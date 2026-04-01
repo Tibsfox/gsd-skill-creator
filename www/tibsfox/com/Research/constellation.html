@@ -24,12 +24,41 @@ canvas:active{cursor:grabbing}
 .cl{all:unset;cursor:pointer;padding:2px 7px;border-radius:3px;font-size:10px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.06);transition:all .15s;pointer-events:auto;white-space:nowrap}
 .cl:hover{color:#fff;border-color:var(--c);background:rgba(255,255,255,.04)}
 .cl.on{color:#fff;background:var(--c);border-color:var(--c)}
-#tooltip{position:absolute;pointer-events:none;background:rgba(15,15,35,.92);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:6px 10px;font-size:12px;display:none;z-index:20;max-width:220px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+#tooltip{position:absolute;pointer-events:none;background:rgba(15,15,35,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:8px 12px;font-size:12px;display:none;z-index:20;max-width:320px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
 #tooltip .tt-id{color:rgba(255,255,255,.4);font-size:10px;font-family:monospace}
 #tooltip .tt-name{color:#fff;font-weight:600;margin:1px 0}
 #tooltip .tt-cluster{font-size:10px;margin-top:2px}
-#stats{position:absolute;bottom:8px;left:12px;font-size:10px;color:rgba(255,255,255,.3);pointer-events:none;z-index:10}
-@media(max-width:640px){#search{width:100%;order:20}#clusters{order:19}}
+#tooltip .tt-pairing{font-size:10px;margin-top:6px;padding-top:5px;border-top:1px solid rgba(255,255,255,.08);line-height:1.5}
+#tooltip .tt-pairing .pair-label{color:rgba(255,255,255,.35);font-size:9px;text-transform:uppercase;letter-spacing:.5px}
+#tooltip .tt-pairing .pair-artist{color:#93c5fd;font-weight:500}
+#tooltip .tt-pairing .pair-species{color:#86efac;font-weight:500}
+#tooltip .tt-pairing .pair-detail{color:rgba(255,255,255,.55)}
+#tooltip .tt-energy{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:middle}
+#filterbar{display:flex;align-items:center;padding:4px 12px;gap:6px;flex-wrap:wrap;pointer-events:auto;background:rgba(10,10,26,.75);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.04)}
+#filterbar label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px}
+.energy-btn{all:unset;cursor:pointer;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.1);font-size:9px;text-align:center;line-height:22px;color:rgba(255,255,255,.5);pointer-events:auto;transition:all .15s}
+.energy-btn:hover{border-color:var(--ec);color:#fff}
+.energy-btn.on{background:var(--ec);border-color:var(--ec);color:#fff;box-shadow:0 0 8px var(--ec)}
+.filter-select{all:unset;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:2px 8px;color:rgba(255,255,255,.6);font-size:11px;pointer-events:auto;cursor:pointer}
+.filter-select:hover{border-color:rgba(255,255,255,.2);color:#fff}
+.filter-select option{background:#1a1a2e;color:#fff}
+#stats{position:absolute;bottom:8px;left:12px;right:12px;font-size:10px;color:rgba(255,255,255,.3);pointer-events:none;z-index:10;display:flex;justify-content:space-between}
+#stats .stats-left{}
+#stats .stats-right{text-align:right}
+#legend{position:absolute;bottom:30px;right:12px;pointer-events:auto;z-index:10}
+#legend-toggle{all:unset;cursor:pointer;padding:4px 10px;border-radius:4px;font-size:10px;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08);background:rgba(10,10,26,.7);backdrop-filter:blur(6px)}
+#legend-toggle:hover{color:#fff;border-color:rgba(255,255,255,.2)}
+#legend-panel{display:none;background:rgba(10,10,26,.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;margin-bottom:6px;font-size:10px;max-height:300px;overflow-y:auto;min-width:180px}
+#legend-panel.open{display:block}
+#legend-panel h4{color:rgba(255,255,255,.5);font-size:9px;text-transform:uppercase;letter-spacing:.6px;margin:8px 0 4px;font-weight:600}
+#legend-panel h4:first-child{margin-top:0}
+.legend-row{display:flex;align-items:center;gap:6px;padding:1px 0}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.legend-ring{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:2px solid;background:transparent}
+.legend-text{color:rgba(255,255,255,.55)}
+.legend-size{display:flex;align-items:center;gap:4px;padding:2px 0}
+.legend-circle{border-radius:50%;background:rgba(255,255,255,.3);flex-shrink:0}
+@media(max-width:640px){#search{width:100%;order:20}#clusters{order:19}#filterbar{padding:4px 8px;gap:4px}}
 </style>
 </head>
 <body>
@@ -43,9 +72,63 @@ canvas:active{cursor:grabbing}
     <input type="text" id="search" placeholder="Search projects...">
     <button id="resetBtn">Reset</button>
   </div>
+  <div id="filterbar">
+    <label>Energy</label>
+    <button class="energy-btn" data-energy="1" style="--ec:#60a5fa" title="E1 - Cool Blue">1</button>
+    <button class="energy-btn" data-energy="2" style="--ec:#4ade80" title="E2 - Green">2</button>
+    <button class="energy-btn" data-energy="3" style="--ec:#fbbf24" title="E3 - Amber">3</button>
+    <button class="energy-btn" data-energy="4" style="--ec:#fb923c" title="E4 - Orange">4</button>
+    <button class="energy-btn" data-energy="5" style="--ec:#ef4444" title="E5 - Red">5</button>
+    <button class="energy-btn" data-energy="6" style="--ec:#a78bfa" title="E6 - Purple">6</button>
+    <span class="sep">|</span>
+    <label>Order</label>
+    <select class="filter-select" id="orderFilter">
+      <option value="">All Orders</option>
+      <option value="Anseriformes">Anseriformes</option>
+      <option value="Apodiformes">Apodiformes</option>
+      <option value="Carnivora">Carnivora</option>
+      <option value="Columbiformes">Columbiformes</option>
+      <option value="Coraciiformes">Coraciiformes</option>
+      <option value="Passeriformes">Passeriformes</option>
+      <option value="Pelecaniformes">Pelecaniformes</option>
+      <option value="Piciformes">Piciformes</option>
+      <option value="Podicipediformes">Podicipediformes</option>
+      <option value="Rodentia">Rodentia</option>
+      <option value="Strigiformes">Strigiformes</option>
+    </select>
+    <span class="sep">|</span>
+    <label>Genre</label>
+    <select class="filter-select" id="genreFilter">
+      <option value="">All Genres</option>
+      <option value="Blues">Blues</option>
+      <option value="Electronic">Electronic</option>
+      <option value="Folk">Folk</option>
+      <option value="Funk">Funk</option>
+      <option value="Gospel">Gospel</option>
+      <option value="Indie">Indie</option>
+      <option value="Jazz">Jazz</option>
+      <option value="Neo-Soul">Neo-Soul</option>
+      <option value="R&B">R&B</option>
+      <option value="Rock">Rock</option>
+      <option value="Singer-Songwriter">Singer-Songwriter</option>
+      <option value="Soft Rock">Soft Rock</option>
+      <option value="Soul">Soul</option>
+    </select>
+  </div>
 </div>
-<div id="tooltip"><div class="tt-id"></div><div class="tt-name"></div><div class="tt-cluster"></div></div>
-<div id="stats"></div>
+<div id="tooltip"><div class="tt-id"></div><div class="tt-name"></div><div class="tt-cluster"></div><div class="tt-pairing"></div></div>
+<div id="stats"><span class="stats-left"></span><span class="stats-right"></span></div>
+<div id="legend">
+  <div id="legend-panel">
+    <h4>Clusters</h4>
+    <div id="legend-clusters"></div>
+    <h4>Energy Levels</h4>
+    <div id="legend-energy"></div>
+    <h4>Node Size</h4>
+    <div id="legend-sizes"></div>
+  </div>
+  <button id="legend-toggle">Legend</button>
+</div>
 <script>
 // === DATA ===
 var CLUSTERS=[
@@ -70,6 +153,100 @@ var PROJECTS=[];
 var EDGES=[];
 'ABL>FLS,OCT,WAL,DAA,SYN,NEH,SYS;ACE>GSD2,SYS,CMH,MPC,OCN,GPO,SGL,SFC,K8S;AIH>LLM,CFU,MST,TCP,SYS;ALV>SNX,TVH,RFC,DAA,COL,BRC;ANM>HEN,ARC,SPA,INP,STA,FFA,GPG,BNY;APR>BHK,ECO,WAL,COL,BRC,MCF,SYS,GRD,GDN;B52>PJM,FFA,SNY,DAA,DRN,DPM,TKH,CAR,BRC;BHC>BHK,GRB,LTS;BHK>GRD,MPC,SGM,LGW,SET,BPS,THE,FQC,DAA;BHM>PPM,WSB,KSM,SAL,ECO,GDN,AGR;BMR>LKR,CDS,HJX,TIBS,COI,PRS;BNY>SGL,BPS,HFE,LED,SVB,OTM,SFC,ECO;CBC>RBH,FCC,C89,KPZ,PSS,IBC,BHM;CDL>COK,FEG,GSD2,ACE,PMG,WAL,SGM,MPC;CDS>TIBS,BRC,MIX,GRV,PJM,FFA,KUB,SGL;CFU>LLM,AIH,MST,TCP,PNP,SYS,K8S,DNS;CGI>GSD2,ACE,PMG,GSA,MGU,CMH,MCF,K8S,OCN;CHS>VKS,RFC,GRD,ECO,BRC,WPH,SYS,K8S;COK>MPC,GRD,SGM,ACE,WAL,GSD2,OTM,BNY;CRY>MIX,SOC,WSB,ACC,KUB,BMR,HFE,CDS;CWC>COK,SAL,DAA,GRD,PPM,GSD2,MPC,BHM,ECO,AWF,GDN,BPS,AGR,ACC;DFQ>RBH,PSS,KPZ,WLF,FCC,C89,CBC,IBC;DHP>DNS,SYS,CMH,MCF,K8S,WPH,TCP,SAN;DNS>RFC,CMH,SYS,K8S,WPH,MCF,FCC,PSS;DPM>DAA,HFE,SGL,CAR,TKH,PIN,DRN,B52,COI;DRN>DPM,HFE,DAA,CAR,B52,FFA,TKH,CDP;EAZ>ATC,FDR,TIBS,LKR,NWZ,ECO,BMR,SGM;ENB>SYS,WPH,PSS,SFC,K8S,CMH,CDS,RBH;FCC>RBH,PSS,SGL,WPH,DAA,CBC,IBC,SVB,KPZ,C89,T55,LED,CMH,SHE,NND,WSB;FEG>COK,SGM,BNY,OTM,SVB,HEN,ACE,MPC;FLS>ABL,OCT,WAL,SYN,DAA;GPG>GPO,SGL,GSD2,K8S,ACE,MPC,GRD,CMH,LED,SYS,T55;GPO>ACE,MPC,K8S,GSD2,CMH,OCN,SYS,SGL,MCF;GRB>BHK,BHC,LTS;GSA>GSD2,CMH,ACE,MCF,PMG,K8S,MGU,COK;HEN>ANM,ARC,FFA,SGL,INP,BNY,STA,OTM,SVB;HFE>DAA,SGL,SRG,LED,FQC,GTP,HFR,SNY;HFR>DAA,SGL,EMG,FQC,BPS,SNL,SNY,LED;HJX>DAA,GRV,MIX,HFE,HFR,SGL,SRG,SSM,PJM,SNY;IBC>RBH,C89,KSM,TIBS,ECO,SAL,CDS,BHM,SYS,CMH,CBC;ICS>ACE,MPC,GSD2,SGM,BCM,OTM,SPA;INP>FFA,ARC,SPA,LED,HEN,ANM,GPG;KFU>TIBS,FFA,BMR,BRC,SGM,MTB,PRS,OTM;LGW>BHK,FQC,SGL,DAA,GRD,BPS,PSS,MPC;LLM>CFU,AIH,MST,TCP,SYS,K8S;LTS>BHC,BHK,GRB,WAL,APR,SYS,MCF;M05>GSD2,ACE,COK,CDL,CMH,MPC,PMG,CDS,MIX,SAL,SGL;MCF>K8S,SYS,GSD2,CMH,NND,OCN,BRC,MCM;MCS>MCM,NND,HGE,OCN,ROF,THE,ACC,WSB;MGU>PMG,GSD2,CDL,K8S,SYS,ACE,COK,MCF;MRW>PLT,CMH,SPA,SNL,BPS,MCR,ECO,VAV;MST>PNP,SYS,TCP,DNS,K8S,RFC,BRC,AVI,ECO,CFU,LLM,AIH,COL,BPS,MAM;MTB>BRC,FFA,TIBS,PRS,DPM,DAA,SGL,COL,BMR,ECO,PIN,COI,HFE;MWC>ACC,WSB,WYR,BCM,COL,NND,BHM,PPM;NEH>VKD,WAL;NWZ>ATC,FDR,SGM,TIBS,LKR,ECO,BMR,GDN;OCT>ABL,FLS,WAL,DAA,NEH;OPS>GSD2,CMH,ACE,K8S,SYS,NND,MCF,OCN;OSC>PKD,LNV,BNY,SGM,OTM,MPC,CMH,K8S;PIN>NND,SYS,OCN,K8S,CMH,MCM,WYR,SFC;PKD>LNV,OSC,COI,ACE,MRW,STE,DPM,PIN;PNP>TCP,SYS,CMH,GSD2,MCF,K8S,DNS,RFC,SGL,EMG;PPM>AGR,GDN,ECO,SAL,AWF,WSB,ACC;PRS>DAA,FQC,SGL,T55,GRD,BMR,TKH,HJX,SPA;PSS>SGL,FCC,BPS,LED,T55,RBH,SYS,K8S,PSG;PTG>WYR,LFR,ECO,FFA,INP,ICS,COK;RFC>SYS,CMH,K8S,WPH,FCC,DNS,MCF,ENB;SET>BPS,MPC,DAA,SGL,PSS,FQC,SNL,BHK,LGW;SFC>SYS,OCN,SYN,NND,K8S,MCM,WYR,PIN;SFH>DPM,DAA,CDS,HFE,SGL,PRS,MIX,BMR,BRC,MTB,C89;SGL>DAA,FQC,T55,GRD,EMG,LED,SPA,ARC;SGM>MPC,GRD,ARC,FQC,SPA,PRS,BHK,ECO;SMP>DAA,GRV,SNY,HFE,PJM,DPM,HJX,CAR;SNL>BPS,T55,SYS,LED,SGL,SHE,SPA,ECO,EMG,PSS,K8S,DAA,AWF,GSD2;SNX>TVH,ALV,RFC,BRC,DAA,GRD;SOC>CDS,GRV,HJX,KUB,PJM,MIX,BMR,CRY;SRD>TCP,PNP,RFC,FEC,SYS,K8S,MDS,CMH,DNS;SRG>HFE,DAA,SGL,FQC,PRS,HFR,DPM,CAR;SSM>PJM,GRV,PPM,SNY,KUB,MIX,SGL,DAA,COL,CAS,TIBS;SST>GSD2,MPC,GSA,DAA,FQC,HFR,MGU,ICS,GRD,BHK,M05,CGI,HFE;STE>SYS,CMH,SAN,K8S,OCN,ACE,VAV,SGL;SVB>C89,BNY,FCC,RBH,KSM,CBC,OTM;TCP>RFC,DNS,DHP,CMH,SYS,K8S,MCF,GRD,WPH;TKH>DPM,CAR,B52,SNY,DAA,HFE,BMR,DRN,PIN;TVH>RFC,SYS,TCP,PNP,DAA,ALV,COL,DHP,BRC;VKD>NEH,WAL,SYS;VKS>SYS,GRD,CMH,DAA,ECO,BRC,CHS,K8S;WPH>SHE,SYS,CMH,SGL,LED,FCC,PSS,GRD,EMG,RBH,BRC,DAA,HFE,GSD2;YNT>LTS,BHK,SYS,RFC,BRC'.split(';').forEach(function(g){var p=g.split('>');var s=p[0];p[1].split(',').forEach(function(t){EDGES.push([s,t])})});
 
+// === PAIRINGS DATA (64 artist-species pairs from S36/SPS knowledge nodes) ===
+var PAIRINGS=[
+{deg:0,artist:'Quincy Jones',genre:'Jazz/R&B/Pop/Film',aEnergy:2,era:'1950s-2024',species:'Great Blue Heron',sciName:'Ardea herodias',family:'Ardeidae',order:'Pelecaniformes',sEnergy:1,soundType:'stalking silence / pterodactyl croak',season:'resident'},
+{deg:1,artist:'Bill Frisell',genre:'Jazz',aEnergy:2,era:'1980s-present',species:'Pacific Wren',sciName:'Troglodytes pacificus',family:'Troglodytidae',order:'Passeriformes',sEnergy:2,soundType:'intricate cascade warble',season:'resident'},
+{deg:2,artist:'Wayne Horvitz',genre:'Jazz',aEnergy:2,era:'1980s-present',species:'Varied Thrush',sciName:'Ixoreus naevius',family:'Turdidae',order:'Passeriformes',sEnergy:2,soundType:'single haunting minor whistle',season:'winter-resident'},
+{deg:3,artist:'Ernestine Anderson',genre:'Jazz',aEnergy:2,era:'1950s-2010s',species:'Black-capped Chickadee',sciName:'Poecile atricapillus',family:'Paridae',order:'Passeriformes',sEnergy:2,soundType:'fee-bee song / chick-a-dee alarm',season:'resident'},
+{deg:4,artist:'Floyd Standifer',genre:'Jazz',aEnergy:2,era:'1950s-2000s',species:'Northern Spotted Owl',sciName:'Strix occidentalis caurina',family:'Strigidae',order:'Strigiformes',sEnergy:2,soundType:'four-note territorial hoot',season:'resident'},
+{deg:5,artist:'Overton Berry',genre:'Jazz',aEnergy:2,era:'1960s-present',species:'Red-breasted Nuthatch',sciName:'Sitta canadensis',family:'Sittidae',order:'Passeriformes',sEnergy:2,soundType:'nasal yank-yank tin horn',season:'resident'},
+{deg:6,artist:'Patti Bown',genre:'Jazz',aEnergy:2,era:'1950s-1970s',species:'Pacific-slope Flycatcher',sciName:'Empidonax difficilis',family:'Tyrannidae',order:'Passeriformes',sEnergy:2,soundType:'upslurred wheeet',season:'spring-fall'},
+{deg:7,artist:'Julian Priester',genre:'Jazz',aEnergy:2,era:'1970s-present',species:'Hermit Thrush',sciName:'Catharus guttatus',family:'Turdidae',order:'Passeriformes',sEnergy:2,soundType:'ethereal spiraling flute song',season:'summer'},
+{deg:8,artist:'Gary Peacock',genre:'Jazz',aEnergy:1,era:'1950s-2020',species:'Golden-crowned Kinglet',sciName:'Regulus satrapa',family:'Regulidae',order:'Passeriformes',sEnergy:1,soundType:'ultra-high ascending zee-zee-zee',season:'resident'},
+{deg:9,artist:'Hadley Caliman',genre:'Jazz',aEnergy:2,era:'1960s-2010s',species:'Chestnut-backed Chickadee',sciName:'Poecile rufescens',family:'Paridae',order:'Passeriformes',sEnergy:2,soundType:'rapid chick-a-dee-dee',season:'resident'},
+{deg:10,artist:'Bud Shank',genre:'Jazz',aEnergy:2,era:'1950s-2009',species:'Bushtit',sciName:'Psaltriparus minimus',family:'Aegithalidae',order:'Passeriformes',sEnergy:1,soundType:'thin insect-like seep contact calls',season:'resident'},
+{deg:11,artist:'Joe Brazil',genre:'Jazz',aEnergy:2,era:'1960s-2000s',species:'Oregon Junco',sciName:'Junco hyemalis oreganus',family:'Emberizidae',order:'Passeriformes',sEnergy:2,soundType:'metallic trill on single pitch',season:'resident'},
+{deg:12,artist:'Don Lanphere',genre:'Jazz',aEnergy:1,era:'1940s-2000s',species:'Pine Siskin',sciName:'Spinus pinus',family:'Fringillidae',order:'Passeriformes',sEnergy:1,soundType:'rising zhreee / buzzy warble',season:'irruptive'},
+{deg:13,artist:'Marc Seales',genre:'Jazz',aEnergy:2,era:'1990s-present',species:"Hutton's Vireo",sciName:'Vireo huttoni',family:'Vireonidae',order:'Passeriformes',sEnergy:2,soundType:'repeated rising-falling zuit',season:'resident'},
+{deg:14,artist:'Aaron Parks',genre:'Jazz',aEnergy:2,era:'2000s-present',species:"MacGillivray's Warbler",sciName:'Geothlypis tolmiei',family:'Parulidae',order:'Passeriformes',sEnergy:2,soundType:'churry-churry-churry-sweet',season:'summer'},
+{deg:15,artist:'Thomas Marriott',genre:'Jazz',aEnergy:3,era:'2000s-present',species:"Wilson's Warbler",sciName:'Cardellina pusilla',family:'Parulidae',order:'Passeriformes',sEnergy:3,soundType:'rapid chattering chi-chi-chet',season:'summer'},
+{deg:16,artist:'Jeff Lorber',genre:'Jazz Fusion',aEnergy:3,era:'1980s-present',species:'Yellow Warbler',sciName:'Setophaga petechia',family:'Parulidae',order:'Passeriformes',sEnergy:3,soundType:'sweet-sweet-sweeter-than-sweet',season:'summer'},
+{deg:17,artist:'Reggie Watts',genre:'Jazz/Comedy',aEnergy:3,era:'2000s-present',species:'Common Yellowthroat',sciName:'Geothlypis trichas',family:'Parulidae',order:'Passeriformes',sEnergy:3,soundType:'witchety-witchety-witchety',season:'summer'},
+{deg:18,artist:'Maktub',genre:'Soul/Jazz',aEnergy:3,era:'1998-2007',species:"Swainson's Thrush",sciName:'Catharus ustulatus',family:'Turdidae',order:'Passeriformes',sEnergy:3,soundType:'upward spiraling fluty phrases',season:'summer'},
+{deg:19,artist:'Fly Moon Royale',genre:'Jazz/Soul',aEnergy:3,era:'2012-present',species:'Veery',sciName:'Catharus fuscescens',family:'Turdidae',order:'Passeriformes',sEnergy:3,soundType:'downward spiraling veer-veer',season:'summer'},
+{deg:20,artist:'Whitney Menge',genre:'Jazz/R&B',aEnergy:3,era:'2015-present',species:'Orange-crowned Warbler',sciName:'Leiothlypis celata',family:'Parulidae',order:'Passeriformes',sEnergy:3,soundType:'trilling descending rattle',season:'summer'},
+{deg:21,artist:'Polyrhythmics',genre:'Jazz/Funk',aEnergy:4,era:'2011-present',species:'Northern Flicker',sciName:'Colaptes auratus',family:'Picidae',order:'Piciformes',sEnergy:4,soundType:'loud wick-wick-wick call',season:'year-round'},
+{deg:22,artist:'Foxy Apollo',genre:'Jazz/Funk',aEnergy:4,era:'2018-present',species:'Northern Flicker',sciName:'Colaptes auratus',family:'Picidae',order:'Piciformes',sEnergy:4,soundType:'resonant hollow-tree percussion',season:'spring'},
+{deg:23,artist:'Allen Stone',genre:'Soul/Jazz',aEnergy:4,era:'2010-present',species:'Black-headed Grosbeak',sciName:'Pheucticus melanocephalus',family:'Cardinalidae',order:'Passeriformes',sEnergy:4,soundType:'rich robin-like warble with slurs',season:'summer'},
+{deg:24,artist:'Ron Artis II',genre:'Soul/Jazz',aEnergy:4,era:'2010-present',species:'Western Tanager',sciName:'Piranga ludoviciana',family:'Cardinalidae',order:'Passeriformes',sEnergy:4,soundType:'hoarse robin-like warble',season:'summer'},
+{deg:25,artist:'Black Stax',genre:'Neo-Soul',aEnergy:4,era:'2010s-present',species:'American Robin',sciName:'Turdus migratorius',family:'Turdidae',order:'Passeriformes',sEnergy:4,soundType:'cheerily cheer-up cheerio',season:'resident'},
+{deg:26,artist:'Shaina Shepherd',genre:'Soul',aEnergy:4,era:'2010s-present',species:'Purple Martin',sciName:'Progne subis',family:'Hirundinidae',order:'Passeriformes',sEnergy:4,soundType:'rich gurgling liquid song',season:'summer'},
+{deg:27,artist:'The Dynamics',genre:'Soul/R&B',aEnergy:4,era:'1960-1970',species:'Violet-green Swallow',sciName:'Tachycineta thalassina',family:'Hirundinidae',order:'Passeriformes',sEnergy:4,soundType:'twitter and liquid chips',season:'summer'},
+{deg:28,artist:'Night Owls',genre:'Soul/R&B',aEnergy:4,era:'2010s-present',species:'Tree Swallow',sciName:'Tachycineta bicolor',family:'Hirundinidae',order:'Passeriformes',sEnergy:4,soundType:'liquid twittering gurgle',season:'spring/summer'},
+{deg:29,artist:'Ivan "Boogaloo Joe" Jones',genre:'Jazz/Funk',aEnergy:4,era:'1960s-1980s',species:'Northern Rough-winged Swallow',sciName:'Stelgidopteryx serripennis',family:'Hirundinidae',order:'Passeriformes',sEnergy:4,soundType:'rough buzzy brrit',season:'summer'},
+{deg:30,artist:'Ray Charles',genre:'R&B/Jazz',aEnergy:4,era:'1940s-2004',species:'Barn Swallow',sciName:'Hirundo rustica',family:'Hirundinidae',order:'Passeriformes',sEnergy:4,soundType:'long liquid twittering warble',season:'summer'},
+{deg:31,artist:'Brenda Lee Eager',genre:'R&B/Soul',aEnergy:4,era:'1970s',species:'Cedar Waxwing',sciName:'Bombycilla cedrorum',family:'Bombycillidae',order:'Passeriformes',sEnergy:4,soundType:'high thin see-see-see trilled',season:'resident'},
+{deg:32,artist:'Luther Rabb',genre:'R&B',aEnergy:5,era:'1970s',species:'Bohemian Waxwing',sciName:'Bombycilla garrulus',family:'Bombycillidae',order:'Passeriformes',sEnergy:5,soundType:'buzzy bzeee calls flock chorus',season:'irruptive'},
+{deg:33,artist:'Larry English',genre:'R&B',aEnergy:5,era:'1960s-1970s',species:"Cassin's Finch",sciName:'Haemorhous cassinii',family:'Fringillidae',order:'Passeriformes',sEnergy:4,soundType:'rich warbling song male display',season:'summer'},
+{deg:34,artist:'The Tempos',genre:'R&B/Soul',aEnergy:5,era:'1960s',species:'Red Crossbill',sciName:'Loxia curvirostra',family:'Fringillidae',order:'Passeriformes',sEnergy:4,soundType:'kip-kip-kip flight call + warble',season:'irruptive'},
+{deg:35,artist:'Robert Cray',genre:'Blues',aEnergy:5,era:'1980s-present',species:'Rufous Hummingbird',sciName:'Selasphorus rufus',family:'Trochilidae',order:'Apodiformes',sEnergy:5,soundType:'ch-ch-ch wingbeat thrum + chitter',season:'summer'},
+{deg:36,artist:'Jimi Hendrix',genre:'Blues Rock',aEnergy:6,era:'1962-1970',species:"Anna's Hummingbird",sciName:'Calypte anna',family:'Trochilidae',order:'Apodiformes',sEnergy:5,soundType:'metallic chip + dive display buzz',season:'resident'},
+{deg:37,artist:'Ayron Jones',genre:'Blues Rock',aEnergy:5,era:'2010-present',species:'Calliope Hummingbird',sciName:'Selasphorus calliope',family:'Trochilidae',order:'Apodiformes',sEnergy:4,soundType:'soft rising tsee-tsee',season:'summer'},
+{deg:38,artist:'Booker T. Jones',genre:'R&B/Soul',aEnergy:5,era:'various',species:'Black-throated Gray Warbler',sciName:'Setophaga nigrescens',family:'Parulidae',order:'Passeriformes',sEnergy:4,soundType:'lazy buzzy wheeze song',season:'summer'},
+{deg:39,artist:'Ron Artis Jr',genre:'Blues/Soul',aEnergy:5,era:'Hawaii to Seattle',species:"Townsend's Warbler",sciName:'Setophaga townsendi',family:'Parulidae',order:'Passeriformes',sEnergy:4,soundType:'buzzy zee-zee-zee-zwee-zweee',season:'summer'},
+{deg:40,artist:'Alice Smith',genre:'Neo-Soul',aEnergy:5,era:'Seattle connection',species:'Hermit Warbler',sciName:'Setophaga occidentalis',family:'Parulidae',order:'Passeriformes',sEnergy:4,soundType:'thin buzzy song conifer top',season:'summer'},
+{deg:41,artist:'Shawn Smith',genre:'Soul/Blues',aEnergy:4,era:'1990s-present',species:'Nashville Warbler',sciName:'Leiothlypis ruficapilla',family:'Parulidae',order:'Passeriformes',sEnergy:4,soundType:'see-bit see-bit teedle-teedle',season:'summer'},
+{deg:42,artist:'Erica Campbell',genre:'Gospel/R&B',aEnergy:5,era:'2000s-present',species:'Yellow-rumped Warbler',sciName:'Setophaga coronata',family:'Parulidae',order:'Passeriformes',sEnergy:4,soundType:'loose trill varied song',season:'resident/summer'},
+{deg:43,artist:'Ann Wilson',genre:'Rock/Soul',aEnergy:6,era:'2018-present',species:'American Goldfinch',sciName:'Spinus tristis',family:'Fringillidae',order:'Passeriformes',sEnergy:4,soundType:'per-chick-o-ree flight call',season:'summer'},
+{deg:44,artist:'Chong the Nomad',genre:'Electronic/R&B',aEnergy:5,era:'2016-present',species:'Lesser Goldfinch',sciName:'Spinus psaltria',family:'Fringillidae',order:'Passeriformes',sEnergy:4,soundType:'high thin tsee-ee-ee',season:'summer'},
+{deg:45,artist:'Damien Jurado',genre:'Folk',aEnergy:2,era:'1993-present',species:'Song Sparrow',sciName:'Melospiza melodia',family:'Passerellidae',order:'Passeriformes',sEnergy:2,soundType:'complex melodious song',season:'resident'},
+{deg:46,artist:'Rocky Votolato',genre:'Folk',aEnergy:3,era:'1997-present',species:'Spotted Towhee',sciName:'Pipilo maculatus',family:'Passerellidae',order:'Passeriformes',sEnergy:3,soundType:'buzzy drink-your-tea trill',season:'resident'},
+{deg:47,artist:'Pedro the Lion',genre:'Indie Folk',aEnergy:3,era:'1995-2019',species:'Dark-eyed Junco',sciName:'Junco hyemalis',family:'Passerellidae',order:'Passeriformes',sEnergy:3,soundType:'simple musical trill',season:'resident'},
+{deg:48,artist:'Sera Cahoone',genre:'Folk',aEnergy:2,era:'2006-present',species:'White-crowned Sparrow',sciName:'Zonotrichia leucophrys',family:'Passerellidae',order:'Passeriformes',sEnergy:2,soundType:'clear whistled song with buzzy trills',season:'summer'},
+{deg:49,artist:'Kimya Dawson',genre:'Folk Punk',aEnergy:3,era:'1999-present',species:'Fox Sparrow',sciName:'Passerella iliaca',family:'Passerellidae',order:'Passeriformes',sEnergy:3,soundType:'rich melodious whistled song',season:'winter visitor'},
+{deg:50,artist:'Mirah',genre:'Indie Folk',aEnergy:2,era:'1999-present',species:'Mountain Chickadee',sciName:'Poecile gambeli',family:'Paridae',order:'Passeriformes',sEnergy:2,soundType:'fee-bee-bay descending whistle',season:'resident'},
+{deg:51,artist:'Grand Archives',genre:'Indie Folk',aEnergy:3,era:'2006-2011',species:'Brown Creeper',sciName:'Certhia americana',family:'Certhiidae',order:'Passeriformes',sEnergy:1,soundType:'high thin see-see-see-see',season:'resident'},
+{deg:52,artist:'Brandi Carlile',genre:'Folk/Rock',aEnergy:4,era:'2001-present',species:'American Dipper',sciName:'Cinclus mexicanus',family:'Cinclidae',order:'Passeriformes',sEnergy:3,soundType:'loud bubbling wren-like song',season:'resident'},
+{deg:53,artist:'Fleet Foxes',genre:'Indie Folk',aEnergy:3,era:'2006-present',species:"Steller's Jay",sciName:'Cyanocitta stelleri',family:'Corvidae',order:'Passeriformes',sEnergy:4,soundType:'harsh shack-shack-shack alarm',season:'resident'},
+{deg:54,artist:'Ivan & Alyosha',genre:'Folk',aEnergy:3,era:'2007-present',species:'Red-breasted Sapsucker',sciName:'Sphyrapicus ruber',family:'Picidae',order:'Piciformes',sEnergy:3,soundType:'mewing cat-like call',season:'resident'},
+{deg:55,artist:'Shelby Earl',genre:'Singer-Songwriter',aEnergy:2,era:'2011-present',species:"Bewick's Wren",sciName:'Thryomanes bewickii',family:'Troglodytidae',order:'Passeriformes',sEnergy:3,soundType:'loud melodious variable song',season:'resident'},
+{deg:56,artist:'Lemolo',genre:'Indie Folk',aEnergy:2,era:'2011-present',species:'Band-tailed Pigeon',sciName:'Patagioenas fasciata',family:'Columbidae',order:'Columbiformes',sEnergy:1,soundType:'soft owl-like cooing',season:'resident'},
+{deg:57,artist:'Laura Gibson',genre:'Folk',aEnergy:2,era:'2006-present',species:'Belted Kingfisher',sciName:'Megaceryle alcyon',family:'Alcedinidae',order:'Coraciiformes',sEnergy:3,soundType:'loud mechanical rattling call',season:'resident'},
+{deg:58,artist:'Death Cab for Cutie',genre:'Indie Rock',aEnergy:4,era:'1997-present',species:'Wood Duck',sciName:'Aix sponsa',family:'Anatidae',order:'Anseriformes',sEnergy:3,soundType:'thin rising whistle',season:'spring'},
+{deg:59,artist:'The Long Winters',genre:'Indie Rock',aEnergy:4,era:'2000-present',species:'Mallard',sciName:'Anas platyrhynchos',family:'Anatidae',order:'Anseriformes',sEnergy:5,soundType:'the quack',season:'year-round'},
+{deg:60,artist:'Ben Gibbard',genre:'Folk',aEnergy:2,era:'2010s-present',species:'Pied-billed Grebe',sciName:'Podilymbus podiceps',family:'Podicipedidae',order:'Podicipediformes',sEnergy:4,soundType:'cuckoo-like cow-cow-cow',season:'year-round'},
+{deg:61,artist:'Y La Bamba',genre:'Folk/Indie',aEnergy:3,era:'2007-present',species:'American Beaver',sciName:'Castor canadensis',family:'Castoridae',order:'Rodentia',sEnergy:4,soundType:'tail slap warning',season:'year-round'},
+{deg:62,artist:'Pickwick',genre:'Indie/Folk',aEnergy:4,era:'2010-2016',species:'Beaver chewing',sciName:'Castor canadensis',family:'Castoridae',order:'Rodentia',sEnergy:3,soundType:'rhythmic gnawing woody percussion',season:'year-round'},
+{deg:63,artist:'Kenny Loggins',genre:'Soft Rock/Folk',aEnergy:3,era:'1971-present',species:'River Otter',sciName:'Lontra canadensis',family:'Mustelidae',order:'Carnivora',sEnergy:4,soundType:'loud chuffing + whistles',season:'year-round'}
+];
+
+// Build pairing index by degree and by project ID
+var pairingByDeg={};
+PAIRINGS.forEach(function(p){pairingByDeg[p.deg]=p});
+
+// Map S36 and SPS project IDs to their pairing data
+var pairingForProject={};
+pairingForProject['S36']='engine'; // S36 is the engine itself
+pairingForProject['SPS']='engine'; // SPS is the engine itself
+
+// Energy color palette
+var ENERGY_COLORS={
+  1:'#60a5fa', // cool blue
+  2:'#4ade80', // green
+  3:'#fbbf24', // amber
+  4:'#fb923c', // orange
+  5:'#ef4444', // red
+  6:'#a78bfa'  // purple
+};
+
+// Compute primary genre for each pairing (for filtering)
+var pairingGenres={};
+PAIRINGS.forEach(function(p){
+  var g=p.genre.split('(')[0].split('/')[0].trim();
+  pairingGenres[p.deg]=g;
+});
+
 // === BUILD INDEX ===
 var idxMap={},clusterOf={},colorOf={};
 PROJECTS.forEach(function(p,i){idxMap[p.id]=i});
@@ -86,6 +263,11 @@ EDGES.forEach(function(e){
 // Degree count
 var degree=new Uint16Array(N);
 edgeIdx.forEach(function(e){degree[e[0]]++;degree[e[1]]++});
+
+// Build adjacency for neighbor highlighting
+var neighbors=[];
+for(var i=0;i<N;i++)neighbors.push(new Set());
+edgeIdx.forEach(function(e){neighbors[e[0]].add(e[1]);neighbors[e[1]].add(e[0])});
 
 // === FORCE LAYOUT ===
 var px=new Float32Array(N),py=new Float32Array(N);
@@ -130,7 +312,6 @@ PROJECTS.forEach(function(p,i){
     }
     for(var i=0;i<N;i++){
       vx[i]*=damping;vy[i]*=damping;
-      // Clamp velocity to prevent blowup
       var maxV=50;
       if(vx[i]>maxV)vx[i]=maxV;if(vx[i]<-maxV)vx[i]=-maxV;
       if(vy[i]>maxV)vy[i]=maxV;if(vy[i]<-maxV)vy[i]=-maxV;
@@ -154,7 +335,6 @@ window.addEventListener('resize',resize);
 // Camera
 var camX=0,camY=0,camZoom=1;
 var targetCamX=0,targetCamY=0,targetZoom=1;
-// Fit all nodes
 var minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
 for(var i=0;i<N;i++){
   if(px[i]<minX)minX=px[i];if(px[i]>maxX)maxX=px[i];
@@ -170,6 +350,9 @@ var dragging=false,dragStartX,dragStartY,dragCamX,dragCamY;
 var hoverIdx=-1;
 var activeCluster=null;
 var searchTerm='';
+var activeEnergy=0; // 0 = no filter, 1-6 = energy level
+var activeOrder='';
+var activeGenre='';
 var nodeAlpha=new Float32Array(N);
 for(var i=0;i<N;i++)nodeAlpha[i]=1.0;
 var driftTime=0,lastInteract=0;
@@ -195,6 +378,56 @@ function findNode(clientX,clientY){
   }
   return best;
 }
+
+// Get energy level for a project (from pairings data)
+function getProjectEnergy(id){
+  if(id==='S36'||id==='SPS'){
+    // Engine projects - average energy
+    return 3;
+  }
+  return 0; // Non-paired projects have no energy
+}
+
+// Get pairing data for a project by checking if it IS S36/SPS
+function getPairingForProject(id){
+  if(id==='S36'||id==='SPS')return 'engine';
+  return null;
+}
+
+// Check if a project matches energy filter
+function matchesEnergyFilter(id){
+  if(!activeEnergy)return true;
+  if(id==='S36'||id==='SPS'){
+    // S36/SPS match any energy (they contain all pairings)
+    return true;
+  }
+  return false;
+}
+
+// Check if a project matches order filter
+function matchesOrderFilter(id){
+  if(!activeOrder)return true;
+  if(id==='SPS'){
+    // SPS matches any order (contains all species)
+    return true;
+  }
+  return false;
+}
+
+// Check if a project matches genre filter
+function matchesGenreFilter(id){
+  if(!activeGenre)return true;
+  if(id==='S36'){
+    // S36 matches any genre (contains all artists)
+    return true;
+  }
+  return false;
+}
+
+// Build energy-aware node info (which pairings are associated)
+// For non-S36/SPS nodes, check if they are neighbors of S36 or SPS
+var s36Idx=idxMap['S36'];
+var spsIdx=idxMap['SPS'];
 
 // === INTERACTION ===
 canvas.addEventListener('pointerdown',function(e){
@@ -252,8 +485,24 @@ canvas.addEventListener('touchmove',function(e){
   }
 },{passive:true});
 
-// Tooltip
+// === RICH TOOLTIP ===
 var tooltip=document.getElementById('tooltip');
+var clusterDescriptions={
+  'Ecology':'Living systems, habitat, species, conservation',
+  'Electronics':'Circuits, signals, sensors, physical computing',
+  'Infrastructure':'Networks, protocols, distributed systems',
+  'Energy':'Thermal, hydro, geothermal power systems',
+  'Creative':'Art, animation, graphics, spatial design',
+  'Business':'Markets, commerce, cooperatives, finance',
+  'Vision':'Architecture, AI, GPU, compute frameworks',
+  'Broadcasting':'Radio, TV, media history, communications',
+  'Science':'Physics, astronomy, biology, mathematics',
+  'Music':'Artists, production, venues, audio culture',
+  'Space':'Deep space, telescopes, cosmic phenomena',
+  'AI':'Artificial intelligence, LLMs, machine learning',
+  'Graphics':'OpenGL, Vulkan, 3D rendering'
+};
+
 function updateTooltip(mx,my){
   if(hoverIdx<0){tooltip.style.display='none';canvas.style.cursor='grab';return}
   canvas.style.cursor='pointer';
@@ -261,11 +510,44 @@ function updateTooltip(mx,my){
   var c=clusterOf[p.id];
   tooltip.querySelector('.tt-id').textContent=p.id;
   tooltip.querySelector('.tt-name').textContent=p.name;
-  tooltip.querySelector('.tt-cluster').innerHTML='<span style="color:'+c.color+'">&#9679;</span> '+c.name+' &middot; '+degree[hoverIdx]+' connections';
+
+  // Cluster + description
+  var clusterDesc=clusterDescriptions[c.name]||'';
+  var clusterHtml='<span style="color:'+c.color+'">&#9679;</span> '+c.name+' &middot; '+degree[hoverIdx]+' connections';
+  if(clusterDesc)clusterHtml+='<br><span style="color:rgba(255,255,255,.35);font-size:9px">'+clusterDesc+'</span>';
+  tooltip.querySelector('.tt-cluster').innerHTML=clusterHtml;
+
+  // Pairing info
+  var pairingDiv=tooltip.querySelector('.tt-pairing');
+  var pairingHtml='';
+
+  if(p.id==='S36'){
+    pairingHtml='<span class="pair-label">Seattle 360 Engine</span><br>';
+    pairingHtml+='<span class="pair-detail">64 artist-species pairings across PNW music and ecology</span>';
+  } else if(p.id==='SPS'){
+    pairingHtml='<span class="pair-label">Sound of Puget Sound Engine</span><br>';
+    pairingHtml+='<span class="pair-detail">64 species with acoustic signatures paired to S36 artists</span>';
+  } else {
+    // Check if this project is connected to S36 or SPS
+    var isS36Neighbor=(s36Idx!==undefined&&neighbors[hoverIdx].has(s36Idx));
+    var isSPSNeighbor=(spsIdx!==undefined&&neighbors[hoverIdx].has(spsIdx));
+    if(isS36Neighbor||isSPSNeighbor){
+      pairingHtml='<span class="pair-label">Connected to '+(isS36Neighbor?'Seattle 360':'')+(isS36Neighbor&&isSPSNeighbor?' & ':'')+(isSPSNeighbor?'Sound of Puget Sound':'')+'</span>';
+    }
+  }
+
+  if(pairingHtml){
+    pairingDiv.innerHTML=pairingHtml;
+    pairingDiv.style.display='block';
+  } else {
+    pairingDiv.style.display='none';
+  }
+
   tooltip.style.display='block';
   var tx=mx+14,ty=my-10;
-  if(tx+220>window.innerWidth)tx=mx-224;
+  if(tx+320>window.innerWidth)tx=mx-330;
   if(ty<0)ty=my+14;
+  if(ty+tooltip.offsetHeight>window.innerHeight)ty=window.innerHeight-tooltip.offsetHeight-10;
   tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';
 }
 
@@ -290,6 +572,32 @@ CLUSTERS.forEach(function(c,i){
   clDiv.appendChild(btn);
 });
 
+// Energy filter buttons
+document.querySelectorAll('.energy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var e=parseInt(this.dataset.energy);
+    if(activeEnergy===e){
+      activeEnergy=0;this.classList.remove('on');
+    } else {
+      document.querySelectorAll('.energy-btn').forEach(function(b){b.classList.remove('on')});
+      activeEnergy=e;this.classList.add('on');
+    }
+    updateVisibility();lastInteract=performance.now();
+  });
+});
+
+// Order filter
+document.getElementById('orderFilter').addEventListener('change',function(){
+  activeOrder=this.value;
+  updateVisibility();lastInteract=performance.now();
+});
+
+// Genre filter
+document.getElementById('genreFilter').addEventListener('change',function(){
+  activeGenre=this.value;
+  updateVisibility();lastInteract=performance.now();
+});
+
 // Search
 var searchInput=document.getElementById('search');
 searchInput.addEventListener('input',function(){
@@ -304,11 +612,40 @@ searchInput.addEventListener('keydown',function(e){
 // Reset
 document.getElementById('resetBtn').addEventListener('click',function(){
   activeCluster=null;searchTerm='';searchInput.value='';
+  activeEnergy=0;activeOrder='';activeGenre='';
   document.querySelectorAll('.cl').forEach(function(b){b.classList.remove('on')});
+  document.querySelectorAll('.energy-btn').forEach(function(b){b.classList.remove('on')});
+  document.getElementById('orderFilter').value='';
+  document.getElementById('genreFilter').value='';
   targetCamX=(minX+maxX)*0.5;targetCamY=(minY+maxY)*0.5;
   targetZoom=Math.min(canvas.width/(rangeX*1.3),canvas.height/(rangeY*1.3));
   updateVisibility();lastInteract=performance.now();
 });
+
+// Build set of pairing-matched project IDs for energy/order/genre filters
+function getPairingMatchedIds(){
+  var matched=new Set();
+  var hasEnergyFilter=activeEnergy>0;
+  var hasOrderFilter=activeOrder!=='';
+  var hasGenreFilter=activeGenre!=='';
+
+  if(!hasEnergyFilter&&!hasOrderFilter&&!hasGenreFilter)return null; // no pairing filter active
+
+  PAIRINGS.forEach(function(p){
+    var energyMatch=!hasEnergyFilter||(p.aEnergy===activeEnergy||p.sEnergy===activeEnergy);
+    var orderMatch=!hasOrderFilter||p.order===activeOrder;
+    var genreMatch=!hasGenreFilter||p.genre.indexOf(activeGenre)!==-1;
+
+    if(energyMatch&&orderMatch&&genreMatch){
+      // This pairing matches - highlight S36 and SPS
+      matched.add('S36');
+      matched.add('SPS');
+    }
+  });
+
+  // If there are active pairing filters, also keep S36/SPS neighbors visible (dimmed)
+  return matched;
+}
 
 function updateVisibility(){
   var matchSet=null;
@@ -317,17 +654,91 @@ function updateVisibility(){
     PROJECTS.forEach(function(p,i){
       if(p.name.toLowerCase().indexOf(searchTerm)!==-1||p.id.toLowerCase().indexOf(searchTerm)!==-1)matchSet.add(i);
     });
+    // Also search pairings
+    PAIRINGS.forEach(function(pair){
+      if(pair.artist.toLowerCase().indexOf(searchTerm)!==-1||
+         pair.species.toLowerCase().indexOf(searchTerm)!==-1||
+         pair.family.toLowerCase().indexOf(searchTerm)!==-1||
+         pair.order.toLowerCase().indexOf(searchTerm)!==-1||
+         pair.genre.toLowerCase().indexOf(searchTerm)!==-1){
+        // Highlight S36 and SPS
+        if(s36Idx!==undefined)matchSet.add(s36Idx);
+        if(spsIdx!==undefined)matchSet.add(spsIdx);
+      }
+    });
   }
+
+  var pairingMatched=getPairingMatchedIds();
+
   for(var i=0;i<N;i++){
     var visible=true;
-    if(activeCluster&&clusterOf[PROJECTS[i].id]!==activeCluster)visible=false;
+    var pid=PROJECTS[i].id;
+    if(activeCluster&&clusterOf[pid]!==activeCluster)visible=false;
     if(matchSet&&!matchSet.has(i))visible=false;
+
+    // Pairing filters (energy, order, genre)
+    if(pairingMatched){
+      if(!pairingMatched.has(pid)){
+        // Dim non-matched projects but don't fully hide
+        if(visible)nodeAlpha[i]=0.12;
+        else nodeAlpha[i]=0.04;
+        continue;
+      }
+    }
+
     nodeAlpha[i]=visible?1.0:0.06;
   }
 }
 updateVisibility();
 
-document.getElementById('stats').textContent=N+' projects \u00b7 '+edgeIdx.length+' connections \u00b7 '+CLUSTERS.length+' clusters';
+// === STATS ===
+// Count unique families and orders
+var uniqueFamilies=new Set(),uniqueOrders=new Set(),uniqueGenres=new Set();
+PAIRINGS.forEach(function(p){
+  if(p.family)uniqueFamilies.add(p.family);
+  if(p.order)uniqueOrders.add(p.order);
+  var g=p.genre.split('(')[0].split('/')[0].trim();
+  uniqueGenres.add(g);
+});
+document.querySelector('#stats .stats-left').textContent=N+' projects \u00b7 '+edgeIdx.length+' connections \u00b7 '+CLUSTERS.length+' clusters';
+document.querySelector('#stats .stats-right').textContent='64 artist-species pairings \u00b7 '+uniqueFamilies.size+' families \u00b7 '+uniqueOrders.size+' orders \u00b7 '+uniqueGenres.size+' genres';
+
+// === LEGEND ===
+var legendToggle=document.getElementById('legend-toggle');
+var legendPanel=document.getElementById('legend-panel');
+legendToggle.addEventListener('click',function(){
+  legendPanel.classList.toggle('open');
+  legendToggle.textContent=legendPanel.classList.contains('open')?'Hide Legend':'Legend';
+});
+
+// Populate legend clusters
+var legendClusters=document.getElementById('legend-clusters');
+CLUSTERS.forEach(function(c){
+  var row=document.createElement('div');
+  row.className='legend-row';
+  row.innerHTML='<div class="legend-dot" style="background:'+c.color+'"></div><span class="legend-text">'+c.name+' ('+c.ids.length+')</span>';
+  legendClusters.appendChild(row);
+});
+
+// Populate legend energy
+var legendEnergy=document.getElementById('legend-energy');
+var energyLabels={1:'E1 Cool Blue',2:'E2 Green',3:'E3 Amber',4:'E4 Orange',5:'E5 Red',6:'E6 Purple'};
+for(var e=1;e<=6;e++){
+  var row=document.createElement('div');
+  row.className='legend-row';
+  row.innerHTML='<div class="legend-ring" style="border-color:'+ENERGY_COLORS[e]+'"></div><span class="legend-text">'+energyLabels[e]+'</span>';
+  legendEnergy.appendChild(row);
+}
+
+// Populate legend sizes
+var legendSizes=document.getElementById('legend-sizes');
+var sizeData=[{r:4,label:'1-3 connections'},{r:7,label:'4-8 connections'},{r:12,label:'9+ connections'}];
+sizeData.forEach(function(s){
+  var row=document.createElement('div');
+  row.className='legend-size';
+  row.innerHTML='<div class="legend-circle" style="width:'+s.r*2+'px;height:'+s.r*2+'px"></div><span class="legend-text">'+s.label+'</span>';
+  legendSizes.appendChild(row);
+});
 
 // === RENDER LOOP ===
 function hexToRgb(hex){
@@ -336,6 +747,17 @@ function hexToRgb(hex){
 }
 var clusterRgb={};
 CLUSTERS.forEach(function(c){clusterRgb[c.color]=hexToRgb(c.color)});
+
+var energyRgb={};
+for(var e in ENERGY_COLORS){energyRgb[e]=hexToRgb(ENERGY_COLORS[e])}
+
+// Pre-compute energy for S36/SPS (average of all pairings)
+// For the engine nodes, we use the most common energy
+var s36EnergyAvg=3,spsEnergyAvg=3;
+
+function getNodeRadius(i){
+  return Math.max(4,3+degree[i]*0.8);
+}
 
 function frame(t){
   requestAnimationFrame(frame);
@@ -361,12 +783,41 @@ function frame(t){
   ctx.fillStyle='#0a0a1a';
   ctx.fillRect(0,0,w,h);
 
+  // Determine if we're hovering over S36 or SPS (for paired highlight)
+  var hoverIsS36=(hoverIdx>=0&&PROJECTS[hoverIdx].id==='S36');
+  var hoverIsSPS=(hoverIdx>=0&&PROJECTS[hoverIdx].id==='SPS');
+  var highlightPair=(hoverIsS36||hoverIsSPS);
+
+  // Draw S36-SPS connecting line when either is hovered
+  if(highlightPair&&s36Idx!==undefined&&spsIdx!==undefined){
+    var sp36=worldToScreen(px[s36Idx],py[s36Idx]);
+    var spSPS=worldToScreen(px[spsIdx],py[spsIdx]);
+    if(isFinite(sp36[0])&&isFinite(spSPS[0])){
+      ctx.save();
+      ctx.setLineDash([6,4]);
+      ctx.lineWidth=2;
+      ctx.strokeStyle='rgba(147,197,253,0.4)';
+      ctx.beginPath();
+      ctx.moveTo(sp36[0],sp36[1]);
+      ctx.lineTo(spSPS[0],spSPS[1]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+  }
+
   // Draw edges
   ctx.lineWidth=1;
   for(var i=0;i<edgeIdx.length;i++){
     var a=edgeIdx[i][0],b=edgeIdx[i][1];
     var alphaA=nodeAlpha[a],alphaB=nodeAlpha[b];
     var ea=Math.min(alphaA,alphaB)*0.2;
+
+    // Brighten edges to/from hovered node
+    if(hoverIdx>=0&&(a===hoverIdx||b===hoverIdx)){
+      ea=Math.min(alphaA,alphaB)*0.6;
+    }
+
     if(ea<0.01)continue;
     var colA=clusterRgb[colorOf[PROJECTS[a].id]]||[150,150,150];
     var colB=clusterRgb[colorOf[PROJECTS[b].id]]||[150,150,150];
@@ -381,31 +832,72 @@ function frame(t){
   for(var i=0;i<N;i++){
     var alpha=nodeAlpha[i];
     if(alpha<0.01)continue;
-    var col=clusterRgb[colorOf[PROJECTS[i].id]]||[150,150,150];
-    var r=Math.max(4,3+degree[i]*0.8);
-    if(i===hoverIdx)r*=1.8;
+    var pid=PROJECTS[i].id;
+    var col=clusterRgb[colorOf[pid]]||[150,150,150];
+    var r=getNodeRadius(i);
+    var isHovered=(i===hoverIdx);
+    if(isHovered)r*=1.8;
+
+    // Highlight neighbors of hovered node
+    var isNeighborOfHover=(hoverIdx>=0&&neighbors[i].has(hoverIdx));
+    if(isNeighborOfHover)r*=1.3;
+
     var sp=worldToScreen(px[i],py[i]);
 
     // Skip if off-screen or NaN
     if(!isFinite(sp[0])||!isFinite(sp[1]))continue;
     if(sp[0]<-50||sp[0]>w+50||sp[1]<-50||sp[1]>h+50)continue;
 
-    // Glow
+    // Energy glow ring for S36 and SPS
+    var nodeEnergy=0;
+    if(pid==='S36')nodeEnergy=s36EnergyAvg;
+    else if(pid==='SPS')nodeEnergy=spsEnergyAvg;
+
+    // Draw energy glow ring
+    if(nodeEnergy>0&&alpha>0.3){
+      var ec=energyRgb[nodeEnergy];
+      if(ec){
+        ctx.strokeStyle='rgba('+ec[0]+','+ec[1]+','+ec[2]+','+(alpha*0.35).toFixed(2)+')';
+        ctx.lineWidth=2;
+        ctx.beginPath();ctx.arc(sp[0],sp[1],r+4,0,Math.PI*2);ctx.stroke();
+        // Outer soft glow
+        ctx.fillStyle='rgba('+ec[0]+','+ec[1]+','+ec[2]+','+(alpha*0.06).toFixed(2)+')';
+        ctx.beginPath();ctx.arc(sp[0],sp[1],r+10,0,Math.PI*2);ctx.fill();
+      }
+    }
+
+    // Cluster glow
     if(alpha>0.5&&r>2){
       ctx.fillStyle='rgba('+col[0]+','+col[1]+','+col[2]+','+(alpha*0.15).toFixed(2)+')';
       ctx.beginPath();ctx.arc(sp[0],sp[1],r*2.5,0,Math.PI*2);ctx.fill();
     }
 
+    // Highlight ring for S36/SPS pair when either is hovered
+    if(highlightPair&&(pid==='S36'||pid==='SPS')){
+      ctx.strokeStyle='rgba(147,197,253,0.5)';
+      ctx.lineWidth=2;
+      ctx.beginPath();ctx.arc(sp[0],sp[1],r+6,0,Math.PI*2);ctx.stroke();
+    }
+
     // Core
-    ctx.fillStyle='rgba('+Math.min(255,col[0]+60)+','+Math.min(255,col[1]+60)+','+Math.min(255,col[2]+60)+','+alpha.toFixed(2)+')';
+    var bright=isHovered?80:(isNeighborOfHover?40:60);
+    ctx.fillStyle='rgba('+Math.min(255,col[0]+bright)+','+Math.min(255,col[1]+bright)+','+Math.min(255,col[2]+bright)+','+alpha.toFixed(2)+')';
     ctx.beginPath();ctx.arc(sp[0],sp[1],r,0,Math.PI*2);ctx.fill();
 
     // Label
-    if(camZoom>1.5||degree[i]>6||i===hoverIdx){
+    if(camZoom>1.5||degree[i]>6||isHovered||isNeighborOfHover){
       var fontSize=Math.max(9,Math.min(13,10*camZoom/2));
-      ctx.font=fontSize+'px system-ui';
-      ctx.fillStyle='rgba(255,255,255,'+(alpha*0.8).toFixed(2)+')';
-      ctx.fillText(PROJECTS[i].id,sp[0]+r+3,sp[1]+fontSize*0.35);
+      ctx.font=(isHovered?'bold ':'')+fontSize+'px system-ui';
+      ctx.fillStyle='rgba(255,255,255,'+(alpha*(isHovered?1.0:0.8)).toFixed(2)+')';
+      ctx.fillText(pid,sp[0]+r+3,sp[1]+fontSize*0.35);
+
+      // Show genre/family as sub-label when zoomed in close
+      if(camZoom>4&&(pid==='S36'||pid==='SPS')){
+        ctx.font=(fontSize*0.75)+'px system-ui';
+        ctx.fillStyle='rgba(255,255,255,'+(alpha*0.4).toFixed(2)+')';
+        var sublabel=(pid==='S36')?'64 Artists':'64 Species';
+        ctx.fillText(sublabel,sp[0]+r+3,sp[1]+fontSize*0.35+fontSize*0.85);
+      }
     }
   }
 
@@ -428,6 +920,53 @@ function frame(t){
       }
     });
     ctx.textAlign='left';
+  }
+
+  // Draw pairing info overlay when hovering S36 or SPS at sufficient zoom
+  if(highlightPair&&camZoom>3){
+    var targetIdx=hoverIsS36?s36Idx:spsIdx;
+    var sp=worldToScreen(px[targetIdx],py[targetIdx]);
+    if(isFinite(sp[0])&&isFinite(sp[1])){
+      // Draw a small info card near the node
+      ctx.save();
+      ctx.font='10px system-ui';
+      ctx.textAlign='left';
+      var cardX=sp[0]+25,cardY=sp[1]-40;
+      ctx.fillStyle='rgba(15,15,35,0.85)';
+      // Determine visible pairings to show (first 5 near the current energy filter)
+      var showPairings=[];
+      var startDeg=activeEnergy?0:Math.max(0,Math.floor(PAIRINGS.length/2)-2);
+      for(var pi=0;pi<PAIRINGS.length&&showPairings.length<4;pi++){
+        var pair=PAIRINGS[(pi+startDeg)%PAIRINGS.length];
+        if(activeEnergy&&pair.aEnergy!==activeEnergy&&pair.sEnergy!==activeEnergy)continue;
+        showPairings.push(pair);
+      }
+
+      if(showPairings.length>0){
+        var cardH=showPairings.length*14+8;
+        var cardW=200;
+        ctx.fillRect(cardX,cardY,cardW,cardH);
+        ctx.strokeStyle='rgba(255,255,255,0.1)';
+        ctx.lineWidth=1;
+        ctx.strokeRect(cardX,cardY,cardW,cardH);
+
+        showPairings.forEach(function(pair,idx){
+          var y=cardY+12+idx*14;
+          // Energy dot
+          var ec=energyRgb[pair.aEnergy];
+          if(ec){
+            ctx.fillStyle='rgba('+ec[0]+','+ec[1]+','+ec[2]+',0.8)';
+            ctx.beginPath();ctx.arc(cardX+8,y-3,3,0,Math.PI*2);ctx.fill();
+          }
+          // Artist + species
+          ctx.fillStyle='rgba(147,197,253,0.8)';
+          ctx.fillText(pair.artist,cardX+16,y);
+          ctx.fillStyle='rgba(134,239,172,0.6)';
+          ctx.fillText(pair.species,cardX+16+ctx.measureText(pair.artist+' ').width,y);
+        });
+      }
+      ctx.restore();
+    }
   }
 }
 requestAnimationFrame(frame);
