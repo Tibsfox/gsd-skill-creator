@@ -1,0 +1,238 @@
+{
+  "degree": 61,
+  "species": "American Beaver",
+  "scientific_name": "Castor canadensis",
+  "slug": "061-american-beaver",
+  "sound_type": "the tail slap -- a sharp, explosive percussive crack produced by slamming a broad, flat tail against the water surface, a warning signal that echoes across the pond",
+  "energy": 4,
+  "ecosystem": "pond, creek, river, wetland -- freshwater with beaver-built dams and lodges",
+  "season": "year-round resident throughout western Washington",
+  "family": "Castoridae",
+  "order": "Rodentia",
+  "csv_substitute": false,
+  "original_species": "American Beaver",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.760,
+    "lon": -122.313,
+    "description": "Carkeek Park / Piper's Creek reference; common on freshwater streams, ponds, and rivers throughout western Washington lowlands and foothills. Found on Piper's Creek, Thornton Creek, Duwamish River, Sammamish Slough, Snoqualmie River, and similar lowland waterways with riparian vegetation. Urban populations documented within Seattle, Bellevue, and other Puget Sound cities."
+  },
+  "taxonomy_note": {
+    "description": "American Beaver introduces a NEW CLASS (Mammalia), a NEW ORDER (Rodentia), and a NEW FAMILY (Castoridae) to the engine at degree 61. This is the FIRST MAMMAL -- the most significant taxonomic event in the engine's history. The engine breaks out of Class Aves for the first time in 62 entries. Mammalia is the 2nd class (after Aves at degree 0). Rodentia is the largest mammalian order (~2,200 species, ~40% of all mammals). Castoridae has only 2 living species worldwide (C. canadensis in North America, C. fiber in Eurasia). Passeriformes percentage drops to 79.0% (49 of 62 entries). Six consecutive non-passerine entries (56-61), the first non-Aves.",
+    "current_class": "Mammalia",
+    "new_class": true,
+    "class_count_in_engine": 2,
+    "current_family": "Castoridae",
+    "new_family": true,
+    "family_count_in_engine": 27,
+    "castoridae_count_in_engine": 1,
+    "name_etymology": "Castor from Greek kastor (beaver), possibly from Sanskrit root meaning 'to shine' or 'to excel.' canadensis = 'of Canada,' reflecting the type specimen's origin. Full translation: 'beaver of Canada' -- direct, geographic naming. Common name 'beaver' from Old English beofor, from Proto-Indo-European *bhebhrus meaning 'brown' or 'the brown animal.' A name predating recorded history.",
+    "genus_note": "Castor is the only living genus in Castoridae. Contains two species: C. canadensis (North American Beaver, widespread) and C. fiber (Eurasian Beaver, recovered after near-extinction). The fossil family included Castoroides ohioensis, the Pleistocene giant beaver -- over 1 meter tall, ~100 kg, incisors 15 cm long, extinct ~10,000 years ago.",
+    "order_note": "Rodentia appears for the 1st time at degree 61. The largest mammalian order: ~2,200 species, ~40% of all living mammals. Defined by continuously growing incisors in both upper and lower jaw. Includes mice, rats, squirrels, chipmunks, porcupines, capybaras, and beavers. The American Beaver is the largest rodent in North America and the second-largest in the world (after the capybara).",
+    "class_note": "Mammalia appears for the 1st time at degree 61 -- only the 2nd class in the engine (after Aves established at degree 0). Aves and Mammalia diverged ~320 million years ago in the Carboniferous Period. Both are warm-blooded (endothermic) but arrived at endothermy independently -- convergent evolution at the class level. The engine is no longer a bird project. It is now a multi-class soundscape engine.",
+    "family_position": "Castoridae enters the engine at degree 61 as the 27th family and the FIRST mammalian family. Only 2 living species worldwide. Characterized by flat scaly tail, orange iron-reinforced incisors, dense waterproof fur, webbed hind feet, castor sacs, and dam-building behavior. The only family in the order Castorimorphia."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "100-5,000 (broadband impulse)",
+    "peak_energy_band_hz": "200-1,500",
+    "song_frequency_hz": "The tail slap is NOT a vocalization. It is a percussive impact: the beaver raises its broad flat tail and slams it against the water surface, producing a sharp crack. Broadband impulse: ~100-5,000 Hz with peak energy at 200-1,500 Hz. The sound is not tonal -- it is a transient containing energy across the full audible spectrum.",
+    "song_duration_s": "<0.1 seconds (impact); 0.5-1.0 seconds (impact + splash + reverberations)",
+    "note_structure": "SINGLE IMPACT: The tail slap is a single percussive event, not a series. The beaver may repeat 2-3 slaps in quick succession if the threat persists, but each slap is a discrete broadband impulse. No melodic structure, no tonal content, no pitch direction. Pure percussion.",
+    "note_types": "Minimal acoustic diversity compared to avian species. Primary sound: tail slap (percussive warning). Secondary: quiet vocalizations including whines, hisses, and grunts used within the family group at close range. The tail slap is the only acoustically significant element -- the vocalizations are quiet and not typically heard by human observers.",
+    "phrase_structure": "No phrase structure. The tail slap is an impulse, not a phrase. A single crack followed by silence (and the beaver's dive). If repeated, each slap is identical -- no development, no variation, no acceleration or deceleration. Pure alarm signal.",
+    "timbre": "Sharp. Percussive. The crack of the tail on water has a quality that resembles a gunshot, a hand clap, or a large rock hitting water. It is startling precisely because it has no tonal quality -- it is pure transient, all attack and no sustain. The splash that follows adds a brief wash of broadband noise. The reverberation across a still pond gives the sound a spatial quality.",
+    "amplitude": "E=4 -- loud and sharp, audible at 200-500 meters across calm water. Startling to anyone who has not heard it before. In quiet evening conditions, the tail slap can be one of the loudest sounds on the pond. The loudness is concentrated in a single instant -- unlike bird calls that sustain over seconds.",
+    "tempo": "N/A -- single impulse, not a repeated pattern. If multiple slaps occur, they are separated by 1-3 seconds. No acceleration, no deceleration, no rhythmic structure.",
+    "context": "The tail slap is a WARNING SIGNAL, exclusively. Not territorial, not mating, not identity. It communicates one thing: danger detected. Functions: (1) alerts family members to dive and take cover, (2) tells the predator 'I see you,' compromising the ambush, (3) startle effect buys time to dive. Given when the beaver detects a potential predator -- coyote on bank, human on trail, unfamiliar movement. Most commonly heard at dusk and dawn when beavers are most active.",
+    "regional_variation": "NO variation. The tail slap is a physical action (flat tail on water), not a learned vocalization. There is no regional variation, no dialects, no cultural learning. Every beaver tail slap sounds the same because it is the same physical event: broad flat tail hitting water surface.",
+    "key_property": "THE TAIL SLAP -- the 62nd acoustic element (species side). A sharp, explosive percussive crack produced by a broad flat tail striking water. The first non-vocal acoustic element from a non-avian species. The first mammalian percussion. The first pure warning signal (not territorial, not mating). The first broadband impulse (no pitch, no melody). The first aquatic percussion (tail strikes water, not wood). The beaver slaps, then dives and vanishes -- warning delivered, engineer submerged."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Large, stocky, semi-aquatic rodent -- the largest rodent in North America and by far the largest species in the engine. Weight 11-35 kg (25-75 lbs). Head-body 74-90 cm + tail 20-35 cm. Barrel-shaped body with short legs. Dense, waterproof dark brown fur. The diagnostic features are the broad flat scaly tail and the large orange incisors.",
+    "diagnostic_mark": "BROAD FLAT TAIL -- oval, scaly, virtually hairless, 20-35 cm long, 13-15 cm wide. Unlike any other North American mammal's tail. Serves as swimming rudder, fat storage, thermoregulation, tripod support, and acoustic instrument (the tail slap). Also: ORANGE INCISORS visible when the mouth is open.",
+    "fur": "Dense, luxurious, waterproof two-layer system. Fine soft underfur traps air for insulation and waterproofing. Longer coarser guard hairs protect the underfur. Dark brown to reddish-brown overall. This is the fur that drove the North American fur trade and nearly caused the species' extinction.",
+    "tail": "The acoustic instrument. Broad, flat, oval, covered in leathery scales, virtually hairless. Functions: swimming rudder, fat storage, thermoregulation (blood vessels radiate heat), tripod support (beaver leans on tail when standing to fell trees), and communication (the tail slap warning signal).",
+    "incisors": "Large, prominent, ORANGE. Iron-rich enamel on the front surface is harder than the dentine on the back, creating a self-sharpening chisel edge as the beaver gnaws. Grow continuously at ~4-5 cm per year. Must be worn down through constant use. Can fell trees 30 cm in diameter.",
+    "feet": "Hind feet large and FULLY WEBBED -- powerful swimming paddles. Front feet smaller, unwebbed, dexterous -- used for manipulating branches, carrying mud, and grooming. Second hind toe has a split claw used as a grooming comb.",
+    "adaptations": "Clear nictitating membranes protect eyes underwater. Ear and nostril valves close when submerged. Can remain underwater up to 15 minutes (typical dives 3-5 min). Castor sacs near tail base produce castoreum for scent-marking territory.",
+    "field_id": "Large stocky brown semi-aquatic mammal (11-35 kg, 90-120 cm total) with a distinctive BROAD FLAT SCALY TAIL and large ORANGE INCISORS. Swims with only head visible above water. Most active at dusk and dawn. Look for: felled trees with characteristic conical gnaw marks, dams across streams, dome-shaped lodge in pond, V-shaped wake on calm water at dusk. Tail slap (sharp crack on water) is often the first evidence of presence."
+  },
+  "nodes": [
+    {
+      "id": "first-mammal",
+      "type": "concept",
+      "title": "FIRST MAMMAL -- The Engine Crosses the Class Boundary",
+      "description": "The American Beaver is the first mammal in the engine. Every previous species (degrees 0-60) was Class Aves. The beaver introduces Class Mammalia -- only the 2nd class since degree 0. This is the most significant taxonomic event in the engine's history. The engine is no longer a bird project. Fur, teeth, mammary glands, placental reproduction -- all new to the engine. The class boundary that held for 61 degrees is crossed.",
+      "connections": ["new-class-mammalia", "tail-slap", "ecosystem-engineer", "aquatic-quartet"]
+    },
+    {
+      "id": "new-class-mammalia",
+      "type": "concept",
+      "title": "New Class: Mammalia -- New Order: Rodentia -- New Family: Castoridae",
+      "description": "Three taxonomic levels introduced simultaneously. Mammalia (2nd class, after Aves at degree 0). Rodentia (largest mammalian order, ~2,200 species, ~40% of all mammals). Castoridae (only 2 living species worldwide: C. canadensis and C. fiber). The engine's deepest taxonomic expansion in a single degree. Aves and Mammalia diverged ~320 million years ago. Six consecutive non-passerine entries (56-61), the first non-Aves.",
+      "connections": ["first-mammal", "castoridae-two-species", "rodentia-largest-order"]
+    },
+    {
+      "id": "tail-slap",
+      "type": "concept",
+      "title": "The Tail Slap -- 62nd Acoustic Element",
+      "description": "A sharp, explosive percussive crack produced by slamming a broad flat tail against the water surface. Broadband impulse ~100-5,000 Hz, peak 200-1,500 Hz. E=4. Duration <0.1 seconds. NOT a vocalization -- the first non-vocal acoustic element from a non-avian species. First mammalian percussion. First pure warning signal. First broadband impulse (no pitch, no melody). First aquatic percussion (tail strikes water, not wood). The beaver slaps, then dives and vanishes.",
+      "connections": ["first-mammal", "ecosystem-engineer", "e4-crepuscular"]
+    },
+    {
+      "id": "ecosystem-engineer",
+      "type": "concept",
+      "title": "Ecosystem Engineer -- The Species That Builds the Pond",
+      "description": "The only species in the engine that physically reshapes its habitat. Builds dams that create ponds, fells trees for food and construction, builds lodges with underwater entrances. The pond creates habitat for Wood Ducks (58, nest in beaver-created snags), Mallards (59, breed on beaver ponds), Grebes (60, swim in impoundments), Kingfishers (57, fish in stillwater), Herons (0/14, wade in margins). The architect arrives at degree 61 -- after the species it enables. The pond builder enters after the pond inhabitants.",
+      "connections": ["first-mammal", "keystone-species", "habitat-creator", "dam-building"]
+    },
+    {
+      "id": "keystone-species",
+      "type": "concept",
+      "title": "Keystone Species -- Remove the Beaver, Lose the Ecosystem",
+      "description": "The textbook keystone species. Remove the beaver, and the dam fails. The pond drains. Ducks leave. Grebes leave. Kingfishers leave. Herons leave. Wetland plants die. Fish die. Entire ecosystem collapses because one species was removed. Before European contact: 60-400 million beavers in North America. By 1900: ~100,000. Millions of ponds lost. Recovery in 20th-21st centuries restores both the species and the wetlands it creates. The beaver is a living restoration tool.",
+      "connections": ["ecosystem-engineer", "fur-trade-history", "habitat-creator"]
+    },
+    {
+      "id": "aquatic-quartet",
+      "type": "pattern",
+      "title": "Four Consecutive Aquatic-Primary Species (58-59-60-61)",
+      "description": "Wood Duck (surface specialist, E=3, Aves), Mallard (surface generalist, E=5, Aves), Pied-billed Grebe (sustained diver, E=4, Aves), American Beaver (ecosystem engineer, E=4, Mammalia). Four degrees, three orders, TWO CLASSES, four aquatic strata: surface, subsurface, submersion, construction. The aquatic trilogy (named at degree 60) becomes a quartet. The fourth member adds the most profound dimension: the beaver MADE the pond. The duck sits on it, the grebe dives in it, the beaver built it.",
+      "connections": ["first-mammal", "ecosystem-engineer", "habitat-creator"]
+    },
+    {
+      "id": "dam-building",
+      "type": "concept",
+      "title": "Dam Building -- Engineering at Landscape Scale",
+      "description": "Beavers construct dams across streams using logs, branches, mud, and rocks. A dam impounds water, converting flowing stream to still pond. Site selection favors narrow shallow sections. The sound of running water triggers instinctive repair -- the most reliable behavioral trigger in mammalian biology. Individual dams from meters to hundreds of meters long. Longest known: ~850 meters (Alberta). Creates canopy gaps, downed wood, standing snags, and entirely new aquatic habitat.",
+      "connections": ["ecosystem-engineer", "keystone-species", "lodge-construction"]
+    },
+    {
+      "id": "lodge-construction",
+      "type": "concept",
+      "title": "Lodge Construction -- Heated Predator-Proof Architecture",
+      "description": "Dome-shaped structure of branches, logs, and mud, typically in center of pond. Underwater entrances provide predator protection -- no terrestrial predator can access the interior. The chamber above the waterline stays above freezing even in deep winter. A heated home accessed only through underwater tunnels. Natural architecture at its most functional. The lodge represents the beaver's complete integration with its engineered environment.",
+      "connections": ["dam-building", "ecosystem-engineer"]
+    },
+    {
+      "id": "fur-trade-history",
+      "type": "concept",
+      "title": "The Fur Trade -- Near-Extinction and Recovery",
+      "description": "Beaver pelts drove the North American fur trade (1600s-1800s). The felt hat industry consumed millions of pelts. In the PNW, Hudson's Bay Company's 'fur desert' policy systematically stripped the Columbia River watershed of beavers by the 1840s to discourage American settlement. Population crashed from an estimated 60-400 million to ~100,000 by 1900. Legal protections, reintroduction programs, and habitat recovery have restored populations. The fur that is the beaver's defense against cold nearly caused its extinction.",
+      "connections": ["keystone-species", "urban-beavers", "pnw-recovery"]
+    },
+    {
+      "id": "habitat-creator",
+      "type": "pattern",
+      "title": "Habitat Creator for Prior Engine Species",
+      "description": "The beaver connects to more prior engine entries than any previous species through direct habitat creation. Wood Ducks (58) nest in beaver-created snags. Mallards (59) breed on beaver ponds. Grebes (60) swim in beaver impoundments. Kingfishers (57) fish in beaver-pond stillwater. Herons (0/14) wade in beaver-pond margins. Pileated Woodpeckers (54) share the infrastructure-creator role. The engine's most ecologically connected species.",
+      "connections": ["ecosystem-engineer", "aquatic-quartet", "keystone-species"]
+    },
+    {
+      "id": "csv-streak-breaks",
+      "type": "pattern",
+      "title": "CSV Substitution Streak Breaks at 16",
+      "description": "The American Beaver is the original CSV species at degree 61 -- no substitution needed. First non-substituted species since degree 44 (Lesser Goldfinch). The amphibian belt (degrees 45-60) required 16 consecutive substitutions. At degree 61, the original CSV resurfaces with a mammal. The streak is broken. The engine returns to its original species list for the first time in 17 degrees.",
+      "connections": ["first-mammal"]
+    },
+    {
+      "id": "orange-incisors",
+      "type": "concept",
+      "title": "Orange Incisors -- Self-Sharpening Iron Chisels",
+      "description": "Large, prominent, and orange. Iron-rich enamel on the front surface is harder than the dentine on the back, creating a self-sharpening chisel edge. Grow continuously at ~4-5 cm per year. Can fell trees 30 cm in diameter. The defining rodent adaptation (continuously growing incisors) scaled up to ecosystem-engineering proportions. The teeth are the tools that build the dams that create the ponds that sustain the ecosystem.",
+      "connections": ["dam-building", "ecosystem-engineer", "new-class-mammalia"]
+    },
+    {
+      "id": "urban-beavers",
+      "type": "concept",
+      "title": "Urban Beavers -- The Engineer Adapts to Cities",
+      "description": "Active beaver populations documented on Piper's Creek (Carkeek Park, Seattle), Thornton Creek (Seattle), Duwamish River (Seattle/Tukwila), Sammamish Slough (Bothell/Redmond), and other suburban/urban waterways. The beaver does not retreat from human development -- it moves in, builds dams on suburban creeks, floods trails, fells ornamental trees. Management challenges are real but so is ecological benefit: urban beaver ponds support more species diversity than degraded urban streams.",
+      "connections": ["ecosystem-engineer", "pnw-recovery", "keystone-species"]
+    },
+    {
+      "id": "pnw-recovery",
+      "type": "concept",
+      "title": "PNW Recovery -- From Fur Desert to Urban Ponds",
+      "description": "The Pacific Northwest was an epicenter of the beaver fur trade. Hudson's Bay Company's 'fur desert' policy nearly extirpated beavers by the 1840s. Recovery through the 20th century restored populations throughout western Washington lowlands and foothills. Now common on lowland streams and rivers. Urban adaptation represents the latest phase: the species that was systematically eliminated from the landscape now builds dams within city limits.",
+      "connections": ["fur-trade-history", "urban-beavers", "keystone-species"]
+    },
+    {
+      "id": "e4-crepuscular",
+      "type": "pattern",
+      "title": "E=4 -- The Evening Crack",
+      "description": "Common and acoustically present but primarily crepuscular and nocturnal. Most active at dusk and dawn. The tail slap is most commonly heard in evening hours when beavers emerge and encounter perceived threats. Two consecutive E=4 entries (60-61) after the Mallard's E=5 peak (59). Energy curve of the aquatic quartet: 3-5-4-4 -- a spike followed by a plateau. The beaver's E=4 is earned through temporal restriction (active at dusk) rather than secretive behavior (like the Grebe's hidden E=4).",
+      "connections": ["tail-slap", "aquatic-quartet"]
+    },
+    {
+      "id": "castoridae-two-species",
+      "type": "concept",
+      "title": "Castoridae -- A Family of Two",
+      "description": "Only two living species: C. canadensis (North America) and C. fiber (Eurasia). The fossil record includes Castoroides ohioensis, the Pleistocene giant beaver -- over 1 meter tall, ~100 kg, incisors 15 cm long, extinct ~10,000 years ago. A family approaching minimum viable diversity. Compare Podicipedidae (grebes, ~22 species at degree 60). The beaver family is an evolutionary lineage reduced nearly to its endpoint.",
+      "connections": ["new-class-mammalia", "fur-trade-history"]
+    },
+    {
+      "id": "rodentia-largest-order",
+      "type": "concept",
+      "title": "Rodentia -- The Largest Mammalian Order",
+      "description": "Approximately 2,200 species -- ~40% of all mammalian species on Earth. More species than all avian orders currently in the engine combined. Defined by continuously growing incisors. Includes mice, rats, squirrels, chipmunks, porcupines, capybaras, guinea pigs, and beavers. The American Beaver is the largest rodent in North America and the second-largest in the world (after the capybara at ~50 kg).",
+      "connections": ["new-class-mammalia", "orange-incisors"]
+    },
+    {
+      "id": "y-la-bamba-parallel",
+      "type": "pattern",
+      "title": "The Y La Bamba Parallel",
+      "description": "Both are the first of their kind: first Latina artist in Part A, first mammal in Part B. Both break demographic/taxonomic boundaries held since degree 0. Both are builders -- Mendoza built a music career from a migrant farmworker family; the beaver builds ponds from streams. Both transform raw material into something larger and more complex. Both reshape the landscape they enter: Y La Bamba's bilingual approach reshapes the indie scene; the beaver reshapes the watershed.",
+      "connections": ["first-mammal", "ecosystem-engineer"]
+    },
+    {
+      "id": "two-ecosystem-engineers",
+      "type": "pattern",
+      "title": "Two Ecosystem Engineers -- Woodpecker and Beaver",
+      "description": "Both the Pileated Woodpecker (54) and the American Beaver (61) physically modify their environment to create habitat for other species. The woodpecker excavates large cavities used by owls, ducks, and other cavity nesters. The beaver builds dams that create ponds used by dozens of species. Both are infrastructure creators. Both make more habitat than they consume. One avian, one mammalian. The engine now has two independent ecosystem-engineering lineages.",
+      "connections": ["ecosystem-engineer", "habitat-creator"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-060",
+      "species": "Pied-billed Grebe",
+      "relationship": "CONSECUTIVE AQUATIC SPECIES -- FOURTH IN A ROW, CLASS BOUNDARY CROSSED. The submerge call (degree 60, Podilymbus podiceps, E=4, secretive diver, Podicipediformes, Aves) yields to the tail slap (degree 61, Castor canadensis, E=4, ecosystem engineer, Rodentia, Mammalia). The grebe swims IN the ponds that the beaver BUILDS. The aquatic quartet extends to four degrees across two classes. The Aves-Mammalia boundary is crossed for the first time."
+    },
+    {
+      "target": "SPS-059",
+      "species": "Mallard",
+      "relationship": "MALLARD BREEDS ON BEAVER PONDS. The ubiquitous pond generalist (degree 59, Anas platyrhynchos, E=5, Anseriformes) benefits from the ecosystem engineer's impoundments. Beaver ponds support higher Mallard breeding density than unimpounded stream channels. The generalist depends on the engineer."
+    },
+    {
+      "target": "SPS-058",
+      "species": "Wood Duck",
+      "relationship": "WOOD DUCKS NEST IN BEAVER-CREATED SNAGS. The cavity nester (degree 58, Aix sponsa, E=3, Anseriformes) depends on standing dead trees created by beaver-dam flooding. Beaver ponds flood riparian forests, kill trees, create snags with natural cavities. Wood Duck populations are positively correlated with beaver pond density. The most ornamental bird depends on the most industrious mammal."
+    },
+    {
+      "target": "SPS-057",
+      "species": "Belted Kingfisher",
+      "relationship": "KINGFISHERS FISH IN BEAVER PONDS. The plunge-diver (degree 57, Megaceryle alcyon, E=4, Coraciiformes) needs still, clear water. Beaver ponds provide it. Many kingfisher territories along small streams are centered on beaver impoundments -- the only sections with water deep and still enough for plunge-diving."
+    },
+    {
+      "target": "SPS-054",
+      "species": "Pileated Woodpecker",
+      "relationship": "TWO ECOSYSTEM ENGINEERS. Both modify their environment to create habitat for other species. The woodpecker excavates cavities (degree 54, Dryocopus pileatus); the beaver builds dams (degree 61). Both are infrastructure creators. Both make more habitat than they consume. One avian, one mammalian."
+    },
+    {
+      "target": "SPS-014",
+      "species": "Great Blue Heron",
+      "relationship": "HERONS WADE IN BEAVER-POND MARGINS. The first species in the engine (degree 0/14, Ardea herodias) forages in the shallow edges of beaver ponds. The oldest species depends on degree 61's newcomer for feeding habitat. Sixty-one degrees apart, connected by water depth."
+    },
+    {
+      "target": "MAM",
+      "species": "Mammals of the Pacific Northwest",
+      "relationship": "First mammal in the SPS engine. The most consequential mammal in PNW freshwater ecosystems. Year-round resident throughout western Washington lowlands and foothills. Historically decimated by the fur trade; now recovered. Urban populations documented on streams within Seattle, Bellevue, and other Puget Sound cities. Keystone species whose removal collapses entire pond ecosystems."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "The textbook keystone species. Beaver dams create wetlands that support dozens of species. Dam removal collapses entire pond ecosystems. Historically 60-400 million beavers maintained wetland habitat across North America. Fur trade removed them, wetlands collapsed. Beaver recovery restores wetlands. The beaver is a living restoration tool. Connects to more prior engine entries through direct habitat creation than any other species."
+    }
+  ]
+}

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 61&deg; &mdash; Y La Bamba &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>061 &mdash; Y La Bamba</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Portland Returns &mdash; First Latina Artist &mdash; First Bilingual Artist &mdash; The Braided Voice</h3>
+      <p>
+        Y La Bamba at degree 61&deg; breaks the Capitol Hill three-peat
+        (58&ndash;59&ndash;60) and returns to <strong>Portland</strong> &mdash;
+        the first Portland-primary artist since Laura Gibson (57).
+        <strong>Luz Elena Mendoza</strong> is the engine&rsquo;s first
+        <strong>Latina/Mexican-American artist</strong> and first
+        <strong>bilingual artist</strong> (English and Spanish).
+        <strong>Folk/Indie</strong> at Genre Stage 43 &mdash; a hybrid
+        classification. <strong>E=3</strong> returns.
+        <strong>Tender Loving Empire</strong> &mdash; Portland indie label,
+        first appearance. The farmworker&rsquo;s daughter bridges cultures,
+        languages, and cities.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">61&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Y La Bamba</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Folk/Indie</span>
+          <span class="label-badge">Tender Loving Empire</span>
+          <span class="neighborhood-badge">Portland to Seattle</span>
+          <span class="record-badge">First Bilingual Artist</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Firsts: First Latina Artist &middot; First Bilingual Artist &middot; First Tender Loving Empire</h4>
+          <p>
+            <strong>Luz Elena Mendoza</strong> is the engine&rsquo;s first
+            Latina/Mexican-American artist &mdash; raised in a migrant
+            farmworker family in the Willamette Valley, Oregon. Y La Bamba
+            is the first bilingual project in the engine, with lyrics in
+            both <strong>English and Spanish</strong>. Through sixty degrees
+            the engine was monolingual; degree 61 breaks that pattern.
+            <strong>Tender Loving Empire</strong>, Portland&rsquo;s
+            community-minded indie label and retail store, enters the engine
+            for the first time.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Farmworker&rsquo;s Daughter</h2>
+          <p>
+            <strong>Luz Elena Mendoza</strong> was born to Mexican immigrant
+            parents in the <strong>Willamette Valley</strong>, Oregon, and
+            raised in a family of migrant farmworkers. The valley is
+            Oregon&rsquo;s primary agricultural region &mdash; flat, fertile
+            land where crops are harvested by laborers who follow the
+            growing season. Spanish was the language of home; English the
+            language of school. Music was present in both worlds &mdash;
+            Mexican folk music at home, American pop and rock on the radio,
+            church music in the Catholic parishes where farmworker families
+            gathered.
+          </p>
+          <p>
+            The path from the Willamette Valley to Portland&rsquo;s indie
+            music scene was a leap across class, cultural, and geographic
+            boundaries. Mendoza bridged them &mdash; bringing the musical
+            traditions of her family into indie spaces, and bringing
+            Portland&rsquo;s experimental energy into contact with Latin
+            rhythms and Spanish lyrics. Y La Bamba is the space between
+            those traditions &mdash; the hybrid that emerges when a person
+            who carries both creates music that honors both.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Bilingual Voice</h2>
+          <p>
+            Y La Bamba&rsquo;s bilingualism is the natural expression of a
+            person who moves between English and Spanish in daily life.
+            Mendoza&rsquo;s lyrics switch between languages within songs
+            &mdash; sometimes mid-verse, sometimes mid-line. The switching
+            is governed by which language best expresses the idea at that
+            moment. In sociolinguistics, this <strong>code-switching</strong>
+            is not a failure to master either language but an expression of
+            mastery of both.
+          </p>
+          <blockquote>
+            The code-switch expands the emotional palette. Some feelings
+            live better in Spanish &mdash; <em>coraz&oacute;n</em>,
+            <em>alma</em>, <em>duele</em> &mdash; carrying cultural weight
+            that English equivalents cannot replicate. The bilingual
+            songwriter can choose the better tool for each moment. Two
+            languages, one voice.
+          </blockquote>
+          <p>
+            Through sixty degrees the engine was monolingual &mdash; every
+            artist performing in English. Degree 61 makes that default
+            visible by breaking it. The previous sixty degrees of
+            English-only performance are revealed, retroactively, as a
+            pattern rather than a given.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Latin Element: Folk Expanded</h2>
+          <p>
+            The folk tradition in the engine, through degree 60, has been
+            Anglo-American &mdash; the lineage from Woody Guthrie through
+            Bob Dylan through Elliott Smith. Y La Bamba expands this
+            tradition. Mendoza&rsquo;s folk draws from two wells: the
+            American singer-songwriter tradition <em>and</em> the Mexican
+            folk tradition &mdash; ranchera&rsquo;s emotional directness,
+            cumbia&rsquo;s rhythmic patterns, the corrido&rsquo;s narrative
+            function, and the son jarocho&rsquo;s communal performance
+            practice.
+          </p>
+          <p>
+            The folk zone is becoming more capacious. What began as
+            Americana folk (Jurado, 45) has now encompassed literary folk
+            (Gibson, 57), stripped singer-songwriter folk (Gibbard, 60),
+            and bilingual Latinx folk-indie (Y La Bamba, 61). The folk
+            tradition in the engine is a <strong>family of approaches</strong>
+            to intimate, song-centered music &mdash; now including
+            traditions from both sides of the border.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Braided Voice</h4>
+              <div class="level advanced">Advanced &mdash; 62nd Acoustic Element</div>
+              <p>
+                The acoustic quality produced when a singer weaves two
+                languages into a single vocal line, creating a texture that
+                is neither monolingual English nor monolingual Spanish but a
+                third thing: a bilingual braid carrying the warmth, rhythm,
+                and cultural weight of both languages simultaneously. The
+                vowels of Spanish lend warmth; the precision of English lends
+                structure. Two threads woven into one cord. The braided voice
+                is communal where the bare wire (60) was solitary.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Corridor Bridge</h4>
+              <div class="level advanced">Advanced &mdash; 62nd Artist-City Pattern</div>
+              <p>
+                The pattern of an artist whose geographic identity is not a
+                single city but a corridor between cities, cultures, and
+                languages. Y La Bamba bridges the Willamette Valley to
+                Portland, Portland to Seattle, Mexico to the Pacific
+                Northwest, and Spanish to English. The corridor bridge
+                operates at regional scale where the frontman alone (60)
+                operated within a single neighborhood.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Untranslatable Ache</h4>
+              <div class="level intermediate">Intermediate &mdash; 61st Deployment</div>
+              <p>
+                The blue note that sounds when an emotion exists in one
+                language but not the other &mdash; when the singer reaches
+                for the Spanish word because the English word is inadequate,
+                or vice versa. The gap between languages where some feelings
+                have a home in only one tongue. The vulnerability of
+                performing between languages.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk/Indie at Genre Stage 43</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 43</div>
+              <p>
+                The first hybrid genre classification in the engine. Neither
+                pure Folk (60) nor pure Indie Rock (58&ndash;59). The slash
+                is a bridge between genre territories. Folk/Indie absorbs
+                the Latin element that the Folk/Indie label only partially
+                captures. The folk zone expands from Anglo-American to
+                multicultural.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Court the Storm</h4>
+              <div class="disco-years">2012 &middot; Tender Loving Empire</div>
+              <p>
+                Breakout album. Folk, rock, and Latin influences.
+                Bilingual lyrics establish the code-switching pattern.
+                Warm, organic production. Critical attention to
+                Mendoza&rsquo;s voice.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Ojos Del Sol</h4>
+              <div class="disco-years">2016 &middot; Tender Loving Empire</div>
+              <p>
+                &ldquo;Eyes of the Sun.&rdquo; More experimental.
+                Spanish-language title signals growing confidence.
+                Identity excavation &mdash; farmworker roots, Mexican
+                folk traditions integrated with indie vocabulary.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Mujeres</h4>
+              <div class="disco-years">2019 &middot; Tender Loving Empire</div>
+              <p>
+                &ldquo;Women.&rdquo; Most fully realized album.
+                Meditation on the women in Mendoza&rsquo;s life.
+                Sonically diverse &mdash; folk next to synth,
+                whispers next to declarations. Bilingual lyrics
+                fully integrated.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">57&deg;</span>
+              <strong>Laura Gibson</strong> &mdash; Portland connection.
+              Both Portland artists in the engine. Both Folk-rooted.
+              Gibson: literary, MFA-trained, English-language.
+              Mendoza: bilingual, farmworker-raised, culturally hybrid.
+              Portland contains both traditions. The manuscript page (57)
+              and the braided voice (61) describe different kinds of
+              intimacy.
+            </li>
+            <li>
+              <span class="ref-degree">60&deg;</span>
+              <strong>Ben Gibbard (Solo)</strong> &mdash; Folk continuity.
+              Two consecutive folk-zone degrees. Gibbard: stripped
+              Anglo-American folk, E=2. Y La Bamba: bilingual Latin-inflected
+              folk-indie, E=3. The bare wire (60) and the braided voice
+              (61) &mdash; single strand versus woven braid. Solo
+              intimacy gives way to bilingual warmth.
+            </li>
+            <li>
+              <span class="ref-degree">58&deg;</span>
+              <strong>Death Cab for Cutie</strong> &mdash; Label
+              infrastructure contrast. Barsuk/Atlantic (58) vs
+              Tender Loving Empire (61). Different models of independent
+              label support. Same I-5 corridor connects both ecosystems.
+            </li>
+            <li>
+              <span class="ref-degree">55&deg;</span>
+              <strong>Shelby Earl</strong> &mdash; E=3 shared. Both
+              intimate-scale artists sustained by city-specific indie
+              infrastructure. Club-level presence. Infrastructure
+              beneficiary pattern applies.
+            </li>
+            <li>
+              <span class="ref-degree">44&deg;</span>
+              <strong>Chong the Nomad</strong> &mdash; Cultural diversity
+              expansion. First Filipino-American (44), now first Latina
+              (61). Seventeen degrees between cultural milestones.
+              The engine&rsquo;s representation broadens incrementally.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">61&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk/Indie</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">43</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2007&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Portland to Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Background</span>
+            <span class="stat-value">Willamette Valley</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Tender Loving Empire</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">43 (Folk/Indie)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#62 (Braided Voice)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">Corridor Bridge</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#61</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Firsts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Latina</span>
+            <span class="stat-value">First</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bilingual</span>
+            <span class="stat-value">First</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">TLE Label</span>
+            <span class="stat-value">First</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hybrid Genre</span>
+            <span class="stat-value">Folk/Indie</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">20</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">14</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">15</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#62 (Braided Voice)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#62 (Corridor Bridge)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#61</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Portland Artists</h4>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Laura Gibson (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">61&deg;</span>
+            <span class="stat-value">Y La Bamba (Folk/Indie)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Laura Gibson</span>
+            <span class="stat-value">Portland folk (57)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gibbard Solo</span>
+            <span class="stat-value">Folk continuity (60)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chong the Nomad</span>
+            <span class="stat-value">Diversity (44)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shelby Earl</span>
+            <span class="stat-value">E=3 shared (55)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../060-ben-gibbard/" style="color: var(--seattle-navy);">&larr; 60&deg; Ben Gibbard (Solo)</a>
+        <a href="../062/" style="color: var(--seattle-navy);">62&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 61&deg; &mdash; Y La Bamba &mdash; Seattle 360 Engine &mdash; v1.49.199
+        <br>
+        Portland returns. The farmworker&rsquo;s daughter bridges cultures. Luz Elena
+        Mendoza &mdash; first Latina artist, first bilingual artist in the engine.
+        Folk/Indie at Genre Stage 43. E=3. Tender Loving Empire (Portland indie label,
+        first appearance). Capitol Hill three-peat broken. Albums: <em>Court the Storm</em>
+        (2012), <em>Ojos Del Sol</em> (2016), <em>Mujeres</em> (2019). The braided voice
+        &mdash; two languages woven into one vocal line. The corridor bridge &mdash; the
+        artist whose identity is a corridor between cities, cultures, and languages. The
+        untranslatable ache &mdash; the gap between languages where some feelings have a
+        home in only one tongue. The folk zone expands from Anglo-American to multicultural.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
