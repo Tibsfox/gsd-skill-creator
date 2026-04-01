@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUK — Weather Data Source Map, Greater Mukilteo / Snohomish County</title>
+<style>
+:root {
+  --sea: #1a3a4a;
+  --sea-light: #2a5a6a;
+  --marine: #3a8a9a;
+  --fog: #8aa0b0;
+  --sand: #c4b090;
+  --drift: #9a8a70;
+  --cedar: #2a4a30;
+  --sky: #4a7a9a;
+  --rain: #5a7a8a;
+  --ink: #1a1a2a;
+  --text: #d0d4da;
+  --dim: #7a8090;
+  --bg: #0a0e14;
+  --panel: #0e1420;
+  --border: rgba(255,255,255,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+a { color: var(--marine); text-decoration:none; }
+a:hover { color: var(--sand); }
+
+header {
+  background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+  padding: 2.5rem 2rem 2rem; border-bottom: 3px solid var(--sand);
+  text-align: center; position: relative; overflow: hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+header nav a {
+  color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif;
+  font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+}
+header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 0.5rem;
+  padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+}
+h3 {
+  font-size:0.95rem; font-weight:400; color:var(--fog); margin:1.5rem 0 0.5rem;
+}
+p, li { font-size:0.88rem; color:var(--text); margin-bottom:0.5rem; }
+ul { margin-left:1.5rem; margin-bottom:1rem; }
+li { line-height:1.6; }
+
+/* ASCII map */
+.ascii-map {
+  background: var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1.5rem 0; overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.ascii-map pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size:0.72rem; line-height:1.35; color:var(--fog);
+  white-space:pre; margin:0;
+}
+.ascii-map .map-legend {
+  font-size:0.72rem; color:var(--dim); font-family:monospace;
+  margin-top:1rem; padding-top:0.8rem; border-top:1px solid var(--border);
+}
+
+/* Data tables */
+.table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.data-table {
+  width:100%; border-collapse:collapse; font-size:0.82rem; margin:0.8rem 0 1.5rem;
+}
+.data-table th {
+  text-align:left; font-size:0.65rem; color:var(--dim); text-transform:uppercase;
+  letter-spacing:0.08em; font-family:system-ui,sans-serif; font-weight:500;
+  padding:0.4rem 0.6rem; border-bottom:1px solid var(--border);
+}
+.data-table td {
+  padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); color:var(--text);
+  font-family:system-ui,sans-serif; font-size:0.8rem;
+}
+.data-table tr:hover td { background:rgba(58,138,154,0.04); }
+.data-table code {
+  font-family:monospace; font-size:0.75rem; color:var(--marine);
+  background:rgba(58,138,154,0.08); padding:0.1rem 0.3rem; border-radius:2px;
+}
+
+/* Tags */
+.tag {
+  display:inline-block; padding:0.05rem 0.4rem; border-radius:2px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.04em; border:1px solid;
+}
+.tag-metar { background:rgba(74,122,154,0.1); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+.tag-tide { background:rgba(26,58,74,0.2); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+.tag-stream { background:rgba(42,74,48,0.15); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+.tag-grid { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+.tag-space { background:rgba(154,106,216,0.1); color:#9a6ad8; border-color:rgba(154,106,216,0.2); }
+.tag-gap { background:rgba(220,80,80,0.1); color:#d05050; border-color:rgba(220,80,80,0.2); }
+
+/* Panels */
+.panel {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem; margin-bottom:1.5rem;
+}
+.panel h4 {
+  font-size:0.85rem; font-weight:400; color:var(--sand); margin-bottom:0.5rem;
+}
+.panel p {
+  font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.6;
+}
+
+/* Coverage gap callout */
+.gap-callout {
+  background:rgba(220,80,80,0.05); border:1px solid rgba(220,80,80,0.15);
+  border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0;
+  font-size:0.85rem; color:#d08080;
+}
+.gap-callout strong { color:var(--sand); }
+
+/* Stats bar */
+.stats {
+  display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2rem;
+  padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+.stat { text-align:center; min-width:80px; }
+.stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+.stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+footer a { color:var(--fog); }
+
+@media(max-width:640px) {
+  header h1 { font-size:1.4rem; }
+  main { padding:1rem; }
+  .ascii-map pre { font-size:0.55rem; }
+  .stats { gap:0.8rem; }
+  .stat-value { font-size:1.2rem; }
+}
+@media(min-width:1920px) {
+  main { max-width:1300px; }
+  footer { max-width:1300px; }
+  .ascii-map pre { font-size:0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Weather Data Source Map</h1>
+  <div class="subtitle">Microclimate monitoring network &mdash; greater Mukilteo / Snohomish County / north King County</div>
+  <div class="coords">Coverage: 47.25&deg;N&ndash;48.50&deg;N &times; 121.50&deg;W&ndash;122.80&deg;W &middot; NWS WFO Seattle (SEW)</div>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="weather-science.html">Weather Science</a>
+    <a href="weather-math.html">Weather Math</a>
+    <a href="weather-map.html" class="active">Data Map</a>
+    <a href="convergence-zone.html">PSCZ</a>
+    <a href="tides-math.html">Tides</a>
+    <a href="marine-science.html">Marine</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <blockquote>
+    Every weather observation is a point sample. The atmosphere is continuous.
+    Understanding where our data comes from &mdash; and where it doesn't &mdash;
+    is the first step to understanding why models disagree over Mukilteo.
+    This page maps every available data source in the greater monitoring network.
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">6</span><span class="stat-label">METAR Stations</span></div>
+    <div class="stat"><span class="stat-value">4</span><span class="stat-label">Tide Gauges</span></div>
+    <div class="stat"><span class="stat-value">4</span><span class="stat-label">Stream Gauges</span></div>
+    <div class="stat"><span class="stat-value">5</span><span class="stat-label">Weather Networks</span></div>
+    <div class="stat"><span class="stat-value">3</span><span class="stat-label">Space Weather</span></div>
+    <div class="stat"><span class="stat-value">4</span><span class="stat-label">Coverage Gaps</span></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ASCII MAP -->
+  <!-- ============================================================ -->
+
+  <h2>Regional Station Map</h2>
+
+  <div class="ascii-map">
+<pre>
+                          N
+                          |
+    122.5W          122.25W          122.0W           121.75W          121.5W
+    ------+-------------+-------------+----------------+---------------+------
+          |                                                            |
+  48.5N - |  [KBVS] Skagit Regional                                   | - 48.5N
+          |    Burlington, 145ft                                       |
+          |                                                            |
+          |                                                            |
+  48.25N -|             .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .| - 48.25N
+          |          (Open-Meteo grid boundary)                        |
+          |                                                            |
+  48.16N -|  [KAWO] Arlington Muni                                     | - 48.16N
+          |    142ft          {12167000} NF Stillaguamish               |
+          |                     near Arlington                         |
+          |                                                            |
+          | ~~~~~~~~~ WHIDBEY ISLAND ~~~~~~~~~~                        |
+  48.0N - | ~~~~~ (limited coverage) ~~~~~~~~~~                        | - 48.0N
+          | ~~~ [gap: no south Whidbey] ~~~~~~~                        |
+          |                                                            |
+          |   [9447659]                                                |
+          |    Everett      [KPAE] Paine Field, 607ft                  |
+          |    tide gauge     METAR + ASOS                             |
+  47.9N - |   ,,,,,,,,,,                                               | - 47.9N
+          |   Possession    ** MUKILTEO  47.91N **                     |
+          |     Sound       ** [gap: no marine buoy] **                |
+          |   [gap: no      ** [gap: no AQ sensor]   **                |
+          |    buoy here]                                              |
+          |   ,,,,,,,,,,                                               |
+  47.75N -|                                                            | - 47.75N
+          |                                                            |
+          |           {12150800} Snohomish R.                           |
+          |             near Monroe                                    |
+          |                                                            |
+          |   ~~~~~~~~~~~~                         CASCADES            |
+          |   ~ PUGET  ~~~                         ^^^^^^^^            |
+  47.6N - |   ~ SOUND ~~~     SEATTLE              ^ [gap: no mtn ^   | - 47.6N
+          |   ~~~~~~~~~~~~                         ^ wx station]  ^    |
+          |                                        ^ Stevens Pass ^    |
+          |   [9447130]                            ^ is closest   ^    |
+          |    Seattle tide                        ^^^^^^^^^^^^^^^^    |
+  47.5N - |    Elliott Bay                                             | - 47.5N
+          |               [KBFI] Boeing Fld, 21ft                      |
+          |                                   {12134500} Skykomish R.  |
+          |               [KRNT] Renton, 32ft   near Gold Bar          |
+          |                                                            |
+          |               [KSEA] Sea-Tac, 433ft                       |
+  47.4N - |                                        {12149000}          | - 47.4N
+          |                                         Snoqualmie R.      |
+          |   [9446484]                              near Carnation    |
+          |    Tacoma tide                                             |
+  47.25N -|    Commencement Bay                                        | - 47.25N
+          |                                                            |
+    ------+-------------+-------------+----------------+---------------+------
+    122.5W          122.25W          122.0W           121.75W          121.5W
+
+    [9444900] Port Townsend tide gauge
+    is off-map to the NW (48.11N 122.76W)
+    at the mouth of Admiralty Inlet
+</pre>
+    <div class="map-legend">
+      [XXXX] = METAR/ASOS aviation station &nbsp;&middot;&nbsp;
+      [#######] = NOAA tide station &nbsp;&middot;&nbsp;
+      {########} = USGS stream gauge &nbsp;&middot;&nbsp;
+      ~~~~ = water &nbsp;&middot;&nbsp;
+      ^^^^ = mountains &nbsp;&middot;&nbsp;
+      [gap:] = coverage gap
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- METAR STATIONS -->
+  <!-- ============================================================ -->
+
+  <h2>Aviation METAR/ASOS Stations</h2>
+  <p>Automated Surface Observing System (ASOS) stations at airports. These are the ground-truth reference for temperature, wind, pressure, visibility, ceiling, and present weather. Updated every minute, METAR reports issued at least hourly with special observations (SPECIs) when conditions change rapidly.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ICAO</th>
+        <th>Location</th>
+        <th>Lat</th>
+        <th>Lon</th>
+        <th>Elev</th>
+        <th>Update</th>
+        <th>Measures</th>
+        <th>API / Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KPAE</strong></td>
+        <td>Paine Field, Everett</td>
+        <td><code>47.9073</code></td>
+        <td><code>-122.2821</code></td>
+        <td>607 ft</td>
+        <td>1 min (ASOS) / hourly (METAR)</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx, remarks</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KPAE">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KAWO</strong></td>
+        <td>Arlington Municipal</td>
+        <td><code>48.1610</code></td>
+        <td><code>-122.1590</code></td>
+        <td>142 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KAWO">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KBFI</strong></td>
+        <td>Boeing Field, Seattle</td>
+        <td><code>47.5300</code></td>
+        <td><code>-122.3020</code></td>
+        <td>21 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KBFI">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KSEA</strong></td>
+        <td>Sea-Tac Airport</td>
+        <td><code>47.4490</code></td>
+        <td><code>-122.3090</code></td>
+        <td>433 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx, RVR</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KSEA">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KRNT</strong></td>
+        <td>Renton Municipal</td>
+        <td><code>47.4930</code></td>
+        <td><code>-122.2160</code></td>
+        <td>32 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KRNT">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KBVS</strong></td>
+        <td>Skagit Regional, Burlington</td>
+        <td><code>48.4710</code></td>
+        <td><code>-122.4210</code></td>
+        <td>145 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KBVS">aviationweather.gov</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="panel">
+    <h4>Why These Stations Matter for Mukilteo</h4>
+    <p>KPAE (Paine Field) is our primary ground-truth station &mdash; 2.5 miles from Mukilteo's waterfront. But at 607 ft elevation on a bluff, it sees different conditions than the shoreline. When the Puget Sound Convergence Zone is active, KPAE can report overcast/rain while KSEA (25 mi south) reports clear. Comparing KPAE vs KAWO (25 mi north) reveals the PSCZ's north-south oscillation. KBFI at 21 ft elevation captures sea-level conditions that hilltop KPAE misses.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TIDE STATIONS -->
+  <!-- ============================================================ -->
+
+  <h2>NOAA Tide Stations</h2>
+  <p>Operational tide gauges with real-time water level, predictions, meteorological observations, and water temperature. The Everett station (9447659) is the closest to Mukilteo. Seattle (9447130) is the primary reference station for Puget Sound datums.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Station</th>
+        <th>ID</th>
+        <th>Location</th>
+        <th>Update</th>
+        <th>Measures</th>
+        <th>API / Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-tide">Tide</span> <strong>Everett</strong></td>
+        <td><code>9447659</code></td>
+        <td>Port of Everett, Possession Sound</td>
+        <td>6-min intervals</td>
+        <td>Water level, predictions, met obs, water temp, conductivity</td>
+        <td><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=9447659">NOAA CO-OPS</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-tide">Tide</span> <strong>Seattle</strong></td>
+        <td><code>9447130</code></td>
+        <td>Elliott Bay (Madison St.)</td>
+        <td>6-min intervals</td>
+        <td>Water level, predictions, met obs, water temp, sea level trends</td>
+        <td><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=9447130">NOAA CO-OPS</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-tide">Tide</span> <strong>Port Townsend</strong></td>
+        <td><code>9444900</code></td>
+        <td>Admiralty Inlet</td>
+        <td>6-min intervals</td>
+        <td>Water level, predictions, met obs, water temp, conductivity</td>
+        <td><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=9444900">NOAA CO-OPS</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-tide">Tide</span> <strong>Tacoma</strong></td>
+        <td><code>9446484</code></td>
+        <td>Commencement Bay</td>
+        <td>6-min intervals</td>
+        <td>Water level, predictions, met obs, water temp</td>
+        <td><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=9446484">NOAA CO-OPS</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="panel">
+    <h4>CO-OPS API Access</h4>
+    <p>All NOAA tide stations are accessible via the CO-OPS API at <code>https://api.tidesandcurrents.noaa.gov/api/prod/datagetter</code>. Parameters: <code>station</code>, <code>product</code> (water_level, predictions, air_temperature, wind, air_pressure, water_temperature), <code>datum</code> (MLLW), <code>units</code> (english/metric), <code>time_zone</code> (lst_ldt), <code>format</code> (json). No API key required. Rate limit: reasonable use.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- STREAM GAUGES -->
+  <!-- ============================================================ -->
+
+  <h2>USGS Stream Gauges</h2>
+  <p>Real-time streamflow monitoring on rivers that drain the Cascades into Puget Sound. These measure discharge (flow volume) and gage height &mdash; critical for flood forecasting and understanding how mountain precipitation translates to lowland water levels.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Station</th>
+        <th>USGS ID</th>
+        <th>River</th>
+        <th>Drainage</th>
+        <th>Update</th>
+        <th>Measures</th>
+        <th>API / Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-stream">Stream</span> <strong>Monroe</strong></td>
+        <td><code>12150800</code></td>
+        <td>Snohomish River</td>
+        <td>1,537 mi&sup2;</td>
+        <td>15-min intervals</td>
+        <td>Discharge (ft&sup3;/s), gage height (ft)</td>
+        <td><a href="https://waterdata.usgs.gov/monitoring-location/USGS-12150800/">USGS NWIS</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-stream">Stream</span> <strong>Gold Bar</strong></td>
+        <td><code>12134500</code></td>
+        <td>Skykomish River</td>
+        <td>535 mi&sup2;</td>
+        <td>15-min intervals</td>
+        <td>Discharge (ft&sup3;/s), gage height (ft)</td>
+        <td><a href="https://waterdata.usgs.gov/monitoring-location/USGS-12134500/">USGS NWIS</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-stream">Stream</span> <strong>Arlington</strong></td>
+        <td><code>12167000</code></td>
+        <td>NF Stillaguamish River</td>
+        <td>262 mi&sup2;</td>
+        <td>15-min intervals</td>
+        <td>Discharge (ft&sup3;/s), gage height (ft)</td>
+        <td><a href="https://waterdata.usgs.gov/monitoring-location/USGS-12167000/">USGS NWIS</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-stream">Stream</span> <strong>Carnation</strong></td>
+        <td><code>12149000</code></td>
+        <td>Snoqualmie River</td>
+        <td>603 mi&sup2;</td>
+        <td>15-min intervals</td>
+        <td>Discharge (ft&sup3;/s), gage height (ft)</td>
+        <td><a href="https://waterdata.usgs.gov/monitoring-location/USGS-12149000/">USGS NWIS</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="panel">
+    <h4>USGS Water Services API</h4>
+    <p>Instantaneous values via <code>https://waterservices.usgs.gov/nwis/iv/</code>. Parameters: <code>sites</code> (comma-separated IDs), <code>parameterCd</code> (00060=discharge, 00065=gage height), <code>format</code> (json). No API key required. Historical daily values at <code>/nwis/dv/</code>. Flood stages: Monroe 15.0 ft, Gold Bar 15.0 ft, Arlington 13.0 ft, Carnation 54.0 ft.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- WEATHER NETWORKS -->
+  <!-- ============================================================ -->
+
+  <h2>Weather Networks &amp; Model Grids</h2>
+  <p>Beyond point observations, these networks provide gridded forecasts, community sensor data, and model output that fill the gaps between official stations.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Network</th>
+        <th>Type</th>
+        <th>Coverage</th>
+        <th>Update</th>
+        <th>Measures</th>
+        <th>API / Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-grid">Grid</span> <strong>Open-Meteo</strong></td>
+        <td>Forecast model ensemble</td>
+        <td>Grid points across 47.5&ndash;48.5&deg;N, 121.5&ndash;122.5&deg;W</td>
+        <td>Hourly (forecast) / 15-min (historical)</td>
+        <td>Temp, precip, wind, humidity, pressure, cloud cover, solar radiation, soil moisture</td>
+        <td><a href="https://open-meteo.com/en/docs">open-meteo.com</a> (free, no key)</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">Grid</span> <strong>NWS Forecast (SEW)</strong></td>
+        <td>Official NWS gridded forecast</td>
+        <td>WFO Seattle coverage &mdash; W. Washington</td>
+        <td>Hourly grids, updated 4x/day</td>
+        <td>Temp, wind, precip probability, sky cover, hazards, marine zones</td>
+        <td><a href="https://api.weather.gov/points/47.9063,-122.2816">api.weather.gov</a> (free, User-Agent required)</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">Grid</span> <strong>PurpleAir</strong></td>
+        <td>Community air quality sensors</td>
+        <td>Dozens of sensors across Snohomish County</td>
+        <td>2-min intervals (real-time)</td>
+        <td>PM2.5, PM10, PM1.0, temperature, humidity, pressure, AQI</td>
+        <td><a href="https://map.purpleair.com/">map.purpleair.com</a> (API key required)</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">Grid</span> <strong>Weather Underground</strong></td>
+        <td>Personal weather stations</td>
+        <td>Hundreds of PWS in Snohomish / N. King County</td>
+        <td>5&ndash;30 min (varies by station)</td>
+        <td>Temp, humidity, wind, precip, pressure, UV, solar radiation</td>
+        <td><a href="https://www.wunderground.com/wundermap">wunderground.com</a> (API key required)</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">Grid</span> <strong>WSDOT Road Weather</strong></td>
+        <td>Highway cameras + sensors</td>
+        <td>I-5, I-405, SR-2, SR-9, US-2 corridors</td>
+        <td>5&ndash;10 min</td>
+        <td>Road temp, air temp, visibility, wind, cameras (still images)</td>
+        <td><a href="https://wsdot.com/travel/real-time/cameras">wsdot.com/travel</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SPACE WEATHER -->
+  <!-- ============================================================ -->
+
+  <h2>Space Weather (Global &mdash; Affects All Stations)</h2>
+  <p>Solar activity affects GPS accuracy, radio propagation, and aurora visibility. Geomagnetic storms can degrade GPS-dependent weather instruments and disrupt HF radio. These indices are global but relevant to all local observations.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Index</th>
+        <th>Update</th>
+        <th>Measures</th>
+        <th>API / Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-space">Space</span> <strong>NOAA SWPC</strong></td>
+        <td>Kp index (0&ndash;9)</td>
+        <td>3-hour intervals</td>
+        <td>Planetary geomagnetic activity. Kp &ge; 5 = geomagnetic storm. Kp &ge; 7 = aurora visible from PNW.</td>
+        <td><a href="https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json">SWPC JSON API</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-space">Space</span> <strong>NOAA SWPC</strong></td>
+        <td>G-scale (G0&ndash;G5)</td>
+        <td>As-needed</td>
+        <td>Geomagnetic storm severity. G1 = minor, G5 = extreme. Affects power grids, GPS, HF radio.</td>
+        <td><a href="https://www.swpc.noaa.gov/noaa-scales-explanation">SWPC Scales</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-space">Space</span> <strong>DSCOVR (L1)</strong></td>
+        <td>Solar wind</td>
+        <td>1-min intervals</td>
+        <td>Solar wind speed (km/s), density (#/cm&sup3;), Bz component (nT). 15&ndash;60 min lead time before geomagnetic impact.</td>
+        <td><a href="https://services.swpc.noaa.gov/products/solar-wind/">SWPC Solar Wind API</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- COMPREHENSIVE SOURCE TABLE -->
+  <!-- ============================================================ -->
+
+  <h2>Complete Source Reference</h2>
+  <p>Every data source in the monitoring network, sorted by update frequency.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Type</th>
+        <th>Frequency</th>
+        <th>Key Measurements</th>
+        <th>Free API</th>
+        <th>API Key</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>KPAE ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KAWO ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KBFI ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KSEA ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx, RVR</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KRNT ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KBVS ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>DSCOVR L1</td><td>Space</td><td>1 min</td><td>Solar wind speed, density, Bz</td><td>swpc.noaa.gov</td><td>No</td></tr>
+      <tr><td>PurpleAir</td><td>Air quality</td><td>2 min</td><td>PM2.5, PM10, AQI, T, RH</td><td>api.purpleair.com</td><td>Yes</td></tr>
+      <tr><td>WU PWS</td><td>Personal wx</td><td>5-30 min</td><td>T, RH, wind, precip, P, UV</td><td>api.weather.com</td><td>Yes</td></tr>
+      <tr><td>WSDOT cameras</td><td>Road wx</td><td>5-10 min</td><td>Road T, air T, vis, wind, images</td><td>wsdot.com API</td><td>No</td></tr>
+      <tr><td>Tide 9447659</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
+      <tr><td>Tide 9447130</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
+      <tr><td>Tide 9444900</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
+      <tr><td>Tide 9446484</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
+      <tr><td>USGS 12150800</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
+      <tr><td>USGS 12134500</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
+      <tr><td>USGS 12167000</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
+      <tr><td>USGS 12149000</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
+      <tr><td>Open-Meteo</td><td>Model grid</td><td>1 hr</td><td>T, precip, wind, RH, P, clouds, solar</td><td>open-meteo.com</td><td>No</td></tr>
+      <tr><td>NWS SEW grid</td><td>Forecast</td><td>1 hr (4x/day)</td><td>T, wind, PoP, sky, hazards</td><td>api.weather.gov</td><td>No</td></tr>
+      <tr><td>SWPC Kp</td><td>Space</td><td>3 hr</td><td>Geomagnetic activity (0-9)</td><td>swpc.noaa.gov</td><td>No</td></tr>
+      <tr><td>SWPC G-scale</td><td>Space</td><td>As needed</td><td>Storm severity (G0-G5)</td><td>swpc.noaa.gov</td><td>No</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- COVERAGE GAPS -->
+  <!-- ============================================================ -->
+
+  <h2>Coverage Gaps</h2>
+  <p>Where the monitoring network has blind spots. These gaps affect our ability to validate forecasts, detect local phenomena, and understand Mukilteo's microclimate.</p>
+
+  <div class="gap-callout">
+    <strong>Gap 1: No marine buoys in Possession Sound</strong><br>
+    The nearest NOAA NDBC buoys are in the Strait of Juan de Fuca and the open Pacific.
+    Possession Sound &mdash; the body of water directly west of Mukilteo &mdash; has no
+    instrumented marine buoy. This means we have no real-time sea surface temperature,
+    wave height, or marine-level wind data for the water that directly influences Mukilteo's
+    marine layer and fog formation. The Everett tide gauge (9447659) provides water level
+    and water temperature at the port, but not open-water conditions mid-Sound.
+  </div>
+
+  <div class="gap-callout">
+    <strong>Gap 2: No mountain weather stations nearby</strong><br>
+    The nearest mountain weather station is at Stevens Pass (elevation 4,061 ft, ~50 miles east).
+    There are no instrumented stations on the western Cascade foothills between the lowland
+    ASOS network and the pass. This gap matters because orographic precipitation &mdash;
+    rain and snow generated as air rises over the foothills &mdash; is a major contributor
+    to Snohomish County weather, and we cannot directly observe the transition zone where
+    rain turns to snow.
+  </div>
+
+  <div class="gap-callout">
+    <strong>Gap 3: Limited south Whidbey Island coverage</strong><br>
+    Whidbey Island sits in the Olympic rain shadow and channels marine air into Possession Sound.
+    NAS Whidbey (KNUW) is at the island's north end, 30+ miles from Mukilteo. South Whidbey
+    &mdash; Clinton, Langley, Freeland &mdash; has no ASOS station. The closest data is from
+    the Mukilteo-Clinton ferry's onboard sensors and occasional Weather Underground personal
+    stations. This gap means we cannot directly measure the marine air mass that crosses
+    the Sound to reach Mukilteo.
+  </div>
+
+  <div class="gap-callout">
+    <strong>Gap 4: No real-time air quality in Mukilteo proper</strong><br>
+    The Puget Sound Clean Air Agency (PSCAA) operates regulatory-grade monitors, but the nearest
+    to Mukilteo are in Marysville (north) and Lynnwood (south). PurpleAir community sensors
+    provide PM2.5 data, but coverage in Mukilteo itself is sparse and sensor quality varies.
+    During wildfire smoke events (increasingly common in August-September), the nearest
+    reliable AQ data comes from stations 5-10 miles away, missing local terrain effects
+    on smoke pooling and dispersal.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- NETWORK TOPOLOGY -->
+  <!-- ============================================================ -->
+
+  <h2>Network Topology</h2>
+
+  <div class="panel">
+    <h4>Data Flow Architecture</h4>
+    <p>All 22 data sources follow a common pattern: instrument &rarr; telemetry &rarr; federal database &rarr; public API &rarr; our collection. The key difference is latency. ASOS stations report in near-real-time (seconds). NOAA tide gauges batch at 6-minute intervals. USGS stream gauges transmit via satellite every 15 minutes. Model grids (Open-Meteo, NWS) are compute-bound &mdash; a new HRRR run takes ~45 minutes to process after the observation window closes.</p>
+  </div>
+
+  <div class="panel">
+    <h4>Observation vs. Forecast</h4>
+    <p>A critical distinction: METAR, tide gauges, and stream gauges report <em>what happened</em>. Open-Meteo and NWS grids report <em>what the model thinks will happen</em>. Our scoring system at the MUK Dashboard compares forecasts against KPAE observations to measure which model knows this place best. The data sources on this page are the raw ingredients for that comparison.</p>
+  </div>
+
+  <div class="panel">
+    <h4>Spatial Resolution</h4>
+    <p>The monitoring network is not uniformly distributed. Aviation stations cluster at airports (lowland, flat terrain). Tide gauges cluster at ports (sheltered harbors). Stream gauges cluster at bridge crossings. The result: excellent coverage of lowland river valleys and harbors, poor coverage of hillsides, foothills, and open water. The Puget Sound Convergence Zone &mdash; a 10-mile-wide band of enhanced precipitation &mdash; can pass between stations without being directly observed by any of them.</p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="index.html">MUK Dashboard</a> &middot;
+  <a href="weather-science.html">Weather Science</a> &middot;
+  <a href="convergence-zone.html">Convergence Zone</a> &middot;
+  <a href="../index.html">PNW Research Series</a>
+  <br>
+  Data sources: FAA ASOS, NOAA CO-OPS, USGS NWIS, NWS SEW, Open-Meteo, PurpleAir, NOAA SWPC
+</footer>
+
+</body>
+</html>
