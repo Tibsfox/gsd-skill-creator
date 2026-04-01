@@ -1,0 +1,231 @@
+{
+  "degree": 64,
+  "species": "Mink",
+  "scientific_name": "Neogale vison",
+  "slug": "064-mink",
+  "sound_type": "shrill chitter alarm call -- a rapid burst of sharp, high-pitched staccato notes (chit-chit-chit-chit-chit) at 2,000-6,000 Hz, the solitary predator's territorial warning and alarm, startling from silence, the 65th acoustic element",
+  "energy": 4,
+  "ecosystem": "creek bank -- the narrow margin where water meets land, the interface habitat of small streams and dense riparian vegetation, territory measured in linear meters of bank",
+  "season": "year-round resident throughout western Washington",
+  "family": "Mustelidae",
+  "order": "Carnivora",
+  "csv_substitute": false,
+  "original_species": "Mink",
+  "csv_substitution": null,
+  "species_pair": null,
+  "coordinates": {
+    "lat": 47.82,
+    "lon": -122.22,
+    "description": "Snohomish County lowland creek reference; common along creek banks, riparian corridors, and wetland margins throughout western Washington. Vocalizations most audible during territorial disputes and alarm encounters at dawn and dusk along densely vegetated creek banks."
+  },
+  "taxonomy_note": {
+    "description": "Fourth mammalian entry. Third mammalian species. Second Carnivora, second Mustelidae. Back-to-back Mustelidae with River Otter (degree 63). Formerly Mustela vison, reclassified to Neogale vison based on molecular phylogenetics -- both otter and mink were reclassified out of Old World genera by the same molecular revolution.",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_family": "Mustelidae",
+    "new_family": false,
+    "family_count_in_engine": 28,
+    "mustelidae_count_in_engine": 2,
+    "name_etymology": "Neogale from Greek neo- (new) + gale (weasel, polecat). Genus erected through molecular phylogenetics when the American Mink was shown to be more closely related to New World weasels than to Old World Mustela. vison from French vison (mink), possibly from a Scandinavian root. Formerly Mustela vison (Schreber, 1777).",
+    "genus_note": "Neogale -- the New World weasels and mink. Four species: N. vison (American Mink), N. frenata (Long-tailed Weasel), N. africana (African Striped Weasel), N. galera (Greater Grison). The Long-tailed Weasel (N. frenata) is the mink's closest relative and is also present in the PNW.",
+    "order_note": "Carnivora -- second entry. Same order as River Otter (degree 63). Back-to-back Carnivora. The engine's carnivore representation doubles from 1 to 2.",
+    "class_note": "Mammalia -- fourth mammalian entry. Third mammalian species. Mammalian representation increases to 6.2% (4 of 65 entries). The mammalian era (degrees 61-64) continues without interruption.",
+    "family_position": "Mustelidae's second entry at degree 64. Back-to-back with degree 63 (River Otter). Mustelidae now represents 2 of 8 PNW species (25% coverage). Like Anatidae (58-59) and Castoridae (61-62), Mustelidae gets consecutive entries."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-6,000 (chitter alarm call, the dominant vocalization)",
+    "peak_energy_band_hz": "3,000-5,000",
+    "song_frequency_hz": "NOT a song but an ALARM. The chitter is a rapid series of sharp, high-pitched staccato notes: chit-chit-chit-chit-chit. Additional vocalizations: hissing (close-range aggression), screaming/squealing (distress), purring (rare, mating/maternal). The chitter dominates -- the sound most likely heard by human observers.",
+    "song_duration_s": "Individual bursts: 0.5-3 seconds. Total vocal event rarely exceeds 10 seconds. The mink is silent 99% of the time.",
+    "note_structure": "STACCATO BURST: Individual 'chit' notes produced at 4-8 per second, creating a machine-gun-like burst. Each note is a sharp, spectrally narrow pulse. Unlike the otter's varied repertoire, the mink's chitter is a single, repeated note type.",
+    "note_types": "Chitter (rapid staccato alarm, dominant), hiss (sustained close-range aggression), scream/squeal (distress), purr (rare, mating/maternal). The chitter is the diagnostic vocalization -- the others are rarely heard.",
+    "phrase_structure": "Single burst. No phrase variation. The chitter is delivered as one rapid burst and then silence. There is no call-and-response, no phrase alternation, no melodic structure. The mink says its piece and goes silent.",
+    "timbre": "Sharp, shrill, high-pitched. The chitter cuts through ambient creek noise like a knife. Nasal quality similar to the otter's chuff but higher-pitched, faster, and more aggressive. Startling precisely because it emerges from silence.",
+    "amplitude": "E=4 -- conspicuous when produced. Counterintuitive for a generally silent, stealthy animal, but the alarm call's purpose is to be heard. Audible at 50-100 meters along a creek corridor. The energy reflects the moment of vocalization, not the animal's typical stealth.",
+    "tempo": "Rapid: 4-8 chit notes per second. Faster than the otter's chuffing (2-4 per second). The speed reflects urgency and aggression -- this is an alarm, not a greeting.",
+    "context": "DEFENSIVE/TERRITORIAL. Not social communication. Not mate attraction. A solitary predator's warning: I am here. Stay away. Produced when alarmed, threatened, cornered, or defending territory. The chitter is the acoustic equivalent of bared teeth from a cornered animal.",
+    "regional_variation": "NO data on regional vocal variation. The chitter appears consistent across populations. Mink vocalizations are not individually distinctive in the way bird songs can be.",
+    "key_property": "THE CHITTER -- the 65th acoustic element. A solitary predator's alarm from silence. The opposite of the otter's social repertoire. Sharp, shrill, startling. Silent 99% of the time; fierce when heard. The sound of the creek bank margin -- an invisible predator announcing itself."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Small mustelid, 47-70 cm total length, 0.5-1.5 kg. Long, sinuous, cylindrical body -- a thin, flexible tube of muscle with a small head and short legs. Pronounced sexual dimorphism: males substantially larger than females. The smallest predator in the engine.",
+    "diagnostic_mark": "For degree 64, the diagnostic features are: (1) ELONGATED BODY -- long, thin, sinuous, low-slung. (2) DARK BROWN FUR -- uniformly dark chocolate brown with small white chin patch. (3) PARTIALLY WEBBED FEET -- webbing partway between toes, less than otter. (4) SMALL SIZE -- roughly house-cat-sized but much more elongated. (5) BOUNDING GAIT -- distinctive arched leaps on land keeping body low.",
+    "fur_detail": "Dense (20,000-24,000 hairs/cm2), glossy, waterproof guard hairs over soft insulating underfur. Wild mink uniformly dark chocolate brown. Small white patch on chin, sometimes irregular white on chest/belly. Farm-bred variants (sapphire, pearl, white, black, etc.) are entirely artificial. Wild coloration remarkably uniform.",
+    "dental_detail": "Carnassial teeth as in all Carnivora. Bite force disproportionately strong for body mass. Kills with a bite to the back of the skull or base of the neck -- the mustelid killing technique. 34 teeth total. Built for shearing meat and crushing small bones.",
+    "field_id": "Along creek banks, wetland edges, and riparian corridors: look for a small, dark brown, sinuous animal bounding low along the water's edge. Often seen at dawn and dusk. Moves with characteristic arched bounding gait. Much smaller and more elongated than an otter. If alarmed, produces a distinctive rapid chit-chit-chit-chit-chit. Often confused with muskrats by casual observers -- the mink is darker, more elongated, and has a fully furred (not scaly) tail."
+  },
+  "nodes": [
+    {
+      "id": "back-to-back-mustelidae",
+      "type": "pattern",
+      "title": "Back-to-Back Mustelidae -- Otter (63) then Mink (64)",
+      "description": "Same family, opposite strategies. River Otter: 5-14 kg, social, six vocal types, river/estuary. Mink: 0.5-1.5 kg, solitary, one dominant alarm call, creek bank. The most contrasting same-family pair in the engine. Like back-to-back Anatidae (58-59) and Castoridae (61-62), but with a more dramatic ecological divergence within the family.",
+      "connections": ["chitter-acoustic", "solitary-vs-social", "creek-bank-habitat", "smallest-predator"]
+    },
+    {
+      "id": "chitter-acoustic",
+      "type": "concept",
+      "title": "The Chitter -- 65th Acoustic Element",
+      "description": "Shrill chit-chit-chit-chit-chit alarm burst at 2,000-6,000 Hz. E=4. A solitary predator's warning -- not social communication (otter) but a territorial/alarm signal from a cornered or surprised animal. Silent 99% of the time; startling when heard. 4-8 notes per second, 0.5-3 second bursts. The acoustic opposite of the otter's six-type social repertoire.",
+      "connections": ["back-to-back-mustelidae", "solitary-vs-social", "stealth-predator"]
+    },
+    {
+      "id": "solitary-vs-social",
+      "type": "pattern",
+      "title": "Solitary vs. Social -- Opposite Mustelid Strategies",
+      "description": "Otter (63): family groups, bachelor groups, cooperative hunting, 12-14 months parental care, six vocal types. Mink (64): strictly solitary, exclusive territory, aggressive defense, 6-8 weeks parental care, one dominant alarm call. Same Mustelidae body plan. Opposite social strategies. The engine's clearest demonstration that a single family can produce radically different ecological answers.",
+      "connections": ["back-to-back-mustelidae", "chitter-acoustic", "stealth-predator"]
+    },
+    {
+      "id": "creek-bank-habitat",
+      "type": "concept",
+      "title": "Creek Bank Habitat -- The Margin Specialist",
+      "description": "The mink works the creek bank -- the narrow margin where water meets land. Not the open river (otter), not the pond surface (ducks), not the lake depth (grebe). Undercut edges, root tangles, dense vegetation at the water's boundary. Territory measured in linear meters of bank (1-5 km). The finest spatial scale of any aquatic-associated species in the engine. The interface between water and land.",
+      "connections": ["back-to-back-mustelidae", "aquatic-septet", "interface-predator"]
+    },
+    {
+      "id": "stealth-predator",
+      "type": "concept",
+      "title": "Stealth Predator -- Invisible Until It Isn't",
+      "description": "The mink is a ghost along the creek bank. Dark fur, low profile, crepuscular/nocturnal activity, near-total silence during normal movement. The antithesis of the otter's visible, vocal, playful presence. The mink hunts by stealth and ambush, not by pursuit and cooperation. When it does vocalize -- the shrill chitter -- the sound is startling because it shatters the silence.",
+      "connections": ["chitter-acoustic", "solitary-vs-social", "smallest-predator", "owl-parallel"]
+    },
+    {
+      "id": "smallest-predator",
+      "type": "concept",
+      "title": "Smallest Predator in the Engine",
+      "description": "At 0.5-1.5 kg, the Mink is the smallest predator in the engine by mass. Roughly one-tenth the mass of a large male otter. In the same weight class as the Northern Spotted Owl (0.5-0.7 kg) but mammalian. Kills prey equal to or larger than its own body weight (muskrats, rabbits). Disproportionate ferocity from a body the size of a house cat.",
+      "connections": ["back-to-back-mustelidae", "surplus-killing", "fierce-generalist"]
+    },
+    {
+      "id": "surplus-killing",
+      "type": "concept",
+      "title": "Surplus Killing -- Over-Predation Behavior",
+      "description": "Mink are documented surplus killers -- killing more prey than they can immediately consume. In henhouses, a mink may kill every chicken. In frog ponds, dozens of frogs in a single night. This is not waste but an instinctive predatory response to prey-dense environments. Ecologically significant: the mink is not just a predator but an over-predator in certain contexts. No other species in the engine exhibits documented surplus killing.",
+      "connections": ["smallest-predator", "fierce-generalist", "stealth-predator"]
+    },
+    {
+      "id": "fierce-generalist",
+      "type": "concept",
+      "title": "The Fierce Generalist -- Widest Prey Spectrum",
+      "description": "Fish, crayfish, frogs, mice, voles, chipmunks, rabbits, bird eggs, nestlings, adult birds, muskrats, aquatic invertebrates. The widest prey spectrum of any species in the engine. The mink enters burrows (unavailable to other predators), swims for fish, raids nests, and attacks animals its own weight or larger. A generalist predator operating across the aquatic-terrestrial interface.",
+      "connections": ["smallest-predator", "surplus-killing", "interface-predator", "woodduck-predation"]
+    },
+    {
+      "id": "interface-predator",
+      "type": "concept",
+      "title": "Interface Predator -- Hunting Both Worlds",
+      "description": "The mink hunts in water (fish, crayfish, aquatic invertebrates) AND on land (mice, voles, rabbits, nesting birds). It enters rodent burrows to hunt underground -- a strategy unavailable to any other predator in the engine. It catches frogs at the water's edge. It raids duck nests on creek banks. The mink is optimized for the margin, the edge, the boundary between aquatic and terrestrial worlds.",
+      "connections": ["creek-bank-habitat", "fierce-generalist", "woodduck-predation"]
+    },
+    {
+      "id": "fur-trade",
+      "type": "concept",
+      "title": "Fur Trade and Farming -- A Species Shaped by Industry",
+      "description": "The most commercially significant fur in North American history. Wild trapping since the 18th century. Mink farming since the late 19th century -- the most widely farmed fur-bearing animal worldwide. 50+ million farmed annually at peak. Selective breeding into dozens of color mutations. Farm escapes creating invasive feral populations devastating European wildlife. COVID-19 led to mass culling of farm mink. No species in the engine has been more shaped by human exploitation.",
+      "connections": ["smallest-predator", "invasive-species"]
+    },
+    {
+      "id": "invasive-species",
+      "type": "concept",
+      "title": "Invasive Predator When Introduced",
+      "description": "Escaped farm mink have established feral populations on multiple continents. In Europe, feral American Mink devastate water voles, ground-nesting birds, and the critically endangered European Mink (Mustela lutreola). The American Mink is one of the most damaging invasive predators in European freshwater ecosystems. The same predatory ferocity that makes the mink successful in its native range makes it devastating when introduced elsewhere.",
+      "connections": ["fur-trade", "fierce-generalist", "surplus-killing"]
+    },
+    {
+      "id": "reclassified-genus",
+      "type": "concept",
+      "title": "Reclassified: Mustela to Neogale",
+      "description": "Formerly Mustela vison, reclassified to Neogale vison based on molecular phylogenetics. The American Mink is more closely related to New World weasels (Long-tailed Weasel, Black-footed Ferret) than to the European Mink (Mustela lutreola) it resembles. Both the otter (Lutra to Lontra) and the mink (Mustela to Neogale) were reclassified out of Old World genera by the same molecular revolution. Appearance deceived taxonomy for two centuries.",
+      "connections": ["back-to-back-mustelidae"]
+    },
+    {
+      "id": "woodduck-predation",
+      "type": "pattern",
+      "title": "Wood Duck Predator-Prey Link (SPS-058)",
+      "description": "The mink is a known predator of Wood Duck (SPS-058) eggs and ducklings in nest boxes along creeks and ponds. The creek bank predator enters the pond ecosystem. A direct, documented predator-prey connection spanning 6 degrees (58 to 64). The aquatic ecosystem documented from degree 58 now includes a small, fierce predator that directly threatens the Wood Duck's reproductive success.",
+      "connections": ["fierce-generalist", "interface-predator", "creek-bank-habitat"]
+    },
+    {
+      "id": "kingfisher-creek-bank",
+      "type": "pattern",
+      "title": "Creek-Bank Convergence with Kingfisher (SPS-057)",
+      "description": "Both the Belted Kingfisher (degree 57) and the Mink (degree 64) are creek-bank predators. Bird vs. mammal approaches to the same habitat. The kingfisher watches from above (perch on branch) and strikes down (plunge-dive). The mink watches from below (bank level) and strikes laterally (ambush). Same creek, different attack vectors. Seven degrees apart, connected by the creek bank.",
+      "connections": ["creek-bank-habitat", "interface-predator"]
+    },
+    {
+      "id": "owl-parallel",
+      "type": "pattern",
+      "title": "Stealthy Solitary Predator Parallel (SPS-004)",
+      "description": "Northern Spotted Owl (degree 4) and Mink (degree 64): both stealthy, solitary predators operating in low light. Both rely on stealth rather than pursuit. Both fierce relative to body size. Both in similar weight classes (0.5-0.7 kg owl vs. 0.5-1.5 kg mink). Owl: forest canopy, nocturnal, silent flight. Mink: creek bank, crepuscular, silent bounding. 60 degrees apart, connected by predatory stealth.",
+      "connections": ["stealth-predator", "smallest-predator"]
+    },
+    {
+      "id": "aquatic-septet",
+      "type": "pattern",
+      "title": "Seven Consecutive Aquatic-Associated Species (58-64)",
+      "description": "The aquatic sextet becomes a septet. Energy curve: 3-5-4-4-3-4-4. Seven degrees, four orders, two classes. The mink adds the margin dimension -- the finest spatial scale of any aquatic-associated species. The longest habitat streak in engine history. The creek bank is the closest the aquatic era has come to terrestrial habitat.",
+      "connections": ["creek-bank-habitat", "back-to-back-mustelidae"]
+    },
+    {
+      "id": "sykes-parallel",
+      "type": "pattern",
+      "title": "The Jesse Sykes Parallel",
+      "description": "Both solitary. Both work the margins (creek bank / dark folk edges). Both fierce despite quiet presentation (shrill chitter / haunted voice). Energy inversion: Sykes E=2, Mink E=4 -- both punch above their weight class. The Otter/Loggins-to-Mink/Sykes shift at degrees 63-64: from joy to darkness, from social to solitary, from playfulness to intensity.",
+      "connections": ["stealth-predator", "solitary-vs-social"]
+    },
+    {
+      "id": "fourth-csv-original",
+      "type": "pattern",
+      "title": "Fourth Consecutive Original CSV Species",
+      "description": "Degrees 61-64: four consecutive original CSV species. The entire mammalian era runs on original CSV entries. No substitutions needed. The CSV's mammalian entries are proving robust and uncontested. Every mammal in the engine was in the original plan.",
+      "connections": ["aquatic-septet", "mammalian-era"]
+    },
+    {
+      "id": "mammalian-era",
+      "type": "pattern",
+      "title": "Fourth Mammalian Entry -- The Mammalian Era Continues",
+      "description": "Four consecutive mammalian entries (degrees 61-64). Third mammalian species. Mammalian representation rises to 6.2% (4 of 65). Two orders (Rodentia, Carnivora), two families (Castoridae, Mustelidae), three species (Beaver, Otter, Mink). The engine was 100% avian for its first 60 degrees -- the mammalian era is now four degrees deep and accelerating.",
+      "connections": ["back-to-back-mustelidae", "fourth-csv-original"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-063",
+      "species": "River Otter",
+      "relationship": "BACK-TO-BACK MUSTELIDAE. Same family, same order. Social vs. solitary. Family hunter vs. stealth predator. River/estuary vs. creek bank. 5-14 kg vs. 0.5-1.5 kg. Six vocal types vs. one dominant alarm call. The otter works the center; the mink works the margins. The most contrasting same-family pair in the engine."
+    },
+    {
+      "target": "SPS-061/062",
+      "species": "American Beaver (tail slap + chewing)",
+      "relationship": "MAMMALIAN ERA CONTINUES. Four consecutive mammalian entries (61-64). Herbivore infrastructure builder vs. carnivore predator. The mink hunts in habitats the beaver creates -- beaver ponds are prime mink foraging territory. The beaver builds; the mink hunts in what was built."
+    },
+    {
+      "target": "SPS-058",
+      "species": "Wood Duck",
+      "relationship": "PREDATOR-PREY CONNECTION. The mink is a known predator of Wood Duck eggs and ducklings in nest boxes along creeks and ponds. Creek bank/pond interface. A direct, documented predator-prey link spanning 6 degrees. The aquatic ecosystem now includes a small, fierce predator that directly threatens Wood Duck reproductive success."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "STEALTHY SOLITARY PREDATORS. Both operate in low light. Both solitary. Both rely on stealth. Both fierce relative to body size. Both in similar weight classes. Owl: forest canopy, nocturnal, silent flight. Mink: creek bank, crepuscular, silent bounding. 60 degrees apart, connected by predatory stealth."
+    },
+    {
+      "target": "SPS-057",
+      "species": "Belted Kingfisher",
+      "relationship": "CREEK-BANK HUNTERS. Both are creek-bank predators. Bird vs. mammal approaches to the same creek habitat. Kingfisher watches from above (perch) and strikes down (plunge-dive). Mink watches from below (bank level) and strikes laterally (ambush). Same creek, different attack vectors."
+    },
+    {
+      "target": "MAM",
+      "species": "Mammals of the Pacific Northwest",
+      "relationship": "Fourth mammalian entry in the SPS engine. Third mammalian species. Second Carnivora, second Mustelidae. Mammalian representation increases to 6.2% (4 of 65 entries). Two orders, two families, three species."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Creek bank habitat. Riparian specialist. Interface predator (aquatic + terrestrial prey). Surplus killing behavior documented. Fur trade and mink farming as unique human-wildlife relationship. Invasive species when introduced outside native range. Indicator of riparian health."
+    }
+  ]
+}
