@@ -124,7 +124,8 @@ footer a { color:rgba(255,255,255,0.3); }
 <main>
 
   <div class="time-bar">
-    <span><span class="time-label">UTC</span> <span id="utc">--:--:--</span></span>
+    <span><span class="time-label">Date</span> <span id="date">----------</span></span>
+    <span><span class="time-label">Zulu</span> <span id="utc">--:--:--Z</span></span>
     <span><span class="time-label">PDT</span> <span id="pdt">--:--:--</span></span>
     <span><span class="time-label">EDT</span> <span id="edt">--:--:--</span></span>
   </div>
@@ -157,8 +158,8 @@ footer a { color:rgba(255,255,255,0.3); }
   <div class="card-grid">
     <div class="card">
       <h3><span class="status-dot monitoring"></span> Wall-Clock Papers</h3>
-      <p>Papers found during active missions, cataloged by date and connected to mission themes. Radiation biology, optical communications, heat shield science, trajectory mechanics, crew health, space weather.</p>
-      <div class="meta">10 papers cataloged &middot; Sources: arXiv, NTRS, SPIE, journals &middot; Updated each sweep</div>
+      <p>Papers found during active missions, cataloged by date and connected to mission themes. Latest: <em>Wasserstein Transformer for Kp Prediction</em> (arXiv:2503.23102) &mdash; ML framework for 3-5 day geomagnetic storm forecasting using multimodal satellite data. Also tracking: <em>A New Phase for Space Weather</em> (AGU Space Weather, 2026). Radiation biology, optical communications, heat shield science, trajectory mechanics, crew health.</p>
+      <div class="meta">12 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature &middot; Updated v1.0.17</div>
     </div>
 
     <a href="../OPEN/index.html" class="card">
@@ -167,10 +168,10 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="meta">12 problems tracked &middot; 3 active, 5 open, 4 watching &middot; Updated each sweep</div>
     </a>
 
-    <div class="card">
-      <h3><span class="status-dot planned"></span> Space Weather <span class="badge badge-new">Coming</span></h3>
-      <p>NOAA Kp index, solar wind, geomagnetic storms, aurora probability at 48&deg;N. Feeds into the forest simulation aurora rendering and Artemis II crew radiation context.</p>
-      <div class="meta">Planned &middot; SWPC APIs verified &middot; Kp, G-scale, solar wind plasma</div>
+    <div class="card" style="border-color:rgba(252,61,33,0.3);">
+      <h3><span class="status-dot countdown"></span> Space Weather <span class="badge badge-live">Active</span></h3>
+      <p>X1.5 flare from AR4405 launched CME at ~1845 km/s on March 30. <strong>G2 Moderate geomagnetic storm watch for April 1 (launch day)</strong>, G1 Minor for April 2. Solar wind 392 km/s, IMF Bz=-1 nT. Kp forecast rising to 3.3. Crew radiation exposure implications being monitored.</p>
+      <div class="meta">SWPC &middot; Kp 1.33 current &middot; Kp 3.3 forecast &middot; Solar wind 392 km/s &middot; Updated 00:15Z Apr 1</div>
     </div>
   </div>
 
@@ -179,12 +180,12 @@ footer a { color:rgba(255,255,255,0.3); }
     <div class="card">
       <h3>APIs Feeding Live Pages</h3>
       <p style="font-family:monospace; font-size:0.8rem; line-height:1.8;">
-        NOAA KPAE &middot; NOAA KXMR &middot; NOAA Tides 9447659 &middot;
-        NOAA Kp Index &middot; NOAA G-Scale &middot; JPL Horizons (-1024) &middot;
-        DSN Now &middot; USGS Snohomish River &middot; NWS Forecast Grid &middot;
-        Open-Meteo &middot; WSDOT Ferries
+        NOAA KPAE &middot; NOAA KSEA &middot; NOAA KXMR &middot; NOAA Tides 9447659 &middot;
+        NOAA Kp Index &middot; NOAA G-Scale &middot; SWPC Solar Wind &middot; SWPC IMF Bz &middot;
+        JPL Horizons (-1024) &middot; DSN Now &middot; USGS Snohomish River &middot;
+        NWS Forecast Grid &middot; Open-Meteo &middot; WSDOT Ferries
       </p>
-      <div class="meta">All free, no API keys, verified March 31, 2026</div>
+      <div class="meta">All free, no API keys, verified April 1, 2026 00:15Z</div>
     </div>
 
     <div class="card">
@@ -209,8 +210,9 @@ footer a { color:rgba(255,255,255,0.3); }
 <script>
 function updateClocks() {
   var now = new Date();
-  var u = now.toISOString().slice(11, 19);
-  document.getElementById('utc').textContent = u;
+  var iso = now.toISOString();
+  document.getElementById('date').textContent = iso.slice(0, 10);
+  document.getElementById('utc').textContent = iso.slice(11, 19) + 'Z';
   var pdt = new Date(now.getTime() - 7*3600000);
   document.getElementById('pdt').textContent = pdt.toISOString().slice(11, 19);
   var edt = new Date(now.getTime() - 4*3600000);
