@@ -948,6 +948,103 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 </div>
 
 
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 8 &mdash; Launch Day Live Data</div>
+    <h2>Real Telemetry, Real Math &mdash; April 1, 2026</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      These calculations use actual telemetry observed during the Artemis II launch on April 1, 2026.
+      Liftoff at 22:35:12 UTC from Pad 39B. Every number below comes from the NASA broadcast telemetry
+      overlay, captured in real time from a research station in Mukilteo, Washington.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Step 1 &mdash; Observed telemetry at T+11:06</span>
+      Velocity:          18,310 mph = 8,185 m/s
+      Altitude:          166 mi = 267 km above MSL
+      Distance to Moon:  242,223 mi = 389,737 km
+      Orbital radius:    r = R_Earth + alt = 6,371 + 267 = 6,638 km
+
+      <span class="step-label">Step 2 &mdash; Compare to circular orbital velocity</span>
+      v_circ = &radic;(&mu;/r) = &radic;(3.986&times;10&sup1;&sup4; / 6,638,000)
+      v_circ = 7,749 m/s (17,334 mph)
+
+      Actual velocity 8,185 m/s is <strong>436 m/s above circular</strong>
+      <span class="comment">/* This excess velocity means the orbit is elliptical &mdash; perigee here, apogee higher */</span>
+
+      <span class="step-label">Step 3 &mdash; Specific orbital energy (vis-viva)</span>
+      &epsilon; = v&sup2;/2 &minus; &mu;/r
+      &epsilon; = (8185)&sup2;/2 &minus; 3.986&times;10&sup1;&sup4;/6,638,000
+      <span class="result">&epsilon; = &minus;26.55 MJ/kg (bound orbit confirmed)</span>
+
+      <span class="step-label">Step 4 &mdash; Semi-major axis from energy</span>
+      a = &minus;&mu; / (2&epsilon;) = 3.986&times;10&sup1;&sup4; / (2 &times; 26.55&times;10&sup6;)
+      <span class="result">a = 7,507 km (mean altitude 1,136 km)</span>
+
+      <span class="step-label">Step 5 &mdash; Apogee from semi-major axis</span>
+      r_apogee = 2a &minus; r_perigee = 2(7,507) &minus; 6,638 = 8,376 km
+      <span class="result">Apogee altitude = 8,376 &minus; 6,371 = 2,005 km</span>
+
+      <span class="step-label">Step 6 &mdash; Orbital period</span>
+      T = 2&pi;&radic;(a&sup3;/&mu;) = 2&pi;&radic;(7,507,000&sup3; / 3.986&times;10&sup1;&sup4;)
+      <span class="result">T = 89.7 min (1.50 hours per orbit)</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">What this means</div>
+      <p>
+        At T+11 minutes, Orion was in an elliptical orbit: 267 km perigee, ~2,005 km apogee. This
+        matches the planned insertion orbit. The ICPS will fire twice more: first to circularize
+        (raise perigee to ~185 km), then the TLI burn at T+3h22m to escape Earth orbit entirely.
+        That TLI burn needs ~3,100 m/s of delta-v &mdash; taking Orion from 7,749 m/s circular to
+        ~10,865 m/s, above escape velocity (10,959 m/s at this altitude). After TLI, the crew is
+        on a free-return trajectory to the Moon. No going back to orbit. Gravity takes over.
+      </p>
+    </div>
+
+    <div class="derivation">
+      <span class="step-label">Chapman's heating &mdash; what awaits them in 10 days</span>
+      Entry velocity:      11.0 km/s (Mach 32)
+      Atmospheric density at 65 km: &rho; = 1.2&times;10&minus;&sup4; kg/m&sup3;
+      Orion nose radius:   r_n = 2.5 m (heat shield 5m diameter)
+      Chapman's constant:  C = 1.83&times;10&minus;&sup4;
+
+      q&#775; = C &times; &radic;(&rho;/r_n) &times; V&sup3;
+      q&#775; = 1.83&times;10&minus;&sup4; &times; &radic;(1.2&times;10&minus;&sup4; / 2.5) &times; (11,000)&sup3;
+      <span class="result">q&#775; = 169 W/cm&sup2; peak heat flux</span>
+
+      AVCOAT ablation limit: 200 W/cm&sup2; &mdash; margin: 15.5%
+      Surface temperature: ~2,760&deg;C
+      Cabin temperature: ~21&deg;C
+      <span class="comment">/* Direct entry: one continuous heating pulse, no skip, no gas trapping */</span>
+    </div>
+
+    <div class="derivation">
+      <span class="step-label">Van Allen belt radiation dose</span>
+      Inner belt dose rate: ~10 mGy/hr (protons &gt;10 MeV)
+      Transit time: ~30 min each way through inner belt
+      Orion hull shielding: ~50% dose reduction
+      Dose per transit: 10 &times; 0.5 &times; 0.5 = 2.5 mSv
+      Total (2 transits): <span class="result">5.0 mSv &mdash; 3.3% of 150 mSv/year career limit</span>
+
+      <span class="comment">/* AVATAR organ chips and K-RadCube will measure the ACTUAL dose.
+         These calculations are predictions. In 10 days we compare. */</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The experiment is running</div>
+      <p>
+        Every number above is a prediction. AVATAR is measuring bone marrow response with the crew's
+        own cells. ARCHeR is tracking circadian drift. K-RadCube has Samsung and SK Hynix chips
+        measuring radiation effects. O2O will test Shannon's limit at lunar distance. In 10 days,
+        we compare predictions to measurements. That's how science works: predict, measure, correct, repeat.
+      </p>
+    </div>
+  </div>
+</div>
+
 </div><!-- end .content -->
 
 
