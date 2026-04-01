@@ -1,42 +1,69 @@
 # HELP artemis_sweep_version Current sweep version number
 # TYPE artemis_sweep_version gauge
-artemis_sweep_version{mission="artemis-ii"} 1.007
+artemis_sweep_version{mission="artemis-ii"} 1.017
 # HELP muk_wx_temp_celsius Weather temperature by source
 # TYPE muk_wx_temp_celsius gauge
-muk_wx_temp_celsius{source="kpae",station="Paine Field"} 2.8
-muk_wx_temp_celsius{source="ksea",station="Sea-Tac"} 3.3
-muk_wx_temp_celsius{source="nws",station="NWS Forecast"} 3.0
-muk_wx_temp_celsius{source="open_meteo",station="Open-Meteo"} 3.1
-muk_wx_temp_celsius{source="kxmr",station="Cape Canaveral"} 25.0
+muk_wx_temp_celsius{source="kpae",station="Paine Field"} 12.2
+muk_wx_temp_celsius{source="ksea",station="Sea-Tac"} 13.3
+muk_wx_temp_celsius{source="open_meteo",station="Open-Meteo"} 12.4
+muk_wx_temp_celsius{source="kxmr",station="Cape Canaveral"} 24.5
 # HELP muk_wx_wind_kmh Wind speed by source
 # TYPE muk_wx_wind_kmh gauge
-muk_wx_wind_kmh{source="kpae"} 0
-muk_wx_wind_kmh{source="ksea"} 13
-muk_wx_wind_kmh{source="nws"} 0
-muk_wx_wind_kmh{source="open_meteo"} 8.0
+muk_wx_wind_kmh{source="kpae"} 5.6
+muk_wx_wind_kmh{source="ksea"} 11.1
+muk_wx_wind_kmh{source="open_meteo"} 7.8
 # HELP muk_wx_pressure_hpa Barometric pressure
 # TYPE muk_wx_pressure_hpa gauge
-muk_wx_pressure_hpa{source="kpae"} 1012.1
-muk_wx_pressure_hpa{source="ksea"} 1012.4
-muk_wx_pressure_hpa{source="nws"} 1011.9
-muk_wx_pressure_hpa{source="open_meteo"} 1012.2
+muk_wx_pressure_hpa{source="kpae"} 1007.2
+muk_wx_pressure_hpa{source="ksea"} 1007.5
+muk_wx_pressure_hpa{source="open_meteo"} 1003.4
+# HELP muk_wx_humidity_pct Relative humidity
+# TYPE muk_wx_humidity_pct gauge
+muk_wx_humidity_pct{source="kpae"} 34
+muk_wx_humidity_pct{source="ksea"} 25
+muk_wx_humidity_pct{source="open_meteo"} 46
+# HELP muk_wx_dewpoint_spread_c Temperature-dewpoint spread
+# TYPE muk_wx_dewpoint_spread_c gauge
+muk_wx_dewpoint_spread_c{source="kpae"} 15.5
+# HELP muk_wx_pressure_tendency_hpa 3-hour pressure tendency
+# TYPE muk_wx_pressure_tendency_hpa gauge
+muk_wx_pressure_tendency_hpa{source="kpae"} -2.4
 # HELP muk_forecast_temp_error_celsius Forecast temp error vs KPAE
 # TYPE muk_forecast_temp_error_celsius gauge
-muk_forecast_temp_error_celsius{source="ksea"} 0.5
-muk_forecast_temp_error_celsius{source="nws"} 0.2
-muk_forecast_temp_error_celsius{source="open_meteo"} 0.3
+muk_forecast_temp_error_celsius{source="ksea"} 1.1
+muk_forecast_temp_error_celsius{source="open_meteo"} 0.2
+muk_forecast_temp_error_celsius{source="nws"} 4.4
 # HELP space_wx_kp_index Planetary Kp index
 # TYPE space_wx_kp_index gauge
-space_wx_kp_index 2.0
+space_wx_kp_index 1.33
+# HELP space_wx_kp_forecast Kp forecast for launch day
+# TYPE space_wx_kp_forecast gauge
+space_wx_kp_forecast{day="apr1"} 3.33
 # HELP space_wx_solar_wind_speed_kms Solar wind speed
 # TYPE space_wx_solar_wind_speed_kms gauge
-space_wx_solar_wind_speed_kms 404
+space_wx_solar_wind_speed_kms 392
+# HELP space_wx_bz_gsm_nT IMF Bz component (negative = southward)
+# TYPE space_wx_bz_gsm_nT gauge
+space_wx_bz_gsm_nT -1
+# HELP space_wx_g_scale_watch NOAA G-scale watch level
+# TYPE space_wx_g_scale_watch gauge
+space_wx_g_scale_watch{day="apr1"} 2
+space_wx_g_scale_watch{day="apr2"} 1
 # HELP muk_river_flow_cfs Snohomish River discharge
 # TYPE muk_river_flow_cfs gauge
-muk_river_flow_cfs{station="12150800"} 11400
+muk_river_flow_cfs{station="12150800"} 10400
+# HELP muk_river_gage_height_ft Snohomish River gage height
+# TYPE muk_river_gage_height_ft gauge
+muk_river_gage_height_ft{station="12150800"} 4.25
 # HELP artemis_countdown_hours Hours until Artemis II launch
 # TYPE artemis_countdown_hours gauge
-artemis_countdown_hours 32
+artemis_countdown_hours 22
 # HELP muk_sweep_sample_count Weather samples collected
 # TYPE muk_sweep_sample_count gauge
-muk_sweep_sample_count 3
+muk_sweep_sample_count 13
+# HELP muk_wx_max_temp_c Today max temperature KPAE
+# TYPE muk_wx_max_temp_c gauge
+muk_wx_max_temp_c{source="kpae"} 13.9
+# HELP muk_wx_min_temp_c Today min temperature KPAE
+# TYPE muk_wx_min_temp_c gauge
+muk_wx_min_temp_c{source="kpae"} 7.2
