@@ -1,0 +1,994 @@
+\documentclass[11pt,letterpaper,twoside,openright]{book}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% THICC SPLINES SAVE LIVES
+%% A Comprehensive Blender User Manual
+%% ═══════════════════════════════════════════════════════════════════════════
+
+%% ── GEOMETRY ────────────────────────────────────────────────────────────────
+\usepackage[top=1in, bottom=1.2in, left=1.1in, right=1.1in, headheight=14pt]{geometry}
+
+%% ── FONTS ───────────────────────────────────────────────────────────────────
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+%% ── CORE PACKAGES ───────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{makeidx}
+\usepackage{emptypage}
+\usepackage{microtype}
+\usepackage{titletoc}
+\usepackage{listings}
+
+\tcbuselibrary{breakable,skins}
+
+%% ── COLOR SCHEME ────────────────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A3A5C}       % Deep navy
+\definecolor{secondary}{HTML}{E55F00}     % Blender orange
+\definecolor{tertiary}{HTML}{2E7D32}      % Forest green
+\definecolor{accent}{HTML}{F4A235}        % Amber
+\definecolor{furry}{HTML}{C62828}         % Furry arts crimson
+\definecolor{history}{HTML}{5C6BC0}       % History indigo
+\definecolor{lightprimary}{HTML}{E8EDF4}
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{lightfurry}{HTML}{FCE4EC}
+\definecolor{lighthistory}{HTML}{E8EAF6}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{codebg}{HTML}{1A1A2E}
+\definecolor{codetext}{HTML}{F4A235}
+
+%% ── CHAPTER FORMATTING ─────────────────────────────────────────────────────
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\sffamily\color{primary}}
+  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.5pt}}]
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\chapter}{0pt}{0pt}{2em}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── CUSTOM ENVIRONMENTS ────────────────────────────────────────────────────
+
+% Historical sidebar — for weaving history throughout
+\newtcolorbox{historynote}[1][]{
+  colback=lighthistory, colframe=history,
+  arc=3pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  title={\sffamily\bfseries\small\textcolor{white}{Historical Note}},
+  coltitle=white, colbacktitle=history,
+  breakable, #1
+}
+
+% Furry arts callout
+\newtcolorbox{furrybox}[1][]{
+  colback=lightfurry, colframe=furry,
+  arc=3pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  title={\sffamily\bfseries\small\textcolor{white}{Furry Arts Focus}},
+  coltitle=white, colbacktitle=furry,
+  breakable, #1
+}
+
+% Tip box
+\newtcolorbox{tipbox}[1][]{
+  colback=lighttertiary, colframe=tertiary,
+  arc=3pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  title={\sffamily\bfseries\small\textcolor{white}{Practical Tip}},
+  coltitle=white, colbacktitle=tertiary,
+  breakable, #1
+}
+
+% Warning box
+\newtcolorbox{warningbox}[1][]{
+  colback=lightsecondary, colframe=secondary,
+  arc=3pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  title={\sffamily\bfseries\small\textcolor{white}{Common Pitfall}},
+  coltitle=white, colbacktitle=secondary,
+  breakable, #1
+}
+
+% Keyboard shortcut box
+\newtcolorbox{shortcutbox}[1][]{
+  colback=lightprimary, colframe=primary,
+  arc=3pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable, #1
+}
+
+% ASCII/code box
+\newtcolorbox{codebox}[1][]{
+  colback=codebg, colframe=codebg,
+  arc=2pt, boxrule=0pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fontupper=\small\ttfamily\color{codetext},
+  breakable, #1
+}
+
+% Quote box
+\newtcolorbox{quotebox}[1][]{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable, #1
+}
+
+%% ── TABLE HELPERS ───────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── CODE LISTINGS ───────────────────────────────────────────────────────────
+\lstset{
+  basicstyle=\small\ttfamily\color{codetext},
+  backgroundcolor=\color{codebg},
+  keywordstyle=\color{accent}\bfseries,
+  stringstyle=\color{tertiary},
+  commentstyle=\color{subtlegray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{subtlegray},
+  numbersep=8pt,
+  frame=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showstringspaces=false,
+  xleftmargin=12pt,
+  xrightmargin=8pt,
+  aboveskip=8pt,
+  belowskip=8pt,
+  language=Python
+}
+
+%% ── HEADERS & FOOTERS ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\sffamily\textcolor{subtlegray}{\leftmark}}
+\fancyhead[RO]{\small\sffamily\textcolor{subtlegray}{\rightmark}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+%% ── HYPERLINKS ──────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  citecolor=tertiary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Thicc Splines Save Lives -- A Comprehensive Blender User Manual},
+  pdfsubject={Blender 4.4, 3D Modeling, Furry Arts, Production Pipeline},
+}
+
+%% ── INDEX ───────────────────────────────────────────────────────────────────
+\makeindex
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\begin{document}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+%% ── TITLE PAGE ──────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{A GSD RESEARCH PUBLICATION}}}
+
+\vspace{0.5cm}
+\textcolor{bordergray}{\rule{10cm}{0.5pt}}
+
+\vspace{2cm}
+{\fontsize{36}{42}\selectfont\bfseries\sffamily\textcolor{primary}{Thicc Splines\\[0.4em]Save Lives}}
+
+\vspace{1cm}
+{\Large\sffamily\textcolor{secondary}{A Comprehensive Blender User Manual}}
+
+\vspace{0.5cm}
+{\large\sffamily\textcolor{tertiary}{From Sutherland's Sketchpad to Your Next Render}}
+
+\vspace{0.5cm}
+{\normalsize\sffamily\textcolor{subtlegray}{With Dedicated Coverage of Furry Arts \& Creative Community Workflows}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Blender 4.4 $\bullet$ 2026 Edition}}
+
+\vspace{0.5cm}
+\textcolor{bordergray}{\rule{10cm}{0.5pt}}
+
+\vspace{1cm}
+{\small\sffamily\textcolor{subtlegray}{Part of the PNW Research Series $\bullet$ Graphics Cluster}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{tibsfox.com/Research/BLN}}
+\end{center}
+\newpage
+
+%% ── COPYRIGHT / COLOPHON ───────────────────────────────────────────────────
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+{\small\sffamily
+\textbf{Thicc Splines Save Lives}\\[0.5em]
+A Comprehensive Blender User Manual\\[0.3em]
+First Edition --- April 2026\\[1.5em]
+
+Part of the PNW Research Series\\
+Graphics Cluster $\bullet$ Project BLN\\[1em]
+
+Blender is a registered trademark of the Blender Foundation.\\
+This manual is an independent publication and is not affiliated with\\
+or endorsed by the Blender Foundation.\\[1em]
+
+Blender is free and open-source software released under the GNU GPL.\\
+blender.org\\[2em]
+
+Built with the GSD Ecosystem\\
+Research conducted via deep web research and\\
+cross-referenced against official Blender documentation.\\[1em]
+
+typeset with \XeLaTeX\\[2em]
+
+{\footnotesize 106,828 words of research $\bullet$ 10 research modules $\bullet$ 132 glossary terms}
+}
+\end{center}
+\vspace*{\fill}
+\newpage
+
+%% ── DEDICATION ──────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\vspace*{4cm}
+\begin{center}
+{\large\itshape\sffamily\textcolor{primary}{
+For every fursuit maker sketching in a convention hotel room,\\[0.5em]
+every animator learning walk cycles at 2 AM,\\[0.5em]
+every creator who picked up Blender because the price was right\\[0.5em]
+and discovered the tool was, too.\\[1.5em]
+The splines are free. The knowledge should be, too.
+}}
+\end{center}
+\newpage
+
+%% ── EPIGRAPH ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{quotebox}
+\itshape ``Blender is the free and open source 3D creation suite. It supports the entirety of the 3D pipeline --- modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game asset creation.''
+
+\vspace{0.5em}
+\upshape --- Blender Foundation, blender.org/features/
+\end{quotebox}
+
+\vspace{2cm}
+
+\begin{historynote}
+In 1985, a professional 3D workstation cost over \$100,000. In 1990, the Video Toaster brought broadcast-quality graphics to a \$3,000 Amiga. In 2002, Blender became free forever when the community raised \texteuro100,000 to buy it from bankruptcy. In 2024, an Oscar-winning animated film was made entirely in Blender.
+
+Every generation makes professional 3D more accessible. This book is part of that tradition.
+\end{historynote}
+\newpage
+
+%% ── TABLE OF CONTENTS ───────────────────────────────────────────────────────
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART I: FOUNDATIONS
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Foundations}
+
+%% ── CHAPTER 1: THE STORY OF 3D ──────────────────────────────────────────────
+\chapter{The Story of 3D Graphics}
+\label{ch:history}
+
+\begin{quotebox}
+\itshape ``The best way to predict the future is to invent it.''
+
+\upshape --- Alan Kay, Xerox PARC, 1971
+\end{quotebox}
+
+\vspace{1em}
+Every tool you use in Blender today has a lineage. The Bezier curves in your spline IK rigs were invented by Pierre B\'{e}zier at Renault in 1962 to model car bodies. The Phong shading on your character's skin was devised by a Vietnamese graduate student who died at 33, and his reflection model is still in every renderer on earth. The real-time viewport you orbit with your mouse descends from Ivan Sutherland's Sketchpad, the first interactive computer graphics program, built at MIT in 1963 with a light pen and a TX-2 computer.
+
+This chapter is not a detour. It is the foundation. Understanding where 3D tools came from makes you a better artist, because you understand \textit{why} the tools work the way they do --- and when to push against their assumptions.
+
+\section{The Mathematical Foundations (1960s)}
+
+\subsection{Sketchpad: The Beginning of Everything}
+
+In 1963, Ivan Sutherland demonstrated Sketchpad as his PhD thesis at MIT's Lincoln Laboratory. It was the first program that allowed a human to interact with a computer graphically --- drawing lines on a screen with a light pen, constraining them with geometric relationships, and transforming them in real time. Sketchpad introduced concepts that remain fundamental to every 3D application today: hierarchical object structures, instancing (a single master shape referenced multiple times), geometric constraints, and interactive manipulation.
+
+Sutherland would go on to co-found Evans \& Sutherland, the first commercial computer graphics company, and to supervise a generation of graphics pioneers at the University of Utah --- including Ed Catmull, who would co-found Pixar.
+
+\begin{historynote}
+The University of Utah's computer science department in the late 1960s and 1970s was the single most important incubator of computer graphics talent in history. From its halls came: Ed Catmull (texture mapping, z-buffer, Pixar), John Warnock (PostScript, Adobe), Jim Clark (Silicon Graphics), Nolan Bushnell (Atari), Alan Kay (Smalltalk, Xerox PARC), Henri Gouraud (Gouraud shading), Bui Tuong Phong (Phong shading), and Frank Crow (anti-aliasing). The Utah teapot, modeled by Martin Newell in 1975 as a test object, remains the most famous 3D model in computer graphics history.
+\end{historynote}
+
+\subsection{B\'{e}zier, de Casteljau, and the Mathematics of Curves}
+
+Pierre B\'{e}zier was an engineer at Renault who needed a mathematical way to describe the smooth curves of automobile body panels. Working independently, Paul de Casteljau at Citro\"{e}n developed equivalent mathematics. B\'{e}zier published first (1962), so the curves bear his name, but de Casteljau's algorithm for evaluating them is the standard computational method.
+
+B\'{e}zier curves are defined by control points: a start point, an end point, and one or more intermediate points that ``pull'' the curve toward them without the curve passing through them. This is the mathematical foundation of every curve tool in Blender --- the Bezier handles you drag in the Graph Editor, the curve objects you use for paths, the spline IK chains in your character rigs.
+
+The generalization of B\'{e}zier curves to B-splines and then to NURBS (Non-Uniform Rational B-Splines) gave engineers and artists the mathematical vocabulary to describe any smooth surface. NURBS dominated CAD software for decades and remain central to industrial design tools like Rhino 3D. Blender supports NURBS curves and surfaces, though polygon mesh modeling has largely supplanted NURBS in entertainment workflows.
+
+\subsection{The Rendering Pioneers}
+
+The 1970s and 1980s produced the core algorithms that every renderer uses today:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Gouraud shading} (Henri Gouraud, 1971) --- interpolates vertex colors across a polygon face, producing smooth shading from flat geometry. This is essentially what Blender's ``Smooth'' shading mode does.
+  \item \textbf{Phong shading} (Bui Tuong Phong, 1975) --- interpolates surface normals across a face and evaluates the lighting equation per-pixel, producing realistic specular highlights. Phong died of leukemia at 33; his shading model is still the basis of real-time rendering.
+  \item \textbf{Texture mapping} (Ed Catmull, 1974) --- projecting a 2D image onto a 3D surface. Every UV-mapped texture in Blender uses this technique.
+  \item \textbf{Bump mapping} (Jim Blinn, 1978) --- perturbing surface normals to simulate geometric detail without adding polygons. Blender's Normal Map and Bump nodes implement this.
+  \item \textbf{Z-buffer} (Ed Catmull, 1974) --- a per-pixel depth buffer that determines which surfaces are visible. Every real-time renderer, including EEVEE, uses a z-buffer.
+  \item \textbf{Ray tracing} (Turner Whitted, 1980) --- tracing light rays from the camera through each pixel to determine color, enabling reflections, refractions, and shadows. Cycles is a ray tracer.
+  \item \textbf{The rendering equation} (Jim Kajiya, 1986) --- the unified mathematical description of how light interacts with surfaces. This single equation is the theoretical basis for all physically-based rendering, including Cycles' path tracing algorithm.
+\end{itemize}
+
+\begin{tipbox}
+When you adjust a ``Roughness'' value in Blender's Principled BSDF shader, you are controlling a parameter in a microfacet BRDF model that descends directly from the Cook-Torrance model (1982), which itself built on Phong's work. The math has been refined over 50 years, but the core insight --- that surface appearance is determined by the statistical distribution of microscopic facets --- has not changed.
+\end{tipbox}
+
+\section{The SGI Era: When 3D Cost \$100,000}
+
+\subsection{Silicon Graphics and the Birth of the Industry}
+
+In 1982, Jim Clark --- another University of Utah alumnus --- founded Silicon Graphics, Inc. (SGI) in Mountain View, California. SGI built the workstations that powered professional 3D graphics for two decades. The machines had names that became legendary: IRIS, Indigo, Indy, Octane, Onyx, O2.
+
+SGI workstations were expensive (\$50,000--\$250,000) but they could do what no other hardware could: render 3D graphics interactively. Film studios, aerospace companies, medical imaging labs, and defense contractors were the primary customers. If you watched a computer-generated effect in a film between 1985 and 2000, it was almost certainly rendered on SGI hardware.
+
+\subsection{IrisGL to OpenGL: Democratizing the Graphics API}
+
+SGI's proprietary graphics library, IrisGL, was the standard API for 3D programming on SGI hardware. In 1992, SGI made a decision that would shape the entire industry: they opened IrisGL as \textbf{OpenGL}, a cross-platform, vendor-neutral graphics API.
+
+OpenGL meant that software written for 3D graphics could run on any hardware that implemented the standard --- not just SGI machines. This was the first great democratization event in 3D graphics. When commodity PC graphics cards from NVIDIA and ATI began supporting OpenGL (and later DirectX) in the late 1990s, the SGI monopoly on interactive 3D was broken forever.
+
+Blender's viewport is built on OpenGL. Every time you rotate the 3D viewport, you are using a direct descendant of SGI's graphics architecture. EEVEE, Blender's real-time renderer, is an OpenGL rasterization engine.
+
+\begin{historynote}
+SGI filed for bankruptcy in 2009. The campus in Mountain View --- including the distinctive buildings at 1600 Amphitheatre Parkway --- was purchased by Google. The machines that once powered Hollywood's visual effects are now museum pieces. But OpenGL lives on in every GPU, every game engine, and every Blender viewport.
+\end{historynote}
+
+\subsection{The Early Software: Wavefront, Alias, Softimage}
+
+The first generation of commercial 3D software ran on SGI workstations and cost as much as the hardware:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Wavefront Technologies} (1984) --- The Advanced Visualizer, one of the first commercial 3D packages. The .OBJ file format, still used today, originated here.
+  \item \textbf{Alias Research} (1985) --- Alias/1, later PowerAnimator, was the tool behind the liquid metal T-1000 in \textit{Terminator 2: Judgment Day} (1991) and the dinosaurs in \textit{Jurassic Park} (1993).
+  \item \textbf{Softimage} (1988) --- Daniel Langlois's Creative Environment, also used on \textit{Jurassic Park}. Softimage pioneered integrated animation tools.
+  \item \textbf{Side Effects Software} (1987) --- PRISMS, later Houdini, took a radically different approach: procedural, node-based workflows where everything is a composable operation. This philosophy would later inspire Blender's Geometry Nodes.
+\end{itemize}
+
+These tools cost \$15,000--\$60,000 for a single license, on top of the \$50,000+ SGI workstation required to run them. Professional 3D was a rich studio's game.
+
+\section{The Amiga Revolution (1985--1995)}
+\label{sec:amiga}
+
+\subsection{The Video Toaster: Broadcast for Everyone}
+
+In 1990, NewTek released the Video Toaster for the Commodore Amiga. For \$2,400 (plus the cost of an Amiga 2000), creators got a broadcast-quality video switcher, character generator, and --- critically --- a 3D modeling and rendering application called \textbf{LightWave 3D}.
+
+This was revolutionary. The same capabilities that required a \$100,000+ setup from SGI and Quantel were suddenly available for under \$5,000 total. The Video Toaster didn't just make 3D cheaper; it proved that the democratization of professional tools was possible and commercially viable.
+
+\subsection{LightWave 3D: The Tool That Changed Television}
+
+LightWave 3D, written by Allen Hastings and Stuart Ferguson, was bundled with the Video Toaster and later sold as standalone software. It became the 3D tool of choice for television production in the 1990s.
+
+\textbf{Babylon 5} (1993--1998) was the watershed moment. Foundation Imaging used LightWave 3D running on Amiga and later PC hardware to produce the space battle sequences for the show --- the first television series with extensive, ongoing CGI visual effects. The VFX team won an Emmy Award in 1993 for their work. Where previous TV shows used physical models (\textit{Star Trek: The Next Generation}'s Enterprise was a 6-foot studio model), Babylon 5 proved that computer graphics on affordable hardware could replace practical effects for broadcast television.
+
+Other LightWave-driven productions included \textit{SeaQuest DSV}, \textit{Hercules: The Legendary Journeys}, \textit{Xena: Warrior Princess}, and numerous commercials and music videos. LightWave's two-program architecture (Modeler for building, Layout for animation and rendering) influenced workflow thinking for a generation of 3D artists.
+
+\begin{historynote}
+The Amiga's unique hardware architecture --- with dedicated custom chips for graphics (Denise/Lisa), sound (Paula), and DMA (Agnus/Alice) --- gave it capabilities that PCs of the same era simply didn't have. The copper coprocessor could manipulate the display in real-time, enabling effects like palette cycling and smooth scrolling that wouldn't be possible on PCs for years. This hardware-software co-design philosophy is echoed today in GPU compute: just as the Amiga offloaded graphics to dedicated silicon, modern renderers like Cycles offload ray tracing to NVIDIA's RT cores.
+\end{historynote}
+
+\subsection{The Democratization Thesis}
+
+The Amiga/Video Toaster/LightWave ecosystem established a principle that would play out again and again in 3D graphics:
+
+\begin{quotebox}
+\textbf{Every generation of technology makes professional 3D creation accessible to a larger group of people, at a lower cost, with fewer barriers to entry.}
+\end{quotebox}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}XC{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Platform} & \tableheader{Cost of Entry} \\
+\midrule
+1985 & SGI workstation + Wavefront/Alias & \$100,000--\$250,000 \\
+1990 & Amiga + Video Toaster + LightWave & \$4,000--\$6,000 \\
+1996 & PC + 3D Studio MAX & \$5,000--\$8,000 \\
+2002 & Any PC + Blender (GPL release) & \$0 (hardware only) \\
+2019 & Any PC + Blender 2.80 & \$0 (production-viable) \\
+2024 & Any PC + Blender 4.x & \$0 (Oscar-winning) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Blender is the current endpoint of this trajectory. The tools are free. The only investment is time and knowledge. This book exists to reduce the knowledge barrier.
+
+\section{The Consolidation Wars (1990s--2010s)}
+
+\subsection{The Rise of the Big Three}
+
+In the late 1990s, corporate mergers reshaped the 3D software landscape:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Alias|Wavefront} (1995) --- Alias Research and Wavefront Technologies merged, then were acquired by SGI. Their combined technology became \textbf{Maya} (1998), which would dominate film VFX.
+  \item \textbf{3D Studio MAX} (1996) --- Autodesk's successor to 3D Studio (DOS), written by the Yost Group. MAX brought plugin architecture and a Windows-native interface that made it the dominant tool for game development and architectural visualization.
+  \item \textbf{Softimage|XSI} (2000) --- Avid acquired Softimage and released XSI as its next-generation product. XSI was technically excellent but suffered from corporate neglect.
+\end{itemize}
+
+For roughly a decade (1998--2008), these three --- Maya, 3ds Max, and Softimage --- were ``the Big Three'' of 3D animation software. Studios chose allegiances, pipelines were built around specific tools, and switching costs were enormous.
+
+\subsection{Autodesk's Acquisition Spree}
+
+Between 2005 and 2008, Autodesk acquired all three:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Maya} (from Alias, 2006) --- \$182 million
+  \item \textbf{Mudbox} (from Skymatter, 2007) --- a ZBrush competitor
+  \item \textbf{Softimage} (from Avid, 2008) --- then \textit{killed} Softimage in 2014
+\end{itemize}
+
+The killing of Softimage was a turning point. The 3D community watched Autodesk buy a beloved tool, neglect it, and then discontinue it --- while simultaneously moving Maya and 3ds Max to mandatory subscription pricing (\$1,875/year each by 2025). The message was clear: if your creative livelihood depends on proprietary software owned by a single corporation, you are at their mercy.
+
+This is the environment that made Blender's rise inevitable.
+
+\section{Blender: From NeoGeo to the Oscars}
+
+\subsection{Origins (1988--2002)}
+
+Blender began as an in-house tool at NeoGeo, a small animation studio in Amsterdam run by Ton Roosendaal. When NeoGeo's parent company, Not a Number Technologies (NaN), went bankrupt in 2002, Roosendaal launched the ``Free Blender'' campaign, asking the community to raise \texteuro100,000 to purchase Blender's source code from the creditors and release it under the GNU General Public License.
+
+The community raised the money in seven weeks. On October 13, 2002, Blender became free and open-source software --- forever.
+
+\subsection{The Long Road to Production (2002--2018)}
+
+For sixteen years, Blender was respected but not taken seriously by major studios. The interface was idiosyncratic (right-click select, anyone?), the rendering engine was outdated, and the learning curve was steep. But the Blender Foundation, funded by open movie projects (Elephants Dream, Big Buck Bunny, Sintel, Tears of Steel, Cosmos Laundromat) and corporate sponsorships, kept improving the software relentlessly.
+
+Key milestones:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Blender 2.5x} (2011) --- Complete UI rewrite, modern Python API
+  \item \textbf{Blender 2.6x--2.7x} (2012--2018) --- Cycles renderer, motion tracking, Freestyle NPR
+  \item \textbf{Blender 2.80} (2019) --- \textit{The revolution.} EEVEE real-time renderer, completely redesigned interface, Collections, left-click select default. This was the version that made Blender production-viable.
+\end{itemize}
+
+\subsection{The Tipping Point (2019--Present)}
+
+Blender 2.80 changed everything. Epic Games awarded the Blender Foundation a \$1.2 million MegaGrant. NVIDIA, AMD, Intel, Apple, Meta, and Ubisoft became corporate sponsors. Studios started integrating Blender into their pipelines.
+
+Then came the proof:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Spider-Man: Across the Spider-Verse} (2023) --- Sony Pictures Imageworks used Blender's Grease Pencil for line-work and 2D effects.
+  \item \textbf{Flow} (2024) --- A Latvian animated film made entirely in Blender's EEVEE renderer, on a \texteuro3.5 million budget, won Best Animated Feature at the 97th Academy Awards.
+\end{itemize}
+
+An Oscar-winning animated film. Made in free software. The democratization thesis, first proven by the Amiga and Video Toaster in 1990, reached its logical conclusion thirty-four years later.
+
+\begin{quotebox}
+\textbf{The rest of this book teaches you the tool that made that possible.}
+\end{quotebox}
+
+
+%% ── CHAPTER 2: FOUNDATIONS & INTERFACE ───────────────────────────────────────
+\chapter{Foundations \& Interface}
+\label{ch:foundations}
+
+\begin{quotebox}
+\itshape ``Blender 4.4 supports modeling, sculpting, UV unwrapping, texture painting, shader nodes, Geometry Nodes, rigging, armatures, inverse kinematics, shape keys, the NLA editor, physics simulations, fluid dynamics, particle systems, two render engines, compositing, video editing, motion tracking, Grease Pencil, Python scripting, and add-on development --- all within a single application. A new user has no map.''
+
+\upshape --- This book is that map.
+\end{quotebox}
+
+\section{Installing Blender}
+
+Blender runs on Windows (10+), macOS (11.2+ for Apple Silicon, 10.15+ for Intel), and Linux (glibc 2.28+). Download the latest stable release from blender.org/download/. You have several options:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Official installer} --- The standard choice. Windows gets an .msi, macOS gets a .dmg, Linux gets a .tar.xz.
+  \item \textbf{Portable build} --- A .zip archive that runs from any directory without installation. Ideal for carrying on a USB drive or maintaining multiple Blender versions side by side.
+  \item \textbf{Steam} --- Blender is available on Steam for free. Auto-updates are convenient, but the Steam version may lag slightly behind direct downloads.
+  \item \textbf{Snap (Linux)} --- \texttt{sudo snap install blender --classic}
+  \item \textbf{Package managers} --- Available via Homebrew (macOS), Chocolatey (Windows), and most Linux distribution repositories, though distribution packages are often outdated.
+\end{itemize}
+
+\begin{tipbox}
+For serious work, always use the official download from blender.org rather than distribution packages. Distribution packages are frequently several versions behind, which matters in a tool that releases three or more major versions per year.
+\end{tipbox}
+
+\subsection{First Launch and Initial Setup}
+
+On first launch, Blender presents a splash screen with quick settings:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Language} --- 30+ languages supported
+  \item \textbf{Shortcuts} --- Choose ``Blender'' (default) or ``Industry Compatible'' (mimics Maya/3ds Max shortcuts)
+  \item \textbf{Select With} --- Left Click (default since 2.80) or Right Click (legacy behavior)
+  \item \textbf{Spacebar Action} --- Play (animation playback), Tools (tool search), or Search (operator search)
+  \item \textbf{Theme} --- Blender Dark (default), Blender Light, or custom
+\end{itemize}
+
+\begin{historynote}
+Blender's default was right-click select for 20 years (1998--2019). The switch to left-click in Blender 2.80 was one of the most contentious UI decisions in the project's history, but it removed the single biggest barrier for new users coming from any other software. Right-click select remains available in Preferences for those who prefer it.
+\end{historynote}
+
+\section{The Workspace System}
+
+Blender organizes its interface into \textbf{workspaces} --- predefined layouts of editor types optimized for specific tasks. The default workspaces are:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Workspace} & \tableheader{Purpose} \\
+\midrule
+Layout & General scene assembly --- 3D Viewport, Outliner, Properties, Timeline \\
+Modeling & Mesh editing --- 3D Viewport in Edit Mode, Properties \\
+Sculpting & Digital sculpting --- 3D Viewport in Sculpt Mode, tool options \\
+UV Editing & UV unwrapping --- UV Editor + 3D Viewport \\
+Texture Paint & Painting directly on 3D models --- Image Editor + 3D Viewport \\
+Shading & Material creation --- Shader Editor + 3D Viewport in Material Preview \\
+Animation & Keyframing --- 3D Viewport + Dope Sheet + Graph Editor + Timeline \\
+Rendering & Render output --- Image viewer + Properties (Render tab) \\
+Compositing & Node-based post-processing --- Compositor Editor \\
+Geometry Nodes & Procedural geometry --- Geometry Node Editor + 3D Viewport \\
+Scripting & Python development --- Text Editor + Python Console + Info \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Workspaces are fully customizable. You can create new ones, modify existing ones, and drag editor boundaries to resize or split panels. Every workspace can be reconfigured by dragging the corner of any editor panel to split it, or by right-clicking an edge to join adjacent panels.
+
+\section{The 3D Viewport}
+
+The 3D Viewport is where you spend most of your time in Blender. It provides four shading modes:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Description} & \tableheader{Shortcut} \\
+\midrule
+Wireframe & Shows only edges. Useful for seeing through geometry. & Z $\rightarrow$ 4 \\
+Solid & Default shading with basic lighting. Fast and clear. & Z $\rightarrow$ 1 \\
+Material Preview & Approximates final materials with an HDRI environment. & Z $\rightarrow$ 2 \\
+Rendered & Real-time render preview using EEVEE or Cycles. & Z $\rightarrow$ 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Viewport Navigation}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Action} & \tableheader{Mouse} & \tableheader{Alternative} \\
+\midrule
+Orbit & Middle Mouse Button drag & Numpad 2/4/6/8 \\
+Pan & Shift + MMB drag & Shift + Numpad keys \\
+Zoom & Scroll wheel & Numpad + / -- \\
+Front view & & Numpad 1 \\
+Right view & & Numpad 3 \\
+Top view & & Numpad 7 \\
+Camera view & & Numpad 0 \\
+Toggle perspective/ortho & & Numpad 5 \\
+Frame selected & & Numpad . (period) \\
+Frame all & & Home \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\begin{tipbox}
+If you don't have a numpad (common on laptop keyboards), enable ``Emulate Numpad'' in Edit $\rightarrow$ Preferences $\rightarrow$ Input. This maps numpad keys to the number row, giving you view shortcuts on any keyboard.
+\end{tipbox}
+
+\section{The Properties Panel}
+
+The Properties Panel (right side of the default layout) is Blender's central control hub. It contains context-sensitive tabs:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Active Tool and Workspace} --- Settings for the currently active tool
+  \item \textbf{Scene} --- Scene-level settings (units, gravity, audio, keying sets)
+  \item \textbf{World} --- Environment lighting (HDRI, background color, volume)
+  \item \textbf{Object Properties} --- Transform (location, rotation, scale), relations, display settings
+  \item \textbf{Modifier Properties} --- The modifier stack for the selected object
+  \item \textbf{Particle Properties} --- Particle system settings (hair, emitter)
+  \item \textbf{Physics Properties} --- Rigid body, cloth, fluid, soft body settings
+  \item \textbf{Object Constraints} --- IK, Copy Rotation, Track To, etc.
+  \item \textbf{Object Data Properties} --- Mesh/curve/armature-specific data
+  \item \textbf{Material Properties} --- Material slots and settings
+  \item \textbf{Render Properties} --- Render engine (EEVEE/Cycles), sampling, output format
+  \item \textbf{Output Properties} --- Resolution, frame range, file format, output path
+  \item \textbf{View Layer Properties} --- Render passes, AOVs, override settings
+\end{itemize}
+
+\section{Object Types}
+
+Blender supports these object types:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Description} \\
+\midrule
+Mesh & Polygon geometry --- the most common object type. Vertices, edges, faces. \\
+Curve & B\'{e}zier or NURBS curves. Used for paths, beveled shapes, and spline IK. \\
+Surface & NURBS surfaces. Less common in modern workflows. \\
+Metaball & Implicit surfaces that merge when close. Useful for organic blobby shapes. \\
+Text & 3D text objects with font support. Convertible to mesh for editing. \\
+Volume & OpenVDB volumes for clouds, fog, and imported simulation data. \\
+Armature & Bone hierarchies for rigging and character animation. \\
+Lattice & A deformation cage that bends geometry non-destructively. \\
+Empty & An invisible reference point. Used for parenting, constraints, and organization. \\
+Camera & The viewpoint for rendering. Focal length, DOF, motion blur settings. \\
+Light & Point, Sun, Spot, and Area lights for illuminating scenes. \\
+Light Probe & Helps EEVEE calculate reflections and global illumination. \\
+Speaker & Positional audio sources for multimedia scenes. \\
+Force Field & Physics forces: wind, turbulence, vortex, magnetic, etc. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Essential Operations}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Operation} & \tableheader{Shortcut} & \tableheader{Notes} \\
+\midrule
+Add object & Shift + A & Opens the Add menu \\
+Delete & X or Delete & Confirmation prompt \\
+Duplicate & Shift + D & Creates an independent copy \\
+Linked duplicate & Alt + D & Shares mesh data \\
+Move (Grab) & G & Then X/Y/Z to constrain to axis \\
+Rotate & R & Then X/Y/Z to constrain \\
+Scale & S & Then X/Y/Z to constrain \\
+Undo & Ctrl + Z & Up to 256 steps (configurable) \\
+Redo & Ctrl + Shift + Z & \\
+Search & F3 & Find any operator by name \\
+Save & Ctrl + S & \\
+Save As & Ctrl + Shift + S & \\
+Render & F12 & Renders current frame \\
+Render Animation & Ctrl + F12 & Renders full animation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\begin{historynote}
+Blender's ``G for Grab'' instead of ``M for Move'' comes from its NeoGeo origins. The original Dutch developers chose mnemonics that made sense to them: G for Grab, S for Scale, R for Rotate. Twenty-five years later, these shortcuts are so deeply embedded in Blender's muscle memory culture that changing them would cause more confusion than keeping them. The ``Industry Compatible'' keymap offers W/E/R (like Maya) for those who prefer standard mnemonics.
+\end{historynote}
+
+\section{Modes}
+
+Blender uses modes to determine what operations are available. For mesh objects:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Object Mode} (default) --- Select, transform, and organize objects
+  \item \textbf{Edit Mode} (Tab) --- Modify individual vertices, edges, and faces
+  \item \textbf{Sculpt Mode} --- Digital sculpting with brushes
+  \item \textbf{Vertex Paint} --- Paint colors directly onto vertices
+  \item \textbf{Weight Paint} --- Paint bone influence weights for rigging
+  \item \textbf{Texture Paint} --- Paint directly onto UV-mapped textures
+\end{itemize}
+
+For armatures: Object Mode, Edit Mode (modify bone structure), and Pose Mode (animate bones).
+
+The mode determines what you can do. If you can't find an operation, check that you're in the right mode. This is the single most common source of confusion for new Blender users.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART II: CREATION
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Creation}
+
+%% ── CHAPTER 3: MODELING (expanded chapter file) ─────────────────────────────
+\input{chapters/ch03-modeling}
+
+%% ── CHAPTER 4: SHADING (expanded chapter file) ─────────────────────────────
+\input{chapters/ch04-shading}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART III: MOTION
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Motion}
+
+%% ── CHAPTER 5: ANIMATION (expanded chapter file) ────────────────────────────
+\input{chapters/ch05-animation}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART IV: OUTPUT
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Output}
+
+%% ── CHAPTER 6: COMPOSITING (expanded chapter file) ──────────────────────────
+\input{chapters/ch06-compositing}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART V: POWER
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Power}
+
+%% ── CHAPTER 7: SCRIPTING (expanded chapter file) ────────────────────────────
+\input{chapters/ch07-scripting}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART VI: COMMUNITY
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Community}
+
+%% ── CHAPTER 8: FURRY ARTS (expanded chapter file) ───────────────────────────
+\input{chapters/ch08-furryarts}
+
+
+%% (Old inline chapters removed — expanded versions loaded via \input above)
+%% ═══════════════════════════════════════════════════════════════════════════
+%% PART VII: PRODUCTION
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\part{Production}
+
+%% ── CHAPTER 9: PRODUCTION WORKFLOWS ─────────────────────────────────────────
+\chapter{Production Workflows}
+\label{ch:production}
+
+\section{The Complete Pipeline}
+
+A professional Blender project follows this pipeline:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Concept} --- Reference gathering, design sketches, mood boards
+  \item \textbf{Modeling} --- Build the geometry (Chapter~\ref{ch:modeling})
+  \item \textbf{UV Unwrapping} --- Create texture coordinates (Chapter~\ref{ch:modeling})
+  \item \textbf{Texturing and Materials} --- Apply surface appearance (Chapter~\ref{ch:shading})
+  \item \textbf{Rigging} --- Build the skeleton for animation (Chapter~\ref{ch:animation})
+  \item \textbf{Animation} --- Bring the scene to life (Chapter~\ref{ch:animation})
+  \item \textbf{Lighting} --- Illuminate the scene (Chapter~\ref{ch:shading})
+  \item \textbf{Rendering} --- Generate the final images (Chapter~\ref{ch:shading})
+  \item \textbf{Compositing and Post} --- Color grade, add effects, assemble (Chapter~\ref{ch:compositing})
+\end{enumerate}
+
+Each step references the relevant chapter. The pipeline is not strictly linear --- you'll loop back frequently, adjusting materials after seeing how they look in lighting, tweaking rigging after discovering animation problems. This iterative process is normal and expected.
+
+\section{File Organization}
+
+\begin{codebox}
+project/\\
+\hspace{2em}assets/\\
+\hspace{4em}characters/\\
+\hspace{4em}environments/\\
+\hspace{4em}props/\\
+\hspace{2em}textures/\\
+\hspace{4em}character\_diffuse.png\\
+\hspace{4em}character\_normal.png\\
+\hspace{4em}character\_roughness.png\\
+\hspace{2em}renders/\\
+\hspace{4em}frames/\\
+\hspace{4em}composited/\\
+\hspace{2em}references/\\
+\hspace{2em}scenes/\\
+\hspace{4em}shot\_001.blend\\
+\hspace{4em}shot\_002.blend\\
+\hspace{2em}README.md
+\end{codebox}
+
+\begin{tipbox}
+Use relative paths in Blender (enable ``Relative Paths'' in Preferences $\rightarrow$ File Paths). This ensures your project works when moved between machines. Pack external data into the .blend file (File $\rightarrow$ External Data $\rightarrow$ Pack Resources) when sharing files.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% APPENDICES
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\appendix
+
+\chapter{Keyboard Shortcut Reference}
+\label{app:shortcuts}
+
+This appendix collects the most important keyboard shortcuts from all chapters into a single reference. Shortcuts assume the default Blender keymap.
+
+\section{Global Shortcuts}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+Ctrl + Z & Undo \\
+Ctrl + Shift + Z & Redo \\
+Ctrl + S & Save \\
+Ctrl + Shift + S & Save As \\
+F3 & Search all operators \\
+F12 & Render current frame \\
+Ctrl + F12 & Render animation \\
+Tab & Toggle Edit Mode \\
+Z & Shading pie menu \\
+N & Toggle sidebar \\
+T & Toggle toolbar \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\section{Object Mode}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+G & Grab (move) \\
+R & Rotate \\
+S & Scale \\
+Shift + A & Add menu \\
+X / Delete & Delete \\
+Shift + D & Duplicate \\
+Alt + D & Linked duplicate \\
+Ctrl + J & Join objects \\
+Ctrl + P & Set parent \\
+H & Hide selected \\
+Alt + H & Unhide all \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\section{Edit Mode}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+1 / 2 / 3 & Vertex / Edge / Face select \\
+E & Extrude \\
+Ctrl + R & Loop Cut \\
+Ctrl + B & Bevel \\
+I & Inset Faces \\
+K & Knife \\
+M & Merge \\
+F & Fill \\
+O & Proportional Editing toggle \\
+Ctrl + L & Select Linked \\
+Alt + Click & Select Loop \\
+L & Select Linked (under cursor) \\
+P & Separate \\
+Ctrl + E & Edge menu \\
+Ctrl + F & Face menu \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+
+%% ── BACK MATTER ─────────────────────────────────────────────────────────────
+
+\chapter{Glossary}
+\label{app:glossary}
+
+A selection of key terms used throughout this book. For the complete 132-term glossary organized by domain, see the BLN research project at tibsfox.com/Research/BLN.
+
+\begin{description}[leftmargin=2em, style=nextline]
+  \item[\textsf{Armature}] A skeleton object containing bones, used for rigging and animation. The bone hierarchy defines how a character's mesh deforms when posed.
+  \item[\textsf{BSDF}] Bidirectional Scattering Distribution Function. A mathematical model describing how light interacts with a surface. Blender's Principled BSDF shader implements a Disney-derived physically-based model.
+  \item[\textsf{Cycles}] Blender's production path-tracing renderer. Physically accurate but computationally expensive.
+  \item[\textsf{Digitigrade}] A leg structure where the animal walks on its toes, with an elongated metatarsal creating a ``backwards knee'' appearance. Common in canines, felines, and many furry character designs. Requires special rigging.
+  \item[\textsf{Dyntopo}] Dynamic Topology. A sculpting mode where the mesh automatically subdivides under the brush, allowing detail where you sculpt without manual geometry management.
+  \item[\textsf{EEVEE}] Blender's real-time rasterization renderer. Fast, GPU-based, excellent for previewing and stylized output.
+  \item[\textsf{F-Curve}] Function Curve. The mathematical representation of an animated property over time. Visible in the Graph Editor.
+  \item[\textsf{Fursona}] A furry character that represents its creator. Modeling a fursona is one of the most common entry points for furry artists learning Blender.
+  \item[\textsf{Geometry Nodes}] Blender's visual, node-based procedural geometry system. Descended from Houdini's procedural philosophy.
+  \item[\textsf{glTF}] GL Transmission Format. An open standard for 3D asset delivery, especially for web and real-time applications. ``The JPEG of 3D.''
+  \item[\textsf{HDRI}] High Dynamic Range Image. A 360-degree photograph used for environment lighting and reflections.
+  \item[\textsf{Mantaflow}] Blender's fluid and smoke simulation library.
+  \item[\textsf{NLA Editor}] Non-Linear Animation editor. Layers and blends pre-recorded animation clips (Action Strips).
+  \item[\textsf{OpenGL}] The open graphics API descended from SGI's IrisGL. Blender's viewport is built on OpenGL.
+  \item[\textsf{PBR}] Physically Based Rendering. A shading approach using material parameters that correspond to measurable physical properties.
+  \item[\textsf{PhysBones}] VRChat's dynamic bone system for simulating physics on avatar accessories like tails, ears, and hair.
+  \item[\textsf{Rigify}] Blender's official automated rigging add-on. Generates production-quality rigs from template meta-rigs.
+  \item[\textsf{Shape Key}] Stored alternate vertex positions for a mesh. Used for facial expressions, corrective deformation, and morph targets.
+  \item[\textsf{USD}] Universal Scene Description. Pixar's open-source scene representation format for studio pipelines.
+  \item[\textsf{VRM}] Virtual Reality Model format. An open standard for humanoid 3D avatars, based on glTF.
+\end{description}
+
+
+%% ── FINAL PAGE ──────────────────────────────────────────────────────────────
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+{\Large\sffamily\textcolor{primary}{\textbf{Thicc Splines Save Lives}}}
+
+\vspace{1em}
+{\normalsize\sffamily\textcolor{subtlegray}{A Comprehensive Blender User Manual}}
+
+\vspace{0.5em}
+{\normalsize\sffamily\textcolor{subtlegray}{First Edition --- April 2026}}
+
+\vspace{2em}
+{\small\sffamily\textcolor{subtlegray}{PNW Research Series $\bullet$ Graphics Cluster $\bullet$ Project BLN}}
+
+\vspace{1em}
+{\small\sffamily\textcolor{subtlegray}{106,828 words of research $\bullet$ 10 modules $\bullet$ 132 glossary terms}}
+
+\vspace{2em}
+{\small\sffamily\textcolor{accent}{The splines are free. The knowledge should be, too.}}
+\end{center}
+\vspace*{\fill}
+
+\end{document}
