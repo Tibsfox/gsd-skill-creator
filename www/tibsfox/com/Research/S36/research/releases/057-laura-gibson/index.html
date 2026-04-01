@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 57&deg; &mdash; Laura Gibson &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .gender-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>057 &mdash; Laura Gibson</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>13th Consecutive Folk-Adjacent &mdash; The Manuscript Page &mdash; The Barsuk Bridge</h3>
+      <p>
+        Laura Gibson at degree 57&deg; extends the folk-adjacent record to
+        <strong>thirteen consecutive degrees</strong> (45&ndash;57). Folk singer-songwriter
+        and MFA-trained author. <strong>Portland</strong>-based, releasing on
+        <strong>Barsuk Records</strong> (Seattle) &mdash; the PNW corridor inverts.
+        <strong>Barsuk cluster</strong>: degrees 57-58-59 (Gibson, Death Cab, Long Winters).
+        <strong>Three consecutive E=2</strong> (55-56-57) &mdash; first E=2 three-peat.
+        E=2 rises to 19. <strong>17th non-male artist</strong> (~29.3%).
+        Folk zone: <strong>7/13 non-male majority</strong> (53.8%).
+        Three consecutive non-male (55-56-57).
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">57&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Laura Gibson</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Barsuk Records (Seattle)</span>
+          <span class="neighborhood-badge">Portland, OR (Barsuk Bridge)</span>
+          <span class="record-badge">13th Folk-Adjacent</span>
+          <span class="gender-badge">17th Non-Male</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Barsuk Bridge Card -->
+        <div class="web-card">
+          <h4>The Barsuk Bridge: Portland &ndash; Seattle via Barsuk Records</h4>
+          <p>
+            <strong>Barsuk Records</strong> (Seattle-based independent, est. 1998)
+            released <em>La Grande</em> (2012), <em>Empire Builder</em> (2016),
+            and <em>Goners</em> (2020). Gibson is Portland-based but chose
+            Seattle&rsquo;s Barsuk for her most mature work &mdash; the inverse
+            of degree 56&rsquo;s corridor (Seattle artist on Portland label).
+            <strong>Barsuk cluster:</strong> Gibson (57), Death Cab for Cutie (58),
+            The Long Winters (59) &mdash; three consecutive degrees on one label.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Quiet Library</h2>
+          <p>
+            <strong>Laura Gibson</strong> is an American singer-songwriter and author
+            from <strong>Coquille, Oregon</strong> &mdash; a small town on the
+            southern Oregon coast, population approximately 3,900. She grew up
+            in a rural, working-class environment. Her father was a pastor; the
+            hymnal tradition planted the folk-form DNA in her songwriting.
+            Gibson attended <strong>Portland State University</strong>, then earned
+            an <strong>MFA in creative writing</strong> from
+            <strong>Hunter College</strong> in New York City.
+          </p>
+          <p>
+            The MFA is not biographical trivia &mdash; it is a structural element
+            of her practice. Gibson writes with the precision of edited prose:
+            specific images, observed details, emotional truths rendered through
+            concrete particulars. Her lyrics operate at the level of literary fiction.
+            She is a <em>writer</em> who sings, and the writing is as important
+            as the singing.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>If You Come to Greet Me: The Debut (2006)</h2>
+          <p>
+            <strong><em>If You Come to Greet Me</em></strong> (2006,
+            <strong>Holocene Music</strong>) &mdash; the conditional invitation.
+            <em>If</em> you come, not <em>when</em>. Hushed vocals, fingerpicked
+            guitar, spare arrangements. Each song a carefully constructed room
+            the listener enters. Self-recorded in Portland. The debut as whisper.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Beasts of Seasons: Hush Records (2009)</h2>
+          <p>
+            <strong><em>Beasts of Seasons</em></strong> (2009,
+            <strong>Hush Records</strong>) &mdash; the seasons as creatures.
+            Strings, piano, subtle percussion expand the palette. The approach
+            remains subtractive: each element earns its presence. First
+            <strong>NPR</strong> coverage. The literary turn deepens. Nature
+            is not backdrop but character.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>La Grande: Barsuk Records (2012)</h2>
+          <p>
+            <strong><em>La Grande</em></strong> (2012, <strong>Barsuk Records</strong>)
+            &mdash; named for <strong>La Grande, Oregon</strong>, a small city
+            in the Blue Mountains at the Oregon Trail&rsquo;s intersection with the
+            Grande Ronde Valley. First Barsuk release. <strong>Sufjan Stevens</strong>
+            contributes instrumentation. <strong>Pitchfork</strong> 7.0.
+            The album where literary and musical practices fully merge:
+            each song a self-contained work of literary fiction rendered as folk music.
+          </p>
+          <blockquote>
+            A Portland artist choosing a Seattle label. The Barsuk aesthetic
+            is literary, careful, emotionally precise. Gibson&rsquo;s writing
+            fits this aesthetic perfectly. She joins the same roster as Death Cab
+            for Cutie and The Long Winters &mdash; not in scale, but in sensibility.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Empire Builder: The Train (2016)</h2>
+          <p>
+            <strong><em>Empire Builder</em></strong> (2016, <strong>Barsuk Records</strong>)
+            &mdash; named for Amtrak&rsquo;s long-distance route from Chicago to
+            Seattle/Portland through the northern tier. Songs carry the movement
+            and isolation of long-distance train travel. <strong>The New York
+            Times</strong> profile. Subtle electronic elements enter. The production
+            moves &mdash; it has the forward motion of travel.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Goners: After the Fire (2020)</h2>
+          <p>
+            <strong><em>Goners</em></strong> (2020, <strong>Barsuk Records</strong>)
+            &mdash; in <strong>2018</strong>, Gibson&rsquo;s New York apartment caught fire
+            while she was home. She survived but lost instruments, notebooks,
+            and personal archives. <em>Goners</em> emerged from the other side:
+            things (and people, and versions of oneself) that are gone, past
+            recovery, beyond saving. The title carries tenderness, not despair.
+          </p>
+          <p>
+            Strongest critical reception of her career: <strong>Pitchfork</strong> 7.5,
+            <strong>NPR Music</strong>, <strong>The New York Times</strong>,
+            <strong>Stereogum</strong>, <strong>Paste</strong>. Most direct vocal
+            delivery &mdash; less reverb, less distance. The subtractive approach
+            reaches its purest expression: what remains after everything has burned.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Manuscript Page</h4>
+              <div class="level advanced">Advanced &mdash; 58th Acoustic Element</div>
+              <p>
+                MFA-trained literary precision rendered as folk music. Each word
+                carries the weight of edited prose; each silence serves as
+                punctuation. Not the murmur&rsquo;s whispered intuition (45),
+                the ember glow&rsquo;s warm craft (55), or the dream haze&rsquo;s
+                atmospheric dissolution (56) &mdash; the specific quality where
+                you can <em>hear</em> the writing, where line breaks and verb
+                choices arrive with the inevitability of edited prose.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Writer-Musician</h4>
+              <div class="level advanced">Advanced &mdash; 58th Artist-City Pattern</div>
+              <p>
+                Artist who holds formal credentials in both literary writing and
+                musical performance, whose practices are structurally inseparable.
+                Portland sustains the writer-musician because the city does not
+                separate literature from music: Powell&rsquo;s Books and the
+                Doug Fir Lounge serve the same audience. The writer-musician
+                IS the creative practice.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Salvaged Lyric</h4>
+              <div class="level intermediate">Intermediate &mdash; 57th Deployment</div>
+              <p>
+                The blue note of creative survival: a songwriter loses her
+                instruments, notebooks, and archives in a fire, then writes an
+                album from the other side. The objects burned but the practice
+                survived. The salvaged lyric is what remains when the process is
+                destroyed but the practitioner survives: not the drafts but
+                the skill that produced them.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>13th Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 38</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk Punk (49),
+                Indie Folk (50), Indie Folk (51), Folk/Rock (52), Indie Folk (53),
+                Folk (54), Singer-Songwriter (55), Indie Folk (56), Folk (57).
+                Thirteen degrees. Folk returns &mdash; sixth use, tied with
+                Indie Folk at six each. The folk-adjacent tridecad.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>If You Come to Greet Me</h4>
+              <div class="disco-years">2006 &middot; Holocene Music</div>
+              <p>
+                Debut. Portland indie. Conditional invitation.
+                Hushed vocals, fingerpicked guitar.
+                Each song a small room.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Beasts of Seasons</h4>
+              <div class="disco-years">2009 &middot; Hush Records</div>
+              <p>
+                Seasons as creatures. Strings, piano added.
+                NPR first coverage. Literary turn.
+                Nature as character.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>La Grande</h4>
+              <div class="disco-years">2012 &middot; Barsuk Records</div>
+              <p>
+                First Barsuk. Named for La Grande, Oregon.
+                Sufjan Stevens contributes. Pitchfork 7.0.
+                Literary-folk synthesis.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Empire Builder</h4>
+              <div class="disco-years">2016 &middot; Barsuk Records</div>
+              <p>
+                Amtrak route. Travel imagery.
+                NYT profile. Electronic textures.
+                The train and the distance.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Goners</h4>
+              <div class="disco-years">2020 &middot; Barsuk Records</div>
+              <p>
+                After the fire. Loss and recovery.
+                Most direct vocal delivery.
+                Pitchfork 7.5. NPR. NYT.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">56&deg;</span>
+              <strong>Lemolo</strong> &mdash; Consecutive E=2, corridor inversion.
+              At 56, Seattle artist on Portland label. At 57, Portland artist on
+              Seattle label. Dream haze (56) yields to manuscript page (57).
+              Both E=2. Both non-male. Inverse production: Lemolo adds reverb;
+              Gibson subtracts everything.
+            </li>
+            <li>
+              <span class="ref-degree">55&deg;</span>
+              <strong>Shelby Earl</strong> &mdash; Three consecutive E=2 (55-56-57).
+              Producer web extends: John Roderick (Long Winters, degree 59,
+              Barsuk) produced Earl&rsquo;s debut. Gibson and Roderick share
+              a label. The folk zone whispers a novel, one chapter per degree.
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Literary-folk lineage.
+              Both build immersive environments. Fleet Foxes through vocal
+              arrangement; Gibson through silence and precision.
+              E=3 fills arenas; E=2 fills small rooms. Craft density comparable.
+            </li>
+            <li>
+              <span class="ref-degree">47&deg;</span>
+              <strong>Pedro the Lion</strong> &mdash; Parable tone and manuscript
+              page. Both treat the lyric as literary object. Bazan writes parables;
+              Gibson writes short stories in verse. The same conviction: words
+              matter, and songs are a delivery system for words.
+            </li>
+            <li>
+              <span class="ref-degree">45&deg;</span>
+              <strong>Damien Jurado</strong> &mdash; Folk zone origin.
+              The murmur (45) to the manuscript page (57): thirteen degrees
+              from intuitive lo-fi whisper to MFA-trained literary precision.
+              Both Folk. Both E=2. Instinct to craft.
+            </li>
+            <li>
+              <span class="ref-degree">0&deg;</span>
+              <strong>Quincy Jones</strong> &mdash; Mercury orchestras to
+              literary-folk manuscript page. Fifty-eight degrees of evolution.
+              At degree 57: a small Seattle label distributing a Portland
+              songwriter&rsquo;s literary folk songs to readers who listen.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">57&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">38</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2006&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Writer-Musician</h4>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Coquille, Oregon</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Based</span>
+            <span class="stat-value">Portland, Oregon</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">MFA</span>
+            <span class="stat-value">Hunter College (NYC)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Holocene / Hush / Barsuk</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Barsuk Cluster (57-58-59)</h4>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Gibson (E=2, Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">58&deg;</span>
+            <span class="stat-value">Death Cab (E=4)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">59&deg;</span>
+            <span class="stat-value">Long Winters (E=3)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Folk-Adjacent Tridecad</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg;</span>
+            <span class="stat-value">Jurado (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">46&deg;</span>
+            <span class="stat-value">Votolato (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">47&deg;</span>
+            <span class="stat-value">Pedro (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">48&deg;</span>
+            <span class="stat-value">Cahoone (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">49&deg;</span>
+            <span class="stat-value">Dawson (Folk Punk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">50&deg;</span>
+            <span class="stat-value">Mirah (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">51&deg;</span>
+            <span class="stat-value">Grand Arch. (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">52&deg;</span>
+            <span class="stat-value">Carlile (Folk/Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">53&deg;</span>
+            <span class="stat-value">Fleet Foxes (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">54&deg;</span>
+            <span class="stat-value">Ivan &amp; Alyosha (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">55&deg;</span>
+            <span class="stat-value">Earl (Singer-Songwriter)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">56&deg;</span>
+            <span class="stat-value">Lemolo (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Gibson (Folk)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#58</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#58</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#57</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Tracking</h4>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Male</span>
+            <span class="stat-value">41</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value">~29.3%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk Zone</span>
+            <span class="stat-value">7/13 = 53.8%</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>PNW Corridor</h4>
+          <div class="stat-row">
+            <span class="stat-label">56&deg; &rarr;</span>
+            <span class="stat-value">SEA &rarr; PDX (TLE)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">57&deg; &rarr;</span>
+            <span class="stat-value">PDX &rarr; SEA (Barsuk)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>E=2 Three-Peat</h4>
+          <div class="stat-row">
+            <span class="stat-label">55&deg;</span>
+            <span class="stat-value">Earl (E=2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">56&deg;</span>
+            <span class="stat-value">Lemolo (E=2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Gibson (E=2)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        Degree 57&deg; &mdash; Laura Gibson &mdash; Seattle 360 Engine &mdash; v1.49.193
+        <br>
+        Thirteen consecutive folk-adjacent degrees. The manuscript page. A writer who sings.
+        Portland to Seattle via Barsuk Records. Five albums across fourteen years.
+        The fire burned everything but the words. The words became <em>Goners</em>.
+        The Barsuk bridge connects two cities. The quiet register whispers three times.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
