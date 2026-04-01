@@ -133,8 +133,8 @@ footer a { color:rgba(255,255,255,0.3); }
   <h2>Active Missions</h2>
   <div class="card-grid">
     <a href="../NASA/artemis-ii/index.html" class="card card-featured">
-      <h3><span class="status-dot live"></span> Artemis II <span class="badge badge-live">IN ORBIT</span></h3>
-      <p><em>The space between the Moon and the Earth.</em> <strong>LAUNCHED 22:35:12 UTC, April 1, 2026.</strong> Liftoff from Pad 39B. Perfect ascent &mdash; good roll, good pitch, all 4 RS-25s nominal, SRB sep at T+2:00, LAS jettison at T+3:30, MECO at T+8:00, core stage sep at T+8:27. Now in orbit. ICPS ready for orbit insertion. Two orbits then TLI at ~T+3h22m &mdash; the burn that sends them to the Moon. Blackwell-Thompson: &ldquo;Jeremy, we are going for all of humanity. Godspeed.&rdquo;</p>
+      <h3><span class="status-dot live"></span> Artemis II <span class="badge badge-live">ORBIT</span></h3>
+      <p><em>The space between the Moon and the Earth.</em> <strong>LAUNCHED 22:35:12 UTC.</strong> Now in parking orbit: 267&times;2,005 km, 90 min period, 18,310 mph. Two orbits before TLI burn at ~L+3h22m sends them to the Moon. Perfect ascent &mdash; all 4 RS-25s nominal, SRB sep T+2:00, LAS jettison T+3:30, MECO T+8:00. Math published: orbital mechanics from live telemetry, O2O link budget, circadian drift prediction. PNW rain arrived as forecast. Crew in orbit. 242,000 miles to go.</p>
       <div class="meta">Mission 1.190 &middot; Launch: Apr 1, 2026 22:24 UTC (6:24 PM EDT / 3:24 PM PDT) &middot; 2-hour window &middot; T-1h &middot; 10-day free-return lunar flyby</div>
     </a>
   </div>
@@ -159,7 +159,7 @@ footer a { color:rgba(255,255,255,0.3); }
     <div class="card">
       <h3><span class="status-dot monitoring"></span> Wall-Clock Papers</h3>
       <p>Papers found during active missions, cataloged in real time. <strong>T-3h additions:</strong> AVATAR organ-on-chip (crew's own bone marrow cells), ARCHeR circadian monitoring, 4-nation CubeSat fleet (TACHELES/ATENEA/K-RadCube/SwCube-1), ESM-2 European engine module, and NASA SVS trajectory visualization. 30 papers across 6 sweeps.</p>
-      <div class="meta">30 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC, ESA, NASA Science &middot; Updated v1.1.15</div>
+      <div class="meta">30 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC, ESA, NASA Science &middot; Updated v1.1.17</div>
     </div>
 
     <a href="../OPEN/index.html" class="card">
@@ -185,7 +185,7 @@ footer a { color:rgba(255,255,255,0.3); }
         JPL Horizons (-1024) &middot; DSN Now &middot; USGS Snohomish River &middot;
         NWS Forecast Grid &middot; Open-Meteo &middot; WSDOT Ferries
       </p>
-      <div class="meta">All free, no API keys, verified April 1, 2026 22:00Z</div>
+      <div class="meta">All free, no API keys, verified April 1, 2026 00:00Z</div>
     </div>
 
     <div class="card">
@@ -222,7 +222,7 @@ function updateClocks() {
 updateClocks();
 setInterval(updateClocks, 1000);
 // Set page load timestamp
-document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.1.15)';
+document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.1.17)';
 </script>
 </body>
 </html>
