@@ -1,0 +1,214 @@
+{
+  "degree": 72,
+  "species": "Opossum",
+  "scientific_name": "Didelphis virginiana",
+  "slug": "072-opossum",
+  "sound_type": "low hiss / click when threatened -- defensive vocalizations combining a sustained low-frequency hiss (open-mouth threat display) and sharp dental clicks (teeth clacking), the 73rd acoustic element, the first defensive-only mammalian vocalization, the first marsupial sound in the engine",
+  "energy": 2,
+  "ecosystem": "woodland edge -- mixed deciduous-conifer forest margins, riparian corridors, suburban yards, farmland borders, and brushy areas. Shared habitat type with Striped Skunk (69) and Short-tailed Weasel (67). Secretive, nocturnal, rarely seen despite being common.",
+  "season": "year-round resident in western Washington, established introduced population",
+  "family": "Didelphidae",
+  "order": "Didelphimorphia",
+  "csv_substitute": false,
+  "original_species": "Opossum",
+  "csv_substitution": null,
+  "species_pair": null,
+  "coordinates": {
+    "lat": 47.55,
+    "lon": -122.35,
+    "description": "Reference for woodland edge habitat in western Washington lowlands. The Virginia Opossum is an introduced species in the Pacific Northwest, established since the early 20th century. Found in suburban neighborhoods, park edges, riparian corridors, and woodland margins throughout the Puget Sound lowlands. Low hiss and dental click most commonly heard at night when cornered or defending food sources."
+  },
+  "taxonomy_note": {
+    "description": "FIRST MARSUPIAL. Twelfth mammalian entry. Tenth mammalian species. FIRST Didelphimorphia. FIRST Didelphidae. NEW ORDER (3rd mammalian order). NEW FAMILY (32nd family). The Virginia Opossum is North America's ONLY marsupial -- a fundamentally different kind of mammal. It belongs to infraclass Marsupialia, not Placentalia. More distantly related to every other mammal in the engine than any of those mammals are to each other. A taxonomic event comparable to the first mammal entering the engine at degree 61.",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_infraclass": "Marsupialia",
+    "new_infraclass": true,
+    "infraclass_note": "FIRST MARSUPIAL. Infraclass Marsupialia enters the engine. All previous mammals (degrees 61-71) are placental (infraclass Placentalia). The marsupial-placental divergence occurred approximately 160-190 million years ago -- deeper than any within-class split previously represented in the engine. The opossum is more distantly related to the beaver, otter, mink, marten, fisher, weasel, skunk, raccoon, and fox than any of those species are to each other.",
+    "current_family": "Didelphidae",
+    "new_family": true,
+    "family_count_in_engine": 32,
+    "didelphidae_count_in_engine": 1,
+    "name_etymology": "Didelphis from Greek di (two) + delphys (womb) -- 'double womb,' referencing the marsupial reproductive anatomy (the female has two uteri and two vaginae). virginiana from Virginia, the colony where the species was first described by European naturalists. Didelphis virginiana = 'the double-wombed animal of Virginia.' Common name 'Opossum' derives from Powhatan Algonquian aposoum, meaning 'white animal' or 'white beast.'",
+    "genus_note": "Didelphis -- approximately six species of large New World opossums: D. virginiana (Virginia Opossum), D. marsupialis (Common Opossum), D. aurita (Big-eared Opossum), and others. The Virginia Opossum is the only species north of Mexico and the only marsupial in North America north of Mexico.",
+    "order_note": "Didelphimorphia -- NEW ORDER (3rd mammalian order in the engine after Rodentia and Carnivora). Contains a single family: Didelphidae (New World opossums). Approximately 19 genera and 110+ species, all in the Western Hemisphere. The order is ancient -- opossums have existed in recognizable form for approximately 65-70 million years, surviving the K-Pg extinction that killed the non-avian dinosaurs.",
+    "class_note": "Mammalia -- twelfth mammalian entry. Tenth mammalian species. THREE orders (Rodentia, Carnivora, Didelphimorphia). SIX families (Castoridae, Mustelidae, Mephitidae, Procyonidae, Canidae, Didelphidae). TWO infraclasses (Placentalia, Marsupialia). Mammalian representation rises to 16.4% (12 of 73 entries). The mammalian era extends to twelve consecutive degrees (61-72).",
+    "family_position": "Didelphidae's FIRST entry at degree 72. The 32nd family in the engine. NEW FAMILY. Fourth new family in four degrees (Mephitidae 69, Procyonidae 70, Canidae 71, Didelphidae 72). Didelphidae is the largest marsupial family in the Western Hemisphere, containing approximately 19 genera and 110+ species. The family dates to the Late Cretaceous -- opossums are among the oldest living mammal lineages."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Hiss: approximately 500-8,000 Hz, broad-spectrum noise. Click: sharp transient, broad-spectrum impulse centered approximately 2,000-6,000 Hz. Both defensive, not tonal.",
+    "peak_energy_band_hz": "Hiss: 1,000-4,000 Hz (the core hiss band). Click: 2,000-5,000 Hz (the sharp dental impact).",
+    "song_frequency_hz": "NOT a song. DEFENSIVE THREAT VOCALIZATIONS. Two primary components: (1) Hiss -- a sustained, low, breathy exhalation with open mouth displaying all 50 teeth. (2) Click -- sharp, percussive dental clacking, teeth snapping together rapidly. Both are produced only when the animal is cornered, threatened, or defending food. Neither is used for social communication or territory.",
+    "song_duration_s": "Hiss: sustained, 1-5 seconds per exhalation, repeated. Click: rapid bursts of 0.5-2 seconds. Defensive display can persist for 30-60 seconds before the opossum either retreats or enters thanatosis (playing dead).",
+    "note_structure": "Hiss: continuous broadband noise without discrete note boundaries, turbulent airflow. Click: discrete, sharp impulses (2-5 clicks per second), each click a hard dental contact. The two types alternate: hiss-click-hiss-click during escalating threat display.",
+    "note_types": "Hiss (low, sustained, breathy threat), click (sharp dental percussion), growl (very low, rare), screech (high-pitched distress, rare). The hiss/click combination is the Opossum's signature -- the sound of a cornered marsupial.",
+    "phrase_structure": "Hiss: sustained exhalation without phrase structure. Click: bursts of rapid dental percussion. During defensive display, the opossum opens its mouth wide (showing all 50 teeth), hisses, then clacks teeth. The sequence escalates: hiss alone, then hiss + click, then (if threat continues) thanatosis (playing dead) -- an involuntary catatonic state.",
+    "timbre": "Hiss: dry, rasping, breathy -- like air escaping a tire but organic and threatening. Click: hard, sharp, bony -- the sound of teeth meeting teeth, percussive and mechanical. Combined: the wet hiss and dry click create an unsettling defensive soundscape. Primitive in quality -- the sound of an ancient lineage's threat display.",
+    "amplitude": "E=2. Secretive, nocturnal, rarely seen or heard despite being common. Hiss is quiet (audible at 3-10 meters). Click is slightly louder (audible at 5-15 meters). Neither carries far. The opossum is one of the quietest mammals in the engine.",
+    "tempo": "Hiss: sustained, continuous. Click: moderate tempo (2-5 clicks per second). The overall tempo of defensive display is slow and deliberate -- the opossum is not agile or quick. The defensive display is a last resort before thanatosis.",
+    "context": "DEFENSIVE ONLY. Hiss and click produced when cornered by a predator, surprised by a human, competing over food with another scavenger (raccoon, cat), or defending young. NOT used for territorial marking, mate attraction, or social bonding. The opossum is essentially silent during normal foraging and movement. The sound is only heard when something has gone wrong.",
+    "regional_variation": "NO documented regional variation. The defensive vocalizations are consistent across the species' range.",
+    "key_property": "LOW HISS / CLICK WHEN THREATENED -- the 73rd acoustic element. Defensive-only vocalizations: hiss (sustained breathy threat with mouth agape, 50 teeth displayed) and click (sharp dental percussion). E=2. The first MARSUPIAL sound in the engine. The first purely DEFENSIVE mammalian vocalization (skunk warning at 69 is multi-modal; raccoon churring at 70 is social). The sound of an ancient lineage under threat."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Medium-sized marsupial. 350-940 mm total length (including long prehensile tail), 1.8-6.4 kg. Rat-like appearance with a pointed snout, prominent naked ears (black with pink or white tips), and a long, scaly, nearly hairless prehensile tail. Plantigrade stance. Slow, waddling gait. Opposable hallux (thumb-like toe) on hind feet. The most primitive-looking mammal in the engine.",
+    "diagnostic_mark": "For degree 72, the diagnostic features are: (1) POINTED SNOUT -- long, conical, with a pink nose. (2) NAKED EARS -- large, thin, black with lighter tips, no fur. (3) PREHENSILE TAIL -- long, scaly, nearly hairless, capable of gripping branches and carrying nesting material. The only PNW mammal with a prehensile tail. (4) 50 TEETH -- more teeth than any other North American land mammal. Displayed during defensive gape. (5) OPPOSABLE HALLUX -- thumb-like first toe on hind feet, used for gripping branches. (6) GRIZZLED GRAY-WHITE FUR -- coarse outer guard hairs over dense underfur.",
+    "fur_detail": "BASE: Coarse, grizzled gray-white. Long outer guard hairs are white-tipped over darker underfur, creating a frosted appearance. Face is white with dark eye patches. TAIL: Long (250-535 mm), scaly, nearly hairless, prehensile -- used for balance and carrying nesting material. EARS: Large, thin, black with pink or white margins, no fur. FUNCTION: Cryptic in low light, not aposematic. The opossum relies on nocturnal habits and defensive behaviors (hiss, click, thanatosis) rather than warning coloration.",
+    "dental_detail": "50 TEETH -- the most of any North American land mammal. Dental formula: 5/4, 1/1, 3/3, 4/4. The high tooth count is primitive -- characteristic of early mammalian lineages. The 50-tooth gape is the centerpiece of the defensive threat display: the opossum opens its mouth as wide as possible, exposing all teeth. The teeth are generalized (not specialized like carnassials or rodent incisors), reflecting the omnivorous diet.",
+    "field_id": "At woodland edges, suburban yards, or road margins: a medium-sized, grayish-white, rat-like mammal with a pointed pink snout, large naked ears, and a long hairless tail. Slow, waddling gait. Primarily nocturnal -- most commonly seen as roadkill or caught in flashlight beams near garbage, compost, or pet food. When cornered, opens mouth wide to display 50 teeth while hissing. If extremely frightened, may enter thanatosis (playing dead) -- lying motionless on its side with tongue lolling, appearing dead for minutes to hours. Distinguished from all other PNW mammals by the combination of naked ears, prehensile tail, and pointed snout."
+  },
+  "marsupial_note": {
+    "description": "THE FIRST MARSUPIAL. The Virginia Opossum is North America's only marsupial. Marsupials diverged from placental mammals approximately 160-190 million years ago. Key marsupial features: (1) POUCH (marsupium) -- females have a fur-lined abdominal pouch where extremely undeveloped young complete their development. (2) EXTREMELY PREMATURE BIRTH -- young are born after only 12-13 days of gestation, approximately the size of a honeybee, blind, hairless, with only forelimbs developed enough to crawl to the pouch. (3) TWO UTERI AND TWO VAGINAE -- the 'double womb' that gives the genus its name (Didelphis). (4) DIFFERENT BODY TEMPERATURE -- lower than placental mammals (~35C vs ~37C). (5) DIFFERENT BRAIN STRUCTURE -- smaller brain relative to body size than placental mammals of similar mass.",
+    "pouch_development": "Newborn opossums are approximately 14 mm long (smaller than a dime) and weigh approximately 0.13 grams. They crawl from the birth canal to the pouch using only their forelimbs (hind limbs are barely formed). In the pouch, they attach to one of 13 nipples (arranged in a horseshoe pattern with one in the center) and remain attached for approximately 60-70 days. Litters average 6-9 but can exceed 13; however, only 13 nipples exist, so any young that fail to attach perish. After leaving the pouch, young ride on the mother's back for several additional weeks.",
+    "evolutionary_significance": "The opossum lineage is ancient. Didelphidae dates to the Late Cretaceous period (~65-70 million years ago). Opossums survived the K-Pg extinction event that eliminated the non-avian dinosaurs. They are often described as 'living fossils,' though they have continued to evolve. The basic opossum body plan has been successful for longer than most mammalian families have existed."
+  },
+  "thanatosis_note": {
+    "description": "PLAYING DEAD (THANATOSIS). The opossum's most famous behavior. When extremely frightened or physically attacked, the opossum enters an involuntary catatonic state: it falls on its side, becomes limp, closes or half-closes its eyes, lets its tongue loll out, drools, and may release foul-smelling fluid from its anal glands. The state can last from minutes to several hours. The opossum does NOT choose to play dead -- it is an involuntary physiological response, similar to fainting. The first defensive behavior of this type in the engine.",
+    "mechanism": "Thanatosis is triggered by extreme stress and is mediated by the autonomic nervous system. Heart rate drops. Breathing becomes shallow and nearly undetectable. The body enters a state resembling death that can deceive predators who prefer live prey. The opossum cannot control when it enters or exits thanatosis -- it is not an act but a physiological response.",
+    "effectiveness": "Thanatosis deters predators that rely on movement detection (canids, felids) or prefer live prey. It is less effective against vehicles (the leading cause of opossum mortality) or predators that consume carrion. The strategy is ancient -- it has persisted for millions of years because it works often enough against the opossum's natural predators."
+  },
+  "introduced_species_note": {
+    "description": "INTRODUCED TO THE PNW. The Virginia Opossum is native to eastern North America (from southern Ontario through the eastern United States to Central America). It was introduced to Washington State in the early 20th century (1920s-1930s), likely as escaped or released pets or fur-farm animals. The species has established self-sustaining populations throughout western Washington, particularly in the Puget Sound lowlands. This is the engine's FIRST INTRODUCED MAMMAL.",
+    "native_range": "Eastern North America: from southern Ontario and the Great Lakes region south through the eastern United States, west to the Great Plains, and south through Mexico into Central America. The species has been expanding its range northward naturally in the east, aided by milder winters.",
+    "pnw_status": "Established introduced population in western Washington. Common in lowland areas west of the Cascades. Not present in eastern Washington or at higher elevations. Considered non-native but not typically classified as invasive because its ecological impact is limited and it fills a scavenger niche."
+  },
+  "nodes": [
+    {
+      "id": "first-marsupial",
+      "type": "pattern",
+      "title": "FIRST MARSUPIAL -- Infraclass Marsupialia Enters the Engine",
+      "description": "The Virginia Opossum is North America's only marsupial. Infraclass Marsupialia enters the engine. More distantly related to every other mammal in the engine than any of those mammals are to each other. The marsupial-placental divergence: ~160-190 million years. A fundamentally different kind of mammal -- pouch, premature birth, 50 teeth, prehensile tail. The deepest taxonomic event since the first mammal at degree 61.",
+      "connections": ["new-order-didelphimorphia", "new-family-didelphidae", "hiss-click-acoustic", "thanatosis-defense"]
+    },
+    {
+      "id": "new-order-didelphimorphia",
+      "type": "pattern",
+      "title": "New Order: Didelphimorphia -- Third Mammalian Order",
+      "description": "Didelphimorphia enters as the engine's third mammalian order (after Rodentia and Carnivora). A completely separate lineage from all previous mammalian entries. Contains one family (Didelphidae) with ~19 genera and 110+ species, all in the Western Hemisphere. Ancient -- survived the K-Pg extinction.",
+      "connections": ["first-marsupial", "new-family-didelphidae", "mammalian-era-extends"]
+    },
+    {
+      "id": "new-family-didelphidae",
+      "type": "pattern",
+      "title": "New Family: Didelphidae -- 32nd Family, Fourth New Family in Four Degrees",
+      "description": "Didelphidae is the 32nd family in the engine. NEW FAMILY. Fourth new family in four consecutive degrees: Mephitidae (69), Procyonidae (70), Canidae (71), Didelphidae (72). Four new families in four degrees -- unprecedented taxonomic expansion. The engine's first non-placental mammalian family.",
+      "connections": ["first-marsupial", "new-order-didelphimorphia", "mammalian-era-extends"]
+    },
+    {
+      "id": "hiss-click-acoustic",
+      "type": "concept",
+      "title": "Low Hiss / Click When Threatened -- 73rd Acoustic Element",
+      "description": "Defensive-only vocalizations: low hiss (sustained breathy threat, mouth agape, 50 teeth displayed) and click (sharp dental percussion). E=2. The first marsupial sound. The first purely defensive mammalian vocalization. The sound of an ancient lineage under threat. Quiet, secretive -- heard only when cornered.",
+      "connections": ["first-marsupial", "thanatosis-defense", "nocturnal-secretive"]
+    },
+    {
+      "id": "thanatosis-defense",
+      "type": "concept",
+      "title": "Thanatosis (Playing Dead) -- First Involuntary Defense Behavior",
+      "description": "The opossum's most famous behavior. An involuntary catatonic state triggered by extreme fear -- not an act but a physiological response. Falls limp, tongue lolls, may release foul-smelling fluid. Can last minutes to hours. The first defensive behavior of this type in the engine. Complements the hiss/click: vocalize first, play dead last.",
+      "connections": ["hiss-click-acoustic", "first-marsupial", "skunk-connection"]
+    },
+    {
+      "id": "introduced-species",
+      "type": "concept",
+      "title": "First Introduced Mammal in the PNW Engine",
+      "description": "The Virginia Opossum is native to eastern North America, introduced to Washington State in the 1920s-1930s. Established self-sustaining populations throughout western Washington lowlands. The engine's first introduced mammal. Non-native but not typically classified as invasive -- fills a scavenger niche with limited ecological disruption.",
+      "connections": ["first-marsupial", "nocturnal-secretive", "woodland-edge"]
+    },
+    {
+      "id": "fifty-teeth",
+      "type": "concept",
+      "title": "50 Teeth -- Most of Any North American Land Mammal",
+      "description": "50 teeth: the highest tooth count of any North American land mammal. Primitive dental formula reflecting the opossum's ancient lineage. The 50-tooth gape is the centerpiece of the defensive display -- mouth opened as wide as possible, all teeth exposed. Generalized teeth (not specialized), reflecting the omnivorous scavenger diet.",
+      "connections": ["first-marsupial", "hiss-click-acoustic"]
+    },
+    {
+      "id": "prehensile-tail",
+      "type": "concept",
+      "title": "Prehensile Tail -- The Only PNW Mammal with a Grasping Tail",
+      "description": "The only PNW mammal with a prehensile tail -- capable of gripping branches for balance and carrying nesting material. Long (250-535 mm), scaly, nearly hairless. A marsupial adaptation not found in any placental mammal in the PNW. Functional but not strong enough to support adult body weight for sustained hanging.",
+      "connections": ["first-marsupial", "introduced-species"]
+    },
+    {
+      "id": "nocturnal-secretive",
+      "type": "concept",
+      "title": "Nocturnal and Secretive -- E=2, Rarely Seen Despite Being Common",
+      "description": "E=2 reflects the opossum's secretive nature. Common throughout western Washington lowlands but rarely seen because: (1) strictly nocturnal, (2) solitary, (3) slow and quiet, (4) avoids confrontation. Most commonly encountered as roadkill. The quietest mammal in the engine's recent run.",
+      "connections": ["hiss-click-acoustic", "woodland-edge", "introduced-species"]
+    },
+    {
+      "id": "woodland-edge",
+      "type": "concept",
+      "title": "Woodland Edge -- Shared Habitat with Skunk (69) and Weasel (67)",
+      "description": "Woodland edge habitat shared with Striped Skunk (69) and Short-tailed Weasel (67). Forest margins, brushy areas, riparian corridors, suburban yards. The third woodland-edge specialist in six degrees. The opossum uses this transitional habitat for denning (brush piles, hollow logs, building foundations) and foraging.",
+      "connections": ["nocturnal-secretive", "skunk-connection", "tick-consumption"]
+    },
+    {
+      "id": "tick-consumption",
+      "type": "concept",
+      "title": "Tick Consumption -- Thousands of Ticks Per Season",
+      "description": "Opossums consume an estimated 5,000+ ticks per season through grooming. Their meticulous self-grooming behavior removes and consumes ticks that attach during foraging. This provides significant ecosystem service -- reducing tick populations and potentially lowering Lyme disease transmission. The first explicit ecosystem service through parasite consumption in the engine.",
+      "connections": ["woodland-edge", "introduced-species", "first-marsupial"]
+    },
+    {
+      "id": "briana-marela-parallel",
+      "type": "pattern",
+      "title": "The Briana Marela Parallel",
+      "description": "Both unexpected in their context -- Marela's art pop is unexpected in the folk-dominated engine, the opossum is an unexpected marsupial in a placental-mammal region. Both layer -- Marela loops vocals into complex textures, the opossum layers defensive strategies (hiss, click, play dead, flee). Both quiet (E=3 meets E=2). Both from elsewhere finding home in the PNW.",
+      "connections": ["hiss-click-acoustic", "first-marsupial", "introduced-species"]
+    },
+    {
+      "id": "skunk-connection",
+      "type": "pattern",
+      "title": "Striped Skunk Connection (SPS-069)",
+      "description": "Both nocturnal defensive specialists sharing woodland edge habitat. Different defense strategies: chemical spray (skunk) vs. playing dead (opossum). Both hiss. Both slow-moving. Both omnivorous scavengers. Both have defensive behaviors that are more famous than the animals themselves. Spray vs. thanatosis -- the engine's two most iconic defensive strategies.",
+      "connections": ["thanatosis-defense", "woodland-edge", "hiss-click-acoustic"]
+    },
+    {
+      "id": "mammalian-era-extends",
+      "type": "pattern",
+      "title": "Twelfth Mammalian Entry -- The Mammalian Era at Twelve Degrees",
+      "description": "Twelve mammalian entries across twelve consecutive degrees (61-72). Ten mammalian species. THREE orders (Rodentia, Carnivora, Didelphimorphia). SIX families. TWO infraclasses (Placentalia, Marsupialia). Mammalian representation rises to 16.4% (12 of 73 entries). EXTREME imbalance continues, but the opossum's marsupial status adds genuine taxonomic depth.",
+      "connections": ["first-marsupial", "new-order-didelphimorphia", "new-family-didelphidae"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-069",
+      "species": "Striped Skunk",
+      "relationship": "BOTH NOCTURNAL DEFENSIVE SPECIALISTS. Both woodland edge. Both hiss. Both slow-moving omnivorous scavengers. Different defense icons: chemical spray (skunk) vs. playing dead (opossum). The engine's two most famous defensive behaviors in four degrees."
+    },
+    {
+      "target": "SPS-070",
+      "species": "Raccoon",
+      "relationship": "BOTH NOCTURNAL OMNIVORES. Both urban-adapted. Both introduced or range-expanded. Similar ecological niche but vastly different evolutionary lineages -- placental (raccoon) vs. marsupial (opossum). The raccoon is dexterous and intelligent; the opossum is ancient and defensive."
+    },
+    {
+      "target": "SPS-071",
+      "species": "Red Fox",
+      "relationship": "PREDATOR-PREY RELATIONSHIP. Foxes prey on opossums. The fox (71) is a canid predator; the opossum (72) is a marsupial prey species. Consecutive degrees, predator then prey. The fox hunts; the opossum plays dead."
+    },
+    {
+      "target": "SPS-061",
+      "species": "American Beaver",
+      "relationship": "BOTH RANGE-EXPANDED IN THE PNW. Both have expanded their PNW presence (beaver naturally, opossum through introduction). Both common, both nocturnal, both resident. Different mechanisms of range change."
+    },
+    {
+      "target": "SPS-059",
+      "species": "Mallard",
+      "relationship": "NATIVE VS. INTRODUCED CONTRAST. The Mallard is native and ubiquitous (E=4). The Opossum is introduced and secretive (E=2). Both common but with opposite visibility profiles and opposite origin stories in the PNW."
+    },
+    {
+      "target": "MAM",
+      "species": "Mammals of the Pacific Northwest",
+      "relationship": "Twelfth mammalian entry. Tenth mammalian species. FIRST MARSUPIAL. Third order (Didelphimorphia). Sixth family (Didelphidae). Second infraclass (Marsupialia). Mammalian representation rises to 16.4% (12 of 73 entries)."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Woodland edge habitat. Introduced species established since 1920s-1930s. Tick consumption ecosystem service. Nocturnal scavenger ecology. The engine's first marsupial adds a fundamentally different evolutionary lineage to the PNW ecological portrait."
+    }
+  ]
+}
