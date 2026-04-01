@@ -1,24 +1,72 @@
 {
-  "updated": "2026-04-01T08:00:00Z",
-  "source": "sweep-v1.0.25",
+  "updated": "2026-04-01T14:00:00Z",
+  "source": "sweep-v1.1.7",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown — T-14h — CME pulse subsided, Kp back to 1.33, gusty overcast, all systems GO",
+    "status": "Launch countdown \u2014 T-8h \u2014 7am sweep, 7.0\u00b0C Calm, SCT080",
     "go_probability": 82
   },
   "weather": {
-    "kpae": {"temp_c": 8.9, "dewpoint_c": 5.0, "wind_dir": 200, "wind_kmh": 27.8, "gust_kmh": 33.3, "humidity": 75, "pressure_hpa": 1004.8, "visibility_m": 16093, "conditions": "BKN024 OVC033", "spread_c": 3.9, "max_today": 13.9, "min_today": 7.2, "pres_tend": -0.7},
-    "ksea": {"temp_c": 8.3, "dewpoint_c": 5.6, "wind_dir": 210, "wind_kmh": 7.4, "humidity": 82, "pressure_hpa": 1004.8, "conditions": "BKN065 OVC090", "max_today": 14.4, "min_today": 7.2},
-    "kxmr": {"temp_c": 20.1, "dewpoint_c": 16.9, "wind_dir": 140, "wind_kmh": 9.3, "humidity": 82, "pressure_hpa": 1020.3, "conditions": "CLR"}
+    "kpae": {
+      "temp_c": 7.0,
+      "dewpoint_c": 5.0,
+      "wind_dir": 200,
+      "wind_kmh": 27.8,
+      "gust_kmh": 33.3,
+      "humidity": 68,
+      "pressure_hpa": 1002.3,
+      "visibility_m": 16093,
+      "conditions": "SCT080",
+      "spread_c": 3.9,
+      "max_today": 13.9,
+      "min_today": 7.2,
+      "pres_tend": -0.7
+    },
+    "ksea": {
+      "temp_c": 8.3,
+      "dewpoint_c": 5.6,
+      "wind_dir": 210,
+      "wind_kmh": 7.4,
+      "humidity": 82,
+      "pressure_hpa": 1004.8,
+      "conditions": "BKN065 OVC090",
+      "max_today": 14.4,
+      "min_today": 7.2
+    },
+    "kxmr": {
+      "temp_c": 21.0,
+      "dewpoint_c": 16.9,
+      "wind_dir": 140,
+      "wind_kmh": 9.3,
+      "humidity": 82,
+      "pressure_hpa": 1020.3,
+      "conditions": "CLR"
+    }
   },
   "tides_everett": [
-    {"time": "04:51", "height_m": 3.37, "type": "high"},
-    {"time": "10:59", "height_m": 0.77, "type": "low"},
-    {"time": "17:04", "height_m": 3.01, "type": "high"},
-    {"time": "22:57", "height_m": 0.72, "type": "low"}
+    {
+      "time": "04:51",
+      "height_m": 3.37,
+      "type": "high"
+    },
+    {
+      "time": "10:59",
+      "height_m": 0.77,
+      "type": "low"
+    },
+    {
+      "time": "17:04",
+      "height_m": 3.01,
+      "type": "high"
+    },
+    {
+      "time": "22:57",
+      "height_m": 0.72,
+      "type": "low"
+    }
   ],
   "river": {
     "site": "Snohomish River near Monroe",
@@ -27,15 +75,15 @@
     "timestamp": "2026-04-01T00:15:00-07:00"
   },
   "space_weather": {
-    "kp_index": 1.33,
+    "kp_index": 2.0,
     "kp_forecast_apr1": 3.33,
     "g_scale": "G0",
     "g_watch_apr1": "G2 Moderate",
     "g_watch_apr2": "G1 Minor",
-    "solar_wind_speed_kms": 372,
+    "solar_wind_speed_kms": 405,
     "bt_nT": 5.7,
     "bz_gsm_nT": -0.3,
-    "aurora_risk": "low — CME pulse from X1.5 flare has subsided. Kp dropped 3.00→1.33. Bz near neutral (-0.3). Solar wind slowing (372 km/s). G2 watch still holds for later today but conditions improving.",
+    "aurora_risk": "low \u2014 CME pulse from X1.5 flare has subsided. Kp dropped 3.00\u21921.33. Bz near neutral (-0.3). Solar wind slowing (372 km/s). G2 watch still holds for later today but conditions improving.",
     "cme_source": "X1.5 flare March 30, AR4405, ~1845 km/s",
     "r_scale_minor_prob": 55,
     "r_scale_major_prob": 20,
@@ -45,25 +93,71 @@
     "sample_count": 20,
     "leaders": {
       "temp_accuracy": "KSEA best at 1am (0.6C error). Open-Meteo 2.5C miss. KSEA perfect match at 11pm (10.6=10.6). Overall: KSEA converging with KPAE overnight.",
-      "wind_accuracy": "Both models missed gusty winds at 1am — KPAE 27.8 km/h gusting 33.3, Open-Meteo predicted 13.0, KSEA only 7.4.",
-      "overall": "20 samples. Overnight cooling 11.1→8.9C. FIRST RAIN at midnight (-RA). Low ceiling BKN024 OVC033. Gusty S 200@15G18kt. Spread collapsed 11.7→3.9C (moistening). Pressure 1004.8 still falling. KSC 20.1C clear, GO."
+      "wind_accuracy": "Both models missed gusty winds at 1am \u2014 KPAE 27.8 km/h gusting 33.3, Open-Meteo predicted 13.0, KSEA only 7.4.",
+      "overall": "20 samples. Overnight cooling 11.1\u21928.9C. FIRST RAIN at midnight (-RA). Low ceiling BKN024 OVC033. Gusty S 200@15G18kt. Spread collapsed 11.7\u21923.9C (moistening). Pressure 1004.8 still falling. KSC 20.1C clear, GO."
     }
   },
   "telemetry": null,
   "announcements": [
-    {"time": "2026-04-01T08:00:00Z", "text": "v1.0.25: T-14h 1am LIVE. KPAE 8.9C gusty S 200@15G18kt, BKN024 OVC033. Rain stopped but low ceiling. Kp back to 1.33 — CME pulse over, good for launch. Spread collapsed to 3.9C. Beth's Cafe deep dive published."},
-    {"time": "2026-04-01T07:00:00Z", "text": "v1.0.24: T-15h midnight. FIRST RAIN! -RA at KPAE. 9.4C, BKN040 OVC065. Dewpoint surging (4.4C). Wind SSE 150@11kt. KSEA wind shift W 240@10kt."},
-    {"time": "2026-04-01T06:00:00Z", "text": "v1.0.23: T-16h 11pm. KPAE cooling 10.6C, S 180@13kt gusting, OVC080. Kp dropping 3.00→1.33 — CME pulse subsiding. KSEA perfect temp match (10.6=10.6)."},
-    {"time": "2026-04-01T05:00:00Z", "text": "v1.0.22: T-17h 10pm. KPAE holding 11.1C, wind picking up 170@10kt, overcast 6500ft. KSC 21.6C clear."},
-    {"time": "2026-04-01T04:00:00Z", "text": "v1.0.21: T-18h 9pm. KPAE 11.1C, clouds building SCT070. Kp still at 3.00. KSC 21.8C clear."},
-    {"time": "2026-04-01T03:15:00Z", "text": "v1.0.20: T-19h 8pm. CME EFFECTS BEGINNING — Kp surged 1.33→3.00, solar wind 406 km/s, Bz -2.6 nT southward. G2 watch holds for launch day. KPAE cooling 11.1C, CLR, S 170@8kt, pressure 1005.5 still falling."},
-    {"time": "2026-04-01T01:00:00Z", "text": "v1.0.18: T-21h 6pm. KPAE 13.3C again — S wind shift 190@10kt. Pressure still falling (1006.5). FEW clouds. KSC cooling 22C. OPEN expanded to 16 problems with 4 new AI research cards."},
-    {"time": "2026-04-01T00:15:00Z", "text": "SPACE WEATHER ALERT: X1.5 flare from AR4405 launched CME at ~1845 km/s. G2 Moderate watch for Apr 1 (LAUNCH DAY). Solar wind 387 km/s, Bz=-1. Kp forecast rising to 3.3. Crew radiation exposure being monitored."},
-    {"time": "2026-04-01T00:00:00Z", "text": "v1.0.17: T-22h 5pm LIVE. KPAE cooling 12.2C from 13.3C peak. VRB light winds. Pressure dropping (1007.2, tend -2.4). NWS missed 5pm temp by 4.4C. KSC 24.5C clear, GO."},
-    {"time": "2026-03-31T23:00:00Z", "text": "v1.0.16: T-23h 4pm. KPAE holding 13.3C peak. SW wind shift 230@8kt. Pressure 1007.9. KSC 24.5C clear."},
-    {"time": "2026-03-31T22:00:00Z", "text": "v1.0.15: T-24h 3pm. KPAE warming to 13.3C afternoon peak. Kp up to 1.33. KSC 25.1C clear."},
-    {"time": "2026-03-31T21:00:00Z", "text": "v1.0.14: T-25h 2pm. Peak 11.1C holding. Kp 0.67 very quiet. Pressure dropping. Radio guide expanded."},
-    {"time": "2026-03-31T20:00:00Z", "text": "v1.0.13: T-26h 1pm. 11.1C peak. Variable wind. Kp dropped to 0.67."},
-    {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"}
+    {
+      "time": "2026-04-01T14:00:00Z",
+      "text": "v1.1.7: T-8h 7am. KPAE 7.0\u00b0C Calm, SCT080. KSC 21.0\u00b0C."
+    },
+    {
+      "time": "2026-04-01T08:00:00Z",
+      "text": "v1.0.25: T-14h 1am LIVE. KPAE 8.9C gusty S 200@15G18kt, BKN024 OVC033. Rain stopped but low ceiling. Kp back to 1.33 \u2014 CME pulse over, good for launch. Spread collapsed to 3.9C. Beth's Cafe deep dive published."
+    },
+    {
+      "time": "2026-04-01T07:00:00Z",
+      "text": "v1.0.24: T-15h midnight. FIRST RAIN! -RA at KPAE. 9.4C, BKN040 OVC065. Dewpoint surging (4.4C). Wind SSE 150@11kt. KSEA wind shift W 240@10kt."
+    },
+    {
+      "time": "2026-04-01T06:00:00Z",
+      "text": "v1.0.23: T-16h 11pm. KPAE cooling 10.6C, S 180@13kt gusting, OVC080. Kp dropping 3.00\u21921.33 \u2014 CME pulse subsiding. KSEA perfect temp match (10.6=10.6)."
+    },
+    {
+      "time": "2026-04-01T05:00:00Z",
+      "text": "v1.0.22: T-17h 10pm. KPAE holding 11.1C, wind picking up 170@10kt, overcast 6500ft. KSC 21.6C clear."
+    },
+    {
+      "time": "2026-04-01T04:00:00Z",
+      "text": "v1.0.21: T-18h 9pm. KPAE 11.1C, clouds building SCT070. Kp still at 3.00. KSC 21.8C clear."
+    },
+    {
+      "time": "2026-04-01T03:15:00Z",
+      "text": "v1.0.20: T-19h 8pm. CME EFFECTS BEGINNING \u2014 Kp surged 1.33\u21923.00, solar wind 406 km/s, Bz -2.6 nT southward. G2 watch holds for launch day. KPAE cooling 11.1C, CLR, S 170@8kt, pressure 1005.5 still falling."
+    },
+    {
+      "time": "2026-04-01T01:00:00Z",
+      "text": "v1.0.18: T-21h 6pm. KPAE 13.3C again \u2014 S wind shift 190@10kt. Pressure still falling (1006.5). FEW clouds. KSC cooling 22C. OPEN expanded to 16 problems with 4 new AI research cards."
+    },
+    {
+      "time": "2026-04-01T00:15:00Z",
+      "text": "SPACE WEATHER ALERT: X1.5 flare from AR4405 launched CME at ~1845 km/s. G2 Moderate watch for Apr 1 (LAUNCH DAY). Solar wind 387 km/s, Bz=-1. Kp forecast rising to 3.3. Crew radiation exposure being monitored."
+    },
+    {
+      "time": "2026-04-01T00:00:00Z",
+      "text": "v1.0.17: T-22h 5pm LIVE. KPAE cooling 12.2C from 13.3C peak. VRB light winds. Pressure dropping (1007.2, tend -2.4). NWS missed 5pm temp by 4.4C. KSC 24.5C clear, GO."
+    },
+    {
+      "time": "2026-03-31T23:00:00Z",
+      "text": "v1.0.16: T-23h 4pm. KPAE holding 13.3C peak. SW wind shift 230@8kt. Pressure 1007.9. KSC 24.5C clear."
+    },
+    {
+      "time": "2026-03-31T22:00:00Z",
+      "text": "v1.0.15: T-24h 3pm. KPAE warming to 13.3C afternoon peak. Kp up to 1.33. KSC 25.1C clear."
+    },
+    {
+      "time": "2026-03-31T21:00:00Z",
+      "text": "v1.0.14: T-25h 2pm. Peak 11.1C holding. Kp 0.67 very quiet. Pressure dropping. Radio guide expanded."
+    },
+    {
+      "time": "2026-03-31T20:00:00Z",
+      "text": "v1.0.13: T-26h 1pm. 11.1C peak. Variable wind. Kp dropped to 0.67."
+    },
+    {
+      "time": "2026-03-30T22:13:00Z",
+      "text": "Launch countdown begins at KSC"
+    }
   ]
 }
