@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill System Optimization — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        OOPS — Ecosystem Alignment &amp; Architecture Analysis<br>
+        PNW Research Series · <a href="../index.html">Back to OOPS Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="skill-system-optimization">Skill System Optimization</h1>
+    <p>Deep analysis of gsd-skill-creator’s skill ecosystem: complete
+    inventory, description compliance, trigger analysis, token cost
+    modeling, overlap detection, format audit against the agentskills.io
+    specification, new skill assessment, lifecycle management, and
+    optimization recommendations.</p>
+    <h2 id="complete-skill-inventory">1. Complete Skill Inventory</h2>
+    <h3 id="directory-census">1.1 Directory Census</h3>
+    <p>41 directories exist under <code>.claude/skills/</code>. 39
+    contain a <code>SKILL.md</code> file. 1 directory
+    (<code>test-skill</code>) contains only a <code>tests.json</code>
+    file with no SKILL.md – it appears to be a test fixture, not a real
+    skill. The effective skill count is <strong>39 active
+    skills</strong>, up from 33 at the start of this research session. 6
+    new skills were created during this session as part of the OOPS
+    research effort itself.</p>
+    <h3 id="complete-inventory-table">1.2 Complete Inventory Table</h3>
+    <p>The following table lists every skill with all measurable fields.
+    Description length is the character count of the
+    <code>description</code> frontmatter field. Line count and word
+    count are for the full SKILL.md file. Category is assigned by
+    functional analysis. Trigger type indicates the activation
+    mechanism. Token estimate uses a 1.5x multiplier on word count for
+    code-heavy technical content.</p>
+    <table>
+    <colgroup>
+    <col style="width: 2%" />
+    <col style="width: 6%" />
+    <col style="width: 9%" />
+    <col style="width: 6%" />
+    <col style="width: 6%" />
+    <col style="width: 11%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    <col style="width: 14%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>#</th>
+    <th>Skill</th>
+    <th>Desc Chars</th>
+    <th>Lines</th>
+    <th>Words</th>
+    <th>Est. Tokens</th>
+    <th>Category</th>
+    <th>Has Version</th>
+    <th>User-Invocable</th>
+    <th>Ref Files</th>
+    <th>Trigger Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>api-design</td>
+    <td>102</td>
+    <td>53</td>
+    <td>254</td>
+    <td>~381</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>beads-state</td>
+    <td>205</td>
+    <td>219</td>
+    <td>1,086</td>
+    <td>~1,630</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>beautiful-commits</td>
+    <td>127</td>
+    <td>51</td>
+    <td>208</td>
+    <td>~312</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>code-review</td>
+    <td>98</td>
+    <td>42</td>
+    <td>158</td>
+    <td>~237</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>context-handoff</td>
+    <td>121</td>
+    <td>54</td>
+    <td>184</td>
+    <td>~276</td>
+    <td>Cross-Cutting</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>6</td>
+    <td>data-fidelity</td>
+    <td>160</td>
+    <td>53</td>
+    <td>267</td>
+    <td>~401</td>
+    <td>Research Ops</td>
+    <td>Yes (1.0.0)</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>7</td>
+    <td>decision-framework</td>
+    <td>114</td>
+    <td>32</td>
+    <td>187</td>
+    <td>~280</td>
+    <td>Cross-Cutting</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>8</td>
+    <td>done-retirement</td>
+    <td>187</td>
+    <td>377</td>
+    <td>2,267</td>
+    <td>~3,400</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>9</td>
+    <td>ecosystem-alignment</td>
+    <td>155</td>
+    <td>61</td>
+    <td>280</td>
+    <td>~420</td>
+    <td>Research Ops</td>
+    <td>Yes (1.0.0)</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>10</td>
+    <td>env-setup</td>
+    <td>128</td>
+    <td>43</td>
+    <td>199</td>
+    <td>~299</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>11</td>
+    <td>file-operation-patterns</td>
+    <td>101</td>
+    <td>36</td>
+    <td>137</td>
+    <td>~205</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>12</td>
+    <td>fleet-mission</td>
+    <td>153</td>
+    <td>60</td>
+    <td>336</td>
+    <td>~504</td>
+    <td>Research Ops</td>
+    <td>Yes (1.0.0)</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>13</td>
+    <td>git-commit</td>
+    <td>192</td>
+    <td>106</td>
+    <td>411</td>
+    <td>~617</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>14</td>
+    <td>gsd-explain</td>
+    <td>202</td>
+    <td>274</td>
+    <td>1,214</td>
+    <td>~1,820</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>15</td>
+    <td>gsd-onboard</td>
+    <td>87</td>
+    <td>52</td>
+    <td>205</td>
+    <td>~308</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>16</td>
+    <td>gsd-preflight</td>
+    <td>122</td>
+    <td>37</td>
+    <td>194</td>
+    <td>~291</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>17</td>
+    <td>gsd-trace</td>
+    <td>145</td>
+    <td>40</td>
+    <td>210</td>
+    <td>~315</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>18</td>
+    <td>gsd-workflow</td>
+    <td>187</td>
+    <td>184</td>
+    <td>1,072</td>
+    <td>~1,610</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>3</td>
+    <td>Context</td>
+    </tr>
+    <tr>
+    <td>19</td>
+    <td>gupp-propulsion</td>
+    <td>174</td>
+    <td>263</td>
+    <td>1,961</td>
+    <td>~2,940</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>2</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>20</td>
+    <td>hook-persistence</td>
+    <td>186</td>
+    <td>295</td>
+    <td>1,461</td>
+    <td>~2,190</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>21</td>
+    <td>image-to-mission</td>
+    <td>170</td>
+    <td>105</td>
+    <td>594</td>
+    <td>~891</td>
+    <td>Cross-Cutting</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword + Context</td>
+    </tr>
+    <tr>
+    <td>22</td>
+    <td>issue-triage-pr-review</td>
+    <td>161</td>
+    <td>137</td>
+    <td>836</td>
+    <td>~1,254</td>
+    <td>Research Ops</td>
+    <td>Yes (1.0.0)</td>
+    <td>Yes</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>23</td>
+    <td>mail-async</td>
+    <td>168</td>
+    <td>219</td>
+    <td>1,084</td>
+    <td>~1,630</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>24</td>
+    <td>mayor-coordinator</td>
+    <td>181</td>
+    <td>250</td>
+    <td>1,249</td>
+    <td>~1,870</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>3</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>25</td>
+    <td>nudge-sync</td>
+    <td>173</td>
+    <td>254</td>
+    <td>1,172</td>
+    <td>~1,760</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>26</td>
+    <td>polecat-worker</td>
+    <td>212</td>
+    <td>266</td>
+    <td>1,253</td>
+    <td>~1,880</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>3</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>27</td>
+    <td>publish-pipeline</td>
+    <td>153</td>
+    <td>58</td>
+    <td>212</td>
+    <td>~318</td>
+    <td>Research Ops</td>
+    <td>Yes (1.0.0)</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>28</td>
+    <td>refinery-merge</td>
+    <td>182</td>
+    <td>273</td>
+    <td>1,251</td>
+    <td>~1,880</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>2</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>29</td>
+    <td>research-engine</td>
+    <td>153</td>
+    <td>62</td>
+    <td>279</td>
+    <td>~419</td>
+    <td>Research Ops</td>
+    <td>Yes (1.0.0)</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>30</td>
+    <td>runtime-hal</td>
+    <td>215</td>
+    <td>250</td>
+    <td>1,822</td>
+    <td>~2,730</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>31</td>
+    <td>sc-dev-team</td>
+    <td>223</td>
+    <td>72</td>
+    <td>386</td>
+    <td>~579</td>
+    <td>Team Orchestration</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>32</td>
+    <td>security-hygiene</td>
+    <td>186</td>
+    <td>34</td>
+    <td>327</td>
+    <td>~491</td>
+    <td>Cross-Cutting</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>0</td>
+    <td>Context</td>
+    </tr>
+    <tr>
+    <td>33</td>
+    <td>session-awareness</td>
+    <td>168</td>
+    <td>65</td>
+    <td>326</td>
+    <td>~489</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>0</td>
+    <td>Context</td>
+    </tr>
+    <tr>
+    <td>34</td>
+    <td>skill-integration</td>
+    <td>190</td>
+    <td>104</td>
+    <td>698</td>
+    <td>~1,047</td>
+    <td>GSD Workflow</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>3</td>
+    <td>Context</td>
+    </tr>
+    <tr>
+    <td>35</td>
+    <td>sling-dispatch</td>
+    <td>236</td>
+    <td>494</td>
+    <td>2,305</td>
+    <td>~3,460</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>1</td>
+    <td>Domain</td>
+    </tr>
+    <tr>
+    <td>36</td>
+    <td>test-generator</td>
+    <td>98</td>
+    <td>46</td>
+    <td>183</td>
+    <td>~275</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>37</td>
+    <td>typescript-patterns</td>
+    <td>114</td>
+    <td>53</td>
+    <td>216</td>
+    <td>~324</td>
+    <td>Dev Practices</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Keyword</td>
+    </tr>
+    <tr>
+    <td>38</td>
+    <td>uc-lab</td>
+    <td>247</td>
+    <td>81</td>
+    <td>423</td>
+    <td>~635</td>
+    <td>Team Orchestration</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Context</td>
+    </tr>
+    <tr>
+    <td>39</td>
+    <td>uc-observatory</td>
+    <td>226</td>
+    <td>84</td>
+    <td>379</td>
+    <td>~569</td>
+    <td>Team Orchestration</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+    <td>Context</td>
+    </tr>
+    <tr>
+    <td>40</td>
+    <td>witness-observer</td>
+    <td>206</td>
+    <td>225</td>
+    <td>1,082</td>
+    <td>~1,620</td>
+    <td>Gastown</td>
+    <td>No</td>
+    <td>No</td>
+    <td>2</td>
+    <td>Domain</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Note:</strong> <code>test-skill</code> (directory 41) is
+    excluded – it contains no SKILL.md.</p>
+    <h3 id="category-taxonomy">1.3 Category Taxonomy</h3>
+    <p>Skills fall into seven functional categories based on their
+    purpose and activation patterns.</p>
+    <p><strong>GSD Workflow (7 skills)</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 30%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>gsd-workflow</td>
+    <td>1,072</td>
+    <td>Core routing, phase execution, lifecycle management</td>
+    </tr>
+    <tr>
+    <td>session-awareness</td>
+    <td>326</td>
+    <td>Project state awareness, session recovery</td>
+    </tr>
+    <tr>
+    <td>skill-integration</td>
+    <td>698</td>
+    <td>Skill loading, observation, bounded learning</td>
+    </tr>
+    <tr>
+    <td>gsd-explain</td>
+    <td>1,214</td>
+    <td>Command explanation and previews</td>
+    </tr>
+    <tr>
+    <td>gsd-onboard</td>
+    <td>205</td>
+    <td>Tutorial and command reference</td>
+    </tr>
+    <tr>
+    <td>gsd-preflight</td>
+    <td>194</td>
+    <td>Artifact validation before workflows</td>
+    </tr>
+    <tr>
+    <td>gsd-trace</td>
+    <td>210</td>
+    <td>Decision archaeology through GSD artifacts</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Gastown Chipset (12 skills)</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 30%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>runtime-hal</td>
+    <td>1,822</td>
+    <td>Multi-runtime detection and abstraction</td>
+    </tr>
+    <tr>
+    <td>mayor-coordinator</td>
+    <td>1,249</td>
+    <td>Cross-rig coordination, convoy management</td>
+    </tr>
+    <tr>
+    <td>polecat-worker</td>
+    <td>1,253</td>
+    <td>Ephemeral autonomous work execution</td>
+    </tr>
+    <tr>
+    <td>witness-observer</td>
+    <td>1,082</td>
+    <td>Agent health monitoring, stall detection</td>
+    </tr>
+    <tr>
+    <td>sling-dispatch</td>
+    <td>2,305</td>
+    <td>Work item routing and dispatch pipeline</td>
+    </tr>
+    <tr>
+    <td>done-retirement</td>
+    <td>2,267</td>
+    <td>Work completion and retirement pipeline</td>
+    </tr>
+    <tr>
+    <td>refinery-merge</td>
+    <td>1,251</td>
+    <td>Sequential merge queue processing</td>
+    </tr>
+    <tr>
+    <td>beads-state</td>
+    <td>1,086</td>
+    <td>Filesystem state persistence</td>
+    </tr>
+    <tr>
+    <td>hook-persistence</td>
+    <td>1,461</td>
+    <td>Work assignment channel (GUPP hooks)</td>
+    </tr>
+    <tr>
+    <td>mail-async</td>
+    <td>1,084</td>
+    <td>Durable inter-agent messaging</td>
+    </tr>
+    <tr>
+    <td>nudge-sync</td>
+    <td>1,172</td>
+    <td>Synchronous signaling channel</td>
+    </tr>
+    <tr>
+    <td>gupp-propulsion</td>
+    <td>1,961</td>
+    <td>Execution enforcement, anti-passivity</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Team Orchestration (3 skills)</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>uc-lab</td>
+    <td>423</td>
+    <td>Unit Circle mission control team</td>
+    </tr>
+    <tr>
+    <td>uc-observatory</td>
+    <td>379</td>
+    <td>UC performance monitoring and analysis</td>
+    </tr>
+    <tr>
+    <td>sc-dev-team</td>
+    <td>386</td>
+    <td>Dev branch mission control team</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Development Practices (8 skills)</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>beautiful-commits</td>
+    <td>208</td>
+    <td>Professional commit message crafting</td>
+    </tr>
+    <tr>
+    <td>git-commit</td>
+    <td>411</td>
+    <td>Conventional commit generation</td>
+    </tr>
+    <tr>
+    <td>code-review</td>
+    <td>158</td>
+    <td>Code review checklist and severity</td>
+    </tr>
+    <tr>
+    <td>test-generator</td>
+    <td>183</td>
+    <td>Test case generation patterns</td>
+    </tr>
+    <tr>
+    <td>typescript-patterns</td>
+    <td>216</td>
+    <td>TypeScript best practices</td>
+    </tr>
+    <tr>
+    <td>api-design</td>
+    <td>254</td>
+    <td>REST API design rules</td>
+    </tr>
+    <tr>
+    <td>env-setup</td>
+    <td>199</td>
+    <td>Environment configuration and secrets</td>
+    </tr>
+    <tr>
+    <td>file-operation-patterns</td>
+    <td>137</td>
+    <td>Safe file operation patterns</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Research Operations (6 skills) – NEW</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 30%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>research-engine</td>
+    <td>279</td>
+    <td>Autonomous topic-to-document pipeline</td>
+    </tr>
+    <tr>
+    <td>fleet-mission</td>
+    <td>336</td>
+    <td>Parallel agent dispatch and aggregation</td>
+    </tr>
+    <tr>
+    <td>publish-pipeline</td>
+    <td>212</td>
+    <td>Markdown to HTML/PDF build and FTP deploy</td>
+    </tr>
+    <tr>
+    <td>data-fidelity</td>
+    <td>267</td>
+    <td>Fact-checking and source verification</td>
+    </tr>
+    <tr>
+    <td>ecosystem-alignment</td>
+    <td>280</td>
+    <td>Upstream version and spec compliance audit</td>
+    </tr>
+    <tr>
+    <td>issue-triage-pr-review</td>
+    <td>836</td>
+    <td>Issue triage, bug fixes, adversarial PR review</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Cross-Cutting (4 skills)</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>security-hygiene</td>
+    <td>327</td>
+    <td>Self-modifying system security</td>
+    </tr>
+    <tr>
+    <td>context-handoff</td>
+    <td>184</td>
+    <td>Session continuity documents</td>
+    </tr>
+    <tr>
+    <td>decision-framework</td>
+    <td>187</td>
+    <td>Thinking frameworks for decisions</td>
+    </tr>
+    <tr>
+    <td>image-to-mission</td>
+    <td>594</td>
+    <td>Creative intent extraction from images</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="category-distribution">1.4 Category Distribution</h3>
+    <pre><code>Gastown Chipset:      12 skills  (31%)   17,993 words  (56%)
+GSD Workflow:          7 skills  (18%)    3,919 words  (12%)
+Development Practices: 8 skills  (21%)    1,766 words   (6%)
+Research Operations:   6 skills  (15%)    2,210 words   (7%)
+Cross-Cutting:         4 skills  (10%)    1,292 words   (4%)
+Team Orchestration:    3 skills   (8%)    1,188 words   (4%)
+                      --------           ------
+Total:                40 skills          28,368 words</code></pre>
+    <p>The Gastown chipset still dominates at 56% of total word count,
+    though the addition of the Research Operations category has diluted
+    its proportional share from 69% to 56%. The Research Operations
+    skills are notable for their efficiency: 6 skills at an average of
+    368 words each, compared to Gastown’s average of 1,499 words. This
+    reflects a design lesson learned – the newer skills are leaner,
+    delegating detail to runtime context rather than embedding it in the
+    SKILL.md.</p>
+    <h2 id="description-length-analysis">2. Description Length
+    Analysis</h2>
+    <p>Claude Code enforces a 250-character cap on skill descriptions.
+    This is the string that appears in the skill index and drives
+    activation decisions. Descriptions that exceed the cap may be
+    truncated, reducing activation accuracy.</p>
+    <h3 id="over-limit-descriptions-250-chars">2.1 Over-Limit
+    Descriptions (&gt;250 chars)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 30%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Chars</th>
+    <th>Over By</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>uc-lab</td>
+    <td>247</td>
+    <td>-3 (borderline, within quoted format that may add chars)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>After the gupp-propulsion description was trimmed during this
+    session (from 291 to 174 characters), no skill definitively exceeds
+    the 250-character limit. The uc-lab description at 247 characters is
+    the closest to the boundary. However, the uc-lab and sc-dev-team
+    descriptions use YAML quoted format (double-quoted strings), which
+    may interact with the parser differently than unquoted
+    descriptions.</p>
+    <h3 id="near-limit-descriptions-200-250-chars">2.2 Near-Limit
+    Descriptions (200-250 chars)</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Chars</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>sling-dispatch</td>
+    <td>236</td>
+    </tr>
+    <tr>
+    <td>uc-observatory</td>
+    <td>226</td>
+    </tr>
+    <tr>
+    <td>sc-dev-team</td>
+    <td>223</td>
+    </tr>
+    <tr>
+    <td>runtime-hal</td>
+    <td>215</td>
+    </tr>
+    <tr>
+    <td>polecat-worker</td>
+    <td>212</td>
+    </tr>
+    <tr>
+    <td>witness-observer</td>
+    <td>206</td>
+    </tr>
+    <tr>
+    <td>beads-state</td>
+    <td>205</td>
+    </tr>
+    <tr>
+    <td>gsd-explain</td>
+    <td>202</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Eight skills sit between 200 and 250 characters. These are safe
+    but have minimal room for description expansion.</p>
+    <h3 id="compact-descriptions-120-chars">2.3 Compact Descriptions
+    (&lt;120 chars)</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Chars</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>gsd-onboard</td>
+    <td>87</td>
+    </tr>
+    <tr>
+    <td>code-review</td>
+    <td>98</td>
+    </tr>
+    <tr>
+    <td>test-generator</td>
+    <td>98</td>
+    </tr>
+    <tr>
+    <td>file-operation-patterns</td>
+    <td>101</td>
+    </tr>
+    <tr>
+    <td>api-design</td>
+    <td>102</td>
+    </tr>
+    <tr>
+    <td>typescript-patterns</td>
+    <td>114</td>
+    </tr>
+    <tr>
+    <td>decision-framework</td>
+    <td>114</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>These descriptions are terse. While brevity is generally good,
+    some of these lack activation trigger keywords. For example,
+    <code>code-review</code> says “Reviews code for bugs, style, and
+    best practices” but does not mention “PR”, “pull request”, or “diff”
+    – common user phrases that should trigger this skill.</p>
+    <h2 id="trigger-analysis">3. Trigger Analysis</h2>
+    <h3 id="activation-mechanisms">3.1 Activation Mechanisms</h3>
+    <p>Skills activate based on description keyword matching against
+    user prompts and context. Three activation patterns exist:</p>
+    <ol type="1">
+    <li><strong>Keyword triggers</strong> – “Use when…” or “Activates
+    when…” phrases in the description (25 skills)</li>
+    <li><strong>Context triggers</strong> – File paths, directories, or
+    artifacts that signal relevance (8 skills)</li>
+    <li><strong>Domain triggers</strong> – Specific subsystem activation
+    (7 skills, mostly Gastown)</li>
+    </ol>
+    <h3 id="overlap-detection">3.2 Overlap Detection</h3>
+    <p><strong>Critical Overlap: beautiful-commits vs
+    git-commit</strong></p>
+    <p>These two skills serve nearly identical purposes: -
+    <code>beautiful-commits</code>: “Crafts professional git commit
+    messages following Conventional Commits” - <code>git-commit</code>:
+    “Generates conventional commit messages following Angular
+    format”</p>
+    <p>Both cover the same commit types table, the same format rules,
+    the same anti-patterns. The content is ~80% identical. When a user
+    mentions “commit”, both skills compete for activation. This wastes
+    context budget by loading redundant information.</p>
+    <p><strong>Moderate Overlap: gsd-workflow vs
+    skill-integration</strong></p>
+    <p>Both contain a “Skill Loading Before GSD Phases” section with
+    identical 5-step loading protocol. The skill-integration version
+    expands this with token budget management details, but the core
+    content is duplicated. The gsd-workflow version should reference
+    skill-integration rather than duplicating.</p>
+    <p><strong>Moderate Overlap: gsd-onboard vs gsd-explain</strong></p>
+    <p>Both explain GSD commands. gsd-onboard is a compact reference (52
+    lines), while gsd-explain is a detailed explainer (274 lines). They
+    serve different user experience levels but could confuse the
+    activation system when a user asks “what does this GSD command
+    do?”</p>
+    <p><strong>Moderate Overlap: research-engine vs
+    fleet-mission</strong></p>
+    <p>Both describe parallel agent dispatch patterns. research-engine
+    includes a pipeline that incorporates fleet dispatch as one of its
+    stages. fleet-mission is the generalized version of that dispatch
+    pattern. When a research task is requested, both could activate,
+    providing overlapping context about how to launch parallel agents.
+    The distinction (research-engine is the full pipeline, fleet-mission
+    is the dispatch pattern alone) is clear to a human reader but may
+    not be to the keyword matcher.</p>
+    <p><strong>Low Overlap: uc-lab vs sc-dev-team</strong></p>
+    <p>sc-dev-team explicitly describes itself as “adapted from uc-lab
+    pattern.” The two skills share architecture (same 4-agent team),
+    same autonomy principles, same context management thresholds. The
+    differences are branch target (dev vs v1.50), quality gates, and
+    integration with the observatory. These could potentially be a
+    single parameterized skill.</p>
+    <h3 id="missing-triggers">3.3 Missing Triggers</h3>
+    <p>Several skills lack obvious trigger keywords in their
+    descriptions:</p>
+    <ul>
+    <li><code>decision-framework</code> – does not mention “trade-off”,
+    “pros and cons”, or “compare”</li>
+    <li><code>file-operation-patterns</code> – does not mention “copy”,
+    “move”, “delete”, or “mkdir”</li>
+    <li><code>env-setup</code> – does not mention “dotenv”, “environment
+    variable”, or “API key”</li>
+    <li><code>security-hygiene</code> – does not mention “security
+    review”, “vulnerability”, or “audit”</li>
+    <li><code>data-fidelity</code> – does not mention “accuracy”,
+    “verify”, “validate” (uses “fact-checking” which is good, but misses
+    related terms)</li>
+    <li><code>publish-pipeline</code> – does not mention “deploy”,
+    “release”, or “website” (uses “FTP sync” which is specific)</li>
+    </ul>
+    <h3 id="gastown-cross-activation">3.4 Gastown Cross-Activation</h3>
+    <p>The 12 Gastown skills form a tightly coupled system where
+    activating one often requires knowledge from several others. The
+    <code>## Integration with Other Gastown Skills</code> tables that
+    appear in each skill document this well, but it creates a loading
+    dilemma: activating <code>polecat-worker</code> without
+    <code>hook-persistence</code> and <code>beads-state</code> means the
+    polecat skill lacks the state management context it references.</p>
+    <h2 id="token-cost-analysis">4. Token Cost Analysis</h2>
+    <h3 id="methodology">4.1 Methodology</h3>
+    <p>Word count serves as a proxy for token cost. For English text,
+    the typical ratio is ~1.3 tokens per word. For code-heavy technical
+    content (which these skills contain), the ratio is closer to ~1.5
+    tokens per word due to identifiers, punctuation, and formatting.</p>
+    <h3 id="per-category-token-budget">4.2 Per-Category Token
+    Budget</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Skills</th>
+    <th>Words</th>
+    <th>Est. Tokens</th>
+    <th>% of Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Gastown Chipset</td>
+    <td>12</td>
+    <td>17,993</td>
+    <td>~27,000</td>
+    <td>63%</td>
+    </tr>
+    <tr>
+    <td>GSD Workflow</td>
+    <td>7</td>
+    <td>3,919</td>
+    <td>~5,880</td>
+    <td>14%</td>
+    </tr>
+    <tr>
+    <td>Research Operations</td>
+    <td>6</td>
+    <td>2,210</td>
+    <td>~3,315</td>
+    <td>8%</td>
+    </tr>
+    <tr>
+    <td>Development Practices</td>
+    <td>8</td>
+    <td>1,766</td>
+    <td>~2,650</td>
+    <td>6%</td>
+    </tr>
+    <tr>
+    <td>Cross-Cutting</td>
+    <td>4</td>
+    <td>1,292</td>
+    <td>~1,940</td>
+    <td>5%</td>
+    </tr>
+    <tr>
+    <td>Team Orchestration</td>
+    <td>3</td>
+    <td>1,188</td>
+    <td>~1,780</td>
+    <td>4%</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>40</strong></td>
+    <td><strong>28,368</strong></td>
+    <td><strong>~42,550</strong></td>
+    <td><strong>100%</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="per-skill-token-ranking">4.3 Per-Skill Token Ranking</h3>
+    <p><strong>Heavy skills (&gt;2,000 tokens estimated):</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Est. Tokens</th>
+    <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>sling-dispatch</td>
+    <td>2,305</td>
+    <td>~3,460</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>done-retirement</td>
+    <td>2,267</td>
+    <td>~3,400</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>gupp-propulsion</td>
+    <td>1,961</td>
+    <td>~2,940</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>runtime-hal</td>
+    <td>1,822</td>
+    <td>~2,730</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>hook-persistence</td>
+    <td>1,461</td>
+    <td>~2,190</td>
+    <td>Gastown</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Medium skills (1,000-2,000 tokens):</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Est. Tokens</th>
+    <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>polecat-worker</td>
+    <td>1,253</td>
+    <td>~1,880</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>refinery-merge</td>
+    <td>1,251</td>
+    <td>~1,880</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>mayor-coordinator</td>
+    <td>1,249</td>
+    <td>~1,870</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>gsd-explain</td>
+    <td>1,214</td>
+    <td>~1,820</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>nudge-sync</td>
+    <td>1,172</td>
+    <td>~1,760</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>beads-state</td>
+    <td>1,086</td>
+    <td>~1,630</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>mail-async</td>
+    <td>1,084</td>
+    <td>~1,630</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>witness-observer</td>
+    <td>1,082</td>
+    <td>~1,620</td>
+    <td>Gastown</td>
+    </tr>
+    <tr>
+    <td>gsd-workflow</td>
+    <td>1,072</td>
+    <td>~1,610</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>skill-integration</td>
+    <td>698</td>
+    <td>~1,047</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>issue-triage-pr-review</td>
+    <td>836</td>
+    <td>~1,254</td>
+    <td>Research Ops</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Light skills (&lt;500 tokens estimated):</strong></p>
+    <table>
+    <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Words</th>
+    <th>Est. Tokens</th>
+    <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>file-operation-patterns</td>
+    <td>137</td>
+    <td>~205</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>code-review</td>
+    <td>158</td>
+    <td>~237</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>test-generator</td>
+    <td>183</td>
+    <td>~275</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>context-handoff</td>
+    <td>184</td>
+    <td>~276</td>
+    <td>Cross-Cutting</td>
+    </tr>
+    <tr>
+    <td>decision-framework</td>
+    <td>187</td>
+    <td>~280</td>
+    <td>Cross-Cutting</td>
+    </tr>
+    <tr>
+    <td>gsd-preflight</td>
+    <td>194</td>
+    <td>~291</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>env-setup</td>
+    <td>199</td>
+    <td>~299</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>gsd-onboard</td>
+    <td>205</td>
+    <td>~308</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>beautiful-commits</td>
+    <td>208</td>
+    <td>~312</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>gsd-trace</td>
+    <td>210</td>
+    <td>~315</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>publish-pipeline</td>
+    <td>212</td>
+    <td>~318</td>
+    <td>Research Ops</td>
+    </tr>
+    <tr>
+    <td>typescript-patterns</td>
+    <td>216</td>
+    <td>~324</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>api-design</td>
+    <td>254</td>
+    <td>~381</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>data-fidelity</td>
+    <td>267</td>
+    <td>~401</td>
+    <td>Research Ops</td>
+    </tr>
+    <tr>
+    <td>research-engine</td>
+    <td>279</td>
+    <td>~419</td>
+    <td>Research Ops</td>
+    </tr>
+    <tr>
+    <td>ecosystem-alignment</td>
+    <td>280</td>
+    <td>~420</td>
+    <td>Research Ops</td>
+    </tr>
+    <tr>
+    <td>security-hygiene</td>
+    <td>327</td>
+    <td>~491</td>
+    <td>Cross-Cutting</td>
+    </tr>
+    <tr>
+    <td>fleet-mission</td>
+    <td>336</td>
+    <td>~504</td>
+    <td>Research Ops</td>
+    </tr>
+    <tr>
+    <td>session-awareness</td>
+    <td>326</td>
+    <td>~489</td>
+    <td>GSD</td>
+    </tr>
+    <tr>
+    <td>sc-dev-team</td>
+    <td>386</td>
+    <td>~579</td>
+    <td>Team</td>
+    </tr>
+    <tr>
+    <td>uc-observatory</td>
+    <td>379</td>
+    <td>~569</td>
+    <td>Team</td>
+    </tr>
+    <tr>
+    <td>git-commit</td>
+    <td>411</td>
+    <td>~617</td>
+    <td>Dev Practices</td>
+    </tr>
+    <tr>
+    <td>uc-lab</td>
+    <td>423</td>
+    <td>~635</td>
+    <td>Team</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="aggregate-budget-impact">4.4 Aggregate Budget Impact</h3>
+    <p>Total across all 40 skills: <strong>~42,550 tokens</strong>
+    (28,368 words x 1.5).</p>
+    <p>Additionally, 24 reference files exist across skill
+    subdirectories. These are loaded on demand but represent additional
+    token cost when activated. The Gastown skills share a
+    <code>gastown-origin.md</code> reference pattern – if a Gastown task
+    loads multiple skills, that origin reference would ideally be loaded
+    once and shared.</p>
+    <p>For a 200K context window, loading all skills would consume ~21%
+    of context. This is well above the 2-5% budget guidance stated in
+    skill-integration’s loading protocol. Even a 1M context window would
+    see ~4.3% consumed by full skill load.</p>
+    <h3 id="realistic-activation-scenarios">4.5 Realistic Activation
+    Scenarios</h3>
+    <p><strong>Scenario: User writes code and commits</strong> - Skills
+    loaded: typescript-patterns (216w), beautiful-commits (208w),
+    git-commit (411w) - Total: ~835 words, ~1,250 tokens - Budget: 0.6%
+    of 200K – well within limits</p>
+    <p><strong>Scenario: Gastown multi-agent dispatch</strong> - Skills
+    loaded: mayor-coordinator (1,249w), sling-dispatch (2,305w),
+    polecat-worker (1,253w), hook-persistence (1,461w), beads-state
+    (1,086w), gupp-propulsion (1,961w) - Total: ~9,315 words, ~14,000
+    tokens - Budget: 7% of 200K – over the 5% ceiling</p>
+    <p><strong>Scenario: Full GSD phase execution</strong> - Skills
+    loaded: gsd-workflow (1,072w), session-awareness (326w),
+    skill-integration (698w) - Total: ~2,096 words, ~3,144 tokens -
+    Budget: 1.6% of 200K – comfortable</p>
+    <p><strong>Scenario: Research project launch (NEW)</strong> - Skills
+    loaded: research-engine (279w), fleet-mission (336w),
+    publish-pipeline (212w), data-fidelity (267w) - Total: ~1,094 words,
+    ~1,641 tokens - Budget: 0.8% of 200K – excellent efficiency</p>
+    <p><strong>Scenario: Issue triage and PR review (NEW)</strong> -
+    Skills loaded: issue-triage-pr-review (836w), git-commit (411w),
+    code-review (158w) - Total: ~1,405 words, ~2,108 tokens - Budget:
+    1.1% of 200K – comfortable</p>
+    <p>The Gastown chipset is the only category that risks exceeding the
+    token budget when multiple related skills co-activate. The new
+    Research Operations skills demonstrate the benefit of lean design:
+    an entire research pipeline (4 skills) loads in fewer tokens than a
+    single Gastown dispatch skill.</p>
+    <h2 id="agentskills.io-format-audit">5. agentskills.io Format
+    Audit</h2>
+    <h3 id="the-skills-api-surface">5.1 The Skills API Surface</h3>
+    <p>Analysis of the Claude Code binary (v2.1.88) reveals a structured
+    Skills API accessible under the <code>skills-2025-10-02</code> beta
+    flag. The API provides CRUD operations on skills:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Endpoint</th>
+    <th>Method</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>/v1/skills</code></td>
+    <td>POST</td>
+    <td>Create a new skill</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills</code></td>
+    <td>GET (list)</td>
+    <td>List all skills</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills/{id}</code></td>
+    <td>GET</td>
+    <td>Retrieve a specific skill</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills/{id}</code></td>
+    <td>DELETE</td>
+    <td>Delete a skill</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills/{id}/versions</code></td>
+    <td>POST</td>
+    <td>Create a new version</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills/{id}/versions</code></td>
+    <td>GET (list)</td>
+    <td>List versions</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills/{id}/versions/{vid}</code></td>
+    <td>GET</td>
+    <td>Retrieve specific version</td>
+    </tr>
+    <tr>
+    <td><code>/v1/skills/{id}/versions/{vid}</code></td>
+    <td>DELETE</td>
+    <td>Delete specific version</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>This is a full lifecycle API with versioned skill management. The
+    version endpoints confirm that Anthropic considers skills to be
+    versioned artifacts, not static files.</p>
+    <h3 id="spec-fields-used-vs-not-used">5.2 Spec Fields: Used vs Not
+    Used</h3>
+    <p>Based on the API surface, binary string analysis, and the local
+    SKILL.md format, we can identify fields that the specification
+    likely supports versus what we actually use.</p>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 26%" />
+    <col style="width: 22%" />
+    <col style="width: 24%" />
+    <col style="width: 14%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Field</th>
+    <th>Spec Status</th>
+    <th>Our Usage</th>
+    <th>Count Used</th>
+    <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>name</code></td>
+    <td>Required</td>
+    <td>Universal</td>
+    <td>40/40</td>
+    <td>Matches directory name</td>
+    </tr>
+    <tr>
+    <td><code>description</code></td>
+    <td>Required</td>
+    <td>Universal</td>
+    <td>40/40</td>
+    <td>250-char cap enforced</td>
+    </tr>
+    <tr>
+    <td><code>version</code></td>
+    <td>Supported (API has versioning)</td>
+    <td>Partial</td>
+    <td>6/40</td>
+    <td>Only new skills use it</td>
+    </tr>
+    <tr>
+    <td><code>user-invocable</code></td>
+    <td>Supported</td>
+    <td>Sparse</td>
+    <td>5/40</td>
+    <td>Controls UI surfacing</td>
+    </tr>
+    <tr>
+    <td><code>domain</code></td>
+    <td>Supported</td>
+    <td>Rare</td>
+    <td>1/40</td>
+    <td>Only image-to-mission</td>
+    </tr>
+    <tr>
+    <td><code>context</code></td>
+    <td>Supported</td>
+    <td>Rare</td>
+    <td>1/40</td>
+    <td>Only image-to-mission</td>
+    </tr>
+    <tr>
+    <td><code>activation</code></td>
+    <td>Supported</td>
+    <td>Rare</td>
+    <td>1/40</td>
+    <td>Only image-to-mission</td>
+    </tr>
+    <tr>
+    <td><code>dependencies</code></td>
+    <td>Supported</td>
+    <td>Rare</td>
+    <td>1/40</td>
+    <td>Only image-to-mission</td>
+    </tr>
+    <tr>
+    <td><code>tags</code></td>
+    <td>Likely supported</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Would enable category filtering</td>
+    </tr>
+    <tr>
+    <td><code>priority</code></td>
+    <td>Likely supported</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Would enable budget-aware loading</td>
+    </tr>
+    <tr>
+    <td><code>context_cost</code></td>
+    <td>Not confirmed</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Would enable pre-load budget decisions</td>
+    </tr>
+    <tr>
+    <td><code>triggers</code></td>
+    <td>Not confirmed</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Would separate activation from description</td>
+    </tr>
+    <tr>
+    <td><code>conflicts</code></td>
+    <td>Not confirmed</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Would prevent co-activation</td>
+    </tr>
+    <tr>
+    <td><code>requires</code></td>
+    <td>Not confirmed</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Hard dependencies</td>
+    </tr>
+    <tr>
+    <td><code>format</code></td>
+    <td>Implied by API versioning</td>
+    <td>Not used</td>
+    <td>0/40</td>
+    <td>Would enable migration</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="gap-assessment">5.3 Gap Assessment</h3>
+    <p><strong>Critical gaps:</strong></p>
+    <ol type="1">
+    <li><p><strong>No <code>version</code> on 34 of 40 skills.</strong>
+    The API supports skill versioning (with a full CRUD version
+    lifecycle), yet 85% of our skills have no version field. This means
+    we cannot track when a skill was last updated, detect stale content,
+    or coordinate migrations.</p></li>
+    <li><p><strong>No <code>format</code> field on any skill.</strong>
+    The <code>skills-2025-10-02</code> beta flag in the API strongly
+    suggests the format has a version date. If the spec evolves to
+    <code>skills-2026-XX-XX</code>, we will have no way to identify
+    which skills need migration without reading and manually inspecting
+    all 40.</p></li>
+    <li><p><strong>No <code>triggers</code> field.</strong> The
+    description field serves double duty: explaining the skill to humans
+    AND providing activation keywords to the loader. These are different
+    audiences. A dedicated <code>triggers</code> field would allow the
+    description to be human-readable while triggers are
+    machine-optimized.</p></li>
+    </ol>
+    <p><strong>Moderate gaps:</strong></p>
+    <ol start="4" type="1">
+    <li><p><strong><code>user-invocable</code> inconsistency.</strong>
+    Only 5 of 40 skills declare this field. Several skills that feel
+    user-invocable (gsd-explain, gsd-onboard, gsd-trace,
+    context-handoff, ecosystem-alignment) do not declare it. Without
+    consistent use, the field provides no reliable signal.</p></li>
+    <li><p><strong><code>domain</code> underuse.</strong> Only
+    image-to-mission uses this field. If the loader supports
+    domain-based filtering (only load skills matching the current domain
+    context), we are missing an optimization opportunity.</p></li>
+    <li><p><strong><code>dependencies</code> underuse.</strong> Only
+    image-to-mission declares dependencies. The Gastown chipset has
+    extensive implicit dependencies documented in “Integration with
+    Other Gastown Skills” tables, but none of these are
+    machine-readable.</p></li>
+    </ol>
+    <h3 id="the-image-to-mission-anomaly">5.4 The
+    <code>image-to-mission</code> Anomaly</h3>
+    <p>The <code>image-to-mission</code> skill uses more frontmatter
+    fields than any other skill: <code>name</code>,
+    <code>description</code>, <code>domain</code>, <code>context</code>,
+    <code>activation</code>, <code>dependencies</code>. It appears to
+    have been authored against a fuller understanding of the spec than
+    the other 39 skills. Examining its frontmatter as a reference
+    implementation:</p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> image-to-mission</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Extract creative intent from images into executable build specs...</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">domain</span><span class="kw">:</span><span class="at"> creative</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">context</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">file_patterns</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;*.png&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;*.jpg&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;*.svg&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;*.webp&quot;</span><span class="kw">]</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">project_types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;web&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;desktop&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;creative&quot;</span><span class="kw">]</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">activation</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keywords</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;image&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;i2m&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;visual&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;screenshot&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;mockup&quot;</span><span class="kw">]</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contexts</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;when user shares an image with build intent&quot;</span><span class="kw">]</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">optional</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;publish-pipeline&quot;</span><span class="kw">]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+    <p>This skill demonstrates what a fully-specified skill frontmatter
+    looks like. If all 40 skills were specified to this level, the
+    loader would have much richer signals for activation decisions,
+    conflict detection, and budget management.</p>
+    <h2 id="new-skill-assessment">6. New Skill Assessment</h2>
+    <h3 id="the-six-new-skills">6.1 The Six New Skills</h3>
+    <p>During this research session, 6 skills were created to codify
+    patterns discovered through empirical use. These skills form the
+    Research Operations category. Here is a critical assessment of
+    each.</p>
+    <p><strong>research-engine (279 words, v1.0.0)</strong></p>
+    <p><em>Codifies:</em> The 6-stage research pipeline (decompose,
+    parallel research, aggregate, structure, build, publish) proven
+    across HEL (28 docs, 91K words) and OOPS (9 docs, 20K words).</p>
+    <p><em>Strengths:</em> Clear pipeline stages. Quality standards are
+    explicit (1,500 word minimum, evidence for claims, three output
+    formats). Project code system is documented.</p>
+    <p><em>Weaknesses:</em> Overlaps with fleet-mission on the parallel
+    dispatch stage. Does not specify how to handle research that
+    produces fewer than 4 tracks (the minimum in “4-12 investigation
+    tracks” may be too high for focused research). No failure recovery
+    guidance.</p>
+    <p><em>Token cost:</em> 419 tokens. Lean and efficient.</p>
+    <p><strong>fleet-mission (336 words, v1.0.0)</strong></p>
+    <p><em>Codifies:</em> Parallel agent dispatch proven at 3-7 agent
+    scale across HEL expansion, OOPS fleet, and HEL refinement runs.</p>
+    <p><em>Strengths:</em> Fleet sizing table is actionable. Rules
+    section captures hard-won lessons (5-6 agent max, complete briefs,
+    worktree isolation). Proven scale section provides confidence
+    calibration.</p>
+    <p><em>Weaknesses:</em> Overlaps with mayor-coordinator on
+    coordination and sling-dispatch on dispatch mechanics. The
+    distinction (fleet-mission is for research/document fleets; Gastown
+    is for codebase work) is implicit, not explicit. A user asking to
+    “dispatch agents” could trigger either system.</p>
+    <p><em>Token cost:</em> 504 tokens. Good value for the specificity
+    it provides.</p>
+    <p><strong>publish-pipeline (212 words, v1.0.0)</strong></p>
+    <p><em>Codifies:</em> The pandoc + xelatex build chain and FTP sync
+    to tibsfox.com, proven on 29 HEL documents.</p>
+    <p><em>Strengths:</em> Critical FTP path mapping documented (“web
+    server maps /Research/X/ to FTP root /X/”). Prerequisites are
+    explicit. Build command is copy-pasteable.</p>
+    <p><em>Weaknesses:</em> Highly specific to one deployment target
+    (tibsfox.com). If the project ever deploys elsewhere, this skill
+    would need significant revision. The template setup section assumes
+    templates already exist – no guidance for creating them from
+    scratch.</p>
+    <p><em>Token cost:</em> 318 tokens. Minimal impact.</p>
+    <p><strong>data-fidelity (267 words, v1.0.0)</strong></p>
+    <p><em>Codifies:</em> The fact-checking and data refresh workflow
+    proven during HEL data fidelity passes.</p>
+    <p><em>Strengths:</em> Severity categories (ERROR, QUESTIONABLE,
+    INCONSISTENCY) provide clear triage criteria. Quality standards are
+    specific (statute numbers, current company names, no “recently”).
+    The rebuild step acknowledges downstream artifacts.</p>
+    <p><em>Weaknesses:</em> Phase structure assumes 24+ documents (agent
+    splitting by “docs 01-12, 13-24”). Smaller projects would need
+    different splits. No guidance on what to do when a fact cannot be
+    verified.</p>
+    <p><em>Token cost:</em> 401 tokens. Efficient.</p>
+    <p><strong>ecosystem-alignment (280 words, v1.0.0)</strong></p>
+    <p><em>Codifies:</em> The upstream version checking and spec
+    compliance audit performed at the start of this research
+    session.</p>
+    <p><em>Strengths:</em> Actionable checklist with shell commands.
+    Binary string analysis technique is documented. Feature gap analysis
+    structure (using vs not using vs extending beyond) is clear.</p>
+    <p><em>Weaknesses:</em> The <code>strings $(which claude)</code>
+    technique is fragile – it depends on the binary being unstripped and
+    the installation path being in PATH. The checklist assumes CJS
+    syntax issues (specific to a point-in-time concern). No guidance on
+    what to do when a breaking spec change is detected.</p>
+    <p><em>Token cost:</em> 420 tokens. Appropriate for a checklist
+    skill.</p>
+    <p><strong>issue-triage-pr-review (836 words, v1.0.0)</strong></p>
+    <p><em>Codifies:</em> The full issue triage, bug fix, and
+    adversarial PR review workflow.</p>
+    <p><em>Strengths:</em> By far the most comprehensive new skill. Spam
+    detection with confidence scoring. Prompt injection guards.
+    Test-first bug workflow. Duplicate handling with smoke tests. PR
+    conflict resolution. Communication policy (no hedging language). The
+    <code>user-invocable: true</code> field is correctly set.</p>
+    <p><em>Weaknesses:</em> At 836 words, it is the heaviest Research
+    Operations skill – 2.4x the category average. The 10-parallel-agent
+    spawn for issue triage could overwhelm smaller projects. No priority
+    ordering (all issues processed equally). The adversarial review
+    section could be a separate skill to allow independent
+    activation.</p>
+    <p><em>Token cost:</em> 1,254 tokens. Highest in the Research Ops
+    category but justified by the workflow complexity.</p>
+    <h3 id="collective-assessment">6.2 Collective Assessment</h3>
+    <p>The 6 new skills share several positive design patterns:</p>
+    <ol type="1">
+    <li><strong>Version field present.</strong> All 6 declare
+    <code>version: 1.0.0</code>. This is the right starting point.</li>
+    <li><strong>Lean design.</strong> Average 368 words, compared to
+    Gastown’s 1,499 average. Detail lives in runtime context, not
+    SKILL.md.</li>
+    <li><strong>Empirical grounding.</strong> Every skill cites specific
+    production use (HEL, OOPS, scale numbers). No speculative
+    features.</li>
+    <li><strong>Clear activation.</strong> All use “Activates when…” or
+    “Use when…” phrasing in their descriptions.</li>
+    </ol>
+    <p>Design concerns:</p>
+    <ol type="1">
+    <li><strong>No <code>triggers</code>, <code>domain</code>, or
+    <code>dependencies</code> fields.</strong> The image-to-mission
+    skill demonstrated these work. The new skills should use them.</li>
+    <li><strong>No <code>conflicts</code> awareness.</strong>
+    research-engine and fleet-mission have overlap that should be
+    declared.</li>
+    <li><strong>Specificity risk.</strong> publish-pipeline and
+    data-fidelity encode patterns specific to the HEL/OOPS research
+    workflow. They will need generalization before they serve other
+    project types.</li>
+    </ol>
+    <h2 id="mergesplit-recommendations-with-beforeafter-examples">7.
+    Merge/Split Recommendations with Before/After Examples</h2>
+    <h3 id="merge-beautiful-commits-git-commit-commit-style">7.1 Merge:
+    beautiful-commits + git-commit –&gt; commit-style</h3>
+    <p><strong>Before:</strong> Two skills with ~80% identical
+    content.</p>
+    <pre><code>beautiful-commits/SKILL.md (51 lines, 208 words)
+  Sections: Format, Types Table, Anti-patterns, Message Structure
+
+git-commit/SKILL.md (106 lines, 411 words)
+  Sections: Format, Types Table, Angular Convention, Examples, Scope Rules, Anti-patterns</code></pre>
+    <p><strong>After:</strong> One skill with deduplicated content.</p>
+    <pre><code>commit-style/SKILL.md (~70 lines, ~300 words)
+  Sections: Format, Types Table, Scope Rules, Examples, Anti-patterns
+  (Removes: duplicate format rules, duplicate types table, &quot;Angular Convention&quot;
+   that duplicates the format section)</code></pre>
+    <p><strong>Savings:</strong> ~319 words (~479 tokens). Eliminates
+    activation conflict on “commit”.</p>
+    <h3 id="merge-uc-lab-sc-dev-team-team-control">7.2 Merge: uc-lab +
+    sc-dev-team –&gt; team-control</h3>
+    <p><strong>Before:</strong> Two skills with 90% shared
+    structure.</p>
+    <pre><code>uc-lab/SKILL.md (81 lines, 423 words)
+  Sections: Agents, Autonomy, Context, Quality Rubric, Pipeline
+  Branch: v1.50
+
+sc-dev-team/SKILL.md (72 lines, 386 words)
+  Sections: Agents, Autonomy, Context, Integration, Pipeline
+  Branch: dev</code></pre>
+    <p><strong>After:</strong> One parameterized skill.</p>
+    <pre><code>team-control/SKILL.md (~100 lines, ~500 words)
+  Sections: Agents, Autonomy, Context, Pipeline
+  Subsections: UC Mode (branch=v1.50, quality rubric, observatory integration)
+               Dev Mode (branch=dev, integration with main)</code></pre>
+    <p><strong>Savings:</strong> ~309 words (~464 tokens). Prevents
+    divergence.</p>
+    <h3 id="merge-gsd-onboard-gsd-explain-gsd-guide">7.3 Merge:
+    gsd-onboard + gsd-explain –&gt; gsd-guide</h3>
+    <p><strong>Before:</strong></p>
+    <pre><code>gsd-onboard/SKILL.md (52 lines, 205 words) -- compact command reference
+gsd-explain/SKILL.md (274 lines, 1,214 words) -- detailed explainer</code></pre>
+    <p><strong>After:</strong></p>
+    <pre><code>gsd-guide/SKILL.md (~280 lines, ~1,100 words)
+  Section 1: Quick Reference (from gsd-onboard, ~50 lines)
+  Section 2: Detailed Explanations (from gsd-explain, ~230 lines)
+  (Removes: duplicated command lists, overlapping &quot;what does this do&quot; content)</code></pre>
+    <p><strong>Savings:</strong> ~319 words (~479 tokens). Eliminates
+    activation confusion.</p>
+    <h3 id="split-sling-dispatch">7.4 Split: sling-dispatch</h3>
+    <p><strong>Before:</strong></p>
+    <pre><code>sling-dispatch/SKILL.md (494 lines, 2,305 words)
+  Contains: Pipeline overview, 7-stage descriptions, full TypeScript implementations,
+  error handling code, batch mode code, formula expansion code</code></pre>
+    <p><strong>After:</strong></p>
+    <pre><code>sling-dispatch/SKILL.md (~120 lines, ~600 words)
+  Contains: Pipeline overview, 7-stage descriptions (prose only),
+  integration table, activation context
+
+sling-dispatch/references/pipeline-implementation.md (~374 lines, ~1,705 words)
+  Contains: Full TypeScript implementations, error handling code,
+  batch mode code, formula expansion code</code></pre>
+    <p><strong>Savings from default load:</strong> ~1,705 words (~2,558
+    tokens). Reference loaded on demand.</p>
+    <h3 id="split-done-retirement">7.5 Split: done-retirement</h3>
+    <p><strong>Before:</strong></p>
+    <pre><code>done-retirement/SKILL.md (377 lines, 2,267 words)
+  Contains: Pipeline overview, 7-stage descriptions, full TypeScript implementations,
+  irreversibility guarantees, cleanup sequences</code></pre>
+    <p><strong>After:</strong></p>
+    <pre><code>done-retirement/SKILL.md (~100 lines, ~550 words)
+  Contains: Pipeline overview, 7-stage descriptions (prose only),
+  irreversibility rules, integration table
+
+done-retirement/references/retirement-implementation.md (~277 lines, ~1,717 words)
+  Contains: Full TypeScript implementations, cleanup sequences</code></pre>
+    <p><strong>Savings from default load:</strong> ~1,717 words (~2,576
+    tokens).</p>
+    <h3 id="split-gupp-propulsion">7.6 Split: gupp-propulsion</h3>
+    <p><strong>Before:</strong></p>
+    <pre><code>gupp-propulsion/SKILL.md (263 lines, 1,961 words)
+  Contains: Core GUPP principle, per-runtime strategies, observable metrics,
+  learning feedback loop, safety boundaries, enforcement rules</code></pre>
+    <p><strong>After:</strong></p>
+    <pre><code>gupp-propulsion/SKILL.md (~80 lines, ~500 words)
+  Contains: Core GUPP principle, enforcement rules, safety boundaries
+
+gupp-propulsion/references/runtime-strategies.md (~100 lines, ~700 words)
+  Contains: Per-runtime strategy details (Claude Code, Codex, Gemini, Cursor)
+
+gupp-propulsion/references/metrics-and-learning.md (~83 lines, ~761 words)
+  Contains: Observable metrics, learning feedback loop</code></pre>
+    <p><strong>Savings from default load:</strong> ~1,461 words (~2,192
+    tokens).</p>
+    <h3 id="projected-savings-summary">7.7 Projected Savings
+    Summary</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Change</th>
+    <th>Type</th>
+    <th>Token Savings (default load)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>beautiful-commits + git-commit merge</td>
+    <td>Merge</td>
+    <td>~479</td>
+    </tr>
+    <tr>
+    <td>uc-lab + sc-dev-team merge</td>
+    <td>Merge</td>
+    <td>~464</td>
+    </tr>
+    <tr>
+    <td>gsd-onboard + gsd-explain merge</td>
+    <td>Merge</td>
+    <td>~479</td>
+    </tr>
+    <tr>
+    <td>sling-dispatch split</td>
+    <td>Split</td>
+    <td>~2,558</td>
+    </tr>
+    <tr>
+    <td>done-retirement split</td>
+    <td>Split</td>
+    <td>~2,576</td>
+    </tr>
+    <tr>
+    <td>gupp-propulsion split</td>
+    <td>Split</td>
+    <td>~2,192</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td></td>
+    <td><strong>~8,748 tokens</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>That is a 21% reduction in default-load token cost. The splits
+    alone account for 84% of the savings.</p>
+    <h2 id="skill-lifecycle-proposal">8. Skill Lifecycle Proposal</h2>
+    <h3 id="current-state">8.1 Current State</h3>
+    <p>No skill declares a version (except the 6 new ones). No mechanism
+    exists to track when a skill was last modified, what format version
+    it targets, or whether it needs migration when the skill system
+    evolves. Skills are created and then edited ad hoc with no formal
+    lifecycle.</p>
+    <h3 id="proposed-lifecycle-stages">8.2 Proposed Lifecycle
+    Stages</h3>
+    <pre><code>DRAFT --&gt; ACTIVE --&gt; DEPRECATED --&gt; RETIRED --&gt; ARCHIVED</code></pre>
+    <p><strong>DRAFT.</strong> Skill is under development. Not loaded by
+    the activation system. Indicated by a <code>status: draft</code>
+    frontmatter field or by placing the skill in a
+    <code>skills-draft/</code> subdirectory.</p>
+    <p><strong>ACTIVE.</strong> Skill is in production. Loaded by the
+    activation system based on triggers and budget. This is the current
+    implicit state of all existing skills.</p>
+    <p><strong>DEPRECATED.</strong> Skill still loads but emits a
+    warning when activated. The deprecation notice includes a migration
+    path (which skill replaces it, what changes are needed). Useful for
+    gradual transitions when merging skills. Indicated by
+    <code>status: deprecated</code> and
+    <code>deprecated-by: replacement-skill-name</code>.</p>
+    <p><strong>RETIRED.</strong> Skill no longer loads. SKILL.md remains
+    in the directory for historical reference but the loader skips it.
+    Indicated by <code>status: retired</code> and
+    <code>retired-date: YYYY-MM-DD</code>.</p>
+    <p><strong>ARCHIVED.</strong> Skill directory is moved to
+    <code>.claude/skills-archive/</code>. Complete removal from the
+    active tree. Only done after retirement has been stable for 30+
+    days.</p>
+    <h3 id="proposed-versioning-scheme">8.3 Proposed Versioning
+    Scheme</h3>
+    <div class="sourceCode" id="cb16"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example-skill</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> ...</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> 2025-10-02</span><span class="co">      # skill-format date from Claude Code</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.2.0</span><span class="co">           # semver for this skill&#39;s content</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span><span class="kw">:</span><span class="at"> active</span><span class="co">           # lifecycle stage</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">updated</span><span class="kw">:</span><span class="at"> 2026-03-31</span><span class="co">      # last modification date</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+    <p>Four version-related fields serve different purposes: -
+    <strong>format</strong> – Which skill format specification this
+    SKILL.md targets. Enables automated migration when Claude Code
+    updates the format. - <strong>version</strong> – Semantic version of
+    the skill content. Major = breaking activation change, minor =
+    content addition, patch = fix/clarification. -
+    <strong>status</strong> – Lifecycle stage. Controls loader behavior.
+    - <strong>updated</strong> – Simple date for staleness detection.
+    Skills not updated in 90+ days could be flagged for review.</p>
+    <h3 id="version-bump-rules">8.4 Version Bump Rules</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 46%" />
+    <col style="width: 28%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Change</th>
+    <th>Version Impact</th>
+    <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Fix typo in content</td>
+    <td>Patch (1.0.0 -&gt; 1.0.1)</td>
+    <td>Correct a command example</td>
+    </tr>
+    <tr>
+    <td>Add new section</td>
+    <td>Minor (1.0.0 -&gt; 1.1.0)</td>
+    <td>Add “Edge Cases” section</td>
+    </tr>
+    <tr>
+    <td>Change activation triggers</td>
+    <td>Minor (1.0.0 -&gt; 1.1.0)</td>
+    <td>Add keywords to description</td>
+    </tr>
+    <tr>
+    <td>Restructure content</td>
+    <td>Minor (1.0.0 -&gt; 1.1.0)</td>
+    <td>Move sections, reorder</td>
+    </tr>
+    <tr>
+    <td>Change skill purpose/scope</td>
+    <td>Major (1.0.0 -&gt; 2.0.0)</td>
+    <td>Expand from “commits” to “all git ops”</td>
+    </tr>
+    <tr>
+    <td>Merge with another skill</td>
+    <td>Major (new skill starts at 1.0.0)</td>
+    <td>beautiful-commits + git-commit</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="staleness-detection">8.5 Staleness Detection</h3>
+    <p>A periodic check (run during <code>/sc:digest</code> or session
+    start) compares <code>updated</code> dates against the current date.
+    Skills with <code>updated</code> older than 90 days are flagged as
+    “stale” in the digest output. The maintainer then decides: update
+    the skill, confirm it is still current (bump <code>updated</code>
+    only), or deprecate it.</p>
+    <h3 id="migration-path">8.6 Migration Path</h3>
+    <p>Adding version fields is backward-compatible. Skills without
+    version fields would be treated as
+    <code>format: 2025-10-02, version: 1.0.0, status: active, updated: unknown</code>.
+    A one-time migration script could set <code>updated</code> from git
+    blame timestamps:</p>
+    <div class="sourceCode" id="cb17"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> d <span class="kw">in</span> .claude/skills/<span class="pp">*</span>/<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">$d</span><span class="st">/SKILL.md&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">last_mod</span><span class="op">=</span><span class="va">$(</span><span class="fu">git</span> log <span class="at">-1</span> <span class="at">--format</span><span class="op">=</span><span class="st">&#39;%ai&#39;</span> <span class="at">--</span> <span class="st">&quot;</span><span class="va">$d</span><span class="st">/SKILL.md&quot;</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span><span class="va">)</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$d</span><span class="st"> -&gt; </span><span class="va">$last_mod</span><span class="st">&quot;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+    <h2 id="frontmatter-format-analysis">9. Frontmatter Format
+    Analysis</h2>
+    <h3 id="fields-currently-used">9.1 Fields Currently Used</h3>
+    <p>Across all 40 skills, the following frontmatter fields
+    appear:</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Field</th>
+    <th>Count</th>
+    <th>Usage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>name</code></td>
+    <td>40/40</td>
+    <td>Universal</td>
+    </tr>
+    <tr>
+    <td><code>description</code></td>
+    <td>40/40</td>
+    <td>Universal</td>
+    </tr>
+    <tr>
+    <td><code>version</code></td>
+    <td>6/40</td>
+    <td>New skills only (1.0.0)</td>
+    </tr>
+    <tr>
+    <td><code>user-invocable</code></td>
+    <td>5/40</td>
+    <td>gsd-workflow, security-hygiene, session-awareness,
+    skill-integration, issue-triage-pr-review</td>
+    </tr>
+    <tr>
+    <td><code>domain</code></td>
+    <td>1/40</td>
+    <td>image-to-mission only</td>
+    </tr>
+    <tr>
+    <td><code>context</code></td>
+    <td>1/40</td>
+    <td>image-to-mission only</td>
+    </tr>
+    <tr>
+    <td><code>activation</code></td>
+    <td>1/40</td>
+    <td>image-to-mission only</td>
+    </tr>
+    <tr>
+    <td><code>dependencies</code></td>
+    <td>1/40</td>
+    <td>image-to-mission only</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="the-user-invocable-field">9.2 The
+    <code>user-invocable</code> Field</h3>
+    <p>Only 5 of 40 skills declare <code>user-invocable: true</code>.
+    This field likely controls whether the skill appears in user-facing
+    command suggestions. The remaining 35 skills are presumably
+    auto-activating only. However, several skills that feel
+    user-invocable (like gsd-explain, gsd-onboard, gsd-trace,
+    context-handoff) do not declare this field. This may be an
+    inconsistency or a deliberate design choice.</p>
+    <h3 id="reference-file-distribution">9.3 Reference File
+    Distribution</h3>
+    <table>
+    <colgroup>
+    <col style="width: 39%" />
+    <col style="width: 28%" />
+    <col style="width: 32%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Ref Count</th>
+    <th>Skills</th>
+    <th>Examples</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>0 refs</td>
+    <td>24 skills</td>
+    <td>All Dev Practices, all Research Ops, most Cross-Cutting</td>
+    </tr>
+    <tr>
+    <td>1 ref</td>
+    <td>7 skills</td>
+    <td>beads-state, done-retirement, runtime-hal, sling-dispatch</td>
+    </tr>
+    <tr>
+    <td>2 refs</td>
+    <td>4 skills</td>
+    <td>gupp-propulsion, refinery-merge, witness-observer</td>
+    </tr>
+    <tr>
+    <td>3 refs</td>
+    <td>5 skills</td>
+    <td>gsd-workflow, mayor-coordinator, polecat-worker,
+    skill-integration</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Skills with 0 reference files are self-contained. Skills with 3
+    reference files are the most modular, with detail factored out of
+    the main SKILL.md. The 5 Gastown skills with 0 refs (beads-state,
+    hook-persistence, mail-async, nudge-sync, and the origin references)
+    could benefit from the same factoring pattern used by their heavier
+    siblings.</p>
+    <h2 id="recommendations">10. Recommendations</h2>
+    <h3 id="immediate-actions-no-risk">10.1 Immediate Actions (No
+    Risk)</h3>
+    <ol type="1">
+    <li><p><strong>Merge beautiful-commits and git-commit</strong> into
+    a single <code>commit-style</code> skill. Remove duplicated content.
+    Estimated savings: ~479 tokens, elimination of activation
+    conflict.</p></li>
+    <li><p><strong>Add missing trigger keywords</strong> to compact
+    descriptions (code-review, env-setup, decision-framework,
+    file-operation-patterns, data-fidelity, publish-pipeline). Improves
+    activation accuracy at zero cost.</p></li>
+    <li><p><strong>Remove or complete test-skill</strong> directory.
+    Either add a proper SKILL.md or delete the directory.</p></li>
+    <li><p><strong>Add <code>version: 1.0.0</code> and
+    <code>format: 2025-10-02</code></strong> to all 34 skills that lack
+    version fields. A one-time migration with no behavioral
+    change.</p></li>
+    </ol>
+    <h3 id="high-value-refactors">10.2 High-Value Refactors</h3>
+    <ol start="5" type="1">
+    <li><p><strong>Split the three heaviest Gastown skills</strong>
+    (sling-dispatch, done-retirement, gupp-propulsion) into lean
+    SKILL.md files plus reference subdirectories. Move TypeScript
+    implementations and detailed protocol descriptions into references.
+    Target: each SKILL.md under 800 words. Estimated savings: ~7,326
+    tokens from the default load path.</p></li>
+    <li><p><strong>Add <code>triggers</code> frontmatter</strong> as
+    explicit activation patterns separate from descriptions. This allows
+    the description to focus on explaining the skill to humans while
+    triggers focus on matching user intent for the loader.</p></li>
+    <li><p><strong>Consolidate gastown-origin.md references</strong>
+    into a shared chipset-level document. Each skill references the
+    shared file plus its specific mapping.</p></li>
+    <li><p><strong>Add <code>domain</code>, <code>activation</code>, and
+    <code>dependencies</code> fields</strong> to all skills, following
+    the image-to-mission pattern. This gives the loader richer signals
+    for activation decisions.</p></li>
+    </ol>
+    <h3 id="structural-improvements">10.3 Structural Improvements</h3>
+    <ol start="9" type="1">
+    <li><p><strong>Introduce a <code>conflicts</code> frontmatter
+    field</strong> to prevent known-overlapping skills from
+    co-activating. This is cheaper than merging skills and preserves
+    modularity.</p></li>
+    <li><p><strong>Introduce a <code>context_cost</code> frontmatter
+    field</strong> declaring approximate token cost. The
+    skill-integration loader can then make budget decisions from
+    frontmatter alone without reading full content.</p></li>
+    <li><p><strong>Merge uc-lab and sc-dev-team</strong> into a
+    parameterized team-control skill with mode switching. Reduces
+    maintenance burden and prevents divergence.</p></li>
+    <li><p><strong>Merge gsd-onboard and gsd-explain</strong> into a
+    unified gsd-guide skill with quick-reference and detailed
+    sections.</p></li>
+    <li><p><strong>Create a skill registry</strong> – a single index
+    file listing all skills with their category, token cost, activation
+    patterns, and conflicts. This serves as both documentation and a
+    machine-readable manifest for the loader.</p></li>
+    <li><p><strong>Implement the lifecycle system</strong>
+    (draft/active/deprecated/retired/archived) with status field and
+    staleness detection.</p></li>
+    </ol>
+    <h3 id="projected-impact">10.4 Projected Impact</h3>
+    <p>If all recommendations were implemented:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Current</th>
+    <th>Projected</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Skill count</td>
+    <td>40</td>
+    <td>37 (3 merges)</td>
+    </tr>
+    <tr>
+    <td>Total words in SKILL.md files</td>
+    <td>28,368</td>
+    <td>~19,000</td>
+    </tr>
+    <tr>
+    <td>Total estimated tokens (default load)</td>
+    <td>~42,550</td>
+    <td>~28,500</td>
+    </tr>
+    <tr>
+    <td>Gastown scenario budget (200K)</td>
+    <td>7%</td>
+    <td>~3.5%</td>
+    </tr>
+    <tr>
+    <td>Over-limit descriptions</td>
+    <td>0</td>
+    <td>0</td>
+    </tr>
+    <tr>
+    <td>Activation conflicts</td>
+    <td>4 pairs</td>
+    <td>0</td>
+    </tr>
+    <tr>
+    <td>Skills with version tracking</td>
+    <td>6</td>
+    <td>37</td>
+    </tr>
+    <tr>
+    <td>Skills with lifecycle status</td>
+    <td>0</td>
+    <td>37</td>
+    </tr>
+    <tr>
+    <td>Skills with explicit triggers</td>
+    <td>0</td>
+    <td>37</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The most impactful single change is splitting the three heaviest
+    Gastown skills into SKILL.md + references. This alone saves ~7,326
+    tokens from the default activation path while keeping all content
+    accessible when needed.</p>
+    <h2 id="the-format-evolution-question">11. The Format Evolution
+    Question</h2>
+    <p>Claude Code’s binary references <code>skills-2025-10-02</code> as
+    a format date and <code>agentskills.io</code> as a domain. This
+    suggests the skill format is versioned and may evolve. Our current
+    skills use a minimal frontmatter schema (name + description +
+    optional fields). If the format specification adds new required
+    fields or changes activation semantics, we need a migration
+    path.</p>
+    <p>The binary analysis reveals a full CRUD API for skills with
+    versioned endpoints:</p>
+    <pre><code>POST   /v1/skills                  -- create
+GET    /v1/skills                  -- list
+GET    /v1/skills/{id}             -- retrieve
+DELETE /v1/skills/{id}             -- delete
+POST   /v1/skills/{id}/versions    -- create version
+GET    /v1/skills/{id}/versions    -- list versions
+GET    /v1/skills/{id}/versions/{vid} -- retrieve version
+DELETE /v1/skills/{id}/versions/{vid} -- delete version</code></pre>
+    <p>This API is gated behind the <code>skills-2025-10-02</code> beta
+    header. The existence of version CRUD endpoints means the platform
+    anticipates skills evolving over time, with multiple versions
+    coexisting. This aligns with our lifecycle proposal (Section 8) and
+    validates the decision to add version fields now.</p>
+    <p>The recommended approach: add <code>format: 2025-10-02</code> to
+    all skills now. When a new format version appears, a script can
+    identify skills needing migration by comparing their declared format
+    to the current specification. Skills without a format declaration
+    are assumed to be on the oldest known format.</p>
+    <p>The agentskills.io reference hints at a community skill
+    ecosystem. If skills become publishable and shareable (similar to
+    npm packages), our skills would need additional metadata: author,
+    license, compatibility ranges, and dependency resolution. The
+    <code>dependencies</code> field used by image-to-mission is a
+    prototype of this pattern. Building the registry (Recommendation 13)
+    positions us to adopt community sharing if the ecosystem
+    materializes.</p>
+    <p>The fact that the API already supports skill versioning means the
+    platform is ahead of where most users are. Our 40-skill inventory,
+    with 6 already versioned and a lifecycle proposal ready, puts us at
+    the leading edge of skill system maturity. The gap between where we
+    are and where the platform is heading is smaller than it appears –
+    we need to add fields and metadata, not redesign the system.</p>
+    <hr />
+    <p><em>Research conducted 2026-03-31. Data sourced from direct
+    reading of all 40 SKILL.md files and 24 reference files across
+    .claude/skills/. Word counts measured with wc, character counts
+    measured on extracted description fields. Binary analysis performed
+    on Claude Code v2.1.88 installed at $(which claude). Skills API
+    surface identified through string extraction of the compiled
+    binary.</em></p>
+    <div class="nav">
+        <a href="../index.html">← Back to OOPS Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/OOPS/">tibsfox.com/Research/OOPS</a>
+    </div>
+</body>
+</html>
