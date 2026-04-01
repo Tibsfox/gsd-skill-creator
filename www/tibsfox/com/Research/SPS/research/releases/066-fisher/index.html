@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 66&deg; &mdash; Fisher &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Mustelidae quartet card */
+    .quartet-card {
+      background: linear-gradient(135deg, #1B2631 0%, #2C3E50 60%, #34495E 100%);
+      border: 3px solid #0E1A24;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #ECF0F1;
+    }
+    .quartet-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BDC3C7;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quartet-card p {
+      color: #ECF0F1;
+    }
+    .quartet-card strong {
+      color: #AEB6BF;
+    }
+
+    /* Scream acoustic card */
+    .scream-card {
+      background: linear-gradient(135deg, #4A0E0E 0%, #7B1A1A 100%);
+      border: 2px solid #3B0000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FDEDEC;
+    }
+    .scream-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #F5B7B1;
+    }
+    .scream-card p {
+      color: #FDEDEC;
+    }
+    .scream-card strong {
+      color: #E74C3C;
+    }
+
+    /* Conservation card */
+    .conservation-card {
+      background: linear-gradient(135deg, #0D3B0D 0%, #1B5E20 60%, #2E7D32 100%);
+      border: 2px solid #0A2E0A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .conservation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .conservation-card p {
+      color: #E8F5E9;
+    }
+    .conservation-card strong {
+      color: #81C784;
+    }
+
+    /* Porcupine predation card */
+    .porcupine-card {
+      background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+      border: 2px solid #2A1B18;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .porcupine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .porcupine-card p {
+      color: #EFEBE9;
+    }
+    .porcupine-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Dense forest card */
+    .forest-card {
+      background: linear-gradient(135deg, #1A3C1A 0%, #2D5E2D 100%);
+      border: 2px solid #0F260F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .forest-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .forest-card p {
+      color: #E8F5E9;
+    }
+    .forest-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Neko Case card */
+    .neko-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .neko-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .neko-card p {
+      color: #F3E5F5;
+    }
+    .neko-card strong {
+      color: #BA68C8;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.quartet { background: #1B2631; }
+    .theory-icon.scream { background: #7B1A1A; }
+    .theory-icon.conservation { background: #1B5E20; }
+    .theory-icon.porcupine { background: #5D4037; }
+    .theory-icon.forest { background: #2D5E2D; }
+    .theory-icon.reclassified { background: #283593; }
+    .theory-icon.neko { background: #6A1B9A; }
+    .theory-icon.carnivore { background: #B71C1C; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.owl-link { background: #263238; }
+    .theory-icon.pileated { background: #2E7D32; }
+    .theory-icon.marten-link { background: #3E2723; }
+    .theory-icon.mink-link { background: #455A64; }
+    .theory-icon.otter-link { background: #01579B; }
+    .theory-icon.e5-rare { background: #880E4F; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">66&deg;</div>
+      <div class="release-title-block">
+        <h2>Fisher</h2>
+        <div class="scientific">Pekania pennanti</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loud screaming call (rare) &mdash; deep-forest predator, FOURTH CONSECUTIVE MUSTELIDAE (the Mustelidae QUARTET: Otter 63, Mink 64, Marten 65, Fisher 66), fourth carnivore, seventh mammalian entry, fifth mammalian species, first reintroduced species, porcupine predator, E=5, year-round resident, dense forest
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Mustelidae Quartet Card -->
+        <div class="quartet-card">
+          <h3>The Mustelidae Quartet &mdash; Four Consecutive (63&ndash;66)</h3>
+          <p>Four consecutive Mustelidae. The engine&rsquo;s deepest family exploration. <strong>Otter (63): river/estuary, 5&ndash;14 kg, social</strong>. <strong>Mink (64): creek bank, 0.5&ndash;1.5 kg, solitary</strong>. <strong>Marten (65): old-growth canopy, 0.5&ndash;1.2 kg, arboreal</strong>. <strong>Fisher (66): dense forest, 2&ndash;6 kg, terrestrial/arboreal</strong>. Four habitats, four sizes, four sounds. A complete gradient from water to deep forest within a single family.</p>
+        </div>
+
+        <!-- Scream Acoustic Card -->
+        <div class="scream-card">
+          <h3>The 67th Acoustic Element: The Scream</h3>
+          <p>A <strong>loud, piercing, almost-human scream</strong> from the deep forest. E=5 &mdash; the loudest mammalian vocalization in the engine. But <strong>almost never heard</strong>. Fishers are secretive, nocturnal, and exist at low densities. The scream has been described as &ldquo;blood-curdling,&rdquo; &ldquo;like a woman screaming in the woods.&rdquo; <strong>Maximum power, minimum prevalence</strong> &mdash; a new acoustic category.</p>
+        </div>
+
+        <!-- Conservation Card -->
+        <div class="conservation-card">
+          <h3>First Reintroduced Species &mdash; Extirpated and Returned</h3>
+          <p>The Fisher was <strong>completely extirpated from Washington State</strong> by trapping and habitat loss. The Washington Department of Fish &amp; Wildlife released Fishers from British Columbia: <strong>Olympics (2008&ndash;2010, 90 animals)</strong> and <strong>South Cascades (2015&ndash;2020, ~80 animals)</strong>. Reproduction confirmed. The engine&rsquo;s first species that exists only because humans chose to bring it back.</p>
+        </div>
+
+        <!-- Porcupine Card -->
+        <div class="porcupine-card">
+          <h3>The Porcupine Predator &mdash; Specialized Killing Technique</h3>
+          <p>The Fisher is one of the few predators that can kill porcupines. <strong>Technique:</strong> attack the face (the only unquilled surface), circling and darting for 25&ndash;30 minutes, then flip the exhausted porcupine to expose the unprotected belly. <strong>Quill tolerance</strong> &mdash; embedded quills encyst rather than causing fatal infection. A learned behavior, possibly culturally transmitted from mother to kits.</p>
+        </div>
+
+        <!-- Dense Forest Card -->
+        <div class="forest-card">
+          <h3>Dense Forest Habitat &mdash; The Closed-Canopy Specialist</h3>
+          <p>The Fisher requires <strong>dense, closed-canopy forest</strong> with &gt;60% canopy closure, large trees (&gt;50 cm DBH) for denning, and structural complexity (downed logs, root wads, snags). Not old-growth specifically &mdash; dense younger forest with adequate structure can support Fishers. The <strong>Marten needs ancient forest; the Fisher needs dense forest</strong>. Both need cover. Both lose to fragmentation.</p>
+        </div>
+
+        <!-- Neko Case Card -->
+        <div class="neko-card">
+          <h3>The Neko Case Parallel</h3>
+          <p>Both <strong>fierce</strong>. Both with <strong>powerful vocalizations</strong> &mdash; Case&rsquo;s volcanic voice, the Fisher&rsquo;s terrifying scream. Both <strong>wild and untameable</strong> &mdash; Case resists categorization; the Fisher cannot be domesticated. Both <strong>reclaim abandoned territory</strong> &mdash; Case in alt-country&rsquo;s margins; the Fisher reintroduced to forests from which it was extirpated. Case E=4, Fisher E=5. Both deliver with maximum intensity.</p>
+        </div>
+
+        <h2>The Sound: Loud Screaming Call (Rare)</h2>
+        <p><strong>The Scream:</strong> A loud, piercing, sustained vocalization that carries through dense forest for hundreds of meters. E=5. Produced during territorial disputes, breeding season encounters, and aggressive interactions. The scream has been described as &ldquo;almost human&rdquo; and &ldquo;blood-curdling&rdquo; &mdash; its frequency and cadence trigger primate alarm responses in human listeners.</p>
+        <p><strong>Other vocalizations:</strong> Low growling and hissing (close-range aggression), clucking/chuckling (mother-kit contact), chittering (similar to but deeper than the Mink&rsquo;s chitter). But the scream dominates the Fisher&rsquo;s acoustic identity &mdash; it is the sound that generates folklore.</p>
+        <p><strong>The paradox:</strong> E=5 (maximum power) combined with extreme rarity. The Mallard (E=5) quacks everywhere, constantly. The Fisher (E=5) screams almost never, in the deepest forest. <strong>Power without prevalence</strong> &mdash; a new acoustic concept for the engine.</p>
+
+        <h2>Physical Description: The Largest Forest Mustelid</h2>
+        <p><strong>Size:</strong> 75&ndash;120 cm total length, 2&ndash;6 kg. Males nearly twice the weight of females. More robust than the Marten &mdash; broader shoulders, thicker neck, more muscular. Built for power and leverage (porcupine predation requires both).</p>
+        <p><strong>Fur:</strong> Dark brown to nearly black, with a diagnostic <strong>grizzled gold-to-silver sheen</strong> on head, neck, and shoulders. Dense underfur. Long, coarse guard hairs. The &ldquo;frosted&rdquo; appearance distinguishes Fisher from Marten at a distance.</p>
+        <p><strong>Feet:</strong> Large, furred pads &mdash; no webbing (unlike Mink and Otter). Adapted for forest substrates: duff, bark, snow. Relatively large feet act as partial snowshoes in winter.</p>
+        <p><strong>Taxonomy note:</strong> Formerly <em>Martes pennanti</em>, reclassified to <em>Pekania pennanti</em> based on molecular phylogenetics. The Fisher diverged from the marten lineage ~8&ndash;12 million years ago. <em>Pekania</em> from Abenaki <em>pekan</em>. Monotypic genus &mdash; the Fisher stands alone.</p>
+
+        <h2>Diet: Forest Generalist with Specialist Capability</h2>
+        <p><strong>Primary prey:</strong> Snowshoe hares (often the main prey item), squirrels, small mammals (mice, voles, shrews), birds, carrion. Seasonal fruits and fungi &mdash; more omnivorous than expected.</p>
+        <p><strong>Specialist prey:</strong> <strong>North American Porcupine</strong> &mdash; the Fisher is one of the few predators capable of regularly taking adult porcupines, using a specialized face-attack technique developed over 25&ndash;30 minute encounters.</p>
+        <p><strong>Trophic cascade:</strong> Fisher &rarr; porcupine &rarr; tree damage. Where Fishers are present, porcupine populations decline and tree girdling decreases. The Fisher is an indirect benefit to forest health.</p>
+
+        <h2>Conservation: Extirpation and Return</h2>
+        <p><strong>Extirpation:</strong> Eliminated from Washington by unregulated trapping (fur trade), industrial logging (habitat loss), and predator persecution. Last confirmed native sighting in the 1990s. Functionally extinct for decades before reintroduction.</p>
+        <p><strong>Reintroduction:</strong> WDFW + National Park Service + Conservation Northwest + BC Ministry of Environment. Olympic Peninsula: 90 animals released 2008&ndash;2010. South Cascades: ~80 animals released 2015&ndash;2020. North Cascades: additional releases 2018&ndash;2020 for genetic connectivity. Source: British Columbia live-trapped and translocated.</p>
+        <p><strong>Status:</strong> Breeding confirmed in both Olympic and Cascade populations. Range expanding. Still state-listed as endangered. The return is real but fragile.</p>
+
+        <h2>The Mustelidae Quartet: Habitat Gradient</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Habitat</th><th>Size</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>63</td><td>River Otter</td><td>River/estuary</td><td>5&ndash;14 kg</td><td>Social chuff (6 types)</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Creek bank</td><td>0.5&ndash;1.5 kg</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Old-growth canopy</td><td>0.5&ndash;1.2 kg</td><td>High-pitched screech</td></tr>
+            <tr><td><strong>66</strong></td><td><strong>Fisher</strong></td><td><strong>Dense forest</strong></td><td><strong>2&ndash;6 kg</strong></td><td><strong>Loud scream (rare)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Four species, four habitats, four acoustic elements. River &rarr; creek margin &rarr; canopy &rarr; deep forest floor. The quartet traces a complete gradient from water to forest interior.</p>
+
+        <h2>Family Tracker After Degree 66</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td><strong>63, 64, 65, 66</strong></td><td><strong>4 (QUARTET)</strong></td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-eight families across 67 entries. <strong>Mustelidae rises to 4 entries &mdash; the QUARTET &mdash; now tied for 4th-largest family representation</strong> behind Parulidae (10), and tied with the five 5-entry families. 49 of 67 entries (73.1%) are Passeriformes. 7 of 67 entries (10.4%) are Mammalia.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon quartet">Q</div>
+            <div class="theory-content">
+              <h4>The Mustelidae Quartet (63&ndash;66) <span class="theory-level landmark">landmark</span></h4>
+              <p>Four consecutive Mustelidae. Otter &rarr; Mink &rarr; Marten &rarr; Fisher. River &rarr; creek bank &rarr; old-growth canopy &rarr; dense forest. The engine&rsquo;s deepest family exploration. Four species, four habitats, four acoustic elements.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon scream">S</div>
+            <div class="theory-content">
+              <h4>The Scream &mdash; 67th Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Loud, piercing, almost-human scream. E=5. The loudest mammalian vocalization in the engine but almost never heard. Power without prevalence. A new acoustic category: maximum energy, minimum frequency of occurrence.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon conservation">R</div>
+            <div class="theory-content">
+              <h4>First Reintroduced Species <span class="theory-level landmark">landmark</span></h4>
+              <p>Extirpated from Washington State. Reintroduced from British Columbia: 90 Fishers to Olympics (2008&ndash;2010), ~80 to Cascades (2015&ndash;2020). Breeding confirmed. The engine&rsquo;s first species returned by human intervention.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon porcupine">P</div>
+            <div class="theory-content">
+              <h4>Porcupine Predator &mdash; Specialist Technique <span class="theory-level foundational">foundational</span></h4>
+              <p>One of the few predators that kills porcupines. Face-attack technique over 25&ndash;30 minutes. Flips prey to expose unquilled belly. Quill-tolerant. Possibly culturally transmitted from mother to kits.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon forest">F</div>
+            <div class="theory-content">
+              <h4>Dense Forest Habitat <span class="theory-level foundational">foundational</span></h4>
+              <p>Closed-canopy forest, &gt;60% canopy closure. Large trees for denning. Not old-growth specifically &mdash; dense forest with structural complexity. The Fisher completes the quartet&rsquo;s water-to-deep-forest gradient.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon reclassified">T</div>
+            <div class="theory-content">
+              <h4>Reclassified: <em>Martes</em> to <em>Pekania</em> <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Molecular phylogenetics separated Fisher from the true martens. Third reclassification in the quartet (Otter, Mink, Fisher). Only the Marten retains its original genus. <em>Pekania</em> from Abenaki <em>pekan</em> &mdash; a Native American-derived genus name.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon e5-rare">5</div>
+            <div class="theory-content">
+              <h4>E=5 and Rarity &mdash; New Acoustic Category <span class="theory-level foundational">foundational</span></h4>
+              <p>Second E=5 species-side (after Mallard). But Mallard quacks everywhere constantly; Fisher screams almost never in the deepest forest. Power without prevalence. The engine&rsquo;s rarest acoustic element.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon neko">N</div>
+            <div class="theory-content">
+              <h4>Neko Case Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both fierce, both with powerful vocalizations, both wild and untameable. Both reclaim abandoned territory. Case&rsquo;s volcanic voice parallels the Fisher&rsquo;s terrifying scream. Case E=4, Fisher E=5 &mdash; both deliver maximum intensity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon carnivore">C</div>
+            <div class="theory-content">
+              <h4>Fourth Carnivore <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Carnivora quadruples from 1 to 4 across the quartet. All four are Mustelidae. The order&rsquo;s entire representation comes from a single family.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl-link">O</div>
+            <div class="theory-content">
+              <h4>Spotted Owl Connection (SPS-004) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both dense-forest dependents. Both conservation stories. Both nocturnal sounds from closed canopy. Habitat overlap in Olympics and Cascades. 62 degrees apart, connected by forest dependency and conservation need.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon marten-link">M</div>
+            <div class="theory-content">
+              <h4>Marten-Fisher Distinction (SPS-065) <span class="theory-level foundational">foundational</span></h4>
+              <p>Consecutive Mustelidae. Both forest predators. Marten = old-growth canopy, 0.5&ndash;1.2 kg. Fisher = dense forest, 2&ndash;6 kg. Fisher is 2&ndash;3x larger. The Marten scaled up and moved to the ground.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">6</div>
+            <div class="theory-content">
+              <h4>Sixth Consecutive Original CSV <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degrees 61&ndash;66: six consecutive originals. The longest original-CSV streak in engine history. Every mammalian entry is an original CSV species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">D</div>
+            <div class="theory-content">
+              <h4>Seventh Mammalian Entry, Fifth Species <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Five mammalian species across seven entries (61&ndash;66). Mammalian representation rises to 10.4%. Two orders, three families. The mammalian era deepens.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>CONSECUTIVE MUSTELIDAE. Both arboreal forest predators. Marten = old-growth canopy, Fisher = dense forest. Fisher is 2&ndash;3x larger. Same family, different scales &mdash; canopy specialist vs. forest-floor generalist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-064: Mink</strong>
+            <p>MUSTELIDAE QUARTET continues. Creek bank vs. dense forest. Mink = solitary, creek-margin ambush predator. Fisher = solitary, deep-forest pursuit predator. Both fierce relative to body size.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-063: River Otter</strong>
+            <p>QUARTET BEGINS. River/estuary vs. deep forest. Social vs. solitary. The quartet&rsquo;s two endpoints: water (otter) and forest interior (fisher). 5&ndash;14 kg vs. 2&ndash;6 kg &mdash; the two largest mustelids in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>DENSE-FOREST DEPENDENTS. Both need closed canopy. Both conservation stories (ESA listing vs. reintroduction). Both nocturnal. Both produce rare, emotionally disturbing vocalizations from deep forest. 62 degrees apart.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-054: Pileated Woodpecker</strong>
+            <p>LARGE-TREE DEPENDENCY. Both need large-diameter trees. Pileated excavates cavities; Fisher dens in them. Both associate with mature forest and structural complexity. Cavity architect and cavity tenant.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Seventh mammalian entry. Fifth mammalian species. Fourth Carnivora, fourth Mustelidae. Mammalian representation rises to 10.4% (7 of 67). Two orders, three families, five species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Dense forest habitat. Closed-canopy specialist. Porcupine predator with trophic cascade. Reintroduced species &mdash; extirpated and returned. Fur trade extirpation. Cross-border conservation (BC to WA).</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; Fisher (<em>Pekania pennanti</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;Fisher (animal).&rdquo;</li>
+          <li>Powell, R.A. (1993). <em>The Fisher: Life History, Ecology, and Behavior</em>. 2nd ed. University of Minnesota Press.</li>
+          <li>Koepfli, K.-P. et al. (2008). &ldquo;Multigene phylogeny of the Mustelidae.&rdquo; <em>Molecular Phylogenetics and Evolution</em> 47(3): 1190&ndash;1206.</li>
+          <li>Lewis, J.C. and Happe, P.J. (2018). &ldquo;Washington Fisher Restoration.&rdquo; WDFW.</li>
+          <li>Aubry, K.B. and Lewis, J.C. (2003). &ldquo;Extirpation and reintroduction of fishers in Oregon.&rdquo; <em>Biological Conservation</em> 114(1): 79&ndash;90.</li>
+          <li>Lofroth, E.C. et al. (2010). &ldquo;Conservation of Fishers in South-Central British Columbia, Western Washington, Western Oregon, and California.&rdquo; USDA Forest Service.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Fisher.</li>
+          <li>Lewis, J.C. et al. (2012). &ldquo;Survival and cause-specific mortality of fishers reintroduced to Olympic National Park.&rdquo; <em>J. Wildl. Manage.</em> 76(3): 616&ndash;625.</li>
+          <li>Gabriel, M.W. et al. (2015). &ldquo;Anticoagulant rodenticides on our public and community lands.&rdquo; <em>PLoS ONE</em> 10(2): e0132649.</li>
+          <li>Sweitzer, R.A. and Berger, J. (1997). &ldquo;A role for predators in maintaining porcupine populations.&rdquo; <em>J. Wildl. Manage.</em> 61(3): 678&ndash;686.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">66&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Scream</div>
+          <div class="stat-detail">#67 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">Loud but rare &mdash; power without prevalence</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">7th mammalian entry, 5th species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Mustelidae</div>
+          <div class="stat-detail">4th entry &mdash; the QUARTET</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">4th entry (all Mustelidae)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Loud scream</div>
+          <div class="stat-detail">Rare, terrifying, almost-human</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Dense Forest</div>
+          <div class="stat-detail">Closed canopy, structural complexity</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Nocturnal &amp; crepuscular</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Reintroduced</div>
+          <div class="stat-detail">Extirpated &rarr; returned from BC</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">6th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Consecutive Mustelid</div>
+          <div class="stat-value">SPS-065</div>
+          <div class="stat-detail">American Marten &mdash; canopy vs. forest floor</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Dense-Forest Pair</div>
+          <div class="stat-value">SPS-004</div>
+          <div class="stat-detail">Northern Spotted Owl &mdash; conservation parallel</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Large-Tree Dependency</div>
+          <div class="stat-value">SPS-054</div>
+          <div class="stat-detail">Pileated Woodpecker &mdash; cavity tenant</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 66 of 360</p>
+  </footer>
+</body>
+</html>
