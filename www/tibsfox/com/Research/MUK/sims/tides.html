@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tidal Harmonic Visualizer &mdash; Mukilteo Observatory</title>
+  <style>
+    :root {
+      --sea: #1a3a4a; --sea-light: #2a5a6a; --marine: #3a8a9a;
+      --fog: #8aa0b0; --sand: #c4b090; --drift: #9a8a70;
+      --cedar: #2a4a30; --sky: #4a7a9a; --rain: #5a7a8a;
+      --ink: #1a1a2a; --text: #d0d4da; --dim: #7a8090;
+      --bg: #0a0e14; --panel: #0e1420; --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2rem 1.5rem 1.5rem; border-bottom: 3px solid var(--sand);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    header::before { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%); }
+    header h1 { font-size:1.6rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.9rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header nav { margin-top:0.8rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif;
+      font-size:0.8rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:960px; margin:0 auto; padding:1.5rem 1rem 3rem; }
+    h2 { font-size:1.15rem; font-weight:400; color:var(--sand); margin:2rem 0 0.5rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); }
+    p { font-size:0.88rem; color:var(--text); margin-bottom:0.7rem; }
+
+    .canvas-wrap { width:100%; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden; margin-bottom:1rem; }
+    canvas { display:block; width:100%; height:auto; }
+
+    .controls { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1rem 1.2rem; margin-bottom:1rem; }
+    .control-row { display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem; flex-wrap:wrap; }
+    .control-row label { font-family:system-ui,sans-serif; font-size:0.78rem; color:var(--dim); min-width:3.5rem; text-transform:uppercase; letter-spacing:0.06em; }
+    .control-row input[type=range] { flex:1; min-width:120px; accent-color:var(--marine); }
+    .control-row .val { font-family:'Courier New',monospace; font-size:0.8rem; color:var(--sky); min-width:3.5rem; text-align:right; }
+    .swatch { width:12px; height:12px; border-radius:2px; display:inline-block; }
+
+    .legend { display:flex; flex-wrap:wrap; gap:0.6rem 1.2rem; font-family:system-ui,sans-serif; font-size:0.75rem; color:var(--dim); margin-bottom:0.8rem; }
+    .legend span { display:flex; align-items:center; gap:0.3rem; }
+
+    .edu { background:rgba(58,138,154,0.08); border:1px solid rgba(58,138,154,0.15); border-radius:4px; padding:1rem 1.2rem; margin:1rem 0; font-size:0.85rem; color:rgba(255,255,255,0.7); }
+    .edu strong { color:var(--sand); }
+    .edu h3 { font-size:0.95rem; color:var(--marine); margin-bottom:0.4rem; font-weight:400; }
+
+    .version { text-align:center; font-size:0.65rem; color:var(--dim); font-family:system-ui,sans-serif; margin-top:2rem; }
+
+    @media (max-width:640px) {
+      header h1 { font-size:1.2rem; }
+      main { padding:1rem 0.5rem 2rem; }
+      .control-row { gap:0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tidal Harmonic Visualizer</h1>
+    <p class="subtitle">Decomposing Puget Sound tides into their astronomical components</p>
+    <nav>
+      <a href="../index.html">Mukilteo Observatory</a>
+      <a href="../../OPEN/index.html">Research Index</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="canvas-wrap">
+      <canvas id="tideCanvas" width="960" height="480"></canvas>
+    </div>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="controls" id="controls"></div>
+
+    <div class="edu">
+      <h3>How Tidal Harmonics Work</h3>
+      <p>Ocean tides are the sum of many sinusoidal components, each driven by a specific gravitational interaction. The four largest constituents are:</p>
+      <p><strong>M2 (Principal Lunar Semidiurnal)</strong> &mdash; Period: 12.42 hours. The Moon's gravity creates two bulges as Earth rotates. This is the dominant component almost everywhere, including Everett/Mukilteo (~1.1m amplitude).</p>
+      <p><strong>S2 (Principal Solar Semidiurnal)</strong> &mdash; Period: 12.00 hours. The Sun creates its own pair of tidal bulges. When M2 and S2 align (new/full Moon), you get <strong>spring tides</strong> (larger range). When they oppose (quarter Moon), you get <strong>neap tides</strong> (smaller range).</p>
+      <p><strong>K1 (Lunisolar Diurnal)</strong> &mdash; Period: 23.93 hours. Created by the declination of both Moon and Sun relative to Earth's equator. This makes consecutive high tides unequal &mdash; the "mixed semidiurnal" signature of Puget Sound.</p>
+      <p><strong>O1 (Principal Lunar Diurnal)</strong> &mdash; Period: 25.82 hours. A purely lunar diurnal component. Combined with K1, it determines how unequal the two daily highs/lows are.</p>
+      <p>The <strong>spring-neap cycle</strong> (~14.8 days) is visible as the beat frequency between M2 and S2. Drag the S2 amplitude to zero to see it vanish.</p>
+    </div>
+
+    <div class="edu">
+      <h3>Reading the Chart</h3>
+      <p>The X-axis spans <strong>30 days</strong>. Each thin colored line is a single harmonic constituent. The thick white line is the <strong>composite tide</strong> &mdash; the sum of all components, which is what you'd actually measure at the Everett waterfront.</p>
+      <p>The dashed gray line shows <strong>approximate real Everett tidal data</strong> reconstructed from NOAA Station 9447130 harmonic constants. Try matching the composite to it by adjusting amplitudes and phases.</p>
+    </div>
+
+    <p class="version">Last updated: 2026-04-01T02:00Z (v1.0.19)</p>
+  </main>
+
+  <script>
+  (function() {
+    const canvas = document.getElementById('tideCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Constituent definitions: name, period (hours), default amplitude (m), default phase (deg), color
+    const constituents = [
+      { id: 'M2', name: 'M2 (Lunar Semi)', period: 12.4206, amp: 1.10, phase: 0,   color: '#5ba3d9' },
+      { id: 'S2', name: 'S2 (Solar Semi)', period: 12.0000, amp: 0.28, phase: 30,  color: '#e8a838' },
+      { id: 'K1', name: 'K1 (Lunisolar)',  period: 23.9345, amp: 0.84, phase: 110, color: '#6dca82' },
+      { id: 'O1', name: 'O1 (Lunar Diurnal)', period: 25.8193, amp: 0.50, phase: 95, color: '#d06a8a' },
+    ];
+
+    // State
+    const state = constituents.map(c => ({ amp: c.amp, phase: c.phase }));
+    let showIndividual = true;
+    let showReference = true;
+    let mouseX = -1;
+
+    // Generate "reference" data using NOAA Everett constants (close approximation)
+    const refConstants = [
+      { period: 12.4206, amp: 1.08, phase: 5 },
+      { period: 12.0000, amp: 0.26, phase: 35 },
+      { period: 23.9345, amp: 0.82, phase: 115 },
+      { period: 25.8193, amp: 0.48, phase: 100 },
+      { period: 12.6583, amp: 0.22, phase: 20 },   // N2
+      { period: 6.2103,  amp: 0.05, phase: 150 },   // M4
+      { period: 24.0659, amp: 0.15, phase: 180 },   // P1
+    ];
+
+    function refTide(t) {
+      let h = 0;
+      for (const c of refConstants) {
+        const omega = 2 * Math.PI / c.period;
+        h += c.amp * Math.cos(omega * t - c.phase * Math.PI / 180);
+      }
+      return h;
+    }
+
+    // Build controls
+    const controlsEl = document.getElementById('controls');
+    const legendEl = document.getElementById('legend');
+
+    constituents.forEach((c, i) => {
+      // Legend
+      legendEl.innerHTML += `<span><span class="swatch" style="background:${c.color}"></span>${c.id} (${c.period.toFixed(2)}h)</span>`;
+
+      // Amplitude slider
+      const ampRow = document.createElement('div');
+      ampRow.className = 'control-row';
+      ampRow.innerHTML = `
+        <span class="swatch" style="background:${c.color}"></span>
+        <label>${c.id} Amp</label>
+        <input type="range" min="0" max="200" value="${Math.round(c.amp * 100)}" data-idx="${i}" data-param="amp">
+        <span class="val" id="amp-val-${i}">${c.amp.toFixed(2)}m</span>
+      `;
+      controlsEl.appendChild(ampRow);
+
+      // Phase slider
+      const phRow = document.createElement('div');
+      phRow.className = 'control-row';
+      phRow.innerHTML = `
+        <label style="margin-left:17px">${c.id} Phase</label>
+        <input type="range" min="0" max="360" value="${c.phase}" data-idx="${i}" data-param="phase">
+        <span class="val" id="phase-val-${i}">${c.phase}&deg;</span>
+      `;
+      controlsEl.appendChild(phRow);
+    });
+
+    legendEl.innerHTML += `<span><span class="swatch" style="background:#fff"></span>Composite</span>`;
+    legendEl.innerHTML += `<span><span class="swatch" style="background:#666;border:1px dashed #999"></span>Everett Reference</span>`;
+
+    // Checkbox row
+    const checkRow = document.createElement('div');
+    checkRow.className = 'control-row';
+    checkRow.style.marginTop = '0.3rem';
+    checkRow.innerHTML = `
+      <label style="min-width:auto"><input type="checkbox" id="chkIndiv" checked> Show individual</label>
+      <label style="min-width:auto; margin-left:1rem"><input type="checkbox" id="chkRef" checked> Show reference</label>
+    `;
+    controlsEl.appendChild(checkRow);
+
+    // Event listeners
+    controlsEl.addEventListener('input', e => {
+      if (e.target.type !== 'range') return;
+      const idx = parseInt(e.target.dataset.idx);
+      const param = e.target.dataset.param;
+      if (param === 'amp') {
+        state[idx].amp = e.target.value / 100;
+        document.getElementById(`amp-val-${idx}`).textContent = state[idx].amp.toFixed(2) + 'm';
+      } else {
+        state[idx].phase = parseInt(e.target.value);
+        document.getElementById(`phase-val-${idx}`).textContent = state[idx].phase + '\u00B0';
+      }
+    });
+
+    document.getElementById('chkIndiv').addEventListener('change', e => { showIndividual = e.target.checked; });
+    document.getElementById('chkRef').addEventListener('change', e => { showReference = e.target.checked; });
+
+    canvas.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = (e.clientX - rect.left) / rect.width * canvas.width;
+    });
+    canvas.addEventListener('mouseleave', () => { mouseX = -1; });
+    canvas.addEventListener('touchmove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = (e.touches[0].clientX - rect.left) / rect.width * canvas.width;
+      e.preventDefault();
+    }, { passive: false });
+
+    // Rendering
+    const DAYS = 30;
+    const HOURS = DAYS * 24;
+    const PAD_L = 50, PAD_R = 20, PAD_T = 30, PAD_B = 50;
+
+    function resize() {
+      const w = canvas.parentElement.clientWidth;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = w * ratio;
+      canvas.height = Math.max(400, w * 0.5) * ratio;
+      canvas.style.height = Math.max(400, w * 0.5) + 'px';
+    }
+
+    function tideAt(t, idx) {
+      const c = constituents[idx];
+      const omega = 2 * Math.PI / c.period;
+      return state[idx].amp * Math.cos(omega * t - state[idx].phase * Math.PI / 180);
+    }
+
+    function compositeAt(t) {
+      let h = 0;
+      for (let i = 0; i < constituents.length; i++) h += tideAt(t, i);
+      return h;
+    }
+
+    function draw() {
+      const W = canvas.width, H = canvas.height;
+      const plotW = W - PAD_L - PAD_R;
+      const plotH = H - PAD_T - PAD_B;
+      const scale = window.devicePixelRatio || 1;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#0a0e14';
+      ctx.fillRect(0, 0, W, H);
+
+      // Find Y range
+      let yMin = -4, yMax = 4;
+
+      // Y-axis mapping
+      const toX = (t) => PAD_L + (t / HOURS) * plotW;
+      const toY = (h) => PAD_T + plotH * (1 - (h - yMin) / (yMax - yMin));
+
+      // Grid lines
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      for (let h = Math.ceil(yMin); h <= yMax; h++) {
+        const y = toY(h);
+        ctx.beginPath(); ctx.moveTo(PAD_L, y); ctx.lineTo(W - PAD_R, y); ctx.stroke();
+      }
+      for (let d = 0; d <= DAYS; d += 5) {
+        const x = toX(d * 24);
+        ctx.beginPath(); ctx.moveTo(x, PAD_T); ctx.lineTo(x, H - PAD_B); ctx.stroke();
+      }
+
+      // Zero line
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(PAD_L, toY(0)); ctx.lineTo(W - PAD_R, toY(0)); ctx.stroke();
+
+      // Axis labels
+      ctx.fillStyle = '#7a8090';
+      ctx.font = `${10 * scale}px system-ui, sans-serif`;
+      ctx.textAlign = 'right';
+      for (let h = Math.ceil(yMin); h <= yMax; h++) {
+        ctx.fillText(h + 'm', PAD_L - 6, toY(h) + 4 * scale);
+      }
+      ctx.textAlign = 'center';
+      for (let d = 0; d <= DAYS; d += 5) {
+        ctx.fillText('Day ' + d, toX(d * 24), H - PAD_B + 16 * scale);
+      }
+
+      // Spring/Neap markers
+      ctx.font = `${9 * scale}px system-ui, sans-serif`;
+      ctx.fillStyle = 'rgba(196,176,144,0.4)';
+      const beatPeriod = 1 / Math.abs(1/12.4206 - 1/12.0);  // hours
+      for (let t = 0; t < HOURS; t += beatPeriod) {
+        const x = toX(t);
+        if (x > PAD_L && x < W - PAD_R) {
+          ctx.fillText('Spring', x, PAD_T - 4 * scale);
+          ctx.strokeStyle = 'rgba(196,176,144,0.1)';
+          ctx.beginPath(); ctx.moveTo(x, PAD_T); ctx.lineTo(x, H - PAD_B); ctx.stroke();
+        }
+        const neapX = toX(t + beatPeriod / 2);
+        if (neapX > PAD_L && neapX < W - PAD_R) {
+          ctx.fillText('Neap', neapX, PAD_T - 4 * scale);
+          ctx.strokeStyle = 'rgba(196,176,144,0.06)';
+          ctx.beginPath(); ctx.moveTo(neapX, PAD_T); ctx.lineTo(neapX, H - PAD_B); ctx.stroke();
+        }
+      }
+
+      const steps = Math.min(plotW, 1200);
+
+      // Reference data
+      if (showReference) {
+        ctx.strokeStyle = 'rgba(150,150,150,0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        for (let s = 0; s <= steps; s++) {
+          const t = (s / steps) * HOURS;
+          const x = toX(t), y = toY(refTide(t));
+          s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Individual constituents
+      if (showIndividual) {
+        for (let i = 0; i < constituents.length; i++) {
+          ctx.strokeStyle = constituents[i].color + '80';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          for (let s = 0; s <= steps; s++) {
+            const t = (s / steps) * HOURS;
+            const x = toX(t), y = toY(tideAt(t, i));
+            s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+      }
+
+      // Composite
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let s = 0; s <= steps; s++) {
+        const t = (s / steps) * HOURS;
+        const x = toX(t), y = toY(compositeAt(t));
+        s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Cursor tooltip
+      if (mouseX > PAD_L && mouseX < W - PAD_R) {
+        const t = ((mouseX - PAD_L) / plotW) * HOURS;
+        const comp = compositeAt(t);
+        const ref = refTide(t);
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(mouseX, PAD_T); ctx.lineTo(mouseX, H - PAD_B); ctx.stroke();
+
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.arc(mouseX, toY(comp), 4, 0, Math.PI * 2); ctx.fill();
+
+        // Tooltip
+        const day = (t / 24).toFixed(1);
+        const tooltipLines = [
+          `Day ${day}`,
+          `Composite: ${comp.toFixed(2)}m`,
+          `Reference: ${ref.toFixed(2)}m`,
+        ];
+        constituents.forEach((c, i) => {
+          tooltipLines.push(`${c.id}: ${tideAt(t, i).toFixed(2)}m`);
+        });
+
+        const boxW = 140 * scale, boxH = tooltipLines.length * 14 * scale + 10 * scale;
+        let bx = mouseX + 10;
+        if (bx + boxW > W - PAD_R) bx = mouseX - boxW - 10;
+        const by = PAD_T + 10;
+
+        ctx.fillStyle = 'rgba(14,20,32,0.92)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(bx, by, boxW, boxH, 4);
+        ctx.fill(); ctx.stroke();
+
+        ctx.font = `${10 * scale}px 'Courier New', monospace`;
+        ctx.textAlign = 'left';
+        tooltipLines.forEach((line, li) => {
+          ctx.fillStyle = li === 0 ? '#c4b090' : li < 3 ? '#d0d4da' : constituents[li - 3].color;
+          ctx.fillText(line, bx + 6, by + 14 * scale + li * 14 * scale);
+        });
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  })();
+  </script>
+</body>
+</html>
