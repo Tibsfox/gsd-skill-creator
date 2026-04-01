@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hook System Deep Dive: Claude Code
+v2.1.88 — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        OOPS — Ecosystem Alignment &amp; Architecture Analysis<br>
+        PNW Research Series · <a href="../index.html">Back to OOPS Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="hook-system-deep-dive-claude-code-v2.1.88">Hook System Deep
+    Dive: Claude Code v2.1.88</h1>
+    <p><strong>Date:</strong> 2026-03-31 <strong>Binary
+    analyzed:</strong>
+    <code>/home/foxy/.local/share/claude/versions/2.1.88</code> (228MB)
+    <strong>Method:</strong> Binary string extraction, settings.json
+    analysis, running hook source review</p>
+    <h2 id="the-complete-hook-taxonomy">The Complete Hook Taxonomy</h2>
+    <p>Claude Code v2.1.88 exposes 13 hook event types. Binary reference
+    counts indicate their relative importance in the codebase (higher
+    count = more internal handling logic):</p>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Hook Event</th>
+    <th>Binary Refs</th>
+    <th>Our Usage</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>PreToolUse</td>
+    <td>150</td>
+    <td>validate-commit, build-check, prompt-guard, workflow-guard</td>
+    <td>Heavy</td>
+    </tr>
+    <tr>
+    <td>PostToolUse</td>
+    <td>233</td>
+    <td>context-monitor, heartbeat, phase-boundary</td>
+    <td>Heavy</td>
+    </tr>
+    <tr>
+    <td>SessionStart</td>
+    <td>105</td>
+    <td>check-update, restore-state, inject-snapshot, session-state,
+    heartbeat-start</td>
+    <td>Heavy</td>
+    </tr>
+    <tr>
+    <td>SessionEnd</td>
+    <td>56</td>
+    <td>save-work-state, snapshot-session</td>
+    <td>Good</td>
+    </tr>
+    <tr>
+    <td>PostCompact</td>
+    <td>79</td>
+    <td>session-state (minimal)</td>
+    <td>Underused</td>
+    </tr>
+    <tr>
+    <td>PreCompact</td>
+    <td>54</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    <tr>
+    <td>FileChanged</td>
+    <td>61</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    <tr>
+    <td>PermissionDenied</td>
+    <td>57</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    <tr>
+    <td>Notification</td>
+    <td>567</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    <tr>
+    <td>TaskCompleted</td>
+    <td>48</td>
+    <td>task-completed-gate</td>
+    <td>Good</td>
+    </tr>
+    <tr>
+    <td>TeammateIdle</td>
+    <td>48</td>
+    <td>teammate-idle-gate</td>
+    <td>Good</td>
+    </tr>
+    <tr>
+    <td>WorktreeCreate</td>
+    <td>90</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    <tr>
+    <td>PostToolUseFailure</td>
+    <td>(low)</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    <tr>
+    <td>Stop</td>
+    <td>(low)</td>
+    <td>None</td>
+    <td>Missing</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>We actively use 6 of 14 hook types. Five are completely missing
+    from our implementation. That is the gap this document
+    addresses.</p>
+    <h2 id="hook-by-hook-analysis">Hook-by-Hook Analysis</h2>
+    <h3 id="pretooluse-150-refs">1. PreToolUse (150 refs)</h3>
+    <p><strong>What it does:</strong> Fires before any tool call
+    executes. Can block execution (exit code 2) or inject advisory
+    context. Receives the tool name and full tool input as JSON on
+    stdin.</p>
+    <p><strong>Data received:</strong></p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;hook_event_name&quot;</span><span class="fu">:</span> <span class="st">&quot;PreToolUse&quot;</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;session_id&quot;</span><span class="fu">:</span> <span class="st">&quot;abc123&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool_input&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;git commit -m </span><span class="ch">\&quot;</span><span class="st">feat: something</span><span class="ch">\&quot;</span><span class="st">&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;/path/to/project&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>Our current usage:</strong> Four hooks on this event: -
+    <code>validate-commit.sh</code> – blocks non-Conventional-Commits
+    messages (matcher: <code>Bash</code>, if:
+    <code>Bash(git commit*)</code>) - <code>build-check.sh</code> – runs
+    <code>tsc --noEmit</code> before commit/push (matcher:
+    <code>Bash</code>, if: <code>Bash(npm run build*)</code>) -
+    <code>gsd-prompt-guard.js</code> – scans Write/Edit to
+    <code>.planning/</code> for prompt injection patterns (matcher:
+    <code>Write|Edit</code>) - <code>gsd-workflow-guard.js</code> –
+    warns when editing files outside GSD workflow (matcher:
+    <code>Write|Edit</code>)</p>
+    <p><strong>Assessment:</strong> This is our strongest hook category.
+    The <code>if</code> condition pattern
+    (<code>"if": "Bash(git commit*)"</code>) is powerful – it lets us
+    target specific commands without running the full hook script for
+    every Bash call.</p>
+    <p><strong>Improvements:</strong> 1. <strong>Add <code>if</code>
+    conditions to prompt-guard and workflow-guard.</strong> Currently
+    these run on every Write/Edit, but prompt-guard only cares about
+    <code>.planning/</code> files. Adding
+    <code>"if": "Write(.planning/*)"</code> would skip the Node.js
+    process spawn for all other writes. At ~3ms per spawn, this adds up
+    in sessions with hundreds of file operations.</p>
+    <ol start="2" type="1">
+    <li><p><strong>Consolidate the two commit validators.</strong> We
+    have both <code>validate-commit.sh</code> and
+    <code>gsd-validate-commit.sh</code> in settings.json (lines 76 and
+    104). The second one references a file that does not exist in the
+    hooks directory, which means it silently fails every time. Remove
+    the dead entry.</p></li>
+    <li><p><strong>Add a <code>npm test</code> gate.</strong> The
+    build-check blocks on TypeScript errors but not test failures. A
+    PreToolUse hook on <code>Bash(git push*)</code> that runs
+    <code>npm test</code> would catch regressions before they hit the
+    remote.</p></li>
+    </ol>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;matcher&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;if&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash(git push*)&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;hooks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;command&quot;</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;bash .claude/hooks/test-gate.sh&quot;</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;timeout&quot;</span><span class="fu">:</span> <span class="dv">120</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <h3 id="posttooluse-233-refs">2. PostToolUse (233 refs)</h3>
+    <p><strong>What it does:</strong> Fires after a tool call completes.
+    Cannot block (the tool already ran). Can inject context for the
+    agent to see. Receives tool name, input, and output.</p>
+    <p><strong>Data received:</strong></p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;hook_event_name&quot;</span><span class="fu">:</span> <span class="st">&quot;PostToolUse&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;session_id&quot;</span><span class="fu">:</span> <span class="st">&quot;abc123&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Write&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool_input&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;file_path&quot;</span><span class="fu">:</span> <span class="st">&quot;/path/to/file.ts&quot;</span><span class="fu">,</span> <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span> <span class="fu">},</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool_output&quot;</span><span class="fu">:</span> <span class="st">&quot;File written successfully&quot;</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;/path/to/project&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>Our current usage:</strong> Three hooks with matcher
+    <code>Bash|Edit|Write|MultiEdit|Agent|Task</code>: -
+    <code>gsd-context-monitor.js</code> – reads context metrics from the
+    statusline bridge file and injects warnings at 35% and 25% remaining
+    - <code>agent-heartbeat.js</code> – writes a timestamp to
+    <code>/tmp/claude-heartbeat-{session_id}.json</code> on every tool
+    call - <code>phase-boundary-check.sh</code> /
+    <code>gsd-phase-boundary.sh</code> – checks if a write touches phase
+    boundary files</p>
+    <p><strong>Assessment:</strong> The context monitor is
+    well-engineered with debouncing (5 calls between warnings) and
+    severity escalation (WARNING to CRITICAL bypasses debounce). The
+    heartbeat system is elegant – the PostToolUse hook writes signals, a
+    background watcher process polls them.</p>
+    <p><strong>Improvements:</strong> 1. <strong>Add a test-result
+    tracker.</strong> After any <code>Bash(npm test*)</code> completes,
+    record pass/fail count to a session file. The statusline could then
+    show test state: <code>Tests: 21298/21298</code>. More importantly,
+    context warnings could reference the last test state – “context is
+    low but all tests pass” versus “context is low and 3 tests are
+    failing.”</p>
+    <ol start="2" type="1">
+    <li><strong>Track file modification patterns.</strong> After
+    Write/Edit, log which files were modified in a session-scoped
+    journal. This enables: (a) better SUMMARY.md generation (we know
+    exactly what changed), (b) conflict detection (two agents editing
+    the same file), (c) rollback support (we know what to
+    <code>git checkout</code>).</li>
+    </ol>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// PostToolUse hook: file-journal.js</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> journal <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-journal-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.jsonl`</span>)<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ([<span class="st">&#39;Write&#39;</span><span class="op">,</span> <span class="st">&#39;Edit&#39;</span><span class="op">,</span> <span class="st">&#39;MultiEdit&#39;</span>]<span class="op">.</span><span class="fu">includes</span>(data<span class="op">.</span><span class="at">tool_name</span>)) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> entry <span class="op">=</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ts</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">file</span><span class="op">:</span> data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">file_path</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">tool</span><span class="op">:</span> data<span class="op">.</span><span class="at">tool_name</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">success</span><span class="op">:</span> <span class="op">!</span>data<span class="op">.</span><span class="at">tool_output</span><span class="op">?.</span><span class="fu">includes</span>(<span class="st">&#39;error&#39;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  fs<span class="op">.</span><span class="fu">appendFileSync</span>(journal<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(entry) <span class="op">+</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <h3 id="posttoolusefailure-new-in-recent-versions">3.
+    PostToolUseFailure (new in recent versions)</h3>
+    <p><strong>What it does:</strong> Fires when a tool call fails
+    (throws an error, times out, or returns an error result). Distinct
+    from PostToolUse, which fires on success.</p>
+    <p><strong>Data received:</strong> Same shape as PostToolUse, but
+    the <code>tool_output</code> contains the error. May include an
+    <code>error</code> or <code>is_error</code> field.</p>
+    <p><strong>Our current usage:</strong> None.</p>
+    <p><strong>Why this matters:</strong> Tool failures are
+    information-rich events. A Bash command that fails tells us
+    something about the environment. A Write that fails tells us about
+    permissions. Currently, the agent sees the error in the
+    conversation, but our hooks do not react.</p>
+    <p><strong>Proposed implementation:</strong></p>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// PostToolUseFailure: failure-tracker.js</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Track repeated failures to detect stuck loops</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> failPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-fails-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> fails <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> { fails <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(failPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span> } <span class="cf">catch</span> {}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> key <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>data<span class="op">.</span><span class="at">tool_name</span><span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">command</span><span class="op">?.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">50</span>) <span class="op">||</span> data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">file_path</span> <span class="op">||</span> <span class="st">&#39;unknown&#39;</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>fails[key] <span class="op">=</span> (fails[key] <span class="op">||</span> <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fs<span class="op">.</span><span class="fu">writeFileSync</span>(failPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(fails))<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (fails[key] <span class="op">&gt;=</span> <span class="dv">3</span>) {</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  output<span class="op">.</span><span class="at">hookSpecificOutput</span> <span class="op">=</span> {</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;PostToolUseFailure&quot;</span><span class="op">,</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">additionalContext</span><span class="op">:</span> <span class="vs">`REPEATED FAILURE: &quot;</span><span class="sc">${</span>key<span class="sc">}</span><span class="vs">&quot; has failed </span><span class="sc">${</span>fails[key]<span class="sc">}</span><span class="vs"> times. `</span> <span class="op">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;This may indicate a systemic issue. Consider an alternative approach.&#39;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <h3 id="sessionstart-105-refs">4. SessionStart (105 refs)</h3>
+    <p><strong>What it does:</strong> Fires once when a new session
+    begins. Output becomes part of the initial conversation context.
+    Multiple hooks run sequentially.</p>
+    <p><strong>Our current usage:</strong> Six hooks – the most of any
+    event: - <code>gsd-check-update.js</code> – spawns a background npm
+    version check - <code>gsd-restore-work-state.js</code> – loads
+    previous session state via skill-creator CLI -
+    <code>gsd-inject-snapshot.js</code> – injects the latest session
+    snapshot for narrative continuity - <code>session-state.sh</code> –
+    outputs STATE.md head for orientation -
+    <code>agent-heartbeat-start.js</code> – spawns the background
+    heartbeat watcher - <code>gsd-session-state.sh</code> – references a
+    script that does not exist in the hooks directory</p>
+    <p><strong>Assessment:</strong> Two issues. First,
+    <code>gsd-inject-snapshot.js</code> and
+    <code>gsd-restore-work-state.js</code> use ESM <code>import</code>
+    syntax but have a <code>.js</code> extension and no
+    <code>"type": "module"</code> in package.json. They would fail in a
+    standard Node.js environment. They likely depend on
+    <code>npx skill-creator</code> existing and working, which silently
+    fails if the CLI is not installed. Second,
+    <code>gsd-session-state.sh</code> is referenced but does not exist –
+    dead entry.</p>
+    <p><strong>Improvements:</strong> 1. <strong>Remove dead
+    hooks.</strong> Delete the <code>gsd-session-state.sh</code> entry
+    from settings.json. Clean up <code>gsd-validate-commit.sh</code>
+    while we’re at it. 2. <strong>Convert ESM hooks to CJS.</strong> The
+    <code>gsd-inject-snapshot.js</code>,
+    <code>gsd-restore-work-state.js</code>,
+    <code>gsd-save-work-state.js</code>, and
+    <code>gsd-snapshot-session.js</code> all use <code>import</code>
+    syntax. Convert to <code>require()</code> for consistency with the
+    rest of the hooks and reliable execution. 3. <strong>Add a
+    session-duration estimator.</strong> On SessionStart, check the
+    calendar and time of day. If it is late at night, inject a gentle
+    “long session” advisory that encourages more frequent commits. This
+    prevents the 3am context-exhaustion scenario.</p>
+    <h3 id="sessionend-56-refs">5. SessionEnd (56 refs)</h3>
+    <p><strong>What it does:</strong> Fires when a session ends (user
+    exits, <code>/exit</code>, timeout). Last chance to persist state.
+    Output is not shown to the agent (session is over).</p>
+    <p><strong>Our current usage:</strong> -
+    <code>gsd-save-work-state.js</code> – saves active task and
+    checkpoint - <code>gsd-snapshot-session.js</code> – generates a
+    session summary from the transcript</p>
+    <p><strong>Assessment:</strong> Solid. The snapshot generator reads
+    the transcript path from stdin, which is the right approach. One
+    concern: both hooks call out to <code>npx skill-creator</code>,
+    which may not be installed, and they use ESM imports.</p>
+    <p><strong>Improvements:</strong> 1. <strong>Add heartbeat
+    cleanup.</strong> When the session ends, remove
+    <code>/tmp/claude-heartbeat-{session_id}.json</code> and kill the
+    watcher process. Currently the watcher self-terminates when the
+    heartbeat file disappears, but the file persists until the next
+    reboot. Add explicit cleanup. 2. <strong>Write a git-stash
+    checkpoint.</strong> If there are uncommitted changes at SessionEnd,
+    automatically <code>git stash</code> them with a descriptive
+    message. This prevents lost work when a session dies
+    unexpectedly.</p>
+    <h3 id="postcompact-79-refs-key-gap">6. PostCompact (79 refs) – KEY
+    GAP</h3>
+    <p><strong>What it does:</strong> Fires after Claude Code compresses
+    the conversation to reclaim context window space. This is the moment
+    where the agent loses working memory – older messages are summarized
+    or dropped.</p>
+    <p><strong>Data received:</strong> The session context, possibly
+    including a summary of what was compacted.</p>
+    <p><strong>Our current usage:</strong> Only
+    <code>session-state.sh</code>, which outputs STATE.md. This is the
+    same script used for SessionStart – it provides orientation but does
+    not address the compaction-specific problem.</p>
+    <p><strong>Why this is critical:</strong> Compaction is the single
+    biggest cause of quality degradation in long sessions. After
+    compaction, the agent forgets: - Which files it was actively editing
+    - What task it was in the middle of - Which tests were
+    passing/failing - The user’s most recent instructions</p>
+    <p><strong>Proposed implementation:</strong></p>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// PostCompact: context-recovery.js</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Reconstructs critical working state after context compaction</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { execSync } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;child_process&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> cwd <span class="op">=</span> data<span class="op">.</span><span class="at">cwd</span> <span class="op">||</span> <span class="bu">process</span><span class="op">.</span><span class="fu">cwd</span>()<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> parts <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Current git state (what branch, what&#39;s modified)</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> branch <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git branch --show-current&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> status <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git status --short&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lastCommit <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git log --oneline -1&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`## Git State</span><span class="sc">\n</span><span class="vs">Branch: </span><span class="sc">${</span>branch<span class="sc">}\n</span><span class="vs">Last commit: </span><span class="sc">${</span>lastCommit<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (status) parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`Modified files:</span><span class="sc">\n${</span>status<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> {}</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. GSD project state</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> statePath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(cwd<span class="op">,</span> <span class="st">&#39;.planning&#39;</span><span class="op">,</span> <span class="st">&#39;STATE.md&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(statePath)) {</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> state <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(statePath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> first30 <span class="op">=</span> state<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">30</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>      parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`## GSD State</span><span class="sc">\n${</span>first30<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Recently modified files from journal</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> journalPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(<span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>      <span class="vs">`claude-journal-</span><span class="sc">${</span>data<span class="op">.</span><span class="at">session_id</span><span class="sc">}</span><span class="vs">.jsonl`</span>)<span class="op">;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(journalPath)) {</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lines <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(journalPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">.</span><span class="fu">trim</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> recent <span class="op">=</span> lines<span class="op">.</span><span class="fu">slice</span>(<span class="op">-</span><span class="dv">10</span>)<span class="op">.</span><span class="fu">map</span>(l <span class="kw">=&gt;</span> {</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> { <span class="kw">const</span> e <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(l)<span class="op">;</span> <span class="cf">return</span> e<span class="op">.</span><span class="at">file</span><span class="op">;</span> } <span class="cf">catch</span> { <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> }</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>      })<span class="op">.</span><span class="fu">filter</span>(<span class="bu">Boolean</span>)<span class="op">;</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (recent<span class="op">.</span><span class="at">length</span>) parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`## Recent Files</span><span class="sc">\n${</span>recent<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (parts<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> output <span class="op">=</span> {</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hookSpecificOutput</span><span class="op">:</span> {</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>          <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;PostCompact&quot;</span><span class="op">,</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>          <span class="dt">additionalContext</span><span class="op">:</span> <span class="st">&quot;CONTEXT RECOVERY (post-compaction):</span><span class="sc">\n\n</span><span class="st">&quot;</span> <span class="op">+</span> parts<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n\n</span><span class="st">&#39;</span>)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>      <span class="bu">process</span><span class="op">.</span><span class="at">stdout</span><span class="op">.</span><span class="fu">write</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(output))<span class="op">;</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <h3 id="precompact-54-refs-new-discovery">7. PreCompact (54 refs) –
+    NEW DISCOVERY</h3>
+    <p><strong>What it does:</strong> Fires before compaction occurs.
+    This is the moment to save state before the context is compressed.
+    This hook was not in our known list.</p>
+    <p><strong>Our current usage:</strong> None.</p>
+    <p><strong>Why this matters:</strong> PreCompact + PostCompact form
+    a save/restore pair. PreCompact is the save checkpoint; PostCompact
+    is the restore point. Without PreCompact, PostCompact can only
+    reconstruct from external sources (git, filesystem). With
+    PreCompact, we can write a precise snapshot of the agent’s working
+    state before it gets compacted away.</p>
+    <p><strong>Proposed implementation:</strong></p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// PreCompact: pre-compact-snapshot.js</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Saves working state before context compaction</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> sessionId <span class="op">=</span> data<span class="op">.</span><span class="at">session_id</span><span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>sessionId) <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> snapshotPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="vs">`claude-precompact-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Save what we know about the session right now</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> snapshot <span class="op">=</span> {</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">timestamp</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">session_id</span><span class="op">:</span> sessionId<span class="op">,</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">cwd</span><span class="op">:</span> data<span class="op">.</span><span class="at">cwd</span><span class="op">,</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Read the file journal if it exists</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">recent_files</span><span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>      <span class="dt">compaction_count</span><span class="op">:</span> <span class="dv">0</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Increment compaction counter</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(snapshotPath)) {</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>      <span class="cf">try</span> {</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> prev <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(snapshotPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        snapshot<span class="op">.</span><span class="at">compaction_count</span> <span class="op">=</span> (prev<span class="op">.</span><span class="at">compaction_count</span> <span class="op">||</span> <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">catch</span> {}</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read file journal</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> journalPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>      <span class="vs">`claude-journal-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.jsonl`</span>)<span class="op">;</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(journalPath)) {</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lines <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(journalPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">.</span><span class="fu">trim</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>      snapshot<span class="op">.</span><span class="at">recent_files</span> <span class="op">=</span> lines<span class="op">.</span><span class="fu">slice</span>(<span class="op">-</span><span class="dv">20</span>)<span class="op">.</span><span class="fu">map</span>(l <span class="kw">=&gt;</span> {</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> { <span class="cf">return</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(l)<span class="op">;</span> } <span class="cf">catch</span> { <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> }</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      })<span class="op">.</span><span class="fu">filter</span>(<span class="bu">Boolean</span>)<span class="op">;</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(snapshotPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(snapshot<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <h3 id="filechanged-61-refs-key-gap">8. FileChanged (61 refs) – KEY
+    GAP</h3>
+    <p><strong>What it does:</strong> Fires when a file on disk changes
+    outside of Claude Code’s own tool calls. This catches: linter
+    auto-fixes, <code>prettier --write</code>, user edits in another
+    editor, git operations (checkout, merge, rebase), build tool
+    outputs.</p>
+    <p><strong>Data received:</strong> Likely includes the file path
+    that changed and possibly the change type (created, modified,
+    deleted).</p>
+    <p><strong>Our current usage:</strong> None.</p>
+    <p><strong>Why this matters:</strong> External file changes are
+    invisible to the agent. If Foxy edits a file in VS Code while Claude
+    is working, Claude does not know. If a linter reformats a file
+    Claude just wrote, Claude’s in-memory version is now stale. If
+    <code>git checkout</code> swaps branches, every file assumption is
+    invalid.</p>
+    <p><strong>Proposed implementation:</strong></p>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">// FileChanged: external-change-tracker.js</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Reacts to files modified outside Claude Code</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> filePath <span class="op">=</span> data<span class="op">.</span><span class="at">file_path</span> <span class="op">||</span> data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">file_path</span> <span class="op">||</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> cwd <span class="op">=</span> data<span class="op">.</span><span class="at">cwd</span> <span class="op">||</span> <span class="bu">process</span><span class="op">.</span><span class="fu">cwd</span>()<span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> messages <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 1: SKILL.md changed -- skills need re-reading</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">&#39;SKILL.md&#39;</span>)) {</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="vs">`Skill file changed externally: </span><span class="sc">${</span>path<span class="op">.</span><span class="fu">basename</span>(path<span class="op">.</span><span class="fu">dirname</span>(filePath))<span class="sc">}</span><span class="vs">. `</span> <span class="op">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Re-read if this skill is relevant to current work.&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 2: .planning/ file changed -- GSD state may be stale</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">includes</span>(<span class="st">&#39;.planning/&#39;</span>)) {</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="vs">`GSD state file changed externally: </span><span class="sc">${</span>path<span class="op">.</span><span class="fu">basename</span>(filePath)<span class="sc">}</span><span class="vs">. `</span> <span class="op">+</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Your cached knowledge of project state may be outdated. Re-read before making decisions.&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 3: Source file we recently modified</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (check against journal if available)</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 4: settings.json changed -- hook config may have changed</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">&#39;settings.json&#39;</span>) <span class="op">&amp;&amp;</span> filePath<span class="op">.</span><span class="fu">includes</span>(<span class="st">&#39;.claude&#39;</span>)) {</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="st">&#39;Hook configuration changed. New hooks may be active.&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (messages<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> output <span class="op">=</span> {</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hookSpecificOutput</span><span class="op">:</span> {</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>          <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;FileChanged&quot;</span><span class="op">,</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>          <span class="dt">additionalContext</span><span class="op">:</span> messages<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>      <span class="bu">process</span><span class="op">.</span><span class="at">stdout</span><span class="op">.</span><span class="fu">write</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(output))<span class="op">;</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <h3 id="permissiondenied-57-refs-key-gap">9. PermissionDenied (57
+    refs) – KEY GAP</h3>
+    <p><strong>What it does:</strong> Fires when a tool call is denied
+    by the permission system (sandbox, allowlist, user rejection). The
+    tool does not execute.</p>
+    <p><strong>Data received:</strong> The tool name, input that was
+    denied, and the denial reason.</p>
+    <p><strong>Our current usage:</strong> None.</p>
+    <p><strong>Why this matters:</strong> Permission denials are not
+    bugs – they are boundary signals. When an agent hits a permission
+    wall, it needs to adapt its strategy, not retry the same action.
+    Currently, the agent sees the denial in the conversation and figures
+    it out. A hook can provide structured guidance.</p>
+    <p><strong>Proposed implementation:</strong></p>
+    <div class="sourceCode" id="cb9"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">// PermissionDenied: graceful-fallback.js</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Provides alternative strategies when tool calls are denied</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> tool <span class="op">=</span> data<span class="op">.</span><span class="at">tool_name</span><span class="op">;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> sessionId <span class="op">=</span> data<span class="op">.</span><span class="at">session_id</span><span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Track denials to avoid retry loops</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> denyPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-denied-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> denials <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> { denials <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(denyPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span> } <span class="cf">catch</span> {}</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> key <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>tool<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">command</span><span class="op">?.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">60</span>) <span class="op">||</span> data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">file_path</span> <span class="op">||</span> <span class="st">&#39;&#39;</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    denials[key] <span class="op">=</span> (denials[key] <span class="op">||</span> <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(denyPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(denials))<span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> advice <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (denials[key] <span class="op">&gt;=</span> <span class="dv">2</span>) {</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>      advice <span class="op">=</span> <span class="vs">`This action has been denied </span><span class="sc">${</span>denials[key]<span class="sc">}</span><span class="vs"> times. Do not retry -- find an alternative approach. `</span><span class="op">;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tool-specific guidance</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (tool <span class="op">===</span> <span class="st">&#39;Bash&#39;</span>) {</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>      advice <span class="op">+=</span> <span class="st">&#39;If a shell command was denied, try using a more specific tool (Read, Write, Grep) instead of Bash.&#39;</span><span class="op">;</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (tool <span class="op">===</span> <span class="st">&#39;Write&#39;</span> <span class="op">||</span> tool <span class="op">===</span> <span class="st">&#39;Edit&#39;</span>) {</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>      advice <span class="op">+=</span> <span class="st">&#39;If a file write was denied, check if the path is in a restricted directory or if the file is read-only.&#39;</span><span class="op">;</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (advice) {</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> output <span class="op">=</span> {</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hookSpecificOutput</span><span class="op">:</span> {</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>          <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;PermissionDenied&quot;</span><span class="op">,</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>          <span class="dt">additionalContext</span><span class="op">:</span> advice</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>      <span class="bu">process</span><span class="op">.</span><span class="at">stdout</span><span class="op">.</span><span class="fu">write</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(output))<span class="op">;</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <h3 id="worktreecreate-90-refs">10. WorktreeCreate (90 refs)</h3>
+    <p><strong>What it does:</strong> Fires when a new git worktree is
+    created for agent isolation. This is the foundation of multi-agent
+    parallel execution – each agent gets its own worktree so they do not
+    step on each other’s files.</p>
+    <p><strong>Our current usage:</strong> None.</p>
+    <p><strong>Why this matters:</strong> WorktreeCreate has 90 binary
+    references – more than SessionEnd (56) or PermissionDenied (57).
+    This is a heavily used event internally. Our multi-agent patterns
+    (Gastown convoy, 4-agent parallel synthesis) create worktrees but
+    have no hook logic around the creation event.</p>
+    <p><strong>Proposed use:</strong> Initialize agent workspace on
+    worktree creation – copy <code>.planning/STATE.md</code> snapshot,
+    set up the file journal, configure agent-specific settings.</p>
+    <h3 id="taskcompleted-and-teammateidle-48-refs-each">11.
+    TaskCompleted and TeammateIdle (48 refs each)</h3>
+    <p><strong>What they do:</strong> <code>TaskCompleted</code> fires
+    when an agent completes a task. <code>TeammateIdle</code> fires when
+    a teammate (agent in a team) goes idle. Both can block (exit 2) with
+    feedback sent to the agent.</p>
+    <p><strong>Our current usage:</strong> -
+    <code>task-completed-gate.sh</code> – gates APT team tasks: verifies
+    PLAN.md exists for planning tasks, tests pass for execution tasks -
+    <code>teammate-idle-gate.sh</code> – gates APT teammates: blocks
+    idle if uncommitted src/ changes exist</p>
+    <p><strong>Assessment:</strong> These are well-targeted but narrow
+    (only APT team). The pattern is sound.</p>
+    <p><strong>Improvements:</strong> Extend to GSD executor agents. A
+    TaskCompleted gate could verify that SUMMARY.md exists before
+    allowing a phase to complete. A TeammateIdle gate could ensure all
+    file changes are committed.</p>
+    <h3 id="notification-567-refs">12. Notification (567 refs)</h3>
+    <p><strong>What it does:</strong> Internal notification system with
+    10+ subtypes (NotificationType0 through NotificationType9). These
+    appear to be the mechanism for system-level messages: update
+    available, context warning, error notification, completion
+    notification.</p>
+    <p><strong>Our current usage:</strong> None directly, though our
+    hooks produce notifications indirectly via
+    <code>additionalContext</code>.</p>
+    <p><strong>This is the highest-reference hook in the binary</strong>
+    – 567 occurrences. The internal notification system is clearly
+    central to Claude Code’s architecture. We should investigate what
+    each NotificationType does and whether we can subscribe to specific
+    types.</p>
+    <h3 id="stop-low-refs-but-significant">13. Stop (low refs, but
+    significant)</h3>
+    <p><strong>What it does:</strong> Fires when the agent is about to
+    stop (session end, user interrupt, context exhaustion). The binary
+    contains <code>Stop hook prevented continuation</code>,
+    <code>Stop hook blocking error</code>, and
+    <code>Stop hook feedback</code> – indicating this hook can both
+    block stopping and inject feedback.</p>
+    <p><strong>Our current usage:</strong> None.</p>
+    <p><strong>Potential use:</strong> A Stop hook could save emergency
+    state – dump current task progress, uncommitted changes summary, and
+    a one-line “where I was” to a recovery file. This is the ejection
+    seat.</p>
+    <h2 id="evaluation-of-current-hook-quality">Evaluation of Current
+    Hook Quality</h2>
+    <h3 id="strengths">Strengths</h3>
+    <ol type="1">
+    <li><p><strong>Silent failure pattern.</strong> Every hook uses
+    <code>try/catch</code> with <code>process.exit(0)</code> fallback.
+    No hook can crash the session. This is correct.</p></li>
+    <li><p><strong>Stdin timeout guards.</strong> The JS hooks
+    (<code>gsd-context-monitor.js</code>,
+    <code>gsd-prompt-guard.js</code>, etc.) include
+    <code>setTimeout(() =&gt; process.exit(0), N)</code> guards against
+    stdin hanging. This prevents hooks from blocking the session on pipe
+    issues.</p></li>
+    <li><p><strong>Atomic writes.</strong> The heartbeat system uses
+    <code>writeFileSync(tmpPath) + renameSync(tmpPath, realPath)</code>
+    – proper atomic file operations to prevent corrupt reads from the
+    watcher.</p></li>
+    <li><p><strong>Debouncing.</strong> The context monitor tracks calls
+    between warnings and supports severity escalation. This prevents
+    warning spam while ensuring critical alerts are not missed.</p></li>
+    </ol>
+    <h3 id="issues">Issues</h3>
+    <ol type="1">
+    <li><p><strong>Dead references.</strong> Four entries in
+    settings.json reference non-existent files:</p>
+    <ul>
+    <li><code>gsd-session-state.sh</code> (SessionStart, line 49) – does
+    not exist</li>
+    <li><code>gsd-validate-commit.sh</code> (PreToolUse, line 109) –
+    does not exist</li>
+    <li><code>phase-boundary-check.sh</code> (PostToolUse, line 168) –
+    does not exist</li>
+    <li><code>gsd-phase-boundary.sh</code> (PostToolUse, line 178) –
+    does not exist These fail silently on every invocation, adding ~3ms
+    of wasted process spawn time each. Four dead hooks firing on common
+    events means ~12ms of overhead on every Write/Edit/Bash cycle for
+    nothing.</li>
+    </ul></li>
+    <li><p><strong>ESM/CJS mismatch.</strong> Four hooks use
+    <code>import</code> (ESM) syntax:
+    <code>gsd-inject-snapshot.js</code>,
+    <code>gsd-restore-work-state.js</code>,
+    <code>gsd-save-work-state.js</code>,
+    <code>gsd-snapshot-session.js</code>. The rest use
+    <code>require()</code> (CJS). Since there is no
+    <code>"type": "module"</code> in package.json, the ESM hooks would
+    fail in standard Node.js unless they are being run through a loader.
+    These need to be CJS or renamed to <code>.mjs</code>.</p></li>
+    <li><p><strong>Redundant SessionStart hooks.</strong> Six hooks on
+    SessionStart is excessive. <code>session-state.sh</code> outputs
+    STATE.md head, and <code>gsd-inject-snapshot.js</code> injects the
+    latest session snapshot, and <code>gsd-restore-work-state.js</code>
+    loads previous state. These overlap. Consolidate into a single hook
+    that performs all three operations in one Node.js process, saving
+    two process spawns.</p></li>
+    <li><p><strong>Missing <code>if</code> conditions.</strong> The
+    prompt-guard and workflow-guard hooks run on every Write/Edit, but
+    they immediately check the file path and exit for non-matching
+    files. Adding <code>if</code> conditions to settings.json would let
+    Claude Code skip the process spawn entirely for non-matching
+    operations.</p></li>
+    <li><p><strong>No PostCompact strategy.</strong> Our single
+    PostCompact hook (<code>session-state.sh</code>) outputs the same
+    STATE.md snippet as SessionStart. After compaction, the agent needs
+    specifically: (a) what it was doing, (b) which files it was editing,
+    (c) what the user last asked. Generic state output is not
+    enough.</p></li>
+    </ol>
+    <h2 id="priority-implementation-order">Priority Implementation
+    Order</h2>
+    <p>Based on impact and effort:</p>
+    <ol type="1">
+    <li><p><strong>Clean up dead references</strong> – 10 minutes.
+    Remove <code>gsd-session-state.sh</code>,
+    <code>gsd-validate-commit.sh</code>,
+    <code>phase-boundary-check.sh</code>, and
+    <code>gsd-phase-boundary.sh</code> from settings.json.</p></li>
+    <li><p><strong>PostCompact context recovery</strong> – 2 hours.
+    Implement the save/restore pair using PreCompact and PostCompact.
+    This directly addresses the biggest quality issue in long
+    sessions.</p></li>
+    <li><p><strong>FileChanged handler</strong> – 1 hour. External
+    change detection prevents stale-state bugs. Start with
+    <code>.planning/</code> and <code>SKILL.md</code>
+    monitoring.</p></li>
+    <li><p><strong>PermissionDenied fallback</strong> – 1 hour. Denial
+    tracking prevents retry loops, which waste context on actions that
+    will never succeed.</p></li>
+    <li><p><strong>PostToolUseFailure tracker</strong> – 1 hour. Failure
+    pattern detection catches stuck agents before they burn through
+    context.</p></li>
+    <li><p><strong>WorktreeCreate initializer</strong> – 2 hours. Proper
+    workspace setup for multi-agent execution.</p></li>
+    <li><p><strong>Consolidate SessionStart</strong> – 2 hours. Merge 6
+    hooks into 2-3 well-structured ones.</p></li>
+    </ol>
+    <h2 id="the-hook-output-contract">The Hook Output Contract</h2>
+    <p>Every hook communicates through a single protocol. The hook
+    receives JSON on stdin and writes JSON to stdout:</p>
+    <p><strong>Advisory output</strong> (inject context, do not
+    block):</p>
+    <div class="sourceCode" id="cb10"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;hookSpecificOutput&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;hookEventName&quot;</span><span class="fu">:</span> <span class="st">&quot;PostToolUse&quot;</span><span class="fu">,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;additionalContext&quot;</span><span class="fu">:</span> <span class="st">&quot;Message the agent will see&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>Blocking output</strong> (PreToolUse only, exit code
+    2):</p>
+    <div class="sourceCode" id="cb11"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;decision&quot;</span><span class="fu">:</span> <span class="st">&quot;block&quot;</span><span class="fu">,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;reason&quot;</span><span class="fu">:</span> <span class="st">&quot;Why the tool call was blocked&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>Silent pass</strong> (no output, exit code 0): The hook
+    ran, found nothing to report, and exited cleanly.</p>
+    <p>This contract is simple and well-designed. The
+    <code>additionalContext</code> field is the primary mechanism for
+    hooks to influence agent behavior without taking control. The
+    <code>decision: "block"</code> mechanism is reserved for hard gates
+    where the agent must not proceed.</p>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>Our hook implementation is strong where it exists but has
+    significant blind spots. The five missing hook types (PreCompact,
+    FileChanged, PermissionDenied, WorktreeCreate, PostToolUseFailure)
+    represent reactive intelligence that we are leaving on the table.
+    PostCompact alone would dramatically improve our long-session
+    quality – the context recovery pattern is the single highest-impact
+    improvement available.</p>
+    <p>The cleanup items (dead references, ESM/CJS mismatch, missing
+    <code>if</code> conditions) are low-effort, high-value fixes that
+    should happen immediately. They reduce wasted process spawns and
+    eliminate silent failures.</p>
+    <p>The discovery of PreCompact as a distinct hook from PostCompact
+    changes our approach to context preservation. Instead of
+    reconstructing state after compaction (reactive), we can snapshot
+    state before compaction (proactive). The PreCompact/PostCompact pair
+    is the save/load pattern for agent memory.</p>
+    <div class="nav">
+        <a href="../index.html">← Back to OOPS Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/OOPS/">tibsfox.com/Research/OOPS</a>
+    </div>
+</body>
+</html>
