@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Mathematical Discovery — OPEN Problems</title>
+<style>
+:root {
+  --bg: #06080e;
+  --panel: #0a0e18;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --green: #4CAF50;
+  --amber: #E89848;
+  --blue: #4a90d9;
+  --purple: #9a6ad8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:#e0cc80; }
+
+header {
+  background:linear-gradient(135deg, #06080e 0%, #0e1428 30%, #1a0e30 60%, #0a1428 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:2px solid var(--purple);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; letter-spacing:0.05em; }
+header .subtitle { color:var(--purple); font-size:0.9rem; font-style:italic; margin-top:0.3rem; }
+header .status-badge {
+  display:inline-block; margin-top:0.6rem; padding:0.15rem 0.7rem; border-radius:3px;
+  font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em;
+  background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3);
+}
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a:hover { color:#fff; }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+.section {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; margin-bottom:1.2rem;
+}
+.section p { font-size:0.9rem; line-height:1.7; margin-bottom:0.6rem; }
+.section p:last-child { margin-bottom:0; }
+
+.stat-grid {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:0.8rem; margin:0.8rem 0;
+}
+.stat-box {
+  background:rgba(154,106,216,0.06); border:1px solid rgba(154,106,216,0.15);
+  border-radius:4px; padding:0.8rem; text-align:center;
+}
+.stat-box .number { font-size:1.5rem; color:var(--purple); font-weight:700; font-family:system-ui,sans-serif; }
+.stat-box .label { font-size:0.7rem; color:var(--dim); font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.05em; margin-top:0.2rem; }
+
+.paper {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.4rem; margin-bottom:0.8rem;
+}
+.paper h3 { font-size:0.95rem; color:#fff; margin-bottom:0.3rem; }
+.paper .meta { font-size:0.75rem; color:var(--purple); font-family:monospace; margin-bottom:0.4rem; }
+.paper p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; line-height:1.5; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-math { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-ai { background:rgba(74,144,217,0.15); color:var(--blue); border:1px solid rgba(74,144,217,0.3); }
+.tag-ours { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+
+.link-list { list-style:none; padding:0; }
+.link-list li { font-size:0.85rem; font-family:system-ui,sans-serif; padding:0.3rem 0; }
+.link-list li::before { content:"\2192\00a0"; color:var(--purple); }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+footer a { color:rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI for Mathematical Discovery</h1>
+  <div class="subtitle">Can language models contribute to mathematical proofs and pattern discovery?</div>
+  <div class="status-badge">Active</div>
+  <nav>
+    <a href="../index.html">OPEN</a>
+    <a href="../../LIVE/index.html">Live</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>The Problem</h2>
+  <div class="section">
+    <p>Can AI systems &mdash; particularly large language models &mdash; make meaningful contributions to mathematical research? Not just solve textbook problems, but discover new patterns, generate novel conjectures, and assist in proving theorems that humans have struggled with?</p>
+    <p>The evidence so far is mixed. The FrontierMath benchmark, designed with research-level mathematics problems, finds that current frontier models solve less than 2% of problems. This is humbling. Yet AI has already contributed to mathematical discovery in specific domains: DeepMind's AlphaGeometry solved IMO geometry problems, and LLM-assisted pattern recognition has found new identities in combinatorics and knot theory.</p>
+    <p>The open question is not "can AI do math" (clearly it struggles) but rather: <strong>what is the right human-AI collaboration model for mathematical research?</strong> Where are LLMs strongest, and where do they fail systematically?</p>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="number">&lt;2%</div>
+        <div class="label">FrontierMath solve rate</div>
+      </div>
+      <div class="stat-box">
+        <div class="number">739</div>
+        <div class="label">Cross-ref graph edges</div>
+      </div>
+      <div class="stat-box">
+        <div class="number">177</div>
+        <div class="label">Cross-ref graph nodes</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Latest Research</h2>
+  <div class="paper">
+    <h3>FrontierMath Benchmark</h3>
+    <div class="meta">Epoch AI, 2025 &middot; Research-level mathematics evaluation</div>
+    <p>A benchmark of research-level mathematics problems designed to be unsolvable by pattern matching alone. Problems require multi-step reasoning, novel proof techniques, and deep domain knowledge. Current frontier models (GPT-4, Claude, Gemini) solve less than 2% of problems. This establishes a clear baseline: LLMs are not yet capable of independent mathematical research at the research frontier. The gap between "can solve competition math" and "can do research math" is enormous.</p>
+  </div>
+  <div class="paper">
+    <h3>Cross-Reference Graph Analysis</h3>
+    <div class="meta">Internal &middot; 739 edges, 177 nodes &middot; gsd-skill-creator</div>
+    <p>Our cross-reference graph maps connections between 177 research projects across 13 Rosetta clusters. With 739 edges, the graph has an average degree of ~8.3, suggesting dense interconnection. This graph is itself a dataset for computational pattern discovery &mdash; unexpected connections between distant research areas may reveal structural relationships that are not obvious to human inspection. The graph grows with every sweep.</p>
+  </div>
+  <div class="paper">
+    <h3>Human-LLM Collaboration on Collatz</h3>
+    <div class="meta"><a href="https://arxiv.org/abs/2603.11066">arXiv:2603.11066</a> &middot; March 2026</div>
+    <p>Documents a structured collaboration between human mathematicians and LLMs on the Collatz conjecture. Key findings: LLMs are most useful for (1) generating conjectures about sub-problems, (2) exploring large parameter spaces, (3) identifying structural patterns in data, and (4) translating between mathematical formalisms. They fail at (1) multi-step logical reasoning, (2) novel proof construction, and (3) maintaining consistency across long arguments. The collaboration model matters more than the model's raw capability.</p>
+  </div>
+
+  <h2>Our Connection</h2>
+  <div class="section">
+    <p><span class="tag tag-ours">Rosetta</span> <span class="tag tag-ai">AI</span> <span class="tag tag-math">Math</span> This problem connects to our work through the <strong>Rosetta Core</strong> (cross-domain translation engine), the College across <strong>all departments</strong>, and <strong>ACE M2</strong>.</p>
+    <p><strong>Cross-reference graph as dataset:</strong> Our 739-edge cross-reference graph connecting 177 research projects is a concrete dataset for computational pattern discovery. We can apply graph algorithms (community detection, centrality analysis, shortest paths between distant nodes) to find unexpected connections. The graph encodes our collective understanding of how different mathematical and scientific domains relate &mdash; finding new edges is AI-assisted discovery in action.</p>
+    <p><strong>Rosetta Core translation engine:</strong> ACE M2 implements the Rosetta Core, which translates concepts between domains. This is precisely the capability needed for AI-assisted mathematical discovery &mdash; recognizing that a problem in combinatorics has structural similarity to a problem in dynamical systems, or that a technique from information theory applies to a number theory question. Every cross-reference we discover is a Rosetta translation.</p>
+    <p><strong>Every sweep is an experiment:</strong> Each research sweep is a live experiment in human-AI collaboration on pattern discovery. We use Claude to read papers, identify connections, and update the cross-reference graph. The <a href="../../AIH/index.html">AIH project</a> documents what works and what doesn't.</p>
+  </div>
+
+  <h2>College &amp; Research Links</h2>
+  <div class="section">
+    <ul class="link-list">
+      <li><a href="../../AIH/index.html">AIH &mdash; AI and Humanity</a> (AI collaboration patterns, alignment)</li>
+      <li><a href="../../ACE/index.html">ACE &mdash; Agent Convoy Engine</a> (M2: Rosetta Core translation engine)</li>
+      <li>Rosetta Core &mdash; cross-domain translation (the foundational capability)</li>
+      <li>College All Departments &mdash; AI-assisted discovery applies everywhere</li>
+      <li><a href="collatz.html">Collatz Conjecture</a> (Human-LLM collaboration case study)</li>
+      <li><a href="chromatic-plane.html">Chromatic Number of the Plane</a> (SAT solvers as computational math tools)</li>
+      <li><a href="komlos.html">Koml&oacute;s Conjecture</a> (computational approaches to open problems)</li>
+    </ul>
+  </div>
+
+  <h2>What Would Constitute a Breakthrough</h2>
+  <div class="section">
+    <p><strong>FrontierMath solve rate &gt;25%:</strong> A model that reliably solves a quarter of research-level mathematics problems would demonstrate genuine mathematical reasoning, not just pattern matching. This would fundamentally change how mathematics is done.</p>
+    <p><strong>AI-discovered theorem:</strong> An AI system generating a novel, non-trivial mathematical theorem with a correct proof that was not previously known. This has arguably happened in narrow domains (AlphaGeometry), but not yet in mainstream mathematics.</p>
+    <p><strong>Automated cross-reference discovery:</strong> An AI system that can read a new paper and automatically identify non-obvious connections to existing work &mdash; connections that human experts would agree are meaningful and surprising. Our cross-reference graph is a training dataset for this capability.</p>
+    <p><strong>Our angle:</strong> We contribute by (1) maintaining and growing the cross-reference graph as a dataset for computational pattern discovery, (2) documenting what works and doesn't work in human-AI math collaboration through our sweep process, (3) building the Rosetta Core translation engine that operationalizes cross-domain connection-finding, and (4) running the experiment at scale &mdash; 190+ research projects provide enough data to study the process itself.</p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../index.html">OPEN</a> &middot;
+  <a href="../../LIVE/index.html">Live</a> &middot;
+  <a href="../../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Last updated: 2026-04-01T01:00Z (sweep v1.0.18)
+</footer>
+</body>
+</html>

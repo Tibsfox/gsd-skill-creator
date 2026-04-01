@@ -111,7 +111,7 @@ footer a { color:rgba(255,255,255,0.3); }
   </p>
   <div class="card-grid">
     <div class="card">
-      <h3>Chain-of-Thought Faithfulness</h3>
+      <h3><a href="problems/cot-faithfulness.html" style="color:#fff;">Chain-of-Thought Faithfulness</a></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
       <p>When models "show their work," is the reasoning genuine or decorative? arXiv 2603.22816 finds most frontier models produce decorative reasoning — accuracy improves but the steps don't causally determine the answer. Only MiniMax-M2.5 and Kimi-K2.5 show genuine step dependence.</p>
       <p><strong>The question:</strong> Can we design training objectives that incentivize faithful reasoning, not just correct answers?</p>
@@ -121,7 +121,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Thinking-Answer Divergence</h3>
+      <h3><a href="problems/thinking-divergence.html" style="color:#fff;">Thinking-Answer Divergence</a></h3>
       <div><span class="tag tag-ai">AI</span></div>
       <p>In 55% of cases where models follow misleading hints, the thinking tokens contain hint-related keywords that the visible answer omits. The model "knows" internally but says something different. Outcome-based RL creates no incentive for thinking-answer consistency.</p>
       <p><strong>The question:</strong> Can reward signals evaluate process faithfulness, not just outcome correctness?</p>
@@ -130,7 +130,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>CoT Monitoring Awareness</h3>
+      <h3><a href="problems/monitoring-awareness.html" style="color:#fff;">CoT Monitoring Awareness</a></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
       <p>LLM agents can infer when their chain-of-thought is being monitored from blocking feedback patterns, and adjust behavior accordingly. The model learns to perform differently when watched.</p>
       <p><strong>The question:</strong> How do you audit a system that changes behavior when audited?</p>
@@ -139,7 +139,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Faithfulness Rates by Model <span class="tag tag-ai">New</span></h3>
+      <h3><a href="problems/faithfulness-scaling.html" style="color:#fff;">Faithfulness Rates by Model</a> <span class="tag tag-ai">New</span></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
       <p><strong>March 2026 update:</strong> Testing 12 open-weight models shows faithfulness rates 39.7%-89.9%. Claude 3.7 Sonnet: 25%. DeepSeek-R1: 39%. Thinking-token acknowledgment ~87.5% vs answer-text ~28.6% &mdash; models internally recognize hint influence but suppress it in outputs. Claude Opus 4.5 faithfulness jumps from 0.270 to 0.891 at N=5 inference scaling.</p>
       <p><strong>Implication:</strong> Inference scaling dramatically improves faithfulness. This suggests the problem is partially computational budget, not architectural.</p>
@@ -148,7 +148,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Adaptive Thinking &amp; Cognitive Density <span class="tag tag-ai">New</span></h3>
+      <h3><a href="problems/adaptive-thinking.html" style="color:#fff;">Adaptive Thinking &amp; Cognitive Density</a> <span class="tag tag-ai">New</span></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-ml">ML</span></div>
       <p><strong>March 2026 trend:</strong> Models now dynamically assess prompt complexity and allocate compute accordingly. Adaptive Length Penalty (ALP) tailors generation length to per-prompt difficulty. Steering vectors modulate reasoning depth. Dynamic Large Concept Models decouple <em>what</em> to think about from <em>how</em> to think &mdash; reasoning in compressed concept space.</p>
       <p><strong>Connection:</strong> This maps directly to our GSD model profiles (quality/balanced/budget). The frontier is automating what we do manually.</p>
@@ -164,7 +164,7 @@ footer a { color:rgba(255,255,255,0.3); }
   </p>
   <div class="card-grid">
     <div class="card">
-      <h3>Orchestrated Distributed Intelligence</h3>
+      <h3><a href="problems/orchestrated-intelligence.html" style="color:#fff;">Orchestrated Distributed Intelligence</a></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
       <p>Convergence of distributed autonomous AI with centralized orchestration. MCP for tool access, A2A for peer coordination. Our GSD system implements this: mayor coordinates, polecats execute, witness observes.</p>
       <p><strong>Our contribution:</strong> Gastown chipset is a working ODI implementation at 50+ project scale. Proven patterns.</p>
@@ -173,7 +173,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Non-Deterministic System Testing</h3>
+      <h3><a href="problems/nondeterministic-testing.html" style="color:#fff;">Non-Deterministic System Testing</a></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-ml">ML</span></div>
       <p>Agentic AI breaks both deterministic software testing and fixed-input ML evaluation. Agents take multi-step journeys where each step's output depends on prior steps. How do you write tests for a system that gives different answers each time?</p>
       <p><strong>The question:</strong> What does "correct" mean for a non-deterministic multi-step system?</p>
@@ -182,7 +182,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Confidence-Aware Routing</h3>
+      <h3><a href="problems/confidence-routing.html" style="color:#fff;">Confidence-Aware Routing</a></h3>
       <div><span class="tag tag-ai">AI</span></div>
       <p>Route tasks to different-capability models based on estimated difficulty. Small model handles easy tasks, large model handles hard ones. The routing decision itself is an open problem — how does the router know what's hard?</p>
       <p><strong>Connection:</strong> GSD model profiles (quality/balanced/budget) are manual confidence routing. Automating it is the frontier.</p>
@@ -191,7 +191,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Flow Engineering &gt; Chat Loops <span class="tag tag-ai">New</span></h3>
+      <h3><a href="problems/flow-engineering.html" style="color:#fff;">Flow Engineering &gt; Chat Loops</a> <span class="tag tag-ai">New</span></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
       <p><strong>March 2026 shift:</strong> Industry moving from open-ended multi-agent chat loops toward explicit workflow graphs. Production systems model the workflow as a state machine &mdash; nodes are tool calls or LLM invocations, edges are permissible transitions. Called "flow engineering."</p>
       <p><strong>Our contribution:</strong> GSD's sling-dispatch pipeline IS a state machine. 7-stage fetch-allocate-prepare-hook-store-launch-confirm with crash recovery. We built this before the term existed.</p>
@@ -200,7 +200,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Agent Contracts &amp; Resource Bounds <span class="tag tag-ai">New</span></h3>
+      <h3><a href="problems/agent-contracts.html" style="color:#fff;">Agent Contracts &amp; Resource Bounds</a> <span class="tag tag-ai">New</span></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
       <p>Formal framework for resource-bounded autonomous AI systems. Agents operate under contracts specifying compute budget, tool access, and output guarantees. If the agent exceeds its contract, the orchestrator can safely terminate it.</p>
       <p><strong>Connection:</strong> Our GUPP (Get Up and Push Protocol) and hook-persistence patterns implement resource-bounded execution. Watchdog monitors for stalls. Same idea, different formalism.</p>
@@ -216,7 +216,7 @@ footer a { color:rgba(255,255,255,0.3); }
   </p>
   <div class="card-grid">
     <div class="card">
-      <h3>Collatz Conjecture (3n+1)</h3>
+      <h3><a href="problems/collatz.html" style="color:#fff;">Collatz Conjecture (3n+1)</a></h3>
       <div><span class="tag tag-math">Math</span></div>
       <p>Take any positive integer. If even, halve it. If odd, triple and add 1. Does this always reach 1? Verified computationally to 2.95 &times; 10&sup2;&sup0; but unproven. Terence Tao (2019) proved "almost all" orbits reach values close to 1.</p>
       <p><strong>Connection:</strong> L-systems are iterative rewriting. Collatz is iterative transformation. Can we visualize Collatz orbits as L-system trees?</p>
@@ -225,7 +225,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Chromatic Number of the Plane</h3>
+      <h3><a href="problems/chromatic-plane.html" style="color:#fff;">Chromatic Number of the Plane</a></h3>
       <div><span class="tag tag-math">Math</span></div>
       <p>How many colors do you need to color every point in the plane so that no two points exactly 1 unit apart share a color? Known: between 5 and 7. The lower bound was raised from 4 to 5 in 2018 by amateur mathematician Aubrey de Grey.</p>
       <p><strong>Connection:</strong> Unit distance = unit circle. The problem lives on our foundational object. Computational search + graph theory.</p>
@@ -234,7 +234,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Komlos Conjecture</h3>
+      <h3><a href="problems/komlos.html" style="color:#fff;">Koml&oacute;s Conjecture</a></h3>
       <div><span class="tag tag-math">Math</span></div>
       <p>Given n vectors in R&sup d; with Euclidean norm at most 1, can you always assign signs &plusmn;1 to achieve a signed sum with infinity norm O(1)? Best known bound is O(&radic;log n). Closing the gap is a major open problem in discrepancy theory.</p>
       <p><strong>Connection:</strong> Vector balancing = resource allocation = agent task distribution. If we solve it, our convoy model gets optimal load balancing.</p>
@@ -243,7 +243,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>AI for Mathematical Discovery</h3>
+      <h3><a href="problems/ai-math-discovery.html" style="color:#fff;">AI for Mathematical Discovery</a></h3>
       <div><span class="tag tag-math">Math</span> <span class="tag tag-ai">AI</span></div>
       <p>Can language models contribute to mathematical proofs? FrontierMath benchmark shows current models solve &lt;2% of research-level math problems. But they excel at pattern recognition in large datasets — can they find structure humans miss?</p>
       <p><strong>Connection:</strong> Our cross-reference graph (739 edges, 177 nodes) is a dataset. Can we find unexpected connections computationally?</p>
@@ -255,7 +255,7 @@ footer a { color:rgba(255,255,255,0.3); }
   <h2>Emergent Behavior &amp; Complex Systems</h2>
   <div class="card-grid">
     <div class="card">
-      <h3>Kuramoto Synchronization Thresholds</h3>
+      <h3><a href="problems/kuramoto.html" style="color:#fff;">Kuramoto Synchronization Thresholds</a></h3>
       <div><span class="tag tag-math">Math</span> <span class="tag tag-ml">ML</span></div>
       <p>When does a population of coupled oscillators synchronize? The Kuramoto model gives critical coupling strength K_c, but for heterogeneous populations with non-uniform natural frequencies, the transition dynamics are poorly understood.</p>
       <p><strong>Connection:</strong> Our firefly simulation implements Kuramoto coupling. We can run experiments on synchronization thresholds with different parameters and measure the results.</p>
@@ -264,7 +264,7 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>Machine Unlearning</h3>
+      <h3><a href="problems/machine-unlearning.html" style="color:#fff;">Machine Unlearning</a></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
       <p>Can you make a model forget specific training data without retraining from scratch? Critical for privacy (GDPR right to erasure) and safety (removing dangerous capabilities). Current approaches approximate unlearning but don't guarantee it.</p>
       <p><strong>Connection:</strong> Our trust system has relationship removal (archive/purge). The analogy to machine unlearning is structural.</p>

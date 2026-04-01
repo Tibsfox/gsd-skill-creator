@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chromatic Number of the Plane — OPEN Problems</title>
+<style>
+:root {
+  --bg: #06080e;
+  --panel: #0a0e18;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --green: #4CAF50;
+  --amber: #E89848;
+  --blue: #4a90d9;
+  --purple: #9a6ad8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:#e0cc80; }
+
+header {
+  background:linear-gradient(135deg, #06080e 0%, #0e1428 30%, #1a0e30 60%, #0a1428 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:2px solid var(--purple);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; letter-spacing:0.05em; }
+header .subtitle { color:var(--purple); font-size:0.9rem; font-style:italic; margin-top:0.3rem; }
+header .status-badge {
+  display:inline-block; margin-top:0.6rem; padding:0.15rem 0.7rem; border-radius:3px;
+  font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em;
+  background:rgba(232,152,72,0.15); color:var(--amber); border:1px solid rgba(232,152,72,0.3);
+}
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a:hover { color:#fff; }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+.section {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; margin-bottom:1.2rem;
+}
+.section p { font-size:0.9rem; line-height:1.7; margin-bottom:0.6rem; }
+.section p:last-child { margin-bottom:0; }
+
+.formula {
+  background:rgba(154,106,216,0.08); border:1px solid rgba(154,106,216,0.2);
+  border-radius:4px; padding:0.8rem 1.2rem; margin:0.8rem 0;
+  font-family:'Courier New',monospace; font-size:0.9rem; color:var(--purple);
+  text-align:center;
+}
+
+.bounds-table {
+  width:100%; border-collapse:collapse; margin:0.8rem 0;
+  font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.bounds-table th { text-align:left; color:var(--purple); padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); font-weight:600; }
+.bounds-table td { padding:0.4rem 0.8rem; color:var(--dim); border-bottom:1px solid var(--border); }
+
+.paper {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.4rem; margin-bottom:0.8rem;
+}
+.paper h3 { font-size:0.95rem; color:#fff; margin-bottom:0.3rem; }
+.paper .meta { font-size:0.75rem; color:var(--purple); font-family:monospace; margin-bottom:0.4rem; }
+.paper p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; line-height:1.5; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-math { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-ours { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+
+.link-list { list-style:none; padding:0; }
+.link-list li { font-size:0.85rem; font-family:system-ui,sans-serif; padding:0.3rem 0; }
+.link-list li::before { content:"\2192\00a0"; color:var(--purple); }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+footer a { color:rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Chromatic Number of the Plane</h1>
+  <div class="subtitle">How many colors to paint the plane with no monochromatic unit distances?</div>
+  <div class="status-badge">Open</div>
+  <nav>
+    <a href="../index.html">OPEN</a>
+    <a href="../../LIVE/index.html">Live</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>The Problem</h2>
+  <div class="section">
+    <p>Color every point in the Euclidean plane such that no two points exactly 1 unit apart receive the same color. What is the minimum number of colors required?</p>
+    <div class="formula">
+      &chi;(R&sup2;) = ? &nbsp;&nbsp;&nbsp; Known: 5 &le; &chi;(R&sup2;) &le; 7
+    </div>
+    <p>This is the <strong>Hadwiger&ndash;Nelson problem</strong>, posed in 1950. For over 60 years, the best known bounds were 4 &le; &chi; &le; 7. The lower bound of 4 came from the Moser spindle (7 vertices), and the upper bound of 7 comes from a hexagonal tiling that has held since 1950.</p>
+    <p>In 2018, amateur mathematician <strong>Aubrey de Grey</strong> shattered the lower bound by constructing a unit-distance graph requiring 5 colors. His original graph had 1,581 vertices. Subsequent work by Marijn Heule using SAT solvers reduced this to a 553-vertex graph that still requires 5 colors.</p>
+
+    <table class="bounds-table">
+      <tr><th>Year</th><th>Lower Bound</th><th>Upper Bound</th><th>Key Result</th></tr>
+      <tr><td>1950</td><td>4</td><td>7</td><td>Moser spindle / hexagonal tiling</td></tr>
+      <tr><td>2018</td><td>5</td><td>7</td><td>de Grey's 1581-vertex graph</td></tr>
+      <tr><td>2024</td><td>5</td><td>7</td><td>Heule SAT solver: 553 vertices</td></tr>
+    </table>
+
+    <p>The key insight: unit distance IS the unit circle. Every point in the plane has a circle of radius 1 around it, and every point on that circle must have a different color. The problem lives on our foundational mathematical object.</p>
+  </div>
+
+  <h2>Latest Research</h2>
+  <div class="paper">
+    <h3>SAT Solver Reduction to 553 Vertices</h3>
+    <div class="meta">Heule, 2024 &middot; SAT-based graph coloring</div>
+    <p>Marijn Heule applied modern SAT solvers to systematically reduce de Grey's 1,581-vertex 5-chromatic unit-distance graph down to 553 vertices. SAT solvers are emerging as the most promising computational tool for this problem &mdash; they can explore vast combinatorial spaces and produce machine-verifiable proofs. The reduction from 1,581 to 553 suggests further compression may be possible, potentially revealing structural reasons why 5 colors are necessary.</p>
+  </div>
+  <div class="paper">
+    <h3>Six-Coloring Extensions</h3>
+    <div class="meta">Pokutta et al., 2024 &middot; Computational geometry</div>
+    <p>Explores what happens when you allow 6 colors instead of the minimum. Shows that 6-colorings have significantly more structure and symmetry than 5-colorings, suggesting the true chromatic number may be closer to 5 than 7. The gap between 5 and 7 remains the central open question, and understanding the 6-coloring landscape constrains where the answer can be.</p>
+  </div>
+  <div class="paper">
+    <h3>Chromatic Number of Spacetime</h3>
+    <div class="meta"><a href="https://arxiv.org/abs/2308.16885">arXiv:2308.16885</a> &middot; 2023</div>
+    <p>Extends the Hadwiger&ndash;Nelson problem to Minkowski spacetime, asking: what is the chromatic number when "distance" is defined by the Lorentzian metric instead of Euclidean? The problem changes dramatically because the Lorentz metric is not positive definite. Shows that the spacetime version has different bounds and connects to relativistic geometry &mdash; a direction no one expected.</p>
+  </div>
+
+  <h2>Our Connection</h2>
+  <div class="section">
+    <p><span class="tag tag-ours">TSPB</span> <span class="tag tag-math">Math</span> This problem connects directly to <strong>TSPB Layer 1 (Unit Circle)</strong> &mdash; the unit distance constraint IS the unit circle. Every forbidden pair of same-colored points lies on a unit circle centered at one of them.</p>
+    <p><strong>Why SAT solvers matter:</strong> The most promising approach to narrowing the bounds is computational. SAT solvers can systematically search for smaller 5-chromatic graphs or prove that 6 colors suffice for certain graph families. This connects to our math coprocessor's constraint-solving capabilities and our interest in computational approaches to open problems.</p>
+    <p><strong>College Mathematics department:</strong> The problem sits at the intersection of combinatorics, graph theory, and geometry &mdash; all areas where computational exploration can generate conjectures that humans then prove. The de Grey breakthrough came from a non-professional mathematician using computational tools, which validates the approach of bringing computation to unsolved problems.</p>
+  </div>
+
+  <h2>College &amp; Research Links</h2>
+  <div class="section">
+    <ul class="link-list">
+      <li>College Mathematics Department &mdash; graph theory, combinatorial geometry</li>
+      <li>TSPB Layer 1 &mdash; Unit Circle (the foundational object of this problem)</li>
+      <li><a href="ai-math-discovery.html">AI for Mathematical Discovery</a> (SAT solvers as AI-adjacent tools)</li>
+      <li><a href="collatz.html">Collatz Conjecture</a> (companion problem &mdash; computational verification)</li>
+    </ul>
+  </div>
+
+  <h2>What Would Constitute a Breakthrough</h2>
+  <div class="section">
+    <p><strong>Raising the lower bound to 6:</strong> Constructing a unit-distance graph that provably requires 6 colors. This would narrow the gap to 6&ndash;7 and would likely require either much larger graphs or fundamentally new construction techniques. SAT solvers are the most promising path here.</p>
+    <p><strong>Lowering the upper bound to 6:</strong> Proving that 6 colors always suffice. This would require a new coloring scheme for the entire plane, replacing the 1950 hexagonal tiling. The Pokutta six-coloring work is exploring this direction.</p>
+    <p><strong>Resolving the exact value:</strong> Proving &chi;(R&sup2;) = 5, 6, or 7. Any of these would close a 75-year-old problem. Most experts lean toward 5 or 7, with 6 considered least likely.</p>
+    <p><strong>Our angle:</strong> This problem is primarily computational at the frontier. Contributions could come from (1) developing better SAT encoding strategies for unit-distance graphs, (2) using GPU-accelerated search for small 5-chromatic graphs, or (3) exploring the spacetime variant as a fresh direction where less is known.</p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../index.html">OPEN</a> &middot;
+  <a href="../../LIVE/index.html">Live</a> &middot;
+  <a href="../../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Last updated: 2026-04-01T01:00Z (sweep v1.0.18)
+</footer>
+</body>
+</html>
