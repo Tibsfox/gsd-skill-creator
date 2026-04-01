@@ -1,0 +1,171 @@
+{
+  "degree": 57,
+  "species": "Belted Kingfisher",
+  "scientific_name": "Megaceryle alcyon",
+  "slug": "057-belted-kingfisher",
+  "sound_type": "loud mechanical rattling call -- rapid, harsh, percussive chatter",
+  "energy": 3,
+  "ecosystem": "cold streams, rivers, lakes, estuaries throughout PNW",
+  "season": "resident (year-round in western Washington/Oregon)",
+  "family": "Alcedinidae",
+  "order": "Coraciiformes",
+  "csv_substitute": true,
+  "original_species": "Pacific Giant Salamander",
+  "csv_substitution": {
+    "original_species": "Pacific Giant Salamander",
+    "original_scientific_name": "Dicamptodon tenebrosus",
+    "reason": "SPS Part B engine is birds-and-mammals only. Belted Kingfisher replaces Pacific Giant Salamander, preserving the original's cold stream habitat and E=3 energy level. The Pacific Giant Salamander is one of the largest terrestrial salamanders in North America, inhabiting cold, clear mountain streams -- notable as one of the few salamanders that vocalizes (a low bark or yelp, E=3). The Belted Kingfisher patrols the airspace above the same cold streams with a loud mechanical rattle (E=3). Both are cold-stream specialists, year-round residents, and loud for their respective taxa. Thirteenth consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54, Oregon Slender Salamander at 55, Ensatina at 56, Pacific Giant Salamander at 57). First CSV substitute that is a stream specialist -- previous substitutes matched forest, brushy, or suburban habitats.",
+    "preserved": ["cold stream habitat", "E=3 energy level", "year-round resident status", "aquatic ecosystem association"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Belted Kingfishers are year-round residents of virtually every waterway in western Washington, from mountain streams in the Cascades and Olympics to lowland rivers (Skagit, Snohomish, Snoqualmie, Green, Puyallup, Nisqually) to lakes, ponds, and tidal estuaries along Puget Sound. Found wherever clear water meets vertical banks for nesting and open water provides fish for hunting. Present from sea level to mountain streams throughout the PNW."
+  },
+  "taxonomy_note": {
+    "description": "Belted Kingfisher is the 1st ALCEDINIDAE in the engine -- the 24th family. NEW ORDER Coraciiformes enters as the 7th order. SECOND CONSECUTIVE NEW ORDER (Columbiformes at 56, Coraciiformes at 57). First kingfisher in the engine. Only kingfisher in the PNW. Megaceryle from Greek megas (great, large) + ceryle (kingfisher). alcyon from Greek alkuon (the mythological halcyon kingfisher, associated with calm seas). Linnaeus 1758. PASSERIFORMES INTERRUPTED for the third time in four degrees (54 Piciformes, 55 Passeriformes, 56 Columbiformes, 57 Coraciiformes).",
+    "current_family": "Alcedinidae",
+    "new_family": true,
+    "family_count_in_engine": 24,
+    "alcedinidae_count_in_engine": 1,
+    "name_etymology": "Megaceryle = Ancient Greek megas (great, large) + ceryle (kingfisher). alcyon = Latin/Greek alkuon or halkuon, the mythological kingfisher associated with Alcyone, daughter of Aeolus, who was transformed into a kingfisher. The 'halcyon days' -- a period of calm seas during the kingfisher's nesting -- derives from this myth. Full translation: 'Great halcyon kingfisher.' Named by Linnaeus in 1758.",
+    "genus_note": "Megaceryle is new to the engine at degree 57. Contains four species worldwide: Belted Kingfisher (M. alcyon, Americas), Ringed Kingfisher (M. torquata, Americas), Giant Kingfisher (M. maxima, Africa), and Crested Kingfisher (M. lugubris, Asia). The Belted Kingfisher is the only Megaceryle in the Pacific Northwest and one of only three kingfisher species in North America north of Mexico.",
+    "order_note": "Coraciiformes enters the engine at degree 57 as the 7th order. SECOND CONSECUTIVE NEW ORDER -- Columbiformes entered at degree 56, Coraciiformes at degree 57. Back-to-back new-order entries are unprecedented in the engine. After a 21-degree gap without a new order (35-55), two new orders in two degrees. Coraciiformes is the order of kingfishers, bee-eaters, rollers, and allies -- a primarily tropical order. Passeriformes is interrupted for the third time in four degrees: 54 (Piciformes), 55 (Passeriformes), 56 (Columbiformes), 57 (Coraciiformes). After degree 57: 49 of 58 entries (84.5%) are Passeriformes.",
+    "family_position": "Alcedinidae enters as the 24th family at degree 57. Back-to-back new families (Columbidae at 56, Alcedinidae at 57). The family brings a fundamentally new body plan (front-heavy plunge-diver with massive bill), a new acoustic character (mechanical rattle), a new nesting strategy (excavated earth burrow), a new foraging strategy (plunge-diving for fish), and reversed sexual dimorphism. Approximately 114 kingfisher species worldwide; only one in the PNW."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000",
+    "peak_energy_band_hz": "3,000-5,000",
+    "song_frequency_hz": "Primary rattle: 2,000-8,000 Hz, peak energy 3,000-5,000 Hz. Alarm rattle: same range, louder and longer. Screech: 3,000-6,000 Hz. Quiet chatter: 2,000-5,000 Hz.",
+    "song_duration_s": "1-3 seconds per rattle burst (up to 5+ seconds in territorial encounters)",
+    "note_structure": "RAPID MECHANICAL RATTLING: A continuous rolling burst of harsh, staccato notes at approximately 8-15 notes per second, fusing into a sustained percussive chatter. Not a song, not a simple call -- a percussive vocal burst. The individual notes blur into one another at delivery speed. Sounds like a fishing reel being cranked, a heavy zipper, or pebbles rattling in a tin can.",
+    "note_types": "LIMITED vocalization types. Primary rattle (territory/alarm/flight), alarm rattle (louder territorial variant), screech (aggression), quiet chatter (pair contact). No learned repertoire -- vocalizations are innate. Dramatically simpler than passerine vocal systems but more complex than the Band-tailed Pigeon's single coo type (degree 56).",
+    "phrase_structure": "No phrase structure in the musical sense. The rattle is a single sustained burst -- a machine-gun delivery with no internal phrasing, no variation, no development. It starts, it runs, it stops. The antithesis of the American Dipper's complex, sustained, improvisatory song (degree 52).",
+    "timbre": "Dry. Harsh. Mechanical. Percussive. Cold. No warmth, no resonance, no woodwind quality. The antithesis of the Band-tailed Pigeon's warm, breathy coo (degree 56). Closer to a snare drum roll than to any vocal timbre in the engine. The most machine-like sound any bird in the engine produces.",
+    "amplitude": "E=3 -- moderate-high energy. The rattle is loud and carries well along waterways. Easily heard at 200+ meters. The energy jump from E=1 (degree 56) to E=3 (degree 57) is a two-step increase -- the engine goes from the soft forest coo to the loud stream rattle.",
+    "tempo": "Very fast within the rattle burst (8-15 notes per second). No variation in tempo during the burst -- the rattle runs at a constant rate from start to finish. The regularity is mechanical, clock-like, unhesitating.",
+    "context": "The rattle accompanies virtually every significant flight -- the bird is almost never silent in motion. Given during territorial patrols along waterways, when disturbed near the nest, during conflicts with other kingfishers, and during courtship flights. Both sexes rattle. Year-round.",
+    "regional_variation": "MINIMAL geographic variation. The rattle is innate and stereotyped. Like the Band-tailed Pigeon's coo (degree 56), there are no dialects, no cultural learning, no regional signatures. The rattle sounds the same on a Cascade stream as on a Puget Sound estuary.",
+    "key_property": "THE STREAM RATTLE -- the 58th acoustic element (species side). A loud, mechanical, dry rattling call that maps the landscape's hydrology -- heard only near water. Named 'the stream rattle' for three resonances: (1) the habitat -- the rattle is never heard away from water, it acoustically maps streams, rivers, lakes, and estuaries; (2) the acoustic novelty -- neither song nor call nor drum nor coo, the rattle is a percussive vocal burst, a new vocalization category for the engine; (3) the mechanical quality -- sounds like a fishing reel, a zipper, a machine. The most non-biological-sounding vocalization in the engine. The stream rattle stands in maximum contrast with the forest coo (degree 56): where the coo is soft, warm, deep, and resonant (400-600 Hz, E=1), the rattle is loud, harsh, mid-treble, and percussive (3,000-5,000 Hz, E=3). Two consecutive non-passerine voices, maximally different in every dimension."
+  },
+  "plumage": {
+    "overall": "Stocky, large-headed, front-heavy bird with massive dagger-shaped bill and shaggy double-pointed crest. Blue-gray above, white below with blue-gray breast band (the 'belt'). Female adds a rusty-rufous belly band -- reversed sexual dimorphism. Punk silhouette diagnostic at any distance.",
+    "diagnostic_mark": "SHAGGY DOUBLE-POINTED CREST + MASSIVE DAGGER BILL -- the Belted Kingfisher's unmistakable profile. The crest is ragged and disheveled, giving the bird a wild, unkempt appearance. The bill is proportionally one of the largest of any North American bird relative to body size.",
+    "upperparts": "Slate-blue to powder-blue on head, back, wings, and tail. White spotting on wings and tail visible in flight.",
+    "underparts": "White with a broad blue-gray breast band (the 'belt'). Male: belly and flanks white. Female: belly and flanks with broad rusty-rufous band and rufous coloring -- the reversed dimorphism mark.",
+    "head": "Blue-gray with shaggy, double-pointed crest. White collar around neck. Dark eye with white spot in front. Massive black dagger bill.",
+    "bill": "Massive, laterally compressed, dagger-shaped. Black upper mandible, dark with pale base on lower mandible. Designed for high-speed aquatic entry and fish capture. Proportionally among the largest bills relative to body size of any North American bird.",
+    "tail": "Blue-gray with white spots. Relatively short compared to body length.",
+    "feet": "Small, weak, syndactyl (partially fused -- outer and middle toes fused at base). Adapted for burrow excavation, not walking. The bird perches; it does not stroll.",
+    "field_id": "Stocky, large-headed bird (28-35 cm, 140-170 g) with massive dagger bill, shaggy crest, blue-gray above, white below with blue breast band. Female has additional rusty belly band. Found on waterways -- streams, rivers, lakes, estuaries. Rattling call in flight diagnostic. The only kingfisher in the PNW. Separated from all other waterside birds by unique profile: huge head, dagger bill, crest, plunge-diving behavior."
+  },
+  "nodes": [
+    {
+      "id": "stream-rattle",
+      "type": "concept",
+      "title": "The Stream Rattle -- 58th Acoustic Element",
+      "description": "A loud, mechanical, dry rattling call -- rapid percussive vocal burst at 3,000-5,000 Hz peak energy. Neither song nor call nor drum nor coo. A new vocalization category. The most machine-like sound in the engine. Maps the landscape's hydrology: heard only near water. Maximum acoustic contrast with the forest coo at degree 56: where the pigeon murmurs softly in the bass register, the kingfisher clatters harshly in the mid-treble. Music-theory parallel: the snare drum roll -- a rapid, sustained, percussive burst that commands attention through pure rhythmic energy rather than melody or harmony.",
+      "connections": ["alcedinidae-enters", "stream-health-indicator", "two-stream-specialists"]
+    },
+    {
+      "id": "alcedinidae-enters",
+      "type": "concept",
+      "title": "Alcedinidae Enters -- 24th Family, 7th Order (Coraciiformes)",
+      "description": "First kingfisher in 57 degrees. New order Coraciiformes enters as the 7th order. SECOND CONSECUTIVE NEW ORDER -- Columbiformes at 56, Coraciiformes at 57. Back-to-back new-order entries are unprecedented. Only kingfisher in the PNW. Brings plunge-diving, burrow nesting, reversed dimorphism, mechanical rattling. Passeriformes interrupted for the third time in four degrees. After degree 57: 49 of 58 entries (84.5%) are Passeriformes but the pace of non-passerine entries is accelerating. Music-theory parallel: the guest soloist -- a performer from an entirely different tradition who enters the ensemble for one movement and changes the piece's character permanently.",
+      "connections": ["stream-rattle", "reversed-sexual-dimorphism", "burrow-nesting", "halcyon-mythology"]
+    },
+    {
+      "id": "stream-health-indicator",
+      "type": "concept",
+      "title": "Stream Health Indicator -- Fish Trophic Level",
+      "description": "Kingfisher presence integrates three habitat conditions: clear water (for visual hunting), fish populations (for prey), and stable banks (for nesting). Where these are met, the aquatic ecosystem is functional. The kingfisher is a top-level integrator of stream health through the fish community, complementing the American Dipper (degree 52) which integrates through the EPT macroinvertebrate community. Dipper monitors the food web base; kingfisher monitors the fish that eat those invertebrates. In PNW streams, the salmonid connection is direct: juvenile coho, steelhead, and cutthroat trout are regular prey. Music-theory parallel: the counterpoint -- two independent voices moving in the same musical space, each valid alone, richer together.",
+      "connections": ["two-stream-specialists", "stream-rattle", "plunge-diving-hunter"]
+    },
+    {
+      "id": "reversed-sexual-dimorphism",
+      "type": "concept",
+      "title": "Reversed Sexual Dimorphism -- Female More Colorful",
+      "description": "One of few North American bird species where the female is more ornate than the male. Both sexes have blue-gray plumage, crest, and blue breast band, but the female adds a broad rusty-rufous belly band and rufous flanks. This reversal likely reflects female-female competition for prime nesting territories (vertical banks near productive fishing water). The rusty band may function as a status signal. In most of the engine's 58 entries, dimorphism favors males when present. The kingfisher inverts the pattern -- a family-level tendency within Alcedinidae. Music-theory parallel: the inversion -- a musical theme played upside down, maintaining its identity while reversing its direction.",
+      "connections": ["alcedinidae-enters", "burrow-nesting", "solitary-territory"]
+    },
+    {
+      "id": "burrow-nesting",
+      "type": "concept",
+      "title": "Burrow Nesting -- Earth Excavator",
+      "description": "Nests in burrows excavated in earthen banks -- 1-2.5 meters long, sloping upward, terminating in an unlined chamber. Both sexes excavate using heavy bill to chip soil and fused feet to kick it backward. Requires vertical or near-vertical exposed earth banks: stream cutbanks, road cuts, gravel pits. Clutch of 5-8 eggs (typically 6-7) -- maximum reproductive contrast with the Band-tailed Pigeon's single egg at degree 56. Bank dependence creates conservation vulnerability: bank stabilization and stream channelization destroy nesting habitat. Music-theory parallel: the ground bass (basso ostinato) -- a recurring bass pattern dug into the foundation of the piece, supporting everything above.",
+      "connections": ["reversed-sexual-dimorphism", "stream-health-indicator", "alcedinidae-enters"]
+    },
+    {
+      "id": "plunge-diving-hunter",
+      "type": "concept",
+      "title": "The Plunge-Diver -- Aerial-Aquatic Predator",
+      "description": "Hunts by perching above or hovering over clear water, locating prey visually, then plunging headfirst at up to 40 km/h. Bill pierces surface tension; nictitating membrane protects eyes. Success rate approximately 40-60%. Must compensate for refraction at the air-water interface. Fish beaten against perch, swallowed headfirst. A hunting strategy unique in the engine -- no other species crosses the air-water boundary to capture prey. The heron (degree 0) wades; the dipper (degree 52) walks underwater. The kingfisher attacks from above. Music-theory parallel: the sforzando (sfz) -- a sudden, sharp, forceful accent in the middle of a phrase, disrupting the expected flow with concentrated violence.",
+      "connections": ["stream-health-indicator", "two-stream-specialists", "solitary-territory"]
+    },
+    {
+      "id": "solitary-territory",
+      "type": "concept",
+      "title": "The Solitary Patrol -- Linear Stream Territory",
+      "description": "Fundamentally solitary species. Maintains linear territories of 0.5-2 km along waterways, defended by rattling flights along territory boundaries. Outside breeding season, males and females often maintain separate, non-overlapping winter territories. Never seen in flocks -- always singly or in pairs. The territorial nature means kingfisher sightings are solitary events: one bird, one stretch of water, one rattle echoing along the stream. The rattle accompanies every flight, threading the day together acoustically. Music-theory parallel: the solo cadenza -- one instrument alone, filling all the space, answerable to no conductor, no ensemble, no one.",
+      "connections": ["stream-rattle", "reversed-sexual-dimorphism", "plunge-diving-hunter"]
+    },
+    {
+      "id": "two-stream-specialists",
+      "type": "connection",
+      "title": "Two Stream Specialists -- Kingfisher and Dipper",
+      "description": "Degrees 52 and 57 give the engine two stream specialists occupying the same cold mountain streams at different trophic levels. American Dipper (Cinclidae, E=3): walks underwater on stream bottom, feeds on EPT macroinvertebrates, monitors invertebrate community health. Belted Kingfisher (Alcedinidae, E=3): plunge-dives from above, feeds on fish, monitors fish community health. Both E=3, both linear territories, both stream health indicators. Finding both on the same stream confirms the entire aquatic food web is functional from invertebrate base to fish community. They share specific stream stretches: kingfisher on an overhanging branch above, dipper on a mid-stream boulder below.",
+      "connections": ["stream-rattle", "stream-health-indicator", "plunge-diving-hunter"]
+    },
+    {
+      "id": "halcyon-mythology",
+      "type": "pattern",
+      "title": "The Halcyon Myth -- 3,000 Years of Mythology",
+      "description": "Named alcyon from the Greek myth of Alcyone, daughter of Aeolus, who was transformed into a kingfisher after her husband Ceyx drowned at sea. The gods decreed calm seas during the kingfisher's nesting -- the 'halcyon days.' The English phrase 'halcyon days' (a period of calm happiness) derives directly from this avian mythology. The species carries 3,000 years of mythology in its name. The Belted Kingfisher was depicted on the Canadian $5 bill (1986-2002 'Birds of Canada' series). Music-theory parallel: the leitmotif -- a recurring theme that carries meaning beyond its notes, connecting the present performance to ancient narrative.",
+      "connections": ["alcedinidae-enters", "solitary-territory"]
+    },
+    {
+      "id": "pnw-distribution",
+      "type": "pattern",
+      "title": "PNW Distribution -- Every Waterway Type",
+      "description": "Found on virtually every type of waterway in the Pacific Northwest: mountain streams (Cascades, Olympics), lowland rivers (Skagit, Snohomish, Green, Puyallup, Nisqually), lakes, ponds, estuaries, tidal channels, and coastal waters. Year-round resident of western Washington and Oregon. Some altitudinal movement: birds on high-elevation streams may move to lower-elevation rivers or coastal waters in winter. The broadest habitat range of any stream specialist in the engine -- from alpine streams to saltwater estuaries.",
+      "connections": ["stream-health-indicator", "solitary-territory", "two-stream-specialists"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-056",
+      "species": "Band-tailed Pigeon",
+      "relationship": "CONSECUTIVE NON-PASSERINE DEGREES, MAXIMUM ACOUSTIC CONTRAST. The forest coo (degree 56, Columbiformes, E=1, 400-600 Hz, deep/soft/resonant/warm) yields to the stream rattle (degree 57, Coraciiformes, E=3, 3,000-5,000 Hz, harsh/loud/mechanical/cold). Back-to-back new orders. Every dimension reversed: frequency (bass to mid-treble), energy (E=1 to E=3), quality (warm to harsh), habitat (forest canopy to waterway), reproductive strategy (1 egg to 5-8 eggs)."
+    },
+    {
+      "target": "SPS-052",
+      "species": "American Dipper",
+      "relationship": "TWO STREAM SPECIALISTS. The dipper (degree 52, Cinclidae, E=3, walks underwater, feeds on EPT invertebrates) and the kingfisher (degree 57, Alcedinidae, E=3, plunge-dives from above, feeds on fish). Same cold mountain streams, different trophic levels. Both E=3, both linear territories, both stream health indicators. Together they bracket the aquatic food web: invertebrate monitor + fish monitor."
+    },
+    {
+      "target": "SPS-053",
+      "species": "Steller's Jay",
+      "relationship": "TWO HARSH NON-MELODIC VOICES. The jay's shack-shack-shack (degree 53, discrete separated alarm notes, forest canopy) and the kingfisher's rattle (degree 57, continuous fused percussive burst, waterway). Both loud, both harsh, both non-melodic. The jay's alarm is cognitive and mimetic; the kingfisher's rattle is mechanical and stereotyped."
+    },
+    {
+      "target": "SPS-000",
+      "species": "Great Blue Heron",
+      "relationship": "TWO WATERSIDE FISH-EATING HUNTERS. The heron (degree 0, Ardeidae, still-hunting in shallows, patience as strategy) and the kingfisher (degree 57, Alcedinidae, plunge-diving from perches, explosive action as strategy). Both piscivores. Both associated with PNW waterways. The heron wades; the kingfisher dives. The heron is patient stillness; the kingfisher is explosive action."
+    },
+    {
+      "target": "SPS-054",
+      "species": "Red-breasted Sapsucker",
+      "relationship": "TWO EXCAVATORS. The sapsucker drills sap wells in living bark (degree 54, Picidae). The kingfisher digs nesting burrows in earthen banks (degree 57, Alcedinidae). Both modify their substrate. Both create resources used by other species: sap wells attract hummingbirds; abandoned kingfisher burrows shelter Rough-winged Swallows and other cavity nesters."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "Belted Kingfisher documented on virtually every waterway in western Washington and Oregon. Year-round resident from mountain streams to tidal estuaries. The only kingfisher in the PNW. Linear stream territories. Cold-stream specialist and fish-community indicator."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Aquatic ecosystem indicator species. Plunge-diving piscivore. Salmonid ecology connection (predator of juvenile coho and steelhead). Burrow-nesting vulnerability to bank stabilization and stream channelization. Reversed sexual dimorphism. Halcyon mythology."
+    }
+  ]
+}
