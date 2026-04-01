@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 60&deg; &mdash; Pied-billed Grebe &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Submerge call element card */
+    .submerge-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #00332B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .submerge-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2DFDB;
+    }
+    .submerge-card p {
+      color: #E0F2F1;
+    }
+    .submerge-card strong {
+      color: #80CBC4;
+    }
+
+    /* New order/family card */
+    .taxonomy-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D1559;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .taxonomy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C5CAE9;
+    }
+    .taxonomy-card p {
+      color: #E8EAF6;
+    }
+    .taxonomy-card strong {
+      color: #9FA8DA;
+    }
+
+    /* Aquatic trilogy card */
+    .trilogy-card {
+      background: linear-gradient(135deg, #01579B 0%, #0277BD 100%);
+      border: 2px solid #003E6B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E1F5FE;
+    }
+    .trilogy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B3E5FC;
+    }
+    .trilogy-card p {
+      color: #E1F5FE;
+    }
+    .trilogy-card strong {
+      color: #81D4FA;
+    }
+
+    /* Buoyancy/sinking card */
+    .buoyancy-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 100%);
+      border: 2px solid #1C2429;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .buoyancy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .buoyancy-card p {
+      color: #ECEFF1;
+    }
+    .buoyancy-card strong {
+      color: #90A4AE;
+    }
+
+    /* Convergent evolution card */
+    .convergent-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      border: 2px solid #311B5E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .convergent-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E1BEE7;
+    }
+    .convergent-card p {
+      color: #F3E5F5;
+    }
+    .convergent-card strong {
+      color: #CE93D8;
+    }
+
+    /* Feather eating card */
+    .feather-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 100%);
+      border: 2px solid #2A1B18;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .feather-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .feather-card p {
+      color: #EFEBE9;
+    }
+    .feather-card strong {
+      color: #BCAAA4;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.submerge { background: #00695C; }
+    .theory-icon.taxonomy { background: #1A237E; }
+    .theory-icon.trilogy { background: #01579B; }
+    .theory-icon.buoyancy { background: #263238; }
+    .theory-icon.convergent { background: #4A148C; }
+    .theory-icon.feather { background: #3E2723; }
+    .theory-icon.lobed { background: #1B5E20; }
+    .theory-icon.diver { background: #004D40; }
+    .theory-icon.flamingo { background: #880E4F; }
+    .theory-icon.gibbard { background: #BF360C; }
+    .theory-icon.cryptic { background: #37474F; }
+    .theory-icon.etymology { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">60&deg;</div>
+      <div class="release-title-block">
+        <h2>Pied-billed Grebe</h2>
+        <div class="scientific">Podilymbus podiceps</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      the submerge call &mdash; a loud, cuckoo-like accelerating &ldquo;cow-cow-cow-cow-cowp-cowp-cowp&rdquo; series, NEW FAMILY Podicipedidae (first grebe), NEW ORDER Podicipediformes (four new orders in five degrees 56&ndash;60), THIRD CONSECUTIVE AQUATIC-PRIMARY SPECIES (58&ndash;60), first sustained diver, E=4, year-round resident, lake edge / pond / marsh / slow river &mdash; freshwater with emergent vegetation, 16th consecutive CSV substitution
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Green Frog</strong> (<em>Lithobates clamitans</em>) at degree 60. Because the SPS Part B engine is birds-and-mammals only, Pied-billed Grebe replaces it. The substitution preserves the original&rsquo;s <strong>lake edge habitat</strong> and <strong>E=4 energy</strong>. The Green Frog produces a distinctive &ldquo;banjo plunk&rdquo; call from lake-edge vegetation (E=4, Ranidae). The Grebe produces a loud cuckoo-like &ldquo;cow-cow-cow&rdquo; series from the same lake-edge habitat (E=4, Podicipedidae). Both are vocally distinctive but quiet relative to their surroundings. This is the <strong>sixteenth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45 through Green Frog at 60) &mdash; the engine&rsquo;s deepest penetration into the amphibian belt.</p>
+        </div>
+
+        <!-- New Order/Family Card -->
+        <div class="taxonomy-card">
+          <h3>New Order: Podicipediformes &mdash; New Family: Podicipedidae</h3>
+          <p>The <strong>first grebe</strong> enters the engine. Podicipediformes is the <strong>fourth new order in five degrees</strong> (56 Columbiformes, 57 Coraciiformes, 58 Anseriformes, 60 Podicipediformes). Five consecutive non-passerine species (56&ndash;60) &mdash; the longest non-passerine streak. Passeriformes drops to <strong>80.3%</strong>. Grebes are an ancient lineage, <strong>sister to flamingos</strong> (Phoenicopteriformes) in the clade Mirandornithes &mdash; the closest relatives of the small brown diver are tall pink waders. <em>Podilymbus podiceps</em> = <strong>&ldquo;rump-footed rump-foot&rdquo;</strong> &mdash; one of the most tautological names in ornithology.</p>
+        </div>
+
+        <!-- Aquatic Trilogy Card -->
+        <div class="trilogy-card">
+          <h3>Three Consecutive Aquatic Species (58&ndash;59&ndash;60)</h3>
+          <p>Wood Duck (58, surface specialist, E=3) &rarr; Mallard (59, surface generalist, E=5) &rarr; <strong>Pied-billed Grebe (60, sustained diver, E=4)</strong>. Three degrees, <strong>two orders</strong>, three aquatic strata: <strong>surface, subsurface tip, full submersion</strong>. The engine descends through the water column. Nesting matches the descent: <strong>tree cavity</strong> (58) &rarr; <strong>ground</strong> (59) &rarr; <strong>floating platform</strong> (60). Naming descends from poetry to anatomy: <em>Aix sponsa</em> (&ldquo;bridal waterfowl&rdquo;) &rarr; <em>Anas platyrhynchos</em> (&ldquo;flat-billed duck&rdquo;) &rarr; <em>Podilymbus podiceps</em> (&ldquo;rump-footed rump-foot&rdquo;).</p>
+        </div>
+
+        <!-- Submerge Call Element Card -->
+        <div class="submerge-card">
+          <h3>The 61st Acoustic Element: The Submerge Call</h3>
+          <p>A loud, cuckoo-like <strong>accelerating series</strong> &mdash; &ldquo;cow-cow-cow-cow-cowp-cowp-cowp&rdquo; &mdash; starting slow (~2&ndash;3 notes/sec) and building to a frantic chattering climax (~5&ndash;6 notes/sec) before stopping abruptly. ~500&ndash;2,000 Hz. E=4. The <strong>first tempo-direction element</strong> in the engine &mdash; not pitch rising or falling but <strong>tempo accelerating</strong>. Named &ldquo;the submerge call&rdquo; for the paradox: the bird produces a loud, carrying call and then <strong>sinks silently beneath the surface</strong>. Sound followed by disappearance. Three resonances: (1) <strong>acceleration</strong> &mdash; new acoustic property; (2) <strong>mismatch</strong> &mdash; exotic sound from a small drab bird; (3) <strong>disappearance</strong> &mdash; the 61st element is the first defined by its own erasure.</p>
+        </div>
+
+        <!-- Buoyancy Card -->
+        <div class="buoyancy-card">
+          <h3>Sinking Without Diving &mdash; Controlled Buoyancy</h3>
+          <p>When alarmed, the Grebe <strong>gradually sinks</strong> beneath the surface without diving &mdash; compressing plumage to expel trapped air, silently reducing buoyancy like a submarine taking on ballast. No splash, no movement, no ripple. Only the head may remain above water, periscope-like. <strong>No duck can do this.</strong> Where the Wood Duck flies and the Mallard flies or swims, the Grebe sinks. Becoming less visible rather than more active. The opposite of every other waterbird in the engine. Also dives conventionally for <strong>20&ndash;30 seconds</strong>, propelled by lobed feet, pursuing fish and crayfish underwater &mdash; the engine&rsquo;s first sustained diver.</p>
+        </div>
+
+        <!-- Convergent Evolution Card -->
+        <div class="convergent-card">
+          <h3>NOT a Duck &mdash; Convergent Evolution</h3>
+          <p>Despite swimming on the same ponds as ducks, the Pied-billed Grebe is <strong>not related to ducks</strong>. Podicipediformes and Anseriformes are entirely separate orders. Their similarity is <strong>convergent evolution</strong>: independent lineages evolving similar body plans. Fundamental differences: <strong>lobed feet</strong> vs. webbed, <strong>vestigial tail</strong> vs. functional, <strong>adjustable buoyancy</strong> vs. fixed, <strong>cannot walk on land</strong> vs. walks freely, <strong>floating nest</strong> vs. ground/cavity. The engine places two degrees of true ducks (58&ndash;59) followed by one degree of not-duck (60) &mdash; teaching <strong>homology</strong> (58&ndash;59) and <strong>convergence</strong> (59&ndash;60) in consecutive degrees.</p>
+        </div>
+
+        <!-- Feather Eating Card -->
+        <div class="feather-card">
+          <h3>Feather Eating &mdash; Internal Feltworks</h3>
+          <p>Grebes <strong>eat their own feathers</strong>. The feathers form a <strong>feltlike mass</strong> in the stomach that protects the intestines from sharp fish bones and crustacean exoskeletons. Parents feed feathers to chicks from day one. Found in <strong>all grebes and no non-grebes</strong>. The thick, laterally compressed bill is adapted for <strong>crushing</strong> hard-shelled prey (crayfish, snails, diving beetles) &mdash; a crushing tool, not a filtering tool like the Mallard&rsquo;s lamellate bill. Also: <strong>carries chicks on its back</strong> while swimming &mdash; no duck does this.</p>
+        </div>
+
+        <h2>The Rump-Footed Rump-Foot</h2>
+        <p><em>Podilymbus podiceps</em> &mdash; <em>Podilymbus</em> from <em>Podiceps</em> (grebe type genus) + Latin <em>colymbus</em> (&ldquo;diver&rdquo;). <em>podiceps</em> from Latin <em>podex</em> (&ldquo;rump&rdquo;) + <em>pes</em> (&ldquo;foot&rdquo;). Full translation: <strong>&ldquo;rump-footed rump-foot&rdquo;</strong> &mdash; the name says the same thing twice, emphasizing that this bird&rsquo;s defining feature is legs set at the very rear of the body. Compare: <em>Aix sponsa</em> (&ldquo;bridal waterfowl&rdquo; &mdash; aesthetic), <em>Anas platyrhynchos</em> (&ldquo;flat-billed duck&rdquo; &mdash; functional), <em>Podilymbus podiceps</em> (&ldquo;rump-footed rump-foot&rdquo; &mdash; anatomical). Three consecutive aquatic species, three naming philosophies descending from poetry to prose to body plan.</p>
+        <p>&ldquo;Pied-billed&rdquo; refers to the <strong>breeding-season bill</strong>: pale with a prominent black vertical band. &ldquo;Grebe&rdquo; from French <em>gr&egrave;be</em>, possibly from Breton <em>krib</em> (&ldquo;crest&rdquo;), though the Pied-billed Grebe lacks a crest. The genus <em>Podilymbus</em> contains only <strong>two species</strong>: <em>P. podiceps</em> (widespread) and <em>P. gigas</em> (Atitl&aacute;n Grebe &mdash; <strong>EXTINCT since 1986</strong>).</p>
+
+        <h2>The Sound: The Submerge Call</h2>
+        <p><strong>Accelerating &ldquo;cow-cow-cow&rdquo; series:</strong> begins at ~2&ndash;3 notes per second, accelerates to ~5&ndash;6 notes per second, climaxes in rapid chattering, stops abruptly. ~500&ndash;2,000 Hz, hollow, cuckoo-like. E=4. Duration 3&ndash;8 seconds. Both sexes vocalize &mdash; duetting is common. First-time listeners often mistake it for a mammal or tropical bird. It sounds <strong>nothing like a duck</strong>.</p>
+        <p><strong>Vocalizations are innate</strong> &mdash; no cultural learning. Like the Wood Duck whistle (58), Mallard quack (59), Kingfisher rattle (57), and Band-tailed Pigeon coo (56), the Grebe&rsquo;s call is genetically determined. Five consecutive non-passerine species (56&ndash;60), all with innate vocalizations.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary &ldquo;cow-cow&rdquo; series</td><td>500&ndash;2,000 Hz (accelerating)</td><td>~3&ndash;8 s (series)</td><td>Territory, mate attraction</td></tr>
+            <tr><td>Contact &ldquo;kuk&rdquo; notes</td><td>1,000&ndash;2,500 Hz</td><td>~0.1&ndash;0.3 s (repeated)</td><td>Pair communication, chick contact</td></tr>
+            <tr><td>Alarm &ldquo;whinny/kee-ow&rdquo;</td><td>1,500&ndash;3,000 Hz</td><td>~0.5&ndash;1.0 s</td><td>Predator alarm</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Plumage: The Drab Diver</h2>
+        <p><strong>Overall:</strong> Small, compact, brown waterbird (31&ndash;38 cm, 253&ndash;568 g) that rides <strong>low in the water</strong> with virtually no visible tail. <strong>No bright colors, no iridescence, no bold patterns.</strong> After two consecutive degrees of extreme sexual dimorphism (Wood Duck baroque, Mallard graphic), the Grebe arrives with <strong>minimal dimorphism</strong> &mdash; males and females nearly identical. The evolutionary pressure differs: grebe courtship is vocal and behavioral (duetting, synchronous diving), not visual.</p>
+        <p><strong>Diagnostic mark:</strong> Thick, short, pale bill with prominent <strong>black vertical band</strong> (breeding). Black chin/throat patch (breeding). Non-breeding: band fades, overall duller brown.</p>
+        <p><strong>Feet:</strong> <strong>Lobed, NOT webbed</strong> &mdash; each toe has independent lateral flaps. Legs set extremely far back, nearly at the tail. Superb underwater propulsion, <strong>cannot walk on land</strong>. The fundamental anatomical distinction from ducks.</p>
+
+        <h2>Habitat: The Vegetated Lake Edge</h2>
+        <p><strong>Freshwater with emergent vegetation</strong> &mdash; lakes, ponds, marshes, and slow rivers where cattails, bulrushes, and sedges provide cover. Requires both <strong>open water</strong> (for diving/foraging) and <strong>dense vegetation</strong> (for nesting/cover). Narrower than the Mallard&rsquo;s all-freshwater range but overlapping. Year-round resident in western Washington lowlands. Common at Union Bay Natural Area, Nisqually NWR, Juanita Bay, and similar freshwater marshes.</p>
+        <p><strong>Nesting:</strong> <strong>Floating nest</strong> &mdash; a platform of decaying vegetation anchored to emergent reeds, rising and falling with water level. Adults cover eggs when leaving the nest, staining them from white to brown for camouflage. <strong>Carries chicks on its back</strong> while swimming for 2&ndash;3 weeks after hatching. Clutch 4&ndash;7 eggs. Both parents incubate (~23 days).</p>
+
+        <h2>The Ben Gibbard Solo Parallel</h2>
+        <p>Degree 60 pairs the Pied-billed Grebe with <strong>Ben Gibbard solo</strong> in Part A &mdash; Death Cab for Cutie&rsquo;s frontman appearing alone, stripped down, acoustic, intimate. Parallel resonances: (1) <strong>The quiet version</strong> &mdash; Death Cab (58) is the full band; Gibbard solo (60) is the voice alone. The Mallard (59) is the loud pond generalist; the Grebe (60) is the secretive diver. Both are the quiet version of something bigger. (2) <strong>Sinking vs. flying</strong> &mdash; the Grebe sinks rather than flies; Gibbard goes solo rather than arena. Both choose the less visible response. (3) <strong>Energy drops</strong> &mdash; Death Cab E=4 to Gibbard E=2; Mallard E=5 to Grebe E=4. The ensemble is louder than the individual. But the quieter version reveals what the louder version obscures.</p>
+
+        <h2>Family Tracker After Degree 60</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td><strong>Podicipedidae</strong></td><td><strong>60</strong></td><td><strong>1 (NEW)</strong></td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-six families across 61 entries. <strong>Podicipedidae enters as the 26th family</strong>. 49 of 61 entries (80.3%) are Passeriformes &mdash; dropping below 81% for the first time as the engine&rsquo;s non-passerine edge extends to five consecutive species (56&ndash;60).</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon submerge">S</div>
+            <div class="theory-content">
+              <h4>The Submerge Call <span class="theory-level foundational">foundational</span></h4>
+              <p>The 61st acoustic element. A loud, cuckoo-like accelerating series that builds in tempo from deliberate to frantic. E=4. Named for the paradox: loud call followed by silent disappearance. The first tempo-direction element &mdash; not pitch rising or falling but tempo accelerating. Music-theory parallel: an accelerando passage building tension through velocity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon taxonomy">P</div>
+            <div class="theory-content">
+              <h4>New Order + New Family <span class="theory-level foundational">foundational</span></h4>
+              <p>Podicipediformes (new order) + Podicipedidae (new family). Fourth new order in five degrees. First grebe. 26th family. Grebes are sister to flamingos &mdash; the closest relative of the small brown diver is the tall pink wader. Passeriformes drops to 80.3%.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trilogy">T</div>
+            <div class="theory-content">
+              <h4>Aquatic Trilogy (58&ndash;59&ndash;60) <span class="theory-level foundational">foundational</span></h4>
+              <p>Three consecutive aquatic species descending through the water column. Surface (Wood Duck) &rarr; subsurface tip (Mallard) &rarr; full submersion (Grebe). Tree cavity &rarr; ground &rarr; floating platform. Poetry &rarr; prose &rarr; body plan. Homology (58&ndash;59) then convergence (59&ndash;60).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon buoyancy">B</div>
+            <div class="theory-content">
+              <h4>Controlled Buoyancy <span class="theory-level foundational">foundational</span></h4>
+              <p>Sinks without diving by compressing plumage to expel air. Silent, invisible, costs nothing. Where ducks fly when alarmed, the Grebe becomes less visible rather than more active. Also dives 20&ndash;30 seconds, foot-propelled. The engine&rsquo;s first sustained diver.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon convergent">C</div>
+            <div class="theory-content">
+              <h4>NOT a Duck &mdash; Convergent Evolution <span class="theory-level foundational">foundational</span></h4>
+              <p>Same ponds as ducks, entirely different lineage. Lobed feet vs. webbed. Vestigial tail vs. functional. Adjustable buoyancy vs. fixed. Cannot walk vs. walks freely. The engine teaches homology (58&ndash;59) and convergence (59&ndash;60) in consecutive degrees. Appearance is not identity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon feather">F</div>
+            <div class="theory-content">
+              <h4>Feather Eating <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Eats own feathers to form gut feltworks protecting against sharp prey. Parents feed feathers to chicks from day one. Found in all grebes, no non-grebes. The most unusual dietary behavior in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon lobed">L</div>
+            <div class="theory-content">
+              <h4>Lobed Feet <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Individual toe flaps vs. duck webbing. Arguably more efficient for diving (less recovery-stroke drag). Ducks prioritize surface paddling; grebes prioritize underwater propulsion. Two evolutionary solutions to the same problem, now documented side by side (webbed 58&ndash;59, lobed 60).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon diver">D</div>
+            <div class="theory-content">
+              <h4>Three Underwater Strategies <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Walking (Dipper, 52), striking (Kingfisher, 57), swimming (Grebe, 60). Three different underwater worlds in eight degrees. The engine&rsquo;s freshwater ecology is now three-dimensional: surface, benthos, and open water.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon flamingo">M</div>
+            <div class="theory-content">
+              <h4>Sister to Flamingos <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Molecular phylogenetics places grebes as sister to flamingos in clade Mirandornithes. The small brown diver and the tall pink wader are closest relatives. The most unexpected kinship in 61 degrees. Convergent evolution gave grebes a duck-like exterior; their heritage connects to the visually dramatic.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon cryptic">E</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; Common but Cryptic <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Widespread on freshwater lakes but secretive and easy to miss. Heard more often than seen. Prefers vegetated margins, sinks when approached, camouflaged among reeds. The cow-cow call carries; the bird hides. Loud acoustically, invisible visually.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon gibbard">G</div>
+            <div class="theory-content">
+              <h4>Ben Gibbard Solo Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both are the quiet version of something bigger. Death Cab &rarr; Gibbard solo; Mallard &rarr; Grebe. Sinking vs. going solo. Energy drops in both sequences. The ensemble is louder than the individual, but the quieter version reveals what the louder version obscures.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon etymology">R</div>
+            <div class="theory-content">
+              <h4>Rump-Footed Rump-Foot <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Podilymbus podiceps &mdash; the name says the same thing twice. Three consecutive naming philosophies: beauty (Aix sponsa), function (Anas platyrhynchos), anatomy (Podilymbus podiceps). Poetry &rarr; prose &rarr; body plan. The genus contains one living species and one extinction (Atitl&aacute;n Grebe, EXTINCT 1986).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>CONSECUTIVE AQUATIC &mdash; ANATIDAE TO PODICIPEDIDAE. The quack (59, E=5, ubiquitous generalist, webbed feet, ground nester) yields to the submerge call (60, E=4, secretive diver, lobed feet, floating nest). Same ponds, different evolutionary lineage. Convergent evolution in consecutive degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-058: Wood Duck</strong>
+            <p>THREE CONSECUTIVE AQUATIC SPECIES (58&ndash;59&ndash;60). Surface specialist &rarr; surface generalist &rarr; sustained diver. Three aquatic strata, two orders, three acoustic characters. The engine descends through the water column.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-057: Belted Kingfisher</strong>
+            <p>PLUNGE-DIVER vs. SUSTAINED DIVER. Kingfisher enters water to strike for 1&ndash;2 seconds (57). Grebe lives in water for 20&ndash;30 seconds per dive (60). Both fish-eaters, completely different submersion strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-052: American Dipper</strong>
+            <p>UNDERWATER WALKER vs. UNDERWATER SWIMMER. Dipper walks stream bottoms (52). Grebe swims through open water (60). Three underwater strategies: walking, striking, swimming.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>TWO SECRETIVE SPECIALISTS. Both heard more often than seen. Owl cryptic in old-growth canopy (4); Grebe cryptic in lake-edge vegetation (60). Both produce loud distinctive calls while remaining nearly invisible.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Pied-billed Grebe breeds and winters on freshwater lakes and ponds with emergent vegetation. Year-round resident. First Podicipedidae. New order. Most common grebe in PNW. Declining in some areas due to wetland loss.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Lake-edge specialist dependent on emergent vegetation. Indicator for freshwater marsh health. Cattail/bulrush removal eliminates grebe habitat. Feather-eating behavior unique among engine species. Prey for eagles, herons, mink.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Pied-billed Grebe (<em>Podilymbus podiceps</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Pied-billed Grebe. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Pied-billed Grebe.</li>
+          <li>National Geographic &mdash; Pied-billed Grebe.</li>
+          <li>Wikipedia &mdash; &ldquo;Pied-billed Grebe.&rdquo;</li>
+          <li>Wikipedia &mdash; &ldquo;Podicipedidae.&rdquo;</li>
+          <li>Audubon &mdash; Pied-billed Grebe Field Guide.</li>
+          <li>Muller, M.J. and Storer, R.W. &mdash; Pied-billed Grebe (<em>Podilymbus podiceps</em>) in Birds of the World.</li>
+          <li>Sibley, D. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Storer, R.W. (1961). &ldquo;The classification of birds.&rdquo; In <em>Biology and Comparative Physiology of Birds</em>, Vol. 1.</li>
+          <li>Fjeldsa, J. (2004). <em>The Grebes: Podicipedidae</em>. Oxford University Press.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">60&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Submerge Call</div>
+          <div class="stat-detail">#61 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Loud call, hidden bird</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Podicipedidae</div>
+          <div class="stat-detail">NEW &mdash; 1st grebe, 26th family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Podilymbus</em></div>
+          <div class="stat-detail">NEW &mdash; &ldquo;rump-footed rump-foot&rdquo;</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Podicipediformes</div>
+          <div class="stat-detail">NEW &mdash; 4th new order in 5 degrees</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Accelerating series</div>
+          <div class="stat-detail">~500&ndash;2,000 Hz cow-cow-cow</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Lake edge</div>
+          <div class="stat-detail">Freshwater + emergent vegetation</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Resident (some seasonal movement)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sexual dimorphism</div>
+          <div class="stat-value">Minimal</div>
+          <div class="stat-detail">Males &amp; females nearly identical</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">Yes</div>
+          <div class="stat-detail">Replaces Green Frog (native)</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Aquatic Trilogy</div>
+          <div class="stat-value">SPS-058/059/060</div>
+          <div class="stat-detail">Wood Duck + Mallard + Grebe</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Previous Degree</div>
+          <div class="stat-value">SPS-059</div>
+          <div class="stat-detail">Mallard &mdash; ubiquitous pond generalist</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Secretive Pair</div>
+          <div class="stat-value">SPS-004</div>
+          <div class="stat-detail">Northern Spotted Owl &mdash; heard not seen</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 60 of 360</p>
+  </footer>
+</body>
+</html>
