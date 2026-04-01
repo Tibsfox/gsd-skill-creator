@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fishing Guide &mdash; Mukilteo Observatory</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    h2 { font-size:1.2rem; font-weight:400; color:var(--sand); margin:2.5rem 0 0.5rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); }
+    h3 { font-size:1rem; font-weight:400; color:#fff; margin:1.5rem 0 0.5rem; }
+    p { font-size:0.9rem; color:var(--text); margin-bottom:0.8rem; }
+
+    .panel { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.2rem; margin-bottom:1.5rem; }
+    .panel h3 { margin-top:0; }
+    .panel p { font-size:0.88rem; color:rgba(255,255,255,0.6); margin-bottom:0.5rem; }
+
+    .callout { background:rgba(58,138,154,0.08); border:1px solid rgba(58,138,154,0.15); border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem; color:var(--marine); }
+    .callout strong { color:var(--sand); }
+
+    .data-table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:0.8rem 0; }
+    .data-table th { text-align:left; font-size:0.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); }
+    .data-table td { padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); color:var(--text); }
+
+    .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+    blockquote { font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light); padding:0.8rem 1.2rem; margin:1.5rem 0; font-size:0.9rem; }
+
+    ul { margin:0.5rem 0 0.8rem 1.5rem; font-size:0.88rem; color:rgba(255,255,255,0.6); }
+    ul li { margin-bottom:0.3rem; }
+
+    .gear-list { list-style:none; margin-left:0; padding:0; }
+    .gear-list li { padding:0.3rem 0 0.3rem 1.2rem; position:relative; }
+    .gear-list li::before { content:'\2022'; position:absolute; left:0; color:var(--sand); }
+
+    .season-tag {
+      display:inline-block; font-size:0.68rem; font-family:system-ui,sans-serif;
+      padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;
+      text-transform:uppercase; margin-left:0.4rem; vertical-align:middle;
+    }
+    .season-summer { background:rgba(196,176,144,0.15); color:var(--sand); }
+    .season-winter { background:rgba(74,122,154,0.15); color:var(--sky); }
+    .season-year { background:rgba(58,138,154,0.1); color:var(--marine); }
+
+    .connections { background:rgba(42,74,48,0.15); border:1px solid rgba(42,74,48,0.3); border-radius:4px; padding:0.8rem 1rem; margin:1rem 0; font-size:0.85rem; }
+    .connections strong { color:var(--sand); }
+    .connections a { color:var(--marine); }
+
+    .warning-box {
+      background:rgba(196,176,144,0.08); border:1px solid rgba(196,176,144,0.2);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0;
+    }
+    .warning-box .label {
+      font-size:0.7rem; color:var(--sand); font-family:system-ui,sans-serif;
+      text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.3rem;
+    }
+    .warning-box p { font-size:0.85rem; color:var(--text); margin:0.3rem 0 0; }
+
+    footer { max-width:900px; margin:0 auto; padding:1.5rem; text-align:center; font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .data-table { font-size:0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Fishing Guide &mdash; Puget Sound &amp; Freshwater</h1>
+  <div class="subtitle">Salmon, crab, shrimp, and freshwater species from Mukilteo to Lake Washington</div>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="waterfront-parks.html">Parks</a>
+    <a href="boating-guide.html">Boating</a>
+    <a href="tides-math.html">Tides</a>
+    <a href="../LIVE/index.html">LIVE</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    The waters around Mukilteo sit at the nexus of one of the most productive marine ecosystems
+    on the Pacific coast. Possession Sound, where the Snohomish River pours freshwater and nutrients
+    into Puget Sound, supports runs of all five Pacific salmon species, Dungeness crab, spot shrimp,
+    and a diversity of bottomfish. Inland, Lake Washington offers year-round freshwater fishing for
+    trout, bass, and perch. This guide covers the species, access points, seasons, and regulations
+    for fishing from Mukilteo south to the greater Seattle waterways.
+  </blockquote>
+
+  <!-- ===== SECTION 1: SALTWATER ===== -->
+
+  <h2>1. Saltwater Fishing &mdash; Puget Sound</h2>
+
+  <div class="panel">
+    <h3>Marine Area 8-2: Possession Sound &amp; Port Gardner</h3>
+    <p>The waters off Mukilteo fall within WDFW Marine Area 8-2, encompassing Possession Sound, Port Gardner Bay, and the nearshore waters between Edmonds and Kayak Point. This area is one of the more accessible saltwater fishing zones in Snohomish County, with multiple public piers and boat launches.</p>
+    <p>Marine Area 8-2 is regulated by the Washington Department of Fish and Wildlife (WDFW). Seasons, daily limits, and size restrictions change annually and sometimes within a season based on run strength and escapement goals. Always check the current WDFW Sport Fishing Rules pamphlet before fishing.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Species by Season</h3>
+    <div class="table-scroll">
+    <table class="data-table">
+      <tr><th>Species</th><th>Peak Season</th><th>Method</th><th>Notes</th></tr>
+      <tr>
+        <td style="color:var(--sand);">Chinook Salmon</td>
+        <td>Jul&ndash;Sep</td>
+        <td>Trolling, mooching</td>
+        <td>Mark-selective &mdash; hatchery (clipped adipose fin) only in most years</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Coho Salmon</td>
+        <td>Aug&ndash;Oct</td>
+        <td>Trolling, casting from piers</td>
+        <td>Strong hatchery returns; often open longer than Chinook</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Pink Salmon</td>
+        <td>Jul&ndash;Sep (odd years)</td>
+        <td>Casting spoons, pier jigging</td>
+        <td>Massive odd-year runs in Snohomish system; shore-accessible</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Chum Salmon</td>
+        <td>Oct&ndash;Nov</td>
+        <td>Trolling, beach casting</td>
+        <td>Late-season opportunity; strong runs some years</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Lingcod</td>
+        <td>May&ndash;Jun, Oct&ndash;Dec</td>
+        <td>Jigging, live bait</td>
+        <td>Minimum size 26 inches; rocky structure near Possession Point</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Pacific Cod</td>
+        <td>Oct&ndash;Mar</td>
+        <td>Bottom jigging</td>
+        <td>Deeper water; occasional from piers</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Cabezon</td>
+        <td>Year-round</td>
+        <td>Jigging, bottom rigs</td>
+        <td>Rocky substrate; catch and release in some areas</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Squid</td>
+        <td>Oct&ndash;Mar</td>
+        <td>Squid jigs under lights</td>
+        <td>Night fishing from piers; best at Edmonds</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+
+  <h3>Fishing Piers</h3>
+
+  <div class="panel">
+    <h3>Mukilteo Fishing Pier <span class="season-tag season-summer">Jul&ndash;Oct peak</span></h3>
+    <p>The new public fishing pier at the Mukilteo ferry terminal provides direct access to Possession Sound. Completed as part of the multimodal terminal project, the pier extends into the shipping channel where salmon transit between open water and the Snohomish River estuary.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Target species:</strong> Coho salmon, pink salmon (odd years), squid (winter nights)</li>
+      <li><strong style="color:var(--sand);">Best time:</strong> Incoming tide, early morning or late evening during salmon runs</li>
+      <li><strong style="color:var(--sand);">Access:</strong> Free public access; parking at the ferry terminal lot (fee applies)</li>
+      <li><strong style="color:var(--sand);">Tip:</strong> Pink salmon years (odd) bring huge crowds &mdash; arrive before dawn for a spot on the rail</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Edmonds Fishing Pier <span class="season-tag season-year">Year-round</span></h3>
+    <p>One of the most popular fishing piers in the Puget Sound region. The Edmonds pier extends into deep water near the Kingston ferry lane, providing access to salmon, bottomfish, and &mdash; uniquely &mdash; some of the best squid jigging in the Pacific Northwest.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Target species:</strong> Salmon (summer/fall), squid (Oct&ndash;Mar), perch, flatfish</li>
+      <li><strong style="color:var(--sand);">Squid jigging:</strong> Night fishing under pier lights, Oct through March; peak in December and January. Use glow-in-the-dark squid jigs on a weighted dropper rig.</li>
+      <li><strong style="color:var(--sand);">Access:</strong> Free; adjacent to Edmonds Underwater Park (no fishing in the marine sanctuary)</li>
+      <li><strong style="color:var(--sand);">Tip:</strong> The pier is lit at night, attracting baitfish and squid &mdash; bring a headlamp and bucket</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Everett Jetty Landing <span class="season-tag season-summer">Spring&ndash;Fall</span></h3>
+    <p>Adjacent to the 10th Street boat launch in Everett, the jetty provides bank access to the mouth of the Snohomish River and Port Gardner Bay. This is primarily a bottomfish spot, with occasional salmon passing through during run season.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Target species:</strong> Pile perch, striped seaperch, flatfish, occasional lingcod</li>
+      <li><strong style="color:var(--sand);">Best time:</strong> Incoming tide for perch; slack water for bottomfish</li>
+      <li><strong style="color:var(--sand);">Access:</strong> Free; parking at the adjacent boat launch (can be crowded on summer weekends)</li>
+      <li><strong style="color:var(--sand);">Tip:</strong> Fish the rock edges of the jetty with shrimp or sandworms for seaperch</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Kayak Point Pier <span class="season-tag season-summer">Best May&ndash;Sep</span></h3>
+    <p>At 300 feet long, the Kayak Point pier at Kayak Point Regional Park is the premier crabbing-from-pier location in Snohomish County. The pier extends over a productive Dungeness crab flat, and the adjacent beach offers additional fishing access.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Target species:</strong> Dungeness crab (season permitting), salmon, perch, flatfish</li>
+      <li><strong style="color:var(--sand);">Crabbing:</strong> Star traps and ring nets from the pier; check WDFW for current crab season openings in Marine Area 8-2</li>
+      <li><strong style="color:var(--sand);">Access:</strong> Snohomish County park; day-use fee or Discover Pass required</li>
+      <li><strong style="color:var(--sand);">Tip:</strong> Best Dungeness crab catches come on incoming tides with chicken or herring bait</li>
+    </ul>
+  </div>
+
+  <!-- ===== SECTION 2: CRABBING & SHRIMPING ===== -->
+
+  <h2>2. Crabbing &amp; Shrimping</h2>
+
+  <div class="panel">
+    <h3>Dungeness Crab &mdash; Possession Sound &amp; Port Gardner</h3>
+    <p>The sandy and muddy bottom of Possession Sound and Port Gardner Bay supports a healthy Dungeness crab population. These are the same prized crabs served at restaurants throughout the Pacific Northwest &mdash; sweet, firm white meat that is the signature shellfish of the Salish Sea.</p>
+    <p>Recreational crabbing from boats is the most productive method, with primary access from the Everett 10th Street boat launch. Pier crabbing is available at Kayak Point (see above). The crab fishery is managed by WDFW with seasonal openings that typically run from July through September, though exact dates vary by year.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Gear &amp; Methods</h3>
+    <ul class="gear-list">
+      <li><strong style="color:var(--sand);">Crab pots (star traps):</strong> Collapsible wire or mesh traps deployed from a boat. Bait with chicken legs, turkey necks, or herring. Set on sandy bottom in 30&ndash;80 feet of water. Soak for 1&ndash;4 hours.</li>
+      <li><strong style="color:var(--sand);">Ring nets:</strong> Simpler and cheaper than pots. Good from piers or boats. Faster soak times (15&ndash;30 minutes) but no escape prevention &mdash; check frequently.</li>
+      <li><strong style="color:var(--sand);">Bait:</strong> Chicken parts (legs, backs) are the standard &mdash; cheap, durable, and effective. Herring and salmon carcasses work well but break down faster. Place bait in a perforated bait container inside the pot.</li>
+      <li><strong style="color:var(--sand);">Buoy &amp; line:</strong> Every pot or ring must be marked with a buoy bearing the fisher's name and WDFW catch record card number.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Regulations Summary</h3>
+    <p>Dungeness crab regulations are strictly enforced. Key rules (verify current year with WDFW):</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Season:</strong> Typically July through September in Marine Area 8-2; exact dates announced annually</li>
+      <li><strong style="color:var(--sand);">Daily limit:</strong> 5 Dungeness crab per person (male only)</li>
+      <li><strong style="color:var(--sand);">Minimum size:</strong> 6.25 inches across the widest part of the carapace (measured point to point)</li>
+      <li><strong style="color:var(--sand);">Sex:</strong> Males only &mdash; all females must be released. Males are identified by the narrow, pointed abdominal flap (females have a wide, rounded flap).</li>
+      <li><strong style="color:var(--sand);">Gear limit:</strong> 2 pots or ring nets per person</li>
+      <li><strong style="color:var(--sand);">Catch record card:</strong> Required &mdash; must be returned to WDFW by the deadline printed on the card</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Tides matter for crabbing:</strong> Crab movement is strongly influenced by tidal currents. Crabs are most active and feeding during tidal exchanges, particularly on incoming tides. Plan your crab sets around the tide tables &mdash; see <a href="tides-math.html">Tides Math</a> for the science behind tidal prediction at Possession Sound.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Spot Shrimp</h3>
+    <p>Spot shrimp (<em>Pandalus platyceros</em>) are the largest shrimp species in the North Pacific and one of the most sought-after shellfish in Puget Sound. These are the same sweet, lobster-like shrimp served at high-end Seattle restaurants.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Depth:</strong> 100&ndash;300 feet; requires a boat and deep-water shrimp pots</li>
+      <li><strong style="color:var(--sand);">Season:</strong> Short &mdash; typically a single-day or multi-day opening in May, announced by WDFW</li>
+      <li><strong style="color:var(--sand);">Gear:</strong> Collapsible shrimp pots with 1-inch mesh, baited with cat food or commercial shrimp bait pellets</li>
+      <li><strong style="color:var(--sand);">Location:</strong> Deep channels in Possession Sound and adjacent waters; local knowledge is essential</li>
+      <li><strong style="color:var(--sand);">Daily limit:</strong> 80 spot shrimp per person (check current year)</li>
+      <li><strong style="color:var(--sand);">Handling:</strong> Remove heads immediately after catching to prevent enzymes from softening the tail meat</li>
+    </ul>
+    <p>The spot shrimp opener is one of the most anticipated days on the Puget Sound fishing calendar. Boats line up before dawn, and pots must be pulled by a specific time. Check WDFW announcements carefully &mdash; dates, areas, and limits can change with very little notice.</p>
+  </div>
+
+  <!-- ===== SECTION 3: FRESHWATER ===== -->
+
+  <h2>3. Freshwater Fishing &mdash; Lake Washington</h2>
+
+  <div class="panel">
+    <h3>Overview</h3>
+    <p>Lake Washington is a 22-mile-long freshwater lake connected to Puget Sound via the Lake Washington Ship Canal and Ballard Locks. This connection means Pacific salmon pass through the lake on their way to spawning tributaries, creating unique urban fishing opportunities alongside resident warmwater and coldwater species.</p>
+    <p>The lake's fishery is remarkably diverse for an urban water body, supporting everything from trophy-class largemouth bass in the south-end weed beds to Chinook salmon trolled in the main basin.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Species Guide</h3>
+    <div class="table-scroll">
+    <table class="data-table">
+      <tr><th>Species</th><th>Season</th><th>Method</th><th>Notes</th></tr>
+      <tr>
+        <td style="color:var(--sand);">Chinook Salmon</td>
+        <td>Jul&ndash;Oct</td>
+        <td>Trolling, pier fishing</td>
+        <td>Catch and release in some years; check WDFW emergency rules</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Coho Salmon</td>
+        <td>Sep&ndash;Nov</td>
+        <td>Trolling</td>
+        <td>Hatchery runs return through the locks and up the lake</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Sockeye Salmon</td>
+        <td>Jun&ndash;Jul</td>
+        <td>Restricted</td>
+        <td>Check WDFW &mdash; fishery opens only when run size permits; highly regulated</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Rainbow Trout</td>
+        <td>Year-round</td>
+        <td>Bank fishing, boat</td>
+        <td>Stocked by WDFW in tributaries and at access points</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Largemouth Bass</td>
+        <td>May&ndash;Oct</td>
+        <td>Soft plastics, topwater</td>
+        <td>South end weed beds (Mercer Slough, Enatai); catch and release encouraged</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Smallmouth Bass</td>
+        <td>May&ndash;Sep</td>
+        <td>Crankbaits, tube jigs</td>
+        <td>Rocky points and riprap along the east shore</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Yellow Perch</td>
+        <td>Year-round</td>
+        <td>Worms, small jigs</td>
+        <td>Docks, piers, and marina edges; excellent for kids</td>
+      </tr>
+      <tr>
+        <td style="color:var(--sand);">Cutthroat Trout</td>
+        <td>Year-round</td>
+        <td>Flies, small spinners</td>
+        <td>Tributaries and near creek mouths; sea-run cutthroat enter from Puget Sound</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Access Points</h3>
+    <ul>
+      <li><strong style="color:var(--sand);">Magnuson Park Pier (Seattle):</strong> North end of the lake. Public pier with parking. Good for perch, trout, and salmon in season. Adjacent to the NOAA Western Regional Center.</li>
+      <li><strong style="color:var(--sand);">Gene Coulon Memorial Beach Park (Renton):</strong> South end. Fishing pier, boat launch, swimming beach. Prime largemouth bass water in the adjacent weedy shallows. The pier produces perch and trout year-round.</li>
+      <li><strong style="color:var(--sand);">Kirkland Waterfront Piers:</strong> East shore. Multiple small public piers along the Kirkland downtown waterfront. Good for perch and cutthroat trout. Pleasant urban fishing with restaurants nearby.</li>
+      <li><strong style="color:var(--sand);">Kenmore (north end):</strong> Where the Sammamish River enters Lake Washington. Bank access and small boat launch. Salmon stage here before running up the Sammamish toward Lake Sammamish.</li>
+      <li><strong style="color:var(--sand);">Luther Burbank Park (Mercer Island):</strong> Fishing dock on the north end of Mercer Island. Sheltered water, good for perch and bass.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <strong>Urban fishery note:</strong> Lake Washington is one of the most studied lakes in the Pacific Northwest. The University of Washington has monitored its ecology since the 1960s, when a massive cleanup effort diverted sewage away from the lake. Today it is remarkably clean for an urban lake &mdash; clear enough to support native salmon runs alongside introduced warmwater species.
+  </div>
+
+  <!-- ===== SECTION 4: SAFETY & REGULATIONS ===== -->
+
+  <h2>4. Safety &amp; Regulations</h2>
+
+  <div class="panel">
+    <h3>Licensing</h3>
+    <p>A Washington State fishing license is required for all recreational fishing. The license system is managed by WDFW and can be purchased online, at sporting goods stores, or at license dealers throughout the state.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Freshwater license:</strong> Required for all freshwater fishing (lakes, rivers, streams)</li>
+      <li><strong style="color:var(--sand);">Saltwater endorsement:</strong> Required in addition to the freshwater license for marine waters</li>
+      <li><strong style="color:var(--sand);">Shellfish/Seaweed endorsement:</strong> Required for crab, shrimp, clams, and other shellfish</li>
+      <li><strong style="color:var(--sand);">Catch record card:</strong> Mandatory for salmon, steelhead, sturgeon, halibut, Dungeness crab, and other species. Must be filled out immediately upon catch and returned to WDFW by the deadline.</li>
+      <li><strong style="color:var(--sand);">Two-pole endorsement:</strong> Optional; allows fishing with two rods simultaneously in many waters</li>
+    </ul>
+    <p>License fees fund fish hatcheries, habitat restoration, and fisheries management. Purchase at <a href="https://fishhunt.dfw.wa.gov/">WDFW Fish &amp; Hunt</a>.</p>
+  </div>
+
+  <div class="warning-box">
+    <div class="label">Emergency Communication</div>
+    <p><strong style="color:var(--sand);">VHF Channel 16</strong> is the international distress and calling frequency monitored by the U.S. Coast Guard. All boaters on Puget Sound should carry a marine VHF radio and know how to issue a Mayday or Pan-Pan call. Cell phone coverage can be spotty on the water &mdash; VHF is the reliable lifeline.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Weather &amp; Water Safety</h3>
+    <p>Puget Sound is not a lake. It is a deep, cold, tidal body of marine water with strong currents and rapidly changing weather. Even on calm summer days, conditions can shift quickly.</p>
+    <ul>
+      <li><strong style="color:var(--sand);">Water temperature:</strong> Puget Sound ranges from 8&ndash;12&deg;C (46&ndash;54&deg;F) year-round. At these temperatures, hypothermia can set in within 30&ndash;60 minutes of immersion. Wear a life jacket at all times on the water.</li>
+      <li><strong style="color:var(--sand);">Tidal currents:</strong> Strongest at Admiralty Inlet (between Whidbey Island and the Kitsap Peninsula) and Deception Pass, where currents can exceed 8 knots. Even in Possession Sound, tidal currents of 1&ndash;2 knots can push small boats off course. See <a href="tides-math.html">Tides Math</a> for current prediction.</li>
+      <li><strong style="color:var(--sand);">Marine forecast:</strong> Always check the NWS marine forecast before boating. Our <a href="weather-map.html">Weather Map</a> aggregates local conditions from 19+ data sources including METAR stations, NWS zones, and NDBC buoys.</li>
+      <li><strong style="color:var(--sand);">Fog:</strong> Dense fog is common in autumn and spring, particularly in early morning. Visibility can drop below 100 meters with little warning. Carry a compass and GPS; sound your horn.</li>
+      <li><strong style="color:var(--sand);">Wind:</strong> Afternoon westerlies of 10&ndash;20 knots are common in summer. Winter storms can bring sustained winds of 30+ knots with gusts to 50.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Regulation Resources</h3>
+    <p>Fishing regulations in Washington State are detailed and change frequently. The following WDFW resources should be consulted before every trip:</p>
+    <ul>
+      <li><a href="https://wdfw.wa.gov/fishing/regulations">WDFW Sport Fishing Rules</a> &mdash; complete regulations for all species and areas</li>
+      <li><a href="https://wdfw.wa.gov/fishing/shellfishing-regulations">WDFW Shellfish Regulations</a> &mdash; crab, shrimp, and clam seasons and limits</li>
+      <li><a href="https://wdfw.wa.gov/fishing/regulations/puget-sound">Marine Area Maps &amp; Rules</a> &mdash; boundaries and area-specific regulations</li>
+      <li><a href="https://wdfw.wa.gov/species-habitats/species/dungeness-crab">Dungeness Crab Info</a> &mdash; identification, measuring, and handling</li>
+      <li><a href="https://fishhunt.dfw.wa.gov/">WDFW Licensing Portal</a> &mdash; purchase licenses, endorsements, and catch record cards</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Mark-selective fisheries:</strong> Many Puget Sound salmon fisheries are "mark-selective," meaning only hatchery fish (those missing the adipose fin) may be retained. Wild (unmarked) fish must be released immediately with minimum handling. Learn to identify the adipose fin before fishing for salmon &mdash; improper retention of wild fish can result in significant fines.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Hypothermia Reference</h3>
+    <div class="table-scroll">
+    <table class="data-table">
+      <tr><th>Water Temp</th><th>Exhaustion / Loss of Consciousness</th><th>Expected Survival Time</th></tr>
+      <tr><td>0&ndash;5&deg;C (32&ndash;41&deg;F)</td><td>15&ndash;45 minutes</td><td>15&ndash;45 minutes</td></tr>
+      <tr><td>5&ndash;10&deg;C (41&ndash;50&deg;F)</td><td>30&ndash;60 minutes</td><td>1&ndash;3 hours</td></tr>
+      <tr><td>10&ndash;15&deg;C (50&ndash;59&deg;F)</td><td>1&ndash;2 hours</td><td>1&ndash;6 hours</td></tr>
+      <tr><td>15&ndash;20&deg;C (59&ndash;68&deg;F)</td><td>2&ndash;7 hours</td><td>2&ndash;40 hours</td></tr>
+    </table>
+    </div>
+    <p>Puget Sound sits in the 8&ndash;12&deg;C range year-round, placing it in the 1&ndash;3 hour survival window. Cold water kills faster than most people expect. Wear your PFD.</p>
+  </div>
+
+  <!-- ===== CONNECTIONS ===== -->
+
+  <div class="connections">
+    <strong>Related research:</strong>
+    <a href="tides-math.html">Tides Math</a> &mdash; harmonic analysis and tidal prediction for Possession Sound &middot;
+    <a href="weather-map.html">Weather Map</a> &mdash; 19+ live data sources for marine and shore conditions &middot;
+    <a href="marine-science.html">Marine Science</a> &mdash; estuarine mixing and marine biology of Possession Sound &middot;
+    <a href="salish-sea.html">Salish Sea</a> &mdash; broader ecological context of Puget Sound &middot;
+    <a href="index.html">Dashboard</a> &mdash; live weather, tides, and conditions at Mukilteo
+  </div>
+
+  <p style="font-size:0.75rem; color:var(--dim); margin-top:2rem; font-family:system-ui,sans-serif;">
+    Last updated: April 1, 2026
+  </p>
+
+</main>
+
+<footer>
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="index.html">MUK Dashboard</a> &middot;
+  Fishing Guide &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a>
+</footer>
+
+</body>
+</html>
