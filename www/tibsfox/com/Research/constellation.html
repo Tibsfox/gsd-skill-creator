@@ -511,16 +511,17 @@ PROJECTS.forEach(function(p,i){
   var a=clusterAngle[c.name]||0;
   var t=nodeType(p.id);
   var r,spread;
-  if(t==='artist'){r=30+Math.random()*50;spread=25}
-  else if(t==='species'){r=30+Math.random()*50;spread=25}
+  if(t==='artist'){r=140+Math.random()*100;spread=60}
+  else if(t==='species'){r=120+Math.random()*80;spread=50}
+  else if(t==='nasa'){r=160+Math.random()*60;spread=40}
   else{r=80+Math.random()*60;spread=40}
   px[i]=Math.cos(a)*r+(Math.random()-.5)*spread;
   py[i]=Math.sin(a)*r+(Math.random()-.5)*spread;
 });
 
 (function runForce(){
-  var repulsion=400,attraction=0.008,damping=0.85,centerPull=0.002,clusterPull=0.008;
-  for(var iter=0;iter<180;iter++){
+  var repulsion=1200,attraction=0.004,damping=0.82,centerPull=0.001,clusterPull=0.006;
+  for(var iter=0;iter<250;iter++){
     var cx={},cy={},cc={};
     CLUSTERS.forEach(function(c){cx[c.name]=0;cy[c.name]=0;cc[c.name]=0});
     for(var i=0;i<N;i++){var cn=clusterOf[PROJECTS[i].id].name;cx[cn]+=px[i];cy[cn]+=py[i];cc[cn]++}
