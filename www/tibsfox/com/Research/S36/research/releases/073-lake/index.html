@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 73&deg; &mdash; LAKE &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>073 &mdash; LAKE</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>K Records Enters &mdash; Genre Stage 55 &mdash; Indie Pop &mdash; The Jangle</h3>
+      <p>
+        LAKE at degree 73&deg; brings <strong>K Records</strong>
+        into the engine &mdash; the heart of the International Pop
+        Underground, founded by Calvin Johnson in 1982. <strong>Indie
+        Pop</strong> enters at Genre Stage 55 &mdash; first pure
+        Indie Pop classification. <strong>E=3</strong> &mdash; middle
+        energy, the jangle bouncing with communal warmth. Dual vocals
+        &mdash; <strong>Eli Moore</strong> and <strong>Ashley
+        Eriksson</strong> as genuine co-vocalists. Eriksson wrote
+        &ldquo;Island Song&rdquo; (Adventure Time). The jangle
+        &mdash; 74th acoustic element. The K Records collective
+        &mdash; 74th artist-city pattern.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">73&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">LAKE</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Indie Pop</span>
+          <span class="label-badge">K Records</span>
+          <span class="neighborhood-badge">Olympia / Seattle</span>
+          <span class="record-badge">First K Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: K Records Enters &middot; Genre Stage 55 &middot; Indie Pop &middot; Dual Vocals</h4>
+          <p>
+            <strong>LAKE</strong> enters the engine as a jangly indie
+            pop band on <strong>K Records</strong> &mdash; the heart of
+            the International Pop Underground. <strong>Indie Pop</strong>
+            enters for the first time at Genre Stage 55 &mdash; first pure
+            Indie Pop classification, continuing the genre departure begun
+            at Art Pop (degree 72). <strong>K Records</strong> (Olympia)
+            enters &mdash; the most culturally significant independent
+            label in Pacific Northwest history, second Olympia label after
+            Kill Rock Stars (degree 70). <strong>E=3</strong> &mdash;
+            middle energy, 19th E=3 deployment. Energy distribution after
+            degree 73: E1:3, E2:24, E3:19, E4:17, E5:10, E6:2.
+            <strong>Dual vocals</strong> &mdash; Eli Moore and Ashley
+            Eriksson as genuine co-vocalists. <strong>Ashley
+            Eriksson</strong> wrote &ldquo;Island Song&rdquo; (Adventure
+            Time). The jangle &mdash; 74th acoustic element. The K Records
+            collective &mdash; 74th artist-city pattern. The sweet
+            imperfection &mdash; 73rd blue note.
+          </p>
+        </div>
+
+        <section>
+          <h2>K Records: The Heart of the International Pop Underground</h2>
+          <p>
+            Degree 73 introduces <strong>K Records</strong> into the
+            engine. This is a landmark event. K Records is arguably
+            the <strong>most culturally significant independent label
+            in Pacific Northwest history</strong> &mdash; more
+            foundational than Sub Pop to the philosophy of independent
+            music, more radical than Kill Rock Stars in its vision of
+            what music could be. Founded in <strong>1982</strong> by
+            <strong>Calvin Johnson</strong> of Beat Happening in
+            <strong>Olympia, Washington</strong>, K Records was built
+            as more than a label &mdash; it was a philosophy: music
+            belongs to everyone.
+          </p>
+          <p>
+            K Records organized the <strong>International Pop
+            Underground Convention</strong> (1991) &mdash; a five-day
+            festival in Olympia, one week before Nirvana&rsquo;s
+            <em>Nevermind</em> dropped. The convention&rsquo;s opening
+            night, &ldquo;Love Rock Revolution Girl Style Now,&rdquo;
+            crystallized <strong>riot grrrl</strong> as a movement.
+            While Sub Pop built a commercial empire on loud guitars,
+            K Records declared that pop music belonged to everyone.
+            The label&rsquo;s roster &mdash; Beat Happening, The
+            Microphones (Phil Elverum, degree 71), Beck (early work),
+            Built to Spill, Modest Mouse (early singles), Tiger Trap,
+            The Blow, Mirah &mdash; is a map of the Pacific Northwest
+            underground.
+          </p>
+          <p>
+            K Records is the <strong>second Olympia label</strong>
+            after Kill Rock Stars (degree 70, Horse Feathers). The
+            two labels are the twin pillars of Olympia&rsquo;s music
+            culture: KRS is the political/punk pillar &mdash; riot
+            grrrl, Sleater-Kinney, political independence as
+            aesthetic. K Records is the pop/communal pillar &mdash;
+            lo-fi sweetness, democratic music-making, the conviction
+            that the pop song is a democratic form. Same city.
+            Different philosophies. Complementary visions.
+          </p>
+          <blockquote>
+            K Records at degree 73 is the engine&rsquo;s encounter
+            with the label that proved anyone can make music &mdash;
+            that the pop song belongs to everyone, that lo-fi
+            production is a choice, not a limitation, and that
+            independence is not just a business model but a
+            way of life. The International Pop Underground enters.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Indie Pop: Genre Stage 55</h2>
+          <p>
+            Degree 73 introduces <strong>Indie Pop</strong> into the
+            engine for the first time &mdash; the fifty-fifth genre
+            stage and the first pure Indie Pop classification. Indie
+            Pop is defined by jangly guitars, melodic accessibility,
+            lo-fi production values, and the communal spirit of shared
+            vocals. The genre treats the pop song not as a commercial
+            product but as a <strong>democratic form</strong> &mdash;
+            accessible to anyone who can strum a guitar and sing.
+          </p>
+          <p>
+            LAKE embodies all four defining qualities: <strong>jangly
+            guitars</strong> that shimmer and chime, <strong>sweet
+            melodies</strong> that lodge in the listener&rsquo;s mind,
+            <strong>lo-fi warmth</strong> that rejects studio polish
+            in favor of handmade charm, and <strong>dual vocals</strong>
+            that create a conversational quality &mdash; two people
+            singing together, not performing at an audience.
+          </p>
+          <p>
+            The genre progression from degree 72: the engine moves
+            from ethereal art pop (Marela, 72) to jangly indie pop
+            (LAKE, 73). Both are pop-adjacent. Both depart from the
+            folk/indie folk quadrant. But the construction methods
+            differ. Art pop adds through technology &mdash; one voice
+            multiplied by loop pedals into dense textures. Indie pop
+            adds through warmth &mdash; friends playing instruments
+            together in a room, the jangle arising from human
+            interaction, not electronic processing.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Dual Vocals and the Adventure Time Connection</h2>
+          <p>
+            LAKE features genuine <strong>dual vocals</strong> &mdash;
+            <strong>Eli Moore</strong> and <strong>Ashley Eriksson</strong>
+            sharing vocal duties as co-vocalists, trading lines,
+            harmonizing, answering each other. The effect is
+            <strong>conversational</strong>: the pop song as dialogue
+            rather than monologue. Neither voice dominates. Both are
+            present, distinct, and essential.
+          </p>
+          <p>
+            <strong>Ashley Eriksson</strong> brings an extraordinary
+            connection: she wrote <strong>&ldquo;Island Song&rdquo;</strong>
+            &mdash; the closing credits theme for <strong>Adventure
+            Time</strong> (Cartoon Network, 2010&ndash;2018).
+            &ldquo;Come along with me / And the butterflies and
+            bees...&rdquo; &mdash; a jangly, sweet, lo-fi pop song
+            heard by millions through animation. The K Records
+            aesthetic &mdash; warm, simple, heartfelt &mdash;
+            reaching a global audience not through the music industry
+            but through a cartoon. The International Pop Underground
+            went mainstream in the most unexpected way.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Jangle</h4>
+              <div class="level advanced">Advanced &mdash; 74th Acoustic Element</div>
+              <p>
+                The bright, chiming, treble-rich guitar sound that
+                defines indie pop &mdash; open chords, clean tone,
+                rhythmic strumming creating a shimmering quality. The
+                K Records jangle is warm, sweet, democratic. Distinct
+                from the layered loop (72, technology-mediated) and
+                the fiddle line (70, melodic thread) &mdash; the
+                jangle is spatial shimmer, not linear melody.
+                Connected to the fraternal jangle (56, Ivan &amp;
+                Alyosha) but broader: the genre&rsquo;s defining
+                texture.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The K Records Collective</h4>
+              <div class="level advanced">Advanced &mdash; 74th Artist-City Pattern</div>
+              <p>
+                The artist whose relationship to the city is mediated
+                through a label that functions as community, philosophy,
+                and way of life. LAKE&rsquo;s connection to Olympia
+                is inseparable from K Records. Not the corridor
+                wanderer (moves between cities) or the international
+                student (trains abroad). The K Records collective is
+                rooted and communal &mdash; the label as home.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Sweet Imperfection</h4>
+              <div class="level intermediate">Intermediate &mdash; 73rd Deployment</div>
+              <p>
+                The blue note that appears in the slight roughness of
+                lo-fi indie pop &mdash; vocal cracks, fret buzz,
+                timing wobbles that make music warm and human. The
+                K Records blue note. Not errors but the source of
+                charm. The echo chamber (72) shimmered between voice
+                and loop. The sweet imperfection warms between
+                intention and execution.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Indie Pop at Genre Stage 55</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 55</div>
+              <p>
+                First pure Indie Pop classification in the engine.
+                Jangly guitars, sweet melodies, lo-fi production,
+                dual vocals. The K Records genre &mdash; pop as
+                democratic form. Two consecutive pop-adjacent genres
+                (Art Pop 72, Indie Pop 73) mark a genuine departure
+                from the folk/indie folk quadrant.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Key Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The World Is Real</h4>
+              <div class="disco-years">2015 &middot; K Records</div>
+              <p>
+                The band at its most accomplished. Jangly indie pop
+                refined without being polished. Sweet dual-vocal
+                harmonies, lo-fi warmth, the K Records aesthetic
+                fully realized.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Let&rsquo;s Build a Roof</h4>
+              <div class="disco-years">2009 &middot; K Records</div>
+              <p>
+                The sound fully formed. Catchy, jangly pop songs with
+                warm harmonies and the handmade quality that defines
+                K Records releases.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Bull</h4>
+              <div class="disco-years">2012 &middot; K Records</div>
+              <p>
+                Continued refinement of the indie pop aesthetic.
+                Lo-fi production, dual vocals, melodic accessibility.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Oh, the Places We&rsquo;ll Go</h4>
+              <div class="disco-years">2007 &middot; K Records</div>
+              <p>
+                Early work establishing the jangly pop template.
+                Bright guitars, shared vocals, lo-fi charm.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">70&deg;</span>
+              <strong>Horse Feathers</strong> &mdash; Second Olympia
+              label. KRS (Horse Feathers, 70) and K Records (LAKE, 73)
+              are the two pillars of Olympia&rsquo;s music culture.
+              KRS is the political/punk pillar. K Records is the
+              pop/communal pillar. Same city, different philosophies.
+              Both independent. Both in the engine.
+            </li>
+            <li>
+              <span class="ref-degree">71&deg;</span>
+              <strong>Phil Elverum</strong> &mdash; K Records orbit.
+              The Microphones released on K Records. Same label, same
+              values, different music. Elverum used K Records for
+              atmospheric experimentation. LAKE uses it for jangly
+              pop sweetness. The ecosystem contains multitudes.
+            </li>
+            <li>
+              <span class="ref-degree">44&deg;</span>
+              <strong>Chong the Nomad</strong> &mdash; Electronic pop
+              contrast. Chong&rsquo;s electronic pop is DAW-produced
+              and beat-driven. LAKE&rsquo;s indie pop is guitar-driven
+              and lo-fi. Both pop. Different centuries of pop-making.
+              Chong builds in software. LAKE builds in the room.
+            </li>
+            <li>
+              <span class="ref-degree">54&deg;</span>
+              <strong>Ivan &amp; Alyosha</strong> &mdash; Jangly
+              positive. Both share the jangle. Ivan &amp;
+              Alyosha&rsquo;s fraternal jangle is folk-pop.
+              LAKE&rsquo;s jangle is indie pop &mdash; lo-fi,
+              K Records, communal warmth. Different positions on
+              the jangle spectrum. Both warm.
+            </li>
+            <li>
+              <span class="ref-degree">49&deg;</span>
+              <strong>Kimya Dawson</strong> &mdash; Anti-folk, K
+              Records adjacent. Both reject polish, both prize
+              sincerity. Dawson&rsquo;s anti-folk is solo and
+              confessional. LAKE&rsquo;s indie pop is communal
+              and jangly. Same philosophy, different expressions.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">73&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">55</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">Seattle / Olympia</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Vocals</span>
+            <span class="stat-value">Eli Moore</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vocals</span>
+            <span class="stat-value">Ashley Eriksson</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Olympia / Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">K Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">K Records Collective</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">55 (Indie Pop)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#74 (The Jangle)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">K Records Collective</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#73 (Sweet Imperfection)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label">Oh, the Places</span>
+            <span class="stat-value">2007</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Let&rsquo;s Build</span>
+            <span class="stat-value">2009</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bull</span>
+            <span class="stat-value">2012</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The World Is Real</span>
+            <span class="stat-value">2015</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">24</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#74 (Jangle)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#74 (K Rec. Collective)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#73 (Sweet Imperfection)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Horse Feathers</span>
+            <span class="stat-value">Olympia label (70)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Elverum</span>
+            <span class="stat-value">K Records (71)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chong</span>
+            <span class="stat-value">Electronic (44)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ivan &amp; Alyosha</span>
+            <span class="stat-value">Jangle (54)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Dawson</span>
+            <span class="stat-value">Anti-folk (49)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../072-briana-marela/" style="color: var(--seattle-navy);">&larr; 72&deg; Briana Marela</a>
+        <a href="../074/" style="color: var(--seattle-navy);">74&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 73&deg; &mdash; LAKE &mdash; Seattle 360
+        Engine &mdash; v1.49.198
+        <br>
+        Jangly indie pop band on <strong>K Records</strong> &mdash;
+        the heart of the International Pop Underground, founded by
+        Calvin Johnson in 1982 in Olympia. First K Records artist in
+        the engine. Second Olympia label after Kill Rock Stars (70).
+        <strong>Indie Pop</strong> enters at Genre Stage 55 &mdash;
+        first pure Indie Pop classification. <strong>E=3</strong>
+        &mdash; middle energy, 19th deployment. Distribution
+        3:24:19:17:10:2. Dual vocals &mdash; <strong>Eli
+        Moore</strong> and <strong>Ashley Eriksson</strong> as
+        genuine co-vocalists. Eriksson wrote &ldquo;Island
+        Song&rdquo; (Adventure Time closing credits) &mdash; K
+        Records indie pop reaching millions through animation. The
+        jangle &mdash; 74th acoustic element &mdash; bright, chiming,
+        treble-rich guitar shimmer. The K Records collective &mdash;
+        74th artist-city pattern &mdash; the label as community,
+        philosophy, and way of life. The sweet imperfection &mdash;
+        73rd blue note &mdash; lo-fi roughness as warmth and
+        humanity. After the layered loop (72), the jangle. After the
+        echo chamber, the sweet imperfection. After art pop&rsquo;s
+        technology, indie pop&rsquo;s humanity. The pop song belongs
+        to everyone.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
