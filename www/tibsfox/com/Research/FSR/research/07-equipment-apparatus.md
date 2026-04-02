@@ -112,6 +112,27 @@ This investment is not uniformly distributed. Wealthy communities have newer app
 
 For the person who served thirty years, the equipment evolved across their career. The turnout gear got lighter, the SCBA got more sophisticated, the thermal imaging cameras went from nonexistent to standard, the cardiac monitors went from basic rhythm strips to 12-lead digital systems with wireless transmission. The tools changed. The job they were used for — protecting lives in moments of crisis — did not.
 
+## Cross-References
+
+- **[FSR-02]** Fire Service — the operational context in which this equipment is used
+- **[FSR-03]** EMS and Paramedicine — ambulance configurations and cardiac monitors in clinical context
+- **[FSR-09]** Responder Wellness — PFAS in turnout gear, cancer risk from contaminated equipment, the gear decontamination cultural shift
+- **[FSR-10]** PNW Departments — the specific apparatus and equipment inventories of PNW departments
+- **[WDC-08]** Construction Framing — building construction types determine which tools firefighters need; the evolution from wood-frame to engineered lumber affects forcible entry and ventilation tactics
+
+---
+
+## Sources and References
+
+- NFPA 1971. "Standard on Protective Ensembles for Structural Fire Fighting."
+- NFPA 1981. "Standard on Open-Circuit Self-Contained Breathing Apparatus."
+- IARC. "Monograph on Occupational Exposure as a Firefighter." Volume 132, 2022.
+- Smith, L.B., et al. "PFAS in Firefighter Turnout Gear." *Environmental Science & Technology Letters*, 2022.
+- KKK-A-1822F. "Federal Specification for the Star-of-Life Ambulance." (Ambulance type classifications)
+- Zoll Medical. X Series monitor specifications. zoll.com
+- Stryker. Power-PRO XT specifications. stryker.com
+- Holmatro. Rescue tools specifications. holmatro.com
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

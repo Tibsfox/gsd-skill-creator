@@ -156,6 +156,32 @@ And the feeling — the feeling of taking a rough board and making it smooth, of
 
 The tradition continues. Every dovetail cut by a beginner watching a YouTube tutorial is part of the same story that includes the furniture in Tutankhamun's tomb and the joints in a Japanese temple. Ten thousand years of woodcraft, and we are still learning.
 
+## Pacific Northwest in the Arc
+
+The Pacific Northwest occupies a specific and significant place in this ten-thousand-year story. The Coast Salish, Haida, Tlingit, and other Indigenous peoples of the region developed a woodworking tradition as sophisticated as any in the world — the cedar dugout canoe, the bentwood box, the longhouse, the totem pole. Their material was western red cedar, and their knowledge of it was total. The tradition is explored in depth in WDC-09 (PNW Timber), but it belongs here too, in the global arc: a woodworking culture that developed independently of Egyptian, Chinese, Japanese, and European traditions, reaching a level of accomplishment that rivals any of them.
+
+The modern PNW woodworking scene carries forward multiple threads from this history. The studio furniture movement lives in shops across Portland, Seattle, and the smaller cities of the I-5 corridor. The maker movement thrives in community workshops from Bellingham to Eugene. The timber frame tradition has been revived by PNW builders working in Douglas fir — the same species that framed every house in the region for a century. And the YouTube-driven democratization of craft knowledge has particular resonance here, where a tradition of self-reliance and making-do runs deep in the regional culture.
+
+## Cross-References
+
+- **[WDC-09]** PNW Timber — the species and the industry that connect this global history to the Pacific Northwest
+- **[WDC-05]** Joinery — the mortise-and-tenon and dovetail joints described here in historical context, expanded in technical detail
+- **[WDC-07]** Furniture Making — the studio furniture makers (Maloof, Nakashima, Krenov) introduced here, explored in depth
+- **[ECO-05]** Forest Ecology — the ecosystems that produce the timber, from old-growth Douglas fir to managed plantation
+- **[PNT-03]** Visual Art — Coast Salish woodcarving as simultaneously art and craft; the false boundary between the two
+
+---
+
+## Sources and References
+
+- Killen, Geoffrey. "Ancient Egyptian Furniture." Aris & Phillips, 1994.
+- Bill, Jan. "Viking Ships and the Sea." In *The Viking World*, Routledge, 2008.
+- Odate, Toshio. "Japanese Woodworking Tools: Their Tradition, Spirit and Use." 1984.
+- Wang, Shixiang. "Classic Chinese Furniture: Ming and Early Qing Dynasties." 1986.
+- Schwarz, Chris. "The Anarchist's Tool Chest." Lost Art Press, 2011.
+- Nakashima, George. "The Soul of a Tree." Kodansha, 1981.
+- Stewart, Hilary. "Cedar: Tree of Life to the Northwest Coast Indians." Douglas & McIntyre, 1984.
+
 ---
 
 *Next: [Understanding Wood — The Science of the Material](02-wood-science.md)*

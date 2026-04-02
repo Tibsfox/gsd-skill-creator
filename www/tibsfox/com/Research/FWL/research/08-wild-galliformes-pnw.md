@@ -217,3 +217,17 @@ The FWL project's focus on domestic fowl exists within the evolutionary context 
 What unites all these birds is their shared galliform heritage: precocial young, ground-dwelling habits, strong legs, crop-based digestion, elaborate male displays, and cryptic female plumage. The domestic breeds profiled in earlier FWL documents are the product of millennia of selective pressure applied to this template. Understanding the wild species -- their adaptations, ecological roles, and conservation challenges -- enriches our appreciation of the domestic birds that share their order.
 
 The farmyard rooster crowing at dawn and the Sooty Grouse hooting in old-growth forest are separated by 50 million years of evolution and 8,000 years of domestication, but they remain recognizably kin.
+
+---
+
+## Sources
+
+- Johnsgard, P.A. (1973). *Grouse and Quails of North America*. University of Nebraska Press.
+- Zwickel, F.C. and Bendell, J.F. (2005). *Blue Grouse: Their Biology and Natural History*. NRC Research Press.
+- Brennan, L.A., et al. (2014). *Ecology and Management of North American Grouse*. CRC Press.
+- Gutierrez, R.J. and Delehanty, D.J. (1999). Mountain Quail. *BNA* No. 457. Cornell Lab.
+- Calkins, J.D., Hagelin, J.C., and Lott, D.F. (1999). California Quail. *BNA* No. 473. Cornell Lab.
+- Giudice, J.H. and Ratti, J.T. (2001). Ring-necked Pheasant. *BNA* No. 572. Cornell Lab.
+- Martin, K. (2001). "Wildlife in alpine and sub-alpine habitats." In: Johnson and O'Neil (eds.), *Wildlife-Habitat Relationships in Oregon and Washington*. OSU Press.
+
+*Cross-references: [AVI-01b] Galliformes through Strigiformes; [ECO] food webs, seed dispersal, fire ecology; [MAM] predator-prey dynamics with Northern Goshawk, coyote, bobcat.*

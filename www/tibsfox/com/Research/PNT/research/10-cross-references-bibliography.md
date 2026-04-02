@@ -58,7 +58,15 @@ A painter who wants to enter the furry commission market (discussed in [PNT-08])
 
 ### Convention Culture (FFA-12, PNT-07, PNT-08)
 
-FFA-12 (Fursuit History & Culture) and PNT-07/PNT-08 discuss the convention ecosystem from different angles. FFA-12 covers the cultural and historical context. PNT-07 covers conventions as learning environments (art shows as exhibition practice, artists' alley as studio practice). PNT-08 covers conventions as economic venues (badge painting, art show auctions, commission queues). Together, these three modules provide a comprehensive picture of the convention as a living painting ecosystem.
+FFA-12 (Fursuit History & Culture) and PNT-07/PNT-08 discuss the convention ecosystem from different angles. FFA-12 covers the cultural and historical context, including the PNW furry scene (Furlandia, PNW Furs, and the legacy of RainFurrest). PNT-07 covers conventions as learning environments (art shows as exhibition practice, artists' alley as studio practice). PNT-08 covers conventions as economic venues (badge painting, art show auctions, commission queues). Together, these three modules provide a comprehensive picture of the convention as a living painting ecosystem.
+
+### Fursuit Makers and Painting (FFA-10)
+
+FFA-10 (Fursuit Makers Index) documents the makers whose airbrush work connects directly to painting technique. The makers profiled in FFA-10 use the same Iwata and Badger airbrushes, the same Createx and Jacquard textile paints, and the same masking and gradient techniques documented in [PNT-02] and [PNT-03]. The bridge between fine art painting and fursuit fabrication is the airbrush.
+
+### Plush and the Furry-Craft Connection (FFA-13, FFA-14, FFA-15)
+
+The plush modules document a parallel material culture. FFA-13 (Plush Makers Directory) catalogs manufacturers from heritage houses like Steiff to artisan makers on Etsy. FFA-14 (Plush History & Industry) traces the stuffed animal from Margarete Steiff's felt elephants through the Beanie Baby bubble to the Squishmallow phenomenon. FFA-15 (Plush Collecting Culture) examines the communities, therapeutic applications, and emotional dimensions of plush ownership. The connection to PNT is through craft: plush construction uses sewing, pattern-making, and airbrushing skills that overlap with painting and textile arts.
 
 ---
 

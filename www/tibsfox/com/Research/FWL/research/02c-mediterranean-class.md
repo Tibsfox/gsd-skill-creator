@@ -222,16 +222,20 @@ These adaptations make Mediterranean breeds excellent choices for southern clima
 
 ## Summary: The Mediterranean Class at a Glance
 
-| Breed | Weight (Cock/Hen) | Eggs/Year | Egg Color | APA Year | Conservancy Status |
-|-------|-------------------|-----------|-----------|----------|-------------------|
-| Leghorn (White SC) | 6 / 4.5 lbs | 250-300 | White | 1874 | Recovering |
-| Leghorn (Brown SC) | 6 / 4.5 lbs | 250-280 | White | 1874 | Recovering |
-| Leghorn (other) | 6 / 4.5 lbs | 200-280 | White | varies | Recovering |
-| Minorca (Black SC) | 9 / 7.5 lbs | 200-260 | White | 1888 | Watch |
-| Andalusian (Blue) | 7 / 5.5 lbs | 150-200 | White | 1874 | Threatened |
-| Ancona | 6 / 4.5 lbs | 200-280 | White | 1898 | Watch |
-| Sicilian Buttercup | 6.5 / 5 lbs | 140-180 | White | 1918 | Threatened |
-| Spanish (WFBS) | 8 / 6.5 lbs | 150-200 | White | 1874 | Critical |
-| Catalana | 8 / 6 lbs | 200-255 | White/Cream | 1949 | Rare (not listed) |
+| Breed | Origin | Weight (Cock/Hen) | Eggs/Year | Egg Color | Temperament | Conservancy Status |
+|-------|--------|-------------------|-----------|-----------|-------------|-------------------|
+| Leghorn (White SC) | Italy | 6 / 4.5 lbs | 250-300 | White | Active, flighty | Recovering |
+| Leghorn (Brown SC) | Italy | 6 / 4.5 lbs | 250-280 | White | Active, flighty | Recovering |
+| Leghorn (other) | Italy | 6 / 4.5 lbs | 200-280 | White | Active, flighty | Recovering |
+| Minorca (Black SC) | Spain (Menorca) | 9 / 7.5 lbs | 200-260 | White | Active, alert | Watch |
+| Andalusian (Blue) | Spain (Andalusia) | 7 / 5.5 lbs | 150-200 | White | Active, alert | Threatened |
+| Ancona | Italy | 6 / 4.5 lbs | 200-280 | White | Alert, excellent forager | Watch |
+| Sicilian Buttercup | Sicily | 6.5 / 5 lbs | 140-180 | White | Active, flighty | Threatened |
+| Spanish (WFBS) | Spain (Castile) | 8 / 6.5 lbs | 150-200 | White | Active, nervous | Critical |
+| Catalana | Spain (Catalonia) | 8 / 6 lbs | 200-255 | White/Cream | Active, heat-tolerant | Rare (not listed) |
 
 The Mediterranean breeds are a study in specialization: what happens when centuries of breeding focus on a single goal — prolific egg production — in a warm, dry climate. The result is a class of lean, efficient, high-strung birds that lay with an intensity unmatched by any other group. They are not for everyone. They require secure fencing (they fly well), patient handling (they are not cuddly), and respect for their independent nature. But for the keeper who wants eggs — mountains of beautiful white eggs — the Mediterranean class delivers with a consistency that borders on the mechanical. Except these machines have feathers, personalities, and a lineage that stretches back to the ancient Mediterranean, where chickens scratched in the same soil that nourished the first civilizations.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Scrivener (2006), "Rare Poultry Breeds."*

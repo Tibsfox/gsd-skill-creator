@@ -216,6 +216,8 @@ In exhibition, foot feathering is a critical judging criterion. Brahmas should s
 
 For practical flock keepers, feathered feet mean providing dry, clean bedding and avoiding muddy runs. Many keepers of Asiatic breeds maintain deep-litter coops with excellent drainage and raise roosts high enough to keep foot feathers out of bedding contact.
 
+In the Pacific Northwest, feather-footed Asiatic breeds face a particular challenge: the region's persistent rain from October through April transforms uncovered runs into quagmires that mat and soil foot feathering, promoting bacterial infections including bumblefoot (*Staphylococcus aureus*). PNW keepers of Brahmas, Cochins, and Langshans must provide covered runs with deep wood-chip or sand substrates, and should inspect foot feathering regularly for mud-packing and signs of infection [FWL-06]. Despite these challenges, the Asiatic breeds' cold hardiness and winter laying patterns make them excellent choices for the PNW climate --- their pea combs (Brahma) and dense plumage handle the region's damp 35-45 degree F winters far better than the large-combed Mediterranean breeds.
+
 ---
 
 ## Cold Hardiness: Built for Winter
@@ -244,17 +246,21 @@ This brooding instinct persists today, and it is one of the Asiatic breeds' grea
 
 ## Summary: The Asiatic Class at a Glance
 
-| Breed | Weight (Cock/Hen) | Eggs/Year | Egg Color | APA Year | Conservancy Status |
-|-------|-------------------|-----------|-----------|----------|-------------------|
-| Brahma (Light) | 12 / 9.5 lbs | 150-200 | Brown | 1874 | Watch |
-| Brahma (Dark) | 12 / 9.5 lbs | 150-200 | Brown | 1874 | Watch |
-| Brahma (Buff) | 12 / 9.5 lbs | 150-200 | Brown | 1924 | Watch |
-| Cochin (all) | 11 / 8.5 lbs | 150-180 | Brown | 1874 | Recovering |
-| Langshan (Black) | 9.5 / 7.5 lbs | 150-210 | Dark Brown | 1883 | Threatened |
-| Langshan (White) | 9.5 / 7.5 lbs | 150-210 | Dark Brown | 1893 | Threatened |
-| Langshan (Blue) | 9.5 / 7.5 lbs | 150-210 | Dark Brown | 1987 | Threatened |
-| Sumatra | 5 / 4 lbs | 100-150 | White/Tinted | 1883 | Watch |
-| Malay | 9 / 7 lbs | 70-120 | Brown | 1883 | Watch |
-| Aseel | 5.5 / 4 lbs | 40-80 | Cream/Tinted | 1981 | Threatened |
+| Breed | Origin | Weight (Cock/Hen) | Eggs/Year | Egg Color | Temperament | Conservancy Status |
+|-------|--------|-------------------|-----------|-----------|-------------|-------------------|
+| Brahma (Light) | India/China via USA | 12 / 9.5 lbs | 150-200 | Brown | Calm, gentle | Watch |
+| Brahma (Dark) | India/China via USA | 12 / 9.5 lbs | 150-200 | Brown | Calm, gentle | Watch |
+| Brahma (Buff) | India/China via USA | 12 / 9.5 lbs | 150-200 | Brown | Calm, gentle | Watch |
+| Cochin (all) | China | 11 / 8.5 lbs | 150-180 | Brown | Docile, sedentary | Recovering |
+| Langshan (Black) | China | 9.5 / 7.5 lbs | 150-210 | Dark Brown | Active, alert | Threatened |
+| Langshan (White) | China | 9.5 / 7.5 lbs | 150-210 | Dark Brown | Active, alert | Threatened |
+| Langshan (Blue) | China | 9.5 / 7.5 lbs | 150-210 | Dark Brown | Active, alert | Threatened |
+| Sumatra | Indonesia | 5 / 4 lbs | 100-150 | White/Tinted | Active, flighty | Watch |
+| Malay | Southeast Asia | 9 / 7 lbs | 70-120 | Brown | Bold, assertive | Watch |
+| Aseel | India | 5.5 / 4 lbs | 40-80 | Cream/Tinted | Combative, loyal | Threatened |
 
 The Asiatic Class holds more concentrated history per breed than any other class in the APA Standard. From the ancient fighting traditions of India and Southeast Asia to the Victorian parlor mania that created organized poultry culture, these breeds connect us to deep currents of human-animal partnership. They are slow, they are big, they are broody, and they are magnificent. Every one of them is worth keeping.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Baxter (1928), "Asiatics: Brahmas, Cochins, and Langshans"; Burnham (1855), "The History of the Hen Fever"; The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds."*

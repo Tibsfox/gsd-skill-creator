@@ -102,6 +102,27 @@ Mutual aid is also a daily, mundane reality. In suburban and rural areas, the fi
 
 For someone who served thirty years in the fire service, these are not abstractions. They are the texture of ten thousand shifts: the morning equipment check, the afternoon drill, the evening meal cooked with the crew, the 2 AM alarm that pulls you from a dead sleep and puts you on the back step of an engine rolling through dark streets toward a column of smoke. The work is exactly what it appears to be — physically demanding, technically complex, occasionally terrifying, and fundamentally necessary. And for thirty years, every third day, someone showed up and did it.
 
+## Cross-References
+
+- **[FSR-01]** History — the institutional lineage from Roman vigiles through insurance brigades to the modern fire service
+- **[FSR-07]** Equipment and Apparatus — the tools described here in operational context
+- **[FSR-09]** Responder Wellness — the 24-hour shift, cumulative exposure, and firehouse culture that shape psychological outcomes
+- **[FSR-10]** PNW Departments — the Pacific Northwest fire service in specific detail
+- **[WDC-08]** Construction Framing — building construction types directly determine fire behavior and firefighter safety; every building construction section in WDC has fireground implications
+- **[ECO-07]** Fire Ecology — wildland fire behavior, fuel accumulation from suppression policy, and the ecological role of fire
+
+---
+
+## Sources and References
+
+- Layman, Lloyd. "Attacking and Extinguishing Interior Fires." 1953. (RECEO-VS framework)
+- Brunacini, Alan. "Fire Command." 1985. (Risk management framework)
+- NFPA 1500. "Standard on Fire Department Occupational Safety, Health, and Wellness Program."
+- Norman, John. "Fire Officer's Handbook of Tactics." 5th Edition.
+- Smith, Dennis. "Report from Engine Co. 82." 1972.
+- Maclean, Norman. "Young Men and Fire." 1992.
+- National Wildfire Coordinating Group (NWCG). "Incident Response Pocket Guide." Updated annually.
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

@@ -242,5 +242,16 @@ For Chairo Charf Charf, and for every kit that has ever followed a mother throug
 
 ---
 
+## Sources
+
+- Gehrt, S.D. and Fritzell, E.K. (1998). "Duration of familial bonds and dispersal patterns for raccoons in south Texas." *Journal of Mammalogy*, 79(3): 859-872.
+- Sanderson, G.C. (1987). "Raccoon." In: *Wild Furbearer Management and Conservation in North America*. Ontario Ministry of Natural Resources, pp. 486-499.
+- Gehrt, S.D. and Fritzell, E.K. (1999). "Growth rates and intraspecific variation in body weights of raccoons." *American Midland Naturalist*, 141(1): 19-27.
+- Hauver, S.A., et al. (2010). "Behavioral and genetic aspects of the raccoon mating system." *Journal of Mammalogy*, 91(3): 749-757.
+- Ritke, M.E. (1990). "Sexual dimorphism in the raccoon." *American Midland Naturalist*, 124(2): 342-351.
+- PAWS Wildlife Center. Raccoon kit rehabilitation protocols. paws.org.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

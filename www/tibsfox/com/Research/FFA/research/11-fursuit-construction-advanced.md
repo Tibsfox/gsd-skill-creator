@@ -1,6 +1,8 @@
 # Advanced Fursuit Engineering -- Beyond the Basics
 
-Research module CRAFT-ADVANCED: advanced construction techniques extending beyond foundational fursuit fabrication documented in [CRAFT-SUIT]. Covers LED integration, articulated mechanisms, digitigrade engineering, cooling systems, sound systems, follow-me eyes, magnetic attachments, under-suit support, materials science, and professional workflows. These techniques transform a fursuit from a static costume into a dynamic, expressive performance instrument.
+Research module FFA-11: advanced construction techniques extending beyond foundational fursuit fabrication documented in [FFA-04]. Covers LED integration, articulated mechanisms, digitigrade engineering, cooling systems, sound systems, follow-me eyes, magnetic attachments, under-suit support, materials science, and professional workflows. These techniques transform a fursuit from a static costume into a dynamic, expressive performance instrument.
+
+**Cross-references:** [FFA-04] Fursuit Fabrication, [FFA-03] Textile Craft, [FFA-10] Fursuit Makers Index, [FFA-01] Biological Foundations, [FFA-02] Digital Rendering, [PNT-02] Mediums (airbrush paints), [PNT-03] Tools (airbrush equipment).
 
 **Safety codes referenced:** SC-SAF (safety and welfare), SC-IP (intellectual property and attribution).
 
@@ -467,21 +469,25 @@ Professional-quality photographs of completed suits are essential for marketing 
 
 ## 11. Cross-Module Connections
 
-### To CRAFT-SUIT
+### To [FFA-04] Fursuit Fabrication
 
-This module extends every section of [CRAFT-SUIT]. LED integration builds on the ventilation and structural frameworks. Articulated features extend the ear, tail, and jaw mechanisms. Digitigrade construction builds on the body construction foundations. Materials science deepens the material selection guidance. Read [CRAFT-SUIT] first -- this module assumes familiarity with the basics.
+This module extends every section of [FFA-04]. LED integration builds on the ventilation and structural frameworks. Articulated features extend the ear, tail, and jaw mechanisms. Digitigrade construction builds on the body construction foundations. Materials science deepens the material selection guidance. Read [FFA-04] first -- this module assumes familiarity with the basics.
 
-### To CRAFT-SEW
+### To [FFA-03] Textile Craft
 
-Advanced fur application techniques -- matching pile across complex curves, working with multiple fur types on a single piece, managing stretch fabrics for digitigrade padding covers -- build directly on the cutting and sewing fundamentals in [CRAFT-SEW].
+Advanced fur application techniques -- matching pile across complex curves, working with multiple fur types on a single piece, managing stretch fabrics for digitigrade padding covers -- build directly on the cutting and sewing fundamentals in [FFA-03].
 
-### To CRAFT-RENDER
+### To [FFA-02] Digital Rendering
 
 The physical lighting effects in section 1 (LEDs, fiber optics, UV-reactive materials) connect to digital rendering in unexpected ways. Understanding how physical light interacts with fur pile helps digital artists create realistic fursuit renders. Conversely, designers who prototype their LED layouts in 3D software before building can avoid costly physical experimentation.
 
-### To CRAFT-BIO
+### To [FFA-01] Biological Foundations
 
-Articulated features in section 2 are biomimetic -- they imitate biological movement. Servo-driven ears mimic the auricular muscles documented in [CRAFT-BIO]. Tail wagging mechanisms approximate the caudal vertebrae flexibility. Understanding the biological systems being imitated leads to more convincing mechanical analogues.
+Articulated features in section 2 are biomimetic -- they imitate biological movement. Servo-driven ears mimic the auricular muscles documented in [FFA-01]. Tail wagging mechanisms approximate the caudal vertebrae flexibility. Understanding the biological systems being imitated leads to more convincing mechanical analogues.
+
+### To [PNT] Painting
+
+The airbrushing techniques that many makers use for color work on fursuits connect directly to the painting fundamentals in the PNT project. Paint selection ([PNT-02]), airbrush equipment ([PNT-03]), and color theory ([PNT-05]) all apply. The masking, gradient, and detail techniques are the same disciplines used in fine art illustration.
 
 ---
 
@@ -517,4 +523,4 @@ Articulated features in section 2 are biomimetic -- they imitate biological move
 
 ---
 
-*Module CRAFT-ADVANCED. Cross-references: [CRAFT-SUIT], [CRAFT-SEW], [CRAFT-RENDER], [CRAFT-BIO]. Safety codes: SC-SAF, SC-IP.*
+*Module FFA-11. Cross-references: [FFA-04], [FFA-03], [FFA-02], [FFA-01], [PNT-02], [PNT-03], [PNT-05]. Safety codes: SC-SAF, SC-IP.*

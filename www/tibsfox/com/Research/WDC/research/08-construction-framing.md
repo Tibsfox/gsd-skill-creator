@@ -150,6 +150,37 @@ The boundary is personal. Some homeowners wire their own houses, pull their own 
 
 The woodworking skills that brought you to this point — reading plans, cutting accurately, thinking in three dimensions, understanding how materials behave — transfer directly to construction framing. The new skills you need are code literacy, structural awareness, and the humility to know when a task exceeds your competence. That humility, more than any tool in the shop, is what keeps a building standing.
 
+## PNW Construction Context
+
+In the Pacific Northwest, construction framing means Douglas fir. The studs are Douglas fir. The joists are Douglas fir. The rafters are Douglas fir. The beams are Douglas fir or Douglas fir glulam. The sheathing is typically Douglas fir or hem-fir plywood. The species is so dominant in PNW construction that framing lumber is simply "lumber" — the species goes without saying.
+
+The PNW climate creates specific construction demands. The wet side of the Cascades receives 35 to 150 inches of rain per year, depending on location. Moisture management is not optional — it is the defining challenge of PNW construction. The building envelope must shed liquid water (rain screen siding details, proper flashing, kick-out diverters at roof-wall intersections), manage water vapor (vapor-open wall assemblies that can dry to the exterior in the PNW's heating-dominated climate), and prevent condensation within wall cavities. A PNW builder who does not understand moisture will build a building that rots from the inside out within a decade. The "leaky condo crisis" in Vancouver, BC, in the 1990s — billions of dollars in building envelope failures in a single decade — is the cautionary tale that every PNW builder knows.
+
+Seismic design adds another layer. The Cascadia Subduction Zone [FSR-10] puts every structure in western Washington and Oregon in a seismic zone. The IRC prescriptive requirements for seismic zones (shear wall bracing, hold-down hardware, Simpson ties at critical connections) are baseline requirements in PNW construction, not optional upgrades. A shed in Seattle needs hold-downs. A deck in Portland needs seismic hardware. The building code assumes the earthquake is coming.
+
+Western red cedar shingles and shakes remain the premium roofing and siding material for PNW residential construction, though composition roofing has overtaken cedar in market share due to fire insurance pressures and maintenance requirements. Cedar siding — either shingle or lap — is the signature exterior material of the PNW residential vernacular. Its natural decay resistance means it performs without chemical treatment in the PNW's wet climate, and its silver-gray weathered appearance has become as much a part of the PNW aesthetic as the evergreen forests behind it.
+
+## Cross-References
+
+- **[WDC-02]** Wood Science — moisture content, wood movement, and the mechanical properties that determine structural performance
+- **[WDC-05]** Joinery — timber frame joinery at building scale
+- **[WDC-09]** PNW Timber — Douglas fir and western red cedar as the species that define PNW construction
+- **[FSR-02]** Fire Service — building construction types determine fire behavior and firefighter tactics; a wood-frame house burns differently than a masonry building
+- **[FSR-10]** PNW Departments — Cascadia Subduction Zone planning, seismic vulnerability of existing buildings
+- **[ECO-05]** Forest Ecology — the sustainable forestry practices that determine whether the next generation of PNW buildings will be framed in PNW-grown timber
+
+---
+
+## Sources and References
+
+- International Residential Code (IRC). International Code Council, current edition.
+- American Wood Council. "National Design Specification for Wood Construction." NDS, current edition.
+- Western Wood Products Association. "Western Lumber Grading Rules." WWPA, current edition.
+- Simpson Strong-Tie. strongtie.com. (Structural connectors, seismic hardware)
+- Lstiburek, Joseph. "Water Management Guide." Building Science Corporation, 2006.
+- Building Science Corporation. buildingscience.com. (PNW climate-specific wall assembly research)
+- Fine Homebuilding Magazine. Framing and building envelope articles. Taunton Press.
+
 ---
 
 *Previous: [Building Furniture](07-furniture-making.md) | Next: [PNW Timber — The Trees That Built the Northwest](09-pnw-timber.md)*

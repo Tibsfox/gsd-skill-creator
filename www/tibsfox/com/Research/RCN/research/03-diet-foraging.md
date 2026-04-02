@@ -194,10 +194,10 @@ Raccoons also damage fruit orchards and vineyards, consuming ripe fruit and brea
 
 ### Poultry Predation
 
-Raccoons are the number-one predator of domestic poultry in many areas of the United States --- a fact of direct relevance to the FWL (Fowl) research cluster. Raccoon predation on chickens, ducks, and other poultry is characterized by:
+Raccoons are the number-one predator of domestic poultry in many areas of the United States --- a fact of direct relevance to the FWL (Fowl) research cluster [FWL-06]. Raccoon predation on chickens, ducks, and other poultry is characterized by:
 
 - **Reaching through wire mesh:** Raccoon forepaws can reach through standard chicken wire and hardware cloth with openings larger than 1 inch, grasping and pulling birds against the wire.
-- **Opening latches:** Simple slide bolts, hook-and-eye closures, and even some keyed locks can be opened by raccoons. Raccoon-proofing a chicken coop requires either combination locks, padlocks, or multi-step latching mechanisms.
+- **Opening latches:** Simple slide bolts, hook-and-eye closures, and even some keyed locks can be opened by raccoons. Raccoon-proofing a chicken coop requires either combination locks, padlocks, or multi-step latching mechanisms [FWL-06].
 - **Digging:** Raccoons will dig under coop walls and fencing if other entry points are unavailable.
 - **Persistent attacks:** Raccoons that gain access to a coop may kill multiple birds in a single event, consuming only portions of each --- a behavior called "surplus killing" that is common in predators that encounter artificially concentrated prey.
 
@@ -238,6 +238,17 @@ The raccoon diet is a masterwork of generalist adaptation. The species can extra
 In the PNW, the raccoon's omnivory connects it to ecosystems from the intertidal zone to the forest canopy, from salmon-bearing streams to suburban garbage cans. Understanding what raccoons eat, and how they obtain it, is essential for understanding their ecological role, their economic impacts, and the dynamics of human-raccoon coexistence.
 
 The generalist supreme does not specialize in any single food source. It specializes in the absence of specialization --- and that, paradoxically, is its greatest specialization of all.
+
+---
+
+## Sources
+
+- Zeveloff, S.I. (2002). *Raccoons: A Natural History*. Smithsonian Institution Press.
+- Kadulski, S. (2005). "Dietary analysis of raccoons in western Washington." M.S. thesis, University of Washington.
+- Helfield, J.M. and Naiman, R.J. (2001). "Effects of salmon-derived nitrogen on riparian forest growth." *Ecology*, 82(9): 2403-2409.
+- Cederholm, C.J., et al. (1999). "Pacific salmon carcasses: essential contributions of nutrients and energy for aquatic and terrestrial ecosystems." *Fisheries*, 24(10): 6-15.
+- Greenwood, R.J. (1982). "Nocturnal activity and foraging of prairie raccoons in North Dakota." *American Midland Naturalist*, 107(2): 238-243.
+- Conover, M.R. (2002). *Resolving Human-Wildlife Conflicts*. CRC Press.
 
 ---
 

@@ -2,8 +2,8 @@
 
 A comprehensive directory of stuffed animal manufacturers, studios, and retailers organized by tier and specialty. Covers heritage luxury houses, mass-market manufacturers, giant and specialty makers, and the independent artisan ecosystem. For each entry: history, specialty, price positioning, notable lines, and where to find them.
 
-**Module ID:** PLUSH-MAKERS
-**Cross-references:** [CRAFT-PLUSH], [PLUSH-HIST], [PLUSH-COLLECT]
+**Module ID:** FFA-13
+**Cross-references:** [FFA-06] Plush Construction, [FFA-14] Plush History & Industry, [FFA-15] Plush Collecting Culture, [FFA-12] Fursuit History & Culture
 
 ---
 
@@ -19,7 +19,7 @@ These are the names that collectors speak with reverence. Heritage makers produc
 **Price range:** $30 (keychains/miniatures) to $30,000+ (rare vintage/limited editions)
 **Where to buy:** Steiff.com, Steiff flagship stores (Munich, Berlin, Giengen), authorized dealers worldwide, StuffedSafari.com
 
-The name that started it all. Margarete Steiff, a seamstress and wheelchair user who survived polio as an infant, began making felt elephant pincushions in 1880 from her workshop in Giengen. Children kept stealing the pincushions to play with — and the world's first stuffed animal company was born. Her nephew Richard Steiff, trained as an artist, sketched bears at the Stuttgart Zoo and designed the jointed "Bear 55 PB" in 1902 — one of the two competing origin claims for the teddy bear (see [PLUSH-HIST] Section 3).
+The name that started it all. Margarete Steiff, a seamstress and wheelchair user who survived polio as an infant, began making felt elephant pincushions in 1880 from her workshop in Giengen. Children kept stealing the pincushions to play with — and the world's first stuffed animal company was born. Her nephew Richard Steiff, trained as an artist, sketched bears at the Stuttgart Zoo and designed the jointed "Bear 55 PB" in 1902 — one of the two competing origin claims for the teddy bear (see [FFA-14] Section 3).
 
 Steiff's trademark is the "Button in Ear" — a small metal button affixed to the left ear of every authentic Steiff animal, introduced in 1904 as one of the world's first product trademarks. The button system encodes production information: a brass button indicates a standard production piece, a white tag marks a limited edition, and a yellow tag identifies classic replicas. Collectors learn to read these buttons the way vintners read wine labels.
 
@@ -307,7 +307,7 @@ The convention dealer den is a marketplace that operates on entirely different e
 
 This direct-to-collector model eliminates retail markup, provides immediate customer feedback, and creates artificial scarcity (convention-exclusive designs that can only be purchased at the event). For the maker, a strong convention weekend can generate a month's income in three days. For the buyer, the convention floor offers the chance to handle pieces before buying, commission directly with the artist present, and access designs that never appear online.
 
-**The furry convention connection is particularly significant.** The furry community has an outsized presence in the custom plush market because the community's core activity — creating and embodying animal-character identities — naturally extends to physical objects. A fursuiter who has invested thousands of dollars in a custom animal costume is a likely buyer of a custom plush version of the same character. Convention dealers who understand this market produce plush fursona commissions, character-specific designs, and species representations that mainstream manufacturers never attempt. See [PLUSH-COLLECT] Section 5 for deeper analysis.
+**The furry convention connection is particularly significant.** The furry community has an outsized presence in the custom plush market because the community's core activity — creating and embodying animal-character identities — naturally extends to physical objects. A fursuiter who has invested thousands of dollars in a custom animal costume is a likely buyer of a custom plush version of the same character. Convention dealers who understand this market produce plush fursona commissions, character-specific designs, and species representations that mainstream manufacturers never attempt. See [FFA-15] Section 5 for deeper analysis.
 
 ---
 
@@ -351,7 +351,7 @@ The brand has achieved remarkable crossover success. Jellycat plush appear in fa
 **Price range:** $5-$60 (depending on size)
 **Where to buy:** Walmart, Target, Walgreens, Five Below, Amazon, Costco
 
-Squishmallows require their own entry because they are not merely a product — they are a cultural phenomenon. See [PLUSH-COLLECT] Section 8 for the full cultural analysis. The product itself is deceptively simple: a round, pillow-like body made from an incredibly soft spandex-polyester blend fabric, filled with ultra-soft polyester fiber. No limbs. No articulation. Just a squishy, round form with a printed face and character name. The genius is in the execution: the fabric feel is genuinely extraordinary (people who pick one up for the first time almost universally comment on the texture), and the character naming system creates collection drive.
+Squishmallows require their own entry because they are not merely a product — they are a cultural phenomenon. See [FFA-15] Section 8 for the full cultural analysis. The product itself is deceptively simple: a round, pillow-like body made from an incredibly soft spandex-polyester blend fabric, filled with ultra-soft polyester fiber. No limbs. No articulation. Just a squishy, round form with a printed face and character name. The genius is in the execution: the fabric feel is genuinely extraordinary (people who pick one up for the first time almost universally comment on the texture), and the character naming system creates collection drive.
 
 Over 2,000 distinct Squishmallow characters have been released as of 2026, each with a name, bio, and design. Limited releases, retailer exclusives, and seasonal drops create the scarcity dynamics that drive collector behavior.
 
@@ -429,10 +429,11 @@ Over 2,000 distinct Squishmallow characters have been released as of 2026, each 
 
 - **Toy Association (USA)** — Trade group for toy manufacturers, runs Toy Fair New York
 - **Spielwarenmesse (Nuremberg)** — World's largest toy trade fair, major plush showcase
-- **CPSIA / ASTM F963 / EN 71** — Safety standards governing plush production (see [CRAFT-PLUSH] Section 10)
+- **CPSIA / ASTM F963 / EN 71** — Safety standards governing plush production (see [FFA-06] Section 10)
 
 ### Cross-References Within This Research
 
-- **[CRAFT-PLUSH]** — Pattern geometry, construction techniques, materials (Module 06)
-- **[PLUSH-HIST]** — History of the stuffed animal industry (Module 14)
-- **[PLUSH-COLLECT]** — Collector culture, communities, and the emotional significance of plush (Module 15)
+- **[FFA-06]** — Pattern geometry, construction techniques, materials (Plush Construction)
+- **[FFA-14]** — History of the stuffed animal industry (Plush History & Industry)
+- **[FFA-15]** — Collector culture, communities, and the emotional significance of plush (Plush Collecting Culture)
+- **[FFA-12]** — Fursuit History & Culture (furry-plush connection, convention dealer dens)

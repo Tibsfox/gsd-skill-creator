@@ -1,6 +1,8 @@
 # From Mascots to Fandom -- The History of Fursuit Culture
 
-Research module CRAFT-HISTORY: the historical development of fursuit culture from its pre-fandom origins in mascot costuming and theme park performance through the emergence of the furry fandom, the professionalization of fursuit making, and the modern era of social media visibility and mainstream acceptance. Documents the cultural practices, community institutions, economics, and regional scenes that define fursuiting today. Cross-references construction techniques from [CRAFT-SUIT] and maker ecosystem from [CRAFT-MAKERS].
+Research module FFA-12: the historical development of fursuit culture from its pre-fandom origins in mascot costuming and theme park performance through the emergence of the furry fandom, the professionalization of fursuit making, and the modern era of social media visibility and mainstream acceptance. Documents the cultural practices, community institutions, economics, and regional scenes that define fursuiting today. Cross-references construction techniques from [FFA-04] Fursuit Fabrication and maker ecosystem from [FFA-10] Fursuit Makers Index.
+
+**Cross-references:** [FFA-04] Fursuit Fabrication, [FFA-10] Fursuit Makers Index, [FFA-11] Advanced Construction, [FFA-01] Biological Foundations, [FFA-02] Digital Rendering, [PNT-06] Genres (furry portrait traditions), [PNT-08] Painting Business (furry commission economy), [PNT-09] PNW Painting Scene.
 
 **Safety codes referenced:** SC-SAF (safety and welfare), SC-IP (intellectual property and attribution).
 
@@ -150,7 +152,7 @@ Beyond fundraising, individual fursuiters and organized groups have brought furs
 
 ### 5.4 Technology Integration
 
-Modern fursuits increasingly incorporate technology documented in [CRAFT-ADVANCED]: LED lighting systems synchronized to music, app-controlled color changes, social media livestreaming from built-in cameras, motion-activated sound effects, and programmable LED matrix displays for changeable facial expressions. The technology tier has created a new category of fursuit performance that blends costume, robotics, and interactive media art.
+Modern fursuits increasingly incorporate technology documented in [FFA-11]: LED lighting systems synchronized to music, app-controlled color changes, social media livestreaming from built-in cameras, motion-activated sound effects, and programmable LED matrix displays for changeable facial expressions. The technology tier has created a new category of fursuit performance that blends costume, robotics, and interactive media art.
 
 ---
 
@@ -231,7 +233,7 @@ The Pacific Northwest furry community holds a distinctive place in fursuit cultu
 
 **RainFurrest** (2007--2015) was the region's flagship convention, held in SeaTac, Washington. At its peak, RainFurrest was a vibrant and well-attended convention that showcased the PNW furry community's creativity. The convention's closure in 2015, following well-documented incidents at its final year, was a painful chapter for the regional community. RainFurrest's legacy is complicated: it demonstrated both the PNW community's vitality and the consequences of inadequate convention management. The community learned from it, and those lessons informed subsequent regional organizing.
 
-**Furlandia** (Portland, Oregon) emerged as the region's primary convention after RainFurrest, offering a fresh start with thoughtful event management. The Portland furry community's overlap with the city's broader creative and maker culture gives Furlandia a distinctive flavor.
+**Furlandia** (Portland, Oregon) emerged as the region's primary convention after RainFurrest, offering a fresh start with thoughtful event management. The Portland furry community's overlap with the city's broader creative and maker culture gives Furlandia a distinctive flavor -- the convention benefits from Portland's deep DIY ethos, its thriving gallery scene (see [PNT-09] for the Portland art scene), and a community that values craft and authenticity. Furlandia's art show and dealer den reflect this sensibility, attracting makers and artists who bring the PNW's attention to materials and process to their work.
 
 **PNW Furs** and other regional groups organize meetups, fursuit walks, and social gatherings throughout Washington, Oregon, and British Columbia. The PNW's outdoor culture creates unique fursuiting opportunities -- fursuit photos in Pacific Northwest forests, at the waterfront, and against mountain backdrops have become a recognizable subgenre of fursuit photography. The region's temperate climate (cool and overcast for much of the year) is actually ideal for fursuiting compared to the summer heat that plagues convention cities in the Midwest and South.
 
@@ -245,7 +247,7 @@ The Pacific Northwest furry community holds a distinctive place in fursuit cultu
 
 ### 9.3 The Pacific Anthropomorphic Scene
 
-Beyond the major convention circuit, smaller gatherings, local furmeets, and regional groups form the connective tissue of fursuit culture. The Pacific anthropomorphic scene -- spanning the US and Canadian West Coast, Hawaii, and extending across the Pacific to Japan and Australia -- connects communities that share both a geographic and cultural orientation. Japanese kemono culture (see [CRAFT-MAKERS:International Makers]) interacts with Western fursuit culture at conventions in both countries, creating a cross-Pacific exchange of aesthetics and techniques.
+Beyond the major convention circuit, smaller gatherings, local furmeets, and regional groups form the connective tissue of fursuit culture. The Pacific anthropomorphic scene -- spanning the US and Canadian West Coast, Hawaii, and extending across the Pacific to Japan and Australia -- connects communities that share both a geographic and cultural orientation. Japanese kemono culture (see [FFA-10] Section 5: International Makers) interacts with Western fursuit culture at conventions in both countries, creating a cross-Pacific exchange of aesthetics and techniques.
 
 ---
 
@@ -271,25 +273,29 @@ The furry fandom and its fursuit culture have weathered decades of mockery, sens
 
 ## 11. Cross-Module Connections
 
-### To CRAFT-SUIT
+### To [FFA-04] Fursuit Fabrication
 
-The construction techniques documented in [CRAFT-SUIT] are the foundation on which the entire culture described in this module is built. Every suit in every fursuit parade, every dancing character, every charity visit, begins with foam carving, tape patterning, fur application, and ventilation engineering.
+The construction techniques documented in [FFA-04] are the foundation on which the entire culture described in this module is built. Every suit in every fursuit parade, every dancing character, every charity visit, begins with foam carving, tape patterning, fur application, and ventilation engineering.
 
-### To CRAFT-MAKERS
+### To [FFA-10] Fursuit Makers Index
 
-The maker ecosystem documented in [CRAFT-MAKERS] is the economic engine of the culture described here. The historical arc of makers from hobbyists to professionals tracks directly against the growth of conventions and community infrastructure documented in this module.
+The maker ecosystem documented in [FFA-10] is the economic engine of the culture described here. The historical arc of makers from hobbyists to professionals tracks directly against the growth of conventions and community infrastructure documented in this module.
 
-### To CRAFT-ADVANCED
+### To [FFA-11] Advanced Construction
 
-The technology integration documented in [CRAFT-ADVANCED] -- LEDs, servos, sound systems, cooling -- represents the current frontier of fursuit culture. These technologies are not just engineering achievements; they are cultural ones, expanding what fursuit performance can be and how fursuits interact with their audiences.
+The technology integration documented in [FFA-11] -- LEDs, servos, sound systems, cooling -- represents the current frontier of fursuit culture. These technologies are not just engineering achievements; they are cultural ones, expanding what fursuit performance can be and how fursuits interact with their audiences.
 
-### To CRAFT-BIO
+### To [FFA-01] Biological Foundations
 
-The biological knowledge in [CRAFT-BIO] provides the reference that makes fursuit characters convincing. The cultural desire to embody an animal character drives the technical desire to accurately represent animal anatomy, coloring, and movement. Culture creates the demand; biology provides the source material.
+The biological knowledge in [FFA-01] provides the reference that makes fursuit characters convincing. The cultural desire to embody an animal character drives the technical desire to accurately represent animal anatomy, coloring, and movement. Culture creates the demand; biology provides the source material.
 
-### To CRAFT-RENDER
+### To [FFA-02] Digital Rendering
 
-Digital art and fursuit culture are deeply intertwined. Most fursuit characters exist first as digital art (reference sheets), and digital art communities overlap substantially with fursuit communities. The rendering techniques in [CRAFT-RENDER] often depict the same characters that are later built as physical suits.
+Digital art and fursuit culture are deeply intertwined. Most fursuit characters exist first as digital art (reference sheets), and digital art communities overlap substantially with fursuit communities. The rendering techniques in [FFA-02] often depict the same characters that are later built as physical suits.
+
+### To [PNT] Painting
+
+The furry commission economy documented in [PNT-08] and the portrait painting traditions in [PNT-06] connect directly to the convention culture described here. Badge painting at conventions is a live painting tradition that bridges fine art and fandom. Airbrush technique for fursuits draws on the same tools and principles documented in [PNT-02] and [PNT-03].
 
 ---
 
@@ -333,4 +339,4 @@ Digital art and fursuit culture are deeply intertwined. Most fursuit characters 
 
 ---
 
-*Module CRAFT-HISTORY. Cross-references: [CRAFT-SUIT], [CRAFT-MAKERS], [CRAFT-ADVANCED], [CRAFT-BIO], [CRAFT-RENDER]. Safety codes: SC-SAF, SC-IP.*
+*Module FFA-12. Cross-references: [FFA-04], [FFA-10], [FFA-11], [FFA-01], [FFA-02], [PNT-02], [PNT-03], [PNT-06], [PNT-08], [PNT-09]. Safety codes: SC-SAF, SC-IP.*

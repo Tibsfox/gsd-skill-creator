@@ -217,7 +217,7 @@ The Pacific Northwest hosts a dense and diverse predator community. Understandin
 
 ### Raccoons (*Procyon lotor*)
 
-Raccoons are the most persistent and problematic chicken predator in PNW suburban and urban areas. They are nocturnal, intelligent, dexterous, and strong. A raccoon can open simple latches, peel back chicken wire, dig under fences, and reach through gaps to grab and kill birds. Raccoons typically kill by reaching through fencing and pulling off a bird's head or limbs. Defense: 1/2-inch hardware cloth on all openings, two-step latches, secure night housing. Raccoon populations in PNW cities are among the densest in North America.
+Raccoons are the most persistent and problematic chicken predator in PNW suburban and urban areas. They are nocturnal, intelligent, dexterous, and strong --- equipped with approximately 438 million cortical neurons and forepaws whose tactile sensitivity rivals that of primate hands [RCN-01, RCN-02]. A raccoon can open simple latches, peel back chicken wire, dig under fences, and reach through gaps to grab and kill birds. Raccoons typically kill by reaching through fencing and pulling off a bird's head or limbs. Their long-term memory means a raccoon that defeats a particular latch design will remember the solution for years [RCN-02]. Defense: 1/2-inch hardware cloth on all openings, two-step latches that require simultaneous actions (carabiner clips or padlocks), and secure night housing. Raccoon populations in PNW cities are among the densest in North America, with suburban densities of 30-75 individuals per km² [RCN-04].
 
 ### Coyotes (*Canis latrans*)
 
