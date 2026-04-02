@@ -33,7 +33,7 @@ The Silver locus, located on the Z chromosome, controls whether phaeomelanin (re
 Because Silver is sex-linked (on the Z chromosome), and because female chickens are hemizygous for Z-linked genes (having only one Z chromosome, paired with a W), the inheritance patterns are asymmetric:
 
 - A Silver male (S/S) crossed to a Gold female (s+/W) produces all Silver sons (S/s+) and all Silver daughters (S/W). The daughters get their father's Silver allele on his Z chromosome.
-- A Gold male (s+/s+) crossed to a Silver female (S/W) produces all Gold sons (S/s+ --- wait, these are Silver because S is dominant) --- let me be precise. The sons get dad's s+ on one Z and mom's S on the other Z, making them S/s+, which is Silver (because S is dominant). The daughters get dad's s+ on his Z and mom's W, making them s+/W, which is Gold. So: Silver sons, Gold daughters.
+- A Gold male (s+/s+) crossed to a Silver female (S/W) produces **Silver sons and Gold daughters**. The sons receive s+ from their father and S from their mother, making them S/s+, which is phenotypically Silver because S is dominant. The daughters receive s+ from their father and the W chromosome from their mother, making them s+/W, which is phenotypically Gold (because they carry no S allele).
 
 This asymmetry is the basis of **auto-sexing** at hatch. By crossing a Gold male to a Silver female, breeders can sex chicks at hatch by their down color: gold chicks are female, silver chicks are male. This principle is used commercially in sex-linked hybrid crosses (e.g., a Rhode Island Red male over a Delaware or White Plymouth Rock female) and has been used by breed developers to create auto-sexing breeds like the Cream Legbar, Rhodebar, and Welbar.
 

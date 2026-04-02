@@ -24,6 +24,20 @@ The forest succession models in ECO — from alder pioneer stands to mixed conif
 
 Red alder's role as a nitrogen-fixing pioneer species, explored in ECO, explains why it is the most available hardwood in the region — it colonizes every disturbed site aggressively, reaching harvestable size faster than any other PNW hardwood. Its abundance and fast growth make it economically accessible for cabinet and millwork, a connection that runs directly from ecology to woodshop.
 
+### FSR — First Responders
+
+The FSR project connects to woodcraft through construction — every building that firefighters enter is a wood structure (in the PNW, almost certainly Douglas fir framing), and building construction type determines fire behavior, collapse risk, and firefighter safety. The building construction sections of FSR-02 (Fire Service) are the fireground application of the construction knowledge in WDC-08. The occupational health parallels are also striking: both woodworkers (dust exposure, tool injuries) and firefighters (carcinogen exposure, physical demands) face long-term health consequences from their craft that require systemic prevention.
+
+Key connections:
+- Building construction types (WDC-08) determine fire behavior and firefighter tactics (FSR-02)
+- Engineered lumber (LVL, I-joists, CLT) behaves differently under fire than solid wood framing — a critical knowledge gap documented in FSR-02
+- Western red cedar dust as a respiratory sensitizer (WDC-04) parallels the carcinogen exposure discussion in FSR-09
+- The timber frame tradition (WDC-08) connects to the fire-resistive properties of heavy timber construction — large timbers char on the surface but maintain structural integrity far longer than dimensional lumber
+
+### RCN — Urban Wildlife
+
+The connection between woodcraft and urban wildlife is lighter but real. Raccoons are the most frequent animal-related 911 callers in the Pacific Northwest [FSR-10], and they are also the most common uninvited occupants of wood structures — attics, crawl spaces, sheds, and any wooden building with a gap larger than four inches. The woodworker who builds a shed (WDC-08) in PNW raccoon territory will discover that raccoons are excellent at finding poorly fitted doors, loose soffit panels, and any joinery gap that admits a determined paw. Building tight is pest prevention. The craftsmanship standards in WDC-05 (Joinery) serve a practical function beyond aesthetics: a well-fitted joint is a joint that raccoons cannot exploit.
+
 ### FFA — Flora, Fauna, and Agriculture
 
 The FFA project addresses Pacific Northwest agriculture and the biological communities that support it. The connections to woodcraft are through the material cycle — trees grow, are harvested, and the land they occupied enters other uses — and through the specific agricultural applications of woodworking.

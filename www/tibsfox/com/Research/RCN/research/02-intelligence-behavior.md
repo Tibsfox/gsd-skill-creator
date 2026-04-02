@@ -235,5 +235,16 @@ Combined with a rich vocal repertoire, a flexible fission-fusion social structur
 
 ---
 
+## Sources
+
+- Herculano-Houzel, S., et al. (2015). "Brains of the raccoon family (Procyonidae)." *Brain, Behavior and Evolution*, 85(4): 275-286.
+- Davis, H.B. (1907). "The raccoon: a study in animal intelligence." *The American Journal of Psychology*, 18(4): 447-489.
+- Breland, K. and Breland, M. (1961). "The misbehavior of organisms." *American Psychologist*, 16(11): 681-684.
+- Tobach, E. (1969). "Some aspects of the behavior and learning of raccoons." *American Zoologist*, 9(2): 559-567.
+- Stanton, L.A., Sullivan, M.S., and Fazio, J.M. (2015). "A standardized ethogram for the raccoon." *Animal Behaviour and Cognition*, 2(3): 292-307.
+- Pettit, R.E. (2010). "Raccoon cognition: problem solving, memory, and learning in *Procyon lotor*." PhD dissertation, University of Wyoming.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

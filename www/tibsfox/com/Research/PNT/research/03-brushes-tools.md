@@ -2,6 +2,12 @@
 
 ## Everything That Puts Paint on Surface
 
+Research module PNT-03: a comprehensive guide to painting tools, from brush anatomy and natural versus synthetic hair to palette knives, easels, airbrush equipment, and the direct connection between airbrush tools and fursuit fabrication.
+
+**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-04] Surfaces, [PNT-05] Color Theory, [FFA-04] Fursuit Fabrication, [FFA-10] Fursuit Makers Index.
+
+---
+
 A painter's tools are extensions of intent. The brush translates the motion of your hand into a mark on the surface, and the character of that mark — its width, edge, texture, and opacity — depends entirely on the tool that made it. Choosing tools is not a minor decision. The difference between a round sable and a flat hog bristle is the difference between a whisper and a shout, and both are necessary.
 
 This chapter covers every major tool a painter uses, from the brush in your hand to the easel that holds your canvas. It is practical knowledge — the kind of thing an experienced painter would tell you in their studio if you asked.
@@ -248,3 +254,20 @@ For the beginning painter, here is a starting tool kit by medium:
 **Watercolor**: 3-4 round brushes (a Kolinsky or good synthetic in sizes 4, 8, 12; a large mop for washes), a ceramic palette, two water containers (one for rinsing, one for clean water), a spray bottle, and paper towels.
 
 Start with these. Add tools as specific needs arise. A painter with three good brushes, a palette, and quality paint can make any painting that has ever been made. Tools enable; they do not create. The creation lives in your eye, your hand, and your intent.
+
+---
+
+## Sources
+
+- Mayer, R. (1991). *The Artist's Handbook of Materials and Techniques*. 5th ed. Viking.
+- Gottsegen, M.D. (2006). *The Painter's Handbook*. Watson-Guptill.
+- Cennini, C. (c. 1400). *Il Libro dell'Arte*. Trans. D.V. Thompson, Dover, 1933.
+- Winsor & Newton. "Brush Guide." winsornewton.com.
+- Rosemary & Co. "Brush Selection Guide." rosemaryandco.com.
+- Princeton Artist Brush Co. "Brush Technology." princetonbrush.com.
+- Iwata-Medea. "Airbrush Product Guide." iwata-medea.com.
+- Badger Air-Brush Co. "Product Catalog." badgerairbrush.com.
+- Harder & Steenbeck. "Airbrush Systems." harder-steenbeck.de.
+- Guerrilla Painter. "Pochade Box Guide." guerrillapainter.com.
+- [FFA-04] Fursuit Fabrication. Tibsfox Research Series.
+- [FFA-10] Fursuit Makers Index. Tibsfox Research Series.

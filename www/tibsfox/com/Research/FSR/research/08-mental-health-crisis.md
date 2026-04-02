@@ -36,11 +36,11 @@ This is the infrastructure — or the absence of infrastructure — that produce
 
 ## The Memphis Model and the Limits of Better Training
 
-On September 24, 1987, Memphis police officers shot and killed Joseph DeWayne Robinson, a 27-year-old Black man who was experiencing a mental health crisis. Robinson was armed with a knife and had been threatening people in a public housing complex. Officers arrived, the situation escalated, and Robinson was shot ten times.
+On September 24, 1987, Memphis police officers shot and killed Joseph DeWayne Robinson, a 27-year-old Black man who was experiencing a mental health crisis. Robinson was armed with a knife and had been threatening people in a public housing complex. Officers arrived, the situation escalated, and Robinson was shot multiple times and killed.
 
 The community response was immediate and sustained. Rather than the cycle of outrage and forgetting that typically follows such shootings, Memphis became the site of a genuine institutional innovation. In 1988, the Memphis Police Department, in partnership with the Memphis chapter of the National Alliance on Mental Illness (NAMI) and the University of Memphis, developed the Crisis Intervention Team (CIT) model — a 40-hour training program for volunteer officers, designed to give them the skills to de-escalate encounters with people in mental health crisis.
 
-The CIT model, often called the Memphis Model, has since been adopted by police departments across the country and around the world. The training covers mental health diagnoses, de-escalation techniques, community mental health resources, site visits to treatment facilities, and interactions with people who have lived experience of mental illness. Officers who complete CIT training are designated as crisis intervention officers and are dispatched preferentially to mental health calls.
+The CIT model, often called the Memphis Model, has since been adopted by over 2,700 communities across the United States and by police departments in multiple countries. The 40-hour training covers mental health diagnoses, de-escalation techniques, community mental health resources, site visits to treatment facilities, and interactions with people who have lived experience of mental illness. Officers who complete CIT training are designated as crisis intervention officers and are dispatched preferentially to mental health calls.
 
 The evidence suggests that CIT works, within its limitations. Studies have found that CIT-trained officers use force less frequently during mental health calls, make more appropriate referrals to treatment rather than arrest, and report higher confidence in their ability to handle these encounters. A 2019 systematic review published in Psychiatric Services found consistent evidence that CIT reduces arrests of people with mental illness and increases diversions to mental health services.
 
@@ -173,6 +173,36 @@ The reform will come. The history of emergency services tells us that. But it wi
 It is real. It has always been real. And closing it is not a matter of innovation or evidence. It is a matter of deciding that people in mental health crisis deserve the same quality of response that people having heart attacks receive. Nothing more. Nothing less. Just the right people, with the right skills, showing up at the right time.
 
 We know how to do this. We have known for thirty-five years. The only thing missing is the decision to do it.
+
+## Cross-References
+
+- **[FSR-01]** History of Emergency Services — the arc of reform through catastrophe that this document extends to mental health
+- **[FSR-03]** EMS and Paramedicine — the community paramedicine model as a parallel evolution toward proactive, non-emergency care
+- **[FSR-04]** Law Enforcement — CIT training, use-of-force framework, and the institutional culture that shapes police response to mental health calls
+- **[FSR-05]** Dispatch and 911 — EMD protocols determine which calls are coded as mental health; dispatch is the first triage point in the gap
+- **[FSR-09]** Responder Wellness — the moral injury of responding to calls you are not equipped for, and the cumulative toll on responders who work the gap daily
+- **[FSR-10]** PNW Departments — King County, Seattle, Portland, and Olympia programs referenced in the PNW section
+- **[ECO-09]** PNW Ecology — the intersection of homelessness, encampment fires, and ecological impact in urban greenspaces
+- **[RCN-03]** Urban Wildlife — raccoons, opossums, and other animals as frequent subjects of 911 calls that first responders are dispatched to; a lighter but real dimension of the "wrong tool for the job" pattern, where animal control capacity gaps mirror mental health capacity gaps
+
+---
+
+## Sources and References
+
+- Treatment Advocacy Center. "Road Runners: The Role and Impact of Law Enforcement in Transporting Individuals with Severe Mental Illness." 2019.
+- Washington Post Fatal Force Database. Ongoing. wapo.st/police-shootings
+- Fuller, D.A., et al. "Overlooked in the Undercounted: The Role of Mental Illness in Fatal Law Enforcement Encounters." Treatment Advocacy Center, 2015.
+- CAHOOTS Media Guide. White Bird Clinic, Eugene, Oregon. Updated annually.
+- City of Eugene. "CAHOOTS Annual Report." Various years. Budget figure (~$2.1M) from 2019 fiscal year reporting.
+- Compton, M.T., et al. "A Comprehensive Review of Extant Research on Crisis Intervention Team (CIT) Programs." *Journal of the American Academy of Psychiatry and the Law*, 36(1), 2008.
+- Watson, A.C., et al. "Crisis Intervention Teams: A Review." *Psychiatric Services*, 70(9), 2019.
+- Substance Abuse and Mental Health Services Administration (SAMHSA). "988 Suicide and Crisis Lifeline Performance Metrics." 2022-present.
+- Bipartisan Safer Communities Act. Public Law 117-159. June 25, 2022.
+- Balfour, M.E., et al. "Crisis Stabilization Units." *Psychiatric Services*, 67(3), 2016.
+- LEAD National Support Bureau. "LEAD Evaluation Studies." Various years. leadbureau.org
+- DESC (Downtown Emergency Service Center). Annual reports. desc.org
+- Crisis Connections. Regional crisis line data. crisisconnections.org
+- Portland Street Response. "Year One Report." City of Portland, 2022.
 
 ---
 

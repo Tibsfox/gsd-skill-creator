@@ -200,7 +200,7 @@ Redcaps are active, alert, and somewhat wild in temperament. They are excellent 
 
 ### Origin and History
 
-The Old English Game is the direct descendant of the fighting cocks that were central to English culture for centuries. Cockfighting was legal in England until 1849, and the birds bred for the pit were the ancestors of today's Old English Game. When cockfighting was banned, breeders turned to exhibition, developing the modern show type. The breed was admitted to the APA in 1938.
+The Old English Game is the direct descendant of the fighting cocks that were central to English culture for centuries. Cockfighting was banned in England by the Cruelty to Animals Act of 1835, though enforcement strengthened with the 1849 amendment, and the birds bred for the pit were the ancestors of today's Old English Game. When cockfighting was banned, breeders turned to exhibition, developing the modern show type. The breed was admitted to the APA in 1938.
 
 The Old English Game is recognized in an extraordinary number of color varieties — over 30 in the APA Standard — reflecting the diverse regional fighting strains that contributed to the breed.
 
@@ -251,18 +251,22 @@ For anyone considering their first chickens, the Buff Orpington is rarely a wron
 
 ## Summary: The English Class at a Glance
 
-| Breed | Weight (Cock/Hen) | Eggs/Year | Egg Color | APA Year | Conservancy Status |
-|-------|-------------------|-----------|-----------|----------|-------------------|
-| Orpington (Buff) | 10 / 8 lbs | 180-250 | Brown | 1902 | Recovering |
-| Orpington (Black) | 10 / 8 lbs | 180-250 | Brown | 1905 | Recovering |
-| Orpington (White) | 10 / 8 lbs | 180-250 | Brown | 1905 | Recovering |
-| Orpington (Blue) | 10 / 8 lbs | 180-250 | Brown | 1923 | Recovering |
-| Cornish (Dark) | 10.5 / 8 lbs | 80-160 | Light Brown | 1893 | Watch |
-| Cornish (White) | 10.5 / 8 lbs | 80-160 | Light Brown | 1898 | Watch |
-| Dorking (Silver-Gray) | 9 / 7 lbs | 150-200 | White/Cream | 1874 | Threatened |
-| Sussex (Speckled) | 9 / 7 lbs | 200-260 | Brown/Cream | 1914 | Threatened |
-| Australorp | 8.5 / 6.5 lbs | 200-280 | Brown | 1929 | Recovering |
-| Redcap | 7.5 / 6 lbs | 150-200 | White/Cream | 1888 | Critical |
-| Old English Game | 5 / 4 lbs | 100-160 | Cream/Tinted | 1938 | Watch |
+| Breed | Origin | Weight (Cock/Hen) | Eggs/Year | Egg Color | Temperament | Conservancy Status |
+|-------|--------|-------------------|-----------|-----------|-------------|-------------------|
+| Orpington (Buff) | England, 1886 | 10 / 8 lbs | 180-250 | Brown | Gentle, friendly | Recovering |
+| Orpington (Black) | England, 1886 | 10 / 8 lbs | 180-250 | Brown | Gentle, friendly | Recovering |
+| Orpington (White) | England | 10 / 8 lbs | 180-250 | Brown | Gentle, friendly | Recovering |
+| Orpington (Blue) | England | 10 / 8 lbs | 180-250 | Brown | Gentle, friendly | Recovering |
+| Cornish (Dark) | Cornwall, England | 10.5 / 8 lbs | 80-160 | Light Brown | Active, assertive | Watch |
+| Cornish (White) | Cornwall, England | 10.5 / 8 lbs | 80-160 | Light Brown | Active, assertive | Watch |
+| Dorking (Silver-Gray) | England, Roman era | 9 / 7 lbs | 150-200 | White/Cream | Gentle, calm | Threatened |
+| Sussex (Speckled) | England, ancient | 9 / 7 lbs | 200-260 | Brown/Cream | Confident, curious | Threatened |
+| Australorp | Australia, early 1900s | 8.5 / 6.5 lbs | 200-280 | Brown | Calm, friendly | Recovering |
+| Redcap | England (Derbyshire) | 7.5 / 6 lbs | 150-200 | White/Cream | Active, alert | Critical |
+| Old English Game | England, ancient | 5 / 4 lbs | 100-160 | Cream/Tinted | Bold, spirited | Watch |
 
 The English Class represents the golden age of practical poultry breeding. These breeds were developed by people who needed their chickens to work — to produce eggs and meat efficiently, to thrive in the damp English climate, to look handsome enough to win at shows, and to be tractable enough to manage in the small holdings and cottage farms that characterized British agriculture. That these breeds achieved all of these goals while remaining beautiful, personable, and genetically distinct is a testament to the skill and vision of their creators. Every one of them deserves to survive.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Poultry Club of Great Britain, "British Poultry Standards," 7th ed. (2018); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds."*

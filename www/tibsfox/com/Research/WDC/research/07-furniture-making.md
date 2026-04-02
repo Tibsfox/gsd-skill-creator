@@ -164,6 +164,36 @@ A Shaker step stool. A dovetailed tool tote. A small bookshelf with dado joints.
 
 None of that matters. What matters is that you made something real from a tree, and it stands on its own, and it works. Everything after that is refinement.
 
+## PNW Furniture Traditions
+
+The Pacific Northwest has a distinctive furniture-making culture shaped by its species, its climate, and its cultural crosscurrents. PNW furniture makers work with local species that are not widely available elsewhere — quilted big-leaf maple, Oregon white oak, Pacific madrone (a hardwood so prone to warping during drying that it is called "the wood that moves"), salvaged old-growth Douglas fir from deconstructed buildings, and western red cedar for outdoor pieces.
+
+The Japanese aesthetic influence is stronger in PNW furniture than in most American regions. The proximity to Japan, the Japanese American community's cultural contributions, and the PNW's general orientation toward clean lines and natural materials have produced a regional style that owes as much to Japanese design principles as to Shaker or Arts and Crafts traditions. PNW furniture tends toward simplicity, natural finishes, and a willingness to let figured wood do the aesthetic work — a quilted maple tabletop needs no ornament.
+
+The live-edge and slab furniture tradition has particular resonance in the PNW, where Nakashima's influence meets an abundant supply of spectacular slabs. PNW sawyers and woodworkers maintain networks for sourcing exceptional logs — a windfall big-leaf maple with quilted figure, a decommissioned dock piling of old-growth Douglas fir, a storm-damaged black walnut from an urban tree. The slab becomes the starting point, and the furniture is designed around it. This is the PNW approach: the tree leads, the maker follows.
+
+Construction tip for PNW outdoor furniture: western red cedar is the default species, but all-heartwood is essential. The pale sapwood that is acceptable in interior cedar will rot within a few seasons of PNW rain. Select boards with uniform dark heartwood, finish with a penetrating UV-protective stain (not film-forming paint), and accept that the furniture will silver to gray if left unfinished. The gray is not damage — it is the wood's surface lignin degrading under UV light. The structural integrity remains for decades.
+
+## Cross-References
+
+- **[WDC-02]** Wood Science — the material properties that every furniture design decision must respect
+- **[WDC-05]** Joinery — the joints that hold furniture together; this chapter shows them in context
+- **[WDC-06]** Finishing — the final step that reveals (or ruins) the work
+- **[WDC-09]** PNW Timber — the species that PNW furniture makers work with, in full ecological and commercial context
+- **[PNT-03]** Visual Art — the studio furniture movement as fine art; furniture in museum collections alongside painting and sculpture
+- **[ECO-05]** Forest Ecology — the forest that grows the trees that become the furniture
+
+---
+
+## Sources and References
+
+- Nakashima, George. "The Soul of a Tree." Kodansha, 1981.
+- Krenov, James. "A Cabinetmaker's Notebook." Sterling, 1976.
+- Maloof, Sam. "Sam Maloof, Woodworker." Kodansha, 1983.
+- Schwarz, Chris. "The Anarchist's Design Book." Lost Art Press, 2016.
+- Galbert, Peter. "Chairmaker's Notebook." Lost Art Press, 2015. (Windsor chair making)
+- Dunbar, Michael. "Windsor Chairmaking." Linden Publishing, 2002.
+
 ---
 
 *Previous: [The Final Surface](06-finishing.md) | Next: [Building Structures](08-construction-framing.md)*

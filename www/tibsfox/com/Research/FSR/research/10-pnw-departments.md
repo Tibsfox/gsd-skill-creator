@@ -120,6 +120,33 @@ The Washington State Patrol provides law enforcement on state highways and suppo
 
 For the person who served thirty years in this region, the mutual aid network was not an abstraction. It was the neighboring engine company that arrived on the second alarm. It was the medic unit from the next district that covered the station when the local unit was committed. It was the wildland fire deployment that took them away from home for fourteen days. It was the system that meant no one was alone — that when the call exceeded what one crew could handle, more crews came.
 
+## Cross-References
+
+- **[FSR-02]** Fire Service — the structural firefighting and wildland fire tactics that PNW departments execute
+- **[FSR-03]** EMS and Paramedicine — King County Medic One as the national model for cardiac arrest systems
+- **[FSR-08]** Mental Health Crisis — Portland Street Response, Seattle LEAD, DESC, and Olympia Crisis Response Unit
+- **[FSR-09]** Responder Wellness — the specific exposures (wildfire smoke seasons, maritime rescue cold water, CSZ planning stress) that shape PNW responder wellness
+- **[ECO-07]** Fire Ecology — the ecological context for wildland fire in the Cascades, fuel accumulation, and the fire regimes that determine fire behavior
+- **[ECO-09]** PNW Ecology — Cascadia Subduction Zone geology, Mount Rainier volcanic hazards, and Puget Sound marine ecology
+- **[WDC-09]** PNW Timber — Douglas fir and western red cedar as the construction materials that PNW firefighters encounter in every structure fire; the timber industry history that built the communities these departments protect
+- **[RCN-05]** Urban Wildlife — PNW departments respond to animal calls involving raccoons, coyotes, bears, and marine mammals; a routine but real operational demand
+
+---
+
+## Sources and References
+
+- Seattle Fire Department. Annual reports. seattle.gov/fire
+- King County EMS Division. "Medic One/EMS Annual Report." Various years. Published cardiac arrest survival data.
+- Cobb, Leonard, et al. Foundational King County Medic One research. University of Washington.
+- Portland Fire and Rescue. Annual reports. portland.gov/fire
+- Tacoma Fire Department. Annual reports. cityoftacoma.org/fire
+- Washington State Fire Defense Committee. Mutual aid protocols.
+- Oregon Seismic Safety Policy Advisory Commission. "Oregon Resilience Plan." 2013.
+- FEMA. "Cascadia Rising Exercise Series." 2016, 2022.
+- USGS Cascades Volcano Observatory. "Mount Rainier Lahar Hazard Zones." Various publications.
+- Pacific Northwest Seismic Network. pnsn.org
+- Washington Department of Natural Resources. "Wildfire Statistics." Updated annually.
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call in the Pacific Northwest.*

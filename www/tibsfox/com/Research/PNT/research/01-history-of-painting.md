@@ -2,6 +2,12 @@
 
 ## A History of Painting from Cave Walls to Convention Halls
 
+Research module PNT-01: a chronological survey of painting from prehistoric cave art through the contemporary era, including the furry art community as a living painting tradition.
+
+**Cross-references:** [PNT-02] Mediums, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-05] Color Theory, [PNT-06] Genres, [PNT-09] PNW Scene, [FFA] Fur, Feathers & Animation Arts, [FFA-10] Fursuit Makers Index.
+
+---
+
 Painting is the oldest continuous art form practiced by human beings. Before writing, before architecture, before agriculture, someone ground ochre into powder, mixed it with animal fat, and pressed a hand against stone. That impulse — to leave a mark, to make color stick to surface, to say *I was here and I saw this* — has never stopped. Forty thousand years later, someone at a furry convention is painting a watercolor badge of a character they love, using the same fundamental act: pigment bound to surface, shaped by intent.
 
 This is the story of that unbroken line.
@@ -148,7 +154,9 @@ Pop Art (Andy Warhol, Roy Lichtenstein) brought painting back to recognizable im
 
 ### Street Art and the Expanded Field
 
-Painting escaped the gallery. Street art — from the graffiti of 1970s New York to the stencil work of Banksy to the large-scale murals that now cover buildings in cities worldwide — returned painting to the public wall where it began in prehistory. The tools changed (spray paint, stencils, wheat paste), but the fundamental act remained: pigment on surface, in a place where people will see it.
+Painting escaped the gallery. Street art -- from the graffiti of 1970s New York to the stencil work of Banksy to the large-scale murals that now cover buildings in cities worldwide -- returned painting to the public wall where it began in prehistory. The tools changed (spray paint, stencils, wheat paste), but the fundamental act remained: pigment on surface, in a place where people will see it.
+
+Regional painting traditions continued to emerge and evolve. The Pacific Northwest developed its own school in the mid-20th century -- the so-called "mystic painters of the Northwest" (Mark Tobey, Morris Graves, Kenneth Callahan, Guy Anderson) fused Asian calligraphic traditions with the region's overcast light and contemplative landscape. Tobey's "white writing" technique anticipated Abstract Expressionism's allover compositions while remaining rooted in Zen brush practice. The PNW painting tradition, explored in depth in [PNT-09], continues today through institutions like the Gage Academy of Art in Seattle and a thriving plein air community that paints the region's forests, volcanoes, and shorelines.
 
 ### Digital Painting
 
@@ -175,3 +183,18 @@ The FFA (Fur, Feathers & Animation Arts) project in this research series examine
 What connects a blown-hand stencil in a Sulawesi cave to a watercolor badge painted at a furry convention? Not style, not subject, not culture. The connection is the act itself: a human being choosing a pigment, choosing a surface, and making a mark with deliberate intent. The tools evolve — from ochre and bone to sable and canvas to stylus and screen — but the impulse is the same.
 
 Every painter, picking up a brush for the first time, joins this line. Every painter, grinding pigment or squeezing a tube or loading a digital brush, inherits forty millennia of accumulated knowledge about how color behaves on surface. The history of painting is not a museum subject. It is a living inheritance, and you are part of it the moment you make your first mark.
+
+---
+
+## Sources
+
+- Gombrich, E.H. (1950). *The Story of Art*. Phaidon. Many subsequent editions.
+- Honour, H. & Fleming, J. (2005). *A World History of Art*. 7th ed. Laurence King.
+- Aubert, M. et al. (2019). Earliest hunting scene in prehistoric art. *Nature*, 576, 442-445. (Sulawesi dating)
+- Clottes, J. (2003). *Chauvet Cave: The Art of Earliest Times*. University of Utah Press.
+- Bahn, P. & Vertut, J. (1997). *Journey Through the Ice Age*. University of California Press.
+- Vasari, G. (1550). *Lives of the Most Eminent Painters, Sculptors, and Architects*. Various modern editions.
+- Cennini, C. (c. 1400). *Il Libro dell'Arte*. Trans. D.V. Thompson, Dover, 1933.
+- Kemp, M. (2000). *The Oxford History of Western Art*. Oxford University Press.
+- Xie He (5th century CE). *The Record of the Classification of Old Painters* (*Gu Hua Pin Lu*).
+- Fur Science (2024). International Anthropomorphic Research Project. furscience.com.

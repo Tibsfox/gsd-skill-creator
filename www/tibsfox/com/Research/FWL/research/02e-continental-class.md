@@ -301,16 +301,20 @@ The Cream Legbar, carrying Araucana blue-egg genetics but not heavy brown-pigmen
 
 ## Summary: The Continental Class at a Glance
 
-| Breed | Weight (Cock/Hen) | Eggs/Year | Egg Color | APA Year | Conservancy Status |
-|-------|-------------------|-----------|-----------|----------|-------------------|
-| Polish (WCB) | 6 / 4.5 lbs | 150-200 | White | 1874 | Watch |
-| Hamburg (Silver Sp.) | 5 / 4 lbs | 200-255 | White | 1874 | Watch |
-| Campine | 6 / 4 lbs | 150-200 | White | 1914 | Critical |
-| Welsummer | 7 / 6 lbs | 160-220 | Dark Brown | 1991 | Not listed |
-| Barnevelder | 7 / 6 lbs | 170-220 | Dark Brown | 1991 | Not listed |
-| Marans (Blk Copper) | 8 / 6.5 lbs | 150-210 | Chocolate | 2011 | Not listed |
-| Cream Legbar | 7.5 / 5.5 lbs | 180-230 | Blue | Not APA | Not listed |
-| Lakenvelder | 5 / 4 lbs | 150-200 | White/Cream | 1939 | Threatened |
-| Faverolles (Salmon) | 8 / 6.5 lbs | 180-240 | Light Brown | 1914 | Threatened |
+| Breed | Origin | Weight (Cock/Hen) | Eggs/Year | Egg Color | Temperament | Conservancy Status |
+|-------|--------|-------------------|-----------|-----------|-------------|-------------------|
+| Polish (WCB) | Netherlands | 6 / 4.5 lbs | 150-200 | White | Gentle, quirky | Watch |
+| Hamburg (Silver Sp.) | Netherlands/England | 5 / 4 lbs | 200-255 | White | Active, independent | Watch |
+| Campine | Belgium | 6 / 4 lbs | 150-200 | White | Active, alert | Critical |
+| Welsummer | Netherlands | 7 / 6 lbs | 160-220 | Dark Brown | Friendly, active | Not listed |
+| Barnevelder | Netherlands | 7 / 6 lbs | 170-220 | Dark Brown | Calm, friendly | Not listed |
+| Marans (Blk Copper) | France | 8 / 6.5 lbs | 150-210 | Chocolate | Active, hardy | Not listed |
+| Cream Legbar | England (Cambridge) | 7.5 / 5.5 lbs | 180-230 | Blue | Active, alert | Not listed |
+| Lakenvelder | Germany/Netherlands | 5 / 4 lbs | 150-200 | White/Cream | Active, flighty | Threatened |
+| Faverolles (Salmon) | France | 8 / 6.5 lbs | 180-240 | Light Brown | Gentle, docile | Threatened |
 
 The Continental Class is where utility meets artistry. These breeds lay eggs in colors that no supermarket shelf has ever seen — blues, greens, and browns so dark they look hand-painted. They wear plumage patterns of extraordinary complexity, from the mathematical precision of Hamburg spangling to the double-laced beauty of the Barnevelder. And they carry within their genetics the cumulative breeding wisdom of centuries of European poultry culture: Dutch precision, French practicality, Belgian innovation, and German thoroughness. In a world that has largely standardized on white and brown supermarket eggs laid by anonymous hybrids, the Continental breeds are a reminder that egg production can be beautiful, that chickens can be works of art, and that diversity is not a luxury but a treasure.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Wang et al. (2013), "An EAV-HP insertion in SLCO1B3 causes blue eggshell in the chicken," PLoS Genetics; Marans of America Club, Egg Color Scale and Breed Standard.*

@@ -20,6 +20,8 @@ The through dovetail is the classic form. Both pins and tails are visible on bot
 
 Cutting dovetails by hand is a rite of passage. The sequence is: lay out the tails on the tail board, saw to the lines, chop the waste, then use the cut tails to mark the pin board, saw the pins, and chop the waste. When the pins and tails come together with a firm tap of the mallet and the faces close flush — that first perfect dovetail — the feeling is unlike anything else in the craft. It is geometry made physical. Two pieces of wood, each useless alone, that lock together into something stronger than either.
 
+The anatomy of a through dovetail, in cross-section, looks like this: the tails are the wider, trapezoidal projections — they flare outward from baseline to end grain like a dove's spread tail feathers, which is where the name comes from. The pins are the narrower pieces between the tails on the mating board. The baseline is the scribed line that marks the depth of the joint on both boards. When assembled, the pins nestle between the tails, and the flared geometry means the joint can only come apart in one direction — you can pull the tail board away from the pin board, but you cannot pull the pin board away from the tail board. That one-directional mechanical lock is why dovetails have been the drawer joint of choice for four centuries: the front of the drawer gets pulled thousands of times, and the dovetails resist every pull.
+
 The learning curve is real. Early dovetails will have gaps. The tails will not quite align. The baselines will not be crisp. This is normal. The skill is in the repetition. By the tenth set, you understand the saw's relationship to the line. By the fiftieth, you can cut them in your sleep.
 
 ### Half-Blind Dovetails
@@ -53,6 +55,8 @@ A **haunched mortise and tenon** adds a short step (the haunch) at the top of th
 A **wedged tenon** is pinched open after assembly by driving small wedges into saw kerfs cut in the end of the tenon. The wedges expand the tenon inside the mortise, creating a mechanical lock that cannot be pulled apart. Tusk tenons — through tenons locked with a wedge driven through a slot in the projecting tenon end — are a beautiful variation used in trestle tables and knockdown furniture.
 
 A **double tenon** uses two smaller tenons instead of one large one. This increases glue surface and resists twisting. It is common on wide rails where a single tenon would be impractically large.
+
+A **drawbored mortise and tenon** is a traditional technique where the peg hole through the tenon is offset slightly from the holes in the mortise cheeks — typically 1/16 inch closer to the tenon shoulder. When the tapered peg is driven through, it draws the tenon tight into the mortise, compressing the shoulder against the mortised piece. This creates a joint that is mechanically locked even without glue. Timber framers use this technique at building scale (where it is called draw-boring); furniture makers use it at furniture scale for joints that must be bombproof — trestle table stretchers, workbench leg joints, any connection where seasonal racking will test the glue bond over decades.
 
 ### Sizing Rules
 
@@ -114,7 +118,7 @@ The **shachi-sen** joint is one of the most elegant. It is a through mortise and
 
 Japanese scarf joints (tsugite) connect two timbers end to end to create a single structural member longer than either piece. Some scarf joints interlock in three dimensions, with mating surfaces that resist tension, compression, and shear simultaneously. The geometry is complex enough to require three-dimensional layout and cutting, and the fit must be precise — there is no glue, no fasteners, only wood against wood.
 
-What makes Japanese joinery remarkable is not complexity for its own sake. Every joint exists because it solves a specific structural problem in a specific way. The complexity serves function. A timber frame joint that must resist earthquake forces is designed differently from a furniture joint that must accommodate seasonal movement, which is designed differently from a tea house joint that must be assembed and disassembled for seasonal relocation. The four hundred joints are four hundred solutions to four hundred problems.
+What makes Japanese joinery remarkable is not complexity for its own sake. Every joint exists because it solves a specific structural problem in a specific way. The complexity serves function. A timber frame joint that must resist earthquake forces is designed differently from a furniture joint that must accommodate seasonal movement, which is designed differently from a tea house joint that must be assembled and disassembled for seasonal relocation. The four hundred joints are four hundred solutions to four hundred problems.
 
 For Western woodworkers, Japanese joinery offers both inspiration and humility. The level of precision required — tolerances measured in hundredths of a millimeter, achieved with hand tools — represents a standard that most will never reach but that illuminates what the material is capable of.
 
@@ -171,6 +175,32 @@ The solutions are ancient. Frame-and-panel construction captures the panel in gr
 The principle is consistent: attach rigidly at one point (or along one axis), and allow movement everywhere else. The point of rigid attachment is typically the center, so the panel expands equally in both directions from the fixed point.
 
 Understanding wood movement is not an advanced topic. It is a prerequisite. Every joint in this chapter — every dovetail, every mortise and tenon, every dado — must be designed with movement in mind. The wood is going to move. The only question is whether you planned for it.
+
+## PNW Joinery Traditions
+
+Two joinery traditions converge in the Pacific Northwest. The Western European tradition — mortise and tenon, dovetails, frame and panel — arrived with the settlers and the carpenters who framed every building in the region out of Douglas fir. The Japanese tradition — the four hundred joints, the pull-saw technique, the tolerance-obsessed fitting — arrived with Japanese immigrants and was reinforced by the region's cultural connection to the Pacific Rim. PNW furniture makers work in both traditions, and many work in a hybrid: Western-style case construction with Japanese-influenced hand tool technique, using PNW species (big-leaf maple, Oregon white oak, Douglas fir, western red cedar) that respond to Japanese tools as well as they respond to Western ones.
+
+The timber frame revival in the PNW draws on Douglas fir's exceptional suitability for large-scale joinery. A Douglas fir mortise-and-tenon in an 8x8 timber is a version of the same joint that holds a dining table together — scaled up, draw-bored with an oak peg, and carrying the weight of a building. The tradition connects [WDC-08] construction framing to the craft joinery in this chapter: the principles are identical, the scale is different.
+
+## Cross-References
+
+- **[WDC-02]** Wood Science — wood movement dictates every joint design decision
+- **[WDC-03]** Hand Tools — the saws, chisels, and planes used to cut joints by hand
+- **[WDC-07]** Furniture Making — joinery in the context of complete furniture construction
+- **[WDC-08]** Construction Framing — timber frame joinery at building scale
+- **[WDC-09]** PNW Timber — Douglas fir for structural joints, cedar for exterior joints, maple for decorative joints
+- **[ECO-05]** Forest Ecology — understanding why certain species produce wood with the properties joints require
+
+---
+
+## Sources and References
+
+- Hayward, Charles H. "Woodwork Joints." 1950. (Comprehensive joint catalog)
+- Odate, Toshio. "Japanese Woodworking Tools." 1984. (Japanese joinery philosophy)
+- Sumiyoshi, Torashichi and Matsui, Gengo. "Wood Joints in Classical Japanese Architecture." 1991.
+- Schwarz, Chris. "The Joiner and Cabinet Maker." Lost Art Press, 2009.
+- Korn, Peter. "Why We Make Things and Why It Matters." 2013.
+- Titebond. titebond.com. (Adhesive specifications and technical data)
 
 ---
 
