@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 74&deg; &mdash; American Pika &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Climate indicator landmark card */
+    .climate-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 3px solid #B71C1C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFEBEE;
+    }
+    .climate-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFCDD2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .climate-card p {
+      color: #FFEBEE;
+    }
+    .climate-card strong {
+      color: #EF9A9A;
+    }
+
+    /* Alpine acoustic card */
+    .alpine-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #1E88E5 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .alpine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .alpine-card p {
+      color: #E3F2FD;
+    }
+    .alpine-card strong {
+      color: #90CAF9;
+    }
+
+    /* Hay-gathering card */
+    .hay-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 50%, #689F38 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .hay-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .hay-card p {
+      color: #F1F8E9;
+    }
+    .hay-card strong {
+      color: #AED581;
+    }
+
+    /* Back-to-back Lagomorpha card */
+    .lagomorpha-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .lagomorpha-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .lagomorpha-card p {
+      color: #EFEBE9;
+    }
+    .lagomorpha-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Poor Moon parallel card */
+    .moon-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .moon-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .moon-card p {
+      color: #E8EAF6;
+    }
+    .moon-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.family { background: #4E342E; }
+    .theory-icon.lagomorpha { background: #5D4037; }
+    .theory-icon.bark { background: #1565C0; }
+    .theory-icon.climate { background: #C62828; }
+    .theory-icon.hay { background: #558B2F; }
+    .theory-icon.elevation { background: #0D47A1; }
+    .theory-icon.mammal { background: #3E2723; }
+    .theory-icon.moon-link { background: #283593; }
+    .theory-icon.hare-link { background: #4E342E; }
+    .theory-icon.weasel-link { background: #455A64; }
+    .theory-icon.owl-link { background: #1B5E20; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">74&deg;</div>
+      <div class="release-title-block">
+        <h2>American Pika</h2>
+        <div class="scientific">Ochotona princeps</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      high sharp &ldquo;eenk&rdquo; bark &mdash; CLIMATE CHANGE INDICATOR, alpine/subalpine talus slopes, NEW FAMILY Ochotonidae (34th family), back-to-back Lagomorpha with Snowshoe Hare (73), highest elevation species in the engine, hay-gathering (alpine farming), does NOT hibernate, E=4, thirteenth mammalian entry
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Climate Indicator Landmark Card -->
+        <div class="climate-card">
+          <h3>Climate Change Indicator &mdash; The Escalator to Extinction</h3>
+          <p>The American Pika is the engine&rsquo;s first species whose <strong>conservation status is primarily driven by climate warming</strong>. Pikas can die from heat stress at temperatures as low as <strong>25.5&deg;C (78&deg;F)</strong>. As temperatures warm, Pika populations are <strong>retreating upslope</strong> &mdash; and some low-elevation populations have already gone extinct. The Pika cannot move higher when it is already at the summit. It cannot adapt faster than the climate is changing. The <strong>escalator to extinction</strong>: the habitable zone shrinks from below. The summit is finite. This is the canary in the alpine coal mine.</p>
+        </div>
+
+        <!-- Alpine Acoustic Card -->
+        <div class="alpine-card">
+          <h3>The 75th Acoustic Element: High Sharp &ldquo;Eenk&rdquo; Bark</h3>
+          <p>A short, loud, <strong>piercing alarm call</strong> &mdash; approximately 3,000&ndash;10,000 Hz, audible at <strong>200&ndash;300 meters</strong> across open alpine terrain. The Pika sits on a prominent boulder, body erect, and delivers the bark with its whole body. <strong>E=4</strong> &mdash; the loudest mammalian call relative to body size in the engine. The <strong>highest-elevation sound</strong> in the engine. Alpine acoustic: thin air, vast sightlines, rock echo. The Pika is far easier to hear than to see.</p>
+        </div>
+
+        <!-- Hay-Gathering Card -->
+        <div class="hay-card">
+          <h3>Hay-Gathering &mdash; The Alpine Farmer</h3>
+          <p>The Pika&rsquo;s most remarkable behavior: <strong>cutting and drying vegetation</strong> for winter food storage. Fresh plants are carried to flat rocks and laid out to dry in the sun &mdash; literally making hay. Once dried, moved into talus interior. Haypiles weigh <strong>15&ndash;30 kg</strong> &mdash; more than <strong>100 times</strong> the Pika&rsquo;s own body weight. The Pika does <strong>NOT hibernate</strong> &mdash; it feeds on stored hay through 6&ndash;8 months of alpine winter, active year-round beneath the snowpack.</p>
+        </div>
+
+        <!-- Back-to-Back Lagomorpha Card -->
+        <div class="lagomorpha-card">
+          <h3>Back-to-Back Lagomorpha (73&ndash;74) &mdash; Like Back-to-Back Anatidae (58&ndash;59)</h3>
+          <p>The <strong>Snowshoe Hare</strong> (73, Leporidae) and <strong>American Pika</strong> (74, Ochotonidae) are consecutive Lagomorpha &mdash; same order, different families. This parallels the <strong>back-to-back Anatidae</strong> at degrees 58&ndash;59 (Wood Duck and Mallard). Forest hare versus alpine pika. Low elevation versus highest elevation. 1.3&ndash;2.2 kg versus 120&ndash;185 grams. Color change versus haypile. Thumping alarm versus barking alarm. Both active year-round. Neither hibernates. The Lagomorpha span the <strong>entire elevation gradient</strong>.</p>
+        </div>
+
+        <!-- Poor Moon Parallel Card -->
+        <div class="moon-card">
+          <h3>The Poor Moon Parallel</h3>
+          <p>Degree 74 pairs American Pika with <strong>Poor Moon</strong> in Part A &mdash; Indie Folk/Rock, E=3, Sub Pop, Fleet Foxes side project. Both exist in <strong>gaps</strong> &mdash; Poor Moon between Fleet Foxes albums, the Pika between talus boulders. Both <strong>small but resonant</strong> &mdash; one album, one sharp bark. Both at <strong>elevation</strong> &mdash; Fleet Foxes company, alpine summits. Both <strong>climate-sensitive</strong> &mdash; temporal brevity meets geographic shrinkage.</p>
+        </div>
+
+        <h2>The Sound: High Sharp &ldquo;Eenk&rdquo; Bark (75th Acoustic Element)</h2>
+        <p><strong>The bark:</strong> A short, loud, high-pitched alarm call &mdash; approximately 0.1&ndash;0.2 seconds in duration, centered at approximately 3,000&ndash;10,000 Hz. Variously transcribed as &ldquo;eenk,&rdquo; &ldquo;eek,&rdquo; or &ldquo;meep.&rdquo; One of the sharpest, most piercing mammalian vocalizations in the PNW. The Pika sits on a prominent boulder and delivers the bark with its whole body, the sound carrying across the talus field [1, 2, 3].</p>
+        <p><strong>Two call types:</strong> (1) <strong>Short call (alarm)</strong> &mdash; single sharp &ldquo;eenk&rdquo; when a predator is detected. Given singly or in series of 2&ndash;5 calls. (2) <strong>Long call (territorial/mating)</strong> &mdash; a longer series of linked calls over 1&ndash;3 seconds. More common during breeding season [1, 2, 3, 6].</p>
+        <p><strong>Why E=4:</strong> Diurnal (unlike recent nocturnal mammals). Vocal and acoustically conspicuous. Lives in exposed alpine habitat where the bark carries far. The Pika is frequently heard by hikers &mdash; far easier to hear than to see. The loudest mammalian call relative to body size in the engine.</p>
+
+        <h2>Taxonomy: <em>Ochotona princeps</em></h2>
+        <p><strong>Etymology:</strong> <em>Ochotona</em> from Mongolian <em>ogdoi/ochodona</em>, the local name for pikas. <em>princeps</em> from Latin &ldquo;chief&rdquo; &mdash; the first American pika described scientifically (Richardson, 1828). Common name &ldquo;Pika&rdquo; from Tungusic <em>piika</em> [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Lagomorpha</strong>. Family <strong>Ochotonidae</strong> &mdash; <strong>NEW FAMILY (34th)</strong>. The pika family, containing one genus (<em>Ochotona</em>) with approximately 30 species worldwide. Fifth new family in six degrees. The Pika is NOT a rodent &mdash; Lagomorpha diverged from Rodentia approximately 80&ndash;90 million years ago [1, 2, 3].</p>
+
+        <h2>Physical Description: The Alpine Tennis Ball</h2>
+        <p><strong>Size:</strong> 162&ndash;216 mm, 120&ndash;185 grams. About the size of a tennis ball with ears. No visible tail (vestigial, ~9&ndash;12 mm, hidden in fur). Compact, egg-shaped body. Short limbs. Fur-soled feet [1, 2, 3].</p>
+        <p><strong>Ears:</strong> Short, rounded, 20&ndash;26 mm &mdash; unlike the long ears of rabbits and hares. Dark-edged. Minimizes heat loss at alpine elevations.</p>
+        <p><strong>Fur:</strong> Dense, soft, grayish-brown to cinnamon-brown. Exceptionally thick for body size &mdash; critical insulation for alpine cold. Two molts per year. Summer: shorter, more reddish. Winter: longer, denser, grayer.</p>
+
+        <h2>Climate Change: The Escalator to Extinction</h2>
+        <p><strong>Heat sensitivity:</strong> Lethal at <strong>25.5&deg;C (78&deg;F)</strong> with extended exposure. Dense fur and high metabolic rate adapted for cold make pikas extremely vulnerable to warming. Primary thermoregulation: behavioral retreat to cool talus interstices [1, 2, 3, 4, 5].</p>
+        <p><strong>Population losses:</strong> In the Great Basin mountains, surveys document loss of Pika populations from lower-elevation sites over the past century. Sites recorded in the early 1900s are now empty. Range contracting from lower and southern margins [4, 5].</p>
+        <p><strong>Washington status:</strong> Currently relatively secure due to cooler, wetter climate. But warming trends push the lower boundary higher. Long-term projections suggest significant habitat loss by mid-century. Monitored as a climate indicator species [1, 2, 3].</p>
+        <p><strong>Conservation contrast:</strong> The Spotted Owl (4) can be protected by forest management. The Fisher (66) can be protected by trapping bans. The Pika can <strong>only be protected by slowing global warming</strong>. The first species in the engine requiring planetary-scale intervention.</p>
+
+        <h2>Hay-Gathering: Alpine Farming</h2>
+        <p><strong>The process:</strong> Mid-summer, the Pika cuts grasses, sedges, and wildflowers, carries them to flat rocks, and lays them out to dry. Once dry, the vegetation is cached in the talus interior. Haypiles of <strong>15&ndash;30 kg</strong> sustain the Pika through 6&ndash;8 months of winter [1, 2, 3, 6].</p>
+        <p><strong>Selectivity:</strong> Pikas preferentially cache high-calorie plants. Sometimes cache mildly toxic plants whose toxins break down during drying &mdash; a natural preservative. Sophisticated food quality assessment.</p>
+        <p><strong>No hibernation:</strong> The Pika remains active year-round. Lives beneath the snowpack in winter, feeding on stored hay. The snowpack insulates &mdash; near-freezing temperatures in the talus while surface temperatures plunge far below zero.</p>
+
+        <h2>Talus Habitat: The Highest Elevation in the Engine</h2>
+        <p><strong>Elevation:</strong> 1,500&ndash;3,000+ meters in Washington &mdash; the <strong>highest elevation of any species in the engine</strong>. Alpine and subalpine talus: broken rock with interstitial spaces. Above treeline or at its upper edge [1, 2, 3].</p>
+        <p><strong>Thermal refuge:</strong> Talus interstices maintain cool internal temperatures even during warm summer days. Air circulation through boulder gaps creates natural refrigeration. The Pika exploits this: active on the surface during cooler periods, retreating to talus during warm midday.</p>
+
+        <h2>The Mammalian Era Continues: Degree 74</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Order</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>61</td><td>American Beaver</td><td>Castoridae</td><td>Rodentia</td><td>Tail slap alarm</td></tr>
+            <tr><td>62</td><td>American Beaver</td><td>Castoridae</td><td>Rodentia</td><td>Nocturnal chewing</td></tr>
+            <tr><td>63</td><td>River Otter</td><td>Mustelidae</td><td>Carnivora</td><td>Social chuff</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Carnivora</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Carnivora</td><td>Loud scream</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Carnivora</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td>70</td><td>Raccoon</td><td>Procyonidae</td><td>Carnivora</td><td>Churring / chittering</td></tr>
+            <tr><td>71</td><td>Red Fox</td><td>Canidae</td><td>Carnivora</td><td>Sharp bark / scream</td></tr>
+            <tr><td>72</td><td>Opossum</td><td>Didelphidae</td><td>Didelphimorphia</td><td>Low hiss / click</td></tr>
+            <tr><td>73</td><td>Snowshoe Hare</td><td>Leporidae</td><td>Lagomorpha</td><td>Foot thump / squeal</td></tr>
+            <tr><td><strong>74</strong></td><td><strong>American Pika</strong></td><td><strong>Ochotonidae</strong></td><td><strong>Lagomorpha</strong></td><td><strong>High &ldquo;eenk&rdquo; bark</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Fourteen degrees in the mammalian zone (61&ndash;74). Thirteen mammalian entries. Eleven species. <strong>Four orders</strong> (Rodentia, Carnivora, Didelphimorphia, Lagomorpha). <strong>Eight families</strong>. <strong>Two infraclasses</strong> (Placentalia, Marsupialia). The Pika adds a new family and completes the North American Lagomorpha representation.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon family">F</div>
+            <div class="theory-content">
+              <h4>New Family: Ochotonidae (34th)</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>The pika family. One genus, ~30 species. Fifth new family in six degrees. Second Lagomorpha family after Leporidae (73).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon lagomorpha">L</div>
+            <div class="theory-content">
+              <h4>Back-to-Back Lagomorpha (73&ndash;74)</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Snowshoe Hare (73) + American Pika (74). Like back-to-back Anatidae (58&ndash;59). Both North American lagomorph families. Forest vs. alpine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bark">B</div>
+            <div class="theory-content">
+              <h4>&ldquo;Eenk&rdquo; Bark &mdash; 75th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Piercing alarm call. 3,000&ndash;10,000 Hz. Audible 200&ndash;300m. E=4. Highest-elevation sound in the engine. Alpine acoustic.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon climate">C</div>
+            <div class="theory-content">
+              <h4>Climate Change Indicator</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>First climate-driven conservation. Lethal at 25.5&deg;C. Populations retreating upslope. Escalator to extinction. Requires global action.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hay">H</div>
+            <div class="theory-content">
+              <h4>Hay-Gathering &mdash; Alpine Farming</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Cuts, dries, and stores vegetation. Haypiles 15&ndash;30 kg. Does not hibernate. Active year-round. Selective caching.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon elevation">E</div>
+            <div class="theory-content">
+              <h4>Highest Elevation Species</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Alpine talus, 1,500&ndash;3,000+ meters. Above treeline. The engine&rsquo;s vertical frontier.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon moon-link">P</div>
+            <div class="theory-content">
+              <h4>The Poor Moon Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both in gaps. Both small but resonant. Both at elevation. Both climate-sensitive. Four dimensions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-073: Snowshoe Hare</strong>
+            <p>Back-to-back Lagomorpha. Same order, different families. Forest vs. alpine. Low vs. high elevation. Large vs. tiny. Both active year-round. Neither hibernates.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-067: Short-tailed Weasel</strong>
+            <p>Predator-prey. The weasel hunts the Pika and can follow it into talus interstices. The predator that breaches the fortress.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>Subalpine forest neighbor. Ranges overlap at the forest-alpine transition. Predator-prey where habitats meet. Both cold-adapted.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-066: Fisher</strong>
+            <p>Conservation parallel. Fisher: trapping/fragmentation (local solutions). Pika: climate warming (global solutions). Different threats, similar vulnerability.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>Climate-threatened parallel. Both indicator species. Owl: old-growth health. Pika: alpine climate health. Both signal ecosystem degradation.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; American Pika (<em>Ochotona princeps</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;American pika.&rdquo;</li>
+          <li>[3] Smith, A.T. and M.L. Weston (1990). &ldquo;<em>Ochotona princeps</em>.&rdquo; <em>Mammalian Species</em> 352: 1&ndash;8.</li>
+          <li>[4] Beever, E.A. et al. (2003). &ldquo;Patterns of apparent extirpation among isolated populations of pikas.&rdquo; <em>J. Mammalogy</em> 84(1): 37&ndash;54.</li>
+          <li>[5] Beever, E.A. et al. (2011). &ldquo;Contemporary climate change alters the pace and drivers of extinction.&rdquo; <em>Global Change Biology</em> 17(6): 2054&ndash;2070.</li>
+          <li>[6] Conner, D.A. (1983). &ldquo;Seasonal changes in activity patterns and the adaptive value of haying in pikas.&rdquo; <em>Can. J. Zoology</em> 61(2): 411&ndash;416.</li>
+          <li>[7] Hafner, D.J. and A.T. Smith (2010). &ldquo;Revision of the subspecies of the American Pika.&rdquo; <em>J. Mammalogy</em> 91(2): 401&ndash;417.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">74&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Diurnal, vocal, visible. Loud relative to body size.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Ochotonidae</div>
+          <div class="stat-detail">NEW &mdash; 34th family. Pika family.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Lagomorpha</div>
+          <div class="stat-detail">Back-to-back with Hare (73).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elevation</div>
+          <div class="stat-value">1,500&ndash;3,000+ m</div>
+          <div class="stat-detail">Highest elevation in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">120&ndash;185 g</div>
+          <div class="stat-detail">Tennis ball with ears.</div>
+        </div>
+
+        <h3>Conservation</h3>
+        <div class="stat-card">
+          <div class="stat-label">Primary Threat</div>
+          <div class="stat-value">Climate Warming</div>
+          <div class="stat-detail">First climate-driven conservation in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Heat Tolerance</div>
+          <div class="stat-value">25.5&deg;C lethal</div>
+          <div class="stat-detail">Extreme heat sensitivity.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Winter Strategy</div>
+          <div class="stat-value">Haypile (no hibernation)</div>
+          <div class="stat-detail">15&ndash;30 kg cached vegetation.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Diurnal</div>
+          <div class="stat-detail">Breaks nocturnal mammal streak.</div>
+        </div>
+
+        <h3>Connections</h3>
+        <div class="stat-card">
+          <div class="stat-label">Snowshoe Hare (73)</div>
+          <div class="stat-value">Back-to-back Lagomorpha</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weasel (67)</div>
+          <div class="stat-value">Predator-prey</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Spotted Owl (4)</div>
+          <div class="stat-value">Climate parallel</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border); font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../073-snowshoe-hare/">&larr; 73&deg; Snowshoe Hare</a>
+        <a href="../075/">75&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 74&deg; &mdash; American Pika &mdash; The Sound of Puget Sound &mdash; v1.49.198
+        <br>
+        Alpine/subalpine talus slopes at 1,500&ndash;3,000+ meters &mdash; the <strong>highest elevation species</strong> in the engine.
+        <strong>High sharp &ldquo;eenk&rdquo; bark</strong> &mdash; 75th acoustic element &mdash; piercing alarm call, E=4, audible 200&ndash;300 meters.
+        <strong>NEW FAMILY Ochotonidae</strong> (34th). <strong>Back-to-back Lagomorpha</strong> with Snowshoe Hare (73).
+        <strong>CLIMATE CHANGE INDICATOR</strong> &mdash; the engine&rsquo;s first species whose conservation is primarily driven by warming.
+        Lethal at 25.5&deg;C. Populations retreating upslope. Low-elevation extinctions. The escalator to extinction.
+        <strong>Hay-gathering</strong> &mdash; cuts and dries vegetation for winter, haypiles 15&ndash;30 kg. Does NOT hibernate. Active year-round.
+        Thirteenth mammalian entry. Eleventh species. Four orders. Eight families. Two infraclasses.
+        The alpine sentinel sits on its boulder, body erect, and delivers the &ldquo;eenk&rdquo; that carries across the talus field.
+        Small body. Big bark. Vast sightlines. Rock echo. The canary in the alpine coal mine.
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
