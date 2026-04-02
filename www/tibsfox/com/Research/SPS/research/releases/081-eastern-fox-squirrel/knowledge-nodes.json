@@ -1,0 +1,144 @@
+{
+  "degree": 81,
+  "species": "Eastern Fox Squirrel",
+  "scientific_name": "Sciurus niger",
+  "slug": "081-eastern-fox-squirrel",
+  "sound_type": "bark + chatter -- loud sharp alarm bark ('quaa!') followed by rapid chatter of shorter notes, lower-pitched than Douglas Squirrel, less aggressive, scolding conversation rather than territorial assault, E=4, urban park habitat",
+  "energy": 4,
+  "ecosystem": "urban park. Urban parks, college campuses, suburban neighborhoods with mature deciduous and mixed trees. INTRODUCED to PNW -- native to eastern North America. Second urban species after Raccoon (70).",
+  "season": "year-round. Does NOT hibernate. Active all year. Caches nuts and acorns for winter use.",
+  "family": "Sciuridae",
+  "order": "Rodentia",
+  "csv_substitute": false,
+  "original_species": "Eastern Fox Squirrel",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [75, 76, 77, 78, 79, 80],
+    "partner_species": ["Yellow-bellied Marmot", "Hoary Marmot", "Olympic Marmot", "Townsend's Ground Squirrel", "Golden-mantled Ground Squirrel", "Douglas Squirrel"],
+    "pair_type": "Sciuridae SEPTET -- SEVENTH consecutive Sciuridae (75-76-77-78-79-80-81). BREAKS THE TIE with Mustelidae sextet (63-68). LONGEST family run in engine history: SEVEN. Three marmots (Marmota, 75-77) + four squirrels (Urocitellus 78, Callospermophilus 79, Tamiasciurus 80, Sciurus 81). Five genera. Seven habitats. Alpine to urban."
+  },
+  "coordinates": {
+    "lat": 47.66,
+    "lon": -122.30,
+    "description": "Reference for urban park habitat in the greater Seattle area. University of Washington campus and surrounding parks where Eastern Fox Squirrels are commonly observed."
+  },
+  "taxonomy_note": {
+    "description": "SEVENTH CONSECUTIVE SCIURIDAE (75-76-77-78-79-80-81). Sciuridae septet. BREAKS Mustelidae tie (63-68). LONGEST family run: SEVEN. NEW GENUS Sciurus -- fifth Sciuridae genus. Twentieth mammalian entry. Eighteenth mammalian species. Eighth Rodentia. Sciuridae's seventh entry. INTRODUCED to PNW.",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_infraclass": "Placentalia",
+    "new_infraclass": false,
+    "infraclass_note": "Placentalia continues.",
+    "current_family": "Sciuridae",
+    "new_family": false,
+    "family_count_in_engine": 34,
+    "sciuridae_count_in_engine": 7,
+    "name_etymology": "Sciurus from Greek skiouros ('squirrel,' from skia 'shadow' + oura 'tail'). niger Latin for 'black,' referring to the melanistic morph. Described by Linnaeus (1758).",
+    "genus_note": "Sciurus -- NEW GENUS in the engine. Fifth Sciuridae genus after Marmota (75-77), Urocitellus (78), Callospermophilus (79), Tamiasciurus (80). True squirrels -- the largest genus of tree squirrels.",
+    "order_note": "Rodentia -- eighth Rodentia in the engine.",
+    "class_note": "Mammalia -- twentieth mammalian entry. Eighteenth mammalian species.",
+    "family_position": "Sciuridae's SEVENTH entry at degree 81. Seventh consecutive (75-81). BREAKS the Mustelidae tie (63-68). LONGEST family run: SEVEN."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Approximately 1,500-6,000 Hz. Lower-pitched than Douglas Squirrel.",
+    "peak_energy_band_hz": "Approximately 2,000-5,000 Hz.",
+    "song_frequency_hz": "NOT a song. BARK + CHATTER. Alarm bark followed by rapid chatter.",
+    "song_duration_s": "Bark: 0.1-0.3 seconds. Chatter sequences: 1-5 seconds. Shorter than Douglas Squirrel's sustained rattle.",
+    "note_structure": "Two-part: initial sharp bark ('quaa!') followed by rapid chatter of shorter notes. Less sustained than Douglas Squirrel.",
+    "note_types": "Bark (sharp alarm), chatter (rapid sequence), screech (distress), purr (contentment).",
+    "phrase_structure": "Bark-chatter pattern. Less complex than Douglas Squirrel's sustained rattle.",
+    "timbre": "Lower, less aggressive than Douglas Squirrel. A deeper scolding conversation rather than a machine-gun assault.",
+    "amplitude": "E=4. Audible across urban parks. Less piercing than Douglas Squirrel at E=5.",
+    "tempo": "Moderate. Bark-pause-chatter pattern rather than continuous stream.",
+    "context": "ALARM and TERRITORIAL. Less aggressively territorial than Douglas Squirrel. More generalized alarm response.",
+    "regional_variation": "Minimal variation in introduced PNW populations.",
+    "key_property": "BARK + CHATTER -- the 82nd acoustic element. Sharp bark followed by rapid chatter. 1,500-6,000 Hz. E=4. Lower-pitched. Less aggressive. Urban park habitat."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Largest tree squirrel in North America. 450-1,000 g (1-2.2 lbs). 45-70 cm total length. Rusty-brown to orange-brown above, pale to orange belly. Variable coloration including melanistic (black) morphs. Much larger than native Douglas Squirrel.",
+    "diagnostic_mark": "For degree 81: (1) LARGE SIZE -- noticeably larger than Douglas Squirrel, roughly three times the mass. (2) RUSTY-BROWN/ORANGE pelage -- warmer tones than Douglas Squirrel. (3) URBAN PARK habitat -- on the ground in parks, not in conifer canopy. (4) BUSHY TAIL -- large, prominent. (5) BARK + CHATTER vocalization -- deeper, less aggressive than Douglas Squirrel.",
+    "fur_detail": "BODY: Rusty-brown to orange-brown above. Highly variable -- ranges from pale buff to deep russet to melanistic black. BELLY: Pale to orange. TAIL: Very bushy, prominent, often with orange or rust tones.",
+    "dental_detail": "Rodent dentition. Generalist. Powerful jaws for cracking hard-shelled nuts.",
+    "field_id": "In urban parks: a LARGE squirrel, noticeably bigger than native squirrels, with warm rusty-brown or orange tones, running on the ground or climbing deciduous trees. If the squirrel is big and in a city park, it is likely an Eastern Fox Squirrel."
+  },
+  "nodes": [
+    {
+      "id": "sciuridae-septet",
+      "type": "pattern",
+      "title": "Sciuridae Septet (75-81) -- BREAKS the Mustelidae Tie! LONGEST Family Run!",
+      "description": "Seven consecutive Sciuridae. SURPASSES Mustelidae (63-68). LONGEST family run in engine history: SEVEN. Three marmots + four squirrels. Five genera. Seven habitats. Alpine to urban.",
+      "connections": ["bark-chatter", "urban-park", "introduced-species"]
+    },
+    {
+      "id": "bark-chatter",
+      "type": "concept",
+      "title": "Bark + Chatter -- 82nd Acoustic Element",
+      "description": "Sharp alarm bark followed by rapid chatter. 1,500-6,000 Hz. E=4. Lower-pitched than Douglas Squirrel. Less aggressive. Scolding conversation rather than territorial assault.",
+      "connections": ["sciuridae-septet", "urban-park"]
+    },
+    {
+      "id": "urban-park",
+      "type": "concept",
+      "title": "Urban Park Habitat -- Second Urban Species",
+      "description": "Urban parks, campuses, suburban neighborhoods. Second urban species after Raccoon (70). Conifer canopy (80) to urban park (81). The habitat shift reflects the native-introduced dynamic.",
+      "connections": ["sciuridae-septet", "introduced-species", "bark-chatter"]
+    },
+    {
+      "id": "introduced-species",
+      "type": "concept",
+      "title": "Introduced to PNW -- Second Introduced Species",
+      "description": "Native to eastern North America. Introduced to PNW urban areas. Second introduced species after Opossum (72). Competes with native Douglas Squirrel.",
+      "connections": ["sciuridae-septet", "urban-park"]
+    },
+    {
+      "id": "largest-tree-squirrel",
+      "type": "concept",
+      "title": "Largest Tree Squirrel in North America",
+      "description": "450-1,000 g. Three times the mass of Douglas Squirrel. The largest tree squirrel on the continent. Size advantage in competition with natives.",
+      "connections": ["urban-park", "introduced-species"]
+    },
+    {
+      "id": "bareilles-parallel",
+      "type": "pattern",
+      "title": "The Sara Bareilles Parallel",
+      "description": "Both E=4. Both outsiders who arrived (introduced/Eureka CA). Both larger than life (largest squirrel/Broadway voice). Both thrive in urban/commercial spaces (parks/major labels).",
+      "connections": ["bark-chatter", "urban-park"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-First Consecutive Original CSV",
+      "description": "Twenty-one consecutive original CSV species. No substitution. CSV reliability continues.",
+      "connections": ["sciuridae-septet"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-080",
+      "species": "Douglas Squirrel",
+      "relationship": "CONSECUTIVE SCIURIDAE. Native (80) vs. introduced (81). Conifer canopy vs. urban park. Chatter (E=5) vs. bark+chatter (E=4). The native-introduced contrast within the same family run."
+    },
+    {
+      "target": "SPS-070",
+      "species": "Raccoon",
+      "relationship": "URBAN HABITAT SHARED. Both urban-adapted mammals. Raccoon was the first urban species (70). Fox Squirrel is the second (81). Both generalist feeders in human-modified environments."
+    },
+    {
+      "target": "SPS-059",
+      "species": "Mallard",
+      "relationship": "URBAN HABITAT PARALLEL. Mallard thrives in urban waterways. Fox Squirrel thrives in urban parks. Both common, visible, and successful in human-modified habitats."
+    },
+    {
+      "target": "SPS-072",
+      "species": "Opossum",
+      "relationship": "INTRODUCED SPECIES PARALLEL. Both INTRODUCED to the PNW. Opossum (72) from eastern/southern North America. Fox Squirrel (81) from eastern North America. Two introductions from the same region."
+    },
+    {
+      "target": "SPS-071",
+      "species": "Red Fox",
+      "relationship": "URBAN PREDATOR-PREY. Red Fox (71) is an urban predator. Eastern Fox Squirrel (81) is urban prey. Both share urban park habitat. The urban food web."
+    }
+  ]
+}
