@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 94&deg; &mdash; Stonefly Hatch &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Stream indicator card */
+    .stream-card {
+      background: linear-gradient(135deg, #01579B 0%, #0277BD 30%, #0288D1 60%, #039BE5 100%);
+      border: 3px solid #01579B;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E1F5FE;
+    }
+    .stream-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #B3E5FC;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .stream-card p { color: #E1F5FE; }
+    .stream-card strong { color: #B3E5FC; }
+
+    /* Wing rustle card */
+    .rustle-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 50%, #5D4037 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .rustle-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .rustle-card p { color: #EFEBE9; }
+    .rustle-card strong { color: #D7CCC8; }
+
+    /* Plecoptera card */
+    .plecoptera-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .plecoptera-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .plecoptera-card p { color: #E8F5E9; }
+    .plecoptera-card strong { color: #C8E6C9; }
+
+    /* Erik Blood contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .contrast-card p { color: #E0F2F1; }
+    .contrast-card strong { color: #B2DFDB; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.stream { background: #01579B; }
+    .theory-icon.rustle { background: #3E2723; }
+    .theory-icon.plecoptera { background: #1B5E20; }
+    .theory-icon.aquatic { background: #006064; }
+    .theory-icon.return { background: #0277BD; }
+    .theory-icon.contrast { background: #004D40; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">94&deg;</div>
+      <div class="release-title-block">
+        <h2>Stonefly Hatch</h2>
+        <div class="scientific">Perlidae (family) &mdash; Order Plecoptera</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      wing rustle on stream surface &mdash; NEW FAMILY Perlidae (44th). NEW ORDER Plecoptera (6th insect order). Stream indicator &mdash; presence confirms clean, cold, well-oxygenated water. First aquatic insect. Returns engine to streams since degree 57. Quietest insect sound. E=2. Cold stream habitat. Thirty-fourth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Stream Indicator Card -->
+        <div class="stream-card">
+          <h3>Stream Indicator &mdash; Clean Cold Well-Oxygenated Water</h3>
+          <p>The stonefly is one of the most reliable <strong>stream health indicators</strong> in freshwater ecology. <strong>If stoneflies are present, the stream is healthy.</strong> Stonefly nymphs require clean water (low pollution), cold water (below 20&deg;C), high dissolved oxygen, and rocky substrate. Their presence IS the data &mdash; a living diagnostic confirming that this stream is healthy [1, 2, 3].</p>
+        </div>
+
+        <!-- Wing Rustle Card -->
+        <div class="rustle-card">
+          <h3>Wing Rustle on Stream Surface &mdash; 95th Acoustic Element</h3>
+          <p>The <strong>quietest insect sound</strong> in the engine. A barely audible rustle of membranous wings drying and flexing on bankside rocks during emergence [1, 2]. Not a buzz, not a chirp, not a call &mdash; a <strong>physical sound</strong> of wing membrane on wet rock. <strong>E=2</strong>. You hear it only when close and attentive. Maximum energy drop from degree 93 (E=5 to E=2).</p>
+        </div>
+
+        <!-- Plecoptera Card -->
+        <div class="plecoptera-card">
+          <h3>NEW ORDER Plecoptera &mdash; 6th Insect Order / Perlidae &mdash; 44th Family</h3>
+          <p><strong>Plecoptera</strong> enters as the sixth insect order &mdash; and the <strong>first with an aquatic life stage</strong>. Stonefly nymphs live IN the stream for 1-4 years, under rocks in fast-flowing riffles, before crawling out to emerge as short-lived adults. <strong>Perlidae</strong> (golden stoneflies) are the largest PNW stoneflies &mdash; predatory nymphs that hunt other aquatic invertebrates [1, 2].</p>
+        </div>
+
+        <!-- Erik Blood Contrast Card -->
+        <div class="contrast-card">
+          <h3>The Erik Blood Contrast</h3>
+          <p>Degree 94 pairs the stonefly with <strong>Erik Blood</strong> in Part A &mdash; Electronic/Experimental, E=4. <strong>Technology vs nature.</strong> The producer&rsquo;s palette (full studio vocabulary, E=4) vs the wing rustle (minimal, natural, E=2). Both connect: Blood connects genre scenes through production; the stonefly <strong>connects stream health to insect presence</strong>. The cross-genre bridge and the stream indicator.</p>
+        </div>
+
+        <h2>The Sound: Wing Rustle on Stream Surface (95th Acoustic Element)</h2>
+        <p><strong>The event:</strong> Stonefly nymphs crawl from the stream onto bankside rocks, logs, or vegetation. The adult splits the nymphal exoskeleton and emerges, drying its wings [1, 2]. The wings flex and flutter &mdash; a faint, papery rustle against rock and water surface. The sound is barely audible, often masked by the stream itself.</p>
+        <p><strong>Why E=2:</strong> Individual emergence. Barely audible. Masked by stream. Short-lived. The quietest insect sound in the engine. Maximum energy drop from the hornet&rsquo;s E=5 at degree 93.</p>
+
+        <h2>Taxonomy: Perlidae (NEW) / Plecoptera (NEW)</h2>
+        <p><strong>Classification:</strong> Class <strong>Insecta</strong>. Order <strong>Plecoptera</strong> &mdash; NEW ORDER (6th insect order). Family <strong>Perlidae</strong> &mdash; NEW FAMILY (44th) [1, 2]. Golden stoneflies. First insect in the engine with an obligate aquatic nymphal stage.</p>
+        <p><strong>PNW species:</strong> <em>Calineuria californica</em>, <em>Hesperoperla pacifica</em>, and other large predatory stoneflies common in Cascade and Olympic mountain streams.</p>
+
+        <h2>Ecology: The Stream Indicator</h2>
+        <p><strong>Habitat:</strong> Cold mountain streams with rocky substrate and fast-flowing riffles. Forested riparian zones provide shade (maintaining cold temperature) and leaf litter input [1, 2].</p>
+        <p><strong>Life cycle:</strong> Nymphs live 1-4 years in the stream under rocks. Predatory &mdash; hunting other aquatic invertebrates. Adults emerge in late spring through summer. Short-lived (days to weeks). Males drum abdomens on substrate to attract females (vibrational signal, not airborne).</p>
+        <p><strong>Return to streams:</strong> First stream species since Belted Kingfisher at degree 57. <strong>37-degree gap closed.</strong> Three stream species: American Dipper (52), Belted Kingfisher (57), Stonefly (94). The stonefly is the first species that actually LIVES in the stream.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon rustle">W</div>
+            <div class="theory-content">
+              <h4>Wing Rustle on Stream Surface &mdash; 95th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Barely audible wing flutter. E=2. Quietest insect. Physical sound, not a signal. Stream surface.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plecoptera">P</div>
+            <div class="theory-content">
+              <h4>Perlidae (44th Family) / Plecoptera (6th Insect Order)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>NEW FAMILY. NEW ORDER. First stoneflies. First insect with aquatic life stage. Six insect orders.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon stream">S</div>
+            <div class="theory-content">
+              <h4>Stream Indicator Species</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Presence = clean, cold, well-oxygenated water. The stonefly's presence IS the data. Diagnostic species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon return">R</div>
+            <div class="theory-content">
+              <h4>Return to Streams (First Since Degree 57)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>37-degree gap closed. First species that lives IN the stream. Three stream species: 52, 57, 94.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon aquatic">A</div>
+            <div class="theory-content">
+              <h4>First Aquatic Insect</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>All prior insects terrestrial/aerial. Stonefly nymphs are aquatic. The insect era enters the water.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">E</div>
+            <div class="theory-content">
+              <h4>The Erik Blood Contrast</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Producer's palette (E=4) vs wing rustle (E=2). Technology vs nature. Both connect. Bridge and indicator.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-057: Belted Kingfisher</strong>
+            <p>Stream shared! Both stream species. Kingfisher watches from above (57); stonefly lives IN the stream (94). 37-degree gap closed. The rattle announces; the rustle barely whispers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-052: American Dipper</strong>
+            <p>Stream connection. Dipper forages in fast mountain streams where stonefly nymphs live. Predator-prey. Both stream health indicators. Both require clean cold water.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-091: Mosquito</strong>
+            <p>Shared E=2. Both quiet individual insect sounds. Mosquito whines in air; stonefly rustles on water surface. Aerial vs aquatic. Quietest insect pair.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-087: Cricket</strong>
+            <p>Insect era context. Eight insect entries (87-94). The stonefly breaks the terrestrial/aerial pattern -- first aquatic insect. The insect era enters the water.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>Old-growth stream neighbor. Marten in old-growth forest near streams (65). Stonefly in the streams (94). Both require intact forested riparian zones. Canopy shades streams cold.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Plecoptera,&rdquo; &ldquo;Perlidae,&rdquo; &ldquo;Stonefly.&rdquo;</li>
+          <li>[2] Merritt, R.W. and Cummins, K.W. (2008). <em>An Introduction to the Aquatic Insects of North America.</em> Kendall/Hunt.</li>
+          <li>[3] Barbour, M.T. et al. (1999). <em>Rapid Bioassessment Protocols for Use in Streams and Wadeable Rivers.</em> EPA 841-B-99-002.</li>
+          <li>[4] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">94&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 2</div>
+          <div class="stat-detail">Barely audible. Quietest insect.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Perlidae</div>
+          <div class="stat-detail">NEW (44th). First stoneflies.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Plecoptera</div>
+          <div class="stat-detail">NEW (6th insect order).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Insecta</div>
+          <div class="stat-detail">First aquatic insect.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Cold stream</div>
+          <div class="stat-detail">Clean, oxygenated, rocky.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Wing rustle</div>
+          <div class="stat-detail">Membranous. On stream surface.</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Indicator</div>
+          <div class="stat-value">Stream health</div>
+          <div class="stat-detail">Presence = clean water.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nymphal Stage</div>
+          <div class="stat-value">1-4 years</div>
+          <div class="stat-detail">Aquatic. Under rocks. Predatory.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Adult Stage</div>
+          <div class="stat-value">Days to weeks</div>
+          <div class="stat-detail">Short-lived. Weak flight.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">44th (NEW)</div>
+          <div class="stat-detail">Perlidae enters.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">6th (NEW)</div>
+          <div class="stat-detail">Plecoptera. First aquatic.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Stream Gap</div>
+          <div class="stat-value">37 degrees</div>
+          <div class="stat-detail">Since Kingfisher (57). Closed.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (34th)</div>
+          <div class="stat-detail">Thirty-fourth consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
