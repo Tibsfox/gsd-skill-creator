@@ -1,0 +1,60 @@
+/* AVI — Wings of the Pacific Northwest
+   Project palette and overrides — base layout from ../../brand.css */
+
+:root {
+  /* --- Project palette --- */
+  --sky: #2c5282;
+  --forest: #276749;
+  --canopy: #38a169;
+  --wing: #4299e1;
+  --talon: #744210;
+  --cream: #faf9f6;
+  --mist: #e2e8f0;
+  --water: #2b6cb0;
+  --raptor: #c05621;
+  --dawn: #ed8936;
+  --snow: #ebf4ff;
+  --text: #2d3748;
+  --text-light: #718096;
+  /* --- Semantic overrides for brand.css --- */
+  --page-bg: var(--cream);
+  --page-text: var(--text);
+  --page-text-light: var(--text-light);
+  --link: var(--water);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* --- Header --- */
+header {
+  background: linear-gradient(135deg, var(--sky) 0%, var(--forest) 60%, var(--canopy) 100%);
+  border-bottom: 4px solid var(--wing);
+}
+
+/* --- Color overrides --- */
+h2 { color: var(--sky); }
+h3 { color: var(--talon); }
+th { background: var(--sky); }
+tr:nth-child(even) { background: rgba(44, 82, 130, 0.06); }
+tr:hover { background: rgba(44, 82, 130, 0.12); }
+blockquote { border-left-color: var(--wing); background: rgba(66, 153, 225, 0.05); }
+code { background: var(--mist); }
+pre { background: #2d3748; color: #e2e8f0; }
+.stat-value { color: var(--sky); }
+
+/* --- Tags --- */
+.tag-resident { background: #e8f5e9; color: #2e7d32; }
+.tag-migratory { background: #e3f2fd; color: #1565c0; }
+.tag-pelagic { background: #e0f2f1; color: #00695c; }
+.tag-community { background: #fff3e0; color: #e65100; }
+.tag-evolution { background: #f3e5f5; color: #7b1fa2; }
+.tag-networks { background: #fce4ec; color: #c62828; }
+.tag-cultural { background: #fff8e1; color: #f57f17; }
+.tag-pass { background: #e8f5e9; color: #2e7d32; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
