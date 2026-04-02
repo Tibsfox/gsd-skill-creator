@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 107&deg; &mdash; Acorn Woodpecker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--puget-teal), #1A1A2E);
+      color: #C5CAE9;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(26, 26, 46, 0.4), 0 0 24px rgba(0, 105, 92, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Picidae card */
+    .picidae-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 3px solid #B71C1C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFCDD2;
+    }
+    .picidae-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFEBEE;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .picidae-card p { color: #FFCDD2; }
+    .picidae-card strong { color: #FFEBEE; }
+
+    /* Granary card */
+    .granary-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #795548 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .granary-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .granary-card p { color: #EFEBE9; }
+    .granary-card strong { color: #BCAAA4; }
+
+    /* Colonial card */
+    .colonial-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .colonial-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .colonial-card p { color: #E8F5E9; }
+    .colonial-card strong { color: #C8E6C9; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.picidae { background: #B71C1C; }
+    .theory-icon.call { background: #0D47A1; }
+    .theory-icon.granary { background: #4E342E; }
+    .theory-icon.colonial { background: #1B5E20; }
+    .theory-icon.oak { background: #F57F17; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #6A1B9A; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">107&deg;</div>
+      <div class="release-title-block">
+        <h2>Acorn Woodpecker</h2>
+        <div class="scientific"><em>Melanerpes formicivorus</em> (Picidae) &mdash; PICIDAE RETURNS!</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      waka-waka-waka call &mdash; colonial, stores acorns in &ldquo;granary trees&rdquo; (drills thousands of holes). <strong>PICIDAE RETURNS</strong> &mdash; first woodpecker since Pileated Woodpecker (degree 54) and Red-breasted Sapsucker (degree 54). After the Corvidae septet (100&ndash;106), the engine shifts to woodpeckers. Oak savanna habitat. E=5. Forty-seventh consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Picidae Card -->
+        <div class="picidae-card">
+          <h3>Picidae Returns &mdash; First Woodpecker Since Degree 54</h3>
+          <p>
+            <strong>PICIDAE RETURNS!</strong> The Acorn Woodpecker is the first woodpecker
+            in the engine since degree 54 &mdash; a <strong>53-degree gap</strong>. The
+            Picidae family was previously represented by the <strong>Northern Flicker</strong>
+            (degrees 21&ndash;22), the <strong>Red-breasted Sapsucker</strong> (degree 54),
+            and the <strong>Pileated Woodpecker</strong> (degree 54). After the
+            <strong>Corvidae septet</strong> (100&ndash;106), the engine shifts from corvids
+            to woodpeckers. A new family era begins.
+          </p>
+        </div>
+
+        <!-- Granary Card -->
+        <div class="granary-card">
+          <h3>Granary Trees &mdash; Thousands of Drilled Holes</h3>
+          <p>
+            The Acorn Woodpecker is famous for its <strong>granary trees</strong> &mdash;
+            trees (typically oaks, pines, or utility poles) drilled with
+            <strong>thousands of individually sized holes</strong>, each storing a single acorn.
+            A single granary tree may hold <strong>50,000+ acorns</strong>. The granary is
+            <strong>community infrastructure</strong> &mdash; maintained by the entire colonial
+            group across generations. The holes are custom-drilled: each acorn is fitted tightly
+            to prevent theft by other animals. The granary is <strong>architecture at scale</strong>.
+          </p>
+        </div>
+
+        <!-- Colonial Card -->
+        <div class="colonial-card">
+          <h3>Colonial Living &mdash; Highly Social Woodpecker</h3>
+          <p>
+            The Acorn Woodpecker lives in <strong>colonial groups</strong> of up to
+            <strong>15 or more individuals</strong> &mdash; one of the most social woodpeckers
+            in the world. The colony cooperatively breeds, maintains the granary,
+            defends territory, and raises young communally. This <strong>cooperative breeding</strong>
+            system is rare among woodpeckers and connects to the social intelligence of
+            corvids (degrees 100&ndash;106). The colony is a <strong>superorganism</strong>.
+          </p>
+        </div>
+
+        <h2>Waka-Waka-Waka Call</h2>
+        <p>
+          The Acorn Woodpecker&rsquo;s primary vocalization is a loud, raucous
+          <strong>waka-waka-waka</strong> &mdash; a rapid, laughing series of nasal notes
+          that carries across oak savanna. The call is social and frequent &mdash;
+          the colony communicates constantly. The waka-waka-waka is diagnostic:
+          no other PNW woodpecker produces this rapid, clownish, laughing call.
+        </p>
+        <p>
+          E=5 &mdash; high energy. The Acorn Woodpecker is <strong>loud, gregarious,
+          and persistent</strong>. Colonial groups calling simultaneously create
+          a cacophony of waka-waka-waka that fills the oak woodland.
+          The acoustic character is entirely different from the Pileated
+          Woodpecker&rsquo;s wild laughing (degree 54) &mdash; the Acorn Woodpecker
+          is faster, more nasal, and more clownish.
+        </p>
+
+        <h2>Oak Savanna Habitat</h2>
+        <p>
+          The Acorn Woodpecker is a bird of <strong>oak savanna</strong> and
+          oak woodland &mdash; open, park-like landscapes dominated by oaks.
+          In the PNW, found in <strong>oak habitats of southern Oregon</strong>
+          and at the northern edge of range. The oak savanna provides both
+          the acorn food source and the granary-tree substrate. The habitat
+          is specific: without oaks, there are no acorns, and without acorns,
+          there is no Acorn Woodpecker.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-054 Pileated Woodpecker (Picidae returns!)</strong>
+            <p>Picidae family returns after a 53-degree gap. Pileated in old-growth forest (E=5); Acorn in oak savanna (E=5). Both E=5 but entirely different habitats and acoustic characters. The Pileated is solitary; the Acorn is colonial.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022 Northern Flicker (Picidae)</strong>
+            <p>Picidae family. The Flicker was the engine's first woodpecker (degrees 21-22). The Acorn Woodpecker is the fourth Picidae species. Different feeding strategies: Flicker feeds on ground (ants); Acorn stores in trees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-100 Common Raven (intelligence)</strong>
+            <p>Intelligence parallel. The Raven is among the most intelligent birds. The Acorn Woodpecker's colonial social system, granary maintenance, and cooperative breeding demonstrate high social intelligence. Corvid intelligence (100) meets woodpecker social complexity (107).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-075 Yellow-bellied Marmot (colonial parallel)</strong>
+            <p>Colonial/social parallel. The marmot lives in colonies with shared burrow systems. The Acorn Woodpecker lives in colonies with shared granary trees. Two colonial species, two different taxa, same community-infrastructure strategy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-105 Clark&rsquo;s Nutcracker (food caching parallel)</strong>
+            <p>Food caching parallel. The nutcracker caches pine seeds (thousands of caches, spatial memory). The Acorn Woodpecker caches acorns (thousands of holes in granary trees). Two caching strategies: dispersed (nutcracker) vs concentrated (woodpecker).</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon call">W</div>
+            <div class="theory-content">
+              <h4>Waka-Waka-Waka &mdash; The Colonial Woodpecker</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Loud, raucous, rapid laughing call. E=5. Social and frequent. Colonial groups create a cacophony across oak savanna. Diagnostic -- no other PNW woodpecker sounds like this.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon picidae">P</div>
+            <div class="theory-content">
+              <h4>Picidae Returns &mdash; First Woodpecker Since Degree 54</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>53-degree gap since the last woodpecker. After the Corvidae septet (100-106), the engine shifts to Picidae. Fourth Picidae species (Flicker 21-22, Sapsucker 54, Pileated 54, Acorn 107).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon granary">G</div>
+            <div class="theory-content">
+              <h4>Granary Trees &mdash; Thousands of Drilled Holes</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Community infrastructure. Thousands of custom-drilled holes, each storing one acorn. 50,000+ acorns per granary. Maintained across generations. Architecture at scale.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon colonial">C</div>
+            <div class="theory-content">
+              <h4>Colonial Living &mdash; Cooperative Breeding</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Groups of 15+ individuals. Cooperative breeding, communal nest defense, shared granary maintenance. One of the most social woodpeckers in the world. The colony as superorganism.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon oak">O</div>
+            <div class="theory-content">
+              <h4>Oak Savanna &mdash; Acorn Dependent</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Open oak woodland and savanna. Southern Oregon at northern range edge. Without oaks, no acorns; without acorns, no Acorn Woodpecker. Habitat-obligate.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Acorn Woodpecker</div>
+          <div class="stat-detail"><em>Melanerpes formicivorus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">Returns after 53-degree gap</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">waka-waka-waka</div>
+          <div class="stat-detail">raucous laughing call</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">High &mdash; loud, gregarious, persistent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Oak savanna</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Trait</div>
+          <div class="stat-value">Granary trees</div>
+          <div class="stat-detail">Thousands of acorn-storage holes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV Status</div>
+          <div class="stat-value">Original</div>
+          <div class="stat-detail">47th consecutive</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
