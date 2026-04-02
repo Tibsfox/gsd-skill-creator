@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 77&deg; &mdash; Olympic Marmot &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Endemic landmark card */
+    .endemic-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #43A047 100%);
+      border: 3px solid #1B5E20;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .endemic-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #C8E6C9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .endemic-card p {
+      color: #E8F5E9;
+    }
+    .endemic-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Sciuridae trio card */
+    .trio-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .trio-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .trio-card p {
+      color: #EFEBE9;
+    }
+    .trio-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Musical whistle card */
+    .whistle-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #42A5F5 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .whistle-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .whistle-card p {
+      color: #E3F2FD;
+    }
+    .whistle-card strong {
+      color: #90CAF9;
+    }
+
+    /* Mree parallel card */
+    .mree-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .mree-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .mree-card p {
+      color: #E8EAF6;
+    }
+    .mree-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.endemic { background: #1B5E20; }
+    .theory-icon.trio { background: #4E342E; }
+    .theory-icon.whistle { background: #1565C0; }
+    .theory-icon.alpine { background: #2E7D32; }
+    .theory-icon.owl-link { background: #37474F; }
+    .theory-icon.wren-link { background: #455A64; }
+    .theory-icon.mree-link { background: #283593; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">77&deg;</div>
+      <div class="release-title-block">
+        <h2>Olympic Marmot</h2>
+        <div class="scientific">Marmota olympus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      musical multi-note whistle &mdash; THIRD CONSECUTIVE SCIURIDAE (75&ndash;76&ndash;77), the Sciuridae TRIO (marmot trio!), ENDEMIC to the Olympic Peninsula &mdash; found NOWHERE else on Earth, rarest and most geographically restricted species in the engine, E=4, Olympic alpine, seventeenth consecutive original CSV
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Endemic Landmark Card -->
+        <div class="endemic-card">
+          <h3>Endemic &mdash; Found Nowhere Else on Earth</h3>
+          <p>The Olympic Marmot is <strong>ENDEMIC to the Olympic Peninsula</strong> &mdash; it exists <strong>nowhere else on the planet</strong>. This is the <strong>most geographically restricted species</strong> in the entire engine. Found only in the alpine and subalpine meadows of the Olympic Mountains, isolated by the Puget Sound lowlands. <strong>E=4</strong> &mdash; a musical, multi-note whistle distinct from the single-note calls of its marmot cousins. The rarest marmot. The Olympic treasure.</p>
+        </div>
+
+        <!-- Sciuridae Trio Card -->
+        <div class="trio-card">
+          <h3>Third Consecutive Sciuridae (75&ndash;76&ndash;77) &mdash; The Marmot Trio!</h3>
+          <p>Three consecutive marmots: <strong>Yellow-bellied</strong> (75), <strong>Hoary</strong> (76), <strong>Olympic</strong> (77). Three species of genus <em>Marmota</em> in three degrees &mdash; the <strong>Sciuridae trio</strong>. Unprecedented: no family has appeared three times consecutively before. The marmot pair (75&ndash;76) extends to a <strong>marmot trio</strong>. Three PNW marmots. Three elevational niches. Three whistle types: chirp, penetrating whistle, <strong>musical multi-note whistle</strong>.</p>
+        </div>
+
+        <!-- Musical Whistle Card -->
+        <div class="whistle-card">
+          <h3>Musical Multi-Note Whistle &mdash; 78th Acoustic Element</h3>
+          <p>The Olympic Marmot produces a <strong>musical, multi-note whistle</strong> &mdash; a series of ascending or descending notes that sounds more like a melody than an alarm. Unlike the Hoary Marmot&rsquo;s single piercing whistle (76, E=5) or the Yellow-bellied Marmot&rsquo;s sharp chirp (75, E=4), the Olympic Marmot&rsquo;s call has <strong>musical phrasing</strong>. Multiple notes. Tonal variation. <strong>E=4</strong> &mdash; lower energy than the Hoary but more melodically complex.</p>
+        </div>
+
+        <!-- Mree Parallel Card -->
+        <div class="mree-card">
+          <h3>The Mree Parallel</h3>
+          <p>Degree 77 pairs the Olympic Marmot with <strong>Mree</strong> in Part A &mdash; Folk/Pop, E=2, Taiwanese-American. Both <strong>create layered, melodic sounds</strong> &mdash; Mree&rsquo;s ethereal vocal layering, the marmot&rsquo;s multi-note whistle melody. Both are <strong>geographically specific</strong> &mdash; Mree in Seattle&rsquo;s bedroom pop scene, the Olympic Marmot found nowhere else on Earth. Both <strong>quiet relative to peers</strong> &mdash; E=2 vs. E=4, while Hoary Marmot is E=5.</p>
+        </div>
+
+        <h2>The Sound: Musical Multi-Note Whistle (78th Acoustic Element)</h2>
+        <p><strong>The whistle:</strong> A series of ascending or descending notes &mdash; typically 3&ndash;5 distinct tonal steps, approximately 1,500&ndash;6,000 Hz, with musical phrasing that distinguishes it from all other marmot calls. Duration 1.0&ndash;2.5 seconds for a full phrase. The call has a melodic, almost songlike quality [1, 2, 3].</p>
+        <p><strong>Why E=4:</strong> Lower volume than the Hoary Marmot (E=5) but more melodically complex. (1) Multi-note structure &mdash; musical phrasing. (2) Moderate range &mdash; audible at 100&ndash;300 meters. (3) Social colony context &mdash; used for colony communication. (4) Endemic rarity &mdash; heard only in the Olympic Mountains.</p>
+        <p><strong>Marmot trio contrast:</strong> Yellow-bellied (75): sharp chirp, E=4, single note. Hoary (76): penetrating whistle, E=5, single note. Olympic (77): musical multi-note whistle, E=4, <strong>multiple notes</strong>. Three marmots, three acoustic signatures.</p>
+
+        <h2>Taxonomy: <em>Marmota olympus</em></h2>
+        <p><strong>Etymology:</strong> <em>Marmota</em> from French <em>marmotte</em>, ultimately from Latin <em>murem montis</em> (&ldquo;mouse of the mountain&rdquo;). <em>olympus</em> from the Olympic Mountains where the species is endemic. Named by Merriam (1898). The mountain mouse of Olympus [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Rodentia</strong>. Family <strong>Sciuridae</strong> &mdash; THIRD consecutive Sciuridae (75&ndash;76&ndash;77). Genus <em>Marmota</em> &mdash; the THIRD of three PNW marmots. All three PNW marmots now in the engine: <em>M. flaviventris</em> (75), <em>M. caligata</em> (76), <em>M. olympus</em> (77) [1, 2, 3].</p>
+
+        <h2>Physical Description: The Olympic Endemic</h2>
+        <p><strong>Size:</strong> 560&ndash;680 mm total, 3.5&ndash;6 kg &mdash; intermediate between Yellow-bellied (2&ndash;5 kg) and Hoary (5&ndash;7 kg). Brown pelage with lighter belly and face patches. Shorter tail than Hoary Marmot [1, 2, 3].</p>
+        <p><strong>Pelage:</strong> Brown to tawny-brown body, distinct from the silver-gray Hoary and the yellowish-brown Yellow-bellied. White patches around muzzle. Darker extremities but less distinct &ldquo;boots&rdquo; than the Hoary Marmot.</p>
+
+        <h2>Ecology: The Island on the Mountain</h2>
+        <p><strong>Habitat:</strong> Alpine and subalpine meadows of the Olympic Mountains, 1,500&ndash;2,000 meters. ONLY found in the Olympics &mdash; isolated by the Puget Sound lowlands and surrounding forests. A sky island species [1, 2, 3].</p>
+        <p><strong>Social:</strong> Highly social, colonial. Family groups of 5&ndash;15. Extended family bonds &mdash; Olympic Marmots are among the most social marmots, with multi-generational family groups. Playful greeting behaviors. Nose-to-nose contact.</p>
+        <p><strong>Diet:</strong> Alpine wildflowers, grasses, sedges. Lupine and aster are preferred.</p>
+        <p><strong>Hibernation:</strong> 6&ndash;8 months (September&ndash;May). Family groups hibernate together &mdash; communal hibernation, unlike the more solitary hibernation of Yellow-bellied Marmots.</p>
+        <p><strong>Predators:</strong> Coyote (primary), Golden Eagle, Bobcat. The Olympic Marmot has fewer predators than mainland marmots due to the peninsula&rsquo;s isolation &mdash; no wolverines, no grizzly bears.</p>
+
+        <h2>The Mammalian Era Continues: Degree 77</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Order</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>63</td><td>River Otter</td><td>Mustelidae</td><td>Carnivora</td><td>Social chuff</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Carnivora</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Carnivora</td><td>Loud scream</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Carnivora</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td>70</td><td>Raccoon</td><td>Procyonidae</td><td>Carnivora</td><td>Churring / chittering</td></tr>
+            <tr><td>71</td><td>Red Fox</td><td>Canidae</td><td>Carnivora</td><td>Sharp bark / scream</td></tr>
+            <tr><td>72</td><td>Opossum</td><td>Didelphidae</td><td>Didelphimorphia</td><td>Low hiss / click</td></tr>
+            <tr><td>73</td><td>Snowshoe Hare</td><td>Leporidae</td><td>Lagomorpha</td><td>Foot thump / squeal</td></tr>
+            <tr><td>74</td><td>American Pika</td><td>Ochotonidae</td><td>Lagomorpha</td><td>High &ldquo;eenk&rdquo; bark</td></tr>
+            <tr><td>75</td><td>Yellow-bellied Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Sharp chirp</td></tr>
+            <tr><td>76</td><td>Hoary Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Loud whistle</td></tr>
+            <tr><td><strong>77</strong></td><td><strong>Olympic Marmot</strong></td><td><strong>Sciuridae</strong></td><td><strong>Rodentia</strong></td><td><strong>Multi-note whistle</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Seventeen degrees in the mammalian zone (61&ndash;77). Sixteen mammalian entries. Fourteen species. <strong>Four orders</strong>. <strong>Nine families</strong>. The Sciuridae trio (75&ndash;76&ndash;77) is unprecedented &mdash; no family has appeared three times consecutively. All three PNW marmots now represented.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon endemic">E</div>
+            <div class="theory-content">
+              <h4>Endemic to Olympic Peninsula</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Found NOWHERE else on Earth. Most geographically restricted species in the engine. Sky island species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trio">T</div>
+            <div class="theory-content">
+              <h4>Sciuridae Trio (75&ndash;76&ndash;77) &mdash; Marmot Trio</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Three consecutive Sciuridae. Unprecedented. All three PNW marmots. Three acoustic signatures.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon whistle">M</div>
+            <div class="theory-content">
+              <h4>Musical Multi-Note Whistle &mdash; 78th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>3&ndash;5 tonal steps. Musical phrasing. E=4. Distinct from single-note marmot calls. Melodic alarm.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon alpine">A</div>
+            <div class="theory-content">
+              <h4>Fourth Consecutive Alpine (74&ndash;75&ndash;76&ndash;77)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Pika, Yellow-bellied, Hoary, Olympic. Four alpine degrees. The engine&rsquo;s alpine era deepens.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl-link">O</div>
+            <div class="theory-content">
+              <h4>Olympic Peninsula Connection (SPS-004)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Spotted Owl (4) and Olympic Marmot (77). Both Olympic Peninsula specialists. 73 degrees apart.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wren-link">W</div>
+            <div class="theory-content">
+              <h4>Olympic Rainforest Connection (SPS-001)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Pacific Wren (1, Olympic rainforest) and Olympic Marmot (77, Olympic alpine). Same peninsula, opposite elevations.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mree-link">C</div>
+            <div class="theory-content">
+              <h4>The Mree Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both create layered melody. Both geographically specific. Both quiet relative to peers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-076: Hoary Marmot</strong>
+            <p>Marmot trio. Sciuridae 75&ndash;76&ndash;77. E=5 vs. E=4. Single whistle vs. multi-note whistle. Widespread vs. endemic.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-075: Yellow-bellied Marmot</strong>
+            <p>Marmot trio. Three PNW marmots complete. Chirp vs. multi-note whistle. Eastern Cascades vs. Olympics.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-074: American Pika</strong>
+            <p>Fourth consecutive alpine (74&ndash;77). Same high-elevation habitat. Different survival strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>Olympic Peninsula connection. Both Olympic Peninsula specialists. Owl in old-growth forest, marmot in alpine meadow.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>Olympic Peninsula connection. Wren in Olympic rainforest (low), marmot in Olympic alpine (high). Same peninsula, opposite elevations.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Olympic Marmot (<em>Marmota olympus</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Olympic marmot.&rdquo;</li>
+          <li>[3] Barash, D.P. (1973). &ldquo;The social biology of the Olympic marmot.&rdquo; <em>Animal Behaviour Monographs</em> 6(3).</li>
+          <li>[4] Armitage, K.B. (2014). <em>Marmot Biology: Sociality, Individual Fitness, and Population Dynamics.</em> Cambridge University Press.</li>
+          <li>[5] Olympic National Park &mdash; Olympic Marmot species information.</li>
+          <li>[6] Griffin, S.C. et al. (2008). &ldquo;Decline of the Olympic Marmot.&rdquo; <em>Northwest Science</em> 82(3).</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">77&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Musical multi-note whistle. Lower than Hoary (E=5).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sciuridae</div>
+          <div class="stat-detail">THIRD consecutive (75&ndash;76&ndash;77).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">Fourth Rodentia in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elevation</div>
+          <div class="stat-value">1,500&ndash;2,000 m</div>
+          <div class="stat-detail">Olympic alpine meadows only.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">3.5&ndash;6 kg</div>
+          <div class="stat-detail">Intermediate between YB and Hoary.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Hibernation</div>
+          <div class="stat-value">6&ndash;8 months</div>
+          <div class="stat-detail">Communal family hibernation.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Colony Size</div>
+          <div class="stat-value">5&ndash;15</div>
+          <div class="stat-detail">Highly social. Multi-generational.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Range</div>
+          <div class="stat-value">ENDEMIC</div>
+          <div class="stat-detail">Olympic Peninsula ONLY. Nowhere else.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Mammalian Entry</div>
+          <div class="stat-value">16th</div>
+          <div class="stat-detail">14th species. 9 families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sciuridae Run</div>
+          <div class="stat-value">3 consecutive</div>
+          <div class="stat-detail">75&ndash;76&ndash;77. Unprecedented trio.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Alpine Run</div>
+          <div class="stat-value">4 consecutive</div>
+          <div class="stat-detail">Pika 74, YB 75, Hoary 76, Olympic 77.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (17th)</div>
+          <div class="stat-detail">No substitution.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
