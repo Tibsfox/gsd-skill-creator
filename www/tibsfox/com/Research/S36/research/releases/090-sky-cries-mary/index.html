@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 90&deg; &mdash; Sky Cries Mary &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card .level.landmark { background: #FFEBEE; color: #B71C1C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .quarter-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 3px solid #B71C1C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFEBEE;
+    }
+    .quarter-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.3rem;
+      color: #FFCDD2;
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quarter-card p {
+      color: #FFEBEE;
+      margin: 0.5rem 0;
+    }
+    .quarter-card strong {
+      color: #FFCDD2;
+    }
+
+    .ethereal-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .ethereal-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #90CAF9;
+      font-family: system-ui, sans-serif;
+    }
+    .ethereal-card p {
+      color: #E3F2FD;
+      margin: 0.5rem 0;
+    }
+    .ethereal-card strong {
+      color: #BBDEFB;
+    }
+
+    .nineties-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .nineties-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .nineties-card p {
+      color: #E8F5E9;
+      margin: 0.5rem 0;
+    }
+    .nineties-card strong {
+      color: #C8E6C9;
+    }
+
+    .milestone-card {
+      background: linear-gradient(135deg, #880E4F 0%, #AD1457 50%, #C2185B 100%);
+      border: 2px solid #880E4F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FCE4EC;
+    }
+    .milestone-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #F48FB1;
+      font-family: system-ui, sans-serif;
+    }
+    .milestone-card p {
+      color: #FCE4EC;
+      margin: 0.5rem 0;
+    }
+    .milestone-card strong {
+      color: #F8BBD0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>090 &mdash; Sky Cries Mary</span>
+    </nav>
+
+    <!-- THE QUARTER-MARK BANNER -->
+    <div class="quarter-card">
+      <h4>THE QUARTER-MARK &mdash; 90 / 360 = 25% Complete</h4>
+      <p>
+        Degree 90 is the <strong>quarter-mark</strong> of the Seattle 360 engine.
+        <strong>90 degrees of 360. One quarter of the circle.</strong>
+        The engine has mapped 25% of Seattle&rsquo;s musical landscape.
+        72 genre stages. 91 acoustic elements. 91 patterns. Five return artists.
+        The first quadrant is complete.
+      </p>
+    </div>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Ethereal/Electronic &mdash; Genre Stage 72 &mdash; Rockville Records &mdash; E=3 &mdash; 1990s Seattle Underground</h3>
+      <p>
+        <strong>Sky Cries Mary</strong> &mdash; Seattle psychedelic/electronic band formed in 1988.
+        Led by <strong>Roderick Romero</strong> and <strong>Anisa Romero</strong> (DJ Anisa).
+        Ambient, ethereal, electronic, world music with live visuals.
+        Active in Seattle&rsquo;s 1990s underground scene alongside grunge but pursuing a
+        completely different aesthetic. One of Seattle&rsquo;s longest-running experimental acts.
+        <strong>Rockville Records</strong>. <strong>Ethereal/Electronic</strong> at Genre Stage 72.
+        <strong>E=3</strong>. THE QUARTER-MARK DEGREE.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">90&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Sky Cries Mary</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Ethereal / Electronic</span>
+          <span class="label-badge">Rockville Records</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 72</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Ethereal Card -->
+        <div class="ethereal-card">
+          <h4>Ethereal/Electronic &mdash; The Anti-Grunge</h4>
+          <p>
+            While grunge dominated Seattle&rsquo;s public image in the early 1990s,
+            <strong>Sky Cries Mary</strong> pursued a completely different aesthetic:
+            <strong>ambient, ethereal, electronic, psychedelic, world music</strong>.
+            They were the anti-grunge &mdash; not loud guitars and angst but
+            synthesizers, global rhythms, light shows, and transcendence.
+            Active alongside Pearl Jam, Soundgarden, and Alice in Chains, but
+            operating in a parallel universe. The same city, the same decade,
+            a completely different sound.
+          </p>
+        </div>
+
+        <!-- 1990s Seattle Card -->
+        <div class="nineties-card">
+          <h4>1990s Seattle Underground &mdash; The Other Scene</h4>
+          <p>
+            Sky Cries Mary is one of Seattle&rsquo;s <strong>longest-running experimental acts</strong>,
+            formed in <strong>1988</strong>. They predate the grunge explosion.
+            <strong>Roderick Romero</strong> and <strong>Anisa Romero</strong> (DJ Anisa) led the
+            project through multiple decades and configurations. The band combined live instruments
+            with <strong>DJ sets, visual projections, and multimedia elements</strong> &mdash;
+            anticipating the audiovisual integration that would become standard decades later.
+          </p>
+        </div>
+
+        <!-- Engine Events Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 72 &middot; Ethereal/Electronic &middot; E=3 &middot; Quarter-Mark &middot; 91st Acoustic Element &middot; 91st Pattern</h4>
+          <p>
+            <strong>Sky Cries Mary</strong> enters at Genre Stage 72 with Ethereal/Electronic.
+            <strong>E=3</strong> &mdash; immersive but not aggressive.
+            THE QUARTER-MARK &mdash; degree 90 of 360. 25% complete.
+            The 91st acoustic element. The 91st artist-city pattern.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 72: Ethereal/Electronic &mdash; The Immersive Sound</h2>
+          <p>
+            Degree 90 reaches <strong>Genre Stage 72</strong>. <strong>Ethereal/Electronic</strong>
+            describes Sky Cries Mary&rsquo;s music: synthesizers and electronic textures merged
+            with ambient atmospheres, psychedelic guitar, world percussion, and ethereal vocals.
+            The sound is immersive rather than confrontational &mdash; it surrounds the listener
+            rather than attacking them.
+          </p>
+          <p>
+            Distinguished from prior electronic entries: <strong>The Postal Service</strong> (degree 86)
+            is electronic pop &mdash; structured, melodic, production-focused. <strong>Chong the Nomad</strong>
+            (degree 44) is experimental electronic &mdash; beat-driven. Sky Cries Mary is ethereal/electronic
+            &mdash; ambient, psychedelic, world-music-inflected. The electronic serves the ethereal,
+            not the other way around.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 91: The Ambient Drift</h2>
+          <p>
+            The <strong>ambient drift</strong> is the ninety-first acoustic element in the
+            Seattle 360 engine. It describes Sky Cries Mary&rsquo;s sound &mdash; layers of
+            synthesizer pads, processed guitar, world percussion, and ethereal vocals that
+            create a <strong>slowly evolving sonic landscape</strong>. The music drifts rather
+            than drives. It changes gradually rather than abruptly. The listener floats in the
+            sound rather than being carried by it.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>baroque whisper</strong> (90th element,
+            Parenthetical Girls at 89) had extreme dynamic range &mdash; whisper to operatic.
+            The ambient drift smooths out all extremes &mdash; everything exists in a middle
+            register of floating intensity. The engine moves from theatrical drama to ambient
+            immersion, from the proscenium to the planetarium.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 91: The Parallel Scene</h2>
+          <p>
+            The <strong>parallel scene</strong> is the ninety-first artist-city pattern in the
+            Seattle 360 engine. It describes an artist or band that operates in the same city,
+            during the same era, as a dominant scene &mdash; but pursues a completely different
+            aesthetic. Sky Cries Mary was in Seattle during grunge but was not grunge.
+            They were the parallel scene &mdash; the other thing that was happening while
+            everyone was looking at something else.
+          </p>
+          <blockquote>
+            The parallel scene is the music that history forgot to document. When people say
+            &ldquo;Seattle in the 1990s,&rdquo; they mean grunge. But Seattle in the 1990s was
+            also ambient electronic psychedelia with light shows. Sky Cries Mary proves that
+            the dominant narrative is never the only narrative. Every scene has a parallel scene.
+            Every spotlight creates a shadow where other music thrives.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>THE QUARTER-MARK</h4>
+              <span class="level landmark">Landmark</span>
+              <p>Degree 90 of 360. 25% complete. The first
+              quadrant closes. 72 genre stages. 91 acoustic
+              elements. 91 patterns. Five return artists.
+              One quarter of the circle.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Ambient Drift</h4>
+              <span class="level advanced">Advanced</span>
+              <p>91st acoustic element. Sky Cries Mary --
+              synthesizer pads, processed guitar, world
+              percussion, ethereal vocals. Music drifts
+              rather than drives. Ambient immersion.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Parallel Scene</h4>
+              <span class="level advanced">Advanced</span>
+              <p>91st artist-city pattern. Operating alongside
+              a dominant scene but pursuing a different
+              aesthetic. The anti-grunge. The other thing
+              that was happening.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 72 &mdash; Ethereal/Electronic</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>72nd genre stage. Ethereal/Electronic.
+              Synthesizers + ambient + psychedelic + world.
+              The electronic serves the ethereal. Immersive
+              rather than confrontational.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 &mdash; Immersive Presence</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>E=3. Immersive but not aggressive. The
+              sound surrounds rather than attacks. Ambient
+              energy. Presence through envelopment.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Rockville Records &mdash; Seattle Label</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Rockville Records. Seattle-based label.
+              Part of the city's independent label
+              infrastructure alongside Sub Pop and others.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">044</span>
+              <strong>Chong the Nomad</strong> &mdash; Electronic connection.
+              Both electronic, both experimental. Chong is beat-driven and
+              production-focused; Sky Cries Mary is ambient and psychedelic.
+              Different electronic vocabularies from different eras.
+            </li>
+            <li>
+              <span class="ref-degree">086</span>
+              <strong>The Postal Service</strong> &mdash; Electronic parallel.
+              Both electronic-centered. Postal Service is structured electronic
+              pop; Sky Cries Mary is ambient electronic psychedelia. Postal
+              Service has verses and choruses; Sky Cries Mary has drifts and
+              textures.
+            </li>
+            <li>
+              <span class="ref-degree">083</span>
+              <strong>Pearl Jam</strong> &mdash; 1990s Seattle parallel.
+              Pearl Jam was the grunge that dominated. Sky Cries Mary was
+              the ethereal that coexisted. Same city, same decade, completely
+              different aesthetics. The parallel scene in action.
+            </li>
+            <li>
+              <span class="ref-degree">036</span>
+              <strong>Jimi Hendrix</strong> &mdash; Psychedelic lineage.
+              Hendrix inaugurated Seattle&rsquo;s psychedelic legacy. Sky Cries
+              Mary extends it into the electronic era. Guitar psychedelia to
+              electronic psychedelia. The lineage continues through technology.
+            </li>
+            <li>
+              <span class="ref-degree">041</span>
+              <strong>Shawn Smith</strong> &mdash; Scene native, 1990s.
+              Both 1990s Seattle acts. Both operated outside grunge&rsquo;s
+              mainstream despite being scene natives. Smith was soulful;
+              Sky Cries Mary was ethereal. Both were the other Seattle.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Sky Cries Mary &mdash; discography and band history.</li>
+            <li>AllMusic &mdash; Sky Cries Mary biography.</li>
+            <li>Rockville Records &mdash; catalog.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">90&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Ethereal / Electronic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Rockville Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">1988</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">72</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">91st Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">91st Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Milestone</span>
+            <span class="stat-value">QUARTER-MARK</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Quarter-Mark Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Progress</span>
+            <span class="stat-value">90 / 360 = 25%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stages</span>
+            <span class="stat-value">72</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Elements</span>
+            <span class="stat-value">91</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">91</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Returns</span>
+            <span class="stat-value">5</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sonic Character</h4>
+          <div class="stat-row">
+            <span class="stat-label">Element</span>
+            <span class="stat-value">Ambient Drift</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Parallel Scene</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Leaders</span>
+            <span class="stat-value">Romero &amp; DJ Anisa</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
