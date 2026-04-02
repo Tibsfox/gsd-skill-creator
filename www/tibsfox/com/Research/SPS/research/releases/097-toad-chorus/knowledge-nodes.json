@@ -1,0 +1,125 @@
+{
+  "degree": 97,
+  "species": "Toad Chorus",
+  "scientific_name": "Bufonidae (family)",
+  "slug": "097-toad-chorus",
+  "sound_type": "sustained musical purring -- long continuous purring trill, 10-30+ seconds, harmonic-rich, dense chorus creates wall of musical sound",
+  "energy": 4,
+  "ecosystem": "Pond. Shallow, still or slow-moving water -- ponds, lake margins, seasonal pools, beaver ponds. Terrestrial outside breeding season.",
+  "season": "Spring and early summer. Breeding choruses peak April through June depending on elevation and latitude.",
+  "family": "47th family (NEW)",
+  "order": "Anura",
+  "csv_substitute": false,
+  "original_species": "Toad Chorus",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.55,
+    "lon": -122.20,
+    "description": "Reference for pond habitat in the PNW, Washington. Western Toads breed in ponds and shallow water from sea level to subalpine."
+  },
+  "taxonomy_note": {
+    "description": "BUFONIDAE -- NEW FAMILY (47th). Third Anura family in engine. True toads. Hylidae (86, 90), Ranidae (96), Bufonidae (97). Four Anura entries across three families.",
+    "current_class": "Amphibia",
+    "new_class": false,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Amphibia. Continuing amphibian sequence.",
+    "current_family": "47th family (NEW)",
+    "new_family": true,
+    "family_count_in_engine": 47,
+    "name_etymology": "Bufonidae from Latin bufo ('toad'). True toads -- dry warty skin, parotoid glands, walking gait, sustained trilling call.",
+    "genus_note": "PNW representative: Western Toad (Anaxyrus boreas). Sea level to subalpine. Softer, higher-pitched trill than Eastern species.",
+    "order_note": "Anura -- continuing. Fourth entry. Three families. Frogs and toads. Each family brings a distinct acoustic signature.",
+    "class_note": "Amphibia -- four Anura entries (86, 90, 96, 97). Three families. The amphibian chorus grows.",
+    "family_position": "47th family at degree 97. NEW FAMILY. Third Anura family. True toads. Sustained trilling call."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1000-3000 Hz (species-dependent). Western Toad higher-pitched than Eastern species.",
+    "peak_energy_band_hz": "1500-2500 Hz. Harmonic-rich with strong fundamental.",
+    "song_frequency_hz": "NOT a song. SUSTAINED TRILL -- a long, continuous purring note produced by rapid laryngeal muscle vibration and vocal sac resonance.",
+    "song_duration_s": "Individual trill: 10-30+ seconds. Chorus: continuous for hours during peak breeding.",
+    "note_structure": "Single sustained trill. No note variation within a call. One long, continuous purring tone. Smooth and unbroken.",
+    "note_types": "Sustained purring trill (breeding call). No alarm calls, no clicks, no percussive elements. Pure sustained tonal trill.",
+    "phrase_structure": "No phrase structure. Individual trill is one sustained note. Brief pause. Repeat. Chorus creates continuous overlap -- no silence.",
+    "timbre": "Musical. Purring. Harmonic-rich. Smooth and resonant. The vocal sac creates a warm, full-bodied tone. Not harsh, not sharp -- rounded and musical. The most melodious amphibian call in the engine.",
+    "amplitude": "E=4. Loud and persistent. Multiple males create a dense wall of sound. Audible hundreds of meters from pond. Dominates nighttime soundscape near breeding sites.",
+    "tempo": "No tempo. Sustained continuous trill. Brief pauses between trills. Chorus is continuous.",
+    "context": "BREEDING CHORUS. Males gather at ponds and call to attract females. Peak calling at dusk through night. Spring and early summer. Pond habitat.",
+    "regional_variation": "Western Toad (Anaxyrus boreas) in PNW -- softer, higher-pitched. American Toad (Anaxyrus americanus) in eastern range -- louder, lower. Both sustained trills.",
+    "key_property": "SUSTAINED MUSICAL PURRING -- the 97th acoustic element (species side). Long continuous purring trill. 10-30+ seconds. E=4. Harmonic-rich. Dense breeding chorus. NEW FAMILY Bufonidae (47th). Third Anura family. Pond habitat. Thirty-seventh consecutive original CSV."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Family-level entry. Adult toads: 50-130 mm body length depending on species. Stout body. Short legs. Dry, warty skin. Prominent parotoid glands behind eyes. Walking gait rather than leaping.",
+    "diagnostic_mark": "For degree 97: (1) DRY WARTY SKIN -- distinguishes from smooth-skinned frogs. (2) PAROTOID GLANDS -- large, prominent glands behind each eye. (3) SHORT LEGS -- walks rather than leaps. (4) STOUT BODY -- round and robust.",
+    "fur_detail": null,
+    "skin_detail": "Dry, bumpy, warty skin covered in glands. Parotoid glands secrete bufotoxins as defensive chemicals. Coloration typically brown, olive, or gray with dark mottling. Western Toad has a pale dorsal stripe.",
+    "dental_detail": "No teeth (true toads lack maxillary teeth, unlike many frogs). Wide mouth for insect capture.",
+    "field_id": "Stout-bodied amphibian with dry, warty skin and prominent parotoid glands behind eyes. Walks rather than leaps. Found near ponds during breeding season, terrestrial otherwise. The sustained trilling call is diagnostic -- no other PNW amphibian produces such a long continuous trill."
+  },
+  "nodes": [
+    {
+      "id": "sustained-purring-trill",
+      "type": "concept",
+      "title": "Sustained Musical Purring -- 97th Acoustic Element (species side)",
+      "description": "Long, continuous purring trill lasting 10-30+ seconds. Harmonic-rich. E=4. Dense breeding chorus creates wall of musical sound. Most sustained amphibian call in the engine.",
+      "connections": ["bufonidae-enters", "anura-survey", "pond-breeding"]
+    },
+    {
+      "id": "bufonidae-enters",
+      "type": "concept",
+      "title": "Bufonidae Enters -- 47th Family (NEW) / Third Anura Family",
+      "description": "True toads. Third frog/toad family: Hylidae (86, 90), Ranidae (96), Bufonidae (97). Four Anura entries. Each family brings a distinct acoustic signature.",
+      "connections": ["sustained-purring-trill", "anura-survey"]
+    },
+    {
+      "id": "anura-survey",
+      "type": "pattern",
+      "title": "Anura Acoustic Survey -- Four Entries, Four Signatures",
+      "description": "Pacific Treefrog kreek (86), Spring Peeper peep (90), Wood Frog cluck (96), Toad trill (97). Four entries, three families, four distinct vocalizations. The order Anura as a complete acoustic survey.",
+      "connections": ["sustained-purring-trill", "bufonidae-enters"]
+    },
+    {
+      "id": "pond-breeding",
+      "type": "concept",
+      "title": "Pond Breeding Chorus -- Dusk Through Night",
+      "description": "Males congregate at breeding ponds. Sustained trills attract females. Dozens to hundreds of individuals. Chorus continuous for hours. Spring and early summer.",
+      "connections": ["sustained-purring-trill"]
+    },
+    {
+      "id": "postal-service-contrast",
+      "type": "pattern",
+      "title": "The Postal Service Contrast -- Organic Purring vs Digital Purring",
+      "description": "Degree 97 pairs toad chorus with Postal Service electronic. Both sustained, layered textures at E=4. Biological trill and algorithmic tenderness. Organic purring and digital purring.",
+      "connections": ["sustained-purring-trill"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-096",
+      "species": "Wood Frog",
+      "relationship": "ANURA CONTINUES! Back-to-back Anura entries. Wood Frog (96, Ranidae, clucking) and Toad Chorus (97, Bufonidae, purring trill). Different families, different acoustic characters. Both pond breeders. Both E=4."
+    },
+    {
+      "target": "SPS-090",
+      "species": "Spring Peeper",
+      "relationship": "CHORUS PARALLEL! Both produce choruses that dominate nighttime soundscapes. Spring Peeper peeps (high, sharp, repeated). Toad trills (sustained, purring, continuous). Same ecological role: the amphibian chorus."
+    },
+    {
+      "target": "SPS-086",
+      "species": "Pacific Treefrog",
+      "relationship": "ANURA LINEAGE. First Anura at degree 86 (Hylidae). Now three families. Treefrog kreek vs toad trill -- sharply different acoustic characters within the same order."
+    },
+    {
+      "target": "SPS-085",
+      "species": "Muskrat",
+      "relationship": "POND CONNECTION. Muskrat builds lodges in the same pond habitat where toads breed. Different ecological niches, shared habitat."
+    },
+    {
+      "target": "SPS-061",
+      "species": "Beaver",
+      "relationship": "POND BUILDER! Beaver creates pond habitat through dam construction. Toad choruses occur in beaver-created ponds. Ecosystem engineer (61) creates habitat for amphibian chorus (97)."
+    }
+  ]
+}

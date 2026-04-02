@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 97&deg; &mdash; Toad Chorus &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Toad chorus card */
+    .chorus-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 30%, #689F38 60%, #7CB342 100%);
+      border: 3px solid #33691E;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .chorus-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #DCEDC8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .chorus-card p { color: #F1F8E9; }
+    .chorus-card strong { color: #DCEDC8; }
+
+    /* New family card */
+    .family-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #6D4C41 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .family-card p { color: #EFEBE9; }
+    .family-card strong { color: #D7CCC8; }
+
+    /* Anura card */
+    .anura-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .anura-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .anura-card p { color: #E8F5E9; }
+    .anura-card strong { color: #C8E6C9; }
+
+    /* Postal Service contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .contrast-card p { color: #E0F2F1; }
+    .contrast-card strong { color: #B2DFDB; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.trill { background: #33691E; }
+    .theory-icon.family { background: #4E342E; }
+    .theory-icon.anura { background: #1B5E20; }
+    .theory-icon.pond { background: #006064; }
+    .theory-icon.contrast { background: #004D40; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">97&deg;</div>
+      <div class="release-title-block">
+        <h2>Toad Chorus</h2>
+        <div class="scientific">Bufonidae (family) &mdash; NEW FAMILY (47th) &mdash; Anura continues</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      sustained musical purring &mdash; NEW FAMILY Bufonidae (47th). Third frog/toad family (Hylidae 86/90, Ranidae 96, Bufonidae 97). Sustained, musical purring trill &mdash; different from treefrog peeps or wood frog clucks. Pond habitat. E=4. Thirty-seventh consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Toad Chorus Card -->
+        <div class="chorus-card">
+          <h3>Sustained Musical Purring &mdash; The Toad&rsquo;s Trill</h3>
+          <p>The toad chorus is one of the most musical sounds in pond ecology. <strong>A sustained, musical purring trill</strong> &mdash; not the sharp high-frequency peeps of treefrogs (86, 90) or the clucking of wood frogs (96). The toad&rsquo;s trill is a <strong>long, continuous, purring note</strong> that can last 10&ndash;30 seconds or more [1, 2]. Multiple males calling simultaneously create a rich, layered chorus &mdash; a <strong>sustained wall of musical purring</strong> emanating from the pond. <strong>E=4</strong>. The toad chorus fills the night air.</p>
+        </div>
+
+        <!-- New Family Card -->
+        <div class="family-card">
+          <h3>NEW FAMILY Bufonidae &mdash; 47th Family &mdash; Third Frog/Toad Family in Engine</h3>
+          <p><strong>Bufonidae</strong> enters as the engine&rsquo;s 47th family and the <strong>third frog/toad family</strong> in Anura. Hylidae appeared at degrees 86 and 90 (Pacific Treefrog and Spring Peeper). Ranidae appeared at degree 96 (Wood Frog). Now <strong>Bufonidae</strong> &mdash; the true toads &mdash; enters at degree 97. Three Anura families in the engine. The amphibian chorus grows richer.</p>
+        </div>
+
+        <!-- Anura Card -->
+        <div class="anura-card">
+          <h3>Anura Continues &mdash; Four Amphibian Entries, Three Families</h3>
+          <p>Anura now has <strong>four entries</strong> across <strong>three families</strong>: Pacific Treefrog (86, Hylidae), Spring Peeper (90, Hylidae), Wood Frog (96, Ranidae), and Toad Chorus (97, Bufonidae). Each brings a <strong>different acoustic character</strong> &mdash; high-frequency peeps (treefrogs), percussive clucking (wood frog), and now <strong>sustained musical purring</strong> (toads). The order Anura is becoming a <strong>complete acoustic survey</strong> of amphibian vocalization.</p>
+        </div>
+
+        <!-- Postal Service Contrast Card -->
+        <div class="contrast-card">
+          <h3>The Postal Service Contrast</h3>
+          <p>Degree 97 pairs the toad chorus with <strong>The Postal Service (Electronic Context)</strong> in Part A &mdash; Indie Electronic, E=4. <strong>Both sustained and layered.</strong> The toad&rsquo;s purring trill is a sustained, analog, biological sound. The Postal Service&rsquo;s algorithmic tenderness is a sustained, digital, electronic sound. Both create a <strong>continuous, enveloping texture</strong> &mdash; the toad through muscular vibration, the machine through quantized code. <strong>Organic purring and digital purring.</strong></p>
+        </div>
+
+        <h2>The Sound: Sustained Musical Purring (97th Acoustic Element, species side)</h2>
+        <p><strong>The call:</strong> The American toad (<em>Anaxyrus americanus</em>) and the Western toad (<em>Anaxyrus boreas</em>) produce a <strong>sustained, musical trill</strong> &mdash; a long, continuous purring note that can last 10&ndash;30 seconds or more [1, 2]. The trill is produced by rapid vibration of the vocal sac, creating a <strong>musical, harmonic-rich purring</strong> tone. Unlike the sharp &ldquo;kreek&rdquo; of treefrogs or the clucking &ldquo;quack&rdquo; of wood frogs, the toad&rsquo;s trill is <strong>sustained, smooth, and musical</strong>.</p>
+        <p><strong>Why E=4:</strong> The toad chorus is loud and persistent. Multiple males calling simultaneously create a <strong>dense, layered wall of sound</strong> that can be heard hundreds of meters from the pond. Louder than the wood frog chorus (96, E=4) in sustained intensity. Comparable to the cricket chorus (87, E=4) in amplitude and persistence. E=4 is appropriate for a chorus that dominates the nighttime soundscape near breeding ponds.</p>
+
+        <h2>Taxonomy: Bufonidae (NEW FAMILY -- 47th)</h2>
+        <p><strong>Classification:</strong> Class <strong>Amphibia</strong>. Order <strong>Anura</strong> (continuing). Family <strong>Bufonidae</strong> &mdash; NEW FAMILY (47th in engine) [1, 2]. True toads. Third Anura family.</p>
+        <p><strong>PNW species:</strong> The <strong>Western Toad</strong> (<em>Anaxyrus boreas</em>) is the primary PNW representative. Found from sea level to subalpine habitats. The trill is softer and higher-pitched than the Eastern American Toad but shares the sustained, musical character [1].</p>
+        <p><strong>Toad vs frog:</strong> Bufonidae (true toads) are distinguished from other Anura by dry, warty skin; parotoid glands behind the eyes; shorter legs adapted for walking rather than leaping; and the sustained trilling call [1, 2].</p>
+
+        <h2>Ecology: The Breeding Pond Chorus</h2>
+        <p><strong>Habitat:</strong> Pond. Toads breed in shallow, still or slow-moving water &mdash; ponds, lake margins, seasonal pools [1, 2]. Outside of breeding season, toads are terrestrial, living in forests, meadows, and gardens.</p>
+        <p><strong>Chorus dynamics:</strong> Males gather at breeding ponds and call in sustained trills to attract females. The chorus can contain dozens to hundreds of individuals, creating a continuous wall of purring sound. Calling peaks at dusk and continues through the night.</p>
+        <p><strong>Distinguishing from other Anura:</strong> The toad&rsquo;s sustained trill is acoustically distinct from the Pacific Treefrog&rsquo;s sharp &ldquo;kreek-ek&rdquo; (86), the Spring Peeper&rsquo;s high-pitched peep (90), and the Wood Frog&rsquo;s percussive clucking (96). Four Anura entries, four distinct acoustic signatures.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon trill">T</div>
+            <div class="theory-content">
+              <h4>Sustained Musical Purring &mdash; 97th Acoustic Element (species side)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Long, continuous purring trill. 10&ndash;30+ seconds sustained. E=4. Musical and harmonic-rich. Dense chorus creates wall of sound.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">B</div>
+            <div class="theory-content">
+              <h4>Bufonidae (47th Family) &mdash; Third Anura Family</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>NEW FAMILY. True toads. Hylidae (86, 90), Ranidae (96), Bufonidae (97). Three frog/toad families. Four Anura entries.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon anura">A</div>
+            <div class="theory-content">
+              <h4>Anura Acoustic Survey &mdash; Four Entries, Four Signatures</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Peeps (86, 90), clucks (96), purring trills (97). Each family brings a different vocalization type. Complete acoustic spectrum emerging.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pond">P</div>
+            <div class="theory-content">
+              <h4>Pond Habitat &mdash; Breeding Congregation</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Shallow still water. Males congregate and call. Chorus of dozens to hundreds. Dusk through night. Seasonal breeding.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">C</div>
+            <div class="theory-content">
+              <h4>The Postal Service Contrast</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Organic purring (E=4) vs digital purring (E=4). Both sustained, layered textures. Biological trill and algorithmic tenderness.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-096: Wood Frog</strong>
+            <p>Anura continues! Wood Frog (96, Ranidae, clucking) and Toad Chorus (97, Bufonidae, purring trill). Back-to-back Anura entries, different families, different acoustic characters. Both pond breeders.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-090: Spring Peeper</strong>
+            <p>Chorus parallel! Both produce choruses that dominate the nighttime soundscape. Spring Peeper peeps (high, sharp). Toad trills (sustained, purring). Different frequencies, same ecological role: the amphibian chorus.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-086: Pacific Treefrog</strong>
+            <p>Anura lineage. First Anura at degree 86 (Hylidae). Now three families in the order. Treefrog "kreek" vs toad trill -- sharply different acoustic characters within the same order.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-085: Muskrat</strong>
+            <p>Pond connection. Muskrat builds lodges in the same pond habitat where toads breed. Different ecological niches, shared habitat. The pond as ecosystem.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-061: Beaver</strong>
+            <p>Pond builder! Beaver creates pond habitat through dam construction. Toad choruses occur in beaver-created ponds. The ecosystem engineer (61) creates habitat for the amphibian chorus (97).</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Bufonidae,&rdquo; &ldquo;Anaxyrus boreas,&rdquo; &ldquo;Anaxyrus americanus.&rdquo;</li>
+          <li>[2] Stebbins, R.C. (2003). <em>A Field Guide to Western Reptiles and Amphibians.</em> Houghton Mifflin.</li>
+          <li>[3] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">97&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Sustained chorus. Dense wall of sound.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">47th (NEW)</div>
+          <div class="stat-detail">Bufonidae. True toads.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Anura</div>
+          <div class="stat-detail">Continuing. 4th entry. 3rd family.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Amphibia</div>
+          <div class="stat-detail">Third Anura family in engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Pond</div>
+          <div class="stat-detail">Shallow still water. Breeding sites.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Sustained purring trill</div>
+          <div class="stat-detail">Musical, 10-30+ seconds.</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">PNW Species</div>
+          <div class="stat-value">Western Toad</div>
+          <div class="stat-detail"><em>Anaxyrus boreas</em>. Sea level to subalpine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Skin</div>
+          <div class="stat-value">Dry, warty</div>
+          <div class="stat-detail">Parotoid glands. Walks, not leaps.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Calling</div>
+          <div class="stat-value">Dusk through night</div>
+          <div class="stat-detail">Breeding ponds. Dozens to hundreds.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">47th (NEW)</div>
+          <div class="stat-detail">Bufonidae enters.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Anura Families</div>
+          <div class="stat-value">3 (Hyl/Ran/Buf)</div>
+          <div class="stat-detail">Hylidae, Ranidae, Bufonidae.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Anura Entries</div>
+          <div class="stat-value">4 (86,90,96,97)</div>
+          <div class="stat-detail">Back-to-back at 96-97.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (37th)</div>
+          <div class="stat-detail">Thirty-seventh consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
