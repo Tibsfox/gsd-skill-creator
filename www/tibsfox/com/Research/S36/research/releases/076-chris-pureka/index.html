@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 76&deg; &mdash; Chris Pureka &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>076 &mdash; Chris Pureka</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>First Queer/Nonbinary Artist &mdash; The Androgynous Register &mdash; Folk Returns</h3>
+      <p>
+        Chris Pureka at degree 76&deg; is a <strong>queer folk singer-songwriter</strong>
+        &mdash; nonbinary/genderqueer, with a rich androgynous voice that resists
+        gendered categorization. <strong>First openly queer/nonbinary artist</strong>
+        in the engine &mdash; a gender identity milestone. <strong>Folk</strong>
+        returns at Genre Stage 58. <strong>Self-released</strong> &mdash; no
+        label, complete creative control. <strong>E=2</strong> &mdash; quiet
+        register. Deeply personal lyrics about identity, love, and loss.
+        The androgynous register. The identity artist. The coming-out.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">76&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Chris Pureka</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Pacific Northwest</span>
+          <span class="record-badge">First Queer/Nonbinary Artist</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Gender Identity Milestone &middot; Folk Returns &middot; Self-Released &middot; E=2</h4>
+          <p>
+            <strong>Chris Pureka</strong> enters the engine as the
+            <strong>first openly queer/nonbinary artist</strong> &mdash;
+            a gender identity milestone. <strong>Folk</strong> at Genre
+            Stage 58 &mdash; confessional folk, the genre&rsquo;s most
+            personal register. <strong>Self-released</strong> &mdash;
+            no label infrastructure, complete creative control.
+            <strong>E=2</strong> &mdash; quiet register, 27th E=2
+            deployment. Distribution after degree 76: E1:3, E2:27,
+            E3:19, E4:18, E5:10, E6:2. The <strong>androgynous
+            register</strong> &mdash; 77th acoustic element. The
+            <strong>identity artist</strong> &mdash; 77th artist-city
+            pattern. The <strong>coming-out</strong> &mdash; 76th blue
+            note. Gender ratio 22:55 (~28.6%).
+          </p>
+        </div>
+
+        <section>
+          <h2>Gender Identity Milestone: First Queer/Nonbinary Artist</h2>
+          <p>
+            Degree 76 introduces the engine&rsquo;s <strong>first openly
+            queer and nonbinary/genderqueer artist</strong>. Chris Pureka&rsquo;s
+            gender identity is not a biographical footnote &mdash; it is
+            the substance of the music. The androgynous voice resists
+            gendered categorization. The lyrics explore identity, love,
+            and loss through a queer lens. The career operates within the
+            <strong>queer folk circuit</strong> &mdash; house concerts,
+            small venues, identity-based community infrastructure.
+          </p>
+          <p>
+            The engine&rsquo;s gender tracking has used a binary (non-male
+            vs. male). Pureka reveals the limitation of this framework.
+            The engine acknowledges the binary&rsquo;s inadequacy while
+            counting Pureka as non-male for continuity: ratio 22:55
+            (~28.6%).
+          </p>
+          <blockquote>
+            The androgynous register is not an affectation &mdash; it is
+            an expression of identity. The voice IS the identity. The
+            music IS the politics. The personal IS the structural.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Androgynous Register: 77th Acoustic Element</h2>
+          <p>
+            Pureka&rsquo;s voice is a rich, deep, <strong>androgynous
+            register</strong> &mdash; a voice that resists gendered
+            categorization. Not a &ldquo;woman&rsquo;s voice&rdquo; and
+            not a &ldquo;man&rsquo;s voice&rdquo; but a <strong>voice</strong>
+            &mdash; full, resonant, unadorned. The 77th acoustic element
+            is the first defined by gender-acoustic identity rather than
+            genre-acoustic character.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>ache</strong> (58,
+            Death Cab) is gendered yearning; the <strong>manuscript
+            page</strong> (57, Gibson) is literary female voice; the
+            <strong>murmur</strong> (45, Jurado) is whispered male voice.
+            The androgynous register dissolves these categories. The voice
+            does not declare its gender. It simply exists.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Discography: Three Albums, Ten Years</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Driving North</h4>
+              <div class="disco-years">2006 &middot; Self-Released</div>
+              <p>Debut. Raw, direct acoustic folk. Songs about love, loss,
+              and PNW landscapes. The title is geographic &mdash; driving
+              north, toward home.</p>
+            </div>
+            <div class="disco-card">
+              <h4>How I Got Here</h4>
+              <div class="disco-years">2010 &middot; Self-Released</div>
+              <p>Second album. More polished, no less intimate. The title
+              is autobiographical &mdash; the journey that produced the
+              artist.</p>
+            </div>
+            <div class="disco-card">
+              <h4>Back in the Ring</h4>
+              <div class="disco-years">2016 &middot; Self-Released</div>
+              <p>Third album. Return after hiatus. Fuller arrangements,
+              acoustic core maintained. The title signals resilience.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Queer Folk Circuit</h2>
+          <p>
+            Pureka&rsquo;s career operates within the <strong>queer folk
+            circuit</strong> &mdash; a network of venues, festivals,
+            house concerts, and online communities that sustain queer
+            artists outside the mainstream music industry. This circuit
+            is particularly strong in the Pacific Northwest, where
+            progressive politics and DIY music culture create
+            infrastructure for artists whose identities place them
+            outside the mainstream.
+          </p>
+          <p>
+            The queer folk circuit is not a ghetto &mdash; it is a
+            <strong>community</strong>. Artists like Pureka draw audiences
+            who come for the representation, the shared identity, the
+            space where queerness is centered rather than marginalized.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Androgynous Register</h4>
+              <span class="level advanced">Advanced</span>
+              <p>77th acoustic element. A voice that resists gendered
+              categorization &mdash; rich, deep, resonant, unadorned.
+              First element defined by gender-acoustic identity.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Identity Artist</h4>
+              <span class="level advanced">Advanced</span>
+              <p>77th artist-city pattern. Personal identity as primary
+              mode of authenticity. Queerness and nonbinary identity are
+              the substance of the music.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Coming-Out</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>76th blue note. The gap between the world&rsquo;s
+              assumptions and the artist&rsquo;s reality. The listener&rsquo;s
+              uncertainty about the voice sustains the blue note.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk at Genre Stage 58</h4>
+              <span class="level advanced">Advanced</span>
+              <p>Confessional folk. Direct, first-person, identity-based.
+              Voice-and-guitar tradition. The genre&rsquo;s most personal
+              register.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 &mdash; 27th Deployment</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Self-released as inherent E=2. Distribution:
+              3:27:19:18:10:2. Quiet register. House concerts, small
+              venues.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Gender Identity Milestone</h4>
+              <span class="level advanced">Advanced</span>
+              <p>First queer/nonbinary artist. Binary framework limitation
+              acknowledged. Queer thread: Mirah (50) + Pureka (76).</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">064</span>
+              <strong>Jesse Sykes</strong> &mdash; Dark folk, women in folk.
+              Both non-male folk artists outside the mainstream. Sykes&rsquo;s
+              folk is dark and atmospheric. Pureka&rsquo;s is confessional
+              and identity-based.
+            </li>
+            <li>
+              <span class="ref-degree">072</span>
+              <strong>Briana Marela</strong> &mdash; Non-male, experimental.
+              Marela pushes boundaries through technology (vocal looping).
+              Pureka pushes through identity (androgynous register).
+            </li>
+            <li>
+              <span class="ref-degree">055</span>
+              <strong>Shelby Earl</strong> &mdash; Quiet folk. Both E=2,
+              both intimate. Earl&rsquo;s intimacy is romantic. Pureka&rsquo;s
+              is identity-based and political.
+            </li>
+            <li>
+              <span class="ref-degree">069</span>
+              <strong>Kris Orlowski</strong> &mdash; Earnest, personal.
+              Both value directness. Orlowski&rsquo;s earnestness is
+              relational. Pureka&rsquo;s is existential.
+            </li>
+            <li>
+              <span class="ref-degree">050</span>
+              <strong>Mirah</strong> &mdash; Queer artist connection. The
+              engine&rsquo;s queer thread: Mirah (50, Olympia) and Pureka
+              (76, PNW). Twenty-six degrees apart.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Bandcamp &mdash; Chris Pureka artist page and discography.</li>
+            <li>AllMusic &mdash; Chris Pureka genre classification and biography.</li>
+            <li>KEXP &mdash; Chris Pureka sessions and coverage.</li>
+            <li>Autostraddle &mdash; Chris Pureka coverage and queer artist profiles.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre, gender.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">76&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-Released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Pacific Northwest</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active</span>
+            <span class="stat-value">2006&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Milestone</span>
+            <span class="stat-value">Gender Identity</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">77th Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">77th Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">76th Deploy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">58</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">27</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">18</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
