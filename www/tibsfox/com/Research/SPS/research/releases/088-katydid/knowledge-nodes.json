@@ -1,0 +1,166 @@
+{
+  "degree": 88,
+  "species": "Katydid",
+  "scientific_name": "Tettigoniidae (family)",
+  "slug": "088-katydid",
+  "sound_type": "continuous electric buzz -- sustained high-pitched drone produced by wing stridulation, NOT rhythmic chirps like cricket (87) but a continuous unbroken buzz that sounds almost electrical, E=4, SECOND CONSECUTIVE INSECT, back-to-back Orthoptera",
+  "energy": 4,
+  "ecosystem": "Shrub/meadow. Shrubs, hedgerows, meadow edges, low trees. Arboreal and shrub-dwelling. Elevated calling positions. Contrasts with ground-dwelling cricket (87).",
+  "season": "Summer (peak calling on warm nights). Active late spring through early fall.",
+  "family": "Tettigoniidae",
+  "order": "Orthoptera",
+  "csv_substitute": false,
+  "original_species": "Katydid",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [87],
+    "partner_species": ["Cricket Chorus"],
+    "pair_type": "Back-to-back Orthoptera (87-88). Same mechanism (wing stridulation), different result (rhythmic chirp vs continuous buzz). Ground vs shrub. Two families exploring one mechanism."
+  },
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.20,
+    "description": "Reference for shrub/meadow habitat in the Puget Sound lowlands, Washington. Katydid buzz audible in shrubs and meadow edges throughout the region."
+  },
+  "taxonomy_note": {
+    "description": "SECOND CONSECUTIVE INSECT (87-88). Back-to-back Orthoptera. Tettigoniidae NEW FAMILY (39th). Same order Orthoptera as cricket (87). Back-to-back new families in the same order. Gryllidae (38th) and Tettigoniidae (39th). Family-level entry.",
+    "current_class": "Insecta",
+    "new_class": false,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Insecta uses subclass Pterygota (winged insects). Not tracked at infraclass level.",
+    "current_family": "Tettigoniidae",
+    "new_family": true,
+    "family_count_in_engine": 39,
+    "tettigoniidae_count_in_engine": 1,
+    "name_etymology": "Tettigoniidae from Greek tettix/tettigonia ('cicada-like'), referring to the buzzing sound. Also known as bush-crickets or long-horned grasshoppers.",
+    "genus_note": "Family-level entry. Multiple genera contribute: Scudderia (bush katydids), Microcentrum (broad-winged katydids), Conocephalus (meadow katydids).",
+    "order_note": "Orthoptera -- same order as cricket (87). Second consecutive Orthoptera entry. Back-to-back Orthoptera.",
+    "class_note": "Insecta -- second insect entry (after cricket at 87). Fourth class in the engine (Aves, Mammalia, Amphibia, Insecta).",
+    "family_position": "Tettigoniidae's FIRST entry at degree 88. NEW FAMILY (39th). Back-to-back new families with Gryllidae (38th at degree 87)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Approximately 5,000-20,000 Hz. Higher than crickets (3,000-5,000 Hz). Some species near or above upper limit of human hearing.",
+    "peak_energy_band_hz": "Species-dependent. Typically 6,000-12,000 Hz. High-pitched buzz dominates upper frequency range.",
+    "song_frequency_hz": "NOT a song. STRIDULATION BUZZ. Sustained, continuous drone without discrete pulses.",
+    "song_duration_s": "Individual buzz: sustained for seconds to minutes without interruption. Calling bouts: hours-long on warm summer nights.",
+    "note_structure": "Continuous buzz -- sustained wing-stroke oscillation producing an unbroken drone. No discrete chirps or pulses. Some species produce 'katy-DID, katy-DIDN'T' phrase but many produce sustained buzz.",
+    "note_types": "Calling buzz (primary advertisement, sustained), aggressive buzz (modified frequency/intensity during male-male encounters), courtship buzz (modified near female).",
+    "phrase_structure": "Continuous, sustained drone. No gaps. No rhythmic pulsing. The buzz fills the frequency band without interruption. Multiple katydids calling simultaneously create overlapping, continuous drone across the shrub canopy.",
+    "timbre": "Electric, droning, high-pitched. Sounds more like a power line or electronic oscillator than a biological sound. Sharp, buzzy. Distinct from cricket's bright, metallic chirp.",
+    "amplitude": "E=4. Individual calls audible at 15-30 meters. Continuous nature fills soundscape without gaps. Multiple individuals produce overlapping sustained drone. E=4 reflects persistent, space-filling quality.",
+    "tempo": "N/A -- continuous buzz, not rhythmic. No discrete tempo. The buzz is sustained without temporal structure.",
+    "context": "BREEDING CALL: males stridulate from elevated positions in shrubs to attract females. Night calling from shrub canopy. Summer. Peaks on warm nights. Nocturnal.",
+    "regional_variation": "Multiple species contribute. Different species have different frequency ranges and call patterns. PNW species include fork-tailed bush katydid and meadow katydids.",
+    "key_property": "CONTINUOUS ELECTRIC BUZZ -- the 89th acoustic element. Second insect sound. Sustained stridulation drone. NOT rhythmic like cricket (87) but CONTINUOUS. High-frequency (5,000-20,000 Hz). Sounds electric. E=4 through persistent space-filling. Back-to-back Orthoptera stridulation (87-88)."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Family-level entry. Bush katydids (Scudderia spp.): 30-50 mm, bright green, elongated body, very long antennae (often longer than body), leaf-like wings. Broad-winged katydids (Microcentrum spp.): 40-65 mm, green, rounded leaf-like wings. Meadow katydids (Conocephalus spp.): 15-25 mm, green or brown, slender.",
+    "diagnostic_mark": "For degree 88: (1) LEAF-LIKE APPEARANCE -- green, flat, wing veins resemble leaf veins. (2) VERY LONG ANTENNAE -- much longer than body (longer than cricket antennae). (3) STRIDULATION -- males rub forewings to produce continuous buzz. (4) ARBOREAL -- found in shrubs and trees, not ground. (5) SOUND -- most often detected by the buzz, not by sight.",
+    "fur_detail": null,
+    "skin_detail": "EXOSKELETON: Chitinous exoskeleton. Primarily green (most species), some brown or mixed. Wings: leaf-like, with venation patterns mimicking leaf structure. Forewings modified for stridulation (file and scraper).",
+    "dental_detail": null,
+    "field_id": "Most often detected by SOUND -- the continuous high-pitched buzz on summer nights. Remarkably leaf-like in appearance. Green, flat, leaf-vein wing patterns. Very long antennae. Arboreal -- in shrubs and trees, not on the ground like crickets. Heard far more than seen."
+  },
+  "nodes": [
+    {
+      "id": "back-to-back-orthoptera",
+      "type": "pattern",
+      "title": "Back-to-Back Orthoptera (87-88)",
+      "description": "Second consecutive Orthoptera. Cricket (87) and katydid (88). Same mechanism (stridulation), different result (chirp vs buzz). Like Anatidae (58-59). Ground vs shrub. Two families exploring one mechanism.",
+      "connections": ["continuous-buzz", "tettigoniidae-new", "second-insect"]
+    },
+    {
+      "id": "continuous-buzz",
+      "type": "concept",
+      "title": "Continuous Electric Buzz -- 89th Acoustic Element",
+      "description": "Sustained drone. Wing stridulation. Sounds electric. High-pitched (5,000-20,000 Hz). E=4. Fills shrub canopy. Continuous without gaps. Distinct from cricket's rhythmic chirp.",
+      "connections": ["back-to-back-orthoptera", "stridulation-comparison", "tettigoniidae-new"]
+    },
+    {
+      "id": "tettigoniidae-new",
+      "type": "concept",
+      "title": "Tettigoniidae -- 39th Family -- Same Order, New Family",
+      "description": "NEW FAMILY. Bush-crickets / katydids. 39th family. Same order Orthoptera as Gryllidae (87). Back-to-back new families in the same order.",
+      "connections": ["back-to-back-orthoptera", "continuous-buzz"]
+    },
+    {
+      "id": "second-insect",
+      "type": "pattern",
+      "title": "Second Consecutive Insect (87-88)",
+      "description": "Second insect in the engine. Back-to-back insects. Both Orthoptera. Both stridulation. Both E=4. Different families, different habitats, different results.",
+      "connections": ["back-to-back-orthoptera", "three-non-mammalian"]
+    },
+    {
+      "id": "stridulation-comparison",
+      "type": "concept",
+      "title": "Stridulation: Chirp vs Buzz",
+      "description": "Same mechanism (wing rubbing), different result. Cricket = discrete chirps, rhythmic. Katydid = continuous drone, no gaps. Two expressions of one mechanism in consecutive degrees.",
+      "connections": ["continuous-buzz", "back-to-back-orthoptera"]
+    },
+    {
+      "id": "three-non-mammalian",
+      "type": "pattern",
+      "title": "Three Consecutive Non-Mammalian Entries (86-87-88)",
+      "description": "Pacific Treefrog (86, Amphibia), cricket (87, Insecta), katydid (88, Insecta). Three consecutive non-mammalian entries. Longest non-mammalian streak since bird era (0-60).",
+      "connections": ["second-insect", "back-to-back-orthoptera"]
+    },
+    {
+      "id": "shrub-habitat",
+      "type": "concept",
+      "title": "Shrub/Meadow Habitat -- Arboreal Calling",
+      "description": "Arboreal/shrub-dwelling. Elevated calling position in shrub canopy. Contrasts with ground-dwelling cricket (87). Meadow shared with Snowshoe Hare (73). Vertical niche separation.",
+      "connections": ["continuous-buzz", "back-to-back-orthoptera"]
+    },
+    {
+      "id": "dawson-parallel",
+      "type": "pattern",
+      "title": "The Kimya Dawson Parallel",
+      "description": "Both continuous and stripped-down. Katydid buzzes all night without interruption. Dawson strums entire songs without embellishment. Both minimal in structure but persistent in presence. Persistence, not force.",
+      "connections": ["continuous-buzz", "second-insect"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Eighth Consecutive Original CSV",
+      "description": "Twenty-eight consecutive original CSV species. No substitution. Original placement at degree 88.",
+      "connections": ["second-insect"]
+    },
+    {
+      "id": "bat-predation",
+      "type": "concept",
+      "title": "Bat-Katydid Frequency Arms Race",
+      "description": "Bats are primary nocturnal predators. Echolocation detects katydid calls. Some katydids evolved to shift call frequency above bat echolocation range. A frequency arms race between predator and prey.",
+      "connections": ["continuous-buzz", "shrub-habitat"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-087",
+      "species": "Cricket Chorus",
+      "relationship": "BACK-TO-BACK ORTHOPTERA. Same mechanism (stridulation), different result (chirp vs buzz). Gryllidae (87) and Tettigoniidae (88). Ground vs shrub. Rhythmic vs continuous. Two families exploring one mechanism."
+    },
+    {
+      "target": "SPS-086",
+      "species": "Pacific Treefrog",
+      "relationship": "THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88). Treefrog (Amphibia), cricket (Insecta), katydid (Insecta). Three consecutive chorusing/buzzing species. The chorus zone extends."
+    },
+    {
+      "target": "SPS-002",
+      "species": "Varied Thrush",
+      "relationship": "ELECTRIC BUZZ QUALITY SHARED. Varied Thrush's ethereal buzzy whistle has electric quality similar to katydid's drone. Different phyla, similar timbral impression."
+    },
+    {
+      "target": "SPS-062",
+      "species": "Beaver Chewing",
+      "relationship": "CONTINUOUS SOUND. Both produce continuous, sustained sounds. Beaver gnaws without stopping; katydid buzzes without stopping. Both fill soundscapes through persistence."
+    },
+    {
+      "target": "SPS-073",
+      "species": "Snowshoe Hare",
+      "relationship": "MEADOW SHARED. Both inhabit meadow edges and shrub habitats. Katydid calls from shrub canopy above where hare forages below. Vertical niche separation."
+    }
+  ]
+}
