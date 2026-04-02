@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 91&deg; &mdash; Mosquito Swarm &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Quadrant II card */
+    .quadrant-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #FB8C00 100%);
+      border: 3px solid #E65100;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .quadrant-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFE0B2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quadrant-card p {
+      color: #FFF3E0;
+    }
+    .quadrant-card strong {
+      color: #FFE0B2;
+    }
+
+    /* Mosquito whine card */
+    .whine-card {
+      background: linear-gradient(135deg, #37474F 0%, #455A64 30%, #546E7A 60%, #607D8B 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .whine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .whine-card p {
+      color: #ECEFF1;
+    }
+    .whine-card strong {
+      color: #CFD8DC;
+    }
+
+    /* New order card */
+    .order-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .order-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .order-card p {
+      color: #F3E5F5;
+    }
+    .order-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Wing-sound card */
+    .wing-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .wing-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .wing-card p {
+      color: #E0F2F1;
+    }
+    .wing-card strong {
+      color: #B2DFDB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.quadrant { background: #E65100; }
+    .theory-icon.whine { background: #37474F; }
+    .theory-icon.order { background: #4A148C; }
+    .theory-icon.wing { background: #004D40; }
+    .theory-icon.wetland { background: #33691E; }
+    .theory-icon.hovercraft { background: #212121; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">91&deg;</div>
+      <div class="release-title-block">
+        <h2>Mosquito Swarm</h2>
+        <div class="scientific">Culicidae (family) &mdash; NEW FAMILY (41st)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      ultra-thin hum cloud &mdash; QUADRANT II OPENS (degree 91). NEW FAMILY: Culicidae (41st). NEW ORDER: Diptera (flies) &mdash; fourth consecutive insect order. First sound produced by wings rather than voice, stridulation, or tymbal. E=2. Wetland habitat. Thirty-first consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Quadrant II Card -->
+        <div class="quadrant-card">
+          <h3>QUADRANT II OPENS &mdash; Degree 91</h3>
+          <p>Degree 91 is the <strong>first degree of Quadrant II</strong> on the species side too. The engine passes the quarter-mark. <strong>And it opens with a whisper &mdash; not a roar.</strong> The mosquito swarm is E=2 &mdash; barely audible, the thinnest sound in the engine. A new family (41st), a new order (Diptera), and the first sound produced by wings alone. <strong>Thirty-first consecutive original CSV.</strong></p>
+        </div>
+
+        <!-- Whine Card -->
+        <div class="whine-card">
+          <h3>Ultra-Thin Hum Cloud &mdash; 92nd Acoustic Element</h3>
+          <p>The mosquito swarm is an <strong>ultra-thin hum cloud</strong> &mdash; a high-pitched, barely audible whine at approximately <strong>400&ndash;600 Hz</strong> (female wingbeat frequency) [1, 2]. The sound is not a call or vocalization &mdash; it is the <strong>mechanical byproduct of flight</strong>. Wings beating 300&ndash;600 times per second produce a thin, persistent whine. When a swarm of mosquitoes hovers together, the individual whines merge into a <strong>diffuse, barely-there hum cloud</strong> that seems to exist at the very threshold of perception. <strong>E=2</strong> &mdash; you sense it more than you hear it.</p>
+        </div>
+
+        <!-- New Order Card -->
+        <div class="order-card">
+          <h3>NEW ORDER: Diptera &mdash; Fourth Consecutive Insect Order</h3>
+          <p><strong>Diptera</strong> (true flies, mosquitoes, gnats) is a <strong>new order</strong> in the engine. This is the <strong>fourth consecutive insect order</strong>: Orthoptera (cricket 87, katydid 88), Hemiptera (cicada 89), and now Diptera (mosquito 91). Each order produces sound differently: Orthoptera by stridulation (leg or wing rubbing), Hemiptera by tymbal (membrane vibration), and Diptera by <strong>wing vibration alone</strong>. <strong>Culicidae</strong> (mosquitoes) is the <strong>41st family</strong> in the engine.</p>
+        </div>
+
+        <!-- Wing-Sound Card -->
+        <div class="wing-card">
+          <h3>First Wing-Produced Sound &mdash; A New Sound Category</h3>
+          <p>The mosquito swarm introduces a <strong>fundamentally new sound category</strong> to the engine. Every prior sound has been produced by <strong>voice</strong> (birds, mammals, frogs), <strong>stridulation</strong> (cricket, katydid &mdash; rubbing body parts), or <strong>tymbal</strong> (cicada &mdash; vibrating membrane). The mosquito&rsquo;s sound is produced by <strong>wings alone</strong> &mdash; the mechanical byproduct of flight, not a specialized sound-producing organ. This is the first time the engine encounters a sound that is not intended as communication but exists as a <strong>physical consequence of movement</strong>.</p>
+        </div>
+
+        <h2>The Sound: Ultra-Thin Hum Cloud (92nd Acoustic Element)</h2>
+        <p><strong>The sound:</strong> The mosquito swarm produces a <strong>high-pitched, thin, persistent whine</strong> [1, 2]. The female mosquito&rsquo;s wingbeat frequency is approximately <strong>400&ndash;600 Hz</strong> &mdash; a thin, reedy tone in the upper register. Males beat their wings faster (approximately 600&ndash;800 Hz). When a swarm hovers, the individual wingbeat tones merge into a <strong>diffuse hum cloud</strong> &mdash; not a focused beam of sound but a spread-out, ambient presence at the edge of hearing.</p>
+        <p><strong>Why E=2:</strong> (1) Individual mosquitoes are nearly inaudible beyond a few meters. (2) Swarm sound is diffuse and unfocused. (3) The hum exists at the <strong>threshold of perception</strong> &mdash; you are aware of it without clearly hearing it. (4) E=2 reflects the barely-there quality. This is the <strong>quietest sound</strong> the species engine has catalogued.</p>
+
+        <h2>Taxonomy: Culicidae &mdash; NEW FAMILY (41st), NEW ORDER: Diptera</h2>
+        <p><strong>Classification:</strong> Class <strong>Insecta</strong>. Order <strong>Diptera</strong> (NEW ORDER &mdash; true flies, mosquitoes, gnats). Family <strong>Culicidae</strong> (NEW FAMILY &mdash; 41st in engine) [1, 2]. Diptera is the fourth insect order in the engine: Orthoptera (87, 88), Hemiptera (89), Anura interlude (90), Diptera (91).</p>
+        <p><strong>Sound production:</strong> Unlike all prior insect entries, the mosquito does not have a specialized sound organ. The sound is a <strong>byproduct of wing movement</strong> &mdash; the wings beat 300&ndash;600 times per second, producing an audible frequency as a mechanical consequence of flight [1, 2].</p>
+
+        <h2>Ecology: The Wetland Hum</h2>
+        <p><strong>Habitat:</strong> Wetland &mdash; standing water, marshes, swamps, wet meadows, pond edges [1, 2]. Mosquito larvae are aquatic; adults emerge and swarm near water sources. The wetland habitat connects to the muskrat&rsquo;s marsh (degree 85) and the spring peeper&rsquo;s wet meadow (degree 90).</p>
+        <p><strong>Activity:</strong> Crepuscular and nocturnal. Swarms most active at dawn and dusk. Males form mating swarms &mdash; hovering columns of hundreds or thousands of individuals.</p>
+        <p><strong>Context:</strong> The insect streak continues &mdash; degree 91 is the fourth insect order after a brief amphibian interlude at degree 90. The engine returns to Insecta immediately after revisiting Amphibia.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon quadrant">Q</div>
+            <div class="theory-content">
+              <h4>QUADRANT II OPENS &mdash; Degree 91</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>First degree of Quadrant II on species side. Opens with a whisper -- E=2. The quietest sound yet.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon whine">W</div>
+            <div class="theory-content">
+              <h4>Ultra-Thin Hum Cloud &mdash; 92nd Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>High-pitched wingbeat whine. 400-600 Hz. Diffuse hum cloud. Threshold of perception. E=2. First wing-produced sound.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon order">D</div>
+            <div class="theory-content">
+              <h4>NEW ORDER: Diptera (Fourth Insect Order)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Diptera = true flies, mosquitoes, gnats. Fourth consecutive insect order: Orthoptera, Hemiptera, Diptera. NEW FAMILY: Culicidae (41st).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wing">F</div>
+            <div class="theory-content">
+              <h4>First Wing-Produced Sound</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>New sound category. Not voice, stridulation, or tymbal -- pure wing vibration. Mechanical byproduct of flight, not communication.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wetland">E</div>
+            <div class="theory-content">
+              <h4>Wetland Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Standing water, marshes, swamps. Aquatic larvae, aerial adults. Connects to muskrat marsh (85) and peeper wet meadow (90).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hovercraft">H</div>
+            <div class="theory-content">
+              <h4>The Hovercraft Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both E=2 -- barely perceived. Hovercraft: sustained crush, maximum volume, minimum audience. Mosquito: ultra-thin hum, minimum volume, maximum ubiquity. Both at the threshold.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-089: Cicada</strong>
+            <p>Insect continues. Cicada (Hemiptera, tymbal) to mosquito (Diptera, wing vibration). Different orders, different sound mechanisms. The insect diversity of the engine expands.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-087: Cricket Chorus</strong>
+            <p>Insect quartet now. Cricket (Orthoptera, stridulation), katydid (Orthoptera, stridulation), cicada (Hemiptera, tymbal), mosquito (Diptera, wing). Four insects, three orders, three mechanisms.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-088: Katydid</strong>
+            <p>Insect diversity. Katydid (Orthoptera) and mosquito (Diptera) -- different orders, different mechanisms. The insect streak extends.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-086: Pacific Treefrog</strong>
+            <p>Wetland shared. Pacific Treefrog in wet habitats (86). Mosquito in wetlands (91). Both associated with standing water. Both crepuscular/nocturnal callers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-085: Muskrat</strong>
+            <p>Wetland neighbor. Muskrat in marshes (85). Mosquito in wetlands (91). Overlapping habitats. Both depend on standing water.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Culicidae&rdquo; and &ldquo;Mosquito.&rdquo;</li>
+          <li>[2] Clements, A.N. (1999). <em>The Biology of Mosquitoes.</em> CABI Publishing.</li>
+          <li>[3] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">91&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 2</div>
+          <div class="stat-detail">Barely audible. Threshold of perception.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Culicidae</div>
+          <div class="stat-detail">NEW FAMILY (41st).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Insecta</div>
+          <div class="stat-detail">Returns after amphibian (90).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Diptera</div>
+          <div class="stat-detail">NEW ORDER. True flies.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Wetland</div>
+          <div class="stat-detail">Standing water, marshes.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Ultra-thin hum</div>
+          <div class="stat-detail">Wing-produced. 400-600 Hz.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Crepuscular</div>
+          <div class="stat-detail">Dawn and dusk swarming.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Behavior</div>
+          <div class="stat-value">Mating swarms</div>
+          <div class="stat-detail">Hovering columns near water.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Mechanism</div>
+          <div class="stat-value">Wing vibration</div>
+          <div class="stat-detail">FIRST in engine. Not vocal.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Insect Order</div>
+          <div class="stat-value">4th (Diptera)</div>
+          <div class="stat-detail">Orthoptera, Hemiptera, Diptera.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Quadrant</div>
+          <div class="stat-value">II (91&ndash;180)</div>
+          <div class="stat-detail">First degree of Quadrant II.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (31st)</div>
+          <div class="stat-detail">Thirty-first consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
