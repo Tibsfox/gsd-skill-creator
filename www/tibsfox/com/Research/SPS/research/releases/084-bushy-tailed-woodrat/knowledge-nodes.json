@@ -1,0 +1,151 @@
+{
+  "degree": 84,
+  "species": "Bushy-tailed Woodrat",
+  "scientific_name": "Neotoma cinerea",
+  "slug": "084-bushy-tailed-woodrat",
+  "sound_type": "chatter + twig gnaw sounds -- rapid tooth-clacking chatter as warning/territorial signal, plus functional twig gnaw sounds during midden construction, E=3, rocky outcrop habitat",
+  "energy": 3,
+  "ecosystem": "Rocky outcrop. Cliff faces, talus slopes, boulder fields, rock crevices. Uses rock overhangs and crevices for midden placement. Returns to rocky terrain.",
+  "season": "year-round. Active all year. Nocturnal. Does not hibernate but may be less active in deep winter.",
+  "family": "Cricetidae",
+  "order": "Rodentia",
+  "csv_substitute": false,
+  "original_species": "Bushy-tailed Woodrat",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [83],
+    "partner_species": ["Deer Mouse"],
+    "pair_type": "Second consecutive Cricetidae (83-84). Deer Mouse (83, ultrasonic, E=2, varied habitat) followed by Bushy-tailed Woodrat (84, chatter+gnaw, E=3, rocky outcrop). From the invisible abundant to the industrious builder."
+  },
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -121.20,
+    "description": "Reference for rocky outcrop habitat in the Cascade Range, Washington. Talus slopes and cliff faces in montane environments."
+  },
+  "taxonomy_note": {
+    "description": "SECOND CONSECUTIVE CRICETIDAE (83-84). Cricetidae streak at two. Twenty-third mammalian entry. Twenty-first mammalian species. Eleventh Rodentia. Second Cricetidae. NEW GENUS Neotoma -- woodrats (pack rats).",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_infraclass": "Placentalia",
+    "new_infraclass": false,
+    "infraclass_note": "Placentalia continues.",
+    "current_family": "Cricetidae",
+    "new_family": false,
+    "family_count_in_engine": 36,
+    "cricetidae_count_in_engine": 2,
+    "name_etymology": "Neotoma from Greek neos ('new') + toma ('cutting'), referring to the sharp cutting incisors. cinerea from Latin 'ash-colored,' describing the gray pelage. Described by Ord (1815).",
+    "genus_note": "Neotoma -- NEW GENUS in the engine. Woodrats (pack rats). Second Cricetidae genus after Peromyscus (83).",
+    "order_note": "Rodentia -- eleventh Rodentia in the engine.",
+    "class_note": "Mammalia -- twenty-third mammalian entry. Twenty-first mammalian species.",
+    "family_position": "Cricetidae's SECOND entry at degree 84. Second consecutive (83-84)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Chatter: approximately 2,000-8,000 Hz. Twig gnaw: broadband, approximately 500-5,000 Hz.",
+    "peak_energy_band_hz": "Chatter: approximately 3,000-6,000 Hz. Gnaw: broadband with peak energy in 1,000-3,000 Hz range.",
+    "song_frequency_hz": "NOT a song. CHATTER + TWIG GNAW SOUNDS. Tooth-clacking chatter (warning) and functional gnaw/construction sounds.",
+    "song_duration_s": "Chatter: 0.5-3 seconds per bout. Gnaw: continuous during construction, variable duration.",
+    "note_structure": "Chatter: rapid series of tooth clicks. Mechanical, rhythmic. Gnaw: irregular scraping and snapping sounds.",
+    "note_types": "Chatter (tooth-clacking warning), twig gnaw (construction), squeak (distress), soft contact calls.",
+    "phrase_structure": "Chatter: rapid burst of clicks. Gnaw: sustained irregular construction sounds. Both functional rather than vocal.",
+    "timbre": "Chatter: mechanical, clicking, percussive. Like teeth chattering. Gnaw: woody, scraping, snapping. The sound of twigs being manipulated and broken.",
+    "amplitude": "E=3. Chatter is moderately loud -- audible at close range. Twig gnaw audible in quiet nocturnal environments. Comparable to Beaver chewing (62, E=4) but softer and smaller in scale.",
+    "tempo": "Chatter: rapid (4-8 clicks per second). Gnaw: irregular, work-paced.",
+    "context": "CHATTER: warning signal when disturbed, territorial defense. GNAW: functional construction sounds during midden building and maintenance. Not vocal communication but activity noise.",
+    "regional_variation": "Minimal variation documented.",
+    "key_property": "CHATTER + TWIG GNAW -- the 85th acoustic element. Tooth-clacking chatter plus functional construction gnaw sounds. E=3. Rocky outcrop. The sound of the pack rat at work. Comparable to Beaver chewing (62) but smaller scale."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Large woodrat (pack rat). 200-600 g (7-21 oz). 28-46 cm total length including tail. Bushy tail (the defining feature). Large ears, large dark eyes, gray-brown fur. The largest North American woodrat species.",
+    "diagnostic_mark": "For degree 84: (1) BUSHY TAIL -- the tail is densely furred and bushy, unlike the scaly tails of most rats and mice. The defining field mark. (2) LARGE EARS -- prominent, rounded. (3) GRAY-BROWN FUR -- soft, ash-colored pelage. (4) WHITE BELLY -- clean white underside. (5) LARGE BODY -- much larger than the Deer Mouse (83).",
+    "fur_detail": "BODY: Soft, dense, gray-brown to cinnamon-brown. Ash-colored (cinerea). BELLY: White to cream. TAIL: BUSHY -- densely furred, squirrel-like. The key diagnostic feature. Unlike the bicolored tail of the Deer Mouse.",
+    "dental_detail": "Rodent dentition. Large, powerful incisors adapted for gnawing bark and twigs. Neotoma = 'new cutting' -- the name refers to these cutting teeth.",
+    "field_id": "Large rat with a distinctly BUSHY tail (not scaly). Gray-brown fur, white belly, large ears. Most often detected by finding middens -- large stick nests in rock crevices. Nocturnal. The bushy tail distinguishes it from all other rats and mice."
+  },
+  "nodes": [
+    {
+      "id": "cricetidae-streak",
+      "type": "pattern",
+      "title": "Second Consecutive Cricetidae (83-84)",
+      "description": "Deer Mouse (83) + Bushy-tailed Woodrat (84). Cricetidae streak at two. After the Sciuridae octet (75-82). From invisible abundant to industrious builder.",
+      "connections": ["chatter-gnaw", "midden-builder", "rocky-outcrop"]
+    },
+    {
+      "id": "chatter-gnaw",
+      "type": "concept",
+      "title": "Chatter + Twig Gnaw -- 85th Acoustic Element",
+      "description": "Tooth-clacking chatter (warning) plus functional twig gnaw sounds (construction). E=3. Mechanical and functional sounds. Comparable to Beaver chewing (62) at smaller scale.",
+      "connections": ["cricetidae-streak", "midden-builder", "beaver-gnaw-parallel"]
+    },
+    {
+      "id": "midden-builder",
+      "type": "concept",
+      "title": "Midden Builder -- Thousands of Years Old",
+      "description": "Elaborate stick nests (middens). Some thousands of years old. Paleontological archives. Preserved plant material and crystallized urine (amberat). Time capsules of ancient ecology.",
+      "connections": ["cricetidae-streak", "chatter-gnaw", "beaver-gnaw-parallel"]
+    },
+    {
+      "id": "rocky-outcrop",
+      "type": "concept",
+      "title": "Rocky Outcrop Habitat -- Returns to Rock",
+      "description": "Cliff faces, talus slopes, boulder fields. Returns to rocky terrain. Shared with Golden-mantled Ground Squirrel (79). Two rocky-outcrop species in six degrees.",
+      "connections": ["cricetidae-streak", "midden-builder"]
+    },
+    {
+      "id": "beaver-gnaw-parallel",
+      "type": "pattern",
+      "title": "Gnaw Parallel -- Beaver Chewing (62)",
+      "description": "Both produce functional gnaw sounds. Beaver chewing trees (62, E=4) and Woodrat gnawing twigs (84, E=3). Both rodent infrastructure builders. Different scales, same principle.",
+      "connections": ["chatter-gnaw", "midden-builder"]
+    },
+    {
+      "id": "marten-predator",
+      "type": "pattern",
+      "title": "American Marten Predator (65)",
+      "description": "Marten preys on Bushy-tailed Woodrats. Marten's prey list grows: Douglas Squirrel (80), Flying Squirrel (82), Woodrat (84). Cross-family predator.",
+      "connections": ["cricetidae-streak"]
+    },
+    {
+      "id": "jurado-parallel",
+      "type": "pattern",
+      "title": "The Damien Jurado Late Parallel",
+      "description": "Both builders over time. Both accumulators. Both quiet. Both work in solitude. Jurado accumulates songs, Woodrat accumulates sticks. Songs and sticks.",
+      "connections": ["midden-builder"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Fourth Consecutive Original CSV",
+      "description": "Twenty-four consecutive original CSV species. No substitution. CSV reliability continues.",
+      "connections": ["cricetidae-streak"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-083",
+      "species": "Deer Mouse",
+      "relationship": "CONSECUTIVE CRICETIDAE (83-84). Deer Mouse is ultrasonic (E=2), Woodrat is audible chatter+gnaw (E=3). Varied habitat (83) to rocky outcrop (84). The invisible abundant followed by the industrious builder."
+    },
+    {
+      "target": "SPS-062",
+      "species": "Beaver",
+      "relationship": "GNAW PARALLEL. Both produce functional gnaw sounds -- Beaver chewing trees (62, E=4) and Woodrat gnawing twigs (84, E=3). Both rodent infrastructure builders. Beaver builds dams; Woodrat builds middens. Different scales, same principle."
+    },
+    {
+      "target": "SPS-061",
+      "species": "Beaver",
+      "relationship": "RODENT INFRASTRUCTURE BUILDER. Both Castoridae (Beaver) and Cricetidae (Woodrat) build structures that modify or preserve habitat. Beaver dams create ponds. Woodrat middens preserve ecological history. Both accumulate materials."
+    },
+    {
+      "target": "SPS-079",
+      "species": "Golden-mantled Ground Squirrel",
+      "relationship": "ROCKY OUTCROP SHARED. Both inhabit rocky terrain -- talus, boulder fields, rock crevices. Two rocky-outcrop species in six degrees (79, 84). Different families (Sciuridae vs Cricetidae) on the same terrain."
+    },
+    {
+      "target": "SPS-065",
+      "species": "American Marten",
+      "relationship": "PREDATOR. The American Marten preys on Bushy-tailed Woodrats. Marten's prey list in the engine: Douglas Squirrel (80), Flying Squirrel (82), Woodrat (84). Cross-family predator."
+    }
+  ]
+}
