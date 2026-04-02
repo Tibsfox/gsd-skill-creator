@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-02T00:49:00Z",
-  "source": "sweep-v1.1.17.3",
+  "updated": "2026-04-02T01:43:00Z",
+  "source": "sweep-v1.1.17.5",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "orbit",
-    "status": "IN ORBIT \u2014 L+2h14m \u2014 ARB due NOW (~L+1h48m, ~5:23PM PDT). 20-second RL10 burn to reach 43,730 mi apogee. ICPS sep at T+3h24m (~6:59PM PDT). Prox ops demo after sep. Solar arrays: 11 kW. TLI on Flight Day 2. Press conf 8 PM EDT.",
+    "status": "HIGH EARTH ORBIT \u2014 L+3h07m \u2014 ARB complete, 43,760 mi apogee. ICPS sep at T+3h24m (~6:59 PM PDT, 17 min away). Then 70-min prox ops demo: backflip, approach to 30 ft, manual piloting (Wiseman+Glover). Toilet fault light under investigation. ICPS deorbits to Pacific after demo.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -102,7 +102,7 @@
   "announcements": [
     {
       "time": "2026-04-02T00:10:00Z",
-      "text": "v1.1.17.3: L+2h14m 5:49pm. ARB imminent \u2014 20s RL10 burn to 43,730 mi apogee. ICPS sep at T+3h24m (~6:59pm PDT), then prox ops demo (Wiseman+Glover manual piloting). Solar arrays 11 kW nominal. Erdős #19 (EFL conjecture) research: proved for large n (Annals 2023), GPU target = verify small n to close the gap. KPAE 10.8°C RA OVC020, pressure 999.8 hPa."
+      "text": "v1.1.17.4: L+2h48m 6:23pm. ARB COMPLETE \u2014 18-min RL10 burn, apogee now 43,760 mi (70,426 km). Highest humans since Apollo 17 Dec 1972. ICPS sep imminent, 70-min prox ops demo: automated backflip, halt at 300ft, manual approach to 30ft, fine handling with RCS thrusters, then automated departure. Toilet fault light reported \u2014 under investigation. ICPS will deorbit to Pacific after sep. KPAE 10.8°C RA OVC020. Erdős #19 updated: EFL proved large n, GPU gap = small n verification."
     },
     {
       "time": "2026-04-01T23:00:00Z",
