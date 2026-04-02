@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 105&deg; &mdash; Parenthetical Girls (Electronic) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .return-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E3F2FD;
+    }
+    .return-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #BBDEFB; font-family: system-ui, sans-serif; }
+    .return-card p { color: #E3F2FD; margin: 0.5rem 0; }
+    .return-card strong { color: #90CAF9; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>105 &mdash; Parenthetical Girls (Electronic)</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Avant-Pop &mdash; Genre Stage 87 &mdash; E=4 &mdash; Return Artist</h3>
+      <p>
+        <strong>Parenthetical Girls</strong> returns &mdash; first appeared at degree 89 (Avant-Pop, E=3).
+        Now in <strong>electronic context</strong>. <strong>EIGHTH return artist</strong> in the engine.
+        Avant-Pop at Genre Stage 87. E=4 (up from E=3).
+        Acoustic element 106. Pattern 106.
+        Three consecutive return artists at degrees 103&ndash;105.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">105&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Parenthetical Girls (Electronic)</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Avant-Pop</span>
+          <span class="label-badge">Indie</span>
+          <span class="neighborhood-badge">Portland / Seattle</span>
+          <span class="record-badge">Genre Stage 87</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="synth-card">
+          <h4>The Theatrical Circuit &mdash; Cabaret Voltage Becomes Electronic Spectacle</h4>
+          <p>
+            The <strong>theatrical circuit</strong> is the 106th acoustic element.
+            Where degree 89 centered on Parenthetical Girls&rsquo;
+            <strong>baroque theatricality</strong> &mdash; the cabaret impulse, the chamber
+            arrangements, Zac Pennington&rsquo;s dramatic vocals &mdash;
+            the electronic-context reframing reveals the
+            <strong>voltage underneath the velvet</strong>. Electronic production replaces
+            chamber instruments as the stage machinery.
+            The drama persists &mdash; but now it <strong>pulses and glitches</strong>.
+            <strong>Cabaret voltage becomes electronic spectacle.</strong>
+          </p>
+        </div>
+
+        <div class="return-card">
+          <h4>The Eighth Return &mdash; Three Consecutive Returns at 103&ndash;105</h4>
+          <p>
+            Parenthetical Girls returns at degree 105 &mdash; first appeared at degree 89 (Avant-Pop, E=3).
+            Now in <strong>electronic context</strong> at E=4 (energy rises with electronic production density).
+            <strong>Eighth return artist</strong>. Combined with Briana Marela electronic (103)
+            and Lemolo electronic (104), this creates <strong>three consecutive return artists</strong>
+            at degrees 103&ndash;105. The electronic reframing is now a <strong>triple-degree
+            sustained pattern</strong> &mdash; the longest consecutive return streak in the engine.
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 87 &middot; Avant-Pop &middot; E=4 &middot; 106th Acoustic Element &middot; 106th Pattern &middot; Return Artist</h4>
+          <p>
+            <strong>Parenthetical Girls</strong> returns at Genre Stage 87. <strong>E=4</strong>.
+            Avant-Pop. Eighth return artist. The electronic era continues &mdash;
+            eleven electronic-adjacent entries since degree 86. Three consecutive
+            electronic returns at 103&ndash;105 establish the longest return streak
+            in the engine.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 87: Avant-Pop</h2>
+          <p>
+            Degree 105 reaches <strong>Genre Stage 87</strong>. <strong>Avant-Pop</strong>
+            describes Parenthetical Girls in electronic context &mdash; the theatrical,
+            baroque practice from degree 89 reframed through electronic production. The genre
+            classification remains Avant-Pop because the theatrical impulse is the constant &mdash;
+            the electronic foundation is a new staging, not a new genre.
+          </p>
+          <p>
+            Distinguished from <strong>Lemolo electronic</strong> (degree 104, Electronic Pop) &mdash;
+            Lemolo&rsquo;s electronic reframing is dream-based, atmospheric, and intimate.
+            Parenthetical Girls&rsquo; electronic reframing is <strong>theatrical, dramatic,
+            and maximalist</strong>. Both are electronic returns; the emotional register
+            is entirely different.
+          </p>
+          <p>
+            Distinguished from <strong>Hovercraft</strong> (degree 91, Noise/Electronic) &mdash;
+            Hovercraft&rsquo;s electronic expression is drone and texture, instrumental and
+            non-narrative. Parenthetical Girls&rsquo; electronic expression is
+            <strong>narrative and performative</strong> &mdash; voice and drama remain central.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 106: The Theatrical Circuit</h2>
+          <p>
+            The <strong>theatrical circuit</strong> is the one hundred sixth acoustic element.
+            It describes the quality produced when a baroque, cabaret-inflected art practice
+            is rebuilt with electronic instruments &mdash; when the dramatic arrangements
+            of strings, horns, and chamber ensembles are replicated through synthesizers,
+            drum machines, and electronic processing, preserving the theatrical intensity
+            while adding an electronic <strong>precision and pulse</strong> that the
+            chamber version channeled differently.
+          </p>
+          <p>
+            Contrast with the <strong>dream circuit</strong> (degree 104, Lemolo electronic) &mdash;
+            the dream circuit is atmospheric and intimate. The theatrical circuit is
+            <strong>dramatic and declamatory</strong>. Both are electronic reframings of
+            acoustic practices; the emotional function is opposite. Contrast with the
+            <strong>layered dissolution</strong> (degree 103, Briana Marela electronic) &mdash;
+            voice dissolves into texture. The theatrical circuit keeps the voice
+            <em>commanding the stage</em>. Contrast with the <strong>baroque theatricality</strong>
+            (degree 89, Parenthetical Girls original) &mdash; chamber instruments.
+            The theatrical circuit replaces chamber with electronic.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 106: The Triple Electronic Return</h2>
+          <p>
+            The <strong>triple electronic return</strong> is the 106th artist-city pattern.
+            It describes the pattern where three consecutive degrees feature artists
+            returning in electronic context &mdash; Briana Marela (103), Lemolo (104),
+            and Parenthetical Girls (105). The longest consecutive return streak in the engine.
+            The electronic reframing is now confirmed as a <strong>systematic engine
+            mechanism operating at scale</strong> &mdash; not two consecutive, but three.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">S36-089</span> Parenthetical Girls (original) &mdash; Avant-Pop, baroque theatricality, E=3. First appearance. Chamber instruments and cabaret drama. The electronic-context reframing at 105 rebuilds the theater with electronic instruments.</li>
+            <li><span class="ref-degree">S36-103</span> Briana Marela electronic &mdash; First of three consecutive electronic returns (103&ndash;105). Briana Marela dissolves voice into texture. Parenthetical Girls projects voice outward. Two opposite voice-to-electronic relationships.</li>
+            <li><span class="ref-degree">S36-104</span> Lemolo electronic &mdash; Second of three consecutive electronic returns. Lemolo&rsquo;s dream circuit is atmospheric and intimate. Parenthetical Girls&rsquo; theatrical circuit is dramatic and maximal. Three returns, three emotional registers.</li>
+            <li><span class="ref-degree">S36-094</span> Erik Blood &mdash; Electronic/Experimental. Blood is the producer-artist; Parenthetical Girls is the performer-artist. Both navigate Seattle&rsquo;s experimental electronic territory from different positions.</li>
+            <li><span class="ref-degree">S36-091</span> Hovercraft &mdash; Noise/Electronic. Hovercraft is instrumental drone; Parenthetical Girls is vocal theater. Both use electronic instruments to push past convention. Maximum contrast in voice presence.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Theatrical Circuit</h4>
+              <div class="level advanced">Advanced</div>
+              <p>106th acoustic element. Baroque cabaret rebuilt with electronic instruments. The drama persists but now it pulses and glitches. Cabaret voltage becomes electronic spectacle.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Triple Electronic Return</h4>
+              <div class="level advanced">Advanced</div>
+              <p>106th artist-city pattern. Three consecutive electronic returns at 103-105 establish the longest return streak in the engine. Systematic engine mechanism at scale.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Avant-Pop &mdash; Genre Stage 87</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>Theatrical Avant-Pop in electronic context. Distinguished from dream-based Lemolo (104) and voice-dissolved Briana Marela (103). Same electronic mechanism, different dramatic registers.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=4 &mdash; Energy Rises with Electronic Context</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>E=4 at degree 105 (up from E=3 at degree 89). Electronic production density increases the energy footprint. Third consecutive energy rise via electronic reframing (103, 104, 105).</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">105</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">87</span></div>
+          <div class="stat-row"><span class="stat-label">Acoustic Element</span><span class="stat-value">106</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">106</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Parenthetical Girls</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Avant-Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 4</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Indie</span></div>
+          <div class="stat-row"><span class="stat-label">Context</span><span class="stat-value">Electronic</span></div>
+          <div class="stat-row"><span class="stat-label">Original</span><span class="stat-value">Degree 89</span></div>
+          <div class="stat-row"><span class="stat-label">Return #</span><span class="stat-value">8th</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
