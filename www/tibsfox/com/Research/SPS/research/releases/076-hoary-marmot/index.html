@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 76&deg; &mdash; Hoary Marmot &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Whistler landmark card */
+    .whistler-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #42A5F5 100%);
+      border: 3px solid #0D47A1;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .whistler-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BBDEFB;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .whistler-card p {
+      color: #E3F2FD;
+    }
+    .whistler-card strong {
+      color: #90CAF9;
+    }
+
+    /* Marmot pair card */
+    .marmot-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .marmot-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .marmot-card p {
+      color: #EFEBE9;
+    }
+    .marmot-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Hibernation card */
+    .hibernation-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 50%, #455A64 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .hibernation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .hibernation-card p {
+      color: #ECEFF1;
+    }
+    .hibernation-card strong {
+      color: #90A4AE;
+    }
+
+    /* Alpine run card */
+    .alpine-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .alpine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .alpine-card p {
+      color: #E8F5E9;
+    }
+    .alpine-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Chris Pureka parallel card */
+    .pureka-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .pureka-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .pureka-card p {
+      color: #E8EAF6;
+    }
+    .pureka-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.pair { background: #4E342E; }
+    .theory-icon.whistle { background: #1565C0; }
+    .theory-icon.mountain { background: #0D47A1; }
+    .theory-icon.size { background: #5D4037; }
+    .theory-icon.hibernate { background: #37474F; }
+    .theory-icon.alpine { background: #1B5E20; }
+    .theory-icon.pika-link { background: #2E7D32; }
+    .theory-icon.pureka-link { background: #283593; }
+    .theory-icon.weasel-link { background: #455A64; }
+    .theory-icon.fox-link { background: #BF360C; }
+    .theory-icon.marten-link { background: #33691E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">76&deg;</div>
+      <div class="release-title-block">
+        <h2>Hoary Marmot</h2>
+        <div class="scientific">Marmota caligata</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loud penetrating whistle &mdash; BACK-TO-BACK SCIURIDAE with Yellow-bellied Marmot (75), MARMOT PAIR, largest North American marmot (5&ndash;7 kg), E=5 (highest energy mammal), named WHISTLER MOUNTAIN (BC), longest hibernation (7&ndash;8 months), third consecutive alpine (74&ndash;75&ndash;76), alpine meadows and talus, sixteenth consecutive original CSV
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Whistler Landmark Card -->
+        <div class="whistler-card">
+          <h3>The Whistler &mdash; Named a Mountain and a City</h3>
+          <p>The Hoary Marmot&rsquo;s alarm whistle is so loud and characteristic that <strong>Whistler Mountain</strong> and the city of <strong>Whistler, British Columbia</strong> &mdash; host of the <strong>2010 Winter Olympics</strong> &mdash; are named for this species. No other species in the engine has named a major geographic feature through its vocalization. <strong>E=5</strong> &mdash; the loudest mammalian call in the engine. Audible at <strong>300&ndash;500+ meters</strong> across open alpine terrain. The sound became a place name.</p>
+        </div>
+
+        <!-- Marmot Pair Card -->
+        <div class="marmot-card">
+          <h3>Back-to-Back Sciuridae (75&ndash;76) &mdash; The Marmot Pair</h3>
+          <p>The <strong>Yellow-bellied Marmot</strong> (75) and <strong>Hoary Marmot</strong> (76) are the <strong>marmot pair</strong> &mdash; same genus (<em>Marmota</em>), different species, consecutive degrees. Fourth family pair after Anatidae (58&ndash;59), Castoridae (61&ndash;62), Mustelidae (67&ndash;68). Lower vs. higher elevation (1,000&ndash;2,500 m vs. 1,500&ndash;3,000+ m). Smaller vs. larger (<strong>2&ndash;5 kg vs. 5&ndash;7 kg</strong>). E=4 vs. <strong>E=5</strong>. Chirp vs. <strong>whistle</strong>.</p>
+        </div>
+
+        <!-- Hibernation Card -->
+        <div class="hibernation-card">
+          <h3>Longest Hibernation in the Engine &mdash; 7&ndash;8 Months</h3>
+          <p>The Hoary Marmot hibernates <strong>7&ndash;8 months</strong> per year (October&ndash;April) &mdash; the <strong>longest hibernation of any mammal in the engine</strong>. Active only 4&ndash;5 months per year. Body temperature drops from 37&deg;C to <strong>3&ndash;5&deg;C</strong>. Heart rate from 100+ bpm to <strong>3&ndash;5 bpm</strong>. Nearly doubles body mass pre-hibernation. <strong>Contrast with Pika (74):</strong> the Pika stores hay and does NOT hibernate. Same alpine habitat, <strong>opposite strategies</strong> &mdash; the two solutions: farm or sleep.</p>
+        </div>
+
+        <!-- Alpine Run Card -->
+        <div class="alpine-card">
+          <h3>Third Consecutive Alpine/Rocky (74&ndash;75&ndash;76)</h3>
+          <p><strong>American Pika</strong> (74), <strong>Yellow-bellied Marmot</strong> (75), <strong>Hoary Marmot</strong> (76). Three consecutive alpine/talus species. The engine&rsquo;s <strong>deepest penetration into high-elevation ecology</strong>. Three size classes: tiny (Pika, 120&ndash;185 g), medium (Yellow-bellied, 2&ndash;5 kg), large (Hoary, 5&ndash;7 kg). Three acoustic signatures: bark, chirp, whistle. One alpine habitat, three ecological niches.</p>
+        </div>
+
+        <!-- Chris Pureka Parallel Card -->
+        <div class="pureka-card">
+          <h3>The Chris Pureka Parallel</h3>
+          <p>Degree 76 pairs Hoary Marmot with <strong>Chris Pureka</strong> in Part A &mdash; Folk, E=2, self-released, queer/nonbinary. Both defined by <strong>voice</strong> &mdash; Pureka&rsquo;s androgynous register, the marmot&rsquo;s penetrating whistle. Both at <strong>margins</strong> &mdash; queer folk circuit, alpine edge. Both carry <strong>names that mislead</strong> &mdash; &ldquo;hoary&rdquo; suggests ancient, an androgynous voice defies assumptions.</p>
+        </div>
+
+        <h2>The Sound: Loud Penetrating Whistle (77th Acoustic Element)</h2>
+        <p><strong>The whistle:</strong> A sharp, high-pitched alarm call &mdash; approximately 2,000&ndash;8,000 Hz, with peak energy at 3,000&ndash;5,000 Hz. Duration 0.3&ndash;1.0 seconds. A true whistle &mdash; tonal, sustained, piercing. Given singly or in series of 2&ndash;5. The whistle carries across entire alpine basins [1, 2, 3, 4].</p>
+        <p><strong>Why E=5:</strong> The loudest mammalian vocalization in the engine. (1) Volume &mdash; audible at 300&ndash;500+ meters. (2) Conspicuousness &mdash; diurnal, social, on prominent boulders. (3) Cultural impact &mdash; named Whistler Mountain. (4) Ecological prominence &mdash; dominant acoustic presence in alpine habitat.</p>
+        <p><strong>Marmot pair contrast:</strong> Yellow-bellied Marmot (75): sharp chirp, E=4, 0.1&ndash;0.3 s. Hoary Marmot (76): penetrating whistle, E=5, 0.3&ndash;1.0 s. Higher, larger, <strong>louder</strong>.</p>
+
+        <h2>Taxonomy: <em>Marmota caligata</em></h2>
+        <p><strong>Etymology:</strong> <em>Marmota</em> from French <em>marmotte</em>, ultimately from Latin <em>murem montis</em> (&ldquo;mouse of the mountain&rdquo;). <em>caligata</em> from Latin &ldquo;wearing boots&rdquo; &mdash; for the dark fur on the lower legs. Named by Eschscholtz (1829). &ldquo;Hoary&rdquo; = white/gray-haired [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Rodentia</strong>. Family <strong>Sciuridae</strong> &mdash; back-to-back with Yellow-bellied Marmot (75). Genus <em>Marmota</em> &mdash; ~14 species worldwide. Three in the PNW: <em>M. flaviventris</em> (Yellow-bellied, 75), <em>M. caligata</em> (Hoary, 76), <em>M. olympus</em> (Olympic Marmot) [1, 2, 3].</p>
+
+        <h2>Physical Description: The Alpine Giant</h2>
+        <p><strong>Size:</strong> 620&ndash;820 mm total, 5&ndash;7 kg at peak autumn mass &mdash; the <strong>largest North American marmot</strong>. Nearly doubles body mass between spring (3&ndash;4 kg) and autumn (5&ndash;7 kg) [1, 2, 3].</p>
+        <p><strong>Pelage:</strong> Silver-gray body with frosted &ldquo;hoary&rdquo; appearance. Dark brown/black face. White patches on muzzle and forehead. Dark &ldquo;boots&rdquo; on lower legs &mdash; the diagnostic feature (Latin <em>caligata</em>).</p>
+
+        <h2>Ecology: Colonial Herbivore</h2>
+        <p><strong>Habitat:</strong> Alpine meadows with adjacent talus. 1,500&ndash;3,000+ meters. Requires BOTH open meadow (foraging) and rocky talus (denning). The meadow-talus interface [1, 2, 3].</p>
+        <p><strong>Social:</strong> Colonial, 5&ndash;15 individuals. Sentinels on elevated boulders. Playful &mdash; juveniles wrestle and chase. Relaxed demeanor when not alarmed.</p>
+        <p><strong>Diet:</strong> Alpine grasses, sedges, wildflowers. No food storage (unlike Pika). Relies on fat reserves for 7&ndash;8 months of hibernation.</p>
+        <p><strong>Predators:</strong> Golden Eagle (aerial), Wolverine (burrow invader), Red Fox (71, middle elevations), Short-tailed Weasel (67, burrow access), American Marten (65, treeline transition).</p>
+
+        <h2>The Mammalian Era Continues: Degree 76</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Order</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>61</td><td>American Beaver</td><td>Castoridae</td><td>Rodentia</td><td>Tail slap alarm</td></tr>
+            <tr><td>62</td><td>American Beaver</td><td>Castoridae</td><td>Rodentia</td><td>Nocturnal chewing</td></tr>
+            <tr><td>63</td><td>River Otter</td><td>Mustelidae</td><td>Carnivora</td><td>Social chuff</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Carnivora</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Carnivora</td><td>Loud scream</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Carnivora</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td>70</td><td>Raccoon</td><td>Procyonidae</td><td>Carnivora</td><td>Churring / chittering</td></tr>
+            <tr><td>71</td><td>Red Fox</td><td>Canidae</td><td>Carnivora</td><td>Sharp bark / scream</td></tr>
+            <tr><td>72</td><td>Opossum</td><td>Didelphidae</td><td>Didelphimorphia</td><td>Low hiss / click</td></tr>
+            <tr><td>73</td><td>Snowshoe Hare</td><td>Leporidae</td><td>Lagomorpha</td><td>Foot thump / squeal</td></tr>
+            <tr><td>74</td><td>American Pika</td><td>Ochotonidae</td><td>Lagomorpha</td><td>High &ldquo;eenk&rdquo; bark</td></tr>
+            <tr><td>75</td><td>Yellow-bellied Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Sharp chirp</td></tr>
+            <tr><td><strong>76</strong></td><td><strong>Hoary Marmot</strong></td><td><strong>Sciuridae</strong></td><td><strong>Rodentia</strong></td><td><strong>Loud whistle</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Sixteen degrees in the mammalian zone (61&ndash;76). Fifteen mammalian entries. Thirteen species. <strong>Four orders</strong> (Rodentia, Carnivora, Didelphimorphia, Lagomorpha). <strong>Nine families</strong>. <strong>Two infraclasses</strong> (Placentalia, Marsupialia). The Hoary Marmot completes the marmot pair and extends the alpine run to three degrees.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">M</div>
+            <div class="theory-content">
+              <h4>Marmot Pair (75&ndash;76) &mdash; 4th Family Pair</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Back-to-back Sciuridae. Yellow-bellied + Hoary. Same genus, different elevation. Fourth family pair.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon whistle">W</div>
+            <div class="theory-content">
+              <h4>Loud Penetrating Whistle &mdash; 77th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Sharp alarm whistle. 2,000&ndash;8,000 Hz. E=5. Audible 300&ndash;500+ m. Loudest mammalian call. Named Whistler Mountain.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mountain">P</div>
+            <div class="theory-content">
+              <h4>The Whistler &mdash; Named a Place</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Whistler Mountain and city named for this species. The only vocalization-to-place-name in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon size">L</div>
+            <div class="theory-content">
+              <h4>Largest North American Marmot</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>5&ndash;7 kg. Substantially larger than Yellow-bellied (2&ndash;5 kg). Alpine giant.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hibernate">H</div>
+            <div class="theory-content">
+              <h4>Longest Hibernation &mdash; 7&ndash;8 Months</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Active only 4&ndash;5 months/year. Contrast: Pika (74) no hibernation. Same habitat, opposite strategies.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon alpine">A</div>
+            <div class="theory-content">
+              <h4>Third Consecutive Alpine (74&ndash;75&ndash;76)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Pika, Yellow-bellied, Hoary. Three size classes. Three acoustics. One alpine habitat.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pureka-link">C</div>
+            <div class="theory-content">
+              <h4>The Chris Pureka Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both defined by voice. Both at margins. Both carry misleading names. Three dimensions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-075: Yellow-bellied Marmot</strong>
+            <p>Marmot pair. Back-to-back Sciuridae. Same genus, different species. Lower vs. higher elevation. E=4 vs. E=5. Chirp vs. whistle.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-074: American Pika</strong>
+            <p>Three consecutive alpine (74&ndash;76). Same habitat, opposite strategies. Pika: hay, no hibernation. Marmot: fat, 7&ndash;8 months hibernation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-067: Short-tailed Weasel</strong>
+            <p>Predator-prey. The weasel enters marmot burrows and preys on juveniles. The predator that goes underground.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-071: Red Fox</strong>
+            <p>Predator-prey at middle elevations. Fox bark (71) vs. marmot whistle (76). Predator and prey acoustic signatures.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>Predator-prey at treeline transition. Marten in subalpine forest, marmot in alpine meadow above.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Hoary Marmot (<em>Marmota caligata</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Hoary marmot.&rdquo;</li>
+          <li>[3] Barash, D.P. (1989). <em>Marmots: Social Behavior and Ecology.</em> Stanford University Press.</li>
+          <li>[4] Taulman, J.F. (1990). &ldquo;Vocalizations of the Hoary Marmot.&rdquo; <em>J. Mammalogy</em> 71(3).</li>
+          <li>[5] Armitage, K.B. (2014). <em>Marmot Biology: Sociality, Individual Fitness, and Population Dynamics.</em> Cambridge University Press.</li>
+          <li>[6] Whistler Museum &mdash; History of the Whistler name.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">76&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">Highest energy mammal. Whistle named a mountain.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sciuridae</div>
+          <div class="stat-detail">Back-to-back with Yellow-bellied (75).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">Third Rodentia in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elevation</div>
+          <div class="stat-value">1,500&ndash;3,000+ m</div>
+          <div class="stat-detail">Alpine meadow + talus.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">5&ndash;7 kg</div>
+          <div class="stat-detail">Largest N.A. marmot.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Hibernation</div>
+          <div class="stat-value">7&ndash;8 months</div>
+          <div class="stat-detail">Longest in the engine. Oct&ndash;Apr.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Colony Size</div>
+          <div class="stat-value">5&ndash;15</div>
+          <div class="stat-detail">Social, colonial, playful.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Whistle Range</div>
+          <div class="stat-value">300&ndash;500+ m</div>
+          <div class="stat-detail">Carries across alpine basins.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Mammalian Entry</div>
+          <div class="stat-value">15th</div>
+          <div class="stat-detail">13th species. 9 families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family Pair</div>
+          <div class="stat-value">4th</div>
+          <div class="stat-detail">Sciuridae 75&ndash;76.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Alpine Run</div>
+          <div class="stat-value">3 consecutive</div>
+          <div class="stat-detail">Pika 74, YB 75, Hoary 76.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (16th)</div>
+          <div class="stat-detail">No substitution.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
