@@ -1,0 +1,144 @@
+{
+  "degree": 85,
+  "species": "Muskrat",
+  "scientific_name": "Ondatra zibethicus",
+  "slug": "085-muskrat",
+  "sound_type": "quiet plop into water -- NON-VOCAL sound, the muskrat entering water from a bank, soft concussive splash, E=3, marsh habitat",
+  "energy": 3,
+  "ecosystem": "Marsh. Freshwater marshes, wetlands, ponds, slow-moving streams, lake edges. Dense cattail and bulrush stands. First marsh species in the engine. Aquatic habitat returns.",
+  "season": "year-round. Active all year. Crepuscular -- most active at dawn and dusk. Does not hibernate.",
+  "family": "Cricetidae",
+  "order": "Rodentia",
+  "csv_substitute": false,
+  "original_species": "Muskrat",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [83, 84],
+    "partner_species": ["Deer Mouse", "Bushy-tailed Woodrat"],
+    "pair_type": "Third consecutive Cricetidae (83-84-85). Deer Mouse (83, varied, E=2) to Woodrat (84, rocky, E=3) to Muskrat (85, marsh, E=3). Three consecutive Cricetidae, three radically different habitats."
+  },
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -122.20,
+    "description": "Reference for marsh habitat in the Puget Sound lowlands, Washington. Freshwater wetlands and cattail marshes."
+  },
+  "taxonomy_note": {
+    "description": "THIRD CONSECUTIVE CRICETIDAE (83-84-85). Cricetidae streak at three. Twenty-fourth mammalian entry. Twenty-second mammalian species. Twelfth Rodentia. Third Cricetidae. NEW GENUS Ondatra -- monotypic, the muskrat. NOT A RAT (Cricetidae, not Muridae).",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_infraclass": "Placentalia",
+    "new_infraclass": false,
+    "infraclass_note": "Placentalia continues.",
+    "current_family": "Cricetidae",
+    "new_family": false,
+    "family_count_in_engine": 36,
+    "cricetidae_count_in_engine": 3,
+    "name_etymology": "Ondatra from the Huron/Wyandot word for the animal. zibethicus from Latin 'musky,' referring to the perineal musk glands used during breeding season. Described by Linnaeus (1766).",
+    "genus_note": "Ondatra -- NEW GENUS in the engine. Monotypic (one species). Third Cricetidae genus after Peromyscus (83) and Neotoma (84).",
+    "order_note": "Rodentia -- twelfth Rodentia in the engine.",
+    "class_note": "Mammalia -- twenty-fourth mammalian entry. Twenty-second mammalian species.",
+    "family_position": "Cricetidae's THIRD entry at degree 85. Third consecutive (83-84-85)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "NOT a vocalization. Body-water interaction sound. Broadband splash, approximately 100-3,000 Hz.",
+    "peak_energy_band_hz": "Low-frequency concussive impact, approximately 200-1,000 Hz.",
+    "song_frequency_hz": "NOT a song. QUIET PLOP INTO WATER. Non-vocal body-water interaction sound.",
+    "song_duration_s": "Plop: approximately 0.1-0.3 seconds. Brief concussive impact followed by ripple sounds.",
+    "note_structure": "Single concussive impact (the plop) followed by brief ripple/splash decay. Not a repeated pattern.",
+    "note_types": "Plop (primary, body entering water), splash (secondary, water displacement), ripple (tertiary, surface waves).",
+    "phrase_structure": "Single event: plop + splash decay. Not phrased. Occurs as a discrete event when the animal enters water.",
+    "timbre": "Soft, concussive, aquatic. The sound of a moderate body entering calm water. Not a hard splash but a quiet plop -- the animal slides or drops in rather than leaps.",
+    "amplitude": "E=3. Audible at moderate range (10-20 meters) in quiet marsh conditions. Distinctive once recognized. Dawn and dusk marshes are otherwise quiet, amplifying the plop.",
+    "tempo": "Sporadic. Each plop is a single event. Multiple muskrats may produce sequential plops. Not rhythmic.",
+    "context": "PLOP: occurs when the muskrat enters water from a bank, log, or lodge. The primary detection sound -- you hear the plop before you see the muskrat. Also produces quiet squeaks and chatters during social interactions, but the plop is the signature sound.",
+    "regional_variation": "Minimal. The plop is a physical phenomenon, not a learned vocalization.",
+    "key_property": "QUIET PLOP INTO WATER -- the 86th acoustic element. NON-VOCAL. The muskrat entering water from a bank. Soft concussive splash. E=3. Marsh habitat. Heard before seen."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Medium-large semi-aquatic rodent. 700-1,800 g (1.5-4 lbs). 40-65 cm total length including tail. Laterally flattened tail (the key diagnostic). Dense waterproof fur. The largest Cricetidae in the engine.",
+    "diagnostic_mark": "For degree 85: (1) LATERALLY FLATTENED TAIL -- the tail is flattened side-to-side (not round like rats, not flat like beavers). The key field mark. (2) DENSE WATERPROOF FUR -- dark brown, thick underfur. (3) PARTIALLY WEBBED HIND FEET -- for swimming. (4) SMALL EARS -- nearly hidden in fur. (5) SWIMMING POSTURE -- low in the water with tail visible as a wake.",
+    "fur_detail": "BODY: Dense, dark brown to reddish-brown. Thick waterproof underfur with longer guard hairs. BELLY: Lighter, grayish. TAIL: Scaly, laterally flattened, nearly hairless. Used as a rudder while swimming.",
+    "dental_detail": "Rodent dentition. Large, prominent orange incisors. Adapted for gnawing aquatic vegetation (cattails, bulrushes). Can close lips behind the incisors to gnaw underwater.",
+    "field_id": "Medium-large rodent swimming low in the water with a laterally flattened tail creating a visible wake. Dark brown, rounded profile. Often detected first by the 'plop' sound of entering water. Much smaller than beaver. Distinctive laterally flattened tail distinguishes from all other rodents."
+  },
+  "nodes": [
+    {
+      "id": "cricetidae-trio",
+      "type": "pattern",
+      "title": "Third Consecutive Cricetidae (83-84-85)",
+      "description": "Deer Mouse (83) + Woodrat (84) + Muskrat (85). Cricetidae streak at three. Three radically different habitats: varied, rocky outcrop, marsh.",
+      "connections": ["quiet-plop", "marsh-first", "lodge-builder"]
+    },
+    {
+      "id": "quiet-plop",
+      "type": "concept",
+      "title": "Quiet Plop into Water -- 86th Acoustic Element",
+      "description": "NON-VOCAL sound. Body entering water from a bank. Soft concussive splash. E=3. The acoustic signature of the muskrat -- heard before seen.",
+      "connections": ["cricetidae-trio", "marsh-first", "not-a-rat"]
+    },
+    {
+      "id": "marsh-first",
+      "type": "concept",
+      "title": "First Marsh Species -- Aquatic Habitat Returns",
+      "description": "First marsh species in the engine. Aquatic habitat returns after the alpine/forest mammal era. Marsh shared with Wood Duck (58) and Mallard (59).",
+      "connections": ["cricetidae-trio", "quiet-plop", "lodge-builder"]
+    },
+    {
+      "id": "lodge-builder",
+      "type": "pattern",
+      "title": "Lodge Builder -- Beaver Parallel (61)",
+      "description": "Builds lodges from cattails and mud. Smaller than beaver lodges. Both semi-aquatic lodge builders. Different materials, same principle.",
+      "connections": ["cricetidae-trio", "marsh-first"]
+    },
+    {
+      "id": "not-a-rat",
+      "type": "concept",
+      "title": "Not a Rat -- Cricetidae, Not Muridae",
+      "description": "Despite its name, NOT a rat. Cricetidae (New World mice/voles), not Muridae (Old World rats/mice). The 'rat' in 'muskrat' is a misnomer.",
+      "connections": ["cricetidae-trio", "quiet-plop"]
+    },
+    {
+      "id": "votolato-parallel",
+      "type": "pattern",
+      "title": "The Rocky Votolato Acoustic Parallel",
+      "description": "Both stripped-down returners. Both E=3. Both quiet, distinctive sounds. Both defined by what they shed: Votolato sheds the band, Muskrat sheds the land.",
+      "connections": ["quiet-plop", "marsh-first"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Fifth Consecutive Original CSV",
+      "description": "Twenty-five consecutive original CSV species. No substitution. CSV reliability continues.",
+      "connections": ["cricetidae-trio"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-061",
+      "species": "American Beaver",
+      "relationship": "LODGE BUILDER PARALLEL. Both build semi-aquatic lodges. Beaver lodges from sticks and mud. Muskrat lodges from cattails and mud. Both modify aquatic habitat. Different scales, same principle."
+    },
+    {
+      "target": "SPS-083",
+      "species": "Deer Mouse",
+      "relationship": "CRICETIDAE TRIO (83-84-85). Deer Mouse (varied habitat, E=2) to Woodrat (rocky outcrop, E=3) to Muskrat (marsh, E=3). Three consecutive Cricetidae, three radically different habitats."
+    },
+    {
+      "target": "SPS-084",
+      "species": "Bushy-tailed Woodrat",
+      "relationship": "CRICETIDAE TRIO (83-84-85). Woodrat builds middens on rocky outcrops. Muskrat builds lodges in marshes. Both Cricetidae builders. Rock to water."
+    },
+    {
+      "target": "SPS-058",
+      "species": "Wood Duck",
+      "relationship": "MARSH NEIGHBOR. Both inhabit marshes and ponds. Wood Duck is waterfowl (Aves). Muskrat is mammal (Mammalia). The marsh connects species across classes."
+    },
+    {
+      "target": "SPS-059",
+      "species": "Mallard",
+      "relationship": "MARSH SHARED. Both inhabit marshes, ponds, wetlands. Mallard is the most common duck. Muskrat is the most common marsh mammal. Co-inhabitants of the same habitat."
+    }
+  ]
+}
