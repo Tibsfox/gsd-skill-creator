@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 100&deg; &mdash; Common Raven &mdash; The Sound of Puget Sound &mdash; MILESTONE</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--puget-teal), #FF6F00);
+      color: #FFF8E1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(255, 111, 0, 0.4), 0 0 24px rgba(0, 105, 92, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Milestone banner */
+    .milestone-banner {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 20%, #FF6F00 50%, #FF8F00 80%, #1A237E 100%);
+      border: 3px solid #FF6F00;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      color: #FFF8E1;
+      box-shadow: 0 4px 24px rgba(255, 111, 0, 0.4);
+      font-family: system-ui, sans-serif;
+    }
+    .milestone-banner h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFF8E1;
+    }
+    .milestone-banner p { margin: 0.3rem 0; font-size: 0.92rem; line-height: 1.6; color: #FFF8E1; }
+    .milestone-banner strong { color: #FFD54F; }
+
+    /* Corvidae card */
+    .corvid-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 30%, #0F3460 60%, #1A1A2E 100%);
+      border: 3px solid #0F3460;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .corvid-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #9FA8DA;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .corvid-card p { color: #E8EAF6; }
+    .corvid-card strong { color: #C5CAE9; }
+
+    /* Aves returns card */
+    .aves-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 3px solid #1B5E20;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .aves-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #C8E6C9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .aves-card p { color: #E8F5E9; }
+    .aves-card strong { color: #C8E6C9; }
+
+    /* Intelligence card */
+    .intel-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .intel-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E1BEE7;
+    }
+    .intel-card p { color: #F3E5F5; }
+    .intel-card strong { color: #CE93D8; }
+
+    /* Vocal complexity card */
+    .vocal-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 30%, #E64A19 60%, #F4511E 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .vocal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCCBC;
+    }
+    .vocal-card p { color: #FBE9E7; }
+    .vocal-card strong { color: #FFCCBC; }
+
+    /* Summer Heart contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .contrast-card p { color: #E0F2F1; }
+    .contrast-card strong { color: #B2DFDB; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.corvid { background: #1A1A2E; }
+    .theory-icon.aves { background: #1B5E20; }
+    .theory-icon.intel { background: #4A148C; }
+    .theory-icon.vocal { background: #BF360C; }
+    .theory-icon.milestone { background: #FF6F00; }
+    .theory-icon.contrast { background: #004D40; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #6A1B9A; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Milestone Banner -->
+    <div class="milestone-banner">
+      <h3>Degree 100 &mdash; The Centennial &mdash; 27.8% of 360 &mdash; Corvidae Enters &mdash; Aves Returns</h3>
+      <p>
+        <strong>THE 100TH DEGREE.</strong> One hundred rotations. <strong>CORVIDAE</strong>
+        enters the engine &mdash; NEW FAMILY (49th). The Common Raven (<em>Corvus corax</em>)
+        &mdash; one of the most intelligent animals on Earth. <strong>AVES RETURNS</strong>
+        after 40 degrees (last bird: Pied-billed Grebe at degree 60). After 39 degrees of
+        mammals, amphibians, and insects (61&ndash;99), <strong>birds return at the centennial</strong>.
+        Over 30 distinct call types. Tool use. Problem-solving. Play. Cultural transmission.
+        <strong>E=4. Open forest. Fortieth consecutive original CSV.</strong>
+      </p>
+    </div>
+
+    <div class="release-header">
+      <div class="degree-badge">100&deg;</div>
+      <div class="release-title-block">
+        <h2>Common Raven</h2>
+        <div class="scientific"><em>Corvus corax</em> (Corvidae) &mdash; NEW FAMILY (49th) &mdash; AVES RETURNS &mdash; MILESTONE</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      deep cronk + bell + hollow knock + mimicry &mdash; among the most complex vocalizations in the animal kingdom. Over 30 distinct call types. <strong>Corvidae enters the engine.</strong> The raven is one of the most intelligent animals on Earth &mdash; tool use, problem-solving, play behavior, cultural transmission. <strong>AVES RETURNS</strong> after 40 degrees (last bird at degree 60). E=4. Open forest. Fortieth consecutive original CSV. <strong>FOUR DECADES of original species.</strong>
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Corvidae Card -->
+        <div class="corvid-card">
+          <h3>Corvidae Enters &mdash; The Corvids Arrive at the Centennial</h3>
+          <p><strong>Corvidae</strong> &mdash; NEW FAMILY (49th) [1, 2]. The corvids. Crows, ravens, jays, magpies. Among the most intelligent families in the animal kingdom. The Common Raven is the largest songbird (Passeriformes). Corvidae enters the engine at the <strong>centennial degree</strong> &mdash; the 100th rotation. And the connection is already here: <strong>Steller&rsquo;s Jay</strong> at degree 53 was the FIRST CORVID. Same family. The engine returns to Corvidae after 47 degrees. But while the Steller&rsquo;s Jay was Corvidae&rsquo;s introduction, the Raven is Corvidae&rsquo;s <strong>full declaration</strong>.</p>
+        </div>
+
+        <!-- Aves Returns Card -->
+        <div class="aves-card">
+          <h3>AVES RETURNS &mdash; After 40 Degrees, Birds Are Back</h3>
+          <p>The last bird in the engine was the <strong>Pied-billed Grebe</strong> at degree 60. Since then &mdash; <strong>40 degrees</strong> of mammals (61&ndash;85), amphibians (90, 96, 97), and insects (87&ndash;89, 91, 94, 95, 98, 99). AVES RETURNS at degree 100. <strong>Birds are back at the centennial.</strong> The engine has traversed four classes (Mammalia, Amphibia, Insecta, and now back to Aves) across 40 degrees. The raven &mdash; intelligent, vocal, commanding &mdash; is the bird that brings Aves home.</p>
+        </div>
+
+        <!-- Intelligence Card -->
+        <div class="intel-card">
+          <h3>One of the Most Intelligent Animals on Earth</h3>
+          <p>The Common Raven is documented as one of the <strong>most intelligent animals on Earth</strong> [1, 2, 3]. <strong>Tool use:</strong> Ravens use and manufacture tools to obtain food. <strong>Problem-solving:</strong> Ravens solve multi-step puzzles, plan for future events, and demonstrate causal reasoning. <strong>Play:</strong> Ravens play &mdash; sliding down snowy slopes, aerial acrobatics, object manipulation without apparent purpose. <strong>Cultural transmission:</strong> Learned behaviors pass between individuals and across generations. <strong>Theory of mind:</strong> Ravens demonstrate awareness of what other ravens can and cannot see. This is not just a bird. This is a <strong>cognitive peer</strong>.</p>
+        </div>
+
+        <!-- Vocal Complexity Card -->
+        <div class="vocal-card">
+          <h3>Over 30 Distinct Call Types &mdash; The Most Complex Voice in the Engine</h3>
+          <p>The raven&rsquo;s vocal repertoire is among the <strong>most complex in the animal kingdom</strong> [1, 2, 4]. Over <strong>30 distinct call types</strong> documented: the deep <strong>&ldquo;cronk&rdquo;</strong> (territorial, long-range), <strong>bell-like tones</strong> (clear, ringing, musical), <strong>hollow knocks</strong> (wooden, percussive), <strong>gargling</strong> (complex, multi-tonal), <strong>screams</strong> (alarm), <strong>soft warbles</strong> (intimate, pair-bonding), and <strong>mimicry</strong> (imitating other species, environmental sounds, even human speech). E=4. The raven does not have one voice &mdash; it has <strong>an entire vocal orchestra</strong>.</p>
+        </div>
+
+        <!-- Summer Heart Contrast Card -->
+        <div class="contrast-card">
+          <h3>The Summer Heart Contrast</h3>
+          <p>Degree 100 pairs the raven with <strong>Summer Heart</strong> in Part A &mdash; Electronic Pop, E=4. <strong>Both E=4. Both have complex, layered voices.</strong> Summer Heart&rsquo;s nostalgic cascade layers synth textures. The raven&rsquo;s vocal repertoire layers 30+ call types. <strong>Electronic layering and biological layering.</strong> The synthesizer cascades; the raven speaks in thirty voices. Both at the centennial. Both deeply complex.</p>
+        </div>
+
+        <h2>The Sound: Deep Cronk + Bell + Hollow Knock (100th Acoustic Element, species side)</h2>
+        <p><strong>The calls:</strong> The Common Raven (<em>Corvus corax</em>) produces an extraordinary range of vocalizations [1, 2, 4]:</p>
+        <p><strong>The deep cronk:</strong> The signature call. A low-pitched, resonant, hollow &ldquo;cronk&rdquo; or &ldquo;pruk&rdquo; that carries over long distances. Deeper and more resonant than the American Crow&rsquo;s &ldquo;caw.&rdquo; Territorial and contact call.</p>
+        <p><strong>Bell-like tones:</strong> Clear, ringing, metallic notes that sound almost artificial in their purity. Musical and surprising. Used in pair-bonding and close communication.</p>
+        <p><strong>Hollow knocks:</strong> Wooden, percussive sounds &mdash; like knocking on a hollow log. Produced vocally, not mechanically. Distinctive and unusual.</p>
+        <p><strong>Mimicry:</strong> Ravens can imitate other bird species, animal sounds, environmental sounds, and human speech. Learned, not innate. Cultural transmission of vocal elements.</p>
+        <p><strong>Why E=4:</strong> The raven is <strong>loud, carrying, and persistent</strong> but not at the extreme volume of a cicada chorus (E=5) or a bugling elk (E=5). E=4 reflects the raven&rsquo;s strong, resonant voice that dominates its soundscape without being the loudest sound in nature. The vocal complexity adds to the impact &mdash; thirty call types create a presence that transcends raw volume.</p>
+
+        <h2>Taxonomy: Corvidae &mdash; NEW FAMILY (49th)</h2>
+        <p><strong>Classification:</strong> Class <strong>Aves</strong> &mdash; RETURNS (last at degree 60). Order <strong>Passeriformes</strong> (songbirds &mdash; the largest order of birds). Family <strong>Corvidae</strong> &mdash; NEW FAMILY (49th) [1, 2]. Genus <em>Corvus</em>. Species <em>C. corax</em>.</p>
+        <p><strong>Corvidae and Steller&rsquo;s Jay:</strong> The Steller&rsquo;s Jay (degree 53) was the first corvid in the engine. Same family Corvidae. The raven returns to this family after 47 degrees. The Jay introduced the corvids; the Raven is the corvid apex &mdash; the largest, most vocal, most intelligent member of the family.</p>
+        <p><strong>The largest songbird:</strong> The Common Raven is the <strong>largest passerine</strong> (songbird) &mdash; wingspan up to 150 cm, weight up to 1.5 kg. A songbird the size of a hawk.</p>
+
+        <h2>Ecology: Intelligence, Open Forest, and Cultural Transmission</h2>
+        <p><strong>Habitat:</strong> Open forest, cliffs, mountains, coastal areas, urban edges [1, 2]. One of the most widely distributed birds on Earth &mdash; found across the Northern Hemisphere. In the PNW, ravens inhabit old-growth forests, mountain ridges, coastal cliffs, and increasingly suburban areas.</p>
+        <p><strong>Intelligence:</strong> The raven&rsquo;s cognitive abilities have been extensively documented [1, 2, 3]:</p>
+        <ul>
+          <li><strong>Tool use and manufacture</strong> &mdash; using sticks to extract food, bending wire to create hooks.</li>
+          <li><strong>Future planning</strong> &mdash; caching food and anticipating others&rsquo; behavior.</li>
+          <li><strong>Causal reasoning</strong> &mdash; understanding hidden causes of events.</li>
+          <li><strong>Play behavior</strong> &mdash; aerial acrobatics, snow-sliding, object manipulation without purpose.</li>
+          <li><strong>Social cognition</strong> &mdash; theory of mind, deception, alliance formation.</li>
+          <li><strong>Cultural transmission</strong> &mdash; learned behaviors passed between individuals and generations.</li>
+        </ul>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon corvid">R</div>
+            <div class="theory-content">
+              <h4>Deep Cronk + Bell + Hollow Knock &mdash; 100th Acoustic Element (species side)</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Over 30 call types. The most complex vocal repertoire in the engine. Cronk, bell, knock, gargle, scream, warble, mimicry. E=4.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon corvid">C</div>
+            <div class="theory-content">
+              <h4>Corvidae &mdash; NEW FAMILY (49th)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Corvids enter. Same family as Steller's Jay (53). The raven is the corvid apex -- largest, most vocal, most intelligent.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon aves">A</div>
+            <div class="theory-content">
+              <h4>AVES RETURNS &mdash; After 40 Degrees</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Last bird at degree 60 (Pied-billed Grebe). 40 degrees of mammals, amphibians, insects. Birds return at the centennial.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon intel">I</div>
+            <div class="theory-content">
+              <h4>Intelligence &mdash; Tool Use, Problem-Solving, Play</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>One of the most intelligent animals. Tool use, future planning, causal reasoning, play, social cognition, cultural transmission.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon milestone">M</div>
+            <div class="theory-content">
+              <h4>The Centennial &mdash; 100th Degree</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>100th degree. 27.8% of 360. Corvidae and Aves return together. The raven marks the centennial. Fortieth consecutive original CSV.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">S</div>
+            <div class="theory-content">
+              <h4>The Summer Heart Contrast</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Both E=4. Both complex, layered voices. Electronic cascading layers and biological 30+ call types. Centennial pair.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-053: Steller&rsquo;s Jay</strong>
+            <p>SAME FAMILY CORVIDAE! First corvid at degree 53. The Jay introduced Corvidae; the Raven is Corvidae's full declaration. Same family, 47 degrees apart. Both intelligent, both vocal. The Jay is bright and loud; the Raven is deep and complex.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>INTELLIGENCE AND OLD FOREST. Both highly intelligent birds of old forest habitats. The owl hunts silently; the raven vocalizes boldly. Both apex predators in their ecological niches. The owl is nocturnal stealth; the raven is diurnal cognition.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-071: Red Fox</strong>
+            <p>INTELLIGENCE PARALLEL. Both among the most intelligent animals in the engine. The fox is Canidae intelligence -- adaptable, cunning. The raven is Corvidae intelligence -- tool use, cultural transmission. Different phyla, convergent cognitive complexity.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-070: Raccoon</strong>
+            <p>INTELLIGENCE AND DEXTERITY. Both highly intelligent, both dexterous. The raccoon manipulates with hands; the raven manipulates with beak and cognition. Both problem-solvers. Both urban-adaptable. Mammalian vs avian intelligence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014: Great Blue Heron</strong>
+            <p>AVES RETURNS. Both large, commanding birds. The Great Blue Heron's pterodactyl croak at degree 14 was early in the engine. The raven's complex repertoire at degree 100 marks Aves' return. 40 degrees apart. Both unforgettable voices.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Common raven,&rdquo; &ldquo;Corvus corax,&rdquo; &ldquo;Corvidae.&rdquo;</li>
+          <li>[2] Heinrich, B. (1999). <em>Mind of the Raven: Investigations and Adventures with Wolf-Birds.</em> HarperCollins.</li>
+          <li>[3] Marzluff, J.M. &amp; Angell, T. (2012). <em>Gifts of the Crow: How Perception, Emotion, and Thought Allow Smart Birds to Behave Like Humans.</em> Atria Books.</li>
+          <li>[4] Enggist-D&uuml;blin, P. &amp; Pfister, B.F. (2002). &ldquo;Cultural transmission of vocalizations in ravens.&rdquo; <em>Animal Behaviour</em>, 64(6), 831-841.</li>
+          <li>[5] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">100&deg; / 360&deg; (MILESTONE!)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Deep cronk carries. 30+ call types.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Corvidae (NEW! 49th)</div>
+          <div class="stat-detail">Corvids. Same family as Steller's Jay (53).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Passeriformes</div>
+          <div class="stat-detail">Songbirds. Raven = largest passerine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Aves (RETURNS!)</div>
+          <div class="stat-detail">Last bird at degree 60. 40 degrees apart!</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Open forest</div>
+          <div class="stat-detail">Mountains, cliffs, coastal, urban edge.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">30+ call types</div>
+          <div class="stat-detail">Cronk, bell, knock, gargle, mimicry.</div>
+        </div>
+
+        <h3>Intelligence</h3>
+        <div class="stat-card">
+          <div class="stat-label">Tool Use</div>
+          <div class="stat-value">Documented</div>
+          <div class="stat-detail">Manufacture and use of tools.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Problem-Solving</div>
+          <div class="stat-value">Multi-step</div>
+          <div class="stat-detail">Causal reasoning. Future planning.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Play</div>
+          <div class="stat-value">Documented</div>
+          <div class="stat-detail">Aerial acrobatics, snow-sliding.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Cultural Transmission</div>
+          <div class="stat-value">Documented</div>
+          <div class="stat-detail">Learned behaviors across generations.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">New Family</div>
+          <div class="stat-value">49th (Corvidae)</div>
+          <div class="stat-detail">NEW. Corvids enter.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Aves Gap</div>
+          <div class="stat-value">40 degrees (60&rarr;100)</div>
+          <div class="stat-detail">Birds return at the centennial.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (40th!)</div>
+          <div class="stat-detail">FOUR DECADES of original species!</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completion</div>
+          <div class="stat-value">27.8% of 360</div>
+          <div class="stat-detail">100th degree. Centennial.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
