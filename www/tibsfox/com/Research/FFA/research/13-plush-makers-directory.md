@@ -212,21 +212,23 @@ These manufacturers specialize in the oversized, the unusual, and the experienti
 
 ### 3.1 JAAG Giants / JAAG Plush (USA)
 
-**Location:** Birmingham, Michigan, USA
-**Founded:** JAAG Plush established in the greater Detroit area
-**Specialty:** Giant plush animals, custom manufacturing, souvenir and destination retail
-**Price range:** $30-$300+ (varies by size and custom specification)
-**Where to buy:** Destination retail (resorts, theme parks, major tourist locations), direct custom orders, nonprofit partnerships
+**Location:** Birmingham, Michigan, USA (PO Box 1683, Birmingham MI 48012)
+**Founded:** JAAG Plush, LLC — established in the greater Detroit area
+**Specialty:** Giant plush predator animals (direct-to-consumer), custom plush manufacturing (B2B)
+**Price range:** $100-$195 (Giants line), custom varies
+**Where to buy:** jaaggiants.com (direct), destination retail (resorts, theme parks), custom orders via jaagplush.com
+**Current catalog:** 8 giant animals — Arctic Wolf ($150), Black Wolf ($195), Cougar ($175), Lion ($100), Silver Fox ($150), Snow Leopard ($100), Tiger ($100), Wolf ($195)
 
-JAAG operates in a fascinating niche: giant plush for destination retail and custom manufacturing. When a resort, theme park, or major tourist attraction wants oversized stuffed animals — the kind that a family buys as the trip souvenir that dominates the back seat on the drive home — JAAG is one of the go-to manufacturers.
+JAAG operates two distinct businesses under one roof. The consumer-facing **JAAG Giants** brand (jaaggiants.com) sells oversized plush predators directly — wolves, big cats, and a silver fox. The catalog is deliberately focused: all predatory species, all giant-scale, all in the $100-$195 range. These aren't cute shelf-sitters — they're statement pieces, room-filling animals that adults buy for themselves as much as for children. The entire Giants catalog sells out regularly.
 
-The custom manufacturing arm (JAAG Plush) serves an even broader market. Nonprofit organizations, corporate clients, and specialty retailers commission custom plush runs tailored to their brand, mascot, or cause. Notable partnerships include:
+The **JAAG Plush** arm (jaagplush.com) is a full-service custom plush manufacturer serving a much broader market. They design, source, and manufacture custom plush for souvenir retailers, resort and destination shops, corporate clients, and nonprofit organizations. JAAG handles the entire pipeline: concept art, prototyping, factory sourcing, safety compliance (worldwide toy safety rules), and delivery. Notable partnerships include:
 
-- **Buc-ee's** — The beloved Texas-based travel center chain, famous for its giant stores and beaver mascot. JAAG has produced custom plush for Buc-ee's retail shelves, contributing to one of the most recognizable mascot plush programs in American roadside retail.
+- **Buc-ee's** — The Texas-based travel center chain, famous for its giant stores and beaver mascot. JAAG has produced custom plush for Buc-ee's retail shelves, contributing to one of the most recognizable mascot plush programs in American roadside retail.
+- **Eskimo Joe's** — The iconic Stillwater, Oklahoma restaurant and retail brand.
 - **Kimo Bear Project** — A nonprofit program providing comfort bears to children in hospitals. JAAG manufactures the bears used in the program, connecting industrial plush production to direct therapeutic impact.
 - **Josh and Friends** — Another nonprofit partnership producing comfort animals for children facing medical procedures.
 
-**What makes JAAG significant:** They demonstrate that plush manufacturing serves purposes far beyond the toy aisle. Custom plush for nonprofits turns fabric and stuffing into instruments of comfort during a child's worst moments. Destination retail plush becomes a tangible memory of a family experience. JAAG's willingness to work with small-run nonprofit orders alongside large commercial accounts shows the breadth of what the plush industry can be.
+**What makes JAAG significant:** The Giants line proves there's a market for adult-oriented plush that doesn't apologize for itself — giant predator animals at premium prices, sold directly to consumers who want a wolf or a cougar in their living room. The custom arm demonstrates that plush manufacturing serves purposes far beyond the toy aisle. Custom plush for nonprofits turns fabric and stuffing into instruments of comfort during a child's worst moments. Destination retail plush becomes a tangible memory of a family experience. The Silver Fox in the Giants line is particularly notable for furry community crossover appeal — a high-quality giant fox plush at $150 from a legitimate manufacturer.
 
 ### 3.2 Melissa & Doug (USA)
 
@@ -373,7 +375,7 @@ Over 2,000 distinct Squishmallow characters have been released as of 2026, each 
 | Wildlife Artists | USA | — | Museum-quality realistic for institutions | $8-$40 | Zoo/museum gift shops |
 | Fiesta Toys | USA | 1976 | Affordable retail and carnival plush | $5-$30 | Retail chains, amusement parks |
 | Warmies | UK | ~2010s | Microwaveable weighted lavender plush | $20-$35 | Amazon, Target, gift shops |
-| JAAG | USA | — | Giant plush, custom manufacturing | $30-$300+ | Destination retail, custom orders |
+| JAAG | USA (MI) | — | Giant predator plush ($100-195), custom B2B manufacturing | $100-$195 (Giants) | jaaggiants.com, destination retail |
 | Melissa & Doug | USA | 1988 | Large-format floor-standing animals | $20-$150 | Amazon, Target, toy stores |
 | FAO Schwarz | USA | 1862 | Luxury retail, oversized plush | $20-$500+ | Flagship store, FAOSchwarz.com |
 | Jellycat | UK | 1999 | Design-forward quirky plush | $15-$80 | Nordstrom, indie gift shops |
