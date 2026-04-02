@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 99&deg; &mdash; Kaina &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+    .milestone-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6F00;
+      color: #FFF8E1;
+      border: 1px solid #FF8F00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .retro-card {
+      background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 30%, #FFA000 60%, #FFB300 100%);
+      border: 2px solid #FF6F00; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #3E2723;
+    }
+    .retro-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #4E342E; font-family: system-ui, sans-serif; }
+    .retro-card p { color: #3E2723; margin: 0.5rem 0; }
+    .retro-card strong { color: #BF360C; }
+
+    .latina-card {
+      background: linear-gradient(135deg, #E65100 0%, #F57C00 30%, #FF9800 60%, #FFB74D 100%);
+      border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #3E2723;
+    }
+    .latina-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #BF360C; font-family: system-ui, sans-serif; }
+    .latina-card p { color: #3E2723; margin: 0.5rem 0; }
+    .latina-card strong { color: #BF360C; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>099 &mdash; Kaina</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Electronic/R&amp;B &mdash; Genre Stage 81 &mdash; E=4 &mdash; Third Latina Artist</h3>
+      <p>
+        <strong>Kaina</strong> &mdash; Kaina Castillo, first-generation Guatemalan-Venezuelan
+        American singer and songwriter. Based between Chicago and the PNW. Electronic
+        production fused with R&amp;B vocals and Latin influences. <strong>Genre Stage 81</strong>.
+        Third Latina artist in the engine (after Y La Bamba 61, Briana Marela 72).
+        <strong>100th acoustic element. 100th artist-city pattern.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">99&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Kaina</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Electronic/R&amp;B</span>
+          <span class="neighborhood-badge">Seattle / Chicago</span>
+          <span class="record-badge">Genre Stage 81</span>
+          <span class="milestone-badge">100th Element!</span>
+          <span class="milestone-badge">100th Pattern!</span>
+          <span class="milestone-badge">3rd Latina!</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="synth-card">
+          <h4>The Bilingual Warmth &mdash; 100th Acoustic Element</h4>
+          <p>
+            The <strong>bilingual warmth</strong> is the <strong>hundredth acoustic element</strong>
+            &mdash; a milestone! Kaina&rsquo;s voice moves fluidly between English and Spanish,
+            between electronic production beds and organic vocal intimacy. The warmth is the
+            sound of <strong>two languages, two cultures, two cities</strong> held together by
+            a voice that refuses to choose. Electronic textures cradle R&amp;B vocals cradle
+            Latin melodic phrasing. The hundredth element is <strong>fusion as mother tongue</strong>.
+          </p>
+        </div>
+
+        <div class="latina-card">
+          <h4>The Third Latina &mdash; A Cultural Milestone</h4>
+          <p>
+            Kaina is the <strong>third Latina artist</strong> in the Seattle 360 engine:
+            <strong>Y La Bamba</strong> (degree 61, Latin Folk), <strong>Briana Marela</strong>
+            (degree 72, Ethereal/Experimental), and now <strong>Kaina</strong> (degree 99,
+            Electronic/R&amp;B). Three Latina artists, three completely different genres,
+            three different relationships to heritage and sound. Y La Bamba channels tradition
+            directly. Briana Marela abstracts it into ethereal texture. Kaina <strong>synthesizes
+            it into electronic warmth</strong> &mdash; heritage as ambient frequency.
+          </p>
+        </div>
+
+        <div class="retro-card">
+          <h4>The Diasporic Synthesist &mdash; 100th Artist-City Pattern</h4>
+          <p>
+            The <strong>diasporic synthesist</strong> is the <strong>hundredth artist-city
+            pattern</strong> &mdash; a milestone! Kaina operates between Chicago and the PNW,
+            between Guatemalan and Venezuelan heritage, between electronic production and
+            R&amp;B vocal tradition. The diasporic synthesist does not choose a single origin
+            &mdash; she <strong>synthesizes all of them</strong> into music that could only come
+            from the intersections. Two cities, two heritages, two languages, one voice.
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 81 &middot; Electronic/R&amp;B &middot; E=4 &middot; 100th Acoustic Element &middot; 100th Pattern &middot; 3rd Latina</h4>
+          <p>
+            <strong>Kaina</strong> enters at Genre Stage 81. <strong>E=4</strong>.
+            Tenth electronic-adjacent entry in fourteen degrees (86, 90, 91, 93, 94, 95, 96,
+            97, 98, 99). Third Latina artist (after Y La Bamba 61, Briana Marela 72).
+            <strong>100th acoustic element</strong> (bilingual warmth).
+            <strong>100th artist-city pattern</strong> (diasporic synthesist).
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 81: Electronic/R&amp;B</h2>
+          <p>
+            Degree 99 reaches <strong>Genre Stage 81</strong> &mdash; the eighty-first genre
+            stage. <strong>Electronic/R&amp;B</strong> is a new genre classification in the engine,
+            distinct from the Indie Electronic of the previous three degrees (96, 97, 98).
+            Kaina&rsquo;s music is not pure electronic nor pure R&amp;B &mdash; it lives in the
+            fusion space where electronic production techniques serve vocal and melodic
+            traditions rooted in R&amp;B and Latin music.
+          </p>
+          <p>
+            The closest prior entry is <strong>Chong the Nomad</strong> (degree 44, Electronic/R&amp;B),
+            who also fuses electronic production with R&amp;B sensibility. But where Chong the Nomad
+            leans toward beat-driven production, Kaina leans toward <strong>vocal warmth and
+            lyrical intimacy</strong>. Same genre fusion, different emphasis.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 100: The Bilingual Warmth</h2>
+          <p>
+            The <strong>bilingual warmth</strong> is the <strong>one hundredth acoustic element</strong>
+            in the Seattle 360 engine. A milestone. One hundred distinct sonic textures cataloged
+            across ninety-nine degrees. The bilingual warmth describes the sound of Kaina&rsquo;s
+            voice moving between English and Spanish over electronic production &mdash; a vocal
+            quality that carries the warmth of two languages, the melodic phrasing of Latin music,
+            and the intimacy of R&amp;B, all held in electronic space.
+          </p>
+          <p>
+            The warmth is not just linguistic &mdash; it is <strong>timbral</strong>. The way
+            Spanish vowels open differently than English. The way melodic contours shift when
+            language shifts. The way electronic production can hold both languages equally,
+            creating a sonic space where bilingualism is not code-switching but
+            <strong>native state</strong>.
+          </p>
+          <blockquote>
+            One hundred acoustic elements. From the deep bass of Sub Pop grunge (degree 1)
+            through the bilingual warmth of diasporic electronic R&amp;B (degree 99). The engine
+            has cataloged one hundred ways the Pacific Northwest sounds.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 100: The Diasporic Synthesist</h2>
+          <p>
+            The <strong>diasporic synthesist</strong> is the <strong>one hundredth artist-city
+            pattern</strong>. A milestone. One hundred distinct artist-city relationships mapped
+            across ninety-nine degrees. The diasporic synthesist describes an artist who operates
+            across multiple cities, multiple cultural heritages, and multiple musical traditions
+            &mdash; not choosing among them but synthesizing all into a singular voice.
+          </p>
+          <p>
+            Kaina moves between Chicago and the PNW. Her Guatemalan and Venezuelan heritage
+            informs her melodic language. Electronic production and R&amp;B vocal tradition
+            provide the medium. The diasporic synthesist is defined by
+            <strong>intersection as origin</strong> &mdash; the music could not exist without
+            all the intersections.
+          </p>
+          <blockquote>
+            The diasporic synthesist contrasts sharply with the self-released synthesist
+            (degree 98, Gold Casio), who operates from a single city with a single aesthetic.
+            Kaina&rsquo;s pattern is defined by multiplicity &mdash; multiple cities, multiple
+            heritages, multiple languages, multiple traditions, one voice.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Bilingual Warmth</h4>
+              <span class="level advanced">Advanced</span>
+              <p>100th acoustic element! Voice moving between
+              English and Spanish over electronic production.
+              Bilingualism as native sonic state. Milestone.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Diasporic Synthesist</h4>
+              <span class="level advanced">Advanced</span>
+              <p>100th artist-city pattern! Multiple cities,
+              heritages, languages, traditions. Intersection
+              as origin. Milestone.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Third Latina Artist</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Y La Bamba (61), Briana Marela (72),
+              Kaina (99). Three genres, three relationships
+              to heritage. Latin Folk, Ethereal, Electronic/R&amp;B.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Electronic/R&amp;B at Genre Stage 81</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>New genre classification. Electronic production
+              serving R&amp;B and Latin vocal traditions. Fusion
+              space. Tenth electronic-adjacent entry.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">061</span>
+              <strong>Y La Bamba</strong> &mdash;
+              LATINA LINEAGE. First Latina artist in the engine. Latin Folk. Y La Bamba channels Latin heritage directly through traditional forms. Kaina synthesizes heritage into electronic warmth. Both Latina, different sonic strategies.
+            </li>
+            <li>
+              <span class="ref-degree">072</span>
+              <strong>Briana Marela</strong> &mdash;
+              LATINA LINEAGE. Second Latina artist. Ethereal/Experimental. Briana Marela abstracts heritage into ethereal texture. Kaina grounds heritage in R&amp;B vocal warmth over electronic production. Three Latinas, three genres.
+            </li>
+            <li>
+              <span class="ref-degree">044</span>
+              <strong>Chong the Nomad</strong> &mdash;
+              ELECTRONIC/R&amp;B PARALLEL. Both fuse electronic production with R&amp;B sensibility. Chong the Nomad is beat-driven. Kaina is vocal-driven. Same genre fusion, different emphasis. Both artists of color in the PNW electronic scene.
+            </li>
+            <li>
+              <span class="ref-degree">026</span>
+              <strong>Shaina Shepherd</strong> &mdash;
+              R&amp;B VOCAL PARALLEL. Both R&amp;B vocalists with strong, warm voices. Shaina Shepherd is soul/R&amp;B rooted. Kaina adds electronic production and Latin melodic phrasing. Both prioritize voice as the emotional center.
+            </li>
+            <li>
+              <span class="ref-degree">094</span>
+              <strong>Erik Blood</strong> &mdash;
+              ELECTRONIC PRODUCER PARALLEL. Both use electronic production as a framework for other traditions. Erik Blood blends genres experimentally. Kaina blends cultures and languages through electronic texture. Production as container for diversity.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">99&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Electronic/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">81</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle / Chicago</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Heritage</span>
+            <span class="stat-value">Guatemalan-Venezuelan</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Latina Context</h4>
+          <div class="stat-row">
+            <span class="stat-label">Latina Position</span>
+            <span class="stat-value">3rd in engine</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prior Latinas</span>
+            <span class="stat-value">61, 72</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Languages</span>
+            <span class="stat-value">English + Spanish</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Key Albums</span>
+            <span class="stat-value">Next to the Sun, It Was a Home</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">100th!</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">100th!</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Run</span>
+            <span class="stat-value">86,90,91,93-99</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">81st</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
