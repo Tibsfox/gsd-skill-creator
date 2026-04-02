@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 79&deg; &mdash; Jesse Marchant &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>079 &mdash; Jesse Marchant</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>The Cinematic Baritone &mdash; Folk &mdash; Genre Stage 61</h3>
+      <p>
+        Jesse Marchant at degree 79&deg; is a <strong>Canadian-born singer-songwriter</strong>
+        who has recorded under his own name and as JBM. His music is atmospheric,
+        cinematic folk with baritone vocals &mdash; dark and meditative. Connected
+        to the Seattle scene through performances and collaborations.
+        <strong>Folk</strong> at Genre Stage 61. <strong>E=2</strong> &mdash;
+        quiet, intimate, atmospheric. The dark meditation. The cinematic
+        stillness. The baritone weight.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">79&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Jesse Marchant</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Independent</span>
+          <span class="neighborhood-badge">Canadian-born / PNW</span>
+          <span class="record-badge">Genre Stage 61</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 61 &middot; Folk &middot; E=2 &middot; Solo Returns &middot; Dark Folk Register</h4>
+          <p>
+            <strong>Jesse Marchant</strong> enters the engine as a Canadian-born
+            singer-songwriter with deep atmospheric folk. <strong>Folk</strong>
+            at Genre Stage 61. <strong>E=2</strong> &mdash; 29th E=2
+            deployment. Distribution after degree 79: E1:3, E2:29,
+            E3:20, E4:18, E5:10, E6:2. The <strong>cinematic stillness</strong>
+            &mdash; 80th acoustic element. The <strong>dark meditation</strong>
+            &mdash; 80th artist-city pattern. The <strong>baritone weight</strong>
+            &mdash; 79th blue note. Solo format returns after the band at
+            degree 78.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 61: Folk Returns</h2>
+          <p>
+            Degree 79 reaches <strong>Genre Stage 61</strong>. Jesse
+            Marchant&rsquo;s <strong>Folk</strong> is atmospheric, cinematic,
+            and dark &mdash; sparse arrangements, baritone vocals, and
+            meditative pacing. Four consecutive folk-adjacent genres
+            (Folk 58 at 76, Folk/Pop 59 at 77, Folk/Indie 60 at 78,
+            Folk 61 at 79). The folk family&rsquo;s dominance deepens.
+            But each degree is a different register: confessional (76),
+            ethereal (77), communal (78), cinematic (79).
+          </p>
+          <p>
+            Marchant&rsquo;s folk is the darkest in this streak &mdash;
+            closer to Jesse Sykes (64) than to the communal warmth of
+            Acid Tongue (78) or the ethereal shimmer of Mree (77).
+            The cinematic quality connects to Philip Aaberg (65), though
+            Aaberg works through solo piano and Marchant through sparse
+            guitar and baritone voice.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Discography: Dark and Meditative</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Not Even in July</h4>
+              <div class="disco-years">2014 &middot; Independent</div>
+              <p>Atmospheric folk with cinematic scope. Baritone
+              vocals over sparse arrangements. Dark, meditative,
+              winter-weight. The silence between notes carries
+              as much meaning as the notes themselves.</p>
+            </div>
+            <div class="disco-card">
+              <h4>Illusion of Love</h4>
+              <div class="disco-years">2019 &middot; Independent</div>
+              <p>More expansive, still dark. The cinematic quality
+              deepens. Strings and atmosphere. The baritone anchors
+              everything. Love examined through a lens of melancholy.</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: #757575; margin-top: 0.5rem;">
+            Also recorded as <strong>JBM</strong> &mdash; earlier releases
+            under the initials. The shift to his full name reflects a
+            move toward directness.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Cinematic Stillness: 80th Acoustic Element</h2>
+          <p>
+            Jesse Marchant&rsquo;s signature sound is the <strong>cinematic
+            stillness</strong> &mdash; music that moves at the pace of film
+            rather than song. Sparse guitar, baritone vocals, ambient textures,
+            and wide dynamic range that uses silence as an instrument. The
+            80th acoustic element. The stillness is cinematic because it
+            creates <strong>visual space</strong> &mdash; the music suggests
+            landscapes, weather, light.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>communal jangle</strong>
+            (79, Acid Tongue) is group looseness. The cinematic stillness is
+            solo precision. The <strong>ethereal layering</strong> (78, Mree)
+            is studio-crafted shimmer. The cinematic stillness is
+            stripped-back darkness. The <strong>ache</strong> (58, Death Cab)
+            is precise emotional targeting. The cinematic stillness is
+            atmospheric emotional immersion.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Dark Meditation: 80th Artist-City Pattern</h2>
+          <p>
+            The <strong>dark meditation</strong> is the 80th artist-city
+            pattern &mdash; artists whose music functions as meditation
+            rather than entertainment. The tempo is slow, the mood is
+            dark, the intention is contemplative. Marchant&rsquo;s music
+            invites the listener inward rather than outward. The anti-party.
+            The anti-spectacle. The dark meditation.
+          </p>
+          <blockquote>
+            The dark meditation is not sad &mdash; it is weighted. The
+            baritone carries gravity. The sparse arrangements create space.
+            The listener is invited to sit with the weight rather than be
+            lifted from it. The darkness is not despair &mdash; it is depth.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Cinematic Stillness</h4>
+              <span class="level advanced">Advanced</span>
+              <p>80th acoustic element. Music at the pace of film.
+              Sparse guitar, baritone vocals, ambient textures.
+              Silence as instrument. Visual space through sound.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Dark Meditation</h4>
+              <span class="level advanced">Advanced</span>
+              <p>80th artist-city pattern. Music as contemplation.
+              Slow tempo, dark mood, weighted intention. The
+              anti-spectacle. Inward rather than outward.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Baritone Weight</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>79th blue note. The gravitational pull of a
+              baritone voice in sparse arrangements &mdash; the
+              lowest register anchoring everything above it.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk at Genre Stage 61</h4>
+              <span class="level advanced">Advanced</span>
+              <p>61st genre classification. Four consecutive
+              folk-adjacent (58&ndash;61). Each degree a different
+              register: confessional, ethereal, communal, cinematic.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 &mdash; 29th Deployment</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Distribution: 3:29:20:18:10:2. E=2 extends
+              its lead. Quiet, intimate, atmospheric.
+              Solo acoustic register.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Solo Format Returns</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Solo returns after band at degree 78. The
+              engine alternates: three solo (76&ndash;77),
+              one band (78), solo again (79).</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">071</span>
+              <strong>Phil Elverum</strong> &mdash; Atmospheric folk.
+              Both create atmospheric, meditative folk with cinematic
+              scope. Elverum is raw and lo-fi. Marchant is dark and
+              polished. Both use silence and space as compositional tools.
+            </li>
+            <li>
+              <span class="ref-degree">068</span>
+              <strong>Sam Beam</strong> &mdash; Quiet folk.
+              Both work in the quiet register of folk (E=2). Beam
+              is warm and inviting. Marchant is dark and contemplative.
+              Same energy, opposite emotional temperature.
+            </li>
+            <li>
+              <span class="ref-degree">064</span>
+              <strong>Jesse Sykes</strong> &mdash; Dark folk.
+              Both occupy the dark end of Seattle&rsquo;s folk spectrum.
+              Sykes is dark and atmospheric with Americana roots.
+              Marchant is dark and cinematic with Canadian roots.
+            </li>
+            <li>
+              <span class="ref-degree">076</span>
+              <strong>Chris Pureka</strong> &mdash; Introspective folk E=2.
+              Both work in introspective folk at E=2. Pureka is confessional.
+              Marchant is cinematic. Both strip arrangements to essentials.
+              Both invite the listener inward.
+            </li>
+            <li>
+              <span class="ref-degree">065</span>
+              <strong>Philip Aaberg</strong> &mdash; Cinematic quality.
+              Both create music with cinematic scope. Aaberg through
+              solo piano, Marchant through sparse guitar and baritone.
+              Both evoke landscape through sound.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Bandcamp &mdash; Jesse Marchant artist page and discography.</li>
+            <li>Spotify &mdash; Jesse Marchant / JBM artist profiles.</li>
+            <li>AllMusic &mdash; Jesse Marchant biography and album reviews.</li>
+            <li>KEXP &mdash; Jesse Marchant sessions and PNW scene context.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">79&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Independent</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Canadian-born / PNW</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Also Known As</span>
+            <span class="stat-value">JBM</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">61</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">80th Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">80th Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">79th Deploy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk Streak</span>
+            <span class="stat-value">4 consecutive</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">29</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">20</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">18</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
