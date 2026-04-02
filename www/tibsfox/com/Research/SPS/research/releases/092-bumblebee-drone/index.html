@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 92&deg; &mdash; Bumblebee Drone &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Buzz card */
+    .buzz-card {
+      background: linear-gradient(135deg, #F57F17 0%, #F9A825 30%, #FBC02D 60%, #FDD835 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #3E2723;
+    }
+    .buzz-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4E342E;
+    }
+    .buzz-card p {
+      color: #3E2723;
+    }
+    .buzz-card strong {
+      color: #1B0000;
+    }
+
+    /* New order card */
+    .order-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .order-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .order-card p {
+      color: #F3E5F5;
+    }
+    .order-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Pollinator card */
+    .pollinator-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 50%, #689F38 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .pollinator-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #AED581;
+    }
+    .pollinator-card p {
+      color: #F1F8E9;
+    }
+    .pollinator-card strong {
+      color: #DCEDC8;
+    }
+
+    /* Trance Mission parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .parallel-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .parallel-card p {
+      color: #E0F2F1;
+    }
+    .parallel-card strong {
+      color: #B2DFDB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.buzz { background: #F57F17; color: #3E2723; }
+    .theory-icon.order { background: #4A148C; }
+    .theory-icon.pollinator { background: #33691E; }
+    .theory-icon.meadow { background: #558B2F; }
+    .theory-icon.sonication { background: #BF360C; }
+    .theory-icon.parallel { background: #004D40; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">92&deg;</div>
+      <div class="release-title-block">
+        <h2>Bumblebee Drone</h2>
+        <div class="scientific">Apidae (family) &mdash; NEW FAMILY (42nd)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      deep resonant buzz &mdash; NEW FAMILY: Apidae (42nd). NEW ORDER: Hymenoptera (bees, wasps, ants) &mdash; fifth insect order. First POLLINATOR in the engine. Buzz pollination (sonication) &mdash; vibrating flowers at specific frequencies to release pollen. Deeper and richer than mosquito whine. E=3. Wildflower meadow habitat. Thirty-second consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Buzz Card -->
+        <div class="buzz-card">
+          <h3>Deep Resonant Buzz &mdash; 93rd Acoustic Element</h3>
+          <p>The bumblebee drone is a <strong>deep, resonant buzz</strong> &mdash; wing vibration at approximately <strong>130&ndash;240 Hz</strong>, much lower and richer than the mosquito&rsquo;s thin whine (400&ndash;600 Hz) [1, 2]. The sound is warm, full, and <strong>resonant</strong> &mdash; the large, furry body of the bumblebee acts as a resonating chamber. The buzz is continuous during flight and intensifies during <strong>buzz pollination</strong> (sonication). <strong>E=3</strong> &mdash; audible and present in the wildflower meadow, a warm hum that fills the space.</p>
+        </div>
+
+        <!-- New Order Card -->
+        <div class="order-card">
+          <h3>NEW ORDER: Hymenoptera &mdash; Fifth Insect Order</h3>
+          <p><strong>Hymenoptera</strong> (bees, wasps, ants) is a <strong>new order</strong> in the engine &mdash; the <strong>fifth insect order</strong>: Orthoptera (87&ndash;88), Hemiptera (89), Diptera (91), and now Hymenoptera (92). <strong>Apidae</strong> (bees) is the <strong>42nd family</strong>. Hymenoptera is the most ecologically significant insect order in the engine &mdash; bees are <strong>keystone pollinators</strong> for PNW wildflower meadows and agricultural systems [1, 2].</p>
+        </div>
+
+        <!-- Pollinator Card -->
+        <div class="pollinator-card">
+          <h3>First POLLINATOR &mdash; Ecological Keystone</h3>
+          <p>The bumblebee is the <strong>first pollinator</strong> in the species engine. Every prior species has been a consumer, predator, or sound-producer. The bumblebee is the first entry whose <strong>ecological role</strong> is fundamentally about <strong>mutualism</strong> &mdash; the bumblebee feeds on nectar and pollen while pollinating the flowers it visits [1, 2]. The wildflower meadow depends on the bumblebee. The bumblebee depends on the wildflower meadow. <strong>First mutualist. First pollinator. First species whose sound is directly tied to an ecological service.</strong></p>
+        </div>
+
+        <!-- Trance Mission Parallel Card -->
+        <div class="parallel-card">
+          <h3>The Trance Mission Parallel</h3>
+          <p>Degree 92 pairs the bumblebee with <strong>Trance Mission</strong> in Part A &mdash; World/Electronic, E=3. <strong>Both are cross-pollinators.</strong> Trance Mission carries musical traditions between scenes and cities. The bumblebee carries pollen between flowers and meadows. Both create new things (music, seeds) by connecting things that would otherwise remain separate. <strong>The cross-pollinator pattern operates on both sides of degree 92.</strong></p>
+        </div>
+
+        <h2>The Sound: Deep Resonant Buzz (93rd Acoustic Element)</h2>
+        <p><strong>The sound:</strong> The bumblebee&rsquo;s buzz is produced by <strong>wing vibration</strong> at approximately <strong>130&ndash;240 Hz</strong> [1, 2]. This is much lower than the mosquito&rsquo;s 400&ndash;600 Hz whine &mdash; deeper, warmer, richer. The bumblebee&rsquo;s large, densely furred body acts as a <strong>resonating chamber</strong>, amplifying and enriching the wing-produced tone. The result is a <strong>warm, full buzz</strong> rather than a thin whine.</p>
+        <p><strong>Buzz pollination (sonication):</strong> Bumblebees perform <strong>buzz pollination</strong> &mdash; they grab a flower and vibrate their flight muscles at specific frequencies (around 130&ndash;400 Hz) without moving their wings, shaking pollen loose from anthers [1, 2]. This is the first time the engine encounters a sound that <strong>performs ecological work</strong> &mdash; the vibration is not just a byproduct of flight but a tool that releases pollen from flowers that require sonication.</p>
+        <p><strong>Why E=3:</strong> (1) Individual bumblebees are clearly audible at several meters. (2) The buzz is warm and resonant, not thin. (3) Multiple bumblebees in a wildflower meadow create a warm, ambient hum. (4) Buzz pollination produces an intensified sound during flower visits. (5) E=3 reflects the warm, present, filling quality of the meadow buzz.</p>
+
+        <h2>Taxonomy: Apidae &mdash; NEW FAMILY (42nd), NEW ORDER: Hymenoptera</h2>
+        <p><strong>Classification:</strong> Class <strong>Insecta</strong>. Order <strong>Hymenoptera</strong> (NEW ORDER &mdash; bees, wasps, ants). Family <strong>Apidae</strong> (NEW FAMILY &mdash; 42nd in engine) [1, 2]. Hymenoptera is the fifth insect order: Orthoptera (87&ndash;88), Hemiptera (89), Diptera (91), Hymenoptera (92).</p>
+        <p><strong>PNW species:</strong> Multiple <em>Bombus</em> species in the PNW &mdash; <em>Bombus occidentalis</em> (western bumblebee), <em>Bombus mixtus</em> (fuzzy-horned bumblebee), <em>Bombus melanopygus</em> (black-tailed bumblebee), and others [1, 2]. Family-level entry encompasses the collective bumblebee buzz of PNW wildflower meadows.</p>
+
+        <h2>Ecology: The Wildflower Meadow Hum</h2>
+        <p><strong>Habitat:</strong> Wildflower meadow &mdash; open meadows with diverse flowering plants, alpine and subalpine meadows, garden edges, forest clearings [1, 2]. The wildflower meadow is the <strong>brightest</strong> and most <strong>diverse</strong> habitat in the engine &mdash; full of color, scent, and buzzing life.</p>
+        <p><strong>Activity:</strong> Diurnal. Active on warm days from spring through autumn. Most active in midsummer when wildflower diversity peaks.</p>
+        <p><strong>Buzz pollination ecology:</strong> Some PNW wildflowers (huckleberry, blueberry, shooting star, tomato) require buzz pollination &mdash; their anthers release pollen only when vibrated at specific frequencies [1, 2]. Bumblebees are among the few pollinators capable of sonication. The bumblebee&rsquo;s sound is not just an acoustic phenomenon but an <strong>ecological service</strong>.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon buzz">B</div>
+            <div class="theory-content">
+              <h4>Deep Resonant Buzz &mdash; 93rd Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Wing vibration at 130-240 Hz. Deep, warm, resonant. Body as resonating chamber. Richer than mosquito's thin whine. E=3.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon order">H</div>
+            <div class="theory-content">
+              <h4>NEW ORDER: Hymenoptera (Fifth Insect Order)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Bees, wasps, ants. Fifth insect order. NEW FAMILY: Apidae (42nd). Most ecologically significant insect order -- keystone pollinators.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pollinator">P</div>
+            <div class="theory-content">
+              <h4>First POLLINATOR &mdash; Ecological Keystone</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>First pollinator in the engine. First mutualist. Ecological role = mutualism. Sound tied to ecological service (buzz pollination).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon sonication">S</div>
+            <div class="theory-content">
+              <h4>Buzz Pollination (Sonication)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Vibrating flowers at specific frequencies to release pollen. Sound performs ecological work. First functional sound in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon meadow">M</div>
+            <div class="theory-content">
+              <h4>Wildflower Meadow Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Open meadows, diverse flowering plants. Brightest habitat in the engine. Connected to marmot (75) and golden-mantled GS (79) meadow/edge habitats.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon parallel">T</div>
+            <div class="theory-content">
+              <h4>The Trance Mission Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both cross-pollinators. Trance Mission carries music between traditions. Bumblebee carries pollen between flowers. Both create through connection.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-091: Mosquito Swarm</strong>
+            <p>Consecutive insect, wing-produced sound. Mosquito (Diptera, 400-600 Hz, E=2) to bumblebee (Hymenoptera, 130-240 Hz, E=3). Both wing-produced but mosquito is thin/quiet; bumblebee is deep/resonant. Two wing-sounds, two characters.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-087: Cricket Chorus</strong>
+            <p>Insect streak extends. Cricket (Orthoptera, stridulation), katydid (Orthoptera), cicada (Hemiptera, tymbal), mosquito (Diptera, wing), bumblebee (Hymenoptera, wing). Five insect orders now.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-089: Cicada</strong>
+            <p>Insect diversity. Cicada (Hemiptera, tymbal) and bumblebee (Hymenoptera, wing). Different orders, different mechanisms, different ecological roles (consumer vs pollinator).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-075: Yellow-bellied Marmot</strong>
+            <p>Meadow shared. Marmot in alpine/subalpine meadows (75). Bumblebee in wildflower meadows (92). Overlapping mountain meadow habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-079: Golden-mantled Ground Squirrel</strong>
+            <p>Meadow/edge shared. Ground squirrel in meadow/edge habitats (79). Bumblebee in wildflower meadows (92). Both diurnal meadow residents.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Apidae,&rdquo; &ldquo;Bumblebee,&rdquo; and &ldquo;Buzz pollination.&rdquo;</li>
+          <li>[2] Goulson, D. (2003). <em>Bumblebees: Behaviour, Ecology, and Conservation.</em> Oxford University Press.</li>
+          <li>[3] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">92&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Warm, resonant meadow buzz.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Apidae</div>
+          <div class="stat-detail">NEW FAMILY (42nd).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Insecta</div>
+          <div class="stat-detail">Insect streak continues.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Hymenoptera</div>
+          <div class="stat-detail">NEW ORDER. Bees, wasps, ants.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Wildflower meadow</div>
+          <div class="stat-detail">Open meadows, diverse flowers.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Deep resonant buzz</div>
+          <div class="stat-detail">Wing vibration. 130-240 Hz.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Diurnal</div>
+          <div class="stat-detail">Active on warm days.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Behavior</div>
+          <div class="stat-value">Buzz pollination</div>
+          <div class="stat-detail">Sonication. Vibrates flowers.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecological Role</div>
+          <div class="stat-value">POLLINATOR</div>
+          <div class="stat-detail">FIRST in engine. Keystone.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Insect Order</div>
+          <div class="stat-value">5th (Hymenoptera)</div>
+          <div class="stat-detail">Fifth insect order.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Mechanism</div>
+          <div class="stat-value">Wing vibration</div>
+          <div class="stat-detail">Second wing-sound (after 91).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (32nd)</div>
+          <div class="stat-detail">Thirty-second consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
