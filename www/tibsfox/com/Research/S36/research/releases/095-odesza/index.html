@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 95&deg; &mdash; ODESZA &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .euphoria-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 30%, #1976D2 60%, #42A5F5 100%);
+      border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E3F2FD;
+    }
+    .euphoria-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #BBDEFB; font-family: system-ui, sans-serif; }
+    .euphoria-card p { color: #E3F2FD; margin: 0.5rem 0; }
+    .euphoria-card strong { color: #E1F5FE; }
+
+    .bellingham-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E8F5E9;
+    }
+    .bellingham-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #A5D6A7; font-family: system-ui, sans-serif; }
+    .bellingham-card p { color: #E8F5E9; margin: 0.5rem 0; }
+    .bellingham-card strong { color: #C8E6C9; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>095 &mdash; ODESZA</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Electronic &mdash; Genre Stage 77 &mdash; Counter Records &mdash; E=5 &mdash; Seattle</h3>
+      <p>
+        <strong>ODESZA</strong> &mdash; Seattle electronic duo of <strong>Harrison Mills</strong>
+        and <strong>Clayton Knight</strong>, formed at Western Washington University in Bellingham.
+        One of the biggest electronic acts to emerge from the PNW.
+        Euphoric, cinematic electronic music. Headlined Coachella.
+        <strong>Electronic</strong> at Genre Stage 77. <strong>E=5</strong>.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">95&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">ODESZA</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Electronic</span>
+          <span class="label-badge">Counter Records</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 77</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="euphoria-card">
+          <h4>The Euphoric Build &mdash; Cinematic Electronic Music</h4>
+          <p>
+            <strong>ODESZA</strong> is defined by the <strong>euphoric build</strong> &mdash; the 96th
+            acoustic element. Layered synths, rising tension, vocal samples, and massive drops
+            that lift festival crowds. The euphoric build is cinematic architecture:
+            <strong>tension, suspension, release</strong>. Stadium-scale electronic music
+            designed to move thousands of people simultaneously. The build IS the instrument.
+          </p>
+        </div>
+
+        <div class="bellingham-card">
+          <h4>The Bellingham Pipeline &mdash; WWU to Seattle to the World</h4>
+          <p>
+            <strong>Harrison Mills</strong> and <strong>Clayton Knight</strong> met at
+            <strong>Western Washington University</strong> in <strong>Bellingham</strong> &mdash;
+            the same origin city as <strong>Death Cab for Cutie</strong> (degree 58). The
+            <strong>Bellingham pipeline</strong> is the 96th artist-city pattern &mdash; a university
+            town incubates artists who then launch into Seattle and beyond. Death Cab
+            took the indie rock path; ODESZA took the electronic path.
+            <strong>Same pipeline, different genres, different decades.</strong>
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 77 &middot; Electronic &middot; E=5 &middot; 96th Acoustic Element &middot; 96th Pattern</h4>
+          <p>
+            <strong>ODESZA</strong> enters at Genre Stage 77. <strong>E=5</strong> &mdash;
+            massive commercial success, arena-headlining, Coachella headliner.
+            Sixth electronic-adjacent entry in ten degrees (86, 90, 91, 93, 94, 95).
+            Second Bellingham-origin act after Death Cab (58).
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 77: Electronic</h2>
+          <p>
+            Degree 95 reaches <strong>Genre Stage 77</strong>. <strong>Electronic</strong>
+            describes ODESZA&rsquo;s music: cinematic electronic production, euphoric builds,
+            vocal samples, festival-scale sound design. Distinguished from
+            <strong>Electronic/Experimental</strong> (Erik Blood, 94) &mdash; ODESZA is more
+            structured, more pop-accessible, more euphoric. Distinguished from
+            <strong>Electronic Pop</strong> (Postal Service, 86) &mdash; ODESZA is
+            festival-scale, instrumental-forward, build-and-drop architecture.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 96: The Euphoric Build</h2>
+          <p>
+            The <strong>euphoric build</strong> is the ninety-sixth acoustic element.
+            It describes the sonic architecture of rising tension, layered synths,
+            vocal samples building to crescendo, and the massive release &mdash; the drop
+            that converts individual listeners into a collective body. ODESZA&rsquo;s
+            signature sound: tension, suspension, release.
+          </p>
+          <p>
+            Contrast with the <strong>producer&rsquo;s palette</strong> (degree 94, Erik Blood)
+            &mdash; Blood&rsquo;s studio-as-instrument is experimental and genre-unbounded;
+            ODESZA&rsquo;s euphoric build is structured and purpose-built for collective
+            experience. Both electronic, different architectures.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 96: The Bellingham Pipeline</h2>
+          <p>
+            The <strong>Bellingham pipeline</strong> is the ninety-sixth artist-city pattern.
+            It describes the phenomenon of a university town &mdash; specifically
+            <strong>Western Washington University</strong> in <strong>Bellingham, WA</strong>
+            &mdash; incubating artists who then launch into Seattle and the wider world.
+            Death Cab for Cutie (degree 58) and ODESZA (degree 95) both formed at WWU.
+            Different genres, different decades, same pipeline.
+          </p>
+          <blockquote>
+            Bellingham is close enough to Seattle to be connected, far enough
+            to develop its own identity. A college town with cheap rent,
+            creative community, and a direct route south to the city.
+            The pipeline is geographic and economic as much as cultural.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Euphoric Build</h4>
+              <span class="level advanced">Advanced</span>
+              <p>96th acoustic element. Cinematic electronic
+              architecture. Rising tension, layered synths,
+              vocal samples, massive release. Festival-scale.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Bellingham Pipeline</h4>
+              <span class="level advanced">Advanced</span>
+              <p>96th artist-city pattern. WWU incubates
+              artists. Death Cab (58) and ODESZA (95).
+              Different genres, same origin city.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Electronic at Genre Stage 77</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Cinematic electronic. Festival-scale.
+              Distinguished from Electronic/Experimental (94)
+              and Electronic Pop (86).</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 Arena Scale</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Coachella headliner. Grammy-nominated.
+              Counter Records. Arena-headlining.
+              Massive commercial success.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">058</span>
+              <strong>Death Cab for Cutie</strong> &mdash;
+              Bellingham/WWU origin! Both formed at Western Washington University. Death Cab launched indie rock from Bellingham; ODESZA launched electronic music from the same campus. Different genres, different decades, same pipeline.
+            </li>
+            <li>
+              <span class="ref-degree">086</span>
+              <strong>The Postal Service</strong> &mdash;
+              Electronic connection. Both electronic, both with massive reach. Postal Service is electronic pop (Ben Gibbard side project); ODESZA is cinematic electronic. Both E=5-scale visibility.
+            </li>
+            <li>
+              <span class="ref-degree">044</span>
+              <strong>Chong the Nomad</strong> &mdash;
+              Electronic Seattle parallel. Both electronic, both Seattle. Chong is beat-driven production; ODESZA is cinematic builds. Different scales, shared electronic lineage.
+            </li>
+            <li>
+              <span class="ref-degree">091</span>
+              <strong>Hovercraft</strong> &mdash;
+              Electronic spectrum. Hovercraft is drone/experimental, maximalist texture. ODESZA is euphoric, structured, pop-accessible. Opposite ends of Seattle&rsquo;s electronic spectrum.
+            </li>
+            <li>
+              <span class="ref-degree">081</span>
+              <strong>Sara Bareilles</strong> &mdash;
+              E=5 parallel. Both E=5, both arena-scale. Bareilles in pop/piano; ODESZA in electronic. Different genres, same energy tier and commercial magnitude.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">95&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Electronic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">77</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Counter Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Bellingham (WWU)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label">Summer&rsquo;s Gone</span>
+            <span class="stat-value">2012</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">In Return</span>
+            <span class="stat-value">2014</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">A Moment Apart</span>
+            <span class="stat-value">2017</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Last Goodbye</span>
+            <span class="stat-value">2022</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">96th</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">96th</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Run</span>
+            <span class="stat-value">86,90,91,93-95</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bellingham Acts</span>
+            <span class="stat-value">58, 95</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
