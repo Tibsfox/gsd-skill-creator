@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNW Daily &mdash; Pacific Northwest News &amp; Research Connections</title>
+  <style>
+    :root {
+      --sea: #1a3a4a; --marine: #3a8a9a; --fog: #8aa0b0; --sand: #c4b090;
+      --cedar: #2a4a30; --ink: #1a1a2a; --text: #d0d4da; --dim: #7a8090;
+      --bg: #0a0e14; --panel: #0e1420; --border: rgba(255,255,255,0.06);
+      --news: #5a9a6a; --news-light: #7aba8a;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--cedar) 70%, #1a3a20 100%);
+      padding: 2.5rem 2rem 2rem; border-bottom: 3px solid var(--news-light);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    header::before { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%); }
+    header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .date-banner { color:var(--news-light); font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:600; position:relative; margin-bottom:0.3rem; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a { color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif; font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent; }
+    header nav a:hover { color:#fff; border-bottom-color:var(--sand); }
+    main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    h2 { color: var(--news-light); font-size:1.3rem; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.4rem; }
+    p { margin-bottom:0.8rem; }
+
+    .story {
+      background: var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem 1.5rem; margin:1rem 0;
+    }
+    .story h3 { color:#fff; font-size:1.05rem; margin-bottom:0.3rem; }
+    .story .meta { color:var(--dim); font-family:system-ui,sans-serif; font-size:0.78rem; margin-bottom:0.5rem; }
+    .story .meta .tag {
+      display:inline-block; padding:1px 8px; border-radius:3px; font-size:0.7rem;
+      font-weight:600; margin-right:0.3rem; text-transform:uppercase; letter-spacing:0.05em;
+    }
+    .tag-space { background:#1a2a4a; color:#6a9aca; }
+    .tag-weather { background:#1a3a4a; color:#4a9aba; }
+    .tag-seismic { background:#3a1a1a; color:#ca6a4a; }
+    .tag-community { background:#1a3a2a; color:#6aba8a; }
+    .tag-emergency { background:#4a2a1a; color:#ca8a4a; }
+    .tag-sports { background:#2a2a1a; color:#baba6a; }
+    .tag-justice { background:#2a1a2a; color:#9a6a9a; }
+
+    .story .connection {
+      background:rgba(42,74,48,0.2); border-left:3px solid var(--cedar);
+      padding:0.6rem 1rem; margin-top:0.8rem; border-radius:0 4px 4px 0;
+      font-size:0.88rem; color:var(--fog);
+    }
+    .story .connection strong { color:var(--news-light); }
+
+    .weather-strip {
+      background: var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:0.8rem 1.2rem; margin:1rem 0; display:flex; gap:1.5rem; flex-wrap:wrap;
+      font-family:system-ui,sans-serif; font-size:0.85rem; align-items:center;
+    }
+    .weather-strip .wx-item { display:flex; align-items:center; gap:0.4rem; }
+    .weather-strip .wx-label { color:var(--dim); font-size:0.7rem; text-transform:uppercase; }
+    .weather-strip .wx-value { color:#fff; font-weight:600; }
+
+    .source-list { list-style:none; margin:0.5rem 0; }
+    .source-list li { padding:0.2rem 0; font-size:0.82rem; color:var(--dim); }
+    footer { text-align:center; color:var(--dim); font-size:0.8rem; padding:2rem; border-top:1px solid var(--border); margin-top:3rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="date-banner">Wednesday, April 2, 2026</div>
+  <h1>PNW Daily</h1>
+  <div class="subtitle">Pacific Northwest News &amp; Research Connections</div>
+  <nav>
+    <a href="../index.html">Research</a>
+    <a href="../MUK/index.html">MUK</a>
+    <a href="../USGS/index.html">USGS</a>
+    <a href="../LIVE/index.html">LIVE</a>
+    <a href="../NASA/artemis-ii/index.html">Artemis II</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="weather-strip">
+    <div class="wx-item"><span class="wx-label">KPAE</span> <span class="wx-value">41&deg;F</span></div>
+    <div class="wx-item"><span class="wx-label">Wind</span> <span class="wx-value">S 7</span></div>
+    <div class="wx-item"><span class="wx-label">Sky</span> <span class="wx-value">-RA BR FEW008 BKN015 OVC025</span></div>
+    <div class="wx-item"><span class="wx-label">Pressure</span> <span class="wx-value">29.73" &darr;</span></div>
+    <div class="wx-item"><span class="wx-label">Rain 24h</span> <span class="wx-value">0.97"</span></div>
+    <div class="wx-item"><span class="wx-label">Artemis II</span> <span class="wx-value">MET +14:25</span></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Top Stories</h2>
+
+  <div class="story">
+    <h3>Artemis II Flight Day 2 &mdash; Crew Prepares for Trans-Lunar Injection</h3>
+    <div class="meta">
+      <span class="tag tag-space">Space</span>
+      <span>NASA &bull; April 2, 2026</span>
+    </div>
+    <p>The four-person crew of Orion Integrity completed proximity operations with the ICPS upper stage last night and is now in a 115 &times; 43,760 mile orbit around Earth. A perigee raise burn is scheduled this morning, followed by a crew rest period. The trans-lunar injection (TLI) burn &mdash; the six-minute firing that sends them to the Moon &mdash; is targeted for approximately 5 PM PDT today.</p>
+    <p>This will be the first time humans have left Earth orbit since Apollo 17 in December 1972 &mdash; 53 years and 4 months ago.</p>
+    <div class="connection">
+      <strong>Research:</strong> <a href="../NASA/artemis-ii/index.html">Artemis II Mission Tracker</a> &bull; <a href="../NASA/artemis-ii/math.html">Orbital Mechanics (Sections 8-10)</a> &bull; <a href="../MUK/rain-gauge.html">Launch Day Weather</a>
+    </div>
+  </div>
+
+  <div class="story">
+    <h3>M4.6 Earthquake Rattles Boulder Creek, Santa Cruz Mountains</h3>
+    <div class="meta">
+      <span class="tag tag-seismic">Seismic</span>
+      <span>USGS &bull; April 2, 2026 01:41 PDT</span>
+    </div>
+    <p>A magnitude 4.6 earthquake struck 1 km ESE of Boulder Creek at 1:41 AM, depth 10.85 km, on the San Andreas fault system. Over 25,000 people filed "Did You Feel It?" reports. Felt from Sacramento to Fresno. No damage or injuries. This is the largest event on the Loma Prieta fault segment since the M6.9 in 1989.</p>
+    <p>The segment has re-accumulated approximately 72% of the strain released by Loma Prieta, based on GPS geodetic slip rates of 33&ndash;37 mm/year over 36.5 years.</p>
+    <div class="connection">
+      <strong>Research:</strong> <a href="../USGS/boulder-creek/index.html">Full Event Analysis &amp; Historical Catalog</a> &bull; <a href="../USGS/index.html">USGS Seismic Observatory</a> &bull; <a href="../MUK/boulder-creek-quake.html">MUK Quake Report</a>
+    </div>
+  </div>
+
+  <div class="story">
+    <h3>Everett Emergency Response Exercise Scheduled April 6</h3>
+    <div class="meta">
+      <span class="tag tag-emergency">Emergency</span>
+      <span>City of Everett &bull; April 6, 2026</span>
+    </div>
+    <p>The City of Everett Emergency Management, partnering with Snohomish County Department of Emergency Management, will conduct a full-scale emergency response exercise at Everett Memorial Stadium on Monday, April 6, from 8 AM to 5 PM. The exercise will test multi-agency coordination and response capabilities.</p>
+    <p>This exercise is particularly relevant given the seismic hazard profile of the Puget Sound region: 85% probability of a M6.5+ deep earthquake, and 10&ndash;15% probability of a Cascadia M9.0, within the next 50 years.</p>
+    <div class="connection">
+      <strong>Research:</strong> <a href="../USGS/index.html">Fault Systems: Seattle Fault, South Whidbey, Cascadia</a> &bull; Preparedness guide (coming soon)
+    </div>
+  </div>
+
+  <div class="story">
+    <h3>Post-Frontal Rain Continues &mdash; 1.48&quot; and Counting</h3>
+    <div class="meta">
+      <span class="tag tag-weather">Weather</span>
+      <span>KPAE METAR &bull; April 2, 2026</span>
+    </div>
+    <p>The atmospheric river that arrived during the Artemis II launch window continues to deliver rain across the Puget Sound. KPAE has recorded 0.97&quot; on April 1 and 0.51&quot; so far on April 2, with peak intensity of 0.22&quot;/hr at 3 AM. Pressure has fallen from 30.00&quot; to 29.73&quot; over 48 hours. Temperatures hovering at 41&deg;F with near-saturation (96% humidity).</p>
+    <p>This rain delivers approximately 40,000 gallons per acre &mdash; significant soil recharge heading into planting season. Soil temperatures remain around 45&ndash;50&deg;F, good for cool-season crops.</p>
+    <div class="connection">
+      <strong>Research:</strong> <a href="../MUK/rain-gauge.html">Rain Gauge &amp; Hourly Precipitation Chart</a> &bull; <a href="../MUK/pnw-weather.html">PNW Weather Science</a> &bull; <a href="../MUK/convergence-zone.html">Convergence Zone</a>
+    </div>
+  </div>
+
+  <div class="story">
+    <h3>&ldquo;No Kings&rdquo; Anti-War Protests in Downtown Everett</h3>
+    <div class="meta">
+      <span class="tag tag-community">Community</span>
+      <span>Everett &bull; April 2026</span>
+    </div>
+    <p>The third nationally organized "No Kings" protest took place in Downtown Everett, with this iteration focusing on anti-war themes. Similar demonstrations occurred in Marysville, Snohomish, and Edmonds across Snohomish County.</p>
+    <div class="connection">
+      <strong>Context:</strong> Community organizing and civic participation are foundational to emergency preparedness and mutual aid networks. The same people who show up for protests show up after earthquakes.
+    </div>
+  </div>
+
+  <div class="story">
+    <h3>AquaSox Open 2026 Season Friday</h3>
+    <div class="meta">
+      <span class="tag tag-sports">Sports</span>
+      <span>Everett AquaSox &bull; April 3, 2026</span>
+    </div>
+    <p>The Everett AquaSox open their 2026 High-A season on Friday, April 3, at Spokane before the home opener on April 7 against the Tri-City Dust Devils at Funko Field. The AquaSox are the High-A affiliate of the Seattle Mariners.</p>
+    <div class="connection">
+      <strong>Context:</strong> Funko Field is at Everett Memorial Stadium &mdash; the same venue hosting the emergency response exercise on April 6, the day before the home opener. <a href="../MUK/paine-field.html">Paine Field &amp; Everett</a>
+    </div>
+  </div>
+
+  <div class="story">
+    <h3>Fourth Suspect Arrested in 2022 Snohomish County Homicide</h3>
+    <div class="meta">
+      <span class="tag tag-justice">Justice</span>
+      <span>Snohomish County Sheriff &bull; April 2026</span>
+    </div>
+    <p>The Sheriff's Office Major Crimes Unit arrested Xavier Jaquan Chaney, 24, as the fourth suspect in the August 19, 2022 home invasion homicide of 36-year-old Irah Sok. The arrest was made by the Violent Offender Task Force.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>How This Page Works</h2>
+
+  <p>PNW Daily connects current events to the research corpus at tibsfox.com/Research. Every news story includes links back to relevant research projects, historical context, and data sources. The goal is not to replace local journalism but to add depth &mdash; to show that today's weather, today's earthquake, today's community action are all part of patterns that the research tracks.</p>
+
+  <p>Data sources: <a href="https://www.heraldnet.com/">Everett Herald</a>, <a href="https://myeverettnews.com/">My Everett News</a>, <a href="https://www.snoho.com/">Snohomish County Tribune</a>, NWS, USGS, NASA, PNSN.</p>
+
+</main>
+
+<footer>
+  <p>PNW Daily &mdash; <a href="../index.html">tibsfox.com/Research</a></p>
+  <p style="margin-top:0.3rem;">News happens. Research explains why.</p>
+</footer>
+
+</body>
+</html>
