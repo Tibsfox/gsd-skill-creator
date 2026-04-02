@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-02T00:44:00Z",
-  "source": "sweep-v1.1.17.2",
+  "updated": "2026-04-02T00:49:00Z",
+  "source": "sweep-v1.1.17.3",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "orbit",
-    "status": "IN ORBIT \u2014 L+2h09m \u2014 PRM COMPLETE (RL10 burn nominal). Brief comms loss post-PRM, resolved. Apogee raise burn next \u2014 will boost to 43,730 mi (70,378 km), 23.5h checkout in high Earth orbit. ICPS sep + TLI on Flight Day 2. Press conf 8 PM EDT.",
+    "status": "IN ORBIT \u2014 L+2h14m \u2014 ARB due NOW (~L+1h48m, ~5:23PM PDT). 20-second RL10 burn to reach 43,730 mi apogee. ICPS sep at T+3h24m (~6:59PM PDT). Prox ops demo after sep. Solar arrays: 11 kW. TLI on Flight Day 2. Press conf 8 PM EDT.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -102,7 +102,7 @@
   "announcements": [
     {
       "time": "2026-04-02T00:10:00Z",
-      "text": "v1.1.17.2: L+2h09m 5:44pm. PRM COMPLETE \u2014 RL10 burn nominal, perigee raised to 115 mi. Brief comms loss post-burn, resolved. Apogee raise burn next: target 43,730 mi (70,378 km) altitude for 23.5h high-orbit checkout. ICPS sep + TLI on Flight Day 2. Press conference 8 PM EDT. Research: Attention Residuals (Kimi), BitNet (Microsoft), TurboQuant (Google ICLR 2026). FoxField Android sensor node architecture designed."
+      "text": "v1.1.17.3: L+2h14m 5:49pm. ARB imminent \u2014 20s RL10 burn to 43,730 mi apogee. ICPS sep at T+3h24m (~6:59pm PDT), then prox ops demo (Wiseman+Glover manual piloting). Solar arrays 11 kW nominal. Erdős #19 (EFL conjecture) research: proved for large n (Annals 2023), GPU target = verify small n to close the gap. KPAE 10.8°C RA OVC020, pressure 999.8 hPa."
     },
     {
       "time": "2026-04-01T23:00:00Z",
