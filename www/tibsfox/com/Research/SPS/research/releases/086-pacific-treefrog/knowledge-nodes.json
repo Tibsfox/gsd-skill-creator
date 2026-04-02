@@ -1,0 +1,145 @@
+{
+  "degree": 86,
+  "species": "Pacific Treefrog",
+  "scientific_name": "Pseudacris regilla",
+  "slug": "086-pacific-treefrog",
+  "sound_type": "amplified krek-krek wall of sound -- collective breeding chorus, hundreds or thousands calling simultaneously from marsh edges on spring nights, NOT an individual call but a wall of sound, E=4, marsh habitat",
+  "energy": 4,
+  "ecosystem": "Marsh. Freshwater marshes, ponds, wetlands, wet meadows. Also gardens, forests, grasslands. Breeds in standing water. Remarkably adaptable. Consecutive marsh species (85-86).",
+  "season": "Late winter through spring (breeding chorus). Active year-round in mild climates. Nocturnal during breeding season.",
+  "family": "Hylidae",
+  "order": "Anura",
+  "csv_substitute": false,
+  "original_species": "Pacific Treefrog",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [85],
+    "partner_species": ["Muskrat"],
+    "pair_type": "Consecutive marsh species (85-86). Muskrat (quiet plop, E=3, Mammalia) and Pacific Treefrog (loud chorus, E=4, Amphibia). Two classes sharing the same marsh."
+  },
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -122.30,
+    "description": "Reference for marsh habitat in the Puget Sound lowlands, Washington. Pacific Treefrog chorus audible at wetlands throughout the region."
+  },
+  "taxonomy_note": {
+    "description": "AMPHIBIA RETURNS. First amphibian in the engine in its own right. After 25 consecutive mammalian entries (61-85) and 16 bird-to-bird substitutions replacing CSV amphibians (45-60). NEW CLASS re-entering. NEW FAMILY Hylidae (37th). NEW ORDER Anura. NEW GENUS Pseudacris. Breaks Cricetidae streak (83-84-85).",
+    "current_class": "Amphibia",
+    "new_class": false,
+    "class_count_in_engine": 3,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Amphibia does not use infraclass in the same way. Lissamphibia is the subclass.",
+    "current_family": "Hylidae",
+    "new_family": true,
+    "family_count_in_engine": 37,
+    "hylidae_count_in_engine": 1,
+    "name_etymology": "Pseudacris from Greek pseudes ('false') + akris ('locust'), referring to the insect-like call. regilla from Latin 'regal' or 'little queen.' Formerly Hyla regilla. Reclassified based on molecular phylogenetics.",
+    "genus_note": "Pseudacris -- NEW GENUS in the engine. Chorus frogs. First anuran genus.",
+    "order_note": "Anura -- first Anura (frogs) in the engine. NEW ORDER.",
+    "class_note": "Amphibia -- RETURNS. Third class in the engine (after Aves and Mammalia). First amphibian entry.",
+    "family_position": "Hylidae's FIRST entry at degree 86. NEW FAMILY (37th)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Individual call: approximately 1,000-4,000 Hz. Peak at approximately 2,000-2,500 Hz.",
+    "peak_energy_band_hz": "Chorus peak: approximately 2,000-3,000 Hz. The massed chorus creates a broad peak in this band.",
+    "song_frequency_hz": "NOT a song. BREEDING CHORUS. Individual call: 'krek-ek, krek-ek' -- two-note, rapidly repeated.",
+    "song_duration_s": "Individual call: approximately 0.1-0.2 seconds per 'krek-ek.' Repeated continuously. Chorus: hours-long, from dusk through night.",
+    "note_structure": "Two-note: 'krek-ek.' First note slightly higher, second note slightly lower. Rapidly repeated. Males call from partially submerged positions at marsh edges.",
+    "note_types": "Krek-ek (primary advertisement call), trilling (extended call variant), encounter call (shorter, used in male-male competition).",
+    "phrase_structure": "Individual: continuous repetition of krek-ek. Chorus: hundreds of individuals calling asynchronously, creating a continuous wall of sound with no gaps.",
+    "timbre": "Individual: sharp, bright, penetrating. Insect-like (hence Pseudacris = 'false locust'). Chorus: dense, layered, continuous. A wall of sound that fills the marsh.",
+    "amplitude": "E=4. Individual calls are loud for body size (approximately 80 dB at 1 m). The chorus is LOUD -- audible from hundreds of meters. Dominates the marsh soundscape on spring nights. The most iconic sound of PNW wetlands.",
+    "tempo": "Individual: approximately 2-3 calls per second. Chorus: continuous. The asynchronous calling creates a pulsing, continuous texture.",
+    "context": "BREEDING CHORUS: males call to attract females. Night chorus from marsh edges. Late winter through spring. Peaks on warm, humid nights. The collective chorus is the primary acoustic phenomenon -- individual calls blend into a wall of sound.",
+    "regional_variation": "Minimal variation in call structure across range. Chorus density varies by population size and habitat quality.",
+    "key_property": "AMPLIFIED KREK-KREK WALL OF SOUND -- the 87th acoustic element. Collective breeding chorus. NOT an individual call but a wall of sound. Hundreds calling simultaneously. E=4. The most iconic sound of PNW wetlands. Used in films to signify 'nighttime outdoors.' AMPHIBIA RETURNS."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Tiny tree frog. 3-5 cm (1-2 inches). 2-5 g. One of the smallest vertebrates in the engine. Highly variable coloration -- green, brown, tan, or gray. Can change color slowly (hours to days). The defining diagnostic is the dark eye stripe.",
+    "diagnostic_mark": "For degree 86: (1) DARK EYE STRIPE -- a dark stripe from nostril through eye to shoulder. The key field mark. Present in all color morphs. (2) TOE PADS -- expanded adhesive toe pads for climbing. Typical of tree frogs. (3) SMALL SIZE -- 3-5 cm. Tiny. (4) VARIABLE COLOR -- green, brown, tan, gray. Can change. (5) VOCAL SAC -- males have a large, dark vocal sac that inflates during calling.",
+    "fur_detail": null,
+    "skin_detail": "BODY: Smooth, moist skin. Highly variable in color -- green, brown, tan, reddish, or gray. Can change color over hours to days in response to temperature and humidity. BELLY: Cream to white. STRIPE: Dark stripe from nostril through eye to shoulder -- the defining field mark.",
+    "dental_detail": null,
+    "field_id": "Tiny frog (3-5 cm) with a dark eye stripe from nostril through eye to shoulder. Variable coloration (green, brown, tan). Expanded toe pads. Most often detected by the CHORUS -- the krek-ek breeding call on spring nights. The sound is far more detectable than the animal. Tiny frog, huge voice."
+  },
+  "nodes": [
+    {
+      "id": "amphibia-returns",
+      "type": "pattern",
+      "title": "Amphibia Returns -- Class Barrier Breaks",
+      "description": "First amphibian in the engine in its own right. After 25 consecutive mammalian entries (61-85) and 16 bird substitutions replacing amphibians (45-60). Amphibia re-enters. Third class in the engine.",
+      "connections": ["krek-chorus", "hylidae-new", "marsh-consecutive"]
+    },
+    {
+      "id": "krek-chorus",
+      "type": "concept",
+      "title": "Krek-Krek Night Chorus -- 87th Acoustic Element",
+      "description": "Collective breeding chorus. Hundreds calling simultaneously. Wall of sound. E=4. The most iconic sound of PNW wetlands. Used in films to signify 'nighttime outdoors.'",
+      "connections": ["amphibia-returns", "hylidae-new", "marsh-consecutive"]
+    },
+    {
+      "id": "hylidae-new",
+      "type": "concept",
+      "title": "Hylidae -- 37th Family -- New Family, New Class",
+      "description": "NEW FAMILY. Tree frog family. 37th family in engine. Breaks Cricetidae streak (83-85). Crosses class boundary from Mammalia to Amphibia.",
+      "connections": ["amphibia-returns", "krek-chorus"]
+    },
+    {
+      "id": "marsh-consecutive",
+      "type": "pattern",
+      "title": "Consecutive Marsh Species (85-86)",
+      "description": "Muskrat (85) and Pacific Treefrog (86). Consecutive marsh species. Mammal and amphibian sharing the same marsh. Quiet plop (E=3) then loud chorus (E=4).",
+      "connections": ["amphibia-returns", "krek-chorus"]
+    },
+    {
+      "id": "hollywood-frog",
+      "type": "concept",
+      "title": "The Most Iconic PNW Wetland Sound",
+      "description": "The Pacific Treefrog chorus is the sound used in Hollywood films, TV, and media to signify 'nighttime outdoors.' Even in scenes set far from the PNW, the krek-ek call is the go-to 'frog sound.'",
+      "connections": ["krek-chorus"]
+    },
+    {
+      "id": "postal-parallel",
+      "type": "pattern",
+      "title": "The Postal Service Parallel",
+      "description": "Both walls of sound. Both E=4. Both collective -- electronic layers vs frog chorus. Both create something larger than any individual element.",
+      "connections": ["krek-chorus", "amphibia-returns"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Sixth Consecutive Original CSV",
+      "description": "Twenty-six consecutive original CSV species. No substitution. The CSV had Pacific Chorus Frog at degree 45 (substituted). This is degree 86 -- a DIFFERENT placement. Original.",
+      "connections": ["amphibia-returns"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-085",
+      "species": "Muskrat",
+      "relationship": "MARSH SHARED. Consecutive marsh species (85-86). Muskrat (quiet plop, E=3, Mammalia) and treefrog (loud chorus, E=4, Amphibia). Two classes sharing the same marsh. The plop and the chorus on the same spring night."
+    },
+    {
+      "target": "SPS-059",
+      "species": "Mallard",
+      "relationship": "MARSH SHARED. Both in marsh/pond habitat. Mallard (Aves) and treefrog (Amphibia). Three classes sharing the marsh by degree 86: Aves, Mammalia, Amphibia."
+    },
+    {
+      "target": "SPS-058",
+      "species": "Wood Duck",
+      "relationship": "POND/MARSH. Both in marsh-adjacent aquatic habitat. Wood Duck (pond) and treefrog (marsh edge). Both breed in spring near standing water."
+    },
+    {
+      "target": "SPS-061",
+      "species": "American Beaver",
+      "relationship": "POND/MARSH BUILDER. Beaver creates ponds that become treefrog breeding habitat. The dam builder creates the chorus stage. Ecological engineering enables the night chorus."
+    },
+    {
+      "target": "SPS-073",
+      "species": "Snowshoe Hare",
+      "relationship": "PREY CONTRAST. Both common, both heavily preyed upon. Different trophic levels and habitats. Hare in forest understory, treefrog at marsh edge."
+    }
+  ]
+}
