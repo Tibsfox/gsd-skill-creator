@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-02T01:43:00Z",
-  "source": "sweep-v1.1.17.5",
+  "updated": "2026-04-02T01:58:00Z",
+  "source": "sweep-v1.1.17.6",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "orbit",
-    "status": "HIGH EARTH ORBIT \u2014 L+3h07m \u2014 ARB complete, 43,760 mi apogee. ICPS sep at T+3h24m (~6:59 PM PDT, 17 min away). Then 70-min prox ops demo: backflip, approach to 30 ft, manual piloting (Wiseman+Glover). Toilet fault light under investigation. ICPS deorbits to Pacific after demo.",
+    "status": "HIGH EARTH ORBIT \u2014 MET +03:27 \u2014 ICPS sep window NOW (T+3h24m was 6:59 PM PDT). Prox ops demo should be underway: 70-min sequence, manual piloting within 30ft of ICPS. MET clock (met.sh) operational. 15-min commit cadence established.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
