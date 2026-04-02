@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 100&deg; &mdash; Summer Heart &mdash; Seattle 360 &mdash; MILESTONE</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF6F00, #FF8F00, #1A237E);
+      color: #FFF8E1;
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(255, 111, 0, 0.5), 0 0 48px rgba(26, 35, 126, 0.3);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+    .milestone-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6F00;
+      color: #FFF8E1;
+      border: 1px solid #FF8F00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .milestone-banner {
+      background: linear-gradient(135deg, #FF6F00, #FF8F00, #1A237E, #283593);
+      color: white; padding: 1.5rem 2rem; border-radius: 8px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+      box-shadow: 0 4px 24px rgba(255, 111, 0, 0.3), 0 4px 24px rgba(26, 35, 126, 0.3);
+    }
+    .milestone-banner h3 { margin: 0 0 0.5rem; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .milestone-banner p { margin: 0; font-size: 0.92rem; line-height: 1.6; opacity: 0.95; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .retro-card {
+      background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 30%, #FFA000 60%, #FFB300 100%);
+      border: 2px solid #FF6F00; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #3E2723;
+    }
+    .retro-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #4E342E; font-family: system-ui, sans-serif; }
+    .retro-card p { color: #3E2723; margin: 0.5rem 0; }
+    .retro-card strong { color: #BF360C; }
+
+    .centennial-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 20%, #FF6F00 50%, #FF8F00 80%, #1A237E 100%);
+      border: 3px solid #FF6F00; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 2rem 0; color: #FFF8E1;
+      box-shadow: 0 4px 24px rgba(255, 111, 0, 0.4);
+    }
+    .centennial-card h4 { margin: 0 0 0.5rem; font-size: 1.2rem; color: #FFF8E1; font-family: system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+    .centennial-card p { color: #FFF8E1; margin: 0.5rem 0; line-height: 1.6; }
+    .centennial-card strong { color: #FFD54F; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>100 &mdash; Summer Heart &mdash; MILESTONE</span>
+    </nav>
+
+    <div class="milestone-banner">
+      <h3>Degree 100 &mdash; The Centennial &mdash; 27.8% of 360 &mdash; Electronic Pop &mdash; E=4</h3>
+      <p>
+        <strong>THE 100TH DEGREE.</strong> One hundred rotations from origin. Twenty-seven
+        point eight percent of the full circle. <strong>Summer Heart</strong> &mdash; the project
+        of Swedish-born, Seattle-connected David Alexander. Dream-pop-influenced electronic pop
+        with warm, nostalgic textures. <strong>Genre Stage 82.</strong> E=4. The centennial degree.
+        The electronic era carries the engine past the hundred-mark. <strong>101st acoustic element.
+        101st artist-city pattern.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">100&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Summer Heart</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Electronic Pop</span>
+          <span class="neighborhood-badge">Seattle / Sweden</span>
+          <span class="record-badge">Genre Stage 82</span>
+          <span class="milestone-badge">100th Degree!</span>
+          <span class="milestone-badge">27.8% of 360!</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="centennial-card">
+          <h4>The Centennial &mdash; 100 Degrees of Seattle Sound</h4>
+          <p>
+            <strong>One hundred degrees.</strong> The engine has rotated one hundred times from
+            origin. One hundred artists. One hundred and one acoustic elements. One hundred and
+            one artist-city patterns. Eighty-two genre stages. From Sub Pop grunge through
+            indie folk, hip hop, jazz, electronic, R&amp;B, Latin, experimental, and beyond.
+            The hundredth degree lands on <strong>Summer Heart</strong> &mdash; electronic pop,
+            warm and nostalgic, Swedish-born and Seattle-connected. <strong>27.8% of 360.</strong>
+            More than a quarter of the circle complete. The engine continues.
+          </p>
+        </div>
+
+        <div class="synth-card">
+          <h4>The Nostalgic Cascade &mdash; 101st Acoustic Element</h4>
+          <p>
+            The <strong>nostalgic cascade</strong> is the 101st acoustic element. Summer Heart&rsquo;s
+            sound is a <strong>cascade of warm synth textures</strong> &mdash; layered pads,
+            glistening arpeggios, and soft vocal melodies that tumble over each other like
+            summer memories. The cascade is <strong>nostalgia in motion</strong> &mdash; not
+            static warmth (like Gold Casio&rsquo;s retro shimmer) but flowing, moving, always
+            arriving. Dream-pop-influenced electronic pop where every layer adds another shade
+            of <strong>golden longing</strong>.
+          </p>
+        </div>
+
+        <div class="retro-card">
+          <h4>The Transatlantic Dreamer &mdash; 101st Artist-City Pattern</h4>
+          <p>
+            The <strong>transatlantic dreamer</strong> is the 101st artist-city pattern.
+            Summer Heart operates across the Atlantic &mdash; Swedish-born, Seattle-connected.
+            The music carries both the <strong>Nordic melancholy</strong> of Scandinavian pop
+            and the <strong>Pacific Northwest warmth</strong> of Seattle&rsquo;s electronic scene.
+            The transatlantic dreamer does not belong to one continent &mdash; the music is the
+            <strong>bridge itself</strong>. Sweden provides the melodic sensibility; Seattle
+            provides the electronic texture. The Atlantic is not a barrier but a
+            <strong>creative frequency</strong>.
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 82 &middot; Electronic Pop &middot; E=4 &middot; 100th Degree (MILESTONE!) &middot; 101st Element &middot; 101st Pattern &middot; Swedish-PNW Connection</h4>
+          <p>
+            <strong>Summer Heart</strong> enters at Genre Stage 82. <strong>E=4</strong>.
+            Eleventh electronic-adjacent entry in fifteen degrees (86, 90, 91, 93, 94, 95,
+            96, 97, 98, 99, 100). The <strong>100th degree</strong> &mdash; a milestone.
+            27.8% of 360. Electronic Pop as a new genre stage. Swedish-PNW connection &mdash;
+            the fourth international connection in the engine (after Y La Bamba&rsquo;s Latin
+            heritage 61, Briana Marela&rsquo;s international connection 72, Kaina&rsquo;s
+            Guatemalan-Venezuelan heritage 99).
+          </p>
+        </div>
+
+        <section>
+          <h2>The 100th Degree: A Milestone</h2>
+          <p>
+            Degree 100 is a <strong>milestone</strong>. One hundred rotations from origin.
+            Twenty-seven point eight percent of the full 360-degree circle. The engine has now
+            documented one hundred artists, one hundred and one acoustic elements, one hundred
+            and one artist-city patterns, and eighty-two genre stages. The journey from degree 0
+            through degree 99 has traversed the full breadth of the PNW music scene &mdash; from
+            the foundational grunge of Sub Pop through indie rock, folk, hip hop, jazz, soul,
+            electronic, experimental, Latin, R&amp;B, and beyond.
+          </p>
+          <p>
+            The hundredth degree lands on <strong>electronic pop</strong> &mdash; warm, nostalgic,
+            international. The electronic era that began around degree 86 has carried the engine
+            past the century mark. Eleven electronic-adjacent entries in fifteen degrees. The PNW
+            electronic scene is deep enough to sustain more than a quarter of Quadrant II.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Genre Stage 82: Electronic Pop</h2>
+          <p>
+            Degree 100 reaches <strong>Genre Stage 82</strong>. <strong>Electronic Pop</strong>
+            is the genre classification &mdash; distinct from the Indie Electronic of degrees
+            96-98 and the Electronic/R&amp;B of degree 99. Summer Heart&rsquo;s music is
+            pop-structured electronic music &mdash; verse-chorus form, melodic hooks, vocal
+            melodies &mdash; delivered through dream-pop-influenced electronic production.
+          </p>
+          <p>
+            The closest prior entries are <strong>ODESZA</strong> (degree 95, Electronic/Cinematic)
+            and <strong>STRFKR</strong> (degree 96, Indie Electronic). ODESZA is cinematic and
+            festival-scale. STRFKR is driving and punk-inflected. Summer Heart is
+            <strong>warm, intimate, and nostalgic</strong> &mdash; bedroom electronic pop with
+            dream-pop textures. Pop structure served by electronic means.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 101: The Nostalgic Cascade</h2>
+          <p>
+            The <strong>nostalgic cascade</strong> is the one hundred and first acoustic element.
+            It describes the flowing, layered quality of Summer Heart&rsquo;s electronic pop
+            &mdash; cascading synth pads, glistening arpeggios, soft vocal melodies, and warm
+            reverb that creates a sense of <strong>constantly arriving</strong>. The cascade is
+            nostalgia in motion &mdash; not the static warmth of Gold Casio&rsquo;s retro shimmer
+            (degree 98) but the flowing warmth of memories in sequence.
+          </p>
+          <p>
+            Where the bilingual warmth (degree 99, Kaina) is cultural fusion, the nostalgic
+            cascade is <strong>temporal fusion</strong> &mdash; the sound of the past and present
+            flowing together. Swedish melodic sensibility through Seattle electronic texture.
+            The nostalgic cascade is the sound of longing across both time and distance.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 101: The Transatlantic Dreamer</h2>
+          <p>
+            The <strong>transatlantic dreamer</strong> is the one hundred and first artist-city
+            pattern. It describes an artist who operates across the Atlantic &mdash; rooted in
+            one continent, connected to another, with music that carries both. Summer Heart&rsquo;s
+            David Alexander brings Swedish pop melodicism to Seattle&rsquo;s electronic landscape.
+          </p>
+          <p>
+            The transatlantic dreamer contrasts with the diasporic synthesist (degree 99, Kaina),
+            who operates across cities within the Americas. Summer Heart&rsquo;s pattern spans
+            <strong>continents</strong> &mdash; Europe to North America. The Atlantic as creative
+            frequency. Nordic melancholy meets Pacific warmth.
+          </p>
+          <blockquote>
+            The transatlantic dreamer joins the growing international dimension of the engine:
+            Y La Bamba (61, Latin heritage), Briana Marela (72, international connections),
+            Kaina (99, Guatemalan-Venezuelan heritage), Summer Heart (100, Swedish-PNW).
+            The engine is not only local &mdash; it is a node in global musical networks.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Nostalgic Cascade</h4>
+              <span class="level advanced">Advanced</span>
+              <p>101st acoustic element. Flowing, layered
+              synth textures. Nostalgia in motion. Cascading
+              warmth. Temporal fusion. Dream-pop electronic.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Transatlantic Dreamer</h4>
+              <span class="level advanced">Advanced</span>
+              <p>101st artist-city pattern. Swedish-born,
+              Seattle-connected. Nordic melancholy meets
+              Pacific warmth. The Atlantic as creative frequency.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Centennial Degree</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>100th degree! 27.8% of 360. One hundred
+              artists. The electronic era carries the engine
+              past the century mark.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Electronic Pop at Genre Stage 82</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>New genre classification. Pop-structured
+              electronic music. Dream-pop influenced. Eleventh
+              electronic-adjacent entry in fifteen degrees.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">095</span>
+              <strong>ODESZA</strong> &mdash;
+              ELECTRONIC POP SPECTRUM. Both electronic pop. ODESZA is cinematic, festival-scale, brass-accented (E=5). Summer Heart is intimate, bedroom-scale, dream-pop-influenced (E=4). The electronic pop spectrum from arena to bedroom.
+            </li>
+            <li>
+              <span class="ref-degree">093</span>
+              <strong>NAVVI</strong> &mdash;
+              DREAM POP PARALLEL. Both dream-pop-influenced electronic. NAVVI is dark, nocturnal, reverb-as-architecture. Summer Heart is warm, golden, nostalgia-as-cascade. Both atmospheric; different emotional temperatures.
+            </li>
+            <li>
+              <span class="ref-degree">096</span>
+              <strong>STRFKR</strong> &mdash;
+              ELECTRONIC POP CONTRAST. Both electronic pop, both synth-driven. STRFKR is driving, punk-inflected, joyful. Summer Heart is flowing, dream-pop-inflected, nostalgic. Different engines, different emotions.
+            </li>
+            <li>
+              <span class="ref-degree">072</span>
+              <strong>Briana Marela</strong> &mdash;
+              INTERNATIONAL CONNECTION. Both international connections in the engine. Briana Marela's ethereal sound connects to global experimental networks. Summer Heart bridges Sweden and Seattle. The engine's international dimension.
+            </li>
+            <li>
+              <span class="ref-degree">077</span>
+              <strong>Mree</strong> &mdash;
+              ETHEREAL POP PARALLEL. Both ethereal, warm pop sensibilities. Mree is acoustic-rooted ethereal pop. Summer Heart is electronic-rooted ethereal pop. Both gentle, both warm, different instruments.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">100&deg; (MILESTONE!)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Electronic Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">82</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle / Sweden</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">David Alexander</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Milestone Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">100th!</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Completion</span>
+            <span class="stat-value">27.8% of 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Total Artists</span>
+            <span class="stat-value">100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stages</span>
+            <span class="stat-value">82</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Run</span>
+            <span class="stat-value">11 in 15 degrees</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">101st</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">101st</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Run</span>
+            <span class="stat-value">86,90,91,93-100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">International</span>
+            <span class="stat-value">4th connection</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
