@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 93&deg; &mdash; Hornet Nest Buzz &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Aggressive hum card */
+    .aggressive-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 3px solid #B71C1C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFEBEE;
+    }
+    .aggressive-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFCDD2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .aggressive-card p {
+      color: #FFEBEE;
+    }
+    .aggressive-card strong {
+      color: #FFCDD2;
+    }
+
+    /* Hymenoptera pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 50%, #F57C00 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .pair-card p {
+      color: #FFF3E0;
+    }
+    .pair-card strong {
+      color: #FFCC80;
+    }
+
+    /* Defensive posture card */
+    .defense-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .defense-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .defense-card p {
+      color: #F3E5F5;
+    }
+    .defense-card strong {
+      color: #E1BEE7;
+    }
+
+    /* NAVVI contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .contrast-card p {
+      color: #E0F2F1;
+    }
+    .contrast-card strong {
+      color: #B2DFDB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.aggressive { background: #B71C1C; }
+    .theory-icon.vespidae { background: #E65100; }
+    .theory-icon.pair { background: #F57C00; }
+    .theory-icon.defense { background: #4A148C; }
+    .theory-icon.paper { background: #5D4037; }
+    .theory-icon.contrast { background: #004D40; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">93&deg;</div>
+      <div class="release-title-block">
+        <h2>Hornet Nest Buzz</h2>
+        <div class="scientific">Vespidae (family)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      aggressive papery hum &mdash; NEW FAMILY Vespidae (43rd). Same order Hymenoptera as bumblebee (92). COLLECTIVE and AGGRESSIVE defensive display. First aggressive/defensive insect sound. Woodland habitat. E=5. Thirty-third consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Aggressive Hum Card -->
+        <div class="aggressive-card">
+          <h3>Aggressive Papery Hum &mdash; 94th Acoustic Element</h3>
+          <p>The hornet nest buzz is the <strong>collective defensive buzzing</strong> of a wasp or hornet colony &mdash; hundreds of individuals vibrating their wings simultaneously in an aggressive display. The sound is <strong>papery</strong> (wood-fiber nest resonance), <strong>harsh</strong> (broad-spectrum wing vibration), and <strong>threatening</strong> (designed to intimidate and repel). <strong>E=5</strong> &mdash; tied with cicada as the highest insect energy. The <strong>first aggressive/defensive insect sound</strong> in the engine.</p>
+        </div>
+
+        <!-- Hymenoptera Pair Card -->
+        <div class="pair-card">
+          <h3>Hymenoptera Pair &mdash; Bumblebee (92) &amp; Hornet (93)</h3>
+          <p>Two consecutive Hymenoptera entries with <strong>opposite acoustic postures</strong>. <strong>Bumblebee</strong> (degree 92, Apidae): gentle drone, pollination, E=2 &mdash; the worker. <strong>Hornet</strong> (degree 93, Vespidae): aggressive hum, colony defense, E=5 &mdash; the warrior. Same order. <strong>Widest consecutive same-order energy gap</strong> (E=2 to E=5). Taxonomic proximity does not imply acoustic similarity.</p>
+        </div>
+
+        <!-- Defensive Posture Card -->
+        <div class="defense-card">
+          <h3>First Aggressive/Defensive Insect Sound</h3>
+          <p>Every prior insect sound served a different purpose: <strong>mating</strong> (cricket chirp, katydid rasp), <strong>advertising</strong> (cicada throb), <strong>incidental flight</strong> (mosquito whine, bumblebee drone). The hornet nest buzz is the first sound with <strong>aggressive/defensive intent</strong> &mdash; a colony defending its nest, a graduated warning that escalates in volume as more hornets emerge. A fundamentally new acoustic posture.</p>
+        </div>
+
+        <!-- NAVVI Contrast Card -->
+        <div class="contrast-card">
+          <h3>The NAVVI Contrast</h3>
+          <p>Degree 93 pairs the hornet nest buzz with <strong>NAVVI</strong> in Part A &mdash; Dream Pop/Electronic, E=3. <strong>Extreme contrast.</strong> NAVVI shimmers and whispers; the hornet nest threatens and roars. The shimmer veil (Part A) vs the aggressive hum (Part B). <strong>E=3 vs E=5</strong>. Intimate vs threatening. The widest A/B energy gap in recent degrees.</p>
+        </div>
+
+        <h2>The Sound: Aggressive Papery Hum (94th Acoustic Element)</h2>
+        <p><strong>Individual sound:</strong> Each hornet produces a buzzing flight tone through rapid wing vibration, typically 100-200 Hz [1, 2]. Higher-pitched and more aggressive than a bumblebee&rsquo;s drone.</p>
+        <p><strong>The collective defensive display:</strong> When a colony is disturbed, hundreds of hornets emerge and vibrate their wings simultaneously, producing an <strong>aggressive, papery hum</strong> that rises in volume and intensity. Alarm pheromone recruits nestmates. The sound escalates &mdash; each second louder than the last. The papery quality comes from the wood-fiber nest resonating with the collective buzzing.</p>
+
+        <h2>Taxonomy: Vespidae (NEW FAMILY &mdash; 43rd)</h2>
+        <p><strong>Classification:</strong> Class <strong>Insecta</strong>. Order <strong>Hymenoptera</strong> (same as bumblebee, degree 92). Family <strong>Vespidae</strong> &mdash; NEW FAMILY (43rd). Wasps and hornets [1, 2].</p>
+        <p><strong>PNW species:</strong> Bald-faced hornet (<em>Dolichovespula maculata</em>), common yellowjacket (<em>Vespula vulgaris</em>), western yellowjacket (<em>Vespula pensylvanica</em>).</p>
+
+        <h2>Ecology: The Nest Defenders</h2>
+        <p><strong>Habitat:</strong> Woodland. Nests in trees, shrubs, and sheltered structures [1, 2]. Paper nests constructed from chewed wood fiber mixed with saliva. Mature colonies: 200-700+ workers.</p>
+        <p><strong>Defense:</strong> Guard wasps release alarm pheromone when disturbed, recruiting nestmates. The collective buzz escalates. Defensive range: 5-15 meters from nest. Unlike honeybees, wasps and hornets can sting repeatedly.</p>
+        <p><strong>Ecology:</strong> Top predators in the insect world. Significant control of pest insects (caterpillars, flies). Also pollinators. Seasonal colonies &mdash; queens overwinter alone, colonies build through summer, die in fall.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon aggressive">A</div>
+            <div class="theory-content">
+              <h4>Aggressive Papery Hum &mdash; 94th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Collective defensive buzzing. Papery quality. E=5. First aggressive/defensive insect sound.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon vespidae">V</div>
+            <div class="theory-content">
+              <h4>Vespidae Enters &mdash; 43rd Family (NEW)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>First wasps/hornets. Same order Hymenoptera as bumblebee (92). Social wasps. Paper nests.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">H</div>
+            <div class="theory-content">
+              <h4>Hymenoptera Pair (92 &amp; 93)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Bumblebee (gentle, E=2) vs hornet (aggressive, E=5). Same order, opposite postures. Widest same-order energy gap.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon defense">D</div>
+            <div class="theory-content">
+              <h4>First Aggressive/Defensive Insect Sound</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>New acoustic posture. Prior insects: mating, advertising, flight. Hornet: defense. Leave or be stung.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon paper">P</div>
+            <div class="theory-content">
+              <h4>Paper Nest Architecture</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Chewed wood fiber nest resonates with wing vibration. Acoustic coupling. Architecture as amplifier.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">N</div>
+            <div class="theory-content">
+              <h4>The NAVVI Contrast</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Shimmer veil (A) vs aggressive hum (B). E=3 vs E=5. Intimate vs threatening. Widest A/B energy gap in recent degrees.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-092: Bumblebee</strong>
+            <p>Hymenoptera pair. Same order, different families. Bumblebee (gentle drone, E=2, pollination) vs hornet (aggressive hum, E=5, defense). Widest consecutive same-order energy gap.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-069: Striped Skunk</strong>
+            <p>Defensive parallel. Both warning displays. Skunk sprays chemical defense; hornet buzzes acoustic defense. Both warn before attacking. Different mechanisms, same purpose.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-091: Mosquito</strong>
+            <p>Wing-produced sound. Both from wing vibration. Mosquito whines alone (E=2); hornet colony buzzes collectively (E=5). Individual vs collective.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-089: Cicada</strong>
+            <p>Shared E=5. Both highest insect energy. Cicada advertises (mating); hornet threatens (defense). Same energy, opposite intent.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-087: Cricket</strong>
+            <p>Insect era continued. Cricket (87), katydid (88), cicada (89), mosquito (91), bumblebee (92), hornet (93). Seven insect entries in seven degrees.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Vespidae,&rdquo; &ldquo;Bald-faced hornet,&rdquo; &ldquo;Yellowjacket.&rdquo;</li>
+          <li>[2] Akre, R.D. et al. (1981). <em>Yellowjackets of America North of Mexico.</em> USDA Agriculture Handbook 552.</li>
+          <li>[3] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">93&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">Collective defensive. Aggressive. Loud.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Vespidae</div>
+          <div class="stat-detail">NEW (43rd). First wasps/hornets.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Insecta</div>
+          <div class="stat-detail">Insect era continues.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Hymenoptera</div>
+          <div class="stat-detail">Same as bumblebee (92).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Woodland</div>
+          <div class="stat-detail">Trees, shrubs, sheltered structures.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Aggressive papery hum</div>
+          <div class="stat-detail">Collective. Defensive. Papery.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Diurnal</div>
+          <div class="stat-detail">Colony active during daylight.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Behavior</div>
+          <div class="stat-value">Colony defense</div>
+          <div class="stat-detail">Alarm pheromone. Escalating buzz.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Posture</div>
+          <div class="stat-value">Aggressive/Defensive</div>
+          <div class="stat-detail">FIRST in engine. Leave or be stung.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">43rd (NEW)</div>
+          <div class="stat-detail">Vespidae enters.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hymenoptera</div>
+          <div class="stat-value">2nd entry</div>
+          <div class="stat-detail">First at 92 (Bumblebee).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (33rd)</div>
+          <div class="stat-detail">Thirty-third consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
