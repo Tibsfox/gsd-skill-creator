@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M4.6 Boulder Creek Earthquake &mdash; April 2, 2026 &mdash; USGS Seismic Observatory</title>
+  <style>
+    :root {
+      --sea: #1a3a4a; --marine: #3a8a9a; --fog: #8aa0b0; --sand: #c4b090;
+      --drift: #9a8a70; --ink: #1a1a2a; --text: #d0d4da; --dim: #7a8090;
+      --bg: #0a0e14; --panel: #0e1420; --border: rgba(255,255,255,0.06);
+      --quake: #c44a2a; --quake-light: #e06a3a; --green: #4a9a4a;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, #2a1a1a 30%, #4a2a1a 60%, var(--quake) 100%);
+      padding: 2.5rem 2rem 2rem; border-bottom: 3px solid var(--quake-light);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    header::before { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%); }
+    header .mag { font-size:4rem; font-weight:700; color:var(--quake-light); position:relative; font-family:system-ui,sans-serif; margin-bottom:0.2rem; }
+    header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a { color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif; font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent; }
+    header nav a:hover { color:#fff; border-bottom-color:var(--sand); }
+    main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    h2 { color: var(--quake-light); font-size:1.3rem; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.4rem; }
+    h3 { color: var(--fog); font-size:1.05rem; margin:1.5rem 0 0.5rem; font-weight:400; }
+    p { margin-bottom:0.8rem; }
+    .data-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
+    .data-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1rem 1.2rem; }
+    .data-card .label { color:var(--dim); font-family:system-ui,sans-serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; }
+    .data-card .value { color:#fff; font-size:1.4rem; font-family:system-ui,sans-serif; font-weight:600; margin-top:0.2rem; }
+    .data-card .unit { color:var(--dim); font-size:0.85rem; font-weight:400; }
+    .data-card .note { color:var(--dim); font-size:0.8rem; margin-top:0.3rem; }
+    .station-table { width:100%; border-collapse:collapse; margin:1rem 0; font-family:system-ui,sans-serif; font-size:0.85rem; }
+    .station-table th { text-align:left; color:var(--dim); font-weight:500; padding:0.5rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; }
+    .station-table td { padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); }
+    .station-table tr:hover { background:rgba(255,255,255,0.02); }
+    .station-table .peak { color:var(--quake-light); font-weight:600; }
+    .context { background:var(--panel); border-left:3px solid var(--sand); padding:1rem 1.5rem; margin:1.5rem 0; border-radius:0 4px 4px 0; }
+    .context p { font-size:0.95rem; font-style:italic; color:var(--fog); margin-bottom:0; }
+    .timeline { list-style:none; margin:1rem 0; }
+    .timeline li { padding:0.6rem 0 0.6rem 2rem; border-left:2px solid var(--border); position:relative; }
+    .timeline li::before { content:''; position:absolute; left:-5px; top:0.85rem; width:8px; height:8px; border-radius:50%; background:var(--quake); }
+    .timeline li.main::before { width:12px; height:12px; left:-7px; background:var(--quake-light); }
+    .timeline .time { color:var(--dim); font-family:system-ui,sans-serif; font-size:0.8rem; display:block; }
+    .felt-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin:1rem 0; }
+    .felt-city { background:var(--panel); border:1px solid var(--border); border-radius:4px; padding:0.5rem 0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+    .felt-city .intensity { font-weight:600; }
+    .felt-city .intensity.strong { color:var(--quake-light); }
+    .felt-city .intensity.moderate { color:var(--sand); }
+    .felt-city .intensity.weak { color:var(--dim); }
+    .history-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.2rem 1.5rem; margin:1rem 0; }
+    .history-card h4 { color:var(--quake-light); font-size:0.95rem; margin-bottom:0.5rem; font-family:system-ui,sans-serif; }
+    .source-list { list-style:none; margin:1rem 0; }
+    .source-list li { padding:0.3rem 0; font-size:0.9rem; }
+    .source-list li::before { content:''; display:inline-block; width:8px; height:8px; background:var(--quake); border-radius:50%; margin-right:0.6rem; }
+    footer { text-align:center; color:var(--dim); font-size:0.8rem; padding:2rem; border-top:1px solid var(--border); margin-top:3rem; }
+    @media (max-width:600px) { .data-grid { grid-template-columns:1fr; } .felt-grid { grid-template-columns:1fr 1fr; } header .mag { font-size:2.8rem; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="mag">M4.6</div>
+  <h1>Boulder Creek Earthquake</h1>
+  <div class="subtitle">April 2, 2026 &mdash; 01:41:25 PDT &mdash; Santa Cruz Mountains, California</div>
+  <nav>
+    <a href="../../index.html">Research</a>
+    <a href="../index.html">USGS</a>
+    <a href="../../LIVE/index.html">LIVE</a>
+    <a href="../../MUK/index.html">MUK</a>
+    <a href="../../NASA/artemis-ii/index.html">Artemis II</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="context">
+    <p>Kings Creek Road runs deep into the redwoods above Boulder Creek. This is where Sam and I lived for many years &mdash; where he ran through the giants and I learned what it means to be still. At 1:41 in the morning on Flight Day 2 of Artemis II, the San Andreas shifted beneath our old home. The ground remembers.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Event Parameters</h2>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="label">Magnitude</div>
+      <div class="value">4.59 <span class="unit">Mw</span></div>
+      <div class="note">Initially reported 4.9, downgraded by 03:00</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Depth</div>
+      <div class="value">10.85 <span class="unit">km (6.7 mi)</span></div>
+    </div>
+    <div class="data-card">
+      <div class="label">Origin Time (UTC)</div>
+      <div class="value" style="font-size:1.1rem;">08:41:25.52</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Origin Time (PDT)</div>
+      <div class="value" style="font-size:1.1rem;">01:41:25.52</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Epicenter</div>
+      <div class="value" style="font-size:1.0rem;">1 km ESE of Boulder Creek</div>
+      <div class="note">Off Highway 9, Santa Cruz Mountains</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Coordinates</div>
+      <div class="value" style="font-size:1.0rem;">37.122&deg;N, 122.107&deg;W</div>
+    </div>
+    <div class="data-card">
+      <div class="label">USGS Event ID</div>
+      <div class="value" style="font-size:0.95rem;"><a href="https://earthquake.usgs.gov/earthquakes/eventpage/nc75337442" style="color:var(--quake-light);">nc75337442</a></div>
+    </div>
+    <div class="data-card">
+      <div class="label">RMS Residual</div>
+      <div class="value">0.17 <span class="unit">seconds</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Felt Reports &amp; Intensity</h2>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="label">DYFI Responses</div>
+      <div class="value">25,658</div>
+      <div class="note">"Did You Feel It?" citizen reports</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Community Intensity (CDI)</div>
+      <div class="value">5.8</div>
+      <div class="note">Moderate to Strong</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Instrumental MMI</div>
+      <div class="value">5.65</div>
+      <div class="note">Modified Mercalli Intensity</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Significance Score</div>
+      <div class="value">904 <span class="unit">/ 1000</span></div>
+    </div>
+  </div>
+
+  <h3>Where It Was Felt</h3>
+
+  <div class="felt-grid">
+    <div class="felt-city"><span class="intensity strong">Strong</span><br>Boulder Creek, Los Gatos, San Ramon, Fremont, Burlingame</div>
+    <div class="felt-city"><span class="intensity moderate">Moderate</span><br>San Jose, Santa Cruz, Oakland, San Francisco, Berkeley</div>
+    <div class="felt-city"><span class="intensity weak">Weak/Light</span><br>Milpitas, Walnut Creek, Pleasant Hill, San Leandro, Dublin, Richmond, Sacramento, Fresno</div>
+  </div>
+
+  <p>ShakeAlert early warning was activated. UC Berkeley issued drop-cover-hold alerts at 01:41 and cleared all-clear by 02:20. Some residents reported receiving phone alerts approximately 30 seconds before feeling the tremor. One Berkeley resident on Reddit: <em>"Shook my whole house."</em></p>
+
+  <p><strong>Damage:</strong> No structural damage reported. UC Berkeley confirmed minimal campus impact. No injuries.</p>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Focal Mechanism</h2>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="label">Fault Type</div>
+      <div class="value" style="font-size:1.0rem;">Strike-slip + Reverse</div>
+      <div class="note">Oblique thrust on San Andreas system</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Nodal Plane 1</div>
+      <div class="value" style="font-size:1.0rem;">Strike 140&deg; Dip 80&deg; Rake 80&deg;</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Contributing Stations</div>
+      <div class="value">95</div>
+      <div class="note">89&ndash;207 phases analyzed</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Azimuthal Gap</div>
+      <div class="value">57&deg;</div>
+      <div class="note">Good station coverage</div>
+    </div>
+  </div>
+
+  <p>The strike-slip + reverse mechanism is characteristic of the San Andreas Fault in the Santa Cruz Mountains, where the fault bends slightly, producing transpressional motion. This is the same mechanism that produced the 1989 Loma Prieta earthquake (M6.9) &mdash; the deadliest California earthquake since 1906.</p>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Seismograph Stations</h2>
+
+  <p>15 stations within 32 km of the epicenter recorded the event. P-wave arrival times increase with distance at ~6 km/s through the upper crust. Near-field stations recorded peak ground velocities up to 5.92 cm/s.</p>
+
+  <table class="station-table">
+    <thead>
+      <tr><th>Station</th><th>Network</th><th>Channel</th><th>Distance</th><th>Peak Velocity</th><th>Azimuth</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>JBNB</td><td>NC</td><td>HHZ</td><td>4 km</td><td class="peak">5.52 cm/s</td><td>269&deg;</td></tr>
+      <tr><td>JBR</td><td>NC</td><td>EHZ</td><td>10 km</td><td>0.15 cm/s</td><td>56&deg;</td></tr>
+      <tr><td>JCD</td><td>NC</td><td>HHZ 01</td><td>12 km</td><td class="peak">5.92 cm/s</td><td>212&deg;</td></tr>
+      <tr><td>JJO</td><td>NC</td><td>EHZ</td><td>15 km</td><td>0.18 cm/s</td><td>50&deg;</td></tr>
+      <tr><td>JAR</td><td>NC</td><td>EHZ</td><td>16 km</td><td class="peak">2.32 cm/s</td><td>164&deg;</td></tr>
+      <tr><td>UMUN</td><td>BK</td><td>HHZ 00</td><td>18 km</td><td>0.91 cm/s</td><td>77&deg;</td></tr>
+      <tr><td>JSGB</td><td>NC</td><td>EHZ 01</td><td>19 km</td><td>0.59 cm/s</td><td>15&deg;</td></tr>
+      <tr><td>JPE</td><td>NC</td><td>EHZ 01</td><td>20 km</td><td>1.38 cm/s</td><td>334&deg;</td></tr>
+      <tr><td>JLO</td><td>NC</td><td>HHZ 01</td><td>20 km</td><td>0.27 cm/s</td><td>96&deg;</td></tr>
+      <tr><td>JBMB</td><td>NC</td><td>EHZ</td><td>22 km</td><td>0.62 cm/s</td><td>350&deg;</td></tr>
+      <tr><td>JPSB</td><td>NC</td><td>EHZ</td><td>23 km</td><td>1.08 cm/s</td><td>292&deg;</td></tr>
+      <tr><td>JSJ</td><td>NC</td><td>EHZ</td><td>24 km</td><td>0.11 cm/s</td><td>3&deg;</td></tr>
+      <tr><td>JFP</td><td>NC</td><td>EHZ</td><td>28 km</td><td>0.45 cm/s</td><td>345&deg;</td></tr>
+      <tr><td>PESC</td><td>BK</td><td>HHZ 00</td><td>28 km</td><td class="peak">3.49 cm/s</td><td>300&deg;</td></tr>
+      <tr><td>JSFB</td><td>NC</td><td>EHZ</td><td>32 km</td><td>0.15 cm/s</td><td>349&deg;</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:0.85rem; color:var(--dim);">Note: Peak velocity variations at similar distances reflect differences in local geology, site effects, and radiation pattern directivity. JCD at 12 km recorded higher velocity (5.92 cm/s) than JBR at 10 km (0.15 cm/s) due to azimuthal position relative to the fault rupture.</p>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Hazard Assessment</h2>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="label">Tsunami Risk</div>
+      <div class="value" style="color:var(--green);">None</div>
+    </div>
+    <div class="data-card">
+      <div class="label">PAGER Alert</div>
+      <div class="value" style="color:var(--green);">Green</div>
+      <div class="note">No fatalities or economic loss expected</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Landslide Hazard</div>
+      <div class="value" style="color:var(--green);">Green</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Liquefaction Hazard</div>
+      <div class="value" style="color:var(--green);">Green</div>
+      <div class="note">Aggregate hazard: 0.0048</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Aftershock Forecast</h2>
+
+  <p>USGS operational aftershock forecast issued within hours of the mainshock. Forecasts are most uncertain in the first 72 hours and improve as aftershock rates stabilize.</p>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="label">M3.0+ within 7 days</div>
+      <div class="value">60% <span class="unit">probability</span></div>
+      <div class="note">Up to 9 aftershocks expected</div>
+    </div>
+    <div class="data-card">
+      <div class="label">M4.0+ within 7 days</div>
+      <div class="value">14% <span class="unit">probability</span></div>
+    </div>
+    <div class="data-card">
+      <div class="label">M5.0+ (foreshock scenario)</div>
+      <div class="value">2% <span class="unit">probability</span></div>
+      <div class="note">Chance this is a foreshock to M4.87+</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Forecast Model</div>
+      <div class="value" style="font-size:0.95rem;">Reasenberg-Jones</div>
+      <div class="note">Modified Omori law + Gutenberg-Richter</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Sequence Timeline</h2>
+
+  <ul class="timeline">
+    <li>
+      <span class="time">April 2, 2026 &mdash; pre-mainshock</span>
+      M2.0 foreshock detected 9 km N of Boulder Creek (nc75337397), depth 11.69 km. Same fault system, hours before the mainshock.
+    </li>
+    <li class="main">
+      <span class="time">April 2, 2026 &mdash; 01:41:25.52 PDT</span>
+      <strong>M4.59 mainshock</strong> &mdash; 1 km ESE of Boulder Creek. 10.85 km depth. 25,658 felt reports. Initially reported as M4.9 then M5.1, finalized at M4.59 Mw by 03:00.
+    </li>
+    <li>
+      <span class="time">01:41:26 PDT (~1 second after origin)</span>
+      P-wave arrives at JBNB station, 4 km from epicenter. Peak ground velocity 5.52 cm/s.
+    </li>
+    <li>
+      <span class="time">01:41 PDT</span>
+      ShakeAlert early warning system activates. UC Berkeley sends drop-cover-hold alert to campus. Some Bay Area residents receive phone alerts ~30 seconds before shaking arrives.
+    </li>
+    <li>
+      <span class="time">01:41&ndash;01:42 PDT</span>
+      S-wave and surface waves propagate outward. Strong shaking in Boulder Creek, Los Gatos, San Ramon, Fremont, Burlingame. Moderate shaking in San Jose, Santa Cruz, Oakland, San Francisco, Berkeley.
+    </li>
+    <li>
+      <span class="time">~01:45 PDT</span>
+      Weak shaking felt as far as Sacramento (~180 km) and Fresno (~200 km). 25,658 DYFI reports filed over the following hours.
+    </li>
+    <li>
+      <span class="time">02:20 PDT</span>
+      UC Berkeley issues all-clear: "minimal impact on campus, and no damage has been reported."
+    </li>
+    <li>
+      <span class="time">~02:45 PDT</span>
+      USGS downgrades magnitude from initial M4.9 to M4.6 based on additional waveform data.
+    </li>
+    <li>
+      <span class="time">~03:00 PDT</span>
+      Aftershock forecast published: 60% chance M3.0+, 14% chance M4.0+, 2% chance this is a foreshock to M4.87+.
+    </li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Historical Context: This Fault Segment</h2>
+
+  <div class="history-card">
+    <h4>M6.9 Loma Prieta &mdash; October 17, 1989</h4>
+    <p>The defining earthquake of this fault segment. Epicenter near Loma Prieta peak, ~9 miles NE of Santa Cruz &mdash; approximately 10 km from tonight's M4.6. Six feet of right-lateral strike-slip and four feet of reverse-slip. 63 deaths, 3,757 injuries, $6 billion damage. Cypress Structure collapse killed 41. Bay Bridge span failure. Marina district liquefaction. World Series interrupted at Candlestick Park.</p>
+    <p>Boulder Creek experienced severe property damage. The town sits directly on the ruptured segment. Highway 9 was blocked by landslides. Power was out for days. The redwoods absorbed the shaking better than the structures did.</p>
+    <p style="font-size:0.85rem; color:var(--dim); margin-top:0.5rem; margin-bottom:0;">I was 13 years old, watching the aftermath on IRC from Everett, Washington. Years later I would live on Kings Creek Road above Boulder Creek with Sam, on the same ground that shook that day.</p>
+  </div>
+
+  <div class="history-card">
+    <h4>M7.9 Great San Francisco Earthquake &mdash; April 18, 1906</h4>
+    <p>The 1906 earthquake ruptured 477 km of the San Andreas Fault from San Juan Bautista to Cape Mendocino. The Loma Prieta segment was part of the southern extent of this rupture. 3,000+ deaths, 80% of San Francisco destroyed by fire. The 1989 Loma Prieta event re-ruptured the southernmost 40 km of the 1906 break.</p>
+  </div>
+
+  <div class="history-card">
+    <h4>Seismic Gap Theory</h4>
+    <p>The Loma Prieta segment was designated a "seismic gap" &mdash; a section of an active fault that had been quiet for an unusually long time, building up strain. It had been relatively inactive since 1906 until two moderate foreshocks in June 1988 and August 1989 preceded the M6.9 mainshock. Tonight's M4.6 is a reminder that this segment remains active, 37 years after Loma Prieta.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Nearby Distances from Epicenter</h2>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="label">Kings Creek Road</div>
+      <div class="value" style="font-size:1.0rem;">&lt;2 km</div>
+      <div class="note">Sam's home in the redwoods</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Felton</div>
+      <div class="value" style="font-size:1.0rem;">~5 km south</div>
+      <div class="note">The garden in the dry grass</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Santa Cruz</div>
+      <div class="value" style="font-size:1.0rem;">~16 km south</div>
+      <div class="note">The beach with the sandy nose</div>
+    </div>
+    <div class="data-card">
+      <div class="label">San Jose</div>
+      <div class="value" style="font-size:1.0rem;">~35 km NE</div>
+    </div>
+    <div class="data-card">
+      <div class="label">San Francisco</div>
+      <div class="value" style="font-size:1.0rem;">~90 km north</div>
+    </div>
+    <div class="data-card">
+      <div class="label">1989 Loma Prieta epicenter</div>
+      <div class="value" style="font-size:1.0rem;">~10 km SE</div>
+      <div class="note">Same fault segment</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Concurrent: Artemis II Flight Day 2</h2>
+
+  <div class="context">
+    <p>This earthquake occurred at MET +05:06 &mdash; five hours and six minutes after the launch of Artemis II from Pad 39B. The Orion spacecraft Integrity was in a 115 &times; 43,760 mile orbit around Earth with the crew asleep after completing proximity operations. While four humans orbited higher than anyone since 1972, the ground beneath the Santa Cruz Mountains shifted along the same fault that has been moving for 28 million years. The space between the Moon and the Earth includes everything underneath us.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <h2>Data Sources</h2>
+
+  <ul class="source-list">
+    <li><a href="https://earthquake.usgs.gov/earthquakes/eventpage/nc75337442">USGS Event Page &mdash; nc75337442</a></li>
+    <li><a href="https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=nc75337442&format=geojson">FDSN Event API (GeoJSON)</a></li>
+    <li><a href="https://earthquake.usgs.gov/earthquakes/eventpage/nc75337397">M2.0 foreshock &mdash; nc75337397</a></li>
+    <li><a href="https://www.usgs.gov/programs/earthquake-hazards/science/m-69-october-17-1989-loma-prieta-earthquake">USGS: 1989 Loma Prieta Earthquake</a></li>
+    <li><a href="https://www.cbsnews.com/sanfrancisco/news/earthquake-santa-cruz-county-boulder-creek/">CBS San Francisco</a></li>
+    <li><a href="https://www.berkeleyscanner.com/2026/04/02/community/santa-cruz-county-earthquake-jolts-bay-area/">Berkeley Scanner</a></li>
+    <li><a href="https://www.nbcbayarea.com/news/local/preliminary-4-9-earthquake-santa-cruz-county/4062207/">NBC Bay Area</a></li>
+    <li>Northern California Seismic Network (NC) &mdash; 15 stations, waveform data</li>
+    <li>Berkeley Seismological Laboratory (BK) &mdash; UMUN, PESC stations</li>
+  </ul>
+
+</main>
+
+<footer>
+  <p>Dedicated to Sam &mdash; Kings Creek Road, Boulder Creek &mdash; who ran these mountains and knew this ground beneath his paws.</p>
+  <p style="margin-top:0.5rem;"><a href="../index.html">USGS Seismic Observatory</a> &mdash; <a href="../../index.html">tibsfox.com/Research</a></p>
+</footer>
+
+</body>
+</html>
