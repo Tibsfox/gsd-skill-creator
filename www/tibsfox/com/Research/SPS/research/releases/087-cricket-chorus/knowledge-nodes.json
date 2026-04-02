@@ -1,0 +1,145 @@
+{
+  "degree": 87,
+  "species": "Cricket Chorus",
+  "scientific_name": "Gryllidae (family)",
+  "slug": "087-cricket-chorus",
+  "sound_type": "rhythmic chirp field chorus -- collective stridulation, hundreds or thousands of male crickets chirping simultaneously in dry meadow, NOT an individual call but the entire field singing together, temperature-dependent chirp rate (Dolbear's Law), E=4, FIRST INSECT",
+  "energy": 4,
+  "ecosystem": "Dry meadow. Grasslands, fields, meadow edges, lawns, pastures. Ground layer and low vegetation. Contrasts with marsh (86).",
+  "season": "Summer (peak chorus on warm nights). Active spring through fall. Temperature-dependent activity.",
+  "family": "Gryllidae",
+  "order": "Orthoptera",
+  "csv_substitute": false,
+  "original_species": "Cricket Chorus",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [86],
+    "partner_species": ["Pacific Treefrog"],
+    "pair_type": "Back-to-back chorus species (86-87). Both collective breeding sounds. Both E=4 through collective amplification. Treefrog (marsh, krek-krek, Amphibia) and cricket (meadow, chirp, Insecta)."
+  },
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.20,
+    "description": "Reference for dry meadow habitat in the Puget Sound lowlands, Washington. Cricket chorus audible in meadows and grasslands throughout the region."
+  },
+  "taxonomy_note": {
+    "description": "INSECTA ENTERS. First insect in the engine. Fourth class (Aves, Mammalia, Amphibia, Insecta). NEW FAMILY Gryllidae (38th). NEW ORDER Orthoptera. NEW CLASS Insecta. Three taxonomic levels added in one entry. Family-level entry (not single species). Second consecutive class crossing (86-87).",
+    "current_class": "Insecta",
+    "new_class": true,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Insecta uses subclass Pterygota (winged insects). Not tracked at infraclass level.",
+    "current_family": "Gryllidae",
+    "new_family": true,
+    "family_count_in_engine": 38,
+    "gryllidae_count_in_engine": 1,
+    "name_etymology": "Gryllidae from Latin gryllus ('cricket'). Orthoptera from Greek ortho ('straight') + pteron ('wing'), referring to the straight forewings.",
+    "genus_note": "Family-level entry. Multiple genera contribute to the chorus: Gryllus (field crickets), Acheta (house crickets), Oecanthus (tree crickets).",
+    "order_note": "Orthoptera -- NEW ORDER. Crickets, grasshoppers, katydids. First Orthoptera in the engine.",
+    "class_note": "Insecta -- ENTERS. Fourth class in the engine (after Aves, Mammalia, Amphibia). First insect entry.",
+    "family_position": "Gryllidae's FIRST entry at degree 87. NEW FAMILY (38th)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Field crickets: approximately 3,000-5,000 Hz. Tree crickets: approximately 2,000-4,000 Hz.",
+    "peak_energy_band_hz": "Chorus peak: approximately 3,000-4,500 Hz. The massed chorus creates a broad peak.",
+    "song_frequency_hz": "NOT a song. STRIDULATION CHORUS. Individual chirp: brief pulse (50-100 ms) repeated at regular intervals.",
+    "song_duration_s": "Individual chirp: approximately 50-100 ms. Repeated continuously. Chorus: hours-long, from dusk through night on warm summer nights.",
+    "note_structure": "Chirp: rapid series of wing-stroke pulses grouped into a single audible 'chirp.' 1-4 chirps per second for field crickets, temperature-dependent.",
+    "note_types": "Calling chirp (primary advertisement, attracts females), aggressive chirp (shorter, higher-pitched, used in male-male competition), courtship chirp (softer, used near female).",
+    "phrase_structure": "Individual: regular, rhythmic chirps at constant intervals. Chorus: hundreds of individuals chirping asynchronously, creating a pulsing, rhythmic field chorus that retains rhythmic quality unlike the wall-of-sound treefrog chorus.",
+    "timbre": "Individual: sharp, bright, metallic. Chorus: dense but rhythmic, pulsing. Retains rhythmic quality even in large choruses -- distinct from the continuous wall-of-sound of treefrog (86).",
+    "amplitude": "E=4. Individual chirps carry 10-20 meters. Collective chorus fills entire meadow soundscape. Continuous for hours. Overwhelming collective volume. E=4 through collective amplification, same mechanism as treefrog (86).",
+    "tempo": "Temperature-dependent. Field cricket: approximately 1-4 chirps per second. Dolbear's Law: T(°F) = N/4 + 40 (N = chirps/minute for snowy tree cricket). Warmer = faster.",
+    "context": "BREEDING CHORUS: males stridulate to attract females. Night chorus from dry meadow. Summer. Peaks on warm nights. The collective chorus is the primary acoustic phenomenon. Living thermometer.",
+    "regional_variation": "Multiple species contribute. Different species have different chirp rates and frequencies. Regional variation reflects species composition.",
+    "key_property": "RHYTHMIC CHIRP FIELD CHORUS -- the 88th acoustic element. First insect sound. Collective stridulation. NOT an individual call but the entire field singing together. Rhythmic (unlike treefrog wall-of-sound). Temperature-dependent (Dolbear's Law). E=4 through collective amplification. INSECTA ENTERS."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Family-level entry. Field crickets (Gryllus spp.): 15-25 mm, dark brown to black, robust body, long antennae, enlarged hind legs for jumping. Tree crickets (Oecanthus spp.): 12-18 mm, pale green, slender. House crickets (Acheta spp.): 16-21 mm, yellowish-brown.",
+    "diagnostic_mark": "For degree 87: (1) STRIDULATION -- males rub forewings together to produce chirp. (2) LONG ANTENNAE -- longer than body. (3) ENLARGED HIND LEGS -- for jumping. (4) CERCI -- paired appendages at rear. (5) SOUND -- most often detected by the chirp, not by sight.",
+    "fur_detail": null,
+    "skin_detail": "EXOSKELETON: Chitinous exoskeleton. Dark brown to black (field crickets), pale green (tree crickets), yellowish-brown (house crickets). Wings: forewings modified for stridulation (file and scraper).",
+    "dental_detail": null,
+    "field_id": "Most often detected by SOUND -- the rhythmic chirp on summer nights. Field crickets: dark, robust, ground-dwelling. Tree crickets: pale green, slender, in vegetation. The chirp is the primary field identification. Listen, don't look."
+  },
+  "nodes": [
+    {
+      "id": "insecta-enters",
+      "type": "pattern",
+      "title": "Insecta Enters -- Fourth Class",
+      "description": "First insect in the engine. Fourth class (Aves, Mammalia, Amphibia, Insecta). Class diversity accelerates. Three taxonomic levels added (class, order, family). Second consecutive class crossing.",
+      "connections": ["chirp-chorus", "gryllidae-new", "back-to-back-chorus"]
+    },
+    {
+      "id": "chirp-chorus",
+      "type": "concept",
+      "title": "Rhythmic Chirp Field Chorus -- 88th Acoustic Element",
+      "description": "Collective field chorus. Rhythmic stridulation. Temperature-dependent (Dolbear's Law). E=4 through collective amplification. Parallel to treefrog chorus (86). Retains rhythmic quality unlike wall-of-sound.",
+      "connections": ["insecta-enters", "gryllidae-new", "dolbear-law"]
+    },
+    {
+      "id": "gryllidae-new",
+      "type": "concept",
+      "title": "Gryllidae -- 38th Family -- New Order Orthoptera, New Class Insecta",
+      "description": "NEW FAMILY. True crickets. 38th family. NEW ORDER Orthoptera. NEW CLASS Insecta. Three taxonomic levels in one entry.",
+      "connections": ["insecta-enters", "chirp-chorus"]
+    },
+    {
+      "id": "back-to-back-chorus",
+      "type": "pattern",
+      "title": "Back-to-Back Chorus Species (86-87)",
+      "description": "Pacific Treefrog chorus (86) and cricket chorus (87). Both collective breeding sounds. Both E=4. Marsh and meadow. Amphibian and insect. Chorus zone.",
+      "connections": ["insecta-enters", "chirp-chorus"]
+    },
+    {
+      "id": "dolbear-law",
+      "type": "concept",
+      "title": "Dolbear's Law -- Temperature-Dependent Chirp",
+      "description": "Chirp rate correlates with temperature. T(°F) = N/4 + 40 (N = chirps/minute). A living thermometer. Amos Dolbear, 1897. Unique in the engine -- no other species has a mathematically described temperature-sound relationship.",
+      "connections": ["chirp-chorus"]
+    },
+    {
+      "id": "case-parallel",
+      "type": "pattern",
+      "title": "The Neko Case Parallel",
+      "description": "Both about the emerging voice. Cricket chorus = field finding its collective voice. Neko Case early = artist finding her voice. The emerging twang meets the emerging chirp.",
+      "connections": ["chirp-chorus", "insecta-enters"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Seventh Consecutive Original CSV",
+      "description": "Twenty-seven consecutive original CSV species. No substitution. Original.",
+      "connections": ["insecta-enters"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-086",
+      "species": "Pacific Treefrog",
+      "relationship": "CHORUS PARALLEL. Both collective breeding sounds. Both E=4 through collective amplification. Treefrog (marsh, krek-krek, Amphibia) and cricket (meadow, chirp, Insecta). Back-to-back chorus species. Three consecutive non-mammalian entries."
+    },
+    {
+      "target": "SPS-059",
+      "species": "Mallard",
+      "relationship": "UBIQUITOUS. Both familiar background sounds of PNW landscapes. Mallard quack and cricket chirp are both immediately recognizable."
+    },
+    {
+      "target": "SPS-025",
+      "species": "American Robin",
+      "relationship": "FAMILIAR BACKGROUND SOUND. Robin song for PNW mornings, cricket chorus for PNW summer nights. Dawn and dusk counterparts."
+    },
+    {
+      "target": "SPS-062",
+      "species": "Beaver Chewing",
+      "relationship": "RHYTHMIC REPETITION. Both rhythmically repetitive sounds. Beaver gnawing and cricket chirping. Both continuous, both functional."
+    },
+    {
+      "target": "SPS-073",
+      "species": "Snowshoe Hare",
+      "relationship": "PREY CONNECTION and MEADOW SHARED. Crickets are prey for many engine species. Both abundant, both foundational in food webs."
+    }
+  ]
+}
