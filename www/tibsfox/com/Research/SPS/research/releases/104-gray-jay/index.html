@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 104&deg; &mdash; Gray Jay (Canada Jay) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--puget-teal), #1A1A2E);
+      color: #C5CAE9;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(26, 26, 46, 0.4), 0 0 24px rgba(0, 105, 92, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Corvidae card */
+    .corvid-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 30%, #0F3460 60%, #1A1A2E 100%);
+      border: 3px solid #0F3460;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .corvid-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #9FA8DA;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .corvid-card p { color: #E8EAF6; }
+    .corvid-card strong { color: #C5CAE9; }
+
+    /* Camp robber card */
+    .robber-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 30%, #689F38 60%, #7CB342 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .robber-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .robber-card p { color: #F1F8E9; }
+    .robber-card strong { color: #DCEDC8; }
+
+    /* Food caching card */
+    .cache-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #795548 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .cache-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .cache-card p { color: #EFEBE9; }
+    .cache-card strong { color: #BCAAA4; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.corvid { background: #1A1A2E; }
+    .theory-icon.whistle { background: #0D47A1; }
+    .theory-icon.cache { background: #4E342E; }
+    .theory-icon.alpine { background: #1B5E20; }
+    .theory-icon.robber { background: #33691E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #6A1B9A; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">104&deg;</div>
+      <div class="release-title-block">
+        <h2>Gray Jay (Canada Jay)</h2>
+        <div class="scientific"><em>Perisoreus canadensis</em> (Corvidae) &mdash; FIFTH CONSECUTIVE CORVIDAE (100&ndash;104)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      soft whistles + mimicry &mdash; the friendliest corvid. The Gray Jay (renamed <strong>Canada Jay</strong> in 2018) approaches humans, steals food from campsites. <strong>&ldquo;Camp robber&rdquo;</strong> or <strong>&ldquo;whiskey jack&rdquo;</strong>. <strong>FIFTH consecutive Corvidae</strong> (100&ndash;104). Subalpine forest. Food caching &mdash; stores thousands of food items per year in tree bark. E=4. Forty-fourth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Corvidae Quintet Card -->
+        <div class="corvid-card">
+          <h3>Fifth Consecutive Corvidae &mdash; The Corvid Quintet</h3>
+          <p>
+            Five consecutive Corvidae: <strong>Raven</strong> (100), <strong>Raven pair</strong> (101),
+            <strong>American Crow</strong> (102), <strong>Steller&rsquo;s Jay</strong> (103),
+            <strong>Gray Jay</strong> (104). The corvid quartet becomes a <strong>quintet</strong>.
+            Five degrees, one family &mdash; the longest same-family consecutive run in the
+            entire engine. Five acoustic characters: deep cronk, duet, sharp caw, raucous alarm,
+            and now <strong>soft whistles</strong>. The quintet spans from the loudest
+            corvid voice (jay alarm, E=5) to the softest (gray jay whisper, E=4).
+          </p>
+        </div>
+
+        <!-- Camp Robber Card -->
+        <div class="robber-card">
+          <h3>The Camp Robber &mdash; Friendliest Corvid in the Forest</h3>
+          <p>
+            The Gray Jay is the <strong>friendliest corvid</strong> &mdash; and one of the
+            friendliest wild birds in North America. It <strong>approaches humans</strong>
+            without hesitation, lands on outstretched hands, and <strong>steals food from
+            campsites</strong>. Hikers, campers, and backcountry travelers know this bird
+            as the <strong>&ldquo;camp robber&rdquo;</strong> or
+            <strong>&ldquo;whiskey jack&rdquo;</strong> (from the Algonquin
+            <em>wisakedjak</em>, a trickster figure). The boldness is not tameness &mdash;
+            it is <strong>intelligence</strong>. The Gray Jay has learned that humans
+            mean food, and it exploits that knowledge with precision.
+          </p>
+        </div>
+
+        <!-- Food Caching Card -->
+        <div class="cache-card">
+          <h3>Food Caching &mdash; Thousands of Items Per Year in Tree Bark</h3>
+          <p>
+            The Gray Jay stores <strong>thousands of food items per year</strong> &mdash;
+            insects, berries, mushrooms, meat scraps &mdash; by gluing them to tree bark
+            with <strong>sticky saliva</strong>. This specialized saliva allows caches to
+            adhere to bark surfaces throughout the winter. The bird&rsquo;s spatial memory
+            allows it to relocate these scattered caches months later. The caching strategy
+            is <strong>survival architecture</strong> &mdash; the Gray Jay breeds in
+            <strong>late winter</strong> (February-March), earlier than almost any other
+            songbird, relying on cached food to fuel breeding when the subalpine forest
+            is still buried in snow.
+          </p>
+        </div>
+
+        <h2>Soft Whistles and Mimicry</h2>
+        <p>
+          The Gray Jay&rsquo;s vocal repertoire is <strong>softer and more varied</strong>
+          than the other corvids in the quintet. Where the raven cronks, the crow caws,
+          and the Steller&rsquo;s Jay shrieks, the Gray Jay <strong>whispers, whistles,
+          and mimics</strong>. The primary vocalizations include soft whistled notes,
+          quiet chuckling, and low-pitched mewing calls. The bird also mimics other species &mdash;
+          hawks, other corvids, and forest sounds &mdash; though less conspicuously than
+          the Steller&rsquo;s Jay.
+        </p>
+        <p>
+          E=4 &mdash; moderate energy. The Gray Jay&rsquo;s vocalizations are not quiet
+          in absolute terms, but they are <strong>quiet relative to the other corvids
+          in the quintet</strong>. The soft whistles carry through the subalpine forest
+          at moderate range &mdash; audible within 50-100 meters but not the long-range
+          broadcasts of the raven or the penetrating alarm of the Steller&rsquo;s Jay.
+        </p>
+
+        <h2>Subalpine Forest Habitat</h2>
+        <p>
+          Subalpine forest &mdash; mountain hemlock, subalpine fir, whitebark pine, Engelmann
+          spruce. The Gray Jay occupies the <strong>high-elevation conifer belt</strong>,
+          above the lowland Douglas fir forests of the Steller&rsquo;s Jay (103) and
+          below the alpine meadows of the American Pika (74). Year-round resident at
+          elevation. Does not migrate. Survives the harshest winters of any songbird in
+          the PNW through its extraordinary food-caching strategy.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-103 Steller&rsquo;s Jay (raucous)</strong>
+            <p>Corvidae quintet. Steller's Jay occupies lowland conifer; Gray Jay occupies subalpine conifer. Raucous alarm (E=5) vs soft whistles (E=4). Complementary elevational niches.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-100 Common Raven</strong>
+            <p>Corvidae quintet. Intelligence. Both corvids demonstrate tool use, problem-solving, and food caching. The raven caches in the ground; the Gray Jay caches in tree bark.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-102 American Crow</strong>
+            <p>Corvidae quintet. The crow is urban/open; the Gray Jay is subalpine/remote. Maximum habitat separation within the corvid family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065 American Marten</strong>
+            <p>Subalpine shared habitat. Both year-round residents of the high-elevation conifer belt. Marten as predator; Gray Jay as prey risk. Shared dependence on intact subalpine forest.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-074 American Pika</strong>
+            <p>Alpine neighbor. Pika in alpine talus above treeline; Gray Jay in subalpine forest below treeline. Adjacent elevational bands. Both adapted to extreme cold. Both cache food for winter.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon whistle">W</div>
+            <div class="theory-content">
+              <h4>Soft Whistles + Mimicry &mdash; The Quiet Corvid</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Soft whistled notes, quiet chuckling, mimicry. E=4. The quietest voice in the Corvidae quintet. The whisper after the alarm.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon corvid">C</div>
+            <div class="theory-content">
+              <h4>Fifth Consecutive Corvidae (100&ndash;104) &mdash; The Corvid Quintet</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Five degrees, one family. Longest same-family consecutive run in the entire engine. Deep cronk, duet, sharp caw, raucous alarm, soft whistles.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon robber">R</div>
+            <div class="theory-content">
+              <h4>The Camp Robber &mdash; Human-Approaching Corvid Intelligence</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Approaches humans. Steals food. &ldquo;Whiskey jack&rdquo; from Algonquin wisakedjak. Intelligence deployed as boldness.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cache">$</div>
+            <div class="theory-content">
+              <h4>Food Caching &mdash; Thousands of Items in Tree Bark</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Sticky saliva adhesive. Spatial memory. Late-winter breeding. Survival architecture in the subalpine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon alpine">A</div>
+            <div class="theory-content">
+              <h4>Subalpine Forest &mdash; High-Elevation Conifer Belt</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Mountain hemlock, subalpine fir, whitebark pine. Above Steller&rsquo;s Jay territory (lowland conifer). Below Pika territory (alpine talus).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Gray Jay</div>
+          <div class="stat-detail"><em>Perisoreus canadensis</em></div>
+          <div class="stat-detail">a.k.a. Canada Jay (2018)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Corvidae</div>
+          <div class="stat-detail">5th consecutive (100&ndash;104)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">soft whistles + mimicry</div>
+          <div class="stat-detail">The quiet corvid</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Moderate &mdash; quietest in quintet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Subalpine forest</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Common Names</div>
+          <div class="stat-value">Camp robber</div>
+          <div class="stat-detail">Whiskey jack</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV Status</div>
+          <div class="stat-value">Original</div>
+          <div class="stat-detail">44th consecutive</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

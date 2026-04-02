@@ -26,7 +26,7 @@ The drivers of this density are straightforward:
 
 1. **Superabundant food:** Human food waste, pet food, bird feeders, gardens, and compost provide more calories per unit area than any natural food source.
 2. **Abundant denning sites:** Attics, chimneys, storm drains, abandoned buildings, and dense vegetation provide more den opportunities than natural habitats.
-3. **Reduced predation:** Coyotes, the primary natural predator of raccoons, are less common in urban cores (though increasing in many cities). Bobcats, cougars, and great horned owls are largely absent from dense urban areas.
+3. **Reduced predation:** Coyotes (*Canis latrans*), the primary natural predator of raccoons, are less common in urban cores (though increasing in many PNW cities --- Seattle's Discovery Park and Portland's Forest Park both support resident coyote populations) [MAM]. Bobcats, cougars, and great horned owls are largely absent from dense urban areas.
 4. **Mild microclimate:** Urban heat island effects reduce winter severity, decreasing winter mortality and extending the active season.
 5. **Water availability:** Irrigation, fountains, puddles, storm drains, and ornamental water features provide consistent water access.
 
@@ -232,6 +232,17 @@ The urban raccoon of 2050 will likely be more numerous, more widely distributed,
 The urban raccoon is not a failure of wildlife management or a symptom of ecological degradation. It is an expression of evolutionary success --- a demonstration that the cognitive and behavioral flexibility honed over millions of years of omnivorous generalism can be deployed, with remarkable efficiency, in the most novel of environments.
 
 Cities are raccoon habitat now. Not in a degraded, making-do sense, but in a genuine ecological sense: urban environments provide raccoons with food, shelter, water, reduced predation, and reproductive success that exceeds what most natural habitats can offer. The question is not how to exclude raccoons from cities but how to share urban space with an animal that is, by every biological measure, superbly adapted to living there.
+
+---
+
+## Sources
+
+- Prange, S., Gehrt, S.D., and Wiggers, E.P. (2003). "Demographic factors contributing to high raccoon densities in urban landscapes." *Journal of Wildlife Management*, 67(2): 324-333.
+- Gehrt, S.D., Riley, S.P.D., and Cypher, B.L. (eds.) (2010). *Urban Carnivores: Ecology, Conflict, and Conservation*. Johns Hopkins University Press.
+- Hadidian, J., et al. (2010). "Raccoons (*Procyon lotor*)." In: *Urban Carnivores*. Johns Hopkins University Press, pp. 35-47.
+- Rosatte, R., et al. (2006). "Behavior, movements, and demographics of raccoons in Toronto." *Journal of Wildlife Management*, 70(4): 967-973.
+- Kazacos, K.R. (2016). "*Baylisascaris* larva migrans." USGS Circular 1412.
+- WDFW. "Living with Wildlife: Raccoons." wdfw.wa.gov.
 
 ---
 

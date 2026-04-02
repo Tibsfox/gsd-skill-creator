@@ -1,6 +1,8 @@
 # The Makers -- A Directory of Fursuit Builders
 
-Research module CRAFT-MAKERS: comprehensive directory of fursuit builders, studios, and makers organized by region, specialty, and tier. Covers the commission process, price structures, community databases, and the cultural ecosystem that connects makers to their clients. Cross-references construction techniques from [CRAFT-SUIT] and textile methods from [CRAFT-SEW].
+Research module FFA-10: comprehensive directory of fursuit builders, studios, and makers organized by region, specialty, and tier. Covers the commission process, price structures, community databases, and the cultural ecosystem that connects makers to their clients. Cross-references construction techniques from [FFA-04] Fursuit Fabrication and textile methods from [FFA-03] Textile Craft.
+
+**Cross-references:** [FFA-04] Fursuit Fabrication, [FFA-03] Textile Craft, [FFA-11] Advanced Construction, [FFA-12] Fursuit History & Culture, [PNT-02] Paint Mediums (airbrush), [PNT-03] Brushes & Tools (airbrush equipment), [PNT-05] Color Theory.
 
 **Safety codes referenced:** SC-IP (intellectual property and attribution), SC-SAF (safety and welfare).
 
@@ -55,52 +57,52 @@ These makers have shaped the fursuit community over years or decades. Their work
 ### 2.1 Don't Hug Cacti (DHC)
 
 **Location:** United States
-**Specialty:** Toony, semi-realistic, full suits and partials
-**Active:** 15+ years
+**Style:** Toony, semi-realistic
 **Price range:** $3,500--$8,000+ (full suits)
 **Wait time:** Extended; commissions open sporadically
+**Notable for:** Extraordinary structural durability, expressive faces that read at any distance, invisible seam work, benchmark-setting craftsmanship
 
 Don't Hug Cacti is one of the most respected names in the fursuit community. DHC's work is entirely hand-crafted, with a distinctive style that balances expressive toony aesthetics with remarkable structural integrity. What sets DHC apart is the extraordinary durability of their suits -- performers who dance, run, and perform in DHC suits for years report that the construction holds up to punishment that would destroy lesser builds. The foam work is precise, the fur is meticulously applied with invisible seams, and the finishing details (airbrushed markings, sculpted features) demonstrate a level of craftsmanship that has set a benchmark for the industry. DHC suits have a characteristic expressiveness -- the faces read clearly at a distance and up close, which is a harder balance to achieve than many realize.
 
 ### 2.2 Lemonbrat
 
 **Location:** United States
-**Specialty:** Fashion-forward toony, mascot-runway hybrid style
-**Active:** 10+ years
+**Style:** Fashion-forward toony, mascot-runway hybrid
 **Price range:** $3,000--$7,500+
 **Wait time:** Long; commissions open periodically
+**Notable for:** Runway-fashion aesthetics, mascot-grade engineering, pioneering fursuits as fashion statements
 
 Lemonbrat occupies a unique space in the maker world. Their work blends mascot-quality construction -- the kind of engineering you see in professional theme park costumes -- with runway fashion aesthetics that push the boundaries of what a fursuit can look like. Lemonbrat suits are immediately recognizable: bold colors, clean lines, and a sense of high fashion that sets them apart from the crowd at any convention. They were among the first makers to demonstrate that fursuits could be genuine fashion statements, not just character costumes. Their body construction is notably refined, with attention to how the suit moves and drapes that reflects a deep understanding of both costume engineering and wearable design.
 
 ### 2.3 Clockwork Creatures
 
 **Location:** United States
-**Specialty:** Realistic and fantasy creatures, animatronic integration
-**Active:** 15+ years (professional creature fabrication background)
+**Style:** Realistic, fantasy creatures
 **Price range:** $5,000--$15,000+ (varies dramatically by project scope)
 **Wait time:** Project-dependent; consultation required
+**Notable for:** Professional creature fabrication background, animatronic integration (moving ears, blinking eyes, breathing chests), film-industry engineering
 
 Clockwork Creature Studio represents the intersection of professional creature fabrication and the furry maker community. Their background in film and entertainment creature work gives their pieces a level of engineering sophistication that few hobbyist-turned-professional makers can match. Clockwork Creatures pioneered the integration of animatronic elements -- moving ears, blinking eyes, breathing chests -- into wearable fursuit-adjacent costumes. Their realistic animal and fantasy creature work is extraordinary, with sculpting, painting, and material choices that create genuinely convincing living creatures. This is the maker you go to when you want something that makes people stop and stare in genuine wonder.
 
 ### 2.4 Made Fur You (MFY)
 
 **Location:** United States
-**Specialty:** Toony, semi-realistic, wide range of species
-**Active:** 10+ years
+**Style:** Toony, semi-realistic
 **Price range:** $2,500--$6,000+
 **Wait time:** Moderate to long
+**Notable for:** Consistent quality across wide species range, reliability, strong ventilation and visibility engineering
 
 Made Fur You is an established, high-volume professional studio that has built a reputation for consistent quality across a wide range of species and styles. MFY's strength lies in their reliability -- commissioners know what they are getting, and what they are getting is a well-constructed, attractive suit delivered within a reasonable timeframe. Their toony work has clean, appealing aesthetics with good visibility and ventilation. MFY has been a workhorse of the community, producing a large number of suits while maintaining quality standards that newer high-volume operations sometimes struggle with.
 
 ### 2.5 Fursuit Enterprise
 
 **Location:** United States
-**Specialty:** Toony to semi-realistic, mascot-grade construction
-**Active:** Long-standing
+**Style:** Toony to semi-realistic
 **Price range:** $2,500--$6,000+
 **Wait time:** Moderate
+**Notable for:** Mascot-grade structural engineering, excellent ventilation design, long-term durability
 
-Fursuit Enterprise has been a steady presence in the maker community for years. Their work features solid structural engineering with good attention to ventilation and wearability -- the practical concerns that separate a suit you can actually perform in from one that looks good on a mannequin. They are known for clean construction, dependable communication during the commission process, and suits that hold up well over time.
+Fursuit Enterprise has been a steady presence in the maker community for years. Their work features solid structural engineering with good attention to ventilation and wearability -- the practical concerns that separate a suit you can actually perform in from one that looks good on a mannequin. They are known for clean construction, dependable communication during the commission process, and suits that hold up well over time. Their approach to ventilation engineering draws on mascot-industry standards, ensuring that performers can maintain longer suiting sessions with less heat stress -- a critical practical consideration that is sometimes overlooked by newer makers who prioritize aesthetics over wearability.
 
 ---
 
@@ -111,99 +113,110 @@ These makers operate at a professional level with established reputations, signi
 ### 3.1 MixedCandy (Autumn Fallings)
 
 **Location:** United States
-**Specialty:** Toony
+**Style:** Toony
 **Price range:** $2,500--$5,500+
 **Wait time:** Moderate to long
+**Notable for:** Defining the toony fursuit aesthetic, warm and friendly expressions, exceptional photo presence
 
 MixedCandy, operated by Autumn Fallings, is synonymous with the toony fursuit style. Their suits have a signature look -- round, expressive faces with a cartoon charm that photographs beautifully and reads well in person. MixedCandy suits have a warmth and friendliness to their expression that makes them popular with performers who interact heavily with the public. Autumn's work has been influential in defining what "toony" means in the fursuit context.
 
 ### 3.2 One Fur All
 
 **Location:** United States
-**Specialty:** Toony, wide species range
+**Style:** Toony, wide species range
 **Price range:** $2,000--$5,000+
 **Wait time:** Moderate
+**Notable for:** Broad species competence, accessible pricing for quality tier
 
 One Fur All produces clean, appealing toony suits with good construction fundamentals. They handle a wide variety of species competently and are known for accessible pricing relative to their quality tier. A solid choice for commissioners seeking a well-made toony suit without the extended wait times of the legendary-tier makers.
 
 ### 3.3 MoreFurLess
 
 **Location:** United States
-**Specialty:** Toony, semi-realistic
+**Style:** Toony, semi-realistic
 **Price range:** $2,000--$5,000+
 **Wait time:** Moderate
+**Notable for:** Versatility across toony and semi-realistic styles, handling of complex multi-color patterns
 
 MoreFurLess has built a reputation for versatile work that can range from bright toony styles to more naturalistic semi-realistic pieces. Their construction is consistent, their communication during the build process is well-regarded, and they handle complex markings and multi-color patterns well.
 
 ### 3.4 Skypro Fursuits
 
 **Location:** United States
-**Specialty:** Toony, high volume
+**Style:** Toony
 **Price range:** $1,800--$4,500+
 **Wait time:** Shorter than most (team-based production)
+**Notable for:** Team-based production with shorter wait times, systematized quality process
 
 Skypro operates with a larger team than most fursuit studios, which translates to shorter wait times -- a significant advantage in a market where 12--18 month waits are common. Their toony style is clean and consistent, and their production process is more systematized than typical one-person operations. This efficiency does not come at the expense of quality; Skypro suits are well-constructed and hold up to regular use. They are a good option for commissioners who want a quality suit without the year-plus wait.
 
 ### 3.5 Artsyrc
 
 **Location:** United States
-**Specialty:** Toony, expressive faces
+**Style:** Toony
 **Price range:** $2,000--$5,000+
 **Wait time:** Moderate to long
+**Notable for:** Exceptionally expressive facial sculpting, personality-driven design
 
 Artsyrc is known for exceptionally expressive fursuit heads. Their facial sculpting captures personality in a way that makes each suit feel like a distinct character rather than a generic animal head. The eye placement, muzzle shape, and ear positioning work together to create faces that convey emotion even in still photographs.
 
 ### 3.6 Beastcub
 
 **Location:** United States
-**Specialty:** Unique sculptural style, fantasy creatures
+**Style:** Sculptural, fantasy creatures
 **Price range:** $2,500--$6,000+
 **Wait time:** Long
+**Notable for:** Distinctive three-dimensional sculptural quality, strong silhouettes, creative solutions for non-standard species
 
 Beastcub produces work with a distinctive sculptural quality. Their heads have a three-dimensional richness -- deep muzzles, layered features, strong silhouettes -- that stands out from more conventional construction. They handle fantasy creatures and unusual species with particular skill, bringing creative solutions to non-standard character designs. Their portfolio demonstrates a willingness to take on challenging projects that push the boundaries of what foam and fur can achieve.
 
 ### 3.7 Kilcodo Costumes
 
 **Location:** United States
-**Specialty:** Toony, clean construction
+**Style:** Toony
 **Price range:** $2,000--$5,000+
 **Wait time:** Moderate
+**Notable for:** Clean construction, reliable finishing, solid mid-range professional quality
 
 Kilcodo Costumes produces reliably well-built toony suits with clean lines and good finishing. They are a dependable mid-range professional maker with a solid track record.
 
 ### 3.8 Matrices
 
 **Location:** United States
-**Specialty:** Comprehensive resource and maker
+**Style:** Various
 **Price range:** Varies
 **Wait time:** Varies
+**Notable for:** Historical community resource, pioneering fursuit construction knowledge base (LiveJournal era), mentored many current professional makers
 
 Matrices is notable not only as a maker but as a community resource. Their online presence (including the historic fursuit LiveJournal community) has been one of the longest-running fursuit construction knowledge bases on the internet. Countless builders, including many who went on to become professional makers themselves, learned foundational techniques from Matrices' guides and tutorials.
 
 ### 3.9 PhoenixWolf Fursuits
 
 **Location:** United States
-**Specialty:** Toony, semi-realistic, Dutch Angel Dragons
+**Style:** Toony, semi-realistic
 **Price range:** $2,500--$6,000+
 **Wait time:** Long
+**Notable for:** Definitive Dutch Angel Dragon suits, built the iconic Telephone suit, strong work across multiple species
 
 PhoenixWolf is closely associated with the Dutch Angel Dragon species -- an open species created by Ino89777 that has become one of the most popular original fursuit species in the community. PhoenixWolf's Dutch Angel Dragon suits are considered definitive. Beyond that specialty, they produce quality work across a range of species and styles.
 
 ### 3.10 Heads & Tails Studios
 
 **Location:** United States
-**Specialty:** Toony, partials and full suits
+**Style:** Toony
 **Price range:** $1,500--$4,500+
 **Wait time:** Moderate
+**Notable for:** Accessible pricing, clean toony work across partials and full suits
 
 Heads & Tails Studios produces clean toony work with accessible pricing. They handle both partials and full suits competently and are a solid choice for commissioners on a moderate budget.
 
 ### 3.11 Wild Life Fursuits
 
 **Location:** United States / International
-**Specialty:** Realistic and semi-realistic
+**Style:** Realistic, semi-realistic
 **Price range:** $3,000--$7,000+
 **Wait time:** Long
+**Notable for:** Detailed airbrushing, natural color palettes, natural-direction pile flow, species-accurate proportions
 
 Wild Life Fursuits specializes in realistic and semi-realistic work. Their suits feature detailed airbrushing, natural color palettes, and proportions that reflect actual animal anatomy. The fur selection and application on their realistic pieces is particularly strong, with natural-direction pile flow and color blending that mimics real pelage.
 
@@ -216,54 +229,60 @@ These makers are known for specific niches, distinctive styles, or innovative ap
 ### 4.1 Beetlecat Originals
 
 **Location:** United States
-**Specialty:** Realistic/fantasy hybrids, intricate detail work
+**Style:** Realistic/fantasy hybrids
 **Price range:** $3,000--$7,000+
 **Wait time:** Long; high demand
+**Notable for:** Extraordinary layered detail work, hybrid species with real-animal construction precision, pieces that reward close inspection
 
 Beetlecat Originals occupies a fascinating niche between realistic and fantasy. Their work features the construction precision and material quality of high-end realistic suits, but applied to characters that blend real-animal anatomy with fantastical elements -- unusual color schemes, hybrid species, magical features rendered in physical materials. The detail work is extraordinary: layered fur applications, hand-painted elements, sculptural features that add dimension without sacrificing wearability. Beetlecat suits have a depth and richness that rewards close inspection -- there is always more to notice.
 
 ### 4.2 CityMutt
 
 **Location:** United States
-**Specialty:** Dutch-angle toony, bold graphic style
+**Style:** Dutch-angle toony, bold graphic
 **Price range:** $2,500--$5,500+
 **Wait time:** Moderate to long
+**Notable for:** Instantly identifiable design vocabulary, dynamic graphic-design energy, strong photographic presence
 
 CityMutt has developed a visual vocabulary that is immediately identifiable. Their suits have a dynamic, almost graphic-design quality to them -- bold shapes, strong angles, and a sense of movement even when standing still. The "Dutch-angle toony" description captures a style that takes the toony framework and tilts it, adding energy and edge. CityMutt suits stand out in fursuit parades and photographs because their design language is so distinct.
 
 ### 4.3 Sparkle Kreations
 
 **Location:** United States
-**Specialty:** Colorful toony, sparkle and shimmer effects
+**Style:** Colorful toony
 **Price range:** $2,000--$5,000+
 **Wait time:** Moderate
+**Notable for:** Vibrant colors, holographic and iridescent fabric integration, joyful exuberant aesthetic
 
 Sparkle Kreations lives up to their name -- their suits feature vibrant colors, shimmer fabrics, and an overall aesthetic of joyful exuberance. They demonstrate that fursuit construction can incorporate unconventional materials (holographic fabrics, iridescent elements, specialty furs) while maintaining structural integrity.
 
 ### 4.4 Roofur
 
 **Location:** United States
-**Specialty:** Semi-realistic, natural styles
+**Style:** Semi-realistic
 **Price range:** $2,000--$5,000+
 **Wait time:** Moderate to long
+**Notable for:** Natural sensibility, well-blended color transitions, proportions grounded in real animal anatomy
 
 Roofur produces clean semi-realistic work with a natural sensibility. Their suits feature well-blended color transitions and proportions that feel grounded in real animal anatomy while maintaining enough stylization to read as characters rather than replicas.
 
 ### 4.5 Blue Moon Fursuits
 
 **Location:** United States
-**Specialty:** Toony, partials
+**Style:** Toony
 **Price range:** $1,500--$4,000+
 **Wait time:** Moderate
+**Notable for:** Charming toony partials at accessible prices, low heat stress designs
 
 Blue Moon Fursuits produces charming toony work at accessible price points. They are particularly good with partials -- head, paws, and tail sets that allow performers to suit up quickly with minimal heat stress while still embodying their character.
 
 ### 4.6 Furr Happens
 
 **Location:** United States
-**Specialty:** Toony, playful style
+**Style:** Toony
 **Price range:** $1,800--$4,500+
 **Wait time:** Moderate
+**Notable for:** Playful personality in design, natural crowd-pleasers, friendly approachable aesthetic
 
 Furr Happens -- the name itself captures the maker's personality -- produces playful toony suits with a sense of humor built into the design. Their work has a friendly, approachable quality that makes their suits natural crowd-pleasers at conventions.
 
@@ -276,18 +295,20 @@ The fursuit maker community is global, with distinctive regional styles and trad
 ### 5.1 KAIBORG Studios
 
 **Location:** Japan
-**Specialty:** Cyberpunk, LED integration, tech-forward design
+**Style:** Cyberpunk, tech-forward
 **Price range:** $5,000--$15,000+ (depending on electronics integration)
 **Wait time:** Long; limited commission availability
+**Notable for:** LED array integration, programmable light patterns, merging electronic and textile arts, stunning UV/blacklight performance
 
 KAIBORG Studios represents the cutting edge of where fursuit construction meets technology. Based in Japan, KAIBORG produces suits that integrate LED arrays, EL wire, programmable light patterns, and cyberpunk aesthetic elements into fully wearable fursuit-style costumes. Their work is visually stunning under UV/blacklight conditions and in low-light environments. The engineering challenge of making electronics that are wearable, durable, washable (or at least removable for cleaning), and safe is formidable, and KAIBORG has solved these problems with elegance. Their suits represent a distinct vision of what character costumes can be when electronic and textile arts merge.
 
 ### 5.2 Kemono-Style Makers
 
 **Location:** Primarily Japan, with growing worldwide adoption
-**Specialty:** Round, cute aesthetic with anime-influenced proportions
+**Style:** Kemono (round, cute, anime-influenced)
 **Price range:** Varies widely ($2,000--$8,000+)
 **Wait time:** Varies; many Japanese makers communicate primarily in Japanese
+**Notable for:** Genuinely different design philosophy from Western toony, smooth uniform fur surfaces, cross-Pacific aesthetic exchange
 
 The kemono fursuit style deserves special discussion because it represents a genuinely different design philosophy, not merely a variation within the Western toony tradition. Kemono suits feature very round head shapes, large forward-facing eyes (often with an anime-influenced style), compact muzzles, and an overall softness of form. Where Western toony suits often emphasize expressiveness and exaggeration, kemono suits emphasize cuteness and approachability. The construction techniques differ as well -- kemono heads often use different base structures to achieve their characteristic rounded profiles, and the fur application creates a smoother, more uniform surface than is typical in Western construction.
 
@@ -296,13 +317,18 @@ Notable kemono and kemono-influenced makers include studios across Japan and inc
 ### 5.3 European Makers
 
 **Location:** UK, Germany, Netherlands, Scandinavia, and throughout Europe
-**Specialty:** Varies; strong realistic and semi-realistic tradition
+**Style:** Varies; strong realistic and semi-realistic tradition
 **Price range:** EUR 1,500--EUR 6,000+ (varies by country and maker)
 **Wait time:** Varies
+**Notable for:** Cross-disciplinary cosplay/LARP techniques, Eurofurence showcase community, Nordic design sensibilities in Scandinavian work
 
 Europe has a thriving fursuit maker community with some distinct characteristics. European makers often have strong connections to the cosplay and LARP (live-action roleplay) communities, which brings cross-disciplinary techniques into fursuit construction. The German furry community is particularly large (Eurofurence is one of the world's largest furry conventions), and Germany has produced numerous skilled makers. UK makers benefit from proximity to strong textile and costume traditions. Scandinavian makers sometimes incorporate elements reflecting Nordic design sensibilities -- clean lines, thoughtful material choices, and functional elegance.
 
 Shipping and customs considerations make international commissions more complex for European makers working with clients outside the EU (and vice versa). Many European makers price in euros, and commissioners should account for VAT, customs duties, and international shipping costs when budgeting.
+
+### 5.4 Pacific Northwest Makers
+
+The Pacific Northwest furry community, centered around Seattle, Portland, and Vancouver, BC, supports a growing maker scene. PNW-based makers benefit from the region's strong craft culture -- the same maker traditions that sustain woodworking, textile arts, and glass studios extend naturally to fursuit fabrication. Conventions like **Furlandia** (Portland) and regional gatherings organized by **PNW Furs** provide local venues for makers to showcase their work. The PNW's cooler climate makes it an ideal region for fursuit performance, and the community's overlap with the broader Pacific Northwest creative economy (see [PNT-09] for the PNW painting scene) creates cross-pollination between fursuit making and other craft disciplines. PNW fursuit makers frequently use airbrush techniques that draw directly from the fine art and illustration traditions described in [PNT-02] and [PNT-03].
 
 ---
 
@@ -474,17 +500,21 @@ Fursuit makers are artisans doing skilled manual labor, often as sole proprietor
 
 ## 11. Cross-Module Connections
 
-### To CRAFT-SUIT
+### To [FFA-04] Fursuit Fabrication
 
-The construction techniques documented in [CRAFT-SUIT] represent the technical foundation that every maker in this directory works from. Understanding foam carving, tape patterning, fur application, and ventilation helps commissioners appreciate the complexity of the work they are commissioning and communicate more effectively with their maker about design preferences and technical constraints.
+The construction techniques documented in [FFA-04] represent the technical foundation that every maker in this directory works from. Understanding foam carving, tape patterning, fur application, and ventilation helps commissioners appreciate the complexity of the work they are commissioning and communicate more effectively with their maker about design preferences and technical constraints.
 
-### To CRAFT-SEW
+### To [FFA-03] Textile Craft
 
-Material selection and sewing techniques from [CRAFT-SEW] directly impact every maker's work. The choice between fur suppliers, pile lengths, and backing types documented in that module explains many of the quality differences between budget and premium construction.
+Material selection and sewing techniques from [FFA-03] directly impact every maker's work. The choice between fur suppliers, pile lengths, and backing types documented in that module explains many of the quality differences between budget and premium construction.
 
-### To CRAFT-RENDER
+### To [FFA-02] Digital Rendering
 
-Many commissioners first develop their character design in digital form using techniques from [CRAFT-RENDER] before commissioning a physical suit. Understanding how digital fur rendering parameters (albedo, roughness, pile length) map to physical fur fabric properties helps commissioners translate their digital vision into material specifications for their maker.
+Many commissioners first develop their character design in digital form using techniques from [FFA-02] before commissioning a physical suit. Understanding how digital fur rendering parameters (albedo, roughness, pile length) map to physical fur fabric properties helps commissioners translate their digital vision into material specifications for their maker.
+
+### To [PNT-02] and [PNT-03] Painting
+
+Fursuit makers who airbrush their work use the same tools and techniques documented in the Painting (PNT) research project. The airbrush equipment in [PNT-03], the textile paints and color theory in [PNT-02] and [PNT-05], and the spray technique fundamentals all apply directly to fursuit color work. The bridge between fine art painting and fursuit making is the airbrush.
 
 ---
 
@@ -514,4 +544,4 @@ Individual maker websites, social media accounts, and convention appearances ser
 
 ---
 
-*Module CRAFT-MAKERS. Cross-references: [CRAFT-SUIT], [CRAFT-SEW], [CRAFT-RENDER]. Safety codes: SC-IP.*
+*Module FFA-10. Cross-references: [FFA-04], [FFA-03], [FFA-02], [FFA-11], [FFA-12], [PNT-02], [PNT-03]. Safety codes: SC-IP.*

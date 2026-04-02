@@ -152,7 +152,7 @@ These organizations cannot fix the structural problems described in this documen
 
 There is a calculation that no pension formula captures and no workers' compensation system acknowledges. It is the calculation of what thirty years of service actually costs the person who gives them.
 
-It costs sleep. Not just the sleep lost on shift, but the sleep lost to nightmares and hypervigilance and the inability to turn off the readiness that the job demands. It costs health — the cardiovascular damage of chronic stress, the cancer risk of chronic exposure, the musculoskeletal wear of chronic physical demands. It costs relationships — the marriages strained by absence and emotional unavailability, the children's milestones attended in memory rather than in person, the friendships outside the service that attroded because the only people who understand are the people who were there.
+It costs sleep. Not just the sleep lost on shift, but the sleep lost to nightmares and hypervigilance and the inability to turn off the readiness that the job demands. It costs health — the cardiovascular damage of chronic stress, the cancer risk of chronic exposure, the musculoskeletal wear of chronic physical demands. It costs relationships — the marriages strained by absence and emotional unavailability, the children's milestones attended in memory rather than in person, the friendships outside the service that atrophied because the only people who understand are the people who were there.
 
 It costs the capacity for ordinary experience. The firefighter who cannot drive past a car accident without assessing the scene. The paramedic who cannot hear a siren without a physiological stress response. The officer who cannot enter a room without identifying the exits. These are not disorders. They are adaptations — skills that the job required and that do not have an off switch. They keep the responder alive on the job and extract a price in every other dimension of life.
 
@@ -163,6 +163,38 @@ The person to whom this research is dedicated carried it for thirty years. Every
 That is what service means. Not the ceremony, not the badge, not the pension. The carrying. Day after day, year after year, for a career and beyond. The weight does not set down when the uniform comes off. It is carried for life.
 
 The least we can do — as colleagues, as institutions, as a society — is acknowledge what we asked them to carry, and build the systems to help them bear it. Not after they break. Not after they retire. Not after they are gone. Now. While they are still carrying it. While there is still time.
+
+## Cross-References
+
+- **[FSR-02]** The Fire Service — the 24-hour shift, firehouse culture, and operational environment that produce the exposures described here
+- **[FSR-03]** EMS and Paramedicine — the dual-role firefighter/paramedic burden, EMS burnout as the highest in healthcare
+- **[FSR-05]** Dispatch and 911 — dispatcher PTSD and the unique psychological toll of hearing without seeing
+- **[FSR-06]** Training and Certification — what the academy teaches and what it cannot; the gap between training and judgment that experience fills
+- **[FSR-08]** Mental Health Crisis — the moral injury of responding to calls you are not equipped for, and the revolving door's toll on responders
+- **[FSR-10]** PNW Departments — the specific operational environments (Puget Sound maritime, Cascadia seismic, wildland-urban interface) that shape PNW responder exposure
+- **[ECO-05]** Forest Ecology — the wildfire smoke exposure that adds respiratory and carcinogen burden to PNW firefighters during increasingly long fire seasons
+- **[WDC-08]** Construction Framing — the building types that firefighters enter; construction knowledge is survival knowledge on the fireground
+
+---
+
+## Sources and References
+
+- Ruderman Family Foundation. "Study of Police and Firefighter Suicide." White Paper, 2018.
+- Firefighter Behavioral Health Alliance. Annual suicide tracking data. ffbha.org
+- Stanley, I.H., et al. "Career Prevalence and Correlates of Suicidal Thoughts and Behaviors Among Firefighters." *Journal of Affective Disorders*, 187, 2015.
+- International Agency for Research on Cancer (IARC). "Monograph on Occupational Exposure as a Firefighter." Volume 132, 2022. Group 1 classification.
+- IARC. "Monograph on Shift Work." Volume 124, 2020 (update). Group 2A classification for circadian disruption.
+- Berger, W., et al. "Rescuers at Risk: A Systematic Review and Meta-Regression Analysis of the Worldwide Current Prevalence and Correlates of PTSD in Rescue Workers." *Social Psychiatry and Psychiatric Epidemiology*, 47(6), 2012.
+- Harvey, S.B., et al. "The Mental Health of Fire-Fighters: An Examination of the Demand-Control-Support Model of Occupational Stress." *Journal of Traumatic Stress*, 29(4), 2016.
+- Daniels, R.D., et al. "Mortality and Cancer Incidence in a Pooled Cohort of US Firefighters." *Occupational and Environmental Medicine*, 71(6), 2014. (NIOSH Firefighter Cancer Study)
+- Smith, L.B., et al. "PFAS in Firefighter Turnout Gear." *Environmental Science & Technology Letters*, 9(4), 2022.
+- Carleton, R.N., et al. "Mental Disorder Symptoms Among Public Safety Personnel in Canada." *Canadian Journal of Psychiatry*, 63(1), 2018.
+- IAFF Center of Excellence for Behavioral Health Treatment and Recovery. iaffrecoverycenter.com
+- Safe Call Now. 1-206-459-3020. safecallnow.org
+- Code Green Campaign. codegreencampaign.org
+- First Responder Support Network. frsn.org
+- National Fallen Firefighters Foundation. "Everyone Goes Home: 16 Life Safety Initiatives." firehero.org
+- Dawson, W.C. "Sleep Deprivation and Sustained Attention: The Equivalence of Sleep Loss to Alcohol Intoxication." *Nature*, 388, 1997. (17-hour wakefulness = 0.05% BAC)
 
 ---
 

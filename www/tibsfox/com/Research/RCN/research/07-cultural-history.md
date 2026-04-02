@@ -232,5 +232,15 @@ The cultural raccoon is a projection screen. We see in it what we want to see: p
 
 ---
 
+## Sources
+
+- North, S. (1963). *Rascal: A Memoir of a Better Era*. E.P. Dutton.
+- Ikeda, T., et al. (2004). "Present status of invasive alien raccoon and its impact in Japan." *Global Environmental Research*, 8(2): 125-131.
+- Zeveloff, S.I. (2002). *Raccoons: A Natural History*. Smithsonian Institution Press. (Cultural history chapters.)
+- Prange, S., Gehrt, S.D., and Wiggers, E.P. (2004). "Influences of anthropogenic resources on raccoon movements and spatial distribution." *Journal of Mammalogy*, 85(3): 483-490.
+- Hadidian, J., Hodge, G.R., and Grandy, J.W. (eds.) (1997). *Wild Neighbors: The Humane Approach to Living with Wildlife*. Humane Society Press.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

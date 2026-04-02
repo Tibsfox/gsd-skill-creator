@@ -134,11 +134,15 @@ The downside of waterstones is maintenance — they must be flattened regularly 
 
 ### Diamond Plates
 
-Diamond plates — steel plates with embedded diamond particles — are flat, fast-cutting, and virtually maintenance-free. They never dish. They work with water or dry. They are available in coarse, fine, and extra-fine grits. Many woodworkers use a coarse diamond plate for flattening the back of new chisels and plane blades (a critical step, since the back must be dead flat for the edge to work properly) and then switch to waterstones for the final honing.
+Diamond plates — steel plates with embedded diamond particles — are flat, fast-cutting, and virtually maintenance-free. They never dish. They work with water or dry. They are available in coarse, fine, and extra-fine grits. DMT (Diamond Machining Technology) is the dominant brand, and their DiaSharp line (a continuous diamond surface bonded to a steel plate) is the most popular among woodworkers. A set of three — coarse (325 mesh), fine (600 mesh), and extra-fine (1200 mesh) — covers most sharpening needs.
+
+Many woodworkers use a coarse diamond plate for flattening the back of new chisels and plane blades (a critical step, since the back must be dead flat for the edge to work properly) and then switch to waterstones for the final honing. Others use diamonds exclusively, accepting a slightly less polished edge in exchange for the convenience of a system that never needs maintenance. In the PNW's damp climate, diamond plates have a practical advantage over waterstones: they do not absorb water, they cannot crack from freeze-thaw, and they require no soaking before use. You can sharpen a chisel on a diamond plate in the time it takes a waterstone to soak.
 
 ### Stropping
 
-After honing on stones, many woodworkers strop the edge on a leather surface charged with fine abrasive compound (chromium oxide is common). Stropping removes the microscopic burr left by the stones and polishes the edge to its final keenness. A stropped edge is perceptibly sharper than a stone-only edge, and the difference shows in the surface quality of the cut.
+After honing on stones, many woodworkers strop the edge on a leather surface charged with fine abrasive compound (chromium oxide is common — the green compound sold by Woodcraft, Lee Valley, and others). Stropping removes the microscopic burr left by the stones and polishes the edge to its final keenness. A stropped edge is perceptibly sharper than a stone-only edge, and the difference shows in the surface quality of the cut.
+
+A strop is nothing more than a piece of leather (smooth side up, or rough side up — both work, rough side is slightly more aggressive) glued to a flat board, with a thin layer of compound rubbed into the surface. The technique is simple: draw the bevel across the leather, away from the edge (the opposite direction of cutting — you are polishing, not cutting the leather). Five or six strokes on the bevel, flip, two strokes on the back. Ten seconds total. The edge should now shave hair cleanly from your forearm, which is the traditional test and a perfectly practical one.
 
 ### The Sharpening Habit
 
@@ -179,6 +183,30 @@ Chris Schwarz, editor and author, has been influential in reviving interest in t
 The Japanese tradition takes this further. A Japanese carpenter's tool kit fits in a single chest. The tools are few, exquisitely made, and maintained with religious care. The philosophy is that each tool should be fully understood — its geometry, its metallurgy, its behavior in every species of wood — before another tool is added to the kit.
 
 None of this means that hand tools are superior to power tools in some absolute sense. The question is not which is better. The question is what kind of relationship you want with the material. Hand tools slow you down. They make you pay attention. They force you to understand the wood because the wood tells you immediately — through feel, through sound, through the quality of the shaving — whether you are doing it right. That feedback, for many woodworkers, is not the cost of hand tool work. It is the point.
+
+## PNW Hand Tool Culture
+
+The Pacific Northwest has a particularly strong hand tool tradition, fed by several streams. The Japanese pull saw and chisel traditions arrived with Japanese immigrants in the late nineteenth and early twentieth centuries, and the proximity to Japan has kept the channel open — PNW woodworkers were among the earliest Americans to adopt Japanese hand tools, and shops in Portland and Seattle carry Japanese tool inventories that rival East Coast specialist dealers. The studio furniture movement in the PNW, influenced by Krenov and by the region's emphasis on working with local figured woods, leans toward hand-tool-intensive approaches — quilted big-leaf maple demands careful hand planing to avoid tearout that a machine planer would produce, and many PNW furniture makers finish their figured surfaces with a hand plane set for a gossamer cut rather than sanding.
+
+The PNW weather also shapes hand tool practice. The damp climate means tools rust fast. A carbon steel chisel left on a bench overnight in an unheated PNW shop will show rust spots by morning. PNW hand tool workers learn early to oil their tools after every session — a habit that becomes as automatic as sharpening. Camellia oil (traditional Japanese tool maintenance oil) and jojoba oil are popular choices. The climate also means that wood in PNW shops tends toward the wet side of equilibrium — a moisture meter is not optional, it is essential, and the hand tool worker develops a feel for the difference between a board at 8% and one at 12% through the way it planes.
+
+## Cross-References
+
+- **[WDC-02]** Wood Science — the material properties that hand tools must negotiate
+- **[WDC-05]** Joinery — hand tool joinery techniques (dovetails, mortise and tenon) in full detail
+- **[WDC-06]** Finishing — the hand-planed surface as an alternative to sanding, and the finish quality it enables
+- **[WDC-10]** Bibliography — Paul Sellers, Chris Schwarz, and the online hand tool community
+
+---
+
+## Sources and References
+
+- Schwarz, Chris. "The Anarchist's Tool Chest." Lost Art Press, 2011.
+- Schwarz, Chris. "Workbenches: From Design and Theory to Construction and Use." Popular Woodworking, 2007.
+- Sellers, Paul. paulsellers.com. Hundreds of hours of free hand tool instruction.
+- Odate, Toshio. "Japanese Woodworking Tools." 1984.
+- Blackburn, Graham. "Traditional Woodworking Handtools." 1999.
+- Wearing, Robert. "The Essential Woodworker." Lost Art Press edition, 2010.
 
 ---
 

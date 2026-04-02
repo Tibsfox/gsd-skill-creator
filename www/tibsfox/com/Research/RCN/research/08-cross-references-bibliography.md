@@ -44,10 +44,10 @@ Raccoon-avian interactions are among the most ecologically significant and conse
 
 The FWL project addresses domestic poultry, and raccoons are directly relevant:
 
-- **Primary predator:** Raccoons are the number-one chicken predator in many regions, making raccoon-proofing a central concern of FWL coop design and husbandry research.
-- **Latch and closure design:** Raccoon dexterity as the benchmark for predator-proof latch specifications. If a raccoon can open it, the design fails.
-- **Nocturnal predation patterns:** Raccoon activity patterns informing FWL recommendations for when coops should be secured.
-- **Predator deterrence:** Effectiveness of lighting, fencing, guardian animals, and other deterrents against raccoon predation of poultry.
+- **Primary predator [FWL-06]:** Raccoons are the number-one chicken predator in many regions, making raccoon-proofing a central concern of FWL coop design and husbandry research. FWL-06 (Husbandry Guide) devotes dedicated sections to raccoon-specific predator defense, including hardware cloth specifications, latch designs, and PNW predator density data.
+- **Latch and closure design [FWL-06]:** Raccoon dexterity as the benchmark for predator-proof latch specifications. If a raccoon can open it, the design fails. FWL-06 specifies two-step latches, carabiner clips, and padlocks as raccoon-resistant closure types.
+- **Nocturnal predation patterns [RCN-02, RCN-04]:** Raccoon activity patterns informing FWL recommendations for when coops should be secured. Automatic coop doors closing at dusk are recommended throughout FWL-06.
+- **Predator deterrence:** Effectiveness of lighting, fencing, guardian animals, and other deterrents against raccoon predation of poultry. See also the PNW-specific hawk and raccoon defense sections in FWL-06 and FWL-08.
 
 ### SPS --- Species Pairings
 

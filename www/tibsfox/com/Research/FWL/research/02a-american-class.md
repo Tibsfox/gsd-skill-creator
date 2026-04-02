@@ -104,11 +104,11 @@ Rhode Island Whites share the general body type of Rhode Island Reds — long, r
 
 ### Temperament and Production
 
-Calm and docile, Rhode Island Whites are reliable producers of 200-250 large brown eggs per year. They are hardy, cold-tolerant, and make excellent dual-purpose farm birds.
+Calm and docile, Rhode Island Whites are reliable producers of 200-250 large brown eggs per year. Their temperament is notably more placid than the sometimes-assertive Rhode Island Red, making them excellent choices for mixed flocks and first-time keepers. They are hardy in cold weather --- the rose comb provides meaningful frostbite resistance compared to single-combed breeds, a genuine advantage in PNW winters during Arctic outflow events. Rhode Island Whites handle confinement well but also forage competently on pasture. Their white plumage, while striking, does make them more visible to aerial predators, a consideration for free-range flocks in areas with hawk pressure. The breed dresses out well as a table bird, with the white plumage producing a clean carcass free of the dark pin feathers that can be cosmetically unappealing on darker-feathered breeds.
 
 ### Conservation Status
 
-**Threatened** on the Livestock Conservancy priority list. Rhode Island Whites are significantly rarer than Rhode Island Reds and deserve active conservation attention. Finding quality breeding stock requires dedication and networking within heritage breed communities.
+**Threatened** on the Livestock Conservancy priority list. Rhode Island Whites are significantly rarer than Rhode Island Reds and deserve active conservation attention. The breed's obscurity is partly a naming problem --- many potential keepers assume it is simply a color variety of the Red rather than a distinct breed with its own history, genetics, and breeding community. Finding quality breeding stock requires dedication and networking within heritage breed communities. The breed's combination of white egg-alternative genetics (brown eggs from a white-feathered bird), gentle temperament, rose comb hardiness, and genuine dual-purpose utility makes it an underappreciated gem in the American Class.
 
 ---
 
@@ -288,7 +288,7 @@ Hollands are medium-to-large birds with a moderately long body and a well-rounde
 
 ### Temperament and Production
 
-Hollands are quiet, calm, and easily managed. Hens lay approximately 200-240 large white eggs per year — notable because most American Class breeds lay brown eggs. This white-egg-laying trait, inherited from their Leghorn ancestry, was the breed's raison d'etre.
+Hollands are quiet, calm, and easily managed --- a temperament that distinguishes them sharply from the flighty Leghorns that contributed their white-egg genetics. This combination of American Class docility with Mediterranean egg color was the Holland's entire reason for being: Rutgers breeders wanted to prove that an American dual-purpose bird could lay white eggs without inheriting the nervous disposition that made Leghorns unpopular with small-flock keepers. They succeeded. Hens lay approximately 200-240 large white eggs per year, placing them among the more productive American Class breeds. They are cold-hardy, adaptable, and tolerant of both confinement and free-range conditions. The breed's quiet disposition makes it an excellent neighbor in suburban settings where noise complaints are a concern.
 
 ### Conservation Status
 
@@ -310,30 +310,42 @@ Lamonas are medium-to-large, clean-legged birds with white plumage, red earlobes
 
 ### Temperament and Production
 
-Lamonas are calm and docile. Hens lay approximately 180-240 large white eggs per year. Like the Holland, they are an American Class breed that lays white eggs — a distinctive feature in a class dominated by brown-egg layers.
+Lamonas are calm and docile, with a steady temperament that reflects their development at a federal research station where manageability was a practical requirement. Hens lay approximately 180-240 large white eggs per year --- a notable production rate for a dual-purpose bird, and particularly valuable because white eggs from an American Class breed is an unusual combination. Most American breeds lay brown eggs; the Lamona and Holland are the exceptions, carrying Leghorn genetics that express white egg color while maintaining the heavier body type and calmer disposition of the dual-purpose American tradition. Lamonas are reasonably cold-hardy and forage well on pasture, though detailed behavioral information is scarce given the breed's extreme rarity.
 
 ### Conservation Status
 
-**Critical** on the Livestock Conservancy priority list. The Lamona is functionally extinct or nearly so. Some poultry historians believe no pure Lamona stock survives, though occasional claims surface from small flock keepers. If any remain, they represent the most urgent conservation priority in the American Class.
+**Critical** on the Livestock Conservancy priority list. The Lamona is functionally extinct or nearly so. Some poultry historians believe no pure Lamona stock survives, though occasional claims surface from small flock keepers. If any remain, they represent the most urgent conservation priority in the American Class. The Lamona's story is a cautionary tale: a breed developed with government resources and scientific expertise, admitted to the APA Standard, and then allowed to vanish because no community of breeders formed around it. The breed never captured the public imagination the way the Plymouth Rock or Rhode Island Red did, and without a constituency, it had no safety net when agricultural modernization made it commercially irrelevant.
 
 ---
 
 ## Summary: The American Class at a Glance
 
-| Breed | Weight (Cock/Hen) | Eggs/Year | Egg Color | APA Year | Conservancy Status |
-|-------|-------------------|-----------|-----------|----------|-------------------|
-| Plymouth Rock | 9.5 / 7.5 lbs | 200-280 | Brown | 1874 | Recovering |
-| Wyandotte | 8.5 / 6.5 lbs | 180-260 | Brown | 1883 | Recovering |
-| Rhode Island Red | 8.5 / 6.5 lbs | 200-300 | Brown | 1904 | Recovering |
-| Rhode Island White | 8.5 / 6.5 lbs | 200-250 | Brown | 1922 | Threatened |
-| New Hampshire | 8.5 / 6.5 lbs | 200-280 | Brown | 1935 | Watch |
-| Delaware | 8.5 / 6.5 lbs | 200-280 | Brown | 1952 | Threatened |
-| Jersey Giant | 13 / 10 lbs | 150-200 | Brown | 1922 | Watch |
-| Dominique | 7 / 5 lbs | 150-200 | Brown | 1874 | Watch |
-| Java | 9.5 / 7.5 lbs | 150-180 | Brown | 1883 | Threatened |
-| Buckeye | 9 / 6.5 lbs | 150-200 | Brown | 1904 | Watch |
-| Chantecler | 8.5 / 6.5 lbs | 180-220 | Brown | 1921 | Critical |
-| Holland | 8.5 / 6.5 lbs | 200-240 | White | 1949 | Critical |
-| Lamona | 8 / 6 lbs | 180-240 | White | 1933 | Critical |
+| Breed | Origin | Weight (Cock/Hen) | Eggs/Year | Egg Color | Temperament | Conservancy Status |
+|-------|--------|-------------------|-----------|-----------|-------------|-------------------|
+| Plymouth Rock | Massachusetts, 1860s | 9.5 / 7.5 lbs | 200-280 | Brown | Docile, friendly | Recovering |
+| Wyandotte | New York, 1870s | 8.5 / 6.5 lbs | 180-260 | Brown | Calm, assertive | Recovering |
+| Rhode Island Red | Rhode Island, 1880s | 8.5 / 6.5 lbs | 200-300 | Brown | Vigorous, alert | Recovering |
+| Rhode Island White | Rhode Island, 1888 | 8.5 / 6.5 lbs | 200-250 | Brown | Calm, docile | Threatened |
+| New Hampshire | New Hampshire, 1910s | 8.5 / 6.5 lbs | 200-280 | Brown | Robust, competitive | Watch |
+| Delaware | Delaware, 1940 | 8.5 / 6.5 lbs | 200-280 | Brown | Calm, curious | Threatened |
+| Jersey Giant | New Jersey, 1870s | 13 / 10 lbs | 150-200 | Brown | Gentle, docile | Watch |
+| Dominique | Colonial America | 7 / 5 lbs | 150-200 | Brown | Calm, hardy | Watch |
+| Java | USA, early 1800s | 9.5 / 7.5 lbs | 150-180 | Brown | Gentle, self-sufficient | Threatened |
+| Buckeye | Ohio, 1890s | 9 / 6.5 lbs | 150-200 | Brown | Active, curious | Watch |
+| Chantecler | Quebec, 1908 | 8.5 / 6.5 lbs | 180-220 | Brown | Gentle, calm | Critical |
+| Holland | New Jersey, 1930s | 8.5 / 6.5 lbs | 200-240 | White | Quiet, calm | Critical |
+| Lamona | Maryland, 1910s | 8 / 6 lbs | 180-240 | White | Calm, docile | Critical |
 
-The American Class tells the story of American poultry in microcosm. From the ubiquitous Plymouth Rock and Rhode Island Red, which shaped an entire industry, to the nearly lost Lamona and Holland, which represent what happens when market forces extinguish genetic diversity, these breeds are a living heritage. Each one carries irreplaceable genetic material — adaptations to climate, disease resistance, foraging ability, temperament — that no commercial hybrid can replicate. To raise them is to keep a promise to the breeders who spent lifetimes perfecting them, and to the generations who will need the genetic diversity these breeds safeguard.
+### PNW Considerations for American Class Breeds
+
+The Pacific Northwest presents specific challenges and advantages for keepers of American Class breeds. The persistent rain from October through April demands covered runs and excellent drainage --- mud management is the defining husbandry challenge of PNW chicken keeping [FWL-06]. Rose-combed breeds like the Wyandotte, Dominique, and Buckeye have a natural advantage in PNW winters, where frostbite risk spikes during occasional Arctic outflow events that drop temperatures into the teens. Hawks are a year-round concern: Cooper's Hawks (*Accipiter cooperii*) are abundant in PNW suburban areas and will take bantam and small standard birds [FWL-08, AVI]. Raccoons (*Procyon lotor*) are the most persistent nocturnal predator, capable of defeating simple latches and reaching through standard chicken wire [RCN-02, RCN-03]. Hardware cloth rated at 1/2 inch, two-step latches, and secure automatic coop doors are essential for any PNW flock.
+
+On the positive side, the PNW's mild winters mean that cold-hardy American breeds like the Plymouth Rock, Wyandotte, Australorp, and Buckeye thrive with minimal supplemental heat. The long growing season supports excellent pasture for foraging breeds like the Dominique and Buckeye. And the region's strong local-food culture has made heritage American breeds increasingly popular at PNW farmers' markets and in backyard flocks from Seattle to Portland [FWL-06, FWL-07].
+
+---
+
+The American Class tells the story of American poultry in microcosm. From the ubiquitous Plymouth Rock and Rhode Island Red, which shaped an entire industry, to the nearly lost Lamona and Holland, which represent what happens when market forces extinguish genetic diversity, these breeds are a living heritage. Each one carries irreplaceable genetic material --- adaptations to climate, disease resistance, foraging ability, temperament --- that no commercial hybrid can replicate. To raise them is to keep a promise to the breeders who spent lifetimes perfecting them, and to the generations who will need the genetic diversity these breeds safeguard.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia"; Dohner (2001), "The Encyclopedia of Historic and Endangered Livestock and Poultry Breeds."*

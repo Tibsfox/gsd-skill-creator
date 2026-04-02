@@ -142,6 +142,32 @@ A board cut from a tree like that carries the memory of a millennium in its grai
 
 This is what it means to work with Pacific Northwest timber. You are working with material that was alive for centuries before you were born and that, properly cared for, will outlast you by centuries more. The forests that produced this timber were not a resource. They were — and where they survive, still are — an ecosystem of almost unimaginable complexity. The wood in your hands is a gift from that ecosystem. Use it with the respect it deserves.
 
+## Cross-References
+
+- **[WDC-01]** History — Coast Salish woodworking as a parallel tradition to Egyptian, Japanese, and European craft
+- **[WDC-02]** Wood Science — the mechanical properties (Janka hardness, bending strength, decay resistance) of PNW species in full technical context
+- **[WDC-06]** Finishing — species-specific finishing challenges for Douglas fir, cedar, and maple
+- **[WDC-08]** Construction Framing — Douglas fir as THE framing timber; cedar as THE exterior material
+- **[ECO-05]** Forest Ecology — the ecosystem that produces these species, the fire regimes that shaped them, and the succession dynamics that determine what grows where
+- **[ECO-09]** PNW Ecology — mycorrhizal networks, watershed dynamics, and the ecological role of dead wood that connects living forest to lumber supply
+- **[FSR-02]** Fire Service — wildland fire in PNW forests; the fuel accumulation that makes these forests burn
+- **[FSR-10]** PNW Departments — the communities built from this timber and the departments that protect them
+- **[PNT-03]** Visual Art — Coast Salish, Haida, and Tlingit carving traditions; totem poles and bentwood boxes as simultaneously art and woodcraft
+
+---
+
+## Sources and References
+
+- Stewart, Hilary. "Cedar: Tree of Life to the Northwest Coast Indians." Douglas & McIntyre, 1984.
+- Peattie, Donald Culross. "A Natural History of Western Trees." Houghton Mifflin, 1953.
+- Burns, Russell M. and Honkala, Barbara H. "Silvics of North America." USDA Forest Service, Agriculture Handbook 654, 1990.
+- Forest Products Laboratory. "Wood Handbook." USDA, FPL-GTR-190, 2010.
+- Green, Michael and Taggart, Jim. "Tall Wood: The Case for Tall Wood Buildings." MGA Architecture, 2017.
+- Forest Stewardship Council. fsc.org. Certification standards and certified wood sourcing.
+- Sustainable Forestry Initiative. sfiprogram.org.
+- Dietrich, William. "The Final Forest: Big Trees, Forks, and the Pacific Northwest." Penguin, 1992. (Spotted owl controversy)
+- Kirk, Ruth and Alexander, Carmela. "Exploring Washington's Past." University of Washington Press, 1990.
+
 ---
 
 *Previous: [Building Structures](08-construction-framing.md) | Next: [Cross-References and Bibliography](10-cross-references-bibliography.md)*

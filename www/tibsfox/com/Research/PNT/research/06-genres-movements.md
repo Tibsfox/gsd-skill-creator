@@ -2,7 +2,7 @@
 
 Research module PNT-06: a guided exploration of painting genres and major art movements, from classical portrait commissions to furry character illustration. Covers portrait, landscape, still life, abstract, illustration, wildlife art, miniature painting, and street art/murals. Connects historical traditions to living contemporary practice with emphasis on the Pacific Northwest and the furry creative community.
 
-**Cross-references:** [PNT-01] History, [PNT-02] Materials, [PNT-03] Color Theory, [PNT-04] Composition, [PNT-05] Tools & Surfaces, [FFA] Fur, Feathers & Animation Arts, [BLN] Blender, [BRC] Biodiversity.
+**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-05] Color Theory & Technique, [FFA] Fur, Feathers & Animation Arts, [FFA-10] Fursuit Makers Index, [BLN] Blender, [BRC] Biodiversity.
 
 ---
 

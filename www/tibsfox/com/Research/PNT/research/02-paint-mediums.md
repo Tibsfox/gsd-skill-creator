@@ -2,6 +2,12 @@
 
 ## Understanding What You're Actually Putting on the Surface
 
+Research module PNT-02: a comprehensive guide to every major paint medium, from oil and acrylic to encaustic, ink, airbrush, and digital. Includes pigment science, lightfastness ratings, and the direct connection between airbrush painting and fursuit fabrication.
+
+**Cross-references:** [PNT-01] History, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-05] Color Theory, [FFA-04] Fursuit Fabrication, [FFA-10] Fursuit Makers Index.
+
+---
+
 Every paint is the same thing: pigment held together by a binder. That is it. Pigment is the color — ground-up minerals, synthetic chemicals, organic compounds, carbon. Binder is the glue — the substance that holds the pigment particles together and adheres them to the surface. The binder is what defines the medium. Oil paint is pigment in drying oil. Watercolor is pigment in gum arabic. Acrylic is pigment in polymer emulsion. Encaustic is pigment in hot beeswax. Change the binder, change everything: drying time, texture, transparency, permanence, working properties, cleanup, and the entire experience of painting.
 
 This chapter walks through every major paint medium a contemporary painter might encounter, from the oldest to the newest, with enough practical detail to actually use them.
@@ -242,4 +248,19 @@ Modern synthetic alternatives exist for every toxic pigment. Cadmium-free altern
 
 There is no best painting medium. There is only the medium that serves what you want to make. Oil if you want slow, rich, deep color and do not mind solvents and long drying times. Acrylic if you want versatility, fast layering, and easy cleanup. Watercolor if you want luminous transparency and embrace the discipline of working light-to-dark with no forgiveness. Gouache if you want matte, opaque, illustration-ready color. Tempera if you want the Renaissance glow and have patience for crosshatching. Ink if the line is your primary language. Airbrush if you need smooth gradients and photographic precision. Digital if you want infinite undo and zero material cost.
 
-Most painters eventually work in more than one medium. Understanding them all — even the ones you do not use regularly — makes you a better painter in the ones you do, because you understand what pigment and binder actually do, and you can choose your tools with informed intent rather than habit.
+Most painters eventually work in more than one medium. Understanding them all -- even the ones you do not use regularly -- makes you a better painter in the ones you do, because you understand what pigment and binder actually do, and you can choose your tools with informed intent rather than habit.
+
+---
+
+## Sources
+
+- Mayer, R. (1991). *The Artist's Handbook of Materials and Techniques*. 5th ed. Viking.
+- Gottsegen, M.D. (2006). *The Painter's Handbook*. Watson-Guptill.
+- Doerner, M. (1984). *The Materials of the Artist*. Harcourt Brace.
+- Wehlte, K. (1975). *The Materials and Techniques of Painting*. Van Nostrand Reinhold.
+- Golden Artist Colors. "Technical Application Information." goldenpaints.com.
+- Gamblin Artists Colors. "Oil Painting Resources." gamblincolors.com.
+- Winsor & Newton. "Professional Product Guides." winsornewton.com.
+- Daniel Smith. "Watercolor Product Information." danielsmith.com.
+- Colour Index International. "Pigment Index Database." colour-index.com.
+- ASTM International. "Standard Test Methods for Lightfastness of Colorants." ASTM D4303.
