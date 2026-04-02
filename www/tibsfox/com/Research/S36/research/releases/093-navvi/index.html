@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 93&deg; &mdash; NAVVI &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .shimmer-card {
+      background: linear-gradient(135deg, #311B92 0%, #4527A0 50%, #512DA8 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EDE7F6;
+    }
+    .shimmer-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #B39DDB;
+      font-family: system-ui, sans-serif;
+    }
+    .shimmer-card p {
+      color: #EDE7F6;
+      margin: 0.5rem 0;
+    }
+    .shimmer-card strong {
+      color: #D1C4E9;
+    }
+
+    .duo-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .duo-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #90CAF9;
+      font-family: system-ui, sans-serif;
+    }
+    .duo-card p {
+      color: #E3F2FD;
+      margin: 0.5rem 0;
+    }
+    .duo-card strong {
+      color: #BBDEFB;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>093 &mdash; NAVVI</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Dream Pop/Electronic &mdash; Genre Stage 75 &mdash; Self-Released &mdash; E=3 &mdash; Seattle</h3>
+      <p>
+        <strong>NAVVI</strong> &mdash; Seattle dream pop/electronic duo of
+        <strong>Ben Shepard</strong> and <strong>Rain Shepard</strong>.
+        Atmospheric, reverb-laden electronic pop with ethereal vocals.
+        Self-released. The shimmer veil &mdash; reverb as architecture,
+        atmosphere as composition.
+        <strong>Dream Pop/Electronic</strong> at Genre Stage 75.
+        <strong>E=3</strong>.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">93&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">NAVVI</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Dream Pop / Electronic</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 75</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Shimmer Veil Card -->
+        <div class="shimmer-card">
+          <h4>The Shimmer Veil &mdash; Reverb as Architecture</h4>
+          <p>
+            <strong>NAVVI</strong> makes music that shimmers behind a veil of atmosphere.
+            Reverb-laden electronic production where the <strong>vocal sits inside the texture</strong>
+            rather than on top of it. The boundary between voice and synthesizer is
+            <strong>deliberately blurred</strong>. The reverb is not an effect &mdash;
+            it is the compositional space. The shimmer veil is the 94th acoustic element
+            in the Seattle 360 engine.
+          </p>
+        </div>
+
+        <!-- Duo Card -->
+        <div class="duo-card">
+          <h4>The Duo &mdash; Ben Shepard &amp; Rain Shepard</h4>
+          <p>
+            Two people. <strong>Ben Shepard</strong> and <strong>Rain Shepard</strong>.
+            The duo format is the minimum viable unit for dream pop/electronic &mdash;
+            one voice, one production environment, the interplay between vocal and texture
+            reduced to its essential conversation. <strong>Self-released</strong> &mdash;
+            no label intermediary, full creative control, direct-to-listener.
+          </p>
+        </div>
+
+        <!-- Engine Events Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 75 &middot; Dream Pop/Electronic &middot; E=3 &middot; 94th Acoustic Element &middot; 94th Pattern</h4>
+          <p>
+            <strong>NAVVI</strong> enters at Genre Stage 75 with Dream Pop/Electronic.
+            <strong>E=3</strong> &mdash; atmospheric presence at intimate scale.
+            The 94th acoustic element (the shimmer veil). The 94th artist-city pattern (the intimate machine).
+            Four electronic entries in eight degrees (86, 90, 91, 93).
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 75: Dream Pop/Electronic</h2>
+          <p>
+            Degree 93 reaches <strong>Genre Stage 75</strong>. <strong>Dream Pop/Electronic</strong>
+            describes NAVVI&rsquo;s music: atmospheric synthesizers, heavy reverb, layered vocals
+            dissolving into texture, the boundary between voice and instrument deliberately blurred.
+            Distinguished from <strong>Ethereal/Electronic</strong> (Sky Cries Mary, degree 90) &mdash;
+            NAVVI is more song-oriented, more pop-influenced. Distinguished from <strong>Electronic Pop</strong>
+            (Postal Service, degree 86) &mdash; NAVVI dissolves structure into atmosphere where the Postal
+            Service maintains clear structure.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 94: The Shimmer Veil</h2>
+          <p>
+            The <strong>shimmer veil</strong> is the ninety-fourth acoustic element. It describes
+            NAVVI&rsquo;s sound &mdash; reverb-laden electronic production where the vocal sits
+            inside the texture rather than on top of it, where the song shimmers behind a veil
+            of atmosphere. The reverb is not an effect; it is the compositional space.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>ambient drift</strong> (91st element,
+            Sky Cries Mary at 90) was slowly evolving sonic landscape. The shimmer veil is
+            more song-structured &mdash; verses and choruses exist, but they shimmer behind
+            reverb rather than standing in front of it.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 94: The Intimate Machine</h2>
+          <p>
+            The <strong>intimate machine</strong> is the ninety-fourth artist-city pattern.
+            It describes a duo or small unit that uses electronic production as the medium
+            for emotional intimacy &mdash; the machine serves the intimate rather than the
+            spectacular. NAVVI&rsquo;s electronic production creates closeness, not distance.
+            The synthesizers whisper. The reverb creates a shared space rather than an empty cathedral.
+          </p>
+          <blockquote>
+            The intimate machine is the opposite of arena-scale electronic music &mdash;
+            it is bedroom-scale electronic music made for headphones and dark rooms.
+            The machine serves the intimate. The electronic production creates closeness.
+            Two people making something beautiful for close listeners.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Shimmer Veil</h4>
+              <span class="level advanced">Advanced</span>
+              <p>94th acoustic element. Reverb-laden
+              electronic production. Vocals inside
+              texture. Atmosphere as composition.
+              Reverb as architecture.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Intimate Machine</h4>
+              <span class="level advanced">Advanced</span>
+              <p>94th artist-city pattern. Electronic
+              production as medium for emotional
+              intimacy. Bedroom-scale. The machine
+              serves the intimate.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Dream Pop/Electronic</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Genre Stage 75. Reverb-laden,
+              atmospheric, song-structured.
+              Ethereal vocals inside electronic
+              production.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Self-Released Model</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>No label. Direct-to-listener.
+              Full creative control. Distribution
+              model diversity expands.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">090</span>
+              <strong>Sky Cries Mary</strong> &mdash;
+              Ethereal/electronic connection. Both atmospheric, both ethereal. Sky Cries Mary ambient/psychedelic (1990s); NAVVI dream pop/song-oriented (2010s). Different eras, shared ethereal territory.
+            </li>
+            <li>
+              <span class="ref-degree">072</span>
+              <strong>Briana Marela</strong> &mdash;
+              Layered/ethereal parallel. Both dissolve the boundary between voice and texture. Marela uses looping; NAVVI uses reverb and production. Both intimate.
+            </li>
+            <li>
+              <span class="ref-degree">056</span>
+              <strong>Lemolo</strong> &mdash;
+              Dream haze connection. Both inhabit dream pop space. NAVVI more electronic; Lemolo more guitar-driven. Both reverb-laden, ethereal, song-structured.
+            </li>
+            <li>
+              <span class="ref-degree">091</span>
+              <strong>Hovercraft</strong> &mdash;
+              Drone/electronic contrast. Hovercraft is pure texture, maximalist drone. NAVVI has vocals dissolved into atmosphere. Both electronic; confrontational vs intimate.
+            </li>
+            <li>
+              <span class="ref-degree">086</span>
+              <strong>The Postal Service</strong> &mdash;
+              Electronic pop contrast. Postal Service is structured electronic pop. NAVVI dissolves structure into atmosphere. Both electronic; different relationships to clarity.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">93&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Dream Pop/Electronic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">75</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-Released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Members</span>
+            <span class="stat-value">Ben &amp; Rain Shepard</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">94th</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">94th</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Run</span>
+            <span class="stat-value">86, 90, 91, 93</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
