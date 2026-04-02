@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-02T13:15:00Z",
-  "source": "sweep-v1.2.6.2",
+  "updated": "2026-04-02T23:55:00Z",
+  "source": "sweep-v1.2.16.5",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
-    "phase": "orbit",
-    "status": "FLIGHT DAY 2 \u2014 MET +12:55 \u2014 Crew awake, prepping PRM #2. Toilet fixed overnight. Schedule: PRM morning, crew sleep ~6:40 AM PDT, TLI ~5 PM PDT. Integrity in 115 x 43,760 mi orbit. KPAE 5.0°C CLR calm, pressure 999.6 recovering.",
+    "phase": "translunar",
+    "status": "TRANSLUNAR COAST \u2014 MET +1d 01:20 \u2014 TLI COMPLETE. 5m49s burn nominal. Integrity is on a free-return trajectory to the Moon at ~24,500 mph. First humans to leave Earth orbit since December 19, 1972. 3-day coast to lunar closest approach. The space between the Moon and the Earth \u2014 they are in it now.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -100,6 +100,30 @@
   },
   "telemetry": null,
   "announcements": [
+    {
+      "time": "2026-04-02T17:30:00Z",
+      "text": "v1.2.10: MET+18:55 10:30am PDT. PRM #2 complete (43s burn, SM main engine, 7:06 AM EDT wake-up to 'Sleepyhead' by Young and Sick). Crew resting 4.5h. TLI at 7:49 PM EDT (4:49 PM PDT): 5m51s burn, 1272 ft/s delta-v. Mission management GO/NO-GO meeting pending. M4.6 Boulder Creek earthquake at 01:41 AM on Sam's territory. USGS Observatory + PNW Daily news page launched."
+    },
+    {
+      "time": "2026-04-02T14:06:00Z",
+      "text": "BACKFILL MET+15:31 7:06am EDT: Crew wake-up. Song: 'Sleepyhead' by Young and Sick. PRM #2 prep begins. Crew checks spacecraft systems."
+    },
+    {
+      "time": "2026-04-02T14:30:00Z",
+      "text": "BACKFILL MET+15:55: PRM #2 COMPLETE. Service module main engine fired 43 seconds. Perigee raised, orbit stabilized for TLI approach. Crew returns to rest for 4.5 hours."
+    },
+    {
+      "time": "2026-04-02T08:41:25Z",
+      "text": "BACKFILL: M4.6 EARTHQUAKE Boulder Creek, CA (nc75337442). 1 km ESE Boulder Creek, depth 10.85 km. 25,658 felt reports. San Andreas fault, strike-slip + reverse. Largest event on Loma Prieta segment since 1989 M6.9. Sam's territory \u2014 Kings Creek Road."
+    },
+    {
+      "time": "2026-04-02T05:00:00Z",
+      "text": "BACKFILL MET+06:25: Crew 4-hour nap period. Prox ops complete. Toilet fixed. ICPS deorbited Pacific. Integrity solo in 115 x 43,760 mi orbit. KPAE overnight rain \u2014 0.97 inches April 1, continuing into April 2."
+    },
+    {
+      "time": "2026-04-02T03:00:00Z",
+      "text": "BACKFILL MET+04:25 8pm PDT: Prox ops demo COMPLETE (70 min). Glover manually piloted Integrity within 30 ft of ICPS. Docking camera nav data gathered. ICPS disposal burn set. Press conference: Administrator Isaacman \u2014 crew 'safe, secure, in great spirits.' Toilet fault light resolved."
+    },
     {
       "time": "2026-04-02T00:10:00Z",
       "text": "v1.1.17.4: L+2h48m 6:23pm. ARB COMPLETE \u2014 18-min RL10 burn, apogee now 43,760 mi (70,426 km). Highest humans since Apollo 17 Dec 1972. ICPS sep imminent, 70-min prox ops demo: automated backflip, halt at 300ft, manual approach to 30ft, fine handling with RCS thrusters, then automated departure. Toilet fault light reported \u2014 under investigation. ICPS will deorbit to Pacific after sep. KPAE 10.8°C RA OVC020. Erdős #19 updated: EFL proved large n, GPU gap = small n verification."
