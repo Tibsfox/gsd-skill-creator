@@ -1,0 +1,123 @@
+{
+  "degree": 101,
+  "species": "Common Raven pair",
+  "scientific_name": "Corvus corax",
+  "slug": "101-raven-pair",
+  "sound_type": "coordinated duet vocalizations -- male and female calling in synchronized territorial displays",
+  "energy": 5,
+  "ecosystem": "Open forest. Territorial. Pair-bonded ravens defending territory through coordinated vocal display.",
+  "season": "Year-round. Duets most intense during breeding season and territorial disputes.",
+  "family": "Corvidae (2nd consecutive, 100-101)",
+  "order": "Passeriformes",
+  "csv_substitute": false,
+  "original_species": "Common Raven pair",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.75,
+    "lon": -122.30,
+    "description": "Reference for PNW raven territory. Open forest, mountain ridges, coastal cliffs."
+  },
+  "taxonomy_note": {
+    "description": "SPECIES PAIR (100-101). Second consecutive Corvidae. Same species as degree 100, different acoustic framing. Third species-pair in the engine (Flicker 21-22, Beaver 61-62, Raven 100-101). Solo voice at 100, coordinated duet at 101.",
+    "current_class": "Aves",
+    "new_class": false,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Same species as degree 100. Species-pair entry.",
+    "current_family": "Corvidae (2nd consecutive)",
+    "new_family": false,
+    "family_count_in_engine": 49,
+    "name_etymology": "Same as degree 100. Corvus from Latin ('raven'). corax from Greek ('raven').",
+    "genus_note": "Corvus -- same as degree 100. The raven pair is two individuals of the same species.",
+    "order_note": "Passeriformes -- songbirds. Same as degree 100.",
+    "class_note": "Aves -- second consecutive bird entry (100-101). Aves returned at degree 100.",
+    "family_position": "Corvidae second consecutive (100-101). First consecutive same-family since Beaver (61-62)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Male: 200-800 Hz (deep cronk range). Female: 250-1000 Hz (slightly higher). Combined duet spans both ranges with harmonic interplay.",
+    "peak_energy_band_hz": "Combined duet: 300-800 Hz. The overlapping frequency ranges of male and female create a richer combined energy band.",
+    "song_frequency_hz": "Variable. Duets occur during territorial disputes, pair-bond maintenance, and breeding season. Can be frequent during territorial challenges.",
+    "song_duration_s": "Individual duet bouts: 5-30 seconds. Extended territorial displays: minutes. Alternating patterns can sustain display for extended periods.",
+    "note_structure": "Coordinated: synchronized, alternating, and overlapping calls. Male and female contribute different tones creating complex combined structure.",
+    "note_types": "Synchronized cronks, alternating calls, overlapping bell-like tones, coordinated gargling, harmonic interplay between male (deeper) and female (higher) voices.",
+    "phrase_structure": "Duet structure: synchronized calling (both together), alternating exchange (male-female-male-female), overlapping calls (staggered timing). The structure varies by context.",
+    "timbre": "Combined: richer than either voice alone. Male deep cronk plus female slightly higher tones create a two-register timbre. Harmonic interplay adds complexity.",
+    "amplitude": "E=5. Two voices louder than one. Synchronization amplifies perceived impact. Greater persistence through alternation. Combined territorial force.",
+    "tempo": "Variable. Rapid alternation during intense territorial disputes. Slower, more deliberate exchanges during pair-bond maintenance.",
+    "context": "TERRITORIAL DEFENSE (primary). Pair-bond maintenance. Coordinated response to intruders. Breeding season displays.",
+    "regional_variation": "Pair duet coordination may vary by region and individual pair-bond history. Long-term pairs may develop more tightly synchronized duets.",
+    "key_property": "COORDINATED DUET VOCALIZATIONS -- 101st acoustic element (species side). Male and female synchronized in territorial display. E=5. Species-pair with degree 100. Second consecutive Corvidae. Third species-pair in engine. 41st consecutive original CSV."
+  },
+  "plumage": {
+    "overall": "Same as degree 100. Entirely black with iridescent sheen. In pair context: side-by-side, the pair is visually impressive -- two large, commanding black birds in coordinated display.",
+    "diagnostic_mark": "Same as degree 100. When a pair: two large black birds soaring, vocalizing, and displaying in tight coordination.",
+    "seasonal_variation": "None. Year-round black.",
+    "flight_pattern": "Coordinated pair flight. Parallel soaring. Synchronized aerial acrobatics. Tandem territorial patrol."
+  },
+  "physical_description": {
+    "overall": "Same as degree 100. Two largest passerines in coordinated display.",
+    "diagnostic_mark": "Pair identification: two large ravens in tight spatial association, vocalizing in coordination.",
+    "fur_detail": null,
+    "skin_detail": null,
+    "dental_detail": null,
+    "field_id": "Two very large black birds flying, perching, or displaying together. Both with wedge-shaped tails, heavy bills, shaggy throat feathers. Coordinated vocalizations -- synchronized or alternating deep cronks, bell tones, and knocks. If two ravens are calling together in apparent coordination, you are witnessing a pair duet."
+  },
+  "nodes": [
+    {
+      "id": "raven-duet",
+      "type": "concept",
+      "title": "Coordinated Duet Vocalizations -- 101st Acoustic Element (species side)",
+      "description": "Male and female ravens calling in synchronized territorial displays. Alternating, overlapping, and harmonic coordination. E=5. Louder and more complex than the solo voice.",
+      "connections": ["corvidae-consecutive", "species-pair-precedent", "hecuba-contrast"]
+    },
+    {
+      "id": "corvidae-consecutive",
+      "type": "pattern",
+      "title": "Second Consecutive Corvidae (100-101)",
+      "description": "Same family for two consecutive degrees. Corvidae is establishing territory in the engine. Solo raven at 100, raven pair at 101.",
+      "connections": ["raven-duet", "species-pair-precedent"]
+    },
+    {
+      "id": "species-pair-precedent",
+      "type": "pattern",
+      "title": "Species-Pair Precedent (Flicker 21-22, Beaver 61-62, Raven 100-101)",
+      "description": "Third species-pair. Same species, consecutive degrees, different acoustic framing. Solo then pair. The pattern is structural and proven.",
+      "connections": ["raven-duet", "corvidae-consecutive"]
+    },
+    {
+      "id": "hecuba-contrast",
+      "type": "pattern",
+      "title": "The Hecuba Contrast -- Both Duos, Both E=5, Both Territorial",
+      "description": "Part A duo (Hecuba, electronic dance) and Part B pair (Ravens, territorial duet). Both E=5. Both coordinated pairs making noise. Electronic and biological duets.",
+      "connections": ["raven-duet"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-100",
+      "species": "Common Raven",
+      "relationship": "SPECIES PAIR! Same species, consecutive degrees. Solo raven at 100 (E=4, 30+ call types). Raven pair at 101 (E=5, coordinated duets). Third species-pair in the engine."
+    },
+    {
+      "target": "SPS-053",
+      "species": "Steller's Jay",
+      "relationship": "CORVIDAE FAMILY. Same family. Steller's Jay introduced Corvidae at 53. Raven pair at 101 is Corvidae's second consecutive degree. Both vocal corvids."
+    },
+    {
+      "target": "SPS-021",
+      "species": "Northern Flicker",
+      "relationship": "SPECIES-PAIR PRECEDENT. Flicker pair (21-22) was the first species-pair. Solo drumming then duet drumming. Same pattern as Raven solo (100) and Raven pair (101)."
+    },
+    {
+      "target": "SPS-061",
+      "species": "American Beaver",
+      "relationship": "SPECIES-PAIR PRECEDENT. Beaver pair (61-62) was the second species-pair. Now Raven pair (100-101) is the third. Three species-pairs across 101 degrees."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "TERRITORIAL PAIR VOCALIZATIONS. Both species where pairs vocalize together for territorial defense. Owl pairs duet quietly. Raven pairs duet loudly. Both intelligent. Both long-lived."
+    }
+  ]
+}
