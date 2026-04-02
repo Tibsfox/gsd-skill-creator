@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 84&deg; &mdash; Damien Jurado (Late Career) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card .level.landmark { background: #FFEBEE; color: #B71C1C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .return-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .return-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+      font-family: system-ui, sans-serif;
+    }
+    .return-card p {
+      color: #ECEFF1;
+      margin: 0.5rem 0;
+    }
+    .return-card strong {
+      color: #CFD8DC;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>084 &mdash; Damien Jurado (Late Career)</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>The Return &mdash; Folk &mdash; Genre Stage 66 &mdash; Secretly Canadian Records &mdash; E=2 &mdash; Second Artist to Appear Twice</h3>
+      <p>
+        Damien Jurado RETURNS at degree 84&deg; in <strong>LATE CAREER</strong> context
+        &mdash; he first appeared at degree 45 (the murmur, the first folk-zone artist).
+        Now at degree 84, Jurado returns with his late-career albums on
+        <strong>Secretly Canadian Records</strong> (new label). The <strong>SECOND</strong>
+        artist to appear twice with different contextual framings (after Death Cab 58/82).
+        <strong>Folk</strong> at Genre Stage 66. <strong>E=2</strong>. Even more stripped-down
+        than his early work.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">84&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Damien Jurado <span style="font-size: 0.9rem; font-weight: 400; color: #757575;">(Late Career)</span></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Secretly Canadian</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 66</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Return Card -->
+        <div class="return-card">
+          <h4>Damien Jurado Returns &mdash; Second Artist to Appear Twice</h4>
+          <p>
+            <strong>Degree 45:</strong> Damien Jurado (early career) &mdash; Folk, E=2, Sub Pop Records. The murmur. The first folk-zone artist in the engine.<br>
+            <strong>Degree 84:</strong> Damien Jurado (late career) &mdash; Folk, E=2, Secretly Canadian Records. The late whisper. Even more stripped-down.
+          </p>
+          <p>
+            Damien Jurado is the <strong>SECOND artist to appear twice</strong> with different
+            contextual framings, after Death Cab for Cutie (58/82). Where Death Cab&rsquo;s return
+            shifted genre (Indie Rock to Indie Folk), Jurado&rsquo;s return keeps the same genre (Folk)
+            but shifts the <strong>label, era, and emotional register</strong>. The early Jurado was
+            the murmur &mdash; quiet intensity waiting to unfold. The late Jurado is the whisper
+            &mdash; quiet certainty that has nothing left to prove.
+          </p>
+        </div>
+
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 66 &middot; Folk &middot; E=2 &middot; Secretly Canadian &middot; Second Return Artist &middot; 85th Acoustic Element &middot; 85th Pattern</h4>
+          <p>
+            <strong>Damien Jurado (late career)</strong> enters the engine as the second
+            returning artist. <strong>Folk</strong> at Genre Stage 66.
+            <strong>E=2</strong> &mdash; the same energy as his first appearance (45),
+            the quietest register. The 85th acoustic element. The 85th artist-city pattern.
+            <strong>Secretly Canadian Records</strong> (new label, first appearance in engine).
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 66: Folk &mdash; The Same Genre, Deeper</h2>
+          <p>
+            Degree 84 reaches <strong>Genre Stage 66</strong>. Damien Jurado&rsquo;s late career
+            remains <strong>Folk</strong> &mdash; the same genre as degree 45. But the Folk
+            has deepened. The early albums on Sub Pop had occasional electric textures,
+            band arrangements, experiments with lo-fi production. The late albums on Secretly
+            Canadian are <strong>even more stripped-down</strong> &mdash; acoustic guitar,
+            voice, minimal accompaniment. <em>In the Shape of a Storm</em> (2019) is
+            solo voice and guitar. <em>The Monster Who Hated Pennsylvania</em> (2022) is
+            sparse and unhurried.
+          </p>
+          <p>
+            The same genre, but the late career has shed everything that was not essential.
+            What remains is the song and the voice. Nothing else.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Secretly Canadian Records &mdash; First Appearance</h2>
+          <p>
+            Jurado moved to <strong>Secretly Canadian Records</strong> for his late-career
+            albums, leaving Sub Pop after his early period. Secretly Canadian is an
+            independent label based in Bloomington, Indiana, known for artist-friendly
+            practices and a catalog of thoughtful, often quiet music. This is the label&rsquo;s
+            <strong>first appearance</strong> in the engine. The label shift from Sub Pop
+            (Seattle) to Secretly Canadian (Indiana) mirrors Jurado&rsquo;s trajectory:
+            from the Seattle scene to a more solitary, national folk space.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Late-Career Albums</h2>
+          <p>
+            <strong><em>In the Shape of a Storm</em> (2019):</strong> Solo voice and acoustic
+            guitar. Nine songs. No band, no overdubs, no production. Jurado alone in a room
+            with a guitar. The most stripped-down album of his career. Each song is a
+            direct transmission &mdash; voice to microphone to listener.
+          </p>
+          <p>
+            <strong><em>The Monster Who Hated Pennsylvania</em> (2022):</strong> Sparse
+            arrangements. Acoustic guitar, occasional piano, whispered vocals. The songs
+            are unhurried &mdash; they take their time. The production is so minimal that
+            the room itself becomes part of the recording.
+          </p>
+          <p>
+            The late-career Jurado has achieved what the early-career Jurado was reaching
+            toward: total reduction. Nothing is left except what is necessary. The murmur
+            (degree 45) has become a whisper (degree 84). The whisper says more.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 85: The Late Whisper</h2>
+          <p>
+            The <strong>late whisper</strong> is the eighty-fifth acoustic element in the
+            Seattle 360 engine. It describes the sound that emerges when an artist who was
+            already quiet becomes even quieter over decades of work. The early Jurado (45)
+            was the murmur &mdash; quiet intensity. The late Jurado (84) is the whisper &mdash;
+            quiet certainty. The difference is not volume but <strong>confidence</strong>.
+            The murmur was reaching. The whisper has arrived.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>grunge whisper</strong> (84th element,
+            Pearl Jam at 83) is arena power compressed. The late whisper is folk intimacy
+            <strong>deepened</strong>. Both are whispers. One compresses power. The other
+            distills presence. From the loudest band unplugged to the quietest songwriter
+            in even greater silence.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 85: The Artist Arc</h2>
+          <p>
+            The <strong>artist arc</strong> is the eighty-fifth artist-city pattern in the
+            Seattle 360 engine. It describes the same artist appearing at two points in
+            the engine separated by decades of creative evolution. Degree 45 and degree 84 &mdash;
+            39 degrees apart. The early career and the late career. The same voice, the same
+            genre, the same E=2 &mdash; but decades of life between them.
+          </p>
+          <blockquote>
+            The artist arc is not return &mdash; it is continuation. The artist at 84 is
+            the same person as the artist at 45, but with 25 more years of songwriting,
+            three label changes, and a deeper relationship with silence. The songs are
+            not louder or more complex. They are simpler. The arc bends toward
+            essential truth.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Late Whisper</h4>
+              <span class="level advanced">Advanced</span>
+              <p>85th acoustic element. Already-quiet artist
+              becomes even quieter over decades. Murmur (45)
+              to whisper (84). Not volume but confidence.
+              Reaching vs. arriving.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Artist Arc</h4>
+              <span class="level advanced">Advanced</span>
+              <p>85th artist-city pattern. Same artist at
+              two points separated by decades. 45 and 84.
+              Same voice, same genre, same E=2. The arc
+              bends toward essential truth.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Second Return Artist</h4>
+              <span class="level landmark">Landmark</span>
+              <p>Damien Jurado is the SECOND artist to appear
+              twice (after Death Cab 58/82). Same genre (Folk)
+              but different label, era, emotional register.
+              The murmur becomes the whisper.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk at Genre Stage 66</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>66th genre classification. Same genre as
+              degree 45. But deeper &mdash; late career sheds
+              everything non-essential. Solo voice and guitar.
+              Total reduction.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 &mdash; The Same Quiet</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Same E=2 as degree 45. The energy does not
+              change across the arc. Jurado was quiet at 45.
+              He is quiet at 84. The consistency of the whisper.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Secretly Canadian &mdash; First Appearance</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>First Secretly Canadian artist. New label.
+              Shift from Sub Pop (45) to Secretly Canadian
+              (84) mirrors the trajectory from scene
+              to solitude.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">045</span>
+              <strong>Damien Jurado</strong> &mdash; Original entry.
+              Folk at E=2. Sub Pop Records. The murmur. The first folk-zone
+              artist. Degree 84 is the same artist 39 degrees later &mdash;
+              same genre, same energy, different label, deeper silence.
+            </li>
+            <li>
+              <span class="ref-degree">047</span>
+              <strong>Pedro the Lion</strong> &mdash; Folk zone.
+              Both in the folk zone (45, 47). Both quiet Seattle singer-songwriters.
+              Pedro the Lion at E=2. The folk-zone trio: Jurado (45),
+              Pedro (47), Jurado late (84).
+            </li>
+            <li>
+              <span class="ref-degree">068</span>
+              <strong>Sam Beam</strong> &mdash; Quiet folk.
+              Both E=2. Both stripped-down folk. Both acoustic guitar and voice.
+              Beam&rsquo;s warmth and Jurado&rsquo;s whisper &mdash; two
+              approaches to the quietest folk register.
+            </li>
+            <li>
+              <span class="ref-degree">071</span>
+              <strong>Phil Elverum</strong> &mdash; Atmospheric.
+              Both quiet Seattle artists. Elverum&rsquo;s atmospheric textures
+              and Jurado&rsquo;s total reduction &mdash; two approaches to
+              minimal folk, one through atmosphere, one through absence.
+            </li>
+            <li>
+              <span class="ref-degree">076</span>
+              <strong>Chris Pureka</strong> &mdash; Quiet folk E=2.
+              Both E=2. Both the quietest folk register. Pureka&rsquo;s
+              gender-fluid voice and Jurado&rsquo;s late-career whisper &mdash;
+              two voices at the same energy, different journeys.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Secretly Canadian Records &mdash; Damien Jurado discography.</li>
+            <li>Damien Jurado &mdash; <em>In the Shape of a Storm</em> (2019).</li>
+            <li>Damien Jurado &mdash; <em>The Monster Who Hated Pennsylvania</em> (2022).</li>
+            <li>AllMusic &mdash; Damien Jurado biography and late-career albums.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">84&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Secretly Canadian</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Context</span>
+            <span class="stat-value">Late Career</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">66</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">85th Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">85th Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Secretly Can.</span>
+            <span class="stat-value">1st artist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Return</span>
+            <span class="stat-value">2nd return artist</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Jurado Arc</h4>
+          <div class="stat-row">
+            <span class="stat-label">045</span>
+            <span class="stat-value">Early (E=2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">084</span>
+            <span class="stat-value">Late (E=2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gap</span>
+            <span class="stat-value">39 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label shift</span>
+            <span class="stat-value">Sub Pop &rarr; SC</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Late Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label">Storm</span>
+            <span class="stat-value">2019</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Monster</span>
+            <span class="stat-value">2022</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
