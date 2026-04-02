@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 78&deg; &mdash; Townsend&rsquo;s Ground Squirrel &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Quartet card */
+    .quartet-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #795548 100%);
+      border: 3px solid #3E2723;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .quartet-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BCAAA4;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quartet-card p {
+      color: #EFEBE9;
+    }
+    .quartet-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Grassland card */
+    .grassland-card {
+      background: linear-gradient(135deg, #827717 0%, #9E9D24 50%, #AFB42B 100%);
+      border: 2px solid #827717;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F9FBE7;
+    }
+    .grassland-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E6EE9C;
+    }
+    .grassland-card p {
+      color: #F9FBE7;
+    }
+    .grassland-card strong {
+      color: #DCEDC8;
+    }
+
+    /* Townsend card */
+    .townsend-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #42A5F5 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .townsend-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .townsend-card p {
+      color: #E3F2FD;
+    }
+    .townsend-card strong {
+      color: #90CAF9;
+    }
+
+    /* Acid Tongue parallel card */
+    .acid-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .acid-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .acid-card p {
+      color: #E8EAF6;
+    }
+    .acid-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.quartet { background: #4E342E; }
+    .theory-icon.trill { background: #1565C0; }
+    .theory-icon.grassland { background: #827717; }
+    .theory-icon.townsend { background: #37474F; }
+    .theory-icon.predator { background: #BF360C; }
+    .theory-icon.acid-link { background: #283593; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">78&deg;</div>
+      <div class="release-title-block">
+        <h2>Townsend&rsquo;s Ground Squirrel</h2>
+        <div class="scientific">Urocitellus townsendii</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      chirping trill alarm &mdash; FOURTH CONSECUTIVE SCIURIDAE (75&ndash;76&ndash;77&ndash;78), the Sciuridae QUARTET! Matches Mustelidae quartet (63&ndash;66). From marmots (75&ndash;77) to ground squirrel (78). NEW HABITAT: open grassland &mdash; first true grassland species. Named after John Kirk Townsend (1834). E=4, eighteenth consecutive original CSV
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Quartet Card -->
+        <div class="quartet-card">
+          <h3>The Sciuridae Quartet &mdash; Matches the Mustelidae Record</h3>
+          <p>FOURTH consecutive Sciuridae: <strong>Yellow-bellied Marmot</strong> (75), <strong>Hoary Marmot</strong> (76), <strong>Olympic Marmot</strong> (77), <strong>Townsend&rsquo;s Ground Squirrel</strong> (78). Four consecutive Sciuridae &mdash; <strong>matching the Mustelidae quartet</strong> (63&ndash;66). From marmots (75&ndash;77) to ground squirrel (78) &mdash; same family, different genus, different habitat. The longest family run in the engine is now <strong>TIED</strong>.</p>
+        </div>
+
+        <!-- Grassland Card -->
+        <div class="grassland-card">
+          <h3>First True Grassland Species &mdash; New Habitat</h3>
+          <p>The Townsend&rsquo;s Ground Squirrel is the engine&rsquo;s <strong>first true grassland species</strong>. After four consecutive alpine degrees (74&ndash;77), degree 78 descends to <strong>open grassland</strong> &mdash; sagebrush steppe, bunchgrass prairies, agricultural fields. The alpine run ends. A new habitat opens. The engine diversifies downward.</p>
+        </div>
+
+        <!-- Townsend Historical Card -->
+        <div class="townsend-card">
+          <h3>Named for John Kirk Townsend (1834)</h3>
+          <p>Named after <strong>John Kirk Townsend</strong>, a Philadelphia naturalist who explored the <strong>Columbia River region in 1834</strong> with Thomas Nuttall on the Nathaniel Wyeth expedition. Townsend collected bird and mammal specimens that became foundational to PNW natural history. The ground squirrel was described from his specimens by Bachman in 1839.</p>
+        </div>
+
+        <!-- Acid Tongue Parallel Card -->
+        <div class="acid-card">
+          <h3>The Acid Tongue Parallel</h3>
+          <p>Degree 78 pairs Townsend&rsquo;s Ground Squirrel with <strong>Acid Tongue</strong> in Part A &mdash; Folk/Indie, E=3, communal band. Both <strong>communal</strong> &mdash; the squirrel in colonial burrow systems, the band in porch-party music-making. Both <strong>shift habitat</strong> &mdash; the squirrel from alpine to grassland, the band from solo to communal format. Both <strong>at ground level</strong> &mdash; literally underground (burrows) and figuratively underground (DIY scene).</p>
+        </div>
+
+        <h2>The Sound: Chirping Trill Alarm (79th Acoustic Element)</h2>
+        <p><strong>The trill:</strong> A rapid, high-pitched chirping trill &mdash; a series of short, sharp notes delivered in rapid succession, approximately 4,000&ndash;8,000 Hz, 0.5&ndash;2.0 seconds duration. The trill has a stuttering, machine-gun quality &mdash; faster and more repetitive than the marmots&rsquo; calls [1, 2, 3].</p>
+        <p><strong>Why E=4:</strong> (1) Volume &mdash; audible at 100&ndash;200 meters across open grassland. (2) Rapidity &mdash; the chirping trill is delivered fast, creating urgency. (3) Colonial context &mdash; triggers colony-wide alarm response. (4) Open habitat &mdash; calls carry well across flat, treeless grassland.</p>
+        <p><strong>Sciuridae quartet contrast:</strong> Yellow-bellied (75): chirp, E=4. Hoary (76): whistle, E=5. Olympic (77): multi-note, E=4. Townsend&rsquo;s (78): chirping trill, E=4. Four Sciuridae, four acoustic signatures.</p>
+
+        <h2>Taxonomy: <em>Urocitellus townsendii</em></h2>
+        <p><strong>Etymology:</strong> <em>Urocitellus</em> from Greek <em>oura</em> (&ldquo;tail&rdquo;) + <em>citellus</em> (&ldquo;ground squirrel&rdquo;). <em>townsendii</em> honors John Kirk Townsend. Described by Bachman (1839) from Townsend&rsquo;s Columbia River specimens [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Rodentia</strong>. Family <strong>Sciuridae</strong> &mdash; FOURTH consecutive (75&ndash;78). Genus <em>Urocitellus</em> &mdash; NEW GENUS in the engine. From <em>Marmota</em> (75&ndash;77) to <em>Urocitellus</em> (78). Ground squirrels, not marmots [1, 2].</p>
+
+        <h2>Ecology: The Grassland Colonist</h2>
+        <p><strong>Habitat:</strong> Open grassland, sagebrush steppe, bunchgrass prairie, agricultural fields. Low elevation &mdash; 200&ndash;1,500 meters. The OPPOSITE of alpine. First true grassland species in the engine [1, 2, 3].</p>
+        <p><strong>Social:</strong> Colonial. Dense colonies in suitable habitat. Burrow systems with multiple entrances. Colonial alarm system &mdash; one squirrel&rsquo;s trill triggers colony-wide response.</p>
+        <p><strong>Diet:</strong> Grasses, seeds, forbs, some insects. Generalist herbivore adapted to open grassland.</p>
+        <p><strong>Predators:</strong> Red Fox (71), weasels (67&ndash;68), raptors (hawks, eagles), badgers, coyotes. Ground squirrels are a <strong>keystone prey species</strong> &mdash; supporting multiple predator populations.</p>
+
+        <h2>The Mammalian Era Continues: Degree 78</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Order</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Carnivora</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Carnivora</td><td>Loud scream</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Carnivora</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td>70</td><td>Raccoon</td><td>Procyonidae</td><td>Carnivora</td><td>Churring / chittering</td></tr>
+            <tr><td>71</td><td>Red Fox</td><td>Canidae</td><td>Carnivora</td><td>Sharp bark / scream</td></tr>
+            <tr><td>72</td><td>Opossum</td><td>Didelphidae</td><td>Didelphimorphia</td><td>Low hiss / click</td></tr>
+            <tr><td>73</td><td>Snowshoe Hare</td><td>Leporidae</td><td>Lagomorpha</td><td>Foot thump / squeal</td></tr>
+            <tr><td>74</td><td>American Pika</td><td>Ochotonidae</td><td>Lagomorpha</td><td>High &ldquo;eenk&rdquo; bark</td></tr>
+            <tr><td>75</td><td>Yellow-bellied Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Sharp chirp</td></tr>
+            <tr><td>76</td><td>Hoary Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Loud whistle</td></tr>
+            <tr><td>77</td><td>Olympic Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Multi-note whistle</td></tr>
+            <tr><td><strong>78</strong></td><td><strong>Townsend&rsquo;s Gnd Squirrel</strong></td><td><strong>Sciuridae</strong></td><td><strong>Rodentia</strong></td><td><strong>Chirping trill</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Eighteen degrees in the mammalian zone (61&ndash;78). Seventeen mammalian entries. Fifteen species. <strong>Sciuridae quartet (75&ndash;78) matches Mustelidae quartet (63&ndash;66)</strong> &mdash; tied for longest family run.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon quartet">Q</div>
+            <div class="theory-content">
+              <h4>Sciuridae Quartet (75&ndash;78) &mdash; Ties Mustelidae Record</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Four consecutive Sciuridae. Matches Mustelidae (63&ndash;66). Three marmots + one ground squirrel. Tied for longest run.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trill">T</div>
+            <div class="theory-content">
+              <h4>Chirping Trill Alarm &mdash; 79th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Rapid chirping trill. 4,000&ndash;8,000 Hz. E=4. Stuttering, machine-gun quality. Colony alarm trigger.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon grassland">G</div>
+            <div class="theory-content">
+              <h4>First True Grassland Species</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Open grassland, sagebrush steppe. 200&ndash;1,500 m. Alpine run ends. New habitat opens.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon townsend">J</div>
+            <div class="theory-content">
+              <h4>Named for Townsend (1834)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>John Kirk Townsend. Columbia River expedition. 1834. Foundational PNW naturalist.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon predator">P</div>
+            <div class="theory-content">
+              <h4>Keystone Prey Species</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Supports multiple predators: fox (71), weasels (67&ndash;68), raptors, badgers. Prey base of the grassland.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon acid-link">A</div>
+            <div class="theory-content">
+              <h4>The Acid Tongue Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both communal. Both shift habitat. Both at ground level &mdash; underground burrows and underground music.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-077: Olympic Marmot</strong>
+            <p>Sciuridae quartet. Marmot (77) to ground squirrel (78). Same family, different genus. Alpine to grassland.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-075/076: Marmots</strong>
+            <p>Sciuridae quartet (75&ndash;78). Three marmots + one ground squirrel. Four acoustic signatures. Four habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-073: Snowshoe Hare</strong>
+            <p>Prey parallel. Both are colonial prey species supporting multiple predators. Different habitats (forest vs. grassland).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-071: Red Fox</strong>
+            <p>Predator-prey. The fox hunts ground squirrels in grassland. Fox bark (71) vs. squirrel trill (78).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-067: Short-tailed Weasel</strong>
+            <p>Predator-prey. The weasel enters squirrel burrows. Same dynamic as weasel-marmot and weasel-pika predation.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Townsend&rsquo;s Ground Squirrel (<em>Urocitellus townsendii</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Townsend&rsquo;s ground squirrel.&rdquo;</li>
+          <li>[3] Rickart, E.A. (1987). &ldquo;Urocitellus townsendii.&rdquo; <em>Mammalian Species</em> No. 268.</li>
+          <li>[4] Townsend, J.K. (1839). <em>Narrative of a Journey across the Rocky Mountains.</em></li>
+          <li>[5] Verts, B.J. &amp; Carraway, L.N. (1998). <em>Land Mammals of Oregon.</em> UC Press.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">78&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Chirping trill alarm. Colony alert.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sciuridae</div>
+          <div class="stat-detail">FOURTH consecutive (75&ndash;78).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">Fifth Rodentia in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elevation</div>
+          <div class="stat-value">200&ndash;1,500 m</div>
+          <div class="stat-detail">Open grassland. First grassland species.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">120&ndash;300 g</div>
+          <div class="stat-detail">Small ground squirrel.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Estivation + Hibernation</div>
+          <div class="stat-value">7&ndash;8 months</div>
+          <div class="stat-detail">Aestivates in summer heat, hibernates in winter.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Colony</div>
+          <div class="stat-value">Dense colonies</div>
+          <div class="stat-detail">Burrow systems, colonial alarm.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Open grassland</div>
+          <div class="stat-detail">Sagebrush steppe, bunchgrass prairie.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Mammalian Entry</div>
+          <div class="stat-value">17th</div>
+          <div class="stat-detail">15th species. 9 families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sciuridae Run</div>
+          <div class="stat-value">4 consecutive</div>
+          <div class="stat-detail">75&ndash;78. Ties Mustelidae (63&ndash;66).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">New Habitat</div>
+          <div class="stat-value">Grassland</div>
+          <div class="stat-detail">First true grassland species.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (18th)</div>
+          <div class="stat-detail">No substitution.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
