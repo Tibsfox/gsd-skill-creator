@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 103&deg; &mdash; Briana Marela (Electronic Context) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .return-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E3F2FD;
+    }
+    .return-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #BBDEFB; font-family: system-ui, sans-serif; }
+    .return-card p { color: #E3F2FD; margin: 0.5rem 0; }
+    .return-card strong { color: #90CAF9; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>103 &mdash; Briana Marela (Electronic Context)</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Art Pop / Electronic &mdash; Genre Stage 85 &mdash; E=3 &mdash; Return Artist</h3>
+      <p>
+        <strong>Briana Marela</strong> returns &mdash; first appeared at degree 72 (Art Pop, Jagjaguwar).
+        Now in <strong>electronic context</strong>. <strong>SIXTH return artist</strong> in the engine.
+        Art Pop/Electronic at Genre Stage 85. E=3.
+        Acoustic element 104. Pattern 104.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">103&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Briana Marela (Electronic Context)</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Art Pop / Electronic</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 85</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="synth-card">
+          <h4>The Layered Dissolution &mdash; Voice as Electronic Texture</h4>
+          <p>
+            The <strong>layered dissolution</strong> is the 104th acoustic element.
+            Where degree 72 centered on Briana Marela&rsquo;s <strong>Art Pop vocal layering</strong> &mdash;
+            voice as primary instrument &mdash; the electronic-context reframing reveals the
+            <strong>dissolution of voice into electronic texture</strong>. Looped, processed,
+            and stacked vocals become <strong>indistinguishable from synthesizer pads</strong>.
+            The voice does not sit atop the electronics &mdash; it dissolves into them.
+            <strong>Human becomes machine becomes atmosphere.</strong>
+          </p>
+        </div>
+
+        <div class="return-card">
+          <h4>The Electronic Reframing &mdash; Sixth Return Artist</h4>
+          <p>
+            Briana Marela returns at degree 103 &mdash; first appeared at degree 72 (Art Pop, Jagjaguwar, E=2).
+            Now in <strong>electronic context</strong> at E=3 (energy rises with electronic production density).
+            <strong>Sixth return artist</strong> in the engine. The return pattern deepens &mdash;
+            artists who merit re-examination through a different analytical lens.
+            Degree 72 heard the voice as Art Pop architecture. Degree 103 hears the voice as
+            <strong>electronic material</strong>.
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 85 &middot; Art Pop/Electronic &middot; E=3 &middot; 104th Acoustic Element &middot; 104th Pattern &middot; Return Artist</h4>
+          <p>
+            <strong>Briana Marela</strong> returns at Genre Stage 85. <strong>E=3</strong>.
+            Art Pop/Electronic. Sixth return artist. The electronic era continues to deepen &mdash;
+            voice-as-texture joins the electronic vocabulary alongside algorithmic tenderness (97),
+            synth-pop pulse (96), and the euphoric build (95).
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 85: Art Pop / Electronic</h2>
+          <p>
+            Degree 103 reaches <strong>Genre Stage 85</strong>. <strong>Art Pop/Electronic</strong>
+            describes Briana Marela in electronic context &mdash; the vocal-layering practice from
+            degree 72 reframed as electronic production. The genre classification shifts from
+            Art Pop (pure, at 72) to Art Pop/Electronic (hybrid, at 103) because the electronic
+            processing of the voice is now the <strong>primary analytical subject</strong>.
+          </p>
+          <p>
+            Distinguished from <strong>NAVVI</strong> (degree 93, Dream Pop/Electronic) &mdash;
+            NAVVI&rsquo;s electronic layer is rhythmic and atmospheric. Briana Marela&rsquo;s
+            electronic layer is <strong>vocal and textural</strong> &mdash; the voice itself
+            becomes the electronic instrument.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 104: The Layered Dissolution</h2>
+          <p>
+            The <strong>layered dissolution</strong> is the one hundred fourth acoustic element.
+            It describes the quality produced when a human voice is looped, processed, layered,
+            and stacked until it dissolves into electronic texture &mdash; when you can no longer
+            distinguish the vocal from the synthesizer, when the boundary between human and
+            machine becomes permeable. Briana Marela&rsquo;s practice of building entire
+            sonic environments from processed vocal layers is the engine&rsquo;s clearest
+            example of this dissolution.
+          </p>
+          <p>
+            Contrast with the <strong>ethereal wash</strong> (degree 90, Sky Cries Mary) &mdash;
+            atmospheric but the voice remains identifiable as voice. The layered dissolution
+            goes further: the voice <em>becomes</em> the atmosphere. Contrast with the
+            <strong>algorithmic tenderness</strong> (degree 97, Postal Service electronic) &mdash;
+            machine warmth as composition. The layered dissolution is <strong>human warmth
+            processed into machine form</strong>.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 104: The Electronic Reframing</h2>
+          <p>
+            The <strong>electronic reframing</strong> is the 104th artist-city pattern.
+            It describes the analytical operation of taking an artist whose primary identity
+            is non-electronic and re-examining them through the lens of their electronic
+            production techniques. Briana Marela at degree 72 was Art Pop &mdash; voice as
+            architecture. At degree 103, the same artistic practice is heard as electronic
+            production &mdash; voice as <strong>material to be processed</strong>.
+          </p>
+          <p>
+            The electronic reframing extends the re-contextualized return pattern established
+            at degree 97 (Postal Service). Both demonstrate that the same body of work supports
+            multiple analytical framings. The engine is enriched by hearing the same artist
+            through different lenses.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">S36-072</span> Briana Marela (original) &mdash; Art Pop, Jagjaguwar, E=2. First appearance. Voice as architecture. The electronic-context reframing at 103 reveals the same practice as electronic production.</li>
+            <li><span class="ref-degree">S36-093</span> NAVVI &mdash; Dream Pop/Electronic. Electronic atmosphere. NAVVI&rsquo;s electronic layer is rhythmic; Briana Marela&rsquo;s is vocal-textural. Different electronic vocabularies.</li>
+            <li><span class="ref-degree">S36-090</span> Sky Cries Mary &mdash; Ethereal. Atmospheric vocal wash. The voice remains identifiable. Briana Marela&rsquo;s dissolution goes further &mdash; voice becomes indistinguishable from synth.</li>
+            <li><span class="ref-degree">S36-088</span> Kimya Dawson (solo) &mdash; Return pattern. Dawson returned in solo context. Briana Marela returns in electronic context. Two return artists, two different reframing strategies.</li>
+            <li><span class="ref-degree">S36-094</span> Erik Blood &mdash; Electronic production. Blood&rsquo;s production is external &mdash; applied to other artists&rsquo; music. Briana Marela&rsquo;s electronic production is internal &mdash; processing her own voice.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Layered Dissolution</h4>
+              <div class="level advanced">Advanced</div>
+              <p>104th acoustic element. Voice looped, processed, and stacked until it dissolves into electronic texture. Human becomes machine becomes atmosphere. The boundary between vocal and synthesizer becomes permeable.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Electronic Reframing</h4>
+              <div class="level advanced">Advanced</div>
+              <p>104th artist-city pattern. Re-examining a non-electronic artist through electronic production lens. Same practice, different analytical center. Extends the re-contextualized return (97).</p>
+            </div>
+            <div class="theory-card">
+              <h4>Art Pop/Electronic &mdash; Genre Stage 85</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>Hybrid genre classification for voice-as-electronic-texture. Distinguished from pure Art Pop (72) and from Dream Pop/Electronic (93). The electronic processing is the primary analytical subject.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 &mdash; Energy Rises with Electronic Context</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>E=3 at degree 103 (up from E=2 at degree 72). Electronic production density increases the energy footprint. The same artist at different energy levels depending on analytical framing.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">103</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">85</span></div>
+          <div class="stat-row"><span class="stat-label">Acoustic Element</span><span class="stat-value">104</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">104</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Briana Marela</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Art Pop / Electronic</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 3</span></div>
+          <div class="stat-row"><span class="stat-label">Context</span><span class="stat-value">Electronic</span></div>
+          <div class="stat-row"><span class="stat-label">Original</span><span class="stat-value">Degree 72</span></div>
+          <div class="stat-row"><span class="stat-label">Return #</span><span class="stat-value">6th</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
