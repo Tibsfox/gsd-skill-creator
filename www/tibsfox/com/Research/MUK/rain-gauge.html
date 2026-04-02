@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rain Gauge &mdash; KPAE Daily Precipitation &mdash; MUK Observatory</title>
+  <style>
+    :root {
+      --sea: #1a3a4a; --marine: #3a8a9a; --fog: #8aa0b0; --sand: #c4b090;
+      --ink: #1a1a2a; --text: #d0d4da; --dim: #7a8090; --bg: #0a0e14;
+      --panel: #0e1420; --border: rgba(255,255,255,0.06);
+      --rain-light: #4a8aaa; --rain-dark: #2a5a7a; --rain-accent: #6aaaca;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 40%, var(--rain-dark) 100%);
+      padding: 2.5rem 2rem 2rem; border-bottom: 3px solid var(--rain-accent);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    header::before { content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%); }
+    header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a { color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif; font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent; }
+    header nav a:hover { color:#fff; border-bottom-color:var(--sand); }
+    main { max-width:960px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    h2 { color: var(--rain-accent); font-size:1.3rem; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.4rem; }
+    h3 { color: var(--fog); font-size:1.05rem; margin:1.5rem 0 0.5rem; font-weight:400; }
+    p { margin-bottom:0.8rem; }
+    .chart-container { background: var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.5rem; margin:1.5rem 0; }
+    .chart-title { color:var(--fog); font-family:system-ui,sans-serif; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
+    .bar-chart { display:flex; align-items:flex-end; gap:2px; height:200px; border-bottom:1px solid var(--border); padding-bottom:4px; }
+    .bar-chart .bar {
+      flex:1; background: linear-gradient(180deg, var(--rain-accent), var(--rain-dark));
+      border-radius:2px 2px 0 0; position:relative; min-width:8px; transition: background 0.2s;
+    }
+    .bar-chart .bar:hover { background: linear-gradient(180deg, #8acaea, var(--rain-light)); }
+    .bar-chart .bar .tooltip {
+      display:none; position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%);
+      background:#1a2a3a; color:#fff; padding:3px 8px; border-radius:3px; font-family:system-ui,sans-serif;
+      font-size:0.7rem; white-space:nowrap; z-index:10;
+    }
+    .bar-chart .bar:hover .tooltip { display:block; }
+    .bar-labels { display:flex; gap:2px; margin-top:4px; }
+    .bar-labels span { flex:1; text-align:center; font-family:system-ui,sans-serif; font-size:0.6rem; color:var(--dim); min-width:8px; }
+    .y-axis { display:flex; flex-direction:column; justify-content:space-between; height:200px; margin-right:8px; text-align:right; }
+    .y-axis span { font-family:system-ui,sans-serif; font-size:0.65rem; color:var(--dim); }
+    .chart-row { display:flex; }
+    .accumulation { margin-top:1rem; display:flex; gap:1rem; }
+    .acc-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:0.8rem 1rem; flex:1; text-align:center; }
+    .acc-card .label { color:var(--dim); font-family:system-ui,sans-serif; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; }
+    .acc-card .value { color:var(--rain-accent); font-size:1.5rem; font-family:system-ui,sans-serif; font-weight:600; }
+    .acc-card .unit { color:var(--dim); font-size:0.8rem; }
+    .obs-table { width:100%; border-collapse:collapse; margin:1rem 0; font-family:system-ui,sans-serif; font-size:0.8rem; }
+    .obs-table th { text-align:left; color:var(--dim); font-weight:500; padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); font-size:0.7rem; text-transform:uppercase; }
+    .obs-table td { padding:0.3rem 0.6rem; border-bottom:1px solid var(--border); }
+    .obs-table tr:hover { background:rgba(255,255,255,0.02); }
+    .obs-table .precip { color:var(--rain-accent); font-weight:600; }
+    .obs-table .no-precip { color:var(--dim); }
+    .context { background: var(--panel); border-left: 3px solid var(--sand); padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+    .context p { font-size: 0.95rem; font-style: italic; color: var(--fog); margin-bottom:0; }
+    footer { text-align:center; color:var(--dim); font-size:0.8rem; padding:2rem; border-top:1px solid var(--border); margin-top:3rem; }
+    @media (max-width:600px) { .accumulation { flex-direction:column; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Rain Gauge</h1>
+  <div class="subtitle">KPAE Paine Field &mdash; Hourly Precipitation &amp; Daily Accumulation</div>
+  <nav>
+    <a href="../index.html">Research</a>
+    <a href="index.html">MUK</a>
+    <a href="pnw-weather.html">Weather</a>
+    <a href="weather-map.html">Weather Map</a>
+    <a href="convergence-zone.html">Convergence</a>
+    <a href="../USGS/index.html">USGS</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>April 1&ndash;2, 2026 &mdash; Atmospheric River Event</h2>
+
+  <p>A frontal system pushed through the Puget Sound on April 1, bringing sustained rain from mid-morning through early April 2. This was the system that arrived during the Artemis II launch window &mdash; rain reached KPAE at approximately 10:00 AM PDT, as predicted in the Day 1 weather sweeps.</p>
+
+  <div class="accumulation">
+    <div class="acc-card">
+      <div class="label">24h Total (Apr 1)</div>
+      <div class="value">0.97 <span class="unit">in</span></div>
+    </div>
+    <div class="acc-card">
+      <div class="label">Running Total (Apr 2)</div>
+      <div class="value">0.51 <span class="unit">in</span></div>
+    </div>
+    <div class="acc-card">
+      <div class="label">Event Total</div>
+      <div class="value">1.48 <span class="unit">in</span></div>
+    </div>
+    <div class="acc-card">
+      <div class="label">Peak Rate</div>
+      <div class="value">0.22 <span class="unit">in/hr</span></div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Hourly Precipitation &mdash; KPAE (inches)</div>
+    <div class="chart-row">
+      <div class="y-axis">
+        <span>0.25</span>
+        <span>0.20</span>
+        <span>0.15</span>
+        <span>0.10</span>
+        <span>0.05</span>
+        <span>0</span>
+      </div>
+      <div style="flex:1;">
+        <div class="bar-chart" id="rainChart">
+          <!-- Apr 1 hours 0-23, Apr 2 hours 0-4 -->
+          <!-- Heights are percentage of max (0.22 in = 100%) -->
+          <div class="bar" style="height:0%"><span class="tooltip">Apr 1 00:00 — 0.00"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">01:00 — 0.00"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">02:00 — 0.00"</span></div>
+          <div class="bar" style="height:55%"><span class="tooltip">03:00 — 0.12"</span></div>
+          <div class="bar" style="height:9%"><span class="tooltip">04:00 — 0.02"</span></div>
+          <div class="bar" style="height:23%"><span class="tooltip">05:00 — 0.05"</span></div>
+          <div class="bar" style="height:14%"><span class="tooltip">06:00 — 0.03"</span></div>
+          <div class="bar" style="height:5%"><span class="tooltip">07:00 — 0.01"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">08:00 — 0.00"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">09:00 — 0.00"</span></div>
+          <div class="bar" style="height:14%"><span class="tooltip">10:00 — 0.03"</span></div>
+          <div class="bar" style="height:32%"><span class="tooltip">11:00 — 0.07"</span></div>
+          <div class="bar" style="height:32%"><span class="tooltip">12:00 — 0.07"</span></div>
+          <div class="bar" style="height:32%"><span class="tooltip">13:00 — 0.07"</span></div>
+          <div class="bar" style="height:45%"><span class="tooltip">14:00 — 0.10"</span></div>
+          <div class="bar" style="height:55%"><span class="tooltip">15:00 — 0.12"</span></div>
+          <div class="bar" style="height:45%"><span class="tooltip">16:00 — 0.10"</span></div>
+          <div class="bar" style="height:14%"><span class="tooltip">17:00 — 0.03"</span></div>
+          <div class="bar" style="height:5%"><span class="tooltip">18:00 — 0.01" (launch hour)</span></div>
+          <div class="bar" style="height:9%"><span class="tooltip">19:00 — 0.02"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">20:00 — 0.00"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">21:00 — 0.00"</span></div>
+          <div class="bar" style="height:27%"><span class="tooltip">22:00 — 0.06"</span></div>
+          <div class="bar" style="height:0%"><span class="tooltip">23:00 — 0.00"</span></div>
+          <!-- Apr 2 -->
+          <div class="bar" style="height:0%;background:linear-gradient(180deg,#6a9aba,#3a6a8a);"><span class="tooltip">Apr 2 00:00 — 0.00"</span></div>
+          <div class="bar" style="height:0%;background:linear-gradient(180deg,#6a9aba,#3a6a8a);"><span class="tooltip">01:00 — 0.00"</span></div>
+          <div class="bar" style="height:68%;background:linear-gradient(180deg,#6a9aba,#3a6a8a);"><span class="tooltip">02:00 — 0.15"</span></div>
+          <div class="bar" style="height:100%;background:linear-gradient(180deg,#8acaea,#4a8aaa);"><span class="tooltip">03:00 — 0.22" (peak)</span></div>
+          <div class="bar" style="height:64%;background:linear-gradient(180deg,#6a9aba,#3a6a8a);"><span class="tooltip">04:00 — 0.14"</span></div>
+        </div>
+        <div class="bar-labels">
+          <span>0</span><span></span><span></span><span>3</span><span></span><span></span>
+          <span>6</span><span></span><span></span><span>9</span><span></span><span></span>
+          <span>12</span><span></span><span></span><span>15</span><span></span><span></span>
+          <span>18</span><span></span><span></span><span>21</span><span></span><span></span>
+          <span>0</span><span></span><span>2</span><span>3</span><span>4</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.3rem;">
+          <span style="font-family:system-ui,sans-serif; font-size:0.7rem; color:var(--dim);">April 1 PDT</span>
+          <span style="font-family:system-ui,sans-serif; font-size:0.7rem; color:var(--dim);">April 2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="context">
+    <p>The rain arrived at KPAE around 10 AM on April 1 as predicted in the Day 1 sweeps. Heaviest precipitation fell 2&ndash;4 PM (0.10&ndash;0.12"/hr) during the approach of the warm front. Rain eased during the launch window (6&ndash;7 PM) then resumed overnight, peaking at 0.22"/hr at 3 AM April 2. This is a classic Pacific frontal passage &mdash; pre-frontal rain, brief clearing at the front, then post-frontal showers.</p>
+  </div>
+
+  <h2>Hourly Observations (METAR)</h2>
+
+  <table class="obs-table">
+    <thead>
+      <tr><th>Date</th><th>Time</th><th>Temp</th><th>Dewpt</th><th>Wind</th><th>Sky</th><th>Wx</th><th>Precip</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Apr 1</td><td>03:53</td><td>43°F</td><td>40°F</td><td>SE 14</td><td>OVC033</td><td>-RA</td><td class="precip">0.12"</td></tr>
+      <tr><td>Apr 1</td><td>04:53</td><td>43°F</td><td>40°F</td><td>SE 12</td><td>BKN028 OVC036</td><td>-RA</td><td class="precip">0.02"</td></tr>
+      <tr><td>Apr 1</td><td>05:53</td><td>42°F</td><td>40°F</td><td>SE 8</td><td>SCT007 BKN012 OVC019</td><td>-RA BR</td><td class="precip">0.05"</td></tr>
+      <tr><td>Apr 1</td><td>06:53</td><td>41°F</td><td>40°F</td><td>SE 13 G20</td><td>OVC016</td><td>-RA BR</td><td class="precip">0.03"</td></tr>
+      <tr><td>Apr 1</td><td>07:53</td><td>42°F</td><td>40°F</td><td>SE 8</td><td>FEW017 BKN033 OVC047</td><td>-RA</td><td class="precip">0.01"</td></tr>
+      <tr><td>Apr 1</td><td>10:53</td><td>45°F</td><td>42°F</td><td>Vrbl 6</td><td>SCT039 OVC050</td><td>-RA BR</td><td class="precip">0.03"</td></tr>
+      <tr><td>Apr 1</td><td>11:53</td><td>45°F</td><td>42°F</td><td>SE 9</td><td>FEW028 BKN039 OVC047</td><td>-RA BR</td><td class="precip">0.07"</td></tr>
+      <tr><td>Apr 1</td><td>12:53</td><td>46°F</td><td>43°F</td><td>Vrbl 7</td><td>BKN030 OVC040</td><td>-RA BR</td><td class="precip">0.07"</td></tr>
+      <tr><td>Apr 1</td><td>13:53</td><td>46°F</td><td>43°F</td><td>SE 8</td><td>BKN035 OVC046</td><td>-RA BR</td><td class="precip">0.07"</td></tr>
+      <tr><td>Apr 1</td><td>14:53</td><td>46°F</td><td>43°F</td><td>SE 10 G17</td><td>BKN013 OVC035</td><td>-RA BR</td><td class="precip">0.10"</td></tr>
+      <tr><td>Apr 1</td><td>15:53</td><td>46°F</td><td>44°F</td><td>E 6</td><td>BKN013 OVC037</td><td>RA BR</td><td class="precip">0.12"</td></tr>
+      <tr><td>Apr 1</td><td>16:53</td><td>46°F</td><td>44°F</td><td>E 5</td><td>BKN037 OVC047</td><td>-RA</td><td class="precip">0.10"</td></tr>
+      <tr><td>Apr 1</td><td>17:53</td><td>47°F</td><td>45°F</td><td>Vrbl 5</td><td>BKN030 OVC036</td><td>-RA</td><td class="precip">0.03"</td></tr>
+      <tr><td>Apr 1</td><td>18:53</td><td>47°F</td><td>44°F</td><td>S 16 G25</td><td>FEW006 BKN026 OVC036</td><td>-RA BR</td><td class="precip">0.01"</td></tr>
+      <tr><td>Apr 1</td><td>19:53</td><td>45°F</td><td>42°F</td><td>S 18 G32</td><td>SCT013 SCT021</td><td>SCT</td><td class="precip">0.02"</td></tr>
+      <tr><td>Apr 1</td><td>22:53</td><td>42°F</td><td>40°F</td><td>S 14</td><td>BKN019 OVC029</td><td>OVC</td><td class="precip">0.06"</td></tr>
+      <tr><td>Apr 2</td><td>02:53</td><td>42°F</td><td>40°F</td><td>SW 10</td><td>FEW011 SCT016 OVC025</td><td>RA BR</td><td class="precip">0.15"</td></tr>
+      <tr><td>Apr 2</td><td>03:53</td><td>41°F</td><td>40°F</td><td>SW 5</td><td>FEW014 BKN020 OVC025</td><td>-RA</td><td class="precip">0.22"</td></tr>
+      <tr><td>Apr 2</td><td>04:53</td><td>41°F</td><td>40°F</td><td>S 7</td><td>FEW008 BKN015 OVC025</td><td>-RA BR</td><td class="precip">0.14"</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Weather Pattern Analysis</h2>
+
+  <h3>Pressure Trace</h3>
+  <p>Barometric pressure fell steadily from 30.00" (1015.9 hPa) at midnight March 31 to 29.41" (996.2 hPa) by 6 PM April 1 &mdash; a drop of 0.59" (20 hPa) in 42 hours. This is a moderate deepening rate consistent with a Pacific frontal system, not a bomb cyclone but enough to drive sustained rain and gusty south winds.</p>
+
+  <h3>Wind Shift</h3>
+  <p>March 31 was dominated by light northerlies (post-high-pressure clearing). April 1 brought the classic SE→S→SW wind progression of a frontal passage: SE 8-14 kt during the warm sector, shifting S 15-18 G32 at the frontal boundary (7 PM), then SW 5-10 post-frontal. This progression is textbook PNW meteorology.</p>
+
+  <h3>Temperature &amp; Dewpoint</h3>
+  <p>March 31 peaked at 56°F (13.3°C) with dewpoint 26°F &mdash; dry northerly flow. April 1 barely reached 47°F (8.3°C) with dewpoint 45°F &mdash; the marine air mass had fully replaced continental air. Dewpoint spread collapsed from 30°F to 2°F, indicating near-saturation.</p>
+
+  <h2>Gardening &amp; Agriculture Notes</h2>
+
+  <div class="context">
+    <p>This 1.48" rain event delivered approximately 40,000 gallons per acre &mdash; significant soil recharge after a dry late March. Soil temperatures in the Everett area are typically 45&ndash;50°F in early April, warm enough for cool-season crops (lettuce, peas, radishes, kale) but still below the 60°F threshold for warm-season planting (tomatoes, peppers, squash). Last frost date for Everett: typically April 15&ndash;25. A more comprehensive planting guide is coming.</p>
+  </div>
+
+  <h2>Data Sources</h2>
+  <ul style="list-style:none; margin:1rem 0;">
+    <li style="padding:0.3rem 0;">KPAE METAR observations via <a href="https://forecast.weather.gov/data/obhistory/KPAE.html">NWS Observation History</a></li>
+    <li style="padding:0.3rem 0;">Precipitation data from hourly METAR reports (1-hour accumulation)</li>
+    <li style="padding:0.3rem 0;">Pressure, wind, and temperature from automated ASOS station at Paine Field</li>
+  </ul>
+
+</main>
+
+<footer>
+  <p>Rain Gauge &mdash; <a href="index.html">MUK Observatory</a> &mdash; <a href="../index.html">tibsfox.com/Research</a></p>
+  <p style="margin-top:0.3rem;">Last updated: 2026-04-02T12:30Z (sweep v1.2.5.2)</p>
+</footer>
+
+</body>
+</html>
