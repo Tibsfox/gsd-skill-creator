@@ -126,6 +126,29 @@ Community paramedicine is still evolving. Reimbursement models are inconsistent.
 
 For someone who ran medical calls for thirty years, the progression is visible: from a system that could barely get a patient to a hospital, to a system that brings the hospital to the patient, to a system that might, if the trajectory holds, keep the patient from needing the hospital at all. The arc is long, but it bends toward care.
 
+## Cross-References
+
+- **[FSR-01]** History — the 1966 white paper and "Emergency!" that created modern EMS
+- **[FSR-05]** Dispatch and 911 — EMD protocols, dispatcher-assisted CPR, and the triage decisions that determine BLS vs. ALS response
+- **[FSR-06]** Training — paramedic education, NREMT certification, and the field internship
+- **[FSR-07]** Equipment — cardiac monitors, ambulance configurations, and the clinical tools described here in operational context
+- **[FSR-08]** Mental Health Crisis — community paramedicine as an evolution beyond the 911-response model; the revolving door's burden on EMS
+- **[FSR-09]** Responder Wellness — EMS burnout rates (highest in healthcare), the dual-role firefighter/paramedic toll
+- **[FSR-10]** PNW Departments — King County Medic One as the gold standard cardiac arrest system
+
+---
+
+## Sources and References
+
+- Cowley, R. Adams. "The Golden Hour" concept. University of Maryland Shock Trauma Center, 1975.
+- National Highway Traffic Safety Administration. "National EMS Education Standards." 2009, updated 2021.
+- NHTSA. "National EMS Scope of Practice Model." 2007, revised 2019.
+- American Heart Association. "Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care." Updated every 5 years.
+- Committee on Tactical Combat Casualty Care. "TCCC Guidelines." Updated regularly. (MARCH mnemonic)
+- Hartford Consensus. "Improving Survival from Active Shooter Events." 2013.
+- Canning, Peter. "Paramedic." Various editions.
+- National Registry of Emergency Medical Technicians. nremt.org
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

@@ -146,7 +146,7 @@ In a broader ecological context, the raccoon-coyote-cat interaction is significa
 
 ## Impact on Native Species
 
-### Marbled Murrelet
+### Marbled Murrelet [AVI]
 
 The Marbled Murrelet (*Brachyramphus marmoratus*) is a small, cryptic seabird listed as threatened under the U.S. Endangered Species Act. It nests on large, horizontal branches in old-growth and mature coniferous forests, typically within 80 km of the coast. Unlike most seabirds, which nest in colonies, murrelets nest as widely dispersed single pairs, making their nests difficult to find and protect.
 
@@ -164,11 +164,11 @@ Conservation efforts for the western pond turtle in Washington include nest prot
 
 The Band-tailed Pigeon (*Patagioenas fasciata*) is a native PNW bird whose populations have declined significantly from historical levels. Band-tailed pigeons nest in trees and lay only 1 egg per clutch, making them highly sensitive to nest predation. Raccoons are documented predators of band-tailed pigeon nests, though the population-level significance of this predation is less well quantified than for murrelets or pond turtles.
 
-### Ground-Nesting Birds
+### Ground-Nesting Birds [AVI, FWL-08]
 
 Multiple species of ground-nesting birds in the PNW face raccoon nest predation, including:
 - Spotted towhees, song sparrows, and other ground-nesting passerines
-- Ruffed grouse and blue grouse
+- Ruffed grouse and Sooty Grouse (formerly "blue grouse")
 - Various shorebird species nesting along rivers and lakeshores
 - Waterfowl (mallards, wood ducks, and other species with ground or near-ground nests)
 
@@ -233,6 +233,17 @@ The primary conservation challenge involving PNW raccoons is not the conservatio
 The Pacific raccoon is a citizen of every PNW ecosystem from the intertidal zone to the montane forest. It eats salmon and delivers marine nutrients to forest soil. It raids murrelet nests and digs up turtle eggs. It forages in beaver ponds and shelters in old-growth tree cavities. It is neither hero nor villain in the PNW ecological narrative but a participant --- a generalist threading its way through a web of relationships that connects the ocean to the mountains, the forest floor to the canopy, the wild to the urban.
 
 Understanding the raccoon's place in PNW ecosystems requires holding two truths simultaneously: that raccoons are native, ecologically integrated members of the biotic community, and that human landscape modification has amplified raccoon populations and impacts in ways that threaten other native species. Both truths are valid. Both must inform management. The raccoon does not need our help to thrive. But the species it affects may need our help to persist alongside it.
+
+---
+
+## Sources
+
+- Ben-David, M., Hanley, T.A., and Schell, D.M. (1998). "Fertilization of terrestrial vegetation by spawning Pacific salmon." *Oikos*, 83(1): 47-55.
+- Helfield, J.M. and Naiman, R.J. (2001). "Effects of salmon-derived nitrogen on riparian forest growth." *Ecology*, 82(9): 2403-2409.
+- Nelson, S.K. and Hamer, T.E. (1995). "Nest success and the effects of predation on Marbled Murrelets." USDA Forest Service General Technical Report PSW-152.
+- Johnson, D.H. and O'Neil, T.A. (2001). *Wildlife-Habitat Relationships in Oregon and Washington*. Oregon State University Press.
+- Harestad, A.S. and Fisher, C. (2006). "Raccoon." In: *Mammals of British Columbia*. Royal BC Museum.
+- WDFW. Species profiles: raccoon, Western Pond Turtle, Marbled Murrelet. wdfw.wa.gov.
 
 ---
 

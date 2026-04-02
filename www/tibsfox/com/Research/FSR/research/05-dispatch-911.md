@@ -96,6 +96,27 @@ The argument for reclassification is straightforward: dispatchers perform work t
 
 For thirty years, every call that reached the person to whom this research is dedicated first passed through a dispatcher's headset. The voice on the radio that gave the address, the nature of the call, the cross streets — that voice belonged to a person sitting in a room full of screens, managing multiple calls simultaneously, carrying the emotional weight of every one. The dispatcher and the field responder are two halves of the same system. One is not possible without the other. The recognition should be equal.
 
+## Cross-References
+
+- **[FSR-01]** History — the 911 system as an outgrowth of the same reform-by-catastrophe pattern
+- **[FSR-03]** EMS and Paramedicine — EMD protocols and dispatcher-assisted CPR as prehospital medical interventions
+- **[FSR-07]** Equipment — CAD systems, trunked radio, and the communications infrastructure that dispatchers operate
+- **[FSR-09]** Responder Wellness — dispatcher PTSD rates comparable to field personnel, the unique psychology of hearing without seeing
+- **[FSR-10]** PNW Departments — regional dispatch centers, Valley Communications (ValleyCom), NORCOM, and South Sound 911
+
+---
+
+## Sources and References
+
+- National Emergency Number Association (NENA). "NENA Master Glossary of 9-1-1 Terminology." Updated regularly.
+- Clawson, Jeff. "Medical Priority Dispatch System (MPDS)." International Academies of Emergency Dispatch.
+- Lerner, E.B., et al. "911 Dispatcher-Assisted CPR." *Resuscitation*, 83(10), 2012.
+- Husain, S., and Eisenberg, M. "Dispatcher-Assisted CPR and Cardiac Arrest Outcomes." *Prehospital Emergency Care*, various.
+- Klimley, K.E., et al. "Posttraumatic Stress Disorder in Police, Firefighters, and Emergency Dispatchers." *Aggression and Violent Behavior*, 43, 2018.
+- APCO International. "Project 25 (P25) Standards."
+- First Responder Network Authority. firstnet.gov
+- 911 SAVES Act. Introduced in multiple congressional sessions. (Reclassification legislation)
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

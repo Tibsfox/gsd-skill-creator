@@ -2,8 +2,8 @@
 
 A comprehensive directory of stuffed animal manufacturers, studios, and retailers organized by tier and specialty. Covers heritage luxury houses, mass-market manufacturers, giant and specialty makers, and the independent artisan ecosystem. For each entry: history, specialty, price positioning, notable lines, and where to find them.
 
-**Module ID:** PLUSH-MAKERS
-**Cross-references:** [CRAFT-PLUSH], [PLUSH-HIST], [PLUSH-COLLECT]
+**Module ID:** FFA-13
+**Cross-references:** [FFA-06] Plush Construction, [FFA-14] Plush History & Industry, [FFA-15] Plush Collecting Culture, [FFA-12] Fursuit History & Culture
 
 ---
 
@@ -19,7 +19,7 @@ These are the names that collectors speak with reverence. Heritage makers produc
 **Price range:** $30 (keychains/miniatures) to $30,000+ (rare vintage/limited editions)
 **Where to buy:** Steiff.com, Steiff flagship stores (Munich, Berlin, Giengen), authorized dealers worldwide, StuffedSafari.com
 
-The name that started it all. Margarete Steiff, a seamstress and wheelchair user who survived polio as an infant, began making felt elephant pincushions in 1880 from her workshop in Giengen. Children kept stealing the pincushions to play with — and the world's first stuffed animal company was born. Her nephew Richard Steiff, trained as an artist, sketched bears at the Stuttgart Zoo and designed the jointed "Bear 55 PB" in 1902 — one of the two competing origin claims for the teddy bear (see [PLUSH-HIST] Section 3).
+The name that started it all. Margarete Steiff, a seamstress and wheelchair user who survived polio as an infant, began making felt elephant pincushions in 1880 from her workshop in Giengen. Children kept stealing the pincushions to play with — and the world's first stuffed animal company was born. Her nephew Richard Steiff, trained as an artist, sketched bears at the Stuttgart Zoo and designed the jointed "Bear 55 PB" in 1902 — one of the two competing origin claims for the teddy bear (see [FFA-14] Section 3).
 
 Steiff's trademark is the "Button in Ear" — a small metal button affixed to the left ear of every authentic Steiff animal, introduced in 1904 as one of the world's first product trademarks. The button system encodes production information: a brass button indicates a standard production piece, a white tag marks a limited edition, and a yellow tag identifies classic replicas. Collectors learn to read these buttons the way vintners read wine labels.
 
@@ -212,21 +212,23 @@ These manufacturers specialize in the oversized, the unusual, and the experienti
 
 ### 3.1 JAAG Giants / JAAG Plush (USA)
 
-**Location:** Birmingham, Michigan, USA
-**Founded:** JAAG Plush established in the greater Detroit area
-**Specialty:** Giant plush animals, custom manufacturing, souvenir and destination retail
-**Price range:** $30-$300+ (varies by size and custom specification)
-**Where to buy:** Destination retail (resorts, theme parks, major tourist locations), direct custom orders, nonprofit partnerships
+**Location:** Birmingham, Michigan, USA (PO Box 1683, Birmingham MI 48012)
+**Founded:** JAAG Plush, LLC — established in the greater Detroit area
+**Specialty:** Giant plush predator animals (direct-to-consumer), custom plush manufacturing (B2B)
+**Price range:** $100-$195 (Giants line), custom varies
+**Where to buy:** jaaggiants.com (direct), destination retail (resorts, theme parks), custom orders via jaagplush.com
+**Current catalog:** 8 giant animals — Arctic Wolf ($150), Black Wolf ($195), Cougar ($175), Lion ($100), Silver Fox ($150), Snow Leopard ($100), Tiger ($100), Wolf ($195)
 
-JAAG operates in a fascinating niche: giant plush for destination retail and custom manufacturing. When a resort, theme park, or major tourist attraction wants oversized stuffed animals — the kind that a family buys as the trip souvenir that dominates the back seat on the drive home — JAAG is one of the go-to manufacturers.
+JAAG operates two distinct businesses under one roof. The consumer-facing **JAAG Giants** brand (jaaggiants.com) sells oversized plush predators directly — wolves, big cats, and a silver fox. The catalog is deliberately focused: all predatory species, all giant-scale, all in the $100-$195 range. These aren't cute shelf-sitters — they're statement pieces, room-filling animals that adults buy for themselves as much as for children. The entire Giants catalog sells out regularly.
 
-The custom manufacturing arm (JAAG Plush) serves an even broader market. Nonprofit organizations, corporate clients, and specialty retailers commission custom plush runs tailored to their brand, mascot, or cause. Notable partnerships include:
+The **JAAG Plush** arm (jaagplush.com) is a full-service custom plush manufacturer serving a much broader market. They design, source, and manufacture custom plush for souvenir retailers, resort and destination shops, corporate clients, and nonprofit organizations. JAAG handles the entire pipeline: concept art, prototyping, factory sourcing, safety compliance (worldwide toy safety rules), and delivery. Notable partnerships include:
 
-- **Buc-ee's** — The beloved Texas-based travel center chain, famous for its giant stores and beaver mascot. JAAG has produced custom plush for Buc-ee's retail shelves, contributing to one of the most recognizable mascot plush programs in American roadside retail.
+- **Buc-ee's** — The Texas-based travel center chain, famous for its giant stores and beaver mascot. JAAG has produced custom plush for Buc-ee's retail shelves, contributing to one of the most recognizable mascot plush programs in American roadside retail.
+- **Eskimo Joe's** — The iconic Stillwater, Oklahoma restaurant and retail brand.
 - **Kimo Bear Project** — A nonprofit program providing comfort bears to children in hospitals. JAAG manufactures the bears used in the program, connecting industrial plush production to direct therapeutic impact.
 - **Josh and Friends** — Another nonprofit partnership producing comfort animals for children facing medical procedures.
 
-**What makes JAAG significant:** They demonstrate that plush manufacturing serves purposes far beyond the toy aisle. Custom plush for nonprofits turns fabric and stuffing into instruments of comfort during a child's worst moments. Destination retail plush becomes a tangible memory of a family experience. JAAG's willingness to work with small-run nonprofit orders alongside large commercial accounts shows the breadth of what the plush industry can be.
+**What makes JAAG significant:** The Giants line proves there's a market for adult-oriented plush that doesn't apologize for itself — giant predator animals at premium prices, sold directly to consumers who want a wolf or a cougar in their living room. The custom arm demonstrates that plush manufacturing serves purposes far beyond the toy aisle. Custom plush for nonprofits turns fabric and stuffing into instruments of comfort during a child's worst moments. Destination retail plush becomes a tangible memory of a family experience. The Silver Fox in the Giants line is particularly notable for furry community crossover appeal — a high-quality giant fox plush at $150 from a legitimate manufacturer.
 
 ### 3.2 Melissa & Doug (USA)
 
@@ -307,7 +309,7 @@ The convention dealer den is a marketplace that operates on entirely different e
 
 This direct-to-collector model eliminates retail markup, provides immediate customer feedback, and creates artificial scarcity (convention-exclusive designs that can only be purchased at the event). For the maker, a strong convention weekend can generate a month's income in three days. For the buyer, the convention floor offers the chance to handle pieces before buying, commission directly with the artist present, and access designs that never appear online.
 
-**The furry convention connection is particularly significant.** The furry community has an outsized presence in the custom plush market because the community's core activity — creating and embodying animal-character identities — naturally extends to physical objects. A fursuiter who has invested thousands of dollars in a custom animal costume is a likely buyer of a custom plush version of the same character. Convention dealers who understand this market produce plush fursona commissions, character-specific designs, and species representations that mainstream manufacturers never attempt. See [PLUSH-COLLECT] Section 5 for deeper analysis.
+**The furry convention connection is particularly significant.** The furry community has an outsized presence in the custom plush market because the community's core activity — creating and embodying animal-character identities — naturally extends to physical objects. A fursuiter who has invested thousands of dollars in a custom animal costume is a likely buyer of a custom plush version of the same character. Convention dealers who understand this market produce plush fursona commissions, character-specific designs, and species representations that mainstream manufacturers never attempt. See [FFA-15] Section 5 for deeper analysis.
 
 ---
 
@@ -351,7 +353,7 @@ The brand has achieved remarkable crossover success. Jellycat plush appear in fa
 **Price range:** $5-$60 (depending on size)
 **Where to buy:** Walmart, Target, Walgreens, Five Below, Amazon, Costco
 
-Squishmallows require their own entry because they are not merely a product — they are a cultural phenomenon. See [PLUSH-COLLECT] Section 8 for the full cultural analysis. The product itself is deceptively simple: a round, pillow-like body made from an incredibly soft spandex-polyester blend fabric, filled with ultra-soft polyester fiber. No limbs. No articulation. Just a squishy, round form with a printed face and character name. The genius is in the execution: the fabric feel is genuinely extraordinary (people who pick one up for the first time almost universally comment on the texture), and the character naming system creates collection drive.
+Squishmallows require their own entry because they are not merely a product — they are a cultural phenomenon. See [FFA-15] Section 8 for the full cultural analysis. The product itself is deceptively simple: a round, pillow-like body made from an incredibly soft spandex-polyester blend fabric, filled with ultra-soft polyester fiber. No limbs. No articulation. Just a squishy, round form with a printed face and character name. The genius is in the execution: the fabric feel is genuinely extraordinary (people who pick one up for the first time almost universally comment on the texture), and the character naming system creates collection drive.
 
 Over 2,000 distinct Squishmallow characters have been released as of 2026, each with a name, bio, and design. Limited releases, retailer exclusives, and seasonal drops create the scarcity dynamics that drive collector behavior.
 
@@ -373,7 +375,7 @@ Over 2,000 distinct Squishmallow characters have been released as of 2026, each 
 | Wildlife Artists | USA | — | Museum-quality realistic for institutions | $8-$40 | Zoo/museum gift shops |
 | Fiesta Toys | USA | 1976 | Affordable retail and carnival plush | $5-$30 | Retail chains, amusement parks |
 | Warmies | UK | ~2010s | Microwaveable weighted lavender plush | $20-$35 | Amazon, Target, gift shops |
-| JAAG | USA | — | Giant plush, custom manufacturing | $30-$300+ | Destination retail, custom orders |
+| JAAG | USA (MI) | — | Giant predator plush ($100-195), custom B2B manufacturing | $100-$195 (Giants) | jaaggiants.com, destination retail |
 | Melissa & Doug | USA | 1988 | Large-format floor-standing animals | $20-$150 | Amazon, Target, toy stores |
 | FAO Schwarz | USA | 1862 | Luxury retail, oversized plush | $20-$500+ | Flagship store, FAOSchwarz.com |
 | Jellycat | UK | 1999 | Design-forward quirky plush | $15-$80 | Nordstrom, indie gift shops |
@@ -429,10 +431,11 @@ Over 2,000 distinct Squishmallow characters have been released as of 2026, each 
 
 - **Toy Association (USA)** — Trade group for toy manufacturers, runs Toy Fair New York
 - **Spielwarenmesse (Nuremberg)** — World's largest toy trade fair, major plush showcase
-- **CPSIA / ASTM F963 / EN 71** — Safety standards governing plush production (see [CRAFT-PLUSH] Section 10)
+- **CPSIA / ASTM F963 / EN 71** — Safety standards governing plush production (see [FFA-06] Section 10)
 
 ### Cross-References Within This Research
 
-- **[CRAFT-PLUSH]** — Pattern geometry, construction techniques, materials (Module 06)
-- **[PLUSH-HIST]** — History of the stuffed animal industry (Module 14)
-- **[PLUSH-COLLECT]** — Collector culture, communities, and the emotional significance of plush (Module 15)
+- **[FFA-06]** — Pattern geometry, construction techniques, materials (Plush Construction)
+- **[FFA-14]** — History of the stuffed animal industry (Plush History & Industry)
+- **[FFA-15]** — Collector culture, communities, and the emotional significance of plush (Plush Collecting Culture)
+- **[FFA-12]** — Fursuit History & Culture (furry-plush connection, convention dealer dens)

@@ -149,6 +149,27 @@ For the person who served thirty years as a firefighter and paramedic, this hist
 
 Every call they answered was a point on this arc. And every call they answered carried the weight of all the calls that came before — all the lessons learned, all the lives lost, all the reforms that arrived just one catastrophe too late.
 
+## Cross-References
+
+- **[FSR-02]** through **[FSR-10]** — each subsequent document in this series expands on a thread introduced here
+- **[FSR-08]** Mental Health Crisis — the current gap in the arc of reform, explicitly forecast in this document's conclusion
+- **[WDC-01]** History of Woodworking — parallel histories of craft knowledge transmission through guilds, apprenticeship, and institutional memory
+- **[ECO-07]** Fire Ecology — Indigenous fire management predates organized fire services by millennia; the ecological context for wildland firefighting
+
+---
+
+## Sources and References
+
+- Dillon, J.C. "The Vigiles of Ancient Rome." *Classical Journal*, various.
+- National Fire Protection Association. "U.S. Fire Department Profile." NFPA Research, updated annually. ~67% volunteer statistic.
+- Franklin, Benjamin. *Pennsylvania Gazette* writings on fire prevention, 1733-1736.
+- National Academy of Sciences. "Accidental Death and Disability: The Neglected Disease of Modern Society." 1966.
+- National Commission on Fire Prevention and Control. "America Burning." 1973.
+- Webb, Jack and Cinader, Robert A. "Emergency!" NBC Television, 1972-1977.
+- 9/11 Commission. "The 9/11 Commission Report." 2004.
+- FIRESCOPE. "Incident Command System." Originally published 1973, revised continuously.
+- FEMA. "National Incident Management System (NIMS)." 2004, revised 2017.
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

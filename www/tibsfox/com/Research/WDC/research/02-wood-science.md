@@ -156,6 +156,30 @@ Wood is not inert. It is responsive, dynamic, and sometimes obstinate. The scien
 
 Understanding wood means understanding that you are not imposing your will on raw material. You are entering into a negotiation with something that has its own nature, its own tendencies, its own memory. The woodworkers who produce the finest work are the ones who listen to what the wood is telling them.
 
+## PNW Species in Context
+
+The wood science described in this chapter comes alive in the Pacific Northwest's species. Douglas fir's exceptional bending strength (modulus of rupture ~12,400 psi) at a modest Janka hardness (660 lbf) makes it the ideal framing timber — strong enough to span rooms as joists and rafters, stiff enough to resist deflection, yet workable enough to cut and fasten efficiently. Western red cedar's extractive-rich heartwood (thujaplicins) provides natural decay resistance that is an evolutionary strategy against the Pacific Northwest's fungal-rich rainforest floor [ECO-05]. Big-leaf maple's figured wood — quilted, curly, spalted — represents the intersection of genetics, growth stress, and fungal colonization that wood science can describe but not fully explain.
+
+The PNW woodworker develops an intuitive grasp of these properties through daily work. You learn that Douglas fir's pronounced earlywood-latewood contrast means the softer earlywood crushes under a plane blade set too aggressively, while the dense latewood resists — requiring a sharp blade and a light touch. You learn that western red cedar's softness means it dents if you look at it sternly, but its dimensional stability makes it the best choice for exterior trim that must hold paint through wet PNW winters. You learn that big-leaf maple moves dramatically with humidity — a quilted maple guitar top must be finished on both sides simultaneously, or it will cup overnight in a coastal shop.
+
+## Cross-References
+
+- **[WDC-09]** PNW Timber — species profiles with full ecological and commercial context
+- **[WDC-06]** Finishing — grain-raising, blotching, and finish compatibility all flow from the wood science in this chapter
+- **[WDC-05]** Joinery — wood movement dictates every joinery decision; this chapter provides the physics
+- **[ECO-05]** Forest Ecology — the growing conditions that produce the wood properties described here
+- **[PNT-05]** Painting Surfaces — wood panel preparation for painting depends on understanding moisture, grain, and movement
+
+---
+
+## Sources and References
+
+- Hoadley, R. Bruce. "Understanding Wood: A Craftsman's Guide to Wood Technology." Taunton Press, 2000.
+- Forest Products Laboratory. "Wood Handbook — Wood as an Engineering Material." USDA, FPL-GTR-190, 2010.
+- Panshin, A.J. and de Zeeuw, Carl. "Textbook of Wood Technology." 4th Edition, McGraw-Hill, 1980.
+- The Wood Database. wood-database.com (Janka hardness values, mechanical properties)
+- National Hardwood Lumber Association. "Rules for the Measurement and Inspection of Hardwood and Cypress." NHLA, current edition.
+
 ---
 
 *Previous: [10,000 Years of Woodcraft](01-history-of-woodworking.md) | Next: [The Hand Tool Workshop](03-hand-tools.md)*

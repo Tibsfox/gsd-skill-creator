@@ -106,6 +106,26 @@ This gap between training and judgment is why the field training period — the 
 
 For the person who served thirty years, the academy was the beginning. The first year was the foundation. But the real education was thirty years of calls, thirty years of situations that the academy could not have anticipated, thirty years of decisions made under conditions that no training scenario can fully simulate. The badge was earned in the academy. The competence behind it was earned on the street, one call at a time, over a career.
 
+## Cross-References
+
+- **[FSR-02]** Fire Service — the operational context that academy training prepares firefighters for
+- **[FSR-03]** EMS and Paramedicine — paramedic scope of practice, protocols, and medical direction that define the clinical knowledge paramedic school must teach
+- **[FSR-04]** Law Enforcement — police academy duration debate, constitutional law training, and use-of-force decision-making
+- **[FSR-09]** Responder Wellness — what training cannot teach: the psychological preparation for cumulative exposure, and the gap between academy resilience messaging and career-long reality
+
+---
+
+## Sources and References
+
+- NFPA 1001. "Standard for Fire Fighter Professional Qualifications."
+- NFPA 1582. "Standard on Comprehensive Occupational Medical Program for Fire Departments."
+- IAFF/IAFC Joint Labor Management Wellness-Fitness Initiative. "Candidate Physical Ability Test (CPAT)." 1999.
+- National Registry of Emergency Medical Technicians. "Paramedic Examination." nremt.org
+- NHTSA. "National EMS Education Standards." 2009, updated 2021.
+- Police Executive Research Forum. "Transforming Police Recruit Training." 2022. (Training duration comparisons)
+- International Fire Service Accreditation Congress (IFSAC). ifsac.org
+- National Board on Fire Service Professional Qualifications (ProBoard). theproboard.org
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

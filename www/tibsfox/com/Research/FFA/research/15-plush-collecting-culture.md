@@ -2,8 +2,8 @@
 
 An exploration of the human relationship with stuffed animals beyond childhood -- the collector subcultures, the therapeutic applications, the online communities, the conventions, the furry-plush intersection, the economics of valuation, the indie artisan movement, and the growing body of research on why so many adults maintain deep emotional attachments to soft, fabric-covered animal forms. This is a document about why people collect plush, how they organize around that collecting, and what the practice reveals about human needs for comfort, connection, and identity.
 
-**Module ID:** PLUSH-COLLECT
-**Cross-references:** [CRAFT-PLUSH], [PLUSH-MAKERS], [PLUSH-HIST], [CRAFT-HISTORY]
+**Module ID:** FFA-15
+**Cross-references:** [FFA-06] Plush Construction, [FFA-13] Plush Makers Directory, [FFA-14] Plush History & Industry, [FFA-12] Fursuit History & Culture
 
 ---
 
@@ -142,7 +142,7 @@ Many furries maintain plush collections, and the furry community is one of the l
 
 Custom fursona plush is a thriving craft category. Artists specialize in translating character reference sheets into three-dimensional fabric forms through custom pattern-making, fabric dyeing, hand embroidery, and novel construction techniques for unusual features -- horns, wings, complex color patterns. The furry community also drives demand for "plush suit" hybrids -- costumes blending fursuit construction with the soft, rounded aesthetic of stuffed animals.
 
-Not all plush collectors are furries, and not all furries are plush collectors. But the overlap is substantial, and the furry community's willingness to invest in custom artisan plush has helped sustain a handmade plush market that might not otherwise exist at its current scale. See [CRAFT-HISTORY] for additional context.
+Not all plush collectors are furries, and not all furries are plush collectors. But the overlap is substantial, and the furry community's willingness to invest in custom artisan plush has helped sustain a handmade plush market that might not otherwise exist at its current scale. In the Pacific Northwest, this connection is especially visible -- the PNW furry community (organized through groups like PNW Furs and conventions like Furlandia) overlaps with the region's broader maker culture, and PNW-based plush artists frequently sell at furry convention dealer dens alongside fursuit makers. See [FFA-12] for additional context on furry convention culture and its PNW regional scene.
 
 ---
 
@@ -185,7 +185,7 @@ For non-Steiff plush, valuation follows predictable patterns:
 
 ### 8.3 The Beanie Baby Aftermarket
 
-The Beanie Baby secondary market is a cautionary tale now studied in behavioral economics courses. At peak (1998-1999), retired Beanie Babies commanded prices of $500-$5,000+ for rare pieces. Today, the vast majority of Beanie Babies are worth $1-$10 regardless of "retired" status. A handful of genuinely rare production variants (first-generation tags, unusual fabric errors) retain three- or four-figure values, but the speculative premium that once defined the market has evaporated completely. See [PLUSH-HIST] Section 9 for the full Beanie Baby story.
+The Beanie Baby secondary market is a cautionary tale now studied in behavioral economics courses. At peak (1998-1999), retired Beanie Babies commanded prices of $500-$5,000+ for rare pieces. Today, the vast majority of Beanie Babies are worth $1-$10 regardless of "retired" status. A handful of genuinely rare production variants (first-generation tags, unusual fabric errors) retain three- or four-figure values, but the speculative premium that once defined the market has evaporated completely. See [FFA-14] Section 9 for the full Beanie Baby story.
 
 ---
 
@@ -269,4 +269,4 @@ The question "why do adults sleep with stuffed animals?" implies the behavior re
 
 ---
 
-*Cross-module connections: The industry history that produced the objects collected here is documented in [PLUSH-HIST]. Construction techniques that inform quality assessment are in [CRAFT-PLUSH]. Individual maker profiles and buying guides are in [PLUSH-MAKERS]. The furry cultural context referenced in Section 6 connects to [CRAFT-HISTORY].*
+*Cross-module connections: The industry history that produced the objects collected here is documented in [FFA-14]. Construction techniques that inform quality assessment are in [FFA-06]. Individual maker profiles and buying guides are in [FFA-13]. The furry cultural context referenced in Section 6 connects to [FFA-12].*

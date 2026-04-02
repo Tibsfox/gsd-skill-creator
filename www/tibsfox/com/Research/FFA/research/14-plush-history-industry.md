@@ -2,8 +2,8 @@
 
 A chronological survey of the stuffed animal industry from the 1880s through the present day. Traces the origins of the teddy bear through dual competing claims, the rise and consolidation of major manufacturers, the pivotal role of licensing and pop culture, the shift of production to Asia, the Beanie Baby speculative bubble, and the emergence of new forms -- from Build-A-Bear customization to Squishmallow soft sculpture. Examines how safety regulation, material science, and cultural forces shaped the plush animal from a handmade novelty into a global industry generating billions of dollars annually.
 
-**Module ID:** PLUSH-HIST
-**Cross-references:** [CRAFT-PLUSH], [PLUSH-MAKERS], [PLUSH-COLLECT]
+**Module ID:** FFA-14
+**Cross-references:** [FFA-06] Plush Construction, [FFA-13] Plush Makers Directory, [FFA-15] Plush Collecting Culture
 
 ---
 
@@ -154,17 +154,19 @@ While the mainstream industry moved toward synthetics, Asian mass manufacturing,
 
 The catalog exceeds 7,000 distinct species. A single animal may require up to 240 individually hand-cut fabric panels, with airbrushed details, wire armatures for posability, and custom-dyed fabrics matched to species-specific coloration. Life-size elephants, polar bears, and gorillas require internal steel armatures and can weigh over 100 pounds. Their animals are stuffed with recycled PE bottles, converting post-consumer waste into product.
 
-Hansa represents a counter-trend in nearly every dimension: handmade, Philippines-based, anatomically accurate, filling institutional niches (museums, zoos) rather than competing for mass-market shelf space. See [PLUSH-MAKERS] Section 1.2 for full maker profile.
+Hansa represents a counter-trend in nearly every dimension: handmade, Philippines-based, anatomically accurate, filling institutional niches (museums, zoos) rather than competing for mass-market shelf space. See [FFA-13] Section 1.2 for full maker profile.
 
 ---
 
 ## 12. JAAG Plush and the Giant Specialty Market
 
-JAAG Plush, based in Michigan, occupies another specialized niche: giant and oversized stuffed animals for resorts, theme parks, carnivals, and retail spectacle. Their products range from large cuddly bears to animals standing several feet tall, designed as visual anchors for retail displays, hotel lobbies, and carnival prize games.
+JAAG Plush, LLC, based in Birmingham, Michigan (PO Box 1683, 48012), operates two distinct brands that together define the giant plush niche. The consumer-facing **JAAG Giants** (jaaggiants.com) sells a curated catalog of 8 giant predator plush animals directly to consumers — Arctic Wolf ($150), Black Wolf ($195), Cougar ($175), Lion ($100), Silver Fox ($150), Snow Leopard ($100), Tiger ($100), and Wolf ($195). The catalog is deliberately focused: all predatory species, all giant-scale, all premium-priced. These aren't children's toys marketed to adults — they're adult-oriented products from the start. The entire catalog regularly sells out. The Silver Fox is particularly notable for crossover appeal with the furry community [FFA-12].
 
-The giant plush market is small but persistent. It serves a specific psychological function: the oversized stuffed animal triggers an exaggerated version of the comfort response. A bear that is physically larger than the person holding it inverts the normal scale relationship between human and toy, creating an experience that is simultaneously ridiculous and deeply comforting. There is a reason that carnival midways continue to hang enormous stuffed animals as top prizes -- they are irresistible as spectacle.
+The B2B arm **JAAG Plush** (jaagplush.com) is a full-service custom plush manufacturer serving destination retailers, resort shops, corporate clients, and nonprofits. Notable partnerships include Buc-ee's (the Texas travel center beaver mascot plush), Eskimo Joe's, the Kimo Bear Project (hospital comfort bears for children), and Josh and Friends (comfort animals for medical procedures). JAAG handles the full pipeline: concept art, prototyping, factory sourcing, worldwide safety compliance, and delivery.
 
-JAAG and similar manufacturers (including Hansa's large-format division) demonstrate that the stuffed animal industry encompasses far more than the standard shelf-sized product. The range extends from keychain miniatures to room-scale installations.
+The giant plush market is small but persistent. It serves a specific psychological function: the oversized stuffed animal triggers an exaggerated version of the comfort response. A bear that is physically larger than the person holding it inverts the normal scale relationship between human and toy, creating an experience that is simultaneously ridiculous and deeply comforting. There is a reason that carnival midways continue to hang enormous stuffed animals as top prizes — they are irresistible as spectacle.
+
+JAAG, Hansa's large-format division, and Melissa & Doug's floor-standing animals demonstrate that the stuffed animal industry encompasses far more than the standard shelf-sized product. The range extends from keychain miniatures to room-scale installations, with JAAG's predator-only catalog proving that specificity and premium pricing can outperform breadth in the giant niche.
 
 ---
 
@@ -218,4 +220,4 @@ The stuffed animal began as a felt elephant pincushion in a Swabian seamstress's
 
 ---
 
-*Cross-module connections: Construction methods referenced here are detailed in [CRAFT-PLUSH]. Individual maker profiles appear in [PLUSH-MAKERS]. Collecting culture, valuation, and community practices are covered in [PLUSH-COLLECT].*
+*Cross-module connections: Construction methods referenced here are detailed in [FFA-06]. Individual maker profiles appear in [FFA-13]. Collecting culture, valuation, and community practices are covered in [FFA-15].*

@@ -53,6 +53,17 @@ Key connections:
 - Urban density and building height affect fire department apparatus requirements, ladder company placement, and high-rise firefighting operations (FSR-02, FSR-07)
 - Water system design — hydrant spacing, main capacity, pressure zones — is an INP topic that directly determines fire suppression capability (FSR-07)
 
+### WDC — Woodcraft
+
+The connection between first responders and woodcraft runs through building construction. Every structure that firefighters enter is a wood structure (in the PNW, almost certainly Douglas fir framing [WDC-09]), and building construction type determines fire behavior, collapse risk, and firefighter safety. The building construction knowledge in WDC-08 (Construction Framing) is the same knowledge that fire officers apply during size-up (FSR-02).
+
+Key connections:
+- Building construction types (WDC-08) directly determine fire behavior, ventilation tactics, and collapse indicators (FSR-02)
+- Platform framing, post-and-beam, and timber framing (WDC-08) each present different fire behavior profiles
+- Engineered lumber (LVL, I-joists, TJIs) loses structural integrity under fire faster than solid dimensional lumber — a critical concern documented in FSR-02 and explained by the wood science in WDC-02
+- Western red cedar's natural fire resistance (lower flame spread than many species due to low resin content) makes it a unique exterior cladding material, though its use in shingle roofing has been restricted in some jurisdictions due to wildland-urban interface fire risk (FSR-10)
+- The mass timber revolution (WDC-09) creates new fire behavior questions — CLT chars predictably and maintains structural integrity, but fire departments are still developing tactics for mass timber buildings
+
 ### HEL — Health and Environmental Linkages
 
 The HEL research project examines the connections between environmental conditions and human health. The occupational health hazards of emergency services — carcinogen exposure, sleep deprivation, cumulative stress — are health-environment linkages of the most direct kind.

@@ -112,6 +112,28 @@ For the person to whom this research is dedicated — who served as a firefighte
 
 This document describes the institution. Other documents in this series — on mental health crisis response, on training, on wellness — address the places where the institution falls short and the reforms that are needed. The description and the critique are not contradictory. They are both necessary.
 
+## Cross-References
+
+- **[FSR-01]** History — Robert Peel's Metropolitan Police and the origins of democratic policing
+- **[FSR-05]** Dispatch and 911 — the dispatch decision that sends patrol officers to calls, including the mental health calls they are not equipped for
+- **[FSR-06]** Training — police academy training, the brevity debate, and field training officer programs
+- **[FSR-08]** Mental Health Crisis — CIT training, the gap between law enforcement response and clinical need, and the policy arguments for civilian crisis response
+- **[FSR-09]** Responder Wellness — police officer suicide rates, PTSD prevalence, and the culture of silence that affects law enforcement alongside fire and EMS
+
+---
+
+## Sources and References
+
+- Graham v. Connor, 490 U.S. 386 (1989). (Objective reasonableness standard)
+- Tennessee v. Garner, 471 U.S. 1 (1985). (Deadly force and fleeing felons)
+- Miranda v. Arizona, 384 U.S. 436 (1966).
+- Michigan v. Tyler, 436 U.S. 499 (1978). Michigan v. Clifford, 464 U.S. 287 (1984). (Fire scene search authority)
+- Goldstein, Herman. "Problem-Oriented Policing." 1990.
+- Balko, Radley. "Rise of the Warrior Cop." 2013.
+- Coates, Ta-Nehisi. "Between the World and Me." 2015.
+- Bureau of Justice Statistics. "Local Police Departments: Personnel." Various years. (~18,000 agencies)
+- Police Executive Research Forum (PERF). "Re-Engineering Training on Police Use of Force." 2015.
+
 ---
 
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

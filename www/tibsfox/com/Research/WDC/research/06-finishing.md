@@ -38,11 +38,15 @@ BLO has two significant drawbacks. It yellows with age, which is either a featur
 
 ### Tung Oil
 
-True tung oil (from the nut of the tung tree) is a harder, more water-resistant oil than linseed. It cures to a slightly harder film with more sheen, and it does not yellow as much. Pure tung oil takes longer to cure — days between coats — and can be difficult to find. Most products labeled "tung oil finish" are actually thinned varnish, not pure tung oil. Read the ingredients.
+True tung oil (from the nut of the tung tree) is a harder, more water-resistant oil than linseed. It cures to a slightly harder film with more sheen, and it does not yellow as much. Pure tung oil takes longer to cure — days between coats, sometimes four or five days in a cool PNW shop — and can be difficult to find. Most products labeled "tung oil finish" are actually thinned varnish, not pure tung oil. Read the ingredients. If the ingredients list petroleum distillates, resins, or driers beyond the oil itself, it is not pure tung oil.
+
+Real Woodworker's Supply, Lee Valley, and Tried & True (which makes a polymerized tung oil that cures faster than raw) are reliable sources for genuine tung oil. The application technique is similar to BLO — flood, soak, wipe off excess — but tung oil benefits from wet-sanding the first coat into the surface with 400-grit wet-dry paper, creating a slurry that fills the grain as it dries. Three to five coats, sanded between with fine paper, produce a surface with genuine water resistance and a warm, natural sheen that deepens with age and use.
 
 ### Danish Oil
 
-Danish oil is a blend of oil (usually BLO or tung oil), varnish, and thinner. It penetrates like an oil and builds a thin protective film like a varnish. It is easier to apply than straight oil (the thinner aids penetration) and provides better protection (the varnish component adds durability). Watco Danish Oil is the best-known brand. It is an excellent finish for shop furniture, tool handles, cutting boards, and any piece where a natural, low-maintenance finish is appropriate.
+Danish oil is a blend of oil (usually BLO or tung oil), varnish, and thinner. It penetrates like an oil and builds a thin protective film like a varnish. It is easier to apply than straight oil (the thinner aids penetration) and provides better protection (the varnish component adds durability). Watco Danish Oil is the best-known brand. It is an excellent finish for shop furniture, tool handles, and any piece where a natural, low-maintenance finish is appropriate.
+
+The application for Danish oil: flood the surface generously, let it soak for 15-30 minutes, then wipe off all excess. For maximum protection, apply three coats over three days, sanding lightly with 320-grit between coats. The first coat soaks in almost entirely. The second builds a thin film. The third produces a soft, satin sheen that feels warm to the touch. Watco comes in Natural (clear), Dark Walnut, Medium Walnut, Cherry, and several other tones. For a first furniture project, Natural Watco Danish Oil on walnut or cherry is nearly foolproof — it is the finish equivalent of training wheels, except the result is genuinely good.
 
 ---
 
@@ -58,11 +62,13 @@ Brush application is the traditional method, and it is where most finishing prob
 
 Dust nibs — tiny specks of dust embedded in the finish — are the other plague. The wet varnish acts as flypaper for every particle in the air. Working in a clean space, wetting the floor to suppress airborne dust, and timing your finish coats for calm, still conditions all help. Between coats, light sanding with 320 grit removes dust nibs and provides tooth for the next coat.
 
-**Wiping varnish** — polyurethane thinned 50/50 with mineral spirits — is the solution for woodworkers who hate brushing. A thin coat of wiping varnish is applied with a rag or foam applicator, building the film gradually over many thin coats. Each coat is so thin that dust nibs are minimal and brush marks are nonexistent. The tradeoff is time: a three-coat brushed finish might require six to eight coats of wiping varnish. But the result is professional-grade, and the technique is accessible to beginners.
+**Wiping varnish** — polyurethane thinned 50/50 with mineral spirits — is the solution for woodworkers who hate brushing. You can make your own (any oil-based polyurethane thinned with odorless mineral spirits) or buy it premixed. General Finishes Arm-R-Seal is arguably the best commercial wiping varnish available — a thinned urethane that goes on smooth, builds a durable film, and forgives beginner technique. A thin coat of wiping varnish is applied with a rag or foam applicator, building the film gradually over many thin coats. Each coat is so thin that dust nibs are minimal and brush marks are nonexistent. The tradeoff is time: a three-coat brushed finish might require six to eight coats of wiping varnish. But the result is professional-grade, and the technique is accessible to beginners.
 
 ### Water-Based Polyurethane
 
-Water-based poly dries fast (hours instead of overnight), produces little odor, and does not yellow with age. It is the preferred finish for light-colored woods (maple, ash, birch) where yellowing would alter the appearance. The tradeoff is that water-based poly raises the grain (requiring extra sanding), does not penetrate as deeply as oil-based, and produces a thinner film per coat.
+Water-based poly dries fast (hours instead of overnight), produces little odor, and does not yellow with age. It is the preferred finish for light-colored woods (maple, ash, birch) where yellowing would alter the appearance. For quilted big-leaf maple — one of the PNW's signature figured woods — water-based poly is the finish that keeps the wood looking like maple rather than turning it amber. General Finishes High Performance water-based topcoat is the benchmark product: it goes on smooth with a synthetic-bristle brush or foam applicator, self-levels well, and builds a film that is nearly as durable as oil-based poly in fewer coats than you would expect.
+
+The tradeoff is that water-based poly raises the grain (requiring pre-wetting and sanding before the first coat, as described in the sanding section), does not penetrate as deeply as oil-based, and produces a thinner film per coat. Plan on four to five coats where three of oil-based would suffice. Sand lightly with 320-grit between coats (water-based poly sands to a fine white powder that is easy to see and easy to remove). The final coat, left unsanded, should have a smooth, even sheen. If the sheen is uneven, a light rubbing with 0000 steel wool and paste wax produces a uniform satin that feels as good as it looks.
 
 ---
 
@@ -157,6 +163,36 @@ All film finishes (polyurethane, lacquer, shellac) are food-safe when fully cure
 ## The Finished Surface
 
 A well-applied finish does not call attention to itself. It calls attention to the wood. The best finish is the one that makes people reach out and touch the surface, drawn by the warmth and depth that the finish reveals in the grain. Whether that finish is a simple coat of oil or a museum-grade French polish depends on the piece, the wood, and the intent. But in every case, the finish is the final act of a conversation between maker and material — the moment when the wood's character is revealed in full, and the maker steps back to let the wood speak.
+
+## PNW Finishing Considerations
+
+The Pacific Northwest's climate creates specific finishing challenges and opportunities. The high humidity — indoor relative humidity in western Washington and Oregon averages 50-60% even in heated homes — means that water-based finishes are slower to cure (the ambient moisture slows water evaporation), and oil finishes take longer between coats. Conversely, the moderate temperatures mean that lacquer spraying rarely encounters the blushing problems common in humid Southern summers, and the cool shop air is forgiving for brush application.
+
+Cedar finishing is a PNW specialty. Western red cedar's natural oils resist many finishes — oil-based paints and stains adhere poorly to fresh cedar, and latex paints can peel as the cedar oils bleed through. The proven approach for exterior cedar (shingles, siding, fencing) is a penetrating semi-transparent stain rather than a film-forming paint. Cabot and TWP (Total Wood Preservative) are the PNW standards for cedar exterior finish. For interior cedar — closet lining, sauna — no finish is needed or desired; the aromatic oils are the point.
+
+Douglas fir finishing rewards patience. The pronounced earlywood-latewood contrast means that stain absorbs unevenly — the soft earlywood soaks up stain while the dense latewood resists it, producing a blotchy, reversed-grain appearance. A washcoat of thinned shellac (1-pound cut) before staining evens the absorption. Or skip stain entirely and let the fir speak for itself — a clear oil-varnish blend (Watco Danish Oil or a wiping varnish) on Douglas fir produces a warm, amber surface that deepens beautifully with age.
+
+Big-leaf maple's figured varieties — quilted, curly, bird's eye — demand finishes that maximize the chatoyance (the optical shimmer that changes with viewing angle). Clear lacquer or water-based polyurethane preserves the maple's natural pale color while providing the high clarity that lets the figure perform. Oil-based finishes work but add amber that some makers find distracting on the maple's naturally light palette. For guitar tops, the finish is typically nitrocellulose lacquer applied thin — thin enough that the finish adds minimal mass and does not dampen the wood's acoustic vibration.
+
+## Cross-References
+
+- **[WDC-02]** Wood Science — grain structure, porosity, and moisture content that determine finish behavior
+- **[WDC-05]** Joinery — finishes must be applied before assembly in some joints (the panel in frame-and-panel, for example, must be finished before the frame is glued, because the exposed wood will show when the panel contracts in dry weather)
+- **[WDC-07]** Furniture Making — finish selection as a design decision, not just a final step
+- **[WDC-09]** PNW Timber — species-specific finishing characteristics for Douglas fir, cedar, maple, and alder
+- **[PNT-05]** Painting — wood panel finishing for painting (gesso preparation, sealing, ground application) shares principles with furniture finishing
+- **[ECO-05]** Forest Ecology — the extractive chemistry (thujaplicins in cedar, tannins in oak) that creates finish compatibility issues has ecological origins
+
+---
+
+## Sources and References
+
+- Flexner, Bob. "Understanding Wood Finishing." Fox Chapel Publishing, revised edition 2010.
+- Jewitt, Jeff. "Taunton's Complete Illustrated Guide to Finishing." Taunton Press, 2004.
+- General Finishes. generalfinishes.com. (Arm-R-Seal, gel stain, water-based topcoat specifications)
+- Old Fashioned Milk Paint Company. milkpaint.com.
+- Hoadley, R. Bruce. "Understanding Wood." (Chapter on wood-finish interaction)
+- Fine Woodworking Magazine. Finishing articles archive. Taunton Press.
 
 ---
 

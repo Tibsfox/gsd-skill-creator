@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 102&deg; &mdash; American Crow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--puget-teal), var(--earth-brown));
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Corvidae trio card */
+    .corvid-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 30%, #0F3460 60%, #1A1A2E 100%);
+      border: 3px solid #0F3460;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .corvid-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #9FA8DA;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .corvid-card p { color: #E8EAF6; }
+    .corvid-card strong { color: #C5CAE9; }
+
+    /* Urban intelligence card */
+    .urban-card {
+      background: linear-gradient(135deg, #37474F 0%, #455A64 30%, #546E7A 60%, #607D8B 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .urban-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .urban-card p { color: #ECEFF1; }
+    .urban-card strong { color: #CFD8DC; }
+
+    /* Familiar sound card */
+    .familiar-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .familiar-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E1BEE7;
+    }
+    .familiar-card p { color: #F3E5F5; }
+    .familiar-card strong { color: #CE93D8; }
+
+    /* Campfire OK contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .contrast-card p { color: #E0F2F1; }
+    .contrast-card strong { color: #B2DFDB; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.corvid { background: #1A1A2E; }
+    .theory-icon.urban { background: #37474F; }
+    .theory-icon.familiar { background: #4A148C; }
+    .theory-icon.contrast { background: #004D40; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #6A1B9A; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">102&deg;</div>
+      <div class="release-title-block">
+        <h2>American Crow</h2>
+        <div class="scientific"><em>Corvus brachyrhynchos</em> (Corvidae) &mdash; THIRD CONSECUTIVE CORVIDAE &mdash; CORVIDAE TRIO</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      caw caw caw complex &mdash; the most recognized bird sound in North America. Same genus <em>Corvus</em> as the Raven but smaller, more urban, more social. Varied habitat &mdash; the most habitat-generalist bird in the engine. Roosts in hundreds to thousands. E=4. <strong>THIRD CONSECUTIVE CORVIDAE</strong> (100&ndash;101&ndash;102). Forty-second consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Corvidae Trio Card -->
+        <div class="corvid-card">
+          <h3>Third Consecutive Corvidae &mdash; The Corvidae Trio (100&ndash;101&ndash;102)</h3>
+          <p><strong>Three consecutive Corvidae.</strong> Raven (100), Raven pair (101), American Crow (102). This is unprecedented in the engine &mdash; no family has ever held three consecutive degrees. The corvids have established a <strong>three-degree territory</strong>. The Raven introduced the family, the Raven pair deepened it, and now the Crow &mdash; same genus <em>Corvus</em>, different species &mdash; completes the <strong>Corvidae trio</strong>. Three degrees of intelligence, three degrees of vocal complexity, three degrees of corvid command.</p>
+        </div>
+
+        <!-- Urban Intelligence Card -->
+        <div class="urban-card">
+          <h3>Urban Intelligence &mdash; The Most Familiar Corvid</h3>
+          <p>The American Crow is the <strong>most urban</strong>, most social, and most familiar corvid [1, 2]. Where the raven is a bird of open forest and mountain, the crow is a bird of <strong>everywhere</strong> &mdash; cities, suburbs, farms, parks, parking lots. The crow roosts in <strong>hundreds to thousands</strong>. The crow recognizes individual human faces [3]. The crow holds funerals. The crow uses tools. The crow is <strong>intelligence made common</strong> &mdash; not rare and remote like the raven, but present, persistent, and everywhere.</p>
+        </div>
+
+        <!-- Familiar Sound Card -->
+        <div class="familiar-card">
+          <h3>The Caw &mdash; 102nd Acoustic Element (species side)</h3>
+          <p>The American Crow&rsquo;s <strong>&ldquo;caw&rdquo;</strong> is arguably the <strong>most recognized bird sound in North America</strong> [1, 2]. The caw caw caw complex is the 102nd acoustic element (species side). Not one caw but a <strong>complex of caws</strong> &mdash; alarm caw, assembly caw, feeding caw, scolding caw, and more. Each carries different information. The caw is not simple &mdash; it is a <strong>language of urgency and social coordination</strong>. E=4. Loud, persistent, unmistakable.</p>
+        </div>
+
+        <!-- Campfire OK Contrast Card -->
+        <div class="contrast-card">
+          <h3>The Campfire OK Contrast &mdash; Both E=4, Both Familiar</h3>
+          <p>Degree 102 pairs the American Crow with <strong>Campfire OK</strong> in Part A &mdash; Indie Electronic, E=4. <strong>Both E=4. Both familiar and warm.</strong> Campfire OK is warm electronic music that invites. The crow is the warm, familiar corvid that lives alongside humans. <strong>Both are the accessible, everyday version</strong> of something that can also be grand &mdash; Campfire OK after ODESZA, the Crow after the Raven. Both at E=4. Both present. Both <strong>OK</strong>.</p>
+        </div>
+
+        <h2>The Sound: Caw Caw Caw Complex (102nd Acoustic Element, species side)</h2>
+        <p><strong>The caw:</strong> The American Crow (<em>Corvus brachyrhynchos</em>) is defined by its <strong>caw</strong> [1, 2] &mdash; a harsh, loud, rhythmic vocalization that is one of the most recognized sounds in the natural world:</p>
+        <p><strong>Alarm caw:</strong> Rapid, harsh, urgent. Signals predator presence. Other crows respond immediately &mdash; mobbing behavior follows. The alarm caw carries hundreds of meters and triggers coordinated response across the roost.</p>
+        <p><strong>Assembly caw:</strong> Rhythmic, moderate intensity. Summons the flock. Used to coordinate movement to roost sites, food sources, or mob targets. Social coordination through sound.</p>
+        <p><strong>Scolding caw:</strong> Directed at specific threats &mdash; hawks, owls, cats, specific humans. Crows remember faces and scold individual humans who have threatened them [3]. The scolding caw is personalized.</p>
+        <p><strong>Rattling and clicking:</strong> Softer, more complex vocalizations used in close social interactions. Not as complex as the raven&rsquo;s 30+ call types but more varied than the simple &ldquo;caw&rdquo; stereotype suggests.</p>
+        <p><strong>Why E=4:</strong> The caw is <strong>loud and persistent</strong>. A crow roost of hundreds or thousands is an impressive acoustic event. But the individual crow is less powerful than the raven pair (E=5) or the raven solo&rsquo;s combined vocal force. E=4 captures the crow&rsquo;s strong, familiar, persistent voice without overstating.</p>
+
+        <h2>Taxonomy: Corvidae &mdash; THIRD CONSECUTIVE (100&ndash;101&ndash;102)</h2>
+        <p><strong>Classification:</strong> Class <strong>Aves</strong>. Order <strong>Passeriformes</strong>. Family <strong>Corvidae</strong>. Genus <em>Corvus</em>. Species <em>C. brachyrhynchos</em>.</p>
+        <p><strong>Same genus as the Raven:</strong> Both <em>Corvus</em>. The raven (<em>C. corax</em>) is the larger, more solitary species. The crow (<em>C. brachyrhynchos</em>) is smaller, more social, more urban. <strong>Size contrast:</strong> Raven wingspan 115-150 cm; Crow wingspan 85-100 cm. Raven weight 0.7-1.5 kg; Crow weight 0.3-0.6 kg.</p>
+        <p><strong>The Corvidae trio:</strong> Three consecutive Corvidae entries (100-101-102). Unprecedented. Steller&rsquo;s Jay at degree 53, then Raven at 100, Raven pair at 101, Crow at 102. Four Corvidae entries total. The family dominates the post-centennial.</p>
+
+        <h2>Ecology: Urban, Social, Habitat-Generalist</h2>
+        <p><strong>Varied habitat:</strong> The American Crow is the <strong>most habitat-generalist bird in the engine</strong> [1, 2]. Found in cities, suburbs, rural areas, farms, forests, beaches, parks, parking lots, landfills. No habitat is off-limits. This generalism is a function of intelligence &mdash; the crow adapts to any environment.</p>
+        <p><strong>Social roosts:</strong> Crows roost communally in numbers ranging from <strong>hundreds to hundreds of thousands</strong>. Winter roosts in the PNW can contain 10,000+ crows. The roost is a social institution &mdash; information exchange, mate selection, and collective security.</p>
+        <p><strong>Intelligence:</strong> Like the raven, the crow is one of the most intelligent animals [1, 2, 3]:</p>
+        <ul>
+          <li><strong>Face recognition</strong> &mdash; crows recognize individual human faces and remember threats for years [3].</li>
+          <li><strong>Tool use</strong> &mdash; documented tool use and manufacture, though less extensively than ravens.</li>
+          <li><strong>Cooperative behavior</strong> &mdash; crows cooperate in mobbing predators, sharing information, and coordinated foraging.</li>
+          <li><strong>Funerals</strong> &mdash; crows gather around dead crows in documented &ldquo;funeral&rdquo; behavior.</li>
+        </ul>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon familiar">C</div>
+            <div class="theory-content">
+              <h4>Caw Caw Caw Complex &mdash; 102nd Acoustic Element (species side)</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>The most recognized bird sound. Alarm caw, assembly caw, scolding caw, rattling. A language of social coordination. E=4.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon corvid">T</div>
+            <div class="theory-content">
+              <h4>Corvidae Trio &mdash; Third Consecutive (100&ndash;101&ndash;102)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Unprecedented three consecutive degrees from same family. Raven, Raven pair, Crow. Corvidae dominates post-centennial.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Most Habitat-Generalist Bird in the Engine</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Found everywhere: cities to forests to beaches. Intelligence enables habitat generalism. More urban than any prior species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">F</div>
+            <div class="theory-content">
+              <h4>The Campfire OK Contrast &mdash; Both E=4, Both Familiar</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Part A (Campfire OK, warm electronic, E=4) and Part B (Crow, familiar corvid, E=4). Both accessible, everyday versions of grand predecessors.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-100: Common Raven</strong>
+            <p>SAME GENUS CORVUS. Size contrast: Raven is larger, deeper-voiced, more solitary, open-forest. Crow is smaller, higher-voiced, more social, urban. Raven E=4 solo; Crow E=4 but through persistence and numbers rather than depth.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-101: Common Raven Pair</strong>
+            <p>CORVIDAE TRIO (100-101-102). Three consecutive Corvidae. Raven solo, Raven pair, Crow. The trio covers individual, pair, and social-flock dimensions of corvid life.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>FAMILIAR / UBIQUITOUS PARALLEL. Both among the most familiar, most recognized species. The Mallard's quack and the Crow's caw are two of the most universally known animal sounds. Both habitat generalists. Both urban-adapted.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>FAMILIAR BIRD. Both among the most familiar birds in North America. The Robin's cheerful song and the Crow's harsh caw are complementary soundscapes -- one melodic, one percussive. Both ubiquitous. Both recognized by non-birders.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-070: Raccoon</strong>
+            <p>URBAN INTELLIGENCE. Both highly intelligent, both urban-adapted, both problem-solvers. The Raccoon manipulates with hands; the Crow recognizes individual human faces. Both thrive in human landscapes. Mammalian and avian urban intelligence.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;American crow,&rdquo; &ldquo;Corvus brachyrhynchos,&rdquo; &ldquo;Corvidae.&rdquo;</li>
+          <li>[2] Marzluff, J.M. &amp; Angell, T. (2012). <em>Gifts of the Crow: How Perception, Emotion, and Thought Allow Smart Birds to Behave Like Humans.</em> Atria Books.</li>
+          <li>[3] Marzluff, J.M. et al. (2010). &ldquo;Lasting recognition of threatening people by wild American crows.&rdquo; <em>Animal Behaviour</em>, 79(3), 699-707.</li>
+          <li>[4] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">102&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Caw is loud and persistent.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Corvidae (3rd consecutive!)</div>
+          <div class="stat-detail">100-101-102. Corvidae trio.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Passeriformes</div>
+          <div class="stat-detail">Songbirds. Same genus as Raven.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Varied (most generalist!)</div>
+          <div class="stat-detail">Cities to forests. Everywhere.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Caw caw caw complex</div>
+          <div class="stat-detail">Most recognized bird sound.</div>
+        </div>
+
+        <h3>Corvidae Trio</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree 100</div>
+          <div class="stat-value">Common Raven</div>
+          <div class="stat-detail">Solo. 30+ call types. E=4.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Degree 101</div>
+          <div class="stat-value">Raven Pair</div>
+          <div class="stat-detail">Duet. Synchronized. E=5.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Degree 102</div>
+          <div class="stat-value">American Crow</div>
+          <div class="stat-detail">Caw complex. Social. E=4.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Corvidae Run</div>
+          <div class="stat-value">3 consecutive (100-102)</div>
+          <div class="stat-detail">Unprecedented trio.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (42nd!)</div>
+          <div class="stat-detail">Forty-second consecutive original.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completion</div>
+          <div class="stat-value">28.3% of 360</div>
+          <div class="stat-detail">102nd degree.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

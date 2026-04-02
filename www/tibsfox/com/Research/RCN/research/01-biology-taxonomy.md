@@ -259,5 +259,16 @@ Understanding the biology of raccoons is not merely an academic exercise. It is 
 
 ---
 
+## Sources
+
+- Goldman, E.A. (1950). "Raccoons of North and Middle America." *North American Fauna*, No. 60. U.S. Fish and Wildlife Service.
+- Koepfli, K.P., et al. (2007). "Phylogeny of the Procyonidae." *Molecular Phylogenetics and Evolution*, 43(3): 1076-1095.
+- Lotze, J.H. and Anderson, S. (1979). "*Procyon lotor*." *Mammalian Species*, 119: 1-8.
+- Helgen, K.M., et al. (2013). "Taxonomic revision of the olingos (Bassaricyon), with description of a new species, the Olinguito." *ZooKeys*, 324: 1-83.
+- Zeveloff, S.I. (2002). *Raccoons: A Natural History*. Smithsonian Institution Press.
+- Eizirik, E., et al. (2010). "Pattern and timing of diversification of the mammalian order Carnivora." *Molecular Phylogenetics and Evolution*, 56(1): 49-63.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

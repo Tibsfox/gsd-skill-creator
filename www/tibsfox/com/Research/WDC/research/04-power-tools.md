@@ -164,6 +164,25 @@ Fatigue is the enemy of attention. The most dangerous time in the shop is the en
 
 The shop is your space. You get to decide how it is organized, what tools it contains, and what rules govern it. The one rule that is not negotiable is this: everyone who walks out of the shop should have the same number of fingers they walked in with.
 
+## Cross-References
+
+- **[WDC-03]** Hand Tools — the complementary approach; when hand tools are the right choice instead of power
+- **[WDC-05]** Joinery — the joints that power tools cut (dadoes, rabbets, tenons, dovetails via jig)
+- **[WDC-08]** Construction Framing — power tools at building scale; the same table saw and miter saw principles applied to dimensional lumber
+- **[WDC-09]** PNW Timber — western red cedar dust as a sensitizer and carcinogen; the dust collection section has direct PNW health implications
+- **[FSR-09]** Responder Wellness — the occupational health parallel; both woodworkers and firefighters face carcinogen exposure that requires systemic prevention, not individual heroism
+
+---
+
+## Sources and References
+
+- Nagyszalanczy, Sandor. "Workshop Dust Control." Taunton Press, 2002.
+- SawStop. sawstop.com. Flesh-detection technology documentation.
+- U.S. Consumer Product Safety Commission. Table saw injury statistics, various years. (~67,000 injuries/year, ~4,000 amputations)
+- Festool. festoolusa.com. Domino joiner specifications.
+- Fine Woodworking Magazine. Tool reviews, various issues. Taunton Press.
+- American National Standards Institute. ANSI O1.1 — Safety Requirements for Woodworking Machinery.
+
 ---
 
 *Previous: [The Hand Tool Workshop](03-hand-tools.md) | Next: [The Art of Joining Wood](05-joinery.md)*

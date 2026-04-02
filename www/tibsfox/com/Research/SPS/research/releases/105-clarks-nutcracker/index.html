@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 105&deg; &mdash; Clark&rsquo;s Nutcracker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--puget-teal), #1A1A2E);
+      color: #C5CAE9;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(26, 26, 46, 0.4), 0 0 24px rgba(0, 105, 92, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Corvidae card */
+    .corvid-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 30%, #0F3460 60%, #1A1A2E 100%);
+      border: 3px solid #0F3460;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .corvid-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #9FA8DA;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .corvid-card p { color: #E8EAF6; }
+    .corvid-card strong { color: #C5CAE9; }
+
+    /* Pine specialist card */
+    .pine-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .pine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .pine-card p { color: #E8F5E9; }
+    .pine-card strong { color: #A5D6A7; }
+
+    /* Seed caching card */
+    .cache-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #795548 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .cache-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .cache-card p { color: #EFEBE9; }
+    .cache-card strong { color: #BCAAA4; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.corvid { background: #1A1A2E; }
+    .theory-icon.call { background: #0D47A1; }
+    .theory-icon.cache { background: #4E342E; }
+    .theory-icon.alpine { background: #1B5E20; }
+    .theory-icon.pine { background: #33691E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #6A1B9A; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">105&deg;</div>
+      <div class="release-title-block">
+        <h2>Clark&rsquo;s Nutcracker</h2>
+        <div class="scientific"><em>Nucifraga columbiana</em> (Corvidae) &mdash; SIXTH CONSECUTIVE CORVIDAE (100&ndash;105)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      harsh grating kraa-a-a &mdash; the whitebark pine specialist. Clark&rsquo;s Nutcracker caches up to <strong>98,000 pine seeds per year</strong> and remembers the locations of thousands of caches. Named for <strong>William Clark</strong> (Lewis and Clark expedition). <strong>SIXTH consecutive Corvidae</strong> (100&ndash;105) &mdash; THE CORVIDAE SEXTET! Ties the Mustelidae sextet (63&ndash;68) and Sciuridae sextet (75&ndash;80) for longest family streak since Sciuridae&rsquo;s octet (75&ndash;82). Alpine pine habitat. E=5. Forty-fifth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Corvidae Sextet Card -->
+        <div class="corvid-card">
+          <h3>Sixth Consecutive Corvidae &mdash; The Corvidae Sextet</h3>
+          <p>
+            Six consecutive Corvidae: <strong>Raven</strong> (100), <strong>Raven pair</strong> (101),
+            <strong>American Crow</strong> (102), <strong>Steller&rsquo;s Jay</strong> (103),
+            <strong>Gray Jay</strong> (104), <strong>Clark&rsquo;s Nutcracker</strong> (105).
+            The corvid quintet becomes a <strong>sextet</strong>.
+            Ties the <strong>Mustelidae sextet</strong> (63&ndash;68) and the
+            <strong>Sciuridae sextet</strong> (75&ndash;80) for longest family streak
+            since Sciuridae&rsquo;s octet (75&ndash;82). Six degrees, one family &mdash;
+            six acoustic characters: deep cronk, duet, sharp caw, raucous alarm,
+            soft whistles, and now <strong>harsh grating kraa-a-a</strong>. The sextet
+            ends with the loudest alpine voice in the corvid family.
+          </p>
+        </div>
+
+        <!-- Pine Specialist Card -->
+        <div class="pine-card">
+          <h3>The Whitebark Pine Specialist &mdash; 98,000 Seeds Per Year</h3>
+          <p>
+            Clark&rsquo;s Nutcracker is a <strong>whitebark pine obligate</strong> &mdash;
+            its survival and the survival of the whitebark pine (<em>Pinus albicaulis</em>)
+            are deeply intertwined. The bird caches up to <strong>98,000 pine seeds per year</strong>
+            in thousands of scattered locations across the alpine landscape. It remembers
+            the locations of these caches with extraordinary spatial memory, recovering them
+            months later &mdash; even under snow. The seeds it fails to recover
+            <strong>germinate</strong>, making the nutcracker the <strong>primary dispersal
+            agent</strong> for whitebark pine. Without the nutcracker, the pine cannot
+            reproduce effectively. Without the pine, the nutcracker cannot survive.
+            <strong>Obligate mutualism.</strong>
+          </p>
+        </div>
+
+        <!-- Seed Caching Card -->
+        <div class="cache-card">
+          <h3>Seed Caching &mdash; The Greatest Memory in the Corvid Family</h3>
+          <p>
+            The nutcracker&rsquo;s <strong>sublingual pouch</strong> can carry up to
+            <strong>150 seeds at a time</strong>, transporting them kilometers from the
+            source tree to cache sites on south-facing slopes, ridges, and windswept areas
+            where snow melts earliest. Each cache contains 1&ndash;15 seeds buried
+            2&ndash;3 cm deep in soil. The bird creates <strong>thousands of caches per year</strong>
+            and remembers a significant proportion of their locations using spatial landmarks.
+            This spatial memory is among the most remarkable in the animal kingdom &mdash;
+            the nutcracker&rsquo;s hippocampus is <strong>proportionally larger</strong>
+            than that of non-caching corvids. The caching behavior is the foundation of
+            <strong>alpine forest regeneration</strong>.
+          </p>
+        </div>
+
+        <h2>Harsh Grating Kraa-a-a</h2>
+        <p>
+          Clark&rsquo;s Nutcracker&rsquo;s primary vocalization is a <strong>harsh, grating,
+          far-carrying kraa-a-a</strong> &mdash; a rough, nasal, almost mechanical call
+          that echoes across alpine ridges and whitebark pine stands. The call is
+          <strong>diagnostic</strong>: if you hear a harsh grating call above treeline
+          in the Cascades, it is almost certainly a Clark&rsquo;s Nutcracker.
+        </p>
+        <p>
+          E=5 &mdash; high energy. The nutcracker&rsquo;s call is <strong>loud, carrying,
+          and persistent</strong>. It broadcasts across open alpine terrain where
+          sound carries far. The harsh quality is distinct from every other corvid
+          in the sextet &mdash; the raven is deep and resonant, the crow is sharp and
+          percussive, the Steller&rsquo;s Jay is raucous and alarming, the Gray Jay
+          is soft and conversational. The nutcracker is <strong>grating and mechanical</strong>.
+        </p>
+
+        <h2>Named for William Clark</h2>
+        <p>
+          Clark&rsquo;s Nutcracker was described by Alexander Wilson in 1811 from a specimen
+          collected during the <strong>Lewis and Clark expedition</strong> (1804&ndash;1806).
+          The species is named for <strong>William Clark</strong>, who first described the
+          bird in his journal near the Salmon River in present-day Idaho. The Lewis and Clark
+          expedition encountered the bird in the mountain forests of the Northwest &mdash;
+          exactly the alpine pine habitat where the species remains today.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-104 Gray Jay (Corvidae sextet)</strong>
+            <p>Corvidae sextet. Gray Jay in subalpine conifer; nutcracker in alpine pine. Soft whistles (E=4) vs harsh grating (E=5). Adjacent corvids occupying adjacent elevational bands.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-100 Common Raven (intelligence)</strong>
+            <p>Corvidae sextet. Intelligence. Both demonstrate exceptional spatial memory and food caching. The raven caches in the ground; the nutcracker caches pine seeds at scale (98,000/year). Maximum caching specialization.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-074 American Pika (alpine shared)</strong>
+            <p>Alpine neighbor. Both occupy alpine/subalpine habitat. Both cache food for winter. The pika caches hay piles on talus; the nutcracker caches pine seeds in soil. Parallel survival strategies at elevation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-076 Hoary Marmot (alpine)</strong>
+            <p>Alpine shared habitat. Both are signature species of the alpine zone. The marmot hibernates; the nutcracker caches and endures. Different winter survival strategies in the same harsh environment.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065 American Marten (subalpine)</strong>
+            <p>Subalpine/alpine overlap. Marten in dense subalpine forest; nutcracker in open alpine pine stands. Both year-round residents of high-elevation environments. Different structural requirements.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon call">K</div>
+            <div class="theory-content">
+              <h4>Harsh Grating Kraa-a-a &mdash; The Alpine Broadcaster</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Harsh, grating, far-carrying call. E=5. Diagnostic for alpine habitat. The loudest and harshest voice in the Corvidae sextet. Mechanical quality.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon corvid">C</div>
+            <div class="theory-content">
+              <h4>Sixth Consecutive Corvidae (100&ndash;105) &mdash; The Corvidae Sextet</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Six degrees, one family. Ties Mustelidae and Sciuridae sextets. Deep cronk, duet, sharp caw, raucous alarm, soft whistles, harsh grating.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon pine">P</div>
+            <div class="theory-content">
+              <h4>Whitebark Pine Mutualism &mdash; Obligate Seed Disperser</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>98,000 seeds per year. Sublingual pouch carries 150 seeds. Unretrieved seeds germinate. Without the nutcracker, the pine cannot reproduce. Obligate mutualism.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cache">$</div>
+            <div class="theory-content">
+              <h4>Seed Caching &mdash; Greatest Spatial Memory in the Corvid Family</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Thousands of caches. Enlarged hippocampus. Recovers caches under snow using spatial landmarks. Foundation of alpine forest regeneration.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon alpine">A</div>
+            <div class="theory-content">
+              <h4>Alpine Pine Habitat &mdash; Above Treeline with the Whitebark Pine</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Whitebark pine stands at and above treeline. Named for William Clark (Lewis and Clark expedition). The corvid of the highest elevations.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Clark&rsquo;s Nutcracker</div>
+          <div class="stat-detail"><em>Nucifraga columbiana</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Corvidae</div>
+          <div class="stat-detail">6th consecutive (100&ndash;105)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">harsh grating kraa-a-a</div>
+          <div class="stat-detail">The alpine broadcaster</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">High &mdash; loud, carrying, persistent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Alpine pine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Trait</div>
+          <div class="stat-value">98,000 seeds/year</div>
+          <div class="stat-detail">Whitebark pine obligate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV Status</div>
+          <div class="stat-value">Original</div>
+          <div class="stat-detail">45th consecutive</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
