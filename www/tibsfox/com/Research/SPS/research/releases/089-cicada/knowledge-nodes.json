@@ -1,0 +1,145 @@
+{
+  "degree": 89,
+  "species": "Cicada (Annual)",
+  "scientific_name": "Cicadidae (family)",
+  "slug": "089-cicada",
+  "sound_type": "electric buzzing throb -- tymbal vibration, completely different from stridulation, 100+ dB, the loudest insect on Earth, E=4, forest edge habitat, THIRD CONSECUTIVE INSECT (87-88-89)",
+  "energy": 4,
+  "ecosystem": "Forest edge. Tree trunks and branches. Transition zone between forest and meadow. Arboreal.",
+  "season": "Summer (peak calling during hot days). Annual emergence.",
+  "family": "Cicadidae",
+  "order": "Hemiptera",
+  "csv_substitute": false,
+  "original_species": "Cicada (Annual)",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [87, 88],
+    "partner_species": ["Cricket Chorus", "Katydid"],
+    "pair_type": "Third consecutive insect (87-88-89). The insect trio. Three different sound mechanisms: stridulation (cricket/katydid) vs tymbal vibration (cicada). Two orders: Orthoptera (87-88) and Hemiptera (89)."
+  },
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.20,
+    "description": "Reference for forest edge habitat in the Puget Sound lowlands, Washington. Cicada calls audible in wooded edges and transition zones."
+  },
+  "taxonomy_note": {
+    "description": "THIRD CONSECUTIVE INSECT (87-88-89). NEW FAMILY Cicadidae (40th -- MILESTONE!). NEW ORDER Hemiptera. Different from Orthoptera (cricket/katydid at 87-88). Tymbal mechanism (not stridulation). Family-level entry. Annual cicadas.",
+    "current_class": "Insecta",
+    "new_class": false,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Insecta. Third insect entry.",
+    "current_family": "Cicadidae",
+    "new_family": true,
+    "family_count_in_engine": 40,
+    "cicadidae_count_in_engine": 1,
+    "name_etymology": "Cicadidae from Latin cicada ('cicada, tree cricket'). Hemiptera from Greek hemi ('half') + pteron ('wing'), referring to the half-hardened forewings.",
+    "genus_note": "Family-level entry. Multiple genera contribute to PNW forest-edge soundscapes. Dog-day cicadas and related annual species.",
+    "order_note": "Hemiptera -- NEW ORDER. True bugs, cicadas, aphids, leafhoppers. Different from Orthoptera (87-88). Second insect order in the engine.",
+    "class_note": "Insecta -- third entry (87, 88, 89). Fourth class in the engine. The insect trio.",
+    "family_position": "Cicadidae's FIRST entry at degree 89. NEW FAMILY (40th -- MILESTONE). Forty families in 89 degrees."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000 Hz depending on species",
+    "peak_energy_band_hz": "3,000-6,000 Hz. Broad peak from tymbal harmonics.",
+    "song_frequency_hz": "NOT a song. TYMBAL VIBRATION. Rapid buckling of paired abdominal membranes at 100-500 cycles per second.",
+    "song_duration_s": "Individual call: seconds to minutes of continuous buzzing. Chorus: hours during peak summer heat.",
+    "note_structure": "Continuous buzzing drone. Tymbal clicks fuse into a sustained electric throb. Some species modulate intensity (pulsing). No discrete notes.",
+    "note_types": "Calling buzz (primary advertisement, attracts females), disturbance squawk (produced when handled), courtship modification (quieter, directed).",
+    "phrase_structure": "No phrase structure. Continuous drone. Some species have on-off pulsing patterns, but the basic signal is sustained.",
+    "timbre": "Electric. Buzzing. Throbbing. Sounds more like a power line or electronic oscillator than a biological organism. Harsh, metallic quality.",
+    "amplitude": "E=4. Individual cicadas exceed 100 dB at close range. The LOUDEST INSECT ON EARTH. Collective chorus fills entire forest edge. Absolute acoustic dominance.",
+    "tempo": "Continuous. No rhythm in the cricket sense. Some species pulse, but the basic sound is a sustained drone.",
+    "context": "BREEDING CALL: males vibrate tymbals to attract females. Diurnal. Peak calling in heat of day. Summer. The collective chorus is the primary acoustic phenomenon.",
+    "regional_variation": "Species composition varies by region. PNW annual cicadas differ from eastern periodical cicadas. Multiple species may contribute to any given chorus.",
+    "key_property": "ELECTRIC BUZZING THROB -- the 90th acoustic element. Third insect sound. TYMBAL VIBRATION -- completely different from stridulation. 100+ dB. Loudest insect. E=4. Forest edge. The most powerful insect sound in the engine."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Family-level entry. Annual cicadas: 25-50 mm body length, robust body, large head with prominent compound eyes, transparent wings held tent-like over body. Green, brown, or black coloration depending on species. Males have paired tymbal organs on sides of abdomen.",
+    "diagnostic_mark": "For degree 89: (1) TYMBALS -- paired vibrating membranes on abdomen (males). (2) LARGE COMPOUND EYES -- prominent, widely spaced. (3) TRANSPARENT WINGS -- held tent-like, veined. (4) ROBUST BODY -- stocky. (5) SOUND -- most often detected by the electric buzz, not by sight.",
+    "fur_detail": null,
+    "skin_detail": "EXOSKELETON: Chitinous exoskeleton. Green, brown, or black with markings. Wings transparent with visible venation. Discarded nymphal exoskeletons (exuviae) found clinging to tree bark after emergence.",
+    "dental_detail": null,
+    "field_id": "Most often detected by SOUND -- the electric buzzing throb on summer days. Large, robust insects on tree trunks. Discarded exoskeletons on bark. The sound is unmistakable. Listen for the electric drone."
+  },
+  "nodes": [
+    {
+      "id": "insect-trio",
+      "type": "pattern",
+      "title": "Third Consecutive Insect -- The Insect Trio (87-88-89)",
+      "description": "Cricket (87), katydid (88), cicada (89). Three consecutive insects. Three different sound mechanisms. Two orders (Orthoptera, Hemiptera). Comprehensive insect acoustic exploration.",
+      "connections": ["tymbal-mechanism", "cicadidae-new", "buzzing-throb"]
+    },
+    {
+      "id": "buzzing-throb",
+      "type": "concept",
+      "title": "Electric Buzzing Throb -- 90th Acoustic Element",
+      "description": "Tymbal vibration. 100+ dB. Loudest insect on Earth. Electric, buzzing, throbbing drone. E=4. Completely different from stridulation. Forest edge.",
+      "connections": ["insect-trio", "tymbal-mechanism", "cicadidae-new"]
+    },
+    {
+      "id": "cicadidae-new",
+      "type": "concept",
+      "title": "Cicadidae -- 40th Family (MILESTONE!) -- New Order Hemiptera",
+      "description": "NEW FAMILY (40th -- milestone). Forty families in 89 degrees. NEW ORDER Hemiptera. Different from Orthoptera. Second insect order.",
+      "connections": ["insect-trio", "buzzing-throb", "tymbal-mechanism"]
+    },
+    {
+      "id": "tymbal-mechanism",
+      "type": "concept",
+      "title": "Tymbal Vibration -- New Sound Mechanism",
+      "description": "Paired abdominal membranes buckled by muscles. 100-500 cycles per second. Clicks fuse into continuous drone. Hollow abdomen amplifies. Fundamentally different from stridulation.",
+      "connections": ["buzzing-throb", "insect-trio"]
+    },
+    {
+      "id": "loudest-insect",
+      "type": "concept",
+      "title": "Loudest Insect on Earth -- 100+ dB",
+      "description": "Individual cicadas exceed 100 dB. Louder than a motorcycle. Tymbal mechanism with abdominal resonating chamber. Absolute acoustic dominance.",
+      "connections": ["buzzing-throb", "tymbal-mechanism"]
+    },
+    {
+      "id": "pennington-parallel",
+      "type": "pattern",
+      "title": "The Parenthetical Girls Parallel",
+      "description": "Both dramatic and overwhelming. Cicada fills forest edge with electric throb. Parenthetical Girls fills venue with theatrical intensity. Both maximalists in their domains.",
+      "connections": ["buzzing-throb", "insect-trio"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Ninth Consecutive Original CSV",
+      "description": "Twenty-nine consecutive original CSV species. No substitution. Original.",
+      "connections": ["insect-trio"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-087",
+      "species": "Cricket Chorus",
+      "relationship": "INSECT TRIO (87-88-89). Cricket = stridulation (chirp). Cicada = tymbal vibration (throb). Different mechanisms. Both E=4. Meadow (cricket) vs forest edge (cicada). Three insects, three mechanisms."
+    },
+    {
+      "target": "SPS-088",
+      "species": "Katydid",
+      "relationship": "CONSECUTIVE INSECTS (88-89). Katydid = wing stridulation (continuous buzz, Orthoptera). Cicada = tymbal vibration (electric throb, Hemiptera). Three consecutive, three mechanisms, two orders."
+    },
+    {
+      "target": "SPS-002",
+      "species": "Varied Thrush",
+      "relationship": "ELECTRIC BUZZING QUALITY. The Varied Thrush's ethereal buzzy whistle has an electric quality reminiscent of the cicada's tymbal drone. Different phyla, similar timbral impression."
+    },
+    {
+      "target": "SPS-062",
+      "species": "Beaver Chewing",
+      "relationship": "SUSTAINED SOUND. Both produce continuous, sustained sounds that fill their soundscapes. Beaver gnaws persistently; cicada throbs persistently."
+    },
+    {
+      "target": "SPS-086",
+      "species": "Pacific Treefrog",
+      "relationship": "CHORUS PARALLEL. Both overwhelming collective sounds. Treefrog (marsh, nocturnal) and cicada (forest edge, diurnal). Both E=4. Four consecutive non-mammalian entries (86-87-88-89)."
+    }
+  ]
+}
