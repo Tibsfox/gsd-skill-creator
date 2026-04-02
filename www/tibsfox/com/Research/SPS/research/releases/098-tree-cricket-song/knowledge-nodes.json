@@ -1,0 +1,125 @@
+{
+  "degree": 98,
+  "species": "Tree Cricket Song",
+  "scientific_name": "Oecanthus fultoni",
+  "slug": "098-tree-cricket-song",
+  "sound_type": "pure sustained trill thermometer -- one of the purest tones in nature, crystalline sustained trill, chirp rate correlates with temperature (Dolbear's Law)",
+  "energy": 3,
+  "ecosystem": "Shrub. Low trees, herbaceous plants, hedgerows. Elevated calling positions on vegetation.",
+  "season": "Late summer through autumn. Peak calling July through October.",
+  "family": "Gryllidae (returns from degree 87)",
+  "order": "Orthoptera",
+  "csv_substitute": false,
+  "original_species": "Tree Cricket Song",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.15,
+    "description": "Reference for shrub habitat in the PNW, Washington. Snowy tree crickets in shrubs and low vegetation throughout lowlands."
+  },
+  "taxonomy_note": {
+    "description": "GRYLLIDAE RETURNS -- first at degree 87 (cricket chorus, dense rhythmic chirping, E=4, dry meadow). Returns at degree 98 (tree cricket song, pure sustained trill, E=3, shrub). Same family, different species, radically different acoustic character.",
+    "current_class": "Insecta",
+    "new_class": false,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Insecta. Continuing insect sequence.",
+    "current_family": "Gryllidae (returns)",
+    "new_family": false,
+    "family_count_in_engine": 47,
+    "name_etymology": "Oecanthus from Greek oikos ('house') + anthos ('flower') -- living among plants. fultoni named after entomologist. Common name 'snowy tree cricket' for pale coloration. 'Thermometer cricket' for temperature correlation.",
+    "genus_note": "Oecanthus -- tree crickets. Small, pale, delicate crickets that live on vegetation. Known for remarkably pure tones and temperature-correlated chirp rates.",
+    "order_note": "Orthoptera -- continuing. Gryllidae (87, 98) and Tettigoniidae (88). Three Orthoptera entries. Crickets, katydids, grasshoppers.",
+    "class_note": "Insecta -- eleven insect entries (87-98, with gaps for non-insects at 96-97). The insect era extends through degree 98.",
+    "family_position": "Gryllidae returns at degree 98. First at degree 87. Same family, different species, different acoustic character. Within-family diversity."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2000-4000 Hz. Species-dependent. Snowy tree cricket approximately 2500-3500 Hz at typical summer temperatures.",
+    "peak_energy_band_hz": "Near the fundamental. Minimal harmonic content. Nearly sinusoidal waveform.",
+    "song_frequency_hz": "Sustained trill. Continuous stridulation. NOT a series of chirps -- a continuous trill.",
+    "song_duration_s": "Individual trill: several seconds. Calling: continuous for hours through the night.",
+    "note_structure": "Single sustained trill. Continuous. No discrete chirps (unlike field crickets). The trill IS the call.",
+    "note_types": "Sustained pure trill (mating call). Remarkably clean tone. Minimal harmonic content.",
+    "phrase_structure": "No phrase structure. Continuous trill with occasional brief pauses. Multiple individuals often synchronize trills.",
+    "timbre": "Crystalline. Pure. Clean. Nearly sinusoidal. The purest natural tone in the engine. No buzz, no rasp, no harmonic complexity. A biological tuning fork.",
+    "amplitude": "E=3. Pure but gentle. Quieter than field cricket chorus (87, E=4). Clearly audible in still night air. Crystalline clarity compensates for moderate volume.",
+    "tempo": "No tempo. Continuous sustained trill. Chirp rate within the trill is temperature-dependent (Dolbear's Law).",
+    "context": "MATING CALL. Males call from shrubs and low vegetation to attract females. Late summer through autumn. Night calling. The pure tone carries through still air.",
+    "regional_variation": "Oecanthus fultoni found across North America. PNW populations call in summer and early autumn. Chirp rate varies with local temperature.",
+    "key_property": "PURE SUSTAINED TRILL THERMOMETER -- the 98th acoustic element (species side). One of the purest tones in nature. Nearly sinusoidal. Crystalline. E=3. Gryllidae RETURNS (first at 87). Dolbear's Law: chirp rate = temperature. Shrub habitat. Thirty-eighth consecutive original CSV."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Small, delicate cricket. 12-15 mm body length. Pale green to white ('snowy'). Long antennae. Transparent wings held flat over body. Lives on vegetation, not on the ground.",
+    "diagnostic_mark": "For degree 98: (1) PALE/WHITE COLORATION -- 'snowy' appearance. (2) TRANSPARENT WINGS -- held flat over body. (3) FOUND ON VEGETATION -- shrubs, not ground. (4) LONG ANTENNAE -- longer than body. (5) PURE SUSTAINED TRILL -- diagnostic call.",
+    "fur_detail": null,
+    "skin_detail": "Thin, pale exoskeleton. Often nearly translucent. Pale green to white. Wings with visible venation. Delicate overall appearance -- much more slender than field crickets.",
+    "dental_detail": "Mandibles for feeding on plant material, aphids, and other small insects. Omnivorous.",
+    "field_id": "Small, pale, delicate cricket found on shrubs and low vegetation (not on the ground). Pale green to white. Long antennae. Transparent wings. Identified primarily by the pure, sustained, crystalline trill -- the purest insect tone. If you hear a clean, ringing trill on a summer night from the shrub layer, it is likely a tree cricket."
+  },
+  "nodes": [
+    {
+      "id": "pure-sustained-trill",
+      "type": "concept",
+      "title": "Pure Sustained Trill -- 98th Acoustic Element (species side)",
+      "description": "One of the purest tones in nature. Nearly sinusoidal waveform. Sustained, crystalline, 2-4 kHz. E=3. Remarkable tonal clarity with minimal harmonic content. A biological tuning fork.",
+      "connections": ["gryllidae-returns", "dolbears-law", "shrub-habitat"]
+    },
+    {
+      "id": "dolbears-law",
+      "type": "concept",
+      "title": "Dolbear's Law -- The Thermometer Cricket",
+      "description": "Chirp rate correlates precisely with temperature. T(F) = 40 + chirps/13s. Verified biophysics. Metabolic rate drives wing-rubbing speed. The cricket IS a thermometer.",
+      "connections": ["pure-sustained-trill"]
+    },
+    {
+      "id": "gryllidae-returns",
+      "type": "pattern",
+      "title": "Gryllidae Returns -- Same Family, Different Sound World",
+      "description": "Field cricket (87): dense rhythmic chirping, E=4, dry meadow. Tree cricket (98): pure sustained trill, E=3, shrub. Same family, radically different acoustic characters. Within-family diversity.",
+      "connections": ["pure-sustained-trill"]
+    },
+    {
+      "id": "shrub-habitat",
+      "type": "concept",
+      "title": "Shrub Habitat -- Elevated Calling Position",
+      "description": "Calls from shrubs and low trees. Elevated position helps pure tone carry. Not ground-dwelling like field crickets. Different ecological niche within same family.",
+      "connections": ["pure-sustained-trill"]
+    },
+    {
+      "id": "gold-casio-contrast",
+      "type": "pattern",
+      "title": "The Gold Casio Contrast -- Biological and Electronic Oscillators",
+      "description": "Degree 98 pairs tree cricket with Gold Casio. Both pure, sustained tones. Biological oscillator (E=3) and electronic oscillator (E=4). Cricket as nature's synthesizer.",
+      "connections": ["pure-sustained-trill"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-087",
+      "species": "Cricket Chorus",
+      "relationship": "SAME FAMILY GRYLLIDAE! Field cricket (87): dense rhythmic chirping, E=4, dry meadow. Tree cricket (98): pure sustained trill, E=3, shrub. Same family, radically different acoustic characters."
+    },
+    {
+      "target": "SPS-088",
+      "species": "Katydid",
+      "relationship": "ORTHOPTERA CONNECTION. Both Orthoptera, different families. Katydid rasp (88, Tettigoniidae) and tree cricket trill (98, Gryllidae). Both stridulating; different textures."
+    },
+    {
+      "target": "SPS-089",
+      "species": "Cicada",
+      "relationship": "INSECT SUSTAINED SOUND PARALLEL. Cicada throb (89, E=5) and tree cricket trill (98, E=3). Both sustained insect sounds. Different mechanisms and amplitudes."
+    },
+    {
+      "target": "SPS-094",
+      "species": "Stonefly",
+      "relationship": "INSECT ERA -- QUIET END. Both low-energy insect entries. Stonefly (94, E=2) and tree cricket (98, E=3). The quiet end of the insect acoustic spectrum."
+    },
+    {
+      "target": "SPS-090",
+      "species": "Spring Peeper",
+      "relationship": "PURE TONE PARALLEL! Both remarkably pure tones. Peeper peep (90) and tree cricket trill (98). Different phyla (amphibian vs insect), convergent acoustic purity. Nature's tuning forks."
+    }
+  ]
+}
