@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 96&deg; &mdash; Wood Frog &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Freeze tolerance card */
+    .freeze-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 30%, #303F9F 60%, #3949AB 100%);
+      border: 3px solid #0D47A1;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .freeze-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #C5CAE9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .freeze-card p { color: #E8EAF6; }
+    .freeze-card strong { color: #C5CAE9; }
+
+    /* Ranidae card */
+    .ranidae-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .ranidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .ranidae-card p { color: #E8F5E9; }
+    .ranidae-card strong { color: #C8E6C9; }
+
+    /* Vernal pool card */
+    .vernal-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .vernal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .vernal-card p { color: #EFEBE9; }
+    .vernal-card strong { color: #D7CCC8; }
+
+    /* STRFKR contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .contrast-card p { color: #F3E5F5; }
+    .contrast-card strong { color: #E1BEE7; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.cluck { background: #4E342E; }
+    .theory-icon.ranidae { background: #1B5E20; }
+    .theory-icon.freeze { background: #1A237E; }
+    .theory-icon.vernal { background: #795548; }
+    .theory-icon.contrast { background: #4A148C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">96&deg;</div>
+      <div class="release-title-block">
+        <h2>Wood Frog</h2>
+        <div class="scientific">Lithobates sylvaticus &mdash; Ranidae &mdash; NEW FAMILY (46th)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      duck-like clucking chorus &mdash; NEW FAMILY Ranidae (46th). Anura continues. FREEZE TOLERANCE &mdash; survives being frozen solid, up to 65% body water as ice, heart stops, thaws in spring. First freeze-tolerant species. Duck-like clucking breeding chorus. E=4. Vernal pool habitat (first temporary habitat). Thirty-sixth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Freeze Tolerance Card -->
+        <div class="freeze-card">
+          <h3>Freeze Tolerance &mdash; Survives Being Frozen Solid</h3>
+          <p>The wood frog is the engine&rsquo;s <strong>first freeze-tolerant species</strong> &mdash; one of the most remarkable survival strategies in vertebrate biology [1, 2, 4]. In winter, wood frogs allow their bodies to <strong>freeze solid</strong>. Up to <strong>65% of body water</strong> converts to ice. The <strong>heart stops beating</strong>. No breathing. No brain activity. The frog produces massive amounts of <strong>glucose</strong> as cryoprotectant &mdash; blood sugar rises to 100x normal &mdash; preventing ice crystals from destroying cells. When spring arrives, the <strong>heart restarts</strong>, blood flows, and the frog hops to a breeding pool within hours. This is not hibernation. The frog is frozen solid and comes back.</p>
+        </div>
+
+        <!-- Ranidae Card -->
+        <div class="ranidae-card">
+          <h3>NEW FAMILY Ranidae &mdash; 46th Family &mdash; True Frogs</h3>
+          <p><strong>Ranidae</strong> enters as the 46th family &mdash; <strong>true frogs</strong> [1, 2]. The second anuran family after Hylidae (tree frogs at degrees 86 and 90). The third amphibian entry. The engine returns to <strong>Amphibia</strong> after nine insect entries (87&ndash;95). <em>Lithobates sylvaticus</em> &mdash; the wood frog &mdash; is one of the most widespread frogs in North America and the <strong>northernmost-ranging</strong> North American frog.</p>
+        </div>
+
+        <!-- Vernal Pool Card -->
+        <div class="vernal-card">
+          <h3>Vernal Pool &mdash; First Temporary Habitat</h3>
+          <p>The <strong>vernal pool</strong> is the wood frog&rsquo;s breeding habitat &mdash; and the engine&rsquo;s <strong>first temporary habitat</strong> [1, 2]. Temporary seasonal pools that fill with <strong>snowmelt and spring rain</strong>, then dry completely by summer. Because they dry, <strong>no fish can establish</strong> &mdash; making them safe havens for amphibian eggs and larvae. Woodland setting. Ephemeral. The wood frog&rsquo;s entire larval development must complete before the pool vanishes.</p>
+        </div>
+
+        <!-- STRFKR Contrast Card -->
+        <div class="contrast-card">
+          <h3>The STRFKR Contrast</h3>
+          <p>Degree 96 pairs the wood frog with <strong>STRFKR</strong> in Part A &mdash; Indie Electronic, E=5. <strong>The frozen and the pulsing.</strong> The wood frog survives being frozen solid &mdash; heart stopped, crystallized, functionally dead &mdash; then thaws and breeds. STRFKR delivers relentless synth-pop pulse &mdash; constant forward motion, joyful groove, never stopping. Both about <strong>persistence</strong> &mdash; the frog persists through the freeze, the band persists through the pulse.</p>
+        </div>
+
+        <h2>The Sound: Duck-Like Clucking Chorus (97th Acoustic Element)</h2>
+        <p><strong>The call:</strong> Male wood frogs produce a rapid, low-pitched <strong>clucking</strong> sound that resembles duck quacking [1, 2, 3]. A series of short, raspy notes: <em>cluck-cluck-cluck-cluck</em>. When dozens to hundreds of males call simultaneously from a vernal pool, the collective effect is remarkably duck-like &mdash; listeners often mistake a wood frog chorus for a group of ducks.</p>
+        <p><strong>Why E=4:</strong> Active vocalization from breeding aggregation. Dozens to hundreds calling simultaneously. Vernal pool amplification. Compressed breeding season (1&ndash;2 weeks) concentrates energy. Matches Pacific Treefrog (86, E=4) &mdash; both anuran breeding choruses at E=4.</p>
+
+        <h2>Taxonomy: Ranidae (NEW FAMILY) / 46th Family</h2>
+        <p><strong>Classification:</strong> Class <strong>Amphibia</strong>. Order <strong>Anura</strong> (continuing). Family <strong>Ranidae</strong> &mdash; NEW FAMILY (46th) [1, 2]. True frogs. Second anuran family after Hylidae.</p>
+        <p><strong>Etymology:</strong> <em>Ranidae</em> from Latin <em>rana</em> (&ldquo;frog&rdquo;). <em>Lithobates</em> from Greek <em>lithos</em> (&ldquo;stone&rdquo;) + <em>bates</em> (&ldquo;one who treads&rdquo;). <em>Sylvaticus</em> from Latin (&ldquo;of the woods&rdquo;). The stone-treading frog of the woods.</p>
+
+        <h2>Ecology: Freeze Tolerance and Early Spring Breeding</h2>
+        <p><strong>Freeze tolerance:</strong> Up to 65% of body water as ice [4]. Heart stops. Cryoprotectant glucose at 100x normal levels. Ice forms between cells, not within them. Can survive multiple freeze-thaw cycles per winter. Thaws in spring and resumes normal activity within hours.</p>
+        <p><strong>Early spring breeding:</strong> Among the very first amphibians to breed each year [1, 2]. Often calling while <strong>snow is still on the ground</strong>. Breeding season extremely compressed &mdash; often just 1&ndash;2 weeks. Males arrive at vernal pools and begin calling immediately upon thawing.</p>
+        <p><strong>Physical description:</strong> Small to medium frog (35&ndash;75 mm). Tan, brown, or rust-colored. Distinctive dark &ldquo;robber&rsquo;s mask&rdquo; across each eye [1]. Light dorsolateral ridges from eye to hip.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon cluck">C</div>
+            <div class="theory-content">
+              <h4>Duck-Like Clucking Chorus &mdash; 97th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Rapid, low-pitched, raspy clucking. E=4. Breeding chorus from vernal pool aggregations. Resembles duck quacking.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon ranidae">R</div>
+            <div class="theory-content">
+              <h4>Ranidae (46th Family) / Anura Continues</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>NEW FAMILY. True frogs. Second anuran family. Third amphibian entry. Return to Amphibia after insect era.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon freeze">F</div>
+            <div class="theory-content">
+              <h4>Freeze Tolerance &mdash; First Freeze-Tolerant Species</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Survives frozen solid. 65% body water as ice. Heart stops. Cryoprotectant glucose. Thaws in spring.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon vernal">V</div>
+            <div class="theory-content">
+              <h4>Vernal Pool &mdash; First Temporary Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Seasonal pools. Fill with snowmelt, dry by summer. Fishless. Safe for amphibian larvae. First temporary habitat in engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">S</div>
+            <div class="theory-content">
+              <h4>The STRFKR Contrast</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Synth-pop pulse (E=5) vs duck-like clucking (E=4). Both about persistence. The frog endures the freeze; the band maintains the pulse.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-086: Pacific Treefrog</strong>
+            <p>Anuran family pair! Both frogs (Anura). Pacific Treefrog (86, Hylidae) and Wood Frog (96, Ranidae) -- two anuran families. Both E=4. Different calls: krek-krek vs duck-like clucking.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-090: Spring Peeper-Like Chorus</strong>
+            <p>Amphibian trio. Three amphibian entries (86, 90, 96). Spring Peeper is high bell-like peep; Wood Frog is low duck-like cluck. Both early spring breeders. Opposite registers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-095: Mayfly Emergence</strong>
+            <p>Water connection. Back-to-back water-associated species. Mayfly (95) mass wing buzz E=3; Wood Frog (96) duck-like clucking E=4. Passive emergence vs active vocalization.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-094: Stonefly Hatch</strong>
+            <p>Aquatic sequence. Three consecutive water-associated species (94, 95, 96). Stonefly in cold streams, mayfly in streams/lakes, wood frog in vernal pools. Three aquatic habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-058: Wood Duck</strong>
+            <p>Wood-and-water namesake. Both &ldquo;wood&rdquo; species. Both woodland water habitats. Wood Frog&rsquo;s call sounds like a duck. Wood Duck on ponds; Wood Frog in vernal pools.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Wood frog,&rdquo; &ldquo;Lithobates sylvaticus.&rdquo;</li>
+          <li>[2] AmphibiaWeb &mdash; <em>Lithobates sylvaticus.</em></li>
+          <li>[3] Elliott, L. and Hershberger, W. (2007). <em>The Songs of Insects.</em> Houghton Mifflin.</li>
+          <li>[4] Storey, K.B. and Storey, J.M. (1988). &ldquo;Freeze tolerance in animals.&rdquo; <em>Physiological Reviews</em> 68(1): 27&ndash;84.</li>
+          <li>[5] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">96&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Breeding chorus. Vernal pool.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">46th (NEW)</div>
+          <div class="stat-detail">Ranidae. True frogs.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Anura</div>
+          <div class="stat-detail">Continuing. Third anuran entry.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Amphibia</div>
+          <div class="stat-detail">Return after insect era.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Vernal Pool</div>
+          <div class="stat-detail">Temporary. Fishless. First.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Duck-like clucking</div>
+          <div class="stat-detail">Raspy, low-pitched chorus.</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Freeze Tolerance</div>
+          <div class="stat-value">65% body ice</div>
+          <div class="stat-detail">Heart stops. Thaws in spring.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Breeding Season</div>
+          <div class="stat-value">1-2 weeks</div>
+          <div class="stat-detail">Very first amphibian. Snow still on ground.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Field Mark</div>
+          <div class="stat-value">Dark eye mask</div>
+          <div class="stat-detail">Robber&rsquo;s mask. Dorsolateral ridges.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">46th (NEW)</div>
+          <div class="stat-detail">Ranidae enters.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Amphibian Entries</div>
+          <div class="stat-value">3rd</div>
+          <div class="stat-detail">86, 90, 96. Two families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Aquatic Sequence</div>
+          <div class="stat-value">94 + 95 + 96</div>
+          <div class="stat-detail">Stream + Lake + Vernal Pool.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (36th)</div>
+          <div class="stat-detail">Thirty-sixth consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
