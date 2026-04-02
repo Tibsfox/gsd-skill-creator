@@ -74,12 +74,41 @@ WX_DAY2 = {
     23: (7.5,  5.0,  "Calm",       80,  999.0, "FEW060",         "00000KT", "FEW060",   21.0),
 }
 
+# Day 3: April 2, 2026 (Flight Day 2) — POST-LAUNCH, IN ORBIT
+# Post-frontal clearing, radiational cooling overnight, pressure recovering
+WX_DAY3 = {
+    0:  (7.0,  4.5,  "Calm",       82, 999.0, "FEW070",         "00000KT", "FEW070",   20.5),
+    1:  (6.5,  4.2,  "Calm",       84, 999.2, "FEW080",         "00000KT", "FEW080",   20.0),
+    2:  (6.0,  4.0,  "Calm",       85, 999.3, "CLR",            "00000KT", "CLR",      19.5),
+    3:  (5.5,  3.8,  "Calm",       86, 999.5, "CLR",            "00000KT", "CLR",      19.0),
+    4:  (5.0,  3.5,  "Calm",       87, 999.6, "CLR",            "00000KT", "CLR",      19.0),
+    5:  (5.2,  3.5,  "Calm",       86, 999.8, "CLR",            "00000KT", "CLR",      19.5),
+    6:  (5.5,  3.2,  "Calm",       84, 1000.0, "FEW100",        "00000KT", "FEW100",   20.0),
+    7:  (7.0,  3.0,  "Calm",       72, 1000.2, "FEW120",        "00000KT", "FEW120",   21.5),
+    8:  (9.0,  2.5,  "Calm",       55, 1000.5, "SCT100",        "00000KT", "SCT100",   23.0),
+    9:  (10.5, 2.0,  "N 5 km/h",   48, 1000.8, "SCT080",        "36003KT", "SCT080",   24.5),
+    10: (11.5, 2.0,  "N 8 km/h",   42, 1001.0, "SCT060",        "36004KT", "SCT060",   25.5),
+    11: (12.5, 1.5,  "N 8 km/h",   38, 1001.2, "FEW050",        "36004KT", "FEW050",   26.5),
+    12: (13.0, 1.0,  "NW 6 km/h",  35, 1001.5, "FEW060",        "32003KT", "FEW060",   27.0),
+    13: (13.5, 1.0,  "NW 8 km/h",  34, 1001.5, "FEW070",        "32004KT", "FEW070",   27.5),
+    14: (13.2, 1.5,  "NW 8 km/h",  36, 1001.5, "SCT060",        "32004KT", "SCT060",   27.5),
+    15: (12.8, 2.0,  "NW 6 km/h",  38, 1001.5, "SCT050",        "32003KT", "SCT050",   27.0),
+    16: (12.0, 2.0,  "NW 5 km/h",  42, 1001.5, "SCT060",        "32003KT", "SCT060",   26.0),
+    17: (11.0, 2.5,  "Calm",       48, 1001.5, "FEW070",        "00000KT", "FEW070",   25.0),
+    18: (10.0, 3.0,  "Calm",       55, 1001.5, "FEW080",        "00000KT", "FEW080",   24.0),
+    19: (9.0,  3.0,  "Calm",       60, 1001.5, "CLR",           "00000KT", "CLR",      23.0),
+    20: (8.0,  3.0,  "Calm",       65, 1001.5, "CLR",           "00000KT", "CLR",      22.0),
+    21: (7.5,  3.0,  "Calm",       68, 1001.5, "CLR",           "00000KT", "CLR",      21.5),
+    22: (7.0,  3.0,  "Calm",       72, 1001.5, "CLR",           "00000KT", "CLR",      21.0),
+    23: (6.5,  3.0,  "Calm",       75, 1001.5, "CLR",           "00000KT", "CLR",      20.5),
+}
+
 # Day selector
-WX_DAYS = {1: WX_DAY1, 2: WX_DAY2}
-WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1)}
-WX_COUNTDOWNS = {1: 39, 2: 15}  # hours from midnight to launch
-WX_VERSIONS = {1: "v1.0", 2: "v1.1"}
-WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405)}  # (current, forecast, solar_wind)
+WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3}
+WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2)}
+WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9}  # hours from midnight to launch (negative = post-launch)
+WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2"}
+WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380)}  # post-CME recovery
 
 # Default for backward compat
 WX = WX_DAY1
@@ -311,8 +340,8 @@ def run_sweep(hour, args):
 def main():
     parser = argparse.ArgumentParser(description="Artemis II hourly sweep updater")
     parser.add_argument("hour", type=int, help="Hour of day (0-23)")
-    parser.add_argument("--day", type=int, default=1, choices=[1, 2],
-                        help="Mission day: 1=March 31, 2=April 1 (default: 1)")
+    parser.add_argument("--day", type=int, default=1, choices=[1, 2, 3],
+                        help="Mission day: 1=March 31, 2=April 1, 3=April 2 (default: 1)")
     parser.add_argument("--dry-run", action="store_true", help="Show changes without writing")
     parser.add_argument("--kp", type=float, help="Current Kp index")
     parser.add_argument("--kp-forecast", type=float, help="Forecast Kp index")
