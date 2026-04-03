@@ -1,0 +1,84 @@
+{
+  "degree": 187,
+  "artist": "Stas THEE Boss (Activist)",
+  "slug": "187-stas-thee-boss-activist",
+  "genre": "Hip-Hop",
+  "energy": 7,
+  "era": "Hip-Hop. E=7 -- activist/political hip-hop. Third entry (146 THEESatisfaction, 173 solo, 187 activist). Central District. Sub Pop. v1.49.328.",
+  "location": {
+    "origin": "Central District, Seattle",
+    "formative": "Seattle experimental hip-hop. Black liberation. Queer identity. Central District displacement.",
+    "career": "Stas THEE Boss. Sub Pop. Third engine entry. Activist era 2016-present."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2016-present (activist era)",
+  "labels": ["Sub Pop"],
+  "members": [
+    {"name": "Stas THEE Boss", "real_name": "Stasia Irons", "role": "MC / activist / artist", "note": "Central District. Third entry. Energy escalation 5→6→7. First three-time artist."}
+  ],
+  "former_members": [],
+  "associated_musicians": [
+    {"name": "Catherine Harris-White", "relationship": "THEESatisfaction partner. Degree 146. Duo context."},
+    {"name": "Ishmael Butler (Shabazz Palaces)", "relationship": "Sub Pop orbit. Degree 170. Seattle's Black experimental hip-hop."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "First three-time artist -- three entries, three dimensions, energy escalation 5→6→7. Collective (146) to individual (173) to political (187).",
+      "level": "milestone",
+      "department": "engine-theory",
+      "college_path": ".college/music/theory/engine/first-three-time-artist.md",
+      "examples": [
+        "146: THEESatisfaction (duo, E=5).",
+        "173: Solo (individual, E=6).",
+        "187: Activist (political, E=7).",
+        "Energy escalation: each entry +1."
+      ],
+      "description": "First three-time artist. Three dimensions. Energy escalation.",
+      "genealogy": {
+        "ancestors": ["THEESatisfaction (146).", "Stas THEE Boss solo (173)."],
+        "relationship": "Stas THEE Boss activist at 187. Third entry completes the arc."
+      }
+    },
+    {
+      "concept": "Activist hip-hop at E=7 -- political urgency, vocal intensity, aggressive production, community mobilization. Every tool deployed for purpose beyond entertainment.",
+      "level": "advanced",
+      "department": "energy-theory",
+      "college_path": ".college/music/theory/energy/activist-hiphop-e7.md",
+      "examples": [
+        "Police violence, systemic racism, gentrification.",
+        "Central District displacement documentation.",
+        "Queer liberation, Black power.",
+        "Fourth E=7: 175, 176, 179, 187."
+      ],
+      "description": "Activist E=7. Political urgency. Community mobilization.",
+      "genealogy": {
+        "ancestors": ["DoNormaal (175, E=7).", "Maliibu Miitch (176, E=7).", "Sir Mix-a-Lot (179, E=7)."],
+        "relationship": "Stas THEE Boss activist at 187. Fourth E=7 entry."
+      }
+    },
+    {
+      "concept": "Central District displacement -- gentrification, Black community erasure, music as resistance. The neighborhood that birthed Seattle hip-hop losing its community.",
+      "level": "intermediate",
+      "department": "geography",
+      "college_path": ".college/music/theory/geography/central-district-displacement.md",
+      "examples": [
+        "Majority-Black to majority-white in ~20 years.",
+        "Black businesses and venues closed.",
+        "Birthplace of Seattle hip-hop (Mix-a-Lot, Criminal Nation).",
+        "Music as documentation of displacement."
+      ],
+      "description": "Central District displacement. Music as resistance.",
+      "genealogy": {
+        "ancestors": ["Sir Mix-a-Lot Central District (179).", "Criminal Nation (182)."],
+        "relationship": "Stas THEE Boss at 187. Resistance to displacement."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 146, "artist": "THEESatisfaction", "relationship": "FIRST ENTRY! Duo. Collective dimension. E=5. The creative crucible."},
+    {"degree": 173, "artist": "Stas THEE Boss (solo)", "relationship": "SECOND ENTRY! Individual voice. E=6. Self-definition."},
+    {"degree": 175, "artist": "DoNormaal", "relationship": "E=7! Same tier. Both activist Seattle hip-hop. Both Central District."},
+    {"degree": 176, "artist": "Maliibu Miitch", "relationship": "E=7! Same tier. Three E=7 entries in 12 degrees (175, 176, 187)."},
+    {"degree": 170, "artist": "Ishmael Butler (Shabazz Palaces)", "relationship": "SUB POP! Same label. Same experimental/activist orbit."}
+  ]
+}
