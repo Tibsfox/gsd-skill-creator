@@ -200,7 +200,15 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
-      <h3>File-Native Agent Architecture <span class="tag tag-ours">New</span></h3>
+      <h3><a href="problems/rpi-lessons.html" style="color:#fff;">RPI Lessons: Instruction Budgets &amp; Agent Quality</a> <span class="tag tag-ours">New</span></h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
+      <p><strong>April 2 analysis:</strong> Dexter Horthy's "Everything We Got Wrong About Research-Plan-Implement" documents failure modes from 1,000+ engineering teams. Key finding: LLMs follow ~150-200 instructions max. Original 85-instruction mega-prompt caused 50%+ workflow skip rate. Fix: split into &lt;40-instruction phases. GSD's skill architecture independently solved this. Convergent evolution validates both approaches. Horthy's quality concern about agent swarms (Gastown callout) addressed by our witness/Nyquist/verify stack.</p>
+      <div class="source">YouTube: Dexter Horthy (2026) &middot; arXiv instruction budget paper &middot; GSD Gastown chipset</div>
+      <div class="status status-active">ACTIVE &mdash; convergent evolution with our architecture, action items identified</div>
+    </div>
+
+    <div class="card">
+      <h3><a href="problems/file-native.html" style="color:#fff;">File-Native Agent Architecture</a> <span class="tag tag-ours">New</span></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
       <p><strong>April 2 discovery:</strong> Convergent finding from arXiv:2602.05447 (Structured Context Engineering for File-Native Systems) and arXiv:2512.05470 (Agentic File System Abstraction). Agent architecture maps directly to directory trees: workflows = folders, tasks = files, each task contains instructions (prompts), tools, and data. MCP servers provide external data. Sub-agents create subdirectories. No framework code needed &mdash; the filesystem IS the framework.</p>
       <p><strong>Our contribution:</strong> GSD's <code>.claude/commands/</code>, <code>.claude/agents/</code>, <code>.claude/skills/</code> structure IS this pattern, built 6 months before the papers. Our music-functions.json "patch routing" knowledge node formalizes the analogy: synthesis patch bay = agent file tree.</p>
@@ -297,7 +305,7 @@ footer a { color:rgba(255,255,255,0.3); }
         <li><strong>Contribute</strong> — if we find something, document it rigorously and submit it</li>
       </ul>
       <p style="color:var(--dim); font-size:0.8rem; margin-top:0.8rem; font-family:system-ui,sans-serif;">
-        Updated v1.2.20 &middot; 17 problems tracked &middot; 5 active, 6 open, 6 watching &middot; Next scan at v1.2.21
+        Updated v1.2.20 &middot; 18 problems tracked &middot; 5 active, 6 open, 6 watching &middot; Next scan at v1.2.21
       </p>
     </div>
   </div>
@@ -309,7 +317,7 @@ footer a { color:rgba(255,255,255,0.3); }
   <a href="../index.html">Tibsfox Research</a> &middot;
   OPEN &mdash; Unsolved problems and research frontier &middot;
   <a href="https://tibsfox.com">tibsfox.com</a><br>
-  Last updated: 2026-04-03T03:30Z (sweep v1.2.20) &middot; 17 problems &middot; 5 active, 6 open, 6 watching
+  Last updated: 2026-04-03T03:30Z (sweep v1.2.20) &middot; 18 problems &middot; 5 active, 6 open, 6 watching
 </footer>
 </body>
 </html>
