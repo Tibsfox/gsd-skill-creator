@@ -1,6 +1,6 @@
 {
   "updated": "2026-04-03T09:00:00Z",
-  "source": "sweep-v1.3.2",
+  "source": "sweep-v1.3.3.1",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
@@ -100,8 +100,8 @@
   },
   "telemetry": null,
   "mission_timeline": {
-    "flight_day_3": "Outbound trajectory correction #1 (Hansen preps). CPR demo in microgravity. Medical equipment checkout. Koch tests emergency DSN comms. Crew rehearses lunar flyby observation choreography.",
-    "flight_day_4": "Trajectory correction #2. 1hr per astronaut reviewing lunar geography targets. 20min celestial photography from windows.",
+    "flight_day_3": "ACTIVE — Hansen preps outbound trajectory correction #1, fires after midday meal. Glover/Koch/Hansen demonstrate CPR in microgravity. Wiseman/Glover conduct medical kit checkout (thermometer, BP monitor, stethoscope, otoscope). Koch tests Orion emergency comms on DSN. Full crew rehearses FD6 lunar flyby observation choreography. Source: nasa.gov/missions/artemis daily agenda.",
+    "flight_day_4": "Trajectory correction #2 refines lunar path. Each astronaut: 1hr reviewing geographic targets for FD6 lunar photography. 20min dedicated celestial body photography from Orion windows. Source: nasa.gov/missions/artemis daily agenda.",
     "flight_day_5": "Enter lunar sphere of influence. Spacesuit testing (Orion OCSS donning, pressurization, helmet port eating). Final outbound burn.",
     "flight_day_6": "CLOSEST APPROACH — 4,000-6,000 mi from lunar surface. Record distance from Earth (~252,021 mi, beating Apollo 13). Photos/video all day. 30-50 min comm blackout behind Moon.",
     "flight_day_7": "Exit lunar sphere. First return trajectory correction. Off-duty recovery day.",
