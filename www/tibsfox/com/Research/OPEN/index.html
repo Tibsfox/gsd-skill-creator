@@ -200,6 +200,15 @@ footer a { color:rgba(255,255,255,0.3); }
     </div>
 
     <div class="card">
+      <h3>File-Native Agent Architecture <span class="tag tag-ours">New</span></h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
+      <p><strong>April 2 discovery:</strong> Convergent finding from arXiv:2602.05447 (Structured Context Engineering for File-Native Systems) and arXiv:2512.05470 (Agentic File System Abstraction). Agent architecture maps directly to directory trees: workflows = folders, tasks = files, each task contains instructions (prompts), tools, and data. MCP servers provide external data. Sub-agents create subdirectories. No framework code needed &mdash; the filesystem IS the framework.</p>
+      <p><strong>Our contribution:</strong> GSD's <code>.claude/commands/</code>, <code>.claude/agents/</code>, <code>.claude/skills/</code> structure IS this pattern, built 6 months before the papers. Our music-functions.json "patch routing" knowledge node formalizes the analogy: synthesis patch bay = agent file tree.</p>
+      <div class="source">arXiv:2602.05447 &middot; arXiv:2512.05470 &middot; GSD skill-creator &middot; YouTube tbVtt2-qUJo</div>
+      <div class="status status-active">ACTIVE &mdash; we are the evidence that this works at production scale</div>
+    </div>
+
+    <div class="card">
       <h3><a href="problems/agent-contracts.html" style="color:#fff;">Agent Contracts &amp; Resource Bounds</a> <span class="tag tag-ai">New</span></h3>
       <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
       <p>Formal framework for resource-bounded autonomous AI systems. Agents operate under contracts specifying compute budget, tool access, and output guarantees. If the agent exceeds its contract, the orchestrator can safely terminate it.</p>
@@ -255,12 +264,13 @@ footer a { color:rgba(255,255,255,0.3); }
   <h2>Emergent Behavior &amp; Complex Systems</h2>
   <div class="card-grid">
     <div class="card">
-      <h3><a href="problems/kuramoto.html" style="color:#fff;">Kuramoto Synchronization Thresholds</a></h3>
+      <h3><a href="problems/kuramoto.html" style="color:#fff;">Kuramoto Synchronization Thresholds</a> <span class="tag tag-math">Updated</span></h3>
       <div><span class="tag tag-math">Math</span> <span class="tag tag-ml">ML</span></div>
       <p>When does a population of coupled oscillators synchronize? The Kuramoto model gives critical coupling strength K_c, but for heterogeneous populations with non-uniform natural frequencies, the transition dynamics are poorly understood.</p>
-      <p><strong>Connection:</strong> Our firefly simulation implements Kuramoto coupling. We can run experiments on synchronization thresholds with different parameters and measure the results.</p>
-      <div class="source">vehicle.js fireflies &middot; Strogatz 2003 &middot; TSPB Layer 1</div>
-      <div class="status status-active">ACTIVE — running experiments in simulation</div>
+      <p><strong>April 2 update:</strong> Kuramoto himself published a 50-year retrospective (arXiv:2602.20505). New paper on launch day (arXiv:2603.29648): proportional coupling where K_ij scales with frequency detuning dramatically lowers K_c. <em>Help the ones who need it most</em> &mdash; the hardest-to-sync pairs get the strongest coupling. Direct implication for agent model profiles.</p>
+      <p><strong>Connection:</strong> Our firefly simulation implements Kuramoto coupling. Proportional coupling variant is testable today in vehicle.js. Maps to agent orchestration: budget-tier agents should get more oversight than quality-tier.</p>
+      <div class="source">vehicle.js fireflies &middot; Strogatz 2003 &middot; arXiv:2602.20505 &middot; arXiv:2603.29648 &middot; TSPB Layer 1</div>
+      <div class="status status-active">ACTIVE &mdash; updated v1.2.20 &mdash; proportional coupling is next experiment</div>
     </div>
 
     <div class="card">
@@ -287,7 +297,7 @@ footer a { color:rgba(255,255,255,0.3); }
         <li><strong>Contribute</strong> — if we find something, document it rigorously and submit it</li>
       </ul>
       <p style="color:var(--dim); font-size:0.8rem; margin-top:0.8rem; font-family:system-ui,sans-serif;">
-        Updated v1.2.0 &middot; 16 problems tracked &middot; 4 active, 6 open, 6 watching &middot; Next scan at v1.0.1
+        Updated v1.2.20 &middot; 17 problems tracked &middot; 5 active, 6 open, 6 watching &middot; Next scan at v1.2.21
       </p>
     </div>
   </div>
@@ -299,7 +309,7 @@ footer a { color:rgba(255,255,255,0.3); }
   <a href="../index.html">Tibsfox Research</a> &middot;
   OPEN &mdash; Unsolved problems and research frontier &middot;
   <a href="https://tibsfox.com">tibsfox.com</a><br>
-  Last updated: 2026-04-02T07:00Z (sweep v1.2.0) &middot; 16 problems &middot; 4 active, 6 open, 6 watching
+  Last updated: 2026-04-03T03:30Z (sweep v1.2.20) &middot; 17 problems &middot; 5 active, 6 open, 6 watching
 </footer>
 </body>
 </html>
