@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-03T02:20:00Z",
-  "source": "sweep-v1.2.19.1",
+  "updated": "2026-04-03T03:30:00Z",
+  "source": "sweep-v1.2.20",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST \u2014 MET +1d 02:40 \u2014 Integrity outbound 1h51m post-TLI. ~40,000 mi from Earth, accelerating. All 4 crew pages + Katherine Johnson + Ed Dwight dedication pages live on tibsfox.com. 3-day coast to lunar closest approach. The space between.",
+    "status": "TRANSLUNAR COAST \u2014 MET +1d 05:00 \u2014 Integrity ~60,000 mi from Earth, outbound velocity ~6,000 mph. Crew in rest period. No trajectory correction burns reported. Lunar closest approach in ~2.5 days. All systems nominal. 5 new music theory knowledge nodes added to vehicle model.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -100,6 +100,10 @@
   },
   "telemetry": null,
   "announcements": [
+    {
+      "time": "2026-04-03T03:30:00Z",
+      "text": "v1.2.20: MET+1d05:00 8pm PDT. Translunar coast steady state. Backfilled sweeps 19-20. 5 music theory knowledge nodes added: subtractive synthesis, patch routing as file tree, oscillator layering, condensation. KPAE 8.0C calm CLR post-frontal clearing. Crew resting. No trajectory corrections reported."
+    },
     {
       "time": "2026-04-02T17:30:00Z",
       "text": "v1.2.10: MET+18:55 10:30am PDT. PRM #2 complete (43s burn, SM main engine, 7:06 AM EDT wake-up to 'Sleepyhead' by Young and Sick). Crew resting 4.5h. TLI at 7:49 PM EDT (4:49 PM PDT): 5m51s burn, 1272 ft/s delta-v. Mission management GO/NO-GO meeting pending. M4.6 Boulder Creek earthquake at 01:41 AM on Sam's territory. USGS Observatory + PNW Daily news page launched."
