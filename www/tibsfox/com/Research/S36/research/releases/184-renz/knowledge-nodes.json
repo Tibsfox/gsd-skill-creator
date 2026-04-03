@@ -1,0 +1,101 @@
+{
+  "degree": 184,
+  "artist": "Renz",
+  "slug": "184-renz",
+  "genre": "Hip-Hop",
+  "energy": 6,
+  "era": "Hip-Hop. E=6 -- post-E=7 trio descent. Self-released. Scene sustainer. Independence spectrum endpoint. v1.49.325.",
+  "location": {
+    "origin": "Seattle, Washington",
+    "formative": "Seattle hip-hop community. Self-release platforms. Working artist ecosystem.",
+    "career": "Renz. Self-released. Active."
+  },
+  "formed": "Seattle, Washington",
+  "active": "Active",
+  "labels": ["Self-released"],
+  "members": [
+    {"name": "Renz", "role": "MC / artist", "note": "Self-released. No label. Scene sustainer. Direct to digital platform."}
+  ],
+  "former_members": [],
+  "associated_musicians": [
+    {"name": "Raz Simone", "relationship": "Independence spectrum neighbor. Degree 183 (Cold Recordings). Label vs self-release."},
+    {"name": "Macklemore", "relationship": "Same ecosystem, different scale. Degree 180. LLC vs self-release. Both independent."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Self-released independence -- the most fundamental form. No label, no LLC, no infrastructure. Just the artist and the digital platform. The endpoint of the independence spectrum.",
+      "level": "advanced",
+      "department": "label-theory",
+      "college_path": ".college/music/theory/label/self-released-independence.md",
+      "examples": [
+        "No Nastymix. No LLC. No Cold Recordings.",
+        "SoundCloud, Bandcamp, Spotify, YouTube.",
+        "Digital platforms as infrastructure replacement.",
+        "Total control, total responsibility."
+      ],
+      "description": "Self-released. Most fundamental independence. Spectrum endpoint.",
+      "genealogy": {
+        "ancestors": ["Cold Recordings (183).", "Macklemore LLC (180-181).", "Nastymix (177-179)."],
+        "relationship": "Renz at 184. The self-released endpoint of the independence spectrum."
+      }
+    },
+    {
+      "concept": "Scene sustainers -- the working artists who keep culture alive without the spotlight. The 90% of any scene. The foundation that enables peaks.",
+      "level": "intermediate",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/scene-sustainers.md",
+      "examples": [
+        "Consistent output without major visibility.",
+        "Local venue performances.",
+        "Community infrastructure maintenance.",
+        "The foundation superstars build on."
+      ],
+      "description": "Scene sustainers. Working artists. The 90% that maintains culture.",
+      "genealogy": {
+        "ancestors": ["Seattle music community.", "DIY tradition."],
+        "relationship": "Renz at 184. Scene sustainer documented."
+      }
+    },
+    {
+      "concept": "Post-trio descent (E=7 -> E=6) -- after three consecutive E=7 entries (181-183), energy descends to E=6. Natural gradient. Maximum energy cannot be sustained indefinitely.",
+      "level": "intermediate",
+      "department": "energy-theory",
+      "college_path": ".college/music/theory/energy/post-trio-descent.md",
+      "examples": [
+        "181-183: E=7 trio.",
+        "184: E=6. Descent.",
+        "Natural energy gradient.",
+        "Steady burn after fireworks."
+      ],
+      "description": "Post-trio descent. E=7 to E=6. Natural gradient.",
+      "genealogy": {
+        "ancestors": ["E=7 trio (181-183)."],
+        "relationship": "Renz at 184. Energy descends after the trio."
+      }
+    },
+    {
+      "concept": "Independence spectrum (177-184) -- eight degrees documenting the full range: indie label, own label, own LLC, artist label, self-release. Complete map of Seattle hip-hop independence.",
+      "level": "intermediate",
+      "department": "engine-theory",
+      "college_path": ".college/music/theory/engine/independence-spectrum.md",
+      "examples": [
+        "Nastymix (177-179, 182): indie label.",
+        "Macklemore LLC (180-181): own company.",
+        "Cold Recordings (183): artist label.",
+        "Self-released (184): no label."
+      ],
+      "description": "Independence spectrum. 8 degrees. Full range documented.",
+      "genealogy": {
+        "ancestors": ["Nastymix trilogy.", "Macklemore trifecta.", "Cold Recordings."],
+        "relationship": "Renz at 184 completes the independence spectrum."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 183, "artist": "Raz Simone", "relationship": "INDEPENDENCE SPECTRUM! Cold Recordings (label) vs self-released (no label). The spectrum continues to endpoint."},
+    {"degree": 179, "artist": "Sir Mix-a-Lot", "relationship": "LINEAGE! Nastymix (owned label) vs self-released (no label). Two ends of independence, 5 degrees apart."},
+    {"degree": 180, "artist": "Macklemore", "relationship": "SCALE! #1 hits (LLC) vs scene sustainer (self-release). Both independent. Different scales."},
+    {"degree": 181, "artist": "Macklemore & Ryan Lewis", "relationship": "ENERGY DESCENT! E=7 trio (181-183) then E=6 at 184. Natural gradient."},
+    {"degree": 178, "artist": "High Performance", "relationship": "E=6 PAIR! Both E=6. Both scene contributors. Different eras."}
+  ]
+}

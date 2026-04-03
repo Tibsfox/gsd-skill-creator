@@ -1,0 +1,112 @@
+{
+  "degree": 184,
+  "species": "Northern Fur Seal",
+  "scientific_name": "Callorhinus ursinus",
+  "slug": "184-northern-fur-seal",
+  "sound_type": "growl + bleat colony -- deep male growls, female bleats, pup cries. Rich, textured colony soundscape. Less thunderous than sea lion roars. E=5",
+  "energy": 5,
+  "ecosystem": "Offshore islands (breeding), open ocean (pelagic, non-breeding). Pribilof Islands primary rookery. Present in PNW waters during migration.",
+  "season": "Breeding: June-August on Pribilof Islands. Non-breeding: pelagic, open ocean. Passes through PNW waters.",
+  "family": "Otariidae (third and final entry -- eared seals)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Northern Fur Seal",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 57.10,
+    "lon": -170.30,
+    "description": "Northern Fur Seal. Pribilof Islands (St. Paul, St. George) primary breeding rookeries. Pelagic in North Pacific. Passes through PNW waters."
+  },
+  "taxonomy_note": {
+    "description": "Third and final Otariidae. Otariidae trio closes (182-184). Marine mammal block closes (180-184). DENSEST FUR of any mammal (300,000 hairs/sq in). Nearly hunted to extinction. 1911 conservation treaty.",
+    "current_family": "Otariidae (third and final entry)",
+    "new_family": false,
+    "family_count_in_engine": "Otariidae: Steller Sea Lion (182), California Sea Lion (183), Northern Fur Seal (184) -- 3 of 3. Trio complete.",
+    "name_etymology": "Callorhinus from Greek 'kalos' (beautiful) + 'rhinos' (nose) -- beautiful nose. ursinus from Latin 'ursinus' (bear-like) -- bear-like appearance.",
+    "genus_note": "Callorhinus -- monotypic genus. Only species: C. ursinus. The sole member of its genus.",
+    "order_note": "Carnivora. Fourth Carnivora in SPS (after Harbor Seal 180, Steller Sea Lion 182, California Sea Lion 183).",
+    "family_position": "Third and final Otariidae. Fur seal vs sea lion within the family. Different thermoregulation strategy (fur vs blubber).",
+    "fur_density": "Up to 300,000 hairs per square inch. 2-3x denser than sea otter. Two layers: waterproof underfur + guard hairs.",
+    "marine_mammal_block": "Phocidae (180-181) + Otariidae (182-184) = 5 pinnipeds, 2 families. Complete marine mammal sequence."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "100-4000 Hz across all call types (male growl, female bleat, pup cry).",
+    "peak_energy_band_hz": "~300-1500 Hz. Mixed colony resonance.",
+    "song_frequency_hz": "Male growl: ~100-600 Hz. Female bleat: ~300-1500 Hz. Pup cry: ~500-2000 Hz.",
+    "song_duration_s": "Male growl: 1-3 seconds. Female bleat: 0.3-1.0 seconds. Pup cry: 0.2-0.5 seconds.",
+    "note_structure": "Deep male growl (territorial), higher female bleat (recognition), thin pup cry (contact). Colony mix creates textured soundscape.",
+    "note_types": "Male territorial growl, female recognition bleat, pup contact cry, colony cacophony.",
+    "phrase_structure": "Colony: overlapping vocalizations from all age/sex classes. Rich texture rather than monolithic roar.",
+    "timbre": "Growling (males), bleating (females), crying (pups). More varied than sea lion colony. Textured.",
+    "amplitude": "E=5. Moderate colony sound. Rich texture. Less raw volume than sea lion colonies (E=6).",
+    "tempo": "Variable by call type. Male growls sustained. Female bleats rhythmic. Pup cries rapid.",
+    "context": "Breeding rookeries (Pribilof Islands). Territorial defense, pup recognition, social.",
+    "regional_variation": "Minimal. Individual vocal signatures for mother-pup recognition.",
+    "key_property": "COLONY GROWL/BLEAT. DENSEST FUR (300K/sq in). Third/final Otariidae. Pelagic. Conservation story. E=5. v1.49.325."
+  },
+  "pelage": {
+    "overall": "Dense, dark brown to black (wet). Lighter when dry. Males darker with thick mane. Females lighter, grayish-brown.",
+    "fur_density": "Up to 300,000 hairs per square inch. Densest fur of any mammal. Two layers: waterproof underfur + coarse guard hairs.",
+    "diagnostic_mark": "Dense fur (obvious). External ear flaps. Smaller than sea lions. Males have thick neck mane. Long fore flippers.",
+    "seasonal_variation": "Annual molt. Fur density maintained year-round. Grooming essential.",
+    "sexual_dimorphism": "Males: 2.1m, up to 270 kg. Females: 1.4m, up to 50 kg. ~5:1 weight ratio. Extreme dimorphism."
+  },
+  "physical_description": {
+    "overall": "Males: length 2.1m, weight up to 270 kg. Females: 1.4m, up to 50 kg. Dense fur. External ear flaps. Long fore flippers.",
+    "diagnostic_mark": "Dense, luxurious fur. Smaller than sea lions. External ear flaps. Long fore flippers relative to body. Males with thick neck mane.",
+    "field_id": "Medium-sized eared seal, smaller than sea lions. Very dense, dark fur. Long fore flippers. Rarely seen on shore in PNW. Pelagic offshore."
+  },
+  "nodes": [
+    {
+      "id": "densest-fur",
+      "type": "milestone",
+      "title": "Densest Fur -- 300,000 Hairs per Square Inch",
+      "description": "Densest fur of any mammal. Two-layer structure: waterproof underfur + guard hairs. Insulation without blubber. The adaptation that nearly caused extinction.",
+      "connections": ["conservation-story", "pelagic-lifestyle", "otariidae-closes"]
+    },
+    {
+      "id": "conservation-story",
+      "type": "concept",
+      "title": "Conservation -- 1911 Treaty",
+      "description": "North Pacific Fur Seal Convention (1911): first international pinniped conservation treaty. Millions to 300K. Partial recovery. Currently Vulnerable (IUCN) / Depleted (MMPA).",
+      "connections": ["densest-fur", "pelagic-lifestyle"]
+    },
+    {
+      "id": "pelagic-lifestyle",
+      "type": "concept",
+      "title": "Pelagic Lifestyle -- Months at Sea",
+      "description": "Open ocean lifestyle outside breeding. Rarely on land. Pribilof Islands breeding. PNW waters during migration. Unusual among pinnipeds.",
+      "connections": ["densest-fur", "conservation-story"]
+    },
+    {
+      "id": "otariidae-closes",
+      "type": "milestone",
+      "title": "Otariidae Trio Closes (182-184)",
+      "description": "Three eared seals: giant (Steller), performer (California), specialist (Northern Fur). Marine mammal block (180-184) complete. 5 pinnipeds, 2 families.",
+      "connections": ["densest-fur"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-182",
+      "species": "Steller Sea Lion",
+      "relationship": "OTARIIDAE TRIO! Giant (Steller) vs specialist (Fur Seal). Sea lion vs fur seal. Size vs adaptation. Both eared seals."
+    },
+    {
+      "target": "SPS-183",
+      "species": "California Sea Lion",
+      "relationship": "OTARIIDAE TRIO! Performer (California) vs pelagic specialist (Northern). Docks vs open ocean. Familiar vs elusive."
+    },
+    {
+      "target": "SPS-180",
+      "species": "Harbor Seal",
+      "relationship": "MARINE MAMMAL BLOCK! Phocidae (180-181) + Otariidae (182-184) = 5 pinnipeds, 2 families. Complete sequence."
+    },
+    {
+      "target": "S36-184",
+      "artist": "Renz",
+      "relationship": "SUBSTANCE! Scene sustainer + densest fur. What endures beneath the surface. The quiet essential adaptation."
+    }
+  ]
+}
