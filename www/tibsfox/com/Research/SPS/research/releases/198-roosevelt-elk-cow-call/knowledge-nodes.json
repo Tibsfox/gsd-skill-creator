@@ -1,0 +1,111 @@
+{
+  "degree": 198,
+  "species": "Roosevelt Elk",
+  "scientific_name": "Cervus canadensis roosevelti",
+  "slug": "198-roosevelt-elk-cow-call",
+  "sound_type": "cow call -- sharp alarm bark (300-800 Hz) and plaintive maternal mew (400-1,200 Hz). Two-vocalization repertoire. Year-round. E=5",
+  "energy": 5,
+  "ecosystem": "Dense forest, river valleys, meadow edges. Year-round resident. Maternal communication peaks May-June calving.",
+  "season": "Year-round. Bark: any threat season. Mew: peaks during calving (May-June) and cow-calf separation.",
+  "family": "Cervidae (fourth entry -- deer 195-196, elk bugle 197)",
+  "order": "Artiodactyla",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Roosevelt Elk",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.86,
+    "lon": -123.93,
+    "description": "Roosevelt Elk on the Olympic Peninsula and Cascades. Cow herds in river valleys and meadows."
+  },
+  "taxonomy_note": {
+    "description": "Second Roosevelt Elk entry. Fourth Cervidae. Elk trio middle (197 bugle E=7, 198 cow call E=5, 199 rut roar E=7).",
+    "current_family": "Cervidae (fourth entry)",
+    "new_family": false,
+    "family_count_in_engine": "Cervidae: Deer Fawn (195, E=3), Deer Buck (196, E=4), Elk Bugle (197, E=7), Elk Cow Call (198, E=5).",
+    "name_etymology": "Same as 197. Cervus (Latin deer), canadensis (Canada), roosevelti (Theodore Roosevelt).",
+    "genus_note": "Cervus -- true deer. Elk/wapiti.",
+    "order_note": "Artiodactyla. Fourth artiodactyl entry.",
+    "family_position": "Cervidae: fourth entry. Elk trio middle.",
+    "class_note": "Class Mammalia. Cow elk: 200-300 kg. Smaller than bulls."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "300-1,200 Hz (bark through mew range).",
+    "peak_energy_band_hz": "400-800 Hz (bark peak). 500-1,000 Hz (mew peak).",
+    "song_frequency_hz": "Bark: 300-800 Hz. Mew: 400-1,200 Hz.",
+    "song_duration_s": "Bark: 0.2-0.5 sec, repeated 2-5 times. Mew: 0.5-2.0 sec.",
+    "note_structure": "Two distinct vocalizations: explosive bark (alarm) and drawn-out mew (contact/maternal).",
+    "note_types": "Bark (alarm, sharp, both sexes), mew (contact, nasal, primarily cows).",
+    "phrase_structure": "Bark: rapid repetitions during alarm. Mew: single or repeated calls during cow-calf contact.",
+    "timbre": "Bark: sharp, explosive, percussive. Mew: nasal, plaintive, harmonically rich, individually recognizable.",
+    "amplitude": "E=5. Powerful and purposeful. Bark carries 500 m-1 km. Mew carries 200-500 m. Essential, not performative.",
+    "tempo": "Bark: rapid bursts. Mew: deliberate, patient repetition.",
+    "context": "Bark: predator/threat detection, year-round. Mew: cow-calf contact, calving season (May-Jun), herd cohesion.",
+    "regional_variation": "Minimal. Cow calls structurally similar across Roosevelt Elk populations. Individual variation (vocal fingerprint) is the key variable.",
+    "key_property": "COW CALL. Bark + mew. Maternal. Individually recognizable. ELK TRIO MIDDLE. E=5. v1.49.339."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Adult cow: brown body, lighter tan rump patch, no antlers. Slightly smaller than bull (200-300 kg). Less prominent neck mane.",
+    "diagnostic_mark": "No antlers. Brown body. Tan rump. Smaller and more slender than bull. Often with calf nearby (May-October).",
+    "seasonal_variation": "Summer: darker brown. Winter: slightly lighter. No antler cycle. Calves: spotted at birth, spots fade by fall.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Adult cow: 200-300 kg (440-660 lbs). 120-140 cm at shoulder. No antlers. Stocky. Tan rump patch.",
+    "diagnostic_mark": "Large brown ungulate without antlers. Tan rump. In herds. Often with calves (spring-summer).",
+    "field_id": "Large brown elk without antlers. In groups of 10-60. Listen for sharp bark (alarm) or nasal mew (cow-calf contact). Calving grounds in May-June. River valleys and meadow edges."
+  },
+  "nodes": [
+    {
+      "id": "cow-calf-fingerprint",
+      "type": "milestone",
+      "title": "Cow-Calf Vocal Fingerprint",
+      "description": "Each cow's mew is individually recognizable. Calf identifies mother within hours of birth. Vocal identity as biological necessity.",
+      "connections": ["bark-alarm", "display-vs-connection", "calving-season"]
+    },
+    {
+      "id": "bark-alarm",
+      "type": "concept",
+      "title": "Bark Alarm -- Herd Alert",
+      "description": "Sharp, explosive bark at 300-800 Hz. Carries 500 m-1 km. One bark triggers herd-wide response. Year-round vigilance.",
+      "connections": ["cow-calf-fingerprint", "display-vs-connection"]
+    },
+    {
+      "id": "display-vs-connection",
+      "type": "concept",
+      "title": "Display vs. Connection",
+      "description": "Bull: performance (bugle, roar, E=7). Cow: precision (bark, mew, E=5). The elk's vocal repertoire divided by function and sex.",
+      "connections": ["cow-calf-fingerprint", "bark-alarm"]
+    },
+    {
+      "id": "calving-season",
+      "type": "concept",
+      "title": "Calving Season -- May-June",
+      "description": "Cow separates from herd. Calf hidden 1-2 weeks. Mew for nursing contact. Most critical period for maternal vocalization.",
+      "connections": ["cow-calf-fingerprint"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-197",
+      "species": "Roosevelt Elk Bugle",
+      "relationship": "ELK TRIO! Bull bugle (E=7, display) vs. cow call (E=5, connection). Performance vs. precision."
+    },
+    {
+      "target": "SPS-199",
+      "species": "Roosevelt Elk Rut Roar",
+      "relationship": "ELK TRIO! Third entry completes the trio. Rut roar (E=7, combat). Bull's deep bellowing."
+    },
+    {
+      "target": "SPS-195",
+      "species": "Black-tailed Deer Fawn Bleat",
+      "relationship": "MATERNAL PARALLEL! Fawn bleat (E=3) and elk calf mew -- both infant contact calls. Same function."
+    },
+    {
+      "target": "S36-198",
+      "artist": "Pedro the Lion",
+      "relationship": "QUIET COMMUNICATION! Both voices that matter for precision, not volume. The storyteller and the mother."
+    }
+  ]
+}
