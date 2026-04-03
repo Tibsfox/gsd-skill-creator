@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 141&deg; &mdash; DJ Sounds &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(106, 27, 154, 0.4); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #D84315; color: #FFCCBC; border: 1px solid #E64A19; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #4E342E; color: #D7CCC8; border: 1px solid #5D4037; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #6A1B9A; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #6A1B9A; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #F3E5F5; color: #4A148C; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #6A1B9A; min-width: 3rem; display: inline-block; }
+    .pioneer-banner { background: linear-gradient(135deg, #3E2723, #4E342E, #5D4037); color: #D7CCC8; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .pioneer-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #EFEBE9; }
+    .pioneer-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+    blockquote { border-left: 3px solid #6A1B9A; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+    .timeline-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .timeline-list li { padding: 0.6rem 0; border-left: 3px solid #6A1B9A; padding-left: 1rem; margin-bottom: 0.5rem; font-size: 0.88rem; }
+    .timeline-list li strong { color: #6A1B9A; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>141 &mdash; DJ Sounds</span>
+    </nav>
+
+    <div class="pioneer-banner">
+      <h3>1983 &mdash; The Earliest Hip-Hop DJ &mdash; Central District</h3>
+      <p>
+        <strong>DJ Sounds</strong> was active from <strong>1983</strong> &mdash; predating the
+        Nasty Nes era and Seattle&rsquo;s documented hip-hop history. Central District house parties.
+        No labels. No radio. No infrastructure. <strong>Pure culture.</strong>
+        The pioneer before the pioneers.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">141&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">DJ Sounds</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop / DJ</span>
+          <span class="label-badge">Independent</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Pre-Institutional Era (1983&ndash;1995)</h2>
+          <ul class="timeline-list">
+            <li><strong>1983&ndash;1986:</strong> The solitary years. House parties in the Central District. No media, no labels, no commercial infrastructure. Pure hip-hop culture.</li>
+            <li><strong>1986&ndash;1989:</strong> The first wave. Nasty Nes and Sir Mix-A-Lot emerge. DJ Sounds part of the cultural foundation they built upon.</li>
+            <li><strong>1989&ndash;1993:</strong> The grunge eclipse. Seattle = Nirvana to the world. Hip-hop continues underground in the CD, invisible to the mainstream narrative.</li>
+            <li><strong>1993&ndash;1995:</strong> The transition. Independent hip-hop infrastructure begins to form. The next generation builds on DJ Sounds&rsquo; foundation.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Central District &mdash; Ground Zero</h2>
+          <blockquote>
+            The Central District was the geographic and cultural heart of Black Seattle.
+            House parties, community centers, parks &mdash; any space that could hold a
+            sound system became a venue. The DJ was not separate from the community;
+            the DJ <em>was</em> the community, with turntables. Every performance was
+            an education in hip-hop culture &mdash; DJing, MCing, breaking, graffiti &mdash;
+            the four elements transmitted through direct contact.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Pioneer Before Documentation</h4>
+              <div class="level advanced">Advanced &mdash; Historiographic Pattern</div>
+              <p>
+                Active from 1983 but largely absent from written histories.
+                Predates media coverage of Seattle hip-hop. Oral history
+                preservation. The invisible pioneer problem.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Central District as Incubator</h4>
+              <div class="level intermediate">Intermediate &mdash; Cultural Geography</div>
+              <p>
+                Redlining legacy concentrated Black culture in the CD.
+                House party circuit as primary venue. Community centers
+                as institutional spaces. Jazz &rarr; R&amp;B &rarr; funk &rarr; hip-hop.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 Pioneer Energy</h4>
+              <div class="level intermediate">Intermediate &mdash; Energy Theory</div>
+              <p>
+                The energy of being first. Cultural friction as energy source.
+                Introducing hip-hop to a rock-centric city. Every performance
+                an act of cultural creation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">134&deg;</span> <strong>DJ B-Mello</strong> &mdash; DJ lineage. B-Mello in the established scene; DJ Sounds in the pre-scene era. Both CD-rooted. Both E=5.</li>
+            <li><span class="ref-degree">136&deg;</span> <strong>DJ Riz</strong> &mdash; 206 Zulu. Community turntablism. The collective that preserves the culture DJ Sounds helped originate.</li>
+            <li><span class="ref-degree">142&deg;</span> <strong>206 Zulu</strong> &mdash; NEXT DEGREE! The collective that carries forward the four-element culture DJ Sounds practiced.</li>
+            <li><span class="ref-degree">138&deg;</span> <strong>Vitamin D</strong> &mdash; Conception Records. CD producer/DJ. Next generation building on the foundation.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">141&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hip-Hop / DJ</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>DJ Sounds</h4>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1983&ndash;1995</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Central District</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Independent</span></div>
+          <div class="stat-row"><span class="stat-label">Significance</span><span class="stat-value">Earliest DJ</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>DJ Era (134&ndash;141)</h4>
+          <div class="stat-row"><span class="stat-label">134&deg;</span><span class="stat-value">DJ B-Mello</span></div>
+          <div class="stat-row"><span class="stat-label">135&deg;</span><span class="stat-value">Indica Jones</span></div>
+          <div class="stat-row"><span class="stat-label">136&deg;</span><span class="stat-value">DJ Riz</span></div>
+          <div class="stat-row"><span class="stat-label">137&deg;</span><span class="stat-value">DJ Revolution</span></div>
+          <div class="stat-row"><span class="stat-label">138&deg;</span><span class="stat-value">Vitamin D</span></div>
+          <div class="stat-row"><span class="stat-label">139&deg;</span><span class="stat-value">Jake One</span></div>
+          <div class="stat-row"><span class="stat-label">140&deg;</span><span class="stat-value">Sabzi DJ</span></div>
+          <div class="stat-row"><span class="stat-label">141&deg;</span><span class="stat-value">DJ Sounds</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Historical Context</h4>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">Pre-institutional</span></div>
+          <div class="stat-row"><span class="stat-label">Venue</span><span class="stat-value">House parties</span></div>
+          <div class="stat-row"><span class="stat-label">Media</span><span class="stat-value">None (oral history)</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../140-sabzi-dj/" style="color: var(--seattle-navy);">&larr; 140&deg; Sabzi (DJ)</a>
+        <a href="../142-206-zulu-collective/" style="color: var(--seattle-navy);">142&deg; 206 Zulu &rarr;</a>
+      </div>
+      <p>Degree 141&deg; &mdash; DJ Sounds &mdash; Seattle 360 Engine &mdash; v1.49.281<br>1983. Central District. The earliest hip-hop DJ. Pioneer before the pioneers. E=5 pure culture.</p>
+    </footer>
+  </div>
+</body>
+</html>
