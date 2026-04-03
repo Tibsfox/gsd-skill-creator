@@ -1,0 +1,108 @@
+{
+  "degree": 138,
+  "species": "Barred Owl (caterwauling)",
+  "scientific_name": "Strix varia",
+  "slug": "138-barred-owl-caterwauling",
+  "sound_type": "caterwauling -- wild ascending screaming sequences; barking, cackling, howling; chaotic multi-voice layering; 300-2000+ Hz; E=6 maximum energy; the most alarming owl sound in the PNW forest",
+  "energy": 6,
+  "ecosystem": "Forest, resident. Dense canopy, mature and old-growth. Caterwauling during pair interactions, territorial disputes, courtship. Year-round, peaks breeding season.",
+  "season": "Year-round resident. Caterwauling peaks February-April (breeding season) and during territorial disputes. Can occur any time of year. Primarily nocturnal, dusk and pre-dawn peaks.",
+  "family": "Strigidae (4th consecutive: 135-136-137-138)",
+  "order": "Strigiformes",
+  "csv_substitute": false,
+  "original_species": "Barred Owl",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.65,
+    "lon": -122.30,
+    "description": "Barred Owls caterwaul throughout PNW forests. Caterwauling reported from forests, parks, and suburban areas with large trees."
+  },
+  "taxonomy_note": {
+    "description": "Second Barred Owl entry (first: degree 137, 'Who cooks for you?' hooting, E=4). FOURTH SPECIES WITH DOUBLE ENTRIES after Pileated Woodpecker (108-109), American Dipper (116-117), and Great Horned Owl (135-136). E=6 maximum energy -- the most dramatic energy step in any double entry (+2, from E=4 to E=6). Fourth consecutive Strigidae (135-138).",
+    "current_family": "Strigidae (4th consecutive, 135-136-137-138)",
+    "new_family": false,
+    "family_count_in_engine": "Strigidae: fifth entry total (Spotted Owl 4, GHO 135, GHO pair duet 136, Barred Owl 137, Barred Owl caterwauling 138). Four consecutive at 135-138.",
+    "name_etymology": "Same as degree 137. Strix from Greek 'screech owl.' varia from Latin 'variegated.'",
+    "genus_note": "Strix -- second entry (first at 137). The caterwauling is the second Strix contribution.",
+    "order_note": "Strigiformes. Fifth entry. Four consecutive at 135-138.",
+    "family_position": "Strigidae continues for a fourth consecutive degree. Longest family streak in the engine."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "300-2000+ Hz. Dramatically wider than hooting (400-550 Hz). Spans multiple octaves from bass howls to high-pitched screams.",
+    "peak_energy_band_hz": "500-1500 Hz. The screaming sequences concentrate energy in the mid-to-high range.",
+    "song_frequency_hz": "Caterwauling spans 300-2000+ Hz. Individual screams may peak at 1000-1500 Hz. Barks and howls at lower end (300-600 Hz).",
+    "song_duration_s": "Individual sequences: 5-30 seconds. Full bouts: 1-10+ minutes. Intensity varies throughout.",
+    "note_structure": "CATERWAULING: Wild ascending screams ('AAAH-aaah-AAAH!'), sharp barks ('WAH! WAH!'), rapid cackling ('ah-ah-ah-ah'), drawn-out howls ('HOOOOO-AWWW'). Chaotic, unpredictable, overlapping when multiple birds involved.",
+    "note_types": "Ascending screams, percussive barks, manic cackling, bass howls. All components may overlap and interleave unpredictably.",
+    "phrase_structure": "No regular phrase structure. Chaotic, ascending, accelerating. Sequences build in intensity and pitch before subsiding. Multiple birds create dense overlapping texture.",
+    "timbre": "Raspy, throat-tearing, anguished. Radically different from the rich, resonant hooting. The caterwauling timbre is rough, intense, and alarming. Often described as 'demonic' or 'primate-like.'",
+    "amplitude": "E=6. MAXIMUM ENERGY. Significantly louder than hooting. Audible 500+ meters through dense forest. The loudest regular nocturnal vocalization in the PNW forest.",
+    "tempo": "Irregular, accelerating, unpredictable. Bursts of screaming interspersed with brief pauses. The tempo builds and subsides in waves.",
+    "context": "Pair bonding/courtship (primary), territorial disputes, agitation/excitement, nest defense. The caterwauling is a high-arousal vocalization indicating intense behavioral engagement.",
+    "regional_variation": "Minimal variation in caterwauling structure across range. The chaotic quality is consistent. Individual and pair variation in intensity and duration.",
+    "key_property": "CATERWAULING -- E=6 MAXIMUM ENERGY. Wild ascending screaming, barking, cackling, howling. 300-2000+ Hz (dramatic range). Fourth double-entry species. Most dramatic energy step: E=4 to E=6 (+2). Fourth consecutive Strigidae (135-138). Most alarming owl sound in PNW. Triggers human primal alarm response. 'Someone is being murdered in the woods.' The hidden wild voice of the measured owl."
+  },
+  "plumage": {
+    "overall": "Same as degree 137. Brown and white barred pattern. Dark brown eyes. No ear tufts.",
+    "diagnostic_mark": "Same as degree 137. Dark eyes, barred chest, no ear tufts.",
+    "seasonal_variation": "Minimal.",
+    "flight_pattern": "Silent flight."
+  },
+  "physical_description": {
+    "overall": "Same as degree 137. Length: 43-50 cm. Weight: 500-1050 g.",
+    "diagnostic_mark": "Same as degree 137.",
+    "field_id": "If you hear wild screaming, barking, and cackling in the forest at night -- especially if it sounds like 'someone being murdered' or 'monkeys' -- it is almost certainly Barred Owls caterwauling. Listen for the ascending pitch pattern."
+  },
+  "nodes": [
+    {
+      "id": "caterwauling-e6",
+      "type": "concept",
+      "title": "Caterwauling -- E=6 Maximum Energy",
+      "description": "Wild ascending screaming sequences. 300-2000+ Hz. Raspy, chaotic, alarming. The most intense owl vocalization in the PNW. Triggers primal human alarm response. E=6 -- maximum energy. The highest energy in the four-degree Strigidae streak.",
+      "connections": ["double-entry-fourth", "human-alarm", "strigidae-quartet"]
+    },
+    {
+      "id": "double-entry-fourth",
+      "type": "pattern",
+      "title": "Fourth Species with Double Entries (137-138)",
+      "description": "Pileated WP (108-109, +1), American Dipper (116-117, +1), GHO (135-136, +1), Barred Owl (137-138, +2). Fourth double-entry species. Most dramatic energy step: E=4 to E=6, bypassing E=5.",
+      "connections": ["caterwauling-e6", "strigidae-quartet"]
+    },
+    {
+      "id": "human-alarm",
+      "type": "concept",
+      "title": "Human Alarm Response -- Primal Fear",
+      "description": "The caterwauling triggers primal alarm in humans. 'Someone is being murdered.' 'Monkeys in the forest.' 'Demonic.' Police reports of mysterious screaming. Night amplification. The most psychologically impactful owl vocalization.",
+      "connections": ["caterwauling-e6", "double-entry-fourth"]
+    },
+    {
+      "id": "strigidae-quartet",
+      "type": "pattern",
+      "title": "Fourth Consecutive Strigidae (135-138)",
+      "description": "GHO solo (135, E=4), GHO pair (136, E=5), Barred Owl hooting (137, E=4), Barred Owl caterwauling (138, E=6). Four consecutive. Energy arc: 4, 5, 4, 6. V-shaped then surge. Longest family streak in the engine.",
+      "connections": ["caterwauling-e6", "double-entry-fourth"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-137",
+      "species": "Barred Owl (hooting)",
+      "relationship": "DOUBLE ENTRY! Hooting (137, E=4) to caterwauling (138, E=6). The most dramatic energy step in any double entry: +2. Same species, radically different acoustic outputs. Measured speech vs. wild screaming."
+    },
+    {
+      "target": "SPS-135-136",
+      "species": "Great Horned Owl",
+      "relationship": "STRIGIDAE QUARTET! GHO (135-136) + Barred Owl (137-138). Four consecutive Strigidae. Two species, two double entries. Energy arc: 4, 5, 4, 6."
+    },
+    {
+      "target": "SPS-108-109",
+      "species": "Pileated Woodpecker",
+      "relationship": "DOUBLE ENTRY PATTERN! Pileated (108-109, +1), Dipper (116-117, +1), GHO (135-136, +1), Barred Owl (137-138, +2). Four species. The Barred Owl shows the most dramatic contrast."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Spotted Owl",
+      "relationship": "STRIGIDAE FAMILY! Five Strigidae entries total. Spotted Owl (4), GHO solo (135), GHO pair (136), Barred Owl hooting (137), Barred Owl caterwauling (138). The most represented family."
+    }
+  ]
+}

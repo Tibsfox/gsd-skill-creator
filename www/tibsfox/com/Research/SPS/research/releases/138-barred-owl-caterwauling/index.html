@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 138&deg; &mdash; Barred Owl Caterwauling &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #B71C1C, #C62828);
+      color: #FFCDD2; font-size: 2.5rem; font-weight: 700;
+      width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 20px rgba(183, 28, 28, 0.6);
+    }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card {
+      background: white; border: 1px solid var(--card-border); border-radius: 6px;
+      padding: 0.75rem 1rem; margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .scream-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #B71C1C 100%);
+      border: 2px solid #7F0000; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2;
+    }
+    .scream-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .scream-card p { color: #FFCDD2; }
+    .scream-card strong { color: #FFEBEE; }
+
+    .alarm-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #4A148C 100%);
+      border: 2px solid #38006B; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E1BEE7;
+    }
+    .alarm-card h3 { margin-top: 0; font-size: 1.1rem; color: #CE93D8; }
+    .alarm-card p { color: #E1BEE7; }
+    .alarm-card strong { color: #F3E5F5; }
+
+    .double-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #E65100 100%);
+      border: 2px solid #BF360C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2;
+    }
+    .double-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCC80; }
+    .double-card p { color: #FFE0B2; }
+    .double-card strong { color: #FFF3E0; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.scream { background: #B71C1C; }
+    .theory-icon.alarm { background: #4A148C; }
+    .theory-icon.double { background: #E65100; }
+    .theory-icon.quartet { background: #1A237E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">138&deg;</div>
+      <div class="release-title-block">
+        <h2>Barred Owl &mdash; Caterwauling</h2>
+        <div class="scientific"><em>Strix varia</em> (Strigidae) &mdash; E=6 &mdash; The Wild Ascending Scream</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>E=6 MAXIMUM ENERGY</strong> &mdash; wild ascending screaming sequences.
+      <strong>300&ndash;2000+ Hz</strong> (dramatic range).
+      Barking, cackling, howling. <strong>Fourth species with double entries</strong>
+      (after Pileated WP, Dipper, GHO). Most dramatic energy step: <strong>E=4 to E=6</strong>.
+      Fourth consecutive Strigidae (135&ndash;138). The most alarming owl sound
+      in the PNW forest.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="scream-card">
+          <h3>E=6 &mdash; The Wild Ascending Scream</h3>
+          <p>
+            <strong>Ascending screams, sharp barks, manic cackling, bass howls</strong>
+            &mdash; all overlapping in chaotic, unpredictable sequences. The caterwauling
+            spans <strong>300&ndash;2000+ Hz</strong> &mdash; dramatically wider than the
+            hooting&rsquo;s 400&ndash;550 Hz. When multiple Barred Owls caterwaul simultaneously,
+            the layered voices create a wall of sound that is <strong>genuinely terrifying</strong>
+            to uninitiated listeners. E=6 maximum energy &mdash; the highest in the four-degree
+            Strigidae streak.
+          </p>
+        </div>
+
+        <div class="alarm-card">
+          <h3>The Human Alarm Response</h3>
+          <p>
+            <strong>&ldquo;Someone is being murdered.&rdquo;</strong> The most common
+            first-time description. Police departments in forested areas report regular
+            calls about mysterious screaming. The ascending pitch pattern triggers a
+            <strong>primal alarm response</strong>. People also describe it as
+            <strong>&ldquo;monkeys in the forest&rdquo;</strong> or
+            <strong>&ldquo;demonic&rdquo;</strong>. At 2 AM, 50 meters from a suburban
+            home, the caterwauling is an unforgettable experience.
+          </p>
+        </div>
+
+        <div class="double-card">
+          <h3>Fourth Double Entry &mdash; Most Dramatic Step</h3>
+          <p>
+            <strong>Pileated WP:</strong> 108&ndash;109, energy step +1.
+            <strong>Dipper:</strong> 116&ndash;117, step +1.
+            <strong>GHO:</strong> 135&ndash;136, step +1.
+            <strong>Barred Owl:</strong> 137&ndash;138, step <strong>+2</strong>.
+            The Barred Owl&rsquo;s caterwauling bypasses E=5 entirely &mdash; from
+            the measured &ldquo;Who cooks for you?&rdquo; to maximum-energy screaming.
+            Same species, <strong>radically different acoustic outputs</strong>.
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-137 Barred Owl (hooting)</strong>
+            <p>DOUBLE ENTRY! Hooting (137, E=4) to caterwauling (138, E=6). +2 energy step. Measured speech to wild screaming. Most dramatic contrast in any double entry.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-135/136 Great Horned Owl</strong>
+            <p>STRIGIDAE QUARTET! Four consecutive: GHO solo (135), GHO pair (136), Barred hooting (137), Barred caterwauling (138). Energy arc: 4, 5, 4, 6.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-108/109 Pileated Woodpecker</strong>
+            <p>DOUBLE ENTRY PRECEDENT! Pileated: +1 step. Barred Owl: +2 step. The caterwauling entry is the most extreme double-entry acoustic contrast.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004 Spotted Owl</strong>
+            <p>STRIGIDAE FAMILY! Five entries total. The Barred Owl that threatens the Spotted Owl now has two entries documenting its full vocal range -- from measured to maximum.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon scream">6</div>
+            <div class="theory-content">
+              <h4>E=6 Caterwauling &mdash; Maximum Energy</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Wild ascending screams, barks, cackling, howls. 300&ndash;2000+ Hz. Chaotic, unpredictable. Multi-voice layering. The most intense owl vocalization in the PNW.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon alarm">A</div>
+            <div class="theory-content">
+              <h4>Human Alarm Response &mdash; Primal Fear</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>&ldquo;Someone is being murdered.&rdquo; Police reports. Ascending pitch triggers instinctive alarm. Night amplification. The most psychologically impactful owl vocalization.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon double">4</div>
+            <div class="theory-content">
+              <h4>Fourth Double Entry (137&ndash;138) &mdash; +2 Step</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Four species with double entries. Barred Owl shows the most dramatic energy step: E=4 to E=6, bypassing E=5. The acoustic contrast is the greatest in any double entry.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon quartet">4</div>
+            <div class="theory-content">
+              <h4>Fourth Consecutive Strigidae (135&ndash;138)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Longest family streak. Two species, four entries, two double entries. Energy arc: 4, 5, 4, 6. The owl era at full depth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Barred Owl</div>
+          <div class="stat-detail"><em>Strix varia</em> &mdash; caterwauling</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Strigidae</div>
+          <div class="stat-detail">4th consecutive (135&ndash;138)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Caterwauling</div>
+          <div class="stat-detail">wild ascending screams</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 6</div>
+          <div class="stat-detail">MAXIMUM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">300&ndash;2000+ Hz</div>
+          <div class="stat-detail">dramatic range</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Double Entry</div>
+          <div class="stat-value">4th in engine</div>
+          <div class="stat-detail">+2 energy step (E=4 to E=6)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Human Impact</div>
+          <div class="stat-value">Extreme alarm</div>
+          <div class="stat-detail">&ldquo;someone being murdered&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Context</div>
+          <div class="stat-value">Pair interaction</div>
+          <div class="stat-detail">territorial, courtship</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
