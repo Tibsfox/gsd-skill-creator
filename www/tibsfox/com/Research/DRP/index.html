@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disaster Recovery &amp; Protective Systems &mdash; Community Resilience Through Distributed Infrastructure | Tibsfox Research</title>
+<style>
+:root {
+  --drp-red: #8b1a1a;
+  --drp-dark: #5c1010;
+  --drp-amber: #d4943a;
+  --drp-light: #e8a84c;
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --green: #4CAF50;
+  --amber: #E89848;
+  --purple: #9a6ad8;
+  --red: #c0392b;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--drp-amber); text-decoration:none; }
+a:hover { color:#f0d070; }
+
+header {
+  background:linear-gradient(135deg, #1a0808 0%, var(--drp-red) 30%, #3d1010 60%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--drp-amber);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 50% 60% at 50% 40%, rgba(139,26,26,0.15) 0%, transparent 70%);
+}
+header h1 { font-size:2.2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; }
+header .subtitle { color:var(--drp-amber); font-size:1rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; position:relative; font-family:system-ui,sans-serif; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a:hover { color:#fff; }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(212,148,58,0.7); border-left:3px solid var(--drp-amber);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+.stats-bar {
+  display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
+  padding:1.2rem 0; margin-bottom:1.5rem;
+  font-family:system-ui,sans-serif; font-size:0.85rem; color:var(--dim);
+  border-bottom:1px solid var(--border);
+}
+.stats-bar strong { color:#fff; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; transition:border-color 0.2s; text-decoration:none; color:inherit; display:block;
+}
+.card:hover { border-color:rgba(212,148,58,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+.card p { font-size:0.85rem; color:var(--dim); line-height:1.5; margin-top:0.3rem; font-family:system-ui,sans-serif; }
+.card .meta-line { font-size:0.7rem; color:rgba(212,148,58,0.5); font-family:monospace; margin-top:0.5rem; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-seismic { background:rgba(192,57,43,0.2); color:var(--red); border:1px solid rgba(192,57,43,0.4); }
+.tag-mesh { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-warning { background:rgba(212,148,58,0.15); color:var(--drp-amber); border:1px solid rgba(212,148,58,0.3); }
+.tag-solar { background:rgba(232,152,72,0.15); color:var(--amber); border:1px solid rgba(232,152,72,0.3); }
+.tag-community { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-rosetta { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+
+.proto-table {
+  width:100%; border-collapse:collapse; margin:1rem 0;
+  font-family:system-ui,sans-serif; font-size:0.8rem;
+}
+.proto-table th {
+  background:rgba(139,26,26,0.15); color:var(--drp-amber); text-align:left;
+  padding:0.6rem 0.8rem; border-bottom:2px solid rgba(212,148,58,0.3);
+  font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:0.7rem;
+}
+.proto-table td {
+  padding:0.5rem 0.8rem; border-bottom:1px solid var(--border); color:var(--dim);
+}
+.proto-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+.paper-list { list-style:none; margin:0.5rem 0; }
+.paper-list li {
+  padding:0.8rem 1rem; margin-bottom:0.5rem;
+  background:var(--panel); border:1px solid var(--border); border-radius:4px;
+  font-size:0.82rem; font-family:system-ui,sans-serif;
+}
+.paper-list li .title { color:#fff; font-weight:500; }
+.paper-list li .source { color:var(--dim); font-size:0.72rem; margin-top:0.2rem; }
+.paper-list li .connection { color:var(--drp-amber); font-size:0.78rem; margin-top:0.3rem; font-style:italic; }
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+@media(max-width:640px) { .card-grid { grid-template-columns:1fr; } header h1 { font-size:1.6rem; } .proto-table { font-size:0.7rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Disaster Recovery &amp; Protective Systems</h1>
+  <div class="subtitle">Community Resilience Through Distributed Infrastructure</div>
+  <div class="meta">Cascadia Subduction Zone &middot; Pacific Northwest &middot; Mesh Networks &middot; Early Warning &middot; Solar Infrastructure</div>
+  <nav>
+    <a href="../LIVE/index.html">Live</a>
+    <a href="../index.html">Research</a>
+    <a href="../MUK/index.html">MUK</a>
+    <a href="../NASA/artemis-ii/index.html">Artemis II</a>
+  </nav>
+</header>
+
+<main>
+  <div class="stats-bar">
+    <span><strong>M9.0+</strong> megathrust threat</span>
+    <span><strong>326</strong> years since last rupture</span>
+    <span><strong>10&ndash;15%</strong> chance in 30 years</span>
+    <span><strong>1,100 km</strong> fault length</span>
+    <span><strong>39</strong> DART buoys (Pacific)</span>
+    <span><strong>50M+</strong> residents in ShakeAlert zone</span>
+    <span><strong>~500 yr</strong> average recurrence</span>
+  </div>
+
+  <blockquote>
+    The Pacific Northwest sits atop the Cascadia Subduction Zone &mdash; the most dangerous fault system in
+    North America. A 1,100-kilometer megathrust running from Cape Mendocino to Vancouver Island, it last
+    ruptured on January 26, 1700, generating a magnitude 9 earthquake and a transoceanic tsunami that
+    struck Japan nine hours later. The geological record shows at least 19 great earthquakes (M8+) over
+    the past 10,000 years. The question is not if, but when. Everything on this page exists because
+    of that certainty.
+  </blockquote>
+
+  <!-- ============================================================ -->
+  <!--  CASCADIA SUBDUCTION ZONE                                     -->
+  <!-- ============================================================ -->
+
+  <h2>Cascadia Subduction Zone</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>The M9.0+ Threat</h3>
+      <div><span class="tag tag-seismic">Seismic</span></div>
+      <p>The Cascadia Subduction Zone extends 1,100 km from northern California to British Columbia, where the Juan de Fuca plate subducts beneath the North American plate at approximately 40 mm/year. USGS estimates place the probability of a full-margin rupture (M8.7&ndash;9.2) at 10&ndash;15% in the next 30 years. Including partial-segment ruptures (M8.0&ndash;8.6), the probability of a major event rises to approximately 37% in 50 years. The locked zone extends 60&ndash;150 km offshore, accumulating strain that will release in seconds.</p>
+      <div class="meta-line">USGS Fact Sheet 2025-3050 &middot; PNSN Cascadia Sources &middot; Recurrence: ~200&ndash;600 years (full margin)</div>
+    </div>
+
+    <div class="card">
+      <h3>January 26, 1700 &mdash; The Last Full Rupture</h3>
+      <div><span class="tag tag-seismic">Seismic</span> <span class="tag tag-warning">Historical</span></div>
+      <p>At approximately 9 PM local time, the entire Cascadia margin ruptured in a M8.7&ndash;9.2 earthquake. The evidence: Japanese historical records document an "orphan tsunami" &mdash; a tsunami with no local earthquake &mdash; striking the Sanriku coast on January 27&ndash;28, 1700 (Japanese calendar). Kenji Satake and colleagues used the tsunami arrival times and wave heights to back-calculate the source, pinpointing the date and magnitude. Ghost forests along the Washington and Oregon coasts &mdash; stands of dead western red cedar killed by sudden saltwater inundation &mdash; stopped growing after the 1699 growing season, confirming the timing through dendrochronology.</p>
+      <div class="meta-line">Satake et al. (1996) Nature 379:246 &middot; Atwater et al. (2005) "The Orphan Tsunami of 1700" USGS</div>
+    </div>
+
+    <div class="card">
+      <h3>Liquefaction Zones in Puget Sound</h3>
+      <div><span class="tag tag-seismic">Seismic</span></div>
+      <p>Loose, water-saturated alluvial soils throughout the Puget Sound lowlands are susceptible to liquefaction during sustained shaking. High-risk areas include the Duwamish industrial corridor in Seattle, Interbay, stream corridors, waterfront areas throughout the region, and fill zones in Everett and Tacoma. The Washington Geological Survey developed liquefaction susceptibility maps after the 2001 M6.8 Nisqually earthquake demonstrated the hazard: buildings tilted, underground pipes broke, and the Port of Olympia sustained significant damage &mdash; from a moderate event at 52 km depth. A shallow M9 would produce shaking 30&ndash;100 times stronger, sustained for 3&ndash;5 minutes.</p>
+      <div class="meta-line">WA DNR Geologic Hazard Maps &middot; USGS Open-File Report 2007-1175 &middot; PNSN Hazard Maps</div>
+    </div>
+
+    <div class="card">
+      <h3>Tsunami Inundation Zones</h3>
+      <div><span class="tag tag-seismic">Seismic</span> <span class="tag tag-warning">Warning</span></div>
+      <p>A full Cascadia rupture generates tsunami waves across the entire Pacific basin. The outer coast (Washington, Oregon) faces 15&ndash;30 minute arrival times with wave heights of 6&ndash;10 meters in many areas, potentially exceeding 20 meters in constricted inlets. The Strait of Juan de Fuca channels waves toward the San Juan Islands and inner waterways. Within Puget Sound, reflected and refracted waves arrive in 30&ndash;60 minutes with reduced but still dangerous amplitudes of 1&ndash;3 meters, complicated by the narrow, deep channels that amplify wave energy. Evacuation to high ground is the only reliable protection on the outer coast.</p>
+      <div class="meta-line">NOAA PMEL Tsunami Modeling &middot; WA DNR Inundation Maps &middot; PTWC coverage zone</div>
+    </div>
+
+    <div class="card">
+      <h3>ShakeAlert Early Warning System</h3>
+      <div><span class="tag tag-warning">Warning</span> <span class="tag tag-seismic">Seismic</span></div>
+      <p>ShakeAlert is the USGS-operated earthquake early warning system covering California, Oregon, and Washington &mdash; over 50 million residents. The system detects P-waves from seismometers, calculates magnitude and location, and issues alerts through the Wireless Emergency Alert (WEA) system and the MyShake smartphone app before slower, destructive S-waves and surface waves arrive. For Cascadia events, warning times vary significantly: coastal areas near the rupture zone may receive only seconds of warning, while inland cities like Seattle and Portland could get 30&ndash;90 seconds. Limitations: the system depends on seismometer density, cellular infrastructure, and internet connectivity &mdash; all of which may degrade in the event itself.</p>
+      <div class="meta-line"><a href="https://www.shakealert.org">shakealert.org</a> &middot; USGS &middot; Delivered via WEA + MyShake app &middot; Operational since 2021 (PNW)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  MESH NETWORKING FOR DISASTER COMMUNICATION                   -->
+  <!-- ============================================================ -->
+
+  <h2>Mesh Networking for Disaster Communication</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    When a M9 Cascadia earthquake hits, conventional communication infrastructure fails within minutes.
+    Cell towers lose power (battery backup: 4&ndash;8 hours), fiber backhaul severs at fault crossings,
+    and network congestion renders surviving towers useless. Mesh networks &mdash; decentralized, self-healing,
+    locally powered &mdash; are the engineering answer to catastrophic infrastructure failure.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>LoRa / LoRaWAN</h3>
+      <div><span class="tag tag-mesh">Mesh</span></div>
+      <p>Long Range (LoRa) radio operates in the unlicensed ISM band (915 MHz in North America, 868 MHz in Europe) using chirp spread spectrum modulation. Range: 2&ndash;15 km line-of-sight, 1&ndash;5 km in urban environments. Data rate: 0.3&ndash;50 kbps (low, but sufficient for text, GPS coordinates, and sensor telemetry). Power consumption: as low as 10&ndash;50 mA transmit, microamps in sleep mode. A single 18650 lithium cell can power a LoRa node for months in low-duty-cycle operation. Spreading factor (SF7&ndash;SF12) trades data rate for range: SF12 reaches farthest but at only 250 bps.</p>
+      <div class="meta-line">ISM 915 MHz &middot; Semtech SX126x / LR11xx &middot; License-free &middot; Battery: months to years</div>
+    </div>
+
+    <div class="card">
+      <h3>Meshtastic &mdash; Open Source LoRa Mesh</h3>
+      <div><span class="tag tag-mesh">Mesh</span> <span class="tag tag-community">Open Source</span></div>
+      <p>Meshtastic is open-source firmware that turns inexpensive LoRa radio modules (ESP32, nRF52, RP2040-based) into a decentralized mesh network. Features: encrypted text messaging, GPS position sharing, telemetry (temperature, humidity, battery voltage), and store-and-forward for offline nodes. Maximum 7 hops per message. Pairs with smartphones via Bluetooth for a user-friendly interface. No internet, no cellular, no infrastructure required. Hardware cost: $25&ndash;60 per node. A network of solar-powered Meshtastic nodes provides persistent, zero-infrastructure communication across an entire community.</p>
+      <div class="meta-line"><a href="https://meshtastic.org">meshtastic.org</a> &middot; GitHub &middot; 7-hop max &middot; AES-256 encryption &middot; $25&ndash;60/node</div>
+    </div>
+
+    <div class="card">
+      <h3>WiFi Mesh (802.11s)</h3>
+      <div><span class="tag tag-mesh">Mesh</span></div>
+      <p>IEEE 802.11s defines a mesh networking amendment to the WiFi standard. Higher bandwidth than LoRa (tens to hundreds of Mbps) but shorter range (50&ndash;200m) and significantly higher power draw (2&ndash;10W per node). Useful for local high-bandwidth needs: sharing images, video feeds from cameras, accessing cached web content. In a disaster mesh, WiFi nodes serve as local access points while LoRa handles long-range backbone communication. Power-hungry &mdash; requires solar or generator to sustain operation beyond battery backup.</p>
+      <div class="meta-line">2.4/5 GHz &middot; 50&ndash;200m range &middot; High bandwidth &middot; Power: 2&ndash;10W per node</div>
+    </div>
+
+    <div class="card">
+      <h3>AREDN &mdash; Amateur Radio Emergency Data Network</h3>
+      <div><span class="tag tag-mesh">Mesh</span> <span class="tag tag-community">Ham Radio</span></div>
+      <p>AREDN transforms commodity WiFi routers into a high-speed amateur radio mesh network operating on 900 MHz, 2.4 GHz, 3.4 GHz, and 5.8 GHz bands. Requires an amateur radio license (Technician class or higher). Achieves 60+ Mbps on 10 MHz channels over 80+ km links with directional antennas. Self-healing mesh topology with Babel routing protocol. Supports email, chat, VoIP, video conferencing, and document sharing. Key advantage over commercial alternatives: amateur radio operators can legally use higher power levels and dedicated spectrum allocations during emergencies.</p>
+      <div class="meta-line"><a href="https://www.arednmesh.org">arednmesh.org</a> &middot; Amateur license required &middot; 60+ Mbps &middot; 80+ km links</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:1.5rem; border:none; padding:0; font-size:0.85rem; text-transform:none; letter-spacing:normal; color:var(--drp-amber);">Protocol Comparison</h2>
+
+  <table class="proto-table">
+    <thead>
+      <tr>
+        <th>Protocol</th>
+        <th>Range</th>
+        <th>Bandwidth</th>
+        <th>Power Draw</th>
+        <th>License</th>
+        <th>Cost/Node</th>
+        <th>Best For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:#fff;">LoRa / Meshtastic</td>
+        <td>2&ndash;15 km</td>
+        <td>0.3&ndash;50 kbps</td>
+        <td>10&ndash;50 mA TX</td>
+        <td>None (ISM)</td>
+        <td>$25&ndash;60</td>
+        <td>Text, GPS, sensors</td>
+      </tr>
+      <tr>
+        <td style="color:#fff;">WiFi Mesh (802.11s)</td>
+        <td>50&ndash;200 m</td>
+        <td>50&ndash;300 Mbps</td>
+        <td>2&ndash;10 W</td>
+        <td>None</td>
+        <td>$40&ndash;150</td>
+        <td>Local high-bandwidth</td>
+      </tr>
+      <tr>
+        <td style="color:#fff;">AREDN</td>
+        <td>1&ndash;80+ km</td>
+        <td>5&ndash;60+ Mbps</td>
+        <td>5&ndash;15 W</td>
+        <td>Ham (Tech+)</td>
+        <td>$50&ndash;200</td>
+        <td>Long-range backbone</td>
+      </tr>
+      <tr>
+        <td style="color:#fff;">Starlink</td>
+        <td>Global (LEO)</td>
+        <td>50&ndash;200 Mbps</td>
+        <td>75&ndash;100 W</td>
+        <td>Subscription</td>
+        <td>$299+/mo</td>
+        <td>Internet uplink (if power available)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card-grid" style="margin-top:1rem;">
+    <div class="card">
+      <h3>Topology: Why Mesh Survives</h3>
+      <div><span class="tag tag-mesh">Mesh</span></div>
+      <p><strong>Star topology</strong> (cellular): all nodes connect to a central tower. Tower fails = all nodes lose connectivity. Single point of failure. <strong>Mesh topology</strong>: every node connects to multiple neighbors. Any node can route traffic for any other node. When a node fails, traffic automatically reroutes through surviving neighbors. This is why mesh survives earthquakes &mdash; there is no central point to destroy. The math: in a mesh of N nodes with average degree k, the network remains connected even after removing up to (k&minus;1) nodes. Redundancy is structural, not added.</p>
+      <div class="meta-line">Graph theory: mesh connectivity = min vertex cut &middot; Self-healing via routing protocol convergence</div>
+    </div>
+
+    <div class="card">
+      <h3>Solar-Powered Node: Power Budget</h3>
+      <div><span class="tag tag-solar">Solar</span> <span class="tag tag-mesh">Mesh</span></div>
+      <p>A reference design for a self-sustaining mesh node: <strong>Load:</strong> LoRa radio + microcontroller = ~1W average (5W peak transmit). <strong>Panel:</strong> 20W solar panel (PNW: ~3.5 peak sun hours/day in winter = 70 Wh/day generation). <strong>Battery:</strong> 100 Wh LiFePO4 (safe chemistry, 2000+ cycles). <strong>Autonomy:</strong> 100 Wh / 24W = ~4 days without sun. With even partial sun, indefinite operation. The 20W panel produces 3.5x the daily load even in December in Seattle (47.6&deg;N). Enclosure: NEMA 4X weatherproof, pole-mounted, elevated above flood zone.</p>
+      <div class="meta-line">5W avg load &middot; 20W panel &middot; 100Wh LiFePO4 &middot; 3+ days autonomy (no sun) &middot; Indefinite (partial sun)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  EARLY WARNING SYSTEMS                                        -->
+  <!-- ============================================================ -->
+
+  <h2>Early Warning Systems</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Modern disaster preparedness depends on layered warning systems operating at different timescales:
+    seconds (seismic P-waves), minutes (tsunami propagation), hours (weather), and days (space weather).
+    Each layer uses different physics, different sensors, and different communication channels.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Seismic: ShakeAlert &amp; Strong Motion Sensors</h3>
+      <div><span class="tag tag-warning">Warning</span> <span class="tag tag-seismic">Seismic</span></div>
+      <p>ShakeAlert detects P-waves (compressional, fast, low damage) traveling at ~6 km/s and issues warnings before S-waves (shear, slow, destructive) arrive at ~3.5 km/s. The system uses a network of ~1,700 seismometers across the West Coast. For a Cascadia event originating offshore, P-waves reach coastal sensors first; the system calculates magnitude within 5&ndash;10 seconds and pushes alerts via WEA and app. Inland cities gain valuable seconds: Seattle could receive 30&ndash;90 seconds of warning for a Cascadia event. Strong motion accelerometers (SMAs) supplement broadband seismometers for near-field recording where broadband instruments clip.</p>
+      <div class="meta-line">~1,700 sensors &middot; P-wave @ 6 km/s vs S-wave @ 3.5 km/s &middot; 5&ndash;10 sec to detection</div>
+    </div>
+
+    <div class="card">
+      <h3>Tsunami: DART Buoys &amp; PTWC</h3>
+      <div><span class="tag tag-warning">Warning</span></div>
+      <p>NOAA operates 39 DART (Deep-ocean Assessment and Reporting of Tsunamis) buoy stations across the Pacific, Atlantic, and Caribbean. Each station consists of a seafloor bottom pressure recorder (BPR) at 1,000&ndash;6,000m depth and a surface buoy communicating via Iridium satellite. The BPR detects tsunami waves as small as 1 cm in 6,000m of water by measuring pressure changes at 15-second intervals. In standard mode: hourly reports. In event mode (triggered by seismic alert): 15-second data transmitted in real time. The Pacific Tsunami Warning Center (PTWC) in Palmer, Alaska integrates DART data with seismic data and tide gauge readings to issue tsunami warnings, watches, and advisories.</p>
+      <div class="meta-line">39 DART stations &middot; 1 cm detection in 6 km depth &middot; Iridium satellite uplink &middot; PTWC Palmer, AK</div>
+    </div>
+
+    <div class="card">
+      <h3>Weather: NWS, CWOP &amp; CoCoRaHS</h3>
+      <div><span class="tag tag-warning">Warning</span> <span class="tag tag-community">Citizen Science</span></div>
+      <p>The National Weather Service operates NEXRAD Doppler radar (160 stations, 230 km range each) and launches radiosondes twice daily from 92 upper-air stations. Citizen networks amplify this: <strong>CWOP</strong> (Citizen Weather Observer Program) contributes ~11,000 personal weather stations feeding real-time data into NWS models via APRS. <strong>CoCoRaHS</strong> (Community Collaborative Rain, Hail &amp; Snow Network) provides daily precipitation measurements from ~23,000 volunteers, critical for flood forecasting in data-sparse areas. These citizen networks demonstrate the power of distributed sensing &mdash; the same architecture that makes mesh networks resilient.</p>
+      <div class="meta-line">NEXRAD: 160 stations &middot; CWOP: ~11,000 stations &middot; CoCoRaHS: ~23,000 observers</div>
+    </div>
+
+    <div class="card">
+      <h3>Space Weather: DSCOVR, ACE &amp; GOES</h3>
+      <div><span class="tag tag-warning">Warning</span></div>
+      <p>Solar storms (coronal mass ejections) can destroy power grid transformers, disable satellites, and disrupt GPS and radio communication. The defense: sentinel spacecraft at the Sun-Earth L1 Lagrange point, 1.5 million km sunward. <strong>DSCOVR</strong> (2015&ndash;present) carries the PlasMag instrument suite (fluxgate magnetometer, Faraday Cup ion detector, electron analyzer) measuring solar wind speed, density, and magnetic field orientation. Provides 15&ndash;60 minutes warning before CME impact. <strong>ACE</strong> (1997&ndash;present) continues as backup. <strong>GOES-16/17/18</strong> carry magnetometers in geostationary orbit for real-time geomagnetic field monitoring. SWFO-L1 (Space Weather Follow-On) is the planned successor.</p>
+      <div class="meta-line">DSCOVR @ L1 &middot; 15&ndash;60 min CME warning &middot; GOES magnetometers &middot; SWPC Boulder, CO</div>
+    </div>
+
+    <div class="card">
+      <h3>Multi-Hazard Integration</h3>
+      <div><span class="tag tag-warning">Warning</span> <span class="tag tag-seismic">Seismic</span></div>
+      <p>Real resilience requires integrating warning systems across hazard types. A Cascadia earthquake triggers a cascade: ground shaking (seconds) &rarr; landslides (seconds to minutes) &rarr; liquefaction (during shaking) &rarr; tsunami (minutes to hours) &rarr; dam failures (hours) &rarr; aftershocks (days to years). Each hazard has its own warning system, detection physics, and communication pathway. The integration challenge: a M9 earthquake may simultaneously disable the communication infrastructure needed to deliver tsunami warnings. This is why local, self-powered, mesh-networked warning systems matter &mdash; they operate independently of the infrastructure the earthquake destroys.</p>
+      <div class="meta-line">Cascading hazards: EQ &rarr; landslide &rarr; liquefaction &rarr; tsunami &rarr; dam failure &rarr; aftershock</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  SOLAR + COMPUTE + COMMUNICATIONS STACK                       -->
+  <!-- ============================================================ -->
+
+  <h2>Solar + Compute + Communications Stack</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    The concept: every rooftop solar installation is a potential node in a resilient distributed network.
+    Panels generate power. Batteries store it. Compute hardware collects sensor data and routes messages.
+    Radios connect nodes into a mesh. Each node is independently viable. Together, they form a system
+    that survives what centralized infrastructure cannot.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Power Architecture</h3>
+      <div><span class="tag tag-solar">Solar</span></div>
+      <p>Solar panels &rarr; MPPT charge controller &rarr; LiFePO4 battery bank &rarr; DC bus (12V or 48V) &rarr; loads. LiFePO4 chemistry chosen for safety (no thermal runaway), cycle life (2,000&ndash;5,000 cycles at 80% DoD), and temperature tolerance (&minus;20&deg;C to 60&deg;C). The DC bus directly powers compute and radio hardware &mdash; no inverter losses for DC loads. A 48V architecture matches telecom standards and minimizes wire losses. Sizing: 1 kWh battery bank + 200W panel sustains a full communication node (radio + compute + sensors) indefinitely at 47&deg;N latitude, including PNW winter cloud cover.</p>
+      <div class="meta-line">LiFePO4 &middot; MPPT &middot; 48V DC bus &middot; No inverter for DC loads &middot; Telecom-standard voltage</div>
+    </div>
+
+    <div class="card">
+      <h3>Edge Compute</h3>
+      <div><span class="tag tag-solar">Solar</span> <span class="tag tag-mesh">Compute</span></div>
+      <p>Raspberry Pi 5 (5&ndash;10W) or Jetson Nano (5&ndash;15W) class single-board computers serve as edge nodes. Functions: sensor data collection (temperature, humidity, barometric pressure, seismic, air quality), data logging to local storage (SD/NVMe), mesh network routing, MQTT message broker, and cached content server. Local-first architecture: all data stored on-node first, synchronized to peers when connectivity allows. No cloud dependency. A Pi 5 with 8GB RAM runs Linux, sensor daemons, MQTT broker, and a local web server simultaneously within a 10W power envelope.</p>
+      <div class="meta-line">Raspberry Pi 5: 5&ndash;10W &middot; Jetson Nano: 5&ndash;15W &middot; Local storage &middot; MQTT telemetry</div>
+    </div>
+
+    <div class="card">
+      <h3>Communication Stack</h3>
+      <div><span class="tag tag-mesh">Mesh</span> <span class="tag tag-solar">Solar</span></div>
+      <p>Layered radio architecture on each node: <strong>Layer 1 &mdash; LoRa</strong> (915 MHz): long range (2&ndash;15 km), low bandwidth (text, GPS, critical alerts), ultra-low power, always-on backbone. <strong>Layer 2 &mdash; WiFi</strong> (2.4/5 GHz): short range (50&ndash;200m), high bandwidth (images, cached content, local services), higher power, activated on demand. <strong>Layer 3 &mdash; Cellular/Starlink</strong>: internet uplink when available, used for data sync to outside world, highest power, opportunistic. The node gracefully degrades: if power drops, Layer 3 shuts down first, then Layer 2. Layer 1 (LoRa) runs last on milliwatts.</p>
+      <div class="meta-line">L1: LoRa (always-on) &rarr; L2: WiFi (on-demand) &rarr; L3: Internet (opportunistic)</div>
+    </div>
+
+    <div class="card">
+      <h3>Data Architecture: Local-First</h3>
+      <div><span class="tag tag-mesh">Mesh</span></div>
+      <p>All sensor data is written to local storage before any network transmission. MQTT (Message Queuing Telemetry Transport) handles sensor telemetry: lightweight publish/subscribe protocol designed for constrained devices and unreliable networks. Data format: structured JSON with timestamps, sensor ID, location, and readings. Synchronization: when mesh connectivity exists, nodes exchange data using a conflict-free replicated data type (CRDT) strategy &mdash; last-write-wins for sensor readings, append-only for event logs. No single node is authoritative. Every node has a complete local view of its neighborhood.</p>
+      <div class="meta-line">MQTT pub/sub &middot; JSON telemetry &middot; CRDT sync &middot; Append-only event logs &middot; No cloud dependency</div>
+    </div>
+
+    <div class="card">
+      <h3>Resilience Mathematics</h3>
+      <div><span class="tag tag-solar">Solar</span> <span class="tag tag-mesh">Mesh</span></div>
+      <p>Each node is independently: <strong>self-sustaining</strong> (solar + battery = indefinite power), <strong>self-routing</strong> (mesh protocol discovers and maintains routes automatically), <strong>self-healing</strong> (node failure triggers automatic route recalculation; no human intervention). Network resilience scales with density: a grid of nodes spaced 1 km apart in a 10&times;10 km area (100 nodes) maintains connectivity even with 40% node failure, because average node degree &ge; 4. The system gets more resilient as nodes are added &mdash; the opposite of centralized infrastructure, which gets more fragile as it scales.</p>
+      <div class="meta-line">N nodes, k=4+ avg degree &middot; Tolerates (k&minus;1) adjacent failures &middot; Antifragile at scale</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  COMMUNITY RESILIENCE PATTERNS                                -->
+  <!-- ============================================================ -->
+
+  <h2>Community Resilience Patterns</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Technology without community organization is hardware on a shelf. These programs represent decades
+    of research into how communities actually self-organize, prepare for, and recover from disasters.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>CERT &mdash; Community Emergency Response Teams</h3>
+      <div><span class="tag tag-community">Community</span></div>
+      <p>FEMA's Community Emergency Response Team program trains civilians in basic disaster response: light search and rescue, fire suppression, medical triage (START protocol), and team organization. The training recognizes a fundamental truth: in a catastrophic event, professional first responders are overwhelmed immediately. The 2001 Nisqually earthquake and 2014 Oso landslide in Washington demonstrated this &mdash; neighbors rescued neighbors in the critical first hours before organized response arrived. CERT creates structured capability at the neighborhood level, turning bystanders into first responders.</p>
+      <div class="meta-line">FEMA &middot; 20-hour basic training &middot; Fire suppression, SAR, triage, org &middot; Active in all 50 states</div>
+    </div>
+
+    <div class="card">
+      <h3>Map Your Neighborhood (MYN)</h3>
+      <div><span class="tag tag-community">Community</span></div>
+      <p>Developed by Dr. LuAn Johnson at the Washington State Emergency Management Division and endorsed by FEMA and the American Red Cross. MYN is a 2.5-hour program that organizes 15&ndash;20 households into a prepared block unit. Participants create a neighborhood map identifying: who has medical training, who has tools (chainsaw, generator, jack), who has special needs (mobility, oxygen, medication), and where gas/water shutoffs are located. Successfully implemented in 22+ states. The genius: it's small enough to complete in one evening, and the social bonds formed are themselves a resilience resource.</p>
+      <div class="meta-line">WA EMD &middot; FEMA/Red Cross endorsed &middot; 15&ndash;20 homes per unit &middot; 22+ states &middot; 2.5-hour program</div>
+    </div>
+
+    <div class="card">
+      <h3>Mutual Aid Networks</h3>
+      <div><span class="tag tag-community">Community</span></div>
+      <p>After every major disaster, mutual aid networks emerge spontaneously: neighbors sharing food, tools, shelter, and labor without formal organization. Research shows these networks form faster and distribute resources more efficiently than centralized distribution in the critical first 72 hours. The pattern is consistent across cultures and disaster types: Kobe 1995, Christchurch 2011, Nepal 2015, Puerto Rico 2017. The research question is not whether mutual aid works &mdash; it demonstrably does &mdash; but how to design infrastructure (communication, logistics, storage) that amplifies natural mutual aid behavior rather than replacing it.</p>
+      <div class="meta-line">Self-organizing &middot; Critical first 72 hours &middot; Faster than centralized distribution</div>
+    </div>
+
+    <div class="card">
+      <h3>The Convergence Zone &mdash; Everett/Mukilteo Microclimate</h3>
+      <div><span class="tag tag-community">Community</span> <span class="tag tag-warning">Weather</span></div>
+      <p>The Puget Sound Convergence Zone is a meteorological phenomenon where marine air splits around the Olympic Mountains and reconverges over the northern Puget Sound lowlands, typically near Everett and Mukilteo. This creates intense, localized precipitation events &mdash; sometimes dropping 2&ndash;4 inches of rain or 6&ndash;12 inches of snow in a narrow band while areas 10 miles north or south receive nothing. For disaster planning, this means hyper-local weather hazards that regional forecasts miss. Distributed rain gauges (CoCoRaHS), personal weather stations (CWOP), and mesh-connected sensors provide the spatial resolution needed to detect convergence zone events in real time.</p>
+      <div class="meta-line">Olympic rain shadow convergence &middot; Hyper-local precipitation &middot; Distributed sensing required</div>
+    </div>
+
+    <div class="card">
+      <h3>Community-Owned Infrastructure</h3>
+      <div><span class="tag tag-community">Community</span> <span class="tag tag-solar">Solar</span></div>
+      <p>The cooperative model for shared resilience has deep roots in the Pacific Northwest: rural electric cooperatives (formed in the 1930s&ndash;40s under REA), community solar programs, and mutual water systems. The principle: infrastructure owned and operated by the people it serves is maintained for their benefit, not for profit extraction. Applied to disaster preparedness, this means community-owned mesh networks, shared solar+battery installations, neighborhood tool libraries, and collectively maintained emergency supply caches. The infrastructure IS the community &mdash; maintained by the same social bonds that activate during disaster response.</p>
+      <div class="meta-line">PNW cooperative tradition &middot; Rural electric co-ops (1930s) &middot; Community solar &middot; Mutual water systems</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ROSETTA CONNECTIONS                                          -->
+  <!-- ============================================================ -->
+
+  <h2>Rosetta Connections</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Disaster resilience is not an isolated discipline. It connects to every cluster in the research framework
+    through shared principles: distributed architecture, redundancy, self-healing, and graceful degradation.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Ecology: Mycorrhizal Networks as Biological Mesh</h3>
+      <div><span class="tag tag-rosetta">ECO</span></div>
+      <p>Forest mycorrhizal networks ("wood wide web") are biological mesh networks. Fungal hyphae connect tree root systems, routing carbon, nitrogen, phosphorus, and chemical warning signals between trees. When a tree is attacked by insects, it sends chemical signals through the mycorrhizal network to neighboring trees, which upregulate their defenses before the insects arrive. The network topology mirrors engineered mesh: no central node, multiple redundant pathways, graceful degradation when connections are severed. Hub trees ("mother trees") serve a role analogous to high-degree mesh nodes &mdash; more connections, more routing capacity, more critical to network integrity.</p>
+      <div class="meta-line">Suzanne Simard (UBC) &middot; Carbon/nutrient routing &middot; Chemical signaling &middot; Damage-tolerant topology</div>
+    </div>
+
+    <div class="card">
+      <h3>Electronics: Sensor Networks &amp; Power Management</h3>
+      <div><span class="tag tag-rosetta">LED</span> <span class="tag tag-rosetta">BPS</span></div>
+      <p>The electronics cluster connects through the fundamental engineering of sensor nodes: analog-to-digital conversion (seismometer output to digital samples), signal conditioning (filtering noise from P-wave detection), power management (MPPT solar charging, sleep/wake duty cycling), and RF design (impedance matching for LoRa antennas). A seismometer node IS an electronics project: operational amplifiers for signal conditioning, ADCs for digitization, microcontrollers for processing, and radio transceivers for communication. The 555 timer (T55) connects through the same timing and oscillator principles that drive LoRa's chirp spread spectrum modulation.</p>
+      <div class="meta-line">ADC &middot; Signal conditioning &middot; MPPT &middot; RF design &middot; Chirp spread spectrum</div>
+    </div>
+
+    <div class="card">
+      <h3>Infrastructure: Distributed Systems &amp; Failover</h3>
+      <div><span class="tag tag-rosetta">SYS</span> <span class="tag tag-rosetta">K8S</span></div>
+      <p>Every principle from distributed computing applies directly to disaster infrastructure. Redundancy: no single point of failure (mesh topology). Consensus: nodes agree on routing tables without a central authority (distributed hash tables, gossip protocols). Partition tolerance: the network continues functioning when split into disconnected segments (each segment operates independently). Eventual consistency: when partitions heal, data synchronizes (CRDT merge). The CAP theorem from distributed systems theory precisely describes the tradeoffs in disaster communication networks.</p>
+      <div class="meta-line">CAP theorem &middot; Gossip protocols &middot; DHT routing &middot; Partition tolerance &middot; Eventual consistency</div>
+    </div>
+
+    <div class="card">
+      <h3>CERN: WLCG as Disaster Recovery Model</h3>
+      <div><span class="tag tag-rosetta">CERN</span></div>
+      <p>CERN's Worldwide LHC Computing Grid is a working example of disaster-resilient distributed infrastructure at planetary scale: 170+ sites across 42 countries, federated authentication, automatic failover between tiers, and data replication across geography. The three-tier architecture (Tier 0 at CERN, 13 Tier 1 national centers, 160+ Tier 2 university sites) provides a blueprint for disaster communication networks: critical data replicated to multiple geographic locations, any tier can operate independently if disconnected, and the system degrades gracefully rather than failing catastrophically.</p>
+      <div class="meta-line">170+ sites &middot; 42 countries &middot; Federated auth &middot; Geographic replication &middot; Graceful degradation</div>
+    </div>
+
+    <div class="card">
+      <h3>Music: Polyrhythm as Multi-Frequency Sensing</h3>
+      <div><span class="tag tag-rosetta">MUS</span></div>
+      <p>A disaster warning system operates like a polyrhythmic composition: seismometers sample at 100&ndash;200 Hz, DART buoys report at 15-second intervals, weather stations update every 5 minutes, satellite passes occur every 90 minutes, and tidal gauges measure continuously. Each sensor operates at its own cadence, yet the combined signal reveals patterns no single frequency can capture. This is polyrhythm: independent rhythmic lines that create emergent structure through their interaction. The Fourier analysis that decomposes seismometer signals into frequency components is the same mathematics that analyzes musical timbre.</p>
+      <div class="meta-line">Multi-cadence sensing &middot; Fourier analysis &middot; Emergent pattern detection &middot; Signal decomposition</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  SEED PAPERS                                                  -->
+  <!-- ============================================================ -->
+
+  <h2>Seed Papers &mdash; Initial Knowledge Base</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Papers to seed the disaster resilience research corpus. Each represents a foundational contribution
+    to seismology, mesh networking, community preparedness, or distributed infrastructure.
+  </p>
+
+  <ul class="paper-list">
+    <li>
+      <div class="title">The Orphan Tsunami of 1700 &mdash; Japanese Clues to a Parent Earthquake in North America</div>
+      <div class="source">Brian F. Atwater et al. &middot; USGS Professional Paper 1707 &middot; 2005</div>
+      <div class="connection">The definitive account of how Japanese historical records, Native oral histories, and coastal geology converged to date the last Cascadia rupture to January 26, 1700.</div>
+    </li>
+    <li>
+      <div class="title">Time and size of a giant earthquake in Cascadia inferred from Japanese tsunami records of January 1700</div>
+      <div class="source">Kenji Satake, Kunihiko Shimazaki, Yoshinobu Tsuji &amp; Kazue Ueda &middot; Nature 379, 246&ndash;249 &middot; 1996</div>
+      <div class="connection">The breakthrough paper that used Japanese tsunami records to constrain the magnitude (M9) and timing (9 PM PST) of the 1700 Cascadia event.</div>
+    </li>
+    <li>
+      <div class="title">Earthquake probabilities and hazards in the U.S. Pacific Northwest</div>
+      <div class="source">USGS Fact Sheet 2025-3050 &middot; 2025</div>
+      <div class="connection">Current USGS assessment of Cascadia seismic hazard, including probability estimates for full-margin and partial-segment ruptures.</div>
+    </li>
+    <li>
+      <div class="title">Expected warning times from the ShakeAlert earthquake early warning system for earthquakes in the Pacific Northwest</div>
+      <div class="source">USGS Open-File Report 2021-1026 &middot; 2021</div>
+      <div class="connection">Quantifies expected ShakeAlert performance for PNW earthquake scenarios, establishing realistic warning time expectations for different source types and locations.</div>
+    </li>
+    <li>
+      <div class="title">A LoRa-Based Mesh Network for Peer-to-Peer Long-Range Communication</div>
+      <div class="source">Sensors 21(13), 4314 &middot; MDPI &middot; 2021</div>
+      <div class="connection">Evaluation of LoRa mesh networking performance: range, throughput, power consumption, and multi-hop reliability. Foundation for disaster mesh network design.</div>
+    </li>
+    <li>
+      <div class="title">Performance Evaluation of a Mesh-Topology LoRa Network</div>
+      <div class="source">Sensors 25(5), 1602 &middot; MDPI &middot; 2025</div>
+      <div class="connection">Recent evaluation showing mesh topology improves packet delivery ratio from 40% to 74% at distances beyond 5.8 km from gateway. Validates mesh over star for resilience.</div>
+    </li>
+    <li>
+      <div class="title">Deep-ocean Assessment and Reporting of Tsunamis (DART): Brief Overview and Status Report</div>
+      <div class="source">NOAA PMEL &middot; NDBC Technical Report</div>
+      <div class="connection">Technical description of the DART system: bottom pressure recorders, acoustic telemetry, Iridium satellite communications, and 1 cm detection sensitivity in 6,000m depth.</div>
+    </li>
+    <li>
+      <div class="title">FEMA Community Resilience Planning Guide (FEMA P-1190)</div>
+      <div class="source">Federal Emergency Management Agency &middot; 2023</div>
+      <div class="connection">Framework for community-level resilience planning: hazard identification, social vulnerability assessment, infrastructure dependencies, and recovery prioritization.</div>
+    </li>
+    <li>
+      <div class="title">Impacts of simulated M9 Cascadia Subduction Zone motions on idealized systems</div>
+      <div class="source">USGS &middot; Physics-based simulation study</div>
+      <div class="connection">Ensemble ShakeMaps from 30 M9 Cascadia rupture scenarios. The uncertainty in expected shaking is itself a key finding &mdash; the 1700 event left no instrument record.</div>
+    </li>
+    <li>
+      <div class="title">Solar Microgrids for Resilient Power Supply: A Review</div>
+      <div class="source">Renewable and Sustainable Energy Reviews &middot; Various authors</div>
+      <div class="connection">Review of solar microgrid architectures for disaster resilience: islanding capability, battery sizing, load management, and integration with communication systems.</div>
+    </li>
+  </ul>
+
+  <!-- ============================================================ -->
+  <!--  WHAT COMES NEXT                                              -->
+  <!-- ============================================================ -->
+
+  <h2>What Comes Next</h2>
+  <div class="card-grid" style="grid-template-columns:1fr;">
+    <div class="card" style="max-width:100%;">
+      <p style="color:var(--text); font-size:0.9rem;">
+        This page documents the science and engineering of community disaster resilience in the Pacific Northwest.
+        The Cascadia Subduction Zone defines the threat. Mesh networking, solar infrastructure, early warning systems,
+        and community organization define the response. Every section connects to the broader research framework:
+        ecology teaches us how biological networks survive damage, electronics teaches us how to build the sensors,
+        infrastructure teaches us how to design distributed systems, and CERN shows us that planetary-scale federated
+        computing already works. The PNW is both the laboratory and the subject &mdash; a region where the science
+        of preparedness meets the urgency of geological certainty.
+      </p>
+      <p style="color:var(--dim); font-size:0.8rem; margin-top:0.8rem; font-family:system-ui,sans-serif;">
+        Next steps: embed seed papers in pgvector &middot; build Meshtastic node reference design page &middot;
+        map Cascadia liquefaction zones with interactive visualization &middot; connect CWOP/CoCoRaHS station data
+        to weather-map.html &middot; document solar power budget calculations for PNW latitude/climate
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../LIVE/index.html">Live</a> &middot;
+  <a href="../MUK/index.html">MUK</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  Disaster Recovery &amp; Protective Systems &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Sources:
+  <a href="https://earthquake.usgs.gov/scenarios/catalog/cszm9/">USGS CSZ M9 Scenarios</a> &middot;
+  <a href="https://pnsn.org/education/pnw-earthquakes/sources/cascadia">PNSN Cascadia</a> &middot;
+  <a href="https://www.shakealert.org">ShakeAlert</a> &middot;
+  <a href="https://nctr.pmel.noaa.gov/Dart/">NOAA DART</a> &middot;
+  <a href="https://meshtastic.org">Meshtastic</a> &middot;
+  <a href="https://www.arednmesh.org">AREDN</a> &middot;
+  <a href="https://www.oregon.gov/oem/hazardsprep/pages/cascadia-subduction-zone.aspx">Oregon OEM CSZ</a> &middot;
+  <a href="https://dnr.wa.gov/washington-geological-survey/geologic-hazards-and-environment/geologic-hazard-maps">WA DNR Geologic Hazards</a> &middot;
+  <a href="https://science.nasa.gov/mission/dscovr/">NASA DSCOVR</a><br>
+  Last updated: 2026-04-02 &middot; PNW Research Series &middot; Infrastructure Cluster
+</footer>
+
+</body>
+</html>
