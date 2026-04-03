@@ -227,3 +227,22 @@ A first aid kit is three things: the container, the contents, and the competence
 Take a course. Practice the skills. Check the kit. Then carry it with you — in your home, in your car, on the trail, in the shop, at the convention, at the event.
 
 The kit you have is the kit that matters. Build it for your life.
+
+## Try This
+
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- The step-by-step project for building the home kit described in this document. Every item explained, every rationale covered, with a trauma upgrade tier. Thirty to fifty dollars, one hour.
+- **[Try Session: Practice Wound Care on Yourself](try-sessions/wound-care-practice.md)** --- The kit supplies are tools. This try session teaches you how to use them on a real wound. Build the kit, then practice with it.
+- **[FSR Try Session: Stop the Bleed](../../FSR/research/try-sessions/stop-the-bleed.md)** --- If you built the trauma kit, get trained on the tourniquet and Israeli bandage. The training makes the difference between supplies and capability.
+- **[FSR Try Session: Build a Go Bag](../../FSR/research/try-sessions/build-a-go-bag.md)** --- The 72-hour evacuation kit. Complements the home and car kits for disaster preparedness.
+
+---
+
+## College of Knowledge Connections
+
+- **Home Economics** --- [Household Preparedness]: Kit building and maintenance is a core household management skill. Location, accessibility, restocking, and expiration checking are the ongoing disciplines that keep the kit functional.
+- **Science** --- [Pharmacology]: COX-2 inhibition (ibuprofen), clotting cascade activation (hemostatic agents), bacteriostatic action (antibiotic ointment). Understanding mechanisms elevates kit use from "follow instructions" to "understand why."
+- **Learning** --- [Risk Assessment]: Building a kit is applied risk analysis. What injuries are most likely in this environment? What fits the space and budget? What saves lives versus what provides comfort? Transferable planning skills.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/build-home-first-aid-kit], [FAD try-session/wound-care-practice], [FSR try-session/stop-the-bleed], [FSR try-session/build-a-go-bag]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

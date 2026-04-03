@@ -156,6 +156,8 @@ Raccoons and humans have been coexisting for centuries, and the raccoons have be
 
 19. **[deep-dives/toronto-raccoon-wars.md](../deep-dives/toronto-raccoon-wars.md)** -- The legendary conflict between the City of Toronto and its raccoon population. A case study in how a city with more raccoons per square kilometer than anywhere else on Earth has tried -- and mostly failed -- to outsmart them. Funny, informative, and humbling. (~20 min)
 
+20. **[deep-dives/raccoons-in-literature.md](../deep-dives/raccoons-in-literature.md)** -- From Sterling North's *Rascal* (1963) to Miyazaki's *Pom Poko* to Marvel's Rocket Raccoon to the "trash panda" meme era. Traces the raccoon through literature, film, anime, comics, and internet culture -- and explains why the mask, the hands, and the adaptability make raccoons irresistible narrative subjects across every medium. (~25 min)
+
 ### What You'll Learn
 - How urban raccoons differ from their rural counterparts
 - Practical raccoon-proofing techniques that actually work

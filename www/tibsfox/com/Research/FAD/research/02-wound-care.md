@@ -205,6 +205,12 @@ This document connects to two departments within the College structure:
 
 **Learning** — Procedural skills. Wound packing, tourniquet application, and burn management are hands-on skills that require practice. The Stop the Bleed course, available free in many communities, provides the hands-on training that turns this document from information into capability. Reading about wound packing is not the same as packing a simulated wound with your fingers while an instructor watches. The procedural memory formed during training is what you will access under stress.
 
+## Try This
+
+- **[Try Session: Practice Wound Care on Yourself](try-sessions/wound-care-practice.md)** --- Use your next minor kitchen cut as a training opportunity. The seven-step protocol: wash hands, apply pressure, clean, assess, close if needed, bandage, monitor. Each minor wound is a rehearsal for the real thing.
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- Stock the supplies this document describes: gauze pads, butterfly closures, antibiotic ointment, nitrile gloves, and the trauma upgrade tier (Israeli bandage, tourniquet).
+- **[FSR Try Session: Stop the Bleed](../../FSR/research/try-sessions/stop-the-bleed.md)** --- Tourniquet application and wound packing. The hands-on training that makes the hemorrhage control techniques in this document functional under stress.
+
 ## The Reality of Blood
 
 Blood is frightening because it represents something going wrong with the body in a visible, visceral way. But blood is also a manageable problem. The techniques in this document — direct pressure, wound packing, tourniquets, burn cooling, nosebleed management — are simple to learn, require minimal equipment, and are effective.
@@ -212,3 +218,15 @@ Blood is frightening because it represents something going wrong with the body i
 The Stop the Bleed campaign estimates that 20 percent of people who die from traumatic injury could have survived if bleeding had been controlled before the ambulance arrived. One in five. These are people who bled to death in the presence of bystanders who did not know how to help.
 
 You now know how to help. The rest is practice, preparation, and the willingness to push hard when it counts.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Wound Healing Biology]: The four phases of wound healing --- hemostasis, inflammation, proliferation, remodeling --- explain why every intervention works. Hydrogen peroxide destroys fibroblasts needed for proliferation. Moist environments optimize cell migration. The science directly informs the practice.
+- **Learning** --- [Procedural Skills]: Wound packing, tourniquet application, and burn management are motor skills that require hands-on practice. Stop the Bleed courses provide the supervised training that converts reading into capability.
+- **Home Economics** --- [Kit Building]: The supplies in your first aid kit --- gauze, tape, butterfly closures, hemostatic agents, tourniquets --- are the tools this document teaches you to use. Kit and knowledge must be built together.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/wound-care-practice], [FAD try-session/build-home-first-aid-kit], [FSR try-session/stop-the-bleed]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

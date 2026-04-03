@@ -75,6 +75,8 @@ Choose three from the breed directory. Read them in any order. Each profile cove
 
 6. **[try-sessions/egg-taste-test.md](../try-sessions/egg-taste-test.md)** -- A structured blind taste test comparing eggs from different sources. You'll need some eggs for this one. The results may surprise you (or confirm what egg snobs have always claimed). (~45 min including prep)
 
+7. **[try-sessions/chicken-math-project.md](../try-sessions/chicken-math-project.md)** -- Calculate the REAL cost of your backyard eggs. Startup costs, monthly operating expenses, production curves, and the honest spreadsheet that reveals why backyard eggs cost $4-8/dozen. Plus: the chicken math phenomenon (you start with 6, you end up with 20). (~1-2 hours)
+
 ### Study Guide
 
 7. **[study-guides/genetics-study-guide.md](../study-guides/genetics-study-guide.md)** -- The fundamentals of poultry genetics: dominant/recessive traits, sex-linked inheritance, how feather color is determined. This is the key that unlocks Level 4. (~30 min)

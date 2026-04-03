@@ -249,5 +249,13 @@ The cultural raccoon is a projection screen. We see in it what we want to see: p
 
 ---
 
+## Try This
+
+> **[Raccoons in Literature and Media](deep-dives/raccoons-in-literature.md)** --- From Sterling North's *Rascal* (1963) to Marvel's Rocket Raccoon to the "trash panda" meme era. The deep dive traces the raccoon through literature, film, anime, comics, and internet culture --- and explains why the mask, the hands, and the adaptability make raccoons irresistible narrative subjects.
+
+> **[Build a Trail Cam Station](try-sessions/build-a-trail-cam-station.md)** --- Watch the real-life trickster in action. Install a camera and observe the same intelligence and dexterity that writers and filmmakers have been telling stories about for decades.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*
