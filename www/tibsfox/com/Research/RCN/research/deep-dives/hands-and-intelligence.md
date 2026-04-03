@@ -196,6 +196,16 @@ This broad foraging toolkit is the foundation of the raccoon's omnivorous genera
 
 ---
 
+## Try This
+
+> **[Raccoon Night Watch](../try-sessions/night-observation.md)** --- Watch a raccoon forage at a stream edge. The forepaw behavior described in this document is best understood by watching it in real time.
+
+> **[Build a Trail Cam Station](../try-sessions/build-a-trail-cam-station.md)** --- Set up a visual lure (a shiny object) near a trail camera and watch raccoons investigate it with their hands. The footage captures manual dexterity that direct observation in the dark often misses.
+
+> **[Track Identification](../try-sessions/track-identification.md)** --- Raccoon front paw prints look like tiny human handprints. Find them in mud and see the anatomy of those 438-million-neuron forepaws in the tracks they leave behind.
+
+---
+
 ## Sources
 
 - Herculano-Houzel, S. et al. "Dogs Have the Most Neurons, Though Not the Largest Brain: Trade-Off between Body Mass and Number of Neurons in the Cerebral Cortex of Large Carnivoran Species." *Frontiers in Neuroanatomy*, 2017.

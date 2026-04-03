@@ -106,6 +106,22 @@ This gap between training and judgment is why the field training period — the 
 
 For the person who served thirty years, the academy was the beginning. The first year was the foundation. But the real education was thirty years of calls, thirty years of situations that the academy could not have anticipated, thirty years of decisions made under conditions that no training scenario can fully simulate. The badge was earned in the academy. The competence behind it was earned on the street, one call at a time, over a career.
 
+## Try This / DIY Project
+
+> **Try Session: [Hands-Only CPR](try-sessions/hands-only-cpr.md)**
+> This chapter covers the formal training pipeline for first responders. The CPR try session is the citizen entry point --- the one skill from that pipeline that any person can learn in 10 minutes and that doubles cardiac arrest survival rates.
+
+> **Try Session: [Stop the Bleed](try-sessions/stop-the-bleed.md)**
+> Hemorrhage control is the trauma counterpart to CPR. The Stop the Bleed try session teaches the three techniques (direct pressure, wound packing, tourniquet) that the military's TCCC program developed and that are now being translated to civilian training.
+
+> **Study Guide: [Incident Command System Basics](study-guides/incident-command-basics.md)**
+> ICS is the organizational framework that all the training described in this chapter operates within. The citizen-level ICS study guide introduces the five functions, span of control, and unified command.
+
+> **Study Guide: [Radio Communications for Emergencies](study-guides/radio-communications-basics.md)**
+> The Technician ham radio license is the communications equivalent of EMT certification --- a structured, exam-based credential that prepares citizens to be useful in emergencies. Two weeks of study, a 35-question exam, and you are licensed.
+
+---
+
 ## Cross-References
 
 - **[FSR-02]** Fire Service — the operational context that academy training prepares firefighters for

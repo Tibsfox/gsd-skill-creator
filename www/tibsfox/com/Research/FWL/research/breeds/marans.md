@@ -128,4 +128,14 @@ The Marans egg, at its best, is among the most beautiful natural objects in agri
 
 ---
 
+## Try This
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- Those dark chocolate Marans eggs look spectacular. But do they taste different in a blind test? Design the experiment and find out.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Marans eggs are notoriously difficult to candle because the dark shell blocks light. A high-powered candling light is essential. Experience the challenge firsthand.
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- Marans egg color is polygenic, not Mendelian. Learn why breeding for dark eggs is harder than breeding for blue ones.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Greenfire Farms and Bev Davis Marans importation records; Marans of America Club breed standards and egg color scale; Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia." See also [FWL-02e] Continental Class, [FWL-04] Feather Genetics, [FWL-05] Egg Science (protoporphyrin deposition), [guides/egg-color-rainbow] Rainbow Egg Basket.*

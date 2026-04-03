@@ -112,6 +112,16 @@ This investment is not uniformly distributed. Wealthy communities have newer app
 
 For the person who served thirty years, the equipment evolved across their career. The turnout gear got lighter, the SCBA got more sophisticated, the thermal imaging cameras went from nonexistent to standard, the cardiac monitors went from basic rhythm strips to 12-lead digital systems with wireless transmission. The tools changed. The job they were used for — protecting lives in moments of crisis — did not.
 
+## Try This / DIY Project
+
+> **Try Session: [Use a Fire Extinguisher --- The PASS Method](try-sessions/fire-extinguisher-drill.md)**
+> The fire extinguisher is the one piece of firefighting equipment every citizen has access to. This try session covers extinguisher types (ABC, BC, Class K), placement, maintenance, and the PASS discharge method. Practice with an expired unit or a training extinguisher.
+
+> **DIY Project: [Build a 72-Hour Go Bag](try-sessions/build-a-go-bag.md)**
+> The go bag contains a distilled version of the emergency equipment documented in this chapter: medical supplies (tourniquet, Israeli bandage), communications (hand-crank radio), tools (headlamp, multi-tool), and PNW-specific gear (rain gear, wool layers).
+
+---
+
 ## Cross-References
 
 - **[FSR-02]** Fire Service — the operational context in which this equipment is used

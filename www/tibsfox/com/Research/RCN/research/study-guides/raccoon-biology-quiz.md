@@ -235,6 +235,18 @@ This is a self-assessment study guide. Read each question carefully, commit to a
 
 ---
 
+## Try This
+
+> **[Raccoon Night Watch](../try-sessions/night-observation.md)** --- You studied the biology. Now observe the animal. A night-watch session lets you see the cortical neurons, the forepaw dexterity, and the social communication in action.
+
+> **[Build a Trail Cam Station](../try-sessions/build-a-trail-cam-station.md)** --- Confirm what the quiz taught you: install a trail camera and see the nocturnal activity patterns, family groups, and site fidelity described in the answers.
+
+> **[PNW Mesocarnivore Comparison](../study-guides/pnw-mesocarnivore-comparison.md)** --- Expand your quiz knowledge to three more species. Compare the raccoon's biology to coyotes, opossums, and skunks across 10 ecological attributes.
+
+> **[Safe Raccoon Latrine Survey](../try-sessions/latrine-survey.md)** --- Question 22 covers Baylisascaris. Now learn to find latrines in the field and handle them safely.
+
+---
+
 ## College of Knowledge Connections
 
 - **Nature Studies** --- [Mammalogy, Animal Identification]: This quiz covers raccoon taxonomy, physical characteristics, behavior, and ecology --- core knowledge in the Animals & Birds wing of Nature Studies. The detailed answer explanations reinforce species-level understanding that supports field identification and natural history literacy.

@@ -120,6 +120,19 @@ The Washington State Patrol provides law enforcement on state highways and suppo
 
 For the person who served thirty years in this region, the mutual aid network was not an abstraction. It was the neighboring engine company that arrived on the second alarm. It was the medic unit from the next district that covered the station when the local unit was committed. It was the wildland fire deployment that took them away from home for fourteen days. It was the system that meant no one was alone — that when the call exceeded what one crew could handle, more crews came.
 
+## Try This / DIY Project
+
+> **DIY Project: [Build a 72-Hour Go Bag](try-sessions/build-a-go-bag.md)**
+> The Cascadia scenario described in this chapter makes the go bag essential, not optional. The PNW-specific additions (rain gear, wool layers, waterproof fire starters) reflect the same environmental conditions these departments operate in daily.
+
+> **Study Guide: [Radio Communications for Emergencies](study-guides/radio-communications-basics.md)**
+> This chapter covers mutual aid networks and the communications infrastructure that connects PNW departments. The radio study guide covers the citizen counterpart: ham radio, ARES/RACES volunteer groups, and the PNW repeater network that will carry emergency traffic when cell service fails.
+
+> **Try Session: [Use a Fire Extinguisher --- The PASS Method](try-sessions/fire-extinguisher-drill.md)**
+> The PNW departments in this chapter respond to residential fires daily. The fire extinguisher try session teaches the one technique that can resolve a small fire before it becomes a department response.
+
+---
+
 ## Cross-References
 
 - **[FSR-02]** Fire Service — the structural firefighting and wildland fire tactics that PNW departments execute

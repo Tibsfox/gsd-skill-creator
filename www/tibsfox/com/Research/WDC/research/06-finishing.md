@@ -208,6 +208,10 @@ Big-leaf maple's figured varieties — quilted, curly, bird's eye — demand fin
 
 - **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Understanding how different species respond to finishes (oak's open pores need filling, cedar's oils resist water-based finishes, cherry darkens dramatically with exposure) starts with identifying the species you are working with.
 
+## DIY Project
+
+- **Build a Birdhouse for PNW Cavity Nesters** ([try-sessions/build-a-birdhouse](try-sessions/build-a-birdhouse.md)): A finishing decision with real consequences — no paint inside (fumes harm nestlings), optional exterior treatment (low-VOC, earth tones, two weeks to cure). The birdhouse project teaches when NOT to finish as much as when to finish.
+
 ---
 
 ## Sources and References

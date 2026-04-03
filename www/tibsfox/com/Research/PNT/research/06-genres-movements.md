@@ -287,6 +287,8 @@ What matters is not which genre you practice. What matters is that you practice.
 
 - **Art History Timeline Study Guide** ([study-guides/art-history-timeline](study-guides/art-history-timeline.md)): The movements described in this chapter are organized chronologically with key artists, key paintings, and self-test questions in the study guide. Use it as a companion reference.
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Still life is one of the great genres. Painting an apple from life connects you to a tradition stretching from Chardin to Cezanne to contemporary realism.
+- **Paint a PNW Landscape in 2 Hours** ([try-sessions/paint-a-landscape](try-sessions/paint-a-landscape.md)): Landscape is the genre that defined the PNW painting tradition. Take the plein air session outdoors and join the lineage from the Northwest Mystics to contemporary painters working in PNW light.
+- **Paint a Furry Convention Badge** ([try-sessions/convention-badge-painting](try-sessions/convention-badge-painting.md)): Miniature portraiture as a living genre. The convention badge is the furry fandom's contribution to the illustration tradition — character art at 2.5 x 3.5 inches.
 
 ---
 

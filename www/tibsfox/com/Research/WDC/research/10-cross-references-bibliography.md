@@ -201,6 +201,26 @@ The WDC project includes detailed sub-pages that extend the main chapters with h
 
 ---
 
+## College of Knowledge Connections
+
+- **Trades** — [woodworking]: This bibliography maps the entire woodworking knowledge landscape — from hand tool technique to power tool safety, from wood science to finishing chemistry, from furniture design to construction engineering. It is the trades department's reading list, organized for progressive skill development.
+- **Learning** — [study-strategies]: A curated bibliography is a study strategy. Knowing the canon (Schwarz, Sellers, Hoadley, Flexner, Nakashima) gives you reliable starting points. Knowing the community resources (Lost Art Press, Fine Woodworking, YouTube makers) keeps you connected to living practice. Knowing the reference standards (Wood Handbook, NDS, grading rules) gives you authoritative technical data.
+- **Materials** — [materials-families]: The species references, wood science texts, and finishing guides in this bibliography span the full range of wood as a material family — from molecular structure to finished surface. Understanding wood at every scale, from cellulose fiber to finished furniture, is the materials department's approach to a single material family.
+
+## Try This
+
+- **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): Start here. No bibliography replaces the experience of a sharp edge entering wood.
+- **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): One joint. One afternoon. Every fundamental skill.
+- **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The structural counterpart to the dovetail. Every table, every chair, every door frame.
+- **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Build a reference collection and learn to read the material before you cut it.
+- **The 10 Essential Woodworking Joints** ([study-guides/essential-joints-reference](study-guides/essential-joints-reference.md)): The complete joint vocabulary with strength ratings, difficulty ratings, and "which joint for...?" self-test.
+
+## DIY Project
+
+- **Build a Birdhouse for PNW Cavity Nesters** ([try-sessions/build-a-birdhouse](try-sessions/build-a-birdhouse.md)): Where woodcraft meets wildlife. Species-specific dimensions, western red cedar construction, and the ecological knowledge that makes a birdhouse actually work.
+
+---
+
 ## A Final Word on Sources
 
 The best source for learning woodworking is not a book, a video, or a class. It is the wood itself. Pick up a board. Look at the end grain. Identify the orientation of the rings. Predict which way it will cup as it dries. Plane a surface and watch the shaving. Listen to the sound of the blade. Feel the moment when the plane catches a bit of reversing grain and the shaving tears instead of curling.

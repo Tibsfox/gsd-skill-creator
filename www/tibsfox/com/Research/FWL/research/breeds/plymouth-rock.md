@@ -165,4 +165,16 @@ The Barred Plymouth Rock is America's chicken. It earned the title honestly, and
 
 ---
 
+## Try This
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- The Barred Rock's sex-linked barring gene makes it possible to color-sex chicks at hatch. Work through the Punnett squares and understand why.
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Barred Rock vs. Dominique vs. Cuckoo Marans --- all have barred plumage, but the comb type and barring pattern tell them apart.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Hatch Barred Rock eggs and observe sex-linked barring in the chicks: males hatch with a larger, more diffuse white head spot than females.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- The Plymouth Rock's robust constitution makes it forgiving for beginners, but every keeper needs to recognize the signs of trouble.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia"; National Plymouth Rock Fanciers Club resources. See also [FWL-02a] American Class, [FWL-04] Feather Genetics (sex-linked barring), [FWL-06] Husbandry Guide, [FWL-07] Heritage Conservation.*

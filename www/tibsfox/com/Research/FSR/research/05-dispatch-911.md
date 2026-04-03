@@ -96,6 +96,16 @@ The argument for reclassification is straightforward: dispatchers perform work t
 
 For thirty years, every call that reached the person to whom this research is dedicated first passed through a dispatcher's headset. The voice on the radio that gave the address, the nature of the call, the cross streets — that voice belonged to a person sitting in a room full of screens, managing multiple calls simultaneously, carrying the emotional weight of every one. The dispatcher and the field responder are two halves of the same system. One is not possible without the other. The recognition should be equal.
 
+## Try This / DIY Project
+
+> **Study Guide: [Radio Communications for Emergencies](study-guides/radio-communications-basics.md)**
+> This chapter covers the dispatch side of communications --- CAD systems, trunked radio, EMD protocols. The radio study guide covers the citizen side: NOAA weather radio, FRS/GMRS walkie-talkies, and ham radio. When the dispatch center's 911 lines are overwhelmed or the phone network is down, amateur radio operators fill the communications gap --- the same electromagnetic spectrum, different access point.
+
+> **Try Session: [Hands-Only CPR](try-sessions/hands-only-cpr.md)**
+> Dispatcher-assisted CPR (covered in this chapter) works because the dispatcher guides bystanders through exactly the technique taught in the CPR try session. Learning CPR before the call means the dispatcher's instructions reinforce existing knowledge rather than teaching from scratch under maximum stress.
+
+---
+
 ## Cross-References
 
 - **[FSR-01]** History — the 911 system as an outgrowth of the same reform-by-catastrophe pattern

@@ -233,3 +233,15 @@ Six weeks after your first egg, you will be standing in the kitchen cracking a b
 Six months in, you will know each bird by name, by personality, by the sound of her particular egg song. You will know which hen always lays in the left nesting box and which one prefers to lay in the corner of the coop behind the waterer. You will have dealt with your first soft-shelled egg, your first broody hen, your first raccoon scare. You will have stood in the rain refilling a waterer and cursed the weather, and then you will have watched your Barred Rock hen forage through the garden bed in the drizzle, utterly unbothered, pulling slugs from beneath the lettuce, and you will have felt something that is hard to name but easy to recognize: the quiet satisfaction of keeping animals well, of participating in a relationship between humans and birds that is 8,000 years old, of doing a small thing that works.
 
 Start with six. Start with good breeds. Build a solid coop. And welcome to the flock.
+
+---
+
+## Try This
+
+> **[Design Your Dream Coop](../try-sessions/coop-design-challenge.md)** --- Before you build, design. Work through the requirements analysis, sketch three views, and solve the PNW rain problem on paper.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Skip the feed store and start from the very beginning: 21 days, a dozen fertile eggs, and an incubator. The most hands-on way to start a flock.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Assemble your first-aid kit before the first bird arrives. This guide covers every condition a new keeper is likely to encounter.
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- Once your flock is laying, run the experiment: are your eggs actually better than store-bought, or is it just pride talking?

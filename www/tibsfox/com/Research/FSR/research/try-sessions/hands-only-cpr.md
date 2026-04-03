@@ -204,6 +204,12 @@ This try session gave you the skill to perform hands-only CPR. It is enough to s
 
 5. **Tell someone what you learned today.** Teaching reinforces learning. Show a family member the hand position, the rate, the depth. Practice the pillow exercise together. The more people who know this skill, the smaller the gap between collapse and first compression.
 
+6. **Build a go bag.** The [Build a 72-Hour Go Bag DIY project](build-a-go-bag.md) includes a tourniquet and Israeli bandage --- the physical tools that complement the skills taught in this session and in [Stop the Bleed](stop-the-bleed.md).
+
+7. **Learn to use a fire extinguisher.** The [Fire Extinguisher Drill try session](fire-extinguisher-drill.md) teaches the PASS method --- 30 seconds to learn, and it turns a red cylinder into a lifesaving tool.
+
+8. **Learn emergency radio communications.** The [Radio Communications study guide](../study-guides/radio-communications-basics.md) covers everything from NOAA weather radio to ham radio licensing. When cell towers fail, radio is the only communication that works.
+
 ---
 
 ## Sources and Further Reading

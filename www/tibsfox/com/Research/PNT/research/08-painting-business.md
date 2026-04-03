@@ -272,6 +272,8 @@ This is where the PNT project and the FFA project intersect most directly. Paint
 ## Try This
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Before you can sell paintings, you need to make them. The fastest path to a painting practice is structured sessions with clear goals and time limits. Start here.
+- **Paint a Furry Convention Badge** ([try-sessions/convention-badge-painting](try-sessions/convention-badge-painting.md)): The most accessible entry point to the furry art economy. Materials under $2 per badge, selling at $20-50 each. Live painting at conventions, pricing guide, and the path from first badge to Artist Alley table.
+- **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): Three budget tiers from $30 to $300+. Spend smart on materials before you try to sell the results. Includes the furry artist kit for convention work.
 
 ---
 

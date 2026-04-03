@@ -172,6 +172,16 @@ That last fact may be the most telling. A city that mourns its raccoons --- even
 
 ---
 
+## Try This
+
+> **[Build a Trail Cam Station](../try-sessions/build-a-trail-cam-station.md)** --- Toronto's green bin arms race is the macro version of what happens in every PNW backyard. Install a camera on your garbage area and watch your local raccoons solve (or fail to solve) your containment strategies.
+
+> **[PNW Mesocarnivore Comparison](../study-guides/pnw-mesocarnivore-comparison.md)** --- Toronto's raccoon density (100+/km2) dwarfs most PNW cities. Compare urban adaptation strategies across all four PNW mesocarnivores.
+
+> **[Safe Raccoon Latrine Survey](../try-sessions/latrine-survey.md)** --- High-density raccoon populations mean high-density latrines. If you live in a raccoon-heavy area, find them before a child does.
+
+---
+
 ## Sources
 
 - Hadidian, J. et al. *Wild Neighbors: The Humane Approach to Living with Wildlife.* Humane Society Press, 2007.

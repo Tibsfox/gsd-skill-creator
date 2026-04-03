@@ -102,6 +102,19 @@ Mutual aid is also a daily, mundane reality. In suburban and rural areas, the fi
 
 For someone who served thirty years in the fire service, these are not abstractions. They are the texture of ten thousand shifts: the morning equipment check, the afternoon drill, the evening meal cooked with the crew, the 2 AM alarm that pulls you from a dead sleep and puts you on the back step of an engine rolling through dark streets toward a column of smoke. The work is exactly what it appears to be — physically demanding, technically complex, occasionally terrifying, and fundamentally necessary. And for thirty years, every third day, someone showed up and did it.
 
+## Try This / DIY Project
+
+> **Try Session: [Use a Fire Extinguisher --- The PASS Method](try-sessions/fire-extinguisher-drill.md)**
+> Most people have never discharged a fire extinguisher. This try session teaches the PASS method (Pull, Aim at the base, Squeeze, Sweep), explains when to fight and when to flee, and includes a practice drill you can perform with an expired extinguisher. The fire chemistry in this chapter --- the fire tetrahedron, suppression agent mechanisms --- is directly applied.
+
+> **DIY Project: [Build a 72-Hour Go Bag](try-sessions/build-a-go-bag.md)**
+> The essential emergency grab bag for the Cascadia scenario discussed throughout this chapter. Two versions: BASIC ($50-80, 72 hours) and ENHANCED ($150-250, 2 weeks). PNW-specific gear included.
+
+> **Study Guide: [Radio Communications for Emergencies](study-guides/radio-communications-basics.md)**
+> When the cell towers fail --- and in the Cascadia scenario, they will --- radio is the only communication that works. From NOAA weather radio ($25) to ham radio and ARES volunteer networks.
+
+---
+
 ## Cross-References
 
 - **[FSR-01]** History — the institutional lineage from Roman vigiles through insurance brigades to the modern fire service

@@ -343,6 +343,16 @@ Several breeds in this exercise are frequently confused with each other. Here ar
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- Every breed difference you identified is encoded in specific alleles. Learn the E locus, the B locus, the Bl locus, and the comb genes that produce what you see.
+
+> **[Hatch Eggs at Home](incubation-project.md)** --- Once you can identify the parents, predict what the chicks will look like. Then hatch them and check your predictions.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Breed identification is the first diagnostic step: different breeds have different vulnerabilities. A Silkie's crest, a Brahma's feet, a Leghorn's comb --- each creates a specific health concern.
+
+---
+
 ## College of Knowledge Connections
 
 - **Nature Studies** --- [Animal Identification]: This exercise develops the core naturalist skill of careful morphological observation, training the eye to distinguish species and varieties through systematic comparison of physical features. Connects to the Animals & Birds wing of the Nature Studies department.

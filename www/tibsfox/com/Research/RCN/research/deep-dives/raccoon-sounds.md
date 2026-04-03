@@ -165,4 +165,12 @@ The 200+ vocalizations are not a list. They are a language --- not in the human 
 
 ---
 
+## Try This
+
+> **[Raccoon Night Watch](../try-sessions/night-observation.md)** --- Go outside with a red headlamp and listen. The vocalizations described in this document become real when you hear them in context: the chitter of approach, the trill of recognition, the growl of dispute.
+
+> **[Build a Trail Cam Station](../try-sessions/build-a-trail-cam-station.md)** --- Many trail cameras record audio alongside video. Review the footage and try to match the sounds you capture to the vocalization categories described here.
+
+---
+
 *Sources and further reading: Herculano-Houzel (2017), "The Remarkable, Yet Not Extraordinary, Human Brain as a Scaled-Up Primate Brain," PNAS; Sieber (1984), "Vocal Communication in Raccoons," Behaviour; Gehrt (2003), "Raccoons and Their Relatives," in Wild Mammals of North America; RCN-01 (Biology and Taxonomy); RCN-02 (Intelligence and Behavior); RCN-05 (Lifecycle and Reproduction); Zeveloff (2002), "Raccoons: A Natural History."*

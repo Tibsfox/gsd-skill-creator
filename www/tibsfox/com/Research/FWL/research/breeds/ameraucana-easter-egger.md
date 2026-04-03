@@ -161,4 +161,16 @@ The blue egg gene is one of nature's improbable gifts --- a retrovirus that beca
 
 ---
 
+## Try This
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- The blue egg gene (O locus) is autosomal dominant. Work through the crosses: what happens when you breed a blue-egg hen to a brown-egg rooster?
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- Blue eggs, green eggs, brown eggs, white eggs. Does shell color affect flavor? Only a blind test can answer the question honestly.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Hatch Easter Egger eggs and discover what shell color the daughters lay. The surprise is the whole point of the cross.
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Ameraucana vs. Easter Egger is the most common misidentification in backyard poultry. Learn the diagnostic differences.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Ameraucana Breeders Club resources; Wang et al. (2013), "An EAV-HP Insertion in the SLCO1B3 Gene Underlies the Blue Eggshell Colour in Chickens," PLoS Genetics; Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds." See also [FWL-04] Feather Genetics, [FWL-05] Egg Science (blue egg gene), [breeds/cream-legbar] The Cream Legbar (auto-sexing blue egg breed), [guides/egg-color-rainbow] Rainbow Egg Basket.*

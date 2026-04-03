@@ -1206,4 +1206,20 @@ Several topics from this document are expanded into detailed standalone guides:
 
 ---
 
+## Try This / DIY Project
+
+> **Try Session: [Build Your First Fursuit Paws](try-sessions/first-fursuit-paws.md)**
+> Paws are the simplest fursuit component and the gateway project. $30-50 in materials, 4-6 hours, and you have a wearable pair that teaches pattern making, fur cutting, sewing, and finishing --- all the foundational skills for the construction documented in this module.
+
+> **DIY Project: [Build a Fursuit Tail](try-sessions/fursuit-tail-construction.md)**
+> Three designs from a 2-hour stuffed tail ($15) to a wagging pendulum ($25) to a poseable wire-armature tail ($20). The tail is the easiest component with the biggest visual impact, and it is wearable immediately with regular clothes.
+
+> **Try Session: [Design Your Fursona Character](try-sessions/design-your-fursona.md)**
+> Before building a fursuit, design the character it represents. Species selection, color palette, distinguishing features, and reference sheet production --- the creative foundation for every construction decision in this module.
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](study-guides/sewing-basics-for-fursuit-makers.md)**
+> The sewing skills this module assumes you have: machine threading, tension adjustment, hand stitches (ladder stitch, whip stitch, backstitch), faux fur cutting from the backing, and seam types. Start here if any sewing step in this module is unfamiliar.
+
+---
+
 *Module CRAFT-SUIT. Cross-references: [CRAFT-SEW], [CRAFT-BIO], [CRAFT-PLUSH], [CRAFT-RENDER]. Safety codes: SC-SAF, SC-IP.*

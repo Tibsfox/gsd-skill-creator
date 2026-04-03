@@ -309,6 +309,7 @@ The materials investment ladder in [PNT-07] discusses how to upgrade surfaces as
 ## Try This
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): The session recommends a toned surface — pre-coat your canvas panel with a thin wash of yellow ochre. This teaches you about surface preparation in the simplest possible way: one step that transforms the painting experience.
+- **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): Surface recommendations at three budget tiers — from canvas pads (starter) to stretched cotton canvas (intermediate) to Belgian linen and cradled panels (advanced). What to buy and what to skip.
 
 ---
 
