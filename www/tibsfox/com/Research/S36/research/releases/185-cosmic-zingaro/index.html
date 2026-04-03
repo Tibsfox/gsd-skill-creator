@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 185&deg; &mdash; Cosmic Zingaro &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #B71C1C; color: #FFCDD2; border: 1px solid #C62828; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid var(--seattle-navy); border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #E65100; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #E65100; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid var(--seattle-navy); margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .lineage-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .lineage-table th { background: #1A237E; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .lineage-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #F3F4F6; }
+    .lineage-table tr:nth-child(even) { background: #E8EAF6; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>185 &mdash; Cosmic Zingaro</span>
+    </nav>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">185&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Cosmic Zingaro</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Self-Released</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Cosmic Traveler</h2>
+          <blockquote>
+            &ldquo;Zingaro&rdquo; &mdash; Italian for traveler. &ldquo;Cosmic&rdquo;
+            &mdash; the scale of the imagination. Cosmic Zingaro is the nomadic
+            artist in the streaming age, self-released, moving through digital
+            space the way the Zingaro moves through physical space. Experimental
+            production as tools. Cosmic imagery as framework. Seattle hip-hop
+            as home base. The traveler carries everything they need.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Independence Continuum</h2>
+          <table class="lineage-table">
+            <thead><tr><th>Degree</th><th>Artist</th><th>Distribution</th><th>Era</th></tr></thead>
+            <tbody>
+              <tr><td>177&deg;</td><td>Kid Sensation</td><td>Nastymix (physical)</td><td>1980s</td></tr>
+              <tr><td>179&deg;</td><td>Sir Mix-a-Lot</td><td>Nastymix/Def American</td><td>1990s</td></tr>
+              <tr><td>180&deg;</td><td>Macklemore</td><td>Macklemore LLC (digital)</td><td>2010s</td></tr>
+              <tr><td>185&deg;</td><td>Cosmic Zingaro</td><td>Self-released (streaming)</td><td>2020s</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Cosmic Experimental Hip-Hop</h4>
+              <div class="level advanced">Advanced &mdash; Energy Theory</div>
+              <p>
+                Experimental production + cosmic imagery + hip-hop delivery.
+                Layered, immersive, production-forward. The sonic environment
+                as the message. E=6 through density of ideas.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Streaming-Age Independence</h4>
+              <div class="level intermediate">Intermediate &mdash; Distribution</div>
+              <p>
+                No label. No LLC. Direct-to-listener through Bandcamp,
+                SoundCloud, streaming. The latest evolution of Seattle&rsquo;s
+                independent spirit: from Nastymix to self-released.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">170&deg;</span> <strong>Ishmael Butler (Shabazz Palaces)</strong> &mdash; EXPERIMENTAL HIP-HOP! Both push Seattle hip-hop beyond genre boundaries. Cosmic themes. Experimental production.</li>
+            <li><span class="ref-degree">171&deg;</span> <strong>Knife Knights</strong> &mdash; EXPERIMENTAL! Butler + Shabazz Palaces orbit. Same experimental lineage. Cosmic Zingaro extends it further.</li>
+            <li><span class="ref-degree">180&deg;</span> <strong>Macklemore</strong> &mdash; INDEPENDENCE! Both self-released. Macklemore proved the digital model. Cosmic Zingaro is the streaming-age expression.</li>
+            <li><span class="ref-degree">146&deg;</span> <strong>THEESatisfaction</strong> &mdash; EXPERIMENTAL! Genre-blending Seattle hip-hop duo. Same experimental tradition.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">185&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 6</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hip-Hop</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-released</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.326</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Traits</h4>
+          <div class="stat-row"><span class="stat-label">Style</span><span class="stat-value">Cosmic / Experimental</span></div>
+          <div class="stat-row"><span class="stat-label">Distribution</span><span class="stat-value">Streaming</span></div>
+          <div class="stat-row"><span class="stat-label">Production</span><span class="stat-value">Immersive</span></div>
+          <div class="stat-row"><span class="stat-label">Lineage</span><span class="stat-value">Shabazz Palaces orbit</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../184-renz/" style="color: var(--seattle-navy);">&larr; 184&deg; Renz (E=6)</a>
+        <a href="../186-erica-campbell/" style="color: var(--seattle-navy);">186&deg; Erica Campbell &rarr;</a>
+      </div>
+      <p>Degree 185&deg; &mdash; Cosmic Zingaro &mdash; Seattle 360 Engine &mdash; v1.49.326<br>Cosmic traveler. Self-released. Experimental hip-hop. The nomadic artist in the streaming age.</p>
+    </footer>
+  </div>
+</body>
+</html>
