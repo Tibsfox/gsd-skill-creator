@@ -1,0 +1,60 @@
+{
+  "degree": 214,
+  "artist": "Helms Alee",
+  "slug": "214-helms-alee",
+  "genre": "Noise Rock",
+  "energy": 6,
+  "era": "Noise Rock. E=6 -- sludgy, heavy, melodic undertow. Return from degree 111. Sargent House. v1.49.355.",
+  "location": {
+    "origin": "Capitol Hill, Seattle",
+    "formative": "Seattle heavy continuum. Melvins, TAD, Boris lineage.",
+    "career": "Helms Alee. 2007-present. Sargent House. Noise Rock."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2007-present",
+  "labels": ["Sargent House"],
+  "members": ["Ben Verellen (guitar/vocals)", "Dana James (bass/vocals)", "Hozoji Matheson-Margullis (drums/vocals)"],
+  "former_members": [],
+  "associated_musicians": [],
+  "theory_nodes": [
+    {
+      "concept": "Three-voice vocal democracy -- all three members sing, male/female, clean/harsh, unpredictable trading. Rare in heavy music. Vocal range mirrors instrumental range.",
+      "level": "advanced",
+      "department": "vocal-theory",
+      "college_path": ".college/music/theory/vocal/three-voice-democracy.md",
+      "examples": [
+        "Ben Verellen: gruff, low, sludge-metal vocals.",
+        "Dana James: higher register, clean, melodic.",
+        "Hozoji Matheson-Margullis: dynamic, versatile.",
+        "Trading: unpredictable, no single frontperson."
+      ],
+      "description": "Three-voice vocal democracy. Male/female, clean/harsh. Heavy music rarity.",
+      "genealogy": {
+        "ancestors": ["Fugazi vocal trading.", "Sleater-Kinney dual vocals.", "Neurosis triple-threat."],
+        "relationship": "Helms Alee at 214. Returns from 111."
+      }
+    },
+    {
+      "concept": "Seattle heavy continuum -- Melvins to TAD to Boris to Helms Alee. Sludge lineage through four decades. Heavy music as Seattle tradition beyond grunge.",
+      "level": "intermediate",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/seattle-heavy-continuum.md",
+      "examples": [
+        "Melvins: ur-band of Seattle heavy.",
+        "TAD: industrial-strength Sub Pop heaviness.",
+        "Boris: doom/noise/beauty crossover.",
+        "Helms Alee: three-voice sludge beauty."
+      ],
+      "description": "Seattle heavy continuum. Four decades of sludge lineage.",
+      "genealogy": {
+        "ancestors": ["Melvins.", "TAD.", "Boris.", "Earth."],
+        "relationship": "Helms Alee at 214. Heavy lineage."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 213, "artist": "Kinski", "relationship": "Back-to-back E=6. Motorik (213) vs. sludge (214). Same energy, different methods."},
+    {"degree": 111, "artist": "Helms Alee", "relationship": "RETURN! 103-degree gap. The pair returns together (Kinski 110, Helms Alee 111)."},
+    {"degree": 215, "artist": "Minus the Bear", "relationship": "Noise rock (214) to math rock (215). Heavy to intricate. Both Capitol Hill."}
+  ]
+}
