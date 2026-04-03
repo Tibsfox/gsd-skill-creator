@@ -1,0 +1,60 @@
+{
+  "degree": 209,
+  "artist": "Campfire OK",
+  "slug": "209-campfire-ok",
+  "genre": "Indie Rock",
+  "energy": 5,
+  "era": "Indie Rock. E=5 -- warm, textured, communal. Self-released. The campfire glow. v1.49.350.",
+  "location": {
+    "origin": "Seattle",
+    "formative": "Seattle DIY scene. House shows, small venues, community-driven. KEXP support.",
+    "career": "Campfire OK. 2012-present. Self-released. Atmospheric indie rock."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2012-present",
+  "labels": ["Self-released"],
+  "members": [],
+  "former_members": [],
+  "associated_musicians": [],
+  "theory_nodes": [
+    {
+      "concept": "Campfire as aesthetic principle -- warmth, community, unpretentious gathering. The name declares the mission. Not a performance space -- a gathering space.",
+      "level": "foundational",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/campfire-aesthetic.md",
+      "examples": [
+        "Campfire OK: name = mission statement.",
+        "House shows as gathering spaces.",
+        "Layered guitars as warmth, not spectacle.",
+        "Self-released as autonomy over reach."
+      ],
+      "description": "Campfire aesthetic. Warmth over spectacle. Community over reach.",
+      "genealogy": {
+        "ancestors": ["Seattle DIY scene.", "House show circuit.", "Bandcamp era self-releasing."],
+        "relationship": "Campfire OK at 209. The fire at the center."
+      }
+    },
+    {
+      "concept": "Self-released as credential in Seattle -- not a limitation but a badge of DIY authenticity. Bandcamp era dissolved barriers. Trade reach for autonomy.",
+      "level": "intermediate",
+      "department": "label-theory",
+      "college_path": ".college/music/theory/label/self-released-credential.md",
+      "examples": [
+        "Campfire OK: self-released, full control.",
+        "Bandcamp/digital distribution: barriers dissolved.",
+        "KEXP support for DIY artists.",
+        "Autonomy over reach as conscious choice."
+      ],
+      "description": "Self-released as credential. Seattle DIY infrastructure. Autonomy over reach.",
+      "genealogy": {
+        "ancestors": ["DIY ethic.", "Bandcamp founding.", "Seattle community radio."],
+        "relationship": "Campfire OK at 209. Self-released indie rock."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 208, "artist": "Pickwick", "relationship": "Previous degree. Soul-inflected vs. atmospheric indie. Different warmth."},
+    {"degree": 210, "artist": "Telekinesis", "relationship": "Next degree. Self-released (209) to Merge Records (210). DIY to major indie label."},
+    {"degree": 211, "artist": "Iska Dhaaf", "relationship": "Same E=5. World/indie fusion. Different texture at same energy."}
+  ]
+}
