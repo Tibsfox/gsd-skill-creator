@@ -1,0 +1,111 @@
+{
+  "degree": 201,
+  "species": "Black Bear",
+  "scientific_name": "Ursus americanus",
+  "slug": "201-black-bear-jaw-pop",
+  "sound_type": "jaw-pop -- loud tooth-clacking intimidation display. Broadband percussive 100-5,000 Hz. Defensive stress. Trail conflict. E=6",
+  "energy": 6,
+  "ecosystem": "Forest, trail, campsite. Trail conflict zones. Defensive display context.",
+  "season": "Year-round. Peak encounters spring through fall on trails.",
+  "family": "Ursidae (second entry -- huff at 200)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Black Bear",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -121.80,
+    "description": "Black Bear throughout western Washington. Forest and trail zones. Common in Cascades foothills."
+  },
+  "taxonomy_note": {
+    "description": "Second Black Bear entry. First at 200 (huff, E=5). Bear trio across 200-202. Jaw-pop is mechanical percussion, not vocalization.",
+    "current_family": "Ursidae (second entry)",
+    "new_family": false,
+    "family_count_in_engine": "Ursidae: Black Bear Huff (200, E=5), Black Bear Jaw-Pop (201, E=6), Black Bear Cub Distress (202, E=4).",
+    "name_etymology": "Ursus from Latin 'bear'. americanus for American continent.",
+    "genus_note": "Ursus -- bears. Black Bear is the smallest North American bear.",
+    "order_note": "Carnivora. Actually omnivorous -- 85% plant matter in PNW.",
+    "family_position": "Ursidae: second entry. Bear trio at 200-202.",
+    "class_note": "Class Mammalia. Largest PNW predator in lowland forests."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Broadband: 100-5,000 Hz. No single fundamental. Percussive transient.",
+    "peak_energy_band_hz": "200-2,000 Hz (peak of jaw-pop impact).",
+    "song_frequency_hz": "Jaw-pop: broadband percussive. Huff: 50-300 Hz. Growl: 100-500 Hz.",
+    "song_duration_s": "Jaw-pop: 0.05-0.15 sec per pop. Often repeated at 1-3 per second.",
+    "note_structure": "Single percussive transient per pop. Repeated in rapid bursts when agitated.",
+    "note_types": "Jaw-pop (percussive, teeth), huff (exhalation, 200), growl (rare, extreme stress).",
+    "phrase_structure": "Escalation sequence: huff (200) -> jaw-pop (201) -> potential bluff charge. Multi-modal display.",
+    "timbre": "Sharp, explosive, percussive. Like a heavy branch snapping. Teeth-on-teeth impact amplified by mouth cavity.",
+    "amplitude": "E=6. Explosive intimidation. Louder than huff (E=5). Startling at close range. 50-100 m carry.",
+    "tempo": "1-3 pops per second when agitated. Single pops during mild stress. Rapid bursts during high agitation.",
+    "context": "Defensive stress. Trail encounter. Food defense. Cub defense. Cornered bear. Always with other displays.",
+    "regional_variation": "Minimal. Jaw-pop mechanics are consistent across black bear populations.",
+    "key_property": "JAW-POP. Percussion not vocalization. Teeth clacking. Broadband. E=6. BEAR TRIO 2/3 (200-202). ENERGY CONTRAST with Chastity Belt. v1.49.342."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Black to dark brown (occasionally cinnamon or blonde in PNW). Muscular. Brown muzzle. No shoulder hump (distinguishes from grizzly).",
+    "diagnostic_mark": "Black fur. Brown muzzle. No shoulder hump. Straight face profile (not dished like grizzly). During jaw-pop: visible saliva/foam, swaying head.",
+    "seasonal_variation": "Thicker coat in fall/winter. Spring coat thinner after hibernation. Size varies with season (heaviest pre-hibernation).",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Adult: 90-180 kg (200-400 lbs). 70-100 cm at shoulder. Black to brown fur. No shoulder hump. Omnivorous.",
+    "diagnostic_mark": "No shoulder hump (vs. grizzly). Straight face profile. Black fur with brown muzzle. Smaller than grizzly.",
+    "field_id": "Medium-large bear. Black fur (usually). No shoulder hump. During defensive display: head swaying, ground slapping, jaw-popping, huffing. Do not approach. Back away slowly."
+  },
+  "nodes": [
+    {
+      "id": "jaw-pop-mechanics",
+      "type": "milestone",
+      "title": "Jaw-Pop Mechanics -- Percussion Not Vocalization",
+      "description": "Teeth clacking, mouth cavity amplification. A percussive instrument played by the bear's own skull. Broadband transient. Unique mechanism in the engine.",
+      "connections": ["escalation-ladder", "bear-trio", "trail-conflict"]
+    },
+    {
+      "id": "escalation-ladder",
+      "type": "concept",
+      "title": "Escalation Ladder -- Huff to Jaw-Pop",
+      "description": "E=5 to E=6. Awareness to threat. Behavioral escalation matches energy escalation. Multi-modal display: sound, movement, visual.",
+      "connections": ["jaw-pop-mechanics", "bear-trio"]
+    },
+    {
+      "id": "bear-trio",
+      "type": "concept",
+      "title": "Bear Trio -- 200-202",
+      "description": "Three entries, one species. Huff (awareness, E=5), jaw-pop (threat, E=6), cub distress (need, E=4). Escalation then inversion.",
+      "connections": ["jaw-pop-mechanics", "escalation-ladder", "trail-conflict"]
+    },
+    {
+      "id": "trail-conflict",
+      "type": "concept",
+      "title": "Trail Conflict -- Defensive Not Predatory",
+      "description": "Bears that jaw-pop want distance. A bear that intends to attack is silent. The louder the display, the more stressed. Give space.",
+      "connections": ["jaw-pop-mechanics", "bear-trio"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-200",
+      "species": "Black Bear Huff",
+      "relationship": "BEAR TRIO 1/3! Huff (E=5) to jaw-pop (E=6). +1 escalation. Awareness to threat."
+    },
+    {
+      "target": "SPS-202",
+      "species": "Black Bear Cub Distress",
+      "relationship": "BEAR TRIO 3/3! Jaw-pop (E=6) to cub distress (E=4). Inversion. Adult intimidation to infant vulnerability."
+    },
+    {
+      "target": "SPS-182",
+      "species": "Steller Sea Lion",
+      "relationship": "BOTH E=6! Sea lion roar (sustained, resonant) vs. jaw-pop (percussive, explosive). Same energy, different mechanisms."
+    },
+    {
+      "target": "S36-201",
+      "artist": "Chastity Belt",
+      "relationship": "ENERGY CONTRAST! E=4 vs. E=6. Display (jaw-pop) and deflection (Chastity Belt). One demands. The other shrugs."
+    }
+  ]
+}
