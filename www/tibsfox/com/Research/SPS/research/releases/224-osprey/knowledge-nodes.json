@@ -1,0 +1,29 @@
+{
+  "degree": 224, "project": "SPS", "name": "Osprey", "slug": "224-osprey",
+  "species": "Pandion haliaetus", "family": "Pandionidae", "order": "Accipitriformes",
+  "common_name": "Osprey (Fish Hawk)", "sound_type": "Loud sharp series -- chewk-chewk-chewk",
+  "energy": 5,
+  "ecosystem": "Water. Rivers, lakes, estuaries, coastal waters. Most water-dependent raptor in PNW.",
+  "season": "Summer migratory. Arrives March/April, departs August/September. Winters South America.",
+  "conservation": "Least Concern (IUCN). ~460,000 global population. DDT-impacted, now recovered.",
+  "vocalization": {
+    "type": "alarm and territorial call",
+    "description": "Loud, sharp series: chewk-chewk-chewk (also kyew-kyew-kyew or pee-pee-pee). Penetrating, carries over open water.",
+    "frequency_hz": "1000-4000",
+    "function": "Nest defense, territorial advertisement, mate calling, food solicitation, alarm",
+    "notable": "Vocally active species. Calls readily. Designed to carry over open water acoustic environment."
+  },
+  "anatomical_adaptations": [
+    "Reversible outer toe (zygodactyl) -- 2 toes per side on fish",
+    "Spicule-covered footpads -- grip slippery fish",
+    "Oily plumage -- rapid water shedding after plunge",
+    "Head-forward fish carry instinct -- aerodynamic drag reduction"
+  ],
+  "connections": [
+    {"degree": 224, "type": "s36_pair", "description": "Mad Season / Above (E=6). Zone between water and sky. Staley's aquatic lyrics. Osprey dives into water from sky. Above inhabits the threshold. Most resonant pair in raptor era."},
+    {"degree": 221, "type": "ecological_relationship", "description": "Bald Eagle steals fish from Osprey (kleptoparasitism). Franklin's complaint at 221. The arc closes at 224 with the victim's entry."},
+    {"degree": 223, "type": "family_transition", "description": "After 3 Accipitridae (221-223), FIRST PANDIONIDAE at 224. Open country Golden Eagle to water-surface Osprey."}
+  ],
+  "tags": ["pandionidae", "osprey", "fish-hawk", "monotypic-family", "summer-migrant", "water-raptor", "plunge-diving", "zygodactyl", "pnw-summer", "ddt-recovery", "first-pandionidae"],
+  "milestones": ["FIRST PANDIONIDAE", "MONOTYPIC FAMILY ENTERS ENGINE", "RAPTOR BLOCK 221-224 COMPLETE", "MAD SEASON WATER-SKY PAIR"]
+}
