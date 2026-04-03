@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-03T22:30:00Z",
-  "source": "sweep-v1.3.15.2",
+  "updated": "2026-04-03T23:00:00Z",
+  "source": "sweep-v1.3.16",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST — MET +1d 23:55 — Integrity ~148,000 mi from Earth, outbound. FD3: TC#1 cancelled (path correct). Session 5 productive: all 4 CERN experiments, all 6 CSP pathways, space weather feed, OPEN #19 (file-native agents), trajectory vis rebuilt, 2 mission skills installed (vision-to-mission + research-mission-generator), 7 fact-checks cleared, DRP AREDN URL fixed. FD4 next: TC#2, lunar geography, celestial photography.",
+    "status": "TRANSLUNAR COAST — MET +2d 00:25 — Integrity ~150,000 mi from Earth, outbound. FD3→FD4 transition. Session 5: all 4 CERN experiments, all 6 CSP pathways (complete curriculum), space weather + Cascadia pages, OPEN #19 file-native agents, trajectory vis rebuilt, mission skills installed, 3 research summaries (#36-38), 10+ fact-checks. 17/24 Day 4 hours covered.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -117,6 +117,10 @@
     "tdrs_issue": "Brief loss of two-way comms post-orbit insertion. Traced to ground TDRS configuration. Resolved, no mission impact."
   },
   "announcements": [
+    {
+      "time": "2026-04-03T23:00:00Z",
+      "text": "v1.3.16: MET+2d00:25 4pm PDT. Hourly sweep. Session 5 continuation: DRP Cascadia page (geology, scenario, ShakeAlert, preparedness). Research #37 (trust-based fintech, Nigeria) + #38 (cognitive load, AI). OPEN #19 on index. AREDN URL fix. 10+ fact-checks cleared. Radio guide linked. Approaching 2-day MET mark. 150K mi outbound."
+    },
     {
       "time": "2026-04-03T22:00:00Z",
       "text": "v1.3.15: MET+1d23:25 3pm PDT. Hourly sweep. Session 5 productive: CERN ALICE + LHCb detail pages (4/4 experiments complete, all cross-linked). CSP Pathway 2 Web & Networking. Space weather feed page (LIVE). MUK stats fixed (28 samples, 4 days). Julia 1.12.5 installed. KPAE 13.8°C NW 6 SCT060, afternoon cooling. TC#1 cancelled, path correct. Integrity ~145K mi outbound."
