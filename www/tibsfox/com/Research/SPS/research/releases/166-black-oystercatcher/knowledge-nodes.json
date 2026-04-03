@@ -1,0 +1,115 @@
+{
+  "degree": 166,
+  "species": "Black Oystercatcher",
+  "scientific_name": "Haematopus bachmani",
+  "slug": "166-black-oystercatcher",
+  "sound_type": "piping wheep-wheep -- piercing, loud, repeated piping call that cuts through surf noise; high-pitched, insistent; E=5",
+  "energy": 5,
+  "ecosystem": "Rocky shores -- intertidal zone, rocky headlands, jetties, offshore rocks, mussel beds. Exclusive to rocky marine shores. Never inland, never sandy beaches.",
+  "season": "Year-round resident. Permanent territories on specific stretches of rocky shore. Piping year-round, peak during breeding (spring/summer).",
+  "family": "Haematopodidae (FIRST entry)",
+  "order": "Charadriiformes",
+  "csv_substitute": false,
+  "original_species": "Black Oystercatcher",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.40,
+    "lon": -123.10,
+    "description": "Black Oystercatcher on rocky shores of the San Juan Islands, Olympic Peninsula outer coast, and rocky headlands of Puget Sound."
+  },
+  "taxonomy_note": {
+    "description": "FIRST HAEMATOPODIDAE entry. Oystercatcher family enters the engine. Rocky shore specialist. Red-orange bill adapted for shellfish. Indicator species for intertidal health. ~10,000 coastwide.",
+    "current_family": "Haematopodidae (first entry)",
+    "new_family": true,
+    "family_count_in_engine": "Haematopodidae: first entry. Black Oystercatcher (166).",
+    "name_etymology": "Haematopus from Greek 'haima' (blood) + 'pous' (foot) -- blood-foot, referring to red legs. bachmani honoring John Bachman, collaborator with Audubon.",
+    "genus_note": "Haematopus -- 12 species worldwide. All coastal shorebirds with long red-orange bills.",
+    "order_note": "Charadriiformes. First Charadriiformes entry in recent sequence. Shorebird order enters.",
+    "family_position": "First Haematopodidae. The rocky shore sentinel. E=5. Narrowest habitat band in the engine."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Piping: 3000-5000 Hz. High-pitched, piercing. Designed to cut through low-frequency surf noise.",
+    "peak_energy_band_hz": "3500-4500 Hz. The piercing core of the wheep call.",
+    "song_frequency_hz": "3000-5000 Hz. High and piercing.",
+    "song_duration_s": "Individual notes: 0.2-0.4 seconds. Sequences: 3-20+ notes. Territorial disputes can last minutes.",
+    "note_structure": "WHEEP! WHEEP! WHEEP! -- piercing, insistent, repeated whistles. Accelerates during alarm. Piping displays between territorial neighbors.",
+    "note_types": "Wheep piping (primary -- territorial/alarm/flight), contact (softer piping -- pair/family), alarm (accelerated, higher-pitched piping).",
+    "phrase_structure": "Repeated single notes in rapid sequence. Often given in flight. Piping displays: synchronized piping between pair members walking along territory boundary.",
+    "timbre": "Piercing, whistled, clean. Cuts through ambient surf noise. Designed for the high-noise environment of rocky shores.",
+    "amplitude": "E=5. Loud. Dominates local soundscape of rocky headlands. Carries well above surf and wind noise.",
+    "tempo": "Rapid repetition. 2-4 notes per second during alarm. Slower during routine territorial calling.",
+    "context": "Territorial defense. Pair bonding. Flight call. Alarm. Piping displays between neighbors. Most behavioral contexts.",
+    "regional_variation": "Minimal across Pacific coast range. Consistent piping character from Alaska to Baja.",
+    "key_property": "WHEEP-WHEEP PIPING -- piercing, high-pitched, surf-cutting. FIRST HAEMATOPODIDAE. Red-orange bill. Rocky shore specialist. Intertidal indicator. E=5. v1.49.306."
+  },
+  "plumage": {
+    "overall": "Entirely black. Bright red-orange bill. Pink legs. Yellow eye with red eye-ring. No seasonal variation. Dark plumage against dark rock.",
+    "diagnostic_mark": "All black body with vivid red-orange bill. Unmistakable on rocky shores.",
+    "seasonal_variation": "None. Black plumage and red-orange bill year-round.",
+    "flight_pattern": "Low over water along shoreline. Strong, direct wingbeats. Often piping in flight."
+  },
+  "physical_description": {
+    "overall": "Length: 42-47 cm. Weight: 500-700g. Stocky shorebird. All black with vivid red-orange bill.",
+    "diagnostic_mark": "Black body + red-orange bill + pink legs. On rocky shores only.",
+    "field_id": "Stocky black shorebird on rocky coast. Bright red-orange bill unmistakable. Listen for loud piercing WHEEP! WHEEP! piping."
+  },
+  "nodes": [
+    {
+      "id": "piercing-piping",
+      "type": "concept",
+      "title": "Piercing Piping -- Surf-Cutting Call",
+      "description": "WHEEP! WHEEP! WHEEP! 3000-5000 Hz. Piercing, high-pitched, designed to carry above surf and wind noise. E=5. Territorial, alarm, flight. Piping displays between neighbors.",
+      "connections": ["red-orange-bill", "intertidal-indicator", "first-haematopodidae"]
+    },
+    {
+      "id": "red-orange-bill",
+      "type": "concept",
+      "title": "Red-Orange Bill -- Precision Shellfish Tool",
+      "description": "6-8 cm laterally compressed blade. Three techniques: stabbing (open bivalves), hammering (closed shells), probing (crevice invertebrates). Learned from parents over months. Most specialized feeding tool in the engine.",
+      "connections": ["piercing-piping", "rocky-shore-specialist"]
+    },
+    {
+      "id": "intertidal-indicator",
+      "type": "concept",
+      "title": "Intertidal Indicator Species",
+      "description": "Presence = healthy rocky shore. Permanent territories. Sensitive to disturbance. 8,900-11,000 coastwide. Conservation rapid assessment tool. Habitat fidelity absolute.",
+      "connections": ["rocky-shore-specialist", "first-haematopodidae"]
+    },
+    {
+      "id": "rocky-shore-specialist",
+      "type": "concept",
+      "title": "Rocky Shore Specialist",
+      "description": "Exclusive to rocky intertidal. Never inland. Never sandy beaches. Territories of 100-500m held year-round for decades. The narrowest habitat band of any species in the engine.",
+      "connections": ["red-orange-bill", "intertidal-indicator"]
+    },
+    {
+      "id": "first-haematopodidae",
+      "type": "pattern",
+      "title": "First Haematopodidae -- Oystercatcher Family Enters",
+      "description": "Haematopodidae enters at degree 166. 12 species worldwide. All coastal. All with red-orange bills. Black Oystercatcher is the Pacific coast specialist. First Charadriiformes in recent sequence.",
+      "connections": ["piercing-piping", "intertidal-indicator"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-165",
+      "species": "Sandhill Crane",
+      "relationship": "HABITAT CONTRAST! Crane: open field, 2-4 km carry, E=6. Oystercatcher: rocky shore, surf-cutting piping, E=5. Open landscape vs narrow coastal strip."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey",
+      "relationship": "BILL CONTRAST! Turkey: short omnivore bill. Oystercatcher: long specialized shellfish bill. Both loud. Different feeding ecology."
+    },
+    {
+      "target": "SPS-148",
+      "species": "Black Swift",
+      "relationship": "COASTAL EDGE! Black Swift on coastal cliffs. Oystercatcher on rocky shores below. Both tied to the coastal edge."
+    },
+    {
+      "target": "SPS-164",
+      "species": "American Coot",
+      "relationship": "SPECIALIST VS GENERALIST! Coot: freshwater generalist. Oystercatcher: rocky shore specialist. Ubiquitous vs rare and localized."
+    }
+  ]
+}
