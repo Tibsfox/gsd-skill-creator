@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 144&deg; &mdash; Digable Planets &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #FF6F00, #FF8F00); color: #FFF8E1; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(255, 111, 0, 0.4); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #D84315; color: #FFCCBC; border: 1px solid #E64A19; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #FF6F00; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #FF6F00; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-card .level.intermediate { background: #F3E5F5; color: #4A148C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #FF6F00; min-width: 3rem; display: inline-block; }
+    .jazz-banner { background: linear-gradient(135deg, #FF6F00, #FF8F00, #FFA000); color: #3E2723; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .jazz-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #212121; }
+    .jazz-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+    blockquote { border-left: 3px solid #FF6F00; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF3E0; font-style: italic; color: #E65100; }
+    .trio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 600px) { .trio-grid { grid-template-columns: 1fr; } }
+    .trio-card { background: white; border: 1px solid #FFE0B2; border-radius: 6px; padding: 0.75rem 1rem; }
+    .trio-card strong { color: #FF6F00; font-size: 0.95rem; }
+    .trio-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>144 &mdash; Digable Planets</span>
+    </nav>
+
+    <div class="jazz-banner">
+      <h3>FIRST JAZZ RAP &mdash; Genre Stage 99 &mdash; Grammy 1994</h3>
+      <p>
+        <strong>Digable Planets</strong> brings <strong>Jazz Rap</strong> into the engine.
+        Grammy for &ldquo;Rebirth of Slick (Cool Like Dat).&rdquo;
+        <strong>Ishmael Butler</strong> (Butterfly) &mdash; Central District roots &mdash;
+        later became half of <strong>Shabazz Palaces</strong> (degree 103).
+        <strong>41-degree arc</strong> from 103 to 144 &mdash; matching Sabzi&rsquo;s span.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">144&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Digable Planets</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Jazz Rap</span>
+          <span class="label-badge">Pendulum / Elektra</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Trio</h2>
+          <div class="trio-grid">
+            <div class="trio-card">
+              <strong>Butterfly</strong>
+              <p>Ishmael Butler. Central District roots. Abstract poetry. Later: Shabazz Palaces (103). The Seattle connection.</p>
+            </div>
+            <div class="trio-card">
+              <strong>Doodlebug</strong>
+              <p>Craig Irving. Philadelphia. Political consciousness. East Coast lyrical tradition.</p>
+            </div>
+            <div class="trio-card">
+              <strong>Ladybug Mecca</strong>
+              <p>Mary Ann Vieira. Brazilian-American. Melodic vocals. Feminist perspective. Vocal diversity.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Butler Arc (103 &harr; 144)</h2>
+          <blockquote>
+            Ishmael Butler&rsquo;s trajectory: Central District &rarr; Howard University
+            &rarr; Digable Planets (NYC, Grammy) &rarr; return to Seattle &rarr;
+            Shabazz Palaces (Sub Pop, experimental). From cool jazz-rap to
+            Afrofuturist abstraction. 41-degree engine span (103 to 144) &mdash;
+            matching Sabzi&rsquo;s 41-degree span (99 to 140). Two Seattle hip-hop
+            figures, two 41-degree arcs, two radical transformations.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>First Jazz Rap &mdash; Genre Stage 99</h4>
+              <div class="level advanced">Advanced &mdash; Genre Theory</div>
+              <p>
+                New genre enters. Jazz + hip-hop fusion. Jazz samples, live
+                instrumentation, jazz sensibility, bohemian identity.
+                The first genre that fuses two distinct traditions.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Grammy Achievement</h4>
+              <div class="level advanced">Advanced &mdash; Commercial Theory</div>
+              <p>
+                1994 Grammy for &ldquo;Rebirth of Slick.&rdquo; Highest commercial
+                recognition in the hip-hop era. Proved Jazz Rap could be
+                commercially successful. #15 Billboard Hot 100.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>41-Degree Arc Echo</h4>
+              <div class="level intermediate">Intermediate &mdash; Structural Pattern</div>
+              <p>
+                Butler: 103 (Shabazz Palaces) to 144 (Digable Planets) = 41 degrees.
+                Sabzi: 99 (Blue Scholars) to 140 (DJ) = 41 degrees.
+                Two figures, two arcs, same span. Engine echo.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">103&deg;</span> <strong>Shabazz Palaces</strong> &mdash; BUTLER ARC! Ishmael Butler. 41-degree span. From Jazz Rap cool (144) to Afrofuturist experiment (103). Same artist, opposite aesthetics.</li>
+            <li><span class="ref-degree">140&deg;</span> <strong>Sabzi (DJ)</strong> &mdash; 41-DEGREE ECHO! Sabzi's span (99-140) matches Butler's span (103-144). Two 41-degree arcs.</li>
+            <li><span class="ref-degree">143&deg;</span> <strong>Spaceman Scotty</strong> &mdash; PREVIOUS DEGREE! Tacoma hip-hop. The era shifts from geography (143) to genre (144).</li>
+            <li><span class="ref-degree">134&deg;</span> <strong>DJ B-Mello</strong> &mdash; ERA START! Eleven degrees (134-144). DJs > producers > collectives > organizations > cities > genres.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">144&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Jazz Rap (NEW)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Digable Planets</h4>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1991&ndash;1995</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Pendulum / Elektra</span></div>
+          <div class="stat-row"><span class="stat-label">Grammy</span><span class="stat-value">1994</span></div>
+          <div class="stat-row"><span class="stat-label">Albums</span><span class="stat-value">2 (Reachin&rsquo;, Blowout Comb)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Butler Arc</h4>
+          <div class="stat-row"><span class="stat-label">103&deg;</span><span class="stat-value">Shabazz Palaces</span></div>
+          <div class="stat-row"><span class="stat-label">144&deg;</span><span class="stat-value">Digable Planets</span></div>
+          <div class="stat-row"><span class="stat-label">Span</span><span class="stat-value">41 degrees</span></div>
+          <div class="stat-row"><span class="stat-label">Echo</span><span class="stat-value">Sabzi (99&ndash;140)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Genre Stage 99</h4>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Jazz Rap</span></div>
+          <div class="stat-row"><span class="stat-label">First in engine</span><span class="stat-value">Degree 144</span></div>
+          <div class="stat-row"><span class="stat-label">Fusion</span><span class="stat-value">Jazz + Hip-Hop</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../143-spaceman-scotty/" style="color: var(--seattle-navy);">&larr; 143&deg; Spaceman Scotty</a>
+        <a href="../145-next/" style="color: var(--seattle-navy);">145&deg; &rarr;</a>
+      </div>
+      <p>Degree 144&deg; &mdash; Digable Planets &mdash; Seattle 360 Engine &mdash; v1.49.284<br>FIRST JAZZ RAP. Genre Stage 99. Grammy 1994. Ishmael Butler. 41-degree arc to Shabazz Palaces. E=5 cool like dat.</p>
+    </footer>
+  </div>
+</body>
+</html>
