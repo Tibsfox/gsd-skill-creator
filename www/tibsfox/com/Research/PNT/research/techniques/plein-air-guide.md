@@ -198,3 +198,11 @@ Show up. Set up next to someone who has been painting for twenty years. Watch ho
 - Guerrilla Painter. "Pochade Box Guide." guerrillapainter.com.
 - Strada Easels. "Product Guide." stradaeasel.com.
 - Plein Air Magazine / Outdoor Painter. outdoorpainter.com.
+
+---
+
+## Try This
+
+> **[Paint From Life --- Why It Matters and How to Start](../try-sessions/paint-from-life-not-photos.md)** --- The companion session to this plein air guide. Before you paint outdoors, understand WHY painting from life --- any life, even a coffee cup on your desk --- transforms your work in ways that painting from photographs cannot. Start with 20 minutes and whatever is in front of you.
+
+> **[Build a Pochade Box](../try-sessions/build-a-pochade-box.md)** --- The portable painting station that makes plein air practical. Build one for $45 in materials and take your life-painting practice into the PNW landscape.

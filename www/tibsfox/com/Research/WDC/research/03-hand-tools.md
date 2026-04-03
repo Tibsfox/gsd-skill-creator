@@ -215,6 +215,7 @@ The PNW weather also shapes hand tool practice. The damp climate means tools rus
 - **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): The foundational hand tool skill. Every tool in this chapter depends on a sharp edge. Start here before anything else.
 - **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail is where hand tools converge — saw, chisel, marking gauge, marking knife. One joint that requires every fundamental skill.
 - **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The mortise chisel, the tenon saw, the paring chisel, the marking gauge — four hand tools from this chapter applied to the most important joint in furniture.
+- **Restore a Vintage Hand Plane** ([try-sessions/restore-a-hand-plane](try-sessions/restore-a-hand-plane.md)): The most satisfying $15 project in woodworking. Find a rusty Stanley Bailey at an estate sale and restore it to precision condition --- disassembly, rust removal, sole flattening, sharpening, and tuning. A century-old tool, better than anything new under $200.
 
 ---
 

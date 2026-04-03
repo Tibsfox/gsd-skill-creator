@@ -178,6 +178,13 @@ This document connects to three departments within the College structure:
 
 **Physical Education** — Outdoor preparedness. The clothing system, the equipment list, the fitness baseline, the trip planning checklist, the turnaround time — all are elements of outdoor preparedness that physical education can teach before the trip, so that first aid is never needed during it. Prevention is the best medicine, and in the backcountry, it is often the only medicine available in time.
 
+## Try This
+
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- The instant cold pack, medications, and wound care supplies handle the aftermath of environmental injuries. The kit is the tool chest for the skills in this document.
+- **[Try Session: Practice the Recovery Position](try-sessions/learn-recovery-position.md)** --- For the hypothermic patient who loses consciousness, the heat stroke patient who becomes unresponsive, or the drowning victim pulled from the water who is breathing. Recovery position protects the airway in every scenario.
+- **[FSR Try Session: Build a Go Bag](../../FSR/research/try-sessions/build-a-go-bag.md)** --- The 72-hour kit for wildfire evacuation, earthquake displacement, or any environmental emergency that forces you from your home.
+- **[Study Guide: Vital Signs Reference](study-guides/vital-signs-reference.md)** --- Temperature assessment is a vital sign. Know what hypothermia and hyperthermia look like in the numbers.
+
 ## Respect the Indifference
 
 The outdoors is not hostile. It is indifferent. That distinction matters because hostility implies intent, and the temptation to assign intent to nature leads to two equally dangerous errors: overconfidence ("nature wouldn't do that to me") and helplessness ("there's nothing I can do").
@@ -185,3 +192,15 @@ The outdoors is not hostile. It is indifferent. That distinction matters because
 The reality is that environmental hazards are predictable, preparable, and in most cases survivable — if you know what you are dealing with. Hypothermia is a physics problem. Heat stroke is a physiology problem. Drowning is a fluid dynamics problem. Lightning is an electrical problem. Each has a solution set that is well understood and well documented.
 
 The person who checks the weather, packs appropriate layers, carries the ten essentials, monitors the AQI, knows tick removal, and turns back when conditions exceed their preparation is not timid. They are competent. And competence, in the Pacific Northwest backcountry, is the difference between a great story and a search and rescue operation.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Thermoregulation, Toxicology]: Heat transfer physics (conduction, convection, radiation, evaporation), the body's compensatory mechanisms (vasodilation, vasoconstriction, sweating, shivering), and the toxicology of wildfire smoke PM2.5 particles.
+- **Nature Studies** --- [Wildlife, Ecology]: Animal behavior, fire ecology, tick biology, and the ecological context of PNW environmental hazards. Understanding the environment is the foundation of surviving it.
+- **Physical Education** --- [Outdoor Preparedness]: Clothing systems, equipment selection, fitness baselines, trip planning, and turnaround discipline. Prevention through preparation is the best environmental medicine.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/build-home-first-aid-kit], [FAD try-session/recovery-position], [FSR try-session/build-a-go-bag], [FAD study-guide/vital-signs-reference]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

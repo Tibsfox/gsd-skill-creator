@@ -178,6 +178,11 @@ Mental health first aid is not a substitute for professional care. It is the bri
 
 Have the conversation.
 
+## Try This
+
+- **[Try Session: The Monthly Mental Health Check-In](try-sessions/mental-health-check-in.md)** --- Eight questions, fifteen minutes, once a month. Sleep, energy, mood, social connection, appetite, substances, joy, stress. You cannot fix what you do not notice. Start noticing.
+- **[Try Session: Practice the Recovery Position](try-sessions/learn-recovery-position.md)** --- For the person who is unconscious from alcohol intoxication, drug overdose, or postictal state after a seizure. Recovery position protects the airway while you wait for help.
+
 ## College Connection
 
 This document connects to three departments within the College structure:
@@ -187,3 +192,15 @@ This document connects to three departments within the College structure:
 **Mind-Body** — Emotional regulation. The neurophysiology of the stress response (amygdala activation, cortisol and adrenaline release, prefrontal cortex suppression) explains why a person in crisis cannot "just think rationally." It also explains why de-escalation techniques work — they target the same physiological systems through different inputs (calm voice, slow breathing, grounding in sensory experience).
 
 **Science** — The neuroscience of stress. Chronic stress physically remodels the brain — shrinking the hippocampus (memory and emotional regulation), enlarging the amygdala (threat detection), and weakening prefrontal connections (executive function and impulse control). This is not metaphor. It is measurable on brain imaging. Understanding the physical reality of mental health conditions — that depression is not weakness, that anxiety is not cowardice, that psychosis is not moral failure — is the foundation of destigmatization, and destigmatization is the foundation of help-seeking.
+
+---
+
+## College of Knowledge Connections
+
+- **Psychology** --- [Crisis Intervention]: Joiner's interpersonal theory of suicide (thwarted belonging, perceived burdensomeness, acquired capability), the stages of crisis, and the evidence base for lethal means restriction. Understanding why people reach crisis informs how we respond.
+- **Mind-Body** --- [Emotional Regulation]: The neurophysiology of the stress response explains why de-escalation works --- calm voice, slow breathing, and grounding techniques target the same amygdala-cortisol-prefrontal axis through different inputs.
+- **Science** --- [Neuroscience]: Chronic stress remodels the brain measurably. Depression, anxiety, and psychosis are neurological conditions, not moral failures. This understanding is the foundation of destigmatization.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/mental-health-check-in], [FSR-08 mental health crisis response], [FSR-09 responder wellness]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

@@ -165,3 +165,20 @@ There is no secret. There is no hack. There is no superfood, supplement, or prog
 It is unglamorous. It does not sell books. It does not trend on social media. It does not require an expensive subscription or a branded product.
 
 It works.
+
+## Try This
+
+- **[Try Session: The Monthly Mental Health Check-In](try-sessions/mental-health-check-in.md)** --- Sleep, energy, mood, appetite, stress. The check-in covers the same domains this document addresses: the foundational inputs of wellness. Track them monthly and notice the patterns.
+- **[Study Guide: Medication Safety Reference](study-guides/medication-safety-reference.md)** --- The OTC medications in your medicine cabinet. Know what ibuprofen, acetaminophen, and diphenhydramine do, how much is too much, and who should not take them.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Nutrition, Physiology]: Macronutrient metabolism (glycolysis, citric acid cycle, beta-oxidation), appetite regulation hormones (ghrelin, leptin, insulin), and sleep physiology (NREM stages, REM, glymphatic clearance). The biochemistry directly informs every practical recommendation.
+- **Physical Education** --- [Exercise Prescription]: Progressive overload, specificity, recovery, periodization. Cardiovascular and muscular adaptation to regular exercise. The physiology of fitness improvement.
+- **Mind-Body** --- [Stress, Sleep, Body-Mind Connection]: The bidirectional relationship between physical and mental health. Exercise improves mood. Sleep deprivation impairs mood. Chronic stress causes physical disease. The practices here --- breathing, nature, movement, sleep --- are mind-body interventions grounded in physiology.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/mental-health-check-in], [FAD study-guide/medication-safety-reference], [FAD-06 mental health basics]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*
