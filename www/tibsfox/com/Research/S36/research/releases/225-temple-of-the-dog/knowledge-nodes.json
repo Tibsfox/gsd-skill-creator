@@ -1,0 +1,28 @@
+{
+  "degree": 225, "project": "S36", "name": "Temple of the Dog", "slug": "225-temple-of-the-dog",
+  "genre": "Rock Supergroup", "energy": 7, "era": "1990-1991",
+  "neighborhood": "Capitol Hill", "label": "A&M Records",
+  "members": [
+    {"name": "Chris Cornell", "role": "vocals, guitar", "primary_band": "Soundgarden"},
+    {"name": "Stone Gossard", "role": "guitar", "primary_band": "Mother Love Bone / Pearl Jam"},
+    {"name": "Jeff Ament", "role": "bass", "primary_band": "Mother Love Bone / Pearl Jam"},
+    {"name": "Mike McCready", "role": "guitar", "primary_band": "Pearl Jam"},
+    {"name": "Matt Cameron", "role": "drums", "primary_band": "Soundgarden"},
+    {"name": "Eddie Vedder", "role": "guest vocals", "primary_band": "Pearl Jam"}
+  ],
+  "discography": [
+    {"title": "Temple of the Dog", "year": 1991, "label": "A&M", "notes": "Only studio album. Platinum US. Reissued 25th anniversary 2016."}
+  ],
+  "key_songs": [
+    "Say Hello 2 Heaven", "Hunger Strike", "Reach Down", "Wooden Jesus", "Call Me a Dog", "Times of Trouble"
+  ],
+  "connections": [
+    {"degree": 224, "type": "predecessor", "description": "Mad Season (E=6, Capitol Hill). Grief-adjacent record preceding the grief monument."},
+    {"degree": 226, "type": "successor", "description": "Wellwater Conspiracy. Matt Cameron consecutive degrees 225-226."},
+    {"degree": "SPS_225", "type": "sps_pair", "description": "Northern Goshawk (E=6). Apex accipiter pairs with apex supergroup. Both operate at the top of their domains."},
+    {"degree": "future_PJ", "type": "band_lineage", "description": "Pearl Jam. Gossard, Ament, McCready, Vedder all present before PJ formed publicly."},
+    {"degree": "Andrew_Wood", "type": "memorial", "description": "Tribute to Andrew Wood of Mother Love Bone, died March 19, 1990, heroin overdose, age 24."}
+  ],
+  "tags": ["supergroup", "tribute", "capitol-hill", "soundgarden", "pearl-jam", "chris-cornell", "andrew-wood", "a-and-m", "hunger-strike", "grief-monument", "accipiter-arc", "e7"],
+  "milestones": ["ACCIPITER ARC OPENS", "APEX PAIR", "CAPITOL HILL SUPERGROUP", "CORNELL-VEDDER FIRST DUET"]
+}
