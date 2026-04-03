@@ -1,0 +1,104 @@
+{
+  "degree": 186,
+  "species": "Dall's Porpoise",
+  "scientific_name": "Phocoenoides dalli",
+  "slug": "186-dalls-porpoise",
+  "sound_type": "no audible vocalization + rooster-tail splash -- echolocation >100 kHz (above human hearing). Physical sound: explosive V-shaped spray at 35 mph. E=5",
+  "energy": 5,
+  "ecosystem": "Open water, deep channels, continental shelf. Resident in Puget Sound and Strait of Juan de Fuca year-round.",
+  "season": "Year-round resident. More commonly sighted fall/winter. Does not migrate from region.",
+  "family": "Phocoenidae (FIRST -- porpoises)",
+  "order": "Cetacea (FIRST cetacean in engine)",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Dall's Porpoise",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.45,
+    "lon": -123.20,
+    "description": "Dall's Porpoise in Strait of Juan de Fuca / San Juan Islands. Deep channel habitat. Bow-riding boats."
+  },
+  "taxonomy_note": {
+    "description": "FIRST PHOCOENIDAE -- porpoise family enters. First cetacean in the SPS engine. Narrow-Band High-Frequency (NBHF) echolocation as family trait. Porpoise vs dolphin distinction.",
+    "current_family": "Phocoenidae (FIRST entry)",
+    "new_family": true,
+    "family_count_in_engine": "Phocoenidae: Dall's Porpoise (186) -- FIRST.",
+    "name_etymology": "Phocoenoides from Greek 'phokaena' (porpoise) + '-oides' (resembling). dalli after W.H. Dall (naturalist). 'Dall's Porpoise' for its discoverer.",
+    "genus_note": "Phocoenoides -- monotypic genus. Only species: P. dalli.",
+    "order_note": "Cetacea. FIRST Cetacea in SPS. Whales, dolphins, porpoises. New order alongside Carnivora.",
+    "family_position": "Fourth marine mammal family: Phocidae (180-181), Otariidae (182-184), Mustelidae (185), Phocoenidae (186). First cetacean family.",
+    "class_note": "Class Mammalia. Marine mammal era: 7 consecutive (180-186). Now 4 families."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": ">100,000 Hz (echolocation, inaudible to humans).",
+    "peak_energy_band_hz": "120,000-160,000 Hz (NBHF clicks).",
+    "song_frequency_hz": "N/A (no audible vocalization).",
+    "song_duration_s": "Click trains: continuous during echolocation. Rooster-tail: continuous at speed.",
+    "note_structure": "NBHF clicks (ultrasonic, inaudible). Rooster-tail splash (physical, audible).",
+    "note_types": "Echolocation clicks (NBHF, >100 kHz), rooster-tail splash (kinetic).",
+    "phrase_structure": "Click trains during navigation/hunting. Rooster tail during high-speed travel.",
+    "timbre": "Echolocation: ultrasonic clicks (inaudible). Splash: explosive, percussive.",
+    "amplitude": "E=5. Silent voice + explosive physical presence. Energy from kinetic splash, not vocal.",
+    "tempo": "Click trains: rapid, continuous. Splash: sustained at speed.",
+    "context": "Deep channel waters. Surface during travel. Bow-riding boats.",
+    "regional_variation": "Minimal documented variation in NBHF clicks.",
+    "key_property": "NO AUDIBLE VOCALIZATION + ROOSTER-TAIL SPLASH. FIRST PHOCOENIDAE. NBHF stealth echolocation. 35 mph. E=5. v1.49.327."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Black body with large white flank/belly patch. Dorsal fin often white-tipped. Thick, muscular body. Built for speed and power.",
+    "diagnostic_mark": "Black-and-white tuxedo pattern. Rooster-tail splash at speed. Robust, thick body. Small triangular dorsal fin (often white-tipped).",
+    "seasonal_variation": "Minimal. Pattern consistent year-round.",
+    "swimming_pattern": "High-speed surface swimming with rooster-tail spray. Bow-riding. Dives to 500+ meters."
+  },
+  "physical_description": {
+    "overall": "Length: 1.8-2.2 m. Weight: 130-220 kg. Thick, muscular body. Small head. Small mouth with spade-shaped teeth. Robust for a porpoise.",
+    "diagnostic_mark": "Black-and-white pattern. Rooster-tail splash. Thick body. Small dorsal fin. Spade-shaped teeth (porpoise, not dolphin).",
+    "field_id": "Black-and-white small cetacean at high speed with distinctive rooster-tail spray. Thick body. Often bow-riding boats. Much smaller than orca. No visible beak."
+  },
+  "nodes": [
+    {
+      "id": "first-phocoenidae",
+      "type": "milestone",
+      "title": "First Phocoenidae -- Porpoises Enter",
+      "description": "First porpoise in the engine. First cetacean. New order (Cetacea). Phocoenidae family. NBHF echolocation as family-level trait. Porpoise vs dolphin distinction.",
+      "connections": ["rooster-tail", "stealth-echolocation"]
+    },
+    {
+      "id": "rooster-tail",
+      "type": "concept",
+      "title": "Rooster Tail -- Speed as Sound",
+      "description": "35 mph. V-shaped spray. Visible from 1+ mile. The 'sound' of a silent animal is its kinetic presence. E=5 from explosive splash, not vocalization.",
+      "connections": ["first-phocoenidae", "stealth-echolocation"]
+    },
+    {
+      "id": "stealth-echolocation",
+      "type": "concept",
+      "title": "Stealth Echolocation -- NBHF Clicks",
+      "description": ">100 kHz. Above human AND orca hearing. Navigate and hunt invisibly. Anti-predator adaptation. Silence as survival strategy. Phocoenidae family trait.",
+      "connections": ["first-phocoenidae", "rooster-tail"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-187",
+      "species": "Harbor Porpoise",
+      "relationship": "PHOCOENIDAE PAIR! Dall's (186, E=5) + Harbor (187, E=1). Same family. Speed vs stealth. Rooster tail vs pure silence."
+    },
+    {
+      "target": "SPS-185",
+      "species": "Sea Otter",
+      "relationship": "MARINE MAMMAL ERA! Mustelidae (185) to Phocoenidae (186). New family. 7 consecutive marine mammals."
+    },
+    {
+      "target": "SPS-188",
+      "species": "Pacific White-sided Dolphin",
+      "relationship": "CETACEAN PROGRESSION! Porpoise (186-187) to dolphin (188). Phocoenidae to Delphinidae. First to third cetacean."
+    },
+    {
+      "target": "S36-186",
+      "artist": "Erica Campbell",
+      "relationship": "THE CROSSOVER! Campbell crosses gospel/hip-hop. Dall's crosses deep water/explosive surface at 35 mph. Both defined by crossing energy."
+    }
+  ]
+}

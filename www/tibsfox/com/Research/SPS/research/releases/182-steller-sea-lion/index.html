@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 182&deg; &mdash; Steller Sea Lion (roaring bark) &mdash; First Otariidae &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C); color: white; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 2px 8px rgba(27, 94, 32, 0.3); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .otariidae-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .otariidae-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .otariidae-card p { color: #C8E6C9; }
+    .otariidae-card strong { color: #E8F5E9; }
+
+    .roar-card { background: linear-gradient(135deg, #BF360C, #D84315, #E64A19); border: 2px solid #BF360C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCCBC; }
+    .roar-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFE0B2; }
+    .roar-card p { color: #FFCCBC; }
+    .roar-card strong { color: #FFF3E0; }
+
+    .giant-card { background: linear-gradient(135deg, #263238, #37474F, #455A64); border: 2px solid #263238; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B0BEC5; }
+    .giant-card h3 { margin-top: 0; font-size: 1.1rem; color: #90A4AE; }
+    .giant-card p { color: #B0BEC5; }
+    .giant-card strong { color: #ECEFF1; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.family { background: #1B5E20; }
+    .theory-icon.roar { background: #BF360C; }
+    .theory-icon.giant { background: #263238; }
+    .theory-icon.endangered { background: #C62828; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #E8F5E9; color: #1B5E20; border: 1px solid #2E7D32; }
+    .theory-level.advanced { background: #FBE9E7; color: #BF360C; }
+    .theory-level.intermediate { background: #ECEFF1; color: #37474F; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .compare-table th { background: #1B5E20; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .compare-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .compare-table tr:nth-child(even) { background: #E8F5E9; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">182&deg;</div>
+      <div class="release-title-block">
+        <h2>Steller Sea Lion &mdash; Colony Roar</h2>
+        <div class="scientific"><em>Eumetopias jubatus</em> (Otariidae) &mdash; E=6 &mdash; FIRST OTARIIDAE</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST OTARIIDAE</strong> &mdash; eared seals enter the engine.
+      The <strong>largest sea lion in the world.</strong> Males up to
+      <strong>2,500 lbs.</strong> Colony roar = loudest PNW pinniped.
+      Named after <strong>Georg Steller</strong> (1741 Bering expedition).
+      <strong>Endangered</strong> (western DPS). E=6 maximum.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="otariidae-card">
+          <h3>First Otariidae &mdash; Eared Seals Enter</h3>
+          <p>
+            <strong>Otariidae</strong> (eared seals) distinguished from
+            <strong>Phocidae</strong> (true seals, 180&ndash;181) by:
+            external ear flaps, rotating hind flippers for walking,
+            long fore flippers for swimming. Three Otariidae entries:
+            <strong>Steller Sea Lion (182)</strong>, California Sea Lion (183),
+            Northern Fur Seal (184). The eared seal trio.
+          </p>
+        </div>
+
+        <div class="roar-card">
+          <h3>The Colony Roar &mdash; E=6 Maximum</h3>
+          <p>
+            The bull&rsquo;s roar: <strong>deep, sustained, thunderous.</strong>
+            At breeding rookeries, hundreds of animals create a
+            <strong>wall of sound.</strong> Bulls roaring, cows calling,
+            pups bleating. <strong>100&ndash;3000 Hz</strong> with rich
+            harmonics. The loudest pinniped vocalization in the PNW.
+            <strong>E=6 &mdash; the SPS ceiling.</strong>
+          </p>
+        </div>
+
+        <div class="giant-card">
+          <h3>The Largest Sea Lion &mdash; 2,500 lbs</h3>
+          <p>
+            Males: <strong>3.3 meters, 1,120 kg.</strong> Massive
+            forequarters, thick neck, sagittal crest. <strong>3x the weight
+            of females.</strong> Extreme sexual dimorphism drives the
+            harem-defense mating system. Roughly the weight of a
+            <strong>grizzly bear.</strong> Megafauna scale.
+          </p>
+        </div>
+
+        <h2>Pinniped Families in the Engine</h2>
+        <table class="compare-table">
+          <thead><tr><th>Family</th><th>Entries</th><th>Key Difference</th></tr></thead>
+          <tbody>
+            <tr><td>Phocidae (true seals)</td><td>180&ndash;181</td><td>No external ears, undulate on land</td></tr>
+            <tr><td>Otariidae (eared seals)</td><td>182&ndash;184</td><td>External ear flaps, walk on land</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-180 Harbor Seal</strong>
+            <p>PHOCIDAE vs OTARIIDAE! True seal (no external ears, E=4 bark) vs eared seal (external ears, E=6 roar). The fundamental pinniped split.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-183 California Sea Lion</strong>
+            <p>OTARIIDAE PAIR! Steller (182) and California (183) sea lions: comparison pair. Largest vs most familiar. Same family, different scale.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-184 Northern Fur Seal</strong>
+            <p>OTARIIDAE TRIO! Third and final eared seal. Fur seal vs sea lion within the family. Densest fur of any mammal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-182 Criminal Nation</strong>
+            <p>RAW POWER! Gangsta rap confrontation + sea lion roar. E=7 + E=6 = E=13 combined. Highest energy pair in the engine.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon family">O</div>
+            <div class="theory-content">
+              <h4>First Otariidae &mdash; Eared Seals</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>New pinniped family enters. External ear flaps, rotating flippers, fore-flipper swimming. Three entries planned (182-184).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon roar">R</div>
+            <div class="theory-content">
+              <h4>Colony Roar &mdash; E=6 Maximum</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Loudest PNW pinniped. Deep, sustained, thunderous. Colony cacophony at rookeries. Bull roar for territory and dominance.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon giant">G</div>
+            <div class="theory-content">
+              <h4>Largest Sea Lion &mdash; 2,500 lbs</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Males 3.3m, 1,120 kg. 3x female weight. Extreme sexual dimorphism. Megafauna scale. Named for Georg Steller.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon endangered" style="background: #C62828;">E</div>
+            <div class="theory-content">
+              <h4>Endangered Status</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Western DPS: ESA Endangered, ~80% decline. Eastern DPS: recovered and delisted (2013). Conservation success and ongoing crisis.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Steller Sea Lion</div><div class="stat-detail"><em>Eumetopias jubatus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Otariidae</div><div class="stat-detail">FIRST (eared seals)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Colony roar</div><div class="stat-detail">deep, sustained, thunderous</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #BF360C;">E = 6</div><div class="stat-detail">maximum (loudest pinniped)</div></div>
+        <div class="stat-card"><div class="stat-label">Male weight</div><div class="stat-value">Up to 2,500 lbs</div><div class="stat-detail">largest sea lion</div></div>
+        <div class="stat-card"><div class="stat-label">Male length</div><div class="stat-value">3.3 meters</div><div class="stat-detail">11 feet</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Endangered</div><div class="stat-detail">western DPS (ESA)</div></div>
+        <div class="stat-card"><div class="stat-label">Named for</div><div class="stat-value">Georg Steller</div><div class="stat-detail">1741 Bering expedition</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
