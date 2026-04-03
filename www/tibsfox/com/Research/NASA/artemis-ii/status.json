@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-03T03:30:00Z",
-  "source": "sweep-v1.2.20",
+  "updated": "2026-04-03T04:00:00Z",
+  "source": "sweep-v1.2.21",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST \u2014 MET +1d 05:00 \u2014 Integrity ~60,000 mi from Earth, outbound velocity ~6,000 mph. Crew in rest period. No trajectory correction burns reported. Lunar closest approach in ~2.5 days. All systems nominal. 5 new music theory knowledge nodes added to vehicle model.",
+    "status": "TRANSLUNAR COAST \u2014 MET +1d 05:30 \u2014 Integrity ~65,000 mi from Earth, outbound. Crew rest period continues. Flight Day 3 tomorrow: outbound trajectory correction #1 (Hansen preps), CPR demo in microgravity, Koch tests emergency DSN comms. Physarum slime mold network sim deployed to forest ecosystem. 4 new papers cataloged.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -112,6 +112,10 @@
     "tdrs_issue": "Brief loss of two-way comms post-orbit insertion. Traced to ground TDRS configuration. Resolved, no mission impact."
   },
   "announcements": [
+    {
+      "time": "2026-04-03T03:30:00Z",
+      "text": "v1.2.21: MET+1d05:30 9pm PDT. Translunar coast night watch. Papers #31-34 cataloged (Kuramoto 50yr, proportional coupling, HERA, Typed CoT). AI coverage analysis page published. Physarum slime mold network sim deployed to forest ecosystem. KPAE 7.5C calm CLR, cooling into clear night. FD3 tomorrow: trajectory correction #1."
+    },
     {
       "time": "2026-04-03T03:30:00Z",
       "text": "v1.2.20: MET+1d05:00 8pm PDT. Translunar coast steady state. Backfilled sweeps 19-20. 5 music theory knowledge nodes added: subtractive synthesis, patch routing as file tree, oscillator layering, condensation. KPAE 8.0C calm CLR post-frontal clearing. Crew resting. No trajectory corrections reported."
