@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-03T22:00:00Z",
-  "source": "sweep-v1.3.15",
+  "updated": "2026-04-03T22:30:00Z",
+  "source": "sweep-v1.3.15.2",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST — MET +1d 23:25 — Integrity ~145,000 mi from Earth, outbound. FD3: TC#1 cancelled (path correct). Crew awake, FD3 ops underway. Session 5: ALICE + LHCb CERN pages (all 4 experiments complete), CSP Pathway 2 (Web), space weather feed page, MUK stats fixed, Julia 1.12.5 installed. FD4 next: TC#2, lunar geography review, celestial photography.",
+    "status": "TRANSLUNAR COAST — MET +1d 23:55 — Integrity ~148,000 mi from Earth, outbound. FD3: TC#1 cancelled (path correct). Session 5 productive: all 4 CERN experiments, all 6 CSP pathways, space weather feed, OPEN #19 (file-native agents), trajectory vis rebuilt, 2 mission skills installed (vision-to-mission + research-mission-generator), 7 fact-checks cleared, DRP AREDN URL fixed. FD4 next: TC#2, lunar geography, celestial photography.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
