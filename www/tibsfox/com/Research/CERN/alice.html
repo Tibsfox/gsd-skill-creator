@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALICE &mdash; A Large Ion Collider Experiment | CERN | Tibsfox Research</title>
+<style>
+:root {
+  --cern-blue: #003399;
+  --cern-light: #4a7aba;
+  --cern-gold: #d4a843;
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--cern-gold); text-decoration:none; }
+a:hover { color:#f0d070; }
+
+header {
+  background:linear-gradient(135deg, #000820 0%, var(--cern-blue) 30%, #001a4d 60%, var(--bg) 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:3px solid var(--cern-gold);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 50% 60% at 50% 40%, rgba(0,51,153,0.15) 0%, transparent 70%);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+header .subtitle { color:var(--cern-gold); font-size:0.9rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a.active { color:var(--cern-gold); }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1.3rem; color:#fff; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+h3 { font-size:1rem; color:var(--cern-gold); margin:1.5rem 0 0.5rem; font-weight:600; }
+p { margin:0.6rem 0; font-size:0.9rem; }
+
+.spec-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; }
+.spec-table th { text-align:left; color:var(--cern-gold); font-weight:600; padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-family:system-ui,sans-serif; }
+.spec-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.spec-table td:first-child { color:var(--cern-light); white-space:nowrap; }
+
+.layer {
+  background:var(--panel); border:1px solid var(--border); border-radius:4px;
+  padding:1.2rem 1.5rem; margin:1rem 0; border-left:3px solid var(--cern-blue);
+}
+.layer h4 { color:var(--cern-light); font-size:0.9rem; margin-bottom:0.4rem; }
+.layer p { font-size:0.85rem; font-family:system-ui,sans-serif; }
+
+.highlight { color:var(--cern-gold); font-weight:600; }
+
+.callout {
+  background:rgba(212,168,67,0.06); border:1px solid rgba(212,168,67,0.15); border-radius:4px;
+  padding:1rem 1.2rem; margin:1rem 0; font-size:0.85rem; font-family:system-ui,sans-serif;
+}
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ALICE</h1>
+  <div class="subtitle">A Large Ion Collider Experiment &mdash; recreating the first microseconds after the Big Bang</div>
+  <nav>
+    <a href="index.html">CERN Home</a>
+    <a href="atlas.html">ATLAS</a>
+    <a href="cms.html">CMS</a>
+    <a class="active" href="alice.html">ALICE</a>
+    <a href="wlcg.html">WLCG</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+<h2>The Question</h2>
+
+<p>What happens when you heat matter to <span class="highlight">4 trillion degrees Celsius</span> &mdash; 250,000 times hotter than the center of the Sun? The quarks and gluons that are normally confined inside protons and neutrons break free and form a new state of matter: the <span class="highlight">quark-gluon plasma</span> (QGP). This is the state of the entire universe for the first few microseconds after the Big Bang, before matter as we know it condensed out.</p>
+
+<p>ALICE exists to study this state. While ATLAS and CMS are general-purpose detectors optimized for proton-proton collisions and rare events like the Higgs, ALICE is purpose-built for the extreme environment of heavy-ion collisions &mdash; lead nuclei smashing into each other at 99.9999991% the speed of light.</p>
+
+<table class="spec-table">
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Length</td><td>26 meters</td></tr>
+<tr><td>Height</td><td>16 meters</td></tr>
+<tr><td>Weight</td><td>10,000 tonnes</td></tr>
+<tr><td>Collision system</td><td>Pb-Pb (lead-lead), p-Pb, p-p</td></tr>
+<tr><td>Energy per nucleon pair</td><td>5.02 TeV (Pb-Pb), 13.6 TeV (p-p)</td></tr>
+<tr><td>Particles per Pb-Pb collision</td><td>Up to ~30,000 charged particles</td></tr>
+<tr><td>Collaboration</td><td>~1,900 physicists from 176 institutes, 40 countries</td></tr>
+<tr><td>Location</td><td>Point 2, Saint-Genis-Pouilly, France, 56m underground</td></tr>
+<tr><td>Operating since</td><td>2009 (first Pb-Pb collisions: November 2010)</td></tr>
+</table>
+
+<h2>The Challenge: 30,000 Particles at Once</h2>
+
+<p>A proton-proton collision at the LHC typically produces a few dozen particles. A lead-lead collision produces up to <span class="highlight">30,000 charged particles</span> in a single event. This is ALICE&rsquo;s fundamental challenge: tracking and identifying every one of those particles, measuring their momenta, determining their species (pion, kaon, proton, electron, muon), and reconstructing the collective behavior of the QGP fireball from which they emerged.</p>
+
+<p>ATLAS and CMS handle this multiplicity too, but their designs prioritize high-rate trigger decisions and rare-event searches. ALICE prioritizes particle identification across a wide momentum range &mdash; it needs to tell a pion from a kaon from a proton, event by event, down to very low momenta where collective QGP effects are strongest.</p>
+
+<h2>Detector Systems</h2>
+
+<div class="layer">
+<h4>Inner Tracking System (ITS) &mdash; Silicon Vertex Detector</h4>
+<p>Seven concentric layers of silicon sensors surrounding the interaction point. The innermost three layers are pixel detectors with 10 billion pixels (after the Run 3 upgrade) &mdash; the highest granularity of any LHC detector. Resolution: 5 micrometers. The ITS reconstructs primary vertices, identifies secondary vertices from particle decays (critical for measuring charm and beauty quarks produced in the QGP), and provides standalone tracking at very low momenta (&lt;200 MeV/c) where the TPC cannot reach.</p>
+</div>
+
+<div class="layer">
+<h4>Time Projection Chamber (TPC) &mdash; The Heart of ALICE</h4>
+<p>The largest TPC ever built: a gas-filled cylinder 5 meters long, 5 meters in diameter, filled with a Ne-CO&#8322;-N&#8322; gas mixture. Charged particles ionize the gas as they pass through; the freed electrons drift in a uniform electric field toward readout chambers at each end. The drift time gives the particle&rsquo;s position along the beam axis; the position on the readout plane gives the transverse coordinates. Each particle leaves a 3D track of up to 159 space points. The amount of ionization along the track (dE/dx) identifies the particle species. The TPC can simultaneously reconstruct thousands of overlapping tracks in a single Pb-Pb event &mdash; the defining capability of ALICE.</p>
+</div>
+
+<div class="layer">
+<h4>Time-of-Flight (TOF) Detector</h4>
+<p>A barrel of 1,593 multigap resistive plate chambers (MRPCs) at a radius of 3.7 meters. Measures particle arrival times with ~50 picosecond resolution. Combined with momentum from the TPC, the time of flight gives the particle mass &mdash; and therefore its identity. Separates pions from kaons up to 2.5 GeV/c and kaons from protons up to 4 GeV/c. This is particle identification by direct mass measurement, the most fundamental method possible.</p>
+</div>
+
+<div class="layer">
+<h4>Transition Radiation Detector (TRD)</h4>
+<p>Six layers of radiator material (polypropylene fiber mats) and xenon/CO&#8322; drift chambers. When high-energy electrons cross the boundary between materials with different dielectric constants, they emit transition radiation &mdash; X-ray photons. Heavier particles (pions) at the same momentum do not. This separates electrons from pions above 1 GeV/c, critical for studying heavy-quark decays (J/&psi;, &Upsilon;) in the QGP environment.</p>
+</div>
+
+<div class="layer">
+<h4>Photon Spectrometer (PHOS) &amp; Electromagnetic Calorimeter (EMCal)</h4>
+<p>PHOS: 17,920 lead tungstate crystals (same material as CMS ECAL, but covering a smaller solid angle) for precision photon and neutral pion measurements. EMCal: lead-scintillator sampling calorimeter covering a larger acceptance for jet measurements. Together they measure direct photons (emitted from the QGP itself &mdash; the only electromagnetic probe that escapes the fireball without rescattering) and reconstruct jets to study how they lose energy traversing the QGP (jet quenching).</p>
+</div>
+
+<div class="layer">
+<h4>Muon Spectrometer &mdash; Forward Arm</h4>
+<p>A dedicated forward spectrometer covering pseudorapidity &minus;4 &lt; &eta; &lt; &minus;2.5. A 3 Tesla dipole magnet, 14 planes of tracking chambers, and trigger chambers behind an iron absorber wall. Measures muon pairs from J/&psi; and &Upsilon; decays &mdash; bound states of charm-anticharm and beauty-antibeauty quarks. In a QGP, these bound states &ldquo;melt&rdquo; because the color force is screened by the surrounding free quarks. The suppression pattern of these states is a thermometer for the QGP temperature.</p>
+</div>
+
+<h2>What ALICE Has Found</h2>
+
+<h3>Quark-Gluon Plasma Is a Perfect Liquid</h3>
+<p>Theory predicted the QGP would behave like an ideal gas &mdash; free quarks and gluons bouncing around independently. ALICE (and RHIC before it) found the opposite: the QGP flows like a <span class="highlight">nearly perfect liquid</span> with the lowest viscosity-to-entropy ratio of any known substance. Collective flow patterns &mdash; elliptic flow, triangular flow, higher harmonics &mdash; reveal that the QGP responds to the initial collision geometry within 1 fm/c (~3 &times; 10&sup2;&sup3; seconds). This is hydrodynamics at the quark scale.</p>
+
+<h3>Jet Quenching</h3>
+<p>When a high-energy parton (quark or gluon) is produced in the initial collision, it must traverse the QGP to escape. The QGP is so dense that the parton loses energy &mdash; the jet is &ldquo;quenched.&rdquo; ALICE measures this by comparing jet spectra in Pb-Pb collisions to those in p-p collisions (where no QGP forms). The suppression factor (R<sub>AA</sub>) reaches as low as 0.1 &mdash; meaning 90% of the jet&rsquo;s energy is absorbed by the medium. The QGP is effectively opaque to colored probes.</p>
+
+<h3>Strangeness Enhancement</h3>
+<p>Strange quarks are heavier than up and down quarks, so they&rsquo;re rarely produced in normal collisions. But in a QGP, the high temperature provides enough energy to create strange quark-antiquark pairs copiously. ALICE observes enhanced production of strange particles (&Lambda;, &Xi;, &Omega; baryons, K mesons) in Pb-Pb collisions &mdash; and, surprisingly, even in high-multiplicity p-p collisions. This was one of the first hints that collective QGP-like behavior might occur in smaller systems than expected.</p>
+
+<h3>Quarkonium Suppression &amp; Regeneration</h3>
+<p>The J/&psi; meson (a bound charm-anticharm pair) was predicted to &ldquo;melt&rdquo; in the QGP as the color screening length becomes shorter than the binding radius. ALICE confirmed this suppression &mdash; but also discovered that at LHC energies, so many charm quarks are produced that J/&psi; mesons are <em>regenerated</em> by recombination of charm quarks from different original pairs. Suppression at forward rapidity, regeneration at mid-rapidity. The QGP destroys and creates bound states simultaneously.</p>
+
+<div class="callout">
+<strong>The temperature:</strong> ALICE measures the QGP temperature indirectly through thermal photon spectra and quarkonium suppression patterns. The initial temperature in central Pb-Pb collisions at LHC energies exceeds <strong>300 MeV</strong> (~3.5 &times; 10<sup>12</sup> K) &mdash; well above the QCD phase transition temperature of ~155 MeV where hadrons dissolve into quarks and gluons.
+</div>
+
+<h2>The Run 3 Upgrade</h2>
+
+<p>For LHC Run 3 (2022&ndash;2025), ALICE underwent its most significant upgrade:</p>
+
+<table class="spec-table">
+<tr><th>System</th><th>Upgrade</th></tr>
+<tr><td>ITS</td><td>Replaced with 7 layers of ALPIDE monolithic active pixel sensors (MAPS). 12.5 billion pixels. 10&times; improvement in pointing resolution. 100&times; faster readout.</td></tr>
+<tr><td>TPC</td><td>Multi-wire proportional chambers replaced with Gas Electron Multiplier (GEM) stacks for continuous (triggerless) readout at 50 kHz Pb-Pb interaction rate.</td></tr>
+<tr><td>Readout</td><td>Continuous readout replaces triggered readout. All events recorded. Data rate: 3.5 TB/s raw, compressed to ~100 GB/s for storage.</td></tr>
+<tr><td>Online computing</td><td>GPU-based O&#178; framework reconstructs events in real time &mdash; 500,000 TPC tracks per second on GPU farm.</td></tr>
+<tr><td>MFT</td><td>New Muon Forward Tracker adds vertex resolution to the muon arm for the first time, enabling separation of prompt J/&psi; from displaced beauty decays.</td></tr>
+</table>
+
+<p>The upgrade transforms ALICE from a triggered detector (recording selected events) to a <span class="highlight">continuous streaming detector</span> &mdash; every interaction is recorded and reconstructed. This is a fundamentally different computing paradigm: the data rate increases by a factor of 100, and the physics filtering happens in software on GPUs, not in hardware triggers.</p>
+
+<h2>Connections to Our Work</h2>
+
+<h3>Continuous Readout &harr; Sweep Cadence</h3>
+<p>ALICE&rsquo;s Run 3 upgrade moved from triggered (selective) to continuous (everything) readout. Our sweep cadence does the same &mdash; every hour is recorded, no gaps. The coverage table is our continuous readout log. Missing an hour is the detector equivalent of dead time: you can never get those events back.</p>
+
+<h3>QGP as Perfect Liquid &harr; Emergent Behavior</h3>
+<p>The QGP was expected to be a weakly-interacting gas. Instead it&rsquo;s a strongly-coupled liquid with collective flow. Our muse team was expected to be independent agents executing tasks. Instead they exhibit emergent coordination &mdash; Cedar&rsquo;s filtering shapes Hemlock&rsquo;s scheduling, which shapes Willow&rsquo;s memory, which feeds back to Cedar. Strong coupling produces collective behavior that the individual components don&rsquo;t predict.</p>
+
+<h3>Strangeness Enhancement &harr; Unexpected Signals in Small Systems</h3>
+<p>ALICE found QGP-like behavior in p-p collisions &mdash; systems too small to form a QGP according to theory. We find orchestration patterns in two-agent systems that were designed for convoy-scale operations. When the physics is right, the effect appears regardless of system size. Don&rsquo;t assume small means simple.</p>
+
+<h3>Jet Quenching &harr; Context Pollution</h3>
+<p>A jet traversing the QGP loses energy to the medium. A signal traversing a noisy context window loses information to irrelevant tokens. Both are attenuation in a dense medium. ALICE quantifies this with R<sub>AA</sub>; our <a href="../OPEN/problems/context-pollution.html">context pollution research</a> quantifies it with retention metrics. Same physics, different substrates.</p>
+
+<h3>30,000 Tracks &harr; High-Multiplicity Data Streams</h3>
+<p>The TPC reconstructs 30,000 tracks simultaneously in a single event. The key is that every track is individually identified &mdash; species, momentum, charge. A co-op data network ingesting thousands of sensor streams needs the same capability: not just aggregate statistics, but per-stream identification and quality tracking. The ALICE ITS/TPC/TOF pipeline is a particle-identification cascade; our data pipeline needs an equivalent sensor-identification cascade.</p>
+
+</main>
+
+<footer>
+  <a href="index.html">CERN Home</a> &middot; <a href="atlas.html">ATLAS</a> &middot; <a href="cms.html">CMS</a> &middot; <a href="wlcg.html">WLCG Grid</a> &middot; <a href="../index.html">Research Index</a><br>
+  Sources: <a href="https://alice.cern">alice.cern</a> &middot; ALICE Collaboration, JINST 3 (2008) S08002 &middot; Int. J. Mod. Phys. A 29 (2014) 1430044<br>
+  Last updated: 2026-04-03T21:30Z (sweep v1.3.14.2)
+</footer>
+
+</body>
+</html>
