@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATLAS &mdash; A Toroidal LHC ApparatuS | CERN | Tibsfox Research</title>
+<style>
+:root {
+  --cern-blue: #003399;
+  --cern-light: #4a7aba;
+  --cern-gold: #d4a843;
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--cern-gold); text-decoration:none; }
+a:hover { color:#f0d070; }
+
+header {
+  background:linear-gradient(135deg, #000820 0%, var(--cern-blue) 30%, #001a4d 60%, var(--bg) 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:3px solid var(--cern-gold);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 50% 60% at 50% 40%, rgba(0,51,153,0.15) 0%, transparent 70%);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+header .subtitle { color:var(--cern-gold); font-size:0.9rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a.active { color:var(--cern-gold); }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1.3rem; color:#fff; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+h3 { font-size:1rem; color:var(--cern-gold); margin:1.5rem 0 0.5rem; font-weight:600; }
+p { margin:0.6rem 0; font-size:0.9rem; }
+
+.spec-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; }
+.spec-table th { text-align:left; color:var(--cern-gold); font-weight:600; padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-family:system-ui,sans-serif; }
+.spec-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.spec-table td:first-child { color:var(--cern-light); white-space:nowrap; }
+
+.layer {
+  background:var(--panel); border:1px solid var(--border); border-radius:4px;
+  padding:1.2rem 1.5rem; margin:1rem 0; border-left:3px solid var(--cern-blue);
+}
+.layer h4 { color:var(--cern-light); font-size:0.9rem; margin-bottom:0.4rem; }
+.layer p { font-size:0.85rem; font-family:system-ui,sans-serif; }
+
+.highlight { color:var(--cern-gold); font-weight:600; }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ATLAS</h1>
+  <div class="subtitle">A Toroidal LHC ApparatuS &mdash; the largest particle detector ever built</div>
+  <nav>
+    <a href="index.html">CERN Home</a>
+    <a class="active" href="atlas.html">ATLAS</a>
+    <a href="wlcg.html">WLCG</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+<h2>The Machine</h2>
+
+<p>ATLAS is one of two general-purpose detectors at the Large Hadron Collider. It sits in a cavern 100 meters underground at Point 1 on the LHC ring, near the CERN main site in Meyrin, Switzerland. It is the <span class="highlight">largest volume detector</span> ever constructed for a particle collider.</p>
+
+<table class="spec-table">
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Length</td><td>46 meters (half the length of a Boeing 747)</td></tr>
+<tr><td>Diameter</td><td>25 meters (height of a 7-story building)</td></tr>
+<tr><td>Weight</td><td>7,000 tonnes</td></tr>
+<tr><td>Channels</td><td>~1 billion readout channels</td></tr>
+<tr><td>Collaboration</td><td>5,500+ physicists from 100+ countries</td></tr>
+<tr><td>Data rate</td><td>~1 PB/sec raw; trigger reduces to ~1 GB/sec written</td></tr>
+<tr><td>Bunch crossing rate</td><td>40 MHz (25 ns between crossings)</td></tr>
+<tr><td>Collisions per crossing</td><td>~25 simultaneous (pileup)</td></tr>
+<tr><td>Operating since</td><td>2008 (first beams), 2010 (first physics)</td></tr>
+<tr><td>Location</td><td>Point 1, Meyrin, Switzerland, 100m underground</td></tr>
+</table>
+
+<h2>Detector Layers</h2>
+
+<p>ATLAS is built like an onion &mdash; concentric layers, each measuring different properties of particles produced in collisions. Particles travel outward from the collision point through each layer. What they leave behind (or don&rsquo;t) tells physicists what they are.</p>
+
+<div class="layer">
+<h4>Inner Detector &mdash; Tracking</h4>
+<p>Closest to the collision point. Immersed in a 2 Tesla solenoid magnetic field. Charged particles curve in the field &mdash; the curvature measures their momentum, the direction of curvature identifies their charge. Three sub-systems: pixel detector (92 million pixels, closest to beam), semiconductor tracker (SCT), and transition radiation tracker (TRT). Spatial resolution: 10 micrometers.</p>
+</div>
+
+<div class="layer">
+<h4>Electromagnetic Calorimeter &mdash; Electrons &amp; Photons</h4>
+<p>Liquid argon (LAr) sampling calorimeter with lead absorber plates in an accordion geometry. Electrons and photons create electromagnetic showers &mdash; cascading pair production and bremsstrahlung. The shower shape and energy deposit identify the particle and measure its energy. The accordion geometry ensures no dead zones. Operating temperature: &minus;183&deg;C (liquid argon boiling point).</p>
+</div>
+
+<div class="layer">
+<h4>Hadronic Calorimeter &mdash; Protons, Neutrons, Pions</h4>
+<p>Tile calorimeter: steel absorber plates interleaved with scintillating tiles. Hadrons (particles made of quarks) create hadronic showers &mdash; nuclear interactions that spray secondary particles. The barrel uses iron/scintillator tiles; the endcaps use liquid argon with copper absorbers. Together with the EM calorimeter, these measure the total energy of every particle except muons and neutrinos.</p>
+</div>
+
+<div class="layer">
+<h4>Muon Spectrometer &mdash; The Outermost Layer</h4>
+<p>The defining feature of ATLAS and the reason for its size. Eight superconducting air-core toroid magnets (each 25m long, the largest ever built) create a toroidal magnetic field. Muons &mdash; the only charged particles that pass through the calorimeters without stopping &mdash; curve in this field. Four types of muon chambers measure their trajectories. The name ATLAS comes from this system: <em>A Toroidal LHC ApparatuS</em>.</p>
+</div>
+
+<div class="layer">
+<h4>Missing Transverse Energy &mdash; The Invisible</h4>
+<p>Neutrinos (and hypothetical dark matter particles) pass through the entire detector without interacting. ATLAS detects them by what&rsquo;s <em>missing</em>: conservation of momentum means the total transverse momentum of all detected particles should be zero. Any imbalance &mdash; missing transverse energy (MET) &mdash; signals an invisible particle carried away momentum. This is how ATLAS searches for dark matter.</p>
+</div>
+
+<h2>The Higgs Discovery</h2>
+
+<p>On <span class="highlight">July 4, 2012</span>, the ATLAS and CMS collaborations independently announced the observation of a new particle consistent with the Higgs boson, at a mass of approximately 125 GeV/c&sup2;. The statistical significance exceeded 5 sigma &mdash; a 1-in-3.5-million probability of being a fluctuation.</p>
+
+<p>ATLAS observed the Higgs primarily through two channels:</p>
+
+<ul style="margin:0.5rem 0 1rem 1.5rem; font-size:0.9rem;">
+<li><strong>H &rarr; &gamma;&gamma;</strong> (Higgs decaying to two photons) &mdash; clean signature in the EM calorimeter, narrow mass peak above smooth background</li>
+<li><strong>H &rarr; ZZ* &rarr; 4 leptons</strong> (Higgs to four electrons or muons via Z bosons) &mdash; the "golden channel," very low background, precise mass measurement</li>
+</ul>
+
+<p>The discovery confirmed the Brout-Englert-Higgs mechanism proposed in 1964: a quantum field permeating all space gives mass to fundamental particles through their interaction with it. Fran&ccedil;ois Englert and Peter Higgs received the 2013 Nobel Prize in Physics.</p>
+
+<h2>The Trigger System</h2>
+
+<p>At 40 million bunch crossings per second with ~25 collisions each, ATLAS produces roughly <span class="highlight">1 billion events per second</span>. Storing all of them would require ~1 PB/s &mdash; impossible. The trigger system decides which events to keep in real time.</p>
+
+<table class="spec-table">
+<tr><th>Level</th><th>Decision Time</th><th>Rate In</th><th>Rate Out</th><th>Method</th></tr>
+<tr><td>Level 1 (hardware)</td><td>2.5 &micro;s</td><td>40 MHz</td><td>~100 kHz</td><td>Custom ASICs, coarse calorimeter + muon data</td></tr>
+<tr><td>High-Level Trigger (software)</td><td>~200 ms</td><td>100 kHz</td><td>~1 kHz</td><td>Full reconstruction on CPU/GPU farm</td></tr>
+<tr><td>Written to disk</td><td>&mdash;</td><td>1 kHz</td><td>~1 GB/s</td><td>Permanent storage via WLCG</td></tr>
+</table>
+
+<p>The trigger reduces 1 billion events/second to ~1,000 written to storage &mdash; a rejection factor of 1 million. Every event that makes it to disk was selected in real time because its physics signature matched patterns worth investigating. The trigger is making a scientific judgment call 40 million times per second.</p>
+
+<h2>Connections to Our Work</h2>
+
+<h3>ATLAS Trigger &harr; Cedar&rsquo;s Filter</h3>
+<p>The ATLAS trigger decides what to keep and what to discard based on pattern matching. Cedar does the same for the trust system &mdash; filtering signal from noise, keeping what matters, discarding what doesn&rsquo;t. Both operate under extreme time pressure with high rejection rates. Both must never miss a rare signal (a Higgs event, a trust violation).</p>
+
+<h3>1 Billion Channels &harr; The Co-op Mesh</h3>
+<p>ATLAS reads out 1 billion channels simultaneously and reconstructs a coherent picture of each collision. A co-op network with thousands of nodes &mdash; weather stations, food production, species surveys, demand signals &mdash; faces the same challenge: aggregate many data streams into a coherent picture of the system state.</p>
+
+<h3>WLCG Grid &harr; Gastown Convoy</h3>
+<p>ATLAS distributes its data processing across 170+ computing centers in 42 countries via the <a href="wlcg.html">Worldwide LHC Computing Grid</a>. Our Gastown chipset distributes work across agent convoys. Same pattern: partition the problem, distribute to available compute, aggregate results. See the <a href="wlcg.html">12-row Gastown mapping table</a>.</p>
+
+<h3>Missing Energy &harr; What&rsquo;s Not There</h3>
+<p>ATLAS detects neutrinos by measuring what&rsquo;s missing. In systems engineering, the most important signal is often the absence: the check-in that didn&rsquo;t happen, the metric that stopped updating, the agent that went silent. Hawk watches for what&rsquo;s NOT there.</p>
+
+</main>
+
+<footer>
+  <a href="index.html">CERN Home</a> &middot; <a href="wlcg.html">WLCG Grid</a> &middot; <a href="../index.html">Research Index</a><br>
+  Sources: <a href="https://atlas.cern">atlas.cern</a> &middot; ATLAS Collaboration, Phys. Lett. B 716 (2012) 1&ndash;29 &middot; arXiv:1207.7214<br>
+  Last updated: 2026-04-03T20:00Z (sweep v1.3.13)
+</footer>
+
+</body>
+</html>
