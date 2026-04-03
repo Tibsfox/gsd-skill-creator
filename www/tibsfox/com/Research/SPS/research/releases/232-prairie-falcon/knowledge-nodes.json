@@ -1,0 +1,36 @@
+{
+  "degree": 232, "project": "SPS", "name": "Prairie Falcon", "slug": "232-prairie-falcon",
+  "species": "Falco mexicanus", "family": "Falconidae", "order": "Falconiformes",
+  "common_name": "Prairie Falcon", "sound_type": "Alarm call -- sharp staccato kik-ki-ki-ki-ki",
+  "energy": 6,
+  "ecosystem": "Canyon, arid cliff, Columbia Plateau basalt. Eastern PNW primary.",
+  "season": "Resident (eastern PNW year-round; some altitudinal migration to valley floors in winter)",
+  "conservation": "Least Concern (IUCN). Stable. 5,000-10,000 pairs US. Ground squirrel poisoning primary threat.",
+  "vocalization": {
+    "type": "alarm call",
+    "description": "Sharp staccato kik-ki-ki-ki. Shorter note attack than Peregrine kak. 5-15+ notes per burst.",
+    "frequency_hz": "2500-7000",
+    "character": "Falconidae family signature: rapid staccato. Slightly lower and shorter-noted than Peregrine.",
+    "function": "Nest defense (aggressive), territorial alarm, stoop accompaniment"
+  },
+  "ecology": {
+    "nesting": "Natural cliff ledges only (not urban buildings). Basalt canyon walls, granite outcrops, sandstone escarpments.",
+    "hunting": "Low fast pursuit over open terrain (primary). High-altitude stoop (secondary). More horizontal than Peregrine.",
+    "prey": "Ground squirrels (primary breeding season), horned larks, meadowlarks, starlings, other open-country birds",
+    "field_mark": "Dark axillary patch (underwing base) -- diagnostic field mark distinguishing from Peregrine in flight"
+  },
+  "taxonomy_note": {
+    "endemic": "North American endemic. Does not breed in Europe, Asia, South America.",
+    "monotypic": "No recognized subspecies.",
+    "mexicanus_etymology": "Type specimen from Mexico; primary range is western US, not Mexico",
+    "falco_genus": "Second Falco in engine (231 Peregrine). Ecological contrast: cosmopolitan/urban vs. endemic/canyon."
+  },
+  "connections": [
+    {"degree": 232, "type": "s36_pair", "description": "Gruntruck (E=7, hard rock, Roadrunner, Capitol Hill). E=13. Canyon specialist meets underground metal lineage."},
+    {"degree": 231, "type": "falcon_pair", "description": "Peregrine Falcon (FIRST FALCONIDAE, E=7). Two Falcos: cosmopolitan/urban vs. endemic/canyon."},
+    {"degree": 229, "type": "eastern_pnw", "description": "Ferruginous Hawk (eastern PNW shrub-steppe). Both eastern PNW specialists, open-country hunters."},
+    {"degree": 221, "type": "raptor_arc", "description": "Bald Eagle (FIRST ACCIPITRIDAE). Raptor arc opened 221. Prairie Falcon at 232 closes the initial 12-degree run."}
+  ],
+  "tags": ["falconidae", "prairie-falcon", "canyon-specialist", "north-american-endemic", "eastern-pnw", "columbia-plateau", "basalt-canyon", "axillary-patch", "resident", "second-falconidae", "raptor-arc-closes"],
+  "milestones": ["SECOND FALCONIDAE", "NORTH AMERICAN ENDEMIC DOCUMENTED", "CANYON HABITAT DOCUMENTED", "RAPTOR ARC 221-232 CLOSES", "THREE RAPTOR FAMILIES COMPLETE"]
+}
