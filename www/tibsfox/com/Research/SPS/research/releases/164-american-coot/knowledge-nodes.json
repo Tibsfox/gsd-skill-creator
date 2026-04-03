@@ -1,0 +1,110 @@
+{
+  "degree": 164,
+  "species": "American Coot",
+  "scientific_name": "Fulica americana",
+  "slug": "164-american-coot",
+  "sound_type": "clucking + grunting flock -- continuous varied stream of clucking, grunting, cackling from social flocks on open water; E=4",
+  "energy": 4,
+  "ecosystem": "Open water -- lakes, ponds, slow rivers, reservoirs, park ponds. Swims on open water. Year-round resident.",
+  "season": "Year-round resident. Flocks largest in winter. Vocalizations year-round.",
+  "family": "Rallidae (3rd entry -- cluster complete)",
+  "order": "Gruiformes",
+  "csv_substitute": false,
+  "original_species": "American Coot",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.30,
+    "description": "American Coot on lakes, ponds, and reservoirs throughout Puget Sound lowlands. Common and conspicuous."
+  },
+  "taxonomy_note": {
+    "description": "THIRD RALLIDAE. Cluster complete (161-162, 164). Looks like a duck but is a rail. White bill, lobed toes, head-bobbing swim. Most frequently misidentified waterbird. 'Not a duck.'",
+    "current_family": "Rallidae (3rd entry, cluster complete)",
+    "new_family": false,
+    "family_count_in_engine": "Rallidae: third and final in cluster. Virginia Rail (161) + Sora (162) + American Coot (164).",
+    "name_etymology": "Fulica from Latin 'fulica' (coot). americana for American.",
+    "genus_note": "Fulica -- the coots. Open-water rails with lobed toes. Worldwide.",
+    "order_note": "Gruiformes. Third entry.",
+    "family_position": "Third Rallidae. Cluster complete. The visible rail. 'Not a duck.'"
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-5000 Hz across repertoire. Clucks lower (500-2000 Hz), cackles higher (2000-5000 Hz).",
+    "peak_energy_band_hz": "1000-3000 Hz. Aggregate flock sound.",
+    "song_frequency_hz": "500-5000 Hz varied.",
+    "song_duration_s": "Continuous flock sound. Individual calls: 0.1-0.5 seconds. Aggregate: unbroken while active.",
+    "note_structure": "Multiple call types: clucks ('kuk-kuk-kuk'), grunts ('unh-unh'), cackles ('ka-ka-ka-ka'), pips (sharp single notes). Continuous stream.",
+    "note_types": "Flock chatter (primary), territorial aggression 'KA-KA-KA-KA!' (loud, harsh), night calls (soft grunts/pips).",
+    "phrase_structure": "No structured phrase. Continuous stream of varied calls from social flock. Individual calls brief, aggregate unbroken.",
+    "timbre": "Varied. Clucks dry and sharp. Grunts nasal. Cackles harsh. The flock sound is a busy, chattering ambiance.",
+    "amplitude": "E=4. Individual calls moderate. Flock aggregate substantial. Aggression calls significantly louder.",
+    "tempo": "Rapid, overlapping. Multiple birds calling simultaneously.",
+    "context": "Social interaction. Flock cohesion. Feeding. Territorial aggression. Year-round.",
+    "regional_variation": "Minimal. Consistent across range.",
+    "key_property": "CLUCKING + GRUNTING FLOCK -- continuous social vocalization. THIRD RALLIDAE. 'Not a duck.' White bill, lobed toes. Aggressive foot-fighting. E=4. v1.49.304."
+  },
+  "plumage": {
+    "overall": "Black body. White bill with dark subterminal band and reddish frontal shield. Green legs.",
+    "diagnostic_mark": "White chicken-like bill (NOT flat like a duck). Black body. Head-bobbing swim. Lobed toes visible when walking.",
+    "seasonal_variation": "Minimal. Frontal shield slightly redder in breeding season.",
+    "flight_pattern": "Labored takeoff with running start across water. Stronger in sustained flight. Feet trail behind."
+  },
+  "physical_description": {
+    "overall": "Length: 34-43 cm. Weight: 430-850 g. Duck-sized. Stocky.",
+    "diagnostic_mark": "White bill. Black body. Green legs. Lobed toes. Head-bobbing swim.",
+    "field_id": "On open water in flocks. Looks like a duck but: white bill (not flat), head bobs while swimming, lobed toes (not webbed). If it has a white bill and bobs its head, it's a coot, not a duck."
+  },
+  "nodes": [
+    {
+      "id": "flock-vocalization",
+      "type": "concept",
+      "title": "Flock Vocalization",
+      "description": "Continuous clucking, grunting, cackling stream from social flocks. 500-5000 Hz. Aggregate of 50-500+ birds. Unmistakable ambient sound of any pond with coots.",
+      "connections": ["not-a-duck", "aggressive-territorial"]
+    },
+    {
+      "id": "not-a-duck",
+      "type": "concept",
+      "title": "Not a Duck",
+      "description": "Rallidae, not Anatidae. White chicken-like bill, lobed toes, head-bobbing swim. Most frequently misidentified waterbird in N.A. A rail in duck habitat.",
+      "connections": ["flock-vocalization", "lobed-toes"]
+    },
+    {
+      "id": "lobed-toes",
+      "type": "concept",
+      "title": "Lobed Toes",
+      "description": "Scalloped flaps on each toe. Not webbed. Provides swimming thrust + efficient land walking + diving. Rail foot plan modified for open water. More versatile than duck webbing.",
+      "connections": ["not-a-duck", "aggressive-territorial"]
+    },
+    {
+      "id": "aggressive-territorial",
+      "type": "concept",
+      "title": "Aggressive Territorial Behavior",
+      "description": "Foot-fighting with lobed toes as weapons. Rearing, striking, locking feet, pushing across water. Brood parasitism defense. Egg counting. Flock dominance hierarchy.",
+      "connections": ["flock-vocalization", "lobed-toes"]
+    },
+    {
+      "id": "rallidae-cluster-complete",
+      "type": "pattern",
+      "title": "Rallidae Cluster Complete (161-162, 164)",
+      "description": "Three entries. Virginia Rail (invisible skulker), Sora (invisible short-billed), American Coot (visible swimmer). All E=4. From total secrecy to full visibility. One family, full behavioral range.",
+      "connections": ["not-a-duck", "flock-vocalization"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-161",
+      "species": "Virginia Rail",
+      "relationship": "RALLIDAE RANGE! Virginia Rail: invisible skulker. Coot: visible swimmer. Same family, opposite strategies."
+    },
+    {
+      "target": "SPS-162",
+      "species": "Sora",
+      "relationship": "RALLIDAE TRIO! Virginia Rail (161), Sora (162), American Coot (164). Three entries, three strategies, same family."
+    },
+    {
+      "target": "SPS-163",
+      "species": "American Bittern",
+      "relationship": "MARSH TO LAKE! Bittern: dense marsh, invisible. Coot: open water, visible. Adjacent degrees, opposite visibility."
+    }
+  ]
+}

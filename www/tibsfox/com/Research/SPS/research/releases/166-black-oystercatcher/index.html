@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 166&deg; &mdash; Black Oystercatcher Piping &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5D4037, #6D4C41); color: #D7CCC8; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(93, 64, 55, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .bill-card { background: linear-gradient(135deg, #E65100, #EF6C00, #F57C00, #E65100); border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .bill-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCC80; }
+    .bill-card p { color: #FFE0B2; }
+    .bill-card strong { color: #FFF3E0; }
+
+    .indicator-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .indicator-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .indicator-card p { color: #C8E6C9; }
+    .indicator-card strong { color: #E8F5E9; }
+
+    .family-card { background: linear-gradient(135deg, #0D47A1, #1565C0, #1976D2, #0D47A1); border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BBDEFB; }
+    .family-card h3 { margin-top: 0; font-size: 1.1rem; color: #90CAF9; }
+    .family-card p { color: #BBDEFB; }
+    .family-card strong { color: #E3F2FD; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.pipe { background: #E65100; }
+    .theory-icon.bill { background: #BF360C; }
+    .theory-icon.indicator { background: #1B5E20; }
+    .theory-icon.shore { background: #0D47A1; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">166&deg;</div>
+      <div class="release-title-block">
+        <h2>Black Oystercatcher &mdash; Piping Wheep-Wheep</h2>
+        <div class="scientific"><em>Haematopus bachmani</em> (Haematopodidae) &mdash; E=5 &mdash; The Rocky Shore Sentinel</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST HAEMATOPODIDAE</strong> &mdash; oystercatcher family enters.
+      <strong>Rocky shore specialist</strong> with a bright
+      <strong>red-orange bill</strong> adapted for prying shellfish.
+      <strong>Indicator species</strong> for intertidal ecosystem health.
+      Piercing <strong>&ldquo;WHEEP! WHEEP!&rdquo;</strong> cuts through
+      surf noise. <strong>E=5. v1.49.306.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="bill-card">
+          <h3>The Red-Orange Bill &mdash; Precision Shellfish Tool</h3>
+          <p>
+            <strong>6&ndash;8 cm</strong> of laterally compressed, blade-like bill.
+            Bright <strong>red-orange.</strong> Three feeding techniques:
+            <strong>stabbing</strong> between open mussel shells,
+            <strong>hammering</strong> closed limpets, and
+            <strong>probing</strong> crevices for worms. Young birds
+            <strong>learn technique from parents</strong> over months.
+            The bill is the tool; the technique is the education.
+          </p>
+        </div>
+        <div class="indicator-card">
+          <h3>Intertidal Indicator Species</h3>
+          <p>
+            <strong>Permanent territories</strong> on specific stretches of
+            rocky shore. If the intertidal is degraded, the oystercatcher
+            <strong>disappears.</strong> Only <strong>8,900&ndash;11,000</strong>
+            individuals coastwide. Each breeding pair is a significant
+            fraction of the total population. <strong>Presence = healthy
+            rocky shore.</strong>
+          </p>
+        </div>
+        <div class="family-card">
+          <h3>First Haematopodidae &mdash; Oystercatcher Family Enters</h3>
+          <p>
+            <strong>12 species</strong> worldwide. All coastal. All with the
+            characteristic long, red-orange bill. The <strong>Black
+            Oystercatcher</strong> is the Pacific coast specialist &mdash;
+            found from Alaska to Baja California on <strong>rocky shores
+            only.</strong> The narrowest habitat band of any family in
+            the engine.
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-165 Sandhill Crane</strong>
+            <p>HABITAT CONTRAST! Crane: open field, 2-4 km carry, E=6. Oystercatcher: rocky shore, surf-cutting piping, E=5. Open landscape vs. narrow coastal strip.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-153 Wild Turkey</strong>
+            <p>BILL CONTRAST! Turkey: short, omnivore bill. Oystercatcher: long specialized shellfish bill. Both loud. Different feeding ecology entirely.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-148 Black Swift</strong>
+            <p>COASTAL CONNECTION! Black Swift nests behind waterfalls on coastal cliffs. Oystercatcher on rocky shores below. Both tied to the coastal edge.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-164 American Coot</strong>
+            <p>HABITAT SPECIALIST VS GENERALIST! Coot: freshwater generalist, common everywhere. Oystercatcher: rocky shore specialist, rare and localized.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon pipe">W</div>
+            <div class="theory-content">
+              <h4>Piercing Piping</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>WHEEP! WHEEP! WHEEP! -- 3000-5000 Hz. Piercing, high-pitched, designed to cut through surf noise. E=5. Territorial and alarm function. Piping displays between neighbors.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon bill">B</div>
+            <div class="theory-content">
+              <h4>Red-Orange Bill Adaptation</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>6-8 cm laterally compressed blade. Stabbing, hammering, probing techniques. Learned from parents. The most specialized bill in the engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon indicator">I</div>
+            <div class="theory-content">
+              <h4>Intertidal Indicator</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Presence = healthy rocky shore. 8,900-11,000 coastwide. Sensitive to disturbance. Conservation biologists use as rapid assessment tool.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon shore">S</div>
+            <div class="theory-content">
+              <h4>Rocky Shore Specialist</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Exclusive to rocky intertidal. Never inland. Never sandy beaches. Permanent territories of 100-500m of shoreline. Held year-round for decades.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Black Oystercatcher</div><div class="stat-detail"><em>Haematopus bachmani</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Haematopodidae</div><div class="stat-detail">FIRST entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Wheep-wheep!</div><div class="stat-detail">piercing piping</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 5</div><div class="stat-detail">surf-cutting piercing call</div></div>
+        <div class="stat-card"><div class="stat-label">Bill</div><div class="stat-value">Red-orange</div><div class="stat-detail">6&ndash;8 cm, laterally compressed</div></div>
+        <div class="stat-card"><div class="stat-label">Population</div><div class="stat-value">~10,000</div><div class="stat-detail">entire Pacific coast</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Rocky shore</div><div class="stat-detail">exclusive intertidal specialist</div></div>
+        <div class="stat-card"><div class="stat-label">Territory</div><div class="stat-value">100&ndash;500m</div><div class="stat-detail">of rocky shoreline</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Resident</div><div class="stat-detail">year-round territories</div></div>
+        <div class="stat-card"><div class="stat-label">Indicator</div><div class="stat-value">Intertidal health</div><div class="stat-detail">presence = healthy shore</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

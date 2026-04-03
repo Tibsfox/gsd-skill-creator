@@ -1,0 +1,115 @@
+{
+  "degree": 165,
+  "species": "Sandhill Crane",
+  "scientific_name": "Antigone canadensis",
+  "slug": "165-sandhill-crane",
+  "sound_type": "bugle -- loud, rolling, trumpeting call amplified by coiled trachea within the sternum; carries 2-4 km; one of the most ancient sounds in birding; E=6",
+  "energy": 6,
+  "ecosystem": "Open fields, marshes, wet meadows, agricultural land. Wide-open landscapes for foraging, roosting, and staging during migration. Traditional staging areas.",
+  "season": "Migrant through PNW (spring and fall). Greater Sandhill Cranes breed in eastern Washington wet meadows. Bugle heard year-round but peak during migration and breeding.",
+  "family": "Gruidae (FIRST entry)",
+  "order": "Gruiformes",
+  "csv_substitute": false,
+  "original_species": "Sandhill Crane",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.30,
+    "lon": -120.50,
+    "description": "Sandhill Cranes in open fields and wet meadows of eastern Washington during breeding; passage through western Washington during migration."
+  },
+  "taxonomy_note": {
+    "description": "FIRST GRUIDAE entry. Crane family enters the engine. One of the oldest living bird families. 10M+ year fossil record. Coiled trachea amplification. 700,000 in North America. Cultural significance worldwide.",
+    "current_family": "Gruidae (first entry)",
+    "new_family": true,
+    "family_count_in_engine": "Gruidae: first entry. Sandhill Crane (165).",
+    "name_etymology": "Antigone from Greek mythology (daughter of Oedipus); canadensis from Latin 'of Canada' -- the species was first described from Canadian specimens. Common name: Sandhill from the Nebraska Sandhills where large numbers winter/stage.",
+    "genus_note": "Antigone -- formerly placed in Grus; reclassified based on molecular data. Contains Sandhill Crane and Brolga.",
+    "order_note": "Gruiformes. Continues from Rallidae (161-164). Crane family enters after rails.",
+    "family_position": "First Gruidae. The ancient bugler. E=6 maximum. 10M+ year fossil record."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Bugle: 500-2000 Hz. Low fundamental for a bird -- coiled trachea deepens the tone. Rich harmonics extend above.",
+    "peak_energy_band_hz": "800-1500 Hz. The rolling, trumpeting core of the bugle.",
+    "song_frequency_hz": "500-2000 Hz. Deep, resonant, with overtones.",
+    "song_duration_s": "Single bugle: 1-3 seconds. Unison calls: extended sequences of coordinated bugles between mated pairs.",
+    "note_structure": "GAROOO-a-a-a: Rolling, trumpeting, resonant bugle. The sound rolls and reverberates due to tracheal resonance. Rich harmonic content. Unison calls are coordinated pair duets.",
+    "note_types": "Bugle (primary -- territorial/pair-bonding/family/migration), contact purr (close range -- family cohesion), alarm (sharp staccato bugle variant).",
+    "phrase_structure": "Single bugles or unison call duets. Repeated. Can continue for minutes during social displays or pre-migration staging.",
+    "timbre": "Rolling, trumpeting, resonant, deep. The coiled trachea gives the bugle a brass-instrument quality -- often compared to a French horn. The rolling harmonic quality is unmistakable.",
+    "amplitude": "E=6. Maximum energy. 2-4 km carry across open landscape. Physically impressive at close range. One of the loudest bird vocalizations in North America.",
+    "tempo": "Measured. Bugles given at intervals of several seconds. Not rapid. The resonance of each bugle carries and decays before the next.",
+    "context": "Territorial defense. Pair bonding (unison call). Family cohesion. Migration coordination. Social display. Alarm. Nearly every behavioral context.",
+    "regional_variation": "Greater Sandhill Cranes (larger, deeper bugle) breed in WA. Lesser Sandhill Cranes (slightly higher) pass through during migration.",
+    "key_property": "BUGLE -- rolling, trumpeting, 2-4 km carry, coiled trachea amplification. FIRST GRUIDAE. 10M+ year fossil record. E=6 maximum. Double maximum combined (E=12). v1.49.305."
+  },
+  "plumage": {
+    "overall": "Gray overall with bare red crown patch. Often stained rusty-brown from iron-rich mud applied during preening. Long legs, long neck, long bill. Elegant posture.",
+    "diagnostic_mark": "Large gray crane. Bare red crown. Often rusty-stained. In flight: neck extended (unlike herons which fold neck). Long trailing legs.",
+    "seasonal_variation": "Minimal base plumage change. Rusty staining varies. Red crown patch more vivid during breeding.",
+    "flight_pattern": "Soaring flight on thermals during migration. Direct flight with slow wingbeats. Neck extended. Legs trailing. V-formations."
+  },
+  "physical_description": {
+    "overall": "Length: 100-120 cm. Wingspan: 160-210 cm. Weight: 3-5 kg (Greater subspecies). One of the tallest birds in North America.",
+    "diagnostic_mark": "Large gray crane with red crown, long legs, long neck. Rusty-brown staining common.",
+    "field_id": "Large gray crane in open habitat. Red crown visible at close range. Listen for the bugle -- unmistakable rolling trumpeting that carries for miles. In flight: neck extended, legs trailing."
+  },
+  "nodes": [
+    {
+      "id": "bugle",
+      "type": "concept",
+      "title": "The Bugle -- Ancient Rolling Trumpet",
+      "description": "Loud, rolling, trumpeting GAROOO-a-a-a. Amplified by coiled trachea within sternum. 2-4 km carry. 500-2000 Hz with rich harmonics. Unison calls between pairs. E=6 maximum. One of the most ancient bird sounds -- 10M+ years.",
+      "connections": ["coiled-trachea", "fossil-record", "first-gruidae"]
+    },
+    {
+      "id": "coiled-trachea",
+      "type": "concept",
+      "title": "Coiled Trachea -- Nature's French Horn",
+      "description": "Trachea 120-150 cm long, coiled within the sternal keel. Acts as resonating tube like a brass instrument. Deepens and amplifies the bugle. 10-20x amplification over expected body-size output. Develops as bird matures -- juveniles have higher, thinner calls.",
+      "connections": ["bugle", "fossil-record"]
+    },
+    {
+      "id": "fossil-record",
+      "type": "concept",
+      "title": "10M+ Year Fossil Record",
+      "description": "Miocene-age crane fossils show modern sternal anatomy including tracheal coiling. The bugle has been produced for 10+ million years. Pliocene Sandhill Crane fossils from 2.5M years ago. One of the oldest living bird species on Earth.",
+      "connections": ["bugle", "coiled-trachea", "first-gruidae"]
+    },
+    {
+      "id": "first-gruidae",
+      "type": "pattern",
+      "title": "First Gruidae -- Crane Family Enters",
+      "description": "Gruidae enters the engine at degree 165. One of the oldest bird families. 15 species worldwide. 700,000 Sandhill Cranes in North America. Cultural significance across civilizations. Follows Rallidae (161-164) in Gruiformes order.",
+      "connections": ["bugle", "migration-spectacle"]
+    },
+    {
+      "id": "migration-spectacle",
+      "type": "concept",
+      "title": "Migration Spectacle",
+      "description": "500,000 cranes staging along the Platte River. 100,000+ observers annually. Pre-dawn departure with massed bugling. PNW passage spring/fall. Mated for life. Dancing displays. Family bonds maintained across thousands of miles.",
+      "connections": ["bugle", "first-gruidae"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-164",
+      "species": "American Coot",
+      "relationship": "FAMILY TRANSITION! Rallidae (161-164) to Gruidae (165). Same order (Gruiformes). Rail chatter to crane bugle. E=3 to E=6."
+    },
+    {
+      "target": "SPS-155",
+      "species": "Ruffed Grouse Drumming",
+      "relationship": "ANCIENT SOUNDS! Ruffed Grouse drumming (mechanical, forest). Sandhill Crane bugling (vocal, open field). Both ancient. Both extraordinary carry distance."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey Gobble",
+      "relationship": "E=6 COMPARISON! Turkey gobble (E=6) and crane bugle (E=6). Both maximum energy, both resonant. Different amplification systems."
+    },
+    {
+      "target": "SPS-161",
+      "species": "Virginia Rail",
+      "relationship": "GRUIFORMES! Rail (secretive, marsh, E=3) to crane (conspicuous, open field, E=6). Same order, opposite visibility and energy."
+    }
+  ]
+}

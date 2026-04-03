@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 163&deg; &mdash; Porter Ray &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #0D47A1, #1565C0); color: #BBDEFB; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(13, 71, 161, 0.5); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #E65100; color: #FFF3E0; border: 1px solid #EF6C00; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .city-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1B5E20; color: #C8E6C9; border: 1px solid #2E7D32; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #0D47A1; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #0D47A1; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card .level.foundational { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #0D47A1; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #0D47A1; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E3F2FD; font-style: italic; color: #0D47A1; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>163 &mdash; Porter Ray</span>
+    </nav>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">163&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Porter Ray</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="city-badge">Rainier Valley</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Rainier Valley Voice</h2>
+          <blockquote>
+            <strong>Porter Ray</strong> &mdash; a Rainier Valley MC on
+            <strong>Sub Pop Records.</strong> His music reflects lived
+            experience in the Rainier Valley community with unflinching
+            honesty &mdash; violence, loss, community, survival, hope.
+            Not observation from outside. Testimony from within.
+            Deliberate, weighted delivery. Every word placed with
+            intention.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Sub Pop&rsquo;s Hip-Hop Expansion</h2>
+          <blockquote>
+            Sub Pop signing Porter Ray expands the label&rsquo;s hip-hop
+            roster beyond Shabazz Palaces (157). Different geography
+            (Rainier Valley vs. Capitol Hill orbit), different style
+            (street narrative vs. experimental abstraction). Sub Pop
+            now represents Seattle hip-hop&rsquo;s geographic and
+            aesthetic breadth.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Community Testimony</h4>
+              <div class="level advanced">Advanced &mdash; Narrative Theory</div>
+              <p>
+                Lyrics as community documentation. Named streets,
+                specific events, real people. The Rainier Valley
+                story told by someone who lived it.
+                Art as testimony.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Sub Pop Hip-Hop Axis</h4>
+              <div class="level intermediate">Intermediate &mdash; Label Theory</div>
+              <p>
+                Shabazz Palaces (157): experimental, abstract.
+                Porter Ray (163): narrative, weighted.
+                Sub Pop&rsquo;s hip-hop roster spans the spectrum.
+                Seattle&rsquo;s iconic label embraces hip-hop.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>South End Geography</h4>
+              <div class="level foundational">Foundational &mdash; Geography Theory</div>
+              <p>
+                Rainier Valley: Columbia City, Hillman City,
+                Rainier Beach. Seattle&rsquo;s most diverse
+                neighborhoods. South-end voice distinct from
+                Capitol Hill&rsquo;s arts corridor.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">162&deg;</span> <strong>Grieves</strong> &mdash; GEOGRAPHIC CONTRAST! Grieves: Capitol Hill, emotional introspection, Rhymesayers. Porter Ray: Rainier Valley, community testimony, Sub Pop. Two neighborhoods, two approaches.</li>
+            <li><span class="ref-degree">157&deg;</span> <strong>Shabazz Palaces</strong> &mdash; SUB POP PAIR! Both on Sub Pop. Shabazz: experimental abstraction. Porter Ray: street narrative. The label&rsquo;s hip-hop breadth.</li>
+            <li><span class="ref-degree">156&deg;</span> <strong>Blue Scholars</strong> &mdash; COMMUNITY HIP-HOP! Blue Scholars: Filipino-American community voice. Porter Ray: Rainier Valley community voice. Community-rooted hip-hop across different neighborhoods.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">163&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.303</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Porter Ray</h4>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Rainier Valley</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">2014&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Style</span><span class="stat-value">Street narrative</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Hip-Hop Era</h4>
+          <div class="stat-row"><span class="stat-label">Era degree</span><span class="stat-value">30th (134&ndash;163)</span></div>
+          <div class="stat-row"><span class="stat-label">Sub Pop hip-hop</span><span class="stat-value">2nd (after 157)</span></div>
+          <div class="stat-row"><span class="stat-label">Geography</span><span class="stat-value">South End voice</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../162-grieves/" style="color: var(--seattle-navy);">&larr; 162&deg; Grieves</a>
+        <a href="../164-kung-foo-grip/" style="color: var(--seattle-navy);">164&deg; Kung Foo Grip &rarr;</a>
+      </div>
+      <p>Degree 163&deg; &mdash; Porter Ray &mdash; Seattle 360 Engine &mdash; v1.49.303<br>Rainier Valley testimony. Sub Pop hip-hop expansion. Deliberate, weighted delivery. First Ardeidae on SPS axis.</p>
+    </footer>
+  </div>
+</body>
+</html>
