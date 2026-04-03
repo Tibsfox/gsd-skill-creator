@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research-Plan-Implement: What Went Wrong &amp; What We Got Right | OPEN Problems</title>
+<style>
+:root {
+  --bg: #06080e; --panel: #0a0e18; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A; --green: #4CAF50; --amber: #E89848;
+  --blue: #4a90d9; --purple: #9a6ad8; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:#e0cc80; }
+
+header {
+  background:linear-gradient(135deg, #06080e 0%, #0e1428 30%, #1a0e30 60%, #0a1428 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:2px solid var(--purple);
+}
+header h1 { font-size:1.6rem; font-weight:400; color:#fff; letter-spacing:0.04em; }
+header .subtitle { color:var(--purple); font-size:0.85rem; font-style:italic; margin-top:0.3rem; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(154,106,216,0.7); border-left:3px solid var(--purple);
+  padding:0.8rem 1.2rem; margin:1.5rem 0; font-size:0.95rem;
+}
+blockquote .attr { display:block; margin-top:0.5rem; font-style:normal; font-size:0.8rem; color:var(--dim); }
+
+h2 { color:var(--purple); font-size:1.2rem; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.4rem; }
+h3 { color:#fff; font-size:1.05rem; margin:1.5rem 0 0.5rem; font-weight:400; }
+p { margin-bottom:1rem; font-size:0.9rem; }
+
+.lesson {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; margin:1.2rem 0; position:relative;
+}
+.lesson::before {
+  content:''; position:absolute; top:0; left:0; width:3px; height:100%; border-radius:3px 0 0 3px;
+}
+.lesson.wrong::before { background:var(--red); }
+.lesson.right::before { background:var(--green); }
+.lesson.evolve::before { background:var(--amber); }
+
+.lesson .label {
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;
+}
+.lesson.wrong .label { color:var(--red); }
+.lesson.right .label { color:var(--green); }
+.lesson.evolve .label { color:var(--amber); }
+.lesson h3 { margin:0 0 0.5rem; }
+.lesson p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; margin-bottom:0.5rem; }
+.lesson p:last-child { margin-bottom:0; }
+.lesson .gsd { color:var(--gold); font-size:0.82rem; margin-top:0.6rem; padding-top:0.6rem; border-top:1px solid var(--border); }
+
+.mapping-table {
+  width:100%; border-collapse:collapse; margin:1.5rem 0;
+  font-family:system-ui,sans-serif; font-size:0.8rem;
+}
+.mapping-table th {
+  text-align:left; padding:0.5rem 0.6rem; color:var(--dim);
+  border-bottom:1px solid var(--border); font-weight:400;
+  text-transform:uppercase; letter-spacing:0.05em; font-size:0.68rem;
+}
+.mapping-table td { padding:0.4rem 0.6rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.mapping-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+.verdict {
+  background:rgba(76,175,80,0.08); border:1px solid rgba(76,175,80,0.2);
+  border-radius:6px; padding:1.2rem; margin:1.5rem 0;
+}
+.verdict h3 { color:var(--green); margin:0 0 0.5rem; }
+.verdict p { font-size:0.85rem; font-family:system-ui,sans-serif; }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { .mapping-table { font-size:0.7rem; } header h1 { font-size:1.3rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Research-Plan-Implement: What Went Wrong &amp; What We Got Right</h1>
+  <div class="subtitle">Lessons from 1,000+ engineering teams mapped against GSD workflow architecture</div>
+  <nav>
+    <a href="../OPEN/index.html">OPEN Problems</a>
+    <a href="../CSP/index.html">CS &amp; Programming</a>
+    <a href="../CERN/wlcg.html">WLCG</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <blockquote>
+    Do not outsource the thinking. You the engineer are an important part of this process.
+    And seek leverage. There's a lot of code being written. Find ways to make sure it's correct
+    without having to read all of it and resteer after the fact.
+    <span class="attr">&mdash; Dexter Horthy, "Everything We Got Wrong About Research-Plan-Implement" (2026)</span>
+  </blockquote>
+
+  <p>In mid-2026, Dexter Horthy gave a talk at a developer conference documenting what went wrong when thousands of engineers adopted the Research-Plan-Implement (RPI) methodology for AI coding agents. RPI is a three-phase workflow: research the codebase, create a plan, implement the code. It was widely adopted after going viral on Hacker News, with prompts used by teams from startups to Fortune 500 companies.</p>
+
+  <p>The talk is valuable not because RPI failed &mdash; it didn't &mdash; but because the failure modes Horthy documents are the exact problems any agent orchestration system must solve. GSD independently converged on solutions to most of them. Where we diverge is instructive.</p>
+
+  <p style="font-size:0.8rem; color:var(--dim); font-family:system-ui,sans-serif;">Source: <a href="https://www.youtube.com/watch?v=YwZR6tc7qYg">YouTube: Everything We Got Wrong About Research-Plan-Implement - Dexter Horthy</a> &middot; Transcript extracted via yt-dlp auto-captions.</p>
+
+  <!-- ============================================================ -->
+  <!--  WHAT THEY GOT WRONG                                          -->
+  <!-- ============================================================ -->
+
+  <h2>What They Got Wrong</h2>
+
+  <div class="lesson wrong">
+    <div class="label">Wrong #1</div>
+    <h3>The 85-Instruction Mega-Prompt</h3>
+    <p>The original RPI planning prompt contained 85+ instructions in a single monolithic prompt. Research from late 2025 showed frontier LLMs can only follow ~150-200 instructions with consistency. Combined with CLAUDE.md, system prompts, tool definitions, and MCP server descriptions, the effective instruction budget was exhausted before the workflow even started. Critical steps &mdash; like asking the user design questions before writing the plan &mdash; were randomly skipped.</p>
+    <p><strong>The fix:</strong> Split the single prompt into focused phases: questions &rarr; research &rarr; design &rarr; structure &rarr; plan &rarr; implement &rarr; PR. Each phase has &lt;40 instructions.</p>
+    <div class="gsd"><strong>GSD equivalent:</strong> Our skill/command system was built this way from the start. <code>discuss-phase</code>, <code>plan-phase</code>, <code>execute-phase</code> are separate prompts with separate context windows. The Gastown chipset separates mayor/polecat/witness into distinct roles with focused instructions. We never had a mega-prompt because the architecture prevented it.</div>
+  </div>
+
+  <div class="lesson wrong">
+    <div class="label">Wrong #2</div>
+    <h3>Telling the Research Agent What You're Building</h3>
+    <p>If you tell the model "I'm building feature X, research the codebase," the research output contains opinions about how to build X. Good research should be pure facts &mdash; objective compression of what's true about the code. Opinions contaminate the planning phase downstream.</p>
+    <p><strong>The fix:</strong> Separate question generation (knows the ticket) from research execution (doesn't know the ticket). One context window generates the queries, a fresh context window executes them blind.</p>
+    <div class="gsd"><strong>GSD equivalent:</strong> Our <code>gsd-phase-researcher</code> agent gets a research brief, not the full implementation plan. The <code>discuss-phase</code> gathers context through questions before the researcher runs. The separation is architectural &mdash; different agents with different context.</div>
+  </div>
+
+  <div class="lesson wrong">
+    <div class="label">Wrong #3</div>
+    <h3>"Don't Read the Code"</h3>
+    <p>"In August I said don't read the code. I was wrong. I am humble enough to admit when I was wrong." They tried not reading code for six months. Had to rip out and replace large parts of the system. A 1,000-line plan produces ~1,000 lines of code, and the code often diverges from the plan.</p>
+    <p><strong>The fix:</strong> Read the code, not the plan. Plans are a means to an end, not a deliverable. The code is the deliverable. Review that.</p>
+    <div class="gsd"><strong>GSD learning:</strong> Our <code>verify-work</code> and Nyquist validation steps check the actual output, not just the plan. But this is a reminder that <strong>autonomous execution still needs human code review</strong>. "Planning is the hard part" remains true, but the output still needs eyes on it.</div>
+  </div>
+
+  <div class="lesson wrong">
+    <div class="label">Wrong #4</div>
+    <h3>"Magic Words" Required for Basic Functionality</h3>
+    <p>The planning prompt had built-in steps for asking the user design questions. But ~50% of the time, the model skipped them. Users discovered you had to add "work back and forth with me starting with your open questions and outline before writing the plan" to trigger the interactive flow. Horthy: "If you built a tool that requires hours and hours of training and reps to get good results from, go fix the tool."</p>
+    <p><strong>The fix:</strong> Use code control flow, not prompt control flow. Classify the input, then route to the right focused prompt deterministically. The if-statement is more reliable than an instruction.</p>
+    <div class="gsd"><strong>GSD equivalent:</strong> Our <code>gsd:do</code> command routes freeform text to the right workflow automatically. <code>gsd:next</code> determines the next step deterministically from project state. We use code for control flow and prompts for content &mdash; which is exactly what Horthy converged on.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  WHAT THEY GOT RIGHT                                          -->
+  <!-- ============================================================ -->
+
+  <h2>What They Got Right (And We Also Got Right)</h2>
+
+  <div class="lesson right">
+    <div class="label">Validated</div>
+    <h3>There Is No Magic Prompt</h3>
+    <p>"There is no magic prompt." The search for the one perfect system prompt is a dead end. Good results come from good architecture: focused phases, appropriate context, human judgment at decision points.</p>
+    <div class="gsd"><strong>GSD:</strong> Our architecture is 34 skills, 57 commands, dozens of agents &mdash; each focused on one thing. No single prompt runs the show. The orchestration IS the prompt.</div>
+  </div>
+
+  <div class="lesson right">
+    <div class="label">Validated</div>
+    <h3>Do Not Outsource the Thinking</h3>
+    <p>"You the engineer are an important part of this process." The model generates options, the human chooses. The model researches, the human interprets. The model writes code, the human reviews. Agency without abdication.</p>
+    <div class="gsd"><strong>GSD:</strong> Our discuss-phase exists specifically for this. Adaptive questioning surfaces decisions the human needs to make BEFORE the agent goes to work. The human steers, the agent executes.</div>
+  </div>
+
+  <div class="lesson right">
+    <div class="label">Validated</div>
+    <h3>Vertical Plans Beat Horizontal Plans</h3>
+    <p>Horizontal: all database &rarr; all services &rarr; all API &rarr; all frontend. Nothing testable until the end. Vertical: mock endpoint &rarr; wire frontend &rarr; service layer &rarr; database &rarr; integration. Testable at every step. Models love horizontal plans. You have to force vertical.</p>
+    <div class="gsd"><strong>GSD:</strong> Our wave-based execution IS vertical planning. Each wave delivers a testable slice. The plan-checker verifies plans are vertical before execution begins. This is one of our strongest architectural decisions.</div>
+  </div>
+
+  <div class="lesson right">
+    <div class="label">Validated</div>
+    <h3>Seek Leverage, Not Speed</h3>
+    <p>"Going 10x faster doesn't matter if you throw it all away in 6 months. Shoot for 2-3x." The goal is sustainable quality at higher throughput, not raw speed. Every speedup that reduces quality is a net negative.</p>
+    <div class="gsd"><strong>GSD:</strong> Our model profiles (quality/balanced/budget) exist for this. Quality mode uses Opus for critical work. Budget mode uses Haiku for routine tasks. The system self-selects the appropriate speed/quality tradeoff.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  WHERE WE DIVERGE                                             -->
+  <!-- ============================================================ -->
+
+  <h2>Where We Diverge &mdash; The Gastown Question</h2>
+
+  <div class="lesson evolve">
+    <div class="label">Divergence</div>
+    <h3>"I'm Mid on Agent Swarms and the Whole Gastown Thing"</h3>
+    <p>Horthy directly called out the Gastown convoy model as a concern. His argument: multi-agent swarms make it harder to ensure quality. You lose visibility into what each agent decided. The blast radius of a bad decision scales with the number of agents.</p>
+    <p><strong>Our response:</strong> He's right that quality assurance is the hard problem. But Gastown has explicit answers:</p>
+    <p>&bull; <strong>witness-observer</strong> &mdash; passive monitoring agent that watches all others without interfering<br>
+    &bull; <strong>Nyquist verification</strong> &mdash; coverage-based validation that every requirement was met<br>
+    &bull; <strong>verify-work</strong> &mdash; goal-backward analysis checking the output delivers what was promised<br>
+    &bull; <strong>atomic commits</strong> &mdash; each wave is a single commit, reviewable in isolation<br>
+    &bull; <strong>plan-checker</strong> &mdash; verifies the plan will achieve the goal before execution starts</p>
+    <p>The question isn't "should you use multiple agents?" &mdash; it's "do you have quality gates between them?" CERN's WLCG runs 1.4M cores across 170 sites with federated governance. The answer to scale isn't centralization &mdash; it's monitoring, verification, and accountability at every tier.</p>
+    <div class="gsd"><strong>Action item:</strong> Document our quality gates more explicitly. Horthy's concern is valid for systems without them. We have them &mdash; we need to prove they work by measuring defect rates across supervised vs. unsupervised agent runs.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  THE NEW RPI PIPELINE                                         -->
+  <!-- ============================================================ -->
+
+  <h2>The New Pipeline: RPI v2 vs. GSD</h2>
+
+  <table class="mapping-table">
+    <thead>
+      <tr>
+        <th>RPI v2 Phase</th>
+        <th>Purpose</th>
+        <th>GSD Equivalent</th>
+        <th>Key Difference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="color:var(--blue);">Questions</td><td>Generate research queries from ticket</td><td style="color:var(--gold);">discuss-phase</td><td>GSD is interactive; RPI v2 is automated</td></tr>
+      <tr><td style="color:var(--blue);">Research</td><td>Objective codebase facts (blind to ticket)</td><td style="color:var(--gold);">gsd-phase-researcher</td><td>Both separate research from planning</td></tr>
+      <tr><td style="color:var(--blue);">Design</td><td>200-line design concept with open questions</td><td style="color:var(--gold);">discuss-phase output</td><td>RPI v2 is a document; GSD is a conversation</td></tr>
+      <tr><td style="color:var(--blue);">Structure</td><td>High-level phase outline (C header file analogy)</td><td style="color:var(--gold);">PLAN.md outline</td><td>Similar &mdash; both create reviewable structure before detail</td></tr>
+      <tr><td style="color:var(--blue);">Plan</td><td>Detailed implementation plan per phase</td><td style="color:var(--gold);">PLAN.md tasks</td><td>RPI v2 plans are shorter; GSD has plan-checker verification</td></tr>
+      <tr><td style="color:var(--blue);">Implement</td><td>Code generation per plan phase</td><td style="color:var(--gold);">gsd-executor waves</td><td>GSD uses wave-based parallel execution</td></tr>
+      <tr><td style="color:var(--blue);">PR</td><td>Create pull request with context</td><td style="color:var(--gold);">gsd:ship</td><td>Both automate PR creation from work artifacts</td></tr>
+      <tr><td style="color:var(--dim);">(none)</td><td>&mdash;</td><td style="color:var(--gold);">verify-work / Nyquist</td><td>GSD has explicit verification; RPI v2 relies on code review</td></tr>
+      <tr><td style="color:var(--dim);">(none)</td><td>&mdash;</td><td style="color:var(--gold);">witness-observer</td><td>GSD has passive monitoring; RPI v2 has no equivalent</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <!--  KEY NUMBERS                                                  -->
+  <!-- ============================================================ -->
+
+  <h2>Key Numbers from the Talk</h2>
+
+  <div class="lesson evolve">
+    <div class="label">Data Points</div>
+    <h3>Quantitative Findings</h3>
+    <p>&bull; <strong>~150-200 instructions</strong> &mdash; max that frontier LLMs follow with consistency (cited arXiv paper, late 2025)</p>
+    <p>&bull; <strong>85 instructions</strong> &mdash; the original RPI mega-prompt size (too many for one context)</p>
+    <p>&bull; <strong>&lt;40 instructions</strong> &mdash; the new per-phase prompt size (well within budget)</p>
+    <p>&bull; <strong>~40% context usage</strong> &mdash; the "dumb zone" threshold where quality degrades (matches our token economics research)</p>
+    <p>&bull; <strong>1,000 line plan &asymp; 1,000 lines of code</strong> &mdash; within 10%. Plans don't compress.</p>
+    <p>&bull; <strong>200 lines</strong> &mdash; the design discussion document. High-leverage review artifact.</p>
+    <p>&bull; <strong>50%+ of users</strong> &mdash; got skipped interactive steps without "magic words"</p>
+    <p>&bull; <strong>2-3x</strong> &mdash; the sustainable productivity multiplier target (not 10x)</p>
+    <p>&bull; <strong>10,000+ users</strong> &mdash; grabbed the open-source RPI prompts</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  VERDICT                                                      -->
+  <!-- ============================================================ -->
+
+  <div class="verdict">
+    <h3>Verdict: Convergent Evolution Validates the Architecture</h3>
+    <p>RPI and GSD were developed independently. RPI started as prompts for Claude Code; GSD started as a full project management system with skills, agents, and chipsets. Both converged on the same core principles: separate research from planning, use focused prompts with small instruction budgets, force vertical plans, don't outsource the thinking, and verify the output.</p>
+    <p style="margin-top:0.8rem;">Where GSD goes further: multi-agent orchestration with quality gates (witness, Nyquist, plan-checker), wave-based parallel execution, model profile routing, and the Gastown chipset for convoy-scale work. Where RPI v2 goes further: explicit instruction budget accounting, the 200-line design discussion artifact, and the "C header file" structure outline as a lightweight review target.</p>
+    <p style="margin-top:0.8rem;"><strong>Action items for GSD:</strong> (1) Add explicit instruction counting to our skill prompts. (2) Consider a "design concept" artifact between discuss and plan. (3) Measure and publish defect rates for supervised vs. unsupervised agent runs to address Horthy's quality concern. (4) Track the ~150-200 instruction limit as a hard constraint in skill design.</p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../OPEN/index.html">OPEN Problems</a> &middot;
+  <a href="../CSP/index.html">CS &amp; Programming</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Source: <a href="https://www.youtube.com/watch?v=YwZR6tc7qYg">YouTube: Everything We Got Wrong About RPI - Dexter Horthy</a> &middot;
+  Transcript via yt-dlp &middot; Analysis: Tibsfox Research<br>
+  Last updated: 2026-04-03T07:00Z (sweep v1.2.23)
+</footer>
+
+</body>
+</html>
