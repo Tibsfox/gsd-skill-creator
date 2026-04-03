@@ -1,0 +1,111 @@
+{
+  "degree": 195,
+  "species": "Black-tailed Deer",
+  "scientific_name": "Odocoileus hemionus columbianus",
+  "slug": "195-black-tailed-deer-fawn-bleat",
+  "sound_type": "fawn bleat -- thin high mew, contact call to mother. 500-1,500 Hz. Plaintive, wavering. The sound of vulnerability. E=3",
+  "energy": 3,
+  "ecosystem": "Forest edge, meadow, suburban woodland, riparian corridor. Everywhere from deep forest to suburban gardens.",
+  "season": "Fawns born May-June. Bleating strongest in first weeks of life. Year-round resident.",
+  "family": "Cervidae (FIRST -- deer)",
+  "order": "Artiodactyla",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Black-tailed Deer",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.30,
+    "description": "Black-tailed Deer throughout western Washington. Forest edge, meadow, suburban. Ubiquitous."
+  },
+  "taxonomy_note": {
+    "description": "FIRST CERVIDAE -- deer family enters. Marine mammal streak breaks at 15 (180-194). Columbian Black-tailed Deer, subspecies of Mule Deer. PNW's most common large mammal. Fawn bleat as infant contact call.",
+    "current_family": "Cervidae (FIRST entry)",
+    "new_family": true,
+    "family_count_in_engine": "Cervidae: Black-tailed Deer Fawn Bleat (195) -- FIRST.",
+    "name_etymology": "Odocoileus from Greek 'odous' (tooth) + 'koilos' (hollow) -- hollow teeth. hemionus from Greek 'hemi' (half) + 'onos' (donkey) -- half-donkey (for mule-like ears). columbianus for the Columbia River region.",
+    "genus_note": "Odocoileus -- 2 species: White-tailed Deer and Mule Deer (including Black-tailed subspecies).",
+    "order_note": "Artiodactyla. First artiodactyl in SPS. Even-toed ungulates.",
+    "family_position": "Eighth mammal family in SPS: Phocidae, Otariidae, Mustelidae, Phocoenidae, Delphinidae, Balaenopteridae, Eschrichtiidae, Cervidae. First terrestrial-only mammal family.",
+    "class_note": "Class Mammalia. Marine mammal streak breaks at 15 (180-194). FIRST CERVIDAE at 195."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-1,500 Hz. Thin, high-pitched mew.",
+    "peak_energy_band_hz": "700-1,200 Hz (peak of fawn bleat).",
+    "song_frequency_hz": "Fawn bleat: 500-1,500 Hz. Mother response grunt: 100-400 Hz.",
+    "song_duration_s": "Fawn bleat: 0.5-1.5 sec. Mother grunt: 0.2-0.5 sec.",
+    "note_structure": "Single wavering bleat per call. Repeated at 3-10 second intervals.",
+    "note_types": "Fawn bleat (contact call, plaintive mew), mother grunt (response, low reassurance).",
+    "phrase_structure": "Call-response: fawn bleats, mother approaches with low grunt. Simple two-voice dialogue.",
+    "timbre": "Thin, high, wavering. Plaintive. Carries a few hundred meters in forest. Emotionally affecting.",
+    "amplitude": "E=3. Quiet but audible. Infant mammal contact call. The sound of vulnerability and need.",
+    "tempo": "Irregular. Bleats at 3-10 second intervals when seeking mother. Intensity increases with distress.",
+    "context": "Forest edge, meadow. First weeks of life. Separation from mother. Hunger. Distress.",
+    "regional_variation": "Minimal. Fawn bleats are structurally similar across Odocoileus populations.",
+    "key_property": "FAWN BLEAT. FIRST CERVIDAE. Marine mammal streak breaks at 15. Thin high mew. 500-1,500 Hz. Vulnerability. E=3. v1.49.336."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Fawn: reddish-brown with white spots (cryptic camouflage). Adult: grayish-brown in winter, reddish-brown in summer. White under tail (black on top -- the 'black tail').",
+    "diagnostic_mark": "Fawn: white spots on reddish-brown (camouflage in dappled light). Adult: black-topped tail, medium size, large ears.",
+    "seasonal_variation": "Summer: reddish-brown. Winter: grayish-brown, thicker coat. Fawn spots fade by 3-4 months.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Fawn: 3-4 kg at birth, 45-55 cm tall. Adult: 50-90 kg, 80-100 cm at shoulder. Medium deer. Black-topped tail. Large ears. Bucks with antlers (shed annually).",
+    "diagnostic_mark": "Medium deer. Black-topped white tail. Large ears. Fawns spotted. Bucks with forked antlers.",
+    "field_id": "Medium-sized deer everywhere in western Washington. Reddish-brown (summer) or gray-brown (winter). Black-topped tail raised when alarmed. Fawns spotted, often found alone in vegetation (DO NOT DISTURB -- mother is nearby)."
+  },
+  "nodes": [
+    {
+      "id": "first-cervidae",
+      "type": "milestone",
+      "title": "First Cervidae -- Deer Enter",
+      "description": "Deer family enters. 50+ species worldwide. Black-tailed Deer is PNW representative. Marine mammal streak breaks at 15 (180-194).",
+      "connections": ["fawn-bleat", "ocean-to-forest", "streak-ends"]
+    },
+    {
+      "id": "fawn-bleat",
+      "type": "concept",
+      "title": "Fawn Bleat -- Infant Contact Call",
+      "description": "Thin high mew at 500-1,500 Hz. The sound of need. Calculated risk: attract mother vs. alert predators. 40-60% first-year mortality. E=3.",
+      "connections": ["first-cervidae"]
+    },
+    {
+      "id": "ocean-to-forest",
+      "type": "concept",
+      "title": "Ocean to Forest -- Habitat Transition",
+      "description": "From 200-ton whales to 3-kg fawns. Deep ocean to forest edge. The engine returns to land. Scale collapse.",
+      "connections": ["first-cervidae", "streak-ends"]
+    },
+    {
+      "id": "streak-ends",
+      "type": "milestone",
+      "title": "Marine Mammal Streak Ends -- 15",
+      "description": "Degrees 180-194. 15 entries. 7 families. E=1 to E=7. Falls 2 short of Anatidae record (17). The marine mammal era is complete.",
+      "connections": ["first-cervidae", "ocean-to-forest"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-181",
+      "species": "Harbor Seal Pup",
+      "relationship": "INFANT PAIR! Seal pup whimper (E=3) and deer fawn bleat (E=3). Both infant contact calls. Both E=3. The energy of infant need."
+    },
+    {
+      "target": "SPS-194",
+      "species": "Blue Whale Infrasound",
+      "relationship": "SCALE COLLAPSE! Blue Whale 200 tons (E=5) to deer fawn 3 kg (E=3). Ocean to forest. The largest ever to a fawn."
+    },
+    {
+      "target": "SPS-196",
+      "species": "Black-tailed Deer Buck Grunt",
+      "relationship": "FAWN-BUCK PAIR! Fawn bleat (E=3, need) and buck grunt (E=4, territory). Same species, degrees 195-196."
+    },
+    {
+      "target": "S36-195",
+      "artist": "Flop",
+      "relationship": "VULNERABLE AND SHORT-LIVED! Flop (6 years, frenzy victim) + fawn (40-60% mortality). Both vulnerable. Both brief."
+    }
+  ]
+}
