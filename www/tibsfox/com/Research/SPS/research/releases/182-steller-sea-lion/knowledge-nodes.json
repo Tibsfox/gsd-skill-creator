@@ -1,0 +1,110 @@
+{
+  "degree": 182,
+  "species": "Steller Sea Lion",
+  "scientific_name": "Eumetopias jubatus",
+  "slug": "182-steller-sea-lion",
+  "sound_type": "roaring bark -- deep, sustained, thunderous colony roar. Bulls on breeding rookeries. Loudest PNW pinniped. E=6",
+  "energy": 6,
+  "ecosystem": "Rocky haul-out sites, offshore islands, exposed coastline. Breeding rookeries on sea stacks and offshore islands. Resident in PNW.",
+  "season": "Year-round resident. Breeding: May-July on rookeries. Non-breeding haul-outs year-round.",
+  "family": "Otariidae (FIRST -- eared seals)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Steller Sea Lion",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.38,
+    "lon": -124.63,
+    "description": "Steller Sea Lion on outer Washington coast / offshore islands. Rookeries and haul-outs on rocky sites."
+  },
+  "taxonomy_note": {
+    "description": "FIRST OTARIIDAE (eared seals) in the engine. Largest sea lion in the world. Named after Georg Wilhelm Steller (1741 Bering expedition). Endangered (western DPS). Three Otariidae entries planned (182-184).",
+    "current_family": "Otariidae (FIRST entry)",
+    "new_family": true,
+    "family_count_in_engine": "Otariidae: Steller Sea Lion (182) -- FIRST. California Sea Lion (183) and Northern Fur Seal (184) upcoming.",
+    "name_etymology": "Eumetopias from Greek 'eu' (true/good) + 'metopon' (forehead) -- broad forehead. jubatus from Latin 'jubatus' (maned) -- the thick neck mane of males. Named for Georg Wilhelm Steller (1709-1746).",
+    "genus_note": "Eumetopias -- monotypic genus. Only species: E. jubatus. The sole member of its genus.",
+    "order_note": "Carnivora. Second Carnivora in SPS (after Harbor Seal, 180).",
+    "family_position": "First Otariidae. The eared seal family enters, distinguished from Phocidae by external ears, rotating flippers, fore-flipper swimming.",
+    "otariidae_vs_phocidae": "Otariidae: external ear flaps, rotate hind flippers, walk on land, swim with fore flippers. Phocidae: no external ears, cannot rotate hind flippers, undulate on land, swim with hind flippers."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "100-3000 Hz. Deep fundamental with rich harmonics.",
+    "peak_energy_band_hz": "~200-800 Hz. Deep chest resonance.",
+    "song_frequency_hz": "Bull roar fundamental: ~100-300 Hz.",
+    "song_duration_s": "Individual roar: 1-5 seconds. Repeated in series. Continuous at rookeries.",
+    "note_structure": "Deep, sustained, thunderous roar. Belching quality. Also: cow calls (shorter, lower), pup bleats (higher).",
+    "note_types": "Bull roar (primary), cow call, pup bleat, colony cacophony.",
+    "phrase_structure": "Roar series: multiple calls in rapid succession during territorial disputes. Colony: overlapping continuous vocalizations.",
+    "timbre": "Deep, resonant, thunderous. Chest resonance amplified by massive body. Intimidating.",
+    "amplitude": "E=6. Maximum for SPS. Loudest PNW pinniped. Carries across rookery and beyond.",
+    "tempo": "Roar rate variable: rapid during disputes, intermittent during patrol.",
+    "context": "Breeding rookeries, territorial defense, dominance, haul-outs.",
+    "regional_variation": "Minimal. Individual recognition by colony members.",
+    "key_property": "COLONY ROAR. FIRST OTARIIDAE. Largest sea lion. 2,500 lbs. Endangered (western DPS). E=6 maximum. v1.49.323."
+  },
+  "pelage": {
+    "overall": "Light tan to reddish-brown. Males darker, with thick mane of coarse hair around neck. Females lighter.",
+    "diagnostic_mark": "Massive size (males). Thick neck mane. External ear flaps (vs Phocidae). Broad forehead. Can walk on all four flippers.",
+    "seasonal_variation": "Minimal. Males develop fuller mane with maturity.",
+    "sexual_dimorphism": "Extreme. Males: 3.3m, 1,120 kg. Females: 2.5m, 350 kg. 3:1 weight ratio."
+  },
+  "physical_description": {
+    "overall": "Males: length 3.3m, weight up to 1,120 kg. Females: 2.5m, up to 350 kg. Massive forequarters, thick neck, sagittal crest (males). External ear flaps.",
+    "diagnostic_mark": "Largest sea lion. External ear flaps. Broad forehead. Thick neck mane (males). Walks on flippers.",
+    "field_id": "Very large sea lion on rocky haul-out. Tan/reddish-brown. External ear flaps visible. Males enormous with thick neck. Listen for deep, sustained roar."
+  },
+  "nodes": [
+    {
+      "id": "first-otariidae",
+      "type": "milestone",
+      "title": "First Otariidae -- Eared Seals Enter",
+      "description": "FIRST OTARIIDAE in the engine. Eared seal family distinguished from Phocidae by external ears, rotating flippers, fore-flipper swimming. Three entries: 182-184.",
+      "connections": ["colony-roar", "largest-sea-lion", "endangered-status"]
+    },
+    {
+      "id": "colony-roar",
+      "type": "concept",
+      "title": "Colony Roar -- E=6 Maximum",
+      "description": "Loudest PNW pinniped. Deep, sustained, thunderous bull roar. Colony cacophony at breeding rookeries. 100-3000 Hz with rich harmonics.",
+      "connections": ["first-otariidae", "largest-sea-lion"]
+    },
+    {
+      "id": "largest-sea-lion",
+      "type": "concept",
+      "title": "Largest Sea Lion -- 2,500 lbs",
+      "description": "Males up to 3.3m, 1,120 kg. 3x female weight. Extreme sexual dimorphism. Megafauna scale. Named for Georg Steller (1741).",
+      "connections": ["first-otariidae", "colony-roar", "endangered-status"]
+    },
+    {
+      "id": "endangered-status",
+      "type": "concept",
+      "title": "Endangered -- Conservation Crisis",
+      "description": "Western DPS: ESA Endangered (~80% decline). Eastern DPS: delisted 2013 after recovery. Nutritional stress, fisheries, predation, historical harvest.",
+      "connections": ["first-otariidae", "largest-sea-lion"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-180",
+      "species": "Harbor Seal",
+      "relationship": "PHOCIDAE vs OTARIIDAE! True seal vs eared seal. The fundamental pinniped split. Bark (E=4) vs roar (E=6). No ears vs external ears."
+    },
+    {
+      "target": "SPS-183",
+      "species": "California Sea Lion",
+      "relationship": "OTARIIDAE PAIR! Steller (182) and California (183): comparison pair. Largest vs most familiar. Same family, different scale."
+    },
+    {
+      "target": "SPS-184",
+      "species": "Northern Fur Seal",
+      "relationship": "OTARIIDAE TRIO! Third and final eared seal. Fur seal vs sea lion within the family. Different ecological niche."
+    },
+    {
+      "target": "S36-182",
+      "artist": "Criminal Nation",
+      "relationship": "RAW POWER! Gangsta rap confrontation + colony roar. E=7 + E=6 = E=13. Highest combined energy in the engine."
+    }
+  ]
+}
