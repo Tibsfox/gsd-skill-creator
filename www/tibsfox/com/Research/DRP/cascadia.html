@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cascadia Subduction Zone &mdash; The Big One | DRP | Tibsfox Research</title>
+<style>
+:root {
+  --drp-red: #8b1a1a;
+  --drp-amber: #d4943a;
+  --drp-light: #e8a84c;
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --green: #4CAF50;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--drp-amber); text-decoration:none; }
+a:hover { color:#f0d070; }
+
+header {
+  background:linear-gradient(135deg, #1a0808 0%, var(--drp-red) 30%, #3d1010 60%, var(--bg) 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:3px solid var(--drp-amber);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 50% 60% at 50% 40%, rgba(139,26,26,0.15) 0%, transparent 70%);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+header .subtitle { color:var(--drp-amber); font-size:0.9rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a.active { color:var(--drp-amber); }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1.3rem; color:#fff; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+h3 { font-size:1rem; color:var(--drp-amber); margin:1.5rem 0 0.5rem; font-weight:600; }
+p { margin:0.6rem 0; font-size:0.9rem; }
+
+.data-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; font-family:system-ui,sans-serif; }
+.data-table th { text-align:left; color:var(--drp-amber); font-weight:600; padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; }
+.data-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.data-table td:first-child { color:var(--drp-light); white-space:nowrap; }
+
+.warning {
+  background:rgba(139,26,26,0.1); border:1px solid rgba(139,26,26,0.3); border-radius:4px;
+  padding:1.2rem 1.5rem; margin:1rem 0; border-left:3px solid var(--drp-red);
+}
+.warning h4 { color:#d04040; font-size:0.9rem; margin-bottom:0.4rem; }
+.warning p { font-size:0.85rem; font-family:system-ui,sans-serif; }
+
+.prep-item {
+  background:var(--panel); border:1px solid var(--border); border-radius:4px;
+  padding:1.2rem 1.5rem; margin:0.8rem 0; border-left:3px solid var(--green);
+}
+.prep-item h4 { color:var(--green); font-size:0.9rem; margin-bottom:0.4rem; }
+.prep-item p { font-size:0.85rem; font-family:system-ui,sans-serif; }
+
+.connects { font-size:0.78rem; color:var(--gold); font-style:italic; margin-top:1rem; padding:0.8rem; background:var(--panel); border:1px solid var(--border); border-radius:4px; }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Cascadia Subduction Zone</h1>
+  <div class="subtitle">700 miles of locked fault, 300+ years of accumulated strain, and the preparedness gap</div>
+  <nav>
+    <a href="index.html">DRP Home</a>
+    <a class="active" href="cascadia.html">Cascadia</a>
+    <a href="zero-trust-comms.html">Zero-Trust Comms</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+<h2>The Fault</h2>
+
+<p>The Cascadia Subduction Zone is a 1,000-kilometer (620-mile) megathrust fault stretching from Cape Mendocino, California to northern Vancouver Island, British Columbia. The Juan de Fuca plate subducts beneath the North American plate at approximately 40 mm/year. The shallow portion of the fault is <strong>locked</strong> &mdash; the two plates are stuck together, accumulating elastic strain that will release in a future earthquake.</p>
+
+<table class="data-table">
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Length</td><td>~1,000 km (Cape Mendocino, CA to Vancouver Island, BC)</td></tr>
+<tr><td>Last full rupture</td><td>January 26, 1700, 21:00 local (~M9.0)</td></tr>
+<tr><td>Recurrence interval</td><td>200&ndash;600 years (average ~243 years for full-margin events)</td></tr>
+<tr><td>Time since last event</td><td>326 years (as of 2026)</td></tr>
+<tr><td>Convergence rate</td><td>~40 mm/year (Juan de Fuca beneath North America)</td></tr>
+<tr><td>Accumulated slip</td><td>~13 meters since 1700</td></tr>
+<tr><td>Expected magnitude</td><td>M8.0&ndash;9.2 (depending on rupture length)</td></tr>
+<tr><td>Tsunami arrival time</td><td>15&ndash;30 min (outer coast), 1&ndash;2 hr (Puget Sound, if generated)</td></tr>
+</table>
+
+<h2>How We Know</h2>
+
+<h3>The Ghost Forest</h3>
+<p>In the late 1980s, geologist Brian Atwater discovered drowned forests along the Washington coast &mdash; trees killed by sudden land subsidence during past earthquakes. Radiocarbon dating showed multiple events over the last several thousand years. The most recent killed trees that were alive in the late 1690s.</p>
+
+<h3>The Japanese Orphan Tsunami</h3>
+<p>Japanese historical records document a tsunami on January 27, 1700 that arrived without a preceding local earthquake &mdash; an &ldquo;orphan tsunami.&rdquo; Kenji Satake and colleagues traced it back across the Pacific to a source: the Cascadia Subduction Zone. The timing, combined with tree-ring dating and coastal subsidence evidence, pinpoints the event to approximately 9 PM local time on January 26, 1700. Magnitude: approximately 9.0.</p>
+
+<h3>Turbidite Record</h3>
+<p>Chris Goldfinger&rsquo;s work on deep-sea sediment cores off the Pacific Northwest coast identified 41 turbidites (underwater landslide deposits) in the last 10,000 years. These correlate across multiple sites, indicating 19 full-margin ruptures and 22 southern-segment ruptures. The average recurrence interval for full-margin events: ~500 years. For southern segment events: ~240 years. Both are overdue.</p>
+
+<h2>Scenario: Full-Margin M9.0</h2>
+
+<div class="warning">
+<h4>This is not speculative. This is the documented behavior of this fault.</h4>
+<p>The Cascadia Subduction Zone has produced at least 19 M8.7&ndash;9.2 earthquakes in the last 10,000 years. It will produce another. The only unknowns are when and how much of the fault ruptures.</p>
+</div>
+
+<h3>Shaking</h3>
+<p>Duration: <strong>3&ndash;5 minutes</strong> of strong ground motion (a typical earthquake lasts 10&ndash;30 seconds). The long duration is due to the fault length &mdash; the rupture propagates at ~3 km/s along 1,000 km. Amplification in sedimentary basins (Seattle, Portland, Willamette Valley) extends and intensifies shaking. Expected Modified Mercalli Intensity: VII&ndash;IX across western Washington and Oregon.</p>
+
+<h3>Tsunami</h3>
+<p>The seafloor lifts meters during the rupture, displacing the entire water column. Tsunami waves reach the outer coast in <strong>15&ndash;30 minutes</strong>. Run-up heights: 6&ndash;20 meters depending on coastal geometry. Inundation extends hundreds of meters to several kilometers inland on low-lying coasts. Grays Harbor, Willapa Bay, and the lower Columbia River are particularly vulnerable.</p>
+
+<h3>Infrastructure</h3>
+<table class="data-table">
+<tr><th>System</th><th>Expected Impact</th><th>Recovery Time</th></tr>
+<tr><td>Power grid</td><td>Widespread outages, substation damage, dam inspections</td><td>1&ndash;3 months</td></tr>
+<tr><td>Water/sewer</td><td>Pipe breaks, treatment plant damage, contamination</td><td>1 month&ndash;1 year</td></tr>
+<tr><td>Roads/bridges</td><td>Liquefaction, landslides, bridge collapses (pre-seismic stock)</td><td>Months&ndash;years</td></tr>
+<tr><td>Communications</td><td>Cell towers overloaded/damaged, fiber cuts, PSTN failure</td><td>Days&ndash;weeks</td></tr>
+<tr><td>Fuel supply</td><td>Critical Energy Infrastructure (CEI) hub in NW Portland at risk from liquefaction</td><td>Weeks&ndash;months</td></tr>
+<tr><td>Hospitals</td><td>Many unreinforced masonry buildings, generator fuel limited to 72 hours</td><td>Weeks</td></tr>
+</table>
+
+<h2>ShakeAlert: Early Warning</h2>
+
+<p>The USGS ShakeAlert system detects earthquakes and sends warnings before strong shaking arrives at your location. For a Cascadia event originating offshore, <strong>Seattle could receive 1&ndash;3 minutes of warning</strong> &mdash; enough to Drop-Cover-Hold On, stop elevators, open fire station doors, slow trains, and halt surgical procedures.</p>
+
+<p>ShakeAlert uses a network of seismometers across the West Coast. When P-waves (the faster, weaker first arrival) are detected, the system calculates magnitude and location within seconds and broadcasts alerts through the Wireless Emergency Alert (WEA) system, Android/iOS earthquake warnings, and dedicated receivers at hospitals, fire stations, and transit systems.</p>
+
+<div class="connects"><a href="https://www.shakealert.org">shakealert.org</a> &mdash; USGS official. Currently serves 50+ million residents in CA, OR, WA.</div>
+
+<h2>What You Can Do</h2>
+
+<div class="prep-item">
+<h4>Water: 1 gallon per person per day, minimum 14 days</h4>
+<p>Municipal water will fail. Store water in food-grade containers. A 55-gallon drum per household is reasonable. Water purification tablets (iodine or chlorine dioxide) and a portable filter extend your supply indefinitely from natural sources. The Snohomish River, Lake Stevens, and Silver Lake are within reach of most Everett/Mukilteo residents.</p>
+</div>
+
+<div class="prep-item">
+<h4>Food: 14 days minimum, no-cook preferred</h4>
+<p>Canned goods, dried foods, energy bars, peanut butter. Rotate stock every 6 months. A camp stove with fuel extends options. Our <a href="../MUK/food.html">food heritage research</a> documents the history of PNW food systems &mdash; the same resilience patterns apply: local sourcing, preservation, community sharing.</p>
+</div>
+
+<div class="prep-item">
+<h4>Communications: Don&rsquo;t depend on cell towers</h4>
+<p>Cell networks will be overwhelmed within minutes. Alternatives: NOAA Weather Radio (battery/hand-crank), FRS/GMRS walkie-talkies (no license), ham radio (license required, most capable). Our <a href="zero-trust-comms.html">zero-trust communications page</a> covers the full stack: Meshtastic mesh, JS8Call weak-signal, AREDN high-bandwidth, Winlink email over radio.</p>
+</div>
+
+<div class="prep-item">
+<h4>Power: Plan for 2 weeks without grid</h4>
+<p>Solar panels + battery bank for essentials (phone charging, radio, lights). A 100W panel + 500Wh battery covers basics. Generators require fuel &mdash; which may be unavailable. Hand-crank and solar are self-sustaining. LED lanterns over candles (fire risk in damaged structures).</p>
+</div>
+
+<div class="prep-item">
+<h4>Go-bag: 72 hours of survival on your back</h4>
+<p>Water, food, first aid, medications, documents (copies), cash, flashlight, multi-tool, change of clothes, emergency blanket. One bag per person, stored by the door. Practice carrying it once &mdash; if it&rsquo;s too heavy, remove items until you can actually move with it.</p>
+</div>
+
+<div class="prep-item">
+<h4>Community: Your neighborhood is your first responder</h4>
+<p>After a major earthquake, professional responders will be overwhelmed for days. Your neighbors are your emergency team. Know them. Map who has medical training, tools, generators, ham radios. The Map Your Neighborhood program (Washington EMD) provides a simple framework. Our co-op network architecture maps directly onto this: distributed resources, local coordination, federated communication.</p>
+</div>
+
+<h2>Cascadia Rising Exercises</h2>
+
+<p><strong>Cascadia Rising</strong> is a series of regional emergency exercises testing response to a M9.0 CSZ earthquake. The most recent full-scale exercise involved federal, state, and local agencies across WA, OR, CA, and BC. Key findings: communication failures between jurisdictions, hospital surge capacity inadequate, fuel distribution bottleneck at Portland CEI hub, and transportation network collapse within 24 hours. Each exercise identifies gaps. Fixing them takes years of infrastructure investment.</p>
+
+<h2>Connection to Our Work</h2>
+
+<p>The DRP research cluster exists because this earthquake will happen. The <a href="zero-trust-comms.html">zero-trust communications stack</a> is designed for exactly this scenario: no internet, no cell towers, no power grid. The Meshtastic mesh works on battery. JS8Call works at -24dB SNR with a wire antenna. AREDN replaces the internet at 60 Mbps. These aren&rsquo;t theoretical &mdash; they&rsquo;re the same technologies that deployed after Hurricane Maria (2017), the Maui wildfire (2023), and the Turkey earthquake (2023).</p>
+
+<p>The co-op network model (food, energy, communication) is the preparedness plan scaled to community level. Distributed infrastructure is resilient infrastructure. No single point of failure. No dependence on centralized systems. The same architecture that runs our agent orchestration also describes how communities survive when the grid goes dark.</p>
+
+</main>
+
+<footer>
+  <a href="index.html">DRP Home</a> &middot; <a href="zero-trust-comms.html">Zero-Trust Comms</a> &middot; <a href="../index.html">Research Index</a><br>
+  Sources: USGS (<a href="https://www.shakealert.org">ShakeAlert</a>) &middot; Oregon DOGAMI &middot; Washington EMD &middot; Atwater et al. (2005) &middot; Goldfinger et al. (2012) &middot; Satake et al. (2003)<br>
+  Last updated: 2026-04-03T22:30Z (sweep v1.3.15.2)
+</footer>
+
+</body>
+</html>
