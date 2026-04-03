@@ -1,0 +1,127 @@
+{
+  "degree": 133,
+  "species": "Snow Goose",
+  "scientific_name": "Anser caerulescens",
+  "slug": "133-snow-goose",
+  "sound_type": "shrill dissonant flock call -- high-pitched nasal bark 'honk' or 'whouk' at 600-4000 Hz, individually harsh and unmusical, but amplified by flock of 10,000-50,000+ into continuous dissonant roar, E=5 flock-scale overwhelm, mass liftoffs physically immersive",
+  "energy": 5,
+  "ecosystem": "Delta, winter visitor. Skagit Valley agricultural fields and tidal flats, Fir Island. Breeds on Arctic tundra. Massive winter flocks of tens of thousands.",
+  "season": "Winter visitor (October-March). Breeds on Arctic tundra in summer. Peak numbers December through February.",
+  "family": "Anatidae (16th consecutive: 118-133)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Snow Goose",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.47,
+    "lon": -122.37,
+    "description": "Reference for Fir Island, Skagit Valley -- primary Snow Goose concentration area. Tens of thousands of birds in agricultural fields."
+  },
+  "taxonomy_note": {
+    "description": "SIXTEENTH consecutive Anatidae (118-133). Second Anser genus entry (after Greater White-fronted Goose, 132). Some authorities place Snow Goose in genus Chen. E=5 reflects the sheer overwhelming volume of Snow Goose flocks. Fifth goose in the goose era (129-134). White and blue morphs -- single-gene polymorphism. Population explosion (15M+) destroying Arctic breeding habitat. Conservation irony.",
+    "current_family": "Anatidae (16th consecutive -- streak ongoing, one more entry)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae: sixteen consecutive at degrees 118-133. Nearly doubled the Picidae record (9).",
+    "name_etymology": "Anser from Latin 'goose.' caerulescens from Latin 'becoming blue' -- referring to the blue morph, which was described and named first. The species was named from the dark form, not the white.",
+    "genus_note": "Anser -- second entry (after Greater White-fronted Goose, 132). Some authorities use Chen for Snow Goose. AOS currently treats it as Anser caerulescens.",
+    "order_note": "Anseriformes. Sixteenth consecutive Anatidae.",
+    "family_position": "Anatidae at sixteenth consecutive. One more entry (Ross's Goose, 134) before the streak ends."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "600-4,000 Hz. Highest-pitched goose in the engine. The shrill quality comes from energy concentrated in the 1,500-3,500 Hz range.",
+    "peak_energy_band_hz": "1,500-3,500 Hz. Higher and shriller than all other PNW geese. Piercing quality to the human ear.",
+    "song_frequency_hz": "Flock call: 600-4,000 Hz. Individual bark: one syllable. Alarm: sharper, more rapid.",
+    "song_duration_s": "Individual calls 0.3-1.0 seconds. One syllable. Given in rapid series when alarmed.",
+    "note_structure": "SHRILL NASAL BARK: One-syllable 'honk' or 'whouk' or yelping 'awk.' High-pitched. Relatively simple waveform. Harsh and unmusical individually. Collectively overwhelming.",
+    "note_types": "Flock contact call (primary), alarm call (sharper, more rapid), flight call (continuous chattering), feeding murmur (softer).",
+    "phrase_structure": "Continuous overlapping calls in large flocks. No structured phrase -- the flock produces a broadband noise field from thousands of simultaneous vocalizations.",
+    "timbre": "Shrill. Nasal. Harsh. Piercing. Lacks the musical quality of Greater White-fronted Goose (132) or the resonant depth of Canada Goose (129).",
+    "amplitude": "E=5. Individual call is moderate. Flock of 10,000-50,000+ produces overwhelming volume. Mass liftoffs: physically immersive. Audible for a mile or more.",
+    "tempo": "Rapid and continuous in flocks. Individual calls at 1-3 second intervals. In alarm, near-continuous.",
+    "context": "Flock communication, flight coordination, alarm, contact. The flock sound is constant when birds are active. Mass liftoffs produce acoustic climax events.",
+    "regional_variation": "Pacific flyway birds (Wrangel Island breeding population) vs. mid-continent birds. Minimal vocal variation. Blue morph frequency varies geographically.",
+    "key_property": "SHRILL DISSONANT FLOCK CALL -- E=5 FLOCK-SCALE OVERWHELM. Nasal bark at 600-4,000 Hz. Tens of thousands of birds producing continuous wall of dissonant sound. Mass liftoffs physically immersive. SIXTEENTH CONSECUTIVE ANATIDAE (118-133). White and blue morphs -- single-gene polymorphism. Conservation irony: population explosion destroying Arctic habitat. 15M+ birds. Skagit Valley spectacle. 'White blizzard.'"
+  },
+  "plumage": {
+    "overall": "White morph: entirely white with black wingtips. Pink bill with black 'grinning patch.' Pink legs. Blue morph: dark gray to blue-gray body with white head and upper neck. Both morphs: pink bill and legs.",
+    "diagnostic_mark": "White morph: all-white with black wingtips. Blue morph: dark body with white head. Pink bill with black grinning patch in both morphs.",
+    "seasonal_variation": "Juveniles: grayish overall (white morph juveniles), darker gray (blue morph juveniles). Adults: clean plumage. Staining: rusty facial staining common from feeding in iron-rich soils.",
+    "flight_pattern": "Massive flocks in V-formation or swirling masses. White birds against gray winter sky = 'white blizzard.' Black wingtips visible. The visual spectacle matches the acoustic overwhelm."
+  },
+  "physical_description": {
+    "overall": "Body length 64-79 cm (25-31 inches). Weight 2.0-3.5 kg (4.4-7.7 lbs). Wingspan 132-165 cm. Medium-large goose. Similar size to Greater White-fronted Goose but chunkier.",
+    "diagnostic_mark": "White morph unmistakable: all-white goose with pink bill and black wingtips. Blue morph: dark body, white head, pink bill. Grinning patch (black line on bill edge) diagnostic in both morphs.",
+    "field_id": "In the Skagit Valley: look for white blankets in agricultural fields visible from a distance. Listen for the continuous shrill hum. At closer range: pink bills with black grinning patch, black wingtips. Scan for blue morphs among the white mass."
+  },
+  "nodes": [
+    {
+      "id": "shrill-flock",
+      "type": "concept",
+      "title": "Shrill Dissonant Wall of Sound -- E=5 Flock-Scale Overwhelm",
+      "description": "Nasal bark at 600-4,000 Hz. Highest-pitched goose. Simple individual call amplified by 10,000-50,000+ birds into continuous dissonant roar. Mass liftoffs physically immersive. Audible for a mile+. One of the most overwhelming avian sounds in the PNW.",
+      "connections": ["blue-morph", "conservation-irony", "goose-quintet", "anatidae-streak"]
+    },
+    {
+      "id": "blue-morph",
+      "type": "concept",
+      "title": "Blue Morph -- Single-Gene Color Polymorphism",
+      "description": "White and blue morphs controlled by a single gene with incomplete dominance. Blue morph once classified as separate species ('Blue Goose'). Species named from the dark form: caerulescens = 'becoming blue.' Blue morphs uncommon in Skagit Valley flocks (eastern Arctic origin).",
+      "connections": ["shrill-flock", "conservation-irony"]
+    },
+    {
+      "id": "conservation-irony",
+      "type": "concept",
+      "title": "Conservation Irony -- Too Many Geese",
+      "description": "Saved from overhunting. Population exploded to 15M+ from agricultural food subsidies. Now overgrazing Arctic tundra breeding habitat -- 'eat-outs' destroying vegetation for decades. Light Goose Conservation Order (1999). Conservation success became ecological crisis.",
+      "connections": ["shrill-flock", "blue-morph", "skagit-spectacle"]
+    },
+    {
+      "id": "skagit-spectacle",
+      "type": "pattern",
+      "title": "Skagit Valley Spectacle -- White Blizzards",
+      "description": "Fir Island and surrounding Skagit Valley agricultural fields. 30,000-50,000+ birds at peak. White blankets visible from distance. Mass liftoffs = 'white blizzard.' One of the PNW's great wildlife events. Tourism driver. December-February peak.",
+      "connections": ["shrill-flock", "conservation-irony"]
+    },
+    {
+      "id": "goose-quintet",
+      "type": "pattern",
+      "title": "Goose Quintet Position 5 (129-133)",
+      "description": "Canada (129, deep honk, E=5), Cackling (130, higher cackle, E=4), Brant (131, low murmur, E=4), White-fronted (132, musical laugh, E=4), Snow (133, shrill bark, E=5). Five geese, five sounds. One more: Ross's Goose (134, FINAL).",
+      "connections": ["shrill-flock", "anatidae-streak"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Sixteenth Consecutive Anatidae (118-133)",
+      "description": "E=5 breaks the E=4 plateau (130-132). Nearly doubled the Picidae record (9). One more entry (Ross's Goose, 134) before the streak ends at seventeen -- the all-time record by a massive margin.",
+      "connections": ["goose-quintet", "shrill-flock"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-132",
+      "species": "Greater White-fronted Goose",
+      "relationship": "ANSER PAIR! White-fronted (132, E=4, musical laugh, small-moderate flocks) to Snow (133, E=5, shrill bark, massive flocks). Both Anser genus. Musical vs. dissonant. The contrast within a genus."
+    },
+    {
+      "target": "SPS-129",
+      "species": "Canada Goose",
+      "relationship": "E=5 PAIR! Canada (129, E=5, deep honk, large flocks) and Snow (133, E=5, shrill bark, massive flocks). Both achieve E=5 through flock scale. Opposite acoustic character: deep vs. shrill."
+    },
+    {
+      "target": "SPS-134",
+      "species": "Ross's Goose",
+      "relationship": "COMPARISON PAIR! Snow (133, E=5, large, massive flocks) and Ross's (134, E=4, tiny, mixed in Snow flocks). Mirrors Canada/Cackling (129/130). Ross's = the FINAL Anatidae."
+    },
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "SIXTEEN CONSECUTIVE! Harlequin (118, E=5, stream) to Snow Goose (133, E=5, delta). Sixteen consecutive Anatidae. One more to go."
+    },
+    {
+      "target": "SPS-128",
+      "species": "Trumpeter Swan",
+      "relationship": "ENERGY SURGE! Trumpeter (128, E=6 climax). After E=4 plateau (130-132), Snow Goose surges to E=5. Flock scale driving energy back up."
+    }
+  ]
+}
