@@ -1,0 +1,110 @@
+{
+  "degree": 146,
+  "species": "Common Nighthawk",
+  "scientific_name": "Chordeiles minor",
+  "slug": "146-common-nighthawk",
+  "sound_type": "nasal 'peent!' call (2000-4000 Hz) + booming dive (100-200 Hz mechanical sound from air through primaries); dual-mode: vocal + mechanical; E=5; spectacular aerial display",
+  "energy": 5,
+  "ecosystem": "Open sky over various habitats -- urban rooftops, gravel bars, open fields, forest clearings. Most aerial nightjar. Crepuscular. Summer breeder. Migrates to South America. Urban rooftop nester (declining). 'Bull-bat' folk name.",
+  "season": "Summer breeder in PNW (May-September). Migrates to South America (Amazon basin). Departs August-September. Crepuscular peak activity at twilight.",
+  "family": "Caprimulgidae (2nd entry. Nightjar contrast pair with Poorwill at 145.)",
+  "order": "Caprimulgiformes",
+  "csv_substitute": false,
+  "original_species": "Common Nighthawk",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.33,
+    "description": "Common Nighthawks breed across Washington, including urban areas. Evening 'peent' calls and booming dives heard over cities and towns."
+  },
+  "taxonomy_note": {
+    "description": "First Common Nighthawk entry. SECOND CAPRIMULGIDAE. Nightjar contrast pair with Poorwill (145). First genus: Chordeiles. Dual-mode sound production (vocal + mechanical). Most aerial nightjar. Urban rooftop nester. 'Bull-bat' folk name.",
+    "current_family": "Caprimulgidae (2nd entry)",
+    "new_family": false,
+    "family_count_in_engine": "Caprimulgidae: second entry. Poorwill (145) + Nighthawk (146).",
+    "name_etymology": "Chordeiles from Greek 'choreia' (dance) + 'deile' (evening) -- 'evening dancer.' minor from Latin 'smaller' (smaller than expected for its wingspan).",
+    "genus_note": "Chordeiles -- first entry. Evening dancers.",
+    "order_note": "Caprimulgiformes. Second entry.",
+    "family_position": "Second Caprimulgidae. Nightjar contrast pair: Poorwill (ground, E=3) vs. Nighthawk (aerial, E=5)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Peent: 2000-4000 Hz (vocal). Boom: 100-200 Hz (mechanical).",
+    "peak_energy_band_hz": "Peent: 2500-3500 Hz. Boom: 120-180 Hz.",
+    "song_frequency_hz": "Two modes: peent at 2000-4000 Hz (nasal, buzzy); boom at 100-200 Hz (deep, resonant, near-subsonic).",
+    "song_duration_s": "Peent: ~0.2 seconds each, irregular intervals. Boom: ~0.3-0.5 seconds. Display bouts: 15-30+ minutes.",
+    "note_structure": "DUAL-MODE: Peent (single nasal note, repeated) + Boom (single mechanical pulse from dive pullout). Two sound production systems.",
+    "note_types": "Peent (vocal, territorial/display), boom (mechanical, courtship/territorial), squeak (alarm, rare).",
+    "phrase_structure": "Display sequence: peent...peent...peent... (flying) then climb, stall, dive, BOOM. Repeat. Peenting = rhythmic base; booms = periodic punctuation.",
+    "timbre": "Peent: nasal, buzzy, metallic. Boom: deep, resonant, almost subsonic -- felt in chest. Two radically different timbres from one bird.",
+    "amplitude": "E=5. Peent: moderate-to-loud (300-500m). Boom: loud (500m+). Combined output high. Landscape-filling at display peak.",
+    "tempo": "Peent: irregular, 1-3 per second during active flight. Boom: periodic, every 30-60 seconds during display. Tempo contrast: rapid peenting punctuated by infrequent booms.",
+    "context": "Territorial display, courtship. Males perform booming dives near females and at territorial boundaries. Peak: May-July twilight. Crepuscular.",
+    "regional_variation": "Minimal for vocalization. Dive boom consistent across range (physics-based, not learned).",
+    "key_property": "DUAL-MODE SOUND -- vocal 'peent!' (2000-4000 Hz) + mechanical boom (100-200 Hz, air through primaries). E=5. SECOND CAPRIMULGIDAE. Booming dive most spectacular aerial display. Nightjar contrast pair with Poorwill (145). Urban rooftop nester. Crepuscular. 'Bull-bat.' Flock migration."
+  },
+  "plumage": {
+    "overall": "Dark brown-gray with intricate barring and mottling. White wing patches (visible in flight -- diagnostic). White throat band. Long, pointed wings. Forked tail.",
+    "diagnostic_mark": "White wing patches in flight -- bold white bars across the primaries. In flight silhouette: long pointed wings, erratic flight, white patches flash. Peent call immediately diagnostic.",
+    "seasonal_variation": "Minimal.",
+    "flight_pattern": "Buoyant, erratic, bat-like. Long pointed wings. Sudden turns and dives pursuing insects. Display: steep dive with pullout boom."
+  },
+  "physical_description": {
+    "overall": "Length: 22-25 cm. Weight: 55-98 g. Wingspan: 51-61 cm. Larger and longer-winged than Poorwill. Streamlined for sustained flight.",
+    "diagnostic_mark": "White wing patches in flight. Long pointed wings. Nasal 'peent' call. Booming dive. Seen at twilight.",
+    "field_id": "Listen for nasal 'peent!' at twilight over open areas, parking lots, fields. Watch for erratic bat-like flight and white wing patches. The booming dive is unmistakable -- steep plummet followed by deep BOOM."
+  },
+  "nodes": [
+    {
+      "id": "booming-dive",
+      "type": "pattern",
+      "title": "Booming Dive -- Mechanical Sound Production",
+      "description": "Male dives at 60-100 km/h, air through spread primaries creates deep boom at 100-200 Hz. Felt in chest. Carries 500m+. Most spectacular aerial display in the engine. Physics: aerodynamic feather vibration.",
+      "connections": ["dual-mode-sound", "aerial-specialist"]
+    },
+    {
+      "id": "dual-mode-sound",
+      "type": "pattern",
+      "title": "Dual-Mode Sound -- Vocal + Mechanical",
+      "description": "Two distinct sound production systems: 'peent' (vocal, syrinx, 2000-4000 Hz) and boom (mechanical, feathers, 100-200 Hz). Unique dual modality in the engine. Analogous to Short-eared Owl wing-clap (140).",
+      "connections": ["booming-dive", "nightjar-contrast-pair"]
+    },
+    {
+      "id": "aerial-specialist",
+      "type": "concept",
+      "title": "Aerial Specialist -- Life on the Wing",
+      "description": "Eats, drinks, and displays in flight. Continuous aerial hawking. Crepuscular activity peak. Flock migration. Most aerial nightjar. Contrast with Poorwill's ground-sitting strategy.",
+      "connections": ["booming-dive", "urban-rooftop"]
+    },
+    {
+      "id": "urban-rooftop",
+      "type": "concept",
+      "title": "Urban Rooftop Nesting",
+      "description": "Flat gravel rooftops as nesting substrate. Declining as roofs modernize (rubber membrane replaces gravel). Parents shade chicks with wings in extreme heat. Urban twilight soundscape.",
+      "connections": ["aerial-specialist", "nightjar-contrast-pair"]
+    },
+    {
+      "id": "nightjar-contrast-pair",
+      "type": "pattern",
+      "title": "Nightjar Contrast Pair (145-146)",
+      "description": "Poorwill (E=3, ground, vocal, nocturnal, hibernates) vs. Nighthawk (E=5, aerial, dual-mode, crepuscular, migrates). Same family, opposite strategies. The two extremes of nightjar ecology.",
+      "connections": ["dual-mode-sound", "aerial-specialist"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-145",
+      "species": "Common Poorwill",
+      "relationship": "NIGHTJAR CONTRAST! Poorwill (E=3, ground-sitter, vocal only, nocturnal, hibernates) vs. Nighthawk (E=5, aerial, vocal+mechanical, crepuscular, migrates). Same family, opposite strategies."
+    },
+    {
+      "target": "SPS-140",
+      "species": "Short-eared Owl",
+      "relationship": "MECHANICAL SOUND! Short-eared Owl wing-clap (140) and Nighthawk boom (146): both produce non-vocal mechanical sounds during flight displays. Wing-based acoustics across families."
+    },
+    {
+      "target": "SPS-147",
+      "species": "Vaux's Swift",
+      "relationship": "NEXT DEGREE! Nighthawk (Caprimulgidae, E=5) to Swift (Apodidae, E=4). Nightjars to swifts. Both aerial insectivores, different families. FIRST APODIDAE."
+    }
+  ]
+}
