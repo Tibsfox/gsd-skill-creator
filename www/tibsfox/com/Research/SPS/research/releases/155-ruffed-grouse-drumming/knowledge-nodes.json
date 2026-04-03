@@ -1,0 +1,108 @@
+{
+  "degree": 155,
+  "species": "Ruffed Grouse",
+  "scientific_name": "Bonasa umbellus",
+  "slug": "155-ruffed-grouse-drumming",
+  "sound_type": "accelerating wing-drum display on fallen log -- wings beat air while stationary, creating low-frequency pressure pulses that accelerate from 2/sec to 20/sec; fourth mechanical sound in the engine; E=5",
+  "energy": 5,
+  "ecosystem": "Forest -- mixed deciduous-coniferous forest with dense understory. Young, regenerating forests with aspen, birch, alder, mixed conifers. Fallen logs for drumming. Most widely distributed grouse in North America.",
+  "season": "Year-round resident. Drumming peaks April-June. Dawn and dusk. Hundreds of bouts per day during peak breeding.",
+  "family": "Phasianidae (3rd entry. THIRD PHASIANIDAE. First mechanical Phasianidae entry.)",
+  "order": "Galliformes",
+  "csv_substitute": false,
+  "original_species": "Ruffed Grouse",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.80,
+    "lon": -121.80,
+    "description": "Ruffed Grouse in PNW forests with alder, birch, cottonwood, and mixed conifers. Riparian corridors and regenerating areas. Both sides of Cascades where habitat conditions are met."
+  },
+  "taxonomy_note": {
+    "description": "THIRD Phasianidae entry. FOURTH MECHANICAL SOUND in engine. The most widespread grouse in North America. Drumming display is one of the most studied mechanical sounds in ornithology. Genus Bonasa: monotypic in North America.",
+    "current_family": "Phasianidae (3rd entry)",
+    "new_family": false,
+    "family_count_in_engine": "Phasianidae: third entry. Wild Turkey (153) + Dusky Grouse (154) + Ruffed Grouse (155). Sooty Grouse (156) follows.",
+    "name_etymology": "Bonasa from Latin 'bonasus' (bison) -- referring to the drumming sound resembling a distant bison. umbellus from Latin 'umbrella, sunshade' -- referring to the ruff of neck feathers that the male fans during display.",
+    "genus_note": "Bonasa -- first entry. Monotypic genus in North America. One species: Ruffed Grouse.",
+    "order_note": "Galliformes. Third entry (after Wild Turkey 153, Dusky Grouse 154).",
+    "family_position": "Third Phasianidae. First mechanical sound from the gamebird family. The wing-drum separates the Dusky-Sooty split pair (154, 156)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Individual beats: approximately 40-100 Hz. Peak acceleration rate: ~20 beats/sec = 20 Hz buzz at threshold of hearing.",
+    "peak_energy_band_hz": "40-100 Hz. Low-frequency. Propagates effectively through forest understory.",
+    "song_frequency_hz": "Drumming beats: 40-100 Hz. Not a vocalization -- mechanical air compression.",
+    "song_duration_s": "Complete bout: 8-11 seconds. ~50 wing beats. Acceleration from 2/sec to 20/sec.",
+    "note_structure": "WING-DRUM: Each beat produced by powerful forward-upward cupped wing stroke. Air compression/vacuum cycle creates low-frequency pressure pulse. No contact with body, log, or other wing.",
+    "note_types": "Wing-drum (primary, breeding display -- mechanical), clucking (contact/alarm -- vocal), hissing (distress/aggression -- vocal).",
+    "phrase_structure": "Acceleration pattern: slow (2/sec) > building > fast (20/sec) > blur > abrupt stop. Complete bout ~8-11 seconds. Repeated throughout dawn/dusk display sessions.",
+    "timbre": "Deep, thumping, building to a low-frequency roar. 'A distant motor starting.' Mechanical -- not vocal. The sound of air being compressed by cupped wings.",
+    "amplitude": "E=5. Audible 200-400 meters. Low frequency aids forest propagation. Not extremely loud in dB but effectively far-carrying.",
+    "tempo": "Acceleration: ~2 beats/sec (initial) to ~20 beats/sec (final). The acceleration is the defining characteristic.",
+    "context": "Breeding season (April-June). Dawn and dusk. Male territorial/courtship display from drumming log. Hundreds of bouts per day.",
+    "regional_variation": "Minor variation in acceleration rate and bout length between populations. Consistent pattern across range.",
+    "key_property": "WING-DRUM -- 40-100 Hz, accelerating 2-20 beats/sec, 8-11 seconds, stationary on log, wings beat air creating pressure pulses. E=5. THIRD PHASIANIDAE. FOURTH MECHANICAL SOUND. 'A distant motor starting.' Log selection critical. Air compression model."
+  },
+  "plumage": {
+    "overall": "Two color morphs: gray and red-brown. Both are cryptically patterned with barring and mottling for forest floor camouflage. Males: black ruff of neck feathers (the 'umbrella' of umbellus), fanned during display. Black tail band.",
+    "diagnostic_mark": "Black tail band (diagnostic). Neck ruff (males). Cryptic mottling. Two color morphs (gray/brown). Small crest.",
+    "seasonal_variation": "Minimal. Males display ruff and fan tail during breeding season.",
+    "flight_pattern": "Explosive burst flight when flushed. Loud wing whir. Short distance. Rapid acceleration. One of the most startling bird flushes."
+  },
+  "physical_description": {
+    "overall": "Length: 40-50 cm. Weight: 450-750 g. Medium grouse. Smaller than Dusky/Sooty Grouse. Stocky build, short tail, small head.",
+    "diagnostic_mark": "Black tail band. Cryptic forest-floor coloring. Ruff of neck feathers. Two color morphs.",
+    "field_id": "Listen for the drumming -- 'a distant motor starting.' Often heard long before seen. On the ground in dense forest. Explosive flush when disturbed."
+  },
+  "nodes": [
+    {
+      "id": "wing-drum-mechanism",
+      "type": "concept",
+      "title": "Wing-Drum -- Air Compression Display",
+      "description": "Wings beat air while bird stands stationary on log. Cupped wing creates localized vacuum followed by air rush, producing low-frequency pressure pulse. ~50 beats per bout. Tail braced against log for support. No contact with anything but air.",
+      "connections": ["acceleration-pattern", "fourth-mechanical"]
+    },
+    {
+      "id": "acceleration-pattern",
+      "type": "concept",
+      "title": "Acceleration Pattern -- 2 to 20 Beats/Second",
+      "description": "Defining characteristic: acceleration from ~2 beats/sec to ~20 beats/sec over 8-11 seconds. Individual thumps merge into continuous low-frequency roar. 'A distant motor starting.' Abrupt stop.",
+      "connections": ["wing-drum-mechanism", "log-selection"]
+    },
+    {
+      "id": "fourth-mechanical",
+      "type": "pattern",
+      "title": "Fourth Mechanical Sound in Engine",
+      "description": "Goldeneye wing whistle (124, in-flight), Mourning Dove whistle (150, takeoff), Rock Pigeon clap (152, takeoff contact), Ruffed Grouse drum (155, stationary). Progression from locomotion byproduct to pure display.",
+      "connections": ["wing-drum-mechanism", "acceleration-pattern"]
+    },
+    {
+      "id": "log-selection",
+      "type": "concept",
+      "title": "Drumming Log Selection and Territory",
+      "description": "Fallen log: 25-40 cm diameter, elevated, dense cover. Multi-year fidelity. Possible resonating platform (mass + air beneath). Territory center. The log defines the territory; the drumming marks the boundary.",
+      "connections": ["acceleration-pattern", "wing-drum-mechanism"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-152",
+      "species": "Rock Pigeon",
+      "relationship": "MECHANICAL PAIR! Rock Pigeon wing clap (152, wings strike each other) vs. Ruffed Grouse drum (155, wings beat air). Contact vs. compression. Adjacent mechanical sounds."
+    },
+    {
+      "target": "SPS-124",
+      "species": "Common Goldeneye",
+      "relationship": "MECHANICAL BOOKENDS! First (124, in-flight whistle) and fourth (155, stationary drum) mechanical sounds. From locomotion to pure display."
+    },
+    {
+      "target": "SPS-154",
+      "species": "Dusky Grouse",
+      "relationship": "GROUSE CONTRAST! Dusky booming (154, vocal, subsonic) vs. Ruffed drumming (155, mechanical, accelerating). Adjacent grouse, different mechanisms."
+    },
+    {
+      "target": "SPS-156",
+      "species": "Sooty Grouse",
+      "relationship": "GROUSE TRIO! Dusky booming (154) > Ruffed drumming (155) > Sooty booming (156). Mechanical separates the split vocal pair."
+    }
+  ]
+}
