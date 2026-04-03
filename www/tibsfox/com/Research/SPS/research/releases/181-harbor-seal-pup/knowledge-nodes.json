@@ -1,0 +1,95 @@
+{
+  "degree": 181,
+  "species": "Harbor Seal (pup)",
+  "scientific_name": "Phoca vitulina",
+  "slug": "181-harbor-seal-pup",
+  "sound_type": "high bleat -- high-pitched, nasal, wavering contact call given by pups to locate mothers. Distinct from adult guttural bark. E=4",
+  "energy": 4,
+  "ecosystem": "Sandy beaches, tidal flats, protected coves. Pupping season: late spring to early summer. Pup stays on beach while mother forages.",
+  "season": "Pupping: May-August, peak June-July. Nursing period: 4-6 weeks. Weaning abrupt.",
+  "family": "Phocidae (second entry -- true seals)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Harbor Seal (pup)",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.53,
+    "lon": -123.01,
+    "description": "Harbor Seal pup on Puget Sound / San Juan Islands beaches. Summer pupping season."
+  },
+  "taxonomy_note": {
+    "description": "Second Harbor Seal entry. Fifth species with double entries. Second Phocidae. Adult (180) = guttural bark. Pup (181) = high bleat. Different sound, same species.",
+    "current_family": "Phocidae (second entry)",
+    "new_family": false,
+    "family_count_in_engine": "Phocidae: Harbor Seal adult (180), Harbor Seal pup (181) -- 2 entries.",
+    "name_etymology": "Pup = young seal. The high bleat is the defining sound of the Harbor Seal pup on PNW beaches.",
+    "double_entry_note": "Fifth species with double entries. Each entry captures a distinct acoustic dimension: adult bark vs pup bleat."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-3000 Hz. Higher than adult bark.",
+    "peak_energy_band_hz": "~800-1500 Hz. Nasal resonance.",
+    "song_frequency_hz": "Bleat fundamental: ~600-1000 Hz.",
+    "song_duration_s": "Individual bleat: 0.3-1.0 seconds. Series: 3-20+ calls with brief pauses.",
+    "note_structure": "High, nasal, wavering bleat. Lamb-like quality. Urgent. Repeated.",
+    "note_types": "Contact bleat (primary), distress call, recognition exchange with mother.",
+    "phrase_structure": "Bleat series: 3-20+ calls, brief pauses between. Persistent when separated.",
+    "timbre": "Nasal, high-pitched, wavering. Distinct from adult guttural bark.",
+    "amplitude": "E=4. Moderate per call but persistent repetition. Carries across beach.",
+    "tempo": "Bleat rate: ~1-2 per second during active calling. Variable with distress level.",
+    "context": "Beach pupping sites. Separation, contact, distress, nursing reunion.",
+    "regional_variation": "Minimal. Individual vocal signatures for mother-pup recognition.",
+    "key_property": "HIGH BLEAT. Mother-pup vocal recognition. Second Harbor Seal entry. Fifth double-entry species. E=4. v1.49.322."
+  },
+  "pelage": {
+    "overall": "Short gray to brown fur, spotted/ringed pattern. Born with adult-type coat (lanugo shed in utero). Lighter than adults.",
+    "diagnostic_mark": "Smaller size. Lighter coloring. Round face with proportionally larger eyes. On beach alone during pupping season.",
+    "seasonal_variation": "Pup coat is the birth coat. First molt after weaning.",
+    "size_at_birth": "Length: ~75-100 cm. Weight: ~8-12 kg. Gain ~0.5 kg/day during nursing."
+  },
+  "nodes": [
+    {
+      "id": "mother-pup-recognition",
+      "type": "concept",
+      "title": "Mother-Pup Vocal Recognition",
+      "description": "Individual vocal signatures recognized within hours of birth. Frequency contour, timing, and harmonic structure encode identity. Acoustic bond critical in crowded colonies.",
+      "connections": ["high-bleat", "double-entry"]
+    },
+    {
+      "id": "high-bleat",
+      "type": "concept",
+      "title": "High Bleat vs Guttural Bark",
+      "description": "Same species, same energy, different sound. Adult: low bark (200-2000 Hz, alarm). Pup: high bleat (500-3000 Hz, contact). Ontogenetic vocal shift.",
+      "connections": ["mother-pup-recognition", "double-entry"]
+    },
+    {
+      "id": "double-entry",
+      "type": "milestone",
+      "title": "Fifth Double Entry Species",
+      "description": "Harbor Seal becomes the fifth species with two entries in the engine. Each captures a distinct acoustic and ecological dimension.",
+      "connections": ["mother-pup-recognition", "high-bleat"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-180",
+      "species": "Harbor Seal (adult)",
+      "relationship": "DOUBLE ENTRY! Adult bark (180) vs pup bleat (181). Same species, same energy, different sound and function. The pair within the species."
+    },
+    {
+      "target": "SPS-182",
+      "species": "Steller Sea Lion",
+      "relationship": "PINNIPED EXPANSION! From Phocidae (true seals, 180-181) to Otariidae (eared seals, 182). Marine mammal era continues."
+    },
+    {
+      "target": "SPS-179",
+      "species": "Ancient Murrelet",
+      "relationship": "PRECOCIAL CONTRAST! Murrelet chick departs nest for sea at 2 days. Seal pup stays on beach 4-6 weeks. Different survival strategies."
+    },
+    {
+      "target": "S36-181",
+      "artist": "Macklemore & Ryan Lewis",
+      "relationship": "PAIR BOND! Creative duo chemistry = #1 hits. Pup bleat = mother recognition. Both about the bond that connects two into one."
+    }
+  ]
+}
