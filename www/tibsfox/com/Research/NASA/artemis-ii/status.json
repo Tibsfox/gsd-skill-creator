@@ -1,6 +1,6 @@
 {
-  "updated": "2026-04-03T05:00:00Z",
-  "source": "sweep-v1.2.22",
+  "updated": "2026-04-03T09:00:00Z",
+  "source": "sweep-v1.2.24-manual",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
@@ -114,6 +114,10 @@
   "announcements": [
     {
       "time": "2026-04-03T03:30:00Z",
+      "text": "v1.2.24: MET+1d10:40 2am PDT. Session 3 final. 32 commits. 28 new pages: CERN (2), DRP (2), MUS (16 — index, 5 pathways, 10 nodes), CSP (2 — index, languages), AI coverage, 2 crew bios, RPI lessons. 19 fact-check corrections. 38 videos + 31 channels queued for research (11.3MB transcripts). Slime mold sim deployed. 4 papers. Integrity ~75K mi outbound, FD3 tomorrow."
+    },
+    {
+      "time": "2026-04-03T05:00:00Z",
       "text": "v1.2.22: MET+1d06:30 10pm PDT. Session 3 wrap sweep. 15 commits this session. New content: CERN root page + WLCG deep dive, DRP disaster recovery + zero-trust comms, AI coverage analysis (Anthropic replication), Physarum slime mold sim, crew-douglas + crew-gibbons backup bios, 5 music theory knowledge nodes, papers #31-34. KPAE 7.0C calm CLR, clear night. FD3 tomorrow."
     },
     {
