@@ -274,3 +274,11 @@ The English Class represents the golden age of practical poultry breeding. These
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Poultry Club of Great Britain, "British Poultry Standards," 7th ed. (2018); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds."*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds]: The English breeds demonstrate how animals can be adapted to specific regional climates through selective breeding, connecting to concepts of geographic adaptation and phenotypic plasticity in the Animals & Birds wing.
+- **Science** --- [Selective Breeding]: The Orpington's development by William Cook --- systematically crossing breeds to produce a specific set of utility and aesthetic traits --- is a textbook example of applied genetics before the molecular era.
+- **Home Economics** --- [Self-Sufficiency, Animal Husbandry]: The English dual-purpose breeds (Orpington, Sussex, Dorking) were developed for practical cottage-farm use, making them ideal subjects for understanding food self-sufficiency and small-scale livestock management.

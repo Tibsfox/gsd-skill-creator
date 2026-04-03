@@ -201,4 +201,12 @@ The least we can do — as colleagues, as institutions, as a society — is ackn
 
 ---
 
+## College of Knowledge Connections
+
+- **Mind-Body** --- [Stress Physiology and Resilience]: Cumulative operational stress, PTSD, sleep deprivation, and the physiological toll of shift work are all mind-body phenomena. The emerging science of resilience --- how some individuals maintain function under chronic stress exposure --- connects neuroscience, psychology, and physical health.
+- **Psychology** --- [Occupational Mental Health]: The stigma surrounding mental health in first responder culture, the barriers to help-seeking, and the peer support models designed to overcome those barriers are applied occupational psychology. The fire service's evolving relationship with mental health reflects broader cultural shifts in how we understand psychological injury.
+- **Physical Education** --- [Recovery and Longevity]: The physical demands of first response are sustainable only with deliberate recovery practices --- sleep hygiene, fitness maintenance, nutritional awareness, and injury prevention. Responder wellness programs that integrate physical and psychological health represent a holistic approach to occupational longevity.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to the one who carried the weight for thirty years — and to everyone who carries it still.*

@@ -310,3 +310,11 @@ Every heritage breed flock is a vote for genetic diversity, agricultural resilie
 - Damerow, Gail. (2012). *The Chicken Encyclopedia.* Storey Publishing.
 - The Livestock Conservancy. (2019). *An Introduction to Heritage Breeds.* Storey Publishing.
 - USDA-ARS National Animal Germplasm Program. ars.usda.gov/NAGP.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Genetics, Ecology]: Heritage breed conservation is applied conservation genetics --- maintaining genetic diversity, avoiding inbreeding depression, and managing small populations. The parallels to endangered wild species conservation programs are direct and instructive.
+- **Nature Studies** --- [Ecology & Habitats, Citizen Science]: Heritage breed keepers function as a distributed conservation network, analogous to citizen science networks that monitor wild species. Understanding why genetic diversity matters in domestic animals reinforces the same concept in wild ecosystems.
+- **Home Economics** --- [Community, Self-Sufficiency]: Heritage breed conservation depends on community networks of small-scale keepers, breeders, and enthusiasts --- the same mutual-aid community structures that support all traditional self-sufficiency skills.

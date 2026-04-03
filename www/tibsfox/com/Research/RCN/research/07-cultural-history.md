@@ -242,5 +242,12 @@ The cultural raccoon is a projection screen. We see in it what we want to see: p
 
 ---
 
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds]: Understanding how human cultural perceptions of raccoons (trickster, pest, curiosity, pet) shape wildlife management policy connects natural history knowledge to the real-world consequences of how societies relate to wild animals.
+- **Science** --- [Science and Society]: The raccoon's cultural history demonstrates the interplay between scientific understanding and public perception --- how myths (the "washing" behavior) persist despite scientific evidence, and how cultural attitudes influence conservation and management decisions.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

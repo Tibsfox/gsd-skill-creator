@@ -155,3 +155,11 @@ The show fancy is imperfect. It has blind spots, biases, and internal disagreeme
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); American Bantam Association, "Bantam Standard" (2020); Roberts (1997), "British Poultry Standards," 5th ed.; Scrivener (2009), "Popular Poultry Breeds"; Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; The Livestock Conservancy breed conservation priority lists; Geertz (1973), "Deep Play: Notes on the Balinese Cockfight."*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Citizen Science, Animals & Birds]: The poultry show fancy is a form of citizen science in its own right --- a decentralized network of expert breeders maintaining genetic diversity through standardized evaluation and record-keeping, paralleling how citizen science networks monitor wild species.
+- **Science** --- [Scientific Communication]: The APA Standard of Perfection is essentially a scientific specification document --- precise morphological descriptions, standardized terminology, and reproducible evaluation criteria. Understanding how standards are written and applied connects to scientific communication skills.
+- **Home Economics** --- [Community, Self-Sufficiency]: Show culture is built on mentorship, community networks, and knowledge transfer between generations --- the same social infrastructure that supports all traditional home economics and self-sufficiency skills.

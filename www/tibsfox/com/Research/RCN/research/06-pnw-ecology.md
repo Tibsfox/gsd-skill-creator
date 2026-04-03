@@ -247,5 +247,12 @@ Understanding the raccoon's place in PNW ecosystems requires holding two truths 
 
 ---
 
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Ecology & Habitats]: The raccoon's role in PNW ecosystems --- riparian corridors, old-growth forests, urban-wildland interfaces --- connects to every core concept in the Ecology & Habitats wing: food webs, habitat types, keystone interactions, and the effects of human land use on wildlife communities.
+- **Science** --- [Evidence-Based Observation]: Understanding raccoon distribution, habitat use, and ecological interactions in the PNW requires synthesizing evidence from multiple sources (field surveys, GPS tracking, camera traps, scat analysis), exercising the cross-evidence reasoning skills of the Science department.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

@@ -186,6 +186,19 @@ Every painter, picking up a brush for the first time, joins this line. Every pai
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [seeing-drawing]: The history of painting is fundamentally the history of learning to see. From prehistoric cave painters who observed animals closely enough to capture movement, to Renaissance artists who studied anatomy and optics, every advance in painting was first an advance in observation. Understanding this history illuminates why seeing is the foundational skill in the art department curriculum.
+- **Art** — [art-in-context]: Every painting described in this chapter was created within a specific cultural, economic, and technological context. Egyptian tomb paintings served the afterlife. Renaissance paintings served the Church and wealthy patrons. Impressionist paintings responded to photography and industrialization. Placing art in context is the art department's framework for understanding why art looks the way it does.
+- **History** — [continuity-change]: Forty thousand years of painting is a case study in historical continuity (pigment on surface, human intent) and change (materials, subjects, purposes, audiences). The skills of historical analysis — identifying what persists and what transforms — apply directly to understanding this timeline.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Experience the fundamental act of painting described throughout this history — pigment on surface, shaped by intent. The same basic problem solved by cave painters, Egyptian artisans, and Renaissance masters.
+- **Art History Timeline Study Guide** ([study-guides/art-history-timeline](study-guides/art-history-timeline.md)): Test your knowledge of the movements, artists, and key works introduced in this chapter with a structured study resource and self-test.
+
+---
+
 ## Sources
 
 - Gombrich, E.H. (1950). *The Story of Art*. Phaidon. Many subsequent editions.

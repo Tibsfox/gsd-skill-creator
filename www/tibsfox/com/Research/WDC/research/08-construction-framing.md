@@ -171,6 +171,19 @@ Western red cedar shingles and shakes remain the premium roofing and siding mate
 
 ---
 
+## College of Knowledge Connections
+
+- **Trades** — [woodworking]: Construction framing is woodworking at building scale. The same principles of wood movement, grain orientation, and joinery that govern furniture making govern structural framing — at ten times the scale and with life-safety consequences. Framing is where woodworking meets engineering.
+- **Trades** — [tools-safety]: Construction sites are high-hazard environments. Fall protection, power tool safety, nail gun protocols, and structural load awareness are trade safety skills with no margin for error. The tools-safety curriculum at the construction scale addresses risks that shop woodworking does not.
+- **Materials** — [material-properties]: Structural lumber is specified by grade, species, and span. Understanding load ratings, moisture content effects on structural capacity, and the difference between framing-grade and appearance-grade lumber is materials science applied to building safety.
+- **Nature-Studies** — [ecology-habitats]: The timber industry and forest ecology are inseparable. Every stick of framing lumber was a tree. Understanding sustainable forestry, old-growth vs. second-growth characteristics, and the environmental impact of timber harvest connects the building site to the forest.
+
+## Try This
+
+- **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Douglas fir, western hemlock, and Sitka spruce — the three dominant PNW framing species — are all in this identification guide. Learn to tell them apart at the lumber yard.
+
+---
+
 ## Sources and References
 
 - International Residential Code (IRC). International Code Council, current edition.

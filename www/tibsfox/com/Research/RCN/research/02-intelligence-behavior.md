@@ -246,5 +246,12 @@ Combined with a rich vocal repertoire, a flexible fission-fusion social structur
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Neuroscience, Experimental Design]: The cortical neuron counts (Herculano-Houzel 2015), cognitive experiments (Davis 1907 lock studies, Breland misbehavior research), and standardized ethogram (Stanton 2015) demonstrate how scientific inquiry progresses from observation through controlled experimentation to reproducible measurement.
+- **Nature Studies** --- [Animals & Birds]: Understanding raccoon intelligence and behavior through systematic observation --- problem-solving, tactile exploration, social interaction, vocalizations --- develops the behavioral observation skills central to the Animals & Birds wing of Nature Studies.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

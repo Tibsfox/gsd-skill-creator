@@ -119,4 +119,12 @@ For thirty years, every call that reached the person to whom this research is de
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Systems Engineering]: The 911 system is a complex distributed system --- call routing, CAD (computer-aided dispatch), GIS mapping, radio interoperability, and telephone network infrastructure are all engineering disciplines that converge in the dispatch center.
+- **Mind-Body** --- [Sustained Attention and Stress Management]: Dispatchers maintain constant vigilance across multiple channels of information for 8-12 hour shifts, making rapid triage decisions based on auditory information alone. The cognitive and emotional demands --- including listening to people in their worst moments --- make dispatch one of the highest-stress roles in emergency services.
+- **Psychology** --- [Occupational Trauma]: Dispatchers experience vicarious trauma through repeated exposure to crisis calls. The movement to reclassify dispatchers as first responders (rather than clerical workers) reflects growing recognition of the psychological burden inherent to the role.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*
