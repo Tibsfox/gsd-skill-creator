@@ -489,6 +489,12 @@ Articulated features in section 2 are biomimetic -- they imitate biological move
 
 The airbrushing techniques that many makers use for color work on fursuits connect directly to the painting fundamentals in the PNT project. Paint selection ([PNT-02]), airbrush equipment ([PNT-03]), and color theory ([PNT-05]) all apply. The masking, gradient, and detail techniques are the same disciplines used in fine art illustration.
 
+### To Deep Dives
+
+- **[FFA Deep Dives: Follow-Me Eyes](deep-dives/fursuit-eye-making.md)** --- expanded from Section 6: full construction methods (resin casting, 3D printing, found objects), painting technique, alignment, LED-lit variants, and the perceptual psychology of the concave hemisphere illusion
+- **[FFA Deep Dives: Fursuit Care and Maintenance](deep-dives/fursuit-care-maintenance.md)** --- after-wear protocol, bathtub deep clean, head cleaning, storage, emergency repairs. The maintenance that keeps advanced features (electronics, articulated parts, follow-me eyes) functioning
+- **[FFA Deep Dives: Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md)** --- expanded from Section 4: thermal physics, hydration, phase-change vests, fan systems, and session timing
+
 ---
 
 ## 12. Sources

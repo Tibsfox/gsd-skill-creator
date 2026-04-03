@@ -77,6 +77,22 @@ Key connections:
 - Sleep and circadian disruption as a health hazard (FSR-09) connects to HEL research on shift work and health outcomes
 - The IARC classification of firefighting as Group 1 carcinogenic (FSR-09) is a reference point for both FSR and HEL
 
+## Internal Sub-Pages
+
+The FSR series includes detailed guides and case studies that expand on topics covered in the main documents:
+
+### Guides
+- **[Becoming a Firefighter](guides/becoming-a-firefighter.md)** — step-by-step career path from EMT certification through probation, PNW-specific
+- **[Becoming a Paramedic](guides/becoming-a-paramedic.md)** — the medical path from EMT-Basic through Paramedic school, employment options, community paramedicine
+- **[Citizen Emergency Preparedness](guides/citizen-preparedness.md)** — Cascadia-specific two-week preparedness guide: water, food, medical, communication, CERT
+
+### Case Studies
+- **[King County Medic One](case-studies/king-county-medic-one.md)** — the gold standard EMS system: tiered response, Harborview residency, 62% cardiac arrest survival
+- **[The Big One — Cascadia Subduction Zone](case-studies/cascadia-earthquake.md)** — geology, history, first responder implications, and what communities must prepare for
+- **[CAHOOTS Model](case-studies/cahoots-model.md)** — Eugene's crisis response alternative: mobile crisis teams instead of police
+- **[Portland Street Response](case-studies/portland-street-response.md)** — Portland's adaptation of the CAHOOTS model
+- **[Twenty-Four Hours — Station Life](case-studies/station-life.md)** — the 24/48 shift hour by hour: rig check, training, meals, calls, sleep, culture
+
 ## Key Texts and References
 
 ### Fire Service

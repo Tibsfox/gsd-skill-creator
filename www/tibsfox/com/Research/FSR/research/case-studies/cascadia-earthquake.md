@@ -179,6 +179,8 @@ The best insurance is not equipment or apparatus. It is community. Neighbors who
 - [FSR-01: History](../01-history-first-responders.md) --- the pattern of catastrophe driving reform; Cascadia is the next catastrophe
 - [FSR-02: Fire Service](../02-fire-service.md) --- wildland fire and structural collapse disciplines that will be activated simultaneously
 - [FSR-05: Dispatch and 911](../05-dispatch-911.md) --- communications infrastructure vulnerability during Cascadia
+- [FSR Guides: Citizen Preparedness](../guides/citizen-preparedness.md) --- the practical guide to two-week self-sufficiency that this document's analysis demands
+- [FSR Case Studies: Station Life](station-life.md) --- the daily reality of the responders who will face Cascadia when it comes
 
 ---
 

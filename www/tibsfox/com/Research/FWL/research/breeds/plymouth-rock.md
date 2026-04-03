@@ -162,3 +162,7 @@ The Livestock Conservancy lists the Plymouth Rock as **Recovering** --- a status
 For the show breeder, the Barred Rock is a lifetime pursuit. The quest for perfect barring --- those ruler-straight, evenly spaced, sharply defined bars from comb to toe, consistent across the body, correct in both sexes --- is a challenge that rewards patience, careful record-keeping, and a willingness to learn from both success and failure. The breed has been bred for exhibition for 150 years, and the best birds today are as fine as any in the breed's history. That is not an accident. It is the result of a continuous chain of dedicated breeders, each generation building on the last, each bird a living argument that beauty and utility are not opposing values.
 
 The Barred Plymouth Rock is America's chicken. It earned the title honestly, and it keeps earning it every morning in thousands of coops across the country, when a broad-breasted, barred hen steps into the nesting box, settles her weight, and gets to work.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia"; National Plymouth Rock Fanciers Club resources. See also [FWL-02a] American Class, [FWL-04] Feather Genetics (sex-linked barring), [FWL-06] Husbandry Guide, [FWL-07] Heritage Conservation.*

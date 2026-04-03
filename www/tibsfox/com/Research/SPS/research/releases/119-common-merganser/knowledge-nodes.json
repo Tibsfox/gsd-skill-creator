@@ -1,0 +1,127 @@
+{
+  "degree": 119,
+  "species": "Common Merganser",
+  "scientific_name": "Mergus merganser",
+  "slug": "119-common-merganser",
+  "sound_type": "guttural croak in flight -- harsh, low-pitched, croaking contact call. Not musical. Functional. E=4.",
+  "energy": 4,
+  "ecosystem": "River -- clear, large rivers with abundant fish populations. PNW rivers: Skagit, Snoqualmie, Skykomish, Stillaguamish. Also large lakes in winter. Requires clean water, fish, riparian forest.",
+  "season": "Year-round resident in the Pacific Northwest. May move to lakes when river conditions deteriorate in winter.",
+  "family": "Anatidae (second entry, after Harlequin Duck at degree 118)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Common Merganser",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.85,
+    "lon": -121.75,
+    "description": "Reference for river habitat in the Cascade foothills. Common Mergansers found on clear rivers throughout the PNW."
+  },
+  "taxonomy_note": {
+    "description": "Second Anatidae entry (after Harlequin Duck at 118). Largest merganser in North America. Fish-eating specialist with serrated bill (sawbill). The Anatidae streak: 118-119 and counting. River ecosystem. Indicator of healthy rivers.",
+    "current_family": "Anatidae (second entry)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae count: 2 entries (Harlequin Duck 118, Common Merganser 119). Streak: 2 consecutive.",
+    "name_etymology": "Mergus from Latin mergus -- 'diving bird' or 'diver.' merganser from Latin mergus + anser (goose) -- 'diving goose.' Common Merganser: the common diving goose.",
+    "genus_note": "Mergus -- the merganser genus. Three North American species: Common, Red-breasted, Hooded. Sawbill ducks with serrated bills for fish-catching.",
+    "order_note": "Anseriformes continues (second consecutive). The waterfowl order. After Piciformes (woodpeckers) and Passeriformes (dipper), Anseriformes has entered with consecutive entries.",
+    "family_position": "Anatidae second entry. Streak begins at 118. Continues at 119. Track continuation at 120."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-2,500 Hz. Low, harsh call. Most energy in low frequencies.",
+    "peak_energy_band_hz": "800-1,500 Hz. The guttural croak concentrates energy in the low-frequency range.",
+    "song_frequency_hz": "Croak: 500-2,500 Hz. Male courtship call (uig-a): softer, bell-like, higher-pitched.",
+    "song_duration_s": "Individual croak: 0.3-0.8 seconds. Given in series during flight. Short, functional calls.",
+    "note_structure": "GUTTURAL CROAK: Harsh, hoarse, low-pitched croaking call. Given in flight. Contact calling. Not musical. Female croak harsher than male courtship call.",
+    "note_types": "Croak (primary, contact/alarm), male courtship call (softer uig-a), alarm calls. Relatively silent while foraging.",
+    "phrase_structure": "Individual croaks in loose series. No complex phrasing. Functional communication.",
+    "timbre": "Harsh. Guttural. Croaking. Not musical. A functional, raspy quality. Low-pitched for a duck.",
+    "amplitude": "E=4 -- moderate. Audible across river corridors but not dominating. The merganser is primarily a visual presence.",
+    "tempo": "Irregular. Croaks given in loose series during flight or disturbance. No rhythmic pattern.",
+    "context": "CONTACT AND ALARM. Given in flight, during disturbance, during courtship. Relatively silent while foraging underwater.",
+    "regional_variation": "Minimal documented variation. Functional calls tend to be less variable than learned songs.",
+    "key_property": "GUTTURAL CROAK IN FLIGHT -- harsh, low-pitched, functional. E=4. Second Anatidae entry. Largest merganser. Sawbill adaptation: serrated bill for fish-catching. River ecosystem indicator. Cooperative group fishing. The Anatidae streak continues."
+  },
+  "plumage": {
+    "overall": "Male: bright white body, dark green-black head with shaggy crest, long red-orange serrated bill. Striking. Female: gray body, warm rufous-brown crested head, same red-orange serrated bill. Large, streamlined duck.",
+    "diagnostic_mark": "For degree 119: (1) LONG RED-ORANGE SERRATED BILL -- the sawbill. Narrow, hooked, unlike any dabbling duck. (2) MALE: white body, dark green head. (3) FEMALE: gray body, rufous head with crest. (4) LARGE SIZE -- biggest merganser. (5) STREAMLINED PROFILE on water.",
+    "seasonal_variation": "Males in eclipse plumage resemble females. Otherwise consistent year-round.",
+    "flight_pattern": "Direct, fast flight with rapid wingbeats. Low over water. White wing patches visible in flight. Often in small flocks following river corridors."
+  },
+  "physical_description": {
+    "overall": "Large duck. Body length 58-72 cm. Wingspan 82-97 cm. Weight 0.9-2.1 kg. Streamlined body. Set-back legs. Long, narrow, serrated bill.",
+    "diagnostic_mark": "For degree 119: large duck with long red-orange serrated bill gliding on clear river. Male: white body, dark green head. Female: gray body, rufous crested head. If the bill is long, narrow, and serrated -- it is a merganser.",
+    "field_id": "Large, streamlined duck on clear rivers. Long red-orange bill with serrated edges. Male: white body, dark green-black head. Female: gray body, rufous head. Dives for fish. Often in small flocks. The sawbill."
+  },
+  "nodes": [
+    {
+      "id": "sawbill",
+      "type": "concept",
+      "title": "The Sawbill -- Serrated Bill Adaptation",
+      "description": "Backward-pointing tomia along both mandibles. Hooked tip. Narrow, cylindrical shape. Catches fish up to 30 cm. A one-way trap: fish can slide backward toward swallowing but not forward toward escape. The defining merganser adaptation.",
+      "connections": ["anatidae-streak", "cooperative-fishing", "river-indicator"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Anatidae Streak -- Waterfowl Entrance (118-119+)",
+      "description": "Second consecutive Anatidae entry. Harlequin Duck (118) to Common Merganser (119). The engine enters the largest waterfowl family. From forest birds to water birds. Track continuation.",
+      "connections": ["sawbill", "water-continuum"]
+    },
+    {
+      "id": "guttural-croak",
+      "type": "concept",
+      "title": "The Guttural Croak -- Functional Call",
+      "description": "Harsh, low-pitched croak in flight. 500-2,500 Hz. Contact calling. Not musical. The merganser is a visual presence, not an acoustic one. E=4.",
+      "connections": ["sawbill", "river-indicator"]
+    },
+    {
+      "id": "river-indicator",
+      "type": "concept",
+      "title": "River Ecosystem Indicator",
+      "description": "Presence requires clean water, abundant fish, riparian forest. The merganser signals river health. PNW rivers: Skagit, Snoqualmie, Skykomish, Stillaguamish.",
+      "connections": ["sawbill", "water-continuum"]
+    },
+    {
+      "id": "water-continuum",
+      "type": "pattern",
+      "title": "Water Continuum -- Upstream to Downstream (116-119)",
+      "description": "Dipper (116-117, fast stream) to Harlequin (118, turbulent stream) to Merganser (119, river). Following the water downstream. Getting wider, deeper, calmer. Birds getting larger. Foraging shifting from invertebrates to fish.",
+      "connections": ["anatidae-streak", "river-indicator"]
+    },
+    {
+      "id": "cooperative-fishing",
+      "type": "connection",
+      "title": "Cooperative Group Fishing",
+      "description": "Flocks of 10-50+ swim in coordinated lines driving fish into shallows. Remarkable cooperative hunting strategy for a duck species. Resembles strategies of cormorants and pelicans.",
+      "connections": ["sawbill", "river-indicator"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "CONSECUTIVE ANATIDAE. Harlequin Duck (118, turbulent stream, E=5) to Common Merganser (119, river, E=4). Anatidae streak continues. Water calms. Energy descends."
+    },
+    {
+      "target": "SPS-116",
+      "species": "American Dipper",
+      "relationship": "WATER CONTINUUM. Dipper: fast mountain stream, songbird (E=5). Merganser: river, duck (E=4). Water theme continues downstream. Invertebrate forager to fish hunter."
+    },
+    {
+      "target": "SPS-117",
+      "species": "Dipper Dunking",
+      "relationship": "UNDERWATER FORAGING. Both forage underwater. Dipper walks on stream bottoms (60g). Merganser dives and pursues fish (1.7kg). Different scales, same medium."
+    },
+    {
+      "target": "SPS-021",
+      "species": "Northern Flicker",
+      "relationship": "CAVITY NESTER. Both cavity nesters. Flicker excavates. Merganser uses existing large cavities in riparian trees. Woodpecker cavities enable duck nesting."
+    },
+    {
+      "target": "SPS-115",
+      "species": "Black-backed Woodpecker",
+      "relationship": "INDICATOR SPECIES. Black-backed: fire forest health indicator. Merganser: river ecosystem health indicator. Both signal ecosystem integrity in their domains."
+    }
+  ]
+}

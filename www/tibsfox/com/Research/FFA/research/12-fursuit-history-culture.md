@@ -287,7 +287,7 @@ The technology integration documented in [FFA-11] -- LEDs, servos, sound systems
 
 ### To Deep Dives
 
-The [Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md) guide covers the thermal management that makes the convention culture described in this module physically survivable -- hydration, cooling vests, head fans, handler protocols, and the headless lounge infrastructure that is essential safety infrastructure at every major convention. The [Faux Fur Fabric Guide](deep-dives/faux-fur-guide.md) documents the material choices that define the visual quality of every suit in every fursuit parade.
+The [Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md) guide covers the thermal management that makes the convention culture described in this module physically survivable -- hydration, cooling vests, head fans, handler protocols, and the headless lounge infrastructure that is essential safety infrastructure at every major convention. The [Faux Fur Fabric Guide](deep-dives/faux-fur-guide.md) documents the material choices that define the visual quality of every suit in every fursuit parade. The [Follow-Me Eyes](deep-dives/fursuit-eye-making.md) guide explains the optical illusion that gives fursuit characters their soul -- the eyes that follow viewers are the primary interface between performer and audience in the convention setting. The [Care and Maintenance](deep-dives/fursuit-care-maintenance.md) guide documents the hygiene social contract that sustains convention culture -- the expectation that suiters maintain their equipment to a standard that respects the close-quarters community spaces described in this module.
 
 ### To [FFA-01] Biological Foundations
 

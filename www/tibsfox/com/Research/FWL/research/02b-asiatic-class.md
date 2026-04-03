@@ -40,6 +40,8 @@ Hens lay approximately 150-200 large brown eggs per year, with production often 
 
 The Livestock Conservancy lists Brahmas as **Watch**. The Light variety is the most common, with a healthy population among heritage breed enthusiasts. The Dark and Buff varieties are rarer and deserve attention from conservation breeders.
 
+*For a full breed profile including detailed variety descriptions, show standards, PNW suitability, and the breed's historical role as America's primary meat bird, see [breeds/brahma].*
+
 ---
 
 ## Cochin

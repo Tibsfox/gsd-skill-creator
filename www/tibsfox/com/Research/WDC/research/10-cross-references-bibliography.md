@@ -182,6 +182,25 @@ The democratization of woodworking knowledge through online video is one of the 
 
 ---
 
+## Sub-Page Guides
+
+The WDC project includes detailed sub-pages that extend the main chapters with hands-on project guides and in-depth species profiles:
+
+### Species Profiles
+- **[species/douglas-fir-profile]** — The Tree That Built the Northwest. Full profile of *Pseudotsuga menziesii*: wood properties, old-growth vs. second-growth, staining and finishing challenges, where to buy in the PNW, and the species' role in mass timber construction.
+- **[species/western-red-cedar]** — The Tree of Life. Full profile of *Thuja plicata*: thujaplicin chemistry, Coast Salish uses (canoes, longhouses, bentwood boxes, bark clothing), modern applications (fencing, decking, siding, saunas), working techniques, and where to buy in the PNW. Includes the old-growth vs. second-growth issue and the logging history.
+
+### Project Guides
+- **[projects/cutting-board]** — Your First Woodworking Project. End-grain cutting board construction from wood selection to food-safe finishing.
+- **[projects/simple-box]** — The finger-joint box as a joinery primer.
+- **[projects/floating-shelf]** — Solid wood floating shelf construction and mounting.
+- **[projects/workbench]** — The Nicholson bench in Douglas fir.
+- **[projects/adirondack-chair]** — Outdoor chair in western red cedar.
+- **[projects/spoon-carving]** — Carving a Spoon: The Oldest Woodworking Project. Green woodworking with $100 in tools: hatchet, sloyd knife, hook knife. Red alder as the PNW spoon wood. The Scandinavian slojd tradition.
+- **[projects/live-edge-shelf]** — The Live Edge Shelf: Nature's Own Design. Finding slabs (Crosscut Hardwoods, Goby Walnut), flattening, epoxy fills, finishing (Rubio Monocoat, Danish oil, Arm-R-Seal), and three mounting approaches (French cleat, brackets, floating).
+
+---
+
 ## A Final Word on Sources
 
 The best source for learning woodworking is not a book, a video, or a class. It is the wood itself. Pick up a board. Look at the end grain. Identify the orientation of the rings. Predict which way it will cup as it dries. Plane a surface and watch the shaving. Listen to the sound of the blade. Feel the moment when the plane catches a bit of reversing grain and the shaving tears instead of curling.

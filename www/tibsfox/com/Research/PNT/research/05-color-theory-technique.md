@@ -4,7 +4,7 @@
 
 Research module PNT-05: a deep exploration of color theory, color mixing, and painting techniques. Covers color models, the color wheel, color relationships, value as the foundation of painting, limited palette mastery, and the major techniques of paint application from alla prima to glazing. Connects traditional principles to digital workflows and the furry art community's color-intensive practice.
 
-**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-06] Genres, [FFA] Fur, Feathers & Animation, [DAA] Digital Art & Animation, [BLN] Blender.
+**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-06] Genres, [FFA] Fur, Feathers & Animation, [DAA] Digital Art & Animation, [BLN] Blender, [techniques/digital-painting-basics] Digital Painting, [techniques/gouache-basics] Gouache, [artists/furry-art-history] Furry Art History.
 
 ---
 
