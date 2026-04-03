@@ -351,4 +351,19 @@ The furry commission economy documented in [PNT-08] and the portrait painting tr
 
 ---
 
+---
+
+## Try This / DIY Project
+
+> **Try Session: [Design Your Fursona Character](try-sessions/design-your-fursona.md)**
+> The creative starting point for participating in the culture documented here. Species, color palette, distinguishing features, and reference sheet --- the blueprint that connects identity to craft.
+
+> **Try Session: [Build Your First Fursuit Paws](try-sessions/first-fursuit-paws.md)**
+> The gateway project for the construction tradition documented in this chapter. $30-50, 4-6 hours, and you join the lineage of makers from 1980s convention costumers to today's professional studios.
+
+> **DIY Project: [Build a Fursuit Tail](try-sessions/fursuit-tail-construction.md)**
+> The simplest visible fursuit component. Three designs, wearable immediately, connecting you to the community culture of character embodiment described in this chapter.
+
+---
+
 *Module FFA-12. Cross-references: [FFA-04], [FFA-10], [FFA-11], [FFA-01], [FFA-02], [PNT-02], [PNT-03], [PNT-06], [PNT-08], [PNT-09]. Safety codes: SC-SAF, SC-IP.*

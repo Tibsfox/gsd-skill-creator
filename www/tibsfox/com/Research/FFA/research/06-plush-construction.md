@@ -771,3 +771,19 @@ Animation and plush share structural and design principles:
 - **6060 Eyes (Germany)** — Glass eyes for artist bears
 - **Suncatcher Craft Eyes** — Glass and safety eyes
 - **National Nonwovens** — Wool felt
+
+---
+
+## Try This / DIY Project
+
+> **Try Session: [Sew Your First Stuffed Animal --- The Simple Cat](try-sessions/first-plush-animal.md)**
+> The applied beginner project for this module: 10 pattern pieces, basic hand sewing, safety eyes, and a finished cat plush in 6-10 hours. The skills transfer directly to the advanced techniques documented here.
+
+> **DIY Project: [Build a Fursuit Tail](try-sessions/fursuit-tail-construction.md)**
+> Tail construction uses the same sewing, turning, stuffing, and closing techniques documented in this module, in a wearable format. Three designs: stuffed, wagging, poseable.
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](study-guides/sewing-basics-for-fursuit-makers.md)**
+> The machine and hand-sewing fundamentals this module assumes: threading, tension, backstitch, ladder stitch, and faux fur cutting from the backing.
+
+> **Try Session: [Design Your Fursona Character](try-sessions/design-your-fursona.md)**
+> Before building a plush of a character, design the character. Species, colors, distinguishing features, and reference sheet production.

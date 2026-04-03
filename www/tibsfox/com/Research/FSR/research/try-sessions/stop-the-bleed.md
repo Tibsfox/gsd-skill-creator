@@ -210,6 +210,12 @@ You are now someone who knows the three techniques. Use them if you need to.
 > **Study Guide: [Radio Communications for Emergencies](../study-guides/radio-communications-basics.md)**
 > When you have controlled the bleeding and need to call for help --- but cell service is down --- a radio is the only way to reach the outside world.
 
+> **DIY Project: [Create a Family Emergency Plan](family-emergency-plan.md)**
+> The plan that coordinates your family's response when disaster strikes. Meeting points, communication tree, medical information, and utility shutoffs --- one laminated page on the refrigerator.
+
+> **Try Session: [Explore CERT Training](neighborhood-cert-overview.md)**
+> Stop the Bleed is the individual skill. CERT is the community-level training that puts hemorrhage control, triage, and search and rescue into an organized response framework. Twenty hours of free training.
+
 ---
 
 ## Sources and Further Reading

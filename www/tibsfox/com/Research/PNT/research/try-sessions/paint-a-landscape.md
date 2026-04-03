@@ -264,4 +264,4 @@ If you want to build the foundational skills that make landscape painting easier
 
 ---
 
-*See also: [Paint an Apple](paint-an-apple.md) | [Value Study Challenge](value-study-challenge.md) | [PNT-05 Color Theory](../05-color-theory-technique.md) | [PNT-09 PNW Painting Scene](../09-pnw-painting-scene.md)*
+*See also: [Paint an Apple](paint-an-apple.md) | [Value Study Challenge](value-study-challenge.md) | [Paint Your Pet](paint-your-pet.md) | [Build a Pochade Box](build-a-pochade-box.md) | [PNT-05 Color Theory](../05-color-theory-technique.md) | [PNT-09 PNW Painting Scene](../09-pnw-painting-scene.md)*
