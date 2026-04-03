@@ -112,6 +112,7 @@ For the person who served thirty years, the academy was the beginning. The first
 - **[FSR-03]** EMS and Paramedicine — paramedic scope of practice, protocols, and medical direction that define the clinical knowledge paramedic school must teach
 - **[FSR-04]** Law Enforcement — police academy duration debate, constitutional law training, and use-of-force decision-making
 - **[FSR-09]** Responder Wellness — what training cannot teach: the psychological preparation for cumulative exposure, and the gap between academy resilience messaging and career-long reality
+- **[Guide: Becoming a Firefighter](guides/becoming-a-firefighter.md)** — the step-by-step path from civilian to firefighter, including EMT certification, CPAT, the hiring process, and PNW-specific opportunities
 
 ---
 

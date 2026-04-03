@@ -182,6 +182,8 @@ We know how to do this. We have known for thirty-five years. The only thing miss
 - **[FSR-05]** Dispatch and 911 — EMD protocols determine which calls are coded as mental health; dispatch is the first triage point in the gap
 - **[FSR-09]** Responder Wellness — the moral injury of responding to calls you are not equipped for, and the cumulative toll on responders who work the gap daily
 - **[FSR-10]** PNW Departments — King County, Seattle, Portland, and Olympia programs referenced in the PNW section
+- **[Case Study: Portland Street Response](case-studies/portland-street-response.md)** — detailed operational analysis of Portland's CAHOOTS-model program, launched 2021
+- **[Case Study: CAHOOTS](case-studies/cahoots-model.md)** — the thirty-five-year proof of concept that the alternative response programs in this document are built on
 - **[ECO-09]** PNW Ecology — the intersection of homelessness, encampment fires, and ecological impact in urban greenspaces
 - **[RCN-03]** Urban Wildlife — raccoons, opossums, and other animals as frequent subjects of 911 calls that first responders are dispatched to; a lighter but real dimension of the "wrong tool for the job" pattern, where animal control capacity gaps mirror mental health capacity gaps
 

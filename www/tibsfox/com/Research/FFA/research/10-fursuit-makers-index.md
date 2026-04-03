@@ -516,6 +516,10 @@ Many commissioners first develop their character design in digital form using te
 
 Fursuit makers who airbrush their work use the same tools and techniques documented in the Painting (PNT) research project. The airbrush equipment in [PNT-03], the textile paints and color theory in [PNT-02] and [PNT-05], and the spray technique fundamentals all apply directly to fursuit color work. The bridge between fine art painting and fursuit making is the airbrush.
 
+### To Deep Dives
+
+The [Faux Fur Fabric Guide](deep-dives/faux-fur-guide.md) documents the material selection process that underlies every maker's work --- the suppliers, pile types, backing types, and color matching that determine the visual quality of the finished suit. The [Cooling Systems Guide](deep-dives/fursuit-cooling-systems.md) covers the thermal management that makers and commissioners should discuss during the design phase --- ventilation, fan placement, and cooling vest compatibility are all influenced by construction decisions.
+
 ---
 
 ## 12. Sources
