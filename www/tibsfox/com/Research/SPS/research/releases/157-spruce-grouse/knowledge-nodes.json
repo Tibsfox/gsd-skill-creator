@@ -1,0 +1,108 @@
+{
+  "degree": 157,
+  "species": "Spruce Grouse",
+  "scientific_name": "Falcipennis canadensis",
+  "slug": "157-spruce-grouse",
+  "sound_type": "wing claps + soft clucking -- short flutter flights with audible wing claps, accompanied by soft clucking contact calls; E=4",
+  "energy": 4,
+  "ecosystem": "Boreal spruce forest -- dense conifer forest dominated by Engelmann spruce, Sitka spruce, subalpine fir. Dark, quiet, deep needle duff. Most habitat-specific grouse in North America.",
+  "season": "Year-round resident. Wing clap display April-June. Non-migratory (unlike Dusky/Sooty reverse migration).",
+  "family": "Phasianidae (5th entry. Extends beyond the quartet 153-156.)",
+  "order": "Galliformes",
+  "csv_substitute": false,
+  "original_species": "Spruce Grouse",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.85,
+    "lon": -117.35,
+    "description": "Spruce Grouse in boreal spruce forests of northeastern Washington -- Okanogan Highlands, Selkirk Mountains, northern Cascades higher elevations."
+  },
+  "taxonomy_note": {
+    "description": "FIFTH Phasianidae entry. Extends beyond the quartet. The 'fool hen' -- legendary tameness. Boreal spruce forest specialist. Wing clap display + soft clucking. Quietest Phasianidae entry (E=4).",
+    "current_family": "Phasianidae (5th entry)",
+    "new_family": false,
+    "family_count_in_engine": "Phasianidae: fifth entry. Wild Turkey (153) + Dusky Grouse (154) + Ruffed Grouse (155) + Sooty Grouse (156) + Spruce Grouse (157). Quartet extended.",
+    "name_etymology": "Falcipennis from Latin 'falx' (sickle) + 'penna' (feather) -- referring to the curved outer primaries. canadensis -- of Canada, reflecting the species' boreal range.",
+    "genus_note": "Falcipennis -- first and only entry. Monotypic genus in the engine. Distinguished from Dendragapus (Dusky/Sooty) and Bonasa (Ruffed) by wing shape and boreal habitat.",
+    "order_note": "Galliformes. Fifth entry.",
+    "family_position": "Fifth Phasianidae. Beyond the quartet. Quietest entry. The coda."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Wing claps: broadband mechanical, 200-2000 Hz. Clucking: 500-2000 Hz.",
+    "peak_energy_band_hz": "Wing claps: broadband. Clucking: 500-1500 Hz.",
+    "song_frequency_hz": "Wing claps: broadband mechanical. Clucking: ~500-2000 Hz.",
+    "song_duration_s": "Wing clap flight: 1-2 seconds. Clucking: individual clucks ~0.1s, series variable.",
+    "note_structure": "WING CLAPS: Mechanical sound from rapid wing beats during short flutter flight. Dry, sharp, percussive. SOFT CLUCKING: Quiet repetitive cluck-cluck-cluck. Intimate.",
+    "note_types": "Wing claps (primary display -- mechanical), soft clucking (contact/courtship -- vocal), hissing (alarm -- vocal).",
+    "phrase_structure": "Wing clap: single burst during 1-2 second flutter flight. May repeat multiple flights. Clucking: series of quiet clucks.",
+    "timbre": "Wing claps: dry, crackling, percussive. Clucking: soft, intimate, low-amplitude. Overall: the most understated acoustic profile of any Phasianidae.",
+    "amplitude": "E=4. Wing claps audible 30-50 meters. Clucking audible 10-20 meters. Short-range. Intimate.",
+    "tempo": "Wing clap flights intermittent. Clucking: moderate repetition rate.",
+    "context": "Breeding season (April-June). Male territorial/courtship display. Wing claps combined with ground strutting and tail-fan display.",
+    "regional_variation": "Slight variation across range. Washington birds at southern edge of range.",
+    "key_property": "WING CLAPS + SOFT CLUCKING -- quiet, intimate, understated. The 'fool hen.' E=4. FIFTH PHASIANIDAE. Beyond the quartet. Quietest entry. Boreal spruce specialist."
+  },
+  "plumage": {
+    "overall": "Males: dark gray-brown with fine white barring. Red eyebrow combs (prominent during display). Females: heavily barred brown, cryptic. Both sexes darker and more uniformly colored than Ruffed Grouse.",
+    "diagnostic_mark": "Males: red eyebrow combs, dark plumage with white-tipped undertail coverts. Short, rounded tail with rufous tip. Females: barred brown, smaller than Ruffed Grouse.",
+    "seasonal_variation": "Red eyebrow combs enlarge during breeding display. Otherwise minimal seasonal change.",
+    "flight_pattern": "Burst flight when flushed. Short distance. Often reluctant to flush at all (fool hen behavior)."
+  },
+  "physical_description": {
+    "overall": "Length: 38-43 cm. Weight: 450-650 g. Medium grouse. Smaller than Dusky/Sooty Grouse. Compact build.",
+    "diagnostic_mark": "Dark plumage, red eyebrow combs, rufous tail tip. Boreal habitat. Extreme tameness.",
+    "field_id": "Dark grouse in dense spruce forest that may not fly when approached. Listen for soft clucking and occasional wing clap flights. The tameness is diagnostic."
+  },
+  "nodes": [
+    {
+      "id": "wing-clap-display",
+      "type": "concept",
+      "title": "Wing Clap Display -- Brief Percussive Flights",
+      "description": "Short flutter flights (1-2 meters up) with audible wing claps. Brief, percussive, 30-50 meter range. Combined with ground strutting and tail-fan display. Mechanical sound similar to but quieter than Rock Pigeon wing clap (152).",
+      "connections": ["fool-hen-tameness", "phasianidae-extension"]
+    },
+    {
+      "id": "fool-hen-tameness",
+      "type": "concept",
+      "title": "Fool Hen -- Legendary Tameness",
+      "description": "So tame it can be approached by hand. Predator naivety from cryptic-plumage strategy. Low human contact in vast boreal range. Sedentary conifer-needle foraging. Historical accounts of hand-catching.",
+      "connections": ["wing-clap-display", "boreal-specialist"]
+    },
+    {
+      "id": "phasianidae-extension",
+      "type": "pattern",
+      "title": "Phasianidae Extension (153-157)",
+      "description": "Fifth Phasianidae entry. Beyond the quartet (153-156). Quietest entry (E=4 after E=6, E=5, E=5, E=5). Loudest to most mysterious to quietest. The coda that completes the family arc.",
+      "connections": ["wing-clap-display", "boreal-specialist"]
+    },
+    {
+      "id": "boreal-specialist",
+      "type": "concept",
+      "title": "Boreal Forest Specialist",
+      "description": "Dense spruce forest. Conifer needle diet (spruce needles primary). Year-round resident. Enlarged cecum for cellulose digestion. Most habitat-specific grouse in North America. Quiet forest = quiet bird.",
+      "connections": ["fool-hen-tameness", "phasianidae-extension"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-156",
+      "species": "Sooty Grouse",
+      "relationship": "QUARTET + CODA! Sooty Grouse (156, ventriloquial, E=5) closed the quartet. Spruce Grouse (157, quiet, E=4) extends as coda. Mystery to silence."
+    },
+    {
+      "target": "SPS-155",
+      "species": "Ruffed Grouse",
+      "relationship": "MECHANICAL COMPARISON! Ruffed Grouse drumming (155, explosive, E=5) vs. Spruce Grouse wing claps (157, quiet, E=4). Both mechanical wing sounds at vastly different intensities."
+    },
+    {
+      "target": "SPS-152",
+      "species": "Rock Pigeon",
+      "relationship": "WING CLAP ECHO! Rock Pigeon wing clap (152) and Spruce Grouse wing claps (157). Both mechanical wing sounds in display contexts. Urban vs. boreal."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey",
+      "relationship": "PHASIANIDAE RANGE! Turkey (153, E=6, loudest) to Spruce Grouse (157, E=4, quietest). Maximum energy range within one family across five entries."
+    }
+  ]
+}
