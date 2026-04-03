@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-03T21:30:00Z",
-  "source": "sweep-v1.3.14.2",
+  "updated": "2026-04-03T22:00:00Z",
+  "source": "sweep-v1.3.15",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST — MET +1d 22:55 — Integrity ~140,000 mi from Earth, outbound. FD3: TRAJECTORY CORRECTION #1 CANCELLED — spacecraft already on correct lunar flyby path, no burn needed. Crew woke from 8hr rest, began FD3 ops. CPR demo done. Medical kit checkout done. FD4 next: trajectory correction #2, lunar geography review (1hr per astronaut), celestial photography (20min). Session 5 begins.",
+    "status": "TRANSLUNAR COAST — MET +1d 23:25 — Integrity ~145,000 mi from Earth, outbound. FD3: TC#1 cancelled (path correct). Crew awake, FD3 ops underway. Session 5: ALICE + LHCb CERN pages (all 4 experiments complete), CSP Pathway 2 (Web), space weather feed page, MUK stats fixed, Julia 1.12.5 installed. FD4 next: TC#2, lunar geography review, celestial photography.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -117,6 +117,10 @@
     "tdrs_issue": "Brief loss of two-way comms post-orbit insertion. Traced to ground TDRS configuration. Resolved, no mission impact."
   },
   "announcements": [
+    {
+      "time": "2026-04-03T22:00:00Z",
+      "text": "v1.3.15: MET+1d23:25 3pm PDT. Hourly sweep. Session 5 productive: CERN ALICE + LHCb detail pages (4/4 experiments complete, all cross-linked). CSP Pathway 2 Web & Networking. Space weather feed page (LIVE). MUK stats fixed (28 samples, 4 days). Julia 1.12.5 installed. KPAE 13.8°C NW 6 SCT060, afternoon cooling. TC#1 cancelled, path correct. Integrity ~145K mi outbound."
+    },
     {
       "time": "2026-04-03T21:30:00Z",
       "text": "v1.3.14.2: MET+1d22:55 2:30pm PDT. Session 5 begins. TRAJECTORY CORRECTION #1 CANCELLED — Orion already on correct lunar flyby path, no burn needed (nasa.gov/blogs/artemis). Live METAR: KPAE 12°C SE 5.5 SCT035 BKN090 (model miss: predicted NW 8 FEW080 14.2°C — 180° wind error, marine push arrived early). R1 minor radio blackout active. KSEA 13°C OVC065 W 11. KSC 26.8°C FEW034 ESE 24. Integrity ~140K mi outbound."
