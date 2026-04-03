@@ -31,6 +31,7 @@ SYNC_DIRS = [
     "PNW-NEWS",  # daily news
     "CERN",  # CERN research knowledge base
     "DRP",  # Disaster Recovery & Protective Systems
+    "MUS",  # Music Theory & Performance
 ]
 
 dry_run = "--dry-run" in sys.argv
