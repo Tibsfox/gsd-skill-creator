@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programming Languages &mdash; A Living History | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --green: #4CAF50; --green-light: #81C784;
+  --blue: #4a7aba; --blue-light: #64b5f6;
+  --gold: #C4A35A; --amber: #E89848; --purple: #9a6ad8; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--green); text-decoration:none; }
+a:hover { color:var(--green-light); }
+
+header {
+  background:linear-gradient(135deg, #000a0a 0%, #0a1a15 25%, #0a2a1a 50%, #051510 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--green);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(76,175,80,0.08) 0%, transparent 70%);
+}
+header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; }
+header .subtitle { color:var(--green); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; position:relative; font-family:system-ui,sans-serif; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(76,175,80,0.7); border-left:3px solid var(--green);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+
+.stats-bar {
+  display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
+  padding:1.2rem 0; margin-bottom:1.5rem;
+  font-family:system-ui,sans-serif; font-size:0.85rem; color:var(--dim);
+  border-bottom:1px solid var(--border);
+}
+.stats-bar strong { color:#fff; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; transition:border-color 0.2s; text-decoration:none; color:inherit; display:block;
+}
+.card:hover { border-color:rgba(76,175,80,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+.card p { font-size:0.85rem; color:var(--dim); line-height:1.5; margin-top:0.3rem; font-family:system-ui,sans-serif; }
+.card .detail { font-size:0.7rem; color:rgba(76,175,80,0.5); font-family:monospace; margin-top:0.5rem; }
+.card .rosetta { font-size:0.72rem; color:var(--gold); font-style:italic; margin-top:0.5rem; font-family:system-ui,sans-serif; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-infra { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-ee { background:rgba(232,152,72,0.15); color:var(--amber); border:1px solid rgba(232,152,72,0.3); }
+.tag-lang { background:rgba(74,122,186,0.15); color:var(--blue); border:1px solid rgba(74,122,186,0.3); }
+.tag-ai { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-hw { background:rgba(186,58,58,0.15); color:var(--red); border:1px solid rgba(186,58,58,0.3); }
+.tag-web { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+.tag-fn { background:rgba(100,181,246,0.15); color:var(--blue-light); border:1px solid rgba(100,181,246,0.3); }
+.tag-sys { background:rgba(129,199,132,0.15); color:var(--green-light); border:1px solid rgba(129,199,132,0.3); }
+
+/* Rosetta Table */
+.rosetta-table { width:100%; border-collapse:collapse; margin:1rem 0; font-family:system-ui,sans-serif; font-size:0.78rem; }
+.rosetta-table th {
+  background:rgba(76,175,80,0.1); color:var(--green-light); text-align:left;
+  padding:0.6rem 0.8rem; border-bottom:2px solid rgba(76,175,80,0.3);
+  font-weight:600; letter-spacing:0.03em; position:sticky; top:0;
+}
+.rosetta-table td {
+  padding:0.5rem 0.8rem; border-bottom:1px solid var(--border);
+  color:var(--text); vertical-align:top;
+}
+.rosetta-table tr:hover td { background:rgba(76,175,80,0.03); }
+.rosetta-table code {
+  background:rgba(255,255,255,0.05); padding:0.1rem 0.35rem; border-radius:3px;
+  font-size:0.72rem; color:var(--green-light);
+}
+.rosetta-table .concept { color:#fff; font-weight:600; white-space:nowrap; }
+.table-wrap { overflow-x:auto; margin:1rem 0; border:1px solid var(--border); border-radius:6px; }
+
+/* Paradigm cards */
+.paradigm-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; }
+.paradigm-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; border-left:3px solid var(--green);
+}
+.paradigm-card h3 { color:var(--green-light); font-size:1rem; margin-bottom:0.4rem; }
+.paradigm-card .langs { font-size:0.78rem; color:var(--amber); font-family:system-ui,sans-serif; margin-bottom:0.4rem; }
+.paradigm-card p { font-size:0.85rem; color:var(--dim); line-height:1.5; font-family:system-ui,sans-serif; }
+
+/* Era section intro */
+.era-intro {
+  font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;
+}
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) {
+  .card-grid, .paradigm-grid { grid-template-columns:1fr; }
+  header h1 { font-size:1.5rem; }
+  .rosetta-table { font-size:0.7rem; }
+  .rosetta-table th, .rosetta-table td { padding:0.35rem 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Programming Languages &mdash; A Living History</h1>
+  <div class="subtitle">From machine code to AI agents &mdash; every language is a way of thinking</div>
+  <div class="meta">5 eras &middot; 35+ languages &middot; 7 paradigms &middot; Rosetta translation engine &middot; 80 years of computing</div>
+  <nav>
+    <a href="index.html">CS &amp; Programming</a>
+    <a href="languages.html" class="active">Languages</a>
+    <a href="../CERN/wlcg.html">WLCG</a>
+    <a href="../OPEN/index.html">OPEN Problems</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <div class="stats-bar">
+    <span><strong>35+</strong> languages covered</span>
+    <span><strong>7</strong> paradigms mapped</span>
+    <span><strong>80</strong> years of history</span>
+    <span><strong>10</strong> Rosetta concepts</span>
+    <span><strong>5</strong> eras traced</span>
+    <span><strong>3</strong> languages in our stack</span>
+  </div>
+
+  <blockquote>
+    A language that doesn't affect the way you think about programming is not worth knowing.
+    <span style="display:block; margin-top:0.5rem; font-size:0.8rem; color:var(--dim); font-style:normal;">&mdash; Alan Perlis, first Turing Award recipient, 1966</span>
+  </blockquote>
+
+  <!-- ============================================================ -->
+  <!--  ERA 1: MACHINE & ASSEMBLY (1940s-1950s)                      -->
+  <!-- ============================================================ -->
+
+  <h2>Era 1 &mdash; Machine &amp; Assembly (1940s&ndash;1950s)</h2>
+  <p class="era-intro">
+    Before there were programming languages, there were switch positions and punch cards. The first programmers
+    spoke directly to hardware &mdash; every bit placed by hand, every address calculated in the programmer's head.
+    Understanding this era is understanding what a computer actually <em>does</em> when it executes your code.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Machine Language</h3>
+      <div><span class="tag tag-hw">Hardware</span> <span class="tag tag-sys">Systems</span></div>
+      <p>Binary opcodes executed directly by the CPU. No translation, no abstraction &mdash; raw instructions the hardware understands. Von Neumann architecture: instructions and data share the same memory. Every language you have ever used compiles or interprets down to this.</p>
+      <p>Each CPU family has its own machine language. An x86 instruction looks nothing like ARM. The fetch-decode-execute cycle runs billions of times per second. Pipelining, branch prediction, out-of-order execution &mdash; the CPU is optimizing your machine code in real time.</p>
+      <div class="detail">1940s &middot; direct hardware control &middot; opcodes + operands &middot; Von Neumann / Harvard architectures</div>
+      <div class="rosetta">Connects to: T55 (logic gates that make CPUs possible), LED (binary is voltage high/low), MPC (GPU machine code = SASS/PTX)</div>
+    </div>
+
+    <div class="card">
+      <h3>Assembly Language</h3>
+      <div><span class="tag tag-hw">Hardware</span> <span class="tag tag-sys">Systems</span></div>
+      <p>Human-readable mnemonics for machine instructions. <code>MOV</code>, <code>ADD</code>, <code>JMP</code>, <code>CMP</code> &mdash; one line of assembly typically maps to one machine instruction. Registers are named (EAX, RSP, R0). Addressing modes let you reach into memory. The assembler translates to binary.</p>
+      <p>Still used today: bootloaders, OS kernels, cryptographic primitives, exploit development, reverse engineering. If you want to know why your code is slow, read the assembly output. Three major dialects dominate: x86-64 (Intel/AMD desktops), ARM (phones, Apple Silicon, Raspberry Pi), RISC-V (open-source, rising fast).</p>
+      <div class="detail">1950s &middot; mnemonics &middot; x86 / ARM / RISC-V / MIPS &middot; assembler &rarr; machine code</div>
+      <div class="rosetta">Connects to: T55 (registers = flip-flop storage), EMG (interrupt-driven motor control), GPO (GPU assembly = PTX for CUDA)</div>
+    </div>
+
+    <div class="card">
+      <h3>Why the Metal Matters</h3>
+      <div><span class="tag tag-ee">Insight</span></div>
+      <p>Every abstraction has a cost. Every high-level feature compiles to sequences of loads, stores, branches, and arithmetic. Understanding the hardware means understanding <em>why</em> hash maps are O(1), why cache misses are expensive, why branch misprediction slows loops, and why memory alignment matters.</p>
+      <p>Our electronics research (LED controllers, 555 timers, sensor circuits) builds the intuition for how digital logic works at the transistor level. A CPU is millions of logic gates. A logic gate is a few transistors. A transistor is a voltage-controlled switch. It is switches all the way down.</p>
+      <div class="detail">abstraction cost &middot; cache lines &middot; branch prediction &middot; SIMD &middot; memory hierarchy</div>
+      <div class="rosetta">Connects to: LED (digital logic in hardware), T55 (timing circuits = clock generation), BPS (sensors = ADC = binary conversion)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ERA 2: FOUNDATIONAL LANGUAGES (1950s-1970s)                  -->
+  <!-- ============================================================ -->
+
+  <h2>Era 2 &mdash; The Foundational Languages (1950s&ndash;1970s)</h2>
+  <p class="era-intro">
+    The era that invented the idea of a programming language. Each of these languages introduced concepts that
+    every language since has inherited, debated, or deliberately rejected. Seven languages that changed
+    everything &mdash; most of them still in active production use.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>FORTRAN</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-hw">HPC</span></div>
+      <p><strong>1957</strong> &mdash; John Backus, IBM. The first high-level programming language. Created so scientists could write formulas instead of machine code. "FORmula TRANslation" &mdash; the name tells you everything.</p>
+      <p>Still the language of high-performance computing. CERN uses Fortran. Weather models run in Fortran. LAPACK and BLAS (the linear algebra libraries that NumPy calls under the hood) are Fortran. When you need every FLOP the CPU can give, Fortran's compiler optimizations remain unmatched for array-heavy numerical code.</p>
+      <div class="detail">1957 &middot; John Backus, IBM &middot; compiled &middot; array-oriented &middot; column-major memory layout</div>
+      <div class="rosetta">Connects to: CERN/WLCG (Monte Carlo simulations), MPC (numerical computing roots), Julia (spiritual successor for scientific computing)</div>
+    </div>
+
+    <div class="card">
+      <h3>LISP</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-ai">AI</span> <span class="tag tag-fn">Functional</span></div>
+      <p><strong>1958</strong> &mdash; John McCarthy, MIT. The original AI language. Code and data have the same structure (homoiconicity) &mdash; programs can rewrite themselves. S-expressions: <code>(+ 1 2)</code>. Macros that generate code at compile time. Garbage collection was invented here.</p>
+      <p>Every functional programming concept traces back to LISP: first-class functions, closures, recursion as the primary control flow, immutable data. Emacs runs on Elisp. Clojure runs on the JVM. Paul Graham wrote the first web app (Viaweb/Yahoo Store) in LISP. The language that makes you think differently.</p>
+      <div class="detail">1958 &middot; John McCarthy, MIT &middot; homoiconic &middot; macros &middot; garbage collection &middot; S-expressions</div>
+      <div class="rosetta">Connects to: OPEN (AI foundations), Unison (content-addressed = LISP's "code is data" taken further), Elixir (macro system lineage)</div>
+    </div>
+
+    <div class="card">
+      <h3>COBOL</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Enterprise</span></div>
+      <p><strong>1959</strong> &mdash; Grace Hopper and the CODASYL committee. Designed to be readable by business managers. English-like syntax: <code>MOVE AMOUNT TO TOTAL</code>. The Department of Defense mandated it. Banks adopted it. Government adopted it.</p>
+      <p>An estimated 220 billion lines of COBOL are in production today. 95% of ATM transactions, 80% of in-person transactions touch COBOL. The IRS, Social Security, major banks &mdash; all COBOL. There are more COBOL transactions per day than Google searches. The language the world runs on, whether it admits it or not.</p>
+      <div class="detail">1959 &middot; Grace Hopper / CODASYL &middot; English-like syntax &middot; 220B+ lines in production</div>
+      <div class="rosetta">Connects to: SQL (both declarative and business-data oriented), SYS (mainframe operations = systems administration's ancestor)</div>
+    </div>
+
+    <div class="card">
+      <h3>ALGOL</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-fn">Paradigm</span></div>
+      <p><strong>1960</strong> &mdash; International committee (Backus, Naur, et al.). The language that influenced everything but was used by almost no one directly. Introduced: block structure, nested scopes, BNF grammar notation (Backus-Naur Form), structured programming.</p>
+      <p>ALGOL's syntax became the template for C, Pascal, Java, JavaScript, Python, Rust, Go, and virtually every imperative language. Its block-scoping rules are in every language you use. BNF notation is how we formally define every language's grammar. ALGOL did not win the market. It won the future.</p>
+      <div class="detail">1960 &middot; Backus, Naur, et al. &middot; block structure &middot; BNF notation &middot; lexical scoping &middot; structured programming</div>
+      <div class="rosetta">Connects to: every language in Era 3-5 inherited ALGOL's syntax structure</div>
+    </div>
+
+    <div class="card">
+      <h3>C</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-sys">Systems</span></div>
+      <p><strong>1972</strong> &mdash; Dennis Ritchie, Bell Labs. Created to write Unix. "Portable assembly" &mdash; close enough to hardware for an OS, abstract enough to compile on different machines. Pointers, manual memory management, minimal runtime, predictable performance.</p>
+      <p>The language that built the modern world. Linux kernel: C. Windows kernel: C. macOS kernel: C. PostgreSQL: C. SQLite: C. Python interpreter: C. Ruby interpreter: C. PHP interpreter: C. Nearly every language runtime you use is written in C. The most important language ever created, by influence and by the infrastructure that depends on it.</p>
+      <div class="detail">1972 &middot; Dennis Ritchie, Bell Labs &middot; compiled &middot; manual memory &middot; pointers &middot; Unix &middot; K&amp;R</div>
+      <div class="rosetta">Connects to: Rust (C's memory model, made safe), SYS (Unix = C), our Tauri backend (Rust started as "C but safe")</div>
+    </div>
+
+    <div class="card">
+      <h3>Smalltalk</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-fn">OOP</span></div>
+      <p><strong>1972</strong> &mdash; Alan Kay, Xerox PARC. "The best way to predict the future is to invent it." Objects all the way down &mdash; even numbers are objects, even <code>true</code> is an object. Message passing instead of function calls. The GUI was invented here. The mouse was invented here. Overlapping windows, copy-paste, undo.</p>
+      <p>Alan Kay's vision: a computer for children to learn with (the Dynabook, 1968 &mdash; he predicted the tablet 42 years before the iPad). Smalltalk's message-passing model influenced Objective-C, Ruby, Erlang, and the actor model. The IDE was invented in Smalltalk. Refactoring tools were invented in Smalltalk.</p>
+      <div class="detail">1972 &middot; Alan Kay, Xerox PARC &middot; message passing &middot; GUI origin &middot; Dynabook vision &middot; image-based</div>
+      <div class="rosetta">Connects to: Ruby (Matz explicitly borrowed from Smalltalk), Erlang (actors = message passing), our agent system (message-passing patterns)</div>
+    </div>
+
+    <div class="card">
+      <h3>SQL</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Data</span></div>
+      <p><strong>1974</strong> &mdash; Donald Chamberlin and Raymond Boyce, IBM. Based on Edgar Codd's relational algebra (1970). Declarative: you say <em>what</em> data you want, not <em>how</em> to get it. The query optimizer figures out the execution plan. <code>SELECT * FROM missions WHERE status = 'active'</code>.</p>
+      <p>50 years later, SQL is more dominant than ever. PostgreSQL, MySQL, SQLite, SQL Server, Oracle. Every relational database speaks SQL. NoSQL came and went; SQL won. Our pgvector database (maple@tibsfox, schema artemis) adds vector similarity search to PostgreSQL &mdash; SQL extended for the embedding era.</p>
+      <div class="detail">1974 &middot; Chamberlin &amp; Boyce, IBM &middot; declarative &middot; relational algebra &middot; Codd's 12 rules</div>
+      <div class="rosetta">Connects to: pgvector (SQL + embeddings), WLCG (ROOT = columnar, SQL-like queries), our artemis schema (6 tables, 1,087 pages)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ERA 3: OOP & SCRIPTING (1980s-1990s)                         -->
+  <!-- ============================================================ -->
+
+  <h2>Era 3 &mdash; Object-Oriented &amp; Scripting (1980s&ndash;1990s)</h2>
+  <p class="era-intro">
+    The era of explosive growth. Object-oriented programming went mainstream. Scripting languages made
+    programming accessible to non-specialists. The Web was born, and with it, three languages that would
+    come to dominate everything: Java, JavaScript, and Python.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>C++</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-sys">Systems</span></div>
+      <p><strong>1985</strong> &mdash; Bjarne Stroustrup, Bell Labs. "C with Classes" became C++ &mdash; object-oriented programming bolted onto C. Templates, RAII, operator overloading, multiple inheritance. Zero-cost abstractions: high-level code that compiles to assembly as efficient as hand-written C.</p>
+      <p>Game engines (Unreal, Unity's native layer), browsers (Chrome, Firefox), databases (MySQL, MongoDB), compilers (Clang/LLVM), embedded systems, trading systems. When you need performance AND abstraction, C++ is the answer. The complexity cost is real &mdash; Rust exists because of C++'s footguns.</p>
+      <div class="detail">1985 &middot; Bjarne Stroustrup, Bell Labs &middot; compiled &middot; RAII &middot; templates &middot; zero-cost abstractions</div>
+      <div class="rosetta">Connects to: Rust (ownership = RAII formalized), our desktop app (Tauri chose Rust over C++ for the same reasons)</div>
+    </div>
+
+    <div class="card">
+      <h3>Perl</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-web">Web</span></div>
+      <p><strong>1987</strong> &mdash; Larry Wall. "Practical Extraction and Report Language" (or "Pathologically Eclectic Rubbish Lister" &mdash; Larry doesn't mind either). The regex king. CPAN (175,000+ modules) was the first great package ecosystem. CGI scripts powered the early Web.</p>
+      <p>"There's more than one way to do it." Perl's philosophy of expressiveness over consistency. One-liners that do in 20 characters what takes 20 lines elsewhere. Text processing, system administration, bioinformatics (BioPerl). The language of the 1990s web, and still running the scripts that glue infrastructure together.</p>
+      <div class="detail">1987 &middot; Larry Wall &middot; regex &middot; CPAN &middot; CGI era &middot; TMTOWTDI &middot; sigils ($@%)</div>
+      <div class="rosetta">Connects to: Python (often positioned as "Perl, but readable"), SYS (sysadmin scripting), Ruby (borrows from Perl's expressiveness)</div>
+    </div>
+
+    <div class="card">
+      <h3>Python</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-ai">AI/ML</span></div>
+      <p><strong>1991</strong> &mdash; Guido van Rossum. Named after Monty Python. Readability as a design principle &mdash; significant whitespace forces clean formatting. "Batteries included" standard library. "There should be one obvious way to do it."</p>
+      <p>The dominant language for machine learning (PyTorch, TensorFlow, scikit-learn), data science (Pandas, NumPy, Jupyter), automation, scripting, web (Django, Flask), and education. Our sweep.py runs hourly mission updates. pic2html.py recreates a 2007 tool. When you need something working in an hour, you reach for Python.</p>
+      <div class="detail">1991 &middot; Guido van Rossum &middot; dynamic typing &middot; indentation syntax &middot; PyPI &middot; CPython (written in C)</div>
+      <div class="rosetta">Connects to: sweep.py (hourly automation), MPC (numpy/scipy backends), OPEN (ML research), Julia (Python's speed problem solved)</div>
+    </div>
+
+    <div class="card">
+      <h3>Ruby</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-web">Web</span></div>
+      <p><strong>1995</strong> &mdash; Yukihiro "Matz" Matsumoto. "Optimized for programmer happiness." Everything is an object (borrowed from Smalltalk). Blocks and closures everywhere. Metaprogramming as a feature, not an escape hatch. <code>5.times { puts "hello" }</code> reads like English.</p>
+      <p>Ruby on Rails (2004, DHH) changed web development forever. Convention over configuration. MVC as standard. Scaffolding, migrations, ActiveRecord. GitHub is Rails. Shopify is Rails. Basecamp is Rails. The language that proved developer productivity can be a competitive advantage.</p>
+      <div class="detail">1995 &middot; Yukihiro Matsumoto &middot; blocks &middot; mixins &middot; open classes &middot; RubyGems &middot; Rails</div>
+      <div class="rosetta">Connects to: Smalltalk (direct philosophical ancestor), Elixir (Ruby syntax, Erlang semantics), our skill system (DSL-like conventions)</div>
+    </div>
+
+    <div class="card">
+      <h3>Java</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Enterprise</span></div>
+      <p><strong>1995</strong> &mdash; James Gosling, Sun Microsystems. "Write once, run anywhere." The JVM compiles to bytecode that runs on any platform. Garbage collection, strict typing, interfaces, checked exceptions. Designed for reliability at enterprise scale.</p>
+      <p>Android's primary language (via Dalvik/ART). Enterprise backends everywhere. Hadoop, Kafka, Elasticsearch, Cassandra &mdash; the Big Data ecosystem is Java. Spring Boot powers millions of microservices. The JVM itself is a masterpiece: JIT compilation, escape analysis, garbage collectors that can handle terabytes of heap. 30 years old and still the #1 enterprise language.</p>
+      <div class="detail">1995 &middot; James Gosling, Sun &middot; JVM bytecode &middot; GC &middot; interfaces &middot; Spring &middot; Maven/Gradle</div>
+      <div class="rosetta">Connects to: Kotlin (modern Java), Scala (functional Java), Clojure (LISP on JVM), WLCG (some DIRAC components)</div>
+    </div>
+
+    <div class="card">
+      <h3>JavaScript</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-web">Web</span></div>
+      <p><strong>1995</strong> &mdash; Brendan Eich, Netscape. Written in 10 days. The language of the Web &mdash; every browser runs it. Originally just for form validation, now: frontend (React, Vue, Svelte), backend (Node.js), desktop (Electron, Tauri webview), mobile (React Native). The most deployed runtime in history.</p>
+      <p>Prototypal inheritance (not classical OOP). First-class functions. Event loop and async/await. JSON (JavaScript Object Notation) became the universal data format. npm is the largest package registry ever (2M+ packages). ES6+ transformed it from a toy language into a real one. TypeScript adds types. Our entire research site is hand-crafted JavaScript.</p>
+      <div class="detail">1995 &middot; Brendan Eich, Netscape &middot; prototype-based &middot; event loop &middot; V8 engine &middot; npm &middot; ES6+</div>
+      <div class="rosetta">Connects to: TypeScript (our 293K lines), our desktop app (Vite webview), p5.js (forest sim), every page on tibsfox.com</div>
+    </div>
+
+    <div class="card">
+      <h3>PHP</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-web">Web</span></div>
+      <p><strong>1995</strong> &mdash; Rasmus Lerdorf. "Personal Home Page" tools became a full language. Embedded in HTML: <code>&lt;?php echo "hello"; ?&gt;</code>. The Web's workhorse. Easy deployment (just upload .php files), shared hosting everywhere, MySQL integration out of the box.</p>
+      <p>WordPress (43% of all websites), Wikipedia (MediaWiki), Facebook (Hack/HHVM is PHP-derived), Laravel, Drupal, Magento. PHP gets mocked by developers who have never built a product that serves millions. Modern PHP (8.x) has types, enums, fibers, JIT compilation. The language survived every attempt to replace it.</p>
+      <div class="detail">1995 &middot; Rasmus Lerdorf &middot; server-side &middot; embedded in HTML &middot; WordPress &middot; Composer</div>
+      <div class="rosetta">Connects to: our static site approach (we chose HTML over PHP for zero-dependency hosting), SYS (LAMP stack = Linux+Apache+MySQL+PHP)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ERA 4: MODERN SYSTEMS & FUNCTIONAL (2000s-2010s)             -->
+  <!-- ============================================================ -->
+
+  <h2>Era 4 &mdash; Modern Systems &amp; Functional (2000s&ndash;2010s)</h2>
+  <p class="era-intro">
+    A generation of languages designed to fix the problems of the previous generation. Memory safety
+    without garbage collection. Concurrency without data races. Types without verbosity. The era where
+    language design became a mature engineering discipline.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>C#</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Enterprise</span></div>
+      <p><strong>2000</strong> &mdash; Anders Hejlsberg, Microsoft. Created for .NET as Microsoft's answer to Java. Properties, events, delegates, LINQ (SQL-like queries in code), async/await (C# had it before JavaScript). Evolved from "Java clone" to one of the most feature-rich languages.</p>
+      <p>Unity game engine (the most popular game engine by project count). Enterprise backends via ASP.NET. Cross-platform via .NET Core (now just .NET). Xamarin for mobile. Blazor for WebAssembly. Anders Hejlsberg also designed TypeScript &mdash; the same mind shaped two of the most important modern languages.</p>
+      <div class="detail">2000 &middot; Anders Hejlsberg, Microsoft &middot; .NET / CLR &middot; LINQ &middot; async/await origin &middot; Unity</div>
+      <div class="rosetta">Connects to: TypeScript (same designer: Anders Hejlsberg), Java (direct competitor), Rust (both have pattern matching and enums)</div>
+    </div>
+
+    <div class="card">
+      <h3>Go</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Cloud</span></div>
+      <p><strong>2009</strong> &mdash; Rob Pike, Ken Thompson, Robert Griesemer, Google. Designed for Google-scale infrastructure. Goroutines (lightweight threads, 2KB stack) and channels (typed pipes between goroutines). Compiles to a single binary. No inheritance. No generics (until 1.18). Aggressively simple.</p>
+      <p>Docker: Go. Kubernetes: Go. Terraform: Go. etcd: Go. Prometheus: Go. The entire cloud-native infrastructure stack is written in Go. Fast compilation (the whole standard library in seconds). Built-in formatting (gofmt &mdash; no style debates). The language that said "less is more" and meant it.</p>
+      <div class="detail">2009 &middot; Pike, Thompson, Griesemer, Google &middot; goroutines &middot; channels &middot; single binary &middot; gofmt</div>
+      <div class="rosetta">Connects to: K8S (written in Go), SYS (infrastructure tooling), our GUPP protocol (Go's concurrency model informs agent patterns)</div>
+    </div>
+
+    <div class="card">
+      <h3>Rust</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-sys">Systems</span> <span class="tag tag-hw">Safety</span></div>
+      <p><strong>2010</strong> &mdash; Graydon Hoare, Mozilla. Memory safety without garbage collection. The ownership system: every value has exactly one owner. Borrowing rules enforced at compile time. No null. No data races. If it compiles, it won't segfault.</p>
+      <p>Our Tauri backend is Rust. Firefox's Servo engine: Rust. The Linux kernel is adopting Rust. Cloudflare, Discord, Dropbox, AWS (Firecracker) &mdash; all using Rust for performance-critical systems. Voted "most loved language" 8 years running. The language that proved you don't have to choose between safety and speed.</p>
+      <div class="detail">2010 &middot; Graydon Hoare, Mozilla &middot; ownership &middot; borrow checker &middot; no GC &middot; Result&lt;T,E&gt; &middot; Cargo</div>
+      <div class="rosetta">Connects to: our Tauri desktop app (src-tauri/), C (what Rust replaces), WASM (Rust compiles to WebAssembly), GPO (GPU compute kernels)</div>
+    </div>
+
+    <div class="card">
+      <h3>Kotlin</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Mobile</span></div>
+      <p><strong>2011</strong> &mdash; JetBrains. Modern Java that actually respects your time. Null safety built in (<code>String?</code> vs <code>String</code>). Data classes, extension functions, coroutines, sealed classes. 100% interop with Java &mdash; call any Java library, use any Java framework.</p>
+      <p>Google's preferred language for Android (2019). Multiplatform: share code between Android, iOS, web, and desktop. Spring Boot supports Kotlin first-class. Gradle build scripts in Kotlin (replacing Groovy). The language that showed you can fix Java without breaking Java's ecosystem.</p>
+      <div class="detail">2011 &middot; JetBrains &middot; JVM &middot; null safety &middot; coroutines &middot; Android official &middot; multiplatform</div>
+      <div class="rosetta">Connects to: Java (runs on JVM), TypeScript (similar "add types and modernize" approach to its base language), Swift (similar design philosophy)</div>
+    </div>
+
+    <div class="card">
+      <h3>TypeScript</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-web">Web</span> <span class="tag tag-infra">Our Stack</span></div>
+      <p><strong>2012</strong> &mdash; Anders Hejlsberg, Microsoft. Static types layered onto JavaScript. Gradual typing: start loose, tighten as you go. Interfaces, generics, union types, mapped types, conditional types. The type system is Turing-complete (yes, you can compute at the type level).</p>
+      <p>Our primary language: 293,531 lines across 2,829 files. Skills, agents, chipsets, CLI, library code &mdash; all TypeScript. 21,298 tests via Vitest. The entire GSD orchestration system. Every skill, every command, every hook. The language we think in.</p>
+      <div class="detail">2012 &middot; Anders Hejlsberg, Microsoft &middot; gradual typing &middot; tsc &middot; .d.ts &middot; 293K lines in our codebase</div>
+      <div class="rosetta">Connects to: our entire codebase (src/), JavaScript (compiles to JS), C# (same designer), Vite (build tool), Vitest (test runner)</div>
+    </div>
+
+    <div class="card">
+      <h3>Elixir</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-fn">Functional</span> <span class="tag tag-infra">Distributed</span></div>
+      <p><strong>2012</strong> &mdash; Jose Valim. Ruby-like syntax on the Erlang VM (BEAM). Pattern matching, pipe operator, immutable data, supervision trees. Processes are dirt cheap (millions per node). "Let it crash" philosophy &mdash; supervisors restart failed processes automatically.</p>
+      <p>Phoenix LiveView: real-time web without JavaScript. WhatsApp (Erlang, same VM) handled 2M connections per server. Discord uses Elixir for their real-time infrastructure. The BEAM VM was built by Ericsson for telephone switches that must never go down. Fault tolerance is not a feature &mdash; it is the foundation.</p>
+      <div class="detail">2012 &middot; Jose Valim &middot; BEAM VM &middot; OTP &middot; supervision trees &middot; pattern matching &middot; pipe operator</div>
+      <div class="rosetta">Connects to: our agent system (supervision = agent orchestration), CMH (distributed compute), Smalltalk (message passing ancestor via Erlang)</div>
+    </div>
+
+    <div class="card">
+      <h3>Swift</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-infra">Apple</span></div>
+      <p><strong>2014</strong> &mdash; Chris Lattner, Apple. Replaces Objective-C for iOS/macOS development. Optionals for null safety. Protocol-oriented programming (protocols > inheritance). Value types (structs) preferred over reference types (classes). Playgrounds for interactive development.</p>
+      <p>All modern iOS and macOS apps are Swift. SwiftUI for declarative interfaces. Server-side Swift (Vapor) exists but is niche. Chris Lattner also created LLVM (the compiler infrastructure that Rust, C++, and dozens of other languages use) and later created Mojo. One person's influence spans three language eras.</p>
+      <div class="detail">2014 &middot; Chris Lattner, Apple &middot; optionals &middot; protocols &middot; value types &middot; ARC &middot; SwiftUI</div>
+      <div class="rosetta">Connects to: Rust (similar safety goals, different approach), Kotlin (parallel evolution for mobile), Mojo (same creator: Chris Lattner)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ERA 5: DOMAIN-SPECIFIC & AI ERA (2010s-2026)                 -->
+  <!-- ============================================================ -->
+
+  <h2>Era 5 &mdash; Domain-Specific &amp; the AI Era (2010s&ndash;2026)</h2>
+  <p class="era-intro">
+    Languages designed for specific domains: GPUs, statistics, scientific computing, systems without hidden costs.
+    And the emergence of natural language as a programming interface &mdash; where the line between
+    "writing a prompt" and "writing a program" dissolves.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>GLSL / HLSL</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-hw">GPU</span></div>
+      <p><strong>2004 / 2002</strong> &mdash; OpenGL ARB / Microsoft. Shader languages that run on the GPU. GLSL for OpenGL/Vulkan, HLSL for DirectX. Each invocation runs on a different pixel or vertex simultaneously. The GPU does not loop through pixels &mdash; it runs all of them at once.</p>
+      <p>Our shader pipeline uses GLSL on the RTX 4060 Ti. Ray marching, signed distance functions, procedural textures, compute shaders. The GPU thinks in parallel: no branches, no pointers, no allocation. Write a function that transforms one pixel. The hardware runs it 2 million times per frame. A fundamentally different model of computation.</p>
+      <div class="detail">2002-2004 &middot; vertex + fragment + compute shaders &middot; massively parallel &middot; SPIR-V intermediate</div>
+      <div class="rosetta">Connects to: our shaders/ directory, GPO (GPU orchestration), VAV (voxel rendering), MPC (compute shaders for math), forest sim (visual effects)</div>
+    </div>
+
+    <div class="card">
+      <h3>R</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-ai">Statistics</span></div>
+      <p><strong>1993</strong> &mdash; Ross Ihaka and Robert Gentleman, University of Auckland. A language built by statisticians for statisticians. Vectorized operations, data frames, ggplot2 (the gold standard for statistical graphics), Bioconductor (genomics), CRAN (19,000+ packages).</p>
+      <p>Where Python dominates machine learning, R dominates statistical analysis, biostatistics, and academic research. The tidyverse (dplyr, tidyr, ggplot2) is the most elegant data manipulation API in any language. R Markdown and Shiny for reproducible research and interactive dashboards. The language that made data science visual.</p>
+      <div class="detail">1993 &middot; Ihaka &amp; Gentleman &middot; vectorized &middot; data frames &middot; ggplot2 &middot; CRAN &middot; tidyverse</div>
+      <div class="rosetta">Connects to: Python (complementary in data science), Julia (R's speed problem solved), our weather data analysis pipeline</div>
+    </div>
+
+    <div class="card">
+      <h3>Julia</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-hw">HPC</span> <span class="tag tag-ai">Science</span></div>
+      <p><strong>2012</strong> &mdash; Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, MIT. "We want the speed of C with the dynamism of Ruby. We want a language that's homoiconic, with true macros like Lisp. We want something as usable for statistics as R, as natural for string processing as Perl."</p>
+      <p>Multiple dispatch as the core paradigm (not OOP, not functional &mdash; dispatch). JIT compilation via LLVM. Calls C and Fortran with zero overhead. Used at the Federal Reserve, BlackRock, NASA, and the climate modeling community. Solves the "two-language problem" &mdash; prototype in Julia, ship in Julia. No rewrite needed.</p>
+      <div class="detail">2012 &middot; MIT &middot; multiple dispatch &middot; JIT/LLVM &middot; zero-overhead C FFI &middot; Pkg &middot; DifferentialEquations.jl</div>
+      <div class="rosetta">Connects to: FORTRAN (same domain, modern approach), MPC (mathematical computing), CERN (particle physics simulations)</div>
+    </div>
+
+    <div class="card">
+      <h3>Zig</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-sys">Systems</span></div>
+      <p><strong>2016</strong> &mdash; Andrew Kelley. A C replacement that does not hide anything. No hidden control flow, no hidden allocators, no hidden casts. Comptime: arbitrary code execution at compile time (generics without generics). Cross-compilation to 39 architectures out of the box. Drop-in C compiler replacement.</p>
+      <p>Bun (the JavaScript runtime) is written in Zig. TigerBeetle (distributed financial database) is Zig. Used as a cross-compiler for C projects (zig cc). The philosophy: "No hidden cost. Every operation is explicit. If the code looks simple, it IS simple." The anti-C++ &mdash; simplicity as a feature, not a limitation.</p>
+      <div class="detail">2016 &middot; Andrew Kelley &middot; comptime &middot; no hidden allocators &middot; cross-compile &middot; C interop &middot; Bun runtime</div>
+      <div class="rosetta">Connects to: C (direct replacement target), Rust (different safety philosophy), our build pipeline (Bun is a Zig project)</div>
+    </div>
+
+    <div class="card">
+      <h3>Unison</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-fn">Functional</span> <span class="tag tag-infra">Distributed</span></div>
+      <p><strong>2019</strong> &mdash; Paul Chiusano and Runar Bjarnason. Content-addressed code: every function is identified by a hash of its syntax tree, not its name. Renaming a function changes nothing. No builds, no dependency conflicts, no broken imports. Code is immutable and globally unique.</p>
+      <p>Distributed computing as a language primitive: <code>Remote.fork</code> sends a computation to another node. No serialization, no RPC stubs, no protobuf &mdash; the runtime handles it. Our UNI research project explores these ideas: 18 files, 6,142 lines. Content-addressing is LISP's "code is data" taken to its logical extreme.</p>
+      <div class="detail">2019 &middot; Chiusano &amp; Bjarnason &middot; content-addressed &middot; structural typing &middot; abilities (algebraic effects)</div>
+      <div class="rosetta">Connects to: <a href="../UNI/index.html">UNI research project</a> (18 files), LISP (homoiconicity lineage), our content-addressed patterns, CMH (distributed compute)</div>
+    </div>
+
+    <div class="card">
+      <h3>Mojo</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-ai">AI-Native</span> <span class="tag tag-hw">Hardware</span></div>
+      <p><strong>2023</strong> &mdash; Chris Lattner, Modular. Python superset built on MLIR (the compiler infrastructure for ML hardware). Write Python, get C++ speed. Ownership model (borrowed from Rust). Compiles to any hardware: CPU, GPU, TPU, custom accelerators. No Python rewrite needed.</p>
+      <p>35,000x faster than Python on benchmarks. The same person who created LLVM, Clang, and Swift now building the AI-native language. Targets the "two-language problem" from the other direction: instead of making a fast language easy (Julia), make the easy language fast (Mojo). If AI workloads are the future, Mojo is designed to be their language.</p>
+      <div class="detail">2023 &middot; Chris Lattner, Modular &middot; Python superset &middot; MLIR &middot; ownership &middot; hardware-agnostic &middot; 35,000x Python</div>
+      <div class="rosetta">Connects to: Python (superset), Rust (ownership model), Swift (same creator), GPO (GPU acceleration), MPC (math compute acceleration)</div>
+    </div>
+
+    <div class="card">
+      <h3>Prompt Engineering / Natural Language</h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-lang">Language</span></div>
+      <p><strong>2022&ndash;present</strong> &mdash; The emergence of LLMs as a programming runtime. A prompt is a program. System instructions are configuration. Tool definitions are APIs. Chain-of-thought is execution. Context windows are memory. Temperature is nondeterminism. The compiler is a neural network.</p>
+      <p>Our skills and commands ARE programs written in natural language. 34 skills, 57 commands, 8 agent definitions &mdash; all in markdown. The GSD workflow orchestrates multi-agent execution. Claude Code is the runtime. MCP servers are the standard library. We are living in the transition from "code that humans write for machines" to "intent that machines translate into action."</p>
+      <div class="detail">2022+ &middot; LLMs as runtime &middot; prompts as programs &middot; tools as APIs &middot; MCP protocol &middot; 34 skills in our system</div>
+      <div class="rosetta">Connects to: our entire skill/agent/command system, GSD orchestration, MPC (18 MCP tools), OPEN (AI faithfulness research)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  THE ROSETTA TABLE                                            -->
+  <!-- ============================================================ -->
+
+  <h2>The Rosetta Table &mdash; Concepts Across Languages</h2>
+  <p class="era-intro">
+    The same ideas appear in every language, wearing different syntax. This table is a translation engine:
+    pick a concept, read across to see how ten representative languages express it. The syntax changes.
+    The idea does not.
+  </p>
+
+  <div class="table-wrap">
+    <table class="rosetta-table">
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>C</th>
+          <th>Python</th>
+          <th>JavaScript</th>
+          <th>TypeScript</th>
+          <th>Rust</th>
+          <th>Go</th>
+          <th>Java</th>
+          <th>Elixir</th>
+          <th>LISP</th>
+          <th>SQL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="concept">Variable</td>
+          <td><code>int x = 5;</code></td>
+          <td><code>x = 5</code></td>
+          <td><code>let x = 5</code></td>
+          <td><code>let x: number = 5</code></td>
+          <td><code>let x: i32 = 5;</code></td>
+          <td><code>x := 5</code></td>
+          <td><code>int x = 5;</code></td>
+          <td><code>x = 5</code></td>
+          <td><code>(defvar x 5)</code></td>
+          <td><code>DECLARE @x INT = 5</code></td>
+        </tr>
+        <tr>
+          <td class="concept">Function</td>
+          <td><code>int add(int a, int b) { return a+b; }</code></td>
+          <td><code>def add(a, b): return a+b</code></td>
+          <td><code>function add(a, b) { return a+b }</code></td>
+          <td><code>function add(a: number, b: number): number</code></td>
+          <td><code>fn add(a: i32, b: i32) -> i32</code></td>
+          <td><code>func add(a, b int) int</code></td>
+          <td><code>int add(int a, int b)</code></td>
+          <td><code>def add(a, b), do: a + b</code></td>
+          <td><code>(defun add (a b) (+ a b))</code></td>
+          <td><code>CREATE FUNCTION add(...)</code></td>
+        </tr>
+        <tr>
+          <td class="concept">Loop (for)</td>
+          <td><code>for(int i=0;i&lt;n;i++)</code></td>
+          <td><code>for i in range(n):</code></td>
+          <td><code>for(let i=0;i&lt;n;i++)</code></td>
+          <td><code>for(let i=0;i&lt;n;i++)</code></td>
+          <td><code>for i in 0..n</code></td>
+          <td><code>for i := 0; i &lt; n; i++</code></td>
+          <td><code>for(int i=0;i&lt;n;i++)</code></td>
+          <td><code>Enum.each(0..n, fn i -></code></td>
+          <td><code>(loop for i from 0 to n ...)</code></td>
+          <td><code>no loops (set-based)</code></td>
+        </tr>
+        <tr>
+          <td class="concept">Map/Transform</td>
+          <td><em>manual loop</em></td>
+          <td><code>[f(x) for x in lst]</code></td>
+          <td><code>arr.map(x => f(x))</code></td>
+          <td><code>arr.map(x => f(x))</code></td>
+          <td><code>v.iter().map(|x| f(x))</code></td>
+          <td><em>manual loop (or generics)</em></td>
+          <td><code>list.stream().map(x -> f(x))</code></td>
+          <td><code>Enum.map(lst, &f/1)</code></td>
+          <td><code>(mapcar #'f lst)</code></td>
+          <td><code>SELECT f(col) FROM t</code></td>
+        </tr>
+        <tr>
+          <td class="concept">Type System</td>
+          <td>Static, weak</td>
+          <td>Dynamic, strong</td>
+          <td>Dynamic, weak</td>
+          <td>Static, structural</td>
+          <td>Static, strong, affine</td>
+          <td>Static, structural</td>
+          <td>Static, nominal</td>
+          <td>Dynamic, strong</td>
+          <td>Dynamic, strong</td>
+          <td>Static (schema)</td>
+        </tr>
+        <tr>
+          <td class="concept">Null / None</td>
+          <td><code>NULL</code> (pointer)</td>
+          <td><code>None</code></td>
+          <td><code>null</code> / <code>undefined</code></td>
+          <td><code>null</code> / <code>undefined</code></td>
+          <td><code>Option&lt;T&gt;</code> (no null)</td>
+          <td><code>nil</code></td>
+          <td><code>null</code></td>
+          <td><code>nil</code></td>
+          <td><code>nil</code></td>
+          <td><code>NULL</code> (three-valued)</td>
+        </tr>
+        <tr>
+          <td class="concept">Error Handling</td>
+          <td>Error codes, <code>errno</code></td>
+          <td><code>try/except</code></td>
+          <td><code>try/catch</code></td>
+          <td><code>try/catch</code></td>
+          <td><code>Result&lt;T,E&gt;</code>, <code>?</code> operator</td>
+          <td><code>if err != nil</code></td>
+          <td><code>try/catch</code>, checked exceptions</td>
+          <td><code>{:ok, val}</code> / <code>{:error, reason}</code></td>
+          <td><code>(handler-case ...)</code></td>
+          <td><code>SQLSTATE</code>, <code>TRY...CATCH</code></td>
+        </tr>
+        <tr>
+          <td class="concept">Concurrency</td>
+          <td>pthreads, fork</td>
+          <td>asyncio, threading, GIL</td>
+          <td>event loop, Promises</td>
+          <td>async/await, Promises</td>
+          <td>async/await, <code>tokio</code>, ownership prevents races</td>
+          <td>goroutines + channels</td>
+          <td>threads, <code>ExecutorService</code></td>
+          <td>processes, GenServer, OTP</td>
+          <td>varies by implementation</td>
+          <td>transactions, MVCC</td>
+        </tr>
+        <tr>
+          <td class="concept">Memory</td>
+          <td>Manual (malloc/free)</td>
+          <td>GC (reference counting + cycle detection)</td>
+          <td>GC (generational)</td>
+          <td>GC (V8 generational)</td>
+          <td>Ownership (no GC)</td>
+          <td>GC (concurrent, tri-color mark)</td>
+          <td>GC (G1/ZGC/Shenandoah)</td>
+          <td>GC (per-process heap)</td>
+          <td>GC (original inventor)</td>
+          <td>N/A (engine-managed)</td>
+        </tr>
+        <tr>
+          <td class="concept">Package Mgr</td>
+          <td><em>none standard</em> (apt, vcpkg)</td>
+          <td>pip / PyPI</td>
+          <td>npm / yarn / pnpm</td>
+          <td>npm / yarn / pnpm</td>
+          <td>cargo / crates.io</td>
+          <td>go mod</td>
+          <td>Maven / Gradle</td>
+          <td>mix / hex.pm</td>
+          <td>Quicklisp</td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  PARADIGM MAP                                                 -->
+  <!-- ============================================================ -->
+
+  <h2>The Paradigm Map</h2>
+  <p class="era-intro">
+    Languages are tools. Paradigms are worldviews. Each paradigm answers the question "how should we think about computation?"
+    differently. Most modern languages are multi-paradigm &mdash; but understanding the pure forms makes you fluent in all of them.
+  </p>
+
+  <div class="paradigm-grid">
+    <div class="paradigm-card">
+      <h3>Imperative</h3>
+      <div class="langs">C, Assembly, FORTRAN, COBOL, Go</div>
+      <p>Step-by-step instructions. "Do this, then this, then this." Mutable state, explicit control flow, loops, assignments. The model closest to how hardware actually executes. You tell the machine exactly what to do, in what order. Maximum control, maximum responsibility.</p>
+    </div>
+
+    <div class="paradigm-card">
+      <h3>Object-Oriented</h3>
+      <div class="langs">Java, C++, C#, Smalltalk, Python, Ruby, Kotlin, Swift</div>
+      <p>The world modeled as objects that hold state and respond to messages. Encapsulation (hide internals), inheritance (share behavior), polymorphism (same interface, different implementations). Design patterns (Gang of Four) emerged here. SOLID principles. The dominant paradigm for 30 years &mdash; now sharing the stage with functional.</p>
+    </div>
+
+    <div class="paradigm-card">
+      <h3>Functional</h3>
+      <div class="langs">LISP, Haskell, Elixir, Clojure, Erlang, OCaml, F#, Unison</div>
+      <p>Computation as the evaluation of mathematical functions. Immutable data, no side effects, first-class functions, recursion over loops, pattern matching, algebraic data types. Pure functions are easy to test, easy to parallelize, easy to reason about. The paradigm that took 50 years to go mainstream.</p>
+    </div>
+
+    <div class="paradigm-card">
+      <h3>Declarative</h3>
+      <div class="langs">SQL, CSS, HTML, Prolog, Terraform, Make, Nix</div>
+      <p>Describe <em>what</em> you want, not <em>how</em> to get it. SQL: "give me all users over 18" (the optimizer decides the execution plan). CSS: "this element is red" (the browser decides the rendering). The opposite of imperative. Higher abstraction, less control, often more concise. Our HTML research pages are declarative.</p>
+    </div>
+
+    <div class="paradigm-card">
+      <h3>Concurrent / Actor</h3>
+      <div class="langs">Erlang, Elixir, Go, Scala (Akka), Pony, BEAM languages</div>
+      <p>Computation as independent processes that communicate by passing messages. No shared mutable state &mdash; each actor/process owns its memory. The actor model (Carl Hewitt, 1973) predates the internet but perfectly describes distributed systems. Erlang's "let it crash" philosophy: supervision trees restart failed processes. Our agent system uses these patterns.</p>
+    </div>
+
+    <div class="paradigm-card">
+      <h3>Logic</h3>
+      <div class="langs">Prolog, Datalog, miniKanren, core.logic</div>
+      <p>Define facts and rules. Ask questions. The runtime finds answers by searching and backtracking. Unification, horn clauses, resolution. "Socrates is a man. All men are mortal. Is Socrates mortal?" &mdash; the program deduces the answer. Used in expert systems, natural language processing, theorem proving, and type inference engines.</p>
+    </div>
+
+    <div class="paradigm-card">
+      <h3>Array / Matrix</h3>
+      <div class="langs">APL, MATLAB, Julia, NumPy, R, J, K</div>
+      <p>Operate on entire arrays at once, not element by element. A single expression transforms a matrix. APL (1966, Kenneth Iverson) used mathematical notation as code: <code>+/v</code> sums a vector. MATLAB is the language of engineering simulation. NumPy brought array programming to Python. The paradigm behind every neural network library.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  TIMELINE SUMMARY                                             -->
+  <!-- ============================================================ -->
+
+  <h2>The Timeline &mdash; 80 Years in 35 Languages</h2>
+  <p class="era-intro">
+    A compressed view of the entire history. Note the clustering: 1957-1960 (the foundational burst),
+    1995 (the Web year &mdash; Java, JavaScript, Ruby, PHP all in one year), 2009-2014 (the modern systems wave).
+    Languages emerge in waves, usually triggered by a hardware shift or a paradigm crisis.
+  </p>
+
+  <div class="table-wrap">
+    <table class="rosetta-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Language</th>
+          <th>Creator</th>
+          <th>Key Innovation</th>
+          <th>Still Used For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1940s</td><td>Machine Code</td><td>&mdash;</td><td>Direct hardware execution</td><td>Bootloaders, firmware, reverse engineering</td></tr>
+        <tr><td>1950s</td><td>Assembly</td><td>&mdash;</td><td>Human-readable mnemonics</td><td>OS kernels, crypto, exploits, embedded</td></tr>
+        <tr><td>1957</td><td>FORTRAN</td><td>John Backus</td><td>First high-level language, formula translation</td><td>HPC, climate modeling, physics, CERN</td></tr>
+        <tr><td>1958</td><td>LISP</td><td>John McCarthy</td><td>Homoiconicity, GC, macros</td><td>Emacs, Clojure, AI research, Racket</td></tr>
+        <tr><td>1959</td><td>COBOL</td><td>Grace Hopper et al.</td><td>English-like business syntax</td><td>Banking, government, 220B lines in production</td></tr>
+        <tr><td>1960</td><td>ALGOL</td><td>Backus, Naur et al.</td><td>Block structure, BNF notation</td><td>Influenced all subsequent languages</td></tr>
+        <tr><td>1972</td><td>C</td><td>Dennis Ritchie</td><td>Portable systems programming</td><td>OS kernels, databases, interpreters, everything</td></tr>
+        <tr><td>1972</td><td>Smalltalk</td><td>Alan Kay</td><td>Objects + messages + GUI</td><td>Pharo, Squeak, educational, IDE concepts</td></tr>
+        <tr><td>1974</td><td>SQL</td><td>Chamberlin &amp; Boyce</td><td>Declarative data queries</td><td>Every relational database (PostgreSQL, MySQL, etc.)</td></tr>
+        <tr><td>1985</td><td>C++</td><td>Bjarne Stroustrup</td><td>OOP + zero-cost abstractions on C</td><td>Game engines, browsers, databases, HFT</td></tr>
+        <tr><td>1987</td><td>Perl</td><td>Larry Wall</td><td>Regex integration, CPAN ecosystem</td><td>Sysadmin scripts, bioinformatics, text processing</td></tr>
+        <tr><td>1991</td><td>Python</td><td>Guido van Rossum</td><td>Readability as design principle</td><td>ML/AI, data science, automation, web</td></tr>
+        <tr><td>1993</td><td>R</td><td>Ihaka &amp; Gentleman</td><td>Statistics-first language, data frames</td><td>Statistical analysis, genomics, academic research</td></tr>
+        <tr><td>1995</td><td>Ruby</td><td>Yukihiro Matsumoto</td><td>Programmer happiness, blocks</td><td>Rails web apps (GitHub, Shopify, Basecamp)</td></tr>
+        <tr><td>1995</td><td>Java</td><td>James Gosling</td><td>JVM, write once run anywhere</td><td>Enterprise, Android, Big Data (Kafka, Spark)</td></tr>
+        <tr><td>1995</td><td>JavaScript</td><td>Brendan Eich</td><td>The browser's language</td><td>Everything (front, back, desktop, mobile)</td></tr>
+        <tr><td>1995</td><td>PHP</td><td>Rasmus Lerdorf</td><td>Server-side HTML embedding</td><td>WordPress (43% of Web), Wikipedia, Laravel</td></tr>
+        <tr><td>2000</td><td>C#</td><td>Anders Hejlsberg</td><td>.NET ecosystem, LINQ, async/await</td><td>Unity games, enterprise, Blazor WebAssembly</td></tr>
+        <tr><td>2002</td><td>GLSL</td><td>OpenGL ARB</td><td>GPU shader programming</td><td>Games, visualization, compute shaders, our pipeline</td></tr>
+        <tr><td>2009</td><td>Go</td><td>Pike, Thompson, Griesemer</td><td>Goroutines, channels, simplicity</td><td>Docker, Kubernetes, cloud infrastructure</td></tr>
+        <tr><td>2010</td><td>Rust</td><td>Graydon Hoare</td><td>Ownership model, memory safety without GC</td><td>Our Tauri backend, Firefox, Linux kernel, AWS</td></tr>
+        <tr><td>2011</td><td>Kotlin</td><td>JetBrains</td><td>Modern Java with null safety</td><td>Android (official), Spring Boot, multiplatform</td></tr>
+        <tr><td>2012</td><td>TypeScript</td><td>Anders Hejlsberg</td><td>Static types on JavaScript</td><td>Our 293K-line codebase, Angular, most new web projects</td></tr>
+        <tr><td>2012</td><td>Julia</td><td>Bezanson, Karpinski, Shah, Edelman</td><td>Multiple dispatch, JIT, C-speed dynamic language</td><td>Scientific computing, climate modeling, finance</td></tr>
+        <tr><td>2012</td><td>Elixir</td><td>Jose Valim</td><td>Ruby syntax on Erlang VM, supervision trees</td><td>Real-time web (Phoenix), Discord, IoT</td></tr>
+        <tr><td>2014</td><td>Swift</td><td>Chris Lattner</td><td>Optionals, protocols, value types</td><td>iOS/macOS apps, SwiftUI, server-side (Vapor)</td></tr>
+        <tr><td>2016</td><td>Zig</td><td>Andrew Kelley</td><td>Comptime, no hidden control flow</td><td>Bun runtime, TigerBeetle, C cross-compilation</td></tr>
+        <tr><td>2019</td><td>Unison</td><td>Chiusano &amp; Bjarnason</td><td>Content-addressed code, abilities</td><td>Distributed computing research, our UNI project</td></tr>
+        <tr><td>2023</td><td>Mojo</td><td>Chris Lattner</td><td>Python superset with MLIR, 35,000x speedup</td><td>AI/ML workloads, hardware-agnostic acceleration</td></tr>
+        <tr><td>2022+</td><td>Natural Language / Prompts</td><td>&mdash;</td><td>LLMs as runtime, intent as code</td><td>Our 34 skills, 57 commands, agent orchestration</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  CROSS-DOMAIN CONNECTIONS                                     -->
+  <!-- ============================================================ -->
+
+  <h2>Cross-Domain Connections</h2>
+  <p class="era-intro">
+    Every language connects to our research. The Rosetta insight: the same patterns appear
+    in hardware, software, mathematics, and nature. Different notation, same truth.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Languages &harr; Electronics</h3>
+      <p>Assembly maps to logic gates. C's memory model maps to physical address lines. PWM is a for-loop in hardware. Our <a href="../T55/index.html">555 timer</a> generates clock signals that drive CPUs. Our <a href="../LED/index.html">LED controllers</a> run C on microcontrollers. The abstraction layers between software and hardware are thinner than most programmers realize.</p>
+    </div>
+    <div class="card">
+      <h3>Languages &harr; Mathematics</h3>
+      <p>LISP is lambda calculus with parentheses. SQL is relational algebra with keywords. Haskell is category theory with syntax. Julia is numerical methods with JIT. Our <a href="../MPC/index.html">Math Co-Processor</a> bridges them: symbolic math in TypeScript calling CUDA kernels on the GPU. The language is the interface; the math is eternal.</p>
+    </div>
+    <div class="card">
+      <h3>Languages &harr; Agent Systems</h3>
+      <p>Erlang's actor model is our agent orchestration. Go's goroutines are our parallel executors. Elixir's supervision trees are our error recovery. Prompt engineering is our skill system. The <a href="../GSD2/index.html">GSD architecture</a> is a programming language for AI agents, with plans as programs and executors as runtimes.</p>
+    </div>
+    <div class="card">
+      <h3>Languages &harr; Natural Systems</h3>
+      <p>DNA is a programming language (4-symbol alphabet, codon = instruction, ribosome = CPU). Neural networks are a programming language (weights = parameters, layers = functions, backprop = compilation). <a href="../ECO/slime-mold.html">Physarum slime mold</a> solves optimization problems without code. Nature compiled first.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="index.html">CS &amp; Programming</a> &middot;
+  <a href="languages.html">Languages</a> &middot;
+  <a href="../CERN/wlcg.html">WLCG</a> &middot;
+  <a href="../OPEN/index.html">OPEN Problems</a> &middot;
+  <a href="../MUS/index.html">Music Theory</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Programming Languages &mdash; A Living History &middot; 35+ languages &middot; 7 paradigms &middot; 80 years of computing<br>
+  Sources: Language creator publications, official documentation, production usage surveys (Stack Overflow, TIOBE, GitHub Octoverse), WLCG technical reports<br>
+  Last updated: 2026-04-02
+</footer>
+
+</body>
+</html>
