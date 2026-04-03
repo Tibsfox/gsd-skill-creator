@@ -1,0 +1,120 @@
+{
+  "degree": 130,
+  "species": "Cackling Goose",
+  "scientific_name": "Branta hutchinsii",
+  "slug": "130-cackling-goose",
+  "sound_type": "higher-pitched cackling call -- rapid 'cack-cack-cack' or 'yip-yip' at 400-2000 Hz, higher and thinner than Canada Goose, flock-driven chattering texture, E=4 flock-amplified, smaller body produces higher pitch",
+  "energy": 4,
+  "ecosystem": "Field/lake, winter visitor. Agricultural fields, lakeshores, and grassy areas in PNW lowlands during winter. Breeds on Arctic and sub-Arctic tundra. Purely migratory -- no resident populations in PNW.",
+  "season": "Winter visitor (November-March). Fall migration peaks October-November. Spring migration peaks March-April. Breeds on Arctic tundra in summer.",
+  "family": "Anatidae (13th consecutive: 118-130 -- RECORD EXTENDS)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Cackling Goose",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 44.94,
+    "lon": -123.03,
+    "description": "Reference for Willamette Valley, Oregon -- primary wintering ground for B. h. minima (smallest subspecies). Tens of thousands of Cackling Geese in agricultural fields."
+  },
+  "taxonomy_note": {
+    "description": "THIRTEENTH consecutive Anatidae (118-130). Split from Canada Goose in 2004 by AOU. Completes goose comparison pair (129-130). Second Branta genus entry. E=4 through flock-amplified higher-pitched cackling. Purely migratory -- Arctic tundra breeder. Four subspecies including recovered Aleutian Cackling Goose.",
+    "current_family": "Anatidae (13th consecutive -- RECORD EXTENDS, streak ongoing)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae: thirteen consecutive at degrees 118-130.",
+    "name_etymology": "Branta from Old Norse brandgas ('burnt goose'). hutchinsii honors Thomas Hutchins, 18th-century naturalist who described the small tundra geese of Hudson Bay.",
+    "genus_note": "Branta -- second entry. Canada Goose (129) and Cackling Goose (130). Both Branta. Genus continues at 131 (Brant).",
+    "order_note": "Anseriformes. Thirteenth consecutive Anatidae. The goose era continues.",
+    "family_position": "Anatidae at thirteenth consecutive. The goose comparison pair (129-130) is complete. Fifth comparison pair in SPS."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "400-2,000 Hz. Higher fundamental than Canada Goose (200-2,500 Hz). Energy centered in 600-1,200 Hz band.",
+    "peak_energy_band_hz": "600-1,200 Hz. Higher than Canada Goose's 300-1,000 Hz peak. The squeaky quality comes from this higher center.",
+    "song_frequency_hz": "Cackle: 400-2,000 Hz. Alarm: sharper, more rapid. Flight call: slightly higher than ground call.",
+    "song_duration_s": "Rapid: individual calls 0.2-0.5 seconds. Given in quick series. Faster call rate than Canada Goose.",
+    "note_structure": "HIGHER CACKLE: Rapid 'cack-cack-cack' or 'yip-yip.' Higher-pitched, thinner, squeakier than Canada Goose's two-syllable 'ah-HONK.' Smaller syrinx produces higher pitch.",
+    "note_types": "Contact cackle (primary, flock communication), alarm call (sharper, more rapid), flight call (slightly higher), feeding chatter (continuous low cackling).",
+    "phrase_structure": "Rapid series of cackles. Faster repetition rate than Canada Goose. Asynchronous flock cackling creates chattering texture rather than rolling honk wall.",
+    "timbre": "Higher. Thinner. Squeaky. Less resonant than Canada Goose. More rapid. The 'frantic' quality distinguishes it from the Canada Goose's deeper authority.",
+    "amplitude": "E=4. Individual call is less powerful than Canada Goose. Flock-amplified. Thousands in agricultural fields produce substantial collective sound. One step below Canada Goose's E=5.",
+    "tempo": "Fast. Rapid cackling with short gaps between calls. Faster tempo than Canada Goose.",
+    "context": "Flock communication, flight coordination, feeding, alarm. Same multi-purpose function as Canada Goose but at higher pitch and faster tempo.",
+    "regional_variation": "Varies by subspecies. B. h. minima (smallest) produces highest pitch. Size correlates with pitch across all four subspecies.",
+    "key_property": "HIGHER-PITCHED CACKLING -- E=4 FLOCK-AMPLIFIED. Rapid 'cack-cack-cack' at 400-2,000 Hz. Higher, thinner, squeakier than Canada Goose. THIRTEENTH CONSECUTIVE ANATIDAE (118-130). GOOSE COMPARISON PAIR COMPLETE (129-130). Split from Canada Goose in 2004. Purely migratory. Arctic tundra breeder. Aleutian subspecies: near-extinction to recovery. Willamette Valley primary PNW winter site."
+  },
+  "plumage": {
+    "overall": "Similar to Canada Goose: black head and neck with white cheek patch. Brown-gray body. Smaller overall. Some subspecies have darker breast than Canada Goose.",
+    "diagnostic_mark": "Smaller size. Stubbier, shorter bill. Shorter neck. Rounder, steeper forehead. White cheek patch (smaller than Canada Goose in some subspecies). Size is the primary separator.",
+    "seasonal_variation": "Adults similar year-round. Juveniles slightly duller.",
+    "flight_pattern": "Flock formation. Faster wingbeats than Canada Goose (smaller body). Higher-pitched flight calls. Looks more compact in flight."
+  },
+  "physical_description": {
+    "overall": "Body length 56-64 cm (22-25 inches). Weight 0.9-1.8 kg (2-4 lbs). Wingspan 110-120 cm. Notably smaller than Canada Goose in all dimensions.",
+    "diagnostic_mark": "Small size. Stubby bill. Short neck. Steep forehead. In mixed flocks with Canada Goose, the size difference is obvious.",
+    "field_id": "In mixed flocks: look for the noticeably smaller birds with stubbier bills and shorter necks. Listen for the higher-pitched cackle among the deeper honks. Voice is often the fastest separator."
+  },
+  "nodes": [
+    {
+      "id": "higher-cackle",
+      "type": "concept",
+      "title": "Higher-Pitched Cackling Call -- E=4 Flock-Amplified",
+      "description": "Rapid 'cack-cack-cack' at 400-2,000 Hz. Higher, thinner, squeakier than Canada Goose. Flock chattering texture. Voice as fastest field separator. Smaller body = higher pitch.",
+      "connections": ["goose-pair", "species-split", "anatidae-streak"]
+    },
+    {
+      "id": "species-split",
+      "type": "concept",
+      "title": "The 2004 AOU Species Split",
+      "description": "Four smallest subspecies elevated from Canada Goose to Branta hutchinsii. Molecular genetics + bimodal size distribution + different breeding ecology. One of the most significant recent North American taxonomic decisions.",
+      "connections": ["higher-cackle", "goose-pair", "arctic-breeding"]
+    },
+    {
+      "id": "arctic-breeding",
+      "type": "concept",
+      "title": "Arctic Tundra Breeder -- Purely Migratory",
+      "description": "Breeds on Yukon-Kuskokwim Delta, Aleutian Islands, Arctic Canada. Purely migratory -- no PNW resident populations. Short Arctic breeding season. Aleutian subspecies recovered from near-extinction. Conservation parallel to Trumpeter Swan (128).",
+      "connections": ["species-split", "higher-cackle"]
+    },
+    {
+      "id": "goose-pair",
+      "type": "pattern",
+      "title": "Goose Comparison Pair Complete (129-130)",
+      "description": "Canada Goose (129, large, deep honk, E=5, resident) vs. Cackling Goose (130, small, higher cackle, E=4, winter visitor). Fifth comparison pair in SPS. Mirrors Hairy/Downy WP (110-111), Barrow's/Common Goldeneye (123-124), Tundra/Trumpeter Swan (127-128).",
+      "connections": ["higher-cackle", "species-split", "anatidae-streak"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Thirteenth Consecutive Anatidae (118-130) -- Record Extends",
+      "description": "Post-climax energy descent: E=6 (128), E=5 (129), E=4 (130). Goose era second entry. Second Branta genus. Ducks (118-126), swans (127-128), geese (129+). All three PNW Anatidae subfamilies.",
+      "connections": ["goose-pair", "higher-cackle"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-129",
+      "species": "Canada Goose",
+      "relationship": "GOOSE PAIR COMPLETE! Canada (129, E=5, large, deep honk, resident) vs. Cackling (130, E=4, small, higher cackle, winter visitor). Fifth comparison pair in SPS. Split in 2004."
+    },
+    {
+      "target": "SPS-131",
+      "species": "Brant",
+      "relationship": "GOOSE ERA CONTINUES! Cackling (130, E=4, field) to Brant (131, E=4, marine). Both small Branta geese at E=4. Different habitats: agricultural field vs. coastal bay eelgrass."
+    },
+    {
+      "target": "SPS-128",
+      "species": "Trumpeter Swan",
+      "relationship": "CONSERVATION PARALLEL! Aleutian Cackling Goose near-extinction and recovery through fox eradication mirrors Trumpeter Swan recovery at 128. Two conservation triumphs within the Anatidae streak."
+    },
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "STREAK EXTENDS! Harlequin (118, E=5, stream) to Cackling (130, E=4, field). Thirteen consecutive Anatidae. From torrential stream to agricultural field."
+    },
+    {
+      "target": "SPS-110-111",
+      "species": "Hairy/Downy Woodpecker",
+      "relationship": "PAIR PATTERN! Hairy/Downy (110-111, size pair) mirrors Canada/Cackling (129-130, size pair). The fifth comparison pair follows the established pattern."
+    }
+  ]
+}
