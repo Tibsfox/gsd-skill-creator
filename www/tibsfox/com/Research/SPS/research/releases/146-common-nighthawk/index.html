@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 146&deg; &mdash; Common Nighthawk &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(26, 35, 126, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .boom-card { background: linear-gradient(135deg, #E65100 0%, #F57C00 30%, #FF9800 60%, #E65100 100%); border: 2px solid #BF360C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFF3E0; }
+    .boom-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCC80; }
+    .boom-card p { color: #FFF3E0; }
+    .boom-card strong { color: #FFFFFF; }
+
+    .aerial-card { background: linear-gradient(135deg, #0D47A1 0%, #1565C0 30%, #1976D2 60%, #0D47A1 100%); border: 2px solid #0A3169; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BBDEFB; }
+    .aerial-card h3 { margin-top: 0; font-size: 1.1rem; color: #90CAF9; }
+    .aerial-card p { color: #BBDEFB; }
+    .aerial-card strong { color: #E3F2FD; }
+
+    .urban-card { background: linear-gradient(135deg, #37474F 0%, #455A64 30%, #546E7A 60%, #37474F 100%); border: 2px solid #263238; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B0BEC5; }
+    .urban-card h3 { margin-top: 0; font-size: 1.1rem; color: #78909C; }
+    .urban-card p { color: #B0BEC5; }
+    .urban-card strong { color: #ECEFF1; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.boom { background: #E65100; }
+    .theory-icon.aerial { background: #0D47A1; }
+    .theory-icon.urban { background: #37474F; }
+    .theory-icon.dual { background: #6A1B9A; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .contrast-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .contrast-table th { background: #1A237E; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .contrast-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .contrast-table tr:nth-child(even) { background: #E8EAF6; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">146&deg;</div>
+      <div class="release-title-block">
+        <h2>Common Nighthawk</h2>
+        <div class="scientific"><em>Chordeiles minor</em> (Caprimulgidae) &mdash; E=5 &mdash; Nasal &ldquo;Peent!&rdquo; + Booming Dive</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>SECOND CAPRIMULGIDAE.</strong> The most aerial nightjar.
+      <strong>Booming dive:</strong> male plummets, air through primaries creates deep BOOM.
+      <strong>&ldquo;Peent!&rdquo;</strong> nasal call at twilight. Dual-mode sound: vocal + mechanical.
+      Urban rooftop nester. <strong>&ldquo;Bull-bat.&rdquo;</strong> Flock migration. Crepuscular.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="boom-card">
+          <h3>The Booming Dive &mdash; Air Through Feathers</h3>
+          <p>
+            The male climbs to altitude, stalls, then <strong>plummets earthward</strong>
+            in a steep dive. At the bottom, he spreads his wings and the
+            <strong>air rushing through his primary feathers</strong> creates a deep,
+            resonant <strong>BOOM</strong> at <strong>100&ndash;200 Hz</strong> &mdash;
+            so low it is <strong>felt in the chest</strong>. Carries <strong>500+ meters</strong>.
+            Dive speeds: <strong>60&ndash;100 km/h</strong>. The most spectacular aerial
+            display in the SPS engine.
+          </p>
+        </div>
+        <div class="aerial-card">
+          <h3>The Aerial Lifestyle &mdash; Born to Fly</h3>
+          <p>
+            Hunts by <strong>continuous aerial hawking</strong> &mdash; mouth agape,
+            scooping insects from the air. <strong>Eats, drinks, and displays on the wing.</strong>
+            Buoyant, erratic flight. Most active at <strong>twilight</strong> (crepuscular).
+            Migrates in <strong>visible flocks</strong> &mdash; hundreds to thousands of birds.
+            The most aerial of the nightjars.
+          </p>
+        </div>
+        <div class="urban-card">
+          <h3>Urban Rooftop Nester</h3>
+          <p>
+            Adopted <strong>flat gravel rooftops</strong> as nesting habitat &mdash;
+            gravel mimics natural gravel bars. Eggs laid directly on rooftop.
+            <strong>Declining</strong> as gravel roofs replaced by rubber membrane.
+            Parents <strong>shade chicks with wings</strong> in extreme heat.
+            The &ldquo;peent&rdquo; over parking lots defines urban summer twilight.
+          </p>
+        </div>
+
+        <h2>Nightjar Contrast Pair</h2>
+        <table class="contrast-table">
+          <thead><tr><th>Aspect</th><th>Poorwill (145)</th><th>Nighthawk (146)</th></tr></thead>
+          <tbody>
+            <tr><td>Energy</td><td>E=3</td><td>E=5</td></tr>
+            <tr><td>Strategy</td><td>Ground-sitter</td><td>Aerial specialist</td></tr>
+            <tr><td>Sound</td><td>Vocal only</td><td>Vocal + mechanical</td></tr>
+            <tr><td>Hunting</td><td>Sit-and-wait</td><td>Continuous hawking</td></tr>
+            <tr><td>Special</td><td>Only hibernating bird</td><td>Booming dive</td></tr>
+            <tr><td>Activity</td><td>Nocturnal</td><td>Crepuscular</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-145 Common Poorwill</strong>
+            <p>NIGHTJAR CONTRAST! Poorwill (E=3, ground, vocal) vs. Nighthawk (E=5, aerial, vocal+mechanical). Same family, opposite strategies. The nightjar pair.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-140 Short-eared Owl</strong>
+            <p>MECHANICAL SOUND! Short-eared Owl wing-clap (140) and Nighthawk boom (146): both produce non-vocal mechanical sounds during flight displays. Wing-based acoustics.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-147 Vaux&rsquo;s Swift</strong>
+            <p>NEXT DEGREE! Nighthawk (Caprimulgidae, E=5) to Swift (Apodidae, E=4). Nightjars to swifts. Both aerial insectivores but different families. Apodidae enters.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon boom">B</div>
+            <div class="theory-content">
+              <h4>Booming Dive &mdash; Mechanical Sound Production</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Air through primaries at 100-200 Hz. Felt in chest. 500m+ range. Dive at 60-100 km/h. Most spectacular aerial display in engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon dual">D</div>
+            <div class="theory-content">
+              <h4>Dual-Mode Sound &mdash; Vocal + Mechanical</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>&ldquo;Peent&rdquo; (vocal, syrinx) + boom (mechanical, feathers). Two distinct sound-production systems. Unique dual modality in engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon aerial">A</div>
+            <div class="theory-content">
+              <h4>Aerial Specialist &mdash; Life on the Wing</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Eats, drinks, displays in flight. Continuous aerial hawking. Crepuscular. Flock migration. Most aerial nightjar.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Urban Rooftop Nesting &mdash; Habitat Adaptation</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Flat gravel rooftops as nesting substrate. Declining as roofs modernize. Parents shade chicks. Urban twilight soundscape.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Common Nighthawk</div><div class="stat-detail"><em>Chordeiles minor</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Caprimulgidae</div><div class="stat-detail">2nd nightjar entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">&ldquo;Peent!&rdquo; + BOOM</div><div class="stat-detail">vocal + mechanical</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 5</div><div class="stat-detail">booming dive spectacle</div></div>
+        <div class="stat-card"><div class="stat-label">Peent Freq</div><div class="stat-value">2000&ndash;4000 Hz</div><div class="stat-detail">nasal, buzzy</div></div>
+        <div class="stat-card"><div class="stat-label">Boom Freq</div><div class="stat-value">100&ndash;200 Hz</div><div class="stat-detail">near-subsonic</div></div>
+        <div class="stat-card"><div class="stat-label">Dive Speed</div><div class="stat-value">60&ndash;100 km/h</div><div class="stat-detail">gravity-powered</div></div>
+        <div class="stat-card"><div class="stat-label">Nesting</div><div class="stat-value">Flat gravel rooftops</div><div class="stat-detail">urban adaptation</div></div>
+        <div class="stat-card"><div class="stat-label">Activity</div><div class="stat-value">Crepuscular</div><div class="stat-detail">twilight specialist</div></div>
+        <div class="stat-card"><div class="stat-label">Migration</div><div class="stat-value">South America</div><div class="stat-detail">visible flock migration</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

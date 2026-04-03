@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 148&deg; &mdash; Gabriel Teodros (return) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #FF6F00, #FF8F00); color: #FFF8E1; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(255, 111, 0, 0.4); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #D84315; color: #FFCCBC; border: 1px solid #E64A19; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .return-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1B5E20; color: #C8E6C9; border: 1px solid #2E7D32; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #FF6F00; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #FF6F00; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-card .level.intermediate { background: #F3E5F5; color: #4A148C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #FF6F00; min-width: 3rem; display: inline-block; }
+    .diaspora-banner { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #43A047); color: #C8E6C9; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .diaspora-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #A5D6A7; }
+    .diaspora-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+    blockquote { border-left: 3px solid #FF6F00; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF3E0; font-style: italic; color: #E65100; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>148 &mdash; Gabriel Teodros (return)</span>
+    </nav>
+
+    <div class="diaspora-banner">
+      <h3>Return &mdash; Ethiopian Diaspora &mdash; Rainier Valley Deepened</h3>
+      <p>
+        <strong>Gabriel Teodros</strong> returns (first at degree 102, 46-degree gap).
+        Ethiopian-American MC from <strong>Rainier Valley</strong>.
+        Solo work. Diaspora consciousness. Pan-African vision.
+        Anti-imperialist critique. The Valley&rsquo;s Ethiopian dimension revealed.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">148&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Gabriel Teodros <small style="font-weight:400; font-size:0.7em;">(return)</small></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Fatbeats / Independent</span>
+          <span class="return-badge">Return &mdash; 102</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>Ethiopian Diaspora Identity</h2>
+          <blockquote>
+            Gabriel Teodros navigates the space between Ethiopian and American
+            identity &mdash; the challenges of immigrant children, the pull between
+            cultural preservation and assimilation, the experience of being Black
+            and immigrant. His art centers the Ethiopian diaspora: Amharic elements,
+            pan-African politics, anti-imperialist critique, and the specific
+            geography of Ethiopian life in the Rainier Valley.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Rainier Valley &mdash; Three Degrees Deeper</h2>
+          <blockquote>
+            Degree 145 (Common Market) introduced Rainier Valley &mdash; the diversity,
+            the immigrant dimension. Degree 148 (Gabriel Teodros) deepens it through
+            the Ethiopian lens: the restaurants on Rainier Avenue, the community
+            organizations, the Amharic on the streets, the churches and mosques.
+            The engine traces specific cultural threads within the Valley&rsquo;s diversity.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Ethiopian Diaspora Thread</h4>
+              <div class="level advanced">Advanced &mdash; Cultural Theory</div>
+              <p>
+                First Ethiopian-American-specific cultural documentation in S36.
+                Diaspora consciousness. Dual identity. Amharic influences.
+                Pan-African vision. The Valley&rsquo;s Ethiopian geography.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Rainier Valley Deepened</h4>
+              <div class="level advanced">Advanced &mdash; Geography Theory</div>
+              <p>
+                145 introduced the Valley. 148 deepens through Ethiopian lens.
+                The engine traces specific communities within diverse neighborhoods.
+                General &rarr; specific. Surface &rarr; depth.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>46-Degree Return</h4>
+              <div class="level intermediate">Intermediate &mdash; Engine Pattern</div>
+              <p>
+                102 to 148 = 46 degrees. Matches Sabzi&rsquo;s span (99&ndash;145 = 46).
+                Another structural echo. Return deepens: early work &rarr;
+                solo artistry + diaspora identity + geographic specificity.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">102&deg;</span> <strong>Gabriel Teodros (debut)</strong> &mdash; RETURN! 46-degree gap. Debut at 102 covered emergence. Return at 148 covers solo artistry, diaspora identity, Rainier Valley.</li>
+            <li><span class="ref-degree">145&deg;</span> <strong>Common Market</strong> &mdash; RAINIER VALLEY! Common Market introduced the Valley. Teodros deepens it. Ethiopian dimension. 3-degree gap (145 to 148).</li>
+            <li><span class="ref-degree">147&deg;</span> <strong>Vitamin D (artist)</strong> &mdash; PREVIOUS DEGREE! Triple-threat MC (147) to diaspora MC (148). Central District to Rainier Valley. The neighborhoods in dialogue.</li>
+            <li><span class="ref-degree">103&deg;</span> <strong>Shabazz Palaces</strong> &mdash; SCENE CONNECTION! Butler&rsquo;s ecosystem. Teodros in the same Seattle hip-hop network. Afrofuturist / pan-African connections.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">148&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hip-Hop</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Gabriel Teodros</h4>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">2003&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Fatbeats / indie</span></div>
+          <div class="stat-row"><span class="stat-label">Identity</span><span class="stat-value">Ethiopian-American</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Rainier Valley</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Return Entry</h4>
+          <div class="stat-row"><span class="stat-label">First</span><span class="stat-value">Degree 102</span></div>
+          <div class="stat-row"><span class="stat-label">Return</span><span class="stat-value">Degree 148</span></div>
+          <div class="stat-row"><span class="stat-label">Gap</span><span class="stat-value">46 degrees</span></div>
+          <div class="stat-row"><span class="stat-label">Echo</span><span class="stat-value">Sabzi (99&ndash;145 = 46)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Rainier Valley Arc</h4>
+          <div class="stat-row"><span class="stat-label">145&deg;</span><span class="stat-value">Common Market (intro)</span></div>
+          <div class="stat-row"><span class="stat-label">148&deg;</span><span class="stat-value">Teodros (Ethiopian)</span></div>
+          <div class="stat-row"><span class="stat-label">Progression</span><span class="stat-value">General &rarr; specific</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../147-vitamin-d-artist/" style="color: var(--seattle-navy);">&larr; 147&deg; Vitamin D (artist)</a>
+        <a href="../149-next/" style="color: var(--seattle-navy);">149&deg; &rarr;</a>
+      </div>
+      <p>Degree 148&deg; &mdash; Gabriel Teodros (return) &mdash; Seattle 360 Engine &mdash; v1.49.288<br>RETURN from 102. Ethiopian diaspora. Rainier Valley deepened. Pan-African vision. 46-degree gap. E=5 the hidden extraordinary.</p>
+    </footer>
+  </div>
+</body>
+</html>
