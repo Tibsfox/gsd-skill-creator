@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 118&deg; &mdash; Harlequin Duck &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #283593, #3949AB);
+      color: #C5CAE9;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(40, 53, 147, 0.6);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Harlequin card -- theatrical gradient */
+    .harlequin-card {
+      background: linear-gradient(135deg, #283593 0%, #3949AB 20%, #5C6BC0 40%, #7986CB 60%, #C62828 80%, #D32F2F 100%);
+      border: 3px solid #283593;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+      box-shadow: 0 0 24px rgba(40, 53, 147, 0.4);
+    }
+    .harlequin-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFD54F;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .harlequin-card p { color: #E8EAF6; }
+    .harlequin-card strong { color: #FFD54F; }
+
+    /* New family card */
+    .family-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .family-card p { color: #E8F5E9; }
+    .family-card strong { color: #C8E6C9; }
+
+    /* Turbulence card */
+    .turbulence-card {
+      background: linear-gradient(135deg, #006064, #00838F, #0097A7);
+      border: 2px solid #006064;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F7FA;
+    }
+    .turbulence-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2EBF2;
+    }
+    .turbulence-card p { color: #E0F7FA; }
+    .turbulence-card strong { color: #B2EBF2; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.family { background: #1B5E20; }
+    .theory-icon.plumage { background: #283593; }
+    .theory-icon.theater { background: #C62828; }
+    .theory-icon.turbulence { background: #006064; }
+    .theory-icon.voice { background: #0097A7; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #E8EAF6; color: #283593; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .plumage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .plumage-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-left: 3px solid #283593;
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+    }
+    .plumage-card strong { color: #283593; font-size: 0.88rem; }
+    .plumage-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">118&deg;</div>
+      <div class="release-title-block">
+        <h2>Harlequin Duck</h2>
+        <div class="scientific"><em>Histrionicus histrionicus</em> (Anatidae) &mdash; FIRST ANATIDAE &mdash; The Painted Player</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      squeak + high whistle &mdash; <strong>FIRST ANATIDAE ENTRY</strong> &mdash; a <strong>NEW FAMILY</strong> in the engine. The duck family enters. Named after the <strong>Harlequin</strong> of Italian commedia dell&rsquo;arte &mdash; <em>Histrionicus</em> = &ldquo;actor.&rdquo; Slate blue plumage with white crescents and chestnut flanks. Breeds on <strong>turbulent mountain streams</strong> (dipper habitat). Winters on <strong>rocky coastline</strong>. E=4. The painted player.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- New Family Card -->
+        <div class="family-card">
+          <h3>Anatidae &mdash; NEW FAMILY &mdash; The Duck Family Enters</h3>
+          <p>
+            <strong>Anatidae</strong> enters the engine for the first time &mdash; ducks, geese,
+            and swans. One of the most species-rich bird families in the PNW (~174 species globally).
+            The <strong>Harlequin Duck</strong> leads the family in &mdash; not the common Mallard
+            but a <strong>turbulent-water specialist</strong> with the most striking plumage
+            of any PNW duck. The family enters with maximum visual impact.
+          </p>
+        </div>
+
+        <!-- Harlequin Card -->
+        <div class="harlequin-card">
+          <h3>The Painted Player &mdash; Commedia Dell&rsquo;Arte in Feathers</h3>
+          <p>
+            Named after <strong>Harlequin</strong> (<em>Arlecchino</em>) of Italian commedia
+            dell&rsquo;arte &mdash; the acrobatic, elaborately costumed trickster. Scientific
+            name <strong><em>Histrionicus histrionicus</em></strong> = &ldquo;actor actor&rdquo;
+            (from Latin <em>histrio</em>). The male&rsquo;s plumage looks <strong>painted on</strong>:
+            slate blue body, bold white crescents, chestnut flanks and crown. Each mark
+            precisely placed. The bird wears a <strong>theatrical costume</strong> that nature
+            designed. The most theatrical bird in North American ornithology.
+          </p>
+        </div>
+
+        <!-- Turbulence Card -->
+        <div class="turbulence-card">
+          <h3>Turbulent Water Specialist &mdash; Stream to Surf</h3>
+          <p>
+            The Harlequin occupies <strong>turbulent water at every stage</strong>.
+            <strong>Breeding:</strong> fast-flowing mountain streams (the same habitat as
+            the American Dipper at 116&ndash;117). Dives in rapids for caddisfly, stonefly,
+            mayfly larvae. <strong>Winter:</strong> rocky coastlines where waves crash
+            against rock. Forages in the <strong>surf zone</strong> for mussels, barnacles,
+            small crabs. Mountain torrent or ocean breaker &mdash; the Harlequin seeks chaos.
+          </p>
+        </div>
+
+        <h2>Extraordinary Plumage</h2>
+        <p>
+          The male Harlequin Duck&rsquo;s plumage is among the most visually
+          striking of any North American bird &mdash; a theatrical costume
+          in slate blue, white, and chestnut.
+        </p>
+        <div class="plumage-grid">
+          <div class="plumage-card">
+            <strong>Body</strong>
+            <p>Slate blue, luminous in direct sun, dark in shadow. The canvas for all other marks.</p>
+          </div>
+          <div class="plumage-card">
+            <strong>Head</strong>
+            <p>White crescent between eye and bill. White ear spot. Chestnut crown stripe. Bold geometric marks.</p>
+          </div>
+          <div class="plumage-card">
+            <strong>Flanks</strong>
+            <p>Chestnut-red, contrasting with slate blue body. The warmth against the cool.</p>
+          </div>
+          <div class="plumage-card">
+            <strong>Wing Pattern</strong>
+            <p>White crescents and spots along flanks/scapulars. Geometric precision. Looks painted on.</p>
+          </div>
+          <div class="plumage-card">
+            <strong>Female</strong>
+            <p>Brownish overall, lighter face patches. Extreme sexual dimorphism. Camouflage for nesting.</p>
+          </div>
+          <div class="plumage-card">
+            <strong>Eclipse Molt</strong>
+            <p>Males go dull post-breeding (late summer). The costume comes off temporarily. Seasonal theater.</p>
+          </div>
+        </div>
+
+        <h2>Acoustic Profile</h2>
+        <p>
+          <strong>Squeak + high whistle</strong> &mdash; not the quack you expect from a duck.
+          Male: thin high whistle (<em>weee-ooo</em>, 3,000&ndash;6,000 Hz). Female: harsh
+          <em>ek-ek-ek</em> (1,000&ndash;3,000 Hz). In groups: thin whistles and harsh notes
+          create an unusual acoustic texture. E=4 &mdash; audible in chaos, not dominating it.
+          Cuts through turbulent water noise by being pitched above it.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-116 American Dipper (song)</strong>
+            <p>Habitat overlap. Both breed on turbulent mountain streams. Same prey: caddisfly, stonefly, mayfly larvae. Dipper walks underwater; Harlequin dives from surface. Three consecutive aquatic degrees (116-117-118).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-117 American Dipper (dunking)</strong>
+            <p>Diving comparison. Both dive in fast-flowing streams. Dipper uses wing hydrofoils to walk bottom; Harlequin swims and dives. Passerine adapted to water vs. duck adapted to turbulence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-115 Black-backed Woodpecker</strong>
+            <p>Water continuation (4 degrees). Fire (115) &rarr; stream/song (116) &rarr; stream/dunk (117) &rarr; turbulent stream/duck (118). The aquatic era.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021 Northern Flicker</strong>
+            <p>First Picidae vs first Anatidae. Flicker introduced woodpeckers (degree 21). Harlequin introduces ducks (degree 118). Both family firsts.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004 Northern Spotted Owl</strong>
+            <p>Visual contrast. Spotted Owl: cryptic (brown, camouflaged). Harlequin Duck: spectacular (slate blue, white crescents, chestnut). The owl hides; the duck displays.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon family">A</div>
+            <div class="theory-content">
+              <h4>Anatidae &mdash; NEW FAMILY</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>First Anatidae entry. The duck/goose/swan family. ~174 species globally. One of the most ecologically important PNW bird families. Major taxonomic event at degree 118.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon plumage">P</div>
+            <div class="theory-content">
+              <h4>The Painted Player &mdash; Theatrical Plumage</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Slate blue + white crescents + chestnut flanks. Geometric precision. Looks painted on. Named after Harlequin of commedia dell'arte. Histrionicus = actor. Nature as theater.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon turbulence">T</div>
+            <div class="theory-content">
+              <h4>Turbulent Water Specialist</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Breeds on mountain streams (rapids, fast current). Winters on rocky coast (surf zone, breaking waves). Turbulence at every stage. Where other ducks seek calm, this one seeks chaos.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon theater">H</div>
+            <div class="theory-content">
+              <h4>Commedia Dell&rsquo;Arte &mdash; Theater in Taxonomy</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Named for Harlequin (Arlecchino): costumed, acrobatic, mercurial trickster. The intersection of natural history and performance art. The bird looks theatrical, so taxonomy named it for theater.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon voice">V</div>
+            <div class="theory-content">
+              <h4>Squeak + Whistle &mdash; The Unexpected Voice</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Not a quack. High-pitched squeak and thin whistle. Mouse-like. E=4. Carries above turbulent water by frequency placement, not volume. Surprising from a duck.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Harlequin Duck</div>
+          <div class="stat-detail"><em>Histrionicus histrionicus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Etymology</div>
+          <div class="stat-value">&ldquo;Actor Actor&rdquo;</div>
+          <div class="stat-detail">Latin <em>histrio</em> = stage player</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value" style="color: #1B5E20;">Anatidae (NEW!)</div>
+          <div class="stat-detail">First entry &mdash; duck family</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Squeak + whistle</div>
+          <div class="stat-detail">Not a quack. Mouse-like.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 4</div>
+          <div class="stat-detail">Audible in chaos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Breeding</div>
+          <div class="stat-value">Turbulent stream</div>
+          <div class="stat-detail">Mountain rapids</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Winter</div>
+          <div class="stat-value">Rocky coast</div>
+          <div class="stat-detail">Surf zone foraging</div>
+        </div>
+
+        <h3>Plumage (Male)</h3>
+        <div class="stat-card">
+          <div class="stat-label">Body</div>
+          <div class="stat-value" style="color: #3949AB;">Slate blue</div>
+          <div class="stat-detail">Luminous in sun</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Accents</div>
+          <div class="stat-value">White crescents</div>
+          <div class="stat-detail">Geometric precision</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Flanks</div>
+          <div class="stat-value" style="color: #C62828;">Chestnut-red</div>
+          <div class="stat-detail">Warm vs. cool contrast</div>
+        </div>
+
+        <h3>Namesake</h3>
+        <div class="stat-card">
+          <div class="stat-label">Character</div>
+          <div class="stat-value">Harlequin</div>
+          <div class="stat-detail">Commedia dell&rsquo;arte</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Traits</div>
+          <div class="stat-value">Costumed trickster</div>
+          <div class="stat-detail">Acrobatic, mercurial</div>
+        </div>
+
+        <h3>Water Theme (4 degrees)</h3>
+        <div class="stat-card">
+          <div class="stat-label">115&deg; &rarr; 116&deg;</div>
+          <div class="stat-value">Fire &rarr; Stream</div>
+          <div class="stat-detail">Transition</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">117&deg;</div>
+          <div class="stat-value">Dunking</div>
+          <div class="stat-detail">Deeper into water</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">118&deg;</div>
+          <div class="stat-value">Turbulent stream</div>
+          <div class="stat-detail">Duck enters water</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
