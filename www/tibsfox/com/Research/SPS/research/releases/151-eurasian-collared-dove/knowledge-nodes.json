@@ -1,0 +1,103 @@
+{
+  "degree": 151,
+  "species": "Eurasian Collared-Dove",
+  "scientific_name": "Streptopelia decaocto",
+  "slug": "151-eurasian-collared-dove",
+  "sound_type": "three-note hoo-HOO-hoo -- distinctive rhythmic cooing with emphasis on second note at 400-700 Hz, repeated persistently from rooftops and power lines; E=3",
+  "energy": 3,
+  "ecosystem": "Urban and suburban habitats. Strongly associated with human settlement -- grain elevators, feedlots, bird feeders, residential areas. Avoids deep forest. Invasive species in North America. One of the fastest avian range expansions in history.",
+  "season": "Year-round resident and caller. Breeding year-round in mild climates. The most persistent Columbidae caller -- calling bouts of 10-30 minutes.",
+  "family": "Columbidae (3rd entry. THIRD COLUMBIDAE. First non-native. Invasive.)",
+  "order": "Columbiformes",
+  "csv_substitute": false,
+  "original_species": "Eurasian Collared-Dove",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.65,
+    "lon": -122.30,
+    "description": "Eurasian Collared-Doves are found in urban and suburban areas throughout the PNW, particularly near grain sources, feedlots, and bird feeders."
+  },
+  "taxonomy_note": {
+    "description": "THIRD Columbidae entry. FIRST non-native Columbidae. Invasive species. Reached North America via Bahamas pet shop escape (~1975), Florida (~1982), PNW (~2000). One of the fastest avian range expansions in modern history. 100-150 km/year expansion rate.",
+    "current_family": "Columbidae (3rd entry, 1st non-native)",
+    "new_family": false,
+    "family_count_in_engine": "Columbidae: third entry. Band-tailed (149) + Mourning Dove (150) + Eurasian Collared-Dove (151).",
+    "name_etymology": "Streptopelia from Greek 'streptos' (collar, twisted necklace) + 'peleia' (dove) -- the collared dove. decaocto from Greek 'dekaokto' (eighteen) -- from a myth about a servant paid 18 coins whose cries were transformed into the dove's call.",
+    "genus_note": "Streptopelia -- first entry. The 'collared doves' -- Old World genus. Asian/European origin.",
+    "order_note": "Columbiformes. Third entry.",
+    "family_position": "Third Columbidae. First non-native. Native/non-native boundary crossed. Invasive species."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Coo: 400-700 Hz. Second note may reach 800 Hz. Slightly higher than Mourning Dove.",
+    "peak_energy_band_hz": "Coo: 450-650 Hz.",
+    "song_frequency_hz": "Cooing: 400-700 Hz. Harsh flight call: 1000-2000 Hz.",
+    "song_duration_s": "Three-note phrase: 1.5-2.0 seconds. Repeated with 2-5 second pauses. Calling bouts: 10-30 minutes.",
+    "note_structure": "THREE-NOTE COO: 'hoo-HOO-hoo' -- emphasis on second note (higher and louder). Invariable. Diagnostic. No native NA dove has this pattern.",
+    "note_types": "Three-note coo (primary, territorial/courtship), harsh nasal 'kwahh' (flight/aggression).",
+    "phrase_structure": "Three-note phrase repeated dozens of times with short pauses. Most persistent Columbidae caller. Monotonous repetition.",
+    "timbre": "Moderate, rhythmic, slightly harsh compared to Mourning Dove. More assertive. Less breathy, more emphatic.",
+    "amplitude": "E=3. Moderate. Audible 100-250m in urban conditions. Louder than Mourning Dove. Still ambient background. Near the upper E=3 boundary.",
+    "tempo": "Moderate repetition rate. 2-5 second pauses. Extended calling bouts of 10-30 minutes unusual for Columbidae.",
+    "context": "Year-round calling. Rooftops, power lines, TV antennas, tall trees near buildings. Urban/suburban matrix. Most persistent caller of the family.",
+    "regional_variation": "Minimal. Three-note pattern consistent across expanding range.",
+    "key_property": "THREE-NOTE HOO-HOO-HOO -- 400-700 Hz, persistent, monotonous, the sound of invasion. E=3. THIRD COLUMBIDAE. FIRST NON-NATIVE. Fastest avian range expansion. Florida to PNW in 20 years. This sound did not exist in the PNW before ~2000."
+  },
+  "plumage": {
+    "overall": "Pale buff-gray, uniform coloring. Stocky build. Square, white-tipped tail. Black crescent on nape (diagnostic field mark -- 'the collar'). Larger than Mourning Dove.",
+    "diagnostic_mark": "Black crescent collar on back of neck. Square white-tipped tail. Stocky build. No native NA dove has the collar.",
+    "seasonal_variation": "Minimal.",
+    "flight_pattern": "Direct, somewhat labored. Harsh nasal flight call often given on takeoff."
+  },
+  "physical_description": {
+    "overall": "Length: 29-33 cm. Weight: 150-240 g. Larger than Mourning Dove (100-170g). Stocky, chunky build vs. Mourning Dove's slim elegance.",
+    "diagnostic_mark": "Black neck collar (crescent on nape). Square white-tipped tail. Pale buff-gray. Stocky build. Urban habitat.",
+    "field_id": "Stocky pale dove on rooftops or power lines near buildings. Look for black collar on nape. Three-note rhythmic call. Often near grain sources. Larger and paler than Mourning Dove."
+  },
+  "nodes": [
+    {
+      "id": "fastest-invasion",
+      "type": "pattern",
+      "title": "Fastest Avian Range Expansion",
+      "description": "Bahamas pet shop escape (~1975) to continental coverage in <30 years. Florida ~1982, Gulf Coast 1990, PNW ~2000. 100-150 km/year. Fueled by human commensalism, grain economy, year-round breeding, no predator pressure at front.",
+      "connections": ["new-sound", "native-nonnative-boundary"]
+    },
+    {
+      "id": "new-sound",
+      "type": "concept",
+      "title": "A New Sound in the Soundscape",
+      "description": "The three-note 'hoo-HOO-hoo' did not exist in the PNW before ~2000. The engine documents the acoustic landscape as it is, including invasive sounds. The Collared-Dove's call is an acoustic fact of the modern PNW.",
+      "connections": ["fastest-invasion", "persistent-caller"]
+    },
+    {
+      "id": "native-nonnative-boundary",
+      "type": "pattern",
+      "title": "Native/Non-Native Boundary Crossed",
+      "description": "First non-native Columbidae. The transition from native (149-150) to non-native (151-152). The progression tells a displacement and colonization story. The engine documents without editorial judgment.",
+      "connections": ["fastest-invasion", "persistent-caller"]
+    },
+    {
+      "id": "persistent-caller",
+      "type": "concept",
+      "title": "Three Columbidae at E=3",
+      "description": "Band-tailed (E=3, deep/muted), Mourning Dove (E=3, soft/mournful), Collared-Dove (E=3, persistent/monotonous). Three mechanisms, same energy. Family energy signature. Only Rock Pigeon wing clap (E=4) will break it.",
+      "connections": ["new-sound", "native-nonnative-boundary"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-150",
+      "species": "Mourning Dove",
+      "relationship": "NATIVE vs. INVASIVE! Both Columbidae, both E=3. Mourning Dove (native, 300M, centuries of presence) vs. Collared-Dove (invasive, 30 years, explosive growth). Potential competition in suburban habitat."
+    },
+    {
+      "target": "SPS-149",
+      "species": "Band-tailed Pigeon",
+      "relationship": "NATIVE ISOLATION! Band-tailed in forest, Collared-Dove in urban/agricultural. Minimal direct competition. Different habitats protect the native."
+    },
+    {
+      "target": "SPS-152",
+      "species": "Rock Pigeon wing clap",
+      "relationship": "NON-NATIVE PAIR! Both non-native Columbidae in urban areas. Collared-Dove (invasive, vocal, 30 years) and Rock Pigeon (feral, mechanical, centuries). Different origins, same cities."
+    }
+  ]
+}
