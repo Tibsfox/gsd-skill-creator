@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 205&deg; &mdash; Bighorn Sheep Clash &mdash; Resonant Cranial Impact &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5D4037, #795548, #8D6E63); color: #EFEBE9; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(93, 64, 55, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .impact-card { background: linear-gradient(135deg, #5D4037, #795548, #8D6E63); border: 2px solid #4E342E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #EFEBE9; }
+    .impact-card h3 { margin-top: 0; font-size: 1.1rem; color: #D7CCC8; }
+    .impact-card p { color: #EFEBE9; }
+    .impact-card strong { color: white; }
+
+    .skull-card { background: linear-gradient(135deg, #4E342E, #5D4037, #6D4C41); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .skull-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .skull-card p { color: #D7CCC8; }
+    .skull-card strong { color: #EFEBE9; }
+
+    .horn-card { background: linear-gradient(135deg, #3E2723, #4E342E, #5D4037); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BCAAA4; }
+    .horn-card h3 { margin-top: 0; font-size: 1.1rem; color: #A1887F; }
+    .horn-card p { color: #BCAAA4; }
+    .horn-card strong { color: #D7CCC8; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.impact { background: #5D4037; }
+    .theory-icon.skull { background: #4E342E; }
+    .theory-icon.horn { background: #3E2723; }
+    .theory-icon.category { background: #795548; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .comparison-table th { background: #5D4037; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .comparison-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .comparison-table tr:nth-child(even) { background: #EFEBE9; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">205&deg;</div>
+      <div class="release-title-block">
+        <h2>Bighorn Sheep Clash</h2>
+        <div class="scientific"><em>Ovis canadensis</em> (Bovidae) &mdash; E=6 &mdash; Resonant Cranial Impact</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      Third Bovidae entry. <strong>First impact-generated sound</strong> in the engine.
+      <strong>800 lbs</strong> of force. Resonant <strong>CRACK</strong> audible for
+      <strong>miles.</strong> Double-layered skull. Sinuses as shock absorbers.
+      Horn curl measurement. Ritual combat. <strong>E=6</strong> &mdash;
+      maximum Bovidae energy. Fall rut.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="impact-card">
+          <h3>The Clash &mdash; 800 lbs of Impact</h3>
+          <p>
+            Two rams charge from <strong>20&ndash;40 feet</strong> apart, reaching
+            <strong>20&ndash;40 mph.</strong> Combined closing speed exceeds
+            <strong>60 mph.</strong> Impact: up to <strong>800 lbs of force.</strong>
+            The crack is instantaneous &mdash; a sharp, resonant <strong>CRACK</strong>
+            that echoes off canyon walls. Audible for <strong>miles.</strong>
+            Contests involve dozens of clashes over <strong>hours.</strong>
+          </p>
+        </div>
+
+        <div class="skull-card">
+          <h3>Skull Engineering &mdash; Built to Collide</h3>
+          <p>
+            <strong>Double-layered skull:</strong> outer layer absorbs initial impact,
+            cancellous bone struts distribute force, inner layer protects brain.
+            <strong>Frontal sinuses</strong> act as pneumatic shock absorbers &mdash;
+            larger in rams than ewes, evolved specifically for combat.
+            <strong>Cervical reinforcement:</strong> massive tendons, thick vertebral
+            processes. The entire anterior body is an impact-absorption chain.
+          </p>
+        </div>
+
+        <div class="horn-card">
+          <h3>Horn Curl &mdash; The Measure of a Ram</h3>
+          <p>
+            <strong>3/4 curl, full curl, beyond.</strong> A full-curl ram has completed
+            a <strong>360-degree arc</strong> &mdash; typically at <strong>7&ndash;8 years.</strong>
+            Horns can weigh over <strong>30 lbs combined</strong> (12% of body weight).
+            The curl directs impact force into the horn base where bone and
+            keratin absorb it. Growth is continuous but slows after full curl.
+          </p>
+        </div>
+
+        <h2>Bovidae Energy Arc</h2>
+        <table class="comparison-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Sound</th><th>Energy</th></tr></thead>
+          <tbody>
+            <tr><td>203&deg;</td><td>Mountain Goat</td><td>Adult bleat</td><td>E=4</td></tr>
+            <tr><td>204&deg;</td><td>Mountain Goat Kid</td><td>Kid mew</td><td>E=3</td></tr>
+            <tr><td>205&deg;</td><td>Bighorn Sheep</td><td>Ram clash</td><td>E=6</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-203 Mountain Goat</strong>
+            <p>BOVIDAE 1/3. Adult bleat (E=4). Contact call. Quiet and nasal. The family baseline.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-204 Mountain Goat Kid</strong>
+            <p>BOVIDAE 2/3. Kid mew (E=3). Thin and high. The infant voice. Now the clash at E=6 completes the arc: 4-3-6.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-205 Naked Giants</strong>
+            <p>ENERGY MATCH (E=6 + E=6 = 12). Impact force: 800 lbs cranial (ram) vs. power trio volume (band). Both maximum.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-200 Black Bear Huff</strong>
+            <p>Warning vs. combat. The bear huffs to avoid confrontation. The ram clashes to win it. Both E=5-6 range. Different strategies.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon impact">I</div>
+            <div class="theory-content">
+              <h4>First Impact-Generated Sound</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>Not a vocalization but a collision. 800 lbs of force converted to resonant CRACK. Opens a new acoustic category for the engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon skull">S</div>
+            <div class="theory-content">
+              <h4>Skull Engineering &mdash; Biological Crumple Zone</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Double-layered skull. Cancellous bone struts. Frontal sinuses as pneumatic cushions. Cervical reinforcement. An impact-absorption chain.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon horn">H</div>
+            <div class="theory-content">
+              <h4>Horn Curl Measurement</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>3/4 curl to full curl (360&deg;). 30+ lbs combined. 7-8 years to maturity. The measure of a ram. The curl directs force into bone.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon category">C</div>
+            <div class="theory-content">
+              <h4>Bovidae Energy Arc &mdash; 4-3-6</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Mountain Goat bleat (E=4), kid mew (E=3), Bighorn Sheep clash (E=6). Quiet contact, quieter infant, then MAXIMUM impact.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Bighorn Sheep</div><div class="stat-detail"><em>O. canadensis</em> (ram clash)</div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Bovidae</div><div class="stat-detail">Third entry (203, 204)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Ram clash</div><div class="stat-detail">resonant cranial CRACK</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #5D4037;">E = 6</div><div class="stat-detail">maximum Bovidae energy</div></div>
+        <div class="stat-card"><div class="stat-label">Impact force</div><div class="stat-value">up to 800 lbs</div><div class="stat-detail">combined closing 60+ mph</div></div>
+        <div class="stat-card"><div class="stat-label">Season</div><div class="stat-value">Fall rut</div><div class="stat-detail">October&ndash;December</div></div>
+        <div class="stat-card"><div class="stat-label">Carry distance</div><div class="stat-value">1&ndash;2+ miles</div><div class="stat-detail">canyon-amplified</div></div>
+        <div class="stat-card"><div class="stat-label">Horn weight</div><div class="stat-value">30+ lbs</div><div class="stat-detail">12% of body weight</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
