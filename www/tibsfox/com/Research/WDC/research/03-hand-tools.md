@@ -20,6 +20,8 @@ Bench chisels are the workhorses. They have blades roughly four to six inches lo
 
 A good set of bench chisels is the backbone of a hand tool kit. They are used for chopping (driving the chisel into the wood with mallet blows, as in cutting a mortise), paring (pushing the chisel by hand for fine, controlled cuts), and cleaning (removing waste from the bottom of a dado or the corner of a joint).
 
+For beginners, the **Narex Richter** set of four (1/4", 1/2", 3/4", 1", approximately $80-100) is the best value in the market -- Czech-made, Cr-V steel, comfortable handles, and they arrive sharp enough to work after a quick honing. The **Stanley Sweetheart 750** set ($60-80 for four) is a solid budget alternative. For the serious hand tool worker ready to invest, **Lie-Nielsen** bench chisels ($45-55 each, A2 steel) and **Blue Spruce Toolworks** chisels ($85-110 each, handmade in Portland, Oregon) represent the premium tier -- tools you will use for decades.
+
 The steel matters. Modern bench chisels are made from carbon steel, chrome-vanadium steel, or high-speed steel. Carbon steel (like O1) is easy to sharpen and takes a keen edge, but dulls faster. High-speed steel (like A2 or PM-V11) holds its edge longer but takes more effort to sharpen. Japanese chisels (oire-nomi) use a laminated construction — a thin layer of very hard white or blue steel forge-welded to a softer iron body. The hard steel takes an extraordinary edge. The soft body absorbs impact without chipping. This laminated approach is ancient and brilliant.
 
 ### Mortise Chisels

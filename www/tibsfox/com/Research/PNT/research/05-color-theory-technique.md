@@ -87,6 +87,8 @@ A triadic scheme uses three colors equally spaced around the wheel (red, yellow,
 
 These schemes are starting points, not rules. No great painting was ever made by strictly following a color scheme. But they provide frameworks for thinking about color balance when you are stuck or when a composition feels like it lacks harmony.
 
+In practice, here is how to use these schemes: before you start painting, make a small (2 x 3 inch) color thumbnail -- not a drawing, but a rough arrangement of the three or four major color areas in your composition. If you are painting a PNW landscape with a blue-gray sky, green forest, and a rusty dock, you have a near-triadic scheme (blue, green, red-orange). The thumbnail tells you whether those proportions work before you commit to a full painting. The general principle: use your dominant color for 60-70% of the painting, the secondary for 20-30%, and the accent for 5-10%. A mostly green landscape with a gray sky and a tiny red barn is a classic example of this proportion -- the red barn is the accent that makes the green sing.
+
 ### Warm and Cool
 
 The warm/cool distinction is one of the most important concepts in painting. Warm colors (those tending toward red, orange, yellow) appear to advance toward the viewer. Cool colors (those tending toward blue, green, violet) appear to recede. This is atmospheric perspective in action: distant mountains appear bluer than near ones because the intervening atmosphere scatters short (blue) wavelengths.
@@ -231,7 +233,9 @@ Plein air painting is the practice of painting outdoors, on location, directly f
 
 ### Equipment
 
-The plein air setup is designed for portability. A **pochade box** (from the French *pochade*, quick sketch) is a compact painting box that opens to hold a panel, a palette, a brush holder, and compartments for paint and medium. The Strada, Open Box M, and Guerrilla Painter are popular brands. The box clamps to a tripod. The whole setup -- box, tripod, paints, panels -- fits in a backpack.
+The plein air setup is designed for portability. A **pochade box** (from the French *pochade*, quick sketch) is a compact painting box that opens to hold a panel, a palette, a brush holder, and compartments for paint and medium. The box clamps to a tripod. The whole setup -- box, tripod, paints, panels -- fits in a backpack.
+
+Popular pochade boxes, from entry-level to premium: the **Guerrilla Painter 9x12 Guerrilla Box** ($150-180) is the entry point that established the category -- sturdy, functional, and widely available. The **Open Box M** ($180-220) offers a more refined design with a larger mixing area and better panel storage. The **Strada Easel Mini** ($250-300) is the premium compact option -- aluminum construction, ultralight, with an elegant clamping system that holds panels securely in wind. For painters who want maximum panel size in a portable package, the **En Plein Air Pro Traveler** ($200-250) accommodates panels up to 12x16 inches. A suitable tripod (Manfrotto 190 series or a basic photography tripod with a flat head, $60-120) completes the rig.
 
 Plein air painters typically work small: 6x8, 8x10, or 9x12 inch panels. Smaller panels can be completed in 2-3 hours, which is roughly how long a light condition holds before the sun moves enough to change the shadow pattern fundamentally. Working small also forces simplification -- there is no room for fussy detail on a 6x8 panel, which is the point.
 
@@ -243,7 +247,7 @@ This is the central challenge of plein air painting: the light is changing const
 
 Painting outdoors in the Pacific Northwest presents specific challenges and gifts. The light is predominantly diffused -- overcast skies scatter light evenly, eliminating harsh shadows and revealing subtle color relationships. This makes the PNW ideal for learning to see color temperature (the slight differences between warm and cool tones become visible when strong shadows are not dominating the scene).
 
-The green challenge is real. The PNW landscape from April through October is overwhelmingly green. Painting convincing, varied greens without muddy monotony is the specific technical challenge of PNW landscape painting. The solution lies in color temperature: warm greens (yellow-green, olive) in sunlit areas, cool greens (blue-green, viridian) in shadows, and constant attention to the muted blue-gray atmosphere that modifies everything.
+The green challenge is real. The PNW landscape from April through October is overwhelmingly green. Painting convincing, varied greens without muddy monotony is the specific technical challenge of PNW landscape painting. The solution lies in color temperature: warm greens (yellow-green, olive) in sunlit areas, cool greens (blue-green, viridian) in shadows, and constant attention to the muted blue-gray atmosphere that modifies everything. A practical PNW plein air palette for managing greens: yellow ochre and cadmium yellow light for the warm end, ultramarine blue and viridian for the cool end, burnt sienna for neutralizing, and alizarin crimson for the purple-grays in distant conifers. Resist the temptation to use sap green or hooker's green straight from the tube -- they produce the monotone green you are trying to avoid. Mix every green fresh from yellow and blue, and each mixture will be unique.
 
 Rain is the other reality. Plein air painting in the PNW means painting in drizzle, under tarps, in the twenty-minute windows between showers. A pochade box with a lid offers some protection for wet paintings. Watercolor painters face the ironic challenge of too much water -- rain spots on a half-finished watercolor are destructive. Many PNW watercolorists work under portable canopies or paint from the shelter of a car with the hatch open.
 
