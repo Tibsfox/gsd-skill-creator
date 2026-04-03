@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 116&deg; &mdash; Pony Time &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #311B92;
+      color: #D1C4E9;
+      border: 1px solid #4527A0;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1A237E;
+      color: #9FA8DA;
+      border: 1px solid #283593;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .reset-banner {
+      background: linear-gradient(135deg, #37474F, #455A64, #1A237E);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .reset-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .reset-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    blockquote {
+      border-left: 3px solid #311B92;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EDE7F6;
+      font-style: italic;
+      color: #311B92;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>116 &mdash; Pony Time</span>
+    </nav>
+
+    <!-- Reset Banner -->
+    <div class="reset-banner">
+      <h3>Post-Streak Reset &mdash; DIY Absolute &mdash; Self-Released &mdash; The Raw Transmission</h3>
+      <p>
+        Pony Time at degree 116&deg; is the <strong>first degree after the Capitol Hill
+        six-degree streak</strong> (110&ndash;115). A <strong>self-released</strong> garage rock
+        <strong>duo</strong> &mdash; Luke Beetham and Stacy Peck. No label. No distribution deal.
+        Guitar + drums + vocals. Two people, amplified, playing as hard and as fast as they can.
+        The <strong>raw transmission</strong>: music stripped to its essential components.
+        The DIY underground that sustains the scene.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">116&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Pony Time</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Indie Rock / Garage</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="record-badge">Post-Streak Reset</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Raw Transmission</h2>
+          <p>
+            Pony Time is a Seattle indie rock/garage rock <strong>duo</strong> &mdash;
+            <strong>Luke Beetham</strong> and <strong>Stacy Peck</strong>. Two people.
+            Guitar, drums, vocals. No bass. No keyboards. No backing tracks. Everything
+            you hear is two people in a room. The duo format is a declaration of
+            <strong>minimalism</strong>: the simplest possible unit of rock band playing
+            the simplest possible version of rock music.
+          </p>
+          <blockquote>
+            After six degrees of elaborate construction &mdash; motorik jams, math-rock
+            intricacy, industrial noise, post-punk architecture &mdash; degree 116
+            delivers the corrective: raw transmission. Two people, amplified, playing
+            for whoever shows up.
+          </blockquote>
+          <p>
+            The songs are short (1&ndash;3 minutes), built on hooks that arrive immediately.
+            The guitar is overdriven. The drums are hit hard. The vocals are shouted, sung,
+            and sometimes screamed. No atmospheric preamble. No extended introduction.
+            The song starts, delivers, and ends. The <strong>DIY absolute</strong>: no label,
+            no producer, no distribution infrastructure. Self-released through Bandcamp and
+            physical media at shows.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The DIY Underground</h2>
+          <p>
+            Pony Time exists in Seattle&rsquo;s <strong>DIY underground</strong> &mdash; the
+            network of house shows, basement venues, all-ages spaces, and informal gatherings
+            that exists below the level of club shows and bar stages. This is where bands play
+            for $50 and a case of beer, where the PA is borrowed, where the audience is 30
+            people who all know each other. The DIY network is the <strong>foundation</strong>
+            of Seattle&rsquo;s music scene. Every band that eventually plays the Showbox or
+            signs to Sub Pop began here. Pony Time represents the network itself &mdash; the
+            permanent underground that sustains the scene regardless of which bands rise above it.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Raw Transmission</h4>
+              <div class="level advanced">Advanced &mdash; 117th Acoustic Element</div>
+              <p>
+                Simplest possible rock unit (duo) delivering music
+                with no mediation. Overdriven guitar + pounding drums
+                + vocals. Lo-fi production. Short-form delivery.
+                Anti-architecture. The signal chain: instrument &rarr;
+                amplifier &rarr; room &rarr; listener.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Post-Streak Reset</h4>
+              <div class="level advanced">Advanced &mdash; 117th Pattern</div>
+              <p>
+                Long streak (Capitol Hill, 110&ndash;115) followed by
+                dramatic simplification. Genre: post-punk to garage.
+                Label: Matador to self-released. Format: four-piece
+                to duo. Production: full to lo-fi. Energy holds (E=5).
+                Everything else resets.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Self-Released &mdash; DIY Absolute</h4>
+              <div class="level intermediate">Intermediate &mdash; Label Spectrum</div>
+              <p>
+                The extreme end of the independence spectrum.
+                Sub Pop (independent) &rarr; Matador (indie prestige)
+                &rarr; Self-released (no label). The DIY absolute.
+                First fully self-released artist in recent engine history.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Duo Minimalism</h4>
+              <div class="level intermediate">Intermediate &mdash; Format</div>
+              <p>
+                Two-piece format: guitar + drums. No bass, no keys,
+                no samples. Connects to White Stripes, early Black Keys,
+                Lightning Bolt. But Pony Time&rsquo;s approach is more
+                direct: no effects, no trickery. Just two people amplified.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">115&deg;</span>
+              <strong>Pretty Girls Make Graves</strong> &mdash; Consecutive contrast.
+              Post-Punk (115, Matador, four-piece, elegant) vs. Garage Rock
+              (116, self-released, duo, raw). Same E=5. Architecture vs. impulse.
+              Streak closer vs. post-streak reset.
+            </li>
+            <li>
+              <span class="ref-degree">110&deg;</span>
+              <strong>Kinski</strong> &mdash; Minimalism spectrum.
+              Kinski: maximalist (extended, layered, hypnotic).
+              Pony Time: minimalist (short, stripped, immediate).
+              Both E=5. Accumulation vs. reduction.
+            </li>
+            <li>
+              <span class="ref-degree">108&deg;</span>
+              <strong>Veronica Lipgloss</strong> &mdash; Garage adjacency.
+              Both punk/garage-adjacent. Veronica Lipgloss: E=6 (maximum).
+              Pony Time: E=5. Similar rawness, different intensity.
+            </li>
+            <li>
+              <span class="ref-degree">28&deg;</span>
+              <strong>Mudhoney</strong> &mdash; Garage lineage.
+              Mudhoney: garage/grunge (E=5, Sub Pop).
+              Pony Time: garage rock (E=5, self-released).
+              Same energy, same genre territory, different decades.
+            </li>
+            <li>
+              <span class="ref-degree">1&deg;</span>
+              <strong>Nirvana</strong> &mdash; DIY origins.
+              Nirvana began in the DIY underground before Sub Pop.
+              Pony Time stays in the DIY underground. The origin
+              that Nirvana left is the home that Pony Time keeps.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">116&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie / Garage Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2010s&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle (DIY)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-Released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Format</span>
+            <span class="stat-value">Duo</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Guitar/Vocals</span>
+            <span class="stat-value">Luke Beetham</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Drums/Vocals</span>
+            <span class="stat-value">Stacy Peck</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Label Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Major</span>
+            <span class="stat-value">DGC, etc.</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Indie</span>
+            <span class="stat-value">Sub Pop, Matador</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">DIY</span>
+            <span class="stat-value" style="color: #E65100;">Self-Released</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#117 (Raw Trans)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#117 (Reset)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../115-pretty-girls-make-graves/" style="color: var(--seattle-navy);">&larr; 115&deg; Pretty Girls Make Graves</a>
+        <a href="../117-/" style="color: var(--seattle-navy);">117&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 116&deg; &mdash; Pony Time &mdash; Seattle 360 Engine &mdash; v1.49.256
+        <br>
+        Post-streak reset. First degree after the Capitol Hill six-degree streak (110&ndash;115).
+        Self-released garage rock duo &mdash; Luke Beetham and Stacy Peck. No label. No bass.
+        No keyboards. Two people, amplified, playing as hard and as fast as they can.
+        The raw transmission &mdash; the 117th acoustic element. The post-streak reset &mdash;
+        the 117th pattern. The DIY absolute: the permanent underground that sustains the scene.
+        Short, fast, loud, honest. The music that exists whether or not anyone is paying attention.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
