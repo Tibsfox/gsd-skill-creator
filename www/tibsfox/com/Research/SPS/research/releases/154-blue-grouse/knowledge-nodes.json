@@ -1,0 +1,108 @@
+{
+  "degree": 154,
+  "species": "Dusky Grouse",
+  "scientific_name": "Dendragapus obscurus",
+  "slug": "154-blue-grouse",
+  "sound_type": "deep resonant booming/thumping -- extremely low-frequency sounds produced by inflating cervical air sacs, 50-100 Hz fundamental, more felt than heard, the lowest-frequency bird vocalization in the PNW; E=5",
+  "energy": 5,
+  "ecosystem": "Conifer slopes -- Douglas-fir, true fir, spruce forests at middle to high elevations. Interior mountains east of the Cascade crest. Subalpine and montane forest. Reverse altitudinal migration: upslope in winter.",
+  "season": "Year-round resident. Booming display April-June. Reverse migration: upslope in autumn, downslope in spring.",
+  "family": "Phasianidae (2nd entry. SECOND PHASIANIDAE. Formerly Blue Grouse -- interior populations.)",
+  "order": "Galliformes",
+  "csv_substitute": false,
+  "original_species": "Dusky Grouse (formerly Blue Grouse, interior)",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.45,
+    "lon": -120.70,
+    "description": "Dusky Grouse in interior mountain forests of Washington -- east side of Cascades. Douglas-fir, ponderosa pine, true fir zones. Klickitat, Yakima, Chelan, Okanogan Counties."
+  },
+  "taxonomy_note": {
+    "description": "SECOND Phasianidae entry. Formerly Blue Grouse -- split in 2006 by AOU into Dusky Grouse (interior, D. obscurus) and Sooty Grouse (coastal, D. fuliginosus). Dusky at 154, Sooty at 156. Evidence: genetic divergence, vocalization differences, air sac coloration (purplish-red vs. yellow), plumage. Cascade crest as approximate boundary.",
+    "current_family": "Phasianidae (2nd entry)",
+    "new_family": false,
+    "family_count_in_engine": "Phasianidae: second entry. Wild Turkey (153) + Dusky Grouse (154). Ruffed Grouse (155) and Sooty Grouse (156) follow.",
+    "name_etymology": "Dendragapus from Greek 'dendron' (tree) + 'agapos' (loving) -- tree-loving. obscurus from Latin 'dark, dusky' -- referring to the plumage color.",
+    "genus_note": "Dendragapus -- first entry. Two species after split: Dusky Grouse (D. obscurus) and Sooty Grouse (D. fuliginosus).",
+    "order_note": "Galliformes. Second entry (after Wild Turkey at 153).",
+    "family_position": "Second Phasianidae. Interior split of Blue Grouse. Subsonic booming display. Lowest frequency PNW bird vocalization."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Booming: approximately 50-100 Hz fundamental. Partially infrasonic. Lowest frequency bird vocalization in the PNW.",
+    "peak_energy_band_hz": "50-100 Hz. Extremely low. Near the lower limit of human hearing (20 Hz).",
+    "song_frequency_hz": "Booming: 50-100 Hz. Harmonics may extend to 200-400 Hz but with much less energy.",
+    "song_duration_s": "Individual note: ~0.3-0.5 seconds. Bout: 5-7 notes over ~8-12 seconds. Sessions: repeated bouts over minutes to hours.",
+    "note_structure": "BOOMING: Deep resonant 'whoom' or 'boop'. Produced by air forced through syrinx from inflated cervical air sacs. Helmholtz resonance determines frequency.",
+    "note_types": "Booming (primary, breeding display -- vocal/pneumatic), clucking (contact/alarm -- vocal), whining (female nesting -- vocal).",
+    "phrase_structure": "Display bout: 5-7 deep booming notes at ~1-2 second intervals. Repeated bouts during display session.",
+    "timbre": "Deep, resonant, thumping. More felt than heard. Physical vibration in chest. Uncanny, almost seismic quality. Not easily described as 'sound' -- more like a pressure pulse.",
+    "amplitude": "E=5. Not conventionally loud (moderate dB SPL). Energy concentrated in extremely low frequencies felt as physical vibration. Effective range: 100-300 meters.",
+    "tempo": "5-7 notes per bout, spaced ~1-2 seconds apart. Bouts repeated at irregular intervals during display sessions.",
+    "context": "Breeding season (April-June). Dawn and early morning. Male territorial/courtship display from elevated site or fallen log.",
+    "regional_variation": "Dusky Grouse booming is slightly higher-pitched and more rapid than Sooty Grouse booming -- a diagnostic difference between the split species.",
+    "key_property": "DEEP BOOMING -- 50-100 Hz, lowest frequency PNW bird, more felt than heard, cervical air sac Helmholtz resonance, purplish-red air sacs, 5-7 note bouts. E=5. SECOND PHASIANIDAE. Formerly Blue Grouse (interior). Split from Sooty (156) in 2006. Reverse altitudinal migration."
+  },
+  "plumage": {
+    "overall": "Males: blue-gray overall, slightly paler and grayer than Sooty Grouse. Purplish-red cervical air sacs surrounded by white feather rosettes during display. Females: mottled brown for camouflage.",
+    "diagnostic_mark": "Males: purplish-red air sacs (diagnostic vs. Sooty's yellow). White feather rosettes. Blue-gray body. Females: mottled brown.",
+    "seasonal_variation": "Air sacs only prominently visible during breeding display. Otherwise concealed.",
+    "flight_pattern": "Burst flight when flushed. Short-distance. Strong but brief."
+  },
+  "physical_description": {
+    "overall": "Length: 43-51 cm. Weight: 850-1300 g. Large grouse. Similar in size to Sooty Grouse. Males slightly larger than females.",
+    "diagnostic_mark": "Blue-gray body (paler than Sooty). Purplish-red air sacs in display. Interior mountain habitat (east of Cascade crest in WA/OR).",
+    "field_id": "Large gray grouse in interior mountain forest. Listen for deep booming -- more felt than heard. Extremely difficult to locate by sound alone due to low frequency."
+  },
+  "nodes": [
+    {
+      "id": "subsonic-display",
+      "type": "concept",
+      "title": "Subsonic Booming -- Lowest Frequency PNW Bird",
+      "description": "50-100 Hz fundamental. Partially infrasonic. More felt than heard. Chest vibration before ear detection. Cervical air sacs as Helmholtz resonators. Extremely difficult to localize in forest environment.",
+      "connections": ["helmholtz-resonance", "blue-grouse-split"]
+    },
+    {
+      "id": "helmholtz-resonance",
+      "type": "concept",
+      "title": "Helmholtz Resonance Mechanism",
+      "description": "Cervical air sacs function as Helmholtz resonators -- cavities that amplify specific low frequencies. Inflation reveals purplish-red skin surrounded by white feather rosettes. Frequency determined by cavity volume and aperture.",
+      "connections": ["subsonic-display", "blue-grouse-split"]
+    },
+    {
+      "id": "blue-grouse-split",
+      "type": "pattern",
+      "title": "Blue Grouse Taxonomic Split (2006)",
+      "description": "AOU split Blue Grouse into Dusky (interior, purplish-red air sacs, D. obscurus) and Sooty (coastal, yellow air sacs, D. fuliginosus). Evidence: genetics, vocalizations, air sac color, plumage. Engine: Dusky at 154, Sooty at 156.",
+      "connections": ["subsonic-display", "reverse-migration"]
+    },
+    {
+      "id": "reverse-migration",
+      "type": "concept",
+      "title": "Reverse Altitudinal Migration",
+      "description": "Upslope in winter (opposite of most mountain birds). Conifer needle diet at higher elevation. Snow roosting for insulation. Solitary and sedentary in winter -- perching in individual conifers for weeks.",
+      "connections": ["blue-grouse-split", "subsonic-display"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-156",
+      "species": "Sooty Grouse",
+      "relationship": "SPLIT PAIR! Formerly one species (Blue Grouse). Dusky (154, interior, purplish-red) and Sooty (156, coastal, yellow). Same genus Dendragapus."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey",
+      "relationship": "PHASIANIDAE CONTRAST! Turkey gobble (153, E=6, audible 1+ mile) vs. Dusky Grouse booming (154, E=5, 50-100 Hz, felt not heard). Loudest to lowest."
+    },
+    {
+      "target": "SPS-155",
+      "species": "Ruffed Grouse",
+      "relationship": "GROUSE TRIO! Dusky booming (154, vocal), Ruffed drumming (155, mechanical), Sooty booming (156, vocal). Different species, different mechanisms."
+    },
+    {
+      "target": "SPS-108",
+      "species": "Pileated Woodpecker",
+      "relationship": "LOW-FREQUENCY PAIR! Both produce low-frequency sounds that penetrate dense forest. Different mechanisms (vocal vs. mechanical) but shared acoustic niche."
+    }
+  ]
+}

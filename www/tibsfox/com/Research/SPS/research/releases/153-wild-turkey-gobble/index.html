@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 153&deg; &mdash; Wild Turkey Gobble &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #B71C1C, #D32F2F); color: #FFCDD2; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(183, 28, 28, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .gobble-card { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #B71C1C); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .gobble-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .gobble-card p { color: #FFCDD2; }
+    .gobble-card strong { color: #FFEBEE; }
+
+    .restoration-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .restoration-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .restoration-card p { color: #C8E6C9; }
+    .restoration-card strong { color: #E8F5E9; }
+
+    .phasianidae-card { background: linear-gradient(135deg, #E65100, #EF6C00, #F57C00, #E65100); border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .phasianidae-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCC80; }
+    .phasianidae-card p { color: #FFE0B2; }
+    .phasianidae-card strong { color: #FFF3E0; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.gobble { background: #B71C1C; }
+    .theory-icon.family { background: #E65100; }
+    .theory-icon.restore { background: #1B5E20; }
+    .theory-icon.energy { background: #FF6F00; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .phasianidae-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .phasianidae-table th { background: #B71C1C; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .phasianidae-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .phasianidae-table tr:nth-child(even) { background: #FFEBEE; }
+    .phasianidae-table tr:first-child td { font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">153&deg;</div>
+      <div class="release-title-block">
+        <h2>Wild Turkey &mdash; Gobble</h2>
+        <div class="scientific"><em>Meleagris gallopavo</em> (Phasianidae) &mdash; E=6 &mdash; Powerful Liquid Gobble</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST PHASIANIDAE.</strong> The gamebird family enters the engine.
+      <strong>E=6 maximum energy returns</strong> after a 45-degree gap (since degree 108).
+      The gobble is audible at <strong>over one mile</strong> &mdash;
+      one of the most powerful bird vocalizations in North America.
+      <strong>100&ndash;9000 Hz.</strong> Liquid thunder. Ben Franklin&rsquo;s preferred national bird.
+      Reintroduced to the PNW. Restoration success.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="gobble-card">
+          <h3>The Gobble &mdash; Liquid Thunder</h3>
+          <p>
+            <strong>~30 pulses in ~1 second</strong> &mdash; so rapid they merge into
+            a continuous rolling, liquid sound. Syringeal production with
+            <strong>crop/throat sac resonance</strong> amplification.
+            Broad spectrum: <strong>100&ndash;9000 Hz</strong>.
+            Peak energy: <strong>1000&ndash;4000 Hz</strong>.
+            <strong>100+ dB at close range.</strong>
+            Audible at <strong>1+ mile</strong>. Amplitude modulation aids
+            long-distance propagation. Dawn chorus: chain-reaction gobbles
+            from multiple toms. <strong>Acoustically overwhelming.</strong>
+          </p>
+        </div>
+        <div class="restoration-card">
+          <h3>PNW Restoration &mdash; Not Native, Now Established</h3>
+          <p>
+            Wild Turkeys were <strong>absent from Washington</strong> when settlers arrived.
+            Introduction programs by WDFW: <strong>Eastern, Rio Grande, and Merriam&rsquo;s
+            subspecies</strong> placed in eastern Washington oak-pine habitats.
+            Now established in <strong>Klickitat, Yakima, Okanogan Counties</strong>
+            and expanding. National recovery: from <strong>30,000 birds (1930s)
+            to 7+ million today</strong>. One of the great wildlife restoration
+            successes in North American history.
+          </p>
+        </div>
+        <div class="phasianidae-card">
+          <h3>Phasianidae Quartet (153&ndash;156)</h3>
+          <p>
+            Four gamebirds enter the engine:<br>
+            <strong>153:</strong> Wild Turkey gobble (E=6, liquid thunder).<br>
+            <strong>154:</strong> Dusky Grouse deep booming (E=5, subsonic).<br>
+            <strong>155:</strong> Ruffed Grouse drumming (E=5, mechanical).<br>
+            <strong>156:</strong> Sooty Grouse muffled booming (E=5, ventriloquial).<br>
+            <strong>Vocal to mechanical. Loudest to most mysterious.</strong>
+          </p>
+        </div>
+
+        <h2>Phasianidae Quartet (153&ndash;156)</h2>
+        <table class="phasianidae-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Sound</th><th>Character</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>153</td><td>Wild Turkey</td><td>Gobble</td><td>Liquid, powerful</td><td>6</td></tr>
+            <tr><td>154</td><td>Dusky Grouse</td><td>Deep booming</td><td>Subsonic, felt</td><td>5</td></tr>
+            <tr><td>155</td><td>Ruffed Grouse</td><td>Drumming</td><td>Accelerating, mechanical</td><td>5</td></tr>
+            <tr><td>156</td><td>Sooty Grouse</td><td>Muffled booming</td><td>Ventriloquial</td><td>5</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-108 Pileated Woodpecker</strong>
+            <p>E=6 PAIR! Last E=6 on SPS axis (108). Wild Turkey restores E=6 after 45-degree gap. Both are maximum-energy vocalizations. Laughing call vs. liquid gobble.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-154 Dusky Grouse</strong>
+            <p>PHASIANIDAE PAIR! Turkey gobble (153, E=6, loudest) followed by Dusky Grouse booming (154, E=5, subsonic). From audible-at-a-mile to felt-not-heard. Same family, opposite acoustic strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-155 Ruffed Grouse</strong>
+            <p>PHASIANIDAE MECHANICAL! Turkey gobble is vocal. Ruffed Grouse drumming is mechanical (4th mechanical sound in engine). Same family, different sound production.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-152 Rock Pigeon</strong>
+            <p>FAMILY TRANSITION! Columbidae (149-152) complete. Phasianidae (153-156) begin. From doves/pigeons to gamebirds. From urban to woodland. New acoustic territory.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon gobble">G</div>
+            <div class="theory-content">
+              <h4>Gobble Acoustics</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>~30 pulses/second creating liquid rolling quality. 100-9000 Hz broad spectrum. Crop/throat sac resonance. Amplitude modulation for long-distance propagation. 1+ mile range.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon family">P</div>
+            <div class="theory-content">
+              <h4>First Phasianidae</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Gamebird family enters. Turkey, Dusky Grouse, Ruffed Grouse, Sooty Grouse. Four degrees, four species. Ground-dwelling acoustic specialists.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon energy">6</div>
+            <div class="theory-content">
+              <h4>E=6 Returns (45-Degree Gap)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Last E=6 at degree 108 (Pileated Woodpecker). 45 degrees without maximum energy. The gobble breaks the drought.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon restore">R</div>
+            <div class="theory-content">
+              <h4>PNW Restoration Story</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Not native to PNW. Introduced by WDFW. Eastern, Rio Grande, Merriam's subspecies. National recovery from 30K to 7M+. Conservation triumph.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Wild Turkey</div><div class="stat-detail"><em>Meleagris gallopavo</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Phasianidae</div><div class="stat-detail">1st entry (FIRST!)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Gobble</div><div class="stat-detail">liquid, rolling, powerful</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 6</div><div class="stat-detail">MAXIMUM returns</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">100&ndash;9000 Hz</div><div class="stat-detail">broad spectrum</div></div>
+        <div class="stat-card"><div class="stat-label">Range</div><div class="stat-value">1+ mile</div><div class="stat-detail">audible distance</div></div>
+        <div class="stat-card"><div class="stat-label">Amplitude</div><div class="stat-value">100+ dB</div><div class="stat-detail">at close range</div></div>
+        <div class="stat-card"><div class="stat-label">Pulses</div><div class="stat-value">~30 / second</div><div class="stat-detail">liquid rolling quality</div></div>
+        <div class="stat-card"><div class="stat-label">PNW Status</div><div class="stat-value">Reintroduced</div><div class="stat-detail">not originally native</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Oak woodland</div><div class="stat-detail">forest edge, clearings</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

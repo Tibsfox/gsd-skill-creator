@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 155&deg; &mdash; Ruffed Grouse Drumming &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3E2723, #4E342E); color: #BCAAA4; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(62, 39, 35, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .drum-card { background: linear-gradient(135deg, #3E2723, #4E342E, #5D4037, #3E2723); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BCAAA4; }
+    .drum-card h3 { margin-top: 0; font-size: 1.1rem; color: #A1887F; }
+    .drum-card p { color: #BCAAA4; }
+    .drum-card strong { color: #EFEBE9; }
+
+    .mechanical-card { background: linear-gradient(135deg, #1A237E, #283593, #303F9F, #1A237E); border: 2px solid #1A237E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .mechanical-card h3 { margin-top: 0; font-size: 1.1rem; color: #9FA8DA; }
+    .mechanical-card p { color: #C5CAE9; }
+    .mechanical-card strong { color: #E8EAF6; }
+
+    .log-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .log-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .log-card p { color: #C8E6C9; }
+    .log-card strong { color: #E8F5E9; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.drum { background: #3E2723; }
+    .theory-icon.mech { background: #1A237E; }
+    .theory-icon.log { background: #1B5E20; }
+    .theory-icon.accel { background: #E65100; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .mechanical-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .mechanical-table th { background: #3E2723; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .mechanical-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .mechanical-table tr:nth-child(even) { background: #EFEBE9; }
+    .mechanical-table tr:last-child { font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">155&deg;</div>
+      <div class="release-title-block">
+        <h2>Ruffed Grouse &mdash; Drumming</h2>
+        <div class="scientific"><em>Bonasa umbellus</em> (Phasianidae) &mdash; E=5 &mdash; Accelerating Wing-Drum on Log</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>THIRD PHASIANIDAE. FOURTH MECHANICAL SOUND.</strong>
+      Wings beat <strong>air while stationary</strong> on a fallen log.
+      Acceleration: <strong>2 beats/sec to 20 beats/sec</strong> over 8&ndash;11 seconds.
+      &ldquo;A distant motor starting.&rdquo; <strong>40&ndash;100 Hz</strong> fundamental.
+      Air compression creates pressure pulses &mdash; a <strong>small sonic boom</strong>
+      at each wing stroke. The log as stage. The wing as instrument.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="drum-card">
+          <h3>The Wing-Drum &mdash; A Distant Motor Starting</h3>
+          <p>
+            Male stands on fallen log, braces tail, cups wings forward.
+            Each stroke: powerful forward-and-upward wing beat striking
+            <strong>nothing but air</strong>. Cupped wing creates
+            <strong>localized vacuum</strong> followed by air rush &mdash;
+            a low-frequency pressure pulse. <strong>~50 beats per bout.</strong>
+            Slow start: <strong>thump... thump... thump...</strong>
+            Acceleration: <strong>thump thump thump thumpthumpthrrrrrr</strong>.
+            Final blur: <strong>~20 beats/second</strong>, merging into
+            continuous low-frequency roar. Abrupt stop.
+            <strong>8&ndash;11 seconds.</strong>
+          </p>
+        </div>
+        <div class="mechanical-card">
+          <h3>Fourth Mechanical Sound in the Engine</h3>
+          <p>
+            Four mechanical sounds now documented:<br>
+            <strong>124:</strong> Common Goldeneye wing whistle (in flight, modified primaries).<br>
+            <strong>150:</strong> Mourning Dove wing whistle (takeoff, modified feather).<br>
+            <strong>152:</strong> Rock Pigeon wing clap (takeoff, wings strike each other).<br>
+            <strong>155:</strong> Ruffed Grouse wing-drum (<strong>stationary</strong>, wings beat air).<br>
+            Progression: <strong>in-flight &rarr; takeoff &rarr; takeoff contact &rarr; stationary.</strong>
+            From byproduct of locomotion to pure display.
+          </p>
+        </div>
+        <div class="log-card">
+          <h3>The Drumming Log &mdash; The Stage</h3>
+          <p>
+            Log selection is critical: <strong>25&ndash;40 cm diameter</strong>,
+            3&ndash;10 meters long, elevated, dense cover.
+            Males use the <strong>same log for years</strong>.
+            The log may function as a <strong>resonating platform</strong> &mdash;
+            mass and air space beneath amplify low frequencies.
+            Territory radiates outward from the log.
+            The log is the center. The drumming is the boundary.
+          </p>
+        </div>
+
+        <h2>Mechanical Sound Series</h2>
+        <table class="mechanical-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Sound</th><th>Mechanism</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>124</td><td>Common Goldeneye</td><td>Wing whistle</td><td>Modified primaries, in flight</td><td>5</td></tr>
+            <tr><td>150</td><td>Mourning Dove</td><td>Wing whistle</td><td>Modified 9th primary, takeoff</td><td>3</td></tr>
+            <tr><td>152</td><td>Rock Pigeon</td><td>Wing clap</td><td>Wings strike each other</td><td>4</td></tr>
+            <tr><td>155</td><td>Ruffed Grouse</td><td>Wing-drum</td><td>Wings beat air, stationary</td><td>5</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-152 Rock Pigeon</strong>
+            <p>MECHANICAL PAIR! Rock Pigeon clap (152, wings strike each other) vs. Ruffed Grouse drum (155, wings beat air). Contact vs. compression. Both from Columbidae/Phasianidae transition zone.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-124 Common Goldeneye</strong>
+            <p>MECHANICAL BOOKENDS! First (124) and fourth (155) mechanical sounds. Goldeneye: in-flight whistle. Ruffed Grouse: stationary drum. From locomotion to pure display.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-154 Dusky Grouse</strong>
+            <p>GROUSE CONTRAST! Dusky Grouse subsonic booming (154, vocal, 50-100 Hz) vs. Ruffed Grouse drumming (155, mechanical, 40-100 Hz). Both low-frequency forest sounds. Different production.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-156 Sooty Grouse</strong>
+            <p>GROUSE TRIO CLOSURE! Dusky booming (154), Ruffed drumming (155), Sooty booming (156). The Ruffed Grouse separates the split pair. Mechanical between two vocals.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon drum">D</div>
+            <div class="theory-content">
+              <h4>Wing-Drum Mechanism</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Wings beat air while stationary. Cupped wing creates vacuum/rush cycle. Pressure pulse at each stroke. The wing as percussion instrument. The air as drum surface.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon accel">A</div>
+            <div class="theory-content">
+              <h4>Acceleration Pattern</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>2 beats/sec to 20 beats/sec over 8-11 seconds. ~50 beats per bout. Individual thumps merge into continuous roar. "A distant motor starting."</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon mech">4</div>
+            <div class="theory-content">
+              <h4>Fourth Mechanical Sound</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Goldeneye (124) > Mourning Dove (150) > Rock Pigeon (152) > Ruffed Grouse (155). In-flight > takeoff > contact > stationary. Locomotion byproduct to pure display.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon log">L</div>
+            <div class="theory-content">
+              <h4>Log Selection and Territory</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Drumming log: 25-40 cm diameter, multi-year use, territory center. Log as resonating platform. The stage that defines the territory.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Ruffed Grouse</div><div class="stat-detail"><em>Bonasa umbellus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Phasianidae</div><div class="stat-detail">3rd entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Wing-drum</div><div class="stat-detail">mechanical, accelerating</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 5</div><div class="stat-detail">4th mechanical sound</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">40&ndash;100 Hz</div><div class="stat-detail">low-frequency thumps</div></div>
+        <div class="stat-card"><div class="stat-label">Acceleration</div><div class="stat-value">2 &rarr; 20/sec</div><div class="stat-detail">over 8&ndash;11 seconds</div></div>
+        <div class="stat-card"><div class="stat-label">Beats/bout</div><div class="stat-value">~50</div><div class="stat-detail">per drumming bout</div></div>
+        <div class="stat-card"><div class="stat-label">Mechanism</div><div class="stat-value">Air compression</div><div class="stat-detail">wings beat air, stationary</div></div>
+        <div class="stat-card"><div class="stat-label">Log</div><div class="stat-value">25&ndash;40 cm dia</div><div class="stat-detail">multi-year fidelity</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Young forest</div><div class="stat-detail">aspen, alder, birch, mixed</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

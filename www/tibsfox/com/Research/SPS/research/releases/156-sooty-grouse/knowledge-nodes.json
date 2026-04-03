@@ -1,0 +1,108 @@
+{
+  "degree": 156,
+  "species": "Sooty Grouse",
+  "scientific_name": "Dendragapus fuliginosus",
+  "slug": "156-sooty-grouse",
+  "sound_type": "deep muffled booming -- extremely low-frequency ventriloquial sounds produced by inflating cervical air sacs with yellow skin, the most directionally ambiguous bird sound in the PNW; E=5",
+  "energy": 5,
+  "ecosystem": "Mountain forest -- wet coastal conifer forest. Sitka spruce, western hemlock, western red cedar, Pacific silver fir. West of Cascade crest. Dense, wet, mossy. Reverse altitudinal migration: upslope in winter.",
+  "season": "Year-round resident. Booming display April-June. Dawn and early morning. Reverse migration: upslope in autumn.",
+  "family": "Phasianidae (4th and final entry. FOURTH AND FINAL PHASIANIDAE. Completes the quartet 153-156.)",
+  "order": "Galliformes",
+  "csv_substitute": false,
+  "original_species": "Sooty Grouse (formerly Blue Grouse, coastal)",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.75,
+    "lon": -123.50,
+    "description": "Sooty Grouse in wet coastal mountain forests of Washington -- Olympic Mountains, western Cascades. Sitka spruce, western hemlock, Pacific silver fir zones."
+  },
+  "taxonomy_note": {
+    "description": "FOURTH and FINAL Phasianidae entry. Completes the quartet. Formerly Blue Grouse (coastal populations) -- split from Dusky Grouse in 2006. Yellow cervical air sacs (vs. Dusky's purplish-red). Coastal range west of Cascade crest. Most ventriloquial bird sound in PNW.",
+    "current_family": "Phasianidae (4th and final entry)",
+    "new_family": false,
+    "family_count_in_engine": "Phasianidae: fourth and final entry. Wild Turkey (153) + Dusky Grouse (154) + Ruffed Grouse (155) + Sooty Grouse (156). Quartet complete.",
+    "name_etymology": "Dendragapus from Greek 'dendron' (tree) + 'agapos' (loving) -- tree-loving. fuliginosus from Latin 'fuliginosus' (sooty, dark) -- referring to the darker plumage compared to Dusky Grouse.",
+    "genus_note": "Dendragapus -- second entry. Dusky (D. obscurus, 154) and Sooty (D. fuliginosus, 156). Both formerly Blue Grouse.",
+    "order_note": "Galliformes. Fourth and final entry.",
+    "family_position": "Fourth and final Phasianidae. Coastal split of Blue Grouse. Ventriloquial booming display. Completes the loudest-to-most-mysterious progression."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Booming: approximately 50-100 Hz fundamental. Slightly lower and more muffled than Dusky Grouse.",
+    "peak_energy_band_hz": "50-100 Hz. Extremely low. Less upper-harmonic content than Dusky = more muffled quality.",
+    "song_frequency_hz": "Booming: 50-100 Hz. Partially infrasonic. Wavelengths of 3-7 meters.",
+    "song_duration_s": "Individual note: ~0.3-0.5 seconds. Series: 5-6 notes over ~10-15 seconds. Longer pauses between notes than Dusky.",
+    "note_structure": "MUFFLED BOOMING: Deep 'hoo' or 'boom'. Cervical air sac inflation/deflation with yellow skin. Helmholtz resonance. More damped than Dusky Grouse. Less upper harmonic content.",
+    "note_types": "Muffled booming (primary, breeding display -- vocal/pneumatic), clucking (contact/alarm -- vocal), whining (female nesting -- vocal).",
+    "phrase_structure": "Series of 5-6 deep muffled notes with longer pauses between than Dusky Grouse. More deliberate pacing. Each note a presence rather than an event.",
+    "timbre": "Deep, muffled, ventriloquial. More muffled than Dusky Grouse. Less defined edge to each note. The sound is ambient rather than directional. A presence that fills the forest.",
+    "amplitude": "E=5. Moderate SPL. Effective 100-400 meters. The sound seems present throughout range rather than emanating from a point. Extreme ventriloquial quality.",
+    "tempo": "5-6 notes per series. Slower and more widely spaced than Dusky Grouse. More deliberate. Longer pauses enhance the mysterious quality.",
+    "context": "Breeding season (April-June). Dawn and early morning. Male display from tree perch (often high in conifers).",
+    "regional_variation": "Slightly lower-pitched and more muffled than Dusky Grouse -- a diagnostic vocal difference between the split species.",
+    "key_property": "MUFFLED BOOMING -- 50-100 Hz, ventriloquial, most directionally ambiguous PNW bird sound, impossible to localize, yellow cervical air sacs, tree-perch display. E=5. FOURTH AND FINAL PHASIANIDAE. Blue Grouse split complete (Dusky 154, Sooty 156). Quartet complete."
+  },
+  "plumage": {
+    "overall": "Males: blue-gray overall, slightly darker and browner than Dusky Grouse ('sooty'). Yellow cervical air sacs surrounded by white feather rosettes during display. Females: mottled brown.",
+    "diagnostic_mark": "Males: yellow air sacs (diagnostic vs. Dusky's purplish-red). Slightly darker plumage. Coastal mountain habitat (west of Cascade crest).",
+    "seasonal_variation": "Air sacs visible during breeding display. Otherwise concealed.",
+    "flight_pattern": "Burst flight when flushed. Short distance. Strong but brief."
+  },
+  "physical_description": {
+    "overall": "Length: 43-51 cm. Weight: 850-1300 g. Large grouse. Similar size to Dusky Grouse.",
+    "diagnostic_mark": "Slightly darker/browner than Dusky. Yellow air sacs. Coastal range. Wet forest habitat.",
+    "field_id": "Large dark grouse in wet coastal mountain forest. Listen for deep, muffled booming -- nearly impossible to localize. The sound seems to come from the forest itself."
+  },
+  "nodes": [
+    {
+      "id": "ventriloquial-booming",
+      "type": "concept",
+      "title": "Ventriloquial Booming -- From Everywhere",
+      "description": "Most directionally ambiguous PNW bird sound. 50-100 Hz wavelengths (3-7m) diffract around trees. Minimal upper harmonics = no directional cues. Tree-perch display diffuses sound through canopy. Listeners cannot determine direction.",
+      "connections": ["blue-grouse-split-complete", "phasianidae-quartet-complete"]
+    },
+    {
+      "id": "blue-grouse-split-complete",
+      "type": "pattern",
+      "title": "Blue Grouse Split Complete",
+      "description": "Both halves documented: Dusky Grouse (154, interior, purplish-red air sacs) and Sooty Grouse (156, coastal, yellow air sacs). 2006 AOU split. Ruffed Grouse drumming (155) between them -- mechanical separates vocal pair.",
+      "connections": ["ventriloquial-booming", "phasianidae-quartet-complete"]
+    },
+    {
+      "id": "phasianidae-quartet-complete",
+      "type": "pattern",
+      "title": "Phasianidae Quartet Complete (153-156)",
+      "description": "Wild Turkey gobble (153, E=6), Dusky Grouse booming (154, E=5), Ruffed Grouse drumming (155, E=5), Sooty Grouse booming (156, E=5). Loudest to most mysterious. Vocal-vocal-mechanical-vocal. Quartet complete.",
+      "connections": ["ventriloquial-booming", "coastal-forest"]
+    },
+    {
+      "id": "coastal-forest",
+      "type": "concept",
+      "title": "Coastal Mountain Forest Ecology",
+      "description": "Wet Sitka spruce / western hemlock / western red cedar forest. West of Cascade crest. Dense, wet, mossy. Reverse altitudinal migration upslope in winter. Conifer needle diet. Distinct from Dusky Grouse's drier interior habitat.",
+      "connections": ["phasianidae-quartet-complete", "ventriloquial-booming"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-154",
+      "species": "Dusky Grouse",
+      "relationship": "SPLIT PAIR COMPLETE! Formerly one species (Blue Grouse). Dusky (154, interior, purplish-red) and Sooty (156, coastal, yellow). Both documented. Split complete."
+    },
+    {
+      "target": "SPS-155",
+      "species": "Ruffed Grouse",
+      "relationship": "GROUSE TRIO! Dusky booming (154) > Ruffed drumming (155) > Sooty booming (156). Mechanical separates the vocal split pair."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey",
+      "relationship": "QUARTET BOOKENDS! Turkey gobble (153, loudest, 1+ mile) opens. Sooty Grouse (156, most mysterious, impossible to localize) closes. Volume to mystery."
+    },
+    {
+      "target": "SPS-152",
+      "species": "Rock Pigeon",
+      "relationship": "FAMILY TRANSITION! Columbidae quartet (149-152) complete. Phasianidae quartet (153-156) complete. Two family quartets in eight degrees."
+    }
+  ]
+}
