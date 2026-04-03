@@ -1,0 +1,111 @@
+{
+  "degree": 212,
+  "species": "Cougar",
+  "scientific_name": "Puma concolor",
+  "slug": "212-cougar-scream",
+  "sound_type": "piercing scream -- estrus wail 'AAAAEEEEIII'. 500-2,500 Hz. 1-3 seconds. Almost human-sounding. E=7",
+  "energy": 7,
+  "ecosystem": "Forest. Coniferous and mixed forest, lowland to subalpine. Solitary apex predator. Resident year-round.",
+  "season": "Year-round. Scream peaks in breeding season (December-March).",
+  "family": "Felidae (FIRST ENTRY)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Cougar",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.80,
+    "lon": -121.80,
+    "description": "Cougar in Cascades forests. Cryptic, solitary, apex predator throughout PNW forested regions."
+  },
+  "taxonomy_note": {
+    "description": "FIRST FELIDAE. Cat family enters. Solitary predator counterpoint to social Canidae. Apex land predator in PNW.",
+    "current_family": "Felidae (FIRST ENTRY)",
+    "new_family": true,
+    "family_count_in_engine": "Felidae: Cougar Scream (212, E=7). FIRST.",
+    "name_etymology": "Puma concolor = 'one-colored cat'. concolor from Latin 'one color'. Also: mountain lion, catamount, panther. Most common names in English.",
+    "genus_note": "Puma -- sole living species. Largest wild felid that can purr.",
+    "order_note": "Carnivora. First Felidae entry. Fifth carnivore family in engine.",
+    "family_position": "Felidae: first entry. Counterpoint to Canidae. Solitary vs. social.",
+    "class_note": "Class Mammalia. Apex land predator. 50-100 kg. Ambush specialist."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-2,500 Hz fundamental. Overtones to 4+ kHz.",
+    "peak_energy_band_hz": "800-2,000 Hz (peak of estrus scream).",
+    "song_frequency_hz": "Scream: 500-2,500 Hz. Growl: 100-500 Hz. Chirp: 1,000-3,000 Hz. Purr: 25-50 Hz.",
+    "song_duration_s": "Scream: 1-3 sec. Repeated at 10-30 second intervals.",
+    "note_structure": "Single sustained scream. Piercing, wavering, drawn-out.",
+    "note_types": "Estrus scream (piercing, mate attraction), growl (low, threat), chirp/whistle (mother-kitten, bird-like), purr (contentment, subsonic).",
+    "phrase_structure": "Single screams with long pauses. No chorus (solitary). Breeding season.",
+    "timbre": "Piercing, wavering, drawn-out. Overtone-rich. Almost human-sounding. Terrifying.",
+    "amplitude": "E=7. Piercing. Forest-penetrating. Same energy as wolf but cuts through canopy rather than filling valleys.",
+    "tempo": "Screams every 10-30 seconds during estrus bouts. Rare outside breeding season.",
+    "context": "Estrus (female mate attraction). Breeding season December-March. Rarely heard.",
+    "regional_variation": "Minimal variation across range. The scream is consistent.",
+    "key_property": "COUGAR SCREAM. Piercing wail. 500-2,500 Hz. E=7. FIRST FELIDAE. Apex land predator. Ghost cat. Estrus function. v1.49.353."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Tawny/golden-brown coat. 50-100 kg. Long body (1.5-2.4 m nose to tail). Small rounded ears. Long heavy tail.",
+    "diagnostic_mark": "Large tawny cat. Long heavy tail (often held low). Small rounded ears. No spots (adults). Powerful build.",
+    "seasonal_variation": "Minimal. Coat slightly thicker in winter. Color consistent year-round.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "50-100 kg (110-220 lbs). Body length 1.0-1.5 m plus 60-90 cm tail. Shoulder height 60-76 cm. Fourth largest cat in world.",
+    "diagnostic_mark": "Large tawny cat with long heavy tail. No spots (adults). Small head relative to body. Powerful hindquarters for leaping. Retractable claws.",
+    "field_id": "Large tawny cat, rarely seen. Long tail, powerful build. If you see one, it chose to be seen. Maintain eye contact, appear large, do not run. Note: you are far more likely to find sign (tracks, scrapes, kills) than the animal itself."
+  },
+  "nodes": [
+    {
+      "id": "first-felidae",
+      "type": "milestone",
+      "title": "FIRST FELIDAE -- Cat Family Enters",
+      "description": "41 species. Retractable claws. Solitary hunters. The cougar is the PNW's apex land predator. Counterpoint to social Canidae.",
+      "connections": ["estrus-scream", "ghost-cat", "wolf-cougar-comparison"]
+    },
+    {
+      "id": "estrus-scream",
+      "type": "concept",
+      "title": "The Scream -- Estrus and Terror",
+      "description": "Piercing wail for mate attraction across 50-400 km2 territories. Overlaps human distress frequencies. Triggers primal freeze response. 1-3 km through forest.",
+      "connections": ["first-felidae", "ghost-cat"]
+    },
+    {
+      "id": "ghost-cat",
+      "type": "concept",
+      "title": "Ghost Cat -- Cryptic Apex Predator",
+      "description": "50-100 kg moving unseen through human areas. Ambush specialist: stalk, sprint, neck bite. Proximity fear: the predator you know is there but never see.",
+      "connections": ["first-felidae", "estrus-scream"]
+    },
+    {
+      "id": "wolf-cougar-comparison",
+      "type": "concept",
+      "title": "Wolf vs. Cougar at E=7 -- Two Strategies",
+      "description": "Wolf fills space (low frequency, pack chorus, valleys). Cougar cuts through space (high frequency, solo scream, forest). Same energy, opposite acoustics.",
+      "connections": ["first-felidae"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-210",
+      "species": "Gray Wolf Howl",
+      "relationship": "TWO E=7 APEX VOICES! Wolf fills valleys (low). Cougar cuts forest (high). Same energy, opposite strategies. Pack vs. solo."
+    },
+    {
+      "target": "SPS-211",
+      "species": "Red Fox Bark",
+      "relationship": "CANIDAE TO FELIDAE! Fox bark (E=4) to cougar scream (E=7). +3 leap. Family transition. Social to solitary."
+    },
+    {
+      "target": "SPS-208",
+      "species": "Coyote Howl",
+      "relationship": "PREDATOR SEQUENCE! Energy arc 5-4-7-4-7. Two E=7 peaks: wolf and cougar. Two apex voices."
+    },
+    {
+      "target": "S36-212",
+      "artist": "Cumulus",
+      "relationship": "SOUND FROM THE DARK! Dream whisper (E=4) and forest scream (E=7). Dream darkness and forest darkness."
+    }
+  ]
+}
