@@ -9,6 +9,7 @@ var food = [];
 var poison = [];
 var pheromones = [];
 var spores = [];
+var slimeMold = null; // Physarum polycephalum network
 var plants = [];
 var seeds = [];
 var raindrops = [];
@@ -519,6 +520,315 @@ function Vehicle(x, y, dna, speciesIdx) {
   };
 }
 
+// === SLIME MOLD — Physarum polycephalum network optimization ===
+// Intelligence without a brain. A single cell that solves shortest-path
+// problems through cytoplasmic streaming and chemotaxis.
+// Lifecycle: spore → amoeba → plasmodium (network phase) → fruiting body
+// Active when moisture is high. Forms transport networks between food sources.
+// Streaming oscillation period: ~2 min IRL, ~120 frames in sim.
+
+function SlimeMold() {
+  this.nodes = [];      // network nodes (food sources the mold has found)
+  this.edges = [];      // transport tubes between nodes {a, b, flow, age}
+  this.fronts = [];     // exploring pseudopod tips
+  this.mass = 0;        // total biomass (controls max network size)
+  this.phase = 'dormant'; // dormant | exploring | network | fruiting
+  this.fruitBodies = []; // sporangia when drying out
+  this.pulsePhase = 0;  // cytoplasmic streaming oscillation
+
+  this.activate = function(x, y) {
+    // Spore germinates — start exploring from a point
+    this.phase = 'exploring';
+    this.mass = 0.5;
+    this.fronts.push({ x: x, y: y, vx: 0, vy: 0, life: 600, trail: [] });
+  };
+
+  this.update = function() {
+    if (this.phase === 'dormant') return;
+
+    // Moisture dependency — slime mold needs wet conditions
+    var moistureOk = groundMoisture > 0.3 || wx.isRaining || wx.humidity > 80;
+    if (!moistureOk && this.phase !== 'fruiting') {
+      // Drying out — trigger sporulation
+      if (this.nodes.length > 0 && random(1) < 0.01) {
+        this.phase = 'fruiting';
+        for (var i = 0; i < this.nodes.length; i++) {
+          if (random(1) < 0.4) {
+            this.fruitBodies.push({
+              x: this.nodes[i].x, y: this.nodes[i].y,
+              age: 0, type: floor(random(3)), // 0=Physarum yellow, 1=Lycogala pink, 2=Stemonitis brown
+            });
+          }
+        }
+      }
+      return;
+    }
+
+    // Reactivate from fruiting if moisture returns
+    if (this.phase === 'fruiting' && moistureOk) {
+      this.phase = this.nodes.length > 2 ? 'network' : 'exploring';
+      this.fruitBodies = [];
+    }
+
+    this.pulsePhase += 0.052; // ~120 frame period for cytoplasmic streaming
+
+    // === EXPLORING PHASE — pseudopod tips search for food ===
+    for (var i = this.fronts.length - 1; i >= 0; i--) {
+      var f = this.fronts[i];
+      f.life--;
+      if (f.life <= 0) { this.fronts.splice(i, 1); continue; }
+
+      // Chemotaxis: bias movement toward nearest food
+      var bestDist = 80, bestFood = null;
+      for (var j = 0; j < food.length; j++) {
+        var d = dist(f.x, f.y, food[j].x, food[j].y);
+        if (d < bestDist) { bestDist = d; bestFood = food[j]; }
+      }
+      // Also attracted to leaf litter (decomposing material)
+      for (var j = 0; j < leafLitter.length; j++) {
+        var d2 = dist(f.x, f.y, leafLitter[j].x, leafLitter[j].y);
+        if (d2 < bestDist * 0.7) { bestDist = d2; bestFood = leafLitter[j]; }
+      }
+
+      if (bestFood) {
+        var dx = bestFood.x - f.x, dy = bestFood.y - f.y;
+        var mag = Math.sqrt(dx * dx + dy * dy) || 1;
+        f.vx += (dx / mag) * 0.15;
+        f.vy += (dy / mag) * 0.15;
+      } else {
+        // Random walk with slight downhill bias (moisture collects low)
+        f.vx += random(-0.12, 0.12);
+        f.vy += random(-0.05, 0.12);
+      }
+
+      // Speed limit — slime molds move 1-4 cm/hr, slow in sim
+      var speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy);
+      if (speed > 0.6) { f.vx *= 0.6 / speed; f.vy *= 0.6 / speed; }
+
+      f.x += f.vx; f.y += f.vy;
+      f.trail.push({ x: f.x, y: f.y });
+      if (f.trail.length > 80) f.trail.shift();
+
+      // Boundary check
+      if (f.x < 5 || f.x > width - 5 || f.y < height * 0.3 || f.y > height - 5) {
+        f.vx *= -0.5; f.vy *= -0.5;
+        f.x = constrain(f.x, 5, width - 5);
+        f.y = constrain(f.y, height * 0.3, height - 5);
+      }
+
+      // Found food — create network node, consume food
+      if (bestFood && bestDist < 5) {
+        var nodeExists = false;
+        for (var n = 0; n < this.nodes.length; n++) {
+          if (dist(this.nodes[n].x, this.nodes[n].y, f.x, f.y) < 15) { nodeExists = true; break; }
+        }
+        if (!nodeExists) {
+          this.nodes.push({ x: f.x, y: f.y, strength: 1.0 });
+          this.mass += 0.3;
+          // Connect to nearest existing node
+          if (this.nodes.length > 1) {
+            var nearIdx = -1, nearDist = Infinity;
+            for (var n = 0; n < this.nodes.length - 1; n++) {
+              var nd = dist(this.nodes[n].x, this.nodes[n].y, f.x, f.y);
+              if (nd < nearDist) { nearDist = nd; nearIdx = n; }
+            }
+            if (nearIdx >= 0) {
+              this.edges.push({ a: nearIdx, b: this.nodes.length - 1, flow: 1.0, age: 0 });
+            }
+          }
+        }
+        // Spawn new exploring front from this food source
+        if (this.fronts.length < 6 && random(1) < 0.5) {
+          this.fronts.push({ x: f.x + random(-3, 3), y: f.y + random(-3, 3), vx: random(-0.3, 0.3), vy: random(-0.1, 0.3), life: 500, trail: [] });
+        }
+        f.life = max(f.life, 300); // finding food extends life
+      }
+    }
+
+    // === NETWORK PHASE — optimize transport tubes ===
+    if (this.nodes.length >= 3 && this.phase === 'exploring') {
+      this.phase = 'network';
+    }
+
+    if (this.phase === 'network') {
+      // Network optimization: strengthen used edges, prune weak ones
+      for (var i = this.edges.length - 1; i >= 0; i--) {
+        var e = this.edges[i];
+        e.age++;
+        // Flow follows Murray's law — tubes with more downstream nodes get more flow
+        var aConns = 0, bConns = 0;
+        for (var j = 0; j < this.edges.length; j++) {
+          if (this.edges[j].a === e.a || this.edges[j].b === e.a) aConns++;
+          if (this.edges[j].a === e.b || this.edges[j].b === e.b) bConns++;
+        }
+        e.flow = 0.3 + (aConns + bConns) * 0.15;
+        e.flow = min(e.flow, 2.0);
+
+        // Prune edges that are too old with low flow
+        if (e.age > 500 && e.flow < 0.5 && this.edges.length > this.nodes.length - 1) {
+          this.edges.splice(i, 1);
+        }
+      }
+
+      // Try to form new shortcut edges (the slime mold finds shorter paths)
+      if (frameNum % 60 === 0 && this.nodes.length > 2) {
+        var a = floor(random(this.nodes.length));
+        var b = floor(random(this.nodes.length));
+        if (a !== b) {
+          var d = dist(this.nodes[a].x, this.nodes[a].y, this.nodes[b].x, this.nodes[b].y);
+          if (d < 80 && d > 20) {
+            // Check if edge already exists
+            var exists = false;
+            for (var j = 0; j < this.edges.length; j++) {
+              if ((this.edges[j].a === a && this.edges[j].b === b) || (this.edges[j].a === b && this.edges[j].b === a)) { exists = true; break; }
+            }
+            if (!exists && this.edges.length < this.nodes.length * 2) {
+              this.edges.push({ a: a, b: b, flow: 0.5, age: 0 });
+            }
+          }
+        }
+      }
+
+      // Occasionally spawn new exploring fronts from network nodes
+      if (this.fronts.length < 3 && random(1) < 0.003 && this.nodes.length > 0) {
+        var src = this.nodes[floor(random(this.nodes.length))];
+        this.fronts.push({ x: src.x + random(-5, 5), y: src.y + random(-5, 5), vx: random(-0.3, 0.3), vy: random(-0.1, 0.3), life: 400, trail: [] });
+      }
+    }
+
+    // Node decay — nodes lose strength if no nearby food
+    for (var i = this.nodes.length - 1; i >= 0; i--) {
+      var hasFood = false;
+      for (var j = 0; j < food.length; j++) {
+        if (dist(this.nodes[i].x, this.nodes[i].y, food[j].x, food[j].y) < 25) { hasFood = true; break; }
+      }
+      if (!hasFood) this.nodes[i].strength -= 0.0005;
+      if (this.nodes[i].strength <= 0) {
+        // Remove edges referencing this node
+        for (var e = this.edges.length - 1; e >= 0; e--) {
+          if (this.edges[e].a === i || this.edges[e].b === i) this.edges.splice(e, 1);
+        }
+        // Reindex edges
+        for (var e = 0; e < this.edges.length; e++) {
+          if (this.edges[e].a > i) this.edges[e].a--;
+          if (this.edges[e].b > i) this.edges[e].b--;
+        }
+        this.nodes.splice(i, 1);
+      }
+    }
+
+    // Reset to dormant if network collapses
+    if (this.nodes.length === 0 && this.fronts.length === 0 && this.phase !== 'fruiting') {
+      this.phase = 'dormant';
+    }
+  };
+
+  this.display = function() {
+    if (this.phase === 'dormant') return;
+
+    var nightDim = sky.isDay ? 1.0 : 0.6;
+    var pulse = sin(this.pulsePhase) * 0.5 + 0.5; // 0-1 oscillation for streaming
+
+    // === EXPLORING PSEUDOPOD TRAILS ===
+    for (var i = 0; i < this.fronts.length; i++) {
+      var f = this.fronts[i];
+      if (f.trail.length < 2) continue;
+      noFill();
+      for (var t = 0; t < f.trail.length - 1; t++) {
+        var ta = (t / f.trail.length) * 0.35 * nightDim * depthAlpha(f.trail[t].y);
+        // Bright yellow — Physarum polycephalum
+        stroke(220, 200, 40, ta * 255);
+        strokeWeight(0.8 * depthScale(f.trail[t].y));
+        line(f.trail[t].x, f.trail[t].y, f.trail[t + 1].x, f.trail[t + 1].y);
+      }
+      // Pseudopod tip — brighter, pulsing
+      var tipAlpha = 0.6 * nightDim * depthAlpha(f.y);
+      fill(240, 220, 50, tipAlpha * 255 * (0.7 + pulse * 0.3));
+      noStroke();
+      ellipse(f.x, f.y, 3 * depthScale(f.y), 3 * depthScale(f.y));
+    }
+
+    // === NETWORK EDGES — transport tubes with cytoplasmic streaming ===
+    for (var i = 0; i < this.edges.length; i++) {
+      var e = this.edges[i];
+      if (e.a >= this.nodes.length || e.b >= this.nodes.length) continue;
+      var na = this.nodes[e.a], nb = this.nodes[e.b];
+      var avgY = (na.y + nb.y) / 2;
+      var ea = depthAlpha(avgY) * nightDim;
+
+      // Tube width proportional to flow (Murray's law visualization)
+      var w = (0.5 + e.flow * 0.8) * depthScale(avgY);
+
+      // Streaming effect: alternate bright/dim segments along the tube
+      var dx = nb.x - na.x, dy = nb.y - na.y;
+      var len = Math.sqrt(dx * dx + dy * dy) || 1;
+      var segments = max(3, floor(len / 6));
+
+      for (var s = 0; s < segments; s++) {
+        var t0 = s / segments, t1 = (s + 1) / segments;
+        var x0 = na.x + dx * t0, y0 = na.y + dy * t0;
+        var x1 = na.x + dx * t1, y1 = na.y + dy * t1;
+        // Streaming pulse travels along the tube
+        var streamPhase = sin(this.pulsePhase + s * 0.8 - i * 0.5);
+        var bright = 0.4 + streamPhase * 0.3;
+        stroke(220 * bright, 200 * bright, 40 * bright, ea * e.flow * 0.4 * 255);
+        strokeWeight(w);
+        line(x0, y0, x1, y1);
+      }
+    }
+
+    // === NETWORK NODES — food source junctions ===
+    for (var i = 0; i < this.nodes.length; i++) {
+      var n = this.nodes[i];
+      var ds = depthScale(n.y), da = depthAlpha(n.y) * nightDim;
+      var nodePulse = 0.6 + sin(this.pulsePhase + i * 1.2) * 0.2;
+      fill(240, 220, 50, da * n.strength * nodePulse * 255);
+      noStroke();
+      ellipse(n.x, n.y, (4 + n.strength * 2) * ds, (4 + n.strength * 2) * ds);
+    }
+
+    // === FRUITING BODIES ===
+    for (var i = 0; i < this.fruitBodies.length; i++) {
+      var fb = this.fruitBodies[i];
+      fb.age++;
+      var ds = depthScale(fb.y), da = depthAlpha(fb.y);
+      var mature = min(1, fb.age / 200);
+
+      if (fb.type === 0) {
+        // Physarum — tiny yellow-brown sporangia on stalks
+        stroke(180, 160, 60, da * 0.5 * 255); strokeWeight(0.3 * ds);
+        line(fb.x, fb.y, fb.x, fb.y - 4 * ds * mature); // stalk
+        fill(200, 180, 50, da * mature * 255); noStroke();
+        ellipse(fb.x, fb.y - 4 * ds * mature, 2.5 * ds, 2 * ds);
+      } else if (fb.type === 1) {
+        // Lycogala epidendrum — wolf's milk, pink spheres
+        fill(200, 100, 110, da * mature * 255); noStroke();
+        ellipse(fb.x, fb.y, 3 * ds, 3 * ds);
+        // Darker with age
+        if (fb.age > 300) {
+          fill(120, 70, 60, da * 0.4 * 255);
+          ellipse(fb.x, fb.y, 3 * ds, 3 * ds);
+        }
+      } else {
+        // Stemonitis — chocolate tube, cluster of tiny stalks
+        stroke(100, 70, 45, da * 0.6 * 255); strokeWeight(0.2 * ds);
+        for (var s = -1; s <= 1; s++) {
+          line(fb.x + s * 1.2 * ds, fb.y, fb.x + s * 1.2 * ds, fb.y - 5 * ds * mature);
+          fill(80, 55, 35, da * mature * 255); noStroke();
+          ellipse(fb.x + s * 1.2 * ds, fb.y - 5 * ds * mature, 1 * ds, 3 * ds * mature);
+        }
+      }
+
+      // Disperse spores when fully mature
+      if (fb.age > 400 && random(1) < 0.005) {
+        var windRad3 = radians(wx.windDir);
+        var windStr3 = wx.windSpeed / 8;
+        spores.push({ x: fb.x, y: fb.y - 4 * ds, vy: -random(0.1, 0.3), vx: cos(windRad3) * windStr3 * 0.2, life: 400 });
+      }
+    }
+  };
+}
+
 // === SETUP ===
 function setup() {
   var holder = document.getElementById('sketch-holder');
@@ -526,6 +836,9 @@ function setup() {
   var h = holder && holder.offsetHeight > 50 ? holder.offsetHeight : windowHeight;
   cnv = createCanvas(w, h);
   cnv.parent('sketch-holder');
+
+  // Initialize slime mold (dormant until conditions are right)
+  slimeMold = new SlimeMold();
 
   // Fetch real weather + compute celestial
   fetchWeather();
@@ -1117,6 +1430,17 @@ function draw() {
     for (var j = i+1; j < vehicles.length; j++) { if(vehicles[j].species!==3)continue;
       if(vehicles[i].position.dist(vehicles[j].position)<55) line(vehicles[i].position.x,vehicles[i].position.y,vehicles[j].position.x,vehicles[j].position.y);
   }}
+
+  // === SLIME MOLD — Physarum polycephalum network ===
+  // Activates on dead logs (leaf litter) when moisture is high
+  if (slimeMold.phase === 'dormant' && leafLitter.length > 3 && (groundMoisture > 0.4 || wx.isRaining) && frameNum > 300) {
+    // Find a good leaf litter spot to germinate
+    var litter = leafLitter[floor(random(leafLitter.length))];
+    slimeMold.activate(litter.x, litter.y);
+  }
+  slimeMold.update();
+  slimeMold.display();
+
   // Spawn food, poison
   if (random(1) < map(season, 0, 1, 0.04, 0.25) && plants.length > 2) food.push(createVector(10+random(width-20),random(height*0.3,height)));
   if (random(1) < 0.004) poison.push(createVector(10+random(width-20),random(height*0.3,height)));
@@ -1145,7 +1469,8 @@ function draw() {
   }
   var speciesStr = '';
   for (var s in speciesCounts) { if (speciesCounts[s] > 0) speciesStr += speciesCounts[s] + ' ' + s + '  '; }
-  var ecoLine = plants.length + ' plants  ' + seeds.length + ' seeds  ' + speciesStr.trim();
+  var slimeLine = slimeMold.phase !== 'dormant' ? '  Physarum:' + slimeMold.phase + '(' + slimeMold.nodes.length + 'n/' + slimeMold.edges.length + 'e)' : '';
+  var ecoLine = plants.length + ' plants  ' + seeds.length + ' seeds  ' + speciesStr.trim() + slimeLine;
   var fogLine = fog.density > 0.05 ? '  Fog' : '';
   var auroraLine = aurora.active ? '  Aurora Kp=' + aurora.kp : '';
   ecoLine += fogLine + auroraLine;
