@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 177&deg; &mdash; Common Murre (colony roar) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1B5E20, #2E7D32); color: #C8E6C9; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(27, 94, 32, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+    .colony-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .colony-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .colony-card p { color: #C8E6C9; }
+    .colony-card strong { color: #E8F5E9; }
+    .egg-card { background: linear-gradient(135deg, #4E342E, #5D4037, #6D4C41, #4E342E); border: 2px solid #4E342E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .egg-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .egg-card p { color: #D7CCC8; }
+    .egg-card strong { color: #EFEBE9; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.colony { background: #1B5E20; }
+    .theory-icon.egg { background: #4E342E; }
+    .theory-icon.dive { background: #0D47A1; }
+    .theory-icon.alcid { background: #BF360C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #E8F5E9; color: #1B5E20; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">177&deg;</div>
+      <div class="release-title-block">
+        <h2>Common Murre &mdash; Colony Roar</h2>
+        <div class="scientific"><em>Uria aalge</em> (Alcidae) &mdash; E=5 &mdash; The Colony</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FOURTH ALCIDAE</strong> (174&ndash;177). Dense cliff colony.
+      <strong>Pear-shaped egg</strong> &mdash; won&rsquo;t roll off the ledge.
+      Growling guttural <strong>colony roar</strong> from thousands.
+      Deep diver. Chick leaps from cliff at 15&ndash;25 days.
+      <strong>E=5. v1.49.317.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="colony-card">
+          <h3>The Densest Colonies &mdash; 20 Pairs per Square Meter</h3>
+          <p>
+            Common Murres form some of the <strong>densest breeding colonies</strong>
+            of any bird. Standing shoulder to shoulder on narrow cliff ledges,
+            barely able to turn. <strong>No nest</strong> &mdash; single egg laid
+            directly on bare rock, incubated on the adult&rsquo;s feet. The density
+            is the defense: no space for a predator to land.
+          </p>
+        </div>
+        <div class="egg-card">
+          <h3>The Pear-Shaped Egg &mdash; Evolution on the Ledge</h3>
+          <p>
+            Strongly <strong>pyriform</strong> (pear-shaped). When bumped, rolls in
+            a <strong>tight circle</strong> rather than off the ledge. Extraordinary
+            <strong>color variation</strong> &mdash; blue, green, white, brown,
+            spotted, streaked &mdash; may help parents identify their own egg in the
+            dense colony. <strong>One egg.</strong> One chance.
+          </p>
+        </div>
+
+        <h2>Cliff Colony Ecology</h2>
+        <p>
+          The &ldquo;penguin of the Northern Hemisphere&rdquo; &mdash; upright
+          posture, black-and-white plumage, extraordinary diving ability
+          (100+ meters, 3+ minutes). Unlike penguins, murres CAN fly.
+          Chicks <strong>leap from cliff ledges</strong> at 15&ndash;25 days old,
+          still flightless, sometimes falling 300+ feet to the sea. The male
+          accompanies the chick at sea for weeks.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-176 Tufted Puffin</strong>
+            <p>ALCIDAE STREAK! Puffin (176) and Murre (177) share cliff colonies. Both Alcidae. Different nesting strategies: burrow vs open ledge.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-175 Rhinoceros Auklet</strong>
+            <p>ALCIDAE STREAK! Auklet (175): nocturnal burrow. Murre (177): diurnal cliff. Both deep divers. Different temporal and spatial niches.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-174 Pigeon Guillemot</strong>
+            <p>ALCIDAE STREAK OPENS! Guillemot (174): nearshore, crevice nester. Murre (177): offshore, open ledge. Both black-and-white. Alcidae range.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-178 Marbled Murrelet</strong>
+            <p>ALCIDAE CONTINUES! Murrelet (178): forest nester. Murre (177): cliff nester. The most extreme nesting contrast in Alcidae.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon colony">C</div>
+            <div class="theory-content">
+              <h4>Colony Roar &mdash; Collective Sound Wall</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Individual growling "arrr" moderate. Colony of thousands = overwhelming wall of sound. Continuous, immersive. E=5 through multiplication.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon egg">E</div>
+            <div class="theory-content">
+              <h4>Pyriform Egg &mdash; Anti-Roll Adaptation</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Pear-shaped egg rolls in circle, not off ledge. Color variation for parent recognition. One of the most studied eggs in ornithology.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon dive">D</div>
+            <div class="theory-content">
+              <h4>Deep Diving Alcid</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>100+ meter dives. 3+ minute breath holds. Wings for underwater propulsion. "Flying" through water. Penguin-like but volant.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon alcid">4</div>
+            <div class="theory-content">
+              <h4>Alcidae Streak (174&ndash;177+)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Fourth consecutive Alcidae. Guillemot, Auklet, Puffin, Murre. Each a different nesting strategy. Streak continues.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Common Murre</div><div class="stat-detail"><em>Uria aalge</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Alcidae</div><div class="stat-detail">4th entry (174&ndash;177)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Colony roar</div><div class="stat-detail">growling, guttural, collective</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #1B5E20;">E = 5</div><div class="stat-detail">colony multiplication</div></div>
+        <div class="stat-card"><div class="stat-label">Egg</div><div class="stat-value">Pear-shaped</div><div class="stat-detail">rolls in circle, not off ledge</div></div>
+        <div class="stat-card"><div class="stat-label">Dive depth</div><div class="stat-value">100+ meters</div><div class="stat-detail">3+ minute breath hold</div></div>
+        <div class="stat-card"><div class="stat-label">Colony density</div><div class="stat-value">20 pairs/m&sup2;</div><div class="stat-detail">densest of any bird</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Cliff colony</div><div class="stat-detail">offshore rocks, summer</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
