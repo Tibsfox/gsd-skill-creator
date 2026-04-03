@@ -227,6 +227,10 @@ If you want it, go get it. The path is clear. The work is hard. The reward is a 
 - [FSR-06: Training and Certification](../06-training-certification.md) --- detailed coverage of academy training, CPAT, NREMT, and the hiring process
 - [FSR-09: Responder Wellness](../09-responder-wellness.md) --- the psychological reality of the career
 - [FSR-10: PNW Departments](../10-pnw-departments.md) --- the specific departments and operational environments in the Pacific Northwest
+- [FSR Guides: Becoming a Paramedic](becoming-a-paramedic.md) --- the medical path for those drawn to medicine over firefighting, and the dual-role convergence
+- [FSR Case Studies: Station Life](../case-studies/station-life.md) --- what the 24/48 shift actually looks like, hour by hour
+- [FSR Case Studies: King County Medic One](../case-studies/king-county-medic-one.md) --- the gold standard of the paramedic excellence that the dual-role path can lead to
+- [FSR Guides: Citizen Preparedness](citizen-preparedness.md) --- the community preparedness training that firefighters teach
 
 ---
 

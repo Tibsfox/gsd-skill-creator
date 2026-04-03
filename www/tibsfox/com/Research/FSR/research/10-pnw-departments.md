@@ -132,6 +132,10 @@ For the person who served thirty years in this region, the mutual aid network wa
 - **[ECO-09]** PNW Ecology — Cascadia Subduction Zone geology, Mount Rainier volcanic hazards, and Puget Sound marine ecology
 - **[WDC-09]** PNW Timber — Douglas fir and western red cedar as the construction materials that PNW firefighters encounter in every structure fire; the timber industry history that built the communities these departments protect
 - **[RCN-05]** Urban Wildlife — PNW departments respond to animal calls involving raccoons, coyotes, bears, and marine mammals; a routine but real operational demand
+- **[FSR Guides: Becoming a Firefighter](guides/becoming-a-firefighter.md)** — career path into the PNW fire departments described here, with department-specific hiring guidance
+- **[FSR Guides: Becoming a Paramedic](guides/becoming-a-paramedic.md)** — the medical path, PNW programs (Tacoma, CWU, OHSU), and King County Medic One residency
+- **[FSR Guides: Citizen Preparedness](guides/citizen-preparedness.md)** — the community preparedness that PNW fire departments teach: Cascadia, tsunami, lahar, CERT
+- **[FSR Case Studies: Station Life](case-studies/station-life.md)** — the daily reality inside the stations described in this document
 
 ---
 

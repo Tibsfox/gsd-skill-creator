@@ -162,6 +162,8 @@ That system operates in our backyard. It saves lives every day. And it stands as
 - [FSR-07: Equipment and Apparatus](../07-equipment-apparatus.md) --- defibrillators, AEDs, monitor technology
 - [FSR-10: PNW Departments and Services](../10-pnw-departments.md) --- King County fire department integration
 - [CAHOOTS Model](cahoots-model.md) --- another PNW innovation in crisis response
+- [FSR Guides: Becoming a Paramedic](../guides/becoming-a-paramedic.md) --- the path to the career that Medic One represents at its highest expression
+- [FSR Guides: Citizen Preparedness](../guides/citizen-preparedness.md) --- the citizen CPR training that forms Tier 1 of the Medic One system
 
 ---
 
