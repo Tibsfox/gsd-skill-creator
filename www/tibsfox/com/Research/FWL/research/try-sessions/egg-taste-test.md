@@ -206,6 +206,16 @@ If you want to take this further:
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Hatch Eggs at Home](incubation-project.md)** --- If you are already keeping hens, take the next step: incubate your own eggs and raise chicks from Day 1. Then taste-test their eggs when they mature.
+
+> **[Design Your Dream Coop](coop-design-challenge.md)** --- The quality of your eggs starts with the quality of your coop. Design a PNW-optimized coop that keeps your flock healthy, dry, and productive.
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- Why is the yolk orange? Why is the shell blue? The genetics behind egg quality and color are part of the story this experiment tells.
+
+---
+
 ## College of Knowledge Connections
 
 - **Science** --- [Experimental Design, Data Collection & Analysis]: This try session is a full scientific experiment: hypothesis formation, variable control, blind protocol design, data collection, and statistical analysis of results. It directly exercises the Hypothesis & Experimental Design and Data Collection & Analysis wings of the Science department.

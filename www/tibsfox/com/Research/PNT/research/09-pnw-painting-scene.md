@@ -260,6 +260,7 @@ What makes a PNW painting a PNW painting? Not subject matter alone -- plenty of 
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Use a PNW apple — Gravenstein, Honeycrisp, or any variety from a local orchard. The colors of PNW-grown apples are different from the idealized red apple of imagination: more yellow, more green, more complex.
 - **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): Days 25-30 push you outdoors. In the PNW, the overcast sky creates soft, diffused light with compressed value ranges — a specific challenge that PNW painters must learn to see and render.
+- **Paint a PNW Landscape in 2 Hours** ([try-sessions/paint-a-landscape](try-sessions/paint-a-landscape.md)): The PNW landscape painting session — atmospheric perspective, the green problem, the "gray" sky that is actually blue-gray, pink-gray, and lavender-gray. The most direct way to engage with the PNW painting tradition described in this chapter.
 
 ---
 

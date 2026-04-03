@@ -191,6 +191,22 @@ The Big One is coming. Not maybe. Not probably. Coming. The question is whether 
 
 ---
 
+## Try This / DIY Project
+
+> **DIY Project: [Build a 72-Hour Go Bag](../try-sessions/build-a-go-bag.md)**
+> This guide covers the full two-week preparedness framework. The go bag project distills the essentials into a single portable kit --- the bag you grab in the first 30 seconds of shaking. Two versions: BASIC ($50-80, 72 hours) and ENHANCED ($150-250, 2 weeks). Includes the PNW-specific gear (rain gear, wool layers, waterproof fire starters) discussed in this guide.
+
+> **Try Session: [Use a Fire Extinguisher --- The PASS Method](../try-sessions/fire-extinguisher-drill.md)**
+> Post-earthquake fires are a major secondary hazard. Gas lines rupture, electrical shorts ignite, and the fire department is overwhelmed. A fire extinguisher and the PASS method are your first line of defense against small fires in a damaged structure.
+
+> **Study Guide: [Radio Communications for Emergencies](../study-guides/radio-communications-basics.md)**
+> This guide covers what you need. The radio study guide covers how you communicate. From NOAA weather radio ($25) to ham radio and organized ARES volunteer networks --- the full civilian communications ladder for when cell towers are down.
+
+> **Try Session: [Hands-Only CPR](../try-sessions/hands-only-cpr.md)**
+> When hospitals are overwhelmed and EMS response times stretch, bystander medical skills save lives. CPR is the first skill. [Stop the Bleed](../try-sessions/stop-the-bleed.md) is the second.
+
+---
+
 ## Cross-References
 
 - [FSR Case Studies: Cascadia Earthquake](../case-studies/cascadia-earthquake.md) --- the geology, the history, and the first responder implications of the Cascadia Subduction Zone

@@ -202,4 +202,14 @@ One night always matters. The raccoons are counting on it.
 
 ---
 
+## Try This
+
+> **[Design Your Dream Coop](../try-sessions/coop-design-challenge.md)** --- Apply what you learned here. Design a coop with hardware cloth, two-step latches, a buried predator apron, and an automatic pop door. Defense by design.
+
+> **[Build a Raccoon Trail Cam Station](../../RCN/research/try-sessions/build-a-trail-cam-station.md)** --- Know your enemy. Install a trail camera on your coop perimeter and see exactly which predators are testing your defenses at 2 AM.
+
+> **[Safe Raccoon Latrine Survey](../../RCN/research/try-sessions/latrine-survey.md)** --- If raccoons visit your coop, they may also leave latrines on your property. Know where they are and how to handle them safely.
+
+---
+
 *Sources and further reading: USDA Wildlife Services, "Managing Predation of Livestock"; Washington Department of Fish and Wildlife, "Living with Wildlife" series; The Livestock Conservancy, "Guide to Predator-Proof Housing" (2019); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Henderson (2012), "The Chicken Health Handbook"; U.S. Fish and Wildlife Service, "Migratory Bird Treaty Act" fact sheet. See also [FWL-06] Husbandry Guide, [FWL-08] Wild Galliformes of the PNW, [FWL-09] Cross-References, [RCN-02] Intelligence and Behavior, [RCN-04] Urban Adaptation, [RCN deep-dives/raccoon-proofing] Raccoon-Proofing Guide.*

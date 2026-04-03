@@ -184,6 +184,7 @@ The PNW woodworker develops an intuitive grasp of these properties through daily
 ## Try This
 
 - **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Put the wood science from this chapter into practice by learning to identify fifteen Pacific Northwest species using the observable properties described here — color, grain, weight, smell, and hardness.
+- **The 10 Essential Woodworking Joints** ([study-guides/essential-joints-reference](study-guides/essential-joints-reference.md)): Wood science governs joint selection — end grain glues poorly (butt joints are weak), long grain glues well (dovetails are strong), wood moves across the grain (joints must accommodate it). The essential joints reference connects material properties to joint design.
 
 ---
 

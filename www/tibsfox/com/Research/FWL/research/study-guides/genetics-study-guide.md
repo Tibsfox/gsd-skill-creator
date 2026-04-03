@@ -278,6 +278,16 @@ For deeper study:
 
 ---
 
+## Try This
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Put your genetics knowledge to the test. Set up a specific cross, predict the offspring ratios, incubate the eggs, and compare results to prediction. This is genetics with a 21-day answer key.
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- The egg color genetics you just studied predict shell color. But do those genetic differences extend to flavor? Design the experiment.
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Every breed difference you identify in this challenge is the visible expression of specific alleles at known loci. Connect what you see to what you learned.
+
+---
+
 ## College of Knowledge Connections
 
 - **Science** --- [Genetics, Experimental Design]: This study guide directly teaches Mendelian inheritance, allelic dominance, sex-linked inheritance, epistasis, and the Punnett square --- core concepts in the genetics strand of the Science department. The practice problems develop the experimental design skill of predicting outcomes from controlled crosses.

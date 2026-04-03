@@ -296,6 +296,9 @@ A furry artist who has painted a thousand character commissions has practiced co
 
 - **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): The single most effective practice regimen for painters at any level. If you are on the learning path and want one exercise that will accelerate your progress, this is it.
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): A structured first painting session that teaches value, edges, and simplification in sixty timed minutes. The ideal starting point for the learning path.
+- **Paint a PNW Landscape in 2 Hours** ([try-sessions/paint-a-landscape](try-sessions/paint-a-landscape.md)): The next step after the apple — atmospheric perspective, color temperature, and the PNW green problem. Plein air or from a window.
+- **Paint a Furry Convention Badge** ([try-sessions/convention-badge-painting](try-sessions/convention-badge-painting.md)): The furry art entry point described in Section 10. From pencil sketch to laminated badge in under an hour. Materials cost under $20.
+- **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): What to buy at every budget level. Three tiers from $30 to $300+, plus the furry artist kit for convention badge work.
 
 ---
 

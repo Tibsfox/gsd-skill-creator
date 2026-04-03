@@ -268,6 +268,7 @@ Most painters eventually work in more than one medium. Understanding them all --
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Try this session in all three major mediums — oil, acrylic, and gouache — on three separate days. The same subject with different mediums teaches you more about medium behavior than any amount of reading.
 - **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): The wash version of the challenge (ink diluted with water) teaches you about medium behavior in its simplest form: one pigment, one binder, water as solvent.
+- **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): Which brand, which grade, which medium to buy first. Three budget tiers with specific product recommendations for every medium discussed in this chapter.
 
 ---
 

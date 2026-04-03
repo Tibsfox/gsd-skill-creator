@@ -273,6 +273,18 @@ A field notebook with dated, located observations accumulates into a valuable lo
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Raccoon Night Watch](night-observation.md)** --- You found the tracks. Now see the animal that made them. A night-watch session at a location where you found fresh tracks is almost guaranteed to produce sightings.
+
+> **[Build a Trail Cam Station](build-a-trail-cam-station.md)** --- Deploy a camera at the tracking site. Confirm which species left the signs and discover what time they visited.
+
+> **[Safe Raccoon Latrine Survey](latrine-survey.md)** --- If you found raccoon scat during your track survey, determine whether it is an isolated dropping or a communal latrine. Latrines require specific safety protocols.
+
+> **[How Well Do You Know Raccoons?](../study-guides/raccoon-biology-quiz.md)** --- Question 25 asks you to describe the difference between front and hind paw prints. After this exercise, you will know the answer from experience.
+
+---
+
 ## College of Knowledge Connections
 
 - **Nature Studies** --- [Tracking, Field Skills, Citizen Science]: This try session directly develops the tracking and field observation skills in the Outdoor Observation and Animals & Birds wings of the Nature Studies department. The systematic survey methodology, habitat assessment, and iNaturalist contribution connect to the Citizen Science wing. Identifying animals by their signs rather than by direct observation is a core naturalist competency.

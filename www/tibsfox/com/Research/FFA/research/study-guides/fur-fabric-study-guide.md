@@ -409,4 +409,22 @@ Test your understanding. Select the best fabric for each application. Answers fo
 
 ---
 
+---
+
+## More Try Sessions and DIY Projects
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](sewing-basics-for-fursuit-makers.md)**
+> This guide covers the fabrics. The sewing basics guide covers what to do with them: machine setup, hand stitches, faux fur cutting technique, seam types, and troubleshooting. Together, these two study guides provide the complete material and technique foundation.
+
+> **Try Session: [Build Your First Fursuit Paws](../try-sessions/first-fursuit-paws.md)**
+> The applied project where fabric selection (from this guide) meets construction technique. Choose your fur, cut it, sew it, and wear the result.
+
+> **DIY Project: [Build a Fursuit Tail](../try-sessions/fursuit-tail-construction.md)**
+> Another applied project for the fabrics in this guide. Species-specific tail shapes, faux fur cutting, and construction techniques for three tail designs.
+
+> **Try Session: [Design Your Fursona Character](../try-sessions/design-your-fursona.md)**
+> Before selecting fabric, design the character. Species, color palette (with hex codes), and distinguishing features --- the decisions that determine which fabrics from this guide you will need.
+
+---
+
 *This document is part of the FFA (Fursuit and Plush Arts) research series within the PNW Research Project. Cross-references: [FFA-03] Textile Craft, [FFA-04] Fursuit Fabrication, [FFA-06] Plush Construction, [FFA deep-dive/faux-fur-guide], [FFA try-session/first-fursuit-paws], [FFA try-session/first-plush-animal]. Know the material, and the material will teach you the craft.*

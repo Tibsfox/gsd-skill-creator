@@ -195,7 +195,9 @@ Construction tip for PNW outdoor furniture: western red cedar is the default spe
 ## Try This
 
 - **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): Dovetails are the cornerstone joint of fine furniture — drawers, boxes, cases. Master the joint and you are ready to build furniture that uses it.
+- **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The structural backbone of every table, chair, and frame. If dovetails are the aesthetic joint, the mortise and tenon is the workhorse that holds the furniture together.
 - **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): Fine furniture demands fine edges. The final fitting of a tenon, the paring of a dovetail, the trimming of a hinge mortise — all require a chisel that is truly sharp.
+- **The 10 Essential Woodworking Joints** ([study-guides/essential-joints-reference](study-guides/essential-joints-reference.md)): The complete joint reference — which joint for which furniture application. Includes the self-test: "which joint for...?" scenarios that build joint selection intuition.
 
 ---
 

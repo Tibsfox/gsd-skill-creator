@@ -182,6 +182,7 @@ The modern PNW woodworking scene carries forward multiple threads from this hist
 
 - **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): The Japanese temple carpenters described in this chapter spent years mastering tool sharpening before cutting a single joint. Start your own sharpening practice today.
 - **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail joint appears in this chapter as an ancient technique and a modern maker's rite of passage. Cut one yourself and join the tradition.
+- **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The mortise and tenon has been documented since the tomb of Queen Hetepheres (c. 2600 BCE). Four thousand years later, the joint has not been improved. Cut one and understand why.
 
 ---
 

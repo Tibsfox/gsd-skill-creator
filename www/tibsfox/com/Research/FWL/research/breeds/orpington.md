@@ -116,4 +116,16 @@ The Buff Orpington is not a breed that demands expertise. It is a breed that rew
 
 ---
 
+## Try This
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Test your ability to identify the Orpington and 19 other breeds by physical characteristics alone. Can you distinguish a Buff Orpington from a Buff Cochin at a glance?
+
+> **[Design Your Dream Coop](../try-sessions/coop-design-challenge.md)** --- The Orpington's heavy body and short legs mean lower roosts and wider pop doors. Design a coop optimized for your Buff flock.
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- Do your Orpington eggs taste different from store-bought? Design a blind experiment and find out.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Heavy breeds like Orpingtons are prone to bumblefoot from hard landings. Learn the signs and the treatment before you need it.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Will (1902), "The Orpington Fowl"; Damerow (2012), "The Chicken Encyclopedia"; United Orpington Club resources. See also [FWL-02d] English Class, [FWL-04] Feather Genetics, [FWL-06] Husbandry Guide, [FWL-07] Heritage Conservation.*

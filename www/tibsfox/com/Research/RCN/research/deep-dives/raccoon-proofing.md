@@ -190,4 +190,14 @@ This year-round activity, combined with the PNW's high urban raccoon densities, 
 
 ---
 
+## Try This
+
+> **[Build a Trail Cam Station](../try-sessions/build-a-trail-cam-station.md)** --- Before you raccoon-proof, find out where they are entering and what they are doing. A trail camera shows you exactly which defenses need upgrading.
+
+> **[Safe Raccoon Latrine Survey](../try-sessions/latrine-survey.md)** --- If raccoons visit your property regularly, they may have established latrines. Find them, map them, and clean them safely.
+
+> **[Design Your Dream Coop](../../FWL/research/try-sessions/coop-design-challenge.md)** --- If you keep chickens, your coop design IS your raccoon-proofing strategy. Hardware cloth, two-step latches, and buried aprons are designed here.
+
+---
+
 *Sources and further reading: WDFW (Washington Department of Fish and Wildlife), "Living with Wildlife: Raccoons" (2024); Hadidian et al. (2010), "Wild Neighbors: The Humane Approach to Living with Wildlife"; Prange et al. (2004), "Survival, Cause-Specific Mortality, and Harvest of Raccoons in Ohio," Journal of Wildlife Management; Rosatte et al. (2010), "Evaluation of Raccoon Translocation," Journal of Wildlife Management; FWL-06 (Husbandry Guide); RCN-02 (Intelligence and Behavior); RCN-04 (Urban Adaptation); The Humane Society of the United States, "What to Do About Raccoons" (2024). See also [deep-dives/raccoons-and-disease] for raccoon-associated health risks and latrine cleanup protocols, [deep-dives/baby-raccoons] for orphaned kit response guidance, [FWL guides/predator-defense-pnw] for comprehensive PNW poultry predator defense.*

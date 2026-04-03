@@ -293,8 +293,11 @@ The gouache renaissance -- driven by Instagram, TikTok, and a generation of pain
 ## Try This
 
 - **Art History Timeline Study Guide** ([study-guides/art-history-timeline](study-guides/art-history-timeline.md)): The study guide synthesizes the historical sources in this bibliography into a testable, structured review of every major movement in painting.
+- **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): The brands and products referenced throughout this bibliography, organized by budget tier. What to buy at $30, $100, and $300+.
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Start here. No amount of bibliography replaces the experience of painting.
 - **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): Build the daily practice that makes all other learning stick.
+- **Paint a PNW Landscape in 2 Hours** ([try-sessions/paint-a-landscape](try-sessions/paint-a-landscape.md)): Take the plein air tradition outdoors. Atmospheric perspective, PNW light, and the green problem — all referenced in the landscape painting sources above.
+- **Paint a Furry Convention Badge** ([try-sessions/convention-badge-painting](try-sessions/convention-badge-painting.md)): The furry art economy referenced in the community sources section, in practice. From blank paper to laminated badge.
 
 ---
 

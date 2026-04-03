@@ -149,6 +149,16 @@ For the person who served thirty years as a firefighter and paramedic, this hist
 
 Every call they answered was a point on this arc. And every call they answered carried the weight of all the calls that came before — all the lessons learned, all the lives lost, all the reforms that arrived just one catastrophe too late.
 
+## Try This / DIY Project
+
+> **Try Session: [Hands-Only CPR](try-sessions/hands-only-cpr.md)**
+> The arc from Roman vigiles to modern paramedicine described in this chapter depends on one link: the bystander. CPR is the single most impactful skill a citizen can learn --- the same skill that the 1966 white paper's descendants eventually made standard training.
+
+> **Study Guide: [Incident Command System Basics](study-guides/incident-command-basics.md)**
+> ICS, born from the 1970 California wildfire failures described in this chapter, is the organizational framework for every emergency response today. The citizen-level study guide introduces the five functions and explains how it all works.
+
+---
+
 ## Cross-References
 
 - **[FSR-02]** through **[FSR-10]** — each subsequent document in this series expands on a thread introduced here
