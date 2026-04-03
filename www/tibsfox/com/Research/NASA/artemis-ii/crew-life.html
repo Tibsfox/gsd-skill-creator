@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II &mdash; Life Aboard Orion</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+.sub-nav {
+  display:flex; justify-content:center; flex-wrap:wrap; gap:0.3rem 1.2rem;
+  padding:0.5rem 2rem; font-size:0.75rem;
+  background: var(--void); border-bottom:1px solid var(--border);
+}
+.sub-nav a { color: var(--orion-silver); }
+.sub-nav a:hover { color: var(--artemis-gold); }
+.sub-nav .active { color: var(--artemis-gold); border-bottom:1px solid var(--artemis-gold); }
+
+.content { max-width:900px; margin:0 auto; padding:2rem 1.5rem; }
+.content h2 {
+  font-family:Georgia,serif; font-size:1.2rem; font-weight:400; color:#fff;
+  letter-spacing:0.04em; margin:2rem 0 0.3rem; padding-top:1.5rem;
+  border-top:1px solid var(--border);
+}
+.content h2:first-child { border-top:none; padding-top:0; margin-top:0; }
+.content h3 {
+  font-size:0.9rem; color: var(--artemis-gold); margin:1.2rem 0 0.4rem;
+  font-weight:600; letter-spacing:0.03em;
+}
+.content p { margin:0.6rem 0; font-size:0.85rem; }
+.content ul { margin:0.4rem 0 0.8rem 1.5rem; font-size:0.85rem; }
+.content li { margin:0.3rem 0; }
+
+.info-panel {
+  background: var(--panel); border:1px solid var(--border);
+  padding:1.2rem 1.5rem; margin:1rem 0;
+}
+.info-panel .panel-title {
+  font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em;
+  color: var(--artemis-gold); margin-bottom:0.6rem;
+}
+
+.spec-table { width:100%; border-collapse:collapse; font-size:0.8rem; margin:0.8rem 0; }
+.spec-table th { text-align:left; color: var(--artemis-gold); font-weight:600; padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; }
+.spec-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.spec-table td:first-child { color: var(--orion-silver); }
+
+.highlight { color: var(--artemis-gold); font-weight:600; }
+.footnote { font-size:0.7rem; color: var(--dim); margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="mission-header">
+  <h1>Artemis II &mdash; Life Aboard Orion</h1>
+  <div class="subtitle">Eating, sleeping, and surviving 252,000 miles from Earth</div>
+  <div class="catalog-id">Mission 1.190 &middot; Flight Days 1&ndash;10 &middot; Crew of Four</div>
+</div>
+
+<div class="sub-nav">
+  <a href="index.html">Tracker</a>
+  <a href="crew.html">Crew</a>
+  <a href="vehicle.html">Vehicle</a>
+  <a href="science.html">Science</a>
+  <a href="math.html">Math</a>
+  <a href="timeline.html">Timeline</a>
+  <a class="active" href="crew-life.html">Life Aboard</a>
+  <a href="watch.html">Watch</a>
+</div>
+
+<div class="content">
+
+<h2>The OCSS Helmet Port</h2>
+
+<p>The <span class="highlight">Orion Crew Survival System (OCSS)</span> &mdash; the orange pressure suit every Artemis II astronaut wears &mdash; is designed for a worst-case scenario: cabin depressurization requiring the crew to survive sealed inside their suits for up to <span class="highlight">144 hours (6 days)</span>. That means eating, drinking, and taking medication without ever opening the visor.</p>
+
+<p>The solution is the <span class="highlight">helmet port system</span>, a set of valved openings built into the helmet visor:</p>
+
+<div class="info-panel">
+<div class="panel-title">Helmet Port Components</div>
+<ul>
+  <li><strong>Drink port</strong> &mdash; An updated design combining heritage visor-mounted drink ports with a newer internal seal. Built into the S1041 helmet visor. Accepts a drinking straw or tube from the in-suit water supply.</li>
+  <li><strong>Contingency feed port</strong> &mdash; A small valve through which the crew can receive drinking water and liquid nutrition without removing the helmet. Used when full suit pressurization must be maintained.</li>
+  <li><strong>In-suit pill delivery tool</strong> &mdash; A device for administering medication through the drink port to a pressurized, suited crew member. Critical for the contingency scenario where a crew member may need anti-nausea or pain medication while sealed in the suit.</li>
+</ul>
+</div>
+
+<h3>Flight Day 5: The Suit Test</h3>
+
+<p>On Flight Day 5 (April 5), the crew will conduct a full OCSS checkout. Each astronaut will:</p>
+
+<ul>
+  <li>Don the suit and pressurize it (testing the rapid donning procedure)</li>
+  <li>Install their custom-fitted seats while wearing the pressurized suit</li>
+  <li>Strap in and verify all connections</li>
+  <li><span class="highlight">Eat and drink through the helmet port</span> while fully pressurized</li>
+  <li>Test waste management systems</li>
+  <li>Verify communications and suit telemetry</li>
+</ul>
+
+<p>This is the first time the OCSS helmet port eating system will be tested in actual microgravity with crew aboard. The 144-hour contingency scenario was designed and tested on the ground, but microgravity introduces new challenges: liquid behavior, crumb control, and the biomechanics of swallowing while suited.</p>
+
+<h2>Food System</h2>
+
+<h3>The Orion Food Bars</h3>
+
+<p>Mass is critical on Orion &mdash; every gram counts on a lunar trajectory. NASA food scientists developed custom food bars specifically for Artemis missions because <em>no commercially available bar meets the requirements</em>.</p>
+
+<div class="info-panel">
+<div class="panel-title">Orion Food Bar Specifications</div>
+<table class="spec-table">
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Calories per bar</td><td>700&ndash;900 kcal</td></tr>
+<tr><td>Flavors available</td><td>Orange cranberry, barbeque nut (+ others in development)</td></tr>
+<tr><td>Shelf life target</td><td>Multi-year</td></tr>
+<tr><td>Purpose</td><td>Breakfast replacement (single package per crew member)</td></tr>
+<tr><td>Designed by</td><td>Takiyah Sirmons, NASA food scientist</td></tr>
+</table>
+</div>
+
+<p>The bars replace the multi-item breakfast packages used on ISS, saving both mass and stowage volume. Lunch and dinner feature meals similar to the ISS food system (~200 items available), prepared with a food warmer and potable water dispenser for rehydrating freeze-dried meals.</p>
+
+<h3>Menu Highlights</h3>
+
+<table class="spec-table">
+<tr><th>Category</th><th>Details</th></tr>
+<tr><td>Breakfast</td><td>Food bars (700&ndash;900 kcal)</td></tr>
+<tr><td>Lunch &amp; dinner</td><td>Macaroni and cheese, beef brisket, vegetables, tortillas</td></tr>
+<tr><td>Snacks</td><td>Assorted nuts, dried fruits</td></tr>
+<tr><td>Beverages</td><td>Coffee, tea, flavored drinks (2 per crew member per day)</td></tr>
+<tr><td>Condiments</td><td>5 different hot sauces</td></tr>
+<tr><td>Bread substitute</td><td>58 tortillas (no crumbs in microgravity)</td></tr>
+</table>
+
+<p>During launch and reentry, the potable water dispenser is unavailable. Crew eat ready-to-eat foods only. The full food preparation system &mdash; warmer, water dispenser, rehydration &mdash; is available during the transit phase.</p>
+
+<h3>Why Tortillas?</h3>
+
+<p>Bread creates crumbs. In microgravity, crumbs float freely and can infiltrate electronics, clog air filters, and irritate eyes. NASA switched from bread to tortillas during the Shuttle program and has never gone back. The 58 tortillas aboard Orion are shelf-stable and vacuum-packed.</p>
+
+<h2>Living in Orion</h2>
+
+<h3>The Space</h3>
+
+<p>Orion's habitable volume is approximately <span class="highlight">316 cubic feet</span> (8.95 m&sup3;) &mdash; roughly the interior of a large SUV. Four adults will share this space for 10 days. For comparison, the Apollo command module provided 218 cubic feet for three crew; ISS provides ~13,696 cubic feet across all modules.</p>
+
+<h3>Sleep</h3>
+
+<p>There are no dedicated sleeping quarters. Crew members use sleeping bags tethered to the cabin walls, taking turns on a staggered sleep schedule. In microgravity, orientation doesn&rsquo;t matter &mdash; you can sleep &ldquo;standing up&rdquo; as easily as lying down. The challenge is noise and light management in such close quarters.</p>
+
+<h3>Hygiene</h3>
+
+<p>No shower. Crew use wet wipes and rinseless shampoo. The waste management system (toilet) experienced a fault light shortly after launch but was resolved by the crew and mission control within hours &mdash; the first in-flight repair of the mission.</p>
+
+<h3>Exercise</h3>
+
+<p>Unlike ISS crews who exercise 2+ hours daily to combat bone and muscle loss, Artemis II is short enough (10 days) that a formal exercise program isn&rsquo;t required. Crew will do stretching and movement as space permits.</p>
+
+<h2>The 144-Hour Scenario</h2>
+
+<p>The worst case: cabin depressurization at the farthest point from Earth. The crew seals into their OCSS suits and plugs into the vehicle&rsquo;s remaining resources. The suit must sustain them for up to 144 hours (6 days) as Orion follows its free-return trajectory home.</p>
+
+<div class="info-panel">
+<div class="panel-title">OCSS Contingency Systems</div>
+<ul>
+  <li><strong>Air</strong> &mdash; Vehicle O&#8322; supply feeds through suit umbilical</li>
+  <li><strong>Water</strong> &mdash; In-suit drink system via helmet port</li>
+  <li><strong>Food</strong> &mdash; Liquid nutrition through contingency feed port</li>
+  <li><strong>Waste</strong> &mdash; Integrated waste management system (urine and fecal collection without suit removal)</li>
+  <li><strong>Medication</strong> &mdash; Pill delivery through drink port</li>
+  <li><strong>Thermal</strong> &mdash; Liquid cooling garment regulates body temperature</li>
+  <li><strong>Neck seal</strong> &mdash; In contingency mode, the neck seal closes slightly to create downward gas flow, preventing waste residue from floating into the oral-nasal region</li>
+</ul>
+</div>
+
+<p>The neck seal design is particularly elegant: rather than clamping tight against the neck, it closes just enough to establish a directional airflow &mdash; clean air flows down past the face, carrying any contaminants away from the crew member&rsquo;s breathing zone. This is passive, requiring no power or crew intervention.</p>
+
+<div class="footnote">
+  <p>Sources: <a href="https://www.nasa.gov/missions/artemis/orion-suit-equipped-to-expect-the-unexpected-on-artemis-missions/">NASA OCSS Overview</a> &middot; <a href="https://www.nasa.gov/missions/artemis/orion/space-food-bars-will-keep-orion-weight-off-and-crew-weight-on/">NASA Food Bars</a> &middot; <a href="https://www.nasa.gov/missions/artemis/nasas-artemis-ii-moon-mission-daily-agenda/">NASA Daily Agenda</a> &middot; <a href="https://thehill.com/homenews/nexstar_media_wire/5813848-nasa-artemis-crew-food-system/">The Hill: Crew Food System</a></p>
+  <p>Last updated: 2026-04-03T10:30Z (sweep v1.3.3.2) &middot; <a href="index.html">&larr; Mission Tracker</a></p>
+</div>
+
+</div>
+</body>
+</html>
