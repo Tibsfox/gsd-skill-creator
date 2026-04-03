@@ -1,0 +1,108 @@
+{
+  "degree": 179,
+  "species": "Ancient Murrelet",
+  "scientific_name": "Synthliboramphus antiquus",
+  "slug": "179-ancient-murrelet",
+  "sound_type": "shrill twitter -- rapid, high-pitched, trilling vocalization at nocturnal colony. Eerie chorus of multiple birds in darkness. E=4",
+  "energy": 4,
+  "ecosystem": "Island colonies, typically predator-free islands. Breeds in burrows. Feeds at sea. Nocturnal at colony.",
+  "season": "Summer breeder. Nocturnal at colony. At sea year-round outside breeding.",
+  "family": "Alcidae (6th entry -- streak closes)",
+  "order": "Charadriiformes",
+  "csv_substitute": false,
+  "original_species": "Ancient Murrelet",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 52.30,
+    "lon": -131.40,
+    "description": "Ancient Murrelet on island colony. Haida Gwaii (Queen Charlotte Islands) -- major breeding population. Also visits PNW waters."
+  },
+  "taxonomy_note": {
+    "description": "SIXTH ALCIDAE (174-179). Streak closes. Six consecutive entries. Six nesting strategies. Precocial chick departure (1-3 days). Named for gray 'elder's shawl' plumage.",
+    "current_family": "Alcidae (6th entry -- closes streak)",
+    "new_family": false,
+    "family_count_in_engine": "Alcidae: Pigeon Guillemot (174), Rhinoceros Auklet (175), Tufted Puffin (176), Common Murre (177), Marbled Murrelet (178), Ancient Murrelet (179).",
+    "name_etymology": "Synthliboramphus from Greek 'synthlibomai' (compressed) + 'ramphos' (bill) -- compressed bill. antiquus from Latin 'antiquus' (ancient) -- gray plumage resembling elder. Murrelet: diminutive of murre.",
+    "genus_note": "Synthliboramphus -- 'ancient' murrelets. ~6 species. Small Alcidae. Precocial chicks. Nocturnal colonies.",
+    "order_note": "Charadriiformes. Alcidae concluding streak from degrees 174-178. Sixth and final consecutive entry.",
+    "family_position": "Sixth Alcidae. First Synthliboramphus. Streak closes. Most precocial chick departure in Alcidae."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "4000-8000 Hz. High-pitched.",
+    "peak_energy_band_hz": "~5000-6000 Hz. Sharp, penetrating.",
+    "song_frequency_hz": "Individual twitter: ~5500 Hz. Rapid trilling.",
+    "song_duration_s": "Individual twitter burst: 0.5-2.0 seconds. Colony sound continuous at night.",
+    "note_structure": "Rapid, high-pitched, shrill twittering. Trilling quality. Multiple notes per burst. Sharp.",
+    "note_types": "Colony twitter (primary -- nocturnal), parental call (chick departure guidance), alarm.",
+    "phrase_structure": "Rapid trilling bursts. Colony: overlapping twitterings from multiple birds creating shimmering chorus.",
+    "timbre": "Shrill, high-pitched, rapid. Trilling. Eerie in nocturnal context.",
+    "amplitude": "E=4. Penetrating but not loud. Colony aggregate atmospheric. Nocturnal context amplifies eeriness.",
+    "tempo": "Very rapid within individual twitter bursts. Colony tempo continuous.",
+    "context": "Nocturnal colony activity. Island breeding sites. Contact, arrival, chick departure guidance.",
+    "regional_variation": "Minimal.",
+    "key_property": "SHRILL TWITTER at nocturnal colony. Chicks depart at 2 days old. 'Ancient' gray plumage. SIXTH ALCIDAE -- streak closes. E=4. v1.49.319."
+  },
+  "plumage": {
+    "overall": "Black head with fine white streaks. Gray back (the 'ancient' shawl). White underparts. Short dark bill. Small, compact seabird.",
+    "diagnostic_mark": "Gray back (elder's shawl). White head streaks. Black crown. Short bill. Compact body.",
+    "seasonal_variation": "Minimal. Breeding and non-breeding similar. White streaks may be more prominent in breeding.",
+    "flight_pattern": "Fast, direct, low over water. Rapid wingbeats. Small wings. Nocturnal at colony."
+  },
+  "physical_description": {
+    "overall": "Length: 24-27 cm. Weight: 180-230g. Bill: short, compressed. Small, compact.",
+    "diagnostic_mark": "Gray 'ancient' back. White head streaks. Short compressed bill. Nocturnal at colony.",
+    "field_id": "Small compact seabird with gray back and white head streaks. Nocturnal at colony -- rarely seen on land during day. At sea: look for gray-backed small auk."
+  },
+  "nodes": [
+    {
+      "id": "precocial-departure",
+      "type": "concept",
+      "title": "Two-Day Departure -- Most Precocial Seabird",
+      "description": "Chicks leave nest burrow at 1-3 days old. Never eaten in burrow. Cannot fly. 25-30g. Scramble to sea at night guided by parental calls. Family swims away -- potentially hundreds of km.",
+      "connections": ["nocturnal-colony", "alcidae-streak-close"]
+    },
+    {
+      "id": "nocturnal-colony",
+      "type": "concept",
+      "title": "Nocturnal Colony -- Shrill Twitter in Darkness",
+      "description": "Colony active only at night. Shrill twittering, rapid trilling creates eerie nocturnal soundscape. Anti-predator strategy. E=4 through contextual eeriness.",
+      "connections": ["precocial-departure", "ancient-plumage"]
+    },
+    {
+      "id": "ancient-plumage",
+      "type": "concept",
+      "title": "The 'Ancient' Name -- Elder's Gray Shawl",
+      "description": "Gray back resembling old person's shawl. White head streaks like gray hair. *antiquus* = ancient. Understated, dignified plumage among flashy Alcidae.",
+      "connections": ["nocturnal-colony"]
+    },
+    {
+      "id": "alcidae-streak-close",
+      "type": "pattern",
+      "title": "Alcidae Streak Closes (174-179)",
+      "description": "Six consecutive Alcidae entries. Six nesting strategies. Longest family streak in the engine (ties Scolopacidae at 5, exceeds it at 6). The auks complete.",
+      "connections": ["precocial-departure"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-178",
+      "species": "Marbled Murrelet",
+      "relationship": "MURRELET PAIR! Marbled (178) and Ancient (179) in sequence. Two murrelets, different genera. Forest nester vs island burrower. Both mysterious."
+    },
+    {
+      "target": "SPS-177",
+      "species": "Common Murre",
+      "relationship": "CHICK DEPARTURE CONTRAST! Murre: 15-25 days. Ancient Murrelet: 1-3 days. Both dramatic departures but murrelet is far more precocial."
+    },
+    {
+      "target": "SPS-174",
+      "species": "Pigeon Guillemot",
+      "relationship": "ALCIDAE STREAK! Guillemot opens (174). Ancient Murrelet closes (179). Six species. Six strategies. Complete family survey."
+    },
+    {
+      "target": "SPS-180",
+      "species": "Harbor Seal",
+      "relationship": "TAXONOMIC REVOLUTION! After 6 consecutive Alcidae (birds), degree 180 enters MARINE MAMMALS. The Alcidae streak bridges to the mammalian ocean."
+    }
+  ]
+}
