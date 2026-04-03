@@ -280,9 +280,22 @@ The furry community is unusually supportive of developing artists. Improvement i
 
 ### Character Art as Painting Education
 
-Drawing and painting furry characters is legitimate art education, despite what snobbery might suggest. Character art requires anatomy (both human and animal -- often simultaneously, as documented in [FFA-01]), color theory (character palettes demand sophisticated color harmony), lighting (painting convincing light on fur, feathers, scales, and skin), composition (posing a character in a readable, dynamic way), and surface rendering (the textures of fur, leather, metal, fabric). These are the same skills that any painting education teaches. The subject matter is different. The fundamentals are the same.
+Drawing and painting furry characters is legitimate art education, despite what snobbery might suggest. The full history of furry art -- from Carl Barks and the fanzine era through the digital commission economy -- is documented in [artists/furry-art-history]. Character art requires anatomy (both human and animal -- often simultaneously, as documented in [FFA-01]), color theory (character palettes demand sophisticated color harmony), lighting (painting convincing light on fur, feathers, scales, and skin), composition (posing a character in a readable, dynamic way), and surface rendering (the textures of fur, leather, metal, fabric). These are the same skills that any painting education teaches. The subject matter is different. The fundamentals are the same.
 
 A furry artist who has painted a thousand character commissions has practiced color mixing, value control, edge management, and composition a thousand times. That is a painter. The subject matter does not diminish the skill.
+
+---
+
+## College of Knowledge Connections
+
+- **Learning** — [study-strategies]: The learning path in painting follows research-supported study strategies: deliberate practice, spaced repetition (daily studies), progressive difficulty (simple to complex subjects), and interleaving (alternating between drawing, value, color, and composition exercises). Painting education is a case study in effective learning design.
+- **Learning** — [mindset-motivation]: Learning to paint requires growth mindset — the belief that observational skill, hand control, and color perception are trainable rather than innate talents. Every stage of the learning path produces visible failures before visible progress. Persistence through the "ugly phase" is a mindset challenge as much as a skill challenge.
+- **Art** — [seeing-drawing]: The learning path begins and ends with seeing. Beginners learn to see shapes, values, and edges. Advanced painters learn to see subtle color temperature shifts, atmospheric effects, and the abstract design underlying realistic scenes. Seeing-drawing is the through-line of the entire curriculum.
+
+## Try This
+
+- **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): The single most effective practice regimen for painters at any level. If you are on the learning path and want one exercise that will accelerate your progress, this is it.
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): A structured first painting session that teaches value, edges, and simplification in sixty timed minutes. The ideal starting point for the learning path.
 
 ---
 

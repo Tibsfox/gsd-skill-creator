@@ -269,4 +269,12 @@ Some knowledge in the emergency services is not published. It exists in the oral
 
 ---
 
+## College of Knowledge Connections
+
+- **Learning** --- [Research Methodology]: This bibliography reflects multiple modes of knowledge production --- peer-reviewed research, government reports, professional standards, journalistic investigation, and oral history. Understanding the strengths and limitations of each source type is a research literacy skill.
+- **Science** --- [Interdisciplinary Foundations]: The FSR research series draws on chemistry, biology, psychology, sociology, engineering, medicine, and public policy. Emergency services are inherently interdisciplinary, and the bibliography maps the disciplinary landscape from which the field draws its knowledge.
+- **Critical-Thinking** --- [Source Evaluation]: Evaluating the reliability, currency, and relevance of sources in a rapidly evolving field --- where guidelines are updated regularly, statistics change annually, and institutional memory fills gaps that published research has not yet addressed --- is applied critical thinking.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

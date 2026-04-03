@@ -131,4 +131,12 @@ For the person who served thirty years, the academy was the beginning. The first
 
 ---
 
+## College of Knowledge Connections
+
+- **Learning** --- [Pedagogy and Skill Acquisition]: First responder training is a rigorous application of adult learning theory --- scenario-based learning, progressive skill building, competency assessment, and continuing education. The progression from EMT to paramedic to specialized certifications is a structured educational pathway.
+- **Physical Education** --- [Fitness Assessment and Standards]: CPAT, swim tests, physical agility courses, and ongoing fitness requirements are standardized physical assessments designed to ensure that responders can perform under the physiological demands of their roles.
+- **Science** --- [Applied Sciences]: Fire science, pharmacology, trauma pathophysiology, hazardous materials chemistry, and forensic science are all disciplinary foundations that underpin first responder certification curricula.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

@@ -48,6 +48,14 @@ Danish oil is a blend of oil (usually BLO or tung oil), varnish, and thinner. It
 
 The application for Danish oil: flood the surface generously, let it soak for 15-30 minutes, then wipe off all excess. For maximum protection, apply three coats over three days, sanding lightly with 320-grit between coats. The first coat soaks in almost entirely. The second builds a thin film. The third produces a soft, satin sheen that feels warm to the touch. Watco comes in Natural (clear), Dark Walnut, Medium Walnut, Cherry, and several other tones. For a first furniture project, Natural Watco Danish Oil on walnut or cherry is nearly foolproof — it is the finish equivalent of training wheels, except the result is genuinely good.
 
+### Hardwax Oil (The Modern Category)
+
+**Rubio Monocoat** ($55-70 for a 350ml can covering 40-50 square feet) has created a new category in wood finishing. It is a single-coat hardwax oil that bonds molecularly with the wood fiber, curing to a durable, matte-to-satin surface in one application. No multiple coats. No sanding between coats. Rub it in with a non-woven pad, buff off the excess, wait five days for full cure.
+
+Rubio Monocoat is food-safe when cured, does not build a plastic film, and comes in over 40 tones from Pure (clear) to richly pigmented options. It has become the finish of choice for live-edge furniture, dining tables, and any application where a natural, low-build finish is desired. The cost per application is higher than Danish oil or wiping varnish, but the single-coat convenience and the quality of the result justify it for many woodworkers. See [projects/live-edge-shelf] for application technique on figured slabs.
+
+**Osmo Polyx-Oil** ($55-65/quart) and **Fiddes Hard Wax Oil** ($50-60/liter) are comparable hardwax oil products from European makers, each with slightly different handling and sheen characteristics. The category is growing and the products are converging on a common standard of performance.
+
 ---
 
 ## Varnish — The Protective Film
@@ -180,8 +188,25 @@ Big-leaf maple's figured varieties — quilted, curly, bird's eye — demand fin
 - **[WDC-05]** Joinery — finishes must be applied before assembly in some joints (the panel in frame-and-panel, for example, must be finished before the frame is glued, because the exposed wood will show when the panel contracts in dry weather)
 - **[WDC-07]** Furniture Making — finish selection as a design decision, not just a final step
 - **[WDC-09]** PNW Timber — species-specific finishing characteristics for Douglas fir, cedar, maple, and alder
+- **[species/western-red-cedar]** Western Red Cedar — exterior cedar finishing (TWP, Cabot, Penofin), and why film-forming finishes fail on cedar heartwood
+- **[species/douglas-fir-profile]** Douglas Fir — staining challenges (earlywood/latewood differential), gel stain technique, and clear finish recommendations
+- **[projects/spoon-carving]** Spoon Carving — food-safe oil finishes (walnut oil, mineral oil, beeswax blend) for carved utensils
+- **[projects/live-edge-shelf]** Live Edge Shelf — Rubio Monocoat, Danish oil, and wiping varnish on figured slabs
 - **[PNT-05]** Painting — wood panel finishing for painting (gesso preparation, sealing, ground application) shares principles with furniture finishing
 - **[ECO-05]** Forest Ecology — the extractive chemistry (thujaplicins in cedar, tannins in oak) that creates finish compatibility issues has ecological origins
+
+---
+
+## College of Knowledge Connections
+
+- **Materials** — [material-properties]: Finishing is applied materials science. Every finish has properties — hardness, flexibility, water resistance, UV stability, sheen, toxicity — that determine where and how it can be used. Understanding these properties lets you choose finishes rationally rather than by habit or brand loyalty.
+- **Materials** — [sustainability-lifecycle]: Finish choice has environmental and health implications. VOC content, heavy metal pigments, application waste, and end-of-life disposal all factor into a finish's sustainability profile. Water-based finishes, natural oils, and plant-based waxes represent lower-impact alternatives to traditional solvent-based finishes.
+- **Trades** — [tools-safety]: Finishing involves chemical hazards — solvent vapors, dust from sanding between coats, spontaneous combustion of oil-soaked rags. The safety protocols for finishing (ventilation, respirators, rag disposal) are as critical as any power tool safety practice.
+- **Art** — [materials-making]: The finished surface is the final visual statement of a project. Gloss or matte, warm or cool, thick film or close-to-the-wood — these are aesthetic decisions made with materials. Finishing connects the craft of woodworking to the art of presentation.
+
+## Try This
+
+- **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Understanding how different species respond to finishes (oak's open pores need filling, cedar's oils resist water-based finishes, cherry darkens dramatically with exposure) starts with identifying the species you are working with.
 
 ---
 

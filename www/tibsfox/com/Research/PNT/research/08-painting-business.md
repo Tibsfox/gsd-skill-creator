@@ -263,6 +263,18 @@ This is where the PNT project and the FFA project intersect most directly. Paint
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [creative-process]: The business of painting is a creative practice in itself — building a brand, developing a client base, pricing work, and managing the tension between personal artistic vision and market demand all require creative problem-solving.
+- **Business** — [economics]: Pricing artwork involves understanding supply and demand, cost of materials and time, market positioning, and value perception. The economics of creative work are different from commodity markets but follow recognizable economic principles.
+- **Learning** — [metacognition]: Building a painting career requires self-awareness — understanding your strengths, identifying your market, recognizing when to invest in skill development versus production. The metacognitive skills of self-assessment and strategic planning transfer directly from learning theory to business practice.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Before you can sell paintings, you need to make them. The fastest path to a painting practice is structured sessions with clear goals and time limits. Start here.
+
+---
+
 ## 11. Sources
 
 - Grant, D. (2010). *The Business of Being an Artist*. 5th ed. Allworth Press.

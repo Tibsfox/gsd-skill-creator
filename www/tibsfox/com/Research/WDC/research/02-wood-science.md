@@ -165,10 +165,25 @@ The PNW woodworker develops an intuitive grasp of these properties through daily
 ## Cross-References
 
 - **[WDC-09]** PNW Timber — species profiles with full ecological and commercial context
+- **[species/douglas-fir-profile]** Douglas Fir — complete profile with strength data, old-growth vs. second-growth, and working properties
+- **[species/western-red-cedar]** Western Red Cedar — thujaplicin chemistry, Janka 350 lbf, dimensional stability, and decay resistance in detail
 - **[WDC-06]** Finishing — grain-raising, blotching, and finish compatibility all flow from the wood science in this chapter
 - **[WDC-05]** Joinery — wood movement dictates every joinery decision; this chapter provides the physics
 - **[ECO-05]** Forest Ecology — the growing conditions that produce the wood properties described here
 - **[PNT-05]** Painting Surfaces — wood panel preparation for painting depends on understanding moisture, grain, and movement
+
+---
+
+## College of Knowledge Connections
+
+- **Materials** — [material-properties]: Wood is a material with measurable properties — density, hardness, stiffness, moisture content, dimensional stability — that determine its behavior under tools and in service. This chapter is the materials department's case study in understanding a natural material through its physical properties.
+- **Materials** — [materials-families]: The hardwood/softwood distinction (angiosperms vs. gymnosperms) is a materials classification system. Within each family, species group by density, grain structure, and workability. Understanding these families helps predict the behavior of unfamiliar species by analogy.
+- **Nature-Studies** — [plants-fungi]: Wood is the structural tissue of a tree — a biological material produced by a living organism. Understanding how a tree grows (cambium, heartwood, sapwood, annual rings) connects the woodworker's shop knowledge to the botanist's field knowledge. Spalting, decay, and figure are all biological processes visible in the wood.
+- **Science** — [chemistry]: Wood chemistry — cellulose, lignin, extractives, moisture equilibrium — explains why wood moves, why heartwood resists decay, and why different species respond differently to finishes. The science of wood is chemistry applied to craft.
+
+## Try This
+
+- **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Put the wood science from this chapter into practice by learning to identify fifteen Pacific Northwest species using the observable properties described here — color, grain, weight, smell, and hardness.
 
 ---
 

@@ -529,4 +529,12 @@ The airbrushing techniques that many makers use for color work on fursuits conne
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Electronics and Materials Science]: LED integration, servo-driven articulation, battery management, and thermal engineering bring electronics and materials science directly into textile craft. Understanding voltage, current draw, heat dissipation, and material properties is essential for advanced fursuit construction.
+- **Trades** --- [Multi-Discipline Fabrication]: Advanced fursuit construction combines sewing, foam sculpting, electronics, mechanical engineering, and painting. The professional maker's workflow --- batching, quality control, client management --- mirrors the operational practices of any skilled fabrication trade.
+- **Physical Education** --- [Biomechanics and Ergonomics]: Digitigrade padding, tail counterweights, cooling systems, and under-suit compression wear all address the biomechanical and ergonomic challenges of performing in a heavy, heat-generating costume. Understanding human movement and thermal regulation is essential for building suits that can be worn safely for extended periods.
+
+---
+
 *Module FFA-11. Cross-references: [FFA-04], [FFA-03], [FFA-02], [FFA-01], [PNT-02], [PNT-03], [PNT-05]. Deep dives: [Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md), [Faux Fur Guide](deep-dives/faux-fur-guide.md). Safety codes: SC-SAF, SC-IP.*

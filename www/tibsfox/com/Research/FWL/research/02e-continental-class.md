@@ -320,3 +320,11 @@ The Continental Class is where utility meets artistry. These breeds lay eggs in 
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Wang et al. (2013), "An EAV-HP insertion in SLCO1B3 causes blue eggshell in the chicken," PLoS Genetics; Marans of America Club, Egg Color Scale and Breed Standard.*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds]: The Continental breeds showcase the full range of plumage pattern diversity --- spangling, penciling, lacing, barring --- making them ideal subjects for developing morphological observation skills and understanding phenotypic variation.
+- **Science** --- [Genetics]: Egg color genetics in Continental breeds (Marans' dark brown, Ameraucana's blue, Cream Legbar's auto-sexing) provide accessible, visible examples of Mendelian inheritance, sex-linkage, and polygenic traits.
+- **Home Economics** --- [Food Quality]: The extraordinary egg color diversity of Continental breeds --- from chocolate Marans to blue Ameraucana to olive Cream Legbar crosses --- connects to food aesthetics, artisanal production, and the relationship between agricultural biodiversity and food culture.

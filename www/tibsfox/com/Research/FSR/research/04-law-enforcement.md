@@ -136,4 +136,12 @@ This document describes the institution. Other documents in this series — on m
 
 ---
 
+## College of Knowledge Connections
+
+- **Psychology** --- [Human Behavior and Social Systems]: Policing is applied behavioral science --- de-escalation, interview technique, community relations, implicit bias, and use-of-force decision-making all involve understanding human behavior under stress, conflict, and uncertainty.
+- **Critical-Thinking** --- [Ethics and Authority]: Law enforcement operates at the intersection of state authority and individual rights. The ethical frameworks governing use of force, search and seizure, due process, and discretionary enforcement are applied ethics in their most consequential form.
+- **Learning** --- [Reform and Institutional Change]: The ongoing evolution of policing --- from community policing to problem-oriented policing to current reform movements --- demonstrates how institutions resist and eventually incorporate evidence-based change.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

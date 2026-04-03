@@ -193,6 +193,20 @@ The timber frame revival in the PNW draws on Douglas fir's exceptional suitabili
 
 ---
 
+## College of Knowledge Connections
+
+- **Trades** — [woodworking]: Joinery is the core skill of woodworking. Every project — furniture, cabinets, structures, boxes — is held together by joints. Understanding which joint serves which purpose (mortise-and-tenon for frame construction, dovetails for boxes and drawers, finger joints for small boxes, dados for shelving) is the woodworking curriculum's central organizing principle.
+- **Materials** — [material-properties]: Every joinery decision is a material decision. Wood moves. It shrinks across the grain, barely at all along the grain. Joints must accommodate this movement or fail. The physics of wood movement — different coefficients of expansion in radial, tangential, and longitudinal directions — determines which joints work and which crack.
+- **Art** — [craft as expression]: Exposed joinery is a design choice. Visible dovetails, through-tenons with contrasting wedges, butterfly keys spanning cracks — these are functional elements that become decorative features. Joinery is where engineering meets aesthetics.
+- **History** — [continuity-change]: The mortise-and-tenon joint is at least four thousand years old. The dovetail is nearly as ancient. These joints have not been improved because they cannot be improved — the geometry is optimal. Alongside this continuity, modern adhesives and fasteners have expanded the joinery vocabulary. The tradition endures alongside innovation.
+
+## Try This
+
+- **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail is the signature joint of hand tool woodworking. One afternoon, one joint, every fundamental skill. Start here.
+- **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): You cannot cut a clean joint with a dull chisel. Sharpen first, then cut.
+
+---
+
 ## Sources and References
 
 - Hayward, Charles H. "Woodwork Joints." 1950. (Comprehensive joint catalog)

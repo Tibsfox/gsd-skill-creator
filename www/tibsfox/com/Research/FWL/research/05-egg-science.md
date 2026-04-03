@@ -327,3 +327,11 @@ Every egg from a heritage breed carries genetic information shaped by centuries 
 - The Livestock Conservancy. *Breed Comparison Chart.* livestockconservancy.org.
 - Marans of America Club. *Egg Color Scale and Breed Standard.* maransofamericaclub.com.
 - USDA Agricultural Research Service. *FoodData Central.* fdc.nal.usda.gov. -- Nutrient composition database for standard reference eggs.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Chemistry, Experimental Design]: Eggshell pigment chemistry (protoporphyrin IX, biliverdin, oocyanin), the biomineralization of calcium carbonate crystal structure, and the biochemistry of egg formation connect to chemistry and materials science. The comparison of pastured vs. conventional egg nutrition is a natural experimental design exercise.
+- **Nature Studies** --- [Animals & Birds]: Egg biology is inseparable from avian reproductive biology --- understanding shell formation, incubation requirements, and the relationship between hen diet and egg quality connects to the broader study of bird physiology and ecology.
+- **Home Economics** --- [Food Quality, Kitchen Skills]: Egg freshness assessment, nutritional content, storage, and the practical differences between heritage and commercial eggs are directly applicable to food sourcing, cooking, and nutritional literacy in the Kitchen Skills & Cooking wing.

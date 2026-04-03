@@ -252,5 +252,12 @@ The generalist supreme does not specialize in any single food source. It special
 
 ---
 
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Ecology & Habitats]: Raccoon diet composition across seasons reveals food web connections --- crayfish, salmon carcasses, insects, berries, and anthropogenic food sources form a web of ecological relationships that illuminate how omnivores function in PNW ecosystems.
+- **Science** --- [Data Collection & Analysis]: Scat analysis, stable isotope studies, and seasonal diet surveys demonstrate how scientists use indirect evidence and quantitative methods to reconstruct animal behavior and ecological roles.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

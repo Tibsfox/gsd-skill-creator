@@ -172,4 +172,12 @@ Every call they answered was a point on this arc. And every call they answered c
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [History of Medicine]: The evolution of emergency services parallels the evolution of medical science --- from Roman vinegar-soaked blankets to modern cardiac monitors. Each era's response capabilities were bounded by the scientific understanding of the time.
+- **Learning** --- [Institutional Knowledge]: The transmission of emergency services knowledge across generations --- from the vigiles to volunteer companies to professional departments --- is a case study in how institutions learn, forget, and relearn. Institutional memory, codified in training standards and operational doctrine, is the mechanism by which hard-won lessons survive personnel turnover.
+- **Psychology** --- [Organizational Behavior]: The recurring tension between volunteer and professional models, between private and public funding, between centralized and decentralized command, reflects fundamental questions about how humans organize collective action under life-threatening conditions.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

@@ -266,3 +266,11 @@ The Asiatic Class holds more concentrated history per breed than any other class
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Baxter (1928), "Asiatics: Brahmas, Cochins, and Langshans"; Burnham (1855), "The History of the Hen Fever"; The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds."*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds, Ecology & Habitats]: The Asiatic breeds trace to specific ecosystems --- the Brahmaputra River valley, the forests of Southeast Asia, the highlands of China --- connecting breed characteristics to geographic origin and environmental adaptation.
+- **Science** --- [History & Nature of Science]: The "Hen Fever" of the 1850s is a case study in how new biological specimens can trigger cultural and economic phenomena, paralleling the tulip mania and other speculative bubbles driven by natural history.
+- **Home Economics** --- [Animal Husbandry]: The Asiatic breeds' broodiness, cold hardiness, and calm temperament make them central to practical small-flock management, particularly in climates like the PNW.

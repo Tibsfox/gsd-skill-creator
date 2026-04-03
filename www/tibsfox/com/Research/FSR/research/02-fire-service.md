@@ -128,4 +128,12 @@ For someone who served thirty years in the fire service, these are not abstracti
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Chemistry and Combustion]: Fire behavior is applied chemistry --- the fire tetrahedron (heat, fuel, oxygen, chain reaction), flashover dynamics, backdraft conditions, and suppression agent chemistry (water, foam, dry chemical, CO2) are all grounded in thermodynamics and chemical kinetics.
+- **Physical Education** --- [Physical Fitness Standards]: Firefighting is among the most physically demanding professions. The CPAT (Candidate Physical Ability Test), SCBA operations under load, and sustained fireground exertion require cardiovascular endurance, strength, and heat tolerance that are maintained through structured fitness programs.
+- **Mind-Body** --- [Decision-Making Under Extreme Stress]: Fireground decisions --- read and react, risk assessment, go/no-go calls --- happen under conditions of extreme heat, limited visibility, time pressure, and life-safety stakes. The fire service's emphasis on training, repetition, and standard operating procedures is a systematic approach to ensuring sound decisions under stress.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

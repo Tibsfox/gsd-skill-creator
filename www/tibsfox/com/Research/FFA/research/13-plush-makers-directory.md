@@ -439,3 +439,11 @@ Over 2,000 distinct Squishmallow characters have been released as of 2026, each 
 - **[FFA-14]** — History of the stuffed animal industry (Plush History & Industry)
 - **[FFA-15]** — Collector culture, communities, and the emotional significance of plush (Plush Collecting Culture)
 - **[FFA-12]** — Fursuit History & Culture (furry-plush connection, convention dealer dens)
+
+---
+
+## College of Knowledge Connections
+
+- **Art** --- [Design and Manufacturing]: The spectrum from Steiff's hand-stitched mohair to Squishmallows' machine-produced simplicity represents different design philosophies --- each optimizing for different values (craftsmanship, realism, accessibility, emotional impact). Understanding these philosophies is applied design theory.
+- **Home Economics** --- [Consumer Literacy]: Evaluating plush makers requires understanding construction quality, material identification, safety standards (CPSIA, ASTM F963), and price-to-value relationships. These are consumer literacy skills grounded in textile and product knowledge.
+- **Trades** --- [Manufacturing Processes]: The directory spans hand-crafting (Steiff, Hansa), small-batch artisan production (Charlie Bears), and industrial mass manufacturing (Aurora, Squishmallows). Understanding how production scale affects quality, cost, and design decisions connects to manufacturing process knowledge.

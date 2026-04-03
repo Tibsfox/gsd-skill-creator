@@ -250,6 +250,19 @@ What makes a PNW painting a PNW painting? Not subject matter alone -- plenty of 
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [art-in-context]: The PNW painting scene is art-in-context at the regional level. The Northwest School's muted palette reflects PNW weather and light. Coast Salish formline design reflects Indigenous cosmology. Glass art in Tacoma reflects industrial heritage and one artist's revolutionary vision. Place shapes art.
+- **History** — [continuity-change]: The PNW painting tradition shows continuity (the influence of landscape and light across generations) and change (from the Northwest Mystics' introspection to contemporary Indigenous reclamation to furry fandom creative communities). Understanding both the persistent and the transformative in regional art history is a historical thinking skill.
+- **Nature-Studies** — [ecology-habitats]: PNW painters paint PNW ecosystems — temperate rainforest, Puget Sound, the Cascades, old-growth forest. The subjects of PNW landscape painting are the same ecosystems studied in the nature-studies department. Painting the landscape deepens ecological observation, and ecological knowledge deepens landscape painting.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Use a PNW apple — Gravenstein, Honeycrisp, or any variety from a local orchard. The colors of PNW-grown apples are different from the idealized red apple of imagination: more yellow, more green, more complex.
+- **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): Days 25-30 push you outdoors. In the PNW, the overcast sky creates soft, diffused light with compressed value ranges — a specific challenge that PNW painters must learn to see and render.
+
+---
+
 ## 11. Sources
 
 - Kingsbury, M. (1972). *Art of the Northwest*. Seattle Art Museum.

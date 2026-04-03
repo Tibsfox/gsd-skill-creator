@@ -123,3 +123,11 @@ The next time you see a Sebright Bantam with its perfect lacing, or a Brahma the
 ---
 
 *Sources and further reading: Eriksson et al. (2008), "Identification of the Yellow Skin Gene Reveals a Hybrid Origin of the Domestic Chicken," PLoS Genetics; Lawal et al. (2020), "The Wild Species Genome Ancestry of Domestic Chickens," BMC Biology; Peters et al. (2022), "The Biocultural Origins and Dispersal of Domestic Chickens," PNAS; Lawler (2014), "Why Did the Chicken Cross the World?"; Smith & Daniel (1975), "The Chicken Book"; West & Zhou (1988), "Did Chickens Go North? New Evidence for Domestication," Journal of Archaeological Science; Burnham (1855), "The History of the Hen Fever."*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Ecology & Habitats]: The domestication story is fundamentally an ecological story --- how a forest-edge bird's niche overlapped with early human agricultural settlements, creating the conditions for co-evolution. Connects to habitat types, species interaction, and the Ecology & Habitats wing.
+- **Science** --- [History & Nature of Science]: The evolving scientific understanding of chicken domestication --- from Darwin's single-origin hypothesis through modern genomic multi-origin models --- demonstrates how scientific knowledge changes through new evidence and technology. A case study in paradigm shifts.
+- **Home Economics** --- [Kitchen Skills & Cooking]: Understanding that domestic chickens descend from junglefowl and that 8,000 years of selective breeding produced the modern egg and meat bird connects directly to food literacy and the agricultural heritage of what we eat.

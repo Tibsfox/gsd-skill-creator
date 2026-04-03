@@ -198,6 +198,22 @@ The PNW weather also shapes hand tool practice. The damp climate means tools rus
 - **[WDC-05]** Joinery — hand tool joinery techniques (dovetails, mortise and tenon) in full detail
 - **[WDC-06]** Finishing — the hand-planed surface as an alternative to sanding, and the finish quality it enables
 - **[WDC-10]** Bibliography — Paul Sellers, Chris Schwarz, and the online hand tool community
+- **[projects/spoon-carving]** Spoon Carving — the gateway project for hand tool woodworking: $100 in tools (hatchet, sloyd knife, hook knife), green wood technique, and the Scandinavian slojd tradition
+- **[projects/live-edge-shelf]** Live Edge Shelf — hand planes and drawknife for slab preparation
+
+---
+
+## College of Knowledge Connections
+
+- **Trades** — [tools-safety]: Hand tool safety is fundamentally about sharpness and control. A sharp tool requires less force, gives more control, and produces cleaner results. Every tool in this chapter — chisel, plane, saw, spokeshave — is safer when sharp and properly maintained. The tools-safety concept begins with the tool in your hand.
+- **Trades** — [woodworking]: Hand tools are where woodworking lives closest to the material. The feedback loop between hand, tool, and wood is unmediated — you feel the grain, hear the cut, see the shaving. This direct connection is what makes hand tool woodworking the foundation of the woodworking curriculum.
+- **Materials** — [fabrication-processes]: Hand tool work is a fabrication process — subtractive manufacturing at the bench scale. Planing, chiseling, and sawing remove material to achieve a desired geometry. The principles of cutting mechanics, surface finish, and dimensional control apply at the hand tool scale just as they do in industrial machining.
+- **Materials** — [material-properties]: The steel in hand tools — carbon steel, alloy steel, high-speed steel, laminated steel — has measurable properties (hardness, toughness, edge retention) that determine tool performance. Understanding tool steel is materials science applied to the workshop.
+
+## Try This
+
+- **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): The foundational hand tool skill. Every tool in this chapter depends on a sharp edge. Start here before anything else.
+- **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail is where hand tools converge — saw, chisel, marking gauge, marking knife. One joint that requires every fundamental skill.
 
 ---
 

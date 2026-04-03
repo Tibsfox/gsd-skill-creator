@@ -176,6 +176,18 @@ The shop is your space. You get to decide how it is organized, what tools it con
 
 ---
 
+## College of Knowledge Connections
+
+- **Trades** — [tools-safety]: Power tool safety is non-negotiable. The table saw alone causes approximately 67,000 injuries and 4,000 amputations per year in the United States. Understanding blade guards, riving knives, push sticks, kickback mechanics, and dust collection is the trades department's most critical safety curriculum. SawStop flesh-detection technology demonstrates how engineering can address safety failures.
+- **Trades** — [woodworking]: Power tools extend the woodworker's capacity — they do not replace the woodworker's judgment. Understanding what a machine does to the wood (how a planer reads grain, how a table saw blade creates kerf, how a router bit climbs or cuts cleanly) requires the same material understanding as hand tool work.
+- **Materials** — [fabrication-processes]: Power tools are industrial fabrication machines at the shop scale. Sawing, planing, routing, drilling, and sanding are all material removal processes with measurable parameters — feed rate, cutting speed, depth of cut, surface finish. Understanding these parameters improves results and safety.
+
+## Try This
+
+- **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): Even in a power tool shop, you reach for hand tools at critical moments. The chisel is the most-used hand tool in a power tool shop — for cleaning up machine cuts, paring joints, and fitting. Keep it sharp.
+
+---
+
 ## Sources and References
 
 - Nagyszalanczy, Sandor. "Workshop Dust Control." Taunton Press, 2002.
