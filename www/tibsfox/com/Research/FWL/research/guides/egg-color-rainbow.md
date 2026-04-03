@@ -79,7 +79,9 @@ A Welsummer egg is the egg that appears on the Kellogg's Corn Flakes box (the ro
 
 The Ameraucana lays a true blue egg --- blue throughout the shell, inside and out, produced by biliverdin deposited during shell formation. The shade varies from pale sky blue to a deeper robin's-egg blue, depending on the individual hen and her genetic background. The blue is clean, with no brown overlay (which would produce green).
 
-The Ameraucana is a standardized breed with recognized color varieties (Black, Blue, Blue Wheaten, Brown Red, Buff, Silver, Wheaten, White), a pea comb (excellent frostbite resistance), muffs and beard (giving the face a puffy, owl-like appearance), and a full tail. It is a distinct breed from the Easter Egger, which is a mixed-heritage bird that may or may not lay blue eggs. If you want a guaranteed blue egg for your rainbow basket, buy from an Ameraucana breeder, not a feed store selling "Ameraucanas" that are actually Easter Eggers.
+The Ameraucana is a standardized breed with recognized color varieties (Black, Blue, Blue Wheaten, Brown Red, Buff, Silver, Wheaten, White), a pea comb (excellent frostbite resistance), muffs and beard (giving the face a puffy, owl-like appearance), and a full tail. It is a distinct breed from the Easter Egger, which is a mixed-heritage bird that may or may not lay blue eggs [breeds/ameraucana-easter-egger]. If you want a guaranteed blue egg for your rainbow basket, buy from an Ameraucana breeder, not a feed store selling "Ameraucanas" that are actually Easter Eggers.
+
+An excellent alternative for the blue-egg slot is the **Cream Legbar** --- the auto-sexing breed developed by Reginald Punnett at Cambridge. Cream Legbars produce 180-220 blue eggs per year, breed true for both egg color and auto-sexing, and are active, hardy foragers well-suited to the PNW [breeds/cream-legbar].
 
 Ameraucana hens lay 180-250 medium blue eggs per year. They are cold-hardy, active, and good foragers --- well-suited to PNW conditions.
 

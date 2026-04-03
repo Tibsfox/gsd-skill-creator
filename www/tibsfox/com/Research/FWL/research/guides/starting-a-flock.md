@@ -32,7 +32,9 @@ The Pacific Northwest is not hard on chickens the way Montana or Minnesota is ha
 
 **Silver Laced Wyandotte.** A round, curvy, strikingly patterned bird with a rose comb (frostbite-resistant --- particularly valuable east of the Cascades). Lays 200--260 brown eggs per year. Hardy, docile, and one of the most beautiful breeds in the standard.
 
-**Easter Egger** (for color). If you want blue, green, or olive eggs in your carton --- and who does not --- add one or two Easter Eggers. They are hardy, generally friendly, and each bird's egg color is a surprise until her first lay. Not a standardized breed, but a practical and delightful addition to a diverse flock.
+**Easter Egger** (for color). If you want blue, green, or olive eggs in your carton --- and who does not --- add one or two Easter Eggers. They are hardy, generally friendly, and each bird's egg color is a surprise until her first lay. Not a standardized breed, but a practical and delightful addition to a diverse flock. For a true-breeding blue-egg alternative, consider the **Cream Legbar** --- the auto-sexing blue-egg breed developed by Punnett himself at Cambridge [breeds/cream-legbar].
+
+**Light Brahma** (for winter eggs and sheer presence). If you have space for a larger bird and want eggs through the PNW's dark winter months, the Brahma is unmatched: pea comb (frostbite-proof), feathered feet, 12-pound gentle giant temperament, and a laying cycle that peaks in the cooler months when other breeds slow down [breeds/brahma].
 
 ### A Suggested First-Flock Mix
 

@@ -212,6 +212,8 @@ The auto-sexing trait deserves emphasis because it solved a genuine practical pr
 
 Other auto-sexing breeds have been created using the same principle (crossing a barred breed with a non-barred breed to create sex-linked barring), including the Bielefelder (a German auto-sexing breed from Marans and other ancestry), the Rhodebar, and the Legbar's siblings the Gold Legbar and Silver Legbar.
 
+*For a full breed profile including the Punnett-Pease breeding program at Cambridge, detailed auto-sexing genetics, PNW suitability, and sourcing guidance, see [breeds/cream-legbar].*
+
 ---
 
 ## Lakenvelder

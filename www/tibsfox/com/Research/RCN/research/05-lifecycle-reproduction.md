@@ -253,6 +253,8 @@ For Chairo Charf Charf, and for every kit that has ever followed a mother throug
 - Ritke, M.E. (1990). "Sexual dimorphism in the raccoon." *American Midland Naturalist*, 124(2): 342-351.
 - PAWS Wildlife Center. Raccoon kit rehabilitation protocols. paws.org.
 
+*For practical guidance on what to do when you find an orphaned or injured raccoon kit, including the 24-hour rule, temporary stabilization, PNW wildlife rehabilitator contacts, and why raising a kit yourself is both illegal and harmful, see [deep-dives/baby-raccoons]. For raccoon-associated disease risks including Baylisascaris, distemper, and rabies, see [deep-dives/raccoons-and-disease].*
+
 ---
 
 *PNW Research Series --- RCN Project*

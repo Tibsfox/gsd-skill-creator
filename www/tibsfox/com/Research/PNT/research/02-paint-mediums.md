@@ -116,11 +116,11 @@ Watercolor comes in **tubes** (moist paste, squeeze onto palette, reconstitute w
 
 Gouache (pronounced "gwash") is essentially opaque watercolor. Same gum arabic binder, but with higher pigment concentration and often the addition of a white extender (chalk/calcium carbonate) that makes it opaque. Where watercolor glows through transparency, gouache sits on the surface as a matte, velvety, opaque layer.
 
-Gouache is the medium of choice for illustration, design, and any application where flat, even color and precise edges matter. It rewets and reworks — you can reactivate dry gouache with water and blend or correct it. This is both a strength (forgiving) and a weakness (accidental reactivation of lower layers when applying new ones).
+Gouache is the medium of choice for illustration, design, and any application where flat, even color and precise edges matter. It rewets and reworks — you can reactivate dry gouache with water and blend or correct it. This is both a strength (forgiving) and a weakness (accidental reactivation of lower layers when applying new ones). See [techniques/gouache-basics] for a full guide to gouache painting, including techniques for managing reactivation in complex layered work.
 
-**Designers gouache** (Winsor & Newton) is formulated for maximum opacity and flatness. **Fine art gouache** (Schmincke Horadam Gouache) emphasizes pigment quality and lightfastness. **Himi Miya jelly gouache** (sold in distinctive stacking cups) has become enormously popular as an affordable, convenient option for beginners and for plein air painting.
+**Designers gouache** (Winsor & Newton, $5-9 per 14ml tube, Primary Set of 6 at $25-30) is formulated for maximum opacity and flatness. **Fine art gouache** (Schmincke Horadam Gouache, $7-12 per 15ml tube) emphasizes pigment quality and lightfastness. **Himi Miya jelly gouache** ($12-18 for 24 colors in stacking cups) has become enormously popular as an affordable, convenient option for beginners and for plein air painting — the TikTok-driven renaissance that has introduced hundreds of thousands of new painters to gouache.
 
-**Holbein Acryla Gouache** and **Turner Acryl Gouache** are acrylic-based gouaches: they have the matte, opaque appearance of traditional gouache but dry water-resistant, allowing confident layering without reactivating lower layers. Many illustrators and animation background painters swear by these.
+**Holbein Acryla Gouache** ($5-8 per 20ml tube, 100+ colors) and **Turner Acryl Gouache** ($4-7 per 20ml tube, 200+ colors) are acrylic-based gouaches: they have the matte, opaque appearance of traditional gouache but dry water-resistant, allowing confident layering without reactivating lower layers. Many illustrators and animation background painters swear by these.
 
 ---
 
@@ -191,12 +191,12 @@ Airbrush equipment:
 
 ### Pixels as Pigment
 
-Digital painting uses software to simulate traditional painting on a screen, typically using a pressure-sensitive stylus and tablet. The major tools:
+Digital painting uses software to simulate traditional painting on a screen, typically using a pressure-sensitive stylus and tablet. See [techniques/digital-painting-basics] for a complete guide to hardware, software, and the transition from traditional to digital painting. The major tools:
 
-- **Procreate** (iPad): Intuitive, powerful, enormous brush library, the most popular digital painting app. $12.99 one-time purchase.
-- **Adobe Photoshop** (desktop): The original digital painting tool, industry standard for over 30 years. Subscription pricing.
-- **Clip Studio Paint** (desktop and mobile): Favored by comic and manga artists, excellent brush engine, one-time or subscription pricing.
-- **Krita** (desktop): Free, open-source, specifically designed for digital painting. Excellent brush engine, active development community.
+- **Procreate** (iPad): Intuitive, powerful, enormous brush library, the most popular digital painting app. $12.99 one-time purchase. The furry art community standard — estimated 80%+ of digital furry commissions are created in Procreate.
+- **Adobe Photoshop** (desktop): The original digital painting tool, industry standard for over 30 years. $22.99/month (Photography plan). Kyle T. Webster's brush packs (included free) are the gold standard.
+- **Clip Studio Paint** (desktop and mobile): Favored by comic and manga artists, excellent brush engine. $49.99 one-time (Pro) or $219.99 (EX).
+- **Krita** (desktop): Free, open-source, specifically designed for digital painting. Excellent brush engine, active development community. The best option for budget-conscious painters on desktop.
 
 Digital brushes simulate traditional media by responding to stylus pressure, tilt, and speed. A watercolor brush in Procreate simulates wet-edge behavior, pigment spread, and paper texture. An oil brush simulates paint mixing and bristle texture. The simulations have become remarkably sophisticated, but they remain simulations — they model the visual appearance of traditional media, not the physics.
 
