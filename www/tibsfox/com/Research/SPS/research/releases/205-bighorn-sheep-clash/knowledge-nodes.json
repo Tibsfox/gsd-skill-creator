@@ -1,0 +1,111 @@
+{
+  "degree": 205,
+  "species": "Bighorn Sheep",
+  "scientific_name": "Ovis canadensis",
+  "slug": "205-bighorn-sheep-clash",
+  "sound_type": "ram clash -- resonant cranial impact CRACK. Broadband 100-5,000+ Hz, peak 500-2,000 Hz. Up to 800 lbs force. Audible 1-2+ miles. E=6",
+  "energy": 6,
+  "ecosystem": "Rocky slopes, alpine meadows, canyon walls. Fall rut (October-December). Rocky Mountain and Cascade populations.",
+  "season": "Fall rut (October-December). Peak combat November.",
+  "family": "Bovidae (third entry -- Mountain Goat at 203, kid at 204)",
+  "order": "Artiodactyla",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Bighorn Sheep",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.75,
+    "lon": -120.70,
+    "description": "Bighorn Sheep in Cascades and eastern Washington rocky slopes. Ram combat during fall rut."
+  },
+  "taxonomy_note": {
+    "description": "Third Bovidae entry. First impact-generated sound. Ram clash at E=6.",
+    "current_family": "Bovidae (third entry)",
+    "new_family": false,
+    "family_count_in_engine": "Bovidae: Mountain Goat Bleat (203, E=4), Mountain Goat Kid Mew (204, E=3), Bighorn Sheep Clash (205, E=6).",
+    "name_etymology": "Ovis from Latin 'sheep'. canadensis for Canada/North America.",
+    "genus_note": "Ovis -- sheep genus. Bighorn Sheep is the iconic North American wild sheep.",
+    "order_note": "Artiodactyla. Third Bovidae entry. Bovidae energy arc: 4-3-6.",
+    "family_position": "Bovidae: third entry. Impact sound. Maximum family energy.",
+    "class_note": "Class Mammalia. Rocky slope specialist. Skull adapted for repeated high-force impact."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Broadband 100-5,000+ Hz. Not a vocalization but an impact-generated sound.",
+    "peak_energy_band_hz": "500-2,000 Hz (peak of clash resonance).",
+    "song_frequency_hz": "Clash: broadband. Grunt: 50-200 Hz. Snort: brief, nasal.",
+    "song_duration_s": "Impact: <0.1 sec. Echo/decay: 1-3 sec in canyon. Contest: minutes to hours.",
+    "note_structure": "Single sharp crack per impact. Repeated as charge-clash-separate-pause cycle.",
+    "note_types": "Clash CRACK (impact), grunt (low contact), snort (rut-associated).",
+    "phrase_structure": "Charge, CRACK, separate, pause. Repeated dozens of times per contest.",
+    "timbre": "Sharp, resonant crack. Keratin horn sheaths vibrate on impact. Not a thud -- a CRACK.",
+    "amplitude": "E=6. Maximum Bovidae. Impact-generated. 1-2+ mile carry. Canyon-amplified.",
+    "tempo": "Charge cycle: variable. Minutes between clashes. Hours per contest.",
+    "context": "Fall rut. Ram-on-ram combat. Mating dominance. Rocky slopes and canyons.",
+    "regional_variation": "Subspecies vary in size (Rocky Mountain > Desert). Clash force proportional to body mass.",
+    "key_property": "RAM CLASH. Resonant CRACK. 800 lbs. E=6. FIRST IMPACT SOUND. Third Bovidae. Bovidae arc 4-3-6. Canyon-amplified. v1.49.346."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Brown to gray-brown coat. White rump patch. Massive curled horns (rams). 125-300 lbs (rams).",
+    "diagnostic_mark": "Large curled horns on rams. White rump patch. Muscular build. Rocky terrain.",
+    "seasonal_variation": "Thicker winter coat. Summer: shorter, lighter brown.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Rams: 125-300 lbs. Massive curved horns up to 30+ lbs combined. Double-layered skull. Ewes: smaller, shorter horns.",
+    "diagnostic_mark": "Large brown sheep with massive curled horns on rocky terrain. White rump patch. Muscular. If you hear a crack in the canyon during fall, look for rams.",
+    "field_id": "Large sheep on rocky slopes. Rams have distinctive curled horns visible at distance. Fall rut: look for two rams charging. The crack carries far."
+  },
+  "nodes": [
+    {
+      "id": "first-impact-sound",
+      "type": "milestone",
+      "title": "First Impact-Generated Sound",
+      "description": "Not a vocalization but a collision. 800 lbs of force converted to resonant CRACK. Opens new acoustic category for the engine.",
+      "connections": ["skull-engineering", "horn-curl", "bovidae-arc"]
+    },
+    {
+      "id": "skull-engineering",
+      "type": "concept",
+      "title": "Skull Engineering -- Biological Crumple Zone",
+      "description": "Double-layered skull. Cancellous bone struts. Frontal sinuses as pneumatic cushions. Cervical reinforcement. Impact-absorption chain.",
+      "connections": ["first-impact-sound", "horn-curl"]
+    },
+    {
+      "id": "horn-curl",
+      "type": "concept",
+      "title": "Horn Curl Measurement",
+      "description": "3/4 curl to full curl (360 degrees). 30+ lbs combined. 7-8 years to full curl. The curl directs force into bone-keratin base.",
+      "connections": ["first-impact-sound", "skull-engineering"]
+    },
+    {
+      "id": "bovidae-arc",
+      "type": "concept",
+      "title": "Bovidae Energy Arc -- 4-3-6",
+      "description": "Mountain Goat bleat (E=4), kid mew (E=3), Bighorn Sheep clash (E=6). Quiet contact, quieter infant, MAXIMUM impact. Dramatic contrast.",
+      "connections": ["first-impact-sound"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-203",
+      "species": "Mountain Goat Adult Bleat",
+      "relationship": "BOVIDAE 1/3. Adult bleat (E=4). Contact call. The family baseline before impact."
+    },
+    {
+      "target": "SPS-204",
+      "species": "Mountain Goat Kid Mew",
+      "relationship": "BOVIDAE 2/3. Kid mew (E=3). Thin infant voice. Bovidae arc: 4-3-6."
+    },
+    {
+      "target": "SPS-200",
+      "species": "Black Bear Huff",
+      "relationship": "Warning vs. combat. Bear huffs to avoid. Ram clashes to win. Different strategies in the E=5-6 range."
+    },
+    {
+      "target": "S36-205",
+      "artist": "Naked Giants",
+      "relationship": "ENERGY MATCH (E=6 + E=6 = 12). Impact force: 800 lbs cranial (ram) vs. power trio volume (band). Both maximum."
+    }
+  ]
+}
