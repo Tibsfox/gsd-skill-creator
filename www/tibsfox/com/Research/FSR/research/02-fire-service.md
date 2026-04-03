@@ -110,6 +110,9 @@ For someone who served thirty years in the fire service, these are not abstracti
 - **[FSR-10]** PNW Departments — the Pacific Northwest fire service in specific detail
 - **[WDC-08]** Construction Framing — building construction types directly determine fire behavior and firefighter safety; every building construction section in WDC has fireground implications
 - **[ECO-07]** Fire Ecology — wildland fire behavior, fuel accumulation from suppression policy, and the ecological role of fire
+- **[FSR Case Studies: Station Life](case-studies/station-life.md)** — the 24/48 shift hour by hour: rig check, training, meals, calls, sleep, culture
+- **[FSR Guides: Becoming a Firefighter](guides/becoming-a-firefighter.md)** — the step-by-step career path into the fire service described here
+- **[FSR Guides: Becoming a Paramedic](guides/becoming-a-paramedic.md)** — the medical credential that completes the dual-role firefighter/paramedic
 
 ---
 
