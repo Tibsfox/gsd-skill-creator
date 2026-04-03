@@ -103,12 +103,41 @@ WX_DAY3 = {
     23: (6.5,  3.0,  "Calm",       75, 1001.5, "CLR",           "00000KT", "CLR",      20.5),
 }
 
+# Day 4: April 3, 2026 (Flight Day 3) — TRANSLUNAR COAST
+# High pressure ridge building, clear skies, light northerly flow, typical PNW spring
+WX_DAY4 = {
+    0:  (6.0,  2.8,  "Calm",       76, 1002.0, "CLR",            "00000KT", "CLR",      20.0),
+    1:  (5.5,  2.5,  "Calm",       78, 1002.2, "CLR",            "00000KT", "CLR",      19.5),
+    2:  (5.0,  2.2,  "Calm",       80, 1002.5, "CLR",            "00000KT", "CLR",      19.0),
+    3:  (4.5,  2.0,  "Calm",       82, 1002.8, "FEW200",         "00000KT", "FEW200",   18.5),
+    4:  (4.2,  1.8,  "Calm",       83, 1003.0, "FEW200",         "00000KT", "FEW200",   18.5),
+    5:  (4.5,  1.8,  "Calm",       82, 1003.2, "FEW180",         "00000KT", "FEW180",   19.0),
+    6:  (5.0,  2.0,  "Calm",       80, 1003.5, "FEW150",         "00000KT", "FEW150",   20.0),
+    7:  (7.5,  2.5,  "Calm",       65, 1003.8, "FEW120",         "00000KT", "FEW120",   22.0),
+    8:  (9.5,  2.0,  "Calm",       52, 1004.0, "SCT100",         "00000KT", "SCT100",   24.0),
+    9:  (11.0, 1.5,  "N 5 km/h",   45, 1004.2, "SCT080",         "36003KT", "SCT080",   25.5),
+    10: (12.5, 1.5,  "N 6 km/h",   40, 1004.5, "FEW060",         "36003KT", "FEW060",   27.0),
+    11: (13.5, 1.0,  "N 8 km/h",   36, 1004.5, "FEW070",         "36004KT", "FEW070",   28.0),
+    12: (14.0, 0.5,  "NW 6 km/h",  33, 1004.5, "FEW080",         "32003KT", "FEW080",   28.5),
+    13: (14.5, 0.5,  "NW 8 km/h",  32, 1004.5, "FEW090",         "32004KT", "FEW090",   29.0),
+    14: (14.2, 1.0,  "NW 8 km/h",  33, 1004.5, "SCT070",         "32004KT", "SCT070",   29.0),
+    15: (13.8, 1.5,  "NW 6 km/h",  35, 1004.5, "SCT060",         "32003KT", "SCT060",   28.5),
+    16: (13.0, 1.5,  "NW 5 km/h",  38, 1004.5, "SCT070",         "32003KT", "SCT070",   27.5),
+    17: (12.0, 2.0,  "Calm",       42, 1004.5, "FEW080",         "00000KT", "FEW080",   26.5),
+    18: (10.5, 2.5,  "Calm",       50, 1004.5, "FEW100",         "00000KT", "FEW100",   25.0),
+    19: (9.5,  2.5,  "Calm",       55, 1004.5, "CLR",            "00000KT", "CLR",      24.0),
+    20: (8.5,  2.5,  "Calm",       60, 1004.5, "CLR",            "00000KT", "CLR",      23.0),
+    21: (7.5,  2.5,  "Calm",       65, 1004.5, "CLR",            "00000KT", "CLR",      22.0),
+    22: (7.0,  2.5,  "Calm",       68, 1004.5, "CLR",            "00000KT", "CLR",      21.5),
+    23: (6.5,  2.5,  "Calm",       72, 1004.5, "CLR",            "00000KT", "CLR",      21.0),
+}
+
 # Day selector
-WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3}
-WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2)}
-WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9}  # hours from midnight to launch (negative = post-launch)
-WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2"}
-WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380)}  # post-CME recovery
+WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3, 4: WX_DAY4}
+WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2), 4: (2026, 4, 3)}
+WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9, 4: -33}  # hours from midnight to launch (negative = post-launch)
+WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2", 4: "v1.3"}
+WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380), 4: (1.33, 1.7, 370)}  # quiet geomagnetic
 
 # Default for backward compat
 WX = WX_DAY1
@@ -199,7 +228,7 @@ def run_sweep(hour, args):
 
     # ── 1. OPEN/problems/*.html — timestamp + sweep version ──
     batch_patterns = [
-        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.[01]\.\d+\)',
+        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.\d\.\d+\)',
          f'Last updated: {ts_utc} (sweep {version})',
          "timestamp + sweep version"),
     ]
@@ -211,7 +240,7 @@ def run_sweep(hour, args):
 
     # ── 2. MUK/sims/*.html — timestamp + version ──
     sim_patterns = [
-        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(v1\.[01]\.\d+\)',
+        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(v1\.\d\.\d+\)',
          f'Last updated: {ts_utc} ({version})',
          "timestamp + version"),
     ]
@@ -223,7 +252,7 @@ def run_sweep(hour, args):
 
     # ── 3. Research/index.html — sweep version in data bar ──
     changes = replace_in_file(files["research_index"], [
-        (r'(<div class="db-label">Sweep</div><div class="db-value">)v1\.[01]\.\d+(</div>)',
+        (r'(<div class="db-label">Sweep</div><div class="db-value">)v1\.\d\.\d+(</div>)',
          rf'\g<1>{version}\2',
          "data-bar sweep version"),
         (r'(\d+) sweeps',
@@ -237,11 +266,11 @@ def run_sweep(hour, args):
     # ── 4. LIVE/index.html — sweep version, space weather, papers, problems ──
     live_patterns = [
         # Sweep version in JS
-        (r"'Z \(sweep v1\.[01]\.\d+\)'",
+        (r"'Z \(sweep v1\.\d\.\d+\)'",
          f"'Z (sweep {version})'",
          "JS sweep version"),
         # Papers meta
-        (r'(\d+) papers cataloged(.*?)Updated v1\.[01]\.\d+',
+        (r'(\d+) papers cataloged(.*?)Updated v1\.\d\.\d+',
          lambda m: f'{args.papers or int(m.group(1))} papers cataloged{m.group(2)}Updated {version}',
          "papers count + version"),
         # Problems meta — don't update counts unless specified
@@ -264,13 +293,13 @@ def run_sweep(hour, args):
 
     # ── 5. OPEN/index.html — version refs + footer ──
     open_patterns = [
-        (r'ACTIVE &mdash; updated v1\.[01]\.\d+',
+        (r'ACTIVE &mdash; updated v1\.\d\.\d+',
          f'ACTIVE &mdash; updated {version}',
          "active status"),
-        (r'Updated v1\.[01]\.\d+(.*?)Next scan at v1\.[01]\.\d+',
+        (r'Updated v1\.\d\.\d+(.*?)Next scan at v1\.\d\.\d+',
          f'Updated {version}\\1Next scan at v1.0.{hour + 1}',
          "version + next scan"),
-        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.[01]\.\d+\)(.*?)\d+ problems',
+        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.\d\.\d+\)(.*?)\d+ problems',
          lambda m: f'Last updated: {ts_utc} (sweep {version}){m.group(1)}{args.open_problems or 16} problems',
          "footer timestamp + count"),
     ]
@@ -297,7 +326,7 @@ def run_sweep(hour, args):
 
     # ── 7. MUK/pnw-weather.html — footer ──
     changes = replace_in_file(files["muk_weather"], [
-        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(v1\.[01]\.\d+\)',
+        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(v1\.\d\.\d+\)',
          f'Last updated: {ts_utc} ({version})',
          "footer timestamp"),
     ], dry_run)
@@ -307,7 +336,7 @@ def run_sweep(hour, args):
 
     # ── 8. NASA/artemis-ii/papers.html — version ref ──
     changes = replace_in_file(files["artemis_papers"], [
-        (r'Last update: v1\.[01]\.\d+\+? \(T-\d+h\)',
+        (r'Last update: v1\.\d\.\d+\+? \(T-\d+h\)',
          f'Last update: {version} (T-{countdown}h)',
          "version + countdown"),
     ], dry_run)
@@ -317,7 +346,7 @@ def run_sweep(hour, args):
 
     # ── 9. NASA/artemis-ii/science-curriculum.html — footer ──
     changes = replace_in_file(files["artemis_curriculum"], [
-        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.[01]\.\d+\)',
+        (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.\d\.\d+\)',
          f'Last updated: {ts_utc} (sweep {version})',
          "footer timestamp"),
     ], dry_run)
@@ -340,8 +369,8 @@ def run_sweep(hour, args):
 def main():
     parser = argparse.ArgumentParser(description="Artemis II hourly sweep updater")
     parser.add_argument("hour", type=int, help="Hour of day (0-23)")
-    parser.add_argument("--day", type=int, default=1, choices=[1, 2, 3],
-                        help="Mission day: 1=March 31, 2=April 1, 3=April 2 (default: 1)")
+    parser.add_argument("--day", type=int, default=1, choices=[1, 2, 3, 4],
+                        help="Mission day: 1=March 31, 2=April 1, 3=April 2, 4=April 3 (default: 1)")
     parser.add_argument("--dry-run", action="store_true", help="Show changes without writing")
     parser.add_argument("--kp", type=float, help="Current Kp index")
     parser.add_argument("--kp-forecast", type=float, help="Forecast Kp index")
