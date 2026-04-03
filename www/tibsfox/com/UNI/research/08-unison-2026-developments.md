@@ -108,11 +108,37 @@ With the MCP server in UCM, this becomes concrete:
 
 This is content-addressed, typed, distributable skill sharing. The Cedar root network for code.
 
+## MCP Server Setup (Ready to Execute)
+
+UCM includes a built-in MCP server. Available tools: `docs`, `get-current-project-context`, `lib-install`, `list-definition-dependencies`, `list-definition-dependents`, `list-library-definitions`, `list-local-projects`, `list-project-branches`, `list-project-definitions`, `list-project-libraries`, `search-by-type`, `search-definitions-by-name`, `share-project-readme`, `share-project-search`, `typecheck-code`, `view-definitions`.
+
+**Install UCM (Linux apt):**
+```bash
+curl https://debian.unison-lang.org/public.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/unison-computing.gpg
+echo 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/unison-computing.gpg] https://debian.unison-lang.org/ trixie main' | sudo tee /etc/apt/sources.list.d/unison-computing.list
+sudo apt update && sudo apt install unisonweb
+```
+
+**Claude Code MCP config** (add to settings.json):
+```json
+{
+  "mcpServers": {
+    "unison": {
+      "command": "/usr/bin/ucm",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+**Or HTTP connection:** `http://localhost:5858/codebase/mcp`
+
 ## Next Steps
 
-- [ ] Install UCM locally, test `ucm mcp` bridge with Claude Code
+- [ ] Install UCM (requires sudo — user approval needed)
+- [ ] Configure MCP bridge in Claude Code settings.json
 - [ ] Port a simple GSD skill to Unison as proof of concept
-- [ ] Test BYOC with MinIO on local machine
+- [ ] Test BYOC with MinIO on local CEPH storage
 - [ ] Explore GPU pool API for math coprocessor operations
 - [ ] Build Unison MCP tools for browsing our codebase through typed queries
 - [ ] Connect to CERN WLCG research (content-addressed distribution parallel)
