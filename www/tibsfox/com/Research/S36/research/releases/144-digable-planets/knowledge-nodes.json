@@ -1,0 +1,86 @@
+{
+  "degree": 144,
+  "artist": "Digable Planets",
+  "slug": "144-digable-planets",
+  "genre": "Jazz Rap",
+  "energy": 5,
+  "era": "1991-1995. Jazz Rap. E=5 -- Grammy energy, genre fusion, Ishmael Butler arc. Pendulum Records / Elektra. FIRST JAZZ RAP in the engine -- Genre Stage 99. Central District roots (Butler). Grammy 1994. Ishmael Butler later formed Shabazz Palaces (degree 103). 41-degree arc (103-144) matching Sabzi's span.",
+  "location": {
+    "origin": "Seattle (Butler's Central District roots) / Brooklyn (formation)",
+    "formative": "Ishmael Butler grew up in Seattle's Central District. Moved to New York for Howard University. Formed Digable Planets in NYC. Jazz-hip-hop fusion in early 1990s NYC/DC scene.",
+    "career": "Digable Planets. Jazz Rap trio: Butterfly (Ishmael Butler), Doodlebug (Craig Irving), Ladybug Mecca (Mary Ann Vieira). Two albums: Reachin' (1993), Blowout Comb (1994). Grammy 1994. Butler returned to Seattle, formed Shabazz Palaces."
+  },
+  "formed": "1991",
+  "died": "1995 (dissolved; 2005 reunion)",
+  "labels": ["Pendulum Records", "Elektra"],
+  "members": [
+    {"name": "Ishmael Butler (Butterfly)", "role": "MC", "note": "Central District roots. Abstract poetry. Later formed Shabazz Palaces (degree 103). 41-degree arc (103-144). The Seattle connection."},
+    {"name": "Craig Irving (Doodlebug)", "role": "MC", "note": "Philadelphia. Political consciousness. East Coast lyrical tradition."},
+    {"name": "Mary Ann Vieira (Ladybug Mecca)", "role": "MC / Vocalist", "note": "Brazilian-American. Melodic vocals. Feminist perspective."}
+  ],
+  "former_members": [],
+  "associated_musicians": [
+    {"name": "Shabazz Palaces", "role": "Butler's later project (degree 103)", "note": "Ishmael Butler + Tendai Maraire. Experimental hip-hop. Sub Pop. Afrofuturist. 41-degree arc from 103 to 144."},
+    {"name": "A Tribe Called Quest", "role": "Jazz Rap contemporaries", "note": "Parallel Jazz Rap practitioners. The Low End Theory. Genre comparison."},
+    {"name": "Sabzi", "role": "41-degree echo (degrees 99-140)", "note": "Sabzi's 41-degree span matches Butler's 41-degree span. Engine echo."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "First Jazz Rap -- Genre Stage 99; jazz + hip-hop fusion; jazz samples, live instrumentation, jazz sensibility, bohemian identity; the first genre that fuses two distinct traditions",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/genres/jazz-rap.md",
+      "examples": [
+        "Jazz samples: Art Blakey, Herbie Hancock, Curtis Fuller.",
+        "Live instrumentation: upright bass, saxophone, piano, drums.",
+        "Bohemian identity: coffee houses, poetry, jazz clubs.",
+        "'Rebirth of Slick (Cool Like Dat)' -- the defining Jazz Rap hit."
+      ],
+      "description": "First Jazz Rap. Genre fusion. Jazz meets hip-hop.",
+      "genealogy": {
+        "ancestors": ["Jazz tradition.", "Hip-hop tradition.", "A Tribe Called Quest, De La Soul."],
+        "relationship": "Digable Planets at 144. First Jazz Rap in engine."
+      }
+    },
+    {
+      "concept": "Grammy achievement -- 1994 Best Rap Performance by Duo/Group; highest commercial recognition in hip-hop era; proved Jazz Rap commercially viable",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/commercial/grammy-jazz-rap.md",
+      "examples": [
+        "Grammy 1994: Best Rap Performance by a Duo or Group.",
+        "'Rebirth of Slick': #15 Billboard Hot 100, #1 Hot Rap Singles.",
+        "Reachin': Certified Gold.",
+        "Proved Jazz Rap could be commercially successful."
+      ],
+      "description": "Grammy 1994. Commercial peak. Jazz Rap viable.",
+      "genealogy": {
+        "ancestors": ["Hip-hop commercial history.", "Jazz crossover history."],
+        "relationship": "Digable Planets at 144. Grammy achievement."
+      }
+    },
+    {
+      "concept": "Ishmael Butler arc -- Digable Planets (144) to Shabazz Palaces (103); 41-degree span; from jazz-cool to Afrofuturist experiment; 41-degree echo with Sabzi (99-140)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/figures/butler-arc.md",
+      "examples": [
+        "103: Shabazz Palaces (experimental, Sub Pop, dark, abstract).",
+        "144: Digable Planets (Jazz Rap, Grammy, cool, accessible).",
+        "41-degree span: matches Sabzi's 41-degree span (99-140).",
+        "Two figures, two arcs, same span. Engine echo."
+      ],
+      "description": "Butler arc. 41 degrees. Cool to experimental.",
+      "genealogy": {
+        "ancestors": ["Shabazz Palaces (103).", "Sabzi arc (99-140)."],
+        "relationship": "Digable Planets at 144. Butler arc endpoint."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 103, "artist": "Shabazz Palaces", "relationship": "BUTLER ARC! Ishmael Butler. 41-degree span (103-144). Shabazz Palaces (experimental, dark, Sub Pop) to Digable Planets (Jazz Rap, cool, Grammy). Same artist, opposite aesthetics."},
+    {"degree": 140, "artist": "Sabzi (DJ)", "relationship": "41-DEGREE ECHO! Sabzi's span (99-140 = 41 degrees) matches Butler's span (103-144 = 41 degrees). Two Seattle figures, two arcs, same distance."},
+    {"degree": 143, "artist": "Spaceman Scotty", "relationship": "PREVIOUS DEGREE! The hip-hop era shifts from geography (Tacoma at 143) to genre (Jazz Rap at 144)."},
+    {"degree": 134, "artist": "DJ B-Mello", "relationship": "ERA SPAN! Eleven degrees (134-144). DJs > producers > collectives > organizations > cities > genres. The most comprehensive era documentation."}
+  ]
+}
