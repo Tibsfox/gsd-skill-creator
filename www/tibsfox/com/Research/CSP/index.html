@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Science &amp; Programming &mdash; Infrastructure, Electronics, and the Machines That Think | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --green: #4CAF50; --green-light: #81C784;
+  --blue: #4a7aba; --blue-light: #64b5f6;
+  --gold: #C4A35A; --amber: #E89848; --purple: #9a6ad8; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--green); text-decoration:none; }
+a:hover { color:var(--green-light); }
+
+header {
+  background:linear-gradient(135deg, #000a0a 0%, #0a1a15 25%, #0a2a1a 50%, #051510 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--green);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(76,175,80,0.08) 0%, transparent 70%);
+}
+header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; }
+header .subtitle { color:var(--green); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; position:relative; font-family:system-ui,sans-serif; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(76,175,80,0.7); border-left:3px solid var(--green);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+
+.stats-bar {
+  display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
+  padding:1.2rem 0; margin-bottom:1.5rem;
+  font-family:system-ui,sans-serif; font-size:0.85rem; color:var(--dim);
+  border-bottom:1px solid var(--border);
+}
+.stats-bar strong { color:#fff; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; transition:border-color 0.2s; text-decoration:none; color:inherit; display:block;
+}
+.card:hover { border-color:rgba(76,175,80,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+.card p { font-size:0.85rem; color:var(--dim); line-height:1.5; margin-top:0.3rem; font-family:system-ui,sans-serif; }
+.card .detail { font-size:0.7rem; color:rgba(76,175,80,0.5); font-family:monospace; margin-top:0.5rem; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-infra { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-ee { background:rgba(232,152,72,0.15); color:var(--amber); border:1px solid rgba(232,152,72,0.3); }
+.tag-lang { background:rgba(74,122,186,0.15); color:var(--blue); border:1px solid rgba(74,122,186,0.3); }
+.tag-ai { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-hw { background:rgba(186,58,58,0.15); color:var(--red); border:1px solid rgba(186,58,58,0.3); }
+.tag-web { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+
+.pathway {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1rem 0; border-left:3px solid var(--green);
+}
+.pathway h3 { color:var(--green-light); font-size:1.05rem; margin-bottom:0.5rem; }
+.pathway .level { color:var(--dim); font-size:0.72rem; font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.3rem; }
+.pathway ol { margin:0.5rem 0 0 1.5rem; font-family:system-ui,sans-serif; font-size:0.85rem; color:var(--text); }
+.pathway ol li { margin-bottom:0.5rem; }
+.pathway ol li strong { color:#fff; }
+.pathway .connects { font-size:0.78rem; color:var(--gold); font-style:italic; margin-top:0.8rem; }
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { .card-grid { grid-template-columns:1fr; } header h1 { font-size:1.5rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Computer Science &amp; Programming</h1>
+  <div class="subtitle">From the 555 timer to distributed agent orchestration &mdash; the machines that think, the code that runs them, the networks that connect them</div>
+  <div class="meta">Clusters 2 &amp; 3 &middot; 27 research projects &middot; 293K lines TypeScript &middot; 9 college departments &middot; 21,298 tests passing</div>
+  <nav>
+    <a href="index.html" class="active">CS &amp; Programming</a>
+    <a href="../CERN/wlcg.html">WLCG</a>
+    <a href="../OPEN/index.html">OPEN Problems</a>
+    <a href="../MUS/index.html">Music Theory</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <div class="stats-bar">
+    <span><strong>27</strong> research projects</span>
+    <span><strong>293,531</strong> lines TypeScript</span>
+    <span><strong>21,298</strong> tests passing</span>
+    <span><strong>9</strong> college departments</span>
+    <span><strong>17</strong> OPEN problems (AI/ML)</span>
+    <span><strong>34</strong> skills + 57 commands</span>
+    <span><strong>2,829</strong> source files</span>
+  </div>
+
+  <blockquote>
+    The fox knows that the angle matches. The math does not care whether the sensor
+    is bone and fat or silicon and solder. It is the same equation.
+    <span style="display:block; margin-top:0.5rem; font-size:0.8rem; color:var(--dim); font-style:normal;">&mdash; BPS (Biological Physics Sensing Systems)</span>
+  </blockquote>
+
+  <!-- ============================================================ -->
+  <!--  LEARNING PATHWAYS                                            -->
+  <!-- ============================================================ -->
+
+  <h2>So You Want to Be a Programmer &mdash; Learning Pathways</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Six pathways from zero to building real systems. Each connects to research projects, college departments,
+    and the 293K lines of production TypeScript in this very repository. The code IS the curriculum.
+  </p>
+
+  <div class="pathway">
+    <div class="level">Pathway 1 &mdash; Fundamentals</div>
+    <h3>Think Like a Computer Before You Code Like One</h3>
+    <ol>
+      <li><strong>Binary &amp; logic gates.</strong> AND, OR, NOT, XOR. Everything a computer does is combinations of these four operations. Build truth tables. Trace circuits. The 555 timer is a logic gate you can hold in your hand.</li>
+      <li><strong>Variables, types, control flow.</strong> Store a value. Make a decision (if/else). Repeat something (loops). Every program is data + decisions + repetition.</li>
+      <li><strong>Functions &amp; decomposition.</strong> Break a big problem into small pieces. A function is a reusable piece. Composition is building big things from small things. This is the only idea that matters.</li>
+      <li><strong>Data structures.</strong> Arrays, maps, sets, trees, graphs. How you organize data determines how fast you can find it. A linked list is a conga line. A hash map is a filing cabinet. A tree is a family tree. A graph is a road map.</li>
+      <li><strong>Algorithms &amp; complexity.</strong> Sorting, searching, graph traversal. Big-O notation: how does runtime grow with input size? O(n) = proportional. O(n&sup2;) = quadratic (bad). O(log n) = binary search (good). O(1) = hash lookup (best).</li>
+    </ol>
+    <div class="connects">Connects to: <a href="../T55/index.html">T55</a> (555 timer logic), <a href="../LED/index.html">LED</a> (digital circuits), <a href="../MPC/index.html">MPC</a> (math co-processor), college departments: coding, logic, mathematics</div>
+  </div>
+
+  <div class="pathway">
+    <div class="level">Pathway 2 &mdash; Web &amp; Networking</div>
+    <h3>The Web Was Born at CERN. Build On It.</h3>
+    <ol>
+      <li><strong>HTML &amp; CSS.</strong> Structure (HTML) and style (CSS). Every web page is a tree of elements with visual rules applied. View source on any page. The web is open by design &mdash; thanks to CERN putting it in the public domain in 1993.</li>
+      <li><strong>JavaScript.</strong> The language of the browser. DOM manipulation, events, async/await, fetch. Also the language of Node.js (server), Electron (desktop), and React Native (mobile). One language, every platform.</li>
+      <li><strong>HTTP &amp; APIs.</strong> GET, POST, PUT, DELETE. Request/response. REST, GraphQL, WebSockets. How browsers talk to servers. How servers talk to each other. How your phone talks to everything.</li>
+      <li><strong>TCP/IP &amp; DNS.</strong> The protocol stack: application &rarr; transport &rarr; internet &rarr; link. IP addresses, ports, routing, DNS resolution. How a packet travels from your keyboard to a server and back. Same stack over fiber, WiFi, or ham radio.</li>
+      <li><strong>Databases &amp; state.</strong> SQL (PostgreSQL, SQLite), NoSQL (MongoDB, Redis), key-value stores. CRUD operations. Transactions. Indexes. Schema design. Where your data lives when the browser closes.</li>
+    </ol>
+    <div class="connects">Connects to: <a href="../CERN/index.html">CERN</a> (birth of the Web), <a href="../SYS/index.html">SYS</a> (systems administration), <a href="../DRP/zero-trust-comms.html">DRP</a> (TCP/IP over anything), tibsfox.com (this site IS the project), college: coding, cloud-systems, technology</div>
+  </div>
+
+  <div class="pathway">
+    <div class="level">Pathway 3 &mdash; Systems &amp; Infrastructure</div>
+    <h3>The Spaces In Between</h3>
+    <ol>
+      <li><strong>Linux &amp; the command line.</strong> The shell is the programmer's workshop. Files, processes, pipes, permissions. Bash scripting. Package management. Every server runs Linux. Every cloud runs Linux.</li>
+      <li><strong>Containers &amp; orchestration.</strong> Docker packages your app with its dependencies. Kubernetes runs containers across clusters. Helm charts. Services, pods, ingress. The infrastructure that runs the modern internet.</li>
+      <li><strong>Networking &amp; security.</strong> Firewalls, TLS, SSH, VPNs. Load balancers, reverse proxies, CDNs. Certificate management. Zero-trust architecture. Defense in depth.</li>
+      <li><strong>Distributed systems.</strong> CAP theorem: you can have two of consistency, availability, partition tolerance. Consensus protocols (Raft, Paxos). Replication. Sharding. The WLCG processes 1 PB/day across 170 sites &mdash; that's distributed systems at scale.</li>
+      <li><strong>Monitoring &amp; observability.</strong> Logs, metrics, traces &mdash; the three pillars. Prometheus, Grafana, OpenTelemetry. SLOs, SLIs, error budgets. You can't fix what you can't see.</li>
+    </ol>
+    <div class="connects">Connects to: <a href="../SYS/index.html">SYS</a> (19 files, 10K lines), <a href="../K8S/index.html">K8S</a> (Kubernetes ecosystem), <a href="../CMH/index.html">CMH</a> (computational mesh), <a href="../CERN/wlcg.html">WLCG</a> (planetary-scale distributed computing), college: cloud-systems, engineering</div>
+  </div>
+
+  <div class="pathway">
+    <div class="level">Pathway 4 &mdash; Electronics &amp; Hardware</div>
+    <h3>The Silicon Under the Software</h3>
+    <ol>
+      <li><strong>Circuits &amp; Ohm's law.</strong> V = IR. Resistors, capacitors, inductors. Series and parallel. The breadboard is your laboratory. A multimeter is your first instrument.</li>
+      <li><strong>The 555 timer.</strong> The most popular IC ever made (billions produced). Astable, monostable, bistable modes. PWM, frequency generation, timing. One chip teaches oscillators, comparators, flip-flops, and feedback.</li>
+      <li><strong>Microcontrollers.</strong> Arduino, ESP32, Raspberry Pi Pico. Digital I/O, ADC, PWM, I2C, SPI, UART. Read sensors, drive motors, blink LEDs, send data. The bridge between code and physical world.</li>
+      <li><strong>Signal processing.</strong> Analog filters (RC, LC), digital filters (FIR, IIR), FFT, sampling (Nyquist). The same math that processes audio also processes sensor data, radio signals, and neural network activations.</li>
+      <li><strong>PCB design &amp; fabrication.</strong> Schematic capture, layout, gerber files, assembly. KiCad is free. JLCPCB fabricates boards for $2. From breadboard prototype to manufactured product in a week.</li>
+    </ol>
+    <div class="connects">Connects to: <a href="../LED/index.html">LED</a> (43 files, controllers), <a href="../T55/index.html">T55</a> (555 timer deep dive), <a href="../SHE/index.html">SHE</a> (smart home electronics), <a href="../BPS/index.html">BPS</a> (biological sensing), <a href="../EMG/index.html">EMG</a> (motors &amp; generators), <a href="../DRP/index.html">DRP</a> (solar + compute stack), college: electronics, engineering</div>
+  </div>
+
+  <div class="pathway">
+    <div class="level">Pathway 5 &mdash; AI &amp; Machine Learning</div>
+    <h3>Teaching Machines to Learn</h3>
+    <ol>
+      <li><strong>Data &amp; statistics.</strong> Mean, median, variance, correlation, distributions. Pandas, NumPy. Clean data, visualize data, understand data. Every ML project starts and ends with data quality.</li>
+      <li><strong>Supervised learning.</strong> Linear regression, decision trees, random forests, gradient boosting. Training set, test set, validation. Bias-variance tradeoff. Overfitting. Cross-validation. The fundamentals that never go out of style.</li>
+      <li><strong>Neural networks.</strong> Perceptrons, backpropagation, activation functions, loss functions, optimizers. PyTorch or TensorFlow. CNNs for images, RNNs for sequences, transformers for everything. The architecture zoo.</li>
+      <li><strong>Large language models.</strong> Tokenization, attention, transformer architecture, fine-tuning, prompting, RLHF. The Anthropic API. Claude as a tool, not a replacement. Chain-of-thought faithfulness (our OPEN problems live here).</li>
+      <li><strong>Agent orchestration.</strong> Multi-agent systems, tool use, MCP servers, planning, state management. GSD's mayor-coordinator, polecat-worker, witness-observer patterns. WLCG's DIRAC pilot jobs. The future is agents coordinating agents.</li>
+    </ol>
+    <div class="connects">Connects to: <a href="../OPEN/index.html">OPEN</a> (17 unsolved problems), <a href="../CERN/wlcg.html">WLCG</a> (DIRAC = GUPP), <a href="../MPC/index.html">MPC</a> (math co-processor, 18 MCP tools), <a href="../NASA/artemis-ii/ai-coverage.html">AI coverage analysis</a>, college: data-science, coding, mathematics</div>
+  </div>
+
+  <div class="pathway">
+    <div class="level">Pathway 6 &mdash; Creative Coding</div>
+    <h3>Code as Art, Art as Code</h3>
+    <ol>
+      <li><strong>p5.js / Processing.</strong> Draw with code. Shapes, colors, animation, interaction. Our forest simulation is 1,297 lines of p5.js &mdash; weather-driven, astronomically accurate, with L-system plants and Physarum slime mold networks.</li>
+      <li><strong>Generative art.</strong> L-systems, fractals, noise fields, particle systems, cellular automata. Conway's Game of Life. Langton's ant. The beauty in rules applied recursively.</li>
+      <li><strong>Data visualization.</strong> D3.js, Observable, Canvas, SVG. Turn data into insight. Our radar charts, timeline visualizations, and weather dashboards are all hand-coded.</li>
+      <li><strong>Shaders &amp; GPU.</strong> GLSL, WebGL, compute shaders. Massively parallel computation. Ray marching, signed distance functions, procedural textures. The GPU thinks differently than the CPU &mdash; learn to think in parallel.</li>
+      <li><strong>Interactive simulations.</strong> Physics engines, agent-based models, cellular automata. Build a world, set the rules, watch it evolve. Our Kuramoto fireflies, Physarum slime mold, and ecosystem agents are all interactive simulations running in the browser.</li>
+    </ol>
+    <div class="connects">Connects to: <a href="../forest/index.html">Forest sim</a> (vehicle.js), <a href="../MUS/nodes/subtractive.html">subtractive synthesis</a> (audio = creative code), <a href="../VAV/index.html">VAV</a> (voxels), <a href="../MRW/index.html">MRW</a> (Minecraft weather), <a href="../NASA/artemis-ii/vehicle.html">Artemis vehicle</a>, college: coding, art, technology</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  INFRASTRUCTURE CLUSTER (Rosetta 3)                           -->
+  <!-- ============================================================ -->
+
+  <h2>Rosetta Cluster 3 &mdash; Infrastructure &amp; Computing</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Hub: SYS (Systems Administration). Servers, networks, storage, containers, mesh topology, TCP/IP.
+    The invisible infrastructure that everything runs on.
+  </p>
+
+  <div class="card-grid">
+    <a href="../SYS/index.html" class="card">
+      <h3>SYS &mdash; Systems Administration</h3>
+      <div><span class="tag tag-infra">Hub</span> <span class="tag tag-infra">Infrastructure</span></div>
+      <p>19 files, 10,550 lines. The spaces in between. Servers, storage (RADOS/Ceph), networking, monitoring. The PoC server runs at <code>www/PNW/SYS/poc/</code>.</p>
+    </a>
+    <a href="../CMH/index.html" class="card">
+      <h3>CMH &mdash; Computational Mesh</h3>
+      <div><span class="tag tag-infra">Infrastructure</span></div>
+      <p>Distributed computing patterns, mesh networking, federated compute. The theoretical foundation for multi-agent orchestration.</p>
+    </a>
+    <a href="../K8S/index.html" class="card">
+      <h3>K8S &mdash; Kubernetes Ecosystem</h3>
+      <div><span class="tag tag-infra">Infrastructure</span></div>
+      <p>Container orchestration, Helm charts, service mesh, autoscaling. HPA, VPA, KEDA. The production platform for cloud-native systems.</p>
+    </a>
+    <a href="../MPC/index.html" class="card">
+      <h3>MPC &mdash; Math Co-Processor</h3>
+      <div><span class="tag tag-ai">AI/ML</span> <span class="tag tag-hw">Hardware</span></div>
+      <p>5 compute chips, 18 MCP tools, 125 tests. CUDA GPU acceleration on RTX 4060 Ti. Linear algebra, FFT, statistics, symbolic math, vector calculus.</p>
+    </a>
+    <a href="../GSD2/index.html" class="card">
+      <h3>GSD2 &mdash; GSD Architecture</h3>
+      <div><span class="tag tag-infra">Infrastructure</span> <span class="tag tag-ai">Agents</span></div>
+      <p>The orchestration system itself as a research subject. Gastown chipset, convoy model, GUPP protocol, mayor-coordinator pattern.</p>
+    </a>
+    <a href="../VAV/index.html" class="card">
+      <h3>VAV &mdash; Voxel as Vessel</h3>
+      <div><span class="tag tag-lang">Creative</span></div>
+      <p>3D voxel rendering, spatial data structures, octrees, ray marching. The intersection of computer graphics and spatial computing.</p>
+    </a>
+    <a href="../OCN/index.html" class="card">
+      <h3>OCN &mdash; Open Compute Node</h3>
+      <div><span class="tag tag-hw">Hardware</span></div>
+      <p>Open-source hardware computing. DIY server builds, edge compute, community-owned infrastructure. The physical layer of distributed systems.</p>
+    </a>
+    <a href="../GPO/index.html" class="card">
+      <h3>GPO &mdash; GPU Orchestration</h3>
+      <div><span class="tag tag-hw">Hardware</span> <span class="tag tag-ai">AI/ML</span></div>
+      <p>GPU scheduling, CUDA programming, multi-GPU coordination. RTX 4060 Ti as local AI accelerator. Compute democratization.</p>
+    </a>
+    <a href="../PIN/index.html" class="card">
+      <h3>PIN &mdash; The Post-Industrial Network</h3>
+      <div><span class="tag tag-infra">Vision</span></div>
+      <p>What comes after centralized cloud? Federated networks, cooperative compute, mesh infrastructure, community-owned data.</p>
+    </a>
+    <a href="../MRW/index.html" class="card">
+      <h3>MRW &mdash; Minecraft Real-Time Weather</h3>
+      <div><span class="tag tag-lang">Creative</span> <span class="tag tag-infra">Integration</span></div>
+      <p>NOAA weather data drives in-game weather. Real sensor data rendered inside virtual worlds. The bridge between data and play.</p>
+    </a>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ELECTRONICS CLUSTER (Rosetta 2)                              -->
+  <!-- ============================================================ -->
+
+  <h2>Rosetta Cluster 2 &mdash; Electronics &amp; Instrumentation</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Hub: LED (LED Lighting &amp; Controllers). Circuits, sensors, actuators, PWM, ADC, oscilloscopes, signal processing.
+    The silicon beneath the software.
+  </p>
+
+  <div class="card-grid">
+    <a href="../LED/index.html" class="card">
+      <h3>LED &mdash; LED Lighting &amp; Controllers</h3>
+      <div><span class="tag tag-ee">Hub</span> <span class="tag tag-ee">Electronics</span></div>
+      <p>43 files. WS2812B, PWM control, color spaces, driver circuits, power distribution. The most hands-on project in the series.</p>
+    </a>
+    <a href="../T55/index.html" class="card">
+      <h3>T55 &mdash; 555 Timer</h3>
+      <div><span class="tag tag-ee">Electronics</span></div>
+      <p>The most popular IC ever manufactured. Astable, monostable, bistable modes. Oscillators, timing circuits, PWM generators. One chip, infinite applications.</p>
+    </a>
+    <a href="../BPS/index.html" class="card">
+      <h3>BPS &mdash; Biological Physics Sensing</h3>
+      <div><span class="tag tag-ee">Electronics</span> <span class="tag tag-ai">Science</span></div>
+      <p>22 research files. Sonar, Doppler, magnetoreception, electroreception. The same equations govern biological sensors and silicon sensors.</p>
+    </a>
+    <a href="../SHE/index.html" class="card">
+      <h3>SHE &mdash; Smart Home Electronics</h3>
+      <div><span class="tag tag-ee">Electronics</span> <span class="tag tag-hw">DIY</span></div>
+      <p>Home automation, sensor networks, ESP32 projects, MQTT, zigbee. Where electronics meets daily life.</p>
+    </a>
+    <a href="../EMG/index.html" class="card">
+      <h3>EMG &mdash; Electric Motors &amp; Generators</h3>
+      <div><span class="tag tag-ee">Electronics</span></div>
+      <p>Electromagnetism, DC/AC motors, stepper motors, servos, generators. The physics of spinning things.</p>
+    </a>
+    <a href="../PSS/index.html" class="card">
+      <h3>PSS &mdash; PNW Signal Stack</h3>
+      <div><span class="tag tag-ee">Electronics</span> <span class="tag tag-infra">Signals</span></div>
+      <p>Signal processing for Pacific Northwest environmental data. Filtering, FFT, time series analysis applied to weather, seismic, and tidal data.</p>
+    </a>
+    <a href="../SNL/index.html" class="card">
+      <h3>SNL &mdash; The Sensing Layer</h3>
+      <div><span class="tag tag-ee">Electronics</span></div>
+      <p>Sensor taxonomy, data acquisition, calibration, fusion. From thermistors to LiDAR. How machines perceive the physical world.</p>
+    </a>
+    <a href="../HFR/index.html" class="card">
+      <h3>HFR &mdash; Hi-Fidelity Audio Reproduction</h3>
+      <div><span class="tag tag-ee">Electronics</span> <span class="tag tag-ee">Audio</span></div>
+      <p>Amplifier design, speaker physics, room acoustics, DAC architecture. Where electronics meets music. Crossover to the MUS cluster.</p>
+    </a>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  THE TECH STACK — WHAT WE BUILD WITH                         -->
+  <!-- ============================================================ -->
+
+  <h2>Our Tech Stack</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    The tools and languages we use every day. Each one is a learning opportunity.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>TypeScript</h3>
+      <div><span class="tag tag-lang">Language</span></div>
+      <p>293,531 lines. Our primary language. Static types on JavaScript. 2,275 source files across skills, agents, chipsets, CLI, and library code. If you learn one language, learn this one.</p>
+      <div class="detail">src/ &middot; 2,829 files &middot; Vitest (21,298 tests)</div>
+    </div>
+    <div class="card">
+      <h3>Rust</h3>
+      <div><span class="tag tag-lang">Language</span></div>
+      <p>Tauri v2 desktop backend. Memory-safe systems programming. Compiles to native. No garbage collector. The language for when performance and safety both matter.</p>
+      <div class="detail">src-tauri/ &middot; Tauri v2.10.x</div>
+    </div>
+    <div class="card">
+      <h3>GLSL</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-hw">GPU</span></div>
+      <p>Shader language for GPU computation. Runs on the RTX 4060 Ti. Massively parallel by design. Used for visualization, simulation, and the math co-processor.</p>
+      <div class="detail">shaders/ &middot; WebGL + compute</div>
+    </div>
+    <div class="card">
+      <h3>Python</h3>
+      <div><span class="tag tag-lang">Language</span> <span class="tag tag-ai">AI/ML</span></div>
+      <p>Data analysis, automation scripts, ML pipelines, FTP sync, weather sweeps. The Swiss army knife. sweep.py runs our hourly mission updates.</p>
+      <div class="detail">sweep.py, sync-usgs.py, pic2html.py</div>
+    </div>
+    <div class="card">
+      <h3>PostgreSQL + pgvector</h3>
+      <div><span class="tag tag-infra">Database</span> <span class="tag tag-ai">Embeddings</span></div>
+      <p>Relational database with vector similarity search. maple@tibsfox schema. 6 tables, 1,087 pages loaded. Semantic search across our entire research corpus.</p>
+      <div class="detail">pgvector &middot; schema: artemis &middot; 6 tables</div>
+    </div>
+    <div class="card">
+      <h3>HTML + CSS + p5.js</h3>
+      <div><span class="tag tag-web">Web</span> <span class="tag tag-lang">Creative</span></div>
+      <p>Every research page is hand-crafted HTML/CSS. The forest simulation runs in p5.js. No build step, no framework, no dependencies. View source on any page &mdash; that IS the code.</p>
+      <div class="detail">www/ &middot; Static HTML &middot; Client-side rendering</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ROSETTA CONNECTIONS                                          -->
+  <!-- ============================================================ -->
+
+  <h2>Cross-Domain Connections</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Computer science connects to every other Rosetta cluster. The same patterns appear everywhere.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>CS &harr; Music</h3>
+      <p>Signal processing = audio processing. Oscillators = waveform generators. Filters = tone shaping. FFT = spectrum analysis. Patch routing = file tree architecture. <a href="../MUS/index.html">The MUS cluster</a> is CS with a different interface.</p>
+    </div>
+    <div class="card">
+      <h3>CS &harr; Ecology</h3>
+      <p>Mycorrhizal networks = mesh networks. Agent-based models = ecosystem simulation. Sensor networks = environmental monitoring. Our forest sim IS a distributed system. <a href="../ECO/slime-mold.html">Physarum</a> solves shortest-path problems without code.</p>
+    </div>
+    <div class="card">
+      <h3>CS &harr; CERN</h3>
+      <p>CERN invented the Web. ROOT pioneered columnar storage. WLCG is the largest distributed system ever built. DIRAC pilot jobs = our GUPP protocol. <a href="../CERN/wlcg.html">Every pattern we use</a>, CERN validated at planetary scale.</p>
+    </div>
+    <div class="card">
+      <h3>CS &harr; Disaster Recovery</h3>
+      <p>TCP/IP works over any medium. SLIP/PPP over radio. Mesh routing = self-healing networks. Zero-trust architecture = disaster-grade security. <a href="../DRP/zero-trust-comms.html">The protocol stack</a> doesn't care about the physical layer.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../SYS/index.html">SYS (Infra Hub)</a> &middot;
+  <a href="../LED/index.html">LED (EE Hub)</a> &middot;
+  <a href="../CERN/wlcg.html">WLCG</a> &middot;
+  <a href="../OPEN/index.html">OPEN Problems</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Computer Science &amp; Programming &mdash; Rosetta Clusters 2 &amp; 3 &middot; 27 research projects &middot; 293K lines TypeScript<br>
+  Last updated: 2026-04-03T06:00Z (sweep v1.2.23)
+</footer>
+
+</body>
+</html>
