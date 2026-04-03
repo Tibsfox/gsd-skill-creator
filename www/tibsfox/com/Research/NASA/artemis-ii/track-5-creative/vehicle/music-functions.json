@@ -49,6 +49,46 @@
       "math": "Sinusoidal activity envelope keyed to sun altitude. Peak at civil twilight (-6° to +3°).",
       "application": "Diurnal agents surge at dawn, nocturnal agents surge at dusk (tritone inversion of diurnal pattern).",
       "formula": "circadian = clamp(map(sunAlt, -12, 20, 0.05, 1.0)) × dawn_boost"
+    },
+    {
+      "concept": "Subtractive synthesis (saw wave + filter + envelope)",
+      "s36_degree": "all",
+      "s36_artist": "multiple",
+      "math": "Start with harmonically rich waveform (saw = all harmonics at 1/n amplitude), remove frequencies with resonant low-pass filter, shape amplitude over time with ADSR envelope. Three parameters control the entire timbral space.",
+      "application": "Agent perception filtering: raw sensory input (all signals) → filter by relevance (low-pass = ignore high-frequency noise) → envelope shapes attention over time (attack=notice, decay=assess, sustain=track, release=forget).",
+      "formula": "perception(t) = sawInput × LPF(cutoff, resonance) × ADSR(t)",
+      "source": "youtube/ZL8Tnq7KQqo — live synth demonstration: saw wave → filter down → envelope → second oscillator → movement",
+      "rosetta": "Electronics: RC low-pass filter. Ecology: sensory gating in prey species. Infrastructure: rate limiting. The filter is universal."
+    },
+    {
+      "concept": "Patch routing (signal flow as file tree)",
+      "s36_degree": "all",
+      "s36_artist": "multiple",
+      "math": "Modular synthesis signal flow maps 1:1 to directory trees. A patch is a workflow. Modules are tasks. Each module has inputs (data), parameters (instructions), and outputs (tools). Sub-patches nest like subdirectories. The abstraction is fractal — zoom into any module and find the same structure.",
+      "application": "Agent architecture IS a patch bay. Route the right signal to the right module with the right parameters. Workflows = folders, tasks = files, instructions/tools/data = the three inputs every module needs. MCP servers = external CV inputs. Sub-agents = sub-patches.",
+      "formula": "agent_tree = {workflow/: {task_n/: {instructions.md, tools.json, data/}, ...}}",
+      "source": "youtube/tbVtt2-qUJo — 'agent architecture as folders': file trees as the fundamental abstraction layer for AI agents, replacing framework code with directory structure",
+      "rosetta": "Electronics: patch bay, signal routing matrix. Infrastructure: microservice mesh, request routing. Ecology: mycorrhizal network routing nutrients between trees. The routing IS the architecture."
+    },
+    {
+      "concept": "Oscillator layering (second wave, low wave)",
+      "s36_degree": "all",
+      "s36_artist": "multiple",
+      "math": "Multiple oscillators at different frequencies/waveforms create complex timbres through additive interference. Detuning creates beat frequencies (f1-f2). Moving one oscillator against another creates evolving spectral content — the 'movement' in a pad sound.",
+      "application": "Multi-agent perception layers: each agent runs multiple 'oscillators' — fast cycle (frame-by-frame reaction), medium cycle (behavioral state), slow cycle (seasonal/energy). The interference between cycles produces emergent behavior that no single cycle contains.",
+      "formula": "behavior(t) = Σ A_i × wave_i(f_i × t + φ_i) where each oscillator has independent frequency and phase",
+      "source": "youtube/ZL8Tnq7KQqo — 'second wave, low wave, move it around': layering oscillators and modulating their relationship creates complexity from simple components",
+      "rosetta": "PRS polyrhythm: multiple clocks = multiple oscillators. The LCM of the periods defines the composite cycle length. Ecology: multiple overlapping territorial signals. The beat frequency between two bird songs IS a detuned oscillator pair."
+    },
+    {
+      "concept": "Condensation (workflow → tool)",
+      "s36_degree": "all",
+      "s36_artist": "multiple",
+      "math": "When a complex workflow becomes a single callable tool, the abstraction level shifts up. In synthesis: a complex patch becomes a preset. In agent architecture: a multi-step workflow becomes a single MCP tool. The condensation preserves function while hiding implementation. This is why frameworks get replaced — they operate at the wrong abstraction layer.",
+      "application": "Agent evolution: as behaviors mature, multi-step sequences condense into single reflexes. A foraging strategy that required scan→evaluate→approach→consume becomes a single 'forage' behavior. The sub-steps still execute, but the agent treats them as atomic. This matches biological skill acquisition — conscious steps become unconscious competence.",
+      "formula": "complexity_visible = total_complexity / condensation_depth",
+      "source": "youtube/tbVtt2-qUJo — 'if they condense your workflow into a feature update, it's now a subtask or a tool': the right abstraction layer absorbs platform changes instead of breaking",
+      "rosetta": "Music: a chord voicing condenses voice leading rules into a single hand position. Ecology: an ecosystem service condenses thousands of species interactions into a single function (pollination, decomposition). The condensation is the maturity."
     }
   ]
 }
