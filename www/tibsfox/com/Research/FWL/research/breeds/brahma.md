@@ -214,4 +214,16 @@ For those considering adding Brahmas to a flock, a few practical notes:
 
 ---
 
+## Try This
+
+> **[Design Your Dream Coop](../try-sessions/coop-design-challenge.md)** --- Brahmas need wider pop doors, lower roosts, and ramps. Design a coop that accommodates a 12-pound bird that cannot jump.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Brahma eggs take the same 21 days as any chicken but produce chicks that grow slowly into gentle giants. Experience the incubation process firsthand.
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Can you tell a Brahma from a Cochin? Both are large, feather-legged Asiatics, but the comb tells the story.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Feather-footed breeds are bumblefoot-prone. Low roosts and soft landings are your first line of defense.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Baxter (1928), "Asiatics: Brahmas, Cochins, and Langshans"; Burnham (1855), "The History of the Hen Fever"; The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; American Brahma Club breed resources; Roberts (1997), "British Poultry Standards"; Robinson (2005), "Genetics for Cat Breeders and Veterinarians" (comparative *MLPH* genetics). See also [FWL-01] Domestication History, [FWL-02b] Asiatic Class, [FWL-04] Feather Genetics, [FWL-06] Husbandry Guide, [FWL-07] Heritage Conservation.*

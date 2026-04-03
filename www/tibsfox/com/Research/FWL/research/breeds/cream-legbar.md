@@ -165,4 +165,14 @@ The Cream Legbar's lack of APA recognition means it is not available from most l
 
 ---
 
+## Try This
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- The Cream Legbar is a living Punnett square. Learn the sex-linked barring and blue-egg genetics that make auto-sexing work.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Hatch Cream Legbar eggs and sex the chicks at hatch by down color. It is Punnett's genetics made visible in your incubator.
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- Blue eggs from a Cream Legbar vs. brown eggs from a Marans vs. white eggs from the store. Does shell color affect flavor, or just expectation?
+
+---
+
 *Sources and further reading: Punnett (1923), "Heredity in Poultry"; Punnett (1930), "The Legbar Auto-sexing Breed"; Punnett and Pease (1930), "Genetic Studies in Poultry," Journal of Genetics; Poultry Club of Great Britain, "British Poultry Standards," 7th ed. (2018); Wang et al. (2013), "An EAV-HP Insertion in the SLCO1B3 Gene Underlies the Blue Eggshell Colour in Chickens," PLoS Genetics; The Cream Legbar Club (US); The Cream Legbar Club of Great Britain. See also [FWL-04] Feather Genetics, [FWL-05] Egg Science, [breeds/ameraucana-easter-egger] Blue Egg Question, [guides/egg-color-rainbow] Rainbow Egg Basket.*

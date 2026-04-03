@@ -203,7 +203,9 @@ The timber frame revival in the PNW draws on Douglas fir's exceptional suitabili
 ## Try This
 
 - **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail is the signature joint of hand tool woodworking. One afternoon, one joint, every fundamental skill. Start here.
+- **Cut a Mortise and Tenon Joint** ([try-sessions/hand-cut-mortise-tenon](try-sessions/hand-cut-mortise-tenon.md)): The most important joint in furniture. Every table, every chair, every door frame. If you can cut a mortise and tenon and a dovetail, you can build anything.
 - **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): You cannot cut a clean joint with a dull chisel. Sharpen first, then cut.
+- **The 10 Essential Woodworking Joints** ([study-guides/essential-joints-reference](study-guides/essential-joints-reference.md)): Visual reference card for all ten joints discussed in this chapter — strength ratings, difficulty ratings, tools needed, and text diagrams. The complete menu for joint selection.
 
 ---
 

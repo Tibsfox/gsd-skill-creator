@@ -184,4 +184,14 @@ That is a happy ending. It does not look like the happy ending you might have im
 
 ---
 
+## Try This
+
+> **[Raccoon Night Watch](../try-sessions/night-observation.md)** --- Observe mother-kit groups in the wild during spring and summer. The bond between a mother raccoon and her kits is visible in their coordinated movement and constant vocalizations.
+
+> **[Build a Trail Cam Station](../try-sessions/build-a-trail-cam-station.md)** --- Install a camera near a suspected den site (from a safe distance) and watch the family emerge at dusk. You may capture the first outdoor explorations of new kits.
+
+> **[PNW Mesocarnivore Comparison](../study-guides/pnw-mesocarnivore-comparison.md)** --- Compare raccoon reproductive strategies to those of coyotes, opossums, and skunks. The opossum's 12-day gestation and marsupial pouch development could not be more different.
+
+---
+
 *Sources and further reading: PAWS Wildlife Center, "Found a Raccoon" guidance (2024); National Wildlife Rehabilitators Association, "Minimum Standards for Wildlife Rehabilitation," 4th ed. (2012); Washington Department of Fish and Wildlife, "Living with Wildlife: Raccoons" (2024); Oregon Department of Fish and Wildlife, "Wildlife Rehabilitation" guidance; Hadidian et al. (2010), "Wild Neighbors: The Humane Approach to Living with Wildlife"; Gehrt et al. (2010), "Urban Carnivores: Ecology, Conflict, and Conservation"; WAC 220-450 (Washington wildlife rehabilitation regulations); ORS 497.298, OAR 635-044 (Oregon wildlife regulations). See also [RCN-02] Intelligence and Behavior, [RCN-03] Diet and Foraging, [RCN-05] Lifecycle and Reproduction, [RCN deep-dives/raccoon-sounds] Raccoon Vocalizations, [RCN deep-dives/raccoons-and-disease] Health Risks.*

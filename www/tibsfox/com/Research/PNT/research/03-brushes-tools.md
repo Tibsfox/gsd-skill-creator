@@ -266,6 +266,7 @@ Start with these. Add tools as specific needs arise. A painter with three good b
 ## Try This
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Use the three-brush setup recommended in this chapter — large flat for block-in, medium flat for midtones, small round for edges — and notice how each brush makes a different kind of mark.
+- **The Painter's Shopping Guide** ([study-guides/paint-shopping-guide](study-guides/paint-shopping-guide.md)): Specific brush recommendations at three budget tiers, from Princeton Snap (starter) to Rosemary & Co (intermediate) to Kolinsky sable (advanced). Which brushes to buy first and which to add later.
 
 ---
 

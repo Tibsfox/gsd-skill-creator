@@ -126,6 +126,19 @@ Community paramedicine is still evolving. Reimbursement models are inconsistent.
 
 For someone who ran medical calls for thirty years, the progression is visible: from a system that could barely get a patient to a hospital, to a system that brings the hospital to the patient, to a system that might, if the trajectory holds, keep the patient from needing the hospital at all. The arc is long, but it bends toward care.
 
+## Try This / DIY Project
+
+> **Try Session: [Hands-Only CPR](try-sessions/hands-only-cpr.md)**
+> The chain of survival described in this chapter depends on bystanders starting CPR before paramedics arrive. The CPR try session teaches the one skill that bridges the gap between cardiac arrest and ALS response --- the same hands-only technique that dispatcher-assisted CPR talks bystanders through.
+
+> **Try Session: [Stop the Bleed](try-sessions/stop-the-bleed.md)**
+> Hemorrhage control is the trauma counterpart to CPR. The three techniques in this try session --- direct pressure, wound packing, tourniquet application --- are the same techniques that this chapter's TCCC and ITLS frameworks formalized for field providers, adapted for citizen bystanders.
+
+> **DIY Project: [Build a 72-Hour Go Bag](try-sessions/build-a-go-bag.md)**
+> The go bag includes a tourniquet and Israeli bandage --- the same hemorrhage control equipment that EMS carries. Having these tools staged and knowing how to use them makes a citizen the first tier of the trauma response system.
+
+---
+
 ## Cross-References
 
 - **[FSR-01]** History — the 1966 white paper and "Emergency!" that created modern EMS

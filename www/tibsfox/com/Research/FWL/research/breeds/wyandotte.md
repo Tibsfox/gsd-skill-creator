@@ -132,4 +132,14 @@ For a PNW flock of any size, from the first-timer's six hens to the experienced 
 
 ---
 
+## Try This
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- The Wyandotte's rose comb is one half of the classic two-gene comb system. Learn the R and P loci that Bateson and Punnett used to demonstrate epistasis.
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Silver Laced, Golden Laced, Blue Laced Red, Columbian --- the Wyandotte's variety list is a genetics showcase. Test your identification skills.
+
+> **[Design Your Dream Coop](../try-sessions/coop-design-challenge.md)** --- The Wyandotte's cold hardiness makes it ideal for PNW coops, but those rose combs still need proper ventilation to stay dry.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Carefoot (1990-2010), papers on poultry color genetics; Damerow (2012), "The Chicken Encyclopedia"; National Wyandotte Breeders Club resources.*

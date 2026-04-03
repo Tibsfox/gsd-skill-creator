@@ -182,6 +182,10 @@ Western red cedar shingles and shakes remain the premium roofing and siding mate
 
 - **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Douglas fir, western hemlock, and Sitka spruce — the three dominant PNW framing species — are all in this identification guide. Learn to tell them apart at the lumber yard.
 
+## DIY Project
+
+- **Build a Birdhouse for PNW Cavity Nesters** ([try-sessions/build-a-birdhouse](try-sessions/build-a-birdhouse.md)): Construction framing principles at miniature scale — floor, walls, roof, drainage, ventilation, and weather protection. The same logic that governs a house, applied to a house for birds.
+
 ---
 
 ## Sources and References

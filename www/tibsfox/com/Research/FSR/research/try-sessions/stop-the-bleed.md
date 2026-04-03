@@ -199,6 +199,19 @@ You are now someone who knows the three techniques. Use them if you need to.
 
 ---
 
+## More Try Sessions and DIY Projects
+
+> **DIY Project: [Build a 72-Hour Go Bag](build-a-go-bag.md)**
+> The go bag includes a CAT tourniquet and Israeli bandage --- the same equipment used in this try session. Having the tools staged by your front door, combined with the knowledge from this session, makes you the first tier of the trauma response system.
+
+> **Try Session: [Use a Fire Extinguisher --- The PASS Method](fire-extinguisher-drill.md)**
+> Fire is a secondary hazard in many trauma scenarios (car accidents, earthquakes, industrial incidents). The PASS method takes 30 seconds to learn and handles small fires before they become big ones.
+
+> **Study Guide: [Radio Communications for Emergencies](../study-guides/radio-communications-basics.md)**
+> When you have controlled the bleeding and need to call for help --- but cell service is down --- a radio is the only way to reach the outside world.
+
+---
+
 ## Sources and Further Reading
 
 - American College of Surgeons. "Stop the Bleed." stopthebleed.org.
