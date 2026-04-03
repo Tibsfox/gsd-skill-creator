@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 234&deg; &mdash; Heart &mdash; E=6 &mdash; Classic Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #880E4F, #AD1457, #C2185B); color: #FCE4EC; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #880E4F; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #AD1457; color: #FCE4EC; border: 1px solid #C2185B; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #880E4F; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #880E4F; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #880E4F; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FCE4EC; font-style: italic; color: #880E4F; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .heart-banner { background: linear-gradient(135deg, #FCE4EC, #FFF0F5); border: 2px solid #C2185B; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #880E4F; }
+    .heart-banner strong { color: #AD1457; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>234 &mdash; Heart (E=6)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">234&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #880E4F;">Heart</h1>
+        <div style="margin-top: 0.15rem; font-size: 0.9rem; color: #757575; font-style: italic; font-family: system-ui, sans-serif;">Ann Wilson &bull; Nancy Wilson</div>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Classic Rock / Pop Era</span>
+          <span class="label-badge">Mushroom &rarr; Epic</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>ENGINE'S MOST IMPORTANT FEMALE-FRONTED BAND &mdash; HEART PAIR OPENS.</strong> Degrees 234 and 235 give Heart two entries for two distinct eras. Degree 234 = Classic/Pop Arc: the commercial height, the arena era, the hits. Degree 235 = Hard Rock Arc: the raw energy of the founding identity. Ann and Nancy Wilson. Bellevue to Queen Anne.
+        </div>
+
+        <h2>Seattle's Greatest Rock Band</h2>
+        <p>Heart has sold over 35 million records. Ann Wilson's voice is one of the great rock instruments. "Barracuda" is a rock classic. The band was inducted into the Rock and Roll Hall of Fame in 2013. By any metric &mdash; commercial success, artistic achievement, longevity, cultural influence &mdash; Heart is Seattle's greatest rock band, and among the most important female-fronted bands in the history of rock music.</p>
+
+        <p>Degree 234 documents the classic and pop arc: from "Magic Man" (1975) and "Crazy on You" (1975) through "What About Love" (1985), "These Dreams" (1986), and "Alone" (1987). The Capitol Records years. The arena tours. The MTV era. The two Wilson sisters at the commercial peak of a career that started in Bellevue and moved to Queen Anne, from Vancouver to the world.</p>
+
+        <blockquote>"Heart did not ask permission to play hard rock. They played hard rock, and they were women, and the two facts were not in tension. That's the revolution &mdash; not the asking, but the doing."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Wilson Sisters</h2>
+        <p>Ann Wilson (b. 1950, raised Bellevue) is the lead vocalist &mdash; four-octave range, Janis Joplin and Robert Plant cited as influences, the defining voice of Heart across six decades. Her live performances are legendary: notes held past the point of physical plausibility, full dynamic range deployed in every set.</p>
+        <p>Nancy Wilson (b. 1954, raised Bellevue) is the guitarist and co-songwriter &mdash; classical guitar training evident in the acoustic fingerpicking, aggressive electric playing on songs like "Barracuda," and decades of songwriting partnership with her sister that produced Heart's most enduring catalog.</p>
+
+        <hr class="section-divider">
+
+        <h2>Key Songs &mdash; The Classic Arc</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Magic Man (1975)</h4>
+            <span class="level intermediate">Mushroom Records</span>
+            <p>The breakthrough. Billboard #9. Ann Wilson's vocal from controlled to unleashed. Folk-rock gentleness to hard rock density. The PNW romanticism is in the DNA.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Barracuda (1977)</h4>
+            <span class="level advanced">Portrait Records</span>
+            <p>Heart's signature song. Written in response to Mushroom Records' exploitative promotional stunt. Nancy Wilson's jabbing riff. Genuine fury producing great rock.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Crazy on You (1975)</h4>
+            <span class="level intermediate">Mushroom Records</span>
+            <p>Nancy's classical acoustic intro, then the band explodes. The Heart dynamic range &mdash; fragile to powerful &mdash; in one song.</p>
+          </div>
+          <div class="theory-card">
+            <h4>These Dreams (1986)</h4>
+            <span class="level milestone">Capitol Records &mdash; #1</span>
+            <p>Nancy Wilson sings lead. Heart's first number-one hit. The pop/rock ballad that showed the other dimension.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Alone (1987)</h4>
+            <span class="level milestone">Capitol Records &mdash; #1</span>
+            <p>Ann Wilson's ballad showcase. From vulnerable to overwhelming in four minutes. Billy Steinberg / Tom Kelly song transformed by Ann's performance.</p>
+          </div>
+          <div class="theory-card">
+            <h4>What About Love (1985)</h4>
+            <span class="level advanced">Capitol Records</span>
+            <p>From the self-titled album. Part of the Capitol era commercial peak that established Heart as arena rock headliners.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Breaking Rock's Hardest Barrier</h2>
+        <p>Hard rock in the 1970s was male territory &mdash; not by explicit rule but by de facto exclusion. Heart broke this not by softening the music or by asking permission, but by playing hard rock, and by being women, and by not treating these facts as contradictions. Their success forced the rock mainstream to accept women in roles beyond backing vocalist and pin-up.</p>
+        <p>The Mushroom Records incident &mdash; the label's promotional implication that Ann and Nancy Wilson were in a romantic relationship &mdash; produced "Barracuda." The response to exploitation was not a complaint but a song. And the song is one of the great rock songs. The anger is authentic; the music matches it.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">233</span> Love Battery (Psych Rock) &mdash; E=6. Previous degree. Psychedelic evolution. Sub Pop.</li>
+          <li><span class="ref-degree">235</span> Heart (Hard Rock) &mdash; E=7. Same band, different era. The founding hard rock identity. The Wilson sisters at maximum energy.</li>
+          <li><span class="ref-degree">SPS 234</span> American Kestrel &mdash; E=5. FINAL FALCONIDAE. Smallest North American falcon. killy-killy-killy. E=11 combined.</li>
+          <li><span class="ref-degree">236</span> Queensryche &mdash; E=7. FIRST PROGRESSIVE METAL. FIRST BELLEVUE BAND (proper). The east-side connection follows.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">234 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">6</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Classic Rock / Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1970&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Bellevue &rarr; Queen Anne</span></div>
+          <div class="stat-row"><span class="stat-label">Labels</span><span class="stat-value">Mushroom &rarr; Epic</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>The Wilson Sisters</h4>
+          <div class="stat-row"><span class="stat-label">Lead Vocals</span><span class="stat-value">Ann Wilson</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Nancy Wilson</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">65.0%</span></div>
+          <div class="stat-row"><span class="stat-label">RRHOF</span><span class="stat-value">Inducted 2013</span></div>
+          <div class="stat-row"><span class="stat-label">Pair</span><span class="stat-value">Heart 234 &amp; 235</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Species</span><span class="stat-value">American Kestrel</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">5</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E=11</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">FALCONIDAE FINAL</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Chart Peaks</h4>
+          <div class="stat-row"><span class="stat-label">These Dreams</span><span class="stat-value">#1 (1986)</span></div>
+          <div class="stat-row"><span class="stat-label">Alone</span><span class="stat-value">#1 (1987)</span></div>
+          <div class="stat-row"><span class="stat-label">Magic Man</span><span class="stat-value">#9 (1976)</span></div>
+          <div class="stat-row"><span class="stat-label">Records sold</span><span class="stat-value">35M+</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
