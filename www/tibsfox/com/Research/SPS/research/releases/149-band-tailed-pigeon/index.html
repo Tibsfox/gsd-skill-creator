@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 149&deg; &mdash; Band-tailed Pigeon &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(26, 35, 126, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .native-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .native-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .native-card p { color: #C8E6C9; }
+    .native-card strong { color: #E8F5E9; }
+
+    .mineral-card { background: linear-gradient(135deg, #4E342E, #5D4037, #6D4C41, #4E342E); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .mineral-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .mineral-card p { color: #D7CCC8; }
+    .mineral-card strong { color: #EFEBE9; }
+
+    .decline-card { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #B71C1C); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .decline-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .decline-card p { color: #FFCDD2; }
+    .decline-card strong { color: #FFEBEE; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.native { background: #1B5E20; }
+    .theory-icon.mineral { background: #4E342E; }
+    .theory-icon.decline { background: #B71C1C; }
+    .theory-icon.family { background: #1A237E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .quartet-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .quartet-table th { background: #1A237E; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .quartet-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .quartet-table tr:nth-child(even) { background: #E8EAF6; }
+    .quartet-table tr.current { background: #C8E6C9; font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">149&deg;</div>
+      <div class="release-title-block">
+        <h2>Band-tailed Pigeon</h2>
+        <div class="scientific"><em>Patagioenas fasciata</em> (Columbidae) &mdash; E=3 &mdash; Deep Owl-Like Coo-Coo</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST COLUMBIDAE.</strong> The PNW&rsquo;s native wild pigeon.
+      <strong>Larger and more colorful</strong> than the Rock Pigeon.
+      Purple-tinged breast. <strong>White neck crescent.</strong>
+      Congregates at mineral springs. Declining populations.
+      Opens the four-degree Columbidae quartet (149&ndash;152).
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="native-card">
+          <h3>The Native Pigeon</h3>
+          <p>
+            Not your city pigeon. The <strong>Band-tailed Pigeon</strong> is the native
+            wild pigeon of western North America &mdash; <strong>the largest pigeon in
+            North America</strong> (300&ndash;450g). Purple-tinged breast, blue-gray back,
+            <strong>white crescent</strong> on the nape, yellow bill with dark tip.
+            A bird of the <strong>deep forest canopy</strong>, not sidewalks.
+            Feeds on fruits, acorns, and grain. Important seed disperser.
+          </p>
+        </div>
+        <div class="mineral-card">
+          <h3>Mineral Spring Congregations</h3>
+          <p>
+            Flocks of <strong>50&ndash;200+ pigeons</strong> gather at natural mineral springs
+            to drink mineral-rich water and consume mineral soil. A form of
+            <strong>geophagy</strong> &mdash; supplementing a low-sodium fruit/nut diet.
+            The same sites used <strong>generation after generation</strong>.
+            Community gathering behavior &mdash; otherwise-solitary birds
+            becoming social at the spring.
+          </p>
+        </div>
+        <div class="decline-card">
+          <h3>Declining Populations</h3>
+          <p>
+            Historically abundant &mdash; flocks of thousands. <strong>Market hunting</strong>
+            at mineral springs devastated numbers. Echoes the <strong>Passenger Pigeon
+            extinction</strong>. Habitat loss compounds the decline.
+            Currently <strong>declining 2&ndash;3% per year</strong>.
+            Pacific coast population: 1.5&ndash;2 million (a fraction of historical).
+            Species of conservation concern.
+          </p>
+        </div>
+
+        <h2>Columbidae Quartet (149&ndash;152)</h2>
+        <table class="quartet-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Status</th><th>E</th></tr></thead>
+          <tbody>
+            <tr class="current"><td>149</td><td>Band-tailed Pigeon</td><td>Native forest</td><td>3</td></tr>
+            <tr><td>150</td><td>Mourning Dove</td><td>Native open</td><td>3</td></tr>
+            <tr><td>151</td><td>Eurasian Collared-Dove</td><td>Invasive</td><td>3</td></tr>
+            <tr><td>152</td><td>Rock Pigeon wing clap</td><td>Feral</td><td>4</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-150 Mourning Dove</strong>
+            <p>NATIVE PAIR! Band-tailed (forest canopy, declining) vs. Mourning Dove (open habitat, thriving). Both native. Both E=3. Opposite trajectories.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-148 Black Swift</strong>
+            <p>FAMILY TRANSITION! From Apodidae (swifts, aerial) to Columbidae (pigeons, terrestrial/arboreal). Radical ecological shift.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-152 Rock Pigeon</strong>
+            <p>NATIVE vs. FERAL! The real pigeon vs. the city pigeon. Band-tailed in the forest; Rock Pigeon on the parking garage. Same family, opposite stories.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon native">N</div>
+            <div class="theory-content">
+              <h4>First Columbidae &mdash; Native Forest Pigeon</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Opens the pigeon/dove family. Native-to-non-native progression begins. Largest NA pigeon. Forest canopy. Acorn specialist.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon mineral">M</div>
+            <div class="theory-content">
+              <h4>Mineral Spring Congregations</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Unique community behavior. Geophagy at traditional sites. Flocks of 50-200+ at mineral springs. Vulnerability to hunting at gathering points.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon decline">D</div>
+            <div class="theory-content">
+              <h4>Population Decline &mdash; Passenger Pigeon Echo</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Market hunting at mineral springs. 2-3% annual decline. Habitat loss. Echoes Passenger Pigeon extinction pattern. Conservation concern.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon family">C</div>
+            <div class="theory-content">
+              <h4>Columbidae Quartet (149&ndash;152)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Four degrees, four Columbidae. Native to non-native. Vocal to mechanical. E=3 baseline with E=4 mechanical break at 152. Band-tailed opens.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Band-tailed Pigeon</div><div class="stat-detail"><em>Patagioenas fasciata</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Columbidae</div><div class="stat-detail">1st pigeon/dove entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Deep owl-like coo</div><div class="stat-detail">300&ndash;600 Hz fundamental</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 3</div><div class="stat-detail">forest canopy murmur</div></div>
+        <div class="stat-card"><div class="stat-label">Size</div><div class="stat-value">300&ndash;450g</div><div class="stat-detail">largest NA pigeon</div></div>
+        <div class="stat-card"><div class="stat-label">Field mark</div><div class="stat-value">White neck crescent</div><div class="stat-detail">+ purple breast, yellow bill</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Forest canopy</div><div class="stat-detail">conifer &amp; mixed</div></div>
+        <div class="stat-card"><div class="stat-label">Population trend</div><div class="stat-value">Declining</div><div class="stat-detail">2&ndash;3% per year</div></div>
+        <div class="stat-card"><div class="stat-label">Mineral springs</div><div class="stat-value">50&ndash;200+ flocks</div><div class="stat-detail">traditional gathering sites</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Native</div><div class="stat-detail">conservation concern</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
