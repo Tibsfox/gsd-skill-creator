@@ -169,6 +169,10 @@ This is what it means to work with Pacific Northwest timber. You are working wit
 
 - **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Every species discussed in this chapter is profiled in the identification guide. Build a reference collection of PNW woods and learn to tell them apart by sight, touch, weight, and smell.
 
+## DIY Project
+
+- **Build a Birdhouse for PNW Cavity Nesters** ([try-sessions/build-a-birdhouse](try-sessions/build-a-birdhouse.md)): Build a species-appropriate birdhouse from western red cedar — the most PNW project possible. The rot-resistant thujaplicin oil that makes cedar ideal for birdhouses is the same chemistry discussed in this chapter's coverage of cedar's natural durability.
+
 ---
 
 ## Sources and References

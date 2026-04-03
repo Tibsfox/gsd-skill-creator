@@ -206,6 +206,18 @@ Before heading out, confirm:
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Build a Trail Cam Station](build-a-trail-cam-station.md)** --- Extend your night observation with 24/7 monitoring. A trail camera captures what you miss during the hours you are not watching.
+
+> **[Track Identification](track-identification.md)** --- After your night watch, return to the observation site in daylight and look for tracks. Confirm what species were present and reconstruct their paths.
+
+> **[Safe Raccoon Latrine Survey](latrine-survey.md)** --- While scouting your night-watch location, check for latrines. Know where they are so you do not accidentally set up your observation chair next to one.
+
+> **[PNW Mesocarnivore Comparison](../study-guides/pnw-mesocarnivore-comparison.md)** --- Your night watch may capture opossums, skunks, or coyotes in addition to raccoons. Learn to identify all four PNW urban mesocarnivores.
+
+---
+
 ## College of Knowledge Connections
 
 - **Nature Studies** --- [Field Observation, Citizen Science]: This try session is a guided field naturalism exercise, developing the core skills of the Outdoor Observation wing (sit spot practice, seasonal phenology, weather awareness) and the Citizen Science wing (iNaturalist contributions, data collection for real research). It also connects to the Animals & Birds wing through focused mammal observation.

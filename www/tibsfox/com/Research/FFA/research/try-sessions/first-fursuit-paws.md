@@ -255,6 +255,19 @@ Asymmetry is normal in handmade items. It is also not visible when the paws are 
 
 ---
 
+## More Try Sessions and DIY Projects
+
+> **DIY Project: [Build a Fursuit Tail](fursuit-tail-construction.md)**
+> The natural companion to paws. Three tail designs (stuffed, wagging, poseable) using the same materials and sewing skills. Together, paws and tail are a partial fursuit wearable with regular clothes.
+
+> **Try Session: [Design Your Fursona Character](design-your-fursona.md)**
+> If you built paws before designing a character, now is the time. Species, colors, distinguishing features, and reference sheet production --- the creative blueprint that informs every future build.
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](../study-guides/sewing-basics-for-fursuit-makers.md)**
+> If any sewing step in this project was confusing --- threading the machine, the ladder stitch, cutting faux fur from the backing --- this study guide covers the fundamentals in detail.
+
+---
+
 ## Sources and Further Reading
 
 - Matrices, "Fursuit Paw Construction Tutorial." YouTube, various creators. (Search "fursuit hand paw tutorial" for dozens of video walkthroughs)

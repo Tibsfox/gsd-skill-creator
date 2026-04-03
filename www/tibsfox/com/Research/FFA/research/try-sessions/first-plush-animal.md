@@ -286,6 +286,19 @@ Faux fur and fleece generally do not fray. If you are using a woven fabric, the 
 
 ---
 
+## More Try Sessions and DIY Projects
+
+> **DIY Project: [Build a Fursuit Tail](fursuit-tail-construction.md)**
+> Uses the same skills as this plush project (pattern making, sewing, turning, stuffing, ladder stitch) in a wearable format. Three designs: stuffed, wagging, and poseable.
+
+> **Try Session: [Design Your Fursona Character](design-your-fursona.md)**
+> Design the character that your plush animals and fursuit components will represent. Species, color palette, and reference sheet --- the creative starting point.
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](../study-guides/sewing-basics-for-fursuit-makers.md)**
+> If the backstitch, ladder stitch, or machine sewing steps in this project were challenging, the sewing basics study guide covers each technique in detail with practice exercises.
+
+---
+
 ## Sources and Further Reading
 
 - Choly Knight. "Sew Cute to Cuddle." Various editions. (Beginner plush sewing patterns)

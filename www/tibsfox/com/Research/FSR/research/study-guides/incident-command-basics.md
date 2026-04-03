@@ -226,6 +226,19 @@ Test your understanding of the concepts in this guide.
 
 ---
 
+## More Try Sessions and DIY Projects
+
+> **Study Guide: [Radio Communications for Emergencies](radio-communications-basics.md)**
+> ICS provides the organizational framework. Radio provides the communications. Ham radio operators in ARES/RACES use ICS-compatible procedures to integrate into disaster response. The radio study guide covers the full citizen communications ladder from NOAA weather radio through ham licensing and ARES membership.
+
+> **DIY Project: [Build a 72-Hour Go Bag](../try-sessions/build-a-go-bag.md)**
+> ICS assumes organized resources. A citizen's first resource is personal preparedness. The go bag is the physical complement to the organizational knowledge in this study guide --- having the supplies to sustain yourself while ICS manages the response.
+
+> **Try Session: [Hands-Only CPR](../try-sessions/hands-only-cpr.md)**
+> ICS Link 1 (Command) and Link 2 (Operations) depend on someone starting CPR before the system activates. Learn the skill that is the foundation of bystander response.
+
+---
+
 ## Sources and Further Reading
 
 - FEMA Emergency Management Institute. "IS-100.c: Introduction to the Incident Command System." training.fema.gov. (Free course)

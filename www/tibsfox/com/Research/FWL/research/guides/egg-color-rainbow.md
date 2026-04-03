@@ -156,4 +156,14 @@ The rainbow egg basket is where science meets beauty, where genetics meets break
 
 ---
 
+## Try This
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- You have a rainbow carton. Do the colors taste different? Design a blind test with your blue, green, brown, and cream eggs.
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- The blue egg gene, the polygenic brown pigment system, and the olive-egg cross. Understand the genetics behind every color in the carton.
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Cross a blue-egg hen with a dark-brown-egg rooster and hatch the offspring. The F1 will lay olive eggs. Watch Mendelian genetics unfold in your incubator.
+
+---
+
 *Sources and further reading: Wang et al. (2013), "An EAV-HP Insertion in SLCO1B3 Causes Blue Eggshell in the Chicken," PLoS Genetics; American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Marans of America Club, Egg Color Scale; Ameraucana Breeders Club breed standard; Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia."*

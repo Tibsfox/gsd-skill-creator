@@ -136,4 +136,16 @@ Despite these management requirements, Silkies thrive in the PNW when properly h
 
 ---
 
+## Try This
+
+> **[Hatch Eggs at Home](../try-sessions/incubation-project.md)** --- Silkies are legendary brooders, but you can also incubate their eggs mechanically. Or use a broody Silkie to hatch eggs from other breeds --- nature's incubator.
+
+> **[Design Your Dream Coop](../try-sessions/coop-design-challenge.md)** --- Silkies need rain protection, low roosts (or none), and predator-aware flockmates. Design a PNW coop with a dedicated Silkie section.
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- Silkie feathering, fibromelanosis, polydactyly, and the recessive hookless barb gene --- no breed packs more genetic oddities into one body.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Silkies' crests obscure their vision, making them vulnerable to threats other breeds see coming. Learn the health concerns specific to ornamental breeds.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Dorshorst et al. (2011), "Genomic Structure of the Endothelin 3 Locus Underlying Fibromelanosis," Genetics; Damerow (2012), "The Chicken Encyclopedia"; American Silkie Bantam Club resources. See also [FWL-02f] Ornamental and Bantam Breeds, [FWL-04] Feather Genetics (silkie feathering, fibromelanosis, polydactyly), [FWL-06] Husbandry Guide.*

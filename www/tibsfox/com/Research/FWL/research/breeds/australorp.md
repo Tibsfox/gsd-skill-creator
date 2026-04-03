@@ -126,4 +126,16 @@ In a starter flock of six PNW hens, two Australorps is not too many. They will l
 
 ---
 
+## Try This
+
+> **[Breed Identification Challenge](../try-sessions/breed-identification.md)** --- Can you distinguish an Australorp from a Black Jersey Giant or a Black Orpington? The beetle-green sheen is the tell. Test your eye on 20 breeds.
+
+> **[The Egg Taste Test](../try-sessions/egg-taste-test.md)** --- The Australorp is among the most prolific brown-egg heritage layers. Run a blind taste test: does quantity correlate with quality?
+
+> **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- The Australorp's black plumage is controlled by the Extended Black allele at the E locus. Learn the genetics behind the sheen.
+
+> **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Your most productive layers are the first to show nutritional stress. Learn to read the signs before production drops.
+
+---
+
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia"; Australian Poultry Standards (2012); Roberts & Carter (1958), "The Australorp: Its Origin and Development"; Punnett (1923), "Heredity in Poultry."*

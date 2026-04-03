@@ -212,4 +212,14 @@ Beyond these precautions, raccoons are neighbors --- intelligent, adaptable, eco
 
 ---
 
+## Try This
+
+> **[Safe Raccoon Latrine Survey](../try-sessions/latrine-survey.md)** --- Apply the Baylisascaris knowledge from this document in the field. Learn to find latrines, assess contamination risk, and clean your own property safely.
+
+> **[PNW Mesocarnivore Comparison](../study-guides/pnw-mesocarnivore-comparison.md)** --- Compare disease profiles across raccoons, coyotes, opossums, and skunks. The opossum's near-immunity to rabies is one of the most remarkable facts in urban wildlife ecology.
+
+> **[How Well Do You Know Raccoons?](../study-guides/raccoon-biology-quiz.md)** --- Question 7 tests whether you know the truth about rabies in PNW raccoons. Most people get it wrong.
+
+---
+
 *Sources and further reading: Kazacos (2016), "Baylisascaris Larva Migrans," U.S. Geological Survey Circular 1412; Blanton et al. (2023), "Rabies Surveillance in the United States During 2022," Journal of the American Veterinary Medical Association; CDC (2023), "Parasites --- Baylisascaris" guidance; WDFW "Living with Wildlife: Raccoons" (2024); Gehrt et al. (2010), "Urban Carnivores: Ecology, Conflict, and Conservation"; Herrero et al. (2011), "Canine Distemper Virus in Raccoons"; Haider et al. (2014), "Leptospirosis in North American Wildlife." See also [RCN-01] Biology and Taxonomy, [RCN-04] Urban Adaptation, [RCN-05] Lifecycle and Reproduction, [RCN deep-dives/raccoon-proofing] Raccoon-Proofing Guide.*

@@ -196,6 +196,7 @@ Every painter, picking up a brush for the first time, joins this line. Every pai
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Experience the fundamental act of painting described throughout this history — pigment on surface, shaped by intent. The same basic problem solved by cave painters, Egyptian artisans, and Renaissance masters.
 - **Art History Timeline Study Guide** ([study-guides/art-history-timeline](study-guides/art-history-timeline.md)): Test your knowledge of the movements, artists, and key works introduced in this chapter with a structured study resource and self-test.
+- **Paint a Furry Convention Badge** ([try-sessions/convention-badge-painting](try-sessions/convention-badge-painting.md)): The newest chapter in painting history is being written at convention tables. The furry badge painting tradition is a living link in the miniature portraiture lineage that runs from Persian miniaturists through Hilliard to today.
 
 ---
 

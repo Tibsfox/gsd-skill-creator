@@ -283,6 +283,7 @@ Convention badge painting is live color mixing under pressure. The artist receiv
 
 - **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): The Zorn palette version of this session puts color theory into practice — four colors, temperature-based mixing, the full range of warm and cool tones from the simplest possible palette.
 - **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): Strip color away entirely and focus on value — the foundation that all color relationships are built on. Thirty days of grayscale study will transform your color painting.
+- **Paint a PNW Landscape in 2 Hours** ([try-sessions/paint-a-landscape](try-sessions/paint-a-landscape.md)): Color temperature in practice — warm foregrounds, cool distances, ten different greens on your palette. The landscape session is the color theory chapter brought to life outdoors.
 
 ---
 
