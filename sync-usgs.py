@@ -24,7 +24,11 @@ SYNC_DIRS = [
     "USGS/cascadia",
     "USGS/preparedness",
     "MUK",  # updated boulder-creek-quake.html
-    "NASA/artemis-ii",  # updated status.json
+    "NASA/artemis-ii",  # status.json, ai-coverage.html, papers.html
+    "OPEN",  # updated problem cards
+    "forest",  # slime mold simulation
+    "ECO",  # slime mold research page
+    "PNW-NEWS",  # daily news
 ]
 
 dry_run = "--dry-run" in sys.argv
