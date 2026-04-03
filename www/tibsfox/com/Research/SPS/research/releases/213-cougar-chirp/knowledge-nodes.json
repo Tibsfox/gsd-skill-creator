@@ -1,0 +1,104 @@
+{
+  "degree": 213,
+  "species": "Cougar",
+  "scientific_name": "Puma concolor",
+  "slug": "213-cougar-chirp",
+  "sound_type": "bird-like contact chirp -- 'PEEP' or 'CHIRP'. 1,000-3,000 Hz. 0.1-0.3 seconds. Mother-kitten communication. E=4",
+  "energy": 4,
+  "ecosystem": "Forest. Coniferous and mixed forest. Denning areas, sheltered corridors. Close-range family communication.",
+  "season": "Year-round. Kittens born any season, peak spring.",
+  "family": "Felidae (second entry)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Cougar",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.80,
+    "lon": -121.80,
+    "description": "Cougar in Cascades forests. Denning areas in secluded locations."
+  },
+  "taxonomy_note": {
+    "description": "Second Felidae. Cougar scream/chirp comparison pair (212-213). Same species, different vocalization.",
+    "current_family": "Felidae (second entry)",
+    "new_family": false,
+    "family_count_in_engine": "Felidae: Cougar Scream (212, E=7), Cougar Chirp (213, E=4).",
+    "name_etymology": "Puma concolor = 'one-colored cat'. Chirp is the intimate family call.",
+    "genus_note": "Puma -- same species as 212, different vocalization.",
+    "order_note": "Carnivora. Second Felidae entry.",
+    "family_position": "Felidae: second entry. Scream/chirp pair complete.",
+    "class_note": "Class Mammalia. Apex predator's gentle side."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,000-3,000 Hz.",
+    "peak_energy_band_hz": "1,500-2,500 Hz.",
+    "song_frequency_hz": "Chirp: 1,000-3,000 Hz. Distress chirp: 2,000-4,000 Hz.",
+    "song_duration_s": "0.1-0.3 seconds per chirp. Sequences of 3-8.",
+    "note_structure": "Short, bird-like whistle. Surprisingly gentle.",
+    "note_types": "Contact chirp (mother-kitten), courtship chirp (adult), distress chirp (kitten, higher pitch).",
+    "phrase_structure": "Sequences of 3-8 chirps. Close-range. 5-30 meters.",
+    "timbre": "Bird-like, whistling, gentle. Nothing like the scream.",
+    "amplitude": "E=4. Intimate, close-range. Designed for family communication, not broadcast.",
+    "tempo": "Chirps in quick succession during contact. Slower during courtship.",
+    "context": "Mother-kitten contact. Courtship. Kitten distress. Den and corridor.",
+    "regional_variation": "Minimal variation.",
+    "key_property": "COUGAR CHIRP. Bird-like contact call. E=4. Second Felidae. Scream/chirp pair (212-213). v1.49.354."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Tawny/golden-brown coat. Kittens: spotted for camouflage, spots fade by 6 months.",
+    "diagnostic_mark": "Kittens: spotted. Adults: plain tawny. Long heavy tail.",
+    "seasonal_variation": "Minimal.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Adults: 50-100 kg. Kittens: ~1 lb at birth. 1-6 per litter (2-3 typical). Born blind.",
+    "diagnostic_mark": "Kittens: spotted coat, blue eyes, small. Adults: large tawny cat.",
+    "field_id": "Kittens are rarely seen -- if found, leave immediately. Mother is nearby. Do not approach."
+  },
+  "nodes": [
+    {
+      "id": "scream-chirp-pair",
+      "type": "concept",
+      "title": "Scream/Chirp Pair -- Vocal Range of Apex Predator",
+      "description": "Same species, E=7 and E=4. Broadcast vs. intimate. Terror vs. tenderness. 1-3 km vs. 5-30 meters.",
+      "connections": ["kitten-communication", "intimate-broadcast"]
+    },
+    {
+      "id": "kitten-communication",
+      "type": "concept",
+      "title": "Kitten Communication -- Vulnerable Apex",
+      "description": "Born blind and spotted. 40-70% first-year mortality. Each chirp: alive. 12-24 month dependency. Adulthood is silence.",
+      "connections": ["scream-chirp-pair"]
+    },
+    {
+      "id": "intimate-broadcast",
+      "type": "concept",
+      "title": "Intimate vs. Broadcast Vocalization",
+      "description": "5-30 meters vs. 1-3 km. Same vocal apparatus, radically different social functions. Chirp for family, scream for reproduction.",
+      "connections": ["scream-chirp-pair"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-212",
+      "species": "Cougar Scream",
+      "relationship": "SCREAM/CHIRP PAIR! Same species, E=7 to E=4. Terror to tenderness. Broadcast to intimate."
+    },
+    {
+      "target": "SPS-214",
+      "species": "Bobcat Yowl",
+      "relationship": "FELIDAE CONTINUES! Cougar chirp (E=4) to bobcat yowl (E=5). Mother's whisper to smaller cat's rasp."
+    },
+    {
+      "target": "SPS-211",
+      "species": "Red Fox Bark",
+      "relationship": "Same E=4. Both contact calls. Fox territorial, cougar familial. Different families, same energy."
+    },
+    {
+      "target": "S36-213",
+      "artist": "Kinski",
+      "relationship": "PREDATOR PATIENCE! Motorik groove (E=6) and mother's chirp (E=4). The stalk and the nest."
+    }
+  ]
+}
