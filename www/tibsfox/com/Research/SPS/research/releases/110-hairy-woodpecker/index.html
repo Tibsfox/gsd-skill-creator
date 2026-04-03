@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 110&deg; &mdash; Hairy Woodpecker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #E65100, #EF6C00);
+      color: #FFF3E0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(230, 81, 0, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Picidae card */
+    .picidae-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #FF9800 100%);
+      border: 2px solid #E65100;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .picidae-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFECB3;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .picidae-card p { color: #FFF3E0; }
+    .picidae-card strong { color: #FFECB3; }
+
+    /* Comparison card */
+    .comparison-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 30%, #455A64 60%, #263238 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .comparison-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .comparison-card p { color: #ECEFF1; }
+    .comparison-card strong { color: #B0BEC5; }
+
+    /* Genus card */
+    .genus-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #33691E 60%, #1B5E20 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .genus-card p { color: #E8F5E9; }
+    .genus-card strong { color: #C8E6C9; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.e5 { background: #E65100; }
+    .theory-icon.peek { background: #FF6F00; }
+    .theory-icon.genus { background: #1B5E20; }
+    .theory-icon.picidae { background: #4E342E; }
+    .theory-icon.generalist { background: #00695C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FFEBEE; color: #B71C1C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+
+    .drum-comparison {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+    .drum-comparison th {
+      background: var(--puget-teal);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .drum-comparison td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .drum-comparison tr:nth-child(even) { background: var(--puget-light); }
+    .drum-comparison .highlight { background: #FFF3E0; font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">110&deg;</div>
+      <div class="release-title-block">
+        <h2>Hairy Woodpecker</h2>
+        <div class="scientific"><em>Dryobates villosus</em> (Picidae) &mdash; E=5 &mdash; 4th Consecutive Picidae &mdash; Genus Dryobates Enters</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      sharp peek! call + stuttering drum &mdash; <strong>E=5</strong>. Fourth consecutive Picidae (107&ndash;110). Energy correction from E=6. Genus <em>Dryobates</em> enters the engine &mdash; &ldquo;tree-treader&rdquo; (where <em>Dryocopus</em> means &ldquo;tree-beater&rdquo;). The Hairy-Downy pair begins: the most commonly confused bird pair in North American birding. Fiftieth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Picidae Card -->
+        <div class="picidae-card">
+          <h3>Fourth Consecutive Picidae &mdash; Halfway to the Sciuridae Record</h3>
+          <p>
+            Four consecutive Picidae: <strong>Acorn Woodpecker</strong> (107),
+            <strong>Pileated laughing</strong> (108), <strong>Pileated drumming</strong> (109),
+            <strong>Hairy Woodpecker</strong> (110). The Picidae streak is now at
+            <strong>half the Sciuridae octet record</strong> (8 consecutive). Each entry
+            is acoustically distinct: colonial laughter, solitary primal scream,
+            machine-gun percussion, sharp staccato call. No two Picidae entries sound alike.
+            The family&rsquo;s acoustic diversity is wider than any other in the engine.
+          </p>
+        </div>
+
+        <!-- Genus Card -->
+        <div class="genus-card">
+          <h3>Genus <em>Dryobates</em> Enters &mdash; The Tree-Treader</h3>
+          <p>
+            <strong><em>Dryobates</em></strong> from Greek <em>drys</em> (&ldquo;tree&rdquo;)
+            + <em>bates</em> (&ldquo;one who treads&rdquo;) &mdash; &ldquo;tree-treader.&rdquo;
+            Where <em>Dryocopus</em> (Pileated, degrees 108&ndash;109) means
+            &ldquo;tree-beater,&rdquo; <em>Dryobates</em> means &ldquo;tree-treader&rdquo; &mdash;
+            a softer, more exploratory relationship with the tree. The Downy Woodpecker
+            (<em>Dryobates pubescens</em>, degree 111) is in the same genus &mdash; consecutive
+            same-genus entries documenting acoustic scaling in closely related species.
+          </p>
+        </div>
+
+        <!-- Comparison Card -->
+        <div class="comparison-card">
+          <h3>The Hairy-Downy Confusion Problem &mdash; Degree 111 Preview</h3>
+          <p>
+            The Hairy and Downy Woodpeckers are the <strong>most commonly confused bird pair</strong>
+            in North American birding. Nearly identical plumage. Different sizes (Hairy is ~50% longer,
+            ~3x heavier). The <strong>bill proportion</strong> is the key visual mark: Hairy&rsquo;s
+            bill is nearly as long as the head; Downy&rsquo;s bill is ~1/3 head length. The
+            <strong>calls</strong> are the key acoustic mark: Hairy&rsquo;s sharp
+            &ldquo;PEEK!&rdquo; vs. Downy&rsquo;s soft &ldquo;pik.&rdquo; Degrees 110&ndash;111
+            document this comparison in full.
+          </p>
+        </div>
+
+        <h2>Sharp Peek! &mdash; The Call</h2>
+        <p>
+          The Hairy Woodpecker&rsquo;s primary call is a <strong>sharp, emphatic
+          &ldquo;peek!&rdquo;</strong> &mdash; a single loud note that rings through the
+          forest at 2,000&ndash;6,000 Hz. Brief (0.05&ndash;0.1 sec) and explosive. The
+          call is metallic, commanding, and immediately attention-grabbing. It is louder,
+          sharper, and lower-pitched than the Downy&rsquo;s softer &ldquo;pik&rdquo; &mdash;
+          the most reliable acoustic field mark separating the two species.
+        </p>
+
+        <h2>The Stuttering Drum</h2>
+        <p>
+          The Hairy Woodpecker&rsquo;s drum is a <strong>rapid, stuttering roll</strong> at
+          approximately 25 strikes per second &mdash; significantly faster than the
+          Pileated&rsquo;s 15&ndash;16/sec but with less force per strike. Duration 0.5&ndash;1.5
+          seconds. Fundamental frequency 100&ndash;200 Hz. The drum is sharp and snappy compared
+          to the Pileated&rsquo;s deep, booming roll. Detection range 200&ndash;500 meters.
+        </p>
+
+        <h2>Acoustic Scaling: Pileated &rarr; Hairy &rarr; Downy</h2>
+        <table class="drum-comparison">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Pileated (109)</th>
+              <th>Hairy (110)</th>
+              <th>Downy (111)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Strike rate</td>
+              <td>15&ndash;16/sec</td>
+              <td class="highlight">~25/sec</td>
+              <td>15&ndash;25/sec</td>
+            </tr>
+            <tr>
+              <td>Duration</td>
+              <td>1&ndash;3 sec</td>
+              <td class="highlight">0.5&ndash;1.5 sec</td>
+              <td>0.5&ndash;1 sec</td>
+            </tr>
+            <tr>
+              <td>Frequency</td>
+              <td>40&ndash;80 Hz</td>
+              <td class="highlight">100&ndash;200 Hz</td>
+              <td>150&ndash;300 Hz</td>
+            </tr>
+            <tr>
+              <td>Amplitude</td>
+              <td>LOUDEST</td>
+              <td class="highlight">Loud</td>
+              <td>Moderate</td>
+            </tr>
+            <tr>
+              <td>Energy</td>
+              <td>E=6</td>
+              <td class="highlight">E=5</td>
+              <td>E=?</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-109 Pileated Woodpecker (drumming)</strong>
+            <p>Consecutive Picidae. Pileated drum (E=6, 40-80 Hz, 15-16/sec, LOUDEST) vs. Hairy drum (E=5, 100-200 Hz, ~25/sec, loud). Acoustic scaling: larger body = lower frequency, more power, slower rate.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-108 Pileated Woodpecker (laughing)</strong>
+            <p>Third consecutive Picidae. Same family, different genus (Dryocopus vs. Dryobates). Tree-beater vs. tree-treader. E=6 vs. E=5. Maximum vs. emphatic.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-107 Acorn Woodpecker (streak start)</strong>
+            <p>Fourth consecutive Picidae (107-108-109-110). The streak began with the Acorn Woodpecker's colonial waka-waka-waka. Four entries, four dramatically different sounds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022 Northern Flicker (family comparison)</strong>
+            <p>Picidae family. Flicker: wicka-wicka-wicka call + rapid drum (25-30/sec). Hairy: sharp peek! + stuttering drum (~25/sec). Similar drum rates, different calls. Both generalists.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-111 Downy Woodpecker (Dryobates pair)</strong>
+            <p>SAME GENUS (Dryobates). Consecutive same-genus entries. Hairy: larger, louder, sharper PEEK! Downy: smaller, softer, gentler pik. The most instructive acoustic scaling comparison in PNW birding.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon e5">5</div>
+            <div class="theory-content">
+              <h4>E=5 &mdash; Sharp and Emphatic, Not Maximum</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>The Hairy's peek! and drum are loud and commanding but not overwhelming. E=5 is the energy correction from the Pileated's E=6. Still powerful, but controlled. The Hairy is the medium percussionist.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon peek">!</div>
+            <div class="theory-content">
+              <h4>Sharp Peek! &mdash; The Diagnostic Call</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Sharp, emphatic, metallic "PEEK!" at 2,000-6,000 Hz. The most reliable acoustic field mark separating Hairy from Downy. Louder, sharper, lower than the Downy's soft "pik."</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon genus">D</div>
+            <div class="theory-content">
+              <h4>Genus <em>Dryobates</em> &mdash; Tree-Treader</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>New genus enters. Dryobates = "tree-treader." Dryocopus = "tree-beater." The etymological shift from beating to treading reflects the size and force difference. Consecutive same-genus entries at 110-111 (Hairy/Downy).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon picidae">P</div>
+            <div class="theory-content">
+              <h4>Fourth Consecutive Picidae (107&ndash;110)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Acorn (107), Pileated laughing (108), Pileated drumming (109), Hairy (110). Halfway to the Sciuridae record (8). Each entry acoustically unique.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon generalist">G</div>
+            <div class="theory-content">
+              <h4>Habitat Generalist</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>The Hairy occupies virtually any forest type: coniferous, mixed, deciduous, suburban, burned. More flexible than the Pileated (old-growth specialist) or Acorn (oak savanna). Generalist in the Picidae streak.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Hairy Woodpecker</div>
+          <div class="stat-detail"><em>Dryobates villosus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">4th consecutive (107&ndash;110)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">peek! + stutter drum</div>
+          <div class="stat-detail">sharp call + rapid roll</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 5</div>
+          <div class="stat-detail">correction from E=6</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Forest (generalist)</div>
+          <div class="stat-detail">coniferous to suburban</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Call Frequency</div>
+          <div class="stat-value">2,000&ndash;6,000 Hz</div>
+          <div class="stat-detail">sharp metallic PEEK!</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Drum Rate</div>
+          <div class="stat-value">~25/sec</div>
+          <div class="stat-detail">faster than Pileated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Drum Frequency</div>
+          <div class="stat-value">100&ndash;200 Hz</div>
+          <div class="stat-detail">higher than Pileated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">18&ndash;26 cm</div>
+          <div class="stat-detail">~3x Downy&rsquo;s mass</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV Status</div>
+          <div class="stat-value">Original</div>
+          <div class="stat-detail">50th consecutive</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

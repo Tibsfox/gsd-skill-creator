@@ -117,7 +117,17 @@ Key connections:
 
 **"Crisis Intervention Team Core Elements"** — CIT International (2019). The standard reference for CIT program implementation, describing the Memphis Model and its adaptations.
 
-**"CAHOOTS Media Guide"** — White Bird Clinic, Eugene, Oregon. The primary source for the CAHOOTS program model, outcomes data, and replication guidance discussed in FSR-08.
+**"CAHOOTS Media Guide"** — White Bird Clinic, Eugene, Oregon. The primary source for the CAHOOTS program model, outcomes data, and replication guidance discussed in FSR-08 and the [CAHOOTS case study](case-studies/cahoots-model.md).
+
+### Case Studies and Guides
+
+The FSR series includes detailed case studies and guides that expand on topics introduced in the main documents:
+
+- **[Portland Street Response](case-studies/portland-street-response.md)** — operational analysis of Portland's CAHOOTS-model alternative crisis response program, expanding on the PNW section of FSR-08
+- **[Cascadia Earthquake Preparedness](case-studies/cascadia-earthquake.md)** — comprehensive analysis of the Cascadia Subduction Zone threat, expanding on the CSZ section of FSR-10
+- **[CAHOOTS Model](case-studies/cahoots-model.md)** — thirty-five years of Eugene's civilian crisis response, the foundation referenced throughout FSR-08
+- **[King County Medic One](case-studies/king-county-medic-one.md)** — the gold standard cardiac arrest system, expanding on FSR-03 and FSR-10
+- **[Becoming a Firefighter](guides/becoming-a-firefighter.md)** — step-by-step career guide, expanding on FSR-06's training and certification content
 
 ### Responder Wellness
 

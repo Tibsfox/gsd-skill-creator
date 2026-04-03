@@ -126,6 +126,8 @@ For the person who served thirty years in this region, the mutual aid network wa
 - **[FSR-03]** EMS and Paramedicine — King County Medic One as the national model for cardiac arrest systems
 - **[FSR-08]** Mental Health Crisis — Portland Street Response, Seattle LEAD, DESC, and Olympia Crisis Response Unit
 - **[FSR-09]** Responder Wellness — the specific exposures (wildfire smoke seasons, maritime rescue cold water, CSZ planning stress) that shape PNW responder wellness
+- **[Case Study: Cascadia Earthquake](case-studies/cascadia-earthquake.md)** — expanded analysis of the Cascadia Subduction Zone threat, lahar hazard, and community preparedness
+- **[Case Study: Portland Street Response](case-studies/portland-street-response.md)** — Portland Fire and Rescue's alternative crisis response program in operational detail
 - **[ECO-07]** Fire Ecology — the ecological context for wildland fire in the Cascades, fuel accumulation, and the fire regimes that determine fire behavior
 - **[ECO-09]** PNW Ecology — Cascadia Subduction Zone geology, Mount Rainier volcanic hazards, and Puget Sound marine ecology
 - **[WDC-09]** PNW Timber — Douglas fir and western red cedar as the construction materials that PNW firefighters encounter in every structure fire; the timber industry history that built the communities these departments protect
