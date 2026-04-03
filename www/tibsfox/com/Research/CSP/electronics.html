@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway 4: Electronics &amp; Hardware &mdash; The Silicon Under the Software | CSP</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --green: #4CAF50; --green-light: #81C784;
+  --blue: #4a7aba; --gold: #C4A35A; --amber: #E89848;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--green); text-decoration:none; }
+a:hover { color:var(--green-light); }
+
+header {
+  background:linear-gradient(135deg, #000a0a 0%, #0a1a15 25%, #0a2a1a 50%, #051510 75%, var(--bg) 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:3px solid var(--green);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(76,175,80,0.08) 0%, transparent 70%);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; }
+header .subtitle { color:var(--green); font-size:0.9rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a.active { color:var(--green); }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1.3rem; color:#fff; margin:2.5rem 0 0.8rem; font-weight:400; }
+h3 { font-size:1rem; color:var(--green-light); margin:1.8rem 0 0.5rem; font-weight:600; }
+p { margin:0.6rem 0; font-size:0.9rem; }
+code { background:rgba(76,175,80,0.1); padding:0.15rem 0.4rem; border-radius:3px; font-size:0.85rem; color:var(--green-light); }
+pre { background:var(--panel); border:1px solid var(--border); padding:1rem 1.2rem; margin:1rem 0; overflow-x:auto; font-size:0.82rem; line-height:1.6; border-radius:4px; }
+pre code { background:none; padding:0; color:var(--text); }
+
+.try-this {
+  background:rgba(76,175,80,0.05); border:1px solid rgba(76,175,80,0.2); border-left:3px solid var(--green);
+  padding:1.2rem 1.5rem; margin:1.2rem 0; border-radius:0 4px 4px 0;
+}
+.try-this h4 { color:var(--green); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem; font-family:system-ui,sans-serif; }
+.try-this p, .try-this li { font-size:0.85rem; font-family:system-ui,sans-serif; }
+.try-this ol, .try-this ul { margin:0.5rem 0 0 1.5rem; }
+.try-this li { margin:0.3rem 0; }
+
+.spec-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; font-family:system-ui,sans-serif; }
+.spec-table th { text-align:left; color:var(--green); font-weight:600; padding:0.4rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; }
+.spec-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.spec-table td:first-child { color:var(--green-light); white-space:nowrap; }
+
+.connects { font-size:0.78rem; color:var(--gold); font-style:italic; margin-top:1rem; padding:0.8rem; background:var(--panel); border:1px solid var(--border); border-radius:4px; }
+
+.circuit {
+  background:var(--panel); border:1px solid var(--border); border-radius:4px;
+  padding:1.2rem 1.5rem; margin:1rem 0; border-left:3px solid var(--amber);
+}
+.circuit h4 { color:var(--amber); font-size:0.9rem; margin-bottom:0.4rem; }
+.circuit p { font-size:0.85rem; font-family:system-ui,sans-serif; }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Pathway 4: Electronics &amp; Hardware</h1>
+  <div class="subtitle">The Silicon Under the Software</div>
+  <nav>
+    <a href="index.html">CSP Home</a>
+    <a href="fundamentals.html">1: Fundamentals</a>
+    <a href="web.html">2: Web</a>
+    <a href="systems.html">3: Systems</a>
+    <a class="active" href="electronics.html">4: Electronics</a>
+    <a href="languages.html">Languages</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+<h2>1. Circuits &amp; Ohm&rsquo;s Law</h2>
+
+<p>Everything in electronics starts with three quantities and one law:</p>
+
+<p style="text-align:center; font-size:1.3rem; color:#fff; margin:1.5rem 0;">V = I &times; R</p>
+
+<p><strong>Voltage (V)</strong> is pressure &mdash; the force pushing electrons through a circuit. <strong>Current (I)</strong> is flow &mdash; how many electrons pass a point per second (amperes). <strong>Resistance (R)</strong> is opposition &mdash; how much the circuit resists the flow (ohms). Know any two, calculate the third.</p>
+
+<div class="circuit">
+<h4>The Three Passive Components</h4>
+<p><strong>Resistor:</strong> Converts electrical energy to heat. Controls current flow. Color bands encode the value. A 10K&Omega; resistor with 5V across it passes 0.5 mA (V/R = 5/10000).</p>
+<p><strong>Capacitor:</strong> Stores energy in an electric field between two plates. Charges and discharges over time. The RC time constant (&tau; = R &times; C) governs how fast. Used for filtering, timing, and coupling signals. A 100&mu;F capacitor with a 10K&Omega; resistor has &tau; = 1 second.</p>
+<p><strong>Inductor:</strong> Stores energy in a magnetic field around a coiled wire. Resists changes in current. Inductors and capacitors together create resonant circuits &mdash; the basis of radio tuning, power supplies, and the oscillators inside every clock signal on every CPU.</p>
+</div>
+
+<h3>Power</h3>
+
+<p>P = V &times; I (watts). A 5V USB port delivering 2A supplies 10 watts. A 12V automotive system at 10A is 120 watts. The Orion spacecraft&rsquo;s solar arrays generate about 11,100 watts at Earth distance &mdash; enough to power a small house. At lunar distance (same solar flux), the arrays produce the same power because the Sun-Earth distance doesn&rsquo;t change significantly over a lunar transit.</p>
+
+<div class="try-this">
+<h4>Try This</h4>
+<ol>
+<li>Buy a breadboard, a bag of resistors, LEDs, and a 9V battery. Build a circuit: battery &rarr; resistor &rarr; LED &rarr; battery. The resistor limits current so the LED doesn&rsquo;t burn out. Calculate the resistor value: (9V &minus; 2V LED drop) / 20mA = 350&Omega;. Use a 390&Omega; (nearest standard value).</li>
+<li>Add a capacitor in parallel with the LED. Watch it glow briefly after you disconnect the battery &mdash; the capacitor discharges through the LED.</li>
+<li>Get a multimeter. Measure voltage across the LED. Measure current through the circuit. Verify Ohm&rsquo;s law: the numbers should match your calculations.</li>
+</ol>
+</div>
+
+<h2>2. The 555 Timer</h2>
+
+<p>The NE555 is the most popular integrated circuit ever manufactured. Billions have been produced since its introduction in 1972 by Signetics (Hans Camenzind&rsquo;s design). It contains 23 transistors, 2 diodes, and 15 resistors &mdash; and it teaches more about analog electronics than any textbook.</p>
+
+<table class="spec-table">
+<tr><th>Mode</th><th>What It Does</th><th>Application</th></tr>
+<tr><td>Astable</td><td>Free-running oscillator &mdash; output toggles between high and low continuously</td><td>Clock signals, LED blinkers, tone generators</td></tr>
+<tr><td>Monostable</td><td>One-shot pulse &mdash; trigger input produces a single timed output pulse</td><td>Debouncing switches, timed delays, pulse shaping</td></tr>
+<tr><td>Bistable</td><td>Flip-flop &mdash; output toggles on each trigger, stays until next trigger</td><td>Toggle switches, memory elements, divide-by-2</td></tr>
+</table>
+
+<h3>Astable Mode: The Oscillator</h3>
+
+<p>Two resistors (R1, R2) and one capacitor (C) set the frequency:</p>
+
+<pre><code>f = 1.44 / ((R1 + 2*R2) * C)
+
+Example: R1 = 1K, R2 = 10K, C = 10uF
+f = 1.44 / ((1000 + 20000) * 0.00001)
+f = 1.44 / 0.21
+f = 6.86 Hz  (blinks ~7 times per second)</code></pre>
+
+<p>Change the capacitor to 100nF and the frequency jumps to 686 Hz &mdash; an audible tone. Connect a speaker and you have a sound generator. The same circuit at MHz frequencies generates the clock signal that drives a CPU. Every digital system has an oscillator at its heart.</p>
+
+<div class="connects">Our <a href="../T55/index.html">555 timer deep dive</a> covers all three modes with interactive simulations. The building at 811 E. Arques Avenue, Sunnyvale &mdash; where Signetics designed the 555 &mdash; is now part of the Juniper Networks campus. Wolf Road in Sunnyvale, where Philips Semiconductor (formerly Signetics) had its offices, is a direct connection to the foxglove@philips.com era.</div>
+
+<h2>3. Microcontrollers</h2>
+
+<p>A microcontroller is a computer on a single chip: CPU, RAM, flash memory, and I/O peripherals. It bridges the gap between software and the physical world.</p>
+
+<table class="spec-table">
+<tr><th>Platform</th><th>CPU</th><th>RAM</th><th>Key Feature</th><th>Cost</th></tr>
+<tr><td>Arduino Uno</td><td>ATmega328P 16MHz</td><td>2 KB</td><td>Simplest. 14 digital I/O, 6 analog. The beginner board.</td><td>~$10</td></tr>
+<tr><td>ESP32</td><td>Xtensa 240MHz dual-core</td><td>520 KB</td><td>WiFi + Bluetooth built in. Perfect for IoT.</td><td>~$5</td></tr>
+<tr><td>Raspberry Pi Pico</td><td>RP2040 133MHz dual-core</td><td>264 KB</td><td>PIO (programmable I/O) state machines. MicroPython.</td><td>~$4</td></tr>
+<tr><td>Raspberry Pi 5</td><td>Cortex-A76 2.4GHz quad</td><td>4-8 GB</td><td>Full Linux computer. HDMI, USB, GPIO. Desktop replacement.</td><td>~$60</td></tr>
+</table>
+
+<h3>Communication Protocols</h3>
+
+<table class="spec-table">
+<tr><th>Protocol</th><th>Wires</th><th>Speed</th><th>Use Case</th></tr>
+<tr><td>I2C</td><td>2 (SDA, SCL)</td><td>100-400 kbit/s</td><td>Sensors, displays, EEPROMs. Bus topology &mdash; many devices, 2 wires.</td></tr>
+<tr><td>SPI</td><td>4 (MOSI, MISO, SCK, CS)</td><td>1-50 Mbit/s</td><td>SD cards, displays, ADCs. Fast but needs more wires.</td></tr>
+<tr><td>UART</td><td>2 (TX, RX)</td><td>9600-115200 baud</td><td>Serial console, GPS modules, Bluetooth modules. Point-to-point.</td></tr>
+<tr><td>PWM</td><td>1</td><td>Varies</td><td>Motor speed, LED brightness, servo position. Duty cycle encodes the value.</td></tr>
+</table>
+
+<pre><code>// Arduino — read temperature sensor, control LED brightness
+#include &lt;Wire.h&gt;
+
+void setup() {
+  Wire.begin();           // I2C bus
+  Serial.begin(115200);   // UART to computer
+  pinMode(9, OUTPUT);     // PWM-capable pin for LED
+}
+
+void loop() {
+  // Read temperature from I2C sensor at address 0x48
+  Wire.requestFrom(0x48, 2);
+  int raw = (Wire.read() &lt;&lt; 8) | Wire.read();
+  float tempC = raw / 256.0;
+
+  // Map temperature to LED brightness (0-30C → 0-255 PWM)
+  int brightness = constrain(map(tempC * 10, 0, 300, 0, 255), 0, 255);
+  analogWrite(9, brightness);  // PWM output
+
+  Serial.print("Temp: "); Serial.print(tempC);
+  Serial.print("C  LED: "); Serial.println(brightness);
+  delay(1000);
+}</code></pre>
+
+<div class="try-this">
+<h4>Try This</h4>
+<ol>
+<li>Get an Arduino Uno or ESP32. Install the Arduino IDE. Upload the Blink example (File &rarr; Examples &rarr; Basics &rarr; Blink). The onboard LED blinks. You just programmed hardware.</li>
+<li>Connect a temperature sensor (DS18B20 or BME280) via I2C. Read the temperature and print it to the serial monitor. Compare with KPAE METAR &mdash; how close is your sensor to the airport?</li>
+<li>Build a weather station: temperature + humidity + pressure sensor, ESP32 with WiFi, POST data to a server every 5 minutes. This is how real weather stations work.</li>
+</ol>
+</div>
+
+<h2>4. Signal Processing</h2>
+
+<p>Every sensor produces a signal. Signal processing extracts the information from that signal and removes the noise.</p>
+
+<h3>Analog Filtering</h3>
+
+<p>An <strong>RC low-pass filter</strong> is a resistor and capacitor in series. High frequencies are attenuated; low frequencies pass through. The cutoff frequency: f<sub>c</sub> = 1 / (2&pi;RC). A 10K&Omega; resistor with a 100nF capacitor gives f<sub>c</sub> &asymp; 159 Hz &mdash; it passes speech frequencies and blocks high-frequency noise.</p>
+
+<h3>Digital Filtering &amp; the FFT</h3>
+
+<p>The <strong>Fast Fourier Transform</strong> converts a time-domain signal into its frequency components. A weather station sampling temperature every second can use FFT to identify: the 24-hour diurnal cycle, the ~12-hour tidal component (for coastal stations), and high-frequency noise from sensor jitter.</p>
+
+<pre><code># Python FFT — analyze temperature data
+import numpy as np
+
+# 96 hours of hourly temperature data (KPAE, 4 days)
+temps = [4.5, 4.0, 3.5, ...]  # 96 values
+fft = np.fft.rfft(temps)
+freqs = np.fft.rfftfreq(len(temps), d=1.0)  # 1 sample/hour
+
+# Dominant frequency should be ~0.042 cycles/hour (24-hour period)
+dominant = freqs[np.argmax(np.abs(fft[1:])) + 1]
+print(f"Dominant period: {1/dominant:.1f} hours")  # should be ~24</code></pre>
+
+<h3>The Nyquist Theorem</h3>
+
+<p>To accurately capture a signal, you must sample at <strong>at least twice its highest frequency</strong>. Our hourly sweep cadence (1 sample/hour) can accurately capture signals with periods of 2 hours or longer. The 24-hour diurnal temperature cycle is well within this. Sub-hourly fluctuations (sea breeze onset, convective showers) are aliased &mdash; which is why our sub-version marks exist: they increase the effective sample rate during interesting events.</p>
+
+<div class="connects">Our math co-processor includes <a href="../MPC/index.html">FFT tools (fourier_fft, fourier_spectrum)</a> running on GPU via CUDA. The same signal processing that analyzes weather data also processes the <a href="../CERN/alice.html">ALICE TPC signals</a> &mdash; thousands of ionization electron drift-time measurements per collision, each a signal to be filtered and reconstructed.</div>
+
+<h2>5. PCB Design &amp; Fabrication</h2>
+
+<p>A printed circuit board replaces the breadboard with a permanent, reproducible, manufacturable design. The workflow:</p>
+
+<table class="spec-table">
+<tr><th>Step</th><th>Tool</th><th>Output</th></tr>
+<tr><td>Schematic capture</td><td>KiCad (free, open source)</td><td>Circuit diagram with component symbols and connections</td></tr>
+<tr><td>PCB layout</td><td>KiCad PCB Editor</td><td>Physical placement of components and copper traces</td></tr>
+<tr><td>Design rules check</td><td>KiCad DRC</td><td>Verify trace widths, clearances, via sizes</td></tr>
+<tr><td>Gerber export</td><td>KiCad Plot</td><td>Industry-standard manufacturing files</td></tr>
+<tr><td>Fabrication</td><td>JLCPCB, OSH Park, PCBWay</td><td>Physical boards, ~$2 for 5 boards, 1-week turnaround</td></tr>
+<tr><td>Assembly</td><td>Soldering iron or reflow oven</td><td>Populated board ready for testing</td></tr>
+</table>
+
+<p>From idea to manufactured hardware in under two weeks, for under $20. The barrier to entry for hardware development has never been lower. KiCad is free. JLCPCB fabricates boards for $2. A soldering iron costs $30. The ESP32 costs $5. A complete IoT device &mdash; designed, fabricated, programmed &mdash; for under $50.</p>
+
+<div class="try-this">
+<h4>Try This</h4>
+<ol>
+<li>Install KiCad 8 (free). Open the tutorial project. Place components, draw traces, run DRC. Generate Gerbers. You now know the PCB workflow.</li>
+<li>Design a simple board: ESP32 breakout with a temperature sensor, LED, and USB-C power. Export Gerbers and upload to JLCPCB &mdash; get a quote (it&rsquo;ll be ~$2).</li>
+<li>Read the <a href="../SHE/index.html">smart home electronics project</a>. Every device described there started as a breadboard prototype, became a KiCad design, and was fabricated as a PCB.</li>
+</ol>
+</div>
+
+<h2>The Hardware-Software Boundary</h2>
+
+<p>Assembly maps to logic gates. C&rsquo;s memory model maps to physical address lines. PWM is a for-loop in hardware. The 555 timer generates the clock signal that drives every CPU. The abstraction layers between software and hardware are thinner than most programmers realize.</p>
+
+<p>Understanding electronics doesn&rsquo;t make you a better programmer in the way that learning algorithms does. It makes you a better <em>engineer</em>. When you know that an I2C bus can only be so long before capacitance causes signal degradation, you understand why distributed systems have latency. When you know that a capacitor smooths voltage ripple, you understand why exponential moving averages smooth noisy data. The math is the same. The substrate changes.</p>
+
+</main>
+
+<footer>
+  <a href="index.html">CSP Home</a> &middot; <a href="fundamentals.html">Pathway 1</a> &middot; <a href="web.html">Pathway 2</a> &middot; <a href="systems.html">Pathway 3</a> &middot; <a href="languages.html">Languages</a> &middot; <a href="../index.html">Research Index</a><br>
+  Sources: Art of Electronics (Horowitz &amp; Hill) &middot; KiCad.org &middot; Arduino.cc &middot; Signetics NE555 datasheet (1972)<br>
+  Last updated: 2026-04-03T22:00Z (sweep v1.3.15)
+</footer>
+
+</body>
+</html>
