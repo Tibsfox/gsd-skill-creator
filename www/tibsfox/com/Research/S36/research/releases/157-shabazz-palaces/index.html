@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 157&deg; &mdash; Shabazz Palaces (Return) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #0D47A1, #1565C0); color: #BBDEFB; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(13, 71, 161, 0.5); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #B71C1C; color: #FFCDD2; border: 1px solid #C62828; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .return-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #0D47A1; color: #BBDEFB; border: 1px solid #1565C0; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #0D47A1; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #0D47A1; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card .level.foundational { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #0D47A1; min-width: 3rem; display: inline-block; }
+    .climax-banner { background: linear-gradient(135deg, #1A237E, #283593, #3949AB, #1A237E); color: #C5CAE9; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .climax-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #9FA8DA; }
+    .climax-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+    blockquote { border-left: 3px solid #0D47A1; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E3F2FD; font-style: italic; color: #0D47A1; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>157 &mdash; Shabazz Palaces (Return)</span>
+    </nav>
+
+    <div class="climax-banner">
+      <h3>Hip-Hop Era Climax &mdash; Three Consecutive E=6 &mdash; Butler Arc Complete</h3>
+      <p>
+        <strong>Shabazz Palaces</strong> returns &mdash;
+        first at degree 103. Now at degree 157.
+        <strong>Ishmael Butler arc:</strong> Digable Planets (144) &rarr; Shabazz Palaces (103, 157).
+        <strong>Third consecutive E=6</strong> (155&ndash;157).
+        Sub Pop&rsquo;s most experimental hip-hop signing.
+        <strong>Afrofuturist transcendence. The climax.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">157&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Shabazz Palaces (Return)</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Experimental Hip-Hop</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="return-badge">Return (103 &rarr; 157)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Afrofuturist Climax</h2>
+          <blockquote>
+            Degree 103: Shabazz Palaces debuts. Ishmael Butler + Tendai Maraire.
+            <em>Black Up</em>. Sub Pop. Experimental hip-hop from the Central
+            District. 54 degrees later, at 157, the project returns &mdash;
+            now with <em>Quazarz</em>, <em>The Don of Diamond Dreams</em>,
+            and <em>Robed in Rareness</em> behind it. The Afrofuturist
+            vision fully realized. The Butler arc complete: Digable Planets
+            (144) to Shabazz Palaces (103, 157). Jazz-rap to Afrofuturism.
+            Butterfly to Palaceer Lazaro. The most radical artistic
+            transformation in the engine.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Three Consecutive E=6</h2>
+          <blockquote>
+            155: The Physics. 156: Blue Scholars return. 157: Shabazz Palaces
+            return. Three consecutive maximum-energy entries. Unprecedented.
+            The hip-hop era&rsquo;s energy peaks and sustains &mdash; explosive
+            live energy, reunion legacy, Afrofuturist transcendence.
+            The climax of 24 degrees of hip-hop (134&ndash;157).
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>E=6 Three-Peat</h4>
+              <div class="level advanced">Advanced &mdash; Engine Theory</div>
+              <p>
+                Three consecutive E=6: The Physics (155),
+                Blue Scholars return (156), Shabazz Palaces
+                return (157). Unprecedented sustained maximum
+                energy. Hip-hop era climax.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Butler Arc (144&ndash;157)</h4>
+              <div class="level intermediate">Intermediate &mdash; Artist Theory</div>
+              <p>
+                Digable Planets (144, jazz-rap) &rarr; Shabazz Palaces
+                (103, 157, Afrofuturism). 13-degree span. Butterfly to
+                Palaceer Lazaro. Most radical single-artist transformation.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Afrofuturist Aesthetic</h4>
+              <div class="level foundational">Foundational &mdash; Genre Theory</div>
+              <p>
+                Conceptual hip-hop at its most visionary. <em>Quazarz</em>
+                double album. Central District roots + cosmic ambition.
+                African percussion (Maraire) + electronic production (Butler).
+                Genre dissolution.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">103&deg;</span> <strong>Shabazz Palaces</strong> &mdash; THE DEBUT! 54 degrees ago. <em>Black Up</em>. The announcement. Sub Pop&rsquo;s experimental hip-hop.</li>
+            <li><span class="ref-degree">144&deg;</span> <strong>Digable Planets</strong> &mdash; BUTLER ARC ORIGIN! Ishmael Butler as Butterfly. Jazz-rap. Brooklyn. <em>Reachin&rsquo;</em>. 13 degrees to the return.</li>
+            <li><span class="ref-degree">156&deg;</span> <strong>Blue Scholars (return)</strong> &mdash; BACK-TO-BACK-TO-BACK E=6! Three consecutive maximum energy. Reunion to Afrofuturism.</li>
+            <li><span class="ref-degree">155&deg;</span> <strong>The Physics</strong> &mdash; E=6 THREE-PEAT BEGINS! Explosive live energy. The start of the sustained peak.</li>
+            <li><span class="ref-degree">140&deg;</span> <strong>Sabzi (DJ)</strong> &mdash; Scene network. Mass Line Media. The hip-hop era ecosystem.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">157&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 6</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Exp. Hip-Hop</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Shabazz Palaces</h4>
+          <div class="stat-row"><span class="stat-label">MC/Producer</span><span class="stat-value">Ishmael Butler</span></div>
+          <div class="stat-row"><span class="stat-label">Multi-inst.</span><span class="stat-value">Tendai Maraire</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Central District</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Butler Arc</h4>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Digable Planets (144)</span></div>
+          <div class="stat-row"><span class="stat-label">Debut</span><span class="stat-value">Shabazz (103)</span></div>
+          <div class="stat-row"><span class="stat-label">Return</span><span class="stat-value">Shabazz (157)</span></div>
+          <div class="stat-row"><span class="stat-label">Span</span><span class="stat-value">13 degrees</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>E=6 Three-Peat</h4>
+          <div class="stat-row"><span class="stat-label">155&deg;</span><span class="stat-value">The Physics (E=6)</span></div>
+          <div class="stat-row"><span class="stat-label">156&deg;</span><span class="stat-value">Blue Scholars (E=6)</span></div>
+          <div class="stat-row"><span class="stat-label">157&deg;</span><span class="stat-value">Shabazz Palaces (E=6)</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">Unprecedented</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../156-blue-scholars/" style="color: var(--seattle-navy);">&larr; 156&deg; Blue Scholars (Return)</a>
+        <a href="../158-draze/" style="color: var(--seattle-navy);">158&deg; Draze &rarr;</a>
+      </div>
+      <p>Degree 157&deg; &mdash; Shabazz Palaces (Return) &mdash; Seattle 360 Engine &mdash; v1.49.297<br>Afrofuturist climax. Butler arc complete. Three consecutive E=6. Sub Pop. Central District. The hip-hop era peaks.</p>
+    </footer>
+  </div>
+</body>
+</html>
