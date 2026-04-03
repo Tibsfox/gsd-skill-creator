@@ -1,60 +1,45 @@
-/* AVI — Wings of the Pacific Northwest
-   Project palette and overrides — base layout from ../../brand.css */
+/* FWL — From Jungle Fowl to Show Ring
+   Warm golds and barn reds — the farmyard palette */
 
 :root {
-  /* --- Project palette --- */
-  --sky: #2c5282;
-  --forest: #276749;
-  --canopy: #38a169;
-  --wing: #4299e1;
-  --talon: #744210;
-  --cream: #faf9f6;
-  --mist: #e2e8f0;
-  --water: #2b6cb0;
-  --raptor: #c05621;
-  --dawn: #ed8936;
-  --snow: #ebf4ff;
+  --accent: #b7791f;
+  --accent-light: #d69e2e;
+  --accent-dark: #975a16;
+  --page-bg: #fffaf0;
+  --card-border: #f6e05e;
+  --card-shadow: rgba(183, 121, 31, 0.12);
   --text: #2d3748;
   --text-light: #718096;
-  /* --- Semantic overrides for brand.css --- */
-  --page-bg: var(--cream);
-  --page-text: var(--text);
-  --page-text-light: var(--text-light);
-  --link: var(--water);
-  --card-border: var(--mist);
-  --border: var(--mist);
+  --link: #975a16;
 }
 
-/* --- Header --- */
-header {
-  background: linear-gradient(135deg, var(--sky) 0%, var(--forest) 60%, var(--canopy) 100%);
-  border-bottom: 4px solid var(--wing);
-}
+body { background: var(--page-bg); color: var(--text); }
+header { background: linear-gradient(135deg, #975a16 0%, #b7791f 40%, #d69e2e 100%); border-bottom: 4px solid #ecc94b; }
+header h1, header .subtitle, header nav a { color: #fffaf0; }
+header nav a:hover { color: #fefcbf; }
+header nav a.active { color: #fefcbf; font-weight: 700; border-bottom: 2px solid #fefcbf; }
 
-/* --- Color overrides --- */
-h2 { color: var(--sky); }
-h3 { color: var(--talon); }
-th { background: var(--sky); }
-tr:nth-child(even) { background: rgba(44, 82, 130, 0.06); }
-tr:hover { background: rgba(44, 82, 130, 0.12); }
-blockquote { border-left-color: var(--wing); background: rgba(66, 153, 225, 0.05); }
-code { background: var(--mist); }
-pre { background: #2d3748; color: #e2e8f0; }
-.stat-value { color: var(--sky); }
+h2 { color: var(--accent-dark); border-bottom: 2px solid #fbd38d; padding-bottom: 0.3rem; }
+h3 { color: #744210; }
 
-/* --- Tags --- */
-.tag-resident { background: #e8f5e9; color: #2e7d32; }
-.tag-migratory { background: #e3f2fd; color: #1565c0; }
-.tag-pelagic { background: #e0f2f1; color: #00695c; }
-.tag-community { background: #fff3e0; color: #e65100; }
-.tag-evolution { background: #f3e5f5; color: #7b1fa2; }
-.tag-networks { background: #fce4ec; color: #c62828; }
-.tag-cultural { background: #fff8e1; color: #f57f17; }
-.tag-pass { background: #e8f5e9; color: #2e7d32; }
+.card { border-left: 4px solid var(--accent); background: linear-gradient(135deg, #ffffff 0%, #fffaf0 100%); box-shadow: 0 2px 8px var(--card-shadow); border-radius: 8px; }
+.card:hover { box-shadow: 0 6px 24px rgba(183, 121, 31, 0.22); border-left-color: var(--accent-light); transform: translateY(-2px); }
+.card h3 { color: var(--accent-dark); }
 
-/* --- Responsive --- */
-@media (max-width: 640px) {
-  header { padding: 1.2rem; }
-  header h1 { font-size: 1.3rem; }
-  main { padding: 1rem; }
-}
+.stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.stat { background: #fffaf0; border: 1px solid #fbd38d; border-radius: 8px; padding: 0.8rem 1.2rem; text-align: center; flex: 1; min-width: 100px; }
+.stat-value { color: var(--accent); font-size: 2rem; font-weight: 700; display: block; }
+.stat-label { color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+blockquote { border-left: 4px solid var(--accent-light); background: rgba(214, 158, 46, 0.06); border-radius: 0 6px 6px 0; padding: 1rem 1.5rem; font-style: italic; }
+
+.tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.75rem; font-weight: 600; }
+.tag-resident { background: #fefcbf; color: #975a16; }
+
+th { background: var(--accent-dark); color: white; }
+tr:nth-child(even) { background: rgba(183, 121, 31, 0.04); }
+code { background: #fefcbf; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+pre { background: #2d3748; color: #e2e8f0; border-radius: 6px; padding: 1rem; overflow-x: auto; }
+footer { border-top: 2px solid #fbd38d; margin-top: 3rem; padding: 1.5rem; text-align: center; color: var(--text-light); }
+
+@media (max-width: 640px) { header { padding: 1.2rem; } header h1 { font-size: 1.3rem; } main { padding: 1rem; } .stats { flex-direction: column; } .card-grid { grid-template-columns: 1fr; } }
