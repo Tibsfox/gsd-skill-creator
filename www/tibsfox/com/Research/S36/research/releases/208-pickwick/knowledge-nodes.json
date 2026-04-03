@@ -1,0 +1,80 @@
+{
+  "degree": 208,
+  "artist": "Pickwick",
+  "slug": "208-pickwick",
+  "genre": "Blue-Eyed Soul / Indie",
+  "energy": 6,
+  "era": "Blue-Eyed Soul. E=6 -- FIRST BLUE-EYED SOUL (Genre Stage 108). Soul voice over indie rock. Maker Records. Capitol Hill. 2010-2016. v1.49.349.",
+  "location": {
+    "origin": "Capitol Hill, Seattle",
+    "formative": "Capitol Hill indie scene. Soul tradition meets indie rock. Gentrification era (2010-2016).",
+    "career": "Pickwick. 2010-2016. Maker Records. First Blue-Eyed Soul."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2010-2016",
+  "labels": ["Maker Records"],
+  "members": [
+    {"name": "Galen Disston", "role": "vocals / guitar", "note": "Deep baritone. Soul phrasing. Emotional directness. The voice as instrument."}
+  ],
+  "former_members": [],
+  "associated_musicians": [],
+  "theory_nodes": [
+    {
+      "concept": "First Blue-Eyed Soul -- Genre Stage 108. Soul music by white vocalist. Complex racial dynamics. Back-to-back genre firsts: blues rock (107) then blue-eyed soul (108).",
+      "level": "milestone",
+      "department": "genre-theory",
+      "college_path": ".college/music/theory/genre/first-blue-eyed-soul.md",
+      "examples": [
+        "108th genre in the engine.",
+        "Righteous Brothers, Hall & Oates, Amy Winehouse tradition.",
+        "Back-to-back: blues rock (107, The Black Tones) then blue-eyed soul (108, Pickwick).",
+        "Both involve Black musical traditions through different lenses."
+      ],
+      "description": "First Blue-Eyed Soul. Genre Stage 108. Back-to-back genre firsts.",
+      "genealogy": {
+        "ancestors": ["Righteous Brothers.", "Hall & Oates.", "Stax/Motown soul tradition.", "Amy Winehouse."],
+        "relationship": "Pickwick at 208. First Blue-Eyed Soul in engine."
+      }
+    },
+    {
+      "concept": "The finite band -- 2010-2016. Six years. Burned bright. First definitively inactive band in recent degrees. Closed arc. Capitol Hill gentrification overlap.",
+      "level": "advanced",
+      "department": "career-theory",
+      "college_path": ".college/music/theory/career/finite-band-pickwick.md",
+      "examples": [
+        "2010-2016: six-year arc.",
+        "First clearly inactive band in recent degrees.",
+        "Capitol Hill gentrification 2010-2016 overlaps exactly.",
+        "Catalog is finite. Arc is closed."
+      ],
+      "description": "Finite band. Six years. Closed arc. The neighborhood changed around them.",
+      "genealogy": {
+        "ancestors": ["Capitol Hill pre-gentrification.", "Small venue ecosystem.", "Maker Records."],
+        "relationship": "Pickwick at 208. 2010-2016. Finite."
+      }
+    },
+    {
+      "concept": "Emotional directness in ironic scene -- Chastity Belt (deadpan), Tacocat (humor), Pickwick (passion). Soul tradition demands sincerity. The contrast with the scene is the creative energy.",
+      "level": "intermediate",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/emotional-directness-208.md",
+      "examples": [
+        "201: Chastity Belt, deadpan irony.",
+        "203: Tacocat, humor as vehicle.",
+        "208: Pickwick, emotional directness.",
+        "Soul tradition demands sincerity. Not cool. Passionate."
+      ],
+      "description": "Emotional directness vs. scene irony. Soul demands sincerity. Passion in ironic territory.",
+      "genealogy": {
+        "ancestors": ["Soul vocal tradition.", "Capitol Hill scene norms.", "Irony as default mode."],
+        "relationship": "Pickwick at 208. Passion where others use irony."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 207, "artist": "Wimps", "relationship": "E=5 to E=6. Lo-fi punk to soul power. Energy returns to maximum after one-degree dip."},
+    {"degree": 206, "artist": "The Black Tones", "relationship": "Back-to-back genre firsts: blues rock (107) then blue-eyed soul (108). Both Black musical traditions."},
+    {"degree": 201, "artist": "Chastity Belt", "relationship": "Deadpan irony (E=4) vs. emotional directness (E=6). Both Capitol Hill. Opposite delivery modes."},
+    {"degree": "SPS-208", "species": "Coyote Howl", "relationship": "ENERGY MATCH (E=6 + E=6 = 12). Voice fills space: Disston fills venue, Coyote fills valley. Vocal power as spatial illusion."}
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "degree": 208,
+  "species": "Coyote",
+  "scientific_name": "Canis latrans",
+  "slug": "208-coyote-howl",
+  "sound_type": "group howl -- ascending yip-howl chorus. 300-3,000 Hz. 3-7 animals sound like 20. Frequency-hopping. 3-5+ mile carry. E=6",
+  "energy": 6,
+  "ecosystem": "Varied -- forest, grassland, urban, suburban, alpine, desert. Most adaptable large carnivore. Year-round resident.",
+  "season": "Year-round. Howling increases breeding (Jan-Mar) and fall dispersal.",
+  "family": "Canidae (RETURNS -- last at degree 71, Red Fox. 137-degree gap)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Coyote",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.10,
+    "description": "Coyote in PNW -- urban, suburban, forest, alpine. Everywhere. Group howl audible from any suitable habitat."
+  },
+  "taxonomy_note": {
+    "description": "CANIDAE RETURNS. Last at degree 71 (Red Fox). 137-degree gap -- longest family gap in engine.",
+    "current_family": "Canidae (returns after 137 degrees)",
+    "new_family": false,
+    "family_count_in_engine": "Canidae: Red Fox Bark (71, E=3), Coyote Group Howl (208, E=6).",
+    "name_etymology": "Canis from Latin 'dog'. latrans from Latin 'barking' -- the barking dog.",
+    "genus_note": "Canis -- true dogs. Coyote is one of several Canis species (with wolves, jackals).",
+    "order_note": "Carnivora. Canidae returns. Most vocal North American canid.",
+    "family_position": "Canidae: second entry. 137-degree gap. Energy arc: E=3 (fox) to E=6 (coyote).",
+    "class_note": "Class Mammalia. Most adaptable North American carnivore. Every habitat type. Persecution resilient."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "300-3,000 Hz. Wide range. Multiple animals, different pitches.",
+    "peak_energy_band_hz": "500-1,500 Hz (peak of howl harmonics).",
+    "song_frequency_hz": "Group howl: 300-3,000 Hz. Solo howl: 400-1,500 Hz. Bark: 500-2,000 Hz.",
+    "song_duration_s": "Individual howl: 3-10 sec. Group chorus: 30 sec to minutes.",
+    "note_structure": "Yip prelude (staccato) escalating to ascending howl (frequency-modulated). Overlapping pack voices.",
+    "note_types": "Group howl (ascending chorus), solo howl (contact), bark/yip (alarm), whine (submission).",
+    "phrase_structure": "Yips -> ascending howls -> wavering sustain -> fade. Pack members stagger entry. Complex overlap.",
+    "timbre": "Rich, wavering, frequency-hopping. Multiple harmonics. Each animal sounds like 2-3. Pack sounds like 15-20+.",
+    "amplitude": "E=6. Maximum canid energy. Valley-filling. 3-5+ mile carry. Most iconic mammalian sound in N.A.",
+    "tempo": "Yips: rapid (4-8 per second). Howls: sustained (3-10 sec). Group tempo: overlapping, no unified beat.",
+    "context": "Territorial assertion. Group reunion. Breeding season. Dusk/dawn/night.",
+    "regional_variation": "Urban coyotes may howl less frequently (avoiding detection). Rural: full vocal repertoire. Pitch and rhythm vary by region.",
+    "key_property": "GROUP HOWL. Ascending yip-howl. E=6. CANIDAE RETURNS (137-degree gap). Frequency-hopping. 3 sounds like 20. 3-5+ mile carry. Most iconic. v1.49.349."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Gray-brown to yellowish-gray. Lighter belly. Bushy tail with black tip. 8-20 kg. Slender, dog-like.",
+    "diagnostic_mark": "Slender canid with pointed ears, narrow snout, bushy tail with black tip. Smaller than wolf. Larger than fox.",
+    "seasonal_variation": "Winter: thicker, grayer coat. Summer: thinner, more yellowish. Tail bushy year-round.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "8-20 kg (18-44 lbs). 75-100 cm body + 30-40 cm tail. Slender. Pointed ears. Narrow snout. Bushy black-tipped tail.",
+    "diagnostic_mark": "Slender dog-like canid. Smaller than wolf, larger than fox. Pointed ears erect. Narrow face. Running gait: tail held low (wolf holds tail high).",
+    "field_id": "Slender canid on trail, field, or road. Pointed ears, narrow face, bushy tail. At dawn/dusk/night, listen for ascending yip-howl chorus. In urban areas, may appear on streets at dusk."
+  },
+  "nodes": [
+    {
+      "id": "canidae-returns",
+      "type": "milestone",
+      "title": "Canidae Returns -- 137-Degree Gap",
+      "description": "Last Canidae at degree 71 (Red Fox, E=3). Longest family gap. Coyote at E=6. Full family vocal range: solitary bark to valley-filling chorus.",
+      "connections": ["acoustic-deception", "urban-generalist", "persecution-resilience"]
+    },
+    {
+      "id": "acoustic-deception",
+      "type": "concept",
+      "title": "Acoustic Deception -- Frequency-Hopping",
+      "description": "Each animal frequency-hops. One sounds like 2-3. Pack of 3-7 sounds like 20. Force multiplier for territorial defense. Social intelligence.",
+      "connections": ["canidae-returns", "urban-generalist"]
+    },
+    {
+      "id": "urban-generalist",
+      "type": "concept",
+      "title": "Ultimate Generalist -- Every Habitat",
+      "description": "Forest to urban. Alaska to Mexico. Most adaptable large carnivore. Every US state except Hawaii. Behavioral shift in cities.",
+      "connections": ["canidae-returns", "persecution-resilience"]
+    },
+    {
+      "id": "persecution-resilience",
+      "type": "concept",
+      "title": "Persecution Resilience -- Population Paradox",
+      "description": "Century of killing increased populations. Larger litters compensate. Range expanded during persecution. Remarkable ecology.",
+      "connections": ["canidae-returns", "urban-generalist"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-71",
+      "species": "Red Fox Bark",
+      "relationship": "CANIDAE REUNION! 137-degree gap. Solitary bark (E=3) to group chorus (E=6). Longest family gap in engine."
+    },
+    {
+      "target": "SPS-205",
+      "species": "Bighorn Sheep Clash",
+      "relationship": "Both E=6. Impact force (ram) vs. vocal force (coyote). Different paths to maximum energy."
+    },
+    {
+      "target": "SPS-207",
+      "species": "Porcupine",
+      "relationship": "Eerie moans (E=3) to iconic howls (E=6). Night sounds. Porcupine unsettles, Coyote commands."
+    },
+    {
+      "target": "S36-208",
+      "artist": "Pickwick",
+      "relationship": "VOICE FILLS SPACE! Soul baritone fills venue. Coyote chorus fills valley. Both E=6. Total E=12. Spatial illusion."
+    }
+  ]
+}
