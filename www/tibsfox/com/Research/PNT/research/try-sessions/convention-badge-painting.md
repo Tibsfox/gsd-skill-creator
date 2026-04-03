@@ -220,4 +220,4 @@ Your first ten badges will not be your best work. That is expected. The badge fo
 
 ---
 
-*See also: [Paint an Apple](paint-an-apple.md) | [Paint a Landscape](paint-a-landscape.md) | [PNT-08 Painting Business](../08-painting-business.md) | [PNT-07 Learning Path](../07-learning-path.md)*
+*See also: [Paint an Apple](paint-an-apple.md) | [Paint a Landscape](paint-a-landscape.md) | [Paint Your Pet](paint-your-pet.md) | [PNT-08 Painting Business](../08-painting-business.md) | [PNT-07 Learning Path](../07-learning-path.md) | [FFA Badge Holder Craft](../../FFA/research/try-sessions/badge-holder-craft.md)*

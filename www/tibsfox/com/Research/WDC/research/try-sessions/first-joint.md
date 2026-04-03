@@ -222,4 +222,4 @@ Then cut one in hardwood — oak, maple, walnut. Hardwood is less forgiving but 
 
 ---
 
-*See also: [Sharpen a Chisel](sharpen-a-chisel.md) | [WDC-03 Hand Tools](../03-hand-tools.md) | [WDC-05 Joinery](../05-joinery.md)*
+*See also: [Sharpen a Chisel](sharpen-a-chisel.md) | [Build a Mallet](build-a-mallet.md) | [Build a Pochade Box](../../PNT/research/try-sessions/build-a-pochade-box.md) | [WDC-03 Hand Tools](../03-hand-tools.md) | [WDC-05 Joinery](../05-joinery.md)*

@@ -211,4 +211,4 @@ If you want to go deeper, try the [30-Day Value Study Challenge](value-study-cha
 
 ---
 
-*See also: [Value Study Challenge](value-study-challenge.md) | [PNT-05 Color Theory](../05-color-theory-technique.md) | [PNT-07 Learning Path](../07-learning-path.md)*
+*See also: [Value Study Challenge](value-study-challenge.md) | [Paint Your Pet](paint-your-pet.md) | [Build a Pochade Box](build-a-pochade-box.md) | [PNT-05 Color Theory](../05-color-theory-technique.md) | [PNT-07 Learning Path](../07-learning-path.md)*

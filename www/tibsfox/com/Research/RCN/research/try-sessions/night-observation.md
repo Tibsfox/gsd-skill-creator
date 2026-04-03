@@ -216,6 +216,10 @@ Before heading out, confirm:
 
 > **[PNW Mesocarnivore Comparison](../study-guides/pnw-mesocarnivore-comparison.md)** --- Your night watch may capture opossums, skunks, or coyotes in addition to raccoons. Learn to identify all four PNW urban mesocarnivores.
 
+> **[Photograph Urban Wildlife](wildlife-photography-basics.md)** --- Bring your phone or camera to your next night watch. Smartphone Night Mode and eye-level composition turn casual sightings into genuine wildlife photography.
+
+> **[The Ethics of Raccoon Interaction](raccoon-enrichment-ethics.md)** --- Before you head out, understand the ethical framework: why we watch from a distance, why we never feed, and why observation is the most respectful form of engagement.
+
 ---
 
 ## College of Knowledge Connections

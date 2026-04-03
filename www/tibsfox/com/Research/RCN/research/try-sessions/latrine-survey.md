@@ -238,6 +238,16 @@ Before beginning your survey, review these rules:
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Raccoon Night Watch](night-observation.md)** --- After surveying for latrines (and knowing where NOT to sit), conduct a night-watch session at a safe observation point to see the raccoons that created them.
+
+> **[Build a Trail Cam Station](build-a-trail-cam-station.md)** --- Deploy a camera near (not at) a latrine to monitor raccoon visitation patterns without approaching the contaminated area.
+
+> **[The Ethics of Raccoon Interaction](raccoon-enrichment-ethics.md)** --- Understanding the health risks associated with raccoons is part of informed coexistence. The ethics session explores why we share space with raccoons without interfering --- and why knowledge of hazards like Baylisascaris is essential to that coexistence.
+
+---
+
 ## College of Knowledge Connections
 
 - **Science** --- [Parasitology, Field Hygiene]: This try session teaches applied parasitology (the life cycle of Baylisascaris, the environmental persistence of nematode eggs, the failure of chemical disinfection against chitinous egg shells) and the scientific basis for heat-based decontamination. The survey protocol itself is a field science exercise in systematic observation and data recording.

@@ -297,6 +297,12 @@ Faux fur and fleece generally do not fray. If you are using a woven fabric, the 
 > **Study Guide: [Sewing Basics for Fursuit Makers](../study-guides/sewing-basics-for-fursuit-makers.md)**
 > If the backstitch, ladder stitch, or machine sewing steps in this project were challenging, the sewing basics study guide covers each technique in detail with practice exercises.
 
+> **Try Session: [Airbrush Basics for Fursuits](airbrush-basics-for-fursuits.md)**
+> Add shading, blush, and depth to your plush animals with airbrushed gradients. The same techniques that bring fursuits to life work on plush --- muzzle shading, cheek blush, and countershading.
+
+> **DIY Project: [Build Convention Badge Holders](badge-holder-craft.md)**
+> Use leftover faux fur scraps to build a custom lanyard for conventions, or cast a resin badge as a permanent display piece.
+
 ---
 
 ## Sources and Further Reading

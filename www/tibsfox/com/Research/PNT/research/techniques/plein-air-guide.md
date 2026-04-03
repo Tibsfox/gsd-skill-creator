@@ -16,6 +16,10 @@ This guide is practical. It covers what to bring, how to set up, how to manage a
 
 A pochade box is a compact painting station that holds a panel, a palette, brushes, and paint in a single box that clamps onto a tripod. It is the tool that makes plein air painting practical rather than an awkward juggling act.
 
+### Build Your Own ($45 in materials)
+
+If you have basic woodworking skills --- or want to develop them --- you can build a pochade box from Baltic birch plywood for under $50. The [DIY Pochade Box project](../try-sessions/build-a-pochade-box.md) walks through the complete build: box joints or rabbet joints, piano hinge, tripod mount, panel clip, and finishing. The crossover with WDC (Woodcraft) makes it a two-discipline project, and the satisfaction of painting outdoors with a box you built yourself is hard to overstate.
+
 ### Budget Setup ($150-200 total)
 
 If you are testing whether plein air painting is for you, start minimal:

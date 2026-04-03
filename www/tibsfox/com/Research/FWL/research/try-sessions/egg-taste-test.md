@@ -214,6 +214,10 @@ If you want to take this further:
 
 > **[Chicken Genetics Study Guide](../study-guides/genetics-study-guide.md)** --- Why is the yolk orange? Why is the shell blue? The genetics behind egg quality and color are part of the story this experiment tells.
 
+> **[Preserve and Display Beautiful Eggs](egg-preservation-project.md)** --- After you have tasted the difference (or not), preserve your most beautiful shells permanently. Blown eggs, natural dyes, and wax-resist decoration turn your rainbow egg basket into lasting art.
+
+> **[Feather Art Project](feather-craft-project.md)** --- Your flock provides eggs AND feathers. Pair preserved eggs with pressed feathers from the same breeds for a display that shows both the plumage and the egg of each bird.
+
 ---
 
 ## College of Knowledge Connections

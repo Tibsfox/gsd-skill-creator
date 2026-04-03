@@ -351,6 +351,8 @@ Several breeds in this exercise are frequently confused with each other. Here ar
 
 > **[Chicken Health 101](../study-guides/poultry-health-basics.md)** --- Breed identification is the first diagnostic step: different breeds have different vulnerabilities. A Silkie's crest, a Brahma's feet, a Leghorn's comb --- each creates a specific health concern.
 
+> **[Feather Art Project](feather-craft-project.md)** --- Every breed you identified sheds feathers with the same distinctive patterns. Collect molted feathers, match them to breeds, and turn them into pressed art, wreaths, or quill pens.
+
 ---
 
 ## College of Knowledge Connections
