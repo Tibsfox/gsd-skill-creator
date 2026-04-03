@@ -84,6 +84,8 @@
 
 - **American black bear.** Bears occasionally raid chicken coops for both birds and feed, particularly in the PNW's rural-wildland interface. This is a less frequent but high-impact predation event that connects MAM's bear management research to FWL's husbandry guidance.
 
+- **Comprehensive predator defense.** FWL's dedicated PNW predator defense guide [guides/predator-defense-pnw] synthesizes predator behavior data from MAM and RCN into a practical, predator-by-predator defense manual for PNW poultry keepers. It profiles raccoons (the #1 threat), raptors (federally protected --- exclusion only), coyotes, owls, rats, dogs, and weasels/mink, drawing directly on RCN and MAM research for behavior patterns and population data.
+
 ---
 
 ### GDN -- Garden and Horticulture

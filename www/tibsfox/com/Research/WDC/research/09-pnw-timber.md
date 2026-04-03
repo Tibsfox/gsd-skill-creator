@@ -50,6 +50,8 @@ Cedar lumber is also prized for closet lining (the aromatic oils repel moths), s
 
 The limitation of western red cedar is its softness. With a Janka hardness of 350 lbf, it dents easily. It is not suitable for flooring, workbench tops, or any surface that takes impact. Its strength values are modest — adequate for non-structural applications, but not for framing or structural beams.
 
+For a complete species profile covering thujaplicin chemistry, Coast Salish material culture, modern working techniques, finishing recommendations, and detailed PNW sourcing, see [species/western-red-cedar].
+
 ---
 
 ## Sitka Spruce — The Resonant Giant

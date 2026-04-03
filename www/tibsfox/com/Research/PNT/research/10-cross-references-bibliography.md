@@ -194,7 +194,15 @@ Several research series projects document physical systems -- infrastructure, en
 
 ### The Furry Intersection
 
-No single published book adequately documents the furry art tradition (as of 2026). The best sources are community-generated: tutorials on Fur Affinity and DeviantArt, video tutorials on YouTube (channels like Zillion Ross, Imaginatively Unimaginative, and others), and the collective wisdom shared in furry artist Discord communities. The FFA project in this research series represents an attempt at systematic documentation.
+No single published book adequately documents the furry art tradition (as of 2026). The best sources are community-generated: tutorials on Fur Affinity and DeviantArt, video tutorials on YouTube (channels like Zillion Ross, Imaginatively Unimaginative, and others), and the collective wisdom shared in furry artist Discord communities. The FFA project in this research series represents an attempt at systematic documentation. The [artists/furry-art-history] sub-page in this PNT project traces the full arc from fanzine era to the modern digital commission economy.
+
+### The Digital Painting Intersection
+
+The shift from traditional to digital painting is one of the defining transitions in contemporary art practice, and it is documented in the [techniques/digital-painting-basics] sub-page. The PNT project covers traditional painting fundamentals that apply to digital work, while [techniques/digital-painting-basics] covers hardware (Wacom, iPad Pro, Huion), software (Procreate, Photoshop, Clip Studio Paint, Krita), and the specific ways that traditional knowledge improves digital practice.
+
+### Gouache as the Rediscovered Medium
+
+The gouache renaissance -- driven by Instagram, TikTok, and a generation of painters rediscovering opaque watercolor -- is documented in [techniques/gouache-basics]. The sub-page covers the full spectrum from Himi Miya jelly cups to professional Winsor & Newton and Schmincke, the illustration tradition from Leyendecker to Disney backgrounds, and the practical techniques that make gouache both accessible and rewarding.
 
 ---
 

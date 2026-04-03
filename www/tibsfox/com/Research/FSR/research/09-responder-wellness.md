@@ -174,6 +174,9 @@ The least we can do — as colleagues, as institutions, as a society — is ackn
 - **[FSR-10]** PNW Departments — the specific operational environments (Puget Sound maritime, Cascadia seismic, wildland-urban interface) that shape PNW responder exposure
 - **[ECO-05]** Forest Ecology — the wildfire smoke exposure that adds respiratory and carcinogen burden to PNW firefighters during increasingly long fire seasons
 - **[WDC-08]** Construction Framing — the building types that firefighters enter; construction knowledge is survival knowledge on the fireground
+- **[FSR Case Studies: Station Life](case-studies/station-life.md)** — the 24-hour shift in detail: the interrupted sleep, the crew meals, the culture that sustains and sometimes harms
+- **[FSR Guides: Becoming a Firefighter](guides/becoming-a-firefighter.md)** — the reality check section addresses the psychological cost before someone commits
+- **[FSR Guides: Becoming a Paramedic](guides/becoming-a-paramedic.md)** — the medical path's specific psychological toll: EMS burnout, frequent flyers, the calls you carry
 
 ---
 

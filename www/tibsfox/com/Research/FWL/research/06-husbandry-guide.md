@@ -70,6 +70,8 @@ Key principles:
 
 **Hawks.** Cooper's hawks (*Accipiter cooperii*) are abundant in PNW suburban and urban areas and are specialized bird-hunters capable of taking chickens up to bantam and small standard size. Red-tailed hawks (*Buteo jamaicensis*) are common and may take standard-sized birds, particularly young ones. Bald eagles (*Haliaeetus leucocephalus*), though primarily fish-eaters, will take chickens opportunistically, especially near waterways. All raptors are federally protected under the Migratory Bird Treaty Act -- it is illegal to harm, harass, or kill them. The only legal defense is physical exclusion (covered runs, netting, overhead wires).
 
+*For a comprehensive predator-by-predator defense guide with PNW-specific strategies, see [guides/predator-defense-pnw].*
+
 ---
 
 ## Feeding -- Nutrition for Every Life Stage

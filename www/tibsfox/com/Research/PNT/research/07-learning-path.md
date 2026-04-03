@@ -4,7 +4,7 @@
 
 Research module PNT-07: a guide for learning to paint, covering foundational skills, learning methods from ateliers to YouTube, daily practice strategies, common mistakes, the PNW art education scene, and the furry art community as a unique learning ecosystem. Written for the beginner who wants to start and the intermediate painter who feels stuck.
 
-**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-05] Color Theory, [PNT-06] Genres, [PNT-08] Business, [FFA] Fur, Feathers & Animation, [FFA-04] Fursuit Fabrication.
+**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-03] Brushes & Tools, [PNT-04] Surfaces, [PNT-05] Color Theory, [PNT-06] Genres, [PNT-08] Business, [FFA] Fur, Feathers & Animation, [FFA-04] Fursuit Fabrication, [techniques/digital-painting-basics] Digital Painting, [techniques/gouache-basics] Gouache, [artists/furry-art-history] Furry Art History.
 
 ---
 

@@ -518,7 +518,7 @@ Fursuit makers who airbrush their work use the same tools and techniques documen
 
 ### To Deep Dives
 
-The [Faux Fur Fabric Guide](deep-dives/faux-fur-guide.md) documents the material selection process that underlies every maker's work --- the suppliers, pile types, backing types, and color matching that determine the visual quality of the finished suit. The [Cooling Systems Guide](deep-dives/fursuit-cooling-systems.md) covers the thermal management that makers and commissioners should discuss during the design phase --- ventilation, fan placement, and cooling vest compatibility are all influenced by construction decisions.
+The [Faux Fur Fabric Guide](deep-dives/faux-fur-guide.md) documents the material selection process that underlies every maker's work --- the suppliers, pile types, backing types, and color matching that determine the visual quality of the finished suit. The [Cooling Systems Guide](deep-dives/fursuit-cooling-systems.md) covers the thermal management that makers and commissioners should discuss during the design phase --- ventilation, fan placement, and cooling vest compatibility are all influenced by construction decisions. The [Follow-Me Eyes Guide](deep-dives/fursuit-eye-making.md) documents the eye construction methods that distinguish exceptional makers --- many of the top-tier and specialty builders in this directory are known for their eye work. The [Care and Maintenance Guide](deep-dives/fursuit-care-maintenance.md) is essential reading for commissioners who want their investment to last --- and for evaluating makers who provide (or fail to provide) care instructions with their finished work.
 
 ---
 

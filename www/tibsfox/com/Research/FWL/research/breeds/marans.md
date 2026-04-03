@@ -125,3 +125,7 @@ There is a practical, almost philosophical pleasure in opening a carton of Maran
 For the show breeder, the Marans is a breed that demands attention to two separate but interrelated standards: the bird must meet the physical standard (type, plumage color and pattern, carriage, condition) *and* the egg must meet the color standard. This dual evaluation makes the Marans one of the most intellectually engaging breeds to work with. Every mating decision involves not just the birds' physical appearance but their egg-color genetics --- and because egg color is polygenic, the genetics cannot be reduced to a simple chart. It requires records, observation, and the patience to evaluate results across multiple generations.
 
 The Marans egg, at its best, is among the most beautiful natural objects in agriculture. Deep, dark, warm, glowing with the chemistry of porphyrins laid down in the darkness of the shell gland and revealed in the light of the nest box. It is worth the effort.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Greenfire Farms and Bev Davis Marans importation records; Marans of America Club breed standards and egg color scale; Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia." See also [FWL-02e] Continental Class, [FWL-04] Feather Genetics, [FWL-05] Egg Science (protoporphyrin deposition), [guides/egg-color-rainbow] Rainbow Egg Basket.*
