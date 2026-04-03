@@ -113,7 +113,7 @@ footer {
   <div class="stats-bar">
     <span><strong>22</strong> research projects</span>
     <span><strong>10+</strong> genres covered</span>
-    <span><strong>6</strong> music-functions knowledge nodes</span>
+    <span><strong>10</strong> knowledge node deep-dives</span>
     <span><strong>5</strong> college wings</span>
     <span><strong>31</strong> Rosetta translation concepts</span>
     <span>Largest cluster by member count</span>
@@ -142,7 +142,7 @@ footer {
 
   <div class="pathway">
     <div class="level">Pathway 1 &mdash; Rhythm First</div>
-    <h3>Feel the Beat Before You Name It</h3>
+    <h3><a href="pathway-rhythm.html" style="color:var(--purple-light);">Feel the Beat Before You Name It &rarr;</a></h3>
     <ol>
       <li><strong>Steady beat &amp; body percussion.</strong> Clap, stomp, snap. Find the pulse in any song. This is the foundation everything else sits on. If you can feel it, you can play it.</li>
       <li><strong>Meter &amp; time signatures.</strong> 4/4, 3/4, 6/8. Count it. Why most pop is in 4, most waltzes in 3, and most West African music in 12/8. The numbers behind the feel.</li>
@@ -155,7 +155,7 @@ footer {
 
   <div class="pathway">
     <div class="level">Pathway 2 &mdash; Melody &amp; Voice</div>
-    <h3>Sing Before You Theorize</h3>
+    <h3><a href="pathway-melody.html" style="color:var(--purple-light);">Sing Before You Theorize &rarr;</a></h3>
     <ol>
       <li><strong>Match pitch.</strong> Hear a note, sing it back. This is trainable &mdash; almost everyone can learn it. Start with a piano or tuner app as reference.</li>
       <li><strong>Scales.</strong> Major (do-re-mi), natural minor, pentatonic (the "safe" scale &mdash; no wrong notes). Play them, sing them, hear them in songs.</li>
@@ -168,7 +168,7 @@ footer {
 
   <div class="pathway">
     <div class="level">Pathway 3 &mdash; Harmony &amp; Structure</div>
-    <h3>Chords Are Simultaneous Melodies</h3>
+    <h3><a href="pathway-harmony.html" style="color:var(--purple-light);">Chords Are Simultaneous Melodies &rarr;</a></h3>
     <ol>
       <li><strong>Triads.</strong> Major, minor, diminished, augmented. Stack two thirds. Three notes. The building block of Western harmony since the Renaissance.</li>
       <li><strong>Chord progressions.</strong> I-IV-V-I (blues, rock, country). ii-V-I (jazz). I-V-vi-IV (pop's "four-chord song"). Why certain sequences feel like home, tension, and resolution.</li>
@@ -181,7 +181,7 @@ footer {
 
   <div class="pathway">
     <div class="level">Pathway 4 &mdash; Sound Design &amp; Synthesis</div>
-    <h3>Build Your Sound from Waveforms Up</h3>
+    <h3><a href="pathway-synthesis.html" style="color:var(--purple-light);">Build Your Sound from Waveforms Up &rarr;</a></h3>
     <ol>
       <li><strong>Waveforms.</strong> Sine (pure tone), saw (all harmonics), square (odd harmonics), triangle (soft odd harmonics), noise (all frequencies). What you hear when you press a key.</li>
       <li><strong>Subtractive synthesis.</strong> Start bright (saw wave), remove frequencies with a filter, shape over time with an envelope (ADSR: attack, decay, sustain, release). The foundation of analog synthesis since the Moog.</li>
@@ -194,7 +194,7 @@ footer {
 
   <div class="pathway">
     <div class="level">Pathway 5 &mdash; Production &amp; Recording</div>
-    <h3>The Studio Is an Instrument</h3>
+    <h3><a href="pathway-production.html" style="color:var(--purple-light);">The Studio Is an Instrument &rarr;</a></h3>
     <ol>
       <li><strong>Signal flow.</strong> Microphone &rarr; preamp &rarr; converter &rarr; DAW &rarr; mix bus &rarr; master. Understand the chain before you start recording. Every link colors the sound.</li>
       <li><strong>Microphone technique.</strong> Dynamic vs. condenser vs. ribbon. Proximity effect. Polar patterns (cardioid, figure-8, omni). Stereo techniques (XY, ORTF, mid-side). The mic is the first creative decision.</li>
@@ -216,47 +216,75 @@ footer {
   </p>
 
   <div class="card-grid">
-    <div class="card">
+    <a href="nodes/ii-v-i.html" class="card" style="text-decoration:none;color:inherit;">
       <h3>ii-V-I Progression</h3>
       <div><span class="tag tag-theory">Theory</span> <span class="tag tag-math">Math</span></div>
-      <p>Three-phase cycle: approach (ii, tension building), dominant (V, peak tension), tonic (I, resolution). Maps to agent foraging: scan &rarr; pursue &rarr; consume. Sinusoidal with 3-phase envelope.</p>
+      <p>Three-phase cycle: approach (ii, tension building), dominant (V, peak tension), tonic (I, resolution). Maps to agent foraging: scan &rarr; pursue &rarr; consume.</p>
       <div class="genre">S36 degree 0: Quincy Jones</div>
-    </div>
+    </a>
 
-    <div class="card">
+    <a href="nodes/tritone.html" class="card" style="text-decoration:none;color:inherit;">
       <h3>Tritone Substitution</h3>
       <div><span class="tag tag-theory">Theory</span> <span class="tag tag-math">Math</span></div>
-      <p>Replace expected chord with chord a tritone (&radic;2 frequency ratio) away. Same tritone interval, different root. Maps to behavioral inversion: agent occasionally swaps seek/flee weights.</p>
-      <div class="genre">S36 degree 0: Quincy Jones &middot; P(inversion) = 0.002/frame</div>
-    </div>
+      <p>Replace expected chord with chord a tritone (&radic;2 frequency ratio) away. Maps to behavioral inversion: agent occasionally swaps seek/flee weights.</p>
+      <div class="genre">S36 degree 0: Quincy Jones</div>
+    </a>
 
-    <div class="card">
+    <a href="nodes/polyrhythm.html" class="card" style="text-decoration:none;color:inherit;">
       <h3>Polyrhythm</h3>
       <div><span class="tag tag-theory">Theory</span> <span class="tag tag-math">Math</span></div>
-      <p>Multiple simultaneous rhythms with incommensurate periods create patterns that never exactly repeat. Agent activity cycles: solar (24h) + tidal (12.4h) + lunar (29.5d) + seasonal (365d).</p>
-      <div class="genre">S36 degree 21: Polyrhythmics &middot; <a href="../PRS/index.html">PRS deep dive</a></div>
-    </div>
+      <p>Multiple simultaneous rhythms with incommensurate periods. Agent activity cycles: solar (24h) + tidal (12.4h) + lunar (29.5d) + seasonal (365d).</p>
+      <div class="genre">S36 degree 21: Polyrhythmics &middot; <a href="../PRS/index.html" style="color:var(--purple-light);">PRS deep dive</a></div>
+    </a>
 
-    <div class="card">
+    <a href="nodes/pioneer.html" class="card" style="text-decoration:none;color:inherit;">
+      <h3>Anti-Folk / Pioneer Break</h3>
+      <div><span class="tag tag-theory">Theory</span> <span class="tag tag-genre">Ecology</span></div>
+      <p>Rule-breaking as generative principle. Pioneer species colonize bare ground. Fireweed and alder germinate where established rules don't apply.</p>
+      <div class="genre">S36 degree 49: Kimya Dawson</div>
+    </a>
+
+    <a href="nodes/energy.html" class="card" style="text-decoration:none;color:inherit;">
+      <h3>Energy Levels E=1-5</h3>
+      <div><span class="tag tag-theory">Theory</span> <span class="tag tag-math">Math</span></div>
+      <p>Amplitude modulation of behavioral dynamics. E=1 is steady state, E=5 is maximum dynamic range. Maps to speed, perception, reproduction.</p>
+      <div class="genre">All species &middot; All S36 degrees</div>
+    </a>
+
+    <a href="nodes/dawn-chorus.html" class="card" style="text-decoration:none;color:inherit;">
+      <h3>Dawn Chorus (Circadian Harmonic)</h3>
+      <div><span class="tag tag-theory">Theory</span> <span class="tag tag-genre">Ecology</span></div>
+      <p>Sinusoidal activity envelope keyed to sun altitude. Diurnal agents surge at dawn, nocturnal at dusk (tritone inversion).</p>
+      <div class="genre">Diurnal species &middot; Civil twilight &minus;6&deg; to +3&deg;</div>
+    </a>
+
+    <a href="nodes/subtractive.html" class="card" style="text-decoration:none;color:inherit;">
       <h3>Subtractive Synthesis</h3>
       <div><span class="tag tag-synth">Synth</span> <span class="tag tag-math">Math</span></div>
-      <p>Saw wave (all harmonics) &rarr; low-pass filter (remove) &rarr; ADSR envelope (shape over time). Maps to agent perception: raw input &rarr; relevance filter &rarr; attention envelope.</p>
-      <div class="genre">Source: YouTube synth demo &middot; perception(t) = sawInput &times; LPF &times; ADSR(t)</div>
-    </div>
+      <p>Saw wave &rarr; low-pass filter &rarr; ADSR envelope. Maps to agent perception: raw input &rarr; relevance filter &rarr; attention envelope.</p>
+      <div class="genre">Source: YouTube synth demo</div>
+    </a>
 
-    <div class="card">
+    <a href="nodes/patch-routing.html" class="card" style="text-decoration:none;color:inherit;">
       <h3>Patch Routing (File Tree)</h3>
       <div><span class="tag tag-synth">Synth</span> <span class="tag tag-production">Architecture</span></div>
-      <p>Modular synthesis signal flow maps 1:1 to directory trees. A patch is a workflow. Modules are tasks. Each module has inputs (data), parameters (instructions), and outputs (tools).</p>
-      <div class="genre">Source: YouTube agent architecture &middot; agent_tree = {workflow/: {task_n/: {...}}}</div>
-    </div>
+      <p>Modular synthesis signal flow maps 1:1 to directory trees. A patch is a workflow. Modules are tasks. The abstraction is fractal.</p>
+      <div class="genre">Source: YouTube agent architecture</div>
+    </a>
 
-    <div class="card">
+    <a href="nodes/oscillator.html" class="card" style="text-decoration:none;color:inherit;">
       <h3>Oscillator Layering</h3>
       <div><span class="tag tag-synth">Synth</span> <span class="tag tag-math">Math</span></div>
-      <p>Multiple oscillators at different frequencies create complex timbres through additive interference. Detuning creates beat frequencies. Maps to multi-cycle agent behavior: fast + medium + slow cycles produce emergent behavior.</p>
+      <p>Multiple oscillators create complex timbres. Detuning creates beat frequencies. Multi-cycle agent behavior produces emergent complexity.</p>
       <div class="genre">behavior(t) = &Sigma; A_i &times; wave_i(f_i &times; t + &phi;_i)</div>
-    </div>
+    </a>
+
+    <a href="nodes/condensation.html" class="card" style="text-decoration:none;color:inherit;">
+      <h3>Condensation (Workflow &rarr; Tool)</h3>
+      <div><span class="tag tag-synth">Synth</span> <span class="tag tag-production">Architecture</span></div>
+      <p>Complex workflow becomes single callable tool. A patch becomes a preset. A multi-step behavior becomes a reflex. Conscious steps become unconscious competence.</p>
+      <div class="genre">Source: YouTube agent architecture</div>
+    </a>
   </div>
 
   <!-- ============================================================ -->
