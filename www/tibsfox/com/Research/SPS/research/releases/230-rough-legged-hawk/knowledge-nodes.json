@@ -1,0 +1,36 @@
+{
+  "degree": 230, "project": "SPS", "name": "Rough-legged Hawk", "slug": "230-rough-legged-hawk",
+  "species": "Buteo lagopus", "family": "Accipitridae", "order": "Accipitriformes",
+  "common_name": "Rough-legged Hawk", "sound_type": "Mew call -- high thin catlike peeeeah, descending",
+  "energy": 4,
+  "ecosystem": "Open field, agricultural land, estuarine grassland. Winter visitor to PNW lowlands; Arctic/subarctic tundra breeding.",
+  "season": "Winter visitor (October-March PNW lowlands). Arctic breeding.",
+  "conservation": "Least Concern (IUCN). Stable. Long-term concern: arctic climate change affecting tundra lemming habitat.",
+  "vocalization": {
+    "type": "mew call",
+    "description": "High, thin, catlike descending mew. peeeeah or keeaow. Drawn out 0.5-1.5 sec.",
+    "frequency_hz": "2000-4500",
+    "character": "Softest raptor call in the 221-232 arc. E=4. Plaintive, quiet, temporary-visitor energy.",
+    "function": "Contact call, winter range. Alarm call (louder) on arctic breeding grounds."
+  },
+  "ecology": {
+    "breeding_habitat": "Arctic and subarctic tundra; cliff and riverbank nesting",
+    "prey_breeding": "Lemmings (specialist), voles. Productivity tightly coupled to lemming cycle.",
+    "lemming_cycle": "3-4 year population oscillation; high lemming years produce irruption winters in PNW",
+    "winter_prey": "Voles, mice, small mammals in agricultural fields",
+    "hunting": "Soaring, hovering (frequently observed hovering against wind, unusually among buteos)",
+    "morphs": "Light morph (dark belly band, white tail base); dark morph (~25-30% of population)"
+  },
+  "etymology": {
+    "lagopus": "Greek: lagos (hare) + pous (foot). Feathered tarsi to toes, like a ptarmigan. Arctic cold adaptation.",
+    "rough_legged": "Common name from the rough-textured feathering of the fully feathered leg"
+  },
+  "connections": [
+    {"degree": 230, "type": "s36_pair", "description": "Pond (E=6, grunge/indie, Sub Pop, Fremont). E=10 equilibrium. Both softer than context. Transplant parallel: hawk from Arctic, band from Portland."},
+    {"degree": 229, "type": "buteo_sequence", "description": "Ferruginous Hawk (LARGEST BUTEO, E=6). Rough-leg completes trilogy: smallest energy, winter visitor."},
+    {"degree": 228, "type": "buteo_sequence", "description": "Red-tailed Hawk (FIRST BUTEO, E=6). Trilogy begins 228, ends 230."},
+    {"degree": 231, "type": "family_transition", "description": "Peregrine Falcon (FIRST FALCONIDAE). Accipitridae ends at 230. New family at 231."}
+  ],
+  "tags": ["accipitridae", "buteo", "rough-legged-hawk", "arctic-visitor", "winter-raptor", "lemming-specialist", "hovering", "skagit-flats", "holarctic", "buteo-trilogy-complete"],
+  "milestones": ["BUTEO TRILOGY COMPLETE", "ARCTIC VISITOR DOCUMENTED", "SOFTEST RAPTOR CALL IN ARC (E=4)", "ACCIPITRIDAE SEQUENCE ENDS"]
+}
