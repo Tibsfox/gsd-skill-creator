@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 150&deg; &mdash; Mr. Hill &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #FF6F00, #FF8F00); color: #FFF8E1; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(255, 111, 0, 0.4); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #D84315; color: #FFCCBC; border: 1px solid #E64A19; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #FF6F00; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #FF6F00; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.intermediate { background: #F3E5F5; color: #4A148C; }
+    .theory-card .level.foundational { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #FF6F00; min-width: 3rem; display: inline-block; }
+    .milestone-banner { background: linear-gradient(135deg, #455A64, #546E7A, #607D8B, #455A64); color: #B0BEC5; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .milestone-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #90A4AE; }
+    .milestone-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+    blockquote { border-left: 3px solid #FF6F00; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF3E0; font-style: italic; color: #E65100; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>150 &mdash; Mr. Hill</span>
+    </nav>
+
+    <div class="milestone-banner">
+      <h3>Degree 150 &mdash; 41.7% Complete &mdash; Steady Progress</h3>
+      <p>
+        <strong>Mr. Hill</strong> &mdash; Seattle MC. Self-released.
+        Working the underground circuit. Seventeenth degree in the hip-hop era.
+        E=5 plateau at seventeen degrees &mdash; unprecedented in S36.
+        Degree 150 = 41.7% of the full rotation.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">150&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Mr. Hill</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Self-Released</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Working MC</h2>
+          <blockquote>
+            Mr. Hill builds a career through consistent output and live
+            performance &mdash; regular releases, regular shows, regular presence
+            in the Seattle hip-hop circuit. Neumos, The Crocodile, Nectar
+            Lounge, house shows, open mics, cyphers. The live circuit is the
+            lifeblood of the underground MC.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Self-Released Underground (Continued)</h2>
+          <blockquote>
+            Degree 149 (J. Pinder) introduced the self-released tier. Degree 150
+            (Mr. Hill) continues it. Two consecutive degrees documenting the
+            same tier establishes its significance &mdash; the self-released
+            underground is not a single artist but a population operating in the
+            same mode. The engine documents the tier as a structural feature.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>E=5 Plateau (17 degrees)</h4>
+              <div class="level intermediate">Intermediate &mdash; Engine Pattern</div>
+              <p>
+                Seventeen consecutive degrees at E=5 (134&ndash;150).
+                Unprecedented. The hip-hop genre has a characteristic
+                energy level that does not peak or dip.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Underground Tier Confirmed</h4>
+              <div class="level foundational">Foundational &mdash; Scene Theory</div>
+              <p>
+                Two consecutive self-released underground entries (149&ndash;150)
+                confirm the tier. Not an anomaly but a structural feature.
+                The foundation is documented.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">149&deg;</span> <strong>J. Pinder</strong> &mdash; PREVIOUS DEGREE! First self-released underground MC (149) to second (150). The tier is established.</li>
+            <li><span class="ref-degree">151&deg;</span> <strong>Sol</strong> &mdash; NEXT DEGREE! Underground MC (150) to new-generation conscious MC (151). The tier broadens.</li>
+            <li><span class="ref-degree">134&deg;</span> <strong>DJ B-Mello</strong> &mdash; HIP-HOP ERA START! Seventeen degrees of E=5. Unprecedented plateau.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">150&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">41.7%</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hip-Hop</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Mr. Hill</h4>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-released</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Tier</span><span class="stat-value">Underground MC</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Hip-Hop Era</h4>
+          <div class="stat-row"><span class="stat-label">Start</span><span class="stat-value">Degree 134</span></div>
+          <div class="stat-row"><span class="stat-label">Current</span><span class="stat-value">Degree 150</span></div>
+          <div class="stat-row"><span class="stat-label">Length</span><span class="stat-value">17 degrees</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E=5 (sustained)</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../149-j-pinder/" style="color: var(--seattle-navy);">&larr; 149&deg; J. Pinder</a>
+        <a href="../151-sol/" style="color: var(--seattle-navy);">151&deg; Sol &rarr;</a>
+      </div>
+      <p>Degree 150&deg; &mdash; Mr. Hill &mdash; Seattle 360 Engine &mdash; v1.49.290<br>Working MC. Self-released underground tier confirmed. E=5 at seventeen degrees. 41.7% complete.</p>
+    </footer>
+  </div>
+</body>
+</html>

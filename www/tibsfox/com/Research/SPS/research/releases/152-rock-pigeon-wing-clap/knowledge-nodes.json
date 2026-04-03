@@ -1,0 +1,108 @@
+{
+  "degree": 152,
+  "species": "Rock Pigeon",
+  "scientific_name": "Columba livia",
+  "slug": "152-rock-pigeon-wing-clap",
+  "sound_type": "loud wing slap on takeoff -- sharp percussive clapping of wings above the body during display flights and alarm takeoffs; third mechanical sound in the engine; E=4",
+  "energy": 4,
+  "ecosystem": "Urban cliffs -- buildings, bridges, overpasses, parking garages. Any vertical structure mimicking Mediterranean cliff faces. World's most successful urban bird. Feral populations on every inhabited continent. Estimated 260 million global feral population.",
+  "season": "Year-round resident. Year-round breeding in urban environments. Wing clap displays and alarm flights year-round.",
+  "family": "Columbidae (4th and final entry. FOURTH AND FINAL COLUMBIDAE. Completes the quartet 149-152.)",
+  "order": "Columbiformes",
+  "csv_substitute": false,
+  "original_species": "Rock Pigeon",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.61,
+    "lon": -122.34,
+    "description": "Rock Pigeons are ubiquitous in urban Seattle -- downtown buildings, bridges, overpasses, parking garages, waterfront structures. Every vertical surface is a potential cliff face."
+  },
+  "taxonomy_note": {
+    "description": "FOURTH and FINAL Columbidae entry. Completes the quartet. Feral descendant of domesticated stock. Domesticated ~5,000-10,000 years ago in the Middle East. Transported globally by humans. Urban cliff substitute habitat. Wing clap focus: mechanical sound, not vocal. THIRD mechanical sound in engine.",
+    "current_family": "Columbidae (4th and final entry)",
+    "new_family": false,
+    "family_count_in_engine": "Columbidae: fourth and final entry. Band-tailed (149) + Mourning Dove (150) + Collared-Dove (151) + Rock Pigeon (152). Quartet complete.",
+    "name_etymology": "Columba from Latin 'columba' (dove, pigeon). livia from Latin 'livid' (blue-gray) -- referring to the wild-type plumage color.",
+    "genus_note": "Columba -- first entry. The 'typical pigeons' -- Old World genus. The ancestral pigeon genus.",
+    "order_note": "Columbiformes. Fourth and final entry.",
+    "family_position": "Fourth and final Columbidae. Feral. Mechanical sound focus. Completes native-to-feral progression: native forest (149) > native open (150) > invasive (151) > feral (152)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Wing clap: broadband 200-5000 Hz. Not tonal. Percussive impulse. Coo (secondary): 300-600 Hz.",
+    "peak_energy_band_hz": "Wing clap: broadband energy, peak percussive impact at 500-2000 Hz.",
+    "song_frequency_hz": "Wing clap: 200-5000 Hz broadband. This is a mechanical, percussive sound -- not a vocalization.",
+    "song_duration_s": "Individual clap: 0.01-0.03 seconds. Display sequence: 3-8 claps over 1-3 seconds. Flock takeoff: hundreds of claps in 2-5 second burst.",
+    "note_structure": "WING CLAP: Wings physically struck together above the body at top of upstroke. Leading edges make contact. Air compression creates pressure wave. Sharp percussive crack.",
+    "note_types": "Wing clap (primary, display/alarm -- mechanical), coo-roo (secondary, territorial/courtship -- vocal).",
+    "phrase_structure": "Display flight: 3-8 claps during climbing phase, then stiff-wing V glide. Alarm: single explosive burst from flock flush.",
+    "timbre": "Sharp, percussive, startling. Not tonal. A physical impact sound. Completely different character from all Columbidae vocalizations.",
+    "amplitude": "E=4. Louder than any Columbidae vocalization. Individual clap: audible 50-150m. Flock takeoff: audible 100-300m. Breaks the E=3 family baseline.",
+    "tempo": "Display: 3-8 claps in rapid succession during climbing flight. Alarm: instantaneous burst.",
+    "context": "Male display flights: climbing with claps, then V-glide. Alarm: flock flush from ledge. Both year-round.",
+    "regional_variation": "None. Mechanical sound. Physics-determined.",
+    "key_property": "WING CLAP -- broadband 200-5000 Hz, percussive, wings slapped above body. E=4. FOURTH AND FINAL COLUMBIDAE. THIRD MECHANICAL SOUND (after Goldeneye 124, Mourning Dove 150). Breaks E=3 family baseline. Feral. Urban cliff adaptation. 260M global. Domesticated 5,000-10,000 years ago. Quartet complete."
+  },
+  "plumage": {
+    "overall": "Wild-type: blue-gray overall with iridescent green-purple neck, two black wing bars, white rump. Feral populations show extreme variation: white, piebald, rusty, dark, checkered. Centuries of selective breeding produced diverse morphs.",
+    "diagnostic_mark": "Highly variable in feral populations. Wild-type: blue-gray with two wing bars. The most morphologically variable bird in any city.",
+    "seasonal_variation": "None.",
+    "flight_pattern": "Strong, direct. Display flight: steep climbing with exaggerated wingbeats and claps, then stiff V-wing glide. Flock takeoff: explosive burst."
+  },
+  "physical_description": {
+    "overall": "Length: 29-37 cm. Weight: 240-380 g. Medium-large pigeon. Smaller than Band-tailed (300-450g). Larger than Mourning Dove (100-170g). Similar size to Collared-Dove (150-240g) but heavier.",
+    "diagnostic_mark": "Urban habitat. Variable plumage. Two wing bars in wild-type. Iridescent neck. Display flight with wing claps.",
+    "field_id": "The city pigeon. On ledges, bridges, sidewalks, parking garages. Listen for the sharp wing clap during display flights or alarm takeoff. Extremely variable in color."
+  },
+  "nodes": [
+    {
+      "id": "wing-clap-mechanism",
+      "type": "concept",
+      "title": "Wing Clap -- Percussion, Not Feather",
+      "description": "Wings physically struck together above the body. Leading edges contact at top of upstroke. Air compression creates pressure wave. Fundamentally different from Goldeneye/Mourning Dove feather whistles. Percussion vs. aeroelastic vibration.",
+      "connections": ["mechanical-sound-trilogy", "display-flight"]
+    },
+    {
+      "id": "mechanical-sound-trilogy",
+      "type": "pattern",
+      "title": "Mechanical Sound Trilogy Complete",
+      "description": "Three mechanical sounds: Goldeneye wing whistle (124, E=5), Mourning Dove wing whistle (150, E=3), Rock Pigeon wing clap (152, E=4). Progression from feather-generated to body-generated. Whistle to clap.",
+      "connections": ["wing-clap-mechanism", "quartet-complete"]
+    },
+    {
+      "id": "quartet-complete",
+      "type": "pattern",
+      "title": "Columbidae Quartet Complete (149-152)",
+      "description": "Four degrees, four species: native forest (149), native open (150), invasive (151), feral mechanical (152). Native-to-non-native. Vocal-to-mechanical. E=3, E=3, E=3, E=4. Habitat: forest > open > urban > urban cliff. The displacement story told in four degrees.",
+      "connections": ["mechanical-sound-trilogy", "cliff-to-city"]
+    },
+    {
+      "id": "cliff-to-city",
+      "type": "concept",
+      "title": "Cliff to City -- Urban Adaptation",
+      "description": "Wild Rock Pigeons nest on Mediterranean sea cliffs. Domesticated 5,000-10,000 years ago. Transported globally. Feral populations recolonized buildings as cliff substitutes. The urban environment is an accidental recreation of ancestral habitat. 260M global.",
+      "connections": ["quartet-complete", "wing-clap-mechanism"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-150",
+      "species": "Mourning Dove",
+      "relationship": "MECHANICAL SOUND PAIR! Both Columbidae with mechanical sounds. Mourning Dove: feather whistle (modified primary). Rock Pigeon: wing clap (body contact). Different mechanisms."
+    },
+    {
+      "target": "SPS-124",
+      "species": "Common Goldeneye",
+      "relationship": "MECHANICAL SOUND TRILOGY! Goldeneye wing whistle (124), Mourning Dove wing whistle (150), Rock Pigeon wing clap (152). Three mechanical sounds. Feather to body."
+    },
+    {
+      "target": "SPS-149",
+      "species": "Band-tailed Pigeon",
+      "relationship": "NATIVE vs. FERAL BOOKENDS! Band-tailed (native, forest, declining, 149) opens the quartet. Rock Pigeon (feral, urban, 260M, 152) closes it. The displacement arc."
+    },
+    {
+      "target": "SPS-151",
+      "species": "Eurasian Collared-Dove",
+      "relationship": "NON-NATIVE PAIR! Both non-native urban Columbidae. Collared-Dove (invasive, vocal, 30 years) and Rock Pigeon (feral, mechanical, centuries). Different timescales."
+    }
+  ]
+}

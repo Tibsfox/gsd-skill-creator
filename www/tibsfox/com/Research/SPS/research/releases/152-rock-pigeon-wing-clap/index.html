@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 152&deg; &mdash; Rock Pigeon Wing Clap &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(26, 35, 126, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .clap-card { background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2, #4A148C); border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .clap-card h3 { margin-top: 0; font-size: 1.1rem; color: #CE93D8; }
+    .clap-card p { color: #E1BEE7; }
+    .clap-card strong { color: #F3E5F5; }
+
+    .feral-card { background: linear-gradient(135deg, #37474F, #546E7A, #607D8B, #37474F); border: 2px solid #37474F; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B0BEC5; }
+    .feral-card h3 { margin-top: 0; font-size: 1.1rem; color: #90A4AE; }
+    .feral-card p { color: #B0BEC5; }
+    .feral-card strong { color: #ECEFF1; }
+
+    .cliff-card { background: linear-gradient(135deg, #3E2723, #4E342E, #5D4037, #3E2723); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BCAAA4; }
+    .cliff-card h3 { margin-top: 0; font-size: 1.1rem; color: #A1887F; }
+    .cliff-card p { color: #BCAAA4; }
+    .cliff-card strong { color: #EFEBE9; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.clap { background: #4A148C; }
+    .theory-icon.trilogy { background: #1A237E; }
+    .theory-icon.quartet { background: #B71C1C; }
+    .theory-icon.cliff { background: #3E2723; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .quartet-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .quartet-table th { background: #1A237E; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .quartet-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .quartet-table tr:nth-child(even) { background: #E8EAF6; }
+    .quartet-table tr:last-child { font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">152&deg;</div>
+      <div class="release-title-block">
+        <h2>Rock Pigeon &mdash; Wing Clap</h2>
+        <div class="scientific"><em>Columba livia</em> (Columbidae) &mdash; E=4 &mdash; Percussive Wing Clap on Takeoff</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FOURTH AND FINAL COLUMBIDAE.</strong> The quartet closes with percussion.
+      <strong>Third mechanical sound</strong> in the engine.
+      Wings slapped above the body &mdash; <strong>not voice, not feather, but body.</strong>
+      Feral. Urban cliff adaptation. <strong>260 million global.</strong>
+      Domesticated 5,000&ndash;10,000 years ago. The displacement story complete.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="clap-card">
+          <h3>The Wing Clap &mdash; Percussion, Not Song</h3>
+          <p>
+            Wings <strong>physically struck together above the body</strong>
+            at the top of the upstroke. Leading edges make contact.
+            Air compression creates a <strong>pressure wave</strong>.
+            Sharp percussive <strong>&ldquo;crack&rdquo;</strong> or <strong>&ldquo;clap.&rdquo;</strong>
+            Broadband: <strong>200&ndash;5000 Hz</strong>. Not tonal. Not a vocalization.
+            <strong>The body is louder than the voice.</strong>
+            Display flight: <strong>3&ndash;8 claps</strong> during steep climb,
+            then stiff V-wing glide. Alarm: explosive flock burst.
+          </p>
+        </div>
+        <div class="cliff-card">
+          <h3>Cliff to City &mdash; 10,000 Years of Adaptation</h3>
+          <p>
+            <strong>Wild ancestor:</strong> sea cliffs and mountain faces in the
+            Mediterranean, Middle East, Central Asia. Narrow ledges with
+            overhanging protection. <strong>Domesticated ~5,000&ndash;10,000 years ago.</strong>
+            Transported to every continent. Escaped. Feral populations
+            recolonized <strong>buildings as cliff substitutes</strong>: window ledges =
+            cliff ledges, bridge undersides = cliff overhangs.
+            <strong>260 million</strong> feral birds worldwide.
+          </p>
+        </div>
+        <div class="feral-card">
+          <h3>The Mechanical Sound Trilogy</h3>
+          <p>
+            Three mechanical sounds in the engine:<br>
+            <strong>124:</strong> Common Goldeneye wing whistle (modified primaries, E=5).<br>
+            <strong>150:</strong> Mourning Dove wing whistle (9th primary feather, E=3).<br>
+            <strong>152:</strong> Rock Pigeon wing clap (<strong>wings slapped together</strong>, E=4).<br>
+            Progression: <strong>feather-generated to body-generated</strong>.
+            Whistle to percussion. Aeroelastic vibration to physical collision.
+          </p>
+        </div>
+
+        <h2>Columbidae Quartet (149&ndash;152)</h2>
+        <table class="quartet-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Status</th><th>Sound</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>149</td><td>Band-tailed Pigeon</td><td>Native forest</td><td>Deep coo-coo</td><td>3</td></tr>
+            <tr><td>150</td><td>Mourning Dove</td><td>Native open</td><td>oo-WOO-woo + whistle</td><td>3</td></tr>
+            <tr><td>151</td><td>Eurasian Collared-Dove</td><td>Invasive</td><td>hoo-HOO-hoo</td><td>3</td></tr>
+            <tr><td>152</td><td>Rock Pigeon</td><td>Feral</td><td>Wing clap</td><td>4</td></tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Architecture:</strong> Native &rarr; non-native. Vocal &rarr; mechanical.
+          Forest &rarr; urban cliff. E=3 &rarr; E=4.
+          The displacement story in four degrees.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-150 Mourning Dove</strong>
+            <p>MECHANICAL PAIR! Both Columbidae with mechanical sounds. Mourning Dove: feather whistle (modified 9th primary). Rock Pigeon: wing clap (body contact). Different mechanisms, same family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-124 Common Goldeneye</strong>
+            <p>MECHANICAL TRILOGY! Goldeneye wing whistle (124, E=5), Mourning Dove whistle (150, E=3), Rock Pigeon clap (152, E=4). From feather to body. Whistle to percussion.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-149 Band-tailed Pigeon</strong>
+            <p>QUARTET BOOKENDS! Band-tailed (native, forest, declining, E=3) opens. Rock Pigeon (feral, urban, 260M, E=4) closes. The displacement arc from canopy to parking garage.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-151 Eurasian Collared-Dove</strong>
+            <p>NON-NATIVE PAIR! Both non-native urban Columbidae. Collared-Dove (invasive, vocal, 30 years) and Rock Pigeon (feral, mechanical, centuries). Same cities, different origins.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon clap">!</div>
+            <div class="theory-content">
+              <h4>Wing Clap Mechanism</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Wings physically struck together above body. Leading-edge contact + air compression = percussive crack. Not feather vibration. Body-generated percussion.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon trilogy">M</div>
+            <div class="theory-content">
+              <h4>Mechanical Sound Trilogy Complete</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Goldeneye (124), Mourning Dove (150), Rock Pigeon (152). Feather whistle to body clap. Three non-vocal sounds across 28 degrees.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon quartet">Q</div>
+            <div class="theory-content">
+              <h4>Columbidae Quartet Complete (149&ndash;152)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Native forest &rarr; native open &rarr; invasive &rarr; feral. Vocal &rarr; mechanical. E=3 &rarr; E=4. The displacement story in four degrees.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cliff">C</div>
+            <div class="theory-content">
+              <h4>Cliff to City Adaptation</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Mediterranean sea cliffs to urban buildings. Domesticated 5,000&ndash;10,000 years ago. Feral populations: 260M global. The urban environment as accidental ancestral habitat.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Rock Pigeon</div><div class="stat-detail"><em>Columba livia</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Columbidae</div><div class="stat-detail">4th &amp; final entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Wing clap</div><div class="stat-detail">mechanical, percussive</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 4</div><div class="stat-detail">breaks E=3 baseline</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">200&ndash;5000 Hz</div><div class="stat-detail">broadband percussive</div></div>
+        <div class="stat-card"><div class="stat-label">Mechanism</div><div class="stat-value">Wings struck</div><div class="stat-detail">body contact, not feather</div></div>
+        <div class="stat-card"><div class="stat-label">Display</div><div class="stat-value">3&ndash;8 claps</div><div class="stat-detail">climbing + V-glide</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Feral</div><div class="stat-detail">domesticated 5&ndash;10K yrs ago</div></div>
+        <div class="stat-card"><div class="stat-label">Population</div><div class="stat-value">260 million</div><div class="stat-detail">global feral</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Urban cliffs</div><div class="stat-detail">buildings, bridges, garages</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
