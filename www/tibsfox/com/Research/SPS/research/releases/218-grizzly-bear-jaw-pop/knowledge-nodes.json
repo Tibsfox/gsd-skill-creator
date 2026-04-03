@@ -1,0 +1,18 @@
+{
+  "degree": 218, "species": "Grizzly Bear", "scientific_name": "Ursus arctos horribilis", "slug": "218-grizzly-bear-jaw-pop",
+  "sound_type": "loud percussive jaw-pop -- broadband 'CLACK', 200-5,000+ Hz, final warning. E=7",
+  "energy": 7, "ecosystem": "Trail/wilderness interface. Close-range encounters. 10-50 meters.",
+  "family": "Ursidae (second grizzly entry)", "order": "Carnivora", "class": "Mammalia",
+  "coordinates": { "lat": 48.80, "lon": -121.10, "description": "Grizzly Bear, North Cascades. Trail encounter context." },
+  "taxonomy_note": { "description": "Second grizzly entry. Roar/jaw-pop pair (217-218). E=15 combined -- highest ever." },
+  "song_metrics": { "fundamental_frequency_range_hz": "Broadband impulse 200-5,000+ Hz.", "amplitude": "E=7. Percussive, startling, close-range.", "key_property": "GRIZZLY JAW-POP. E=7. Final warning. E=15 combined with roar. v1.49.359." },
+  "nodes": [
+    { "id": "final-warning", "type": "concept", "title": "Final Warning Vocalization", "description": "Stage 3 of 5 in threat escalation. Jaw-pop = critical. 1,200+ psi bite force.", "connections": ["roar-jawpop-pair"] },
+    { "id": "roar-jawpop-pair", "type": "concept", "title": "Roar/Jaw-Pop Pair -- E=15 Combined", "description": "Long-range roar (E=8) + close-range jaw-pop (E=7). Highest combined species energy ever.", "connections": ["final-warning"] }
+  ],
+  "cross_references": [
+    { "target": "SPS-217", "species": "Grizzly Bear Roar", "relationship": "GRIZZLY PAIR! E=8 + E=7 = E=15. Highest combined ever." },
+    { "target": "SPS-201", "species": "Black Bear Jaw-Pop", "relationship": "URSIDAE JAW-POP! Black bear (E=6) vs. grizzly (E=7). Different scale." },
+    { "target": "S36-218", "artist": "The Blood Brothers", "relationship": "E=15 COMBINED! Blood Brothers (E=8) + jaw-pop (E=7). Maximum intensity." }
+  ]
+}
