@@ -1,0 +1,81 @@
+{
+  "degree": 206,
+  "artist": "The Black Tones",
+  "slug": "206-the-black-tones",
+  "genre": "Blues Rock / Indie",
+  "energy": 6,
+  "era": "Blues Rock. E=6 -- FIRST BLUES ROCK (Genre Stage 107). Sibling duo. Blues through punk lens. Rainier Valley. Sub Pop. v1.49.347.",
+  "location": {
+    "origin": "Rainier Valley, Seattle",
+    "formative": "Rainier Valley: south Seattle's diverse heart. Black cultural tradition, punk energy, indie aesthetics.",
+    "career": "The Black Tones. 2013-present. Sub Pop. First Blues Rock."
+  },
+  "formed": "Rainier Valley, Seattle",
+  "active": "2013-present",
+  "labels": ["Sub Pop"],
+  "members": [
+    {"name": "Eva Walker", "role": "guitar / vocals", "note": "Blues bends through punk distortion. Raw, powerful vocals. Songwriter and frontperson."},
+    {"name": "Cedric Walker", "role": "drums", "note": "Sibling. Heavy, propulsive. Blues shuffle at punk velocity. Communication since birth."}
+  ],
+  "former_members": [],
+  "associated_musicians": [],
+  "theory_nodes": [
+    {
+      "concept": "First Blues Rock -- Genre Stage 107. The oldest rock genre lineage enters at degree 206. The engine mirrors Seattle's relationship with blues: always filtered, never purist.",
+      "level": "milestone",
+      "department": "genre-theory",
+      "college_path": ".college/music/theory/genre/first-blues-rock.md",
+      "examples": [
+        "107th genre in the engine.",
+        "Blues rock: root of all rock music.",
+        "Seattle is not a blues city. Blues here is filtered through punk and indie.",
+        "The oldest lineage, the newest entry."
+      ],
+      "description": "First Blues Rock. Genre Stage 107. Oldest tradition, newest entry.",
+      "genealogy": {
+        "ancestors": ["Robert Johnson.", "Muddy Waters.", "Jimi Hendrix.", "Pacific Northwest blues tradition."],
+        "relationship": "The Black Tones at 206. First Blues Rock in engine."
+      }
+    },
+    {
+      "concept": "Rainier Valley enters the engine -- south Seattle's diverse heart. Not Capitol Hill. Black cultural tradition plus punk energy plus indie aesthetics. A different part of the city.",
+      "level": "advanced",
+      "department": "geography-theory",
+      "college_path": ".college/music/theory/geography/rainier-valley-enters.md",
+      "examples": [
+        "Rainier Valley: MLK Jr. Way South corridor.",
+        "One of America's most diverse neighborhoods.",
+        "Most engine entries from Capitol Hill or U-District.",
+        "South Seattle brings a different cultural context."
+      ],
+      "description": "Rainier Valley enters. South Seattle. Diverse heart. Not Capitol Hill.",
+      "genealogy": {
+        "ancestors": ["Rainier Valley community.", "South Seattle music scene.", "Black American cultural tradition."],
+        "relationship": "The Black Tones at 206. Rainier Valley enters the engine."
+      }
+    },
+    {
+      "concept": "Sibling duo format -- two people making blues rock. More economical than power trio (205). Maximum pressure on each member. Sibling shorthand: communication since birth.",
+      "level": "intermediate",
+      "department": "formation-theory",
+      "college_path": ".college/music/theory/formation/sibling-duo.md",
+      "examples": [
+        "Eva Walker: guitar/vocals. Cedric Walker: drums.",
+        "Sibling shorthand -- no rehearsal needed for timing.",
+        "Even more economical than Naked Giants' trio (205).",
+        "Formations shrink: quartet to trio to duo."
+      ],
+      "description": "Sibling duo. Two people, one blues rock band. Maximum economy.",
+      "genealogy": {
+        "ancestors": ["White Stripes (sibling-style duo).", "Black Keys (duo).", "Blues duo tradition."],
+        "relationship": "The Black Tones at 206. Sibling duo enters engine."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 205, "artist": "Naked Giants", "relationship": "Previous entry. Power trio to sibling duo. Three to two. Both Sub Pop. Both E=6. Formations shrink."},
+    {"degree": 203, "artist": "Tacocat", "relationship": "Four consecutive E=6 (203-206). Pop-punk, garage-raw, power trio, blues rock. Longest E=6 streak."},
+    {"degree": 200, "artist": "Death Cab for Cutie", "relationship": "Sub Pop lineage. Quiet indie (E=4) vs. loud blues (E=6). The label's range."},
+    {"degree": "SPS-206", "species": "Mountain Beaver", "relationship": "EXTREME CONTRAST (E=6 + E=2). Ancient lineage: blues (oldest genre) and Mountain Beaver (oldest rodent). Both PNW."}
+  ]
+}

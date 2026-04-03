@@ -1,0 +1,111 @@
+{
+  "degree": 211,
+  "species": "Red Fox",
+  "scientific_name": "Vulpes vulpes",
+  "slug": "211-red-fox-bark",
+  "sound_type": "explosive bark -- sharp percussive 'WRAHH!' 500-2,000 Hz. 0.2-0.5 sec. Territory, alarm, contact. E=4",
+  "energy": 4,
+  "ecosystem": "Varied. Forest edges, agricultural fields, suburban neighborhoods, urban margins. Boundary specialist. Resident year-round.",
+  "season": "Year-round. Bark peaks in breeding season (January-February).",
+  "family": "Canidae (fourth entry -- coyote 208, coyote pup 209, gray wolf 210)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Red Fox",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -122.20,
+    "description": "Red Fox in varied PNW habitats: forest edges, agricultural fields, suburban margins."
+  },
+  "taxonomy_note": {
+    "description": "140-degree callback from degree 71. Fourth Canidae. CANIDAE QUARTET COMPLETE (208-211). Most adaptable canid.",
+    "current_family": "Canidae (fourth entry, quartet complete)",
+    "new_family": false,
+    "family_count_in_engine": "Canidae: Coyote Howl (208, E=5), Coyote Pup (209, E=4), Gray Wolf (210, E=7), Red Fox (211, E=4). COMPLETE.",
+    "name_etymology": "Vulpes vulpes = 'fox fox'. Redundant binomial. The most fox-like fox.",
+    "genus_note": "Vulpes -- the true foxes. Red Fox is the type species.",
+    "order_note": "Carnivora. Fourth Canidae entry. Quartet complete.",
+    "family_position": "Canidae: fourth entry. Quartet complete. Energy arc: 5-4-7-4.",
+    "class_note": "Class Mammalia. Most widely distributed wild carnivore on Earth. Boundary specialist."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-2,000 Hz. Peak energy at 800-1,500 Hz.",
+    "peak_energy_band_hz": "800-1,500 Hz (peak of territorial bark).",
+    "song_frequency_hz": "Bark: 500-2,000 Hz. Alarm bark: 800-2,500 Hz. Breeding scream: 1,000-3,000+ Hz.",
+    "song_duration_s": "Bark: 0.2-0.5 sec. Repeated every 3-10 seconds in territorial bouts.",
+    "note_structure": "Single explosive burst. Percussive, not tonal. No sustain.",
+    "note_types": "Territorial bark (loud, explosive), alarm bark (sharp, higher), contact bark (soft, brief), breeding scream (drawn-out wail).",
+    "phrase_structure": "Single barks repeated. No chorus (solitary hunter). Scream is single sustained call.",
+    "timbre": "Sharp, explosive, percussive. Abrupt onset and offset. No resonant sustain.",
+    "amplitude": "E=4. Explosive but brief. High instantaneous energy, low sustained. Flash not glow. 200-500 m carry.",
+    "tempo": "Barks every 3-10 seconds during territorial bouts.",
+    "context": "Territory advertisement. Alarm. Contact. Breeding (bark + scream). Year-round.",
+    "regional_variation": "Subtle variation in bark pitch across populations. Scream consistent.",
+    "key_property": "RED FOX BARK. Sharp explosive. 500-2,000 Hz. E=4. 140-DEGREE CALLBACK from 71. Fourth Canidae. QUARTET COMPLETE. Boundary specialist. v1.49.352."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Classic red-orange coat with white-tipped tail. 4-7 kg. Slender build. Large ears. Bushy tail.",
+    "diagnostic_mark": "Red-orange coat. White tail tip (diagnostic). Black stockings. Pointed face. Large ears relative to head.",
+    "seasonal_variation": "Thicker winter coat with richer color. Summer coat thinner, more faded.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "4-7 kg (9-15 lbs). Body length 45-90 cm. Tail 30-55 cm. Slender, agile. Built for versatility.",
+    "diagnostic_mark": "Red-orange fur. White-tipped bushy tail. Black legs/stockings. Pointed face. Cat-like pupils (vertical slit in bright light).",
+    "field_id": "Medium-small red-orange canid with white-tipped tail. Black stockings. Often seen at dusk/dawn at habitat edges. May bark sharply if disturbed. Cat-like in movement -- light, quick, solitary."
+  },
+  "nodes": [
+    {
+      "id": "quartet-complete",
+      "type": "milestone",
+      "title": "Canidae Quartet COMPLETE -- 208-211",
+      "description": "Four canid voices. Energy arc 5-4-7-4. Habitat: everywhere, den, wilderness, edges. Size: medium, tiny, large, small. Conservation: common, common, extirpated, resident.",
+      "connections": ["callback-140", "boundary-specialist", "bark-vs-howl"]
+    },
+    {
+      "id": "callback-140",
+      "type": "concept",
+      "title": "140-Degree Callback -- Fox Returns",
+      "description": "From degree 71 to 211. More than a third of the 360. The fox bridges time within the engine itself. Longest callback in current stretch.",
+      "connections": ["quartet-complete", "boundary-specialist"]
+    },
+    {
+      "id": "boundary-specialist",
+      "type": "concept",
+      "title": "Boundary Specialist -- Most Adaptable Canid",
+      "description": "Thrives where habitats meet. Forest edge, field edge, suburban edge. Dietary flexibility. Behavioral adaptability. Every parameter tunable.",
+      "connections": ["quartet-complete", "callback-140"]
+    },
+    {
+      "id": "bark-vs-howl",
+      "type": "concept",
+      "title": "Percussive vs. Tonal -- Bark vs. Howl",
+      "description": "Fox bark: percussive, 0.2-0.5 sec, flash. Wolf howl: tonal, 3-11 sec, glow. Two fundamental approaches to canid vocalization.",
+      "connections": ["quartet-complete"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-71",
+      "species": "Red Fox",
+      "relationship": "140-DEGREE CALLBACK! First fox entry. Returns 140 degrees later with full comparative context."
+    },
+    {
+      "target": "SPS-210",
+      "species": "Gray Wolf Howl",
+      "relationship": "CANIDAE CONTRAST! Wolf (E=7, sustained, landscape) vs. fox (E=4, percussive, territory). Apex to compact. -3 drop."
+    },
+    {
+      "target": "SPS-209",
+      "species": "Coyote Pup Yipping",
+      "relationship": "SAME ENERGY! Both E=4. Pup chorus (sustained, chaotic, group) vs. fox bark (percussive, brief, solitary)."
+    },
+    {
+      "target": "S36-211",
+      "artist": "Iska Dhaaf",
+      "relationship": "BRIDGE BETWEEN WORLDS! Iska Dhaaf crosses cultural boundaries. Red Fox crosses ecological boundaries. Both thrive at edges."
+    }
+  ]
+}
