@@ -35,6 +35,7 @@ SYNC_DIRS = [
     "MUS",  # Music Theory & Performance
     "MUS/nodes",  # Knowledge node deep-dive pages
     "CSP",  # Computer Science & Programming
+    "LIVE",  # Real-time monitoring dashboards
 ]
 
 dry_run = "--dry-run" in sys.argv
