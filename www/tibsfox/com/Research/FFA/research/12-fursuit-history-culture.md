@@ -285,6 +285,10 @@ The maker ecosystem documented in [FFA-10] is the economic engine of the culture
 
 The technology integration documented in [FFA-11] -- LEDs, servos, sound systems, cooling -- represents the current frontier of fursuit culture. These technologies are not just engineering achievements; they are cultural ones, expanding what fursuit performance can be and how fursuits interact with their audiences.
 
+### To Deep Dives
+
+The [Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md) guide covers the thermal management that makes the convention culture described in this module physically survivable -- hydration, cooling vests, head fans, handler protocols, and the headless lounge infrastructure that is essential safety infrastructure at every major convention. The [Faux Fur Fabric Guide](deep-dives/faux-fur-guide.md) documents the material choices that define the visual quality of every suit in every fursuit parade.
+
 ### To [FFA-01] Biological Foundations
 
 The biological knowledge in [FFA-01] provides the reference that makes fursuit characters convincing. The cultural desire to embody an animal character drives the technical desire to accurately represent animal anatomy, coloring, and movement. Culture creates the demand; biology provides the source material.
