@@ -32,6 +32,8 @@ SYNC_DIRS = [
     "CERN",  # CERN research knowledge base
     "DRP",  # Disaster Recovery & Protective Systems
     "MUS",  # Music Theory & Performance
+    "MUS/nodes",  # Knowledge node deep-dive pages
+    "CSP",  # Computer Science & Programming
 ]
 
 dry_run = "--dry-run" in sys.argv
