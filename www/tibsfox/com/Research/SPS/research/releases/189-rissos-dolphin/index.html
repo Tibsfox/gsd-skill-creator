@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 189&deg; &mdash; Risso&rsquo;s Dolphin (low grunts + clicks) &mdash; Second Delphinidae &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #37474F, #455A64, #546E7A); color: #B0BEC5; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(55, 71, 79, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .scar-card { background: linear-gradient(135deg, #37474F, #455A64, #546E7A, #607D8B); border: 2px solid #37474F; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .scar-card h3 { margin-top: 0; font-size: 1.1rem; color: #ECEFF1; }
+    .scar-card p { color: #CFD8DC; }
+    .scar-card strong { color: #ECEFF1; }
+
+    .deep-card { background: linear-gradient(135deg, #1A237E, #283593, #303F9F); border: 2px solid #1A237E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .deep-card h3 { margin-top: 0; font-size: 1.1rem; color: #9FA8DA; }
+    .deep-card p { color: #C5CAE9; }
+    .deep-card strong { color: #E8EAF6; }
+
+    .streak-card { background: linear-gradient(135deg, #004D40, #00695C, #00796B); border: 2px solid #004D40; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B2DFDB; }
+    .streak-card h3 { margin-top: 0; font-size: 1.1rem; color: #80CBC4; }
+    .streak-card p { color: #B2DFDB; }
+    .streak-card strong { color: #E0F2F1; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.scar { background: #37474F; }
+    .theory-icon.deep { background: #1A237E; }
+    .theory-icon.streak { background: #004D40; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .era-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 1rem 0; }
+    .era-table th { background: #004D40; color: white; padding: 0.35rem 0.5rem; text-align: left; font-family: system-ui, sans-serif; }
+    .era-table td { padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--card-border); }
+    .era-table tr:nth-child(even) { background: #E0F2F1; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">189&deg;</div>
+      <div class="release-title-block">
+        <h2>Risso&rsquo;s Dolphin &mdash; Low Grunts &amp; Clicks</h2>
+        <div class="scientific"><em>Grampus griseus</em> (Delphinidae) &mdash; E=4 &mdash; Second Delphinidae</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>Second Delphinidae</strong> &mdash; the scarred dolphin.
+      Deep-water squid specialist. Born dark gray, ages to <strong>nearly white</strong>
+      through accumulated scarring. Low grunts + clicks. Monotypic genus.
+      <strong>10 consecutive marine mammals</strong> (180&ndash;189) &mdash;
+      <strong>BREAKS Picidae nonet record.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="scar-card">
+          <h3>The Scarred One &mdash; A Living Record</h3>
+          <p>
+            Born <strong>dark gray.</strong> Accumulates <strong>white scars</strong>
+            throughout life: squid tentacle rakes, conspecific tooth rakes, parasites.
+            Older individuals become <strong>nearly entirely white.</strong>
+            Each dolphin carries a <strong>unique record of its life on its skin.</strong>
+            The scars enable individual identification. <strong>E=4.</strong>
+          </p>
+        </div>
+
+        <div class="deep-card">
+          <h3>Deep-Water Specialist &mdash; Squid Hunter</h3>
+          <p>
+            Dives to <strong>300&ndash;1,000+ meters.</strong> Primary prey: deep-water
+            <strong>squid.</strong> Reduced dentition (2&ndash;7 pairs, lower jaw only)
+            &mdash; adapted for sucking in squid, not biting. <strong>Nocturnal feeding</strong>
+            follows squid vertical migration. The diet that shapes the scarred body.
+          </p>
+        </div>
+
+        <div class="streak-card">
+          <h3>Marine Mammal Era &mdash; 10 Consecutive &mdash; NEW RECORD</h3>
+          <p>
+            <strong>10 consecutive marine mammals</strong> (degrees 180&ndash;189).
+            <strong>BREAKS the Picidae nonet record</strong> &mdash; now the longest
+            taxonomic streak in engine history.
+            <strong>5 families:</strong> Phocidae (2), Otariidae (3), Mustelidae (1),
+            Phocoenidae (2), Delphinidae (2). Energy range: <strong>E=1 to E=6.</strong>
+          </p>
+        </div>
+
+        <h2>Marine Mammal Era</h2>
+        <table class="era-table">
+          <thead><tr><th>Deg</th><th>Species</th><th>Family</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>180</td><td>Harbor Seal</td><td>Phocidae</td><td>4</td></tr>
+            <tr><td>181</td><td>Harbor Seal Pup</td><td>Phocidae</td><td>3</td></tr>
+            <tr><td>182</td><td>Steller Sea Lion</td><td>Otariidae</td><td>6</td></tr>
+            <tr><td>183</td><td>California Sea Lion</td><td>Otariidae</td><td>5</td></tr>
+            <tr><td>184</td><td>Northern Fur Seal</td><td>Otariidae</td><td>4</td></tr>
+            <tr><td>185</td><td>Sea Otter</td><td>Mustelidae</td><td>4</td></tr>
+            <tr><td>186</td><td>Dall&rsquo;s Porpoise</td><td>Phocoenidae</td><td>5</td></tr>
+            <tr><td>187</td><td>Harbor Porpoise</td><td>Phocoenidae</td><td>1</td></tr>
+            <tr><td>188</td><td>Pac. White-sided Dolphin</td><td>Delphinidae</td><td>5</td></tr>
+            <tr><td>189</td><td>Risso&rsquo;s Dolphin</td><td>Delphinidae</td><td>4</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-188 Pac. White-sided Dolphin</strong>
+            <p>DELPHINIDAE PAIR! First dolphin (E=5, acrobatic, squawks + whistles) to second dolphin (E=4, deep-water, grunts + clicks). Acrobat to scarred specialist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-180 Harbor Seal</strong>
+            <p>STREAK RECORD! 10 consecutive marine mammals (180-189). BREAKS Picidae nonet. 5 families. New longest streak.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-189 Mudhoney</strong>
+            <p>THE FOUNDATIONAL! Mudhoney = foundational grunge (38 years, still here). Risso's = deep-water survivor (scarred skin records every encounter). Both persist. Total E=11.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon scar">S</div>
+            <div class="theory-content">
+              <h4>Scarred Body as Living Record</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Born gray, ages to white through accumulated scarring. Squid rakes, tooth rakes, parasites. Each individual uniquely marked. The body records the life.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon deep">D</div>
+            <div class="theory-content">
+              <h4>Deep-Water Squid Specialist</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Dives 300-1,000+ m. Squid primary prey. Reduced dentition. Nocturnal feeding. The deep-water specialist of the Delphinidae sequence.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon streak">10</div>
+            <div class="theory-content">
+              <h4>10 Consecutive Marine Mammals &mdash; NEW RECORD</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Degrees 180-189. BREAKS Picidae nonet. 5 families. Longest taxonomic streak in engine history. The marine mammal era extends.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Risso&rsquo;s Dolphin</div><div class="stat-detail"><em>Grampus griseus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Delphinidae</div><div class="stat-detail">Second (dolphins)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Low grunts + clicks</div><div class="stat-detail">deep-water voice</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #37474F;">E = 4</div><div class="stat-detail">restrained, functional</div></div>
+        <div class="stat-card"><div class="stat-label">Dive depth</div><div class="stat-value">1,000+ m</div><div class="stat-detail">squid specialist</div></div>
+        <div class="stat-card"><div class="stat-label">Scarring</div><div class="stat-value">Gray to white</div><div class="stat-detail">lifetime record</div></div>
+        <div class="stat-card"><div class="stat-label">Marine mammal era</div><div class="stat-value">10 consecutive</div><div class="stat-detail">NEW RECORD</div></div>
+        <div class="stat-card"><div class="stat-label">Pair total</div><div class="stat-value">E = 11</div><div class="stat-detail">E7 + E4</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

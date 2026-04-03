@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 190&deg; &mdash; Harvey Danger &mdash; E=5 &mdash; FIRST INDIE POP &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4527A0, #512DA8, #5E35B1); color: #D1C4E9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 16px rgba(69, 39, 160, 0.4); }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #4527A0; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #7B1FA2; color: #F3E5F5; border: 1px solid #8E24AA; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .first-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #7B1FA2; color: white; border: 2px solid #8E24AA; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E1BEE7; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CE93D8; border-left: 4px solid #4527A0; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card .level.advanced { background: #F3E5F5; color: #4A148C; }
+    .theory-card .level.intermediate { background: #EDE7F6; color: #311B92; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #4527A0; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #4527A0; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>190 &mdash; Harvey Danger (E=5) &mdash; First Indie Pop</span>
+    </nav>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">190&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Harvey Danger</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Indie Pop</span>
+          <span class="label-badge">Arena Rock / Slash</span>
+          <span class="first-badge">First Indie Pop</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>&ldquo;Flagpole Sitta&rdquo; and Beyond</h2>
+          <blockquote>
+            &ldquo;I&rsquo;m not sick but I&rsquo;m not well.&rdquo; One song defined a generation&rsquo;s
+            ambivalence. Harvey Danger had one massive hit (1997) and three excellent
+            albums. Sean Nelson&rsquo;s lyrics are dense, literary, self-deprecating,
+            and genuinely moving beneath the cleverness. Capitol Hill&rsquo;s finest
+            indie pop band. Too smart for the mainstream. Remembered for one song
+            but worth far more than that. 1992&ndash;2009.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>First Indie Pop &mdash; Genre Stage 102</h4>
+              <div class="level milestone">Milestone &mdash; Genre Theory</div>
+              <p>
+                Indie pop enters the engine. After 90 degrees of hip-hop and one
+                degree of grunge, the axis immediately diversifies. The post-hip-hop
+                era is not a single genre &mdash; it splinters. Harvey Danger is the first splinter.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>One-Hit Wonder Complexity</h4>
+              <div class="level advanced">Advanced &mdash; Artist Theory</div>
+              <p>
+                &ldquo;Flagpole Sitta&rdquo; at #1 Modern Rock. Three quality albums.
+                Free release experiment (2005) predating Radiohead. The one-hit label
+                obscures the full catalog. E=5 respects both the hit and the depth.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Capitol Hill Indie Ecosystem</h4>
+              <div class="level intermediate">Intermediate &mdash; Geography Theory</div>
+              <p>
+                Capitol Hill: venues, bookstores, coffee shops, cheap apartments.
+                The ecosystem that produced literate indie pop.
+                Contrast with Central District&rsquo;s DIY grunge (189).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">189&deg;</span> <strong>Mudhoney</strong> &mdash; E=7! Previous degree. Grunge to indie pop in one degree. The post-hip-hop era immediately splinters.</li>
+            <li><span class="ref-degree">188&deg;</span> <strong>DoNormaal (Late Career)</strong> &mdash; E=8! The hip-hop era peak. Two degrees earlier. The shift is still fresh.</li>
+            <li><span class="ref-degree">190&deg;</span> <strong>Minke Whale (SPS)</strong> &mdash; E=4. Both understated. Harvey Danger too clever for mainstream. Minke Whale smallest rorqual. Total E=9.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card" style="border-color: #7B1FA2; border-width: 2px;">
+          <h4 style="color: #7B1FA2;">First Indie Pop</h4>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">102</span></div>
+          <div class="stat-row"><span class="stat-label">The hit</span><span class="stat-value">Flagpole Sitta</span></div>
+          <div class="stat-row"><span class="stat-label">Chart peak</span><span class="stat-value">#1 Modern Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.331</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">190&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Indie Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Arena Rock / Slash</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1992&ndash;2009</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Facts</h4>
+          <div class="stat-row"><span class="stat-label">Vocalist</span><span class="stat-value">Sean Nelson</span></div>
+          <div class="stat-row"><span class="stat-label">Albums</span><span class="stat-value">3</span></div>
+          <div class="stat-row"><span class="stat-label">Free release</span><span class="stat-value">2005</span></div>
+          <div class="stat-row"><span class="stat-label">Pair total</span><span class="stat-value">E = 9</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #4527A0; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../189-mudhoney/" style="color: var(--seattle-navy);">&larr; 189&deg; Mudhoney (E=7)</a>
+        <a href="../191-the-posies/" style="color: var(--seattle-navy);">191&deg; The Posies &rarr;</a>
+      </div>
+      <p>Degree 190&deg; &mdash; Harvey Danger &mdash; E=5 &mdash; FIRST INDIE POP &mdash; Seattle 360 Engine &mdash; v1.49.331<br>&ldquo;I&rsquo;m not sick but I&rsquo;m not well.&rdquo; Capitol Hill. Sean Nelson. Three albums. One unforgettable hit.</p>
+    </footer>
+  </div>
+</body>
+</html>
