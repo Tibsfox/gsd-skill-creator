@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 117&deg; &mdash; American Dipper (Dunking) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #006064, #00838F);
+      color: #B2EBF2;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(0, 96, 100, 0.6);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Plunge card */
+    .plunge-card {
+      background: linear-gradient(135deg, #004D40 0%, #006064 30%, #00838F 60%, #0097A7 100%);
+      border: 3px solid #004D40;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E0F7FA;
+      box-shadow: 0 0 24px rgba(0, 77, 64, 0.4);
+    }
+    .plunge-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #B2DFDB;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .plunge-card p { color: #E0F7FA; }
+    .plunge-card strong { color: #B2DFDB; }
+
+    /* Double-entry card */
+    .double-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 50%, #006064 100%);
+      border: 2px solid #1A237E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #C5CAE9;
+    }
+    .double-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .double-card p { color: #C5CAE9; }
+    .double-card strong { color: #9FA8DA; }
+
+    /* Splash card */
+    .splash-card {
+      background: linear-gradient(135deg, #006064, #00838F, #26C6DA);
+      border: 2px solid #006064;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F7FA;
+    }
+    .splash-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2EBF2;
+    }
+    .splash-card p { color: #E0F7FA; }
+    .splash-card strong { color: #B2EBF2; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.plunge { background: #004D40; }
+    .theory-icon.hydro { background: #006064; }
+    .theory-icon.splash { background: #00838F; }
+    .theory-icon.double { background: #1A237E; }
+    .theory-icon.prey { background: #0097A7; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #E0F7FA; color: #006064; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .physics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .physics-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-left: 3px solid #004D40;
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+    }
+    .physics-card strong { color: #004D40; font-size: 0.88rem; }
+    .physics-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">117&deg;</div>
+      <div class="release-title-block">
+        <h2>American Dipper &mdash; Dunking Behavior</h2>
+        <div class="scientific"><em>Cinclus mexicanus</em> (Cinclidae) &mdash; SECOND ENTRY &mdash; The Plunge</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      splash + song integrated &mdash; <strong>SECOND CONSECUTIVE DIPPER ENTRY</strong> &mdash;
+      degree 116 was the song, degree 117 is the <strong>plunge</strong>. Walking underwater
+      against the current. Wing hydrofoils. Splash-song integration: three acoustic layers
+      (stream drone, bubbly song, periodic splash). Second species with two entries after
+      Pileated Woodpecker (108&ndash;109). E=5 &mdash; the energy of submersion.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Double-entry card -->
+        <div class="double-card">
+          <h3>Second Consecutive Dipper Entry &mdash; The Cinclidae Pair</h3>
+          <p>
+            Degree 116: the <strong>song</strong> (singing over rushing water).
+            Degree 117: the <strong>plunge</strong> (underwater foraging, walking against current).
+            Second species with two consecutive entries &mdash; mirroring the
+            <strong>Pileated Woodpecker</strong> (108 laughing, 109 drumming). Both
+            double-entries separate acoustic behavior from physical behavior.
+            Some species are too behaviorally rich for a single degree.
+          </p>
+        </div>
+
+        <!-- Plunge card -->
+        <div class="plunge-card">
+          <h3>The Physics of Walking Underwater</h3>
+          <p>
+            A <strong>60-gram bird</strong> walks along the bottom of fast-flowing streams
+            against currents of 0.5&ndash;2.0 m/s. The solution: <strong>wing hydrofoils</strong>.
+            Partially opened wings angled against the current generate
+            <strong>downforce</strong> &mdash; the faster the water, the more firmly the bird
+            is pressed against the rocks. Inverted airplane wings underwater. Combined with
+            <strong>strong claws</strong> gripping rocky substrate, <strong>streamlined posture</strong>,
+            and <strong>dense plumage</strong> managed as buoyancy. The bird uses the river&rsquo;s
+            own energy to stay on the bottom.
+          </p>
+        </div>
+
+        <!-- Splash card -->
+        <div class="splash-card">
+          <h3>Splash + Song Integration &mdash; Three Acoustic Layers</h3>
+          <p>
+            <strong>Layer 1:</strong> Stream &mdash; continuous broadband drone below 2,000 Hz.
+            <strong>Layer 2:</strong> Song &mdash; intermittent bubbly phrases, 2,000&ndash;8,000 Hz.
+            <strong>Layer 3:</strong> Splash &mdash; periodic transient impulse, broadband.
+            The pattern: <strong>sing-sing-sing-SPLASH-silence (underwater)-SURFACE-sing</strong>.
+            The splash punctuates the song like a rhythmic accent. Three layers interweaving:
+            rhythm (splashes), melody (song), harmony (stream). Unique in the PNW soundscape.
+          </p>
+        </div>
+
+        <h2>Hydrodynamic Solutions</h2>
+        <p>
+          The American Dipper solves the problem of underwater locomotion in fast current
+          through a suite of <strong>biomechanical adaptations</strong> working in concert.
+        </p>
+        <div class="physics-grid">
+          <div class="physics-card">
+            <strong>Wing Hydrofoils</strong>
+            <p>Partially opened wings angled against current. Generate downforce like inverted airplane wings. Faster current = more grip.</p>
+          </div>
+          <div class="physics-card">
+            <strong>Clawed Grip</strong>
+            <p>Powerful toes with sharp claws grip slippery rocks. Combined with wing downforce for total substrate adhesion.</p>
+          </div>
+          <div class="physics-card">
+            <strong>Streamlined Posture</strong>
+            <p>Compact, tucked body reduces drag. Short tail (unusual for a songbird) is hydrodynamically efficient underwater.</p>
+          </div>
+          <div class="physics-card">
+            <strong>Buoyancy Management</strong>
+            <p>Dense plumage traps air (insulating but buoyant). Bird tilts forward, uses wing hydrofoils to counteract buoyancy.</p>
+          </div>
+          <div class="physics-card">
+            <strong>Nictitating Vision</strong>
+            <p>Translucent third eyelid slides across during submersion. Underwater vision for locating prey between rocks.</p>
+          </div>
+          <div class="physics-card">
+            <strong>Nasal Sealing</strong>
+            <p>Movable nasal flaps close on submersion. Prevents water entry to respiratory system during dives.</p>
+          </div>
+        </div>
+
+        <h2>Prey and Foraging</h2>
+        <p>
+          Foraging dives last <strong>10&ndash;30 seconds</strong> (up to 45). The bird probes
+          between rocks for <strong>caddisfly larvae</strong> (primary prey, extracted from
+          protective cases), <strong>mayfly nymphs</strong> (pried from rock undersides),
+          <strong>stonefly nymphs</strong> (found between cobbles), small fish, and
+          <strong>salmon eggs</strong> during spawning season &mdash; connecting the dipper
+          to the salmon cycle central to PNW ecology.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-116 American Dipper (song)</strong>
+            <p>Consecutive pair. Song (116) and dunking (117). Acoustic vs. physical. Singing over water vs. going into water. Second double-entry after Pileated WP (108-109).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-108 Pileated Woodpecker (laughing)</strong>
+            <p>Double-entry precedent. First species with two entries: laughing (108) + drumming (109). Dipper mirrors this: song (116) + dunking (117). Vocalization separated from physical act.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-109 Pileated Woodpecker (drumming)</strong>
+            <p>Physical behavior parallel. Degree 109: bill strikes wood (drumming). Degree 117: body enters water (dunking). Both physical behaviors producing distinctive sounds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-115 Black-backed Woodpecker</strong>
+            <p>Water continuation. Fire-to-water began at 115-116. Degree 117 goes deeper into water -- literally. The aquatic commitment deepens from singing over water to walking through it.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-050 Mountain Chickadee</strong>
+            <p>Mountain stream connection. Both montane. Chickadee in canopy; dipper in stream. Degree 117 emphasizes the dipper's commitment to the aquatic niche the chickadee flies over.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon plunge">P</div>
+            <div class="theory-content">
+              <h4>The Plunge &mdash; Underwater Foraging</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>The dipper's signature dunking behavior. Walk-in, direct dive, or surface swim. Enters fast-flowing water, walks along bottom against current, forages for 10-30 seconds, surfaces dry.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon hydro">H</div>
+            <div class="theory-content">
+              <h4>Wing Hydrofoils &mdash; Hydrodynamic Solution</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Partially opened wings generate downforce against current. Inverted airplane wings underwater. Faster current = more grip. Combined with claw adhesion and streamlined posture.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon splash">S</div>
+            <div class="theory-content">
+              <h4>Splash-Song Integration &mdash; Three Layers</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Stream (broadband drone) + Song (bubbly phrases) + Splash (transient impulse). Three acoustic layers interweaving. Rhythm, melody, harmony coexisting. Unique in PNW soundscape.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon double">D</div>
+            <div class="theory-content">
+              <h4>Double-Entry Pattern &mdash; Cinclidae Pair</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Second species with two consecutive entries (after Pileated WP 108-109). Song (116) + dunking (117). Acoustic separated from physical. Behaviorally rich species need two degrees.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon prey">F</div>
+            <div class="theory-content">
+              <h4>Benthic Foraging &mdash; Salmon Connection</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Caddisfly, mayfly, stonefly larvae. Small fish. Salmon eggs during spawning. Connects dipper to the salmon cycle central to PNW ecology.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">American Dipper</div>
+          <div class="stat-detail"><em>Cinclus mexicanus</em> (2nd entry)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Focus</div>
+          <div class="stat-value">Dunking Behavior</div>
+          <div class="stat-detail">Underwater foraging, the plunge</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Cinclidae</div>
+          <div class="stat-detail">Only aquatic passerines</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Splash + song</div>
+          <div class="stat-detail">Three-layer integration</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 5</div>
+          <div class="stat-detail">Energy of submersion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Rapid creek</div>
+          <div class="stat-detail">Fast-flowing mountain streams</div>
+        </div>
+
+        <h3>Dive Physics</h3>
+        <div class="stat-card">
+          <div class="stat-label">Dive Duration</div>
+          <div class="stat-value">10&ndash;30 sec</div>
+          <div class="stat-detail">Up to 45 sec recorded</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Max Depth</div>
+          <div class="stat-value">~1 meter</div>
+          <div class="stat-detail">In fast current</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Current Speed</div>
+          <div class="stat-value">0.5&ndash;2.0 m/s</div>
+          <div class="stat-detail">Would sweep a human off feet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Water Temp</div>
+          <div class="stat-value">0&ndash;4&deg;C</div>
+          <div class="stat-detail">Near freezing, routine</div>
+        </div>
+
+        <h3>Primary Prey</h3>
+        <div class="stat-card">
+          <div class="stat-label">Caddisfly larvae</div>
+          <div class="stat-value">Primary</div>
+          <div class="stat-detail">Extracted from cases</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Mayfly/Stonefly</div>
+          <div class="stat-value">Secondary</div>
+          <div class="stat-detail">Under rocks, between cobbles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Salmon eggs</div>
+          <div class="stat-value">Seasonal</div>
+          <div class="stat-detail">PNW salmon connection</div>
+        </div>
+
+        <h3>Double-Entry History</h3>
+        <div class="stat-card">
+          <div class="stat-label">108&ndash;109&deg;</div>
+          <div class="stat-value">Pileated WP</div>
+          <div class="stat-detail">Laughing + drumming</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">116&ndash;117&deg;</div>
+          <div class="stat-value">Am. Dipper</div>
+          <div class="stat-detail">Song + dunking</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
