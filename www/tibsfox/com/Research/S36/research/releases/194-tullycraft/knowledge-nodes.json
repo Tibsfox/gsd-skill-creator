@@ -1,0 +1,80 @@
+{
+  "degree": 194,
+  "artist": "Tullycraft",
+  "slug": "194-tullycraft",
+  "genre": "Twee Pop",
+  "energy": 3,
+  "era": "Twee Pop. E=3 -- FIRST TWEE POP. Genre Stage 104. Deliberately quiet, deliberately small, deliberately charming. Sonic relief after E=7/E=8 zone. v1.49.335.",
+  "location": {
+    "origin": "Capitol Hill, Seattle",
+    "formative": "Capitol Hill indie pop scene. Anti-grunge. Jangly, gentle, intimate.",
+    "career": "Tullycraft. 1994-present. Harriet Records. Over 30 years active."
+  },
+  "formed": "Capitol Hill, Seattle, Washington",
+  "active": "1994-present",
+  "labels": ["Harriet Records", "Magic Marker", "5 Rue Christine"],
+  "members": [
+    {"name": "Sean Tollefson", "role": "vocals / guitar / songwriter", "note": "Founder. Defined the Tullycraft sound. Jangly, lyric-driven pop songs. Over 30 years."}
+  ],
+  "former_members": [],
+  "associated_musicians": [],
+  "theory_nodes": [
+    {
+      "concept": "FIRST TWEE POP -- Genre Stage 104. Twee pop enters the engine. Deliberately quiet, small, charming. Jangly guitars, sincerity, charm over power. The 104th genre stage.",
+      "level": "milestone",
+      "department": "genre-theory",
+      "college_path": ".college/music/theory/genre/twee-pop-entry.md",
+      "examples": [
+        "Twee: from British slang, excessively dainty.",
+        "Simple jangly guitars, gentle vocals, innocent lyrics.",
+        "Rejection of rock bombast. Charm over power.",
+        "Genre Stage 104."
+      ],
+      "description": "First twee pop. Genre Stage 104. Deliberately gentle.",
+      "genealogy": {
+        "ancestors": ["Sarah Records (UK).", "C86 compilation.", "Indie pop lineage."],
+        "relationship": "Tullycraft at 194. First twee pop in the engine."
+      }
+    },
+    {
+      "concept": "Sonic relief -- E=3 after the E=7/E=8 zone. The engine needs dynamic range. Quiet after loud gives the loud its meaning. Tullycraft provides essential decompression.",
+      "level": "advanced",
+      "department": "energy-theory",
+      "college_path": ".college/music/theory/energy/sonic-relief.md",
+      "examples": [
+        "E=8 at degree 188 (DoNormaal).",
+        "E=7 at degree 193 SPS (Gray Whale breach).",
+        "E=3 at degree 194 (Tullycraft).",
+        "The rest that gives the loud its meaning."
+      ],
+      "description": "Sonic relief. E=3 after E=7/E=8. Essential decompression.",
+      "genealogy": {
+        "ancestors": ["Engine dynamic range theory.", "E=1 at 187 (Harbor Porpoise) as precedent."],
+        "relationship": "Tullycraft at 194 provides relief after the high-energy zone."
+      }
+    },
+    {
+      "concept": "Twee and punk share a root -- both reject mainstream polish, both DIY. But punk rejects through raw energy, twee through deliberate gentleness. Opposite responses to the same impulse.",
+      "level": "intermediate",
+      "department": "genre-theory",
+      "college_path": ".college/music/theory/genre/twee-punk-root.md",
+      "examples": [
+        "Both DIY. Both anti-mainstream.",
+        "Punk: raw energy. Twee: deliberate gentleness.",
+        "Opposite ends of the rejection spectrum.",
+        "Fastbacks (193, punk) to Tullycraft (194, twee)."
+      ],
+      "description": "Twee and punk: same root, opposite expression.",
+      "genealogy": {
+        "ancestors": ["Punk (Fastbacks, 193).", "DIY ethic.", "Anti-mainstream impulse."],
+        "relationship": "Tullycraft at 194 shares roots with the Fastbacks at 193. Different branches."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 193, "artist": "Fastbacks", "relationship": "E=5 to E=3. Punk to twee. Both DIY, both anti-mainstream. Different branches of the same root."},
+    {"degree": 188, "artist": "DoNormaal (Late Career)", "relationship": "E=8 to E=3 in 6 degrees. Maximum to near-minimum. The relief is structural."},
+    {"degree": 191, "artist": "The Posies", "relationship": "Power-pop peer. Shared melodic sensibility. Different intensity levels."},
+    {"degree": 192, "artist": "Young Fresh Fellows", "relationship": "PopLlama to Harriet Records. Indie label progression. Same DIY spirit."}
+  ]
+}

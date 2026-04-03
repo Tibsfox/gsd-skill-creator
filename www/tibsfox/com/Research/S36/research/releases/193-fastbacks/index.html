@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 193&deg; &mdash; Fastbacks &mdash; E=5 &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1565C0, #1976D2, #42A5F5); color: white; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1565C0; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .foundation-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #2E7D32; color: #E8F5E9; border: 1px solid #388E3C; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #C5CAE9; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #C5CAE9; border-left: 4px solid #1565C0; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #0D47A1; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1565C0; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1565C0; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #283593; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>193 &mdash; Fastbacks (E=5)</span>
+    </nav>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">193&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Fastbacks</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Indie Rock/Pop</span>
+          <span class="label-badge">PopLlama</span>
+          <span class="foundation-badge">Since 1979</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Foundation Layer</h2>
+          <blockquote>
+            1979. The Fastbacks formed in Ballard, Seattle. Sub Pop wouldn&rsquo;t exist
+            for seven more years. Nirvana wouldn&rsquo;t exist for a decade. Pearl Jam
+            for eleven. The Fastbacks were the foundation layer &mdash; playing
+            punk/pop in a city that didn&rsquo;t yet know it was a music city.
+            Kurt Bloch, Kim Warnick, Lulu Gargiulo. 22 years. PopLlama Records.
+            The longest-running punk band in Seattle history.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Foundation Layer &mdash; Pre-Scene Infrastructure</h4>
+              <div class="level milestone">Milestone &mdash; Scene Theory</div>
+              <p>
+                The Fastbacks existed before the Seattle scene. Since 1979 &mdash;
+                7 years before Sub Pop, 10 before grunge. They proved a band
+                could survive in Seattle playing original music. The foundation.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>PopLlama Streak &mdash; 192-193</h4>
+              <div class="level advanced">Advanced &mdash; Label Theory</div>
+              <p>
+                Young Fresh Fellows (192) and Fastbacks (193) are both PopLlama
+                artists. Kurt Bloch played in BOTH. The PopLlama connection is
+                a personnel link, not just a label coincidence.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Ballard &mdash; Working-Class Punk</h4>
+              <div class="level intermediate">Intermediate &mdash; Geography</div>
+              <p>
+                Ballard: Scandinavian working-class. Maritime. Blue-collar.
+                Punk&rsquo;s DIY ethic fits Ballard&rsquo;s no-pretension culture.
+                A new neighborhood enters the engine&rsquo;s geographic map.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">192&deg;</span> <strong>Young Fresh Fellows</strong> &mdash; PopLlama streak! Kurt Bloch played in both bands. Consecutive PopLlama degrees.</li>
+            <li><span class="ref-degree">189&deg;</span> <strong>Mudhoney</strong> &mdash; Post-hip-hop indie rock. The Fastbacks predate Mudhoney by a decade. Foundation to successor.</li>
+            <li><span class="ref-degree">190&deg;</span> <strong>Harvey Danger</strong> &mdash; Another PopLlama-adjacent band in the indie rock zone.</li>
+            <li><span class="ref-degree">191&deg;</span> <strong>The Posies</strong> &mdash; Power-pop peers. Similar melodic sensibility. The Posies learned from what the Fastbacks built.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Band Profile</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">193&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Indie Rock/Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Ballard</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">PopLlama</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1979&ndash;2001</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.334</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Kurt Bloch</span></div>
+          <div class="stat-row"><span class="stat-label">Bass/Vox</span><span class="stat-value">Kim Warnick</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar/Vox</span><span class="stat-value">Lulu Gargiulo</span></div>
+          <div class="stat-row"><span class="stat-label">Drums (early)</span><span class="stat-value">Duff McKagan</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Context</h4>
+          <div class="stat-row"><span class="stat-label">Founded</span><span class="stat-value">1979</span></div>
+          <div class="stat-row"><span class="stat-label">Pre-Sub Pop</span><span class="stat-value">7 years</span></div>
+          <div class="stat-row"><span class="stat-label">Pre-grunge</span><span class="stat-value">10 years</span></div>
+          <div class="stat-row"><span class="stat-label">PopLlama streak</span><span class="stat-value">192&ndash;193</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #C5CAE9; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../192-young-fresh-fellows/" style="color: var(--seattle-navy);">&larr; 192&deg; Young Fresh Fellows</a>
+        <a href="../194-tullycraft/" style="color: var(--seattle-navy);">194&deg; Tullycraft &rarr;</a>
+      </div>
+      <p>Degree 193&deg; &mdash; Fastbacks &mdash; E=5 &mdash; Indie Rock/Pop &mdash; Ballard &mdash; PopLlama &mdash; Seattle 360 Engine &mdash; v1.49.334<br>The foundation layer. Since 1979. Before everything.</p>
+    </footer>
+  </div>
+</body>
+</html>

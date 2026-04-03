@@ -1,0 +1,111 @@
+{
+  "degree": 196,
+  "species": "Black-tailed Deer",
+  "scientific_name": "Odocoileus hemionus columbianus",
+  "slug": "196-black-tailed-deer-buck-grunt",
+  "sound_type": "buck rut grunt -- low guttural 'uurrh', territorial vocalization. 50-200 Hz. Repeated during fall rut. The sound of controlled assertion. E=4",
+  "energy": 4,
+  "ecosystem": "Forest, forest edge, meadow. Fall rut November-December. Territorial patrol.",
+  "season": "Fall rut November-December. Antlers hardened. Territorial behavior peak.",
+  "family": "Cervidae (second entry -- fawn bleat at 195)",
+  "order": "Artiodactyla",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Black-tailed Deer",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.30,
+    "description": "Black-tailed Deer throughout western Washington. Forest and forest edge. Ubiquitous."
+  },
+  "taxonomy_note": {
+    "description": "Second Black-tailed Deer entry. First at 195 (fawn bleat, E=3). Fawn-buck comparison pair across degrees 195-196. Same species, opposite life stages.",
+    "current_family": "Cervidae (second entry)",
+    "new_family": false,
+    "family_count_in_engine": "Cervidae: Black-tailed Deer Fawn Bleat (195, E=3), Black-tailed Deer Buck Grunt (196, E=4).",
+    "name_etymology": "Odocoileus from Greek 'odous' (tooth) + 'koilos' (hollow). hemionus from Greek 'hemi' (half) + 'onos' (donkey). columbianus for Columbia River region.",
+    "genus_note": "Odocoileus -- White-tailed and Mule Deer (including Black-tailed subspecies).",
+    "order_note": "Artiodactyla. Second artiodactyl entry.",
+    "family_position": "Cervidae: second entry. Fawn-buck pair at 195-196.",
+    "class_note": "Class Mammalia. Terrestrial. First Cervidae pair complete."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "50-200 Hz. Low, guttural.",
+    "peak_energy_band_hz": "80-150 Hz (peak of buck grunt).",
+    "song_frequency_hz": "Buck grunt: 50-200 Hz. Snort alarm: 200-800 Hz.",
+    "song_duration_s": "Grunt: 0.3-1.0 sec. Repeated at 5-30 second intervals.",
+    "note_structure": "Single guttural grunt per vocalization. Repeated pattern during territorial patrol.",
+    "note_types": "Buck grunt (territorial, low), snort (alarm, higher, both sexes).",
+    "phrase_structure": "Repeated grunts at regular intervals. Intensity increases as rut peaks or during rival encounters.",
+    "timbre": "Low, guttural, resonant. Vibrates in the chest cavity. Forceful but controlled.",
+    "amplitude": "E=4. Territorial. Controlled assertion. More forceful than fawn bleat (E=3). Carries 100-300 m in forest.",
+    "tempo": "Grunts at 5-30 second intervals. Tempo increases during encounters.",
+    "context": "Fall rut (November-December). Territorial patrol. Buck rubs. Scrapes. Doe attraction. Pre-sparring.",
+    "regional_variation": "Minimal. Buck grunts structurally similar across Odocoileus populations.",
+    "key_property": "BUCK RUT GRUNT. Low guttural. 50-200 Hz. Territorial. FAWN-BUCK PAIR (195-196). E=4. ENERGY MATCH with 764-HERO. v1.49.337."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Adult buck: grayish-brown (winter) to reddish-brown (summer). Black-topped white tail. Antlers (mature buck: 3-4 points per side). Muscular neck thickens during rut.",
+    "diagnostic_mark": "Antlers (bucks, fall). Black-topped tail. Muscular build. Thickened neck during rut. Buck rubs on trees.",
+    "seasonal_variation": "Summer: reddish-brown. Winter: grayish-brown. Antlers: spring growth through fall hardening to winter shedding. Neck thickens during rut.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Adult buck: 60-90 kg (130-200 lbs). 80-100 cm at shoulder. Antlers: up to 4 points per side (mature). Muscular. Black-topped tail.",
+    "diagnostic_mark": "Antlers. Black-topped tail. Reddish-brown (summer) or gray-brown (winter). Buck rubs on trees during rut.",
+    "field_id": "Medium deer with antlers (bucks, fall-winter). Black on top of white tail. Look for buck rubs on small trees (bark stripped 0.5-1.5 m high). During rut: thickened neck, active movement, low grunting."
+  },
+  "nodes": [
+    {
+      "id": "fawn-buck-pair",
+      "type": "milestone",
+      "title": "Fawn-Buck Pair -- 195-196",
+      "description": "Same species across consecutive degrees. Fawn bleat (E=3, high, need) and buck grunt (E=4, low, claim). The full vocal range of one species in two degrees.",
+      "connections": ["territorial-grunt", "antler-cycle", "fall-rut"]
+    },
+    {
+      "id": "territorial-grunt",
+      "type": "concept",
+      "title": "Territorial Vocalization -- Controlled Assertion",
+      "description": "Low guttural grunt at 50-200 Hz. 100-300 m carry in forest. Repeated during rut. Dominance through control, not volume. E=4.",
+      "connections": ["fawn-buck-pair", "fall-rut"]
+    },
+    {
+      "id": "antler-cycle",
+      "type": "concept",
+      "title": "Antler Cycle -- Fastest Tissue Growth",
+      "description": "1-2 cm/day growth. Spring velvet to fall hardening to winter shedding. Antlers, grunts, and territorial behavior form a coordinated system.",
+      "connections": ["fawn-buck-pair", "fall-rut"]
+    },
+    {
+      "id": "fall-rut",
+      "type": "concept",
+      "title": "Fall Rut -- November-December",
+      "description": "Breeding season. Buck rubs, scrapes, scent marking, grunting, sparring. Annual peak of territorial behavior.",
+      "connections": ["fawn-buck-pair", "territorial-grunt", "antler-cycle"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-195",
+      "species": "Black-tailed Deer Fawn Bleat",
+      "relationship": "FAWN-BUCK PAIR! Same species, consecutive degrees. Fawn E=3 (need) to buck E=4 (claim). High to low. Infant to adult."
+    },
+    {
+      "target": "SPS-182",
+      "species": "Steller Sea Lion",
+      "relationship": "TERRITORIAL COMPARISON! Sea lion roar (E=6, marine) vs. buck grunt (E=4, terrestrial). Both assert dominance. Different scales."
+    },
+    {
+      "target": "SPS-181",
+      "species": "Harbor Seal Pup",
+      "relationship": "INFANT-ADULT PATTERN! Pup whimper (E=3) parallels fawn bleat (E=3). Buck grunt (E=4) is the adult counterpoint across families."
+    },
+    {
+      "target": "S36-196",
+      "artist": "764-HERO (Indie Context)",
+      "relationship": "ENERGY MATCH! Both E=4. Restraint (764-HERO) and territory (buck grunt). Controlled expression."
+    }
+  ]
+}

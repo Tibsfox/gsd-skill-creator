@@ -1,0 +1,111 @@
+{
+  "degree": 194,
+  "species": "Blue Whale",
+  "scientific_name": "Balaenoptera musculus",
+  "slug": "194-blue-whale-infrasound",
+  "sound_type": "infrasound at 10-40 Hz, below human hearing. 188 dB -- loudest animal sound. Calls travel hundreds of miles via SOFAR channel. E=5",
+  "energy": 5,
+  "ecosystem": "Open ocean, deep water. Rare visitor to Washington outer coast. Continental shelf edge. Acoustic detections only.",
+  "season": "Year-round in eastern North Pacific. Seasonal movements following krill concentrations.",
+  "family": "Balaenopteridae (second entry -- Humpback Whale Song at 191)",
+  "order": "Cetacea",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Blue Whale",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -125.50,
+    "description": "Blue Whale off Washington outer coast, continental shelf edge. Deep ocean. Acoustic detection only."
+  },
+  "taxonomy_note": {
+    "description": "Second Balaenopteridae (after Humpback Whale Song 191). THE LARGEST ANIMAL THAT HAS EVER LIVED. 188 dB -- loudest animal sound. Infrasound below hearing. 15 consecutive marine mammals (180-194).",
+    "current_family": "Balaenopteridae (second entry)",
+    "new_family": false,
+    "family_count_in_engine": "Balaenopteridae: Minke Whale (190), Humpback Whale Song (191), Blue Whale Infrasound (194).",
+    "name_etymology": "Balaenoptera from Greek 'balaena' (whale) + 'pteron' (fin/wing). musculus from Latin 'musculus' (little mouse, also muscle) -- a Linnaean joke. 'Blue Whale' for its blue-gray coloring underwater.",
+    "genus_note": "Balaenoptera -- 8 species including Blue, Fin, Sei, Bryde's, Minke, Humpback.",
+    "order_note": "Cetacea. Balaenopteridae third entry overall in SPS.",
+    "family_position": "Seventh marine mammal family (shared): Phocidae, Otariidae, Mustelidae, Phocoenidae, Delphinidae, Balaenopteridae, Eschrichtiidae.",
+    "class_note": "Class Mammalia. Marine mammal era: 15 consecutive (180-194). Approaching Anatidae record of 17."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "10-90 Hz. A/B calls: 10-20 Hz. D calls: 25-90 Hz.",
+    "peak_energy_band_hz": "15-20 Hz (A calls -- the 'classic' blue whale call).",
+    "song_frequency_hz": "A calls: 15-20 Hz. B calls: 10-18 Hz. D calls: 25-90 Hz.",
+    "song_duration_s": "A calls: 15-20 sec. B calls: 1-5 sec. D calls: 1-4 sec.",
+    "note_structure": "A calls (long moans), B calls (pulses), D calls (downswept). A and B alternate in predictable patterns.",
+    "note_types": "Long moans (A), pulses (B), downswept arch sounds (D). All infrasonic or near-infrasonic.",
+    "phrase_structure": "A-B alternation patterns. Songs can last hours. Regular temporal structure.",
+    "timbre": "Below hearing for most content. If pitch-shifted: deep, resonant, haunting moans. Steady pitch. Enormous.",
+    "amplitude": "E=5. 188 dB re 1 uPa at 1 m. LOUDEST ANIMAL SOUND. But below human hearing. Paradox of inaudibility.",
+    "tempo": "Slow. 15-20 second calls with pauses. Deliberate. Matches the scale of the animal.",
+    "context": "Open ocean, deep water. Communication across ocean basins. Mating calls. Population monitoring via acoustic arrays.",
+    "regional_variation": "Blue whale call frequencies have been declining worldwide over decades (McDonald et al. 2006). Reason unknown.",
+    "key_property": "INFRASOUND. 188 dB. LOUDEST ANIMAL. LARGEST ANIMAL EVER. Below hearing. SOFAR channel. 500-1,600 km range. E=5. v1.49.335."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Blue-gray dorsal surface. Mottled with lighter patches. Yellowish ventral surface (from diatom accumulation). Small dorsal fin far back on body.",
+    "diagnostic_mark": "Enormous size (largest animal). Blue-gray coloring. Tiny dorsal fin relative to body. Mottled. Tall columnar blow (9 m / 30 ft).",
+    "seasonal_variation": "Diatom accumulation varies. Otherwise consistent year-round.",
+    "swimming_pattern": "Slow cruiser (5-8 mph). Can sprint to 20 mph. Deep diver (to 200 m). Solitary or small groups (1-3). Not acrobatic."
+  },
+  "physical_description": {
+    "overall": "Length: up to 30 m (98 ft). Weight: up to 200 tons. LARGEST ANIMAL EVER. Heart: size of VW Beetle. Tongue: weight of elephant. Aorta: child could crawl through. Baleen plates.",
+    "diagnostic_mark": "Sheer size. Nothing else is this large. Blue-gray. Tiny dorsal fin. Columnar blow. Mottled lighter patches.",
+    "field_id": "Extremely rare visual sighting off Washington coast. Enormous blue-gray whale. Columnar blow to 9 m. Tiny dorsal fin. Most detections are acoustic only via hydrophone arrays."
+  },
+  "nodes": [
+    {
+      "id": "absolute-superlative",
+      "type": "milestone",
+      "title": "The Absolute Superlative -- Largest Animal Ever",
+      "description": "200 tons. 30 meters. 188 dB. No larger animal in 4.5 billion years of Earth. The absolute maximum of biological scale.",
+      "connections": ["infrasound-below-hearing", "paradox-inaudibility", "fifteen-consecutive"]
+    },
+    {
+      "id": "infrasound-below-hearing",
+      "type": "concept",
+      "title": "Infrasound -- Below Human Hearing",
+      "description": "10-40 Hz calls below the ~20 Hz hearing threshold. SOFAR channel propagation. 500-1,600 km range. Ocean basin communication.",
+      "connections": ["absolute-superlative", "paradox-inaudibility"]
+    },
+    {
+      "id": "paradox-inaudibility",
+      "type": "concept",
+      "title": "Paradox of Inaudibility -- 188 dB = Silence",
+      "description": "The loudest animal sound on Earth is below human hearing. 188 dB = silence to us. E=5 reflects power without audibility.",
+      "connections": ["absolute-superlative", "infrasound-below-hearing"]
+    },
+    {
+      "id": "fifteen-consecutive",
+      "type": "milestone",
+      "title": "15 Consecutive Marine Mammals",
+      "description": "Degrees 180-194. 15 entries. 7 families. E=1 to E=7. Approaching Anatidae record of 17.",
+      "connections": ["absolute-superlative"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-191",
+      "species": "Humpback Whale Song",
+      "relationship": "BALAENOPTERIDAE PAIR! Humpback (E=6, audible song) vs. Blue Whale (E=5, inaudible infrasound). Same family, opposite audibility."
+    },
+    {
+      "target": "SPS-193",
+      "species": "Gray Whale Breach",
+      "relationship": "LOUDEST EVENT! Breach E=7 (audible) vs. Blue Whale E=5 (inaudible). Audibility inverts amplitude."
+    },
+    {
+      "target": "SPS-187",
+      "species": "Harbor Porpoise",
+      "relationship": "SILENCE BOOKENDS! Porpoise E=1 (true silence) vs. Blue Whale E=5 (inaudible power). Both unheard. Different reasons."
+    },
+    {
+      "target": "S36-194",
+      "artist": "Tullycraft",
+      "relationship": "EXTREMES OF SCALE! Twee pop E=3 (smallest genre) + Blue Whale (largest animal ever). Both easily overlooked."
+    }
+  ]
+}
