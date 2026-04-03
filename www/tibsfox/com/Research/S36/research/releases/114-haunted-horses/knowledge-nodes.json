@@ -1,0 +1,86 @@
+{
+  "degree": 114,
+  "subject": "Haunted Horses",
+  "project": "S36",
+  "energy": 6,
+  "genre": "Noise/Indie",
+  "era": "2010s-present",
+  "location": "Seattle",
+  "label": "Self-released",
+  "members": [
+    { "name": "Colin Dawson", "role": "guitar, vocals, electronics" },
+    { "name": "Jessica Jaworski", "role": "drums, drum machines, electronics" }
+  ],
+  "nodes": [
+    {
+      "id": "machine-signal",
+      "type": "concept",
+      "label": "The Machine Signal -- Industrial Noise, Drum Machines, Human Performance",
+      "description": "Heavily distorted, drum-machine-driven, industrially textured sonic assault. Human performance merged with machine rhythm. Drum machines provide relentless mechanical pulse. Extreme guitar distortion treats the instrument as noise generator. Shouted vocals add urgency. The music sounds mechanical even though two humans create it. E=6 maximum.",
+      "connections": ["e6-concentration", "noise-duo-pattern", "diy-infrastructure"]
+    },
+    {
+      "id": "e6-concentration",
+      "type": "pattern",
+      "label": "E=6 Concentration -- Fifth Maximum in Eight Degrees (108-114)",
+      "description": "Five E=6 entries in eight degrees: punk/electronic (108), industrial noise duo (109), instrumental ascent (110), beauty/destruction (111), machine signal (114). Each maximum expressed differently. 1 E=6 in first 107 degrees, then 5 in next 7. The engine's baseline shifted upward. E=6 is a level with multiple valid expressions.",
+      "connections": ["machine-signal", "capitol-hill-streak"]
+    },
+    {
+      "id": "noise-duo-pattern",
+      "type": "pattern",
+      "label": "Noise Duo Pattern -- Haunted Horses + No Anchor",
+      "description": "Two Seattle noise duos at E=6 maximum: No Anchor (109) and Haunted Horses (114). Five degrees apart. Both industrial-adjacent, both two-person, both DIY. Part of the resurgent Seattle noise/industrial underground. The engine has established a pattern: noise duos at E=6.",
+      "connections": ["machine-signal", "diy-infrastructure"]
+    },
+    {
+      "id": "diy-infrastructure",
+      "type": "concept",
+      "label": "Self-Released -- Pure DIY Infrastructure",
+      "description": "First fully self-released artist in the Capitol Hill streak (110-114). No label intermediary. Bandcamp as primary distribution. Noise music's economics don't support traditional label overhead. Self-release is the natural infrastructure for noise music. The most extreme DIY expression in the engine's label ecosystem.",
+      "connections": ["machine-signal", "noise-duo-pattern", "capitol-hill-streak"]
+    },
+    {
+      "id": "capitol-hill-streak",
+      "type": "pattern",
+      "label": "Capitol Hill Streak Extends to Five (110-114)",
+      "description": "Five consecutive Seattle acts: Kinski (E=6), Helms Alee (E=6), 764-HERO (E=4), Minus the Bear (E=5), Haunted Horses (E=6). Energy: 6, 6, 4, 5, 6. Five different genres. Longest neighborhood streak in the engine. Capitol Hill's dominance from instrumental noise rock to industrial noise.",
+      "connections": ["e6-concentration", "diy-infrastructure"]
+    },
+    {
+      "id": "industrial-lineage",
+      "type": "connection",
+      "label": "Industrial Lineage -- Big Black to Haunted Horses",
+      "description": "Big Black (drum machine + angular guitar, 1980s) -> Swans (crushing repetition, 1980s) -> Lightning Bolt (duo force, 2000s) -> No Anchor (noise duo, 109) -> Haunted Horses (machine signal, 114). The industrial noise lineage from Chicago to New York to Providence to Seattle. Drum machines + distortion as a persistent format across four decades.",
+      "connections": ["machine-signal", "noise-duo-pattern"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "S36-109",
+      "artist": "No Anchor",
+      "relationship": "NOISE DUO PARALLEL. Both Seattle noise duos at E=6. Five degrees apart. Both industrial-adjacent, two-person, DIY. Paired noise duos in the engine."
+    },
+    {
+      "target": "S36-108",
+      "artist": "Veronica Lipgloss",
+      "relationship": "E=6 CONCENTRATION. Five E=6 in eight degrees (108-114). Punk/electronic vs. industrial noise. Different genres, same maximum."
+    },
+    {
+      "target": "S36-113",
+      "artist": "Minus the Bear",
+      "relationship": "ENERGY CONTRAST. Math rock/electronic E=5 to noise/indie E=6. Technical warmth gives way to raw force. One-degree ascent to maximum."
+    },
+    {
+      "target": "S36-110",
+      "artist": "Kinski",
+      "relationship": "NOISE LINEAGE. Both noise/experimental at E=6. Kinski: instrumental. Haunted Horses: vocals + drum machines. Noise lineage threads through Capitol Hill streak."
+    },
+    {
+      "target": "S36-112",
+      "artist": "764-HERO",
+      "relationship": "LABEL SPECTRUM. Up Records (112) vs. self-released (114). Full label spectrum: established indie to no label. Both valid."
+    }
+  ],
+  "tags": ["noise", "indie", "industrial", "drum-machines", "self-released", "e6-maximum", "seattle", "duo", "diy", "machine-signal", "colin-dawson", "jessica-jaworski", "capitol-hill-streak"]
+}
