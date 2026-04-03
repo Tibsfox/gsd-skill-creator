@@ -26,6 +26,7 @@ SYNC_DIRS = [
     "MUK",  # updated boulder-creek-quake.html
     "NASA/artemis-ii",  # status.json, ai-coverage.html, papers.html
     "OPEN",  # updated problem cards
+    "OPEN/problems",  # individual problem deep-dives
     "forest",  # slime mold simulation
     "ECO",  # slime mold research page
     "PNW-NEWS",  # daily news
