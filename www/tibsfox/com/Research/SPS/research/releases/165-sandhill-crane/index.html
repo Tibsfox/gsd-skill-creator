@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 165&deg; &mdash; Sandhill Crane Bugle &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5D4037, #6D4C41); color: #D7CCC8; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(93, 64, 55, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .ancient-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .ancient-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .ancient-card p { color: #C8E6C9; }
+    .ancient-card strong { color: #E8F5E9; }
+
+    .trachea-card { background: linear-gradient(135deg, #E65100, #EF6C00, #F57C00, #E65100); border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .trachea-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCC80; }
+    .trachea-card p { color: #FFE0B2; }
+    .trachea-card strong { color: #FFF3E0; }
+
+    .family-card { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #B71C1C); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .family-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .family-card p { color: #FFCDD2; }
+    .family-card strong { color: #FFEBEE; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.bugle { background: #B71C1C; }
+    .theory-icon.trachea { background: #E65100; }
+    .theory-icon.fossil { background: #5D4037; }
+    .theory-icon.migration { background: #1B5E20; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">165&deg;</div>
+      <div class="release-title-block">
+        <h2>Sandhill Crane &mdash; Bugle</h2>
+        <div class="scientific"><em>Antigone canadensis</em> (Gruidae) &mdash; E=6 &mdash; The Ancient Bugle</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST GRUIDAE</strong> &mdash; crane family enters.
+      The Sandhill Crane bugle is one of the <strong>most ancient sounds</strong>
+      in birding &mdash; fossil cranes date to <strong>10+ million years.</strong>
+      <strong>E=6 maximum energy.</strong> Coiled trachea within the sternum
+      amplifies the bugle to carry <strong>2&ndash;4 kilometers.</strong>
+      <strong>v1.49.305.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="ancient-card">
+          <h3>10 Million Years of Bugling</h3>
+          <p>
+            Fossil cranes from the <strong>Miocene epoch</strong> show essentially
+            modern skeletal anatomy, including the sternal keel that houses the
+            <strong>coiled trachea.</strong> The bugle has been sounding for
+            <strong>10+ million years</strong> &mdash; across ice ages, interglacial
+            periods, the rise and fall of countless species. When a Sandhill Crane
+            bugles over a Washington meadow today, it produces essentially the
+            <strong>same sound its ancestors produced for millions of years.</strong>
+          </p>
+        </div>
+        <div class="trachea-card">
+          <h3>The Coiled Trachea &mdash; Nature&rsquo;s French Horn</h3>
+          <p>
+            The trachea is <strong>120&ndash;150 cm long</strong> &mdash; far longer
+            than the bird&rsquo;s neck. The excess coils within the
+            <strong>sternum</strong>, creating a resonating chamber like a
+            brass instrument. The result: a <strong>deep, rolling, trumpeting
+            bugle</strong> that carries <strong>2&ndash;4 km</strong> across
+            open landscape. <strong>E=6.</strong> Maximum energy.
+          </p>
+        </div>
+        <div class="family-card">
+          <h3>First Gruidae &mdash; Crane Family Enters</h3>
+          <p>
+            The <strong>Gruidae</strong> enters the engine at degree 165. One of
+            the <strong>oldest living bird families.</strong> 15 species worldwide.
+            Approximately <strong>700,000</strong> Sandhill Cranes in North America.
+            <strong>Cultural significance</strong> across civilizations. The
+            <strong>Platte River</strong> migration spectacle draws 100,000+
+            observers annually.
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-164 American Coot</strong>
+            <p>FAMILY TRANSITION! Rallidae (161-164) to Gruidae (165). Same order (Gruiformes). Different families. Coot chatter to crane bugle &mdash; E=3 to E=6.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-155 Ruffed Grouse Drumming</strong>
+            <p>ANCIENT SOUNDS! Ruffed Grouse drumming (mechanical, forest). Sandhill Crane bugling (vocal, open field). Both ancient. Both extraordinary carry distance.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-153 Wild Turkey Gobble</strong>
+            <p>E=6 COMPARISON! Turkey gobble (E=6, vocal, forest clearing). Crane bugle (E=6, vocal, open field). Both maximum energy. Both resonant. Different amplification systems.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-161 Virginia Rail</strong>
+            <p>GRUIFORMES! Virginia Rail (Rallidae, E=3, marsh, secretive). Sandhill Crane (Gruidae, E=6, open field, conspicuous). Same order, opposite visibility.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon bugle">B</div>
+            <div class="theory-content">
+              <h4>The Bugle</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Rolling, trumpeting GAROOO-a-a-a. 2-4 km carry. Amplified by coiled trachea. 500-2000 Hz fundamental with rich harmonics. Unison calls between mated pairs. E=6.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon trachea">T</div>
+            <div class="theory-content">
+              <h4>Coiled Trachea</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>120-150 cm trachea coiled in sternum. Resonating chamber like a French horn. Deepens and amplifies syringeal sound. 10-20x amplification over expected body-size output.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon fossil">F</div>
+            <div class="theory-content">
+              <h4>10M+ Year Fossil Record</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Miocene-age crane fossils with modern sternal anatomy. One of the oldest living bird species. The bugle has sounded for geological time. Deep evolutionary continuity.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon migration">M</div>
+            <div class="theory-content">
+              <h4>Migration Spectacle</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>700,000 in North America. 500,000 at Platte River staging. 100,000+ human observers annually. Mated for life. Dancing displays. PNW passage spring/fall.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Sandhill Crane</div><div class="stat-detail"><em>Antigone canadensis</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Gruidae</div><div class="stat-detail">FIRST entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Bugle</div><div class="stat-detail">rolling, trumpeting GAROOO-a-a-a</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 6</div><div class="stat-detail">maximum &mdash; ancient force</div></div>
+        <div class="stat-card"><div class="stat-label">Carry</div><div class="stat-value">2&ndash;4 km</div><div class="stat-detail">coiled trachea amplification</div></div>
+        <div class="stat-card"><div class="stat-label">Trachea</div><div class="stat-value">120&ndash;150 cm</div><div class="stat-detail">coiled in sternum</div></div>
+        <div class="stat-card"><div class="stat-label">Fossil Record</div><div class="stat-value">10M+ years</div><div class="stat-detail">Miocene crane fossils</div></div>
+        <div class="stat-card"><div class="stat-label">Population</div><div class="stat-value">~700,000</div><div class="stat-detail">most abundant crane</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Open field</div><div class="stat-detail">meadow, marsh, ag land</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Migrant</div><div class="stat-detail">spring/fall PNW passage</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
