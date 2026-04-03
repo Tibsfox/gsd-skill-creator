@@ -1,0 +1,24 @@
+{
+  "degree": 221, "project": "SPS", "name": "Bald Eagle Call", "slug": "221-bald-eagle-call",
+  "species": "Haliaeetus leucocephalus", "family": "Accipitridae", "order": "Accipitriformes",
+  "common_name": "Bald Eagle", "sound_type": "Contact call -- thin descending kee-kee-kee",
+  "energy": 5,
+  "ecosystem": "Water/forest interface. Rivers, coasts, large trees for nesting.",
+  "season": "Resident (year-round PNW)",
+  "conservation": "Least Concern (IUCN). Recovered from near-extinction. Delisted from US ESA 2007.",
+  "vocalization": {
+    "type": "contact call",
+    "description": "Thin, descending series of 4-10 high-pitched notes: kee-kee-kee-kee",
+    "frequency_hz": "2000-5000",
+    "note_duration_sec": "0.1-0.15",
+    "function": "Mate coordination, adult-chick communication, low-level territorial awareness",
+    "notable": "Hollywood uses Red-tailed Hawk call instead -- actual Bald Eagle call too thin for cinema"
+  },
+  "connections": [
+    {"degree": 221, "type": "s36_pair", "description": "Love Battery (E=5, Sub Pop, psychedelic). Both project depth through texture. Acoustic thin-ness vs. fuzz-haze."},
+    {"degree": 222, "type": "same_species_different_call", "description": "Bald Eagle territorial call -- louder, more aggressive, E=6. The public declaration follows the private voice."},
+    {"degree": 224, "type": "ecological_connection", "description": "Osprey (FIRST PANDIONIDAE). Franklin's complaint: eagle steals fish from osprey. Kleptoparasitism."}
+  ],
+  "tags": ["accipitridae", "bald-eagle", "contact-call", "raptor", "pnw-resident", "national-bird", "haliaeetus", "fish-eagle", "ddt-recovery", "first-accipitridae"],
+  "milestones": ["FIRST ACCIPITRIDAE", "RAPTOR ERA OPENS", "NATIONAL BIRD ENTERS ENGINE"]
+}

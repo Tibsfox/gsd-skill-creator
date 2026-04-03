@@ -254,3 +254,33 @@ The professional responders are coming. They are brave, skilled, and committed. 
 In those seconds, the person who matters is the person who is there. The person who read the documents. The person who took the course. The person who built the kit. The person who asked the hard question. The person who showed up and did something.
 
 Be that person.
+
+## Try This
+
+Start with one thing. Any one thing from the list below:
+
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- One hour, thirty to fifty dollars, and you have the tangible foundation of everything in this series.
+- **[Try Session: Practice the Recovery Position](try-sessions/learn-recovery-position.md)** --- Ten minutes with a partner. The single most useful physical skill for unconscious breathing patients.
+- **[Try Session: Practice Wound Care on Yourself](try-sessions/wound-care-practice.md)** --- Your next kitchen cut becomes a training opportunity.
+- **[Try Session: The Monthly Mental Health Check-In](try-sessions/mental-health-check-in.md)** --- Fifteen minutes of honest self-assessment that catches downward trends before they become crises.
+- **[Study Guide: Vital Signs Reference](study-guides/vital-signs-reference.md)** --- The five numbers that tell you everything about how a body is doing.
+- **[Study Guide: Medication Safety Reference](study-guides/medication-safety-reference.md)** --- Eight OTC medications everyone should understand.
+- **[FAD Learning Pathway](pathways/learning-pathway.md)** --- The complete structured journey from bystander to first responder-ready. Five levels, from one hour to ongoing certification.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Universal]: Anatomy, physiology, pharmacology, immunology, toxicology, environmental health, and the biological foundations of every topic in the series.
+- **Psychology** --- [Crisis Intervention, Self-Assessment]: Recognition of mental health crisis, suicide intervention, stress response, and the behavioral aspects of health-seeking and prevention.
+- **Mind-Body** --- [Stress Response, Emotional Regulation]: Emergency response under stress, breathwork, the body-mind connection in crisis and daily wellness.
+- **Physical Education** --- [Fitness, Outdoor Preparedness]: Exercise science, injury prevention, outdoor skills, and the physical conditioning that reduces injury risk.
+- **Nature Studies** --- [Wildlife, Environment]: Wildlife encounters, environmental hazards, plant and fungal identification, and ecological context for PNW-specific risks.
+- **Home Economics** --- [Household Safety, Preparedness]: Kit building, food safety, preventive maintenance, emergency preparedness, and the infrastructure of a health-literate home.
+- **Learning** --- [Procedural Memory, Certification]: Protocol-based decision-making, hands-on skills training, certification as structured learning, and the pedagogy of emergency response education.
+- **Geography** --- [Regional Hazards]: Cascadia Subduction Zone, volcanic hazard zones, wildfire risk geography, marine hazard zones.
+- **Mathematics** --- [Dosage, Risk Assessment]: Medication dosage calculation, probability and risk assessment, epidemiological reasoning, screening test performance statistics.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Start anywhere. Start today. The [FAD Learning Pathway](pathways/learning-pathway.md) provides the structured route, but any step forward is the right step.*

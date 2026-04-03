@@ -1,0 +1,21 @@
+{
+  "degree": 224, "artist": "Mad Season", "slug": "224-mad-season", "genre": "Rock", "energy": 6,
+  "era": "1994-1995. Rock. E=6 -- meditative, soulful, emotionally dense. Capitol Hill. Columbia Records.",
+  "location": { "origin": "Capitol Hill, Seattle" }, "formed": "Seattle, Washington", "active": "1994-1995",
+  "labels": ["Columbia Records"],
+  "members": ["Layne Staley (vocals -- Alice in Chains)", "Mike McCready (guitar -- Pearl Jam)", "Barrett Martin (drums -- Screaming Trees)", "John Baker Saunders (bass -- d. 1999)"],
+  "associated_musicians": ["Alice in Chains (Staley)", "Pearl Jam (McCready)", "Screaming Trees (Martin)", "Mother Love Bone (Andrew Wood, referenced in context)"],
+  "albums": [{"title": "Above", "year": 1995, "label": "Columbia", "us_sales_approx": "800K", "signature_track": "River of Deceit"}],
+  "theory_nodes": [
+    { "concept": "Seattle supergroup. AIC + Pearl Jam + Screaming Trees. One album: Above (1995). Born from addiction and recovery. Born from Seattle's grief (Wood 1990, Cobain April 1994).", "level": "advanced", "department": "scene-theory", "description": "The most important supergroup in Seattle history." },
+    { "concept": "Aquatic imagery in Staley's lyrics: river, surfacing, above, long gone day, deceit as water. PNW water city. Osprey pair is exact: zone between water and sky.", "level": "advanced", "department": "lyric-analysis", "description": "Above as a water album." },
+    { "concept": "E=6 streak reaches 3 degrees (222-224). Character changes: territorial→commercial→meditative. Same energy level, three emotional registers.", "level": "intermediate", "department": "energy-theory", "description": "The E=6 arc: urgency to commerce to depth." }
+  ],
+  "cross_references": [
+    {"degree": 223, "artist": "Candlebox", "relationship": "E=6 continues. Post-grunge commercial to supergroup depth. Same energy, opposite soul."},
+    {"degree": 222, "artist": "Hammerbox", "relationship": "E=6 arc begins at 222. Territorial urgency to meditative depth across three degrees."}
+  ],
+  "sps_pair": {"degree": 224, "species": "Osprey", "pairing_note": "FIRST PANDIONIDAE. Water and sky zone. Osprey hunts by diving into water from flight. Above inhabits the zone between submersion and surfacing. Most resonant pair in raptor era."},
+  "milestones": ["SEATTLE SUPERGROUP", "FIRST PANDIONIDAE PAIR", "E=6 STREAK COMPLETE (222-224)"],
+  "tags": ["supergroup", "layne-staley", "mike-mccready", "barrett-martin", "john-baker-saunders", "alice-in-chains", "pearl-jam", "screaming-trees", "above", "river-of-deceit", "columbia-records", "addiction", "grunge-grief"]
+}

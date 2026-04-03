@@ -338,3 +338,11 @@ The backyard chicken community exists because people care about their birds. Not
 - **Home Economics** --- [Animal Husbandry, Self-Sufficiency]: This is the most directly Home Economics-aligned document in the FWL project. Housing design, feeding schedules, health management, predator defense, and flock economics are practical life skills for anyone pursuing food self-sufficiency.
 - **Nature Studies** --- [Ecology & Habitats, Animals & Birds]: Predator management (identifying and deterring hawks, raccoons, coyotes, and weasels) requires understanding local predator ecology. Disease prevention connects to understanding pathogen-host dynamics in managed animal populations.
 - **Science** --- [Experimental Design, Data Collection]: Keeping flock records (egg production, feed consumption, health events) develops data collection and analysis skills. The husbandry guide's emphasis on observing bird behavior to diagnose health issues exercises the scientific observation skills of the Observation & Inquiry wing.
+
+---
+
+## Try This
+
+> **[Chicken Math --- The Economics of Backyard Eggs](try-sessions/chicken-math-project.md)** --- How much do your eggs really cost? Build a spreadsheet, track startup and operating costs, and discover why the "chicken math" phenomenon (you start with 6, you end up with 20) is the hobby operating as designed.
+
+> **[Design Your Dream Coop](try-sessions/coop-design-challenge.md)** --- Apply the housing principles from this guide to design a PNW-optimized coop for your specific flock, lot, and climate conditions.

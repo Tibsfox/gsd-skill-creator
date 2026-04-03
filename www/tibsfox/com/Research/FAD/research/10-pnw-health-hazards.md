@@ -175,3 +175,22 @@ Every region has its hazards. The Midwest has tornadoes. The Southeast has hurri
 None of these hazards are reasons not to live here. All of them are reasons to be informed. The person who keeps shoes by the bed, checks the AQI before going outside in August, wears wool instead of cotton on trail, and never eats a mushroom they cannot identify with certainty is not anxious. They are adapted.
 
 The PNW rewards preparation. It punishes ignorance. Know the territory.
+
+## Try This
+
+- **[FSR Try Session: Build a Go Bag](../../FSR/research/try-sessions/build-a-go-bag.md)** --- The earthquake kit, the wildfire evacuation bag, the 72-hour survival package. The Cascadia scenario described in this document is the reason the go bag exists.
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- After Cascadia, professional medical response will be overwhelmed. Your home kit becomes your primary care facility. Build it now.
+- **[Study Guide: Vital Signs Reference](study-guides/vital-signs-reference.md)** --- Crush injury assessment, hypothermia staging, and shock recognition all depend on vital signs. Temperature, pulse, skin signs --- the numbers that tell you what the body is doing.
+- **[FSR Try Session: Hands-Only CPR](../../FSR/research/try-sessions/hands-only-cpr.md)** --- In a mass casualty event, bystander CPR may be the only CPR available for the first hours. The skill that doubles survival rates becomes critical infrastructure.
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [PNW Ecology]: Fungal ecology (forager's paradise and poisoner's nightmare), marine ecology (Puget Sound, coastal environment), wildlife ecology (tick populations, animal encounters), and fire ecology (transforming the region's relationship with summer).
+- **Science** --- [Environmental Health, Toxicology]: Amatoxin pharmacology, paralytic shellfish toxin, volcanic ash silica content, PM2.5 pathophysiology, and crush syndrome physiology. The chemistry and biology of regional hazards.
+- **Geography** --- [Regional Hazards, Geology]: Cascadia Subduction Zone tectonics, volcanic hazard mapping, lahar inundation zones, wildfire risk geography. The same forces that built the beauty create the danger.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FSR try-session/build-a-go-bag], [FAD try-session/build-home-first-aid-kit], [FAD study-guide/vital-signs-reference], [FSR try-session/hands-only-cpr]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

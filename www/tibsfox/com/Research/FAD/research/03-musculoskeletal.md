@@ -190,6 +190,11 @@ This document connects to two departments within the College structure:
 
 **Physical Education** — Injury prevention. Proper warm-up, appropriate progression in training load, correct form in lifting and movement, adequate rest and recovery, and sport-specific protective equipment all reduce the risk of musculoskeletal injury. The best first aid is the injury that never happens. Conditioning programs that emphasize joint stability (proprioceptive training for ankles, rotator cuff strengthening for shoulders, core stability for the spine) are effective injury prevention strategies supported by strong evidence.
 
+## Try This
+
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- The SAM splint ($8-12) in the trauma upgrade tier handles any limb fracture. Build the kit and you will have the tools this document describes.
+- **[Study Guide: Vital Signs Reference](study-guides/vital-signs-reference.md)** --- After splinting, monitor vital signs. Pale skin, fast pulse, and sweating in a fracture patient suggest internal bleeding and shock. Know what the numbers mean.
+
 ## The Body Will Heal
 
 The human body's capacity for repair is remarkable. Bones knit. Ligaments scar. Muscles regenerate. A fracture that is properly aligned and immobilized will, in most cases, heal to full strength within six to twelve weeks. The skeleton you have at sixty is not the skeleton you were born with — every bone in your body has been remodeled multiple times throughout your life, old bone dissolved by osteoclasts and new bone laid down by osteoblasts in a continuous cycle of maintenance.
@@ -197,3 +202,14 @@ The human body's capacity for repair is remarkable. Bones knit. Ligaments scar. 
 Your job in the first minutes and hours after a musculoskeletal injury is to give the body's repair systems the best possible starting conditions: prevent further damage, control pain and swelling, maintain circulation, and get the person to a professional who can provide definitive care.
 
 The body will do the rest. It has been doing it for a very long time.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Skeletal Anatomy, Biomechanics]: Bone structure (cortical, trabecular, periosteum, marrow cavity), joint types (ball-and-socket, hinge, pivot), and soft tissue structures (ligaments, tendons, cartilage) explain why injuries present the way they do and why splinting works.
+- **Physical Education** --- [Injury Prevention]: Proper warm-up, progressive training load, correct lifting form, and sport-specific protective equipment reduce musculoskeletal injury risk. Prevention is the best first aid.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/build-home-first-aid-kit], [FAD study-guide/vital-signs-reference]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

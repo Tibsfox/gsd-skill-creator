@@ -63,7 +63,9 @@ Now you're building. Level 2 introduces hand tools, your first joint, and your f
 
 6. **[try-sessions/first-joint.md](../try-sessions/first-joint.md)** -- Cut your first joint: a simple butt joint, then a dado, then a rabbet. These are the simplest joints in woodworking, but cutting them well requires accurate layout, controlled sawing, and clean chisel work. Each one teaches something the previous one didn't. (~2-3 hours)
 
-7. **[try-sessions/build-a-birdhouse.md](../try-sessions/build-a-birdhouse.md)** -- Your first complete project. A birdhouse is small, uses simple joints, requires measuring, cutting, assembly, and finishing. When you're done, you have something a bird can live in. That's satisfying in a way that abstract exercises never are. (~3-4 hours)
+7. **[try-sessions/restore-a-hand-plane.md](../try-sessions/restore-a-hand-plane.md)** -- The most satisfying $15 project in woodworking. Find a rusty Stanley Bailey #4 or #5 at a thrift store or estate sale and restore it to precision condition: disassembly, rust removal, sole flattening, sharpening the iron, reassembly, and tuning. A century-old tool, made better than anything new under $200, brought back to life by your hands. (~4-6 hours over a weekend)
+
+8. **[try-sessions/build-a-birdhouse.md](../try-sessions/build-a-birdhouse.md)** -- Your first complete project. A birdhouse is small, uses simple joints, requires measuring, cutting, assembly, and finishing. When you're done, you have something a bird can live in. That's satisfying in a way that abstract exercises never are. (~3-4 hours)
 
 ### Study Guide
 

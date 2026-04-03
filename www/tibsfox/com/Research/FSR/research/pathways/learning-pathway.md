@@ -80,6 +80,8 @@ The Pacific Northwest sits on the Cascadia Subduction Zone. A major earthquake i
 
 9. **[study-guides/radio-communications-basics.md](../study-guides/radio-communications-basics.md)** -- Basic radio communications: how emergency radios work, standard protocols, phonetic alphabet, the importance of clear and concise transmissions. If you have a ham radio or FRS radio, this teaches you how to use it effectively in an emergency. (~20 min)
 
+10. **[study-guides/emergency-phone-numbers.md](../study-guides/emergency-phone-numbers.md)** -- Print it, laminate it, put it on the refrigerator. National emergency numbers (911, 988, 211, Poison Control), PNW-specific crisis lines, wildlife emergency contacts, utility companies, and a template for your household's personal emergency information. The companion reference to everything in Level 2. (~15 min to read, 30 min to customize)
+
 ### Guide
 
 10. **[guides/citizen-preparedness.md](../guides/citizen-preparedness.md)** -- The comprehensive citizen preparedness guide: household emergency planning, neighborhood organizing, special needs considerations, pet preparedness, and the psychological dimension of being prepared without being paranoid. (~30 min)
