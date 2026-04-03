@@ -292,4 +292,6 @@ ___________________________
 
 ---
 
+*See also: [Convention Badge Painting](../../PNT/research/try-sessions/convention-badge-painting.md) | [Build Convention Badge Holders](badge-holder-craft.md) | [Airbrush Basics for Fursuits](airbrush-basics-for-fursuits.md) | [Paint Your Pet](../../PNT/research/try-sessions/paint-your-pet.md)*
+
 *This document is part of the FFA (Fursuit and Plush Arts) research series within the PNW Research Project. Cross-references: [FFA-01] Biological Foundations, [FFA-02] Digital Rendering, [FFA-04] Fursuit Fabrication, [FFA try-session/first-fursuit-paws], [FFA try-session/fursuit-tail-construction]. Designed by you, for you, as you. The character is the beginning of everything.*

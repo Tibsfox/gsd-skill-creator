@@ -243,5 +243,17 @@ These experiences are not available from a textbook or a video. They are availab
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Design Your Dream Coop](coop-design-challenge.md)** --- Your hatchlings will need a home. Start the coop design process now, because those chicks grow fast and need outdoor housing by 6 weeks.
+
+> **[Preserve and Display Beautiful Eggs](egg-preservation-project.md)** --- Once your hens start laying, preserve the most beautiful eggs permanently with blown-egg technique, natural dyes, and wax-resist decoration.
+
+> **[Feather Art Project](feather-craft-project.md)** --- As your birds grow, they molt. Collect the naturally shed feathers and turn them into pressed art, wreaths, or functional quill pens.
+
+> **[The Egg Taste Test](egg-taste-test.md)** --- When your home-hatched hens start laying, compare their eggs to store-bought in a proper blind taste test. Science meets breakfast.
+
+---
+
 *PNW Research Series --- FWL Project*
 *tibsfox.com/Research/FWL*

@@ -283,6 +283,10 @@ A field notebook with dated, located observations accumulates into a valuable lo
 
 > **[How Well Do You Know Raccoons?](../study-guides/raccoon-biology-quiz.md)** --- Question 25 asks you to describe the difference between front and hind paw prints. After this exercise, you will know the answer from experience.
 
+> **[Photograph Urban Wildlife](wildlife-photography-basics.md)** --- Document the tracks and signs you find with photographs. A detailed shot of a raccoon paw print in mud is both a field record and a composition exercise.
+
+> **[The Ethics of Raccoon Interaction](raccoon-enrichment-ethics.md)** --- Track surveys are a form of ethical wildlife engagement: you learn about the animal without altering its behavior or creating dependencies.
+
 ---
 
 ## College of Knowledge Connections

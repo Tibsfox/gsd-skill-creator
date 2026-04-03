@@ -178,4 +178,4 @@ Once you can sharpen a chisel reliably, consider expanding your setup:
 
 ---
 
-*See also: [First Dovetail Joint](first-joint.md) | [WDC-03 Hand Tools](../03-hand-tools.md) | [WDC-05 Joinery](../05-joinery.md)*
+*See also: [First Dovetail Joint](first-joint.md) | [Build a Mallet](build-a-mallet.md) | [WDC-03 Hand Tools](../03-hand-tools.md) | [WDC-05 Joinery](../05-joinery.md)*

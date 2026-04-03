@@ -250,4 +250,6 @@ Pile direction mismatch. When cutting your two panels, ensure the pile flows in 
 
 ---
 
+*See also: [Airbrush Basics for Fursuits](airbrush-basics-for-fursuits.md) | [Build Convention Badge Holders](badge-holder-craft.md) | [First Fursuit Paws](first-fursuit-paws.md) | [First Plush Animal](first-plush-animal.md)*
+
 *This document is part of the FFA (Fursuit and Plush Arts) research series within the PNW Research Project. Cross-references: [FFA-04] Fursuit Fabrication, [FFA-03] Textile Craft, [FFA try-session/first-fursuit-paws], [FFA try-session/first-plush-animal], [FFA study-guide/sewing-basics]. Built to swing, posed to impress, worn because you can.*

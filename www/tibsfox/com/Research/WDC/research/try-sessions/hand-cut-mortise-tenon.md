@@ -191,4 +191,4 @@ This is why woodworking teachers say: "If you can cut a mortise and tenon and a 
 
 ---
 
-*See also: [Sharpen a Chisel](sharpen-a-chisel.md) | [First Dovetail Joint](first-joint.md) | [WDC-03 Hand Tools](../03-hand-tools.md) | [WDC-05 Joinery](../05-joinery.md)*
+*See also: [Sharpen a Chisel](sharpen-a-chisel.md) | [Build a Mallet](build-a-mallet.md) | [First Dovetail Joint](first-joint.md) | [Finishing Sampler Board](wood-finishing-sampler.md) | [WDC-03 Hand Tools](../03-hand-tools.md) | [WDC-05 Joinery](../05-joinery.md)*

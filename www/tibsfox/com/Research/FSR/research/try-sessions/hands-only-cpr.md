@@ -210,6 +210,10 @@ This try session gave you the skill to perform hands-only CPR. It is enough to s
 
 8. **Learn emergency radio communications.** The [Radio Communications study guide](../study-guides/radio-communications-basics.md) covers everything from NOAA weather radio to ham radio licensing. When cell towers fail, radio is the only communication that works.
 
+9. **Create a family emergency plan.** The [Family Emergency Plan project](family-emergency-plan.md) builds the one-page document that coordinates your family's response when disaster strikes --- meeting points, communication tree, out-of-area contact, and annual drill.
+
+10. **Explore CERT training.** The [CERT Overview](neighborhood-cert-overview.md) describes the 20-hour free training program that teaches you to organize neighborhood-level disaster response. CPR is the individual skill. CERT is the community-level framework.
+
 ---
 
 ## Sources and Further Reading
