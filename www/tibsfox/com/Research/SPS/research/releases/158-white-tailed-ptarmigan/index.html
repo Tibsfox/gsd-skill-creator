@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 158&deg; &mdash; White-tailed Ptarmigan &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #ECEFF1, #CFD8DC); color: #37474F; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(207, 216, 220, 0.8); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .alpine-card { background: linear-gradient(135deg, #ECEFF1, #CFD8DC, #B0BEC5, #ECEFF1); border: 2px solid #90A4AE; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #263238; }
+    .alpine-card h3 { margin-top: 0; font-size: 1.1rem; color: #37474F; }
+    .alpine-card p { color: #37474F; }
+    .alpine-card strong { color: #263238; }
+
+    .plumage-card { background: linear-gradient(135deg, #F5F5F5, #FFFFFF, #FAFAFA, #F5F5F5); border: 2px solid #E0E0E0; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #424242; }
+    .plumage-card h3 { margin-top: 0; font-size: 1.1rem; color: #616161; }
+    .plumage-card p { color: #424242; }
+    .plumage-card strong { color: #212121; }
+
+    .final-card { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #B71C1C); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .final-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .final-card p { color: #FFCDD2; }
+    .final-card strong { color: #FFEBEE; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.alpine { background: #90A4AE; color: #263238; }
+    .theory-icon.plumage { background: #E0E0E0; color: #424242; }
+    .theory-icon.final { background: #B71C1C; }
+    .theory-icon.climate { background: #0277BD; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .phasianidae-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .phasianidae-table th { background: #263238; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .phasianidae-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .phasianidae-table tr:nth-child(even) { background: #ECEFF1; }
+    .phasianidae-table tr:last-child { font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">158&deg;</div>
+      <div class="release-title-block">
+        <h2>White-tailed Ptarmigan &mdash; Cackling + Soft Clucks</h2>
+        <div class="scientific"><em>Lagopus leucura</em> (Phasianidae) &mdash; E=3 &mdash; The Alpine Ghost</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>SIXTH AND FINAL PHASIANIDAE.</strong> The family closes.
+      The <strong>only bird</strong> that lives above treeline year-round.
+      Turns <strong>pure white</strong> in winter.
+      <strong>Smallest grouse</strong> in North America.
+      Cackling + soft clucks from the alpine tundra. <strong>E=3.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="alpine-card">
+          <h3>The Alpine Ghost &mdash; Year-Round Above Treeline</h3>
+          <p>
+            The <strong>only bird in North America</strong> that lives above
+            treeline year-round. Never descends. Endures <strong>&minus;40&deg;C</strong>,
+            roosts in <strong>snow burrows</strong>, subsists on
+            <strong>willow buds</strong>. The smallest grouse
+            (300&ndash;400g). Its soft cackling and clucking are
+            the <strong>quiet sounds of survival</strong> at the edge
+            of what is habitable.
+          </p>
+        </div>
+        <div class="plumage-card">
+          <h3>Pure White in Winter &mdash; Complete Plumage Transformation</h3>
+          <p>
+            <strong>Summer:</strong> mottled brown and gray. Cryptic against alpine rocks.<br>
+            <strong>Winter:</strong> pure white. Entire bird &mdash; body, wings, head &mdash;
+            turns white. Only bill and eyes remain dark. Against the snowfield,
+            <strong>virtually invisible.</strong> The white tail (diagnostic)
+            provides complete camouflage. <strong>6&ndash;8 weeks</strong> per transition.
+            Driven by photoperiod. An evolutionary masterpiece.
+          </p>
+        </div>
+        <div class="final-card">
+          <h3>Phasianidae Complete (153&ndash;158) &mdash; Six Entries</h3>
+          <p>
+            <strong>153:</strong> Wild Turkey (E=6, low elevation, loudest).<br>
+            <strong>154:</strong> Dusky Grouse (E=5, interior mountains).<br>
+            <strong>155:</strong> Ruffed Grouse (E=5, deciduous forest).<br>
+            <strong>156:</strong> Sooty Grouse (E=5, coastal mountains).<br>
+            <strong>157:</strong> Spruce Grouse (E=4, boreal forest).<br>
+            <strong>158:</strong> White-tailed Ptarmigan (E=3, alpine tundra).<br>
+            <strong>Ascending elevation. Descending energy.</strong>
+            From forest floor to above the forest. From E=6 to E=3.
+          </p>
+        </div>
+
+        <h2>Phasianidae Complete (153&ndash;158)</h2>
+        <table class="phasianidae-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Sound</th><th>Habitat</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>153</td><td>Wild Turkey</td><td>Gobble</td><td>Forest edge / low elev.</td><td>6</td></tr>
+            <tr><td>154</td><td>Dusky Grouse</td><td>Deep booming</td><td>Interior mountains</td><td>5</td></tr>
+            <tr><td>155</td><td>Ruffed Grouse</td><td>Drumming</td><td>Deciduous / mixed</td><td>5</td></tr>
+            <tr><td>156</td><td>Sooty Grouse</td><td>Muffled booming</td><td>Coastal mountains</td><td>5</td></tr>
+            <tr><td>157</td><td>Spruce Grouse</td><td>Wing claps</td><td>Boreal spruce</td><td>4</td></tr>
+            <tr><td>158</td><td>White-tailed Ptarmigan</td><td>Cackling + clucks</td><td>Alpine tundra</td><td>3</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-157 Spruce Grouse</strong>
+            <p>ELEVATION ASCENT! Spruce Grouse in boreal forest (157, E=4). Ptarmigan above treeline (158, E=3). From forest to beyond forest. Energy continues to descend.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-153 Wild Turkey</strong>
+            <p>FAMILY ARC! Turkey (153, E=6, low elevation, loudest) to Ptarmigan (158, E=3, alpine, quietest). The full Phasianidae arc: 6 degrees, 6 species, E=6 to E=3.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-154 Dusky Grouse</strong>
+            <p>REVERSE MIGRATION CONTRAST! Dusky/Sooty grouse migrate upslope in winter. Ptarmigan is already there -- lives above treeline year-round. No migration needed.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-156 Sooty Grouse</strong>
+            <p>CAMOUFLAGE COMPARISON! Sooty Grouse: ventriloquial (sound camouflage). Ptarmigan: pure white (visual camouflage). Both specialists in disappearance.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon alpine">A</div>
+            <div class="theory-content">
+              <h4>Year-Round Alpine Residency</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Only North American bird above treeline year-round. Snow roosting. Willow bud diet. Energy conservation. -40C endurance. The extreme edge of avian habitat.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon plumage">P</div>
+            <div class="theory-content">
+              <h4>Seasonal Plumage Transformation</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Complete brown-to-white transition. 6-8 weeks. Photoperiod-driven. White tail diagnostic. Virtually invisible on snow. Evolutionary masterpiece.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon final">F</div>
+            <div class="theory-content">
+              <h4>Phasianidae Complete (153&ndash;158)</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Six entries. Ascending elevation. Descending energy. E=6 to E=3. Forest floor to above treeline. Loudest to quietest. Family arc complete.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon climate">C</div>
+            <div class="theory-content">
+              <h4>Climate Change Vulnerability</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Treeline advancing upslope. Alpine zone shrinking. Habitat contraction. The ptarmigan's world is getting smaller. An indicator species for climate impact.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">White-tailed Ptarmigan</div><div class="stat-detail"><em>Lagopus leucura</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Phasianidae</div><div class="stat-detail">6th &amp; FINAL entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Cackling + clucks</div><div class="stat-detail">quiet alpine calls</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 3</div><div class="stat-detail">quietest Phasianidae</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Alpine tundra</div><div class="stat-detail">above treeline year-round</div></div>
+        <div class="stat-card"><div class="stat-label">Size</div><div class="stat-value">300&ndash;400g</div><div class="stat-detail">smallest N.A. grouse</div></div>
+        <div class="stat-card"><div class="stat-label">Winter Plumage</div><div class="stat-value">Pure white</div><div class="stat-detail">complete transformation</div></div>
+        <div class="stat-card"><div class="stat-label">Snow Roost</div><div class="stat-value">Yes</div><div class="stat-detail">insulating burrows</div></div>
+        <div class="stat-card"><div class="stat-label">Winter Diet</div><div class="stat-value">Willow buds</div><div class="stat-detail">extremely low quality</div></div>
+        <div class="stat-card"><div class="stat-label">Range (WA)</div><div class="stat-value">N &amp; C Cascades</div><div class="stat-detail">above 6,000&ndash;7,000 ft</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
