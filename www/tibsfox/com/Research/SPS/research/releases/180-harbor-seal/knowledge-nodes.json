@@ -1,0 +1,112 @@
+{
+  "degree": 180,
+  "species": "Harbor Seal",
+  "scientific_name": "Phoca vitulina",
+  "slug": "180-harbor-seal",
+  "sound_type": "guttural bark -- low, resonant, short alarm bark. Soft grunts, moans, growls during social contact. Underwater clicks and roars during breeding. E=4",
+  "energy": 4,
+  "ecosystem": "Haul-out rocks, sandy beaches, tidal flats, estuaries, harbors. Resident year-round in Puget Sound. Most common marine mammal in PNW.",
+  "season": "Year-round resident. Does not migrate. Pupping: late spring to early summer. Present in Puget Sound every month.",
+  "family": "Phocidae (FIRST -- true seals)",
+  "order": "Carnivora",
+  "class": "Mammalia (FIRST MARINE MAMMAL)",
+  "csv_substitute": false,
+  "original_species": "Harbor Seal",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.53,
+    "lon": -123.01,
+    "description": "Harbor Seal in Puget Sound / San Juan Islands. Haul-out rocks throughout the Sound. Year-round resident."
+  },
+  "taxonomy_note": {
+    "description": "FIRST MARINE MAMMAL in the engine. FIRST PHOCIDAE (true seals). Class Mammalia returns (last seen ~degree 108). Massive taxonomic event at HALFWAY MARK (180/360). The engine enters the ocean.",
+    "current_family": "Phocidae (FIRST entry)",
+    "new_family": true,
+    "new_class": true,
+    "family_count_in_engine": "Phocidae: Harbor Seal (180) -- FIRST.",
+    "name_etymology": "Phoca from Greek 'phoke' (seal). vitulina from Latin 'vitulus' (calf) -- calf-like. 'Harbor Seal' for its preference for sheltered harbors and bays.",
+    "genus_note": "Phoca -- harbor seals and spotted seals. 2 species. The most widespread Phocid genus.",
+    "order_note": "Carnivora. FIRST Carnivora in SPS. Pinnipedia (seals, sea lions, walruses) is a suborder/clade within Carnivora.",
+    "family_position": "First Phocidae. First marine mammal. First Carnivora. Taxonomic revolution at the midpoint.",
+    "class_note": "Class Mammalia returns to the SPS engine. The engine expands from primarily avian to multi-class at degree 180."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "200-2000 Hz. Low fundamental with harmonics.",
+    "peak_energy_band_hz": "~500-1000 Hz. Low, guttural.",
+    "song_frequency_hz": "Bark fundamental: ~400-600 Hz. Resonant.",
+    "song_duration_s": "Individual bark: 0.2-0.5 seconds. Series: 1-10 barks. Social sounds continuous at haul-outs.",
+    "note_structure": "Low, guttural bark. Short, sharp. Also: soft grunts, moans, growls. Underwater: clicks, roars, low-frequency sounds.",
+    "note_types": "Alarm bark (primary above-water), social grunts/moans/growls, mother-pup recognition calls, underwater breeding vocalizations.",
+    "phrase_structure": "Bark series: 1-10 barks in sequence during alarm. Social sounds: continuous murmur at haul-outs.",
+    "timbre": "Guttural, resonant, low. Bark is sharp and purposeful. Social sounds are softer, more varied.",
+    "amplitude": "E=4. Moderate volume. Carries across water. Purposeful rather than overwhelming. Intermittent.",
+    "tempo": "Bark series: ~1-3 per second during alarm. Social sounds: irregular, continuous.",
+    "context": "Haul-out sites. Alarm, territorial, social, mother-pup. Also underwater during breeding.",
+    "regional_variation": "Minimal. Bark consistent. Individual recognition by mother-pup calls.",
+    "key_property": "GUTTURAL BARK + LIQUID GAZE. FIRST MARINE MAMMAL. FIRST PHOCIDAE. Haul-out rocks. Resident. HALFWAY MARK. E=4. v1.49.320."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Variable: silver-gray to dark brown with spots and rings. Pattern unique to individual (like fingerprints). Short, dense fur. Streamlined body.",
+    "diagnostic_mark": "Spotted/ringed pattern. Round face. Large dark eyes (liquid gaze). No external ear flaps (vs sea lions). Short flippers.",
+    "seasonal_variation": "Minimal. Annual molt replaces fur. Pattern remains individually unique.",
+    "swimming_pattern": "Powerful undulating hind-flipper propulsion. Streamlined. Can reach speeds of 19 km/h. Dives to 500+ meters."
+  },
+  "physical_description": {
+    "overall": "Length: 1.5-1.8 m. Weight: 45-130 kg. Round face. Large dark eyes. Thick vibrissae. No external ears.",
+    "diagnostic_mark": "Large dark eyes (liquid gaze). Round face. Spotted pelage. No external ear flaps. Short fore-flippers.",
+    "field_id": "Medium-sized seal on rocks or swimming. Round face with large dark eyes. Spotted/ringed pattern. No external ears (vs sea lions). Listen for guttural bark when alarmed."
+  },
+  "nodes": [
+    {
+      "id": "first-marine-mammal",
+      "type": "milestone",
+      "title": "First Marine Mammal -- Taxonomic Revolution",
+      "description": "FIRST MARINE MAMMAL in the engine. FIRST PHOCIDAE. Class Mammalia returns. The engine enters the ocean at the midpoint (180/360). Taxonomic scope expands dramatically.",
+      "connections": ["threshold", "liquid-gaze", "halfway-mark"]
+    },
+    {
+      "id": "threshold",
+      "type": "concept",
+      "title": "The Threshold -- Between Land and Sea",
+      "description": "Haul-out behavior = living at the boundary between worlds. On rocks: terrestrial, breathing air. In water: marine predator, diving 500m. Two worlds. The midpoint embodied.",
+      "connections": ["first-marine-mammal", "liquid-gaze"]
+    },
+    {
+      "id": "liquid-gaze",
+      "type": "concept",
+      "title": "The Liquid Gaze -- Large Dark Eyes",
+      "description": "Disproportionately large, dark eyes adapted for underwater vision. Round face. Vibrissae (whiskers) detect fish by water turbulence. The most compelling marine encounter in PNW.",
+      "connections": ["first-marine-mammal", "threshold"]
+    },
+    {
+      "id": "halfway-mark",
+      "type": "milestone",
+      "title": "Halfway Mark -- 180 / 360 = 50.0%",
+      "description": "The engine's exact midpoint. 180 species documented. The first half is complete. The second half begins. At the midpoint, the engine enters a new taxonomic realm.",
+      "connections": ["first-marine-mammal"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-179",
+      "species": "Ancient Murrelet",
+      "relationship": "TAXONOMIC SHIFT! After 6 consecutive Alcidae (174-179, birds), the engine enters marine mammals at 180. Bird-to-mammal transition at the midpoint."
+    },
+    {
+      "target": "SPS-177",
+      "species": "Common Murre",
+      "relationship": "MARINE PREDATORS! Murre: dives 100m for fish. Seal: dives 500m for fish. Both marine predators. Different classes (Aves vs Mammalia). Same ocean."
+    },
+    {
+      "target": "SPS-178",
+      "species": "Marbled Murrelet",
+      "relationship": "CONSERVATION! Murrelet: ESA Threatened. Seal: MMPA protected. Both at the intersection of conservation law and marine ecology."
+    },
+    {
+      "target": "S36-180",
+      "artist": "Macklemore",
+      "relationship": "HALFWAY MARK PAIR! Both at 180. Both at the threshold. Macklemore between eras. Harbor Seal between land and sea. The threshold."
+    }
+  ]
+}
