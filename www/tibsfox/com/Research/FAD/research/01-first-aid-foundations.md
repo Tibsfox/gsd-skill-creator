@@ -224,6 +224,12 @@ This document connects to three departments within the College structure:
 
 **Learning** — Emergency protocols as procedural memory. The reason certification courses have you practice the same sequence repeatedly is that procedural memory — the memory of how to do something — is stored differently than declarative memory (the memory of facts). Under extreme stress, declarative memory degrades significantly, but procedural memory is more resilient. You may not be able to recite the steps of CPR from a textbook while someone is dying in front of you. But if you have practiced those steps fifty times on a mannequin, your hands will know what to do even when your conscious mind is overwhelmed.
 
+## Try This
+
+- **[Try Session: Practice the Recovery Position](try-sessions/learn-recovery-position.md)** --- Ten minutes with a partner. Practice rolling someone into the recovery position from both sides. The technique described above becomes muscle memory when you practice it four times.
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- Thirty to fifty dollars and an hour of your time. Every item explained, every rationale covered. The kit makes the knowledge in this document actionable.
+- **[FSR Try Session: Hands-Only CPR](../../FSR/research/try-sessions/hands-only-cpr.md)** --- The other half of the unconscious patient fork: if they are NOT breathing, you need CPR. Learn it in ten minutes, practice it today.
+
 ## The Person Who Shows Up
 
 The survival rate for out-of-hospital cardiac arrest in the United States is approximately 10 percent. When a bystander performs CPR before the ambulance arrives, that number doubles or triples. When a bystander uses an AED (automated external defibrillator) within the first few minutes, survival rates can exceed 70 percent.
@@ -235,3 +241,16 @@ You do not need to be a doctor. You do not need to be a paramedic. You need to b
 The professionals are coming. The ambulance is on its way. But the ambulance takes eight minutes on average, and in those eight minutes, the person who is there is you.
 
 Be ready.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Anatomy, Physiology]: Airway anatomy, circulatory system mechanics, and the physiological basis for CPR. Understanding why chest compressions maintain perfusion to the brain transforms the technique from rote memorization to understood intervention.
+- **Mind-Body** --- [Stress Response]: The sympathetic nervous system activation during emergencies --- adrenaline, tunnel vision, fine motor degradation, auditory exclusion, time distortion. Understanding these responses helps you channel them rather than be overwhelmed.
+- **Learning** --- [Procedural Memory]: Emergency protocols practiced repeatedly encode as procedural memory, which is more resilient under extreme stress than declarative memory. Practice makes the response automatic when conscious thought fails.
+- **Home Economics** --- [Household Safety]: Scene safety applied to the home environment. First aid preparedness as a core household management responsibility.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD try-session/recovery-position], [FAD try-session/build-home-first-aid-kit], [FSR try-session/hands-only-cpr]. Start with the [FAD Learning Pathway](pathways/learning-pathway.md).*

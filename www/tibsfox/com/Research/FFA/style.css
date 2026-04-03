@@ -33,8 +33,19 @@ header {
   border-bottom: 4px solid var(--lavender);
 }
 
+/* ── Cards — colored left border + tinted background ── */
+body { background: var(--cream); }
+.card { border-left: 4px solid var(--craft); background: linear-gradient(135deg, #ffffff 0%, #F9F5FF 100%); box-shadow: 0 2px 8px rgba(74, 20, 140, 0.1); border-radius: 8px; }
+.card:hover { box-shadow: 0 6px 24px rgba(74, 20, 140, 0.2); border-left-color: var(--lavender); transform: translateY(-2px); }
+.card h3 { color: var(--deep); }
+
+.stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.stat { background: #F9F5FF; border: 1px solid var(--mist); border-radius: 8px; padding: 0.8rem 1.2rem; text-align: center; flex: 1; min-width: 100px; }
+.stat-value { color: var(--deep); font-size: 2rem; font-weight: 700; display: block; }
+.stat-label { color: var(--page-text-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
 /* ── Color overrides ── */
-h2 { color: var(--deep); border-bottom-color: var(--mist); }
+h2 { color: var(--deep); border-bottom: 2px solid var(--mist); padding-bottom: 0.3rem; }
 h3 { color: var(--craft); }
 th { background: var(--deep); }
 td { border-bottom-color: var(--mist); }

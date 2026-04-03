@@ -111,7 +111,9 @@ You can get paint on canvas and you understand the basics. Now the real work beg
 
 ### Try-Session
 
-11. **[try-sessions/convention-badge-painting.md](../try-sessions/convention-badge-painting.md)** -- Paint a convention badge (the small, laminated character paintings sold at conventions). This is a focused, small-format exercise that teaches tight detail work, character painting, and finishing a piece to "done." Connected to the furry art community and the FFA project. (~2-3 hours)
+11. **[try-sessions/paint-from-life-not-photos.md](../try-sessions/paint-from-life-not-photos.md)** -- The most important practice shift you can make. Why cameras lie about color, value, space, and edges -- and why painting from life (starting with your coffee cup, a shoe, your hand, the view from your window) transforms your work in ways photographs never can. (~20 min first exercise, ongoing practice)
+
+12. **[try-sessions/convention-badge-painting.md](../try-sessions/convention-badge-painting.md)** -- Paint a convention badge (the small, laminated character paintings sold at conventions). This is a focused, small-format exercise that teaches tight detail work, character painting, and finishing a piece to "done." Connected to the furry art community and the FFA project. (~2-3 hours)
 
 ### Technique Guide
 

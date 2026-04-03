@@ -364,6 +364,9 @@ The furry commission economy documented in [PNT-08] and the portrait painting tr
 > **DIY Project: [Build a Fursuit Tail](try-sessions/fursuit-tail-construction.md)**
 > The simplest visible fursuit component. Three designs, wearable immediately, connecting you to the community culture of character embodiment described in this chapter.
 
+> **Try Session: [Commission Your First Furry Art](try-sessions/commission-your-first-art.md)**
+> The buyer's guide to the furry commission ecosystem. How to find artists, how the process works, what things cost, and why supporting artists is an investment in the community that makes all of this possible.
+
 ---
 
 *Module FFA-12. Cross-references: [FFA-04], [FFA-10], [FFA-11], [FFA-01], [FFA-02], [PNT-02], [PNT-03], [PNT-06], [PNT-08], [PNT-09]. Safety codes: SC-SAF, SC-IP.*

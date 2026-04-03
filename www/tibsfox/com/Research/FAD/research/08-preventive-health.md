@@ -169,3 +169,21 @@ Every screening on this list takes less than a day. Every vaccination takes less
 The pound of cure — the emergency room visit, the surgery, the chemotherapy, the hearing aid, the dental implant — takes weeks, months, or years, costs thousands or hundreds of thousands of dollars, and sometimes does not work.
 
 An ounce. Invest the ounce.
+
+## Try This
+
+- **[Study Guide: Medication Safety Reference](study-guides/medication-safety-reference.md)** --- The eight OTC medications everyone should understand. Dose, max daily amount, interactions, and who should NOT take each one. Read the label, every time.
+- **[Try Session: The Monthly Mental Health Check-In](try-sessions/mental-health-check-in.md)** --- Preventive health is not only physical. Mental health monitoring catches downward trends before they become crises. Fifteen minutes a month.
+- **[Try Session: Build a Home First Aid Kit](try-sessions/build-home-first-aid-kit.md)** --- Preventive health includes having the supplies ready before you need them. Quarterly kit checks are preventive maintenance for your household.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Immunology, Preventive Medicine]: How vaccines prime the adaptive immune system through memory B cells and T cells. The epidemiological evidence for screening recommendations. Sensitivity, specificity, and predictive value. The biology of noise-induced hearing loss.
+- **Home Economics** --- [Household Health Management]: Vaccination records, screening schedules, medicine cabinet maintenance, OTC medication selection, and home environment health. The infrastructure of a health-literate household.
+- **Mind-Body** --- [Proactive Health Orientation]: The mindset shift from reactive healthcare (wait until sick) to proactive healthcare (maintain, prevent, catch early). Treating your future self as someone worth investing in.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FAD study-guide/medication-safety-reference], [FAD try-session/mental-health-check-in], [FAD try-session/build-home-first-aid-kit]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*

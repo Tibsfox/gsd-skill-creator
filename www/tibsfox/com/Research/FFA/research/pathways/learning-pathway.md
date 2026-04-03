@@ -30,6 +30,8 @@ Every fursuit, every plush, every piece of furry art starts the same way: someon
 
 4. **[12-fursuit-history-culture.md](../12-fursuit-history-culture.md)** -- The history and culture of fursuiting: from early convention mascots through the explosion of the modern fursuit scene. Understanding the culture helps you understand why people make these things and what the community values. (~25 min)
 
+5. **[try-sessions/commission-your-first-art.md](../try-sessions/commission-your-first-art.md)** -- The buyer's guide to commissioning custom furry art. How to find artists (Fur Affinity, Twitter/X, Bluesky, convention artist alleys), the step-by-step commission process (from checking availability through final delivery), pricing guide ($15 sketches to $500+ illustrations), and etiquette. Support artists -- they make this community possible. (~20 min)
+
 ### What You'll Learn
 - How to design an anthropomorphic character with a coherent reference sheet
 - Animal anatomy basics that inform believable character design

@@ -137,4 +137,12 @@ For thirty years, every call that reached the person to whom this research is de
 
 ---
 
+## Try This
+
+> **[Numbers You Should Know --- Emergency Contacts Reference](study-guides/emergency-phone-numbers.md)** --- Print it, laminate it, put it on the refrigerator. National emergency numbers (911, 988, 211, Poison Control), PNW-specific crisis lines, wildlife emergency contacts, utility companies, and a template for your household's personal emergency information. The companion reference to the dispatch system described in this chapter.
+
+> **[Create a Family Emergency Plan](try-sessions/family-emergency-plan.md)** --- The phone numbers are one component. The family emergency plan adds meeting points, communication trees, utility shutoffs, and evacuation routes.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

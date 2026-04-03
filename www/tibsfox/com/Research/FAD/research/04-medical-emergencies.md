@@ -278,3 +278,22 @@ Every one of these decisions has a correct answer, and every one of those correc
 That is enough. It is more than enough. It is the difference between life and death in a statistically meaningful number of cases every year.
 
 Learn the patterns. Practice the responses. Carry the tools. Be the bystander who acts.
+
+## Try This
+
+- **[FSR Try Session: Hands-Only CPR](../../FSR/research/try-sessions/hands-only-cpr.md)** --- Cardiac arrest is the most time-critical emergency in this document. Hands-only CPR doubles or triples survival. Learn it in ten minutes.
+- **[Study Guide: Vital Signs Reference](study-guides/vital-signs-reference.md)** --- Pulse, breathing, blood pressure, temperature, and skin assessment. The numbers that tell you whether the body is compensating or failing.
+- **[Study Guide: Medication Safety Reference](study-guides/medication-safety-reference.md)** --- The cardiac aspirin protocol, epinephrine for anaphylaxis, naloxone for opioid overdose. Know the medications that buy time in the emergencies described here.
+- **[Try Session: Practice the Recovery Position](try-sessions/learn-recovery-position.md)** --- For the unconscious breathing patient after a seizure, after naloxone administration, or after any medical emergency where they are unconscious but breathing.
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Cardiovascular Physiology, Pharmacology]: How the heart works as a pump, how atherosclerosis develops, why oxygen deprivation kills tissue. The pharmacology of aspirin (platelet aggregation inhibition), epinephrine (adrenergic receptor agonism), and naloxone (competitive opioid receptor antagonism) transforms memorized actions into understood mechanisms.
+- **Mind-Body** --- [Emergency Response Under Crisis]: Medical emergencies produce extreme stress. The fear of "doing something wrong" paralyzes bystanders into doing nothing, which is always worse. Practiced protocols and procedural memory are the antidote to paralysis.
+- **Learning** --- [Decision Trees]: FAST for stroke. The sugar rule for diabetes. Check-call-care. These are algorithms that do the thinking when thinking is hardest.
+
+---
+
+*This document is part of the FAD (First Aid and Health Studies) research series within the PNW Research Project. Cross-references: [FSR try-session/hands-only-cpr], [FAD study-guide/vital-signs-reference], [FAD study-guide/medication-safety-reference], [FAD try-session/recovery-position]. See the [FAD Learning Pathway](pathways/learning-pathway.md) for the complete sequence.*
