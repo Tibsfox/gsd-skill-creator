@@ -1,50 +1,50 @@
 {
   "updated": "2026-04-03T09:00:00Z",
-  "source": "sweep-v1.3.3.1",
+  "source": "sweep-v1.3.12",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST \u2014 MET +1d 10:50 \u2014 Integrity ~80,000 mi from Earth, outbound. Flight Day 3: trajectory correction #1 (Hansen preps), CPR demo in microgravity, Koch tests emergency DSN comms, crew rehearses lunar flyby observation choreography. Session 4 sweep cadence resumed.",
+    "status": "TRANSLUNAR COAST \u2014 MET +1d 21:00 \u2014 Integrity ~120,000 mi from Earth, outbound. FD3: Crew woke from 8hr rest, established deep-space ops rhythm. Exercise equipment tested. CPR demo in zero-g complete. Medical kit checkout done. Trajectory correction #1 burn imminent (Hansen preps, fires after midday meal). Moon photography + lunar observation practice for FD6 flyby. Session 4: 10 research videos, crew-life page, CWC NASA food, Fox Bar concept, www-tibsfox repo.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
   "weather": {
     "kpae": {
-      "temp_c": 5.0,
-      "dewpoint_c": 2.2,
-      "wind_dir": 0,
-      "wind_kmh": 0,
+      "temp_c": 14.0,
+      "dewpoint_c": 0.5,
+      "wind_dir": 320,
+      "wind_kmh": 11.1,
       "gust_kmh": 0,
-      "humidity": 80,
-      "pressure_hpa": 1002.5,
+      "humidity": 33,
+      "pressure_hpa": 1004.5,
       "visibility_m": 16093,
-      "conditions": "CLR",
-      "spread_c": 2.8,
+      "conditions": "FEW080",
+      "spread_c": 13.5,
       "max_today": 14.5,
       "min_today": 4.2,
       "pres_tend": 0.5
     },
     "ksea": {
-      "temp_c": 4.5,
-      "dewpoint_c": 2.0,
-      "wind_dir": 0,
-      "wind_kmh": 0,
-      "humidity": 82,
-      "pressure_hpa": 1003.0,
-      "conditions": "CLR",
+      "temp_c": 13.0,
+      "dewpoint_c": 1.0,
+      "wind_dir": 330,
+      "wind_kmh": 9.3,
+      "humidity": 35,
+      "pressure_hpa": 1005.0,
+      "conditions": "FEW070",
       "max_today": 14.0,
       "min_today": 4.0
     },
     "kxmr": {
-      "temp_c": 19.0,
-      "dewpoint_c": 17.0,
-      "wind_dir": 0,
-      "wind_kmh": 3.7,
-      "humidity": 88,
-      "pressure_hpa": 1019.5,
-      "conditions": "FEW200"
+      "temp_c": 28.5,
+      "dewpoint_c": 17.5,
+      "wind_dir": 320,
+      "wind_kmh": 14.8,
+      "humidity": 52,
+      "pressure_hpa": 1018.0,
+      "conditions": "FEW090"
     }
   },
   "tides_everett": [
@@ -112,6 +112,10 @@
     "tdrs_issue": "Brief loss of two-way comms post-orbit insertion. Traced to ground TDRS configuration. Resolved, no mission impact."
   },
   "announcements": [
+    {
+      "time": "2026-04-03T19:58:00Z",
+      "text": "v1.3.12: MET+1d21:00 noon PDT. Backfill hours 7-12. FD3 deep-space ops: crew awake from 8hr rest, exercise tested, CPR demo complete, trajectory correction #1 imminent. KPAE warming to 14.0°C NW 6 FEW080, high pressure ridge. Session 4: 10/11 research videos processed, crew-life page, CWC NASA food standards, Fox Bar concept, www-tibsfox repo (5,173 files). Integrity ~120K mi outbound."
+    },
     {
       "time": "2026-04-03T09:24:00Z",
       "text": "v1.3.2: MET+1d10:50 2am PDT. Session 4 begins. Sweep cadence resumed — Day 4 weather data added, regex patterns fixed for v1.2+. FD3 underway: trajectory correction #1, CPR demo, DSN test. KPAE 5.0°C calm CLR, high pressure ridge building. Integrity ~80K mi outbound."
