@@ -273,6 +273,19 @@ Convention badge painting is live color mixing under pressure. The artist receiv
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [color-composition]: This entire chapter is the expanded curriculum for the color-composition concept. Value, hue, saturation, temperature, color harmonies, and the Zorn palette are all compositional tools that the painter uses to organize visual information and guide the viewer's eye.
+- **Art** — [seeing-drawing]: Color perception is trained, not innate. Learning to see value relationships, color temperature shifts, and simultaneous contrast requires the same disciplined observation that seeing-drawing develops. Color theory is seeing-drawing applied to the chromatic dimension.
+- **Science** — [physics/optics]: Color is light. The visible spectrum, additive and subtractive mixing, metamerism, and the behavior of pigments under different light sources are all physics topics. Understanding the optics of color deepens the painter's ability to predict and control color behavior.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): The Zorn palette version of this session puts color theory into practice — four colors, temperature-based mixing, the full range of warm and cool tones from the simplest possible palette.
+- **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): Strip color away entirely and focus on value — the foundation that all color relationships are built on. Thirty days of grayscale study will transform your color painting.
+
+---
+
 ## 10. Sources
 
 - Albers, J. (1963). *Interaction of Color*. Yale University Press.

@@ -351,5 +351,12 @@ For Chairo Charf Charf, who is connected to everything.
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Scientific Communication, Evaluating Sources]: This bibliography and cross-reference document models how scientific knowledge is organized, cited, and interconnected. Understanding how to navigate a structured bibliography and follow cross-references between sources is a core scientific literacy skill.
+- **Nature Studies** --- [Citizen Science]: The cross-references to other PNW research projects (AVI, MAM, ECO) demonstrate how individual species studies connect to broader ecological understanding, mirroring how citizen science observations aggregate into landscape-level knowledge.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

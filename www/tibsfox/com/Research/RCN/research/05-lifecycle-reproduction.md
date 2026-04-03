@@ -257,5 +257,12 @@ For Chairo Charf Charf, and for every kit that has ever followed a mother throug
 
 ---
 
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds]: Raccoon reproductive biology --- mating behavior, gestation, kit development, maternal care, juvenile dispersal --- provides a complete mammalian life cycle case study for the Animals & Birds wing.
+- **Science** --- [Anatomy & Physiology, Data Collection]: Developmental milestones (eye opening, weaning, independence), survival statistics, and population dynamics demonstrate how quantitative life history data is collected and used to understand animal populations.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

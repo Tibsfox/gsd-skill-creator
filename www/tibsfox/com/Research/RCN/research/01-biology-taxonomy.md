@@ -270,5 +270,12 @@ Understanding the biology of raccoons is not merely an academic exercise. It is 
 
 ---
 
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds, Ecology & Habitats]: Raccoon taxonomy, physical morphology, and subspecies diversity develop foundational mammalogy skills in the Animals & Birds wing. Understanding how 22 subspecies reflect geographic and environmental variation connects to biogeography and habitat concepts in Ecology & Habitats.
+- **Science** --- [Anatomy & Physiology]: Skeletal adaptations (plantigrade locomotion, rotating ankles, dexterous forepaws), dental morphology (modified carnassials for omnivory), and sensory systems (tactile forepaws, night vision) provide concrete examples of structure-function relationships and evolutionary adaptation.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

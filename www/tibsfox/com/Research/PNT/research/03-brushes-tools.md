@@ -4,7 +4,7 @@
 
 Research module PNT-03: a comprehensive guide to painting tools, from brush anatomy and natural versus synthetic hair to palette knives, easels, airbrush equipment, and the direct connection between airbrush tools and fursuit fabrication.
 
-**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-04] Surfaces, [PNT-05] Color Theory, [FFA-04] Fursuit Fabrication, [FFA-10] Fursuit Makers Index.
+**Cross-references:** [PNT-01] History, [PNT-02] Mediums, [PNT-04] Surfaces, [PNT-05] Color Theory, [FFA-04] Fursuit Fabrication, [FFA-10] Fursuit Makers Index, [techniques/digital-painting-basics] Digital Painting (stylus tablets and pen displays as painting tools), [techniques/gouache-basics] Gouache (brush selection for opaque watercolor).
 
 ---
 
@@ -254,6 +254,18 @@ For the beginning painter, here is a starting tool kit by medium:
 **Watercolor**: 3-4 round brushes -- a Kolinsky sable or premium synthetic in sizes 4, 8, and 12 (Rosemary & Co. Series 33 for Kolinsky at excellent value; Princeton Neptune for synthetic), plus a large squirrel or synthetic mop for washes (Raphael Petit Gris 803 size 4, or Princeton Aqua Elite mop). A ceramic palette with wells and mixing area (the John Pike palette is the classic, or a white porcelain butcher tray for larger mixing). Two water containers (one for rinsing, one for clean water). A spray bottle. Paper towels. Total startup cost: approximately $70-150 depending on brush choice.
 
 Start with these. Add tools as specific needs arise. A painter with three good brushes, a palette, and quality paint can make any painting that has ever been made. Tools enable; they do not create. The creation lives in your eye, your hand, and your intent.
+
+---
+
+## College of Knowledge Connections
+
+- **Art** — [materials-making]: Brushes, knives, and airbrush equipment are the tools that translate intent into marks. Understanding tool construction — hair types, ferrule materials, handle ergonomics — is materials knowledge applied to the act of making. The relationship between tool quality and mark quality is direct and measurable.
+- **Trades** — [tools-safety]: Tool maintenance in painting parallels tool maintenance in trades. A brush that is cleaned and stored properly lasts years; one that is neglected is ruined in a session. The discipline of caring for tools is a cross-disciplinary skill that connects the painter's studio to the woodworker's shop.
+- **Materials** — [fabrication-processes]: Brush manufacturing is a fabrication process — selecting raw materials (hair, wood, metal), assembling components (handle, ferrule, hair bundle), and finishing to specification. Understanding how tools are made helps you understand why quality varies and what to look for.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Use the three-brush setup recommended in this chapter — large flat for block-in, medium flat for midtones, small round for edges — and notice how each brush makes a different kind of mark.
 
 ---
 

@@ -185,6 +185,20 @@ Construction tip for PNW outdoor furniture: western red cedar is the default spe
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [creative-process]: Furniture making follows the creative process from concept through design, material selection, construction, finishing, and delivery. Each stage requires different skills and different modes of thinking — conceptual at the start, analytical during design, physical during construction, aesthetic during finishing. The furniture maker cycles through the creative process in every project.
+- **Art** — [craft as expression]: Studio furniture occupies the space between craft and fine art. Nakashima's slabs, Krenov's cabinets, and Maloof's rockers are in museum collections alongside paintings and sculpture. Furniture can be purely functional, purely sculptural, or — at its best — both.
+- **Trades** — [woodworking]: Furniture making is the capstone of the woodworking curriculum. It integrates every skill — joinery, finishing, wood selection, tool use, design — into a single discipline. A completed piece of furniture is the proof that all the foundational skills work together.
+- **Materials** — [design-manufacturing]: Furniture design involves the intersection of aesthetics, ergonomics, material properties, and manufacturing constraints. A chair must support weight, fit a human body, look beautiful, and be buildable with available tools and materials. This multi-constraint design problem is the materials department's design-manufacturing concept in action.
+
+## Try This
+
+- **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): Dovetails are the cornerstone joint of fine furniture — drawers, boxes, cases. Master the joint and you are ready to build furniture that uses it.
+- **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): Fine furniture demands fine edges. The final fitting of a tenon, the paring of a dovetail, the trimming of a hinge mortise — all require a chisel that is truly sharp.
+
+---
+
 ## Sources and References
 
 - Nakashima, George. "The Soul of a Tree." Kodansha, 1981.

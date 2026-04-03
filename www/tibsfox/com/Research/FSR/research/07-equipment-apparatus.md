@@ -135,4 +135,12 @@ For the person who served thirty years, the equipment evolved across their caree
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Materials Science and Engineering]: SCBA, turnout gear, cardiac monitors, extrication tools, and apparatus design are all products of materials science and mechanical engineering. The evolution from leather buckets to composite-material SCBA demonstrates how engineering advances directly enable life-saving capability.
+- **Trades** --- [Mechanical Systems]: Apparatus maintenance, pump operations, hydraulic tool operation, and equipment repair are skilled trades embedded within the fire service. The ability to maintain and troubleshoot complex mechanical systems under field conditions is a core competency.
+- **Science** --- [Toxicology and Health]: The emerging understanding of PFAS in turnout gear, carcinogenic exposure on the fireground, and diesel exhaust in stations connects equipment decisions to occupational health science.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

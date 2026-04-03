@@ -355,3 +355,11 @@ The American Class tells the story of American poultry in microcosm. From the ub
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Damerow (2012), "The Chicken Encyclopedia"; Dohner (2001), "The Encyclopedia of Historic and Endangered Livestock and Poultry Breeds."*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds]: Breed identification through physical characteristics (comb type, plumage, body shape, leg color) develops the same morphological observation skills used in field ornithology and species identification.
+- **Science** --- [Genetics, Selective Breeding]: Each breed's origin story is a case study in artificial selection --- how deliberate breeding decisions over generations produce predictable phenotypic outcomes. The conservation status of rare breeds connects to genetic diversity and population biology.
+- **Home Economics** --- [Food Production, Self-Sufficiency]: The dual-purpose American breeds were developed specifically for practical homestead use, making this document directly relevant to food self-sufficiency and small-scale agricultural planning.

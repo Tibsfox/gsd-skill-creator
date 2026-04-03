@@ -155,4 +155,12 @@ For the person who served thirty years in this region, the mutual aid network wa
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Geology and Natural Hazards]: PNW emergency services operate in a region defined by its geological hazards --- the Cascadia Subduction Zone, volcanic activity (Rainier, St. Helens, Baker), lahar zones, and tsunami inundation areas. Understanding the science behind these hazards is essential to understanding the preparedness posture of PNW departments.
+- **Geography** --- [Regional Systems]: The distribution of fire stations, EMS units, and mutual aid agreements across the PNW reflects the region's geography --- urban density in the I-5 corridor, vast rural areas in eastern Washington and Oregon, island communities in the San Juans, and remote mountain terrain that shapes response times and resource positioning.
+- **Learning** --- [Regional Innovation]: The PNW has produced some of the most innovative emergency service models in the country --- Medic One, CAHOOTS, Portland Street Response, Washington's statewide mutual aid system. Understanding why innovation clusters in certain regions connects to the study of institutional learning environments.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call in the Pacific Northwest.*

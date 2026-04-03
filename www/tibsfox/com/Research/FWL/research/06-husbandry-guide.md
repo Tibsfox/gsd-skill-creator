@@ -330,3 +330,11 @@ The backyard chicken community exists because people care about their birds. Not
 - Washington State University Extension. *Poultry Resources.* extension.wsu.edu.
 - Oregon State University Extension. *Small Farms: Poultry.* extension.oregonstate.edu.
 - The Livestock Conservancy. *Breed Comparison Chart.* livestockconservancy.org.
+
+---
+
+## College of Knowledge Connections
+
+- **Home Economics** --- [Animal Husbandry, Self-Sufficiency]: This is the most directly Home Economics-aligned document in the FWL project. Housing design, feeding schedules, health management, predator defense, and flock economics are practical life skills for anyone pursuing food self-sufficiency.
+- **Nature Studies** --- [Ecology & Habitats, Animals & Birds]: Predator management (identifying and deterring hawks, raccoons, coyotes, and weasels) requires understanding local predator ecology. Disease prevention connects to understanding pathogen-host dynamics in managed animal populations.
+- **Science** --- [Experimental Design, Data Collection]: Keeping flock records (egg production, feed consumption, health events) develops data collection and analysis skills. The husbandry guide's emphasis on observing bird behavior to diagnose health issues exercises the scientific observation skills of the Observation & Inquiry wing.

@@ -86,7 +86,7 @@ But big-leaf maple has a secret. A small percentage of trees — perhaps one in 
 
 **Spalted big-leaf maple** — colonized by fungi after the tree falls — shows the dark zone lines and color changes that make spalted wood dramatic. Big-leaf maple spalts readily and evenly, making it one of the best species for spalted turning blanks and veneer.
 
-Figured big-leaf maple is a Pacific Northwest specialty. The major figured-wood dealers — Cook Woods, Northwest Timber, Berkshire Veneer — deal heavily in PNW maple. Quilted maple guitar tops, often paired with a Sitka spruce soundboard, are a signature combination of Pacific Northwest tone woods.
+Figured big-leaf maple is a Pacific Northwest specialty. The major figured-wood dealers — Cook Woods, Northwest Timber, Berkshire Veneer — deal heavily in PNW maple. Quilted maple guitar tops, often paired with a Sitka spruce soundboard, are a signature combination of Pacific Northwest tone woods. Big-leaf maple is also the PNW's signature live-edge wood — wide slabs with quilted or spalted figure, finished in clear lacquer or water-based polyurethane, produce shelves and tables of extraordinary beauty. See [projects/live-edge-shelf] for the complete guide to sourcing, preparing, and finishing live-edge slabs.
 
 ---
 
@@ -94,7 +94,7 @@ Figured big-leaf maple is a Pacific Northwest specialty. The major figured-wood 
 
 **Oregon white oak** (*Quercus garryana*) is the only native oak of the Pacific Northwest. It is a white oak — ring-porous, hard (Janka 1,360 lbf), with excellent bending properties and natural decay resistance. It was historically used for wagon wheels, ship timbers, and cooperage (barrels). Today, it is valued for furniture and flooring. The species is increasingly scarce, as urban development has consumed much of its native oak savanna habitat.
 
-**Red alder** (*Alnus rubra*) is the most common hardwood in the Pacific Northwest. It grows aggressively in disturbed sites — clearcuts, road edges, riverbanks — and reaches harvestable size in 30 to 40 years. The wood is light (Janka 590 lbf), fine-grained, and takes stain beautifully. It is the standard material for Pacific Northwest cabinet and millwork shops. Its light color and even grain make it an excellent substrate for stained and painted finishes. Alder is also a nitrogen-fixer — its root nodules host bacteria that convert atmospheric nitrogen to plant-usable form, enriching the soil for subsequent tree generations.
+**Red alder** (*Alnus rubra*) is the most common hardwood in the Pacific Northwest. It grows aggressively in disturbed sites — clearcuts, road edges, riverbanks — and reaches harvestable size in 30 to 40 years. The wood is light (Janka 590 lbf), fine-grained, and takes stain beautifully. It is the standard material for Pacific Northwest cabinet and millwork shops. Its light color and even grain make it an excellent substrate for stained and painted finishes. Alder is also a nitrogen-fixer — its root nodules host bacteria that convert atmospheric nitrogen to plant-usable form, enriching the soil for subsequent tree generations. Red alder is also the PNW's premier spoon-carving wood — fine-grained, moderately hard, free from tree crews, and beautifully responsive to a sharp sloyd knife when green. See [projects/spoon-carving] for the complete guide.
 
 **Pacific yew** (*Taxus brevifolia*) is a small, slow-growing understory tree found throughout the PNW old-growth forests. Its wood is extremely hard (Janka 1,600 lbf), dense, and elastic — the traditional material for archery bows among Indigenous peoples. Pacific yew gained global significance in the 1960s when taxol, a compound extracted from its bark, was found to be an effective treatment for ovarian and breast cancer. The demand for bark nearly threatened the species before taxol was synthesized from other sources.
 
@@ -155,6 +155,19 @@ This is what it means to work with Pacific Northwest timber. You are working wit
 - **[FSR-02]** Fire Service — wildland fire in PNW forests; the fuel accumulation that makes these forests burn
 - **[FSR-10]** PNW Departments — the communities built from this timber and the departments that protect them
 - **[PNT-03]** Visual Art — Coast Salish, Haida, and Tlingit carving traditions; totem poles and bentwood boxes as simultaneously art and woodcraft
+
+---
+
+## College of Knowledge Connections
+
+- **Nature-Studies** — [plants-fungi]: PNW timber species are living organisms in living forests. Douglas fir, western red cedar, Sitka spruce, western hemlock, and the hardwoods (big-leaf maple, red alder, Oregon white oak) are ecological actors — they provide habitat, regulate water, cycle nutrients, and define ecosystems. Understanding these trees as organisms deepens the woodworker's relationship with the material.
+- **Nature-Studies** — [ecology-habitats]: Old-growth forests, managed plantations, urban canopy, and riparian corridors are all habitats shaped by and containing these timber species. The spotted owl controversy, the Timber Wars, and the shift toward sustainable forestry are ecological and political stories woven into the PNW timber tradition.
+- **History** — [sources-evidence]: PNW timber history is documented in sawmill records, shipping manifests, forest survey maps, labor union archives, and oral histories. The evidence of PNW timber's economic and cultural role is rich and primary-source-accessible.
+- **Trades** — [woodworking]: Knowing your regional species is the first step in material selection. A PNW woodworker who understands the properties of Douglas fir, cedar, maple, and alder can source locally, reduce transportation costs and environmental impact, and work with materials suited to the climate.
+
+## Try This
+
+- **Identify 15 PNW Woods by Sight and Touch** ([study-guides/wood-identification-guide](../study-guides/wood-identification-guide.md)): Every species discussed in this chapter is profiled in the identification guide. Build a reference collection of PNW woods and learn to tell them apart by sight, touch, weight, and smell.
 
 ---
 

@@ -242,3 +242,10 @@ This document is a map. The territory is in the breeding pen, in the hatch tray,
 ---
 
 *Sources and further reading: Hutt (1949), "Genetics of the Fowl"; Smyth (1990), "Genetics of Plumage, Skin and Eye Pigmentation in Chickens"; Carefoot (1990-2010), multiple papers on poultry color genetics; Dorshorst et al. (2011), "Genomic Structure of the Endothelin 3 Locus," Genetics; Gunnarsson et al. (2007), "The Dark Brown Plumage Color in Chickens," Genetics; Wang et al. (2013), "An EAV-HP Insertion in the SLCO1B3 Gene," PLoS Genetics; Eriksson et al. (2008), "Identification of the Yellow Skin Gene," PLoS Genetics; National Poultry Improvement Plan (NPIP) genetic resources; Punnett (1923), "Heredity in Poultry."*
+
+---
+
+## College of Knowledge Connections
+
+- **Science** --- [Genetics]: This document is a deep dive into applied genetics --- Mendelian inheritance, allelic series, epistasis, sex-linkage, polygenic traits, and modifier genes. It connects directly to every genetics concept in the Science department and provides real, tangible examples that make abstract genetic principles visible.
+- **Nature Studies** --- [Animals & Birds]: Understanding the genetic basis of plumage variation develops the ability to "read" a bird's genotype from its phenotype --- a skill that enhances both breed identification and appreciation of natural variation in wild bird plumage.

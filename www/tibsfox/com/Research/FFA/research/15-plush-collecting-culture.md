@@ -269,4 +269,12 @@ The question "why do adults sleep with stuffed animals?" implies the behavior re
 
 ---
 
+## College of Knowledge Connections
+
+- **Psychology** --- [Attachment and Comfort Objects]: The psychology of plush collecting --- transitional objects, deep pressure therapy, emotional attachment to inanimate objects, and the role of comfort items across the lifespan --- draws directly on developmental and clinical psychology. Temple Grandin's research on deep touch pressure connects plush to sensory processing science.
+- **Mind-Body** --- [Sensory Experience and Wellbeing]: The tactile experience of plush --- softness, weight, texture, warmth --- engages the somatosensory system in ways that produce measurable calming effects. The therapeutic use of weighted and textured plush in anxiety management, pediatric care, and elder care is applied mind-body science.
+- **Home Economics** --- [Collecting and Valuation]: Understanding plush market dynamics --- limited editions, retirement cycles, secondary market pricing, condition grading, and authentication --- is applied consumer economics. The Beanie Baby bubble and the Squishmallow phenomenon are case studies in collectibles economics.
+
+---
+
 *Cross-module connections: The industry history that produced the objects collected here is documented in [FFA-14]. Construction techniques that inform quality assessment are in [FFA-06]. Individual maker profiles and buying guides are in [FFA-13]. The furry cultural context referenced in Section 6 connects to [FFA-12].*
