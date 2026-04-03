@@ -158,3 +158,7 @@ For the backyard keeper who wants colored eggs, the practical implications are:
 **For the show hall:** Only true Ameraucanas and true Araucanas can be exhibited at APA-sanctioned shows. Easter Eggers and Olive Eggers have no APA standard and cannot be shown. If your goal includes exhibition, sourcing from a breed club member is essential.
 
 The blue egg gene is one of nature's improbable gifts --- a retrovirus that became a pigment, a mutation that became a breed characteristic, a South American chicken that changed egg cartons worldwide. Whether the blue arrives in a purebred Ameraucana or a feed-store Easter Egger, the egg itself is the same shade of remarkable.
+
+---
+
+*Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Ameraucana Breeders Club resources; Wang et al. (2013), "An EAV-HP Insertion in the SLCO1B3 Gene Underlies the Blue Eggshell Colour in Chickens," PLoS Genetics; Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds." See also [FWL-04] Feather Genetics, [FWL-05] Egg Science (blue egg gene), [breeds/cream-legbar] The Cream Legbar (auto-sexing blue egg breed), [guides/egg-color-rainbow] Rainbow Egg Basket.*

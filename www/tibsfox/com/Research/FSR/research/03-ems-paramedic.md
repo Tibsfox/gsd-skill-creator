@@ -135,6 +135,10 @@ For someone who ran medical calls for thirty years, the progression is visible: 
 - **[FSR-08]** Mental Health Crisis — community paramedicine as an evolution beyond the 911-response model; the revolving door's burden on EMS
 - **[FSR-09]** Responder Wellness — EMS burnout rates (highest in healthcare), the dual-role firefighter/paramedic toll
 - **[FSR-10]** PNW Departments — King County Medic One as the gold standard cardiac arrest system
+- **[FSR Guides: Becoming a Paramedic](guides/becoming-a-paramedic.md)** — the step-by-step path from EMT-Basic to Paramedic, employment options, PNW programs
+- **[FSR Guides: Becoming a Firefighter](guides/becoming-a-firefighter.md)** — the dual-role firefighter/paramedic path
+- **[FSR Case Studies: King County Medic One](case-studies/king-county-medic-one.md)** — the system that proves what paramedic excellence looks like at scale
+- **[FSR Case Studies: Station Life](case-studies/station-life.md)** — what the daily rhythm of medical calls looks like from inside the firehouse
 
 ---
 

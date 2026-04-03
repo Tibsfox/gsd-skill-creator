@@ -45,6 +45,7 @@ Raccoon-avian interactions are among the most ecologically significant and conse
 The FWL project addresses domestic poultry, and raccoons are directly relevant:
 
 - **Primary predator [FWL-06]:** Raccoons are the number-one chicken predator in many regions, making raccoon-proofing a central concern of FWL coop design and husbandry research. FWL-06 (Husbandry Guide) devotes dedicated sections to raccoon-specific predator defense, including hardware cloth specifications, latch designs, and PNW predator density data.
+- **Comprehensive predator defense [FWL guides/predator-defense-pnw]:** The FWL Predator Defense Guide profiles raccoons as the #1 PNW poultry predator, detailing attack patterns, hardware cloth requirements, two-step latch specifications, and the nightly lockup routine. Directly references RCN-02 (intelligence), RCN-04 (urban density data), and RCN deep-dives/raccoon-proofing.
 - **Latch and closure design [FWL-06]:** Raccoon dexterity as the benchmark for predator-proof latch specifications. If a raccoon can open it, the design fails. FWL-06 specifies two-step latches, carabiner clips, and padlocks as raccoon-resistant closure types.
 - **Nocturnal predation patterns [RCN-02, RCN-04]:** Raccoon activity patterns informing FWL recommendations for when coops should be secured. Automatic coop doors closing at dusk are recommended throughout FWL-06.
 - **Predator deterrence:** Effectiveness of lighting, fencing, guardian animals, and other deterrents against raccoon predation of poultry. See also the PNW-specific hawk and raccoon defense sections in FWL-06 and FWL-08.
@@ -65,9 +66,9 @@ The SPS project examines ecological relationships between paired species:
 The AWF project covers wildlife management and conservation:
 
 - **Wildlife damage management:** Raccoon conflict resolution, exclusion techniques, and the ineffectiveness of relocation.
-- **Disease surveillance:** CDV, Baylisascaris, leptospirosis monitoring in raccoon populations.
+- **Disease surveillance:** CDV, Baylisascaris, leptospirosis monitoring in raccoon populations. See also [RCN deep-dives/raccoons-and-disease] for detailed disease profiles, latrine cleanup protocols, and PNW-specific rabies risk assessment.
 - **Furbearer management:** Harvest regulations, population monitoring, and the economics of raccoon trapping.
-- **Wildlife rehabilitation:** Raccoon kit rehabilitation protocols, release criteria, and outcomes.
+- **Wildlife rehabilitation:** Raccoon kit rehabilitation protocols, release criteria, and outcomes. See also [RCN deep-dives/baby-raccoons] for the complete orphan response guide including PNW rehabilitator contacts and the 24-hour rule.
 - **Human-wildlife coexistence:** The raccoon as a model for urban wildlife coexistence research and public education.
 
 ### GDN --- Garden
