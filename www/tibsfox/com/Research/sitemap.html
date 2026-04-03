@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap — Tibsfox Research</title>
+<link rel="stylesheet" href="../brand.css">
+<style>
+body { background: #faf8f0; color: #2d3748; font-family: system-ui, -apple-system, sans-serif; }
+header { background: linear-gradient(135deg, #2a3a3a 0%, #4a5a5a 40%, #c75b3a 100%); padding: 2rem; color: #f0e4d8; border-bottom: 4px solid #c75b3a; }
+header h1 { margin: 0 0 0.3rem; font-size: 2rem; }
+header p { margin: 0; opacity: 0.85; font-size: 1rem; }
+main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+.stats-bar { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0 2rem; padding: 1rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.stat { text-align: center; flex: 1; min-width: 100px; }
+.stat-value { font-size: 1.8rem; font-weight: 700; color: #c75b3a; display: block; }
+.stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #718096; }
+
+.filter-bar { margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.filter-bar input { flex: 1; min-width: 200px; padding: 0.5rem 0.8rem; border: 1px solid #d4c8b0; border-radius: 6px; font-size: 0.9rem; background: #fff; }
+.filter-bar input:focus { border-color: #c75b3a; outline: none; }
+.cluster-btn { padding: 0.3rem 0.7rem; border: 1px solid #d4c8b0; border-radius: 4px; font-size: 0.75rem; cursor: pointer; background: #fff; color: #4a5568; transition: all 0.2s; }
+.cluster-btn:hover, .cluster-btn.active { background: #c75b3a; color: white; border-color: #c75b3a; }
+
+h2 { color: #c75b3a; border-bottom: 2px solid #e8d4b8; padding-bottom: 0.3rem; margin-top: 2rem; }
+h3 { color: #4a5568; margin-top: 1.5rem; }
+
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.project-card { background: linear-gradient(135deg, #fff 0%, #faf8f0 100%); border: 1px solid #e8d4b8; border-left: 4px solid #c75b3a; border-radius: 8px; padding: 1rem 1.2rem; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+.project-card:hover { box-shadow: 0 4px 16px rgba(199, 91, 58, 0.15); transform: translateY(-1px); text-decoration: none; }
+.project-card .code { font-weight: 700; color: #c75b3a; font-size: 0.85rem; font-family: monospace; }
+.project-card .title { font-weight: 600; color: #2d3748; margin: 0.2rem 0; font-size: 1rem; }
+.project-card .meta { font-size: 0.78rem; color: #718096; }
+.project-card .cluster-tag { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.68rem; font-weight: 600; margin-left: 0.3rem; }
+
+/* Cluster colors */
+.cluster-ecology { background: #c6f6d5; color: #276749; border-left-color: #38a169; }
+.cluster-electronics { background: #bee3f8; color: #2b6cb0; border-left-color: #4299e1; }
+.cluster-infrastructure { background: #e2e8f0; color: #4a5568; border-left-color: #718096; }
+.cluster-energy { background: #fefcbf; color: #975a16; border-left-color: #d69e2e; }
+.cluster-creative { background: #fed7e2; color: #97266d; border-left-color: #ed64a6; }
+.cluster-business { background: #feebc8; color: #c05621; border-left-color: #ed8936; }
+.cluster-vision { background: #e9d8fd; color: #553c9a; border-left-color: #9f7aea; }
+.cluster-broadcasting { background: #fefcbf; color: #744210; border-left-color: #d69e2e; }
+.cluster-science { background: #c4f1f9; color: #086f83; border-left-color: #0bc5ea; }
+.cluster-music { background: #fed7d7; color: #9b2c2c; border-left-color: #fc8181; }
+.cluster-space { background: #e2e8f0; color: #1a365d; border-left-color: #4299e1; }
+.cluster-ai { background: #c6f6d5; color: #22543d; border-left-color: #48bb78; }
+.cluster-graphics { background: #e9d8fd; color: #44337a; border-left-color: #b794f4; }
+
+.sub-page-list { margin: 0.3rem 0 0 1rem; font-size: 0.78rem; color: #718096; }
+.sub-page-list a { color: #718096; text-decoration: none; }
+.sub-page-list a:hover { color: #c75b3a; }
+
+footer { margin-top: 3rem; padding: 1.5rem; text-align: center; border-top: 2px solid #e8d4b8; color: #718096; font-size: 0.85rem; }
+
+@media (max-width: 640px) { .project-grid { grid-template-columns: 1fr; } .stats-bar { flex-direction: column; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Tibsfox Research — Sitemap</h1>
+  <p>Complete index of all research projects, documents, and learning resources</p>
+</header>
+
+<main>
+<div class="stats-bar" id="stats">
+  <div class="stat"><span class="stat-value" id="stat-projects">—</span><span class="stat-label">Projects</span></div>
+  <div class="stat"><span class="stat-value" id="stat-docs">—</span><span class="stat-label">Documents</span></div>
+  <div class="stat"><span class="stat-value" id="stat-words">—</span><span class="stat-label">Words</span></div>
+  <div class="stat"><span class="stat-value" id="stat-clusters">13</span><span class="stat-label">Rosetta Clusters</span></div>
+</div>
+
+<div class="filter-bar">
+  <input type="text" id="search" placeholder="Search projects by code, title, or topic...">
+  <button class="cluster-btn" data-cluster="all" onclick="filterCluster('all')">All</button>
+  <button class="cluster-btn" data-cluster="ecology" onclick="filterCluster('ecology')">Ecology</button>
+  <button class="cluster-btn" data-cluster="creative" onclick="filterCluster('creative')">Creative</button>
+  <button class="cluster-btn" data-cluster="music" onclick="filterCluster('music')">Music</button>
+  <button class="cluster-btn" data-cluster="infrastructure" onclick="filterCluster('infrastructure')">Infra</button>
+  <button class="cluster-btn" data-cluster="broadcasting" onclick="filterCluster('broadcasting')">Broadcasting</button>
+  <button class="cluster-btn" data-cluster="science" onclick="filterCluster('science')">Science</button>
+  <button class="cluster-btn" data-cluster="space" onclick="filterCluster('space')">Space</button>
+  <button class="cluster-btn" data-cluster="electronics" onclick="filterCluster('electronics')">Electronics</button>
+  <button class="cluster-btn" data-cluster="business" onclick="filterCluster('business')">Business</button>
+  <button class="cluster-btn" data-cluster="energy" onclick="filterCluster('energy')">Energy</button>
+  <button class="cluster-btn" data-cluster="ai" onclick="filterCluster('ai')">AI</button>
+  <button class="cluster-btn" data-cluster="graphics" onclick="filterCluster('graphics')">Graphics</button>
+  <button class="cluster-btn" data-cluster="vision" onclick="filterCluster('vision')">Vision</button>
+</div>
+
+<div id="project-list"></div>
+
+<h2>Special Pages</h2>
+<div class="project-grid">
+  <a href="getting-started.html" class="project-card"><span class="code">GUIDE</span><div class="title">Getting Started</div><div class="meta">Quick start guide to the research series</div></a>
+  <a href="advanced-guide.html" class="project-card"><span class="code">GUIDE</span><div class="title">Advanced Guide</div><div class="meta">Deep integration and navigation patterns</div></a>
+  <a href="sc-learn.html" class="project-card"><span class="code">LEARN</span><div class="title">SC:Learn Pipeline</div><div class="meta">Skill-creator learning pathways</div></a>
+  <a href="constellation.html" class="project-card"><span class="code">VIS</span><div class="title">Constellation Map</div><div class="meta">Interactive force-directed research graph (337 nodes)</div></a>
+  <a href="forest/" class="project-card"><span class="code">SIM</span><div class="title">PNW Forest Simulation</div><div class="meta">L-system trees, real weather, tree physiology engine (2,121 lines)</div></a>
+  <a href="learning-paths/index.md" class="project-card"><span class="code">PATH</span><div class="title">Learning Paths</div><div class="meta">Cross-project structured learning journeys</div></a>
+  <a href="llms.txt" class="project-card"><span class="code">AI</span><div class="title">llms.txt</div><div class="meta">AI agent navigation file</div></a>
+</div>
+
+</main>
+
+<footer>
+  <p>Tibsfox Research Sitemap · Auto-generated · <span id="gen-date"></span></p>
+  <p>Pacific Northwest bioregion mapping · 190+ projects · 13 Rosetta clusters</p>
+</footer>
+
+<script>
+// Project data — loaded from series.js or inline
+var CLUSTERS = {
+  ecology: ['COL','CAS','ECO','GDN','AVI','MAM','AWF','SAL','CRV','PLT','AGR','LFR','PPM','BHM','SSM','CDS','SFC','MWC','FWL','RCN','FAD'],
+  electronics: ['SHE','LED','T55','EMG','BPS','PSS','SNL','HFR','HFE','FEC'],
+  infrastructure: ['SYS','CMH','GSD2','MPC','VAV','OCN','K8S','MCM','PMG','ACE','MCF','MCS','STE','WPH','MRW','GPO','GPG','PIN','SRD','MDS','SCR','DHP','DNS','TCP','PNP','RFC','ENB'],
+  energy: ['THE','HGE','NND'],
+  creative: ['FFA','ARC','TIBS','STA','BRC','DAA','HEN','ANM','INP','MTB','APR','EAZ','NWZ','KFU','CWC','PNT','WDC','FSR'],
+  business: ['ACC','WSB','BCM','BLA','FCC'],
+  vision: ['ROF','SPA','NWC','SMF','WCN','OTM'],
+  broadcasting: ['RBH','KPZ','KSM','KUB','WLF','C89','MIX','SGL','CBC','IBC','SVB','DFQ','AMR','TVH','ALV','SNX','LNT','CCT','CNA'],
+  science: ['BHK','LGW','SET','SGM','BNY','ABM','CHS'],
+  music: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'],
+  space: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'],
+  ai: ['SST','CFU','LLM','AIH','AAR','FLT'],
+  graphics: ['NEH','VKD','VKS','BLN'],
+};
+
+var codeToCluster = {};
+for (var c in CLUSTERS) { CLUSTERS[c].forEach(function(code) { codeToCluster[code] = c; }); }
+
+// Scan for projects by fetching index pages
+// For now, use a static list generated at build time
+var activeFilter = 'all';
+
+function scanProjects() {
+  // Fetch the series.js data or use the directory listing approach
+  // For static generation, we embed the project list
+  var container = document.getElementById('project-list');
+
+  // Fetch all project directories dynamically
+  fetch('series.js')
+    .then(function(r) { return r.text(); })
+    .then(function(text) {
+      // Parse series.js for project codes
+      var match = text.match(/SERIES_DATA\s*=\s*(\[[\s\S]*?\]);/);
+      if (!match) { container.innerHTML = '<p>Loading project data...</p>'; return; }
+      try {
+        var data = JSON.parse(match[1].replace(/'/g, '"'));
+        renderProjects(data);
+      } catch(e) {
+        container.innerHTML = '<p>Error parsing project data: ' + e.message + '</p>';
+      }
+    })
+    .catch(function() {
+      // Fallback: render what we know from clusters
+      var allCodes = [];
+      for (var c in CLUSTERS) { allCodes = allCodes.concat(CLUSTERS[c]); }
+      allCodes.sort();
+      var data = allCodes.map(function(code) { return { code: code, title: code, docs: '?', words: '?' }; });
+      renderProjects(data);
+    });
+}
+
+function renderProjects(data) {
+  var container = document.getElementById('project-list');
+  var html = '<div class="project-grid" id="grid">';
+  var totalProjects = 0;
+
+  // Group by cluster
+  var byCluster = {};
+  for (var c in CLUSTERS) { byCluster[c] = []; }
+  byCluster['uncategorized'] = [];
+
+  data.forEach(function(p) {
+    var code = p.code || p.id || '';
+    var cluster = codeToCluster[code] || 'uncategorized';
+    byCluster[cluster].push(p);
+    totalProjects++;
+  });
+
+  // Render all as flat grid (filter handles grouping)
+  data.sort(function(a, b) { return (a.code || '').localeCompare(b.code || ''); });
+
+  data.forEach(function(p) {
+    var code = p.code || p.id || '';
+    var title = p.title || p.name || code;
+    var cluster = codeToCluster[code] || '';
+    var clusterClass = cluster ? 'cluster-' + cluster : '';
+
+    html += '<a href="' + code + '/" class="project-card ' + clusterClass + '" data-code="' + code + '" data-cluster="' + cluster + '" data-title="' + title.toLowerCase() + '">';
+    html += '<span class="code">' + code + '</span>';
+    if (cluster) { html += '<span class="cluster-tag ' + clusterClass + '">' + cluster + '</span>'; }
+    html += '<div class="title">' + title + '</div>';
+    html += '</a>';
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  document.getElementById('stat-projects').textContent = totalProjects;
+  document.getElementById('stat-docs').textContent = '2,300+';
+  document.getElementById('stat-words').textContent = '7.5M';
+  document.getElementById('gen-date').textContent = new Date().toISOString().split('T')[0];
+}
+
+function filterCluster(cluster) {
+  activeFilter = cluster;
+  document.querySelectorAll('.cluster-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.cluster === cluster);
+  });
+  applyFilters();
+}
+
+function applyFilters() {
+  var query = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.project-card[data-code]').forEach(function(card) {
+    var matchCluster = activeFilter === 'all' || card.dataset.cluster === activeFilter;
+    var matchSearch = !query || card.dataset.code.toLowerCase().indexOf(query) !== -1 || card.dataset.title.indexOf(query) !== -1;
+    card.style.display = (matchCluster && matchSearch) ? '' : 'none';
+  });
+}
+
+document.getElementById('search').addEventListener('input', applyFilters);
+
+scanProjects();
+</script>
+</body>
+</html>
