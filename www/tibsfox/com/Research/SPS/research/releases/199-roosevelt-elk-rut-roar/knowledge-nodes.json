@@ -1,0 +1,111 @@
+{
+  "degree": 199,
+  "species": "Roosevelt Elk",
+  "scientific_name": "Cervus canadensis roosevelti",
+  "slug": "199-roosevelt-elk-rut-roar",
+  "sound_type": "rut roar -- deep sustained bellowing at 80-400 Hz. Combat vocalization during antler contests. Raw, guttural, primal. E=7",
+  "energy": 7,
+  "ecosystem": "River valley, old-growth forest, meadow edges. Fall rut September-October. Peak combat phase.",
+  "season": "Fall rut September-October. Peak intensity: direct bull-to-bull competition. Antler combat.",
+  "family": "Cervidae (fifth entry -- deer 195-196, elk bugle 197, elk cow 198)",
+  "order": "Artiodactyla",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Roosevelt Elk",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.86,
+    "lon": -123.93,
+    "description": "Roosevelt Elk on the Olympic Peninsula and Cascades. River valleys and meadow edges during fall rut."
+  },
+  "taxonomy_note": {
+    "description": "Third Roosevelt Elk entry. Fifth Cervidae. Elk trio completes (197 bugle, 198 cow call, 199 rut roar). E=7, E=5, E=7 symmetry.",
+    "current_family": "Cervidae (fifth entry)",
+    "new_family": false,
+    "family_count_in_engine": "Cervidae: Deer Fawn (195), Deer Buck (196), Elk Bugle (197), Elk Cow (198), Elk Rut Roar (199).",
+    "name_etymology": "Same as 197-198. Cervus canadensis roosevelti.",
+    "genus_note": "Cervus -- true deer. Elk/wapiti.",
+    "order_note": "Artiodactyla. Fifth artiodactyl entry.",
+    "family_position": "Cervidae: fifth entry. Elk trio complete.",
+    "class_note": "Class Mammalia. Bull: 300-500 kg. Peak physical condition during rut."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "80-400 Hz. Deepest part of elk vocal range.",
+    "peak_energy_band_hz": "100-250 Hz (roar peak).",
+    "song_frequency_hz": "Rut roar: 80-400 Hz. Antler clash transient: 1,000-3,000 Hz.",
+    "song_duration_s": "Roar: 3-8 sec sustained. Combat: 30 sec to 30 min total.",
+    "note_structure": "Sustained bellowing. Less structured than bugle. Raw exhalation.",
+    "note_types": "Rut roar (combat, deep), post-combat roar (victory/exhaustion), combat grunts.",
+    "phrase_structure": "Sustained roar during close-range confrontation. Repeated during antler combat.",
+    "timbre": "Deep, raw, guttural, primal. Chest-resonant. Forced exhalation of aggression.",
+    "amplitude": "E=7. One of the most physically intense mammalian vocalizations in PNW. Close-range. Sustained.",
+    "tempo": "Roars during combat are continuous/overlapping. Post-combat roar is single sustained.",
+    "context": "Fall rut peak (October). Direct bull-to-bull challenge. Antler combat. Harem defense.",
+    "regional_variation": "Minimal. Roosevelt Elk rut roar structurally similar across populations.",
+    "key_property": "RUT ROAR. Deep sustained bellowing. Combat vocalization. ELK TRIO COMPLETE. E=7. E=13 pair with Modest Mouse. v1.49.340."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Adult bull in rut: dark brown, massive antlers (up to 120 cm span), thickened neck, dark mane. Mud-caked from wallowing. Battle scars.",
+    "diagnostic_mark": "Massive antlers. Thickened neck. Mud-stained. Aggressive posture. Often with harem of 10-30 cows nearby.",
+    "seasonal_variation": "Peak rut condition: maximum neck thickness, fully hardened antlers, aggressive posture. Post-rut: exhausted, weight loss up to 20%.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Adult bull in rut: 300-500 kg (700-1,100 lbs). Maximum physical condition. Antlers fully hardened. Neck thickened for combat.",
+    "diagnostic_mark": "Massive body. Large antlers. Aggressive behavior. Roaring. Often sparring with rival or guarding harem.",
+    "field_id": "Very large brown ungulate with massive antlers, roaring deeply. In meadows or river valleys September-October. Often with group of cows. Do not approach rutting bulls -- they are aggressive and dangerous."
+  },
+  "nodes": [
+    {
+      "id": "rut-roar-combat",
+      "type": "milestone",
+      "title": "Rut Roar -- Combat Vocalization",
+      "description": "Deep sustained bellowing at 80-400 Hz. 3-8 seconds. Close-range direct challenge. The vocal expression of physical contest between bulls.",
+      "connections": ["antler-combat", "elk-trio-complete", "harem-dynamics"]
+    },
+    {
+      "id": "antler-combat",
+      "type": "concept",
+      "title": "Antler Combat Sequence",
+      "description": "Bugle (long-range) to parallel walk (assessment) to roar (challenge) to antler lock (combat). 30 seconds to 30 minutes. Injuries possible.",
+      "connections": ["rut-roar-combat", "harem-dynamics"]
+    },
+    {
+      "id": "elk-trio-complete",
+      "type": "concept",
+      "title": "Elk Trio Complete -- E=7, E=5, E=7",
+      "description": "Symmetrical trio across 197-199. Display (bugle), connection (cow call), combat (rut roar). Full vocal repertoire. Three consecutive degrees.",
+      "connections": ["rut-roar-combat"]
+    },
+    {
+      "id": "harem-dynamics",
+      "type": "concept",
+      "title": "Harem Dynamics",
+      "description": "Winner controls 10-30 cows. Reproductive access. Natural selection mechanism. The rut roar and combat as biological imperative.",
+      "connections": ["rut-roar-combat", "antler-combat"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-197",
+      "species": "Roosevelt Elk Bugle",
+      "relationship": "ELK TRIO! Bugle (E=7, display) vs. rut roar (E=7, combat). Both maximum energy, different functions."
+    },
+    {
+      "target": "SPS-198",
+      "species": "Roosevelt Elk Cow Call",
+      "relationship": "ELK TRIO! Cow call (E=5) is the essential middle between two E=7 peaks."
+    },
+    {
+      "target": "SPS-196",
+      "species": "Black-tailed Deer Buck Grunt",
+      "relationship": "CERVIDAE ESCALATION! Deer buck grunt (E=4) to elk rut roar (E=7). Same function, vastly different scale."
+    },
+    {
+      "target": "S36-199",
+      "artist": "Modest Mouse",
+      "relationship": "RESTLESS POWER! Modest Mouse (E=6) + rut roar (E=7). E=13 combined. Highest pair energy."
+    }
+  ]
+}
