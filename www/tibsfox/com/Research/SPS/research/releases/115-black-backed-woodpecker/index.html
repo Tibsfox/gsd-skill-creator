@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 115&deg; &mdash; Black-backed Woodpecker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3E2723, #4E342E);
+      color: #BCAAA4;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 24px rgba(62, 39, 35, 0.6);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Fire card */
+    .fire-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 20%, #E64A19 40%, #FF5722 60%, #FF6E40 80%, #FF9E80 100%);
+      border: 3px solid #BF360C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+      box-shadow: 0 0 24px rgba(191, 54, 12, 0.4);
+    }
+    .fire-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFECB3;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .fire-card p { color: #FBE9E7; }
+    .fire-card strong { color: #FFECB3; }
+
+    /* Record card */
+    .record-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 30%, #5D4037 60%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .record-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .record-card p { color: #EFEBE9; }
+    .record-card strong { color: #BCAAA4; }
+
+    /* Three-toed card */
+    .threetoe-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .threetoe-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .threetoe-card p { color: #E8F5E9; }
+    .threetoe-card strong { color: #C8E6C9; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.fire { background: #BF360C; }
+    .theory-icon.record { background: #3E2723; }
+    .theory-icon.threetoe { background: #1B5E20; }
+    .theory-icon.rattle { background: #E65100; }
+    .theory-icon.picidae { background: #4E342E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FFEBEE; color: #B71C1C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">115&deg;</div>
+      <div class="release-title-block">
+        <h2>Black-backed Woodpecker</h2>
+        <div class="scientific"><em>Picoides arcticus</em> (Picidae) &mdash; 9th consecutive Picidae &mdash; ALL-TIME FAMILY RECORD &mdash; STREAK CLOSES</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loud rattle call + unique drum &mdash; <strong>THE FIRE GHOST.</strong> 9th consecutive Picidae (107&ndash;115) &mdash; surpasses the Sciuridae octet to set the <strong>ALL-TIME FAMILY RECORD</strong>. The Picidae streak <strong>CLOSES</strong>. Second fire-specialist (after Lewis&rsquo;s at 112). Three toes (shared with Three-toed WP at 114). <strong>Obligate fire-follower</strong> &mdash; requires burned forest. E=5.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Record Card -->
+        <div class="record-card">
+          <h3>9th Consecutive Picidae &mdash; ALL-TIME FAMILY RECORD &mdash; Streak Closes</h3>
+          <p>
+            <strong>Nine consecutive Picidae</strong> (degrees 107&ndash;115). Surpasses the
+            Sciuridae octet (8 consecutive) as the <strong>all-time family record</strong>.
+            The nonet: Acorn (107), Pileated laughing (108), Pileated drumming (109),
+            Hairy (110), Downy (111), Lewis&rsquo;s (112), White-headed (113), Three-toed (114),
+            Black-backed (115). From colonial clowns to fire ghosts. From old-growth giants
+            to burn-forest specialists. The streak <strong>closes here</strong> &mdash;
+            degree 116 introduces a new family.
+          </p>
+        </div>
+
+        <!-- Fire Card -->
+        <div class="fire-card">
+          <h3>The Fire Ghost &mdash; Obligate Fire-Follower</h3>
+          <p>
+            The Black-backed Woodpecker is the <strong>quintessential fire-follower</strong>.
+            It requires recently burned forest &mdash; typically within 1&ndash;8 years
+            post-fire &mdash; for the bark beetles that form the majority of its diet.
+            Where most organisms flee fire, the Black-backed <strong>follows it</strong>.
+            Against charred bark, its <strong>all-black back</strong> is nearly invisible.
+            It is the fire ghost: appearing in burned landscapes, exploiting the beetle
+            bonanza, and disappearing as the burn ages. A <strong>conservation paradox</strong>
+            &mdash; it needs fire, but human policy has been to prevent fire.
+          </p>
+        </div>
+
+        <!-- Three-toed Card -->
+        <div class="threetoe-card">
+          <h3>Three Toes &mdash; Consecutive Three-Toed Pair (114&ndash;115)</h3>
+          <p>
+            Like the American Three-toed Woodpecker (degree 114), the Black-backed has
+            <strong>three toes</strong> (two forward, one back) rather than four. The
+            three-toed foot provides a <strong>wider swing arc</strong> when striking bark
+            &mdash; more force per strike for bark-flaking specialists. The only two
+            three-toed woodpeckers in North America, documented <strong>back-to-back</strong>.
+            Both are <em>Picoides</em>. Both are bark-flakers. The convergent adaptation
+            connects them.
+          </p>
+        </div>
+
+        <h2>The Fire Rattle</h2>
+        <p>
+          The Black-backed Woodpecker&rsquo;s acoustic signature: a <strong>loud, sharp,
+          staccato rattle call</strong> &mdash; rapid percussive notes carrying across the
+          open post-fire landscape. Louder and sharper than the Three-toed&rsquo;s rattle
+          (114). Harsher than the Hairy&rsquo;s peek (110). Less wild than the Pileated&rsquo;s
+          laughing wuk-wuk-wuk (108). The rattle carries well because the post-fire environment
+          is acoustically <strong>open</strong> &mdash; no canopy, no understory, just snags and sky.
+        </p>
+        <p>
+          The <strong>drum pattern</strong> is fast, slightly accelerating, higher-pitched and
+          drier-sounding than the Pileated&rsquo;s resonant boom. Produced on charred dead snags,
+          the drum has a distinctive <strong>dry, percussive quality</strong> shaped by the
+          burned substrate. E=5 &mdash; loud, assertive, carrying across the burn. Not the
+          overwhelming E=6 of the Pileated, but a territorial sentinel&rsquo;s declaration
+          in a landscape most species have abandoned.
+        </p>
+
+        <h2>Fire Ecology &amp; Conservation Paradox</h2>
+        <p>
+          The Black-backed Woodpecker&rsquo;s ecological cycle: fire kills standing trees,
+          bark beetles colonize the dead trees, Black-backed Woodpeckers arrive and
+          concentrate (densities 10&ndash;50x higher than unburned forest), peak at 1&ndash;3
+          years post-fire, decline as beetles fade, then wait for the next fire. This
+          cycle has <strong>conservation implications</strong>: fire suppression reduces habitat.
+          <strong>Salvage logging</strong> &mdash; removing dead trees after fire &mdash;
+          removes the standing snags the birds need. Climate change complicates: more fire may
+          help, but the most extreme fires may burn too completely.
+        </p>
+        <p>
+          The <strong>conservation paradox</strong>: protecting the Black-backed Woodpecker
+          means allowing fire and tolerating its aftermath &mdash; a direct challenge to
+          a century of fire management philosophy. The bird that needs the forest to burn.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-114 Three-toed Woodpecker (consecutive three-toed)</strong>
+            <p>Both have three toes. Both are bark-flakers. Both are Picoides. Three-toed (114, boreal/burn, E=4); Black-backed (115, burn, E=5). The two three-toed woodpeckers back-to-back. Energy escalation within the three-toed pair.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-112 Lewis&rsquo;s Woodpecker (fire-specialist pair)</strong>
+            <p>Two fire-specialists in the Picidae streak. Lewis&rsquo;s (112, flycatching, E=4, opportunistic). Black-backed (115, bark-flaking, E=5, obligate). Spectrum of fire-dependence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-108 Pileated Woodpecker laughing (energy peak)</strong>
+            <p>Pileated at E=6 (maximum). Black-backed at E=5. The Picidae streak&rsquo;s energy range: E=3 (Downy, White-headed) to E=6 (Pileated). Nine degrees, four energy levels.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-107 Acorn Woodpecker (streak bookends)</strong>
+            <p>Acorn opens (107, colonial, oak savanna). Black-backed closes (115, solitary, burn forest). Community to solitude. Standing forest to charred landscape. The streak&rsquo;s full arc.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004 Northern Spotted Owl (fire ecology contrast)</strong>
+            <p>Spotted Owl needs old-growth standing forest alive. Black-backed needs standing forest dead and burned. Both need standing trees -- one alive, one dead. The fire management paradox.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map / Theory -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon record">9</div>
+            <div class="theory-content">
+              <h4>9th Consecutive Picidae &mdash; ALL-TIME FAMILY RECORD</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Nine consecutive Picidae (107&ndash;115). Surpasses the Sciuridae octet. From Acorn (colonial) to Black-backed (fire ghost). The streak closes at degree 115.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon fire">F</div>
+            <div class="theory-content">
+              <h4>The Fire Ghost &mdash; Obligate Fire-Follower</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Requires recently burned forest. All-black back as camouflage on charred bark. Bark beetle specialist. Conservation paradox: needs fire, but humans suppress fire.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon rattle">R</div>
+            <div class="theory-content">
+              <h4>The Fire Rattle &mdash; Carrying Across the Burn</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Loud staccato rattle call + dry drum on charred snags. Carries across open post-fire landscape. E=5. Louder than Three-toed (114), less wild than Pileated (108).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon threetoe">3</div>
+            <div class="theory-content">
+              <h4>Three-Toed Pair (114&ndash;115)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Consecutive three-toed woodpeckers. Wider swing arc for bark-flaking. The only two three-toed woodpeckers in North America, back-to-back.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon picidae">P</div>
+            <div class="theory-content">
+              <h4>Picidae Streak Closes &mdash; Fire to Water</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Degree 116 introduces Cinclidae (dippers). The transition from burn forest to rushing stream. Fire to water. The engine&rsquo;s most dramatic ecosystem shift.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Black-backed WP</div>
+          <div class="stat-detail"><em>Picoides arcticus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Context</div>
+          <div class="stat-value">Rattle call + drum</div>
+          <div class="stat-detail">Fire ghost, obligate fire-follower</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">9th consecutive (107&ndash;115) RECORD</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Loud rattle + drum</div>
+          <div class="stat-detail">Sharp staccato, dry percussive</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 5</div>
+          <div class="stat-detail">Loud, assertive, carrying</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Burn forest</div>
+          <div class="stat-detail">Recently burned, 1&ndash;8 yr post-fire</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Toes</div>
+          <div class="stat-value">3 (two + one)</div>
+          <div class="stat-detail">Shared with Three-toed (114)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Fire Dependence</div>
+          <div class="stat-value">Obligate</div>
+          <div class="stat-detail">vs Lewis&rsquo;s (112) opportunistic</div>
+        </div>
+
+        <h3>Picidae Nonet (107&ndash;115)</h3>
+        <div class="stat-card">
+          <div class="stat-label">107&deg;</div>
+          <div class="stat-value">Acorn WP (E=5)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">108&deg;</div>
+          <div class="stat-value">Pileated laugh (E=6)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">109&deg;</div>
+          <div class="stat-value">Pileated drum (E=5)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">110&deg;</div>
+          <div class="stat-value">Hairy (E=4)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">111&deg;</div>
+          <div class="stat-value">Downy (E=3)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">112&deg;</div>
+          <div class="stat-value">Lewis&rsquo;s (E=4)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">113&deg;</div>
+          <div class="stat-value">White-headed (E=3)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">114&deg;</div>
+          <div class="stat-value">Three-toed (E=4)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">115&deg;</div>
+          <div class="stat-value" style="color: #BF360C;">Black-backed (E=5)</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
