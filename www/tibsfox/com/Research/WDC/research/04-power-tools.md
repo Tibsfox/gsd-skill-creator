@@ -32,7 +32,9 @@ Other kickback prevention measures: never stand directly behind the blade (stand
 
 A general-purpose combination blade (40 to 50 teeth, alternate top bevel grind) handles both ripping and crosscutting reasonably well. A dedicated rip blade (24 teeth, flat top grind) cuts faster along the grain with less motor strain. A dedicated crosscut blade (60 to 80 teeth, alternate top bevel) produces cleaner cuts across the grain. A good combination blade is the starting point. Add dedicated rip and crosscut blades as your work demands.
 
-Thin-kerf blades remove less material per cut and require less motor power, making them suitable for smaller saws. Full-kerf blades are stiffer and produce cleaner cuts on larger saws with more power.
+Specific recommendations: the **Freud Diablo D1050X** 50-tooth combination blade ($35-45) is the best value in a general-purpose blade -- it cuts clean in both rip and crosscut, leaves a smooth surface, and lasts through hundreds of board feet before needing sharpening. The **Forrest Woodworker II** ($85-100) is the premium choice -- it produces a surface so clean that many woodworkers glue directly from the saw without jointing. For dedicated ripping, the **Freud Diablo D0724A** 24-tooth rip blade ($25-30) cuts Douglas fir and hardwood with minimal effort. For dedicated crosscutting, the **Freud LU85R010** 80-tooth ultra-fine crosscut ($55-65) leaves a polished surface on miters and end grain.
+
+Thin-kerf blades remove less material per cut and require less motor power, making them suitable for smaller saws (contractor saws with 1.5-2 HP motors). Full-kerf blades are stiffer and produce cleaner cuts on larger saws with more power (cabinet saws with 3+ HP).
 
 ---
 
