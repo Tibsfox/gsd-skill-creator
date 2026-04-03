@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway 3: Harmony &mdash; Chords Are Simultaneous Melodies | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A; --gold-light: #e0cc80;
+  --purple: #9a6ad8; --purple-light: #b88aee;
+  --blue: #4a7aba; --green: #4CAF50; --amber: #E89848; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:var(--gold-light); }
+
+header {
+  background:linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 25%, #2a1040 50%, #1a0a2a 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--purple);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(154,106,216,0.1) 0%, transparent 70%);
+}
+header .level { color:var(--dim); font-size:0.72rem; font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.12em; position:relative; }
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; margin-top:0.3rem; }
+header .subtitle { color:var(--purple-light); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:820px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+h3 { font-size:1.1rem; color:#fff; margin:1.5rem 0 0.5rem; }
+
+.section { margin-bottom:2rem; }
+.section p { font-size:0.92rem; margin-bottom:0.8rem; }
+
+.step-block {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1.5rem 0; border-left:3px solid var(--purple);
+}
+.step-block h3 { margin-top:0; color:var(--purple-light); }
+.step-block p { font-size:0.9rem; margin-bottom:0.6rem; }
+
+.activity-box {
+  background:rgba(196,163,90,0.06); border:1px solid rgba(196,163,90,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.activity-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:600; margin-bottom:0.4rem; }
+.activity-box p, .activity-box li { color:var(--text); }
+
+.listen-box {
+  background:rgba(154,106,216,0.06); border:1px solid rgba(154,106,216,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.listen-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--purple-light); font-weight:600; margin-bottom:0.4rem; }
+.listen-box ul { margin:0.3rem 0 0 1.2rem; }
+.listen-box li { margin-bottom:0.3rem; color:var(--text); }
+
+.diy-box {
+  background:rgba(76,175,80,0.06); border:1px solid rgba(76,175,80,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.diy-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); font-weight:600; margin-bottom:0.4rem; }
+.diy-box p { color:var(--text); }
+
+.practice-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.practice-list li { margin-bottom:0.6rem; }
+.practice-list .time { color:var(--purple-light); font-weight:600; font-size:0.8rem; }
+
+.rosetta-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.5rem; margin:0.5rem 0; border-left:3px solid var(--gold);
+}
+.rosetta-card h3 { font-size:0.9rem; color:var(--gold); margin-bottom:0.3rem; margin-top:0; font-family:system-ui,sans-serif; }
+.rosetta-card p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; }
+
+.resource-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.resource-list li { margin-bottom:0.5rem; }
+.resource-list .category { color:var(--purple-light); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+footer {
+  max-width:820px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { header h1 { font-size:1.4rem; } main { padding:1.5rem 1rem 3rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="level">Pathway 3 &mdash; Harmony &amp; Structure</div>
+  <h1>Chords Are Simultaneous Melodies</h1>
+  <div class="subtitle">When notes stack, meaning multiplies. Harmony is how music thinks in depth.</div>
+  <nav>
+    <a href="pathway-melody.html">&larr; Prev: Melody</a>
+    <a href="index.html">MUS Index</a>
+    <a href="pathway-synthesis.html">Next: Synthesis &rarr;</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>Overview</h2>
+  <div class="section">
+    <p>Melody is horizontal &mdash; notes one after another through time. Harmony is vertical &mdash; notes stacked on top of each other at the same moment. But that framing misses the deeper truth: a chord is not a single "thing." A chord is multiple melodies happening simultaneously, each voice moving through its own line, and the magic is in how those independent lines interact.</p>
+    <p>This pathway teaches you to hear vertically. When you listen to a song, you will not just hear "a chord" &mdash; you will hear three, four, or five notes in specific relationships, creating tension, resolution, brightness, darkness, motion, or stillness. You will understand <em>why</em> certain chord sequences feel like coming home (I-IV-V-I), why others feel like a question left unanswered (ending on V), and why jazz harmony can take you on a journey through fifteen keys in thirty-two bars and land you exactly where you started.</p>
+    <p>By the end of this pathway, you will know how chords are built, how they connect, how they define keys, and how songs are structured from sections. You will be able to listen to a pop song and call out the chord progression in Roman numerals. You will hear the difference between a major 7th (dreamy) and a dominant 7th (bluesy). And you will understand that form &mdash; the large-scale structure of verse, chorus, bridge &mdash; is itself a kind of harmony: the relationship between sections in time.</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <h3>Step 1: Triads</h3>
+    <p>A <strong>triad</strong> is three notes stacked in thirds: a root, a third, and a fifth. It is the fundamental unit of Western harmony, used continuously since the Renaissance. There are four types, and their emotional quality comes entirely from the intervals between the notes:</p>
+    <p><strong>Major triad</strong> (root + major 3rd + perfect 5th): bright, stable, resolved. C-E-G. The sound of "happy." The interval stack is 4 half-steps + 3 half-steps.<br>
+    <strong>Minor triad</strong> (root + minor 3rd + perfect 5th): dark, stable, introspective. C-Eb-G. The sound of "sad." The interval stack is 3 half-steps + 4 half-steps. The only difference from major is that the middle note is one half-step lower.<br>
+    <strong>Diminished triad</strong> (root + minor 3rd + diminished 5th): tense, unstable, wants to resolve. C-Eb-Gb. The interval stack is 3 + 3 (symmetric). It sounds anxious because every interval is compressed.<br>
+    <strong>Augmented triad</strong> (root + major 3rd + augmented 5th): eerie, floating, ambiguous. C-E-G#. The interval stack is 4 + 4 (also symmetric). It sounds dreamlike because it divides the octave into three equal parts.</p>
+    <p>In any major key, the triads built on each scale degree follow a fixed pattern: I = major, ii = minor, iii = minor, IV = major, V = major, vi = minor, vii&deg; = diminished. This is not arbitrary &mdash; it is a mathematical consequence of the major scale's interval structure. Every major key produces the same pattern, just starting on a different root.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>On a piano (real or app), play C-E-G (C major triad). Listen for 3 seconds. Now lower the E to Eb (one key to the left): C-Eb-G (C minor triad). Feel the shift from bright to dark. That one note &mdash; one half-step &mdash; changes the entire emotional quality. Now lower the G to Gb: C-Eb-Gb (C diminished). Feel how it tightens, becomes anxious. Go back to C-E-G and raise the G to G#: C-E-G# (C augmented). Feel how it floats, becomes uncertain. Four chords, four emotions, three notes each, maximum one note different between them.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Let It Be" &mdash; The Beatles:</strong> The entire song uses only major and minor triads. C major, G major, A minor, F major (I-V-vi-IV). No sevenths, no extensions, no complexity. The purity of triads is the point.</li>
+        <li><strong>"God Only Knows" &mdash; The Beach Boys:</strong> Brian Wilson uses every triad type. Listen for the augmented chord in the introduction &mdash; it is the moment of suspension before the melody enters. Wilson called it "a chord that hangs in the air."</li>
+        <li><strong>"Black" &mdash; Pearl Jam:</strong> Minor triads dominate the verse (dark, introspective), then the chorus opens to major (release, catharsis). The emotional arc IS the triad quality arc. See <a href="../PJM/index.html">PJM</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Triad Chart:</strong> On a piece of paper, write out all 12 major triads (C, Db, D, Eb, E, F, F#, G, Ab, A, Bb, B) and their component notes. Then write out all 12 minor triads. Play each one on a piano. Circle the ones that sound "familiar" to you &mdash; these are likely the keys of songs you know well. You now have a reference sheet of every basic chord in Western music. It fits on one page.</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <h3>Step 2: Chord Progressions</h3>
+    <p>A chord <strong>progression</strong> is a sequence of chords that creates a sense of motion, tension, and resolution. If chords are words, progressions are sentences. And just as languages have common sentence structures, music has common progressions that appear across centuries and genres.</p>
+    <p><strong>I-IV-V-I</strong> is the most fundamental progression in Western music. It is the sound of blues, rock, country, folk, and hymns. The I chord is home (tonic). The IV chord moves away (subdominant &mdash; gentle tension). The V chord creates maximum tension (dominant &mdash; it contains the tritone, the interval that demands resolution). The return to I is resolution. This tension-resolution cycle is the engine of tonal music.</p>
+    <p><strong>ii-V-I</strong> is the backbone of jazz. The ii chord (minor) sets up the V (dominant), which resolves to I (tonic). It is a more sophisticated version of IV-V-I &mdash; the ii chord shares two notes with IV but has a darker, more complex color. Jazz standards cycle through ii-V-I in multiple keys, creating chains of tension and resolution that travel through the entire tonal landscape.</p>
+    <p><strong>I-V-vi-IV</strong> is the "four-chord song" of modern pop. "Let It Be," "No Woman No Cry," "With or Without You," "Someone Like You," "Despacito" &mdash; hundreds of hit songs use this exact progression. It works because it balances brightness (I, IV, V are all major) with emotional depth (vi is the relative minor, the moment of vulnerability in the sequence).</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>On a piano or guitar, play the I-V-vi-IV progression in C major: C-G-Am-F. Strum or play each chord for 4 beats. Loop it. Sing any melody you want over it. Now try it in G: G-D-Em-C. Same progression, different key, same emotional arc. Now play I-IV-V-I in A: A-D-E-A. This is a 12-bar blues in compressed form. You have just played the harmonic foundation of roughly 70% of all popular music written since 1950.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Hallelujah" &mdash; Leonard Cohen:</strong> Cohen literally sings the chord names in the lyrics: "It goes like this: the fourth, the fifth, the minor fall, the major lift." IV-V-vi-IV (translated from his key). The song teaches its own harmony.</li>
+        <li><strong>"Fly Me to the Moon" &mdash; Frank Sinatra:</strong> A chain of ii-V-I progressions through multiple keys. Each ii-V-I resolves, and the new I becomes the ii of the next key. This is how jazz "modulates" &mdash; by treating every arrival as a new departure.</li>
+        <li><strong>"Enjoy the Silence" &mdash; Depeche Mode:</strong> Minor key progression with synth pads. The chords are simple (i-III-VI-VII) but the voicing &mdash; how the notes are arranged across the synthesizer &mdash; gives them depth. Same chords, infinite voicings. See <a href="../DPM/index.html">DPM</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Progression Spotter:</strong> Pick 10 songs from your playlist. For each one, figure out the chord progression of the chorus (use a guitar chord site like Ultimate Guitar if you need help). Write each progression in Roman numerals. Count how many use I-V-vi-IV, I-IV-V-I, or vi-IV-I-V (a rotation of the same four chords). You will likely find that 6-8 of your 10 songs share the same basic progression. The differences are melody, rhythm, arrangement, and production &mdash; not harmony.</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <h3>Step 3: Key Signatures &amp; Tonality</h3>
+    <p>A <strong>key</strong> is the gravitational center of a piece of music &mdash; the note and mode (major or minor) that everything relates to. When a song is "in C major," it means C is home, the notes of the C major scale are the primary palette, and the chord progressions are built from triads of that scale. The key signature (the sharps or flats at the beginning of written music) tells you which notes are altered from the "default" of C major (all white keys).</p>
+    <p>The <strong>circle of fifths</strong> is the map of all 12 major and 12 minor keys, arranged so that adjacent keys differ by exactly one sharp or flat. Moving clockwise (C &rarr; G &rarr; D &rarr; A &rarr; E &rarr; B) adds one sharp each time. Moving counterclockwise (C &rarr; F &rarr; Bb &rarr; Eb &rarr; Ab &rarr; Db) adds one flat. Keys on opposite sides of the circle (like C and F#) are maximally distant &mdash; they share the fewest notes. Keys next to each other are closely related &mdash; they share almost everything. This is why modulation to the dominant (V) feels smooth and modulation to the tritone feels shocking.</p>
+    <p><strong>Modulation</strong> is the art of changing keys within a song. A song might start in C major for the verse, modulate to A minor for the chorus (relative minor &mdash; same notes, different center), and then modulate up to Db major for the final chorus (the "truck driver's gear change" &mdash; up one half step for emotional lift). Modulation is how songs create large-scale harmonic motion beyond what chord progressions alone can achieve.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Draw the circle of fifths on paper: write C at the top (12 o'clock), G at 1 o'clock, D at 2, A at 3, E at 4, B at 5, F#/Gb at 6, Db at 7, Ab at 8, Eb at 9, Bb at 10, F at 11. Inside each, write the number of sharps or flats (C=0, G=1#, D=2#... F=1b, Bb=2b...). Now play C major and G major on a piano. Notice they share 6 of 7 notes (only F becomes F#). Play C major and then F# major. Notice they share almost nothing. The circle of fifths is a map of harmonic distance. Close = smooth. Far = dramatic.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Love on Top" &mdash; Beyonce:</strong> Modulates upward four times in the final section. Each key change is one half-step up. Each one raises the energy. By the end, the song is in a completely different key than it started. This is modulation as emotional intensification.</li>
+        <li><strong>"Bohemian Rhapsody" &mdash; Queen:</strong> Modulates through at least 6 keys across its 6-minute runtime. The operatic section cycles through keys rapidly. The ballad section sits in Bb. The headbanging section is in Eb. The key changes delineate the sections.</li>
+        <li><strong>"Still Alive" &mdash; Weird Al parodies require matching the original key precisely, which means understanding key relationships deeply. Listen to any Weird Al parody alongside its source &mdash; the key is identical because the joke requires harmonic fidelity. See <a href="../WAL/index.html">WAL</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Key Detective:</strong> Open any streaming service. Pick 5 songs you know well. For each one, find the tonic by humming the note that feels like "home" &mdash; the note you could end the song on and feel resolved. Check your answer by looking up the song's key online. Then place all 5 songs on your circle of fifths diagram. Are they clustered (similar keys) or scattered? Your taste in keys might reveal something about the sonic palette you are drawn to.</p>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <h3>Step 4: Seventh Chords &amp; Extensions</h3>
+    <p>Triads are the foundation. <strong>Seventh chords</strong> are the first floor built on top. Add a fourth note &mdash; the seventh scale degree above the root &mdash; and the chord gains complexity, richness, and specificity.</p>
+    <p><strong>Dominant 7th</strong> (1-3-5-b7): The chord that defines blues and rock. G7 (G-B-D-F) contains a tritone between B and F, which creates a powerful pull toward resolution. Every 12-bar blues uses dominant 7th chords exclusively. The bluesy quality IS the b7.</p>
+    <p><strong>Major 7th</strong> (1-3-5-7): Dreamy, sophisticated, open. Cmaj7 (C-E-G-B) is the sound of bossa nova, yacht rock, and lo-fi hip-hop beats. The natural 7th (B, one half-step below the octave) creates a lush dissonance &mdash; not tense enough to demand resolution, but complex enough to avoid blandness.</p>
+    <p><strong>Minor 7th</strong> (1-b3-5-b7): Mellow, warm, the default jazz chord. Am7 (A-C-E-G) is more relaxed than a plain A minor triad. It is the "ii" chord in a ii-V-I &mdash; the approach, the setup, the gentle tension before the dominant.</p>
+    <p><strong>Extensions</strong> continue the stack: add a 9th (the 2nd, an octave up), an 11th (the 4th), a 13th (the 6th). A full C13 chord contains C-E-G-Bb-D-F-A &mdash; all seven notes of the scale. In practice, some notes are omitted (the root and 5th are often dropped), but the principle is: the higher you stack, the richer and more ambiguous the harmony becomes. Neo-soul and R&amp;B live in 9th and 13th territory. Jazz ballads use every extension available.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>On a piano, play C-E-G (C major triad). Now add B on top: C-E-G-B (Cmaj7). Hear how it opens up, becomes dreamy. Now change the B to Bb: C-E-G-Bb (C7, dominant). Hear how it becomes bluesy, restless, wanting to move to F. Now change the E to Eb: C-Eb-G-Bb (Cm7, minor seventh). Hear how it becomes mellow, warm, relaxed. Three different seventh chords built by moving one or two notes. The difference between genres lives in these small movements.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Girl From Ipanema" &mdash; Stan Getz &amp; Joao Gilberto:</strong> Major 7th chords throughout. The Fmaj7 at the opening is the quintessential bossa nova sound &mdash; warm, open, floating. Notice how the chords never feel "resolved" in the blues sense; they are permanently dreamy.</li>
+        <li><strong>"Crossroads" &mdash; Cream (Robert Johnson):</strong> Dominant 7th chords exclusively. A7, D7, E7. The b7 in every chord is what makes it "blues" rather than "rock." Compare to AC/DC playing the same progression with plain major triads &mdash; the dominant 7th IS the blues sound.</li>
+        <li><strong>"Untitled (How Does It Feel)" &mdash; D'Angelo:</strong> Dense extended chords &mdash; 9ths, 11ths, 13ths. The harmony is so rich that individual chord tones blur together. This is neo-soul harmony: jazz chord vocabulary applied to R&amp;B groove.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Seventh Chord Palette:</strong> Take the I-V-vi-IV progression you learned in Step 2. Now upgrade every chord to a seventh chord: Imaj7-V7-vi(m7)-IVmaj7. In C: Cmaj7-G7-Am7-Fmaj7. Play it. Notice how the same progression becomes more sophisticated, more "grown-up." This single transformation is the difference between a campfire singalong and a jazz club. Now try adding 9ths to each chord. Welcome to neo-soul.</p>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <h3>Step 5: Form &amp; Structure</h3>
+    <p><strong>Form</strong> is the architecture of a song &mdash; how sections are arranged to create a journey from beginning to end. If chords are bricks and progressions are walls, form is the floor plan of the building. And like architecture, form carries meaning: a song structured as verse-chorus-verse-chorus-bridge-chorus tells a different story than a song structured as a continuous, evolving 20-minute piece.</p>
+    <p><strong>Verse-Chorus</strong> is the dominant form of popular music since the 1960s. The verse tells the story (different words each time, same melody). The chorus delivers the emotional payload (same words, same melody, the part everyone sings). The <strong>bridge</strong> is the surprise &mdash; a section that contrasts both verse and chorus, often in a different key or with a different feel, creating relief before the final chorus.</p>
+    <p><strong>AABA form</strong> (Tin Pan Alley, Great American Songbook): A = the main theme (8 bars), played twice. B = the bridge (8 bars, contrasting). A = the theme returns. "Over the Rainbow," "Yesterday," "Georgia on My Mind." This was the standard before rock and roll introduced verse-chorus structure.</p>
+    <p><strong>12-bar blues:</strong> Three 4-bar phrases following a fixed chord pattern (I-I-I-I / IV-IV-I-I / V-IV-I-V). Call-call-response. The most influential form in American music. Rock, jazz, R&amp;B, country, and hip-hop all descend from it.</p>
+    <p><strong>Sonata-allegro form</strong> (classical): Exposition (introduce two themes in different keys), Development (fragment, modulate, transform the themes), Recapitulation (both themes return in the home key). This is the form that organized symphonic music for 200 years. The tension between the two keys in the exposition IS the drama; the recapitulation resolves it.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Pick any pop song. Listen to it with a notepad. Every time the music changes significantly (new section), draw a line and label the section: is it a verse (V), chorus (C), bridge (B), pre-chorus (PC), intro (I), or outro (O)? When you are done, you will have a form chart like: I-V-V-PC-C-V-V-PC-C-B-C-C-O. Compare this to 3 other songs. You will see that most pop songs follow the same basic template with small variations. The art is not in inventing new forms &mdash; it is in making the standard form feel fresh.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Smells Like Teen Spirit" &mdash; Nirvana:</strong> Textbook verse-chorus-verse-chorus-bridge-chorus. The bridge ("a denial, a denial") is in the same key but uses a different dynamic (quiet to loud). Cobain understood that form IS dynamics.</li>
+        <li><strong>"A Day in the Life" &mdash; The Beatles:</strong> Two separate songs spliced together (Lennon's surreal verses + McCartney's upbeat middle section) with orchestral chaos connecting them. The form is experimental, but it still follows an emotional arc: descent &rarr; chaos &rarr; uplift &rarr; chaos &rarr; resolution.</li>
+        <li><strong>"So What" &mdash; Miles Davis:</strong> AABA form, but each section is 8 bars of a single chord (Dm7 for A sections, Ebm7 for the B section). The simplest possible harmony with the most complex improvisations on top. Form as constraint; constraint as freedom.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Form Map Collection:</strong> Create form maps (section diagrams) for 10 songs across different genres: 3 pop, 2 blues, 2 jazz standards, 2 rock, 1 classical piece. Use colored blocks (one color per section type). Arrange them chronologically on a page. You will see that pop songs are short and symmetric, blues is repetitive and cyclical, jazz standards are compact (32 bars), and classical is long and developmental. Form is the genre's DNA &mdash; the skeleton on which everything else hangs.</p>
+    </div>
+  </div>
+
+  <!-- PRACTICE IDEAS -->
+  <h2>Practice Ideas</h2>
+  <div class="section">
+    <ol class="practice-list">
+      <li><span class="time">5 min:</span> Chord quality identification. Use an app (Tenuto, Perfect Ear) to play random chords. Identify: major, minor, diminished, or augmented. Then: major 7th, dominant 7th, or minor 7th. Build to 10 in a row correct.</li>
+      <li><span class="time">5 min:</span> Play I-IV-V-I in a new key each day. Cycle through all 12 keys over two weeks. Your fingers (and ears) will internalize the pattern in every key.</li>
+      <li><span class="time">15 min:</span> Harmonic dictation. Play a song you have not analyzed before. Pause after each chord change. Try to identify the chord (letter name or Roman numeral). Check against a chord chart. Track your accuracy over time.</li>
+      <li><span class="time">15 min:</span> Voice leading exercise. Play Cmaj7 &rarr; Am7 &rarr; Dm7 &rarr; G7 &rarr; Cmaj7 on a piano. Notice which notes stay the same between chords and which move. This shared-note movement is <strong>voice leading</strong> &mdash; the art of moving between chords smoothly.</li>
+      <li><span class="time">30 min:</span> Analyze a jazz standard. Get a lead sheet (iRealPro app or jazzstandards.com). Play through the chords. Identify every ii-V-I. Mark the key centers. Note where the song modulates. You are now reading the harmonic blueprint of a professional composition.</li>
+      <li><span class="time">30 min:</span> Song structure analysis. Pick a full album. Map the form of every track. Look for patterns: does the artist favor verse-chorus? Do they use bridges? How long are their intros? Structural preferences are part of an artist's signature.</li>
+      <li><span class="time">5 min:</span> The "one chord" test. Listen to any song. When the first chord hits, sing the root. Is it the tonic (I)? Or does the song start on a different chord? Songs that start on I feel grounded; songs that start on vi or IV feel like they are arriving from somewhere else.</li>
+    </ol>
+  </div>
+
+  <!-- CONNECTIONS -->
+  <h2>Connections</h2>
+  <div class="rosetta-card">
+    <h3><a href="../WAL/index.html">WAL &mdash; Weird Al Yankovic</a></h3>
+    <p>Parody requires harmonic fidelity. Weird Al matches the original song's chord progression exactly &mdash; the joke only works if the harmony is identical. Deep harmonic knowledge is a prerequisite for parody. The Rosetta Hub of the music cluster.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../PJM/index.html">PJM &mdash; Pearl Jam</a></h3>
+    <p>Pearl Jam's harmonic language: power chords (rootless triads), minor-key verses opening into major choruses, McCready's jazz-influenced chord substitutions. The Seattle sound as harmonic dialect.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../DPM/index.html">DPM &mdash; Depeche Mode</a></h3>
+    <p>Synthesizer harmony: sustained pads, arpeggiated chords, voicing as timbre. How the same chord played on a piano vs. a synth pad vs. an arpeggiated sequence creates three completely different emotional effects.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3>Knowledge Nodes: ii-V-I &amp; Tritone Substitution</h3>
+    <p>The <a href="nodes/ii-v-i.html">ii-V-I node</a> maps jazz's fundamental progression to agent foraging cycles. The <a href="nodes/tritone.html">tritone substitution node</a> shows how replacing a chord with its tritone equivalent maps to behavioral inversion in the forest simulation.</p>
+  </div>
+
+  <!-- RESOURCES -->
+  <h2>Resources</h2>
+  <div class="section">
+    <ul class="resource-list">
+      <li><span class="category">Book:</span> <em>Tonal Harmony</em> by Kostka &amp; Payne &mdash; the standard college harmony textbook, covers triads through chromatic harmony</li>
+      <li><span class="category">Book:</span> <em>The Jazz Theory Book</em> by Mark Levine &mdash; the definitive guide to jazz harmony, chord extensions, and substitutions</li>
+      <li><span class="category">App:</span> iRealPro ($15) &mdash; lead sheets for 1,500+ jazz standards with playback. The essential practice tool for harmonic analysis</li>
+      <li><span class="category">App:</span> Tenuto (free tier) &mdash; chord identification, scale exercises, and fretboard/keyboard trainers</li>
+      <li><span class="category">YouTube:</span> 12tone &mdash; visual chord analysis of pop and rock songs, Roman numeral breakdowns with animated diagrams</li>
+      <li><span class="category">YouTube:</span> Jacob Collier's Audience Choir segments &mdash; live demonstrations of extended harmony, modulation, and voice leading explained in real time</li>
+      <li><span class="category">Website:</span> <a href="https://www.hooktheory.com">Hooktheory</a> &mdash; interactive chord progression database. Look up any song's progression or browse by genre and decade</li>
+      <li><span class="category">Tool:</span> Hookpad (Hooktheory's composition tool) &mdash; build chord progressions visually, hear them played back, add melodies on top</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <a href="pathway-melody.html">&larr; Melody</a> &middot;
+  <a href="index.html">MUS Index</a> &middot;
+  <a href="pathway-synthesis.html">Synthesis &rarr;</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Pathway 3: Harmony &mdash; Chords Are Simultaneous Melodies &middot; Music Learning Pathways &middot; Rosetta Cluster 10<br>
+  <span style="font-style:italic; color:rgba(154,106,216,0.5);">Dedicated to Pepper Coyote &mdash; &ldquo;Nothing to lose but your chains and a world to win&rdquo;</span>
+</footer>
+
+</body>
+</html>

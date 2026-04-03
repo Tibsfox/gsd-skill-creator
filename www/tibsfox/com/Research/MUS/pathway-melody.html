@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway 2: Melody &mdash; Sing Before You Theorize | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A; --gold-light: #e0cc80;
+  --purple: #9a6ad8; --purple-light: #b88aee;
+  --blue: #4a7aba; --green: #4CAF50; --amber: #E89848; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:var(--gold-light); }
+
+header {
+  background:linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 25%, #2a1040 50%, #1a0a2a 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--purple);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(154,106,216,0.1) 0%, transparent 70%);
+}
+header .level { color:var(--dim); font-size:0.72rem; font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.12em; position:relative; }
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; margin-top:0.3rem; }
+header .subtitle { color:var(--purple-light); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:820px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+h3 { font-size:1.1rem; color:#fff; margin:1.5rem 0 0.5rem; }
+
+.section { margin-bottom:2rem; }
+.section p { font-size:0.92rem; margin-bottom:0.8rem; }
+
+.step-block {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1.5rem 0; border-left:3px solid var(--purple);
+}
+.step-block h3 { margin-top:0; color:var(--purple-light); }
+.step-block p { font-size:0.9rem; margin-bottom:0.6rem; }
+
+.activity-box {
+  background:rgba(196,163,90,0.06); border:1px solid rgba(196,163,90,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.activity-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:600; margin-bottom:0.4rem; }
+.activity-box p, .activity-box li { color:var(--text); }
+
+.listen-box {
+  background:rgba(154,106,216,0.06); border:1px solid rgba(154,106,216,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.listen-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--purple-light); font-weight:600; margin-bottom:0.4rem; }
+.listen-box ul { margin:0.3rem 0 0 1.2rem; }
+.listen-box li { margin-bottom:0.3rem; color:var(--text); }
+
+.diy-box {
+  background:rgba(76,175,80,0.06); border:1px solid rgba(76,175,80,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.diy-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); font-weight:600; margin-bottom:0.4rem; }
+.diy-box p { color:var(--text); }
+
+.practice-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.practice-list li { margin-bottom:0.6rem; }
+.practice-list .time { color:var(--purple-light); font-weight:600; font-size:0.8rem; }
+
+.rosetta-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.5rem; margin:0.5rem 0; border-left:3px solid var(--gold);
+}
+.rosetta-card h3 { font-size:0.9rem; color:var(--gold); margin-bottom:0.3rem; margin-top:0; font-family:system-ui,sans-serif; }
+.rosetta-card p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; }
+
+.resource-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.resource-list li { margin-bottom:0.5rem; }
+.resource-list .category { color:var(--purple-light); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+footer {
+  max-width:820px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { header h1 { font-size:1.4rem; } main { padding:1.5rem 1rem 3rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="level">Pathway 2 &mdash; Melody &amp; Voice</div>
+  <h1>Sing Before You Theorize</h1>
+  <div class="subtitle">Your voice is your first instrument. Melody is how music speaks in sentences.</div>
+  <nav>
+    <a href="pathway-rhythm.html">&larr; Prev: Rhythm</a>
+    <a href="index.html">MUS Index</a>
+    <a href="pathway-harmony.html">Next: Harmony &rarr;</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>Overview</h2>
+  <div class="section">
+    <p>Melody is the part of music you remember. It is the tune you hum in the shower, the hook that gets stuck in your head, the part you sing along to even when you don't know the words. If rhythm is the skeleton of music, melody is the voice &mdash; the part that says something, that tells a story, that makes you feel.</p>
+    <p>This pathway begins with the most radical act in music education: <strong>singing</strong>. You do not need a "good" voice. You do not need to sound like anyone else. You need to be able to hear a pitch and reproduce it &mdash; and this is a <em>trainable skill</em>, not a genetic gift. Research consistently shows that the vast majority of people who believe they "can't sing" actually have normal pitch perception; they simply lack practice matching their voice to what they hear. The ear-voice connection is a neural pathway, and like all neural pathways, it strengthens with use.</p>
+    <p>By the end of this pathway, you will understand scales, intervals, melodic contour, and sight-singing. You will be able to hear a melody once and identify its key features: does it step or leap? Is it in major or minor? What intervals make it distinctive? You will hear music with new ears &mdash; not just "that sounds nice" but "that is a descending minor scale with a tritone leap at the climax."</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <h3>Step 1: Match Pitch</h3>
+    <p>Pitch matching is the foundational skill of all melodic work. Hear a note, sing it back at the same frequency. This is simpler than it sounds, and almost everyone can learn it. The process is: listen, internalize, produce, compare, adjust.</p>
+    <p>When you hear a note, your cochlea (the spiral organ in your inner ear) vibrates at that frequency. Your brain encodes this as a specific pitch. When you sing, your vocal cords vibrate at a frequency determined by their tension and thickness. The goal is to match the two: make your vocal cords vibrate at the same frequency as the sound you heard. Your brain does this through a <strong>feedback loop</strong> &mdash; you sing, you hear yourself, you adjust. The loop is fast (milliseconds) but requires conscious practice to calibrate.</p>
+    <p>Common obstacles: singing an octave too low or too high (correct pitch class, wrong register), sliding up to the note instead of hitting it cleanly (scoop), or matching the note but drifting flat over time. All of these are correctable with practice. A tuner app provides objective visual feedback: sing a note, see if you are sharp, flat, or on target.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Download a free tuner app (Tuner T1, PanoTuner, or the built-in tuner in GarageBand). Play a note on a piano, guitar, or piano app. Listen for 2 seconds. Then sing "aah" and hold it. Watch the tuner: is the needle centered? Are you sharp (too high) or flat (too low)? Adjust until the needle sits in the center for a full 3 seconds. Repeat with 5 different notes spread across your comfortable range. Do this daily for one week. The improvement will be measurable.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"A Change Is Gonna Come" &mdash; Sam Cooke:</strong> Cooke's pitch is supernaturally accurate, but listen for the micro-variations &mdash; the tiny bends and scoops that make it human, not robotic. Perfect pitch matching is the foundation; expression is what you build on top.</li>
+        <li><strong>"Creep" &mdash; Radiohead:</strong> Thom Yorke's voice starts soft and low, then leaps to a falsetto. Notice the two different registers and how the pitch remains consistent in both. Register shifts are a pitch-matching challenge.</li>
+        <li><strong>"Jolene" &mdash; Dolly Parton:</strong> Pure, clean pitch with minimal vibrato. Each note is exactly where it should be. Use this as a reference for what "in tune" sounds like in a solo vocal context.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Pitch Matching Journal:</strong> For 7 days, spend 5 minutes with a tuner app. Play 10 random notes on a piano app, sing each one, and record whether you were sharp, flat, or on target. Log the results. By day 7, compare your accuracy to day 1. Most people see a 30-50% improvement in one week. The journal proves that pitch matching is a skill, not a talent.</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <h3>Step 2: Scales</h3>
+    <p>A <strong>scale</strong> is a collection of notes arranged in ascending or descending order that defines the tonal material of a piece of music. Scales are not rules &mdash; they are palettes. A painter does not use every color on every canvas; a musician does not use every note in every song. The scale tells you which notes are "in" and which are "out."</p>
+    <p>The <strong>major scale</strong> (do-re-mi-fa-sol-la-ti-do) is the foundation of Western music. Its pattern of whole and half steps (W-W-H-W-W-W-H) creates a bright, resolved, "happy" sound. Every major key uses this exact pattern starting from its root note. C major uses only white keys on a piano. G major adds one sharp (F#). The pattern is the same; the starting point changes.</p>
+    <p>The <strong>natural minor scale</strong> (la-ti-do-re-mi-fa-sol-la, or W-H-W-W-H-W-W) sounds darker, sadder, more introspective. It uses the same notes as its relative major (A minor = same notes as C major) but starts on a different note, reframing the hierarchy.</p>
+    <p>The <strong>pentatonic scale</strong> is the universal scale &mdash; five notes that sound good in any combination. The major pentatonic (do-re-mi-sol-la) removes the two notes that create the most tension (fa and ti). The minor pentatonic (la-do-re-mi-sol) is the backbone of blues, rock guitar solos, and folk music worldwide. It appears independently in Chinese, Celtic, West African, Japanese, and Native American traditions. If you play only pentatonic notes, there are no "wrong" notes. This is why it is the safest starting point for improvisation.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Sing "Do-Re-Mi" from <em>The Sound of Music</em>. You just sang a major scale. Now sing it again, but stop after each note and hold it for 2 beats. Notice: "do" feels like home. "re" feels like it wants to move. "mi" feels bright and stable. "fa" feels tense (it wants to resolve down to mi). "sol" feels like a resting point. "la" has gentle pull. "ti" has strong pull (it wants to resolve up to do). Now sing just do-re-mi-sol-la (skip fa and ti). That is the major pentatonic. Notice how every note feels resolved &mdash; no tension anywhere. That is why pentatonic melodies are instantly singable.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"My Girl" &mdash; The Temptations:</strong> The opening bass and guitar riff is a pure major pentatonic melody. Five notes. No tension. Instant joy. This is pentatonic songwriting at its most elegant.</li>
+        <li><strong>"Stairway to Heaven" intro &mdash; Led Zeppelin:</strong> A minor scale descending over a changing bass note. Each bass note reframes the same melody in a new harmonic context. The scale stays the same; the meaning changes.</li>
+        <li><strong>"Blue Bossa" &mdash; Kenny Dorham:</strong> A jazz standard built on two minor scales (C minor and Db minor). Listen for the key change in bar 9 &mdash; the scale shifts, the color shifts, and then it comes back. Modulation between scales is how jazz creates motion.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Five-Note Song:</strong> Using only the notes of the minor pentatonic (A-C-D-E-G on a piano, or frets 5-8 on the first two strings of a guitar), compose a 4-bar melody. Hum it first, then play it. Because every note combination sounds "right," you cannot make a mistake. Record it on your phone. You have just written a melody using the same scale as "Smoke on the Water," "Purple Haze," and a thousand blues solos.</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <h3>Step 3: Intervals</h3>
+    <p>An <strong>interval</strong> is the distance between two notes, and it is the single most powerful tool for understanding melody. If scales are your vocabulary, intervals are the grammar &mdash; the relationships between words that give sentences meaning.</p>
+    <p>Every interval has a sound, a feel, and a name. The trick is to associate each interval with a song you already know:</p>
+    <p><strong>Minor 2nd</strong> (1 half step) &mdash; "Jaws" theme. The smallest interval. Creepy, tense, dissonant. Two adjacent keys on a piano.<br>
+    <strong>Major 2nd</strong> (2 half steps) &mdash; "Happy Birthday" (first two notes). A comfortable step. The interval that scales are built from.<br>
+    <strong>Minor 3rd</strong> (3 half steps) &mdash; "Greensleeves" or a doorbell (ding-DONG). Sad, gentle, the defining interval of a minor chord.<br>
+    <strong>Major 3rd</strong> (4 half steps) &mdash; "Oh, When the Saints" (first two notes). Bright, assertive, the defining interval of a major chord.<br>
+    <strong>Perfect 4th</strong> (5 half steps) &mdash; "Here Comes the Bride." Strong, open, stable. The interval of the power chord.<br>
+    <strong>Tritone</strong> (6 half steps) &mdash; "The Simpsons" theme (first two notes) or "Maria" from <em>West Side Story</em>. Unstable, demanding resolution. The "devil's interval."<br>
+    <strong>Perfect 5th</strong> (7 half steps) &mdash; "Star Wars" main theme (first two notes). Heroic, open, majestic. The foundation of harmony.<br>
+    <strong>Octave</strong> (12 half steps) &mdash; "Somewhere Over the Rainbow" (first two notes). The same note, doubled. The most consonant interval.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Use a free interval trainer app (Functional Ear Trainer, Tenuto, or Perfect Ear). Start with just two intervals: perfect 5th and octave. The app plays two notes; you identify the interval. Once you can get 10 in a row correct, add the major 3rd. Then the perfect 4th. Build up one interval at a time over days, not hours. The goal is unconscious recognition &mdash; you hear the interval and the name comes to you before you think about it.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Somewhere Over the Rainbow" &mdash; Judy Garland:</strong> Opens with an ascending octave. The leap is enormous &mdash; the widest "simple" interval. It creates a sense of yearning and space. Then the melody steps back down by scale tones. Leap up, step down. This is melodic architecture.</li>
+        <li><strong>"Star Wars Main Theme" &mdash; John Williams:</strong> The first interval is a perfect 5th (ascending). The most "heroic" interval in Western music. Williams uses it in nearly every major theme because it conveys power and openness.</li>
+        <li><strong>"Maria" &mdash; West Side Story:</strong> Opens with a tritone. Bernstein deliberately chose the most unstable interval for the word "Maria" because love is unstable, dissonant, unresolved. The interval IS the meaning.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Interval Songbook:</strong> Create a personal reference sheet: for each interval (minor 2nd through octave, ascending and descending), write down a song you know that starts with that interval. Keep this sheet on your phone. When you hear an interval in the wild, check it against your songbook. Over time, you will not need the sheet &mdash; the songs will play automatically in your mind when you hear the interval. This is how professional musicians develop "relative pitch."</p>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <h3>Step 4: Melodic Contour &amp; Phrasing</h3>
+    <p><strong>Melodic contour</strong> is the shape of a melody &mdash; its ups and downs, leaps and steps, peaks and valleys. If you drew a line tracing the pitch of every note in a melody, the shape of that line is the contour. And the contour carries meaning independent of the specific notes.</p>
+    <p>There are a handful of archetypal contours that appear across all musical traditions:</p>
+    <p><strong>The Arch:</strong> rises to a peak, then descends. This is the shape of "Somewhere Over the Rainbow," "Ode to Joy," and most nursery rhymes. It mirrors the shape of a sentence &mdash; rising intensity, climax, resolution. It feels natural because speech does the same thing.</p>
+    <p><strong>The Descent:</strong> starts high and falls. "Yesterday" by the Beatles, "Summertime" from <em>Porgy and Bess</em>. Descending melodies often feel melancholy, resigned, or peaceful. Gravity pulling the melody home.</p>
+    <p><strong>The Ascent:</strong> starts low and rises. "A Hard Day's Night" opening chord into vocal. Rising melodies feel hopeful, building, reaching. They create anticipation.</p>
+    <p><strong>Phrasing</strong> is how you group notes into musical sentences. A phrase is a complete musical thought, typically 4 or 8 bars long. Phrases breathe &mdash; they have a beginning, middle, and end. The space between phrases (where a singer takes a breath) is as important as the notes. Call-and-response phrasing (one phrase asks, the next answers) is the backbone of blues, gospel, jazz, and hip-hop, tracing directly to West African musical traditions.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Hum the melody of "Happy Birthday." Now draw it: when the pitch goes up, draw your line going up. When it goes down, draw it going down. Big leaps = big jumps in your line. Small steps = gradual slopes. You will see an arch shape with a high peak on "dear [name]." Now do the same with "Twinkle Twinkle Little Star" &mdash; you will see a different arch (up, sustained, down). The drawing IS the contour. Try it with 5 melodies you know well. Each will have a distinct visual fingerprint.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Yellow" &mdash; Coldplay:</strong> The verse melody is almost flat &mdash; Chris Martin sings on one or two notes with very little contour. Then the chorus leaps upward. The contrast between flat verse and arching chorus is the architecture of the song. See <a href="../CDP/index.html">CDP</a>.</li>
+        <li><strong>"Purple Haze" &mdash; Jimi Hendrix:</strong> The vocal melody uses wide leaps and angular contour &mdash; it jumps unpredictably. This angularity mirrors the psychedelic disorientation of the lyrics. The contour IS the meaning. See <a href="../HJX/index.html">HJX</a>.</li>
+        <li><strong>"Psycho Killer" &mdash; Talking Heads:</strong> David Byrne's verse melody is deliberately monotone (minimal contour), then the chorus introduces wider intervals. The flatness of the verse IS the character &mdash; controlled, suppressed, about to break. See <a href="../TKH/index.html">TKH</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Contour Sketchbook:</strong> Get a small notebook. Each page: pick a song, draw its melody contour as a line graph (time on x-axis, pitch on y-axis). No need for exact notes &mdash; just the shape. After 10 songs, look at your sketches side by side. You will see that songs in the same genre often share similar contour shapes. Pop tends toward arches. Blues tends toward descents. Punk tends toward flat lines with sharp spikes. The shape is the genre's melodic fingerprint.</p>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <h3>Step 5: Sight-Singing &amp; Solfege</h3>
+    <p><strong>Sight-singing</strong> is the ability to look at written music and sing it without hearing it first. It is the literacy of music &mdash; the skill that lets you read a score the way you read a book. It is also the skill that accelerates all other musical learning, because once you can sight-sing, you can learn any piece of music without an instrument.</p>
+    <p><strong>Solfege</strong> is the system that makes sight-singing possible. You already know it: Do, Re, Mi, Fa, Sol, La, Ti. Each syllable maps to a scale degree. In <strong>movable do</strong> (the system used in most American and British training), "Do" is always the tonic &mdash; the home note of whatever key you are in. In C major, Do = C. In G major, Do = G. The intervals between syllables stay the same regardless of key.</p>
+    <p><strong>Fixed do</strong> (used in France, Italy, Spain, and much of the conservatory tradition) maps syllables to absolute pitches: Do is always C, Re is always D, regardless of key. Both systems work. Movable do is better for understanding tonal relationships; fixed do is better for developing absolute pitch awareness.</p>
+    <p>The practical process: see a note on the staff, identify its scale degree (is it the 3rd? the 5th?), map it to a solfege syllable (Mi? Sol?), hear the interval in your mind (from the previous note to this one), and sing it. With practice, steps 2-4 collapse into a single unconscious process: see note, sing note.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Open the free app "Functional Ear Trainer" (available on iOS, Android, and desktop). Set it to "Level 1" (just Do and Re). It plays a reference scale, then plays a single note, and you identify which solfege syllable it is. Once you can nail Do and Re 10 times in a row, add Mi. Then Fa. Then Sol. The app builds your internal sense of scale degrees incrementally. After 2 weeks of daily practice (10 minutes/day), most users can reliably identify all 7 scale degrees by ear.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Do-Re-Mi" &mdash; The Sound of Music:</strong> Julie Andrews literally teaches solfege in the song. Each syllable is sung on its correct scale degree. This is not a coincidence &mdash; Rodgers and Hammerstein wrote it as a teaching tool. Use it as one.</li>
+        <li><strong>"Lean on Me" &mdash; Bill Withers:</strong> The melody walks up the major scale (Do-Re-Mi-Fa-Sol) in the opening. Sing along with solfege syllables instead of words. You will feel how each degree has a unique "weight" &mdash; Do is grounded, Mi is bright, Sol is open.</li>
+        <li><strong>"In the Mood" &mdash; Glenn Miller:</strong> The famous riff is Sol-La-Sol-Fa-Mi (descending from the 5th). Try singing it with solfege. Once you can do this with familiar tunes, you are doing movable-do sight-singing in reverse (hearing music and mapping it to syllables).</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>Solfege Karaoke:</strong> Pick 5 songs you know by heart. Sing each one replacing every word with its solfege syllable. "Twinkle Twinkle Little Star" becomes "Do-Do-Sol-Sol-La-La-Sol, Fa-Fa-Mi-Mi-Re-Re-Do." This forces your ear to identify the scale degree of every single note in the melody. It is harder than it sounds. Start with simple children's songs (they were designed to be singable) and work up to pop songs. When you can solfege a verse of your favorite song without hesitation, your sight-singing foundation is solid.</p>
+    </div>
+  </div>
+
+  <!-- PRACTICE IDEAS -->
+  <h2>Practice Ideas</h2>
+  <div class="section">
+    <ol class="practice-list">
+      <li><span class="time">5 min:</span> Pitch matching warm-up. Play 5 random notes on a piano app, sing each back, check with a tuner. Quick daily calibration of the ear-voice connection.</li>
+      <li><span class="time">5 min:</span> Interval flash cards. Use an interval trainer app. Identify 20 intervals. Track your accuracy. Focus on whichever intervals you miss most often.</li>
+      <li><span class="time">15 min:</span> Scale singing. Sing up and down the major scale, natural minor, and pentatonic in 3 different keys. Use solfege syllables. Use a piano or app for reference pitch on the starting note only.</li>
+      <li><span class="time">15 min:</span> Contour sketching. Listen to 3 songs you have never heard before. Draw the vocal melody contour of each chorus. Label the highest and lowest points. Identify the key interval at the climax.</li>
+      <li><span class="time">30 min:</span> Sight-singing practice. Use a sight-singing book (Berkowitz, Ottman, or a free resource like musictheory.net exercises). Start with simple melodies in C major. Sing each one with solfege before checking yourself on a piano.</li>
+      <li><span class="time">30 min:</span> Transcription. Pick a song with a clear, singable melody. Learn it by ear (play, pause, sing back, repeat). Then write out the melody as solfege syllables with rhythm notation. Check against a published transcription or lead sheet.</li>
+      <li><span class="time">5 min:</span> The hum test. Think of a random song. Hum the melody. Ask yourself: does it start on Do? On Sol? On Mi? Identify the starting note's scale degree without an instrument. This builds internal pitch reference.</li>
+    </ol>
+  </div>
+
+  <!-- CONNECTIONS -->
+  <h2>Connections</h2>
+  <div class="rosetta-card">
+    <h3><a href="../CDP/index.html">CDP &mdash; Coldplay</a></h3>
+    <p>Melodic architecture that fills stadiums. Coldplay's melodies demonstrate the power of contour: flat verses exploding into soaring choruses. Study "Fix You," "The Scientist," "Yellow" for masterful use of melodic shape.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../HJX/index.html">HJX &mdash; Hendrix &amp; Joplin</a></h3>
+    <p>Two contrasting vocal approaches: Hendrix's angular, blues-inflected melodies against Joplin's raw, wide-interval emotional delivery. Both demonstrate how vocal phrasing carries meaning beyond the notes.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../TKH/index.html">TKH &mdash; Talking Heads</a></h3>
+    <p>David Byrne's deliberately limited melodic contour as artistic statement. Angular melody, repetitive phrasing, the tension between monotone delivery and rhythmic complexity. Melody as character.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3>BPS &mdash; Acoustic Physics</h3>
+    <p>Frequency, resonance, overtones: the physics of why certain intervals sound consonant and others dissonant. The overtone series explains why octaves and fifths are universal &mdash; they are physical facts, not cultural conventions.</p>
+  </div>
+
+  <!-- RESOURCES -->
+  <h2>Resources</h2>
+  <div class="section">
+    <ul class="resource-list">
+      <li><span class="category">App:</span> Functional Ear Trainer (free, all platforms) &mdash; the gold standard for training scale degree recognition and relative pitch</li>
+      <li><span class="category">App:</span> Perfect Ear (free tier) &mdash; interval training, chord identification, rhythm reading in one app</li>
+      <li><span class="category">App:</span> SingTrue (iOS) &mdash; pitch matching exercises with visual feedback, designed for beginners who think they "can't sing"</li>
+      <li><span class="category">Book:</span> <em>A New Approach to Sight Singing</em> by Berkowitz, Fontrier &amp; Kraft &mdash; the standard conservatory sight-singing textbook, progressive difficulty</li>
+      <li><span class="category">Book:</span> <em>The Musician's Guide to Aural Skills</em> by Phillips, Clendinning &amp; Marvin &mdash; comprehensive ear training and sight-singing workbook</li>
+      <li><span class="category">YouTube:</span> 8-bit Music Theory &mdash; visual analysis of melody and harmony in video game and popular music</li>
+      <li><span class="category">YouTube:</span> Adam Neely &mdash; interval and pitch theory explained with clarity and depth</li>
+      <li><span class="category">Website:</span> <a href="https://www.musictheory.net">musictheory.net</a> (free) &mdash; interactive lessons on scales, intervals, and sight-reading exercises</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <a href="pathway-rhythm.html">&larr; Rhythm</a> &middot;
+  <a href="index.html">MUS Index</a> &middot;
+  <a href="pathway-harmony.html">Harmony &rarr;</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Pathway 2: Melody &mdash; Sing Before You Theorize &middot; Music Learning Pathways &middot; Rosetta Cluster 10<br>
+  <span style="font-style:italic; color:rgba(154,106,216,0.5);">Dedicated to Pepper Coyote &mdash; &ldquo;Nothing to lose but your chains and a world to win&rdquo;</span>
+</footer>
+
+</body>
+</html>
