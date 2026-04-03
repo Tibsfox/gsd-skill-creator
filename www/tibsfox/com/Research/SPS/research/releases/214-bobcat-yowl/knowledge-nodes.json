@@ -1,0 +1,104 @@
+{
+  "degree": 214,
+  "species": "Bobcat",
+  "scientific_name": "Lynx rufus",
+  "slug": "214-bobcat-yowl",
+  "sound_type": "raspy caterwauling yowl -- 'RRAAAAOWWW'. 400-1,500 Hz. 1-3 seconds. Territorial/mating. E=5",
+  "energy": 5,
+  "ecosystem": "Forest and brushland. Mixed forest, chaparral, suburban edges, rocky outcrops. Most adaptable felid.",
+  "season": "Year-round. Yowl peaks in breeding season (January-March).",
+  "family": "Felidae (third entry)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Bobcat",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.10,
+    "description": "Bobcat throughout PNW forests and brushland, including suburban edges."
+  },
+  "taxonomy_note": {
+    "description": "Third Felidae. Felidae quartet (212-215). The smaller, more adaptable PNW felid.",
+    "current_family": "Felidae (third entry)",
+    "new_family": false,
+    "family_count_in_engine": "Felidae: Cougar Scream (212, E=7), Cougar Chirp (213, E=4), Bobcat Yowl (214, E=5).",
+    "name_etymology": "Lynx rufus = 'reddish lynx'. rufus from Latin 'red/reddish'. Bobcat from 'bobbed' tail.",
+    "genus_note": "Lynx -- 4 species worldwide. Bobcat and Canada Lynx both in PNW.",
+    "order_note": "Carnivora. Third Felidae entry.",
+    "family_position": "Felidae: third entry. Smaller cat. Generalist predator.",
+    "class_note": "Class Mammalia. 7-14 kg. Most adaptable felid in North America."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "400-1,500 Hz.",
+    "peak_energy_band_hz": "600-1,200 Hz.",
+    "song_frequency_hz": "Yowl: 400-1,500 Hz. Hiss: 2,000-8,000 Hz. Growl: 100-500 Hz. Bark: 500-1,500 Hz.",
+    "song_duration_s": "1-3 seconds per yowl.",
+    "note_structure": "Drawn-out, raspy, caterwauling. Scratchy overtones.",
+    "note_types": "Territorial yowl (raspy, drawn-out), hiss (defensive), growl (warning), bark (alarm), purr (contentment).",
+    "phrase_structure": "Sequences during mating season. Multiple bobcats may yowl in chorus.",
+    "timbre": "Raspy, scratchy, aggressive. Like a large angry house cat.",
+    "amplitude": "E=5. Mid-range predator. Between cougar scream (E=7) and chirp (E=4).",
+    "tempo": "Yowls at irregular intervals during mating bouts.",
+    "context": "Breeding season (Jan-Mar). Territorial disputes. Male advertisement.",
+    "regional_variation": "Minimal variation across range.",
+    "key_property": "BOBCAT YOWL. Raspy caterwauling. E=5. Third Felidae. v1.49.355."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Tawny-brown with dark spots/streaks. Short 'bobbed' tail with dark tip. Ear tufts (small).",
+    "diagnostic_mark": "Short bobbed tail (10-18 cm). Spotted/streaked coat. Ear tufts. Smaller than cougar.",
+    "seasonal_variation": "Slight seasonal variation. Coat slightly thicker and grayer in winter.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "7-14 kg (15-30 lbs). Body length 65-105 cm. Short tail 10-18 cm. Muscular, compact.",
+    "diagnostic_mark": "Short bobbed tail. Spotted coat. Ear tufts. Compact and muscular.",
+    "field_id": "Small tawny cat with short tail and spots. Much smaller than cougar. Often glimpsed at dawn/dusk near suburban edges. Reclusive but not as cryptic as cougar."
+  },
+  "nodes": [
+    {
+      "id": "raspy-yowl",
+      "type": "concept",
+      "title": "Raspy Yowl -- Felid Vocal Template",
+      "description": "Same basic vocalization template as house cat, diverged 10 million years ago. Scaled-up caterwauling. 400-1,500 Hz.",
+      "connections": ["adaptable-predator", "cougar-bobcat-comparison"]
+    },
+    {
+      "id": "adaptable-predator",
+      "type": "concept",
+      "title": "Habitat Generalism -- Most Adaptable Felid",
+      "description": "Forest to suburban edge. 20,000-30,000 in WA. The most habitat-generalist felid in North America.",
+      "connections": ["raspy-yowl", "cougar-bobcat-comparison"]
+    },
+    {
+      "id": "cougar-bobcat-comparison",
+      "type": "concept",
+      "title": "Cougar vs. Bobcat -- Two PNW Felids",
+      "description": "50-100 kg vs. 7-14 kg. Deep forest vs. everywhere. Same family, different niches and scales.",
+      "connections": ["raspy-yowl", "adaptable-predator"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-212",
+      "species": "Cougar Scream",
+      "relationship": "FELIDAE SIZE COMPARISON! Cougar (E=7, 50-100 kg) vs. bobcat (E=5, 7-14 kg). Same family, different scale."
+    },
+    {
+      "target": "SPS-213",
+      "species": "Cougar Chirp",
+      "relationship": "FELIDAE TRIO! Scream (E=7), chirp (E=4), yowl (E=5). Three voices in three degrees."
+    },
+    {
+      "target": "SPS-215",
+      "species": "Canada Lynx",
+      "relationship": "LYNX GENUS! Same genus. Yowl (E=5) to yowl+chatter (E=5). Different niches."
+    },
+    {
+      "target": "S36-214",
+      "artist": "Helms Alee",
+      "relationship": "SMALLER PREDATOR FEROCITY! Power trio (E=6) and small cat (E=5). Both punch above weight."
+    }
+  ]
+}
