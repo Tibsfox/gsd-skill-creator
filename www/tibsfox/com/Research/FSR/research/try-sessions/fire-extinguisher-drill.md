@@ -248,6 +248,14 @@ Open windows to ventilate. Leave the building if smoke or unusual odors persist.
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Create a Family Emergency Plan](family-emergency-plan.md)** --- Your emergency plan includes utility shutoffs (gas is a post-earthquake fire hazard), meeting points, and the coordination document that makes the difference between organized response and chaos.
+
+> **[Explore CERT Training](neighborhood-cert-overview.md)** --- CERT Session 2 includes live fire suppression practice with training extinguishers. If PASS interested you, CERT takes it further with hands-on practice on a real controlled fire.
+
+---
+
 ## College of Knowledge Connections
 
 - **Science** --- [Fire Chemistry]: The fire tetrahedron (heat, fuel, oxygen, chain reaction) is applied chemistry. Understanding the combustion process --- pyrolysis of fuel, gas-phase flame propagation, the role of free radicals in sustaining the chain reaction, and how extinguishing agents interrupt these processes --- connects practical fire safety to thermodynamics and reaction kinetics.

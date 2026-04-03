@@ -222,4 +222,4 @@ And the birdhouse itself is a bridge between the workshop and the field. You bui
 
 ---
 
-*See also: [Sharpen a Chisel](sharpen-a-chisel.md) | [First Dovetail Joint](first-joint.md) | [Mortise and Tenon](hand-cut-mortise-tenon.md) | [WDC-09 PNW Timber](../09-pnw-timber.md)*
+*See also: [Sharpen a Chisel](sharpen-a-chisel.md) | [Build a Mallet](build-a-mallet.md) | [Finishing Sampler Board](wood-finishing-sampler.md) | [First Dovetail Joint](first-joint.md) | [Mortise and Tenon](hand-cut-mortise-tenon.md) | [WDC-09 PNW Timber](../09-pnw-timber.md)*

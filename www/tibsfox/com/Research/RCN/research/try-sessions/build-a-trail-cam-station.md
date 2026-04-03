@@ -208,6 +208,16 @@ Over months and years, this dataset reveals patterns that no single night of obs
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Raccoon Night Watch](night-observation.md)** --- Use your trail camera footage to scout the best location and time for a live night-watch session. The camera tells you where the raccoons are. You go there in person.
+
+> **[Photograph Urban Wildlife](wildlife-photography-basics.md)** --- Trail cam stills are data. Phone and camera photographs are art. Use the trail camera for scouting, then show up at the right time and place with your phone for composition-controlled wildlife photography.
+
+> **[The Ethics of Raccoon Interaction](raccoon-enrichment-ethics.md)** --- The trail camera is the ideal ethical observation tool: it records without disturbing, operates without human presence, and produces data that serves both science and appreciation.
+
+---
+
 ## College of Knowledge Connections
 
 - **Science** --- [Field Research Methods, Data Collection]: This project teaches the fundamentals of remote field research: sensor placement, sampling design, systematic data collection, and temporal analysis. The same principles used here --- location selection, detection optimization, standardized recording protocols --- are the foundation of professional wildlife monitoring.

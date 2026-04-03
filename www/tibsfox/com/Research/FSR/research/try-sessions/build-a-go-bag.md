@@ -284,6 +284,20 @@ Build the bag. Stage it by the door. Maintain it every six months. And hope you 
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Create a Family Emergency Plan](family-emergency-plan.md)** --- The go bag is the physical kit. The family emergency plan is the coordination document. Together, they form the complete household preparedness package. One laminated page on the refrigerator --- meeting points, communication tree, medical needs, utility shutoffs.
+
+> **[Hands-Only CPR](hands-only-cpr.md)** --- The most important medical skill to pair with your go bag. Ten minutes to learn, and it doubles or triples cardiac arrest survival.
+
+> **[Stop the Bleed](stop-the-bleed.md)** --- Your go bag includes a tourniquet and Israeli bandage. This session teaches you how to use them.
+
+> **[Fire Extinguisher Drill](fire-extinguisher-drill.md)** --- Post-earthquake fires are a major secondary hazard. PASS method in 30 seconds.
+
+> **[Explore CERT Training](neighborhood-cert-overview.md)** --- Extend your preparedness from personal to community-level. CERT training teaches you to organize neighborhood response when professional help is days away.
+
+---
+
 ## College of Knowledge Connections
 
 - **Learning** --- [Preparedness Planning]: Building a go bag is an exercise in systematic risk assessment and resource prioritization. It requires identifying likely scenarios, ranking needs by urgency (water > shelter > food > medical > tools > comms), selecting equipment against budget and weight constraints, and establishing a maintenance schedule. These are the same analytical skills used in project management, logistics, and systems design.

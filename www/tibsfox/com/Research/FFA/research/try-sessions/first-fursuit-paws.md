@@ -266,6 +266,12 @@ Asymmetry is normal in handmade items. It is also not visible when the paws are 
 > **Study Guide: [Sewing Basics for Fursuit Makers](../study-guides/sewing-basics-for-fursuit-makers.md)**
 > If any sewing step in this project was confusing --- threading the machine, the ladder stitch, cutting faux fur from the backing --- this study guide covers the fundamentals in detail.
 
+> **Try Session: [Airbrush Basics for Fursuits](airbrush-basics-for-fursuits.md)**
+> Now that you have paws, add dimension with airbrushed gradients, shading, and markings. The airbrush session teaches you to paint on fur scraps before touching your finished pieces.
+
+> **DIY Project: [Build Convention Badge Holders](badge-holder-craft.md)**
+> Use leftover fur scraps from this project to build a matching faux fur lanyard for conventions. Completes the look without building a full suit.
+
 ---
 
 ## Sources and Further Reading

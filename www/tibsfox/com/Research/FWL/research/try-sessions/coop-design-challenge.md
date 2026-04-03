@@ -226,6 +226,16 @@ Before committing to construction, check your design against these questions:
 
 ---
 
+## Try This --- Related Sessions
+
+> **[Hatch Eggs at Home](incubation-project.md)** --- Design the coop first, then fill it. Hatching your own chicks means the coop needs a brooder area or a separate brooder setup for the first 6 weeks.
+
+> **[Feather Art Project](feather-craft-project.md)** --- The coop you design will produce a steady supply of molted feathers. Collect them and turn them into pressed art, wreaths, or quill pens.
+
+> **[Preserve and Display Beautiful Eggs](egg-preservation-project.md)** --- The nesting boxes in your coop design will eventually produce eggs worth preserving permanently. Blown eggs, natural dyes, and display methods for your rainbow flock.
+
+---
+
 ## College of Knowledge Connections
 
 - **Trades** --- [Design, Technical Drawing]: This exercise practices the fundamentals of architectural design: requirements analysis, dimensional planning, multi-view drawing (plan, front elevation, side elevation), and materials specification. These skills transfer directly to any building project.

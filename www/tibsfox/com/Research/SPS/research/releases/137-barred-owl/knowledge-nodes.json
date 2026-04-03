@@ -1,0 +1,103 @@
+{
+  "degree": 137,
+  "species": "Barred Owl",
+  "scientific_name": "Strix varia",
+  "slug": "137-barred-owl",
+  "sound_type": "\"Who cooks for you? Who cooks for you-all?\" -- rhythmic 8-note phrase, 400-550 Hz fundamental, rich and hoarse timbre, measured deliberate phrasing; both sexes call; active day and night",
+  "energy": 4,
+  "ecosystem": "Mature forest, resident. Old-growth and mature second-growth. Dense canopy. Water association. Year-round. Expanding from eastern origin into PNW.",
+  "season": "Year-round resident. Calling peaks during breeding season (February-April) and fall territorial establishment. Calls year-round, day and night.",
+  "family": "Strigidae (3rd consecutive: 135-136-137)",
+  "order": "Strigiformes",
+  "csv_substitute": false,
+  "original_species": "Barred Owl",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.65,
+    "lon": -122.30,
+    "description": "Barred Owls now abundant throughout PNW forests, parks, and suburban areas with large trees."
+  },
+  "taxonomy_note": {
+    "description": "First Barred Owl entry. Third consecutive Strigidae (after GHO 135-136). The Barred Owl is an eastern species that has expanded westward into the PNW, creating a conservation crisis for the Northern Spotted Owl (SPS degree 4). E=4 reflects measured, rhythmic hooting. The caterwauling (degree 138, E=6) is a separate acoustic event.",
+    "current_family": "Strigidae (3rd consecutive, 135-136-137)",
+    "new_family": false,
+    "family_count_in_engine": "Strigidae: fourth entry total (Spotted Owl 4, GHO 135, GHO pair duet 136, Barred Owl 137). Three consecutive at 135-137.",
+    "name_etymology": "Strix from Greek 'screech owl.' varia from Latin 'variegated,' referring to the barred plumage pattern.",
+    "genus_note": "Strix -- first entry for this genus. Different from Bubo (Great Horned Owl). Strix includes both Barred and Spotted Owls.",
+    "order_note": "Strigiformes. Fourth entry. Three consecutive at 135-137.",
+    "family_position": "Strigidae continues for a third consecutive degree. The owl family era deepens."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "400-550 Hz. Significantly higher than GHO (250-400 Hz). Rich, resonant, slightly hoarse quality.",
+    "peak_energy_band_hz": "420-500 Hz. The main vocalization energy is concentrated in this band.",
+    "song_frequency_hz": "Primary call: 400-550 Hz. Individual variation in exact pitch. Female slightly higher than male.",
+    "song_duration_s": "Single phrase: 3-4 seconds (8 notes). Calling bouts: phrases every 10-20 seconds for several minutes.",
+    "note_structure": "8-NOTE PHRASE: 'Who cooks for YOU?' (4 notes, rising emphasis) + 'Who cooks for you-ALL?' (4-5 notes, drawn-out finish). The mnemonic is remarkably accurate to the actual acoustic pattern.",
+    "note_types": "Territorial hoot (8-note phrase), contact call, location call. The 8-note phrase is the primary vocalization.",
+    "phrase_structure": "Two-part phrase: 4 notes + 4-5 notes with distinct rhythmic pattern and emphasis. Deliberate pacing between phrases (10-20 seconds).",
+    "timbre": "Rich, resonant, slightly hoarse or 'barking.' Warmer and more textured than GHO. Some describe as nasal or throaty. Distinctive and immediately recognizable.",
+    "amplitude": "E=4. Moderately loud -- carries 200-400 meters through dense forest. Louder and more frequent than Spotted Owl. Less powerful than GHO pair duet (E=5).",
+    "tempo": "Measured, unhurried. Phrases every 10-20 seconds. Deliberate pacing suggesting territorial confidence.",
+    "context": "Territorial declaration (primary), contact between mates, breeding season intensification. Calls year-round, day and night -- more diurnal than most owls.",
+    "regional_variation": "Minimal vocal variation. The 8-note phrase structure is consistent across the species' range. Individual variation in timing and tonal quality.",
+    "key_property": "\"WHO COOKS FOR YOU?\" -- E=4 MEASURED MNEMONIC. 8-note rhythmic phrase at 400-550 Hz. Rich, hoarse timbre. Day and night calling. Third consecutive Strigidae (135-137). Eastern species expanding into PNW. Spotted Owl conflict. Fourth Strigidae in engine (after Spotted Owl 4, GHO 135-136)."
+  },
+  "plumage": {
+    "overall": "Brown and white barred pattern. Rounded head without ear tufts (unlike Great Horned Owl). Dark brown eyes (unlike yellow-eyed GHO). Prominent facial disc with concentric brown and white rings.",
+    "diagnostic_mark": "Dark eyes (brown, not yellow). No ear tufts. Horizontal barring on chest, vertical streaking on belly. The barred pattern gives the species its common name.",
+    "seasonal_variation": "Minimal. Year-round plumage similar.",
+    "flight_pattern": "Silent flight like other owls. Broad wings, short tail. Moth-like buoyant flight in low-light conditions."
+  },
+  "physical_description": {
+    "overall": "Length: 43-50 cm. Weight: 500-1050 g. Wingspan: 99-110 cm. Stocky, rounded body. Large round head without ear tufts. ~20% larger than Northern Spotted Owl.",
+    "diagnostic_mark": "Dark brown eyes distinguish from yellow-eyed Great Horned Owl and Spotted Owl. Barred chest pattern (horizontal bars) vs. Spotted Owl's spotted pattern (white spots on brown).",
+    "field_id": "Large round-headed owl without ear tufts. Dark eyes. Barred chest. Listen for 'Who cooks for you?' at dusk and dawn. More likely to call during day than GHO."
+  },
+  "nodes": [
+    {
+      "id": "who-cooks-mnemonic",
+      "type": "concept",
+      "title": "\"Who Cooks for You?\" -- E=4 Vocal Mnemonic",
+      "description": "The most recognizable owl mnemonic. 8-note rhythmic phrase at 400-550 Hz. Rich, hoarse timbre. Both sexes call. Active day and night. Measured, deliberate phrasing. The mnemonic matches the acoustic pattern with remarkable accuracy.",
+      "connections": ["spotted-owl-conflict", "range-expansion", "strigidae-trio"]
+    },
+    {
+      "id": "spotted-owl-conflict",
+      "type": "concept",
+      "title": "Spotted Owl Conflict -- Conservation Crisis",
+      "description": "Barred Owl displaces Northern Spotted Owl through competitive exclusion. 20% larger body, broader diet, wider habitat tolerance. Hybridization ('Sparred Owls'). USFWS removal programs. The most significant interspecific conflict in PNW conservation. SPS degree 4 meets degree 137.",
+      "connections": ["who-cooks-mnemonic", "range-expansion"]
+    },
+    {
+      "id": "range-expansion",
+      "type": "concept",
+      "title": "Range Expansion -- Eastern to PNW",
+      "description": "Historical eastern species. Expanded via boreal forest corridor created by fire suppression. BC in 1940s-1960s, Washington by 1970s-1980s. Now abundant throughout PNW. Habitat generalism enables exploitation of diverse forest types including suburban areas.",
+      "connections": ["spotted-owl-conflict", "who-cooks-mnemonic"]
+    },
+    {
+      "id": "strigidae-trio",
+      "type": "pattern",
+      "title": "Third Consecutive Strigidae (135-137)",
+      "description": "GHO solo (135, E=4), GHO pair duet (136, E=5), Barred Owl (137, E=4). Three consecutive owl entries. The Strigidae era deepens with a new species. Fourth Strigidae in engine total (Spotted Owl at 4).",
+      "connections": ["who-cooks-mnemonic", "spotted-owl-conflict"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-004",
+      "species": "Spotted Owl",
+      "relationship": "ECOLOGICAL CONFLICT! Barred Owl (137, E=4) threatens Spotted Owl (4, E=3). 133 degrees apart. The expanding eastern species displaces the endangered PNW endemic. The most significant interspecific conflict in PNW conservation."
+    },
+    {
+      "target": "SPS-135-136",
+      "species": "Great Horned Owl",
+      "relationship": "STRIGIDAE TRIO! GHO solo (135, E=4), GHO pair duet (136, E=5), Barred Owl (137, E=4). Three consecutive Strigidae. Different genera (Bubo vs. Strix). The GHO is also a predator of Barred Owls."
+    },
+    {
+      "target": "SPS-138",
+      "species": "Barred Owl caterwauling",
+      "relationship": "DOUBLE ENTRY PREVIEW! Measured hooting (137, E=4) to wild caterwauling (138, E=6). Fourth species with double entries. The most dramatic energy step in any double entry: E=4 to E=6."
+    }
+  ]
+}
