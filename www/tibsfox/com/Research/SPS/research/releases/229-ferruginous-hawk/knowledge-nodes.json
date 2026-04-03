@@ -1,0 +1,36 @@
+{
+  "degree": 229, "project": "SPS", "name": "Ferruginous Hawk", "slug": "229-ferruginous-hawk",
+  "species": "Buteo regalis", "family": "Accipitridae", "order": "Accipitriformes",
+  "common_name": "Ferruginous Hawk", "sound_type": "Alarm call -- loud rough descending kree-ah",
+  "energy": 6,
+  "ecosystem": "Open grassland, shrub-steppe, rangeland. Eastern PNW Columbia Basin primary.",
+  "season": "Resident eastern PNW; winter visitor western PNW lowlands",
+  "conservation": "Least Concern (IUCN). Species of Conservation Concern (US). Threatened (Canada SARA).",
+  "vocalization": {
+    "type": "alarm call",
+    "description": "Loud, rough, descending kree-ah or kaah. Raspy texture, repeated 2-4 times. Nest defense context.",
+    "frequency_hz": "1000-3500",
+    "character": "Louder and rougher than Red-tailed Hawk scream; lower than Bald Eagle contact call",
+    "function": "Territorial defense, nest protection, alarm at intrusion"
+  },
+  "ecology": {
+    "prey": "Ground squirrels, prairie dogs, jackrabbits, pocket gophers",
+    "keystone_connection": "Prairie dog colony abundance directly tracks Ferruginous Hawk productivity",
+    "hunting_technique": "Soaring stoop, wind-hover, ground walking (rare among large raptors)",
+    "nesting": "Trees, cliff ledges, ground on rocky outcrops when elevated sites unavailable"
+  },
+  "morphology": {
+    "wingspan_cm": "122-152",
+    "weight_g": "977-2270",
+    "field_mark": "Rust V-shaped leg feathers against white belly (light morph). White upper tail. Ferruginous upper parts.",
+    "morphs": "Light (90%), dark (10%), intermediate rare"
+  },
+  "connections": [
+    {"degree": 229, "type": "s36_pair", "description": "Alcohol Funnycar (E=7, grunge punk, Empty Records). E=13 combined. Both outsized in their domain."},
+    {"degree": 228, "type": "buteo_sequence", "description": "Red-tailed Hawk (FIRST BUTEO). Ferruginous follows as largest buteo."},
+    {"degree": 230, "type": "buteo_sequence", "description": "Rough-legged Hawk (Arctic buteo visitor, E=4). Third and final buteo in the engine's sequence."},
+    {"degree": 231, "type": "family_transition", "description": "Peregrine Falcon (FIRST FALCONIDAE). Major taxonomic boundary two degrees ahead."}
+  ],
+  "tags": ["accipitridae", "buteo", "ferruginous-hawk", "open-grassland", "largest-buteo", "prairie-dog-connection", "shrub-steppe", "columbia-basin", "conservation-concern"],
+  "milestones": ["LARGEST NORTH AMERICAN BUTEO", "EASTERN PNW SHRUB-STEPPE DOCUMENTED", "BUTEO 2 OF 3"]
+}
