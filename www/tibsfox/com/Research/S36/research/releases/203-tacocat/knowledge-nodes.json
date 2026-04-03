@@ -1,0 +1,86 @@
+{
+  "degree": 203,
+  "artist": "Tacocat",
+  "slug": "203-tacocat",
+  "genre": "Punk Pop",
+  "energy": 6,
+  "era": "Punk Pop. E=6 -- bright, fast, hook-driven, feminist. Palindrome name. Hardly Art streak 3/4. v1.49.344.",
+  "location": {
+    "origin": "Capitol Hill, Seattle",
+    "formative": "Capitol Hill punk pop scene. Feminist music network. Hardly Art community.",
+    "career": "Tacocat. 2007-present. Hardly Art. Punk pop. Palindrome feminism."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2007-present",
+  "labels": ["Hardly Art"],
+  "members": [
+    {"name": "Emily Nokes", "role": "vocals", "note": "Bright, clear, conversational-to-shouted. Feminist lyrics. Humor as vehicle."},
+    {"name": "Eric Randall", "role": "guitar", "note": "Fast power chords. Bright distortion. Punk rhythm guitar."},
+    {"name": "Bree McKenna", "role": "bass", "note": "Fast driving bass. Also in Childbirth (204). Network node."},
+    {"name": "Lelah Maupin", "role": "drums", "note": "Fast, driving, punk tempos. Energy through speed."}
+  ],
+  "former_members": [],
+  "associated_musicians": [
+    {"name": "Childbirth", "note": "Supergroup featuring Bree McKenna. Hardly Art (204). Direct member overlap."},
+    {"name": "Chastity Belt", "note": "Hardly Art labelmate (201). Members overlap via Childbirth. Network triangle."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Humor as political vehicle -- Tacocat uses humor to deliver feminist politics. Laugh first, think second. The point lands because the delivery disarms. Distinct from Chastity Belt's irony.",
+      "level": "milestone",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/humor-as-politics.md",
+      "examples": [
+        "Crimson Wave: menstruation. Catchy punk anthem.",
+        "Men Explain Things to Me: mansplaining (after Solnit).",
+        "Hey Girl: street harassment.",
+        "The subjects are political. The delivery is pop."
+      ],
+      "description": "Humor as political vehicle. Feminist punk pop. Laugh then think.",
+      "genealogy": {
+        "ancestors": ["Bikini Kill (riot grrrl, direct politics).", "Ramones (pop-punk catchiness).", "2010s internet feminism."],
+        "relationship": "Tacocat at 203. Humor-first feminist punk pop."
+      }
+    },
+    {
+      "concept": "Hardly Art energy ascent -- E=4 (201) to E=5 (202) to E=6 (203). The streak climbs. Three genres, one direction. Label range fully visible.",
+      "level": "advanced",
+      "department": "label-theory",
+      "college_path": ".college/music/theory/label/hardly-art-energy-ascent.md",
+      "examples": [
+        "201: Chastity Belt, indie rock, E=4.",
+        "202: La Luz, surf/indie, E=5.",
+        "203: Tacocat, punk pop, E=6.",
+        "204: Childbirth, punk pop, E=6 (plateau)."
+      ],
+      "description": "Hardly Art energy ascent. E=4 to E=6 across three genres.",
+      "genealogy": {
+        "ancestors": ["Hardly Art streak begins (201).", "Genre diversification.", "Energy calibration."],
+        "relationship": "Tacocat at 203. Peak energy in the streak."
+      }
+    },
+    {
+      "concept": "Member overlap network -- Tacocat's McKenna in Childbirth (204). Chastity Belt members in Childbirth too. Triangle: 201-203-204. People, not just proximity.",
+      "level": "intermediate",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/member-overlap-network.md",
+      "examples": [
+        "McKenna: Tacocat (203) + Childbirth (204).",
+        "Chastity Belt (201) members in Childbirth (204).",
+        "Three bands, shared DNA.",
+        "Geographic overlap: Capitol Hill venues."
+      ],
+      "description": "Member overlap network. Capitol Hill triangle. Shared DNA across bands.",
+      "genealogy": {
+        "ancestors": ["Capitol Hill feminist network.", "Hardly Art curation."],
+        "relationship": "Tacocat at 203. Central node in overlap network."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 201, "artist": "Chastity Belt", "relationship": "Hardly Art 1/4. Ironic deadpan (E=4) to open humor (E=6). Two feminist delivery modes."},
+    {"degree": 202, "artist": "La Luz", "relationship": "Hardly Art 2/4. Surf reverb to punk distortion. E=5 to E=6."},
+    {"degree": 204, "artist": "Childbirth", "relationship": "Hardly Art 4/4. Supergroup with Tacocat's McKenna. Member overlap made explicit."},
+    {"degree": 193, "artist": "Fastbacks", "relationship": "Historical punk lineage. Fastbacks (1979) to Tacocat (2007). 28 years of Capitol Hill punk."}
+  ]
+}

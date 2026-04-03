@@ -1,0 +1,86 @@
+{
+  "degree": 198,
+  "artist": "Pedro the Lion",
+  "slug": "198-pedro-the-lion",
+  "genre": "Indie / Emo",
+  "energy": 4,
+  "era": "Indie / Emo. E=4 -- quiet, confessional, narrative. David Bazan. Faith and doubt. Greenwood enters. v1.49.339.",
+  "location": {
+    "origin": "Greenwood, Seattle -- NEW NEIGHBORHOOD",
+    "formative": "North Seattle. Residential, understated. Not the scene -- the place where the artist lives.",
+    "career": "Pedro the Lion. 1995-2006, 2017-present. Jade Tree Records. David Bazan solo overlap."
+  },
+  "formed": "Greenwood, Seattle, Washington",
+  "active": "1995-2006, 2017-present",
+  "labels": ["Jade Tree Records", "Made in Mexico", "Suicide Squeeze", "Polyvinyl"],
+  "members": [
+    {"name": "David Bazan", "role": "vocals / guitar / bass / songwriter", "note": "Sole constant. Warm, conversational voice. Narrative storytelling. Faith and doubt. Also solo career."}
+  ],
+  "former_members": [
+    {"name": "Various", "role": "bass, drums, keys", "note": "Multiple members across eras. Bazan is the constant."}
+  ],
+  "associated_musicians": [
+    {"name": "Sunny Day Real Estate", "note": "Emo parallel. Enigk faith/Bazan doubt. E=5 (SDRE) to E=4 (Pedro the Lion)."},
+    {"name": "Death Cab for Cutie", "note": "Same indie scene. Ben Gibbard as parallel storyteller."},
+    {"name": "Damien Jurado", "note": "Pacific Northwest singer-songwriter community."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Greenwood enters -- first north Seattle neighborhood in the engine. Residential, understated, far from the scene. E=4 matches its character.",
+      "level": "milestone",
+      "department": "geography",
+      "college_path": ".college/music/theory/geography/greenwood.md",
+      "examples": [
+        "Greenwood: north Seattle, residential, understated.",
+        "First north Seattle neighborhood in the engine.",
+        "Contrasts with Capitol Hill (scene) and Ballard (waterfront).",
+        "E=4 neighborhood energy: present but not loud."
+      ],
+      "description": "Greenwood enters. New neighborhood. North Seattle.",
+      "genealogy": {
+        "ancestors": ["Capitol Hill (dominant).", "Ballard.", "University District."],
+        "relationship": "Pedro the Lion at 198. Greenwood opens a new quadrant."
+      }
+    },
+    {
+      "concept": "Faith-doubt thread in emo -- Enigk (SDRE, 197) converts TO Christianity. Bazan (Pedro the Lion, 198) departs FROM it. Opposite trajectories, same fundamental questions.",
+      "level": "advanced",
+      "department": "genre-theory",
+      "college_path": ".college/music/theory/genre/faith-doubt-emo.md",
+      "examples": [
+        "Enigk: conversion, spiritual albums, Return of the Frog Queen.",
+        "Bazan: departure, questioning, loss of organized faith.",
+        "Both wrestle with meaning, morality, transcendence.",
+        "Emo's emotional vulnerability has a spiritual dimension."
+      ],
+      "description": "Faith and doubt in emo. Enigk and Bazan. Opposite trajectories.",
+      "genealogy": {
+        "ancestors": ["Emo genre (emotional vulnerability).", "SDRE at 197.", "Christian indie music."],
+        "relationship": "Pedro the Lion at 198. Faith-doubt as emo thread."
+      }
+    },
+    {
+      "concept": "E=4 confessional emo -- the quiet end of the emo spectrum. SDRE at E=5 (surging). Pedro the Lion at E=4 (conversational). Intense through restraint.",
+      "level": "intermediate",
+      "department": "energy-theory",
+      "college_path": ".college/music/theory/energy/e4-confessional-emo.md",
+      "examples": [
+        "E=5 emo: SDRE, surging, dynamic extremes.",
+        "E=4 emo: Pedro the Lion, conversational, restraint.",
+        "Same genre family, different energy level.",
+        "764-HERO (196) also E=4 -- restraint parallel."
+      ],
+      "description": "E=4 confessional emo. Quiet intensity. Storytelling.",
+      "genealogy": {
+        "ancestors": ["Energy calibration theory.", "Emo energy spectrum (SDRE E=5)."],
+        "relationship": "Pedro the Lion at 198. E=4 as quiet emo."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 197, "artist": "Sunny Day Real Estate", "relationship": "E=5 to E=4. FIRST EMO to second emo. Enigk's faith, Bazan's doubt. The emo thread."},
+    {"degree": 196, "artist": "764-HERO (indie)", "relationship": "Both E=4. Both restrained. Indie rock restraint parallels confessional emo restraint."},
+    {"degree": 200, "artist": "Death Cab for Cutie", "relationship": "Same late-90s/early-2000s indie scene. Parallel storytellers. Capitol Hill to Greenwood."},
+    {"degree": 58, "artist": "Death Cab for Cutie", "relationship": "First Death Cab entry. The indie/emo ecosystem that produced both bands."}
+  ]
+}

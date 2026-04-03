@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 202&deg; &mdash; La Luz &mdash; E=5 &mdash; FIRST SURF ROCK &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #0277BD, #0288D1, #039BE5); color: #E1F5FE; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #0277BD; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #00838F; color: #E0F7FA; border: 1px solid #00ACC1; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .milestone-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; margin-left: 0.3rem; }
+    .streak-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #E8EAF6; color: #283593; border: 1px solid #9FA8DA; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #0277BD; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #0277BD; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #0277BD; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E1F5FE; font-style: italic; color: #01579B; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>202 &mdash; La Luz (E=5)</span>
+    </nav>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">202&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">La Luz</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Surf / Indie</span>
+          <span class="label-badge">Hardly Art</span>
+          <span class="milestone-badge">Genre Stage 106</span>
+          <span class="streak-badge">Hardly Art 2/4</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>Dark Surf &mdash; The Pacific at Dusk</h2>
+          <blockquote>
+            Surf rock enters the engine. Genre Stage 106. La Luz: Shana Cleveland&rsquo;s
+            spring-reverb guitar, minor keys, fog-coast melancholy. Not beach party
+            surf &mdash; dark surf for cold Pacific water. Vocal harmonies add a 1960s
+            girl-group dimension. Hardly Art streak continues. Capitol Hill. E=5.
+            The sound of the Pacific filtered through rain and fog.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Genre Stage 106 &mdash; Surf Rock Enters</h4>
+              <div class="level milestone">Milestone &mdash; Genre Theory</div>
+              <p>
+                FIRST SURF ROCK in the engine. 106 genre entries at 202 degrees.
+                Dark, reverb-heavy, minor-key surf filtered through PNW rain.
+                Not California beach party &mdash; Pacific Northwest fog coast.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Reverb as Landscape</h4>
+              <div class="level advanced">Advanced &mdash; Production Theory</div>
+              <p>
+                Cleveland&rsquo;s reverb is not decorative &mdash; it&rsquo;s evocative.
+                The wet signal places the guitar on a foggy coastline, in a cave,
+                in a tiled room. The space is as important as the notes.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 Rhythmic Drive</h4>
+              <div class="level intermediate">Intermediate &mdash; Energy Theory</div>
+              <p>
+                Surf rock&rsquo;s energy comes from rhythm, not volume. Driving beat,
+                tremolo picking, insistent bass &mdash; kinetic momentum without
+                distortion. E=5: guitar-forward, melodic, rhythmic.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">201&deg;</span> <strong>Chastity Belt</strong> &mdash; Hardly Art 1/4. E=4 to E=5. Slacker indie to surf drive. Energy steps up with the rhythm section.</li>
+            <li><span class="ref-degree">203&deg;</span> <strong>Tacocat</strong> &mdash; Hardly Art 3/4. Surf to punk pop. E=5 to E=6. The streak accelerates.</li>
+            <li><span class="ref-degree">204&deg;</span> <strong>Childbirth</strong> &mdash; Hardly Art 4/4. Streak completes. Supergroup with network members.</li>
+            <li><span class="ref-degree">200&deg;</span> <strong>Death Cab for Cutie</strong> &mdash; Indie heavyweight. La Luz is the opposite: rhythmic, reverbed, genre-expanding. DCFC introspection to La Luz kinetic drive.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Band Profile</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">202&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Surf / Indie</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Hardly Art</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">2011&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.343</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar/Vox</span><span class="stat-value">Shana Cleveland</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Genre Milestone</h4>
+          <div class="stat-row"><span class="stat-label">Stage</span><span class="stat-value">106</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Surf Rock</span></div>
+          <div class="stat-row"><span class="stat-label">First in engine</span><span class="stat-value">Yes</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Degree Pair</h4>
+          <div class="stat-row"><span class="stat-label">S36</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">SPS</span><span class="stat-value">E = 4</span></div>
+          <div class="stat-row"><span class="stat-label">Pair total</span><span class="stat-value">E = 9</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #CFD8DC; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../201-chastity-belt/" style="color: var(--seattle-navy);">&larr; 201&deg; Chastity Belt</a>
+        <a href="../203-tacocat/" style="color: var(--seattle-navy);">203&deg; Tacocat &rarr;</a>
+      </div>
+      <p>Degree 202&deg; &mdash; La Luz &mdash; E=5 &mdash; Hardly Art &mdash; FIRST SURF ROCK (Genre Stage 106) &mdash; Seattle 360 Engine &mdash; v1.49.343<br>Dark surf for the fog coast. The sound of the Pacific filtered through rain.</p>
+    </footer>
+  </div>
+</body>
+</html>

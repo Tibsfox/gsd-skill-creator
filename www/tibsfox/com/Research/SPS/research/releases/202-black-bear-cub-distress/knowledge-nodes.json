@@ -1,0 +1,111 @@
+{
+  "degree": 202,
+  "species": "Black Bear",
+  "scientific_name": "Ursus americanus",
+  "slug": "202-black-bear-cub-distress",
+  "sound_type": "cub distress call -- high mewling squall 'meeew, meeew'. 300-800 Hz. Separation from sow. Summer. E=4",
+  "energy": 4,
+  "ecosystem": "Forest, meadow, berry patch. Summer. First summer with sow. Cub following mother.",
+  "season": "Summer (May-September). First summer after emergence from den.",
+  "family": "Ursidae (third and final entry -- huff at 200, jaw-pop at 201)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Black Bear",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -121.80,
+    "description": "Black Bear throughout western Washington. Forest and meadow. Cub with sow in summer."
+  },
+  "taxonomy_note": {
+    "description": "Third and final Black Bear entry. Bear trio complete (200-202). Final Ursidae in the engine.",
+    "current_family": "Ursidae (third and final entry)",
+    "new_family": false,
+    "family_count_in_engine": "Ursidae: Black Bear Huff (200, E=5), Black Bear Jaw-Pop (201, E=6), Black Bear Cub Distress (202, E=4). COMPLETE.",
+    "name_etymology": "Ursus from Latin 'bear'. americanus for American continent.",
+    "genus_note": "Ursus -- bears. Only Ursus species in PNW lowlands.",
+    "order_note": "Carnivora. Third and final Carnivora Ursidae entry.",
+    "family_position": "Ursidae: third and final entry. Bear trio complete.",
+    "class_note": "Class Mammalia. Bear trio (200-202) done."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "300-800 Hz. High for a bear. Produced by small vocal cords.",
+    "peak_energy_band_hz": "400-600 Hz (peak of cub distress mew).",
+    "song_frequency_hz": "Distress: 300-800 Hz. Contentment humming: 100-300 Hz.",
+    "song_duration_s": "Distress mew: 0.5-2.0 sec. Repeated every 2-5 seconds.",
+    "note_structure": "Single mewing vocalization. Repeated insistently when distressed.",
+    "note_types": "Distress mew (high, thin, separation), contentment hum (low, nursing).",
+    "phrase_structure": "Repeated mews at regular intervals. Rate increases with distress level. Continuous when panicked.",
+    "timbre": "Thin, high, mewling. Small body cavity. Small vocal cords. Not yet the resonant adult voice.",
+    "amplitude": "E=4. Infant vulnerability. Audible at 50-150 m. Sufficient for sow. Not long-range.",
+    "tempo": "Mew every 2-5 seconds. Faster when more distressed. Continuous when panicked.",
+    "context": "Separation from sow. Fear. Tree-climbing failure. First summer. Close to mother.",
+    "regional_variation": "Minimal. Cub distress calls are structurally consistent across populations.",
+    "key_property": "CUB DISTRESS. High mewling squall. 300-800 Hz. E=4. BEAR TRIO 3/3 (200-202) COMPLETE. Final Ursidae. INVERSION from adult E=6 to infant E=4. v1.49.343."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Cub: black fur, lighter muzzle. Small (2-4 kg at emergence, growing to 15-25 kg by fall). Claws for climbing.",
+    "diagnostic_mark": "Small size. Black fur. Lighter muzzle. Often seen with sow (larger adult). Climbing behavior.",
+    "seasonal_variation": "Born nearly hairless. Full coat by emergence. Grows rapidly through summer.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Cub at emergence: 2-4 kg (5-10 lbs). By fall: 15-25 kg (35-55 lbs). Black fur. Small claws for climbing.",
+    "diagnostic_mark": "Small bear. Always with or near sow. Climbs trees when threatened. Mews when separated.",
+    "field_id": "Small black bear (cub) near larger adult (sow). If you see a cub, the sow is nearby. Leave immediately. Do not approach."
+  },
+  "nodes": [
+    {
+      "id": "bear-trio-complete",
+      "type": "milestone",
+      "title": "Bear Trio Complete -- 200-202",
+      "description": "Three entries, one species. Huff (awareness, E=5), jaw-pop (threat, E=6), cub distress (need, E=4). Escalation then inversion. Final Ursidae.",
+      "connections": ["cub-distress-call", "maternal-response", "infant-comparison"]
+    },
+    {
+      "id": "cub-distress-call",
+      "type": "concept",
+      "title": "Cub Distress Call -- The Sound of Need",
+      "description": "300-800 Hz. High, thin, mewling. Repeated every 2-5 seconds. The vocal tether between cub and sow. Brings the sow running.",
+      "connections": ["bear-trio-complete", "maternal-response"]
+    },
+    {
+      "id": "maternal-response",
+      "type": "concept",
+      "title": "Maternal Response -- Highest Risk Encounter",
+      "description": "Sow responds to cub distress with defensive aggression. The most dangerous bear encounter for hikers. Leave immediately.",
+      "connections": ["bear-trio-complete", "cub-distress-call"]
+    },
+    {
+      "id": "infant-comparison",
+      "type": "concept",
+      "title": "Infant Contact Call -- Bear Cub vs. Deer Fawn",
+      "description": "Cub distress (E=4, 300-800 Hz) vs. fawn bleat (E=3, 500-1,500 Hz). Both infant calls. Cubs more vocal, more insistent.",
+      "connections": ["bear-trio-complete"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-200",
+      "species": "Black Bear Huff",
+      "relationship": "BEAR TRIO 1/3! Huff (E=5). Trio begins with adult awareness. Cub inverts at E=4."
+    },
+    {
+      "target": "SPS-201",
+      "species": "Black Bear Jaw-Pop",
+      "relationship": "BEAR TRIO 2/3! Jaw-pop (E=6) to cub (E=4). The -2 inversion. Intimidation to vulnerability."
+    },
+    {
+      "target": "SPS-195",
+      "species": "Black-tailed Deer Fawn Bleat",
+      "relationship": "INFANT PARALLEL! Fawn (E=3) and cub (E=4). Both infant contact calls. Cubs more vocal."
+    },
+    {
+      "target": "S36-202",
+      "artist": "La Luz",
+      "relationship": "ECHO AND CALLING! Reverb (coast echo) and cub mew (forest echo). Searching sounds."
+    }
+  ]
+}
