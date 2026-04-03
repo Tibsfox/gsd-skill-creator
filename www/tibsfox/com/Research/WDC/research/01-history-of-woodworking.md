@@ -172,6 +172,19 @@ The modern PNW woodworking scene carries forward multiple threads from this hist
 
 ---
 
+## College of Knowledge Connections
+
+- **Trades** — [woodworking]: The history of woodworking is the history of the trades. From Egyptian mortise-and-tenon joints to Japanese temple carpentry to the Arts and Crafts movement's reaction against industrial production, every era's woodworking reflects the relationship between maker, material, and purpose. This chapter is the origin story for the trades department's woodworking curriculum.
+- **History** — [continuity-change]: Ten thousand years of woodcraft shows remarkable continuity (the mortise-and-tenon joint has not been improved upon since Egypt) alongside dramatic change (powered machinery, CNC fabrication, cross-laminated timber). The guild system, the industrial revolution, and the hand tool revival are case studies in how traditions adapt to technological disruption.
+- **Art** — [craft as expression]: Japanese temple carpentry, Ming dynasty furniture, and the studio furniture movement all demonstrate that woodworking is simultaneously craft and art. The boundary between functional construction and aesthetic expression has been porous for millennia.
+
+## Try This
+
+- **Sharpen a Chisel in 15 Minutes** ([try-sessions/sharpen-a-chisel](try-sessions/sharpen-a-chisel.md)): The Japanese temple carpenters described in this chapter spent years mastering tool sharpening before cutting a single joint. Start your own sharpening practice today.
+- **Cut Your First Dovetail Joint** ([try-sessions/first-joint](try-sessions/first-joint.md)): The dovetail joint appears in this chapter as an ancient technique and a modern maker's rite of passage. Cut one yourself and join the tradition.
+
+---
+
 ## Sources and References
 
 - Killen, Geoffrey. "Ancient Egyptian Furniture." Aris & Phillips, 1994.

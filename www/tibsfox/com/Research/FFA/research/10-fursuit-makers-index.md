@@ -548,4 +548,12 @@ Individual maker websites, social media accounts, and convention appearances ser
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** --- [Creative Enterprise]: The fursuit maker ecosystem is a creative economy --- independent artisans producing bespoke works through commission-based business models. Understanding maker tiers, pricing, portfolio assessment, and the client-maker relationship applies to any commissioned creative field.
+- **Trades** --- [Skilled Craft Trades]: Fursuit making is a skilled trade that combines textile work, foam sculpture, adhesive engineering, and finishing techniques. The progression from hobbyist to professional mirrors the apprenticeship model in traditional trades.
+- **Psychology** --- [Identity and Self-Expression]: The fursuit commission process involves deeply personal creative expression --- a person bringing an imagined identity into physical form. The emotional significance of the maker-client relationship and the moment of first wearing a completed suit reflect the psychology of identity, embodiment, and creative collaboration.
+
+---
+
 *Module FFA-10. Cross-references: [FFA-04], [FFA-03], [FFA-02], [FFA-11], [FFA-12], [PNT-02], [PNT-03]. Safety codes: SC-IP.*

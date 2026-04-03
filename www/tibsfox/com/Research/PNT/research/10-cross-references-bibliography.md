@@ -284,6 +284,20 @@ The gouache renaissance -- driven by Instagram, TikTok, and a generation of pain
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [seeing-drawing]: The cross-references in this bibliography connect painting to every other visual discipline. Drawing, photography, digital art, textile design, and architectural rendering all develop seeing skills. The bibliography maps the network of related seeing practices.
+- **Art** — [color-composition]: Color and composition theory texts listed here span art, science, and design. The interdisciplinary nature of color knowledge — from Albers to Munsell to the physics of light — reflects the color-composition concept's breadth.
+- **Learning** — [study-strategies]: A well-organized bibliography is itself a study strategy. Knowing which books to read first (Gurney before Albers, Loomis before Bridgman), which resources are reference vs. tutorial, and which periodicals keep you current is metacognitive knowledge that accelerates learning.
+
+## Try This
+
+- **Art History Timeline Study Guide** ([study-guides/art-history-timeline](study-guides/art-history-timeline.md)): The study guide synthesizes the historical sources in this bibliography into a testable, structured review of every major movement in painting.
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Start here. No amount of bibliography replaces the experience of painting.
+- **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): Build the daily practice that makes all other learning stick.
+
+---
+
 ## Final Note
 
 Painting is not a closed system. It connects to everything -- to science (optics, chemistry, biology), to technology (digital tools, GPU rendering, material science), to culture (community, identity, commerce), and to other creative practices (3D art, animation, textile craft, fursuit making). The boundaries between painting and these adjacent fields are porous and productive. A painter who stays only within painting misses the richest opportunities for growth and connection.

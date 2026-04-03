@@ -300,6 +300,18 @@ The materials investment ladder in [PNT-07] discusses how to upgrade surfaces as
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [materials-making]: The surface is half the painting. Canvas, panel, paper — each substrate interacts with the paint medium in specific ways. Understanding surface preparation (gesso, sizing, tooth) is materials knowledge that directly determines how paint adheres, absorbs, and ages.
+- **Materials** — [material-properties]: Surface properties — absorbency, texture, flexibility, dimensional stability, pH — determine which mediums work on which substrates and how the painting will age. Linen's superior dimensional stability compared to cotton, the archival permanence of acid-free paper, the rigidity of hardboard panels — all are material properties with measurable consequences.
+- **Trades** — [woodworking]: Wood panels for painting connect the painter's studio to the woodworker's shop. Understanding wood movement, grain orientation, and panel construction (cradling, cross-battens) prevents cracking and warping. The same wood science that governs furniture construction governs painting panel preparation.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): The session recommends a toned surface — pre-coat your canvas panel with a thin wash of yellow ochre. This teaches you about surface preparation in the simplest possible way: one step that transforms the painting experience.
+
+---
+
 ## 10. Sources
 
 - Gottsegen, M.D. (2006). *The Painter's Handbook*. Watson-Guptill.

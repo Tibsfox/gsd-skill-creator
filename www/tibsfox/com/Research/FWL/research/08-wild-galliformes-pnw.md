@@ -231,3 +231,10 @@ The farmyard rooster crowing at dawn and the Sooty Grouse hooting in old-growth 
 - Martin, K. (2001). "Wildlife in alpine and sub-alpine habitats." In: Johnson and O'Neil (eds.), *Wildlife-Habitat Relationships in Oregon and Washington*. OSU Press.
 
 *Cross-references: [AVI-01b] Galliformes through Strigiformes; [ECO] food webs, seed dispersal, fire ecology; [MAM] predator-prey dynamics with Northern Goshawk, coyote, bobcat.*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Ecology & Habitats, Animals & Birds]: Wild galliformes are keystone prey species in PNW forest ecosystems, connecting to food web dynamics, habitat management, and the ecological roles of ground-nesting birds. Grouse drumming, quail covey behavior, and ptarmigan seasonal plumage change are accessible examples of behavioral ecology.
+- **Science** --- [Observation & Inquiry]: Identifying wild galliformes in the field requires careful observation of habitat, behavior, vocalizations, and subtle morphological differences --- the core skills of scientific observation applied to natural history.

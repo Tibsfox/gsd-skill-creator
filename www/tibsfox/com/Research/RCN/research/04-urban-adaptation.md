@@ -246,5 +246,13 @@ Cities are raccoon habitat now. Not in a degraded, making-do sense, but in a gen
 
 ---
 
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Ecology & Habitats, Citizen Science]: Urban raccoon adaptation is a case study in synanthropic ecology --- how wildlife adapts to human-modified environments. Monitoring urban wildlife populations through citizen science (iNaturalist, trail cameras) connects to the Citizen Science wing.
+- **Science** --- [Evidence-Based Observation]: The Toronto raccoon wars, urban density studies, and human-wildlife conflict research demonstrate how empirical data (population surveys, GPS tracking, behavioral observation) informs wildlife management policy.
+- **Home Economics** --- [Home Management]: Raccoon-proofing homes, securing garbage, and managing coexistence with urban wildlife are practical home management skills directly relevant to PNW households.
+
+---
+
 *PNW Research Series --- RCN Project*
 *tibsfox.com/Research/RCN*

@@ -277,6 +277,19 @@ What matters is not which genre you practice. What matters is that you practice.
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [art-in-context]: Every genre and movement exists in cultural context. Still life flourished in Dutch Golden Age markets. Landscape rose alongside Romantic philosophy. Abstract art emerged in the aftermath of world wars. Understanding genre as a cultural response — not just a technical category — is the art-in-context framework in action.
+- **Art** — [creative-process]: Choosing a genre is a creative decision. Each genre imposes constraints (still life demands patience, plein air demands speed, portraiture demands likeness) and rewards different strengths. Understanding the full range of genres helps painters find the creative process that fits their temperament and goals.
+- **History** — [perspectives-empathy]: Art movements reflect the worldviews of their creators. Understanding why Impressionists rejected academic finish, why Abstract Expressionists rejected representation, and why furry artists embrace character portraiture requires perspective-taking — seeing the world through another era's or community's eyes.
+
+## Try This
+
+- **Art History Timeline Study Guide** ([study-guides/art-history-timeline](study-guides/art-history-timeline.md)): The movements described in this chapter are organized chronologically with key artists, key paintings, and self-test questions in the study guide. Use it as a companion reference.
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Still life is one of the great genres. Painting an apple from life connects you to a tradition stretching from Chardin to Cezanne to contemporary realism.
+
+---
+
 ## 10. Sources
 
 - Campbell, L. (1990). *Renaissance Portraits: European Portrait-Painting in the 14th, 15th and 16th Centuries*. Yale University Press.

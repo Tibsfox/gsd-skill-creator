@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 125&deg; &mdash; Greater Scaup &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #00695C, #00897B);
+      color: #B2DFDB;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(0, 105, 92, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .raft-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 30%, #1E88E5 60%, #1565C0 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .raft-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .raft-card p { color: #E3F2FD; }
+    .raft-card strong { color: #BBDEFB; }
+
+    .id-card {
+      background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 30%, #FFA000 60%, #FF6F00 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF8E1;
+    }
+    .id-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFF3E0;
+    }
+    .id-card p { color: #FFF8E1; }
+    .id-card strong { color: #FFF3E0; }
+
+    .streak-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #4E342E 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .streak-card p { color: #EFEBE9; }
+    .streak-card strong { color: #D7CCC8; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.scaup { background: #1565C0; }
+    .theory-icon.raft { background: #00695C; }
+    .theory-icon.id { background: #FF6F00; }
+    .theory-icon.anatidae { background: #4E342E; }
+    .theory-icon.aythya { background: #4527A0; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FFF8E1; color: #FF6F00; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">125&deg;</div>
+      <div class="release-title-block">
+        <h2>Greater Scaup</h2>
+        <div class="scientific"><em>Aythya marila</em> (Anatidae) &mdash; E=3 &mdash; 8th Consecutive Anatidae &mdash; TIES Sciuridae Octet</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      soft scaup call &mdash; <strong>E=3</strong>. The name <strong>&ldquo;scaup&rdquo;</strong>
+      is onomatopoeia &mdash; a direct phonetic transcription of the female&rsquo;s soft,
+      nasal flight call. Eighth consecutive Anatidae (118&ndash;125), <strong>TIES Sciuridae
+      octet record</strong>. One more would <strong>TIE the Picidae nonet ALL-TIME RECORD</strong>.
+      Genus transition: Bucephala &rarr; Aythya. Winters in <strong>enormous rafts</strong>
+      (5,000&ndash;20,000) on Puget Sound bays. Widest energy gap in engine history:
+      E=3 (scaup) vs. E=7 (These Arms Are Snakes) = delta 4.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Raft Card -->
+        <div class="raft-card">
+          <h3>Rafting Behavior &mdash; Thousands on the Bay</h3>
+          <p>
+            Greater Scaup gather in <strong>enormous winter rafts</strong> on Puget Sound &mdash;
+            aggregations of <strong>5,000 to 20,000 individuals</strong> visible from shore as
+            dark shifting masses on the water. Rafting serves predator dilution,
+            thermoregulation, foraging coordination, and multiplied vigilance. The raft
+            functions as a <strong>rolling foraging machine</strong>: birds dive from the
+            leading edge, feed on shellfish beds below, surface at the trailing edge, then
+            swim forward to dive again. The collective murmur of thousands of soft
+            &ldquo;scaup&rdquo; calls creates an ambient hum audible from shore.
+          </p>
+        </div>
+
+        <!-- ID Card -->
+        <div class="id-card">
+          <h3>Greater vs. Lesser Scaup &mdash; The Hardest ID Problem</h3>
+          <p>
+            One of the <strong>most difficult identification challenges</strong> in North American
+            birding. Both species: medium diving ducks, dark heads, gray backs, white flanks,
+            winter in mixed flocks. The key: <strong>head shape</strong>. Greater = <strong>rounded,
+            smooth</strong> from crown to nape, greenish gloss. Lesser = <strong>peaked crown</strong>
+            (highest point behind eye), purplish gloss. Greater has broader bill nail, wider
+            female facial crescent. Greater prefers saltwater; Lesser prefers freshwater &mdash;
+            but extensive overlap on Puget Sound.
+          </p>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-card">
+          <h3>8th Consecutive Anatidae &mdash; TIES Sciuridae Octet Record</h3>
+          <p>
+            Eight consecutive Anatidae: Harlequin (118), Common Merganser (119), Hooded
+            Merganser (120), Wood Duck (121), Bufflehead (122), Barrow&rsquo;s Goldeneye (123),
+            Common Goldeneye (124), <strong>Greater Scaup (125)</strong>. <strong>TIES the
+            Sciuridae octet record</strong> (8 consecutive). One more Anatidae at degree 126
+            would <strong>TIE the Picidae nonet ALL-TIME RECORD</strong> (9 consecutive,
+            107&ndash;115). Genus transition at 125: Bucephala &rarr; Aythya.
+          </p>
+        </div>
+
+        <h2>The Sound That Named the Bird</h2>
+        <p>
+          &ldquo;Scaup&rdquo; is <strong>onomatopoeia</strong> &mdash; the common name is a
+          direct phonetic transcription of the female&rsquo;s soft, nasal flight call. The
+          Scottish/Northern English etymology connects to both the bird&rsquo;s voice and the
+          <strong>mussel beds (scalps/scaups)</strong> where it feeds. Double meaning: named
+          for its voice and for its habitat. The call itself is quiet (E=3), nasal,
+          descending &mdash; a soft &ldquo;scaup&rdquo; or &ldquo;scaup scaup&rdquo; given
+          in flight or when flushed. Male courtship: a dove-like cooing &ldquo;wah-whew,&rdquo;
+          barely audible beyond 15&ndash;20 meters.
+        </p>
+
+        <h2>Bay Duck Ecology</h2>
+        <p>
+          Greater Scaup breeds on <strong>subarctic and boreal tundra</strong> across the
+          Northern Hemisphere. In winter, it favors <strong>saltwater bays and coastal waters</strong>
+          &mdash; more marine than Lesser Scaup. A deep-water diver (1&ndash;6 meters,
+          occasionally 7+) that feeds on <strong>mollusks, crustaceans, and aquatic plants</strong>.
+          One of the most powerful gizzards among diving ducks &mdash; necessary for
+          crushing mussel and clam shells. Global population: <strong>1.2&ndash;1.4 million</strong>
+          (Least Concern), but concerning <strong>~50% decline since the 1980s</strong>.
+          Every large Puget Sound raft is a conservation asset.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-124 Common Goldeneye (Bucephala &rarr; Aythya)</strong>
+            <p>GENUS TRANSITION. Common Goldeneye (Bucephala, wing-whistle, E=4) followed by Greater Scaup (Aythya, soft call, E=3). Mechanical to vocal. Cavity nester to ground nester. Cosmopolitan boreal to subarctic tundra.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (Anatidae streak)</strong>
+            <p>ANATIDAE STREAK! Eight consecutive (118-125). Harlequin started the streak at E=5. Greater Scaup at E=3. Stream specialist to bay specialist. TIES Sciuridae octet. One more TIES Picidae nonet ALL-TIME RECORD.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-122 Bufflehead (diving duck comparison)</strong>
+            <p>DIVING DUCKS. Both small-to-medium diving ducks wintering on Puget Sound. Bufflehead (Bucephala, cavity nester, freshwater preference). Scaup (Aythya, ground nester, saltwater preference). Different families, overlapping winter habitat.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-121 Wood Duck (nesting contrast)</strong>
+            <p>NESTING CONTRAST. Wood Duck (cavity nester, forest pools). Greater Scaup (ground nester, arctic tundra). Both Anatidae, completely different breeding strategies and habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-123 Barrow&rsquo;s Goldeneye (energy match)</strong>
+            <p>ENERGY MATCH at E=3. Both produce soft, close-range vocalizations. Barrow's: quiet grunts (courtship). Scaup: soft nasal call (flight/alarm). Same amplitude, different vocal character.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon scaup">S</div>
+            <div class="theory-content">
+              <h4>The Scaup Call &mdash; Onomatopoeic Name</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Common name is direct phonetic transcription of the female's call. Soft, nasal, descending &ldquo;scaup.&rdquo; 500-2,500 Hz. E=3. Close-range vocalization appropriate for raft life. Also refers to mussel beds (scalps/scaups).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon raft">R</div>
+            <div class="theory-content">
+              <h4>Rafting Behavior &mdash; Collective Presence</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Enormous winter aggregations: 5,000-20,000 on Puget Sound. Predator dilution, thermoregulation, foraging coordination, multiplied vigilance. Rolling foraging machine. Collective murmur audible from shore.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon id">G</div>
+            <div class="theory-content">
+              <h4>Greater/Lesser Scaup &mdash; Hardest ID Problem</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Head shape is key: Greater = rounded, Lesser = peaked. Head gloss: Greater = greenish, Lesser = purplish. Greater prefers saltwater, Lesser freshwater. Extensive overlap on Puget Sound. Bill nail width, female facial crescent.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon anatidae">8</div>
+            <div class="theory-content">
+              <h4>Eighth Consecutive Anatidae (118&ndash;125) &mdash; TIES Sciuridae Octet</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Eight consecutive. TIES Sciuridae octet record. One more would TIE Picidae nonet ALL-TIME RECORD (9). Energy: E=5, E=4, E=4, E=3, E=3, E=3, E=4, E=3. Oscillates in lower half.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon aythya">A</div>
+            <div class="theory-content">
+              <h4>Genus Transition: Bucephala &rarr; Aythya</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Bucephala trilogy complete (122-124). Aythya begins at 125. Cavity nesters to ground nesters. Ox-headed divers to bay ducks. Mechanical/vocal to purely vocal. Different branch of Anatidae.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Greater Scaup</div>
+          <div class="stat-detail"><em>Aythya marila</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">8th consecutive (118&ndash;125)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Soft &ldquo;scaup&rdquo;</div>
+          <div class="stat-detail">onomatopoeic name</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">soft, nasal, close-range</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Saltwater bay</div>
+          <div class="stat-detail">marine winter, tundra breeder</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Winter visitor</div>
+          <div class="stat-detail">subarctic breeder</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Head Shape</div>
+          <div class="stat-value">Rounded</div>
+          <div class="stat-detail">vs. Lesser&rsquo;s peaked crown</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Head Gloss</div>
+          <div class="stat-value">Greenish</div>
+          <div class="stat-detail">vs. Lesser&rsquo;s purplish</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Global Population</div>
+          <div class="stat-value">~1.2&ndash;1.4M</div>
+          <div class="stat-detail">~50% decline since 1980s</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Raft Size</div>
+          <div class="stat-value">5,000&ndash;20,000</div>
+          <div class="stat-detail">Puget Sound winter rafts</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

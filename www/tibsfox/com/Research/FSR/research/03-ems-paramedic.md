@@ -155,4 +155,12 @@ For someone who ran medical calls for thirty years, the progression is visible: 
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Anatomy and Physiology]: Prehospital medicine is applied anatomy --- airway management, vascular access, cardiac rhythm interpretation, pharmacology, and trauma assessment all require detailed understanding of human body systems and their failure modes.
+- **Mind-Body** --- [Performing Under Pressure]: Paramedics make critical clinical decisions in uncontrolled environments --- in moving ambulances, on roadsides, in homes, under time pressure. The cognitive load of simultaneous patient assessment, treatment, communication, and scene management demands sustained focus under extreme stress.
+- **Physical Education** --- [Endurance and Ergonomics]: Patient lifting, CPR, equipment carrying, and the physical demands of 12-24 hour shifts require both cardiovascular endurance and biomechanical awareness to prevent the musculoskeletal injuries that are endemic to EMS.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call.*

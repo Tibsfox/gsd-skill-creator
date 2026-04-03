@@ -208,4 +208,12 @@ We know how to do this. We have known for thirty-five years. The only thing miss
 
 ---
 
+## College of Knowledge Connections
+
+- **Psychology** --- [Clinical and Crisis Psychology]: Mental health crisis response draws directly on clinical psychology --- understanding psychosis, suicidal ideation, substance use disorders, de-escalation techniques, and the neurobiological basis of crisis states. Programs like CIT and CAHOOTS apply clinical knowledge in field settings.
+- **Mind-Body** --- [Trauma and Recovery]: The intersection of mental health crisis and first response raises fundamental questions about the relationship between psychological states, physical safety, and environmental context. Crisis intervention is mind-body work in its most immediate form.
+- **Learning** --- [Systems Innovation]: The evolution from law-enforcement-only response to integrated mental health models (CIT, co-responder, community-based) is a case study in how systems innovate when existing approaches produce unacceptable outcomes.
+
+---
+
 *This document is part of the FSR (First Responders) research series within the PNW Research Project. It is dedicated to those who answer the call — and to the ones they are called to help.*

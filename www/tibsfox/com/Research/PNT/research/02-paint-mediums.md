@@ -258,6 +258,19 @@ Most painters eventually work in more than one medium. Understanding them all --
 
 ---
 
+## College of Knowledge Connections
+
+- **Art** — [materials-making]: Every paint medium is a material system — pigment plus binder plus solvent. Understanding why oil paint behaves differently from acrylic or watercolor is materials science applied to art. The art department's materials-making concept connects the physical chemistry of paint to the creative decisions painters make.
+- **Science** — [chemistry]: Paint chemistry is real chemistry: oxidative polymerization in oil paint, polymer emulsion in acrylic, crystallization of gum arabic in watercolor. Understanding these reactions explains drying times, film flexibility, yellowing, cracking, and every other material behavior a painter encounters.
+- **Materials** — [material-properties]: Each medium has measurable properties — viscosity, opacity, drying time, lightfastness, flexibility, adhesion. These properties determine what each medium can and cannot do, and they are the basis for choosing the right medium for a given purpose.
+
+## Try This
+
+- **Paint an Apple in One Hour** ([try-sessions/paint-an-apple](try-sessions/paint-an-apple.md)): Try this session in all three major mediums — oil, acrylic, and gouache — on three separate days. The same subject with different mediums teaches you more about medium behavior than any amount of reading.
+- **The 30-Day Value Study Challenge** ([try-sessions/value-study-challenge](try-sessions/value-study-challenge.md)): The wash version of the challenge (ink diluted with water) teaches you about medium behavior in its simplest form: one pigment, one binder, water as solvent.
+
+---
+
 ## Sources
 
 - Mayer, R. (1991). *The Artist's Handbook of Materials and Techniques*. 5th ed. Viking.

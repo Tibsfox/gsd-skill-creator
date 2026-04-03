@@ -375,3 +375,11 @@ The bantam and ornamental breeds remind us that chickens are not merely units of
 ---
 
 *Sources and further reading: American Bantam Association, "Bantam Standard" (2016); American Poultry Association, "American Standard of Perfection," 44th ed. (2020); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Scrivener (2006), "Rare Poultry Breeds"; The Livestock Conservancy breed conservation priority lists.*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Animals & Birds]: Ornamental bantams push morphological diversity to its extremes --- feather structure (Silkie), body proportion (Japanese Bantam), and plumage precision (Sebright) --- making them ideal subjects for studying phenotypic variation and the limits of selective breeding.
+- **Science** --- [Genetics]: The Sebright's hen-feathering gene, the Silkie's fibromelanosis, and the Japanese Bantam's creeper lethal allele are classic genetic case studies that demonstrate sex-linked expression, pleiotropic mutations, and lethal alleles respectively.
+- **Home Economics** --- [Animal Husbandry]: Bantams require specialized housing and management considerations (small body size, vulnerability to predators, broodiness) that develop practical animal care skills applicable to small-scale poultry keeping.

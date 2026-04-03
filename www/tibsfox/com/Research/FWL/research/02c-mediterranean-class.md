@@ -239,3 +239,11 @@ The Mediterranean breeds are a study in specialization: what happens when centur
 ---
 
 *Sources and further reading: American Poultry Association, "American Standard of Perfection," 44th ed. (2020); The Livestock Conservancy, Conservation Priority List (2024); Ekarius (2007), "Storey's Illustrated Guide to Poultry Breeds"; Scrivener (2006), "Rare Poultry Breeds."*
+
+---
+
+## College of Knowledge Connections
+
+- **Nature Studies** --- [Ecology & Habitats]: Mediterranean breeds are adapted to warm, dry climates --- their lean bodies, large combs (for heat dissipation), and active foraging behavior reflect the environmental pressures of their origin. Understanding climate-adapted traits connects to ecological adaptation concepts.
+- **Science** --- [Genetics]: The white earlobe/white egg correlation in Mediterranean breeds is a classic example of genetic linkage and the relationship between visible markers and productive traits.
+- **Home Economics** --- [Food Production]: The Leghorn's extraordinary egg production (280-320 eggs/year) makes it the foundation of the modern egg industry, directly connecting this document to food system literacy and the economics of food production.

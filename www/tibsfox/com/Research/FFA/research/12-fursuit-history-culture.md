@@ -343,4 +343,12 @@ The furry commission economy documented in [PNT-08] and the portrait painting tr
 
 ---
 
+## College of Knowledge Connections
+
+- **Psychology** --- [Identity, Play, and Community]: Fursuit culture sits at the intersection of identity expression, performative play, and community belonging. The psychology of persona, the social dynamics of convention culture, and the therapeutic dimensions of creative self-expression through costume are rich areas of behavioral and social psychology.
+- **Art** --- [Performance and Material Culture]: Fursuits are simultaneously wearable art, performance costume, and cultural artifact. The history of fursuit evolution --- from crude mascot adaptations to precision-engineered character embodiments --- documents a material culture's artistic development arc.
+- **Home Economics** --- [Craft Economy]: The fursuit economy operates as a cottage industry --- independent makers working from home studios, managing commissions, materials, and client relationships. This micro-enterprise model mirrors historical craft economies and raises questions about sustainable creative livelihoods.
+
+---
+
 *Module FFA-12. Cross-references: [FFA-04], [FFA-10], [FFA-11], [FFA-01], [FFA-02], [PNT-02], [PNT-03], [PNT-06], [PNT-08], [PNT-09]. Safety codes: SC-SAF, SC-IP.*

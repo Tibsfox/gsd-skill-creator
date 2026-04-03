@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 126&deg; &mdash; Canvasback &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #BF360C, #D84315);
+      color: #FFCCBC;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(191, 54, 12, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .record-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 30%, #E64A19 60%, #BF360C 100%);
+      border: 2px solid #870000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFCCBC;
+    }
+    .record-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .record-card p { color: #FFCCBC; }
+    .record-card strong { color: #FFE0B2; }
+
+    .aristocrat-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #4A148C 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E1BEE7;
+    }
+    .aristocrat-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .aristocrat-card p { color: #E1BEE7; }
+    .aristocrat-card strong { color: #CE93D8; }
+
+    .profile-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 30%, #1E88E5 60%, #1565C0 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .profile-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .profile-card p { color: #E3F2FD; }
+    .profile-card strong { color: #BBDEFB; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.record { background: #BF360C; }
+    .theory-icon.aristocrat { background: #4A148C; }
+    .theory-icon.profile { background: #1565C0; }
+    .theory-icon.anatidae { background: #4E342E; }
+    .theory-icon.aythya { background: #00695C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FBE9E7; color: #BF360C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">126&deg;</div>
+      <div class="release-title-block">
+        <h2>Canvasback</h2>
+        <div class="scientific"><em>Aythya valisineria</em> (Anatidae) &mdash; E=3 &mdash; 9th Consecutive Anatidae &mdash; TIES PICIDAE NONET ALL-TIME RECORD</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      low grunts display &mdash; <strong>E=3</strong>. The <strong>&ldquo;aristocrat of ducks&rdquo;</strong>
+      &mdash; North America&rsquo;s <strong>fastest-flying duck</strong> (72 mph) and most
+      elegantly shaped diving duck. Ninth consecutive Anatidae (118&ndash;126),
+      <strong>TIES the Picidae nonet ALL-TIME RECORD</strong> (9 consecutive, 107&ndash;115).
+      The sloping forehead-to-bill profile. Canvas-colored back. Named for
+      <em>Vallisneria</em> (wild celery). Second consecutive Aythya.
+      <strong>Degree 127 determines history:</strong> 10th would break the all-time record.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Record Card -->
+        <div class="record-card">
+          <h3>9th Consecutive Anatidae &mdash; TIES ALL-TIME RECORD</h3>
+          <p>
+            Nine consecutive Anatidae: Harlequin (118) through <strong>Canvasback (126)</strong>.
+            <strong>TIES the Picidae nonet</strong> (107&ndash;115) as the longest family streak
+            in engine history. Four genera, nine ecological niches, nine acoustic profiles.
+            The Picidae nonet included the engine&rsquo;s first E=6 entries; the Anatidae nonet
+            operates in a lower energy register (E=3&ndash;5) but matches the streak length.
+            <strong>Degree 127 is the deciding degree:</strong> a 10th Anatidae would break the
+            all-time record. A non-Anatidae would leave the record tied.
+          </p>
+        </div>
+
+        <!-- Aristocrat Card -->
+        <div class="aristocrat-card">
+          <h3>The Aristocrat of Ducks &mdash; Speed, Elegance, Prestige</h3>
+          <p>
+            The Canvasback is North America&rsquo;s <strong>fastest-flying duck</strong> at
+            <strong>72 mph</strong> (some sources report 80 mph). The distinctive
+            <strong>sloping forehead-to-bill profile</strong> &mdash; a smooth concave curve
+            from crown to bill tip &mdash; is both aerodynamically functional and the
+            definitive field mark. No other North American duck has this shape. Prized in
+            hunting culture for speed, difficulty, and the rich flavor from a wild celery
+            (<em>Vallisneria</em>) diet. The &ldquo;aristocrat&rdquo; title dates to the 19th century.
+          </p>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+          <h3>The Sloping Profile &mdash; Canvasback vs. Redhead</h3>
+          <p>
+            The identification challenge: Canvasback vs. <strong>Redhead</strong>
+            (<em>Aythya americana</em>). Both Aythya with reddish heads. The key:
+            Canvasback = <strong>sloping profile</strong> (smooth concave forehead-to-bill),
+            longer bill, paler canvas-colored back, richer red head.
+            Redhead = <strong>rounded head</strong> (standard duck shape), shorter bill with
+            pale band, darker gray back. The profile difference is definitive at any range
+            where head shape is visible.
+          </p>
+        </div>
+
+        <h2>Low Grunts Display</h2>
+        <p>
+          The Canvasback&rsquo;s courtship involves a dramatic <strong>head-throw display</strong>:
+          the male arches his neck back until the head nearly touches the back, then snaps
+          forward with a low, guttural <strong>&ldquo;ik-ik-ik&rdquo;</strong> grunt. The display
+          is visually spectacular but <strong>acoustically quiet</strong> (E=3). The grunt is
+          deep (200&ndash;1,800 Hz), percussive, brief. Audible at 10&ndash;25 meters. The
+          female gives a soft, harsh &ldquo;crrr&rdquo; &mdash; a growling purr. The Canvasback
+          communicates with restraint: the aristocrat does not shout.
+        </p>
+
+        <h2>Prairie Pothole Breeder</h2>
+        <p>
+          Breeds in the <strong>Prairie Pothole Region</strong> &mdash; the &ldquo;duck factory&rdquo;
+          of North America (Dakotas, Montana, Saskatchewan, Alberta, Manitoba). Prefers
+          <strong>deep-water marshes</strong> with wild celery. The species name <em>valisineria</em>
+          comes from the plant genus <em>Vallisneria</em> &mdash; the aquatic plant that
+          provides both food and rich flavor. Population: <strong>600,000&ndash;700,000</strong>
+          (Least Concern but closely monitored). A <strong>bellwether</strong> for prairie
+          pothole health &mdash; when Canvasback declines, it signals broader wetland
+          degradation.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-125 Greater Scaup (Aythya pair)</strong>
+            <p>SECOND CONSECUTIVE AYTHYA. Scaup (nasal call, bay rafter, E=3) and Canvasback (guttural grunts, prairie breeder, E=3). Same genus, same energy, different vocal character. Both deep-water divers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (Anatidae streak origin)</strong>
+            <p>ANATIDAE NONET! Nine consecutive (118-126). Harlequin started the streak at E=5. Canvasback completes the nonet at E=3. Stream to prairie. TIES Picidae all-time record. The aristocrat carries the record.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-107 Pileated Woodpecker (Picidae nonet)</strong>
+            <p>RECORD TIE! Anatidae nonet (118-126) ties Picidae nonet (107-115). Two families, two streaks, nine consecutive each. Picidae: E=2-6 (wider range). Anatidae: E=3-5 (lower register).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-121 Wood Duck (Anatidae diversity)</strong>
+            <p>ANATIDAE DIVERSITY. Wood Duck (cavity nester, forest pools, E=3) and Canvasback (ground nester, prairie marshes, E=3). Same family, same energy, completely different ecology and habitat. The streak's range.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-124 Common Goldeneye (speed comparison)</strong>
+            <p>SPEED. Common Goldeneye is a fast flier with the wing-whistle. Canvasback is THE fastest at 72 mph. Goldeneye: speed produces sound (wing-whistle). Canvasback: speed is silent (the aristocrat flies without announcement).</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon record">9</div>
+            <div class="theory-content">
+              <h4>Ninth Consecutive Anatidae &mdash; TIES ALL-TIME RECORD</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Nine consecutive (118-126). TIES Picidae nonet (107-115). Four genera, nine niches, nine acoustic profiles. Degree 127 determines whether the record is broken or remains tied. The most significant streak event since the Picidae nonet.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon aristocrat">A</div>
+            <div class="theory-content">
+              <h4>The Aristocrat of Ducks</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>North America's fastest duck (72 mph). The sloping forehead-to-bill profile. Canvas-colored back. Prized for speed, elegance, and flavor (wild celery diet). 19th-century designation that persists.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon profile">P</div>
+            <div class="theory-content">
+              <h4>The Sloping Profile &mdash; Aerodynamic Field Mark</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Smooth concave slope from crown to bill tip. No other North American duck has this shape. Functionally aerodynamic (contributes to speed). Definitive vs. Redhead (rounded profile). Visible at range and in silhouette.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon anatidae">G</div>
+            <div class="theory-content">
+              <h4>Low Grunts Display &mdash; Head-Throw Courtship</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Head-throw display: neck arched back, snap forward with guttural "ik-ik-ik." Visually dramatic, acoustically quiet (E=3). 200-1,800 Hz. Close-range courtship signal. The aristocrat communicates with restraint.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon aythya">V</div>
+            <div class="theory-content">
+              <h4>Aythya Pair Complete (125&ndash;126)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Greater Scaup (125, nasal call, bay rafter) and Canvasback (126, guttural grunts, prairie breeder). Same genus, same E=3, different acoustic character. Both deep-water divers with different breeding strategies.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Canvasback</div>
+          <div class="stat-detail"><em>Aythya valisineria</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">9th consecutive &mdash; TIES RECORD</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Low grunts</div>
+          <div class="stat-detail">head-throw courtship display</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">quiet, guttural, close-range</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Marsh lake</div>
+          <div class="stat-detail">prairie pothole breeder</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Winter visitor</div>
+          <div class="stat-detail">bellwether species</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Top Speed</div>
+          <div class="stat-value">72 mph</div>
+          <div class="stat-detail">fastest N. American duck</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Profile</div>
+          <div class="stat-value">Sloping</div>
+          <div class="stat-detail">concave forehead-to-bill</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Named For</div>
+          <div class="stat-value">Canvas + celery</div>
+          <div class="stat-detail">back plumage + <em>Vallisneria</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Global Population</div>
+          <div class="stat-value">~600&ndash;700K</div>
+          <div class="stat-detail">closely monitored</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

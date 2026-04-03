@@ -220,4 +220,12 @@ The stuffed animal began as a felt elephant pincushion in a Swabian seamstress's
 
 ---
 
+## College of Knowledge Connections
+
+- **Science** --- [Materials Science History]: The evolution of plush materials --- from straw-stuffed fabric to mohair to synthetic faux fur to engineered minky --- parallels the broader history of materials science. Each material innovation changed what was possible in plush design and manufacturing.
+- **Home Economics** --- [Textile Industry and Consumer Safety]: The plush industry's relationship with safety standards (CPSIA, ASTM F963, EN 71, choking hazard regulations) is a case study in how consumer protection frameworks shape manufacturing practices. Understanding safety testing requirements is applied home economics.
+- **Art** --- [Cultural History of Objects]: The stuffed animal's journey from novelty toy to comfort object to collectible art form to cultural phenomenon (Beanie Babies, Squishmallows) documents how the emotional significance of objects evolves across generations and cultural contexts.
+
+---
+
 *Cross-module connections: Construction methods referenced here are detailed in [FFA-06]. Individual maker profiles appear in [FFA-13]. Collecting culture, valuation, and community practices are covered in [FFA-15].*
