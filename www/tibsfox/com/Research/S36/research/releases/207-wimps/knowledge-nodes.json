@@ -1,0 +1,79 @@
+{
+  "degree": 207,
+  "artist": "Wimps",
+  "slug": "207-wimps",
+  "genre": "Lo-Fi Punk",
+  "energy": 5,
+  "era": "Lo-Fi Punk. E=5 -- fast, catchy, deliberately underproduced. Kill Rock Stars returns. E=6 streak breaks. v1.49.348.",
+  "location": {
+    "origin": "Seattle, Washington",
+    "formative": "Seattle punk scene. Olympia lo-fi tradition (Beat Happening, GBV). Kill Rock Stars lineage.",
+    "career": "Wimps. 2010s. Kill Rock Stars. Lo-fi punk."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2010s",
+  "labels": ["Kill Rock Stars"],
+  "members": [],
+  "former_members": [],
+  "associated_musicians": [],
+  "theory_nodes": [
+    {
+      "concept": "E=6 streak breaks at 207 -- four consecutive E=6 (203-206) ends. Wimps' E=5 resets the energy curve. The lo-fi buffer between listener and maximum impact.",
+      "level": "milestone",
+      "department": "energy-theory",
+      "college_path": ".college/music/theory/energy/e6-streak-breaks-207.md",
+      "examples": [
+        "203: Tacocat E=6 (pop-punk).",
+        "204: Childbirth E=6 (garage-raw).",
+        "205: Naked Giants E=6 (power trio).",
+        "206: The Black Tones E=6 (blues rock).",
+        "207: Wimps E=5 (lo-fi punk). STREAK BREAKS."
+      ],
+      "description": "E=6 streak breaks. Four entries at max, then E=5 reset. The engine breathes.",
+      "genealogy": {
+        "ancestors": ["E=6 plateau (203-206).", "Lo-fi energy ceiling.", "Dynamic range theory."],
+        "relationship": "Wimps at 207. E=5 breaks the streak."
+      }
+    },
+    {
+      "concept": "Kill Rock Stars returns -- Olympia-born label (1991). Bikini Kill, Sleater-Kinney, Elliott Smith. Different lineage from Sub Pop: riot grrrl rather than grunge heir.",
+      "level": "advanced",
+      "department": "label-theory",
+      "college_path": ".college/music/theory/label/kill-rock-stars-returns-207.md",
+      "examples": [
+        "KRS founded Olympia 1991.",
+        "Bikini Kill, Sleater-Kinney, Elliott Smith, The Decemberists.",
+        "After Sub Pop dominance (200-206), label axis shifts.",
+        "Different lineage: Olympia riot grrrl."
+      ],
+      "description": "Kill Rock Stars returns. Olympia lineage. Label axis shifts from Sub Pop.",
+      "genealogy": {
+        "ancestors": ["Kill Rock Stars (1991).", "Olympia indie scene.", "Riot grrrl movement."],
+        "relationship": "Wimps at 207. Kill Rock Stars re-enters engine."
+      }
+    },
+    {
+      "concept": "Lo-fi as aesthetic commitment -- deliberately rough production. Not budget limitation but artistic choice. GBV, Beat Happening, Wimps. Imperfections are features.",
+      "level": "intermediate",
+      "department": "production-theory",
+      "college_path": ".college/music/theory/production/lo-fi-commitment.md",
+      "examples": [
+        "Guided By Voices: four-track recordings, tape hiss as texture.",
+        "Beat Happening: minimal production, maximum sincerity.",
+        "Wimps: hooks buried in distortion. Pop under punk under lo-fi.",
+        "The room is in the recording."
+      ],
+      "description": "Lo-fi as commitment. Rough production by choice. Imperfections as features.",
+      "genealogy": {
+        "ancestors": ["Guided By Voices.", "Beat Happening.", "K Records/Olympia aesthetic."],
+        "relationship": "Wimps at 207. Lo-fi punk. Hooks in distortion."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 206, "artist": "The Black Tones", "relationship": "E=6 to E=5. Blues rock to lo-fi punk. Sub Pop to Kill Rock Stars. Energy steps down. Label shifts."},
+    {"degree": 204, "artist": "Childbirth", "relationship": "Both punk. Childbirth: raw feminist garage (E=6). Wimps: lo-fi catchy punk (E=5). Different punk energies."},
+    {"degree": 203, "artist": "Tacocat", "relationship": "E=6 streak began here. Pop-punk brightness. Wimps ends the streak. Bookends."},
+    {"degree": "SPS-207", "species": "Porcupine", "relationship": "DETERRENCE! Lo-fi deters polish-seekers. Quills deter predators. Both unappealing to wrong audience."}
+  ]
+}
