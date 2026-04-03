@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WLCG &mdash; Worldwide LHC Computing Grid | CERN Research</title>
+<style>
+:root {
+  --cern-blue: #003399;
+  --cern-light: #4a7aba;
+  --cern-gold: #d4a843;
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --green: #4CAF50;
+  --amber: #E89848;
+  --purple: #9a6ad8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--cern-gold); text-decoration:none; }
+a:hover { color:#f0d070; }
+
+header {
+  background:linear-gradient(135deg, #000820 0%, #0a2a5a 30%, var(--cern-blue) 60%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--green);
+  position:relative; overflow:hidden;
+}
+header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; }
+header .subtitle { color:var(--green); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; position:relative; font-family:system-ui,sans-serif; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(76,175,80,0.7); border-left:3px solid var(--green);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+.stats-bar {
+  display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
+  padding:1.2rem 0; margin-bottom:1.5rem;
+  font-family:system-ui,sans-serif; font-size:0.85rem; color:var(--dim);
+  border-bottom:1px solid var(--border);
+}
+.stats-bar strong { color:#fff; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; transition:border-color 0.2s;
+}
+.card:hover { border-color:rgba(76,175,80,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+.card p { font-size:0.85rem; color:var(--dim); line-height:1.5; margin-top:0.3rem; font-family:system-ui,sans-serif; }
+.card .meta-line { font-size:0.7rem; color:rgba(76,175,80,0.5); font-family:monospace; margin-top:0.5rem; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-wlcg { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-gastown { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+.tag-protocol { background:rgba(74,122,186,0.15); color:var(--cern-light); border:1px solid rgba(74,122,186,0.3); }
+.tag-lesson { background:rgba(232,152,72,0.15); color:var(--amber); border:1px solid rgba(232,152,72,0.3); }
+
+.mapping-table {
+  width:100%; border-collapse:collapse; margin:1rem 0;
+  font-family:system-ui,sans-serif; font-size:0.82rem;
+}
+.mapping-table th {
+  text-align:left; padding:0.6rem 0.8rem; color:var(--dim);
+  border-bottom:1px solid var(--border); font-weight:400;
+  text-transform:uppercase; letter-spacing:0.05em; font-size:0.7rem;
+}
+.mapping-table td {
+  padding:0.5rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.mapping-table tr:hover td { background:rgba(255,255,255,0.02); }
+.mapping-table .wlcg-col { color:var(--green); }
+.mapping-table .gastown-col { color:var(--gold); }
+.mapping-table .lesson-col { color:var(--amber); font-size:0.78rem; font-style:italic; }
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { .card-grid { grid-template-columns:1fr; } header h1 { font-size:1.5rem; } .mapping-table { font-size:0.72rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Worldwide LHC Computing Grid</h1>
+  <div class="subtitle">The largest distributed computing system ever built &mdash; and what it teaches us about agent orchestration</div>
+  <div class="meta">1.4M CPU cores &middot; 1.5 exabytes &middot; 170+ sites &middot; 42 countries &middot; ~1 PB/day</div>
+  <nav>
+    <a href="index.html">CERN Overview</a>
+    <a href="../LIVE/index.html">Live</a>
+    <a href="../index.html">Research</a>
+    <a href="../NASA/artemis-ii/index.html">Artemis II</a>
+  </nav>
+</header>
+
+<main>
+  <div class="stats-bar">
+    <span><strong>1.4M</strong> CPU cores</span>
+    <span><strong>1.5 EB</strong> storage</span>
+    <span><strong>170+</strong> sites</span>
+    <span><strong>42</strong> countries</span>
+    <span><strong>~1 PB</strong> data/day</span>
+    <span><strong>200 PB</strong> processed/year</span>
+    <span><strong>12,000+</strong> physicists served</span>
+  </div>
+
+  <blockquote>
+    The LHC generates roughly one petabyte of collision data per day. No single computing center on Earth can
+    store and process this alone. CERN's answer: don't build a bigger center &mdash; federate every center.
+    The Worldwide LHC Computing Grid connects 170+ sites across 42 countries into a single coherent
+    computing fabric. It is the proof that distributed autonomous systems can operate at planetary scale
+    with shared governance, heterogeneous infrastructure, and no central authority over execution.
+    Sound familiar? It should. This is what we're building with Gastown.
+  </blockquote>
+
+  <!-- ============================================================ -->
+  <!--  TIER ARCHITECTURE                                            -->
+  <!-- ============================================================ -->
+
+  <h2>Tier Architecture</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    WLCG organizes computing resources into tiers based on capability, responsibility, and connectivity.
+    The model is hierarchical in data flow but federated in governance &mdash; each site operates autonomously.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Tier 0 &mdash; CERN Data Centre</h3>
+      <div><span class="tag tag-wlcg">Tier 0</span></div>
+      <p><strong>The source.</strong> Tier 0 is CERN itself. Raw collision data from the four LHC detectors flows here first. Performs first-pass reconstruction (raw &rarr; calibrated physics objects) and distributes copies to all Tier 1 sites within 48 hours. Stores one full copy of all raw and reconstructed data permanently. ~15% of total WLCG compute capacity.</p>
+      <p><strong>Gastown parallel:</strong> This is the <strong>mayor-coordinator</strong>. It doesn't do all the work &mdash; it receives the signal, does first-pass triage, and distributes work items to the tier below.</p>
+      <div class="meta-line">CERN Data Centre, Meyrin + Wigner (Budapest) &middot; ~100K cores &middot; ~340 PB disk</div>
+    </div>
+
+    <div class="card">
+      <h3>Tier 1 &mdash; National Computing Centers (14 sites)</h3>
+      <div><span class="tag tag-wlcg">Tier 1</span></div>
+      <p><strong>The backbone.</strong> 14 large national computing centers in 12 countries. Connected to CERN by dedicated 100 Gbps fiber (LHCONE network). Each stores a fraction of the total dataset and provides significant CPU for scheduled reprocessing. Custodial storage: tape archives holding a second copy of all data. Available 24/7 with professional operations teams.</p>
+      <p><strong>Gastown parallel:</strong> These are <strong>polecat-workers</strong> with persistent state and guaranteed availability. They don't choose their work &mdash; they receive dispatched beads and execute them reliably. The dedicated fiber is like our <strong>mail-async</strong> durable messaging.</p>
+      <div class="meta-line">BNL, CNAF, FNAL, GridKA, IN2P3, JINR, KISTI, NDGF, NL-T1, PIC, RAL, RRC-KI, ASGC, TRIUMF</div>
+    </div>
+
+    <div class="card">
+      <h3>Tier 2 &mdash; University Sites (160+ sites)</h3>
+      <div><span class="tag tag-wlcg">Tier 2</span></div>
+      <p><strong>The workforce.</strong> 160+ sites at universities and research labs. Provide the bulk of CPU for Monte Carlo simulation and user analysis. Heterogeneous: different hardware, different middleware, different local policies. Connect via national research networks (1&ndash;10 Gbps). Fat Tier-2s (T2D) provide more services; thin Tier-2s (T2C) provide raw compute only.</p>
+      <p><strong>Gastown parallel:</strong> This is the <strong>convoy model</strong>. Heterogeneous agents with different capabilities, dispatched work via sling, monitored by witness. The fat/thin distinction mirrors our quality/balanced/budget model profiles &mdash; same interface, different capacity.</p>
+      <div class="meta-line">160+ sites &middot; ~1M cores combined &middot; majority of Monte Carlo production</div>
+    </div>
+
+    <div class="card">
+      <h3>Tier 3 &mdash; Local Clusters</h3>
+      <div><span class="tag tag-wlcg">Tier 3</span></div>
+      <p><strong>The edge.</strong> Individual physics groups' local clusters. No formal SLA with WLCG. Used for final-stage analysis, development, and testing. Pull data on demand from Tier 1/2 via XRootD federation. Ephemeral &mdash; can come and go without affecting the grid.</p>
+      <p><strong>Gastown parallel:</strong> Local development environments. An agent that spins up, does work, disappears. No state contract with the orchestrator. This is how our <strong>worktree isolation</strong> works &mdash; ephemeral, pull what you need, produce artifacts, vanish.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  KEY PROTOCOLS & MIDDLEWARE                                   -->
+  <!-- ============================================================ -->
+
+  <h2>Protocols &amp; Middleware Stack</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>XRootD &mdash; Data Federation Protocol</h3>
+      <div><span class="tag tag-protocol">Protocol</span> <span class="tag tag-gastown">Chipset Lesson</span></div>
+      <p>Developed at SLAC/CERN. Provides transparent data access across all tiers. A client requests a file; the redirector service locates it across the entire grid and streams it. No need to know where data physically lives. Supports caching, parallel streams, and third-party copy. Handles >1M file opens/day across the federation.</p>
+      <p><strong>Chipset lesson:</strong> Our <strong>context-packet</strong> DAG resolver does the same thing &mdash; agent requests context, system locates and delivers it without the agent knowing the source. XRootD's redirector = our context resolver. The pattern is universal: <em>request what you need, not where it lives.</em></p>
+    </div>
+
+    <div class="card">
+      <h3>HTCondor &mdash; Workload Management</h3>
+      <div><span class="tag tag-protocol">Protocol</span> <span class="tag tag-gastown">Chipset Lesson</span></div>
+      <p>High-throughput computing framework from UW-Madison. WLCG uses HTCondor-CE (Computing Element) as the interface between the grid and local batch systems. Jobs are submitted to a central negotiator that matches job requirements to available resources. ClassAds (key-value descriptions) enable capability-based matching rather than hard-coded routing.</p>
+      <p><strong>Chipset lesson:</strong> ClassAds = our <strong>hook-persistence</strong> work descriptors. Capability-based matching = our model profile routing. HTCondor doesn't care what hardware runs the job, only that the requirements match. <em>Describe the work, not the worker.</em></p>
+    </div>
+
+    <div class="card">
+      <h3>DIRAC &mdash; Interware</h3>
+      <div><span class="tag tag-protocol">Protocol</span> <span class="tag tag-gastown">Chipset Lesson</span></div>
+      <p>LHCb's workload management system, now used by 70+ virtual organizations. Sits between experiments and the grid. Provides job management, data management, accounting, and monitoring through a unified API regardless of the underlying middleware (Grid, Cloud, HPC). "Pilot job" model: DIRAC sends lightweight pilots that claim resources, then pull real jobs from a central task queue.</p>
+      <p><strong>Chipset lesson:</strong> The pilot job model IS our <strong>GUPP (Get Up and Push Protocol)</strong>. The pilot lands on a resource, checks for work, executes it, reports back. DIRAC's agent framework with specialized agents for different subsystems mirrors our polecat/witness/mayor separation. This is convergent evolution.</p>
+    </div>
+
+    <div class="card">
+      <h3>FTS &mdash; File Transfer Service</h3>
+      <div><span class="tag tag-protocol">Protocol</span></div>
+      <p>CERN-developed reliable bulk data transfer service. Manages millions of file transfers per day between sites. Handles retry logic, checksum verification, bandwidth scheduling, and priority queues. Supports GridFTP, HTTP-TPC, and XRootD protocols. Activity-based scheduling prevents any single transfer campaign from monopolizing links.</p>
+      <p><strong>Chipset lesson:</strong> Activity-based scheduling = our convoy batching. Priority queues = our wave-based execution. FTS proves that reliable bulk transfer at scale requires: checksums, retries, bandwidth fairness, and activity classification. All patterns we implement.</p>
+    </div>
+
+    <div class="card">
+      <h3>CVMFS &mdash; Software Distribution</h3>
+      <div><span class="tag tag-protocol">Protocol</span></div>
+      <p>CernVM File System. Distributes experiment software to all 170+ sites via HTTP-based content-addressable storage with aggressive caching. A single publication at CERN propagates to every site within minutes. Read-only, deduplicated, cryptographically verified. ~500 TB of software served to ~160K unique clients daily.</p>
+      <p><strong>Chipset lesson:</strong> Content-addressable + read-only + cached = exactly how our <strong>skills</strong> distribute. A skill published once propagates to all agents. CVMFS is skills distribution at CERN scale.</p>
+    </div>
+
+    <div class="card">
+      <h3>Rucio &mdash; Data Management</h3>
+      <div><span class="tag tag-protocol">Protocol</span></div>
+      <p>ATLAS-developed, now multi-experiment data management system. Tracks the location, state, and lifecycle of >1 billion files across the grid. Enforces replication policies (e.g., "keep 2 copies on Tier 1 tape, 1 on Tier 2 disk"). Manages data placement, deletion, and access patterns. The metadata catalog for the entire ATLAS dataset.</p>
+      <p><strong>Chipset lesson:</strong> Rucio = our <strong>beads-state</strong> persistence layer. It tracks what exists, where it lives, and what the lifecycle policy is. The replication rules mirror our "always keep state in git + local JSON" dual-write pattern.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  DIRECT MAPPING TABLE                                         -->
+  <!-- ============================================================ -->
+
+  <h2>WLCG &rarr; Gastown Chipset Mapping</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    The structural parallels are not metaphorical &mdash; they are architectural. Both systems solve the same problem:
+    coordinate heterogeneous autonomous agents to process more work than any single node can handle.
+  </p>
+
+  <table class="mapping-table">
+    <thead>
+      <tr>
+        <th>WLCG Component</th>
+        <th>Function</th>
+        <th>Gastown Equivalent</th>
+        <th>Lesson for Us</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="wlcg-col">Tier 0 (CERN)</td><td>Receive, triage, distribute</td><td class="gastown-col">mayor-coordinator</td><td class="lesson-col">The coordinator doesn't do all the work &mdash; it routes</td></tr>
+      <tr><td class="wlcg-col">Tier 1 (14 national)</td><td>Reliable scheduled execution</td><td class="gastown-col">polecat-worker (persistent)</td><td class="lesson-col">Dedicated resources with SLAs for critical path work</td></tr>
+      <tr><td class="wlcg-col">Tier 2 (160+ university)</td><td>Bulk compute, heterogeneous</td><td class="gastown-col">convoy agents</td><td class="lesson-col">Fat/thin distinction = quality/budget model profiles</td></tr>
+      <tr><td class="wlcg-col">Tier 3 (local)</td><td>Ephemeral edge analysis</td><td class="gastown-col">worktree isolation</td><td class="lesson-col">No state contract needed for edge work</td></tr>
+      <tr><td class="wlcg-col">XRootD</td><td>Federated data access</td><td class="gastown-col">context-packet resolver</td><td class="lesson-col">Request content, not location</td></tr>
+      <tr><td class="wlcg-col">HTCondor ClassAds</td><td>Capability-based job matching</td><td class="gastown-col">hook-persistence + model profiles</td><td class="lesson-col">Describe work, not worker</td></tr>
+      <tr><td class="wlcg-col">DIRAC pilots</td><td>Pull-based job execution</td><td class="gastown-col">GUPP protocol</td><td class="lesson-col">Pilot lands, checks for work, executes, reports</td></tr>
+      <tr><td class="wlcg-col">FTS</td><td>Reliable bulk transfer</td><td class="gastown-col">mail-async + sling-dispatch</td><td class="lesson-col">Checksums, retries, bandwidth fairness, activity classes</td></tr>
+      <tr><td class="wlcg-col">CVMFS</td><td>Software distribution</td><td class="gastown-col">skills distribution</td><td class="lesson-col">Publish once, propagate to all nodes, content-addressed</td></tr>
+      <tr><td class="wlcg-col">Rucio</td><td>Data lifecycle management</td><td class="gastown-col">beads-state persistence</td><td class="lesson-col">Track what exists, where, and lifecycle policy</td></tr>
+      <tr><td class="wlcg-col">Monitoring (MonIT)</td><td>System-wide observability</td><td class="gastown-col">witness-observer + watchdog</td><td class="lesson-col">Passive observation, escalate on anomaly</td></tr>
+      <tr><td class="wlcg-col">VOMS</td><td>Virtual org membership</td><td class="gastown-col">trust-relationship</td><td class="lesson-col">Identity + role + capability = access decision</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <!--  LESSONS FOR GSD                                              -->
+  <!-- ============================================================ -->
+
+  <h2>Architectural Lessons for GSD &amp; Skill-Creator</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>1. Federate, Don't Centralize</h3>
+      <div><span class="tag tag-lesson">Architecture</span></div>
+      <p>WLCG works because no single site owns all the data or all the compute. Sites join voluntarily, operate autonomously, and contribute to the whole. Our multi-agent system should work the same way: agents are autonomous, contribute to shared state, and the orchestrator coordinates rather than controls.</p>
+    </div>
+
+    <div class="card">
+      <h3>2. The Pilot Job Pattern Is Universal</h3>
+      <div><span class="tag tag-lesson">Pattern</span></div>
+      <p>DIRAC's pilot jobs land on a resource, discover what's available, pull work from a queue, execute, report. This is exactly GUPP. WLCG validated this pattern at planetary scale with 1.4M cores. Our implementation at 4-8 agents is the same architecture, different magnitude.</p>
+    </div>
+
+    <div class="card">
+      <h3>3. Content-Addressed Distribution Scales</h3>
+      <div><span class="tag tag-lesson">Pattern</span></div>
+      <p>CVMFS distributes 500 TB of software to 160K clients daily using content-addressed, cached, read-only filesystems. Our skills are the same: published once, immutable, cached locally, verified by hash. If we ever need to scale skills distribution, CVMFS is the blueprint.</p>
+    </div>
+
+    <div class="card">
+      <h3>4. Heterogeneity Is a Feature, Not a Bug</h3>
+      <div><span class="tag tag-lesson">Architecture</span></div>
+      <p>WLCG sites run different hardware, different OS versions, different local batch systems. The middleware layer (HTCondor-CE, DIRAC) abstracts this away. Our runtime-hal (Hardware Abstraction Layer) does the same: detect Claude Code, Codex, Gemini, Cursor &mdash; present a uniform interface. WLCG proves this works at 170+ sites.</p>
+    </div>
+
+    <div class="card">
+      <h3>5. Monitoring Must Be Passive and Universal</h3>
+      <div><span class="tag tag-lesson">Operations</span></div>
+      <p>WLCG's MonIT system collects metrics from all sites without requiring sites to push. Dashboards aggregate. Alerts trigger on anomalies. No site is required to explain itself &mdash; the monitoring system observes and reports. This is our witness-observer pattern: watch, don't interfere, escalate when stuck.</p>
+    </div>
+
+    <div class="card">
+      <h3>6. Data Lifecycle Policies Prevent Rot</h3>
+      <div><span class="tag tag-lesson">Operations</span></div>
+      <p>Rucio enforces rules: "2 copies on tape, 1 on disk, delete after 2 years." Without automated lifecycle management, data accumulates until storage is full. Our .planning/ lifecycle (gitignored, session-scoped, archived per milestone) is the same pattern. Rucio just does it for a billion files.</p>
+    </div>
+  </div>
+
+  <h2>Papers &amp; References</h2>
+
+  <ul style="list-style:none; margin:0.5rem 0; font-family:system-ui,sans-serif; font-size:0.82rem;">
+    <li style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+      <strong>WLCG Technical Design Report</strong> &mdash; CERN-LHCC-2005-024 (2005). The original blueprint.
+    </li>
+    <li style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+      <strong>XRootD: A Highly Scalable Architecture for Data Access</strong> &mdash; Dorigo et al., JINST (2005). Data federation protocol.
+    </li>
+    <li style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+      <strong>DIRAC: A Community Grid Solution</strong> &mdash; Tsaregorodtsev et al., J. Phys. Conf. Ser. 119 (2008). Pilot job framework.
+    </li>
+    <li style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+      <strong>Rucio: Scientific Data Management</strong> &mdash; Barisits et al., Comput. Softw. Big Sci. 3 (2019). Data lifecycle at exabyte scale.
+    </li>
+    <li style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+      <strong>CernVM-FS: Delivering Scientific Software to Globally Distributed Computing Resources</strong> &mdash; Blomer et al. (2011). Content-addressed software distribution.
+    </li>
+    <li style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+      <strong>A Comprehensive Perspective on Pilot-Job Systems</strong> &mdash; Turilli et al., arXiv:1508.04180 (2015). Survey of pilot frameworks including DIRAC.
+    </li>
+  </ul>
+
+</main>
+
+<footer>
+  <a href="index.html">CERN Overview</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  WLCG Deep Dive &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Sources: <a href="https://wlcg.web.cern.ch">WLCG</a> &middot;
+  <a href="https://home.cern/science/computing/grid">CERN Computing</a> &middot;
+  <a href="https://xrootd.slac.stanford.edu">XRootD</a> &middot;
+  <a href="https://diracgrid.org">DIRAC</a> &middot;
+  <a href="https://rucio.cern.ch">Rucio</a><br>
+  Last updated: 2026-04-03T05:00Z (sweep v1.2.21) &middot; Deep dive for Gastown chipset architecture alignment
+</footer>
+
+</body>
+</html>
