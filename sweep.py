@@ -308,7 +308,7 @@ def run_sweep(hour, args):
         total_changes += len(changes)
         print(f"  OPEN/index.html: {', '.join(changes)}")
 
-    # ── 6. MUK/index.html — leaderboard + countdown fix ──
+    # ── 6. MUK/index.html — leaderboard + countdown fix + header stats ──
     muk_patterns = [
         # Fix the stale countdown target
         (r"new Date\('2025-09-01T00:00:00Z'\)",
@@ -318,6 +318,14 @@ def run_sweep(hour, args):
         (r'(\d+) samples collected',
          f'{args.samples or 3} samples collected',
          "sample count"),
+        # Update header stats — samples
+        (r'(id="s-samples">)\d+(<)',
+         rf'\g<1>{args.samples or 3}\2',
+         "header sample count"),
+        # Update header stats — days tracked
+        (r'(id="s-days">)\d+(<)',
+         rf'\g<1>{day}\2',
+         "header days tracked"),
     ]
     changes = replace_in_file(files["muk_index"], muk_patterns, dry_run)
     if changes:
