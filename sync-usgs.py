@@ -30,6 +30,7 @@ SYNC_DIRS = [
     "ECO",  # slime mold research page
     "PNW-NEWS",  # daily news
     "CERN",  # CERN research knowledge base
+    "DRP",  # Disaster Recovery & Protective Systems
 ]
 
 dry_run = "--dry-run" in sys.argv

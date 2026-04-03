@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero-Trust Emergency Communications &mdash; Recovering Local Comms with Zero Infrastructure</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --red: #8b1a1a; --red-light: #ba3a3a; --amber: #d4943a; --amber-light: #e8b050;
+  --green: #4CAF50; --blue: #4a7aba; --purple: #9a6ad8; --gold: #C4A35A;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--amber); text-decoration:none; }
+a:hover { color:var(--amber-light); }
+
+header {
+  background:linear-gradient(135deg, #1a0a0a 0%, var(--red) 30%, #2a1a0a 60%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--amber);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; letter-spacing:0.03em; }
+header .subtitle { color:var(--amber); font-size:0.9rem; font-style:italic; margin-top:0.3rem; }
+header nav { margin-top:1rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:1000px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(212,148,58,0.7); border-left:3px solid var(--amber);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+h3 { font-size:1.05rem; color:#fff; font-weight:400; margin:1.5rem 0 0.5rem; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.4rem;
+}
+.card:hover { border-color:rgba(212,148,58,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin:0 0 0.4rem; }
+.card p { font-size:0.85rem; color:var(--dim); line-height:1.5; margin-top:0.3rem; font-family:system-ui,sans-serif; }
+.card .fcc { font-size:0.7rem; color:rgba(76,175,80,0.7); font-family:monospace; margin-top:0.5rem; }
+.card .spec { font-size:0.72rem; color:var(--blue); font-family:monospace; margin-top:0.3rem; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-license { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-ham { background:rgba(74,122,186,0.15); color:var(--blue); border:1px solid rgba(74,122,186,0.3); }
+.tag-proto { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-hw { background:rgba(212,148,58,0.15); color:var(--amber); border:1px solid rgba(212,148,58,0.3); }
+.tag-noauth { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+
+.layer-table {
+  width:100%; border-collapse:collapse; margin:1rem 0; font-family:system-ui,sans-serif; font-size:0.8rem;
+}
+.layer-table th {
+  text-align:left; padding:0.5rem 0.6rem; color:var(--dim); border-bottom:1px solid var(--border);
+  font-weight:400; text-transform:uppercase; letter-spacing:0.05em; font-size:0.68rem;
+}
+.layer-table td { padding:0.4rem 0.6rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.layer-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+.principle {
+  background:var(--panel); border-left:3px solid var(--amber); padding:1rem 1.2rem; margin:1rem 0; border-radius:0 4px 4px 0;
+}
+.principle .label { color:var(--amber); font-family:system-ui,sans-serif; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; }
+.principle p { font-size:0.88rem; margin-top:0.3rem; }
+
+footer {
+  max-width:1000px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { .card-grid { grid-template-columns:1fr; } header h1 { font-size:1.4rem; } .layer-table { font-size:0.7rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Zero-Trust Emergency Communications</h1>
+  <div class="subtitle">Recovering local comms with zero infrastructure, zero authentication, and hardware on hand</div>
+  <nav>
+    <a href="index.html">DRP Overview</a>
+    <a href="../CERN/wlcg.html">WLCG</a>
+    <a href="../LIVE/index.html">Live</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <blockquote>
+    The earthquake hits. Cell towers are down &mdash; no power, backhaul severed. Internet is gone.
+    Landlines are dead. 911 is unreachable. You have a laptop with a charged battery, a WiFi radio,
+    maybe an old ham radio in the garage, and a neighborhood full of people who need information.
+    What do you do? This page is the answer. Every technique here works with zero infrastructure,
+    zero pre-existing trust, and hardware a citizen can legally operate today.
+  </blockquote>
+
+  <div class="principle">
+    <div class="label">Design Principle</div>
+    <p><strong>Zero trust means zero assumptions.</strong> Assume no internet. Assume no cell service. Assume no power grid.
+    Assume no pre-shared keys, no certificates, no PKI. Assume the person on the other end is a stranger.
+    Build communications that work anyway. Authentication comes later &mdash; first, you need signal.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  LAYER 1: NO-LICENSE COMMUNICATIONS (Part 15, MURS, FRS)      -->
+  <!-- ============================================================ -->
+
+  <h2>Layer 1: No-License Communications</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    These require zero licensing, zero registration, zero cost beyond hardware. Any citizen can operate them legally today.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Open WiFi Access Points</h3>
+      <div><span class="tag tag-license">No License</span> <span class="tag tag-noauth">Zero Trust</span></div>
+      <p>Any WiFi router can become a zero-trust communication node. Set SSID to something like <code>EMERGENCY-INFO</code>. Disable authentication (open network). Run a captive portal serving a static HTML page with local information: shelter locations, water sources, road closures, missing persons board. No internet needed &mdash; the AP itself IS the information source.</p>
+      <p><strong>Range:</strong> 50-100m typical, 300m+ with directional antenna. <strong>Power:</strong> 5-15W. Battery + inverter runs for hours.</p>
+      <div class="fcc">FCC Part 15.247 &middot; ISM 2.4/5 GHz &middot; No license required &middot; 1W EIRP (2.4 GHz) / 4W EIRP (5 GHz)</div>
+    </div>
+
+    <div class="card">
+      <h3>WiFi Mesh (802.11s)</h3>
+      <div><span class="tag tag-license">No License</span> <span class="tag tag-proto">Protocol</span></div>
+      <p>Multiple open WiFi APs running mesh firmware (OpenWrt with 802.11s, or BATMAN-adv) self-organize into a multi-hop network. Each node relays traffic for all others. A message enters at one node and routes through the mesh to any other node. No central controller. If a node dies, the mesh re-routes automatically.</p>
+      <p><strong>Software:</strong> OpenWrt, LibreMesh, BATMAN-adv. <strong>Hardware:</strong> Any WiFi router ($10-30 used). Flash firmware from USB, power from car battery.</p>
+      <div class="fcc">FCC Part 15.247 &middot; Same rules as any WiFi AP &middot; No license for mesh operation</div>
+    </div>
+
+    <div class="card">
+      <h3>FRS/GMRS Radios</h3>
+      <div><span class="tag tag-license">No License (FRS)</span> <span class="tag tag-hw">Hardware</span></div>
+      <p><strong>FRS (Family Radio Service):</strong> 22 channels, 462/467 MHz UHF. 2W max. No license. Range: 0.5-2 miles typical, more with elevation. Every "walkie-talkie" sold at stores is an FRS radio. Millions already in homes.</p>
+      <p><strong>GMRS:</strong> Same frequencies, 5-50W, requires license ($35, no exam, covers whole family for 10 years). Repeater-capable. Range: 5-25 miles with repeaters.</p>
+      <div class="fcc">FCC Part 95 Subpart B (FRS) / Subpart E (GMRS) &middot; UHF 462-467 MHz</div>
+    </div>
+
+    <div class="card">
+      <h3>CB Radio</h3>
+      <div><span class="tag tag-license">No License</span> <span class="tag tag-hw">Hardware</span></div>
+      <p>40 channels on 27 MHz (HF/11-meter band). 4W AM, 12W PEK SSB. No license required since 1983. Range: 2-10 miles ground wave, hundreds of miles via skywave (ionospheric skip). Channel 9 is the emergency channel. Channel 19 is the highway trucker channel &mdash; truckers are often the first to establish comms in a disaster.</p>
+      <p>Hardware is cheap ($30-80) and ubiquitous. Many trucks, RVs, and farms still have them. Power from 12V DC (car battery direct).</p>
+      <div class="fcc">FCC Part 95 Subpart D &middot; 26.965-27.405 MHz &middot; No license &middot; Channel 9 = emergency</div>
+    </div>
+
+    <div class="card">
+      <h3>MURS (Multi-Use Radio Service)</h3>
+      <div><span class="tag tag-license">No License</span></div>
+      <p>5 channels in VHF 151-154 MHz. 2W max. No license. Less congested than FRS because fewer people know about it. Better building penetration than UHF. Good for neighborhood-scale coordination.</p>
+      <div class="fcc">FCC Part 95 Subpart J &middot; 151.820-154.600 MHz &middot; No license &middot; 2W</div>
+    </div>
+
+    <div class="card">
+      <h3>Part 15 Low-Power Broadcasting</h3>
+      <div><span class="tag tag-license">No License</span> <span class="tag tag-noauth">One-to-Many</span></div>
+      <p><strong>AM:</strong> 200 foot range (ground plane + 3m wire antenna). ~0.1W equivalent. Any AM radio in the area receives it. Perfect for a shelter or staging area broadcasting status updates on a loop. Build from a 555 timer + audio amp + ferrite antenna for under $10.</p>
+      <p><strong>FM:</strong> 250 &mu;V/m at 3 meters (~0.01 &mu;W). Very short range (&lt;200 ft) but every car radio and phone with FM receives it. Raspberry Pi with rpitx can transmit FM from the GPIO pin with zero additional hardware.</p>
+      <div class="fcc">FCC Part 15.219 (AM) / 15.239 (FM) &middot; No license &middot; ~200 ft range &middot; No FCC approval needed for homebrew</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  LAYER 2: LICENSED AMATEUR RADIO (Part 97)                    -->
+  <!-- ============================================================ -->
+
+  <h2>Layer 2: Licensed Amateur Radio (Part 97)</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Ham radio requires a license (Technician: 35-question exam, free or $15). In return: far more power, more frequencies,
+    digital modes, and the legal framework for emergency communication. <strong>Get your license NOW, before you need it.</strong>
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>AX.25 Packet Radio</h3>
+      <div><span class="tag tag-ham">Part 97</span> <span class="tag tag-proto">Protocol</span></div>
+      <p>The original digital radio networking protocol (1982). Frame-based, connection-oriented, derived from X.25. Runs at 1,200 baud (VHF) or 9,600 baud (UHF) over standard FM radios with a TNC (Terminal Node Controller) or sound card modem. Supports digipeaters (store-and-forward relays) for multi-hop routing.</p>
+      <p><strong>TCP/IP over AX.25:</strong> Linux has native AX.25 kernel support. Route IP packets over amateur radio. JNOS, LinuxNode, and the AMPRNet (44.0.0.0/8 allocation) provide the infrastructure. Email, file transfer, and basic web services at 1,200-9,600 bps.</p>
+      <div class="spec">AX.25 v2.2 &middot; HDLC framing &middot; 1200/9600 baud &middot; AFSK 1200Hz/2200Hz (Bell 202)</div>
+    </div>
+
+    <div class="card">
+      <h3>SLIP &amp; PPP over Radio</h3>
+      <div><span class="tag tag-ham">Part 97</span> <span class="tag tag-proto">Protocol</span></div>
+      <p><strong>SLIP (Serial Line Internet Protocol):</strong> The simplest possible IP encapsulation. No framing, no error correction, no authentication. Just IP datagrams delimited by 0xC0 bytes on a serial link. Perfect for radio because it adds zero overhead. Connect a radio's audio port to a serial modem, run SLIP, and you have IP.</p>
+      <p><strong>PPP (Point-to-Point Protocol):</strong> More robust than SLIP. Adds framing (HDLC), error detection (CRC), link negotiation (LCP), and optional authentication (PAP/CHAP). Supports compression (Van Jacobson TCP/IP header compression reduces 40-byte headers to 3-5 bytes &mdash; critical at 1,200 baud).</p>
+      <p><strong>The stack:</strong> Radio &rarr; audio modem (Bell 202 or V.34) &rarr; serial port &rarr; SLIP/PPP &rarr; TCP/IP. A complete internetwork over two radios.</p>
+      <div class="spec">SLIP: RFC 1055 &middot; PPP: RFC 1661 &middot; VJ compression: RFC 1144 (3-5 byte headers)</div>
+    </div>
+
+    <div class="card">
+      <h3>Winlink &mdash; Email over Radio</h3>
+      <div><span class="tag tag-ham">Part 97</span> <span class="tag tag-proto">Protocol</span></div>
+      <p>Global email system that works entirely over amateur radio when internet is down. 200+ Radio Message Servers (RMS) worldwide, many solar-powered with backup generators. Connects to the internet when available, operates as a closed store-and-forward system when it doesn't. Used by FEMA, Red Cross, and ARES/RACES during real disasters.</p>
+      <p><strong>Modes:</strong> HF PACTOR (3,200 bps), VHF/UHF VARA FM (25,000 bps), Telnet (internet backup). Standard email with attachments (compressed).</p>
+      <div class="spec">winlink.org &middot; VARA modem &middot; ICS-213 forms &middot; FEMA-interoperable</div>
+    </div>
+
+    <div class="card">
+      <h3>AREDN &mdash; Amateur Radio Emergency Data Network</h3>
+      <div><span class="tag tag-ham">Part 97</span> <span class="tag tag-proto">Mesh</span></div>
+      <p>High-bandwidth mesh network on Part 97 amateur frequencies. Uses modified 802.11 hardware (Ubiquiti, MikroTik, TP-Link) reflashed with AREDN firmware. Operates at 5, 10, or 20 MHz channel widths on 900 MHz, 2.4 GHz, 3.4 GHz, or 5.8 GHz amateur bands. Throughput: 1-60+ Mbps. Range: line-of-sight, 80+ km with directional antennas.</p>
+      <p>Runs standard TCP/IP services: VoIP phones, video cameras, file servers, web dashboards, chat. A complete disaster-grade internet replacement.</p>
+      <div class="spec">aredn.org &middot; OLSR mesh routing &middot; Modified 802.11 &middot; 5-60 Mbps &middot; Part 97 amateur</div>
+    </div>
+
+    <div class="card">
+      <h3>APRS &mdash; Automatic Packet Reporting System</h3>
+      <div><span class="tag tag-ham">Part 97</span> <span class="tag tag-proto">Protocol</span></div>
+      <p>Real-time tactical communication network on 144.390 MHz (North America). Broadcasts position, weather, status messages, and short text. Digipeaters relay packets across wide areas. Used by ARES, SKYWARN, search and rescue, and served agencies. A Baofeng UV-5R ($25) + a phone running APRSdroid + an audio cable = complete APRS station.</p>
+      <div class="spec">144.390 MHz &middot; 1200 baud AX.25 &middot; aprs.fi for internet gateway &middot; Direwolf software TNC</div>
+    </div>
+
+    <div class="card">
+      <h3>JS8Call &mdash; Keyboard-to-Keyboard HF</h3>
+      <div><span class="tag tag-ham">Part 97</span> <span class="tag tag-proto">Protocol</span></div>
+      <p>Weak-signal digital mode based on FT8. Works at signal levels below the noise floor (&minus;24 dB SNR). Keyboard-to-keyboard messaging, store-and-forward relay, and automatic beacon. HF propagation means continental or global range with 5-100W. Works with any HF transceiver + sound card.</p>
+      <p><strong>Why it matters:</strong> When everything else fails, HF propagates via ionosphere. JS8Call can reach hundreds or thousands of miles with a wire antenna in a tree and 5 watts of power.</p>
+      <div class="spec">js8call.com &middot; HF 3-30 MHz &middot; Works below noise floor &middot; ~13 chars/min throughput</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  LAYER 3: THE PROTOCOL STACK — IP OVER ANYTHING               -->
+  <!-- ============================================================ -->
+
+  <h2>Layer 3: IP Over Anything &mdash; The Universal Protocol Stack</h2>
+
+  <div class="principle">
+    <div class="label">Core Insight</div>
+    <p>TCP/IP doesn't care about the physical medium. The same email can travel over fiber optic, WiFi, amateur radio,
+    or a cable strung between two tin cans. The protocol stack is medium-independent. This means you can build an internet
+    from <em>any</em> communication channel, no matter how slow or unreliable. The key is choosing the right protocol
+    for the bandwidth available.</p>
+  </div>
+
+  <table class="layer-table">
+    <thead>
+      <tr>
+        <th>Link Speed</th>
+        <th>Medium</th>
+        <th>Best IP Protocol</th>
+        <th>What You Can Do</th>
+        <th>Historical Precedent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--amber);">300 baud</td>
+        <td>HF radio, acoustic coupler</td>
+        <td>SLIP + VJ compression</td>
+        <td>Text email, short messages, bulletins</td>
+        <td>UUCP/BBS era, 1970s-80s dialup</td>
+      </tr>
+      <tr>
+        <td style="color:var(--amber);">1,200 baud</td>
+        <td>VHF packet radio (Bell 202)</td>
+        <td>AX.25 + IP, PPP</td>
+        <td>Email, file transfer, BBS, basic web</td>
+        <td>Standard packet radio since 1982</td>
+      </tr>
+      <tr>
+        <td style="color:var(--amber);">9,600 baud</td>
+        <td>UHF packet radio (G3RUH modem)</td>
+        <td>PPP + TCP/IP, KISS TNC</td>
+        <td>Compressed web pages, images, forms</td>
+        <td>AMPRNet backbone links</td>
+      </tr>
+      <tr>
+        <td style="color:var(--green);">56 kbps</td>
+        <td>V.90 modem over audio pair</td>
+        <td>PPP + TCP/IP</td>
+        <td>Full web browsing (text-optimized), VoIP</td>
+        <td>The entire 1990s internet ran on this</td>
+      </tr>
+      <tr>
+        <td style="color:var(--green);">1&ndash;60 Mbps</td>
+        <td>AREDN mesh, WiFi mesh</td>
+        <td>Standard TCP/IP, HTTP, MQTT</td>
+        <td>Everything: video, VoIP, file sharing, web</td>
+        <td>Modern emergency mesh deployments</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Building the Stack from Nothing</h3>
+
+  <div class="card-grid" style="grid-template-columns:1fr;">
+    <div class="card" style="max-width:100%;">
+      <p style="color:var(--text); font-size:0.88rem; line-height:1.8;">
+        <strong>Step 1: Voice (minutes).</strong> FRS/CB/MURS radios for immediate voice coordination. "Is anyone there?" Channel 9 (CB) or Channel 1 (FRS). No setup, grab and talk.<br>
+        <strong>Step 2: Broadcast (minutes).</strong> Part 15 AM transmitter on a loop: "Shelter at [location]. Water at [location]. Next update at [time]." Every AM radio in range receives it.<br>
+        <strong>Step 3: Local net (hours).</strong> Open WiFi APs with captive portal serving static info pages. Mesh them with BATMAN-adv if multiple nodes available. Power from car batteries or generators.<br>
+        <strong>Step 4: Data links (hours).</strong> AX.25 packet radio for digital messaging between neighborhoods. APRS for position reporting and short messages. Winlink for email to outside world via HF relay.<br>
+        <strong>Step 5: Internet substitute (day 1-2).</strong> AREDN mesh nodes on high points (rooftops, hills). TCP/IP services: email server, bulletin board, VoIP, file sharing. SLIP/PPP over radio links between mesh islands. This is a working internet.<br>
+        <strong>Step 6: Bridge out (day 2+).</strong> HF radio (JS8Call, Winlink PACTOR) to reach beyond the affected area. Request resources, send damage assessments, connect to the wider world. One HF station with a wire antenna in a tree can reach the entire continent.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  THE ZERO-TRUST INFORMATION ARCHITECTURE                      -->
+  <!-- ============================================================ -->
+
+  <h2>Zero-Trust Information Architecture</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>The Captive Portal Pattern</h3>
+      <div><span class="tag tag-noauth">Zero Trust</span> <span class="tag tag-proto">Protocol</span></div>
+      <p>Open WiFi AP + captive portal = zero-authentication information broadcast. The user connects to an open network, any HTTP request redirects to a local page. No login, no password, no terms of service. Just information. The page is served from local storage &mdash; no internet required.</p>
+      <p><strong>Content model:</strong> Static HTML generated from MQTT sensor feeds or manual text input. Auto-refreshes on a timer. Structured data: shelter locations, road status, water/food, medical, missing persons. Think of it as a digital bulletin board that anyone with a phone can read.</p>
+    </div>
+
+    <div class="card">
+      <h3>Local-First, Sync-When-Possible</h3>
+      <div><span class="tag tag-noauth">Zero Trust</span> <span class="tag tag-proto">Architecture</span></div>
+      <p>Every node stores data locally. When two nodes connect (WiFi, radio, sneakernet USB), they sync using CRDTs (Conflict-free Replicated Data Types) or append-only logs. No central server needed. Data propagates like gossip &mdash; eventually consistent, but always available locally.</p>
+      <p><strong>Protocol:</strong> Append-only JSON logs with Lamport timestamps. Merge = union of all entries. Conflicts resolved by "latest writer wins" or manual review. Same pattern as git &mdash; branch locally, merge when you connect.</p>
+    </div>
+
+    <div class="card">
+      <h3>Sneakernet: The Original Mesh</h3>
+      <div><span class="tag tag-noauth">Zero Trust</span> <span class="tag tag-hw">Hardware</span></div>
+      <p>A USB drive carried by a person walking or cycling between locations has effectively infinite bandwidth and about 15-minute latency per mile. In a disaster, physical data transport is often faster and more reliable than any radio link. The key is standardized data format: each drive carries a dated JSON/HTML package that any browser can read.</p>
+      <p><strong>Bandwidth:</strong> A 32 GB USB drive carried 1 mile in 15 minutes = ~285 Mbps effective throughput. 14,000&times; faster than a 9,600 baud radio link. Never underestimate the bandwidth of a station wagon full of USB drives.</p>
+    </div>
+
+    <div class="card">
+      <h3>Authentication After the Fact</h3>
+      <div><span class="tag tag-noauth">Zero Trust</span></div>
+      <p>In a disaster, authentication is a <em>luxury</em>, not a requirement. First priority: get information flowing. Second priority: verify sources. Use signed messages (GPG) where available, but never let authentication requirements block communication. A rumor that "shelter is at the school" saves lives even if it's unsigned. Verify later.</p>
+      <p><strong>Trust model:</strong> Information carries its own reputation. Cross-referenced from multiple sources = more trustworthy. Single-source, unverified = tagged as unconfirmed. The network is the verifier, not a certificate authority.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  HARDWARE REFERENCE                                           -->
+  <!-- ============================================================ -->
+
+  <h2>Hardware Reference &mdash; What to Have Ready</h2>
+
+  <table class="layer-table">
+    <thead>
+      <tr><th>Item</th><th>Cost</th><th>What It Does</th><th>Power</th><th>FCC Rule</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>FRS radio (pair)</td><td>$20-40</td><td>Voice, 0.5-2 mi</td><td>3&times;AA batteries (20+ hrs)</td><td>Part 95B, no license</td></tr>
+      <tr><td>CB radio (mobile)</td><td>$30-80</td><td>Voice, 2-10 mi, Ch 9 emergency</td><td>12V DC (car battery)</td><td>Part 95D, no license</td></tr>
+      <tr><td>Baofeng UV-5R</td><td>$25</td><td>VHF/UHF FM, APRS, packet radio</td><td>7.4V Li-ion (24+ hrs standby)</td><td>Part 97, Technician license</td></tr>
+      <tr><td>Meshtastic LoRa node</td><td>$25-60</td><td>Text mesh, 2-15 km range</td><td>USB 5V / solar (days)</td><td>Part 15, ISM 915 MHz</td></tr>
+      <tr><td>OpenWrt WiFi router</td><td>$10-30 used</td><td>Mesh AP, captive portal</td><td>12V DC, 5-10W</td><td>Part 15.247, no license</td></tr>
+      <tr><td>Raspberry Pi + SDR</td><td>$50-80</td><td>Software radio, FM TX, AX.25 TNC</td><td>5V USB, 5-15W</td><td>Part 15 (TX) / Part 97 (ham)</td></tr>
+      <tr><td>20W solar panel + battery</td><td>$50-100</td><td>Powers any of the above</td><td>Generates 60-100 Wh/day (PNW)</td><td>N/A</td></tr>
+      <tr><td>Ubiquiti NanoStation (AREDN)</td><td>$60-90</td><td>High-bandwidth mesh, 1-60 Mbps</td><td>24V PoE, 8W</td><td>Part 97, Technician license</td></tr>
+    </tbody>
+  </table>
+
+  <div class="principle">
+    <div class="label">Total Cost: Complete Emergency Comm Kit</div>
+    <p><strong>No-license kit:</strong> FRS radios + CB + Meshtastic + WiFi router + solar panel = <strong>~$200</strong>. Covers voice, text mesh, and local information broadcast. Zero licensing, zero expertise required beyond basic setup.</p>
+    <p style="margin-top:0.5rem;"><strong>Ham-licensed kit:</strong> Add Baofeng + AREDN node + HF transceiver + Raspberry Pi = <strong>~$500-800</strong>. Adds packet radio, email over radio, high-bandwidth mesh, and continental-range HF digital. Requires Technician license ($15 exam fee, 35 questions, study 1-2 weeks).</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  ROSETTA CONNECTIONS                                          -->
+  <!-- ============================================================ -->
+
+  <h2>Rosetta Connections</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>WLCG Tier Architecture</h3>
+      <p>The tier model maps directly: Tier 0 (central shelter/EOC) &rarr; Tier 1 (neighborhood hubs with AREDN) &rarr; Tier 2 (individual homes with WiFi/LoRa) &rarr; Tier 3 (mobile devices, sneakernet). Federated, autonomous, resilient. CERN proved this works at planetary scale.</p>
+    </div>
+
+    <div class="card">
+      <h3>Mycorrhizal Networks (ECO)</h3>
+      <p>Forest mycorrhizal networks route nutrients between trees, tolerate node damage, and have no central controller. A LoRa mesh does the same with data. The slime mold in our forest sim optimizes transport networks between food sources &mdash; the same algorithm optimizes mesh node placement between shelters.</p>
+    </div>
+
+    <div class="card">
+      <h3>Gastown Chipset (GSD)</h3>
+      <p>GUPP = pilot job = DIRAC = a radio node that wakes up, checks for work, transmits, sleeps. Mail-async = store-and-forward = Winlink = AX.25 digipeater. Witness-observer = APRS beacon = passive status broadcast. The patterns are the same because the problem is the same: coordinate autonomous agents with unreliable links.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="index.html">DRP Overview</a> &middot;
+  <a href="../CERN/wlcg.html">WLCG</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Sources: FCC Part 15/95/97 &middot; ARRL &middot; AREDN &middot; Meshtastic &middot; Winlink &middot;
+  <a href="https://www.fcc.gov/media/radio/low-power-radio-general-information">FCC Low Power Radio</a> &middot;
+  <a href="https://www.aredn.org">AREDN</a> &middot;
+  <a href="https://meshtastic.org">Meshtastic</a> &middot;
+  <a href="https://js8call.com">JS8Call</a><br>
+  Last updated: 2026-04-03T05:30Z (sweep v1.2.21)
+</footer>
+
+</body>
+</html>
