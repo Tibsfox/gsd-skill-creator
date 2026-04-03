@@ -156,11 +156,11 @@ footer a { color:rgba(255,255,255,0.3); }
 
   <h2>Science &amp; Research Feeds</h2>
   <div class="card-grid">
-    <div class="card">
+    <a href="../NASA/artemis-ii/papers.html" class="card">
       <h3><span class="status-dot monitoring"></span> Wall-Clock Papers</h3>
       <p>Papers found during active missions, cataloged in real time. <strong>T-3h additions:</strong> AVATAR organ-on-chip (crew's own bone marrow cells), ARCHeR circadian monitoring, 4-nation CubeSat fleet (TACHELES/ATENEA/K-RadCube/SwCube-1), ESM-2 European engine module, and NASA SVS trajectory visualization. 30 papers across 6 sweeps.</p>
-      <div class="meta">30 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC, ESA, NASA Science &middot; Updated v1.3.14</div>
-    </div>
+      <div class="meta">30 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC, ESA, NASA Science &middot; Updated v1.3.15</div>
+    </a>
 
     <a href="../OPEN/index.html" class="card">
       <h3><span class="status-dot live"></span> Open Problems &amp; Research Frontier <span class="badge badge-new">New</span></h3>
@@ -168,11 +168,11 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="meta">16 problems tracked &middot; 4 active, 6 open, 6 watching &middot; Updated v1.1.13</div>
     </a>
 
-    <div class="card" style="border-color:rgba(252,61,33,0.3);">
+    <a href="space-weather.html" class="card" style="border-color:rgba(252,61,33,0.3);">
       <h3><span class="status-dot countdown"></span> Space Weather <span class="badge badge-live">Active</span></h3>
-      <p>X1.5 flare from AR4405 CME has fully passed. <strong>Kp steady at 2.0 &mdash; no longer a concern.</strong> Bz near neutral, solar wind decelerating. Space weather is GO for launch. Primary weather constraints at KSC: cumulus cloud rule, flight through precipitation rule, ground winds &mdash; all currently favorable at 80%. Van Allen belt transit dose projected 5-15 mSv, well within career limits. Aurora watch tonight at 55&deg;N (PNW!) &mdash; post-launch bonus.</p>
-      <div class="meta">SWPC &middot; Kp 2.0 (stable) &middot; Solar wind decelerating &middot; Space weather GO &middot; Updated 20:00Z Apr 1</div>
-    </div>
+      <p>Kp 1.33 quiet, R1 minor radio blackout active. CME from March 30 X1.5 flare fully resolved. Bz +0.5 nT northward &mdash; excellent conditions for translunar coast. Solar wind 370 km/s nominal. Crew beyond magnetosphere, GCR background is primary radiation source. Van Allen belt transit completed successfully at launch.</p>
+      <div class="meta">SWPC &middot; Kp 1.33 (quiet) &middot; R1 active &middot; Space weather GO &middot; Updated 21:30Z Apr 3</div>
+    </a>
   </div>
 
   <h2>Data Sources</h2>
@@ -185,7 +185,7 @@ footer a { color:rgba(255,255,255,0.3); }
         JPL Horizons (-1024) &middot; DSN Now &middot; USGS Snohomish River &middot;
         NWS Forecast Grid &middot; Open-Meteo &middot; WSDOT Ferries
       </p>
-      <div class="meta">All free, no API keys, verified April 3, 2026 21:00Z</div>
+      <div class="meta">All free, no API keys, verified April 3, 2026 22:00Z</div>
     </div>
 
     <div class="card">
@@ -222,7 +222,7 @@ function updateClocks() {
 updateClocks();
 setInterval(updateClocks, 1000);
 // Set page load timestamp
-document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.3.14)';
+document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.3.15)';
 </script>
 </body>
 </html>
