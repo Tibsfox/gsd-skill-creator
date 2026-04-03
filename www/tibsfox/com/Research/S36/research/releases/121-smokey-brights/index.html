@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 121&deg; &mdash; Smokey Brights &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593, #3949AB);
+      color: #9FA8DA;
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1A237E;
+      color: #9FA8DA;
+      border: 1px solid #283593;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .hood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #CE93D8;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .synth-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 30%, #3949AB 60%, #5C6BC0 100%);
+      border: 3px solid #1A237E;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+      box-shadow: 0 0 24px rgba(26, 35, 126, 0.4);
+    }
+    .synth-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #C5CAE9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .synth-card p { color: #E8EAF6; }
+    .synth-card strong { color: #C5CAE9; }
+
+    blockquote {
+      border-left: 3px solid #1A237E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #E8EAF6;
+      font-style: italic;
+      color: #1A237E;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>121 &mdash; Smokey Brights</span>
+    </nav>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">121&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Smokey Brights</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Indie Electronic</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="hood-badge">Capitol Hill</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Synth Card -->
+        <div class="synth-card">
+          <h3>The Moody Pulse &mdash; Synth-Forward Atmosphere</h3>
+          <p>
+            <strong>Kim West</strong> (vocals, synthesizers) and <strong>Ryan Devlin</strong>
+            (guitar, production). Capitol Hill, 2014&ndash;present. Dense synthesizer
+            layers, breathy vocals, guitar-as-texture, programmed rhythms. The music
+            is <strong>smokey</strong> (dark, hazy, atmospheric) and <strong>bright</strong>
+            (melodic hooks, vocal clarity, harmonic luminescence). Self-released.
+            DIY. The moody pulse throbs beneath everything.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Sound</h2>
+          <p>
+            Smokey Brights builds from <strong>synthesizer-forward production</strong>:
+            analog-inflected pads, arpeggiated sequences, sub-bass warmth creating
+            atmospheric beds. Kim West&rsquo;s <strong>smoky, breathy vocals</strong>
+            anchor the human center &mdash; intimate delivery against dense electronic
+            architecture. Ryan Devlin&rsquo;s guitar is <strong>textural, not rhythmic</strong>:
+            reverb-soaked clean tones, tremolo-picked ambience, closer to dream-pop than
+            indie rock. Drum machines pulse at moderate tempo. The sound is dark, melodic,
+            and immersive.
+          </p>
+          <blockquote>
+            The name captures the aesthetic: something hazy and obscured (&ldquo;smokey&rdquo;)
+            combined with something luminous and vivid (&ldquo;brights&rdquo;). Dark atmospheres
+            lit by bright melodic hooks. Murky synthesizer beds punctuated by clear vocal lines.
+            The tension between obscurity and clarity.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Capitol Hill &mdash; The DIY Approach</h2>
+          <p>
+            Smokey Brights is a <strong>Capitol Hill band</strong> in the deepest sense &mdash;
+            emerged from the neighborhood&rsquo;s creative ferment, playing the small venues
+            (Barboza, Neumos, Sunset Tavern, house shows) that constitute its musical ecosystem.
+            All releases <strong>self-released</strong> through Bandcamp and streaming platforms.
+            Home production. No label mediation. KEXP sessions for broader exposure. The visual
+            aesthetic is band-controlled: dark, moody, atmospheric with flashes of saturated color.
+          </p>
+          <p>
+            Capitol Hill <strong>returns</strong> at degree 121 after a one-degree break.
+            The Capitol Hill streak (110&ndash;115) ended at 116 (Seattle proper). Degrees
+            117&ndash;119 were Seattle generic. Degree 120 reached Ellensburg (east of the
+            Cascades). At 121, the engine returns to its gravitational center. Capitol Hill
+            is home base &mdash; the engine orbits it, departing and returning.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Discography</h2>
+          <p>
+            <strong>Wild Rites</strong> (2016) &mdash; debut full-length. Core sound established:
+            synth-forward, atmospheric, Kim West&rsquo;s vocals as human center.
+            <strong>I Love You But Damn</strong> (2018) &mdash; the refinement. Darker, denser.
+            Guitar recedes further into the synth wash.
+            <strong>Time Is a Crooked Bow</strong> (2020) &mdash; most atmospheric. Spacious,
+            reverberant, introspective. Each release deepens the atmospheric commitment.
+            The trajectory: greater density, darker mood, more sophisticated synthesis.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Moody Pulse</h4>
+              <div class="level advanced">Advanced &mdash; 122nd Acoustic Element</div>
+              <p>
+                Throbbing, moderate-tempo electronic pulse embedded in dense
+                atmospheric production. Dark and propulsive. Introspective
+                and physical. Synthesizer density with human vocal anchor.
+                The rhythmic foundation of indie electronic.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Capitol Hill Returns</h4>
+              <div class="level intermediate">Intermediate &mdash; Geographic Pattern</div>
+              <p>
+                Capitol Hill streak (110&ndash;115), departure (116&ndash;120),
+                return (121). The neighborhood is the gravitational center.
+                The engine orbits it. Post-one-third-mark, Capitol Hill
+                reaffirms its position as home base.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Indie Electronic Enters</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 97</div>
+              <p>
+                Synth-forward production with indie songwriting structures.
+                Synthesizers serve songs, not dancefloors. Layer 3 of Capitol
+                Hill&rsquo;s electronic scene: moody, atmospheric, song-based.
+                The 97th genre in the engine.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">120&deg;</span>
+              <strong>Mark Lanegan</strong> &mdash; Darkness continuity.
+              Darkwave (120, E=4) to indie electronic (121, E=5). Both dark,
+              atmospheric, reverb-laden. Lanegan&rsquo;s darkness is vocal;
+              Smokey Brights&rsquo; is environmental.
+            </li>
+            <li>
+              <span class="ref-degree">118&deg;</span>
+              <strong>Loomer</strong> &mdash; Shoegaze/electronic adjacency.
+              Both use guitar as texture, both create atmospheric density.
+              Loomer through pedals; Smokey Brights through synthesizers.
+            </li>
+            <li>
+              <span class="ref-degree">110&deg;</span>
+              <strong>Kinski</strong> &mdash; Capitol Hill electronic.
+              Both Capitol Hill, both E=5, both exploring rock/electronic boundaries.
+              Kinski through motorik drone; Smokey Brights through synth-pop atmosphere.
+            </li>
+            <li>
+              <span class="ref-degree">99&deg;</span>
+              <strong>Blue Scholars</strong> &mdash; Capitol Hill DIY.
+              Both self-released Capitol Hill artists. Different genres
+              (hip-hop vs. indie electronic), same ethic, same neighborhood.
+            </li>
+            <li>
+              <span class="ref-degree">116&deg;</span>
+              <strong>Pony Time</strong> &mdash; Post-Capitol-Hill return.
+              Last non-Capitol-Hill Seattle entry before the geographic wandering
+              of 117&ndash;120. Smokey Brights brings the engine back to Capitol Hill.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">121&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Electronic</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Members</span>
+            <span class="stat-value">Kim West, Ryan Devlin</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">2014</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Capitol Hill</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-released</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">Wild Rites</span>
+            <span class="stat-value">2016</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">I Love You...</span>
+            <span class="stat-value">2018</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Time Is a...</span>
+            <span class="stat-value">2020</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#122 (Moody Pulse)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Capitol Hill Return</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">97 (Indie Electronic)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../120-mark-lanegan/" style="color: var(--seattle-navy);">&larr; 120&deg; Mark Lanegan</a>
+        <a href="../122-sabzi/" style="color: var(--seattle-navy);">122&deg; Sabzi &rarr;</a>
+      </div>
+      <p>
+        Degree 121&deg; &mdash; Smokey Brights &mdash; Seattle 360 Engine &mdash; v1.49.261
+        <br>
+        Kim West and Ryan Devlin. Capitol Hill, 2014&ndash;present. Indie Electronic, E=5.
+        Self-released. Moody synth-pop with atmospheric production. Synthesizer-forward,
+        breathy vocals, guitar-as-texture, programmed rhythms. The moody pulse: dark and
+        propulsive. Capitol Hill returns after the one-third mark. The engine comes home.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

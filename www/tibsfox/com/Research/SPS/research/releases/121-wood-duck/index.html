@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 121&deg; &mdash; Wood Duck &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C);
+      color: #A5D6A7;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 28px rgba(27, 94, 32, 0.6);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .plumage-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 20%, #388E3C 40%, #4A148C 70%, #6A1B9A 100%);
+      border: 3px solid #1B5E20;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+      box-shadow: 0 0 24px rgba(27, 94, 32, 0.4);
+    }
+    .plumage-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #A5D6A7;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .plumage-card p { color: #E8F5E9; }
+    .plumage-card strong { color: #C8E6C9; }
+
+    .streak-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 30%, #00796B 60%, #00897B 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2DFDB;
+    }
+    .streak-card p { color: #E0F2F1; }
+    .streak-card strong { color: #B2DFDB; }
+
+    .cavity-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 30%, #5D4037 60%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .cavity-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .cavity-card p { color: #EFEBE9; }
+    .cavity-card strong { color: #BCAAA4; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.plumage { background: #1B5E20; }
+    .theory-icon.streak { background: #004D40; }
+    .theory-icon.call { background: #00838F; }
+    .theory-icon.cavity { background: #5D4037; }
+    .theory-icon.aix { background: #4A148C; }
+    .theory-icon.conserve { background: #E65100; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #E8F5E9; color: #1B5E20; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">121&deg;</div>
+      <div class="release-title-block">
+        <h2>Wood Duck</h2>
+        <div class="scientific"><em>Aix sponsa</em> (Anatidae) &mdash; The Painted Swimmer &mdash; Most Beautiful Duck in North America</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      rising ooo-eek flight call &mdash; <strong>fourth consecutive Anatidae</strong> (118&ndash;121) &mdash;
+      <strong>iridescent green/purple head</strong> with white racing stripes &mdash; chestnut breast &mdash;
+      genus <em>Aix</em> (two species worldwide) &mdash; <strong>cavity nester</strong> &mdash;
+      conservation success story &mdash; wooded pond, summer &mdash; E=4.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Plumage Card -->
+        <div class="plumage-card">
+          <h3>The Most Beautiful Duck in North America</h3>
+          <p>
+            The male Wood Duck in breeding plumage: <strong>iridescent green-to-purple head</strong>
+            with a swept-back crest, <strong>two thin white racing stripes</strong> from bill
+            to nape, <strong>bright red eyes</strong>, <strong>chestnut-maroon breast</strong>
+            with white speckles, warm buff flanks with vermiculated patterns. Every surface
+            carries color, pattern, or iridescence. The species name <em>sponsa</em> means
+            &ldquo;betrothed&rdquo; &mdash; dressed for a wedding. An argument for extravagance
+            in nature.
+          </p>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-card">
+          <h3>Anatidae Streak &mdash; Four Consecutive Waterfowl</h3>
+          <p>
+            <strong>118:</strong> Harlequin Duck (turbulent stream, E=5) &rarr;
+            <strong>119:</strong> Common Merganser (river, E=4) &rarr;
+            <strong>120:</strong> Hooded Merganser (wooded pond, E=4) &rarr;
+            <strong>121:</strong> Wood Duck (wooded pond, E=4). Four consecutive Anatidae.
+            Four genera: <em>Histrionicus, Mergus, Lophodytes, Aix</em>. The streak
+            deepens. The wooded pond holds for a second degree.
+          </p>
+        </div>
+
+        <!-- Cavity Card -->
+        <div class="cavity-card">
+          <h3>Cavity Nesting &mdash; The Leap of Faith</h3>
+          <p>
+            Obligate cavity nester &mdash; nests in tree cavities created by large
+            woodpeckers or natural decay. Also uses <strong>nest boxes</strong> &mdash; the
+            Wood Duck nest box program is one of the greatest conservation success stories
+            in North American waterfowl. Ducklings hatch in the cavity and at <strong>one day
+            old, leap to the ground</strong> from heights of 15+ meters. The
+            &ldquo;leap of faith&rdquo;: 20-gram downy ducklings bouncing off the ground
+            on their mother&rsquo;s call.
+          </p>
+        </div>
+
+        <h2>The Rising Ooo-Eek Flight Call</h2>
+        <p>
+          A sharp, rising, squealed <strong>&ldquo;ooo-eek!&rdquo;</strong> &mdash; thin,
+          high-pitched, ascending. 1,500&ndash;5,000 Hz, sweeping upward over 0.3&ndash;0.5
+          seconds. Plaintive, almost electronic in quality. Primarily an in-flight contact
+          call that penetrates forest canopy. The female&rsquo;s call is louder and more
+          emphatic. Not a quack or honk &mdash; a squealing whistle. E=4: piercing and
+          carrying despite moderate volume. Same energy as the Hooded Merganser (120),
+          but radically different frequency profile &mdash; high rising squeal vs. low
+          rolling frog-call.
+        </p>
+
+        <h2>Genus <em>Aix</em> &mdash; Two Beautiful Ducks</h2>
+        <p>
+          Only two living species: Wood Duck (<em>Aix sponsa</em>, North America) and
+          Mandarin Duck (<em>Aix galericulata</em>, East Asia). Both renowned for
+          extraordinary plumage. Both cavity nesters. Both perching ducks. A
+          <strong>biogeographic mirror</strong>: parallel species on two continents,
+          both evolved through sexual selection, both cultural symbols for centuries.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-120 Hooded Merganser (cavity nester duo)</strong>
+            <p>Both cavity nesters on wooded ponds. Merganser: fan-crest, frog-call. Wood Duck: iridescent plumage, ooo-eek. Same ecosystem, same nesting strategy, different tribes. Consecutive degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-119 Common Merganser (Anatidae streak)</strong>
+            <p>Four consecutive Anatidae: Harlequin (118), Common Merganser (119), Hooded Merganser (120), Wood Duck (121). Four genera, four niches. The streak deepens.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (streak origin)</strong>
+            <p>Streak began at 118 with turbulent streams. At 121, calmed to wooded ponds. Four degrees, four genera, complete hydrological descent.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-115 Black-backed Woodpecker (cavity chain)</strong>
+            <p>Picidae nonet (107-115) built cavity infrastructure. Anatidae streak (118-121) uses it. Fire creates snags, woodpeckers create cavities, waterfowl nest in them.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-099 Northern Flicker (flicker cavities)</strong>
+            <p>Flickers create cavities used by Hooded Mergansers. Pileated Woodpeckers create larger cavities used by Wood Ducks. The Picidae-Anatidae cavity pipeline.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon plumage">P</div>
+            <div class="theory-content">
+              <h4>The Painted Swimmer &mdash; Iridescent Plumage</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Most beautiful duck in North America. Green-to-purple iridescent head, white racing stripes, chestnut breast. Every surface carries color. The species name means &ldquo;betrothed.&rdquo;</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon call">C</div>
+            <div class="theory-content">
+              <h4>The Rising Ooo-Eek Flight Call</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Sharp rising squeal, 1,500&ndash;5,000 Hz. In-flight contact call. Plaintive, almost electronic. Diagnostic. Not a quack &mdash; a squealing whistle. E=4.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon streak">A</div>
+            <div class="theory-content">
+              <h4>Anatidae Streak &mdash; Four Consecutive</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Harlequin (118), Common Merganser (119), Hooded Merganser (120), Wood Duck (121). Four genera, four ecosystems. Longest waterfowl streak in the engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cavity">N</div>
+            <div class="theory-content">
+              <h4>Cavity Nesting &amp; The Leap of Faith</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Obligate cavity nester. Nest boxes as conservation success. Day-old ducklings leap 15+ meters from nest. The Picidae-Anatidae cavity pipeline connects degrees 107&ndash;121.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon aix">A</div>
+            <div class="theory-content">
+              <h4>Genus <em>Aix</em> &mdash; Biogeographic Mirror</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Two species: Wood Duck (North America) + Mandarin Duck (East Asia). Both extraordinarily beautiful. Both cavity nesters. Parallel evolution on two continents.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon conserve">S</div>
+            <div class="theory-content">
+              <h4>Conservation Success Story</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Recovered from severe depletion through nest box programs. One of the founding narratives of North American waterfowl conservation. Habitat infrastructure reverses decline.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Wood Duck</div>
+          <div class="stat-detail"><em>Aix sponsa</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Context</div>
+          <div class="stat-value">Rising ooo-eek call</div>
+          <div class="stat-detail">Most beautiful duck in NA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">4th entry (streak: 118&ndash;121)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value" style="color: #1B5E20;"><em>Aix</em> (2 spp.)</div>
+          <div class="stat-detail">Wood Duck + Mandarin Duck</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 4</div>
+          <div class="stat-detail">Piercing squeal, moderate vol.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Wooded pond</div>
+          <div class="stat-detail">Summer / year-round</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">450&ndash;680 g</div>
+          <div class="stat-detail">Medium-sized duck</div>
+        </div>
+
+        <h3>Anatidae Streak</h3>
+        <div class="stat-card">
+          <div class="stat-label">118&deg;</div>
+          <div class="stat-value">Harlequin Duck</div>
+          <div class="stat-detail">Turbulent stream, E=5</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">119&deg;</div>
+          <div class="stat-value">Common Merganser</div>
+          <div class="stat-detail">River, E=4</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">120&deg;</div>
+          <div class="stat-value">Hooded Merganser</div>
+          <div class="stat-detail">Wooded pond, E=4</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">121&deg;</div>
+          <div class="stat-value" style="color: #1B5E20;">Wood Duck</div>
+          <div class="stat-detail">Wooded pond, E=4</div>
+        </div>
+
+        <h3>Cavity Nesting</h3>
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Obligate cavity</div>
+          <div class="stat-detail">Tree cavities + nest boxes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duckling Leap</div>
+          <div class="stat-value">15+ meters</div>
+          <div class="stat-detail">Day-old, 20-30 grams</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
