@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 114&deg; &mdash; Haunted Horses &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #C62828);
+      color: #FFCDD2;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(183, 28, 28, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #B71C1C; color: #FFCDD2; border: 1px solid #C62828;
+    }
+    .genre-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #212121; color: #BDBDBD; border: 1px solid #424242; margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #37474F; color: #B0BEC5; border: 1px solid #455A64; margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #00695C; color: #B2DFDB; border: 1px solid #00897B; margin-left: 0.3rem;
+    }
+    .era-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #37474F; color: #B0BEC5; border: 1px solid #455A64; margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white; border: 1px solid #9FA8DA; border-left: 4px solid #B71C1C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #B71C1C; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .machine-card {
+      background: linear-gradient(135deg, #212121 0%, #37474F 30%, #455A64 60%, #546E7A 100%);
+      border: 2px solid #212121; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #ECEFF1;
+    }
+    .machine-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #FFFFFF; font-family: system-ui, sans-serif; }
+    .machine-card p { color: #ECEFF1; margin: 0.5rem 0; }
+    .machine-card strong { color: #FFFFFF; }
+
+    .e6-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFEBEE;
+    }
+    .e6-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #FFCDD2; font-family: system-ui, sans-serif; }
+    .e6-card p { color: #FFEBEE; margin: 0.5rem 0; }
+    .e6-card strong { color: #FFCDD2; }
+
+    .diy-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #795548 100%);
+      border: 2px solid #4E342E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #EFEBE9;
+    }
+    .diy-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #D7CCC8; font-family: system-ui, sans-serif; }
+    .diy-card p { color: #EFEBE9; margin: 0.5rem 0; }
+    .diy-card strong { color: #D7CCC8; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>114 &mdash; Haunted Horses</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Noise/Indie &mdash; E=6 &mdash; The Machine Signal &mdash; Self-Released</h3>
+      <p>
+        <strong>E=6 RETURNS</strong> &mdash; fifth E=6 in eight degrees (108&ndash;114).
+        Haunted Horses: <strong>Colin Dawson</strong> + <strong>Jessica Jaworski</strong>.
+        Industrial noise, drum machines, heavy distortion. Self-released.
+        Part of the <strong>resurgent Seattle noise/industrial underground</strong>
+        alongside No Anchor (degree 109). Capitol Hill streak extends to five (110&ndash;114).
+        <strong>Noise duo at maximum energy.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">114&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Haunted Horses</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Noise/Indie</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="era-badge">2010s-present</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="machine-card">
+          <h4>The Machine Signal &mdash; Human Performance Meets Industrial Rhythm</h4>
+          <p>
+            <strong>Drum machines</strong> provide the relentless, mechanical pulse.
+            <strong>Extreme guitar distortion</strong> treats the instrument as a noise generator.
+            <strong>Shouted vocals</strong> add urgency without lyrical clarity.
+            The combination sounds <strong>mechanical</strong> &mdash; relentless, rhythmically rigid,
+            tonally harsh &mdash; even though two human musicians create it.
+            Lineage: <strong>Big Black</strong> (drum machine + angular guitar),
+            <strong>early Swans</strong> (crushing repetition),
+            <strong>Lightning Bolt</strong> (duo force). The machine signal is not beautiful;
+            it is <strong>powerful</strong>.
+          </p>
+        </div>
+
+        <div class="e6-card">
+          <h4>E=6 Returns &mdash; Fifth Maximum in Eight Degrees</h4>
+          <p>
+            Five E=6 entries in eight degrees (108&ndash;114). Each expresses maximum differently:
+            <strong>punk/electronic combustion</strong> (108),
+            <strong>industrial noise duo</strong> (109),
+            <strong>instrumental ascent</strong> (110),
+            <strong>beauty/destruction</strong> (111),
+            <strong>machine signal</strong> (114).
+            E=6 is not a single sound &mdash; it is a <strong>level</strong> with
+            radically different expressions. The engine&rsquo;s baseline has shifted upward.
+          </p>
+        </div>
+
+        <div class="diy-card">
+          <h4>Self-Released &mdash; Pure DIY Infrastructure</h4>
+          <p>
+            First fully <strong>self-released</strong> artist in the Capitol Hill streak.
+            No label intermediary. <strong>Bandcamp</strong> as primary distribution.
+            The most extreme expression of DIY independence in the engine&rsquo;s label ecosystem.
+            Noise music&rsquo;s economics don&rsquo;t support traditional label overhead &mdash;
+            the audience is small, dedicated, and accustomed to buying directly from artists.
+            Self-release is not a limitation; it is the <strong>natural infrastructure</strong>
+            for noise music.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Duo</h2>
+          <p>
+            <strong>Colin Dawson</strong> (guitar, vocals, electronics) &mdash; sonic architect.
+            Heavily distorted guitar from drone to angular atonal riffing. Shouted vocals buried
+            in the mix. Electronics push the guitar signal from instrument to pure texture.<br>
+            <strong>Jessica Jaworski</strong> (drums, drum machines, electronics) &mdash; rhythmic
+            foundation. Layers acoustic drums over drum machine patterns. The organic unpredictability
+            of live drumming combined with the relentless regularity of the machine. The tension
+            between human and machine is essential.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Noise/Industrial Resurgence</h2>
+          <p>
+            Haunted Horses exists within a broader <strong>resurgence of industrial and noise music
+            in Seattle</strong> during the 2010s&ndash;2020s. After grunge and 2000s indie rock dominance,
+            the underground shifted toward noise, industrial, and experimental music.
+            Alongside <strong>No Anchor</strong> (degree 109), Haunted Horses represents the
+            current generation of Seattle noise. DIY venues, Bandcamp distribution, KEXP support.
+            Descended from <strong>the Melvins, Tad, Kinski, Helms Alee</strong> &mdash;
+            Seattle&rsquo;s long tradition of extreme music continues.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">S36-109</span> No Anchor (noise duo parallel) &mdash; Both Seattle noise duos at E=6. Five degrees apart. Both industrial-adjacent, both two-person, both DIY. Paired noise duos in the engine.</li>
+            <li><span class="ref-degree">S36-108</span> Veronica Lipgloss (E=6 concentration) &mdash; Five E=6 in eight degrees (108-114). Punk/electronic vs. industrial noise. Different genres, same maximum.</li>
+            <li><span class="ref-degree">S36-113</span> Minus the Bear (energy contrast) &mdash; Math rock/electronic E=5 to noise/indie E=6. Technical warmth gives way to raw force. One-degree ascent to maximum.</li>
+            <li><span class="ref-degree">S36-110</span> Kinski (noise lineage) &mdash; Both noise/experimental. Kinski: instrumental (E=6). Haunted Horses: vocals + drum machines (E=6). Noise lineage threads through the Capitol Hill streak.</li>
+            <li><span class="ref-degree">S36-112</span> 764-HERO (label spectrum) &mdash; Up Records (112) vs. self-released (114). Full label spectrum: established indie to no label. Both valid. Both in the Seattle scene.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Machine Signal</h4>
+              <div class="level advanced">Advanced</div>
+              <p>Drum machines + extreme distortion + shouted vocals. Mechanical, relentless, industrial. Human performance merged with machine rhythm. Lineage: Big Black, early Swans, Lightning Bolt. The noise is the foundation; songs are built within it.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=6 Concentration (108-114)</h4>
+              <div class="level advanced">Advanced</div>
+              <p>Five E=6 in eight degrees. Each maximum expressed differently. The engine's baseline shifted upward. E=6 is a level, not a sound. Unprecedented concentration: 1 E=6 in first 107 degrees, then 5 in the next 7.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Self-Released DIY</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>First fully self-released in the Capitol Hill streak. Bandcamp distribution. No label overhead. Noise music's economics favor direct artist-to-listener. The natural infrastructure for noise.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Capitol Hill Streak (110-114)</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>Five consecutive: Kinski (E=6), Helms Alee (E=6), 764-HERO (E=4), Minus the Bear (E=5), Haunted Horses (E=6). Five genres, five degrees, one scene. Energy: 6, 6, 4, 5, 6. The neighborhood's depth.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">114</span></div>
+          <div class="stat-row"><span class="stat-label">E=6 count</span><span class="stat-value">5th in 8 degrees</span></div>
+          <div class="stat-row"><span class="stat-label">Capitol Hill</span><span class="stat-value">5th consecutive</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-released</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Haunted Horses</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Noise/Indie</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 6</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-released</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2010s-present</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Members</span><span class="stat-value">Dawson / Jaworski</span></div>
+          <div class="stat-row"><span class="stat-label">Format</span><span class="stat-value">Duo (guitar + drums/machines)</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
