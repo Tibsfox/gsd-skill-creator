@@ -99,6 +99,18 @@
     }
   },
   "telemetry": null,
+  "mission_timeline": {
+    "flight_day_3": "Outbound trajectory correction #1 (Hansen preps). CPR demo in microgravity. Medical equipment checkout. Koch tests emergency DSN comms. Crew rehearses lunar flyby observation choreography.",
+    "flight_day_4": "Trajectory correction #2. 1hr per astronaut reviewing lunar geography targets. 20min celestial photography from windows.",
+    "flight_day_5": "Enter lunar sphere of influence. Spacesuit testing (Orion OCSS donning, pressurization, helmet port eating). Final outbound burn.",
+    "flight_day_6": "CLOSEST APPROACH — 4,000-6,000 mi from lunar surface. Record distance from Earth (~252,021 mi, beating Apollo 13). Photos/video all day. 30-50 min comm blackout behind Moon.",
+    "flight_day_7": "Exit lunar sphere. First return trajectory correction. Off-duty recovery day.",
+    "flight_day_8": "Radiation shelter demo (solar flare protection). Manual piloting test (6-DOF vs 3-DOF control).",
+    "flight_day_9": "Reentry procedure review. Return trajectory correction #2. Waste system test. Orthostatic garment fit.",
+    "flight_day_10": "Final trajectory correction. Cabin reconfig. SM separation. Direct entry at 11.0 km/s, 3000°F. Drogue→pilot→main chutes. Splashdown Pacific, ~17 mph. April 10, 8:06 PM EDT.",
+    "pcd_issue": "Koch PCD went dark before TLI, unresponsive. Mission control working alternatives. Non-critical — backup procedures available.",
+    "tdrs_issue": "Brief loss of two-way comms post-orbit insertion. Traced to ground TDRS configuration. Resolved, no mission impact."
+  },
   "announcements": [
     {
       "time": "2026-04-03T03:30:00Z",
