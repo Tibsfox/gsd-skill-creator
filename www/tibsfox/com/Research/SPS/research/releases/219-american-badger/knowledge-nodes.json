@@ -1,0 +1,17 @@
+{
+  "degree": 219, "species": "American Badger", "scientific_name": "Taxidea taxus", "slug": "219-american-badger",
+  "sound_type": "low growl (100-600 Hz) + sharp hiss (2,000-8,000 Hz). Defensive. E=5",
+  "energy": 5, "ecosystem": "Open grassland, sage-steppe, prairie. Eastern Washington. Fossorial specialist.",
+  "family": "Mustelidae (second in stretch, after wolverine 216)", "order": "Carnivora", "class": "Mammalia",
+  "coordinates": { "lat": 47.20, "lon": -120.50, "description": "American Badger in eastern WA grassland." },
+  "taxonomy_note": { "description": "Second Mustelidae in stretch. Grassland representative. Ecological engineer." },
+  "song_metrics": { "fundamental_frequency_range_hz": "Growl: 100-600 Hz. Hiss: 2,000-8,000 Hz.", "amplitude": "E=5. Moderate, defensive.", "key_property": "AMERICAN BADGER. Growl + hiss. E=5. Tenacious digger. v1.49.360." },
+  "nodes": [
+    { "id": "tenacious-digger", "type": "concept", "title": "Tenacious Digger -- Fossorial Specialist", "description": "Massive claws, 10-50 burrows, digs faster than prey escapes. Ecological engineer.", "connections": ["mustelid-grassland"] },
+    { "id": "mustelid-grassland", "type": "concept", "title": "Mustelidae Grassland Representative", "description": "Wolverine (wilderness) to badger (grassland). Same family, different habitats.", "connections": ["tenacious-digger"] }
+  ],
+  "cross_references": [
+    { "target": "SPS-216", "species": "Wolverine", "relationship": "MUSTELIDAE! Wolverine (wilderness, E=6) vs. badger (grassland, E=5)." },
+    { "target": "S36-219", "artist": "Brad", "relationship": "ENERGY EQUILIBRIUM! Both E=5. Groove + soil. Balance." }
+  ]
+}
