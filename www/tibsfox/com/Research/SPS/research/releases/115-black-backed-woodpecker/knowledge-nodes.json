@@ -1,0 +1,127 @@
+{
+  "degree": 115,
+  "species": "Black-backed Woodpecker",
+  "scientific_name": "Picoides arcticus",
+  "slug": "115-black-backed-woodpecker",
+  "sound_type": "loud rattle call + unique drum -- sharp staccato burst carrying across open post-fire landscape, dry percussive drum on charred snags, E=5",
+  "energy": 5,
+  "ecosystem": "Burn forest -- recently burned conifer and mixed forest, 1-8 years post-fire. Standing dead trees (snags) colonized by bark beetles. Open, canopy-free landscape. The post-fire environment as acoustic stage.",
+  "season": "Year-round resident. Does not migrate. Nomadic following fire events -- may move dozens or hundreds of kilometers to reach recently burned areas.",
+  "family": "Picidae (9th consecutive: 107-115, ALL-TIME FAMILY RECORD)",
+  "order": "Piciformes",
+  "csv_substitute": false,
+  "original_species": "Black-backed Woodpecker",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.50,
+    "lon": -121.20,
+    "description": "Reference for montane burn habitat in the North Cascades. Black-backed Woodpeckers found in recently burned conifer forest throughout the boreal and montane West."
+  },
+  "taxonomy_note": {
+    "description": "NINTH CONSECUTIVE PICIDAE (107-115) -- ALL-TIME FAMILY RECORD surpassing the Sciuridae octet. STREAK CLOSES at degree 115. Second fire-specialist after Lewis's Woodpecker (112). Three-toed adaptation shared with Three-toed Woodpecker (114). Obligate fire-follower. Conservation paradox: needs fire, but fire suppression reduces habitat.",
+    "current_family": "Picidae (9th consecutive, all-time record, streak closes)",
+    "new_family": false,
+    "family_count_in_engine": "Picidae count: 11 entries (Northern Flicker 21-22, Red-breasted Sapsucker 54, Pileated Woodpecker 54, Acorn 107, Pileated laughing 108, Pileated drumming 109, Hairy 110, Downy 111, Lewis's 112, White-headed 113, Three-toed 114, Black-backed 115)",
+    "name_etymology": "Picoides from Latin picus ('woodpecker') + Greek -oides ('resembling') -- 'woodpecker-like.' arcticus from Latin arcticus ('of the north, arctic') -- referring to the species' boreal range. The Black-backed Woodpecker: the northern woodpecker-like bird.",
+    "genus_note": "Picoides shared with Three-toed Woodpecker (degree 114). The two three-toed North American woodpeckers. Consecutive Picoides entries (114-115).",
+    "order_note": "Piciformes. Ninth consecutive (107-115). The longest Piciformes streak in the engine. Closes at degree 115.",
+    "family_position": "Picidae streak closes at degree 115. Nine consecutive -- all-time record. Degree 116 introduces Cinclidae (dippers), a new family. The transition from fire to water."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,500-4,000 Hz. Rattle call -- sharp, staccato, percussive. Drum -- 500-2,000 Hz.",
+    "peak_energy_band_hz": "2,000-3,500 Hz. The sharp quality of the rattle carries across open post-fire landscape.",
+    "song_frequency_hz": "Rattle call: 1,500-4,000 Hz, rapid staccato burst. Drum: 500-2,000 Hz, fast dry roll on dead snags.",
+    "song_duration_s": "Rattle call: 1-3 seconds. A rapid burst of sharp percussive notes. Drum: 1-2 seconds, fast accelerating roll.",
+    "note_structure": "RATTLE: Rapid series of sharp, hard notes -- sharper and louder than Three-toed (114). Percussive, insistent, functional. DRUM: Fast, slightly accelerating roll on charred dead snags. Higher-pitched and drier than Pileated's resonant boom.",
+    "note_types": "Rattle call (primary, territorial/contact), drum (territorial/mate-attraction), soft pik contact notes. The rattle is the diagnostic vocalization.",
+    "phrase_structure": "Single burst. The rattle is one continuous staccato burst. The drum is one continuous roll. No repeated phrases within a single delivery.",
+    "timbre": "Sharp. Percussive. Dry. The rattle has a hard, cutting quality. The drum is drier and higher-pitched than larger woodpeckers' drums. Both shaped by the charred-snag substrate and open post-fire acoustic environment.",
+    "amplitude": "E=5 -- loud, assertive, carrying. Not the overwhelming E=6 of the Pileated, but a territorial sentinel's declaration across open burn landscape. The lack of canopy means sound travels unobstructed.",
+    "tempo": "Rapid. Both rattle and drum are fast -- the rattle is a quick staccato burst, the drum slightly accelerates.",
+    "context": "TERRITORIAL AND CONTACT. The rattle declares territory in post-fire landscape. The drum attracts mates and establishes boundaries. Given year-round but most frequently in breeding season.",
+    "regional_variation": "Minimal. Rattle and drum are consistent across the species' range.",
+    "key_property": "LOUD RATTLE CALL + UNIQUE DRUM -- the fire ghost's acoustic signature. E=5. Sharp staccato rattle carrying across open post-fire landscape. Dry percussive drum on charred snags. 9th CONSECUTIVE PICIDAE (107-115) -- ALL-TIME FAMILY RECORD surpassing Sciuridae octet. STREAK CLOSES. Second fire-specialist (after Lewis's 112). Three-toed (shared with 114). Obligate fire-follower. Conservation paradox."
+  },
+  "plumage": {
+    "overall": "Medium-sized woodpecker. Entirely black back (no white barring or patterning). Black head with yellow crown patch (males). White underparts with black barring on flanks. The all-black back is diagnostic -- camouflage against charred bark.",
+    "diagnostic_mark": "For degree 115: (1) ALL-BLACK BACK -- no white barring, unique among PNW woodpeckers. Camouflage on charred bark. (2) YELLOW CROWN -- males have a bright yellow crown patch (not red like most woodpeckers). (3) THREE TOES -- two forward, one back. (4) BURN FOREST HABITAT -- found in recently burned areas with standing dead trees.",
+    "seasonal_variation": "Minimal. Year-round plumage. Males have yellow crown; females lack it or have reduced yellow.",
+    "flight_pattern": "Undulating flight typical of woodpeckers. The all-black back is visible in flight, distinguishing from other medium-sized woodpeckers."
+  },
+  "physical_description": {
+    "overall": "Medium-sized woodpecker. Body length 23-25 cm. Wingspan 39-42 cm. Weight 61-88 g. Entirely black back. Black head with yellow crown (males). White underparts. Three toes.",
+    "diagnostic_mark": "For degree 115: medium-sized woodpecker with entirely black back in recently burned forest. Yellow crown on males. Three toes visible at close range. If you see a black-backed woodpecker flaking bark off charred snags in a burn -- it is a Black-backed Woodpecker.",
+    "field_id": "All-black back (no white), yellow crown (males), three toes, in recently burned forest. The fire ghost. If the habitat is burned snags and the woodpecker's back is solid black -- Black-backed Woodpecker."
+  },
+  "nodes": [
+    {
+      "id": "picidae-record",
+      "type": "pattern",
+      "title": "9th Consecutive Picidae -- ALL-TIME FAMILY RECORD (107-115)",
+      "description": "Nine consecutive Picidae entries. Surpasses the Sciuridae octet (8) as the all-time family record. The nonet: Acorn (107), Pileated laughing (108), Pileated drumming (109), Hairy (110), Downy (111), Lewis's (112), White-headed (113), Three-toed (114), Black-backed (115). Streak closes at 115.",
+      "connections": ["fire-ghost", "three-toed-pair", "streak-close"]
+    },
+    {
+      "id": "fire-ghost",
+      "type": "concept",
+      "title": "The Fire Ghost -- Obligate Fire-Follower",
+      "description": "Requires recently burned forest (1-8 years post-fire). Bark beetle specialist. All-black back as camouflage on charred bark. Conservation paradox: needs fire, but fire suppression reduces habitat. Salvage logging removes critical snag habitat.",
+      "connections": ["picidae-record", "fire-rattle", "fire-specialist-pair"]
+    },
+    {
+      "id": "fire-rattle",
+      "type": "concept",
+      "title": "The Fire Rattle -- Carrying Across the Burn",
+      "description": "Loud sharp staccato rattle call + dry percussive drum on charred snags. Carries across open post-fire landscape (no canopy obstruction). E=5. Louder than Three-toed (114), harsher than Hairy (110), less wild than Pileated (108).",
+      "connections": ["fire-ghost", "three-toed-pair"]
+    },
+    {
+      "id": "three-toed-pair",
+      "type": "pattern",
+      "title": "Consecutive Three-Toed Woodpeckers (114-115)",
+      "description": "Three-toed (114) and Black-backed (115) -- the only two three-toed woodpeckers in North America. Both Picoides. Both bark-flakers. Three-toed foot provides wider swing arc, more force per strike. Consecutive entries documenting convergent adaptation.",
+      "connections": ["picidae-record", "fire-ghost"]
+    },
+    {
+      "id": "fire-specialist-pair",
+      "type": "connection",
+      "title": "Fire-Specialist Pair -- Lewis's (112) + Black-backed (115)",
+      "description": "Two fire-specialists in the Picidae streak. Lewis's (112, flycatching, E=4, opportunistic fire-dependence). Black-backed (115, bark-flaking, E=5, obligate fire-dependence). Spectrum from opportunistic to obligate.",
+      "connections": ["fire-ghost", "picidae-record"]
+    },
+    {
+      "id": "streak-close",
+      "type": "pattern",
+      "title": "Picidae Streak Closes -- Fire to Water",
+      "description": "Degree 115 closes the Picidae streak. Degree 116 introduces Cinclidae (dippers) -- a new family. The transition from burn forest to rushing stream. Fire to water. The engine's most dramatic ecosystem shift.",
+      "connections": ["picidae-record", "fire-ghost"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-114",
+      "species": "Three-toed Woodpecker",
+      "relationship": "CONSECUTIVE THREE-TOED WOODPECKERS. Both have three toes. Both are bark-flakers. Both are Picoides. Three-toed (114, boreal/burn, E=4); Black-backed (115, burn, E=5). Back-to-back. Energy escalation."
+    },
+    {
+      "target": "SPS-112",
+      "species": "Lewis's Woodpecker",
+      "relationship": "FIRE-SPECIALIST PAIR. Lewis's (112, flycatching, E=4, opportunistic). Black-backed (115, bark-flaking, E=5, obligate). Spectrum of fire-dependence. Two fire-specialists in the same streak."
+    },
+    {
+      "target": "SPS-108",
+      "species": "Pileated Woodpecker (laughing)",
+      "relationship": "PICIDAE ENERGY PEAK AND RANGE. Pileated at E=6 (maximum). Black-backed at E=5. The streak's energy range: E=3 to E=6 across nine degrees."
+    },
+    {
+      "target": "SPS-107",
+      "species": "Acorn Woodpecker",
+      "relationship": "STREAK BOOKENDS. Acorn opens (107, colonial, oak savanna). Black-backed closes (115, solitary, burn forest). Community to solitude. Standing forest to charred landscape."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "FIRE ECOLOGY CONTRAST. Spotted Owl needs old-growth standing forest alive. Black-backed needs standing forest dead and burned. Both need standing trees -- one alive, one dead. The fire management paradox."
+    }
+  ]
+}
