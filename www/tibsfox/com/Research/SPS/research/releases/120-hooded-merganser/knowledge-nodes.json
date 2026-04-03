@@ -1,0 +1,134 @@
+{
+  "degree": 120,
+  "species": "Hooded Merganser",
+  "scientific_name": "Lophodytes cucullatus",
+  "slug": "120-hooded-merganser",
+  "sound_type": "rolling frog-like call -- low, resonant crrroo, more like an amphibian than a duck. Courtship display context. Diagnostic and unusual. E=4.",
+  "energy": 4,
+  "ecosystem": "Wooded pond -- woodland ponds, beaver ponds, forested swamps, quiet backwaters. Sheltered, still, clear water surrounded by trees. Cavity nester requiring large tree cavities near water.",
+  "season": "Year-round resident in the Pacific Northwest lowlands. Breeds in wooded areas near water. Winters on sheltered ponds and backwaters.",
+  "family": "Anatidae (third consecutive entry: Harlequin 118, Common Merganser 119, Hooded Merganser 120)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Hooded Merganser",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.65,
+    "lon": -122.20,
+    "description": "Reference for wooded pond habitat in the Puget Sound lowland. Hooded Mergansers found in woodland ponds, beaver ponds, and sheltered backwaters west of the Cascades."
+  },
+  "taxonomy_note": {
+    "description": "Third consecutive Anatidae entry. ONE-THIRD MARK (120/360 = 33.3%). North America's smallest merganser. Only member of genus Lophodytes. Fan-shaped black-and-white crest is one of the most dramatic displays in duck taxonomy. Rolling frog-like call. Wooded pond ecosystem. Cavity nester.",
+    "current_family": "Anatidae (third consecutive entry)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae count: 3 entries (Harlequin Duck 118, Common Merganser 119, Hooded Merganser 120). Streak: 3 consecutive.",
+    "name_etymology": "Lophodytes from Greek lophos (crest) + dytes (diver) -- 'crested diver.' cucullatus from Latin cucullus (hood) -- 'hooded.' The Hooded Merganser: the hooded crested diver.",
+    "genus_note": "Lophodytes -- monotypic genus. The Hooded Merganser is the ONLY member. Evolutionary divergence from Mergus occurred earlier than divergence between Common and Red-breasted Mergansers. Taxonomically unique.",
+    "order_note": "Anseriformes continues (third consecutive). The waterfowl order holds. After Piciformes (107-115, nine consecutive) and a brief Passeriformes return (116-117), Anseriformes has established its own streak.",
+    "family_position": "Anatidae third consecutive entry. Streak: 118-120. Track continuation at 121. If 121 is also Anatidae, the streak reaches 4."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "400-2,000 Hz. Low, resonant rolling call. Most energy below 1,500 Hz.",
+    "peak_energy_band_hz": "600-1,200 Hz. The rolling frog-like crrroo concentrates energy in the low-mid frequency range.",
+    "song_frequency_hz": "Male courtship call: rolling crrroo, 400-2,000 Hz. Female: hoarse croak, lower-pitched.",
+    "song_duration_s": "Individual call: 0.5-1.5 seconds. Rolling quality with trill. Given during courtship display sequences.",
+    "note_structure": "ROLLING FROG-LIKE CALL: Low, resonant crrroo. The vocal membranes vibrate producing a buzzy, rolling tone. More like an amphibian than a duck. Accompanies crest display.",
+    "note_types": "Male courtship crrroo (primary, distinctive), female hoarse croak, alarm calls. The courtship call is diagnostic.",
+    "phrase_structure": "Individual calls during display sequences. Not complex phrasing. Display-synchronized.",
+    "timbre": "Rolling. Guttural. Frog-like. Mechanical. Resonant. Unlike any other duck vocalization. The rolling trill quality is diagnostic.",
+    "amplitude": "E=4 -- moderate. Carries across wooded ponds effectively. Unusual quality rather than high volume. In sheltered pond environments, moderate amplitude suffices.",
+    "tempo": "Slow to moderate. Calls given during deliberate courtship display sequences. Crest raises, head pumps, call emits.",
+    "context": "COURTSHIP DISPLAY. Male raises fan-shaped crest, pumps head, emits rolling crrroo. Display-oriented. Also alarm and agitation contexts.",
+    "regional_variation": "Minimal documented variation. Display calls tend to be species-typical with limited learned variation.",
+    "key_property": "ROLLING FROG-LIKE CALL -- low, resonant crrroo, more like amphibian than duck. E=4. ONE-THIRD MARK (120/360). Third consecutive Anatidae. Smallest merganser. Sole genus Lophodytes. Fan-shaped black-and-white crest. Wooded pond ecosystem. Still water. Cavity nester."
+  },
+  "plumage": {
+    "overall": "Male: black upperparts, white breast, rufous flanks. Head black with enormous fan-shaped crest -- black at edges with large triangular white center. When crest raised, head appears to double in size. Amber-gold eyes. Female: brown-gray overall with warm rufous-brown crest (smaller than male's). Both sexes: serrated merganser bill.",
+    "diagnostic_mark": "For degree 120: (1) MALE: Fan-shaped black-and-white crest (diagnostic, unmistakable when raised). (2) FEMALE: Rufous-brown crested head on gray-brown body. (3) SMALL SIZE -- smallest merganser. (4) AMBER-GOLD EYES (male). (5) WOODED POND HABITAT.",
+    "seasonal_variation": "Males in eclipse plumage resemble females but retain amber eyes. Non-breeding season: crest less frequently displayed.",
+    "flight_pattern": "Fast, direct flight with rapid wingbeats. White wing patches visible. Small, compact silhouette in flight."
+  },
+  "physical_description": {
+    "overall": "Small merganser. Body length 40-49 cm. Wingspan 56-70 cm. Weight 450-880 g. Roughly half the mass of Common Merganser. Compact body. Fan-shaped crest. Short, triangular serrated bill.",
+    "diagnostic_mark": "For degree 120: small duck on a wooded pond with a dramatic fan-shaped black-and-white crest (male) or rufous crest (female). If the crest raises into a fan shape and the bird is on a sheltered, tree-lined pond -- Hooded Merganser.",
+    "field_id": "Small merganser on wooded ponds. Male: dramatic fan-shaped crest (black edges, white center), black-and-white body. Female: rufous-brown crest, gray-brown body. Both: amber-gold eyes, small serrated bill. Rolling frog-like call during courtship display."
+  },
+  "nodes": [
+    {
+      "id": "fan-crest",
+      "type": "concept",
+      "title": "The Fan-Shaped Crest -- Dramatic Display",
+      "description": "Male's fan-shaped black-and-white crest: one of the most dramatic displays in duck taxonomy. Head appears to double in size when raised. Courtship, territorial, alarm functions. Flat when relaxed -- completely different bird.",
+      "connections": ["frog-call", "sole-genus", "anatidae-streak"]
+    },
+    {
+      "id": "frog-call",
+      "type": "concept",
+      "title": "The Rolling Frog-Like Call",
+      "description": "Low, resonant crrroo more like an amphibian than a duck. 400-2,000 Hz. Rolling trill from vibrating vocal membranes. Courtship display context. Diagnostic and unusual. E=4.",
+      "connections": ["fan-crest", "wooded-pond"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Anatidae Streak -- Three Consecutive (118-120)",
+      "description": "Harlequin Duck (118, turbulent stream), Common Merganser (119, river), Hooded Merganser (120, wooded pond). Three ecosystems: rapids to river to pond. Three genera. The waterfowl entrance at the one-third mark.",
+      "connections": ["fan-crest", "water-culmination", "one-third-mark"]
+    },
+    {
+      "id": "sole-genus",
+      "type": "concept",
+      "title": "Sole Genus Lophodytes -- Taxonomic Uniqueness",
+      "description": "Only member of genus Lophodytes. Early evolutionary divergence from Mergus. Monotypic genus at the one-third mark. Joins American Dipper (Cinclus) as monotypic-genus representative. Unique taxa at structural boundaries.",
+      "connections": ["fan-crest", "one-third-mark"]
+    },
+    {
+      "id": "wooded-pond",
+      "type": "concept",
+      "title": "Wooded Pond Ecosystem -- Still Water",
+      "description": "Woodland ponds, beaver ponds, forested swamps. Sheltered, still, clear water surrounded by trees. Cavity nester. The quietest aquatic habitat in the engine. The water theme culminates in stillness.",
+      "connections": ["frog-call", "water-culmination"]
+    },
+    {
+      "id": "water-culmination",
+      "type": "pattern",
+      "title": "Water Culmination -- Torrent to Stillness (116-120)",
+      "description": "Five degrees of progressive calming: fast stream (116-117) to turbulent rapids (118) to river (119) to wooded pond (120). The full hydrological spectrum. The engine has traced the water from mountain torrent to woodland pool.",
+      "connections": ["anatidae-streak", "wooded-pond"]
+    },
+    {
+      "id": "one-third-mark",
+      "type": "pattern",
+      "title": "One-Third Mark -- 120/360 Taxonomic Summary",
+      "description": "120 species. All avian. ~25-30 families. Picidae nonet (107-115, largest streak). Anatidae streak (118-120, current). Monotypic genera at boundaries. Forest to fire to water to stillness. The engine's ecological trajectory documented.",
+      "connections": ["anatidae-streak", "sole-genus"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-119",
+      "species": "Common Merganser",
+      "relationship": "MERGANSER CONTRAST. Largest vs smallest. River vs wooded pond. Guttural croak vs frog-like call. Same tribe, opposite scale. Consecutive degrees."
+    },
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "ANATIDAE STREAK. Three consecutive: Harlequin (turbulent stream, E=5), Common Merganser (river, E=4), Hooded Merganser (wooded pond, E=4). Three ecosystems, three genera."
+    },
+    {
+      "target": "SPS-116",
+      "species": "American Dipper",
+      "relationship": "WATER CULMINATION. Five degrees: fast stream (116) to wooded pond (120). Full hydrological spectrum. Torrent to stillness. MONOTYPIC GENUS PARALLEL: Cinclus (116) and Lophodytes (120)."
+    },
+    {
+      "target": "SPS-115",
+      "species": "Black-backed Woodpecker",
+      "relationship": "CAVITY NESTER LINEAGE. Woodpecker excavates in burned snags. Merganser uses existing cavities near water. Fire creates snags; decay creates cavities; mergansers nest in them."
+    },
+    {
+      "target": "SPS-021",
+      "species": "Northern Flicker",
+      "relationship": "CAVITY CREATION. Flickers and woodpeckers create the cavities that Hooded Mergansers depend on for nesting. The Picidae-Anatidae connection: one makes holes, the other uses them."
+    }
+  ]
+}
