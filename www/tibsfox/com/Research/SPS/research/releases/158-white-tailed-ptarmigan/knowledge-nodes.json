@@ -1,0 +1,108 @@
+{
+  "degree": 158,
+  "species": "White-tailed Ptarmigan",
+  "scientific_name": "Lagopus leucura",
+  "slug": "158-white-tailed-ptarmigan",
+  "sound_type": "cackling + soft clucks -- quiet alarm/territorial cackling and soft clucking contact calls; the quiet sounds of the alpine zone; E=3",
+  "energy": 3,
+  "ecosystem": "Alpine tundra -- above treeline year-round. Alpine meadows, talus slopes, snowfields, krummholz edges. The most extreme habitat of any Phasianidae entry. The only bird in North America that lives above treeline year-round.",
+  "season": "Year-round alpine resident. Breeding May-July. Never descends below treeline. Snow roosting in winter.",
+  "family": "Phasianidae (6th and FINAL entry. Closes the family. 153-158 complete.)",
+  "order": "Galliformes",
+  "csv_substitute": false,
+  "original_species": "White-tailed Ptarmigan",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.75,
+    "lon": -121.10,
+    "description": "White-tailed Ptarmigan in alpine zones of the North Cascades, Mount Rainier, and other high peaks of Washington. Above treeline (6,000-7,000+ ft)."
+  },
+  "taxonomy_note": {
+    "description": "SIXTH and FINAL Phasianidae entry. Closes the family. Only year-round alpine bird in N.A. Pure white winter plumage. Smallest grouse (300-400g). Cackling + soft clucks. E=3 -- quietest Phasianidae. The extreme endpoint of the family arc.",
+    "current_family": "Phasianidae (6th and final entry)",
+    "new_family": false,
+    "family_count_in_engine": "Phasianidae: sixth and final entry. Wild Turkey (153) + Dusky Grouse (154) + Ruffed Grouse (155) + Sooty Grouse (156) + Spruce Grouse (157) + White-tailed Ptarmigan (158). Complete.",
+    "name_etymology": "Lagopus from Greek 'lagos' (hare) + 'pous' (foot) -- hare-footed, referring to the feathered feet. leucura from Greek 'leukos' (white) + 'oura' (tail) -- white-tailed.",
+    "genus_note": "Lagopus -- first and only entry. The ptarmigan genus. Distinguished by feathered feet and seasonal plumage change.",
+    "order_note": "Galliformes. Sixth and final entry.",
+    "family_position": "Sixth and final Phasianidae. Alpine extreme. Quietest entry. Highest elevation. Closes the family arc."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Cackling: 1000-4000 Hz. Soft clucks: 500-2000 Hz.",
+    "peak_energy_band_hz": "Cackling: 1500-3000 Hz. Clucks: 800-1500 Hz.",
+    "song_frequency_hz": "Cackling: 1000-4000 Hz. Clucks: 500-2000 Hz. Higher-pitched than booming grouse species.",
+    "song_duration_s": "Cackling: 1-3 seconds. Clucks: individual 0.1s, series variable.",
+    "note_structure": "CACKLING: Low rattling 'kuk-kuk-kuk-kuk'. Scratchy, dry. SOFT CLUCKS: Very quiet 'cluck-cluck' contact notes.",
+    "note_types": "Cackling (alarm/territorial -- vocal), soft clucks (contact -- vocal), screaming (alarm when flushed -- vocal, rare).",
+    "phrase_structure": "Cackling: rapid series of 'kuk' notes. Clucking: irregular soft series for flock cohesion.",
+    "timbre": "Cackling: scratchy, rattling, dry. Clucks: soft, intimate. Both quiet by grouse standards. Adapted for close-range communication in exposed alpine habitat.",
+    "amplitude": "E=3. Very low. Cackling audible 20-50 meters in calm conditions. Clucks audible 5-15 meters. Easily masked by alpine wind.",
+    "tempo": "Cackling: rapid kuk notes. Clucking: moderate.",
+    "context": "Breeding season (May-July). Alarm. Contact between flock members. Hen-chick communication.",
+    "regional_variation": "Slight variation across range. Washington birds at southern extent of primary range.",
+    "key_property": "CACKLING + SOFT CLUCKS -- quiet, intimate, alpine. E=3. SIXTH AND FINAL PHASIANIDAE. Only year-round alpine bird. Pure white winter plumage. Smallest grouse. The extreme endpoint."
+  },
+  "plumage": {
+    "overall": "SUMMER: Mottled brown, gray, and white. Cryptic against alpine rocks and tundra. WINTER: Pure white. Entire bird white except bill and eyes. Complete seasonal transformation.",
+    "diagnostic_mark": "White tail (diagnostic -- other ptarmigan species have black tails). Winter: pure white. Summer: mottled brown/gray with white wings. Feathered feet year-round.",
+    "seasonal_variation": "The most dramatic seasonal plumage change of any PNW bird. Brown (summer) to pure white (winter). 6-8 weeks per transition. Photoperiod-driven.",
+    "flight_pattern": "Burst flight when flushed. Short distance. Usually prefers to walk or freeze. Reluctant to fly in alpine wind."
+  },
+  "physical_description": {
+    "overall": "Length: 30-33 cm. Weight: 300-400 g. Smallest North American grouse. Compact. Feathered feet (snowshoe adaptation).",
+    "diagnostic_mark": "White tail (all seasons). Feathered feet. In winter, pure white. In summer, mottled brown with white wings.",
+    "field_id": "Small grouse above treeline. In winter, pure white against snow -- virtually invisible. In summer, mottled brown among rocks. Listen for soft cackling in calm conditions. The tameness and alpine habitat are diagnostic."
+  },
+  "nodes": [
+    {
+      "id": "year-round-alpine",
+      "type": "concept",
+      "title": "Year-Round Alpine Residency",
+      "description": "Only North American bird above treeline year-round. Never descends. Snow roosting. Willow bud diet. -40C endurance. Energy conservation. The extreme edge of avian habitat adaptation.",
+      "connections": ["seasonal-plumage", "phasianidae-complete"]
+    },
+    {
+      "id": "seasonal-plumage",
+      "type": "concept",
+      "title": "Seasonal Plumage Transformation",
+      "description": "Complete brown-to-white plumage change. 6-8 weeks per transition. Photoperiod-driven. White tail diagnostic. Virtually invisible on snow. The most dramatic seasonal color change of any PNW bird.",
+      "connections": ["year-round-alpine", "climate-vulnerability"]
+    },
+    {
+      "id": "phasianidae-complete",
+      "type": "pattern",
+      "title": "Phasianidae Complete (153-158)",
+      "description": "Six entries across six degrees. Ascending elevation (forest floor to alpine tundra). Descending energy (E=6 to E=3). Loudest (Wild Turkey) to quietest (White-tailed Ptarmigan). The family arc is complete.",
+      "connections": ["year-round-alpine", "climate-vulnerability"]
+    },
+    {
+      "id": "climate-vulnerability",
+      "type": "concept",
+      "title": "Climate Change Vulnerability",
+      "description": "Treeline advancing upslope with warming. Alpine zone shrinking. Habitat contraction. The ptarmigan's world is getting smaller. An indicator species for climate impact on alpine ecosystems.",
+      "connections": ["year-round-alpine", "seasonal-plumage"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-157",
+      "species": "Spruce Grouse",
+      "relationship": "ELEVATION ASCENT! Spruce Grouse in boreal forest (157, E=4) to Ptarmigan above treeline (158, E=3). From forest to beyond forest. Energy descends."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey",
+      "relationship": "FAMILY ARC! Turkey (153, E=6, low elevation) to Ptarmigan (158, E=3, alpine). Complete Phasianidae arc: 6 species, ascending elevation, descending energy."
+    },
+    {
+      "target": "SPS-154",
+      "species": "Dusky Grouse",
+      "relationship": "MIGRATION CONTRAST! Dusky/Sooty reverse-migrate upslope in winter. Ptarmigan lives there year-round. No migration needed -- already at the top."
+    },
+    {
+      "target": "SPS-156",
+      "species": "Sooty Grouse",
+      "relationship": "CAMOUFLAGE TYPES! Sooty Grouse: ventriloquial sound camouflage. Ptarmigan: pure white visual camouflage. Both masters of disappearance."
+    }
+  ]
+}
