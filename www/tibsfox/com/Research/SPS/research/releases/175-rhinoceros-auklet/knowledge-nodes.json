@@ -1,0 +1,108 @@
+{
+  "degree": 175,
+  "species": "Rhinoceros Auklet",
+  "scientific_name": "Cerorhinca monocerata",
+  "slug": "175-rhinoceros-auklet",
+  "sound_type": "grunting moaning colony -- deep, grunting, moaning vocalizations at night. Colony chorus eerie and immersive. Nocturnal. E=4",
+  "energy": 4,
+  "ecosystem": "Offshore islands, open ocean. Breeds on islands in burrows. Feeds in offshore waters. Nocturnal colony visitor.",
+  "season": "Summer breeder on PNW islands. Present offshore year-round. Colony activity spring through fall.",
+  "family": "Alcidae (2nd entry)",
+  "order": "Charadriiformes",
+  "csv_substitute": false,
+  "original_species": "Rhinoceros Auklet",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.13,
+    "lon": -122.93,
+    "description": "Rhinoceros Auklet colony on Protection Island, Strait of Juan de Fuca. ~36,000 nesting pairs. Nocturnal."
+  },
+  "taxonomy_note": {
+    "description": "SECOND ALCIDAE. Continuing auk era from 174. Nocturnal colony behavior. Burrow nester. Horn-like casque at bill base. New genus: Cerorhinca (rhinoceros auklets).",
+    "current_family": "Alcidae (2nd entry)",
+    "new_family": false,
+    "family_count_in_engine": "Alcidae: Pigeon Guillemot (174), Rhinoceros Auklet (175).",
+    "name_etymology": "Cerorhinca from Greek 'keras' (horn) + 'rhynchos' (bill). monocerata from Greek 'monos' (single) + 'keras' (horn). Rhinoceros Auklet: the horn on the bill. Auklet: small auk.",
+    "genus_note": "Cerorhinca -- monotypic genus. Only one species. The horn-billed auklet. Closely related to puffins (Fratercula).",
+    "order_note": "Charadriiformes. Alcidae continuing from degree 174. Second consecutive entry.",
+    "family_position": "Second Alcidae. First nocturnal alcid in engine. Burrow nester. Horn morphology. Closely related to puffins."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-2000 Hz. Deep for a seabird.",
+    "peak_energy_band_hz": "~1000 Hz. Deep, resonant, grunting.",
+    "song_frequency_hz": "~1000 Hz. Low grunting and moaning.",
+    "song_duration_s": "Individual calls 0.5-2 seconds. Colony chorus continuous for hours after dark.",
+    "note_structure": "Deep grunts and moans: 'mmmrraah' and 'urrr-urrr-urrr.' No clear melodic structure. Guttural.",
+    "note_types": "grunting/moaning calls (primary -- colony, nocturnal), bill clacking (defense), soft grunting (mate communication in burrow).",
+    "phrase_structure": "Individual grunts and moans. Colony produces overlapping chorus. No structured phrases.",
+    "timbre": "Deep, guttural, resonant. More felt than heard at distance. Eerie in collective nocturnal context.",
+    "amplitude": "E=4. Individual moderate. Colony immersive. Nocturnal amplification of perceived intensity.",
+    "tempo": "Irregular. Individual calls intermittent. Colony creates continuous low chorus.",
+    "context": "Nocturnal colony return. Mate communication. Burrow defense. Breeding islands only.",
+    "regional_variation": "Minimal. Calls consistent.",
+    "key_property": "GRUNTING MOANING COLONY -- nocturnal, deep, collective chorus. Horn casque on bill. Burrow nester. Protection Island 36K pairs. E=4. v1.49.315."
+  },
+  "plumage": {
+    "overall": "Breeding: dark gray-brown overall. Orange bill with horn casque. White plumes behind eye and at bill base. Non-breeding: duller, horn reduced, plumes absent.",
+    "diagnostic_mark": "Orange bill with horn casque (breeding). White facial plumes. Dark overall. Stocky build.",
+    "seasonal_variation": "Breeding: horn present, white plumes, bright bill. Non-breeding: horn reduced, plumes absent, duller bill.",
+    "flight_pattern": "Fast, direct, low over water. Short stiff wings. Rapid wingbeats. Typical alcid flight."
+  },
+  "physical_description": {
+    "overall": "Length: 35-37 cm. Weight: 480-620g. Bill: orange with keratinized horn casque (breeding). Stocky build. Short wings.",
+    "diagnostic_mark": "Horn casque on orange bill. White facial plumes (breeding). Dark plumage. Stocky.",
+    "field_id": "Stocky dark seabird offshore. Orange bill with visible horn (breeding). Unlikely to see at colony (nocturnal). At sea: look for stocky dark alcid with orange bill."
+  },
+  "nodes": [
+    {
+      "id": "nocturnal-colony",
+      "type": "concept",
+      "title": "Nocturnal Colony -- Night Chorus",
+      "description": "Returns to colony only at night. Deep grunting/moaning chorus. Predator avoidance. Fish carrying in darkness. Navigation to correct burrow among thousands. Eerie immersive sound.",
+      "connections": ["horn-casque", "burrow-nesting"]
+    },
+    {
+      "id": "horn-casque",
+      "type": "concept",
+      "title": "Rhinoceros Horn -- Bill Casque",
+      "description": "Keratinized horn at bill base. Breeding adults. Orange bill. Named for this structure. Likely breeding condition signal. Cerorhinca = 'horn-bill.'",
+      "connections": ["nocturnal-colony", "alcidae-sequence"]
+    },
+    {
+      "id": "burrow-nesting",
+      "type": "pattern",
+      "title": "Burrow Nesting -- Underground Seabird",
+      "description": "Digs burrows 1-5 meters into island soil. Strict island breeder. Predator-free islands required. Protection Island: 36,000 pairs. Catastrophic vulnerability to introduced predators.",
+      "connections": ["nocturnal-colony", "alcidae-sequence"]
+    },
+    {
+      "id": "alcidae-sequence",
+      "type": "pattern",
+      "title": "Second Alcidae (174-175)",
+      "description": "Guillemot (174): diurnal, nearshore, crevice, urban. Auklet (175): nocturnal, offshore, burrow, island. Two contrasting modes of alcid life documented.",
+      "connections": ["nocturnal-colony", "horn-casque"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-174",
+      "species": "Pigeon Guillemot",
+      "relationship": "ALCIDAE SEQUENCE! First (174) vs second (175). Diurnal/nocturnal. Nearshore/offshore. Crevice/burrow. Urban/island. Two modes of alcid life."
+    },
+    {
+      "target": "SPS-176",
+      "species": "Tufted Puffin",
+      "relationship": "ALCIDAE TRIO! Both nocturnal colony visitors. Both burrow nesters. Both on offshore islands. Closely related (Cerorhinca sister to Fratercula). Puffin: conservation crisis."
+    },
+    {
+      "target": "SPS-169",
+      "species": "Dunlin Flock",
+      "relationship": "COLLECTIVE SOUND! Both produce collective sounds. Dunlin: wing-rush of thousands (diurnal). Auklet: moaning chorus of thousands (nocturnal). Different collective modes."
+    },
+    {
+      "target": "SPS-173",
+      "species": "Greater Yellowlegs",
+      "relationship": "ACOUSTIC CONTRAST! Yellowlegs: solo sentinel, loud, diurnal alarm. Auklet: colony chorus, moderate, nocturnal moaning. Opposite acoustic strategies."
+    }
+  ]
+}

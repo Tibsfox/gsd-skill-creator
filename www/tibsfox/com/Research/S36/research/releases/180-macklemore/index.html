@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 180&deg; &mdash; Macklemore &mdash; HALFWAY MARK &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #FFD700, #FFA000, #FF6F00); color: #3E2723; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 160, 0, 0.3); border: 3px solid #FFD700; }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #B71C1C; color: #FFCDD2; border: 1px solid #C62828; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .halfway-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #FFD700, #FFA000); color: #3E2723; border: 2px solid #FFD700; margin-left: 0.3rem; animation: halfway-glow 3s infinite; }
+    @keyframes halfway-glow { 0%, 100% { box-shadow: 0 0 4px rgba(255, 215, 0, 0.3); } 50% { box-shadow: 0 0 16px rgba(255, 215, 0, 0.6); } }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #FFD700; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #E65100; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #E65100; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #FFD700; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF8E1; font-style: italic; color: #E65100; }
+    .halfway-banner { background: linear-gradient(135deg, #FFD700, #FFA000, #FF6F00, #FFD700); color: #3E2723; padding: 1.5rem 2rem; border-radius: 8px; margin-bottom: 2rem; font-family: system-ui, sans-serif; border: 3px solid #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+    .halfway-banner h3 { margin: 0 0 0.5rem; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.08em; color: #3E2723; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+    .halfway-banner p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: #4E342E; }
+    .halfway-banner strong { color: #1A1A1A; }
+    .lineage-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .lineage-table th { background: #E65100; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .lineage-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #F3F4F6; }
+    .lineage-table tr:nth-child(even) { background: #FFF8E1; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>180 &mdash; Macklemore &mdash; HALFWAY MARK</span>
+    </nav>
+
+    <div class="halfway-banner">
+      <h3>Degree 180&deg; &mdash; The Halfway Mark &mdash; 50.0%</h3>
+      <p>
+        <strong>Macklemore</strong> (Ben Haggerty) at the exact midpoint.
+        <strong>180 of 360 degrees.</strong> The first half of the circle is complete.
+        <strong>&ldquo;Thrift Shop&rdquo;</strong> and <strong>&ldquo;Can&rsquo;t Hold Us&rdquo;</strong>
+        &mdash; back-to-back #1 hits released independently. <strong>Beacon Hill enters.</strong>
+        The hip-hop era (99&ndash;180) spans <strong>81 degrees.</strong>
+        <strong>The threshold between what was and what comes next.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">180&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Macklemore</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Independent</span>
+          <span class="halfway-badge">Halfway Mark</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Threshold</h2>
+          <blockquote>
+            Degree 180. The exact midpoint. The threshold between what
+            was and what comes next. Macklemore stands at this boundary
+            &mdash; the hip-hop era ends, a new era begins. His
+            independent #1 hits proved that the old model was not the
+            only path. Seattle hip-hop, from Sir Mix-a-Lot&rsquo;s Nastymix
+            to Macklemore&rsquo;s LLC, has always been independent at
+            its best. The first half is complete.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Two Eras of Seattle Independent Hip-Hop</h2>
+          <table class="lineage-table">
+            <thead><tr><th>Attribute</th><th>Sir Mix-a-Lot (179&deg;)</th><th>Macklemore (180&deg;)</th></tr></thead>
+            <tbody>
+              <tr><td>Era</td><td>1985&ndash;1990s</td><td>2000s&ndash;present</td></tr>
+              <tr><td>Distribution</td><td>Nastymix (physical)</td><td>Macklemore LLC (digital)</td></tr>
+              <tr><td>#1 hit</td><td>Baby Got Back (1992)</td><td>Thrift Shop / Can&rsquo;t Hold Us (2013)</td></tr>
+              <tr><td>Grammy</td><td>Best Rap Solo</td><td>Best Rap Album + 3 more</td></tr>
+              <tr><td>Energy</td><td>E=7 (architect)</td><td>E=6 (apex performer)</td></tr>
+              <tr><td>Neighborhood</td><td>Central District</td><td>Beacon Hill</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Halfway Mark</h4>
+              <div class="level milestone">Milestone &mdash; Engine Theory</div>
+              <p>
+                180/360 = 50.0%. The exact midpoint. The first half
+                of the circle is complete. 180 artists. 180 species.
+                180 degree pairs. The threshold.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Independent #1 in the Digital Era</h4>
+              <div class="level advanced">Advanced &mdash; Energy Theory</div>
+              <p>
+                &ldquo;Thrift Shop&rdquo; + &ldquo;Can&rsquo;t Hold Us&rdquo;: back-to-back
+                #1 hits with no major label. Digital distribution.
+                1.8B YouTube views. The model changed.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Hip-Hop Era Closes (99&ndash;180)</h4>
+              <div class="level intermediate">Intermediate &mdash; Engine Theory</div>
+              <p>
+                81 degrees. The longest single-genre era. From
+                underground pioneers to national superstars. The era
+                reaches its natural endpoint at the halfway mark.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Beacon Hill Enters</h4>
+              <div class="level intermediate">Intermediate &mdash; Geography</div>
+              <p>
+                New neighborhood. One of Seattle&rsquo;s most diverse
+                communities. Central District, Capitol Hill, Ballard,
+                University District, Tacoma, and now Beacon Hill.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">179&deg;</span> <strong>Sir Mix-a-Lot</strong> &mdash; LINEAGE! Two eras of Seattle independent hip-hop. Both #1. Both Grammy winners. Mix-a-Lot built the scene (E=7). Macklemore maximized it (E=6).</li>
+            <li><span class="ref-degree">160&deg;</span> <strong>Ryan Lewis</strong> &mdash; PARTNERSHIP! Lewis produced &ldquo;Thrift Shop,&rdquo; &ldquo;Can&rsquo;t Hold Us,&rdquo; &ldquo;Same Love,&rdquo; and <em>The Heist</em>. The full creative engine.</li>
+            <li><span class="ref-degree">177&deg;</span> <strong>Kid Sensation</strong> &mdash; NASTYMIX LINEAGE! From Kid Sensation (177) through Sir Mix-a-Lot (179) to Macklemore (180). Three degrees spanning the full history of Seattle hip-hop.</li>
+            <li><span class="ref-degree">156&deg;</span> <strong>Blue Scholars</strong> &mdash; SEATTLE HIP-HOP! Both conscious, socially engaged Seattle hip-hop. Different scales, same commitment to content with meaning.</li>
+            <li><span class="ref-degree">1&deg;</span> <strong>Degree 1</strong> &mdash; FULL ARC! From degree 1 to degree 180. The first half of the circle. 180 artists. The engine&rsquo;s midpoint.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card" style="border-color: #FFD700; border-width: 2px;">
+          <h4 style="color: #E65100;">Halfway Mark</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value" style="color: #E65100;">180&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Progress</span><span class="stat-value" style="color: #E65100;">50.0%</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 6</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.320</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Macklemore</h4>
+          <div class="stat-row"><span class="stat-label">Real name</span><span class="stat-value">Ben Haggerty</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Beacon Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">2000&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Macklemore LLC</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Achievements</h4>
+          <div class="stat-row"><span class="stat-label">#1 singles</span><span class="stat-value">2</span></div>
+          <div class="stat-row"><span class="stat-label">Grammys</span><span class="stat-value">4 (2014)</span></div>
+          <div class="stat-row"><span class="stat-label">YouTube views</span><span class="stat-value">1.8B+</span></div>
+          <div class="stat-row"><span class="stat-label">Release model</span><span class="stat-value">Independent</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Hip-Hop Era</h4>
+          <div class="stat-row"><span class="stat-label">Span</span><span class="stat-value">99&ndash;180</span></div>
+          <div class="stat-row"><span class="stat-label">Duration</span><span class="stat-value">81 degrees</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">Closes at 180</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #FFD700; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../179-sir-mix-a-lot/" style="color: var(--seattle-navy);">&larr; 179&deg; Sir Mix-a-Lot (E=7)</a>
+        <a href="../181-next/" style="color: var(--seattle-navy);">181&deg; &mdash; Second Half Begins &rarr;</a>
+      </div>
+      <p>Degree 180&deg; &mdash; Macklemore &mdash; HALFWAY MARK &mdash; Seattle 360 Engine &mdash; v1.49.320<br>50.0% complete. Independent #1. Beacon Hill enters. Hip-hop era closes (99&ndash;180). The threshold between the first half and the second.</p>
+    </footer>
+  </div>
+</body>
+</html>
