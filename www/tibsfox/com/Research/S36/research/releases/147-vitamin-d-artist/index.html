@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 147&deg; &mdash; Vitamin D (artist) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #FF6F00, #FF8F00); color: #FFF8E1; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(255, 111, 0, 0.4); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #D84315; color: #FFCCBC; border: 1px solid #E64A19; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .return-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1B5E20; color: #C8E6C9; border: 1px solid #2E7D32; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #FF6F00; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #FF6F00; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-card .level.intermediate { background: #F3E5F5; color: #4A148C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #FF6F00; min-width: 3rem; display: inline-block; }
+    .triple-banner { background: linear-gradient(135deg, #E65100, #F57C00, #FF9800); color: #3E2723; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .triple-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #212121; }
+    .triple-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+    blockquote { border-left: 3px solid #FF6F00; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF3E0; font-style: italic; color: #E65100; }
+    .triple-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    @media (max-width: 600px) { .triple-grid { grid-template-columns: 1fr; } }
+    .triple-card { background: white; border: 1px solid #FFE0B2; border-radius: 6px; padding: 0.75rem 1rem; }
+    .triple-card strong { color: #FF6F00; font-size: 0.95rem; }
+    .triple-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>147 &mdash; Vitamin D (artist)</span>
+    </nav>
+
+    <div class="triple-banner">
+      <h3>Return &mdash; Triple Threat Complete &mdash; MC Side</h3>
+      <p>
+        <strong>Vitamin D</strong> returns (first at degree 138 as DJ/producer).
+        This entry documents the <strong>MC/artist</strong> side.
+        <strong>Triple threat:</strong> DJ + Producer + MC.
+        <strong>Central District.</strong> <strong>Conception Records.</strong>
+        Narrative rapping. Conversational delivery. Three decades of hip-hop.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">147&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Vitamin D <small style="font-weight:400; font-size:0.7em;">(artist)</small></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop / MC</span>
+          <span class="label-badge">Conception Records</span>
+          <span class="return-badge">Return &mdash; 138</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Triple Threat</h2>
+          <div class="triple-grid">
+            <div class="triple-card">
+              <strong>DJ (138)</strong>
+              <p>Turntablist. Live performance. Vinyl culture. The hands on the record.</p>
+            </div>
+            <div class="triple-card">
+              <strong>Producer (138)</strong>
+              <p>Beat-maker. Studio engineer. Others&rsquo; records. Conception Records founder.</p>
+            </div>
+            <div class="triple-card">
+              <strong>MC (147)</strong>
+              <p>Rapper. Lyricist. Solo artist. Narrative storytelling. THIS ENTRY.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The MC Voice</h2>
+          <blockquote>
+            Vitamin D raps like he&rsquo;s talking to you &mdash; direct, clear,
+            rhythmic but not showy. Narrative-driven: stories, characters,
+            Central District specificity. Street names, landmarks, people.
+            His raps are a documentary record of a specific place at a specific time.
+            Hip-hop philosophy: authenticity, community, artistic integrity.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Dual-Facet Return Pattern</h4>
+              <div class="level advanced">Advanced &mdash; Engine Pattern</div>
+              <p>
+                Two entries for different facets of one artist.
+                138: DJ/producer. 147: MC/artist. 9-degree gap.
+                Parallels Sabzi&rsquo;s multi-entry arc.
+                The engine treats multidimensionality as worth separate documentation.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Triple Threat</h4>
+              <div class="level intermediate">Intermediate &mdash; Cultural Pattern</div>
+              <p>
+                DJ + Producer + MC in one person. Rare at high level.
+                Few hip-hop figures operate in all three roles.
+                The most complete hip-hop artist in the Seattle ecosystem.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Central District Documentary</h4>
+              <div class="level intermediate">Intermediate &mdash; Geography Theory</div>
+              <p>
+                Vitamin D&rsquo;s MC work is geographically specific.
+                Street names, landmarks, characters. His raps document
+                the Central District at a time of rapid change.
+                Music as neighborhood archive.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">138&deg;</span> <strong>Vitamin D (DJ/producer)</strong> &mdash; RETURN! 9-degree gap. DJ/producer at 138, MC/artist at 147. Dual-facet pattern. Triple threat complete.</li>
+            <li><span class="ref-degree">146&deg;</span> <strong>THEESatisfaction</strong> &mdash; PREVIOUS DEGREE! Genre-dissolving duo (146) to triple-threat solo MC (147). Both Central District. Both Conception-adjacent.</li>
+            <li><span class="ref-degree">140&deg;</span> <strong>Sabzi (DJ)</strong> &mdash; PARALLEL PATTERN! Sabzi multi-entry (99, 101, 122, 140, 145). Vitamin D dual-entry (138, 147). Both document different facets.</li>
+            <li><span class="ref-degree">136&deg;</span> <strong>DJ Riz</strong> &mdash; CENTRAL DISTRICT! CD hip-hop thread: Riz (136), Vitamin D DJ (138), now Vitamin D MC (147). The CD deepens with each entry.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">147&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hip-Hop / MC</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Vitamin D</h4>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1993&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Conception Records</span></div>
+          <div class="stat-row"><span class="stat-label">Roles</span><span class="stat-value">DJ + Producer + MC</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Central District</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Dual-Facet Return</h4>
+          <div class="stat-row"><span class="stat-label">138&deg;</span><span class="stat-value">DJ / Producer</span></div>
+          <div class="stat-row"><span class="stat-label">147&deg;</span><span class="stat-value">MC / Artist</span></div>
+          <div class="stat-row"><span class="stat-label">Gap</span><span class="stat-value">9 degrees</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Conception Records</h4>
+          <div class="stat-row"><span class="stat-label">Type</span><span class="stat-value">Independent</span></div>
+          <div class="stat-row"><span class="stat-label">Role</span><span class="stat-value">CD hip-hop archive</span></div>
+          <div class="stat-row"><span class="stat-label">Scope</span><span class="stat-value">Decades of catalog</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../146-theesatisfaction/" style="color: var(--seattle-navy);">&larr; 146&deg; THEESatisfaction</a>
+        <a href="../148-gabriel-teodros/" style="color: var(--seattle-navy);">148&deg; Gabriel Teodros &rarr;</a>
+      </div>
+      <p>Degree 147&deg; &mdash; Vitamin D (artist) &mdash; Seattle 360 Engine &mdash; v1.49.287<br>RETURN from 138. Triple threat: DJ + Producer + MC. Narrative rapping. Central District documentary. Conception Records. E=5 the most complete hip-hop artist.</p>
+    </footer>
+  </div>
+</body>
+</html>
