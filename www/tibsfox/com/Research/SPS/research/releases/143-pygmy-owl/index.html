@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 143&deg; &mdash; Northern Pygmy-Owl &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #33691E, #558B2F); color: #C5E1A5; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(51, 105, 30, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .false-eyes-card { background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #4A148C 100%); border: 2px solid #311B92; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .false-eyes-card h3 { margin-top: 0; font-size: 1.1rem; color: #CE93D8; }
+    .false-eyes-card p { color: #E1BEE7; }
+    .false-eyes-card strong { color: #F3E5F5; }
+
+    .predator-card { background: linear-gradient(135deg, #BF360C 0%, #D84315 30%, #E64A19 60%, #BF360C 100%); border: 2px solid #8D1700; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCCBC; }
+    .predator-card h3 { margin-top: 0; font-size: 1.1rem; color: #FF8A65; }
+    .predator-card p { color: #FFCCBC; }
+    .predator-card strong { color: #FFF3E0; }
+
+    .record-card { background: linear-gradient(135deg, #F9A825 0%, #FBC02D 30%, #FDD835 60%, #F9A825 100%); border: 2px solid #F57F17; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #5D4037; }
+    .record-card h3 { margin-top: 0; font-size: 1.1rem; color: #3E2723; }
+    .record-card p { color: #5D4037; }
+    .record-card strong { color: #212121; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.eyes { background: #4A148C; }
+    .theory-icon.predator { background: #BF360C; }
+    .theory-icon.diurnal { background: #33691E; }
+    .theory-icon.record { background: #F9A825; color: #3E2723; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">143&deg;</div>
+      <div class="release-title-block">
+        <h2>Northern Pygmy-Owl</h2>
+        <div class="scientific"><em>Glaucidium gnoma</em> (Strigidae) &mdash; E=3 &mdash; Deliberate Tooting</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>Tooting whistled series</strong> &mdash; E=3 slow, deliberate.
+      <strong>TIES PICIDAE NONET RECORD</strong> &mdash; ninth consecutive Strigidae.
+      <strong>False eyes</strong> on back of head. <strong>Diurnal predator</strong>.
+      PNW&rsquo;s smallest owl. Hunts birds its own size. Fearless.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="record-card">
+          <h3>TIES THE RECORD &mdash; Nine Consecutive Strigidae</h3>
+          <p>
+            <strong>Nine consecutive owl entries</strong> (135&ndash;143).
+            <strong>Six genera. Seven species.</strong>
+            TIES the Picidae nonet for the all-time family streak.
+            From the 1400g Great Horned Owl to the 62g Pygmy-Owl &mdash;
+            a <strong>22:1 mass ratio</strong> within one family.
+            Degree 144 will <strong>break</strong> the record.
+          </p>
+        </div>
+        <div class="false-eyes-card">
+          <h3>False Eyes &mdash; Occipital Eyespots</h3>
+          <p>
+            Dark spots bordered by white on the <strong>back of the head</strong>
+            create a convincing illusion of a face looking back at you.
+            Anti-predator function: the owl appears to be <strong>always watching</strong>.
+            May also confuse mobbing songbirds. Found in several small
+            owl species worldwide &mdash; <strong>convergent evolution</strong>.
+          </p>
+        </div>
+        <div class="predator-card">
+          <h3>Fearless Micro-Predator</h3>
+          <p>
+            <strong>15&ndash;18 cm</strong>. <strong>54&ndash;73 g</strong>.
+            Smaller than a robin. But hunts birds <strong>its own size or larger</strong>.
+            Active pursuit through forest canopy. <strong>Diurnal</strong>.
+            Triggers <strong>intense mobbing</strong> from dozens of songbirds.
+            The most feared small owl. Caches multiple kills.
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-141 Northern Saw-whet Owl</strong>
+            <p>SIZE COMPARISON! Saw-whet (54-151g) and Pygmy-Owl (54-73g). Both tiny. Both toot. But Saw-whet hunts rodents, Pygmy-Owl hunts birds. Nocturnal vs. diurnal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-140 Short-eared Owl</strong>
+            <p>DIURNAL PAIR! Both hunt during the day. Short-eared: open grassland. Pygmy-Owl: forest. Two diurnal strategies in the Strigidae run.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-135 Great Horned Owl</strong>
+            <p>MASS RATIO! GHO (~1400g) to Pygmy-Owl (~62g). 22:1 mass ratio. Largest to smallest within nine consecutive Strigidae.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon record">9</div>
+            <div class="theory-content">
+              <h4>TIES Picidae Nonet Record</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Nine consecutive Strigidae (135&ndash;143). Six genera. Seven species. Ties the all-time family streak. Degree 144 breaks it.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon eyes">E</div>
+            <div class="theory-content">
+              <h4>Occipital Eyespots &mdash; False Eyes</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Dark spots on back of head mimic a watching face. Anti-predator deception. Convergent evolution in small owls worldwide.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon predator">F</div>
+            <div class="theory-content">
+              <h4>Fearless Micro-Predator</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Hunts prey its own size or larger. Triggers intense mobbing. Diurnal. Active pursuit. The most feared small owl in the PNW.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon diurnal">D</div>
+            <div class="theory-content">
+              <h4>Diurnal Hunter (Second)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Second diurnal owl in run (after Short-eared at 140). Forest hunter vs. grassland hunter. Different diurnal strategies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">N. Pygmy-Owl</div><div class="stat-detail"><em>Glaucidium gnoma</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Strigidae</div><div class="stat-detail">9th consecutive (TIES RECORD)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Tooting series</div><div class="stat-detail">slow, deliberate</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 3</div><div class="stat-detail">quiet, persistent</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">~800 Hz</div><div class="stat-detail">hollow whistle</div></div>
+        <div class="stat-card"><div class="stat-label">Size</div><div class="stat-value">15&ndash;18 cm</div><div class="stat-detail">PNW&rsquo;s smallest owl</div></div>
+        <div class="stat-card"><div class="stat-label">Activity</div><div class="stat-value">Diurnal</div><div class="stat-detail">daylight hunter</div></div>
+        <div class="stat-card"><div class="stat-label">False Eyes</div><div class="stat-value">Occipital</div><div class="stat-detail">back of head</div></div>
+        <div class="stat-card"><div class="stat-label">Hunting</div><div class="stat-value">Birds + mammals</div><div class="stat-detail">prey its own size</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
