@@ -144,7 +144,13 @@ Encaustic painting uses beeswax melted with damar resin as a binder for pigment.
 
 The Fayum mummy portraits (1st-3rd century CE) — the most vivid surviving paintings from the ancient world — were painted in encaustic. The medium fell out of common use for centuries but has experienced a strong revival among contemporary painters.
 
-Encaustic requires specialized equipment (heated palette, heat gun, ventilation for wax fumes) and a tolerance for working with molten materials. Layers can be scraped, incised, polished, or embedded with collage elements. The medium rewards experimentation and has a strong tactile, almost sculptural dimension.
+Encaustic requires specialized equipment and a tolerance for working with molten materials. The basic setup: a heated palette or griddle (an electric pancake griddle works for beginners), a heat gun or propane torch for fusing, natural-bristle brushes (synthetics melt in hot wax), and metal tools for scraping and incising. Ventilation is essential -- beeswax fumes are not highly toxic but can irritate the respiratory system during extended sessions.
+
+The working process is additive and subtractive in alternation. You apply molten wax with a brush, let it cool, then fuse it with a heat gun (holding the gun six to eight inches from the surface, moving steadily to avoid scorching). Each layer bonds to the layer below through fusing. Between fused layers, you can scrape back to reveal earlier colors, incise lines with heated tools, embed collage elements (paper, fabric, found objects), or polish the surface with a soft cloth for a luminous sheen.
+
+Encaustic medium (purified beeswax mixed with damar resin, typically at a 4:1 to 8:1 ratio) is available pre-mixed from R&F Handmade Paints (the leading encaustic paint manufacturer, based in Kingston, NY) and Enkaustikos. R&F also produces a full range of pigmented encaustic paints -- over 80 colors -- that are the standard for serious encaustic painters. For beginners, their starter set of 10 colors plus medium is a reasonable entry point at around $80-100.
+
+The medium rewards experimentation and has a strong tactile, almost sculptural dimension. Encaustic surfaces have a physical depth that flat media cannot replicate -- light penetrates the translucent wax layers and bounces back through them, creating a glow that is unique to the medium.
 
 ---
 

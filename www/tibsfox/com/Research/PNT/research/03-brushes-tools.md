@@ -144,7 +144,7 @@ A basic set of 3-5 painting knives in different sizes and shapes (one small diam
 
 **Disposable paper palettes** (pads of coated paper — tear off and discard after each session) are convenient but wasteful. Good for workshops and teaching.
 
-**Ceramic palettes** (white porcelain or glazed ceramic with wells and a flat mixing area) are the standard for watercolor. The white surface lets you judge color accurately, and the non-absorbent glaze prevents staining. John Pike palettes (large, with a lid) and Robert E. Wood palettes are popular.
+**Ceramic palettes** (white porcelain or glazed ceramic with wells and a flat mixing area) are the standard for watercolor. The white surface lets you judge color accurately, and the non-absorbent glaze prevents staining. The **John Pike palette** ($25-35, large with a snap-on lid that keeps paint moist between sessions) is the classic. The **Mijello Silver Nano palette** ($30-40, with 33 wells and airtight seals) represents the modern evolution -- its sealed wells keep watercolor moist for weeks, which saves significant paint over time. For budget starters, a **white porcelain butcher tray** from a restaurant supply store ($8-12) provides the largest flat mixing area per dollar.
 
 ### The Limited Palette Philosophy
 
@@ -247,11 +247,11 @@ Good tools, poorly maintained, become bad tools quickly. Bad tools, well maintai
 
 For the beginning painter, here is a starting tool kit by medium:
 
-**Oil painting**: 4-6 hog bristle brushes (flat sizes 2, 4, 8, 12; filbert size 6; round size 4), one synthetic round for detail, a painting knife, a glass or wood palette, two palette cups, odorless mineral spirits, linseed oil or Liquin, rags, and The Masters Brush Cleaner.
+**Oil painting**: 4-6 hog bristle brushes (flat sizes 2, 4, 8, 12; filbert size 6; round size 4) -- Rosemary & Co. Ivory long flats or the Winsor & Newton Winton series are strong starting points. One synthetic round for detail (Princeton Velvetouch size 2). A painting knife (RGM Italian-made, size 45 trowel). A glass or wood palette (a 12x16" tempered glass sheet over neutral gray paper is the most practical). Two palette cups. Gamblin Gamsol (the safest OMS available). Gamblin Refined Linseed Oil or Winsor & Newton Liquin Original. Cotton rags (old t-shirts cut into 6-inch squares). The Masters Brush Cleaner. Total startup cost: approximately $120-180.
 
-**Acrylic painting**: 6-8 synthetic brushes (flats sizes 4, 8, 12; filberts sizes 4, 8; rounds sizes 2, 6; liner size 0), a stay-wet palette, a spray bottle, paper towels, and The Masters Brush Cleaner.
+**Acrylic painting**: 6-8 synthetic brushes (flats sizes 4, 8, 12; filberts sizes 4, 8; rounds sizes 2, 6; liner size 0) -- Princeton Velvetouch or Creative Mark Mimik for best value. A Masterson Sta-Wet palette (the 12x16" version). A fine-mist spray bottle. Viva paper towels (their cloth-like texture is preferred by many painters). The Masters Brush Cleaner. Total startup cost: approximately $80-130.
 
-**Watercolor**: 3-4 round brushes (a Kolinsky or good synthetic in sizes 4, 8, 12; a large mop for washes), a ceramic palette, two water containers (one for rinsing, one for clean water), a spray bottle, and paper towels.
+**Watercolor**: 3-4 round brushes -- a Kolinsky sable or premium synthetic in sizes 4, 8, and 12 (Rosemary & Co. Series 33 for Kolinsky at excellent value; Princeton Neptune for synthetic), plus a large squirrel or synthetic mop for washes (Raphael Petit Gris 803 size 4, or Princeton Aqua Elite mop). A ceramic palette with wells and mixing area (the John Pike palette is the classic, or a white porcelain butcher tray for larger mixing). Two water containers (one for rinsing, one for clean water). A spray bottle. Paper towels. Total startup cost: approximately $70-150 depending on brush choice.
 
 Start with these. Add tools as specific needs arise. A painter with three good brushes, a palette, and quality paint can make any painting that has ever been made. Tools enable; they do not create. The creation lives in your eye, your hand, and your intent.
 

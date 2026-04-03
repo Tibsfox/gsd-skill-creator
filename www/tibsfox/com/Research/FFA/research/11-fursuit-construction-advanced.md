@@ -523,4 +523,4 @@ The airbrushing techniques that many makers use for color work on fursuits conne
 
 ---
 
-*Module FFA-11. Cross-references: [FFA-04], [FFA-03], [FFA-02], [FFA-01], [PNT-02], [PNT-03], [PNT-05]. Safety codes: SC-SAF, SC-IP.*
+*Module FFA-11. Cross-references: [FFA-04], [FFA-03], [FFA-02], [FFA-01], [PNT-02], [PNT-03], [PNT-05]. Deep dives: [Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md), [Faux Fur Guide](deep-dives/faux-fur-guide.md). Safety codes: SC-SAF, SC-IP.*
