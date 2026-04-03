@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 120&deg; &mdash; Hooded Merganser &mdash; The Sound of Puget Sound &mdash; ONE-THIRD MARK</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #004D40, #006064, #00838F);
+      color: #B2EBF2;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 28px rgba(0, 77, 64, 0.6);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .milestone-banner {
+      background: linear-gradient(135deg, #004D40, #00695C, #00796B);
+      color: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+    .milestone-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #B2DFDB;
+    }
+    .milestone-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.92;
+    }
+    .milestone-banner .fraction {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #80CBC4;
+      margin: 0.5rem 0;
+    }
+
+    .crest-card {
+      background: linear-gradient(135deg, #212121 0%, #37474F 30%, #455A64 60%, #ECEFF1 100%);
+      border: 3px solid #212121;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+      box-shadow: 0 0 24px rgba(33, 33, 33, 0.4);
+    }
+    .crest-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .crest-card p { color: #ECEFF1; }
+    .crest-card strong { color: white; }
+
+    .streak-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 30%, #00796B 60%, #00897B 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2DFDB;
+    }
+    .streak-card p { color: #E0F2F1; }
+    .streak-card strong { color: #B2DFDB; }
+
+    .water-card {
+      background: linear-gradient(135deg, #006064 0%, #00838F 20%, #0097A7 40%, #00ACC1 60%, #26C6DA 80%, #4DD0E1 100%);
+      border: 3px solid #006064;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E0F7FA;
+      box-shadow: 0 0 24px rgba(0, 96, 100, 0.4);
+    }
+    .water-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #B2EBF2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .water-card p { color: #E0F7FA; }
+    .water-card strong { color: #B2EBF2; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.crest { background: #212121; }
+    .theory-icon.streak { background: #004D40; }
+    .theory-icon.frog { background: #00838F; }
+    .theory-icon.pond { background: #2E7D32; }
+    .theory-icon.milestone { background: #6A1B9A; }
+    .theory-icon.genus { background: #0097A7; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #E0F7FA; color: #006064; }
+    .theory-level.milestone { background: #F3E5F5; color: #6A1B9A; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .taxon-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      font-family: system-ui, sans-serif;
+      margin: 1rem 0;
+    }
+    .taxon-table th {
+      background: var(--puget-teal);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .taxon-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid #E0E0E0;
+      color: var(--page-text);
+    }
+    .taxon-table tr:nth-child(even) td { background: #FAFAFA; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Milestone Banner -->
+    <div class="milestone-banner">
+      <h3>One-Third Mark &mdash; Taxonomic Summary</h3>
+      <div class="fraction">120&deg; / 360&deg;</div>
+      <p>33.3% of the full rotation. 120 species documented. Anatidae streak: 3 consecutive.
+      Water theme: 5 degrees. All entries avian. The engine pauses for taxonomic accounting.</p>
+    </div>
+
+    <div class="release-header">
+      <div class="degree-badge">120&deg;</div>
+      <div class="release-title-block">
+        <h2>Hooded Merganser</h2>
+        <div class="scientific"><em>Lophodytes cucullatus</em> (Anatidae) &mdash; Sole Genus Member &mdash; The Crested Diver</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      rolling frog-like call &mdash; <strong>third consecutive Anatidae</strong> (118-120) &mdash;
+      North America&rsquo;s <strong>smallest merganser</strong> &mdash; only member of genus
+      <em>Lophodytes</em> &mdash; <strong>fan-shaped crest</strong>: one of the most dramatic
+      displays in duck taxonomy &mdash; wooded pond ecosystem &mdash; still water &mdash; E=4.
+      <strong>ONE-THIRD MARK.</strong>
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Crest Card -->
+        <div class="crest-card">
+          <h3>The Fan-Shaped Crest &mdash; Black and White Display</h3>
+          <p>
+            The male Hooded Merganser&rsquo;s <strong>fan-shaped crest</strong> is one of the
+            most dramatic features of any North American duck. When raised, it expands into
+            a large, rounded fan &mdash; <strong>black at the edges with a triangular white
+            center</strong>. The bird&rsquo;s head appears to double in size. Courtship display,
+            territorial signaling, alarm response. When relaxed, the crest lies flat &mdash;
+            a completely different bird. The transformation is startling.
+          </p>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-card">
+          <h3>Anatidae Streak &mdash; Three Consecutive Waterfowl</h3>
+          <p>
+            <strong>118:</strong> Harlequin Duck (turbulent stream, E=5) &rarr;
+            <strong>119:</strong> Common Merganser (river, E=4) &rarr;
+            <strong>120:</strong> Hooded Merganser (wooded pond, E=4). Three consecutive
+            Anatidae. Three ecosystems: rapids to river to pond. Three genera:
+            <em>Histrionicus, Mergus, Lophodytes</em>. The water calms to stillness.
+          </p>
+        </div>
+
+        <!-- Water Card -->
+        <div class="water-card">
+          <h3>Water Culmination &mdash; From Torrent to Still Pond</h3>
+          <p>
+            The water ecosystem theme spans degrees 116&ndash;120: fast stream (dipper) &rarr;
+            turbulent rapids (harlequin) &rarr; river (common merganser) &rarr;
+            <strong>wooded pond</strong> (hooded merganser). Five degrees of progressive
+            calming. The full hydrological spectrum from <strong>mountain torrent to
+            woodland pool</strong>. The water is still. The engine has reached silence.
+          </p>
+        </div>
+
+        <h2>The Rolling Frog-Like Call</h2>
+        <p>
+          The Hooded Merganser produces one of the most unusual calls in North American
+          duck taxonomy: a <strong>rolling, frog-like &ldquo;crrroo&rdquo;</strong> &mdash;
+          a resonant, almost mechanical sound more like an amphibian than a bird. Low,
+          rolling, guttural. 400&ndash;2,000 Hz. Primarily during courtship display.
+          If you hear what sounds like a large frog from a wooded pond and see a duck,
+          it is likely a Hooded Merganser. E=4: moderate, unusual quality over volume.
+        </p>
+
+        <h2>Smallest Merganser, Sole Genus</h2>
+        <p>
+          The Hooded Merganser is <strong>North America&rsquo;s smallest merganser</strong>
+          (450&ndash;880g, roughly half the Common Merganser&rsquo;s mass) and the
+          <strong>only member of genus <em>Lophodytes</em></strong>. The generic separation
+          reflects early evolutionary divergence from the <em>Mergus</em> mergansers.
+          Smaller body, larger proportional crest, shorter bill, preference for wooded
+          ponds over rivers. The sole genus representative at the one-third mark &mdash;
+          taxonomically unique.
+        </p>
+
+        <h2>Third-Mark Taxonomic Summary</h2>
+        <table class="taxon-table">
+          <thead>
+            <tr><th>Metric</th><th>Value at 120&deg;</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Class</td><td>Aves only (120/120 entries)</td></tr>
+            <tr><td>Orders</td><td>~7+ documented</td></tr>
+            <tr><td>Families</td><td>~25&ndash;30 documented</td></tr>
+            <tr><td>Largest family streak</td><td>Picidae nonet (107&ndash;115, 9)</td></tr>
+            <tr><td>Current streak</td><td>Anatidae (118&ndash;120, 3)</td></tr>
+            <tr><td>Monotypic genera</td><td>2 (<em>Cinclus</em>, <em>Lophodytes</em>)</td></tr>
+            <tr><td>Ecosystem phases</td><td>Forest &rarr; Fire &rarr; Water &rarr; Stillness</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-119 Common Merganser (merganser contrast)</strong>
+            <p>Largest vs smallest merganser. River vs wooded pond. Guttural croak vs frog-like call. Same tribe, opposite scale. Consecutive degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (Anatidae streak)</strong>
+            <p>Three consecutive Anatidae: Harlequin (turbulent stream, E=5), Common Merganser (river, E=4), Hooded Merganser (wooded pond, E=4). Three ecosystems, three genera.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-116 American Dipper (water culmination)</strong>
+            <p>Five degrees of water: fast stream (116) to wooded pond (120). The full hydrological spectrum. Torrent to stillness. The water calms completely.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-115 Black-backed Woodpecker (cavity nester)</strong>
+            <p>Both cavity nesters. Woodpecker excavates in burned snags. Merganser uses existing cavities near water. Fire creates snags; decay creates cavities; mergansers nest in them.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-116 American Dipper (monotypic parallel)</strong>
+            <p>Both sole genus representatives in N. America. Dipper (Cinclus) at fire-to-water transition. Hooded Merganser (Lophodytes) at one-third mark. Unique taxa at structural boundaries.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon crest">C</div>
+            <div class="theory-content">
+              <h4>The Fan-Shaped Crest &mdash; Dramatic Display</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Black-and-white fan crest, one of the most dramatic displays in duck taxonomy. Courtship, territorial, alarm functions. The bird transforms when the crest raises.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon frog">F</div>
+            <div class="theory-content">
+              <h4>The Rolling Frog-Like Call</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Low, rolling &ldquo;crrroo&rdquo; more like an amphibian than a duck. 400&ndash;2,000 Hz. Courtship context. Unusual quality, diagnostic. E=4.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon streak">A</div>
+            <div class="theory-content">
+              <h4>Anatidae Streak &mdash; Three Consecutive</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Harlequin (118), Common Merganser (119), Hooded Merganser (120). Three ecosystems: rapids, river, pond. Three genera. The waterfowl entrance.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon milestone">M</div>
+            <div class="theory-content">
+              <h4>One-Third Mark &mdash; 120&deg;/360&deg;</h4>
+              <span class="theory-level milestone">Milestone &mdash; 33.3%</span>
+              <p>120 species. All avian. ~25&ndash;30 families. Forest to fire to water to stillness. Monotypic genera at structural boundaries.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon genus">L</div>
+            <div class="theory-content">
+              <h4>Sole Genus <em>Lophodytes</em></h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Only member of its genus. Taxonomically unique among mergansers. Early evolutionary divergence from Mergus. Monotypic genus at one-third mark.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon pond">P</div>
+            <div class="theory-content">
+              <h4>Wooded Pond Ecosystem</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Woodland ponds, beaver ponds, forested swamps. Sheltered, still water. Cavity nester. Obligate tree cavities near water. The quietest aquatic habitat in the engine.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Hooded Merganser</div>
+          <div class="stat-detail"><em>Lophodytes cucullatus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Context</div>
+          <div class="stat-value">Frog-like rolling call</div>
+          <div class="stat-detail">Smallest merganser. Sole genus.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">3rd entry (streak: 118&ndash;120)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value" style="color: #006064;"><em>Lophodytes</em> (sole)</div>
+          <div class="stat-detail">Monotypic &mdash; only member</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 4</div>
+          <div class="stat-detail">Unusual quality over volume</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Wooded pond</div>
+          <div class="stat-detail">Still, sheltered water</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round resident</div>
+          <div class="stat-detail">PNW lowland wetlands</div>
+        </div>
+
+        <h3>Merganser Comparison</h3>
+        <div class="stat-card">
+          <div class="stat-label">Common (119&deg;)</div>
+          <div class="stat-value">1.3&ndash;2.1 kg</div>
+          <div class="stat-detail">Largest. River. Guttural croak.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hooded (120&deg;)</div>
+          <div class="stat-value">450&ndash;880 g</div>
+          <div class="stat-detail">Smallest. Pond. Frog-like call.</div>
+        </div>
+
+        <h3>Water Continuum</h3>
+        <div class="stat-card">
+          <div class="stat-label">116&ndash;117&deg;</div>
+          <div class="stat-value">Fast stream</div>
+          <div class="stat-detail">American Dipper</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">118&deg;</div>
+          <div class="stat-value">Turbulent stream</div>
+          <div class="stat-detail">Harlequin Duck</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">119&deg;</div>
+          <div class="stat-value">River</div>
+          <div class="stat-detail">Common Merganser</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">120&deg;</div>
+          <div class="stat-value" style="color: #006064;">Wooded pond</div>
+          <div class="stat-detail">Hooded Merganser</div>
+        </div>
+
+        <h3>Milestone</h3>
+        <div class="stat-card">
+          <div class="stat-label">Position</div>
+          <div class="stat-value" style="color: #6A1B9A;">ONE-THIRD</div>
+          <div class="stat-detail">120&deg; / 360&deg; = 33.3%</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
