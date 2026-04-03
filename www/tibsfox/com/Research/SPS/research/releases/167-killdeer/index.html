@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 167&deg; &mdash; Killdeer Alarm &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5D4037, #6D4C41); color: #D7CCC8; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(93, 64, 55, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .display-card { background: linear-gradient(135deg, #E65100, #EF6C00, #F57C00, #E65100); border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .display-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCC80; }
+    .display-card p { color: #FFE0B2; }
+    .display-card strong { color: #FFF3E0; }
+
+    .vociferous-card { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #B71C1C); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .vociferous-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .vociferous-card p { color: #FFCDD2; }
+    .vociferous-card strong { color: #FFEBEE; }
+
+    .family-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .family-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .family-card p { color: #C8E6C9; }
+    .family-card strong { color: #E8F5E9; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.alarm { background: #B71C1C; }
+    .theory-icon.wing { background: #E65100; }
+    .theory-icon.nest { background: #5D4037; }
+    .theory-icon.name { background: #4A148C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">167&deg;</div>
+      <div class="release-title-block">
+        <h2>Killdeer &mdash; Kill-Dee Alarm</h2>
+        <div class="scientific"><em>Charadrius vociferus</em> (Charadriidae) &mdash; E=5 &mdash; The Broken-Wing Actor</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST CHARADRIIDAE</strong> &mdash; plover family enters.
+      The Killdeer&rsquo;s <strong>broken-wing distraction display</strong> is
+      the most famous deception in birding. Its
+      <strong>&ldquo;kill-DEE! kill-DEE!&rdquo;</strong> alarm is loud,
+      insistent, and the source of its name. Species name
+      <strong><em>vociferus</em></strong> &mdash; the vociferous plover.
+      <strong>E=5. v1.49.307.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="display-card">
+          <h3>The Broken-Wing Display &mdash; Most Famous Bird Deception</h3>
+          <p>
+            When a predator approaches the nest, the Killdeer leaves and
+            <strong>drops to the ground with one wing dragging</strong>,
+            appearing injured. It moves erratically, calling loudly,
+            <strong>luring the predator away.</strong> When the predator
+            has been led far enough, the bird <strong>&ldquo;recovers&rdquo;</strong>
+            and flies back. The display is <strong>graduated</strong> &mdash;
+            intensity calibrated to threat level. Effective against foxes,
+            coyotes, cats, dogs, crows, and humans.
+          </p>
+        </div>
+        <div class="vociferous-card">
+          <h3><em>Vociferus</em> &mdash; The Vociferous Plover</h3>
+          <p>
+            Both names reference the voice. <strong>&ldquo;Killdeer&rdquo;</strong>
+            is onomatopoeia of the call. <strong><em>Vociferus</em></strong>
+            means &ldquo;carrying voice&rdquo; &mdash; loud and insistent.
+            Named by <strong>Linnaeus in 1758.</strong> The name has stuck
+            for nearly 270 years because it remains perfectly accurate.
+            <strong>The bird has not become quieter.</strong>
+          </p>
+        </div>
+        <div class="family-card">
+          <h3>First Charadriidae &mdash; Plover Family Enters</h3>
+          <p>
+            <strong>67 species</strong> worldwide. Plovers, lapwings, dotterels.
+            Short stout bills. <strong>Run-stop-peck</strong> foraging.
+            Open habitat specialists. The Killdeer is the most adaptable &mdash;
+            nesting on <strong>parking lots, gravel rooftops</strong>, and
+            construction sites alongside natural habitats. A
+            <strong>Walmart parking lot = a gravel bar on a river.</strong>
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-166 Black Oystercatcher</strong>
+            <p>CHARADRIIFORMES SEQUENCE! Oystercatcher (166) to plover (167). Rocky shore to open ground. Both loud. Different habitats within same order.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-165 Sandhill Crane</strong>
+            <p>OPEN GROUND VOCALISTS! Crane: open field, bugle, E=6. Killdeer: open ground, kill-dee, E=5. Both loudly conspicuous in open landscapes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-160 Mountain Quail</strong>
+            <p>VISIBILITY CONTRAST! Mountain Quail: heard but never seen (dense brush). Killdeer: heard AND seen (open ground). Opposite concealment strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-157 Spruce Grouse</strong>
+            <p>PREDATOR STRATEGY! Spruce Grouse: freeze and rely on camouflage. Killdeer: perform and rely on deception. Passive vs active defense.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon alarm">K</div>
+            <div class="theory-content">
+              <h4>Kill-Dee Alarm</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Loud, insistent, repeated kill-DEE! kill-DEE! 2500-4500 Hz. Piercing. Can continue for minutes. Insistence is the defining characteristic. E=5.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon wing">W</div>
+            <div class="theory-content">
+              <h4>Broken-Wing Display</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Most famous bird deception. Feigns injury to lure predators. Graduated response -- intensity matches threat level. Effective against diverse predators. Performance as defense.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon nest">N</div>
+            <div class="theory-content">
+              <h4>Open Ground Nesting</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Scrape in gravel. No concealment. Parking lots, rooftops, construction sites. Cryptic eggs. Precocial chicks. Defense entirely behavioral. Double-brooding.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon name">V</div>
+            <div class="theory-content">
+              <h4><em>Vociferus</em> -- Named for the Voice</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both names reference the call. Killdeer = onomatopoeia. Vociferus = loud-voiced. Named by Linnaeus 1758. Still accurate 270 years later.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Killdeer</div><div class="stat-detail"><em>Charadrius vociferus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Charadriidae</div><div class="stat-detail">FIRST entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Kill-dee!</div><div class="stat-detail">loud, insistent alarm</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 5</div><div class="stat-detail">vociferous &mdash; loud-voiced</div></div>
+        <div class="stat-card"><div class="stat-label">Display</div><div class="stat-value">Broken-wing</div><div class="stat-detail">most famous deception</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Open ground</div><div class="stat-detail">parking lots to mudflats</div></div>
+        <div class="stat-card"><div class="stat-label">Nest</div><div class="stat-value">Ground scrape</div><div class="stat-detail">no concealment</div></div>
+        <div class="stat-card"><div class="stat-label">Chicks</div><div class="stat-value">Precocial</div><div class="stat-detail">running within hours</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Resident</div><div class="stat-detail">year-round in PNW</div></div>
+        <div class="stat-card"><div class="stat-label">Named 1758</div><div class="stat-value">By Linnaeus</div><div class="stat-detail">still accurate</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
