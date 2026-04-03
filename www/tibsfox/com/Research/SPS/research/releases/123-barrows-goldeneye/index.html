@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 123&deg; &mdash; Barrow&rsquo;s Goldeneye &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+      color: #BBDEFB;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(21, 101, 192, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .mountain-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 30%, #1E88E5 60%, #1565C0 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .mountain-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .mountain-card p { color: #E3F2FD; }
+    .mountain-card strong { color: #BBDEFB; }
+
+    .id-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #4E342E 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .id-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .id-card p { color: #EFEBE9; }
+    .id-card strong { color: #D7CCC8; }
+
+    .cavity-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #33691E 60%, #1B5E20 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .cavity-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .cavity-card p { color: #E8F5E9; }
+    .cavity-card strong { color: #C8E6C9; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.mountain { background: #1565C0; }
+    .theory-icon.id { background: #4E342E; }
+    .theory-icon.cavity { background: #1B5E20; }
+    .theory-icon.anatidae { background: #00695C; }
+    .theory-icon.bucephala { background: #4527A0; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #E3F2FD; color: #1565C0; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">123&deg;</div>
+      <div class="release-title-block">
+        <h2>Barrow&rsquo;s Goldeneye</h2>
+        <div class="scientific"><em>Bucephala islandica</em> (Anatidae) &mdash; E=3 &mdash; 6th Consecutive Anatidae &mdash; Mountain Lake Specialist</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      quiet grunts during courtship display &mdash; <strong>E=3</strong>. The PNW&rsquo;s
+      <strong>mountain lake specialist</strong> &mdash; a northwestern specialty with limited
+      global range. Sixth consecutive Anatidae (118&ndash;123). First of a
+      <strong>comparison pair</strong> with Common Goldeneye (degree 124):
+      crescent facial patch vs. round spot. Named after Sir John Barrow.
+      Second of the <em>Bucephala</em> trilogy (Bufflehead 122, Barrow&rsquo;s 123, Common 124).
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Mountain Lake Card -->
+        <div class="mountain-card">
+          <h3>Mountain Lake Specialist &mdash; Northwestern Specialty</h3>
+          <p>
+            Barrow&rsquo;s Goldeneye breeds on <strong>high-elevation mountain lakes</strong>
+            in the Cascades and Northern Rockies &mdash; clear, deep lakes surrounded by
+            coniferous forest. An estimated <strong>150,000&ndash;200,000</strong> exist
+            worldwide, concentrated in western North America with a small isolated population
+            in Iceland. This is fundamentally a <strong>northwestern bird</strong>. Seeing
+            one in the PNW is expected; seeing one in the eastern US is genuinely rare.
+            Winters on coastal waters and lowland lakes in Puget Sound.
+          </p>
+        </div>
+
+        <!-- ID Card -->
+        <div class="id-card">
+          <h3>The Crescent vs. The Circle &mdash; Barrow&rsquo;s vs. Common</h3>
+          <p>
+            The diagnostic field mark: Barrow&rsquo;s Goldeneye has a <strong>crescent-shaped</strong>
+            white facial patch; Common Goldeneye has a <strong>round spot</strong>. Barrow&rsquo;s
+            head shows a <strong>purplish gloss</strong>; Common shows <strong>greenish gloss</strong>.
+            Barrow&rsquo;s has a more <strong>angular, blocky</strong> head shape; Common is
+            <strong>rounder</strong>. In winter on Puget Sound, both species occur in mixed flocks
+            &mdash; careful study of facial patch shape and head structure is required. This is
+            one of birding&rsquo;s classic identification challenges.
+          </p>
+        </div>
+
+        <!-- Cavity Card -->
+        <div class="cavity-card">
+          <h3>Cavity Nester &mdash; The Pileated Connection</h3>
+          <p>
+            Barrow&rsquo;s Goldeneye nests in <strong>tree cavities</strong> near mountain lakes,
+            depending on cavities created by <strong>Pileated Woodpecker</strong> (degrees 54, 108, 109)
+            and <strong>Northern Flicker</strong> (degrees 21&ndash;22). The dead snag economy
+            documented at degree 109 literally houses Barrow&rsquo;s Goldeneye young. Ducklings
+            leave the nest by <strong>jumping</strong> &mdash; a dramatic free-fall from the
+            cavity (3&ndash;15 meters up) to the forest floor, then walking to the nearest water.
+          </p>
+        </div>
+
+        <h2>The Head-Throw Display</h2>
+        <p>
+          The male&rsquo;s courtship display is visually dramatic but acoustically quiet.
+          The <strong>head-throw</strong>: the male throws his head backward in a rapid arc
+          until the crown touches his back, kicks his feet to propel his breast upward
+          from the water, and at the apex produces a quiet <strong>ka-KAA</strong> grunt.
+          The entire sequence takes approximately 1.5 seconds. Multiple males display
+          simultaneously to females &mdash; a visual spectacle of heads snapping backward,
+          water splashing, bodies rising and falling. E=3 reflects the acoustic reality:
+          the grunts are <strong>audible only at close range</strong> (10&ndash;30 meters).
+          This is a <strong>visual-primary, acoustic-secondary</strong> display system.
+        </p>
+
+        <h2>Sixth Consecutive Anatidae (118&ndash;123)</h2>
+        <p>
+          Six consecutive Anatidae: <strong>Harlequin Duck</strong> (118, stream, E=5),
+          <strong>Common Merganser</strong> (119, underwater pursuit, E=4),
+          <strong>Hooded Merganser</strong> (120, forest pool, E=4),
+          <strong>Wood Duck</strong> (121, cavity nesting, E=3),
+          <strong>Bufflehead</strong> (122, smallest diver, E=3),
+          <strong>Barrow&rsquo;s Goldeneye</strong> (123, mountain lake, E=3).
+          The streak approaches the <strong>Picidae nonet record</strong> (9 consecutive).
+          Degree 124 (Common Goldeneye) would make seven consecutive. The energy has
+          descended through the streak: E=5, E=4, E=4, E=3, E=3, E=3 &mdash;
+          settling into the quiet Anatidae acoustic register.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-124 Common Goldeneye (comparison pair)</strong>
+            <p>COMPARISON PAIR! Barrow's (crescent, mountain, E=3) vs. Common (round spot, widespread, E=4). Same genus Bucephala. The crescent vs. the circle. Mirrors the Hairy/Downy Woodpecker pair (110-111).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-122 Bufflehead (Bucephala trilogy)</strong>
+            <p>Bucephala trilogy: Bufflehead (122), Barrow's (123), Common (124). Three Bucephala species, three ecological niches. The smallest (Bufflehead), the most restricted (Barrow's), and the most widespread (Common).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-109 Pileated Woodpecker drumming (cavity economy)</strong>
+            <p>CAVITY CONNECTION! Barrow's Goldeneye nests in old Pileated Woodpecker cavities. The dead snag economy documented at degree 109 provides nest sites. Pileated drums, Barrow's nests.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-121 Wood Duck (cavity nesting)</strong>
+            <p>Both cavity nesters in the Anatidae streak. Wood Duck (forest pools, E=3) and Barrow's Goldeneye (mountain lakes, E=3). Same nesting strategy, different lake types.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (Anatidae streak start)</strong>
+            <p>ANATIDAE STREAK! Harlequin (118) started the streak. Six consecutive Anatidae at degree 123. Stream specialist (118) to mountain lake specialist (123). Approaching the Picidae nonet record.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon mountain">M</div>
+            <div class="theory-content">
+              <h4>Mountain Lake Specialist &mdash; Northwestern Specialty</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Breeds on high-elevation Cascade and Rocky Mountain lakes. 150,000-200,000 globally, concentrated in western North America + Iceland. A fundamentally northwestern bird.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon id">C</div>
+            <div class="theory-content">
+              <h4>The Crescent vs. The Circle &mdash; Identification Challenge</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Barrow's: crescent-shaped white facial patch, purplish head gloss, angular head shape. Common: round white spot, greenish gloss, rounder head. Classic birding ID challenge. Mixed winter flocks on Puget Sound.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cavity">N</div>
+            <div class="theory-content">
+              <h4>Cavity Nester &mdash; Pileated Connection</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Secondary cavity nester using old Pileated Woodpecker and Northern Flicker excavations. Dead snag economy (degree 109) houses goldeneye young. Ducklings jump from cavity to forest floor.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon anatidae">6</div>
+            <div class="theory-content">
+              <h4>Sixth Consecutive Anatidae (118&ndash;123)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Harlequin (118), Common Merganser (119), Hooded Merganser (120), Wood Duck (121), Bufflehead (122), Barrow's Goldeneye (123). Six consecutive. Approaching Picidae nonet record (9).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon bucephala">B</div>
+            <div class="theory-content">
+              <h4>Bucephala Trilogy (122&ndash;124)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Three Bucephala species in sequence: Bufflehead (smallest), Barrow's (most restricted range), Common (most widespread). "Ox-headed" diving ducks with distinctive oversized heads.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Barrow&rsquo;s Goldeneye</div>
+          <div class="stat-detail"><em>Bucephala islandica</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">6th consecutive (118&ndash;123)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Quiet grunts</div>
+          <div class="stat-detail">courtship head-throw display</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">visual-primary display</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain lake</div>
+          <div class="stat-detail">breeds high-elevation Cascades</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">altitudinal migrant</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Facial Patch</div>
+          <div class="stat-value">Crescent</div>
+          <div class="stat-detail">vs. Common&rsquo;s round spot</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Head Gloss</div>
+          <div class="stat-value">Purple</div>
+          <div class="stat-detail">vs. Common&rsquo;s green</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Global Population</div>
+          <div class="stat-value">~150&ndash;200K</div>
+          <div class="stat-detail">mostly western N. America</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Named For</div>
+          <div class="stat-value">Sir John Barrow</div>
+          <div class="stat-detail">2nd Sec. of Admiralty</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
