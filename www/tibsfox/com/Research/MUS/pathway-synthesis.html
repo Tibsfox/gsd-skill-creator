@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway 4: Synthesis &mdash; Build Your Sound from Waveforms Up | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A; --gold-light: #e0cc80;
+  --purple: #9a6ad8; --purple-light: #b88aee;
+  --blue: #4a7aba; --green: #4CAF50; --amber: #E89848; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:var(--gold-light); }
+
+header {
+  background:linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 25%, #2a1040 50%, #1a0a2a 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--purple);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(154,106,216,0.1) 0%, transparent 70%);
+}
+header .level { color:var(--dim); font-size:0.72rem; font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.12em; position:relative; }
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; margin-top:0.3rem; }
+header .subtitle { color:var(--purple-light); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:820px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+h3 { font-size:1.1rem; color:#fff; margin:1.5rem 0 0.5rem; }
+
+.section { margin-bottom:2rem; }
+.section p { font-size:0.92rem; margin-bottom:0.8rem; }
+
+.step-block {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1.5rem 0; border-left:3px solid var(--purple);
+}
+.step-block h3 { margin-top:0; color:var(--purple-light); }
+.step-block p { font-size:0.9rem; margin-bottom:0.6rem; }
+
+.activity-box {
+  background:rgba(196,163,90,0.06); border:1px solid rgba(196,163,90,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.activity-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:600; margin-bottom:0.4rem; }
+.activity-box p, .activity-box li { color:var(--text); }
+
+.listen-box {
+  background:rgba(154,106,216,0.06); border:1px solid rgba(154,106,216,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.listen-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--purple-light); font-weight:600; margin-bottom:0.4rem; }
+.listen-box ul { margin:0.3rem 0 0 1.2rem; }
+.listen-box li { margin-bottom:0.3rem; color:var(--text); }
+
+.diy-box {
+  background:rgba(76,175,80,0.06); border:1px solid rgba(76,175,80,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.diy-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); font-weight:600; margin-bottom:0.4rem; }
+.diy-box p { color:var(--text); }
+
+.practice-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.practice-list li { margin-bottom:0.6rem; }
+.practice-list .time { color:var(--purple-light); font-weight:600; font-size:0.8rem; }
+
+.rosetta-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.5rem; margin:0.5rem 0; border-left:3px solid var(--gold);
+}
+.rosetta-card h3 { font-size:0.9rem; color:var(--gold); margin-bottom:0.3rem; margin-top:0; font-family:system-ui,sans-serif; }
+.rosetta-card p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; }
+
+.resource-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.resource-list li { margin-bottom:0.5rem; }
+.resource-list .category { color:var(--purple-light); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+.signal-chain {
+  display:flex; align-items:center; justify-content:center; gap:0.5rem;
+  flex-wrap:wrap; margin:1.5rem 0; font-family:system-ui,sans-serif;
+}
+.signal-step {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:0.6rem 1rem; text-align:center; min-width:100px;
+}
+.signal-step .label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.05em; }
+.signal-step .name { font-size:0.9rem; color:#fff; margin-top:0.2rem; }
+.signal-arrow { color:var(--purple); font-size:1.2rem; }
+
+footer {
+  max-width:820px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { header h1 { font-size:1.4rem; } main { padding:1.5rem 1rem 3rem; } .signal-chain { flex-direction:column; } .signal-arrow { transform:rotate(90deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="level">Pathway 4 &mdash; Sound Design &amp; Synthesis</div>
+  <h1>Build Your Sound from Waveforms Up</h1>
+  <div class="subtitle">Every sound is a waveform. Learn to shape waveforms and you can create any sound imaginable.</div>
+  <nav>
+    <a href="pathway-harmony.html">&larr; Prev: Harmony</a>
+    <a href="index.html">MUS Index</a>
+    <a href="pathway-production.html">Next: Production &rarr;</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>Overview</h2>
+  <div class="section">
+    <p>In Pathways 1-3, you learned to organize musical ideas: rhythm in time, melody in pitch, harmony in depth. This pathway goes to the atomic level: <strong>what is sound itself?</strong> Sound is vibration. A vibrating string, a vibrating column of air, a vibrating speaker cone &mdash; all produce pressure waves that your ear converts into perceived pitch, volume, and <strong>timbre</strong> (the quality that lets you distinguish a piano from a guitar playing the same note).</p>
+    <p>Synthesis is the art of building sounds from scratch by generating, combining, filtering, and shaping waveforms. It began in 1964 when Robert Moog built a voltage-controlled synthesizer that let musicians sculpt sound the way a potter sculpts clay. Since then, every genre of electronic music &mdash; from Kraftwerk to Aphex Twin to Billie Eilish &mdash; has been built on synthesis.</p>
+    <p>By the end of this pathway, you will understand the five basic waveforms, the subtractive synthesis signal chain (oscillator &rarr; filter &rarr; envelope), the art of oscillator layering and detuning, the effects that define modern production, and the digital tools that put a recording studio in a laptop. You will be able to open a synthesizer plugin, build a sound from an initialized (blank) patch, and explain exactly what every parameter does to the sound.</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <h3>Step 1: Waveforms</h3>
+    <p>Every sound you hear is a waveform &mdash; a pattern of air pressure changes over time. The simplest waveform is the <strong>sine wave</strong>: a pure tone, a single frequency, no harmonics. It is what a tuning fork produces. It sounds "clean" and "empty" because there is literally nothing in it except the fundamental frequency.</p>
+    <p>All other waveforms are combinations of sine waves at different frequencies and amplitudes &mdash; this is the <strong>Fourier theorem</strong>, and it is one of the deepest connections between mathematics and music. Any sound, no matter how complex, can be decomposed into a sum of sine waves. The <strong>harmonic series</strong> (integer multiples of the fundamental: 2x, 3x, 4x...) determines which overtones are present.</p>
+    <p><strong>Sawtooth wave:</strong> Contains all harmonics at amplitudes of 1/n. The brightest, richest waveform. Used for brass, strings, and leads. This is the raw material of subtractive synthesis.<br>
+    <strong>Square wave:</strong> Contains only odd harmonics (1, 3, 5, 7...) at amplitudes of 1/n. Hollow, woody, clarinet-like. Used for bass and retro game sounds.<br>
+    <strong>Triangle wave:</strong> Contains only odd harmonics at amplitudes of 1/n&sup2;. Very soft and rounded. Like a mellowed square wave. Used for flute-like tones and sub-bass.<br>
+    <strong>Noise:</strong> All frequencies at random amplitudes. Not pitched. Used for percussion (hi-hats, snares), wind effects, and texture. White noise has equal energy per frequency; pink noise has equal energy per octave (sounds more natural).</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Open a free online synthesizer (<a href="https://learningsynths.ableton.com">Ableton Learning Synths</a> is ideal for this). Set the oscillator to sine and play a note. Listen to the pure, empty sound. Switch to sawtooth &mdash; notice how much brighter and "buzzier" it is. Switch to square &mdash; notice the hollow, reedy quality. Switch to triangle &mdash; notice it is like a softer version of the square. Finally, switch to noise &mdash; no pitch at all, just texture. Each waveform sounds different because it contains different harmonics. You are hearing Fourier's theorem in action.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"On the Run" &mdash; Pink Floyd (Dark Side of the Moon):</strong> The sequenced synth is a filtered sawtooth wave. The brightness changes as the filter opens and closes. You are hearing the raw saw wave being sculpted in real time.</li>
+        <li><strong>"Popcorn" &mdash; Hot Butter (Gershon Kingsley):</strong> Square wave melody. That hollow, bleepy character IS the square wave's missing even harmonics. It is also why early video game music sounds like this &mdash; game consoles used square wave generators.</li>
+        <li><strong>"Windowlicker" &mdash; Aphex Twin:</strong> Complex synthesis using modulated waveforms, frequency modulation, and noise layers. Try to hear the individual components: the pitched tones (oscillators) and the unpitched textures (noise). The complexity is built from simple waveforms.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Waveform Ear Test:</strong> Have a friend (or use a randomized app) play sine, saw, square, triangle, and noise in random order. Identify each one by ear. You pass when you can get 10 in a row. The differences are dramatic once you know what to listen for: sine = pure, saw = bright, square = hollow, triangle = soft, noise = unpitched. This takes most people about 15 minutes to master.</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <h3>Step 2: Subtractive Synthesis</h3>
+
+    <div class="signal-chain">
+      <div class="signal-step" style="border-color:rgba(186,58,58,0.3);"><div class="label">Oscillator</div><div class="name">Saw Wave</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(154,106,216,0.3);"><div class="label">Filter</div><div class="name">Low-Pass</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(196,163,90,0.3);"><div class="label">Envelope</div><div class="name">ADSR</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(76,175,80,0.3);"><div class="label">Output</div><div class="name">Sound</div></div>
+    </div>
+
+    <p>Subtractive synthesis is the foundation of analog synthesis since Moog. The principle: <strong>start harmonically rich, then remove what you don't want.</strong> It is sculpting in sound &mdash; starting with a block of marble (the sawtooth wave) and chiseling away until a shape emerges.</p>
+    <p>The <strong>low-pass filter (LPF)</strong> removes frequencies above a cutoff point. Turn the cutoff down: the sound gets darker, muffled, fewer overtones pass through. Turn it up: brightness returns. The <strong>resonance</strong> parameter boosts frequencies at the cutoff point, creating a nasal, vocal "wah" quality. A filter sweep &mdash; slowly moving the cutoff up or down &mdash; is the most recognizable gesture in electronic music.</p>
+    <p>The <strong>ADSR envelope</strong> shapes how the sound evolves over time when you press and release a key. <strong>Attack</strong>: how fast it reaches full volume (fast = pluck, slow = pad). <strong>Decay</strong>: how fast it falls to the sustain level (fast = percussive, slow = bell-like). <strong>Sustain</strong>: the level while the key is held (high = organ, low = piano-like). <strong>Release</strong>: how long it takes to fade after releasing the key (short = staccato, long = reverberant). The envelope is typically applied to both amplitude AND filter cutoff, so each note has a timbral shape as well as a volume shape.</p>
+    <p>For a deeper dive, see the <a href="nodes/subtractive.html">Subtractive Synthesis knowledge node</a>.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>In <a href="https://learningsynths.ableton.com">Ableton Learning Synths</a> or any free synth (Vital, Dexed, Helm), load an initialized patch (just a raw oscillator). Set it to sawtooth. Play a note &mdash; it sounds harsh and bright. Now find the filter cutoff knob and slowly turn it down. Listen as the brightness disappears and the sound becomes a dull hum. Now turn the resonance up to about 60% and sweep the cutoff back and forth slowly. You are hearing the filter sweep &mdash; the foundational gesture of electronic music. Finally, set the amp envelope to: Attack=0, Decay=300ms, Sustain=0%, Release=200ms. Play a key and release it quickly. You now have a pluck sound. Change Attack to 1 second and Sustain to 80% &mdash; you have a pad. Same oscillator, same filter, different envelope, completely different instrument.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Oxygene Pt. 4" &mdash; Jean-Michel Jarre:</strong> The entire piece is subtractive synthesis. The iconic sequence is a filtered sawtooth with modulated cutoff. The filter IS the performance &mdash; the notes stay the same while the timbre evolves.</li>
+        <li><strong>"Da Funk" &mdash; Daft Punk:</strong> The lead sound is a heavily filtered, distorted sawtooth with extreme resonance. That "talking" quality is the resonant filter peak. One oscillator, one filter, one of the most recognizable synth sounds in dance music.</li>
+        <li><strong>"Enjoy the Silence" &mdash; Depeche Mode:</strong> The opening pad is a low-pass filtered sawtooth with slow attack and long release. The chords are sustained by the envelope while the filter provides subtle motion. See <a href="../DPM/index.html">DPM</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>Build Three Sounds from One Oscillator:</strong> Using a single sawtooth oscillator and filter, build: (1) a punchy bass (low cutoff, fast attack, short decay, no sustain), (2) a screaming lead (high cutoff, high resonance, medium attack, full sustain), and (3) an ambient pad (medium cutoff, slow attack, long release, moderate sustain). Save each as a preset. You have just proven that one oscillator + one filter + one envelope = infinite sounds. This is why the Minimoog changed music with only three oscillators.</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <h3>Step 3: Oscillator Layering &amp; Detuning</h3>
+    <p>A single oscillator produces a clean, static tone. Two oscillators playing the same note but <strong>slightly detuned</strong> (off by 2-10 cents) create a <strong>beating effect</strong> &mdash; the two frequencies interfere with each other, producing a slow amplitude modulation that sounds like a chorus or shimmer. This is the "fat" sound of classic analog synths: the Juno-106, the Prophet-5, the Oberheim OB-Xa.</p>
+    <p>The physics: when two frequencies are nearly identical (say 440 Hz and 442 Hz), they alternately reinforce and cancel each other at the difference frequency (2 Hz = two beats per second). The closer the frequencies, the slower the beating. At zero detuning, the beating stops and the sound is static. At wide detuning (20+ cents), the beating becomes so fast it is perceived as roughness rather than motion. The sweet spot (3-7 cents) produces a warm, animated shimmer.</p>
+    <p>A <strong>sub-oscillator</strong> adds weight by playing one octave below the main oscillator. This gives bass patches their chest-shaking low end without making the main sound darker. The sub is typically a sine or triangle wave &mdash; pure low frequency, no upper harmonics to muddy the mix.</p>
+    <p>More complex layering: tune one oscillator to a perfect fifth above the other (7 semitones) for a "power chord" timbre. Tune one to a major third above (4 semitones) for organ-like richness. Each interval relationship between oscillators produces a different timbre, governed by the same ratio mathematics that defines harmony.</p>
+    <p>See the <a href="nodes/oscillator.html">Oscillator Layering knowledge node</a> for the full mathematical treatment.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>In any synth with two oscillators (Vital, Surge XT, Diva &mdash; all free or have free versions), set both to sawtooth at the same pitch. Listen: it sounds like one oscillator, slightly louder. Now detune oscillator 2 by +5 cents. Listen: the sound comes alive, shimmering and wide. Detune further to +15 cents: the beating is faster, more aggressive. At +50 cents: it sounds out of tune. Find the sweet spot where the sound is animated but not sour &mdash; typically 3-8 cents. Now hard-pan oscillator 1 to the left and oscillator 2 to the right. The detuning now creates stereo width. This is the "supersaw" sound that powers trance, EDM, and modern pop production.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Strangelove" &mdash; Depeche Mode:</strong> The main synth is two detuned sawtooths with a sub-oscillator. The fatness of the sound comes entirely from detuning and layering, not from effects. See <a href="../DPM/index.html">DPM</a>.</li>
+        <li><strong>"Girls on Film" &mdash; Duran Duran:</strong> The synth bass is a single oscillator with a sub-oscillator one octave below. The top oscillator provides definition; the sub provides weight. Two oscillators, two octaves, one enormous bass sound. See <a href="../DRN/index.html">DRN</a>.</li>
+        <li><strong>"100%" &mdash; Sonic Youth:</strong> Alternate tunings on guitar create natural detuning between strings. When two strings are tuned nearly (but not exactly) to the same pitch, the beating effect is identical to oscillator detuning on a synth. The guitar IS a multi-oscillator synthesizer. See <a href="../SNY/index.html">SNY</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Detune Spectrum:</strong> Set up two sawtooth oscillators at the same pitch. Record (or just listen to) the sound at 0, 2, 5, 10, 20, 50, and 100 cents of detuning. At 0 = static. At 2 = barely alive. At 5 = warm chorus. At 10 = wider. At 20 = aggressive. At 50 = dissonant. At 100 = minor second (one semitone apart, clearly two different notes). Write down the character of each detuning amount. You now have a personal detuning reference that you can use when designing sounds: "I want warmth = 5 cents. I want aggression = 20 cents."</p>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <h3>Step 4: Effects &amp; Signal Chain</h3>
+    <p>Effects are processors that transform sound after it leaves the synthesizer (or microphone, or guitar). They are the salt, pepper, and spices of audio production &mdash; the raw ingredient matters, but the seasoning is what makes a dish. The <strong>order</strong> in which effects are chained matters enormously: distortion before reverb sounds different from reverb before distortion.</p>
+    <p><strong>Reverb</strong> simulates acoustic space. A dry sound (no reverb) feels close and intimate. A wet sound (heavy reverb) feels distant and grand. Reverb types: room (small, tight), hall (large, spacious), plate (metallic, bright, the classic vocal reverb), spring (wobbly, surf-guitar, the sound of early Fender amps).</p>
+    <p><strong>Delay</strong> (echo) repeats the sound at a set interval. Slapback delay (short, single repeat) is the sound of 1950s rockabilly. Long stereo delay (ping-pong between left and right channels) is the sound of U2's The Edge. Syncing delay to the song's tempo creates rhythmic echoes that reinforce the groove.</p>
+    <p><strong>Distortion</strong> adds harmonics by clipping the waveform. Soft clipping (overdrive) adds warmth and presence. Hard clipping (fuzz, distortion) adds aggression and density. Tube saturation is soft clipping through vacuum tubes &mdash; the warm "analog" sound that audiophiles chase.</p>
+    <p><strong>Chorus</strong> creates width by duplicating the signal, detuning the copy slightly, and modulating the detuning over time. It is automated oscillator detuning. The Juno-106's built-in chorus is the defining sound of 1980s synth-pop.</p>
+    <p><strong>Compression</strong> reduces the dynamic range &mdash; makes loud parts quieter and quiet parts louder. It is the invisible backbone of modern production. Every vocal, every drum bus, every master you hear has been compressed. Subtle compression = polish. Heavy compression = loudness. Over-compression = lifeless (the "loudness wars").</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>In any DAW (GarageBand is free on Mac/iOS; BandLab is free on web and mobile), record a single note from a synth or guitar. Duplicate the track 5 times. On track 1: no effects (dry). On track 2: add reverb only. Track 3: delay only. Track 4: distortion only. Track 5: all three in series (distortion &rarr; delay &rarr; reverb). Solo each track and listen. Then swap the order on track 5 to reverb &rarr; delay &rarr; distortion. The difference is dramatic: distortion on a reverb tail sounds like a wall of noise. Reverb on a distorted signal sounds like a guitar in a cathedral. Order matters.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Where the Streets Have No Name" &mdash; U2:</strong> The Edge's guitar is defined by delay. The dotted-eighth-note delay creates rhythmic patterns that sound like two guitarists playing interlocking parts. The delay IS the composition. Remove it and the song collapses.</li>
+        <li><strong>"When Doves Cry" &mdash; Prince:</strong> Famously has no bass. The drum machine is heavily compressed, the synths are distorted, and the vocal has tight plate reverb. The absence of bass makes the effects on every other element hyper-audible. See <a href="../SRG/index.html">SRG</a> for Susan Rogers' engineering perspective.</li>
+        <li><strong>"Daydreaming" &mdash; Radiohead:</strong> Reversed reverb, stretched piano, heavily processed vocals. Every sound has been transformed by effects to the point where the original source is unrecognizable. Effects as composition.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Signal Chain Cookbook:</strong> Pick one sound source (a synth pad, a guitar chord, a vocal recording). Apply 5 different effect chains, using the same 3 effects (reverb, delay, distortion) in different orders and settings. For each chain, write a one-sentence description of the character: "Chain 3: distortion(high) &rarr; delay(dotted 8th) &rarr; reverb(hall) = aggressive, rhythmic, spacious." After 5 chains, you will understand intuitively that the signal chain is a creative instrument, not just a technical utility.</p>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <h3>Step 5: Sampling &amp; Digital Production</h3>
+    <p><strong>Sampling</strong> is the act of recording a piece of audio and using it as a musical element. It is the oldest form of digital music making (the Fairlight CMI in 1979) and the foundation of hip-hop, electronic, and modern pop production. When you chop a drum break from a James Brown record into individual hits, rearrange them on a grid, and play them from a drum machine, you are sampling. When you pitch a vocal snippet up two octaves and loop it, you are sampling. When you record a door slamming and use it as a kick drum, you are sampling.</p>
+    <p>The <strong>Digital Audio Workstation (DAW)</strong> is the modern studio. Ableton Live, Logic Pro, FL Studio, Reaper, GarageBand &mdash; each is a complete recording, editing, mixing, and mastering environment in software. The DAW is not just a tool; it is an <strong>instrument</strong>. The way you arrange clips on a timeline, the way you automate parameters over time, the way you route audio between tracks &mdash; these are creative decisions that shape the music as much as the notes themselves.</p>
+    <p><strong>MIDI</strong> (Musical Instrument Digital Interface) is the language that lets instruments, computers, and controllers talk to each other. When you press a key on a MIDI keyboard, it does not produce sound &mdash; it sends a message: "Note C4, velocity 80, on." The DAW receives this message and tells a software synth to play that note at that volume. MIDI is control data, not audio data. This is why you can record a performance, change the sound afterward, and even edit individual notes without re-recording.</p>
+    <p><strong>Automation</strong> is the recording of parameter changes over time. Automate the filter cutoff to sweep up during a build. Automate the reverb send to increase on the last word of a vocal phrase. Automate the volume to duck the bass during the verse and bring it up in the chorus. Automation turns static mixes into dynamic performances. In a fully produced track, dozens of parameters are automated simultaneously &mdash; the mix is not a still photograph; it is a movie.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Open GarageBand (free on Mac/iOS) or BandLab (free on web). Create a new project. Find a drum loop in the included library and drop it onto the timeline. Now open a software synth (any built-in synth) and play a bass line over the drum loop using a MIDI keyboard or the on-screen keyboard. Record 4 bars. Now: automate the synth's filter cutoff to sweep from low to high over the 4 bars. Play it back. The bass line now has motion and energy that the static notes alone did not have. You have just used a DAW as an instrument: sequencing, synthesis, and automation in one workflow.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Harder, Better, Faster, Stronger" &mdash; Daft Punk:</strong> The entire vocal is a chopped, pitched, and rearranged sample from Edwin Birdsong's "Cola Bottle Baby." The sample is the composition. The production transforms a funk vocal into a robotic anthem.</li>
+        <li><strong>"Amen, Brother" (The Amen Break) &mdash; The Winstons:</strong> A 6-second drum break that has been sampled in thousands of songs across jungle, drum &amp; bass, hip-hop, and pop. One sample, infinite music. The most influential recording in the history of sampling.</li>
+        <li><strong>"Everything in Its Right Place" &mdash; Radiohead:</strong> Thom Yorke's vocal is sampled, sliced, and triggered by a sequencer. The vocal fragments are rearranged into rhythmic patterns that the human voice could never perform live. The sampler is the vocalist.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The One-Sample Song:</strong> Record one sound with your phone: a handclap, a door, a pot lid, a snap, a vocal "ah." Import it into a DAW. From that single sample, build a 30-second piece of music. Pitch it down for a bass. Pitch it up for a hi-hat. Reverse it for a riser. Layer the original with a pitched copy for a chord. Stretch it for a pad. The constraint (one source) forces creativity. This exercise proves that sampling is not about what you record &mdash; it is about what you do with it.</p>
+    </div>
+  </div>
+
+  <!-- PRACTICE IDEAS -->
+  <h2>Practice Ideas</h2>
+  <div class="section">
+    <ol class="practice-list">
+      <li><span class="time">5 min:</span> Waveform identification. Play random waveforms from a synth with your eyes closed. Name each one. Build to 100% accuracy across sine, saw, square, triangle, and noise.</li>
+      <li><span class="time">5 min:</span> Filter sweep practice. Set up a raw sawtooth through a low-pass filter. Sweep the cutoff from minimum to maximum and back while playing a note. Listen for the brightness change, the resonance peak, and the exact point where the sound "opens up." Develop muscle memory for where the sweet spots are.</li>
+      <li><span class="time">15 min:</span> Patch design challenge. Start from an initialized patch (no sound). Set a timer for 15 minutes. Build a specific sound: "plucked bass," "eerie pad," "screaming lead," "80s brass." Save the patch. Over time, your speed and accuracy will increase.</li>
+      <li><span class="time">15 min:</span> Effect chain experimentation. Take any sound source. Apply 3 effects in different orders. Document what each order does. Build an intuitive vocabulary of "distortion before reverb = X, reverb before distortion = Y."</li>
+      <li><span class="time">30 min:</span> Sound recreation. Pick a synth sound from a song you know (a bass, a lead, a pad). Try to recreate it from scratch in a software synth. Compare your version to the original. This reverse-engineering exercise is how professional sound designers learn.</li>
+      <li><span class="time">30 min:</span> Sampling session. Record 10 sounds from your environment. Import them into a DAW. Pitch, stretch, reverse, layer, and filter them. Build a 1-minute sketch from found sounds only. No synthesizers, no instruments &mdash; just samples.</li>
+      <li><span class="time">5 min:</span> Automation practice. Take any 8-bar loop. Add one automation lane (filter cutoff, volume, pan, or reverb send). Draw a curve that adds motion to the loop. A/B the loop with and without automation. Notice how automation transforms static into dynamic.</li>
+    </ol>
+  </div>
+
+  <!-- CONNECTIONS -->
+  <h2>Connections</h2>
+  <div class="rosetta-card">
+    <h3><a href="../SNY/index.html">SNY &mdash; Sonic Youth</a></h3>
+    <p>Alternate tunings, prepared guitars, and feedback as composition. Sonic Youth treated the guitar as a modular synthesizer: retuning strings = retuning oscillators. Screwdrivers between strings = waveshaping. Feedback = self-oscillation.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../DPM/index.html">DPM &mdash; Depeche Mode</a></h3>
+    <p>Synth-pop production masterclass: sampling industrial sounds (metal, chains, pipes) and using them as percussion. Subtractive synthesis for pads and leads. The production IS the composition.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../DRN/index.html">DRN &mdash; Duran Duran</a></h3>
+    <p>New wave production: synth layering, drum machine programming, and effects-heavy guitar. The Roland Jupiter-8 and Juno-60 defined the sound of the 1980s through detuned sawtooth oscillators and built-in chorus.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3>Knowledge Nodes: <a href="nodes/subtractive.html">Subtractive Synthesis</a> &amp; <a href="nodes/oscillator.html">Oscillator Layering</a></h3>
+    <p>Mathematical deep dives: how the saw-filter-envelope chain maps to agent perception in the forest simulation, and how multi-oscillator behavior creates emergent complexity from simple waveforms.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3>LED Electronics (Rosetta Cluster 2)</h3>
+    <p>The same circuits that shape sound in a synthesizer (oscillators, filters, amplifiers) shape light in LED electronics. An RC low-pass filter is the same circuit whether it is smoothing audio or dimming an LED. Cutoff = 1/(2&pi;RC).</p>
+  </div>
+
+  <!-- RESOURCES -->
+  <h2>Resources</h2>
+  <div class="section">
+    <ul class="resource-list">
+      <li><span class="category">Interactive:</span> <a href="https://learningsynths.ableton.com">Ableton Learning Synths</a> (free, web) &mdash; the best introduction to synthesis, hands-on, no software required</li>
+      <li><span class="category">Synth:</span> Vital (free) &mdash; professional-grade wavetable synthesizer with visual feedback on every parameter</li>
+      <li><span class="category">Synth:</span> Surge XT (free, open source) &mdash; powerful subtractive/wavetable synth with deep modulation capabilities</li>
+      <li><span class="category">DAW:</span> GarageBand (free on Mac/iOS) &mdash; complete production environment with synths, samplers, and effects</li>
+      <li><span class="category">DAW:</span> BandLab (free, web/mobile) &mdash; browser-based DAW with collaboration features, no download needed</li>
+      <li><span class="category">Book:</span> <em>Synth Secrets</em> by Gordon Reid (Sound on Sound series, free online) &mdash; 63-part deep dive into synthesis from first principles</li>
+      <li><span class="category">YouTube:</span> Andrew Huang &mdash; creative sound design, sampling experiments, and production tutorials with infectious enthusiasm</li>
+      <li><span class="category">YouTube:</span> Venus Theory &mdash; experimental sound design, granular synthesis, and "making music from weird sounds"</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <a href="pathway-harmony.html">&larr; Harmony</a> &middot;
+  <a href="index.html">MUS Index</a> &middot;
+  <a href="pathway-production.html">Production &rarr;</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Pathway 4: Synthesis &mdash; Build Your Sound from Waveforms Up &middot; Music Learning Pathways &middot; Rosetta Cluster 10<br>
+  <span style="font-style:italic; color:rgba(154,106,216,0.5);">Dedicated to Pepper Coyote &mdash; &ldquo;Nothing to lose but your chains and a world to win&rdquo;</span>
+</footer>
+
+</body>
+</html>

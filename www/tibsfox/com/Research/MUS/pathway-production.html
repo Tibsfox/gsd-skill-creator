@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway 5: Production &mdash; The Studio Is an Instrument | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A; --gold-light: #e0cc80;
+  --purple: #9a6ad8; --purple-light: #b88aee;
+  --blue: #4a7aba; --green: #4CAF50; --amber: #E89848; --red: #ba3a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:var(--gold-light); }
+
+header {
+  background:linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 25%, #2a1040 50%, #1a0a2a 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--purple);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(154,106,216,0.1) 0%, transparent 70%);
+}
+header .level { color:var(--dim); font-size:0.72rem; font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.12em; position:relative; }
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.04em; margin-top:0.3rem; }
+header .subtitle { color:var(--purple-light); font-size:0.95rem; font-style:italic; margin-top:0.3rem; position:relative; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:820px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+h3 { font-size:1.1rem; color:#fff; margin:1.5rem 0 0.5rem; }
+
+.section { margin-bottom:2rem; }
+.section p { font-size:0.92rem; margin-bottom:0.8rem; }
+
+.step-block {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1.5rem 0; border-left:3px solid var(--purple);
+}
+.step-block h3 { margin-top:0; color:var(--purple-light); }
+.step-block p { font-size:0.9rem; margin-bottom:0.6rem; }
+
+.activity-box {
+  background:rgba(196,163,90,0.06); border:1px solid rgba(196,163,90,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.activity-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); font-weight:600; margin-bottom:0.4rem; }
+.activity-box p, .activity-box li { color:var(--text); }
+
+.listen-box {
+  background:rgba(154,106,216,0.06); border:1px solid rgba(154,106,216,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.listen-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--purple-light); font-weight:600; margin-bottom:0.4rem; }
+.listen-box ul { margin:0.3rem 0 0 1.2rem; }
+.listen-box li { margin-bottom:0.3rem; color:var(--text); }
+
+.diy-box {
+  background:rgba(76,175,80,0.06); border:1px solid rgba(76,175,80,0.2); border-radius:5px;
+  padding:1rem 1.2rem; margin:0.8rem 0; font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.diy-box .box-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); font-weight:600; margin-bottom:0.4rem; }
+.diy-box p { color:var(--text); }
+
+.practice-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.practice-list li { margin-bottom:0.6rem; }
+.practice-list .time { color:var(--purple-light); font-weight:600; font-size:0.8rem; }
+
+.rosetta-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.5rem; margin:0.5rem 0; border-left:3px solid var(--gold);
+}
+.rosetta-card h3 { font-size:0.9rem; color:var(--gold); margin-bottom:0.3rem; margin-top:0; font-family:system-ui,sans-serif; }
+.rosetta-card p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; }
+
+.resource-list { margin:0.5rem 0 0 1.2rem; font-family:system-ui,sans-serif; font-size:0.88rem; }
+.resource-list li { margin-bottom:0.5rem; }
+.resource-list .category { color:var(--purple-light); font-weight:600; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+.signal-chain {
+  display:flex; align-items:center; justify-content:center; gap:0.5rem;
+  flex-wrap:wrap; margin:1.5rem 0; font-family:system-ui,sans-serif;
+}
+.signal-step {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:0.6rem 1rem; text-align:center; min-width:100px;
+}
+.signal-step .label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.05em; }
+.signal-step .name { font-size:0.9rem; color:#fff; margin-top:0.2rem; }
+.signal-arrow { color:var(--purple); font-size:1.2rem; }
+
+footer {
+  max-width:820px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+@media(max-width:640px) { header h1 { font-size:1.4rem; } main { padding:1.5rem 1rem 3rem; } .signal-chain { flex-direction:column; } .signal-arrow { transform:rotate(90deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="level">Pathway 5 &mdash; Production &amp; Recording</div>
+  <h1>The Studio Is an Instrument</h1>
+  <div class="subtitle">Recording is not capturing a performance. Recording is creating one.</div>
+  <nav>
+    <a href="pathway-synthesis.html">&larr; Prev: Synthesis</a>
+    <a href="index.html">MUS Index</a>
+    <a href="../SRG/index.html">Susan Rogers</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <h2>Overview</h2>
+  <div class="section">
+    <p>The first four pathways taught you to make music: rhythm, melody, harmony, and sound design. This pathway teaches you to <strong>capture, shape, and deliver</strong> that music so other people can hear it the way you intend. Production is where art meets engineering. It is the discipline of recording, mixing, mastering, and releasing music &mdash; and each of these stages is a creative act, not just a technical one.</p>
+    <p>The studio as instrument is not a metaphor. When Phil Spector invented the Wall of Sound, the studio was the instrument. When Brian Eno produced ambient records by processing tape loops through guitar pedals, the studio was the instrument. When Susan Rogers engineered <em>Purple Rain</em> by capturing Prince's live intensity on tape and shaping it with EQ and compression, the studio was the instrument. The microphone, the preamp, the EQ, the compressor, the reverb, the mix bus &mdash; each is a creative tool that shapes the emotional impact of the music.</p>
+    <p>By the end of this pathway, you will understand signal flow from microphone to master, the creative decisions involved in microphone selection and placement, the art and science of mixing, the subtle craft of mastering, and the practical realities of getting your music into the world. You will not just make music &mdash; you will make records.</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <h3>Step 1: Signal Flow</h3>
+
+    <div class="signal-chain">
+      <div class="signal-step" style="border-color:rgba(186,58,58,0.3);"><div class="label">Source</div><div class="name">Microphone</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(154,106,216,0.3);"><div class="label">Gain</div><div class="name">Preamp</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(196,163,90,0.3);"><div class="label">Conversion</div><div class="name">A/D Converter</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(74,122,186,0.3);"><div class="label">Recording</div><div class="name">DAW</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(76,175,80,0.3);"><div class="label">Processing</div><div class="name">Mix Bus</div></div>
+      <div class="signal-arrow">&rarr;</div>
+      <div class="signal-step" style="border-color:rgba(232,152,72,0.3);"><div class="label">Final</div><div class="name">Master</div></div>
+    </div>
+
+    <p><strong>Signal flow</strong> is the path audio takes from its source (a voice, an instrument, a synthesizer) to its final destination (the listener's ears). Understanding signal flow is the single most important technical concept in production, because every stage in the chain colors the sound, and troubleshooting requires knowing where in the chain the problem lives.</p>
+    <p>The chain begins with a <strong>transducer</strong> &mdash; a device that converts one form of energy into another. A microphone converts sound pressure (acoustic energy) into electrical voltage (electrical energy). A speaker does the reverse. A guitar pickup converts string vibration (mechanical energy) into electrical signal.</p>
+    <p>The <strong>preamp</strong> amplifies the microphone's tiny electrical signal (millivolts) to a usable level (volts). Preamps are not neutral &mdash; different preamp designs add different coloration. A Neve 1073 adds warm low-mid saturation. An API 512 adds punchy midrange. A clean solid-state preamp (like a Focusrite Scarlett) adds minimal color. The preamp choice is a creative decision.</p>
+    <p>The <strong>analog-to-digital converter (ADC)</strong> translates the continuous electrical waveform into discrete digital samples &mdash; numbers that a computer can store and process. Standard settings: 44.1 kHz sample rate (44,100 snapshots per second) and 24-bit depth (16 million possible amplitude values per snapshot). These numbers are more than sufficient for human hearing.</p>
+    <p>The <strong>DAW</strong> records, stores, and plays back those digital samples. Within the DAW, the audio is processed (EQ, compression, effects), mixed (balanced, panned, spatialized), and rendered to a final file. The DAW is the center of the chain &mdash; everything before it is input; everything after it is output.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Trace the signal flow of your current listening setup. Where does the sound originate? (Streaming service &rarr; digital file &rarr; DAC in your phone/computer &rarr; amplifier &rarr; headphone driver/speaker.) Now trace it backward: what is the last thing that touches the sound before your ears? (Headphone driver or speaker cone.) What is the first? (The microphone in the recording studio, possibly decades ago.) Every link in the chain shaped the sound. The artist chose the studio. The engineer chose the mic. The mastering engineer chose the final EQ curve. Your phone chose the DAC. You chose the headphones. Signal flow is shared authorship.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"When the Levee Breaks" &mdash; Led Zeppelin:</strong> John Bonham's drum sound is the result of signal flow: the drums were in a stairwell (room acoustics), recorded with two distant microphones (Beyerdynamic M160 ribbons), through a Helios preamp, compressed with a Urei 1176, and printed to tape with tape saturation. Every link in the chain contributed to arguably the most famous drum sound in history.</li>
+        <li><strong>"Billie Jean" &mdash; Michael Jackson:</strong> Bruce Swedien's mix uses over 90 tracks, but the clarity comes from meticulous signal flow: each element recorded cleanly, processed individually, and summed to the mix bus with careful gain staging. Clarity IS signal flow discipline.</li>
+        <li><strong>"Only Shallow" &mdash; My Bloody Valentine:</strong> Kevin Shields deliberately broke conventional signal flow: guitar &rarr; tremolo bar &rarr; reversed reverb &rarr; re-amplified &rarr; recorded. The unconventional chain IS the sound.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Signal Flow Map:</strong> Draw the complete signal flow of any recording setup you have access to &mdash; even if it is just a phone. Start at the source (your voice) and end at the output (the speaker playing it back). Label every stage: transducer, preamp/gain, conversion, storage, playback, conversion (D/A), amplification, transducer (speaker). For a phone, this is: voice &rarr; MEMS microphone &rarr; integrated preamp &rarr; ADC &rarr; compressed audio file &rarr; DAC &rarr; amplifier &rarr; speaker/headphone driver. You have just mapped the simplest professional signal flow. A recording studio's flow is the same, with higher-quality components at each stage.</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <h3>Step 2: Microphone Technique</h3>
+    <p>The microphone is the first creative decision in recording. Before EQ, before compression, before mixing &mdash; the microphone determines what information enters the chain. Choose wrong and no amount of processing can fix it. Choose right and the processing becomes minimal.</p>
+    <p><strong>Dynamic microphones</strong> (Shure SM57, SM58) use a moving coil attached to a diaphragm. They are rugged, handle loud sources, and reject off-axis sound. The SM57 on a snare drum and the SM58 on a vocal are the two most common microphone placements in history. They work because they are honest: what you point them at is what you get.</p>
+    <p><strong>Condenser microphones</strong> (Neumann U87, AKG C414) use an electrically charged diaphragm that is more sensitive than a dynamic. They capture more detail, more high frequency, more nuance. They are the standard for studio vocals, acoustic instruments, and overheads. They require phantom power (48V from the preamp) and are more fragile than dynamics.</p>
+    <p><strong>Ribbon microphones</strong> (Royer R-121, Beyerdynamic M160) use a thin metal ribbon suspended in a magnetic field. They have a natural roll-off in high frequencies that sounds "warm" and "vintage." They excel on guitar amps, brass, and strings. They are fragile (do not blow into a ribbon mic; do not send it phantom power on older models) but produce the most natural, ear-like sound of any microphone type.</p>
+    <p><strong>Proximity effect:</strong> All directional microphones boost bass frequencies when the source is close. Sing 2 inches from an SM58: booming bass. Sing 12 inches away: thinner, more natural. Radio DJs use proximity effect deliberately for that deep, authoritative sound.</p>
+    <p><strong>Polar patterns</strong> determine what direction the mic "hears" from. Cardioid (heart-shaped, rejects the rear): the default. Figure-8 (front and back, rejects sides): for duets sharing one mic. Omnidirectional (all directions equally): the most natural, but picks up everything, including room sound.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>With any microphone (even your phone), record yourself speaking at 3 different distances: 2 inches, 6 inches, and 18 inches. Keep your voice at the same volume. Play back all three. The 2-inch recording will be bassy and intimate (proximity effect). The 6-inch recording will be balanced and clear. The 18-inch recording will have more room sound and less bass. The distance between your mouth and the microphone is a tonal control &mdash; and it is free. Most recording problems are solved by moving the mic, not by adding EQ.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Purple Rain" &mdash; Prince:</strong> Susan Rogers recorded Prince's vocal on a Neumann U87 condenser &mdash; close, intimate, every breath and nuance captured. The condenser's detail IS the emotional intimacy. See <a href="../SRG/index.html">SRG</a>.</li>
+        <li><strong>"Back in Black" &mdash; AC/DC:</strong> The guitar sound is an SM57 pointed at the center of a Marshall cabinet speaker cone. Move the mic toward the edge of the cone: darker. Move it toward the center: brighter. The placement IS the EQ.</li>
+        <li><strong>"Wrecking Ball" &mdash; Emmylou Harris (Daniel Lanois production):</strong> Ribbon microphones on vocals and acoustic instruments throughout. The natural high-frequency roll-off of the ribbon creates the album's characteristic warmth without any processing.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Three-Position Test:</strong> If you have access to any microphone (USB mic, phone, even earbuds with a built-in mic), record the same sound source (your voice singing one phrase, or a guitar strumming one chord) from three positions: directly in front (0 degrees), 45 degrees off to the side, and from behind. Compare the three recordings. The timbre, volume, and room sound will be different in each. You have just demonstrated polar pattern behavior. The mic "hears" differently depending on where the sound comes from, and you can use that as a creative tool.</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <h3>Step 3: Mixing</h3>
+    <p><strong>Mixing</strong> is the art of combining multiple recorded tracks into a single stereo (or surround) output that sounds like a finished piece of music. It is the most creative stage of production after the performance itself, because the mixer decides what you hear, how loud, where in the stereo field, and with what processing.</p>
+    <p>A good mix creates a <strong>three-dimensional sound field:</strong></p>
+    <p><strong>Left-Right (Panning):</strong> Each element has a position in the stereo field. Kick and bass are almost always centered (they carry the most energy and need to be equal in both speakers). Guitars, keys, and backing vocals are spread left and right. The lead vocal is dead center &mdash; the listener's attention anchor.</p>
+    <p><strong>Near-Far (Reverb and Delay):</strong> Dry sounds feel close. Wet sounds (lots of reverb) feel distant. A vocal with no reverb feels like someone is whispering in your ear. A vocal with long hall reverb feels like it is at the back of a cathedral. The amount and type of reverb places each element at a specific depth in the mix.</p>
+    <p><strong>Bright-Dark (EQ):</strong> Equalization boosts or cuts specific frequency ranges. Bright (high-frequency boost) sounds feel present and airy. Dark (high-frequency cut) sounds feel warm and distant. Cutting the low-mids of a guitar (around 300 Hz) clears space for the vocal. Boosting the "air" frequencies (10-16 kHz) of a vocal adds shimmer and presence.</p>
+    <p><strong>Loud-Quiet (Dynamics/Compression):</strong> Compression reduces the dynamic range of individual tracks so they sit more consistently in the mix. An uncompressed vocal varies wildly in volume from syllable to syllable; a compressed vocal stays present and readable throughout. Compression is the invisible hand that holds the mix together.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Download a free multitrack mix session (Cambridge Music Technology offers free multitrack downloads at cambridgemt.co.uk, or search "free multitracks for mixing practice"). Import the tracks into any DAW. Before touching any plugin: set all faders to zero, then bring up only the kick and vocal. Balance those two. Then add the bass. Then the snare. Then guitars. Then everything else. This "build from the foundation" approach is how most professionals mix. Each new element is balanced against what is already there, not against silence.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Bohemian Rhapsody" &mdash; Queen:</strong> The mix has extraordinary depth: the close, dry vocal in the verses, the wide operatic section with layered vocals panned across the stereo field, the aggressive guitar solo pushed forward with distortion and compression. Each section has a completely different spatial treatment. The mix follows the drama.</li>
+        <li><strong>"Siamese Dream" (full album) &mdash; Smashing Pumpkins:</strong> Butch Vig's mix layers up to 40 guitar tracks per song, yet the vocal sits clearly on top. The secret: heavy EQ carving (each guitar track has a narrow frequency band, and together they fill the spectrum) and aggressive compression on the drum bus. See <a href="../SMP/index.html">SMP</a>.</li>
+        <li><strong>"Lovesong" &mdash; The Cure:</strong> A mix with enormous stereo width. Close your eyes and point to where each instrument is: guitar far left, synth far right, bass center, vocal center. The spatial arrangement is as much a part of the composition as the notes.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Reference Mix:</strong> Pick a professionally mixed song you love as a "reference." Import it into your DAW on a separate track. Now mix your own multitrack session (or a free practice multitrack), A/B comparing your mix to the reference by switching between them. Ask: is my vocal as present? Is my low end as tight? Is my stereo width as wide? You will not match the reference (it was mixed by a professional in a treated room), but you will close the gap dramatically by having a concrete target instead of mixing in the abstract.</p>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <h3>Step 4: Mastering</h3>
+    <p><strong>Mastering</strong> is the final step before a recording is released to the world. It is the process of taking a finished mix and optimizing it for distribution: making it loud enough to compete with other commercial releases, ensuring it sounds good on every playback system (earbuds, car speakers, studio monitors, phone speakers, club PA), and creating consistency across an album so that every track sits at the same perceived volume and tonal balance.</p>
+    <p>The mastering chain is typically simple: <strong>EQ</strong> (subtle tonal adjustments &mdash; perhaps a gentle high-frequency shelf to add air, or a low-cut at 30 Hz to remove subsonic rumble), <strong>compression</strong> (subtle dynamic control &mdash; perhaps 1-3 dB of gain reduction to glue the mix together), <strong>limiting</strong> (a brick-wall limiter that prevents the signal from exceeding 0 dBFS, the digital ceiling), and <strong>dithering</strong> (adding a tiny amount of shaped noise when converting from 24-bit to 16-bit for CD or streaming, to preserve low-level detail).</p>
+    <p><strong>LUFS</strong> (Loudness Units Full Scale) is the modern loudness measurement standard. Spotify normalizes to -14 LUFS. Apple Music normalizes to -16 LUFS. YouTube normalizes to -14 LUFS. This means that if you master louder than the platform's target, the platform will turn your song down &mdash; and the over-compression you used to get louder will now sound worse than a more dynamic master at the correct target level. The loudness wars are over. Dynamic range wins.</p>
+    <p>The most important mastering skill is <strong>restraint</strong>. A good mastering engineer makes subtle moves: 0.5 dB of EQ here, 1 dB of compression there. If you can obviously hear what the mastering did, it probably did too much. The goal is not to transform the mix &mdash; it is to translate it from the controlled studio environment to the chaotic real world of earbuds, car speakers, and bluetooth devices.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Take any mix you have created (or a free practice mix). Put three plugins on the master bus in this order: EQ, compressor, limiter. On the EQ: add a gentle high shelf at 10 kHz (+1 dB) and a low cut at 30 Hz. On the compressor: set a slow attack (30 ms), medium release (100 ms), ratio of 2:1, and adjust the threshold until you see 1-2 dB of gain reduction. On the limiter: set the ceiling to -1 dBTP (true peak) and push the input gain until the loudness meter reads around -14 LUFS. A/B the mastered version against the unmastered version. You will hear: slightly more air, slightly more glue, and significantly more loudness. This is basic mastering.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>"Random Access Memories" &mdash; Daft Punk:</strong> Mastered by Bob Ludwig. Exceptionally dynamic for a modern record &mdash; the quiet sections are actually quiet, and the loud sections are actually loud. Compare the loudness meter during "Get Lucky" (moderate) vs. "Giorgio by Moroder" (wide dynamic range). This is what tasteful mastering sounds like.</li>
+        <li><strong>"Death Magnetic" &mdash; Metallica:</strong> Infamously over-compressed during mastering. The Guitar Hero version of the same recordings (mastered differently) has significantly more dynamic range. Listen for the difference: the album version sounds flat and fatiguing; the Guitar Hero version breathes. This is the loudness wars in action.</li>
+        <li><strong>"Kind of Blue" &mdash; Miles Davis (remastered editions):</strong> Compare the original mastering to the 1997 and 2020 remasters. Each remaster uses different technology and different loudness targets. The same performances, processed differently for different eras. Mastering IS the translation.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Playback Translation Test:</strong> Master a track to -14 LUFS. Then listen to it on every device you own: headphones, earbuds, phone speaker, laptop speaker, car stereo, bluetooth speaker. Take notes on each: is the bass audible on the phone speaker? Is the vocal clear on earbuds? Does the low end overwhelm the car stereo? A master that sounds good on all of these is a good master. Adjust your mastering EQ based on the weakest link (usually phone speakers and cheap earbuds) without ruining the sound on headphones. This is the mastering engineer's daily challenge.</p>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <h3>Step 5: Release &amp; Distribution</h3>
+    <p>You made the music. You recorded it. You mixed it. You mastered it. Now what? The final step is getting it from your hard drive to ears around the world. This step is less glamorous than the creative work, but it is essential &mdash; music that is not released does not exist in the cultural conversation.</p>
+    <p><strong>File formats and stems:</strong> Always keep your session files, stems (individual track bounces), and the unmastered mix. You will need them for remixes, sync licensing, vinyl mastering, and future remastering. Standard delivery format for streaming: 16-bit/44.1 kHz WAV or high-quality AAC/MP3 (320 kbps minimum). For archival: 24-bit/96 kHz WAV.</p>
+    <p><strong>Metadata matters:</strong> Every digital audio file contains metadata &mdash; the song title, artist name, album, track number, genre, year, ISRC code (International Standard Recording Code, a unique identifier for every released recording), and songwriter/publisher information. Incorrect metadata means lost royalties, incorrect credits, and songs that cannot be found. Fill in every field correctly before distribution.</p>
+    <p><strong>Distribution platforms:</strong> DistroKid, TuneCore, CD Baby, and LANDR are aggregators that deliver your music to Spotify, Apple Music, Amazon, YouTube Music, Tidal, and 50+ other platforms for a fee. They handle the technical delivery; you handle the creative and business decisions. Most charge either a yearly fee (DistroKid: ~$20/year) or a per-release fee (TuneCore: ~$10-30 per single).</p>
+    <p><strong>Rights and royalties:</strong> There are two copyrights in every song: the <strong>composition</strong> (melody and lyrics, owned by the songwriter/publisher) and the <strong>sound recording</strong> (the specific recorded performance, owned by the artist/label). Each generates separate royalties through separate collection channels. Register your songs with a PRO (Performing Rights Organization: ASCAP, BMI, or SESAC in the US) to collect composition royalties from radio, streaming, and live performance.</p>
+
+    <div class="activity-box">
+      <div class="box-label">Try This</div>
+      <p>Pick one finished track (or a demo). Export it as a 16-bit/44.1 kHz WAV file. Open the file properties and check the metadata: is the title correct? Is the artist name spelled right? Is there an album name? A genre? Now create accounts on DistroKid (or a free alternative like Amuse or RouteNote) and walk through the release process without pressing "submit" &mdash; see what information they ask for: ISRC, UPC, release date, cover art dimensions (usually 3000x3000 pixels minimum), genre, language, and songwriter credits. Understanding this process before you need it eliminates the stress of your first release day.</p>
+    </div>
+
+    <div class="listen-box">
+      <div class="box-label">Listen For</div>
+      <ul>
+        <li><strong>Any song on Spotify:</strong> Right-click and select "Song Credits." Notice the list: performers, songwriters, producers, engineers, mixers, mastering engineers. Every name represents a creative and business decision. The credits ARE the distribution metadata made visible.</li>
+        <li><strong>"In Rainbows" &mdash; Radiohead:</strong> Self-released as a "pay what you want" download in 2007, bypassing the traditional label distribution system entirely. The band kept the rights, set the terms, and proved that alternative distribution models work. The release strategy was as much a statement as the music.</li>
+        <li><strong>Curren$y's discography:</strong> 100+ projects released independently across Bandcamp, DatPiff, streaming, and physical. Consistent output, full ownership, no major label. The distribution strategy IS the career. See <a href="../CRY/index.html">CRY</a>.</li>
+      </ul>
+    </div>
+
+    <div class="diy-box">
+      <div class="box-label">DIY Project</div>
+      <p><strong>The Release Checklist:</strong> Create a document with every item needed to release a single: (1) Mastered WAV file at -14 LUFS, (2) Cover art at 3000x3000px, (3) Song title, artist name, featured artists, (4) Songwriting credits (who wrote what percentage), (5) Producer credits, (6) ISRC code (your distributor can generate one), (7) Genre and subgenre, (8) Release date (minimum 2 weeks out for playlist consideration), (9) PRO registration for the composition, (10) Lyrics for sync services. Laminate this checklist (metaphorically). Use it for every release. The artists who sustain careers are the ones who treat distribution as seriously as creation.</p>
+    </div>
+  </div>
+
+  <!-- PRACTICE IDEAS -->
+  <h2>Practice Ideas</h2>
+  <div class="section">
+    <ol class="practice-list">
+      <li><span class="time">5 min:</span> Critical listening. Put on a favorite song on good headphones. Close your eyes. Point to each instrument in the stereo field. Ask: what is the wettest (most reverb) element? The driest? Where is the vocal placed? This builds mixing awareness passively.</li>
+      <li><span class="time">5 min:</span> Microphone distance experiment. Record yourself speaking or singing at 2 inches, 6 inches, and 18 inches. Compare. No processing &mdash; just distance. Understand proximity effect with your ears, not your mind.</li>
+      <li><span class="time">15 min:</span> EQ ear training. Use a plugin like FabFilter Pro-Q or the free TonGym web app. It plays audio with a boosted frequency and you identify which band is boosted. Start with octave-wide bands. Narrow to 1/3 octave over weeks. This is the single most valuable production ear training exercise.</li>
+      <li><span class="time">15 min:</span> Compression practice. Take a vocal recording. Set a compressor to fast attack, fast release, 4:1 ratio. Sweep the threshold from no compression to heavy compression. Listen for: quieter loud parts, louder quiet parts, less dynamic variation. Now try slow attack &mdash; notice how the transients punch through. Compression settings are recipes; learn them by cooking.</li>
+      <li><span class="time">30 min:</span> Mix practice. Download a free multitrack. Set a 30-minute timer. Mix it as well as you can before the timer ends. Speed forces decisiveness &mdash; you cannot overthink when time is limited. Do this weekly. Your mixing speed and instincts will improve dramatically.</li>
+      <li><span class="time">30 min:</span> A/B mastering. Take a finished mix. Master it to -14 LUFS. Then master the same mix to -8 LUFS (very loud, heavily limited). A/B them at matched loudness (turn the loud one down to match). The -14 LUFS version will sound more open, more dynamic, more musical. This is how you learn that louder is not better &mdash; it is just louder.</li>
+      <li><span class="time">5 min:</span> Playback check. Listen to your latest mix on your phone speaker (no headphones). If the vocal is not clearly audible, your mix needs work. The phone speaker test is the fastest reality check in mixing.</li>
+    </ol>
+  </div>
+
+  <!-- CONNECTIONS -->
+  <h2>Connections</h2>
+  <div class="rosetta-card">
+    <h3><a href="../SRG/index.html">SRG &mdash; Susan Rogers</a></h3>
+    <p>Prince's recording engineer (Purple Rain, Sign o' the Times, Parade) turned Berklee professor of music perception. The bridge between studio craft and neuroscience. How the ear perceives loudness, why certain mic placements "feel" better, and what the brain does with spatial information in a mix.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../COI/index.html">COI &mdash; Coil</a></h3>
+    <p>Industrial music as production art. Peter Christopherson and John Balance used the studio as a primary instrument: tape manipulation, found sound, extreme processing. The most experimental edge of the production spectrum.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3>src/audio-engineering/ &mdash; DAP/DACP Signal Chain Code</h3>
+    <p>The Digital Audio Pipeline and Digital Audio Control Protocol. Code implementations of the same signal flow concepts covered in this pathway: routing, gain staging, processing chains, and bus architecture in software.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3>Knowledge Node: <a href="nodes/patch-routing.html">Patch Routing (File Tree)</a></h3>
+    <p>Modular synthesis signal flow maps 1:1 to directory trees. A patch is a workflow. Modules are tasks. The signal chain in a studio is the same abstraction as the signal chain in a synth: source &rarr; processing &rarr; output.</p>
+  </div>
+  <div class="rosetta-card">
+    <h3><a href="../GTP/index.html">GTP &mdash; Geggy Tah (Production)</a></h3>
+    <p>Lo-fi as deliberate production choice. How limitations (4-track recorder, cheap microphones, room noise) become aesthetic assets. The constraint IS the sound. Lo-fi production is not bad production; it is different production.</p>
+  </div>
+
+  <!-- RESOURCES -->
+  <h2>Resources</h2>
+  <div class="section">
+    <ul class="resource-list">
+      <li><span class="category">Book:</span> <em>Mixing Secrets for the Small Studio</em> by Mike Senior &mdash; the most practical mixing book for home studios, covers every technique with free audio examples</li>
+      <li><span class="category">Book:</span> <em>Mastering Audio</em> by Bob Katz &mdash; the definitive mastering reference, covers loudness, metering, and the entire mastering chain</li>
+      <li><span class="category">Book:</span> <em>Recording Engineers Handbook</em> by Bobby Owsinski &mdash; microphone technique for every instrument and vocal style, with diagrams</li>
+      <li><span class="category">Free multitracks:</span> <a href="https://www.cambridge-mt.com/ms/mtk/">Cambridge Music Technology</a> &mdash; hundreds of free multitrack sessions for mixing practice</li>
+      <li><span class="category">YouTube:</span> Pensado's Place &mdash; interviews with Grammy-winning engineers and producers, deep technical discussion</li>
+      <li><span class="category">YouTube:</span> Produce Like a Pro (Warren Huart) &mdash; practical recording and mixing tutorials with real sessions</li>
+      <li><span class="category">Tool:</span> Youlean Loudness Meter (free) &mdash; LUFS metering plugin for your DAW, essential for mastering to streaming platform targets</li>
+      <li><span class="category">Tool:</span> SPAN by Voxengo (free) &mdash; frequency analyzer plugin. See the spectrum of your mix in real time. Visual feedback for EQ decisions</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <a href="pathway-synthesis.html">&larr; Synthesis</a> &middot;
+  <a href="index.html">MUS Index</a> &middot;
+  <a href="../SRG/index.html">SRG (Science)</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Pathway 5: Production &mdash; The Studio Is an Instrument &middot; Music Learning Pathways &middot; Rosetta Cluster 10<br>
+  <span style="font-style:italic; color:rgba(154,106,216,0.5);">Dedicated to Pepper Coyote &mdash; &ldquo;Nothing to lose but your chains and a world to win&rdquo;</span>
+</footer>
+
+</body>
+</html>
