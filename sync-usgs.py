@@ -37,6 +37,7 @@ SYNC_DIRS = [
     "CSP",  # Computer Science & Programming
     "LIVE",  # Real-time monitoring dashboards
     "GSD",   # GSD & Skill Creator architecture docs
+    "BEE",   # Feed the Bees — pollinator research & guides
 ]
 
 dry_run = "--dry-run" in sys.argv
