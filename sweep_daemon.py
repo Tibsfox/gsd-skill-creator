@@ -335,8 +335,8 @@ def daemon_loop(day_override=None, dry_run=False, once=False):
                 print("\n--once mode: exiting after one cycle")
                 return
 
-        # Sleep until next check (poll every 10 seconds)
-        time.sleep(10)
+        # Sleep until next check (poll every 60 seconds)
+        time.sleep(60)
 
 
 def show_status():
