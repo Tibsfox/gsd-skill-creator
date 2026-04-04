@@ -1,0 +1,56 @@
+{
+  "degree": 280,
+  "species": "Sperm Whale",
+  "scientific_name": "Physeter macrocephalus",
+  "slug": "280-sperm-whale-click-train",
+  "sound_type": "Loud directional biosonar -- sperm whale echolocation click train, 230-236 dB source level, the loudest biological sound on Earth, directional forward beam, giant squid hunting at 2,000+ meters depth, E=7",
+  "energy": 7,
+  "ecosystem": "Deep water -- open ocean mesopelagic and bathypelagic; deep-diving predator",
+  "season": "Rare (sperm whale presence in NE Pacific deep waters; uncommon in PNW-adjacent observations)",
+  "family": "Physeteridae",
+  "order": "Artiodactyla (Cetacea, Odontoceti)",
+  "milestone": "FIRST PHYSETERIDAE at degree 280. Physeter macrocephalus: largest toothed animal on Earth (male up to 57 metric tons). Click train 230-236 dB: loudest biological sound on Earth. E=7 because directional (not broadcast); power realized in forward beam. Combined E=15 with The Gits (S36 280, E=8).",
+  "coordinates": {
+    "lat": 43.0,
+    "lon": -135.0,
+    "description": "NE Pacific deep water. Sperm whales are found in deep ocean globally. NE Pacific distribution includes waters off PNW coast at depth. Deep diving species not regularly observed nearshore."
+  },
+  "click_data": {
+    "source_level_db": "230-236 dB re 1 µPa @ 1m. Mohl et al. (2003) confirmed. Highest source level measured for any biological sound. Exceeds orca echolocation (224 dB) by 6-12 dB (factor of ~4-16x acoustic pressure).",
+    "directionality": "Narrow forward beam produced by spermaceti organ in head. NOT broadcast broadly -- aimed. An observer off the beam axis hears a much less intense sound. E=7 reflects this directionality.",
+    "frequency": "Multi-kHz clicks, broadly distributed in frequency. Primary energy at several kHz. Individual clicks are broadband, short duration.",
+    "click_structure": "Complex multi-pulse event. Primary click followed by regularly spaced secondary pulses (P1, P2, P3...) = reflections within spermaceti organ. Inter-pulse interval proportional to spermaceti organ size = individual acoustic fingerprint.",
+    "click_rate": "Regular click train during hunting. Rate accelerates to 'creak' (rapid burst) during prey approach. Creak = acoustic signature of imminent prey capture.",
+    "e7_rationale": "E=7 because directional, not broadcast. 230+ dB only in forward beam direction. Full acoustic power realized only on beam axis. Broadcast events (breach at E=9) outrank directional events at E=7 regardless of source level maximum.",
+    "prey": "Giant squid (Architeuthis dux) and colossal squid (Mesonychoteuthis hamiltoni) at 2,000+ meters depth. Hunt entirely in acoustic space, in absolute darkness, at crushing pressure."
+  },
+  "nodes": [
+    {
+      "id": "first-physeteridae",
+      "type": "pattern",
+      "title": "First Physeteridae -- Sperm Whale Family Enters",
+      "description": "Degree 280 is the first entry in Physeteridae. The sperm whale: sole member of genus Physeter, largest toothed animal, 230+ dB directional biosonar. The engine has now documented Mysticeti (Balaenopteridae: 278-279) and Odontoceti (Physeteridae: 280) in consecutive family entries.",
+      "connections": ["loudest-sound", "deep-dive"]
+    },
+    {
+      "id": "loudest-sound",
+      "type": "concept",
+      "title": "Loudest Biological Sound on Earth",
+      "description": "230-236 dB source level (Mohl et al. 2003). Highest measured for any biological sound. Directional, not broadcast. E=7 for directionality. Exceeds orca echolocation (224 dB) but is aimed rather than broadcast.",
+      "connections": ["first-physeteridae", "deep-dive"]
+    },
+    {
+      "id": "deep-dive",
+      "type": "concept",
+      "title": "Deep Dive -- Hunt at 2,000+ Meters",
+      "description": "Sperm whale dives to 2,000-3,000+ meters. Hunts giant squid and colossal squid at depth never directly observed by humans. Entire hunt in acoustic space. Click train at 230+ dB illuminates the dark deep ocean. Sucker scars on skin: evidence of battles no human has seen.",
+      "connections": ["loudest-sound", "first-physeteridae"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-279", "species": "Blue whale 20Hz pulse", "relationship": "Second Balaenopteridae then first Physeteridae. Two great whale families in consecutive degrees. Mysticeti (baleen) vs. Odontoceti (toothed). Low-frequency long-range (blue whale) vs. high-frequency directional biosonar (sperm whale)."},
+    {"target": "SPS-276", "species": "Orca echolocation burst", "relationship": "224 dB orca vs. 230+ dB sperm whale. Both Odontoceti, both directional biosonar. Sperm whale more powerful; orca more frequency-agile and faster click rate. E=8 (orca) vs. E=7 (sperm whale) because of context and deployment."},
+    {"target": "SPS-273", "species": "Orca breaching", "relationship": "Orca breach E=9 despite lower source level than sperm whale click. Reason: broadcast vs. directional. E reflects broadcast intensity. The E designation is not a decibel meter."},
+    {"target": "S36-280", "artist": "The Gits", "relationship": "Combined E=15. First Physeteridae alongside the most direct, raw punk band in the Seattle Central District. Mia Zapata sending signals from the stage; sperm whale sending 230+ dB clicks into the deep ocean. Both targeting in the dark."}
+  ]
+}
