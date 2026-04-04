@@ -494,6 +494,66 @@ export function checkVersionConsistency(): InvariantResult {
 }
 
 // ---------------------------------------------------------------------------
+// Security Invariants (from CMU Safety + OWASP analysis, Session 6)
+// ---------------------------------------------------------------------------
+
+/**
+ * Config immutability: settings.json must not be writable by agent file-write tools.
+ * OWASP finding: configuration-overwrite attack can bypass permission gates.
+ * Defense: settings.json should be in the gsd-prompt-guard's protected paths.
+ */
+export function checkConfigImmutability(): InvariantResult {
+  if (!fs.existsSync(SETTINGS_PATH)) {
+    return { name: 'config-immutability', passed: true, message: 'No settings.json to protect' };
+  }
+
+  // Check if gsd-prompt-guard protects settings.json
+  const guardPath = path.join(HOOKS_DIR, 'gsd-prompt-guard.js');
+  if (!fs.existsSync(guardPath)) {
+    return {
+      name: 'config-immutability',
+      passed: false,
+      message: 'gsd-prompt-guard.js not found — settings.json unprotected from agent writes',
+    };
+  }
+
+  const guardContent = fs.readFileSync(guardPath, 'utf8');
+  const protectsSettings = guardContent.includes('settings.json') ||
+    guardContent.includes('.claude/settings');
+  return {
+    name: 'config-immutability',
+    passed: protectsSettings,
+    message: protectsSettings
+      ? 'gsd-prompt-guard.js references settings.json — write protection active'
+      : 'CRITICAL: settings.json not in prompt guard protected paths — config-overwrite attack possible',
+  };
+}
+
+/**
+ * Fail-safe defaults: if settings.json is missing or corrupt, the harness
+ * must default to maximum restrictions, not open access.
+ */
+export function checkFailSafeDefaults(): InvariantResult {
+  // Verify that hooks reference files that exist (already covered)
+  // This check ensures settings.json itself is valid JSON
+  if (!fs.existsSync(SETTINGS_PATH)) {
+    return { name: 'fail-safe-defaults', passed: true, message: 'No settings.json — harness uses built-in defaults' };
+  }
+
+  try {
+    const content = fs.readFileSync(SETTINGS_PATH, 'utf8');
+    JSON.parse(content);
+    return { name: 'fail-safe-defaults', passed: true, message: 'settings.json is valid JSON' };
+  } catch {
+    return {
+      name: 'fail-safe-defaults',
+      passed: false,
+      message: 'CRITICAL: settings.json is corrupt — harness may fail open instead of closed',
+    };
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Full suite runner
 // ---------------------------------------------------------------------------
 
@@ -554,6 +614,17 @@ export function runAllInvariantChecks(): InvariantSuiteResult[] {
     suite: 'Build Invariants',
     results: buildResults,
     allPassed: buildResults.every((r) => r.passed),
+  });
+
+  // Security invariants (OWASP + CMU Safety)
+  const secResults = [
+    checkConfigImmutability(),
+    checkFailSafeDefaults(),
+  ];
+  suites.push({
+    suite: 'Security Invariants',
+    results: secResults,
+    allPassed: secResults.every((r) => r.passed),
   });
 
   return suites;
