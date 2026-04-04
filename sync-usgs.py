@@ -38,6 +38,9 @@ SYNC_DIRS = [
     "LIVE",  # Real-time monitoring dashboards
     "GSD",   # GSD & Skill Creator architecture docs
     "BEE",   # Feed the Bees — pollinator research & guides
+    "GSD2",  # GSD-2 Architecture research series
+    "GSD2/mission-pack",  # GSD-2 mission pack PDFs
+    "GSD2/research",      # GSD-2 research modules
 ]
 
 dry_run = "--dry-run" in sys.argv
