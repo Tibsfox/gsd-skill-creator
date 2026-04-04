@@ -84,40 +84,41 @@ footer a { color:rgba(255,255,255,0.3); }
 @media(max-width:640px) { .card-grid { grid-template-columns:1fr; } }
 </style>
 </head>
-<body>
+<body class="project-open">
+  <header>
+    <h1>OPEN &mdash; Unsolved Problems &amp; Open Research</h1>
+    <div class="subtitle">Chain-of-Thought Reliability &middot; Distributed Intelligence &middot; Combinatorics &middot; Synchronization &middot; Millennium Prizes &middot; Fundamental Physics</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-cot-faithfulness">CoT Faithfulness</a>
+      <a href="page.html?doc=04-distributed-intelligence">Distributed Intelligence</a>
+      <a href="page.html?doc=07-collatz">Collatz</a>
+      <a href="page.html?doc=11-kuramoto-sync">Kuramoto Sync</a>
+      <a href="page.html?doc=13-riemann-hypothesis">Riemann</a>
+      <a href="page.html?doc=14-p-vs-np">P vs NP</a>
+      <a href="page.html?doc=19-turbulence">Turbulence</a>
+    </nav>
+  </header>
 
-<header>
-  <h1>OPEN</h1>
-  <div class="subtitle">Unsolved problems, research frontiers, and things we might be able to contribute to</div>
-  <nav>
-    <a href="../LIVE/index.html">Live</a>
-    <a href="../index.html">Research</a>
-    <a href="../NASA/artemis-ii/index.html">Artemis II</a>
-  </nav>
-</header>
+  <main>
+    <blockquote>
+      Every unsolved problem is a boundary between what we know and what we pretend to know.
+      These nineteen problems span AI reliability, pure mathematics, fundamental physics, and
+      emergent behavior in complex systems. They are not idle curiosities &mdash; each one
+      intersects with live work in the gsd-skill-creator ecosystem, from multi-agent orchestration
+      to trust verification to the physics of cooperative networks. We track them not because we
+      expect to solve them, but because the attempt to solve them makes everything else we build
+      more rigorous.
+    </blockquote>
 
-<main>
-  <blockquote>
-    The unsolved problems are where the interesting work is. Some are famous impossibilities.
-    Some are tractable puzzles no one has tried the right approach on yet.
-    Some are questions we discovered while building something else.
-    Track them. Study them. Try things. Document what doesn't work — that's data too.
-  </blockquote>
-
-  <h2>AI Reasoning &amp; Faithfulness</h2>
-  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
-    Do language models actually reason, or do they pattern-match and then generate plausible explanations?
-    This is the central open question in AI right now. March 2026 produced a cluster of papers attacking it from different angles.
-  </p>
-  <div class="card-grid">
-    <div class="card">
-      <h3><a href="problems/cot-faithfulness.html" style="color:#fff;">Chain-of-Thought Faithfulness</a></h3>
-      <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
-      <p>When models "show their work," is the reasoning genuine or decorative? arXiv 2603.22816 finds most frontier models produce decorative reasoning — accuracy improves but the steps don't causally determine the answer. Only MiniMax-M2.5 and Kimi-K2.5 show genuine step dependence.</p>
-      <p><strong>The question:</strong> Can we design training objectives that incentivize faithful reasoning, not just correct answers?</p>
-      <div class="source">arXiv:2603.22816 &middot; arXiv:2603.26410 &middot; arXiv:2602.03994</div>
-      <div class="source">arXiv:2603.22816 &middot; arXiv:2603.26410 &middot; arXiv:2602.03994</div>
-      <div class="status status-watching">WATCHING — directly relevant to how we use Claude</div>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">19</span><span class="stat-label">Open Problems</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Pure Math</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">AI / ML</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Emergent Systems</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Fundamental Physics</span></div>
+      <div class="stat"><span class="stat-value">250+</span><span class="stat-label">References</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Active Tracks</span></div>
     </div>
 
     <div class="card">
@@ -172,23 +173,211 @@ footer a { color:rgba(255,255,255,0.3); }
       <div class="status status-active">ACTIVE — we are building this</div>
     </div>
 
-    <div class="card">
-      <h3><a href="problems/file-native-agents.html" style="color:#fff;">File-Native Agent Architecture</a></h3>
-      <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
-      <p>When the filesystem IS the message bus. Agents coordinate through file writes, directory listings, and git commits. Crash-recoverable, debuggable, cross-runtime. Is this a hack or a fundamentally better architecture?</p>
-      <p><strong>Our contribution:</strong> Gastown chipset: 14 skills, 8 file-native patterns. 50+ projects orchestrated via filesystem. Zero data loss from crashes.</p>
-      <div class="source">Plan 9 (Bell Labs) &middot; Maildir format &middot; WLCG DIRAC &middot; Gastown chipset</div>
-      <div class="status status-active">ACTIVE — we are building this</div>
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Millennium Prize Problems &amp; Classical Mathematics</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <div class="card-grid">
+      <a href="page.html?doc=13-riemann-hypothesis" class="card" style="text-decoration:none;color:inherit">
+        <h3>P13: The Riemann Hypothesis</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1859</span> $1M Clay Prize</div>
+        <p>All nontrivial zeros of the Riemann zeta function lie on the critical line Re(s) = 1/2. The distribution of prime numbers &mdash; and every cryptographic key ever generated, including agent identity keys in the GSD trust system &mdash; depends on this being true. 10 trillion zeros verified, zero counterexamples found.</p>
+      </a>
+
+      <a href="page.html?doc=14-p-vs-np" class="card" style="text-decoration:none;color:inherit">
+        <h3>P14: P vs NP</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1971</span> $1M Clay Prize</div>
+        <p>If P = NP, verification is no easier than search, and the entire witness-observer pattern collapses. The GSD verifier, the convoy model, and paper #34's Curry-Howard framework all rest on the practical assumption that checking a proof is easier than finding one. Three known barriers prevent all current proof techniques from resolving this.</p>
+      </a>
+
+      <a href="page.html?doc=15-navier-stokes" class="card" style="text-decoration:none;color:inherit">
+        <h3>P15: Navier-Stokes Existence &amp; Smoothness</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1934</span> $1M Clay Prize</div>
+        <p>The equations governing every fluid on Earth &mdash; blood, wind over Paine Field, water in Puget Sound &mdash; and we cannot prove smooth solutions always exist in 3D. Our forest simulation, the KPAE weather pipeline, and the MUK convergence zone all run on numerical approximations to equations we haven't proven are well-posed.</p>
+      </a>
+
+      <a href="page.html?doc=16-twin-primes" class="card" style="text-decoration:none;color:inherit">
+        <h3>P16: The Twin Prime Conjecture</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Classical</span> Number theory</div>
+        <p>Are there infinitely many pairs of primes that differ by 2? Zhang (2013) proved bounded gaps exist; Maynard-Tao reduced the bound to 246. The gap from 246 to 2 remains open. Our GPU pipeline for Erd&#337;s verification connects directly to the sieve methods and prime gap computation this problem demands.</p>
+      </a>
     </div>
 
-    <div class="card">
-      <h3><a href="problems/nondeterministic-testing.html" style="color:#fff;">Non-Deterministic System Testing</a></h3>
-      <div><span class="tag tag-ai">AI</span> <span class="tag tag-ml">ML</span></div>
-      <p>Agentic AI breaks both deterministic software testing and fixed-input ML evaluation. Agents take multi-step journeys where each step's output depends on prior steps. How do you write tests for a system that gives different answers each time?</p>
-      <p><strong>The question:</strong> What does "correct" mean for a non-deterministic multi-step system?</p>
-      <div class="source">MachineLearningMastery.com &middot; 5 Production Scaling Challenges 2026</div>
-      <div class="status status-open">OPEN — our Nyquist verification is one approach</div>
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Fundamental Physics</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <div class="card-grid">
+      <a href="page.html?doc=17-quantum-gravity" class="card" style="text-decoration:none;color:inherit">
+        <h3>P17: Quantum Gravity</h3>
+        <div class="meta"><span class="tag tag-physics">Physics</span> <span class="tag tag-open">Open since 1930s</span> GR + QM reconciliation</div>
+        <p>General relativity describes spacetime curvature at cosmic scales. Quantum mechanics describes particle behavior at atomic scales. Both are spectacularly successful, and they are mathematically incompatible. Reconciling them is the deepest open problem in physics &mdash; and Artemis II's cislunar navigation requires relativistic corrections that brush against this boundary.</p>
+      </a>
+
+      <a href="page.html?doc=18-dark-energy" class="card" style="text-decoration:none;color:inherit">
+        <h3>P18: Dark Energy &amp; the Cosmological Constant</h3>
+        <div class="meta"><span class="tag tag-physics">Physics</span> <span class="tag tag-open">Open since 1917</span> Accelerating expansion</div>
+        <p>68% of the universe's energy density is something we cannot see, detect directly, or explain from first principles. The cosmological constant problem &mdash; a 120 orders of magnitude discrepancy between quantum field theory predictions and observation &mdash; is the worst prediction in the history of physics.</p>
+      </a>
+
+      <a href="page.html?doc=19-turbulence" class="card" style="text-decoration:none;color:inherit">
+        <h3>P19: Turbulence</h3>
+        <div class="meta"><span class="tag tag-physics">Physics</span> <span class="tag tag-open">Classical</span> The last unsolved problem</div>
+        <p>Kolmogorov's 1941 theory predicts the energy cascade in turbulent flow, yet fully rigorous derivation from Navier-Stokes remains elusive. Turbulence appears in our forest simulation (canopy wind), weather data (MUK convergence zone), and &mdash; by analogy &mdash; in context degradation patterns in long LLM conversations. The -5/3 power law is everywhere.</p>
+      </a>
     </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Problem Index</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Problem</th>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>Connection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P1</td>
+          <td><a href="page.html?doc=01-cot-faithfulness">CoT Faithfulness</a></td>
+          <td>AI Reasoning</td>
+          <td class="status-active">Active</td>
+          <td>Multi-agent verification, trust system</td>
+        </tr>
+        <tr>
+          <td>P2</td>
+          <td><a href="page.html?doc=02-thinking-divergence">Thinking Token Divergence</a></td>
+          <td>AI Reasoning</td>
+          <td class="status-active">Active</td>
+          <td>Extended thinking audit, GSD executor</td>
+        </tr>
+        <tr>
+          <td>P3</td>
+          <td><a href="page.html?doc=03-cot-monitoring">CoT Monitoring at Scale</a></td>
+          <td>AI/Testing</td>
+          <td class="status-active">Active</td>
+          <td>Convoy model verification pipeline</td>
+        </tr>
+        <tr>
+          <td>P4</td>
+          <td><a href="page.html?doc=04-distributed-intelligence">Distributed Intelligence</a></td>
+          <td>Multi-Agent</td>
+          <td class="status-active">Active</td>
+          <td>Gastown convoy, GUPP federation</td>
+        </tr>
+        <tr>
+          <td>P5</td>
+          <td><a href="page.html?doc=05-nondeterministic-testing">Nondeterministic Testing</a></td>
+          <td>Testing</td>
+          <td class="status-active">Active</td>
+          <td>21,298 tests, metamorphic testing</td>
+        </tr>
+        <tr>
+          <td>P6</td>
+          <td><a href="page.html?doc=06-confidence-routing">Confidence Routing</a></td>
+          <td>AI/Trust</td>
+          <td class="status-partial">Partial</td>
+          <td>Trust system, FoxFiber routing</td>
+        </tr>
+        <tr>
+          <td>P7</td>
+          <td><a href="page.html?doc=07-collatz">Collatz Conjecture</a></td>
+          <td>Number Theory</td>
+          <td class="status-open">Open</td>
+          <td>Convergence analysis, stopping time</td>
+        </tr>
+        <tr>
+          <td>P8</td>
+          <td><a href="page.html?doc=08-chromatic-number">Chromatic Number</a></td>
+          <td>Combinatorics</td>
+          <td class="status-open">Open</td>
+          <td>Graph coloring, resource allocation</td>
+        </tr>
+        <tr>
+          <td>P9</td>
+          <td><a href="page.html?doc=09-komlos-conjecture">Komlos Conjecture</a></td>
+          <td>Discrepancy Theory</td>
+          <td class="status-open">Open</td>
+          <td>Load balancing, agent assignment</td>
+        </tr>
+        <tr>
+          <td>P10</td>
+          <td><a href="page.html?doc=10-ai-math-discovery">AI Math Discovery</a></td>
+          <td>AI/Math</td>
+          <td class="status-partial">Partial</td>
+          <td>Muse council, Rosetta clusters</td>
+        </tr>
+        <tr>
+          <td>P11</td>
+          <td><a href="page.html?doc=11-kuramoto-sync">Kuramoto Synchronization</a></td>
+          <td>Complex Systems</td>
+          <td class="status-active">Active</td>
+          <td>HEL corridor, cooperative model</td>
+        </tr>
+        <tr>
+          <td>P12</td>
+          <td><a href="page.html?doc=12-machine-unlearning">Machine Unlearning</a></td>
+          <td>AI/Privacy</td>
+          <td class="status-partial">Partial</td>
+          <td>GUPP/DACP, consent enforcement</td>
+        </tr>
+        <tr>
+          <td>P13</td>
+          <td><a href="page.html?doc=13-riemann-hypothesis">Riemann Hypothesis</a></td>
+          <td>Number Theory</td>
+          <td class="status-open">Open</td>
+          <td>Prime distribution, cryptographic security, agent identity</td>
+        </tr>
+        <tr>
+          <td>P14</td>
+          <td><a href="page.html?doc=14-p-vs-np">P vs NP</a></td>
+          <td>Complexity Theory</td>
+          <td class="status-open">Open</td>
+          <td>Witness-observer pattern, verification model</td>
+        </tr>
+        <tr>
+          <td>P15</td>
+          <td><a href="page.html?doc=15-navier-stokes">Navier-Stokes</a></td>
+          <td>Mathematical Physics</td>
+          <td class="status-open">Open</td>
+          <td>Forest sim, weather pipeline, MUK convergence</td>
+        </tr>
+        <tr>
+          <td>P16</td>
+          <td><a href="page.html?doc=16-twin-primes">Twin Prime Conjecture</a></td>
+          <td>Number Theory</td>
+          <td class="status-open">Open</td>
+          <td>GPU pipeline, Erd&#337;s verification, sieve methods</td>
+        </tr>
+        <tr>
+          <td>P17</td>
+          <td><a href="page.html?doc=17-quantum-gravity">Quantum Gravity</a></td>
+          <td>Theoretical Physics</td>
+          <td class="status-open">Open</td>
+          <td>Cislunar navigation, relativistic corrections</td>
+        </tr>
+        <tr>
+          <td>P18</td>
+          <td><a href="page.html?doc=18-dark-energy">Dark Energy</a></td>
+          <td>Physics/Cosmology</td>
+          <td class="status-open">Open</td>
+          <td>Cosmological constant, foundational physics</td>
+        </tr>
+        <tr>
+          <td>P19</td>
+          <td><a href="page.html?doc=19-turbulence">Turbulence</a></td>
+          <td>Physics/Mathematics</td>
+          <td class="status-open">Open</td>
+          <td>Context degradation, forest sim, weather models</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
 
     <div class="card">
       <h3><a href="problems/confidence-routing.html" style="color:#fff;">Confidence-Aware Routing</a></h3>

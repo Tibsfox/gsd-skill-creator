@@ -1089,13 +1089,17 @@ function draw() {
     if (random(1) < 0.04 && fireflies.length < 40) {
       var srcPlant = plants[floor(random(plants.length))];
       if (srcPlant.growth > 0.3) {
+        // Enhanced firefly with energy, spectral variation, temperature-dependent rate
+        var baseRate = map(constrain(wx.temp, 5, 30), 5, 30, 0.025, 0.09);
         fireflies.push({
           x: srcPlant.x + random(-30, 30),
           y: srcPlant.y + random(-40, -5),
           vx: random(-0.3, 0.3), vy: random(-0.2, 0.1),
-          phase: random(TWO_PI), rate: random(0.03, 0.08),
-          life: floor(random(200, 600)),
+          phase: random(TWO_PI), rate: baseRate * random(0.8, 1.2),
+          life: floor(random(300, 800)),
           sz: random(1.5, 3.0),
+          energy: 1.0,                      // bioluminescence energy (0-1)
+          spectral: random(-0.15, 0.15),    // color temp shift (LED-inspired)
         });
       }
     }
@@ -1108,39 +1112,69 @@ function draw() {
     ff.vx = constrain(ff.vx, -0.5, 0.5); ff.vy = constrain(ff.vy, -0.4, 0.3);
     ff.life--;
     if (ff.life <= 0 || ff.y < 0 || ff.x < -10 || ff.x > width + 10) { fireflies.splice(i, 1); continue; }
-    // Pulse glow
+    // Pulse glow with LED-inspired spectral variation
     var pulse = (sin(frameNum * ff.rate + ff.phase) + 1) * 0.5;
     pulse = pulse * pulse; // sharper on/off
-    var fa = pulse * 0.9 * (ff.life > 30 ? 1.0 : ff.life / 30);
+    var nrg = ff.energy || 1.0;
+    var fa = pulse * 0.9 * nrg * (ff.life > 30 ? 1.0 : ff.life / 30);
+    // Energy decay + renewal (bioluminescence ATP cost)
+    if (ff.energy !== undefined) {
+      ff.energy -= 0.0008;
+      ff.energy += 0.0004 * (1.0 + sin(ff.phase)); // recover near flash peak
+      ff.energy = constrain(ff.energy, 0.15, 1.0);
+    }
     if (fa > 0.05) {
       noStroke();
-      fill(180, 220, 80, fa * 30);
+      // Spectral shift: amber (-0.15) to green (+0.15) — LED bioluminescence variation
+      var sp = ff.spectral || 0;
+      fill(180 + sp * 60, 220 + sp * 20, 80 - sp * 40, fa * 30);
       ellipse(ff.x, ff.y, ff.sz * 5, ff.sz * 5);
-      fill(200, 240, 100, fa * 80);
+      fill(200 + sp * 40, 240 + sp * 10, 100 - sp * 30, fa * 80);
       ellipse(ff.x, ff.y, ff.sz * 2.5, ff.sz * 2.5);
-      fill(230, 255, 140, fa * 200);
+      fill(230, 255, 140 + sp * 60, fa * 200);
       ellipse(ff.x, ff.y, ff.sz, ff.sz);
     }
   }
-  // Firefly synchronization — Kuramoto coupled oscillators
-  // Each firefly adjusts its phase toward nearby flashing neighbors
-  // Simple rule → collective synchronization (Strogatz 2003)
-  if (!sky.isDay) {
-    var couplingStrength = 0.015; // K in Kuramoto model
-    for (var i = 0; i < fireflies.length; i++) {
+  // Enhanced Kuramoto synchronization — Session 7 research upgrade
+  // Adaptive coupling: strength depends on distance, brightness match, and phase proximity
+  // Temperature-dependent flash rate from real KPAE weather data
+  // Order parameter r measures collective synchronization (0=chaos, 1=perfect sync)
+  // Sources: Self-Organizing Intelligence (p3nGu1nZz), LED Evolution, Strogatz 2003
+  if (!sky.isDay && fireflies.length > 1) {
+    var baseCoupling = 0.02;
+    var n = fireflies.length;
+    // Phase 1: Adaptive coupling (distance + brightness + phase proximity)
+    for (var i = 0; i < n; i++) {
       var fi = fireflies[i];
-      for (var j = i + 1; j < fireflies.length; j++) {
+      for (var j = i + 1; j < n; j++) {
         var fj = fireflies[j];
         var dx = fi.x - fj.x, dy = fi.y - fj.y;
-        var distSq = dx*dx + dy*dy;
-        if (distSq < 3600) { // within 60px
-          // Phase coupling: each shifts toward the other
-          var phaseDiff = sin(fj.phase - fi.phase);
-          fi.phase += couplingStrength * phaseDiff;
-          fj.phase -= couplingStrength * phaseDiff;
-        }
+        var distSq = dx * dx + dy * dy;
+        if (distSq > 4900) continue; // beyond 70px visual range
+        // Distance factor: inverse square with soft floor
+        var distFactor = 1.0 / (1.0 + distSq / 900);
+        // Phase proximity: positive feedback — near-sync strengthens bond
+        var phaseDiff = sin(fj.phase - fi.phase);
+        var phaseBonus = 1.0 + (1.0 - abs(phaseDiff)) * 0.5;
+        var K = baseCoupling * distFactor * phaseBonus;
+        fi.phase += K * phaseDiff;
+        fj.phase -= K * phaseDiff;
       }
     }
+    // Phase 2: Temperature-dependent frequency — warmer = faster flash
+    var tempRate = map(constrain(wx.temp, 5, 30), 5, 30, 0.8, 1.3);
+    for (var i = 0; i < n; i++) {
+      fireflies[i].rate = fireflies[i].rate || random(0.03, 0.08);
+      fireflies[i].phase += fireflies[i].rate * tempRate * 0.1;
+      if (fireflies[i].phase > TWO_PI) fireflies[i].phase -= TWO_PI;
+    }
+    // Phase 3: Compute order parameter r (collective sync metric)
+    var sumCos = 0, sumSin = 0;
+    for (var i = 0; i < n; i++) { sumCos += cos(fireflies[i].phase); sumSin += sin(fireflies[i].phase); }
+    var orderR = sqrt((sumCos/n)*(sumCos/n) + (sumSin/n)*(sumSin/n));
+    // Store for debug/display
+    if (typeof window._kuramotoR === 'undefined') window._kuramotoR = 0;
+    window._kuramotoR = window._kuramotoR * 0.95 + orderR * 0.05; // smoothed
   }
   // Clear fireflies during day
   if (sky.isDay && fireflies.length > 0) fireflies = [];

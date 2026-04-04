@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Lunar Flyby Observation Guide</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+  --lunar-silver: #d4d8e0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === COUNTDOWN === */
+.countdown-section {
+  background: var(--void); padding: 2rem 2rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.countdown-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.2em; margin-bottom:0.5rem; }
+.countdown-row {
+  display:flex; justify-content:center; align-items:baseline; gap:0.3rem;
+  font-size:3.5rem; font-weight:300; color:#fff;
+  text-shadow: 0 0 30px rgba(196,163,90,0.15);
+}
+.countdown-row .sep { color: var(--dim); font-size:2.5rem; }
+.countdown-sub { font-size:0.8rem; color:var(--dim); margin-top:0.5rem; }
+.countdown-sub span { margin: 0 0.8rem; }
+
+/* === CONTENT === */
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+.section-header {
+  font-family: Georgia, serif;
+  font-size: 1.3rem; font-weight: 400; color: #fff;
+  text-align: center; padding: 2rem 2rem 0.5rem;
+  letter-spacing: 0.04em;
+}
+.section-subtitle {
+  text-align: center; font-size: 0.8rem; color: var(--dim);
+  margin-bottom: 1.5rem; font-style:italic; font-family:Georgia,serif;
+}
+
+.event-card {
+  background: var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem 1.5rem; margin-bottom:1rem;
+}
+.event-card h3 { font-size:0.95rem; color:#fff; font-family:Georgia,serif; margin-bottom:0.3rem; }
+.event-card .met { font-size:0.75rem; color:var(--artemis-gold); margin-bottom:0.4rem; }
+.event-card p { font-size:0.82rem; color:var(--dim); font-family:system-ui,sans-serif; line-height:1.5; }
+.event-card.highlight { border-color: rgba(252,61,33,0.3); background: linear-gradient(135deg, #080c16 0%, #0a1428 100%); }
+
+.data-table { width:100%; border-collapse:collapse; margin:1rem 0 2rem; font-size:0.82rem; }
+.data-table th { text-align:left; padding:0.5rem 0.8rem; color:var(--artemis-gold); border-bottom:1px solid var(--border); font-weight:400; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; }
+.data-table td { padding:0.5rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+.data-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+.note-box {
+  background: rgba(196,163,90,0.06); border:1px solid rgba(196,163,90,0.15); border-radius:4px;
+  padding:1rem 1.2rem; margin:1.5rem 0; font-size:0.82rem;
+  font-family:system-ui,sans-serif;
+}
+.note-box strong { color:var(--artemis-gold); }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border);
+}
+
+@media(max-width:640px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .countdown-row { font-size:2.5rem; }
+  main { padding:1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="mission-header">
+  <h1>Lunar Flyby</h1>
+  <div class="subtitle">Closest approach to the Moon &mdash; Flight Day 7</div>
+  <div class="catalog-id">Artemis II &middot; Mission 1.190 &middot; Free-Return Trajectory</div>
+</div>
+
+<div class="nav-links">
+  <a href="index.html">Mission Home</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <a href="papers.html">Papers</a> &middot;
+  <a href="math.html">Mathematics</a> &middot;
+  <a href="../../LIVE/index.html">LIVE</a> &middot;
+  <a href="../../LIVE/space-weather.html">Space Weather</a>
+</div>
+
+<div class="countdown-section">
+  <div class="countdown-label">Time to Closest Lunar Approach</div>
+  <div class="countdown-row" id="countdown">
+    <span id="cd-d">--</span><span class="sep">d</span>
+    <span id="cd-h">--</span><span class="sep">:</span>
+    <span id="cd-m">--</span><span class="sep">:</span>
+    <span id="cd-s">--</span>
+  </div>
+  <div class="countdown-sub">
+    <span>Approach: <strong>~Mon Apr 7, 2026 ~12:30 EDT</strong></span>
+    <span>Altitude: <strong>~4,000 miles (~6,400 km)</strong></span>
+  </div>
+</div>
+
+<main>
+
+<div class="section-header">Flyby Overview</div>
+<div class="section-subtitle">The farthest humans have traveled from Earth since Apollo 17 (December 1972)</div>
+
+<div class="event-card highlight">
+  <h3>What Happens at Closest Approach</h3>
+  <div class="met">Flight Day 7 &middot; ~MET +5d 14h &middot; April 7, 2026</div>
+  <p>Orion passes approximately 4,000 miles (~6,400 km) above the lunar far side on a free-return trajectory. No engine burn is required &mdash; the Moon's gravity bends the spacecraft's path and sends it back toward Earth. This is the moment the crew will be the farthest any humans have been from Earth since Gene Cernan, Harrison Schmitt, and Ron Evans in December 1972. The far side pass means <strong>Loss of Signal (LOS)</strong> for approximately 40 minutes as the Moon blocks direct Earth communication.</p>
+</div>
+
+<div class="event-card">
+  <h3>Free-Return Trajectory</h3>
+  <p>Unlike Apollo missions that entered lunar orbit, Artemis II uses a free-return trajectory &mdash; a figure-eight path around the Moon that returns to Earth without requiring additional propulsion. If all systems fail, the spacecraft still comes home. This is the same trajectory used by Apollo 8 (first crewed lunar flyby, December 1968) and Apollo 13 (emergency free return, April 1970). The trajectory was computed by the same group at JSC that computed Apollo trajectories, using modern tools but the same orbital mechanics.</p>
+</div>
+
+<div class="section-header">Flyby Timeline</div>
+<div class="section-subtitle">Key events during the approach, closest point, and departure</div>
+
+<table class="data-table">
+<thead>
+<tr><th>Event</th><th>Approx. Time (EDT)</th><th>Distance</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Approach phase begins</td><td>Apr 7, ~06:00</td><td>~30,000 mi</td><td>Moon's gravitational influence dominates</td></tr>
+<tr><td>Lunar far side entry</td><td>Apr 7, ~11:45</td><td>~10,000 mi</td><td>Loss of Signal (LOS) begins</td></tr>
+<tr><td style="color:#fff;font-weight:600;">Closest approach</td><td style="color:var(--artemis-red);">Apr 7, ~12:30</td><td style="color:var(--artemis-red);">~4,000 mi</td><td>Farthest from Earth since Apollo 17</td></tr>
+<tr><td>Far side exit</td><td>Apr 7, ~13:15</td><td>~10,000 mi</td><td>Acquisition of Signal (AOS) &mdash; comm restored</td></tr>
+<tr><td>Departure phase</td><td>Apr 7, ~18:00</td><td>~30,000 mi</td><td>Accelerating on return trajectory</td></tr>
+<tr><td>Return coast begins</td><td>Apr 8, ~00:00</td><td>~80,000 mi</td><td>Moon receding, Earth growing</td></tr>
+</tbody>
+</table>
+
+<div class="note-box">
+  <strong>Note on timing:</strong> All times are approximate estimates based on the planned trajectory. NASA has not published exact flyby timing. Actual closest approach may differ by hours. Times will be updated as NASA releases FD5-7 briefings. The live stream at <a href="https://youtube.com/watch?v=m3kR2KK8TEs">NASA TV</a> provides continuous mission coverage.
+</div>
+
+<div class="section-header">What to Watch For</div>
+<div class="section-subtitle">Science, engineering, and historical significance</div>
+
+<div class="event-card">
+  <h3>Far Side Photography</h3>
+  <p>The crew will photograph the lunar far side through Orion's windows &mdash; the first human eyes to see it since Apollo 17's command module pilot Ron Evans in December 1972. Key targets: Tsiolkovsky crater (dark-floored, visible from orbit), South Pole-Aitken Basin (the largest known impact structure in the solar system), and the Von K&aacute;rm&aacute;n crater where China's Chang'e 4 lander sits. These photographs will be compared against Lunar Reconnaissance Orbiter data.</p>
+</div>
+
+<div class="event-card">
+  <h3>Deep Space Communication</h3>
+  <p>During the ~40-minute Loss of Signal behind the Moon, the crew will be completely out of contact with Earth. The Deep Space Network (DSN) dishes at Goldstone (California), Madrid (Spain), and Canberra (Australia) will track Orion's signal before and after the far side pass. <a href="https://eyes.nasa.gov/dsn/dsn.html">DSN Now</a> shows real-time tracking.</p>
+</div>
+
+<div class="event-card">
+  <h3>Radiation Environment</h3>
+  <p>At closest approach, the crew is fully exposed to the deep space radiation environment with no magnetosphere or lunar surface shielding. The Hybrid Electronic Radiation Assessor (HERA) aboard Orion continuously monitors radiation levels. Data from the flyby will inform Artemis III surface EVA planning and future Gateway station shielding requirements. GCR (Galactic Cosmic Rays) are the primary source; any solar particle events during the flyby would be a significant test of Orion's storm shelter.</p>
+</div>
+
+<div class="event-card">
+  <h3>Navigation and Trajectory</h3>
+  <p>The free-return trajectory requires no engine burns at the Moon &mdash; but precise navigation is critical. Star trackers, the optical navigation camera, and ground-based tracking confirm Orion's path. The gravity assist effect accelerates Orion for the return trip. Any trajectory correction maneuvers (TCMs) would happen before or after the flyby, not during it. The Optical Communications (O2O) laser link will be tested during the flyby approach.</p>
+</div>
+
+<div class="event-card">
+  <h3>Thermal Environment</h3>
+  <p>The thermal environment shifts dramatically during the flyby. In the Moon's shadow (if the trajectory passes through it), temperatures drop rapidly. The crew has already demonstrated thermal problem-solving with the Window 1 black t-shirt improvisation and AZ9 panel deployment on FD4. The flyby's thermal profile will validate Orion's heat rejection system design for the Artemis III lunar orbit mission.</p>
+</div>
+
+<div class="section-header">Historical Context</div>
+<div class="section-subtitle">Every crewed lunar flyby in history</div>
+
+<table class="data-table">
+<thead>
+<tr><th>Mission</th><th>Date</th><th>Closest Approach</th><th>Crew</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td style="color:var(--artemis-gold);">Apollo 8</td><td>Dec 24, 1968</td><td>69 mi (111 km)</td><td>Borman, Lovell, Anders</td><td>First humans to orbit the Moon. "Earthrise" photograph.</td></tr>
+<tr><td>Apollo 10</td><td>May 22, 1969</td><td>47,400 ft (14.4 km)</td><td>Stafford, Young, Cernan</td><td>Lunar module descended to 47,400 ft above surface.</td></tr>
+<tr><td>Apollo 11</td><td>Jul 20, 1969</td><td>Surface</td><td>Armstrong, Aldrin, Collins</td><td>First Moon landing. Collins orbited at 69 mi.</td></tr>
+<tr><td>Apollo 12</td><td>Nov 19, 1969</td><td>Surface</td><td>Conrad, Bean, Gordon</td><td>Precision landing near Surveyor 3.</td></tr>
+<tr><td style="color:var(--artemis-red);">Apollo 13</td><td>Apr 15, 1970</td><td>158 mi (254 km)</td><td>Lovell, Swigert, Haise</td><td>Free-return trajectory after oxygen tank explosion.</td></tr>
+<tr><td>Apollo 14</td><td>Feb 5, 1971</td><td>Surface</td><td>Shepard, Mitchell, Roosa</td><td>Fra Mauro landing. Shepard's golf shot.</td></tr>
+<tr><td>Apollo 15</td><td>Jul 30, 1971</td><td>Surface</td><td>Scott, Irwin, Worden</td><td>First lunar rover. Hadley Rille.</td></tr>
+<tr><td>Apollo 16</td><td>Apr 21, 1972</td><td>Surface</td><td>Young, Duke, Mattingly</td><td>Descartes Highlands. Highest lunar elevation explored.</td></tr>
+<tr><td>Apollo 17</td><td>Dec 11, 1972</td><td>Surface</td><td>Cernan, Schmitt, Evans</td><td>Last humans on the Moon. 53+ years ago.</td></tr>
+<tr><td style="color:#fff;font-weight:600;">Artemis II</td><td style="color:var(--artemis-red);">Apr 7, 2026</td><td style="color:var(--artemis-red);">~4,000 mi (6,400 km)</td><td>Glover, Wiseman, Hansen, Koch</td><td>First crewed lunar flyby in 53+ years. Free-return.</td></tr>
+</tbody>
+</table>
+
+<div class="note-box">
+  <strong>53 years, 3 months, 27 days</strong> &mdash; the gap between Apollo 17's lunar flyby (December 11, 1972) and Artemis II's (April 7, 2026). This is the longest gap in human spaceflight history between visits to the same celestial body. The four Artemis II crew members &mdash; Reid Wiseman, Victor Glover, Christina Koch, and Jeremy Hansen &mdash; are the first humans to see the Moon up close since Ron Evans looked out the window of the Apollo 17 command module America.
+</div>
+
+<div class="section-header">Observation Cadence</div>
+<div class="section-subtitle">Data collection plan for the flyby window</div>
+
+<div class="event-card">
+  <h3>Peak Cadence: April 7, 06:00&ndash;18:00 EDT</h3>
+  <p>During the 12-hour flyby window, sweeps increase to <strong>every 15 minutes</strong> (4x normal cadence). Each sweep captures: space weather (Kp, Bz, solar wind), DSN tracking status, live stream state, and any NASA briefing data. This produces approximately 48 sub-version data points covering the entire approach, closest point, and departure.</p>
+</div>
+
+<div class="event-card">
+  <h3>LOS Window: Special Handling</h3>
+  <p>During the ~40-minute Loss of Signal behind the Moon, DSN will show no active link. This is expected and nominal. The sweep daemon will note "LOS — far side pass" rather than flagging a communication failure. AOS (Acquisition of Signal) will be a key milestone &mdash; confirmation that Orion has safely rounded the Moon.</p>
+</div>
+
+<div class="event-card">
+  <h3>Post-Flyby Analysis</h3>
+  <p>After the flyby window closes, a synthesis sweep will aggregate all 48+ data points into a flyby summary: peak distance, LOS/AOS timing, radiation environment, thermal performance, and communication quality. This summary will be added to the mission timeline and linked from the LIVE page.</p>
+</div>
+
+</main>
+
+<footer>
+  <a href="index.html">Artemis II</a> &middot;
+  <a href="../../LIVE/index.html">LIVE</a> &middot;
+  <a href="../../index.html">Tibsfox Research</a><br>
+  The space between the Moon and the Earth &middot; Updated <span id="update-ts">--</span>
+</footer>
+
+<script>
+// Countdown to approximate closest approach: April 7, 2026 16:30 UTC (12:30 EDT)
+var targetUTC = new Date('2026-04-07T16:30:00Z').getTime();
+function updateCountdown() {
+  var now = Date.now();
+  var diff = targetUTC - now;
+  if (diff <= 0) {
+    document.getElementById('cd-d').textContent = '00';
+    document.getElementById('cd-h').textContent = '00';
+    document.getElementById('cd-m').textContent = '00';
+    document.getElementById('cd-s').textContent = '00';
+    document.querySelector('.countdown-label').textContent = 'Closest Approach Reached';
+    return;
+  }
+  var d = Math.floor(diff / 86400000);
+  var h = Math.floor((diff % 86400000) / 3600000);
+  var m = Math.floor((diff % 3600000) / 60000);
+  var s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z';
+</script>
+</body>
+</html>

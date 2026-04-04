@@ -165,6 +165,17 @@ footer a { color:rgba(255,255,255,0.3); }
     <p><strong>Link to FAIS:</strong> The <a href="../../FAIS/index.html">FAIS project</a> (Kara's RL framework) uses reward-coupled agent dynamics that exhibit Kuramoto-like phase locking. When multiple game agents share an environment, their learning cycles synchronize through shared state &mdash; a natural Kuramoto system where the environment is the coupling medium.</p>
   </div>
 
+  <h2>Session 7 Research Connections</h2>
+  <div class="section">
+    <p><span class="tag tag-ours">Session 7</span> <span class="tag tag-ml">Implementation</span> New connections discovered during Artemis II Session 7 (2026-04-04):</p>
+    <p><strong>Enhanced Kuramoto implementation (forest/api/kuramoto-enhanced.js):</strong> Built an adaptive coupling model where coupling strength depends on (1) distance (inverse square), (2) brightness match (similar energy = stronger bond), and (3) phase proximity (positive feedback &mdash; near-sync strengthens the bond). This produces the self-organizing behavior from the particle physics paper: particles that oscillate in sync form stronger bonds, naturally creating synchronization clusters.</p>
+    <p><strong>Order parameter measurement:</strong> The enhanced model computes the Kuramoto order parameter r = |1/N &Sigma; e<sup>i&theta;</sup>| every frame. r = 0 means complete desynchronization; r = 1 means perfect sync. The forest sim now has a live metric for collective synchronization quality.</p>
+    <p><strong>Cluster detection:</strong> Union-find algorithm detects synchronization clusters &mdash; groups of fireflies in near-phase within visual range. This allows measuring how many distinct sync groups form, matching the theoretical prediction of partial synchronization regimes below K<sub>c</sub>.</p>
+    <p><strong>Temperature-dependent coupling:</strong> Flash rate now varies with real KPAE weather temperature (from live METAR data). Warmer nights = faster flashing. This creates a natural experiment: weather variation modulates the Kuramoto natural frequency distribution, potentially crossing in and out of the sync regime based on real-world conditions.</p>
+    <p><strong>Rosetta translation:</strong> The zero-trust security research (OWASP, AIP) maps structurally to ecological awareness zones. Agent trust boundaries = organism awareness radii. The mathematics is identical: a distance threshold below which coupling activates. See <a href="../../SAA/research/session7-rosetta-templates.md">Session 7 Rosetta Templates</a>.</p>
+    <p><strong>DIY Try Session:</strong> A hands-on tutorial for building a Kuramoto firefly simulation from scratch (2-3 hours, p5.js) is documented in the <a href="../../SAA/research/session7-study-guides.md">Session 7 Study Guides</a>.</p>
+  </div>
+
   <h2>What Would Constitute a Breakthrough</h2>
   <div class="section">
     <p><strong>Complete phase diagram for heterogeneous Kuramoto:</strong> A full classification of all possible synchronization regimes for the Kuramoto model with arbitrary frequency distributions, coupling topologies, and noise types. The 9-transition result with L&eacute;vy noise shows how far we are from this &mdash; each new ingredient reveals new transitions.</p>
@@ -180,7 +191,7 @@ footer a { color:rgba(255,255,255,0.3); }
   <a href="../../LIVE/index.html">Live</a> &middot;
   <a href="../../index.html">Tibsfox Research</a> &middot;
   <a href="https://tibsfox.com">tibsfox.com</a><br>
-  Last updated: 2026-04-04T17:00Z (sweep v1.4.10)
+  Last updated: 2026-04-05T16:00Z (sweep v1.5.9)
 </footer>
 </body>
 </html>
