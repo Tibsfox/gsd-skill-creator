@@ -420,9 +420,19 @@ header {
   color: white;
   padding: 2rem;
 }
+header > *:not(nav):not(.guide-hero-inner) {
+  max-width: var(--content-width, 52rem);
+  margin-left: auto;
+  margin-right: auto;
+}
 header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: 0.02em; }
 header .subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.3rem; font-style: italic; }
-header nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+header nav {
+  margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;
+  max-width: var(--content-width, 52rem);
+  margin-left: auto;
+  margin-right: auto;
+}
 header nav a {
   color: white;
   background: rgba(255,255,255,0.12);
@@ -437,9 +447,10 @@ header nav a.active { background: rgba(255,255,255,0.3); font-weight: 600; }
 
 /* --- Main content --- */
 main {
-  max-width: var(--content-width, 52rem);
+  max-width: var(--content-width, 60rem);
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
+  width: 100%;
 }
 
 /* --- PDF container --- */
