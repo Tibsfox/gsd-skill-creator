@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 307&deg; &mdash; Screaming Trees (return) &mdash; E=7 &mdash; Grunge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #4A148C, #6A1B9A); border: 2px solid #CE93D8; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .milestone-banner strong { color: #F3E5F5; }
+    .discography-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .discography-list li { padding: 0.6rem 0.8rem; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; display: flex; gap: 1rem; align-items: baseline; }
+    .discography-list li:last-child { border-bottom: none; }
+    .disc-year { font-weight: 700; color: #1A237E; min-width: 2.5rem; font-family: system-ui, sans-serif; }
+    .disc-label-tag { font-size: 0.72rem; padding: 0.1rem 0.35rem; border-radius: 3px; background: #E8EAF6; color: #283593; font-family: system-ui, sans-serif; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>307 &mdash; Screaming Trees return (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">307&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Screaming Trees</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Grunge</span>
+          <span class="label-badge">SST &rarr; Epic</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>RETURN &mdash; ELLENSBURG IN THE GRUNGE CLUSTER.</strong> Screaming Trees return at degree 307: the geographic outlier, the Ellensburg band, the SST-to-Epic trajectory. Mark Lanegan's voice. "Nearly Lost You." Barrett Martin as the bridge between the Screaming Trees (307) and Mad Season (305). Paired with Salmon Run Full River (SPS 307, E=8).
+        </div>
+
+        <h2>Ellensburg &mdash; 100 Miles Over the Cascades</h2>
+        <p>The Screaming Trees are the engine's most geographically displaced major band. Ellensburg, Washington: population 20,000, seat of Central Washington University, high desert in the Kittitas Valley, east of the Cascades on Interstate 90. The drive crosses Snoqualmie Pass at 3,022 feet &mdash; the mountains that divide the wet west from the dry east, the Puget Sound climate from the Columbia Basin. Ellensburg is sagebrush and basalt, hot summers and cold winters, a landscape nothing like the rain-soaked neighborhoods where most of the engine's Seattle bands formed.</p>
+        <p>A Seattle band making grunge was responding to an immediate cultural environment. An Ellensburg band making music with the same weight and ambition chose to reach across the Cascades. The Screaming Trees chose to be in conversation with the Seattle scene from the outside.</p>
+
+        <blockquote>"He's a young man / And he's nearly lost you." &mdash; "Nearly Lost You," 1992. Singles soundtrack. #1 Mainstream Rock.</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Mark Lanegan (1964&ndash;2022)</h2>
+        <p>Mark Lanegan was born November 25, 1964, in Ellensburg, Washington. He died February 22, 2022, in Killarney, Ireland, at age 57. His baritone voice &mdash; deep, worn, emotionally direct &mdash; is the defining instrument of the Screaming Trees and one of the most distinctive in Pacific Northwest music history. His lineage was not metal or punk but the blues, Johnny Cash, Roy Orbison, Neil Young. He brought a different American tradition into the Seattle grunge moment.</p>
+        <p>After the Screaming Trees, Lanegan built a solo catalog of extraordinary depth (beginning with <em>The Winding Sheet</em>, 1990, Sub Pop), collaborated with Queens of the Stone Age, Greg Dulli (The Gutter Twins), Isobel Campbell, and many others. He sang for Layne Staley at the 2011 Mad Season reunion shows &mdash; his voice was one of the few that could inhabit Staley's material without imitation. He wrote two memoirs: <em>Sing Backwards and Weep</em> (2020) and <em>Devil in a Coma</em> (2021).</p>
+
+        <hr class="section-divider">
+
+        <h2>"Nearly Lost You" and <em>Sweet Oblivion</em></h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Sweet Oblivion (1992)</h4>
+            <span class="level milestone">Epic Records</span>
+            <p>Produced by Don Fleming. The breakthrough album. Major-label resources applied to the Screaming Trees' core aesthetic. Lanegan at maximum expressiveness. The album that made the band known outside the underground.</p>
+          </div>
+          <div class="theory-card">
+            <h4>"Nearly Lost You"</h4>
+            <span class="level milestone">#1 Mainstream Rock</span>
+            <p>On the <em>Singles</em> (1992) soundtrack alongside Soundgarden, Pearl Jam, Alice in Chains, Mudhoney. Billboard Hot 100 #34. Mainstream Rock Tracks #1. Lee Conner's climbing riff + Lanegan's voice at full cry.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Dust (1996)</h4>
+            <span class="level advanced">Epic Records</span>
+            <p>More atmospheric, more psychedelic. Jack Endino in the credits. The album the band wanted to make after Sweet Oblivion's success. "Gospel Plow" and "Sworn and Broken": Screaming Trees at full maturity.</p>
+          </div>
+          <div class="theory-card">
+            <h4>SST Years (1987&ndash;1989)</h4>
+            <span class="level advanced">Underground</span>
+            <p>Even If and Especially When, Invisible Lantern, Buzz Factory. SST = Black Flag's label, Hüsker Dü, Dinosaur Jr., Sonic Youth. The national underground context before the grunge moment.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Full Discography</h2>
+        <ul class="discography-list">
+          <li><span class="disc-year">1985</span><span>Other Worlds <span class="disc-label-tag">Velvetone</span> &mdash; Debut. Teenagers in Ellensburg. Raw and experimental.</span></li>
+          <li><span class="disc-year">1987</span><span>Even If and Especially When <span class="disc-label-tag">SST</span> &mdash; National underground enters. SST places Screaming Trees alongside Black Flag, Dinosaur Jr., Sonic Youth.</span></li>
+          <li><span class="disc-year">1988</span><span>Invisible Lantern <span class="disc-label-tag">SST</span> &mdash; Growing confidence. Lanegan's voice at full emergence.</span></li>
+          <li><span class="disc-year">1989</span><span>Buzz Factory <span class="disc-label-tag">SST</span> &mdash; Final SST album. Maximum underground intensity before Epic signing.</span></li>
+          <li><span class="disc-year">1992</span><span>Sweet Oblivion <span class="disc-label-tag">Epic</span> &mdash; The breakthrough. "Nearly Lost You." Singles soundtrack. Commercial peak.</span></li>
+          <li><span class="disc-year">1996</span><span>Dust <span class="disc-label-tag">Epic</span> &mdash; The mature statement. "Gospel Plow." Jack Endino. Atmospheric and deep.</span></li>
+          <li><span class="disc-year">2011</span><span>Last Words <span class="disc-label-tag">Vapor</span> &mdash; Final sessions, 2000 recorded, 2011 released. The permanent document.</span></li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2>Barrett Martin &mdash; The Human Bridge</h2>
+        <p>Barrett Martin plays in both the Screaming Trees (degrees 305-307 context) and Mad Season (degrees 224 and 305). This makes him the human infrastructure connecting the two bands in the engine's current zone. The bridge is concrete: the same drummer, two bands, separated by two degrees (305 Mad Season, 307 Screaming Trees). Martin's jazz-adjacent approach to rock drumming &mdash; rhythms that breathe, dynamic control wide enough to serve both Lanegan's blues-rooted approach and Staley's grunge weight &mdash; is identifiable across both bands.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">305</span> Mad Season (grunge) &mdash; Barrett Martin drums in both bands. Two degrees apart. The bridge.</li>
+          <li><span class="ref-degree">224</span> Mad Season first appearance &mdash; Barrett Martin introduced as Mad Season drummer. Screaming Trees connection noted there.</li>
+          <li><span class="ref-degree">308</span> Melvins &mdash; Aberdeen enters. The degree after Screaming Trees. The Ellensburg-Aberdeen parallel: both bands from outside Seattle that were central to the scene's formation.</li>
+          <li><span class="ref-degree">SPS 307</span> Salmon Run Full River &mdash; E=8. The aggregate sound of the full spawning run. Both E=7 music and E=8 ecology: the run overwhelms the music.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">307 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1984&ndash;2000</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Ellensburg, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Labels</span><span class="stat-value">SST &rarr; Epic</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Mark Lanegan</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Lee Conner</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Van Conner</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Barrett Martin</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">85.3%</span></div>
+          <div class="stat-row"><span class="stat-label">B. Martin also at</span><span class="stat-value">305, 224</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Facts</h4>
+          <div class="stat-row"><span class="stat-label">Lanegan died</span><span class="stat-value">Feb 22, 2022</span></div>
+          <div class="stat-row"><span class="stat-label">Van Conner died</span><span class="stat-value">Jan 2023</span></div>
+          <div class="stat-row"><span class="stat-label">Singles soundtrack</span><span class="stat-value">1992</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Salmon Run Full River</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

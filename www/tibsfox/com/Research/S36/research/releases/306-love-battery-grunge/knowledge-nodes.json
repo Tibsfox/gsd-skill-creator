@@ -1,0 +1,22 @@
+{
+  "degree": 306, "artist": "Love Battery", "slug": "306-love-battery-grunge", "genre": "Grunge/Psych", "energy": 6,
+  "era": "1989-1996 core. Grunge/Psych. E=6 -- grunge frame over psychedelic substrate. U-District. Sub Pop. Fourth appearance.",
+  "location": { "origin": "U-District, Seattle" }, "formed": "Seattle, Washington", "active": "1989-1999",
+  "labels": ["Sub Pop", "Atlas Records", "Mercury Records", "Pop Llama"],
+  "members": ["Ron Nine (guitar/vocals)", "Kevin Whitworth (guitar)", "Jim White (bass)", "Jason Finn (drums)", "Tommy Bonaldo (bass, later)"],
+  "associated_musicians": ["Presidents of the United States of America (Jason Finn)", "Mudhoney (Sub Pop peer)"],
+  "theory_nodes": [
+    { "concept": "Fourth appearance arc: 221 (Psychedelic, E=5), 299 (return, E=5), 306 (Grunge/Psych, E=6). 85-degree span from first to current. Energy escalates. Genre expands to compound classification.", "level": "advanced", "department": "arc-analysis", "description": "The engine's most-returned band in the current cluster." },
+    { "concept": "Grunge/Psych compound genre. Dayglo (1992): Out of Focus = heavy riff + dreamy middle + heavy return. Both grunge structure and psychedelic texture simultaneously. The overlap is real, not diplomatic.", "level": "advanced", "department": "genre-theory", "description": "First compound genre assignment for Love Battery." },
+    { "concept": "Ron Nine = third Seattle guitar vocabulary: psychedelic expansiveness. Thayil = metal precision. Peterson = punk immediacy. Nine = fuzz-as-texture, reverb-as-depth. The guitar as environment.", "level": "intermediate", "department": "guitar-theory", "description": "Three distinct Seattle lead guitar approaches documented." },
+    { "concept": "U-District inside the grunge cluster. Capitol Hill majority (294-308) plus Love Battery as U-District representative. Sub Pop geographic spread across Seattle neighborhoods.", "level": "intermediate", "department": "geography", "description": "U-District enters the grunge cluster through Love Battery." }
+  ],
+  "cross_references": [
+    {"degree": 221, "artist": "Love Battery", "relationship": "First appearance E=5. Psychedelic Rock. First U-District band. Sub Pop psychedelic wing. FIRST ACCIPITRIDAE pair (raptor era begins)."},
+    {"degree": 299, "artist": "Love Battery return", "relationship": "Third appearance E=5. Late Sub Pop era. 78-degree gap from 221."},
+    {"degree": 307, "artist": "Screaming Trees return", "relationship": "Consecutive grunge-cluster entry. Mark Lanegan. Ellensburg to Seattle to Pacific Northwest."}
+  ],
+  "sps_pair": {"degree": 306, "species": "Steller Sea Lion beach battle", "pairing_note": "E=6 + E=8 = E=14. Maximum asymmetry in current zone. The sea lion battle is the more intense event; the music is the psychedelic-heavy substrate."},
+  "milestones": ["FOURTH LOVE BATTERY APPEARANCE", "FIRST GRUNGE/PSYCH COMPOUND CLASSIFICATION", "E=6 ESCALATION FROM E=5"],
+  "tags": ["grunge", "psychedelic-rock", "compound-genre", "sub-pop", "u-district", "ron-nine", "fuzz-guitar", "reverb", "jason-finn", "dayglo-1992"]
+}
