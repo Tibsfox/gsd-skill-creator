@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 323&deg; &mdash; Ten Minute Warning &mdash; E=8 &mdash; Proto-Grunge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .lineage-card { background: linear-gradient(135deg, #263238, #37474F); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .lineage-card h3 { margin: 0 0 0.75rem; color: #80CBC4; font-size: 1.1rem; }
+    .lineage-row { display: flex; align-items: center; gap: 0.5rem; margin: 0.4rem 0; font-size: 0.9rem; color: #CFD8DC; }
+    .lineage-row strong { color: #80CBC4; }
+    .lineage-arrow { color: #78909C; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>323 &mdash; Ten Minute Warning (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">323&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Ten Minute Warning</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Proto-Grunge</span>
+          <span class="label-badge">Independent</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>E=8 RETURNS &mdash; THE LAST HIGH-ENERGY PRE-SUMMIT ECHO.</strong> Ten Minute Warning: proto-grunge at maximum energy, 1982&ndash;1986. The vocabulary is fully formed. Sub Pop does not exist yet. Nirvana has not formed. The commercial moment arrives four years too late. Steve Turner goes to Green River, then Mudhoney. Greg Gilmore goes to Mother Love Bone. The band that seeded two summit entries never had a summit.
+        </div>
+
+        <h2>Before the Myth</h2>
+        <p>Ten Minute Warning formed in Seattle in 1982 &mdash; before Sub Pop (1986), before Green River (1984), before the mythology that would market the sound they were already making. The band operated with the full grunge vocabulary: heavy, down-tuned guitar; mid-tempo rhythm with downbeat emphasis; aggressive non-melodic vocals; riff-organized song structures; dark, confrontational lyrical content. In 1982, this sound had no genre name and no commercial infrastructure. By 1989&ndash;1991, it would be called grunge and would sell millions of records.</p>
+
+        <blockquote>&ldquo;The mountain was already there. The commercial world caught up by 1989.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <div class="lineage-card">
+          <h3>The Lineage: Every Member Connects to the Summit</h3>
+          <div class="lineage-row"><strong>Steve Turner</strong> <span class="lineage-arrow">&rarr;</span> <span>Green River (1984) <span class="lineage-arrow">&rarr;</span> Mudhoney (1988, S36-310)</span></div>
+          <div class="lineage-row"><strong>Greg Gilmore</strong> <span class="lineage-arrow">&rarr;</span> <span>Mother Love Bone (1988) <span class="lineage-arrow">&rarr;</span> Pearl Jam lineage (S36-314)</span></div>
+          <div style="margin-top:0.75rem;font-size:0.82rem;color:#90A4AE;">Ten Minute Warning (1982) is the oldest branch of the grunge family tree. No other single pre-grunge band seeds as many summit entries through direct personnel.</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Capitol Hill in 1982</h2>
+        <p>In 1982, Capitol Hill was Seattle&rsquo;s bohemian neighborhood &mdash; cheaper, denser, producing bands from the post-punk tradition. No Sub Pop, no commercial infrastructure, no touring circuit for heavy independent Seattle bands. Ten Minute Warning played locally, released independently, and existed entirely outside any system that could have rewarded them commercially. This is Capitol Hill before it knew what it was becoming.</p>
+
+        <hr class="section-divider">
+
+        <h2>Members and Connections</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Paul Solger (vocals)</h4>
+            <span class="level advanced">Founding member</span>
+            <p>Raw, confrontational vocal delivery. Screams, shouts, intones &mdash; the full range of aggressive vocal expression that grunge would later codify.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Steve Turner (guitar)</h4>
+            <span class="level milestone">Green River &rarr; Mudhoney</span>
+            <p>The most consequential alumni. Turner&rsquo;s guitar vocabulary from 1982 is the direct ancestor of Mudhoney&rsquo;s approach. &ldquo;Touch Me I&rsquo;m Sick&rdquo; begins here.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Greg Gilmore (drums)</h4>
+            <span class="level milestone">Mother Love Bone &rarr; Pearl Jam lineage</span>
+            <p>Gilmore went to Mother Love Bone with Jeff Ament and Andrew Wood. Wood&rsquo;s death led to Temple of the Dog, which led to Pearl Jam&rsquo;s formation.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">322</span> Pond &mdash; E=7 to E=8. E=7 plateau ends. Post-summit arc reaches back to find the band that predates the entire commercial period.</li>
+          <li><span class="ref-degree">324</span> Swallow &mdash; E drops back to 7. Ten Minute Warning is the local E=8 peak in the post-summit sequence.</li>
+          <li><span class="ref-degree">310</span> Mudhoney &mdash; Steve Turner connection. The summit entry traces to this band.</li>
+          <li><span class="ref-degree">314</span> Pearl Jam &mdash; Greg Gilmore &rarr; Mother Love Bone &rarr; Pearl Jam lineage.</li>
+          <li><span class="ref-degree">SPS 323</span> Puget Sound Tidal Bore &mdash; E=8 pair. Both sustained pressure events. E=16 combined.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">323 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Proto-Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1982&ndash;1986</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Independent</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Paul Solger</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Steve Turner</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Greg Gilmore</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">89.7%</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">LAST HIGH-E ECHO</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Lineage To</h4>
+          <div class="stat-row"><span class="stat-label">Turner &rarr;</span><span class="stat-value">Mudhoney (310)</span></div>
+          <div class="stat-row"><span class="stat-label">Gilmore &rarr;</span><span class="stat-value">Pearl Jam (314)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Tidal Bore E=8</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
