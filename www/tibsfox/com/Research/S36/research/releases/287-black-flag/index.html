@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 287&deg; &mdash; Black Flag &mdash; E=9 &mdash; Hardcore &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .milestone-banner { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; color: #FFEBEE; }
+    .milestone-banner h3 { margin: 0 0 0.4rem; font-size: 1.1rem; color: #FFCDD2; text-transform: uppercase; letter-spacing: 0.05em; }
+    .milestone-banner p { margin: 0.3rem 0; color: #FFEBEE; font-size: 0.95rem; }
+    .warning-note { background: #FFF3E0; border: 1px solid #FF9800; border-left: 4px solid #E65100; border-radius: 0 6px 6px 0; padding: 0.8rem 1.2rem; margin: 1rem 0; font-size: 0.9rem; }
+    .warning-note strong { color: #E65100; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>287 &mdash; Black Flag (E=9)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">287&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Black Flag <span style="font-size: 1rem; font-weight: 400; color: #757575;">(Seattle influence)</span></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 9</span>
+          <span class="genre-badge">Hardcore</span>
+          <span class="label-badge">SST Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <h3>E=9 &mdash; Ties S36 Absolute Maximum &mdash; Second Consecutive</h3>
+          <p><strong>Black Flag ties the new ceiling.</strong> Degree 286 (Dead Kennedys) established E=9 as the S36 absolute maximum. Degree 287 ties it in the very next degree. Two consecutive E=9 entries. The engine has never sustained maximum energy across back-to-back degrees. The hardcore block is at the ceiling.</p>
+          <p>NOT a Seattle band. Hermosa Beach / Los Angeles. SST Records (engine degree 261). Documents the direct mechanism of LA hardcore's influence on Seattle: the SST distribution pipeline, the West Coast touring circuit, the Metropolis venue appearances, the generational absorption.</p>
+        </div>
+
+        <div class="warning-note">
+          <strong>Scope note:</strong> Black Flag were formed in Hermosa Beach, California. This entry documents their influence on Seattle's hardcore and alternative scene &mdash; not their origins. The influence mechanism is the SST distribution network, the touring circuit through Seattle venues including the Metropolis, and the direct impact on bands like The Fartz (degree 270) who formed in dialogue with the LA hardcore template.
+        </div>
+
+        <h2>The SST Pipeline</h2>
+        <p>Black Flag's route to Seattle runs through SST Records (degree 261). Greg Ginn founded SST in 1978 specifically to release Black Flag's music &mdash; a response to the mainstream industry's refusal to touch hardcore. SST built an independent distribution network that reached Pacific Northwest record stores. A teenager in Seattle in 1982 could walk into a shop and buy <em>Damaged</em>, <em>My War</em>, and <em>Nervous Breakdown</em>. The pipeline was physical: records leaving Hermosa Beach, reaching Seattle, entering the hands of musicians who would form the next generation of the scene.</p>
+
+        <p>SST's catalog extended beyond Black Flag to Minutemen, Husker Du, Dinosaur Jr, and Meat Puppets &mdash; the full document of the American underground. But Black Flag was the center. The label existed because of the band; the band's aesthetic defined the label's identity.</p>
+
+        <blockquote>"Black Flag demonstrated that a band could own its recording and distribution infrastructure and reach a national audience. This model is the economic foundation of independent rock music."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Touring Circuit</h2>
+        <p>Black Flag treated touring as a full-time occupation. The West Coast corridor &mdash; Los Angeles to San Francisco to Portland to Seattle &mdash; was their regular route. They played Seattle venues including the Metropolis, the all-ages hardcore space that was Seattle punk's primary home in the early 1980s. These shows were not casual; Black Flag live was a physical ordeal. When Seattle bands saw Black Flag at the Metropolis, they saw something that had not existed before: the body as a musical instrument, maximum physical presence deployed in service of a political and sonic argument.</p>
+
+        <p>The Fartz (degree 270) are the most direct evidence of this transmission. Seattle's first prominent hardcore band formed their aesthetic in dialogue with LA hardcore &mdash; Black Flag's template was the input; The Fartz were an early Seattle output of that influence.</p>
+
+        <hr class="section-divider">
+
+        <h2>Henry Rollins: Body as Instrument</h2>
+        <p>Rollins joined Black Flag in 1981 from Washington DC's hardcore scene. His addition transformed the band's physical and literary character. The Rollins-era records &mdash; <em>Damaged</em> (1981), <em>My War</em> (1984), <em>Slip It In</em> (1984), <em>Loose Nut</em> (1985), <em>In My Head</em> (1985) &mdash; document a band pushing beyond the form it had created. The long, slow, crushing tracks on <em>My War</em>'s side B anticipated sludge metal a decade before the genre crystallized.</p>
+        <p>Rollins developed a parallel spoken word career that brought the confrontational approach into rooms too small for a full band. His 1994 book <em>Get in the Van</em> &mdash; journal documentation of the Black Flag years, van floors, venues, violence, and music &mdash; won a Grammy for Best Spoken Word Album and is a primary source for the era.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography &mdash; The Records That Reached Seattle</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Nervous Breakdown EP (1978)</h4>
+            <span class="level milestone">SST &bull; First</span>
+            <p>Before the genre had a name. Keith Morris vocals. Four songs. The original hardware document. "Nervous Breakdown," "Fix Me," "I've Had It," "Wasted."</p>
+          </div>
+          <div class="theory-card">
+            <h4>Damaged (1981)</h4>
+            <span class="level milestone">SST &bull; The Album</span>
+            <p>Rollins's first full-length with the band. MCA refused to distribute it. SST distributed independently. Reached Seattle through the indie network, passed hand to hand. "Rise Above." "TV Party." "Depression."</p>
+          </div>
+          <div class="theory-card">
+            <h4>My War (1984)</h4>
+            <span class="level advanced">SST &bull; Evolution</span>
+            <p>Side A: hardcore. Side B: three long, slow, crushing songs anticipating sludge metal. The proof that Black Flag would not be frozen in the form that made them famous.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Slip It In / Loose Nut / In My Head (1984&ndash;85)</h4>
+            <span class="level intermediate">SST &bull; Final Phase</span>
+            <p>Increasingly metal-influenced final records. The band evolving toward something beyond hardcore before disbanding in 1986.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The SST / Alternative Tentacles Mirror</h2>
+        <p>Degrees 286 and 287 document the two poles of West Coast hardcore distribution simultaneously. Alternative Tentacles (degree 270, The Fartz) and SST Records (degree 261) were mirror images: AT in San Francisco under Jello Biafra, SST in Hermosa Beach under Greg Ginn. Both built independent distribution networks. Both reached Seattle. The 286-287 pairing documents both poles: Dead Kennedys (AT, SF) and Black Flag (SST, LA). The engine's most consecutive pairing in terms of energy ceiling &mdash; and both document not Seattle bands but the external forces that shaped Seattle's hardest music.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">261</span> SST Records &mdash; The label founded by Greg Ginn. Black Flag's infrastructure. The distribution network that brought BF records to Seattle stores.</li>
+          <li><span class="ref-degree">270</span> The Fartz &mdash; Alternative Tentacles. The Seattle hardcore band formed in dialogue with LA hardcore. Direct output of the Black Flag influence input.</li>
+          <li><span class="ref-degree">286</span> Dead Kennedys &mdash; E=9, first degree at ceiling. Alternative Tentacles. SF band. Consecutive E=9 pair with Black Flag. The two West Coast hardcore poles.</li>
+          <li><span class="ref-degree">288</span> The Blood Brothers &mdash; E=9 continues. Post-hardcore. Shoreline. The hardcore DNA absorbed and mutated. Third consecutive E=9.</li>
+          <li><span class="ref-degree">SPS 287</span> Brandt's Cormorant colony &mdash; E=7. Guttural colonial roar. Both are ensemble phenomena at maximum intensity.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">287 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value" style="color: #B71C1C;">9 &mdash; CEILING</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hardcore</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1976&ndash;1986</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Hermosa Beach, CA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">SST Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Founder</span><span class="stat-value">Greg Ginn</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals (1981&ndash;86)</span><span class="stat-value">Henry Rollins</span></div>
+          <div class="stat-row"><span class="stat-label">Bass (1983&ndash;86)</span><span class="stat-value">Kira Roessler</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Bill Stevenson</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals (1976&ndash;79)</span><span class="stat-value">Keith Morris</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">E=9 entries</span><span class="stat-value">2nd (ties 286)</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">TIES CEILING</span></div>
+          <div class="stat-row"><span class="stat-label">SST thread</span><span class="stat-value">261 &rarr; 287</span></div>
+          <div class="stat-row"><span class="stat-label">Consecutive max</span><span class="stat-value">2nd straight</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row"><span class="stat-label">Label (engine)</span><span class="stat-value">SST at degree 261</span></div>
+          <div class="stat-row"><span class="stat-label">DK mirror</span><span class="stat-value">AT at degree 286</span></div>
+          <div class="stat-row"><span class="stat-label">Seattle channel</span><span class="stat-value">The Fartz (270)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Brandt's Cormorant</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
