@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-04T00:30:00Z",
-  "source": "sweep-v1.3.17.2",
+  "updated": "2026-04-04T01:00:00Z",
+  "source": "sweep-v1.3.18",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST — MET +2d 01:25 — Integrity ~155,000 mi from Earth, outbound. FD4: crew reviewing lunar geography targets. Bee/pollinator research mission launched (3 parallel agents: PNW ecology, garden design, global conservation). Research queue 20/20. 18/24 Day 4 hours.",
+    "status": "TRANSLUNAR COAST — MET +2d 02:25 — Integrity ~160,000 mi from Earth, outbound. FD3→FD4 transition. NASA confirms TC#1 cancelled, trajectory correct. Session 5: 15+ new pages (CERN 4/4, CSP 6/6, DRP Cascadia, LIVE space-wx, OPEN #19, GSD 7 docs). Bee research mission complete (16-page PDF). GSD-2 v2.59.0 installed. 19/24 Day 4 hours.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
@@ -14,13 +14,13 @@
     "kpae": {
       "temp_c": 12.0,
       "dewpoint_c": 3.0,
-      "wind_dir": 140,
+      "wind_dir": 280,
       "wind_kmh": 5.5,
       "gust_kmh": 0,
       "humidity": 54,
       "pressure_hpa": 1029.5,
       "visibility_m": 16093,
-      "conditions": "SCT035 BKN090",
+      "conditions": "FEW043 Mostly Clear",
       "spread_c": 9.0,
       "max_today": 14.5,
       "min_today": 4.2,
