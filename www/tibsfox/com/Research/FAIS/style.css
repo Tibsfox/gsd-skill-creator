@@ -1,0 +1,350 @@
+/* FAIS — Cyan/Green Game Compute theme, AI Agents in Game Systems
+   Brand foundation loaded from brand.css
+   Dedicated to Kara Rawson (Cat Game Research) */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
+:root {
+  --fais-cyan: #00BCD4;
+  --fais-cyan-light: #E0F7FA;
+  --fais-cyan-mid: #0097A7;
+  --fais-cyan-dark: #006064;
+  --fais-green: #00E676;
+  --fais-green-light: #E8F5E9;
+  --fais-green-dark: #00C853;
+  --fais-terminal: #0d1117;
+  --fais-grid: rgba(0,188,212,0.06);
+
+  /* Semantic overrides */
+  --page-bg: #0F1419;
+  --page-text: #C9D1D9;
+  --page-text-light: #8B949E;
+  --link: var(--fais-cyan);
+  --link-hover: var(--fais-green);
+  --accent: var(--fais-cyan);
+  --accent-light: var(--fais-cyan-light);
+  --accent-dark: var(--fais-cyan-dark);
+  --card-bg: #161B22;
+  --card-border: #30363D;
+  --card-shadow: rgba(0,188,212,0.15);
+  --border: #30363D;
+  --parchment: #21262D;
+}
+
+/* ═══════════════════════════════════════════
+   2. BODY & PAGE — dark game terminal
+   ═══════════════════════════════════════════ */
+
+body.project-fais {
+  background: var(--page-bg);
+  color: var(--page-text);
+}
+
+/* ═══════════════════════════════════════════
+   3. HEADER — deep dark with cyan/green glow
+   ═══════════════════════════════════════════ */
+
+header {
+  background: linear-gradient(135deg, #0a0e14 0%, #006064 35%, #004D40 65%, #0a0e14 100%);
+  border-bottom: 4px solid var(--fais-cyan);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(0,188,212,0.2) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(0,230,118,0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,188,212,0.03) 2px,
+    rgba(0,188,212,0.03) 4px
+  );
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: var(--fais-cyan-light); text-shadow: 0 0 20px rgba(0,188,212,0.3); }
+header .subtitle { color: var(--fais-cyan); opacity: 0.9; }
+
+/* ═══════════════════════════════════════════
+   4. NAV — dark terminal buttons
+   ═══════════════════════════════════════════ */
+
+header nav a {
+  color: var(--fais-cyan);
+  background: rgba(0,188,212,0.08);
+  border: 1px solid rgba(0,188,212,0.2);
+}
+header nav a:hover {
+  background: rgba(0,188,212,0.18);
+  color: #fff;
+}
+header nav a.active {
+  background: rgba(0,188,212,0.25);
+  color: #fff;
+  border-color: var(--fais-cyan);
+}
+
+/* ═══════════════════════════════════════════
+   5. TYPOGRAPHY — light on dark
+   ═══════════════════════════════════════════ */
+
+h2 {
+  color: var(--fais-cyan);
+  border-bottom-color: #30363D;
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--fais-green); }
+h4 { color: var(--fais-cyan-mid); }
+
+a { color: var(--fais-cyan); }
+a:hover { color: var(--fais-green); }
+
+/* ═══════════════════════════════════════════
+   6. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
+
+blockquote {
+  background: rgba(0,188,212,0.06);
+  border-left: 4px solid var(--fais-cyan);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #8B949E;
+}
+
+th { background: var(--fais-cyan-dark); color: white; }
+td { border-bottom-color: #30363D; color: var(--page-text); }
+tr:nth-child(even) { background: rgba(0,188,212,0.04); }
+tr:hover { background: rgba(0,188,212,0.08); }
+
+pre {
+  background: #0d1117;
+  color: var(--fais-green);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--fais-cyan);
+}
+code {
+  background: rgba(0,188,212,0.1);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--fais-cyan);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ═══════════════════════════════════════════
+   7. CARDS — dark cards with glow border
+   ═══════════════════════════════════════════ */
+
+main { max-width: 54rem; }
+
+.card {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+  color: var(--page-text);
+}
+.card:hover {
+  box-shadow: 0 2px 16px rgba(0,188,212,0.15);
+  border-color: var(--fais-cyan);
+}
+.card h3 { color: var(--fais-cyan); margin: 0 0 0.3rem; }
+.card p { color: #8B949E; }
+.card .meta { color: #8B949E; }
+
+/* ═══════════════════════════════════════════
+   8. STATS — dark grid with cyan accents
+   ═══════════════════════════════════════════ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.4rem;
+  color: var(--fais-cyan);
+}
+.stat-label {
+  color: #8B949E;
+}
+
+/* ═══════════════════════════════════════════
+   9. TAGS — game system palette
+   ═══════════════════════════════════════════ */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-rl { background: rgba(0,188,212,0.15); color: var(--fais-cyan); }
+.tag-gpu { background: rgba(0,230,118,0.12); color: var(--fais-green); }
+.tag-ecs { background: rgba(255,167,38,0.12); color: #FFA726; }
+.tag-algo { background: rgba(171,71,188,0.12); color: #CE93D8; }
+.tag-memory { background: rgba(66,165,245,0.12); color: #64B5F6; }
+.tag-det { background: rgba(255,112,67,0.12); color: #FF7043; }
+
+/* ═══════════════════════════════════════════
+   10. DEDICATION — special callout
+   ═══════════════════════════════════════════ */
+
+.dedication {
+  background: linear-gradient(135deg, rgba(0,188,212,0.08) 0%, rgba(0,230,118,0.06) 100%);
+  border: 1px solid rgba(0,188,212,0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.dedication h3 {
+  color: var(--fais-cyan);
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+.dedication .dedication-quote {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--fais-green);
+  margin: 0.8rem 0;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 12px rgba(0,230,118,0.15);
+}
+.dedication p {
+  color: #8B949E;
+  font-size: 0.92rem;
+  margin: 0.3rem 0;
+}
+.dedication a {
+  color: var(--fais-cyan);
+}
+
+/* ═══════════════════════════════════════════
+   11. CITATION BOX
+   ═══════════════════════════════════════════ */
+
+.citation {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-left: 4px solid var(--fais-cyan);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #8B949E;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   12. VIDEO LIST
+   ═══════════════════════════════════════════ */
+
+.video-list {
+  list-style: none;
+  padding: 0;
+}
+.video-list li {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: border-color 0.2s;
+}
+.video-list li:hover {
+  border-color: var(--fais-cyan);
+}
+.video-list .video-icon {
+  color: var(--fais-cyan);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.video-list .video-title {
+  color: var(--page-text);
+  font-size: 0.92rem;
+}
+.video-list .video-topic {
+  color: #8B949E;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+}
+
+/* ═══════════════════════════════════════════
+   13. RELEVANCE CONNECTIONS
+   ═══════════════════════════════════════════ */
+
+.connection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.connection {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 6px;
+  padding: 1.2rem;
+  border-top: 3px solid var(--fais-cyan);
+  transition: border-color 0.2s;
+}
+.connection:hover {
+  border-color: var(--fais-cyan);
+}
+.connection h4 {
+  color: var(--fais-cyan);
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+.connection .from {
+  color: var(--fais-green);
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  margin-bottom: 0.4rem;
+}
+.connection p {
+  color: #8B949E;
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   14. FOOTER — dark
+   ═══════════════════════════════════════════ */
+
+footer {
+  border-top-color: #30363D;
+  color: #8B949E;
+}
+footer a { color: var(--fais-cyan); }
+
+/* ═══════════════════════════════════════════
+   15. RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .connection-grid { grid-template-columns: 1fr; }
+}

@@ -58,6 +58,7 @@
     { id: 'ECO', name: 'Living Systems', path: 'ECO/index.html' },
     { id: 'EMG', name: 'Electric Motors', path: 'EMG/index.html' },
     { id: 'ENB', name: 'Eskimo North BBS', path: 'ENB/index.html' },
+    { id: 'FAIS', name: 'AI Game Agents', path: 'FAIS/index.html' },
     { id: 'FCC', name: 'FCC Catalog', path: 'FCC/index.html' },
     { id: 'FDR', name: 'Fire Dragon', path: 'FDR/index.html' },
     { id: 'FEC', name: 'Error Correction', path: 'FEC/index.html' },
@@ -204,7 +205,7 @@
     { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS'] },
     { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'] },
     { name: 'Space', color: '#1E88E5', ids: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'] },
-    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA'] },
+    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA','FAIS'] },
     { name: 'Graphics', color: '#8E24AA', ids: ['NEH','VKD','VKS'] }
   ];
 
