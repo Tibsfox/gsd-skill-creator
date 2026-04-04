@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$244,155 Storage Monster — HPC Research Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <script src="../../series.js"></script>
+
+  <div class="back-nav">
+    <a href="../../index.html">Research</a> /
+    <a href="../index.html">HPC</a> /
+    <strong>$244,155 Storage Monster</strong>
+  </div>
+
+  <header>
+    <h1>$244,155 &mdash; Storage Monster</h1>
+    <p class="subtitle">82% of Budget in Storage &mdash; The Violin 3200 Build</p>
+    <div class="source-badge">
+      <span class="era-badge era-gpu">GPU Era</span>
+      <span class="tier-badge tier-3">T3: Scientific</span>
+      March 3, 2011 &mdash;
+      LJ <a href="https://tiggerfox.livejournal.com/89835.html" target="_blank">#89835</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="stats-bar" style="margin-top:1.5rem">
+      <div class="stat"><div class="stat-value">$244K</div><div class="stat-label">Total Cost</div></div>
+      <div class="stat"><div class="stat-value">48</div><div class="stat-label">Cores</div></div>
+      <div class="stat"><div class="stat-value">512GB</div><div class="stat-label">RAM</div></div>
+      <div class="stat"><div class="stat-value">10TB</div><div class="stat-label">All-Flash</div></div>
+      <div class="stat"><div class="stat-value">$5,087</div><div class="stat-label">$/Core</div></div>
+    </div>
+
+    <section class="section">
+      <h2>Component Breakdown</h2>
+      <div class="data-table-container">
+        <table>
+          <thead>
+            <tr><th>Component</th><th>Specification</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chassis + CPUs</td><td>4x AMD Opteron 6176 (12-core, 2.3GHz)</td><td>1</td><td class="cost-cell">$1,927.00</td><td class="cost-cell">$1,927.00</td></tr>
+            <tr><td>RAM</td><td>16GB DDR3 ECC</td><td>32</td><td class="cost-cell">$553.00</td><td class="cost-cell">$17,696.00</td></tr>
+            <tr><td>GPU Compute</td><td>PNY Quadro Plex 2200 S4</td><td>1</td><td class="cost-cell">$15,117.00</td><td class="cost-cell">$15,117.00</td></tr>
+            <tr><td>Network</td><td>HP 10GbE Adapter</td><td>1</td><td class="cost-cell">$621.00</td><td class="cost-cell">$621.00</td></tr>
+            <tr><td>Storage</td><td>Violin 3200 10TB All-Flash Array</td><td>1</td><td class="cost-cell">~$200,000</td><td class="cost-cell">~$200,000</td></tr>
+            <tr><td>Display</td><td>ViewSonic VP 2290b 3840x2400</td><td>1</td><td class="cost-cell">$3,998.00</td><td class="cost-cell">$3,998.00</td></tr>
+            <tr style="background:rgba(0,255,65,0.06)"><td colspan="4" style="text-align:right"><strong>Total</strong></td><td class="cost-cell"><strong>~$244,155</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Cost Distribution</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="stat-value" style="font-size:1.4rem;color:var(--accent-amber)">82%</div>
+          <div class="stat-label">Storage ($200K)</div>
+          <p>Violin 3200 10TB all-flash array. Enterprise SSD at scale before SSDs were commodity.</p>
+        </div>
+        <div class="card">
+          <div class="stat-value" style="font-size:1.4rem">7%</div>
+          <div class="stat-label">RAM ($17.7K)</div>
+          <p>512GB DDR3 ECC across 32 DIMMs. 16GB per stick at $553 each.</p>
+        </div>
+        <div class="card">
+          <div class="stat-value" style="font-size:1.4rem">6%</div>
+          <div class="stat-label">GPU ($15.1K)</div>
+          <p>Quadro Plex 2200 S4 &mdash; external GPU compute unit with 4 Quadro FX 5800 cards.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Notable Components</h2>
+
+      <div class="context-panel">
+        <h4>Violin 3200 (~$200,000)</h4>
+        <p>Violin Memory was a startup (founded 2005, IPO 2013, bankrupt 2017) that built all-flash storage arrays using custom NAND flash modules. The 3200 was their mid-range enterprise product. In 2011, 10TB of all-flash storage at $200K was aggressive pricing &mdash; equivalent enterprise SAN solutions cost 3-5x more. The Violin approach foreshadowed the commodity flash revolution by several years.</p>
+      </div>
+
+      <div class="context-panel">
+        <h4>ViewSonic VP 2290b ($3,998)</h4>
+        <p>A 22.2" IPS panel at 3840x2400 resolution (WQUXGA). In 2011, this was an exotic display &mdash; 4K consumer monitors wouldn't arrive until 2013-2014. The 204 PPI density was intended for medical imaging and print production, perfect for verifying the fractal composites at native resolution.</p>
+      </div>
+
+      <div class="context-panel">
+        <h4>Scalability Note</h4>
+        <p>The post noted the chassis was expandable to 64 cores with future 16-core Opterons. AMD would ship the Opteron 6272 (16-core Bulldozer, Interlagos) in November 2011 &mdash; 8 months after this spec.</p>
+      </div>
+    </section>
+
+    <div class="context-panel">
+      <h4>Computing Context: March 2011</h4>
+      <p>The AMD Opteron 6176 (Magny-Cours) was AMD's first 12-core server CPU. The Quadro Plex was NVIDIA's external GPU compute chassis, predating the Tesla dedicated compute line becoming mainstream. 10GbE was still enterprise-only. This build is transitional &mdash; server-class compute meets enterprise storage, with GPU acceleration as an add-on rather than the primary compute engine.</p>
+    </div>
+
+    <section class="section">
+      <h2>Where This Fits</h2>
+      <p style="color:var(--text-secondary)">The Storage Monster is the only build in the archive where storage dominates the budget. At $5,087/core, it has the highest per-core cost of any non-render-farm system. But the $/core metric is misleading here &mdash; the system exists to pair high-bandwidth storage with sufficient compute, not to maximize cores. It proves that the white-box approach extends to enterprise-class storage systems, and that cost decomposition reveals what a system is actually designed to do.</p>
+    </section>
+
+    <div class="system-nav">
+      <a href="2009-3way-sli.html"><span class="nav-label">Previous</span>&larr; $3,630 3-Way SLI</a>
+      <a href="../index.html" class="timeline-link"><span class="nav-label">Timeline</span> All Systems</a>
+      <a href="2011-render-farm.html"><span class="nav-label">Next</span> $10.5M Render Farm &rarr;</a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="../index.html">HPC Timeline</a> &middot;
+    <a href="../../index.html">Research</a> &middot;
+    <span class="lj-ref">Source: <a href="https://tiggerfox.livejournal.com/89835.html" target="_blank">LJ #89835</a></span>
+  </footer>
+</body>
+</html>
