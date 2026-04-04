@@ -191,3 +191,293 @@ function hpcRenderBenchmarkTable(containerId) {
   html += '</tbody></table>';
   document.getElementById(containerId).innerHTML = html;
 }
+
+// =============================================================================
+// 2026 GOLD STANDARD BUILDS — April 2026 new retail pricing
+// Research date: April 3, 2026
+// Market context: DRAM shortage, GPU supply constrained, DDR5 prices 2-4x above 2024
+// =============================================================================
+
+// === Gold Standard 2026 Tier Builds ===
+var GOLD_STANDARD_2026 = [
+  {
+    id: 'gs-2026-t1',
+    tier: 1,
+    label: 'Budget Build',
+    cost: 1439,
+    cpu: 'AMD Ryzen 5 9600X',
+    cpuSpec: '6C/12T, 3.8-5.4 GHz Zen 5, 65W',
+    cores: 6,
+    threads: 12,
+    ram: 32,
+    ramSpec: '32GB (2x16GB) DDR5-6000 CL30',
+    gpu: 'AMD RX 9060 XT 8GB',
+    vram: 8,
+    tflops: 17,
+    costPerCore: 240,
+    costPerTflop: 85,
+    gb6sc: 3284,
+    gb6mc: 14594,
+    gb6mcPerK: 10135,
+    wattage: 400,
+    motherboard: 'ASRock B650M Pro RS WiFi',
+    storage: '1TB Samsung 990 EVO NVMe',
+    psu: 'Corsair RM750x 750W Gold',
+    chassis: 'NZXT H5 Flow',
+    cooler: 'Stock / Thermalright PA120'
+  },
+  {
+    id: 'gs-2026-t2',
+    tier: 2,
+    label: 'Gaming / Workstation',
+    cost: 4712,
+    cpu: 'AMD Ryzen 9 9950X',
+    cpuSpec: '16C/32T, 4.3-5.7 GHz Zen 5, 170W',
+    cores: 16,
+    threads: 32,
+    ram: 64,
+    ramSpec: '64GB (2x32GB) DDR5-6000 CL30',
+    gpu: 'NVIDIA RTX 5080',
+    vram: 16,
+    tflops: 56.3,
+    costPerCore: 295,
+    costPerTflop: 84,
+    gb6sc: 3359,
+    gb6mc: 20550,
+    gb6mcPerK: 4362,
+    wattage: 800,
+    motherboard: 'MSI MAG X870 TOMAHAWK WiFi',
+    storage: '6TB (2TB + 4TB) Samsung 990 Pro NVMe',
+    psu: 'Corsair HX1500i 1500W Platinum',
+    chassis: 'Fractal Design Torrent',
+    cooler: 'Noctua NH-D15 G2'
+  },
+  {
+    id: 'gs-2026-t3a',
+    tier: 3,
+    label: 'Scientific Workstation (3A: EPYC)',
+    cost: 24400,
+    cpu: 'AMD EPYC 9755',
+    cpuSpec: '128C/256T, 2.7-4.1 GHz Zen 5, 500W',
+    cores: 128,
+    threads: 256,
+    ram: 768,
+    ramSpec: '768GB (12x64GB) DDR5-4800 ECC RDIMM',
+    gpu: 'NVIDIA RTX 5090',
+    vram: 32,
+    tflops: 104.8,
+    costPerCore: 191,
+    costPerTflop: 233,
+    gb6sc: 2200,
+    gb6mc: 18850,
+    gb6mcPerK: null,
+    wattage: 1200,
+    motherboard: 'Supermicro H13SSL-NT',
+    storage: '8TB (2x 4TB) Samsung 990 Pro NVMe',
+    psu: '2x 1600W Platinum (redundant)',
+    chassis: 'Supermicro CSE-747BTS 4U Tower',
+    cooler: 'Industrial tower cooler + case fans'
+  },
+  {
+    id: 'gs-2026-t3b',
+    tier: 3,
+    label: 'Scientific Workstation (3B: TR PRO 7-GPU)',
+    cost: 114000,
+    cpu: 'AMD TR PRO 9995WX',
+    cpuSpec: '96C/192T, 2.5-5.4 GHz Zen 5, 350W',
+    cores: 96,
+    threads: 192,
+    ram: 2048,
+    ramSpec: '2TB (8x256GB) DDR5-5600 ECC RDIMM',
+    gpu: '7x NVIDIA RTX PRO 6000 Blackwell',
+    vram: 672,
+    tflops: 875,
+    costPerCore: 1188,
+    costPerTflop: 130,
+    gb6sc: 3100,
+    gb6mc: 30170,
+    gb6mcPerK: null,
+    wattage: 5500,
+    motherboard: 'ASUS Pro WS WRX90E-SAGE SE',
+    storage: '24TB (2x4TB + 2x8TB) NVMe',
+    psu: '2x 2000W Titanium (redundant)',
+    chassis: 'Full tower workstation (EEB)',
+    cooler: 'Custom loop / Noctua industrial'
+  },
+  {
+    id: 'gs-2026-t4',
+    tier: 4,
+    label: 'Rack-Optimized (4U)',
+    cost: 105116,
+    cpu: '2x AMD EPYC 9654',
+    cpuSpec: '96C/192T each = 192C/384T, 2.4 GHz, 360W ea',
+    cores: 192,
+    threads: 384,
+    ram: 1536,
+    ramSpec: '1.5TB (24x64GB) DDR5-4800 ECC RDIMM',
+    gpu: '4x NVIDIA RTX PRO 6000 Blackwell',
+    vram: 384,
+    tflops: 500,
+    costPerCore: 547,
+    costPerTflop: 210,
+    gb6sc: 2400,
+    gb6mc: 36000,
+    gb6mcPerK: null,
+    wattage: 4500,
+    motherboard: 'Supermicro AS-4125GS-TNRT2 (barebone)',
+    storage: '15.36TB (4x 3.84TB NVMe U.2)',
+    psu: '2x 2000W Titanium (included)',
+    chassis: 'Supermicro 4U (integrated)',
+    cooler: 'Enterprise cooling (integrated)',
+    perfPerKPerU: 1.19
+  },
+  {
+    id: 'gs-2026-t5',
+    tier: 5,
+    label: 'Cutting Edge (40U Rack)',
+    cost: 971044,
+    cpu: '18x AMD EPYC 9654',
+    cpuSpec: '9x dual-socket, 1728C/3456T total',
+    cores: 1728,
+    threads: 3456,
+    ram: 13824,
+    ramSpec: '13.5TB (216x64GB) DDR5-4800 ECC RDIMM',
+    gpu: '36x NVIDIA RTX PRO 6000 Blackwell',
+    vram: 3456,
+    tflops: 4500,
+    costPerCore: 562,
+    costPerTflop: 216,
+    gb6sc: 2400,
+    gb6mc: null,
+    gb6mcPerK: null,
+    wattage: 40000,
+    motherboard: '9x Supermicro AS-4125GS-TNRT2',
+    storage: '138.24TB (36x 3.84TB NVMe U.2)',
+    psu: '18x 2000W Titanium',
+    chassis: '42U rack enclosure',
+    cooler: 'Enterprise per-node cooling',
+    perfPerKPerU: null,
+    tflopsPerU: 107,
+    note: '4.5 PFLOPS FP32 in a single rack'
+  }
+];
+
+// === GPU Landscape — April 2026 ===
+var GPU_LANDSCAPE = [
+  { gpu: 'RX 9060 XT 8GB',      arch: 'RDNA 4',    cuda: null,   vram: 8,   vramType: 'GDDR6',     tflops: 17,    msrp: 299,   street: 310,   costPerTflop: 18 },
+  { gpu: 'RX 9060 XT 16GB',     arch: 'RDNA 4',    cuda: null,   vram: 16,  vramType: 'GDDR6',     tflops: 17,    msrp: 349,   street: 459,   costPerTflop: 27 },
+  { gpu: 'RTX 5070 Ti',         arch: 'Blackwell',  cuda: 8960,   vram: 16,  vramType: 'GDDR7',     tflops: 43.9,  msrp: 749,   street: 1069,  costPerTflop: 24 },
+  { gpu: 'RTX 5080',            arch: 'Blackwell',  cuda: 10752,  vram: 16,  vramType: 'GDDR7',     tflops: 56.3,  msrp: 999,   street: 1249,  costPerTflop: 22 },
+  { gpu: 'RTX 5090',            arch: 'Blackwell',  cuda: 21760,  vram: 32,  vramType: 'GDDR7',     tflops: 104.8, msrp: 1999,  street: 3699,  costPerTflop: 35 },
+  { gpu: 'RTX PRO 6000',        arch: 'Blackwell',  cuda: 24064,  vram: 96,  vramType: 'GDDR7 ECC', tflops: 125,   msrp: 8000,  street: 8000,  costPerTflop: 64 },
+  { gpu: 'NVIDIA H100 SXM',     arch: 'Hopper',     cuda: 16896,  vram: 80,  vramType: 'HBM3',      tflops: 67,    msrp: null,  street: 30000, costPerTflop: 448 },
+  { gpu: 'NVIDIA H200',         arch: 'Hopper',     cuda: 16896,  vram: 141, vramType: 'HBM3e',     tflops: 67,    msrp: null,  street: 35000, costPerTflop: 522 },
+  { gpu: 'NVIDIA B200',         arch: 'Blackwell',  cuda: 18000,  vram: 192, vramType: 'HBM3e',     tflops: 180,   msrp: null,  street: 50000, costPerTflop: 278 }
+];
+
+// === CPU Landscape — April 2026 ===
+var CPU_LANDSCAPE = [
+  { cpu: 'Ryzen 5 9600X',   cores: 6,   threads: 12,  boost: '5.4 GHz', tdp: 65,  price: 229,   costPerCore: 38,  gb6mc: 14594 },
+  { cpu: 'Ryzen 7 9700X',   cores: 8,   threads: 16,  boost: '5.5 GHz', tdp: 65,  price: 298,   costPerCore: 37,  gb6mc: 17000 },
+  { cpu: 'Ryzen 9 9950X',   cores: 16,  threads: 32,  boost: '5.7 GHz', tdp: 170, price: 529,   costPerCore: 33,  gb6mc: 20550 },
+  { cpu: 'TR PRO 7995WX',   cores: 96,  threads: 192, boost: '5.1 GHz', tdp: 350, price: 10000, costPerCore: 104, gb6mc: 25000 },
+  { cpu: 'TR PRO 9995WX',   cores: 96,  threads: 192, boost: '5.4 GHz', tdp: 350, price: 11699, costPerCore: 122, gb6mc: 30170 },
+  { cpu: 'EPYC 9654',       cores: 96,  threads: 192, boost: '3.7 GHz', tdp: 360, price: 6650,  costPerCore: 69,  gb6mc: 22000 },
+  { cpu: 'EPYC 9755',       cores: 128, threads: 256, boost: '4.1 GHz', tdp: 500, price: 4711,  costPerCore: 37,  gb6mc: 18850 }
+];
+
+// === Historical Reference Points per Tier (for trend charts) ===
+var TIER_HISTORY = {
+  1: [
+    { year: 2008, cpu: 'AMD Phenom X4 9950', gpu: 'Radeon HD 4870', ramPerGB: 8,  systemCost: 800,   costPerCore: 200, gpuTflops: 1.2 },
+    { year: 2011, cpu: 'AMD Phenom II X6 1100T', gpu: 'Radeon HD 6870', ramPerGB: 5,  systemCost: 700,   costPerCore: 117, gpuTflops: 2.0 },
+    { year: 2014, cpu: 'AMD FX-8350', gpu: 'GTX 970', ramPerGB: 8,  systemCost: 850,   costPerCore: 106, gpuTflops: 3.9 },
+    { year: 2018, cpu: 'Ryzen 5 2600', gpu: 'GTX 1060 6GB', ramPerGB: 10, systemCost: 800,   costPerCore: 133, gpuTflops: 4.4 },
+    { year: 2022, cpu: 'Ryzen 5 5600', gpu: 'RX 6650 XT', ramPerGB: 3,  systemCost: 750,   costPerCore: 125, gpuTflops: 10.8 },
+    { year: 2024, cpu: 'Ryzen 5 7600', gpu: 'RTX 4060', ramPerGB: 2.5, systemCost: 800,   costPerCore: 133, gpuTflops: 15.1 },
+    { year: 2026, cpu: 'Ryzen 5 9600X', gpu: 'RX 9060 XT', ramPerGB: 12.8, systemCost: 1439, costPerCore: 240, gpuTflops: 17 }
+  ],
+  2: [
+    { year: 2008, cpu: 'Core 2 Quad Q9650', gpu: 'GTX 280', ramPerGB: 8,  systemCost: 2000,  costPerCore: 500, gpuTflops: 0.93 },
+    { year: 2011, cpu: 'i7-2600K', gpu: 'GTX 580', ramPerGB: 5,  systemCost: 1500,  costPerCore: 375, gpuTflops: 1.6 },
+    { year: 2014, cpu: 'i7-4790K', gpu: 'GTX 980', ramPerGB: 8,  systemCost: 1700,  costPerCore: 425, gpuTflops: 4.6 },
+    { year: 2018, cpu: 'Ryzen 7 2700X', gpu: 'RTX 2080 Ti', ramPerGB: 10, systemCost: 2500,  costPerCore: 313, gpuTflops: 13.4 },
+    { year: 2022, cpu: 'Ryzen 9 5950X', gpu: 'RTX 3090', ramPerGB: 3,  systemCost: 3000,  costPerCore: 188, gpuTflops: 35.6 },
+    { year: 2024, cpu: 'Ryzen 9 7950X', gpu: 'RTX 4090', ramPerGB: 2.5, systemCost: 3200,  costPerCore: 200, gpuTflops: 82.6 },
+    { year: 2026, cpu: 'Ryzen 9 9950X', gpu: 'RTX 5080', ramPerGB: 12.8, systemCost: 4712, costPerCore: 295, gpuTflops: 56.3 }
+  ],
+  3: [
+    { year: 2008, cpu: '2x Opteron 2356 (8C)', gpu: 'Tesla C1060', ramPerGB: null, systemCost: 15000,  costPerCore: 1875, gpuTflops: 0.93 },
+    { year: 2011, cpu: '2x Opteron 6176 (24C)', gpu: 'Tesla M2090', ramPerGB: null, systemCost: 14000,  costPerCore: 583,  gpuTflops: 1.33 },
+    { year: 2014, cpu: '2x Xeon E5-2697 v3 (28C)', gpu: 'Tesla K80', ramPerGB: null, systemCost: 18000, costPerCore: 643,  gpuTflops: 8.7 },
+    { year: 2018, cpu: 'TR 2990WX (32C)', gpu: 'Tesla V100', ramPerGB: null, systemCost: 14000,  costPerCore: 438,  gpuTflops: 15.7 },
+    { year: 2022, cpu: 'TR PRO 5995WX (64C)', gpu: 'A100 80GB', ramPerGB: null, systemCost: 30000, costPerCore: 469,  gpuTflops: 19.5 },
+    { year: 2024, cpu: 'TR PRO 7995WX (96C)', gpu: 'RTX 6000 Ada', ramPerGB: null, systemCost: 40000, costPerCore: 417,  gpuTflops: 91.1 },
+    { year: 2026, cpu: 'EPYC 9755 (128C)', gpu: 'RTX PRO 6000', ramPerGB: null, systemCost: 28000, costPerCore: 219, gpuTflops: 125 }
+  ]
+};
+
+// === TOP500 Reference Data (Rmax in TFLOPS, FP64 Linpack) ===
+var TOP500_DATA = [
+  { year: 2008, month: 11, rank1Name: 'Roadrunner (LANL)',       rank1Tflops: 1026,      rank500Tflops: 12.64,  sumTflops: 16000,   note: 'First petaflop system' },
+  { year: 2011, month: 6,  rank1Name: 'K computer (RIKEN)',      rank1Tflops: 8160,      rank500Tflops: 40,     sumTflops: 58000,   note: '' },
+  { year: 2014, month: 6,  rank1Name: 'Tianhe-2 (NUDT)',         rank1Tflops: 33860,     rank500Tflops: 133.7,  sumTflops: 274000,  note: '' },
+  { year: 2018, month: 11, rank1Name: 'Summit (ORNL)',           rank1Tflops: 143500,    rank500Tflops: 1000,   sumTflops: 1130000, note: '#500 approaches petascale' },
+  { year: 2022, month: 11, rank1Name: 'Frontier (ORNL)',         rank1Tflops: 1102000,   rank500Tflops: 1700,   sumTflops: 4860000, note: 'First exascale system' },
+  { year: 2024, month: 11, rank1Name: 'El Capitan (LLNL)',       rank1Tflops: 1742000,   rank500Tflops: 2310,   sumTflops: 8300000, note: '' }
+];
+
+// === DRAM Crisis Data ($/GB DDR5 desktop) ===
+var DRAM_CRISIS = {
+  pricePerGB: {
+    '2024-Q1': 2.50,
+    '2024-Q4': 3.00,
+    '2025-Q2': 2.50,
+    '2025-Q4': 8.00,
+    '2026-Q2': 12.80
+  },
+  impactByTier: [
+    { tier: 1, ramPctOfBuild2024: 8,  ramPctOfBuild2026: 28 },
+    { tier: 2, ramPctOfBuild2024: 4,  ramPctOfBuild2026: 17 },
+    { tier: 3, ramPctOfBuild2024: 15, ramPctOfBuild2026: 34 },
+    { tier: 4, ramPctOfBuild2024: 12, ramPctOfBuild2026: 22 },
+    { tier: 5, ramPctOfBuild2024: 12, ramPctOfBuild2026: 22 }
+  ],
+  rootCause: 'AI datacenter buildout consuming all available DRAM fab capacity',
+  samsung60PctHike: true,
+  forecast: 'Prices expected to remain elevated through 2026, potential relief in 2027'
+};
+
+// === Reference Platform ===
+var REFERENCE_PLATFORM = {
+  motherboard: 'Gigabyte MZ72-HB0 Rev 3.x',
+  cpu: '2x AMD EPYC 7T83',
+  cpuSpec: '64C/128T each = 128C/256T total',
+  ram: '1TB DDR4-3200 ECC (16x 64GB)',
+  totalCost: 10600,
+  generation: 'SP3 (Milan) — two generations behind SP5 (Turin)',
+  pcie: '4.0',
+  ddr: 'DDR4',
+  verdict: 'Closeout value — do not use for new system design basis'
+};
+
+// === Value Analysis Summary ===
+var VALUE_ANALYSIS = [
+  { metric: 'Lowest $/Core',       bestTier: '3A', value: '$191/core',          detail: 'EPYC 9755' },
+  { metric: 'Lowest $/TFLOP',      bestTier: '1-2', value: '$84-85/TFLOP',     detail: 'Consumer GPU sweet spot' },
+  { metric: 'Best GB6 SC',         bestTier: '2',  value: '3,359',              detail: 'Ryzen 9 9950X' },
+  { metric: 'Best GB6 MC per $1K', bestTier: '1',  value: '10,135',             detail: 'Best multi-thread value' },
+  { metric: 'Best Perf/$/U',       bestTier: '4',  value: '1.50 TFLOPS/$K/U',  detail: 'RTX 5090 config' },
+  { metric: 'Most VRAM',           bestTier: '5',  value: '3,456GB (3.375TB)',  detail: '36x RTX PRO 6000' },
+  { metric: 'Most Total Compute',  bestTier: '5',  value: '4.5 PFLOPS',         detail: 'Single rack' }
+];
+
+// === White-Box vs TOP500 Floor ===
+var WHITEBOX_VS_TOP500 = [
+  { year: 2008, top500Floor: 12.64,  tierToMatch: 'T2', costToMatch: 4000,   note: 'Single high-end GPU today' },
+  { year: 2011, top500Floor: 40,     tierToMatch: 'T2', costToMatch: 5000,   note: 'Single RTX 5080 = 56 TFLOPS' },
+  { year: 2014, top500Floor: 133.7,  tierToMatch: 'T2-3', costToMatch: 12000, note: '2x RTX 5090' },
+  { year: 2018, top500Floor: 1000,   tierToMatch: 'T4', costToMatch: 140000, note: '2x 4U servers w/ 8 GPUs' },
+  { year: 2022, top500Floor: 1700,   tierToMatch: 'T4', costToMatch: 280000, note: '4x 4U servers' },
+  { year: 2024, top500Floor: 2310,   tierToMatch: 'T5', costToMatch: 500000, note: 'Half rack' }
+];
