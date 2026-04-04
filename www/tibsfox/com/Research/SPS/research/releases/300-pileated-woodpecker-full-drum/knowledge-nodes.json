@@ -1,0 +1,62 @@
+{
+  "degree": 300,
+  "species": "Pileated Woodpecker",
+  "scientific_name": "Dryocopus pileatus",
+  "slug": "300-pileated-woodpecker-full-drum",
+  "sound_type": "industrial machine-gun drumming on dead fir -- full territorial and foraging drum sequence on large-diameter old-growth snag; rapid powerful strikes up to 20/second; broadband impact sound 200-2000 Hz; snag resonates and amplifies; carries 500m-1km; accelerating sequence; sustained for minutes at a session",
+  "energy": 7,
+  "ecosystem": "Old-growth snag -- large dead standing trees (2-4 foot diameter) in old-growth or mature Pacific Northwest forest; primary foraging and territorial drumming substrate; requires centuries of tree growth followed by decades of decay",
+  "season": "Resident (year-round; territorial drumming most intense late winter and early spring; foraging drumming year-round)",
+  "family": "Picidae",
+  "order": "Piciformes",
+  "conservation_status": "Least Concern (IUCN). Common and widespread in mature and old-growth Pacific Northwest forest. Not threatened. Keystone cavity excavator. Old-growth dependent for highest-quality drumming substrate.",
+  "milestone": "THIRD PILEATED APPEARANCE. FIVE-SIXTHS MARK (300/360 = 83.3%). ENGINE NAMESAKE SPECIES. Three-appearance escalation arc: E=5 (degree 54, general), E=6 (degree 108, wild laughing call, FIRST DOUBLE-MAXIMUM in engine history), E=7 (degree 300, full drum, five-sixths mark). 246-degree span from first to third appearance. The species that defines the SPS engine's acoustic ambition reaches highest energy at the engine's major structural milestone.",
+  "coordinates": {
+    "lat": 47.8,
+    "lon": -121.5,
+    "description": "Pacific Northwest distribution: common in mature and old-growth forest throughout Cascades, Olympics, Coast Ranges, and forested lowlands. Requires large territories (100-400 acres per pair) with substantial dead wood. Year-round resident."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Mechanical drumming -- bill strikes resonant dead wood, not a vocal production. Produces broadband impact sound amplified by snag resonance. Different from the laughing call (degree 108) which is a syrinx-produced vocalization.",
+    "mechanics": "Up to 20 strikes per second. Skull spongy bone absorbs impact. Hyoid bone wraps skull for protection. Asymmetric bill tip prevents slippage. Snag acts as resonating chamber: 2-4 foot diameter hollow dead Douglas-fir or Western red cedar produces maximum resonance.",
+    "frequency_range": "Broadband 200-2,000 Hz with energy concentrated in lower frequencies (the deep thwack component). Low-frequency content carries through forest at long range. Audible 500m to over 1km.",
+    "duration": "Minutes at a session (territorial and foraging drumming both sustained). Longer duration than the laughing call (dramatic but brief). Duration difference drives E=7 vs. E=6 calibration.",
+    "e7_calibration": "E=7: sustained duration + long-range carry + maximum mechanical force. Above the laughing call (E=6) because of duration and carrying power. The full drum is the most ecologically complete Pileated behavior: simultaneously territorial and foraging."
+  },
+  "nodes": [
+    {
+      "id": "five-sixths-namesake",
+      "type": "milestone",
+      "title": "Five-Sixths Mark -- Engine Namesake Species",
+      "description": "300/360 = 83.3% = five-sixths. The Pileated Woodpecker, which defines the SPS engine's acoustic ambition, returns at the engine's major structural milestone. The landing is not designed -- it is where the rotation falls. But it is structurally coherent: the most significant recurring species at the most significant current milestone.",
+      "connections": ["three-appearance-arc", "degree-108-callback"]
+    },
+    {
+      "id": "three-appearance-arc",
+      "type": "arc",
+      "title": "Three-Appearance Escalation Arc: 54 → 108 → 300",
+      "description": "Degree 54 (general, E=5): species overview. Degree 108 (laughing call, E=6): isolated vocalization, first double-maximum. Degree 300 (full drum, E=7): mechanical behavior, five-sixths mark. Each appearance isolates a genuinely different behavior at a genuinely higher energy level. The arc is analytically coherent: species overview → vocalization → mechanical behavior, E=5 → E=6 → E=7. 246-degree span.",
+      "connections": ["five-sixths-namesake", "degree-108-callback"]
+    },
+    {
+      "id": "degree-108-callback",
+      "type": "callback",
+      "title": "Degree 108 Double-Maximum Callback",
+      "description": "Degree 108 was the SPS engine's first double-maximum: E=6 on both S36 (Veronica Lipgloss) and SPS (Pileated laughing) simultaneously. Degree 300 returns the Pileated 192 degrees later at E=7 -- the engine's threshold has expanded. The laughing call (syrinx) vs. the drum (mechanical): same species, different behaviors, different energies. The callback connects the engine's first structural event (first double-maximum at 108) to its current structural milestone (five-sixths mark at 300).",
+      "connections": ["three-appearance-arc", "five-sixths-namesake"]
+    },
+    {
+      "id": "old-growth-snag-keystone",
+      "type": "concept",
+      "title": "Keystone Cavity Excavator -- Old-Growth Snag Infrastructure",
+      "description": "The Pileated is the Pacific Northwest's primary creator of large cavities in snags. The rectangular excavations it creates are taken over by Wood Duck, goldeneye, Barred Owl, Northern Flying Squirrel, Vaux's Swift. The drum is the sound of infrastructure creation. The E=7 drum quality requires centuries of tree growth to produce the snag substrate: old-growth only.",
+      "connections": ["five-sixths-namesake"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-108", "species": "Pileated Woodpecker laughing", "relationship": "Second appearance E=6. FIRST DOUBLE-MAXIMUM in engine history. 192-degree callback. Laughing call (syrinx) vs. drum (mechanical)."},
+    {"target": "SPS-54", "species": "Pileated Woodpecker general", "relationship": "First appearance E=5. Species overview. 246-degree span from first to third appearance."},
+    {"target": "SPS-4", "species": "Northern Spotted Owl", "relationship": "Old-growth indicator thread. Engine begins in old-growth (degree 4) and five-sixths-marks in old-growth (degree 300). Old-growth is the ecological spine of the SPS engine."},
+    {"target": "S36-300", "artist": "Pond return", "relationship": "E=6 + E=7 = E=13. Five-sixths mark pairing. Old-growth forest and Fremont neighborhood. Ecological ambition and human-scale music at the milestone."}
+  ]
+}
