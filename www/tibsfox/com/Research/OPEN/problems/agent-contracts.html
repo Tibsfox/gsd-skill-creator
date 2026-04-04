@@ -151,6 +151,16 @@ footer a { color:rgba(255,255,255,0.3); }
   </section>
 
   <section>
+    <h2>Session 6 Research Connections</h2>
+    <p>New connections discovered during the Artemis II Session 6 research sweep:</p>
+    <ul>
+      <li><strong>12 Primitives &mdash; Permission Audit Trail + Agent Type System:</strong> The 12 Agentic Primitives analysis formalizes two contract-adjacent concepts. The Permission Audit Trail creates an immutable record of every tool access, providing post-hoc contract compliance verification. The Agent Type System assigns typed capabilities to agents, making contract preconditions enforceable at dispatch time &mdash; an agent without the required type cannot be assigned the work.</li>
+      <li><strong>Token Budget = Hard Contract Enforcement:</strong> The token-budget.ts module (now built) implements the resource bound component of agent contracts as a mechanical enforcement layer. Per-convoy and per-agent token ceilings with pre-execution checking mean that the contract's resource bound is not advisory &mdash; it is a hard stop. This is the conservation law from arXiv:2601.08815 made operational.</li>
+      <li><strong>SDD (Spec-Driven Development) &mdash; Spec IS the Contract:</strong> The Spec-Driven Development pattern discovered in Session 6 research treats the specification as the single source of truth for both implementation and verification. In agent contract terms, the spec is the contract: preconditions are the spec's input schema, postconditions are the spec's output schema, and resource bounds come from the spec's complexity estimate. Writing the spec writes the contract.</li>
+    </ul>
+  </section>
+
+  <section>
     <h2>What Would Constitute a Breakthrough</h2>
     <p>A compositional contract system where individual agent contracts compose into system-level guarantees. If agent A has contract C_A and agent B has contract C_B, and they interact through a defined protocol, derive the composite contract C_{AB} that bounds the behavior of the combined system. This is the multi-agent analog of compositional verification in formal methods.</p>
     <p>A practical breakthrough would be automatic contract inference: given a task description and a target cost budget, automatically generate a contract that is tight enough to prevent waste but loose enough to allow task completion with high probability. The drift bounds work is a step toward this, but current methods require historical execution data for calibration.</p>

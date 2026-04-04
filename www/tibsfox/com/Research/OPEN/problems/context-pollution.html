@@ -129,6 +129,15 @@ footer { max-width:900px; margin:0 auto; padding:1.5rem; text-align:center; font
 </section>
 
 <section>
+<h2>Session 6 Research Connections</h2>
+<p>New connections discovered during the Artemis II Session 6 research sweep:</p>
+<ul>
+  <li><strong>12 Primitives &mdash; Transcript Compaction (Primitive 10):</strong> The 12 Agentic Primitives analysis identifies Transcript Compaction as a first-class primitive that directly addresses context pollution. Rather than injecting raw sub-agent output, Primitive 10 compresses execution traces into structured summaries that preserve decision points while discarding verbose intermediate steps. This is the "Cedar filter" expressed as a formal operation.</li>
+  <li><strong>Token Budget Enforcement (backlog 999.1, now built):</strong> The token-budget.ts module provides hard per-convoy and per-agent token limits with pre-execution checking. This is a mechanical prevention layer &mdash; context cannot be polluted beyond the budget ceiling. When a sub-agent approaches its token budget, it must compress or terminate, never overflow into the parent's context window.</li>
+</ul>
+</section>
+
+<section>
 <h2>Related Problems</h2>
 <ul style="list-style:none; padding:0;">
   <li style="margin-bottom:0.4rem;">&rarr; <a href="orchestrated-intelligence.html">Orchestrated Distributed Intelligence</a> &mdash; the coordination problem</li>
