@@ -16,7 +16,7 @@ import sys
 import psycopg2
 from sentence_transformers import SentenceTransformer
 
-DB_DSN = "host=localhost dbname=tibsfox user=postgres password=foxyuw5,&%cM#(C3"
+from db_config import DB_DSN
 MODEL = "all-MiniLM-L6-v2"
 RRF_K = 60  # Reciprocal Rank Fusion constant (from Sourcegraph/Axon research)
 LIMIT = 5
