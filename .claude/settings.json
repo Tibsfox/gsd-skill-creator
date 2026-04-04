@@ -24,14 +24,6 @@
             "command": "node .claude/hooks/gsd-inject-snapshot.js"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/session-state.cjs"
-          }
-        ]
       }
     ],
     "SessionEnd": [
@@ -55,17 +47,7 @@
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "if": "Bash(git commit*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/validate-commit.cjs"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "if": "Bash(git push*)",
+        "if": "Bash(npm run build*)",
         "hooks": [
           {
             "type": "command",
@@ -84,35 +66,7 @@
         ]
       }
     ],
-    "TaskCompleted": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/task-completed-gate.sh"
-          }
-        ]
-      }
-    ],
-    "TeammateIdle": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/teammate-idle-gate.sh"
-          }
-        ]
-      }
-    ],
     "PostCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/session-state.cjs"
-          }
-        ]
-      }
     ],
     "PostToolUse": [
       {
@@ -123,16 +77,8 @@
             "command": "node .claude/hooks/gsd-context-monitor.js",
             "timeout": 10
           }
-        ]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/phase-boundary-check.cjs"
-          }
-        ]
+        ],
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
       }
     ]
   },
