@@ -1,0 +1,50 @@
+{
+  "degree": 239, "species": "Steelhead", "slug": "239-steelhead-leap", "sound_type": "metallic splash clean jump", "energy": 5,
+  "scientific_name": "Oncorhynchus mykiss (anadromous form)",
+  "common_names": ["Steelhead", "Steelhead Trout", "Steelhead Salmon"],
+  "family": "Salmonidae",
+  "ecosystem": "river (spawning migration, holding), open ocean (growth phase)",
+  "season": "winter (Nov-Apr primary Puget Sound and coastal WA)",
+  "taxonomy": {
+    "order": "Salmoniformes",
+    "family": "Salmonidae",
+    "genus": "Oncorhynchus",
+    "species": "O. mykiss (same species as Rainbow Trout)",
+    "note": "Species 3 in the Salmonidae chapter. Anadromous form of O. mykiss = Steelhead; resident form = Rainbow Trout."
+  },
+  "biology": {
+    "size": "2-5 kg typical; exceptional fish to 8-12+ kg",
+    "life_history": "Anadromous: born in river, smoltify 1-3 years, ocean 1-4 years, return to spawn",
+    "iteroparity": "Can spawn multiple times (unlike semelparous Pacific salmon). Kelts (post-spawn fish) may return to ocean and spawn again.",
+    "coloration": "Ocean phase: metallic steel-grey dorsal, bright silver sides. Spawning: pink lateral stripe returns.",
+    "run_types": ["Winter Steelhead (Nov-Apr entry, Feb-May spawn): primary Puget Sound and coastal WA run", "Summer Steelhead (May-Oct entry, spring spawn): Columbia River tributaries primarily"]
+  },
+  "sound_profile": {
+    "type": "physical impact sound; not vocalization",
+    "description": "Metallic, bright, clean jump. Higher frequency dominant than Chinook body-slap. Slender body enters water cleanly (steeper angle, less lateral splash). Brief duration -- a crack, then quiet.",
+    "energy_note": "E=5 (below Chinook/Coho E=6): lower mass + cleaner entry = less acoustic energy. Episodic, not continuous.",
+    "acrobatics": "Steelhead leap more frequently than other Pacific salmon; also leap during angling fights"
+  },
+  "conservation": {
+    "esa_listings": [
+      "Puget Sound Steelhead ESU: Threatened",
+      "Snake River summer Steelhead: Threatened",
+      "Middle Columbia River Steelhead: Threatened",
+      "Upper Columbia River Steelhead: Threatened"
+    ],
+    "olympic_peninsula_crisis": "Wild winter Steelhead critically declining on Hoh, Sol Duc, Quillayute, Bogachiel rivers. WDFW emergency closures issued. Most urgent steelhead conservation crisis in Washington.",
+    "hatchery_issue": "Hatchery Steelhead interbreeding with wild fish reduces genetic diversity. Management tension between fishery access and wild conservation."
+  },
+  "theory_nodes": [
+    { "concept": "Steelhead = O. mykiss anadromous form. Same species as Rainbow Trout. The anadromous life history (smoltification, ocean growth, natal return) is the difference. Iteroparous unlike semelparous Pacific salmon -- may spawn multiple times.", "level": "advanced", "department": "biology", "description": "The biological relationship between Steelhead and Rainbow Trout." },
+    { "concept": "Metallic clean jump E=5: slender body (higher length/mass ratio than Chinook) enters water cleanly. Higher-frequency dominant, shorter duration than Chinook E=6 body-slap. Acoustic texture is 'bright and brief' not 'heavy and sustained'. E=5 correct.", "level": "advanced", "department": "acoustics", "description": "Why the Steelhead leap is E=5 and acoustically distinct from Chinook." },
+    { "concept": "Olympic Peninsula wild winter Steelhead crisis: WDFW emergency closures on Hoh, Sol Duc, others. Critical decline of wild fish populations despite habitat quality. Complex of causes: ocean conditions, hatchery genetics, harvest history.", "level": "intermediate", "department": "conservation", "description": "The most urgent ongoing Steelhead conservation emergency in Washington State." }
+  ],
+  "cross_references": [
+    {"degree": 238, "species": "Coho Salmon spawning", "relationship": "Coho and Steelhead share juvenile freshwater habitat (small streams). Stream restoration benefits both. 6PPD-quinone also affects Steelhead (less so than Coho)."},
+    {"degree": 240, "species": "Bull Trout", "relationship": "Next Salmonidae species. Bull Trout = E=2 (near silence). Steelhead E=5 to Bull Trout E=2 = dramatic energy drop. Both char-family adjacent; very different ecology."}
+  ],
+  "s36_pair": {"degree": 239, "artist": "The Ventures", "pairing_note": "E=5 equilibrium. Metallic clean guitar (clean tone, bright reverb, Fender) + metallic splash clean jump. Both cross open water: Ventures crossed Pacific to Japan; Steelhead crosses ocean and returns. Metallic in sound, metallic in color."},
+  "milestones": ["Species 3 in Salmonidae chapter", "First iteroparous species in Salmonidae chapter", "Olympic Peninsula wild winter Steelhead crisis documented"],
+  "tags": ["salmonidae", "steelhead", "o-mykiss", "anadromous", "rainbow-trout", "winter-steelhead", "metallic-jump", "iteroparous", "olympic-peninsula-crisis", "esa-threatened", "clean-leap", "kelt", "smoltification"]
+}
