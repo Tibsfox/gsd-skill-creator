@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global Power Efficiency Rankings 2024-2025 — Tibsfox Research</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-nav">
+    <a href="../index.html">Research</a> /
+    <strong style="color:var(--text-primary)">Global Power Efficiency Rankings</strong>
+  </div>
+
+  <header>
+    <h1>Global Power Efficiency Rankings</h1>
+    <p class="subtitle">A comprehensive multi-level analysis: from individual action to global cooperation. Featuring 75 country rankings, success stories from every continent, and practical guidance on leveraging AI tools for energy efficiency at every scale.</p>
+    <span class="metrics-badge">Individual &bull; Community &bull; State/Regional &bull; National &bull; Global | AI Tools Integration | Metric: Electricity Intensity (kWh per $1,000 GDP per Capita)</span>
+  </header>
+
+  <main class="container">
+    <!-- Stats Bar -->
+    <div class="stats-bar" style="margin-top:1.5rem">
+      <div class="stat"><div class="stat-value">75</div><div class="stat-label">Countries Ranked</div></div>
+      <div class="stat"><div class="stat-value">4</div><div class="stat-label">Efficiency Tiers</div></div>
+      <div class="stat"><div class="stat-value">5</div><div class="stat-label">Regions</div></div>
+      <div class="stat"><div class="stat-value">25</div><div class="stat-label">AI Strategies</div></div>
+      <div class="stat"><div class="stat-value">125</div><div class="stat-label">Career Pathways</div></div>
+    </div>
+
+    <!-- Region Navigation -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Explore by Region</h2>
+        <p class="section-desc">Dive into region-specific efficiency data, trends, and strategies</p>
+      </div>
+      <div class="region-nav">
+        <a href="europe.html" class="region-card" style="border-top:3px solid #3b82f6">
+          <h3>Europe</h3>
+          <div class="region-count">30 countries</div>
+        </a>
+        <a href="asia-pacific.html" class="region-card" style="border-top:3px solid #ef4444">
+          <h3>Asia-Pacific</h3>
+          <div class="region-count">16 countries</div>
+        </a>
+        <a href="americas.html" class="region-card" style="border-top:3px solid #10b981">
+          <h3>Americas</h3>
+          <div class="region-count">8 countries</div>
+        </a>
+        <a href="africa.html" class="region-card" style="border-top:3px solid #f59e0b">
+          <h3>Africa</h3>
+          <div class="region-count">7 countries</div>
+        </a>
+        <a href="middle-east.html" class="region-card" style="border-top:3px solid #8b5cf6">
+          <h3>Middle East &amp; N. Africa</h3>
+          <div class="region-count">10 countries</div>
+        </a>
+      </div>
+      <div style="text-align:center; margin-top:1rem">
+        <a href="strategies.html" class="card" style="display:inline-block; padding:0.75rem 2rem; border-top:3px solid var(--accent-purple); text-decoration:none">
+          <strong style="color:var(--accent-purple)">25 AI Efficiency Strategies &amp; 125 Career Pathways &rarr;</strong>
+        </a>
+      </div>
+    </section>
+
+    <!-- Energy Intensity Trends -->
+    <section class="section" id="intensity-trends">
+      <div class="section-header">
+        <h2>Energy Intensity Trends (2000-2024)</h2>
+        <p class="section-desc">Tracking the decline in energy intensity across major economies</p>
+      </div>
+      <div class="chart-container">
+        <div class="canvas-wrapper canvas-wrapper-tall"><canvas id="intensityChart"></canvas></div>
+        <div class="citation">Sources: IEA Energy Efficiency Reports 2023-2025, Enerdata Global Energy Yearbook 2025, World Bank SDG7 Tracking</div>
+      </div>
+
+      <!-- Period Averages -->
+      <div class="data-table-container" style="margin-top:1rem">
+        <table>
+          <thead>
+            <tr><th>Region</th><th>2000-2010</th><th>2010-2019</th><th>2020-2024</th><th>Total Reduction</th><th>Key Driver</th></tr>
+          </thead>
+          <tbody id="period-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Annual Improvement -->
+    <section class="section" id="improvement">
+      <div class="section-header">
+        <h2>Annual Improvement Rate</h2>
+        <p class="section-desc">Global energy intensity improvement (%) year-over-year, with COP28 target</p>
+      </div>
+      <div class="chart-container">
+        <div class="canvas-wrapper"><canvas id="improvementChart"></canvas></div>
+        <div class="citation">Sources: IEA, UN SDG7, World Bank, Enerdata 2025</div>
+      </div>
+    </section>
+
+    <!-- Top Consumers -->
+    <section class="section" id="top-consumers">
+      <div class="section-header">
+        <h2>Top 10 Electricity Consumers</h2>
+        <p class="section-desc">Annual electricity consumption by country (TWh)</p>
+      </div>
+      <div class="chart-container">
+        <div class="canvas-wrapper"><canvas id="consumersChart"></canvas></div>
+        <div class="citation">Sources: <a href="https://ember-energy.org/latest-insights/global-electricity-review-2025/" target="_blank" style="color:var(--accent-blue)">Ember 2025</a>, <a href="https://www.energyinst.org/statistical-review" target="_blank" style="color:var(--accent-blue)">Energy Institute 2025</a></div>
+      </div>
+    </section>
+
+    <!-- Consumption vs Efficiency -->
+    <section class="section" id="consumption-analysis">
+      <div class="section-header">
+        <h2>Consumption vs Efficiency Analysis</h2>
+        <p class="section-desc">Comparing total electricity consumption with efficiency across economy types</p>
+      </div>
+      <div class="chart-container">
+        <div class="canvas-wrapper canvas-wrapper-tall"><canvas id="bubbleChart"></canvas></div>
+        <div class="citation">Sources: IEA Electricity 2025, IMF World Economic Outlook Oct 2025</div>
+      </div>
+    </section>
+
+    <!-- AI & Data Centers -->
+    <section class="section" id="ai-datacenters">
+      <div class="section-header">
+        <h2>Emerging Challenge: AI &amp; Data Centers</h2>
+        <p class="section-desc">The new driver of electricity demand growth in advanced economies</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="stat-value">945 TWh</div>
+          <p class="stat-label">Projected Data Center Consumption by 2030</p>
+          <p style="margin-top:0.5rem; color:var(--text-secondary); font-size:0.85rem">Data center electricity consumption projected to more than double by 2030 &mdash; equivalent to Japan's annual consumption. AI workloads are the primary driver.</p>
+        </div>
+        <div class="card">
+          <div class="stat-value">80%</div>
+          <p class="stat-label">US &amp; China Share of Growth</p>
+          <p style="margin-top:0.5rem; color:var(--text-secondary); font-size:0.85rem">The US and China account for nearly 80% of projected global data center growth to 2030. US data center consumption alone expected to rise by 240 TWh (+130%).</p>
+        </div>
+      </div>
+      <div class="chart-container" style="margin-top:1rem">
+        <h3 class="chart-title">Data Center Electricity Projection (TWh)</h3>
+        <div class="canvas-wrapper"><canvas id="datacenterChart"></canvas></div>
+        <div class="citation">Source: <a href="https://www.iea.org/reports/electricity-2024" target="_blank" style="color:var(--accent-blue)">IEA Electricity 2024</a>, <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" style="color:var(--accent-blue)">IEA Energy and AI Report 2025</a></div>
+      </div>
+    </section>
+
+    <!-- Full Rankings Table -->
+    <section class="section" id="rankings">
+      <div class="section-header">
+        <h2>Complete Rankings: Top 75 Power Consumers</h2>
+        <p class="section-desc">Ranked by electricity intensity (lower values indicate more efficient conversion of electricity to economic output)</p>
+      </div>
+      <div class="methodology-note">
+        <strong>Methodology:</strong> Electricity Intensity = Total Electricity Consumption (TWh) / (GDP per Capita x Population) x 1,000,000. Data: IEA, Ember, Energy Institute, World Bank, IMF WEO October 2025.
+      </div>
+      <div class="table-controls" style="margin-top:1rem">
+        <input type="text" id="search-input" placeholder="Search countries...">
+        <select id="tier-filter">
+          <option value="all">All Tiers</option>
+          <option value="Elite">Elite</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+        </select>
+        <select id="region-filter">
+          <option value="all">All Regions</option>
+          <option value="europe">Europe</option>
+          <option value="asia-pacific">Asia-Pacific</option>
+          <option value="americas">Americas</option>
+          <option value="africa">Africa</option>
+          <option value="middle-east">Middle East &amp; N. Africa</option>
+        </select>
+      </div>
+      <div class="data-table-container" id="rankings-table"></div>
+      <div class="citation" style="margin-top:1rem">Data: <a href="https://ember-energy.org/latest-insights/global-electricity-review-2025/" target="_blank" style="color:var(--accent-blue)">Ember 2025</a>, <a href="https://www.energyinst.org/statistical-review" target="_blank" style="color:var(--accent-blue)">Energy Institute 2025</a>, <a href="https://www.imf.org/en/Publications/WEO" target="_blank" style="color:var(--accent-blue)">IMF WEO Oct 2025</a>, <a href="https://data.worldbank.org/" target="_blank" style="color:var(--accent-blue)">World Bank</a></div>
+    </section>
+
+    <!-- Sources -->
+    <div class="source-section">
+      <h4>Data Sources &amp; Methodology</h4>
+      <div class="source-grid">
+        <div class="source-item">
+          <span class="source-name">Ember</span><br>
+          <a href="https://ember-energy.org/latest-insights/global-electricity-review-2025/" target="_blank">Global Electricity Review 2025</a>
+        </div>
+        <div class="source-item">
+          <span class="source-name">Energy Institute</span><br>
+          <a href="https://www.energyinst.org/statistical-review" target="_blank">Statistical Review of World Energy 2025</a>
+        </div>
+        <div class="source-item">
+          <span class="source-name">IMF</span><br>
+          <a href="https://www.imf.org/en/Publications/WEO" target="_blank">World Economic Outlook Oct 2025</a>
+        </div>
+        <div class="source-item">
+          <span class="source-name">IEA</span><br>
+          <a href="https://www.iea.org/reports/energy-efficiency-2025" target="_blank">Energy Efficiency 2025</a>
+        </div>
+        <div class="source-item">
+          <span class="source-name">World Bank</span><br>
+          <a href="https://data.worldbank.org/" target="_blank">Development Indicators</a>
+        </div>
+        <div class="source-item">
+          <span class="source-name">UN SDG7</span><br>
+          <a href="https://trackingsdg7.esmap.org/" target="_blank">Tracking SDG7 Report 2025</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="../index.html">Research</a> &middot;
+    <a href="strategies.html">AI Strategies</a> &middot;
+    <a href="europe.html">Europe</a> &middot;
+    <a href="asia-pacific.html">Asia-Pacific</a> &middot;
+    <a href="americas.html">Americas</a> &middot;
+    <a href="africa.html">Africa</a> &middot;
+    <a href="middle-east.html">Middle East</a>
+    <p style="margin-top:0.75rem">Global Power Efficiency Rankings v1.2 &mdash; Source: <a href="https://github.com/Tibsfox/Global-Power-Efficiency-Rankings" target="_blank">GitHub</a></p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = 'rgba(100,116,139,0.2)';
+    Chart.defaults.font.family = "'DM Sans', sans-serif";
+    Chart.defaults.font.size = 11;
+
+    // Period averages table
+    (function() {
+      var tb = document.getElementById('period-table');
+      GPE_PERIOD_AVERAGES.forEach(function(r) {
+        var color = r.total.startsWith('-4') ? 'var(--accent-green)' : 'var(--accent-blue)';
+        tb.innerHTML += '<tr><td><strong>' + r.flag + ' ' + r.region + '</strong></td><td>' + r.p1 + '</td><td>' + r.p2 + '</td><td>' + r.p3 + '</td><td style="color:' + color + '"><strong>' + r.total + '</strong></td><td>' + r.driver + '</td></tr>';
+      });
+    })();
+
+    // Intensity Chart
+    new Chart(document.getElementById('intensityChart').getContext('2d'), {
+      type: 'line',
+      data: { labels: GPE_INTENSITY_LABELS, datasets: GPE_INTENSITY_DATASETS },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, padding: 15, usePointStyle: true, font: { size: 10 } } },
+          title: { display: true, text: 'Energy Intensity Index (2000 = 100) \u2014 Lower Values = Higher Efficiency', font: { size: 12, weight: '600' } },
+          tooltip: {
+            callbacks: {
+              afterBody: function(ctx) {
+                var a = {'2001':'\u{1F4CC} China joins WTO','2005':'\u{1F4CC} China peaks, begins decline','2008':'\u{1F4CC} Global financial crisis','2020':'\u{1F4CC} COVID-19 pandemic','2022':'\u{1F4CC} Energy crisis accelerates EU/US'};
+                return a[ctx[0].label] || '';
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45 } },
+          y: { min: 50, max: 110, grid: { color: 'rgba(100,116,139,0.15)' }, title: { display: true, text: 'Index (2000 = 100)', font: { size: 10 } } }
+        }
+      }
+    });
+
+    // Improvement Chart
+    new Chart(document.getElementById('improvementChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: GPE_IMPROVEMENT_LABELS,
+        datasets: [{
+          label: 'Global Annual Improvement (%)',
+          data: GPE_IMPROVEMENT_DATA,
+          backgroundColor: function(ctx) {
+            var i = ctx.dataIndex, v = ctx.dataset.data[i];
+            if (i === 24) return '#10b981';
+            if (v >= 2.6) return '#22c55e';
+            if (v >= 2.0) return '#3b82f6';
+            if (v >= 1.3) return '#60a5fa';
+            if (v >= 1.0) return '#f59e0b';
+            return '#ef4444';
+          },
+          borderRadius: 3
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Global Primary Energy Intensity Improvement (%/year)', font: { size: 10, weight: '600' } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 8 } } },
+          y: { max: 4.5, min: 0, grid: { color: 'rgba(100,116,139,0.15)' }, ticks: { font: { size: 9 }, callback: function(v) { return v + '%'; } } }
+        }
+      }
+    });
+
+    // Consumers Chart
+    new Chart(document.getElementById('consumersChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: GPE_CONSUMERS_LABELS,
+        datasets: [{ label: 'TWh', data: GPE_CONSUMERS_DATA, backgroundColor: GPE_CONSUMERS_COLORS, borderRadius: 4 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: 'rgba(100,116,139,0.15)' } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Bubble Chart
+    new Chart(document.getElementById('bubbleChart').getContext('2d'), {
+      type: 'bubble',
+      data: { datasets: GPE_BUBBLE_DATASETS },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 10, padding: 15, usePointStyle: true, font: { size: 10 } } },
+          title: { display: true, text: 'Consumption (TWh) vs Intensity (kWh/$1k GDP/cap)', font: { size: 12, weight: '600' } },
+          tooltip: { callbacks: { label: function(ctx) { var p=ctx.raw; return p.country+': '+p.x+' TWh, Intensity: '+p.y; } } }
+        },
+        scales: {
+          x: { type: 'logarithmic', title: { display: true, text: 'Total Electricity (TWh) - Log Scale', font: { size: 10 } }, grid: { color: 'rgba(100,116,139,0.15)' } },
+          y: { title: { display: true, text: 'Intensity (Lower = More Efficient)', font: { size: 10 } }, grid: { color: 'rgba(100,116,139,0.15)' }, min: 0, max: 8 }
+        }
+      }
+    });
+
+    // Datacenter Chart
+    new Chart(document.getElementById('datacenterChart').getContext('2d'), {
+      type: 'line',
+      data: { labels: GPE_DATACENTER_LABELS, datasets: GPE_DATACENTER_DATASETS },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { boxWidth: 12, padding: 20, usePointStyle: true, font: { size: 11 } } } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(100,116,139,0.15)' } }
+        }
+      }
+    });
+
+    // Rankings table with filtering
+    (function() {
+      var searchInput = document.getElementById('search-input');
+      var tierFilter = document.getElementById('tier-filter');
+      var regionFilter = document.getElementById('region-filter');
+
+      function render() {
+        var q = searchInput.value.toLowerCase();
+        var tier = tierFilter.value;
+        var region = regionFilter.value;
+        var filtered = GPE_DATA.filter(function(d) {
+          if (q && d.country.toLowerCase().indexOf(q) === -1) return false;
+          if (tier !== 'all' && d.tier !== tier) return false;
+          if (region !== 'all' && d.region !== region) return false;
+          return true;
+        });
+        gpeRenderTable('rankings-table', filtered);
+      }
+
+      searchInput.addEventListener('input', render);
+      tierFilter.addEventListener('change', render);
+      regionFilter.addEventListener('change', render);
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Optimization Techniques &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>Token Optimization Techniques
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html">3. Multi-Agent</a>
+      <a href="section-4.html" class="active">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html">10. GSD</a>
+      <a href="references.html">References</a>
+    </div>
+  </header>
+
+
+    <header>
+        <span class="section-number">4</span>
+        <h1>Token Optimization Techniques</h1>
+        <p class="subtitle">Comprehensive Guide to Cost Reduction and Efficiency in LLM Applications</p>
+        <p class="research-date" style="margin-top: 0.5rem;">Research current as of: January 2026</p>
+    </header>
+
+    <div class="container">
+        <nav class="navigation">
+            <a href="../index.html" class="nav-button">← Back to Index</a>
+            <a href="section-3.html" class="nav-button">← Previous: Multi-Agent Systems</a>
+            <a href="section-5.html" class="nav-button">Next: Performance Improvement →</a>
+        </nav>
+
+        <!-- Executive Summary -->
+        <section class="content-section">
+            <h2>Executive Summary</h2>
+            <p>Token optimization has become a critical competency for organizations deploying LLM applications at scale. With AI workloads projected to exceed <strong>$840 billion by 2026</strong>, and output tokens costing 3-10x more than input tokens, systematic optimization strategies are no longer optional—they're essential for sustainable AI operations.</p>
+
+            <div class="highlight-box">
+                <strong>Key Finding:</strong> Most production systems can achieve 60-80% cost reduction through systematic optimization while maintaining acceptable quality. Combined strategies including prompt caching (90% savings), batch processing (50% discount), intelligent routing (50-80% reduction), and prompt compression (70-94% savings) deliver transformative ROI.
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">60-80%</div>
+                    <div class="stat-label">Typical Cost Reduction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">Max Caching Savings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3-10x</div>
+                    <div class="stat-label">Output Token Premium</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$840B</div>
+                    <div class="stat-label">AI Spending by 2026</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Token Economics -->
+        <section class="content-section">
+            <h2>1. Token Economics and Pricing (2026)</h2>
+
+            <h3>Understanding the Output Token Premium</h3>
+            <p>The fundamental asymmetry in LLM pricing—where output tokens cost 2-10x more than input tokens—creates the primary opportunity for optimization. This premium reflects the computational cost of generation versus processing.</p>
+
+            <div class="warning-box">
+                <strong>Critical Insight:</strong> Many companies overlook the output token premium when calculating costs, leading to budget overruns of 200-500% in production deployments. Always model costs with realistic input/output ratios for your use case.
+            </div>
+
+            <h3>Current Pricing Landscape (2026)</h3>
+
+            <h4>Major Provider Comparison</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Provider / Model</th>
+                        <th>Input (per 1M tokens)</th>
+                        <th>Output (per 1M tokens)</th>
+                        <th>Premium Ratio</th>
+                        <th>Context Window</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Anthropic Claude Opus 4.5</strong></td>
+                        <td class="price-high">$5.00</td>
+                        <td class="price-high">$25.00</td>
+                        <td>5x</td>
+                        <td>200K tokens</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anthropic Claude Sonnet 4.5</strong></td>
+                        <td class="price-mid">$3.00</td>
+                        <td class="price-mid">$15.00</td>
+                        <td>5x</td>
+                        <td>200K tokens</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anthropic Claude Haiku 4.5</strong></td>
+                        <td class="price-low">$1.00</td>
+                        <td class="price-low">$5.00</td>
+                        <td>5x</td>
+                        <td>200K tokens</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OpenAI GPT-4o</strong></td>
+                        <td class="price-mid">$2.50</td>
+                        <td class="price-mid">$10.00</td>
+                        <td>4x</td>
+                        <td>128K tokens</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OpenAI o1 (reasoning)</strong></td>
+                        <td class="price-high">$15.00</td>
+                        <td class="price-high">$60.00</td>
+                        <td>4x</td>
+                        <td>128K tokens</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <strong>2026 Market Trend:</strong> The introduction of reasoning models (o1, o3) has created a new pricing tier where "thinking tokens" can generate 10-30x more internal tokens than visible output, multiplying costs dramatically for complex reasoning tasks. Providers are developing effort/budget controls to cap reasoning depth.
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Context Window Extension Research:</strong> The 200K+ token context windows now standard in frontier models are enabled by research on positional interpolation<sup class="citation" data-ref="16"><a href="#ref-16" aria-describedby="tooltip-16">16</a><span class="citation-tooltip" id="tooltip-16" role="tooltip"><span class="source-type academic">Academic</span><strong>Extending Context Window of LLMs via Positional Interpolation</strong><span class="authors">Chen et al., arXiv 2024</span><a href="https://arxiv.org/abs/2306.15595" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> and YaRN<sup class="citation" data-ref="17"><a href="#ref-17" aria-describedby="tooltip-17">17</a><span class="citation-tooltip" id="tooltip-17" role="tooltip"><span class="source-type academic">Academic</span><strong>YaRN: Efficient Context Window Extension of Large Language Models</strong><span class="authors">Peng et al., ICLR 2024</span><a href="https://arxiv.org/abs/2309.00071" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup>. YaRN combines RoPE scaling with NTK-aware interpolation, achieving 128K context windows with superior quality retention compared to linear interpolation. Infini-attention<sup class="citation" data-ref="18"><a href="#ref-18" aria-describedby="tooltip-18">18</a><span class="citation-tooltip" id="tooltip-18" role="tooltip"><span class="source-type academic">Academic</span><strong>Leave No Context Behind: Efficient Infinite Context Transformers with Infini-attention</strong><span class="authors">Munkhdalai et al., Google 2024</span><a href="https://arxiv.org/abs/2404.07143" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> enables bounded memory and computation while handling unboundedly long contexts.</p>
+                </div>
+            </aside>
+
+            <h4>Prompt Caching Pricing</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Cache Write Multiplier</th>
+                        <th>Cache Read Multiplier</th>
+                        <th>Effective Savings</th>
+                        <th>Cache TTL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Anthropic (5-min cache)</strong></td>
+                        <td>1.25x base input</td>
+                        <td>0.1x base input</td>
+                        <td>90% on cache hits</td>
+                        <td>5 minutes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anthropic (1-hour cache)</strong></td>
+                        <td>2.0x base input</td>
+                        <td>0.1x base input</td>
+                        <td>90% on cache hits</td>
+                        <td>1 hour</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OpenAI</strong></td>
+                        <td>1.0x base input</td>
+                        <td>0.5x base input</td>
+                        <td>50% on cache hits</td>
+                        <td>5-10 minutes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Reasoning Tokens Cost Impact</h4>
+            <div class="warning-box">
+                <strong>Hidden Cost Alert:</strong> Reasoning models like OpenAI's o1 and o3 generate "thinking tokens" that can be 10-30x the visible output length. For a 100-token visible response, you might pay for 1,000-3,000 internal reasoning tokens.
+
+                <p style="margin-top: 1rem;"><strong>Example:</strong> At $60/M output tokens, a seemingly simple 100-token response that generates 2,000 thinking tokens actually costs $0.12 instead of the expected $0.006—a 20x cost multiplier.</p>
+            </div>
+
+            <h3>ROI Calculations for Optimization</h3>
+            <p>Understanding the financial impact of optimization strategies requires modeling realistic usage patterns:</p>
+
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">❌ Before Optimization</h4>
+                    <p><strong>Scenario:</strong> Customer support app</p>
+                    <ul>
+                        <li>10M tokens/day processed</li>
+                        <li>100% GPT-4o usage ($2.50 input / $10 output)</li>
+                        <li>50/50 input/output ratio</li>
+                        <li>No caching, no batching</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Daily Cost:</strong></p>
+                    <p style="font-size: 1.5rem; color: var(--warning);">$62.50/day = $22,813/year</p>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">✅ After Optimization</h4>
+                    <p><strong>Optimizations Applied:</strong></p>
+                    <ul>
+                        <li>70% routed to Haiku ($1/$5)</li>
+                        <li>30% routed to GPT-4o ($2.50/$10)</li>
+                        <li>80% cache hit rate (50% discount)</li>
+                        <li>50% batch API discount</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Daily Cost:</strong></p>
+                    <p style="font-size: 1.5rem; color: var(--success);">$8.75/day = $3,194/year</p>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <strong>ROI Impact:</strong> This optimization strategy delivers <strong>86% cost reduction</strong>, saving <strong>$19,619 annually</strong> with minimal quality degradation. The implementation cost (1-2 weeks engineering time) typically pays for itself within the first month.
+            </div>
+        </section>
+
+        <!-- Prompt Compression -->
+        <section class="content-section">
+            <h2>2. Prompt Compression Techniques</h2>
+
+            <h3>Overview of Compression Approaches</h3>
+            <p>Prompt compression reduces the length and complexity of input prompts while preserving semantic meaning and task performance. Three main categories of techniques have emerged:</p>
+
+            <h4>1. Hard Prompt Methods (Token Removal)</h4>
+            <p>These methods remove redundant tokens from natural language prompts while retaining semantic meaning:</p>
+
+            <ul>
+                <li><strong>SelectiveContext:</strong> Uses lexical analysis to identify and preserve key tokens</li>
+                <li><strong>LLMLingua:</strong> Leverages smaller language models to rank and preserve essential tokens, achieving up to 20x compression<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1">1</a><span class="citation-tooltip" id="tooltip-1" role="tooltip"><span class="source-type academic">Academic</span><strong>LLMLingua-2: Data Distillation for Efficient Prompt Compression</strong><span class="authors">Pan et al., ACL 2024</span><a href="https://arxiv.org/abs/2403.12968" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></li>
+                <li><strong>LongLLMLingua:</strong> Optimized variant for long-context scenarios with question-aware coarse-to-fine compression<sup class="citation" data-ref="2"><a href="#ref-2" aria-describedby="tooltip-2">2</a><span class="citation-tooltip" id="tooltip-2" role="tooltip"><span class="source-type academic">Academic</span><strong>LongLLMLingua: Accelerating and Enhancing LLMs in Long Context Scenarios</strong><span class="authors">Jiang et al., ACL 2024</span><a href="https://arxiv.org/abs/2310.06839" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></li>
+                <li><strong>AdaComp:</strong> Adaptive compression with dynamic compression ratios</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Microsoft Research Insight:</strong> LLMLingua<sup class="citation" data-ref="12"><a href="#ref-12" aria-describedby="tooltip-12">12</a><span class="citation-tooltip" id="tooltip-12" role="tooltip"><span class="source-type industry">Industry</span><strong>LLMLingua: Prompt Compression Toolkit</strong><span class="authors">Microsoft Research</span><a href="https://github.com/microsoft/LLMLingua" target="_blank" rel="noopener" class="tooltip-link">View Repo</a></span></sup> has been integrated into LlamaIndex and shows particular effectiveness in multi-document question-answering tasks, where it can reduce RAG context by 30-80% while maintaining accuracy.
+            </div>
+
+            <h4>2. Soft Prompt Methods (Embedding-Based)</h4>
+            <p>These methods encode prompts into continuous trainable embeddings or key-value pairs:</p>
+
+            <ul>
+                <li><strong>AutoCompressor/ICAE:</strong> Learns compressed representations through training, compressing long contexts into compact "memory slots" with 4x compression at 90%+ performance<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4">4</a><span class="citation-tooltip" id="tooltip-4" role="tooltip"><span class="source-type academic">Academic</span><strong>In-context Autoencoder for Context Compression in a Large Language Model</strong><span class="authors">Ge et al., ICLR 2024</span><a href="https://arxiv.org/abs/2307.06945" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></li>
+                <li><strong>GIST:</strong> Generalizable soft prompt compression, compressing prompts into "gist" tokens achieving up to 26x compression<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3">3</a><span class="citation-tooltip" id="tooltip-3" role="tooltip"><span class="source-type academic">Academic</span><strong>Learning to Compress Prompts with Gist Tokens</strong><span class="authors">Mu et al., NeurIPS 2023</span><a href="https://arxiv.org/abs/2304.08467" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></li>
+                <li><strong>500xCompressor:</strong> Achieves extreme compression ratios up to 480x</li>
+                <li><strong>xRAG:</strong> Specialized for RAG applications</li>
+            </ul>
+
+            <h4>3. Traditional Techniques</h4>
+            <ul>
+                <li><strong>Semantic Summarization:</strong> Condenses long/repetitive content while retaining essential semantics</li>
+                <li><strong>Relevance Filtering:</strong> Measures relevance and includes only the most pertinent context</li>
+                <li><strong>Keyphrase Extraction:</strong> Identifies and preserves critical keywords and phrases</li>
+                <li><strong>Semantic Chunking:</strong> Intelligently segments based on semantic boundaries</li>
+            </ul>
+
+            <h3>Performance and Cost Savings</h3>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">5-20x</div>
+                    <div class="stat-label">Compression Ratio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">70-94%</div>
+                    <div class="stat-label">Cost Reduction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">30%</div>
+                    <div class="stat-label">LinkedIn's Improvement</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">480x</div>
+                    <div class="stat-label">Max Compression (Soft)</div>
+                </div>
+            </div>
+
+            <h3>Real-World Implementation Examples</h3>
+
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">Before Compression (800 tokens)</h4>
+                    <pre><code>System: You are a helpful customer service agent for Acme Corp.
+Our company values excellent customer service. We sell widgets,
+gadgets, and various products. Our return policy allows returns
+within 30 days. We offer free shipping on orders over $50.
+Customer satisfaction is our top priority. We have a dedicated
+support team available 24/7 to assist with any questions or
+concerns. Our products come with a one-year warranty...
+
+[Additional 600 tokens of context and instructions]
+
+User: How do I return a defective widget?</code></pre>
+                    <p style="margin-top: 1rem;"><strong>Token Count:</strong> ~800 tokens</p>
+                    <p><strong>Cost:</strong> $0.002 (at $2.50/M input tokens)</p>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">After LLMLingua Compression (40 tokens)</h4>
+                    <pre><code>customer service Acme Corp. return policy 30 days
+free shipping $50. support 24/7. warranty one-year
+
+User: return defective widget?</code></pre>
+                    <p style="margin-top: 1rem;"><strong>Token Count:</strong> ~40 tokens (20x compression)</p>
+                    <p><strong>Cost:</strong> $0.0001 (at $2.50/M input tokens)</p>
+                    <p style="color: var(--success); margin-top: 0.5rem;"><strong>Savings:</strong> 95% cost reduction</p>
+                </div>
+            </div>
+
+            <h3>Industry Case Study: LinkedIn</h3>
+            <div class="success-box">
+                <strong>LinkedIn Production Results:</strong> Applied domain-adapted compression to internal EON models, achieving:
+                <ul style="margin-top: 0.5rem;">
+                    <li>~30% reduction in prompt sizes</li>
+                    <li>Faster inference speeds</li>
+                    <li>Significant cost savings at scale</li>
+                    <li>Maintained high accuracy for production workloads</li>
+                </ul>
+            </div>
+
+            <h3>Compression Tools and Libraries</h3>
+
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h4>LLMLingua</h4>
+                    <p>Microsoft's open-source solution for prompt compression. Integrated with LlamaIndex.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted);">
+                        <li>Up to 20x compression</li>
+                        <li>Black-box LLM compatible</li>
+                        <li>Production-ready</li>
+                    </ul>
+                </div>
+                <div class="tool-card">
+                    <h4>500xCompressor</h4>
+                    <p>Extreme compression for specialized use cases using soft prompt methods.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted);">
+                        <li>Up to 480x compression</li>
+                        <li>Requires training</li>
+                        <li>Best for repetitive tasks</li>
+                    </ul>
+                </div>
+                <div class="tool-card">
+                    <h4>PCToolkit</h4>
+                    <p>Comprehensive toolkit for prompt compression with multiple algorithms.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted);">
+                        <li>Multiple compression strategies</li>
+                        <li>Configurable trade-offs</li>
+                        <li>Easy integration</li>
+                    </ul>
+                </div>
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Attention Efficiency Advances:</strong> Beyond prompt compression, recent research on attention mechanisms offers additional optimization paths. Mamba<sup class="citation" data-ref="9"><a href="#ref-9" aria-describedby="tooltip-9">9</a><span class="citation-tooltip" id="tooltip-9" role="tooltip"><span class="source-type academic">Academic</span><strong>Mamba: Linear-Time Sequence Modeling with Selective State Spaces</strong><span class="authors">Gu &amp; Dao, ICLR 2024 Oral</span><a href="https://arxiv.org/abs/2312.00752" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> achieves linear scaling with sequence length while matching Transformer quality. FlashAttention-2<sup class="citation" data-ref="10"><a href="#ref-10" aria-describedby="tooltip-10">10</a><span class="citation-tooltip" id="tooltip-10" role="tooltip"><span class="source-type academic">Academic</span><strong>FlashAttention-2: Faster Attention with Better Parallelism</strong><span class="authors">Dao, ICLR 2024</span><a href="https://arxiv.org/abs/2307.08691" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> delivers 2x speedup through IO-aware exact attention computation. Ring Attention<sup class="citation" data-ref="11"><a href="#ref-11" aria-describedby="tooltip-11">11</a><span class="citation-tooltip" id="tooltip-11" role="tooltip"><span class="source-type academic">Academic</span><strong>Ring Attention with Blockwise Transformers for Near-Infinite Context</strong><span class="authors">Liu et al., ICLR 2024</span><a href="https://arxiv.org/abs/2310.01889" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> enables context lengths scaling linearly with device count, demonstrated with contexts up to millions of tokens.</p>
+                </div>
+            </aside>
+
+            <aside class="gsd-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">GSD Integration</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Hierarchical Compression for Agent Workflows:</strong> In Claude Code's GSD workflows, context accumulates across multi-step planning and execution phases. Apply hierarchical compression: <strong>keep system instructions and tool definitions stable (cache-friendly)</strong>, compress previous plans and accumulated decisions (semi-stable), and <strong>keep current task and recent results at full fidelity</strong> (dynamic). For tool outputs, extract relevant sections from large file reads, summarize git diffs while keeping key details, and truncate verbose command output to error/success indicators.</p>
+                </div>
+            </aside>
+
+            <h3>Best Practices for Prompt Compression</h3>
+            <ol>
+                <li><strong>Start with semantic summarization</strong> for immediate 30-50% gains with minimal risk</li>
+                <li><strong>Test on representative samples</strong> before deploying aggressive compression</li>
+                <li><strong>Monitor quality metrics</strong> to ensure compression doesn't degrade performance</li>
+                <li><strong>Use domain-specific compression</strong> when possible for better preservation of critical terms</li>
+                <li><strong>Combine with caching</strong> to maximize ROI (compress once, cache repeatedly)</li>
+                <li><strong>Consider task complexity</strong> — simple tasks tolerate more compression than complex reasoning</li>
+            </ol>
+        </section>
+
+        <!-- Context Caching -->
+        <section class="content-section">
+            <h2>3. Context Caching Strategies</h2>
+
+            <h3>Understanding Prompt Caching</h3>
+            <p>Prompt caching allows LLM providers to store and reuse frequently accessed context, offering dramatic cost reductions (50-90%) and latency improvements (up to 85%) for applications with repeated context. This is particularly valuable for:</p>
+
+            <ul>
+                <li>RAG applications with stable knowledge bases</li>
+                <li>Agents with consistent system prompts and tool definitions</li>
+                <li>Applications processing multiple queries against the same documents</li>
+                <li>Multi-turn conversations with long context</li>
+            </ul>
+
+            <h3>Anthropic Claude Prompt Caching</h3>
+
+            <h4>Implementation Structure</h4>
+            <p>Claude's prompt caching<sup class="citation" data-ref="7"><a href="#ref-7" aria-describedby="tooltip-7">7</a><span class="citation-tooltip" id="tooltip-7" role="tooltip"><span class="source-type industry">Industry</span><strong>Prompt Caching with Claude</strong><span class="authors">Anthropic Documentation, 2024</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank" rel="noopener" class="tooltip-link">View Docs</a></span></sup> processes the prompt in order: tools → system → messages, marking cacheable sections with the <code>cache_control</code> parameter.</p>
+
+            <div class="info-box">
+                <strong>Important 2026 Update:</strong> Starting February 5, 2026, prompt caching uses workspace-level isolation instead of organization-level isolation. Caches are isolated per workspace to ensure data separation between workspaces within the same organization.
+            </div>
+
+            <h4>Cache Configuration Options</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cache Type</th>
+                        <th>TTL</th>
+                        <th>Write Cost</th>
+                        <th>Read Cost</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>5-minute cache</strong></td>
+                        <td>5 minutes (refreshed on use)</td>
+                        <td>1.25x base input</td>
+                        <td>0.1x base input</td>
+                        <td>High-frequency, short-duration workloads</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1-hour cache</strong></td>
+                        <td>1 hour (refreshed on use)</td>
+                        <td>2.0x base input</td>
+                        <td>0.1x base input</td>
+                        <td>Sustained workloads, batch processing</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Implementation Example</h4>
+            <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-sonnet-4-5-20250514",
+    max_tokens=1024,
+    system=[
+        {
+            "type": "text",
+            "text": "You are an AI assistant for Acme Corp...",
+        },
+        {
+            "type": "text",
+            "text": "Here is our product catalog: [10,000 tokens of product data]",
+            "cache_control": {"type": "ephemeral"}  # Cache this section
+        }
+    ],
+    messages=[
+        {"role": "user", "content": "What's the price of widget XYZ?"}
+    ]
+)</code></pre>
+
+            <h4>Key Requirements and Constraints</h4>
+            <ul>
+                <li><strong>Minimum cache size:</strong> 1,024 tokens per cache checkpoint (Claude 3.7+)</li>
+                <li><strong>Maximum breakpoints:</strong> Up to 4 cache breakpoints per prompt</li>
+                <li><strong>Supported models:</strong> Claude Opus 4.1/4, Sonnet 4.5/4/3.7, Haiku 4.5/3.5/3</li>
+                <li><strong>Cache lifetime:</strong> 5 minutes default, 1 hour optional (refreshed on each use)</li>
+            </ul>
+
+            <h3>OpenAI Prompt Caching</h3>
+
+            <h4>Automatic Caching Mechanism</h4>
+            <p>OpenAI's approach<sup class="citation" data-ref="8"><a href="#ref-8" aria-describedby="tooltip-8">8</a><span class="citation-tooltip" id="tooltip-8" role="tooltip"><span class="source-type industry">Industry</span><strong>Prompt Caching in the API</strong><span class="authors">OpenAI Platform, 2024</span><a href="https://platform.openai.com/docs/guides/production-best-practices" target="_blank" rel="noopener" class="tooltip-link">View Docs</a></span></sup> is simpler—it automatically caches the longest prefix of prompts that have been previously computed. No API changes required.</p>
+
+            <div class="success-box">
+                <strong>Zero-Configuration Benefit:</strong> If you reuse prompts with common prefixes, OpenAI automatically applies the 50% discount on cached tokens without requiring changes to your API integration.
+            </div>
+
+            <h4>Caching Behavior</h4>
+            <ul>
+                <li><strong>Minimum cache size:</strong> Starts at 1,024 tokens, increments in 128-token blocks</li>
+                <li><strong>Cache matching:</strong> Requires exact prefix match (byte-level identical)</li>
+                <li><strong>Cache lifetime:</strong> 5-10 minutes of inactivity, maximum 1 hour total</li>
+                <li><strong>Discount:</strong> Flat 50% on cached input tokens</li>
+            </ul>
+
+            <h3>Optimization Strategies for Maximum Cache Utilization</h3>
+
+            <h4>1. Structure Prompts for Cacheability</h4>
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">❌ Poor Cache Structure</h4>
+                    <pre><code>// Variable content first
+User query: "What is product X?"
+
+// Static content last (not cached)
+System: Long instructions...
+Tools: [tool definitions...]
+Knowledge: [product catalog...]</code></pre>
+                    <p style="color: var(--warning); margin-top: 1rem;">Cache hit rate: ~0%</p>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">✅ Optimal Cache Structure</h4>
+                    <pre><code>// Static content first (cached)
+Tools: [tool definitions...]
+System: Long instructions...
+Knowledge: [product catalog...]
+
+// Variable content last
+User query: "What is product X?"</code></pre>
+                    <p style="color: var(--success); margin-top: 1rem;">Cache hit rate: ~90%+</p>
+                </div>
+            </div>
+
+            <h4>2. Batch Similar Requests</h4>
+            <p>Process multiple queries against the same context within the cache TTL window to maximize cache utilization:</p>
+
+            <pre><code># Batch-related queries within 5-minute window
+questions = [
+    "What's the price of widget A?",
+    "Does widget B come with warranty?",
+    "Compare widgets C and D"
+]
+
+# Process rapidly to hit cache
+for question in questions:
+    response = client.messages.create(
+        model="claude-sonnet-4-5",
+        system=[...cached_context...],
+        messages=[{"role": "user", "content": question}]
+    )
+    # 90% cost reduction on cached tokens after first call</code></pre>
+
+            <h4>3. Combine Documents into Single Cached Blocks</h4>
+            <div class="info-box">
+                <strong>Best Practice:</strong> Instead of sending multiple small documents separately, combine them into a single large cached block. This maximizes the ratio of cached to uncached tokens and improves overall efficiency.
+            </div>
+
+            <h4>4. Monitor Cache Hit Rates</h4>
+            <p>Track cache performance to optimize your implementation:</p>
+
+            <ul>
+                <li>Monitor cache hit rates in API responses (Anthropic provides cache metadata)</li>
+                <li>Target 70%+ cache hit rate for cost-effective caching</li>
+                <li>Break-even point: ~4-5 cache reads per write (5-min cache, 1.25x write cost)</li>
+                <li>Adjust cache TTL based on usage patterns (1-hour cache for sustained workloads)</li>
+            </ul>
+
+            <h3>Cost Analysis: Caching ROI</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Cache Hit Rate</th>
+                        <th>Requests/Hour</th>
+                        <th>Cost Without Cache</th>
+                        <th>Cost With Cache</th>
+                        <th>Savings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>RAG Q&A (10K context)</td>
+                        <td>80%</td>
+                        <td>1,000</td>
+                        <td>$30.00</td>
+                        <td>$4.50</td>
+                        <td class="price-low">85%</td>
+                    </tr>
+                    <tr>
+                        <td>Document Analysis</td>
+                        <td>90%</td>
+                        <td>500</td>
+                        <td>$75.00</td>
+                        <td>$9.75</td>
+                        <td class="price-low">87%</td>
+                    </tr>
+                    <tr>
+                        <td>Agent with Tools (5K context)</td>
+                        <td>85%</td>
+                        <td>2,000</td>
+                        <td>$30.00</td>
+                        <td>$5.25</td>
+                        <td class="price-low">82.5%</td>
+                    </tr>
+                    <tr>
+                        <td>Low-frequency (poor fit)</td>
+                        <td>20%</td>
+                        <td>100</td>
+                        <td>$3.00</td>
+                        <td>$3.15</td>
+                        <td class="price-high">-5%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <strong>Warning:</strong> Caching is not cost-effective for all use cases. Low cache hit rates (<40%) can actually increase costs due to cache write overhead. Best for: high-frequency requests, stable context, batch processing.
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Cache vs. Compression Decision Framework:</strong> Academic research on KV-cache optimization<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5">5</a><span class="citation-tooltip" id="tooltip-5" role="tooltip"><span class="source-type academic">Academic</span><strong>H2O: Heavy-Hitter Oracle for Efficient Generative Inference</strong><span class="authors">Zhang et al., NeurIPS 2023</span><a href="https://arxiv.org/abs/2306.14048" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup><sup class="citation" data-ref="6"><a href="#ref-6" aria-describedby="tooltip-6">6</a><span class="citation-tooltip" id="tooltip-6" role="tooltip"><span class="source-type academic">Academic</span><strong>StreamingLLM: Efficient Streaming Language Models with Attention Sinks</strong><span class="authors">Xiao et al., ICLR 2024</span><a href="https://arxiv.org/abs/2309.17453" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> suggests: <strong>If cache hit rate > 40%, use caching; if context > 50K tokens, use compression first then cache.</strong> For latency-sensitive applications, caching reduces TTFT while compression adds latency. For quality-critical applications, caching preserves all information while compression may lose nuance.</p>
+                </div>
+            </aside>
+        </section>
+
+        <!-- Model Routing -->
+        <section class="content-section">
+            <h2>4. Intelligent Model Routing</h2>
+
+            <h3>The Model Routing Opportunity</h3>
+            <p>For 70-80% of production workloads, mid-tier models perform identically to premium models. Intelligent routing directs simple queries to cost-effective models while reserving expensive frontier models for complex reasoning tasks.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">50-80%</div>
+                    <div class="stat-label">Cost Reduction Potential</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Max Savings (IBM Research)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5-20ms</div>
+                    <div class="stat-label">Routing Latency Overhead</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-label">Simple Tasks (Route to Small Models)</div>
+                </div>
+            </div>
+
+            <h3>Routing Strategies</h3>
+
+            <h4>1. Complexity-Based Routing</h4>
+            <p>Analyze query complexity and route accordingly:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Query Complexity</th>
+                        <th>Indicators</th>
+                        <th>Routed Model</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Simple</strong></td>
+                        <td>Short, factual, FAQ-like</td>
+                        <td>Haiku ($1/$5)</td>
+                        <td>"What are your hours?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medium</strong></td>
+                        <td>Multi-step, some reasoning</td>
+                        <td>Sonnet ($3/$15) or GPT-4o ($2.50/$10)</td>
+                        <td>"Compare these two products"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complex</strong></td>
+                        <td>Deep reasoning, analysis, code</td>
+                        <td>Opus ($5/$25)</td>
+                        <td>"Analyze this legal contract"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Advanced Reasoning</strong></td>
+                        <td>Multi-step logic, math, planning</td>
+                        <td>o1 ($15/$60) - use sparingly!</td>
+                        <td>"Solve this proof"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>2. Cascade Routing (Try Smaller First)</h4>
+            <p>Attempt with smaller model first, escalate only on failure:</p>
+
+            <pre><code>async def cascade_route(query, context):
+    # Try Haiku first (cheap, fast)
+    haiku_response = await call_haiku(query, context)
+
+    # Check confidence/quality
+    if haiku_response.confidence > 0.85:
+        return haiku_response  # 70% of queries stop here
+
+    # Escalate to Sonnet for medium complexity
+    sonnet_response = await call_sonnet(query, context)
+
+    if sonnet_response.confidence > 0.90:
+        return sonnet_response  # 25% need this tier
+
+    # Final escalation to Opus for complex tasks
+    return await call_opus(query, context)  # Only 5% reach here</code></pre>
+
+            <h4>3. Semantic Routing (Intent-Based)</h4>
+            <p>Use lightweight classifier to determine query intent and route accordingly:</p>
+
+            <pre><code>from semantic_router import Route, Router
+
+# Define routes
+faq_route = Route(
+    name="faq",
+    model="claude-haiku-4-5",
+    utterances=["hours", "location", "contact", "price"]
+)
+
+support_route = Route(
+    name="support",
+    model="claude-sonnet-4-5",
+    utterances=["problem", "not working", "error", "help"]
+)
+
+analysis_route = Route(
+    name="analysis",
+    model="claude-opus-4-5",
+    utterances=["compare", "analyze", "evaluate", "recommend"]
+)
+
+router = Router(routes=[faq_route, support_route, analysis_route])
+route = router.classify(user_query)  # Fast, cheap classification
+response = await call_model(route.model, user_query)</code></pre>
+
+            <h3>Real-World Routing Impact</h3>
+
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">❌ No Routing (Single Model)</h4>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>100% GPT-4o ($2.50/$10)</li>
+                        <li>10M tokens/day</li>
+                        <li>50/50 input/output</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Daily Cost:</strong></p>
+                    <p style="font-size: 1.5rem; color: var(--warning);">$62.50/day</p>
+                    <p>= $22,813/year</p>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">✅ Intelligent Routing</h4>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>60% → Haiku ($1/$5)</li>
+                        <li>30% → GPT-4o ($2.50/$10)</li>
+                        <li>10% → Opus ($5/$25)</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Daily Cost:</strong></p>
+                    <p style="font-size: 1.5rem; color: var(--success);">$27.50/day</p>
+                    <p>= $10,038/year</p>
+                    <p style="color: var(--success); margin-top: 0.5rem;"><strong>Savings: 56% ($12,775/year)</strong></p>
+                </div>
+            </div>
+
+            <h3>Router Implementation Frameworks</h3>
+
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h4>xRouter (Reinforcement Learning)</h4>
+                    <p>Training-based router using RL to optimize cost/quality tradeoffs dynamically.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted);">
+                        <li>Learns optimal routing patterns</li>
+                        <li>Adapts to workload changes</li>
+                        <li>Requires training data</li>
+                    </ul>
+                </div>
+                <div class="tool-card">
+                    <h4>Semantic Router</h4>
+                    <p>Fast, lightweight intent classification for routing decisions.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted);">
+                        <li>Low latency (5-10ms)</li>
+                        <li>Easy to configure</li>
+                        <li>Works with embeddings</li>
+                    </ul>
+                </div>
+                <div class="tool-card">
+                    <h4>LiteLLM Router</h4>
+                    <p>Multi-provider routing with load balancing and fallbacks.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted);">
+                        <li>Provider-agnostic</li>
+                        <li>Built-in retry logic</li>
+                        <li>Cost tracking included</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Routing Best Practices</h3>
+
+            <ol>
+                <li><strong>Start with conservative routing:</strong> Begin with 50/50 split, measure quality, then adjust</li>
+                <li><strong>Monitor quality metrics closely:</strong> Track accuracy, user satisfaction per route</li>
+                <li><strong>Account for latency:</strong> Routing adds 5-20ms overhead—ensure it's acceptable</li>
+                <li><strong>Use confidence scores:</strong> Let models self-report confidence for cascade routing</li>
+                <li><strong>Combine with caching:</strong> Cache routing decisions for repeated queries</li>
+                <li><strong>A/B test routing strategies:</strong> Compare different routing algorithms in production</li>
+                <li><strong>Avoid over-optimization:</strong> Don't route to reasoning models (o1/o3) unless absolutely necessary</li>
+            </ol>
+
+            <div class="warning-box">
+                <strong>Critical Trade-off:</strong> Routing adds complexity and potential points of failure. Only implement when processing volume justifies the engineering investment (typically >1M tokens/day).
+            </div>
+        </section>
+
+        <!-- RAG Optimization -->
+        <section class="content-section">
+            <h2>5. RAG Token Optimization</h2>
+
+            <h3>The RAG Token Challenge</h3>
+            <p>Retrieval-Augmented Generation (RAG) applications face a unique token challenge: retrieved context often constitutes 70-90% of total input tokens. Optimizing RAG pipelines can deliver 50-80% cost reduction while improving accuracy.</p>
+
+            <h3>Advanced Chunking Strategies</h3>
+
+            <h4>Why Chunking Matters</h4>
+            <p>Chunking determines how documents are segmented for indexing and retrieval. Poor chunking leads to:</p>
+            <ul>
+                <li>Broken semantic coherence (mid-sentence splits)</li>
+                <li>Excessive retrieval (retrieving too many irrelevant chunks)</li>
+                <li>Context overflow (exceeding token limits)</li>
+                <li>Cost inflation (unnecessary tokens in context)</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Research Finding (2025):</strong> Chunking configuration has a critical impact on retrieval performance—comparable to or greater than the influence of the embedding model itself, with observed 10x variation in retrieval quality across chunking strategies.
+            </div>
+
+            <h4>Chunking Strategy Comparison (2026 Research)</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Strategy</th>
+                        <th>Accuracy</th>
+                        <th>Precision</th>
+                        <th>Recall</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Adaptive Chunking</strong></td>
+                        <td class="price-low">87%</td>
+                        <td>7.5</td>
+                        <td>89%</td>
+                        <td>Clinical/technical domains</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Semantic Chunking</strong></td>
+                        <td class="price-low">85%</td>
+                        <td>7.8</td>
+                        <td>88%</td>
+                        <td>General purpose, coherent content</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recursive Token-Based (R100-0)</strong></td>
+                        <td class="price-mid">82%</td>
+                        <td>7.2</td>
+                        <td>86%</td>
+                        <td>Balanced performance/efficiency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClusterSemantic (400 tokens)</strong></td>
+                        <td class="price-mid">80%</td>
+                        <td>7.0</td>
+                        <td class="price-low">91.3%</td>
+                        <td>High recall requirements</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClusterSemantic (200 tokens)</strong></td>
+                        <td class="price-mid">78%</td>
+                        <td class="price-low">8.0</td>
+                        <td>85%</td>
+                        <td>High precision requirements</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fixed Size (baseline)</strong></td>
+                        <td class="price-high">50%</td>
+                        <td>5.0</td>
+                        <td>70%</td>
+                        <td>Quick prototypes only</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Implementation: Semantic Chunking</h4>
+            <pre><code>from langchain.text_splitter import SemanticChunker
+from langchain.embeddings import OpenAIEmbeddings
+
+# Semantic chunking based on embedding similarity
+embeddings = OpenAIEmbeddings()
+text_splitter = SemanticChunker(
+    embeddings=embeddings,
+    breakpoint_threshold_type="percentile",  # Use percentile-based threshold
+    breakpoint_threshold_amount=95,  # Split at 95th percentile similarity
+    number_of_chunks=None  # Let it determine optimal chunk count
+)
+
+# Process documents
+chunks = text_splitter.create_documents([long_document])
+
+# Result: Semantically coherent chunks (avg 200-400 tokens)
+# vs fixed-size chunks that often break mid-thought</code></pre>
+
+            <h3>Hybrid Retrieval for Token Efficiency</h3>
+
+            <p>Combine multiple retrieval methods to maximize relevance while minimizing retrieved tokens:</p>
+
+            <h4>Hybrid Retrieval Architecture</h4>
+            <pre><code>from langchain.retrievers import EnsembleRetriever
+from langchain.vectorstores import FAISS
+from langchain.retrievers import BM25Retriever
+
+# Dense retrieval (semantic search)
+vectorstore = FAISS.from_documents(chunks, embeddings)
+dense_retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
+
+# Sparse retrieval (keyword-based)
+sparse_retriever = BM25Retriever.from_documents(chunks)
+sparse_retriever.k = 5
+
+# Hybrid ensemble (weighted combination)
+ensemble_retriever = EnsembleRetriever(
+    retrievers=[dense_retriever, sparse_retriever],
+    weights=[0.6, 0.4]  # Favor semantic, but include keyword matches
+)
+
+# Retrieve most relevant chunks (better precision = fewer tokens)
+relevant_docs = ensemble_retriever.get_relevant_documents(query)</code></pre>
+
+            <h3>Re-ranking for Context Compression</h3>
+
+            <p>Re-ranking reduces retrieved context by 50-70% while improving relevance:</p>
+
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">❌ Without Re-ranking</h4>
+                    <p><strong>Process:</strong></p>
+                    <ol style="font-size: 0.9rem;">
+                        <li>Retrieve top-20 chunks (8,000 tokens)</li>
+                        <li>Send all to LLM</li>
+                        <li>LLM filters noise internally</li>
+                    </ol>
+                    <p style="margin-top: 1rem;"><strong>Input Tokens:</strong> 8,000</p>
+                    <p><strong>Cost:</strong> $0.024 (at $3/M)</p>
+                    <p style="color: var(--warning);">Relevance: ~40% of context</p>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">✅ With Re-ranking</h4>
+                    <p><strong>Process:</strong></p>
+                    <ol style="font-size: 0.9rem;">
+                        <li>Retrieve top-20 chunks (8,000 tokens)</li>
+                        <li>Re-rank with cross-encoder</li>
+                        <li>Keep only top-5 (2,000 tokens)</li>
+                        <li>Send to LLM</li>
+                    </ol>
+                    <p style="margin-top: 1rem;"><strong>Input Tokens:</strong> 2,000</p>
+                    <p><strong>Cost:</strong> $0.006 (at $3/M)</p>
+                    <p style="color: var(--success);">Relevance: ~85% of context</p>
+                    <p style="color: var(--success); margin-top: 0.5rem;"><strong>Savings: 75%</strong></p>
+                </div>
+            </div>
+
+            <h4>Re-ranker Implementation</h4>
+            <pre><code>from sentence_transformers import CrossEncoder
+
+# Load cross-encoder re-ranker
+reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+
+# Initial retrieval (cast wide net)
+initial_docs = retriever.get_relevant_documents(query, k=20)
+
+# Re-rank based on query-document relevance
+pairs = [[query, doc.page_content] for doc in initial_docs]
+scores = reranker.predict(pairs)
+
+# Sort by score and keep top-k
+ranked_docs = [doc for _, doc in sorted(
+    zip(scores, initial_docs),
+    key=lambda x: x[0],
+    reverse=True
+)][:5]  # Keep only top 5 most relevant
+
+# Result: 75% fewer tokens, higher relevance</code></pre>
+
+            <h3>RAG-Specific Compression</h3>
+
+            <h4>xRAG: Compression for RAG</h4>
+            <p>xRAG specializes in compressing retrieved context while preserving answer-critical information:</p>
+
+            <ul>
+                <li>Identifies and preserves answer-bearing passages</li>
+                <li>Removes redundant information across chunks</li>
+                <li>Compresses supporting context more aggressively than key facts</li>
+                <li>Achieves 60-80% compression with <5% accuracy loss</li>
+            </ul>
+
+            <h3>Complete RAG Optimization Stack</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Optimization Layer</th>
+                        <th>Technique</th>
+                        <th>Token Reduction</th>
+                        <th>Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Chunking</strong></td>
+                        <td>Semantic chunking (200-400 tokens)</td>
+                        <td>Baseline</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Retrieval</strong></td>
+                        <td>Hybrid (dense + sparse)</td>
+                        <td>20-30%</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Re-ranking</strong></td>
+                        <td>Cross-encoder filtering</td>
+                        <td>50-70%</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Compression</strong></td>
+                        <td>xRAG or LLMLingua</td>
+                        <td>60-80%</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Caching</strong></td>
+                        <td>Cache stable knowledge base</td>
+                        <td>90% (on hits)</td>
+                        <td>Low</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <strong>Cumulative Impact:</strong> Combining these techniques achieves 80-90% total token reduction compared to naive RAG implementations, while often improving accuracy due to better signal-to-noise ratio in retrieved context.
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>KV-Cache Optimization for Long Context:</strong> For self-hosted inference, KV-cache management is crucial. SnapKV<sup class="citation" data-ref="13"><a href="#ref-13" aria-describedby="tooltip-13">13</a><span class="citation-tooltip" id="tooltip-13" role="tooltip"><span class="source-type academic">Academic</span><strong>SnapKV: LLM Knows What You are Looking for Before Generation</strong><span class="authors">Li et al., arXiv 2024</span><a href="https://arxiv.org/abs/2404.14469" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> uses attention patterns from the prompt phase to identify important KV pairs before generation begins. PyramidKV<sup class="citation" data-ref="14"><a href="#ref-14" aria-describedby="tooltip-14">14</a><span class="citation-tooltip" id="tooltip-14" role="tooltip"><span class="source-type academic">Academic</span><strong>PyramidKV: Dynamic KV Cache Compression based on Pyramidal Information Funneling</strong><span class="authors">Cai et al., arXiv 2024</span><a href="https://arxiv.org/abs/2406.02069" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> observes that lower layers need more KV pairs while upper layers need fewer, enabling dynamic budget allocation. KIVI<sup class="citation" data-ref="15"><a href="#ref-15" aria-describedby="tooltip-15">15</a><span class="citation-tooltip" id="tooltip-15" role="tooltip"><span class="source-type academic">Academic</span><strong>KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache</strong><span class="authors">Liu et al., ICML 2024</span><a href="https://arxiv.org/abs/2402.02750" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup> achieves 2.6x memory reduction through asymmetric quantization with negligible quality degradation.</p>
+                </div>
+            </aside>
+
+            <h3>RAG Optimization Best Practices</h3>
+
+            <ol>
+                <li><strong>Test chunk sizes empirically:</strong> 100-300 tokens works well for most tasks, but domain-specific tuning is critical</li>
+                <li><strong>Never hardcode chunking strategy:</strong> A/B test multiple approaches with your specific data</li>
+                <li><strong>Implement hybrid retrieval:</strong> Combining dense + sparse consistently outperforms either alone</li>
+                <li><strong>Always re-rank:</strong> Re-ranking provides the best ROI for token reduction (75% savings, minimal complexity)</li>
+                <li><strong>Cache knowledge bases:</strong> Static knowledge bases are perfect caching candidates</li>
+                <li><strong>Monitor retrieval quality:</strong> Track precision@k and recall@k to ensure optimization doesn't degrade relevance</li>
+                <li><strong>Consider task-specific embeddings:</strong> Fine-tuned embeddings improve retrieval quality, reducing over-retrieval</li>
+            </ol>
+        </section>
+
+        <!-- Batch Processing -->
+        <section class="content-section">
+            <h2>6. Batch Processing and BatchPrompt</h2>
+
+            <h3>Batch API Discounts</h3>
+            <p>Both OpenAI and Anthropic offer significant discounts for batch processing—50% off standard pricing for workloads that can tolerate 24-hour processing windows.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">50%</div>
+                    <div class="stat-label">Batch API Discount</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2-4x</div>
+                    <div class="stat-label">Throughput Improvement</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-label">GPU Cost Reduction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24h</div>
+                    <div class="stat-label">Processing Window</div>
+                </div>
+            </div>
+
+            <h3>When to Use Batch Processing</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Use Case</th>
+                        <th>Batch Fit</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Data extraction</strong></td>
+                        <td class="price-low">Excellent</td>
+                        <td>Extract structured data from 10,000 documents overnight</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Content generation</strong></td>
+                        <td class="price-low">Excellent</td>
+                        <td>Generate product descriptions for entire catalog</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analysis & classification</strong></td>
+                        <td class="price-low">Excellent</td>
+                        <td>Classify customer feedback, sentiment analysis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Translation</strong></td>
+                        <td class="price-mid">Good</td>
+                        <td>Translate documentation to multiple languages</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer support</strong></td>
+                        <td class="price-high">Poor</td>
+                        <td>Real-time chat requires immediate response</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Code generation (interactive)</strong></td>
+                        <td class="price-high">Poor</td>
+                        <td>Developer tools need low-latency feedback</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Continuous Batching for Self-Hosted Models</h3>
+
+            <p>Continuous batching dynamically groups requests for maximum GPU utilization:</p>
+
+            <h4>Traditional Static Batching vs. Continuous Batching</h4>
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">Static Batching</h4>
+                    <ul>
+                        <li>Wait for batch to fill (adds latency)</li>
+                        <li>Process entire batch together</li>
+                        <li>GPU idles when sequences complete at different times</li>
+                        <li>Throughput: 50 tokens/sec</li>
+                    </ul>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">Continuous Batching</h4>
+                    <ul>
+                        <li>Insert new sequences as others complete</li>
+                        <li>Per-iteration scheduling</li>
+                        <li>GPU stays saturated</li>
+                        <li>Throughput: 450 tokens/sec (9x improvement)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <strong>Anthropic Case Study:</strong> Optimized Claude 3 with continuous batching, increasing throughput from 50 to 450 tokens/sec, reducing latency from 2.5s to 0.8s, and cutting GPU costs by 40%.
+            </div>
+
+            <h3>BatchPrompt: The Research Technique</h3>
+
+            <h4>Core Concept</h4>
+            <p>BatchPrompt batches multiple data points in each prompt to improve efficiency. Instead of making 100 API calls for 100 items, make 10 calls with 10 items each.</p>
+
+            <h4>Basic BatchPrompt Example</h4>
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4 style="color: var(--warning);">Traditional Approach (100 calls)</h4>
+                    <pre><code>for review in reviews:  # 100 reviews
+    prompt = f"Classify sentiment: {review}"
+    result = llm.call(prompt)
+    # Cost: 100 API calls
+    # Latency: 100 * 2s = 200s</code></pre>
+                </div>
+                <div class="before-after-item">
+                    <h4 style="color: var(--success);">BatchPrompt (10 calls)</h4>
+                    <pre><code>batches = chunk(reviews, 10)  # 10 batches of 10
+for batch in batches:
+    prompt = f"Classify sentiment for each:\n"
+    for i, review in enumerate(batch):
+        prompt += f"{i+1}. {review}\n"
+    results = llm.call(prompt)
+    # Cost: 10 API calls (90% reduction)
+    # Latency: 10 * 3s = 30s (85% faster)</code></pre>
+                </div>
+            </div>
+
+            <h4>Advanced: BPE + SEAS</h4>
+            <p>The BatchPrompt paper introduces two sophisticated techniques:</p>
+
+            <h4>BPE (Batch Permutation and Ensembling)</h4>
+            <p>Runs multiple voting rounds with different data orderings to improve accuracy:</p>
+
+            <pre><code>def bpe_classify(batch, num_rounds=3):
+    votes = defaultdict(list)
+
+    for round in range(num_rounds):
+        # Shuffle batch order each round
+        shuffled = random.sample(batch, len(batch))
+
+        # Get predictions for this ordering
+        predictions = batch_prompt(shuffled)
+
+        # Collect votes
+        for item_id, prediction in predictions.items():
+            votes[item_id].append(prediction)
+
+    # Majority vote
+    return {id: Counter(v).most_common(1)[0][0]
+            for id, v in votes.items()}</code></pre>
+
+            <h4>SEAS (Self-reflection-guided Early Stopping)</h4>
+            <p>Stops voting early for confident predictions:</p>
+
+            <pre><code>def seas_classify(batch, confidence_threshold=0.9):
+    votes = defaultdict(list)
+    confidences = defaultdict(list)
+    completed = set()
+
+    for round in range(max_rounds):
+        # Skip completed items
+        active_batch = [item for item in batch
+                       if item.id not in completed]
+
+        if not active_batch:
+            break
+
+        # Get predictions with confidence scores
+        results = batch_prompt_with_confidence(active_batch)
+
+        for item_id, (pred, conf) in results.items():
+            votes[item_id].append(pred)
+            confidences[item_id].append(conf)
+
+            # Early stop if confident
+            if conf > confidence_threshold and len(votes[item_id]) >= 2:
+                if votes[item_id][-1] == votes[item_id][-2]:
+                    completed.add(item_id)
+
+    return {id: Counter(v).most_common(1)[0][0]
+            for id, v in votes.items()}</code></pre>
+
+            <h4>BatchPrompt Performance (Research Results)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>API Calls</th>
+                        <th>Accuracy (BoolQ)</th>
+                        <th>Accuracy (RTE)</th>
+                        <th>Token Efficiency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Single-data prompting</td>
+                        <td>100%</td>
+                        <td>78.5%</td>
+                        <td>72.3%</td>
+                        <td>Baseline</td>
+                    </tr>
+                    <tr>
+                        <td>Basic BatchPrompt (batch=32)</td>
+                        <td>15.7%</td>
+                        <td>72.1%</td>
+                        <td>68.9%</td>
+                        <td class="price-low">6.4x better</td>
+                    </tr>
+                    <tr>
+                        <td>BatchPrompt + BPE</td>
+                        <td>31.4%</td>
+                        <td>77.8%</td>
+                        <td>71.5%</td>
+                        <td class="price-low">3.2x better</td>
+                    </tr>
+                    <tr>
+                        <td>BatchPrompt + BPE + SEAS</td>
+                        <td>22.5%</td>
+                        <td class="price-low">79.2%</td>
+                        <td class="price-low">73.1%</td>
+                        <td class="price-low">4.4x better</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <strong>Key Finding:</strong> BPE + SEAS achieves competitive or superior accuracy to single-data prompting while using only 22.5% of the API calls—a 77.5% cost reduction with improved accuracy.
+            </div>
+
+            <h3>Batch Processing Best Practices</h3>
+
+            <ol>
+                <li><strong>Use provider batch APIs for async workloads:</strong> 50% instant discount for 24-hour processing window</li>
+                <li><strong>Implement BatchPrompt for classification tasks:</strong> 80%+ cost reduction with BPE+SEAS</li>
+                <li><strong>Tune batch size:</strong> 10-32 items per batch optimal for most tasks</li>
+                <li><strong>Combine with caching:</strong> Batch similar queries to maximize cache hits</li>
+                <li><strong>Monitor quality:</strong> Larger batches can degrade accuracy—find the sweet spot</li>
+                <li><strong>Use continuous batching for self-hosted:</strong> 2-4x throughput improvement</li>
+            </ol>
+        </section>
+
+        <!-- Token-Efficient Prompting -->
+        <section class="content-section">
+            <h2>7. Token-Efficient Prompting Patterns</h2>
+
+            <h3>Zero-Shot vs. Few-Shot Trade-offs (2026 Research)</h3>
+
+            <div class="info-box">
+                <strong>Breaking Research (2026):</strong> Recent studies found that for strong models like Qwen2.5, Claude Opus 4.5, and GPT-4o, adding traditional CoT exemplars does not improve reasoning performance compared to Zero-Shot CoT. The primary function of exemplars is to align output format, not improve reasoning.
+            </div>
+
+            <h4>When to Use Each Approach</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Token Cost</th>
+                        <th>Best For</th>
+                        <th>Model Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Zero-Shot</strong></td>
+                        <td class="price-low">Minimal</td>
+                        <td>Strong models, simple tasks, format alignment</td>
+                        <td>Opus 4.5, GPT-4o, Sonnet 4.5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zero-Shot CoT</strong></td>
+                        <td class="price-low">Low (+15 tokens)</td>
+                        <td>Reasoning tasks with strong models</td>
+                        <td>Opus 4.5, GPT-4o</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Few-Shot (1-3 examples)</strong></td>
+                        <td class="price-mid">Medium (+200-600 tokens)</td>
+                        <td>Format specification, weaker models, edge cases</td>
+                        <td>Haiku, GPT-3.5, specialized formats</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Few-Shot CoT (3-5 examples)</strong></td>
+                        <td class="price-high">High (+1000-2000 tokens)</td>
+                        <td>Weaker models requiring reasoning scaffolding</td>
+                        <td>GPT-3.5, smaller models</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Optimized Prompting Patterns</h3>
+
+            <h4>Pattern 1: Zero-Shot CoT (Most Token-Efficient)</h4>
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4>Traditional Few-Shot CoT (1,500 tokens)</h4>
+                    <pre><code>Example 1: [Complex example with reasoning steps]
+[200 tokens]
+
+Example 2: [Another complex example]
+[200 tokens]
+
+Example 3: [Third example]
+[200 tokens]
+
+Now solve this problem:
+[User query]</code></pre>
+                </div>
+                <div class="before-after-item">
+                    <h4>Zero-Shot CoT (50 tokens)</h4>
+                    <pre><code>[User query]
+
+Let's think step by step.</code></pre>
+                    <p style="color: var(--success); margin-top: 1rem;"><strong>Savings: 96.7% token reduction</strong></p>
+                    <p style="color: var(--text-muted);">For GPT-4o, Opus 4.5: Same or better accuracy</p>
+                </div>
+            </div>
+
+            <h4>Pattern 2: Concise Few-Shot (Format Only)</h4>
+            <pre><code>Extract key information in JSON format.
+
+Example:
+Input: "John Smith, age 35, lives in NYC"
+Output: {"name": "John Smith", "age": 35, "city": "NYC"}
+
+Now process: [user input]</code></pre>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">~50 tokens vs. 200+ for verbose examples. Use for format specification only.</p>
+
+            <h4>Pattern 3: Auto-CoT (Automatic Example Generation)</h4>
+            <p>Automatically generate diverse, simple examples instead of manual curation:</p>
+
+            <ul>
+                <li>Choose demonstrations with <60 tokens</li>
+                <li>Select rationales with <5 reasoning steps</li>
+                <li>Prioritize simpler questions</li>
+                <li>Ensure diversity across examples</li>
+            </ul>
+
+            <h3>Structured Output Optimization</h3>
+
+            <h4>Use Native Structured Output APIs</h4>
+            <p>Both OpenAI and Anthropic now offer structured output modes that eliminate the need for verbose format instructions:</p>
+
+            <div class="before-after">
+                <div class="before-after-item">
+                    <h4>Verbose Instructions (150 tokens)</h4>
+                    <pre><code>Extract information and return in JSON format.
+Use the following schema:
+{
+  "name": "string",
+  "age": "integer",
+  "email": "string",
+  "interests": ["string"]
+}
+
+Ensure all fields are present. Use null if
+unknown. Validate email format. Return only
+valid JSON, no explanations.</code></pre>
+                </div>
+                <div class="before-after-item">
+                    <h4>Structured Output API (0 tokens)</h4>
+                    <pre><code>response = client.messages.create(
+    model="claude-sonnet-4-5",
+    response_format={
+        "type": "json_schema",
+        "json_schema": schema
+    },
+    messages=[...]
+)
+
+# Schema enforced by API
+# No format instructions needed</code></pre>
+                    <p style="color: var(--success); margin-top: 1rem;"><strong>Savings: 150 tokens per call</strong></p>
+                </div>
+            </div>
+
+            <h3>Reasoning Model Optimization</h3>
+
+            <div class="warning-box">
+                <strong>Cost Management for o1/o3:</strong> Reasoning models generate 10-30x more tokens internally. Strategies to control costs:
+                <ul style="margin-top: 0.5rem;">
+                    <li><strong>Use sparingly:</strong> Only for tasks that truly require deep reasoning (proofs, complex analysis)</li>
+                    <li><strong>Set token budgets:</strong> Use max_completion_tokens to cap thinking depth</li>
+                    <li><strong>Disable CoT when possible:</strong> For some tasks, standard completion is sufficient</li>
+                    <li><strong>Test cheaper models first:</strong> Often GPT-4o or Opus 4.5 can solve without reasoning overhead</li>
+                </ul>
+            </div>
+
+            <aside class="gsd-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">GSD Integration</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Token Optimization for Planning Documents:</strong> In GSD workflows, planning documents (PLAN.md, ROADMAP.md) often contain verbose descriptions that consume tokens across multiple agent invocations. Apply these optimizations: (1) <strong>Use structured frontmatter</strong> with YAML/JSON instead of prose for metadata, (2) <strong>Keep task descriptions atomic</strong> - one clear action per task, (3) <strong>Reference files by path</strong> rather than including content inline, and (4) <strong>Compress completed task context</strong> to summary form while keeping current task at full fidelity.</p>
+                </div>
+            </aside>
+
+            <h3>Token-Efficient Prompting Checklist</h3>
+
+            <ol>
+                <li>Use Zero-Shot CoT with strong models instead of Few-Shot CoT (96% token savings)</li>
+                <li>✅ Use structured output APIs instead of verbose format instructions (100-200 token savings)</li>
+                <li>✅ Provide minimal, concise examples for format alignment only (~50 tokens vs. 200+)</li>
+                <li>✅ Remove unnecessary pleasantries and verbose instructions ("please", "kindly", etc.)</li>
+                <li>✅ Use schema-aware formatting (JSON schema, TypeScript types) instead of natural language descriptions</li>
+                <li>✅ Cache static instructions and system prompts (90% savings on repeated context)</li>
+                <li>✅ Avoid reasoning models (o1/o3) unless absolutely necessary (10-30x cost multiplier)</li>
+                <li>✅ Test zero-shot before adding examples (often performs equally well with frontier models)</li>
+            </ol>
+        </section>
+
+        <!-- Cost Monitoring -->
+        <section class="content-section">
+            <h2>8. Cost Monitoring and Observability Tools</h2>
+
+            <h3>Why Cost Monitoring Is Critical</h3>
+            <p>75% of enterprises adopt FinOps automation by 2026, shifting from reactive cost control to autonomous optimization with AI agents managing AI costs. Real-time cost tracking enables:</p>
+
+            <ul>
+                <li>Early detection of cost anomalies (runaway loops, prompt injection attacks)</li>
+                <li>Per-user, per-feature cost attribution</li>
+                <li>ROI measurement for optimization strategies</li>
+                <li>Budget alerts and guardrails</li>
+                <li>Model performance vs. cost trade-off analysis</li>
+            </ul>
+
+            <h3>Leading LLM Observability Platforms (2026)</h3>
+
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h4>Langfuse</h4>
+                    <span class="badge badge-new">Open Source</span>
+                    <p>Open-source LLM observability with automatic token tracking for OpenAI, Anthropic, and other providers.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        <li>Auto-tracking with wrappers</li>
+                        <li>Cost breakdown by usage type</li>
+                        <li>LangChain, LlamaIndex integrations</li>
+                        <li>Self-hostable</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>Helicone</h4>
+                    <span class="badge badge-update">Developer-Focused</span>
+                    <p>Simplest solution for LLM cost and token tracking with optimization tools built-in.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        <li>One-line integration</li>
+                        <li>Real-time cost tracking</li>
+                        <li>Caching recommendations</li>
+                        <li>Prompt optimization suggestions</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>Datadog LLM Observability</h4>
+                    <span class="badge badge-update">Enterprise</span>
+                    <p>End-to-end tracing with OpenAI cost breakdowns from project to individual model token consumption.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        <li>Real (not estimated) costs</li>
+                        <li>Project-level breakdowns</li>
+                        <li>Per-prompt trace costs</li>
+                        <li>Full-stack observability</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>Braintrust</h4>
+                    <span class="badge badge-new">AI-Native</span>
+                    <p>Monitors LLM quality, cost, and performance from development through production.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        <li>Cost per user/feature tracking</li>
+                        <li>A/B testing built-in</li>
+                        <li>Quality + cost correlation</li>
+                        <li>Experiments and evaluations</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>TrueFoundry AI Gateway</h4>
+                    <span class="badge badge-update">Gateway-Based</span>
+                    <p>Single pane of glass for all inference traffic with unified observability and cost attribution.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        <li>Routes API and self-hosted models</li>
+                        <li>Unified cost tracking</li>
+                        <li>Multi-provider support</li>
+                        <li>Cost attribution by team/project</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <h4>Weights & Biases (Weave)</h4>
+                    <span class="badge badge-new">Research-Friendly</span>
+                    <p>Automatically logs calls to OpenAI, Anthropic, and other LLM libraries with full cost tracking.</p>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        <li>Auto-logging for major providers</li>
+                        <li>Token usage and costs</li>
+                        <li>Experiment tracking</li>
+                        <li>Visualization dashboards</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Key Metrics to Track</h3>
+
+            <h4>Cost Metrics</h4>
+            <ul>
+                <li><strong>Cost per request:</strong> Average cost across all requests</li>
+                <li><strong>Cost per user:</strong> Identify high-cost users or abuse patterns</li>
+                <li><strong>Cost per feature:</strong> Which features drive costs (RAG, reasoning, chat)?</li>
+                <li><strong>Input/output token ratio:</strong> Monitor for unexpected shifts</li>
+                <li><strong>Cache hit rate:</strong> Track caching effectiveness (target >70%)</li>
+                <li><strong>Model distribution:</strong> Percentage routed to each model tier</li>
+            </ul>
+
+            <h4>Performance Metrics</h4>
+            <ul>
+                <li><strong>Latency (p50, p95, p99):</strong> Response time distribution</li>
+                <li><strong>Throughput:</strong> Requests per second</li>
+                <li><strong>Error rate:</strong> Failed requests, rate limits, timeouts</li>
+                <li><strong>Token usage per request:</strong> Detect prompt bloat</li>
+            </ul>
+
+            <h4>Quality Metrics</h4>
+            <ul>
+                <li><strong>Groundedness:</strong> Responses grounded in retrieved context (RAG)</li>
+                <li><strong>Relevance:</strong> Response relevance to prompt</li>
+                <li><strong>Hallucination rate:</strong> Factually incorrect outputs</li>
+                <li><strong>User satisfaction:</strong> Thumbs up/down, feedback scores</li>
+            </ul>
+
+            <h3>Implementation: OpenTelemetry-Based Tracking</h3>
+
+            <pre><code>from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+# Setup OpenTelemetry
+trace.set_tracer_provider(TracerProvider())
+tracer = trace.get_tracer(__name__)
+otlp_exporter = OTLPSpanExporter(endpoint="your-collector:4317")
+trace.get_tracer_provider().add_span_processor(
+    BatchSpanProcessor(otlp_exporter)
+)
+
+# Instrument LLM calls
+@tracer.start_as_current_span("llm_call")
+def call_llm(prompt, model="claude-sonnet-4-5"):
+    span = trace.get_current_span()
+
+    # Add metadata
+    span.set_attribute("llm.model", model)
+    span.set_attribute("llm.prompt_tokens", len(prompt.split()))
+
+    response = client.messages.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    # Track usage and cost
+    span.set_attribute("llm.input_tokens", response.usage.input_tokens)
+    span.set_attribute("llm.output_tokens", response.usage.output_tokens)
+    span.set_attribute("llm.cache_read_tokens",
+                      response.usage.cache_read_input_tokens or 0)
+
+    # Calculate cost
+    cost = calculate_cost(response.usage, model)
+    span.set_attribute("llm.cost", cost)
+
+    return response</code></pre>
+
+            <h3>Cost Alerting and Guardrails</h3>
+
+            <h4>Budget Alerts</h4>
+            <pre><code># Set up cost alerting
+class CostGuardrail:
+    def __init__(self, daily_budget=100.0):
+        self.daily_budget = daily_budget
+        self.current_spend = 0.0
+        self.reset_daily()
+
+    def check_budget(self, estimated_cost):
+        if self.current_spend + estimated_cost > self.daily_budget:
+            raise BudgetExceededError(
+                f"Request would exceed daily budget: "
+                f"${self.current_spend + estimated_cost:.2f} > ${self.daily_budget}"
+            )
+        return True
+
+    def record_spend(self, actual_cost):
+        self.current_spend += actual_cost
+
+        # Alert at 80% threshold
+        if self.current_spend > self.daily_budget * 0.8:
+            send_alert(f"Daily budget 80% consumed: ${self.current_spend:.2f}")
+
+# Use in application
+guardrail = CostGuardrail(daily_budget=100.0)
+
+def process_request(user_input):
+    estimated_cost = estimate_cost(user_input)
+    guardrail.check_budget(estimated_cost)
+
+    response = call_llm(user_input)
+    guardrail.record_spend(response.cost)
+
+    return response</code></pre>
+
+            <h3>Observability Best Practices</h3>
+
+            <ol>
+                <li><strong>Instrument from day one:</strong> Cost tracking should be in place before production deployment</li>
+                <li><strong>Use OpenTelemetry:</strong> Industry standard for tracing, portable across platforms</li>
+                <li><strong>Track quality + cost together:</strong> Cost optimization without quality tracking leads to degraded experiences</li>
+                <li><strong>Set up automated alerts:</strong> Budget thresholds, anomaly detection, error rate spikes</li>
+                <li><strong>Implement per-user tracking:</strong> Identify abuse, support tiered pricing, understand usage patterns</li>
+                <li><strong>Monitor cache performance:</strong> Track hit rates, ensure caching ROI is positive</li>
+                <li><strong>Review dashboards weekly:</strong> Regular review identifies optimization opportunities</li>
+            </ol>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section class="content-section">
+            <h2>9. Implementation Roadmap</h2>
+
+            <h3>Phased Optimization Approach</h3>
+            <p>Implement token optimization in stages to manage complexity and measure impact:</p>
+
+            <h4>Phase 1: Quick Wins (Week 1-2)</h4>
+            <div class="success-box">
+                <strong>Expected Savings: 30-50%</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li><strong>Implement cost monitoring:</strong> Deploy Langfuse, Helicone, or similar (1 day)</li>
+                    <li><strong>Enable prompt caching:</strong> Add cache_control to static context (2 days)</li>
+                    <li><strong>Optimize prompts:</strong> Remove verbose instructions, switch to zero-shot CoT (3 days)</li>
+                    <li><strong>Use batch API:</strong> Migrate async workloads to batch processing (2 days)</li>
+                </ul>
+            </div>
+
+            <h4>Phase 2: Strategic Optimization (Week 3-6)</h4>
+            <div class="success-box">
+                <strong>Expected Savings: 50-70% (cumulative)</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li><strong>Implement model routing:</strong> Deploy complexity-based routing (1 week)</li>
+                    <li><strong>Optimize RAG pipeline:</strong> Semantic chunking, hybrid retrieval, re-ranking (2 weeks)</li>
+                    <li><strong>Deploy prompt compression:</strong> Integrate LLMLingua for long contexts (1 week)</li>
+                </ul>
+            </div>
+
+            <h4>Phase 3: Advanced Optimization (Week 7-12)</h4>
+            <div class="success-box">
+                <strong>Expected Savings: 60-80% (cumulative)</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li><strong>Advanced routing:</strong> ML-based routing with xRouter or similar (2 weeks)</li>
+                    <li><strong>RAG compression:</strong> Deploy xRAG for context compression (2 weeks)</li>
+                    <li><strong>BatchPrompt with BPE+SEAS:</strong> For classification workloads (1 week)</li>
+                    <li><strong>Continuous optimization:</strong> A/B testing, monitoring, tuning (ongoing)</li>
+                </ul>
+            </div>
+
+            <h3>Success Criteria and Measurement</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Baseline</th>
+                        <th>Target (Phase 3)</th>
+                        <th>Measurement Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cost per 1M requests</strong></td>
+                        <td>$1,000</td>
+                        <td>$200-300</td>
+                        <td>Observability platform</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cache hit rate</strong></td>
+                        <td>0%</td>
+                        <td>>70%</td>
+                        <td>API response metadata</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avg tokens per request</strong></td>
+                        <td>5,000</td>
+                        <td><2,000</td>
+                        <td>Token usage tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User satisfaction</strong></td>
+                        <td>85%</td>
+                        <td>>83% (maintain)</td>
+                        <td>User feedback, ratings</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Response quality</strong></td>
+                        <td>0.90</td>
+                        <td>>0.88 (maintain)</td>
+                        <td>Eval suite, human review</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <strong>Quality Guardrails:</strong> Always monitor quality metrics alongside cost. Set minimum quality thresholds and roll back optimizations that degrade user experience. A 70% cost reduction is worthless if it drives users away.
+            </div>
+
+            <h3>ROI Calculator</h3>
+
+            <p>Estimate your potential savings:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Current Metrics</th>
+                        <th>Your Value</th>
+                        <th>Optimized Value</th>
+                        <th>Savings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monthly API spend</td>
+                        <td>$10,000</td>
+                        <td>$2,500</td>
+                        <td class="price-low">$7,500/mo</td>
+                    </tr>
+                    <tr>
+                        <td>Annual savings</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td class="price-low">$90,000/year</td>
+                    </tr>
+                    <tr>
+                        <td>Implementation cost (12 weeks)</td>
+                        <td>—</td>
+                        <td>$30,000</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ROI (first year)</strong></td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td class="price-low"><strong>200%</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Payback period</strong></td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td class="price-low"><strong>4 months</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Common Pitfalls to Avoid</h3>
+
+            <ol>
+                <li><strong>Optimizing without monitoring:</strong> You can't improve what you don't measure. Deploy observability first.</li>
+                <li><strong>Over-compressing prompts:</strong> Aggressive compression can degrade quality. Test thoroughly.</li>
+                <li><strong>Ignoring cache TTL:</strong> Low cache hit rates make caching cost-ineffective. Monitor and adjust.</li>
+                <li><strong>Routing too aggressively:</strong> Over-routing to small models increases error rates and user frustration.</li>
+                <li><strong>Forgetting quality metrics:</strong> Cost optimization without quality tracking leads to poor user experience.</li>
+                <li><strong>Skipping A/B tests:</strong> Always compare optimized vs. baseline in production before full rollout.</li>
+                <li><strong>Optimizing too early:</strong> Premature optimization wastes time. Wait until you have meaningful usage data.</li>
+            </ol>
+        </section>
+
+        <!-- Key Takeaways -->
+        <section class="content-section">
+            <h2>10. Key Takeaways</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">60-80%</div>
+                    <div class="stat-label">Typical Total Savings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4-6 mo</div>
+                    <div class="stat-label">Typical Payback Period</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5-7</div>
+                    <div class="stat-label">Core Techniques to Master</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">Weekly</div>
+                    <div class="stat-label">Recommended Review Cadence</div>
+                </div>
+            </div>
+
+            <h3>Essential Optimization Techniques (Ranked by ROI)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Technique</th>
+                        <th>Savings</th>
+                        <th>Complexity</th>
+                        <th>When to Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td><strong>Prompt Caching</strong></td>
+                        <td class="price-low">50-90%</td>
+                        <td>Low</td>
+                        <td>Stable context, high-frequency requests</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td><strong>Model Routing</strong></td>
+                        <td class="price-low">50-80%</td>
+                        <td>Medium</td>
+                        <td>>1M tokens/day, varied complexity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td><strong>Batch Processing</strong></td>
+                        <td class="price-low">50%</td>
+                        <td>Low</td>
+                        <td>Async workloads, can tolerate 24h latency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong></td>
+                        <td><strong>RAG Optimization</strong></td>
+                        <td class="price-mid">50-80%</td>
+                        <td>Medium-High</td>
+                        <td>RAG applications with chunking/retrieval</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td><strong>Zero-Shot CoT</strong></td>
+                        <td class="price-mid">30-50%</td>
+                        <td>Low</td>
+                        <td>Strong models, reasoning tasks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td><strong>Prompt Compression</strong></td>
+                        <td class="price-mid">70-94%</td>
+                        <td>High</td>
+                        <td>Very long contexts, specialized domains</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7</strong></td>
+                        <td><strong>BatchPrompt (BPE+SEAS)</strong></td>
+                        <td class="price-mid">70-80%</td>
+                        <td>Medium-High</td>
+                        <td>Classification, batch tasks</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>The Token Optimization Mindset</h3>
+
+            <div class="highlight-box">
+                <strong>Core Principles:</strong>
+                <ol style="margin-top: 0.5rem;">
+                    <li><strong>Measure everything:</strong> You can't optimize what you don't measure. Deploy observability first.</li>
+                    <li><strong>Start with quick wins:</strong> Caching and batching deliver immediate ROI with minimal complexity.</li>
+                    <li><strong>Never sacrifice quality:</strong> Cost optimization that degrades user experience is counterproductive.</li>
+                    <li><strong>Test rigorously:</strong> A/B test all optimizations before full deployment.</li>
+                    <li><strong>Optimize continuously:</strong> Token optimization is an ongoing process, not a one-time project.</li>
+                    <li><strong>Combine techniques:</strong> The real power comes from layering multiple optimizations strategically.</li>
+                </ol>
+            </div>
+
+            <h3>2026 Market Context</h3>
+            <p>As AI workloads are projected to exceed $840 billion by 2026, token optimization has become a core competency for AI teams. Organizations that master these techniques gain significant competitive advantages through:</p>
+
+            <ul>
+                <li><strong>Lower operational costs:</strong> 60-80% cost reduction enables broader AI deployment</li>
+                <li><strong>Faster response times:</strong> Optimized prompts reduce latency</li>
+                <li><strong>Improved quality:</strong> Focused context often improves accuracy</li>
+                <li><strong>Sustainable scaling:</strong> Cost-effective operations enable growth</li>
+                <li><strong>Competitive pricing:</strong> Lower costs enable more aggressive pricing strategies</li>
+            </ul>
+
+            <div class="success-box">
+                <strong>Future Outlook:</strong> By 2026, 75% of enterprises have adopted FinOps automation, with AI agents managing AI costs autonomously. Token optimization is shifting from manual engineering to automated, ML-driven strategies that continuously adapt to workload patterns.
+            </div>
+        </section>
+
+        <!-- Implementation Examples -->
+        <section class="content-section implementation-section">
+            <h2>Implementation Examples</h2>
+            <p>Practical Claude Code patterns for token optimization. These examples demonstrate selective context loading, session continuity, and lazy file references based on the context compression research.<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1-impl">1</a><span class="citation-tooltip" id="tooltip-1-impl" role="tooltip"><span class="source-type academic">Academic</span><strong>LLMLingua-2: Prompt Compression</strong><span class="authors">Pan et al., 2024</span><a href="https://arxiv.org/abs/2403.12968" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+
+            <h3>Selective Context Loading</h3>
+            <p>Only load the files needed for the task, reducing token usage significantly. This implements the hierarchical context pattern from the compression research.<sup class="citation" data-ref="2"><a href="#ref-2" aria-describedby="tooltip-2-impl">2</a><span class="citation-tooltip" id="tooltip-2-impl" role="tooltip"><span class="source-type academic">Academic</span><strong>LongLLMLingua: Long Context Compression</strong><span class="authors">Jiang et al., 2024</span><a href="https://arxiv.org/abs/2310.06839" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Python</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">from</span> claude_agent_sdk <span class="keyword">import</span> query, ClaudeAgentOptions
+
+<span class="comment"># BAD: Loading entire codebase (expensive)</span>
+<span class="comment"># async for msg in query("Fix the bug in our codebase", ...)</span>
+
+<span class="comment"># GOOD: Targeted context loading</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"""Fix the authentication bug.
+Context needed:
+- @src/auth/login.py (the buggy file)
+- @src/auth/types.py (type definitions)
+- @tests/auth/test_login.py (failing tests)"""</span>,
+    options=ClaudeAgentOptions(
+        allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Edit"</span>],
+        permission_mode=<span class="string">"acceptEdits"</span>
+    )
+):
+    <span class="keyword">pass</span>
+
+<span class="comment"># Even better: Use Glob/Grep to find relevant files first</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"""Find and fix the authentication timeout issue.
+1. Use Grep to find where timeout is configured
+2. Read only the relevant files
+3. Fix the issue"""</span>,
+    options=ClaudeAgentOptions(
+        allowed_tools=[<span class="string">"Grep"</span>, <span class="string">"Read"</span>, <span class="string">"Edit"</span>],
+        permission_mode=<span class="string">"acceptEdits"</span>
+    )
+):
+    <span class="keyword">pass</span></code></pre>
+            </div>
+
+            <h3>Session Continuity for Context Reuse</h3>
+            <p>Maintain session state across queries to avoid re-loading context, implementing the KV-cache optimization pattern.<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5-impl">5</a><span class="citation-tooltip" id="tooltip-5-impl" role="tooltip"><span class="source-type academic">Academic</span><strong>H2O: Heavy-Hitter Oracle</strong><span class="authors">Zhang et al., 2023</span><a href="https://arxiv.org/abs/2306.14048" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Python</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">from</span> claude_agent_sdk <span class="keyword">import</span> query, ClaudeAgentOptions
+
+<span class="comment"># First query: establish context</span>
+session_id = <span class="keyword">None</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"Read and understand the authentication module in src/auth/"</span>,
+    options=ClaudeAgentOptions(allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Glob"</span>])
+):
+    <span class="keyword">if</span> <span class="function">hasattr</span>(message, <span class="string">'subtype'</span>) <span class="keyword">and</span> message.subtype == <span class="string">'init'</span>:
+        session_id = message.session_id  <span class="comment"># Capture session ID</span>
+
+<span class="comment"># Second query: reuse session (context already loaded)</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"Now find all places that call the login function"</span>,
+    options=ClaudeAgentOptions(
+        resume=session_id  <span class="comment"># Resume existing session</span>
+    )
+):
+    <span class="keyword">if</span> <span class="function">hasattr</span>(message, <span class="string">"result"</span>):
+        <span class="function">print</span>(message.result)
+
+<span class="comment"># Third query: continue with same context</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"Add rate limiting to each of those call sites"</span>,
+    options=ClaudeAgentOptions(
+        resume=session_id,
+        allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Edit"</span>]
+    )
+):
+    <span class="keyword">pass</span></code></pre>
+            </div>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">TypeScript</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">import</span> { query } <span class="keyword">from</span> <span class="string">"@anthropic-ai/claude-agent-sdk"</span>;
+
+<span class="comment">// Capture session ID from first query</span>
+<span class="keyword">let</span> sessionId: <span class="class-name">string</span> | <span class="keyword">null</span> = <span class="keyword">null</span>;
+
+<span class="keyword">for await</span> (<span class="keyword">const</span> msg <span class="keyword">of</span> query({
+  prompt: <span class="string">"Analyze the database schema in src/models/"</span>,
+  options: { allowedTools: [<span class="string">"Read"</span>, <span class="string">"Glob"</span>] }
+})) {
+  <span class="keyword">if</span> (msg.subtype === <span class="string">"init"</span>) sessionId = msg.sessionId;
+}
+
+<span class="comment">// Subsequent queries reuse the session</span>
+<span class="keyword">for await</span> (<span class="keyword">const</span> msg <span class="keyword">of</span> query({
+  prompt: <span class="string">"Add indexes for the slow queries we discussed"</span>,
+  options: { resume: sessionId, allowedTools: [<span class="string">"Read"</span>, <span class="string">"Edit"</span>] }
+})) {
+  <span class="keyword">if</span> (<span class="string">"result"</span> <span class="keyword">in</span> msg) <span class="function">console</span>.log(msg.result);
+}</code></pre>
+            </div>
+
+            <h3>Lazy File References with @-syntax</h3>
+            <p>Use file references that load on-demand rather than eagerly including all content in the prompt.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Bash</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="comment"># BAD: Eagerly loads entire file into prompt</span>
+claude <span class="string">"Here is my code: $(cat src/auth/login.py) - Fix the bug"</span>
+
+<span class="comment"># GOOD: Lazy reference - Claude loads only what's needed</span>
+claude <span class="string">"Fix the authentication bug in @src/auth/login.py"</span>
+
+<span class="comment"># BETTER: Multiple lazy references</span>
+claude <span class="string">"Review @src/auth/login.py against @docs/auth-spec.md"</span>
+
+<span class="comment"># BEST: Let Claude discover what to read</span>
+claude <span class="string">"Find and fix the login timeout bug in the auth module"</span></code></pre>
+            </div>
+
+            <h3>GSD Context Optimization</h3>
+            <p>GSD workflows implement hierarchical context compression through file-based state management, following the research on efficient context organization.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Markdown</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="comment"># GSD uses hierarchical context loading:</span>
+
+<span class="comment"># Level 1: PROJECT.md (always loaded, ~500 tokens)</span>
+<span class="comment"># - Core constraints and decisions</span>
+
+<span class="comment"># Level 2: STATE.md (loaded for continuity, ~300 tokens)</span>
+<span class="comment"># - Current position, accumulated decisions</span>
+
+<span class="comment"># Level 3: PLAN.md (loaded for execution, ~500 tokens)</span>
+<span class="comment"># - Specific tasks and verification criteria</span>
+
+<span class="comment"># Level 4: SUMMARY.md files (loaded on-demand)</span>
+<span class="comment"># - Only loaded when context from completed work is needed</span>
+
+<span class="comment"># Result: Fresh execution agent loads ~1300 tokens of context</span>
+<span class="comment"># vs. loading entire project history (potentially 50k+ tokens)</span></code></pre>
+            </div>
+
+            <h3>Context Budget Rules from gsd-planner</h3>
+            <p>GSD enforces the 50% context budget rule to address the quality degradation curve identified in research. Each plan targets completion within 50% of available context.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Context Usage</th>
+                        <th>Quality Level</th>
+                        <th>GSD Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-30%</td>
+                        <td>PEAK - Thorough, comprehensive</td>
+                        <td>Optimal operating range</td>
+                    </tr>
+                    <tr>
+                        <td>30-50%</td>
+                        <td>GOOD - Confident, solid work</td>
+                        <td>Target completion zone</td>
+                    </tr>
+                    <tr>
+                        <td>50-70%</td>
+                        <td>DEGRADING - Efficiency mode</td>
+                        <td>Split into new plan</td>
+                    </tr>
+                    <tr>
+                        <td>70%+</td>
+                        <td>POOR - Rushed, minimal</td>
+                        <td>Never reach this zone</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <aside class="gsd-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">GSD Pattern: 50% Budget Rule Addresses Degradation Curve</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>The 50% context budget rule prevents quality degradation from context pressure.</strong> GSD enforces this through plan sizing: each plan has 2-3 tasks maximum, targeting ~50% context. If a task would exceed this budget, it becomes a new plan in the next wave. This maps directly to the compression research showing quality drops beyond certain context thresholds.<sup class="citation" data-ref="1"><a href="#ref-1">1</a></sup></p>
+                </div>
+            </aside>
+
+            <h4>Enhancement Ideas</h4>
+            <ul>
+                <li><strong>Automatic compression:</strong> Apply LLMLingua-style compression<sup class="citation" data-ref="1"><a href="#ref-1">1</a></sup> to SUMMARY files before loading</li>
+                <li><strong>Dynamic budget monitoring:</strong> Track context usage during execution, trigger plan split at 60%</li>
+                <li><strong>Hierarchical detail levels:</strong> Full detail for current phase, one-liners for distant phases</li>
+            </ul>
+        </section>
+
+        <!-- References -->
+        <section class="references">
+            <h2>References</h2>
+            <p class="research-date">Research current as of: January 2026</p>
+
+            <div class="ref-group">
+                <h3>Academic Papers</h3>
+                <ol class="ref-list">
+                    <li id="ref-1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-content">Pan et al. (2024). "LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression." ACL 2024. <a href="https://arxiv.org/abs/2403.12968" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-2">
+                        <span class="ref-num">[2]</span>
+                        <span class="ref-content">Jiang et al. (2024). "LongLLMLingua: Accelerating and Enhancing LLMs in Long Context Scenarios via Prompt Compression." ACL 2024. <a href="https://arxiv.org/abs/2310.06839" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-3">
+                        <span class="ref-num">[3]</span>
+                        <span class="ref-content">Mu et al. (2023). "Learning to Compress Prompts with Gist Tokens." NeurIPS 2023. <a href="https://arxiv.org/abs/2304.08467" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-4">
+                        <span class="ref-num">[4]</span>
+                        <span class="ref-content">Ge et al. (2024). "In-context Autoencoder for Context Compression in a Large Language Model." ICLR 2024. <a href="https://arxiv.org/abs/2307.06945" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-5">
+                        <span class="ref-num">[5]</span>
+                        <span class="ref-content">Zhang et al. (2023). "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models." NeurIPS 2023. <a href="https://arxiv.org/abs/2306.14048" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-6">
+                        <span class="ref-num">[6]</span>
+                        <span class="ref-content">Xiao et al. (2024). "Streaming LLM: Efficient Streaming Language Models with Attention Sinks." ICLR 2024. <a href="https://arxiv.org/abs/2309.17453" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-9">
+                        <span class="ref-num">[9]</span>
+                        <span class="ref-content">Gu &amp; Dao (2024). "Mamba: Linear-Time Sequence Modeling with Selective State Spaces." ICLR 2024 (Oral). <a href="https://arxiv.org/abs/2312.00752" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-10">
+                        <span class="ref-num">[10]</span>
+                        <span class="ref-content">Dao (2024). "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning." ICLR 2024. <a href="https://arxiv.org/abs/2307.08691" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-11">
+                        <span class="ref-num">[11]</span>
+                        <span class="ref-content">Liu et al. (2024). "Ring Attention with Blockwise Transformers for Near-Infinite Context." ICLR 2024. <a href="https://arxiv.org/abs/2310.01889" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-13">
+                        <span class="ref-num">[13]</span>
+                        <span class="ref-content">Li et al. (2024). "SnapKV: LLM Knows What You are Looking for Before Generation." arXiv 2024. <a href="https://arxiv.org/abs/2404.14469" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-14">
+                        <span class="ref-num">[14]</span>
+                        <span class="ref-content">Cai et al. (2024). "PyramidKV: Dynamic KV Cache Compression based on Pyramidal Information Funneling." arXiv 2024. <a href="https://arxiv.org/abs/2406.02069" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-15">
+                        <span class="ref-num">[15]</span>
+                        <span class="ref-content">Liu et al. (2024). "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache." ICML 2024. <a href="https://arxiv.org/abs/2402.02750" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-16">
+                        <span class="ref-num">[16]</span>
+                        <span class="ref-content">Chen et al. (2024). "Extending Context Window of Large Language Models via Positional Interpolation." arXiv 2024. <a href="https://arxiv.org/abs/2306.15595" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-17">
+                        <span class="ref-num">[17]</span>
+                        <span class="ref-content">Peng et al. (2024). "YaRN: Efficient Context Window Extension of Large Language Models." ICLR 2024. <a href="https://arxiv.org/abs/2309.00071" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                    <li id="ref-18">
+                        <span class="ref-num">[18]</span>
+                        <span class="ref-content">Munkhdalai et al. (2024). "Leave No Context Behind: Efficient Infinite Context Transformers with Infini-attention." Google, arXiv 2024. <a href="https://arxiv.org/abs/2404.07143" target="_blank" rel="noopener">arXiv</a></span>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="ref-group">
+                <h3>Industry Sources</h3>
+                <ol class="ref-list" start="7">
+                    <li id="ref-7">
+                        <span class="ref-num">[7]</span>
+                        <span class="ref-content">Anthropic. "Prompt Caching with Claude." Anthropic Documentation, 2024. <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank" rel="noopener">View Docs</a></span>
+                    </li>
+                    <li id="ref-8">
+                        <span class="ref-num">[8]</span>
+                        <span class="ref-content">OpenAI. "Prompt Caching in the API." OpenAI Platform Documentation, 2024. <a href="https://platform.openai.com/docs/guides/production-best-practices" target="_blank" rel="noopener">View Docs</a></span>
+                    </li>
+                    <li id="ref-12">
+                        <span class="ref-num">[12]</span>
+                        <span class="ref-content">Microsoft Research. "LLMLingua: Prompt Compression Toolkit." GitHub Repository. <a href="https://github.com/microsoft/LLMLingua" target="_blank" rel="noopener">View Repo</a></span>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="sources">
+            <h3>Additional Sources</h3>
+            <ul>
+                <li><a href="https://www.cloudidr.com/llm-pricing" target="_blank">LLM API Pricing 2026: OpenAI vs Anthropic vs Gemini | Live Comparison - CloudIDR</a></li>
+                <li><a href="https://pricepertoken.com/" target="_blank">LLM API Pricing 2026 - Compare 300+ AI Model Costs - PricePerToken</a></li>
+                <li><a href="https://www.cloudidr.com/blog/llm-pricing-comparison-2026" target="_blank">Complete LLM Pricing Comparison 2026: We Analyzed 60+ Models - CloudIDR</a></li>
+                <li><a href="https://www.metacto.com/blogs/anthropic-api-pricing-a-full-breakdown-of-costs-and-integration" target="_blank">Anthropic Claude API Pricing 2026: Complete Cost Breakdown - MetaCTO</a></li>
+                <li><a href="https://research.aimultiple.com/llm-pricing/" target="_blank">LLM Pricing: Top 15+ Providers Compared in 2026 - AIMultiple</a></li>
+                <li><a href="https://machinelearningmastery.com/prompt-compression-for-llm-generation-optimization-and-cost-reduction/" target="_blank">Prompt Compression for LLM Generation Optimization and Cost Reduction - Machine Learning Mastery</a></li>
+                <li><a href="https://medium.com/@sahin.samia/prompt-compression-in-large-language-models-llms-making-every-token-count-078a2d1c7e03" target="_blank">Prompt Compression in Large Language Models (LLMs): Making Every Token Count - Medium</a></li>
+                <li><a href="https://www.microsoft.com/en-us/research/blog/llmlingua-innovating-llm-efficiency-with-prompt-compression/" target="_blank">LLMLingua: Innovating LLM efficiency with prompt compression - Microsoft Research</a></li>
+                <li><a href="https://medium.com/@yashpaddalwar/token-compression-how-to-slash-your-llm-costs-by-80-without-sacrificing-quality-bfd79daf7c7c" target="_blank">Token Compression: How to Slash Your LLM Costs by 80% - Medium</a></li>
+                <li><a href="https://towardsdatascience.com/how-to-cut-rag-costs-by-80-using-prompt-compression-877a07c6bedb/" target="_blank">How to Cut RAG Costs by 80% Using Prompt Compression - Towards Data Science</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank">Prompt caching - Claude API Docs - Anthropic</a></li>
+                <li><a href="https://www.anthropic.com/news/prompt-caching" target="_blank">Prompt caching with Claude - Anthropic News</a></li>
+                <li><a href="https://www.aifreeapi.com/en/posts/claude-api-prompt-caching-guide" target="_blank">How to Use Prompt Caching in Claude API: Complete 2026 Guide - AI Free API</a></li>
+                <li><a href="https://medium.com/@mcraddock/unlocking-efficiency-a-practical-guide-to-claude-prompt-caching-3185805c0eef" target="_blank">Unlocking Efficiency: A Practical Guide to Claude Prompt Caching - Medium</a></li>
+                <li><a href="https://openai.com/index/api-prompt-caching/" target="_blank">Prompt Caching in the API - OpenAI</a></li>
+                <li><a href="https://www.prompthub.us/blog/prompt-caching-with-openai-anthropic-and-google-models" target="_blank">Prompt Caching with OpenAI, Anthropic, and Google Models - PromptHub</a></li>
+                <li><a href="https://ngrok.com/blog/prompt-caching/" target="_blank">Prompt caching: 10x cheaper LLM tokens, but how? - ngrok blog</a></li>
+                <li><a href="https://www.kosmoy.com/post/llm-cost-management-stop-burning-money-on-tokens" target="_blank">LLM Cost Optimization: Stop Token Spend Waste with Smart Routing - Kosmoy</a></li>
+                <li><a href="https://byteiota.com/llm-cost-optimization-stop-overpaying-5-10x-in-2026/" target="_blank">LLM Cost Optimization: Stop Overpaying 5-10x in 2026 - ByteIota</a></li>
+                <li><a href="https://research.ibm.com/blog/LLM-routers" target="_blank">LLM routing for quality, low-cost responses - IBM Research</a></li>
+                <li><a href="https://arxiv.org/html/2510.08439v1" target="_blank">xRouter: Training Cost-Aware LLMs Orchestration System via Reinforcement Learning - arXiv</a></li>
+                <li><a href="https://medium.com/@adnanmasood/chunking-strategies-for-retrieval-augmented-generation-rag-a-comprehensive-guide-5522c4ea2a90" target="_blank">Chunking Strategies for Retrieval-Augmented Generation (RAG): A Comprehensive Guide - Medium</a></li>
+                <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12649634/" target="_blank">Comparative Evaluation of Advanced Chunking for RAG in LLMs for Clinical Decision Support - PMC</a></li>
+                <li><a href="https://antematter.io/blogs/optimizing-rag-advanced-chunking-techniques-study" target="_blank">Optimizing RAG with Advanced Chunking Techniques: A Comparative Study - Antematter</a></li>
+                <li><a href="https://developer.nvidia.com/blog/finding-the-best-chunking-strategy-for-accurate-ai-responses/" target="_blank">Finding the Best Chunking Strategy for Accurate AI Responses - NVIDIA</a></li>
+                <li><a href="https://www.prompts.ai/blog/batch-processing-for-llm-cost-savings" target="_blank">Batch Processing for LLM Cost Savings - Prompts.ai</a></li>
+                <li><a href="https://ai.koombea.com/blog/llm-cost-optimization" target="_blank">LLM Cost Optimization: Complete Guide to Reducing AI Expenses by 80% - Koombea AI</a></li>
+                <li><a href="https://latitude-blog.ghost.io/blog/scaling-llms-with-batch-processing-ultimate-guide/" target="_blank">Scaling LLMs with Batch Processing: Ultimate Guide - Latitude</a></li>
+                <li><a href="https://arxiv.org/html/2309.00384v3" target="_blank">BatchPrompt: Accomplish more with less - arXiv</a></li>
+                <li><a href="https://proceedings.iclr.cc/paper_files/paper/2024/file/5d8c01de2dc698c54201c1c7d0b86974-Paper-Conference.pdf" target="_blank">BatchPrompt: Accomplish More with Less - ICLR 2024</a></li>
+                <li><a href="https://www.promptingguide.ai/techniques/cot" target="_blank">Chain-of-Thought Prompting - Prompt Engineering Guide</a></li>
+                <li><a href="https://arxiv.org/abs/2506.14641" target="_blank">Revisiting Chain-of-Thought Prompting: Zero-shot Can Be Stronger than Few-shot - arXiv</a></li>
+                <li><a href="https://langfuse.com/docs/observability/features/token-and-cost-tracking" target="_blank">Model Usage & Cost Tracking for LLM applications - Langfuse</a></li>
+                <li><a href="https://www.truefoundry.com/blog/llm-cost-tracking-solution" target="_blank">LLM Cost Tracking Solution: Observability, Governance & Optimization - TrueFoundry</a></li>
+                <li><a href="https://www.firecrawl.dev/blog/best-llm-observability-tools" target="_blank">Best LLM Observability Tools in 2025 - Firecrawl</a></li>
+                <li><a href="https://lakefs.io/blog/llm-observability-tools/" target="_blank">LLM Observability Tools: 2026 Comparison - LakeFS</a></li>
+                <li><a href="https://logz.io/blog/top-llm-observability-tools/" target="_blank">Top 9 LLM Observability Tools in 2025 - Logz.io</a></li>
+                <li><a href="https://www.helicone.ai/blog/monitor-and-optimize-llm-costs" target="_blank">How to Monitor Your LLM API Costs and Cut Spending by 90% - Helicone</a></li>
+                <li><a href="https://www.datadoghq.com/product/llm-observability/" target="_blank">LLM Observability - Datadog</a></li>
+                <li><a href="https://www.braintrust.dev/articles/best-llm-monitoring-tools-2026" target="_blank">The 4 best LLM monitoring tools to understand how your AI agents are performing in 2026 - Braintrust</a></li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>v2.0 Update: 1M Context Window Strategies</h2>
+
+            <p>Claude Opus 4.6's 1 million token context window fundamentally changes token optimization strategy. Rather than aggressive compression, teams can now focus on <strong>intelligent context curation</strong> and <strong>team-level budget allocation</strong>.</p>
+
+            <h3>Context Budget Allocation for Agent Teams</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>Agent Role</th><th>Context Budget</th><th>Strategy</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Team Leader</strong></td><td>200K-400K tokens</td><td>Full project context, all worker summaries, coordination state</td></tr>
+                    <tr><td><strong>Worker (Opus)</strong></td><td>100K-200K tokens</td><td>Focused scope, relevant code sections, domain knowledge</td></tr>
+                    <tr><td><strong>Worker (Sonnet)</strong></td><td>50K-100K tokens</td><td>Minimal context, specific task instructions, targeted analysis</td></tr>
+                    <tr><td><strong>Background Agent</strong></td><td>25K-50K tokens</td><td>Task description only, isolated execution, result summary</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Context Compaction</h3>
+            <p>Even with 1M tokens, long-running agent sessions can exhaust context. Claude Code automatically compresses prior messages as conversations approach limits. Best practices for agent teams include: (1) Workers summarize findings rather than passing raw data, (2) Leaders maintain a rolling context window with periodic compaction, (3) Use the Task tool to offload analysis to separate context windows, (4) Store intermediate results in files rather than conversation history.</p>
+        </section>
+
+        <nav class="navigation">
+            <a href="../index.html" class="nav-button">← Back to Index</a>
+            <a href="section-3.html" class="nav-button">← Previous: Multi-Agent Systems</a>
+            <a href="section-5.html" class="nav-button">Next: Performance Improvement →</a>
+        </nav>
+    </div>
+
+    <footer>
+        <p>Section 4 of 8: Token Optimization Techniques</p>
+        <p>Report generated January 30, 2026. Information current as of research date.</p>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // Only add touch support if device doesn't support hover
+        if (window.matchMedia('(hover: none)').matches) {
+            initTouchTooltips();
+        }
+
+        // Handle Escape key dismissal (WCAG 1.4.13)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                dismissAllTooltips();
+            }
+        });
+
+        function initTouchTooltips() {
+            var citations = document.querySelectorAll('.citation');
+
+            citations.forEach(function(citation) {
+                citation.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    dismissAllTooltips();
+                    this.classList.add('tooltip-active');
+                }, { passive: false });
+            });
+
+            // Tap anywhere else to dismiss
+            document.addEventListener('touchstart', function(e) {
+                if (!e.target.closest('.citation')) {
+                    dismissAllTooltips();
+                }
+            });
+        }
+
+        function dismissAllTooltips() {
+            document.querySelectorAll('.citation.tooltip-active')
+                .forEach(function(el) {
+                    el.classList.remove('tooltip-active');
+                });
+        }
+    })();
+
+    // Copy code to clipboard functionality
+    function copyCode(button) {
+        var codeBlock = button.closest('.code-example').querySelector('.code-content code');
+        var text = codeBlock.textContent || codeBlock.innerText;
+
+        navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(function(err) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+    </script>
+
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-3.html" style="margin-right:auto">&larr; 3. Multi-Agent</a><a href="section-5.html" style="margin-left:auto">5. Performance &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

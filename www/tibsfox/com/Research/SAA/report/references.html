@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>References and Citations &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>References and Citations
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html">3. Multi-Agent</a>
+      <a href="section-4.html">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html">10. GSD</a>
+      <a href="references.html" class="active">References</a>
+    </div>
+  </header>
+
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="section-1.html">Fundamentals</a>
+        <a href="section-2.html">Skills</a>
+        <a href="section-3.html">Multi-Agent</a>
+        <a href="section-4.html">Tokens</a>
+        <a href="section-5.html">Performance</a>
+        <a href="section-6.html">Applications</a>
+        <a href="section-7.html">Accuracy</a>
+        <a href="section-8.html">Future</a>
+    </nav>
+
+    <header>
+        <h1>Citations and References</h1>
+        <p class="subtitle">33 Primary Sources | Research compiled January 2026</p>
+    </header>
+
+    <div class="container">
+        <section class="references-section">
+            <h2>Academic & Research Papers</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">1</span>
+                    <div class="ref-content">
+                        <div class="ref-title">AI Agentic Programming: A Survey of Techniques, Challenges, and Opportunities<span class="category-tag">Survey</span></div>
+                        <div class="ref-source">arXiv, August 2025</div>
+                        <a href="https://arxiv.org/html/2508.11126v1" class="ref-link" target="_blank">https://arxiv.org/html/2508.11126v1</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">22</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG<span class="category-tag">Survey</span></div>
+                        <div class="ref-source">arXiv, February 2025</div>
+                        <a href="https://arxiv.org/abs/2501.09136" class="ref-link" target="_blank">https://arxiv.org/abs/2501.09136</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Industry Analysis & Trends</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">2</span>
+                    <div class="ref-content">
+                        <div class="ref-title">7 Agentic AI Trends to Watch in 2026<span class="category-tag">Trends</span></div>
+                        <div class="ref-source">MachineLearningMastery.com, December 2025</div>
+                        <a href="https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/" class="ref-link" target="_blank">https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">5</span>
+                    <div class="ref-content">
+                        <div class="ref-title">AI Engineering Trends in 2025: Agents, MCP and Vibe Coding<span class="category-tag">Trends</span></div>
+                        <div class="ref-source">The New Stack, December 2025</div>
+                        <a href="https://thenewstack.io/ai-engineering-trends-in-2025-agents-mcp-and-vibe-coding/" class="ref-link" target="_blank">https://thenewstack.io/ai-engineering-trends-in-2025-agents-mcp-and-vibe-coding/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">12</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Agents, protocols, and vibes: The best AI stories of 2025<span class="category-tag">Analysis</span></div>
+                        <div class="ref-source">InfoWorld, December 2025</div>
+                        <a href="https://www.infoworld.com/article/4108014/agents-protocols-and-vibes-ais-big-year.html" class="ref-link" target="_blank">https://www.infoworld.com/article/4108014/agents-protocols-and-vibes-ais-big-year.html</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">26</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Was 2025 Really the Year of AI Agents in the Workforce?<span class="category-tag">Analysis</span></div>
+                        <div class="ref-source">IEEE Spectrum, January 2026</div>
+                        <a href="https://spectrum.ieee.org/2025-year-of-ai-agents" class="ref-link" target="_blank">https://spectrum.ieee.org/2025-year-of-ai-agents</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">32</span>
+                    <div class="ref-content">
+                        <div class="ref-title">10 Things Developers Want from their Agentic IDEs in 2025<span class="category-tag">Developer</span></div>
+                        <div class="ref-source">RedMonk, December 2025</div>
+                        <a href="https://redmonk.com/kholterhoff/2025/12/22/10-things-developers-want-from-their-agentic-ides-in-2025/" class="ref-link" target="_blank">https://redmonk.com/kholterhoff/2025/12/22/10-things-developers-want-from-their-agentic-ides-in-2025/</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Protocols & Standards</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">3</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Model Context Protocol<span class="category-tag">Protocol</span></div>
+                        <div class="ref-source">Wikipedia, January 2026</div>
+                        <a href="https://en.wikipedia.org/wiki/Model_Context_Protocol" class="ref-link" target="_blank">https://en.wikipedia.org/wiki/Model_Context_Protocol</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">4</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Put AI to Work Faster Using Model Context Protocol<span class="category-tag">Enterprise</span></div>
+                        <div class="ref-source">BCG, August 2025</div>
+                        <a href="https://www.bcg.com/publications/2025/put-ai-to-work-faster-using-model-context-protocol" class="ref-link" target="_blank">https://www.bcg.com/publications/2025/put-ai-to-work-faster-using-model-context-protocol</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">33</span>
+                    <div class="ref-content">
+                        <div class="ref-title">The Model Context Protocol's impact on 2025<span class="category-tag">Security</span></div>
+                        <div class="ref-source">Thoughtworks, December 2025</div>
+                        <a href="https://www.thoughtworks.com/en-us/insights/blog/generative-ai/model-context-protocol-mcp-impact-2025" class="ref-link" target="_blank">https://www.thoughtworks.com/en-us/insights/blog/generative-ai/model-context-protocol-mcp-impact-2025</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Agent Skills & Development</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">6</span>
+                    <div class="ref-content">
+                        <div class="ref-title">What Are Agent Skills?<span class="category-tag">Tutorial</span></div>
+                        <div class="ref-source">Medium, December 2025</div>
+                        <a href="https://medium.com/@tahirbalarabe2/what-are-agent-skills-c7793b206daf" class="ref-link" target="_blank">https://medium.com/@tahirbalarabe2/what-are-agent-skills-c7793b206daf</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">7</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Agent Skills: Anthropic's Next Bid to Define AI Standards<span class="category-tag">Standard</span></div>
+                        <div class="ref-source">The New Stack, December 2025</div>
+                        <a href="https://thenewstack.io/agent-skills-anthropics-next-bid-to-define-ai-standards/" class="ref-link" target="_blank">https://thenewstack.io/agent-skills-anthropics-next-bid-to-define-ai-standards/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">10</span>
+                    <div class="ref-content">
+                        <div class="ref-title">GitHub - lastmile-ai/mcp-agent<span class="category-tag">Open Source</span></div>
+                        <div class="ref-source">GitHub</div>
+                        <a href="https://github.com/lastmile-ai/mcp-agent" class="ref-link" target="_blank">https://github.com/lastmile-ai/mcp-agent</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Frameworks & Platforms</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">8</span>
+                    <div class="ref-content">
+                        <div class="ref-title">AI Agent Frameworks: A Practical Guide (2025)<span class="category-tag">Guide</span></div>
+                        <div class="ref-source">Salesforce</div>
+                        <a href="https://www.salesforce.com/agentforce/ai-agents/ai-agent-frameworks/" class="ref-link" target="_blank">https://www.salesforce.com/agentforce/ai-agents/ai-agent-frameworks/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">9</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Top 9 AI Agent Frameworks as of January 2026<span class="category-tag">Comparison</span></div>
+                        <div class="ref-source">Shakudo</div>
+                        <a href="https://www.shakudo.io/blog/top-9-ai-agent-frameworks" class="ref-link" target="_blank">https://www.shakudo.io/blog/top-9-ai-agent-frameworks</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Enterprise & Case Studies</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">11</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Multi-Agent AI Orchestration: Enterprise Strategy for 2025-2026<span class="category-tag">Enterprise</span></div>
+                        <div class="ref-source">OnAbout.ai, June 2025</div>
+                        <a href="https://www.onabout.ai/p/mastering-multi-agent-orchestration-architectures-patterns-roi-benchmarks-for-2025-2026" class="ref-link" target="_blank">https://www.onabout.ai/p/mastering-multi-agent-orchestration-architectures-patterns-roi-benchmarks-for-2025-2026</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">24</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Agentic AI Implementation Guide<span class="category-tag">Implementation</span></div>
+                        <div class="ref-source">SketchDev, November 2025</div>
+                        <a href="https://www.sketchdev.io/blog/agentic-ai-implementation-guide" class="ref-link" target="_blank">https://www.sketchdev.io/blog/agentic-ai-implementation-guide</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">25</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Unlocking exponential value with AI agent orchestration<span class="category-tag">Enterprise</span></div>
+                        <div class="ref-source">Deloitte, November 2025</div>
+                        <a href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html" class="ref-link" target="_blank">https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Token Optimization & Cost</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">13</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Reduce LLM Costs: Token Optimization Strategies<span class="category-tag">Optimization</span></div>
+                        <div class="ref-source">Rost Glukhov, November 2025</div>
+                        <a href="https://www.glukhov.org/post/2025/11/cost-effective-llm-applications/" class="ref-link" target="_blank">https://www.glukhov.org/post/2025/11/cost-effective-llm-applications/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">14</span>
+                    <div class="ref-content">
+                        <div class="ref-title">5 Approaches to Solve LLM Token Limits<span class="category-tag">Technical</span></div>
+                        <div class="ref-source">Deepchecks, October 2025</div>
+                        <a href="https://www.deepchecks.com/5-approaches-to-solve-llm-token-limits/" class="ref-link" target="_blank">https://www.deepchecks.com/5-approaches-to-solve-llm-token-limits/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">15</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Token Optimization Strategies for AI Agents<span class="category-tag">Optimization</span></div>
+                        <div class="ref-source">Medium/Elementor Engineers, August 2025</div>
+                        <a href="https://medium.com/elementor-engineers/optimizing-token-usage-in-agent-based-assistants-ffd1822ece9c" class="ref-link" target="_blank">https://medium.com/elementor-engineers/optimizing-token-usage-in-agent-based-assistants-ffd1822ece9c</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">16</span>
+                    <div class="ref-content">
+                        <div class="ref-title">LLM Cost Optimization: Stop Token Spend Waste with Smart Routing<span class="category-tag">Cost</span></div>
+                        <div class="ref-source">Kosmoy, September 2025</div>
+                        <a href="https://www.kosmoy.com/post/llm-cost-management-stop-burning-money-on-tokens" class="ref-link" target="_blank">https://www.kosmoy.com/post/llm-cost-management-stop-burning-money-on-tokens</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">17</span>
+                    <div class="ref-content">
+                        <div class="ref-title">How to Optimize Token Efficiency When Prompting<span class="category-tag">Prompting</span></div>
+                        <div class="ref-source">Portkey, March 2025</div>
+                        <a href="https://portkey.ai/blog/optimize-token-efficiency-in-prompts/" class="ref-link" target="_blank">https://portkey.ai/blog/optimize-token-efficiency-in-prompts/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">18</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Code execution with MCP: building more efficient AI agents<span class="category-tag">MCP</span></div>
+                        <div class="ref-source">Anthropic</div>
+                        <a href="https://www.anthropic.com/engineering/code-execution-with-mcp" class="ref-link" target="_blank">https://www.anthropic.com/engineering/code-execution-with-mcp</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">19</span>
+                    <div class="ref-content">
+                        <div class="ref-title">A Guide to Token-Efficient Data Prep for LLM Workloads<span class="category-tag">Data</span></div>
+                        <div class="ref-source">The New Stack, December 2025</div>
+                        <a href="https://thenewstack.io/a-guide-to-token-efficient-data-prep-for-llm-workloads/" class="ref-link" target="_blank">https://thenewstack.io/a-guide-to-token-efficient-data-prep-for-llm-workloads/</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">20</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Reduce LLM Token Usage in RAG<span class="category-tag">RAG</span></div>
+                        <div class="ref-source">APXML</div>
+                        <a href="https://apxml.com/courses/optimizing-rag-for-production/chapter-5-cost-optimization-production-rag/minimize-llm-token-usage-rag" class="ref-link" target="_blank">https://apxml.com/courses/optimizing-rag-for-production/chapter-5-cost-optimization-production-rag/minimize-llm-token-usage-rag</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Performance & Scaling</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">21</span>
+                    <div class="ref-content">
+                        <div class="ref-title">AI Agent Orchestration: Enterprise Framework Evolution and Technical Performance Analysis<span class="category-tag">Performance</span></div>
+                        <div class="ref-source">Medium, July 2025</div>
+                        <a href="https://medium.com/@josefsosa/ai-agent-orchestration-enterprise-framework-evolution-and-technical-performance-analysis-4463b2c3477d" class="ref-link" target="_blank">https://medium.com/@josefsosa/ai-agent-orchestration-enterprise-framework-evolution-and-technical-performance-analysis-4463b2c3477d</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Use Cases & Applications</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">23</span>
+                    <div class="ref-content">
+                        <div class="ref-title">AI Agents Explained: Everything You Need to Know in 2025<span class="category-tag">Overview</span></div>
+                        <div class="ref-source">APIDeck, July 2025</div>
+                        <a href="https://www.apideck.com/blog/ai-agents-explained-everything-you-need-to-know-in-2025" class="ref-link" target="_blank">https://www.apideck.com/blog/ai-agents-explained-everything-you-need-to-know-in-2025</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Prompt Engineering & Accuracy</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">27</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Complete Prompt Engineering Guide: 15 AI Techniques for 2025<span class="category-tag">Guide</span></div>
+                        <div class="ref-source">DataUnboxed</div>
+                        <a href="https://www.dataunboxed.io/blog/the-complete-guide-to-prompt-engineering-15-essential-techniques-for-2025" class="ref-link" target="_blank">https://www.dataunboxed.io/blog/the-complete-guide-to-prompt-engineering-15-essential-techniques-for-2025</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">28</span>
+                    <div class="ref-content">
+                        <div class="ref-title">The Complete Prompt Engineering Guide for 2025<span class="category-tag">Guide</span></div>
+                        <div class="ref-source">Medium, October 2025</div>
+                        <a href="https://aloaguilar20.medium.com/the-complete-prompt-engineering-guide-for-2025-mastering-cutting-edge-techniques-dfe0591b1d31" class="ref-link" target="_blank">https://aloaguilar20.medium.com/the-complete-prompt-engineering-guide-for-2025-mastering-cutting-edge-techniques-dfe0591b1d31</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">29</span>
+                    <div class="ref-content">
+                        <div class="ref-title">AI prompt engineering in 2025: What works and what doesn't<span class="category-tag">Research</span></div>
+                        <div class="ref-source">Lenny's Newsletter, June 2025</div>
+                        <a href="https://www.lennysnewsletter.com/p/ai-prompt-engineering-in-2025-sander-schulhoff" class="ref-link" target="_blank">https://www.lennysnewsletter.com/p/ai-prompt-engineering-in-2025-sander-schulhoff</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">30</span>
+                    <div class="ref-content">
+                        <div class="ref-title">7 Best Practices for AI Prompt Engineering in 2025<span class="category-tag">Best Practices</span></div>
+                        <div class="ref-source">PromptMixer, January 2025</div>
+                        <a href="https://www.promptmixer.dev/blog/7-best-practices-for-ai-prompt-engineering-in-2025" class="ref-link" target="_blank">https://www.promptmixer.dev/blog/7-best-practices-for-ai-prompt-engineering-in-2025</a>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">31</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Technical Tuesday: 10 best practices for building reliable AI agents in 2025<span class="category-tag">Best Practices</span></div>
+                        <div class="ref-source">UiPath, October 2025</div>
+                        <a href="https://www.uipath.com/blog/ai/agent-builder-best-practices" class="ref-link" target="_blank">https://www.uipath.com/blog/ai/agent-builder-best-practices</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Section 9: DevOps Lifecycle Automation</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">32</span>
+                    <div class="ref-content">
+                        <div class="ref-title">DevOps Lifecycle<span class="category-tag">Industry</span></div>
+                        <div class="ref-source">GeeksforGeeks, July 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">33</span>
+                    <div class="ref-content">
+                        <div class="ref-title">DevOps Lifecycle: Key Phases and Best Practices<span class="category-tag">Industry</span></div>
+                        <div class="ref-source">ELITEX, July 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">34</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Platform Engineering in 2026: 5 Shifts Driving the Rise of IDPs<span class="category-tag">Research</span></div>
+                        <div class="ref-source">Growin, January 2026</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">35</span>
+                    <div class="ref-content">
+                        <div class="ref-title">6 Software Development and DevOps Trends Shaping 2026<span class="category-tag">Industry</span></div>
+                        <div class="ref-source">DZone, January 2026</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">36</span>
+                    <div class="ref-content">
+                        <div class="ref-title">How AI is Transforming DevOps in 2026<span class="category-tag">Research</span></div>
+                        <div class="ref-source">Softjourn, January 2026</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">37</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Predict 2026: Why AI Will Force DevOps to Reinvent Itself<span class="category-tag">Industry</span></div>
+                        <div class="ref-source">DevOps.com, January 2026</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">38</span>
+                    <div class="ref-content">
+                        <div class="ref-title">2026 Observability Predictions<span class="category-tag">Research</span></div>
+                        <div class="ref-source">APMdigest, December 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">39</span>
+                    <div class="ref-content">
+                        <div class="ref-title">State of Platform Engineering Report Vol 4<span class="category-tag">Research</span></div>
+                        <div class="ref-source">PlatformEngineering.org, January 2026</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">40</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Evolution of DevSecOps and Its Influence on Application Security<span class="category-tag">Academic</span></div>
+                        <div class="ref-source">MDPI, November 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">41</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Secure Software Development Framework (SSDF) Version 1.2<span class="category-tag">Standard</span></div>
+                        <div class="ref-source">NIST, December 2025</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="references-section">
+            <h2>Section 10: GSD Orchestrator Architecture</h2>
+            <ul class="reference-list">
+                <li class="reference-item">
+                    <span class="ref-number">42</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Claude Agent SDK Documentation<span class="category-tag">Documentation</span></div>
+                        <div class="ref-source">Anthropic, 2026</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">43</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Model Context Protocol (MCP) Specification<span class="category-tag">Standard</span></div>
+                        <div class="ref-source">Anthropic, 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">44</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Agent-to-Agent (A2A) Protocol<span class="category-tag">Standard</span></div>
+                        <div class="ref-source">Google, 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">45</span>
+                    <div class="ref-content">
+                        <div class="ref-title">LangGraph: Multi-Agent Orchestration Framework<span class="category-tag">Documentation</span></div>
+                        <div class="ref-source">LangChain, 2025</div>
+                    </div>
+                </li>
+                <li class="reference-item">
+                    <span class="ref-number">46</span>
+                    <div class="ref-content">
+                        <div class="ref-title">Salesforce Agentforce: Slack as Agentic OS<span class="category-tag">Industry</span></div>
+                        <div class="ref-source">Dreamforce 2025</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Report v2.0 generated February 7, 2026</p>
+        <p><a href="../index.html">Return to Report Index</a></p>
+    </footer>
+
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-10.html" style="margin-right:auto">&larr; 10. GSD</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

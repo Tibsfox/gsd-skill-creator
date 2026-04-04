@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The GSD Orchestrator &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>The GSD Orchestrator
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html">3. Multi-Agent</a>
+      <a href="section-4.html">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html" class="active">10. GSD</a>
+      <a href="references.html">References</a>
+    </div>
+  </header>
+
+
+    <nav>
+        <div class="nav-links">
+            <a href="../index.html">&larr; Back to Index</a>
+            <a href="section-9.html">&larr; Previous Section</a>
+        </div>
+    </nav>
+
+    <header>
+        <span class="section-number">Section 10</span>
+        <h1>The GSD Orchestrator</h1>
+        <p class="subtitle">From Conversational Interface to Distributed Multi-Agent DevOps System</p>
+        <p class="research-date">Research current as of: February 2026</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-box">
+            <p><strong>The GSD (Get Stuff Done) Agent represents the convergence of agentic AI and DevOps automation into a single orchestrating intelligence.</strong> Rather than requiring developers to understand which agent to invoke or what context to provide, the GSD Agent acts as the "front door" to the entire agentic DevOps system. Users describe what they want to accomplish; the system figures out the rest. This section defines the GSD Agent architecture, its evolution from a simple conversational interface to an enterprise-grade distributed system, and the implementation roadmap.</p>
+        </div>
+
+        <!-- 10.1 The GSD Agent Vision -->
+        <section class="content-section">
+            <h2>10.1 The GSD Agent Vision</h2>
+
+            <p>The GSD Agent is a <strong>project-aware, context-holding orchestrator</strong> that guides users through the entire DevOps project lifecycle. It maintains the project's requirements, design decisions, and constraints as persistent context, ensuring both users and sub-agents stay aligned on goals.</p>
+
+            <h3>Core Design Principles</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Principle</th>
+                        <th>Description</th>
+                        <th>Implementation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>User-first simplicity</strong></td>
+                        <td>The user never needs to understand the underlying agent architecture</td>
+                        <td>Natural language interface, GSD handles routing and orchestration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vision persistence</strong></td>
+                        <td>Project goals, requirements, and constraints maintained as living context</td>
+                        <td>Project Vision Store with version-controlled documents</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Adaptive verbosity</strong></td>
+                        <td>System calibrates output level from silent to fully transparent</td>
+                        <td>5-level verbosity controller, adjustable at any time</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Human-in-the-loop</strong></td>
+                        <td>Autonomous execution with defined escalation points</td>
+                        <td>7 gate types with configurable approval thresholds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Progressive complexity</strong></td>
+                        <td>Start simple, scale to distributed systems as demand grows</td>
+                        <td>3-tier architecture: Direct &rarr; Queue &rarr; Stream</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Composable architecture</strong></td>
+                        <td>Every sub-agent is a modular skill, independently testable and replaceable</td>
+                        <td>MCP-compatible agent definitions with AgentBus abstraction</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h4>Why This Matters</h4>
+                <p>The current pain point in agentic AI adoption is that users must understand the system to use it. They need to know which agent to invoke, what context to provide, and how to chain outputs. The GSD Agent inverts this model: it acts as the <strong>conversational layer on top of the Internal Developer Platform</strong>, making the entire DevOps lifecycle accessible through natural language.</p>
+            </div>
+        </section>
+
+        <!-- 10.2 Conceptual Architecture -->
+        <section class="content-section">
+            <h2>10.2 Conceptual Architecture</h2>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">GSD Orchestrator Architecture</div>
+
+                <div class="arch-flow">
+                    <div class="arch-box">Slack</div>
+                    <div class="arch-box">Teams</div>
+                    <div class="arch-box">Discord</div>
+                    <div class="arch-box">Web/CLI</div>
+                </div>
+
+                <span class="arch-arrow-down">&darr;</span>
+
+                <div class="arch-flow">
+                    <div class="arch-box orchestrator" style="min-width: 300px;">Message Gateway (Normalize Input)</div>
+                </div>
+
+                <span class="arch-arrow-down">&darr;</span>
+
+                <div class="arch-flow">
+                    <div class="arch-box leader" style="min-width: 400px;">
+                        GSD Orchestrator<br>
+                        <small style="font-weight: normal; color: var(--text-muted);">Vision Store &bull; Memory &bull; Verbosity &bull; Task Decomposer &bull; HITL Gate &bull; Progress Tracker</small>
+                    </div>
+                </div>
+
+                <span class="arch-arrow-down">&darr; Agent Router (MCP + A2A) &darr;</span>
+
+                <div class="arch-flow">
+                    <div class="arch-box">Plan Agents</div>
+                    <div class="arch-box">Build/Test Agents</div>
+                    <div class="arch-box">Release Agents</div>
+                    <div class="arch-box">Operate/Monitor Agents</div>
+                </div>
+
+                <span class="arch-arrow-down">&darr;</span>
+
+                <div class="arch-flow">
+                    <div class="arch-box" style="border-color: var(--info);">Security Agent</div>
+                    <div class="arch-box" style="border-color: var(--info);">FinOps Agent</div>
+                    <div class="arch-box" style="border-color: var(--info);">Governance Agent</div>
+                    <div class="arch-box" style="border-color: var(--info);">Knowledge Agent</div>
+                </div>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">Cross-Cutting Agents</p>
+            </div>
+
+            <p>The GSD Orchestrator uses the <strong>ReAct Loop</strong> (Think &rarr; Act &rarr; Observe) for decision making, the <strong>Router Pattern</strong> for task classification and delegation, and the <strong>Evaluator-Optimizer Pattern</strong> for quality gates between phases.</p>
+        </section>
+
+        <!-- 10.3 Core Capabilities -->
+        <section class="content-section">
+            <h2>10.3 GSD Orchestrator Core Capabilities</h2>
+
+            <h3>Project Vision Store</h3>
+
+            <p>The most critical differentiator of the GSD Agent is its <strong>persistent project context</strong>. This is the "brain" that keeps everyone aligned:</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Project Vision Store Structure</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>project-vision/
+├── requirements.md        # What we're building and why
+├── design.md              # Architecture decisions and constraints
+├── standards.md           # Code, security, compliance standards
+├── progress.md            # Current state, milestones, blockers
+├── decisions.md           # Decision log with rationale
+├── team.md                # Roles, permissions, escalation paths
+└── config.yaml            # Verbosity, notification preferences,
+                           # agent permissions, approval gates</code></div>
+            </div>
+
+            <p>These documents serve as the <strong>source of truth</strong> that every sub-agent references. When the Code Review Agent evaluates a PR, it checks <code>standards.md</code>. When the Release Agent prepares a deployment, it checks <code>requirements.md</code> for feature completeness. When the Security Agent scans, it checks <code>standards.md</code> for compliance requirements.</p>
+
+            <h3>Verbosity Controller</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Name</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Silent</strong></td>
+                        <td>Only surfaces at human-in-the-loop gates (approvals, blockers, failures). Everything else runs autonomously.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Summary</strong></td>
+                        <td>Sends periodic digests (daily or per-milestone) plus gates. No play-by-play.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Standard</strong></td>
+                        <td>Reports major phase transitions, decisions made, and gates. The recommended default.</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Detailed</strong></td>
+                        <td>Shows each agent's reasoning and output. Good for learning or auditing.</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Transparent</strong></td>
+                        <td>Full visibility into every agent action, tool call, and decision. Debug mode.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 10.4 Human-in-the-Loop Gates -->
+        <section class="content-section">
+            <h2>10.4 Human-in-the-Loop Gates</h2>
+
+            <p>These are the defined moments where GSD pauses autonomous execution and requests human input:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Gate Type</th>
+                        <th>Trigger</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Architecture Decision</strong></td>
+                        <td>Design choice with significant implications</td>
+                        <td>"I recommend microservices over monolith. Here's why. Proceed?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scope Change</strong></td>
+                        <td>Requirement that conflicts with or extends the vision</td>
+                        <td>"This feature conflicts with the original scope. Adjust or defer?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployment Approval</strong></td>
+                        <td>Release to production or sensitive environment</td>
+                        <td>"All tests pass. Security scan clean. Deploy to production?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost Threshold</strong></td>
+                        <td>Action exceeding budget guardrails</td>
+                        <td>"This infrastructure change adds ~$X/month. Approve?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security Exception</strong></td>
+                        <td>Vulnerability or policy violation detected</td>
+                        <td>"Critical CVE in dependency X. Block release or accept risk?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failure Recovery</strong></td>
+                        <td>System failure requiring human judgment</td>
+                        <td>"Deploy failed. Rollback succeeded. Root cause: [X]. How to proceed?"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ambiguity Resolution</strong></td>
+                        <td>Agent cannot determine intent</td>
+                        <td>"You said 'fast.' Optimize for latency or development speed?"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 10.5 Messaging Architecture Evolution -->
+        <section class="content-section">
+            <h2>10.5 Messaging Architecture Evolution</h2>
+
+            <p>The GSD system scales from a single-user chat interaction to an enterprise-grade distributed system through three architectural tiers.</p>
+
+            <div class="tier-section">
+                <h4>Tier 1: Direct Messaging (1-3 Users)</h4>
+                <p>Synchronous request-response. GSD Agent is a single process that calls sub-agents as functions. Messages flow through the chat platform's API (Slack Bolt SDK, Teams Bot Framework).</p>
+                <ul>
+                    <li><strong>Communication:</strong> Synchronous function calls</li>
+                    <li><strong>State:</strong> In-memory or SQLite/Redis</li>
+                    <li><strong>Limitations:</strong> Single point of failure, no parallelism</li>
+                    <li><strong>Stack:</strong> Slack Bolt, LangGraph, Redis, Git repo for Vision Store</li>
+                </ul>
+            </div>
+
+            <div class="tier-section">
+                <h4>Tier 2: Message Queue (5-50 Users)</h4>
+                <p>Asynchronous message passing. GSD publishes task messages to agent-specific queues. Agents consume, process, and publish results back. Agents are decoupled and can run in parallel.</p>
+                <ul>
+                    <li><strong>Communication:</strong> AMQP (RabbitMQ) or NATS</li>
+                    <li><strong>State:</strong> PostgreSQL + Redis, Git-backed Vision Store</li>
+                    <li><strong>Capabilities:</strong> Parallel agents, fault tolerance, priority routing, audit trail</li>
+                    <li><strong>Stack:</strong> RabbitMQ/NATS, Kubernetes, OpenTelemetry, MCP + A2A</li>
+                </ul>
+            </div>
+
+            <div class="tier-section">
+                <h4>Tier 3: Event Streaming (50-1000+ Users)</h4>
+                <p>Full event-driven architecture with Apache Kafka. Every agent decision, tool call, and user interaction is an immutable event. Apache Flink provides real-time event correlation.</p>
+                <ul>
+                    <li><strong>Communication:</strong> Kafka topics with consumer groups</li>
+                    <li><strong>State:</strong> Event-sourced via Kafka log + PostgreSQL + Redis</li>
+                    <li><strong>Capabilities:</strong> Multi-project, multi-tenant, event replay, CEP with Flink</li>
+                    <li><strong>Stack:</strong> Kafka, Flink, Kubernetes + Helm, OPA + Vault + Falco</li>
+                </ul>
+            </div>
+
+            <h3>Tier Comparison</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>Tier 1: Direct</th>
+                        <th>Tier 2: Queue</th>
+                        <th>Tier 3: Stream</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Users</td>
+                        <td>1-3</td>
+                        <td>5-50</td>
+                        <td>50-1000+</td>
+                    </tr>
+                    <tr>
+                        <td>Projects</td>
+                        <td>1</td>
+                        <td>5-20</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Parallelism</td>
+                        <td>None</td>
+                        <td>Per-agent</td>
+                        <td>Full event-driven</td>
+                    </tr>
+                    <tr>
+                        <td>Fault tolerance</td>
+                        <td>None</td>
+                        <td>Message retry</td>
+                        <td>Durable log + replay</td>
+                    </tr>
+                    <tr>
+                        <td>Audit trail</td>
+                        <td>Logs only</td>
+                        <td>Message logs</td>
+                        <td>Immutable event stream</td>
+                    </tr>
+                    <tr>
+                        <td>Real-time analytics</td>
+                        <td>No</td>
+                        <td>Basic</td>
+                        <td>Full CEP with Flink</td>
+                    </tr>
+                    <tr>
+                        <td>Cost (monthly)</td>
+                        <td>Free-$50</td>
+                        <td>$200-$2K</td>
+                        <td>$2K-$20K+</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>AgentBus Abstraction</h3>
+
+            <p>The key migration enabler: agents are written against an abstract bus interface. Switching tiers means swapping the bus implementation, not rewriting agents.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>AgentBus Interface (Python)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code># Abstract interface — same for all tiers
+class AgentBus:
+    async def publish(self, topic: str, message: AgentMessage): ...
+    async def subscribe(self, topic: str, handler: Callable): ...
+    async def request(self, topic: str, message: AgentMessage) -> AgentMessage: ...
+
+# Tier 1: In-process function calls
+class DirectBus(AgentBus):
+    """No network. Sub-agents called as functions."""
+
+# Tier 2: Message queue
+class RabbitMQBus(AgentBus):
+    """AMQP protocol. Work queues with acknowledgment."""
+
+# Tier 3: Event stream
+class KafkaBus(AgentBus):
+    """Immutable event log. Consumer groups for scaling."""</code></div>
+            </div>
+        </section>
+
+        <!-- 10.6 Phase-by-Phase GSD Behavior -->
+        <section class="content-section">
+            <h2>10.6 Phase-by-Phase GSD Behavior</h2>
+
+            <h3>PLAN Phase</h3>
+            <p>GSD asks about goals, constraints, and success criteria. Routes to Requirements Agent, Risk Agent, Compliance Agent. Generates and maintains <code>requirements.md</code> and <code>design.md</code>. Presents architecture decisions at HITL gates.</p>
+
+            <h3>CREATE Phase</h3>
+            <p>User describes features; GSD decomposes into tasks. Routes to Code Generation Agent and IaC Agent. Code Review Agent evaluates all generated code. Security Agent scans for vulnerabilities (shift-left).</p>
+
+            <div class="conversation-example">
+                <span class="gsd">GSD:</span> PR #7 ready. 3 new endpoints, all tests passing, no security issues.<br>
+                <span class="gsd">GSD:</span> Code coverage: 87%. Security scan: clean. Ready for review.
+            </div>
+
+            <h3>VERIFY Phase</h3>
+            <p>GSD automatically triggers test suites on code changes. Routes to Test Generation Agent for new coverage. Performance Agent runs load tests before release candidates. Security Agent runs DAST against staging.</p>
+
+            <div class="conversation-example">
+                <span class="gsd">GSD:</span> All 147 tests pass. Code coverage 87%. No critical vulnerabilities.<br>
+                <span class="gsd">GSD:</span> Performance baseline: p99 latency 45ms (within SLO of 100ms).
+            </div>
+
+            <h3>RELEASE Phase</h3>
+
+            <div class="conversation-example">
+                <span class="gsd">GSD:</span> Deploy v1.3.2 to production via canary (10% &rarr; 50% &rarr; 100%)?<br>
+                <span class="user">User:</span> Yes, go ahead.<br>
+                <span class="system">[GSD routes to Release Agent via ArgoCD, monitors via Operate/Monitor agents]</span><br>
+                <span class="gsd">GSD:</span> v1.3.2 live. Canary complete. All SLOs green.
+            </div>
+
+            <h3>OPERATE Phase</h3>
+            <p>Incident Agent monitors for issues 24/7. Self-healing Agent handles auto-recovery. GSD only alerts user for severity 1-2 incidents or when auto-remediation fails.</p>
+
+            <div class="conversation-example">
+                <span class="gsd">GSD:</span> Incident #42: Memory spike on pod-3. Auto-scaled. Resolved in 90 seconds.<br>
+                <span class="system">[Verbosity level 3: reported because it was auto-resolved]</span>
+            </div>
+
+            <h3>MONITOR Phase</h3>
+            <p>AIOps Agent analyzes telemetry continuously. Cost Agent tracks spending against budget. SLO Agent monitors error budgets. GSD sends digests per verbosity setting.</p>
+
+            <div class="conversation-example">
+                <span class="gsd">GSD:</span> Weekly summary:<br>
+                &nbsp;&nbsp;&#10003; 99.97% uptime (SLO target: 99.9%)<br>
+                &nbsp;&nbsp;&#10003; 4 successful deployments, 0 rollbacks<br>
+                &nbsp;&nbsp;&#9888; Test suite time increased 23% (now 8 min)<br>
+                &nbsp;&nbsp;&#128176; $127 cloud spend (-8% vs last week)
+            </div>
+
+            <h3>The Feedback Loop</h3>
+
+            <div class="highlight-box">
+                <h4>Closing the Loop</h4>
+                <p>GSD feeds operational insights back into planning. Incident patterns become backlog items. Performance regressions become sprint tasks. Cost trends inform architecture decisions. This creates a <strong>continuous improvement cycle</strong> where the system learns from its own operational data.</p>
+            </div>
+        </section>
+
+        <!-- 10.7 Implementation Roadmap -->
+        <section class="content-section">
+            <h2>10.7 Implementation Roadmap</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-label">Phase 0: GSD Agent Core (Months 1-2)</div>
+                        <p>Working conversational agent for project setup. Slack/Teams bot (Tier 1). Project Vision Store. Verbosity controller. MCP for basic tool access.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-label">Phase 1: Specialized Sub-Agents (Months 2-4)</div>
+                        <p>Code Review, Test Generation, Build, and Plan agents. HITL gate framework. Agent Router with MCP + direct calls. AgentBus abstraction in place.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-label">Phase 2: Message Queue (Months 4-6)</div>
+                        <p>Tier 2 migration (RabbitMQ/NATS). Containerized agents on Kubernetes. Release, Security, FinOps agents. Multi-user support. OpenTelemetry tracing.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-label">Phase 3: Operations &amp; Self-Healing (Months 6-9)</div>
+                        <p>Incident Triage, Self-Healing, AIOps, SLO, Runbook Execution agents. Knowledge Agent for learning from incidents. Retrospective Agent.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-label">Phase 4: Event Streaming (Months 9-12+)</div>
+                        <p>Tier 3 migration (Apache Kafka + Flink). Multi-project, multi-team orchestration. Event sourcing. DORA metrics automation. A2A cross-org collaboration.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-label">Phase 5: Platform Maturity (12+ Months)</div>
+                        <p>Self-service golden paths via conversation. Backstage integration. Custom agent creation by users. Agent skill marketplace. Fine-tuned models.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10.8 Technical Specifications -->
+        <section class="content-section">
+            <h2>10.8 Technical Specifications</h2>
+
+            <h3>Standard Message Format</h3>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Agent Message (JSON)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "id": "msg-uuid-v4",
+  "timestamp": "2026-02-07T18:00:00Z",
+  "source": "gsd-orchestrator",
+  "target": "agent.build.code-review",
+  "project_id": "proj-employee-scheduler",
+  "type": "task.request",
+  "priority": "normal",
+  "payload": {
+    "action": "review_pull_request",
+    "pr_url": "https://github.com/org/repo/pull/7",
+    "context": {
+      "vision_ref": "requirements.md#api-endpoints",
+      "standards_ref": "standards.md#code-quality"
+    }
+  },
+  "metadata": {
+    "user_id": "user-123",
+    "verbosity": 3,
+    "trace_id": "trace-uuid",
+    "parent_msg_id": "msg-parent-uuid"
+  }
+}</code></div>
+            </div>
+
+            <h3>Technology Stack by Tier</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Tier 1</th>
+                        <th>Tier 2</th>
+                        <th>Tier 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chat Interface</td>
+                        <td>Slack Bolt</td>
+                        <td>Slack Bolt</td>
+                        <td>Slack Bolt + Custom Web UI</td>
+                    </tr>
+                    <tr>
+                        <td>Message Transport</td>
+                        <td>In-process</td>
+                        <td>RabbitMQ / NATS</td>
+                        <td>Apache Kafka</td>
+                    </tr>
+                    <tr>
+                        <td>Stream Processing</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>Apache Flink</td>
+                    </tr>
+                    <tr>
+                        <td>Agent Orchestration</td>
+                        <td>LangGraph</td>
+                        <td>LangGraph + K8s</td>
+                        <td>LangGraph + K8s + Flink</td>
+                    </tr>
+                    <tr>
+                        <td>Agent Protocol</td>
+                        <td>MCP (tools)</td>
+                        <td>MCP + A2A</td>
+                        <td>MCP + A2A + Kafka</td>
+                    </tr>
+                    <tr>
+                        <td>State Store</td>
+                        <td>Redis / SQLite</td>
+                        <td>PostgreSQL + Redis</td>
+                        <td>PostgreSQL + Redis + Kafka log</td>
+                    </tr>
+                    <tr>
+                        <td>Knowledge Store</td>
+                        <td>Local files</td>
+                        <td>Vector DB (Qdrant)</td>
+                        <td>Vector DB + Knowledge Graph (Neo4j)</td>
+                    </tr>
+                    <tr>
+                        <td>Observability</td>
+                        <td>Console logs</td>
+                        <td>OpenTelemetry + Grafana</td>
+                        <td>OpenTelemetry + Grafana + Flink CEP</td>
+                    </tr>
+                    <tr>
+                        <td>IaC</td>
+                        <td>Manual</td>
+                        <td>Terraform</td>
+                        <td>Terraform + GitOps (ArgoCD)</td>
+                    </tr>
+                    <tr>
+                        <td>Security</td>
+                        <td>Basic</td>
+                        <td>OPA policies</td>
+                        <td>OPA + Vault + Falco</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 10.9 Risk Considerations -->
+        <section class="content-section">
+            <h2>10.9 Risk Considerations</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Risk</th>
+                        <th>Impact</th>
+                        <th>Mitigation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Over-automation</strong></td>
+                        <td>GSD makes decisions the user should make</td>
+                        <td>Configurable HITL gates. Default to "ask" for high-impact actions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Context drift</strong></td>
+                        <td>Project vision becomes stale</td>
+                        <td>Regular vision review prompts. Decisions logged with rationale.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent loops</strong></td>
+                        <td>Sub-agents stuck in retry loops</td>
+                        <td>Circuit breakers, max iteration limits, dead letter queues, alerting.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Token cost explosion</strong></td>
+                        <td>Complex orchestration consumes excessive tokens</td>
+                        <td>Token budgets per agent per task. Model routing. Caching.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security exposure</strong></td>
+                        <td>Agents with tool access are an attack surface</td>
+                        <td>Least-privilege per agent. Tool call auditing. Approval gates for destructive actions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vendor lock-in</strong></td>
+                        <td>Tight coupling to specific LLM provider</td>
+                        <td>Agent abstraction layer. MCP for standardization. Swap LLM per agent.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pilot purgatory</strong></td>
+                        <td>Building forever, never shipping</td>
+                        <td>Phase 0 is a usable product. Each phase adds value incrementally.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 10.10 Sources -->
+        <section class="content-section">
+            <h2>10.10 Sources and References</h2>
+
+            <h3>Agent Architecture and Orchestration</h3>
+            <ul class="sources-list">
+                <li><a href="https://docs.anthropic.com/en/docs/agents-and-tools" target="_blank">Claude Agent SDK Documentation &mdash; Anthropic, 2026</a></li>
+                <li><a href="https://modelcontextprotocol.io/" target="_blank">Model Context Protocol (MCP) Specification &mdash; Anthropic, 2025</a></li>
+                <li><a href="https://google.github.io/A2A/" target="_blank">Agent-to-Agent (A2A) Protocol &mdash; Google, 2025</a></li>
+                <li><a href="https://langchain-ai.github.io/langgraph/" target="_blank">LangGraph: Multi-Agent Orchestration Framework &mdash; LangChain, 2025</a></li>
+            </ul>
+
+            <h3>Industry Context</h3>
+            <ul class="sources-list">
+                <li><a href="https://www.salesforce.com/agentforce/" target="_blank">Salesforce Agentforce: Slack as Agentic OS &mdash; Dreamforce 2025</a></li>
+                <li><a href="https://www.gartner.com/en/newsroom/press-releases" target="_blank">80% of Orgs Will Have Platform Teams by 2026 &mdash; Gartner, 2025</a></li>
+                <li><a href="https://growin.com/platform-engineering-2026/" target="_blank">Platform Engineering in 2026 &mdash; Growin, January 2026</a></li>
+            </ul>
+
+            <h3>Messaging and Event Architecture</h3>
+            <ul class="sources-list">
+                <li><a href="https://www.rabbitmq.com/docs" target="_blank">RabbitMQ Documentation &mdash; VMware/Broadcom, 2025</a></li>
+                <li><a href="https://kafka.apache.org/documentation/" target="_blank">Apache Kafka Documentation &mdash; Apache Software Foundation, 2025</a></li>
+                <li><a href="https://flink.apache.org/" target="_blank">Apache Flink: Stateful Stream Processing &mdash; Apache Software Foundation, 2025</a></li>
+                <li><a href="https://bloomberg.github.io/blazingmq/" target="_blank">BlazingMQ: High-Performance Message Broker &mdash; Bloomberg, 2024</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Section 10 of 10: GSD Orchestrator Architecture | <a href="section-9.html">&larr; Previous</a></p>
+        <p>Report generated February 7, 2026 | <a href="../index.html">Return to Index</a> | <a href="references.html">View All References</a></p>
+    </footer>
+
+    <script>
+    function copyCode(button) {
+        var codeBlock = button.closest('.code-example').querySelector('.code-content code');
+        var text = codeBlock.textContent || codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(function(err) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+    </script>
+
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-9.html" style="margin-right:auto">&larr; 9. DevOps</a><a href="references.html" style="margin-left:auto">References &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

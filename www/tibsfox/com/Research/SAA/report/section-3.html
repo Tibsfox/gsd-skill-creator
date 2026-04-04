@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combining Skills and Agents for Complex Tasks &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>Combining Skills and Agents for Complex Tasks
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html" class="active">3. Multi-Agent</a>
+      <a href="section-4.html">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html">10. GSD</a>
+      <a href="references.html">References</a>
+    </div>
+  </header>
+
+
+    <header>
+        <div class="container">
+            <div class="nav-breadcrumb">
+                <a href="../index.html">Home</a> / Section 3
+            </div>
+            <h1><span class="section-number">3</span>Combining Skills and Agents for Complex Tasks</h1>
+            <p class="subtitle">Multi-Agent Architectures, Orchestration Frameworks, and Enterprise Deployments</p>
+            <p class="research-date" style="margin-top: 0.5rem;">Research current as of: January 2026</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="highlight-box">
+            <h3>Key Takeaways</h3>
+            <ul>
+                <li>Multi-agent system inquiries surged 1,445% from Q1 2024 to Q2 2025, signaling a paradigm shift</li>
+                <li>Organizations using multi-agent architectures achieve 45% faster problem resolution and 60% more accurate outcomes</li>
+                <li>The multi-agent platform market is projected to grow from $7.81 billion in 2025 to $54.91 billion by 2030</li>
+                <li>Major frameworks (LangGraph, CrewAI, AutoGen/Microsoft Agent Framework) reached production maturity in 2025</li>
+                <li>Enterprise deployments show 40% faster case resolution and 30% workforce redeployment to higher-value activities</li>
+            </ul>
+        </div>
+
+        <section>
+            <h2>Overview: The Multi-Agent Revolution</h2>
+            <p>The evolution from single-agent systems to multi-agent architectures represents one of the most significant shifts in AI agent development. Where single agents excel at focused, well-defined tasks, multi-agent systems unlock the ability to tackle complex, multi-faceted problems that require diverse expertise, parallel processing, and sophisticated coordination.<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1">1</a><span class="citation-tooltip" id="tooltip-1" role="tooltip"><span class="source-type academic">Academic</span><strong>Improving Factuality and Reasoning through Multiagent Debate</strong><span class="authors">Du et al., 2023</span><a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+
+            <p>As Gartner reported, the 1,445% surge in multi-agent system inquiries from Q1 2024 to Q2 2025 signals a fundamental transformation in how AI systems are designed. By 2028, Gartner predicts that 15% of daily business decisions will be automated by AI agents, with 33% of enterprise software depending on agentic AI.</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1,445%</div>
+                    <div class="stat-label">Surge in Multi-Agent Inquiries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">45%</div>
+                    <div class="stat-label">Faster Problem Resolution</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-label">More Accurate Outcomes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$54.9B</div>
+                    <div class="stat-label">Market Size by 2030</div>
+                </div>
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p>Academic research demonstrates that multi-agent debate significantly improves factual accuracy and reasoning. When multiple LLM instances engage in structured debate, they achieve higher accuracy than single-agent approaches by catching each other's mistakes through adversarial collaboration.<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1b">1</a><span class="citation-tooltip" id="tooltip-1b" role="tooltip"><span class="source-type academic">Academic</span><strong>Improving Factuality and Reasoning through Multiagent Debate</strong><span class="authors">Du et al., 2023</span><a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+                </div>
+            </aside>
+
+            <p>If 2025 was the year of AI agents, 2026 is emerging as the year of multi-agent systems, as the infrastructure needed for coordinated agents has finally matured. This section explores the architectures, frameworks, patterns, and real-world implementations that are driving this transformation.</p>
+        </section>
+
+        <section>
+            <h2>Multi-Agent Architectures</h2>
+            <p>Multi-agent systems can be organized using several fundamental architectural patterns, each with distinct characteristics, advantages, and optimal use cases.</p>
+
+            <h3>1. Centralized (Supervisor/Coordinator) Architecture</h3>
+
+            <div class="architecture-diagram">
+                <div class="diagram-title">Centralized Multi-Agent Architecture</div>
+                <div class="diagram-container">
+                    <div class="diagram-row">
+                        <div class="agent-node">User Request</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="diagram-row">
+                        <div class="coordinator-node">Central Orchestrator</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="diagram-row">
+                        <div class="worker-node">Research Agent</div>
+                        <div class="worker-node">Analysis Agent</div>
+                        <div class="worker-node">Writing Agent</div>
+                        <div class="worker-node">Validation Agent</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="diagram-row">
+                        <div class="coordinator-node">Synthesis & Response</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>How It Works</h4>
+                <p>A hierarchical architecture where a central orchestrator receives user requests, decomposes them into subtasks, delegates work to specialized agents, monitors progress, validates outputs, and synthesizes a final unified response.</p>
+
+                <h4>Advantages</h4>
+                <ul>
+                    <li><strong>Clear coordination:</strong> Single point of control simplifies orchestration logic</li>
+                    <li><strong>Consistent governance:</strong> Centralized enforcement of policies and guardrails</li>
+                    <li><strong>Easier debugging:</strong> Centralized logging and monitoring</li>
+                    <li><strong>Resource optimization:</strong> Central controller can balance workloads efficiently</li>
+                </ul>
+
+                <h4>Challenges</h4>
+                <ul>
+                    <li><strong>Single point of failure:</strong> Orchestrator failure disrupts the entire system</li>
+                    <li><strong>Scalability bottleneck:</strong> Central coordinator can become overloaded</li>
+                    <li><strong>Limited adaptability:</strong> Less flexible in responding to dynamic conditions</li>
+                </ul>
+
+                <h4>Best For</h4>
+                <p>Well-defined workflows, compliance-heavy environments, enterprise applications requiring strict governance and audit trails.</p>
+            </div>
+
+            <h3>2. Decentralized (Peer-to-Peer) Architecture</h3>
+
+            <div class="architecture-diagram">
+                <div class="diagram-title">Decentralized Multi-Agent Architecture</div>
+                <div class="diagram-container">
+                    <div class="diagram-row">
+                        <div class="agent-node">Agent A</div>
+                        <span class="arrow">↔</span>
+                        <div class="agent-node">Agent B</div>
+                    </div>
+                    <div class="diagram-row">
+                        <span class="arrow" style="transform: rotate(90deg);">↕</span>
+                        <span></span>
+                        <span class="arrow" style="transform: rotate(90deg);">↕</span>
+                    </div>
+                    <div class="diagram-row">
+                        <div class="agent-node">Agent C</div>
+                        <span class="arrow">↔</span>
+                        <div class="agent-node">Agent D</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>How It Works</h4>
+                <p>Agents coordinate directly with each other without a central controller. Each agent can initiate communication, request assistance, or delegate tasks to peers based on their capabilities and current state.</p>
+
+                <h4>Advantages</h4>
+                <ul>
+                    <li><strong>Fault tolerance:</strong> No single point of failure; system continues if individual agents fail</li>
+                    <li><strong>Scalability:</strong> Easy to add new agents without restructuring the system</li>
+                    <li><strong>Adaptability:</strong> Agents can dynamically adjust coordination based on conditions</li>
+                    <li><strong>Parallel processing:</strong> Multiple agents can work simultaneously without bottlenecks</li>
+                </ul>
+
+                <h4>Challenges</h4>
+                <ul>
+                    <li><strong>Complex coordination:</strong> Requires sophisticated communication protocols</li>
+                    <li><strong>Conflict resolution:</strong> Disagreements between agents can be difficult to resolve</li>
+                    <li><strong>Debugging difficulty:</strong> Distributed behavior is harder to trace and monitor</li>
+                    <li><strong>Consistency issues:</strong> Maintaining shared state across agents is challenging</li>
+                </ul>
+
+                <h4>Best For</h4>
+                <p>Dynamic environments, systems requiring high availability, distributed computing scenarios, research and exploration tasks.</p>
+            </div>
+
+            <h3>3. Hierarchical Architecture</h3>
+
+            <div class="architecture-diagram">
+                <div class="diagram-title">Hierarchical Multi-Agent Architecture</div>
+                <div class="diagram-container">
+                    <div class="diagram-row">
+                        <div class="coordinator-node">Strategic Planning Agent</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="diagram-row">
+                        <div class="agent-node">Manager Agent 1</div>
+                        <div class="agent-node">Manager Agent 2</div>
+                        <div class="agent-node">Manager Agent 3</div>
+                    </div>
+                    <div class="arrow-down">↓</div>
+                    <div class="diagram-row">
+                        <div class="worker-node">Worker</div>
+                        <div class="worker-node">Worker</div>
+                        <div class="worker-node">Worker</div>
+                        <div class="worker-node">Worker</div>
+                        <div class="worker-node">Worker</div>
+                        <div class="worker-node">Worker</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>How It Works</h4>
+                <p>Multiple layers of agents with different levels of authority and abstraction. Higher-level agents handle planning and oversight, while lower-level agents execute operational tasks. Each layer coordinates within its scope.<sup class="citation" data-ref="2"><a href="#ref-2" aria-describedby="tooltip-2">2</a><span class="citation-tooltip" id="tooltip-2" role="tooltip"><span class="source-type academic">Academic</span><strong>MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework</strong><span class="authors">Hong et al., 2024 - ICLR</span><a href="https://arxiv.org/abs/2308.00352" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+
+                <h4>Advantages</h4>
+                <ul>
+                    <li><strong>Separation of concerns:</strong> Clear division between strategy and execution</li>
+                    <li><strong>Modular scaling:</strong> Scale different layers independently</li>
+                    <li><strong>Distributed decision-making:</strong> Reduces load on top-level coordinators</li>
+                    <li><strong>Natural task decomposition:</strong> Mirrors organizational structures</li>
+                </ul>
+
+                <h4>Best For</h4>
+                <p>Large-scale enterprise systems, complex workflows with natural hierarchies, organizations with multiple departments or teams.</p>
+            </div>
+
+            <h3>4. Federated Architecture</h3>
+
+            <div class="info-box">
+                <h4>How It Works</h4>
+                <p>Agents from different departments or organizations collaborate without sharing raw data. Each organization maintains its own agent systems, which communicate through standardized protocols while preserving data sovereignty.</p>
+
+                <h4>Advantages</h4>
+                <ul>
+                    <li><strong>Privacy preservation:</strong> Data stays within organizational boundaries</li>
+                    <li><strong>Compliance friendly:</strong> Meets regulatory requirements for data residency</li>
+                    <li><strong>Cross-organizational collaboration:</strong> Enables partnerships without data exposure</li>
+                </ul>
+
+                <h4>Best For</h4>
+                <p>Regulated industries (BFSI, healthcare), cross-organizational workflows, privacy-sensitive applications.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Agent Coordination Patterns</h2>
+            <p>Beyond architectural structures, specific coordination patterns define how agents collaborate to accomplish tasks. These patterns have emerged as standard building blocks for multi-agent systems.<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3">3</a><span class="citation-tooltip" id="tooltip-3" role="tooltip"><span class="source-type academic">Academic</span><strong>AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors</strong><span class="authors">Chen et al., 2024</span><a href="https://arxiv.org/abs/2308.10848" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+
+            <div class="pattern-card">
+                <h4>Map-Reduce (Orchestrator-Worker)</h4>
+                <p>A central orchestrator breaks tasks down, assigns work to specialized workers, then synthesizes results. This pattern powers retrieval-augmented generation (RAG), coding agents, and sophisticated multimodal research.</p>
+
+                <p><strong>Use Cases:</strong> Document analysis, code review, parallel research, data processing pipelines</p>
+
+                <p><strong>Example:</strong> A research agent splits a complex query into subtopics, assigns each to specialized research workers, then aggregates findings into a comprehensive report.</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Router Pattern</h4>
+                <p>An initial LLM acts as a router, classifying user input and directing it to the most appropriate specialized task or agent. This implements separation of concerns and allows optimizing individual downstream tasks in isolation.</p>
+
+                <p><strong>Use Cases:</strong> Customer support triage, multi-intent handling, tiered LLM usage (routing simple queries to cheaper models)</p>
+
+                <p><strong>Example:</strong> A customer service system routes billing questions to a billing specialist agent, technical issues to a support agent, and product questions to a product specialist.</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Evaluator-Optimizer</h4>
+                <p>Agents collaborate in a continuous loop: one generates solutions, the other evaluates and suggests improvements. The cycle continues until quality thresholds are met or maximum iterations reached.<sup class="citation" data-ref="9"><a href="#ref-9" aria-describedby="tooltip-9">9</a><span class="citation-tooltip" id="tooltip-9" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener" class="tooltip-link">View Guide</a></span></sup></p>
+
+                <p><strong>Use Cases:</strong> Content generation, code optimization, iterative refinement tasks</p>
+
+                <p><strong>Example:</strong> A writing agent generates content while an evaluation agent scores quality and provides feedback, iterating until the content meets standards.</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Parallelization</h4>
+                <p>Splitting a large task into independent sub-tasks for concurrent execution by multiple agents or LLMs. Drastically reduces time to resolution and improves consensus accuracy.<sup class="citation" data-ref="7"><a href="#ref-7" aria-describedby="tooltip-7">7</a><span class="citation-tooltip" id="tooltip-7" role="tooltip"><span class="source-type academic">Academic</span><strong>Tree of Thoughts: Deliberate Problem Solving with Large Language Models</strong><span class="authors">Yao et al., 2024 - NeurIPS 2023</span><a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+
+                <p><strong>Use Cases:</strong> Code review, candidate evaluation, A/B testing, building guardrails</p>
+
+                <p><strong>Example:</strong> A code review system assigns different files to different reviewer agents simultaneously, then aggregates feedback.</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Blackboard Pattern</h4>
+                <p>Agents share information through a common knowledge base (blackboard). Agents read from and write to the blackboard asynchronously, enabling loose coupling.<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3b">3</a><span class="citation-tooltip" id="tooltip-3b" role="tooltip"><span class="source-type academic">Academic</span><strong>AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors</strong><span class="authors">Chen et al., 2024</span><a href="https://arxiv.org/abs/2308.10848" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+
+                <p><strong>Use Cases:</strong> Collaborative problem-solving, knowledge aggregation, complex reasoning tasks</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Auction/Bidding Pattern</h4>
+                <p>Tasks are announced, and agents bid based on their capabilities and current load. The system assigns tasks to the most appropriate agents.</p>
+
+                <p><strong>Use Cases:</strong> Dynamic resource allocation, load balancing, market-based coordination</p>
+            </div>
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p>Research from AgentVerse identifies four distinct collaboration modes: horizontal (peer agents), vertical (manager-worker), debate (adversarial), and blackboard (shared workspace). Experiments show no single coordination pattern is universally optimal - different modes excel at different task types, with debate improving reasoning and horizontal cooperation improving creative tasks.<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3c">3</a><span class="citation-tooltip" id="tooltip-3c" role="tooltip"><span class="source-type academic">Academic</span><strong>AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors</strong><span class="authors">Chen et al., 2024</span><a href="https://arxiv.org/abs/2308.10848" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+                </div>
+            </aside>
+        </section>
+
+        <section>
+            <h2>Communication Protocols</h2>
+            <p>Effective multi-agent systems depend on standardized communication protocols that enable agents to discover each other, exchange information, and coordinate actions.</p>
+
+            <h3>Model Context Protocol (MCP)</h3>
+            <div class="info-box">
+                <p><strong>Announced:</strong> May 2024</p>
+                <p><strong>Purpose:</strong> Standardized interface for accessing tools and resources</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Connects agents to external tools and data sources</li>
+                    <li>Enhances modularity and interoperability</li>
+                    <li>Provides statefulness across multi-agent systems</li>
+                    <li>Reduces integration complexity</li>
+                </ul>
+            </div>
+
+            <h3>Agent-to-Agent Protocol (A2A)</h3>
+            <div class="info-box">
+                <p><strong>Announced:</strong> May 2025</p>
+                <p><strong>Purpose:</strong> Structured inter-agent communication</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Facilitates agent discovery and capability negotiation</li>
+                    <li>Enables agents to exchange messages and distribute subtasks</li>
+                    <li>Builds shared understanding for collective problem-solving</li>
+                    <li>Complements MCP by focusing on agent-to-agent interactions</li>
+                </ul>
+            </div>
+
+            <h3>Agent Communication Protocol (ACP)</h3>
+            <div class="info-box">
+                <p><strong>Developed by:</strong> IBM</p>
+                <p><strong>Purpose:</strong> Standardize agent communication, task delegation, and workflow orchestration</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Acts as a "project manager" for multi-agent systems</li>
+                    <li>Manages state across agents</li>
+                    <li>Coordinates complex workflows</li>
+                </ul>
+            </div>
+
+            <h3>Protocol Stacking Approach</h3>
+            <p>Modern multi-agent systems often employ a protocol stacking approach, layering multiple communication protocols to address different aspects:</p>
+            <ul>
+                <li><strong>MCP</strong> connects agents to tools and data sources</li>
+                <li><strong>A2A</strong> enables agents to discover and communicate with each other</li>
+                <li><strong>ACP</strong> orchestrates workflows and manages state across agents</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Leading Multi-Agent Frameworks</h2>
+            <p>The multi-agent framework landscape evolved dramatically in 2025, with several platforms reaching production maturity. Here's a comprehensive comparison of the leading frameworks.</p>
+
+            <div class="framework-comparison">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Framework</th>
+                            <th>Architecture</th>
+                            <th>Key Strengths</th>
+                            <th>Performance</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LangGraph</strong></td>
+                            <td>Graph-based state machines</td>
+                            <td>Fastest framework, flexible control flows, built-in persistence, human-in-the-loop</td>
+                            <td>Lowest latency across all tasks (2026 benchmarks)</td>
+                            <td>Production systems, complex workflows, multi-agent orchestration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CrewAI</strong></td>
+                            <td>Role-based collaboration</td>
+                            <td>5.76x faster than LangGraph in some cases, dual Crews/Flows architecture, extensive memory systems</td>
+                            <td>Optimized for speed and minimal resources</td>
+                            <td>Finance, research, customer support, rapid prototyping</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Microsoft Agent Framework</strong></td>
+                            <td>Event-driven + data flow</td>
+                            <td>Merger of AutoGen + Semantic Kernel, enterprise features, strong observability</td>
+                            <td>Enterprise-grade scalability</td>
+                            <td>Microsoft ecosystem, enterprise deployments, Azure integration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>n8n</strong></td>
+                            <td>Visual workflow automation</td>
+                            <td>Low-code, visual canvas, business automation integration</td>
+                            <td>Best for visual builders</td>
+                            <td>Business automation, non-technical teams, hybrid workflows</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Salesforce Agentforce</strong></td>
+                            <td>Integrated enterprise platform</td>
+                            <td>CRM integration, governance, Command Center, 12,000 customers</td>
+                            <td>46% case deflection, 84% faster resolution</td>
+                            <td>Salesforce customers, CRM-centric workflows</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>LangGraph: Graph-Based Multi-Agent Orchestration</h3>
+
+            <div class="info-box">
+                <h4>Version 1.0 Release (November 2024)</h4>
+                <p>LangGraph and LangChain both reached v1.0 in November 2024, marking commitment to stability with no breaking changes until 2.0.<sup class="citation" data-ref="10"><a href="#ref-10" aria-describedby="tooltip-10">10</a><span class="citation-tooltip" id="tooltip-10" role="tooltip"><span class="source-type industry">Industry</span><strong>Multi-Agent Architectures Documentation</strong><span class="authors">LangChain, 2024-2025</span><a href="https://python.langchain.com/docs/how_to/multi_agent/" target="_blank" rel="noopener" class="tooltip-link">View Docs</a></span></sup></p>
+
+                <h4>Architecture Approach</h4>
+                <p>LangGraph uses a graph-based approach where each agent is represented as a node that maintains its own state, connected through a directed graph enabling conditional logic, multi-team coordination, and hierarchical control.</p>
+
+                <h4>Key Components</h4>
+                <ul>
+                    <li><strong>Nodes:</strong> Represent agents, functions, or decision points</li>
+                    <li><strong>Edges:</strong> Dictate how data flows between nodes</li>
+                    <li><strong>StateGraph:</strong> Centralized context storing intermediate results and metadata</li>
+                </ul>
+
+                <h4>Production Features</h4>
+                <ul>
+                    <li><strong>Durable State:</strong> Execution state persists automatically</li>
+                    <li><strong>Built-in Persistence:</strong> Save and resume workflows at any point</li>
+                    <li><strong>Human-in-the-Loop:</strong> Pause execution for human review and approval</li>
+                    <li><strong>Horizontal Scaling:</strong> Large workload handling with task queues</li>
+                    <li><strong>Intelligent Caching:</strong> Automated retries and resilience</li>
+                </ul>
+
+                <h4>Performance</h4>
+                <p>According to 2026 benchmarks, LangGraph is the fastest framework with the lowest latency values across all tasks compared to CrewAI, OpenAI Swarm, and standard LangChain.</p>
+            </div>
+
+            <div class="code-header">Python - LangGraph Multi-Agent Example</div>
+            <pre><code>from langgraph.graph import StateGraph, END
+from typing import TypedDict, Annotated
+import operator
+
+class AgentState(TypedDict):
+    messages: Annotated[list, operator.add]
+    current_agent: str
+    task_result: dict
+
+# Define agent nodes
+def research_agent(state):
+    # Perform research
+    return {"task_result": {"research": "completed"}}
+
+def analysis_agent(state):
+    # Analyze results
+    return {"task_result": {"analysis": "completed"}}
+
+def writing_agent(state):
+    # Generate final output
+    return {"task_result": {"writing": "completed"}}
+
+# Build the graph
+workflow = StateGraph(AgentState)
+
+# Add nodes
+workflow.add_node("research", research_agent)
+workflow.add_node("analysis", analysis_agent)
+workflow.add_node("writing", writing_agent)
+
+# Define edges
+workflow.add_edge("research", "analysis")
+workflow.add_edge("analysis", "writing")
+workflow.add_edge("writing", END)
+
+# Set entry point
+workflow.set_entry_point("research")
+
+# Compile
+app = workflow.compile()
+
+# Execute
+result = app.invoke({"messages": [], "current_agent": "research"})</code></pre>
+
+            <h3>CrewAI: Role-Based Multi-Agent Teams</h3>
+
+            <div class="info-box">
+                <h4>Overview</h4>
+                <p>CrewAI is an open-source Python framework for building collaborative AI agent teams with specialized roles, designed to mimic real-world organizational structures.<sup class="citation" data-ref="11"><a href="#ref-11" aria-describedby="tooltip-11">11</a><span class="citation-tooltip" id="tooltip-11" role="tooltip"><span class="source-type industry">Industry</span><strong>CrewAI Documentation - Multi-Agent Systems</strong><span class="authors">CrewAI, 2024-2025</span><a href="https://docs.crewai.com/" target="_blank" rel="noopener" class="tooltip-link">View Docs</a></span></sup></p>
+
+                <h4>Dual Architecture: Crews and Flows</h4>
+                <ul>
+                    <li><strong>Crews:</strong> Autonomous collaboration for scenarios requiring adaptive problem-solving</li>
+                    <li><strong>Flows:</strong> Deterministic, event-driven orchestration with fine-grained state management</li>
+                </ul>
+
+                <h4>Role-Based Design</h4>
+                <ul>
+                    <li><strong>Manager Agents:</strong> Oversee task distribution</li>
+                    <li><strong>Worker Agents:</strong> Execute specific tasks</li>
+                    <li><strong>Researcher Agents:</strong> Handle information gathering and data analysis</li>
+                </ul>
+
+                <h4>Advanced Features</h4>
+                <ul>
+                    <li><strong>Memory Systems:</strong> Shared short-term, long-term, entity, and contextual memory<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4">4</a><span class="citation-tooltip" id="tooltip-4" role="tooltip"><span class="source-type academic">Academic</span><strong>Generative Agents: Interactive Simulacra of Human Behavior</strong><span class="authors">Park et al., 2023</span><a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></li>
+                    <li><strong>Tool Integration:</strong> 100s of open-source tools out of the box</li>
+                    <li><strong>Real-time Tracing:</strong> Every step detailed from interpretation to final output</li>
+                    <li><strong>LLM-Agnostic:</strong> Different models for different agents</li>
+                </ul>
+
+                <h4>Performance</h4>
+                <p>Independent of LangChain, built from scratch, optimized for speed. Demonstrates 5.76x faster execution than LangGraph in certain cases.</p>
+
+                <h4>Adoption</h4>
+                <ul>
+                    <li>30.5K GitHub stars</li>
+                    <li>1M monthly downloads</li>
+                    <li>100,000+ certified developers through community courses</li>
+                </ul>
+            </div>
+
+            <div class="code-header">Python - CrewAI Multi-Agent Team Example</div>
+            <pre><code>from crewai import Agent, Task, Crew, Process
+
+# Define agents with roles
+researcher = Agent(
+    role='Research Specialist',
+    goal='Gather comprehensive information on the topic',
+    backstory='Expert researcher with deep analytical skills',
+    tools=[search_tool, scrape_tool],
+    memory=True
+)
+
+analyst = Agent(
+    role='Data Analyst',
+    goal='Analyze research findings and extract insights',
+    backstory='Experienced analyst with pattern recognition expertise',
+    tools=[analysis_tool],
+    memory=True
+)
+
+writer = Agent(
+    role='Content Writer',
+    goal='Create compelling content from analysis',
+    backstory='Professional writer skilled at translating data to narrative',
+    tools=[writing_tool],
+    memory=True
+)
+
+# Define tasks
+research_task = Task(
+    description='Research recent developments in multi-agent AI systems',
+    expected_output='Comprehensive research report with sources',
+    agent=researcher
+)
+
+analysis_task = Task(
+    description='Analyze research findings for key trends',
+    expected_output='Analysis with identified patterns and insights',
+    agent=analyst
+)
+
+writing_task = Task(
+    description='Create article from analysis',
+    expected_output='Publication-ready article',
+    agent=writer
+)
+
+# Create crew
+crew = Crew(
+    agents=[researcher, analyst, writer],
+    tasks=[research_task, analysis_task, writing_task],
+    process=Process.sequential,
+    memory=True,
+    verbose=True
+)
+
+# Execute
+result = crew.kickoff()</code></pre>
+
+            <h3>Microsoft Agent Framework: AutoGen + Semantic Kernel</h3>
+
+            <div class="info-box">
+                <h4>Major Merger (October 2025)</h4>
+                <p>AutoGen and Semantic Kernel merged into a single unified framework under the name Microsoft Agent Framework, combining AutoGen's simple abstractions for multi-agent patterns with Semantic Kernel's enterprise-grade features.<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5">5</a><span class="citation-tooltip" id="tooltip-5" role="tooltip"><span class="source-type academic">Academic</span><strong>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</strong><span class="authors">Wu et al., 2023</span><a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup><sup class="citation" data-ref="12"><a href="#ref-12" aria-describedby="tooltip-12">12</a><span class="citation-tooltip" id="tooltip-12" role="tooltip"><span class="source-type industry">Industry</span><strong>AI Agent Orchestration Patterns</strong><span class="authors">Microsoft Learn, 2025</span><a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns" target="_blank" rel="noopener" class="tooltip-link">View Docs</a></span></sup></p>
+
+                <h4>Enterprise Features</h4>
+                <ul>
+                    <li>Session-based state management</li>
+                    <li>Type safety</li>
+                    <li>Filters and telemetry</li>
+                    <li>Extensive model and embedding support</li>
+                    <li>Strong observability</li>
+                </ul>
+
+                <h4>Built-in Orchestration Patterns</h4>
+                <p>Sequential, concurrent, hand-off, and Magentic patterns for coordinating multiple AI agents.</p>
+
+                <h4>AutoGen v0.4 Legacy (Released May 2025)</h4>
+                <p>Before the merger, AutoGen v0.4 adopted an asynchronous, event-driven architecture enabling:</p>
+                <ul>
+                    <li>Asynchronous messaging between agents</li>
+                    <li>Event-driven and request/response interaction patterns</li>
+                    <li>Scalable and distributed agent networks</li>
+                </ul>
+
+                <h4>Timeline</h4>
+                <ul>
+                    <li>Public preview: October 2025</li>
+                    <li>GA scheduled: Q1 2026</li>
+                    <li>AutoGen in maintenance mode (bug fixes and security patches only)</li>
+                </ul>
+
+                <h4>Migration Path</h4>
+                <p>Migration requires rethinking approach from event-driven to data-flow based architectures, though straightforward for those familiar with AutoGen concepts.</p>
+            </div>
+
+            <h3>n8n: Visual Multi-Agent Orchestration</h3>
+
+            <div class="info-box">
+                <h4>Overview</h4>
+                <p>n8n is an open-source workflow automation tool that has evolved into a powerful platform for visual multi-agent orchestration, making AI agents accessible to non-technical teams.</p>
+
+                <h4>Key Capabilities</h4>
+                <ul>
+                    <li><strong>Visual Canvas:</strong> Build multi-agent workflows without code</li>
+                    <li><strong>Agent as Nodes:</strong> Each agent is a node performing tasks like data retrieval, API calls, or reasoning</li>
+                    <li><strong>Dynamic Branching:</strong> Conditional logic based on agent outputs</li>
+                    <li><strong>AI Agent Tool Node:</strong> Multi-agent orchestration on a single canvas</li>
+                </ul>
+
+                <h4>Advantages</h4>
+                <ul>
+                    <li>Clear leader among low-code options for visual agent building</li>
+                    <li>Integration without deep infrastructure setup</li>
+                    <li>Combines traditional business automation with AI capabilities</li>
+                    <li>Accessible even for solo developers</li>
+                </ul>
+
+                <h4>Use Cases</h4>
+                <ul>
+                    <li>Business automation (customer queries, sales analysis)</li>
+                    <li>Research & knowledge management</li>
+                    <li>Healthcare (patient data analysis)</li>
+                    <li>Content creation workflows</li>
+                </ul>
+
+                <h4>Getting Started Recommendations</h4>
+                <ul>
+                    <li>Begin with small workflows (2-3 agents)</li>
+                    <li>Experiment with AI nodes (OpenAI, Hugging Face)</li>
+                    <li>Add verification and logging early</li>
+                    <li>Gradually expand to agent networks handling complex tasks</li>
+                </ul>
+            </div>
+
+            <h3>Salesforce Agentforce: Enterprise CRM Multi-Agent Platform</h3>
+
+            <div class="info-box">
+                <h4>Agentforce 360 (October 2025)</h4>
+                <p>The world's first platform designed to connect humans and AI agents in one trusted system, marking the arrival of the "Agentic Enterprise."</p>
+
+                <h4>Evolution Through 2025</h4>
+                <ul>
+                    <li><strong>Agentforce 1.0</strong> (October 2024): First enterprise AI agent platform</li>
+                    <li><strong>Agentforce 2</strong> (December 2024): Improved Atlas Reasoning Engine</li>
+                    <li><strong>Agentforce 2dx</strong> (March 2025): Embedded agents in any workflow</li>
+                    <li><strong>Agentforce 3</strong> (June 2025): Enhanced interoperability, governance, and Command Center</li>
+                    <li><strong>Agentforce 360</strong> (October 2025): Full multi-agent collaboration platform</li>
+                </ul>
+
+                <h4>Multi-Agent Features</h4>
+                <ul>
+                    <li>Advanced multi-agent collaboration and orchestration</li>
+                    <li>Agent2Agent (A2A) protocol support</li>
+                    <li>Agents work across teams and workflows</li>
+                    <li>Direct collaboration with humans in Slack</li>
+                </ul>
+
+                <h4>Enterprise Control</h4>
+                <ul>
+                    <li><strong>Command Center:</strong> Centralized observability and management</li>
+                    <li><strong>Enhanced Atlas Architecture:</strong> Lower latency, greater accuracy, global availability</li>
+                    <li><strong>Governance Controls:</strong> Enterprise-ready with security-focused architecture</li>
+                </ul>
+
+                <h4>Adoption & Results</h4>
+                <ul>
+                    <li>12,000 customers</li>
+                    <li>119% growth in agents created/deployed (H1 2025)</li>
+                    <li>Reddit: 46% case deflection, 84% faster resolution times</li>
+                </ul>
+            </div>
+        </section>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p>Stanford's generative agents research demonstrates genuine emergent social behaviors in multi-agent systems. Twenty-five LLM agents in a simulated town formed relationships, spread information, and coordinated activities (including planning a party) without explicit programming - all enabled by memory architecture with reflection.<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4b">4</a><span class="citation-tooltip" id="tooltip-4b" role="tooltip"><span class="source-type academic">Academic</span><strong>Generative Agents: Interactive Simulacra of Human Behavior</strong><span class="authors">Park et al., 2023</span><a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+                </div>
+            </aside>
+
+        <section>
+            <h2>Conflict Resolution in Multi-Agent Systems</h2>
+            <p>As agents collaborate, conflicts inevitably arise from competing priorities, contradictory information, or divergent reasoning. Effective conflict resolution is critical for reliable multi-agent deployments.<sup class="citation" data-ref="6"><a href="#ref-6" aria-describedby="tooltip-6">6</a><span class="citation-tooltip" id="tooltip-6" role="tooltip"><span class="source-type academic">Academic</span><strong>CAMEL: Communicative Agents for Mind Exploration</strong><span class="authors">Li et al., 2024 - NeurIPS 2023</span><a href="https://arxiv.org/abs/2303.17760" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+
+            <h3>Conflict Types</h3>
+            <ul>
+                <li><strong>Task Priority Conflicts:</strong> Multiple agents competing for resources or user attention</li>
+                <li><strong>Information Conflicts:</strong> Agents providing contradictory data or analysis</li>
+                <li><strong>Goal Conflicts:</strong> Agents optimizing for different objectives</li>
+                <li><strong>Execution Conflicts:</strong> Agents attempting incompatible actions</li>
+            </ul>
+
+            <h3>Resolution Mechanisms</h3>
+
+            <div class="pattern-card">
+                <h4>Belief Merging</h4>
+                <p>Systematic approaches for reconciling contradictions and establishing shared understanding. Modern deployments demonstrate substantial processing capabilities and high conflict resolution accuracy rates across various deployment scenarios.</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Voting Systems</h4>
+                <p>Democratic mechanisms for resolving information conflicts by aggregating agents' preferences or beliefs. Particularly effective when multiple agents evaluate the same evidence.<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1c">1</a><span class="citation-tooltip" id="tooltip-1c" role="tooltip"><span class="source-type academic">Academic</span><strong>Improving Factuality and Reasoning through Multiagent Debate</strong><span class="authors">Du et al., 2023</span><a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Negotiation Protocols</h4>
+                <p>Built-in frameworks allowing agents with competing priorities to negotiate solutions using rules, escalation policies, or optimization algorithms.</p>
+            </div>
+
+            <div class="pattern-card">
+                <h4>Human-in-the-Loop Escalation</h4>
+                <p>When conflicts exceed automated resolution capabilities, systems escalate to human operators. Industry data suggests 3-7% of decisions may require human intervention initially, decreasing as systems mature.</p>
+            </div>
+
+            <h3>Best Practices</h3>
+            <ul>
+                <li>Define clear priority hierarchies for agents</li>
+                <li>Implement confidence scoring for agent outputs</li>
+                <li>Establish escalation thresholds</li>
+                <li>Log all conflict events for continuous improvement</li>
+                <li>Design agents to surface errors instead of hiding them</li>
+                <li>Use circuit breaker patterns for agent dependencies</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Enterprise Best Practices</h2>
+            <p>Organizations successfully deploying multi-agent systems follow established patterns for architecture, operations, and governance.</p>
+
+            <h3>Architecture & Design</h3>
+            <div class="info-box">
+                <h4>Isolation and Fault Tolerance</h4>
+                <ul>
+                    <li>Design agents to be as isolated as practical from each other</li>
+                    <li>Avoid single points of failure shared between agents</li>
+                    <li>Implement circuit breakers for agent dependencies</li>
+                    <li>Plan handoff mechanisms for interrupted work</li>
+                </ul>
+
+                <h4>Security and Access Control</h4>
+                <ul>
+                    <li>Secure communication between agents (encryption, authentication)</li>
+                    <li>Limit each agent's access to sensitive data (principle of least privilege)</li>
+                    <li>Implement federated architectures for privacy-sensitive scenarios</li>
+                </ul>
+
+                <h4>Domain Specialization</h4>
+                <ul>
+                    <li>Optimize agents for narrow tasks working toward common goals</li>
+                    <li>Create well-orchestrated systems that enforce compliance</li>
+                    <li>Monitor decision flows for transparent audit trails</li>
+                </ul>
+            </div>
+
+            <h3>Operational Guidelines</h3>
+            <div class="info-box">
+                <h4>Start Small, Scale Gradually</h4>
+                <ul>
+                    <li>Begin with a single high-value workflow</li>
+                    <li>Build first orchestration with 2-3 agents</li>
+                    <li>Measure everything (latency, accuracy, cost, user satisfaction)</li>
+                    <li>Expand based on demonstrated value</li>
+                </ul>
+
+                <h4>Error Handling and Recovery</h4>
+                <ul>
+                    <li>Surface errors instead of hiding them</li>
+                    <li>Enable downstream agents to respond appropriately</li>
+                    <li>Use checkpoint features for recovery from interruptions</li>
+                    <li>Implement intelligent retry mechanisms</li>
+                </ul>
+
+                <h4>Monitoring and Observability</h4>
+                <ul>
+                    <li>Real-time tracing of agent interactions</li>
+                    <li>Centralized logging and analytics</li>
+                    <li>Performance dashboards</li>
+                    <li>Anomaly detection for unusual patterns</li>
+                </ul>
+            </div>
+
+            <h3>Governance and Compliance</h3>
+            <div class="info-box">
+                <ul>
+                    <li>Establish clear ownership and accountability for agent decisions</li>
+                    <li>Implement approval workflows for sensitive operations</li>
+                    <li>Maintain comprehensive audit trails</li>
+                    <li>Regular compliance reviews and testing</li>
+                    <li>Document agent capabilities and limitations</li>
+                </ul>
+            </div>
+        </section>
+
+            <aside class="gsd-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">GSD Integration</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Claude Code's GSD workflow implements research-validated multi-agent patterns:</strong> The orchestrator-executor pattern (main Claude instance plans while spawned Task agents execute), checkpoint-based coordination (fresh agents continue from checkpoints with preserved state), and hierarchical planning (Phases decompose to Plans decompose to Tasks). These patterns align directly with MetaGPT's Standard Operating Procedures approach for reducing hallucination cascades.<sup class="citation" data-ref="2"><a href="#ref-2" aria-describedby="tooltip-2b">2</a><span class="citation-tooltip" id="tooltip-2b" role="tooltip"><span class="source-type academic">Academic</span><strong>MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework</strong><span class="authors">Hong et al., 2024 - ICLR</span><a href="https://arxiv.org/abs/2308.00352" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+                </div>
+            </aside>
+
+        <section>
+            <h2>Enterprise Case Studies</h2>
+            <p>Real-world implementations demonstrate the transformative impact of multi-agent systems across industries.</p>
+
+            <div class="case-study">
+                <h3>Wells Fargo: Multi-Agent Banking Assistant</h3>
+                <p><strong>Platform:</strong> Microsoft Multi-Agent Orchestration</p>
+                <p><strong>Scale:</strong> 35,000 bankers</p>
+
+                <h4>Challenge</h4>
+                <p>Bankers needed quick access to 1,700 complex procedures and compliance requirements. Manual search took 10+ minutes per query, creating bottlenecks and compliance risks.</p>
+
+                <h4>Solution</h4>
+                <p>Multi-agent system with specialized agents for procedures, compliance, customer history, and product information. Central orchestrator routes queries to appropriate agents and synthesizes responses.</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">30 sec</div>
+                        <div class="metric-label">From 10 minutes</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">35,000</div>
+                        <div class="metric-label">Bankers Enabled</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">1,700</div>
+                        <div class="metric-label">Procedures Accessible</div>
+                    </div>
+                </div>
+
+                <h4>Impact</h4>
+                <ul>
+                    <li>95% reduction in procedure lookup time</li>
+                    <li>Improved compliance through consistent information</li>
+                    <li>Enhanced customer service quality</li>
+                    <li>Significant time savings reinvested in customer relationships</li>
+                </ul>
+            </div>
+
+            <div class="case-study">
+                <h3>Stripe: Multi-Agent Payment Recovery and Fraud Detection</h3>
+                <p><strong>Platform:</strong> Custom multi-agent system with OpenAI</p>
+                <p><strong>Focus:</strong> Payment optimization, fraud detection, recovery operations</p>
+
+                <h4>Multi-Agent Architecture</h4>
+                <p>Multiple specialized agents handle payment optimization, fraud detection, and recovery operations simultaneously, collaborating through the Agentic Commerce Protocol (ACP) codeveloped with OpenAI.</p>
+
+                <h4>Fraud Detection Features</h4>
+                <ul>
+                    <li><strong>Shared Payment Tokens (SPTs):</strong> Relay underlying risk signals powered by Stripe Radar</li>
+                    <li><strong>Risk Scoring:</strong> Differentiate between high-intent agents and low-trust bots</li>
+                    <li><strong>Explainable AI:</strong> Models provide reasons for flagging transactions</li>
+                    <li><strong>Dynamic Decision-Making:</strong> AI-assisted with human oversight for complex cases</li>
+                </ul>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">$6B</div>
+                        <div class="metric-label">Recovered (2024)</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">60%</div>
+                        <div class="metric-label">YoY Improvement in Retry Success</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">38%</div>
+                        <div class="metric-label">Fraud Reduction (Radar)</div>
+                    </div>
+                </div>
+
+                <h4>Innovation: Agentic Commerce Protocol</h4>
+                <p>Stripe and OpenAI codeveloped ACP to handle fraud detection in AI agent-driven commerce, addressing challenges like AI agents being misflagged as fraudulent or manipulated by bad actors.</p>
+            </div>
+
+            <div class="case-study">
+                <h3>LinkedIn: Agentic Platform for Hiring</h3>
+                <p><strong>Platform:</strong> Custom multi-agent platform built on existing messaging infrastructure</p>
+                <p><strong>First Implementation:</strong> Hiring Assistant (global availability)</p>
+
+                <h4>Architectural Innovation</h4>
+                <p>LinkedIn extended its generative AI application platform to support multi-agent systems by repurposing existing messaging infrastructure as an orchestration layer, avoiding the need to build new coordination technology from scratch.</p>
+
+                <h4>Key Design Principles</h4>
+                <ul>
+                    <li><strong>Distributed Application Approach:</strong> Agents as modules orchestrated by core AI application</li>
+                    <li><strong>Service Architecture:</strong> Agents as standardized gRPC services in central skill registry</li>
+                    <li><strong>Messaging-Based Orchestration:</strong> Natural language communication with structured content</li>
+                </ul>
+
+                <h4>Lessons Learned</h4>
+                <ul>
+                    <li>Reuse existing infrastructure for efficient scaling</li>
+                    <li>Provide strong developer abstractions</li>
+                    <li>Design for human-in-the-loop control</li>
+                    <li>Invest in observability and context engineering</li>
+                    <li>Adopt open protocols for interoperability</li>
+                </ul>
+            </div>
+
+            <div class="case-study">
+                <h3>HCLTech: Salesforce Agentforce Deployment</h3>
+                <p><strong>Platform:</strong> Salesforce Agentforce</p>
+                <p><strong>Industry:</strong> IT Services</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">40%</div>
+                        <div class="metric-label">Faster Case Resolution</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">30%</div>
+                        <div class="metric-label">Workforce Redeployment to High-Value Activities</div>
+                    </div>
+                </div>
+
+                <h4>Implementation</h4>
+                <p>Multi-agent system for customer service automation with agents specializing in case triage, technical support, knowledge retrieval, and escalation management.</p>
+            </div>
+
+            <div class="case-study">
+                <h3>Reddit: Agentforce Support Automation</h3>
+                <p><strong>Platform:</strong> Salesforce Agentforce 360</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">46%</div>
+                        <div class="metric-label">Support Cases Deflected</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">84%</div>
+                        <div class="metric-label">Faster Resolution Times</div>
+                    </div>
+                </div>
+
+                <h4>Implementation</h4>
+                <p>Multi-agent customer support system handling common queries automatically while escalating complex issues to human agents with full context.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Market Growth and Industry Trends</h2>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$7.81B</div>
+                    <div class="stat-label">Market Size (2025)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$54.91B</div>
+                    <div class="stat-label">Projected by 2030</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">79%</div>
+                    <div class="stat-label">Organizations with AI Agents</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-label">Enterprise Apps with Agents by End of 2026</div>
+                </div>
+            </div>
+
+            <h3>Adoption Statistics</h3>
+            <div class="info-box">
+                <ul>
+                    <li>57% of companies already have AI agents in production (G2, August 2025)</li>
+                    <li>22% in pilot phase, 21% in pre-pilot</li>
+                    <li>61% of business leaders deploying AI agents</li>
+                    <li>Gartner predicts 15% of daily business decisions automated by AI agents by 2028</li>
+                    <li>33% of enterprise software will depend on agentic AI by 2028</li>
+                </ul>
+            </div>
+
+            <h3>Industry Leaders</h3>
+            <div class="info-box">
+                <h4>Financial Services</h4>
+                <p>Goldman Sachs, JP Morgan, and HSBC use AI agents for compliance and financial analysis, with early data showing one agent replacing the work of 50 analysts while improving accuracy.</p>
+
+                <h4>Healthcare</h4>
+                <p>Veeva Systems announced comprehensive rollout of AI Agents across all applications, beginning December 2025 for commercial applications and expanding through 2026 for R&D and quality.</p>
+
+                <h4>Technology</h4>
+                <p>Major cloud providers (AWS, Azure, Google Cloud) offering native multi-agent orchestration capabilities with production-ready governance and monitoring.</p>
+            </div>
+
+            <h3>Investment Trends</h3>
+            <div class="info-box">
+                <p>Business leaders demonstrate unwavering commitment: 67% say they will maintain spending even if a recession occurs in the next 12 months, with a projected $124 million to be deployed over the coming year per organization.</p>
+            </div>
+
+            <h3>2026 Outlook</h3>
+            <div class="info-box">
+                <p>Leaders have moved beyond initial deployments and are professionalizing and preparing to scale agent systems—readying data, investing in infrastructure, and building governance and observability to run multi-agent systems reliably.</p>
+
+                <p>Recent framework updates signal maturation:</p>
+                <ul>
+                    <li><strong>OpenAI Agents SDK</strong> (March 2025): Replaced experimental Swarm with production-ready handoff patterns</li>
+                    <li><strong>Microsoft Agent Framework</strong> (October 2025): Merged AutoGen with Semantic Kernel for enterprise</li>
+                    <li><strong>Google ADK:</strong> Added strong multi-agent patterns for Google Cloud integration</li>
+                </ul>
+            </div>
+        </section>
+
+            <aside class="gsd-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">GSD Integration</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Opportunities for Claude Code multi-agent enhancement:</strong> The wave-based parallel execution in GSD (multiple plans executing simultaneously in the same wave) maps directly to academic parallelization research. Future enhancements could include intra-plan parallelism (concurrent tasks within a plan), evaluator-optimizer loops for code quality, and specialist agents (research, implementation, testing, documentation) that hand off context through structured markdown files.<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5b">5</a><span class="citation-tooltip" id="tooltip-5b" role="tooltip"><span class="source-type academic">Academic</span><strong>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</strong><span class="authors">Wu et al., 2023</span><a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener" class="tooltip-link">View Paper</a></span></sup></p>
+                </div>
+            </aside>
+
+        <section>
+            <h2>Code Examples: Common Patterns</h2>
+
+            <h3>Supervisor Pattern with LangGraph</h3>
+            <div class="code-header">Python - Supervisor Multi-Agent Pattern</div>
+            <pre><code>from langgraph.graph import StateGraph, END
+from typing import TypedDict, Literal
+import operator
+from typing import Annotated
+
+class SupervisorState(TypedDict):
+    messages: Annotated[list, operator.add]
+    next: str
+
+def create_supervisor_chain(members: list[str]):
+    """Create supervisor that routes to appropriate agent"""
+    system_prompt = f"""You are a supervisor managing these workers: {members}.
+    Given user request, determine which worker should act next.
+    Each worker will perform a task and respond with results.
+    When finished, respond with FINISH."""
+
+    # Supervisor decides next agent
+    def supervisor(state):
+        # Logic to determine next agent based on state
+        # Returns name of next agent or "FINISH"
+        return {"next": determine_next_agent(state)}
+
+    return supervisor
+
+# Define worker agents
+def research_agent(state):
+    """Performs research tasks"""
+    # Implementation
+    return {"messages": ["Research completed"]}
+
+def analysis_agent(state):
+    """Performs analysis tasks"""
+    # Implementation
+    return {"messages": ["Analysis completed"]}
+
+def writer_agent(state):
+    """Generates content"""
+    # Implementation
+    return {"messages": ["Content written"]}
+
+# Build supervisor workflow
+workflow = StateGraph(SupervisorState)
+
+# Add supervisor and workers
+workflow.add_node("supervisor", create_supervisor_chain(
+    ["research", "analysis", "writer"]
+))
+workflow.add_node("research", research_agent)
+workflow.add_node("analysis", analysis_agent)
+workflow.add_node("writer", writer_agent)
+
+# Conditional routing based on supervisor decision
+workflow.add_conditional_edges(
+    "supervisor",
+    lambda x: x["next"],
+    {
+        "research": "research",
+        "analysis": "analysis",
+        "writer": "writer",
+        "FINISH": END
+    }
+)
+
+# Workers report back to supervisor
+workflow.add_edge("research", "supervisor")
+workflow.add_edge("analysis", "supervisor")
+workflow.add_edge("writer", "supervisor")
+
+workflow.set_entry_point("supervisor")
+app = workflow.compile()</code></pre>
+
+            <h3>Peer-to-Peer Pattern with Agent Handoffs</h3>
+            <div class="code-header">Python - Peer-to-Peer Multi-Agent Pattern</div>
+            <pre><code>from typing import Protocol, List, Dict, Any
+
+class Agent(Protocol):
+    """Base protocol for agents"""
+    def can_handle(self, task: Dict[str, Any]) -> bool:
+        """Check if agent can handle the task"""
+        ...
+
+    def execute(self, task: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute the task"""
+        ...
+
+    def handoff(self, result: Dict[str, Any], agents: List['Agent']) -> 'Agent':
+        """Determine which agent should handle next"""
+        ...
+
+class ResearchAgent:
+    name = "research"
+
+    def can_handle(self, task):
+        return task.get("type") == "research"
+
+    def execute(self, task):
+        # Perform research
+        return {
+            "status": "completed",
+            "data": "research findings",
+            "next_type": "analysis"
+        }
+
+    def handoff(self, result, agents):
+        # Find analyst agent
+        for agent in agents:
+            if hasattr(agent, 'name') and agent.name == "analysis":
+                return agent
+        return None
+
+class AnalysisAgent:
+    name = "analysis"
+
+    def can_handle(self, task):
+        return task.get("type") == "analysis"
+
+    def execute(self, task):
+        # Perform analysis
+        return {
+            "status": "completed",
+            "data": "analysis results",
+            "next_type": "writing"
+        }
+
+    def handoff(self, result, agents):
+        for agent in agents:
+            if hasattr(agent, 'name') and agent.name == "writing":
+                return agent
+        return None
+
+class WritingAgent:
+    name = "writing"
+
+    def can_handle(self, task):
+        return task.get("type") == "writing"
+
+    def execute(self, task):
+        # Generate content
+        return {
+            "status": "completed",
+            "data": "final content",
+            "next_type": None
+        }
+
+    def handoff(self, result, agents):
+        return None  # End of workflow
+
+# Multi-agent coordinator
+class PeerToPeerCoordinator:
+    def __init__(self, agents: List[Agent]):
+        self.agents = agents
+
+    def execute_workflow(self, initial_task: Dict[str, Any]):
+        current_task = initial_task
+        current_agent = None
+
+        # Find first agent that can handle the task
+        for agent in self.agents:
+            if agent.can_handle(current_task):
+                current_agent = agent
+                break
+
+        results = []
+
+        while current_agent:
+            # Execute with current agent
+            result = current_agent.execute(current_task)
+            results.append(result)
+
+            # Determine next agent through handoff
+            next_agent = current_agent.handoff(result, self.agents)
+
+            if next_agent:
+                # Prepare task for next agent
+                current_task = {
+                    "type": result.get("next_type"),
+                    "data": result.get("data")
+                }
+                current_agent = next_agent
+            else:
+                current_agent = None
+
+        return results
+
+# Usage
+agents = [ResearchAgent(), AnalysisAgent(), WritingAgent()]
+coordinator = PeerToPeerCoordinator(agents)
+
+results = coordinator.execute_workflow({
+    "type": "research",
+    "query": "Multi-agent AI systems"
+})</code></pre>
+
+            <h3>Router Pattern Implementation</h3>
+            <div class="code-header">Python - Router Pattern for Agent Selection</div>
+            <pre><code>from typing import Dict, Any, Callable
+from enum import Enum
+
+class AgentType(Enum):
+    BILLING = "billing"
+    TECHNICAL = "technical"
+    PRODUCT = "product"
+    GENERAL = "general"
+
+class RouterAgent:
+    """Routes requests to specialized agents based on classification"""
+
+    def __init__(self, specialized_agents: Dict[AgentType, Callable]):
+        self.agents = specialized_agents
+        self.classifier = self._create_classifier()
+
+    def _create_classifier(self):
+        """Create LLM-based classifier"""
+        # In practice, this would use an LLM
+        def classify(query: str) -> AgentType:
+            # Simplified classification logic
+            query_lower = query.lower()
+            if any(word in query_lower for word in ["bill", "payment", "invoice"]):
+                return AgentType.BILLING
+            elif any(word in query_lower for word in ["error", "bug", "not working"]):
+                return AgentType.TECHNICAL
+            elif any(word in query_lower for word in ["feature", "product", "upgrade"]):
+                return AgentType.PRODUCT
+            else:
+                return AgentType.GENERAL
+        return classify
+
+    def route_and_execute(self, query: str) -> Dict[str, Any]:
+        """Route query to appropriate agent and execute"""
+        # Classify the query
+        agent_type = self.classifier(query)
+
+        # Get the appropriate agent
+        agent = self.agents.get(agent_type)
+
+        if not agent:
+            return {
+                "error": f"No agent found for type {agent_type}",
+                "query": query
+            }
+
+        # Execute with the specialized agent
+        return {
+            "agent_type": agent_type.value,
+            "result": agent(query),
+            "query": query
+        }
+
+# Define specialized agents
+def billing_agent(query: str) -> str:
+    return f"Billing Agent: Processing billing query: {query}"
+
+def technical_agent(query: str) -> str:
+    return f"Technical Agent: Troubleshooting: {query}"
+
+def product_agent(query: str) -> str:
+    return f"Product Agent: Providing product information: {query}"
+
+def general_agent(query: str) -> str:
+    return f"General Agent: Handling general inquiry: {query}"
+
+# Create router
+router = RouterAgent({
+    AgentType.BILLING: billing_agent,
+    AgentType.TECHNICAL: technical_agent,
+    AgentType.PRODUCT: product_agent,
+    AgentType.GENERAL: general_agent
+})
+
+# Route queries
+queries = [
+    "I have a question about my invoice",
+    "The app keeps crashing",
+    "What features are in the premium plan?",
+    "Can you help me?"
+]
+
+for query in queries:
+    result = router.route_and_execute(query)
+    print(f"Query: {query}")
+    print(f"Routed to: {result['agent_type']}")
+    print(f"Result: {result['result']}\n")</code></pre>
+        </section>
+
+        <section>
+            <h2>Key Recommendations</h2>
+
+            <div class="highlight-box">
+                <h3>For Teams Getting Started</h3>
+                <ul>
+                    <li><strong>Start Simple:</strong> Begin with 2-3 agents solving a high-value, well-defined problem<sup class="citation" data-ref="9"><a href="#ref-9" aria-describedby="tooltip-9b">9</a><span class="citation-tooltip" id="tooltip-9b" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener" class="tooltip-link">View Guide</a></span></sup></li>
+                    <li><strong>Choose the Right Framework:</strong> LangGraph for flexibility, CrewAI for speed, Microsoft Framework for Azure integration, n8n for visual building</li>
+                    <li><strong>Measure Everything:</strong> Track latency, accuracy, cost, and user satisfaction from day one</li>
+                    <li><strong>Plan for Failure:</strong> Implement error handling, handoffs, and human escalation early</li>
+                    <li><strong>Invest in Observability:</strong> You can't improve what you can't see</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>For Scaling Deployments</h3>
+                <ul>
+                    <li><strong>Adopt Standard Protocols:</strong> MCP for tools, A2A for agent communication, ACP for orchestration<sup class="citation" data-ref="8"><a href="#ref-8" aria-describedby="tooltip-8">8</a><span class="citation-tooltip" id="tooltip-8" role="tooltip"><span class="source-type industry">Industry</span><strong>Introducing Swarm: Lightweight Multi-Agent Orchestration</strong><span class="authors">OpenAI, 2024</span><a href="https://openai.com/index/introducing-swarm/" target="_blank" rel="noopener" class="tooltip-link">View Blog</a></span></sup></li>
+                    <li><strong>Build Governance Early:</strong> Establish ownership, approval workflows, and audit trails</li>
+                    <li><strong>Design for Isolation:</strong> Minimize dependencies between agents to improve fault tolerance</li>
+                    <li><strong>Optimize Resource Usage:</strong> Route simple tasks to smaller models, complex ones to larger models</li>
+                    <li><strong>Iterate Based on Data:</strong> Use observability insights to continuously refine agent behavior</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Architecture Selection Guide</h3>
+                <ul>
+                    <li><strong>Use Centralized</strong> for: Compliance-heavy workflows, audit requirements, well-defined processes</li>
+                    <li><strong>Use Decentralized</strong> for: Dynamic environments, high availability needs, research tasks</li>
+                    <li><strong>Use Hierarchical</strong> for: Large organizations, complex multi-layer workflows</li>
+                    <li><strong>Use Federated</strong> for: Cross-organizational collaboration, privacy-sensitive data</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Implementation Examples -->
+        <section class="content-section implementation-section">
+            <h2>Implementation Examples</h2>
+            <p>Practical Claude Code patterns for multi-agent orchestration. These examples demonstrate the Task tool for subagent delegation, parallel execution, and result aggregation based on AutoGen-style coordination patterns.<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5-impl">5</a><span class="citation-tooltip" id="tooltip-5-impl" role="tooltip"><span class="source-type academic">Academic</span><strong>AutoGen: Multi-Agent Conversation</strong><span class="authors">Wu et al., 2023</span><a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+
+            <h3>Orchestrator Pattern with Task Tool</h3>
+            <p>The main agent delegates specialized work to subagents via the Task tool, implementing the coordinator-worker pattern from multi-agent research.<sup class="citation" data-ref="2"><a href="#ref-2" aria-describedby="tooltip-2-impl">2</a><span class="citation-tooltip" id="tooltip-2-impl" role="tooltip"><span class="source-type academic">Academic</span><strong>MetaGPT: Multi-Agent Collaborative Framework</strong><span class="authors">Hong et al., 2024</span><a href="https://arxiv.org/abs/2308.00352" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Python</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">from</span> claude_agent_sdk <span class="keyword">import</span> query, ClaudeAgentOptions, AgentDefinition
+
+<span class="comment"># Define specialized subagents</span>
+researcher = AgentDefinition(
+    description=<span class="string">"Research specialist for gathering information."</span>,
+    prompt=<span class="string">"Gather comprehensive information on the topic. Cite sources."</span>,
+    tools=[<span class="string">"Read"</span>, <span class="string">"Grep"</span>, <span class="string">"Glob"</span>]
+)
+
+analyst = AgentDefinition(
+    description=<span class="string">"Data analyst for synthesizing findings."</span>,
+    prompt=<span class="string">"Analyze data and extract actionable insights."</span>,
+    tools=[<span class="string">"Read"</span>, <span class="string">"Bash"</span>]  <span class="comment"># Can run analysis scripts</span>
+)
+
+writer = AgentDefinition(
+    description=<span class="string">"Technical writer for documentation."</span>,
+    prompt=<span class="string">"Write clear, well-structured documentation."</span>,
+    tools=[<span class="string">"Read"</span>, <span class="string">"Write"</span>]
+)
+
+<span class="comment"># Orchestrator delegates via Task tool</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"""Create a technical report on the auth system:
+1. Use researcher to gather information about current auth implementation
+2. Use analyst to identify security patterns and issues
+3. Use writer to create the final report document"""</span>,
+    options=ClaudeAgentOptions(
+        allowed_tools=[<span class="string">"Task"</span>],  <span class="comment"># Orchestrator only delegates</span>
+        agents={
+            <span class="string">"researcher"</span>: researcher,
+            <span class="string">"analyst"</span>: analyst,
+            <span class="string">"writer"</span>: writer
+        }
+    )
+):
+    <span class="keyword">if</span> <span class="function">hasattr</span>(message, <span class="string">"result"</span>):
+        <span class="function">print</span>(message.result)</code></pre>
+            </div>
+
+            <h3>Parallel Agent Execution</h3>
+            <p>Run multiple independent agent queries in parallel for faster execution, following the distributed pattern discussed in multi-agent architectures.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Python</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">import</span> asyncio
+<span class="keyword">from</span> claude_agent_sdk <span class="keyword">import</span> query, ClaudeAgentOptions
+
+<span class="keyword">async</span> <span class="keyword">def</span> <span class="function">parallel_analysis</span>():
+    <span class="string">"""Run multiple analyses in parallel."""</span>
+
+    <span class="comment"># Define independent tasks</span>
+    tasks = [
+        query(
+            prompt=<span class="string">"Analyze security vulnerabilities in src/auth/"</span>,
+            options=ClaudeAgentOptions(allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Grep"</span>])
+        ),
+        query(
+            prompt=<span class="string">"Analyze performance bottlenecks in src/api/"</span>,
+            options=ClaudeAgentOptions(allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Grep"</span>])
+        ),
+        query(
+            prompt=<span class="string">"Check test coverage in tests/"</span>,
+            options=ClaudeAgentOptions(allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Bash"</span>])
+        )
+    ]
+
+    <span class="comment"># Execute in parallel using asyncio.gather</span>
+    results = <span class="keyword">await</span> asyncio.gather(*[
+        collect_results(task) <span class="keyword">for</span> task <span class="keyword">in</span> tasks
+    ])
+
+    <span class="keyword">return</span> results
+
+<span class="keyword">async</span> <span class="keyword">def</span> <span class="function">collect_results</span>(query_gen):
+    result = <span class="keyword">None</span>
+    <span class="keyword">async for</span> msg <span class="keyword">in</span> query_gen:
+        <span class="keyword">if</span> <span class="function">hasattr</span>(msg, <span class="string">"result"</span>):
+            result = msg.result
+    <span class="keyword">return</span> result
+
+asyncio.run(parallel_analysis())</code></pre>
+            </div>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">TypeScript</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">import</span> { query } <span class="keyword">from</span> <span class="string">"@anthropic-ai/claude-agent-sdk"</span>;
+
+<span class="comment">// Helper to collect results from a query stream</span>
+<span class="keyword">async function</span> <span class="function">collectResult</span>(queryStream: AsyncIterable&lt;any&gt;) {
+  <span class="keyword">let</span> result = <span class="keyword">null</span>;
+  <span class="keyword">for await</span> (<span class="keyword">const</span> msg <span class="keyword">of</span> queryStream) {
+    <span class="keyword">if</span> (<span class="string">"result"</span> <span class="keyword">in</span> msg) result = msg.result;
+  }
+  <span class="keyword">return</span> result;
+}
+
+<span class="comment">// Run analyses in parallel</span>
+<span class="keyword">const</span> results = <span class="keyword">await</span> Promise.all([
+  collectResult(query({ prompt: <span class="string">"Analyze security in src/auth/"</span>, options: { allowedTools: [<span class="string">"Read"</span>, <span class="string">"Grep"</span>] } })),
+  collectResult(query({ prompt: <span class="string">"Analyze performance in src/api/"</span>, options: { allowedTools: [<span class="string">"Read"</span>, <span class="string">"Grep"</span>] } })),
+  collectResult(query({ prompt: <span class="string">"Check test coverage"</span>, options: { allowedTools: [<span class="string">"Read"</span>, <span class="string">"Bash"</span>] } }))
+]);
+
+<span class="function">console</span>.log(<span class="string">"Security:"</span>, results[<span class="number">0</span>]);
+<span class="function">console</span>.log(<span class="string">"Performance:"</span>, results[<span class="number">1</span>]);
+<span class="function">console</span>.log(<span class="string">"Coverage:"</span>, results[<span class="number">2</span>]);</code></pre>
+            </div>
+
+            <h3>Result Aggregation Pattern</h3>
+            <p>Combine outputs from multiple agents into a unified result, implementing the collaborative peer pattern described in the multi-agent debate research.<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1-impl">1</a><span class="citation-tooltip" id="tooltip-1-impl" role="tooltip"><span class="source-type academic">Academic</span><strong>Improving Factuality through Multiagent Debate</strong><span class="authors">Du et al., 2023</span><a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Python</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="keyword">from</span> claude_agent_sdk <span class="keyword">import</span> query, ClaudeAgentOptions, AgentDefinition
+
+<span class="comment"># Multiple reviewers provide different perspectives</span>
+reviewers = {
+    <span class="string">"security-reviewer"</span>: AgentDefinition(
+        description=<span class="string">"Security-focused code reviewer."</span>,
+        prompt=<span class="string">"Focus on security vulnerabilities and best practices."</span>,
+        tools=[<span class="string">"Read"</span>, <span class="string">"Grep"</span>]
+    ),
+    <span class="string">"perf-reviewer"</span>: AgentDefinition(
+        description=<span class="string">"Performance-focused code reviewer."</span>,
+        prompt=<span class="string">"Focus on performance bottlenecks and optimization."</span>,
+        tools=[<span class="string">"Read"</span>, <span class="string">"Grep"</span>]
+    ),
+    <span class="string">"maintainability-reviewer"</span>: AgentDefinition(
+        description=<span class="string">"Code quality and maintainability reviewer."</span>,
+        prompt=<span class="string">"Focus on code clarity, patterns, and technical debt."</span>,
+        tools=[<span class="string">"Read"</span>, <span class="string">"Grep"</span>]
+    )
+}
+
+<span class="comment"># Aggregator synthesizes all reviews</span>
+<span class="keyword">async for</span> message <span class="keyword">in</span> query(
+    prompt=<span class="string">"""Review src/payment/ from multiple perspectives:
+1. Get security review from security-reviewer
+2. Get performance review from perf-reviewer
+3. Get maintainability review from maintainability-reviewer
+4. Synthesize into a unified code review report with prioritized recommendations"""</span>,
+    options=ClaudeAgentOptions(
+        allowed_tools=[<span class="string">"Read"</span>, <span class="string">"Write"</span>, <span class="string">"Task"</span>],
+        agents=reviewers
+    )
+):
+    <span class="keyword">if</span> <span class="function">hasattr</span>(message, <span class="string">"result"</span>):
+        <span class="function">print</span>(message.result)</code></pre>
+            </div>
+
+            <h3>GSD Multi-Agent Pattern</h3>
+            <p>GSD workflows demonstrate multi-agent coordination through plan execution with specialized phase agents.<sup class="citation" data-ref="9"><a href="#ref-9" aria-describedby="tooltip-9-impl">9</a><span class="citation-tooltip" id="tooltip-9-impl" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View Guide</a></span></sup></p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">Bash</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre class="code-content"><code><span class="comment"># GSD orchestrates multiple specialized execution agents:</span>
+<span class="comment"># 1. Planning agent (creates PLAN.md files)</span>
+<span class="comment"># 2. Execution agent (implements tasks from plans)</span>
+<span class="comment"># 3. Verification agent (validates completed work)</span>
+
+<span class="comment"># Initialize multi-phase project</span>
+claude <span class="string">"/gsd:initialize"</span>
+
+<span class="comment"># Each phase spawns independent execution agents</span>
+<span class="comment"># Coordination happens via file-based state (STATE.md, SUMMARY.md)</span></code></pre>
+            </div>
+
+            <h3>Wave-Based Parallel Execution</h3>
+            <p>GSD implements wave-based parallel execution where plans are grouped by dependency and executed in parallel within waves. This pattern maps to the coordination research from Wu et al. on multi-agent conversation frameworks.<sup class="citation" data-ref="5"><a href="#ref-5">5</a></sup></p>
+
+            <div class="highlight-box">
+                <h4>Wave Execution Model</h4>
+                <p>Plans specify their wave number in frontmatter (<code>wave: N</code>). The execute-phase orchestrator groups plans by wave and spawns all Wave N plans in parallel. Wave N+1 only begins after all Wave N plans complete. This maximizes parallelism while respecting dependencies.</p>
+            </div>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span class="language">YAML (Plan Frontmatter)</span>
+                </div>
+                <pre class="code-content"><code><span class="comment">---</span>
+<span class="keyword">phase:</span> <span class="string">03-implementation</span>
+<span class="keyword">plan:</span> <span class="number">02</span>
+<span class="keyword">wave:</span> <span class="number">1</span>                     <span class="comment"># Execute in Wave 1 (parallel)</span>
+<span class="keyword">depends_on:</span> <span class="string">[]</span>              <span class="comment"># No dependencies</span>
+<span class="keyword">autonomous:</span> <span class="string">true</span>            <span class="comment"># No human checkpoints</span>
+<span class="comment">---</span>
+
+<span class="comment"># Plan 03-03 depends on 03-01:</span>
+<span class="comment">---</span>
+<span class="keyword">phase:</span> <span class="string">03-implementation</span>
+<span class="keyword">plan:</span> <span class="number">03</span>
+<span class="keyword">wave:</span> <span class="number">2</span>                     <span class="comment"># Execute in Wave 2 (after Wave 1)</span>
+<span class="keyword">depends_on:</span> <span class="string">["03-01"]</span>       <span class="comment"># Requires 03-01 artifacts</span>
+<span class="keyword">autonomous:</span> <span class="string">false</span>           <span class="comment"># Has human verification checkpoint</span>
+<span class="comment">---</span></code></pre>
+            </div>
+
+            <aside class="gsd-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">GSD Pattern: Wave Execution Implements Wu et al. Coordination</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Wave-based execution implements the multi-agent coordination pattern from AutoGen research.</strong> The orchestrator spawns parallel gsd-executor agents for same-wave plans via the Task tool. Each executor runs independently with its own context. Result aggregation happens through SUMMARY.md files that the orchestrator reads after wave completion. This maps directly to the "conversation-based" coordination pattern where agents communicate through structured artifacts.<sup class="citation" data-ref="5"><a href="#ref-5">5</a></sup></p>
+                </div>
+            </aside>
+
+            <h4>Enhancement Ideas</h4>
+            <ul>
+                <li><strong>Adversarial debate:</strong> Spawn multiple agents with opposing viewpoints for architectural decisions (Du et al. pattern<sup class="citation" data-ref="1"><a href="#ref-1">1</a></sup>)</li>
+                <li><strong>Dynamic wave reassignment:</strong> If a Wave 1 plan fails, dynamically move dependent Wave 2 plans</li>
+                <li><strong>Capability-based routing:</strong> Route complex plans to Opus, simple plans to Haiku</li>
+            </ul>
+        </section>
+
+        <section class="references">
+            <h2>References</h2>
+            <p class="research-date">Research current as of: January 2026</p>
+
+            <div class="ref-group">
+                <h3>Academic Papers</h3>
+                <ul class="ref-list">
+                    <li id="ref-1">
+                        <span class="ref-number">1</span>
+                        <span class="ref-content">
+                            Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I. (2023). "Improving Factuality and Reasoning in Language Models through Multiagent Debate." arXiv:2305.14325. <a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                    <li id="ref-2">
+                        <span class="ref-number">2</span>
+                        <span class="ref-content">
+                            Hong, S., et al. (2024). "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework." ICLR 2024. <a href="https://arxiv.org/abs/2308.00352" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                    <li id="ref-3">
+                        <span class="ref-number">3</span>
+                        <span class="ref-content">
+                            Chen, W., et al. (2024). "AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors." arXiv:2308.10848. <a href="https://arxiv.org/abs/2308.10848" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                    <li id="ref-4">
+                        <span class="ref-number">4</span>
+                        <span class="ref-content">
+                            Park, J. S., et al. (2023). "Generative Agents: Interactive Simulacra of Human Behavior." arXiv:2304.03442. <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                    <li id="ref-5">
+                        <span class="ref-number">5</span>
+                        <span class="ref-content">
+                            Wu, Q., et al. (2023). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." arXiv:2308.08155. <a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                    <li id="ref-6">
+                        <span class="ref-number">6</span>
+                        <span class="ref-content">
+                            Li, G., et al. (2024). "CAMEL: Communicative Agents for 'Mind' Exploration of Large Language Model Society." NeurIPS 2023. <a href="https://arxiv.org/abs/2303.17760" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                    <li id="ref-7">
+                        <span class="ref-number">7</span>
+                        <span class="ref-content">
+                            Yao, S., et al. (2024). "Tree of Thoughts: Deliberate Problem Solving with Large Language Models." NeurIPS 2023. <a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">arXiv</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ref-group">
+                <h3>Industry Sources</h3>
+                <ul class="ref-list">
+                    <li id="ref-8">
+                        <span class="ref-number">8</span>
+                        <span class="ref-content">
+                            OpenAI. (2024). "Introducing Swarm: Lightweight Multi-Agent Orchestration." <a href="https://openai.com/index/introducing-swarm/" target="_blank" rel="noopener">OpenAI Blog</a>
+                        </span>
+                    </li>
+                    <li id="ref-9">
+                        <span class="ref-number">9</span>
+                        <span class="ref-content">
+                            Anthropic. (2024). "Building Effective Agents." <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">Anthropic Research</a>
+                        </span>
+                    </li>
+                    <li id="ref-10">
+                        <span class="ref-number">10</span>
+                        <span class="ref-content">
+                            LangChain. (2024-2025). "Multi-Agent Architectures Documentation." <a href="https://python.langchain.com/docs/how_to/multi_agent/" target="_blank" rel="noopener">LangChain Docs</a>
+                        </span>
+                    </li>
+                    <li id="ref-11">
+                        <span class="ref-number">11</span>
+                        <span class="ref-content">
+                            CrewAI. (2024-2025). "Multi-Agent Systems Documentation." <a href="https://docs.crewai.com/" target="_blank" rel="noopener">CrewAI Docs</a>
+                        </span>
+                    </li>
+                    <li id="ref-12">
+                        <span class="ref-number">12</span>
+                        <span class="ref-content">
+                            Microsoft. (2025). "AI Agent Orchestration Patterns." Microsoft Learn. <a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns" target="_blank" rel="noopener">Microsoft Learn</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="sources">
+            <h2>Sources</h2>
+            <ul>
+                <li><a href="https://www.langchain.com/langgraph">LangGraph - LangChain</a></li>
+                <li><a href="https://www.blog.langchain.com/langchain-langgraph-1dot0/">LangChain and LangGraph Agent Frameworks Reach v1.0 Milestones</a></li>
+                <li><a href="https://latenode.com/blog/ai-frameworks-technical-infrastructure/langgraph-multi-agent-orchestration/langgraph-multi-agent-orchestration-complete-framework-guide-architecture-analysis-2025">LangGraph Multi-Agent Orchestration: Complete Framework Guide 2025</a></li>
+                <li><a href="https://latenode.com/blog/ai-frameworks-technical-infrastructure/crewai-framework/crewai-framework-2025-complete-review-of-the-open-source-multi-agent-ai-platform">CrewAI Framework 2025: Complete Review</a></li>
+                <li><a href="https://www.crewai.com/">CrewAI - The Leading Multi-Agent Platform</a></li>
+                <li><a href="https://github.com/crewAIInc/crewAI">CrewAI GitHub Repository</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview">Introduction to Microsoft Agent Framework</a></li>
+                <li><a href="https://azure.microsoft.com/en-us/blog/introducing-microsoft-agent-framework/">Introducing Microsoft Agent Framework - Azure Blog</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns">AI Agent Orchestration Patterns - Azure Architecture Center</a></li>
+                <li><a href="https://aws.amazon.com/solutions/guidance/multi-agent-orchestration-on-aws/">Guidance for Multi-Agent Orchestration on AWS</a></li>
+                <li><a href="https://www.onabout.ai/p/mastering-multi-agent-orchestration-architectures-patterns-roi-benchmarks-for-2025-2026">Multi-Agent AI Orchestration: Enterprise Strategy for 2025-2026</a></li>
+                <li><a href="https://www.kore.ai/blog/choosing-the-right-orchestration-pattern-for-multi-agent-systems">Choosing the Right Orchestration Pattern for Multi-Agent Systems</a></li>
+                <li><a href="https://wizr.ai/blog/ai-agent-orchestration/">AI Agent Orchestration: How Enterprises Manage Multiple AI Agents</a></li>
+                <li><a href="https://datasciencedojo.com/blog/agentic-ai-communication-protocols/">Agentic AI Communication Protocols</a></li>
+                <li><a href="https://medium.com/@manavg/agentic-ai-protocols-mcp-a2a-and-acp-ea0200eac18b">Agentic AI Protocols: MCP, A2A, and ACP</a></li>
+                <li><a href="https://medium.com/software-architecture-in-the-age-of-ai/how-agents-talk-mapping-the-future-of-multi-agent-communication-protocols-6115ea083dba">How Agents Talk: Multi-Agent Communication Protocols</a></li>
+                <li><a href="https://ioni.ai/post/multi-ai-agents-in-2025-key-insights-examples-and-challenges">Multi-AI Agents Systems in 2025: Key Insights and Challenges</a></li>
+                <li><a href="https://lorojournals.com/index.php/emsj/article/view/1648">Conflict Resolution Techniques in Multi-Agent Systems</a></li>
+                <li><a href="https://kpmg.com/us/en/media/news/q4-ai-pulse.html">AI at Scale: Agent-Driven Enterprise Reinvention in 2026 - KPMG</a></li>
+                <li><a href="https://learn.g2.com/enterprise-ai-agents-report">G2's Enterprise AI Agents Report: Industry Outlook for 2026</a></li>
+                <li><a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025">Gartner: 40% of Enterprise Apps Will Feature AI Agents by 2026</a></li>
+                <li><a href="https://www.infoworld.com/article/4054974/how-linkedin-built-an-agentic-ai-platform.html">How LinkedIn Built an Agentic AI Platform - InfoWorld</a></li>
+                <li><a href="https://www.infoq.com/news/2025/09/linkedin-multi-agent/">How LinkedIn Built Enterprise Multi-Agent AI - InfoQ</a></li>
+                <li><a href="https://stripe.com/blog/introducing-our-agentic-commerce-solutions">Introducing Our Agentic Commerce Solutions - Stripe</a></li>
+                <li><a href="https://stripe.com/newsroom/news/stripe-openai-instant-checkout">Stripe Powers Instant Checkout in ChatGPT</a></li>
+                <li><a href="https://www.salesforce.com/news/press-releases/2025/10/13/agentic-enterprise-announcement/">Welcome to the Agentic Enterprise - Agentforce 360</a></li>
+                <li><a href="https://www.salesforce.com/news/press-releases/2025/06/23/agentforce-3-announcement/">Salesforce Launches Agentforce 3</a></li>
+                <li><a href="https://medium.com/@angelosorte1/multi-agent-orchestration-with-n8n-in-2025-from-concept-to-practical-ai-systems-8fc6996468b2">Multi-Agent Orchestration with n8n in 2025</a></li>
+                <li><a href="https://blog.n8n.io/multi-agent-systems/">Multi-Agent System: Frameworks & Tutorial - n8n</a></li>
+                <li><a href="https://medium.com/the-advanced-school-of-ai/agentic-ai-workflow-patterns-evaluator-optimizer-4-4-37cba30bb600">Agentic AI Workflow Patterns: Evaluator-Optimizer</a></li>
+                <li><a href="https://www.marktechpost.com/2025/08/09/9-agentic-ai-workflow-patterns-transforming-ai-agents-in-2025/">9 Agentic AI Workflow Patterns Transforming AI Agents in 2025</a></li>
+                <li><a href="https://www.patronus.ai/ai-agent-development/ai-agent-routing">AI Agent Routing: Tutorial & Best Practices</a></li>
+            </ul>
+        </div>
+
+        <section class="content-section">
+            <h2>v2.0 Update: Agent Teams, Swarms, and DevOps Orchestration</h2>
+
+            <h3>Claude Code Agent Teams (February 2026)</h3>
+            <p>Agent Teams are a native Claude Code feature enabling coordinated multi-agent workflows with a <strong>leader-worker topology</strong>. The leader agent coordinates task assignment, synthesizes worker outputs, and produces unified results. Workers execute specialized analysis in parallel.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>Feature</th><th>Description</th><th>DevOps Example</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Task Lists</strong></td><td>Shared task tracking with status updates</td><td>Track review items across reviewers</td></tr>
+                    <tr><td><strong>Mailboxes</strong></td><td>Inter-agent message passing</td><td>Security reviewer flags issue for performance reviewer</td></tr>
+                    <tr><td><strong>Hooks</strong></td><td>Event-driven coordination (TeammateIdle, TaskCompleted)</td><td>Auto-assign next task when reviewer finishes</td></tr>
+                    <tr><td><strong>Delegate Mode</strong></td><td>Leader delegates focused sub-tasks to workers</td><td>Coordinator assigns file groups to specific reviewers</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Swarm Architectures</h3>
+            <p>Beyond Claude Code's native teams, several frameworks enable swarm-style multi-agent coordination:</p>
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>Framework</th><th>Pattern</th><th>Best For</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>LangGraph</strong></td><td>Stateful graph-based workflows</td><td>Complex multi-step pipelines with branching logic</td></tr>
+                    <tr><td><strong>CrewAI</strong></td><td>Role-based agent crews</td><td>Team simulations with clear role boundaries</td></tr>
+                    <tr><td><strong>AutoGen</strong></td><td>Conversational agent groups</td><td>Research and brainstorming workflows</td></tr>
+                    <tr><td><strong>OpenAI Agents SDK</strong></td><td>Handoff-based routing</td><td>Customer-facing agent pipelines</td></tr>
+                </tbody>
+            </table>
+
+            <p>This project now includes <strong>12 teams</strong> (up from 5), with 7 new DevOps-focused teams: devops-pipeline-team, incident-response-team, release-management-team, security-audit-team, infrastructure-review-team, sre-operations-team, and platform-onboarding-team. See <a href="section-9.html">Section 9</a> for how these map to DevOps lifecycle phases.</p>
+        </section>
+
+        <div class="navigation">
+            <a href="section-2.html" class="nav-button prev">Section 2: AI Agent Skills</a>
+            <a href="../index.html" class="nav-button">Back to Index</a>
+            <a href="section-4.html" class="nav-button next">Section 4: Token Optimization</a>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--border); margin-top: 3rem; color: var(--text-muted);">
+        <p>Section 3: Combining Skills and Agents for Complex Tasks</p>
+        <p>Part of: Cutting-Edge Techniques in AI Agentic Programming and Design</p>
+        <p>Research compiled January 30, 2026</p>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // Only add touch support if device doesn't support hover
+        if (window.matchMedia('(hover: none)').matches) {
+            initTouchTooltips();
+        }
+
+        // Handle Escape key dismissal (WCAG 1.4.13)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                dismissAllTooltips();
+            }
+        });
+
+        function initTouchTooltips() {
+            var citations = document.querySelectorAll('.citation');
+
+            citations.forEach(function(citation) {
+                citation.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    dismissAllTooltips();
+                    this.classList.add('tooltip-active');
+                }, { passive: false });
+            });
+
+            // Tap anywhere else to dismiss
+            document.addEventListener('touchstart', function(e) {
+                if (!e.target.closest('.citation')) {
+                    dismissAllTooltips();
+                }
+            });
+        }
+
+        function dismissAllTooltips() {
+            document.querySelectorAll('.citation.tooltip-active')
+                .forEach(function(el) {
+                    el.classList.remove('tooltip-active');
+                });
+        }
+    })();
+
+    // Copy code to clipboard functionality
+    function copyCode(button) {
+        var codeBlock = button.closest('.code-example').querySelector('.code-content code');
+        var text = codeBlock.textContent || codeBlock.innerText;
+
+        navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(function(err) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+    </script>
+
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-2.html" style="margin-right:auto">&larr; 2. Skills</a><a href="section-4.html" style="margin-left:auto">4. Tokens &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

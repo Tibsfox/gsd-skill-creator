@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Catalog &mdash; Skills &amp; Agents Architecture</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+</head>
+<body class="project-saa">
+  <header>
+    <h1>Skills &amp; Agents Architecture</h1>
+    <div class="subtitle">Skill Catalog &mdash; 33 modular capability definitions</div>
+    <nav>
+      <a href="../index.html">Overview</a>
+      <a href="../agents/index.html">Agents</a>
+      <a href="index.html" class="active">Skills</a>
+      <a href="../teams/index.html">Teams</a>
+      <a href="../report/index.html">Report</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">SAA</a><span class="sep">/</span>Skills
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">33</span><span class="stat-label">Total Skills</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Development</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">DevOps/Platform</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Operations/SRE</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Governance</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">GSD Workflow</span></div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="skill-search" placeholder="Search skills...">
+      <button class="filter-btn active" data-filter="all">All (33)</button>
+      <button class="filter-btn" data-filter="dev">Dev (8)</button>
+      <button class="filter-btn" data-filter="devops">DevOps (7)</button>
+      <button class="filter-btn" data-filter="ops">Ops/SRE (5)</button>
+      <button class="filter-btn" data-filter="gov">Governance (5)</button>
+      <button class="filter-btn" data-filter="gsd">GSD (8)</button>
+    </div>
+
+    <h2>Development</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=api-design" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>API Design</h3>
+        <p>REST API design best practices, conventions, endpoint naming, status codes, and patterns.</p>
+      </a>
+      <a href="page.html?doc=beautiful-commits" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>Beautiful Commits</h3>
+        <p>Conventional commit messages with semantic structure following Angular format.</p>
+      </a>
+      <a href="page.html?doc=code-review" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>Code Review</h3>
+        <p>Reviews code for bugs, style issues, and best practices across languages.</p>
+      </a>
+      <a href="page.html?doc=file-operation-patterns" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>File Operation Patterns</h3>
+        <p>Safe file system operation patterns for creating, copying, moving, and deleting files.</p>
+      </a>
+      <a href="page.html?doc=git-commit" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>Git Commit</h3>
+        <p>Conventional commit message generation following Angular format.</p>
+      </a>
+      <a href="page.html?doc=sql-patterns" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>SQL Patterns</h3>
+        <p>SQL best practices for query optimization, schema design, migrations, and indexing.</p>
+      </a>
+      <a href="page.html?doc=test-generator" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>Test Generator</h3>
+        <p>Generates test cases for functions and components with coverage analysis.</p>
+      </a>
+      <a href="page.html?doc=typescript-patterns" class="card" data-cluster="dev">
+        <span class="family-label cluster-dev">Dev</span>
+        <h3>TypeScript Patterns</h3>
+        <p>TypeScript best practices: types, interfaces, generics, and type safety patterns.</p>
+      </a>
+    </div>
+
+    <h2>DevOps / Platform</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=ci-cd-patterns" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>CI/CD Patterns</h3>
+        <p>CI/CD pipeline best practices for GitHub Actions, deployment strategies, and optimization.</p>
+      </a>
+      <a href="page.html?doc=docker-patterns" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>Docker Patterns</h3>
+        <p>Docker containerization: multi-stage builds, security hardening, and compose patterns.</p>
+      </a>
+      <a href="page.html?doc=gitops-patterns" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>GitOps Patterns</h3>
+        <p>GitOps best practices for ArgoCD, Flux, Argo Rollouts, and progressive delivery.</p>
+      </a>
+      <a href="page.html?doc=infrastructure-as-code" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>Infrastructure as Code</h3>
+        <p>IaC best practices for Terraform, Pulumi, CloudFormation, and OpenTofu.</p>
+      </a>
+      <a href="page.html?doc=kubernetes-patterns" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>Kubernetes Patterns</h3>
+        <p>K8s resource management, Helm charts, service mesh, and autoscaling strategies.</p>
+      </a>
+      <a href="page.html?doc=platform-engineering" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>Platform Engineering</h3>
+        <p>Internal Developer Platforms, golden paths, service catalogs, and developer experience.</p>
+      </a>
+      <a href="page.html?doc=release-management" class="card" data-cluster="devops">
+        <span class="family-label cluster-devops">DevOps</span>
+        <h3>Release Management</h3>
+        <p>Release strategies: canary, blue-green, rollback procedures, and feature flags.</p>
+      </a>
+    </div>
+
+    <h2>Operations / SRE</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=chaos-engineering" class="card" data-cluster="ops">
+        <span class="family-label cluster-ops">Ops/SRE</span>
+        <h3>Chaos Engineering</h3>
+        <p>Resilience testing, fault injection, and game day planning best practices.</p>
+      </a>
+      <a href="page.html?doc=env-setup" class="card" data-cluster="ops">
+        <span class="family-label cluster-ops">Ops/SRE</span>
+        <h3>Environment Setup</h3>
+        <p>Environment configuration: .env management, secrets hygiene, and config validation.</p>
+      </a>
+      <a href="page.html?doc=incident-response" class="card" data-cluster="ops">
+        <span class="family-label cluster-ops">Ops/SRE</span>
+        <h3>Incident Response</h3>
+        <p>Severity classification, on-call rotation, war room protocols, and blameless postmortems.</p>
+      </a>
+      <a href="page.html?doc=monitoring-observability" class="card" data-cluster="ops">
+        <span class="family-label cluster-ops">Ops/SRE</span>
+        <h3>Monitoring &amp; Observability</h3>
+        <p>Three pillars (logs, metrics, traces), OpenTelemetry, Prometheus/Grafana, and SLO alerting.</p>
+      </a>
+      <a href="page.html?doc=sre-patterns" class="card" data-cluster="ops">
+        <span class="family-label cluster-ops">Ops/SRE</span>
+        <h3>SRE Patterns</h3>
+        <p>SLOs, SLIs, SLAs, error budgets, toil reduction, and capacity planning.</p>
+      </a>
+    </div>
+
+    <h2>Governance / Business</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=accessibility-patterns" class="card" data-cluster="gov">
+        <span class="family-label cluster-gov">Governance</span>
+        <h3>Accessibility Patterns</h3>
+        <p>Web accessibility: semantic HTML, ARIA, keyboard navigation, color contrast.</p>
+      </a>
+      <a href="page.html?doc=compliance-governance" class="card" data-cluster="gov">
+        <span class="family-label cluster-gov">Governance</span>
+        <h3>Compliance &amp; Governance</h3>
+        <p>OPA Rego, Kyverno, SBOM generation, SLSA provenance, and regulatory mapping.</p>
+      </a>
+      <a href="page.html?doc=decision-framework" class="card" data-cluster="gov">
+        <span class="family-label cluster-gov">Governance</span>
+        <h3>Decision Framework</h3>
+        <p>Structured thinking frameworks for decisions, trade-offs, and root cause analysis.</p>
+      </a>
+      <a href="page.html?doc=dependency-audit" class="card" data-cluster="gov">
+        <span class="family-label cluster-gov">Governance</span>
+        <h3>Dependency Audit</h3>
+        <p>Dependency management and supply chain security for vulnerability auditing.</p>
+      </a>
+      <a href="page.html?doc=finops-patterns" class="card" data-cluster="gov">
+        <span class="family-label cluster-gov">Governance</span>
+        <h3>FinOps Patterns</h3>
+        <p>Cloud cost optimization, budget management, and resource rightsizing.</p>
+      </a>
+    </div>
+
+    <h2>GSD Workflow</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=context-handoff" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>Context Handoff</h3>
+        <p>Structured context handoff documents for session continuity.</p>
+      </a>
+      <a href="page.html?doc=gsd-explain" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>GSD Explain</h3>
+        <p>Explains what a GSD workflow command will do before execution.</p>
+      </a>
+      <a href="page.html?doc=gsd-migrate" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>GSD Migrate</h3>
+        <p>Migrates existing projects to GSD structure without rewriting history.</p>
+      </a>
+      <a href="page.html?doc=gsd-onboard" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>GSD Onboard</h3>
+        <p>Interactive tutorial for learning GSD workflows and getting started.</p>
+      </a>
+      <a href="page.html?doc=gsd-preflight" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>GSD Preflight</h3>
+        <p>Validates GSD artifacts before running workflows to prevent failures.</p>
+      </a>
+      <a href="page.html?doc=gsd-trace" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>GSD Trace</h3>
+        <p>Traces decision history and requirement provenance through GSD artifacts.</p>
+      </a>
+      <a href="page.html?doc=hook-recipes" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>Hook Recipes</h3>
+        <p>Ready-to-use Claude Code hook recipes for safety, automation, and context injection.</p>
+      </a>
+      <a href="page.html?doc=agent-orchestration" class="card" data-cluster="gsd">
+        <span class="family-label cluster-gsd">GSD</span>
+        <h3>Agent Orchestration</h3>
+        <p>Multi-agent coordination, MCP servers, A2A protocol, and swarm architectures.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      var search = document.getElementById('skill-search');
+      var cards = document.querySelectorAll('.card[data-cluster]');
+      var btns = document.querySelectorAll('.filter-btn');
+      var sectionHeaders = document.querySelectorAll('main h2');
+
+      function filterCards() {
+        var query = search.value.toLowerCase();
+        var activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        var clusterCounts = {};
+
+        cards.forEach(function(card) {
+          var text = card.textContent.toLowerCase();
+          var cluster = card.dataset.cluster;
+          var matchesSearch = !query || text.indexOf(query) !== -1;
+          var matchesFilter = activeFilter === 'all' || cluster === activeFilter;
+          var show = matchesSearch && matchesFilter;
+          card.style.display = show ? '' : 'none';
+          if (!clusterCounts[cluster]) clusterCounts[cluster] = 0;
+          if (show) clusterCounts[cluster]++;
+        });
+
+        var clusterMap = ['dev', 'devops', 'ops', 'gov', 'gsd'];
+        sectionHeaders.forEach(function(h, i) {
+          if (i < clusterMap.length) {
+            h.style.display = (clusterCounts[clusterMap[i]] || 0) > 0 ? '' : 'none';
+          }
+        });
+      }
+
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          btns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          filterCards();
+        });
+      });
+
+      search.addEventListener('input', filterCards);
+    })();
+  </script>
+</body>
+</html>

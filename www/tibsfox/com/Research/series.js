@@ -142,6 +142,7 @@
     { id: 'RFC', name: 'RFC Archive', path: 'RFC/index.html' },
     { id: 'RLS', name: 'Resonant Lands', path: 'RLS/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
+    { id: 'SAA', name: 'Skills & Agents', path: 'SAA/index.html' },
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
     { id: 'SCR', name: 'Source Code Review', path: 'SCR/index.html' },
     { id: 'SET', name: 'SETI', path: 'SET/index.html' },
@@ -201,7 +202,7 @@
     { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS'] },
     { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'] },
     { name: 'Space', color: '#1E88E5', ids: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'] },
-    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT'] },
+    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA'] },
     { name: 'Graphics', color: '#8E24AA', ids: ['NEH','VKD','VKS'] }
   ];
 
