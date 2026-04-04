@@ -1,0 +1,19 @@
+{
+  "degree": 309, "species": "Great Horned Owl pair at peak", "slug": "309-great-horned-owl-pair", "sound_type": "Two owls simultaneous full volume", "energy": 9,
+  "family": "Strigidae", "scientific_name": "Bubo virginianus", "season": "Winter (December-January peak)", "ecosystem": "Winter territory",
+  "frequency_range": "200-600 Hz combined male + female",
+  "theory_nodes": [
+    { "concept": "THIRD STRIGIDAE ENTRY. Degrees 4 (Northern Spotted Owl, E=3), 299 (GHO territorial solo, E=6), 309 (GHO pair duet, E=9). Three Strigidae entries: specialist at E=3, solo generalist at E=6, pair generalist at E=9. The family's full energy range in three entries.", "level": "milestone", "department": "strigidae-family", "description": "Third Strigidae entry completing the family's energy range: E=3 to E=6 to E=9." },
+    { "concept": "FROM E=6 TO E=9 IN TEN DEGREES. Degree 299: solo territorial call, counter-call from neighbor, multi-night negotiation, E=6. Degree 309: bonded pair simultaneous full-volume duet, peak December-January, E=9. Same species; categorically different acoustic event; +3 energy units.", "level": "milestone", "department": "energy-escalation", "description": "Within-species energy escalation: solo to pair duet produces +3 unit jump." },
+    { "concept": "Bonded pair calling mechanics: coordinated timing (male fills gaps in female sequence), simultaneous peak at December-January maximum, mutual reinforcement exceeding solo call, reverse sexual dimorphism (female larger but higher-pitched). Combined 200-600 Hz frequency stack.", "level": "advanced", "department": "pair-bond-acoustics", "description": "Bonded pair acoustic mechanics producing E=9 from E=6 foundation." },
+    { "concept": "E=9 SPS MAXIMUM. Second biological E=9 entry in the cluster (after Marten scream, 308). SPS at maximum for second consecutive degree. The ecology matches the Grunge Summit's opening energy. TAD + GHO pair = E=17 combined.", "level": "milestone", "department": "maximum-zone", "description": "Second E=9 SPS entry, sustaining maximum into the Grunge Summit opening." }
+  ],
+  "cross_references": [
+    {"degree": "4", "species": "Northern Spotted Owl", "relationship": "First Strigidae. Old-growth specialist, E=3. GHO pair at E=9 is the generalist maximum vs. the specialist minimum. Same family, opposite ecological and energy positions."},
+    {"degree": "299", "species": "Great Horned Owl territorial", "relationship": "Same species. Solo call at E=6. Ten degrees later, pair duet at E=9. Within-species escalation from individual to bonded pair event."},
+    {"degree": "308", "species": "Marten scream", "relationship": "Preceding E=9. First SPS maximum in the cluster. Marten scream (biological, old-growth) to GHO pair (biological, winter territory): consecutive E=9 biological events."}
+  ],
+  "s36_pair": {"degree": 309, "artist": "TAD", "pairing_note": "E=8 + E=9 = E=17. Two-guitar simultaneous heavy assault paired with two-owl simultaneous acoustic territorial claim. Both are dual-voice simultaneous events claiming territory through layered sound. Georgetown industrial south and winter forest peripheral intensity."},
+  "milestones": ["THIRD STRIGIDAE", "SECOND GHO ENTRY", "E=6 TO E=9 WITHIN-SPECIES", "SECOND SPS E=9", "GRUNGE SUMMIT OPENS"],
+  "tags": ["great-horned-owl", "bubo-virginianus", "strigidae", "pair-bond", "winter-territory", "december-january", "territorial-duet", "e9-maximum", "grunge-summit", "tad-pair"]
+}
