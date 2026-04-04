@@ -1,0 +1,33 @@
+{
+  "degree": 318, "artist": "Candlebox", "slug": "318-candlebox-grunge", "genre": "Grunge", "energy": 7,
+  "era": "1990-present. Grunge. E=7. Seattle. Maverick Records. Kevin Martin vocals. Classic-rock inheritance. 4 million debut. Commercial success without critical establishment acceptance. Long career.",
+  "location": { "origin": "Seattle, Washington" }, "formed": "Seattle, Washington, 1990", "active": "1990-present (hiatuses 2000-2006, 2009-2011)",
+  "labels": ["Maverick Records", "Sire Records", "E1 Music"],
+  "members": [
+    "Kevin Martin (vocals)",
+    "Peter Klett (guitar)",
+    "Bardi Martin (bass)",
+    "Scott Mercado (drums)"
+  ],
+  "key_albums": [
+    "Candlebox (1993, Maverick) -- self-titled debut; 4 million US copies; You, Far Behind, Cover Me, Change",
+    "Lucy (1995, Maverick) -- follow-up; ~500K copies; better critical reception, less commercial",
+    "Happy Pills (1998, Maverick) -- third album; commercial momentum further reduced",
+    "Into the Sun (2008, Sire) -- reunion album after 2000-2006 hiatus",
+    "Disappearing in Airports (2016, E1) -- fifth studio album"
+  ],
+  "theory_nodes": [
+    { "concept": "MAVERICK RECORDS PARADOX. Maverick was founded by Madonna in 1992, distributed by Time Warner. Grunge defined itself against the mainstream pop industry; Candlebox signing to a pop megastar's label and achieving 4 million in sales is the commercial scenario grunge's cultural identity resisted. The engine documents the paradox without resolving it.", "level": "milestone", "department": "label-context", "description": "The Maverick paradox: grunge success on a label founded by the pop mainstream." },
+    { "concept": "COMMERCIAL SUCCESS AS CRITICAL DISQUALIFICATION. Candlebox's 4 million debut outsold most of the grunge canon's critically celebrated records (Mudhoney, TAD, Hammerbox, Love Battery). The Seattle critical establishment applied a logic of authenticity that disqualified commercial success as evidence against grunge purity. The engine does not apply this logic.", "level": "milestone", "department": "critical-reception", "description": "4 million copies as critical evidence against authenticity: the paradox of commercial grunge success." },
+    { "concept": "CLASSIC-ROCK VOCAL INHERITANCE. Kevin Martin's voice draws more from Robert Plant and Paul Rodgers than from the punk-metal lineage of Cobain, Cornell, or Staley. This inheritance is what separated Candlebox from their Seattle peers and enabled dual accessibility: heavy enough for the grunge audience, melodic enough for classic-rock FM listeners.", "level": "advanced", "department": "vocal-lineage", "description": "Classic-rock vs. post-punk vocal roots: the acoustic basis for Candlebox's commercial reach." },
+    { "concept": "LONG CAREER PATTERN. Candlebox has maintained activity through two hiatuses across 35+ years. Five studio albums. The peak commercial entry (1993) was followed by committed long-term activity at reduced commercial scale. This is the pattern for most grunge-era acts: the commercial window closed but the band continued.", "level": "intermediate", "department": "career-arc", "description": "Post-commercial-window persistence: the pattern of grunge bands continuing after the commercial moment." }
+  ],
+  "cross_references": [
+    {"degree": 317, "artist": "Temple of the Dog", "relationship": "E=7 consecutive. Post-summit cooldown holds. Memorial record (317) vs. commercial record (318): both E=7 from different angles of peripherality from the critical canon."},
+    {"degree": 313, "artist": "Alice in Chains (Dirt)", "relationship": "6M sales vs. 4M sales. Both multi-million grunge records. Critical reception inverted: Dirt is canonical (produced under duress, Layne Staley's heroin context), Candlebox is not (classic-rock roots, Maverick label). Commercial tier comparable, critical status opposite."},
+    {"degree": 314, "artist": "Pearl Jam (Ten)", "relationship": "13M sales vs. 4M sales. Ten is the commercial ceiling of the grunge canon. Candlebox is the next commercial tier."}
+  ],
+  "sps_pair": {"degree": 318, "species": "Cascadia subduction deep current", "pairing_note": "E=5 SPS + E=7 S36. Both operating below their genre's visible surface: Candlebox below the critical canon; the Cascadia subduction below the ocean floor. The infrasonic deep current vs. the classic-rock grunge commercial current."},
+  "milestones": ["FIRST APPEARANCE -- CANDLEBOX", "4M DEBUT DOCUMENTED", "MAVERICK RECORDS PARADOX", "COMMERCIAL OUTLIER IN GRUNGE CANON"],
+  "tags": ["grunge", "seattle", "maverick-records", "kevin-martin", "peter-klett", "candlebox-self-titled", "4-million", "commercial-success", "critical-dismissal", "classic-rock-roots", "madonna-label", "you", "far-behind", "lucy"]
+}
