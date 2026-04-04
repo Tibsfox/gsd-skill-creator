@@ -1,0 +1,61 @@
+{
+  "degree": 241, "species": "Dolly Varden", "slug": "241-dolly-varden", "sound_type": "silent / ripple in shallow glacial stream", "energy": 2,
+  "scientific_name": "Salvelinus malma",
+  "family": "Salmonidae",
+  "ecosystem": "glacial stream (cold, clear, high-gradient, mountain and coastal streams fed by glacial meltwater)",
+  "season": "resident year-round; spawning fall (September-November)",
+  "taxonomy": {
+    "order": "Salmoniformes",
+    "family": "Salmonidae",
+    "genus": "Salvelinus",
+    "class": "Actinopterygii",
+    "note": "FIRST Salvelinus (char genus) in engine. Distinguishing feature: light spots on dark background (reverse of most trout). Separated from Bull Trout (degree 240) by genetic research in 1980s-90s."
+  },
+  "two_subspecies": [
+    { "name": "S. malma malma", "range": "Northern: Kuskokwim River north/west through Bering region and into Asia" },
+    { "name": "S. malma lordi", "range": "Southern: Washington, Oregon, British Columbia -- the PNW form documented in this entry" }
+  ],
+  "size": { "freshwater_cm": "25-50", "anadromous_cm": "60-70", "weight_kg": "0.5-3 freshwater, 3-5 anadromous" },
+  "coloration": "Olive-dark green back, pale yellow/cream/orange-red spots on sides. Spawning males: vivid orange-red spots intensifying against dark background.",
+  "name_origin": {
+    "source": "Barnaby Rudge (Charles Dickens, 1841)",
+    "character": "Dolly Varden, blacksmith's daughter, known for colorful spotted dress",
+    "decade_named": "1870s",
+    "note": "Victorian 'Dolly Varden' fashion style (polka-dotted fabric) also gave name to hats, cakes, and this spotted char."
+  },
+  "sound_profile": {
+    "type": "near-silence (not a vocalization)",
+    "components": ["gentle water displacement over gravel", "occasional fin break at surface", "gravel shimmer as fish holds in current"],
+    "energy": "E=2 -- acoustic minimum of a living fish in cold, clear water"
+  },
+  "habitat": {
+    "type": "glacial stream",
+    "temperature_max_c": 12,
+    "key_locations": ["Olympic Peninsula", "North Cascades", "coastal drainages"],
+    "note": "Prefers cold tributary streams; sensitive to sediment and temperature increase from land use"
+  },
+  "ecology": {
+    "diet": ["aquatic invertebrates (mayfly, caddisfly, stonefly)", "terrestrial insects", "small fish", "dislodged salmon eggs (minor)"],
+    "predators_in_engine": ["Osprey (224)", "Bald Eagle (221-222)", "Merganser (119-120)", "River Otter (63)"],
+    "spawning": "Fall redds in cold tributary gravel; 500-2000 eggs per female"
+  },
+  "conservation": {
+    "wa_status": "Species of Concern in portions of range",
+    "federal_listing": "Not listed (unlike Bull Trout which is Threatened)",
+    "threats": ["glacial retreat / climate change (primary)", "Brook Trout competition and hybridization", "habitat degradation (logging, roads)", "hydropower diversions"],
+    "protection": "Olympic National Park, North Cascades National Park protect core habitat"
+  },
+  "theory_nodes": [
+    { "concept": "FIRST Salvelinus (char genus) in engine. Chars: light spots on dark background, opposite of most trout. Dolly Varden and Bull Trout (240) were classified as one species until 1980s-90s genetic separation. Cold-water specialists across North Pacific Rim.", "level": "milestone", "department": "taxonomy", "description": "First char genus introduced at 241." },
+    { "concept": "E=2 near-silence: the acoustic minimum of a cold-water predator in a glacial stream. The 'sound' is water displacement and fin breaks. Maximum contrast with S36 241 (The Sonics, E=8) -- spread of 6, among the widest in the engine.", "level": "advanced", "department": "acoustic-ecology", "description": "E=2 acoustic profile and E=8 contrast pairing." },
+    { "concept": "Penultimate Salmonidae entry (241 of 7 in arc 236-242). At degree 243, engine crosses to Petromyzontidae -- jawless fish, 450M years. Dolly Varden closes the Salmonidae run one degree before the ancient fish transition.", "level": "intermediate", "department": "engine-structure", "description": "Dolly Varden as penultimate Salmonidae and transition marker." }
+  ],
+  "cross_references": [
+    {"degree": 240, "species": "Bull Trout", "relationship": "Sister species. Both Salvelinus. Classified as same species until 1980s-90s. Bull Trout more interior; Dolly Varden more coastal and glacial."},
+    {"degree": 236, "species": "Pacific Salmon", "relationship": "Shared Salmonidae arc. Dolly Varden follows salmon egg dislodging in streams -- a minor but natural ecological relationship."},
+    {"degree": 224, "species": "Osprey", "relationship": "Osprey predates Dolly Varden. Cold-stream salmonids are key prey across the Salmonidae arc."}
+  ],
+  "s36_pair": {"degree": 241, "artist": "The Sonics", "pairing_note": "E=8 vs E=2 -- spread of 6. Maximum proto-punk aggression against near-silent glacial char. The degree holds both the scream and the stream simultaneously."},
+  "milestones": ["FIRST Salvelinus IN ENGINE", "CHAR GENUS ENTERS", "Penultimate Salmonidae (transition to Petromyzontidae at 243)"],
+  "tags": ["salmonidae", "salvelinus", "first-char", "dolly-varden", "glacial-stream", "cold-water-specialist", "e2-minimum", "olympic-peninsula", "north-cascades", "brook-trout-competition", "barnaby-rudge", "dickens"]
+}
