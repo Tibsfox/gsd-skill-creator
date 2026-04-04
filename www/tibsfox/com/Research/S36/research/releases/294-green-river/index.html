@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 294&deg; &mdash; Green River &mdash; E=7 &mdash; Proto-Grunge/Punk &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.origin { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .origin-banner { background: linear-gradient(135deg, #1A237E, #283593); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .origin-banner h3 { margin-top: 0; font-size: 1.2rem; color: #FFD700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .origin-banner p { color: #9FA8DA; margin: 0.5rem 0; }
+    .origin-banner strong { color: #FFD700; }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    .split-card { padding: 1rem 1.2rem; border-radius: 6px; border: 2px solid; }
+    .split-card.mudhoney { background: #E8EAF6; border-color: #3949AB; }
+    .split-card.pearl-jam { background: #FFF8E1; border-color: #E65100; }
+    .split-card h4 { margin: 0 0 0.5rem; font-size: 1rem; font-family: system-ui, sans-serif; }
+    .split-card.mudhoney h4 { color: #1A237E; }
+    .split-card.pearl-jam h4 { color: #E65100; }
+    .split-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #424242; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>294 &mdash; Green River (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">294&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Green River</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Proto-Grunge / Punk</span>
+          <span class="label-badge">Sub Pop</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="origin-banner">
+          <h3>The Origin Band &mdash; First Sub Pop Release &mdash; Deep Six (1986)</h3>
+          <p><strong>Green River is the most important band you've never heard twice.</strong> Their split in 1987 created the two most significant bands of the Seattle grunge era: Mark Arm and Steve Turner formed Mudhoney; Stone Gossard and Jeff Ament joined Andrew Wood (Malfunkshun) in Mother Love Bone. That chain leads directly to Pearl Jam. "Come On Down" was Sub Pop's first release. <em>Deep Six</em> (1986) was the scene's founding document. Capitol Hill. 1984&ndash;1987.</p>
+        </div>
+
+        <h2>The Personnel</h2>
+        <p>Green River contained, at the same time, the future founders of two of the most important bands in American rock:</p>
+
+        <div class="split-grid">
+          <div class="split-card mudhoney">
+            <h4>Mark Arm + Steve Turner &rarr; Mudhoney</h4>
+            <p>The punk faction. Sub Pop's flagship band. The purest expression of the grunge/punk aesthetic. Bruce Pavitt and Jonathan Poneman at Sub Pop said Mudhoney most completely embodied what they were trying to do. <em>Superfuzz Bigmuff</em> (1988). Sub Pop's identity.</p>
+          </div>
+          <div class="split-card pearl-jam">
+            <h4>Stone Gossard + Jeff Ament &rarr; Mother Love Bone &rarr; Pearl Jam</h4>
+            <p>The rock-architecture faction. Joined Andrew Wood. Mother Love Bone. <em>Apple</em> (1990). Wood's death. Temple of the Dog. Eddie Vedder recruited. Pearl Jam. <em>Ten</em> (August 1991). The chain runs from Green River's 1987 split to Pearl Jam's multi-platinum debut.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The <em>Deep Six</em> Compilation (1986)</h2>
+        <p><em>Deep Six</em> (1986, C/Z Records) is the founding document of Seattle grunge: six bands (Green River, Melvins, Soundgarden, Skin Yard, U-Men, Malfunkshun), recorded by Jack Endino at Reciprocal Recording, released before Sub Pop had fully formalized its commercial operation. Green River and Malfunkshun are both on <em>Deep Six</em> &mdash; both are in the engine at consecutive degrees (294 and 295) because they are consecutive steps in the same story.</p>
+        <p>Hearing <em>Deep Six</em> end to end is to hear, in one listening session, the people who would become Pearl Jam, Mudhoney, Soundgarden, and Temple of the Dog all in early form. Green River is in it: Stone Gossard's guitar, Jeff Ament's bass, Mark Arm's voice, Steve Turner's guitar. The origin, documented.</p>
+
+        <blockquote>"Green River's split in 1987 is not a failure. It is the mechanism through which the scene's most important creative energies found their proper forms."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Creative Fault Line</h2>
+        <p>Green River dissolved because of genuine creative disagreement: Mark Arm and Steve Turner wanted to stay closer to punk &mdash; fast, raw, anti-commercial, ideologically committed to underground aesthetics. Stone Gossard and Jeff Ament had broader rock ambitions &mdash; bigger songs, wider audiences, larger sonic palettes. Both positions are legitimate. The creative fault line between them produced two bands, each more fully realized in its own direction than either faction could have been within a shared band.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>"Come On Down" (1985)</h4>
+            <span class="level origin">Sub Pop / Homestead</span>
+            <p>Among Sub Pop's first single releases. The label's origin. The band's recorded debut. Capitol Hill proto-grunge at its rawest.</p>
+          </div>
+          <div class="theory-card">
+            <h4><em>Deep Six</em> tracks (1986)</h4>
+            <span class="level origin">C/Z Records</span>
+            <p>The founding document of Seattle grunge. Jack Endino. Reciprocal Recording. Green River alongside Soundgarden, Melvins, Malfunkshun, Skin Yard, U-Men.</p>
+          </div>
+          <div class="theory-card">
+            <h4><em>Dry as a Bone</em> EP (1987)</h4>
+            <span class="level advanced">Sub Pop</span>
+            <p>The mature Green River statement. Jack Endino producing. "Unwind," "Baby Takes." The sound fully formed. The template for Sub Pop grunge is here.</p>
+          </div>
+          <div class="theory-card">
+            <h4><em>Rehab Doll</em> EP (1988)</h4>
+            <span class="level advanced">Sub Pop</span>
+            <p>Released posthumously. Charles Burns cover art. The final document. Jack Endino. The band gone but the record arriving anyway.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References &mdash; The Green River Web</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">293</span> Swallow &mdash; Sub Pop grunge/punk, 1989-1992. The wave that Green River helped create.</li>
+          <li><span class="ref-degree">295</span> Malfunkshun &mdash; Andrew Wood. The other half of the origin. Gossard + Ament left Green River to join Wood in MLB.</li>
+          <li><span class="ref-degree">296</span> Mother Love Bone &mdash; Wood + Gossard + Ament. <em>Apple</em>. The pivot point. Andrew Wood's death. Everything that follows.</li>
+          <li><span class="ref-degree">225</span> Temple of the Dog &mdash; Cornell's tribute to Wood. "Say Hello 2 Heaven." The gathering of MLB's survivors + the soon-to-be Pearl Jam.</li>
+          <li><span class="ref-degree">224</span> Mad Season &mdash; Layne Staley (AIC) + Mike McCready (Pearl Jam, from the GR/MLB lineage). Two worlds connecting.</li>
+          <li><span class="ref-degree">SPS 294</span> Tufted Puffin colony &mdash; FIRST ALCIDAE. E=7 + E=6 = E=13. Two firsts at the same degree.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">294 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Proto-Grunge / Punk</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1984&ndash;1987</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Personnel</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Mark Arm</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Steve Turner</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Stone Gossard</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Jeff Ament</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Alex Vincent</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Split Outcomes</h4>
+          <div class="stat-row"><span class="stat-label">Arm + Turner</span><span class="stat-value">Mudhoney</span></div>
+          <div class="stat-row"><span class="stat-label">Gossard + Ament</span><span class="stat-value">Mother Love Bone</span></div>
+          <div class="stat-row"><span class="stat-label">Then</span><span class="stat-value">Pearl Jam</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Historical Firsts</h4>
+          <div class="stat-row"><span class="stat-label">Label debut</span><span class="stat-value">First Sub Pop release</span></div>
+          <div class="stat-row"><span class="stat-label">Compilation</span><span class="stat-value">Deep Six (1986)</span></div>
+          <div class="stat-row"><span class="stat-label">Producer</span><span class="stat-value">Jack Endino</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">81.7%</span></div>
+          <div class="stat-row"><span class="stat-label">Arc position</span><span class="stat-value">Origin arc (2/4)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Tufted Puffin colony</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
