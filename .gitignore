@@ -55,6 +55,17 @@ contrib/upstream/*/
 # Local project data
 media/
 
+# Artifacts (local only — transcripts, audio, channel scans, summaries)
+artifacts/
+
+# Python cache
+__pycache__/
+*.pyc
+.venv/
+
+# Stray VTT transcripts (should be in artifacts/)
+yt-queue-*.en.vtt
+
 # Lost and found (orphaned files from refactors)
 lost-and-found/
 
