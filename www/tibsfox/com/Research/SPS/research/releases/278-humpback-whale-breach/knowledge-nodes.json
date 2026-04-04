@@ -1,0 +1,56 @@
+{
+  "degree": 278,
+  "species": "Humpback Whale",
+  "scientific_name": "Megaptera novaeangliae",
+  "slug": "278-humpback-whale-breach",
+  "sound_type": "Thunderous body percussion -- humpback whale full-body breach, 25-40 metric tons fully airborne then crashing onto ocean surface, broadband concussive impact, E=9",
+  "energy": 9,
+  "ecosystem": "Open ocean -- NE Pacific pelagic waters, feeding and migration range",
+  "season": "Summer (NE Pacific feeding season, July-October)",
+  "family": "Balaenopteridae",
+  "order": "Artiodactyla (Cetacea)",
+  "milestone": "FIRST BALAENOPTERIDAE at degree 278. The rorqual family enters the engine. Third E=9 event in SPS catalog (273: orca breach, 277: orca chorus, 278: humpback breach). Most massive single physical event in catalog: 25-40 metric tons fully airborne. Combined E=17 with Unwound (S36 278, E=8).",
+  "coordinates": {
+    "lat": 48.9,
+    "lon": -124.5,
+    "description": "NE Pacific pelagic waters. Washington and BC offshore Pacific. Strait of Juan de Fuca. Summer feeding range. Migration route: Hawaii breeding grounds (winter) to North Pacific feeding grounds (summer)."
+  },
+  "breach_data": {
+    "mass_metric_tons": "25-40 metric tons (adult; females average ~28t, males slightly smaller; maximum ~40t)",
+    "length_meters": "14-16 meters average; maximum ~18m",
+    "breach_mechanism": "Tail fluke propulsion from depth at steep angle. Entire body or nearly entire body exits water. Brief near-total airborne phase. Impact: broadband concussive shockwave through water and air.",
+    "kinetic_energy_estimate": "At 6-8 m/s and 40,000 kg: approximately 720,000-1,280,000 joules at apex. Converts to acoustic and hydrodynamic energy on impact.",
+    "impact_sound": "Broadband. Described by observers as explosive, concussive, physically felt. Hydrophone-detectable at distance. Source level on order of 115-125 dB re 1 µPa @ 1m for sustained impact; peak transient may be higher.",
+    "serial_breaching": "Multiple successive breaches (serial breaching) documented when other whales are nearby. Energetically costly. Suggests significant communicative or social function.",
+    "vs_orca_breach": "Orca breach (degree 273): ~6 metric tons. Humpback breach (degree 278): 25-40 metric tons. Mass ratio approximately 6:1. Both designated E=9."
+  },
+  "nodes": [
+    {
+      "id": "first-balaenopteridae",
+      "type": "pattern",
+      "title": "First Balaenopteridae -- Rorqual Family Enters",
+      "description": "Degree 278 is the first entry in the Balaenopteridae family (rorqual whales). The family includes the largest animals in Earth's history. Humpback (278) begins a Balaenopteridae arc that continues with blue whale (279).",
+      "connections": ["e9-third", "mass-maximum"]
+    },
+    {
+      "id": "e9-third",
+      "type": "concept",
+      "title": "Third E=9 Event -- SPS Maximum Tier",
+      "description": "SPS now has three E=9 events: orca breach (273, physical), orca multi-pod chorus (277, social), humpback breach (278, physical). Two physical maxima and one social maximum. The E=9 tier is established.",
+      "connections": ["first-balaenopteridae", "mass-maximum"]
+    },
+    {
+      "id": "mass-maximum",
+      "type": "concept",
+      "title": "Mass Maximum -- Largest Physical Event",
+      "description": "25-40 metric tons fully airborne is the largest mass in any single physical event in the SPS catalog. Orca breach is ~6 tons. Humpback is 6x heavier. The mass scaling does not change the E=9 designation -- E=9 is a qualitative ceiling.",
+      "connections": ["first-balaenopteridae", "e9-third"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-273", "species": "Orca breaching", "relationship": "First physical E=9. Orca ~6 tons vs. humpback ~40 tons. Same designation, very different mass. E=9 as qualitative ceiling confirmed."},
+    {"target": "SPS-279", "species": "Blue whale 20Hz pulse", "relationship": "Second Balaenopteridae. The blue whale: largest animal in Earth's history. E=5. Balaenopteridae arc: E=9 spectacular breach (humpback) to E=5 infrasonic depth (blue whale). Maximum spectacle to maximum depth."},
+    {"target": "SPS-277", "species": "Orca multi-pod chorus", "relationship": "Social E=9. Three E=9 events now in catalog: two physical (273, 278), one social (277). SPS maximum tier established."},
+    {"target": "S36-278", "artist": "Unwound", "relationship": "Combined E=17. Angular post-hardcore severity (Unwound, E=8) paired with massive physical force (humpback breach, E=9). Both accumulative forces. First Balaenopteridae alongside Olympia post-hardcore legend."}
+  ]
+}
