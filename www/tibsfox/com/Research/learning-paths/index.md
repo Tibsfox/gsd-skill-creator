@@ -167,11 +167,49 @@ From basic safety through community preparedness to volunteer service: an integr
 
 ---
 
+### The Systems Thinker
+
+**[systems-thinker.md](systems-thinker.md)**
+
+From entropy to game theory: see the same mathematical structures in every domain — synchronization, stability, information, trust, and networks. The path that makes the Rosetta translations rigorous.
+
+| | |
+|---|---|
+| **Projects** | SAA, ELE, INF, ENE, OPEN, NASA/artemis-ii |
+| **Modules** | 12 |
+| **Estimated time** | 100-150 hours |
+| **Difficulty** | Intermediate to advanced |
+| **College departments** | Mathematics, Physics, Engineering, Ecology, Economics, Computer Science |
+| **Best for** | Anyone who wants to understand why the same equations appear in completely different fields |
+
+---
+
+### The Research Frontier
+
+**[research-frontier.md](research-frontier.md)**
+
+Post-doctoral level: derive testable hypotheses from cross-domain connections. Kuramoto predicts convoy performance. Shannon bounds context quality. BFT determines minimum convoy size. Wright's Law forecasts agent learning curves. Not metaphors — experiments.
+
+| | |
+|---|---|
+| **Projects** | OPEN (19 problems), all Rosetta clusters, forest sim |
+| **Modules** | 10 |
+| **Estimated time** | 500+ hours (open-ended research) |
+| **Difficulty** | Post-doctoral / cutting-edge |
+| **College departments** | Mathematics, Physics, Computer Science, Ecology, Philosophy |
+| **Best for** | Anyone ready to derive new truths from established connections |
+
+---
+
 ## Choosing Your Path
 
 **If you know your interest:** Pick a per-project pathway and start at Level 1.
 
 **If you want breadth:** Pick a cross-project path and start at Module 1.
+
+**If you want depth:** Start with [The Systems Thinker](systems-thinker.md). It teaches you to see patterns across domains.
+
+**If you want to push the frontier:** Start with [The Research Frontier](research-frontier.md). It teaches you to derive and test new hypotheses.
 
 **If you're not sure:** Start with [The PNW Naturalist](pnw-naturalist.md). It touches five projects and the skills are immediately applicable to your daily life in the Pacific Northwest.
 

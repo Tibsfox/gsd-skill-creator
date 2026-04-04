@@ -1176,6 +1176,335 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   </div>
 </div>
 
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 11</div>
+    <h2>Second-Order Differential Equations &mdash; The Language of Motion, Oscillation, and Decay</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      If first-order differential equations describe <em>rates</em> &mdash; how fast something changes &mdash;
+      then second-order differential equations describe <em>acceleration</em>: how fast the rate of change
+      itself is changing. Nearly every physical system that oscillates, vibrates, resonates, or decays
+      is governed by a second-order ODE. Springs, circuits, pendulums, spacecraft attitude control,
+      structural resonance, audio amplifier feedback, and the coupled oscillators in the Kuramoto model
+      all reduce to the same mathematical object.
+    </p>
+
+    <p class="explain">
+      <strong>The general form.</strong> A second-order linear ODE with constant coefficients is:
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">General form</span>
+      a &middot; y''(t) + b &middot; y'(t) + c &middot; y(t) = f(t)
+
+      where:
+        y(t)   = the unknown function (position, charge, angle, temperature)
+        y'(t)  = first derivative (velocity, current, angular velocity)
+        y''(t) = second derivative (acceleration, rate of current change)
+        a, b, c = constants (mass, damping, stiffness)
+        f(t)   = external forcing function (drive signal, thrust, wind load)
+
+      <span class="step-label">When f(t) = 0: homogeneous</span>
+      a &middot; y'' + b &middot; y' + c &middot; y = 0
+      <span class="comment">/* The system evolves from initial conditions alone &mdash; no external input */</span>
+
+      <span class="step-label">When f(t) &ne; 0: non-homogeneous</span>
+      a &middot; y'' + b &middot; y' + c &middot; y = f(t)
+      <span class="comment">/* External forcing drives the system &mdash; the source of resonance */</span>
+    </div>
+
+    <p class="explain">
+      <strong>The characteristic equation.</strong> To solve the homogeneous case, we guess that the
+      solution has the form y = e<sup>rt</sup>. Substituting into the equation and dividing through:
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Substitution: y = e^(rt)</span>
+      y' = r &middot; e^(rt)
+      y'' = r&sup2; &middot; e^(rt)
+
+      <span class="step-label">Substitute into a&middot;y'' + b&middot;y' + c&middot;y = 0</span>
+      a &middot; r&sup2; &middot; e^(rt) + b &middot; r &middot; e^(rt) + c &middot; e^(rt) = 0
+
+      <span class="step-label">Divide by e^(rt) (never zero)</span>
+      <span class="result">a &middot; r&sup2; + b &middot; r + c = 0</span>
+
+      <span class="comment">/* This is the characteristic equation &mdash; a quadratic in r */</span>
+      <span class="comment">/* The discriminant &Delta; = b&sup2; - 4ac determines everything */</span>
+    </div>
+
+    <p class="explain">
+      <strong>The three cases.</strong> The discriminant &Delta; = b&sup2; &minus; 4ac splits all second-order
+      systems into three fundamentally different behaviors. This is not a mathematical technicality &mdash;
+      it is the physical classification of every oscillating system in nature.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Case 1: &Delta; &gt; 0 &mdash; Overdamped</span>
+      Two distinct real roots: r&sub1; and r&sub2; (both negative for stable systems)
+      y(t) = C&sub1; &middot; e^(r&sub1; &middot; t) + C&sub2; &middot; e^(r&sub2; &middot; t)
+
+      <span class="result">Behavior: exponential decay, no oscillation</span>
+      <span class="comment">/* Door closer, shock absorber set too stiff, overdamped circuit */</span>
+      <span class="comment">/* System returns to equilibrium slowly without overshooting */</span>
+
+      <span class="step-label">Case 2: &Delta; = 0 &mdash; Critically damped</span>
+      One repeated real root: r = -b/(2a)
+      y(t) = (C&sub1; + C&sub2; &middot; t) &middot; e^(r &middot; t)
+
+      <span class="result">Behavior: fastest return to equilibrium without oscillation</span>
+      <span class="comment">/* The optimal damping point. Used in instrument design, */</span>
+      <span class="comment">/* spacecraft attitude control, and precision engineering. */</span>
+      <span class="comment">/* The Boeing 0.927 correction factor lives here. */</span>
+
+      <span class="step-label">Case 3: &Delta; &lt; 0 &mdash; Underdamped</span>
+      Two complex conjugate roots: r = &alpha; &plusmn; &beta;i
+      where &alpha; = -b/(2a) and &beta; = &radic;(4ac - b&sup2;) / (2a)
+
+      y(t) = e^(&alpha; &middot; t) &middot; [C&sub1; &middot; cos(&beta;t) + C&sub2; &middot; sin(&beta;t)]
+
+      <span class="result">Behavior: decaying oscillation (damped sinusoid)</span>
+      <span class="comment">/* Guitar string, pendulum in air, RLC circuit ringing, */</span>
+      <span class="comment">/* Kuramoto oscillators with dissipation */</span>
+
+      <span class="step-label">Special case: &Delta; &lt; 0 and b = 0 &mdash; Undamped</span>
+      Pure imaginary roots: r = &plusmn;&beta;i
+      y(t) = C&sub1; &middot; cos(&beta;t) + C&sub2; &middot; sin(&beta;t)
+
+      <span class="result">Behavior: perpetual oscillation at natural frequency &omega;&sub0; = &radic;(c/a)</span>
+      <span class="comment">/* Ideal spring, LC circuit, pendulum in vacuum, */</span>
+      <span class="comment">/* orbiting spacecraft (gravity + inertia, no drag) */</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters for Artemis II</div>
+      <p>
+        Every physical system on the spacecraft is a second-order ODE. The attitude control system
+        (reaction wheels + thrusters) is a damped rotational oscillator. The solar array deployment
+        mechanism is a torsional spring-damper. The RLC filters in the power distribution system
+        are electrical oscillators. The crew's circadian rhythms are coupled oscillators (Section 10,
+        Kuramoto). Even the free-return trajectory (Section 7) is governed by the second-order
+        gravitational equation r'' = -GM/r&sup2;. The discriminant &Delta; = b&sup2; - 4ac is the
+        single number that determines whether each of these systems oscillates, decays, or rings.
+      </p>
+    </div>
+
+    <p class="explain">
+      <strong>The mechanical analogy: mass-spring-damper.</strong> The canonical second-order system
+      is a mass on a spring with a dashpot damper. Every other second-order system maps onto it.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Newton's second law for mass-spring-damper</span>
+      m &middot; x''(t) + c &middot; x'(t) + k &middot; x(t) = F(t)
+
+      m = mass                       <span class="comment">/* inertia: resists acceleration */</span>
+      c = damping coefficient         <span class="comment">/* friction: resists velocity */</span>
+      k = spring constant             <span class="comment">/* stiffness: resists displacement */</span>
+      F(t) = applied force            <span class="comment">/* external drive */</span>
+
+      <span class="step-label">Natural frequency (undamped)</span>
+      <span class="result">&omega;&sub0; = &radic;(k/m)</span>
+
+      <span class="step-label">Damping ratio</span>
+      <span class="result">&zeta; = c / (2&radic;(mk))</span>
+
+      &zeta; &lt; 1: underdamped (oscillates)
+      &zeta; = 1: critically damped (optimal return)
+      &zeta; &gt; 1: overdamped (sluggish return)
+
+      <span class="step-label">Damped frequency</span>
+      <span class="result">&omega;&sub;d = &omega;&sub0; &middot; &radic;(1 - &zeta;&sup2;)</span>
+      <span class="comment">/* Damping lowers the oscillation frequency */</span>
+    </div>
+
+    <p class="explain">
+      <strong>The electrical analogy: RLC circuit.</strong> The same equation governs a series
+      resistor-inductor-capacitor circuit, with a direct variable-for-variable mapping.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Kirchhoff's voltage law for series RLC</span>
+      L &middot; q''(t) + R &middot; q'(t) + (1/C) &middot; q(t) = V(t)
+
+      <span class="step-label">Variable mapping</span>
+      Mechanical    Electrical
+      ─────────────────────────
+      mass m     &harr;  inductance L       <span class="comment">/* stores kinetic energy / magnetic energy */</span>
+      damping c  &harr;  resistance R       <span class="comment">/* dissipates energy as heat */</span>
+      spring k   &harr;  1/capacitance (1/C) <span class="comment">/* stores potential energy / electric energy */</span>
+      force F(t) &harr;  voltage V(t)       <span class="comment">/* external drive */</span>
+      position x &harr;  charge q           <span class="comment">/* state variable */</span>
+      velocity v &harr;  current i = q'     <span class="comment">/* rate of change */</span>
+
+      <span class="step-label">Resonant frequency</span>
+      <span class="result">&omega;&sub0; = 1 / &radic;(LC)</span>
+
+      <span class="step-label">Quality factor</span>
+      <span class="result">Q = (1/R) &middot; &radic;(L/C)</span>
+      <span class="comment">/* Q measures how "ringy" the circuit is. High Q = narrow resonance peak. */</span>
+      <span class="comment">/* A 12AX7 tube preamp stage is an RLC circuit with Q shaped by the */</span>
+      <span class="comment">/* cathode bypass cap (25&mu;F) and plate load resistor (100K&Omega;). */</span>
+    </div>
+
+    <p class="explain">
+      <strong>Forced oscillation and resonance.</strong> When an external periodic force
+      f(t) = F&sub0; cos(&omega;t) drives an underdamped system, the steady-state response
+      amplitude depends on how close the driving frequency &omega; is to the natural frequency &omega;&sub0;.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Steady-state amplitude of forced oscillation</span>
+      A(&omega;) = F&sub0; / &radic;[(k - m&omega;&sup2;)&sup2; + (c&omega;)&sup2;]
+
+      <span class="step-label">At resonance: &omega; = &omega;&sub0;</span>
+      k - m&omega;&sub0;&sup2; = k - m(k/m) = 0
+      <span class="result">A(&omega;&sub0;) = F&sub0; / (c &middot; &omega;&sub0;)</span>
+      <span class="comment">/* Amplitude limited ONLY by damping. If c &rarr; 0, amplitude &rarr; &infin; */</span>
+
+      <span class="step-label">The resonance catastrophe</span>
+      If damping is too low and driving frequency matches &omega;&sub0;:
+      - Tacoma Narrows Bridge (1940): wind vortex frequency &asymp; torsional &omega;&sub0;
+      - Millennium Bridge (2000): pedestrian step frequency &asymp; lateral &omega;&sub0;
+      - Spacecraft launch vibration: acoustic loads at structural &omega;&sub0;
+
+      <span class="step-label">Connection to Kuramoto (P11)</span>
+      Each Kuramoto oscillator has a natural frequency &omega;&sub;i.
+      Coupling K acts like an external periodic force on each oscillator.
+      When K exceeds K&sub;c, the oscillators "resonate" into synchronization.
+      <span class="result">Phase locking = resonance in the phase domain</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The universal equation</div>
+      <p>
+        The equation m&middot;y'' + c&middot;y' + k&middot;y = F(t) appears in: mass-spring-damper systems,
+        RLC circuits, pendulums, building seismic response, guitar strings, spacecraft attitude dynamics,
+        control system PID loops, acoustic resonators, bridge aeroelastic flutter, and the linearized
+        equations of motion near any equilibrium point. The specific values of m, c, k change. The
+        mathematics does not. Learning to solve this one equation &mdash; characteristic roots, damping ratio,
+        natural frequency, forced response, resonance &mdash; unlocks every oscillating system in physics
+        and engineering.
+      </p>
+    </div>
+
+    <p class="explain">
+      <strong>Solution methods for the non-homogeneous case.</strong> When f(t) &ne; 0, the complete
+      solution is y(t) = y<sub>h</sub>(t) + y<sub>p</sub>(t), where y<sub>h</sub> is the homogeneous
+      (complementary) solution and y<sub>p</sub> is a particular solution.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Method 1: Undetermined coefficients</span>
+      Guess the form of y&sub;p based on f(t):
+        f(t) = polynomial  &rarr;  guess y&sub;p = polynomial of same degree
+        f(t) = e^(at)      &rarr;  guess y&sub;p = A &middot; e^(at)
+        f(t) = sin(&omega;t) &rarr;  guess y&sub;p = A&middot;cos(&omega;t) + B&middot;sin(&omega;t)
+
+      Substitute, match coefficients, solve for A, B.
+      <span class="comment">/* Works when f(t) is a "nice" function (polynomial, exponential, sinusoidal) */</span>
+
+      <span class="step-label">Method 2: Variation of parameters</span>
+      Works for ANY f(t), even when undetermined coefficients fails.
+      Given two homogeneous solutions y&sub1;, y&sub2;:
+
+      y&sub;p = -y&sub1; &middot; &int;[y&sub2;&middot;f(t) / W] dt  +  y&sub2; &middot; &int;[y&sub1;&middot;f(t) / W] dt
+
+      where W = y&sub1;&middot;y&sub2;' - y&sub2;&middot;y&sub1;' is the Wronskian determinant.
+
+      <span class="step-label">Method 3: Laplace transform</span>
+      Transform both sides: s&sup2;Y(s) - sy(0) - y'(0) + ...
+      Solve algebraically for Y(s), then invert.
+      <span class="result">Converts the ODE into algebra &mdash; the most powerful general method.</span>
+      <span class="comment">/* The transfer function H(s) = 1/(as&sup2; + bs + c) IS the system. */</span>
+      <span class="comment">/* Poles of H(s) = roots of the characteristic equation. */</span>
+    </div>
+
+    <p class="explain">
+      <strong>Worked example: Orion reaction control system.</strong> The spacecraft's attitude about
+      one axis is a rotational second-order system.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Attitude dynamics (single axis, linearized)</span>
+      I &middot; &theta;''(t) + c &middot; &theta;'(t) + k &middot; &theta;(t) = &tau;(t)
+
+      I = moment of inertia about axis  <span class="comment">/* mass analog */</span>
+      c = rotational damping coefficient <span class="comment">/* from thruster deadband logic */</span>
+      k = restoring torque coefficient   <span class="comment">/* from gravity gradient + control law */</span>
+      &tau;(t) = control torque from RCS thrusters
+
+      <span class="step-label">Orion parameters (approximate)</span>
+      I &asymp; 50,000 kg&middot;m&sup2;          <span class="comment">/* for yaw axis, loaded Orion */</span>
+      Design: &zeta; = 0.7 (slightly underdamped)
+      Target: critically damped response for docking approach
+
+      <span class="step-label">Natural frequency</span>
+      &omega;&sub0; = &radic;(k/I)
+
+      For docking approach, if k is set so &omega;&sub0; &asymp; 0.1 rad/s:
+      Period = 2&pi;/&omega;&sub0; &asymp; 63 seconds per oscillation cycle
+
+      <span class="step-label">Damping requirement</span>
+      &zeta; = c / (2&radic;(Ik)) = 0.7
+
+      <span class="result">The control system must provide damping c = 2 &middot; 0.7 &middot; &radic;(I &middot; k)</span>
+      <span class="comment">/* This is why reaction wheels exist &mdash; they provide continuous, */</span>
+      <span class="comment">/* proportional damping that thrusters alone cannot match. */</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Rosetta connections</div>
+      <p>
+        The second-order ODE is the deepest Rosetta object in this curriculum. It maps across every cluster:
+      </p>
+      <p style="margin-top:0.5rem;">
+        <strong>Electronics:</strong> RLC circuits, amplifier feedback stability (Barkhausen criterion),
+        power supply filter resonance (the 16&mu;F cap in Video 2 of the amplifier series).<br>
+        <strong>Energy:</strong> Power grid frequency regulation (swing equation, &delta;'' = P<sub>m</sub> - P<sub>e</sub> - D&middot;&delta;',
+        where &delta; is the generator rotor angle &mdash; exactly the mass-spring-damper equation).<br>
+        <strong>Ecology:</strong> Predator-prey dynamics (Lotka-Volterra), population oscillation near carrying capacity.<br>
+        <strong>Structures:</strong> Seismic response, launch vehicle pogo oscillation, bridge flutter (strykvisionz #127).<br>
+        <strong>AI:</strong> Gradient descent with momentum is a discretized second-order ODE &mdash; the "mass" is the momentum term,
+        the "spring" is the loss landscape curvature, the "damping" is the learning rate decay.<br>
+        <strong>Music:</strong> Every vibrating string, drum head, and air column obeys the wave equation, which reduces
+        to a second-order ODE for each normal mode.
+      </p>
+    </div>
+
+    <p class="explain">
+      <strong>Study path.</strong> To master second-order ODEs, follow this sequence:
+    </p>
+
+    <table class="comp-table">
+      <thead><tr><th>Step</th><th>Topic</th><th>Key skill</th><th>Connection</th></tr></thead>
+      <tbody>
+      <tr><td class="highlight">1</td><td>Characteristic equation</td><td>Factor ar&sup2; + br + c = 0, classify &Delta;</td><td>Quadratic formula, complex numbers</td></tr>
+      <tr><td class="highlight">2</td><td>Three cases (over/critical/under)</td><td>Write general solution for each</td><td>Euler formula: e<sup>i&theta;</sup> = cos&theta; + i&middot;sin&theta;</td></tr>
+      <tr><td class="highlight">3</td><td>Initial value problems</td><td>Apply y(0) and y'(0) to find C&sub1;, C&sub2;</td><td>Physics: initial position + velocity</td></tr>
+      <tr><td class="highlight">4</td><td>Damping ratio &zeta; and natural frequency &omega;&sub0;</td><td>Convert between a,b,c and &zeta;,&omega;&sub0;</td><td>Control theory, circuit design</td></tr>
+      <tr><td class="highlight">5</td><td>Forced response</td><td>Undetermined coefficients for standard forcing</td><td>Resonance, frequency response</td></tr>
+      <tr><td class="highlight">6</td><td>Resonance</td><td>Maximum amplitude at &omega; = &omega;&sub0;</td><td>Kuramoto, structural failure, amplifier feedback</td></tr>
+      <tr><td class="highlight">7</td><td>Laplace transform</td><td>s-domain algebra, transfer functions, poles</td><td>Signal processing, control systems</td></tr>
+      <tr><td class="highlight">8</td><td>Systems of second-order ODEs</td><td>Matrix methods, eigenvalue problems</td><td>Coupled oscillators, normal modes, P11</td></tr>
+      </tbody>
+    </table>
+
+    <p class="explain">
+      <strong>DIY: build a damped oscillator and measure &zeta;.</strong> Connect a 100&mu;F capacitor,
+      a 1K&Omega; resistor, and a 100mH inductor in series. Charge the capacitor to 5V, then close the
+      switch and record the voltage across the capacitor on an oscilloscope. You will see a damped
+      sinusoid. Measure: (1) the oscillation period T &rarr; &omega;<sub>d</sub> = 2&pi;/T, (2) the ratio of
+      successive peaks A<sub>n+1</sub>/A<sub>n</sub> &rarr; &delta; = ln(A<sub>n</sub>/A<sub>n+1</sub>)
+      (the logarithmic decrement) &rarr; &zeta; = &delta; / &radic;(4&pi;&sup2; + &delta;&sup2;).
+      Compare your measured &zeta; to the theoretical value R/(2&radic;(L/C)).
+    </p>
+  </div>
+</div>
+
+
 </div><!-- end .content -->
 
 

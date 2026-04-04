@@ -134,8 +134,9 @@ footer a { color:rgba(255,255,255,0.3); }
   <div class="card-grid">
     <a href="../NASA/artemis-ii/index.html" class="card card-featured">
       <h3><span class="status-dot live"></span> Artemis II <span class="badge badge-live">TRANSLUNAR</span></h3>
-      <p><em>The space between the Moon and the Earth.</em> <strong>MET +2d &mdash; Flight Day 4, translunar coast.</strong> Integrity ~165,000 miles from Earth, ~110,000 miles to the Moon on free-return trajectory. ESM helium branch isolated (no mission impact). Manual piloting test on FD4 &mdash; crew hand-flying Orion for the first time in deep space. Lunar flyby Monday April 7, closest approach ~4,000 miles above the far side. 34 papers, trajectory visualization, space weather feed, AI coverage analysis.</p>
-      <div class="meta">Mission 1.190 &middot; Launch: Apr 1, 2026 22:24 UTC &middot; Splashdown: ~Apr 10, 8:06 PM EDT &middot; FD4 of 10</div>
+      <p><em>The space between the Moon and the Earth.</em> <strong>MET +3d &mdash; Flight Day 5, translunar coast.</strong> Coasting toward the Moon. <a href="../NASA/artemis-ii/lunar-flyby.html" style="color:var(--live-red);font-weight:600;">Lunar flyby Monday April 7</a> &mdash; closest approach ~4,000 miles above the far side, first humans at the Moon since Apollo 17 (1972). ESM helium branch isolated (no mission impact). FD4 thermal management: crew improvised window shading with t-shirt + AZ9 panel. 34 papers, trajectory visualization, space weather feed.</p>
+      <p style="font-size:0.82rem;color:var(--dim);margin-top:0.3rem;">Space weather nominal. Crew beyond magnetosphere, GCR background is primary radiation source. Sweep daemon: autonomous hourly coverage.</p>
+      <div class="meta">Mission 1.190 &middot; Launch: Apr 1, 2026 22:24 UTC &middot; Splashdown: ~Apr 10, 8:06 PM EDT &middot; FD5 of 10 &middot; <a href="../NASA/artemis-ii/lunar-flyby.html">Flyby Guide</a></div>
     </a>
   </div>
 
@@ -159,7 +160,7 @@ footer a { color:rgba(255,255,255,0.3); }
     <a href="../NASA/artemis-ii/papers.html" class="card">
       <h3><span class="status-dot monitoring"></span> Wall-Clock Papers</h3>
       <p>Papers found during active missions, cataloged in real time. <strong>T-3h additions:</strong> AVATAR organ-on-chip (crew's own bone marrow cells), ARCHeR circadian monitoring, 4-nation CubeSat fleet (TACHELES/ATENEA/K-RadCube/SwCube-1), ESM-2 European engine module, and NASA SVS trajectory visualization. 30 papers across 6 sweeps.</p>
-      <div class="meta">30 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC, ESA, NASA Science &middot; Updated v1.4.10</div>
+      <div class="meta">30 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC, ESA, NASA Science &middot; Updated v1.5.9</div>
     </a>
 
     <a href="../OPEN/index.html" class="card">
@@ -170,8 +171,8 @@ footer a { color:rgba(255,255,255,0.3); }
 
     <a href="space-weather.html" class="card" style="border-color:rgba(252,61,33,0.3);">
       <h3><span class="status-dot countdown"></span> Space Weather <span class="badge badge-live">Active</span></h3>
-      <p>Kp 1.33 quiet, R1 minor radio blackout active. CME from March 30 X1.5 flare fully resolved. Bz +0.5 nT northward &mdash; excellent conditions for translunar coast. Solar wind 370 km/s nominal. Crew beyond magnetosphere, GCR background is primary radiation source. Van Allen belt transit completed successfully at launch.</p>
-      <div class="meta">SWPC &middot; Kp 1.33 (quiet) &middot; R1 active &middot; Space weather GO &middot; Updated 21:30Z Apr 3</div>
+      <p>Monitoring conditions for translunar coast and upcoming lunar flyby. Crew beyond magnetosphere &mdash; GCR is primary radiation source. Any solar particle events before the April 7 flyby would test Orion's storm shelter. Van Allen belt transit completed successfully at launch.</p>
+      <div class="meta">SWPC &middot; Translunar coast &middot; Flyby Apr 7 &middot; Updated Apr 4</div>
     </a>
   </div>
 
@@ -185,7 +186,7 @@ footer a { color:rgba(255,255,255,0.3); }
         JPL Horizons (-1024) &middot; DSN Now &middot; USGS Snohomish River &middot;
         NWS Forecast Grid &middot; Open-Meteo &middot; WSDOT Ferries
       </p>
-      <div class="meta">All free, no API keys, verified April 4, 2026 17:00Z</div>
+      <div class="meta">All free, no API keys, verified April 5, 2026 16:00Z</div>
     </div>
 
     <div class="card">
@@ -222,7 +223,7 @@ function updateClocks() {
 updateClocks();
 setInterval(updateClocks, 1000);
 // Set page load timestamp
-document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.4.10)';
+document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.5.9)';
 </script>
 </body>
 </html>
