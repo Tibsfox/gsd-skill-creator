@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git, GSD &amp; Skill Creator — Project Management Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anybody:wght@400;600;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #ddd8d0;
+    --paper: #0e0f12;
+    --surface: #161820;
+    --raised: #1c1e28;
+    --accent: #f0884e;
+    --cyan: #4ec8d4;
+    --green: #56c491;
+    --rose: #e06888;
+    --violet: #9b78d4;
+    --yellow: #d4c456;
+    --code-bg: #0a0b0e;
+    --code-fg: #c8c4bb;
+    --border: #282a34;
+    --dim: #7a7870;
+    --glow: rgba(240, 136, 78, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.74;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 880px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+  /* ── Hero ── */
+  .hero { padding: 4.5rem 0 3rem; border-bottom: 3px solid var(--accent); margin-bottom: 3.5rem; position: relative; }
+  .hero::before { content: ''; position: absolute; top: 0; left: -50%; right: -50%; bottom: 0; background: radial-gradient(ellipse at 30% 80%, var(--glow) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; position: relative; }
+  .hero h1 { font-family: 'Anybody', sans-serif; font-size: clamp(2.2rem, 5.5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.4rem; position: relative; }
+  .hero h1 span { color: var(--cyan); }
+  .hero .sub { font-size: 1.05rem; color: var(--dim); max-width: 640px; line-height: 1.65; position: relative; font-weight: 300; }
+
+  /* ── TOC ── */
+  .toc { background: var(--surface); border: 1px solid var(--border); padding: 2.2rem 2.8rem; margin-bottom: 4rem; border-radius: 4px; }
+  .toc-title { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.2rem; }
+  .toc ol { list-style: none; counter-reset: toc; columns: 2; column-gap: 2.5rem; }
+  @media (max-width: 600px) { .toc ol { columns: 1; } }
+  .toc > ol > li { counter-increment: toc; margin-bottom: 0.45rem; break-inside: avoid; }
+  .toc > ol > li::before { content: counter(toc, decimal-leading-zero); font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--accent); margin-right: 0.7rem; }
+  .toc a { color: var(--ink); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+  .toc a:hover { color: var(--accent); }
+
+  /* ── Part Divider ── */
+  .part { margin: 4rem 0 2.5rem; padding: 1.5rem 0; border-top: 2px solid var(--border); }
+  .part-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); }
+  .part h2 { font-family: 'Anybody', sans-serif; font-size: 1.8rem; font-weight: 800; margin-top: 0.4rem; }
+
+  /* ── Sections ── */
+  .section { margin-bottom: 3.5rem; scroll-margin-top: 2rem; }
+  .sn { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+  h2 { font-family: 'Anybody', sans-serif; font-size: 1.55rem; font-weight: 800; line-height: 1.25; margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.8rem; }
+  h4 { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--yellow); margin-top: 1.6rem; margin-bottom: 0.6rem; }
+  p { margin-bottom: 1rem; }
+  strong { font-weight: 600; }
+  em { font-style: italic; color: var(--dim); }
+
+  /* ── Code ── */
+  code { font-family: 'Space Mono', monospace; font-size: 0.84em; background: var(--raised); padding: 0.15em 0.45em; border-radius: 3px; color: var(--cyan); }
+  pre { background: var(--code-bg); color: var(--code-fg); padding: 1.4rem 1.6rem; border-radius: 4px; overflow-x: auto; margin: 1.2rem 0 1.5rem; line-height: 1.55; font-size: 0.84rem; border: 1px solid var(--border); position: relative; }
+  pre code { background: none; padding: 0; color: inherit; }
+  .cm { color: #5a5e6a; }
+  .kw { color: #7ec89e; }
+  .str { color: #d4a44e; }
+  .flag { color: #e06888; }
+  .pre-label { position: absolute; top: 0.5rem; right: 0.8rem; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); opacity: 0.6; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: 0.92rem; }
+  th { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; padding: 0.8rem 1rem; background: var(--surface); color: var(--accent); font-weight: 400; border-bottom: 2px solid var(--border); }
+  td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+
+  /* ── Cards ── */
+  .card { background: var(--raised); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 1.5rem 1.8rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+  .card.cyan { border-left-color: var(--cyan); }
+  .card.green { border-left-color: var(--green); }
+  .card.rose { border-left-color: var(--rose); }
+  .card.violet { border-left-color: var(--violet); }
+  .card.yellow { border-left-color: var(--yellow); }
+  .card h4 { margin-top: 0; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ── Callouts ── */
+  .callout { background: var(--surface); border-left: 4px solid var(--yellow); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; font-size: 0.95rem; }
+  .callout.warn { border-left-color: var(--rose); }
+  .callout.tip { border-left-color: var(--green); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ── Flow Diagrams ── */
+  .flow { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1.5rem 0; }
+  .flow-step { background: var(--raised); border: 1px solid var(--border); padding: 0.4rem 0.85rem; border-radius: 3px; font-size: 0.86rem; font-weight: 500; }
+  .flow-arrow { font-family: 'Space Mono', monospace; color: var(--dim); font-size: 1rem; }
+
+  .diagram { background: var(--raised); border: 1px solid var(--border); padding: 1.6rem; margin: 1.5rem 0; border-radius: 4px; }
+  .diagram pre { background: none; color: var(--ink); border: none; margin: 0; padding: 0; font-size: 0.8rem; line-height: 1.7; }
+
+  /* ── Scenarios ── */
+  .scenario { background: var(--surface); border: 1px solid var(--border); padding: 1.8rem 2rem; margin: 2rem 0; border-radius: 4px; }
+  .scenario-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); display: inline-block; margin-bottom: 0.6rem; }
+  .scenario h3 { margin-top: 0; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  .footer { margin-top: 4rem; padding-top: 2rem; border-top: 2px solid var(--border); font-size: 0.85rem; color: var(--dim); }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .page { padding: 1.5rem 1rem 4rem; }
+    .hero { padding: 2.5rem 0 2rem; }
+    pre { padding: 1rem; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════════════════════════════════════════════════ HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Solo Developers &amp; Teams</div>
+  <h1>Managing Projects with <span>Git</span>, GSD &amp; Skill Creator</h1>
+  <p class="sub">A complete guide to version control, branching strategies, team collaboration, inbox processing, and the folder structures that hold it all together — from your first commit to production deployment.</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════ TOC -->
+<nav class="toc">
+  <div class="toc-title">Contents</div>
+  <ol>
+    <li><a href="#why-git">Why Git Matters</a></li>
+    <li><a href="#git-basics">Git in 10 Minutes</a></li>
+    <li><a href="#branching">Branching &amp; Merging</a></li>
+    <li><a href="#conflicts">Resolving Merge Conflicts</a></li>
+    <li><a href="#versioning">Versioning &amp; Tags</a></li>
+    <li><a href="#worktrees">Git Worktrees</a></li>
+    <li><a href="#workflows">Dev → Alpha → Beta → Prod</a></li>
+    <li><a href="#gsd-git">How GSD Uses Git</a></li>
+    <li><a href="#folders">Skill Creator Folder Structure</a></li>
+    <li><a href="#inbox">Inbox Processing Pipeline</a></li>
+    <li><a href="#solo">Solo Developer Workflow</a></li>
+    <li><a href="#teams">Team Collaboration</a></li>
+    <li><a href="#shared-repos">Shared Repos Without GitHub</a></li>
+    <li><a href="#hooks">Git Hooks &amp; Automation</a></li>
+    <li><a href="#security">Agent Isolation with Worktrees</a></li>
+    <li><a href="#recipes">Quick Reference Recipes</a></li>
+  </ol>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════════════ PART 1 -->
+<div class="part">
+  <div class="part-label">Part One</div>
+  <h2>Understanding Git</h2>
+</div>
+
+<!-- ─── 01 ─── -->
+<section class="section" id="why-git">
+  <span class="sn">01</span>
+  <h2>Why Git Matters</h2>
+
+  <p>Git is a version control system. It tracks every change you make to your files and lets you go back to any previous version. Think of it as an infinite undo history that also lets multiple people work on the same project simultaneously without overwriting each other's work.</p>
+
+  <p>When combined with GSD and Skill Creator, Git becomes the backbone of the entire system. GSD makes atomic commits after every completed task. Skill Creator's post-commit hooks observe those commits to detect patterns. The DACP system uses Git state to determine handoff context. Without Git, none of this works.</p>
+
+  <p>If you're coming to Git for the first time, the next section will get you up to speed. If you already know Git, skip to <a href="#branching">section 03</a>.</p>
+</section>
+
+
+<!-- ─── 02 ─── -->
+<section class="section" id="git-basics">
+  <span class="sn">02</span>
+  <h2>Git in 10 Minutes</h2>
+
+  <h3>The Three Places Your Files Live</h3>
+  <p>Git has three areas that files move between. Understanding these three areas is the single most important concept in Git:</p>
+
+  <div class="diagram">
+    <pre>
+  <span class="kw">Working Directory</span>        <span class="kw">Staging Area</span>           <span class="kw">Repository</span>
+  (your actual files)      (what's about to         (permanent history)
+                            be committed)
+
+  You edit files here  ──→  git add  ──→  git commit  ──→  Saved forever
+                            (pick what                     (snapshot with
+                             to include)                    a message)
+    </pre>
+  </div>
+
+  <p><strong>Working directory</strong> is just your files on disk. Edit them however you like.</p>
+  <p><strong>Staging area</strong> (also called "index") is where you assemble what you want to save. You pick and choose which changes to include. This is powerful — if you changed 5 files but only want to save 3 of them right now, you stage those 3.</p>
+  <p><strong>Repository</strong> is the permanent record. Once committed, a change is (almost) impossible to lose.</p>
+
+  <h3>Essential Commands</h3>
+
+  <pre><code><span class="cm"># Create a new git repository in the current folder</span>
+<span class="kw">git init</span>
+
+<span class="cm"># See what's changed since the last commit</span>
+<span class="kw">git status</span>
+
+<span class="cm"># Stage specific files for the next commit</span>
+<span class="kw">git add</span> src/app.ts src/types.ts
+
+<span class="cm"># Stage everything that's changed</span>
+<span class="kw">git add</span> <span class="flag">.</span>
+
+<span class="cm"># Commit the staged changes with a message</span>
+<span class="kw">git commit</span> <span class="flag">-m</span> <span class="str">"feat(auth): add login form with email validation"</span>
+
+<span class="cm"># See the history of commits</span>
+<span class="kw">git log</span> <span class="flag">--oneline</span>
+
+<span class="cm"># See what changed in a file</span>
+<span class="kw">git diff</span> src/app.ts</code></pre>
+
+  <div class="callout tip">
+    <strong>The golden rule:</strong> commit often, with clear messages. A commit should represent one logical change — "add login form," "fix password validation bug," "update user schema." If your commit message needs the word "and" in it, you're probably bundling too much into one commit.
+  </div>
+
+  <h3>Reading Git Status</h3>
+  <p>When you run <code>git status</code>, Git tells you exactly what's going on:</p>
+  <pre><code><span class="cm"># Untracked files — Git has never seen these before</span>
+<span class="rose">Untracked files:</span>
+  src/new-feature.ts
+
+<span class="cm"># Modified — changed since last commit, but not staged yet</span>
+<span class="rose">Changes not staged for commit:</span>
+  modified: src/app.ts
+
+<span class="cm"># Staged — ready to be committed</span>
+<span class="green">Changes to be committed:</span>
+  new file: src/types.ts
+  modified: src/utils.ts</code></pre>
+
+  <h3>Undoing Things</h3>
+  <pre><code><span class="cm"># Unstage a file (keep the changes, just remove from staging)</span>
+<span class="kw">git restore</span> <span class="flag">--staged</span> src/app.ts
+
+<span class="cm"># Discard changes to a file (go back to last committed version)</span>
+<span class="kw">git restore</span> src/app.ts
+
+<span class="cm"># Go back to a previous commit (look at it, don't change anything)</span>
+<span class="kw">git log</span> <span class="flag">--oneline</span>       <span class="cm"># find the commit hash</span>
+<span class="kw">git checkout</span> abc1234    <span class="cm"># visit that point in time</span>
+<span class="kw">git checkout</span> main       <span class="cm"># come back to the present</span></code></pre>
+</section>
+
+
+<!-- ─── 03 ─── -->
+<section class="section" id="branching">
+  <span class="sn">03</span>
+  <h2>Branching &amp; Merging</h2>
+
+  <p>A branch is a parallel version of your project. You create a branch, make changes on it, and when you're satisfied, merge those changes back into the main line. The original branch is untouched until you decide to integrate.</p>
+
+  <h3>Why Branch?</h3>
+  <p>Without branches, every change you make affects everyone immediately. If you're building a new feature and it's half-finished, the whole project is in a broken state. Branches let you work in isolation — you can break things, experiment, and iterate without affecting anyone else (or your own stable codebase).</p>
+
+  <h3>Creating and Switching Branches</h3>
+  <pre><code><span class="cm"># Create a new branch and switch to it</span>
+<span class="kw">git checkout</span> <span class="flag">-b</span> feature/user-dashboard
+
+<span class="cm"># This is shorthand for two commands:</span>
+<span class="kw">git branch</span> feature/user-dashboard    <span class="cm"># create it</span>
+<span class="kw">git checkout</span> feature/user-dashboard   <span class="cm"># switch to it</span>
+
+<span class="cm"># List all branches (* marks the current one)</span>
+<span class="kw">git branch</span>
+  * feature/user-dashboard
+    main
+
+<span class="cm"># Switch back to main</span>
+<span class="kw">git checkout</span> main</code></pre>
+
+  <h3>Branch Naming Conventions</h3>
+  <p>Good branch names tell you what the branch is for at a glance:</p>
+
+  <table>
+    <thead><tr><th>Prefix</th><th>Purpose</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>feature/</code></td><td>New functionality</td><td><code>feature/user-dashboard</code></td></tr>
+      <tr><td><code>fix/</code></td><td>Bug fixes</td><td><code>fix/login-redirect-loop</code></td></tr>
+      <tr><td><code>hotfix/</code></td><td>Urgent production fixes</td><td><code>hotfix/payment-crash</code></td></tr>
+      <tr><td><code>chore/</code></td><td>Maintenance, cleanup</td><td><code>chore/update-dependencies</code></td></tr>
+      <tr><td><code>docs/</code></td><td>Documentation</td><td><code>docs/api-reference</code></td></tr>
+      <tr><td><code>refactor/</code></td><td>Code restructuring</td><td><code>refactor/extract-auth-module</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Merging a Branch</h3>
+  <p>When your feature is done, you bring those changes back into <code>main</code>:</p>
+  <pre><code><span class="cm"># 1. Switch to the branch you want to merge INTO</span>
+<span class="kw">git checkout</span> main
+
+<span class="cm"># 2. Merge the feature branch into main</span>
+<span class="kw">git merge</span> feature/user-dashboard
+
+<span class="cm"># 3. Delete the branch (it's been merged, you don't need it)</span>
+<span class="kw">git branch</span> <span class="flag">-d</span> feature/user-dashboard</code></pre>
+
+  <p>If nobody else changed <code>main</code> while you were working, Git does a "fast-forward merge" — it just moves the pointer ahead. No merge commit needed. If <code>main</code> did change, Git creates a merge commit that combines both histories.</p>
+</section>
+
+
+<!-- ─── 04 ─── -->
+<section class="section" id="conflicts">
+  <span class="sn">04</span>
+  <h2>Resolving Merge Conflicts</h2>
+
+  <p>A merge conflict happens when two branches changed the same lines in the same file. Git can't automatically decide whose version to keep, so it asks you.</p>
+
+  <h3>What a Conflict Looks Like</h3>
+  <p>When Git finds a conflict during a merge, it marks the file with conflict markers:</p>
+  <pre><code>function getGreeting(name: string) {
+<<<<<<< HEAD
+  return `Hello, ${name}! Welcome back.`;
+=======
+  return `Hey ${name}, good to see you!`;
+>>>>>>> feature/casual-greetings
+}</code></pre>
+
+  <p>The file now has three sections:</p>
+  <ul>
+    <li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> — your current branch's version</li>
+    <li><code>=======</code> — the dividing line</li>
+    <li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/casual-greetings</code> — the incoming branch's version</li>
+  </ul>
+
+  <h3>How to Resolve</h3>
+  <p>You resolve a conflict by editing the file to be exactly what you want. Remove the conflict markers and choose (or combine) the code:</p>
+  <pre><code><span class="cm">// Option A: Keep your version</span>
+function getGreeting(name: string) {
+  return `Hello, ${name}! Welcome back.`;
+}
+
+<span class="cm">// Option B: Keep theirs</span>
+function getGreeting(name: string) {
+  return `Hey ${name}, good to see you!`;
+}
+
+<span class="cm">// Option C: Combine both (this is the most common choice)</span>
+function getGreeting(name: string, casual = false) {
+  return casual
+    ? `Hey ${name}, good to see you!`
+    : `Hello, ${name}! Welcome back.`;
+}</code></pre>
+
+  <p>After editing, tell Git the conflict is resolved:</p>
+  <pre><code><span class="kw">git add</span> src/greeting.ts        <span class="cm"># mark as resolved</span>
+<span class="kw">git commit</span>                      <span class="cm"># complete the merge</span></code></pre>
+
+  <div class="callout tip">
+    <strong>Preventing conflicts:</strong> The best way to handle conflicts is to avoid them. Keep branches short-lived (merge within a few days, not weeks). Pull from main frequently. Communicate with your team about which files you're working on.
+  </div>
+
+  <h3>Aborting a Merge</h3>
+  <p>If a merge gets too messy and you want to start over:</p>
+  <pre><code><span class="kw">git merge</span> <span class="flag">--abort</span>    <span class="cm"># go back to before the merge started</span></code></pre>
+</section>
+
+
+<!-- ─── 05 ─── -->
+<section class="section" id="versioning">
+  <span class="sn">05</span>
+  <h2>Versioning &amp; Tags</h2>
+
+  <p>Tags mark specific points in your history as important — usually releases. While branches move forward as you add commits, tags are permanent bookmarks.</p>
+
+  <h3>Semantic Versioning</h3>
+  <p>The standard format is <code>MAJOR.MINOR.PATCH</code>:</p>
+
+  <table>
+    <thead><tr><th>Part</th><th>When to Increment</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>MAJOR</strong></td><td>Breaking changes that require users to update their code</td><td>1.0.0 → 2.0.0</td></tr>
+      <tr><td><strong>MINOR</strong></td><td>New features that are backward-compatible</td><td>1.0.0 → 1.1.0</td></tr>
+      <tr><td><strong>PATCH</strong></td><td>Bug fixes, no new features</td><td>1.1.0 → 1.1.1</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Creating Tags</h3>
+  <pre><code><span class="cm"># Create an annotated tag (recommended — includes message and author)</span>
+<span class="kw">git tag</span> <span class="flag">-a</span> v1.2.0 <span class="flag">-m</span> <span class="str">"Release 1.2.0: add user dashboard and API caching"</span>
+
+<span class="cm"># List all tags</span>
+<span class="kw">git tag</span>
+
+<span class="cm"># See details about a specific tag</span>
+<span class="kw">git show</span> v1.2.0
+
+<span class="cm"># Check out a specific release</span>
+<span class="kw">git checkout</span> v1.2.0</code></pre>
+
+  <p>Skill Creator uses this exact convention — v1.49.6 means major version 1, minor version 49, patch 6. The CHANGELOG maps each version to its phase count, test count, and shipped features.</p>
+</section>
+
+
+<!-- ─── 06 ─── -->
+<section class="section" id="worktrees">
+  <span class="sn">06</span>
+  <h2>Git Worktrees</h2>
+
+  <p>A worktree lets you have multiple branches checked out simultaneously in different directories, all sharing the same repository. Instead of switching branches (which replaces all your files), you just open a different folder.</p>
+
+  <h3>Why Worktrees?</h3>
+  <p>Switching branches is disruptive. Your editor reloads. Your dev server restarts. Your build cache invalidates. Worktrees avoid all of this — each branch lives in its own directory, running independently.</p>
+
+  <pre><code><span class="cm"># Your main working directory is already on 'main'</span>
+<span class="cm"># Create a worktree for a feature branch in a sibling directory</span>
+<span class="kw">git worktree add</span> ../my-project-feature feature/user-dashboard
+
+<span class="cm"># Now you have:</span>
+<span class="cm">#   ~/projects/my-project/           ← main branch</span>
+<span class="cm">#   ~/projects/my-project-feature/   ← feature branch</span>
+
+<span class="cm"># Both are the same repository — commits in either appear in both</span>
+
+<span class="cm"># List all worktrees</span>
+<span class="kw">git worktree list</span>
+
+<span class="cm"># When done, remove the worktree</span>
+<span class="kw">git worktree remove</span> ../my-project-feature</code></pre>
+
+  <h3>Worktrees + GSD</h3>
+  <p>Worktrees are especially powerful with GSD because each worktree can run its own GSD session. You can have one agent executing Phase 12 in the main worktree while another agent runs tests on Phase 11's output in a feature worktree. The sessions don't interfere because they're in different directories.</p>
+
+  <p>Skill Creator v1.38 formalized this as <strong>per-agent worktree isolation</strong>: each agent type (exec, verify, scout, main) gets its own worktree with a scoped sandbox profile. Cross-agent read access is denied by default, with only the INTEG (integration) role having read-only access across all worktrees. This prevents a compromised agent from accessing credentials or modifying another agent's work.</p>
+</section>
+
+
+<!-- ─── 07 ─── -->
+<section class="section" id="workflows">
+  <span class="sn">07</span>
+  <h2>Dev → Alpha → Beta → Prod</h2>
+
+  <p>For projects with deployment stages, a multi-environment branching strategy keeps unstable code away from users:</p>
+
+  <div class="diagram">
+    <pre>
+  <span class="kw">feature/*</span> ──→ <span class="kw">dev</span> ──→ <span class="kw">alpha</span> ──→ <span class="kw">beta</span> ──→ <span class="kw">main</span> (prod)
+  (wild west)     (integration)  (internal      (external     (stable,
+                                  testing)       testing)      deployed)
+    </pre>
+  </div>
+
+  <table>
+    <thead><tr><th>Branch</th><th>Who Uses It</th><th>Stability</th><th>Merges From</th></tr></thead>
+    <tbody>
+      <tr><td><code>feature/*</code></td><td>Individual developers</td><td>May be broken</td><td>Created from <code>dev</code></td></tr>
+      <tr><td><code>dev</code></td><td>All developers</td><td>Compiles, tests pass</td><td>Merged features</td></tr>
+      <tr><td><code>alpha</code></td><td>Internal team</td><td>Feature-complete, may have bugs</td><td>Promoted from <code>dev</code></td></tr>
+      <tr><td><code>beta</code></td><td>External testers</td><td>Release candidate, minor bugs</td><td>Promoted from <code>alpha</code></td></tr>
+      <tr><td><code>main</code></td><td>End users</td><td>Production-ready</td><td>Promoted from <code>beta</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Promotion Flow</h3>
+  <pre><code><span class="cm"># Developer finishes a feature</span>
+<span class="kw">git checkout</span> dev
+<span class="kw">git merge</span> feature/new-widget
+<span class="kw">git branch</span> <span class="flag">-d</span> feature/new-widget
+
+<span class="cm"># When dev is stable enough for internal testing</span>
+<span class="kw">git checkout</span> alpha
+<span class="kw">git merge</span> dev
+<span class="kw">git tag</span> <span class="flag">-a</span> v2.1.0-alpha.1 <span class="flag">-m</span> <span class="str">"Alpha 1: widget + dashboard"</span>
+
+<span class="cm"># After internal testing passes</span>
+<span class="kw">git checkout</span> beta
+<span class="kw">git merge</span> alpha
+<span class="kw">git tag</span> <span class="flag">-a</span> v2.1.0-beta.1 <span class="flag">-m</span> <span class="str">"Beta 1: tested internally"</span>
+
+<span class="cm"># After beta feedback is addressed</span>
+<span class="kw">git checkout</span> main
+<span class="kw">git merge</span> beta
+<span class="kw">git tag</span> <span class="flag">-a</span> v2.1.0 <span class="flag">-m</span> <span class="str">"Release 2.1.0"</span></code></pre>
+
+  <h3>Hotfixes</h3>
+  <p>When a critical bug hits production, you branch directly from <code>main</code>, fix it, merge it back, then forward-merge the fix through beta, alpha, and dev so everyone has it:</p>
+  <pre><code><span class="kw">git checkout</span> <span class="flag">-b</span> hotfix/payment-crash main
+<span class="cm"># ... fix the bug ...</span>
+<span class="kw">git checkout</span> main  && <span class="kw">git merge</span> hotfix/payment-crash
+<span class="kw">git checkout</span> beta  && <span class="kw">git merge</span> main
+<span class="kw">git checkout</span> alpha && <span class="kw">git merge</span> main
+<span class="kw">git checkout</span> dev   && <span class="kw">git merge</span> main
+<span class="kw">git branch</span> <span class="flag">-d</span> hotfix/payment-crash</code></pre>
+
+  <div class="callout">
+    <strong>Not every project needs all these stages.</strong> A solo developer might use just <code>main</code> + <code>feature/*</code>. A small team might add <code>dev</code>. The full pipeline is for projects with external users and deployment infrastructure.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════ PART 2 -->
+<div class="part">
+  <div class="part-label">Part Two</div>
+  <h2>GSD &amp; Skill Creator Integration</h2>
+</div>
+
+<!-- ─── 08 ─── -->
+<section class="section" id="gsd-git">
+  <span class="sn">08</span>
+  <h2>How GSD Uses Git</h2>
+
+  <p>GSD doesn't just use Git for storage — Git is part of the execution model. Here's what happens behind the scenes:</p>
+
+  <h3>Atomic Task Commits</h3>
+  <p>After every completed task within a plan, GSD creates a git commit. Not after every phase, not after every milestone — after every task. This gives you an extremely fine-grained history. If task 3 of 5 introduced a regression, you can identify exactly which commit caused it and revert just that change.</p>
+
+  <p>Commits follow the Conventional Commits format, enforced by a git hook:</p>
+  <pre><code><span class="str">feat(auth): add email validation to login form</span>
+<span class="str">fix(api): handle null response from user service</span>
+<span class="str">test(dashboard): add integration tests for chart rendering</span>
+<span class="str">docs(readme): update installation instructions</span></code></pre>
+  <p>The format is <code>type(scope): description</code>, where type is one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore. The validate-commit hook blocks any commit that doesn't match this pattern.</p>
+
+  <h3>Git State Awareness</h3>
+  <p>Skill Creator includes a <code>git-state-check</code> script that produces a JSON report of the repository's state at any moment. It detects six states in priority order: CONFLICT (unresolved merge conflicts), MERGING (mid-merge), REBASING (mid-rebase), DETACHED (not on a branch), DIRTY (uncommitted changes), and CLEAN. The report includes branch name, remote tracking info, ahead/behind counts, and lists of staged, unstaged, and untracked files.</p>
+  <p>This state report feeds into the session hooks and pattern detection system. If you start a GSD session with dirty files, the system knows. If you're mid-rebase, it warns you before starting execution.</p>
+
+  <h3>Session State Hooks</h3>
+  <p>On every session start, a hook reads <code>.planning/STATE.md</code> and injects it into the context. This is how GSD remembers where it left off — the hook feeds the agent the current phase, any blockers, and the project configuration. A post-commit hook observes every commit and appends it to <code>sessions.jsonl</code> for pattern analysis.</p>
+</section>
+
+
+<!-- ─── 09 ─── -->
+<section class="section" id="folders">
+  <span class="sn">09</span>
+  <h2>Skill Creator Folder Structure</h2>
+
+  <p>As of v1.49.5, the repository is organized into zones following Linux FHS conventions. Understanding this layout helps you navigate projects and know where things belong.</p>
+
+  <h3>The Zone System (v1.49.4)</h3>
+
+  <table>
+    <thead><tr><th>Zone</th><th>Path</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>projects/</strong></td><td><code>projects/</code></td><td>Your GSD projects. Each subdirectory is an independent project with its own <code>.planning/</code> state. External projects can be linked via <code>.sc-config.json</code>.</td></tr>
+      <tr><td><strong>contrib/</strong></td><td><code>contrib/</code></td><td>Collaboration zone. <code>upstream/</code> for PRs you send to other repos. <code>downstream/staging/</code> for PRs you receive. <code>publishing/</code> for extracted side projects.</td></tr>
+      <tr><td><strong>packs/</strong></td><td><code>packs/</code></td><td>Catalog of educational and domain packs. References source directories in <code>src/</code>.</td></tr>
+      <tr><td><strong>www/</strong></td><td><code>www/</code></td><td>Web staging. <code>site/</code> for generated output, <code>tools/</code> for web tool sources, <code>staging/</code> for pre-publish review.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The .planning/ Directory</h3>
+  <p>Every GSD project has a <code>.planning/</code> directory at its root. This is the state machine:</p>
+
+  <div class="diagram">
+    <pre>
+.planning/
+├── STATE.md                 <span class="cm"># Current position, blockers, context</span>
+├── ROADMAP.md               <span class="cm"># Phase completion status</span>
+├── REQUIREMENTS.md          <span class="cm"># What we're building</span>
+├── PROJECT.md               <span class="cm"># Project definition</span>
+├── config.json              <span class="cm"># GSD mode and settings</span>
+├── staging/                 <span class="cm"># Inbox processing pipeline</span>
+│   ├── inbox/               <span class="cm"># New documents land here</span>
+│   ├── checking/            <span class="cm"># Being processed</span>
+│   ├── attention/           <span class="cm"># Needs human review</span>
+│   ├── ready/               <span class="cm"># Cleared for processing</span>
+│   ├── aside/               <span class="cm"># Deferred</span>
+│   └── queue.jsonl          <span class="cm"># Processing queue</span>
+├── patterns/                <span class="cm"># Observation JSONL logs</span>
+├── bus/                     <span class="cm"># Filesystem message bus</span>
+├── security/                <span class="cm"># Security profiles and audit</span>
+└── phases/                  <span class="cm"># Per-phase plans, summaries, verification</span>
+    ├── phase-001-PLAN.md
+    ├── phase-001-SUMMARY.md
+    ├── phase-001-VERIFICATION.md
+    └── ...
+    </pre>
+  </div>
+
+  <h3>Skill Storage</h3>
+  <p>Skills live in two locations, with project-level overriding user-level:</p>
+  <table>
+    <thead><tr><th>Scope</th><th>Path</th><th>Visibility</th></tr></thead>
+    <tbody>
+      <tr><td>User</td><td><code>~/.claude/skills/</code></td><td>All your projects</td></tr>
+      <tr><td>Project</td><td><code>.claude/skills/</code></td><td>This project only</td></tr>
+    </tbody>
+  </table>
+
+  <h3>External Projects via Config</h3>
+  <p>You don't have to keep all projects inside the Skill Creator repo. The <code>.sc-config.json</code> (gitignored, user-local) lets you reference external directories:</p>
+  <pre><code>{
+  <span class="str">"home"</span>: <span class="str">"projects"</span>,
+  <span class="str">"external_projects"</span>: [
+    { <span class="str">"name"</span>: <span class="str">"my-saas-app"</span>, <span class="str">"path"</span>: <span class="str">"/home/user/code/my-saas-app"</span> },
+    { <span class="str">"name"</span>: <span class="str">"client-site"</span>, <span class="str">"path"</span>: <span class="str">"/home/user/code/client-site"</span> }
+  ]
+}</code></pre>
+  <p>The <code>sc project list</code> command shows both local and external projects.</p>
+</section>
+
+
+<!-- ─── 10 ─── -->
+<section class="section" id="inbox">
+  <span class="sn">10</span>
+  <h2>Inbox Processing Pipeline</h2>
+
+  <p>The staging pipeline is a document intake system that ensures every piece of input — vision documents, requirements, skill proposals, feature requests — goes through hygiene checking and clarity assessment before entering the build queue.</p>
+
+  <h3>The Five States</h3>
+
+  <div class="flow">
+    <div class="flow-step" style="border-color:var(--cyan)">inbox</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step" style="border-color:var(--yellow)">checking</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step" style="border-color:var(--rose)">attention</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step" style="border-color:var(--green)">ready</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step" style="border-color:var(--dim)">aside</div>
+  </div>
+
+  <table>
+    <thead><tr><th>State</th><th>What Happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>inbox</strong></td><td>Document arrives. A companion <code>.meta.json</code> file is created alongside it with the submission timestamp, source, and status. Nothing has been checked yet.</td></tr>
+      <tr><td><strong>checking</strong></td><td>The hygiene scanner runs. It looks for YAML code execution risks, path traversal patterns, zip extraction dangers, and other security concerns. Content is classified by familiarity (trusted/known/stranger). A hygiene report is generated with an overall risk level.</td></tr>
+      <tr><td><strong>attention</strong></td><td>If the hygiene scan flags critical or warning-level risks, the document is moved here and the flow pauses. A human must review the findings before the document can proceed. This is a hard gate — no automatic bypass.</td></tr>
+      <tr><td><strong>ready</strong></td><td>The document passed hygiene and clarity assessment. It's been confirmed by the user (the "anything else?" prompt) and is queued for processing.</td></tr>
+      <tr><td><strong>aside</strong></td><td>The user deferred this document. It can be resubmitted to inbox later via the <code>aside → inbox</code> transition.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Valid State Transitions</h3>
+  <p>Not every transition is allowed. The state machine enforces a specific graph:</p>
+  <div class="diagram">
+    <pre>
+  inbox  ──→ checking ──→ attention ──→ ready
+    │            │   ╲        │   ╲        │
+    │            │    ╲       │    ╲       │
+    ╰──→ aside ←─╯     ╰──→ aside  ╰──→ aside
+         │                     ↑            ↑
+         ╰──→ inbox            │            │
+              (resubmit)     ready ──→ checking
+                             (re-check)
+    </pre>
+  </div>
+
+  <p>Key rules: documents can be set aside from any state. Aside documents can only go back to inbox (start over). Ready documents can be re-checked if something changes. Attention documents can be approved (go to ready), re-checked, or deferred.</p>
+
+  <h3>The Clarity Assessment</h3>
+  <p>After passing hygiene, documents go through a clarity assessment that routes to one of three paths:</p>
+  <ul>
+    <li><strong>Clear</strong> — The document is well-specified and ready to process. User gets an "anything else?" confirmation prompt before queuing.</li>
+    <li><strong>Gaps</strong> — The document has specific missing pieces. The system generates targeted questions about the gaps.</li>
+    <li><strong>Confused</strong> — The document needs fundamental restatement. It's not clear enough to ask useful questions about.</li>
+  </ul>
+
+  <h3>Crash Recovery</h3>
+  <p>The intake flow tracks every step in the metadata file. If the process crashes mid-assessment, <code>resumeIntakeFlow()</code> reads the last completed step and continues from there. You never lose progress through the pipeline.</p>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════ PART 3 -->
+<div class="part">
+  <div class="part-label">Part Three</div>
+  <h2>Working With Others</h2>
+</div>
+
+<!-- ─── 11 ─── -->
+<section class="section" id="solo">
+  <span class="sn">11</span>
+  <h2>Solo Developer Workflow</h2>
+
+  <p>Even as a solo developer, a structured workflow prevents chaos. Here's the recommended approach:</p>
+
+  <div class="scenario">
+    <div class="scenario-label">Scenario</div>
+    <h3>Building a Feature Alone</h3>
+    <pre><code><span class="cm"># 1. Start from main, create a feature branch</span>
+<span class="kw">git checkout</span> main
+<span class="kw">git checkout</span> <span class="flag">-b</span> feature/notifications
+
+<span class="cm"># 2. Initialize a GSD project (if new) or start a new milestone</span>
+/gsd:new-project      <span class="cm"># or /gsd:new-milestone</span>
+/gsd:discuss-phase    <span class="cm"># talk through what you want</span>
+/gsd:plan-phase       <span class="cm"># generate the plan</span>
+
+<span class="cm"># 3. Execute — GSD commits atomically after each task</span>
+/gsd:execute-phase
+
+<span class="cm"># 4. Verify the work</span>
+/gsd:verify-work
+
+<span class="cm"># 5. When the feature is complete, merge back to main</span>
+<span class="kw">git checkout</span> main
+<span class="kw">git merge</span> feature/notifications
+<span class="kw">git tag</span> <span class="flag">-a</span> v1.3.0 <span class="flag">-m</span> <span class="str">"Add notification system"</span>
+<span class="kw">git branch</span> <span class="flag">-d</span> feature/notifications</code></pre>
+  </div>
+
+  <p>The feature branch protects your <code>main</code> branch. If the feature goes sideways, you can abandon the branch entirely. If it works, you get a clean merge with a complete history of atomic commits.</p>
+</section>
+
+
+<!-- ─── 12 ─── -->
+<section class="section" id="teams">
+  <span class="sn">12</span>
+  <h2>Team Collaboration</h2>
+
+  <p>When multiple people work together, Git's distributed nature becomes essential. Each person has a complete copy of the repository. They push changes to a shared location (a remote) and pull other people's changes down.</p>
+
+  <h3>The Shared Remote</h3>
+  <pre><code><span class="cm"># Clone the team repository</span>
+<span class="kw">git clone</span> https://github.com/team/project.git
+
+<span class="cm"># Or if using a shared server (see next section)</span>
+<span class="kw">git clone</span> ssh://server/repos/project.git
+
+<span class="cm"># Push your branch to the remote</span>
+<span class="kw">git push</span> origin feature/my-feature
+
+<span class="cm"># Pull the latest changes from main</span>
+<span class="kw">git checkout</span> main
+<span class="kw">git pull</span> origin main
+
+<span class="cm"># Keep your feature branch up to date with main</span>
+<span class="kw">git checkout</span> feature/my-feature
+<span class="kw">git merge</span> main    <span class="cm"># or: git rebase main</span></code></pre>
+
+  <h3>Team + GSD Workflow</h3>
+  <p>When a team uses GSD, each developer runs their own GSD sessions on their own feature branches. The <code>.planning/</code> directory tracks per-person state. The key coordination points:</p>
+
+  <ul>
+    <li><strong>Project setup:</strong> One person creates the project, defines the roadmap, and pushes it. Everyone else pulls.</li>
+    <li><strong>Phase assignment:</strong> Different team members claim different phases or milestones. The roadmap shows who's working on what.</li>
+    <li><strong>Skills sharing:</strong> Project-level skills (in <code>.claude/skills/</code>) are committed to Git and shared. When one developer creates a useful skill, everyone benefits on the next pull.</li>
+    <li><strong>Merge reviews:</strong> Before merging a feature branch into <code>dev</code>, another team member reviews the changes. GSD's <code>SUMMARY.md</code> and <code>VERIFICATION.md</code> files make reviews faster — the reviewer reads what the agent built and verified instead of reading every line of code.</li>
+  </ul>
+
+  <div class="card cyan">
+    <h4>Skill Creator's Contrib Zone</h4>
+    <p>The <code>contrib/</code> directory is designed for team collaboration: <code>upstream/</code> holds PRs you're preparing to send to shared repos, <code>downstream/staging/</code> holds incoming PRs to review, and <code>publishing/</code> holds side projects extracted for independent release. <code>sc contrib status</code> shows the count in each direction.</p>
+  </div>
+</section>
+
+
+<!-- ─── 13 ─── -->
+<section class="section" id="shared-repos">
+  <span class="sn">13</span>
+  <h2>Shared Repos Without GitHub</h2>
+
+  <p>You don't need GitHub, GitLab, or any cloud service. Git works perfectly with a bare repository on a shared filesystem — NFS, a Samba share, or even a USB drive.</p>
+
+  <h3>Setting Up a Bare Repository</h3>
+  <p>A "bare" repository has no working directory — it's just the Git database. It exists solely as a central point for pushing and pulling.</p>
+
+  <pre><code><span class="cm"># On the shared drive (NFS mount, Samba share, etc.)</span>
+<span class="kw">mkdir</span> /mnt/shared/repos/my-project.git
+<span class="kw">cd</span> /mnt/shared/repos/my-project.git
+<span class="kw">git init</span> <span class="flag">--bare</span>
+
+<span class="cm"># On Developer A's machine — create the project and push</span>
+<span class="kw">cd</span> ~/projects/my-project
+<span class="kw">git init</span>
+<span class="kw">git add</span> .
+<span class="kw">git commit</span> <span class="flag">-m</span> <span class="str">"chore: initial project structure"</span>
+<span class="kw">git remote add</span> origin /mnt/shared/repos/my-project.git
+<span class="kw">git push</span> <span class="flag">-u</span> origin main
+
+<span class="cm"># On Developer B's machine — clone</span>
+<span class="kw">git clone</span> /mnt/shared/repos/my-project.git ~/projects/my-project</code></pre>
+
+  <h3>SSH-Based Sharing</h3>
+  <p>If the shared location is on another machine accessible via SSH:</p>
+  <pre><code><span class="cm"># Create the bare repo on the server</span>
+<span class="kw">ssh</span> server <span class="str">"mkdir -p /repos/my-project.git && cd /repos/my-project.git && git init --bare"</span>
+
+<span class="cm"># Clone via SSH</span>
+<span class="kw">git clone</span> ssh://server/repos/my-project.git</code></pre>
+
+  <h3>Local Network Discovery</h3>
+  <p>For small teams on a LAN, you can even serve repos temporarily with Git's built-in server:</p>
+  <pre><code><span class="cm"># On the machine with the repo (serves it read-only)</span>
+<span class="kw">git daemon</span> <span class="flag">--reuseaddr --base-path=/repos</span> /repos
+
+<span class="cm"># Other machines can clone via:</span>
+<span class="kw">git clone</span> git://192.168.1.50/my-project.git</code></pre>
+
+  <div class="callout warn">
+    <strong>NFS locking caveat:</strong> Git relies on atomic file operations. Most NFS implementations handle this fine, but NFS v3 with poor locking can cause corruption if two people push simultaneously. Use NFS v4 or SSH-based remotes for teams larger than 3–4 people.
+  </div>
+</section>
+
+
+<!-- ─── 14 ─── -->
+<section class="section" id="hooks">
+  <span class="sn">14</span>
+  <h2>Git Hooks &amp; Automation</h2>
+
+  <p>Git hooks are scripts that run automatically at specific points in the Git workflow. Skill Creator ships with several:</p>
+
+  <h3>The Validate-Commit Hook</h3>
+  <p>Runs before every commit is accepted. It parses the commit message and rejects anything that doesn't follow Conventional Commits format. The regex check enforces: valid type prefix, optional scope in parentheses, colon-space separator, subject line under 72 characters. This hook is POSIX-compatible (works on macOS Bash 3.2).</p>
+
+  <h3>The Session-State Hook</h3>
+  <p>Runs on every session start. It reads <code>.planning/STATE.md</code> and outputs the first 20 lines as a project state reminder. If no <code>.planning/</code> exists, it suggests running <code>/gsd:new-project</code>. It also reads the project config to display the current mode.</p>
+
+  <h3>The Post-Commit Hook</h3>
+  <p>Runs after every successful commit. It appends commit metadata to <code>sessions.jsonl</code> — timestamp, hash, message, files changed. This powers the pattern detection system and the historical trends dashboard (commit type distribution, velocity curves, file hotspots).</p>
+
+  <h3>Phase Boundary Check</h3>
+  <p>Prevents accidental cross-phase work by checking that the current git state aligns with the active phase in <code>.planning/</code>. If you're supposed to be in Phase 12 but the commit references Phase 11 files, the hook warns you.</p>
+
+  <h3>Installing Hooks</h3>
+  <pre><code><span class="cm"># GSD installs its hooks automatically during setup</span>
+npx get-shit-done-cc@latest    <span class="cm"># includes hook installation</span>
+
+<span class="cm"># Or manually copy hooks into your project</span>
+<span class="kw">cp</span> project-claude/hooks/validate-commit.sh .claude/hooks/
+<span class="kw">cp</span> project-claude/hooks/session-state.sh .claude/hooks/
+<span class="kw">cp</span> project-claude/hooks/post-commit .git/hooks/</code></pre>
+</section>
+
+
+<!-- ─── 15 ─── -->
+<section class="section" id="security">
+  <span class="sn">15</span>
+  <h2>Agent Isolation with Worktrees</h2>
+
+  <p>v1.38 introduced per-agent worktree isolation as a security boundary. This is relevant for teams running multiple AI agents simultaneously on the same repository.</p>
+
+  <h3>How It Works</h3>
+  <p>Each agent type gets its own git worktree with a scoped sandbox profile:</p>
+
+  <table>
+    <thead><tr><th>Agent Type</th><th>Worktree</th><th>Access</th></tr></thead>
+    <tbody>
+      <tr><td><strong>exec</strong></td><td>Own worktree, own branch</td><td>Read/write own files only</td></tr>
+      <tr><td><strong>verify</strong></td><td>Own worktree, read-only checkout</td><td>Read everything, write nothing</td></tr>
+      <tr><td><strong>scout</strong></td><td>Own worktree, ephemeral</td><td>Read own, no cross-agent access</td></tr>
+      <tr><td><strong>main</strong></td><td>Primary worktree</td><td>Full access</td></tr>
+      <tr><td><strong>integ</strong></td><td>Integration worktree</td><td>Read-only across all agent worktrees</td></tr>
+    </tbody>
+  </table>
+
+  <p>Cross-agent read denial is verified programmatically — an exec agent literally cannot see the verify agent's files. The <code>WorktreeCreate</code> hook auto-generates a sandbox profile (bubblewrap on Linux, Seatbelt on macOS) for each new worktree, ensuring isolation is enforced at the OS level, not just at the application level.</p>
+
+  <p>This matters because a compromised or misbehaving agent can't access credentials, modify another agent's work, or exfiltrate data from a neighboring worktree. The isolation is structural — built into the filesystem and enforced by the operating system's process sandbox.</p>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════ PART 4 -->
+<div class="part">
+  <div class="part-label">Part Four</div>
+  <h2>Quick Reference</h2>
+</div>
+
+<!-- ─── 16 ─── -->
+<section class="section" id="recipes">
+  <span class="sn">16</span>
+  <h2>Quick Reference Recipes</h2>
+
+  <div class="card cyan">
+    <h4>Start a New GSD Project with Git</h4>
+    <pre><code><span class="kw">mkdir</span> my-project && <span class="kw">cd</span> my-project
+<span class="kw">git init</span>
+<span class="cm"># open Claude Code with GSD installed</span>
+/gsd:new-project
+<span class="kw">git add</span> . && <span class="kw">git commit</span> <span class="flag">-m</span> <span class="str">"chore: initialize project with GSD"</span></code></pre>
+  </div>
+
+  <div class="card green">
+    <h4>Save Your Work and Come Back Later</h4>
+    <pre><code>/gsd:pause-work       <span class="cm"># creates handoff document</span>
+<span class="kw">git add</span> . && <span class="kw">git commit</span> <span class="flag">-m</span> <span class="str">"chore: pause work at phase 12 task 3"</span>
+<span class="cm"># ... days later ...</span>
+/gsd:resume-work      <span class="cm"># reads handoff, continues exactly where you left off</span></code></pre>
+  </div>
+
+  <div class="card violet">
+    <h4>Work on Two Features Simultaneously with Worktrees</h4>
+    <pre><code><span class="cm"># Feature A in main directory</span>
+<span class="kw">git checkout</span> <span class="flag">-b</span> feature/auth
+
+<span class="cm"># Feature B in a separate worktree</span>
+<span class="kw">git worktree add</span> ../my-project-api feature/api-cache
+
+<span class="cm"># Work on either by cd-ing into the right directory</span>
+<span class="kw">cd</span> ~/projects/my-project/       <span class="cm"># auth feature</span>
+<span class="kw">cd</span> ~/projects/my-project-api/   <span class="cm"># api cache feature</span>
+
+<span class="cm"># Each can run its own GSD session independently</span></code></pre>
+  </div>
+
+  <div class="card rose">
+    <h4>Emergency Revert a Bad Phase</h4>
+    <pre><code><span class="cm"># Find the commit before the bad phase started</span>
+<span class="kw">git log</span> <span class="flag">--oneline</span>
+
+<span class="cm"># Revert all commits from the bad phase</span>
+<span class="kw">git revert</span> HEAD~5..HEAD    <span class="cm"># reverts the last 5 commits</span>
+
+<span class="cm"># Or, nuclear option: reset to before the phase (destroys history)</span>
+<span class="kw">git reset</span> <span class="flag">--hard</span> abc1234
+<span class="cm"># ⚠️ Only do this on your own branch, never on shared branches</span></code></pre>
+  </div>
+
+  <div class="card yellow">
+    <h4>Share a Repo on a Local Network</h4>
+    <pre><code><span class="cm"># Set up a bare repo on NFS</span>
+<span class="kw">ssh</span> nas <span class="str">"mkdir -p /share/git/project.git && cd /share/git/project.git && git init --bare"</span>
+
+<span class="cm"># Each team member</span>
+<span class="kw">git clone</span> ssh://nas/share/git/project.git
+<span class="cm"># ... work, commit ...</span>
+<span class="kw">git push</span> origin feature/my-work
+<span class="kw">git pull</span> origin main</code></pre>
+  </div>
+
+  <div class="card">
+    <h4>The Daily Team Routine</h4>
+    <pre><code><span class="cm"># Morning: pull latest, update your branch</span>
+<span class="kw">git checkout</span> main && <span class="kw">git pull</span>
+<span class="kw">git checkout</span> feature/my-work && <span class="kw">git merge</span> main
+
+<span class="cm"># Work: GSD executes, commits atomically</span>
+/gsd:resume-work
+
+<span class="cm"># End of day: push your branch</span>
+<span class="kw">git push</span> origin feature/my-work
+
+<span class="cm"># When feature is done: merge to dev, delete branch</span>
+<span class="kw">git checkout</span> dev && <span class="kw">git merge</span> feature/my-work
+<span class="kw">git push</span> origin dev
+<span class="kw">git branch</span> <span class="flag">-d</span> feature/my-work</code></pre>
+  </div>
+
+  <h3>Git Cheatsheet</h3>
+  <table>
+    <thead><tr><th>Task</th><th>Command</th></tr></thead>
+    <tbody>
+      <tr><td>Create repo</td><td><code>git init</code></td></tr>
+      <tr><td>Clone repo</td><td><code>git clone &lt;url&gt;</code></td></tr>
+      <tr><td>See status</td><td><code>git status</code></td></tr>
+      <tr><td>See history</td><td><code>git log --oneline</code></td></tr>
+      <tr><td>Stage files</td><td><code>git add &lt;files&gt;</code></td></tr>
+      <tr><td>Commit</td><td><code>git commit -m "msg"</code></td></tr>
+      <tr><td>New branch</td><td><code>git checkout -b name</code></td></tr>
+      <tr><td>Switch branch</td><td><code>git checkout name</code></td></tr>
+      <tr><td>Merge</td><td><code>git merge branch</code></td></tr>
+      <tr><td>Push</td><td><code>git push origin branch</code></td></tr>
+      <tr><td>Pull</td><td><code>git pull origin branch</code></td></tr>
+      <tr><td>Tag a release</td><td><code>git tag -a v1.0.0 -m "msg"</code></td></tr>
+      <tr><td>List branches</td><td><code>git branch</code></td></tr>
+      <tr><td>Delete branch</td><td><code>git branch -d name</code></td></tr>
+      <tr><td>Create worktree</td><td><code>git worktree add path branch</code></td></tr>
+      <tr><td>List worktrees</td><td><code>git worktree list</code></td></tr>
+      <tr><td>Abort merge</td><td><code>git merge --abort</code></td></tr>
+      <tr><td>See diff</td><td><code>git diff</code></td></tr>
+      <tr><td>Stash changes</td><td><code>git stash</code> / <code>git stash pop</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER -->
+<footer class="footer">
+  <p>
+    <strong>GSD:</strong> <a href="https://github.com/gsd-build/get-shit-done">github.com/gsd-build/get-shit-done</a><br>
+    <strong>Skill Creator:</strong> <a href="https://github.com/Tibsfox/gsd-skill-creator">github.com/Tibsfox/gsd-skill-creator</a>
+  </p>
+  <p style="margin-top: 1rem;">Built from GSD and Skill Creator source code, hooks, release notes, and documentation. Both projects are MIT licensed.</p>
+</footer>
+
+</div>
+</body>
+</html>

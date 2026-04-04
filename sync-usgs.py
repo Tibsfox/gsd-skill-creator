@@ -36,6 +36,7 @@ SYNC_DIRS = [
     "MUS/nodes",  # Knowledge node deep-dive pages
     "CSP",  # Computer Science & Programming
     "LIVE",  # Real-time monitoring dashboards
+    "GSD",   # GSD & Skill Creator architecture docs
 ]
 
 dry_run = "--dry-run" in sys.argv
