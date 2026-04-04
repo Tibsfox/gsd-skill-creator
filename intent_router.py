@@ -104,10 +104,69 @@ def fts_search(query, cur, limit=10):
              'score': float(r[4]), 'lane': 'fts'} for r in cur.fetchall()]
 
 
+def _concept_lane_available(cur):
+    """Check if concept embeddings exist."""
+    try:
+        cur.execute("""
+            SELECT column_name FROM information_schema.columns
+            WHERE table_schema = 'artemis' AND table_name = 'concepts'
+              AND column_name = 'embedding'
+        """)
+        if not cur.fetchone():
+            return False
+        cur.execute("SELECT count(*) FROM artemis.concepts WHERE embedding IS NOT NULL")
+        return cur.fetchone()[0] > 0
+    except Exception:
+        return False
+
+
+def concept_search(query_emb, cur, limit=20):
+    """Find matching concepts by embedding similarity, return their referenced pages."""
+    cur.execute("""
+        SELECT c.id, c.name, c.category,
+               1 - (c.embedding <=> %s::vector) as sim
+        FROM artemis.concepts c
+        WHERE c.embedding IS NOT NULL
+        ORDER BY c.embedding <=> %s::vector
+        LIMIT 10
+    """, (query_emb.tolist(), query_emb.tolist()))
+    top_concepts = cur.fetchall()
+    if not top_concepts:
+        return []
+
+    page_scores = {}
+    page_meta = {}
+    for cid, cname, ccat, csim in top_concepts:
+        cur.execute("""
+            SELECT cr.page_id, cr.ref_type, rp.path, rp.title, rp.category
+            FROM artemis.concept_refs cr
+            JOIN artemis.research_pages rp ON rp.id = cr.page_id
+            WHERE cr.concept_id = %s
+        """, (cid,))
+        for page_id, ref_type, path, title, category in cur.fetchall():
+            type_weight = {'definition': 1.0, 'reference': 0.7, 'related': 0.5}.get(ref_type, 0.5)
+            score = csim * type_weight
+            if page_id not in page_scores or score > page_scores[page_id]:
+                page_scores[page_id] = score
+                page_meta[page_id] = {
+                    'id': page_id, 'title': title, 'path': path,
+                    'category': category, 'score': score, 'lane': 'concept',
+                    'concept': cname
+                }
+
+    ranked = sorted(page_scores.items(), key=lambda x: -x[1])[:limit]
+    return [page_meta[pid] for pid, _ in ranked]
+
+
 def hybrid_rrf(query, query_emb, cur, limit=10):
-    """Reciprocal Rank Fusion of vector + FTS results, boosted by PageRank."""
+    """Reciprocal Rank Fusion of vector + FTS + concept results, boosted by PageRank."""
     vector_results = vector_search(query_emb, cur, limit=limit * 3)
     fts_results = fts_search(query, cur, limit=limit * 3)
+
+    # Lane 3: Concept search (if available)
+    concept_results = []
+    if _concept_lane_available(cur):
+        concept_results = concept_search(query_emb, cur, limit=limit * 3)
 
     # Build RRF scores
     scores = {}
@@ -127,6 +186,15 @@ def hybrid_rrf(query, query_emb, cur, limit=10):
         else:
             metadata[pid] = r
             metadata[pid]['lanes'] = ['fts']
+
+    for rank, r in enumerate(concept_results):
+        pid = r['id']
+        scores[pid] = scores.get(pid, 0) + 1.0 / (RRF_K + rank + 1)
+        if pid in metadata:
+            metadata[pid]['lanes'].append('concept')
+        else:
+            metadata[pid] = r
+            metadata[pid]['lanes'] = ['concept']
 
     # PageRank boost (10%)
     if scores:
