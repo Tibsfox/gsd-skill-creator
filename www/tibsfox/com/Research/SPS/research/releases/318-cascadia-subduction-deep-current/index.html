@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 318&deg; &mdash; Cascadia Subduction Deep Current &mdash; E=5 &mdash; Geophysics &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #263238, #0D0D0D); color: #B0BEC5; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(26,35,126,0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: #1A237E; border: none; padding: 0; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #1A237E; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #1A237E; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .geo-banner { background: linear-gradient(135deg, #0D0D0D, #1A237E, #263238); border: 2px solid #5C6BC0; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .geo-banner h3 { margin: 0 0 0.5rem; color: #C5CAE9; font-size: 1.1rem; }
+    .geo-banner p { color: #B0BEC5; margin: 0.3rem 0; }
+    .depth-display { text-align: center; font-size: 1.2rem; font-weight: 700; color: #1A237E; font-family: 'Georgia', serif; letter-spacing: 0.04em; margin: 1.5rem 0 0.25rem; }
+    .depth-sub { text-align: center; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .plates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.5rem 0; }
+    .plate-card { border-radius: 6px; padding: 1rem 1.2rem; }
+    .plate-card.jdf { background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; }
+    .plate-card.nam { background: linear-gradient(135deg, #263238, #37474F); color: #ECEFF1; }
+    .plate-card h4 { margin: 0 0 0.4rem; font-size: 0.9rem; }
+    .plate-card p { font-size: 0.82rem; margin: 0.2rem 0; line-height: 1.5; }
+    .event-card { background: linear-gradient(135deg, #B71C1C, #C62828); border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFEBEE; }
+    .event-card h3 { margin: 0 0 0.5rem; color: #FFCDD2; font-size: 1.1rem; }
+    .event-card p { color: #FFEBEE; margin: 0.4rem 0; line-height: 1.65; }
+    .event-card strong { color: #FFD700; }
+    .ets-card { background: white; border: 2px solid #9FA8DA; border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+    .ets-card h3 { margin: 0 0 0.75rem; color: #1A237E; font-size: 1rem; font-family: system-ui, sans-serif; }
+    .ets-card p { font-size: 0.88rem; line-height: 1.7; color: #424242; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #1A237E; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">318&deg;</div>
+      <div class="release-title-block">
+        <h2>Cascadia Subduction Deep Current</h2>
+        <div style="color: #1A237E; font-size: 1rem; font-family: system-ui, sans-serif;">Juan de Fuca Plate &mdash; Cascadia Subduction Zone &mdash; E=5 &mdash; FIRST GEOPHYSICAL ENTRY &mdash; Infrasonic geological baseline &mdash; THE PLATE BOUNDARY BENEATH EVERYTHING</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      very low infrasonic (0.01&ndash;10 Hz) &mdash; ETS tremor + deep ocean current &mdash; 1,100 km fault &mdash; continuous &mdash; E=5 GEOLOGICAL BASELINE
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="geo-banner">
+          <h3>First Geophysical Entry &mdash; E=5 &mdash; The Plate Boundary Beneath Everything</h3>
+          <p>The Cascadia Subduction Zone is the Pacific Northwest&rsquo;s most consequential geological feature: the Juan de Fuca Plate subducting beneath North America at 4&ndash;5 cm/year along a 1,100 km boundary. The acoustic signatures &mdash; deep current infrasound, Episodic Tremor and Slip (ETS) at 1&ndash;10 Hz, hydrothermal vent signals &mdash; are documented by hydrophone networks on the Pacific floor. E=5: the geological baseline beneath all other PNW acoustic events.</p>
+        </div>
+
+        <div class="depth-display">0.01 Hz &mdash;&mdash;&mdash; 10 Hz</div>
+        <div class="depth-sub">The infrasonic acoustic range of the Cascadia Subduction Zone &mdash; below human hearing &mdash; physically real &mdash; detected by NEPTUNE Canada and OOI seafloor hydrophone networks &mdash; continuous and geological</div>
+
+        <h2>The Plates</h2>
+        <div class="plates-grid">
+          <div class="plate-card jdf">
+            <h4>Juan de Fuca Plate</h4>
+            <p>Oceanic plate, ~250,000 km&sup2;. Subducting beneath North America at 4&ndash;5 cm/year. Created at Juan de Fuca Ridge (~300 km offshore). Dives to 100+ km depth beneath the continent. The plate driving Cascadia.</p>
+          </div>
+          <div class="plate-card nam">
+            <h4>North American Plate</h4>
+            <p>Continental plate. Riding over the Juan de Fuca Plate as it subducts. The locked zone: 30&ndash;40 km depth along the continental margin. Stress accumulating since 1700. The plate being overridden.</p>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #9FA8DA;margin:2rem 0;">
+
+        <div class="ets-card">
+          <h3>Episodic Tremor and Slip (ETS) &mdash; The 14-Month Signal</h3>
+          <p>Every ~14 months, the CSZ transition zone undergoes Episodic Tremor and Slip: a slow-slip event that releases stress over weeks rather than seconds, accompanied by non-volcanic tremor at 1&ndash;10 Hz. This is the geological acoustic signal the engine documents at degree 318 &mdash; not the catastrophic earthquake (the 1700 event, M9.0) but the continuous between-event baseline. The ETS rhythm is one of the most precisely timed geological phenomena in the Pacific Northwest. The tremor is infrasonic at the frequencies of concern but detectable by the Pacific seafloor hydrophone networks.</p>
+        </div>
+
+        <h2>The 1700 Event &mdash; The Last Full Rupture</h2>
+        <div class="event-card">
+          <h3>January 26, 1700 &mdash; M9.0 &mdash; Full-Margin Rupture</h3>
+          <p>The most recent CSZ full-margin rupture is documented by: <strong>Japanese orphan tsunami records</strong> (a large tsunami struck Japan the morning of January 27, 1700, with no local earthquake); <strong>Pacific Northwest tree ring chronologies</strong> (coastal forests killed by saltwater inundation 1699&ndash;1700); <strong>Native oral traditions</strong> of coastal peoples describing catastrophic events; <strong>turbidite seafloor deposits</strong> (earthquake-triggered underwater landslides). Combined evidence: M9.0, January 26, 1700, approximately 9 PM Pacific time. Tsunami run-up: 10&ndash;30 meters on the Pacific Northwest coast. Japan reached: 10 hours.</p>
+          <p><strong>Return interval:</strong> 300&ndash;500 years. The Pacific Northwest is currently within that window.</p>
+        </div>
+
+        <h2>The Acoustic Signal &mdash; What Degree 318 Documents</h2>
+        <p>The engine documents the <em>between-event</em> CSZ acoustic baseline: not the megathrust (1700) but the continuous geological murmur of a locked subduction zone. ETS tremor (1&ndash;10 Hz) during 14-month cycles. Deep ocean current pressure variations below 1 Hz. Hydrothermal vent acoustics at the Juan de Fuca Ridge (Axial Seamount, ~300 km offshore, monitored by Ocean Observatories Initiative). Microseismic noise from ocean surface wave pressure (0.05&ndash;0.5 Hz).</p>
+        <p>Converted to audio (shifted 100x upward to audible range), CSZ ETS tremor sounds like sustained distant rain or low-frequency surf &mdash; a continuous wash with intermittent bursts. Physically real. Acoustically below human hearing in situ. Documented by instrument.</p>
+
+        <h2>E=5 &mdash; Scale vs. Intensity</h2>
+        <p>By physical scale, the CSZ is the largest object the SPS engine has documented: 250,000 km&sup2; of subducting plate, 1,100 km fault, 1700 megathrust energy equivalent to millions of Hiroshima bombs. By E-scale, it is E=5. The distinction: E-value reflects perceptual acoustic intensity as encountered in the environment, not the absolute physical scale of the generating system. The geological system is enormous; the continuous ambient signal it produces is in the infrasonic range, near-imperceptible to humans at surface. E=5 is the correct calibration: physically real, geologically significant, perceptually near-absent at the surface.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>S36-318 Candlebox (E=7)</strong>
+            <p>Below-the-surface pairing: Candlebox below the critical grunge canon (4M copies, commercially present, critically invisible); CSZ below the Pacific (vast, acoustically present, surface-invisible). Both E below visible.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-312 Puget Sound winter storm surge (E=9)</strong>
+            <p>The ocean surface event (storm, E=9) vs. the ocean floor event (CSZ, E=5). Both are Pacific Northwest water acoustic events. Surface: chaotic, perceptible, E=9. Depth: continuous, infrasonic, E=5. The full water column is documented.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-future Cascadia megathrust acoustic event</strong>
+            <p>The 1700 event (M9.0) or the future event is the CSZ at maximum. Degree 318 documents the between-event baseline. The megathrust future entry would calibrate to E=10 or above the scale.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Infrasonic geological</div>
+          <div class="stat-detail">ETS tremor + deep current</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">Geological baseline. Infrasonic.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">0.01&ndash;10 Hz</div>
+          <div class="stat-detail">Below human hearing. Instrumented.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Fault Length</div>
+          <div class="stat-value">1,100 km</div>
+          <div class="stat-detail">Northern CA to BC. CSZ full extent.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subduction Rate</div>
+          <div class="stat-value">4&ndash;5 cm/year</div>
+          <div class="stat-detail">Juan de Fuca beneath North America.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ETS Recurrence</div>
+          <div class="stat-value">~14 months</div>
+          <div class="stat-detail">Most precisely timed PNW geological event.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Last M9</div>
+          <div class="stat-value">Jan 26, 1700</div>
+          <div class="stat-detail">Full-margin rupture. ~325 years ago.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value" style="color:#1A237E;">FIRST GEOPHYSICAL ENTRY</div>
+          <div class="stat-detail">CSZ as SPS acoustic baseline.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Candlebox (E=7)</div>
+          <div class="stat-detail">E=12. Below-surface pairing.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
