@@ -1,0 +1,75 @@
+# v1.49.488 -- Degree 347: Alice in Chains Dirt + Cougar+Wolf+Bear Convergence
+
+**Release Date:** 2026-04-03
+**Type:** Seattle 360 / Sound of Puget Sound -- Degree 347 of 360
+
+## Summary
+
+**ALICE IN CHAINS DIRT. COUGAR+WOLF+BEAR CONVERGENCE. E=10. E=10. E=20 COMBINED. STALEY PEAK. CLOSING SEQUENCE SUSTAINED. 96.4%.**
+
+**Alice in Chains** return at E=10 -- the Seattle metal/grunge band documented at degree 336 of the Metal Summit (E=9), now returning with their specific album *Dirt* (1992, Columbia Records), and at E=10 rather than E=9: the escalation from degree 336's E=9 to degree 347's E=10 is the recognition that *Dirt* is not Alice in Chains in the general register but Alice in Chains at their peak -- the album that remains the definitive document of Layne Staley's vocal instrument and Jerry Cantrell's guitar work at their collective maximum, recorded at a moment when the band's songwriting and emotional weight arrived at a combination that no subsequent release would equal. *Dirt* is twelve tracks of psychological weight that have no structural equivalent in the Pacific Northwest heavy music tradition: the album documents addiction, depression, and dissociation not as lyrical themes but as the organizing principle of its acoustic architecture -- the guitar tones are dark without being decorative, the vocal harmonies (Staley's lead voice and Cantrell's lower vocal line stacking in combinations that produce a dissonance with specific emotional content) are unsettling in a way that is compositionally precise, the tempos are deliberate without being slow in the way that sludge is slow, and the album's length and track sequence are designed to produce a cumulative emotional weight that individual tracks cannot produce alone. "Would?" "Them Bones." "Down in a Hole." "Rooster." The album's canonical tracks are a demonstration of what E=10 looks like when the mechanism is not acoustic weight or rhythmic complexity or technical extremity but sustained, controlled, compositionally precise emotional darkness as musical architecture.
+
+Layne Staley died on April 5, 2002, at the age of 34, from a combination of heroin and cocaine. His body was not discovered for approximately two weeks. Degree 347 records this fact as part of the documentation of *Dirt*, the album that preceded the final decade of his life and that documents what his voice was at its peak. The engine records the death as part of the record without narrative imposition on the trajectory of a life that ended in circumstances that belong to Staley rather than to the engine's documentation.
+
+E=10 for Alice in Chains *Dirt* is the correct assignment for the album that requires E=10 where degree 336's general Alice in Chains entry required E=9. *Dirt* operates above degree 336's E=9 through its combination of compositional precision, sustained psychological weight, vocal performance at peak, and the album's unique capacity to deploy emotional darkness as structural material rather than as surface content. The Final Ascent's third E=10 belongs to the Pacific Northwest heavy music tradition's most emotionally precise recorded statement.
+
+**Cougar+Wolf+Bear convergence** arrives at E=10 on the SPS track -- the acoustic event of the Pacific Northwest's three apex land predators in simultaneous acoustic presence: a mountain lion (*Puma concolor*, the cougar), a gray wolf (*Canis lupus*), and a black bear (*Ursus americanus*) or grizzly bear (*Ursus arctos*) in the same acoustic space at the same time, each producing the vocalizations characteristic of their species in a context of territorial or prey-related acoustic activity. The Pacific Northwest's three apex land predators share geographic range in the Cascades and Olympic Peninsula but rarely occupy the same location at the same time -- their acoustic convergence at degree 347 is the SPS track's most ecologically concentrated apex-predator event. The mountain lion's vocalization in a territorial or stressed context includes the scream: a long-duration, high-amplitude call that covers a wide frequency range from low resonant tones through a mid-range sustained peak, among the most startling vocalizations produced by any North American terrestrial mammal, and acoustically unique in a way that makes mountain lion vocalization unmistakable to any listener who has heard it at close range. The gray wolf's howl in a territorial context is the Pacific Northwest's most spatially distributed large-mammal vocal signal: a low-to-mid-frequency sustained tone that propagates through forested terrain at distances of up to ten kilometers, the signal's frequency chosen by evolutionary selection for maximum propagation through the acoustic medium of the northern coniferous forest. The black or grizzly bear's vocalizations in a stressed or territorial context include the woof, the jaw-pop, and the full roar: a dense, low-frequency acoustic event that is one of the Pacific Northwest's most physically imposing terrestrial animal sounds. Three apex predators. Three independent vocal systems. Three simultaneous territorial or stress acoustic events in one ecological space.
+
+E=10 for the cougar+wolf+bear convergence is the correct assignment for the SPS track's maximum terrestrial apex-predator acoustic density. The prior apex-predator entries documented the cougar, wolf, or bear in isolation or in paired events; degree 347 documents all three in simultaneous acoustic presence, the Pacific Northwest's complete terrestrial apex-predator acoustic inventory in a single convergence event. E=10 for the three-species territorial convergence that assembles the Pacific Northwest's most acoustically imposing land predators in one acoustic space simultaneously.
+
+**STALEY PEAK. CLOSING SEQUENCE SUSTAINED.** Degree 347 sustains the Final Ascent's three-degree E=20 closing sequence at its second degree. The sequence: 346 (Cornell peak, E=20) → 347 (Staley peak, E=20) → 348 (Cobain peak, E=20). Three of the Pacific Northwest heavy music tradition's most consequential vocalists -- each with a specific album, each at E=10, each with a death documented with respect -- form the closing sequence's human core. The sequence documents the tradition's three most significant voices in chronological album order (1992, 1994, but reversed in terms of artist death order) as the Final Ascent approaches its last degree.
+
+**E=10 + E=10 = E=20 COMBINED.** Degree 347 is the third E=20 in the engine's run: degree 344 (first, Botch peak + multi-species polyrhythmic apex), degree 346 (second, Soundgarden *Superunknown* + Cascades full storm), degree 347 (third, Alice in Chains *Dirt* + cougar+wolf+bear convergence). One more E=20 follows at degree 348. The engine is at 96.4% -- 13 degrees remain.
+
+## Key Features
+
+- **Part A -- S36:** Alice in Chains *Dirt* (Metal/Grunge, E=10) -- **STALEY PEAK, CLOSING SEQUENCE SUSTAINED**, Layne Staley (vocals), Jerry Cantrell (guitar/vocals), Mike Inez (bass, replacing Starr), Sean Kinney (drums), Seattle 1987, Columbia Records, *Dirt* 1992 (12 tracks, emotional weight architecture), "Would?" + "Them Bones" + "Down in a Hole" + "Rooster" as canonical evidence, guitar tones dark without decorative, Staley+Cantrell vocal harmonies dissonant with specific emotional content, addiction + depression + dissociation as organizational acoustic principle not lyrical theme, compositional precision in emotional darkness, E=9 at degree 336 for general AIC -- now E=10 for *Dirt* specifically; Layne Staley 1967-2002, the peak vocal instrument documented here
+- **Part B -- SPS:** Cougar+Wolf+Bear Convergence (three apex-predator acoustic event, E=10) -- **PACIFIC NORTHWEST TERRESTRIAL APEX-PREDATOR MAXIMUM**, mountain lion *Puma concolor* + gray wolf *Canis lupus* + black/grizzly bear (*Ursus americanus*/*Ursus arctos*) in simultaneous acoustic presence: (1) cougar scream -- long-duration wide-frequency-range high-amplitude territorial call, acoustically unique, unmistakable at close range; (2) wolf howl -- low-to-mid sustained territorial tone, up to 10 km propagation in coniferous forest, evolutionary frequency selection for maximum forest transmission; (3) bear woof + jaw-pop + full roar -- dense low-frequency acoustic event, Pacific Northwest's most imposing terrestrial mammal sound; three apex predators, three independent vocal systems, three simultaneous territorial events in one ecological space; E=10 for Pacific Northwest complete terrestrial apex-predator acoustic inventory simultaneously
+- **CLOSING SEQUENCE SUSTAINED (346-348)** -- degree 347 is the second of three consecutive E=20 readings: Cornell peak (346, E=10) → Staley peak (347, E=10) → Cobain peak (348, E=10); three Pacific Northwest heavy music tradition vocalists each at their specific album peak, each with a death documented; the closing sequence's human core is three voices that no longer exist, documented at the moments of their maximum acoustic achievement; the arc closes at degree 348
+- **Dirt's psychological architecture** -- *Dirt* (1992) is the Pacific Northwest heavy music tradition's most studied example of a record whose emotional content is architecturally embedded in its acoustic structure rather than conveyed through its lyrics alone: the guitar tones on "Would?" descend into a register that the ear associates with constriction and weight before the lyric arrives; the vocal harmonies on "Down in a Hole" produce a consonance-dissonance pattern that encodes Staley's emotional state in the harmonic relationship between his lead and Cantrell's harmony; the album's track sequence is not random -- the emotional arc from the album's opening through its closing is a designed trajectory; *Dirt*'s capacity to embed psychological content in acoustic structure rather than only in lyrical statement is the mechanism by which it achieves E=10 through emotional precision rather than acoustic weight or rhythmic complexity
+- **Mountain lion scream acoustic profile** -- the mountain lion's territorial scream is one of North America's most acoustically startling vocalizations: a call that begins in the low-mid register, rises through a sustained mid-frequency peak of high amplitude, and ends with a descending frequency sweep, covering approximately three octaves of frequency content in a single vocalization; the call's duration (up to several seconds), its amplitude (audible at distances of over a mile in favorable terrain), and its specific harmonic content (which places the call in a frequency range that mammalian hearing systems associate with distress and threat) combine to produce an acoustic event that is immediately alarming at close range; the mountain lion's scream is the Pacific Northwest's most effective acoustic deterrent and territorial marker among the large predators, in part because its frequency and amplitude profile are designed by evolutionary selection to carry maximum information about the predator's presence and state across the widest possible range
+- **Wolf howl ecology** -- the gray wolf's howl evolved in northern coniferous forest acoustic environments, and its frequency (approximately 150-780 Hz primary energy) is selected for maximum propagation through that specific medium; the coniferous forest attenuates high-frequency sound more rapidly than low-frequency sound, and the wolf's howl is weighted toward the low-to-mid frequency range that the forest transmits most efficiently; the howl's information content includes individual identity, pack affiliation, location, and social state; pack howls -- multiple wolves howling simultaneously in coordinated but not synchronized patterns -- produce the frequency overlap and beating patterns that give wolf pack vocalizations their characteristic multi-voice quality; the gray wolf's howl and the Pacific Northwest's coniferous forest acoustic environment are co-evolved over the wolf's history in the region
+- **Staley, Cornell, and Cobain as memorial arc** -- degrees 346, 347, and 348 place Cornell, Staley, and Cobain in consecutive E=10 positions in the engine's closing sequence; all three died before the age of 55 from causes connected to the pressures of the Pacific Northwest music scene's intersection with substance use and mental health; the engine documents each death in the entry that documents each artist's peak recorded work; the three deaths span 1994 to 2017; the three peak albums span 1991 to 1994; the closing sequence's human core is three voices that were among the most distinctive the Pacific Northwest produced, all present in the record, all absent from the present
+- **13 degrees remain** -- degree 347 brings the engine to 96.4% complete; Alice in Chains *Dirt* has delivered Staley's vocal peak at E=10; the cougar+wolf+bear convergence has assembled the Pacific Northwest's three terrestrial apex predators simultaneously at E=10; the closing sequence is at its second of three degrees; 13 degrees remain to 360
+
+<details>
+<summary>Full Release Details</summary>
+
+## Acoustic Progression
+
+### S36 (last 8)
+| Degree | Artist | Genre | E |
+|--------|--------|-------|---|
+| 339 | Green River | Proto-Metal | 7 |
+| 340 | Nirvana | Heavy Grunge | 9 |
+| 341 | Pearl Jam (heavy) | Hard Rock | 8 |
+| 342 | Gruntruck | Metal/Grunge | 8 |
+| 343 | Blood Brothers | Post-HC/Metal | 9 |
+| 344 | Botch (peak) | Mathcore | 10 |
+| 345 | Melvins (peak sludge) | Sludge Metal | 9 |
+| 347 | **Alice in Chains *Dirt*** | **Metal/Grunge** | **10** |
+
+### SPS (last 8)
+| Degree | Species/Sound | Sound | E |
+|--------|--------------|-------|---|
+| 339 | Snowmelt Flood Surge | regional hydrological event | 7 |
+| 340 | Orca Breach Cascade | maximum surface acoustic event | 9 |
+| 341 | Elk+Storm+Eagle | three-source compositional pairing | 8 |
+| 342 | Sea Lion Colony Storm | coastal pinniped density + storm | 8 |
+| 343 | Peregrine Through Tern Colony | kinetic maximum | 9 |
+| 344 | Multi-Species Polyrhythmic Apex | five-plus independent pulse streams | 10 |
+| 345 | Full Pacific Infrasound | three-source infrasonic event | 9 |
+| 347 | **Cougar+Wolf+Bear Convergence** | **three apex-predator acoustic event** | **10** |
+
+## Engine Statistics
+
+- Degrees complete: 347 of 360 (96.4%)
+- Quadrant: IV (271-360)
+- **CLOSING SEQUENCE SECOND DEGREE: Cornell (346, E=10) → Staley (347, E=10) → Cobain (348, E=10), three consecutive E=20 paired with three specific era-defining albums**
+- **E=20 COMBINED: E=10 (Alice in Chains *Dirt*) + E=10 (Cougar+Wolf+Bear Convergence), third E=20 of engine run**
+- **AIC DIRT: E=10, *Dirt* 1992, Staley+Cantrell vocal harmony architecture, psychological darkness as acoustic structure, emotional precision as E=10 mechanism; Layne Staley 1967-2002**
+- **COUGAR+WOLF+BEAR: E=10, Pacific Northwest complete terrestrial apex-predator acoustic inventory simultaneously, cougar scream + wolf howl + bear roar in one ecological space**
+- **MEMORIAL ARC: Cornell (346, 1964-2017) + Staley (347, 1967-2002) + Cobain (348, 1967-1994), three E=10 closing sequence positions, each at peak album**
+- 13 degrees remain to 360
+
+</details>

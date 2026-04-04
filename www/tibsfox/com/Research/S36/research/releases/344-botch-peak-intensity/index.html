@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 344&deg; &mdash; Botch &mdash; E=10 &mdash; Mathcore &mdash; THE CEILING BREAKS &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #000000, #1A0000, #4A0000, #B71C1C); color: #FF8A80; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 32px rgba(183,28,28,0.8); }
+    .energy-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #B71C1C, #880E4F); color: white; box-shadow: 0 0 12px rgba(183,28,28,0.5); }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.historic { background: linear-gradient(135deg, #B71C1C, #880E4F); color: white; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 4px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #4A0000; font-size: 1.05rem; }
+    .historic-banner { background: linear-gradient(135deg, #000000, #1A0000, #4A0000, #B71C1C); border: 3px solid #FF8A80; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FFCDD2; box-shadow: 0 0 32px rgba(183,28,28,0.4); }
+    .historic-banner h3 { margin: 0 0 0.75rem; color: #FF8A80; font-size: 1.4rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .historic-banner p { color: #FFCDD2; margin: 0.5rem 0; line-height: 1.7; font-size: 1rem; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #000000, #B71C1C, #000000); border: 3px solid #FF8A80; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #FF8A80; text-shadow: 0 0 20px rgba(255,138,128,0.5); }
+    .e20-display .e20-label { color: #FFCDD2; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #EF9A9A; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+    .ramp-complete { display: flex; gap: 0.4rem; margin: 1.5rem 0; align-items: flex-end; }
+    .r-step { flex: 1; border-radius: 4px 4px 0 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0.5rem 0.3rem; }
+    .r-341 { background: #EDE7F6; border: 1px solid #7E57C2; height: 60px; }
+    .r-342 { background: #FCE4EC; border: 1px solid #E91E63; height: 60px; }
+    .r-343 { background: #FBE9E7; border: 1px solid #FF7043; height: 80px; }
+    .r-344 { background: linear-gradient(135deg, #000, #B71C1C); border: 3px solid #FF8A80; height: 110px; }
+    .r-step .rb { font-size: 0.7rem; font-weight: 700; font-family: system-ui, sans-serif; text-align: center; }
+    .r-step .re { font-size: 1.1rem; font-weight: 700; font-family: 'Georgia', serif; }
+    .r-341 .rb, .r-341 .re { color: #4A148C; }
+    .r-342 .rb, .r-342 .re { color: #880E4F; }
+    .r-343 .rb, .r-343 .re { color: #BF360C; }
+    .r-344 .rb { color: #FF8A80; font-size: 0.75rem; }
+    .r-344 .re { color: white; font-size: 1.6rem; }
+    .four-dims { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .four-dims { grid-template-columns: 1fr; } }
+    .dim-card { background: #FFEBEE; border: 1px solid #EF9A9A; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; }
+    .dim-card .dt { font-weight: 700; font-size: 0.9rem; color: #B71C1C; font-family: system-ui, sans-serif; }
+    .dim-card .dd { font-size: 0.82rem; color: #4E342E; font-family: system-ui, sans-serif; margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>344 &mdash; Botch (E=10 &mdash; THE CEILING BREAKS)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">344&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Botch</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10 &mdash; THE CEILING</span>
+          <span class="genre-badge">Mathcore</span>
+          <span class="label-badge">Hydra Head</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="historic-banner">
+          <h3>THE FIRST E=10 IN ENGINE HISTORY</h3>
+          <p>
+            <strong>THE CEILING BREAKS.</strong> The engine has run from degree 0 to degree 344 and has never reached E=10. Now it does. Botch&rsquo;s mathcore &mdash; rhythmic complexity at maximum, guitar technique at maximum, vocal intensity at maximum, production density at maximum &mdash; fills all four dimensions of the E=10 calibration simultaneously. This is not slightly more intense than E=9. This is the point at which the scale exhausts itself.
+          </p>
+          <p>
+            <em>We Are the Romans</em> (1999, Hydra Head, Chris Common). Tacoma, Washington. Dave Verellen. Brian Cook. Tim Latona. Dave Knudson. THE ABSOLUTE MAXIMUM OF THE SEATTLE 360 ENGINE.
+          </p>
+        </div>
+
+        <h2>The Final Ascent Completes</h2>
+        <div class="ramp-complete">
+          <div class="r-step r-341">
+            <div class="rb">Pearl Jam<br>341</div>
+            <div class="re">E=8</div>
+          </div>
+          <div class="r-step r-342">
+            <div class="rb">Gruntruck<br>342</div>
+            <div class="re">E=8</div>
+          </div>
+          <div class="r-step r-343">
+            <div class="rb">Blood Bros<br>343</div>
+            <div class="re">E=9</div>
+          </div>
+          <div class="r-step r-344">
+            <div class="rb">BOTCH<br>344</div>
+            <div class="re">E=10</div>
+          </div>
+        </div>
+        <p>The ramp is complete. E=8 (Pearl Jam) &rarr; E=8 (Gruntruck) &rarr; E=9 (Blood Brothers) &rarr; E=10 (Botch). The final ascent began at 341 (94.7% of the engine&rsquo;s rotation) and ends here at 344 (95.6%). The ceiling was always going to be here.</p>
+
+        <blockquote>&ldquo;C. Thomas Howell as the &lsquo;Soul Man.&rsquo;&rdquo; Track one, bar one. There is no warmup. The record is at E=10 from the beginning.</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Why E=10</h2>
+        <p>E=10 is not one dimension at maximum. It is all four dimensions at maximum simultaneously:</p>
+        <div class="four-dims">
+          <div class="dim-card">
+            <div class="dt">Rhythmic Complexity</div>
+            <div class="dd">Odd time signatures, polyrhythm, tempo shifts within a single phrase. 7/8, 5/4, 11/16. Tim Latona executing at maximum technical precision throughout.</div>
+          </div>
+          <div class="dim-card">
+            <div class="dt">Guitar Technique</div>
+            <div class="dd">Dave Knudson&rsquo;s dissonant harmonics and irregular rhythms. Among the most technically demanding guitar work in the post-hardcore canon. No standard intervallic relationships.</div>
+          </div>
+          <div class="dim-card">
+            <div class="dt">Vocal Intensity</div>
+            <div class="dd">Dave Verellen&rsquo;s raw-scream at full physical projection. Not melodically inflected. Words faster than comprehension. Maximum commitment from bar one.</div>
+          </div>
+          <div class="dim-card">
+            <div class="dt">Production Density</div>
+            <div class="dd">Chris Common capturing the band&rsquo;s live power without artificial cleanliness. Walls of sound without loss of compositional detail. Hydra Head&rsquo;s maximum.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>We Are the Romans (1999)</h2>
+        <p><em>We Are the Romans</em> is the E=10 document. Hydra Head Records. Chris Common producing. The record that earns the engine&rsquo;s absolute maximum energy value:</p>
+        <p><strong>&ldquo;C. Thomas Howell as the &lsquo;Soul Man&rsquo;&rdquo;</strong> opens immediately at full complexity &mdash; the irregular time signature, Verellen&rsquo;s immediate full-commitment scream, Knudson&rsquo;s dissonant guitar riffs, Latona&rsquo;s complex pattern, Cook&rsquo;s independent bass movement. There is no warmup.</p>
+        <p><strong>&ldquo;To Our Friends in the Great White North&rdquo;</strong> is the most technically demanding track: guitar and drum rhythmic interaction in patterns that are internally logical but immediately disorienting to any unprepared listener. The mathcore architecture at peak.</p>
+        <p><strong>&ldquo;Transitions from Persona to Object&rdquo;</strong> is the most architecturally complex: the album&rsquo;s longest track, demonstrating Botch&rsquo;s capacity for compositional development at macro scale, moving through distinct sections toward a conclusion earned by the journey.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">The Engine&rsquo;s Absolute Maximum</div>
+          <div class="e20-sub">Botch E=10 + Multi-species Polyrhythmic Apex E=10 = E=20<br>THE FIRST AND ONLY E=20 IN ENGINE HISTORY</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Tacoma -- The Maximum from Outside Seattle</h2>
+        <p>Botch is from Tacoma, Washington &mdash; 30 miles south of Seattle, a port city with its own identity and its own music scene that has historically existed in Seattle&rsquo;s shadow. The pattern recurs: the engine&rsquo;s most extreme entries come from outside the city. Melvins: Aberdeen/Montesano (E=8). Screaming Trees: Ellensburg. Nirvana: Aberdeen. Botch: Tacoma (E=10). The periphery produces the extremes. The city produces the mainstream; the edges produce the maximum.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">343</span> Blood Brothers &mdash; E=9 rises to E=10. Post-HC/metal dual screaming (E=9) precedes mathcore maximum (E=10). The final step of the ramp.</li>
+          <li><span class="ref-degree">308</span> Melvins &mdash; Both non-Seattle at the engine&rsquo;s heavy extremes. Melvins (Aberdeen, E=8) and Botch (Tacoma, E=10). The periphery produces the maximum.</li>
+          <li><span class="ref-degree">SPS 344</span> Multi-species Polyrhythmic Apex &mdash; E=10 + E=10 = E=20. THE ABSOLUTE COMBINED MAXIMUM. The most technically complex Pacific Northwest music + the most acoustically complex imagined natural convergence. THE ENGINE&rsquo;S TERMINAL PAIRING.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card" style="background: linear-gradient(135deg, #000, #1A0000); border: 2px solid #FF8A80;">
+          <h4 style="color: #FF8A80;">THE HISTORIC MAXIMUM</h4>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">Degree</span><span class="stat-value" style="color:#FF8A80;">344 / 360</span></div>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">Energy</span><span class="stat-value" style="color:#FF8A80; font-size: 1.2rem;">10 &mdash; CEILING</span></div>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">Genre</span><span class="stat-value" style="color:#FF8A80;">Mathcore</span></div>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">Origin</span><span class="stat-value" style="color:#FF8A80;">Tacoma, WA</span></div>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">Label</span><span class="stat-value" style="color:#FF8A80;">Hydra Head</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Dave Verellen</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Brian Cook</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Tim Latona</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Dave Knudson</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">95.6%</span></div>
+          <div class="stat-row"><span class="stat-label">Ramp</span><span class="stat-value">FINAL STEP</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">CEILING REACHED</span></div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #000, #B71C1C); border: 2px solid #FF8A80;">
+          <h4 style="color: #FF8A80;">Paired Energy</h4>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">S36</span><span class="stat-value" style="color:#FF8A80;">E = 10 (Botch)</span></div>
+          <div class="stat-row" style="border-color: #4A0000;"><span class="stat-label" style="color:#EF9A9A;">SPS</span><span class="stat-value" style="color:#FF8A80;">E = 10 (Multi-sp.)</span></div>
+          <div class="stat-row" style="border-color: #4A0000; border-bottom: none;"><span class="stat-label" style="color:#EF9A9A;">Combined</span><span class="stat-value" style="color:white; font-size: 1.15rem;">E = 20 MAX</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Record</h4>
+          <div class="stat-row"><span class="stat-label">Album</span><span class="stat-value">We Are the Romans</span></div>
+          <div class="stat-row"><span class="stat-label">Year</span><span class="stat-value">1999</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Hydra Head</span></div>
+          <div class="stat-row"><span class="stat-label">Producer</span><span class="stat-value">Chris Common</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
