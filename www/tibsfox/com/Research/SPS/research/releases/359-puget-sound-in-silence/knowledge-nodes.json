@@ -1,0 +1,35 @@
+{
+  "degree": 359, "sound_type": "Puget Sound in Silence", "slug": "359-puget-sound-in-silence", "energy": 10,
+  "sound_category": "Acoustic baseline -- low disturbance water column",
+  "ecosystem": "Puget Sound deep water column (main basin and Hood Canal)",
+  "season": "Any (year-round; acoustic character seasonally modulated but continuous)",
+  "family": "Aquatic acoustic ecology -- Puget Sound fjord",
+  "species": [
+    "Snapping Shrimp (Alpheidae spp.)",
+    "Harbor Seal (Phoca vitulina)",
+    "Southern Resident Killer Whale (Orcinus orca, ambient calls)",
+    "Various Sebastes rockfish (spawning acoustic)",
+    "Pacific Tree Frog (adjacent coastal terrestrial, not water column)"
+  ],
+  "acoustic_nodes": [
+    { "layer": "Snapping shrimp Alpheidae", "description": "Sustained crackling background 2-15 kHz from snapper claw closure. Most acoustically active invertebrate in temperate coastal waters. Dominant signal in warm shallow Puget Sound areas when vessel noise absent. Not a single snap but continuous crackle rising and falling with temperature and density. The acoustic community the engine's entire bioregion rests on.", "energy_contribution": "High-frequency sustained biological background" },
+    { "layer": "Harbor Seal underwater calls", "description": "100-8,000 Hz including tonal, pulsed, complex frequency-modulated calls. More complex than above-water vocalizations. Breeding calls, threat, contact. Haul-out sites throughout Salish Sea. Carries in fjord water column. Contributes low-to-mid frequency biological layer.", "energy_contribution": "Low-to-mid frequency biological layer" },
+    { "layer": "SRKW ambient discrete calls", "description": "1-15 kHz pod-specific dialect calls at lower rate than active foraging. Propagate through fjord waveguide far from calling animals. Present when population in the Sound. The orca acoustic presence in background state.", "energy_contribution": "Mid-frequency biological layer" },
+    { "layer": "Infrasonic geological and tidal", "description": "Below 20 Hz: microseisms from Pacific swell interaction continental shelf (0.06-0.12 Hz); Cascadia Subduction Zone tectonic background; tidal exchange turbulence Tacoma Narrows and other sills; fjord resonant modes (fundamental infrasonic). The Sound's geological voice, present since fjord formation 15,000 years ago, below threshold of human hearing.", "energy_contribution": "Sub-audible geological layer -- oldest sound in the engine" }
+  ],
+  "theory_nodes": [
+    { "concept": "Puget Sound fjord acoustic physics: glacially carved fjord system with deep basins (main basin 280m, Hood Canal 177m) acting as low-frequency waveguide below ~100 Hz. Sills (Tacoma Narrows, 8-9 knot currents) as acoustic reflectors and turbulence sources. Seasonal thermocline 20-50 meters as acoustic refraction layer. Fjord geometry creates infrasonic resonant modes. Sound speed 1,480-1,520 m/s seasonal variation.", "level": "advanced", "department": "acoustic_physics", "description": "Fjord acoustic physics -- deep basins as waveguide, sills as reflectors, thermocline as refraction, resonant modes." },
+    { "concept": "Acoustic baseline concept (R. Murray Schafer World Soundscape Project SFU 1970s; Bernie Krause biophony/geophony/anthrophony framework): pre-contact Puget Sound 40-60 dB SPL 10-1000 Hz biophony+geophony. Current vessel traffic 80-110 dB same range. 20-50 dB contrast, factor 100-100,000 in acoustic power. Low-disturbance windows exist -- early morning, weather events, deeper basin attenuation.", "level": "advanced", "department": "acoustic_ecology", "description": "Acoustic baseline -- pre-contact 40-60 dB, current 80-110 dB, low-disturbance windows document baseline." },
+    { "concept": "E=10 depth calibration: the engine's most unusual calibration -- E=10 for quiet not loud. Depth as ceiling. Temporal depth: infrasonic geological baseline continuous since fjord formation ~15,000 years ago; Cascadia Subduction Zone longer; snapping shrimp communities millions of years Pacific coastal evolution. The acoustic environment that precedes and will outlast human habitation of the Sound. Degree 000 (Quincy Jones, born 1933) to degree 359 (acoustic environment millions of years old): depth is the ceiling.", "level": "milestone", "department": "calibration", "description": "E=10 depth calibration -- temporal depth not loudness, 15,000 years to millions, depth is the ceiling." },
+    { "concept": "The engine closes. SPS degree 359 pairs with S36 degree 359 (Unwound, Leaves Turn Inside You): both maximum depth at minimum surface disturbance. Unwound: sonic density dissolves to near-ambient fade in final tracks. Puget Sound in silence: human acoustic layer removed, water column's own voice remains. Both about what remains when the most audible things are removed. THE SEATTLE 360 ENGINE / THE SOUND OF PUGET SOUND IS COMPLETE.", "level": "milestone", "department": "engine_closure", "description": "The engine closes. Maximum depth, minimum surface. Both tracks complete." }
+  ],
+  "cross_references": [
+    {"degree": "SPS-339", "species": "Snowmelt Flood Surge", "relationship": "Both Puget Sound water-column acoustic entries. 339 = flood hydrology, downstream movement, spring. 359 = acoustic baseline, deep basin, any season. Water as acoustic subject from different aspects."},
+    {"degree": "SPS-352", "species": "River + Percussion + Wind (Snoqualmie Falls)", "relationship": "Both involve geological acoustic sources. 352: geological timescale percussion, physical overwhelming. 359: geological infrasound, below-threshold depth. Geological sound at surface vs geological sound below surface."},
+    {"degree": "S36-359", "species": "Unwound (Leaves Turn Inside You)", "relationship": "E=10 + E=10 = E=20. Both maximum depth minimum surface. Unwound final tracks near-ambient. Puget Sound baseline: human noise removed, water column voice. THE ENGINE CLOSES."}
+  ],
+  "s36_pair": {"degree": 359, "artist": "Unwound (Leaves Turn Inside You)", "pairing_note": "E=10 + E=10 = E=20. Maximum depth at minimum surface disturbance. THE FINAL PAIR. THE ENGINE CLOSES. Unwound: 78 minutes ending in quiet fade, post-hardcore vocabulary dissolves to ambient, last note dissipates. Puget Sound in silence: human acoustic layer removed, fjord's own voice (infrasound, biological baseline, geological resonance) remains. Both about depth. E=20. Circle complete."},
+  "milestones": ["THE FINAL SPS ENTRY", "SPS FINAL SIX COMPLETE (6/6)", "ACOUSTIC BASELINE DOCUMENTED", "DEPTH CALIBRATION E=10", "THE SOUND OF PUGET SOUND IS COMPLETE", "THE ENGINE CLOSES"],
+  "engine_complete": "SPS 000 through 359. 360 degrees. The Sound of Puget Sound is complete. The engine closes with depth rather than intensity, quiet rather than loudness, the acoustic environment that preceded and will outlast human habitation of the Sound.",
+  "tags": ["puget-sound", "silence", "acoustic-baseline", "snapping-shrimp", "harbor-seal", "infrasound", "fjord", "geological", "depth", "e10", "final-entry", "engine-complete", "359"]
+}

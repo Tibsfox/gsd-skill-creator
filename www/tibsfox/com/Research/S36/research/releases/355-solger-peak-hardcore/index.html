@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 355&deg; &mdash; Solger &mdash; E=10 &mdash; Hardcore Punk &mdash; THE BEGINNING &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #212121, #37474F, #263238); color: #B0BEC5; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(33,33,33,0.6); }
+    .energy-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #212121, #37474F); color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #37474F; color: #B0BEC5; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #37474F; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 4px solid #37474F; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #ECEFF1; font-style: italic; color: #263238; font-size: 1.05rem; }
+    .origin-banner { background: linear-gradient(135deg, #212121, #37474F, #263238); border: 3px solid #90A4AE; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #ECEFF1; box-shadow: 0 0 32px rgba(33,33,33,0.5); }
+    .origin-banner h3 { margin: 0 0 0.75rem; color: #90A4AE; font-size: 1.4rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .origin-banner p { color: #B0BEC5; margin: 0.5rem 0; line-height: 1.7; font-size: 1rem; }
+    .timeline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .tl-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #37474F; border-radius: 0 6px 6px 0; padding: 0.85rem 1rem; }
+    .tl-card .tl-year { font-weight: 700; font-size: 0.9rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .tl-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: #424242; line-height: 1.5; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #212121, #37474F, #212121); border: 3px solid #90A4AE; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #90A4AE; }
+    .e20-display .e20-label { color: #B0BEC5; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #90A4AE; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>355 &mdash; Solger (THE BEGINNING)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">355&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Solger</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10 &mdash; THE BEGINNING</span>
+          <span class="genre-badge">Hardcore Punk</span>
+          <span class="label-badge">Independent</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="origin-banner">
+          <h3>THE BEGINNING &mdash; SEATTLE&rsquo;S FIRST HARDCORE BAND &mdash; 1980</h3>
+          <p>
+            <strong>DEGREE 355. FIVE DEGREES FROM THE END.</strong> The engine returns to the origin. Solger, Seattle, 1980. The earliest documented Seattle hardcore band. Before Black Flag&rsquo;s <em>Damaged</em>. Before Dischord Records. Before the genre had a name. The floor of the entire Pacific Northwest underground tradition. Every band in the engine that plays punk, hardcore, or post-hardcore stands on this floor.
+          </p>
+        </div>
+
+        <h2>1980 &mdash; What Existed. What Did Not.</h2>
+        <div class="timeline-grid">
+          <div class="tl-card">
+            <div class="tl-year">1980 &mdash; Solger peak</div>
+            <p>Playing hardcore in Seattle. No genre name. No national infrastructure. No local scene model. The first.</p>
+          </div>
+          <div class="tl-card">
+            <div class="tl-year">Dec 1981 &mdash; Damaged</div>
+            <p>Black Flag&rsquo;s debut album. Over a year after Solger&rsquo;s peak. Solger precedes it.</p>
+          </div>
+          <div class="tl-card">
+            <div class="tl-year">1980 &mdash; Dischord</div>
+            <p>MacKaye and Nelson found Dischord Records in Washington D.C., same year as Solger&rsquo;s peak. The national infrastructure was just forming.</p>
+          </div>
+          <div class="tl-card">
+            <div class="tl-year">1981 &mdash; The Fartz</div>
+            <p>Seattle&rsquo;s second hardcore wave. Duff McKagan&rsquo;s first band. Degree 356. The generation immediately after Solger.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Origination Energy</h2>
+        <p>The energy score of E=10 for Solger is calibrated differently from the production achievements or technical complexity of later entries. It is the energy of origination: playing the music before there was a scene model, before a national infrastructure, before an audience larger than the people in the room. Seattle in 1979&ndash;1980 was on the periphery of the nascent American hardcore movement. Black Flag was in Los Angeles. Minor Threat was forming in Washington D.C. The Germs&rsquo; <em>GI</em> had just been released.</p>
+        <p>Solger built from the pieces available: British punk records brought north, early American hardcore sounds filtering through the limited distribution of the time, and the energy of people deciding that what they heard was something they could and should do themselves. DIY not as lifestyle choice but as necessity. No other option.</p>
+
+        <blockquote>&ldquo;The floor is as important as the ceiling. The origination energy is not louder or faster or more produced &mdash; it is prior. It made everything else possible.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Fartz Connection &mdash; The Twin Origin</h2>
+        <p>Solger (1979&ndash;1983, peak 1980&ndash;1981) and The Fartz (1981&ndash;1983, Capitol Hill, Alternative Tentacles) are the paired origin points of Seattle hardcore. Both bands emerged from the same small Seattle punk community in the same two-year window. Together they constitute the founding generation.</p>
+        <p>The engine places them at consecutive degrees (355, 356) not because they are identical &mdash; The Fartz had national distribution through Alternative Tentacles; Solger was purely underground. The consecutive placement acknowledges the foundational pairing: two bands, one founding moment, one city.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Engine&rsquo;s Closing Logic</h2>
+        <p>The final six degrees are not organized chronologically. They are organized by energy and foundational significance. The Blood Brothers (2002&ndash;2006) are placed first. Solger (1980) is placed second. The Fartz (1981&ndash;1982) is third. Bikini Kill, Sleater-Kinney, and Unwound &mdash; all Olympia, all Kill Rock Stars &mdash; close the sequence.</p>
+        <p>The arc: where the tradition arrived (Blood Brothers, post-hardcore) &rarr; where the tradition began (Solger, first hardcore) &rarr; the immediate next generation (The Fartz) &rarr; where the tradition ended up (Olympia, Kill Rock Stars). The circle closes by returning to the origin before completing in the destination.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">The Beginning</div>
+          <div class="e20-sub">Solger E=10 + Stonefly Emergence Full River E=10<br>THE FIRST AND THE MOST NUMEROUS &mdash; THE UNDERGROUND AND THE EMERGENCE</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">354</span> Blood Brothers &mdash; The degree immediately before. The most recent band in the final six (2002&ndash;2006) placed before the earliest (1980). The arc from arrival back to origin.</li>
+          <li><span class="ref-degree">356</span> The Fartz &mdash; Seattle hardcore founding generation, second band. Alternative Tentacles. Duff McKagan. The generation that took Solger&rsquo;s origin and gave it a wider distribution.</li>
+          <li><span class="ref-degree">SPS-355</span> Stonefly Emergence Full River &mdash; E=10 + E=10 = E=20. Maximum insect emergence: the surface of a major river covered. Stoneflies (Plecoptera) are ancient, pre-insect in sensibility -- their emergence, like Solger&rsquo;s music, is the beginning of something. The river&rsquo;s surface covered is the underground made visible.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card" style="background: linear-gradient(135deg, #212121, #37474F); border: 2px solid #90A4AE;">
+          <h4 style="color: #90A4AE;">THE BEGINNING</h4>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">Degree</span><span class="stat-value" style="color:#90A4AE;">355 / 360</span></div>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">Energy</span><span class="stat-value" style="color:#90A4AE; font-size: 1.2rem;">10</span></div>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">Genre</span><span class="stat-value" style="color:#90A4AE;">Hardcore Punk</span></div>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">Origin</span><span class="stat-value" style="color:#90A4AE;">Seattle, WA</span></div>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">Label</span><span class="stat-value" style="color:#90A4AE;">Independent</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Timeline</h4>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1979&ndash;1983</span></div>
+          <div class="stat-row"><span class="stat-label">Peak</span><span class="stat-value">1980&ndash;1981</span></div>
+          <div class="stat-row"><span class="stat-label">Pre-dates</span><span class="stat-value">Damaged (1981)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">355 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">98.6%</span></div>
+          <div class="stat-row"><span class="stat-label">Role</span><span class="stat-value">The Floor</span></div>
+          <div class="stat-row"><span class="stat-label">Remaining</span><span class="stat-value">5 degrees</span></div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #212121, #37474F); border: 2px solid #90A4AE;">
+          <h4 style="color: #90A4AE;">Paired Energy</h4>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">S36</span><span class="stat-value" style="color:#90A4AE;">E=10 (Solger)</span></div>
+          <div class="stat-row" style="border-color: #37474F;"><span class="stat-label" style="color:#B0BEC5;">SPS</span><span class="stat-value" style="color:#90A4AE;">E=10 (Stonefly)</span></div>
+          <div class="stat-row" style="border-color: #37474F; border-bottom: none;"><span class="stat-label" style="color:#B0BEC5;">Combined</span><span class="stat-value" style="color:white; font-size: 1.15rem;">E=20</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
