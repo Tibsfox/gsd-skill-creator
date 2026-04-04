@@ -1,0 +1,71 @@
+{
+  "degree": 274,
+  "species": "Orca",
+  "scientific_name": "Orcinus orca",
+  "slug": "274-orca-full-spy-hop",
+  "sound_type": "vertical rise + crash -- Southern Resident Killer Whale rises vertically above surface, holds 2-10 seconds (observation phase), descends. E=8 water displacement event.",
+  "energy": 8,
+  "ecosystem": "Inland sea -- Salish Sea, San Juan Islands, Puget Sound, Strait of Juan de Fuca",
+  "season": "Resident (year-round Southern Residents in Salish Sea)",
+  "family": "Delphinidae",
+  "order": "Artiodactyla (Cetacea)",
+  "milestone": "Orca arc degree 4 of 7 (degrees 270-276). Cultural behavior documented: spy-hop is a learned, culturally transmitted behavior. The orca rising to observe the above-water world. E=8 following E=9 apex at degree 273.",
+  "coordinates": {
+    "lat": 48.52,
+    "lon": -123.00,
+    "description": "Southern Resident range: Salish Sea, San Juan Islands, Strait of Juan de Fuca. Spy-hopping observed throughout range, particularly in complex surface environments (vessel traffic, prey activity)."
+  },
+  "behavioral_context": {
+    "spy_hop_description": "Controlled vertical rise until head (and pectoral fins in full spy-hop) clears the water surface. Hold 2-10 seconds in observation phase. Directional orientation toward point of interest. Controlled descent return. Not a breach -- the animal does not leave the water entirely and does not crash laterally.",
+    "function": "Primarily observational: gathering visual information about the above-water environment. Documented directional orientation toward vessels, other animals, shoreline features. Cultural transmission: learned by young orcas observing adults.",
+    "cultural_transmission": "Meets all three criteria for cultural transmission: within-population variation, learned through observation during development, persists through teaching not genetics. One of the clearest examples of cultural behavior in non-human animals.",
+    "visual_capability": "Bifocal vision: orca eyes adapted for function in both water and air. Spy-hop eliminates Snell's window restriction, providing unrestricted aerial view of immediate environment."
+  },
+  "sound_metrics": {
+    "amplitude": "E=8. Controlled descent water impact. Substantial but not the E=9 of a lateral breach body-slam. Water displacement on ascent; near-silence during hold; descent water return at E=8.",
+    "key_property": "E=8 following E=9 apex (breach, degree 273). Vertical rise + hold + descent. Culturally transmitted observational behavior. Directional orientation toward points of interest. Hold duration 2-10 seconds above surface."
+  },
+  "nodes": [
+    {
+      "id": "cultural-behavior",
+      "type": "concept",
+      "title": "Cultural Transmission -- Learned Behavior",
+      "description": "Spy-hop is culturally transmitted: within-population variation, learned during development, persists through teaching. Young orcas learn from adults. One of the clearest examples of cultural behavior in non-human animals.",
+      "connections": ["cognitive-model", "social-context"]
+    },
+    {
+      "id": "cognitive-model",
+      "type": "concept",
+      "title": "Cognitive Model of Above-Water World",
+      "description": "To spy-hop deliberately and orient toward a point of interest requires a cognitive model extending beyond primary underwater sensory environment. The orca has a concept of the above-water world as information source.",
+      "connections": ["cultural-behavior", "visual-capability"]
+    },
+    {
+      "id": "visual-capability",
+      "type": "concept",
+      "title": "Bifocal Vision -- Snell's Window Eliminated",
+      "description": "Orca eyes adapted for both water and air vision. Spy-hop eliminates Snell's window restriction -- unrestricted aerial view of immediate environment. Information gain justifies energy expenditure.",
+      "connections": ["cognitive-model", "cultural-behavior"]
+    },
+    {
+      "id": "breach-contrast",
+      "type": "connection",
+      "title": "Breach vs. Spy-Hop -- Force vs. Observation",
+      "description": "Two consecutive above-water behaviors: breach (273, E=9, maximum force, function uncertain) vs. spy-hop (274, E=8, controlled, observational, function clearer). One goes completely; the other watches carefully.",
+      "connections": ["cultural-behavior"]
+    },
+    {
+      "id": "orca-arc-position",
+      "type": "pattern",
+      "title": "Orca Arc Degree 4/7",
+      "description": "Degrees 270-276. 273 was energy maximum (breach E=9). 274 is observational behavior (spy-hop E=8). Arc documents behavioral repertoire: vocal (270), species (271), predation (272), force (273), observation (274), percussion (275), echolocation (276).",
+      "connections": ["breach-contrast", "cultural-behavior"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-273", "species": "Orca breaching", "relationship": "Preceding entry. Breach (maximum force, E=9) vs. spy-hop (observation, E=8). Two above-water behaviors in consecutive degrees. Arc descends one step from energy apex."},
+    {"target": "SPS-237", "species": "Chinook Salmon", "relationship": "SRKW primary prey. Spy-hopping may assist surface prey detection -- surface-schooling Chinook visible from above water. Salmon-orca dependency shapes all SRKW behavioral ecology."},
+    {"target": "SPS-275", "species": "Orca pec-slap sequence", "relationship": "Next entry. Spy-hop (vertical observation) to pec-slap (horizontal percussion). Observation to rhythmic social behavior."},
+    {"target": "S36-274", "artist": "Vexed", "relationship": "E=8 combined E=16. Cultural curiosity and political engagement. The orca rises to observe; Vexed engage with theirs."}
+  ]
+}
