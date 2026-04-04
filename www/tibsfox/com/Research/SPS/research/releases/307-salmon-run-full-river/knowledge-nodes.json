@@ -1,0 +1,64 @@
+{
+  "degree": 307,
+  "species": "Salmon Run Full River (Multi-species aggregate)",
+  "scientific_name": "Oncorhynchus spp. + Salvelinus spp. (Salmonidae, multiple genera)",
+  "slug": "307-salmon-run-full-river",
+  "sound_type": "Full spawning run aggregate: thousands of salmon simultaneously in spawning river -- tail-slapping gravel redds, bodies churning shallow riffles, male competition at redds, continuous overlapping percussion of fins on water; multi-species superposition; ambient hiss and roar of river at maximum biological density; the wall of splash-slap-churn that transforms the river's acoustic identity",
+  "energy": 8,
+  "ecosystem": "Spawning river at peak run -- shallow gravel-bottomed riffles, deep holding pools, Pacific Northwest coastal and Cascade rivers (Skykomish, Sauk, Skagit, Hoh, Quinault); fall peak run conditions with thousands to tens of thousands of fish simultaneously",
+  "season": "Fall (peak for Chinook, Coho, Chum, Pink; overlap with early Steelhead; primary October-November in most PNW rivers)",
+  "family": "Salmonidae (multi-species)",
+  "milestone": "FIRST MULTI-SPECIES AGGREGATE SALMONIDAE ENTRY. E=8 = Salmonidae maximum in engine. Aggregate of all seven prior Salmonidae entries (SPS 236-242) combined. 71 degrees from First Fish (SPS 236, E=5) to Full River (SPS 307, E=8). The individual entries documented species and behaviors at E=5-7; the aggregate event produces E=8: the superposition exceeds any individual component.",
+  "coordinates": {
+    "lat": 47.9,
+    "lon": -121.7,
+    "description": "Pacific Northwest rivers at peak fall spawning: Skykomish, Sauk, Skagit (Washington), Hoh, Quinault, Queets (Olympic Peninsula), Elwha (post-dam removal). Fall peak October-November most major rivers."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Not vocalization -- mechanical sounds of biological activity: tail-slap on gravel (redd excavation and maintenance), body splash in shallow riffles, male competition (body collision, fin action), ambient water sound modified by mass biological activity. Multi-source superposition.",
+    "mechanics": "Thousands of fish simultaneously: each producing individual sounds at E=4-5 intensity; superposition of thousands creates continuous texture at E=8. Redd focal points: female tail-sweeping gravel + male competition = highest density acoustic events. River ambient character transformed by biological activity.",
+    "frequency_range": "Broadband across 50-5,000 Hz: tail-slaps (impulsive, broadband), splash (broadband), body movement (low frequency), ambient river current modified by fish activity. No narrow-band peaks.",
+    "duration": "Continuous for the duration of peak run: days to weeks. Acoustic character constant during peak; gradually decreasing as run ends.",
+    "e8_calibration": "E=8: aggregate of seven prior Salmonidae entries (E=5-7). The individual maximum (Steelhead leap, E=7) is below the aggregate (E=8). Superposition principle: the full run is greater than the sum of its individual-species components."
+  },
+  "nodes": [
+    {
+      "id": "salmonidae-aggregate",
+      "type": "milestone",
+      "title": "First Aggregate Salmonidae Entry -- 71 Degrees After First Fish",
+      "description": "SPS 236 was the FIRST FISH IN ENGINE (E=5). Degrees 237-242 documented individual species and behaviors (E=5-7). Degree 307 is the first aggregate entry: all species simultaneously, the ecological event rather than the component species. 71-degree arc from first to aggregate.",
+      "connections": ["superposition-principle", "salmonidae-arc"]
+    },
+    {
+      "id": "superposition-principle",
+      "type": "concept",
+      "title": "Superposition: Aggregate Exceeds Individual",
+      "description": "Each individual salmon produces E=4-5 sound events. Thousands simultaneously produce E=8. The aggregate is not just louder -- it has a qualitatively different acoustic character: continuous texture rather than discrete events, transformation of the river's acoustic identity. E=8 cannot be produced by any individual species; it requires the aggregate.",
+      "connections": ["salmonidae-aggregate"]
+    },
+    {
+      "id": "salmonidae-arc",
+      "type": "arc",
+      "title": "Salmonidae Arc: SPS 236 to 307",
+      "description": "Seven prior entries (236-242) + aggregate (307). 71-degree span = 19.7% of full rotation. E=5 entry (first fish) through E=7 individual maximum (Steelhead) to E=8 aggregate. The most fully documented family arc in the SPS engine.",
+      "connections": ["salmonidae-aggregate"]
+    },
+    {
+      "id": "nutrient-pulse",
+      "type": "concept",
+      "title": "Spawning Run as Nutrient Delivery System",
+      "description": "The acoustic event is the audible surface of the PNW's most significant annual ecological event: marine-derived nutrients (N, P, marine carbon) carried from the Pacific Ocean to Cascade forest via decomposing salmon carcasses. The sound wall is the ecological process made audible.",
+      "connections": ["salmonidae-aggregate"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-236", "species": "Pacific Salmon general spawning", "relationship": "FIRST FISH IN ENGINE. E=5. The Salmonidae entry point. 71 degrees before the aggregate."},
+    {"target": "SPS-237", "species": "Chinook Salmon leap", "relationship": "E=6. Largest Pacific salmon. Individual leap component of the full run."},
+    {"target": "SPS-238", "species": "Coho Salmon spawning", "relationship": "E=6. Redd behavior: tail-slap on gravel documented individually. At 307, thousands of these events simultaneously."},
+    {"target": "SPS-239", "species": "Steelhead leap", "relationship": "E=7. Highest individual Salmonidae energy. Still one below the aggregate (E=8). Individual maximum < collective aggregate."},
+    {"target": "SPS-240", "species": "Bull Trout", "relationship": "E=5. Cold-water headwater component. Present in tributaries while main-stem run reaches E=8."},
+    {"target": "SPS-241", "species": "Dolly Varden", "relationship": "E=5. Coastal cold-stream component."},
+    {"target": "SPS-242", "species": "Cutthroat Trout", "relationship": "E=5. Most distributed PNW trout. Salmonidae family complete."},
+    {"target": "S36-307", "artist": "Screaming Trees (return)", "relationship": "E=7 + E=8 = E=15. Lanegan's singular voice vs. thousands of salmon. Individual vs. aggregate. Collective exceeds individual by one."}
+  ]
+}
