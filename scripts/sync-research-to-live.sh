@@ -14,11 +14,13 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 LOCAL_BASE="$PROJECT_ROOT/www/tibsfox/com"
 REMOTE_SUBDIR=""
 
-# Load credentials — password contains leading ' and shell-hostile chars
-# NEVER source .env — always use python to parse
+# Load credentials — use python to parse .env because passwords contain shell-hostile chars
 ENV_FILE="$PROJECT_ROOT/.env"
 if [ ! -f "$ENV_FILE" ]; then
   ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator/.env"
+fi
+if [ ! -f "$ENV_FILE" ]; then
+  ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator-nasa/.env"
 fi
 
 if [ ! -f "$ENV_FILE" ]; then
@@ -27,17 +29,17 @@ if [ ! -f "$ENV_FILE" ]; then
   exit 1
 fi
 
-# Python-based .env parser (handles leading ' and special chars)
+# Parse .env with python to handle special chars in passwords
 eval "$(python3 -c "
-import sys
-for line in open('$ENV_FILE'):
-    line = line.strip()
-    if '=' in line and not line.startswith('#'):
-        k, v = line.split('=', 1)
-        # Shell-safe export using base64 to avoid any quoting issues
-        import base64
-        b64 = base64.b64encode(v.encode()).decode()
-        print(f'export {k}=\"\$(echo {b64} | base64 -d)\"')
+with open('$ENV_FILE') as f:
+    for line in f:
+        line = line.strip()
+        if line and not line.startswith('#') and '=' in line:
+            key, val = line.split('=', 1)
+            if key.startswith('FTP_'):
+                # Escape single quotes for bash export
+                val_escaped = val.replace(\"'\", \"'\\\"'\\\"'\")
+                print(f\"export {key}='{val_escaped}'\")
 ")"
 
 if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
@@ -45,7 +47,7 @@ if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
   exit 1
 fi
 
-FTP_PATH="${FTP_PATH:-/public_html}"
+FTP_PATH="${FTP_PATH:-/}"
 DRY_RUN=""
 NASA_ONLY=""
 LOCAL_DIR="$LOCAL_BASE/Research"
@@ -91,34 +93,33 @@ echo ""
 # Exclude patterns (don't sync these)
 EXCLUDES="--exclude-glob .git/ --exclude-glob .planning/ --exclude-glob node_modules/ --exclude-glob .env"
 
-# Sync — use python to write lftp script file (password has leading ' and special chars)
-echo "Starting sync..."
-LFTP_SCRIPT=$(mktemp /tmp/lftp-sync-XXXXXX)
-trap "rm -f '$LFTP_SCRIPT'" EXIT
-
+# Sync — use python to write lftp script file (avoids shell escaping of password)
+LFTP_SCRIPT=$(mktemp /tmp/lftp-sync-XXXXXX.sh)
 python3 -c "
-import sys
-env = {}
-for line in open('$ENV_FILE'):
-    line = line.strip()
-    if '=' in line and not line.startswith('#'):
-        k, v = line.split('=', 1)
-        env[k] = v
-
+import os
+host = os.environ['FTP_HOST']
+user = os.environ['FTP_USER']
+with open('$ENV_FILE') as f:
+    for line in f:
+        if line.startswith('FTP_PASS='):
+            pwd = line.strip().split('=', 1)[1]
+            break
+# Escape for lftp (backslash special chars)
+pwd_esc = pwd.replace('\\\\', '\\\\\\\\').replace('\"', '\\\\\"')
+script = f'''set ssl:verify-certificate no
+set net:max-retries 3
+set net:reconnect-interval-base 5
+set mirror:use-pget-n 4
+open -u {user},\"{pwd_esc}\" {host}
+mirror --reverse --verbose --only-newer --no-perms $DRY_RUN $EXCLUDES '$LOCAL_DIR' '$REMOTE_DIR'
+bye
+'''
 with open('$LFTP_SCRIPT', 'w') as f:
-    f.write('set ssl:verify-certificate no\n')
-    f.write('set net:max-retries 3\n')
-    f.write('set net:reconnect-interval-base 5\n')
-    f.write('set mirror:use-pget-n 4\n')
-    f.write('open -u ' + env['FTP_USER'] + ',' + env['FTP_PASS'] + ' ' + env['FTP_HOST'] + '\n')
-    f.write('mirror --reverse --verbose --only-newer --no-perms $DRY_RUN $EXCLUDES \"$LOCAL_DIR\" \"$REMOTE_DIR\"\n')
-    f.write('bye\n')
+    f.write(script)
 "
-
-# Substitute shell vars in the lftp script
-sed -i "s|\$DRY_RUN|$DRY_RUN|g; s|\$EXCLUDES|$EXCLUDES|g; s|\$LOCAL_DIR|$LOCAL_DIR|g; s|\$REMOTE_DIR|$REMOTE_DIR|g" "$LFTP_SCRIPT"
-
+echo "Starting sync..."
 lftp -f "$LFTP_SCRIPT"
+rm -f "$LFTP_SCRIPT"
 
 echo ""
 echo "=== Sync complete ==="
