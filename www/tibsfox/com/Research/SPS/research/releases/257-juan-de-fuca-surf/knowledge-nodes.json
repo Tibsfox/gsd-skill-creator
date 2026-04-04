@@ -1,0 +1,53 @@
+{
+  "degree": 257, "sound": "Juan de Fuca Surf", "slug": "257-juan-de-fuca-surf",
+  "acoustic_character": "Sustained low-frequency roar",
+  "energy": 8,
+  "domain": "Meteorology / Coastal oceanography",
+  "mechanism": "Pacific Ocean swell entering Strait of Juan de Fuca and breaking on Olympic Peninsula open coast",
+  "ecosystem": "Open coast",
+  "season": "Winter (dominant; present year-round but maximized in winter swell)",
+  "status": "STORM ARC OPENS. First of four consecutive E=8 SPS readings (257-259, then 260 breaks to E=9).",
+  "strait_geography": {
+    "length_miles": 96,
+    "width_miles": "12-17",
+    "western_mouth": "Cape Flattery (Makah Nation) -- northwesternmost point of contiguous US",
+    "eastern_end": "Salish Sea (Puget Sound + Strait of Georgia)",
+    "southern_shore": "Olympic Peninsula, Washington",
+    "northern_shore": "Vancouver Island, British Columbia"
+  },
+  "acoustic_physics": {
+    "primary_mechanism": "Wave breaking: air entrainment and bubble collapse releases broad-spectrum acoustic energy",
+    "frequency_range": "1-50+ Hz; heavily weighted to low frequencies (1-50 Hz = infrasound to low audio)",
+    "infrasound_component": "Significant energy below 20 Hz (threshold of hearing). Not heard but felt: physical chest pressure, ground vibration. Recordings capture audio range only.",
+    "sustained_character": "Multiple simultaneous breaking events at all stages of wave approach. New events replace completing ones continuously. Roar is not episodic but a continuous wall.",
+    "e8_criteria": "Continuous, massive, audible miles from coastline, physically felt, dominates all competing sounds in environment."
+  },
+  "swell_origins": {
+    "north_pacific_storms": "Extratropical cyclones generating swell over thousands of miles of fetch. Trans-Pacific travel time 3-5 days from Japan-vicinity storms.",
+    "gulf_of_alaska": "Aleutian Low drives storms eastward. Gulf of Alaska swell = highest amplitude, most frequent, shorter travel time.",
+    "swell_period_seconds": "12-18 (North Pacific long-period swell)",
+    "significant_wave_height_winter_ft": "15-25 in major events; exceptional events exceed 30"
+  },
+  "key_locations": [
+    {"name": "Cape Flattery", "notes": "Northwest corner of contiguous US. First land Pacific swell reaches. Makah Nation territory. Most exposed point on Washington coast."},
+    {"name": "La Push", "notes": "Quileute Nation. Most accessible open-coast surf on outer Olympic Peninsula. Direct westward exposure to Pacific swell. Thousands of years of human habitation with surf as baseline soundscape."},
+    {"name": "Olympic National Park Coastal Strip", "notes": "Roadless wilderness coast. No coastal development. Surf sounds as it has for 10,000 years."}
+  ],
+  "cultural_context": {
+    "makah_nation": "Cape Flattery. Only US tribe with treaty-guaranteed whale hunting right. Ocean-going culture. Surf is the medium of livelihood, not background.",
+    "quileute_nation": "La Push. Thousands of years of continuous presence. E=8 surf as baseline winter soundscape.",
+    "wilderness_character": "Olympic Peninsula outer coast is one of last wild coasts in North America. No coastal cities. Acoustic environment without human development."
+  },
+  "theory_nodes": [
+    { "concept": "STORM ARC OPENS (257-260). Juan de Fuca Surf (257, E=8) is the first entry of the engine's most intense sustained arc. Four consecutive E=8 readings (257-259, then 260 breaks to E=9 NEW ABSOLUTE MAXIMUM). No previous SPS arc has sustained E=8 for four consecutive degrees. The Storm Arc represents the PNW landscape at its most acoustically violent.", "level": "milestone", "department": "engine-arc", "description": "Storm Arc opens. Unprecedented four-consecutive E=8 streak begins." },
+    { "concept": "Infrasound component of open coast surf. Large surf produces substantial energy below 20 Hz (below hearing threshold). This infrasound is felt, not heard: physical chest pressure, ground vibration. Recordings capture audio range only; they cannot convey the embodied experience of infrasound. E=8 rating reflects this full-body acoustic experience.", "level": "advanced", "department": "acoustic-physics", "description": "Infrasound as the missing element in surf recordings." },
+    { "concept": "Open coast as weather announcement. Juan de Fuca Surf is the storm heard before it arrives. Pacific storm systems produce coast surf first, then drive wind into the Olympics (degree 258), then generate Cascade thunderstorms (degree 259), then produce lightning strikes (degree 260). The surf at degree 257 is the advance announcement of the full Storm Arc that follows.", "level": "advanced", "department": "storm-sequence", "description": "Open coast surf as leading indicator of incoming storm system." }
+  ],
+  "cross_references": [
+    {"degree": 256, "sound": "prior entry", "relationship": "Storm Arc begins. E=8 opens. Transition from previous SPS arc."},
+    {"degree": 258, "sound": "Olympic Peninsula Wind Storm", "relationship": "E=8 continues. Storm moves inland: coast surf → Olympic ridge winds. Same storm system, different elevation and position."}
+  ],
+  "s36_pair": {"degree": 257, "artist": "Wellwater Conspiracy (Heavy)", "pairing_note": "E=7 vs E=8. Stoner rock riffs vs. sustained coastal roar. Both large, sustained, low-frequency presences. Guitar riff repeats; surf repeats. Acoustic character aligned. Music slightly below coast in energy."},
+  "milestones": ["STORM ARC OPENS (257-260)", "E=8 STREAK BEGINS (four consecutive, 257-259, then E=9 at 260)"],
+  "tags": ["juan-de-fuca", "strait-of-juan-de-fuca", "surf", "open-coast", "e8", "storm-arc", "winter-swell", "olympic-peninsula", "cape-flattery", "la-push", "makah", "quileute", "infrasound", "north-pacific-swell", "meteorology"]
+}
