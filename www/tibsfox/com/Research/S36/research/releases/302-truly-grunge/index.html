@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 302&deg; &mdash; Truly &mdash; E=6 &mdash; Grunge/Alt &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>302 &mdash; Truly (E=6)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">302&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Truly</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Grunge / Alt</span>
+          <span class="label-badge">Island Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>SECOND TRULY APPEARANCE &mdash; COUGAR SCREAM E=9 PAIRS.</strong> Truly returns in the final sixth for mature reappraisal. At degree 302, the Cougar full scream (SPS 302) TIES SPS MAXIMUM at E=9 &mdash; the most terrifying vocalization in the Pacific Northwest forest pairs with Truly&rsquo;s crystalline melodic grunge at E=6. Three consecutive E=9 entries begin (302&ndash;304).
+        </div>
+
+        <h2>The Crystalline Grunge Return</h2>
+        <p>Truly returns at degree 302 for a final-sixth reappraisal. The Capitol Hill band &mdash; Robert Roth (guitar/vocals), Hiro Yamamoto (bass, former Soundgarden), Mark Pickerel (drums, former Screaming Trees) &mdash; occupies one of the most specific niches in the Seattle alt-rock landscape: melodic, atmospheric grunge that is too clean for the noise crowd, too heavy for alternative pop, too sophisticated for the raw grunge mainstream. Island Records distributed the sound broadly; the commercial moment had already moved on.</p>
+
+        <p>The return in the final sixth is a reappraisal: what does Truly mean now, when the music can be heard without the genre's commercial noise? The answer is that it holds. <em>Fast Stories from Kid Coma</em> (1995, produced by Jack Endino) remains one of the better records in the Capitol Hill alt-rock catalog.</p>
+
+        <blockquote>"The melody is not incidental to the heaviness &mdash; it is load-bearing. The crystalline production disciplines the grunge impulse without domesticating it."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Soundgarden and Screaming Trees Lineage</h2>
+        <p>Truly's personnel tracks two of the engine's major bands. Hiro Yamamoto brought the Soundgarden thread &mdash; one of the engine's commercial peaks &mdash; into a post-commercial direction. Mark Pickerel brought the Screaming Trees thread: Eastern Washington roots in the Seattle mainstream, rhythmically sophisticated playing. The combination produced a band that could not have existed without the Seattle ecosystem's interconnectedness.</p>
+
+        <hr class="section-divider">
+
+        <h2>Jack Endino and the Production Tension</h2>
+        <p>The choice of Jack Endino &mdash; the engineer/producer most associated with raw grunge (Nirvana's <em>Bleach</em>, Mudhoney's debut) &mdash; to produce Truly's most melodic and sophisticated record is one of the engine's more interesting production decisions. Endino's directness disciplined Truly's atmospheric tendencies; Truly's melodic intelligence prevented the record from becoming another raw-grunge document. The tension is the record's most distinctive quality.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Fast Stories from Kid Coma (1995)</h4>
+            <span class="level advanced">Island Records</span>
+            <p>The definitive Truly statement. Produced by Jack Endino. Crystalline melodic grunge at its best: heavy enough to feel physical, clean enough to feel beautiful.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Feeling You Up (1996)</h4>
+            <span class="level intermediate">Island Records</span>
+            <p>EP and follow-up material. Continuing the melodic direction of <em>Fast Stories</em>.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Sunset Gun (2002)</h4>
+            <span class="level intermediate">Jetpak</span>
+            <p>Later period on independent label. Post-commercial continuation. Still artistically coherent. Commitment to the sound beyond the moment.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>E=6 -- The Melodic Weight</h2>
+        <p>E=6 is correct for Truly: genuine weight and emotional engagement, but the crystalline production and melodic sophistication mediate the force. Below E=7 (Hammerbox, ahead) where the rawness overtakes the melody. Above E=5 where the energy becomes spacious and ambient. Truly occupies the middle with precision: heavy enough, beautiful enough, specific enough to hold its place in the engine's energy sequence.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">220</span> Truly first appearance &mdash; Formation documented. Capitol Hill. Island. E=6. The first document of this band in the engine.</li>
+          <li><span class="ref-degree">301</span> Hovercraft &mdash; E=6 holds. Noise rock to melodic grunge. Capitol Hill continues. Abrasive to crystalline.</li>
+          <li><span class="ref-degree">303</span> Brad &mdash; E=5. Post-Grunge. Capitol Hill continues. Melodic temperature drops slightly.</li>
+          <li><span class="ref-degree">SPS 302</span> Cougar full scream &mdash; E=9. TIES SPS MAXIMUM. Blood-curdling escalating shriek. The most terrifying PNW sound. E=6 + E=9 = E=15.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">302 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">6</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge / Alt</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1991&ndash;2003</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Island Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Robert Roth</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Hiro Yamamoto</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Mark Pickerel</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Appearance</span><span class="stat-value">2nd (first: 220)</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">83.9%</span></div>
+          <div class="stat-row"><span class="stat-label">E-streak</span><span class="stat-value">E=6 (3rd)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Cougar scream E=9</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Associated</h4>
+          <div class="stat-row"><span class="stat-label">Producer</span><span class="stat-value">Jack Endino</span></div>
+          <div class="stat-row"><span class="stat-label">Prior band (bass)</span><span class="stat-value">Soundgarden</span></div>
+          <div class="stat-row"><span class="stat-label">Prior band (drums)</span><span class="stat-value">Screaming Trees</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
