@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 325&deg; &mdash; Love Battery (heavy) &mdash; E=7 &mdash; Grunge/Psych &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .return-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #4A148C; color: #E1BEE7; border: 1px solid #6A1B9A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .return-banner { background: linear-gradient(135deg, #1A237E, #283593); border: 2px solid #7986CB; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .return-banner strong { color: #E8EAF6; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>325 &mdash; Love Battery / heavy (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">325&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Love Battery <span style="font-size: 1.1rem; color: #B71C1C; font-weight: 400;">(heavy)</span></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Grunge / Psych</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="return-badge">Return</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="return-banner">
+          <strong>RETURN ENTRY &mdash; THE HEAVY SIDE.</strong> Love Battery first entered the engine at degree 221 as the psychedelic anomaly on a grunge label (E=5). At degree 325, the same band returns with the volume at nine. E rises from 5 to 7. The fuzz is not for texture. The fuzz is the weight.
+        </div>
+
+        <h2>The Fuzz at Nine</h2>
+        <p>Love Battery's psychedelic side &mdash; E=5, reverb-drenched, hazy, the Sub Pop outlier &mdash; was documented at degree 221. Degree 325 documents the other half: the tracks where Ron Nine pushes the fuzz past texture into compression, where Jim White's bass is the weight-bearing structure, and where the tempo drops until the riff becomes a wall instead of a melody.</p>
+
+        <p>This is Love Battery in the Grunge/Psych fusion mode. Not grunge's confrontational punk directness. Not psychedelia's airy exploration. The specific zone between them: heavy enough for the Sub Pop catalog, exploratory enough for the psychedelic tradition. Slow tempos. Dense fuzz. Riffs as hypnotic structures. The U-District's heavy half.</p>
+
+        <blockquote>"The riff is not a vehicle for melodic development. The riff is a hypnotic structure. You live inside it or you do not enter."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>E=7 Calibration &mdash; What Changes</h2>
+        <p>Two units of energy separate the 221 entry from the 325 entry. The difference is not a different band or a different album &mdash; Love Battery's records contain both modes. The difference is which side of the catalog is foregrounded:</p>
+        <p>At E=5: fuzz as texture. Reverb as space. Tempo as mid-range. The haze is the point.</p>
+        <p>At E=7: fuzz as compression. Bass as the primary weight-bearing voice. Tempo slowed until the riff has mass. The weight is the point.</p>
+        <p>Jason Finn's kick drum lands harder. Jim White's bass is mixed forward. The riff cycles until the listener is inside it. This is the E=7 Love Battery &mdash; the same musicians, the same era, the heavier mode.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Grunge/Psych Genre Position</h2>
+        <p>The genre ancestry is specific: Blue Cheer (heavy psychedelia as precursor), Black Sabbath (slow heavy riffs as hypnotic structures), Spacemen 3 (drone-based psychedelia with guitar weight), the Stooges (confrontational noise as aesthetic). Love Battery draws from all of these without being any of them.</p>
+        <p>In the Sub Pop context: Mudhoney occupies garage-punk. TAD occupies sludge. Nirvana occupies pop-punk. Love Battery occupies the psychedelic corner. These are not competitors for the same territory but complementary mappings of a diverse catalog. The heavy Love Battery is the Grunge/Psych entry that Sub Pop's psychedelic wing required.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography &mdash; Heavy Emphasis</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Between the Eyes (1990)</h4>
+            <span class="level advanced">Sub Pop</span>
+            <p>The debut. The rough Sub Pop production is itself a texture. Heavy tracks: "Between the Eyes," "Foot." Low fidelity enhances the weight rather than obscuring it.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Dayglo (1992)</h4>
+            <span class="level advanced">Sub Pop</span>
+            <p>Richer production makes the heavy tracks heavier &mdash; bass frequencies more defined. The E=7 material sits alongside the E=5 psychedelia in the same sequence. Both modes, one album.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Far Gone (1993)</h4>
+            <span class="level intermediate">Sub Pop / Atlas</span>
+            <p>The heavy tracks are more polished &mdash; the grunge commercial moment at its peak. The fuzz is the same; the production is more controlled. Most radio-ready heavy Love Battery.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Confusion Au Go-Go (1995)</h4>
+            <span class="level intermediate">Atlas / Mercury</span>
+            <p>Commercial moment passing. Heavy tracks grow slower, denser, more experimental. The artistic vision doubles down when the commercial reason to compromise disappears.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">221</span> Love Battery (psych) &mdash; E=5. First entry. The hazy side. Same band, same era, the airy mode.</li>
+          <li><span class="ref-degree">299</span> Love Battery (return) &mdash; Earlier return, grunge context. 325 is the Grunge/Psych fusion specifically.</li>
+          <li><span class="ref-degree">324</span> Swallow &mdash; E=7, Sub Pop, founding moment. Energy holds at 7. Label stays Sub Pop.</li>
+          <li><span class="ref-degree">326</span> Truly (heavy) &mdash; E=6 ahead. Island Records. Capitol Hill. Energy steps down from 7.</li>
+          <li><span class="ref-degree">SPS 325</span> Salmon-Bear-Eagle Convergence &mdash; E=8. Three keystone species at the spawning creek. FIRST MULTI-SPECIES SYNTHESIS EVENT. The most complex SPS pairing.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">325 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge / Psych</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1989&ndash;1996</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">U-District</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Ron Nine</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Kevin Whitworth</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Jim White</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Jason Finn</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">90.3%</span></div>
+          <div class="stat-row"><span class="stat-label">Prior entry</span><span class="stat-value">221 (E=5)</span></div>
+          <div class="stat-row"><span class="stat-label">Entry type</span><span class="stat-value">Return / Heavy</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Pairing</h4>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Salmon-Bear-Eagle</span></div>
+          <div class="stat-row"><span class="stat-label">SPS energy</span><span class="stat-value">E = 8</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E = 15</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
