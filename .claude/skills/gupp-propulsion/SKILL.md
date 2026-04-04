@@ -1,6 +1,6 @@
 ---
 name: gupp-propulsion
-description: Interrupt controller for multi-agent execution enforcement. Converts polled (waiting) execution to interrupt-driven (proactive) execution using per-runtime strategies, configurable thresholds, and the Deacon heartbeat supervision pattern. Fights LLM assistant training bias toward passivity.
+description: Interrupt controller converting polled to proactive agent execution. Per-runtime strategies, configurable thresholds, Deacon heartbeat supervision. Fights LLM passivity bias.
 ---
 
 # GUPP Propulsion
