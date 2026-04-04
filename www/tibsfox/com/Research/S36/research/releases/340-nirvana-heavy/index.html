@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 340&deg; &mdash; Nirvana &mdash; E=9 &mdash; Heavy Grunge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #880E4F; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; border: 1px solid #283593; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #880E4F; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FCE4EC; color: #880E4F; border: 1px solid #F48FB1; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #880E4F; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #880E4F; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FCE4EC; font-style: italic; color: #4A148C; }
+    .milestone-banner { background: linear-gradient(135deg, #1A237E, #880E4F); border: 2px solid #E91E63; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #FCE4EC; }
+    .milestone-banner strong { color: #F48FB1; }
+    .arc-visual { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1.5rem 0; }
+    .arc-step { padding: 0.75rem; border-radius: 6px; text-align: center; }
+    .arc-step.tad { background: #FCE4EC; border: 1px solid #F48FB1; }
+    .arc-step.skinyard { background: #EDE7F6; border: 1px solid #9575CD; }
+    .arc-step.greenriver { background: #E0F2F1; border: 1px solid #26A69A; }
+    .arc-step.nirvana { background: linear-gradient(135deg, #FCE4EC, #EDE7F6); border: 2px solid #880E4F; }
+    .arc-step .band { font-size: 0.82rem; font-weight: 700; font-family: system-ui, sans-serif; }
+    .arc-step .degree { font-size: 0.7rem; color: #757575; font-family: system-ui, sans-serif; }
+    .arc-step .energy { font-size: 1.1rem; font-weight: 700; font-family: 'Georgia', serif; }
+    .tad .band { color: #B71C1C; } .tad .energy { color: #B71C1C; }
+    .skinyard .band { color: #4527A0; } .skinyard .energy { color: #4527A0; }
+    .greenriver .band { color: #004D40; } .greenriver .energy { color: #004D40; }
+    .nirvana .band { color: #880E4F; } .nirvana .energy { color: #880E4F; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>340 &mdash; Nirvana (E=9)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">340&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Nirvana</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 9</span>
+          <span class="genre-badge">Heavy Grunge</span>
+          <span class="label-badge">Sub Pop → DGC</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>FINAL NIRVANA ENTRY &mdash; METAL SUMMIT CLOSES AT 94.4%.</strong> This is the engine's last Nirvana entry. The heavy dimension of the Sub Pop-to-Nevermind arc. Aberdeen to the world. 30 million copies of Nevermind. The proto-grunge template fully realized. E=9 paired with the Orca Breach Cascade (SPS 340): E=18. The summit's maximum.
+        </div>
+
+        <h2>The Metal Summit Arc</h2>
+        <div class="arc-visual">
+          <div class="arc-step tad">
+            <div class="band">TAD</div>
+            <div class="degree">337 &mdash; Georgetown</div>
+            <div class="energy">E=9</div>
+          </div>
+          <div class="arc-step skinyard">
+            <div class="band">Skin Yard</div>
+            <div class="degree">338 &mdash; U-District</div>
+            <div class="energy">E=7</div>
+          </div>
+          <div class="arc-step greenriver">
+            <div class="band">Green River</div>
+            <div class="degree">339 &mdash; Capitol Hill</div>
+            <div class="energy">E=7</div>
+          </div>
+          <div class="arc-step nirvana">
+            <div class="band">Nirvana</div>
+            <div class="degree">340 &mdash; Aberdeen</div>
+            <div class="energy">E=9</div>
+          </div>
+        </div>
+
+        <p>The metal summit follows the full arc from peak (TAD's sub-Pop maximum) through the historical precedents (Skin Yard, Green River) to the commercial climax (Nirvana). The energy profile &mdash; 9, 7, 7, 9 &mdash; reflects the historical arc: the heavy Sub Pop ceiling, the pre-commercial underground, the genetic material, and the global expression. Nirvana is the apex of everything that preceded it in the Seattle heavy music story.</p>
+
+        <blockquote>"Aberdeen produced Kurt Cobain. Seattle produced Nirvana. The distance between them &mdash; 100 miles, two different worlds &mdash; is the space in which the songs were written."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Heavy Nirvana &mdash; What This Entry Honors</h2>
+        <p>Degree 340 honors the heavy dimension of Nirvana's catalog specifically &mdash; not the pop craftsmanship of "Come as You Are" or the accessibility of "Polly," but the Bleach-era weight, the B-side roar, the In Utero rawness. The metal summit context positions Nirvana correctly: they are not primarily a pop band who happened to play loud; they are a heavy band who happened to write songs that the mainstream could access.</p>
+        <p><em>Bleach</em> (1989, Sub Pop): produced by Jack Endino for $606.17. "Blew," "Floyd the Barber," "School" &mdash; the heavy template before the polished production. <em>In Utero</em> (1993, DGC): Steve Albini's raw production, Cobain's deliberate attempt to return to the heavy origin after Nevermind's commercial transformation. "Frances Farmer Will Have Her Revenge on Seattle." "Pennyroyal Tea." The loud side of the final album.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Bleach (1989)</h4>
+            <span class="level milestone">Sub Pop / Endino / $606.17</span>
+            <p>The heavy origin. Jack Endino producing. "Blew," "School," "Floyd the Barber." The Melvins influence fully present. Maximum Sub Pop weight before the pop instinct was fully developed. The record that preceded everything.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Nevermind (1991)</h4>
+            <span class="level milestone">DGC / Butch Vig / 30M</span>
+            <p>The commercial apex. Butch Vig producing. "Smells Like Teen Spirit." 30 million copies worldwide. Ended hair metal's commercial dominance. The proto-grunge template carried to the global mainstream. The heavy dimension is still present beneath the production.</p>
+          </div>
+          <div class="theory-card">
+            <h4>In Utero (1993)</h4>
+            <span class="level advanced">DGC / Steve Albini</span>
+            <p>The return to raw. Steve Albini producing. Deliberate move away from Nevermind's polish. "Frances Farmer Will Have Her Revenge on Seattle." "Pennyroyal Tea." The heaviest major-label Nirvana record. Cobain's artistic assertion over commercial trajectory.</p>
+          </div>
+          <div class="theory-card">
+            <h4>MTV Unplugged (1994, posthumous)</h4>
+            <span class="level intermediate">DGC / acoustic</span>
+            <p>The quiet side. David Bowie, Lead Belly, Vaselines covers. The breadth of Cobain's listening documented in a single performance. Released November 1994, seven months after his death. Acoustic but not less intense.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Kurt Cobain &mdash; With Respect</h2>
+        <p>Kurt Donald Cobain: born February 20, 1967 in Aberdeen, Washington. Died April 5, 1994 in Seattle, Washington. Age 27. He left a wife and a daughter (Frances Bean Cobain, born August 1992). The King County Medical Examiner's Office determined the cause of death to be a self-inflicted gunshot wound. The investigation concluded suicide.</p>
+        <p>The engine documents this once and completely, with respect for the person and the family he left behind. The manner of his death is a biographical fact; it is not the meaning of his music. The meaning is in the songs &mdash; and the songs have been in continuous cultural circulation since 1991. They hold up because the songwriting is genuinely good and the emotional content is genuinely present. The music outlasts the biography.</p>
+        <p>Frances Bean Cobain (born 1992) is a visual artist. The engine notes her existence and does not proceed further into her life.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Through-Line: Deep Six to Nirvana</h2>
+        <p>The engine's most carefully constructed sequential arc closes here. Deep Six (1986, C/Z Records): Skin Yard (degree 338) + Green River (degree 339) + Melvins (the Montesano band who taught Cobain to play guitar). Green River contains the Mudhoney wing and the Pearl Jam wing. The Melvins connection runs from the Deep Six co-appearance through Buzz Osborne's direct guitar teaching to Cobain. Nirvana is the specific synthesis of the Sub Pop heavy tradition (Endino, Bleach, TAD as contemporaries) and the proto-grunge template (Green River, the Melvins, the Deep Six underground). The engine documents the complete genealogy across four consecutive degrees.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">339</span> Green River &mdash; Proto-form immediately precedes peak form. Green River holds the genetic material; Nirvana is the full expression. E=7 to E=9.</li>
+          <li><span class="ref-degree">337</span> TAD &mdash; Sub Pop peer, Jack Endino connection. Both produced by Endino at Reciprocal. TAD and Nirvana were Sub Pop peers in 1988-1989.</li>
+          <li><span class="ref-degree">338</span> Skin Yard &mdash; Endino's guitar origin. Endino played guitar in Skin Yard, then produced Bleach. The direct production lineage through the same engineer.</li>
+          <li><span class="ref-degree">SPS 340</span> Orca Breach Cascade &mdash; E=9 + E=9 = E=18. The metal summit's maximum. Three consecutive orca breaches against the commercial apex of the Seattle heavy music story.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">340 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">9</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Heavy Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1987&ndash;1994</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Aberdeen, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop &rarr; DGC</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Kurt Cobain</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Krist Novoselic</span></div>
+          <div class="stat-row"><span class="stat-label">Drums (DGC era)</span><span class="stat-value">Dave Grohl</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">94.4%</span></div>
+          <div class="stat-row"><span class="stat-label">Summit</span><span class="stat-value">METAL CLOSES</span></div>
+          <div class="stat-row"><span class="stat-label">Entry type</span><span class="stat-value">FINAL NIRVANA</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Records</h4>
+          <div class="stat-row"><span class="stat-label">Bleach</span><span class="stat-value">1989 Sub Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Nevermind</span><span class="stat-value">1991 DGC, 30M</span></div>
+          <div class="stat-row"><span class="stat-label">In Utero</span><span class="stat-value">1993 DGC / Albini</span></div>
+          <div class="stat-row"><span class="stat-label">Unplugged</span><span class="stat-value">1994 posthumous</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>The Summit E=18</h4>
+          <div class="stat-row"><span class="stat-label">S36</span><span class="stat-value">E = 9 (Nirvana)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS</span><span class="stat-value">E = 9 (Orca)</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E = 18</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
