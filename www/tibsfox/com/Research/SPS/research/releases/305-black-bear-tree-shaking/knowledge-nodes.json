@@ -1,0 +1,47 @@
+{
+  "degree": 305,
+  "species": "American Black Bear",
+  "scientific_name": "Ursus americanus",
+  "slug": "305-black-bear-tree-shaking",
+  "sound_type": "confrontation tree-shaking display: bear seizes small tree, shakes with full upper-body force; simultaneous wood-crack, branch-snap, foliage crash, and explosive huff vocalizations; stationary display; audible 50-100 meters; high-arousal defensive confrontation",
+  "energy": 7,
+  "ecosystem": "Confrontation context -- defensive or territorial assertion at close range, in response to human or large predator proximity, or intraspecific competition; forest interior and edge",
+  "season": "Resident (year-round at low elevations; confrontation displays occur whenever bear is surprised or challenged)",
+  "family": "Ursidae",
+  "order": "Carnivora",
+  "conservation_status": "Least Concern (IUCN). Common and widespread throughout Pacific Northwest. Population approximately 25,000-30,000 in Washington state alone. Not threatened.",
+  "milestone": "SECOND URSIDAE ENTRY. Completes the Ursidae pair with SPS-304 (Grizzly Bear threat-charge, E=8). Grizzly = kinetic locomotion toward listener (E=8); Black Bear = stationary display at fixed point (E=7). Both bear taxa of the Pacific Northwest documented at appropriate relative energies.",
+  "coordinates": {
+    "lat": 47.5,
+    "lon": -122.0,
+    "description": "Pacific Northwest distribution: common throughout western Washington and Oregon, Cascade Range, Olympic Peninsula, Klamath Mountains. Habitat generalist. Low-elevation populations may be year-round active; high-elevation populations hibernate."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Combined mechanical and vocal: tree-shaking produces wood-crack (structural), branch-snap (fracture), foliage crash (secondary); huff is explosive nasal exhalation (vocal warning component). Multiple simultaneous acoustic sources.",
+    "mechanics": "Bear seizes tree trunk or major branch with forepaws and shakes with full upper-body strength. Force sufficient to fracture small branches and partially crack main trunk. Rapid, forceful, sustained for seconds to tens of seconds.",
+    "frequency_range": "Broadband mechanical sounds (wood-crack, snap, crash): energy across 100-5,000 Hz. Huff: low-frequency broadband exhalation, 100-1,000 Hz primary. Combined profile is complex and broadband.",
+    "duration": "Display lasts 5-30 seconds typically; may repeat. Huff vocalizations rapid in succession at high arousal.",
+    "e7_calibration": "E=7: stationary confrontational display at high force. Below Grizzly charge (E=8, kinetic locomotion). Above standard bear vocalization (E=5-6). The tree-shaking display is E=7 because it is maximum acoustic output from a stationary position."
+  },
+  "nodes": [
+    {
+      "id": "ursidae-pair",
+      "type": "family-arc",
+      "title": "Ursidae Pair: 304 Grizzly (E=8) + 305 Black Bear (E=7)",
+      "description": "Both Pacific Northwest bear taxa documented in consecutive degrees at appropriate relative energies. Grizzly charge = kinetic, locomotive, coming toward listener (E=8). Black Bear tree-shaking = stationary, displaying at fixed point (E=7). The energy difference is the difference between moving at the threat and demonstrating at the threat.",
+      "connections": ["confrontation-spectrum", "stationary-vs-kinetic"]
+    },
+    {
+      "id": "confrontation-spectrum",
+      "type": "concept",
+      "title": "Black Bear Confrontation as Communication",
+      "description": "Tree-shaking is defensive confrontation, not predatory aggression. The bear communicates: I am here, I am large, I am capable, give me space. The display is a message, not an attack. Stationary intensity: maximum acoustic output to assert presence without motion.",
+      "connections": ["ursidae-pair"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-304", "species": "Grizzly Bear threat-charge", "relationship": "Consecutive Ursidae entries. E=8 vs. E=7. Kinetic vs. stationary. The family pair."},
+    {"target": "SPS-308", "species": "Marten scream", "relationship": "E=9 SPS maximum three degrees later. Both from old-growth forest contexts adjacent to Aberdeen-area timber country."},
+    {"target": "S36-305", "artist": "Mad Season (grunge)", "relationship": "E=7 + E=7 = E=14. Perfect equilibrium. Both are confrontational assertions at a fixed point. Stationary intensity on both sides."}
+  ]
+}
