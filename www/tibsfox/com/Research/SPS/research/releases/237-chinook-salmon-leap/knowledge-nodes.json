@@ -1,0 +1,61 @@
+{
+  "degree": 237, "species": "Chinook Salmon", "slug": "237-chinook-salmon-leap", "sound_type": "massive body-slap waterfall leap", "energy": 6,
+  "scientific_name": "Oncorhynchus tshawytscha",
+  "common_names": ["Chinook Salmon", "King Salmon", "Tyee Salmon", "Spring Salmon"],
+  "family": "Salmonidae",
+  "ecosystem": "river (spawning migration), open ocean, estuary",
+  "season": "fall Chinook (Aug-Oct); spring Chinook (Feb-Jul)",
+  "taxonomy": {
+    "order": "Salmoniformes",
+    "family": "Salmonidae",
+    "genus": "Oncorhynchus",
+    "species": "O. tshawytscha",
+    "note": "First species-specific Salmonidae entry. Genus overview at degree 236."
+  },
+  "biology": {
+    "size": "60-120 cm, 4.5-20 kg typical; record 44.2 kg (Kenai River 1985, 97.5 lbs)",
+    "run_types": ["spring Chinook (springers): Feb-Jul entry, Aug-Sep spawn, fat-rich, most endangered", "fall Chinook: Aug-Oct entry, fall spawn, more numerous"],
+    "juvenile_types": ["ocean-type (subyearlings): coastal rivers, migrate in first year", "stream-type (yearlings): interior rivers, rear 1 year in freshwater"],
+    "ocean_range": "California to Alaska to Bering Sea",
+    "ocean_duration": "1-7 years at sea before return"
+  },
+  "sound_profile": {
+    "type": "physical impact sound, not vocalization",
+    "description": "Waterfall leap: launch splash (low-frequency water displacement) + body-slap on reentry (broadband impact 50-2000+ Hz). Heavier than smaller salmon species due to greater mass. E=6 at active falls during run.",
+    "key_sites": ["Cedar Falls (Cedar River)", "Tumwater Falls (Deschutes/Olympia)", "Sunset Falls (Skykomish)"],
+    "notes": "E=6 vs. E=5 genus level (236): Chinook mass generates heavier acoustic impact than smaller species"
+  },
+  "orca_nexus": {
+    "southern_resident_orca": "SRKW (~73-75 individuals, J/K/L pods, Endangered 2005)",
+    "dietary_dependency": "80-90%+ Chinook in SRKW diet. Cultural learning -- passed mother to calf for generations.",
+    "conservation_link": "SRKW cannot recover without Chinook recovery. Same crisis, two species."
+  },
+  "conservation": {
+    "esa_listings": [
+      "Puget Sound Chinook ESU: Threatened",
+      "Snake River fall Chinook ESU: Threatened",
+      "Snake River spring/summer Chinook ESU: Threatened",
+      "Upper Columbia spring Chinook ESU: Endangered"
+    ],
+    "threats": ["dams (lower Snake River four dams)", "habitat degradation", "ocean warming", "hatchery genetic effects"],
+    "recovery_success": "Elwha dam removal 2011-2014: Chinook documented above former dam sites within a decade"
+  },
+  "cultural": {
+    "first_salmon": "Chinook is the primary First Salmon ceremony species for most PNW nations",
+    "etymology": "Chinook name derives from Chinook Nation of lower Columbia River",
+    "celilo_falls": "Most important salmon fishing site in the world before inundation by The Dalles Dam 1957",
+    "boldt_decision": "1974: tribal treaty rights to 50% of harvestable salmon; Chinook as primary subject"
+  },
+  "theory_nodes": [
+    { "concept": "Chinook waterfall leap: E=6 broadband impact. Largest Pacific salmon (to 50 kg) produces heaviest acoustic impacts at falls. Mass-velocity relationship: heavier fish at same velocity = more acoustic energy.", "level": "advanced", "department": "acoustics", "description": "Physics of the King Salmon leap." },
+    { "concept": "Chinook-Orca nexus: Southern Resident Orca are Chinook-obligate (80-90% diet). SRKW recovery requires Chinook recovery. Same conservation crisis, two species. Cannot be decoupled.", "level": "milestone", "department": "ecology", "description": "The most critical predator-prey dependency in Salish Sea conservation." },
+    { "concept": "Two run types: spring Chinook (fat-rich, Feb-Jul entry, most endangered by warming water) and fall Chinook (more numerous, Aug-Oct). Different ecology, different conservation status, same species.", "level": "intermediate", "department": "biology", "description": "Spring vs. fall Chinook life history divergence." }
+  ],
+  "cross_references": [
+    {"degree": 236, "species": "Pacific Salmon overview", "relationship": "FIRST SALMONIDAE at genus level. Chinook introduced in five-species overview. Degree 237 is species-specific deep dive."},
+    {"degree": 238, "species": "Coho Salmon spawning", "relationship": "Next species in Salmonidae chapter. Coho aggressive male spawning vs. Chinook waterfall leap. Different sound, different energy, same family."}
+  ],
+  "s36_pair": {"degree": 237, "artist": "Foo Fighters", "pairing_note": "King Salmon + king of post-grunge. Both largest in their category. Chinook leap E=6; Foo Fighters E=7. Forward momentum against resistance. E=13 combined."},
+  "milestones": ["First species-specific Salmonidae entry", "Chinook-Orca nexus documented in detail"],
+  "tags": ["salmonidae", "chinook", "king-salmon", "waterfall-leap", "orca-obligate", "esa-threatened", "spring-chinook", "fall-chinook", "celilo-falls", "boldt-decision", "elwha-dam-removal", "first-salmon-ceremony", "oncorhynchus-tshawytscha"]
+}
