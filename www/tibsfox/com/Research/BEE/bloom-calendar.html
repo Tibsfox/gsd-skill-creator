@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Succession Calendar &mdash; Feed the Bees | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --honey: #d4943a; --honey-light: #e8a84c;
+  --green: #4CAF50; --green-dark: #1B5E20;
+  --gold: #C4A35A; --blue: #4a7aba;
+  --mar: #7a5a8a; --apr: #4a8a5a; --may: #5a9a4a; --jun: #8a9a3a;
+  --jul: #9a8a2a; --aug: #9a6a2a; --sep: #8a5a3a; --oct: #6a4a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.7; }
+a { color:var(--honey); text-decoration:none; }
+a:hover { color:var(--honey-light); }
+
+header {
+  background:linear-gradient(135deg, #0a0806 0%, var(--green-dark) 40%, #1a1408 70%, #0a0806 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:3px solid var(--honey);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; }
+header .subtitle { color:var(--honey); font-size:0.9rem; font-style:italic; margin-top:0.3rem; }
+header nav { margin-top:1rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:1000px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1.3rem; color:#fff; margin:2.5rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+h3 { font-size:1rem; color:var(--honey); margin:1.5rem 0 0.5rem; font-weight:600; }
+p { margin:0.6rem 0; font-size:0.9rem; }
+
+.month {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin:1rem 0;
+}
+.month h3 { margin-top:0; font-size:1.1rem; }
+.month .context { font-size:0.82rem; font-style:italic; color:var(--dim); margin-bottom:0.8rem; }
+
+.plant-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:0.6rem; }
+.plant {
+  padding:0.6rem 0.8rem; border-radius:4px; font-size:0.82rem; font-family:system-ui,sans-serif;
+  border-left:3px solid var(--honey);
+  background:rgba(212,148,58,0.03);
+}
+.plant .common { color:#fff; font-weight:600; }
+.plant .latin { color:var(--dim); font-style:italic; font-size:0.75rem; }
+.plant .info { color:var(--dim); font-size:0.72rem; margin-top:0.2rem; }
+.plant .pollinators { color:var(--green); font-size:0.72rem; }
+
+.native { border-left-color: var(--green); }
+.non-native { border-left-color: var(--blue); }
+
+.callout {
+  background:rgba(212,148,58,0.06); border:1px solid rgba(212,148,58,0.15); border-radius:4px;
+  padding:1rem 1.2rem; margin:1rem 0; font-size:0.85rem; font-family:system-ui,sans-serif;
+}
+
+.legend { display:flex; gap:1.5rem; margin:1rem 0; font-size:0.78rem; font-family:system-ui,sans-serif; }
+.legend-item { display:flex; align-items:center; gap:0.4rem; }
+.legend-dot { width:12px; height:3px; border-radius:1px; }
+
+footer {
+  max-width:1000px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bloom Succession Calendar</h1>
+  <div class="subtitle">Continuous nectar and pollen from February through October &mdash; zero gaps</div>
+  <nav>
+    <a href="index.html">Feed the Bees</a>
+    <a href="native-bees.html">Native Bees</a>
+    <a href="seed-starting.html">Seed Starting</a>
+    <a href="conservation.html">Conservation</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+<p>The goal: <strong>at least 3 species flowering in every month</strong> from March through October. No single plant blooms continuously &mdash; different bee species emerge throughout the season, and each visits different flowers. Plant for every window. Overlap is intentional.</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> PNW Native</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue);"></div> Non-Native (Extension-recommended)</div>
+</div>
+
+<p style="font-size:0.8rem; color:var(--dim); font-family:system-ui,sans-serif;">All recommendations from WSU Extension, OSU Extension, Xerces Society Maritime NW Plant List, and USDA NRCS.</p>
+
+<!-- MARCH -->
+<div class="month" style="border-left:3px solid var(--mar);">
+  <h3 style="color:var(--mar);">March &mdash; Early Emergence</h3>
+  <div class="context">Critical month. Overwintering bumble bee queens emerge starving. First mason bees active. Without early flowers, queens die.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Indian Plum</span> <span class="latin">Oemleria cerasiformis</span><div class="info">Shrub &middot; 6&ndash;15 ft &middot; Part shade to shade</div><div class="pollinators">Earliest PNW bloom &middot; Mason bees, mining bees</div></div>
+    <div class="plant native"><span class="common">Tall Oregon Grape</span> <span class="latin">Mahonia aquifolium</span><div class="info">Shrub &middot; 3&ndash;8 ft &middot; Full sun to shade</div><div class="pollinators">Bright yellow clusters &middot; Bumble bees, mason bees</div></div>
+    <div class="plant native"><span class="common">Kinnikinnick</span> <span class="latin">Arctostaphylos uva-ursi</span><div class="info">Groundcover &middot; 6&ndash;12 in &middot; Full sun to part shade</div><div class="pollinators">Early bumble bees, mining bees</div></div>
+    <div class="plant native"><span class="common">Red Flowering Currant</span> <span class="latin">Ribes sanguineum</span><div class="info">Shrub &middot; 6&ndash;10 ft &middot; Full sun to part shade</div><div class="pollinators">CRITICAL early food for queen bumble bees + hummingbirds</div></div>
+    <div class="plant native"><span class="common">Pacific Bleeding Heart</span> <span class="latin">Dicentra formosa</span><div class="info">Wildflower &middot; 8&ndash;18 in &middot; Part shade to shade</div><div class="pollinators">Long-tongued bumble bees, hummingbirds</div></div>
+    <div class="plant non-native"><span class="common">Pasque Flower</span> <span class="latin">Pulsatilla vulgaris</span><div class="info">Perennial &middot; 6&ndash;12 in &middot; Full sun</div><div class="pollinators">Very early bumble bee queens</div></div>
+  </div>
+</div>
+
+<!-- APRIL -->
+<div class="month" style="border-left:3px solid var(--apr);">
+  <h3 style="color:var(--apr);">April &mdash; Mason Bee Peak</h3>
+  <div class="context">Mason bees at peak activity. Early bumble bee workers foraging. The garden comes alive.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Common Camas</span> <span class="latin">Camassia quamash</span><div class="info">Wildflower &middot; 1&ndash;2 ft &middot; Full sun</div><div class="pollinators">Wide range of native bees &middot; Historically critical PNW species</div></div>
+    <div class="plant native"><span class="common">Western Columbine</span> <span class="latin">Aquilegia formosa</span><div class="info">Wildflower &middot; 1&ndash;3 ft &middot; Part shade to shade</div><div class="pollinators">Bumble bees, mason bees, hummingbirds</div></div>
+    <div class="plant native"><span class="common">Saskatoon Serviceberry</span> <span class="latin">Amelanchier alnifolia</span><div class="info">Shrub/tree &middot; 6&ndash;20 ft &middot; Full sun to part shade</div><div class="pollinators">Bumble bees, mason bees, butterflies</div></div>
+    <div class="plant native"><span class="common">Oregon Iris</span> <span class="latin">Iris tenax</span><div class="info">Wildflower &middot; 6&ndash;16 in &middot; Full sun to part shade</div><div class="pollinators">Bumble bees</div></div>
+    <div class="plant native"><span class="common">Red Elderberry</span> <span class="latin">Sambucus racemosa</span><div class="info">Shrub &middot; 8&ndash;20 ft &middot; Part shade</div><div class="pollinators">Bees, beetles, flower flies</div></div>
+    <div class="plant native"><span class="common">Arrowleaf Balsamroot</span> <span class="latin">Balsamorhiza sagittata</span><div class="info">Wildflower &middot; 1&ndash;2 ft &middot; Full sun</div><div class="pollinators">Native bees, bumble bees</div></div>
+    <div class="plant native"><span class="common">Wild Strawberry</span> <span class="latin">Fragaria virginiana</span><div class="info">Groundcover &middot; 3&ndash;6 in &middot; Full sun to part shade</div><div class="pollinators">Small bees, syrphid flies &middot; Edible fruit</div></div>
+    <div class="plant native"><span class="common">Chocolate Lily</span> <span class="latin">Fritillaria lanceolata</span><div class="info">Wildflower &middot; 1&ndash;2 ft &middot; Part shade</div><div class="pollinators">Native bees, early pollinators</div></div>
+    <div class="plant native"><span class="common">Twinberry</span> <span class="latin">Lonicera involucrata</span><div class="info">Shrub &middot; 3&ndash;8 ft &middot; Part shade to sun</div><div class="pollinators">Hummingbirds, bumble bees</div></div>
+  </div>
+</div>
+
+<!-- MAY -->
+<div class="month" style="border-left:3px solid var(--may);">
+  <h3 style="color:var(--may);">May &mdash; Peak Diversity</h3>
+  <div class="context">Maximum pollinator diversity. Most gardens peak here. The challenge is extending this abundance into summer and fall.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Oregon Sunshine</span> <span class="latin">Eriophyllum lanatum</span><div class="info">Wildflower &middot; 6 in&ndash;2 ft &middot; Full sun</div><div class="pollinators">20+ bee genera documented</div></div>
+    <div class="plant native"><span class="common">Mock Orange</span> <span class="latin">Philadelphus lewisii</span><div class="info">Shrub &middot; 4&ndash;10 ft &middot; Full sun to part shade</div><div class="pollinators">WA state flower &middot; Native bees, bumble bees</div></div>
+    <div class="plant native"><span class="common">Broadleaf Lupine</span> <span class="latin">Lupinus latifolius</span><div class="info">Wildflower &middot; 1&ndash;4 ft &middot; Full sun</div><div class="pollinators">Buzz-pollinated by bumble bees</div></div>
+    <div class="plant native"><span class="common">Nootka Rose</span> <span class="latin">Rosa nutkana</span><div class="info">Shrub &middot; 3&ndash;8 ft &middot; Full sun to part shade</div><div class="pollinators">Pollen-collecting bees &middot; Open-faced flowers</div></div>
+    <div class="plant native"><span class="common">Salal</span> <span class="latin">Gaultheria shallon</span><div class="info">Shrub &middot; 2&ndash;6 ft &middot; Shade to part shade</div><div class="pollinators">Bumble bees, native bees</div></div>
+    <div class="plant native"><span class="common">Showy Milkweed</span> <span class="latin">Asclepias speciosa</span><div class="info">Wildflower &middot; 1&ndash;3 ft &middot; Full sun</div><div class="pollinators">Monarch host + bumble bees (not native to W. WA &mdash; plant E. of Cascades)</div></div>
+    <div class="plant non-native"><span class="common">Lavender</span> <span class="latin">Lavandula angustifolia</span><div class="info">Perennial &middot; 1&ndash;2 ft &middot; Full sun</div><div class="pollinators">Exceptional nectar &middot; Honey bees, bumble bees, butterflies</div></div>
+    <div class="plant non-native"><span class="common">Catmint</span> <span class="latin">Nepeta spp.</span><div class="info">Perennial &middot; 1&ndash;3 ft &middot; Full sun</div><div class="pollinators">Long bloom May&ndash;Sep &middot; Deadhead for rebloom</div></div>
+  </div>
+</div>
+
+<!-- JUNE -->
+<div class="month" style="border-left:3px solid var(--jun);">
+  <h3 style="color:var(--jun);">June &mdash; Full Colony Strength</h3>
+  <div class="context">Solitary bees active. Bumble bee colonies at full workforce. Butterflies emerging.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Cascade Penstemon</span> <span class="latin">Penstemon serrulatus</span><div class="info">Wildflower &middot; 1&ndash;2 ft &middot; Full sun</div><div class="pollinators">Bumble bees, mason bees, hummingbirds</div></div>
+    <div class="plant native"><span class="common">Oceanspray</span> <span class="latin">Holodiscus discolor</span><div class="info">Shrub &middot; 6&ndash;15 ft &middot; Full sun to part shade</div><div class="pollinators">Diverse bees &middot; Also provides pithy nesting stems</div></div>
+    <div class="plant native"><span class="common">Tiger Lily</span> <span class="latin">Lilium columbianum</span><div class="info">Wildflower &middot; 2&ndash;4 ft &middot; Part shade to sun</div><div class="pollinators">Swallowtails, hummingbirds</div></div>
+    <div class="plant native"><span class="common">Blanketflower</span> <span class="latin">Gaillardia aristata</span><div class="info">Wildflower &middot; 1&ndash;2.5 ft &middot; Full sun</div><div class="pollinators">Long bloom Jun&ndash;Sep &middot; Bees, butterflies</div></div>
+    <div class="plant non-native"><span class="common">Purple Coneflower</span> <span class="latin">Echinacea purpurea</span><div class="info">Perennial &middot; 2&ndash;4 ft &middot; Full sun</div><div class="pollinators">Bumble bees, butterflies &middot; Goldfinches eat seeds</div></div>
+    <div class="plant non-native"><span class="common">Yarrow</span> <span class="latin">Achillea millefolium</span><div class="info">Perennial &middot; 1&ndash;3 ft &middot; Full sun</div><div class="pollinators">Predatory wasps, syrphid flies, small bees &middot; Native cultivars available</div></div>
+  </div>
+</div>
+
+<!-- JULY -->
+<div class="month" style="border-left:3px solid var(--jul);">
+  <h3 style="color:var(--jul);">July &mdash; The Gap Risk</h3>
+  <div class="context">The &ldquo;July gap&rdquo; is a known PNW challenge. Many spring bloomers are done, fall bloomers haven&rsquo;t started. Plant deliberately for this window.</div>
+  <div class="callout"><strong>Warning:</strong> This is where most gardens fail. If you only plant spring favorites, your bees starve in July. The plants below are specifically selected to bridge this gap.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Cut-leaf Penstemon</span> <span class="latin">Penstemon richardsonii</span><div class="info">Wildflower &middot; 1&ndash;2 ft &middot; Full sun</div><div class="pollinators">Hummingbirds, native bees</div></div>
+    <div class="plant native"><span class="common">Pearly Everlasting</span> <span class="latin">Anaphalis margaritacea</span><div class="info">Wildflower &middot; 1&ndash;3 ft &middot; Full sun</div><div class="pollinators">Painted lady host &middot; Native bees</div></div>
+    <div class="plant non-native"><span class="common">Agastache</span> <span class="latin">Agastache spp.</span><div class="info">Perennial &middot; 2&ndash;4 ft &middot; Full sun</div><div class="pollinators">Excellent July gap filler &middot; Bees + hummingbirds</div></div>
+    <div class="plant non-native"><span class="common">Lavender (peak)</span> <span class="latin">Lavandula angustifolia</span><div class="info">At peak bloom &middot; Keep deadheading</div><div class="pollinators">Highest nectar production month</div></div>
+    <div class="plant non-native"><span class="common">Catmint (rebloom)</span> <span class="latin">Nepeta spp.</span><div class="info">Deadhead spent blooms for second flush</div><div class="pollinators">Continuous if maintained</div></div>
+    <div class="plant non-native"><span class="common">Globe Thistle</span> <span class="latin">Echinops bannaticus</span><div class="info">Perennial &middot; 3&ndash;4 ft &middot; Full sun</div><div class="pollinators">Bumble bees, honey bees &middot; Dramatic blue spheres</div></div>
+  </div>
+</div>
+
+<!-- AUGUST -->
+<div class="month" style="border-left:3px solid var(--aug);">
+  <h3 style="color:var(--aug);">August &mdash; Late Season Stocking</h3>
+  <div class="context">Late-season bees stocking up. Monarch migration staging. Bumble bee queens preparing for hibernation.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Canada Goldenrod</span> <span class="latin">Solidago canadensis</span><div class="info">Wildflower &middot; 2&ndash;5 ft &middot; Full sun</div><div class="pollinators">CRITICAL pre-hibernation food for bumble bee queens</div></div>
+    <div class="plant native"><span class="common">Douglas Aster</span> <span class="latin">Symphyotrichum subspicatum</span><div class="info">Wildflower &middot; 1&ndash;3 ft &middot; Full sun to part shade</div><div class="pollinators">#1 RANKED native plant for bee visitation (OSU research)</div></div>
+    <div class="plant non-native"><span class="common">Sedum / Stonecrop</span> <span class="latin">Sedum spectabile</span><div class="info">Perennial &middot; 1&ndash;2 ft &middot; Full sun</div><div class="pollinators">Blooms through frost &middot; Drought-tolerant</div></div>
+    <div class="plant non-native"><span class="common">Agastache (continues)</span> <span class="latin">Agastache spp.</span><div class="info">Still blooming from July</div><div class="pollinators">Reliable late-season nectar</div></div>
+  </div>
+</div>
+
+<!-- SEPTEMBER-OCTOBER -->
+<div class="month" style="border-left:3px solid var(--sep);">
+  <h3 style="color:var(--sep);">September&ndash;October &mdash; Last Call</h3>
+  <div class="context">Bumble bee queens making final nectar stores before hibernation. Every flower counts. These are the plants that keep blooming until frost.</div>
+  <div class="plant-grid">
+    <div class="plant native"><span class="common">Canada Goldenrod (peak)</span> <span class="latin">Solidago canadensis</span><div class="info">Peak bloom &middot; Golden spires</div><div class="pollinators">Final nectar push for queens</div></div>
+    <div class="plant native"><span class="common">Douglas Aster (peak)</span> <span class="latin">Symphyotrichum subspicatum</span><div class="info">Blooms through first frost</div><div class="pollinators">#1 for bees &middot; 3 spp. long-horned bees + 3 spp. Halictidae</div></div>
+    <div class="plant non-native"><span class="common">Sedum (peak)</span> <span class="latin">Sedum spectabile</span><div class="info">Blooms through frost</div><div class="pollinators">One of the very last flowers standing</div></div>
+    <div class="plant non-native"><span class="common">Hardy Geranium &lsquo;Rozanne&rsquo;</span> <span class="latin">Geranium &times; &lsquo;Rozanne&rsquo;</span><div class="info">Blooms May through hard frost &middot; Longest bloom of any perennial</div><div class="pollinators">Bumble bees, native bees &middot; Insurance plant</div></div>
+    <div class="plant native"><span class="common">Witch Hazel</span> <span class="latin">Hamamelis virginiana</span><div class="info">Shrub &middot; Latest blooming native</div><div class="pollinators">Very last nectar source of the season</div></div>
+  </div>
+</div>
+
+<div class="callout">
+<strong>Key principle from OSU Extension:</strong> &ldquo;No single plant blooms from April through September continuously. Different bee species emerge throughout the growing season, so a bee flying in July visits different flowers than one flying in April.&rdquo; Plant for every window. Overlap is intentional and beneficial.
+</div>
+
+<div class="callout">
+<strong>OSU Research Finding:</strong> Native straight species attract significantly more pollinators than cultivated varieties (cultivars). Douglas aster (<em>Symphyotrichum subspicatum</em>) ranked #1 among all native plants tested for total bee visitation in OSU Garden Ecology Lab research. Source: OSU Extension EM-9363.
+</div>
+
+</main>
+
+<footer>
+  <a href="index.html">Feed the Bees</a> &middot;
+  <a href="native-bees.html">Native Bees</a> &middot;
+  <a href="seed-starting.html">Seed Starting</a> &middot;
+  <a href="conservation.html">Conservation</a> &middot;
+  <a href="../index.html">Research Index</a><br>
+  Sources: WSU Extension &middot; OSU Extension EM-9363 &middot; OSU Garden Ecology Lab &middot; Xerces Society Maritime NW Plant List (22-023) &middot; USDA NRCS Plant Materials Technical Note 13<br>
+  Last updated: 2026-04-04T01:00Z (sweep v1.3.18)
+</footer>
+
+</body>
+</html>

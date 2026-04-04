@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed the Bees &mdash; PNW Pollinator Guide | Tibsfox Research</title>
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --honey: #d4943a; --honey-light: #e8a84c; --honey-dark: #a06820;
+  --green: #4CAF50; --green-dark: #1B5E20;
+  --gold: #C4A35A;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.7; }
+a { color:var(--honey); text-decoration:none; }
+a:hover { color:var(--honey-light); }
+
+header {
+  background:linear-gradient(135deg, #0a0806 0%, #1a1408 25%, var(--honey-dark) 50%, var(--green-dark) 75%, #0a0806 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--honey);
+}
+header h1 { font-size:2.2rem; font-weight:400; color:#fff; }
+header .subtitle { color:var(--honey); font-size:1rem; font-style:italic; margin-top:0.3rem; }
+header .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; font-family:system-ui,sans-serif; }
+header nav { margin-top:1rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+
+main { max-width:1000px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(212,148,58,0.7); border-left:3px solid var(--honey);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 { font-size:1.2rem; color:#fff; margin:2rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+p { margin:0.6rem 0; font-size:0.9rem; }
+
+.stats { display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; padding:1.2rem 0; margin-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.stat { text-align:center; }
+.stat-value { display:block; font-size:1.8rem; font-weight:300; color:var(--honey); font-family:system-ui,sans-serif; }
+.stat-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--dim); font-family:system-ui,sans-serif; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; transition:border-color 0.2s; display:block; color:inherit;
+}
+.card:hover { border-color:rgba(212,148,58,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+.card p { font-size:0.82rem; color:var(--dim); font-family:system-ui,sans-serif; line-height:1.5; }
+.card .meta { font-size:0.7rem; color:var(--honey); font-family:monospace; margin-top:0.5rem; }
+
+.tag { display:inline-block; padding:0.1rem 0.5rem; border-radius:3px; font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem; }
+.tag-guide { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-ecology { background:rgba(212,148,58,0.15); color:var(--honey); border:1px solid rgba(212,148,58,0.3); }
+.tag-action { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+.tag-global { background:rgba(74,122,186,0.15); color:#4a90d9; border:1px solid rgba(74,122,186,0.3); }
+
+footer {
+  max-width:1000px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Feed the Bees</h1>
+  <div class="subtitle">A Pacific Northwest Pollinator Guide &mdash; from seed to bloom to bee</div>
+  <div class="meta">Western Washington &middot; 47&ndash;48&deg;N &middot; USDA Zones 8a&ndash;8b &middot; Puget Sound Lowlands</div>
+  <nav>
+    <a href="../ECO/index.html">ECO</a>
+    <a href="../MUK/index.html">MUK</a>
+    <a href="../LIVE/space-weather.html">Space Weather</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+<blockquote>
+  The single greatest thing any individual can do for pollinators is to plant native wildflowers. &mdash; Xerces Society
+</blockquote>
+
+<div class="stats">
+  <div class="stat"><span class="stat-value">600</span><span class="stat-label">Native Bee Species (WA)</span></div>
+  <div class="stat"><span class="stat-value">40+</span><span class="stat-label">Plant Profiles</span></div>
+  <div class="stat"><span class="stat-value">8</span><span class="stat-label">Bloom Months</span></div>
+  <div class="stat"><span class="stat-value">$235B+</span><span class="stat-label">Global Pollination Value</span></div>
+  <div class="stat"><span class="stat-value">1M+</span><span class="stat-label">Pollinator Gardens Planted</span></div>
+</div>
+
+<h2>Getting Started</h2>
+<div class="card-grid">
+  <a href="windowsill.html" class="card">
+    <h3>The Windowsill Garden</h3>
+    <div><span class="tag tag-guide">Beginner</span> <span class="tag tag-action">Under $20</span></div>
+    <p>Start with a sunny window, a pot, and three plants. Herbs that double as pollinator magnets: lavender, basil, thyme. Let them flower. The bees will come.</p>
+    <div class="meta">5 min read &middot; Zero experience needed</div>
+  </a>
+
+  <a href="container.html" class="card">
+    <h3>The Container Patio</h3>
+    <div><span class="tag tag-guide">Beginner</span> <span class="tag tag-action">Under $50</span></div>
+    <p>Three containers on a 4-foot balcony can feed bees from April through October. Spring trio, summer trio, fall trio. Continuous bloom in minimal space.</p>
+    <div class="meta">8 min read &middot; Balcony or patio</div>
+  </a>
+
+  <a href="garden-bed.html" class="card">
+    <h3>The Pollinator Bed</h3>
+    <div><span class="tag tag-guide">Intermediate</span></div>
+    <p>A full pollinator garden bed with bloom succession from February through October. 20+ species, native-first design, zero bloom gaps. The complete PNW pollinator habitat.</p>
+    <div class="meta">15 min read &middot; Yard or plot</div>
+  </a>
+</div>
+
+<h2>Deep Research</h2>
+<div class="card-grid">
+  <a href="bloom-calendar.html" class="card">
+    <h3>Bloom Succession Calendar</h3>
+    <div><span class="tag tag-ecology">Plants</span></div>
+    <p>Month-by-month planting guide: 50+ species with bloom times, light requirements, and pollinator value. Covers the critical March emergence through October hibernation prep. Identifies the dangerous July gap.</p>
+    <div class="meta">28 native + 12 non-native species &middot; Feb&ndash;Oct</div>
+  </a>
+
+  <a href="native-bees.html" class="card">
+    <h3>PNW Native Bee Guide</h3>
+    <div><span class="tag tag-ecology">Ecology</span></div>
+    <p>600 species across 6 families. Bumble bees, mason bees, sweat bees, mining bees. Nesting requirements (70% ground, 30% cavity). Conservation status. The convergence zone as unexpected habitat.</p>
+    <div class="meta">10+ species profiled &middot; WSU &middot; Xerces Society</div>
+  </a>
+
+  <a href="seed-starting.html" class="card">
+    <h3>Indoor Seed Starting</h3>
+    <div><span class="tag tag-guide">How-To</span></div>
+    <p>Cold stratification schedules for 10 PNW native species. Equipment list, timing calendar (Nov&ndash;May), germination methods. Turn your kitchen into a nursery.</p>
+    <div class="meta">PNW frost dates &middot; OSU Extension methods</div>
+  </a>
+
+  <a href="conservation.html" class="card">
+    <h3>Global Bee Conservation</h3>
+    <div><span class="tag tag-global">Global</span></div>
+    <p>Colony Collapse Disorder: the 2025 USDA breakthrough. $235&ndash;577B global pollination value. Bee City USA, Million Pollinator Garden Challenge, citizen science. EU neonicotinoid bans. What&rsquo;s working and what isn&rsquo;t.</p>
+    <div class="meta">USDA &middot; IPBES &middot; UN FAO &middot; Xerces Society</div>
+  </a>
+
+  <a href="bee-lawn.html" class="card">
+    <h3>Bee Lawn Guide</h3>
+    <div><span class="tag tag-action">Action</span></div>
+    <p>Replace grass with clover, self-heal, and creeping thyme. UMN seed mix ratios, mowing protocol, establishment timeline. 111 bee species found in reduced-mow lawns.</p>
+    <div class="meta">UMN Extension &middot; OSU Extension</div>
+  </a>
+
+  <a href="../bee-pollinator-mission/index.html" class="card">
+    <h3>Mission Package (PDF)</h3>
+    <div><span class="tag tag-action">GSD</span></div>
+    <p>The complete 16-page research mission document: Vision Guide, Research Reference, Mission Package. LaTeX source included. Ready for GSD execution.</p>
+    <div class="meta">PDF + LaTeX &middot; Squadron activation &middot; 32 tests</div>
+  </a>
+</div>
+
+<h2>The Through-Line</h2>
+<p>Every flower is a node. Every garden is a hub. The network grows one planting at a time, requiring no central coordination, no permission, no infrastructure &mdash; just soil, water, sun, and the decision to feed the bees. This is the architecture of resilience: distributed, autonomous, locally adapted, globally connected. The same pattern that runs our agent orchestration also describes how communities restore habitat. Plant a flower. Feed a bee. Strengthen the network.</p>
+
+</main>
+
+<footer>
+  <a href="../index.html">Research Index</a> &middot;
+  <a href="../ECO/index.html">ECO Cluster</a> &middot;
+  <a href="../MUK/index.html">MUK</a> &middot;
+  <a href="../DRP/cascadia.html">DRP Cascadia</a><br>
+  Sources: USDA ARS &middot; Xerces Society &middot; WSU Extension &middot; OSU Extension &middot; IPBES &middot; UN FAO<br>
+  Last updated: 2026-04-03T01:00Z (sweep v1.3.18) &middot; Rosetta Cluster: Ecology
+</footer>
+
+</body>
+</html>
