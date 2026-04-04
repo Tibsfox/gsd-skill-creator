@@ -15,3 +15,22 @@ export { StateManager } from './state-manager.js';
 export type { StateManagerOptions } from './state-manager.js';
 export { validateChipset } from './validate-chipset.js';
 export type { ValidationResult, SectionResult } from './validate-chipset.js';
+export {
+  createBudget,
+  checkBudget,
+  recordUsage,
+  getBudgetReport,
+  saveBudget,
+  loadBudget,
+  deleteBudget,
+  listBudgets,
+} from './token-budget.js';
+export type {
+  TokenUsage,
+  AgentUsageRecord,
+  BudgetUsage,
+  TokenBudgetConfig,
+  TokenBudget,
+  BudgetCheckResult,
+  BudgetReport,
+} from './token-budget.js';
