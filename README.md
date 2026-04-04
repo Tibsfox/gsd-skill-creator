@@ -3,7 +3,11 @@
 An adaptive learning and coprocessor architecture for [Claude Code](https://docs.anthropic.com/en/docs/build-with-claude/claude-code), built as an extension to [GSD (Get Shit Done)](https://github.com/gsd-build).
 
 ```
+
 npx get-shit-done-cc@latest
+
+npx gsd-skill-creator@latest
+
 ```
 
 ## Table of Contents
