@@ -145,6 +145,15 @@ footer a { color:rgba(255,255,255,0.3); }
   </section>
 
   <section>
+    <h2>Session 6 Research Connections</h2>
+    <p>New connections discovered during the Artemis II Session 6 research sweep:</p>
+    <ul>
+      <li><strong>3-Lane Hybrid Search (vector + FTS + concept):</strong> Our hybrid search implementation provides a concrete confidence signal through lane agreement. When all three lanes (vector similarity, full-text search, and concept graph) return the same result, confidence is high. When only one lane finds a match, confidence is low. The Reciprocal Rank Fusion score (k=60) quantifies this agreement, giving a calibrated confidence estimate without a separate classifier model. This is routing by consensus rather than routing by prediction.</li>
+      <li><strong>Intent Classification for Confidence Routing:</strong> The intent classification system built for dataset retrieval routes queries by detected confidence in the query's intent category. Ambiguous queries (low classification confidence) get routed to the more expensive multi-lane search. Clear queries (high classification confidence) get routed to the fast single-lane path. The classifier's confidence in its own routing decision is the routing signal &mdash; matching the arXiv:2601.04861 insight that confidence calibration is easier than difficulty estimation.</li>
+    </ul>
+  </section>
+
+  <section>
     <h2>What Would Constitute a Breakthrough</h2>
     <p>A routing system that achieves within 2% of oracle routing accuracy (where the oracle knows the optimal model for each task) using less than 5% of total inference budget on routing overhead. The router must generalize to novel task types without retraining, handling distribution shift gracefully.</p>
     <p>For our system, the breakthrough is automatic profile selection that replaces human judgment: given a work item description, automatically choose quality/balanced/budget mode with accuracy that matches or exceeds the user's manual selection over a representative workload.</p>

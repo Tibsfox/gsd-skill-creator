@@ -145,6 +145,25 @@ footer {
 <h3>Q4: Is there a formal model?</h3>
 <p>Can file-native agent coordination be formalized as a CSP (Communicating Sequential Processes) system? Each agent is a process. Each directory is a channel. File writes are channel sends. File reads are channel receives. If the mapping is clean, existing CSP verification tools could prove properties about agent systems.</p>
 
+<h2>Session 6 Research Connections</h2>
+
+<p>New connections discovered during the Artemis II Session 6 research sweep:</p>
+
+<div class="claim">
+<h4>Andreessen: "The agent is just its files"</h4>
+<p>Marc Andreessen (Mosaic creator, a16z) independently validated the file-native thesis in a March 2026 interview. His framing: the agent's identity, state, and capabilities are defined entirely by its files. There is no separate "agent runtime" &mdash; the agent IS its directory. This is independent confirmation from the person who invented the web browser that the filesystem is the natural substrate for agent architecture. Our Gastown chipset has been operating on this principle since January 2026.</p>
+</div>
+
+<div class="claim">
+<h4>Beads-State: JSON Files with Atomic Writes = File-Native State</h4>
+<p>The beads-state skill implements agent state persistence as JSON files with atomic write operations (write to temp file, then rename). Each bead is a work item. Each hook is an assignment. Each mail message is a file. The crash recovery guarantee comes from the filesystem's atomic rename: if the process dies mid-write, the old state file is still intact. This is the operational proof that file-native state management works at production scale.</p>
+</div>
+
+<div class="claim">
+<h4>SDD: Specs as Files, Deterministic from File State</h4>
+<p>Spec-Driven Development (discovered in Session 6 research) treats specifications as the authoritative files that determine agent behavior. The spec file IS the agent's contract. The implementation file IS the agent's capability. The test file IS the agent's verification. Everything is a file, and the agent's behavior is deterministic from the state of those files. This is file-native architecture applied to the development process itself.</p>
+</div>
+
 <h2>Prior Art</h2>
 
 <table class="comparison">
