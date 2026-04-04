@@ -1,0 +1,77 @@
+{
+  "degree": 303,
+  "species": "Gray Wolf",
+  "scientific_name": "Canis lupus",
+  "slug": "303-gray-wolf-full-pack-howl",
+  "sound_type": "multi-voice rising harmonic howl -- full pack howl: multiple wolves vocalizing simultaneously with distinct voices interweaving; harmonic creation above individual frequencies; rising pitch modulation; impression of larger pack through acoustic interweaving; carries 6-10 km in winter conditions; the most emotionally resonant animal vocalization in the Northern Hemisphere",
+  "energy": 9,
+  "ecosystem": "Pack territory -- eastern Washington Cascades and northeastern forest; Okanogan, Ferry, Stevens, Pend Oreille, Spokane counties; territories 200-600+ square miles; mature forest, river corridor, subalpine habitat; elk and deer prey base",
+  "season": "Winter (peak frequency and carrying distance; pack cohesion for large prey hunting; howling year-round for territory, assembly, coordination)",
+  "family": "Canidae",
+  "order": "Carnivora",
+  "conservation_status": "Least Concern (IUCN globally). Washington State: recovering from extirpation. 30+ documented packs, 200+ minimum population as of 2025-2026. Managed under Washington Wolf Conservation and Management Plan. Listed as State Endangered in WA.",
+  "milestone": "FIRST CANIDAE IN ENGINE. Family debut at E=9 -- the SPS engine's absolute ceiling. Second of three consecutive E=9 entries (302-304). Gray wolf recovery in WA is one of the most significant Pacific Northwest wildlife events in modern history.",
+  "coordinates": {
+    "lat": 48.5,
+    "lon": -119.2,
+    "description": "Eastern Washington distribution: Okanogan, Ferry, Stevens, Pend Oreille, Spokane counties. Natural dispersal from Idaho (reintroduced 1995) beginning early 2000s. 30+ packs documented. 200+ minimum population. Some western Cascades presence. Dispersal to OR and BC."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Vocal -- larynx-produced harmonic howl. Pack howl is collective creation: multiple individuals vocalizing simultaneously with interweaving voices creating harmonics no individual produces alone.",
+    "mechanics": "Individual voices join and depart independently (not synchronized). Each wolf has distinct fundamental frequency and modulation pattern. Harmonic interweaving produces frequencies above individual voices. Five wolves sound like fifteen through harmonic multiplication. Rising pitch modulation typical.",
+    "frequency_range": "150-1,500 Hz primary. Individual voices in this range; harmonics may extend above. Peak human emotional response frequency range.",
+    "duration": "Individual howl: 5-10 seconds. Pack howl session: 30 seconds to several minutes. Territory assertion sessions may involve multiple exchanges.",
+    "carry_distance": "6-10 km in winter conditions (cold dense air + snow cover). 4-6 km in summer. Across open terrain or river valleys at maximum range.",
+    "e9_calibration": "E=9: four simultaneous justifications: (1) harmonic complexity -- collective creation exceeding individual capability; (2) maximum carry distance 6-10 km; (3) cross-cultural profound emotional response (melancholy, longing, Pleistocene connection); (4) first Canidae and recovery context -- the sound of 70 years of silence ending. SPS maximum."
+  },
+  "nodes": [
+    {
+      "id": "first-canidae",
+      "type": "milestone",
+      "title": "FIRST CANIDAE IN ENGINE",
+      "description": "Gray wolf enters the SPS engine as the first Canidae at E=9. The family debuts at the absolute ceiling. The coyote (more common, more widely distributed) is not the first Canidae -- the wolf's full pack howl is acoustically and ecologically in a different category. Canidae enters through its most extreme acoustic member.",
+      "connections": ["harmonic-interweaving", "recovery-context"]
+    },
+    {
+      "id": "harmonic-interweaving",
+      "type": "concept",
+      "title": "Harmonic Interweaving -- The Pack Creates What No Individual Can",
+      "description": "The pack howl's multi-voice interweaving creates harmonics above individual voice frequencies. Five wolves sound like fifteen. The collective vocal architecture is qualitatively different from individual howling. The pack howl is the acoustic expression of pack social organization -- the family structure is in the sound itself.",
+      "connections": ["first-canidae"]
+    },
+    {
+      "id": "pleistocene-response",
+      "type": "concept",
+      "title": "Pleistocene Emotional Response",
+      "description": "The gray wolf howl produces a cross-cultural emotional response unlike the cougar (fear) or elk (awe): melancholy, longing, profound presence. Documented across Western cultures (centuries) and indigenous cultures (millennia). The howl connects to the Pleistocene: human auditory systems evolved in landscapes where wolf howls were part of the acoustic environment. The response is pre-civilizational.",
+      "connections": ["harmonic-interweaving"]
+    },
+    {
+      "id": "recovery-context",
+      "type": "context",
+      "title": "Washington State Wolf Recovery -- 70 Years of Silence Ending",
+      "description": "Gray wolves extirpated from WA by 1930s. Natural recolonization from Idaho (1995 reintroduction) beginning early 2000s. Pack-by-pack tracking. Lookout Pack: first established pack northeastern Cascades. Profanity Peak Pack 2016: livestock conflict, lethal removal authorization, contested management. Tribal significance: Confederated Colville, Spokane Tribe, Yakama Nation. 30+ packs, 200+ wolves by 2025-2026. The howl is the sound of recovery.",
+      "connections": ["first-canidae"]
+    },
+    {
+      "id": "trophic-cascade",
+      "type": "concept",
+      "title": "Trophic Cascade -- The Ecology of Fear",
+      "description": "Yellowstone 1995 documented: wolves changed elk behavior, riparian vegetation recovered, hydrology improved, fish habitat improved. WA wolf recovery generating same research questions in northeastern WA elk territory. Ecology of fear: prey behavioral modification from predator presence. Data being collected.",
+      "connections": ["recovery-context"]
+    },
+    {
+      "id": "social-music",
+      "type": "concept",
+      "title": "Pack Howl as Social Music",
+      "description": "Packs howl together at times with no external stimulus, apparently for the social activity itself. Territory, assembly, coordination, and social bonding are all functions -- but the bonding function places the pack howl in a category that exceeds pure biological utility. The pack howl is a collective sonic activity that exists partly for its own sake. The engine's most direct parallel between animal and human music.",
+      "connections": ["harmonic-interweaving"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-302", "species": "Cougar full scream", "relationship": "E=9. Previous degree. First consecutive E=9. Felidae. Ecological competitors in WA forests; both apex predators of deer and elk."},
+    {"target": "SPS-304", "species": "Grizzly Bear threat charge", "relationship": "E=9. Next degree. Third consecutive max. Closes apex predator arc."},
+    {"target": "SPS-301", "species": "Roosevelt Elk bugle", "relationship": "E=8. Primary wolf prey species. Prey-predator arc across three degrees (301-303). Elk bugle → Cougar scream → Wolf howl."},
+    {"target": "S36-303", "artist": "Brad return", "relationship": "E=5 + E=9 = E=14. Maximum S36/SPS energy asymmetry. Patient craft and ancient chorus. Shawn Smith's soulful restraint and the Pleistocene pack howl at the same degree."}
+  ]
+}
