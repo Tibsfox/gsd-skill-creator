@@ -1,0 +1,56 @@
+{
+  "degree": 260, "sound": "Lightning Strike Tree", "slug": "260-lightning-strike-tree",
+  "acoustic_character": "Explosive crack + crackle",
+  "energy": 9,
+  "domain": "Meteorology",
+  "mechanism": "Lightning return stroke current (10,000-100,000+ amperes) heating sap channel water to steam in fraction of millisecond; steam expansion factor 1,700 produces explosive decompression of bark and wood",
+  "ecosystem": "Forest",
+  "season": "Summer",
+  "status": "NEW ABSOLUTE SPS MAXIMUM. E=9 is the highest energy reading in the Sound of Puget Sound engine at degree 260. Closes Storm Arc (256-260). Engine scale fully spanned from E=1 to E=9.",
+  "acoustic_physics": {
+    "return_stroke_current_amperes": "10,000-100,000+ (typical: 10,000-30,000; exceptional: above 100,000)",
+    "current_path": "Preferentially follows moisture in sap channels and living cells (water is good conductor; wood is poor conductor)",
+    "steam_expansion_factor": 1700,
+    "expansion_duration": "Fraction of a millisecond (10^-4 to 10^-3 seconds)",
+    "peak_spl_at_10_30m": "150+ dB SPL",
+    "pain_threshold_db": 120,
+    "permanent_damage_threshold_db": "approximately 140 dB single exposure",
+    "crack_source": "Explosive decompression: steam expansion blows bark and wood outward along sap channel path. Simultaneous with air thunder at close range.",
+    "crackle_source": "Steam channels propagating through wood fibers post-explosion; bark and wood fragments falling; structural settling of struck section.",
+    "spiral_scar": "Explosion follows sap channel spiral geometry, producing characteristic spiral groove from crown to ground in survivors."
+  },
+  "acoustic_sequence": [
+    {"time_ms": 0, "event": "CRACK", "description": "Explosive decompression. Maximum amplitude. 150+ dB SPL. No warning. Air strike and tree strike simultaneous at close range."},
+    {"time_ms": "0-10", "event": "Steam channel propagation", "description": "Explosion travels trunk length along sap channels. Crack extended fractionally."},
+    {"time_ms": "10-3000", "event": "CRACKLE", "description": "Wood continuing to split. Bark/wood fragments falling. Structural settling. Tree's response to internal explosion."},
+    {"time_ms": "500-5000", "event": "CRASH", "description": "If major limbs or trunk felled: crash through surrounding trees, multiple impact sounds, trunk hitting ground."},
+    {"time_ms": "5000+", "event": "Ozone + secondary silence", "description": "O3 from lightning ionization arrives by smell. Brief secondary silence as forest processes event. Forest returns."}
+  ],
+  "pnw_forest_ecology": {
+    "most_common_targets": ["Douglas fir", "Sitka spruce", "Western red cedar"],
+    "target_characteristics": "High moisture content, tall straight form, high sap channel density",
+    "douglas_fir_damage": "Crown loss, spiral bark stripping, sapwood shattering. Damage visible from hundreds of meters.",
+    "lightning_scar": "Spiral groove crown to ground in survivors. Physical record of steam explosion path. Old-growth forests contain many lightning-scarred veterans.",
+    "snag_creation": "Trees killed but not felled = standing dead wood. Provides nesting cavities for woodpeckers, owls, small raptors. Roosting for bats. Invertebrate habitat. Lightning as snag-creation ecological process.",
+    "fire_ignition": "Small percentage of strikes ignite fires. Dry summer East Cascades: highest ignition probability. Fire lookout towers discover most lightning fires within 24-48 hours."
+  },
+  "theory_nodes": [
+    { "concept": "E=9 NEW ABSOLUTE SPS MAXIMUM. Lightning Strike Tree at degree 260 establishes the highest energy reading in the Sound of Puget Sound engine. The engine's energy scale has been climbed across 260 degrees: E=1 (near-silence, insect) to E=9 (close-range lightning tree strike, 150+ dB SPL). The scale is fully spanned. Future entries may match but cannot easily exceed in naturalistic terms the engine has established.", "level": "milestone", "department": "engine-scale", "description": "E=9 establishes the absolute ceiling of the SPS energy scale at degree 260." },
+    { "concept": "Lightning strike physics: steam explosion as mechanism. Return stroke current follows water in sap channels. Water to steam = 1,700x volume expansion in fraction of millisecond. The explosion blows bark and wood outward along the sap channel spiral. The sound (explosive crack, 150+ dB) is the acoustic expression of this volume expansion event. Not a percussion instrument struck from outside but an explosion initiated from within the wood.", "level": "advanced", "department": "acoustic-physics", "description": "Sap channel steam explosion: the physical mechanism of E=9." },
+    { "concept": "STORM ARC COMPLETE (256-260). Arc followed Pacific storm system from coast to forest: surf (257, coast) → ridge wind (258, Olympics) → thunder (259, Cascades) → lightning strike (260, forest). The arc architecture is the storm's interaction with successive landscape features. E=8 sustained through four degrees (256-259); E=9 at fifth (260). Storm Arc is the most structured and escalating arc in the SPS engine.", "level": "milestone", "department": "engine-arc", "description": "Storm Arc complete. Escalation from coast surf to forest lightning strike." },
+    { "concept": "Lightning strike as irreversible ecological event. The tree is permanently altered: scarred, killed, or felled. The acoustic event (E=9) corresponds to an irreversible physical action. No other sound in the engine at this amplitude has this character. Additionally: lightning kills create snags (ecological infrastructure) and can ignite fires (landscape-scale ecological process). The E=9 sound is the beginning of multiple ecological chains.", "level": "advanced", "department": "ecological-significance", "description": "E=9 event as irreversible ecological action: snag creation and potential fire ignition." }
+  ],
+  "cross_references": [
+    {"degree": 259, "sound": "Thunderstorm Cascades", "relationship": "TRANSITION E=8→E=9. Thunder (259) is the storm as environment. Lightning Strike Tree (260) is the storm as specific irreversible event. Rolling rumble → explosive crack. The final step in the storm arc escalation."},
+    {"degree": 256, "sound": "Storm Arc opening", "relationship": "Storm Arc began at degree 256. Lightning Strike Tree closes it at degree 260 at maximum energy."}
+  ],
+  "s36_pair": {"degree": 260, "artist": "Nancy Wilson", "energy_s36": 6, "pairing_note": "E=9 vs E=6. NEW ABSOLUTE MAXIMUM vs. patient architectural guitar composition. Lightning bolt instantaneous irreversible event vs. film score 90-minute narrative arc. The most extreme energy contrast in the Storm Arc. The bolt does not build; Wilson's guitar work does. Maximum contrast: the instant and the patient."},
+  "storm_arc_position": {"arc": "256-260", "position": 5, "status": "COMPLETE", "note": "Storm Arc closed. E=9 established as new absolute maximum. Engine fully spanned E=1 to E=9."},
+  "milestones": [
+    "E=9 NEW ABSOLUTE SPS MAXIMUM",
+    "STORM ARC COMPLETE (256-260)",
+    "ENGINE ENERGY SCALE FULLY SPANNED (E=1 to E=9)",
+    "FIRST E=9 IN ENGINE HISTORY"
+  ],
+  "tags": ["lightning-strike", "e9", "absolute-maximum", "storm-arc", "explosive-crack", "forest", "summer", "cascade", "olympic", "douglas-fir", "steam-explosion", "snag-creation", "fire-ignition", "meteorology", "new-maximum", "engine-ceiling"]
+}
