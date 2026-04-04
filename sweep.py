@@ -297,7 +297,7 @@ def run_sweep(hour, args):
          f'ACTIVE &mdash; updated {version}',
          "active status"),
         (r'Updated v1\.\d\.\d+(.*?)Next scan at v1\.\d\.\d+',
-         f'Updated {version}\\1Next scan at v1.0.{hour + 1}',
+         f'Updated {version}\\1Next scan at {ver_prefix}.{hour + 1}',
          "version + next scan"),
         (r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z \(sweep v1\.\d\.\d+\)(.*?)\d+ problems',
          lambda m: f'Last updated: {ts_utc} (sweep {version}){m.group(1)}{args.open_problems or 16} problems',
