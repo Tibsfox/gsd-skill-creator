@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 275&deg; &mdash; Beat Happening &mdash; E=5 &mdash; Lo-Fi Punk &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #4CAF50; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #4CAF50; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #4CAF50; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8F5E9; font-style: italic; color: #1B5E20; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .olympia-banner { background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 40%, #43A047 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E8F5E9; }
+    .olympia-banner h3 { margin-top: 0; color: #C8E6C9; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .olympia-banner p { color: #E8F5E9; margin: 0.5rem 0; }
+    .olympia-banner strong { color: #A5D6A7; }
+    .calvin-card { background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5; }
+    .calvin-card h3 { margin-top: 0; color: #E1BEE7; font-size: 1.15rem; }
+    .calvin-card p { color: #F3E5F5; margin: 0.4rem 0; }
+    .calvin-card strong { color: #CE93D8; }
+    .ipu-card { background: linear-gradient(135deg, #E65100 0%, #F57C00 50%, #FF8F00 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFF8E1; }
+    .ipu-card h3 { margin-top: 0; color: #FFE0B2; font-size: 1.1rem; }
+    .ipu-card p { color: #FFF8E1; margin: 0.4rem 0; }
+    .ipu-card strong { color: #FFE0B2; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>275 &mdash; Beat Happening (E=5)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">275&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Beat Happening</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Lo-Fi Punk</span>
+          <span class="label-badge">K Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>OLYMPIA ENTERS THE ENGINE &mdash; FIRST NON-SEATTLE/TACOMA/EASTSIDE CITY.</strong> Beat Happening is the first Olympia-based entry in the entire S36 catalog. K Records enters. Calvin Johnson enters. The infrastructure that made riot grrrl possible. The most influential least-heard band in Pacific Northwest music history.
+        </div>
+
+        <div class="olympia-banner">
+          <h3>Olympia &mdash; The Engine&rsquo;s New Geography</h3>
+          <p>Sixty miles south of Seattle on I-5. Washington&rsquo;s state capital. Home to <strong>Evergreen State College</strong> &mdash; the interdisciplinary, self-directed institution that incubated Calvin Johnson, Tobi Vail, Kathleen Hanna, and the Olympia scene. The same I-5 corridor that connects Seattle to Olympia connects their music scenes.</p>
+          <p><strong>Olympia is not Seattle.</strong> Anti-careerist by design. Built not in response to Seattle&rsquo;s commercial ambitions but as a deliberate alternative to them. More feminist, more queer, more anarchist, more DIY. The engine crosses the Olympia threshold at degree 275. It will not be the last time.</p>
+        </div>
+
+        <h2>Calvin Johnson and K Records</h2>
+        <div class="calvin-card">
+          <h3>K Records &mdash; Founded 1982 &mdash; Still Active</h3>
+          <p>Calvin Johnson founded K Records in Olympia in 1982 &mdash; the same year Beat Happening formed. The label and the band are inseparable: K Records was the vehicle for Beat Happening&rsquo;s music and the aesthetic that Beat Happening represented. Handmade covers, simple recordings, childlike illustration, deliberate anti-professionalism. The K aesthetic communicates: <strong>this was made by a person, for love, outside the commercial system.</strong></p>
+          <p>Johnson&rsquo;s bass-baritone voice is immediately distinctive &mdash; deep, deadpan, always completely sincere. Anti-heroic, anti-rockstar. The voice of someone who believes completely in what they&rsquo;re doing and doesn&rsquo;t need to prove it.</p>
+          <p><strong>Kurt Cobain&rsquo;s K tattoo.</strong> Cobain admired Beat Happening and the K Records aesthetic. The &ldquo;K&rdquo; tattooed on his forearm is a documented tribute. The influence ran from Olympia to Seattle, from lo-fi punk to the band that would sell 30 million albums.</p>
+        </div>
+
+        <div class="ipu-card">
+          <h3>International Pop Underground Convention &mdash; Olympia, August 1991</h3>
+          <p>Calvin Johnson organized three days of independent music that articulated the values of the underground scene in opposition to the mainstream. Day one through three: bands from across North America and internationally. <strong>Final night, August 20, 1991: &ldquo;Love Rock Revolution Girl Style Now&rdquo; &mdash; an all-female performance night.</strong> One of the immediate precursors to riot grrrl. The convention was the organizational moment for 1990s American indie rock. It happened in Olympia because Calvin Johnson built K Records there.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Band</h2>
+        <p>Beat Happening: Calvin Johnson (vocals/guitar), Heather Lewis (vocals/guitar/drums), Bret Lunsford (guitar/vocals). Three members. <strong>No bassist.</strong> The absence of bass is a compositional decision: the thinness is the point. The music is exposed, fragile, not protected by amplifier power or bass anchor. A jangly, open-chord guitar in the high registers. Minimal drums. Two distinct vocal timbres &mdash; Johnson&rsquo;s deep bass, Lewis&rsquo;s higher, direct voice.</p>
+
+        <blockquote>"The childlike quality is not naive &mdash; it is achieved through deliberate rejection of adult musical convention."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Sound &mdash; Lo-Fi Punk, E=5</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Lo-Fi as Political Choice</h4>
+            <span class="level advanced">Identity</span>
+            <p>Minimal production by design. Professional production implies commercial aspiration. Beat Happening's rough recordings refuse commercial aspiration explicitly. The rough recording says: the idea is more important than the production.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The Childlike Aesthetic</h4>
+            <span class="level advanced">Aesthetic</span>
+            <p>Directness, sincerity, absence of irony. Children's approach to creative work: no pre-emptive self-censorship, no commercial calculation. Not naive -- achieved through deliberate rejection of adult musical convention. The simplicity makes emotional content more direct.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Darkness Underneath</h4>
+            <span class="level intermediate">Depth</span>
+            <p>"Indian Summer," "Black Candy" -- desire, longing, loss, intensity. The childlike surface and the dark emotional content are not contradictory; the simplicity makes the darkness more powerful. Black Candy (1989) is the defining album.</p>
+          </div>
+          <div class="theory-card">
+            <h4>E=5 After E=8</h4>
+            <span class="level milestone">Engine</span>
+            <p>Energy drops from E=8 (Vexed, degree 274) to E=5. The largest energy drop in the hardcore-to-indie transition. Olympia's scene was a conscious alternative to Seattle's high-energy commercial moment. The quiet is the point.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Beat Happening (1985)</h4>
+            <span class="level advanced">K Records</span>
+            <p>The debut. Ten songs. Primitive, direct, fully formed. "Our Secret," "Fourteen." The Beat Happening aesthetic at its founding statement.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Black Candy (1989)</h4>
+            <span class="level advanced">K Records</span>
+            <p>The definitive statement. "Indian Summer" -- seasonal transition and desire, both simple and devastating. One of the most important songs in the indie rock canon.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Dreamy (1991)</h4>
+            <span class="level intermediate">K Records</span>
+            <p>Final album proper. The band at its most varied, before the hiatus that would effectively end the group's active period.</p>
+          </div>
+          <div class="theory-card">
+            <h4>You Turn Me On (1992)</h4>
+            <span class="level intermediate">Sub Pop</span>
+            <p>Final release: a single on Sub Pop. The moment when Olympia and Seattle indie scenes were most mutually aware. Beat Happening on Nirvana's label.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">274</span> Vexed &mdash; E=8, Capitol Hill hardcore. Energy drops from 8 to 5. Seattle to Olympia. High energy to lo-fi. The largest energy transition in the hardcore-to-indie arc.</li>
+          <li><span class="ref-degree">276</span> Bikini Kill &mdash; E=8, Riot Grrrl, Olympia, Kill Rock Stars. The IPU lineage continues. K Records scene produces riot grrrl. Olympia second entry.</li>
+          <li><span class="ref-degree">SPS 275</span> Orca pec-slap sequence &mdash; E=7. Combined E=12. Rhythmic percussion paired with Beat Happening's rhythmic lo-fi.</li>
+          <li><span class="ref-degree">Cobain</span> Kurt Cobain K tattoo -- documented tribute to Calvin Johnson and K Records. Olympia to Seattle influence vector.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">275 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Lo-Fi Punk</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1982&ndash;1992</span></div>
+          <div class="stat-row"><span class="stat-label">City</span><span class="stat-value">Olympia</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">K Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals / Guitar</span><span class="stat-value">Calvin Johnson</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals / Guitar</span><span class="stat-value">Heather Lewis</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Bret Lunsford</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Milestones</h4>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">OLYMPIA ENTERS</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">K Records enters</span></div>
+          <div class="stat-row"><span class="stat-label">IPU 1991</span><span class="stat-value">Foundation</span></div>
+          <div class="stat-row"><span class="stat-label">Cobain link</span><span class="stat-value">K tattoo</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Pairing</h4>
+          <div class="stat-row"><span class="stat-label">SPS 275</span><span class="stat-value">Orca pec-slap</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=7</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=12</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">76.4%</span></div>
+          <div class="stat-row"><span class="stat-label">Geographic</span><span class="stat-value">First Olympia</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
