@@ -1,49 +1,43 @@
 # HELP artemis_sweep_version Current sweep version number
 # TYPE artemis_sweep_version gauge
-artemis_sweep_version{mission="artemis-ii"} 1.314
+artemis_sweep_version{mission="artemis-ii"} 1.319
 # HELP artemis_met_hours Mission elapsed time in hours
 # TYPE artemis_met_hours gauge
-artemis_met_hours{mission="artemis-ii"} 46.92
+artemis_met_hours{mission="artemis-ii"} 51.42
 # HELP muk_wx_temp_celsius Weather temperature by source
 # TYPE muk_wx_temp_celsius gauge
-muk_wx_temp_celsius{source="kpae",station="Paine Field"} 12.0
-muk_wx_temp_celsius{source="ksea",station="Sea-Tac"} 13.0
-muk_wx_temp_celsius{source="kxmr",station="Cape Canaveral"} 26.8
+muk_wx_temp_celsius{source="kpae",station="Paine Field"} 13.0
+muk_wx_temp_celsius{source="ksea",station="Sea-Tac"} 12.0
+muk_wx_temp_celsius{source="kxmr",station="Cape Canaveral"} 24.0
 # HELP muk_wx_wind_kmh Wind speed by source
 # TYPE muk_wx_wind_kmh gauge
-muk_wx_wind_kmh{source="kpae"} 5.5
-muk_wx_wind_kmh{source="ksea"} 11.1
-muk_wx_wind_kmh{source="kxmr"} 24.1
+muk_wx_wind_kmh{source="kpae"} 9.3
+muk_wx_wind_kmh{source="ksea"} 7.4
+muk_wx_wind_kmh{source="kxmr"} 14.8
 # HELP muk_wx_wind_dir_deg Wind direction by source
 # TYPE muk_wx_wind_dir_deg gauge
-muk_wx_wind_dir_deg{source="kpae"} 140
-muk_wx_wind_dir_deg{source="ksea"} 250
+muk_wx_wind_dir_deg{source="kpae"} 240
+muk_wx_wind_dir_deg{source="ksea"} 220
 muk_wx_wind_dir_deg{source="kxmr"} 110
 # HELP muk_wx_gust_kmh Wind gust speed
 # TYPE muk_wx_gust_kmh gauge
 muk_wx_gust_kmh{source="kpae"} 0
 # HELP muk_wx_pressure_hpa Barometric pressure (SLP)
 # TYPE muk_wx_pressure_hpa gauge
-muk_wx_pressure_hpa{source="kpae"} 1029.5
-muk_wx_pressure_hpa{source="ksea"} 1029.1
-muk_wx_pressure_hpa{source="kxmr"} 1021.3
+muk_wx_pressure_hpa{source="kpae"} 1029.1
+muk_wx_pressure_hpa{source="ksea"} 1028.8
+muk_wx_pressure_hpa{source="kxmr"} 1020.5
 # HELP muk_wx_humidity_pct Relative humidity
 # TYPE muk_wx_humidity_pct gauge
-muk_wx_humidity_pct{source="kpae"} 54
-muk_wx_humidity_pct{source="ksea"} 51
-muk_wx_humidity_pct{source="kxmr"} 66
+muk_wx_humidity_pct{source="kpae"} 51
+muk_wx_humidity_pct{source="ksea"} 52
+muk_wx_humidity_pct{source="kxmr"} 62
 # HELP muk_wx_dewpoint_spread_c Temperature-dewpoint spread
 # TYPE muk_wx_dewpoint_spread_c gauge
-muk_wx_dewpoint_spread_c{source="kpae"} 9.0
+muk_wx_dewpoint_spread_c{source="kpae"} 10.0
 # HELP muk_wx_pressure_tendency_hpa 3-hour pressure tendency
 # TYPE muk_wx_pressure_tendency_hpa gauge
 muk_wx_pressure_tendency_hpa{source="kpae"} 0.0
-# HELP muk_forecast_temp_error_celsius Model forecast error vs actual KPAE
-# TYPE muk_forecast_temp_error_celsius gauge
-muk_forecast_temp_error_celsius{source="sweep_model"} 2.2
-# HELP muk_forecast_wind_dir_error_deg Wind direction error vs actual KPAE
-# TYPE muk_forecast_wind_dir_error_deg gauge
-muk_forecast_wind_dir_error_deg{source="sweep_model"} 180
 # HELP space_wx_kp_index Planetary Kp index
 # TYPE space_wx_kp_index gauge
 space_wx_kp_index 1.33
@@ -64,13 +58,22 @@ muk_river_flow_cfs{station="12150800"} 10000
 muk_river_gage_height_ft{station="12150800"} 4.13
 # HELP artemis_mission_day Current flight day
 # TYPE artemis_mission_day gauge
-artemis_mission_day 3
+artemis_mission_day 4
 # HELP muk_sweep_sample_count Weather samples collected
 # TYPE muk_sweep_sample_count gauge
-muk_sweep_sample_count 28
+muk_sweep_sample_count 30
 # HELP muk_wx_max_temp_c Today max temperature KPAE
 # TYPE muk_wx_max_temp_c gauge
 muk_wx_max_temp_c{source="kpae"} 14.5
 # HELP muk_wx_min_temp_c Today min temperature KPAE
 # TYPE muk_wx_min_temp_c gauge
 muk_wx_min_temp_c{source="kpae"} 4.2
+# HELP research_project_count Total research projects
+# TYPE research_project_count gauge
+research_project_count 213
+# HELP research_page_count Total HTML pages
+# TYPE research_page_count gauge
+research_page_count 1157
+# HELP open_problem_count Open research problems
+# TYPE open_problem_count gauge
+open_problem_count 19
