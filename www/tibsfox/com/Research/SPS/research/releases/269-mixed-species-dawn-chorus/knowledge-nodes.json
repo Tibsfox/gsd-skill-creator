@@ -1,0 +1,104 @@
+{
+  "degree": 269,
+  "species": "Mixed-Species Dawn Chorus",
+  "scientific_name": "Multi-species community event (no single taxon)",
+  "slug": "269-mixed-species-dawn-chorus",
+  "sound_type": "Layered polyrhythmic bird symphony -- 20-40 species singing simultaneously at forest edge, spring dawn. Frequency partitioning, temporal partitioning, spatial partitioning. E=7.",
+  "energy": 7,
+  "ecosystem": "Forest edge -- transition zone between closed forest and open habitat. Holds highest species diversity. Most complex dawn chorus environment.",
+  "season": "Spring dawn. March through June peak in PNW. Begins 30-45 minutes before civil twilight. Peaks at first light.",
+  "family": "Multi-species (Turdidae, Troglodytidae, Parulidae, Cardinalidae, Passerellidae, and many others simultaneously)",
+  "order": "Multiple (community event)",
+  "csv_substitute": false,
+  "original_species": "Mixed-species dawn chorus",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.65,
+    "lon": -122.20,
+    "description": "Reference for forest edge habitat in the greater Seattle area. Dawn chorus occurs throughout PNW forest edge habitat in spring."
+  },
+  "taxonomy_note": {
+    "description": "Multi-species community acoustic event. Not a single species but an ecological phenomenon involving 20-40 species simultaneously. The dawn chorus is documented by acoustic ecologists (Bernie Krause soundscape ecology, others) as one of the most complex natural acoustic events. First community acoustic event in the SPS engine.",
+    "current_family": "Multi-species",
+    "new_family": true,
+    "family_count_in_engine": "First community event entry",
+    "name_etymology": "Dawn chorus: the simultaneous singing of multiple bird species at dawn, peaking at spring breeding season. Named for the acoustic event, not a taxonomic entity.",
+    "genus_note": "Not applicable (community event). Species present include: American Robin (Turdus migratorius), Swainson's Thrush (Catharus ustulatus), Pacific Wren (Troglodytes pacificus), Wilson's Warbler (Wilsonia pusilla), Black-headed Grosbeak (Pheucticus melanocephalus), Song Sparrow (Melospiza melodia), and 14-34 additional species depending on location and habitat quality.",
+    "order_note": "Multi-order community event. Passeriformes dominant but includes other orders.",
+    "family_position": "First community acoustic event in SPS engine. Previously all entries were single-species."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "400-10,000 Hz. The full range of avian vocalization is represented simultaneously. Frequency partitioning means each species occupies a distinct frequency band.",
+    "peak_energy_band_hz": "2,000-6,000 Hz. The dawn chorus is richest in the mid-to-upper frequency range where most songbird species concentrate.",
+    "song_frequency_hz": "Full spectrum, frequency-partitioned by species. High-frequency singers: Pacific Wren (2,500-9,000+ Hz), Golden-crowned Kinglet (7,000-10,000 Hz). Low-frequency singers: Black-headed Grosbeak (1,000-4,000 Hz), Song Sparrow (2,000-8,000 Hz).",
+    "song_duration_s": "30-90 minutes total event duration. Individual songs range from 2-10 seconds per species. The chorus as an acoustic event spans from first voices (45+ minutes before civil twilight) to wind-down (60+ minutes after civil twilight).",
+    "note_structure": "LAYERED POLYRHYTHM: Each species sings its own song structure simultaneously. The acoustic result is layered, polyrhythmic, with no single dominant voice. The structure emerges from the community, not from any individual.",
+    "note_types": "20-40 species x individual song types = 20-40 simultaneous note types. The diversity of note structures is the defining characteristic.",
+    "phrase_structure": "Each species has its own phrase structure; the community event has emergent structure from the overlap. The result is not cacophony but a rich, layered acoustic environment that experienced listeners can parse by species.",
+    "timbre": "Varied: bright flute-like (thrushes), buzzy (warblers), rich (grosbeaks), high and rapid (wrens). The simultaneous diversity of timbres creates the 'orchestra' quality of the dawn chorus.",
+    "amplitude": "E=7. Community amplitude exceeds individual amplitude (Pacific Wren at E=5 at degree 268). The 20-40 simultaneous voices create a total amplitude greater than any individual contribution.",
+    "tempo": "Each species has its own tempo. The resulting polyrhythm has no shared meter -- it is polyrhythmic in the strict sense, with each voice following its own rhythmic structure independently.",
+    "context": "TERRITORIAL AND REPRODUCTIVE. Each species is singing for its own reasons: territorial declaration, mate attraction, reliability signaling. The community event emerges from the simultaneous pursuit of individual acoustic strategies.",
+    "regional_variation": "Spring dawn chorus varies by location: forest type, elevation, habitat quality, and proximity to water all affect species composition. The forest edge dawn chorus is the most species-diverse.",
+    "key_property": "MULTI-SPECIES COMMUNITY ACOUSTIC EVENT. First community event in the SPS engine. 20-40 species simultaneously. Frequency, temporal, and spatial partitioning. E=7. Forest edge, spring dawn. Biology returns from individual virtuosity (Pacific Wren, E=5, degree 268) to community symphony (Dawn Chorus, E=7, degree 269). ORCA ARC APPROACHES at degree 270."
+  },
+  "nodes": [
+    {
+      "id": "community-event",
+      "type": "milestone",
+      "title": "First Community Acoustic Event",
+      "description": "The mixed-species dawn chorus is the SPS engine's first entry documenting a community acoustic event rather than a single species. 20-40 species simultaneously. The community is the subject.",
+      "connections": ["frequency-partition", "biology-deepens", "orca-approach"]
+    },
+    {
+      "id": "frequency-partition",
+      "type": "concept",
+      "title": "Acoustic Niche Partitioning",
+      "description": "Frequency, temporal, and spatial partitioning of the dawn chorus. Each species in its own niche minimizes interference. Resource partitioning applied to acoustic space. Evolved cooperation without conscious intent.",
+      "connections": ["community-event", "forest-edge"]
+    },
+    {
+      "id": "forest-edge",
+      "type": "concept",
+      "title": "Forest Edge -- Maximum Diversity",
+      "description": "Dawn chorus most complex at transition zone. Forest edge holds higher species diversity than pure forest or pure open habitat. The margin is where complexity lives.",
+      "connections": ["frequency-partition", "community-event"]
+    },
+    {
+      "id": "biology-deepens",
+      "type": "pattern",
+      "title": "Biology Returns -- Individual to Community",
+      "description": "268: Pacific Wren (1 species, E=5). 269: Dawn Chorus (20-40 species, E=7). The biology return deepens from virtuoso to orchestra across two degrees.",
+      "connections": ["community-event", "orca-approach"]
+    },
+    {
+      "id": "orca-approach",
+      "type": "connection",
+      "title": "Orca Arc Approaches -- Dawn Before Depth",
+      "description": "Degree 270: Puget Sound orca S01 pod call. The dawn chorus is the morning light before the marine depth. Forest edge to inland sea. Birds to cetaceans. Air to water.",
+      "connections": ["community-event", "biology-deepens"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-268",
+      "species": "Pacific Wren rain-day chorus",
+      "relationship": "BIOLOGY RETURN DEEPENS. 268: individual virtuosity, E=5. 269: community symphony, E=7. The progression from single species to community event."
+    },
+    {
+      "target": "SPS-001",
+      "species": "Pacific Wren",
+      "relationship": "PRESENT IN CHORUS. The engine's first species is a voice in the community event at degree 269."
+    },
+    {
+      "target": "SPS-025",
+      "species": "American Robin",
+      "relationship": "PRESENT IN CHORUS. First voice before civil twilight. Already documented at degree 025."
+    },
+    {
+      "target": "SPS-270",
+      "species": "Puget Sound Orca S01 Pod Call",
+      "relationship": "ORCA ARC BEGINS. Dawn chorus (bird community, forest edge) precedes orca pod calls (cetacean community, inland sea). Habitat transition. Community acoustic events on both sides."
+    }
+  ]
+}
