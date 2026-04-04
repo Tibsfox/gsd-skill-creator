@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 312&deg; &mdash; Soundgarden &mdash; E=9 &mdash; GRUNGE SUMMIT / U-DISTRICT / Sub Pop to A&M &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #006064; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #006064; font-family: system-ui, sans-serif; border-bottom: 1px solid #80DEEA; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #E0F7FA; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 700; color: #006064; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #002020, #006064, #00838F); color: #E0F7FA; font-size: 2rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(0,96,100,0.5); border: 2px solid #FFD700; }
+    .energy-badge { display: inline-block; padding: 0.25rem 0.7rem; border-radius: 3px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #006064; color: white; border: 2px solid #FFD700; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #37474F; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #80DEEA; margin: 2.5rem 0; }
+    .soundgarden-banner { background: linear-gradient(135deg, #002020, #006064, #00838F); border: 3px solid #FFD700; border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #E0F7FA; }
+    .soundgarden-banner h3 { margin: 0 0 0.75rem; color: #FFD700; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .soundgarden-banner p { margin: 0.4rem 0; color: #E0F7FA; line-height: 1.6; }
+    .soundgarden-banner strong { color: #FFD700; }
+    .cornell-memorial { background: linear-gradient(135deg, #1C2833, #2C3E50); border: 2px solid #85929E; border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #AEB6BF; }
+    .cornell-memorial h3 { margin: 0 0 0.75rem; color: #AEB6BF; font-size: 1.2rem; }
+    .cornell-memorial p { color: #85929E; margin: 0.5rem 0; line-height: 1.65; }
+    .cornell-memorial strong { color: #BFC9CA; }
+    .temple-card { background: linear-gradient(135deg, #1B5E20, #2E7D32); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .temple-card h3 { margin: 0 0 0.75rem; color: #A5D6A7; font-size: 1.2rem; }
+    .temple-card p { color: #C8E6C9; margin: 0.5rem 0; line-height: 1.65; }
+    .temple-card strong { color: #DCEDC8; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #80DEEA; border-left: 4px solid #006064; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.peak { background: #E0F7FA; color: #006064; border: 1px solid #00838F; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.major { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #006064; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #006064; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E0F7FA; font-style: italic; color: #006064; }
+    .disc-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .disc-list li { padding: 0.5rem 0.75rem; border-bottom: 1px solid #E0F7FA; font-size: 0.88rem; display: flex; gap: 0.75rem; align-items: baseline; }
+    .disc-list li:last-child { border-bottom: none; }
+    .disc-year { font-weight: 700; color: #006064; min-width: 2.5rem; font-family: system-ui, sans-serif; }
+    .disc-label-tag { font-size: 0.7rem; padding: 0.1rem 0.35rem; border-radius: 3px; background: #E0F7FA; color: #006064; font-family: system-ui, sans-serif; font-weight: 600; border: 1px solid #80DEEA; }
+    .disc-star { color: #FFD700; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: #006064;">Seattle 360</a> &rsaquo; <a href="../" style="color: #006064;">Releases</a> &rsaquo; <span>312 &mdash; Soundgarden &mdash; E=9 &mdash; U-District &mdash; First Major Label Seattle Grunge</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">312&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 2rem; color: #006064;">Soundgarden</h1>
+        <div style="margin-top: 0.4rem;">
+          <span class="energy-badge">E = 9 &mdash; GRUNGE SUMMIT</span>
+          <span class="genre-badge">Grunge / Metal</span>
+          <span class="label-badge">Sub Pop &rarr; A&amp;M</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+
+        <div class="soundgarden-banner">
+          <h3>U-District &mdash; First Seattle Grunge Band Signed to a Major &mdash; E=9</h3>
+          <p><strong>Soundgarden. Chris Cornell (vocals, guitar). Kim Thayil (guitar). Matt Cameron (drums). Ben Shepherd (bass, from 1990).</strong> Formed 1984 in the University District. The first Seattle grunge band signed to a major label (A&M Records, 1989). Sub Pop to A&M: the major-label trajectory that Nirvana (DGC) and Pearl Jam (Epic) would follow. <em>Ultramega OK</em> (1988, SST). <em>Louder Than Love</em> (1989, A&M). <em>Badmotorfinger</em> (1991, A&M). <em>Superunknown</em> (1994, A&M) &mdash; the commercial peak. "Black Hole Sun." "Spoonman." "Fell on Black Days." Four-time Grammy nominees; two wins. Temple of the Dog (degree 225): Cornell's tribute to Andrew Wood. Chris Cornell died May 18, 2017. He is remembered here with the full weight of his artistry.</p>
+          <p><strong>Kim Thayil (guitar):</strong> One of the most original guitar voices in grunge. Open and alternate tunings deployed for maximum harmonic strangeness. The guitar sound that makes Soundgarden sound like no other band.</p>
+        </div>
+
+        <h2>The University District &mdash; Soundgarden's Origin</h2>
+        <p>Soundgarden formed in 1984 in the University District, Seattle's academic neighborhood. Hiro Yamamoto, the bassist who was part of the original lineup (degrees 220 and 302 in the engine's prior documentation of Truly, which Yamamoto joined after leaving Soundgarden), and Kim Thayil were among the initial members. Chris Cornell joined, and the band that would define "heavy Seattle" began to take shape.</p>
+        <p>The U-District gave Soundgarden a different character from the Capitol Hill bands: it is a neighborhood of academic transience, students, and the University of Washington's cultural orbit. The intellectual engagement with music theory and composition that characterizes Kim Thayil's guitar work reflects this environment. Soundgarden was always the most technically sophisticated of the major grunge bands in terms of musical theory: odd time signatures, open tunings, modal harmony, compositional structures that could not be described by the three-chord punk template.</p>
+
+        <hr class="section-divider">
+
+        <h2>Chris Cornell (1964&ndash;2017)</h2>
+        <p>Chris Cornell was born Christopher John Boyle on July 20, 1964, in Seattle, Washington. He took the surname Cornell from a former girlfriend. He was Soundgarden's vocalist, primary lyricist, and one of the most gifted rock singers of the 20th century.</p>
+        <p>His voice had an unusual range: four octaves across recordings, from a low baritone to a high tenor that could sustain notes at extremes of the register that would be impossible for most singers. More than the range, Cornell had control: the ability to modulate from a whisper to a scream within a phrase, to sustain notes at full volume without wavering, to produce a quality of emotional rawness without losing technical precision. He was simultaneously one of the most powerful rock singers and one of the most musical.</p>
+
+        <blockquote>"I always thought that the songs I wrote would outlive me, and that was enough." &mdash; Chris Cornell (interview paraphrase, referenced in multiple biographical sources)</blockquote>
+
+        <div class="cornell-memorial">
+          <h3>May 18, 2017 &mdash; Handled with Respect</h3>
+          <p><strong>Chris Cornell died on May 18, 2017, in Detroit, Michigan, following a Soundgarden concert.</strong> He was 52 years old. The manner of his death was a suicide by hanging. He had struggled for years with addiction and depression.</p>
+          <p>This entry does not speculate beyond what is publicly documented. Cornell's death is a significant loss to music, to Seattle, and to everyone who loved his work. It is acknowledged here factually and without sensationalism.</p>
+          <p><strong>He is remembered in the engine through his music.</strong> Soundgarden (degree 312), Temple of the Dog (degree 225), and the Soundgarden legacy are the primary documents. The voice is preserved. The songs outlived him, as he said they would.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Kim Thayil &mdash; The Guitar Voice</h2>
+        <p>Kim Thayil (born September 4, 1960, Seattle, Washington) is the architect of Soundgarden's guitar sound and one of the most original guitar voices in the grunge era. His background in music theory (University of Washington connections) and his early interest in psychedelic rock, garage rock, and punk provided the foundation for an approach that was entirely his own:</p>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Open and Alternate Tunings</h4>
+            <span class="level peak">Harmonic Architecture</span>
+            <p>Thayil uses open tunings and non-standard alternate tunings extensively. The open tunings allow chord voicings and riff structures that are impossible in standard tuning, producing the characteristic Soundgarden "droning" quality &mdash; sustained notes in low registers against melodic motion in higher registers.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Odd Time Signatures</h4>
+            <span class="level peak">Rhythmic Sophistication</span>
+            <p>Soundgarden uses 7/8, 5/4, and compound time signatures more extensively than any other grunge band. "Black Hole Sun" is in 4/4 but with time signature shifts; "Spoonman" is in 7/4; "Fell on Black Days" is in 6/8. The rhythmic sophistication is unusual in rock.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Modal Harmony</h4>
+            <span class="level advanced">Theory Applied</span>
+            <p>Soundgarden uses Lydian, Mixolydian, and other modes that produce harmonic colors outside the standard major/minor duality. The modal approach gives the music its characteristic ambiguity: neither conventionally happy nor conventionally dark.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Volume Control</h4>
+            <span class="level advanced">Dynamic Range</span>
+            <p>Thayil uses the guitar's volume control as a performance parameter &mdash; swelling into notes, cutting sharply. Combined with his picking dynamics, this produces a guitar voice that has a wider expressive range than most rock guitarists. The sound changes depending on the song's emotional content, not just the chord chart.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Matt Cameron &mdash; The Engine Room</h2>
+        <p>Matt Cameron (born November 28, 1962, San Diego, California) is one of the finest rock drummers of his generation. His playing with Soundgarden is distinguished by:</p>
+        <ul style="font-size: 0.9rem; line-height: 1.8; color: #424242; padding-left: 1.5rem;">
+          <li><strong>Metric intelligence.</strong> Cameron navigates Soundgarden's complex time signatures without losing the physical momentum that drives rock music. Playing in 7/8 without the music feeling mathematically stilted is a specific skill; Cameron has it.</li>
+          <li><strong>Power-precision balance.</strong> The same combination that Dale Crover (Melvins, degree 308) exemplified and that Dave Grohl absorbed. Cameron is the Soundgarden equivalent: enormous physical commitment at the kit combined with consistent rhythmic precision. The groove never slips regardless of how hard he hits.</li>
+          <li><strong>After Soundgarden.</strong> Cameron joined Pearl Jam in 1998 after Soundgarden's first dissolution and has remained their drummer. He is the only musician to have been a primary member of both Soundgarden and Pearl Jam.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2>Sub Pop to A&M &mdash; The First Major Label Grunge Band</h2>
+        <p>Soundgarden was the first Seattle grunge band signed to a major label. A&M Records signed them in 1989 &mdash; two years before Nirvana went to DGC, three years before Pearl Jam launched on Epic. The timeline is important:</p>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Sub Pop Period (1987-1989)</h4>
+            <span class="level advanced">Origin</span>
+            <p>Singles Club appearances. "Screaming Life" EP (1987, Sub Pop). "Fopp" EP (1988, Sub Pop). The Sub Pop years established Soundgarden's reputation in the underground before the major label signing.</p>
+          </div>
+          <div class="theory-card">
+            <h4>SST Period (1988)</h4>
+            <span class="level advanced">Transitional</span>
+            <p>*Ultramega OK* (1988, SST Records). Black Flag's label. SST was the primary underground rock label of the 1980s. Soundgarden on SST placed them in the company of Black Flag, the Minutemen, Hüsker Dü, and Dinosaur Jr.</p>
+          </div>
+          <div class="theory-card">
+            <h4>A&M Signing (1989)</h4>
+            <span class="level major">First Major</span>
+            <p>A&M Records signed Soundgarden in 1989. *Louder Than Love* (1989) was their major-label debut. Two years before Nevermind; three years before the general grunge major-label signing frenzy. Soundgarden showed it was possible.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Superunknown (1994)</h4>
+            <span class="level major">Commercial Peak</span>
+            <p>*Superunknown* was released March 8, 1994 &mdash; three days after Kurt Cobain's last public appearance, 28 days before Cobain's death. The commercial peak of the grunge era's two most important bands collided in March 1994.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Discography &mdash; The Essential Records</h2>
+        <ul class="disc-list">
+          <li><span class="disc-year">1987</span><span>Screaming Life EP <span class="disc-label-tag">Sub Pop</span> &mdash; Sub Pop debut. Kim Thayil's tuning approach established. "Nothing to Say," "Entering." The earliest essential document.</span></li>
+          <li><span class="disc-year">1988</span><span>Ultramega OK <span class="disc-label-tag">SST</span> &mdash; Full-length debut. Black Flag's label. Psychedelic heavy rock. More experimental than what followed.</span></li>
+          <li><span class="disc-year">1989</span><span>Louder Than Love <span class="disc-label-tag">A&amp;M</span> &mdash; Major label debut. First Seattle grunge band on a major. "Loud Love," "Hands All Over," "Full on Kevin's Mom."</span></li>
+          <li><span class="disc-year">1991</span><span>Badmotorfinger <span class="disc-label-tag">A&amp;M</span> <span class="disc-star">&#9733;</span> &mdash; The critical breakthrough. "Rusty Cage," "Outshined," "Jesus Christ Pose." Chris Cornell's vocal range fully displayed. Kim Thayil's alternate-tuning riff architecture at peak. One of grunge's greatest records.</span></li>
+          <li><span class="disc-year">1994</span><span>Superunknown <span class="disc-label-tag">A&amp;M</span> <span class="disc-star">&#9733;&#9733;</span> &mdash; The commercial peak. "Black Hole Sun," "Spoonman," "Fell on Black Days," "My Wave," "The Day I Tried to Live." Four Grammy nominations; two wins. #1 US. Cornell's vocal and lyrical gifts at their most fully realized. Odd time signatures throughout. Released March 8, 1994.</span></li>
+          <li><span class="disc-year">1996</span><span>Down on the Upside <span class="disc-label-tag">A&amp;M</span> &mdash; Final pre-hiatus album. More acoustic-influenced. Less overtly heavy. The band winding down before the 1997 dissolution.</span></li>
+          <li><span class="disc-year">1997</span><span>Band dissolves. Cameron joins Pearl Jam. Cornell pursues solo career and Audioslave.</span></li>
+          <li><span class="disc-year">2010</span><span>Reunion. <span class="disc-label-tag">Interscope</span> &mdash; Band reunites. Touring extensively 2010-2017.</span></li>
+          <li><span class="disc-year">2012</span><span>King Animal <span class="disc-label-tag">Universal</span> &mdash; Reunion studio record. The band still capable; the magic largely present.</span></li>
+          <li><span class="disc-year">2017</span><span>Chris Cornell dies May 18, 2017. Band does not continue.</span></li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <div class="temple-card">
+          <h3>Temple of the Dog (Degree 225) &mdash; The Andrew Wood Tribute</h3>
+          <p><strong>Temple of the Dog is Chris Cornell's most important collaborative project</strong> and one of the grunge era's most significant documents. Formed in 1991 as a tribute to Andrew Wood (Mother Love Bone vocalist, who died March 19, 1990), the project brought Cornell together with the future members of Pearl Jam.</p>
+          <p><strong>The lineup:</strong> Chris Cornell (Soundgarden) + Matt Cameron (Soundgarden) + Stone Gossard + Jeff Ament + Mike McCready (pre-Pearl Jam) + Eddie Vedder (in his first significant recording). The album was recorded before Pearl Jam's debut.</p>
+          <p><strong>"Hunger Strike":</strong> The album's most famous track features the first recorded duet between Cornell and Vedder &mdash; a combination of Cornell's high tenor and Vedder's baritone that defines the track. Neither singer had ever worked with a vocal counterpart of comparable quality; the combination is electric.</p>
+          <p><strong>The engine cross-reference:</strong> Temple of the Dog entered the engine at degree 225. Soundgarden enters at degree 312. The Cornell-Cameron through-line connects both entries. The grunge network fully visible: Soundgarden (312) + Temple of the Dog (225) + Pearl Jam + Mother Love Bone (degree 296).</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Hiro Yamamoto Connection (Degrees 220, 302)</h2>
+        <p>Hiro Yamamoto was Soundgarden's original bassist (1984-1989), appearing on the Sub Pop releases, *Ultramega OK*, and *Louder Than Love*. He left Soundgarden in 1989 and subsequently formed Truly with Robert Roth and Mark Lanegan (Screaming Trees, degree 307), which entered the engine at degrees 220 and 302.</p>
+        <p>This connection documents the Soundgarden-Truly lineage directly: Yamamoto is the personnel bridge between Seattle's first major-label grunge band and one of the scene's most critically respected post-grunge acts. The cross-reference runs: Soundgarden (312) &rarr; Hiro Yamamoto &rarr; Truly (220, 302) &rarr; Robert Roth &rarr; Capitol Hill scene connections.</p>
+
+        <hr class="section-divider">
+
+        <h2>"Black Hole Sun" (1994) &mdash; The Defining Moment</h2>
+        <p>"Black Hole Sun" is the single from <em>Superunknown</em> that defined Soundgarden's commercial peak and remains their most widely recognized song. Several aspects of the track are worth documenting:</p>
+        <ul style="font-size: 0.9rem; line-height: 1.8; color: #424242; padding-left: 1.5rem;">
+          <li><strong>The time signature.</strong> "Black Hole Sun" is primarily in 4/4 but with rhythmic displacement and phrase-length variations that make it feel simultaneously straightforward and subtly wrong. The verse feels settled; the chorus opens unexpectedly. The structure is deceptive in its apparent simplicity.</li>
+          <li><strong>The tuning.</strong> Kim Thayil's guitar in "Black Hole Sun" uses an open tuning that produces the characteristic drone of the chord progressions. The movement from the verse chord to the chorus chord is a harmonic motion that does not occur in standard tuning; it is a product of the open tuning's voicing possibilities.</li>
+          <li><strong>Cornell's vocal.</strong> The vocal on "Black Hole Sun" demonstrates Cornell's ability to sustain melodic lines at a high register for extended phrases. The chorus requires sustained notes at the top of a normal baritone's range; Cornell sings them effortlessly and with full emotional presence.</li>
+          <li><strong>The video.</strong> The music video for "Black Hole Sun" (directed by Howard Greenhalgh) features deliberately unsettling suburban imagery &mdash; smiling families, cheerful environments, all warped by fisheye lens and surreal editing. The contrast between the images' surface cheerfulness and their underlying distortion matches the song's tonal ambiguity: major-key melody over unsettling harmonic context.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">225</span> Temple of the Dog &mdash; Cornell's tribute to Andrew Wood. First recorded Cobain-Vedder pairing ("Hunger Strike"). The Soundgarden-Pearl Jam connection at its most direct.</li>
+          <li><span class="ref-degree">220 / 302</span> Truly (Hiro Yamamoto) &mdash; Yamamoto was Soundgarden's original bassist. His departure to Truly traces the personnel thread from Soundgarden's origin to the post-grunge era.</li>
+          <li><span class="ref-degree">311</span> Nirvana &mdash; Both at E=9. Both Summit peaks. Cornell and Cobain were Seattle peers. Both lost to deaths. Both handled with respect.</li>
+          <li><span class="ref-degree">308</span> Melvins &mdash; The Melvins are listed in the Soundgarden influence network: the sludge metal approach that informed the heaviest Soundgarden material.</li>
+          <li><span class="ref-degree">SPS 312</span> Puget Sound winter storm surge &mdash; E=9. The storm surge's full coastline impact resonance paired with Soundgarden's full-band sonic impact. Both at E=9. "Black Hole Sun" and the Pacific winter storm share a quality of ominous beautiful weight.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">312 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">9 &mdash; Summit</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge / Metal</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1984&ndash;1997, 2010-2017</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">U-District</span></div>
+          <div class="stat-row"><span class="stat-label">Labels</span><span class="stat-value">Sub Pop &rarr; SST &rarr; A&amp;M</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals / Guitar</span><span class="stat-value">Chris Cornell</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Kim Thayil</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Matt Cameron</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Ben Shepherd</span></div>
+          <div class="stat-row"><span class="stat-label">Bass (orig.)</span><span class="stat-value">Hiro Yamamoto</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Chris Cornell</h4>
+          <div class="stat-row"><span class="stat-label">Born</span><span class="stat-value">Jul 20, 1964</span></div>
+          <div class="stat-row"><span class="stat-label">Seattle, WA</span><span class="stat-value">Hometown</span></div>
+          <div class="stat-row"><span class="stat-label">Died</span><span class="stat-value">May 18, 2017</span></div>
+          <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value">52</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Records</h4>
+          <div class="stat-row"><span class="stat-label">1988</span><span class="stat-value">Ultramega OK (SST)</span></div>
+          <div class="stat-row"><span class="stat-label">1991</span><span class="stat-value">Badmotorfinger</span></div>
+          <div class="stat-row"><span class="stat-label">1994</span><span class="stat-value">Superunknown</span></div>
+          <div class="stat-row"><span class="stat-label">1996</span><span class="stat-value">Down on the Upside</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">86.7%</span></div>
+          <div class="stat-row"><span class="stat-label">First major</span><span class="stat-value">FIRST A&M GRUNGE</span></div>
+          <div class="stat-row"><span class="stat-label">Temple</span><span class="stat-value">Degree 225</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Event</span><span class="stat-value">Winter storm surge</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=9</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=18</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 311&deg; &mdash; Orca Greeting Ceremony &mdash; E=9 &mdash; SPS MAXIMUM &mdash; Delphinidae &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0D1B2E, #1A2744, #263238); color: #90CAF9; font-size: 2.2rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 40px rgba(0,0,0,0.8); border: 3px solid #FFD700; }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: #212121; font-weight: 700; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #37474F; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .maximum-banner { background: linear-gradient(135deg, #0D1B2E, #1A2744, #0D47A1); border: 3px solid #FFD700; border-radius: 8px; padding: 1.75rem 2rem; margin: 1.5rem 0; color: #E3F2FD; }
+    .maximum-banner .max-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: #FFD700; font-family: system-ui, sans-serif; margin-bottom: 0.5rem; }
+    .maximum-banner .max-value { font-size: 2.5rem; font-weight: 700; color: #FFD700; font-family: 'Georgia', serif; }
+    .maximum-banner h3 { margin: 0.75rem 0 0.5rem; color: #90CAF9; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .maximum-banner p { color: #E3F2FD; margin: 0.4rem 0; line-height: 1.65; }
+    .nirvana-card { background: linear-gradient(135deg, #212121, #37474F); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #CFD8DC; border: 2px solid #FFD700; }
+    .nirvana-card h3 { margin: 0 0 0.75rem; color: #FFD700; font-size: 1.2rem; }
+    .nirvana-card p { color: #CFD8DC; margin: 0.5rem 0; line-height: 1.65; }
+    .nirvana-card strong { color: #FFD700; }
+    .call-display { text-align: center; font-size: 1.4rem; font-weight: 700; color: #0D47A1; font-family: 'Georgia', serif; letter-spacing: 0.08em; margin: 1.5rem 0 0.5rem; }
+    .call-sub { text-align: center; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .acoustic-card { background: linear-gradient(135deg, #0D1B2E, #1A2744); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E0E0E0; border: 1px solid #FFD700; }
+    .acoustic-card h3 { margin-top: 0; color: #FFD700; font-size: 1.1rem; }
+    .acoustic-card p { color: #E0E0E0; margin: 0.4rem 0; }
+    .acoustic-card strong { color: #FFD700; }
+    .pod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .pod-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .pod-card .ptitle { font-weight: 700; color: #0D47A1; font-size: 0.88rem; }
+    .pod-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #37474F; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">311&deg;</div>
+      <div class="release-title-block">
+        <h2>Orca Greeting Ceremony</h2>
+        <div class="scientific"><em>Orcinus orca</em> &mdash; E=9 &mdash; SPS MAXIMUM &mdash; Delphinidae &mdash; Resident pod &mdash; FULL CONVERGENCE &mdash; NIRVANA EQUIVALENCE &mdash; E=18 SUMMIT MAXIMUM</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      full pod multi-voice convergence &mdash; <strong>500 Hz&ndash;20+ kHz layered</strong> &mdash; reunion greeting ceremony &mdash; entire resident pod vocalizing simultaneously &mdash; rare event &mdash; maximum acoustic convergence &mdash; Puget Sound
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="maximum-banner">
+          <div class="max-label">SPS Engine Maximum + S36 Engine Maximum</div>
+          <div class="max-value">E = 9 + E = 9 = E = 18</div>
+          <h3>The Summit Maximum &mdash; Both Tracks Peak Simultaneously</h3>
+          <p>Degree 311 is the only degree in the engine where both tracks simultaneously reach E=9. S36 delivers Nirvana at E=9 &mdash; the S36 first maximum, the most important rock band of the 1990s. SPS delivers the Orca greeting ceremony at E=9 &mdash; the SPS maximum shared with the Marten scream (308) and the Great Horned Owl pair (309). <strong>E=18: the engine's highest combined energy. The Summit Maximum. The peak of the Grunge Summit is also the peak of the SPS engine's engagement with the marine apex.</strong> No subsequent degree can exceed the combined E=18 of degree 311.</p>
+        </div>
+
+        <div class="call-display">GREETING &bull;&bull;&bull; GREETING &bull;&bull;&bull; GREETING</div>
+        <div class="call-sub">The entire resident pod vocalizing simultaneously &mdash; 20-80 animals &mdash; pulsed calls + whistles + clicks overlapping &mdash; 500 Hz to 20+ kHz &mdash; the Salish Sea filled with Orca voices at once &mdash; reunion after separation &mdash; rare &mdash; E=9</div>
+
+        <div class="nirvana-card">
+          <h3>The Nirvana-Orca Equivalence &mdash; Full Convergence</h3>
+          <p><strong>The structural parallel:</strong> Nirvana achieves its defining acoustic events through the convergence of three voices: Cobain's guitar and vocals, Novoselic's bass, Grohl's drums. No element alone is Nirvana; the convergence is what Nirvana is. The Orca greeting ceremony achieves its E=9 calibration through the convergence of all voices in a resident pod: 20-80 animals vocalizing simultaneously in the same acoustic space. No individual animal is the greeting ceremony; the convergence is what the event is.</p>
+          <p><strong>The rarity:</strong> Nirvana existed for seven years (1987-1994). Full resident pod greeting ceremonies occur rarely &mdash; only when groups that have been separated are reunited. Both are rare convergence events. Both achieve something at the group level that no component could achieve alone.</p>
+          <p><strong>The Salish Sea and Puget Sound:</strong> The Southern Resident Killer Whale pods (J, K, and L pods) are the iconic cetacean inhabitants of Puget Sound and the broader Salish Sea. Their acoustic presence is one of the defining features of Pacific Northwest marine ecology. Degree 311 documents the moment of maximum acoustic expression: the full greeting ceremony.</p>
+          <p><strong>E=18 combined:</strong> Both tracks at E=9. The engine's highest combined energy. The Summit Maximum. The moment where human music and Pacific Northwest ecology simultaneously reach their maximum expression.</p>
+        </div>
+
+        <h2><em>Orcinus orca</em> &mdash; The Species</h2>
+        <p>The Killer Whale (<em>Orcinus orca</em>, Linnaeus, 1758) is the largest member of the family Delphinidae (oceanic dolphins). Despite the common name, Orcas are dolphins, not whales in the taxonomic sense. Body length: males 6-8 m, females 5-7 m. Body mass: males up to 5,400 kg, females up to 3,800 kg. The distinctive black-and-white coloration, dorsal fin (up to 1.8 m in males), and saddle patch behind the dorsal fin are the primary field identification features.</p>
+        <p>In the Pacific Northwest, Orcas are divided into two primary ecotypes: Resident Orcas (Southern and Northern Resident populations) and Transient Orcas (Bigg's Killer Whales). The resident and transient populations have different diets (fish vs. marine mammals), different acoustic repertoires, and different social structures. The Southern Resident Killer Whales (SRKW) &mdash; J, K, and L pods &mdash; are the Puget Sound population most familiar to PNW observers and the population most endangered.</p>
+
+        <h2>The Southern Resident Killer Whale Pods</h2>
+        <div class="pod-grid">
+          <div class="pod-card">
+            <div class="ptitle">J Pod</div>
+            <p>The smallest and most frequently observed SRKW pod. Year-round Puget Sound presence. J1 (Ruffles) was the most studied individual; died 2010. Current matriarch lineage.</p>
+          </div>
+          <div class="pod-card">
+            <div class="ptitle">K Pod</div>
+            <p>Smallest of the three SRKW pods. Typically found in the outer Salish Sea and coastal waters in winter. Joins J and L for summer superpod events.</p>
+          </div>
+          <div class="pod-card">
+            <div class="ptitle">L Pod</div>
+            <p>Largest SRKW pod. Often found offshore in winter. The most acoustically diverse pod due to its size. Joins J and K for superpod greeting ceremonies.</p>
+          </div>
+          <div class="pod-card">
+            <div class="ptitle">Superpod</div>
+            <p>When all three pods &mdash; J, K, and L &mdash; gather, the event is called a superpod. 60-80+ animals together. The greeting ceremony at superpod scale is the most acoustically extreme SRKW event.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-card">
+          <h3>Acoustic Profile &mdash; The Greeting Ceremony at E=9</h3>
+          <p><strong>Vocalization types:</strong> Resident Orcas produce three primary vocalization types: (1) pulsed calls &mdash; the primary social communication signal, pod-specific, culturally transmitted; (2) whistles &mdash; higher-frequency, used in close-contact social situations; (3) clicks &mdash; echolocation, used for navigation and prey detection. The greeting ceremony involves all three simultaneously.</p>
+          <p><strong>Frequency range:</strong> 500 Hz to over 20 kHz. Pulsed calls: 500 Hz-5 kHz fundamental with harmonics extending higher. Whistles: 2-20 kHz. Echolocation clicks: broadband, up to 150 kHz but with significant energy 20-100 kHz. The full acoustic output of a greeting ceremony covers the entire audible spectrum and extends far into ultrasound.</p>
+          <p><strong>Pod-specific dialects:</strong> Each pod has a set of pulsed calls that are unique to that pod and are culturally transmitted from generation to generation. The calls are learned, not innate. Individual animals within a pod share the same call repertoire. When multiple pods meet, the simultaneous production of different pods' calls creates an acoustic complexity that is unique to the inter-pod encounter.</p>
+          <p><strong>E=9 calibration:</strong> Full pod (20-80 animals) + all three vocalization types simultaneously + inter-pod dialect complexity + water as transmission medium (sound carries 4x faster in water than in air, extending effective radius significantly) + reunion context driving maximum calling intensity. Combined: SPS ceiling at E=9.</p>
+          <p><strong>Underwater acoustic environment:</strong> Sound in water travels approximately 1,500 m/s (vs. 340 m/s in air). Orca calls at full greeting intensity can be detected by hydrophone at ranges of tens of kilometers. The acoustic event at degree 311 is not bounded by normal air-based sound propagation limits; it fills a three-dimensional aquatic volume of significant extent.</p>
+        </div>
+
+        <h2>The Greeting Ceremony &mdash; What It Is</h2>
+        <p>The Orca greeting ceremony occurs when resident pod groups that have been separated &mdash; sometimes for days or weeks while different pods range in different parts of their territory &mdash; come together again. The behavioral sequence is documented and distinctive:</p>
+        <p>The pods form two parallel lines facing each other, at the surface. They mill in place, often spy-hopping (lifting heads above the water surface). Then one or both lines surge toward each other. Contact: physical touch, rubbing, rolling. Simultaneously, all animals in both groups vocalize at full intensity. The acoustic event begins as the lines converge and continues through the physical contact and rubbing phase. It is one of the most dramatic behavioral events in marine mammal biology.</p>
+        <p>The function of the greeting ceremony is not fully understood. It clearly reinforces social bonds at the pod level; the physical contact and shared vocalization are not consistent with any purely utilitarian interpretation. The greeting ceremony is a social and acoustic celebration of reunion. It is, by the available behavioral evidence, an expression of something that resembles joy.</p>
+
+        <h2>Puget Sound and the SRKW</h2>
+        <p>The Southern Resident Killer Whales are one of the most endangered marine mammal populations in North America. The current population (as of 2026) stands at approximately 73 individuals &mdash; down from a historical high and significantly below the population needed for long-term viability. The primary threats are Chinook salmon decline (their preferred prey), vessel noise (acoustic interference with echolocation and communication), and contaminant accumulation (PCBs, PBDEs) that concentrate in the fat-rich bodies of top predators.</p>
+        <p>The SRKW have been protected under the Endangered Species Act since 2005. Recovery depends primarily on Chinook salmon recovery throughout the Columbia River basin and the Pacific Northwest watershed system. The salmon recovery story is one of the engine's deepest threads: the salmon run (degree 307) and the Orca greeting ceremony (degree 311) are acoustically and ecologically linked. The Orcas need the salmon. The salmon need the rivers. The rivers need the forests. The engine documents the whole system.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>S36-311 Nirvana (E=9)</strong>
+            <p>E=9 + E=9 = E=18. THE SUMMIT MAXIMUM. Full convergence paired with full convergence. Both at the engine's maximum in both tracks simultaneously.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-307 Salmon run full river (if documented)</strong>
+            <p>Chinook salmon are the SRKW's primary prey. The salmon run and the Orca greeting ceremony are ecologically linked: salmon recovery is the primary path to SRKW recovery.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-308 Marten scream (E=9)</strong>
+            <p>First E=9 in the engine at degree 308. Now occurring at 309, 311. The SPS maximum zone spans the Grunge Summit degrees. The ecology matches the music's peak.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-309 Great Horned Owl pair (E=9)</strong>
+            <p>Second E=9. Three consecutive degrees with E=9 SPS entries (308, 309, and now 311) across the Grunge Summit. The SPS track is at sustained maximum during the Summit zone.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-312 Puget Sound winter storm surge (E=9)</strong>
+            <p>Next degree. The SPS E=9 entries continue: Marten (308), Owl pair (309), Orca greeting (311), Storm surge (312). Four E=9 entries across the Summit cluster.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Greeting ceremony</div>
+          <div class="stat-detail">Full pod multi-voice</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #0D47A1; font-size: 1.4rem;">E = 9</div>
+          <div class="stat-detail" style="color: #0D47A1; font-weight: 700;">SPS MAXIMUM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">500 Hz&ndash;20+ kHz</div>
+          <div class="stat-detail">Pulsed + whistle + click</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-style: italic; font-size: 0.88rem;">Orcinus orca</div>
+          <div class="stat-detail">Linnaeus, 1758</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pods involved</div>
+          <div class="stat-value">J, K, L &mdash; SRKW</div>
+          <div class="stat-detail">Superpod at max</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~73 animals</div>
+          <div class="stat-detail">Endangered, 2026</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Combined energy</div>
+          <div class="stat-value" style="color: #B71C1C; font-size: 1.1rem;">E=18</div>
+          <div class="stat-detail">ENGINE SUMMIT MAXIMUM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Nirvana (E=9)</div>
+          <div class="stat-detail">Both at E=9 max</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "degree": 315,
+  "species": "Varied Thrush",
+  "scientific_name": "Ixoreus naevius",
+  "slug": "315-varied-thrush-in-fog",
+  "sound_type": "Single sustained pure-tone whistle in fog: one note held for 2-4 seconds at constant pitch and volume, followed by silence, then a new note at a different pitch; no vibrato, no frequency modulation, no harmony; each note an isolated acoustic event; produced in low-visibility coastal fog conditions; the fog reduces ambient sound and increases perceived isolation of each note; most haunting single-note vocalization in the PNW bird catalog",
+  "energy": 7,
+  "ecosystem": "Coastal old-growth and mature coniferous forest -- western red cedar, Sitka spruce, western hemlock understory; dense canopy; Pacific fog layer common at dawn; the bird sings from mid-canopy in reduced visibility; the fog context is not incidental -- Varied Thrush song in fog is acoustically and aesthetically distinct from the same bird in clear conditions",
+  "season": "Year-round (resident), with peak singing activity in late winter through spring (February-June). Fog context most common on Pacific coast from October through April. The fog + Varied Thrush combination peaks in winter-early spring.",
+  "family": "Turdidae",
+  "order": "Passeriformes",
+  "conservation_status": "Least Concern (IUCN). Common in Pacific Coast old-growth and mature forest. Old-growth dependent for breeding. Declining in areas of forest fragmentation. Coastal fog forest is the optimal habitat.",
+  "milestone": "FIRST VARIED THRUSH ENTRY IN ENGINE. E=7. The most acoustically isolated and emotionally singular bird vocalization in the SPS engine's Pacific Northwest catalog. THE HAUNTING SINGLE NOTE: the fog context reduces ambient competition; the bird's single-note song, each note isolated in silence, in reduced-visibility coastal forest -- the most emotionally complete simple acoustic event in the engine. POST-SUMMIT GRADIENT CONTINUES: E=7 following E=8 at degree 314.",
+  "coordinates": {
+    "lat": 47.9,
+    "lon": -124.1,
+    "description": "Pacific Coast old-growth and coastal fog forest: Olympic Peninsula coast (Hoh Rain Forest, Quinault Rain Forest, Kalaloch), coastal Oregon (Siuslaw National Forest), coastal British Columbia. Prime Varied Thrush fog-singing habitat requires: mature-to-old-growth Sitka spruce/western red cedar/western hemlock, Pacific fog layer, minimal wind. Olympic Peninsula western slope is the engine's primary geographic reference."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Single sustained pure-tone whistle: each note is one unmodulated frequency held for 2-4 seconds at constant amplitude. No vibrato. No trill. No ascending or descending slide. The note begins, is held, and ends. Then silence of 3-8 seconds. Then a new note at a different frequency. The song is a series of isolated tone events, each separated by silence.",
+    "mechanics": "Syrinx-produced pure tone: unusual acoustic purity for a songbird. Most songbirds produce frequency modulation within each note (vibrato, trill, ascending whistle). The Varied Thrush produces an unmodulated sustained tone -- the acoustic equivalent of a single string bowed without vibrato. Fog context: coastal fog reduces ambient sound pressure by absorbing high-frequency reflections; the bird's pure-tone vocalization carries through the fog with less degradation than complex multi-frequency calls. Each note arrives isolated in the listener's perception.",
+    "frequency_range": "Individual notes: 1,200-4,000 Hz depending on which note in the repertoire is being sung. Notes do not overlap in frequency. Each note occupies a single narrow frequency band. The song sequence moves through multiple frequencies non-sequentially -- not a scale, not a pattern the listener can predict.",
+    "duration": "Individual note: 2-4 seconds. Silence between notes: 3-8 seconds. Active singing period: 5-30 minutes at dawn in fog. The pauses are essential to the acoustic effect -- the silence between notes is as structurally significant as the notes themselves.",
+    "e7_calibration": "E=7: Four factors: (1) acoustic uniqueness -- no other PNW bird produces a song with this specific quality (single unmodulated pure tone, isolated in silence, repeated at different pitches without pattern); (2) fog context -- the coastal fog elevates the perceptual isolation of each note; the same song in clear conditions would be E=6; fog is the E=7 factor; (3) emotional weight per acoustic simplicity -- the fewest acoustic elements of any E=7 entry (single tone + silence + single tone) producing the highest emotional-impact-to-acoustic-complexity ratio; (4) habitat specificity -- Varied Thrush fog-singing is specific to coastal old-growth, the engine's most ecologically significant habitat type. Combined: E=7."
+  },
+  "nodes": [
+    {
+      "id": "first-varied-thrush",
+      "type": "milestone",
+      "title": "First Varied Thrush Entry -- Most Acoustically Isolated PNW Bird Song",
+      "description": "The Varied Thrush single-note whistle in fog is the SPS engine's most acoustically simple entry: one unmodulated frequency, held, followed by silence, then another unmodulated frequency. No other bird in the engine produces a song this structurally minimal yet this emotionally complete. The fog context is required for E=7; it is not a background condition.",
+      "connections": ["fog-as-context", "post-summit-gradient"]
+    },
+    {
+      "id": "fog-as-context",
+      "type": "concept",
+      "title": "Fog as Acoustic Context -- E=6 to E=7 Elevation",
+      "description": "The Varied Thrush in clear conditions: E=6. In coastal fog: E=7. The fog is the calibration increment. Fog absorbs high-frequency ambient sound, reducing competition; it reduces visibility, increasing acoustic reliance; it isolates the listener perceptually from the landscape's visual cues, making the auditory field more prominent. The same bird, the same song, elevated one energy unit by atmospheric context.",
+      "connections": ["first-varied-thrush"]
+    },
+    {
+      "id": "post-summit-gradient",
+      "type": "milestone",
+      "title": "Post-Summit Gradient Continues -- E=7 at Degree 315",
+      "description": "SPS track gradient: E=9 (311, 312, 313), E=8 (314), E=7 (315). The engine descends one unit per degree through the post-Summit zone. Degree 315 is the second gradient step. The descent is orderly: maximum zone -> high zone -> mid-high zone.",
+      "connections": ["first-varied-thrush"]
+    },
+    {
+      "id": "silence-as-structure",
+      "type": "concept",
+      "title": "Silence as Structural Element -- The Pause Between Notes",
+      "description": "The Varied Thrush song's pauses (3-8 seconds between notes) are as structurally essential as the notes. The silence allows each note to be heard as an isolated acoustic event. Without the pause, the song would be a sequence; with the pause, each note is a complete event. The fog reinforces this: ambient sound is reduced, making the silence more silent, the notes more isolated. The engine's first entry where silence is explicitly part of the acoustic architecture.",
+      "connections": ["first-varied-thrush", "fog-as-context"]
+    },
+    {
+      "id": "foo-fighters-equivalence",
+      "type": "pairing",
+      "title": "Foo Fighters -- Varied Thrush Equivalence",
+      "description": "Foo Fighters E=7: melodic directness, emotional commitment without the harmonic complexity of Summit acts. Each great Foo Fighters moment (Everlong's primary riff, Best of You's opening line, Pretender's breakdown) is one clear melodic gesture followed by space for it to land. Varied Thrush: one clear pure tone followed by silence for it to land. Both operate through the principle of direct isolated statement followed by space. Both E=7.",
+      "connections": ["silence-as-structure", "post-summit-gradient"]
+    }
+  ],
+  "cross_references": [
+    {"target": "S36-315", "artist": "Foo Fighters", "relationship": "E=7 + E=7 = E=14. POST-SUMMIT GRADIENT STEP TWO. Melodic directness + acoustic simplicity. Foo Fighters (one clear melodic gesture, space for landing) + Varied Thrush (one clear pure tone, silence for landing). Same principle: isolated direct statement at E=7."},
+    {"target": "SPS-314", "species": "Elk herd full bugle", "relationship": "Preceding SPS entry, E=8. Elk herd: E=8 through collective density. Varied Thrush: E=7 through singular simplicity. Opposite acoustic mechanisms, consecutive degrees, one unit difference. The gradient step."},
+    {"target": "SPS-108", "species": "Pileated Woodpecker (first appearance)", "relationship": "Old-growth thread. Varied Thrush is old-growth dependent (Sitka spruce, western red cedar, western hemlock). Both species require habitat that only old-growth structural complexity provides. Old-growth dependent species accumulate across the engine."},
+    {"target": "SPS-future", "species": "Hermit Thrush (future)", "relationship": "Thrush comparison: Hermit Thrush (complex ascending multi-note song) vs. Varied Thrush (simple isolated pure tone). Both emotionally affecting; different mechanisms. Future engine entry will document the distinction."}
+  ]
+}
