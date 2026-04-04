@@ -96,11 +96,11 @@
     "r1_impact": "Weak HF radio degradation on sunlit side, occasional loss of radio contact"
   },
   "scoring": {
-    "sample_count": 28,
+    "sample_count": 30,
     "leaders": {
-      "temp_accuracy": "v1.3.14.2: Model predicted 14.2°C, actual 12.0°C — 2.2°C overshoot. Afternoon cooling faster than expected. KSEA 13°C tracks closer.",
-      "wind_accuracy": "v1.3.14.2: MAJOR MISS — model predicted NW 8 km/h (320°), actual SE 5.5 km/h (140°). 180° direction error. Onshore marine flow arrived early, not offshore ridge flow.",
-      "overall": "28 samples. Day 4 afternoon: model humidity miss +21% (predicted 33%, actual 54%). Marine layer infiltrating — spread collapsed to 9°C. Clouds lower (SCT035 BKN090 vs predicted SCT070). Ridge weaker than modeled. KSEA OVC065 confirms marine push. KSC 26.8°C FEW034 ESE 24 km/h — warmer winds at Cape."
+      "temp_accuracy": "v1.3.19: Model predicted 9.5°C at 7pm, actual 13.0°C — 3.5°C undershoot. Evening cooling slower than modeled. Clear skies retaining heat. Day 4 pattern: model consistently underperforms on marine-influenced temperatures.",
+      "wind_accuracy": "v1.3.19: WSW 240° @ 9.3 km/h actual vs Calm predicted. Wind direction improved from afternoon 180° miss but speed still off. Marine influence persisting into evening.",
+      "overall": "30 samples across 4 days. Day 4 evening: KPAE 13°C CLR WSW 240° — beautiful clear night. Model consistently missed today: 180° wind error at 2:30pm, 2.2°C overshoot at 2pm, 3.5°C undershoot at 7pm. Marine push timing and magnitude continue to challenge the pre-authored weather data. Live METAR consistently more informative than model."
     }
   },
   "telemetry": null,
