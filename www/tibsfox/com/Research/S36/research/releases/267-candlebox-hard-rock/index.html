@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 267&deg; &mdash; Candlebox (hard rock) &mdash; E=7 &mdash; Hard Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #E65100, #F57C00, #FF9800); color: #FFF3E0; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #E65100; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #F57C00; color: #FFF3E0; border: 1px solid #FF9800; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .return-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #E65100; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-card .level.intermediate { background: #FFF8E1; color: #F57C00; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #E65100; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #E65100; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF3E0; font-style: italic; color: #E65100; }
+    .return-card { background: linear-gradient(135deg, #E65100 0%, #F57C00 50%, #FF9800 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FFF3E0; }
+    .return-card h3 { margin-top: 0; color: #FFECB3; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .return-card p { color: #FFF3E0; margin: 0.5rem 0; }
+    .return-card strong { color: #FFECB3; }
+    .maverick-card { background: linear-gradient(135deg, #311B92 0%, #4527A0 50%, #512DA8 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #EDE7F6; }
+    .maverick-card h3 { margin-top: 0; color: #E8EAF6; font-size: 1.1rem; }
+    .maverick-card p { color: #EDE7F6; margin: 0.4rem 0; }
+    .maverick-card strong { color: #E8EAF6; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>267 &mdash; Candlebox / hard rock (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">267&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Candlebox <span style="font-size: 1.1rem; color: #757575;">(hard rock)</span></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Hard Rock</span>
+          <span class="label-badge">Maverick Records</span>
+          <span class="return-badge">RETURN &mdash; degree 223</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="return-card">
+          <h3>Return from Degree 223 &mdash; Hard Rock Reframing</h3>
+          <p>Candlebox first appeared at <strong>degree 223</strong> in post-grunge context. At degree 267, the band returns in <strong>hard rock context</strong> &mdash; a distinction that matters. Post-grunge positions Candlebox relative to a moment; hard rock positions them in a lineage. The reframing allows the music to be heard against the full tradition: Led Zeppelin dynamics, 1980s Sunset Strip melodic sensibility, and the Seattle mutation of those traditions into something less theatrical and more direct.</p>
+          <p><strong>44-degree gap. E=7 at degree 267.</strong></p>
+        </div>
+
+        <h2>Hard Rock, E=7 -- The Musical DNA</h2>
+        <p>Candlebox&rsquo;s music is rooted in hard rock&rsquo;s foundational attributes: riff-driven construction, dynamic verse-chorus architecture, Kevin Martin&rsquo;s powerful wide-ranging tenor as the central instrument, and guitar work by Peter Klett that defines songs through riff identity rather than technical display. This is hard rock in the classical sense &mdash; songs that deploy heavy guitar and powerful vocals to create emotional immediacy.</p>
+
+        <p>E=7 is the hard rock register: high energy, powerful, riff-forward, but with space for dynamic contrast (quiet verse to loud chorus) that pure maximum-energy formats (E=8 crossover thrash) don&rsquo;t accommodate. The power is real; the control is also real. Hard rock at its best holds both simultaneously.</p>
+
+        <blockquote>"Post-grunge positions Candlebox in a moment. Hard rock positions them in a lineage that runs from Led Zeppelin through the Sunset Strip through the rainy Seattle version of all of it."</blockquote>
+
+        <div class="maverick-card">
+          <h3>Maverick Records &mdash; An Unexpected Label Home</h3>
+          <p>Maverick Records was co-founded by <strong>Madonna</strong> in 1992 as part of her Time Warner deal. Candlebox was among the label&rsquo;s first signings. A Seattle hard rock band on Madonna&rsquo;s label. This is 1993 &mdash; genre categories were unstable, independent label co-founders signed what they believed in, and the commercial infrastructure built by grunge&rsquo;s success was being deployed across a wide range of rock acts. <strong>4 million copies of the debut sold.</strong> The bet paid off.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Debut: Candlebox (1993)</h2>
+        <p>The self-titled debut is the central document. It sold over <strong>4 million copies</strong> in the United States -- one of the most commercially successful debut albums from a Pacific Northwest rock band. The songs are built on the dynamic verse-chorus architecture of hard rock: Peter Klett&rsquo;s riffs define the song identities, Kevin Martin&rsquo;s vocal delivery peaks in the choruses, the rhythm section (Bardi Martin on bass, Scott Mercado on drums) supports the dynamic arc.</p>
+        <p><strong>&ldquo;Far Behind&rdquo;</strong> is the signature track: a hard rock power ballad built around a central riff and an emotionally direct chorus. Martin&rsquo;s vocal delivery in the chorus is powerful, melodic, and immediate. The track reached number 18 on the Billboard Hot 100 and remains in classic rock radio rotation decades later.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Candlebox (1993)</h4>
+            <span class="level advanced">Maverick</span>
+            <p>The debut. 4 million US copies. "Far Behind," "You." Hard rock built on dynamic architecture. Kevin Martin's vocal power at its most concentrated. The moment of arrival.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Lucy (1995)</h4>
+            <span class="level intermediate">Maverick</span>
+            <p>The second album. More ambitious. Wider sonic palette, more varied song structures. The band developing beyond the debut's template.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Happy Pills (1998)</h4>
+            <span class="level intermediate">Maverick</span>
+            <p>Third album, darker in tone. The band through the end of the commercial cycle. The songs remain hard rock; the emotional register has shifted.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Post-hiatus work</h4>
+            <span class="level advanced">Various</span>
+            <p>Reformation and continued recording. The hard rock format is durable; the audience for these songs persists well beyond the commercial moment.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">223</span> Candlebox (post-grunge) &mdash; FIRST APPEARANCE. 44-degree gap. Genre reframing from post-grunge to hard rock.</li>
+          <li><span class="ref-degree">266</span> The Accused &mdash; E=8 maximum. Crossover thrash. The step down from 8 to 7 as The Accused gives way to Candlebox.</li>
+          <li><span class="ref-degree">268</span> The Sonics &mdash; E=8 returns. Proto-punk Tacoma. Energy rises again after Candlebox's E=7.</li>
+          <li><span class="ref-degree">SPS 267</span> Mudslide (Oso type) &mdash; E=8. Final degree of Geophysics arc. Deep rumbling wall movement. Maximum energy for the arc.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">267 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hard Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1990&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Maverick</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Kevin Martin</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Peter Klett</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Bardi Martin</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Scott Mercado</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Data</h4>
+          <div class="stat-row"><span class="stat-label">Prior degree</span><span class="stat-value">223</span></div>
+          <div class="stat-row"><span class="stat-label">Gap</span><span class="stat-value">44 degrees</span></div>
+          <div class="stat-row"><span class="stat-label">Reframing</span><span class="stat-value">Post-grunge &rarr; Hard Rock</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Mudslide (Oso)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Commercial</h4>
+          <div class="stat-row"><span class="stat-label">Debut sales</span><span class="stat-value">4M+ (US)</span></div>
+          <div class="stat-row"><span class="stat-label">Key track</span><span class="stat-value">"Far Behind"</span></div>
+          <div class="stat-row"><span class="stat-label">Chart peak</span><span class="stat-value">#18 Hot 100</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
