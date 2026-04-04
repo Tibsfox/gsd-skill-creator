@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 286&deg; &mdash; Dead Kennedys (Seattle Influence) &mdash; E=9 &mdash; NEW MAXIMUM &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #B71C1C; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #B71C1C; font-family: system-ui, sans-serif; border-bottom: 1px solid #FFCDD2; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #FFF0F0; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: #B71C1C; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFCDD2; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #C62828; color: #FFCDD2; border: 1px solid #D32F2F; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #37474F; color: #CFD8DC; border: 1px solid #455A64; margin-left: 0.3rem; }
+    .influence-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF8F00; color: #FFF8E1; border: 1px solid #FFA000; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #FFCDD2; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #FFCDD2; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #FFF0F0; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .maximum-banner { background: linear-gradient(135deg, #B71C1C, #C62828); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FFEBEE; }
+    .maximum-banner h3 { margin-top: 0; font-size: 1.3rem; color: #FFCDD2; text-transform: uppercase; letter-spacing: 0.06em; }
+    .maximum-banner p { color: #FFEBEE; margin: 0.5rem 0; }
+    .maximum-banner strong { color: #FFCDD2; }
+    .influence-notice { background: #FFF8E1; border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; font-size: 0.9rem; }
+    .influence-notice strong { color: #E65100; }
+    .e9-display { text-align: center; font-size: 5rem; font-weight: 700; color: #B71C1C; font-family: 'Georgia', serif; letter-spacing: 0.05em; margin: 1rem 0 0.2rem; line-height: 1; }
+    .e9-sub { text-align: center; font-size: 0.9rem; color: #757575; font-family: system-ui, sans-serif; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: #B71C1C;">Seattle 360</a> &rsaquo; <a href="../" style="color: #B71C1C;">Releases</a> &rsaquo; <span>286 &mdash; Dead Kennedys (Seattle Influence) (E=9)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">286&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #B71C1C;">Dead Kennedys</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 9</span>
+          <span class="genre-badge">Hardcore</span>
+          <span class="label-badge">Alt. Tentacles</span>
+          <span class="influence-badge">Seattle Influence</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="maximum-banner">
+          <h3>NEW S36 ABSOLUTE MAXIMUM &mdash; E=9 ARRIVES</h3>
+          <p>Degree 286 marks the first time the Seattle 360 engine reaches <strong>E=9</strong>. Dead Kennedys are NOT a Seattle band &mdash; they are a San Francisco band &mdash; but their influence on Seattle hardcore is direct, documented, and substantial. Alternative Tentacles Records (at degree 270 via The Fartz), touring Seattle venues including the Metropolis, and Jello Biafra's ongoing spoken word presence define the connection. The engine's scale expands at degree 286.</p>
+        </div>
+
+        <div class="influence-notice">
+          <strong>INFLUENCE ENTRY.</strong> Dead Kennedys are a San Francisco band. This degree documents their Seattle influence specifically: the Alternative Tentacles circuit (The Fartz, degree 270, was on this label), the touring shows at Seattle venues, and Biafra's sustained relationship with Pacific Northwest audiences through spoken word. The connection is real and justified at the new maximum.
+        </div>
+
+        <div class="e9-display">E = 9</div>
+        <div class="e9-sub">New S36 absolute maximum &mdash; first E=9 in the engine's history</div>
+
+        <h2>The Seattle Connection</h2>
+        <p>The Dead Kennedys' influence on Seattle hardcore operates through three distinct channels. First: Alternative Tentacles Records, which Jello Biafra founded in 1979. The engine already documents this at degree 270 &mdash; The Fartz, Seattle's foundational hardcore band, released on Alternative Tentacles. The label is the legal and commercial instrument that connected Dead Kennedys to Seattle's scene. Second: the touring circuit. Dead Kennedys played Seattle venues &mdash; the Metropolis and related all-ages spaces &mdash; during their active period (1978-1986). Third: Biafra's spoken word tours, which brought his (and the DKs') political and cultural analysis to Seattle audiences long after the band's dissolution.</p>
+
+        <blockquote>"The Dead Kennedys demonstrated that hardcore could be sophisticated. Two-minute songs with real political analysis. Maximum intensity; maximum content. Seattle's serious hardcore bands took this as their model."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Alternative Tentacles &mdash; The Label Connection</h2>
+        <p>Alternative Tentacles is the primary connective mechanism. Biafra founded the label in 1979 to release DKs material that mainstream distributors refused. It became the infrastructure for West Coast confrontational punk. When The Fartz (degree 270) signed to Alternative Tentacles, they were not just finding a distributor &mdash; they were affiliating with a political and aesthetic project that the Dead Kennedys had defined. The label's catalog (TSOL, Nomeansno, Lard, and others) is the document of an ideology, not merely a business roster.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Sound &mdash; E=9 Calibrated</h2>
+        <p>East Bay Ray's guitar is the DKs' most distinctive sonic element: surf-rock twang, spy-film reverb, and hardcore tempo collapsed into one style. No other band of the era sounded like this. Above the guitar, Jello Biafra's theatrical vocal range &mdash; from conversational low to operatic high screech &mdash; adds a dimension of performance that pure speed does not capture. "Holiday in Cambodia" begins almost like a theme song, then detonates. "Police Truck" is more raw; "Nazi Punks Fuck Off" is a direct political intervention in hardcore's own scene. E=9 is calibrated to this combination: speed + theatrical fury + specific political content.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography &mdash; The DK Catalog</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Fresh Fruit for Rotting Vegetables (1980)</h4>
+            <span class="level milestone">Cherry Red / Alt. Tentacles</span>
+            <p>"Kill the Poor," "Holiday in Cambodia," "California Uber Alles." Everything the DKs would become: surf-hardcore guitar, theatrical vocals, political content.</p>
+          </div>
+          <div class="theory-card">
+            <h4>In God We Trust, Inc. (EP, 1981)</h4>
+            <span class="level intermediate">Alt. Tentacles</span>
+            <p>"Nazi Punks Fuck Off" &mdash; a direct political intervention against Nazi presence at hardcore shows. The DKs at their most confrontational.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Plastic Surgery Disasters (1982)</h4>
+            <span class="level advanced">Alt. Tentacles</span>
+            <p>Consumer culture, military critique, suburban conformity. "Government Flu" and "Trust Your Mechanic." East Bay Ray's guitar at its fullest.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Frankenchrist (1985)</h4>
+            <span class="level intermediate">Alt. Tentacles</span>
+            <p>H.R. Giger poster led to obscenity prosecution. "MTV - Get Off the Air." The record that made the DKs a legal case as well as a band.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Bedtime for Democracy (1986)</h4>
+            <span class="level advanced">Alt. Tentacles</span>
+            <p>Final studio album before the breakup. Maximum speed, maximum political density. The DKs' last word.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The New Scale</h2>
+        <p>E=9 at degree 286 changes the engine's calibration retroactively. Every previous E=8 entry &mdash; The Blood Brothers (218, 288), Hammerbox, others &mdash; now has headroom above them. The scale was not complete at E=8. E=9 is the Dead Kennedys' permanent contribution to the measurement system.</p>
+        <p>Degree 287 (Black Flag, Seattle influence) also arrives at E=9 &mdash; tying the new maximum. Degree 288 (Blood Brothers return) arrives at E=9 &mdash; their earlier E=8 (218) now recognized as understated. Three consecutive E=9 entries: the hardcore arc at the new ceiling.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">270</span> The Fartz &mdash; Alternative Tentacles. Seattle hardcore on the DKs' label. The direct genealogical connection.</li>
+          <li><span class="ref-degree">287</span> Black Flag (Seattle influence) &mdash; E=9 ties the new maximum. LA hardcore, SST Records, Greg Ginn, Henry Rollins. The West Coast hardcore influence arc continues.</li>
+          <li><span class="ref-degree">288</span> The Blood Brothers (hardcore) &mdash; E=9 three consecutive degrees. Seattle post-hardcore at the new maximum.</li>
+          <li><span class="ref-degree">SPS 286</span> Storm Petrel colony &mdash; FIRST HYDROBATIDAE. E=6. Midnight chattering. E=9+E=6=E=15.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">286 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value" style="color: #B71C1C; font-size: 1.1rem;">9 &mdash; NEW MAX</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hardcore</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">San Francisco</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1978&ndash;1986</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Alt. Tentacles</span></div>
+          <div class="stat-row"><span class="stat-label">Entry type</span><span class="stat-value">Seattle Influence</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Jello Biafra</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">East Bay Ray</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Klaus Flouride</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Ted / D.H. Peligro</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>E=9 Milestone</h4>
+          <div class="stat-row"><span class="stat-label">Previous max</span><span class="stat-value">E=8</span></div>
+          <div class="stat-row"><span class="stat-label">New max</span><span class="stat-value" style="color: #B71C1C;">E=9</span></div>
+          <div class="stat-row"><span class="stat-label">Degree of arrival</span><span class="stat-value">286</span></div>
+          <div class="stat-row"><span class="stat-label">Label at 270</span><span class="stat-value">Alt. Tentacles</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Species</span><span class="stat-value">Storm Petrel colony</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=6</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E=15</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Milestone</span><span class="stat-value">FIRST HYDROBATIDAE</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
