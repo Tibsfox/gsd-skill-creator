@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 239&deg; &mdash; The Ventures &mdash; E=5 &mdash; Surf Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .japan-card { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border: 2px solid #2E7D32; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #1B5E20; }
+    .japan-card h3 { margin-top: 0; color: #1B5E20; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>239 &mdash; The Ventures (E=5)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">239&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">The Ventures</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Surf Rock / Instrumental</span>
+          <span class="label-badge">Dolton Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>FIRST TACOMA BAND IN THE ENGINE &mdash; 100 MILLION RECORDS SOLD.</strong> The Ventures formed in 1958 in Tacoma, Washington &mdash; not Seattle. They sold an estimated 100 million records worldwide, triggered the electric guitar boom in Japan, and are the most globally impactful Pacific Northwest band of all time by units sold.
+        </div>
+
+        <h2>The Sound -- Walk Don't Run</h2>
+        <p>The Ventures recorded &ldquo;Walk Don't Run&rdquo; in 1960 &mdash; a cover of a Johnny Smith jazz composition filtered through Chet Atkins&rsquo; country guitar style, then transformed into electric rock. The result is one of the most recognizable guitar instrumentals in history: three minutes of clean, reverb-drenched melodic guitar with nothing extraneous. It reached #2 on the Billboard pop chart. It has been covered more than 200 times.</p>
+
+        <blockquote>&ldquo;The Ventures&rsquo; guitar sound is the anti-grunge of the Pacific Northwest: clean where grunge is distorted, melodic where grunge is aggressive, open where grunge is compressed. Both sounds come from the same region. They could not be more different.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Tacoma &mdash; First Non-Seattle Location</h2>
+        <p>The Ventures bring Tacoma into the engine. 32 miles south of Seattle, at the south end of Puget Sound. Working-class city, port city, a different character than Capitol Hill or the U-District. Don Wilson was a used car salesman before the band; Bob Bogle worked construction. They formed the Ventures in a parking lot. The origin is as practical and working-class as Tacoma itself.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Sound -- E=5, Surf Rock</h2>
+        <p>E=5 is the clean middle of the engine&rsquo;s scale. Surf rock requires space &mdash; the notes need room to ring and decay. The signature elements: reverb (clean, bright, notes sustaining slightly beyond their natural duration), tremolo (amplitude modulation giving the &ldquo;watery&rdquo; quality of surf rock), and clean tone (no distortion, articulate pick attack, crisp chord changes). Fender guitars and amplifiers are the instruments of this sound. The Ventures defined what Fender was for in the 1960s.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Members</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Don Wilson (born 1933, Tacoma)</h4>
+            <span class="level advanced">Co-Founder</span>
+            <p>Rhythm guitar and business manager. The organizational spine. Longest-tenured member. Still active.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Bob Bogle (1934&ndash;2009)</h4>
+            <span class="level advanced">Co-Founder</span>
+            <p>Bass and lead guitar. Original lead voice on &ldquo;Walk Don't Run.&rdquo; Later switched roles with Edwards. Died 2009.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Nokie Edwards (born 1935)</h4>
+            <span class="level intermediate">Lead Guitar</span>
+            <p>Primary lead guitarist on most 1960s recordings. Diverse stylist: surf, country, jazz. Left and rejoined multiple times.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Mel Taylor (1933&ndash;1996)</h4>
+            <span class="level intermediate">Drums (1962&ndash;1996)</span>
+            <p>One of the great 1960s rock drummers. Precise, swinging, authoritative. Son Leon Taylor now drums for the band.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Japan -- The Largest Audience in the World</h2>
+        <div class="japan-card">
+          <h3>The Band That Taught Japan to Play Electric Guitar</h3>
+          <p>The Ventures were discovered in Japan through US Armed Forces radio in the early 1960s. The &ldquo;Ventures guitar boom&rdquo; followed: tens of thousands of Japanese musicians learned electric guitar by playing Ventures songs from tablature songbooks published in Japan in massive print runs. The Ventures have sold an estimated 30&ndash;50 million records in Japan alone. They are more popular in Japan than in the US. They continue to tour Japan to large audiences. Their influence on Japanese rock is analogous to the Beatles&rsquo; influence on American rock &mdash; they are the originary model. Rock and Roll Hall of Fame: 2008.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">238</span> Presidents of the USA &mdash; E=6 to E=5. Alt Rock to Surf Rock. Eastlake to Tacoma. First non-Seattle location enters the engine.</li>
+          <li><span class="ref-degree">240</span> Paul Revere and the Raiders &mdash; Garage Rock. 1960s Pacific Northwest rock. Two years after the Ventures formed; adjacent era and geography.</li>
+          <li><span class="ref-degree">SPS 239</span> Steelhead leap &mdash; Metallic clean jump, E=5. The Ventures' clean metallic guitar tone pairs with the Steelhead's metallic-flash leap. Anadromous rainbow trout that crosses the ocean and returns; Ventures that crossed the Pacific culturally and built a global audience.</li>
+          <li><span class="ref-degree">221</span> Love Battery &mdash; Contrast: Love Battery uses reverb for psychedelic fuzz. Ventures use reverb for clean bright melody. Two uses of the same effect, 18 degrees apart.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">239 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">5</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Surf Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1958&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Tacoma, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Dolton Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Scale</h4>
+          <div class="stat-row"><span class="stat-label">Records sold</span><span class="stat-value">~100 million</span></div>
+          <div class="stat-row"><span class="stat-label">Japan sales</span><span class="stat-value">30&ndash;50 million</span></div>
+          <div class="stat-row"><span class="stat-label">Cover versions</span><span class="stat-value">200+</span></div>
+          <div class="stat-row"><span class="stat-label">Albums total</span><span class="stat-value">100+</span></div>
+          <div class="stat-row"><span class="stat-label">RRHOF</span><span class="stat-value">2008</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">66.4%</span></div>
+          <div class="stat-row"><span class="stat-label">New location</span><span class="stat-value">Tacoma (FIRST)</span></div>
+          <div class="stat-row"><span class="stat-label">Founded</span><span class="stat-value">1958</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Species</span><span class="stat-value">Steelhead leap</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E=5+5=10</span></div>
+          <div class="stat-row"><span class="stat-label">Theme</span><span class="stat-value">Metallic clean</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
