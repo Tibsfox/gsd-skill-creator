@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 347&deg; &mdash; Alice in Chains: Dirt &mdash; E=10 &mdash; Alt Metal &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #FFD700; font-size: 2rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; border: 3px solid #FFD700; }
+    .energy-badge { display: inline-block; padding: 0.25rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #B71C1C, #C62828); color: #FFD700; border: 1px solid #FFD700; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.milestone { background: linear-gradient(135deg, #FFEBEE, #FCE4EC); color: #880E4F; border: 1px solid #EF9A9A; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #37474F; }
+    .ceiling-banner { background: linear-gradient(135deg, #1A237E, #B71C1C, #880E4F); border: 3px solid #FFD700; border-radius: 8px; padding: 1.25rem 1.6rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .ceiling-banner .ceiling-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: #FFD700; font-family: system-ui, sans-serif; margin-bottom: 0.5rem; }
+    .ceiling-banner .ceiling-value { font-size: 3rem; font-weight: 700; color: #FFD700; font-family: 'Georgia', serif; }
+    .ceiling-banner p { color: #FFCDD2; margin: 0.5rem 0; line-height: 1.65; }
+    .ceiling-banner strong { color: #FFD700; }
+    .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .track-card { background: white; border: 1px solid #FFCDD2; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 0.9rem 1.1rem; }
+    .track-card h4 { margin: 0 0 0.25rem; font-size: 0.95rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .track-card .note { font-size: 0.7rem; color: #B71C1C; font-family: system-ui, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; display: block; }
+    .track-card p { margin: 0; font-size: 0.82rem; line-height: 1.5; color: #424242; }
+    .respect-block { background: linear-gradient(135deg, #212121, #37474F); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #CFD8DC; border: 2px solid #B71C1C; }
+    .respect-block h3 { margin: 0 0 0.75rem; color: #EF9A9A; font-size: 1.1rem; }
+    .respect-block p { color: #CFD8DC; margin: 0.5rem 0; line-height: 1.65; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>347 &mdash; Alice in Chains: Dirt (E=10)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">347&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Alice in Chains &mdash; <em>Dirt</em></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10</span>
+          <span class="genre-badge">Alt Metal</span>
+          <span class="label-badge">Columbia Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="ceiling-banner">
+          <div class="ceiling-label">The Absolute Ceiling &mdash; Second Reached</div>
+          <div class="ceiling-value">E = 10</div>
+          <p><strong>Alice in Chains &mdash; <em>Dirt</em> &mdash; September 29, 1992.</strong> E=10 is reached for the second time in the summit. The most emotionally intense album in the grunge/alt metal tradition: Layne Staley's autobiographical account of addiction documented from the inside, with precision and without sentimentality. Jerry Cantrell's tritone harmonics and drop-D guitar. The Staley-Cantrell dual vocal architecture. "Them Bones." "Rooster." "Down in a Hole." "Sickman." "Would?" &mdash; Andrew Wood's memorial. <strong>E=20 with Cougar + Wolf + Bear Convergence (SPS 347, E=10): the summit's second absolute maximum.</strong></p>
+        </div>
+
+        <h2>Dirt (1992) &mdash; The Record</h2>
+        <p><em>Dirt</em> was released September 29, 1992, on Columbia Records, produced by Dave Jerden and Alice in Chains. It debuted at #6 on the Billboard 200 and has sold approximately 6 million copies worldwide. The album runs 57 minutes across 13 tracks. The subject matter is explicit and autobiographical: Layne Staley was experiencing heroin addiction during the recording, and the album documents that experience from the inside &mdash; not abstracted, not romanticized, not externally observed, but reported with the specificity of a person experiencing what he is writing about simultaneously.</p>
+        <p>The guitar approach: Jerry Cantrell in drop-D tuning throughout, with tritone harmonics (the interval historically called <em>diabolus in musica</em>) creating the album's signature dissonant beauty. The vocal architecture: Staley and Cantrell singing simultaneously with Cantrell's harmonies frequently at a tritone above or below Staley's lead, producing a persistent harmonic tension that is emotionally exactly right for the album's subject. The production: Dave Jerden's dense, intimate work gives the album a presence that allows no distance between the listener and the material.</p>
+
+        <blockquote>"Down in a hole / Feeling so small / Catch myself crying all the time." &mdash; "Down in a Hole," <em>Dirt</em> (1992)</blockquote>
+
+        <h2>The Essential Tracks</h2>
+        <div class="track-grid">
+          <div class="track-card">
+            <h4>Them Bones</h4>
+            <span class="note">7/4 time &mdash; album announces itself immediately</span>
+            <p>The first sound is feedback-initiated drop-D riff in 7/4 time. The album does not build; it arrives. No accommodation whatsoever. The message is established in the first bar. E=10 begins here.</p>
+          </div>
+          <div class="track-card">
+            <h4>Down in a Hole</h4>
+            <span class="note">The most recognized &mdash; devastating in restraint</span>
+            <p>"Howcome the sun shines upon me / And then one day it just stopped." The chord progression descends. The lyrics document depression with the precision of lived experience, not as a general condition but as specific observations. Cantrell wrote it; Staley sings it as if he did.</p>
+          </div>
+          <div class="track-card">
+            <h4>Sickman</h4>
+            <span class="note">Most difficult &mdash; most important</span>
+            <p>The subject is explicit: addiction, without romanticization. Dissonant vocal harmonies at their most disorienting. Guitar tones at maximum weight. No consolation offered. This track is important precisely because it is uncomfortable and refuses to resolve that discomfort.</p>
+          </div>
+          <div class="track-card">
+            <h4>Rooster</h4>
+            <span class="note">Cantrell's father &mdash; Vietnam survival</span>
+            <p>Written about Jerry Cantrell Sr., whose Vietnam military nickname was "Rooster." A meditation on survival: the specific combination of luck and damage that allows return from something that should have destroyed you. The album's exception &mdash; its meditation on what survival looks like and costs.</p>
+          </div>
+          <div class="track-card">
+            <h4>Junkhead</h4>
+            <span class="note">Internal logic of addiction &mdash; without external corrective</span>
+            <p>"What's my drug of choice? / Well what have you got?" The perspective of someone defending their use. Not glorification: documentation of the internal logic that addiction imposes. The engine documents it as Staley wrote it: from inside the perspective.</p>
+          </div>
+          <div class="track-card">
+            <h4>Dirt</h4>
+            <span class="note">Title track &mdash; explicit without metaphor</span>
+            <p>The directness is total. Staley does not obscure or render in metaphor. The music is dense and heavy but has a hypnotic quality that makes the words land harder for being embedded in something that is also beautiful. Beauty and devastation simultaneously.</p>
+          </div>
+          <div class="track-card">
+            <h4>Would?</h4>
+            <span class="note">Andrew Wood memorial &mdash; Mother Love Bone</span>
+            <p>Written about Andrew Wood (Mother Love Bone vocalist, died heroin overdose March 19, 1990). "If I would, could you?" The song connects Dirt to the entire lineage of loss in Seattle music. The most beloved track. The album's closing meditation on someone who did not survive.</p>
+          </div>
+          <div class="track-card">
+            <h4>God Smack</h4>
+            <span class="note">Anger &mdash; the accusatory mode</span>
+            <p>Different from the resignation of Down in a Hole or the documentation of Sickman: this is Staley angry, locating blame outside himself. The emotional register of someone who understands what is happening to them and cannot stop it regardless. The only track on the album that burns rather than descends.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Layne Staley &mdash; With Respect</h2>
+        <div class="respect-block">
+          <h3>Layne Thomas Staley &mdash; August 22, 1967 &ndash; April 5, 2002</h3>
+          <p>Born in Kirkland, Washington. Died in Seattle, Washington, at approximately 34 years of age. The King County Medical Examiner determined the cause of death to be combined drug intoxication. He had struggled with heroin addiction for many years. He is remembered as one of the most powerful rock vocalists of his generation and the defining voice of Alice in Chains' most important work.</p>
+          <p>The engine documents these biographical facts once and does not proceed further. The manner of his death is a biographical fact; it is not the meaning of his music. The music exists. <em>Dirt</em> is a document of something he experienced and expressed with precision and honesty. The songs are in continuous cultural circulation. They hold up because the songwriting is genuinely great and the emotional content is genuinely present. The music outlasts the biography.</p>
+          <p>The engine honors his memory with the deepest respect.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Jerry Cantrell &mdash; The Guitar Architecture</h2>
+        <p>Jerry Cantrell (born March 18, 1966, Tacoma, WA) is the principal guitarist, main songwriter, and Cantrell-half of the album's vocal architecture. His guitar work on <em>Dirt</em> deploys drop-D tuning throughout and tritone harmonics systematically, creating the record's defining sonic signature. The tritone &mdash; historically called <em>diabolus in musica</em> ("the devil in music") &mdash; is the most dissonant interval in Western music, exactly halfway between the root and the octave. Its ubiquity on <em>Dirt</em> gives the album its characteristic quality: simultaneously beautiful and fundamentally unresolved, the perfect harmonic correlate for the album's subject.</p>
+        <p>Cantrell's vocal harmonies are the album's second emotional axis. His voice takes the lower harmony line, typically a tritone below Staley's lead. When both voices maintain the dissonant interval without resolving it, the effect is a doubled consciousness: two voices expressing the same emotional content from slightly different harmonic angles. The dissonance is not a mistake; it is the point. The album's subject requires a harmony that cannot resolve.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Band</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Layne Staley</h4>
+            <span class="level milestone">Vocals &mdash; Kirkland WA 1967-2002</span>
+            <p>Four-octave range. Autobiographical content. Maximum emotional directness. Wide dynamic range from full power (Them Bones chorus) to devastating restraint (Down in a Hole verse). The quiet passages are often more devastating than the loud ones. Documented what he experienced. The music exists.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Jerry Cantrell</h4>
+            <span class="level advanced">Guitar / Vocals &mdash; Tacoma WA b.1966</span>
+            <p>Drop-D tuning. Tritone harmonics. Compositional songwriter approach &mdash; riffs serve the song. Wrote Rooster about his father. Harmony vocals that create the album's dissonant signature. Still active: leads AIC with William DuVall as vocalist. Three post-reunion albums (2009, 2013, 2018).</p>
+          </div>
+          <div class="theory-card">
+            <h4>Mike Starr</h4>
+            <span class="level intermediate">Bass &mdash; Dirt era</span>
+            <p>Original AIC bassist. Played on Facelift (1990) and Dirt (1992). Left the band during the Dirt touring period. His bass work on Dirt provides the low-end foundation that Cantrell's drop-D guitar rests on.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Sean Kinney</h4>
+            <span class="level advanced">Drums &mdash; Seattle b.1966</span>
+            <p>One of the most consistent elements in AIC across all eras. His drumming on Dirt is heavy, precise, and compositionally supportive. The drum performance on Them Bones (7/4 time) is one of the record's technical highlights. Still with AIC through the DuVall era.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">346</span> Soundgarden <em>Superunknown</em> &mdash; E=10. The first absolute maximum. Different approach to E=10: Cornell's psychedelic complexity vs. Staley's autobiographical directness. Both at the ceiling from different directions.</li>
+          <li><span class="ref-degree">348</span> Nirvana <em>Nevermind</em> &mdash; E=10. The summit's conclusion. Cobain died April 5, 2002 &mdash; the same calendar date on which Staley would die eight years later. The connection between the two is noted once, with respect for both.</li>
+          <li><span class="ref-degree">SPS 347</span> Cougar + Wolf + Bear Convergence &mdash; E=10. Triple apex predator night convergence. E=10 + E=10 = E=20. Three predators at the summit of the wilderness food web paired with the most intense album in the grunge tradition.</li>
+          <li><span class="ref-degree">311</span> Nirvana (S36) / Would? connection &mdash; "Would?" is about Andrew Wood, Mother Love Bone. Wood's death preceded and informed the entire arc the engine documents in degrees 311-348.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">347 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value" style="color:#B71C1C; font-weight:800;">10 &mdash; CEILING</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Alt Metal</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1992</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Beacon Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Columbia Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Layne Staley</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Jerry Cantrell</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Mike Starr</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Sean Kinney</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Dirt</h4>
+          <div class="stat-row"><span class="stat-label">Released</span><span class="stat-value">Sep 29, 1992</span></div>
+          <div class="stat-row"><span class="stat-label">Chart</span><span class="stat-value">#6 Billboard 200</span></div>
+          <div class="stat-row"><span class="stat-label">Sales</span><span class="stat-value">~6M worldwide</span></div>
+          <div class="stat-row"><span class="stat-label">Producer</span><span class="stat-value">Dave Jerden</span></div>
+          <div class="stat-row"><span class="stat-label">Tracks</span><span class="stat-value">13 / 57 min</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">96.4%</span></div>
+          <div class="stat-row"><span class="stat-label">Summit</span><span class="stat-value">CEILING 2nd</span></div>
+          <div class="stat-row"><span class="stat-label">Position</span><span class="stat-value">3 of 4</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>E=20</h4>
+          <div class="stat-row"><span class="stat-label">S36</span><span class="stat-value">E = 10 (AIC)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS</span><span class="stat-value">E = 10 (3 predators)</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value" style="color:#B71C1C; font-weight:800;">E = 20 MAX</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
