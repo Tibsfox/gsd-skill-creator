@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 137&deg; &mdash; Barred Owl &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #C5CAE9;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.5);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .mnemonic-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 30%, #689F38 60%, #33691E 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #DCEDC8;
+    }
+    .mnemonic-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #AED581;
+    }
+    .mnemonic-card p { color: #DCEDC8; }
+    .mnemonic-card strong { color: #F1F8E9; }
+
+    .conflict-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #B71C1C 100%);
+      border: 2px solid #7F0000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFCDD2;
+    }
+    .conflict-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #EF9A9A;
+    }
+    .conflict-card p { color: #FFCDD2; }
+    .conflict-card strong { color: #FFEBEE; }
+
+    .expansion-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #E65100 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFE0B2;
+    }
+    .expansion-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCC80;
+    }
+    .expansion-card p { color: #FFE0B2; }
+    .expansion-card strong { color: #FFF3E0; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.mnemonic { background: #33691E; }
+    .theory-icon.conflict { background: #B71C1C; }
+    .theory-icon.expansion { background: #E65100; }
+    .theory-icon.strigidae { background: #1A237E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.advanced { background: #FFEBEE; color: #B71C1C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+    .comparison-table th {
+      background: #33691E;
+      color: white;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .comparison-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .comparison-table tr:nth-child(even) { background: #F1F8E9; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">137&deg;</div>
+      <div class="release-title-block">
+        <h2>Barred Owl</h2>
+        <div class="scientific"><em>Strix varia</em> (Strigidae) &mdash; E=4 &mdash; &ldquo;Who Cooks for You?&rdquo;</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>&ldquo;Who cooks for you? Who cooks for you-all?&rdquo;</strong> &mdash;
+      the rhythmic 8-note phrase. <strong>E=4</strong> &mdash; measured, deliberate.
+      <strong>400&ndash;550 Hz</strong>. Mature forest resident.
+      <strong>Third consecutive Strigidae</strong> (135&ndash;137).
+      <strong>Eastern invader</strong> &mdash; range expansion into PNW old-growth.
+      <strong>Spotted Owl conflict</strong> &mdash; the most significant interspecific
+      conflict in PNW conservation.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Mnemonic Card -->
+        <div class="mnemonic-card">
+          <h3>&ldquo;Who Cooks for You?&rdquo; &mdash; E=4</h3>
+          <p>
+            The most recognizable owl mnemonic in North American birding.
+            <strong>Eight notes in two phrases:</strong>
+            &ldquo;Who cooks for YOU?&rdquo; (4 notes, rising) followed by
+            &ldquo;Who cooks for you-ALL?&rdquo; (4&ndash;5 notes, drawn-out finish).
+            <strong>400&ndash;550 Hz</strong> fundamental &mdash; higher than the
+            Great Horned Owl&rsquo;s 250&ndash;400 Hz. Rich, resonant, slightly
+            hoarse timbre. Calls day and night &mdash; more diurnal vocal
+            activity than most owls.
+          </p>
+        </div>
+
+        <!-- Conflict Card -->
+        <div class="conflict-card">
+          <h3>Spotted Owl Conflict</h3>
+          <p>
+            The Barred Owl&rsquo;s expansion into the PNW has created a
+            <strong>conservation crisis</strong> for the Northern Spotted Owl
+            (<em>Strix occidentalis caurina</em>, SPS degree 4, E=3).
+            The Barred Owl is <strong>20% larger</strong>, has a
+            <strong>broader diet</strong>, and uses a <strong>wider range of habitats</strong>.
+            In areas of overlap, Spotted Owl populations decline. USFWS has
+            initiated controversial <strong>Barred Owl removal programs</strong>.
+            <strong>Hybridization</strong> (&ldquo;Sparred Owls&rdquo;) threatens
+            genetic integrity.
+          </p>
+        </div>
+
+        <!-- Expansion Card -->
+        <div class="expansion-card">
+          <h3>Range Expansion &mdash; Eastern to Western</h3>
+          <p>
+            Historically an <strong>eastern North American species</strong>, the
+            Barred Owl expanded westward via the <strong>boreal forests of Canada</strong>
+            as fire suppression and reforestation created a continuous forest corridor.
+            First documented in <strong>British Columbia in the 1940s&ndash;1960s</strong>.
+            Reached Washington and Oregon by the 1970s&ndash;1980s. Now
+            <strong>abundant throughout the PNW</strong> and expanding into California.
+          </p>
+        </div>
+
+        <h2>Barred Owl vs. Spotted Owl</h2>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Barred Owl</th>
+              <th>Spotted Owl</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Call</strong></td>
+              <td>&ldquo;Who cooks for you?&rdquo; (8 notes)</td>
+              <td>4-note &ldquo;hoo... hoo-hoo... hooo&rdquo;</td>
+            </tr>
+            <tr>
+              <td><strong>Frequency</strong></td>
+              <td>400&ndash;550 Hz</td>
+              <td>500&ndash;700 Hz</td>
+            </tr>
+            <tr>
+              <td><strong>Energy</strong></td>
+              <td>E=4 (degree 137)</td>
+              <td>E=3 (degree 4)</td>
+            </tr>
+            <tr>
+              <td><strong>Body size</strong></td>
+              <td>~20% larger</td>
+              <td>Smaller</td>
+            </tr>
+            <tr>
+              <td><strong>Diet</strong></td>
+              <td>Broad (mammals, birds, fish, crayfish)</td>
+              <td>Narrow (primarily flying squirrels, woodrats)</td>
+            </tr>
+            <tr>
+              <td><strong>Habitat</strong></td>
+              <td>Generalist (old-growth to suburban)</td>
+              <td>Specialist (old-growth dependent)</td>
+            </tr>
+            <tr>
+              <td><strong>Calling frequency</strong></td>
+              <td>Very vocal, day and night</td>
+              <td>Less frequent, primarily nocturnal</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-004 Spotted Owl</strong>
+            <p>ECOLOGICAL CONFLICT! Barred Owl (137, E=4) threatens Spotted Owl (4, E=3). 133 degrees apart. The invader meets the endemic. The most significant interspecific conflict in PNW conservation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-135/136 Great Horned Owl</strong>
+            <p>STRIGIDAE TRIO! GHO solo (135, E=4), GHO pair duet (136, E=5), Barred Owl (137, E=4). Three consecutive Strigidae. The apex predator, the pair, the invader.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-138 Barred Owl Caterwauling</strong>
+            <p>DOUBLE ENTRY PREVIEW! The measured &ldquo;Who cooks for you?&rdquo; (137, E=4) will be followed by the wild caterwauling (138, E=6). Fourth species with double entries.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon mnemonic">W</div>
+            <div class="theory-content">
+              <h4>&ldquo;Who Cooks for You?&rdquo; &mdash; E=4 Mnemonic</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>The most recognizable owl mnemonic. 8-note rhythmic phrase. 400&ndash;550 Hz. Rich, hoarse timbre. Calls day and night. Measured, deliberate phrasing.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon conflict">C</div>
+            <div class="theory-content">
+              <h4>Spotted Owl Conflict &mdash; Conservation Crisis</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Barred Owl displaces Northern Spotted Owl through competitive exclusion. Larger body, broader diet, habitat flexibility. USFWS removal programs. Hybridization. The most significant interspecific conflict in PNW conservation.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon expansion">R</div>
+            <div class="theory-content">
+              <h4>Range Expansion &mdash; Eastern to PNW</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Historical eastern species. Expanded via boreal corridor. Fire suppression created the path. BC in 1940s, Washington by 1970s. Now abundant throughout PNW. Continuing southward.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon strigidae">3</div>
+            <div class="theory-content">
+              <h4>Third Consecutive Strigidae (135&ndash;137)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>GHO solo (135), GHO pair duet (136), Barred Owl (137). Three consecutive owl family entries. The Strigidae era deepens. New species introduced.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Barred Owl</div>
+          <div class="stat-detail"><em>Strix varia</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Strigidae</div>
+          <div class="stat-detail">3rd consecutive (135&ndash;137)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">&ldquo;Who cooks for you?&rdquo;</div>
+          <div class="stat-detail">8-note rhythmic phrase</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">measured, deliberate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">400&ndash;550 Hz</div>
+          <div class="stat-detail">higher than GHO</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Mature forest</div>
+          <div class="stat-detail">old-growth to suburban</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Range</div>
+          <div class="stat-value">Expanding</div>
+          <div class="stat-detail">eastern origin, PNW since 1970s</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conflict</div>
+          <div class="stat-value">Spotted Owl</div>
+          <div class="stat-detail">SPS degree 4, E=3</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">year-round, expanding</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

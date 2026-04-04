@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 127&deg; &mdash; Jonathan Poneman &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+      color: #BBDEFB;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(21, 101, 192, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1565C0;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1565C0;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E3F2FD; color: #1565C0; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: #1565C0;
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .subpop-banner {
+      background: linear-gradient(135deg, #1565C0, #0D47A1, #263238);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .subpop-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .subpop-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    blockquote {
+      border-left: 3px solid #1565C0;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #E3F2FD;
+      font-style: italic;
+      color: #0D47A1;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>127 &mdash; Jonathan Poneman</span>
+    </nav>
+
+    <!-- Sub Pop Banner -->
+    <div class="subpop-banner">
+      <h3>Sub Pop Co-Founder &mdash; The Business of the Seattle Sound</h3>
+      <p>
+        Jonathan Poneman at degree 127&deg; brings the first of two
+        <strong>Sub Pop Records co-founders</strong> into the engine.
+        KCMU DJ turned label architect. <strong>Nirvana, Soundgarden, Mudhoney,
+        Fleet Foxes, Beach House</strong> &mdash; three decades of the PNW&rsquo;s
+        most important independent label. E=3 &mdash; behind-the-scenes energy.
+        The business half of the partnership that defined Seattle music.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">127&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Jonathan Poneman</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Radio / Label</span>
+          <span class="label-badge">Sub Pop / KCMU</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Business Architect</h2>
+          <p>
+            Jonathan Poneman co-founded <strong>Sub Pop Records</strong> with
+            Bruce Pavitt in 1986, creating the label that would define the
+            Seattle sound and launch grunge as a global phenomenon. Before
+            Sub Pop, Poneman was a DJ at <strong>KCMU</strong> (now KEXP),
+            the University of Washington&rsquo;s freeform radio station &mdash;
+            the broadcast platform for underground Seattle music in the 1980s.
+          </p>
+          <p>
+            E=3 reflects Poneman&rsquo;s behind-the-scenes role: the business
+            architect, not the performer. He brought startup capital ($19,000
+            of personal funds), business structure, marketing vision, and
+            promotional genius to the partnership. His invitation to British
+            journalist <strong>Everett True</strong> to visit Seattle and write
+            for <em>Melody Maker</em> was one of the most consequential acts
+            of music promotion in the 1980s &mdash; it created the international
+            buzz that preceded the grunge explosion.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>From KCMU to Sub Pop</h2>
+          <blockquote>
+            KCMU was the training ground for cultural curators across the
+            Seattle music spectrum. Nasty Nes Rodriguez (degree 126) for
+            hip-hop. Jonathan Poneman for what would become grunge.
+            The station operated at low power but with enormous cultural
+            influence &mdash; it played the bands nobody else would play.
+          </blockquote>
+          <p>
+            Poneman&rsquo;s time at KCMU gave him access to the underground
+            scene, an understanding of how music reaches audiences, and a
+            meeting with Bruce Pavitt &mdash; the curatorial half who would
+            become his co-founder. The Sub Pop Singles Club (launched 1988)
+            was a stroke of marketing genius: monthly 7-inch singles mailed
+            to subscribers, creating both a collector&rsquo;s market and
+            recurring revenue. The label&rsquo;s early roster &mdash;
+            <strong>Mudhoney, Soundgarden, TAD, Nirvana, Green River</strong>
+            &mdash; coalesced around a sound: heavy, distorted, raw guitar rock.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Nirvana Deal &mdash; Near-Death and Rescue</h2>
+          <p>
+            By 1990&ndash;91, Sub Pop was hemorrhaging money. More bands than
+            it could support, unreliable distribution, bounced checks.
+            The label was months from collapse. Then <strong>Nirvana signed
+            to DGC Records</strong>, and Poneman negotiated a royalty
+            percentage on future Nirvana albums &mdash; an unusual provision
+            for a departing band. When <em>Nevermind</em> sold 30 million
+            copies, Sub Pop&rsquo;s royalty share generated millions,
+            transforming a struggling indie into a financially stable institution.
+          </p>
+          <p>
+            The lesson Poneman drew was not that major labels were the answer
+            &mdash; it was that <strong>survival required financial discipline
+            and strategic thinking</strong>. The 1995 deal selling 49% to
+            Warner Music Group gave Sub Pop major-label distribution while
+            retaining artistic independence. Poneman built a label designed
+            to <strong>outlast any single genre</strong>.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Sub Pop After Grunge &mdash; Three Decades</h2>
+          <p>
+            The post-grunge years reveal Poneman&rsquo;s long-game vision.
+            <strong>The Postal Service, The Shins, Iron and Wine</strong> (2000s).
+            <strong>Fleet Foxes, Beach House, Shabazz Palaces, Father John Misty</strong> (2010s).
+            <strong>IDLES, Weyes Blood</strong> (late 2010s&ndash;2020s).
+            Sub Pop reinvented itself with each generation: from grunge to
+            indie rock to baroque folk to dream pop to experimental hip-hop.
+            The label became genre-agnostic &mdash; united only by quality
+            and independence.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Sub Pop Founders Enter (127&ndash;128)</h4>
+              <div class="level advanced">Advanced &mdash; Label Founding Pair</div>
+              <p>
+                Poneman (business, 127) + Pavitt (curatorial, 128) at consecutive
+                degrees. The label that defined Seattle music. Nirvana, Soundgarden,
+                Mudhoney, Fleet Foxes, Beach House. Three decades. Sub Pop has appeared
+                throughout the engine; now the founders arrive.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>KCMU/Radio Trio (126&ndash;128)</h4>
+              <div class="level advanced">Advanced &mdash; Cultural Pattern</div>
+              <p>
+                Nasty Nes (126, E=4), Poneman (127, E=3), Pavitt (128, E=3).
+                Three consecutive radio/label figures from the KCMU orbit.
+                The DJ, the business architect, the curatorial visionary.
+                Energy descends from performer to infrastructure.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 as Infrastructure Energy</h4>
+              <div class="level intermediate">Intermediate &mdash; Energy Pattern</div>
+              <p>
+                E=3 for the behind-the-scenes architect. Not low energy &mdash;
+                foundational energy. Without Poneman, no Sub Pop. Without Sub Pop,
+                no label for Nirvana. The quiet power of infrastructure:
+                the system that makes performance possible.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Long Game &mdash; Label as Institution</h4>
+              <div class="level intermediate">Intermediate &mdash; Cultural Pattern</div>
+              <p>
+                Sub Pop survived grunge by refusing to be a grunge label.
+                Poneman&rsquo;s vision: financial discipline, genre agnosticism,
+                institutional permanence. Warner 49% deal (1995) for distribution
+                without surrendering curatorial control.
+                Independent music needs institutions that last.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">128&deg;</span>
+              <strong>Bruce Pavitt</strong> &mdash; Co-founder pair.
+              Poneman (business) + Pavitt (curatorial) = Sub Pop.
+              Consecutive degrees for the founding partnership.
+              The business architect meets the curatorial visionary.
+            </li>
+            <li>
+              <span class="ref-degree">126&deg;</span>
+              <strong>Nasty Nes Rodriguez</strong> &mdash; KCMU trio.
+              Three consecutive radio/label figures. Nasty Nes (hip-hop DJ, E=4),
+              Poneman (label founder, E=3), Pavitt (label founder, E=3).
+              The KCMU orbit produced cultural curators across genres.
+            </li>
+            <li>
+              <span class="ref-degree">124&deg;</span>
+              <strong>Horse Feathers</strong> &mdash; Label contrast.
+              Kill Rock Stars (Olympia, 124) followed by Sub Pop founders
+              (Seattle, 127&ndash;128). Two legendary PNW independent labels
+              in close proximity. KRS: independence as principle.
+              Sub Pop: independence with pragmatic survival.
+            </li>
+            <li>
+              <span class="ref-degree">43&deg;</span>
+              <strong>K Records</strong> &mdash; Olympia label lineage.
+              Calvin Johnson&rsquo;s K Records (degree 43) provided the
+              philosophical template for PNW independent labels. Sub Pop
+              built on that template with business infrastructure that
+              K Records deliberately avoided.
+            </li>
+            <li>
+              <span class="ref-degree">Various</span>
+              <strong>Sub Pop artists throughout the engine</strong> &mdash;
+              Mudhoney, Soundgarden, and other Sub Pop acts have appeared
+              as individual entries. Degree 127 documents the person who
+              made the label possible.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">127&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Radio / Label</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Capitol Hill, Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Sub Pop Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Station</span>
+            <span class="stat-value">KCMU (now KEXP)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Founded</span>
+            <span class="stat-value">Sub Pop: 1986</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Role</h4>
+          <div class="stat-row">
+            <span class="stat-label">Position</span>
+            <span class="stat-value">Co-founder</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Contribution</span>
+            <span class="stat-value">Business, marketing</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Partner</span>
+            <span class="stat-value">Bruce Pavitt (128)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Sub Pop Acts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Grunge</span>
+            <span class="stat-value">Nirvana, Mudhoney</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2000s</span>
+            <span class="stat-value">Shins, Postal Service</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2010s</span>
+            <span class="stat-value">Fleet Foxes, Beach House</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hip-hop</span>
+            <span class="stat-value">Shabazz Palaces</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Moments</h4>
+          <div class="stat-row">
+            <span class="stat-label">1986</span>
+            <span class="stat-value">Sub Pop founded</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1988</span>
+            <span class="stat-value">Singles Club launch</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1989</span>
+            <span class="stat-value">Nirvana&rsquo;s Bleach</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1991</span>
+            <span class="stat-value">Nevermind royalties</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1995</span>
+            <span class="stat-value">Warner 49% deal</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../126-nasty-nes-rodriguez/" style="color: var(--seattle-navy);">&larr; 126&deg; Nasty Nes Rodriguez</a>
+        <a href="../128-bruce-pavitt/" style="color: var(--seattle-navy);">128&deg; Bruce Pavitt &rarr;</a>
+      </div>
+      <p>
+        Degree 127&deg; &mdash; Jonathan Poneman &mdash; Seattle 360 Engine &mdash; v1.49.267
+        <br>
+        Sub Pop co-founder enters the engine &mdash; the business architect of the Seattle sound.
+        KCMU DJ turned label builder. $19,000 startup, Nirvana royalties rescue, Warner 49% deal.
+        Three decades: Mudhoney to Fleet Foxes to Beach House. E=3 &mdash; infrastructure energy.
+        Part one of the Sub Pop founding pair (127&ndash;128). KCMU/radio trio (126&ndash;128).
+        Independent music needs institutions that last.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 64&deg; &mdash; Mink &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Mustelidae pair card */
+    .mustelid-pair-card {
+      background: linear-gradient(135deg, #3E2723 0%, #5D4037 60%, #6D4C41 100%);
+      border: 3px solid #2A1B18;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .mustelid-pair-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #D7CCC8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .mustelid-pair-card p {
+      color: #EFEBE9;
+    }
+    .mustelid-pair-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Chitter acoustic card */
+    .chitter-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .chitter-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .chitter-card p {
+      color: #F3E5F5;
+    }
+    .chitter-card strong {
+      color: #BA68C8;
+    }
+
+    /* Stealth predator card */
+    .stealth-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 60%, #455A64 100%);
+      border: 2px solid #1C2830;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .stealth-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .stealth-card p {
+      color: #ECEFF1;
+    }
+    .stealth-card strong {
+      color: #90A4AE;
+    }
+
+    /* Creek bank card */
+    .creek-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+      border: 2px solid #0D3B13;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .creek-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .creek-card p {
+      color: #E8F5E9;
+    }
+    .creek-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Aquatic septet card */
+    .septet-card {
+      background: linear-gradient(135deg, #01579B 0%, #0277BD 100%);
+      border: 2px solid #003E6B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E1F5FE;
+    }
+    .septet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B3E5FC;
+    }
+    .septet-card p {
+      color: #E1F5FE;
+    }
+    .septet-card strong {
+      color: #81D4FA;
+    }
+
+    /* Fur trade card */
+    .fur-card {
+      background: linear-gradient(135deg, #4E342E 0%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .fur-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .fur-card p {
+      color: #EFEBE9;
+    }
+    .fur-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.mustelid-pair { background: #3E2723; }
+    .theory-icon.chitter { background: #4A148C; }
+    .theory-icon.stealth { background: #263238; }
+    .theory-icon.creek { background: #1B5E20; }
+    .theory-icon.septet { background: #01579B; }
+    .theory-icon.fur-trade { background: #4E342E; }
+    .theory-icon.solitary { background: #37474F; }
+    .theory-icon.smallest { background: #B71C1C; }
+    .theory-icon.surplus { background: #880E4F; }
+    .theory-icon.reclassified { background: #283593; }
+    .theory-icon.woodduck { background: #2E7D32; }
+    .theory-icon.kingfisher { background: #00695C; }
+    .theory-icon.sykes { background: #4A148C; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">64&deg;</div>
+      <div class="release-title-block">
+        <h2>Mink</h2>
+        <div class="scientific">Neogale vison</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      shrill chitter alarm call &mdash; solitary stealth predator of creek bank margins, SECOND MUSTELID (back-to-back with River Otter), second carnivore, fourth mammalian entry, third mammalian species, seventh consecutive aquatic-associated species, smallest predator in engine, E=4, year-round resident, creek bank
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Mustelidae Pair Card -->
+        <div class="mustelid-pair-card">
+          <h3>Back-to-Back Mustelidae &mdash; Otter (63) then Mink (64)</h3>
+          <p>Same family. Opposite strategies. River Otter: <strong>5&ndash;14 kg, social, six vocal types, river/estuary</strong>. Mink: <strong>0.5&ndash;1.5 kg, solitary, one dominant alarm call, creek bank</strong>. The otter works the center of the waterway; the mink works the <strong>margins</strong>. The otter plays with family; the mink hunts alone. Back-to-back Mustelidae demonstrating that one family can produce radically different ecological strategies.</p>
+        </div>
+
+        <!-- Chitter Acoustic Card -->
+        <div class="chitter-card">
+          <h3>The 65th Acoustic Element: The Chitter</h3>
+          <p>Shrill <strong>chit-chit-chit-chit-chit</strong> &mdash; a rapid burst of sharp, high-pitched staccato notes at 2,000&ndash;6,000 Hz. E=4. A <strong>solitary predator&rsquo;s alarm</strong> &mdash; not social communication but a territorial warning: I am here, stay away. The mink is silent 99% of the time; the 1% when it vocalizes, the sound is sharp, aggressive, and <strong>startling</strong>. From the most diverse repertoire (otter, 6 types) to one dominant call.</p>
+        </div>
+
+        <!-- Stealth Predator Card -->
+        <div class="stealth-card">
+          <h3>Smallest Predator in the Engine &mdash; Fiercest Temperament</h3>
+          <p>At <strong>0.5&ndash;1.5 kg</strong>, the Mink is the smallest predator in the engine &mdash; roughly one-tenth the mass of a large River Otter. But the Mink kills prey its own weight or larger: muskrats, rabbits, large fish. It enters burrows to hunt, engages in <strong>surplus killing</strong>, and will confront animals many times its size. Disproportionate ferocity from a body the size of a house cat.</p>
+        </div>
+
+        <!-- Creek Bank Card -->
+        <div class="creek-card">
+          <h3>Creek Bank Habitat &mdash; The Margin Specialist</h3>
+          <p>The Mink works the <strong>creek bank</strong> &mdash; the narrow margin where water meets land. Not the open river (otter), not the pond surface (ducks), not the lake depth (grebe). The undercut edge, the root tangles, the dense vegetation at the water&rsquo;s boundary. Territory measured in <strong>linear meters of bank</strong>, typically 1&ndash;5 km. The finest spatial scale of any aquatic-associated species in the engine.</p>
+        </div>
+
+        <!-- Aquatic Septet Card -->
+        <div class="septet-card">
+          <h3>Seven Consecutive Aquatic-Associated Species (58&ndash;64)</h3>
+          <p>Wood Duck (58, E=3) &rarr; Mallard (59, E=5) &rarr; Grebe (60, E=4) &rarr; Beaver tail slap (61, E=4) &rarr; Beaver chewing (62, E=3) &rarr; River Otter (63, E=4) &rarr; <strong>Mink (64, E=4)</strong>. The aquatic sextet becomes a <strong>septet</strong>. Energy curve: <strong>3&ndash;5&ndash;4&ndash;4&ndash;3&ndash;4&ndash;4</strong>. Seven degrees, four orders, two classes. The mink adds the <strong>margin dimension</strong>.</p>
+        </div>
+
+        <!-- Fur Trade Card -->
+        <div class="fur-card">
+          <h3>The Fur Trade &mdash; A Species Shaped by Industry</h3>
+          <p>No animal in the engine has been more directly shaped by human exploitation than the Mink. Wild trapping since the 18th century. <strong>Mink farming</strong> since the 19th &mdash; the most widely farmed fur-bearing animal in the world. Selective breeding into dozens of color mutations. The &ldquo;mink coat&rdquo; as cultural symbol. Farm escapes creating <strong>invasive populations</strong> devastating European wildlife. The fur industry is now declining, but the mink&rsquo;s story cannot be separated from it.</p>
+        </div>
+
+        <h2>The Sound: Shrill Chitter Alarm Call</h2>
+        <p><strong>The Chitter:</strong> A rapid series of sharp, high-pitched staccato notes &mdash; chit-chit-chit-chit-chit &mdash; produced at 4&ndash;8 notes per second. Fundamental frequency: 2,000&ndash;6,000 Hz. Duration: typically 0.5&ndash;3 seconds. The mink&rsquo;s alarm call is a threat display, a territorial warning, a &ldquo;back off&rdquo; signal from a cornered or surprised predator.</p>
+        <p><strong>Other vocalizations:</strong> Hissing (close-range aggression), screaming/squealing (distress during violent encounters), purring (rare, during mating and maternal care). But the chitter dominates &mdash; it is the sound most likely to be heard by a human observer along a creek bank.</p>
+        <p><strong>Context:</strong> Defensive and territorial. Not social communication (otter) or mate attraction (birdsong). A solitary predator&rsquo;s warning. The mink is silent until it isn&rsquo;t &mdash; and when it vocalizes, the sound is sharp enough to startle.</p>
+
+        <h2>Physical Description: The Stealth Predator</h2>
+        <p><strong>Size:</strong> 47&ndash;70 cm total length, 0.5&ndash;1.5 kg. Males substantially larger than females. Long, sinuous, cylindrical body &mdash; a thin, flexible tube of muscle with a small head and short legs. Built for entering burrows, rock crevices, and dense vegetation.</p>
+        <p><strong>Feet:</strong> <strong>Partially webbed</strong> &mdash; less webbing than the otter&rsquo;s fully webbed feet. A compromise: adequate for swimming, adequate for running, optimized for the interface.</p>
+        <p><strong>Fur:</strong> Dense (20,000&ndash;24,000 hairs/cm&sup2;), glossy, waterproof. Dark chocolate brown with small white chin patch. Farm-bred variants include sapphire, pearl, white, black &mdash; entirely artificial. The wild mink is uniformly dark.</p>
+        <p><strong>Taxonomy note:</strong> Formerly <em>Mustela vison</em>, reclassified to <em>Neogale vison</em> based on molecular phylogenetics. Both the otter and the mink were reclassified out of Old World genera by the same molecular revolution.</p>
+
+        <h2>Diet: The Fierce Generalist</h2>
+        <p><strong>Prey range:</strong> Fish, crayfish, frogs, mice, voles, chipmunks, rabbits, bird eggs, nestlings, adult birds, muskrats, aquatic invertebrates. The widest prey spectrum of any species in the engine.</p>
+        <p><strong>Hunting style:</strong> Ambush from bank cover. Enters rodent burrows to hunt underground. Swims for fish and crayfish. Raids duck nests. <strong>Surplus killing</strong> documented &mdash; kills more than it can immediately consume in prey-dense environments.</p>
+        <p><strong>Wood Duck connection:</strong> Known predator of Wood Duck (SPS-058) eggs and ducklings in nest boxes along creeks and ponds. The predator-prey link between degrees 58 and 64 is direct and documented.</p>
+
+        <h2>Solitary vs. Social: The Otter-Mink Contrast</h2>
+        <p>The Otter-Mink pair is the engine&rsquo;s most contrasting same-family pair. <strong>Otter (63):</strong> social, family groups of 2&ndash;6, cooperative hunting, 12&ndash;14 months parental care, six vocal types. <strong>Mink (64):</strong> strictly solitary, one animal per territory, solo ambush, 6&ndash;8 weeks parental care, one dominant alarm call. Same Mustelidae body plan. Opposite answers to how to be a predator.</p>
+
+        <h2>The Jesse Sykes Parallel</h2>
+        <p>Degree 64 pairs Mink with <strong>Jesse Sykes</strong> in Part A &mdash; Folk, E=2, Seattle, Barsuk Records. Parallel resonances: (1) <strong>Operating at the margins</strong> &mdash; Sykes makes dark, atmospheric folk at the edge of the music industry; the Mink hunts at the edge of the creek. Both work interfaces, not centers. (2) <strong>Solitary by nature</strong> &mdash; Sykes&rsquo; music is solitary, sparse, creating isolation within sound; the Mink is strictly solitary. (3) <strong>Fierce despite quiet presentation</strong> &mdash; Sykes&rsquo; haunted voice can be startling; the Mink&rsquo;s shrill chitter alarm emerges from silence. Both are quiet until they aren&rsquo;t. (4) <strong>Energy inversion</strong> &mdash; Sykes E=2, Mink E=4. Both punch above their weight class.</p>
+
+        <h2>Family Tracker After Degree 64</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td><strong>63, 64</strong></td><td><strong>2 (back-to-back)</strong></td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-eight families across 65 entries. <strong>Mustelidae increases to 2 entries</strong> (back-to-back, like Anatidae at 58&ndash;59 and Castoridae at 61&ndash;62). 49 of 65 entries (75.4%) are Passeriformes. 4 of 65 entries (6.2%) are Mammalia. Aves representation drops to 93.8%.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon mustelid-pair">M</div>
+            <div class="theory-content">
+              <h4>Back-to-Back Mustelidae <span class="theory-level landmark">landmark</span></h4>
+              <p>River Otter (63) then Mink (64). Same family, opposite strategies. Social vs. solitary. River center vs. creek margin. 5&ndash;14 kg vs. 0.5&ndash;1.5 kg. Six vocal types vs. one alarm call. The most contrasting same-family pair in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon chitter">A</div>
+            <div class="theory-content">
+              <h4>The Chitter &mdash; 65th Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Shrill chit-chit-chit-chit-chit alarm burst. 2,000&ndash;6,000 Hz. E=4. Solitary predator&rsquo;s warning. Silent 99% of the time; startling when heard. From social repertoire (otter) to single alarm call (mink).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon stealth">S</div>
+            <div class="theory-content">
+              <h4>Stealth Predator &mdash; Smallest in Engine <span class="theory-level foundational">foundational</span></h4>
+              <p>0.5&ndash;1.5 kg. Kills prey its own weight or larger. Enters burrows. Surplus killing. Disproportionate ferocity. The mink is fierce in ways that its small size does not suggest.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon creek">C</div>
+            <div class="theory-content">
+              <h4>Creek Bank Habitat <span class="theory-level foundational">foundational</span></h4>
+              <p>The margin specialist. Small streams, undercut banks, root tangles. Territory measured in linear meters of bank. The finest spatial scale of any aquatic-associated species. The interface between water and land.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon septet">7</div>
+            <div class="theory-content">
+              <h4>Aquatic Septet (58&ndash;64) <span class="theory-level foundational">foundational</span></h4>
+              <p>Seven consecutive aquatic-associated species. Energy: 3&ndash;5&ndash;4&ndash;4&ndash;3&ndash;4&ndash;4. The mink adds the margin dimension. The longest habitat streak in engine history.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon solitary">1</div>
+            <div class="theory-content">
+              <h4>Solitary vs. Social Contrast <span class="theory-level foundational">foundational</span></h4>
+              <p>Strictly solitary. Exclusive territory. Aggressive defense. 6&ndash;8 weeks parental care. The opposite of the otter&rsquo;s family-group social life. Same family, opposite social strategies.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon fur-trade">F</div>
+            <div class="theory-content">
+              <h4>Fur Trade and Farming <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Most commercially significant fur in North American history. Mink farming as global industry. Selective breeding. Farm escapes as invasive species. The fur industry&rsquo;s rise and decline. A species defined by human exploitation.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon smallest">P</div>
+            <div class="theory-content">
+              <h4>Surplus Killing Behavior <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Documented surplus killing &mdash; kills more prey than it can immediately consume. Henhouses, frog ponds. A predatory strategy beyond subsistence. Ecologically significant over-predation.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon reclassified">R</div>
+            <div class="theory-content">
+              <h4>Reclassified: <em>Mustela</em> to <em>Neogale</em> <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Molecular phylogenetics moved the American Mink from <em>Mustela</em> (Old World) to <em>Neogale</em> (New World). Both otter and mink were reclassified by the same molecular revolution. Appearance deceived taxonomy for two centuries.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon woodduck">W</div>
+            <div class="theory-content">
+              <h4>Wood Duck Predator-Prey Link <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Known predator of Wood Duck (SPS-058) eggs and ducklings. The creek bank predator enters the pond ecosystem. A direct, documented predator-prey connection spanning 6 degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon kingfisher">K</div>
+            <div class="theory-content">
+              <h4>Creek-Bank Convergence with Kingfisher <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both are creek-bank predators (SPS-057). Bird vs. mammal approaches: kingfisher watches from above and dives down; mink watches from below and strikes laterally. Same creek, different attack vectors.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon sykes">J</div>
+            <div class="theory-content">
+              <h4>Jesse Sykes Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both solitary. Both work the margins. Both fierce despite quiet presentation. Sykes E=2, Mink E=4 &mdash; both punch above their weight class. The Otter/Loggins-to-Mink/Sykes shift: from joy to darkness, from social to solitary.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">4</div>
+            <div class="theory-content">
+              <h4>Fourth Consecutive Original CSV <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degrees 61&ndash;64: four consecutive original CSV species. The mammalian era runs entirely on original CSV entries. No substitutions needed.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">D</div>
+            <div class="theory-content">
+              <h4>Fourth Mammalian Entry <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Third mammalian species. Four consecutive mammalian entries (61&ndash;64). Mammalian representation rises to 6.2%. Two orders, two families, three species.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-063: River Otter</strong>
+            <p>BACK-TO-BACK MUSTELIDAE. Social vs. solitary. Family hunter vs. stealth predator. River/estuary vs. creek bank. 5&ndash;14 kg vs. 0.5&ndash;1.5 kg. Six vocal types vs. one alarm call. The most contrasting same-family pair in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-061/062: American Beaver</strong>
+            <p>MAMMALIAN ERA CONTINUES. Four consecutive mammalian entries. Herbivore infrastructure builder vs. carnivore predator. The mink hunts in the habitats the beaver creates &mdash; beaver ponds are prime mink territory.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-058: Wood Duck</strong>
+            <p>PREDATOR-PREY CONNECTION. Known predator of Wood Duck eggs and ducklings. Creek bank / pond interface. The aquatic ecosystem now includes a small, fierce predator that directly threatens Wood Duck reproductive success.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>STEALTHY SOLITARY PREDATORS. Both operate in low light. Both solitary. Both rely on stealth. Both fierce relative to body size. Owl: forest canopy at night. Mink: creek bank at dawn/dusk.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-057: Belted Kingfisher</strong>
+            <p>CREEK-BANK HUNTERS. Both are creek-bank predators. Kingfisher watches from above and dives down. Mink watches from below and strikes laterally. Same creek, different attack vectors.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Fourth mammalian entry. Third mammalian species. Second Carnivora, second Mustelidae. Mammalian representation rises to 6.2% (4 of 65). Two orders, two families, three species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Creek bank habitat. Riparian specialist. Interface predator (aquatic + terrestrial prey). Surplus killing behavior. Fur trade and mink farming. Invasive species when introduced outside native range.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; American Mink (<em>Neogale vison</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;American mink.&rdquo;</li>
+          <li>Lariviere, S. (1999). &ldquo;<em>Mustela vison</em>.&rdquo; <em>Mammalian Species</em> No. 608, pp. 1&ndash;9.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Mink.</li>
+          <li>Dunstone, N. (1993). <em>The Mink</em>. T &amp; AD Poyser Natural History.</li>
+          <li>Birks, J.D.S. (2015). &ldquo;Mink.&rdquo; In: <em>Mammals of Britain and Europe</em>. HarperCollins.</li>
+          <li>Bonesi, L. and Palazon, S. (2007). &ldquo;The American mink in Europe.&rdquo; <em>Biological Conservation</em> 134(4): 470&ndash;483.</li>
+          <li>Gerell, R. (1970). &ldquo;Home ranges and movements of the mink.&rdquo; <em>Oikos</em> 21(2): 160&ndash;173.</li>
+          <li>Melero, Y. et al. (2008). &ldquo;Space use of the invasive American mink.&rdquo; <em>European Journal of Wildlife Research</em> 54: 609&ndash;617.</li>
+          <li>Zschille, J. et al. (2010). &ldquo;Gender differences in activity patterns of the American mink.&rdquo; <em>European Journal of Wildlife Research</em> 56(2): 187&ndash;194.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">64&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Chitter</div>
+          <div class="stat-detail">#65 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Conspicuous alarm, startling from silence</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">4th mammalian entry, 3rd species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Mustelidae</div>
+          <div class="stat-detail">2nd entry (back-to-back with otter)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">2nd entry (back-to-back)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Shrill chitter</div>
+          <div class="stat-detail">2,000&ndash;6,000 Hz, alarm/defense</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Creek Bank</div>
+          <div class="stat-detail">Margin specialist, water/land interface</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Crepuscular &amp; nocturnal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Aquatic Streak</div>
+          <div class="stat-value">7th</div>
+          <div class="stat-detail">Septet: degrees 58&ndash;64</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">4th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Back-to-Back Mustelid</div>
+          <div class="stat-value">SPS-063</div>
+          <div class="stat-detail">River Otter &mdash; social vs. solitary</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Predator-Prey</div>
+          <div class="stat-value">SPS-058</div>
+          <div class="stat-detail">Wood Duck &mdash; mink predates eggs/ducklings</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Creek-Bank Hunter</div>
+          <div class="stat-value">SPS-057</div>
+          <div class="stat-detail">Belted Kingfisher &mdash; same creek, different vectors</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 64 of 360</p>
+  </footer>
+</body>
+</html>

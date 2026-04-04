@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 150&deg; &mdash; Mourning Dove &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(26, 35, 126, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .mournful-card { background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2, #4A148C); border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .mournful-card h3 { margin-top: 0; font-size: 1.1rem; color: #CE93D8; }
+    .mournful-card p { color: #E1BEE7; }
+    .mournful-card strong { color: #F3E5F5; }
+
+    .wing-card { background: linear-gradient(135deg, #E65100, #F57C00, #FF9800, #E65100); border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFF3E0; }
+    .wing-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFE0B2; }
+    .wing-card p { color: #FFF3E0; }
+    .wing-card strong { color: #FFFFFF; }
+
+    .hunted-card { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #B71C1C); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .hunted-card h3 { margin-top: 0; font-size: 1.1rem; color: #EF9A9A; }
+    .hunted-card p { color: #FFCDD2; }
+    .hunted-card strong { color: #FFEBEE; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.mournful { background: #4A148C; }
+    .theory-icon.wing { background: #E65100; }
+    .theory-icon.hunted { background: #B71C1C; }
+    .theory-icon.pair { background: #1B5E20; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .mechanical-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .mechanical-table th { background: #1A237E; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .mechanical-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .mechanical-table tr:nth-child(even) { background: #E8EAF6; }
+    .mechanical-table tr.current { background: #F3E5F5; font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">150&deg;</div>
+      <div class="release-title-block">
+        <h2>Mourning Dove</h2>
+        <div class="scientific"><em>Zenaida macroura</em> (Columbidae) &mdash; E=3 &mdash; Mournful oo-WOO-woo-woo-woo + Wing Whistle</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>SECOND COLUMBIDAE.</strong> The most recognized bird call in America.
+      <strong>Dual-sound species:</strong> mournful five-note coo + wing whistle on takeoff.
+      <strong>America&rsquo;s most hunted game bird</strong> (20 million/year).
+      300&ndash;400 million population. Everywhere. Unnoticed.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="mournful-card">
+          <h3>The Mournful Call</h3>
+          <p>
+            <strong>&ldquo;oo-WOO-woo-woo-woo&rdquo;</strong> &mdash; five notes, second highest,
+            descending. Fundamental <strong>350&ndash;550 Hz</strong>. Repeated with
+            3&ndash;8 second pauses. Named for the sound: <strong>&ldquo;mourning&rdquo;</strong>
+            &mdash; early settlers heard grief in the cooing. The most
+            <strong>frequently misidentified</strong> bird sound (often called an owl).
+            Embedded in American cultural memory: summer mornings,
+            rural nostalgia, peaceful melancholy.
+          </p>
+        </div>
+        <div class="wing-card">
+          <h3>The Wing Whistle &mdash; Second Mechanical Sound</h3>
+          <p>
+            A sharp, ascending whistle on takeoff &mdash; produced by the
+            <strong>modified 9th primary feather</strong>. Not a vocalization but
+            a <strong>feather-generated alarm signal</strong>. The whistle alone
+            triggers flight in nearby doves. 1000&ndash;3000 Hz.
+            <strong>Second mechanical sound</strong> in the engine (after
+            Common Goldeneye at 124). Gentle coo &rarr; sharp whistle.
+          </p>
+        </div>
+        <div class="hunted-card">
+          <h3>America&rsquo;s Most Hunted Game Bird</h3>
+          <p>
+            <strong>20 million</strong> Mourning Doves killed by hunters annually.
+            Legal in <strong>40 of 50 states</strong>. More than all duck species combined.
+            Washington opened its first Mourning Dove season in <strong>2019</strong>.
+            Yet the population sustains: up to <strong>6 broods per year</strong>,
+            14-day incubation, 14-day nestling period. The paradox:
+            America&rsquo;s most <strong>beloved backyard bird</strong> and most
+            <strong>hunted game bird</strong> are the same species.
+          </p>
+        </div>
+
+        <h2>Mechanical Sound Progression</h2>
+        <table class="mechanical-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Mechanical Sound</th><th>Mechanism</th></tr></thead>
+          <tbody>
+            <tr><td>124</td><td>Common Goldeneye</td><td>Wing whistle (flight)</td><td>Modified inner primaries</td></tr>
+            <tr class="current"><td>150</td><td>Mourning Dove</td><td>Wing whistle (takeoff)</td><td>Modified 9th primary</td></tr>
+            <tr><td>152</td><td>Rock Pigeon</td><td>Wing clap (takeoff)</td><td>Wings slapped above body</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-149 Band-tailed Pigeon</strong>
+            <p>NATIVE PAIR! Both native Columbidae at E=3. Band-tailed (forest, declining) vs. Mourning Dove (open, thriving). Opposite trajectories.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-124 Common Goldeneye</strong>
+            <p>MECHANICAL SOUND! Goldeneye wing whistle (first, flight) and Mourning Dove wing whistle (second, takeoff). Both feather-generated. Different mechanisms.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-152 Rock Pigeon</strong>
+            <p>MECHANICAL TRILOGY! Dove wing whistle (feather vibration) to Pigeon wing clap (physical wing contact). Whistle to clap. Columbidae bracket.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon mournful">M</div>
+            <div class="theory-content">
+              <h4>The Mournful Call &mdash; America&rsquo;s Sound</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Five-note coo. 350-550 Hz. Named for its sound. Most recognized, most misidentified (owl confusion). Cultural resonance: melancholy, nostalgia, peace.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon wing">W</div>
+            <div class="theory-content">
+              <h4>Wing Whistle &mdash; Second Mechanical Sound</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Modified 9th primary feather. Alarm function. Triggers flight in nearby doves without vocalization. Second mechanical sound (after Goldeneye 124).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon hunted">H</div>
+            <div class="theory-content">
+              <h4>Most Hunted Game Bird</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>20 million annually. 40 states. Sustained by 2-6 broods/year. The paradox: beloved backyard bird and most hunted game bird. Same species.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon pair">P</div>
+            <div class="theory-content">
+              <h4>Native Pigeon Contrast (149&ndash;150)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Band-tailed (forest, declining, hidden) vs. Mourning Dove (open, thriving, ubiquitous). Both native, both E=3. Opposite trajectories, same family.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Mourning Dove</div><div class="stat-detail"><em>Zenaida macroura</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Columbidae</div><div class="stat-detail">2nd pigeon/dove entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound (vocal)</div><div class="stat-value">oo-WOO-woo-woo-woo</div><div class="stat-detail">mournful five-note coo</div></div>
+        <div class="stat-card"><div class="stat-label">Sound (mechanical)</div><div class="stat-value">Wing whistle</div><div class="stat-detail">9th primary feather</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 3</div><div class="stat-detail">soft, mournful, ambient</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency (coo)</div><div class="stat-value">350&ndash;550 Hz</div><div class="stat-detail">low, owl-like quality</div></div>
+        <div class="stat-card"><div class="stat-label">Population</div><div class="stat-value">300&ndash;400 million</div><div class="stat-detail">most common NA wild bird</div></div>
+        <div class="stat-card"><div class="stat-label">Hunting</div><div class="stat-value">20 million/year</div><div class="stat-detail">most hunted game bird</div></div>
+        <div class="stat-card"><div class="stat-label">Broods</div><div class="stat-value">2&ndash;6 per year</div><div class="stat-detail">most prolific NA Columbidae</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Native</div><div class="stat-detail">stable, widespread</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

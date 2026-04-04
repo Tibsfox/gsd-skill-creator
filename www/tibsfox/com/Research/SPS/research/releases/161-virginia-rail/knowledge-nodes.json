@@ -1,0 +1,103 @@
+{
+  "degree": 161,
+  "species": "Virginia Rail",
+  "scientific_name": "Rallus limicola",
+  "slug": "161-virginia-rail",
+  "sound_type": "descending whinny grunt -- rapid, pig-like grunting notes that descend in pitch and accelerate; E=4",
+  "energy": 4,
+  "ecosystem": "Freshwater marsh -- dense emergent vegetation (cattails, bulrushes, sedges), shallow water, muddy substrate. Obligate marsh specialist.",
+  "season": "Summer breeder in western Washington. Some year-round. Peak vocalization spring through summer.",
+  "family": "Rallidae (1st entry -- FIRST RALLIDAE)",
+  "order": "Gruiformes",
+  "csv_substitute": false,
+  "original_species": "Virginia Rail",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -122.20,
+    "description": "Virginia Rail in freshwater marshes of Puget Sound lowlands. Cattails, bulrushes, shallow water."
+  },
+  "taxonomy_note": {
+    "description": "FIRST RALLIDAE. The rail family enters. Laterally compressed ('thin as a rail'). Long-toed. Obligate marsh specialist. Secretive -- more heard than seen. Descending whinny grunt diagnostic.",
+    "current_family": "Rallidae (1st entry)",
+    "new_family": true,
+    "family_count_in_engine": "Rallidae: first entry. Three in cluster (161, 162, 164).",
+    "name_etymology": "Rallus from French 'rale' (rail). limicola from Latin 'limus' (mud) + 'cola' (dweller) -- mud-dweller.",
+    "genus_note": "Rallus -- the typical rails. Long-billed, laterally compressed, marsh specialists.",
+    "order_note": "Gruiformes. First Gruiformes entry in the engine.",
+    "family_position": "First Rallidae. Opens the rail family. Virginia Rail/Sora comparison pair at 161-162."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1000-4000 Hz. Descending through the phrase.",
+    "peak_energy_band_hz": "1500-3000 Hz. The initial grunting notes carry the most energy.",
+    "song_frequency_hz": "1000-4000 Hz. Broad range, descending.",
+    "song_duration_s": "Full whinny: 1-3 seconds. Series of 5-15 grunting notes.",
+    "note_structure": "Rapid descending series of pig-like grunts: 'kid-ick kid-ick kid-ick-ick-ick-ick.' Descends in pitch and accelerates. Un-bird-like.",
+    "note_types": "Descending whinny grunt (primary), ticket call 'kiddick' (contact), soft grunting/clicking (close range).",
+    "phrase_structure": "Single descending phrase repeated. Called from within dense marsh vegetation.",
+    "timbre": "Grunting, pig-like, nasal. Distinctly un-bird-like. Immediately recognizable once learned.",
+    "amplitude": "E=4. Carries 100-300 meters across marsh. Produced from concealed position.",
+    "tempo": "Accelerating within each whinny phrase. Moderate repetition rate between phrases.",
+    "context": "Territorial announcement. Contact. Breeding season. Agitation. Dawn/dusk peak.",
+    "regional_variation": "Slight. Western Washington birds at core of PNW range.",
+    "key_property": "DESCENDING WHINNY GRUNT -- pig-like, accelerating, descending. FIRST RALLIDAE. E=4. v1.49.301."
+  },
+  "plumage": {
+    "overall": "Rusty-brown upperparts, gray face, reddish-brown breast, barred flanks (black and white). Cryptic in marsh setting.",
+    "diagnostic_mark": "Long, slightly downcurved, reddish bill. Gray face contrasting with brown body. Laterally compressed silhouette.",
+    "seasonal_variation": "Minimal.",
+    "flight_pattern": "Weak, fluttering flight with dangling legs. Last resort. Prefers to run through marsh."
+  },
+  "physical_description": {
+    "overall": "Length: 20-27 cm. Weight: ~85 g. Laterally compressed. Long-toed.",
+    "diagnostic_mark": "Long reddish bill. Gray face. Laterally compressed body. Barred flanks.",
+    "field_id": "Almost never seen. Detected by descending whinny grunt from marsh. If seen: small, laterally compressed bird with long reddish bill skulking through cattails."
+  },
+  "nodes": [
+    {
+      "id": "whinny-grunt",
+      "type": "concept",
+      "title": "Descending Whinny Grunt",
+      "description": "Rapid descending series of pig-like grunts. 1000-4000 Hz. Accelerating. Carries 100-300m. Primary detection method. Called from within dense reeds.",
+      "connections": ["lateral-compression", "rallidae-first"]
+    },
+    {
+      "id": "lateral-compression",
+      "type": "concept",
+      "title": "Lateral Compression -- Thin as a Rail",
+      "description": "Body laterally compressed to slip between marsh stems. The phrase 'thin as a rail' derives from the bird. Skulks at ground level. Runs rather than flies.",
+      "connections": ["whinny-grunt", "long-toes"]
+    },
+    {
+      "id": "long-toes",
+      "type": "concept",
+      "title": "Long-Toed Adaptation",
+      "description": "Disproportionately long toes spread weight across floating vegetation. 1.5x expected length. Walks on lily pads and cattail mats. Precocial chicks walk immediately.",
+      "connections": ["lateral-compression", "rallidae-first"]
+    },
+    {
+      "id": "rallidae-first",
+      "type": "pattern",
+      "title": "First Rallidae",
+      "description": "The rail family enters. Three entries: Virginia Rail (161), Sora (162), American Coot (164). All E=4. From invisible skulkers to visible swimmers.",
+      "connections": ["whinny-grunt", "long-toes"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-162",
+      "species": "Sora",
+      "relationship": "RALLIDAE COMPARISON PAIR! Virginia Rail (161) + Sora (162). Long bill vs. short bill. Grunt vs. musical whinny. Same marsh, different niches."
+    },
+    {
+      "target": "SPS-160",
+      "species": "Mountain Quail",
+      "relationship": "SECRETIVE TRANSITION! Mountain Quail: dense brush (Odontophoridae). Virginia Rail: dense marsh (Rallidae). Different habitats, same detection paradox."
+    },
+    {
+      "target": "SPS-164",
+      "species": "American Coot",
+      "relationship": "RALLIDAE RANGE! Virginia Rail: invisible. Coot: visible. Same family, opposite strategies."
+    }
+  ]
+}

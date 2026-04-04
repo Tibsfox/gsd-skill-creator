@@ -1,0 +1,115 @@
+{
+  "degree": 160,
+  "species": "Mountain Quail",
+  "scientific_name": "Oreortyx pictus",
+  "slug": "160-mountain-quail",
+  "sound_type": "loud quee-ark -- emphatic, loud, single-note whistled call that carries 200-400m through dense brush; detection paradox: loud call, invisible bird; E=4",
+  "energy": 4,
+  "ecosystem": "Dense mountain brush -- manzanita, ceanothus, mountain mahogany, dense understory of mixed conifer forest. Mountain slopes. The densest brush available. Mid-elevation.",
+  "season": "Year-round resident with walking migration: downslope in autumn, upslope in spring. Quee-ark call year-round but peak in breeding season.",
+  "family": "Odontophoridae (2nd and FINAL entry. Completes the pair 159-160.)",
+  "order": "Galliformes",
+  "csv_substitute": false,
+  "original_species": "Mountain Quail",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -121.50,
+    "description": "Mountain Quail in dense brush on mountain slopes of the Cascades, Olympics, and other ranges of western Washington. Mid-elevation (1,000-6,000 ft)."
+  },
+  "taxonomy_note": {
+    "description": "SECOND and FINAL Odontophoridae entry. Completes the New World quail pair. Largest N.A. quail (240-290g). Most secretive. Longest head plume (two straight feathers, 6-8cm). Loud quee-ark call. Walking migration. Dense brush specialist.",
+    "current_family": "Odontophoridae (2nd and final entry)",
+    "new_family": false,
+    "family_count_in_engine": "Odontophoridae: second and final entry. California Quail (159) + Mountain Quail (160). Pair complete.",
+    "name_etymology": "Oreortyx from Greek 'oros' (mountain) + 'ortyx' (quail) -- mountain quail. pictus from Latin 'pictus' (painted) -- referring to the colorful plumage.",
+    "genus_note": "Oreortyx -- monotypic genus. Only one species. The mountain specialist of the New World quail.",
+    "order_note": "Galliformes. Eighth and final entry (6 Phasianidae + 2 Odontophoridae).",
+    "family_position": "Second and final Odontophoridae. Largest quail. Most secretive. Longest plume. Completes the pair and the Galliformes arc."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Quee-ark: 1500-3500 Hz. Clear, penetrating whistle.",
+    "peak_energy_band_hz": "2000-3000 Hz. The stressed 'ARK' element carries the most energy.",
+    "song_frequency_hz": "1500-3500 Hz. Single emphatic note structure.",
+    "song_duration_s": "Single call: 0.3-0.5 seconds. Repeated persistently but less frequently than California Quail.",
+    "note_structure": "QUEE-ARK: Emphatic whistled call. First element (quee) slightly rising. Second element (ARK) stressed, emphatic. Sometimes transcribed as 'kyow!' or 'QUEE-ark.' Single concentrated burst.",
+    "note_types": "Quee-ark (primary -- territorial/assembly/contact), contact clucks (close range -- covey cohesion), alarm (sharp, triggering freeze or deeper retreat).",
+    "phrase_structure": "Single emphatic note repeated. Less persistent repetition than California Quail. Called from concealed position within dense brush.",
+    "timbre": "Ringing, penetrating, clear. The quee-ark has a whistled quality that cuts through dense brush. Surprisingly powerful for a secretive bird.",
+    "amplitude": "E=4. Loud. 200-400 meter carry through dense brush. Detection paradox: loud enough to be heard at distance but bird remains invisible.",
+    "tempo": "Single calls repeated at intervals. Less rapid than California Quail's chi-CA-go sequence.",
+    "context": "Territorial announcement. Assembly. Breeding season (spring). General contact. Year-round.",
+    "regional_variation": "Slight variation. Washington birds at northern edge of primary range.",
+    "key_property": "QUEE-ARK -- loud, emphatic, whistled, 200-400m carry. SECOND AND FINAL ODONTOPHORIDAE. Largest quail. Most secretive. Longest plume. Detection paradox. E=4. v1.49.300."
+  },
+  "plumage": {
+    "overall": "Males: blue-gray breast, chestnut throat bordered by white, bold white bars on chestnut flanks, olive-brown back. Two straight head plumes pointing backward. Females: similar but slightly duller. Both sexes beautifully patterned.",
+    "diagnostic_mark": "Two straight backward-pointing head plumes (6-8cm, longest of any quail). Bold flank pattern. Larger size than California Quail. Dense brush habitat.",
+    "seasonal_variation": "Minimal. Plumes present year-round.",
+    "flight_pattern": "Burst flight when forced to flush. Very brief. Immediately into dense cover. Prefers to run through brush."
+  },
+  "physical_description": {
+    "overall": "Length: 26-30 cm. Weight: 240-290 g. Largest New World quail in North America. Robust build.",
+    "diagnostic_mark": "Two straight backward plumes. Bold flank bars. Larger than California Quail. Dense brush habitat.",
+    "field_id": "Large quail in dense mountain brush -- usually heard (quee-ark!) rather than seen. Two straight backward plumes visible in brief glimpses. If you can see it clearly, it's probably a California Quail. If you can only hear it, it's probably a Mountain Quail."
+  },
+  "nodes": [
+    {
+      "id": "quee-ark-call",
+      "type": "concept",
+      "title": "Quee-Ark Call -- Loud From Hidden Source",
+      "description": "Emphatic whistled call. 200-400m carry through dense brush. Called from concealed position. Detection paradox: loud enough to detect at distance, but bird remains invisible. Often the only evidence of presence.",
+      "connections": ["secretive-behavior", "odontophoridae-complete"]
+    },
+    {
+      "id": "secretive-behavior",
+      "type": "concept",
+      "title": "Most Secretive Quail",
+      "description": "Selects densest brush. Runs deeper rather than flushing. Rarely seen despite being common. Largest N.A. quail yet most elusive. Small coveys (5-20). The detection paradox defines the species.",
+      "connections": ["quee-ark-call", "longest-plume"]
+    },
+    {
+      "id": "longest-plume",
+      "type": "concept",
+      "title": "Longest Head Plume -- Two Straight Feathers",
+      "description": "Two straight feathers pointing backward from crown. 6-8 cm. Longest head plume of any quail. Contrast with California Quail's forward-curving topknot. May aid brush navigation by streamlining head profile.",
+      "connections": ["secretive-behavior", "odontophoridae-complete"]
+    },
+    {
+      "id": "odontophoridae-complete",
+      "type": "pattern",
+      "title": "Odontophoridae Complete (159-160)",
+      "description": "Two entries. California Quail (159) + Mountain Quail (160). Comparison pair: forward vs. backward plume, chi-CA-go vs. quee-ark, visible vs. secretive, open vs. dense. Equal energy (E=4 + E=4). Galliformes arc complete: 8 entries, 153-160.",
+      "connections": ["quee-ark-call", "walking-migration"]
+    },
+    {
+      "id": "walking-migration",
+      "type": "concept",
+      "title": "Walking Migration",
+      "description": "One of few quail species that migrates. Walks downslope in autumn, upslope in spring. Miles through dense brush. Traditional routes passed through generations. Remarkable for a small gamebird.",
+      "connections": ["secretive-behavior", "odontophoridae-complete"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-159",
+      "species": "California Quail",
+      "relationship": "ODONTOPHORIDAE PAIR! California (159) and Mountain (160). Forward vs. backward plume. Chi-CA-go vs. quee-ark. Open vs. dense. Visible vs. secretive. E=4 + E=4."
+    },
+    {
+      "target": "SPS-158",
+      "species": "White-tailed Ptarmigan",
+      "relationship": "FAMILY SEQUENCE! Final Phasianidae (158) to final Odontophoridae (160). Two families complete across three degrees. Alpine to mountain brush."
+    },
+    {
+      "target": "SPS-153",
+      "species": "Wild Turkey",
+      "relationship": "GALLIFORMES ARC! Turkey (153, E=6, largest Phasianidae) to Mountain Quail (160, E=4, largest Odontophoridae). 8 Galliformes across 8 degrees. Complete."
+    },
+    {
+      "target": "SPS-157",
+      "species": "Spruce Grouse",
+      "relationship": "VISIBILITY CONTRAST! Spruce Grouse: tame, approachable (fool hen). Mountain Quail: evasive, runs into brush. Both hard to see but for opposite behavioral reasons."
+    }
+  ]
+}

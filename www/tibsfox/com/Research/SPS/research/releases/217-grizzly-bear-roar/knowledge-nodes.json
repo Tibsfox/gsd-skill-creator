@@ -1,0 +1,46 @@
+{
+  "degree": 217,
+  "species": "Grizzly Bear",
+  "scientific_name": "Ursus arctos horribilis",
+  "slug": "217-grizzly-bear-roar",
+  "sound_type": "deep resonant roar -- 50-400 Hz, infrasound below 20 Hz, 100+ dB, 2-8 seconds. E=8. THIRD E=8 IN ENGINE.",
+  "energy": 8,
+  "ecosystem": "Remote wilderness. Alpine meadows, subalpine forest, river corridors. Apex land predator.",
+  "season": "Year-round resident. Roar peaks during breeding season and territorial disputes.",
+  "family": "Ursidae (returns from 200-202)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "coordinates": { "lat": 48.80, "lon": -121.10, "description": "Grizzly Bear in North Cascades. Critically endangered. Fewer than 10." },
+  "taxonomy_note": {
+    "description": "Ursidae returns. E=8 -- THIRD E=8. Grizzly roar. Apex land predator. Largest terrestrial animal in PNW.",
+    "current_family": "Ursidae (returns from Black Bear 200-202)",
+    "new_family": false,
+    "family_count_in_engine": "Ursidae: Black Bear Huff (200, E=5), Jaw-Pop (201, E=6), Cub Distress (202, E=5), Grizzly Roar (217, E=8).",
+    "name_etymology": "Ursus arctos horribilis = 'horrible bear bear'. horribilis from Latin 'dreadful'.",
+    "class_note": "Class Mammalia. 180-360 kg. Largest PNW land predator. Keystone species."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "50-400 Hz. Infrasound below 20 Hz.",
+    "peak_energy_band_hz": "100-250 Hz (chest-vibrating range).",
+    "song_duration_s": "2-8 seconds sustained.",
+    "amplitude": "E=8. 100+ dB at 10 meters. ABSOLUTE MAXIMUM.",
+    "context": "Dominance display, territorial defense, confrontation escalation.",
+    "key_property": "GRIZZLY BEAR ROAR. E=8. THIRD E=8. Apex land predator. v1.49.358."
+  },
+  "physical_description": {
+    "overall": "180-360 kg (males). Standing height 2.4 m. Shoulder hump. Concave face profile.",
+    "diagnostic_mark": "Large shoulder hump. Concave face. Long front claws. Much larger than black bear.",
+    "field_id": "Massive brown bear with shoulder hump. If encountered: do not run. Make yourself known. Back away slowly. Bear spray."
+  },
+  "nodes": [
+    { "id": "e8-apex-roar", "type": "milestone", "title": "E=8 Apex Roar -- Third Maximum", "description": "Third E=8 in engine. 50-400 Hz, 100+ dB, infrasound. Most powerful terrestrial vocalization in PNW.", "connections": ["apex-land-predator", "north-cascades-recovery"] },
+    { "id": "apex-land-predator", "type": "concept", "title": "Apex Land Predator -- Keystone Species", "description": "180-360 kg. Ecosystem engineer. Soil disturbance, salmon fertilization, wildlife corridors.", "connections": ["e8-apex-roar"] },
+    { "id": "north-cascades-recovery", "type": "concept", "title": "North Cascades Recovery -- Critical Conservation", "description": "Fewer than 10 in WA. Federal recovery. One of most endangered populations in lower 48.", "connections": ["e8-apex-roar"] }
+  ],
+  "cross_references": [
+    { "target": "SPS-200", "species": "Black Bear Huff", "relationship": "URSIDAE SCALE! E=5 vs. E=8. 25K+ vs. <10. Different league." },
+    { "target": "SPS-212", "species": "Cougar Scream", "relationship": "TWO E=8! Scream cuts (high). Roar fills (low). Same max, opposite spectra." },
+    { "target": "SPS-218", "species": "Grizzly Bear Jaw-Pop", "relationship": "GRIZZLY PAIR! Roar (E=8) + jaw-pop (E=7). Combined E=15." },
+    { "target": "S36-217", "artist": "Pretty Girls Make Graves", "relationship": "POWER BEHIND VOICE! E=14 pair total. Stage voice + wilderness voice." }
+  ]
+}

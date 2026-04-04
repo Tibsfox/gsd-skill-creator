@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 188&deg; &mdash; Pacific White-sided Dolphin (squawks + whistles) &mdash; FIRST DELPHINIDAE &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0D47A1, #1565C0, #1976D2); color: #BBDEFB; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(13, 71, 161, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .vocal-card { background: linear-gradient(135deg, #0D47A1, #1565C0, #1976D2, #1E88E5); border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BBDEFB; }
+    .vocal-card h3 { margin-top: 0; font-size: 1.1rem; color: #90CAF9; }
+    .vocal-card p { color: #BBDEFB; }
+    .vocal-card strong { color: #E3F2FD; }
+
+    .acrobat-card { background: linear-gradient(135deg, #01579B, #0277BD, #0288D1, #039BE5); border: 2px solid #01579B; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B3E5FC; }
+    .acrobat-card h3 { margin-top: 0; font-size: 1.1rem; color: #81D4FA; }
+    .acrobat-card p { color: #B3E5FC; }
+    .acrobat-card strong { color: #E1F5FE; }
+
+    .streak-card { background: linear-gradient(135deg, #004D40, #00695C, #00796B); border: 2px solid #004D40; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B2DFDB; }
+    .streak-card h3 { margin-top: 0; font-size: 1.1rem; color: #80CBC4; }
+    .streak-card p { color: #B2DFDB; }
+    .streak-card strong { color: #E0F2F1; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.dolphin { background: #0D47A1; }
+    .theory-icon.vocal { background: #01579B; }
+    .theory-icon.streak { background: #004D40; }
+    .theory-icon.acrobat { background: #1565C0; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .era-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 1rem 0; }
+    .era-table th { background: #004D40; color: white; padding: 0.35rem 0.5rem; text-align: left; font-family: system-ui, sans-serif; }
+    .era-table td { padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--card-border); }
+    .era-table tr:nth-child(even) { background: #E0F2F1; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">188&deg;</div>
+      <div class="release-title-block">
+        <h2>Pacific White-sided Dolphin &mdash; Squawks &amp; Whistles</h2>
+        <div class="scientific"><em>Lagenorhynchus obliquidens</em> (Delphinidae) &mdash; E=5 &mdash; FIRST DELPHINIDAE</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST DELPHINIDAE</strong> &mdash; the dolphin family enters.
+      Third cetacean family. <strong>The silence breaks</strong> &mdash; after two
+      porpoises (E=5 rooster-tail, E=1 silence), the dolphin arrives with
+      <strong>audible squawks, whistles, and clicks.</strong>
+      Acrobatic leaps. Pods of <strong>10&ndash;100+.</strong>
+      <strong>9 consecutive marine mammals</strong> (180&ndash;188) &mdash; ties Picidae nonet.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="vocal-card">
+          <h3>The Silence Breaks &mdash; Squawks, Whistles, Clicks</h3>
+          <p>
+            After two <strong>silent porpoises</strong> (Dall&rsquo;s 186, Harbor 187),
+            the dolphin arrives with <strong>full audible voice.</strong>
+            <strong>Squawks:</strong> rapid click bursts merging into buzzy vocalizations.
+            <strong>Whistles:</strong> frequency-modulated tonal sounds &mdash; the
+            acoustic hallmark that distinguishes dolphins from porpoises.
+            <strong>Clicks:</strong> broadband echolocation in audible range.
+            A rich, diverse, <strong>hearable</strong> vocal repertoire. <strong>E=5.</strong>
+          </p>
+        </div>
+
+        <div class="acrobat-card">
+          <h3>The Acrobat &mdash; Aerial Displays</h3>
+          <p>
+            Spectacular <strong>leaps, belly flops, side slaps, somersaults.</strong>
+            Launches completely out of the water, rotating in mid-air.
+            Multiple dolphins leaping <strong>simultaneously.</strong>
+            Speeds up to <strong>25 mph.</strong> The progression from
+            cryptic surfacing (Harbor Porpoise 187) to full aerial display (188)
+            mirrors the acoustic progression from <strong>silence to song.</strong>
+          </p>
+        </div>
+
+        <div class="streak-card">
+          <h3>Marine Mammal Era &mdash; 9 Consecutive &mdash; Ties Record</h3>
+          <p>
+            <strong>9 consecutive marine mammals</strong> (degrees 180&ndash;188).
+            <strong>Ties the Picidae nonet record</strong> for longest taxonomic streak.
+            <strong>5 families:</strong> Phocidae (2), Otariidae (3), Mustelidae (1),
+            Phocoenidae (2), Delphinidae (1). Extraordinary diversity within a single streak.
+            Energy range: <strong>E=1 to E=6</strong> across 9 entries.
+          </p>
+        </div>
+
+        <h2>Marine Mammal Era</h2>
+        <table class="era-table">
+          <thead><tr><th>Deg</th><th>Species</th><th>Family</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>180</td><td>Harbor Seal</td><td>Phocidae</td><td>4</td></tr>
+            <tr><td>181</td><td>Harbor Seal Pup</td><td>Phocidae</td><td>3</td></tr>
+            <tr><td>182</td><td>Steller Sea Lion</td><td>Otariidae</td><td>6</td></tr>
+            <tr><td>183</td><td>California Sea Lion</td><td>Otariidae</td><td>5</td></tr>
+            <tr><td>184</td><td>Northern Fur Seal</td><td>Otariidae</td><td>4</td></tr>
+            <tr><td>185</td><td>Sea Otter</td><td>Mustelidae</td><td>4</td></tr>
+            <tr><td>186</td><td>Dall&rsquo;s Porpoise</td><td>Phocoenidae</td><td>5</td></tr>
+            <tr><td>187</td><td>Harbor Porpoise</td><td>Phocoenidae</td><td>1</td></tr>
+            <tr><td>188</td><td>Pac. White-sided Dolphin</td><td>Delphinidae</td><td>5</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-186 Dall&rsquo;s Porpoise</strong>
+            <p>CETACEAN PROGRESSION! Porpoise (E=5, silent voice, rooster tail) to dolphin (E=5, audible voice, aerial display). Same energy, opposite acoustic strategy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-187 Harbor Porpoise</strong>
+            <p>SILENCE TO SONG! Harbor Porpoise E=1 (absolute silence) to Dolphin E=5 (squawks + whistles). The cetacean acoustic arc: silence to voice in one degree.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-180 Harbor Seal</strong>
+            <p>MARINE MAMMAL ERA! 9 consecutive from 180 (first marine mammal) to 188 (first dolphin). Ties Picidae nonet. 5 families.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-188 DoNormaal (E=8)</strong>
+            <p>THE BREAKTHROUGH! DoNormaal breaks E=7 ceiling. Dolphin breaks cetacean silence. Both break through ceilings. Total E=13 (record).</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon dolphin">D</div>
+            <div class="theory-content">
+              <h4>First Delphinidae &mdash; Dolphins Enter</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>First dolphin. Third cetacean family. Whistles distinguish dolphins from porpoises. Conical teeth. Social. Vocal. The silence breaks.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon vocal">V</div>
+            <div class="theory-content">
+              <h4>Silence to Song &mdash; Cetacean Acoustic Arc</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Dall's (186, silent voice), Harbor (187, E=1 silence), Dolphin (188, audible squawks/whistles). Three degrees: from silence to song. The cetacean silence breaks.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon acrobat">A</div>
+            <div class="theory-content">
+              <h4>Acrobatic Displays &mdash; Leaps and Somersaults</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Spectacular aerial displays. Multiple dolphins leaping simultaneously. Cryptic surfacing (187) to full aerial display (188). Visual matches acoustic progression.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon streak">9</div>
+            <div class="theory-content">
+              <h4>9 Consecutive Marine Mammals &mdash; Ties Record</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Degrees 180-188. Ties Picidae nonet. 5 families. E=1 to E=6. The marine mammal era is the most taxonomically diverse streak in the engine.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Pac. White-sided Dolphin</div><div class="stat-detail"><em>Lagenorhynchus obliquidens</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Delphinidae</div><div class="stat-detail">FIRST (dolphins)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Squawks + whistles</div><div class="stat-detail">audible, varied, social</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #0D47A1;">E = 5</div><div class="stat-detail">the silence breaks</div></div>
+        <div class="stat-card"><div class="stat-label">Pod size</div><div class="stat-value">10&ndash;100+</div><div class="stat-detail">super-pods to 1,000+</div></div>
+        <div class="stat-card"><div class="stat-label">Speed</div><div class="stat-value">25 mph</div><div class="stat-detail">acrobatic leaper</div></div>
+        <div class="stat-card"><div class="stat-label">Marine mammal era</div><div class="stat-value">9 consecutive</div><div class="stat-detail">ties Picidae nonet</div></div>
+        <div class="stat-card"><div class="stat-label">Pair total</div><div class="stat-value">E = 13</div><div class="stat-detail">RECORD (E8 + E5)</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

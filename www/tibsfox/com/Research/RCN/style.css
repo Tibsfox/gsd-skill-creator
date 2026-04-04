@@ -1,0 +1,44 @@
+/* RCN — The Masked Procyonid
+   Dusky grays and forest greens — the nocturnal palette */
+
+:root {
+  --accent: #276749;
+  --accent-light: #38a169;
+  --accent-dark: #22543d;
+  --page-bg: #f0fff4;
+  --card-border: #9ae6b4;
+  --card-shadow: rgba(39, 103, 73, 0.12);
+  --text: #2d3748;
+  --text-light: #718096;
+  --link: #276749;
+}
+
+body { background: var(--page-bg); color: var(--text); }
+header { background: linear-gradient(135deg, #2d3748 0%, #4a5568 40%, #276749 100%); border-bottom: 4px solid #68d391; }
+header h1, header .subtitle, header nav a { color: #f0fff4; }
+header nav a:hover { color: #c6f6d5; }
+header nav a.active { color: #c6f6d5; font-weight: 700; border-bottom: 2px solid #68d391; }
+
+h2 { color: var(--accent); border-bottom: 2px solid #9ae6b4; padding-bottom: 0.3rem; }
+h3 { color: #2d3748; }
+
+.card { border-left: 4px solid var(--accent); background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%); box-shadow: 0 2px 8px var(--card-shadow); border-radius: 8px; }
+.card:hover { box-shadow: 0 6px 24px rgba(39, 103, 73, 0.2); border-left-color: var(--accent-light); transform: translateY(-2px); }
+.card h3 { color: var(--accent); }
+
+.stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.stat { background: #f0fff4; border: 1px solid #9ae6b4; border-radius: 8px; padding: 0.8rem 1.2rem; text-align: center; flex: 1; min-width: 100px; }
+.stat-value { color: var(--accent); font-size: 2rem; font-weight: 700; display: block; }
+.stat-label { color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+blockquote { border-left: 4px solid #68d391; background: rgba(104, 211, 145, 0.08); border-radius: 0 6px 6px 0; padding: 1rem 1.5rem; font-style: italic; }
+.tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.75rem; font-weight: 600; }
+.tag-resident { background: #c6f6d5; color: #276749; }
+
+th { background: var(--accent); color: white; }
+tr:nth-child(even) { background: rgba(39, 103, 73, 0.04); }
+code { background: #c6f6d5; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+pre { background: #2d3748; color: #e2e8f0; border-radius: 6px; padding: 1rem; overflow-x: auto; }
+footer { border-top: 2px solid #9ae6b4; margin-top: 3rem; padding: 1.5rem; text-align: center; color: var(--text-light); }
+
+@media (max-width: 640px) { header { padding: 1.2rem; } header h1 { font-size: 1.3rem; } main { padding: 1rem; } .stats { flex-direction: column; } .card-grid { grid-template-columns: 1fr; } }

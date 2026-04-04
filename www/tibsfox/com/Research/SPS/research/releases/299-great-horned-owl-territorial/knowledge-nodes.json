@@ -1,0 +1,55 @@
+{
+  "degree": 299,
+  "species": "Great Horned Owl",
+  "scientific_name": "Bubo virginianus",
+  "slug": "299-great-horned-owl-territorial",
+  "sound_type": "multi-night hooting battle -- territorial establishment exchange; male and female calling back and forth across territory boundaries for hours; deep resonant hoo-hoo-hoo; 200-500 Hz male; 300-600 Hz female; carries 1-3 km in winter conditions; mated pairs duet; repeats on consecutive nights",
+  "energy": 6,
+  "ecosystem": "Territory -- mixed forest edge, riparian corridors, open woodland; broad habitat generalist; nocturnal territorial activity primarily December-January",
+  "season": "Winter (territorial establishment November-February; hooting wars peak December-January; nesting begins January-February; earliest nesting owl in North America)",
+  "family": "Strigidae",
+  "order": "Strigiformes",
+  "conservation_status": "Least Concern (IUCN). Common and widespread across Pacific Northwest and North America. No conservation concerns for the species. Active predator and competitor of Northern Spotted Owl (SPS degree 4).",
+  "milestone": "Second Strigidae entry in SPS engine (first was Northern Spotted Owl at degree 4). Great Horned Owl is the generalist counterpart to the specialist Spotted Owl. One degree before the five-sixths mark. Last ecological entry in the raptor-owl cluster 297-299.",
+  "coordinates": {
+    "lat": 47.6,
+    "lon": -122.0,
+    "description": "Pacific Northwest distribution: present in virtually all forest and partially forested habitats. Extremely common across the region. Territorial activity most intense in winter in riparian corridors and mixed forest-grassland edge habitats where territories are established and contested."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Territorial hooting -- deep resonant hoo-hoo-hoo sequences; 3-8 notes per sequence; male lower-pitched than female; counter-calling exchange between neighboring owls; mated pair duets; repeats over hours and consecutive nights.",
+    "frequency_range": "Male: 200-500 Hz fundamental. Female: 300-600 Hz. One of the lowest-pitched bird vocalizations in the Pacific Northwest. Carries 1-3 km in ideal winter conditions.",
+    "duration": "Hours of exchange per night; multiple consecutive nights during active territorial disputes. Sustained nocturnal presence. The defining sound of the Pacific Northwest winter night.",
+    "winter_context": "Acoustic vacuum of December-January amplifies the owl's presence. No competing bird voices. Deep hoo carries through cold, calm winter air without interference. Counter-seasonal loudness.",
+    "e6_calibration": "E=6: sustained acoustic negotiation across large spatial and temporal scale. Not physical commitment (vs. E=7 raptor physical displays). Significant, weighted, persistent. E=6 is the correct level for sustained non-physical territorial behavior."
+  },
+  "nodes": [
+    {
+      "id": "second-strigidae",
+      "type": "milestone",
+      "title": "Second Strigidae -- The Ecological Opposite of the Spotted Owl",
+      "description": "Northern Spotted Owl (SPS 4): old-growth specialist, habitat-sensitive, silent. Great Horned Owl (SPS 299): habitat generalist, apex predator, loud. Same family, opposite strategies. The Great Horned Owl is the primary avian predator of Spotted Owl. The engine's two Strigidae entries document the full ecological contrast within the family.",
+      "connections": ["winter-phenology", "raptor-cluster"]
+    },
+    {
+      "id": "winter-phenology",
+      "type": "concept",
+      "title": "Winter Nesting Phenology -- The Earliest Nesting Owl",
+      "description": "Great Horned Owl lays eggs January-February -- the earliest nesting schedule of any North American owl. Territorial establishment must precede nesting: December territorial wars prepare for January egg-laying. The winter timing is the direct consequence of this early calendar. The acoustic vacuum of December amplifies the effect.",
+      "connections": ["second-strigidae"]
+    },
+    {
+      "id": "raptor-cluster",
+      "type": "arc",
+      "title": "Raptor-Owl Cluster 297-299 -- Closes at 299",
+      "description": "Three consecutive behavioral entries: Bald Eagle combat (297, E=7, Accipitridae), Northern Goshawk alarm (298, E=7, Accipitridae), Great Horned Owl territorial (299, E=6, Strigidae). Two families, three species, three behaviors. Energy: E=7, E=7, E=6. Cluster closes at 299. Pileated Woodpecker (300) is next, at the five-sixths mark.",
+      "connections": ["second-strigidae"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-4", "species": "Northern Spotted Owl", "relationship": "First Strigidae. Old-growth specialist. Great Horned Owl is its primary avian predator and contributes to its range contraction."},
+    {"target": "SPS-297", "species": "Bald Eagle aerial combat", "relationship": "E=7. Raptor cluster opens. Bald Eagle (297) → Goshawk (298) → Great Horned Owl (299): three behavioral entries."},
+    {"target": "SPS-300", "species": "Pileated Woodpecker full drum", "relationship": "One degree ahead. Five-sixths mark. Engine namesake. E=7. The ecological endpoint of the cluster."},
+    {"target": "S36-299", "artist": "Love Battery return", "relationship": "E=6 + E=6 = E=12. Sustained territorial presence. Love Battery's decade-long sonic territory and owl's multi-night acoustic territory."}
+  ]
+}

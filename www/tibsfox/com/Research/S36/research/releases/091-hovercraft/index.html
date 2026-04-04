@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 91&deg; &mdash; Hovercraft &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card .level.landmark { background: #FFEBEE; color: #B71C1C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .quadrant-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #FB8C00 100%);
+      border: 3px solid #E65100;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .quadrant-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.3rem;
+      color: #FFE0B2;
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quadrant-card p {
+      color: #FFF3E0;
+      margin: 0.5rem 0;
+    }
+    .quadrant-card strong {
+      color: #FFE0B2;
+    }
+
+    .drone-card {
+      background: linear-gradient(135deg, #212121 0%, #424242 50%, #616161 100%);
+      border: 2px solid #212121;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EEEEEE;
+    }
+    .drone-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #BDBDBD;
+      font-family: system-ui, sans-serif;
+    }
+    .drone-card p {
+      color: #EEEEEE;
+      margin: 0.5rem 0;
+    }
+    .drone-card strong {
+      color: #E0E0E0;
+    }
+
+    .vedder-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .vedder-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .vedder-card p {
+      color: #E8F5E9;
+      margin: 0.5rem 0;
+    }
+    .vedder-card strong {
+      color: #C8E6C9;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>091 &mdash; Hovercraft</span>
+    </nav>
+
+    <!-- QUADRANT II BANNER -->
+    <div class="quadrant-card">
+      <h4>QUADRANT II BEGINS &mdash; Degree 91 / 360</h4>
+      <p>
+        Degree 91 is the <strong>first degree of Quadrant II</strong>.
+        The engine has passed the quarter-mark. <strong>The second quadrant (91&ndash;180) opens.</strong>
+        Quadrant I mapped the foundation. Quadrant II builds on it.
+        And it opens with <strong>the most extreme genre yet</strong> &mdash;
+        Drone/Noise at E=2.
+      </p>
+    </div>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Drone/Noise &mdash; Genre Stage 73 &mdash; Tag/DGC Records &mdash; E=2 &mdash; Seattle</h3>
+      <p>
+        <strong>Hovercraft</strong> &mdash; Seattle drone/noise duo of
+        <strong>Beth Liebling</strong> (bass) and <strong>Ryan Campbell</strong> (guitar, electronics).
+        Heavy, hypnotic, instrumental drone/noise &mdash; no vocals, no conventional song structure.
+        Beth Liebling was married to <strong>Eddie Vedder</strong> (Pearl Jam, degree 83).
+        Active 1993&ndash;2001. <strong>Tag</strong> and <strong>DGC Records</strong> (Geffen subsidiary).
+        <strong>Drone/Noise</strong> at Genre Stage 73 &mdash; the most extreme genre yet.
+        <strong>E=2</strong> &mdash; quiet in cultural reach, LOUD in volume.
+        First degree of Quadrant II.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">91&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Hovercraft</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Drone / Noise</span>
+          <span class="label-badge">Tag / DGC Records</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 73</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Drone/Noise Card -->
+        <div class="drone-card">
+          <h4>Drone/Noise &mdash; The Most Extreme Genre Yet</h4>
+          <p>
+            <strong>Hovercraft</strong> made heavy, hypnotic, instrumental drone/noise.
+            <strong>No vocals. No conventional song structure. No verses. No choruses.</strong>
+            Just bass, guitar, electronics, and volume &mdash; sustained tones,
+            feedback, distortion, and repetition building into walls of sound.
+            Drone/Noise at Genre Stage 73 is the <strong>most extreme genre</strong>
+            the engine has encountered. More extreme than grunge, more extreme than
+            avant-pop, more extreme than any prior entry. The engine opens Quadrant II
+            at the edge.
+          </p>
+        </div>
+
+        <!-- Vedder Connection Card -->
+        <div class="vedder-card">
+          <h4>The Pearl Jam Connection &mdash; Beth Liebling &amp; Eddie Vedder</h4>
+          <p>
+            <strong>Beth Liebling</strong>, Hovercraft&rsquo;s bassist, was married to
+            <strong>Eddie Vedder</strong> of Pearl Jam (degree 83). This is
+            a <strong>direct personal connection</strong> between degrees 83 and 91 &mdash;
+            the biggest band in Seattle&rsquo;s grunge era and a two-person drone/noise
+            project that rejected everything grunge stood for commercially.
+            Vedder occasionally performed with Hovercraft. The connection shows how
+            Seattle&rsquo;s musicians moved between commercial and experimental worlds.
+          </p>
+        </div>
+
+        <!-- Engine Events Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 73 &middot; Drone/Noise &middot; E=2 &middot; Quadrant II Opens &middot; 92nd Acoustic Element &middot; 92nd Pattern</h4>
+          <p>
+            <strong>Hovercraft</strong> enters at Genre Stage 73 with Drone/Noise &mdash;
+            the most extreme genre yet. <strong>E=2</strong> &mdash; quiet in cultural
+            reach but LOUD in volume. The paradox of drone/noise: maximum sonic intensity,
+            minimum cultural penetration. The 92nd acoustic element. The 92nd pattern.
+            <strong>QUADRANT II OPENS.</strong>
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 73: Drone/Noise &mdash; The Extreme Frontier</h2>
+          <p>
+            Degree 91 reaches <strong>Genre Stage 73</strong>. <strong>Drone/Noise</strong>
+            is the most extreme genre the engine has catalogued. No vocals. No song
+            structure. No melody in any conventional sense. The sound is built from
+            sustained bass tones, guitar feedback, electronic processing, and sheer
+            volume. The music is hypnotic through repetition and density rather than
+            through rhythm or harmony.
+          </p>
+          <p>
+            Distinguished from prior entries: <strong>Sky Cries Mary</strong> (degree 90)
+            is ethereal/electronic &mdash; ambient and immersive. Hovercraft is drone/noise
+            &mdash; heavy and abrasive. Sky Cries Mary floats; Hovercraft crushes.
+            <strong>Phil Elverum</strong> (degree 71) uses drone and texture but within
+            song structures. Hovercraft abandons structure entirely.
+            The engine moves from ambient immersion (90) to sonic obliteration (91).
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 92: The Sustained Crush</h2>
+          <p>
+            The <strong>sustained crush</strong> is the ninety-second acoustic element in the
+            Seattle 360 engine. It describes Hovercraft&rsquo;s sound &mdash; sustained bass
+            drones, guitar feedback loops, electronic distortion, and volume that creates
+            a <strong>physical pressure</strong> on the listener. The sound does not move
+            forward in time like a song &mdash; it presses down like weight. The crush is
+            sustained: it does not attack and release but maintains constant pressure.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>ambient drift</strong> (91st element,
+            Sky Cries Mary at 90) floats and envelops gently. The sustained crush presses
+            and overwhelms physically. The engine moves from floating to crushing &mdash;
+            from the planetarium to the bunker. Both are immersive but through opposite
+            mechanisms: the drift through gentleness, the crush through force.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 92: The Spousal Satellite</h2>
+          <p>
+            The <strong>spousal satellite</strong> is the ninety-second artist-city pattern
+            in the Seattle 360 engine. It describes a musical project that exists in the
+            orbit of a much more famous partner&rsquo;s band. Beth Liebling&rsquo;s Hovercraft
+            orbited Eddie Vedder&rsquo;s Pearl Jam &mdash; not artistically (Hovercraft
+            sounds nothing like Pearl Jam) but biographically. The spousal satellite
+            has its own artistic identity but is inevitably discussed in relation to
+            the more famous partner.
+          </p>
+          <blockquote>
+            The spousal satellite is the project that exists on its own terms but is
+            forever introduced by its proximity to fame. Hovercraft was not Pearl Jam.
+            Hovercraft was drone/noise. But every article about Hovercraft mentions
+            Eddie Vedder in the first paragraph. The spousal satellite proves that
+            artistic independence and biographical proximity can coexist &mdash; and
+            that proximity to fame does not guarantee cultural reach. E=2.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>QUADRANT II OPENS</h4>
+              <span class="level landmark">Landmark</span>
+              <p>Degree 91 is the first degree of Quadrant II.
+              The engine passes the quarter-mark. The second
+              quadrant (91-180) begins. Opens with the most
+              extreme genre yet.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Sustained Crush</h4>
+              <span class="level advanced">Advanced</span>
+              <p>92nd acoustic element. Hovercraft --
+              sustained bass drones, guitar feedback,
+              electronic distortion, physical pressure.
+              The sound presses down like weight.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Spousal Satellite</h4>
+              <span class="level advanced">Advanced</span>
+              <p>92nd artist-city pattern. A project in
+              the biographical orbit of a famous partner.
+              Beth Liebling / Eddie Vedder. Artistic
+              independence, biographical proximity.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 73 &mdash; Drone/Noise</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>73rd genre stage. Drone/Noise. The most
+              extreme genre yet. No vocals, no structure.
+              Sustained tones, feedback, distortion.
+              Hypnotic through density.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 &mdash; The Volume Paradox</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>E=2. Quiet in cultural reach, LOUD in
+              volume. Maximum sonic intensity, minimum
+              cultural penetration. The drone/noise
+              paradox.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Tag / DGC Records</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Tag Records and DGC (Geffen subsidiary).
+              A noise band on a major-label subsidiary --
+              the 1990s economics of signing extreme acts.
+              Post-Nirvana signing frenzy.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">083</span>
+              <strong>Pearl Jam</strong> &mdash; Vedder/Liebling marriage.
+              Beth Liebling (Hovercraft) was married to Eddie Vedder (Pearl Jam).
+              Direct personal connection. The biggest grunge band and a two-person
+              drone/noise project. Same household, opposite aesthetics.
+            </li>
+            <li>
+              <span class="ref-degree">090</span>
+              <strong>Sky Cries Mary</strong> &mdash; 1990s underground.
+              Both 1990s Seattle underground acts outside grunge. Sky Cries Mary
+              is ethereal/electronic (ambient drift); Hovercraft is drone/noise
+              (sustained crush). Two flavors of the underground.
+            </li>
+            <li>
+              <span class="ref-degree">036</span>
+              <strong>Jimi Hendrix</strong> &mdash; Noise lineage.
+              Hendrix pioneered feedback and distortion as musical tools.
+              Hovercraft takes that lineage to its logical extreme &mdash;
+              feedback and distortion as the entire music. The noise lineage
+              from Hendrix through Hovercraft.
+            </li>
+            <li>
+              <span class="ref-degree">071</span>
+              <strong>Phil Elverum</strong> &mdash; Drone/texture.
+              Both use drone and texture. Elverum uses them within song
+              structures; Hovercraft abandons structure entirely. Drone as
+              element (Elverum) vs drone as totality (Hovercraft).
+            </li>
+            <li>
+              <span class="ref-degree">089</span>
+              <strong>Parenthetical Girls</strong> &mdash; Experimental.
+              Both experimental. Parenthetical Girls is theatrical avant-pop;
+              Hovercraft is instrumental drone/noise. Both reject convention
+              but in opposite directions &mdash; maximalist theater vs
+              minimalist obliteration.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Hovercraft &mdash; discography and band history.</li>
+            <li>AllMusic &mdash; Hovercraft biography.</li>
+            <li>Tag Records / DGC Records &mdash; catalog.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">91&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Drone / Noise</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Tag / DGC Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active</span>
+            <span class="stat-value">1993&ndash;2001</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">73</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">92nd Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">92nd Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Milestone</span>
+            <span class="stat-value">QUADRANT II</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sonic Character</h4>
+          <div class="stat-row">
+            <span class="stat-label">Element</span>
+            <span class="stat-value">Sustained Crush</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Spousal Satellite</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Members</span>
+            <span class="stat-value">Liebling &amp; Campbell</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Quadrant II</h4>
+          <div class="stat-row">
+            <span class="stat-label">Position</span>
+            <span class="stat-value">91 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Quadrant</span>
+            <span class="stat-value">II (91&ndash;180)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stages</span>
+            <span class="stat-value">73</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Elements</span>
+            <span class="stat-value">92</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">92</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 133&deg; &mdash; Kevin Cole &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #37474F, #455A64);
+      color: #CFD8DC;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(55, 71, 79, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #CFD8DC;
+      border: 1px solid #455A64;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #37474F;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #37474F;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: #37474F;
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .kexp-banner {
+      background: linear-gradient(135deg, #37474F, #263238, #37474F);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .kexp-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .kexp-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    blockquote {
+      border-left: 3px solid #37474F;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #ECEFF1;
+      font-style: italic;
+      color: #263238;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .pillar-card {
+      background: white;
+      border: 1px solid #CFD8DC;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .pillar-card strong { color: #37474F; font-size: 0.88rem; }
+    .pillar-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>133 &mdash; Kevin Cole</span>
+    </nav>
+
+    <!-- KEXP Banner -->
+    <div class="kexp-banner">
+      <h3>Program Director &amp; On-Air Host &mdash; The Architect of KEXP</h3>
+      <p>
+        Kevin Cole at degree 133&deg; &mdash; the <strong>programming architect</strong>
+        behind KEXP&rsquo;s identity. Program Director who shaped the station&rsquo;s
+        curatorial philosophy, mentored on-air talent (130&ndash;132), and built the
+        live session platform that made KEXP a global tastemaker.
+        Also performs music as <strong>Tablam</strong>.
+        E=3 &mdash; the quiet authority of infrastructure.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">133&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Kevin Cole</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Radio</span>
+          <span class="label-badge">KEXP 90.3 FM</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Programming Architect</h2>
+          <p>
+            Kevin Cole has served as <strong>KEXP&rsquo;s Program Director</strong>
+            since the station&rsquo;s transformation from KCMU in the early 2000s.
+            Where the host trio (130&ndash;132) documented KEXP&rsquo;s on-air
+            <em>performers</em>, degree 133 documents the <em>architect</em> &mdash;
+            the person who built the stage those performers work on. Cole shaped
+            the station&rsquo;s core philosophy: <strong>human curation over algorithm,
+            discovery over repetition, depth over breadth</strong>.
+          </p>
+          <p>
+            Every show on KEXP reflects Cole&rsquo;s programming framework.
+            He hired and mentored the on-air talent, developed the playlist
+            philosophy (genuine DJ freedom within coherent station identity),
+            championed the <strong>live in-studio sessions</strong> that became
+            KEXP&rsquo;s most visible global product (hundreds of millions of
+            YouTube views), and guided the station through the KCMU-to-KEXP
+            transition and the move to the <strong>purpose-built Seattle Center
+            facility</strong> in 2016.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pillars of the KEXP Model</h2>
+          <div class="pillar-grid">
+            <div class="pillar-card">
+              <strong>Human Curation</strong>
+              <p>DJs curate their own shows with genuine freedom, within a framework that ensures station coherence</p>
+            </div>
+            <div class="pillar-card">
+              <strong>Live Sessions</strong>
+              <p>Intimate, high-fidelity in-studio performances distributed globally via YouTube</p>
+            </div>
+            <div class="pillar-card">
+              <strong>Local-to-Global Pipeline</strong>
+              <p>Discover regional artists, give exposure, distribute worldwide through streaming</p>
+            </div>
+            <div class="pillar-card">
+              <strong>Community Institution</strong>
+              <p>Radio as gathering space: public studio, events, cultural calendar integration</p>
+            </div>
+            <div class="pillar-card">
+              <strong>Listener-Supported</strong>
+              <p>No corporate ownership, no ad-driven format restrictions; quality curation drives support</p>
+            </div>
+            <div class="pillar-card">
+              <strong>Tablam</strong>
+              <p>Cole&rsquo;s atmospheric, experimental musical project &mdash; the architect as artist</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Tablam &mdash; The Program Director as Artist</h2>
+          <blockquote>
+            Tablam reveals the dimension of Cole that the programming role
+            doesn&rsquo;t fully express &mdash; the artist&rsquo;s impulse to create,
+            not just curate. Atmospheric, experimental, textured. Electronic and
+            ambient elements blended with guitar-based composition. The sound of
+            a person who listens deeply and creates from that listening.
+          </blockquote>
+          <p>
+            Cole maintains strict separation between his curatorial role and his
+            artistic output &mdash; Tablam is not promoted through KEXP&rsquo;s airwaves.
+            This restraint is itself revealing: the program director&rsquo;s ethics
+            prevent self-promotion through the station. The aesthetic aligns with
+            KEXP&rsquo;s values: music that rewards attention, that is compositionally
+            interesting, that doesn&rsquo;t chase commercial trends.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Programming Architect &mdash; Post-Trio Infrastructure</h4>
+              <div class="level advanced">Advanced &mdash; Institutional Theory</div>
+              <p>
+                After the host trio (130&ndash;132) documented the performers,
+                degree 133 documents the architect. Cole built the programming
+                framework &mdash; the invisible structure that enables the
+                on-air voices. Infrastructure over performance.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>KEXP Curatorial Model &mdash; Human vs. Algorithm</h4>
+              <div class="level advanced">Advanced &mdash; Media Theory</div>
+              <p>
+                Cole&rsquo;s legacy: a framework proving human curation can
+                compete with algorithmic recommendation. Every KEXP show
+                is a demonstration of this argument. The live sessions
+                are its global export.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Tablam &mdash; Curator as Creator</h4>
+              <div class="level intermediate">Intermediate &mdash; Artist Theory</div>
+              <p>
+                The program director who also makes music. Atmospheric,
+                experimental output that reflects the same values he curates
+                for. Strict separation between the two roles. Ethics of
+                non-self-promotion.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 &mdash; Quiet Curatorial Authority</h4>
+              <div class="level intermediate">Intermediate &mdash; Energy Theory</div>
+              <p>
+                E=3 as infrastructure energy. The architect doesn&rsquo;t need
+                to be the loudest voice. Matches the KEXP baseline
+                (Waters 130, Richards 131). Quiet confidence from decades
+                of curation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">130&deg;</span>
+              <strong>Cheryl Waters</strong> &mdash; KEXP talent Cole mentored.
+              Waters (Midday, local, E=3) operates within Cole&rsquo;s programming
+              framework. Shared E=3 curatorial baseline.
+            </li>
+            <li>
+              <span class="ref-degree">131&deg;</span>
+              <strong>John Richards</strong> &mdash; KEXP talent Cole mentored.
+              Richards (Morning, personal, E=3). The personal voice operating
+              within the architectural framework.
+            </li>
+            <li>
+              <span class="ref-degree">132&deg;</span>
+              <strong>Darek Mazzone</strong> &mdash; KEXP talent Cole empowered.
+              Wo&rsquo; Pop (global, E=4). Mazzone&rsquo;s global programming
+              exists because Cole built a station structure that enables it.
+            </li>
+            <li>
+              <span class="ref-degree">128&deg;</span>
+              <strong>Bruce Pavitt</strong> &mdash; Curatorial lineage.
+              Pavitt curated a label (Sub Pop, E=3). Cole curates a station
+              (KEXP, E=3). Same curatorial DNA, different institutional forms.
+            </li>
+            <li>
+              <span class="ref-degree">126&deg;</span>
+              <strong>Nasty Nes Rodriguez</strong> &mdash; KCMU lineage.
+              Nasty Nes (KCMU hip-hop, E=4) helped build the freeform tradition
+              Cole inherited and professionalized as KEXP Program Director.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">133&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Radio</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Station</span>
+            <span class="stat-value">KEXP 90.3 FM</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Role</span>
+            <span class="stat-value">Program Director</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">~1995</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Music</span>
+            <span class="stat-value">Tablam</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>KEXP Sequence (130&ndash;133)</h4>
+          <div class="stat-row">
+            <span class="stat-label">130&deg;</span>
+            <span class="stat-value">Waters (Midday)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">131&deg;</span>
+            <span class="stat-value">Richards (Morning)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">132&deg;</span>
+            <span class="stat-value">Mazzone (Wo&rsquo; Pop)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">133&deg;</span>
+            <span class="stat-value">Cole (Program Dir.)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Innovations</h4>
+          <div class="stat-row">
+            <span class="stat-label">Sessions</span>
+            <span class="stat-value">Live In-Studio</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Philosophy</span>
+            <span class="stat-value">Human Curation</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reach</span>
+            <span class="stat-value">Global Streaming</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Facility</span>
+            <span class="stat-value">Seattle Center</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../132-darek-mazzone/" style="color: var(--seattle-navy);">&larr; 132&deg; Darek Mazzone</a>
+        <a href="../134-dj-b-mello/" style="color: var(--seattle-navy);">134&deg; DJ B-Mello &rarr;</a>
+      </div>
+      <p>
+        Degree 133&deg; &mdash; Kevin Cole &mdash; Seattle 360 Engine &mdash; v1.49.273
+        <br>
+        KEXP&rsquo;s Program Director and the architect of the station&rsquo;s curatorial
+        identity. Built the programming framework that enables the host trio
+        (130&ndash;132). Live sessions. Human curation over algorithm. Also performs
+        as Tablam. E=3 &mdash; the quiet authority of infrastructure.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

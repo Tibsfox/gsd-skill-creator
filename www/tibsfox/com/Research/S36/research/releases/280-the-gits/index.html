@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 280&deg; &mdash; The Gits &mdash; E=8 &mdash; Punk Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #CFD8DC; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #ECEFF1; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #212121, #37474F, #455A64); color: #ECEFF1; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #37474F; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #212121; color: #CFD8DC; border: 1px solid #37474F; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #37474F; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #37474F; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #455A64; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #ECEFF1; font-style: italic; color: #37474F; font-size: 1.05rem; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .voice-card { background: linear-gradient(135deg, #1A237E 0%, #283593 50%, #3949AB 100%); border-radius: 8px; padding: 1.75rem 2rem; margin: 1.5rem 0; color: #E8EAF6; }
+    .voice-card h3 { margin-top: 0; color: #C5CAE9; font-size: 1.25rem; }
+    .voice-card p { color: #E8EAF6; margin: 0.6rem 0; }
+    .voice-card strong { color: #BBDEFB; }
+    .community-card { background: linear-gradient(135deg, #004D40 0%, #00695C 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E0F2F1; }
+    .community-card h3 { margin-top: 0; color: #B2DFDB; font-size: 1.15rem; }
+    .community-card p { color: #E0F2F1; margin: 0.4rem 0; }
+    .community-card strong { color: #80CBC4; }
+    .fact-note { background: #FAFAFA; border: 1px solid #E0E0E0; border-left: 4px solid #9E9E9E; border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .fact-note p { margin: 0.3rem 0; font-size: 0.9rem; color: #616161; font-family: system-ui, sans-serif; }
+    .fact-note strong { color: #37474F; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>280 &mdash; The Gits (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">280&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #37474F;">The Gits</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Punk Rock</span>
+          <span class="label-badge">C/Z Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>E=8 FIFTH CONSECUTIVE (276&ndash;280). C/Z RECORDS SECOND CONSECUTIVE. CENTRAL DISTRICT PUNK.</strong> The Gits: Mia Zapata (vocals), Joe Spleen (guitar), Matt Dresdner (bass), Steve Moriarty (drums). Central District, Seattle. C/Z Records. &ldquo;Frenching the Bully&rdquo; (1992). One of the most gifted vocalists in Pacific Northwest punk history. The music endures. The community honored it. &ldquo;&iexcl;Viva Zapata!&rdquo; (degree 279) named in Mia Zapata&rsquo;s honor.
+        </div>
+
+        <div class="voice-card">
+          <h3>Mia Zapata: The Voice</h3>
+          <p>Zapata&rsquo;s voice is the center of The Gits&rsquo; music. Her vocal approach is singular: <strong>the rawness and commitment of punk, the emotional directness of the blues, the power of R&B, and a distinctly personal quality that sounds unlike any other vocalist in the Pacific Northwest punk scene.</strong></p>
+          <p>She sings with her whole body. The emotional range &mdash; from intimate and conversational to devastating and full-throated &mdash; is wide. The transitions between registers are achieved with complete conviction. The blues dimension is real: note-bending, sustained vowels, the use of silence before attacking the next word. Blues techniques in a punk context, producing something that is neither conventional blues nor conventional punk. Something that is specifically hers.</p>
+          <p><strong>Mia Zapata was one of the most gifted vocalists of the Pacific Northwest punk scene.</strong> This is a statement of fact.</p>
+        </div>
+
+        <div class="fact-note">
+          <p><strong>Mia Zapata was murdered on July 7, 1993.</strong> She was twenty-seven years old. The case was unsolved for ten years. DNA evidence led to the identification and conviction of Jesus Mezquia in 2004, who was sentenced to thirty-six years in prison. The engine documents this fact briefly, accurately, and with the respect the fact demands. What follows is what matters: the music, the artistry, the community that refused to let either be forgotten.</p>
+        </div>
+
+        <blockquote>"Frenching the Bully" (1992, produced by Steve Albini) is the band's primary artistic statement: thirteen tracks, raw and direct, Zapata's voice at the center of every dynamic shift.</blockquote>
+
+        <hr class="section-divider">
+
+        <div class="community-card">
+          <h3>The Community&rsquo;s Response</h3>
+          <p><strong>Home Alive:</strong> Founded 1993 in the immediate aftermath of the murder. Mission: self-defense and personal safety resources for artists and community members. Free and low-cost classes. One of the most significant community organizations to emerge from a music community tragedy in Seattle&rsquo;s history.</p>
+          <p><strong>&iexcl;Viva Zapata! (Seven Year Bitch, 1994):</strong> Named in Mia Zapata&rsquo;s honor. &ldquo;Long live Zapata!&rdquo; &mdash; both the revolutionary and the murdered singer. The exclamation points insist on life. The tribute is embedded in the title of the album one degree earlier (degree 279) &mdash; the most explicit cross-degree bridge in this section of the engine.</p>
+          <p><strong>Joan Jett&rsquo;s involvement:</strong> Collaborated with The Gits&rsquo; surviving members on tribute recordings. The feminist punk lineage &mdash; Joan Jett, Bikini Kill, The Gits, Seven Year Bitch &mdash; expressed as solidarity.</p>
+          <p><strong>"The Gits" documentary (2005):</strong> Feature film documenting the band&rsquo;s history, Zapata&rsquo;s artistry, and the community&rsquo;s response. A primary source.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Sound &mdash; E=8</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>&ldquo;Frenching the Bully&rdquo; (1992)</h4>
+            <span class="level milestone">Album</span>
+            <p>Produced by Steve Albini. Minimal processing, close microphones, the natural sound of the instruments. Thirteen tracks. Direct and raw. &ldquo;Second Skin,&rdquo; &ldquo;Insecure,&rdquo; &ldquo;Look More Like You,&rdquo; &ldquo;Seaweed.&rdquo; The album sounds as live now as it did in 1992.</p>
+          </div>
+          <div class="theory-card">
+            <h4>C/Z Records Second Consecutive</h4>
+            <span class="level milestone">Label</span>
+            <p>C/Z at 279 (Seven Year Bitch) and 280 (The Gits). Seattle&rsquo;s independent label, distinct from Kill Rock Stars and Sub Pop. The Capitol Hill-adjacent Seattle independent scene documented at two consecutive degrees.</p>
+          </div>
+          <div class="theory-card">
+            <h4>E=8 Fifth Consecutive</h4>
+            <span class="level milestone">Energy</span>
+            <p>276 (Bikini Kill), 277 (Sleater-Kinney), 278 (Unwound), 279 (Seven Year Bitch), 280 (The Gits). Five consecutive E=8 entries. The most sustained E=8 streak in the engine&rsquo;s Pacific Northwest documentation.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The Central District</h4>
+            <span class="level intermediate">Geography</span>
+            <p>From Yellow Springs, Ohio to Seattle&rsquo;s Central District. The Gits chose their neighborhood; they were not native to it. The CD&rsquo;s character &mdash; complex, layered, affordable, community-rooted &mdash; was the context for the band&rsquo;s Seattle years.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">279</span> Seven Year Bitch &mdash; &ldquo;&iexcl;Viva Zapata!&rdquo; (1994) named for Mia Zapata. The most explicit cross-degree bridge in the engine&rsquo;s riot grrrl documentation. Two consecutive degrees. Two losses. One community. The exclamation points insist on life.</li>
+          <li><span class="ref-degree">276</span> Bikini Kill &mdash; E=8, riot grrrl, Olympia. Joan Jett produced &ldquo;Rebel Girl&rdquo; (276) and collaborated with The Gits&rsquo; survivors (280). The feminist punk lineage expressed as solidarity across the Pacific Northwest.</li>
+          <li><span class="ref-degree">Joan Jett</span> Collaborating with The Gits&rsquo; surviving members. The same feminist punk lineage that connects Bikini Kill (276) to The Gits (280) through one musician&rsquo;s sustained commitment to the community.</li>
+          <li><span class="ref-degree">SPS 280</span> Sperm whale click train &mdash; E=7. FIRST PHYSETERIDAE. 230+ dB. Loudest biological sound on Earth. Combined E=15. The Gits&rsquo; raw punk directness paired with the sperm whale&rsquo;s directional biosonar in the deep ocean. Both sending signals into the dark.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">280 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Punk Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1986&ndash;1993</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Central District</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">C/Z Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Mia Zapata</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Joe Spleen</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Matt Dresdner</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Steve Moriarty</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Milestones</h4>
+          <div class="stat-row"><span class="stat-label">E=8 streak</span><span class="stat-value">5th (276&ndash;280)</span></div>
+          <div class="stat-row"><span class="stat-label">C/Z streak</span><span class="stat-value">2nd (279&ndash;280)</span></div>
+          <div class="stat-row"><span class="stat-label">Bridge from</span><span class="stat-value">279 ¡Viva Zapata!</span></div>
+          <div class="stat-row"><span class="stat-label">Home Alive</span><span class="stat-value">Founded 1993</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Pairing</h4>
+          <div class="stat-row"><span class="stat-label">SPS 280</span><span class="stat-value">Sperm whale</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=7</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=15</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">FIRST PHYSETERIDAE</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">77.8%</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Yellow Springs, OH</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

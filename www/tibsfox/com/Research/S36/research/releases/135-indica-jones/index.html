@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 135&deg; &mdash; Indica Jones &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6A1B9A, #8E24AA);
+      color: #E1BEE7;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(106, 27, 154, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #6A1B9A;
+      color: #E1BEE7;
+      border: 1px solid #8E24AA;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #6A1B9A;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #F3E5F5; color: #6A1B9A; }
+    .theory-card .level.intermediate { background: #EDE7F6; color: #4527A0; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: #6A1B9A;
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .kexp-banner {
+      background: linear-gradient(135deg, #6A1B9A, #4A148C, #311B92);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .kexp-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .kexp-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    blockquote {
+      border-left: 3px solid #6A1B9A;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .genre-card {
+      background: white;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .genre-card strong { color: #6A1B9A; font-size: 0.88rem; }
+    .genre-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>135 &mdash; Indica Jones</span>
+    </nav>
+
+    <!-- KEXP Banner -->
+    <div class="kexp-banner">
+      <h3>KEXP Radio Sextet CLOSES (130&ndash;135)</h3>
+      <p>
+        Indica Jones at degree 135&deg; <strong>closes the KEXP radio sextet</strong>.
+        Six consecutive KEXP on-air personalities: Waters (130), Richards (131),
+        Mazzone (132), Cole (133), B-Mello (134), Indica Jones (135).
+        Electronic music programming &mdash; E=5 kinetic DJ energy.
+        After this: S36 transitions back from radio personalities to performing artists.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">135&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Indica Jones</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Electronic / DJ</span>
+          <span class="label-badge">KEXP 90.3 FM</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>Electronic Music on Independent Radio</h2>
+          <p>
+            Indica Jones has been a fixture of <strong>KEXP&rsquo;s electronic
+            music programming</strong> since the mid-2000s, bringing deep
+            knowledge of electronic subgenres to the station&rsquo;s airwaves.
+            House, techno, ambient, IDM, breakbeat, UK bass, dubstep,
+            garage, drum and bass, downtempo, experimental electronic &mdash;
+            the breadth of subgenres reflects the genre&rsquo;s own diversity.
+          </p>
+          <p>
+            For many KEXP listeners, Indica Jones&rsquo;s programming is their
+            <strong>primary exposure to electronic music beyond mainstream EDM</strong>.
+            The programming serves as a gateway to the deeper electronic
+            underground &mdash; the independent labels, the DIY producers,
+            the subgenres that don&rsquo;t get algorithmic promotion.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Electronic Subgenres</h2>
+          <div class="genre-grid">
+            <div class="genre-card">
+              <strong>House</strong>
+              <p>Four-on-the-floor, Chicago/Detroit lineage, deep house, tech house</p>
+            </div>
+            <div class="genre-card">
+              <strong>Techno</strong>
+              <p>Detroit origins, Belleville Three, minimal, industrial</p>
+            </div>
+            <div class="genre-card">
+              <strong>Ambient / IDM</strong>
+              <p>Downtempo, experimental, abstract sound design</p>
+            </div>
+            <div class="genre-card">
+              <strong>UK Bass / Garage</strong>
+              <p>Dubstep, UK garage, grime, breakbeat</p>
+            </div>
+            <div class="genre-card">
+              <strong>Drum &amp; Bass</strong>
+              <p>170+ BPM, jungle lineage, liquid, neurofunk</p>
+            </div>
+            <div class="genre-card">
+              <strong>Electro / Experimental</strong>
+              <p>808-driven, modular, noise, cross-genre hybrids</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Capitol Hill Electronic Culture</h2>
+          <blockquote>
+            Electronic music is inherently nocturnal. Capitol Hill&rsquo;s late-night
+            culture &mdash; clubs, warehouse parties, after-hours sets &mdash; is the
+            social infrastructure that electronic music requires. Indica Jones
+            brings this nocturnal energy to daytime listeners through KEXP.
+          </blockquote>
+          <p>
+            Capitol Hill is the epicenter of Seattle&rsquo;s electronic music
+            scene. Kremwerk, Timbre Room, Re-bar, and rotating warehouse
+            venues have hosted electronic music since the rave era of the
+            early 1990s. The neighborhood&rsquo;s density, walkability, and
+            late-night culture create the conditions for electronic music
+            to thrive. Indica Jones connects KEXP to this local scene while
+            programming international electronic music &mdash; the
+            <strong>local-global bridge</strong>, specific to electronic.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>KEXP Radio Sextet CLOSES (130&ndash;135)</h4>
+              <div class="level advanced">Advanced &mdash; Structural Pattern</div>
+              <p>
+                Six consecutive KEXP personalities: Waters (130, Midday),
+                Richards (131, Morning), Mazzone (132, Wo&rsquo; Pop),
+                Cole (133, Program Director), B-Mello (134, hip-hop/R&amp;B),
+                Indica Jones (135, electronic). Complete on-air infrastructure
+                documented. S36 transitions back to performing artists.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Electronic Music Curation on Radio</h4>
+              <div class="level advanced">Advanced &mdash; Curatorial Theory</div>
+              <p>
+                Electronic music on independent radio is rare. The programming
+                makes the argument that radio curation can serve electronic
+                music with the same depth it serves indie rock &mdash; context,
+                discovery, human selection over algorithms.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The DJ as Energy Architect</h4>
+              <div class="level intermediate">Intermediate &mdash; Performance Theory</div>
+              <p>
+                Electronic DJing is architectural: set construction, energy
+                management, beatmatching, harmonic mixing. A fundamentally
+                different craft from talk-and-play radio. The mix is the art.
+                Every transition is a design choice.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 &mdash; Kinetic Electronic Energy</h4>
+              <div class="level intermediate">Intermediate &mdash; Energy Theory</div>
+              <p>
+                E=5 reflects dance-floor kinetics: BPM-driven, bass-forward,
+                build-peak-release. Matches DJ B-Mello (134, E=5) at the
+                genre-specialist DJ energy level. Higher than the host trio
+                (E=3/E=4). Electronic music demands kinetic energy.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">134&deg;</span>
+              <strong>DJ B-Mello</strong> &mdash; Genre-specialist DJ pair.
+              B-Mello (hip-hop/R&amp;B, 134, E=5) and Indica Jones (electronic,
+              135, E=5). Same energy, same role: expanding KEXP&rsquo;s genre
+              coverage through DJ-driven programming.
+            </li>
+            <li>
+              <span class="ref-degree">132&deg;</span>
+              <strong>Darek Mazzone</strong> &mdash; Genre expansion lineage.
+              Mazzone (world music, 132, E=4), B-Mello (hip-hop, 134, E=5),
+              Indica Jones (electronic, 135, E=5). Three genre specialists
+              expanding KEXP beyond indie rock.
+            </li>
+            <li>
+              <span class="ref-degree">130&deg;</span>
+              <strong>Cheryl Waters</strong> &mdash; KEXP sextet bookends.
+              Waters (130, E=3, Midday, local indie) opened the sextet.
+              Indica Jones (135, E=5, electronic) closes it.
+              E=3 to E=5 &mdash; the energy arc of the sextet.
+            </li>
+            <li>
+              <span class="ref-degree">133&deg;</span>
+              <strong>Kevin Cole</strong> &mdash; Institutional architecture.
+              Cole (133, E=3, Program Director) designed the programming
+              framework that creates space for genre specialists like
+              Indica Jones (135, E=5).
+            </li>
+            <li>
+              <span class="ref-degree">126&deg;</span>
+              <strong>Nasty Nes Rodriguez</strong> &mdash; Radio era lineage.
+              Nasty Nes (126, E=4) opened the radio era. Indica Jones (135, E=5)
+              approaches its close. Ten degrees of radio infrastructure.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">135&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Electronic / DJ</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Station</span>
+            <span class="stat-value">KEXP 90.3 FM</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Focus</span>
+            <span class="stat-value">Electronic Music</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">~2005</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Base</span>
+            <span class="stat-value">Capitol Hill</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>KEXP Radio Sextet (Complete)</h4>
+          <div class="stat-row">
+            <span class="stat-label">130&deg;</span>
+            <span class="stat-value">Waters (Midday)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">131&deg;</span>
+            <span class="stat-value">Richards (Morning)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">132&deg;</span>
+            <span class="stat-value">Mazzone (Wo&rsquo; Pop)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">133&deg;</span>
+            <span class="stat-value">Cole (Director)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">134&deg;</span>
+            <span class="stat-value">B-Mello (Hip-Hop)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">135&deg;</span>
+            <span class="stat-value">Indica Jones (Electronic)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>BPM Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Downtempo</span>
+            <span class="stat-value">70&ndash;100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">House</span>
+            <span class="stat-value">120&ndash;130</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Techno</span>
+            <span class="stat-value">130&ndash;150</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">DnB</span>
+            <span class="stat-value">170&ndash;180</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../134-dj-b-mello/" style="color: var(--seattle-navy);">&larr; 134&deg; DJ B-Mello</a>
+        <a href="../136-dj-riz/" style="color: var(--seattle-navy);">136&deg; DJ Riz &rarr;</a>
+      </div>
+      <p>
+        Degree 135&deg; &mdash; Indica Jones &mdash; Seattle 360 Engine &mdash; v1.49.275
+        <br>
+        KEXP electronic music DJ. E=5 &mdash; kinetic, dance-floor energy on
+        independent radio. House, techno, ambient, IDM, UK bass, drum &amp; bass.
+        Capitol Hill electronic culture. Closes the KEXP radio sextet (130&ndash;135):
+        six consecutive KEXP on-air personalities. S36 transitions back from radio
+        to performing artists. The electronic ear of independent radio.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

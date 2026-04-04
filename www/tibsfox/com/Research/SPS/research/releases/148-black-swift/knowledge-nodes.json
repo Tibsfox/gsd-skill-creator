@@ -1,0 +1,103 @@
+{
+  "degree": 148,
+  "species": "Black Swift",
+  "scientific_name": "Cypseloides niger",
+  "slug": "148-black-swift",
+  "sound_type": "low chipping calls near cliff colony -- series of low, soft chip notes at 3000-5000 Hz heard near waterfall nesting sites; quieter and lower-pitched than Vaux's Swift; partially masked by waterfall; E=4",
+  "energy": 4,
+  "ecosystem": "High-elevation cliff faces behind or near waterfalls. Most unusual nesting habitat of any NA bird. Forages at high altitude (1000-3000m). Last NA bird to have nest discovered (1901). Disappears to high altitude during day. Largest NA swift.",
+  "season": "Summer breeder in PNW. Returns to nesting sites May-June. Departs August-September. Winters in western Brazil/Bolivia (confirmed 2010s via satellite tracking).",
+  "family": "Apodidae (2nd entry. Swift contrast pair with Vaux's Swift at 147.)",
+  "order": "Apodiformes",
+  "csv_substitute": false,
+  "original_species": "Black Swift",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.75,
+    "lon": -121.60,
+    "description": "Black Swifts nest at scattered waterfall sites in the Cascade Range and other western mountains. Known sites in North Cascades and Olympic Mountains."
+  },
+  "taxonomy_note": {
+    "description": "First Black Swift entry. SECOND APODIDAE. Swift contrast pair with Vaux's Swift (147). First genus: Cypseloides. Last NA bird to have nest discovered (1901). Waterfall nesting. Largest NA swift. Daily high-altitude disappearance. Migration to Brazil confirmed 2010s.",
+    "current_family": "Apodidae (2nd entry)",
+    "new_family": false,
+    "family_count_in_engine": "Apodidae: second entry. Vaux's (147) + Black (148).",
+    "name_etymology": "Cypseloides from Greek 'kypselos' (swift, hollow vessel) + '-oides' (resembling) -- swift-like. niger from Latin 'black' -- referring to the dark plumage.",
+    "genus_note": "Cypseloides -- first entry. The 'cloud swifts' -- high-altitude, waterfall-nesting.",
+    "order_note": "Apodiformes. Second entry.",
+    "family_position": "Second Apodidae. Swift contrast pair: Vaux's (communal chimney, E=4) vs. Black (solitary waterfall, E=4)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Chip: 3000-5000 Hz. Lower than Vaux's Swift (5000-8000).",
+    "peak_energy_band_hz": "Chip: 3500-4500 Hz.",
+    "song_frequency_hz": "Chipping: 3000-5000 Hz. Low for a swift. Soft. Partially masked by waterfall.",
+    "song_duration_s": "Individual chip: 0.03-0.06 seconds. Colony calling at dawn departure and dusk return only.",
+    "note_structure": "LOW CHIPPING: Series of soft chip notes. Lower-pitched and softer than Vaux's. Partially masked by waterfall white noise.",
+    "note_types": "Chip (primary, colony communication), trill (excitement near colony), screech (alarm, very rare).",
+    "phrase_structure": "No distinct phrases. Chipping during colony arrivals/departures. Silent during high-altitude foraging.",
+    "timbre": "Low, soft, somewhat hollow. Contrasts with the high, thin quality of Vaux's Swift. Heard within waterfall soundscape.",
+    "amplitude": "E=4. Individual: quiet (30-80m in still conditions). Against waterfall: audible 10-30m only. Environmental amplification by cliff face. Waterfall masking reduces effective range.",
+    "tempo": "3-6 chips per second. Slower than Vaux's Swift (5-10/sec).",
+    "context": "Colony communication during dawn departure and dusk return. Silent during high-altitude daytime foraging. Brief calling windows.",
+    "regional_variation": "Minimal. Low chipping consistent across range.",
+    "key_property": "LOW CHIPPING AT CLIFF COLONY -- 3000-5000 Hz, partially masked by waterfall, heard during brief dawn/dusk colony visits. E=4. SECOND APODIDAE. Waterfall nesting. Last NA nest discovered (1901). Daily disappearance to high altitude. Largest NA swift. Winters Brazil. Environmental acoustics."
+  },
+  "plumage": {
+    "overall": "Entirely dark blackish-brown. The darkest swift in North America. Slightly paler on forehead. No distinct markings. Large for a swift.",
+    "diagnostic_mark": "Large size (largest NA swift). Entirely dark. Long, broad wings. Forked tail. Near waterfall habitat diagnostic if seen at colony.",
+    "seasonal_variation": "Minimal.",
+    "flight_pattern": "Powerful, direct. Longer glides than Vaux's Swift. Less flickering, more deliberate. Capable of sustained high-altitude soaring."
+  },
+  "physical_description": {
+    "overall": "Length: 18-20 cm. Weight: 40-55 g. Wingspan: 38-44 cm. Largest swift in North America. Significantly larger than Vaux's Swift (11-12 cm, 17-20g). 2-3x the mass.",
+    "diagnostic_mark": "Large dark swift near waterfalls or at high altitude. No similar species in PNW. Size alone separates from Vaux's.",
+    "field_id": "Look for a large, entirely dark swift near mountain waterfalls at dawn or dusk. The species is rarely seen at close range. At known colony sites, watch for birds entering/exiting the waterfall spray zone. In flight: larger, more powerful, less flickering than Vaux's Swift."
+  },
+  "nodes": [
+    {
+      "id": "waterfall-nesting",
+      "type": "concept",
+      "title": "Waterfall Nesting -- Unique Habitat",
+      "description": "Cliff ledges behind or adjacent to waterfalls. Moist, inaccessible, concealed. Shallow cup of moss/fern/mud. Most unusual nesting habitat of any NA bird. Waterfall provides protection and moisture.",
+      "connections": ["last-nest-discovered", "daily-disappearance"]
+    },
+    {
+      "id": "last-nest-discovered",
+      "type": "pattern",
+      "title": "Last Nest Discovered -- 1901",
+      "description": "Last NA bird to have nest found. A.G. Prill, 1901, Colorado. Hidden by waterfall, elevation, invisible minimal nest. Searched for decades. New colonies still discovered today.",
+      "connections": ["waterfall-nesting", "swift-contrast-pair"]
+    },
+    {
+      "id": "daily-disappearance",
+      "type": "concept",
+      "title": "The Disappearing Act",
+      "description": "Departs colony dawn, disappears to high altitude (1000-3000m), returns dusk. Hours unobserved. Satellite tracking: hundreds of km daily. Winters Brazil/Bolivia (confirmed 2010s). A ghost in the sky.",
+      "connections": ["waterfall-nesting", "last-nest-discovered"]
+    },
+    {
+      "id": "swift-contrast-pair",
+      "type": "pattern",
+      "title": "Swift Contrast Pair (147-148)",
+      "description": "Vaux's (communal chimney, 35K birds, public spectacle, E=4) vs. Black (solitary waterfall, 5-20 nests, hidden mystery, E=4). Same family, same energy, opposite architecture. Public vs. concealed.",
+      "connections": ["last-nest-discovered", "waterfall-nesting"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-147",
+      "species": "Vaux's Swift",
+      "relationship": "SWIFT CONTRAST! Vaux's (communal chimney, public spectacle, 35K birds) vs. Black (solitary waterfall, hidden mystery, 5-20 nests). Same family, same E=4, opposite ecology."
+    },
+    {
+      "target": "SPS-145",
+      "species": "Common Poorwill",
+      "relationship": "HIDDEN SPECIALISTS! Both masters of concealment. Poorwill invisible on ground (camouflage + torpor). Black Swift hidden behind waterfall (concealment + altitude). Different strategies, same theme."
+    },
+    {
+      "target": "SPS-146",
+      "species": "Common Nighthawk",
+      "relationship": "AERIAL CONTRAST! Nighthawk (visible, urban, crepuscular, booming) vs. Black Swift (invisible, wilderness, altitude, silent). Seen vs. unseen aerial insectivores."
+    }
+  ]
+}

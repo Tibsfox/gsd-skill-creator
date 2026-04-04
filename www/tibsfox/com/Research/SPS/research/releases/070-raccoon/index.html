@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 70&deg; &mdash; Raccoon &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Procyonidae new-family card */
+    .procyonidae-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 40%, #0F3460 80%, #4A6741 100%);
+      border: 3px solid #1A1A2E;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8E8F0;
+    }
+    .procyonidae-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #81C784;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .procyonidae-card p {
+      color: #E8E8F0;
+    }
+    .procyonidae-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Churring acoustic card */
+    .churr-card {
+      background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .churr-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .churr-card p {
+      color: #EFEBE9;
+    }
+    .churr-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Riparian/urban habitat card */
+    .urban-card {
+      background: linear-gradient(135deg, #37474F 0%, #546E7A 60%, #78909C 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .urban-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .urban-card p {
+      color: #ECEFF1;
+    }
+    .urban-card strong {
+      color: #CFD8DC;
+    }
+
+    /* Dexterous hands card */
+    .hands-card {
+      background: linear-gradient(135deg, #4E342E 0%, #6D4C41 60%, #8D6E63 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .hands-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .hands-card p {
+      color: #EFEBE9;
+    }
+    .hands-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Horse Feathers parallel card */
+    .horsefeathers-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D1642;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .horsefeathers-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .horsefeathers-card p {
+      color: #E8EAF6;
+    }
+    .horsefeathers-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.procyonidae { background: #4A6741; }
+    .theory-icon.churr { background: #5D4037; }
+    .theory-icon.urban { background: #546E7A; }
+    .theory-icon.hands { background: #6D4C41; }
+    .theory-icon.horsefeathers { background: #283593; }
+    .theory-icon.carnivore { background: #B71C1C; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.nocturnal { background: #1A237E; }
+    .theory-icon.omnivore { background: #E65100; }
+    .theory-icon.skunk-link { background: #533483; }
+    .theory-icon.beaver-link { background: #4E342E; }
+    .theory-icon.mallard-link { background: #0D47A1; }
+    .theory-icon.robin-link { background: #1B5E20; }
+    .theory-icon.owl-link { background: #311B92; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">70&deg;</div>
+      <div class="release-title-block">
+        <h2>Raccoon</h2>
+        <div class="scientific">Procyon lotor</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      churring / chittering young &mdash; riparian/urban nocturnal omnivore, NEW FAMILY Procyonidae (30th family), BACK-TO-BACK NEW FAMILIES (Mephitidae 69 + Procyonidae 70), ninth carnivore, eleventh mammalian entry, ninth mammalian species, the engine&rsquo;s first urban-adapted species, dexterous hands, E=3, year-round resident, riparian/urban
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Procyonidae New-Family Card -->
+        <div class="procyonidae-card">
+          <h3>Procyonidae Arrives &mdash; 30th Family, Back-to-Back New Families</h3>
+          <p>Degree 70 brings <strong>another new family</strong>: Procyonidae. The raccoons. The 30th family in the engine. This is the <strong>second consecutive new family</strong> &mdash; Mephitidae (skunks) at degree 69, Procyonidae (raccoons) at degree 70. Back-to-back new families have not occurred since the early avian run. Both are Carnivora. Both are omnivores classified in a predator order. Both are nocturnal. Both are musteloid-adjacent in the superfamily Musteloidea. Two new families in two degrees &mdash; the engine&rsquo;s taxonomy is expanding rapidly in the mammalian era.</p>
+        </div>
+
+        <!-- Churring Acoustic Card -->
+        <div class="churr-card">
+          <h3>The 71st Acoustic Element: Churring / Chittering Young</h3>
+          <p>The Raccoon&rsquo;s acoustic contribution is <strong>social and familial</strong>: the churring purr of contentment and the chittering of young raccoons begging from their mother. Churring is a low, rolling, purr-like vocalization &mdash; the sound of raccoon family groups at rest, mothers reassuring kits. Chittering is the high-pitched, rapid vocalization of juvenile raccoons &mdash; insistent, repetitive, the sound of young animals demanding attention. Together they form the <strong>71st acoustic element</strong>: the sound of raccoon family life, heard at night from attics, park ponds, and riparian corridors across the PNW.</p>
+        </div>
+
+        <!-- Riparian/Urban Habitat Card -->
+        <div class="urban-card">
+          <h3>Riparian/Urban &mdash; The Engine&rsquo;s First Urban-Adapted Species</h3>
+          <p>The Raccoon is the engine&rsquo;s <strong>first truly urban-adapted species</strong>. Previous entries have tolerated human presence &mdash; the Striped Skunk (69) inhabits suburban margins, the American Beaver (61) builds in city parks. But the Raccoon does not merely tolerate cities: it <strong>thrives</strong> in them. Urban raccoon densities exceed rural populations by 10&ndash;20x in some studies. The raccoon has conquered the built environment. Its dual habitat designation &mdash; <strong>riparian/urban</strong> &mdash; captures both the ancestral streamside habitat and the modern urban reality.</p>
+        </div>
+
+        <!-- Dexterous Hands Card -->
+        <div class="hands-card">
+          <h3>Dexterous Hands &mdash; The Most Manually Dexterous Species in the Engine</h3>
+          <p>The Raccoon has <strong>nearly primate-like hand dexterity</strong>. Five long, flexible digits on each forepaw. No webbing. Extraordinary tactile sensitivity &mdash; the forepaws contain four to five times more mechanoreceptors than most mammals. Raccoons can open latches, turn doorknobs, unscrew jar lids, manipulate zippers, and solve multi-step mechanical puzzles. The hands are the raccoon&rsquo;s defining tool: they feel, probe, grip, and manipulate with a precision unmatched by any other species in the engine. <strong>The most manually dexterous species in 71 degrees.</strong></p>
+        </div>
+
+        <!-- Horse Feathers Parallel Card -->
+        <div class="horsefeathers-card">
+          <h3>The Horse Feathers Parallel</h3>
+          <p>Degree 70 pairs Raccoon with <strong>Horse Feathers</strong> in Part A &mdash; Indie Folk, E=3, Kill Rock Stars. Both are <strong>adaptable</strong>: Horse Feathers moved between cities and scenes, the raccoon thrives everywhere from old-growth forest to downtown dumpsters. Both are <strong>dexterous</strong> &mdash; Horse Feathers&rsquo; intricate multi-instrument arrangements mirror the raccoon&rsquo;s intricate hands. Both are <strong>nocturnal</strong> &mdash; folk music is evening music, played in dim rooms and late-night venues, and the raccoon is a creature of the night. E=3 meets E=3 &mdash; perfectly matched energy.</p>
+        </div>
+
+        <h2>The Sound: Churring / Chittering Young (71st Acoustic Element)</h2>
+        <p><strong>Churring:</strong> A low, rolling, purr-like vocalization produced by raccoons in close social contact. Mothers churr to their kits. Kits churr back. The sound is continuous, rhythmic, and calming &mdash; the raccoon equivalent of a cat&rsquo;s purr. Produced during grooming, nursing, and resting in family groups. Audible at close range (5&ndash;15 meters). The churr is a contact call &mdash; &ldquo;I am here, we are together, everything is fine.&rdquo;</p>
+        <p><strong>Chittering young:</strong> A high-pitched, rapid, repetitive vocalization produced by juvenile raccoons. Chittering is the sound of young raccoons begging for food, demanding attention, or expressing distress when separated from the mother. The chittering is insistent and carrying &mdash; audible from inside attics, tree cavities, and chimney flues where raccoon families den in urban settings. This is the sound that most people hear when they discover raccoons in their building: the chittering of young.</p>
+        <p><strong>Additional vocalizations:</strong> Raccoons have an extensive vocal repertoire &mdash; over 50 distinct vocalizations have been documented, including screams, growls, snarls, whimpers, and a distinctive trill. But the churring / chittering young is the species&rsquo; acoustic signature because it is the <strong>social sound of family life</strong> &mdash; the sound most commonly heard from raccoon populations, especially in spring and early summer when kits are vocal [1, 2, 3].</p>
+        <p><strong>Why E=3:</strong> Common, familiar, but nocturnal. Everyone has encountered a raccoon &mdash; trash cans overturned, attic noises, masked faces at park ponds after dark. But not everyone sees them regularly. The raccoon is ubiquitous in the PNW but strictly night-active in urban settings. E=3 reflects this: extremely well-known, moderately encountered visually, frequently encountered acoustically (chittering from dens, churring from trees at night).</p>
+
+        <h2>Taxonomy: <em>Procyon lotor</em></h2>
+        <p><strong>Etymology:</strong> <em>Procyon</em> from Greek <em>pro</em> (before) + <em>kyon</em> (dog) &mdash; &ldquo;before the dog&rdquo; or &ldquo;pre-dog,&rdquo; referencing an early taxonomic impression that raccoons were a primitive form related to dogs. <em>lotor</em> from Latin <em>lotor</em>, meaning &ldquo;washer&rdquo; &mdash; referring to the raccoon&rsquo;s well-known behavior of dipping food in water before eating. <em>Procyon lotor</em>: &ldquo;the washing pre-dog.&rdquo; The binomial captures two defining characteristics: the taxonomic mystery of where raccoons fit in the carnivore tree, and the washing behavior that is the species&rsquo; most recognizable habit [1, 2, 3].</p>
+        <p><strong>Classification:</strong> Order Carnivora, Family <strong>Procyonidae</strong> &mdash; the raccoon family. <strong>NEW FAMILY (30th)</strong>. Procyonidae contains seven genera and approximately 14 species, including raccoons, coatis, kinkajous, olingos, and ringtails. The family is restricted to the Americas. Procyonidae is a member of the suborder Caniformia and the superfamily Musteloidea, making it a relative of the mustelids (63&ndash;68) and mephitids (69). The Raccoon is the most widespread and familiar procyonid &mdash; the family&rsquo;s flagship species [1, 2, 4, 5].</p>
+        <p><strong>Back-to-back new families:</strong> Mephitidae at degree 69, Procyonidae at degree 70. Two consecutive new families. Both within Carnivora. Both within the superfamily Musteloidea. Both omnivores in a carnivore order. The engine added its 29th and 30th families in consecutive degrees &mdash; a taxonomic expansion rate not seen since the early avian progression. Three musteloid families now represented: Mustelidae (63&ndash;68), Mephitidae (69), Procyonidae (70).</p>
+
+        <h2>Physical Description: The Masked Omnivore</h2>
+        <p><strong>Size:</strong> 600&ndash;950 mm total length (including tail), 3.5&ndash;9.0 kg (7.7&ndash;20 lbs). Urban raccoons tend toward the upper end due to calorie-rich anthropogenic food. The largest non-rodent mammal in the engine (exceeding the Striped Skunk&rsquo;s 1.8&ndash;4.5 kg). Stocky and robust, with a hunched posture and a rolling gait [1, 2, 3].</p>
+        <p><strong>The mask:</strong> The defining visual feature &mdash; a broad black band across the eyes, bordered by white above and below. The facial mask is the raccoon&rsquo;s most recognizable characteristic, giving the species its cultural association with banditry and stealth. The mask may reduce glare and enhance night vision, similar to the dark patches under a football player&rsquo;s eyes [1, 2, 3].</p>
+        <p><strong>Tail:</strong> Bushy, ringed with alternating bands of light and dark fur (typically 5&ndash;7 rings). The ringed tail is diagnostic in the field and a Procyonidae family characteristic &mdash; coatis and ringtails share the banded tail pattern.</p>
+        <p><strong>Fur:</strong> Dense, grizzled gray-brown. Thick underfur provides insulation. The overall coloration is cryptic in forest and riparian settings but does not function as aposematic warning (unlike the Striped Skunk&rsquo;s black-and-white at degree 69). The raccoon relies on nocturnal habits and dexterity rather than warning coloration.</p>
+        <p><strong>The hands:</strong> Five long, flexible digits on each forepaw. Claws are non-retractile but relatively short. The forepaws function as hands &mdash; raccoons pick up objects, probe crevices, feel along stream bottoms, and manipulate complex mechanisms. The tactile sensitivity of the forepaws is extraordinary: the cortical representation of the forepaw in the raccoon&rsquo;s brain is disproportionately large, similar to the human hand&rsquo;s cortical representation [1, 2, 3, 6].</p>
+        <p><strong>Plantigrade stance:</strong> Like the Striped Skunk (69), the Raccoon is plantigrade &mdash; it walks on the soles of its feet. The hindfoot tracks resemble miniature human footprints. This stance, combined with the dexterous forepaws, gives the raccoon an almost anthropomorphic quality in its movement and manipulation behavior.</p>
+
+        <h2>The Washing Behavior: <em>Procyon lotor</em></h2>
+        <p><strong>The behavior:</strong> Raccoons routinely dip food in water before eating &mdash; the behavior that earned the species epithet <em>lotor</em> (&ldquo;washer&rdquo;). The behavior is not actually cleaning in the hygienic sense. Wetting the food activates mechanoreceptors in the forepaws, enhancing tactile feedback. The raccoon is not washing its food &mdash; it is <strong>feeling</strong> its food more precisely. Water amplifies the already-extraordinary sensitivity of the forepaws [1, 2, 3, 6].</p>
+        <p><strong>Captive persistence:</strong> Raccoons in captivity will dip food in water even when the food is clean and the water is dirty. This confirms that the behavior is about tactile enhancement, not hygiene. The German word for raccoon is <em>Waschb&auml;r</em> (&ldquo;wash bear&rdquo;), and the species is called &ldquo;washing bear&rdquo; in many European languages &mdash; the behavior is so defining that it enters the common name across cultures [1, 2].</p>
+
+        <h2>Riparian/Urban Habitat: The Engine&rsquo;s First Urban Species</h2>
+        <p><strong>Ancestral habitat:</strong> Riparian &mdash; streamside corridors, lake margins, wetland edges, floodplain forests. The Raccoon evolved as a riparian specialist, using water margins for foraging (crayfish, frogs, fish, aquatic invertebrates) and denning in streamside tree cavities. Riparian corridors remain the primary habitat in rural and wildland settings [1, 2, 3].</p>
+        <p><strong>Urban adaptation:</strong> The Raccoon is the engine&rsquo;s first species with URBAN in its habitat description. Urban raccoon populations have been studied since the 1940s and represent one of the most successful wildlife urbanization events in North America. Raccoon densities in cities routinely exceed rural densities: urban populations may reach 100+ raccoons per km&sup2; compared to 5&ndash;10 per km&sup2; in wildland settings [1, 2, 3, 7].</p>
+        <p><strong>Why cities work for raccoons:</strong> (1) <strong>Dexterous hands</strong> open garbage cans, pet doors, compost bins, and building entry points. (2) <strong>Omnivorous diet</strong> exploits the calorie-rich anthropogenic food web. (3) <strong>Nocturnal habits</strong> minimize human contact during peak city activity. (4) <strong>Intelligence</strong> supports rapid learning of urban features (traffic patterns, garbage collection schedules, building access points). (5) <strong>Lack of predators</strong> in urban cores removes the primary mortality source. The raccoon is pre-adapted for urbanism: dexterous, smart, nocturnal, and omnivorous [1, 2, 3, 7].</p>
+        <p><strong>Dual designation:</strong> Riparian/urban. The slash captures the species&rsquo; range &mdash; from pristine streamside forest to downtown alleyway. No previous species in the engine has warranted a dual habitat designation that includes &ldquo;urban.&rdquo; The Raccoon is the bridge between wild PNW and built PNW.</p>
+
+        <h2>Nocturnal Ecology: The Night Specialist</h2>
+        <p><strong>Strictly nocturnal in urban settings:</strong> The Raccoon is the engine&rsquo;s most consistently nocturnal species. While the American Beaver (62) and Striped Skunk (69) are nocturnal-primary, they are occasionally active at dusk and dawn. Urban raccoons are <strong>strictly night-active</strong> &mdash; emerging after full darkness and returning to dens before dawn. This strict nocturnality is an urban adaptation: raccoons in rural areas show more crepuscular flexibility [1, 2, 3, 7].</p>
+        <p><strong>Night vision:</strong> Large eyes with a well-developed tapetum lucidum (reflective layer behind the retina) provide excellent night vision. The eye-shine of raccoons caught in flashlight beams is a familiar suburban experience &mdash; bright, greenish-yellow reflections from trashcan lids, tree branches, and rooftops.</p>
+        <p><strong>The nocturnal portfolio grows:</strong> The Raccoon joins the engine&rsquo;s nocturnal cohort: Northern Spotted Owl (4), American Beaver (62), Mink (64), Fisher (66), Short-tailed Weasel (67), Long-tailed Weasel (68), Striped Skunk (69), and now Raccoon (70). Eight nocturnal-primary species in 71 degrees. But the Raccoon is the most strictly nocturnal of the mammals &mdash; the most committed to darkness.</p>
+
+        <h2>Diet: The Second Consecutive Omnivore in Carnivora</h2>
+        <p><strong>The pattern continues:</strong> Like the Striped Skunk (69), the Raccoon is classified in Order Carnivora but is functionally an omnivore. The ninth carnivore entry. The second consecutive omnivore in the Carnivora sequence. The third consecutive non-hypercarnivore Carnivora member (Marten 65 through Raccoon 70 shows the order&rsquo;s dietary diversity: hypercarnivore, hypercarnivore, hypercarnivore, hypercarnivore, omnivore, omnivore).</p>
+        <p><strong>Diet breadth:</strong> Crayfish, frogs, fish, insects, bird eggs, nestlings, fruit, berries, corn, nuts, garbage, pet food, compost, birdseed, and virtually anything edible. The Raccoon may be the most omnivorous species in the engine &mdash; its diet breadth exceeds even the Striped Skunk&rsquo;s. In urban settings, anthropogenic food (garbage, pet food, garden produce) can constitute over 50% of the diet [1, 2, 3].</p>
+        <p><strong>Aquatic foraging:</strong> In riparian habitat, the Raccoon forages along stream margins and pond edges, feeling along the bottom with its sensitive forepaws for crayfish, mussels, and aquatic invertebrates. This aquatic foraging behavior connects the Raccoon to the riparian species in the engine &mdash; the Otter (63), the Mink (64), and the Beaver (61&ndash;62) &mdash; while remaining a generalist rather than an aquatic specialist.</p>
+
+        <h2>Conservation: Common and Expanding</h2>
+        <p><strong>Status:</strong> Least Concern (IUCN). Common and increasing across North America. Urban populations are growing. The Raccoon is one of the most successful mid-sized mammals on the continent &mdash; its range and population density have expanded with urbanization rather than contracted [1, 2, 3].</p>
+        <p><strong>Human conflict:</strong> The raccoon&rsquo;s success creates friction. Attic denning causes structural damage. Garbage raiding creates mess. Raccoons are vectors for rabies (the primary wildlife rabies reservoir in the eastern United States) and raccoon roundworm (<em>Baylisascaris procyonis</em>). The species is simultaneously admired (dexterous, clever, charismatic) and resented (destructive, disease-carrying, bold). E=3 reflects this complex relationship: ubiquitous but not universally welcome.</p>
+
+        <h2>Intelligence and Problem-Solving</h2>
+        <p><strong>Cognitive ability:</strong> Raccoons demonstrate problem-solving abilities that rival some primates. In laboratory studies, raccoons have learned to open complex latches, remember solutions for years, and distinguish between quantities. Their intelligence is practical rather than abstract &mdash; focused on manipulating physical objects, remembering spatial locations, and exploiting food sources [1, 2, 3, 6].</p>
+        <p><strong>Urban intelligence:</strong> Urban raccoons learn garbage collection schedules, recognize which houses leave pet food outside, remember building access points across seasons, and teach their young these learned behaviors. This cultural transmission of urban knowledge is a form of intelligence that few species demonstrate at the raccoon&rsquo;s scale [1, 2, 7].</p>
+
+        <h2>The Mammalian Era Continues: Degree 70</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Habitat</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>61</td><td>American Beaver</td><td>Castoridae</td><td>Wetland/river</td><td>Tail slap alarm</td></tr>
+            <tr><td>62</td><td>American Beaver</td><td>Castoridae</td><td>Wetland/river</td><td>Nocturnal chewing</td></tr>
+            <tr><td>63</td><td>River Otter</td><td>Mustelidae</td><td>River/estuary</td><td>Social chuff (6 types)</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Mustelidae</td><td>Creek bank</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Old-growth canopy</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Dense forest</td><td>Loud scream (rare)</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Meadow-forest edge</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Open woodland</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Woodland edge</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td><strong>70</strong></td><td><strong>Raccoon</strong></td><td><strong>Procyonidae</strong></td><td><strong>Riparian/urban</strong></td><td><strong>Churring / chittering young</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Ten consecutive mammalian degrees (61&ndash;70). Eleven mammalian entries. Nine mammalian species. Three orders (Rodentia, Carnivora). Five families (Castoridae, Mustelidae, Mephitidae, Procyonidae). The mammalian era is now ten degrees deep. Three musteloid families represented in eight consecutive degrees (63&ndash;70).</p>
+
+        <h2>Family Tracker After Degree 70</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td>63, 64, 65, 66, 67, 68</td><td><strong>6 (sextet complete)</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Mephitidae</td><td>69</td><td>1</td></tr>
+            <tr><td><strong>Procyonidae</strong></td><td><strong>70</strong></td><td><strong>1 (NEW &mdash; 30th family)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Thirty families across 71 entries. <strong>Procyonidae is the 30th family</strong> &mdash; back-to-back with Mephitidae (29th) at degree 69. 49 of 71 entries (69.0%) are Passeriformes. 11 of 71 entries (15.5%) are Mammalia. The mammalian era extends to ten consecutive degrees (61&ndash;70).</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon procyonidae">P</div>
+            <div class="theory-content">
+              <h4>Procyonidae Arrives &mdash; 30th Family, Back-to-Back New Families <span class="theory-level landmark">landmark</span></h4>
+              <p>The 30th family. Second consecutive new family (Mephitidae 69, Procyonidae 70). Both Carnivora. Both omnivores. Both nocturnal. Both musteloid-adjacent. Two new families in two degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon churr">C</div>
+            <div class="theory-content">
+              <h4>Churring / Chittering Young &mdash; 71st Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Social family-group vocalizations: churring (purr-like contentment) and chittering (juvenile begging). The sound of raccoon family life. Heard at night from attics, tree cavities, and riparian corridors.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Riparian/Urban &mdash; First Urban-Adapted Species <span class="theory-level landmark">landmark</span></h4>
+              <p>The engine&rsquo;s first species with URBAN in its habitat description. Urban raccoon densities exceed rural by 10&ndash;20x. The raccoon thrives in cities &mdash; not just tolerates them. Riparian/urban captures both ancestral and modern habitat.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hands">H</div>
+            <div class="theory-content">
+              <h4>Dexterous Hands &mdash; Most Manually Dexterous Species <span class="theory-level landmark">landmark</span></h4>
+              <p>Nearly primate-like hand dexterity. Five flexible digits, extraordinary tactile sensitivity, 4&ndash;5x more mechanoreceptors than most mammals. Opens latches, turns doorknobs, solves multi-step puzzles. The most manually dexterous species in 71 degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon horsefeathers">F</div>
+            <div class="theory-content">
+              <h4>Horse Feathers Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both adaptable (Horse Feathers moved between cities; raccoons thrive everywhere). Both dexterous (intricate arrangements; intricate hands). Both nocturnal (folk music is evening music; raccoons are night animals). E=3 meets E=3.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon carnivore">9</div>
+            <div class="theory-content">
+              <h4>Ninth Carnivore &mdash; Third Musteloid Family <span class="theory-level foundational">foundational</span></h4>
+              <p>Carnivora grows to nine entries. Three families: Mustelidae (6), Mephitidae (1), Procyonidae (1). All musteloid. No non-musteloid carnivore yet. Second consecutive omnivore in the order.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">10</div>
+            <div class="theory-content">
+              <h4>Tenth Consecutive Original CSV &mdash; A DECADE <span class="theory-level landmark">landmark</span></h4>
+              <p>Degrees 61&ndash;70: TEN consecutive original CSV species. A full decade of originals. The longest original-CSV streak. Every mammalian entry is an original CSV species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">11</div>
+            <div class="theory-content">
+              <h4>Eleventh Mammalian Entry, Ninth Species <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Nine mammalian species across eleven entries (61&ndash;70). Mammalian representation rises to 15.5% (11 of 71). Two orders, five families, nine species. The mammalian era is now ten degrees deep.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon nocturnal">N</div>
+            <div class="theory-content">
+              <h4>Nocturnal &mdash; Strictly Night-Active in Urban Settings <span class="theory-level foundational">foundational</span></h4>
+              <p>The engine&rsquo;s most consistently nocturnal mammal. Strictly night-active in cities. Second nocturnal-primary species in the mammalian era after beaver chewing (62). More nocturnal than the skunk &mdash; committed to darkness.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon omnivore">O</div>
+            <div class="theory-content">
+              <h4>Second Consecutive Omnivore in Carnivora <span class="theory-level foundational">foundational</span></h4>
+              <p>Like the Striped Skunk (69), classified in Carnivora but functionally omnivorous. Third consecutive non-hypercarnivore. The order name describes ancestry, not diet. Two omnivores in a row.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon skunk-link">S</div>
+            <div class="theory-content">
+              <h4>Striped Skunk Connection (SPS-069) <span class="theory-level foundational">foundational</span></h4>
+              <p>Consecutive new families: Mephitidae (69) then Procyonidae (70). Both Carnivora omnivores. Both nocturnal. Both musteloid. Back-to-back family introductions.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon beaver-link">B</div>
+            <div class="theory-content">
+              <h4>American Beaver Connection (SPS-061) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both urban-adapted. Both nocturnal. Both dexterous &mdash; the beaver with incisors, the raccoon with hands. Both have reshaped urban waterways. Both resident, both common.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mallard-link">D</div>
+            <div class="theory-content">
+              <h4>Mallard Connection (SPS-059) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both urban generalists. Park pond neighbors &mdash; the Mallard on the water, the raccoon on the bank. Both thrive in cities. Both ubiquitous in urban PNW parks.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon robin-link">A</div>
+            <div class="theory-content">
+              <h4>American Robin Connection (SPS-025) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both ubiquitous, both familiar. Day vs. night equivalents &mdash; the robin is the most recognized diurnal species, the raccoon is the most recognized nocturnal species. Complementary familiarity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl-link">O</div>
+            <div class="theory-content">
+              <h4>Northern Spotted Owl Connection (SPS-004) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both nocturnal. Forest specialist vs. urban generalist. The owl represents nocturnal wilderness; the raccoon represents nocturnal urbanism. Opposite ends of the nocturnal spectrum.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-069: Striped Skunk</strong>
+            <p>CONSECUTIVE NEW FAMILIES. Mephitidae (69) then Procyonidae (70). Both Carnivora omnivores. Both nocturnal. Both musteloid. Back-to-back new family introductions &mdash; two degrees, two new families.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-061: American Beaver</strong>
+            <p>BOTH URBAN-ADAPTED AND NOCTURNAL. Both dexterous &mdash; beaver with incisors, raccoon with hands. Both have colonized urban waterways. Both common, both resident. Day-engineering vs. night-foraging.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>BOTH URBAN GENERALISTS. Park pond neighbors. The Mallard on the water by day, the raccoon on the bank by night. Both thrive in cities. Both ubiquitous in urban PNW parks and waterways.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>BOTH UBIQUITOUS, BOTH FAMILIAR. Day vs. night equivalents. The robin is the most recognized diurnal species; the raccoon is the most recognized nocturnal species. Complementary familiarity across the 24-hour cycle.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>BOTH NOCTURNAL. Forest specialist vs. urban generalist. The owl hunts old-growth darkness; the raccoon raids suburban darkness. Opposite ends of the nocturnal spectrum &mdash; wilderness vs. city.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Eleventh mammalian entry. Ninth mammalian species. Ninth Carnivora, first Procyonidae. Mammalian representation rises to 15.5% (11 of 71). Two orders, five families, nine species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Riparian/urban habitat. The first urban-adapted species. Omnivorous diet spanning aquatic invertebrates to garbage. Dexterous manipulation. Nocturnal ecology. The bridge between wild PNW and built PNW.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; Raccoon (<em>Procyon lotor</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;Raccoon.&rdquo;</li>
+          <li>Lotze, J.-H. and Anderson, S. (1979). &ldquo;<em>Procyon lotor</em>.&rdquo; <em>Mammalian Species</em> 119: 1&ndash;8.</li>
+          <li>Flynn, J.J. et al. (2005). &ldquo;Molecular phylogeny of the Carnivora (Mammalia): assessing the impact of increased sampling on resolving enigmatic relationships.&rdquo; <em>Systematic Biology</em> 54(2): 317&ndash;337.</li>
+          <li>Eizirik, E. et al. (2010). &ldquo;Pattern and timing of diversification of the mammalian order Carnivora inferred from multiple nuclear gene sequences.&rdquo; <em>Molecular Phylogenetics and Evolution</em> 56(1): 49&ndash;63.</li>
+          <li>Iwaniuk, A.N. et al. (2000). &ldquo;Is brain size related to forelimb dexterity in raccoons?&rdquo; <em>Canadian Journal of Zoology</em> 78(6): 1010&ndash;1015.</li>
+          <li>Prange, S. et al. (2004). &ldquo;Demography of the raccoon (<em>Procyon lotor</em>) in an urban/suburban environment.&rdquo; <em>Journal of Wildlife Management</em> 68(1): 119&ndash;128.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Raccoons.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">70&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">Churring / Chittering Young</div>
+          <div class="stat-detail">#71 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Common, familiar, nocturnal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">11th mammalian entry, 9th species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Procyonidae</div>
+          <div class="stat-detail">NEW &mdash; 30th family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">9th entry (3rd family)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Churr + chitter</div>
+          <div class="stat-detail">Social family vocalizations</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Riparian/Urban</div>
+          <div class="stat-detail">First urban-adapted species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Resident throughout Washington</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">3.5&ndash;9.0 kg</div>
+          <div class="stat-detail">Largest non-rodent mammal in engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">10th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">New Family Pair</div>
+          <div class="stat-value">SPS-069</div>
+          <div class="stat-detail">Striped Skunk &mdash; back-to-back new families</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Urban Dexterity</div>
+          <div class="stat-value">SPS-061</div>
+          <div class="stat-detail">American Beaver &mdash; both urban, both dexterous</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Park Pond Neighbors</div>
+          <div class="stat-value">SPS-059</div>
+          <div class="stat-detail">Mallard &mdash; both urban generalists</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 70 of 360</p>
+  </footer>
+</body>
+</html>

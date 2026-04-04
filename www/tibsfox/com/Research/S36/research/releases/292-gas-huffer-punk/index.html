@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 292&deg; &mdash; Gas Huffer (return) &mdash; E=8 &mdash; Punk/Garage &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.return { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .return-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .return-banner strong { color: #E65100; }
+    .streak-bar { display: flex; gap: 0.5rem; margin: 1.5rem 0; flex-wrap: wrap; }
+    .streak-entry { flex: 1; min-width: 120px; background: #E8EAF6; border: 1px solid #9FA8DA; border-radius: 4px; padding: 0.6rem 0.8rem; text-align: center; }
+    .streak-entry .deg { font-size: 1.1rem; font-weight: 700; color: #1A237E; font-family: system-ui, sans-serif; }
+    .streak-entry .name { font-size: 0.75rem; color: #424242; font-family: system-ui, sans-serif; margin-top: 0.2rem; }
+    .streak-entry.active { background: #1A237E; border-color: #3949AB; }
+    .streak-entry.active .deg { color: #C5CAE9; }
+    .streak-entry.active .name { color: #9FA8DA; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>292 &mdash; Gas Huffer (return) (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">292&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Gas Huffer</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Punk / Garage</span>
+          <span class="label-badge">Amphetamine Reptile</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="return-banner">
+          <strong>RETURN APPEARANCE &mdash; FREMONT &mdash; AMPHETAMINE REPTILE ENTERS ENGINE.</strong> Gas Huffer returns at degree 292. Tom Price. Fremont. Amphetamine Reptile Records' first engine appearance. E=8: third consecutive degree. 1990-2003. The thirteen-year punk-garage run documented.
+        </div>
+
+        <h2>E=8 Streak &mdash; Three Consecutive Degrees</h2>
+        <div class="streak-bar">
+          <div class="streak-entry">
+            <div class="deg">290&deg;</div>
+            <div class="name">These Arms Are Snakes<br>Post-Hardcore</div>
+          </div>
+          <div class="streak-entry">
+            <div class="deg">291&deg;</div>
+            <div class="name">Alcohol Funnycar<br>Punk/Grunge</div>
+          </div>
+          <div class="streak-entry active">
+            <div class="deg">292&deg;</div>
+            <div class="name">Gas Huffer<br>Punk/Garage</div>
+          </div>
+        </div>
+
+        <p>Three consecutive degrees at E=8, three distinct characters: post-hardcore (TAAS, angular, Capitol Hill), punk/grunge (Alcohol Funnycar, fast, Seattle), punk/garage (Gas Huffer, loose, Fremont). The E=8 tier of Seattle's heavy music scene is documented in three consecutive, differentiated entries. Equal intensity; different traditions.</p>
+
+        <hr class="section-divider">
+
+        <h2>Fremont &mdash; The Center of the Universe</h2>
+        <p>Fremont enters the engine at degree 292 as Gas Huffer's neighborhood. Fremont's self-description as the "Center of the Universe" is the right note: this is a neighborhood that takes itself seriously enough to be genuinely artistic but not seriously enough to be pretentious about it. The Fremont Troll under the Aurora Bridge. The Lenin statue. The Cold War-era rocket. Public art that combines genuine ambition with deliberate absurdism. Gas Huffer is a Fremont band: capable but not showy, committed but humorous, rooted in community rather than aspiring to transcendence.</p>
+
+        <blockquote>"The Fremont Troll watches over Aurora Bridge. Gas Huffer played in the bars below. Both are artifacts of the same neighborhood sensibility."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Amphetamine Reptile Records</h2>
+        <p>Amphetamine Reptile Records enters the engine for the first time through Gas Huffer's return at degree 292. Founded in Minneapolis in 1986 by Tom Hazelmyer (of Halo of Flies), AmRep became one of the most important noise-rock and punk labels in the United States: Melvins, Helmet, Boss Hog, Unsane, and others. The label's aesthetic is consistent &mdash; raw, physical, often humorous, resolutely anti-pretentious. Gas Huffer on AmRep is the Seattle chapter of this national noise-punk story.</p>
+        <p>The Melvins' presence on AmRep provides the Pacific Northwest connection: Aberdeen, Washington's most famous band operating on the same label as Fremont's Gas Huffer. The Minneapolis-Seattle axis through Amphetamine Reptile is one of the less-documented cross-pollinations of 1990s American independent music.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Make It Legal (1992)</h4>
+            <span class="level advanced">Amphetamine Reptile</span>
+            <p>The debut. Fast, loose, humorous, committed. Tom Price's guitar immediately establishes the Gas Huffer identity. AmRep aesthetic in action.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Integrity Technology and Service (1993)</h4>
+            <span class="level advanced">Amphetamine Reptile</span>
+            <p>Second album. Corporate language irony in the title is a Gas Huffer signature. More confident songwriting on the consistent template.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Janitors of Tomorrow (1994)</h4>
+            <span class="level advanced">Amphetamine Reptile</span>
+            <p>The most critically noted AmRep entry. Gas Huffer at peak consistency mid-decade.</p>
+          </div>
+          <div class="theory-card">
+            <h4>One Inch Masters (1999)</h4>
+            <span class="level intermediate">Empty Records</span>
+            <p>Label shift to Empty Records. Seattle punk infrastructure connection. The band continues past the AmRep relationship and the grunge commercial collapse.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Porch Mule (2003)</h4>
+            <span class="level return">Estrus Records</span>
+            <p>Final album. Estrus Records -- deep PNW garage roots. Gas Huffer's last record closes the thirteen-year run.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">291</span> Alcohol Funnycar (return) &mdash; E=8 streak 2nd degree. Punk/Grunge. The punk cluster: consecutive E=8 entries from different punk traditions.</li>
+          <li><span class="ref-degree">293</span> Next degree &mdash; E=8 streak continues or resets. The post-punk-cluster transition.</li>
+          <li><span class="ref-degree">SPS 292</span> Common Tern colony &mdash; E=7, Laridae. Sandy spit. Sharp keerr colony screaming. E=8+E=7=E=15. Laridae arc closes.</li>
+          <li><span class="ref-degree">earlier</span> Gas Huffer first appearance &mdash; establishes the band. Return at 292 completes the 1990-2003 arc.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">292 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Punk / Garage</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1990&ndash;2003</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Fremont</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Amphetamine Reptile</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Tom Price</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals / Guitar</span><span class="stat-value">Joe Newton</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Matt Wright</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">81.1%</span></div>
+          <div class="stat-row"><span class="stat-label">E-streak</span><span class="stat-value">E=8 (3rd)</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">Return</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Associated</h4>
+          <div class="stat-row"><span class="stat-label">Label peers</span><span class="stat-value">Melvins (AmRep)</span></div>
+          <div class="stat-row"><span class="stat-label">Later label</span><span class="stat-value">Estrus Records</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Common Tern colony</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Milestones</h4>
+          <div class="stat-row"><span class="stat-label">Label debut</span><span class="stat-value">AmRep in engine</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Fremont debut</span></div>
+          <div class="stat-row"><span class="stat-label">Run</span><span class="stat-value">13 years</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

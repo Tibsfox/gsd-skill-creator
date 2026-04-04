@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 113&deg; &mdash; Minus the Bear &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+      color: #BBDEFB;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(21, 101, 192, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #1565C0; color: #BBDEFB; border: 1px solid #1976D2;
+    }
+    .genre-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #00695C; color: #B2DFDB; border: 1px solid #00897B; margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #E65100; color: #FFF3E0; border: 1px solid #EF6C00; margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #00695C; color: #B2DFDB; border: 1px solid #00897B; margin-left: 0.3rem;
+    }
+    .era-badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif; background: #37474F; color: #B0BEC5; border: 1px solid #455A64; margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white; border: 1px solid #9FA8DA; border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #0D47A1, #1565C0, #1976D2);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .tapping-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 30%, #1E88E5 60%, #2196F3 100%);
+      border: 2px solid #1565C0; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E3F2FD;
+    }
+    .tapping-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #BBDEFB; font-family: system-ui, sans-serif; }
+    .tapping-card p { color: #E3F2FD; margin: 0.5rem 0; }
+    .tapping-card strong { color: #90CAF9; }
+
+    .mathrock-card {
+      background: linear-gradient(135deg, #00695C 0%, #00897B 30%, #009688 60%, #26A69A 100%);
+      border: 2px solid #00695C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E0F2F1;
+    }
+    .mathrock-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #B2DFDB; font-family: system-ui, sans-serif; }
+    .mathrock-card p { color: #E0F2F1; margin: 0.5rem 0; }
+    .mathrock-card strong { color: #80CBC4; }
+
+    .suicide-squeeze-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #FF9800 100%);
+      border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFF3E0;
+    }
+    .suicide-squeeze-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #FFECB3; font-family: system-ui, sans-serif; }
+    .suicide-squeeze-card p { color: #FFF3E0; margin: 0.5rem 0; }
+    .suicide-squeeze-card strong { color: #FFE0B2; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>113 &mdash; Minus the Bear</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Math Rock/Electronic &mdash; E=5 &mdash; The Tapping Signal &mdash; Suicide Squeeze</h3>
+      <p>
+        <strong>MATH ROCK ENTERS the engine</strong> &mdash; Genre Stage 93.
+        Minus the Bear: technical musicianship disguised as party music.
+        <strong>Dave Knudson&rsquo;s two-hand tapping</strong> as primary compositional tool.
+        Complex time signatures, electronic textures, pop hooks.
+        Capitol Hill, 2001&ndash;2018. <strong>Suicide Squeeze Records</strong> (new label).
+        Fourth consecutive Capitol Hill act (110&ndash;113).
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">113&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Minus the Bear</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Math Rock/Electronic</span>
+          <span class="label-badge">Suicide Squeeze</span>
+          <span class="neighborhood-badge">Capitol Hill</span>
+          <span class="era-badge">2001-2018</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="tapping-card">
+          <h4>The Tapping Signal &mdash; Two-Hand Technique as Compositional Tool</h4>
+          <p>
+            <strong>Dave Knudson&rsquo;s two-hand tapping</strong> is the defining sonic signature:
+            both hands on the fretboard simultaneously, tapping notes to build entire song structures
+            &mdash; riffs, melodies, rhythmic patterns. Combined with <strong>digital delay and loop
+            pedals</strong>, a single guitar sounds like multiple instruments. Where Van Halen used
+            tapping for flashy solos, Knudson used it as a <strong>primary compositional method</strong>.
+            The cascading, almost piano-like quality is unmistakable. Previously of <strong>Botch</strong>
+            (Tacoma mathcore) &mdash; same hands, same fretboard, radically different music.
+          </p>
+        </div>
+
+        <div class="mathrock-card">
+          <h4>Math Rock Enters the Engine &mdash; Genre Stage 93</h4>
+          <p>
+            <strong>Math rock</strong> arrives at degree 113 &mdash; the first appearance in the engine.
+            Complex time signatures (7/8, 11/8, alternating meters), angular riff structures,
+            polyrhythmic drumming, technical virtuosity. But Minus the Bear made math rock
+            <strong>fun</strong>. You can write in 7/8 and still make people dance. You can use
+            two-hand tapping and still write hooks. The math doesn&rsquo;t have to be forbidding.
+            <strong>Technical musicianship disguised as party music.</strong>
+          </p>
+        </div>
+
+        <div class="suicide-squeeze-card">
+          <h4>Suicide Squeeze Records &mdash; New Label in the Engine</h4>
+          <p>
+            Founded 1996 in Seattle by David Dickenson. Initially a limited-edition 7&rdquo; singles
+            label, evolved into a full-service indie. Roster: Minus the Bear, <strong>Modest Mouse</strong>
+            (early singles), <strong>Elliott Smith</strong>, <strong>Botch</strong>,
+            <strong>Pretty Girls Make Graves</strong>, <strong>The Thermals</strong>.
+            Joins Sub Pop, Kill Rock Stars, K Records, Up Records, Barsuk, Sargent House
+            in the engine&rsquo;s label map. Eclectic &mdash; no genre specialization, only quality.
+          </p>
+        </div>
+
+        <section>
+          <h2>Key Albums</h2>
+          <p>
+            <strong>Highly Refined Pirates</strong> (2002, Suicide Squeeze) &mdash; the debut.
+            Establishes the template: Knudson&rsquo;s tapping, Snider&rsquo;s smooth vocals,
+            complex structures beneath accessible surfaces. Famously absurd song titles.
+          </p>
+          <p>
+            <strong>Menos el Oso</strong> (2005, Suicide Squeeze) &mdash; the masterpiece.
+            All elements crystallize. &ldquo;Pachuca Sunrise&rdquo; and &ldquo;The Game Needed Me&rdquo;
+            demonstrate the ability to write genuinely catchy songs on genuinely complex structures.
+            The album that brought Minus the Bear from math rock niche to indie mainstream.
+          </p>
+          <p>
+            <strong>Planet of Ice</strong> (2007, Suicide Squeeze) &mdash; the ambitious expansion.
+            Longer songs, more atmospheric, more progressive. &ldquo;Knights&rdquo; is a ten-minute epic
+            tracing the full range of the band&rsquo;s capabilities.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Band</h2>
+          <p>
+            <strong>Jake Snider</strong> (vocals, guitar) &mdash; smooth, melodic vocal counterpoint
+            to angular instrumentation. Previously of Sharks Keep Moving.<br>
+            <strong>Dave Knudson</strong> (guitar) &mdash; tapping pioneer. Previously of Botch.<br>
+            <strong>Erin Tate</strong> (drums) &mdash; polyrhythmic precision, the bridge between
+            math rock complexity and electronic textures.<br>
+            <strong>Cory Murchy</strong> (bass) &mdash; melodic, active bass lines occupying their
+            own rhythmic space.<br>
+            <strong>Alex Rose</strong> (keyboards, synths) &mdash; the electronic element that
+            transformed math rock into math rock/electronic.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">S36-112</span> 764-HERO (Capitol Hill streak) &mdash; Four consecutive Capitol Hill acts (110-113). From lo-fi indie/electronic (E=4) to math rock/electronic (E=5). Energy rises one step. Both incorporate electronic elements on independent labels.</li>
+            <li><span class="ref-degree">S36-111</span> Helms Alee (technical musicianship) &mdash; Both technically accomplished. Crushing harmonics (E=6) vs. tapping complexity (E=5). Different energy, shared commitment to pushing instruments to unusual places.</li>
+            <li><span class="ref-degree">S36-109</span> No Anchor (noise to math rock) &mdash; E=6 noise vs. E=5 math rock/electronic. Both complex and unconventional. The spectrum from chaos to precision.</li>
+            <li><span class="ref-degree">S36-048</span> Death Cab for Cutie (Capitol Hill infrastructure) &mdash; Both Capitol Hill on independent labels. Barsuk vs. Suicide Squeeze. Same clubs, same scene, different genres.</li>
+            <li><span class="ref-degree">S36-110</span> Kinski (Botch connection) &mdash; Knudson came from Botch; Kinski and Botch were PNW heavy/experimental contemporaries. Aggression to warmth parallels E=6 to E=5 transition.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Two-Hand Tapping as Composition</h4>
+              <div class="level advanced">Advanced</div>
+              <p>Knudson&rsquo;s two-hand tapping: both hands on fretboard simultaneously, building entire song structures. Combined with delay/loops for cascading layers. Structural, not ornamental. From Botch aggression to Minus the Bear warmth.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Math Rock Enters &mdash; Genre Stage 93</h4>
+              <div class="level advanced">Advanced</div>
+              <p>First math rock in 113 degrees. Complex time signatures, angular riffs, polyrhythmic drums, technical virtuosity. Minus the Bear made it accessible &mdash; math rock you can dance to. The genre&rsquo;s late entry reflects its niche status.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Suicide Squeeze Records</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>New label. Founded 1996 Seattle. Eclectic roster: Minus the Bear, Modest Mouse (early), Elliott Smith, Botch. No genre specialization &mdash; quality and independence as the unifying principle.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Capitol Hill Streak (110-113)</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>Four consecutive: Kinski (E=6), Helms Alee (E=6), 764-HERO (E=4), Minus the Bear (E=5). Energy: 6, 6, 4, 5. The neighborhood&rsquo;s diversity &mdash; noise rock, lo-fi, math rock/electronic. Four genres, one neighborhood.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">113</span></div>
+          <div class="stat-row"><span class="stat-label">Genre stage</span><span class="stat-value">93 (math rock)</span></div>
+          <div class="stat-row"><span class="stat-label">Capitol Hill</span><span class="stat-value">4th consecutive</span></div>
+          <div class="stat-row"><span class="stat-label">New label</span><span class="stat-value">Suicide Squeeze</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Minus the Bear</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Math Rock/Electronic</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Suicide Squeeze</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2001-2018</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Members</span><span class="stat-value">Snider / Knudson / Tate / Murchy / Rose</span></div>
+          <div class="stat-row"><span class="stat-label">Key album</span><span class="stat-value">Menos el Oso (2005)</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

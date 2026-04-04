@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 82&deg; &mdash; Northern Flying Squirrel &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Octet card */
+    .octet-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 30%, #303F9F 60%, #3F51B5 100%);
+      border: 3px solid #1A237E;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .octet-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #9FA8DA;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .octet-card p {
+      color: #E8EAF6;
+    }
+    .octet-card strong {
+      color: #C5CAE9;
+    }
+
+    /* Glider card */
+    .glider-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .glider-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #90CAF9;
+    }
+    .glider-card p {
+      color: #E3F2FD;
+    }
+    .glider-card strong {
+      color: #BBDEFB;
+    }
+
+    /* Truffle card */
+    .truffle-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 50%, #5D4037 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .truffle-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BCAAA4;
+    }
+    .truffle-card p {
+      color: #EFEBE9;
+    }
+    .truffle-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Old-growth card */
+    .oldgrowth-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .oldgrowth-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .oldgrowth-card p {
+      color: #E8F5E9;
+    }
+    .oldgrowth-card strong {
+      color: #C8E6C9;
+    }
+
+    /* Death Cab parallel card */
+    .deathcab-card {
+      background: linear-gradient(135deg, #37474F 0%, #455A64 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .deathcab-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .deathcab-card p {
+      color: #ECEFF1;
+    }
+    .deathcab-card strong {
+      color: #CFD8DC;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.octet { background: #1A237E; }
+    .theory-icon.tseet { background: #0D47A1; }
+    .theory-icon.glider { background: #1565C0; }
+    .theory-icon.truffle { background: #3E2723; }
+    .theory-icon.nocturnal { background: #263238; }
+    .theory-icon.deathcab-link { background: #455A64; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">82&deg;</div>
+      <div class="release-title-block">
+        <h2>Northern Flying Squirrel</h2>
+        <div class="scientific">Glaucomys sabrinus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      high thin &ldquo;tseet&rdquo; contact call &mdash; EIGHTH CONSECUTIVE SCIURIDAE (75&ndash;82), the OCTET! First GLIDING mammal in the engine. Strictly nocturnal. Old-growth dependent. Truffle mutualism with American Marten (65). Nearly ultrasonic. E=3, twenty-second consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Octet Card -->
+        <div class="octet-card">
+          <h3>The Sciuridae Octet &mdash; EIGHT Consecutive!</h3>
+          <p>EIGHTH consecutive Sciuridae: <strong>Yellow-bellied Marmot</strong> (75), <strong>Hoary Marmot</strong> (76), <strong>Olympic Marmot</strong> (77), <strong>Townsend&rsquo;s Ground Squirrel</strong> (78), <strong>Golden-mantled Ground Squirrel</strong> (79), <strong>Douglas Squirrel</strong> (80), <strong>Eastern Fox Squirrel</strong> (81), <strong>Northern Flying Squirrel</strong> (82). Eight consecutive Sciuridae &mdash; the <strong>OCTET</strong>. The longest family run in engine history extends to <strong>EIGHT</strong>.</p>
+        </div>
+
+        <!-- Glider Card -->
+        <div class="glider-card">
+          <h3>First Gliding Mammal &mdash; The Patagium</h3>
+          <p>The Northern Flying Squirrel is the engine&rsquo;s <strong>first gliding mammal</strong> &mdash; the first species that can &ldquo;fly&rdquo; (glide). A <strong>patagium</strong> &mdash; a membrane of skin stretching from wrist to ankle &mdash; allows glides of <strong>20&ndash;50 meters</strong> between trees. The engine goes AIRBORNE for the first time among mammals.</p>
+        </div>
+
+        <!-- Truffle Card -->
+        <div class="truffle-card">
+          <h3>Truffle Mutualism &mdash; Connection to American Marten (65)</h3>
+          <p>The Northern Flying Squirrel eats <strong>truffles</strong> (hypogeous fungi) and disperses their spores through fecal pellets, inoculating forest soil with mycorrhizal fungi essential for tree growth. The <strong>American Marten</strong> (degree 65) also depends on truffles. <strong>Truffle mutualism</strong> connects two Sciuridae entries across 17 degrees: the Marten&rsquo;s prey (Douglas Squirrel, 80) and the nocturnal glider (82) both serve as truffle dispersers.</p>
+        </div>
+
+        <!-- Old-Growth Card -->
+        <div class="oldgrowth-card">
+          <h3>Old-Growth Dependent &mdash; Nests in Tree Cavities</h3>
+          <p>The Northern Flying Squirrel is <strong>old-growth dependent</strong> &mdash; it requires mature and old-growth coniferous forest with large-diameter trees that provide <strong>cavity nests</strong>. Habitat loss from old-growth logging is the primary threat. Shares old-growth dependence with <strong>Pacific Wren</strong> (degree 1) and <strong>Pileated Woodpecker</strong> (degree 54).</p>
+        </div>
+
+        <!-- Death Cab Parallel Card -->
+        <div class="deathcab-card">
+          <h3>The Death Cab Acoustic Parallel</h3>
+          <p>Degree 82 pairs Northern Flying Squirrel with <strong>Death Cab for Cutie (acoustic context)</strong> in Part A &mdash; Indie Folk, E=3. Both <strong>E=3</strong>. Both <strong>quieter versions of something bigger</strong> &mdash; Death Cab stripped to acoustic skeleton, the Flying Squirrel nearly inaudible. Both <strong>nocturnal/intimate</strong> &mdash; the acoustic set in a small room, the squirrel gliding through darkness. Both <strong>reveal hidden dimensions</strong> &mdash; acoustic reveals folk bones, the flying squirrel reveals the nocturnal old-growth canopy.</p>
+        </div>
+
+        <h2>The Sound: High Thin &ldquo;Tseet&rdquo; Contact Call (83rd Acoustic Element)</h2>
+        <p><strong>The call:</strong> A high, thin, barely audible &ldquo;tseet&rdquo; contact call &mdash; nearly ultrasonic. Approximately 8,000&ndash;20,000+ Hz, at the upper edge of human hearing. Many people cannot hear it at all. The quietest and highest-pitched vocalization in the Sciuridae octet [1, 2, 3].</p>
+        <p><strong>Why E=3:</strong> (1) Nearly inaudible to humans &mdash; at the edge of hearing range. (2) Very soft &mdash; low amplitude even at close range. (3) Brief &mdash; short contact notes, not sustained. (4) Nocturnal context &mdash; the call exists in the silence of the night forest. E=3 reflects the presence of vocalization but its extreme subtlety.</p>
+
+        <h2>Taxonomy: <em>Glaucomys sabrinus</em></h2>
+        <p><strong>Etymology:</strong> <em>Glaucomys</em> from Greek <em>glaukos</em> (&ldquo;silver/gray&rdquo;) + <em>mys</em> (&ldquo;mouse&rdquo;). <em>sabrinus</em> from Latin <em>Sabrinus</em>, relating to the Severn River. Described by Shaw (1801) [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Rodentia</strong>. Family <strong>Sciuridae</strong> &mdash; EIGHTH consecutive (75&ndash;82). Genus <em>Glaucomys</em> &mdash; NEW GENUS (sixth Sciuridae genus). Flying squirrels &mdash; the first gliding genus [1, 2].</p>
+
+        <h2>Ecology: The Nocturnal Glider</h2>
+        <p><strong>Habitat:</strong> Old-growth coniferous forest. Nests in tree cavities in large-diameter trees. Old-growth dependent &mdash; requires mature forest structure [1, 2, 3, 4].</p>
+        <p><strong>Activity:</strong> Strictly NOCTURNAL. Active only at night. Rarely seen by humans. The most cryptic mammal in the Sciuridae octet.</p>
+        <p><strong>Gliding:</strong> Patagium (skin membrane wrist-to-ankle) enables glides of 20&ndash;50 meters between trees. Steering via tail. The first &ldquo;flying&rdquo; mammal in the engine.</p>
+        <p><strong>Diet:</strong> Truffles (hypogeous fungi) are a primary food source. Also lichens, fungi, seeds, insects. Key truffle spore disperser &mdash; mycorrhizal mutualism.</p>
+        <p><strong>Predators:</strong> <strong>Northern Spotted Owl</strong> (SPS-004) &mdash; the NORTHERN SPOTTED OWL PREYS ON FLYING SQUIRRELS. Key ecological link! Also: Great Horned Owl, Northern Goshawk, American Marten (65).</p>
+
+        <h2>The Sciuridae Octet: Degree 82</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Sound</th><th>E</th><th>Habitat</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>75</td><td>Yellow-bellied Marmot</td><td>Sharp chirp</td><td>4</td><td>Alpine rock</td></tr>
+            <tr><td>76</td><td>Hoary Marmot</td><td>Loud whistle</td><td>5</td><td>Alpine meadow</td></tr>
+            <tr><td>77</td><td>Olympic Marmot</td><td>Multi-note whistle</td><td>4</td><td>Olympic alpine</td></tr>
+            <tr><td>78</td><td>Townsend&rsquo;s Gnd Squirrel</td><td>Chirping trill</td><td>4</td><td>Grassland</td></tr>
+            <tr><td>79</td><td>Golden-mantled Gnd Sq</td><td>Sharp chip</td><td>4</td><td>Forest edge</td></tr>
+            <tr><td>80</td><td>Douglas Squirrel</td><td>Scolding chatter</td><td>5</td><td>Conifer canopy</td></tr>
+            <tr><td>81</td><td>Eastern Fox Squirrel</td><td>Bark + chatter</td><td>4</td><td>Urban park</td></tr>
+            <tr><td><strong>82</strong></td><td><strong>N. Flying Squirrel</strong></td><td><strong>High &ldquo;tseet&rdquo;</strong></td><td><strong>3</strong></td><td><strong>Old-growth</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Eight consecutive Sciuridae (75&ndash;82). The <strong>OCTET</strong>. Six genera. Eight habitats. Eight acoustic signatures. Energy range E=3 to E=5. Alpine to old-growth canopy. The longest family run in engine history: <strong>EIGHT</strong>.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon octet">8</div>
+            <div class="theory-content">
+              <h4>Sciuridae Octet (75&ndash;82) &mdash; EIGHT Consecutive!</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Eight consecutive Sciuridae. The OCTET. Longest family run: EIGHT. Six genera. Eight habitats. Alpine to old-growth.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon tseet">T</div>
+            <div class="theory-content">
+              <h4>High Thin &ldquo;Tseet&rdquo; &mdash; 83rd Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Nearly ultrasonic contact call. 8,000&ndash;20,000+ Hz. E=3. Barely audible to humans. Quietest in the octet.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon glider">G</div>
+            <div class="theory-content">
+              <h4>First Gliding Mammal &mdash; The Patagium</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Patagium enables 20&ndash;50 m glides. First &ldquo;flying&rdquo; mammal. The engine goes airborne.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon truffle">M</div>
+            <div class="theory-content">
+              <h4>Truffle Mutualism &mdash; Marten Connection (65)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Both eat truffles. Both disperse spores. Mycorrhizal mutualism. Cross-family ecological link.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon nocturnal">N</div>
+            <div class="theory-content">
+              <h4>Strictly Nocturnal &mdash; Old-Growth Dependent</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Active only at night. Nests in tree cavities. Requires old-growth. Northern Spotted Owl prey.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon deathcab-link">P</div>
+            <div class="theory-content">
+              <h4>The Death Cab Acoustic Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both E=3. Both quieter versions. Both nocturnal/intimate. Both reveal hidden dimensions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-081: Eastern Fox Squirrel</strong>
+            <p>Sciuridae octet. Urban park (81) to old-growth (82). Introduced (81) to native (82). Diurnal (81) to nocturnal (82). Bark+chatter (E=4) to tseet (E=3). Maximum contrast within consecutive Sciuridae.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>TRUFFLE MUTUALISM! Both eat truffles. Both disperse mycorrhizal spores. Marten (65) also preys on Douglas Squirrel (80). Cross-family truffle network across 17 degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>NORTHERN SPOTTED OWL PREYS ON FLYING SQUIRRELS &mdash; key ecological link! Both old-growth dependent. Both nocturnal. Predator-prey in the nocturnal canopy. The owl needs the squirrel. The squirrel needs the old-growth.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>Old-growth shared. Both depend on old-growth forest structure. Pacific Wren in the understory, Flying Squirrel in the canopy. Two old-growth specialists across 82 degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-054: Pileated Woodpecker</strong>
+            <p>Cavity connection. Pileated Woodpecker creates cavities in large trees. Northern Flying Squirrel nests in cavities. The woodpecker&rsquo;s work becomes the squirrel&rsquo;s home. Cavity ecosystem linkage.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Northern Flying Squirrel (<em>Glaucomys sabrinus</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Northern flying squirrel.&rdquo;</li>
+          <li>[3] Wells-Gosling, N. &amp; Heaney, L.R. (1984). <em>Glaucomys sabrinus.</em> <em>Mammalian Species</em> No. 229.</li>
+          <li>[4] Carey, A.B. (2000). &ldquo;Ecology of Northern Flying Squirrels.&rdquo; <em>Northwest Science</em>.</li>
+          <li>[5] Maser, C. et al. (1978). &ldquo;Relationships among fungi, small mammals, and old-growth forests.&rdquo;</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">82&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">High thin &ldquo;tseet.&rdquo; Nearly ultrasonic.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sciuridae</div>
+          <div class="stat-detail">EIGHTH consecutive (75&ndash;82). OCTET!</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">Ninth Rodentia in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Old-growth</div>
+          <div class="stat-detail">Cavity nests. Old-growth dependent.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">110&ndash;230 g</div>
+          <div class="stat-detail">Small. Gliding mammal.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Strictly nocturnal</div>
+          <div class="stat-detail">Active only at night.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Locomotion</div>
+          <div class="stat-value">Gliding</div>
+          <div class="stat-detail">Patagium. 20&ndash;50 m glides.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diet</div>
+          <div class="stat-value">Truffles, lichens</div>
+          <div class="stat-detail">Key truffle spore disperser.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Mammalian Entry</div>
+          <div class="stat-value">21st</div>
+          <div class="stat-detail">19th species. 9 families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sciuridae Run</div>
+          <div class="stat-value">8 consecutive</div>
+          <div class="stat-detail">75&ndash;82. THE OCTET.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Predator</div>
+          <div class="stat-value">N. Spotted Owl (4)</div>
+          <div class="stat-detail">Key prey item for spotted owl.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (22nd)</div>
+          <div class="stat-detail">Twenty-second consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

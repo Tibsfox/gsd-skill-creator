@@ -1,0 +1,22 @@
+{
+  "degree": 307, "artist": "Screaming Trees", "slug": "307-screaming-trees-return", "genre": "Grunge", "energy": 7,
+  "era": "1984-2000 full run. Grunge. E=7. Ellensburg WA origin. SST Records 1987-1991. Epic Records 1992-2000. Nearly Lost You. Sweet Oblivion. Dust.",
+  "location": { "origin": "Ellensburg, Washington", "adopted": "Seattle, Washington" }, "formed": "Ellensburg, Washington", "active": "1984-2000; 2011 reunion",
+  "labels": ["Velvetone", "SST Records", "Epic Records", "Vapor Records"],
+  "members": ["Mark Lanegan (vocals)", "Lee Conner (guitar)", "Van Conner (bass)", "Barrett Martin (drums)", "Mark Pickerel (drums, earlier)"],
+  "associated_musicians": ["Mad Season (Barrett Martin bridge)", "Queens of the Stone Age (Lanegan)", "The Gutter Twins (Lanegan + Greg Dulli)", "Mad Season 2011 reunion (Lanegan sang for Staley)"],
+  "theory_nodes": [
+    { "concept": "Geographic outlier: Ellensburg, 100 miles east of Seattle over the Cascades. High desert, CWU, Kittitas Valley. A band that chose to reach across the mountains. Grunge as PNW-wide phenomenon, not just Seattle.", "level": "advanced", "department": "geography", "description": "Ellensburg as the engine's most geographically displaced major band." },
+    { "concept": "Mark Lanegan: baritone deep as grief. Blues lineage (Cash, Orbison, Young) not metal/punk. Born Ellensburg 1964, died Killarney Ireland 2022, age 57. The most important voice from outside Seattle in the grunge era.", "level": "advanced", "department": "biography", "description": "Lanegan's voice as a different American tradition in the Seattle grunge moment." },
+    { "concept": "'Nearly Lost You' (1992): Singles soundtrack, #1 Mainstream Rock, Billboard Hot 100 #34. Sweet Oblivion as breakthrough. Lee Conner's climbing riff + Lanegan's vocal at full cry.", "level": "milestone", "department": "discography", "description": "The song that made the Screaming Trees known outside the underground." },
+    { "concept": "Barrett Martin bridge: drums in Screaming Trees (307) AND Mad Season (305, 224). The human infrastructure connecting two of the grunge cluster's most important entries. Two degrees apart in the engine.", "level": "intermediate", "department": "cross-reference", "description": "Barrett Martin as the engine's most direct band-to-band human bridge in the current zone." }
+  ],
+  "cross_references": [
+    {"degree": 305, "artist": "Mad Season", "relationship": "Barrett Martin drums in both. Two degrees apart. The human bridge between Mad Season and Screaming Trees in the engine."},
+    {"degree": 224, "artist": "Mad Season", "relationship": "First Mad Season appearance where Barrett Martin was first introduced in engine context."},
+    {"degree": 308, "artist": "Melvins", "relationship": "Aberdeen enters at 308. Ellensburg (307) + Aberdeen (308): both bands from outside Seattle that were central to the scene. Geographic parallel."}
+  ],
+  "sps_pair": {"degree": 307, "species": "Salmon Run Full River", "pairing_note": "E=7 + E=8. The salmon run overwhelms. Multi-species aggregate sound of thousands of fish: the ecology outweighs the music. E=15 combined."},
+  "milestones": ["SCREAMING TREES RETURN", "MARK LANEGAN DOCUMENTED", "BARRETT MARTIN BRIDGE CONFIRMED"],
+  "tags": ["grunge", "ellensburg", "mark-lanegan", "lee-conner", "van-conner", "barrett-martin", "sst-records", "epic-records", "nearly-lost-you", "sweet-oblivion", "dust", "singles-soundtrack"]
+}

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 129&deg; &mdash; Canada Goose &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3E2723, #4E342E);
+      color: #D7CCC8;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(62, 39, 35, 0.5);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .honk-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 30%, #5D4037 60%, #3E2723 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .honk-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .honk-card p { color: #EFEBE9; }
+    .honk-card strong { color: #D7CCC8; }
+
+    .urban-card {
+      background: linear-gradient(135deg, #37474F 0%, #455A64 30%, #546E7A 60%, #37474F 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .urban-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .urban-card p { color: #ECEFF1; }
+    .urban-card strong { color: #B0BEC5; }
+
+    .vformation-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 30%, #1E88E5 60%, #1565C0 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .vformation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .vformation-card p { color: #E3F2FD; }
+    .vformation-card strong { color: #BBDEFB; }
+
+    .streak-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #E65100 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .streak-card p { color: #FFF3E0; }
+    .streak-card strong { color: #FFE0B2; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.honk { background: #3E2723; }
+    .theory-icon.urban { background: #37474F; }
+    .theory-icon.vformation { background: #1565C0; }
+    .theory-icon.anatidae { background: #E65100; }
+    .theory-icon.goose { background: #2E7D32; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #EFEBE9; color: #3E2723; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">129&deg;</div>
+      <div class="release-title-block">
+        <h2>Canada Goose</h2>
+        <div class="scientific"><em>Branta canadensis</em> (Anatidae) &mdash; E=5 &mdash; 12th Consecutive Anatidae &mdash; RECORD EXTENDS</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      deep honk flock chorus &mdash; <strong>E=5 flock-amplified power</strong>.
+      The most <strong>ubiquitous waterfowl in North America</strong>.
+      V-formation honking is one of the most recognizable bird sounds on the continent.
+      <strong>First <em>Branta</em> (goose) genus</strong> in the engine &mdash;
+      genus shift from swans (127&ndash;128) to geese (129+).
+      <strong>Twelfth consecutive Anatidae (118&ndash;129)</strong>.
+      Resident + migratory. Urban dominant.
+      Begins <strong>goose comparison pair</strong> with Cackling Goose (130).
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Honk Card -->
+        <div class="honk-card">
+          <h3>Deep Honk Flock Chorus &mdash; E=5</h3>
+          <p>
+            The two-syllable <strong>&ldquo;ah-HONK&rdquo;</strong> at
+            <strong>200&ndash;2,500 Hz</strong>. Nasal, brassy, carrying.
+            A single honk is moderate &mdash; but Canada Geese are
+            <strong>almost never alone</strong>. A flock of 50&ndash;200
+            birds honking asynchronously creates a
+            <strong>wall of sound</strong> that dominates the acoustic environment.
+            E=5 through collective power. Individual recognition by voice &mdash;
+            mates and family members distinguish each other&rsquo;s calls.
+            The <strong>most universally recognized waterfowl sound</strong>
+            in North America.
+          </p>
+        </div>
+
+        <!-- Urban Card -->
+        <div class="urban-card">
+          <h3>Urban Adaptation &mdash; The Ubiquitous Giant</h3>
+          <p>
+            Resident (non-migratory) populations have <strong>exploded</strong>
+            in the PNW &mdash; estimated <strong>100,000&ndash;200,000+</strong>
+            in Washington State alone. Descendants of mid-20th century transplants,
+            these geese thrive in parks, golf courses, corporate campuses, and
+            any landscape with <strong>short grass near water</strong>. They&rsquo;ve
+            lost wariness of humans, aggressively defend territory, and produce
+            <strong>~500 grams of droppings per bird per day</strong>. The most
+            visible, most audible, most numerous large bird in many PNW landscapes.
+            A species so successful it has become a management challenge.
+          </p>
+        </div>
+
+        <!-- V-Formation Card -->
+        <div class="vformation-card">
+          <h3>V-Formation Flight &mdash; Aerodynamics and Sound</h3>
+          <p>
+            Each trailing bird flies in the <strong>upwash zone</strong> of the bird
+            ahead, saving <strong>10&ndash;14% flight energy</strong>. Leaders
+            rotate to distribute fatigue. The <strong>honking V-formation</strong>
+            passing overhead is the iconic sound of migration: approaching, maximum
+            overhead, receding with Doppler shift. Even non-birders recognize it.
+            For many PNW residents, the V-formation honk is the
+            <strong>first wild bird sound</strong> they learn to identify.
+          </p>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-card">
+          <h3>Twelfth Consecutive Anatidae (118&ndash;129)</h3>
+          <p>
+            The streak enters <strong>goose territory</strong>. Genus shift from
+            <strong><em>Cygnus</em> (swans, 127&ndash;128)</strong> to
+            <strong><em>Branta</em> (black geese, 129)</strong>. The energy
+            descends from the Trumpeter&rsquo;s E=6 climax to E=5 &mdash;
+            still high. The streak now covers all three major Anatidae
+            subfamilies in the PNW: ducks (118&ndash;126), swans (127&ndash;128),
+            geese (129+). <strong>Twelve consecutive</strong> and counting.
+          </p>
+        </div>
+
+        <h2>Resident vs. Migratory Populations</h2>
+        <p>
+          <strong>Resident birds</strong> (descendants of mid-20th century transplants)
+          stay year-round, breed in parks and lakeshores, and form the large urban
+          flocks. <strong>Migratory birds</strong> breed in Alaska and northern Canada,
+          pass through in V-formations October&ndash;November and March&ndash;April.
+          In winter, both populations mix in agricultural fields and wetlands &mdash;
+          the Skagit Valley and Ridgefield NWR host major concentrations.
+        </p>
+
+        <h2>Taxonomy &mdash; The 2004 Split</h2>
+        <p>
+          In <strong>2004</strong>, the smallest four subspecies were split from Canada
+          Goose as the <strong>Cackling Goose</strong> (<em>Branta hutchinsii</em>,
+          degree 130). The split was based on a size gap, genetic divergence, and
+          ecological differences. The Canada/Cackling pair mirrors other comparison
+          pairs in the engine: Hairy/Downy Woodpecker (110&ndash;111),
+          Barrow&rsquo;s/Common Goldeneye (123&ndash;124), Tundra/Trumpeter Swan
+          (127&ndash;128). Degree 130 will complete the pair.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-130 Cackling Goose (comparison pair)</strong>
+            <p>GOOSE PAIR BEGINS! Canada (129, deep honk, E=5, large, resident) vs. Cackling (130, higher-pitched cackle, E=4, small, winter visitor). Separated in 2004. The identification challenge. Degree 130 completes the pair.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-128 Trumpeter Swan (E=6 climax)</strong>
+            <p>ENERGY ARC! Trumpeter (128, E=6 climax) to Canada Goose (129, E=5). Energy descends from maximum. Genus shift: Cygnus to Branta. The streak peaks at 128 and continues at high energy through 129.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-127 Tundra Swan (flock energy comparison)</strong>
+            <p>FLOCK ENERGY! Tundra (127, baying flock, E=5) and Canada Goose (129, honking flock, E=5). Both E=5 through collective power. Different sounds: melodious baying vs. brassy honking. Same acoustic strategy: many voices make the volume.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (streak origin)</strong>
+            <p>STREAK EXTENDED! Harlequin (118, E=5) to Canada Goose (129, E=5). Twelve consecutive Anatidae. From torrential stream to urban park. The family diversity is extraordinary.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-107&ndash;115 Picidae (surpassed record)</strong>
+            <p>MARGIN GROWS! Picidae held 9 consecutive (107&ndash;115). Anatidae now at 12 (118&ndash;129). Three more than the previous record. The Anatidae streak is the longest family run in the engine.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon honk">H</div>
+            <div class="theory-content">
+              <h4>Deep Honk Flock Chorus &mdash; E=5</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Two-syllable &ldquo;ah-HONK&rdquo; at 200&ndash;2,500 Hz. Flock-amplified. Asynchronous overlapping creates wall of sound. Individual recognition by voice. Most recognized waterfowl sound in N. America.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Urban Adaptation Specialist</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Resident populations 100K-200K+ in WA alone. Parks, golf courses, corporate campuses. Short grass near water = ideal habitat. Lost wariness. Aggressive territorial defense. Success creates management challenges.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon vformation">V</div>
+            <div class="theory-content">
+              <h4>V-Formation Aerodynamics and Acoustics</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Upwash zone saves 10&ndash;14% flight energy. Leader rotation. Honking coordination during flight. The Doppler-shifted overhead passage is the iconic migration sound.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon goose">G</div>
+            <div class="theory-content">
+              <h4>Goose Comparison Pair Begins (129&ndash;130)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Canada (129, large, deep honk) vs. Cackling (130, small, higher cackle). Split in 2004. Fifth comparison pair in SPS. Mirrors Hairy/Downy WP, Barrow&rsquo;s/Common Goldeneye, Tundra/Trumpeter Swan.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon anatidae">12</div>
+            <div class="theory-content">
+              <h4>Twelfth Consecutive Anatidae (118&ndash;129)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Enters goose territory. Genus shift: Cygnus to Branta. Ducks (118&ndash;126) + swans (127&ndash;128) + geese (129+). All three PNW Anatidae subfamilies represented. Record extends.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Canada Goose</div>
+          <div class="stat-detail"><em>Branta canadensis</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">12th consecutive &mdash; record extends</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Deep honk chorus</div>
+          <div class="stat-detail">flock-amplified, E=5</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">collective flock power</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Lake / grass</div>
+          <div class="stat-detail">resident, year-round</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">2.6&ndash;6.5 kg</div>
+          <div class="stat-detail">up to 14.3 lbs (maxima)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~5 million</div>
+          <div class="stat-detail">N. America total</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Ubiquitous</div>
+          <div class="stat-detail">resident + migratory</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Branta</em></div>
+          <div class="stat-detail">first in engine (black geese)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pair</div>
+          <div class="stat-value">Cackling (130)</div>
+          <div class="stat-detail">goose comparison pair</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

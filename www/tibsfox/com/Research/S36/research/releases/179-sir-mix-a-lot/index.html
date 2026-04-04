@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 179&deg; &mdash; Sir Mix-a-Lot &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #D32F2F, #FF5722); color: #FFCDD2; font-size: 1.6rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 16px rgba(183, 28, 28, 0.6); }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #B71C1C, #D32F2F); color: #FFEBEE; border: 2px solid #C62828; animation: pulse-e7 2s infinite; }
+    @keyframes pulse-e7 { 0%, 100% { box-shadow: 0 0 4px rgba(183, 28, 28, 0.3); } 50% { box-shadow: 0 0 12px rgba(183, 28, 28, 0.6); } }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #B71C1C; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.maximum { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .e7-banner { background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F, #E53935, #FF5722); color: #FFCDD2; padding: 1.2rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; border: 2px solid #B71C1C; }
+    .e7-banner h3 { margin: 0 0 0.3rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #FFEBEE; }
+    .e7-banner p { margin: 0; font-size: 0.92rem; line-height: 1.5; }
+    .e7-banner strong { color: #FFFFFF; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>179 &mdash; Sir Mix-a-Lot</span>
+    </nav>
+
+    <div class="e7-banner">
+      <h3>E=7 &mdash; Maximum Energy &mdash; Nastymix Trilogy Culminates</h3>
+      <p>
+        <strong>Sir Mix-a-Lot</strong> (Anthony Ray) &mdash; THE biggest hip-hop artist
+        to come out of Seattle. <strong>&ldquo;Baby Got Back&rdquo;</strong> was #1 for
+        five weeks (1992). Grammy winner. Founded <strong>Nastymix Records</strong> (1985).
+        &ldquo;Posse on Broadway&rdquo; &mdash; the Seattle anthem. Third E=7 in the engine.
+        <strong>The foundation of Seattle hip-hop.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">179&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Sir Mix-a-Lot</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7 &mdash; MAXIMUM</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Nastymix / Def American</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>The Foundation of Seattle Hip-Hop</h2>
+          <blockquote>
+            He built the label. He wrote the anthem. He achieved #1
+            nationally. He won the Grammy. He launched the careers.
+            Sir Mix-a-Lot didn&rsquo;t just participate in Seattle
+            hip-hop &mdash; he BUILT it. From Nastymix Records to
+            &ldquo;Posse on Broadway&rdquo; to &ldquo;Baby Got Back,&rdquo;
+            the trajectory is the trajectory of Seattle hip-hop itself.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>&ldquo;Posse on Broadway&rdquo; &mdash; The Founding Anthem</h2>
+          <p>
+            &ldquo;Posse on Broadway&rdquo; (1988) put Seattle hip-hop on the map.
+            Specific geography &mdash; Broadway on Capitol Hill, Seattle
+            neighborhoods, real streets, real landmarks. The song is a
+            time capsule: late-1980s Seattle, the cars, the fashion, the
+            crew, the bass. It reached #70 on the Billboard Hot 100 &mdash;
+            enormous for an independent Seattle hip-hop release.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>&ldquo;Baby Got Back&rdquo; &mdash; Five Weeks at #1</h2>
+          <p>
+            The cultural earthquake. <strong>#1 for five consecutive weeks</strong>
+            on the Billboard Hot 100 (1992). Over 10 million copies sold.
+            Grammy for Best Rap Solo Performance. Inducted into the Library
+            of Congress National Recording Registry. From Nastymix to Def
+            American to the top of the charts &mdash; Seattle hip-hop at
+            its absolute peak of commercial power.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Cultural Magnitude as E=7</h4>
+              <div class="level maximum">Maximum &mdash; Energy Theory</div>
+              <p>
+                #1 national hit + label founder + scene architect +
+                Grammy + cultural icon + four-decade career = E=7.
+                Cultural magnitude at every level. The engine&rsquo;s
+                highest energy.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Nastymix Trilogy Culmination</h4>
+              <div class="level advanced">Advanced &mdash; Engine Theory</div>
+              <p>
+                Kid Sensation (177, E=6) &rarr; High Performance (178, E=6) &rarr;
+                Sir Mix-a-Lot (179, E=7). The label that built PNW
+                hip-hop. Three degrees. The architect arrives last.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Three E=7 Entries (175&ndash;179)</h4>
+              <div class="level intermediate">Intermediate &mdash; Engine Theory</div>
+              <p>
+                DoNormaal (175), Maliibu Miitch (176), Sir Mix-a-Lot (179).
+                Three maximum-energy entries in five degrees. Energy
+                escalation toward the halfway mark at 180.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">177&deg;</span> <strong>Kid Sensation</strong> &mdash; NASTYMIX PROTEGE! Mix-a-Lot signed Kid Sensation. &ldquo;Posse on Broadway&rdquo; connected them. Founder (179) meets flagship MC (177).</li>
+            <li><span class="ref-degree">178&deg;</span> <strong>High Performance</strong> &mdash; NASTYMIX SIGNED! Mix-a-Lot&rsquo;s label signed Tacoma&rsquo;s High Performance. The label bridged Seattle and Tacoma.</li>
+            <li><span class="ref-degree">180&deg;</span> <strong>Macklemore</strong> &mdash; SEATTLE HIP-HOP LINEAGE! Mix-a-Lot (179) to Macklemore (180) = the two biggest Seattle hip-hop names in sequence. Pioneer to modern mainstream.</li>
+            <li><span class="ref-degree">175&deg;</span> <strong>DoNormaal</strong> &mdash; E=7 TRIO! DoNormaal (175), Maliibu Miitch (176), Sir Mix-a-Lot (179). Three maximum-energy entries. Three modes of E=7.</li>
+            <li><span class="ref-degree">160&deg;</span> <strong>Ryan Lewis</strong> &mdash; INDEPENDENT SUCCESS! Lewis/Macklemore (160) achieved independent #1 like Mix-a-Lot. Two eras of Seattle independent hip-hop at the top of the charts.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">179&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value" style="color: #B71C1C;">E = 7 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.319</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Sir Mix-a-Lot</h4>
+          <div class="stat-row"><span class="stat-label">Real name</span><span class="stat-value">Anthony Ray</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Central District</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1985&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Labels</span><span class="stat-value">3 (founded 2)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Achievements</h4>
+          <div class="stat-row"><span class="stat-label">#1 single</span><span class="stat-value">Baby Got Back</span></div>
+          <div class="stat-row"><span class="stat-label">Weeks at #1</span><span class="stat-value">5</span></div>
+          <div class="stat-row"><span class="stat-label">Grammy</span><span class="stat-value">1993</span></div>
+          <div class="stat-row"><span class="stat-label">Anthem</span><span class="stat-value">Posse on Broadway</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Nastymix Trilogy</h4>
+          <div class="stat-row"><span class="stat-label">Position</span><span class="stat-value">3rd of 3 (climax)</span></div>
+          <div class="stat-row"><span class="stat-label">Span</span><span class="stat-value">177&ndash;179</span></div>
+          <div class="stat-row"><span class="stat-label">Role</span><span class="stat-value">Founder</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../178-high-performance/" style="color: var(--seattle-navy);">&larr; 178&deg; High Performance</a>
+        <a href="../180-macklemore/" style="color: var(--seattle-navy);">180&deg; Macklemore &mdash; HALFWAY MARK &rarr;</a>
+      </div>
+      <p>Degree 179&deg; &mdash; Sir Mix-a-Lot &mdash; Seattle 360 Engine &mdash; v1.49.319<br>E=7 MAXIMUM. Nastymix trilogy culminates. &ldquo;Baby Got Back&rdquo; #1 for five weeks. Grammy. Founded Nastymix Records. &ldquo;Posse on Broadway.&rdquo; The foundation of Seattle hip-hop.</p>
+    </footer>
+  </div>
+</body>
+</html>

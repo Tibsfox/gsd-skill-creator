@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 160&deg; &mdash; Ryan Lewis &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #0D47A1, #1565C0); color: #BBDEFB; font-size: 1.5rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 12px rgba(13, 71, 161, 0.5); }
+    .energy-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #E65100; color: #FFF3E0; border: 1px solid #EF6C00; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #FF6F00; color: #FFF8E1; border: 1px solid #FF8F00; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .city-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1B5E20; color: #C8E6C9; border: 1px solid #2E7D32; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #9FA8DA; border-left: 4px solid #0D47A1; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #0D47A1; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-card .level.intermediate { background: #FCE4EC; color: #880E4F; }
+    .theory-card .level.foundational { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #0D47A1; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #0D47A1; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E3F2FD; font-style: italic; color: #0D47A1; }
+    .milestone-banner { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); color: #C8E6C9; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif; }
+    .milestone-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: #A5D6A7; }
+    .milestone-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>160 &mdash; Ryan Lewis</span>
+    </nav>
+
+    <div class="milestone-banner">
+      <h3>v1.49.300 &mdash; Spokane Enters &mdash; Second Non-Seattle City</h3>
+      <p>
+        <strong>Ryan Lewis</strong> &mdash; the producer half of
+        <strong>Macklemore &amp; Ryan Lewis.</strong>
+        Two #1 Billboard hits, independently released. Four Grammys.
+        <strong>Spokane</strong> enters the engine &mdash; second non-Seattle
+        city (after Tacoma at 143). <strong>v1.49.300.</strong>
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">160&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Ryan Lewis</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop</span>
+          <span class="label-badge">Independent</span>
+          <span class="city-badge">Spokane</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <section>
+          <h2>Independent at #1</h2>
+          <blockquote>
+            &ldquo;Thrift Shop&rdquo; and &ldquo;Can&rsquo;t Hold Us&rdquo; &mdash;
+            both #1 on the Billboard Hot 100. Both independently released.
+            No major label. Four Grammy Awards. Ryan Lewis&rsquo;s
+            horn-driven, anthemic production took Seattle hip-hop to the
+            absolute mainstream. The independent model proven at the
+            highest level.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Spokane to Seattle</h2>
+          <blockquote>
+            From Spokane &mdash; 280 miles east of Seattle, across the
+            Cascades, in a different climate and a different cultural
+            context. Ryan Lewis grew up in eastern Washington and
+            migrated to Seattle for the music. The second non-Seattle
+            city of origin in the engine. The geographic reach expands.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Independent Mainstream Proof</h4>
+              <div class="level advanced">Advanced &mdash; Industry Theory</div>
+              <p>
+                #1 Billboard without major label. First since 1994.
+                Paradigm-shifting. Self-fund, self-release, internet +
+                touring. The Macklemore &amp; Ryan Lewis model
+                influenced the entire industry.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Spokane Enters</h4>
+              <div class="level intermediate">Intermediate &mdash; Geography Theory</div>
+              <p>
+                Second non-Seattle city. Eastern Washington. 280 miles.
+                Different climate, economy, culture. Spokane-to-Seattle
+                migration pattern. Geographic reach expands.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Horn-Driven Production</h4>
+              <div class="level foundational">Foundational &mdash; Production Theory</div>
+              <p>
+                Prominent brass sections. Anthemic hooks. Arena-sized
+                sound. Clean, punchy drums. Radio-ready mix.
+                Lewis&rsquo;s signature: accessibility with depth.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">159&deg;</span> <strong>Sango</strong> &mdash; PRODUCER COMPARISON! Sango: producer-as-artist, baile funk, self-released. Lewis: producer-in-partnership, horn-driven, independent mainstream. Different producer models.</li>
+            <li><span class="ref-degree">143&deg;</span> <strong>Tacoma entry</strong> &mdash; GEOGRAPHIC EXPANSION! First non-Seattle (Tacoma, 143). Second non-Seattle (Spokane, 160). 17 degrees apart. The engine&rsquo;s reach beyond Seattle.</li>
+            <li><span class="ref-degree">99&deg;</span> <strong>Blue Scholars</strong> &mdash; PRODUCER LINEAGE! Sabzi (boom-bap), Sango (baile funk), Lewis (horn-driven anthem). Three production styles. 60+ degrees of evolution.</li>
+            <li><span class="ref-degree">157&deg;</span> <strong>Shabazz Palaces (return)</strong> &mdash; COMMERCIAL SPECTRUM! Shabazz Palaces: experimental, Sub Pop. Ryan Lewis: mainstream, independent. Both successful. Different definitions of success.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">160&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 5</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.300</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Ryan Lewis</h4>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Spokane</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Independent</span></div>
+          <div class="stat-row"><span class="stat-label">Partner</span><span class="stat-value">Macklemore</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">2006&ndash;present</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Chart Achievement</h4>
+          <div class="stat-row"><span class="stat-label">Thrift Shop</span><span class="stat-value">#1 Billboard</span></div>
+          <div class="stat-row"><span class="stat-label">Can&rsquo;t Hold Us</span><span class="stat-value">#1 Billboard</span></div>
+          <div class="stat-row"><span class="stat-label">Grammys</span><span class="stat-value">4 (2014)</span></div>
+          <div class="stat-row"><span class="stat-label">Distribution</span><span class="stat-value">Independent</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Hip-Hop Era</h4>
+          <div class="stat-row"><span class="stat-label">Era degree</span><span class="stat-value">27th (134&ndash;160)</span></div>
+          <div class="stat-row"><span class="stat-label">Geographic</span><span class="stat-value">2nd non-Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Model</span><span class="stat-value">Producer-partner</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../159-sango/" style="color: var(--seattle-navy);">&larr; 159&deg; Sango</a>
+        <a href="../161-next/" style="color: var(--seattle-navy);">161&deg; &rarr;</a>
+      </div>
+      <p>Degree 160&deg; &mdash; Ryan Lewis &mdash; Seattle 360 Engine &mdash; v1.49.300<br>Spokane enters. Independent #1. Four Grammys. Horn-driven production. The hip-hop era reaches the mainstream. Odontophoridae pair complete on SPS axis.</p>
+    </footer>
+  </div>
+</body>
+</html>

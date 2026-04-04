@@ -1,0 +1,65 @@
+{
+  "degree": 287,
+  "species": "Brandt's Cormorant",
+  "scientific_name": "Urile penicillatus",
+  "slug": "287-brandts-cormorant-colony",
+  "sound_type": "guttural croaking roar -- low-frequency harsh croaking and grunting of colonial nesting aggregation; dozens to hundreds of birds calling simultaneously from nest sites; 300-3,000 Hz; colonial acoustic mass; E=7",
+  "energy": 7,
+  "ecosystem": "Rocky island -- remote offshore rocky islands, stacks, and sea stacks along Pacific coast; almost entirely coastal saltwater; dense colonial nesting",
+  "season": "Summer (breeding; arrives February-March; egg laying March-May; chicks fledge June-August)",
+  "family": "Phalacrocoracidae",
+  "order": "Suliformes",
+  "conservation_status": "Least Concern (IUCN). El Niño-sensitive: warm-water events (1982-83, 1997-98, 2015-16) cause widespread breeding failure. Population fluctuates with California Current upwelling productivity. Prey specialist: Pacific sardine, herring, anchovy, juvenile rockfish. Indicator organism for upwelling productivity.",
+  "coordinates": {
+    "lat": 44.5,
+    "lon": -124.1,
+    "description": "Three Arch Rocks NWR, Oregon (Cape Meares). Washington outer coast colonies on offshore rocks and stacks. California: Farallon Islands (largest world colony, tens of thousands of pairs). Outer Pacific coast only; does not enter Puget Sound interior regularly."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Low, guttural croaks, grunts, and gargling sounds. Used in territorial defense, mate display, and chick recognition. Harsh, unfiltered, unmusical character.",
+    "frequency_range": "300-3,000 Hz; energy concentrated 500-1,500 Hz. Rough, raw quality. Colony: dozens to hundreds of birds simultaneously. Carries across water from offshore colony sites.",
+    "colony_environment": "Extremely dense nesting: individual territory = area reachable from nest bowl without moving. Nest sites may touch. Overlapping calls from nest sites, in-flight adults, and begging chicks. Colony announces itself acoustically before becoming visible.",
+    "e7_calibration": "E=7: more individual amplitude than storm-petrel (E=6; tiny bird), combined with colony mass effect. Less than Steller Sea Lion (E=8: sustained single-animal roar, much greater individual amplitude). Medium-large bird (33-35 in) in dense colonial aggregation."
+  },
+  "morphology": {
+    "size": "33-35 inches (84-89 cm); wingspan 48-50 inches (122-127 cm); weight ~2-3 lbs (0.9-1.4 kg)",
+    "appearance": "Dark iridescent blue-green; bright blue gular pouch (breeding, diagnostic); white filoplumes (breeding); pale buff-beige breast patch; non-breeding duller",
+    "blue_gular_pouch": "Bright blue breeding season only. Primary courtship visual display. Brightness = honest signal of male quality (body condition, parasite load). Female choice correlates with brightness. No other PNW cormorant has blue gular pouch."
+  },
+  "nodes": [
+    {
+      "id": "first-phalacrocoracidae",
+      "type": "milestone",
+      "title": "First Phalacrocoracidae -- Cormorant Chapter Opens",
+      "description": "Degree 287 is the first Phalacrocoracidae in the engine. Two-entry chapter: Brandt's (287, outer coast specialist) and Double-crested (288, inland adaptable). Third cormorant species (Pelagic Cormorant) will enter in future degrees. Phalacrocoracidae family characters: wettable plumage for diving buoyancy reduction; wing-spreading behavior to dry; hooked bill.",
+      "connections": ["blue-gular-display", "el-nino-sensitivity"]
+    },
+    {
+      "id": "blue-gular-display",
+      "type": "concept",
+      "title": "Blue Gular Pouch -- Honest Signal Courtship Display",
+      "description": "Bright blue gular pouch in breeding season; inflates during courtship display. Brightness correlates with male body condition and parasite load (honest signal). Female choice selects for brightness. No other PNW cormorant has blue gular; all others are orange-yellow (Double-crested) or olive-dull (Pelagic). Most reliable field identification mark.",
+      "connections": ["first-phalacrocoracidae"]
+    },
+    {
+      "id": "el-nino-sensitivity",
+      "type": "concept",
+      "title": "El Ni&ntilde;o Prey Collapse -- Oceanographic Indicator",
+      "description": "Brandt's is the PNW seabird most tightly coupled to California Current upwelling. Cold-water high-upwelling years: excellent breeding success. El Niño warm-water years (1982-83, 1997-98, 2015-16): widespread breeding failure. Prey specialist (sardine, herring, anchovy): no flexibility when schooling fish fail. Indicator organism for upwelling productivity.",
+      "connections": ["first-phalacrocoracidae"]
+    },
+    {
+      "id": "farallon-colony",
+      "type": "location",
+      "title": "Farallon Islands -- World's Largest Brandt's Colony",
+      "description": "Farallon Islands, California (outside strict PNW scope but benchmark population context). Tens of thousands of breeding pairs. The largest Brandt's Cormorant colony in the world. Provides scale reference for understanding what a large Brandt's colony sounds like at full density.",
+      "connections": ["first-phalacrocoracidae"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-286", "species": "Leach's Storm-Petrel colony", "relationship": "E=6. First Hydrobatidae. Nocturnal vs. daytime. Tiny birds (55 g) vs. medium-large. Both colonial seabirds on offshore islands. E=6 vs. E=7."},
+    {"target": "SPS-288", "species": "Double-crested Cormorant", "relationship": "E=6. Second Phalacrocoracidae. Outer coast specialist (Brandt's) vs. inland/coastal generalist (DCCO). Blue gular vs. orange-yellow. Thousands of pairs vs. dozens to hundreds. Chapter closes at 288."},
+    {"target": "S36-287", "artist": "Black Flag influence", "relationship": "E=9. SST Records. E=9 + E=7 = E=16. Block peak combined energy. Both ensemble phenomena at maximum simultaneous intensity: Black Flag's collective sonic assault + Brandt's colony guttural chorus from nest sites inches apart."}
+  ],
+  "milestones": ["FIRST PHALACROCORACIDAE", "PHALACROCORACIDAE CHAPTER OPENS (287-288)"]
+}

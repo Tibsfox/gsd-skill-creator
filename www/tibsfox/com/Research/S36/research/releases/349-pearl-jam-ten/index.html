@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 349&deg; &mdash; Pearl Jam Ten &mdash; E=10 &mdash; Grunge &mdash; THE CLOSING ARC BEGINS &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #0D47A1); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(26,35,126,0.5); }
+    .energy-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #1A237E, #283593); color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 4px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; font-size: 1.05rem; }
+    .closing-arc-banner { background: linear-gradient(135deg, #1A237E, #283593, #0D47A1); border: 3px solid #90CAF9; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E3F2FD; box-shadow: 0 0 32px rgba(26,35,126,0.4); }
+    .closing-arc-banner h3 { margin: 0 0 0.75rem; color: #90CAF9; font-size: 1.4rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .closing-arc-banner p { color: #BBDEFB; margin: 0.5rem 0; line-height: 1.7; font-size: 1rem; }
+    .closing-arc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin: 1.5rem 0; }
+    @media (max-width: 700px) { .closing-arc-grid { grid-template-columns: 1fr; } }
+    .arc-step { padding: 0.75rem 0.5rem; border-radius: 6px; text-align: center; }
+    .arc-349 { background: linear-gradient(135deg, #1A237E, #283593); border: 3px solid #90CAF9; }
+    .arc-350 { background: #FCE4EC; border: 1px solid #880E4F; }
+    .arc-351 { background: #FFF8E1; border: 1px solid #E65100; }
+    .arc-352 { background: #F3E5F5; border: 1px solid #6A1B9A; }
+    .arc-353 { background: #E8F5E9; border: 1px solid #1B5E20; }
+    .arc-step .band { font-size: 0.75rem; font-weight: 700; font-family: system-ui, sans-serif; }
+    .arc-step .deg { font-size: 0.68rem; color: #757575; font-family: system-ui, sans-serif; }
+    .arc-step .energy { font-size: 1.1rem; font-weight: 700; font-family: 'Georgia', serif; }
+    .arc-349 .band { color: #90CAF9; font-size: 0.8rem; } .arc-349 .energy { color: white; font-size: 1.3rem; } .arc-349 .deg { color: #BBDEFB; }
+    .arc-350 .band { color: #880E4F; } .arc-350 .energy { color: #880E4F; } .arc-350 .deg { color: #757575; }
+    .arc-351 .band { color: #E65100; } .arc-351 .energy { color: #E65100; } .arc-351 .deg { color: #757575; }
+    .arc-352 .band { color: #6A1B9A; } .arc-352 .energy { color: #6A1B9A; } .arc-352 .deg { color: #757575; }
+    .arc-353 .band { color: #1B5E20; } .arc-353 .energy { color: #1B5E20; } .arc-353 .deg { color: #757575; }
+    .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .track-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 0.85rem 1rem; }
+    .track-card h4 { margin: 0 0 0.2rem; font-size: 0.95rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .track-card .track-note { font-size: 0.82rem; color: #546E7A; font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    .platinum-display { text-align: center; background: linear-gradient(135deg, #1A237E, #0D47A1, #1A237E); border: 3px solid #90CAF9; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+    .platinum-display .plat-num { font-size: 4.5rem; font-weight: 700; font-family: 'Georgia', serif; color: #90CAF9; text-shadow: 0 0 20px rgba(144,202,249,0.5); }
+    .platinum-display .plat-label { color: #BBDEFB; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .platinum-display .plat-sub { color: #90CAF9; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.4rem; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #1A237E, #0D47A1, #1A237E); border: 3px solid #90CAF9; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #90CAF9; text-shadow: 0 0 20px rgba(144,202,249,0.5); }
+    .e20-display .e20-label { color: #BBDEFB; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #90CAF9; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>349 &mdash; Pearl Jam Ten (E=10)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">349&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Pearl Jam &mdash; <em>Ten</em></h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10</span>
+          <span class="genre-badge">Grunge</span>
+          <span class="label-badge">Epic Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="closing-arc-banner">
+      <h3>THE CLOSING ARC BEGINS &mdash; THE ENGINE&rsquo;S FINAL FIVE</h3>
+      <p>
+        <strong>Pearl Jam <em>Ten</em> (1991).</strong> The debut. Eleven tracks, 53 minutes, 13&times; platinum. &ldquo;Alive,&rdquo; &ldquo;Even Flow,&rdquo; &ldquo;Jeremy,&rdquo; &ldquo;Black.&rdquo; The album that documented a generation&rsquo;s emotional landscape with precision and refused to simplify it for commercial purposes. <strong>E=10.</strong> The closing arc opens.
+      </p>
+      <p>
+        Pairs with <strong>Elk Rut + Storm + Dawn Chorus</strong> (SPS 349, E=10) &mdash; the most complete seasonal convergence in the SPS engine. <strong>E=20.</strong> The closing arc&rsquo;s first maximum combined energy.
+      </p>
+    </div>
+
+    <div style="margin: 1.5rem 0;">
+      <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #757575; font-family: system-ui, sans-serif; margin-bottom: 0.5rem;">The Closing Arc: Degrees 349&ndash;353</div>
+      <div class="closing-arc-grid">
+        <div class="arc-step arc-349"><div class="band">Pearl Jam</div><div class="deg">349</div><div class="energy">E=10</div></div>
+        <div class="arc-step arc-350"><div class="band">TAD</div><div class="deg">350</div><div class="energy">E=10</div></div>
+        <div class="arc-step arc-351"><div class="band">The Accused</div><div class="deg">351</div><div class="energy">E=10</div></div>
+        <div class="arc-step arc-352"><div class="band">Botch</div><div class="deg">352</div><div class="energy">E=10</div></div>
+        <div class="arc-step arc-353"><div class="band">TAAS</div><div class="deg">353</div><div class="energy">E=9</div></div>
+      </div>
+    </div>
+
+    <div class="release-layout">
+      <main>
+        <div class="platinum-display">
+          <div class="plat-num">13&times;</div>
+          <div class="plat-label">Platinum &mdash; RIAA Certification</div>
+          <div class="plat-sub">13 million units sold in the United States &mdash; #2 Billboard 200 &mdash; Epic Records, 1991</div>
+        </div>
+
+        <h2>The Record</h2>
+        <p><em>Ten</em> was released on August 27, 1991, on Epic Records, produced by Rick Parashar at London Bridge Studio in Seattle. It ran 53 minutes across eleven tracks and did not immediately chart; the album built its following through touring and radio airplay, eventually reaching #2 on the Billboard 200 in early 1992. It remains one of the best-selling American rock debuts.</p>
+
+        <p>The album was recorded to sound like people playing instruments in a room. Rick Parashar&rsquo;s production did not smooth Eddie Vedder&rsquo;s voice or compress the guitar tones toward radio palatability. The roughness is preserved. The grain is in. This production decision &mdash; to maintain the organic presence of the live performance in the recorded artifact &mdash; distinguishes <em>Ten</em> from the more polished grunge records that followed its commercial success.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Tracks</h2>
+        <div class="track-grid">
+          <div class="track-card">
+            <h4>Alive</h4>
+            <p class="track-note">Biographical: Vedder discovers the man he believed was his biological father was his stepfather; his biological father had died before they could meet. Audiences heard triumph; Vedder intended ambivalence. The gap between intention and reception is why the song endures.</p>
+          </div>
+          <div class="track-card">
+            <h4>Even Flow</h4>
+            <p class="track-note">Stone Gossard&rsquo;s descending opening riff is the song&rsquo;s primary architecture. Vedder&rsquo;s lyrics describe a homeless man in Seattle without judgment or sentimentality. The specificity grounds it.</p>
+          </div>
+          <div class="track-card">
+            <h4>Jeremy</h4>
+            <p class="track-note">Based on Jeremy Wade Delle, who shot himself in front of his class on January 8, 1991, in Richardson, Texas. MTV VMA Video of the Year 1993. The video exceeded the song in cultural reach.</p>
+          </div>
+          <div class="track-card">
+            <h4>Black</h4>
+            <p class="track-note">6:22. Not released as a commercial single &mdash; Vedder refused, believing music videos would constrain listener interpretation. Radio stations played it anyway. The refusal cost nothing commercially; the integrity of it was real.</p>
+          </div>
+          <div class="track-card">
+            <h4>Once</h4>
+            <p class="track-note">Opens the album. Heavier, less immediate than the singles. An unconventional lead track that announces the album&rsquo;s refusal to sequence for commercial comfort.</p>
+          </div>
+          <div class="track-card">
+            <h4>Release</h4>
+            <p class="track-note">Closes the album. Grief as its subject. The album&rsquo;s emotional arc completes here &mdash; from violence and identity rupture at the open to grief and resolution at the close.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Triangle</h2>
+        <p><strong>Stone Gossard</strong> is the primary compositional architect. His rhythm guitar work builds the rooms: &ldquo;Once,&rdquo; &ldquo;Even Flow,&rdquo; the harmonic structures that give Vedder&rsquo;s lyrics their physical weight. He does not call attention to the architecture &mdash; the architecture supports the song.</p>
+        <p><strong>Mike McCready&rsquo;s</strong> lead guitar work is blues-influenced and emotionally direct. The &ldquo;Alive&rdquo; solo is the clearest expression: not a virtuosity display, a catharsis event. Fast, raw, targeted at the song&rsquo;s emotional peak. McCready provides the expressive release that Gossard&rsquo;s architecture holds in reserve.</p>
+        <p><strong>Eddie Vedder&rsquo;s</strong> voice is baritone, capable of significant dynamic range within a phrase, and characterized by sustained intensity: full commitment from the beginning of the phrase to its end. It does not offer comfortable access to the emotional content. It delivers the emotional content directly.</p>
+
+        <blockquote>&ldquo;I&rsquo;m still alive &mdash; but I don&rsquo;t want to be.&rdquo; The line and the response it generates are not the same thing. Both are real.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Temple of the Dog &mdash; The Formation Context</h2>
+        <p>Before <em>Ten</em> was recorded, the members who would become Pearl Jam participated in a tribute album to Andrew Wood, organized by Chris Cornell. <em>Temple of the Dog</em> (1991, A&amp;M Records) featured Cornell, Gossard, Ament, and McCready. Eddie Vedder appeared on two tracks, including &ldquo;Hunger Strike&rdquo; &mdash; the duet with Cornell that was the first time Vedder&rsquo;s voice reached a wide audience. The album was released in April 1991, four months before <em>Ten</em>.</p>
+        <p>Mother Love Bone&rsquo;s Andrew Wood had died of a heroin overdose on March 19, 1990. The musicians who would become Pearl Jam formed in the grief and its productive energy. <em>Temple of the Dog</em> was the grief&rsquo;s public documentation; <em>Ten</em> was what came next.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">The Closing Arc&rsquo;s First Pairing</div>
+          <div class="e20-sub">Pearl Jam <em>Ten</em> E=10 + Elk Rut + Storm + Dawn Chorus E=10 = E=20<br>MAXIMUM COMPLETENESS &mdash; ALL LAYERS SIMULTANEOUSLY AT PEAK</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">348</span> Nirvana Nevermind &mdash; Summit completes. Both 1991, both Grunge, both E=10. The detonation (348) followed immediately by the emotional documentation (349). Sequential degrees, simultaneous years.</li>
+          <li><span class="ref-degree">346</span> Soundgarden Superunknown &mdash; Both Capitol Hill. Both E=10. Soundgarden = completeness (70 min, full alt metal range). Ten = emotional precision and debut scale.</li>
+          <li><span class="ref-degree">341</span> Pearl Jam catalog (E=9) &mdash; Prior entry for full discography. Degree 349 re-enters at E=10 specifically for the 1991 debut album. Two engine positions document the full arc.</li>
+          <li><span class="ref-degree">350</span> TAD peak intensity &mdash; The closing arc continues. Commercial maximum (349, 13&times; platinum) followed by Sub Pop maximum heaviness (350). The arc moves from accessible to extreme.</li>
+          <li><span class="ref-degree">SPS&nbsp;349</span> Elk Rut + Storm + Dawn Chorus &mdash; E=10 + E=10 = E=20. All emotional registers (Ten) paired with all ecological layers simultaneously (peak fall dawn). Maximum completeness.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">349 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 10</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Album</span><span class="stat-value">Ten (1991)</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Epic Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Ten (1991)</h4>
+          <div class="stat-row"><span class="stat-label">Released</span><span class="stat-value">Aug 27, 1991</span></div>
+          <div class="stat-row"><span class="stat-label">Studio</span><span class="stat-value">London Bridge, Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Producer</span><span class="stat-value">Rick Parashar</span></div>
+          <div class="stat-row"><span class="stat-label">Tracks</span><span class="stat-value">11</span></div>
+          <div class="stat-row"><span class="stat-label">Runtime</span><span class="stat-value">~53 min</span></div>
+          <div class="stat-row"><span class="stat-label">Peak chart</span><span class="stat-value">#2 Billboard 200</span></div>
+          <div class="stat-row"><span class="stat-label">US sales</span><span class="stat-value">13&times; Platinum</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members (Ten)</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Eddie Vedder</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Stone Gossard</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Mike McCready</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Jeff Ament</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Dave Krusen</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">97.0%</span></div>
+          <div class="stat-row"><span class="stat-label">Arc</span><span class="stat-value">CLOSING (1/5)</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=20 (SPS 349)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Sound</span><span class="stat-value">Elk Rut + Storm</span></div>
+          <div class="stat-row"><span class="stat-label">Season</span><span class="stat-value">Fall Dawn</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=10</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E=20</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

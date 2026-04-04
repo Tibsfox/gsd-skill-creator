@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 136&deg; &mdash; Great Horned Owl Pair Duet &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #C5CAE9;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.5);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .duet-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 30%, #303F9F 60%, #1A237E 100%);
+      border: 2px solid #0D1642;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #C5CAE9;
+    }
+    .duet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .duet-card p { color: #C5CAE9; }
+    .duet-card strong { color: #E8EAF6; }
+
+    .paradox-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #4A148C 100%);
+      border: 2px solid #38006B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E1BEE7;
+    }
+    .paradox-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .paradox-card p { color: #E1BEE7; }
+    .paradox-card strong { color: #F3E5F5; }
+
+    .nesting-card {
+      background: linear-gradient(135deg, #01579B 0%, #0277BD 30%, #0288D1 60%, #01579B 100%);
+      border: 2px solid #002F6C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #B3E5FC;
+    }
+    .nesting-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #81D4FA;
+    }
+    .nesting-card p { color: #B3E5FC; }
+    .nesting-card strong { color: #E1F5FE; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.duet { background: #1A237E; }
+    .theory-icon.paradox { background: #4A148C; }
+    .theory-icon.nesting { background: #01579B; }
+    .theory-icon.double { background: #4E342E; }
+    .theory-icon.strigidae { background: #33691E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.advanced { background: #EDE7F6; color: #4A148C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+    .comparison-table th {
+      background: #1A237E;
+      color: white;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .comparison-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .comparison-table tr:nth-child(even) { background: #E8EAF6; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">136&deg;</div>
+      <div class="release-title-block">
+        <h2>Great Horned Owl &mdash; Pair Duet</h2>
+        <div class="scientific"><em>Bubo virginianus</em> (Strigidae) &mdash; E=5 &mdash; Call-and-Response in the Night</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      male-female <strong>pitch-different duet</strong> &mdash;
+      <strong>E=5</strong> &mdash; the most complex nocturnal vocalization
+      in the PNW forest. Male: <strong>250&ndash;400 Hz</strong> (deeper).
+      Female: <strong>300&ndash;500 Hz</strong> (higher, despite being larger).
+      <strong>Size-pitch paradox</strong> &mdash; reversed sexual dimorphism.
+      <strong>Third species with double entries</strong> (after Pileated WP 108&ndash;109,
+      American Dipper 116&ndash;117). Winter nesting &mdash; earliest nester
+      in North America. Pair bonding, territory declaration.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Duet Card -->
+        <div class="duet-card">
+          <h3>Call-and-Response &mdash; E=5</h3>
+          <p>
+            The male initiates with his deep
+            <strong>&ldquo;hoo-h&rsquo;HOO-hoo-hoo&rdquo;</strong>
+            (250&ndash;400 Hz). The female responds within 2&ndash;5 seconds
+            with a <strong>higher-pitched version</strong> (300&ndash;500 Hz),
+            often with more notes (5&ndash;7 vs. 4&ndash;5). The pair
+            alternates: <strong>male-female-male-female</strong>, creating
+            a near-continuous vocal presence. Combined acoustic power and
+            territorial significance push the energy from E=4 (solo) to
+            <strong>E=5 (duet)</strong>.
+          </p>
+        </div>
+
+        <!-- Paradox Card -->
+        <div class="paradox-card">
+          <h3>The Size-Pitch Paradox</h3>
+          <p>
+            The female is <strong>~25% heavier</strong> than the male
+            (1.4&ndash;2.5 kg vs. 0.9&ndash;1.8 kg) &mdash; reversed sexual
+            dimorphism, common in raptors. But her hoot is
+            <strong>higher-pitched</strong>, violating the typical size-pitch
+            relationship. <strong>Larger body, higher voice.</strong> The deeper
+            voice is always the male; the higher voice is always the female.
+            A remarkable reversal with implications for acoustic dimorphism
+            research.
+          </p>
+        </div>
+
+        <!-- Nesting Card -->
+        <div class="nesting-card">
+          <h3>Winter Nesting &mdash; January to February</h3>
+          <p>
+            The duet peaks during nesting &mdash; the <strong>earliest nesting
+            period of any North American bird</strong>. Eggs in January&ndash;February.
+            The female incubates through ice storms, heavy rain, and sub-zero
+            temperatures for <strong>30&ndash;35 days</strong>. Great Horned Owls
+            <strong>do not build nests</strong> &mdash; they appropriate nests
+            of Red-tailed Hawks, crows, and ravens. Early nesting = first
+            access to the best sites.
+          </p>
+        </div>
+
+        <h2>Male vs. Female Acoustic Comparison</h2>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Male</th>
+              <th>Female</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Frequency</strong></td>
+              <td>250&ndash;400 Hz</td>
+              <td>300&ndash;500 Hz</td>
+            </tr>
+            <tr>
+              <td><strong>Notes per series</strong></td>
+              <td>4&ndash;5</td>
+              <td>5&ndash;7</td>
+            </tr>
+            <tr>
+              <td><strong>Duration</strong></td>
+              <td>2&ndash;3 seconds</td>
+              <td>2&ndash;4 seconds</td>
+            </tr>
+            <tr>
+              <td><strong>Timbre</strong></td>
+              <td>Deeper, more resonant</td>
+              <td>Higher, slightly thinner</td>
+            </tr>
+            <tr>
+              <td><strong>Body mass</strong></td>
+              <td>0.9&ndash;1.8 kg</td>
+              <td>1.4&ndash;2.5 kg (larger)</td>
+            </tr>
+            <tr>
+              <td><strong>Size-pitch</strong></td>
+              <td>Smaller = deeper</td>
+              <td>Larger = higher (paradox)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-135 Great Horned Owl (solo hoot)</strong>
+            <p>DOUBLE ENTRY! Solo hoot (135, E=4) to pair duet (136, E=5). Individual to partnership. E=4 to E=5. The step from &ldquo;I am here&rdquo; to &ldquo;We are here, and this is ours.&rdquo;</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-108/109 Pileated Woodpecker</strong>
+            <p>DOUBLE ENTRY PRECEDENT! Pileated: laughing call (108) + drumming (109). GHO: solo hoot (135) + pair duet (136). Same pattern: two acoustically distinct contributions from one species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-116/117 American Dipper</strong>
+            <p>DOUBLE ENTRY PRECEDENT! Dipper: song (116) + dunking (117). Three species now with double entries. Each represents a species with two distinct acoustic signatures.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004 Spotted Owl</strong>
+            <p>STRIGIDAE PAIR! Spotted Owl (4, E=3) and Great Horned Owl (135&ndash;136, E=4/5). The GHO is actually the primary threat to Spotted Owls &mdash; an ecological predator-prey relationship within the same family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-101 Raven Pair</strong>
+            <p>PAIR VOCALIZATION PRECEDENT! Raven pair (101, E=4) and GHO pair duet (136, E=5). Both document paired vocalizations as distinct from individual calls. Both are corvid/raptor pairs with coordinated communication.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon duet">D</div>
+            <div class="theory-content">
+              <h4>Pair Duet &mdash; E=5 Call-and-Response</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Male-female alternating hoots. Combined acoustic power. Near-continuous territorial signal. E=4 (solo) to E=5 (duet). The most complex nocturnal vocalization in the PNW forest.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon paradox">P</div>
+            <div class="theory-content">
+              <h4>Size-Pitch Paradox</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Female 25% heavier but higher-pitched. Reversed sexual dimorphism meets reversed acoustic dimorphism. Larger body, higher voice. A remarkable biological anomaly with acoustic implications.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon nesting">W</div>
+            <div class="theory-content">
+              <h4>Winter Nesting &mdash; Earliest in N. America</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Eggs January&ndash;February. Incubation through ice storms. Nest appropriation from other raptors. 30&ndash;35 day incubation. Duet intensifies during nesting. The pair bond as survival strategy.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon double">3</div>
+            <div class="theory-content">
+              <h4>Third Double Entry (135&ndash;136)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Pileated WP (108&ndash;109), American Dipper (116&ndash;117), Great Horned Owl (135&ndash;136). Three species with two acoustically distinct contributions. Double entries for exceptional acoustic diversity.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon strigidae">2</div>
+            <div class="theory-content">
+              <h4>Second Consecutive Strigidae (135&ndash;136)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Two Strigidae entries after 17 Anatidae. The owl family establishes presence. The engine has shifted from waterfowl to nocturnal forest predators.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Great Horned Owl</div>
+          <div class="stat-detail"><em>Bubo virginianus</em> &mdash; pair duet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Strigidae</div>
+          <div class="stat-detail">2nd consecutive (135&ndash;136)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Pair duet</div>
+          <div class="stat-detail">male-female call-and-response</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">combined power, territorial</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Male Frequency</div>
+          <div class="stat-value">250&ndash;400 Hz</div>
+          <div class="stat-detail">deeper, 4&ndash;5 notes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Female Frequency</div>
+          <div class="stat-value">300&ndash;500 Hz</div>
+          <div class="stat-detail">higher, 5&ndash;7 notes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size-Pitch</div>
+          <div class="stat-value">Paradox</div>
+          <div class="stat-detail">larger female = higher pitch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nesting</div>
+          <div class="stat-value">Jan&ndash;Feb</div>
+          <div class="stat-detail">earliest in N. America</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pair Bond</div>
+          <div class="stat-value">Lifelong</div>
+          <div class="stat-detail">multi-year territory fidelity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Double Entry</div>
+          <div class="stat-value">3rd in engine</div>
+          <div class="stat-detail">after Pileated WP, Dipper</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

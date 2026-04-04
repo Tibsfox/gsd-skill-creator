@@ -1,0 +1,37 @@
+{
+  "degree": 225, "project": "SPS", "name": "Northern Goshawk", "slug": "225-northern-goshawk",
+  "species": "Accipiter gentilis", "family": "Accipitridae", "order": "Accipitriformes",
+  "common_name": "Northern Goshawk", "sound_type": "Loud rapid alarm -- ka-ka-ka-ka-ka",
+  "energy": 6,
+  "ecosystem": "Mature coniferous forest interior. Old-growth and mature second-growth. Closed canopy, large-diameter trees, open understory.",
+  "season": "Resident (year-round PNW)",
+  "conservation": "Least Concern (IUCN). A. g. laingi subspecies (coastal islands) considered vulnerable. Mainland PNW populations reduced from historical by old-growth logging.",
+  "vocalization": {
+    "type": "alarm call",
+    "description": "Rapid, hard-edged series: ka-ka-ka-ka-ka (also kek-kek-kek, kak-kak-kak). Up to 8-12 notes per second at peak agitation.",
+    "frequency_hz": "1500-4000",
+    "function": "Territorial defense, intruder alarm, nest defense. Directionally aimed at threat. Escalates to physical attack at nest approach.",
+    "notable": "Most aggressive-sounding raptor alarm in PNW forests. Will physically strike human heads during nest approach in breeding season."
+  },
+  "size": {
+    "female_weight_kg": "0.8-1.5",
+    "female_length_cm": "55-61",
+    "female_wingspan_cm": "98-113",
+    "male_weight_kg": "0.5-1.0",
+    "sexual_dimorphism": "Pronounced -- female can weigh twice male"
+  },
+  "ecology": {
+    "habitat": "Mature/old-growth forest interior. Most sensitive PNW indicator species for forest quality.",
+    "prey": "Jays, woodpeckers, corvids, squirrels, rabbits, grouse. Top-level forest food web predator.",
+    "hunting": "Perch-and-launch ambush. High-speed pursuit through dense vegetation. Short wings, long tail for forest maneuverability.",
+    "territory_ha": "500-5000+"
+  },
+  "connections": [
+    {"degree": 225, "type": "s36_pair", "description": "Temple of the Dog (E=7). Apex supergroup pairs with apex accipiter. Both at top of their domains. Grief monument + explosive nest defender."},
+    {"degree": 226, "type": "accipiter_trio", "description": "Cooper's Hawk (medium). Second of the three-accipiter sequence (225-227), largest to smallest."},
+    {"degree": 227, "type": "accipiter_trio", "description": "Sharp-shinned Hawk (smallest). Third and final accipiter. Trio closes."},
+    {"degree": 221, "type": "family_connection", "description": "Bald Eagle -- FIRST ACCIPITRIDAE. Goshawk at 225 = FIRST Accipiter genus in the engine. Same family, different genus."}
+  ],
+  "tags": ["accipitridae", "accipiter", "northern-goshawk", "mature-forest", "old-growth-indicator", "accipiter-trio", "apex-accipiter", "resident-pnw", "forest-interior", "first-accipiter-genus"],
+  "milestones": ["ACCIPITER ARC OPENS", "FIRST ACCIPITER GENUS IN ENGINE", "APEX PAIR WITH TEMPLE OF THE DOG"]
+}

@@ -1,0 +1,87 @@
+{
+  "degree": 111,
+  "subject": "Helms Alee",
+  "project": "S36",
+  "energy": 6,
+  "genre": "Noise/Experimental",
+  "era": "2008-present",
+  "location": "Capitol Hill, Seattle",
+  "label": "Sargent House",
+  "members": [
+    { "name": "Ben Verellen", "role": "guitar, vocals", "note": "Founder of Verellen Amplifiers" },
+    { "name": "Dana James", "role": "bass, vocals" },
+    { "name": "Hozoji Matheson-Margullis", "role": "drums, vocals" }
+  ],
+  "nodes": [
+    {
+      "id": "crushing-harmonic",
+      "type": "concept",
+      "label": "The Crushing Harmonic",
+      "description": "Maximum heaviness with maximum beauty. Three-part vocal harmonics over crushing noise-rock riffs through Verellen amplifiers. The paradox generates E=6. Neither element compromises -- both at full intensity simultaneously. The defining acoustic signature of Helms Alee.",
+      "connections": ["three-voices", "verellen-amps", "e6-corridor"]
+    },
+    {
+      "id": "three-voices",
+      "type": "concept",
+      "label": "Three Voices -- Angelic Harmonics Over Noise",
+      "description": "All three members sing. Ben Verellen, Dana James, Hozoji Matheson-Margullis -- three voices in angelic harmony, unison screaming, call-and-response, or layered combinations. Unprecedented in heavy music. The vocal dimension that sets Helms Alee apart from all other noise rock.",
+      "connections": ["crushing-harmonic", "capitol-hill-heavy"]
+    },
+    {
+      "id": "verellen-amps",
+      "type": "entity",
+      "label": "Verellen Amplifiers -- Builder and Player Unified",
+      "description": "Ben Verellen designs and hand-builds boutique tube amplifiers. The amps Helms Alee plays through are the amps Verellen builds. Instrument-maker and instrument-user are the same person. Tone engineered from circuit board up. In the lineage of Fender, Marshall, Mesa/Boogie -- but Verellen is unique: builder and player unified.",
+      "connections": ["crushing-harmonic", "hendrix-lineage"]
+    },
+    {
+      "id": "e6-corridor",
+      "type": "pattern",
+      "label": "E=6 Sustained Corridor (107-111)",
+      "description": "Fourth E=6 in five degrees. Veronica Lipgloss (108), No Anchor (109), Kinski (110), Helms Alee (111). Unprecedented density at maximum. Prior: one E=6 in 107 degrees (Hendrix at 36). Now: four in five. The engine at sustained peak energy.",
+      "connections": ["crushing-harmonic", "capitol-hill-heavy"]
+    },
+    {
+      "id": "capitol-hill-heavy",
+      "type": "connection",
+      "label": "Capitol Hill Heavy Lineage",
+      "description": "Capitol Hill's heavy music tradition: Melvins (sludge), Kinski (110, instrumental), Hovercraft (91, drone), Big Business (sludge/noise). Helms Alee synthesizes the tradition. Second consecutive Capitol Hill act at E=6 (110-111). Beginning of Capitol Hill corridor (110-115).",
+      "connections": ["three-voices", "e6-corridor"]
+    },
+    {
+      "id": "hendrix-lineage",
+      "type": "connection",
+      "label": "Amplifier Lineage -- Hendrix to Verellen",
+      "description": "Hendrix (degree 36, E=6) played through Marshall stacks. Verellen builds the next generation of high-powered amplifiers. A literal hardware lineage from the first E=6 to the fifth. Builder and player, unified in one person at degree 111.",
+      "connections": ["verellen-amps", "e6-corridor"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "S36-110",
+      "artist": "Kinski",
+      "relationship": "CONSECUTIVE CAPITOL HILL E=6. Both Capitol Hill, both E=6, both heavy. Kinski is instrumental and expansive; Helms Alee is vocal and paradoxical. Two consecutive Capitol Hill acts at maximum energy."
+    },
+    {
+      "target": "S36-108",
+      "artist": "Veronica Lipgloss",
+      "relationship": "E=6 CORRIDOR. Fourth E=6 in five degrees. Punk/electronic combustion (108) and noise/beauty paradox (111). Different sources of maximum energy."
+    },
+    {
+      "target": "S36-091",
+      "artist": "Hovercraft",
+      "relationship": "HEAVY SEATTLE VOLUME. Both noise-adjacent, both overwhelming volume. Hovercraft: instrumental drone (E=4). Helms Alee: vocal, structured, paradoxically beautiful (E=6)."
+    },
+    {
+      "target": "S36-036",
+      "artist": "Jimi Hendrix",
+      "relationship": "E=6 AND AMPLIFIER LINEAGE. Hendrix played Marshall stacks. Verellen builds the next generation. Builder-and-player unified. E=6 from degree 36 to degree 111."
+    },
+    {
+      "target": "S36-083",
+      "artist": "Pearl Jam",
+      "relationship": "SEATTLE HEAVY TRADITION. Both heavy, both Seattle. Pearl Jam fills arenas at E=5. Helms Alee detonates venues at E=6."
+    }
+  ],
+  "tags": ["noise-rock", "experimental", "sargent-house", "capitol-hill", "e6-maximum", "three-voices", "verellen-amplifiers", "heavy-music", "vocal-harmonics", "sludge", "e6-corridor"]
+}

@@ -1,0 +1,198 @@
+{
+  "degree": 76,
+  "species": "Hoary Marmot",
+  "scientific_name": "Marmota caligata",
+  "slug": "076-hoary-marmot",
+  "sound_type": "loud penetrating whistle -- sharp, high-pitched alarm whistle that carries across alpine basins, the 'whistler' of Whistler Mountain fame, E=5, audible at 300-500+ meters, the loudest mammalian call in the engine, named a mountain and a city",
+  "energy": 5,
+  "ecosystem": "alpine and subalpine meadows with adjacent talus or boulder fields, typically at or above treeline, 1,500-3,000+ meters in the Cascades and Olympics. Prefers the interface between open meadow (foraging) and rocky talus (denning and predator escape).",
+  "season": "active spring through fall (May-September); HIBERNATES 7-8 months (October-April), the longest hibernation period of any mammal in the engine",
+  "family": "Sciuridae",
+  "order": "Rodentia",
+  "csv_substitute": false,
+  "original_species": "Hoary Marmot",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": 75,
+    "partner_species": "Yellow-bellied Marmot",
+    "pair_type": "Marmot pair -- back-to-back Sciuridae. Same genus (Marmota), different species, different elevation zones. Lower (Yellow-bellied, 1,000-2,500 m) vs. higher (Hoary, 1,500-3,000+ m). Smaller (2-5 kg) vs. larger (5-7 kg). E=4 vs. E=5. Chirp vs. whistle. Fourth family pair after Anatidae (58-59), Castoridae (61-62), Mustelidae (67-68)."
+  },
+  "coordinates": {
+    "lat": 48.85,
+    "lon": -121.68,
+    "description": "Reference for alpine habitat in the North Cascades, Mount Baker vicinity. The Hoary Marmot inhabits alpine meadows and talus at and above treeline. The whistle carries across alpine basins. Whistler Mountain (BC) is named for this species."
+  },
+  "taxonomy_note": {
+    "description": "BACK-TO-BACK SCIURIDAE with Yellow-bellied Marmot (75). Marmot pair. Fifteenth mammalian entry. Thirteenth mammalian species. Third Rodentia in the engine (after Beaver 61-62, Yellow-bellied 75). Sciuridae's second entry. Largest North American marmot. Named Whistler Mountain, BC.",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_infraclass": "Placentalia",
+    "new_infraclass": false,
+    "infraclass_note": "Placentalia continues. The Hoary Marmot is a placental mammal.",
+    "current_family": "Sciuridae",
+    "new_family": false,
+    "family_count_in_engine": 34,
+    "sciuridae_count_in_engine": 2,
+    "name_etymology": "Marmota from French marmotte, from Romansch murmont (mountain mouse), ultimately from Latin murem montis (mouse of the mountain). caligata from Latin caligata ('wearing boots'), for the dark fur on the lower legs. Named by Eschscholtz (1829). Marmota caligata = 'the booted mountain mouse.' Common name 'Hoary' = white/gray-haired, for the silver-gray pelage.",
+    "genus_note": "Marmota -- approximately 14 species worldwide. Three in the PNW region: M. flaviventris (Yellow-bellied, degree 75), M. caligata (Hoary, degree 76), and M. olympus (Olympic Marmot, endemic to Olympic Mountains). Two of three PNW species now represented.",
+    "order_note": "Rodentia -- third Rodentia in the engine after American Beaver (61-62) and Yellow-bellied Marmot (75). Rodentia returns for the third time. The order remains underrepresented relative to its global diversity.",
+    "class_note": "Mammalia -- fifteenth mammalian entry. Thirteenth mammalian species. FOUR orders (Rodentia, Carnivora, Didelphimorphia, Lagomorpha). NINE families (Castoridae, Mustelidae, Mephitidae, Procyonidae, Canidae, Didelphidae, Leporidae, Ochotonidae, Sciuridae). TWO infraclasses (Placentalia, Marsupialia).",
+    "family_position": "Sciuridae's SECOND entry at degree 76. Back-to-back with Yellow-bellied Marmot (75). Marmot pair. Fourth family pair in the engine. Sciuridae is the squirrel family -- the most diverse rodent family in the PNW."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Approximately 2,000-8,000 Hz, with peak energy at 3,000-5,000 Hz.",
+    "peak_energy_band_hz": "Approximately 3,000-5,000 Hz (the piercing core of the whistle).",
+    "song_frequency_hz": "NOT a song. ALARM WHISTLE. Sharp, tonal, descending slightly. Given singly or in series of 2-5 when a predator is detected. Named Whistler Mountain.",
+    "song_duration_s": "0.3-1.0 seconds per whistle. Series of 2-5 whistles with 1-3 second intervals.",
+    "note_structure": "Single sharp whistle, high onset descending slightly. Clean tonal quality. Not a bark or chirp -- a true whistle produced by air forced through a narrow opening.",
+    "note_types": "Alarm whistle (primary, sharp and loud), territorial call (lower-volume version), distress call (rare).",
+    "phrase_structure": "Simple: single whistle or short series. No complex phrasing. The whistle is an alarm impulse, not a structured vocalization.",
+    "timbre": "Sharp, clear, piercing, tonal. A true whistle -- clean and penetrating. Unlike the Pika's metallic 'eenk' bark (74), the marmot's whistle is smoother and more tonal. Unlike the Yellow-bellied Marmot's abrupt chirp (75), the Hoary Marmot's whistle is longer and more sustained.",
+    "amplitude": "E=5. LOUD. The loudest mammalian vocalization in the engine. Audible at 300-500+ meters across open alpine terrain. Far louder than the Pika's bark (E=4) and the Yellow-bellied Marmot's chirp (E=4). The whistle named a mountain.",
+    "tempo": "Single whistles or short series (2-5). Inter-whistle interval: 1-3 seconds. Alarm calling can persist for minutes when a predator is present.",
+    "context": "ALARM. Given when a predator is detected -- eagle overhead, weasel approaching, human hiker. Functions as personal alert and colony warning. Sentinels on elevated boulders give alarm whistles that are relayed across the colony. The whistle is the colony's early warning system.",
+    "regional_variation": "Minimal geographic variation. The alarm whistle is consistent across the species' range.",
+    "key_property": "LOUD PENETRATING WHISTLE -- the 77th acoustic element. Sharp, high-pitched alarm whistle. E=5. Audible at 300-500+ meters. The loudest mammalian call in the engine. Named Whistler Mountain, BC. The whistle that crosses alpine basins."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Large, stocky ground squirrel. 620-820 mm total length. 5-7 kg at peak autumn mass (pre-hibernation). Largest North American marmot. Silver-gray pelage with dark brown/black face and 'boots' on lower legs. Bushy reddish-brown tail. Robust, broad-chested build.",
+    "diagnostic_mark": "For degree 76, the diagnostic features are: (1) LARGE SIZE -- 5-7 kg, largest marmot. Substantially bigger than Yellow-bellied Marmot. (2) SILVER-GRAY PELAGE -- hoary (frosted) appearance, silver-tipped guard hairs. (3) DARK 'BOOTS' -- dark brown to black lower legs and feet (caligata = 'wearing boots'). (4) DARK FACE -- brown to black crown and facial markings. White muzzle/forehead patches. (5) ALPINE MEADOW HABITAT -- at or above treeline, on boulders or in meadows.",
+    "fur_detail": "BODY: Silver-gray with brown underfur. Guard hairs silver-tipped, creating frosted 'hoary' appearance. HEAD: Dark brown to black crown and face. White patches on muzzle and forehead. EXTREMITIES: Dark brown to black lower legs and feet -- the diagnostic 'boots.' BELLY: Lighter gray to buff. TAIL: Bushy, reddish-brown to dark brown.",
+    "dental_detail": "Rodent dentition with ever-growing incisors. Herbivorous. Feeds on alpine grasses, sedges, and wildflowers.",
+    "field_id": "In alpine meadows or on talus boulders above treeline: a large, stocky, silver-gray marmot with dark 'boots' on the lower legs and a dark face. Much larger than American Pika (same habitat). Distinguished from Yellow-bellied Marmot by larger size, silver-gray (not yellowish-brown) pelage, and higher elevation. Usually heard before seen -- the loud, penetrating whistle carries far."
+  },
+  "hibernation_note": {
+    "description": "HIBERNATION: 7-8 months (October-April). The LONGEST hibernation of any mammal in the engine. Active only 4-5 months per year. Deep torpor: body temperature drops from 37 C to 3-5 C. Heart rate drops from 100+ bpm to 3-5 bpm. Metabolic rate to 1-2% of active. Pre-hibernation weight gain: 3-4 kg (spring) to 5-7 kg (autumn). Nearly doubles body mass.",
+    "contrast_with_pika": "The Pika (degree 74) does NOT hibernate -- it stores hay and remains active year-round. The Hoary Marmot DOES hibernate -- it stores fat and shuts down. Same alpine habitat, opposite winter strategies. The two solutions to alpine winter: farm or sleep.",
+    "significance": "The longest hibernation in the engine demonstrates the extreme metabolic flexibility of alpine mammals. The Hoary Marmot's solution to winter: total shutdown."
+  },
+  "whistler_note": {
+    "description": "WHISTLER MOUNTAIN: The city of Whistler, British Columbia -- host of the 2010 Winter Olympics -- is named for the Hoary Marmot. The London Mountain Club named the mountain 'Whistler' in the early 1900s because of the Hoary Marmots' loud whistles on its alpine slopes. The only species in the engine whose vocalization named a major geographic feature.",
+    "significance": "Toponymic significance: the sound became a place name. The marmot's voice is permanently embedded in PNW geography. Extends engine geography to British Columbia."
+  },
+  "nodes": [
+    {
+      "id": "marmot-pair",
+      "type": "pattern",
+      "title": "Back-to-Back Sciuridae (75-76) -- The Marmot Pair",
+      "description": "Yellow-bellied Marmot (75) and Hoary Marmot (76) are consecutive Sciuridae -- same genus (Marmota), different species. Fourth family pair after Anatidae (58-59), Castoridae (61-62), Mustelidae (67-68). Lower vs. higher elevation. Smaller vs. larger. E=4 vs. E=5. Chirp vs. whistle. The complementary marmot pair spans the alpine elevation gradient.",
+      "connections": ["loud-whistle-acoustic", "alpine-run", "yellow-bellied-connection"]
+    },
+    {
+      "id": "loud-whistle-acoustic",
+      "type": "concept",
+      "title": "Loud Penetrating Whistle -- 77th Acoustic Element",
+      "description": "Sharp, high-pitched alarm whistle. 2,000-8,000 Hz. E=5 -- the loudest mammalian call in the engine. Audible at 300-500+ meters. Named Whistler Mountain, BC. The whistle is tonal, sustained, and piercing -- a true whistle rather than a bark or chirp.",
+      "connections": ["marmot-pair", "whistler-mountain", "alpine-run"]
+    },
+    {
+      "id": "whistler-mountain",
+      "type": "concept",
+      "title": "The Whistler -- Named a Mountain and a City",
+      "description": "Whistler Mountain and the city of Whistler, BC, are named for the Hoary Marmot's alarm whistle. The London Mountain Club named the mountain in the early 1900s. Host of the 2010 Winter Olympics. The only species in the engine whose vocalization named a major geographic feature. The sound became a place name.",
+      "connections": ["loud-whistle-acoustic", "marmot-pair"]
+    },
+    {
+      "id": "largest-marmot",
+      "type": "concept",
+      "title": "Largest North American Marmot",
+      "description": "5-7 kg at peak autumn mass. Substantially larger than Yellow-bellied Marmot (2-5 kg). The alpine giant. Large body mass is an adaptation to extreme cold -- reduced surface-area-to-volume ratio for thermoregulation. Second largest rodent in the engine after Beaver (11-32 kg).",
+      "connections": ["marmot-pair", "longest-hibernation"]
+    },
+    {
+      "id": "longest-hibernation",
+      "type": "concept",
+      "title": "Longest Hibernation in the Engine -- 7-8 Months",
+      "description": "Hibernates October-April. Active only 4-5 months per year. Body temperature drops to 3-5 C. Heart rate to 3-5 bpm. Nearly doubles body mass pre-hibernation (3-4 kg to 5-7 kg). Contrast with Pika (74): marmot hibernates, Pika stores hay. Same habitat, opposite strategies.",
+      "connections": ["largest-marmot", "pika-contrast", "alpine-run"]
+    },
+    {
+      "id": "alpine-run",
+      "type": "pattern",
+      "title": "Third Consecutive Alpine/Rocky Species (74-75-76)",
+      "description": "American Pika (74), Yellow-bellied Marmot (75), Hoary Marmot (76). Three consecutive alpine/talus species. The engine's deepest penetration into high-elevation ecology. Alpine run. Elevation gradient across three degrees.",
+      "connections": ["marmot-pair", "pika-contrast", "loud-whistle-acoustic"]
+    },
+    {
+      "id": "pika-contrast",
+      "type": "pattern",
+      "title": "Pika Contrast -- Opposite Winter Strategies",
+      "description": "Same alpine talus habitat, opposite approaches to winter. Pika (74): stores hay, active year-round, does NOT hibernate. Hoary Marmot (76): stores fat, hibernates 7-8 months, total shutdown. Tiny (120-185 g) vs. massive (5-7 kg). The two solutions: farm or sleep.",
+      "connections": ["longest-hibernation", "alpine-run"]
+    },
+    {
+      "id": "chris-pureka-parallel",
+      "type": "pattern",
+      "title": "The Chris Pureka Parallel",
+      "description": "Both defined by voice -- Pureka's androgynous register, the marmot's penetrating whistle. Both at margins -- queer folk circuit, alpine edge. Both carry names that mislead -- 'hoary' suggests ancient but the marmot is vigorous; an androgynous voice defies name-based assumptions.",
+      "connections": ["loud-whistle-acoustic", "marmot-pair"]
+    },
+    {
+      "id": "yellow-bellied-connection",
+      "type": "pattern",
+      "title": "Yellow-bellied Marmot Connection (SPS-075)",
+      "description": "Back-to-back Sciuridae. Marmot pair. Same genus, different species. Lower vs. higher elevation. Smaller vs. larger. E=4 vs. E=5. Chirp vs. whistle. The complementary pair.",
+      "connections": ["marmot-pair"]
+    },
+    {
+      "id": "weasel-predator",
+      "type": "pattern",
+      "title": "Weasel Predator Connection (SPS-067)",
+      "description": "Predator-prey. The Short-tailed Weasel can enter marmot burrows and prey on juveniles. Small enough to breach the den system. The predator that goes underground.",
+      "connections": ["marmot-pair", "alpine-run"]
+    },
+    {
+      "id": "fox-predator",
+      "type": "pattern",
+      "title": "Red Fox Predator Connection (SPS-071)",
+      "description": "Predator-prey at middle elevations. The Red Fox hunts marmots where ranges overlap. Fox bark (71) vs. marmot whistle (76). Predator and prey acoustic signatures.",
+      "connections": ["loud-whistle-acoustic"]
+    },
+    {
+      "id": "marten-predator",
+      "type": "pattern",
+      "title": "American Marten Connection (SPS-065)",
+      "description": "Predator-prey at the treeline transition. Marten in subalpine forest, Hoary Marmot in alpine meadow above. Where forest meets alpine, the predator-prey relationship activates.",
+      "connections": ["alpine-run"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-075",
+      "species": "Yellow-bellied Marmot",
+      "relationship": "MARMOT PAIR. BACK-TO-BACK SCIURIDAE (75-76). Same genus (Marmota), different species. Fourth family pair. Lower vs. higher elevation (1,000-2,500 m vs. 1,500-3,000+ m). Smaller vs. larger (2-5 kg vs. 5-7 kg). E=4 vs. E=5. Chirp vs. whistle. Yellow-bellied vs. silver-gray. The complementary marmot pair spans the alpine gradient."
+    },
+    {
+      "target": "SPS-074",
+      "species": "American Pika",
+      "relationship": "THREE CONSECUTIVE ALPINE/TALUS (74-75-76). Same habitat, opposite winter strategies. Pika: stores hay, no hibernation, active year-round. Hoary Marmot: stores fat, hibernates 7-8 months. Tiny vs. massive (120-185 g vs. 5-7 kg). Both climate-sensitive. Both talus-associated."
+    },
+    {
+      "target": "SPS-067",
+      "species": "Short-tailed Weasel",
+      "relationship": "PREDATOR-PREY. The weasel can enter marmot burrows and prey on juveniles. The predator that breaches the fortress. Same dynamic as weasel-Pika predation."
+    },
+    {
+      "target": "SPS-071",
+      "species": "Red Fox",
+      "relationship": "PREDATOR-PREY at middle elevations. The fox hunts marmots where ranges overlap. Fox bark (71) vs. marmot whistle (76). Predator and prey acoustic signatures in the alpine-forest transition."
+    },
+    {
+      "target": "SPS-065",
+      "species": "American Marten",
+      "relationship": "PREDATOR-PREY at the treeline transition. Marten occupies subalpine forest; Hoary Marmot occupies alpine meadow above. Where forest meets alpine, predation occurs."
+    },
+    {
+      "target": "MAM",
+      "species": "Mammals of the Pacific Northwest",
+      "relationship": "Fifteenth mammalian entry. Thirteenth species. Fourth order (Rodentia, third entry). Ninth family (Sciuridae, second entry). Marmot pair (75-76). Largest marmot. E=5. Longest hibernation."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Alpine meadow and talus habitat. 1,500-3,000+ meters. Colonial herbivore. Alpine foraging ecology -- grasses, sedges, wildflowers. Hibernation 7-8 months. Climate-sensitive at southern range margins. Predator-prey web: eagle, wolverine, fox, weasel, marten."
+    }
+  ]
+}

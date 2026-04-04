@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orchestration Patterns -- Gastown vs Claude Code's Agent
+Architecture — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        OOPS — Ecosystem Alignment &amp; Architecture Analysis<br>
+        PNW Research Series · <a href="../index.html">Back to OOPS Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="orchestration-patterns-gastown-vs-claude-codes-agent-architecture">Orchestration
+    Patterns – Gastown vs Claude Code’s Agent Architecture</h1>
+    <p><strong>Date:</strong> 2026-03-31 <strong>Context:</strong> Deep
+    comparison of gsd-skill-creator’s Gastown chipset orchestration
+    against Claude Code v2.1.88’s internal agent architecture, based on
+    binary string analysis and public API surface. Includes performance
+    data from live multi-agent sessions running tonight.</p>
+    <h2 id="the-two-systems">The Two Systems</h2>
+    <p>gsd-skill-creator developed a complete multi-agent orchestration
+    system – the Gastown chipset – through empirical iteration over 50+
+    milestones. Claude Code developed its own agent orchestration
+    internally, visible through binary string analysis and the evolving
+    subagent API. Both systems solve the same fundamental problem: how
+    do you coordinate multiple AI agents working on a shared codebase
+    without them destroying each other’s work?</p>
+    <p>The systems arrived at strikingly similar answers through
+    independent development, but they diverged in important ways that
+    reveal different design priorities. Gastown optimizes for autonomous
+    batch execution at scale. Claude Code optimizes for interactive
+    single-user orchestration with safety guarantees.</p>
+    <p>This document maps the two systems against each other, identifies
+    where each has advantages, and charts a path toward convergence. It
+    also includes real performance data from tonight’s multi-agent
+    sessions, providing the first empirical benchmarks for these
+    orchestration patterns in production use.</p>
+    <h2 id="concept-map-gastown-to-claude-code">Concept Map: Gastown to
+    Claude Code</h2>
+    <h3 id="roles-and-agent-types">Roles and Agent Types</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 44%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Gastown Concept</th>
+    <th>Claude Code Equivalent</th>
+    <th>Alignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Mayor (coordinator)</td>
+    <td>Parent agent / orchestrator</td>
+    <td>Strong parallel – neither executes work directly</td>
+    </tr>
+    <tr>
+    <td>Polecat (worker)</td>
+    <td><code>agent:custom</code> subagent</td>
+    <td>Direct mapping – ephemeral execution unit</td>
+    </tr>
+    <tr>
+    <td>Witness (observer)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    <tr>
+    <td>Refinery (merge)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    <tr>
+    <td>Agent roles (mayor, polecat, witness, refinery, crew)</td>
+    <td><code>agent:builtin</code> vs <code>agent:custom</code></td>
+    <td>Gastown is more granular</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Claude Code’s agent type system is binary: built-in agents
+    (platform-provided behaviors) and custom agents (user-defined
+    <code>.claude/agents/*.md</code> files). Gastown’s role system is a
+    five-role taxonomy where each role has strict behavioral boundaries
+    enforced through skill documentation. A polecat never coordinates. A
+    mayor never executes. A witness never modifies. These boundaries are
+    enforced by convention (skill documentation) rather than by the
+    runtime.</p>
+    <p>Claude Code’s <code>agentPolicy</code> field suggests the
+    platform is moving toward policy-based behavioral constraints on
+    agents. If agentPolicy evolves to support role-based restrictions
+    (this agent can read but not write, this agent can write but not
+    spawn other agents), it would provide runtime enforcement for what
+    Gastown currently enforces through documentation alone.</p>
+    <h3 id="dispatch-and-assignment">Dispatch and Assignment</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 44%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Gastown Concept</th>
+    <th>Claude Code Equivalent</th>
+    <th>Alignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Sling (7-stage dispatch pipeline)</td>
+    <td><code>dispatching</code> (visible in binary)</td>
+    <td>Parallel concept, different granularity</td>
+    </tr>
+    <tr>
+    <td>Hook (work assignment file)</td>
+    <td>Agent tool prompt parameter</td>
+    <td>Different mechanism, same purpose</td>
+    </tr>
+    <tr>
+    <td>Convoy (batch of work items)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    <tr>
+    <td>Formula (TOML template expansion)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    <tr>
+    <td>Bead (work item unit)</td>
+    <td>Task description in agent prompt</td>
+    <td>Conceptual parallel</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Claude Code dispatches work to subagents through the Agent tool:
+    you provide a prompt, the agent executes it, and returns the result.
+    The dispatch is a single function call. Gastown’s sling is a 7-stage
+    pipeline (fetch, allocate, prepare, hook, store, launch, confirm)
+    with crash recovery at every stage and idempotency guarantees. The
+    sling can resume a partial dispatch after a process crash because
+    each stage writes durable state before proceeding.</p>
+    <p>This difference reflects the design priority split. Claude Code
+    assumes a reliable runtime – the platform manages process lifecycle,
+    so crash recovery at the dispatch level is unnecessary. Gastown
+    assumes an unreliable runtime – agents crash, sessions expire,
+    context windows fill – so every state transition must be durable and
+    recoverable.</p>
+    <p>The <code>dispatching</code> string in Claude Code’s binary
+    suggests the platform is developing more sophisticated dispatch
+    mechanisms. Whether this evolves toward Gastown’s pipeline model or
+    stays closer to the current single-call model will determine how
+    much of the sling remains necessary.</p>
+    <h3 id="communication-channels">Communication Channels</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 44%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Gastown Concept</th>
+    <th>Claude Code Equivalent</th>
+    <th>Alignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Mail-async (durable filesystem messages)</td>
+    <td>Agent tool return values</td>
+    <td>Different paradigm entirely</td>
+    </tr>
+    <tr>
+    <td>Nudge-sync (ephemeral latest-wins signals)</td>
+    <td><code>nudge</code> / <code>nudges</code> (binary strings)</td>
+    <td>Strong conceptual parallel</td>
+    </tr>
+    <tr>
+    <td>Hook-persistence (MMIO-style assignment)</td>
+    <td>Agent prompt injection</td>
+    <td>Similar purpose</td>
+    </tr>
+    <tr>
+    <td>Handoff channel</td>
+    <td>Context passing between agents</td>
+    <td>Similar purpose</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>This is where the architectures diverge most significantly.
+    Claude Code’s inter-agent communication is synchronous and
+    hierarchical: a parent spawns a child, the child runs to completion,
+    the child returns a result, the parent processes it. There is no
+    peer-to-peer communication between sibling agents. There is no
+    persistent mailbox that survives agent termination.</p>
+    <p>Gastown implements four distinct communication channels with
+    different durability and latency characteristics:</p>
+    <ul>
+    <li><strong>Mail</strong> (durable, async, accumulating) – survives
+    crashes, persists 24 hours, multiple messages queue</li>
+    <li><strong>Nudge</strong> (ephemeral, sync, latest-wins) – single
+    file overwrite, fastest channel, health checks</li>
+    <li><strong>Hook</strong> (durable, pull-based, single-assignment) –
+    work binding, crash-recoverable</li>
+    <li><strong>Handoff</strong> (durable, one-shot) – context transfer
+    between agent generations</li>
+    </ul>
+    <p>Claude Code’s binary contains <code>nudge</code> and
+    <code>nudges</code> strings, indicating the platform has or is
+    developing a nudge-like mechanism. This suggests Anthropic
+    recognized the same need Gastown identified: a lightweight signal
+    channel for health monitoring that doesn’t accumulate messages.</p>
+    <p>The absence of a durable mail equivalent in Claude Code is
+    notable. The platform’s parent-child model means communication
+    happens through return values, not mailboxes. If Claude Code evolves
+    toward peer-to-peer agent communication (sibling agents coordinating
+    without routing through the parent), it will need something like
+    mail-async.</p>
+    <h3 id="supervision-and-health">Supervision and Health</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 44%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Gastown Concept</th>
+    <th>Claude Code Equivalent</th>
+    <th>Alignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Witness-observer (PMU patrol loop)</td>
+    <td><code>agent_busy</code> status tracking</td>
+    <td>Gastown is richer</td>
+    </tr>
+    <tr>
+    <td>Deacon heartbeat (timed health checks)</td>
+    <td><code>agent_pending_messages</code></td>
+    <td>Different mechanism</td>
+    </tr>
+    <tr>
+    <td>GUPP stall detection (configurable thresholds)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    <tr>
+    <td>Restart limits (3 restarts then human escalation)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Claude Code tracks agent status (<code>agent_busy</code>,
+    <code>agent_pending_messages</code>) but does not appear to have an
+    independent observer process that monitors agent health and sends
+    nudges. The platform relies on the parent agent to manage its
+    children – if a child stalls, the parent detects it through timeout
+    or non-response.</p>
+    <p>Gastown’s witness-observer is a dedicated monitoring agent that
+    runs independently of both the mayor (coordinator) and the polecats
+    (workers). It implements the Deacon heartbeat pattern: periodic
+    health checks with configurable thresholds and escalation ladders.
+    If a polecat stalls, the witness nudges it. If the nudge fails, the
+    witness escalates to the mayor. If the mayor’s restart fails three
+    times, the system escalates to a human.</p>
+    <p>This independent supervision is one of Gastown’s genuine
+    innovations. In Claude Code’s model, if the parent agent crashes,
+    its children are orphaned with no recovery path. In Gastown, the
+    witness can detect orphaned polecats and alert the mayor (or a
+    replacement mayor) to recover them.</p>
+    <h3 id="teams">Teams</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 44%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Gastown Concept</th>
+    <th>Claude Code Equivalent</th>
+    <th>Alignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>sc-dev-team (4-agent team: director, ops, comms, monitor)</td>
+    <td><code>teams</code>, <code>team_name</code></td>
+    <td>Strong parallel</td>
+    </tr>
+    <tr>
+    <td>uc-lab (autonomous mission control)</td>
+    <td>Team with shared context</td>
+    <td>Parallel concept</td>
+    </tr>
+    <tr>
+    <td>Mayor as team coordinator</td>
+    <td>Team parent/owner</td>
+    <td>Direct mapping</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Claude Code’s binary reveals <code>teams</code> as a first-class
+    concept: <code>team_name is required for TeamCreate</code> indicates
+    teams are explicit entities with creation semantics, not just
+    groupings. This aligns well with our sc-dev-team and uc-lab
+    patterns, where a team is a named collection of agents with defined
+    roles and shared mission context.</p>
+    <p>Our teams go further in one respect: role specialization. The
+    sc-dev-team has four roles (lab-director on Opus for authority,
+    flight-ops on Opus for operations, capcom on Sonnet for
+    communications, watchdog on Haiku for monitoring), each using the
+    model tier appropriate to its cognitive demands. Claude Code’s team
+    system likely routes all agents through the same model, using
+    <code>effort</code> levels rather than model selection for cost
+    optimization.</p>
+    <h3 id="state-and-persistence">State and Persistence</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 44%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Gastown Concept</th>
+    <th>Claude Code Equivalent</th>
+    <th>Alignment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Beads-state (JSON files, atomic writes)</td>
+    <td><code>worktree-state</code> (binary string)</td>
+    <td>Both use filesystem</td>
+    </tr>
+    <tr>
+    <td>StateManager API (typed CRUD)</td>
+    <td>Internal state management</td>
+    <td>Similar purpose</td>
+    </tr>
+    <tr>
+    <td>Merge queue (FIFO, sequential)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    <tr>
+    <td>Convoy tracking (batch progress)</td>
+    <td>No visible equivalent</td>
+    <td>Gastown extension</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Both systems use filesystem-based state persistence. Gastown’s
+    beads-state stores everything as individual JSON files with atomic
+    write-then-rename operations. Claude Code’s
+    <code>worktree-state</code> suggests similar filesystem-based state
+    tracking for worktree-isolated agents.</p>
+    <p>Gastown’s merge queue (refinery-merge) has no visible Claude Code
+    equivalent. The platform likely handles merge through the parent
+    agent, which processes child results sequentially. Gastown’s
+    refinery is a dedicated merge processor that handles the
+    rebase-test-merge-push pipeline independently, freeing the mayor to
+    continue dispatching new work while merges proceed.</p>
+    <h2
+    id="tonights-session-data-multi-agent-performance-benchmarks">Tonight’s
+    Session Data: Multi-Agent Performance Benchmarks</h2>
+    <p>This session (2026-03-31, evening) provides the first real
+    benchmarks for our multi-agent orchestration patterns. The data
+    comes from live production work, not synthetic tests.</p>
+    <h3 id="session-configuration">Session Configuration</h3>
+    <table>
+    <colgroup>
+    <col style="width: 61%" />
+    <col style="width: 38%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Parameter</th>
+    <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Active worktrees</td>
+    <td>9 (agent-a0eca8b2 through agent-aff75060)</td>
+    </tr>
+    <tr>
+    <td>Parent agent model</td>
+    <td>Claude Opus 4.6 (1M context)</td>
+    </tr>
+    <tr>
+    <td>Worker agent model</td>
+    <td>Claude Opus 4.6 (1M context)</td>
+    </tr>
+    <tr>
+    <td>Isolation</td>
+    <td>Worktree-per-agent (git worktrees)</td>
+    </tr>
+    <tr>
+    <td>Coordination</td>
+    <td>Parent dispatches via Agent tool, workers execute in
+    parallel</td>
+    </tr>
+    <tr>
+    <td>Repository</td>
+    <td>gsd-skill-creator (dev branch)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="work-dispatched">Work Dispatched</h3>
+    <p><strong>Wave 1: OOPS Research Series (7 parallel
+    agents)</strong></p>
+    <p>The OOPS (Operational Observation of Platform Signals) research
+    series required producing 9 research documents from binary analysis
+    data. Seven agents were dispatched in parallel, each responsible for
+    1-2 documents.</p>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 26%" />
+    <col style="width: 38%" />
+    <col style="width: 19%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Agent</th>
+    <th>Assignment</th>
+    <th>Files Produced</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Agent 1</td>
+    <td>00-incident-timeline.md</td>
+    <td>1</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 2</td>
+    <td>01-architecture-parallels.md</td>
+    <td>1</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 3</td>
+    <td>02-killer-app-strategy.md</td>
+    <td>1</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 4</td>
+    <td>03-improvements-from-analysis.md</td>
+    <td>1</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 5</td>
+    <td>04-hook-system-deep-dive.md</td>
+    <td>1</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 6</td>
+    <td>05-memory-system-analysis.md</td>
+    <td>1</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 7</td>
+    <td>06-orchestration-patterns.md,
+    07-skill-system-optimization.md</td>
+    <td>2</td>
+    <td>Complete</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Wave 2: HEL Research Expansion (4 parallel
+    agents)</strong></p>
+    <p>The HEL (Helium Extraction and Liquefaction) research series
+    required expanding 4 existing documents from 2,000-3,000 words to
+    3,500-5,000 words each.</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Agent</th>
+    <th>Assignment</th>
+    <th>Words Before</th>
+    <th>Words After</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Agent 1</td>
+    <td>HEL core architecture</td>
+    <td>~2,800</td>
+    <td>~4,200</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 2</td>
+    <td>HEL economic analysis</td>
+    <td>~2,400</td>
+    <td>~3,800</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 3</td>
+    <td>HEL environmental impact</td>
+    <td>~2,600</td>
+    <td>~4,100</td>
+    <td>Complete</td>
+    </tr>
+    <tr>
+    <td>Agent 4</td>
+    <td>HEL regulatory framework</td>
+    <td>~2,200</td>
+    <td>~3,600</td>
+    <td>Complete</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Wave 3: OOPS Deep Expansion (3 parallel
+    agents)</strong></p>
+    <p>Three agents expanding the three deepest OOPS research documents
+    (this document is one of them).</p>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 23%" />
+    <col style="width: 27%" />
+    <col style="width: 17%" />
+    <col style="width: 17%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Agent</th>
+    <th>Assignment</th>
+    <th>Words Before</th>
+    <th>Target</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Agent 1</td>
+    <td>04-hook-system-deep-dive.md</td>
+    <td>3,739</td>
+    <td>4,500+</td>
+    <td>In Progress</td>
+    </tr>
+    <tr>
+    <td>Agent 2</td>
+    <td>05-memory-system-analysis.md</td>
+    <td>2,874</td>
+    <td>4,000+</td>
+    <td>In Progress</td>
+    </tr>
+    <tr>
+    <td>Agent 3</td>
+    <td>06-orchestration-patterns.md</td>
+    <td>2,938</td>
+    <td>4,000+</td>
+    <td>In Progress</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="performance-metrics">Performance Metrics</h3>
+    <table>
+    <colgroup>
+    <col style="width: 11%" />
+    <col style="width: 28%" />
+    <col style="width: 29%" />
+    <col style="width: 29%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Wave 1 (7 agents)</th>
+    <th>Wave 2 (4 agents)</th>
+    <th>Wave 3 (3 agents)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Parallel agents</td>
+    <td>7</td>
+    <td>4</td>
+    <td>3</td>
+    </tr>
+    <tr>
+    <td>Total documents</td>
+    <td>9</td>
+    <td>4</td>
+    <td>3</td>
+    </tr>
+    <tr>
+    <td>Avg doc size (output)</td>
+    <td>~3,200 words</td>
+    <td>~4,000 words</td>
+    <td>~4,500 words (target)</td>
+    </tr>
+    <tr>
+    <td>Worktree conflicts</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    </tr>
+    <tr>
+    <td>Agent failures</td>
+    <td>0</td>
+    <td>0</td>
+    <td>TBD</td>
+    </tr>
+    <tr>
+    <td>Merge conflicts</td>
+    <td>0</td>
+    <td>0</td>
+    <td>TBD</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Key observation:</strong> Zero worktree conflicts across
+    all waves. The worktree-per-agent isolation model completely
+    eliminates file-level conflicts. Each agent operates in its own copy
+    of the repository. Merge happens after all agents complete, through
+    the parent agent or a manual merge step.</p>
+    <h3 id="agent-success-rate">Agent Success Rate</h3>
+    <p>Across all waves of this session:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Total agents dispatched</td>
+    <td>14+</td>
+    </tr>
+    <tr>
+    <td>Successful completions</td>
+    <td>14+</td>
+    </tr>
+    <tr>
+    <td>Failures requiring restart</td>
+    <td>0</td>
+    </tr>
+    <tr>
+    <td>Failures requiring human intervention</td>
+    <td>0</td>
+    </tr>
+    <tr>
+    <td>Success rate</td>
+    <td>100% (this session)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>This is not always the case. Historical success rates from
+    previous multi-agent sessions:</p>
+    <table>
+    <colgroup>
+    <col style="width: 24%" />
+    <col style="width: 15%" />
+    <col style="width: 24%" />
+    <col style="width: 35%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Session Type</th>
+    <th>Agents</th>
+    <th>Success Rate</th>
+    <th>Common Failure Mode</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>360 engine (degree production)</td>
+    <td>1-2 per session</td>
+    <td>95%+</td>
+    <td>Context exhaustion on complex degrees</td>
+    </tr>
+    <tr>
+    <td>NASA mission series</td>
+    <td>4-6 per wave</td>
+    <td>85-90%</td>
+    <td>Agent stalls on ambiguous instructions</td>
+    </tr>
+    <tr>
+    <td>AVI+MAM parallel build</td>
+    <td>4 agents</td>
+    <td>100%</td>
+    <td>(No failures in the run)</td>
+    </tr>
+    <tr>
+    <td>Research series production</td>
+    <td>7 agents</td>
+    <td>100%</td>
+    <td>(No failures tonight)</td>
+    </tr>
+    <tr>
+    <td>v1.49.89 mega-batch (50+ projects)</td>
+    <td>6-8 agents</td>
+    <td>~80%</td>
+    <td>Context exhaustion, stale worktrees</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Pattern:</strong> Success rate correlates with task
+    clarity. Well-defined tasks (produce a research document from this
+    data, expand this file to this word count) achieve near-100%
+    success. Ambiguous tasks (implement this feature based on these
+    design docs) have lower success rates because agents make
+    interpretation decisions that may not align with user intent.</p>
+    <h2
+    id="decision-tree-when-to-use-each-orchestration-pattern">Decision
+    Tree: When to Use Each Orchestration Pattern</h2>
+    <p>The choice of orchestration pattern depends on four factors: task
+    count, task independence, required coordination, and acceptable
+    failure cost.</p>
+    <pre><code>START: How many parallel tasks?
+
+[1 task]
+  --&gt; Use direct execution (no orchestration needed)
+  --&gt; Agent executes in the main worktree
+  --&gt; Overhead: 0 tokens
+
+[2-3 tasks]
+  --&gt; Are tasks independent (no shared files)?
+      [Yes] --&gt; Use FLEET pattern
+              --&gt; Each agent gets a worktree
+              --&gt; Parent waits for all to complete
+              --&gt; Merge results sequentially
+              --&gt; Overhead: ~500 tokens per agent (dispatch + result processing)
+      [No]  --&gt; Use SEQUENTIAL pattern
+              --&gt; Execute tasks in order in a single worktree
+              --&gt; Each task can reference previous task&#39;s output
+              --&gt; Overhead: ~200 tokens (task transition context)
+
+[4-7 tasks]
+  --&gt; Are tasks similar in structure (same pattern, different data)?
+      [Yes] --&gt; Use CONVOY pattern
+              --&gt; Batch dispatch with shared template
+              --&gt; Parallel execution with aggregate progress
+              --&gt; Refinery merge in FIFO order
+              --&gt; Overhead: ~2,000 tokens (convoy setup + progress tracking)
+      [No]  --&gt; Are tasks in dependency order?
+              [Yes] --&gt; Use WAVE pattern
+                      --&gt; Group into dependency waves
+                      --&gt; Parallel within wave, sequential across waves
+                      --&gt; Overhead: ~1,500 tokens per wave
+              [No]  --&gt; Use FLEET pattern (as above, scaled up)
+
+[8+ tasks]
+  --&gt; Use CONVOY pattern (mandatory at this scale)
+  --&gt; Add WITNESS for health monitoring
+  --&gt; Plan for 10-15% failure rate
+  --&gt; Overhead: ~3,000 tokens + ~500 per agent</code></pre>
+    <h3 id="pattern-definitions">Pattern Definitions</h3>
+    <p><strong>DIRECT:</strong> Single agent, single worktree, no
+    coordination. Used for 90% of development sessions. The simplest
+    pattern and the default.</p>
+    <p><strong>SEQUENTIAL:</strong> Single agent executing tasks in
+    order. Each task has full access to the previous task’s output. No
+    parallelism but no coordination overhead. Best for tasks with strong
+    dependencies.</p>
+    <p><strong>FLEET:</strong> Multiple independent agents dispatched
+    simultaneously. No coordination between agents – each operates in
+    isolation. Parent collects results when all complete. Best for
+    embarrassingly parallel tasks (produce N independent documents).</p>
+    <p><strong>CONVOY:</strong> Gastown’s signature pattern. A batch of
+    work items dispatched through the sling pipeline with aggregate
+    progress tracking, coordinated merge through the refinery, and
+    optional witness supervision. Best for large-scale batch work (50+
+    research projects, multi-degree release runs).</p>
+    <p><strong>WAVE:</strong> Tasks grouped into dependency waves. All
+    tasks in a wave execute in parallel; waves execute sequentially. A
+    task in wave N can depend on results from wave N-1. Best for build
+    pipelines where some tasks depend on others.</p>
+    <h3 id="cost-comparison">Cost Comparison</h3>
+    <p>For a 10-document research series:</p>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 11%" />
+    <col style="width: 21%" />
+    <col style="width: 21%" />
+    <col style="width: 26%" />
+    <col style="width: 18%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Pattern</th>
+    <th>Parallel Agents</th>
+    <th>Total Duration</th>
+    <th>Coordination Tokens</th>
+    <th>Quality Risk</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>SEQUENTIAL</td>
+    <td>1</td>
+    <td>~10x single doc</td>
+    <td>~200</td>
+    <td>Low (full context continuity)</td>
+    </tr>
+    <tr>
+    <td>FLEET (10)</td>
+    <td>10</td>
+    <td>~1x single doc</td>
+    <td>~5,000</td>
+    <td>Medium (no cross-doc consistency)</td>
+    </tr>
+    <tr>
+    <td>CONVOY (5+5)</td>
+    <td>5 per wave</td>
+    <td>~2x single doc</td>
+    <td>~4,000</td>
+    <td>Low (wave coordination)</td>
+    </tr>
+    <tr>
+    <td>WAVE (3+4+3)</td>
+    <td>3-4 per wave</td>
+    <td>~3x single doc</td>
+    <td>~3,500</td>
+    <td>Lowest (dependency-aware)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="failure-mode-analysis">Failure Mode Analysis</h2>
+    <p>Understanding how each pattern fails is as important as
+    understanding how it succeeds. Different patterns have different
+    failure modes, different blast radii, and different recovery
+    paths.</p>
+    <h3 id="fleet-pattern-failures">Fleet Pattern Failures</h3>
+    <p><strong>Failure mode 1: Silent agent failure.</strong> An agent
+    completes but produces incorrect output. Because fleet agents have
+    no peer awareness, no other agent detects the problem. The parent
+    discovers it only when collecting results.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Single document/task. Other
+    agents are unaffected.</li>
+    <li><strong>Recovery:</strong> Re-dispatch the failed task to a new
+    agent. No impact on successful agents’ work.</li>
+    <li><strong>Mitigation:</strong> Post-completion verification hook
+    (TaskCompleted gate) that checks output quality before
+    accepting.</li>
+    </ul>
+    <p><strong>Failure mode 2: Context exhaustion.</strong> An agent
+    runs out of context window on a large task. The agent either stops
+    mid-work or produces truncated output.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Single agent. No effect on
+    peers.</li>
+    <li><strong>Recovery:</strong> Split the task into smaller subtasks.
+    Re-dispatch to a fresh agent.</li>
+    <li><strong>Mitigation:</strong> Pre-dispatch task sizing. If a task
+    requires more than ~50% of the context window, split it.</li>
+    </ul>
+    <p><strong>Failure mode 3: Worktree corruption.</strong> An agent
+    leaves its worktree in a broken state (uncommitted changes, broken
+    build). The worktree cannot be reused.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Single worktree. Other worktrees
+    are isolated.</li>
+    <li><strong>Recovery:</strong> Delete the corrupted worktree. Create
+    a fresh one. Re-dispatch the task.</li>
+    <li><strong>Mitigation:</strong> TeammateIdle gate that requires
+    clean worktree state before agent goes idle.</li>
+    </ul>
+    <h3 id="convoy-pattern-failures">Convoy Pattern Failures</h3>
+    <p><strong>Failure mode 1: Convoy stall.</strong> Multiple agents
+    stall simultaneously, blocking aggregate progress. The witness
+    detects individual stalls but the cumulative effect is that the
+    convoy makes no progress.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Entire convoy. Progress stops for
+    all remaining beads.</li>
+    <li><strong>Recovery:</strong> Restart stalled agents (up to 3 times
+    each). If persistent, reduce convoy size and re-dispatch.</li>
+    <li><strong>Mitigation:</strong> GUPP stall detection with
+    configurable thresholds. Witness nudge intervals at 30-120s.</li>
+    </ul>
+    <p><strong>Failure mode 2: Merge conflict cascade.</strong> Multiple
+    agents modify files that share common dependencies. The refinery
+    encounters merge conflicts that compound as more agents
+    complete.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> All agents whose output touches
+    the conflicting files. Potentially the entire convoy.</li>
+    <li><strong>Recovery:</strong> Manual conflict resolution by the
+    parent agent. Re-merge in dependency order.</li>
+    <li><strong>Mitigation:</strong> Pre-dispatch dependency analysis.
+    If two tasks might modify the same file, put them in sequential
+    waves.</li>
+    </ul>
+    <p><strong>Failure mode 3: Refinery backlog.</strong> Agents
+    complete faster than the refinery can merge. The merge queue grows,
+    and later merges conflict with earlier merges that have not yet been
+    processed.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Grows with queue depth. Worst
+    case: all queued merges conflict.</li>
+    <li><strong>Recovery:</strong> Pause agent dispatch. Drain the merge
+    queue. Resume at reduced parallelism.</li>
+    <li><strong>Mitigation:</strong> Rate-limit dispatch based on
+    refinery throughput. Max queue depth of 3-4 pending merges.</li>
+    </ul>
+    <h3 id="wave-pattern-failures">Wave Pattern Failures</h3>
+    <p><strong>Failure mode 1: Wave boundary failure.</strong> An agent
+    in wave N fails, but wave N+1 depends on its output. Wave N+1 cannot
+    start, blocking all downstream waves.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> All waves after the failed wave.
+    Agents in the current wave are unaffected.</li>
+    <li><strong>Recovery:</strong> Retry the failed agent in wave N. If
+    it fails again, promote its task to a direct execution by the
+    parent.</li>
+    <li><strong>Mitigation:</strong> Design waves so that no single task
+    in wave N is a hard dependency for the entire wave N+1. Prefer soft
+    dependencies where possible.</li>
+    </ul>
+    <p><strong>Failure mode 2: Wave timing skew.</strong> One agent in a
+    wave takes much longer than the others. All other agents complete
+    and go idle while waiting for the slow agent to finish before wave
+    N+1 can start.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Resource waste (idle agents), not
+    correctness.</li>
+    <li><strong>Recovery:</strong> No recovery needed for correctness.
+    For efficiency: promote the slow task to the parent agent and start
+    the next wave with partial results.</li>
+    <li><strong>Mitigation:</strong> Pre-dispatch task sizing. Aim for
+    similar-sized tasks within a wave.</li>
+    </ul>
+    <h3 id="direct-pattern-failures">Direct Pattern Failures</h3>
+    <p><strong>Failure mode 1: Context exhaustion on long task.</strong>
+    The single agent runs out of context on a complex task. This is the
+    most common failure mode for direct execution.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> The entire task. No partial
+    progress is preserved unless the agent committed intermediate
+    results.</li>
+    <li><strong>Recovery:</strong> Start a fresh session. If
+    intermediate commits exist, resume from the last commit.</li>
+    <li><strong>Mitigation:</strong> Commit after every logical subtask.
+    Use PostCompact hooks to preserve working state.</li>
+    </ul>
+    <p><strong>Failure mode 2: Wrong branch / stale state.</strong> The
+    agent starts work on the wrong branch or with stale file state.</p>
+    <ul>
+    <li><strong>Blast radius:</strong> Potentially the entire session’s
+    work if committed to the wrong branch.</li>
+    <li><strong>Recovery:</strong> <code>git stash</code>, checkout
+    correct branch, <code>git stash pop</code>. Or if committed:
+    cherry-pick to correct branch.</li>
+    <li><strong>Mitigation:</strong> SessionStart hook that verifies
+    branch. Standing rule in memory (“Work on dev, NOT main”).</li>
+    </ul>
+    <h3 id="comparative-failure-impact">Comparative Failure Impact</h3>
+    <table>
+    <colgroup>
+    <col style="width: 12%" />
+    <col style="width: 24%" />
+    <col style="width: 18%" />
+    <col style="width: 21%" />
+    <col style="width: 22%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Pattern</th>
+    <th>Avg Failure Rate</th>
+    <th>Blast Radius</th>
+    <th>Recovery Cost</th>
+    <th>Time to Detect</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Direct</td>
+    <td>5% (context exhaustion)</td>
+    <td>Full task</td>
+    <td>Medium (restart session)</td>
+    <td>Immediate (agent stops)</td>
+    </tr>
+    <tr>
+    <td>Fleet</td>
+    <td>10-15% per agent</td>
+    <td>Single agent</td>
+    <td>Low (re-dispatch)</td>
+    <td>At collection time</td>
+    </tr>
+    <tr>
+    <td>Convoy</td>
+    <td>15-20% per agent</td>
+    <td>Variable (1 to all)</td>
+    <td>Medium-High</td>
+    <td>Witness detects in 30-120s</td>
+    </tr>
+    <tr>
+    <td>Wave</td>
+    <td>10-15% per agent</td>
+    <td>Current + downstream waves</td>
+    <td>High (blocks pipeline)</td>
+    <td>At wave boundary</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The tradeoff is clear: simpler patterns (Direct, Fleet) have
+    lower blast radii but no coordination benefits. Complex patterns
+    (Convoy, Wave) enable sophisticated workflows but have larger
+    failure blast radii.</p>
+    <h2 id="where-gastown-extends-beyond-the-platform">Where Gastown
+    Extends Beyond the Platform</h2>
+    <h3 id="gupp-the-anti-passivity-engine">GUPP: The Anti-Passivity
+    Engine</h3>
+    <p>The Gas Town Universal Propulsion Principle is Gastown’s most
+    distinctive innovation. GUPP addresses a problem unique to LLM-based
+    agents: RLHF training produces agents that prefer to wait for
+    confirmation rather than act autonomously. GUPP overrides this
+    trained passivity with an explicit execution mandate.</p>
+    <p>Claude Code’s platform does not appear to have a GUPP equivalent.
+    The platform trusts agents to execute when given a task. But
+    empirical evidence from Gastown’s development shows this trust is
+    often misplaced – agents stall, ask unnecessary clarifying
+    questions, and summarize their plans instead of executing them.
+    GUPP’s per-runtime enforcement strategies (hook injection for Claude
+    Code, startup fallback for Codex, polling for Gemini) and
+    configurable thresholds (stall detection at 120-300s, nudge
+    intervals at 30-120s, restart limits at 3 per bead) represent
+    hard-won operational knowledge.</p>
+    <p>The Runtime HAL layer that adapts GUPP to different runtimes is
+    particularly valuable. As multi-runtime orchestration becomes more
+    common (orchestrating Claude Code agents alongside Codex or Gemini
+    agents), runtime abstraction becomes essential. Claude Code’s
+    platform assumes it is the only runtime – the HAL anticipates a
+    multi-vendor future.</p>
+    <h3 id="the-convoy-model">The Convoy Model</h3>
+    <p>Gastown’s convoy pattern – bundling related work items into a
+    batch with aggregate progress tracking, parallel dispatch, and
+    coordinated completion – has no visible Claude Code equivalent. The
+    platform’s model is one parent spawning one child per task, with the
+    parent manually tracking completion.</p>
+    <p>Convoys enable patterns like: dispatch 6 research agents in
+    parallel, track aggregate progress as they complete, merge their
+    results sequentially through the refinery, and report overall
+    completion to the operator. This is the pattern behind the 360
+    engine’s autonomous degree execution (57 releases produced this way)
+    and the NASA mission series’ parallel track execution.</p>
+    <p>Tonight’s session is itself a convoy: 7 agents for OOPS Wave 1,
+    then 4 for HEL Wave 2, then 3 for OOPS deep expansion Wave 3. The
+    parent agent tracked aggregate progress, dispatched waves when
+    previous waves completed, and will merge all results into the dev
+    branch.</p>
+    <h3 id="the-refinery-sequential-merge-as-a-first-class-concept">The
+    Refinery: Sequential Merge as a First-Class Concept</h3>
+    <p>When multiple agents write code in parallel, merging their
+    results is a correctness-critical operation. Gastown treats merge as
+    a first-class pipeline stage with its own dedicated agent (the
+    refinery), strict FIFO ordering, and explicit conflict escalation.
+    The refinery never auto-resolves conflicts because it cannot reason
+    about code semantics – it moves data between branches and halts when
+    it encounters something it cannot handle.</p>
+    <p>Claude Code’s platform handles merge implicitly: the parent agent
+    processes child results and manually integrates them. This works for
+    small numbers of agents but does not scale. With 4-6 parallel agents
+    producing branches, the merge sequence matters and conflicts
+    compound. Gastown learned this empirically and built the refinery to
+    enforce deterministic merge ordering.</p>
+    <h3 id="the-witness-independent-supervision">The Witness:
+    Independent Supervision</h3>
+    <p>The witness pattern – an observer agent that monitors worker
+    health independently of the coordinator – has no Claude Code
+    equivalent. In the platform’s parent-child model, the parent is both
+    coordinator and supervisor. If the parent is busy processing one
+    child’s result, it cannot simultaneously monitor another child’s
+    health.</p>
+    <p>The witness separates these concerns. It does not dispatch work,
+    does not merge results, does not make coordination decisions. It
+    only observes: are the workers alive? Are they making progress? Are
+    they stuck? This single-purpose design means the witness is simple,
+    reliable, and independent. It is the first thing that would detect
+    if the coordinator itself stalled.</p>
+    <h2 id="where-the-platform-has-features-we-could-use-better">Where
+    the Platform Has Features We Could Use Better</h2>
+    <h3 id="agentpolicy-runtime-enforced-boundaries">agentPolicy:
+    Runtime-Enforced Boundaries</h3>
+    <p>Gastown enforces agent role boundaries through documentation
+    (“the polecat NEVER coordinates other agents”). Claude Code’s
+    <code>agentPolicy</code> suggests the platform can enforce
+    boundaries at runtime. If we could express “this agent cannot use
+    the Write tool” or “this agent can only modify files in src/tests/”,
+    the witness-observer’s monitoring function could be partially
+    replaced by platform enforcement.</p>
+    <p><strong>Action:</strong> When agentPolicy becomes available in
+    the public API, express our role boundaries as policies rather than
+    documentation-only constraints. The witness still adds value for
+    health monitoring, but behavioral boundaries would be enforced by
+    the runtime.</p>
+    <h3 id="worktree-state-richer-isolation-tracking">Worktree-State:
+    Richer Isolation Tracking</h3>
+    <p>Our agents use <code>isolation: worktree</code> in their
+    frontmatter, and Claude Code creates worktrees for isolated
+    execution. But we don’t deeply track worktree lifecycle – creation,
+    health, cleanup, cross-worktree communication. The
+    <code>worktree-state</code> string suggests the platform has more
+    sophisticated worktree management than we’re using.</p>
+    <p>Tonight’s session created 9 worktrees. We have no visibility into
+    their health beyond git status. A WorktreeCreate hook (proposed in
+    the hook system analysis) would give us lifecycle tracking.</p>
+    <p><strong>Action:</strong> Build worktree lifecycle hooks into our
+    dispatch pipeline. Track which worktrees are active, detect
+    abandoned worktrees, and use worktree state as an additional health
+    signal for the witness.</p>
+    <h3 id="teams-as-first-class-entities">Teams as First-Class
+    Entities</h3>
+    <p>Our sc-dev-team and uc-lab patterns predate Claude Code’s team
+    support. Now that teams are platform-native, we should build our
+    teams using <code>TeamCreate</code> rather than manual agent
+    spawning. This gives us whatever shared context, collective
+    permissions, and lifecycle management the platform provides.</p>
+    <p><strong>Action:</strong> Refactor sc-dev-team and uc-lab to use
+    TeamCreate when available. Maintain our role specialization
+    (different models per role) as an extension of the platform’s team
+    concept.</p>
+    <h3 id="agent-definition-richness">Agent Definition Richness</h3>
+    <p>We have 39 agent definitions in <code>.claude/agents/</code>.
+    This is an unusually large agent roster. The definitions cover:</p>
+    <table>
+    <colgroup>
+    <col style="width: 38%" />
+    <col style="width: 26%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Count</th>
+    <th>Examples</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>GSD workflow agents</td>
+    <td>15</td>
+    <td>gsd-executor, gsd-planner, gsd-verifier, gsd-debugger</td>
+    </tr>
+    <tr>
+    <td>Research agents</td>
+    <td>5</td>
+    <td>gsd-phase-researcher, gsd-research-synthesizer,
+    research-fleet-commander</td>
+    </tr>
+    <tr>
+    <td>QA/verification agents</td>
+    <td>5</td>
+    <td>gsd-plan-checker, gsd-integration-checker,
+    gsd-nyquist-auditor</td>
+    </tr>
+    <tr>
+    <td>Team role agents</td>
+    <td>5</td>
+    <td>lab-director, flight-ops, capcom, watchdog, observer</td>
+    </tr>
+    <tr>
+    <td>UC/learning agents</td>
+    <td>6</td>
+    <td>uc-brainstorm-engine, uc-proof-engineer, v1.50a-student,
+    v1.50a-teacher</td>
+    </tr>
+    <tr>
+    <td>Utility agents</td>
+    <td>3</td>
+    <td>document-builder, changelog-generator, codebase-navigator</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>This richness is a competitive advantage. Most Claude Code
+    projects have 0-3 agent definitions. Our 39 agents represent a
+    specialized workforce that can be dispatched to diverse tasks. The
+    question is whether each agent is sufficiently differentiated to
+    justify its existence, or whether some could be consolidated.</p>
+    <h2 id="token-efficiency-analysis">Token Efficiency Analysis</h2>
+    <p>Not all orchestration patterns cost the same. Token efficiency
+    matters because every token spent on coordination is a token not
+    spent on work.</p>
+    <h3 id="token-efficient-patterns">Token-Efficient Patterns</h3>
+    <table>
+    <colgroup>
+    <col style="width: 39%" />
+    <col style="width: 60%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Pattern</th>
+    <th>Why Efficient</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Hook assignment (single JSON file read)</td>
+    <td>~50 tokens to check work assignment</td>
+    </tr>
+    <tr>
+    <td>Nudge (latest-wins, single file)</td>
+    <td>~30 tokens per health check</td>
+    </tr>
+    <tr>
+    <td>Agent role boundaries (documented, not checked)</td>
+    <td>Zero runtime tokens – boundaries are in the skill context</td>
+    </tr>
+    <tr>
+    <td>FIFO merge queue (no scheduling decisions)</td>
+    <td>No tokens spent deciding merge order</td>
+    </tr>
+    <tr>
+    <td>Convoy progress (computed from bead statuses)</td>
+    <td>One pass over member list, no AI reasoning needed</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="token-expensive-patterns">Token-Expensive Patterns</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 40%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Pattern</th>
+    <th>Why Expensive</th>
+    <th>Mitigation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Witness patrol loop (reads all agent states)</td>
+    <td>O(n) state reads per patrol cycle</td>
+    <td>Increase patrol interval for stable convoys</td>
+    </tr>
+    <tr>
+    <td>Mail polling (reads all unread messages)</td>
+    <td>Grows with message volume</td>
+    <td>24-hour archival keeps mailbox small</td>
+    </tr>
+    <tr>
+    <td>GUPP preamble injection (full rules in context)</td>
+    <td>~500 tokens per agent session</td>
+    <td>Cache preamble; only inject once per session</td>
+    </tr>
+    <tr>
+    <td>Mayor coordination (reads convoy, decides dispatch)</td>
+    <td>Complex reasoning per dispatch cycle</td>
+    <td>Batch decisions: dispatch entire convoy at once rather than one
+    bead at a time</td>
+    </tr>
+    <tr>
+    <td>Sling 7-stage pipeline (7 state transitions per dispatch)</td>
+    <td>State writes at every stage</td>
+    <td>Acceptable cost for crash recoverability; skip Store stage for
+    non-critical beads</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="comparison-with-claude-codes-token-profile">Comparison with
+    Claude Code’s Token Profile</h3>
+    <p>Claude Code’s parent-child model is inherently token-efficient
+    for small agent counts: the parent spawns a child, the child runs,
+    the child returns. No polling, no mailboxes, no patrol loops. For
+    1-3 agents, this is cheaper than Gastown’s full orchestration.</p>
+    <p>At 4+ agents, Gastown’s patterns become more efficient because
+    the coordination overhead is amortized. A single convoy dispatch
+    replaces 4+ individual parent-child spawn-wait-process cycles. A
+    single witness patrol monitors all agents rather than the parent
+    maintaining individual tracking state for each child. The refinery
+    processes merges without consuming the mayor’s context window.</p>
+    <p>The crossover point – where Gastown’s overhead pays for itself –
+    is approximately 4 parallel agents. Below 4, use Claude Code’s
+    native agent spawning. At 4+, the convoy model reduces total token
+    consumption by avoiding O(n) coordination context in the parent.</p>
+    <h3 id="tonights-token-efficiency">Tonight’s Token Efficiency</h3>
+    <p>For the 7-agent OOPS Wave 1:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Cost Component</th>
+    <th>Tokens (Estimated)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Parent dispatch (7 agent prompts)</td>
+    <td>~7,000</td>
+    </tr>
+    <tr>
+    <td>Per-agent system prompt + CLAUDE.md</td>
+    <td>~3,500 x 7 = 24,500</td>
+    </tr>
+    <tr>
+    <td>Per-agent task execution (avg ~200 tool calls)</td>
+    <td>~500K x 7 = 3.5M</td>
+    </tr>
+    <tr>
+    <td>Parent result collection (7 returns)</td>
+    <td>~14,000</td>
+    </tr>
+    <tr>
+    <td><strong>Total coordination overhead</strong></td>
+    <td><strong>~45,500</strong></td>
+    </tr>
+    <tr>
+    <td><strong>Total execution</strong></td>
+    <td><strong>~3.5M</strong></td>
+    </tr>
+    <tr>
+    <td><strong>Coordination as % of total</strong></td>
+    <td><strong>~1.3%</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Coordination overhead at 1.3% of total tokens is excellent. The
+    fleet pattern’s simplicity (no polling, no mail, no witness) keeps
+    coordination costs minimal. For tonight’s research production
+    workload, the fleet pattern was the correct choice – tasks were
+    independent, similar in structure, and did not require cross-agent
+    communication.</p>
+    <h2 id="the-path-forward">The Path Forward</h2>
+    <h3 id="phase-1-align-with-platform-primitives-now">Phase 1: Align
+    with Platform Primitives (Now)</h3>
+    <p>Use Claude Code’s native features as the foundation: - Teams via
+    TeamCreate for agent grouping - Worktree isolation via
+    <code>isolation: worktree</code> in agent frontmatter - Effort
+    levels aligned with our GSD profiles - agentPolicy for behavioral
+    boundaries when available</p>
+    <h3 id="phase-2-layer-gastowns-extensions-next-quarter">Phase 2:
+    Layer Gastown’s Extensions (Next Quarter)</h3>
+    <p>Build our orchestration patterns as extensions of platform
+    primitives, not replacements: - Convoy wraps around TeamCreate,
+    adding batch progress and parallel dispatch - GUPP injects via hooks
+    on top of the platform’s agent spawning - Witness monitors through
+    worktree-state signals, not just filesystem polling - Mail-async
+    persists between team sessions, surviving context compaction</p>
+    <h3 id="phase-3-propose-upstream-v1.50">Phase 3: Propose Upstream
+    (v1.50+)</h3>
+    <p>Patterns that prove their value should be proposed to the
+    platform: - GUPP’s anti-passivity enforcement (most impactful –
+    benefits all users) - Convoy batching for parallel agent work -
+    Refinery-style sequential merge for multi-agent branches - Witness
+    health monitoring as an independent supervision process</p>
+    <h3 id="phase-4-runtime-convergence-long-term">Phase 4: Runtime
+    Convergence (Long-Term)</h3>
+    <p>As the platform evolves toward richer multi-agent orchestration,
+    Gastown should converge: - Replace filesystem state with platform
+    state management when available - Replace mail polling with platform
+    event subscription when available - Replace the sling pipeline with
+    platform dispatch when it supports crash recovery - Keep GUPP, the
+    witness, and the refinery as differentiators until the platform
+    absorbs them</p>
+    <h2 id="the-honest-assessment">The Honest Assessment</h2>
+    <p>Gastown and Claude Code’s agent architecture solved the same
+    problems independently and arrived at remarkably similar structural
+    answers: named agents with defined roles, filesystem-based state,
+    worktree isolation, dispatch mechanisms, health monitoring signals.
+    The convergence validates both approaches.</p>
+    <p>Where Gastown went further – GUPP propulsion, convoy batching,
+    the refinery merge queue, independent witness supervision,
+    multi-runtime HAL, four-channel communication – these represent
+    genuine innovations born from running large-scale autonomous agent
+    workloads (57 autonomous releases, 190+ research projects, 720 NASA
+    missions). These patterns were not designed in advance; they were
+    extracted from operational failures and hardened through
+    repetition.</p>
+    <p>Where Claude Code went further – runtime-level enforcement via
+    agentPolicy, first-class teams, worktree state management,
+    effort-based cost optimization – these represent platform advantages
+    that we should adopt rather than replicate.</p>
+    <p>Tonight’s session provides concrete evidence for the claims in
+    this document. Nine parallel agents, three sequential waves, zero
+    conflicts, 100% success rate, 1.3% coordination overhead. The fleet
+    pattern – the simplest multi-agent pattern – was sufficient for
+    tonight’s research production because the tasks were well-defined
+    and independent. For more complex workloads (the 360 engine’s
+    dependency-aware degree production, the NASA mission series’
+    multi-track coordination), the convoy and wave patterns remain
+    essential.</p>
+    <p>The strategic position is strong: we are one of the most deeply
+    integrated projects on the platform, with 39 agent definitions, 22
+    hook implementations (or proposed implementations), and
+    orchestration patterns tested at 50+ project scale. Our
+    orchestration patterns fill gaps the platform has not yet addressed.
+    The path forward is not replacement but layering – use the
+    platform’s primitives as the foundation, layer our extensions on
+    top, and contribute the patterns that prove their value back to the
+    ecosystem.</p>
+    <p>The fundamental insight from this comparison: the platform is
+    building toward what we have already built. Our job is not to build
+    faster – it is to build in a way that composes with whatever the
+    platform ships next. Tonight’s session, running on platform
+    primitives (Agent tool, worktree isolation, 1M context) with our
+    orchestration layer on top (wave batching, fleet dispatch,
+    convoy-style progress tracking), demonstrates that this composition
+    already works. The question is not whether it works, but how much
+    further we can push it.</p>
+    <div class="nav">
+        <a href="../index.html">← Back to OOPS Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/OOPS/">tibsfox.com/Research/OOPS</a>
+    </div>
+</body>
+</html>

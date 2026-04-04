@@ -1,0 +1,23 @@
+{
+  "degree": 305, "artist": "Mad Season", "slug": "305-mad-season-grunge", "genre": "Grunge", "energy": 7,
+  "era": "1994-1995 original; 2011 reunion. Grunge. E=7 -- elevated from E=6 at degree 224. Grunge frame foregrounds physical weight. Capitol Hill. Columbia Records.",
+  "location": { "origin": "Capitol Hill, Seattle" }, "formed": "Seattle, Washington", "active": "1994-1995 (original), 2011 (partial reunion)",
+  "labels": ["Columbia Records"],
+  "members": ["Layne Staley (vocals)", "Mike McCready (guitar)", "Barrett Martin (drums)", "John Baker Saunders (bass)"],
+  "associated_musicians": ["Alice in Chains (Layne Staley)", "Pearl Jam (Mike McCready)", "Screaming Trees (Barrett Martin)", "Mark Lanegan (2011 reunion vocals)"],
+  "key_album": "Above (1995, Columbia) -- one album, complete. River of Deceit. Billboard 200 #24. 250,000+ US copies.",
+  "theory_nodes": [
+    { "concept": "Grunge frame at return. E=6 Rock (224) to E=7 Grunge (305). The return foregrounds physical weight: Lifeless Dead, the density of Staley's voice, the scene's mortality.", "level": "advanced", "department": "energy-analysis", "description": "Energy escalates at return: Rock to Grunge, E=6 to E=7." },
+    { "concept": "Layne Staley death April 5 2002. Eight years after Cobain. Combined cocaine-heroin overdose. Age 34. Found two weeks after death. The most important loss from the Seattle scene.", "level": "advanced", "department": "biography", "description": "Staley's death as Seattle scene's defining loss." },
+    { "concept": "'River of Deceit' as permanent standard. Self-chosen pain. Resignation and transcendence. The scene's most direct engagement with mortality. 30-year critical reassessment elevates it continuously.", "level": "milestone", "department": "legacy", "description": "The song that made the scene's relationship with addiction permanent in music history." },
+    { "concept": "2011 reunion with Mark Lanegan. Above survives the loss of its primary voice. Lanegan inhabits Staley's material without imitation.", "level": "intermediate", "department": "cross-reference", "description": "Screaming Trees connection: Martin in both bands; Lanegan sings for Staley at reunion." }
+  ],
+  "cross_references": [
+    {"degree": 224, "artist": "Mad Season", "relationship": "First appearance E=6. Rock frame. The supergroup story: lineup, recovery narrative, single-album achievement. 81-degree gap to return."},
+    {"degree": 296, "artist": "Mother Love Bone", "relationship": "Andrew Wood's death. The first scene death. Mad Season (Staley, Saunders) continues the mortality thread."},
+    {"degree": 307, "artist": "Screaming Trees return", "relationship": "Mark Lanegan sang for Staley at 2011 reunion. Barrett Martin is the Screaming Trees-Mad Season bridge."}
+  ],
+  "sps_pair": {"degree": 305, "species": "Black Bear tree-shaking", "pairing_note": "Both E=7. Confrontational display: bear asserts territory via wood-crack + huff; Mad Season asserts emotional weight via Staley's voice at maximum."},
+  "milestones": ["SECOND MAD SEASON APPEARANCE", "GRUNGE RECLASSIFICATION", "E=7 ESCALATION FROM E=6"],
+  "tags": ["grunge", "supergroup", "layne-staley", "mike-mccready", "barrett-martin", "capitol-hill", "columbia-records", "above-1995", "river-of-deceit", "addiction", "mortality", "seattle-scene"]
+}

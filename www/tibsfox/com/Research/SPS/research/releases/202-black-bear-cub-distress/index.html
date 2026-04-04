@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 202&deg; &mdash; Black Bear Cub Distress &mdash; Bear Trio 3/3 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #33691E, #558B2F, #689F38); color: #DCEDC8; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(51, 105, 30, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .cub-card { background: linear-gradient(135deg, #795548, #8D6E63, #A1887F); border: 2px solid #5D4037; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .cub-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .cub-card p { color: #D7CCC8; }
+    .cub-card strong { color: #EFEBE9; }
+
+    .inversion-card { background: linear-gradient(135deg, #33691E, #558B2F, #689F38); border: 2px solid #33691E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #DCEDC8; }
+    .inversion-card h3 { margin-top: 0; font-size: 1.1rem; color: #C5E1A5; }
+    .inversion-card p { color: #DCEDC8; }
+    .inversion-card strong { color: #F1F8E9; }
+
+    .maternal-card { background: linear-gradient(135deg, #4E342E, #5D4037, #6D4C41); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .maternal-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .maternal-card p { color: #D7CCC8; }
+    .maternal-card strong { color: #EFEBE9; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.trio { background: #33691E; }
+    .theory-icon.cub { background: #795548; }
+    .theory-icon.maternal { background: #4E342E; }
+    .theory-icon.infant { background: #8D6E63; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-level.advanced { background: #F1F8E9; color: #33691E; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .comparison-table th { background: #4E342E; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .comparison-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .comparison-table tr:nth-child(even) { background: #EFEBE9; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">202&deg;</div>
+      <div class="release-title-block">
+        <h2>Black Bear Cub Distress</h2>
+        <div class="scientific"><em>Ursus americanus</em> (Ursidae) &mdash; E=4 &mdash; Bear Trio 3/3</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      Third and final Black Bear entry. <strong>Bear trio completes</strong> (200&ndash;202).
+      High, mewling <strong>&ldquo;meeew, meeew&rdquo;</strong> at <strong>300&ndash;800 Hz.</strong>
+      Cub separated from sow. Summer forest.
+      <strong>E=4</strong> &mdash; infant vulnerability.
+      The inversion: adult intimidation gives way to infant need.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="cub-card">
+          <h3>The Distress Call &mdash; High Mewling Squall</h3>
+          <p>
+            <strong>&ldquo;Meeew, meeew.&rdquo;</strong> High, thin, sustained.
+            <strong>300&ndash;800 Hz.</strong> Repeated every <strong>2&ndash;5 seconds.</strong>
+            The cub has lost sight of its mother. The mew brings her running &mdash;
+            crashing through brush with urgent intensity.
+            Carries <strong>50&ndash;150 meters.</strong> Enough for the sow. <strong>E=4.</strong>
+          </p>
+        </div>
+
+        <div class="inversion-card">
+          <h3>The Inversion &mdash; Bear Trio Completes</h3>
+          <p>
+            <strong>200:</strong> Huff (E=5) &mdash; &ldquo;I know you&rsquo;re there.&rdquo;
+            <strong>201:</strong> Jaw-pop (E=6) &mdash; &ldquo;Back off. Now.&rdquo;
+            <strong>202:</strong> Cub distress (E=4) &mdash; &ldquo;Where are you, mom?&rdquo;
+            Escalation then inversion. <strong>E=6 to E=4.</strong>
+            Adult dominance gives way to <strong>infant vulnerability.</strong>
+            Three voices. One species. Complete.
+          </p>
+        </div>
+
+        <div class="maternal-card">
+          <h3>Maternal Response &mdash; The Most Dangerous Encounter</h3>
+          <p>
+            A mewing bear cub on a trail means the <strong>sow is nearby.</strong>
+            She will respond to the cub&rsquo;s distress with <strong>defensive aggression.</strong>
+            This is the <strong>highest-risk bear encounter</strong> for hikers.
+            Leave immediately. Do not approach the cub.
+            The sow is coming.
+          </p>
+        </div>
+
+        <h2>Bear Trio Complete</h2>
+        <table class="comparison-table">
+          <thead><tr><th>Degree</th><th>Sound</th><th>Energy</th><th>Context</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>200&deg;</td><td>Huff</td><td>E=5</td><td>Mild agitation</td><td>&ldquo;I know you&rsquo;re there.&rdquo;</td></tr>
+            <tr><td>201&deg;</td><td>Jaw-pop</td><td>E=6</td><td>Defensive stress</td><td>&ldquo;Back off. Now.&rdquo;</td></tr>
+            <tr><td>202&deg;</td><td>Cub distress</td><td>E=4</td><td>Maternal bond</td><td>&ldquo;Where are you, mom?&rdquo;</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-200 Black Bear Huff</strong>
+            <p>BEAR TRIO 1/3! Huff (E=5). The trilogy begins with awareness. Cub at E=4 inverts the adult escalation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-201 Black Bear Jaw-Pop</strong>
+            <p>BEAR TRIO 2/3! Jaw-pop (E=6) to cub (E=4). The -2 drop is the inversion. Explosive intimidation to thin vulnerability.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-195 Fawn Bleat</strong>
+            <p>INFANT PARALLEL! Fawn bleat (E=3) and cub distress (E=4). Both infant contact calls. Cubs slightly louder, more insistent.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-202 La Luz</strong>
+            <p>ECHO AND CALLING! La Luz reverb (coast echo) and cub mew (forest echo). Both searching sounds filling empty space.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon trio">T</div>
+            <div class="theory-content">
+              <h4>Bear Trio Complete &mdash; 200-202</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>Three entries, one species. Huff (awareness, E=5), jaw-pop (threat, E=6), cub distress (need, E=4). Escalation then inversion. Final Ursidae.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cub">C</div>
+            <div class="theory-content">
+              <h4>Cub Distress Call &mdash; The Sound of Need</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>300-800 Hz. High, thin, mewling. Repeated every 2-5 seconds. The vocal tether between cub and sow. Brings the sow running.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon maternal">M</div>
+            <div class="theory-content">
+              <h4>Maternal Response &mdash; Highest Risk</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Sow responds to cub distress with defensive aggression. The most dangerous bear encounter. A mewing cub means the sow is near.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon infant">I</div>
+            <div class="theory-content">
+              <h4>Infant Contact Call &mdash; Bear vs. Deer</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Cub distress (E=4) vs. fawn bleat (E=3). Both infant calls. Cubs more vocal, more insistent. Bears squall; fawns mew.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Black Bear</div><div class="stat-detail"><em>Ursus americanus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Ursidae</div><div class="stat-detail">Third entry (final)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Cub distress</div><div class="stat-detail">high mewling squall</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #795548;">E = 4</div><div class="stat-detail">infant vulnerability</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">300&ndash;800 Hz</div><div class="stat-detail">high, thin, mewling</div></div>
+        <div class="stat-card"><div class="stat-label">Season</div><div class="stat-value">Summer</div><div class="stat-detail">first summer with sow</div></div>
+        <div class="stat-card"><div class="stat-label">Carry distance</div><div class="stat-value">50&ndash;150 m</div><div class="stat-detail">enough for sow</div></div>
+        <div class="stat-card"><div class="stat-label">Bear trio</div><div class="stat-value">3 of 3</div><div class="stat-detail">200-201-202 (complete)</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

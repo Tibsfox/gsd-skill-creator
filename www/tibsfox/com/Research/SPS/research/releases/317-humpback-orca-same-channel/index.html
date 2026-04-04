@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 317&deg; &mdash; Humpback-Orca Same Channel &mdash; E=8 &mdash; Multi-Species &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #006064, #00838F, #0097A7); color: #E0F7FA; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(0,96,100,0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: #006064; border: none; padding: 0; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #00838F; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #00838F; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .convergence-banner { background: linear-gradient(135deg, #006064, #00838F); border: 2px solid #80DEEA; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E0F7FA; }
+    .convergence-banner h3 { margin: 0 0 0.5rem; color: #E0F7FA; font-size: 1.1rem; }
+    .convergence-banner p { color: #E0F7FA; margin: 0.3rem 0; }
+    .species-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .species-grid { grid-template-columns: 1fr; } }
+    .species-card { border-radius: 8px; padding: 1.25rem 1.5rem; }
+    .species-card.humpback { background: linear-gradient(135deg, #1A237E, #283593); color: #C5CAE9; }
+    .species-card.orca { background: linear-gradient(135deg, #0D0D0D, #1A1A2E); color: #CFD8DC; }
+    .species-card h3 { margin: 0 0 0.5rem; font-size: 1rem; }
+    .species-card .sci { font-style: italic; font-size: 0.85rem; opacity: 0.8; }
+    .species-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.55; }
+    .frequency-display { background: white; border: 2px solid #80DEEA; border-radius: 6px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+    .frequency-display h3 { margin: 0 0 1rem; font-size: 1rem; color: #006064; font-family: system-ui, sans-serif; }
+    .freq-bar-container { margin: 0.75rem 0; }
+    .freq-label { font-size: 0.78rem; color: #424242; font-family: system-ui, sans-serif; margin-bottom: 0.2rem; }
+    .freq-bar { height: 20px; border-radius: 3px; position: relative; }
+    .freq-bar.humpback-bar { background: linear-gradient(90deg, #1A237E 0%, #3F51B5 40%, transparent 100%); width: 30%; }
+    .freq-bar.orca-bar { background: linear-gradient(90deg, transparent 10%, #00838F 20%, #26C6DA 80%, transparent 100%); width: 95%; }
+    .freq-bar.overlap-bar { background: linear-gradient(90deg, transparent 8%, #FF6F00 10%, #FFA000 18%, transparent 20%); width: 95%; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #00838F; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">317&deg;</div>
+      <div class="release-title-block">
+        <h2>Humpback &amp; Orca &mdash; Same Channel</h2>
+        <div style="font-style: italic; color: #00838F; font-size: 1rem; font-family: Georgia, serif;"><em>Megaptera novaeangliae</em> + <em>Orcinus orca</em> &mdash; E=8 &mdash; MULTI-SPECIES CONVERGENCE &mdash; San Juan Islands summer simultaneous vocalization</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      whale song + orca call overlap &mdash; <strong>20&ndash;20,000 Hz combined</strong> &mdash; cultural transmission on both tracks &mdash; San Juan Islands, Salish Sea &mdash; E=8 FIRST MULTI-SPECIES EVENT
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="convergence-banner">
+          <h3>First Multi-Species Vocalization Entry &mdash; E=8 &mdash; Convergence at San Juan</h3>
+          <p>The Humpback-Orca same-channel event is the engine&rsquo;s first multi-species acoustic entry: two of the most vocal marine mammals on the planet simultaneously active in the San Juan Islands. Humpback song (the most complex vocal sequence in the animal kingdom, culturally transmitted, 10-30 minutes) + Orca calls (culturally transmitted dialects, 100+ SRKW call types). Both species in the same acoustic space. E=8.</p>
+        </div>
+
+        <h2>The Two Species</h2>
+        <div class="species-grid">
+          <div class="species-card humpback">
+            <h3>Humpback Whale</h3>
+            <div class="sci"><em>Megaptera novaeangliae</em></div>
+            <p>Family Balaenopteridae. 40-50 feet, 25-40 tons. Summer resident: arrives June, departs October. Primary song range: 30-500 Hz. Song duration: 10-30 minutes, repeated continuously. Culturally transmitted: new phrase types spread across populations at 1,500 km/year.</p>
+          </div>
+          <div class="species-card orca">
+            <h3>Southern Resident Killer Whale</h3>
+            <div class="sci"><em>Orcinus orca</em></div>
+            <p>Family Delphinidae. J/K/L pods, ~73 animals. Year-round residents, peak summer. Call range: 100-20,000 Hz. 100+ discrete call types. Culturally transmitted pod dialects. Degree 311 (E=9, greeting ceremony): the engine&rsquo;s highest SPS energy.</p>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #80DEEA;margin:2rem 0;">
+
+        <h2>The Frequency Overlap</h2>
+        <div class="frequency-display">
+          <h3>Acoustic Space &mdash; Where the Two Species Meet</h3>
+          <div class="freq-bar-container">
+            <div class="freq-label">Humpback song primary energy: 30&ndash;500 Hz</div>
+            <div class="freq-bar humpback-bar"></div>
+          </div>
+          <div class="freq-bar-container">
+            <div class="freq-label">Orca call range: 100&ndash;20,000 Hz (full width)</div>
+            <div class="freq-bar orca-bar"></div>
+          </div>
+          <div class="freq-bar-container">
+            <div class="freq-label">Overlap zone: ~100&ndash;500 Hz (both species active)</div>
+            <div class="freq-bar overlap-bar"></div>
+          </div>
+          <p style="font-size:0.82rem; color:#424242; margin-top:0.75rem; font-family:system-ui,sans-serif;">At 100&ndash;500 Hz: Humpback&rsquo;s moans and cries share acoustic space with Orca&rsquo;s lower-frequency calls. Research documents behavioral modification in both species during simultaneous vocalization. The overlap zone is where the convergence event is acoustically defined.</p>
+        </div>
+
+        <h2>Cultural Transmission &mdash; Both Species</h2>
+        <p>The degree-317 SPS entry is unique in the engine: both species involved have culturally transmitted vocalizations. Humpback song evolves through social learning &mdash; new phrase types emerge, spread laterally at up to 1,500 km/year, and eventually replace previous song types across entire ocean basins (documented by Noad et al. 1999 in the Pacific). Southern Resident Killer Whale pod dialects are culturally distinct from neighboring transient and offshore Orca populations &mdash; the J, K, and L pod call repertoires are specific to those family lines and transmitted across generations through social learning.</p>
+        <p>When both species are simultaneously active in the San Juan Islands, the acoustic event contains two independently evolving cultural traditions in the same water. This is the engine&rsquo;s richest cultural-acoustic pairing.</p>
+
+        <h2>The Humpback Recovery</h2>
+        <p>The Humpback whale was commercially hunted to near-extinction in the North Pacific before the International Whaling Commission moratorium (1966). North Pacific Humpback populations have recovered significantly since. The Salish Sea and San Juan Islands area has seen increasing Humpback presence over the past two decades &mdash; from rare sightings to regular summer individuals. The simultaneous presence of Humpback and Orca in the same channel is partly a conservation success story: the Humpback&rsquo;s recovery has restored a multi-species acoustic ecology to the Salish Sea that was absent during the post-whaling depletion period.</p>
+
+        <h2>The Temple of the Dog Pairing</h2>
+        <p>S36 degree 317: Temple of the Dog (E=7, grunge supergroup, memorial, Capitol Hill). The pairing theme is convergence: two bands in one studio; two species in one channel. Both degree-317 events are about what happens when two systems that do not normally occupy the same space meet in that space. Cornell and Vedder: the first meeting, the single album that contains two futures. Humpback and Orca: the simultaneous vocalization that contains two independently evolving cultural traditions. E=8 (SPS) + E=7 (S36) = E=15. The natural acoustic event is louder than the memorial record.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-311 Orca Greeting Ceremony (E=9)</strong>
+            <p>The SRKW at maximum greeting. E=9 through combined family vocalization. Degree 317 is Orca in non-ceremony context, simultaneous with Humpback, reduced to E=8.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-317 Temple of the Dog (E=7)</strong>
+            <p>Convergence pairing: two bands/two species. Both firsts at degree 317. Cultural transmission on both tracks: human (recorded music) and non-human (whale song evolution).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-future Humpback song full sequence</strong>
+            <p>This entry documents the multi-species overlap event. The Humpback song alone as a full acoustic document is a future entry: complete song sequence, North Pacific cultural evolution.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Multi-species overlap</div>
+          <div class="stat-detail">Whale song + Orca call simultaneous</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 8</div>
+          <div class="stat-detail">Combined multi-species. First.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">20&ndash;20,000 Hz</div>
+          <div class="stat-detail">Combined range. Overlap: 100-500 Hz.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Species 1</div>
+          <div class="stat-value" style="font-style:italic; font-size:0.88rem;">Megaptera novaeangliae</div>
+          <div class="stat-detail">Humpback. Balaenopteridae. 40 tons.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Species 2</div>
+          <div class="stat-value" style="font-style:italic; font-size:0.88rem;">Orcinus orca</div>
+          <div class="stat-detail">SRKW J/K/L. Delphinidae. ~73 animals.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">June&ndash;Sept. Peak July&ndash;Aug.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">San Juan Islands</div>
+          <div class="stat-detail">Salish Sea. Inland waters.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value" style="color:#00838F;">FIRST MULTI-SPECIES</div>
+          <div class="stat-detail">Both: culturally transmitted vocalizations.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Temple of the Dog (E=7)</div>
+          <div class="stat-detail">E=15. Convergence pairing.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

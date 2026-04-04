@@ -1,0 +1,73 @@
+# v1.49.491 -- Degree 350: TAD (peak intensity) + Cascades Full Avalanche
+
+**Release Date:** 2026-04-03
+**Type:** Seattle 360 / Sound of Puget Sound -- Degree 350 of 360
+
+## Summary
+
+**TAD PEAK INTENSITY. CASCADES FULL AVALANCHE. E=10. E=10. E=20 COMBINED. THE HEAVIEST BAND IN SEATTLE. THE MOUNTAIN RELEASES ITS WEIGHT. 97.2%.**
+
+**TAD** arrive at E=10 -- the Seattle heavy metal band formed in 1988 by Tad Doyle (vocals/guitar), Kurt Danielson (bass), Gary Thorstensen (guitar), and Steve Wied (drums), signing to Sub Pop Records and releasing *God's Balls* (1989), *Salt Lick* EP (1990), and *8-Way Santa* (1991) as a body of work that constitutes the heaviest, most physically dense output in the Pacific Northwest's Sub Pop-era underground. TAD appeared at degree 337 (E=9) in the Final Ascent's Metal Summit-adjacent position; degree 350 delivers TAD at E=10 -- peak intensity, the band at the absolute ceiling of what their specific sonic approach can produce. TAD at peak intensity is Tad Doyle's voice at maximum physical commitment -- a baritone instrument that operates well below Vedder's range and that at its maximum approaches the physical register of doom metal, driven by guitar work (Doyle's own, Thorstensen's) that operates at tuned-down, gain-saturated levels that make the guitar-bass register of the Pacific Northwest underground's most extreme licensed practitioners sound almost delicate by comparison. TAD's songs -- "Satan's Chainsaw," "Behemoth," "Ritual Device," "Stumblin' Man," "Jinx," "Woodgoblin" -- are not songs structured around melody in the way that Pearl Jam's songs are structured around Vedder's melodic instrument. They are songs structured around weight: the weight of Doyle's descending guitar patterns, the weight of Danielson's bass underpinning those patterns, the weight of Doyle's voice asserting physical presence over the combined sonic density.
+
+TAD's specific position in the Pacific Northwest rock tradition is the tradition's extreme low end: the band that every other band in the Sub Pop catalog understood as occupying the heaviest possible position in the scene's sonic geography. Nirvana and Mudhoney were loud and distorted; TAD was heavier. Soundgarden and Alice in Chains operated in the heavy metal tradition; TAD operated below it. The Melvins at their sludge maximum (degree 345, E=9) approach TAD's register from the sludge side; TAD approaches that register from the proto-doom side. At degree 350, the engine documents TAD at the peak intensity that requires E=10: the maximum expression of the heaviest approach in the Pacific Northwest's rock tradition, the ceiling of weight in a tradition whose defining characteristic, across its most consequential bands, is guitar density and low-frequency saturation.
+
+E=10 for TAD peak intensity is the correct Closing Arc assignment for the band that holds the tradition's heaviest position. Degree 337's E=9 documented TAD in the Metal Summit context -- adequate for the heavy grunge arc's interior. Degree 350's E=10 documents TAD at their specific ceiling: not TAD in context but TAD at maximum, the physical density of their approach at its most fully realized, the Closing Arc's second consecutive E=20 pairing.
+
+**Cascades full avalanche** arrives at E=10 on the SPS track -- the Pacific Northwest's most geologically forceful acoustic event: a full-scale Cascade Range avalanche from initiation fracture through full debris field dispersal. The Cascades support some of the heaviest snowpack in North America outside of Alaska: the windward slopes of the range intercept Pacific moisture systems at the precise elevation where temperature and moisture content combine to produce deep, dense snowpack that accumulates across October through March and releases in events whose scale ranges from small sluffs to multi-hectare slab releases. A full-scale Cascade avalanche begins with the fracture: a sharp crack or series of cracks as the slab's bonding layer fails, releasing the overlying snow mass. The fracture propagates laterally across the slope at the speed of sound in snow -- approximately 200 meters per second -- in a millisecond event that initiates the main mass movement. The mass movement itself is a frequency-layered acoustic event: the deep subsonic rumble of the primary snow mass accelerating down the slope (the acoustic equivalent of a sustained, below-hearing-threshold pressure wave), the mid-frequency roar of secondary material breaking loose and joining the flow, the high-frequency sounds of individual snow blocks and ice fragments in the leading edge of the debris cloud, and the terminal impact as the debris field reaches the valley floor and the motion stops.
+
+E=10 for the Cascades full avalanche is the correct Closing Arc assignment for the Pacific Northwest's maximum geological acoustic event. No prior SPS entry has documented the full avalanche acoustic sequence; prior geological acoustic entries have documented river systems (degree 352 approaches this from the water side), but the avalanche represents the Cascades' maximum mass-movement acoustic event -- the mountain's accumulated weight released in a single acoustic event whose frequency range spans from subsonic to high-frequency impact, whose energy density per second at maximum flow exceeds any biological acoustic event in the SPS track, and whose visual and auditory signature is the definitive expression of the Pacific Northwest high Cascades in their dynamic, mass-releasing mode.
+
+**THE HEAVIEST BAND. THE MOUNTAIN RELEASES ITS WEIGHT.** TAD peak intensity (E=10) and Cascades full avalanche (E=10) constitute a pairing of maximum physical weight in both tracks: the heaviest sonic approach in the S36 tradition at its ceiling, and the Pacific Northwest's maximum geological acoustic event. The Closing Arc's second consecutive E=20 confirms the arc's energy architecture: not occasional E=20 readings embedded in lower-energy surroundings but a sustained maximum that characterizes the arc's relationship to the engine's ceiling. Ten degrees remain to 360.
+
+## Key Features
+
+- **Part A -- S36:** TAD peak intensity (Heavy Metal/Proto-Doom, E=10) -- **THE HEAVIEST BAND IN SEATTLE AT CEILING**, Tad Doyle (vocals/guitar), Kurt Danielson (bass), Gary Thorstensen (guitar), Steve Wied (drums), Seattle 1988, Sub Pop Records, *God's Balls* 1989 + *Salt Lick* EP 1990 + *8-Way Santa* 1991, Doyle voice below Vedder's range approaching doom-metal register at maximum, guitar at tuned-down gain-saturated maximum, songs structured around weight not melody -- "Satan's Chainsaw" + "Behemoth" + "Ritual Device" + "Stumblin' Man" + "Jinx" + "Woodgoblin," tradition's extreme low end below Soundgarden + Alice in Chains + Nirvana, below Melvins sludge maximum, approaching proto-doom from Sub Pop side; E=9 at degree 337 in Metal Summit context -- E=10 here for peak intensity; maximum expression of heaviest approach in Pacific Northwest rock tradition
+- **Part B -- SPS:** Cascades Full Avalanche (geological maximum acoustic event, E=10) -- **THE MOUNTAIN RELEASES ITS WEIGHT**, full-scale Cascade Range avalanche from initiation to debris field dispersal: (1) fracture -- sharp crack as slab bonding layer fails, propagates laterally at ~200 m/s in millisecond event; (2) primary mass acceleration -- deep subsonic rumble of main snow mass accelerating down slope, below-hearing-threshold pressure wave sustained; (3) secondary material roar -- mid-frequency sound of joining debris; (4) leading-edge impact sounds -- high-frequency individual snow block and ice fragment collisions; (5) terminal dispersal -- debris field impacts valley floor, motion stops; frequency range from subsonic to high-frequency impact; heaviest Pacific Northwest snowpack outside Alaska, windward Cascade slopes; first full avalanche acoustic documentation in SPS track 350 degrees
+- **CLOSING ARC SECOND CONSECUTIVE E=20 (349-350)** -- degrees 349 and 350 open the Closing Arc with back-to-back E=20 readings; the Final Ascent (341-348) achieved its first E=20 at degree 344 after three degrees of escalation; the Closing Arc achieves E=20 immediately at degree 349 and sustains it at degree 350; the arc is not building toward its maximum -- it is operating at its maximum from the opening; two of eight Closing Arc degrees complete, two E=20 readings established
+- **TAD's position in the Pacific Northwest sonic geography** -- the Pacific Northwest's Sub Pop-era bands occupied distinct positions in a sonic geography defined by two axes: melody/dissonance and light/heavy; Nirvana occupied the melodic-heavy quadrant; Mudhoney occupied the dissonant-medium quadrant; Soundgarden occupied the melodic-heavy quadrant at higher production values; TAD occupied the dissonant-extreme-heavy quadrant that no other band in the catalog approached; this position made TAD simultaneously the most respected and the least commercially accessible band in the scene -- the band that other musicians cited as the heaviest, the most physically committed, the most uncompromising in their dedication to weight as a primary compositional value; E=10 documents this position at its maximum
+- **Cascade avalanche snowpack physics** -- the Pacific Northwest Cascades accumulate snowpack through a specific combination of atmospheric dynamics: Pacific moisture systems moving inland from the Pacific Ocean at 2,000-4,000 meter elevations, where temperatures hover near the freezing point for extended periods, producing snow rather than rain in quantities that exceed most continental mountain ranges; the average annual snowfall at Rainier's Paradise station (1,646 meters) is approximately 17 meters -- among the heaviest in North America; this snowpack develops a complex internal structure over the winter months: layers of different density, crystal structure, and bonding strength that create weak layers at the interfaces where temperature or crystal-type transitions occur; when a weak layer fails under the weight of overlying snow or under external stress (skier, earthquake, rapid warming), the slab above it releases as a unit; the Cascades' combination of deep snowpack, variable weak-layer development, and steep terrain produces avalanche events at the scale documented at degree 350 multiple times per winter season
+- **TAD and the Sub Pop economy** -- TAD signed to Sub Pop in 1988 at a moment when Sub Pop was building the curatorial identity that would make it the Pacific Northwest underground's most influential label; Bruce Pavitt and Jonathan Poneman's strategy of pairing heavy guitar bands with a specific visual and narrative identity -- the plaid, the Pacific Northwest logging culture, the "loser" aesthetic -- created a context in which TAD's extreme heaviness was legible as regionally authentic rather than commercially anomalous; TAD's *God's Balls* was released as a crucial early Sub Pop LP, establishing the label's sonic ceiling in its first phase; without TAD occupying the extreme heavy position, the Sub Pop identity's sonic range would have been narrower, and the curatorial logic that allowed Nirvana, Mudhoney, and Soundgarden to share a catalog would have been less internally coherent
+- **Avalanche as Pacific Northwest seasonal reality** -- avalanche is not an exotic or rare event in the Pacific Northwest Cascades but a seasonal constant that defines the region's mountain geography from November through June; Washington State Department of Transportation manages avalanche control programs on mountain passes (Stevens Pass, Snoqualmie Pass, White Pass) using explosive charges to trigger controlled avalanches before they grow to hazardous scale; the Northwest Avalanche Center issues daily forecasts during the snow season; avalanche has shaped the human geography of the Cascades -- the routing of highways, the siting of towns, the timing of mountain access -- as fundamentally as any geological force in the region; the acoustic event at degree 350 is not an emergency but a feature: the mountain's seasonal function documented at its maximum acoustic scale
+- **10 degrees remain** -- degree 350 brings the engine to 97.2% complete; TAD peak intensity has delivered the Pacific Northwest rock tradition's heaviest position at its ceiling in the Closing Arc's second E=10 pairing; the Cascades full avalanche has delivered the Pacific Northwest's maximum geological acoustic event; the Closing Arc has sustained E=20 for two consecutive degrees; 10 degrees remain to 360
+
+<details>
+<summary>Full Release Details</summary>
+
+## Acoustic Progression
+
+### S36 (last 8)
+| Degree | Artist | Genre | E |
+|--------|--------|-------|---|
+| 342 | Gruntruck | Metal/Grunge | 8 |
+| 343 | Blood Brothers | Post-HC/Metal | 9 |
+| 344 | Botch (peak) | Mathcore | 10 |
+| 345 | Melvins (peak sludge) | Sludge Metal | 9 |
+| 346 | Soundgarden *Superunknown* | Heavy Metal | 10 |
+| 347 | Alice in Chains *Dirt* | Metal/Grunge | 10 |
+| 348 | Nirvana *Nevermind* | Heavy Grunge | 10 |
+| 350 | **TAD (peak intensity)** | **Heavy Metal/Proto-Doom** | **10** |
+
+### SPS (last 8)
+| Degree | Species/Sound | Sound | E |
+|--------|--------------|-------|---|
+| 342 | Sea Lion Colony Storm | coastal pinniped density + storm | 8 |
+| 343 | Peregrine Through Tern Colony | kinetic maximum | 9 |
+| 344 | Multi-Species Polyrhythmic Apex | five-plus independent pulse streams | 10 |
+| 345 | Full Pacific Infrasound | three-source infrasonic event | 9 |
+| 346 | Cascades Full Storm | high-elevation maximum storm | 10 |
+| 347 | Wolf Pack+Waterfall+Storm | maximum apex predator chorus | 10 |
+| 348 | Full SRKW Pod Reunion | complete three-pod reunion | 10 |
+| 350 | **Cascades Full Avalanche** | **geological maximum acoustic event** | **10** |
+
+## Engine Statistics
+
+- Degrees complete: 350 of 360 (97.2%)
+- Quadrant: IV (271-360)
+- **CLOSING ARC: degrees 349-356, second consecutive E=20, arc operating at ceiling from degree 349 opening**
+- **E=20 COMBINED: E=10 (TAD peak intensity) + E=10 (Cascades Full Avalanche), sixth E=20 of engine run**
+- **TAD PEAK INTENSITY: E=10, *God's Balls* 1989 + *8-Way Santa* 1991 Sub Pop, tradition's extreme heavy position, Doyle proto-doom register at ceiling; E=9 at degree 337 -- E=10 here for peak intensity**
+- **CASCADES FULL AVALANCHE: E=10, full slab release from fracture through debris dispersal, subsonic-to-high-frequency acoustic range, heaviest Pacific Northwest snowpack in North America outside Alaska, first full avalanche documentation in SPS track**
+- **CLOSING ARC ENERGY: two of eight degrees complete, two consecutive E=20 readings, arc operates at engine ceiling**
+- 10 degrees remain to 360
+
+</details>

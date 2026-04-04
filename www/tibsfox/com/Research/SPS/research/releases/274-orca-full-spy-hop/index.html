@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 274&deg; &mdash; Orca Full Spy-Hop &mdash; E=8 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #0D47A1, #1565C0); color: #BBDEFB; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 24px rgba(21, 101, 192, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+
+    .spy-banner { background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #1E88E5 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E3F2FD; }
+    .spy-banner h3 { margin-top: 0; color: #BBDEFB; font-size: 1.2rem; text-transform: uppercase; }
+    .spy-banner p { color: #E3F2FD; margin: 0.5rem 0; }
+    .spy-banner strong { color: white; }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 1rem; }
+    .compare-card h4 { margin: 0 0 0.4rem; font-size: 0.95rem; font-family: system-ui, sans-serif; }
+    .compare-card .energy-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 3px; margin-bottom: 0.5rem; }
+    .compare-card .e9 { background: #0D47A1; color: white; }
+    .compare-card .e8 { background: #1565C0; color: white; }
+    .compare-card p { margin: 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .cultural-card { background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E8F5E9; }
+    .cultural-card h3 { margin-top: 0; color: #C8E6C9; font-size: 1.1rem; }
+    .cultural-card p { color: #E8F5E9; margin: 0.4rem 0; }
+    .cultural-card strong { color: #C8E6C9; }
+
+    .arc-card { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .arc-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--earth-brown); }
+    .arc-row { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.35rem 0; border-bottom: 1px solid rgba(0,105,92,0.1); font-size: 0.9rem; }
+    .arc-row:last-child { border-bottom: none; }
+    .arc-deg { font-weight: 700; color: var(--puget-teal); min-width: 2.5rem; font-family: system-ui, sans-serif; }
+    .arc-current { background: rgba(21,101,192,0.12); border-radius: 4px; padding: 0.1rem 0.4rem; font-weight: 600; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">274&deg;</div>
+      <div class="release-title-block">
+        <h2>Orca Full Spy-Hop</h2>
+        <div class="scientific"><em>Orcinus orca</em> &mdash; Southern Resident &mdash; E=8 &mdash; Delphinidae &mdash; Orca Arc degree 4/7</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      inland sea &mdash; vertical rise + crash &mdash; <strong>culturally transmitted behavior</strong> &mdash; the orca rises to observe the above-water world &mdash; directional orientation toward points of interest &mdash; 2&ndash;10 second hold above surface
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="spy-banner">
+          <h3>The Spy-Hop &mdash; Rising to See</h3>
+          <p>The Southern Resident Killer Whale rises vertically from the surface, clears the water above the pectoral fins, holds position for 2&ndash;10 seconds &mdash; <strong>observing</strong> &mdash; then descends. The directional orientation is deliberate: the animal faces a point of interest. Vessels, other orcas, prey at the surface. The orca is gathering visual information about the above-water world.</p>
+          <p>This is a <strong>culturally transmitted behavior</strong>. Young orcas learn it from adults within their pod. Not genetically programmed &mdash; culturally passed. An animal that has developed a concept of the above-water world as a source of useful information.</p>
+        </div>
+
+        <!-- BREACH VS SPY-HOP -->
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h4>Breach (degree 273)</h4>
+            <span class="energy-tag e9">E=9 &mdash; MAXIMUM</span>
+            <p>Full body airborne. Lateral body-slam return. Maximum physical assertion. Function uncertain (communication, parasites, play, exploration). Goes completely.</p>
+          </div>
+          <div class="compare-card">
+            <h4>Full Spy-Hop (degree 274)</h4>
+            <span class="energy-tag e8">E=8</span>
+            <p>Controlled vertical rise. Holds above surface 2-10 seconds. Observes. Deliberate and directed. Function clearer: gathering visual information. Watching carefully.</p>
+          </div>
+        </div>
+
+        <h2>The Physical Behavior</h2>
+        <p>Starting from at or just below the surface, the orca propels itself vertically. The rise is controlled &mdash; this is not the explosive acceleration of the breach. The animal rises until its head is fully above the surface; in a full spy-hop, the pectoral fins or higher clears the water. The hold: 2 to 10 seconds. The eyes are above the surface. The orca is looking.</p>
+        <p>The directional orientation is documented: orcas spy-hop facing specific points of interest. Vessels approaching the pod. Other animals at the surface. Shoreline features. The behavior is not random. The animal rises because there is something specific to observe.</p>
+
+        <div class="cultural-card">
+          <h3>Cultural Transmission &mdash; Learned, Not Genetically Programmed</h3>
+          <p>Three criteria for cultural transmission: <strong>(1)</strong> within-population variation (some pods spy-hop more than others in specific contexts); <strong>(2)</strong> learned during development through observation of adults; <strong>(3)</strong> persists through teaching and practice, not genetic inheritance. The spy-hop meets all three. Young orcas observe adults, practice the behavior, and integrate it into their behavioral repertoire. A behavior that is passed down through generations like a skill, not inherited like an instinct.</p>
+          <p><strong>The sophistication argument:</strong> to spy-hop deliberately and orient toward a point of interest requires a cognitive model of the world that extends beyond the animal&rsquo;s primary underwater sensory environment. The orca spy-hops because it has a concept of the above-water world as a source of useful information.</p>
+        </div>
+
+        <h2>Visual Capability &mdash; Bifocal Vision</h2>
+        <p>Orca eyes are adapted to function in both water and air. Underwater, the wide lateral placement provides broad field of view. Above surface, the cornea and lens function in air. When an orca spy-hops, it is making active use of aerial visual capability. From underwater, Snell&rsquo;s window limits the above-surface view to a narrow cone. A spy-hop eliminates this restriction entirely: the orca gains an unrestricted aerial view of the immediate environment. The information gain justifies the energy expenditure.</p>
+
+        <div class="arc-card">
+          <h3>The Orca Arc &mdash; Degrees 270&ndash;276</h3>
+          <div class="arc-row"><span class="arc-deg">270</span> <span>Pod call &mdash; vocal identity, signature call</span></div>
+          <div class="arc-row"><span class="arc-deg">271</span> <span>Southern Resident &mdash; species, population, ecology</span></div>
+          <div class="arc-row"><span class="arc-deg">272</span> <span>Transient hunt &mdash; mammal-eating ecotype, predation</span></div>
+          <div class="arc-row"><span class="arc-deg">273</span> <span>Breaching &mdash; E=9, maximum force, body-slam</span></div>
+          <div class="arc-row"><span class="arc-deg">274</span> <span class="arc-current">Full spy-hop &mdash; <strong>E=8, observation, rising to see</strong></span></div>
+          <div class="arc-row"><span class="arc-deg">275</span> <span>Pec-slap sequence &mdash; rhythmic body percussion</span></div>
+          <div class="arc-row"><span class="arc-deg">276</span> <span>Echolocation burst &mdash; 224 dB click trains, biosonar</span></div>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-273 Orca Breaching E=9</strong>
+            <p>Preceding entry. Breach vs. spy-hop: maximum force vs. maximum observation. Two above-water behaviors in consecutive degrees. E=9 to E=8: the arc descends one step from its energy apex.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-237 Chinook Salmon</strong>
+            <p>SRKW primary prey. Spy-hopping may assist surface prey detection: surface-schooling Chinook sometimes visible from above water. Salmon-orca dependency shapes all SRKW behavioral ecology.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-275 Orca Pec-Slap Sequence</strong>
+            <p>Next entry. Spy-hop (vertical observation) to pec-slap (horizontal percussion). Two different physical surface interactions. Observation to percussion.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-274 Vexed E=8</strong>
+            <p>Combined E=16. Capitol Hill hardcore 1982-1986. Cultural curiosity and political engagement: the orca rises to observe its world; Vexed engage with theirs.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Behavior</div>
+          <div class="stat-value">Full spy-hop</div>
+          <div class="stat-detail">Vertical rise + hold + descent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #1565C0;">E = 8</div>
+          <div class="stat-detail">Water displacement, controlled return</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hold Duration</div>
+          <div class="stat-value">2&ndash;10 sec</div>
+          <div class="stat-detail">Observation phase above surface</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Function</div>
+          <div class="stat-value">Observation</div>
+          <div class="stat-detail">Directional; toward point of interest</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Transmission</div>
+          <div class="stat-value">Cultural</div>
+          <div class="stat-detail">Learned, not genetically programmed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Inland sea</div>
+          <div class="stat-detail">Salish Sea, San Juan Islands</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orca Arc</div>
+          <div class="stat-value">274 / 270&ndash;276</div>
+          <div class="stat-detail">Degree 4 of 7</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Vexed</div>
+          <div class="stat-detail">E=8, Capitol Hill hardcore</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "degree": 204,
+  "artist": "Childbirth",
+  "slug": "204-childbirth",
+  "genre": "Punk Pop",
+  "energy": 6,
+  "era": "Punk Pop. E=6 -- feminist supergroup. Raw, fast, confrontational. Hardly Art streak completes (201-204). v1.49.345.",
+  "location": {
+    "origin": "Capitol Hill, Seattle",
+    "formative": "Capitol Hill feminist punk network. Supergroup from Chastity Belt (201), Tacocat (203), Pony Time.",
+    "career": "Childbirth. 2013-present. Hardly Art. Feminist punk supergroup."
+  },
+  "formed": "Seattle, Washington",
+  "active": "2013-present",
+  "labels": ["Hardly Art"],
+  "members": [
+    {"name": "Julia Shapiro", "role": "vocals / guitar", "note": "From Chastity Belt (201). Louder, more direct here. Restraint loosens."},
+    {"name": "Bree McKenna", "role": "bass", "note": "From Tacocat (203). More aggressive here. Network bridge."},
+    {"name": "Stacy Peck", "role": "drums", "note": "From Pony Time. Aggressive, driving. The engine."}
+  ],
+  "former_members": [],
+  "associated_musicians": [
+    {"name": "Chastity Belt", "note": "Shapiro's primary band. Hardly Art (201). Deadpan irony."},
+    {"name": "Tacocat", "note": "McKenna's primary band. Hardly Art (203). Pop-punk humor."},
+    {"name": "Pony Time", "note": "Peck's primary band. Aggressive drums."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Hardly Art streak completes (201-204) -- four entries, one label, one story. Energy arc: 4-5-6-6. Genre arc: indie-surf-punk-punk. Feminist continuity: irony-melancholy-humor-confrontation.",
+      "level": "milestone",
+      "department": "label-theory",
+      "college_path": ".college/music/theory/label/hardly-art-streak-complete.md",
+      "examples": [
+        "201: Chastity Belt, E=4, ironic deadpan.",
+        "202: La Luz, E=5, reverb melancholy.",
+        "203: Tacocat, E=6, humor as vehicle.",
+        "204: Childbirth, E=6, confrontation. COMPLETE."
+      ],
+      "description": "Hardly Art streak complete. Four entries. Energy 4-5-6-6. Four feminist modes.",
+      "genealogy": {
+        "ancestors": ["Hardly Art founding 2007.", "Sub Pop subsidiary.", "Capitol Hill feminist network."],
+        "relationship": "Childbirth at 204. Streak completes. Network closes."
+      }
+    },
+    {
+      "concept": "Supergroup as scene maturity marker -- when a scene produces supergroups, the scene is mature. Temple of the Dog was grunge's marker. Childbirth is the feminist punk marker.",
+      "level": "advanced",
+      "department": "scene-theory",
+      "college_path": ".college/music/theory/scene/supergroup-maturity.md",
+      "examples": [
+        "Temple of the Dog: Soundgarden + Pearl Jam.",
+        "Mad Season: Alice in Chains + Pearl Jam + Screaming Trees.",
+        "Childbirth: Chastity Belt + Tacocat + Pony Time.",
+        "Geography + politics (not substances)."
+      ],
+      "description": "Supergroup as scene maturity. Feminist punk equivalent of grunge supergroups.",
+      "genealogy": {
+        "ancestors": ["Temple of the Dog.", "Mad Season.", "Seattle supergroup tradition."],
+        "relationship": "Childbirth at 204. Capitol Hill feminist network's supergroup."
+      }
+    },
+    {
+      "concept": "Member overlap closure -- Shapiro (201) + McKenna (203) = Childbirth (204). The network loop closes. Geography and values become shared DNA.",
+      "level": "intermediate",
+      "department": "network-theory",
+      "college_path": ".college/music/theory/network/member-overlap-closure.md",
+      "examples": [
+        "Shapiro: Chastity Belt (201) -> Childbirth (204).",
+        "McKenna: Tacocat (203) -> Childbirth (204).",
+        "Peck: Pony Time -> Childbirth (204).",
+        "Three bands converge in one supergroup."
+      ],
+      "description": "Member overlap closure. Three source bands. One supergroup. Network DNA exposed.",
+      "genealogy": {
+        "ancestors": ["Capitol Hill feminist network.", "Hardly Art curation.", "Member overlap triangle (201-203-204)."],
+        "relationship": "Childbirth at 204. The loop closes."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 201, "artist": "Chastity Belt", "relationship": "Shapiro's primary band. Deadpan (E=4) to confrontation (E=6). The restraint loosens."},
+    {"degree": 203, "artist": "Tacocat", "relationship": "McKenna's primary band. Pop-punk catchiness to garage rawness. Same energy, different texture."},
+    {"degree": 202, "artist": "La Luz", "relationship": "Hardly Art 2/4. Surf reverb mid-streak. Quiet center between indie and punk."},
+    {"degree": 200, "artist": "Death Cab for Cutie", "relationship": "Anti-DCFC: raw, fast, loud, feminist, lo-fi. Same neighborhood, opposite aesthetics."}
+  ]
+}

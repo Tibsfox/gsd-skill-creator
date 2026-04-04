@@ -1,0 +1,25 @@
+{
+  "degree": 252, "artist": "No-Anchor", "slug": "252-no-anchor", "genre": "Noise Rock", "energy": 7,
+  "era": "Seattle. Noise Rock. E=7 -- self-released, DIY, the underground endpoint of the 249-252 batch.",
+  "location": { "origin": "Seattle, Washington" }, "active": "active",
+  "labels": ["Self-released"],
+  "format": "Band",
+  "theory_nodes": [
+    { "concept": "249-252 Seattle rock spectrum: Sub Pop blues (249), Hollywood blues (250), Sub Pop garage (251), Self-released noise rock (252). Institutional gradient from most commercially visible to most independent. E=7 across all four. The batch maps the full width of current Seattle rock.", "level": "advanced", "department": "engine-structure", "description": "249-252 as institutional spectrum of Seattle rock." },
+    { "concept": "Noise rock tradition: No Wave (1970s NYC) → SST Records (Black Flag, Sonic Youth) → Touch and Go (Big Black, Shellac, Steve Albini) → 1990s underground (Unwound, Jesus Lizard) → current DIY practitioners. Self-released. Volume as composition, feedback as instrument, structural disruption as content, dissonance as primary harmonic material.", "level": "advanced", "department": "genre-history", "description": "Noise rock lineage and aesthetic principles." },
+    { "concept": "E=7 streak: four consecutive degrees (249, 250, 251, 252) at E=7. The current Seattle rock generation's energy level. Holds across blues rock, garage rock, and noise rock; across Sub Pop, Hollywood, and self-release. The batch closes the streak at degree 252.", "level": "intermediate", "department": "engine-structure", "description": "E=7 streak closes at degree 252." }
+  ],
+  "cross_references": [
+    {"degree": 249, "artist": "The Black Tones", "relationship": "Sub Pop vs. self-released. The institutional contrast within the blues-rock-noise rock batch."},
+    {"degree": 251, "artist": "Naked Giants", "relationship": "Sub Pop garage vs. self-released noise. Adjacent traditions, adjacent degrees, opposite institutional positions."}
+  ],
+  "sps_pair": {"degree": 252, "sound": "Tidal Surge on Cobble Beach", "pairing_note": "E=7 vs E=4. Noise rock's abrasive textures against the rhythmic percussion of stone-on-stone tidal surge. Force against hard material: guitar pick vs. string; wave vs. stone."},
+  "milestones": ["E=7 STREAK CLOSES (249-252, four consecutive degrees)", "249-252 SEATTLE ROCK SPECTRUM COMPLETE"],
+  "noise_lineage": {
+    "no_wave": "New York, late 1970s -- DNA, Teenage Jesus and the Jerks. Abrasion, out-of-tune instruments, structural rejection.",
+    "sst_records": "Los Angeles, 1978-1995 -- Black Flag, Sonic Youth. American hardcore and noise rock.",
+    "touch_and_go": "Chicago, 1981-2009 -- Big Black, Shellac. Steve Albini production ethic.",
+    "pnw_connection": "Olympia DIY scene -- K Records, Kill Rock Stars, Unwound. 60 miles south of Seattle."
+  },
+  "tags": ["noise-rock", "self-released", "diy", "underground", "seattle", "feedback", "dissonance", "no-wave-lineage", "sst-lineage", "olympia-adjacent", "e7-streak-close"]
+}

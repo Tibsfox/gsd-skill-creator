@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 304&deg; &mdash; Hammerbox &mdash; E=7 &mdash; Grunge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .apex-arc { background: linear-gradient(135deg, #B71C1C, #7F0000); border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .apex-arc h3 { margin-top: 0; color: #EF9A9A; font-size: 1.05rem; }
+    .apex-arc .arc-row { display: flex; gap: 0.75rem; padding: 0.3rem 0; font-size: 0.88rem; color: #FFCDD2; }
+    .apex-arc .arc-deg { font-weight: 700; color: #EF9A9A; min-width: 2.5rem; }
+    .apex-arc .arc-row.current { color: #FFD700; font-weight: 600; }
+    .apex-arc .arc-deg.current { color: #FFD700; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>304 &mdash; Hammerbox (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">304&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Hammerbox</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Grunge</span>
+          <span class="label-badge">C/Z &rarr; A&amp;M</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>FIRST APPEARANCE &mdash; THREE CONSECUTIVE SPS E=9 CLOSES &mdash; GRIZZLY BEAR CHARGE PAIRS.</strong> Hammerbox enters the engine at E=7 &mdash; the heaviest S36 entry in the 301&ndash;304 arc. SPS closes three consecutive E=9 (Cougar, Wolf, Grizzly) with the Grizzly Bear threat charge at degree 304. E=7 + E=9 = E=16. The apex predator arc is complete.
+        </div>
+
+        <div class="apex-arc">
+          <h3>SPS Apex Predator Arc &mdash; Three Consecutive E=9 (302&ndash;304)</h3>
+          <div class="arc-row"><span class="arc-deg">302</span><span>Cougar full scream &mdash; E=9 &mdash; TIES SPS MAXIMUM &mdash; Felidae &mdash; blood-curdling escalating shriek</span></div>
+          <div class="arc-row"><span class="arc-deg">303</span><span>Gray Wolf full pack howl &mdash; E=9 &mdash; FIRST CANIDAE &mdash; multi-voice harmonic rising howl</span></div>
+          <div class="arc-row current"><span class="arc-deg current">304</span><span>Grizzly Bear threat charge &mdash; E=9 &mdash; URSIDAE RETURNS &mdash; full roar + ground percussion &mdash; [CURRENT]</span></div>
+        </div>
+
+        <h2>Carrie Akre and the Female Grunge Tradition</h2>
+        <p>Hammerbox formed in Seattle in 1989, fronted by Carrie Akre &mdash; one of the most powerful voices in the grunge scene that the canonical male-vocal narrative obscures. The received history of grunge is constructed around Cobain, Cornell, Vedder, and Staley. This is not false; those are exceptional voices. But the construction excludes Akre, Courtney Love, Kim Shattuck, Kat Bjelland, and the female-fronted heavy rock tradition that ran through the same scene with equal force. Hammerbox's E=7 &mdash; reaching the same energy as many of the engine's male-fronted grunge bands &mdash; is the correct calibration and the correct corrective.</p>
+
+        <blockquote>"Akre&rsquo;s voice brings emotional range that the male grunge vocal tradition at peak force does not always reach. The aggression has context; the tenderness has weight. E=7 contains both."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>From C/Z to A&M &mdash; The Grunge Commercial Moment</h2>
+        <p>Hammerbox's trajectory from C/Z Records (Seattle independent, home to early Mudhoney and Screaming Trees) to A&M Records tracks the major-label expansion into Seattle's scene post-Nirvana. A&M was one of the more artistically credible major labels of the era &mdash; Soundgarden's label &mdash; and the Hammerbox signing reflected genuine engagement with the Seattle sound. The commercial timing problem: by 1993, the grunge market was beginning to plateau. The bands that broke through in 1991-1992 had captured the audience; the 1993-1994 major-label wave arrived as the window was closing.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Hammerbox (1992)</h4>
+            <span class="level advanced">C/Z Records</span>
+            <p>The independent debut. Raw Seattle grunge on C/Z. Hammerbox before major-label involvement &mdash; the most unmediated version of the sound.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Numb (1993)</h4>
+            <span class="level advanced">A&amp;M Records</span>
+            <p>The major-label statement. Carrie Akre's vocal range across heavy grunge arrangements. A&amp;M production applied to the Seattle core sound. Critically well-received. Commercial moment had plateaued.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Four-Degree Arc Closes -- E=7 as Capstone</h2>
+        <p>The S36 301&ndash;304 arc: Hovercraft E=6 (noise rock) &rarr; Truly E=6 (melodic grunge) &rarr; Brad E=5 (soul post-grunge) &rarr; Hammerbox E=7 (heavy grunge). The arc dips to E=5 then closes at E=7. Hammerbox's closing escalation is the signature move: the final push of the four-degree sequence. The arc documents Capitol Hill and Seattle's genre diversity in the early 1990s in miniature &mdash; noise, melodic grunge, soul-inflected post-grunge, and raw heavy grunge in four consecutive degrees.</p>
+
+        <hr class="section-divider">
+
+        <h2>E=7 + E=9 = E=16</h2>
+        <p>Hammerbox's E=7 is the strongest S36 entry pairing with the three consecutive E=9 apex predator entries. The Grizzly Bear threat charge &mdash; full roar plus ground-shaking percussion from a charging grizzly in a surprise encounter &mdash; is E=9. The combined energy at degree 304 is E=16. The maximum SPS intensity meets the maximum S36 intensity in the four-degree arc. The Grizzly Bear's roar does not compare acoustically to the most produced rock music &mdash; but the combination of raw force, animal urgency, and physical percussion that defines a grizzly charge makes E=9 the correct ceiling.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">303</span> Brad &mdash; E=5 to E=7. Soul post-grunge to raw grunge. Arc closes with escalation.</li>
+          <li><span class="ref-degree">301</span> Hovercraft &mdash; Arc opening. E=6 noise rock. Four-degree arc: 301-304 complete.</li>
+          <li><span class="ref-degree">SPS 302</span> Cougar scream &mdash; E=9. First of three consecutive max. Felidae. Blood-curdling shriek.</li>
+          <li><span class="ref-degree">SPS 303</span> Gray Wolf howl &mdash; E=9. Second consecutive. FIRST CANIDAE. Multi-voice harmonic.</li>
+          <li><span class="ref-degree">SPS 304</span> Grizzly Bear charge &mdash; E=9. Third consecutive. URSIDAE MAX. E=7 + E=9 = E=16.</li>
+          <li><span class="ref-degree">Soundgarden</span> A&amp;M connection &mdash; Same label. Seattle scene's most commercially successful heavy band on the same major.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">304 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1989&ndash;1994</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">C/Z &rarr; A&amp;M</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Carrie Akre</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Anderson Richter</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Harris Thurmond</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">James Atkins</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Appearance</span><span class="stat-value">1st</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">84.4%</span></div>
+          <div class="stat-row"><span class="stat-label">Arc role</span><span class="stat-value">Closes 301&ndash;304</span></div>
+          <div class="stat-row"><span class="stat-label">Pair energy</span><span class="stat-value">E=16 (7+9)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Arc</h4>
+          <div class="stat-row"><span class="stat-label">302 Cougar</span><span class="stat-value">E=9</span></div>
+          <div class="stat-row"><span class="stat-label">303 Wolf</span><span class="stat-value">E=9</span></div>
+          <div class="stat-row"><span class="stat-label">304 Grizzly</span><span class="stat-value">E=9</span></div>
+          <div class="stat-row"><span class="stat-label">3x E=9</span><span class="stat-value">UNPRECEDENTED</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

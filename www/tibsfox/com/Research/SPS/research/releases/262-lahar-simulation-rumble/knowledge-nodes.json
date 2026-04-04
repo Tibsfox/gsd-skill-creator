@@ -1,0 +1,61 @@
+{
+  "degree": 262, "sound": "Lahar Simulation Rumble", "slug": "262-lahar-simulation-rumble",
+  "acoustic_character": "Deep ground vibration",
+  "energy": 7,
+  "family": "Geophysics",
+  "mechanism": "Flowing mixture of water and volcanic debris moving through confined river valley. Ground vibration from mass momentum (infrasonic); low-frequency rumble from turbulent flow; boulder grinding and material crushing at close range.",
+  "ecosystem": "Drainage",
+  "season": "Hypothetical",
+  "status": "Second entry in GEOPHYSICS ARC. Lahar as the destructive potential of the volcanic system documented at degree 261. E=7 is the Geophysics Arc maximum. Real hazard zones: Orting, Puyallup, Sumner, Auburn, Kent.",
+  "lahar_physics": {
+    "definition": "Flowing mixture of water and volcanic debris. Consistency of wet concrete at high concentrations. Fluid and fast-moving.",
+    "speed_steep_sections_mph": "20-40",
+    "speed_valley_floor_mph": "5-15",
+    "orting_travel_time_minutes": "30-45",
+    "water_sources": ["Glacial melt (triggered by volcanic heat or eruption)", "Heavy rainfall on ash-covered slopes", "Crater lake failure"],
+    "flow_characteristics": "Dense slurry carrying boulders (Osceola transported boulders of thousands of tons). Initial flow front most dangerous. Progressively dilutes downstream."
+  },
+  "osceola_mudflow": {
+    "age_years_ago": 5600,
+    "approximate_date_bce": 3600,
+    "volume_cubic_km": 3.8,
+    "volume_comparison": "Approximately 2-3x volume of Mt. St. Helens 1980 eruption",
+    "source": "Eastern flank collapse of Mt. Rainier triggered by hydrothermal weakening of volcanic edifice",
+    "path": "White River valley → Puget Sound lowlands near Tacoma",
+    "reach": "Current shoreline near Tacoma",
+    "modern_area_covered": ["Auburn", "Kent", "Sumner", "Puyallup", "Orting", "portions of Tacoma"],
+    "current_land_use": "Modern agricultural lowlands of Puyallup River delta and much of the Kent Valley are built on Osceola deposit"
+  },
+  "hazard_zones": [
+    { "community": "Orting, WA", "population": 8000, "risk_level": "Extreme", "details": "Entirely within lahar inundation zone. Built on Osceola deposit. Warning time 30-45 minutes. Vertical evacuation planning. Evacuation drills conducted. Signage to high ground." },
+    { "community": "Puyallup, WA", "population": 45000, "risk_level": "High", "details": "Puyallup River valley primary lahar pathway. Valley-floor portions in hazard zone." },
+    { "community": "Sumner, WA", "risk_level": "High", "details": "Adjacent to Puyallup on valley floor. Similar hazard profile." },
+    { "community": "Auburn / Kent", "risk_level": "High", "details": "White River lahar pathway. Industrial/commercial infrastructure in inundation zones." },
+    { "community": "Port of Tacoma", "risk_level": "Elevated", "details": "Near Puyallup River delta. Fuel storage in potential inundation area." },
+    { "community": "Seattle-Tacoma International Airport", "risk_level": "Elevated", "details": "Between White River and Green River valleys. Near edge of some hazard mapping." }
+  ],
+  "monitoring": {
+    "agencies": ["USGS Cascades Volcano Observatory", "Pierce County Emergency Management"],
+    "method": "Automated sensors in river channels detecting sudden flow change. Automated alert to emergency management. Integrated with summit volcanic monitoring.",
+    "note": "Lahar detection network and volcanic monitoring are two components of the same integrated early warning system."
+  },
+  "acoustic_sequence": [
+    { "range": "Several km distant", "description": "Low-frequency ground vibration (infrasonic). Primary signal from mass momentum of flow. Detectable before visual arrival." },
+    { "range": "1-3 km", "description": "Low-frequency rumble. Turbulent mixing of solid and liquid components. Often compared to fast freight train, lower in pitch, more sustained." },
+    { "range": "Close range", "description": "Turbulent flow noise. Boulders grinding against bedrock and each other. Waves within the flow. Material crushing and breaking. E=7." }
+  ],
+  "theory_nodes": [
+    { "concept": "Lahar as the most destructive volcanic hazard in the PNW. Not lava flows (too slow), not pyroclastic flows (too localized in most Rainier scenarios), but lahars -- because of the enormous ice volume on Rainier and the dense urban populations in lahar pathways. Osceola Mudflow (3.8 cubic km, ~5,600 years ago) reached Puget Sound. Modern lahar would bury Orting, Puyallup, Sumner, Auburn, Kent under volcanic debris.", "level": "advanced", "department": "hazard-science", "description": "Lahar as primary PNW volcanic hazard: specific reasons why." },
+    { "concept": "Orting as the acute case: entirely within lahar inundation zone, built on Osceola deposit, warning time 30-45 minutes (insufficient for vehicle evacuation in modern traffic), vertical evacuation planning. Orting is the most completely documented case of a community whose existence is contingent on warning time from a volcanic monitoring network.", "level": "advanced", "department": "community-hazard", "description": "Orting: acute lahar hazard case study." },
+    { "concept": "Geophysics Arc internal escalation: degree 261 (background tremor, E=5) to degree 262 (destructive event, E=7). The same volcanic system, two acoustic registers: the normal and the catastrophic. The monitoring of degree 261 exists to detect the event of degree 262. E=7 is the Geophysics Arc maximum.", "level": "intermediate", "department": "engine-arc", "description": "Volcanic arc escalation: background monitoring to catastrophic event." },
+    { "concept": "E=7 equilibrium: Lahar Simulation Rumble (E=7) + Gas Huffer (S36 262, E=7) = E=14 combined. Both are unstoppable forward-moving forces. The lahar follows drainage downhill; Gas Huffer follows the garage rock formula. Both are large, physical, direction-locked.", "level": "intermediate", "department": "engine-pairing", "description": "E=7 perfect equilibrium: lahar and garage rock as parallel unstoppable forces." }
+  ],
+  "cross_references": [
+    { "degree": 261, "sound": "Volcanic Tremor Mt. Rainier", "relationship": "VOLCANIC ARC. Background tremor (261, E=5) to destructive event (262, E=7). The monitoring system at 261 exists to detect the 262 event. Same volcanic system, two acoustic registers." },
+    { "degree": 263, "sound": "Earthquake P-wave Rumble", "relationship": "GEOPHYSICS ARC continues. Volcanic (262) to seismic (263). Ground vibration mechanisms differ: lahar mass flow vs. fault rupture seismic wave." }
+  ],
+  "s36_pair": { "degree": 262, "artist": "Gas Huffer", "energy_s36": 7, "pairing_note": "E=7 + E=7 = E=14. PERFECT EQUILIBRIUM. Both are unstoppable forward-moving forces. The lahar does not stop; the Gas Huffer song does not stop. Full-volume forward momentum as the shared mode." },
+  "geophysics_arc_position": { "arc": "261-264", "position": 2, "status": "GEOPHYSICS ARC MAXIMUM", "energy": 7 },
+  "milestones": ["GEOPHYSICS ARC MAXIMUM (E=7)", "LAHAR HAZARD ZONES DOCUMENTED", "OSCEOLA MUDFLOW CONTEXT ESTABLISHED"],
+  "tags": ["lahar", "volcanic-mudflow", "geophysics", "drainage", "hypothetical", "osceola-mudflow", "orting", "puyallup", "white-river", "carbon-river", "usgs", "pierce-county", "hazard-zone", "geophysics-arc", "e7"]
+}

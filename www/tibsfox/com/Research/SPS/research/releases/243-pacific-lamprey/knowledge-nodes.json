@@ -1,0 +1,58 @@
+{
+  "degree": 243, "species": "Pacific Lamprey", "slug": "243-pacific-lamprey", "sound_type": "silent / sucker sound in stream", "energy": 1,
+  "scientific_name": "Lampetra tridentata",
+  "family": "Petromyzontidae",
+  "ecosystem": "rock/stream (spawning and larval); rivers and ocean (parasitic adult phase)",
+  "season": "resident (larval 5-7 years in stream; adult spawning migration spring)",
+  "taxonomy": {
+    "order": "Petromyzontiformes",
+    "family": "Petromyzontidae",
+    "genus": "Lampetra",
+    "class": "Petromyzontida (jawless vertebrates, Agnatha)",
+    "lineage_age_mya": 450,
+    "note": "FIRST PETROMYZONTIDAE IN ENGINE. The jawless lamprey family -- the most ancient surviving vertebrate lineage. Diverged from jawed vertebrates before jaws evolved. No paired fins. No opercular covers. Circular oral disc with keratinous teeth. 450+ million years of evolutionary continuity."
+  },
+  "etymology": {
+    "lampetra": "Latin: lambere (to lick) + petra (stone) = 'stone licker', from oral disc attachment behavior",
+    "tridentata": "Latin: three-toothed, referring to characteristic dental feature of this species"
+  },
+  "size": "50-80 cm (adults), occasionally to 90 cm. Largest PNW lamprey species.",
+  "five_phase_lifecycle": [
+    { "phase": 1, "name": "Egg / Spawning", "notes": "Spring April-June in clean gravel. Adults use oral disc to move rocks. Semelparous death after spawning." },
+    { "phase": 2, "name": "Ammocoete (larva)", "duration": "5-7 years", "notes": "Blind, toothless filter-feeder buried in stream sediment. No eyes. Feeds on bacteria and algae. Longest larval phase of any PNW vertebrate." },
+    { "phase": 3, "name": "Metamorphosis", "duration": "~6 months", "notes": "Eyes develop, oral disc forms, body adapts for fast water. Late summer-fall." },
+    { "phase": 4, "name": "Marine parasitic phase", "duration": "1-2 years", "notes": "Attaches to host fish (salmon, halibut). Feeds on blood/body fluids. Anticoagulant secretion. Grows from juvenile to full adult size." },
+    { "phase": 5, "name": "Spawning migration", "notes": "Returns from ocean July-October. Upstream migration. Spawns April-June. Dies." }
+  ],
+  "sound_profile": {
+    "type": "near-silence (not a vocalization)",
+    "components": ["hydraulic displacement as fish moves", "oral disc adhesion and release from substrate", "nest-building rock movement during spawning", "passive gill respiration water flow"],
+    "energy": "E=1 -- TIES ABSOLUTE ENGINE MINIMUM. Previously reached by Harbor Porpoise (187). The acoustic minimum of a living vertebrate."
+  },
+  "first_nations": {
+    "status": "FIRST FOODS SPECIES -- Columbia River tribes",
+    "tribes": ["Warm Springs", "Yakama", "Umatilla", "Nez Perce", "Clackamas Chinook", "Willamette Valley tribes"],
+    "significance": "One of five First Foods: salmon, deer, camas, roots, lamprey. Sacred relation. High-fat nutritional profile. Smoked/dried for winter storage and trade.",
+    "key_sites": ["Willamette Falls (Oregon City)", "Celilo Falls (destroyed 1957 by The Dalles Dam)"],
+    "recovery_programs": ["CRITFC lamprey program", "Yakama Nation lamprey restoration", "Confederated Tribes of Umatilla Indian Reservation"]
+  },
+  "conservation": {
+    "decline_estimate": "90-95% from historical abundance in Columbia River basin",
+    "primary_cause": "Dam barriers: fish ladders designed for salmon do not accommodate lamprey 'inching' navigation (oral disc attachment to rock faces, not swimming through current). 400+ dams = 400+ near-complete barriers.",
+    "secondary_causes": ["ammocoete habitat degradation (silt quality, logging)", "water quality / pesticide bioaccumulation", "Sea Lamprey (Petromyzon marinus, invasive in Great Lakes) confusion leading to negative management attitudes"],
+    "recovery_efforts": ["tribal lamprey programs (CRITFC, Yakama)", "shallow-water collector channels at some dams", "lamprey-specific passage improvement research", "habitat restoration"]
+  },
+  "theory_nodes": [
+    { "concept": "FIRST PETROMYZONTIDAE IN ENGINE. E=1 TIES ABSOLUTE MINIMUM. 450 million years of evolutionary continuity -- the jawless vertebrate lineage. Older than dinosaurs, older than flowering plants, older than most land-dwelling life. The most ancient family in the SPS engine's taxonomic history.", "level": "milestone", "department": "taxonomy", "description": "The most significant taxonomic milestone since Pacific Salmon entered at 236." },
+    { "concept": "First Nations First Foods status: Pacific Lamprey is one of five sacred First Foods for Columbia River tribes. Sacred relation, not merely food resource. Willamette Falls and Celilo Falls (destroyed 1957) were primary lamprey fishing sites. Tribal recovery programs are leading lamprey restoration.", "level": "advanced", "department": "cultural-ecology", "description": "Indigenous sacred relationship with lamprey." },
+    { "concept": "90-95% population decline driven by fish ladders designed for salmon physiology, not lamprey physiology. Fish ladders require swimming against current; lampreys 'inch' up rock surfaces with oral disc. 400+ Columbia River dams = near-complete migration barriers. The most severe decline of any PNW vertebrate documented in engine.", "level": "advanced", "department": "conservation", "description": "Lamprey decline mechanism: the fish ladder design failure." }
+  ],
+  "cross_references": [
+    {"degree": 236, "species": "Pacific Salmon", "relationship": "Celilo Falls: both lamprey AND salmon fishing traditions destroyed by The Dalles Dam 1957. Double cultural loss. Shared spawning habitat in clean gravel streams."},
+    {"degree": 244, "species": "White Sturgeon", "relationship": "Both ancient fish lineages: Petromyzontidae (450 MYA) and Acipenseridae (200 MYA). Consecutive engine entries. Ancient fish arc begins at 243."},
+    {"degree": 187, "species": "Harbor Porpoise", "relationship": "Previous E=1 entry. Both ties for absolute engine minimum -- the acoustic floor of the engine."}
+  ],
+  "s36_pair": {"degree": 243, "artist": "The Frantics", "pairing_note": "E=6 vs E=1. Surf-garage Seattle 1959 against jawless fish 450 million years old. The widest biological distance in the engine at any single degree."},
+  "milestones": ["FIRST PETROMYZONTIDAE IN ENGINE", "E=1 TIES ABSOLUTE ENGINE MINIMUM", "OLDEST VERTEBRATE LINEAGE IN ENGINE (450 MYA)", "JAWLESS VERTEBRATE ERA BEGINS"],
+  "tags": ["petromyzontidae", "first-petromyzontidae", "lamprey", "pacific-lamprey", "jawless-fish", "agnatha", "450-million-years", "living-fossil", "first-foods", "columbia-river-tribes", "critfc", "e1-minimum", "ammocoete", "oral-disc", "dam-barriers", "90-percent-decline", "willamette-falls", "celilo-falls"]
+}

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 136&deg; &mdash; DJ Riz &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D84315, #E64A19);
+      color: #FFCCBC;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(216, 67, 21, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #D84315;
+      color: #FFCCBC;
+      border: 1px solid #E64A19;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #2E7D32;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #D84315;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #D84315;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #FBE9E7; color: #BF360C; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: #D84315;
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .cd-banner {
+      background: linear-gradient(135deg, #D84315, #BF360C, #4E342E);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .cd-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    blockquote {
+      border-left: 3px solid #D84315;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #FBE9E7;
+      font-style: italic;
+      color: #BF360C;
+    }
+
+    .element-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .element-card {
+      background: white;
+      border: 1px solid #FFCCBC;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .element-card strong { color: #D84315; font-size: 0.88rem; }
+    .element-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>136 &mdash; DJ Riz</span>
+    </nav>
+
+    <!-- CD Banner -->
+    <div class="cd-banner">
+      <h3>Central District Enters &mdash; 206 Zulu</h3>
+      <p>
+        DJ Riz at degree 136&deg; introduces the <strong>Central District</strong>
+        as a new neighborhood &mdash; the historical heart of Seattle&rsquo;s Black
+        community and hip-hop culture. <strong>206 Zulu</strong> &mdash; PNW chapter
+        of the Universal Zulu Nation. Active since 1993. Turntablist, cultural
+        architect, community builder. E=5 kinetic turntablism.
+        The radio era (126&ndash;136) closes. S36 returns to performing artists.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">136&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">DJ Riz</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop / DJ</span>
+          <span class="label-badge">206 Zulu</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>206 Zulu &mdash; Hip-Hop Culture in the PNW</h2>
+          <p>
+            DJ Riz has been active in Seattle&rsquo;s hip-hop scene since
+            <strong>1993</strong> and is a central figure in <strong>206 Zulu</strong>,
+            the Pacific Northwest chapter of the <strong>Universal Zulu Nation</strong>.
+            Founded in the Bronx by Afrika Bambaataa in 1973, the UZN defines
+            hip-hop through four elements: <strong>DJing, MCing, breaking,
+            and graffiti</strong>. 206 Zulu brings this mission to Seattle,
+            rooted in the Central District.
+          </p>
+          <p>
+            DJ Riz is a <strong>turntablist</strong> &mdash; using vinyl records
+            and turntables as a musical instrument. Scratching, beat juggling,
+            mixing, and needle drops are the technical vocabulary. Three decades
+            of continuous practice represent deep mastery of the craft and
+            dedication to hip-hop&rsquo;s foundational element.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Four Elements</h2>
+          <div class="element-grid">
+            <div class="element-card">
+              <strong>DJing</strong>
+              <p>The foundation. Turntablism, mixing, scratching, beat juggling. DJ Riz&rsquo;s primary element.</p>
+            </div>
+            <div class="element-card">
+              <strong>MCing</strong>
+              <p>Lyrical arts. Freestyle, battle rap, conscious hip-hop. The voice over the DJ&rsquo;s beats.</p>
+            </div>
+            <div class="element-card">
+              <strong>Breaking</strong>
+              <p>B-boying/b-girling. Dance as creative expression. The physical element on the cardboard.</p>
+            </div>
+            <div class="element-card">
+              <strong>Graffiti</strong>
+              <p>Aerosol art. Visual expression. Tags, throws, pieces. The visual element on the wall.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Central District &mdash; Heart of Black Seattle</h2>
+          <blockquote>
+            The Central District is the historical heart of Seattle&rsquo;s Black
+            community. From the Jackson Street jazz corridor of the 1930s through
+            the hip-hop scene of the 1990s, the CD has been where Black musical
+            culture in Seattle lives. DJ Riz and 206 Zulu are part of this lineage.
+          </blockquote>
+          <p>
+            The CD&rsquo;s significance runs deep: churches, clubs, barbershops,
+            community centers, and block parties formed the social infrastructure
+            that sustained the community through decades of segregation and
+            redlining. <strong>Seattle&rsquo;s hip-hop scene emerged from the CD</strong>
+            in the late 1980s and early 1990s. Since the 2000s, severe
+            gentrification has transformed the neighborhood &mdash; the Black
+            population declining from over 70% (1970s) to under 20% (2020s).
+            DJ Riz represents the <strong>persistent presence</strong> of
+            hip-hop culture even as the neighborhood changes.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>Central District Enters S36</h4>
+              <div class="level advanced">Advanced &mdash; Geographic Pattern</div>
+              <p>
+                New neighborhood. The historical heart of Seattle&rsquo;s Black
+                community. Jackson Street jazz heritage. Hip-hop birthplace.
+                Gentrification and cultural persistence. The CD joins Capitol
+                Hill in the S36 geographic map.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>206 Zulu &mdash; Four-Element Hip-Hop</h4>
+              <div class="level advanced">Advanced &mdash; Cultural Theory</div>
+              <p>
+                Universal Zulu Nation PNW chapter. Hip-hop as four-element
+                culture, not just music genre. DJing, MCing, breaking, graffiti.
+                Cultural preservation in an era of commercialization.
+                Knowledge, culture, overstanding.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Radio Era Closes (126&ndash;136)</h4>
+              <div class="level intermediate">Intermediate &mdash; Structural Pattern</div>
+              <p>
+                Eleven degrees of radio, broadcasting, and DJ culture. From
+                Nasty Nes (126, KCMU) through KEXP sextet (130&ndash;135) to
+                DJ Riz (136, community). The transition from broadcast to
+                community marks the era&rsquo;s close.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 &mdash; Turntablist Kinetic Energy</h4>
+              <div class="level intermediate">Intermediate &mdash; Energy Theory</div>
+              <p>
+                Physical performance: scratching, cutting, beat juggling.
+                The turntable as instrument. E=5 matches B-Mello (134) and
+                Indica Jones (135). Three consecutive E=5 DJs. The performing
+                DJ energy tier.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">126&deg;</span>
+              <strong>Nasty Nes Rodriguez</strong> &mdash; Hip-hop lineage.
+              Nasty Nes (126, E=4, KCMU hip-hop pioneer) and DJ Riz (136, E=5,
+              206 Zulu). Both hip-hop DJs, both expanding Seattle&rsquo;s
+              musical identity. Ten degrees apart. Radio pioneer to community architect.
+            </li>
+            <li>
+              <span class="ref-degree">134&deg;</span>
+              <strong>DJ B-Mello</strong> &mdash; DJ trio. B-Mello (134, E=5,
+              KEXP hip-hop), Indica Jones (135, E=5, KEXP electronic),
+              DJ Riz (136, E=5, 206 Zulu). Three consecutive E=5 DJs.
+              Radio to community transition.
+            </li>
+            <li>
+              <span class="ref-degree">135&deg;</span>
+              <strong>Indica Jones</strong> &mdash; DJ pair. Indica Jones
+              (135, E=5, KEXP electronic, Capitol Hill) and DJ Riz (136, E=5,
+              206 Zulu hip-hop, Central District). Same energy, different
+              genres, different neighborhoods. Electronic and hip-hop.
+            </li>
+            <li>
+              <span class="ref-degree">130&deg;</span>
+              <strong>Cheryl Waters</strong> &mdash; Radio era arc. Waters
+              (130, E=3, KEXP) opened the KEXP sextet. DJ Riz (136, E=5,
+              community) closes the radio era. Broadcast to community.
+              E=3 to E=5 arc.
+            </li>
+            <li>
+              <span class="ref-degree">122&deg;</span>
+              <strong>Sabzi</strong> &mdash; Hip-hop production lineage.
+              Sabzi (122, E=4, Blue Scholars/Common Market) and DJ Riz
+              (136, E=5, 206 Zulu). Different facets of Seattle hip-hop.
+              Producer vs. turntablist.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">136&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Hip-Hop / DJ</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Crew</span>
+            <span class="stat-value">206 Zulu</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Network</span>
+            <span class="stat-value">Universal Zulu Nation</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">1993</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>DJ Trio (134&ndash;136)</h4>
+          <div class="stat-row">
+            <span class="stat-label">134&deg;</span>
+            <span class="stat-value">B-Mello (KEXP)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">135&deg;</span>
+            <span class="stat-value">Indica Jones (KEXP)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">136&deg;</span>
+            <span class="stat-value">DJ Riz (206 Zulu)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">All E=5</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Four Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">DJing</span>
+            <span class="stat-value">Primary</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">MCing</span>
+            <span class="stat-value">Supported</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Breaking</span>
+            <span class="stat-value">Supported</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Graffiti</span>
+            <span class="stat-value">Supported</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Central District</h4>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">New neighborhood</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Heritage</span>
+            <span class="stat-value">Black community heart</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jazz era</span>
+            <span class="stat-value">Jackson Street</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../135-indica-jones/" style="color: var(--seattle-navy);">&larr; 135&deg; Indica Jones</a>
+        <a href="../137-next/" style="color: var(--seattle-navy);">137&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 136&deg; &mdash; DJ Riz &mdash; Seattle 360 Engine &mdash; v1.49.276
+        <br>
+        Hip-hop DJ and 206 Zulu member. E=5 &mdash; turntablist kinetic energy.
+        Central District &mdash; new neighborhood, heart of Seattle&rsquo;s Black
+        community. Active since 1993. Universal Zulu Nation PNW chapter.
+        Four-element hip-hop culture. The radio era (126&ndash;136) closes.
+        S36 returns to performing artists.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "degree": 297,
+  "species": "Bald Eagle",
+  "scientific_name": "Haliaeetus leucocephalus",
+  "slug": "297-bald-eagle-aerial-combat",
+  "sound_type": "shrieking locked-talon tumble -- two eagles grapple talons in aerial territorial display; spin and cartwheel in freefall from height; continuous high-pitched screaming throughout; separation before impact; audible from hundreds of meters",
+  "energy": 7,
+  "ecosystem": "Territory -- riparian corridors, lake shorelines, coastal areas; nesting territory defense; year-round in prime Pacific Northwest habitat",
+  "season": "Resident (year-round; locked-talon combat most frequent late winter to early spring when breeding investment is maximum)",
+  "family": "Accipitridae",
+  "order": "Accipitriformes",
+  "conservation_status": "Least Concern (IUCN). Delisted from US Federal Endangered Species List 2007. Successful recovery from DDT-related population decline. Washington State has one of the highest populations in the contiguous US.",
+  "milestone": "Second Accipitridae entry in SPS engine. Return from degree 221 (contact call, E=5). Behavioral escalation: contact call (E=5) to locked-talon aerial combat (E=7). Two-level energy escalation for the same species across different behaviors. Opens raptor cluster at degrees 297-299.",
+  "coordinates": {
+    "lat": 48.5,
+    "lon": -121.8,
+    "description": "Pacific Northwest distribution: Skagit River valley (December-January chum salmon concentration, hundreds of eagles), San Juan Islands, Puget Sound shorelines, coastal rivers. Year-round resident in prime habitat. Skagit River Bald Eagle Natural Area is the most significant concentration site."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Territorial combat screaming -- the contact call (kee-kee-kee) pushed to maximum urgency and volume; continuous bilateral screaming from both combatants throughout the locked-talon display; carries hundreds of meters.",
+    "locked_talon_mechanics": "Two eagles grip each other's feet with talons; combined weight produces tumbling freefall; cartwheeling motion from aerodynamic forces; documented freefall up to 100+ feet; separation before impact requires precise timing; failure to separate risks injury or drowning.",
+    "e7_calibration": "E=7: maximum territorial behavioral commitment. Physical risk accepted. Bilateral sustained screaming throughout display. The highest-intensity Bald Eagle behavior. Two levels above the contact call at E=5."
+  },
+  "nodes": [
+    {
+      "id": "behavioral-escalation",
+      "type": "milestone",
+      "title": "E=5 to E=7 -- Contact Call to Aerial Combat",
+      "description": "Same species, two behaviors, two energy levels. Contact call (221, E=5): ambient communication. Locked-talon combat (297, E=7): maximum territorial commitment. The energy gap accurately represents the behavioral gap. The engine's most precise single-species energy calibration.",
+      "connections": ["raptor-cluster", "first-accipitridae"]
+    },
+    {
+      "id": "raptor-cluster",
+      "type": "arc",
+      "title": "Raptor Cluster 297-299",
+      "description": "Three consecutive raptor/owl degrees approaching the five-sixths mark: Bald Eagle combat (297, E=7, Accipitridae), Northern Goshawk alarm (298, E=7, Accipitridae), Great Horned Owl territorial (299, E=6, Strigidae). Then Pileated Woodpecker (300, E=7, Picidae) at the milestone. The ecological cluster matches the S36 return cluster in intensity.",
+      "connections": ["behavioral-escalation"]
+    },
+    {
+      "id": "first-accipitridae",
+      "type": "callback",
+      "title": "Return from Degree 221 -- FIRST ACCIPITRIDAE",
+      "description": "Degree 221 was the first Accipitridae entry in the engine: Bald Eagle contact call, E=5, paired with Love Battery (U-District enters). The return at 297 escalates to E=7. The Accipitridae family documents its full behavioral range through two entries of the same species.",
+      "connections": ["behavioral-escalation"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-221", "species": "Bald Eagle contact call", "relationship": "First appearance E=5. FIRST ACCIPITRIDAE. Contact call only. E=5 to E=7 behavioral escalation on return."},
+    {"target": "SPS-298", "species": "Northern Goshawk full alarm", "relationship": "Second Accipitridae E=7. Raptor cluster continues at 298. Two consecutive Accipitridae both at E=7."},
+    {"target": "S36-297", "artist": "Skin Yard return", "relationship": "E=7 + E=7 = E=14. Matched energy. Proto-grunge riff architecture and locked-talon combat: sustained structural effort at altitude."}
+  ]
+}

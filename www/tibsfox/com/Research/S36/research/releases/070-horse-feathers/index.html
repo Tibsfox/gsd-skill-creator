@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 70&deg; &mdash; Horse Feathers &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>070 &mdash; Horse Feathers</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Kill Rock Stars Enters &mdash; Indie Folk Returns &mdash; Genre Stage 52 &mdash; The Fiddle Line</h3>
+      <p>
+        Horse Feathers at degree 70&deg; brings <strong>Kill Rock Stars</strong>
+        into the engine &mdash; the legendary Olympia-based independent label,
+        home of Bikini Kill, Sleater-Kinney, Elliott Smith. First KRS artist.
+        <strong>Indie Folk</strong> at Genre Stage 52 &mdash; the genre returns
+        after hybrid stages. <strong>E=3</strong> &mdash; middle energy,
+        breaking the back-to-back E=2 (68&ndash;69). <strong>Justin Ringle</strong>
+        leads a Portland-to-Seattle corridor band with delicate acoustic
+        arrangements featuring violin, banjo, and hushed vocals. Olympia enters
+        the engine&rsquo;s label geography &mdash; the sixth I-5 corridor node.
+        The corridor wanderer. The fiddle line.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">70&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Horse Feathers</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Indie Folk</span>
+          <span class="label-badge">Kill Rock Stars</span>
+          <span class="neighborhood-badge">Portland to Seattle</span>
+          <span class="record-badge">First KRS Artist</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Kill Rock Stars Enters &middot; Genre Stage 52 &middot; Olympia Node &middot; First Violin &amp; Banjo</h4>
+          <p>
+            <strong>Horse Feathers</strong> enters the engine as a
+            Portland-to-Seattle indie folk band led by <strong>Justin
+            Ringle</strong>. <strong>Kill Rock Stars</strong> &mdash; the
+            legendary Olympia-based independent label &mdash; enters the
+            engine for the first time, adding Olympia as the sixth I-5
+            corridor node after Seattle, Portland, Bellingham, Everett, and
+            Tacoma. <strong>Indie Folk</strong> at Genre Stage 52 &mdash;
+            the genre returns after the hybrid Genre Stages.
+            <strong>E=3</strong> &mdash; middle energy, breaking the
+            back-to-back E=2 (68&ndash;69). Energy distribution after
+            degree 70: E1:3, E2:23, E3:17, E4:17, E5:10, E6:2. First
+            prominent <strong>violin and banjo</strong> in the engine.
+            The fiddle line &mdash; 71st acoustic element. The corridor
+            wanderer &mdash; 71st artist-city pattern. The thread &mdash;
+            70th blue note.
+          </p>
+        </div>
+
+        <section>
+          <h2>Kill Rock Stars: Olympia Enters the Engine</h2>
+          <p>
+            <strong>Kill Rock Stars</strong> is one of the most significant
+            independent record labels in the history of Pacific Northwest
+            music. Founded in <strong>Olympia, Washington</strong> in 1991
+            by Slim Moon, KRS was born out of the same riot grrrl and punk
+            scenes that produced Bikini Kill, Sleater-Kinney, and Heavens
+            to Betsy. The label later signed Elliott Smith, whose albums
+            on KRS became landmarks of indie folk and singer-songwriter
+            music. Kill Rock Stars is not merely a label &mdash; it is an
+            institution of Pacific Northwest independent music culture,
+            a philosophical statement about artistic autonomy, and a
+            geographic anchor in Olympia.
+          </p>
+          <p>
+            With Horse Feathers, KRS enters the Seattle 360 engine for
+            the first time. This is a structural event of the first order.
+            The engine has tracked Sub Pop (Seattle), Barsuk (Seattle),
+            Tender Loving Empire (Portland), and various self-released
+            artists. Kill Rock Stars adds <strong>Olympia</strong> to the
+            engine&rsquo;s label geography &mdash; the state capital, the
+            Evergreen State College town, the birthplace of riot grrrl.
+            Olympia becomes the sixth I-5 corridor node: Seattle, Portland,
+            Bellingham, Everett, Tacoma, and now Olympia. The corridor
+            thickens. The engine&rsquo;s map of Pacific Northwest music
+            infrastructure gains another anchor point.
+          </p>
+          <p>
+            The significance of KRS extends beyond geography. Sub Pop
+            defined the grunge era and evolved into a national tastemaker.
+            Barsuk nurtured the Death Cab ecosystem. Tender Loving Empire
+            represents Portland&rsquo;s community-retail model. Kill Rock
+            Stars represents something else: the <strong>political
+            independent label</strong> &mdash; the label founded on
+            principles of artistic freedom, DIY ethics, and resistance
+            to commercial co-optation. KRS did not chase trends. It
+            created the conditions for artists to work outside the
+            commercial system entirely. That Horse Feathers landed on
+            KRS rather than Sub Pop or Barsuk tells us something about
+            the band&rsquo;s relationship to the commercial music
+            ecosystem: they are outside it, deliberately, by choice
+            and by aesthetic.
+          </p>
+          <blockquote>
+            Kill Rock Stars at degree 70 is the engine&rsquo;s first
+            encounter with the Olympia node &mdash; the state capital,
+            the college town, the riot grrrl birthplace. KRS adds a
+            political dimension to the engine&rsquo;s label ecology:
+            not just geography and genre, but ideology. The label as
+            philosophical statement. Artistic autonomy as organizing
+            principle. Olympia as the conscience of the corridor.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Fiddle Line: Violin and Banjo Enter the Engine</h2>
+          <p>
+            Horse Feathers&rsquo; sound is built on delicate acoustic
+            arrangements where <strong>violin</strong> and
+            <strong>banjo</strong> carry as much melodic and emotional
+            weight as the voice itself. This is structurally significant:
+            through seventy degrees, the engine has tracked guitar-centric
+            arrangements almost exclusively. Acoustic guitar, electric
+            guitar, piano, synthesizer, percussion &mdash; these have
+            been the engine&rsquo;s primary instrumental voices. Violin
+            and banjo have appeared in arrangements (Fleet Foxes&rsquo;
+            layered instrumentation, for instance) but never as
+            <strong>primary voices</strong> defining a band&rsquo;s
+            sonic identity.
+          </p>
+          <p>
+            Horse Feathers changes this. The violin in <em>Thistled
+            Spring</em> (2008) and <em>Broken Birthday</em> (2016) is
+            not an ornamental layer &mdash; it is a lead voice, carrying
+            melodies, providing counterpoint to Ringle&rsquo;s hushed
+            vocals, and creating the emotional atmosphere that defines
+            the band&rsquo;s sound. The banjo functions similarly:
+            not the driving percussive banjo of bluegrass, but a
+            fingerpicked, melodic instrument that interlocks with the
+            guitar and violin to create a <strong>woven texture</strong>
+            &mdash; three string instruments braiding around each
+            other, none dominating, all essential.
+          </p>
+          <p>
+            The <strong>fiddle line</strong> is the seventy-first
+            acoustic element: the melodic line played on violin that
+            weaves through the arrangement like a thread through fabric,
+            appearing and disappearing, carrying the emotional subtext
+            that the lyrics cannot hold. In Horse Feathers&rsquo; music,
+            the fiddle line does what the voice cannot &mdash; it
+            sustains emotion across the spaces between words, fills the
+            silences that Ringle&rsquo;s hushed delivery creates, and
+            provides a second narrative that runs parallel to the
+            lyrical narrative. The thread beneath the words.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Corridor Wanderer: Portland, Seattle, Olympia</h2>
+          <p>
+            Horse Feathers occupies the <strong>I-5 corridor</strong>
+            as a zone rather than a fixed point. Justin Ringle formed
+            the band in Portland but moved between Portland and Seattle
+            over the course of the band&rsquo;s career. The label is
+            based in Olympia. The music draws from the folk traditions
+            of the entire Pacific Northwest corridor &mdash; not
+            anchored to one city&rsquo;s specific scene, but existing
+            in the spaces between cities, in the corridor itself.
+          </p>
+          <p>
+            The engine has seen I-5 corridor artists before. Y La Bamba
+            (degree 61) moved from Portland to Seattle. Laura Gibson
+            (degree 57) is Portland-based on a Seattle label (Barsuk).
+            But Horse Feathers is the first artist whose identity is
+            genuinely <strong>multi-nodal</strong> &mdash; Portland
+            origin, Seattle presence, Olympia label. Three cities on
+            the corridor, all contributing to the band&rsquo;s identity.
+            The <strong>corridor wanderer</strong> is the seventy-first
+            artist-city pattern: the artist who does not belong to one
+            city but to the corridor itself, whose movement between
+            cities is not a departure or a migration but a way of
+            inhabiting the region as a connected whole.
+          </p>
+          <p>
+            The corridor wanderer is distinct from the Export (leaves
+            permanently), the visiting artist (connects institutionally
+            without geographic presence), and the working musician
+            (commits to one city). The corridor wanderer treats the
+            I-5 corridor as a single ecosystem &mdash; Portland,
+            Seattle, and Olympia as neighborhoods of one extended
+            metropolitan region of independent music. The freeway as
+            neighborhood. The corridor as city.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Fiddle Line</h4>
+              <div class="level advanced">Advanced &mdash; 71st Acoustic Element</div>
+              <p>
+                The melodic line played on violin that weaves through
+                the arrangement like a thread through fabric &mdash;
+                appearing and disappearing, carrying the emotional
+                subtext that lyrics cannot hold. In Horse Feathers,
+                the violin is not ornamental but a lead voice, providing
+                counterpoint to Ringle&rsquo;s hushed vocals. The fiddle
+                line sustains emotion across the spaces between words.
+                Distinct from the earnest voice (69, outward delivery)
+                &mdash; the fiddle line is the instrumental voice that
+                shadows the vocal, the thread beneath the words.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Corridor Wanderer</h4>
+              <div class="level advanced">Advanced &mdash; 71st Artist-City Pattern</div>
+              <p>
+                The pattern of an artist who does not belong to one city
+                but to the I-5 corridor itself &mdash; Portland origin,
+                Seattle presence, Olympia label. Multi-nodal identity.
+                Not the Export (leaves), not the visiting artist
+                (institutional), not the working musician (stays in one
+                city). The corridor wanderer inhabits the region as a
+                connected whole. The freeway as neighborhood.
+                Three cities as one ecosystem.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Thread</h4>
+              <div class="level intermediate">Intermediate &mdash; 70th Deployment</div>
+              <p>
+                The blue note that appears in the space between two
+                interlocking string lines &mdash; the moment where
+                violin and guitar almost meet but do not quite resolve,
+                creating a delicate tension. The thread is the blue
+                note of counterpoint: not a single note but the
+                relationship between two voices. The open chord (69)
+                rang in sustained simplicity; the thread shimmers in
+                woven complexity.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Indie Folk at Genre Stage 52</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 52</div>
+              <p>
+                Indie Folk returns at the fifty-second genre stage.
+                The genre appeared at degree 53 (Fleet Foxes, Genre
+                Stage 34) as communal, multi-voice folk. At degree 70,
+                Indie Folk is intimate, string-driven, hushed &mdash;
+                the chamber-folk end of the spectrum. Same genre, different
+                architecture: Fleet Foxes&rsquo; wall of voices versus
+                Horse Feathers&rsquo; woven strings. Genre Stage 52
+                follows Singer-Songwriter (51, degree 69).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Key Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>House with No Home</h4>
+              <div class="disco-years">2006 &middot; Self-Released</div>
+              <p>
+                The debut. Justin Ringle&rsquo;s earliest recordings
+                &mdash; sparse, hushed, intimate. Guitar and voice as
+                foundation, with early hints of the string arrangements
+                that would define the band. Portland beginnings. The
+                seed before the fiddle line grew.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Thistled Spring</h4>
+              <div class="disco-years">2008 &middot; Kill Rock Stars</div>
+              <p>
+                The KRS debut. Violin and banjo fully integrated into
+                the arrangements. Delicate, woven textures &mdash;
+                three string instruments braiding around Ringle&rsquo;s
+                hushed vocals. The album that defined the Horse
+                Feathers sound: chamber folk as indie music.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Broken Birthday</h4>
+              <div class="disco-years">2016 &middot; Kill Rock Stars</div>
+              <p>
+                Matured arrangements, deeper emotional territory.
+                The string interplay reaches its most sophisticated
+                form. The fiddle line as a fully developed second
+                narrative voice. Songs of loss, time, and the
+                persistence of feeling.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Appreciation</h4>
+              <div class="disco-years">2012 &middot; Kill Rock Stars</div>
+              <p>
+                Mid-career expansion. The arrangements grow more
+                confident without losing the delicate core. Piano
+                textures appear alongside the string instruments.
+                The woven quality deepens. KRS stewardship continues.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">61&deg;</span>
+              <strong>Y La Bamba</strong> &mdash; Portland-to-Seattle
+              corridor shared. Both I-5 wanderers. Y La Bamba&rsquo;s
+              braided voice (61) weaves languages. Horse Feathers&rsquo;
+              fiddle line (70) weaves instruments. Both bridge cities.
+              Both are corridor artists whose identity cannot be
+              pinned to one place.
+            </li>
+            <li>
+              <span class="ref-degree">68&deg;</span>
+              <strong>Sam Beam (Iron &amp; Wine)</strong> &mdash; Hushed
+              indie folk shared. Both quiet, intricate, string-rich.
+              Beam&rsquo;s hush (68) is a solo confessional voice.
+              Ringle&rsquo;s hush is entwined with the fiddle line
+              &mdash; never alone, always accompanied by the thread.
+              Beam visits through Sub Pop; Horse Feathers wanders
+              through KRS.
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Indie folk connection.
+              Both delicate, multi-instrument arrangements. Fleet
+              Foxes&rsquo; communal harmony (53) blends many voices
+              into one wall. Horse Feathers weaves a few instruments
+              into an intimate thread. Same genre, opposite
+              architecture: the choir versus the chamber ensemble.
+            </li>
+            <li>
+              <span class="ref-degree">64&deg;</span>
+              <strong>Jesse Sykes</strong> &mdash; Folk atmospheric
+              shared. Sykes&rsquo;s dusk (64) is dark and liminal.
+              Horse Feathers&rsquo; arrangements are delicate and
+              luminous &mdash; not twilight but early morning mist.
+              Both quiet. Both atmospheric. Different light.
+            </li>
+            <li>
+              <span class="ref-degree">57&deg;</span>
+              <strong>Laura Gibson</strong> &mdash; Portland folk
+              connection. Gibson on Barsuk (Seattle label), Horse
+              Feathers on KRS (Olympia label). Both Portland artists
+              on Pacific Northwest labels outside Portland. The
+              corridor sends artists in one direction and labels
+              claim them from another.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">70&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">52</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">Seattle (originally Portland)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Portland, OR</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Corridor</span>
+            <span class="stat-value">Portland / Seattle / Olympia</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Kill Rock Stars</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Corridor Wanderer</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">52 (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#71 (Fiddle Line)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">Corridor Wanderer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#70 (The Thread)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label">House with No Home</span>
+            <span class="stat-value">2006</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Thistled Spring</span>
+            <span class="stat-value">2008 (KRS)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Appreciation</span>
+            <span class="stat-value">2012 (KRS)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Broken Birthday</span>
+            <span class="stat-value">2016 (KRS)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">23</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#71 (Fiddle Line)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#71 (Corridor Wanderer)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#70 (The Thread)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Y La Bamba</span>
+            <span class="stat-value">I-5 corridor (61)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Beam</span>
+            <span class="stat-value">Hushed folk (68)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Fleet Foxes</span>
+            <span class="stat-value">Indie folk (53)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sykes</span>
+            <span class="stat-value">Folk atmospheric (64)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gibson</span>
+            <span class="stat-value">Portland folk (57)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../069-kris-orlowski/" style="color: var(--seattle-navy);">&larr; 69&deg; Kris Orlowski</a>
+        <a href="../071/" style="color: var(--seattle-navy);">71&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 70&deg; &mdash; Horse Feathers &mdash; Seattle 360
+        Engine &mdash; v1.49.201
+        <br>
+        Indie folk band led by Justin Ringle, originally from Portland,
+        moving between Portland and Seattle. Delicate acoustic
+        arrangements with violin, banjo, and hushed vocals.
+        <strong>Kill Rock Stars</strong> &mdash; legendary Olympia-based
+        independent label (Bikini Kill, Sleater-Kinney, Elliott Smith)
+        enters the engine for the first time. Olympia becomes the sixth
+        I-5 corridor node. <strong>Indie Folk</strong> at Genre Stage
+        52 &mdash; returns after hybrid stages. <strong>E=3</strong>
+        &mdash; middle energy, breaking back-to-back E=2 (68&ndash;69).
+        Distribution 3:23:17:17:10:2. Albums: <em>House with No Home</em>
+        (2006), <em>Thistled Spring</em> (2008, KRS), <em>Appreciation</em>
+        (2012, KRS), <em>Broken Birthday</em> (2016, KRS). The fiddle
+        line &mdash; 71st acoustic element &mdash; the violin melody
+        that weaves through the arrangement, carrying emotional subtext
+        between the words. The corridor wanderer &mdash; 71st artist-city
+        pattern &mdash; the artist who belongs not to one city but to
+        the I-5 corridor itself. The thread &mdash; 70th blue note
+        &mdash; the tension between two interlocking string lines that
+        almost meet but never quite resolve. First prominent violin
+        and banjo in the engine. After the earnest voice (69), the
+        fiddle line. After the working musician (69), the corridor
+        wanderer. After the open chord (69), the thread. The weave
+        tightens. The corridor deepens.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

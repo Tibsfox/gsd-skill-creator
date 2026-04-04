@@ -735,6 +735,8 @@ The standard fursuit eye construction:
 
 ### 8.3 Follow-Me Eyes
 
+> **Deep dive available:** The [Follow-Me Eyes deep dive](deep-dives/fursuit-eye-making.md) expands this section into a comprehensive guide covering resin casting, 3D printing, found-object methods, detailed painting technique, alignment and convergence, LED-lit variants, and the perceptual psychology of the concave hemisphere illusion.
+
 A follow-me eye creates the optical illusion that the character's eyes are looking directly at any viewer, regardless of the viewer's position. This dramatically increases the character's expressiveness.
 
 **Construction:**
@@ -996,6 +998,8 @@ Airbrushing adds color detail, shading, and markings to the fur surface:
 
 ## 13. Maintenance and Repair
 
+> **Deep dive available:** The [Fursuit Care and Maintenance deep dive](deep-dives/fursuit-care-maintenance.md) expands this section into a comprehensive guide covering after-wear protocol, bathtub deep cleaning, head cleaning best practices, storage, pest protection, emergency repairs, and the community hygiene social contract. This section provides the quick reference; the deep dive provides the full detail.
+
 ### 13.1 Cleaning
 
 **Head:**
@@ -1156,6 +1160,15 @@ The physical construction documented here provides ground truth for digital arti
 - Material properties (fur shininess, pile length, density) inform PBR shader parameters
 - Physical construction seams inform UV seam placement in digital models
 
+### 15.5 Bridges to Deep Dives
+
+Several topics from this document are expanded into detailed standalone guides:
+
+- **[FFA Deep Dives: Follow-Me Eyes](deep-dives/fursuit-eye-making.md)** — expanded from Section 8.3: resin casting, 3D printing, painting technique, alignment and convergence, LED variants, and why eyes matter more than anything else
+- **[FFA Deep Dives: Fursuit Care and Maintenance](deep-dives/fursuit-care-maintenance.md)** — expanded from Section 13: after-wear protocol, bathtub deep clean, head cleaning, storage, pest protection, emergency repairs, the hygiene social contract
+- **[FFA Deep Dives: Fursuit Cooling Systems](deep-dives/fursuit-cooling-systems.md)** — expanded from Section 11: the physics of heat generation in an insulated costume, hydration, cooling vests, fan systems, and session timing
+- **[FFA Deep Dives: Head Construction](deep-dives/fursuit-head-construction.md)** — expanded from Sections 1-4: foam carving, tape patterning, furring, and jaw mechanisms
+
 ---
 
 ## 16. Sources
@@ -1190,6 +1203,22 @@ The physical construction documented here provides ground truth for digital arti
 - **NIOSH.** National Institute for Occupational Safety and Health -- respirator selection and fit guidelines.
 - **3M Respiratory Protection.** Technical guides for organic vapor cartridge respirators (6000 series).
 - **CPSIA / ASTM F963 / EN 71.** Consumer product safety standards for toys and children's items.
+
+---
+
+## Try This / DIY Project
+
+> **Try Session: [Build Your First Fursuit Paws](try-sessions/first-fursuit-paws.md)**
+> Paws are the simplest fursuit component and the gateway project. $30-50 in materials, 4-6 hours, and you have a wearable pair that teaches pattern making, fur cutting, sewing, and finishing --- all the foundational skills for the construction documented in this module.
+
+> **DIY Project: [Build a Fursuit Tail](try-sessions/fursuit-tail-construction.md)**
+> Three designs from a 2-hour stuffed tail ($15) to a wagging pendulum ($25) to a poseable wire-armature tail ($20). The tail is the easiest component with the biggest visual impact, and it is wearable immediately with regular clothes.
+
+> **Try Session: [Design Your Fursona Character](try-sessions/design-your-fursona.md)**
+> Before building a fursuit, design the character it represents. Species selection, color palette, distinguishing features, and reference sheet production --- the creative foundation for every construction decision in this module.
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](study-guides/sewing-basics-for-fursuit-makers.md)**
+> The sewing skills this module assumes you have: machine threading, tension adjustment, hand stitches (ladder stitch, whip stitch, backstitch), faux fur cutting from the backing, and seam types. Start here if any sewing step in this module is unfamiliar.
 
 ---
 

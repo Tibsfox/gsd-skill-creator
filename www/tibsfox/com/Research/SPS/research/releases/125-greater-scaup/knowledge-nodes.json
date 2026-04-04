@@ -1,0 +1,127 @@
+{
+  "degree": 125,
+  "species": "Greater Scaup",
+  "scientific_name": "Aythya marila",
+  "slug": "125-greater-scaup",
+  "sound_type": "soft scaup call -- soft, nasal, descending 'scaup' or 'scaup scaup' given by female in flight and alarm. Onomatopoeic name. 500-2500 Hz. E=3. Close-range vocalization. Male courtship: dove-like 'wah-whew.'",
+  "energy": 3,
+  "ecosystem": "Saltwater bay -- breeds on subarctic and boreal tundra across North America and Eurasia. Winters in large rafts on saltwater bays, coastal waters, and large lakes. More marine than Lesser Scaup in winter.",
+  "season": "Winter visitor to PNW. Breeds on subarctic tundra (Alaska to northern Canada). Arrives on Puget Sound bays in fall, departs in spring. Enormous winter rafts (5,000-20,000).",
+  "family": "Anatidae (8th consecutive: 118-125)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Greater Scaup",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.58,
+    "lon": -122.38,
+    "description": "Reference for winter habitat on Puget Sound. Greater Scaup winters in large rafts on shallow saltwater bays with abundant shellfish beds."
+  },
+  "taxonomy_note": {
+    "description": "Eighth consecutive Anatidae (118-125). TIES the Sciuridae octet record (8 consecutive). One more Anatidae would TIE the Picidae nonet ALL-TIME RECORD (9 consecutive, 107-115). Genus transition: Bucephala (122-124) to Aythya (125). First Aythya in the engine. The name 'scaup' is onomatopoeia -- direct phonetic transcription of the female's call.",
+    "current_family": "Anatidae (8th consecutive, streak ongoing, TIES Sciuridae octet)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae: 13+ entries across the engine. Eight consecutive at degrees 118-125.",
+    "name_etymology": "Aythya from Greek aithuia (a seabird mentioned by Aristotle). marila from Latin marilus ('of the sea, charcoal-colored'). 'Scaup' from Scottish/Northern English -- onomatopoeia for the call, also refers to mussel beds (scalps/scaups) where the bird feeds. Double meaning: voice and habitat.",
+    "genus_note": "Aythya -- first entry in the genus. Bay ducks / pochards. Deep-water divers. Ground nesters on tundra. Different branch from Bucephala (122-124, cavity nesters).",
+    "order_note": "Anseriformes. Eighth consecutive Anatidae.",
+    "family_position": "Anatidae at eighth consecutive. TIES Sciuridae octet record. One more TIES Picidae nonet ALL-TIME RECORD (9)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-2,500 Hz. Mid-frequency range. Above deepest duck grunts, below Common Goldeneye's wing-whistle (1,000-4,000 Hz).",
+    "peak_energy_band_hz": "800-1,800 Hz. Peak energy in the lower-mid range.",
+    "song_frequency_hz": "Female scaup call: 500-2,500 Hz. Male courtship cooing: 300-1,500 Hz.",
+    "song_duration_s": "Brief. Single or double notes. 'Scaup' = 0.2-0.4 seconds. 'Scaup scaup' = 0.5-0.8 seconds. Not sustained.",
+    "note_structure": "SOFT NASAL CALL: Descending pitch. Compressed, congested quality -- as if produced through a narrow aperture. The nasal timbre is distinctive. Single or double notes.",
+    "note_types": "Female scaup call (primary, onomatopoeic, flight/alarm), male courtship cooing (dove-like 'wah-whew', very quiet), female growl (aggressive, rare).",
+    "phrase_structure": "Single or double notes. No sustained phrases or songs. Brief, discrete calls.",
+    "timbre": "Nasal. Soft. Compressed spectral profile -- energy concentrated in narrow band. 'Pinched' quality. Descending.",
+    "amplitude": "E=3. Low. Audible at 10-30 meters in calm conditions. Close-range vocalization appropriate for raft life. Does not carry far over water.",
+    "tempo": "Irregular. Calls given as needed (flight, alarm, contact), not in rhythmic patterns.",
+    "context": "FLIGHT and ALARM primarily. The female scaup call is given when flushed, in flight, and as contact call within the raft. Male courtship cooing is given during display on the water. Both are close-range communications.",
+    "regional_variation": "Minimal. The call is a simple vocalization with little learned variation. Consistent across the Holarctic range.",
+    "key_property": "SOFT SCAUP CALL -- onomatopoeic name. Female's soft, nasal, descending 'scaup' gave the bird its name. E=3. 500-2,500 Hz. Close-range vocalization for raft life. EIGHTH CONSECUTIVE ANATIDAE (118-125) -- TIES Sciuridae octet record. Genus transition: Bucephala to Aythya. Winters in enormous rafts (5,000-20,000) on Puget Sound. Greater/Lesser Scaup ID challenge: rounded vs. peaked head shape. WIDEST ENERGY GAP in engine: E=3 (scaup) vs. E=7 (These Arms Are Snakes) = delta 4."
+  },
+  "plumage": {
+    "overall": "Male: dark head with greenish gloss, gray back with fine pale vermiculation, white flanks, dark breast and tail. Female: brown overall with prominent white facial crescent at base of bill. Both sexes: medium-sized diving duck.",
+    "diagnostic_mark": "Male: ROUNDED head shape (vs. Lesser's peaked crown). Greenish head gloss (vs. Lesser's purplish). Broader bill nail. More extensive white flanks. Female: broader white facial crescent than Lesser.",
+    "seasonal_variation": "Eclipse plumage in summer -- males resemble females. Non-breeding plumage less distinctive.",
+    "flight_pattern": "Fast, direct flight with rapid wingbeats. White wing-stripe visible in flight (broader than Lesser's). Flies in compact flocks."
+  },
+  "physical_description": {
+    "overall": "Medium-sized diving duck. Body length 39-56 cm. Wingspan 71-80 cm. Weight 700-1300 g. Slightly larger than Lesser Scaup with broader body and bill.",
+    "diagnostic_mark": "Rounded head shape. Greenish head gloss. Broader bill nail. Broader body proportions than Lesser Scaup. White wing-stripe extends onto primaries (Lesser's does not).",
+    "field_id": "Head shape is the key: rounded and smooth (Greater) vs. peaked behind eye (Lesser). Head gloss: greenish (Greater) vs. purplish (Lesser). Bill nail broader in Greater. In flight, white wing-stripe extends further onto primaries in Greater. On Puget Sound, Greater prefers saltwater bays; Lesser prefers freshwater -- but overlap is extensive."
+  },
+  "nodes": [
+    {
+      "id": "scaup-call",
+      "type": "concept",
+      "title": "The Scaup Call -- Onomatopoeic Name",
+      "description": "Common name is direct phonetic transcription of the female's call. Soft, nasal, descending 'scaup.' 500-2,500 Hz. E=3. Close-range vocalization appropriate for raft life. Also refers to mussel beds (scalps/scaups).",
+      "connections": ["rafting-behavior", "greater-lesser-id"]
+    },
+    {
+      "id": "rafting-behavior",
+      "type": "concept",
+      "title": "Rafting Behavior -- Collective Presence",
+      "description": "Enormous winter aggregations: 5,000-20,000 on Puget Sound. Predator dilution, thermoregulation, foraging coordination, multiplied vigilance. Rolling foraging machine. Collective murmur audible from shore. Individual E=3 calls blend into ambient hum.",
+      "connections": ["scaup-call", "bay-duck-ecology"]
+    },
+    {
+      "id": "greater-lesser-id",
+      "type": "pattern",
+      "title": "Greater/Lesser Scaup -- Hardest ID Problem",
+      "description": "Head shape (rounded vs. peaked), head gloss (greenish vs. purplish), bill nail width, female facial crescent. Greater prefers saltwater, Lesser freshwater. Extensive overlap on Puget Sound. One of the most difficult North American bird IDs.",
+      "connections": ["scaup-call", "bay-duck-ecology"]
+    },
+    {
+      "id": "bay-duck-ecology",
+      "type": "concept",
+      "title": "Bay Duck Ecology -- Subarctic to Marine",
+      "description": "Breeds on subarctic/boreal tundra. Winters on saltwater bays (more marine than Lesser Scaup). Deep-water diver (1-6m). Feeds on mollusks/crustaceans. Powerful gizzard for crushing shells. 1.2-1.4M globally, ~50% decline since 1980s.",
+      "connections": ["rafting-behavior", "genus-transition"]
+    },
+    {
+      "id": "genus-transition",
+      "type": "pattern",
+      "title": "Genus Transition: Bucephala to Aythya",
+      "description": "Bucephala trilogy complete at 122-124. Aythya begins at 125. Cavity nesters to ground nesters. Ox-headed divers to bay ducks. Mechanical/vocal to purely vocal. Different branch of Anatidae family tree.",
+      "connections": ["anatidae-streak", "bay-duck-ecology"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Eighth Consecutive Anatidae (118-125) -- TIES Sciuridae Octet",
+      "description": "Harlequin (118), Common Merganser (119), Hooded Merganser (120), Wood Duck (121), Bufflehead (122), Barrow's Goldeneye (123), Common Goldeneye (124), Greater Scaup (125). Eight consecutive. TIES Sciuridae octet. One more TIES Picidae nonet ALL-TIME RECORD.",
+      "connections": ["genus-transition", "scaup-call"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-124",
+      "species": "Common Goldeneye",
+      "relationship": "GENUS TRANSITION. Common Goldeneye (Bucephala, wing-whistle, mechanical, E=4) followed by Greater Scaup (Aythya, soft call, vocal, E=3). Bucephala trilogy ends; Aythya begins. Cavity nesters to ground nesters."
+    },
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "ANATIDAE STREAK! Eight consecutive (118-125). Harlequin started the streak at E=5. Greater Scaup at E=3. Stream specialist to bay specialist. TIES Sciuridae octet. One more TIES Picidae nonet ALL-TIME RECORD."
+    },
+    {
+      "target": "SPS-122",
+      "species": "Bufflehead",
+      "relationship": "DIVING DUCKS. Both small-to-medium diving ducks wintering on Puget Sound. Bufflehead (Bucephala, cavity nester, freshwater). Scaup (Aythya, ground nester, saltwater). Different genera, overlapping winter habitat."
+    },
+    {
+      "target": "SPS-121",
+      "species": "Wood Duck",
+      "relationship": "NESTING CONTRAST. Wood Duck (cavity nester, forest pools, resident). Greater Scaup (ground nester, arctic tundra, winter visitor). Both Anatidae, completely different breeding strategies."
+    },
+    {
+      "target": "SPS-123",
+      "species": "Barrow's Goldeneye",
+      "relationship": "ENERGY MATCH at E=3. Both produce soft, close-range vocalizations. Barrow's: quiet grunts (courtship display). Scaup: soft nasal call (flight/alarm). Same energy, different character."
+    }
+  ]
+}

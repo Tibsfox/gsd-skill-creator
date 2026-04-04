@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 256&deg; &mdash; Monster Truck Thundercat &mdash; E=6 &mdash; Stoner Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #4A148C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #37474F; color: #CFD8DC; border: 1px solid #455A64; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #263238; color: #B0BEC5; border: 1px solid #37474F; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CE93D8; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CE93D8; border-left: 4px solid #4A148C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #F3E5F5; color: #4A148C; }
+    .theory-card .level.intermediate { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #4A148C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+    .storm-arc { background: linear-gradient(135deg, #01579B, #0277BD, #0288D1); border: 2px solid #40C4FF; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #E1F5FE; }
+    .storm-arc strong { color: #FFD740; }
+    .institution-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    .institution-table th { background: #4A148C; color: white; padding: 0.5rem 0.75rem; text-align: left; font-family: system-ui, sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .institution-table td { padding: 0.4rem 0.75rem; border-bottom: 1px solid #F3F4F6; }
+    .institution-table tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>256 &mdash; Monster Truck Thundercat (E=6)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">256&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #4A148C;">Monster Truck Thundercat</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Stoner Rock</span>
+          <span class="label-badge">Self-Released</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="storm-arc">
+          <strong>STORM ARC OPENS AT DEGREE 256 &mdash; SPS SIDE.</strong> Winter Storm Surf (SPS 256) ties the SPS engine maximum at E=8 &mdash; the outer coast of Washington in winter. The storm arc runs 256-260. The S36 side holds at E=6: stoner rock against the Pacific roar. The pairing is deliberately asymmetric. The storm is bigger than the music. For now.
+        </div>
+
+        <h2>The Name</h2>
+        <p>Monster Truck Thundercat is a compound of two 1980s cultural references. Monster trucks &mdash; oversized vehicles on enormous tires, born from Bob Chandler's Bigfoot (1975) and institutionalized by Monster Jam &mdash; are a distinctly American form of arena spectacle: enormous, loud, deliberately excessive. Thundercats (1985-1987, Rankin/Bass) were the humanoid cat aliens of 1980s animated television, carrying the Sword of Omens, shouting "ThunderCats, Ho!" from Third Earth. The compound name is knowingly excessive: the genre convention of stoner rock naming &mdash; which runs toward the grandiose, the nostalgic, and the deliberately silly &mdash; fully embraced.</p>
+
+        <blockquote>"Stoner rock band names are their own genre: Earthride, Riffmaster General, Bongzilla, Greenleaf, Stoned Jesus, Wo Fat. Monster Truck Thundercat belongs to this tradition. The name is the manifesto."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Self-Released in the Bandcamp Era</h2>
+        <p>Self-released stoner rock is not marginal -- it is one of the genre's primary distribution modes. Bandcamp (founded 2008) transformed the stoner/doom underground: a band in Seattle can now have listeners in Germany, Sweden, and Italy without a label. Limited vinyl pressings (300-1000 copies, often colored vinyl) move through Bandcamp, underground record stores, and merch tables at shows. The small-venue circuit &mdash; Tractor Tavern, Highline, Barboza, and similar Seattle spaces &mdash; provides the live infrastructure without label booking. Monster Truck Thundercat operate entirely within this system.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Institutional Spectrum: Degrees 253-256</h2>
+        <table class="institution-table">
+          <thead>
+            <tr><th>Degree</th><th>Band</th><th>Label</th><th>Scope</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>253</td><td>Helms Alee</td><td>Sargent House</td><td>National/international independent</td></tr>
+            <tr><td>254</td><td>Botch</td><td>Hydra Head</td><td>Influential historical independent</td></tr>
+            <tr><td>255</td><td>Valley of the Giants</td><td>Heavy Psych Sounds</td><td>Specialized international independent (Italy)</td></tr>
+            <tr><td>256</td><td>Monster Truck Thundercat</td><td>Self-Released</td><td>Complete independence (DIY)</td></tr>
+          </tbody>
+        </table>
+        <p>The arc documents the full institutional spectrum of heavy music: from mid-major independent to complete self-determination. The music at each institutional level has the same energy (E=6-8). The institutional position does not determine the quality.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Double Stoner Degree</h2>
+        <p>Degrees 255 and 256 form the engine's first consecutive stoner rock occurrence. Valley of the Giants (255) and Monster Truck Thundercat (256) both occupy E=6 Seattle stoner rock; the difference is institutional. Two modes of existing as a stoner rock band in the same city: one on an Italian independent with international reach; one self-released in the Seattle underground. The music is equivalent in energy; the infrastructure is entirely different. The engine documents both as equally valid.</p>
+
+        <hr class="section-divider">
+
+        <h2>Energy = 6 and the Storm Opening</h2>
+        <p>At degree 256, the S36 side holds at E=6 while the SPS side opens the Storm Arc at E=8. The asymmetry is deliberate: the stoner rock is heavy and sustained, but the Pacific winter storm is categorically larger. The SPS 256 entry (Winter Storm Surf) ties the SPS engine maximum &mdash; the outer coast of Washington in winter, massive Pacific swells, E=8. The engine holds both simultaneously: the studio riff and the ocean's maximum expression. The storm is bigger. The music continues anyway.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">255</span> Valley of the Giants &mdash; E=6 holds. First double stoner degree in engine. Seattle stoner, two institutional positions.</li>
+          <li><span class="ref-degree">257</span> Next degree &mdash; energy direction TBD. Storm arc continues in SPS.</li>
+          <li><span class="ref-degree">SPS 256</span> Winter Storm Surf &mdash; E=8, TIES SPS MAXIMUM. Outer coast Washington in winter. Storm arc opens. The ocean vs. the riff.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">256 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">6</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Stoner Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-Released</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Name References</h4>
+          <div class="stat-row"><span class="stat-label">Monster Truck</span><span class="stat-value">Bigfoot 1975</span></div>
+          <div class="stat-row"><span class="stat-label">Thundercat</span><span class="stat-value">Rankin/Bass 1985</span></div>
+          <div class="stat-row"><span class="stat-label">Tradition</span><span class="stat-value">Stoner naming</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">71.1%</span></div>
+          <div class="stat-row"><span class="stat-label">Double stoner</span><span class="stat-value">255&ndash;256</span></div>
+          <div class="stat-row"><span class="stat-label">Arc opening</span><span class="stat-value">Storm (SPS side)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Distribution</h4>
+          <div class="stat-row"><span class="stat-label">Primary</span><span class="stat-value">Bandcamp</span></div>
+          <div class="stat-row"><span class="stat-label">Physical</span><span class="stat-value">Vinyl (limited)</span></div>
+          <div class="stat-row"><span class="stat-label">Live</span><span class="stat-value">Small venue</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Winter Storm Surf</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

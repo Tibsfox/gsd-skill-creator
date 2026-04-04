@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 87&deg; &mdash; Cricket Chorus &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Insect landmark card */
+    .insect-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #FB8C00 100%);
+      border: 3px solid #E65100;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .insect-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFE0B2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .insect-card p {
+      color: #FFF3E0;
+    }
+    .insect-card strong {
+      color: #FFECB3;
+    }
+
+    /* Chirp chorus card */
+    .chirp-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .chirp-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .chirp-card p {
+      color: #E8F5E9;
+    }
+    .chirp-card strong {
+      color: #C8E6C9;
+    }
+
+    /* New family card */
+    .family-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .family-card p {
+      color: #F3E5F5;
+    }
+    .family-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Case parallel card */
+    .case-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .case-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C5E1A5;
+    }
+    .case-card p {
+      color: #F1F8E9;
+    }
+    .case-card strong {
+      color: #DCEDC8;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.insecta { background: #E65100; }
+    .theory-icon.chirp { background: #1B5E20; }
+    .theory-icon.gryllidae { background: #4A148C; }
+    .theory-icon.meadow { background: #795548; }
+    .theory-icon.dolbear { background: #0D47A1; }
+    .theory-icon.case-link { background: #33691E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">87&deg;</div>
+      <div class="release-title-block">
+        <h2>Cricket Chorus</h2>
+        <div class="scientific">Gryllidae (family)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      rhythmic chirp field chorus &mdash; FIRST INSECT in the engine. After birds (0&ndash;60 with substitutions), mammals (61&ndash;85), and an amphibian (86), INSECTA enters. Gryllidae = NEW FAMILY (38th). NEW ORDER: Orthoptera. NEW CLASS: Insecta. A collective sound &mdash; not one individual but the entire field singing together. Temperature-dependent chirp rate (Dolbear&rsquo;s Law). E=4. Dry meadow habitat. Twenty-seventh consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Insect Landmark Card -->
+        <div class="insect-card">
+          <h3>INSECTA Enters &mdash; A Fourth Class Joins the Engine</h3>
+          <p>After <strong>birds</strong> (degrees 0&ndash;60 with substitutions), <strong>mammals</strong> (degrees 61&ndash;85), and an <strong>amphibian</strong> (degree 86), a <strong>FOURTH CLASS</strong> enters the engine. <strong>Insecta</strong> &mdash; insects. The cricket chorus is the first insect in the engine. <strong>Four classes now represented:</strong> Aves, Mammalia, Amphibia, Insecta. The class diversity accelerates: one class for 60 degrees (Aves), one for 25 (Mammalia), one for 1 (Amphibia), now a fourth at degree 87.</p>
+        </div>
+
+        <!-- Chirp Chorus Card -->
+        <div class="chirp-card">
+          <h3>Rhythmic Chirp Field Chorus &mdash; 88th Acoustic Element</h3>
+          <p>The cricket chorus is not a single animal &mdash; it is the <strong>entire field singing together</strong>. Hundreds or thousands of male crickets stridulating in a dry meadow on a summer night. The sound is <strong>rhythmic</strong> &mdash; each cricket produces a regular &ldquo;chirp-chirp-chirp&rdquo; by rubbing its wings together. The chorus is a <strong>field chorus</strong> &mdash; the combined, overlapping rhythmic chirps of an entire population. E=4 &mdash; the collective volume fills the meadow. A <strong>parallel to the Pacific Treefrog</strong> (degree 86) &mdash; both collective breeding sounds, both chorus phenomena, both E=4.</p>
+        </div>
+
+        <!-- New Family Card -->
+        <div class="family-card">
+          <h3>Gryllidae &mdash; 38th Family &mdash; New Family, New Order, New Class</h3>
+          <p><strong>Gryllidae</strong> (true crickets) is a <strong>NEW FAMILY</strong> &mdash; the 38th in the engine. This also introduces a <strong>NEW ORDER</strong> (Orthoptera &mdash; crickets, grasshoppers, katydids) and a <strong>NEW CLASS</strong> (Insecta). Three taxonomic levels added in a single entry. The family jump from Hylidae (Amphibia) to Gryllidae (Insecta) crosses the class boundary again &mdash; second consecutive class crossing (85&rarr;86 Mammalia&rarr;Amphibia, 86&rarr;87 Amphibia&rarr;Insecta).</p>
+        </div>
+
+        <!-- Part A Parallel Card -->
+        <div class="case-card">
+          <h3>The Neko Case Parallel</h3>
+          <p>Degree 87 pairs Cricket Chorus with <strong>Neko Case (Early Folk)</strong> in Part A &mdash; Folk Country, E=3. <strong>Both are about the emerging voice.</strong> The cricket chorus is the field finding its collective voice on summer nights. Neko Case&rsquo;s early work is the artist finding her voice in the Bloodshot Records years. Both are <strong>precursors</strong>: the crickets chirp all summer leading to the insects&rsquo; full presence in the engine; Case&rsquo;s early folk leads to the powerful Alt Country voice at degree 66. The emerging twang meets the emerging chirp.</p>
+        </div>
+
+        <h2>The Sound: Rhythmic Chirp Field Chorus (88th Acoustic Element)</h2>
+        <p><strong>The call:</strong> Male crickets produce their characteristic chirp through <strong>stridulation</strong> &mdash; rubbing a scraper on one wing against a file on the other. The sound is a <strong>rhythmic, regularly spaced chirp</strong> &mdash; &ldquo;chirp-chirp-chirp&rdquo; at regular intervals. Individual chirps are brief (approximately 50&ndash;100 ms) with regular pauses between them. The chirp rate is <strong>temperature-dependent</strong> &mdash; faster in warmer conditions (Dolbear&rsquo;s Law) [1, 2, 3].</p>
+        <p><strong>Why E=4:</strong> (1) Individual calls carry well &mdash; crickets are audible at 10&ndash;20 meters. (2) The collective chorus is <strong>overwhelming</strong> &mdash; hundreds or thousands chirping simultaneously. (3) Fills the entire meadow soundscape on summer nights. (4) Continuous for hours. (5) E=4 reflects the collective volume and persistence &mdash; the sound dominates the habitat. Like the treefrog chorus (86), E=4 through collective amplification.</p>
+
+        <h2>Taxonomy: Gryllidae (Family-Level Entry)</h2>
+        <p><strong>Note:</strong> This is a <strong>family-level entry</strong>, not a single species. The cricket chorus represents the collective sound of field crickets (Gryllidae) as a group. Multiple species contribute to the chorus in PNW meadows, including <em>Gryllus</em> spp. (field crickets) and <em>Acheta</em> spp. (house crickets) [1, 2].</p>
+        <p><strong>Classification:</strong> <strong>Class Insecta</strong> &mdash; INSECTA ENTERS. Fourth class. Order <strong>Orthoptera</strong> &mdash; NEW ORDER (crickets, grasshoppers, katydids). Family <strong>Gryllidae</strong> &mdash; NEW FAMILY (38th). True crickets [1, 2, 3].</p>
+
+        <h2>Ecology: The Summer Field Chorus</h2>
+        <p><strong>Habitat:</strong> Dry meadow. Grasslands, fields, meadow edges, lawns. Crickets inhabit the ground layer and low vegetation. Dry meadow contrasts with the marsh habitat of the Pacific Treefrog (86) &mdash; different habitat, similar acoustic strategy [1, 2, 3].</p>
+        <p><strong>Activity:</strong> Primarily nocturnal and crepuscular. The chorus peaks on warm summer nights. Males call from concealed positions on the ground or in low vegetation.</p>
+        <p><strong>Dolbear&rsquo;s Law:</strong> The chirp rate of crickets is correlated with ambient temperature. Count the chirps in 14 seconds and add 40 to get the approximate temperature in Fahrenheit. This relationship (T = N/4 + 40, where N = chirps per minute) was first described by Amos Dolbear in 1897 [3].</p>
+        <p><strong>Diet:</strong> Omnivorous. Plant material, fungi, other insects. Decomposers and scavengers.</p>
+        <p><strong>Predators:</strong> Birds, bats, spiders, frogs (including Pacific Treefrog), small mammals. Crickets are prey for many engine species.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon insecta">I</div>
+            <div class="theory-content">
+              <h4>Insecta Enters &mdash; Fourth Class</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>First insect in the engine. Fourth class (Aves, Mammalia, Amphibia, Insecta). Class diversity accelerates. Three taxonomic levels added (class, order, family).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon chirp">C</div>
+            <div class="theory-content">
+              <h4>Rhythmic Chirp Field Chorus &mdash; 88th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Collective field chorus. Rhythmic stridulation. Temperature-dependent (Dolbear&rsquo;s Law). E=4 through collective amplification. Parallel to treefrog chorus (86).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon gryllidae">G</div>
+            <div class="theory-content">
+              <h4>Gryllidae &mdash; 38th Family &mdash; New Order Orthoptera</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>NEW FAMILY. True crickets. 38th family. NEW ORDER Orthoptera. NEW CLASS Insecta. Three taxonomic levels in one entry.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon meadow">M</div>
+            <div class="theory-content">
+              <h4>Dry Meadow Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Dry meadow contrasts with marsh (86). Different habitat, similar acoustic strategy. Meadow shared with Snowshoe Hare (73).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dolbear">D</div>
+            <div class="theory-content">
+              <h4>Dolbear&rsquo;s Law &mdash; Temperature-Dependent Chirp</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Chirp rate correlates with temperature. T = N/4 + 40 (Fahrenheit, N = chirps/min). A living thermometer. Amos Dolbear, 1897.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon case-link">N</div>
+            <div class="theory-content">
+              <h4>The Neko Case Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both about the emerging voice. Cricket chorus = field finding its voice. Neko Case early = artist finding her voice. The emerging twang meets the emerging chirp.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-086: Pacific Treefrog</strong>
+            <p>Chorus parallel. Both collective breeding sounds. Both E=4 through collective amplification. Treefrog (marsh, krek-krek) and cricket (meadow, chirp). Back-to-back chorus species. Three consecutive non-bird, non-mammal entries if followed by another.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>Ubiquitous. Both familiar, background sounds of PNW landscapes. Mallard quack is a recognized sound; cricket chirp is a recognized sound. Both E=4 in their full context.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>Familiar background sound. Both define their respective soundscapes -- robin song for PNW mornings, cricket chorus for PNW summer nights. Dawn and dusk counterparts.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-062: Beaver Chewing</strong>
+            <p>Rhythmic repetition. Both produce rhythmically repetitive sounds -- beaver gnawing and cricket chirping. Both continuous. Both functional (beaver builds, cricket attracts mates).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-073: Snowshoe Hare</strong>
+            <p>Prey connection. Crickets are prey for many engine species. Meadow shared. Both abundant, both foundational in their food webs -- the hare for forest predators, crickets for meadow predators.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Cricket (insect).&rdquo;</li>
+          <li>[2] Capinera, J.L. et al. (2004). <em>Field Guide to Grasshoppers, Katydids, and Crickets of the United States.</em> Cornell University Press.</li>
+          <li>[3] Dolbear, A.E. (1897). &ldquo;The Cricket as a Thermometer.&rdquo; <em>The American Naturalist</em> 31(371): 970&ndash;971.</li>
+          <li>[4] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">87&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Collective field chorus. Overwhelming.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Gryllidae</div>
+          <div class="stat-detail">NEW FAMILY (38th). True crickets.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Insecta</div>
+          <div class="stat-detail">INSECTA ENTERS. Fourth class.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Orthoptera</div>
+          <div class="stat-detail">NEW ORDER. Crickets, katydids.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Dry meadow</div>
+          <div class="stat-detail">Grasslands, fields, meadow edges.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Rhythmic chirp</div>
+          <div class="stat-detail">Stridulation. Wing rubbing.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Nocturnal chorus</div>
+          <div class="stat-detail">Summer nights. Warm conditions.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Behavior</div>
+          <div class="stat-value">Field chorus</div>
+          <div class="stat-detail">Hundreds chirping simultaneously.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Special</div>
+          <div class="stat-value">Dolbear&rsquo;s Law</div>
+          <div class="stat-detail">Chirp rate = temperature.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Insect Entry</div>
+          <div class="stat-value">1st</div>
+          <div class="stat-detail">First insect. Class enters.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">38th family</div>
+          <div class="stat-detail">Gryllidae. NEW. True crickets.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class Count</div>
+          <div class="stat-value">4 classes</div>
+          <div class="stat-detail">Aves, Mammalia, Amphibia, Insecta.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (27th)</div>
+          <div class="stat-detail">Twenty-seventh consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

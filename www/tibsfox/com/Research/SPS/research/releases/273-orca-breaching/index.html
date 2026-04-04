@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 273&deg; &mdash; Orca Breaching &mdash; E=9 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #0D47A1, #1565C0); color: #BBDEFB; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 28px rgba(21, 101, 192, 0.7); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .apex-banner { background: linear-gradient(135deg, #0D47A1 0%, #1565C0 30%, #1976D2 60%, #1E88E5 100%); border: 3px solid #0D47A1; border-radius: 8px; padding: 1.75rem 2rem; margin: 1.5rem 0; color: #E3F2FD; box-shadow: 0 0 32px rgba(13, 71, 161, 0.6); }
+    .apex-banner h3 { margin-top: 0; font-size: 1.35rem; color: #BBDEFB; text-transform: uppercase; letter-spacing: 0.05em; }
+    .apex-banner p { color: #E3F2FD; margin: 0.6rem 0; }
+    .apex-banner strong { color: #90CAF9; }
+    .apex-banner .big-e { font-size: 4rem; font-weight: 700; color: #64B5F6; font-family: 'Georgia', serif; display: inline-block; margin-right: 0.3rem; }
+
+    .physics-card { background: linear-gradient(135deg, #263238 0%, #37474F 50%, #455A64 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .physics-card h3 { margin-top: 0; color: #ECEFF1; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .physics-card p { color: #CFD8DC; margin: 0.5rem 0; }
+    .physics-card strong { color: #ECEFF1; }
+    .physics-card .big-number { font-size: 3rem; font-weight: 700; color: #90A4AE; font-family: 'Georgia', serif; display: block; margin-bottom: 0.2rem; }
+
+    .endangered-card { background: linear-gradient(135deg, #BF360C 0%, #D84315 50%, #E64A19 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FBE9E7; }
+    .endangered-card h3 { margin-top: 0; color: #FFCCBC; font-size: 1.1rem; }
+    .endangered-card p { color: #FBE9E7; margin: 0.4rem 0; }
+    .endangered-card strong { color: #FFCCBC; }
+
+    .arc-card { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .arc-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--earth-brown); }
+    .arc-row { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.35rem 0; border-bottom: 1px solid rgba(0,105,92,0.1); font-size: 0.9rem; }
+    .arc-row:last-child { border-bottom: none; }
+    .arc-deg { font-weight: 700; color: var(--puget-teal); min-width: 2.5rem; font-family: system-ui, sans-serif; }
+    .arc-current { background: rgba(13,71,161,0.12); border-radius: 4px; padding: 0.1rem 0.4rem; font-weight: 600; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.apex { background: #0D47A1; }
+    .theory-icon.physics { background: #263238; }
+    .theory-icon.esa { background: #BF360C; }
+    .theory-icon.arc { background: #1B5E20; }
+    .theory-icon.function { background: #4A148C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #E8F5E9; color: #1B5E20; }
+    .theory-level.advanced { background: #E0F2F1; color: #004D40; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">273&deg;</div>
+      <div class="release-title-block">
+        <h2>Orca Breaching</h2>
+        <div class="scientific"><em>Orcinus orca</em> &mdash; Southern Resident &mdash; <strong>E=9 TIES MAXIMUM</strong> &mdash; Delphinidae &mdash; Orca Arc opens</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      open water &mdash; massive detonation body-slam &mdash; <strong>six tons fully airborne</strong> &mdash; ~165 dB impact &mdash; <strong>E=17 combined with S36 273 &mdash; engine apex</strong> &mdash; Southern Residents: ~73 individuals, ESA endangered 2005
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- ENGINE APEX BANNER -->
+        <div class="apex-banner">
+          <h3>E=9 &mdash; Ties the Absolute Maximum &mdash; <span class="big-e">E=17</span> Combined</h3>
+          <p>Before degree 273, E=9 appeared once in the engine: <strong>Lightning Strike at degree 260</strong>. A Southern Resident Killer Whale breaching fully now ties it. An atmospheric electrical discharge equaled by a living mammal.</p>
+          <p><strong>Combined with The Refuzors (S36 273) at E=8: E=17. The highest combined energy in engine history.</strong> The previous maximum was E=16. This degree produces the engine apex &mdash; a six-ton orca launching fully airborne, paired with Seattle&rsquo;s longest-running hardcore band at maximum energy.</p>
+          <p>Neither holds anything back. <strong>Both go completely.</strong></p>
+        </div>
+
+        <!-- PHYSICS CARD -->
+        <div class="physics-card">
+          <h3>The Physics of the Breach</h3>
+          <span class="big-number">~165 dB</span>
+          <p><strong>Mass:</strong> Adult male SRKW, 5,400&ndash;6,000 kg (approximately six tons). <strong>Approach velocity:</strong> 17&ndash;26 km/h. <strong>Maximum height:</strong> 3&ndash;5 meters above surface for a large male. <strong>Impact:</strong> Lateral body-slam, full body mass returning to water surface. <strong>Sound:</strong> ~165 decibels at close range &mdash; louder than a rifle shot at the shooter&rsquo;s position. Propagates both in air (audible kilometers away in calm conditions) and underwater (speed 1,500 m/s, reaches other pods). The white water plume is visible from kilometers away.</p>
+        </div>
+
+        <h2>Why Do Orcas Breach?</h2>
+        <p>The function of orca breaching is an open question in cetacean behavioral research. Multiple hypotheses have support, and current evidence suggests the behavior is likely multifunctional:</p>
+        <p><strong>Communication:</strong> The breach impact produces underwater sound detectable by other pods at distance. In a highly social, matrilineal species with distinct pod dialects, long-range acoustic signaling is functionally important. <strong>Ectoparasite removal:</strong> The water-entry shear force may dislodge barnacles and copepods from the skin. <strong>Play and social bonding:</strong> Breaching is more frequent in socially excited contexts; it is contagious &mdash; one animal breaches, others follow. <strong>Sensory exploration:</strong> The moment of being three to five meters above the surface provides a sensory perspective unavailable from the water. The caloric cost is too high for a purely casual behavior; the social context suggests motivations beyond purely acoustic function.</p>
+
+        <!-- ENDANGERED STATUS -->
+        <div class="endangered-card">
+          <h3>Southern Residents &mdash; ~73 Individuals &mdash; ESA Endangered Since 2005</h3>
+          <p><strong>J, K, and L pods.</strong> Approximately 73 individuals as of recent surveys. Population peaked at ~98 in 1995. Three primary threats: (1) <strong>Chinook salmon decline</strong> &mdash; SRKWs eat fish, not mammals; they depend on Chinook as primary prey. Cross-reference: Chinook salmon at degree 237. (2) <strong>Vessel noise</strong> &mdash; commercial shipping, ferries, whale-watching vessels interfere with echolocation and communication. (3) <strong>Contaminants</strong> &mdash; PCBs and PBDEs bioaccumulate to levels among the highest measured in any marine mammal globally. These animals are culturally sophisticated: pod dialects, multi-generational knowledge transfer, named individuals recognized across decades.</p>
+        </div>
+
+        <!-- ORCA ARC -->
+        <div class="arc-card">
+          <h3>The Orca Arc &mdash; Degrees 270&ndash;276</h3>
+          <div class="arc-row"><span class="arc-deg">270</span> <span>Puget Sound orca S01 pod call &mdash; vocal communication, signature call</span></div>
+          <div class="arc-row"><span class="arc-deg">271</span> <span>Southern Resident Killer Whale &mdash; general species, full catalog entry</span></div>
+          <div class="arc-row"><span class="arc-deg">272</span> <span>Transient orca hunt sequence &mdash; predatory behavior, mammal-eating ecotype</span></div>
+          <div class="arc-row"><span class="arc-deg">273</span> <span class="arc-current">Orca breaching &mdash; <strong>E=9, fully airborne, body-slam, ~165 dB</strong></span></div>
+          <div class="arc-row"><span class="arc-deg">274</span> <span>Orca full spy-hop &mdash; vertical rise + crash, cultural curiosity</span></div>
+          <div class="arc-row"><span class="arc-deg">275</span> <span>Orca pec-slap sequence &mdash; rhythmic pectoral fin slapping</span></div>
+          <div class="arc-row"><span class="arc-deg">276</span> <span>Orca echolocation burst &mdash; rapid click trains, 224 dB source level</span></div>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-260 Lightning Strike E=9</strong>
+            <p>Only previous E=9 in the engine. Orca breaching at 273 ties it. Abiotic maximum equals biological maximum. An atmospheric electrical discharge and a living mammal at the same energy level.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-237 Chinook Salmon</strong>
+            <p>SRKW primary prey. Chinook decline is the primary driver of SRKW population crisis. Degree 237 documents the salmon; degrees 273-276 document the orca that depends on it. Direct ecological dependency in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-270 Orca S01 Pod Call</strong>
+            <p>Arc beginning. The same species as a vocal communicator. Degree 273 documents the orca as physical force -- the same animal in its most explosive behavioral mode. Voice to body, 270 to 273.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-276 Orca Echolocation Burst</strong>
+            <p>Arc closing entry. 224 dB source level click trains. Physical maximum (273 breach) vs. perceptual maximum (276 echolocation). The arc's two extremes bookend the behavioral documentation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-273 The Refuzors E=8</strong>
+            <p>ENGINE APEX. E=17 combined. Seattle's longest-running hardcore band at maximum energy paired with the orca's maximum physical event. Neither holds anything back. Both go completely.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon apex">E9</div>
+            <div class="theory-content">
+              <h4>E=9 Ties Maximum &mdash; Engine Apex at E=17 Combined</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>Second E=9 in engine history; first from a living creature. Combined with The Refuzors E=8: E=17, the highest combined energy ever produced by the engine. The engine apex.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon physics">P</div>
+            <div class="theory-content">
+              <h4>Breach Physics &mdash; Six Tons Fully Airborne</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>5,400-6,000 kg adult male. Approach velocity 17-26 km/h. Maximum height 3-5 meters. Lateral body-slam impact: ~165 dB. Propagates in air and underwater. White water plume visible kilometers distant.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon esa">ESA</div>
+            <div class="theory-content">
+              <h4>Southern Residents &mdash; ~73 Individuals &mdash; Endangered</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>ESA endangered 2005. J, K, L pods. Primary threats: Chinook decline (cross-ref 237), vessel noise, PCB/PBDE contaminants. Among the most contaminated marine mammals globally. Culturally sophisticated: pod dialects, knowledge transfer.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon function">?</div>
+            <div class="theory-content">
+              <h4>Breach Function &mdash; Multifunctional Behavior</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Communication, ectoparasite removal, play/social bonding, sensory exploration. No single confirmed function. Too energetically costly for pure play; social contagion suggests more than acoustic communication. Likely multifunctional.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon arc">7</div>
+            <div class="theory-content">
+              <h4>Orca Arc &mdash; Seven Degrees for One Species</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>Degrees 270-276 dedicated to Orcinus orca. Most sustained single-species run in SPS catalog. Breach (273) is the energy maximum of the arc; echolocation (276) is the perceptual maximum. Arc closes at 276.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Breaching</div>
+          <div class="stat-detail">Massive detonation body-slam</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #0D47A1; font-size: 1.5rem;">E = 9</div>
+          <div class="stat-detail">TIES ABSOLUTE MAXIMUM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Combined E</div>
+          <div class="stat-value" style="color: #B71C1C; font-size: 1.5rem;">E = 17</div>
+          <div class="stat-detail">Engine apex, all time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Orca</div>
+          <div class="stat-detail"><em>Orcinus orca</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecotype</div>
+          <div class="stat-value">Southern Resident</div>
+          <div class="stat-detail">J, K, L pods; ~73 individuals</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Impact</div>
+          <div class="stat-value">~165 dB</div>
+          <div class="stat-detail">Close-range body-slam</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Mass</div>
+          <div class="stat-value">~6 tons</div>
+          <div class="stat-detail">Adult male SRKW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ESA Status</div>
+          <div class="stat-value" style="color: #BF360C;">Endangered</div>
+          <div class="stat-detail">Since 2005</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orca Arc</div>
+          <div class="stat-value">273 / 270&ndash;276</div>
+          <div class="stat-detail">7-degree arc, closes at 276</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">The Refuzors</div>
+          <div class="stat-detail">E=8, hardcore, 40+ years</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

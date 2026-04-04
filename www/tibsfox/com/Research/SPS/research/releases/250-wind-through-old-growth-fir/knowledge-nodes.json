@@ -1,0 +1,49 @@
+{
+  "degree": 250, "sound": "Wind through Old-Growth Fir", "slug": "250-wind-through-old-growth-fir",
+  "acoustic_character": "Multi-harmonic resonance",
+  "energy": 5,
+  "domain": "Meteorology",
+  "mechanism": "Flat scale-leaf vortex + heavy branch mass sweep in storm wind",
+  "ecosystem": "Old-growth forest (Cascades, Olympic interior, Pacific Northwest)",
+  "season": "Storm (fall/winter)",
+  "tree": "Douglas fir (Pseudotsuga menziesii)",
+  "status": "Second consecutive wind entry; second entry in meteorological arc 249-252",
+  "tree_facts": {
+    "max_height_m": 100,
+    "typical_old_growth_height_m": "70-90",
+    "max_trunk_diameter_m": 5,
+    "max_age_years": 1400,
+    "taxonomy_note": "Not a true fir. Pseudotsuga = 'false hemlock.' Three-pointed bracts on cones. Unique genus.",
+    "leaf_structure": "Flat scale-leaves, pectinate (comb-like) arrangement, ~2-3 cm. Flat cross-section creates different vortex pattern than circular Sitka spruce needles.",
+    "branch_mass": "Large, heavy branches that sweep in wind -- adds low-frequency component absent from Sitka spruce"
+  },
+  "acoustic_physics": {
+    "vs_sitka_spruce": "Flat needles create broader-spectrum vortex vs. Sitka circular needles; branch mass adds low-frequency sweep; irregular old-growth canopy creates turbulence that broadens spectrum",
+    "harmonic_profile": "Multi-harmonic: energy at multiple frequencies from needles (high), twigs (mid), branches (low), canopy gaps (turbulence). Richer than Sitka spruce pure moan.",
+    "vertical_dimension": "70-90m canopy height: wind velocity varies with height, meaning different canopy layers produce different aeolian frequencies simultaneously.",
+    "E_comparison": "E=5 vs. E=4 (Sitka spruce): branch mass movement adds energy to sound profile",
+    "cathedral_acoustics": "Large straight trunks act as reverb chamber; sound enriched by distance traveled through canopy"
+  },
+  "geographic_context": {
+    "original_range": "~8-10 million acres in Washington State alone; now 10-15% remaining",
+    "primary_locations": ["Olympic National Park interior (upper Hoh, Elwha, Dungeness valleys)", "Mount Rainier National Park (Carbon River, Ohanapecosh)", "Gifford Pinchot National Forest wilderness areas", "H.J. Andrews Experimental Forest, Oregon", "Coast Range fragments (SW Washington, NW Oregon)"],
+    "loss": "85-90% of original old-growth logged, predominantly 1880-1990. Acoustic landscape fundamentally transformed."
+  },
+  "cultural_significance": {
+    "indigenous": "Old-growth Douglas fir as landscape itself for coastal and interior Salish, Chinook, and others. Sound is constant feature of homeland, not novel.",
+    "timber_era": "PNW timber industry defined by Douglas fir harvest; logging transformed acoustic landscape as thoroughly as any event since glaciation",
+    "conservation": "Northwest Forest Plan 1994; spotted owl controversy; old-growth protection battles partly motivated by non-timber values including sound",
+    "acoustic_ecology": "R. Murray Schafer, World Soundscape Project. Old-growth fir wind as keynote sound -- background against which other sounds heard. Pre-logging: omnipresent background of PNW forest."
+  },
+  "theory_nodes": [
+    { "concept": "249 vs 250 acoustic contrast: Sitka spruce (circular needles, stiff branches, coastal, E=4, pure moan) vs. Douglas fir (flat leaves, large branch mass, old-growth interior, E=5, multi-harmonic resonance). Genuine acoustic difference from structural biology. Engine documents both because they are genuinely different sounds.", "level": "advanced", "department": "acoustic-physics", "description": "249-250 acoustic contrast and structural basis." },
+    { "concept": "Old-growth acoustic ecology: 85-90% of original PNW old-growth logged (1880-1990). The sound at degree 250 can now only be heard in ~10-15% of original range. R. Murray Schafer: old-growth wind as keynote sound -- the omnipresent background of the original PNW acoustic landscape, now nearly silenced from most of its range.", "level": "advanced", "department": "conservation-acoustics", "description": "Old-growth loss as acoustic loss." }
+  ],
+  "cross_references": [
+    {"degree": 249, "sound": "Wind through Sitka Spruce", "relationship": "Consecutive wind entries. Structural acoustic contrast: circular vs. flat needles, stiff vs. sweeping branches, coastal vs. interior, E=4 vs. E=5. Together constitute the wind chapter of the meteorological arc."},
+    {"degree": 251, "sound": "Pacific Rain on Water Surface", "relationship": "Meteorological arc continues: wind (249, 250) → rain (251). The atmosphere producing sound in different forms."}
+  ],
+  "s36_pair": {"degree": 250, "artist": "Ayron Jones", "pairing_note": "E=5 vs E=7. Multi-harmonic resonance from forest vs. multi-harmonic guitar. Both produce complex harmonic spectra from physical structures (forest canopy / guitar string) driven by external force (storm wind / musician). The parallel is deep: both are instruments producing chords."},
+  "milestones": ["METEOROLOGICAL ARC DEGREE 2 (249-252)", "249-250 WIND CHAPTER COMPLETE"],
+  "tags": ["wind", "douglas-fir", "old-growth", "multi-harmonic", "meteorology", "cascades", "olympic-interior", "canopy-acoustics", "aeolian", "abiotic-phase", "flat-needles", "branch-sweep", "keynote-sound", "acoustic-ecology"]
+}

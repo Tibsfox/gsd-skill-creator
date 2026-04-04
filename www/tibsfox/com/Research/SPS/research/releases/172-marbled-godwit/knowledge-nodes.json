@@ -1,0 +1,108 @@
+{
+  "degree": 172,
+  "species": "Marbled Godwit",
+  "scientific_name": "Limosa fedoa",
+  "slug": "172-marbled-godwit",
+  "sound_type": "loud 'godwit! godwit!' repeated -- nasal, two-syllable, insistent. Onomatopoeic origin of 'godwit.' Repeated 3-10+ times. E=5",
+  "energy": 5,
+  "ecosystem": "Tidal flats, coastal mudflats, estuaries during migration and winter. Breeds on northern Great Plains grasslands.",
+  "season": "Regular in PNW from fall through spring. Breeds on Great Plains. More common in PNW than Long-billed Curlew.",
+  "family": "Scolopacidae (5th entry)",
+  "order": "Charadriiformes",
+  "csv_substitute": false,
+  "original_species": "Marbled Godwit",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 46.95,
+    "lon": -124.05,
+    "description": "Marbled Godwit on PNW coastal tidal flats. Regular fall through spring. Sweeping bill through mud and shallow water."
+  },
+  "taxonomy_note": {
+    "description": "FIFTH SCOLOPACIDAE. Completes five-entry streak (168-172). Bill curves UP -- counter-curve to four degrees of down-curved bills. Bill morphology: straight > decurved > down-curved > extremely down-curved > UPTURNED. New genus: Limosa (godwits).",
+    "current_family": "Scolopacidae (5th entry)",
+    "new_family": false,
+    "family_count_in_engine": "Scolopacidae: Wilson's Snipe (168), Dunlin (169), Whimbrel (170), Long-billed Curlew (171), Marbled Godwit (172).",
+    "name_etymology": "Limosa from Latin 'limus' (mud) -- mud-dweller. fedoa possibly from Italian 'fedoa' -- name for godwit. Godwit from the call: 'godwit!' Marbled from the barred/marbled plumage pattern.",
+    "genus_note": "Limosa -- godwits. ~4 species. Large shorebirds with long, slightly upturned bills. Lateral sweeping feeding strategy.",
+    "order_note": "Charadriiformes. Scolopacidae continuing from degrees 168-171. Fifth consecutive entry.",
+    "family_position": "Fifth Scolopacidae. First Limosa. Upturned bill enters -- counter-curve to curlew. Streak complete."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1800-2800 Hz. Nasal quality.",
+    "peak_energy_band_hz": "~2200 Hz. Nasal, carrying.",
+    "song_frequency_hz": "~2200 Hz per 'godwit' syllable pair.",
+    "song_duration_s": "Each 'godwit': 0.3-0.5 seconds. Repeated 3-10+ times per sequence.",
+    "note_structure": "Two-syllable 'godWIT!' with stress on second syllable. Repeated insistently. Clear, nasal, carrying.",
+    "note_types": "godwit! call (primary -- flight/alarm/contact), display call (breeding -- elaborate repeated series).",
+    "phrase_structure": "Repeated two-syllable pattern: 'godWIT! godWIT! godWIT!' 3-10+ repetitions per sequence.",
+    "timbre": "Nasal, clear, carrying. Insistent and demanding quality. Loud and projecting.",
+    "amplitude": "E=5. Very loud. Carries far on open tidal flats. Insistent repetition amplifies.",
+    "tempo": "Repetitions at ~1-2 per second during alarm. Steady, insistent rhythm.",
+    "context": "Flight, alarm, contact. Tidal flats and breeding grasslands. Given frequently.",
+    "regional_variation": "Minimal. Call consistent.",
+    "key_property": "REPEATED 'GODWIT!' -- loud, nasal, insistent, onomatopoeic. Upturned bill (counter-curve). Cinnamon plumage. E=5. v1.49.312."
+  },
+  "plumage": {
+    "overall": "Warm cinnamon-buff throughout. Intricate barring/marbling on back and wings. Long, slightly upturned, bicolored bill (pink-orange base, dark tip). Bright cinnamon underwings in flight.",
+    "diagnostic_mark": "Upturned bicolored bill. Warm cinnamon plumage. Marbled back pattern. Cinnamon underwings in flight.",
+    "seasonal_variation": "Minimal. Cinnamon plumage year-round.",
+    "flight_pattern": "Strong, direct. Bright cinnamon underwings diagnostic. Often calls in flight."
+  },
+  "physical_description": {
+    "overall": "Length: 42-48 cm. Weight: 285-510g. Bill: 10-13 cm, slightly upturned, bicolored. Large, heavy shorebird.",
+    "diagnostic_mark": "Upturned bicolored bill. Warm cinnamon. Large size. Marbled pattern.",
+    "field_id": "Large, warm-toned shorebird on tidal flats. Slightly upturned, pink-based bill. Listen for insistent 'godwit! godwit!' Compare with Long-billed Curlew (down-curved bill)."
+  },
+  "nodes": [
+    {
+      "id": "godwit-call",
+      "type": "concept",
+      "title": "Repeated 'Godwit!' -- The Namesake Call",
+      "description": "Loud, nasal, two-syllable 'godWIT!' repeated 3-10+ times. Onomatopoeic origin. Stress on second syllable. Insistent and demanding. E=5.",
+      "connections": ["upturned-bill", "counter-curve"]
+    },
+    {
+      "id": "upturned-bill",
+      "type": "concept",
+      "title": "Upturned Bill -- The Counter-Curve",
+      "description": "10-13 cm, slightly upturned. Opposite of curlew down-curve. Bicolored (pink-orange base, dark tip). Lateral sweeping feeding through soft mud and shallow water.",
+      "connections": ["godwit-call", "counter-curve", "curlew-comparison"]
+    },
+    {
+      "id": "counter-curve",
+      "type": "pattern",
+      "title": "The Counter-Curve -- Bill Direction Reversal",
+      "description": "After four degrees of down-curved bills (168-171), the godwit bill curves UP. Curlew down vs godwit up. Different feeding strategies accessing different prey zones. The counter-curve.",
+      "connections": ["upturned-bill", "curlew-comparison"]
+    },
+    {
+      "id": "curlew-comparison",
+      "type": "pattern",
+      "title": "Curlew vs Godwit -- Opposite Curves",
+      "description": "Long-billed Curlew (171): down-curved, up to 21 cm, deep probing. Marbled Godwit (172): upturned, 10-13 cm, lateral sweeping. Both cinnamon. Both on tidal flats. Opposite bill curves.",
+      "connections": ["upturned-bill", "counter-curve"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-171",
+      "species": "Long-billed Curlew",
+      "relationship": "BILL DIRECTION! Curlew DOWN (171) vs Godwit UP (172). Opposite curves. Both large, both cinnamon, both on tidal flats. Fundamental morphological contrast."
+    },
+    {
+      "target": "SPS-170",
+      "species": "Whimbrel",
+      "relationship": "SCOLOPACIDAE STREAK! Whimbrel (170): moderate down-curve. Godwit (172): slight up-curve. The bill progression reverses between these endpoints."
+    },
+    {
+      "target": "SPS-168",
+      "species": "Wilson's Snipe Winnowing",
+      "relationship": "SCOLOPACIDAE STREAK COMPLETE! Five consecutive (168-172). Straight > decurved > down-curved > extreme > upturned. Full bill morphology documented."
+    },
+    {
+      "target": "SPS-169",
+      "species": "Dunlin Flock",
+      "relationship": "TIDAL FLAT SHARED! Both on tidal flats. Dunlin: small, in massive flocks. Godwit: large, in small groups. Different scales of tidal flat life."
+    }
+  ]
+}

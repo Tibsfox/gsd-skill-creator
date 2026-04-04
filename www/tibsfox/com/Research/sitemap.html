@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap — Tibsfox Research</title>
+<link rel="stylesheet" href="../brand.css">
+<style>
+body { background: #faf8f0; color: #2d3748; font-family: system-ui, -apple-system, sans-serif; }
+header { background: linear-gradient(135deg, #2a3a3a 0%, #4a5a5a 40%, #c75b3a 100%); padding: 2rem; color: #f0e4d8; border-bottom: 4px solid #c75b3a; }
+header h1 { margin: 0 0 0.3rem; font-size: 2rem; }
+header p { margin: 0; opacity: 0.85; font-size: 1rem; }
+main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+.stats-bar { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0 2rem; padding: 1rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.stat { text-align: center; flex: 1; min-width: 100px; }
+.stat-value { font-size: 1.8rem; font-weight: 700; color: #c75b3a; display: block; }
+.stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #718096; }
+
+.filter-bar { margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.filter-bar input { flex: 1; min-width: 200px; padding: 0.5rem 0.8rem; border: 1px solid #d4c8b0; border-radius: 6px; font-size: 0.9rem; background: #fff; }
+.filter-bar input:focus { border-color: #c75b3a; outline: none; }
+.cluster-btn { padding: 0.3rem 0.7rem; border: 1px solid #d4c8b0; border-radius: 4px; font-size: 0.75rem; cursor: pointer; background: #fff; color: #4a5568; transition: all 0.2s; }
+.cluster-btn:hover, .cluster-btn.active { background: #c75b3a; color: white; border-color: #c75b3a; }
+
+h2 { color: #c75b3a; border-bottom: 2px solid #e8d4b8; padding-bottom: 0.3rem; margin-top: 2rem; }
+h3 { color: #4a5568; margin-top: 1.5rem; }
+
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.project-card { background: linear-gradient(135deg, #fff 0%, #faf8f0 100%); border: 1px solid #e8d4b8; border-left: 4px solid #c75b3a; border-radius: 8px; padding: 1rem 1.2rem; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+.project-card:hover { box-shadow: 0 4px 16px rgba(199, 91, 58, 0.15); transform: translateY(-1px); text-decoration: none; }
+.project-card .code { font-weight: 700; color: #c75b3a; font-size: 0.85rem; font-family: monospace; }
+.project-card .title { font-weight: 600; color: #2d3748; margin: 0.2rem 0; font-size: 1rem; }
+.project-card .meta { font-size: 0.78rem; color: #718096; }
+.project-card .cluster-tag { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.68rem; font-weight: 600; margin-left: 0.3rem; }
+
+/* Cluster colors */
+.cluster-ecology { background: #c6f6d5; color: #276749; border-left-color: #38a169; }
+.cluster-electronics { background: #bee3f8; color: #2b6cb0; border-left-color: #4299e1; }
+.cluster-infrastructure { background: #e2e8f0; color: #4a5568; border-left-color: #718096; }
+.cluster-energy { background: #fefcbf; color: #975a16; border-left-color: #d69e2e; }
+.cluster-creative { background: #fed7e2; color: #97266d; border-left-color: #ed64a6; }
+.cluster-business { background: #feebc8; color: #c05621; border-left-color: #ed8936; }
+.cluster-vision { background: #e9d8fd; color: #553c9a; border-left-color: #9f7aea; }
+.cluster-broadcasting { background: #fefcbf; color: #744210; border-left-color: #d69e2e; }
+.cluster-science { background: #c4f1f9; color: #086f83; border-left-color: #0bc5ea; }
+.cluster-music { background: #fed7d7; color: #9b2c2c; border-left-color: #fc8181; }
+.cluster-space { background: #e2e8f0; color: #1a365d; border-left-color: #4299e1; }
+.cluster-ai { background: #c6f6d5; color: #22543d; border-left-color: #48bb78; }
+.cluster-graphics { background: #e9d8fd; color: #44337a; border-left-color: #b794f4; }
+
+.sub-page-list { margin: 0.3rem 0 0 1rem; font-size: 0.78rem; color: #718096; }
+.sub-page-list a { color: #718096; text-decoration: none; }
+.sub-page-list a:hover { color: #c75b3a; }
+
+footer { margin-top: 3rem; padding: 1.5rem; text-align: center; border-top: 2px solid #e8d4b8; color: #718096; font-size: 0.85rem; }
+
+@media (max-width: 640px) { .project-grid { grid-template-columns: 1fr; } .stats-bar { flex-direction: column; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Tibsfox Research — Sitemap</h1>
+  <p>Complete index of all research projects, documents, and learning resources</p>
+</header>
+
+<main>
+<div class="stats-bar" id="stats">
+  <div class="stat"><span class="stat-value" id="stat-projects">—</span><span class="stat-label">Projects</span></div>
+  <div class="stat"><span class="stat-value" id="stat-docs">—</span><span class="stat-label">Documents</span></div>
+  <div class="stat"><span class="stat-value" id="stat-words">—</span><span class="stat-label">Words</span></div>
+  <div class="stat"><span class="stat-value" id="stat-clusters">13</span><span class="stat-label">Rosetta Clusters</span></div>
+</div>
+
+<div class="filter-bar">
+  <input type="text" id="search" placeholder="Search projects by code, title, or topic...">
+  <button class="cluster-btn" data-cluster="all" onclick="filterCluster('all')">All</button>
+  <button class="cluster-btn" data-cluster="ecology" onclick="filterCluster('ecology')">Ecology</button>
+  <button class="cluster-btn" data-cluster="creative" onclick="filterCluster('creative')">Creative</button>
+  <button class="cluster-btn" data-cluster="music" onclick="filterCluster('music')">Music</button>
+  <button class="cluster-btn" data-cluster="infrastructure" onclick="filterCluster('infrastructure')">Infra</button>
+  <button class="cluster-btn" data-cluster="broadcasting" onclick="filterCluster('broadcasting')">Broadcasting</button>
+  <button class="cluster-btn" data-cluster="science" onclick="filterCluster('science')">Science</button>
+  <button class="cluster-btn" data-cluster="space" onclick="filterCluster('space')">Space</button>
+  <button class="cluster-btn" data-cluster="electronics" onclick="filterCluster('electronics')">Electronics</button>
+  <button class="cluster-btn" data-cluster="business" onclick="filterCluster('business')">Business</button>
+  <button class="cluster-btn" data-cluster="energy" onclick="filterCluster('energy')">Energy</button>
+  <button class="cluster-btn" data-cluster="ai" onclick="filterCluster('ai')">AI</button>
+  <button class="cluster-btn" data-cluster="graphics" onclick="filterCluster('graphics')">Graphics</button>
+  <button class="cluster-btn" data-cluster="vision" onclick="filterCluster('vision')">Vision</button>
+</div>
+
+<div id="project-list"></div>
+
+<h2>Special Pages</h2>
+<div class="project-grid">
+  <a href="getting-started.html" class="project-card"><span class="code">GUIDE</span><div class="title">Getting Started</div><div class="meta">Quick start guide to the research series</div></a>
+  <a href="advanced-guide.html" class="project-card"><span class="code">GUIDE</span><div class="title">Advanced Guide</div><div class="meta">Deep integration and navigation patterns</div></a>
+  <a href="sc-learn.html" class="project-card"><span class="code">LEARN</span><div class="title">SC:Learn Pipeline</div><div class="meta">Skill-creator learning pathways</div></a>
+  <a href="constellation.html" class="project-card"><span class="code">VIS</span><div class="title">Constellation Map</div><div class="meta">Interactive force-directed research graph (337 nodes)</div></a>
+  <a href="forest/" class="project-card"><span class="code">SIM</span><div class="title">PNW Forest Simulation</div><div class="meta">L-system trees, real weather, tree physiology engine (2,121 lines)</div></a>
+  <a href="learning-paths/index.md" class="project-card"><span class="code">PATH</span><div class="title">Learning Paths</div><div class="meta">Cross-project structured learning journeys</div></a>
+  <a href="llms.txt" class="project-card"><span class="code">AI</span><div class="title">llms.txt</div><div class="meta">AI agent navigation file</div></a>
+</div>
+
+</main>
+
+<footer>
+  <p>Tibsfox Research Sitemap · Auto-generated · <span id="gen-date"></span></p>
+  <p>Pacific Northwest bioregion mapping · 190+ projects · 13 Rosetta clusters</p>
+</footer>
+
+<script>
+// Project data — loaded from series.js or inline
+var CLUSTERS = {
+  ecology: ['COL','CAS','ECO','GDN','AVI','MAM','AWF','SAL','CRV','PLT','AGR','LFR','PPM','BHM','SSM','CDS','SFC','MWC','FWL','RCN','FAD'],
+  electronics: ['SHE','LED','T55','EMG','BPS','PSS','SNL','HFR','HFE','FEC'],
+  infrastructure: ['SYS','CMH','GSD2','MPC','VAV','OCN','K8S','MCM','PMG','ACE','MCF','MCS','STE','WPH','MRW','GPO','GPG','PIN','SRD','MDS','SCR','DHP','DNS','TCP','PNP','RFC','ENB'],
+  energy: ['THE','HGE','NND'],
+  creative: ['FFA','ARC','TIBS','STA','BRC','DAA','HEN','ANM','INP','MTB','APR','EAZ','NWZ','KFU','CWC','PNT','WDC','FSR'],
+  business: ['ACC','WSB','BCM','BLA','FCC'],
+  vision: ['ROF','SPA','NWC','SMF','WCN','OTM'],
+  broadcasting: ['RBH','KPZ','KSM','KUB','WLF','C89','MIX','SGL','CBC','IBC','SVB','DFQ','AMR','TVH','ALV','SNX','LNT','CCT','CNA'],
+  science: ['BHK','LGW','SET','SGM','BNY','ABM','CHS'],
+  music: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'],
+  space: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'],
+  ai: ['SST','CFU','LLM','AIH','AAR','FLT'],
+  graphics: ['NEH','VKD','VKS','BLN'],
+};
+
+var codeToCluster = {};
+for (var c in CLUSTERS) { CLUSTERS[c].forEach(function(code) { codeToCluster[code] = c; }); }
+
+// Static project data — generated from filesystem scan
+var PROJECTS=[
+{code:'AAR',title:'Architecture Alignment & Refinement',cluster:'ai',meta:'9 docs · 32K words'},
+{code:'ABL',title:'Ableton Live',cluster:'music',meta:'5 docs · 4K words'},
+{code:'ABM',title:'A Beautiful Mind',cluster:'science',meta:'5 docs · 1K words'},
+{code:'ACC',title:'WA Accounting Law & CPA Practice',cluster:'business',meta:'6 docs · 9K words'},
+{code:'ACE',title:'Art of the Compute Engine',cluster:'infrastructure',meta:'6 docs · 19K words'},
+{code:'AGR',title:'PNW Agriculture',cluster:'ecology',meta:'9 docs · 22K words'},
+{code:'AIH',title:'AI Intelligence Horizon',cluster:'ai',meta:'6 docs · 7K words'},
+{code:'ALV',title:'Almost Live!',cluster:'broadcasting',meta:'5 docs · 2K words'},
+{code:'AMR',title:'AM Radio',cluster:'broadcasting',meta:'6 docs · 3K words'},
+{code:'ANM',title:'The Golden Screen',cluster:'creative',meta:'6 docs · 22K words'},
+{code:'APR',title:'So You Want To Be An Artist',cluster:'creative',meta:'7 docs · 4K words'},
+{code:'ARC',title:'Shapes & Colors',cluster:'creative',meta:'5 docs · 6K words'},
+{code:'ATC',title:'Aries-Taurus Cusp',cluster:'',meta:'5 docs · 19K words'},
+{code:'AVI',title:'Wings of the Pacific Northwest',cluster:'ecology',meta:'19 docs · 295K words'},
+{code:'AWF',title:'Clean Air, Water & Food',cluster:'ecology',meta:'11 docs · 55K words'},
+{code:'B52',title:'The B-52s',cluster:'music',meta:'5 docs · 23K words'},
+{code:'BCM',title:'Building Construction Mastery',cluster:'business',meta:'12 docs · 107K words'},
+{code:'BHC',title:'Black Hole Catalog',cluster:'space',meta:'5 docs · 1K words'},
+{code:'BHK',title:'Black Holes & Spacetime',cluster:'science',meta:'8 docs · 25K words'},
+{code:'BHM',title:'Bellingham Market',cluster:'ecology',meta:'5 docs · 20K words'},
+{code:'BLA',title:'Business Law',cluster:'business',meta:'8 docs · 19K words'},
+{code:'BLN',title:'Blender User Manual',cluster:'graphics',meta:'10 docs · 106K words'},
+{code:'BMR',title:'Bob Marley & Reggae',cluster:'music',meta:'5 docs · 21K words'},
+{code:'BNY',title:'Bill Nye',cluster:'science',meta:'5 docs · 25K words'},
+{code:'BPS',title:'Bio-Physics Sensing',cluster:'electronics',meta:'22 docs · 111K words'},
+{code:'BRC',title:'Black Rock City',cluster:'creative',meta:'6 docs · 12K words'},
+{code:'C89',title:'C89.5 FM Seattle',cluster:'broadcasting',meta:'5 docs · 16K words'},
+{code:'CAR',title:'The Cars',cluster:'music',meta:'5 docs · 13K words'},
+{code:'CAS',title:'Vertical Wilderness',cluster:'ecology',meta:'10 docs · 55K words'},
+{code:'CBC',title:'CBC/Radio-Canada',cluster:'broadcasting',meta:'5 docs · 17K words'},
+{code:'CCT',title:'Comedy Central',cluster:'broadcasting',meta:'5 docs · 1K words'},
+{code:'CDL',title:'College Deep Linking',cluster:'',meta:'5 docs · 16K words'},
+{code:'CDP',title:'Coldplay',cluster:'music',meta:'7 docs · 28K words'},
+{code:'CDS',title:'Central District',cluster:'ecology',meta:'6 docs · 29K words'},
+{code:'CFU',title:'ComfyUI',cluster:'ai',meta:'5 docs · 4K words'},
+{code:'CHS',title:'Making Sense of Chaos',cluster:'science',meta:'6 docs · 3K words'},
+{code:'CMH',title:'Computational Mesh',cluster:'infrastructure',meta:'7 docs · 6K words'},
+{code:'CNA',title:'Cartoon Network',cluster:'broadcasting',meta:'5 docs · 1K words'},
+{code:'COI',title:'Coil — Sonic Alchemy',cluster:'music',meta:'6 docs · 28K words'},
+{code:'COK',title:'College of Knowledge',cluster:'',meta:'6 docs · 16K words'},
+{code:'COL',title:'PNW Rainforest Biodiversity',cluster:'ecology',meta:'8 docs · 92K words'},
+{code:'CRV',title:'Crows and Ravens',cluster:'ecology',meta:'6 docs · 25K words'},
+{code:'CRY',title:'Curren$y',cluster:'music',meta:'5 docs · 23K words'},
+{code:'CWC',title:'Cooking with Claude',cluster:'creative',meta:'5 docs · 17K words'},
+{code:'CYG',title:'Cygnus X-3',cluster:'space',meta:'5 docs · 1K words'},
+{code:'DAA',title:'Deep Audio Analyzer',cluster:'creative',meta:'6 docs · 9K words'},
+{code:'DDA',title:'dada',cluster:'music',meta:'8 docs · 22K words'},
+{code:'DFQ',title:'Dead Frequencies',cluster:'broadcasting',meta:'5 docs · 24K words'},
+{code:'DHP',title:'DHCP Protocol',cluster:'infrastructure',meta:'5 docs · 17K words'},
+{code:'DNS',title:'DNS Protocol',cluster:'infrastructure',meta:'6 docs · 18K words'},
+{code:'DPM',title:'Depeche Mode',cluster:'music',meta:'5 docs · 7K words'},
+{code:'DRN',title:'Duran Duran',cluster:'music',meta:'5 docs · 19K words'},
+{code:'EAZ',title:'East Asian Zodiac',cluster:'creative',meta:'5 docs · 20K words'},
+{code:'ECO',title:'Tahoma to Salish Sea',cluster:'ecology',meta:'15 docs · 118K words'},
+{code:'EMG',title:'Electric Motors',cluster:'electronics',meta:'6 docs · 8K words'},
+{code:'ENB',title:'Eskimo North BBS',cluster:'infrastructure',meta:'5 docs · 20K words'},
+{code:'FAD',title:'First Aid & Health',cluster:'ecology',meta:'16 docs · 54K words'},
+{code:'FCC',title:'FCC Rules',cluster:'business',meta:'6 docs · 21K words'},
+{code:'FEC',title:'Forward Error Correction',cluster:'electronics',meta:'6 docs · 3K words'},
+{code:'FFA',title:'Fur, Feathers & Animation',cluster:'creative',meta:'31 docs · 155K words'},
+{code:'FLS',title:'FL Studio',cluster:'music',meta:'5 docs · 3K words'},
+{code:'FLT',title:'Fleet Feature Refinement',cluster:'ai',meta:'4 docs · 8K words'},
+{code:'FSR',title:'First Responders',cluster:'creative',meta:'28 docs · 111K words'},
+{code:'FWL',title:'Jungle Fowl to Show Ring',cluster:'ecology',meta:'37 docs · 151K words'},
+{code:'GDN',title:'PNW Gardening',cluster:'ecology',meta:'8 docs · 83K words'},
+{code:'GGT',title:'Geggy Tah',cluster:'music',meta:'5 docs · 19K words'},
+{code:'GPG',title:'GPU Ecosystem',cluster:'infrastructure',meta:'6 docs · 16K words'},
+{code:'GPO',title:'GPU Orchestration',cluster:'infrastructure',meta:'6 docs · 15K words'},
+{code:'GRB',title:'GRB 230906A',cluster:'space',meta:'5 docs · 1K words'},
+{code:'GRG',title:'The Gorge',cluster:'music',meta:'5 docs · 6K words'},
+{code:'GRV',title:'Green River',cluster:'music',meta:'8 docs · 20K words'},
+{code:'GSD2',title:'GSD-2 Architecture',cluster:'infrastructure',meta:'7 docs · 11K words'},
+{code:'GTP',title:'Geggy Tah Production',cluster:'music',meta:'6 docs · 23K words'},
+{code:'HEL',title:'Helium Supply Chain',cluster:'',meta:'29 docs · 92K words'},
+{code:'HEN',title:'Jim Henson',cluster:'creative',meta:'5 docs · 17K words'},
+{code:'HFE',title:'Hi-Fi Audio Engineering',cluster:'electronics',meta:'6 docs · 22K words'},
+{code:'HFR',title:'Hi-Fi Audio Reproduction',cluster:'electronics',meta:'5 docs · 19K words'},
+{code:'HGE',title:'Hydro-Geothermal Energy',cluster:'energy',meta:'7 docs · 11K words'},
+{code:'HJX',title:'Hendrix & Joplin',cluster:'music',meta:'5 docs · 21K words'},
+{code:'IBC',title:'Indigenous Broadcasting',cluster:'broadcasting',meta:'5 docs · 20K words'},
+{code:'INP',title:'Ink & Paint',cluster:'creative',meta:'6 docs · 18K words'},
+{code:'K8S',title:'Kubernetes',cluster:'infrastructure',meta:'6 docs · 17K words'},
+{code:'KFU',title:'Learn Kung Fu',cluster:'creative',meta:'5 docs · 18K words'},
+{code:'KGX',title:"King's X",cluster:'music',meta:'6 docs · 31K words'},
+{code:'KPZ',title:'KPLZ Seattle Radio',cluster:'broadcasting',meta:'5 docs · 28K words'},
+{code:'KSM',title:'KISM Bellingham',cluster:'broadcasting',meta:'5 docs · 24K words'},
+{code:'KUB',title:'KUBE 93.3 Seattle',cluster:'broadcasting',meta:'4 docs · 22K words'},
+{code:'LED',title:'LED Lighting',cluster:'electronics',meta:'36 docs · 86K words'},
+{code:'LFR',title:'Living Forest',cluster:'ecology',meta:'8 docs · 28K words'},
+{code:'LGW',title:'LIGO Gravitational Waves',cluster:'science',meta:'5 docs · 19K words'},
+{code:'LLM',title:'Local LLM Ecosystem',cluster:'ai',meta:'5 docs · 5K words'},
+{code:'LTS',title:'Listening to Space',cluster:'space',meta:'5 docs · 1K words'},
+{code:'MAM',title:'Fur, Fin & Fang',cluster:'ecology',meta:'14 docs · 151K words'},
+{code:'MCF',title:'Multi-Cluster Federation',cluster:'infrastructure',meta:'5 docs · 17K words'},
+{code:'MCM',title:'Maritime Compute',cluster:'infrastructure',meta:'6 docs · 21K words'},
+{code:'MCS',title:'Maritime Cost Model',cluster:'infrastructure',meta:'6 docs · 15K words'},
+{code:'MDB',title:'Moody Blues',cluster:'music',meta:'6 docs · 7K words'},
+{code:'MIX',title:'Sir Mix-A-Lot',cluster:'broadcasting',meta:'5 docs · 16K words'},
+{code:'MPC',title:'Math Co-Processor',cluster:'infrastructure',meta:'5 docs · 4K words'},
+{code:'MRW',title:'Minecraft Weather',cluster:'infrastructure',meta:'5 docs · 18K words'},
+{code:'MST',title:'Telescope Mesh',cluster:'space',meta:'6 docs · 6K words'},
+{code:'MTB',title:'Moontribe',cluster:'creative',meta:'6 docs · 26K words'},
+{code:'MWC',title:'PNW Millwork Co-op',cluster:'ecology',meta:'7 docs · 24K words'},
+{code:'NEH',title:'NeHe OpenGL',cluster:'graphics',meta:'6 docs · 4K words'},
+{code:'NND',title:'New New Deal',cluster:'energy',meta:'7 docs · 13K words'},
+{code:'NWC',title:'Norwescon',cluster:'vision',meta:'8 docs · 15K words'},
+{code:'OCN',title:'Open Compute Node',cluster:'infrastructure',meta:'6 docs · 13K words'},
+{code:'OCT',title:'OctaMED Trackers',cluster:'music',meta:'6 docs · 4K words'},
+{code:'OOPS',title:'Ecosystem Alignment',cluster:'',meta:'11 docs · 55K words'},
+{code:'OPEN',title:'Unsolved Problems',cluster:'',meta:'12 docs · 16K words'},
+{code:'OTM',title:'Odyssey of the Mind',cluster:'vision',meta:'5 docs · 19K words'},
+{code:'PJM',title:'Pearl Jam',cluster:'music',meta:'9 docs · 19K words'},
+{code:'PLT',title:'PNW Planting',cluster:'ecology',meta:'5 docs · 19K words'},
+{code:'PMG',title:'Pi-Mono + GSD',cluster:'infrastructure',meta:'6 docs · 22K words'},
+{code:'PNP',title:'Ports & Pipes',cluster:'infrastructure',meta:'6 docs · 18K words'},
+{code:'PNT',title:'So You Want to Be a Painter',cluster:'creative',meta:'29 docs · 117K words'},
+{code:'PPM',title:'Pike Place Market',cluster:'ecology',meta:'5 docs · 24K words'},
+{code:'PRS',title:'Polyrhythm Standard',cluster:'music',meta:'6 docs · 23K words'},
+{code:'PSS',title:'PNW Signal Stack',cluster:'electronics',meta:'6 docs · 22K words'},
+{code:'RBH',title:'Voices from Fir Trees',cluster:'broadcasting',meta:'6 docs · 23K words'},
+{code:'RCN',title:'The Masked Procyonid',cluster:'ecology',meta:'24 docs · 82K words'},
+{code:'RFC',title:'RFC Archive',cluster:'infrastructure',meta:'6 docs · 16K words'},
+{code:'ROF',title:'Ring of Fire',cluster:'vision',meta:'4 docs · 7K words'},
+{code:'S36',title:'Seattle 360',cluster:'music',meta:'460 docs · 1149K words'},
+{code:'SAL',title:'Salmon Heritage',cluster:'ecology',meta:'6 docs · 10K words'},
+{code:'SET',title:'SETI',cluster:'science',meta:'6 docs · 24K words'},
+{code:'SFC',title:'Silicon Forest',cluster:'ecology',meta:'6 docs · 19K words'},
+{code:'SFH',title:'Bay Area House',cluster:'music',meta:'5 docs · 18K words'},
+{code:'SGL',title:'Signal & Light',cluster:'broadcasting',meta:'6 docs · 19K words'},
+{code:'SGM',title:'Sacred Geometry',cluster:'science',meta:'5 docs · 20K words'},
+{code:'SHE',title:'Smart Home Electronics',cluster:'electronics',meta:'12 docs · 33K words'},
+{code:'SMB',title:'Black Hole Brakes',cluster:'space',meta:'5 docs · 1K words'},
+{code:'SMF',title:'SMOFcon',cluster:'vision',meta:'7 docs · 13K words'},
+{code:'SMP',title:'Smashing Pumpkins',cluster:'music',meta:'5 docs · 21K words'},
+{code:'SNL',title:'Sensing Layer',cluster:'electronics',meta:'6 docs · 24K words'},
+{code:'SNX',title:'Saturday Night Live',cluster:'broadcasting',meta:'5 docs · 2K words'},
+{code:'SNY',title:'Sonic Youth',cluster:'music',meta:'8 docs · 18K words'},
+{code:'SOC',title:'Strait Out of Compton',cluster:'music',meta:'6 docs · 31K words'},
+{code:'SPA',title:'Spatial Awareness',cluster:'vision',meta:'5 docs · 5K words'},
+{code:'SPS',title:'Sound of Puget Sound',cluster:'music',meta:'445 docs · 1141K words'},
+{code:'SRG',title:'Susan Rogers Arc',cluster:'music',meta:'5 docs · 21K words'},
+{code:'SSM',title:'Seattle Street Music',cluster:'ecology',meta:'5 docs · 26K words'},
+{code:'SST',title:'States, Symbols & Tape',cluster:'ai',meta:'5 docs · 3K words'},
+{code:'SVB',title:'Student Voice Broadcasting',cluster:'broadcasting',meta:'5 docs · 26K words'},
+{code:'SYS',title:'Systems Administration',cluster:'infrastructure',meta:'11 docs · 73K words'},
+{code:'T55',title:'555 Timer IC',cluster:'electronics',meta:'6 docs · 6K words'},
+{code:'TCP',title:'TCP/IP Protocol',cluster:'infrastructure',meta:'5 docs · 18K words'},
+{code:'THE',title:'Thermal & Hydrogen Energy',cluster:'energy',meta:'14 docs · 96K words'},
+{code:'TIBS',title:'Animal Speak',cluster:'creative',meta:'8 docs · 33K words'},
+{code:'TKH',title:'Talking Heads',cluster:'music',meta:'5 docs · 23K words'},
+{code:'TVH',title:'Television Era',cluster:'broadcasting',meta:'6 docs · 3K words'},
+{code:'VAV',title:'Voxel as Vessel',cluster:'infrastructure',meta:'30 docs · 130K words'},
+{code:'VKD',title:'Vulkan Desktop',cluster:'graphics',meta:'6 docs · 3K words'},
+{code:'VKS',title:'Vulkan Screensaver',cluster:'graphics',meta:'6 docs · 4K words'},
+{code:'WAL',title:'Weird Al Yankovic',cluster:'music',meta:'9 docs · 25K words'},
+{code:'WCN',title:'Westercon',cluster:'vision',meta:'7 docs · 13K words'},
+{code:'WDC',title:'So You Want to Be a Woodcrafter',cluster:'creative',meta:'29 docs · 108K words'},
+{code:'WLF',title:'100.7 The Wolf',cluster:'broadcasting',meta:'6 docs · 24K words'},
+{code:'WPH',title:'The Weekly Phone',cluster:'infrastructure',meta:'6 docs · 22K words'},
+{code:'WSB',title:'WA Small Business',cluster:'business',meta:'6 docs · 10K words'},
+{code:'YNT',title:"Yuri's Night",cluster:'space',meta:'5 docs · 1K words'},
+];
+
+var activeFilter = 'all';
+
+function scanProjects() {
+  renderProjects(PROJECTS);
+}
+
+function renderProjects(data) {
+  var container = document.getElementById('project-list');
+  var html = '<div class="project-grid" id="grid">';
+  var totalProjects = data.length;
+  var totalDocs = 0;
+
+  data.forEach(function(p) {
+    var cluster = p.cluster || '';
+    var clusterClass = cluster ? 'cluster-' + cluster : '';
+    var meta = p.meta || '';
+    // Extract doc count for total
+    var dm = meta.match(/(\d+)\s*docs/);
+    if (dm) totalDocs += parseInt(dm[1]);
+
+    html += '<a href="' + p.code + '/" class="project-card ' + clusterClass + '" data-code="' + p.code + '" data-cluster="' + cluster + '" data-title="' + (p.title || '').toLowerCase() + '" data-meta="' + meta.toLowerCase() + '">';
+    html += '<span class="code">' + p.code + '</span>';
+    if (cluster) { html += '<span class="cluster-tag ' + clusterClass + '">' + cluster + '</span>'; }
+    html += '<div class="title">' + p.title + '</div>';
+    if (meta) { html += '<div class="meta">' + meta + '</div>'; }
+    html += '</a>';
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  document.getElementById('stat-projects').textContent = totalProjects.toLocaleString();
+  document.getElementById('stat-docs').textContent = totalDocs.toLocaleString() + '+';
+  document.getElementById('stat-words').textContent = '7.5M';
+  document.getElementById('gen-date').textContent = new Date().toISOString().split('T')[0];
+}
+
+function filterCluster(cluster) {
+  activeFilter = cluster;
+  document.querySelectorAll('.cluster-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.cluster === cluster);
+  });
+  applyFilters();
+}
+
+function applyFilters() {
+  var query = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.project-card[data-code]').forEach(function(card) {
+    var matchCluster = activeFilter === 'all' || card.dataset.cluster === activeFilter;
+    var matchSearch = !query || card.dataset.code.toLowerCase().indexOf(query) !== -1 || card.dataset.title.indexOf(query) !== -1 || (card.dataset.meta && card.dataset.meta.indexOf(query) !== -1);
+    card.style.display = (matchCluster && matchSearch) ? '' : 'none';
+  });
+}
+
+document.getElementById('search').addEventListener('input', applyFilters);
+
+scanProjects();
+</script>
+</body>
+</html>

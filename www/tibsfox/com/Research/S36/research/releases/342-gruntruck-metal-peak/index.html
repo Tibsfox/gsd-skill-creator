@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 342&deg; &mdash; Gruntruck &mdash; E=8 &mdash; Metal/Grunge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #880E4F; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #880E4F; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FCE4EC; color: #880E4F; border: 1px solid #F48FB1; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #880E4F; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #880E4F; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FCE4EC; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #1A237E, #880E4F); border: 2px solid #F48FB1; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #FCE4EC; }
+    .milestone-banner strong { color: #F48FB1; }
+    .memorial-card { background: #37474F; border: 1px solid #546E7A; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .memorial-card h3 { margin: 0 0 0.5rem; color: #90A4AE; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: system-ui, sans-serif; }
+    .memorial-card p { margin: 0; font-size: 0.9rem; line-height: 1.6; color: #B0BEC5; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>342 &mdash; Gruntruck (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">342&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Gruntruck</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Metal / Grunge</span>
+          <span class="label-badge">Roadrunner Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>SECOND STEP OF THE FINAL ASCENT &mdash; E=8 BASE HOLDS.</strong> Capitol Hill metal at its peak, 1990&ndash;1994. Two albums. Roadrunner Records. The Skin Yard lineage closes. Ben McMillan&rsquo;s most fully realized metal project. Scott McCcloud&rsquo;s precision guitar. The engine holds at E=8 (341 Pearl Jam, 342 Gruntruck) before rising to E=9 (343 Blood Brothers) and the historic E=10 (344 Botch).
+        </div>
+
+        <div class="memorial-card">
+          <h3>Ben McMillan &mdash; 1966&ndash;2008</h3>
+          <p>Ben McMillan died January 20, 2008, in Seattle, Washington. He was 41 years old. Cause of death: complications from type 1 diabetes. He was the vocalist for Skin Yard (1986&ndash;1992), Gruntruck (1990&ndash;1994), and the solo project Swallow. His voice was one of the most distinctive instruments in the Seattle metal/grunge underground. The engine documents this biographical fact once, completely, with respect. The music is the primary subject.</p>
+        </div>
+
+        <h2>The Skin Yard Lineage</h2>
+        <p>Gruntruck does not appear in isolation. It is the continuation of a specific thread: the Capitol Hill metal lineage that runs from Skin Yard through Gruntruck. Ben McMillan was Skin Yard&rsquo;s vocalist from 1986, through the Deep Six compilation (C/Z Records, 1986), through the band&rsquo;s most significant albums (<em>Hallowed Ground</em> 1988, <em>1000 Smiling Knuckles</em> 1991). The engine documented Skin Yard at degree 338. Gruntruck at degree 342 is the same voice, the same Capitol Hill geography, and a harder sonic edge.</p>
+        <p>Scott McCcloud&rsquo;s guitar is the element that distinguishes Gruntruck from the Skin Yard template. Where Skin Yard had Jack Endino&rsquo;s more dissonant, atmospheric guitar approach, McCcloud brings a precision-metal riffing style: palm-muted patterns with specific rhythmic architectures that owe more to Roadrunner&rsquo;s 1992 roster (Sepultura, Fear Factory) than to the Sub Pop underground. The collision between McCcloud&rsquo;s metal precision and McMillan&rsquo;s Seattle underground vocal sensibility is Gruntruck&rsquo;s defining sound.</p>
+
+        <blockquote>"Metal in Seattle in 1992 was not arena metal. It was something smaller and angrier and less interested in spectacle than the mainstream metal of the decade. Gruntruck was that."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Capitol Hill Contrast: Pearl Jam and Gruntruck</h2>
+        <p>Degrees 341 (Pearl Jam) and 342 (Gruntruck) are consecutive Capitol Hill entries at E=8 in the same era. The contrast is stark:</p>
+        <p>Pearl Jam: formed 1990, still active in 2026, 35+ years of continuous operation, 13 million US copies of the debut, Epic Records, globally recognized. Gruntruck: formed 1990, dissolved 1994, four years, two albums, Roadrunner Records, recognized within the metal underground, the engine of Ben McMillan&rsquo;s most fully realized heavy project.</p>
+        <p>The engine documents both at E=8. The energy calibration does not privilege commercial scale over historical significance. Gruntruck&rsquo;s two albums are at E=8 because the music is E=8, not because the band&rsquo;s commercial footprint matched Pearl Jam&rsquo;s. The engine is not a chart.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Push (1992)</h4>
+            <span class="level milestone">Roadrunner Records</span>
+            <p>The debut. Roadrunner&rsquo;s metal production clarity applied to Seattle underground material. Tribe, Above Me. McCcloud&rsquo;s riff architecture at its most immediate. McMillan&rsquo;s voice at full projection. The record that made the Roadrunner placement make sense.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Inside Yours (1993)</h4>
+            <span class="level advanced">Roadrunner Records</span>
+            <p>The follow-up. More compositionally varied than Push, with wider dynamic range. Songs breathe before returning to the heavy sections. Retrospectively assessed as the stronger of the two records within the metal press. The band&rsquo;s most complete creative statement.</p>
+          </div>
+          <div class="theory-card">
+            <h4>1990&ndash;1991 Independent Period</h4>
+            <span class="level intermediate">Capitol Hill live era</span>
+            <p>Before Roadrunner, Gruntruck built their reputation on Capitol Hill stages. The live reputation preceded the studio work. The transition from Skin Yard&rsquo;s existing audience to a Roadrunner metal audience was navigated through this pre-label touring period.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">338</span> Skin Yard &mdash; The direct predecessor. McMillan was Skin Yard&rsquo;s vocalist 1986&ndash;1992. Deep Six (1986) lineage. Jack Endino&rsquo;s guitar origin in the same band.</li>
+          <li><span class="ref-degree">341</span> Pearl Jam &mdash; Consecutive Capitol Hill E=8. Same neighborhood, same era, completely different scale and longevity. Both documented equally at E=8.</li>
+          <li><span class="ref-degree">343</span> Blood Brothers &mdash; E=8 rises to E=9. The ramp lifts. Post-HC/metal intensity from Shoreline replaces Capitol Hill metal at the next degree.</li>
+          <li><span class="ref-degree">SPS 342</span> Sea Lion Colony Storm Day &mdash; E=8 + E=8 = E=16. Colony-scale roaring against the storm. Collective energy in adverse conditions as the unifying theme.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">342 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Metal / Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1990&ndash;1994</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Roadrunner Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Ben McMillan</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Scott McCcloud</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Tim Paul</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">William Flatt</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>McMillan</h4>
+          <div class="stat-row"><span class="stat-label">Born</span><span class="stat-value">1966</span></div>
+          <div class="stat-row"><span class="stat-label">Died</span><span class="stat-value">Jan 20, 2008</span></div>
+          <div class="stat-row"><span class="stat-label">Cause</span><span class="stat-value">Diabetes complications</span></div>
+          <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value">41</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">95.0%</span></div>
+          <div class="stat-row"><span class="stat-label">Ramp</span><span class="stat-value">STEP 2 OF 4</span></div>
+          <div class="stat-row"><span class="stat-label">Next</span><span class="stat-value">E=9 at 343</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Paired Energy</h4>
+          <div class="stat-row"><span class="stat-label">S36</span><span class="stat-value">E = 8 (Gruntruck)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS</span><span class="stat-value">E = 8 (Sea Lion)</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E = 16</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

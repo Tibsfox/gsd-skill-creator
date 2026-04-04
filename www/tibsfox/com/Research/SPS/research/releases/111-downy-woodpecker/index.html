@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 111&deg; &mdash; Downy Woodpecker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4E342E, #6D4C41);
+      color: #D7CCC8;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(78, 52, 46, 0.4);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .comparison-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 30%, #5D4037 60%, #6D4C41 100%);
+      border: 3px solid #3E2723;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+      box-shadow: 0 0 16px rgba(62, 39, 35, 0.3);
+    }
+    .comparison-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #D7CCC8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .comparison-card p { color: #EFEBE9; }
+    .comparison-card strong { color: #D7CCC8; }
+
+    .suburban-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .suburban-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .suburban-card p { color: #E8F5E9; }
+    .suburban-card strong { color: #C8E6C9; }
+
+    .smallest-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 50%, #9FA8DA 100%);
+      border: 2px solid #7986CB;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #1A237E;
+    }
+    .smallest-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #283593;
+    }
+    .smallest-card p { color: #1A237E; }
+    .smallest-card strong { color: #283593; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.compare { background: #3E2723; }
+    .theory-icon.call { background: #6D4C41; }
+    .theory-icon.suburban { background: #2E7D32; }
+    .theory-icon.smallest { background: #5C6BC0; }
+    .theory-icon.picidae { background: #4E342E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FFEBEE; color: #B71C1C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      font-family: system-ui, sans-serif;
+    }
+    .comparison-table th {
+      background: #4E342E;
+      color: #EFEBE9;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .comparison-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .comparison-table tr:nth-child(even) td { background: #FAFAFA; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">111&deg;</div>
+      <div class="release-title-block">
+        <h2>Downy Woodpecker</h2>
+        <div class="scientific"><em>Dryobates pubescens</em> (Picidae) &mdash; E=4 &mdash; North America&rsquo;s smallest woodpecker</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      pik + soft rattle drum &mdash; <strong>the smallest woodpecker</strong> follows its lookalike the Hairy (110) &mdash;
+      fifth consecutive Picidae (107&ndash;111). Quiet, adaptable, ubiquitous. The woodpecker of backyards and small branches.
+      E=4 after the Hairy&rsquo;s E=5 &mdash; the energy continues to descend from the Pileated&rsquo;s E=6 maximum.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Comparison Card -->
+        <div class="comparison-card">
+          <h3>Downy vs. Hairy &mdash; The Great Look-Alike Pair</h3>
+          <p>
+            The <strong>Downy Woodpecker</strong> (degree 111) follows the <strong>Hairy Woodpecker</strong>
+            (degree 110) at consecutive degrees. They look nearly identical &mdash; black and white,
+            red nape patch on males. But they are <strong>profoundly different</strong> in size, sound,
+            and ecology. The Downy is <strong>sparrow-sized</strong>; the Hairy is <strong>robin-sized</strong>.
+            The Downy&rsquo;s bill is <strong>short and stubby</strong> (half head width); the Hairy&rsquo;s
+            is <strong>long and chisel-shaped</strong> (nearly equal to head width).
+            The Downy says <strong>pik</strong> (soft); the Hairy says <strong>peek!</strong> (loud).
+          </p>
+        </div>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Hairy (110)</th>
+              <th>Downy (111)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Size</td><td>18-26 cm (robin)</td><td>14-18 cm (sparrow)</td></tr>
+            <tr><td>Weight</td><td>40-95 g</td><td>21-28 g</td></tr>
+            <tr><td>Bill</td><td>Long, chisel-shaped</td><td>Short, stubby</td></tr>
+            <tr><td>Call</td><td>Loud peek!</td><td>Soft pik</td></tr>
+            <tr><td>Energy</td><td>E=5</td><td>E=4</td></tr>
+            <tr><td>Drum</td><td>Fast, powerful</td><td>Slower, softer</td></tr>
+            <tr><td>Habitat</td><td>Mature forest</td><td>Varied, suburbs OK</td></tr>
+            <tr><td>Foraging</td><td>Large branches/trunks</td><td>Small branches, weed stems</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Smallest Card -->
+        <div class="smallest-card">
+          <h3>The Smallest Woodpecker in North America</h3>
+          <p>
+            At just <strong>14-18 cm</strong> and <strong>21-28 g</strong>, the Downy Woodpecker is
+            North America&rsquo;s <strong>smallest woodpecker</strong>. Within the Picidae streak
+            (107&ndash;111), the size range is dramatic: Acorn Woodpecker (21 cm, 107), Pileated
+            (40-49 cm, 108-109), Hairy (18-26 cm, 110), Downy (14-18 cm, 111). The smallest
+            and the largest, separated by three degrees. The Downy&rsquo;s small size is its
+            <strong>superpower</strong> &mdash; it forages on branches too thin for larger woodpeckers,
+            drills into weed stems, and thrives in suburban habitats where no other woodpecker can.
+          </p>
+        </div>
+
+        <!-- Suburban Card -->
+        <div class="suburban-card">
+          <h3>Suburban Specialist &mdash; The Backyard Woodpecker</h3>
+          <p>
+            The Downy Woodpecker is the <strong>most successfully urbanized woodpecker</strong>
+            in North America. While the Pileated requires old-growth and the Hairy prefers mature
+            forest, the Downy thrives in suburban backyards, parks, orchards, and fragmented woodlots.
+            It is the woodpecker that comes to your <strong>suet feeder</strong>. It is the woodpecker
+            most people see first. Its flexibility is a model of <strong>ecological adaptability</strong>
+            &mdash; the species has expanded, not declined, with urbanization.
+          </p>
+        </div>
+
+        <h2>Acoustic Profile: pik + Soft Rattle Drum</h2>
+        <p>
+          The Downy&rsquo;s primary call is a soft, short <strong>pik</strong> &mdash; distinctly
+          quieter and softer than the Hairy&rsquo;s loud <strong>peek!</strong>. The mnemonic:
+          the Downy&rsquo;s pik is a <strong>whisper</strong>; the Hairy&rsquo;s peek! is a
+          <strong>shout</strong>. The Downy also produces a descending <strong>rattle</strong>
+          &mdash; a rapid series of pik notes running together into a gentle, rolling descent.
+          The drum is slower (~15-25 strikes/sec) and softer than the Hairy&rsquo;s (~25-30 strikes/sec).
+          <strong>E=4</strong> &mdash; the quietest woodpecker in the Picidae streak.
+        </p>
+
+        <h2>Mixed-Species Flocking</h2>
+        <p>
+          In fall and winter, Downy Woodpeckers join <strong>mixed-species foraging flocks</strong>
+          with chickadees, nuthatches, creepers, and kinglets. The Downy serves as a
+          <strong>nuclear species</strong> &mdash; its presence attracts and stabilizes the flock.
+          Its tapping sounds alert other species to food sources, and its vigilance provides
+          predator detection for the group. The smallest woodpecker, playing the biggest social role.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-110 Hairy Woodpecker (the look-alike pair)</strong>
+            <p>Consecutive degrees (110-111). Visually similar, acoustically different. Hairy: loud peek!, E=5, long bill, mature forest. Downy: soft pik, E=4, short bill, varied habitat. The most important look-alike pair in North American birding.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-108 Pileated Woodpecker laughing (size contrast)</strong>
+            <p>Pileated is the largest (40-49 cm, E=6). Downy is the smallest (14-18 cm, E=4). Same family, maximum size range. Three degrees apart (108-111).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-109 Pileated Woodpecker drumming (energy descent)</strong>
+            <p>Pileated drumming E=6 (109), Hairy E=5 (110), Downy E=4 (111). Three-degree descent from maximum to moderate within Picidae.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-107 Acorn Woodpecker (streak start)</strong>
+            <p>Fifth consecutive Picidae (107-111). Acorn started the streak. Downy continues it. Oak savanna (107) to suburban backyards (111).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021 Northern Flicker (first woodpecker)</strong>
+            <p>Engine's first woodpecker (degrees 21-22). The Downy at 111 is the most recent. Both common, widespread, and familiar -- the woodpeckers most people encounter first.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon compare">D</div>
+            <div class="theory-content">
+              <h4>Downy vs. Hairy &mdash; The Great Look-Alike Pair</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Consecutive degrees (110-111). Visually similar, acoustically different. Bill length is the key visual field mark. Sound quality is the key auditory mark. pik (whisper) vs. peek! (shout).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon call">P</div>
+            <div class="theory-content">
+              <h4>Soft pik + Gentle Rattle &mdash; The Quiet Woodpecker</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>E=4. The softest, quietest woodpecker in the Picidae streak. The pik is a whisper. The rattle is a gentle rolling descent. Energy descends: E=6 (108-109), E=5 (110), E=4 (111).</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon smallest">S</div>
+            <div class="theory-content">
+              <h4>Smallest Woodpecker &mdash; Size as Superpower</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>14-18 cm, 21-28 g. North America's smallest woodpecker. Small size enables foraging on thin branches, weed stems, and in suburban habitats unavailable to larger woodpeckers.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon suburban">U</div>
+            <div class="theory-content">
+              <h4>Suburban Specialist &mdash; Ecological Flexibility</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Most successfully urbanized woodpecker. Thrives in backyards, parks, orchards, fragmented woodlots. Population stable to increasing. Comes to suet feeders. The woodpecker most people see first.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon picidae">5</div>
+            <div class="theory-content">
+              <h4>Fifth Consecutive Picidae (107&ndash;111)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Acorn (107), Pileated laughing (108), Pileated drumming (109), Hairy (110), Downy (111). Five degrees of woodpeckers. Approaching the Corvidae septet's record of seven.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Downy Woodpecker</div>
+          <div class="stat-detail"><em>Dryobates pubescens</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">14-18 cm</div>
+          <div class="stat-detail">Smallest in North America</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">5th consecutive (107&ndash;111)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">pik + rattle</div>
+          <div class="stat-detail">soft, gentle, quiet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Descent from E=6 (108-109)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Varied forest / suburban</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Look-Alike</div>
+          <div class="stat-value">Hairy (degree 110)</div>
+          <div class="stat-detail">Bill length is key mark</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">Stable / increasing</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

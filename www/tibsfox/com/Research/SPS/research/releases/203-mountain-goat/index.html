@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 203&deg; &mdash; Mountain Goat &mdash; FIRST BOVIDAE &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #546E7A, #78909C, #90A4AE); color: #ECEFF1; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(84, 110, 122, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .alpine-card { background: linear-gradient(135deg, #546E7A, #78909C, #90A4AE); border: 2px solid #455A64; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .alpine-card h3 { margin-top: 0; font-size: 1.1rem; color: #CFD8DC; }
+    .alpine-card p { color: #ECEFF1; }
+    .alpine-card strong { color: white; }
+
+    .taxonomy-card { background: linear-gradient(135deg, #4E342E, #5D4037, #6D4C41); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .taxonomy-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .taxonomy-card p { color: #D7CCC8; }
+    .taxonomy-card strong { color: #EFEBE9; }
+
+    .cliff-card { background: linear-gradient(135deg, #37474F, #455A64, #546E7A); border: 2px solid #263238; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .cliff-card h3 { margin-top: 0; font-size: 1.1rem; color: #B0BEC5; }
+    .cliff-card p { color: #CFD8DC; }
+    .cliff-card strong { color: #ECEFF1; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.bovidae { background: #4E342E; }
+    .theory-icon.alpine { background: #546E7A; }
+    .theory-icon.cliff { background: #37474F; }
+    .theory-icon.misid { background: #78909C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">203&deg;</div>
+      <div class="release-title-block">
+        <h2>Mountain Goat</h2>
+        <div class="scientific"><em>Oreamnos americanus</em> (Bovidae) &mdash; E=4 &mdash; FIRST BOVIDAE</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST BOVIDAE</strong> &mdash; the cattle/goat/sheep family enters.
+      Not actually a goat &mdash; a <strong>goat-antelope</strong> related to <strong>chamois</strong>.
+      Nasal <strong>&ldquo;baaah&rdquo;</strong> at <strong>200&ndash;600 Hz.</strong>
+      Alpine cliffs. Above treeline.
+      <strong>E=4</strong> &mdash; steady on stone.
+      The highest-elevation mammal in the engine.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="taxonomy-card">
+          <h3>Not Actually a Goat &mdash; Taxonomic Misidentification</h3>
+          <p>
+            <strong><em>Oreamnos americanus</em></strong> &mdash; not in genus <em>Capra</em> (true goats).
+            Closest relative: <strong>chamois</strong> (<em>Rupicapra</em>) of the European Alps.
+            Only living species in its genus.
+            Early naturalists called it a goat because it <strong>looks like a goat</strong>
+            and <strong>lives like a goat</strong>. The name is a lie that describes the behavior.
+            <strong>Convergent evolution</strong>, not shared lineage.
+          </p>
+        </div>
+
+        <div class="cliff-card">
+          <h3>The Impossible Terrain &mdash; Cliff-Dwelling Adaptations</h3>
+          <p>
+            <strong>Split hooves</strong> with rubbery pads that grip rock like climbing shoes.
+            <strong>Low center of gravity.</strong> Powerful shoulders.
+            <strong>Dense double-layered wool</strong> &mdash; warmest coat in North America.
+            Withstands <strong>-50&deg;C</strong> and <strong>150 km/h winds.</strong>
+            Both sexes carry <strong>dagger-like horns</strong> (permanent, not shed).
+            The cliff is the fortress: predators cannot follow.
+          </p>
+        </div>
+
+        <div class="alpine-card">
+          <h3>The Bleat &mdash; Sound Across Stone</h3>
+          <p>
+            <strong>&ldquo;Baaah.&rdquo;</strong> Nasal, resonant, <strong>200&ndash;600 Hz.</strong>
+            Contact call across rocky terrain. The nasal quality <strong>cuts through wind.</strong>
+            Rock surfaces <strong>reflect and amplify</strong> the sound.
+            Carries <strong>200&ndash;500 meters</strong> across alpine basins.
+            <strong>E=4</strong> &mdash; moderate sound, amplified by stone.
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-204 Mountain Goat Kid</strong>
+            <p>ADULT-KID PAIR! Adult bleat (E=4, 200-600 Hz) and kid mew (E=3, 400-1,000 Hz). Same species, alpine nursery.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-197 Roosevelt Elk Bugle</strong>
+            <p>UNGULATE COMPARISON! Elk bugle (E=6, forest valley) vs. goat bleat (E=4, alpine cliff). Different habitats, different strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-200 Black Bear Huff</strong>
+            <p>PREDATOR-PREY! Bear (predator) vs. Mountain Goat (prey that escapes to cliffs). The bear cannot follow.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-203 Tacocat</strong>
+            <p>MISIDENTIFICATION AND DEFIANCE! Both defy classification. Goat-antelope called a goat. Punk-pop band called just punk or just pop.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon bovidae">B</div>
+            <div class="theory-content">
+              <h4>FIRST BOVIDAE &mdash; New Family</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>Bovidae enters the engine. Cattle/goat/sheep/antelope family. Mountain Goat first representative. Not a true goat -- goat-antelope.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon misid">M</div>
+            <div class="theory-content">
+              <h4>Taxonomic Misidentification &mdash; Not a Goat</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Oreamnos (goat-antelope) vs. Capra (true goats). Closest to chamois. Convergent evolution. The name is a lie that describes the behavior.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cliff">C</div>
+            <div class="theory-content">
+              <h4>Cliff Fortress Strategy &mdash; Vertical Escape</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Can't outrun predators. Goes where they can't follow. Split hooves, rubbery pads, low center of gravity. The cliff is the fortress.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon alpine">A</div>
+            <div class="theory-content">
+              <h4>Alpine Acoustics &mdash; Rock Amplification</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Rock surfaces reflect sound. Wind is constant. Nasal bleat cuts through. E=4 on stone carries like E=5 in forest.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Mountain Goat</div><div class="stat-detail"><em>Oreamnos americanus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Bovidae</div><div class="stat-detail">FIRST ENTRY</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Adult bleat</div><div class="stat-detail">nasal &ldquo;baaah&rdquo;</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #546E7A;">E = 4</div><div class="stat-detail">steady on stone</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">200&ndash;600 Hz</div><div class="stat-detail">nasal, resonant</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Alpine cliffs</div><div class="stat-detail">1,500&ndash;3,000 m</div></div>
+        <div class="stat-card"><div class="stat-label">Carry distance</div><div class="stat-value">200&ndash;500 m</div><div class="stat-detail">rock-amplified</div></div>
+        <div class="stat-card"><div class="stat-label">True identity</div><div class="stat-value">Goat-antelope</div><div class="stat-detail">related to chamois</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

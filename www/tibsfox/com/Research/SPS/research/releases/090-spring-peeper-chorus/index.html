@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 90&deg; &mdash; Spring Peeper-Like Chorus &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Quarter-mark card */
+    .quarter-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 3px solid #B71C1C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FFEBEE;
+    }
+    .quarter-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFCDD2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quarter-card p {
+      color: #FFEBEE;
+    }
+    .quarter-card strong {
+      color: #FFCDD2;
+    }
+
+    /* Bell-like peep card */
+    .peep-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 30%, #303F9F 60%, #3949AB 100%);
+      border: 2px solid #1A237E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .peep-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .peep-card p {
+      color: #E8EAF6;
+    }
+    .peep-card strong {
+      color: #C5CAE9;
+    }
+
+    /* Hylidae return card */
+    .hylidae-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .hylidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .hylidae-card p {
+      color: #F3E5F5;
+    }
+    .hylidae-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Sky Cries Mary parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .parallel-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .parallel-card p {
+      color: #E0F2F1;
+    }
+    .parallel-card strong {
+      color: #B2DFDB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.quarter { background: #B71C1C; }
+    .theory-icon.peep { background: #1A237E; }
+    .theory-icon.hylidae { background: #4A148C; }
+    .theory-icon.meadow { background: #33691E; }
+    .theory-icon.crystalline { background: #0D47A1; }
+    .theory-icon.parallel { background: #004D40; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">90&deg;</div>
+      <div class="release-title-block">
+        <h2>Spring Peeper-Like Chorus</h2>
+        <div class="scientific">Hylidae (family)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      bell-like peep chorus &mdash; THE QUARTER-MARK (90/360 = 25%). SECOND Hylidae entry (first at degree 86, Pacific Treefrog). Same family, different chorus character. A collective bell-like sound &mdash; higher-pitched and more crystalline than the Pacific Treefrog&rsquo;s krek-krek. Wet meadow habitat. E=4. Thirtieth consecutive original CSV (THREE DECADES!). Insect-to-amphibian transition.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Quarter-Mark Card -->
+        <div class="quarter-card">
+          <h3>THE QUARTER-MARK &mdash; 90/360 = 25% Complete</h3>
+          <p>Degree 90 is the <strong>quarter-mark</strong> on the species side too. <strong>90 degrees of 360. One quarter of the circle.</strong> The species engine has mapped 25% of the PNW acoustic landscape. 40 families. Five non-mammalian consecutive entries (86-90). The first quadrant closes with a bell-like chorus from a wet meadow &mdash; crystalline and pure. <strong>Thirtieth consecutive original CSV &mdash; THREE DECADES of original species.</strong></p>
+        </div>
+
+        <!-- Bell-Like Peep Card -->
+        <div class="peep-card">
+          <h3>Bell-Like Peep Chorus &mdash; 91st Acoustic Element</h3>
+          <p>The spring peeper-like chorus is a <strong>collective bell-like peeping</strong> &mdash; high-pitched, clear, crystalline individual &ldquo;peep&rdquo; calls produced by small treefrogs. Each call is a single ascending note, bell-like in quality, repeated at regular intervals [1, 2]. When hundreds or thousands chorus together, the individual peeps merge into a <strong>shimmering, ringing wall of sound</strong>. Higher-pitched and more crystalline than the Pacific Treefrog&rsquo;s harsher krek-krek. E=4 &mdash; the collective chorus fills the wet meadow completely.</p>
+        </div>
+
+        <!-- Hylidae Return Card -->
+        <div class="hylidae-card">
+          <h3>Second Hylidae Entry &mdash; Same Family, Different Voice</h3>
+          <p><strong>Hylidae</strong> (treefrogs) returns. First entry at degree 86 (Pacific Treefrog, krek-krek night chorus). Second entry at degree 90 (spring peeper-like chorus, bell-like peep). Same family, different chorus character. The Pacific Treefrog&rsquo;s krek-krek is <strong>harsh and percussive</strong>; the spring peeper-like chorus is <strong>pure and bell-like</strong>. Two expressions of the treefrog vocal apparatus. Hylidae is the first family to appear twice in the non-mammalian sequence.</p>
+        </div>
+
+        <!-- Sky Cries Mary Parallel Card -->
+        <div class="parallel-card">
+          <h3>The Sky Cries Mary Parallel</h3>
+          <p>Degree 90 pairs the spring peeper-like chorus with <strong>Sky Cries Mary</strong> in Part A &mdash; Ethereal/Electronic, E=3. <strong>Both are ambient and immersive.</strong> The spring peeper chorus creates a shimmering wall of bell-like sound that envelops the listener in the wet meadow. Sky Cries Mary creates a drifting ambient soundscape that envelops the listener in the venue. Both are <strong>ambient by nature</strong> &mdash; the chorus and the ambient drift. Both fill their spaces through envelopment, not force. THE QUARTER-MARK on both sides: ambient immersion at 25%.</p>
+        </div>
+
+        <h2>The Sound: Bell-Like Peep Chorus (91st Acoustic Element)</h2>
+        <p><strong>The call:</strong> The spring peeper-like chorus represents the collective sound of small Hylidae species producing <strong>high-pitched, clear, bell-like &ldquo;peep&rdquo; calls</strong> [1, 2]. Each individual call is a single ascending note &mdash; a pure tone that rises slightly in pitch, lasting approximately 0.1&ndash;0.3 seconds. The sound is <strong>crystalline</strong> &mdash; clear, bright, ringing. The quality is bell-like: each peep rings out and decays, creating a natural reverb in the wet meadow acoustic environment.</p>
+        <p><strong>Why E=4:</strong> (1) Individual peeps carry well across wet meadow habitat. (2) Hundreds or thousands chorus simultaneously. (3) The collective chorus creates a <strong>shimmering wall of sound</strong> that fills the entire soundscape. (4) Continuous for hours on spring and early summer nights. (5) E=4 reflects the overwhelming, space-filling quality of the collective chorus.</p>
+
+        <h2>Taxonomy: Hylidae (Second Entry)</h2>
+        <p><strong>Note:</strong> This is a <strong>family-level entry</strong> representing the spring peeper-like chorus sound. The true spring peeper (<em>Pseudacris crucifer</em>) is eastern; in the PNW, the Pacific chorus frog (<em>Pseudacris regilla</em>) and related Hylidae produce analogous bell-like choruses in wet meadow habitats, though the Pacific Treefrog&rsquo;s primary call (krek-krek, degree 86) differs from the peeper-like register explored here [1, 2].</p>
+        <p><strong>Classification:</strong> Class <strong>Amphibia</strong> (second amphibian, after Pacific Treefrog at 86). Order <strong>Anura</strong>. Family <strong>Hylidae</strong> &mdash; SECOND ENTRY (first at degree 86). The return to Hylidae after three consecutive insects (87-88-89) marks an <strong>insect-to-amphibian transition</strong>.</p>
+
+        <h2>Ecology: The Wet Meadow Bell Choir</h2>
+        <p><strong>Habitat:</strong> Wet meadow. Saturated grasslands, seasonal wetlands, meadow edges near standing water. Wetter than the cricket&rsquo;s dry meadow (87) but not open water like a pond. The wet meadow is a transition zone &mdash; neither fully terrestrial nor fully aquatic [1, 2].</p>
+        <p><strong>Activity:</strong> Nocturnal and crepuscular. The chorus peaks on warm spring and early summer nights. Males call from concealed positions in grass and low vegetation near water. The chorus is triggered by temperature and humidity.</p>
+        <p><strong>Context:</strong> The insect-to-amphibian transition (89 to 90) is a return to Amphibia after three consecutive insects. The engine revisits a class it had only briefly entered at degree 86.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon quarter">Q</div>
+            <div class="theory-content">
+              <h4>THE QUARTER-MARK &mdash; 90/360 = 25%</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Degree 90. 25% complete. First quadrant closes on the species side too. 40 families. Thirtieth consecutive original CSV.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon peep">P</div>
+            <div class="theory-content">
+              <h4>Bell-Like Peep Chorus &mdash; 91st Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>High-pitched, crystalline, bell-like peeping. Collective chorus. Shimmering wall of sound. E=4. Distinct from krek-krek (86).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hylidae">H</div>
+            <div class="theory-content">
+              <h4>Second Hylidae Entry (86 &amp; 90)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Same family, different voice. Krek-krek (harsh, 86) vs bell-like peep (crystalline, 90). Two expressions of treefrog vocal apparatus.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon meadow">M</div>
+            <div class="theory-content">
+              <h4>Wet Meadow Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Saturated grasslands. Neither fully terrestrial nor aquatic. Wetter than cricket's dry meadow (87). Transition zone. Connected to muskrat marsh (85).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon crystalline">C</div>
+            <div class="theory-content">
+              <h4>Insect-to-Amphibian Transition</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>After three consecutive insects (87-88-89), the engine returns to Amphibia. Insect-to-amphibian transition. Class crossing.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon parallel">S</div>
+            <div class="theory-content">
+              <h4>The Sky Cries Mary Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both ambient and immersive. Peeper chorus = shimmering bell wall. Sky Cries Mary = ambient drift. Both envelop through immersion. Quarter-mark on both sides.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-086: Pacific Treefrog</strong>
+            <p>Same family Hylidae, different chorus character. Krek-krek (harsh, percussive, degree 86) vs bell-like peep (crystalline, pure, degree 90). Two Hylidae entries. Two treefrog voices. First family to appear twice in non-mammalian sequence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-087: Cricket Chorus</strong>
+            <p>Chorus parallel. Both collective breeding sounds. Both E=4. But cricket chorus is rhythmic chirp (dry meadow); peeper chorus is shimmering bell (wet meadow). Dry vs wet. Rhythmic vs crystalline.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-088: Katydid</strong>
+            <p>Consecutive non-mammalian. The non-mammalian run extends: treefrog (86), cricket (87), katydid (88), cicada (89), peeper chorus (90). Five consecutive non-mammalian entries.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-089: Cicada</strong>
+            <p>Insect-to-amphibian transition. Cicada (89, Insecta, Hemiptera) to spring peeper chorus (90, Amphibia, Hylidae). The engine returns to Amphibia after three consecutive insects.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-085: Muskrat</strong>
+            <p>Marsh/meadow neighbor. Muskrat inhabits marshes (85). Spring peeper-like chorus inhabits wet meadows (90). Both associated with saturated habitats near standing water. Overlapping ecological zones.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Hylidae&rdquo; and &ldquo;Spring peeper.&rdquo;</li>
+          <li>[2] Stebbins, R.C. (2003). <em>A Field Guide to Western Reptiles and Amphibians.</em> Houghton Mifflin.</li>
+          <li>[3] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">90&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Collective chorus. Bell-like wall.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hylidae</div>
+          <div class="stat-detail">SECOND entry (first at 86).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Amphibia</div>
+          <div class="stat-detail">Second amphibian. Returns after insects.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Anura</div>
+          <div class="stat-detail">Frogs and toads.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Wet meadow</div>
+          <div class="stat-detail">Saturated grasslands. Transition zone.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Bell-like peep</div>
+          <div class="stat-detail">Crystalline. High-pitched. Pure.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Nocturnal</div>
+          <div class="stat-detail">Spring/early summer nights.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Behavior</div>
+          <div class="stat-value">Collective chorus</div>
+          <div class="stat-detail">Shimmering bell wall of sound.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value">QUARTER-MARK</div>
+          <div class="stat-detail">90/360 = 25% complete.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Amphibian Entry</div>
+          <div class="stat-value">2nd</div>
+          <div class="stat-detail">Returns after 3 insects.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hylidae</div>
+          <div class="stat-value">2nd entry</div>
+          <div class="stat-detail">First at 86 (Pacific Treefrog).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Non-mammal Run</div>
+          <div class="stat-value">5 (86-90)</div>
+          <div class="stat-detail">Treefrog, cricket, katydid, cicada, peeper.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (30th)</div>
+          <div class="stat-detail">THREE DECADES! Thirtieth consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

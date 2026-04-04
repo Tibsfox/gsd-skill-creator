@@ -1,0 +1,54 @@
+{
+  "degree": 279,
+  "species": "Blue Whale",
+  "scientific_name": "Balaenoptera musculus",
+  "slug": "279-blue-whale-20hz-pulse",
+  "sound_type": "Deepest sustained note in nature -- blue whale 20Hz infrasonic pulse, at or below human hearing threshold, 180-188 dB source level, long-range ocean communication, E=5",
+  "energy": 5,
+  "ecosystem": "Open Pacific -- deep ocean pelagic; NE Pacific range",
+  "season": "Rare (NE Pacific; uncommon in nearshore PNW waters; population severely reduced by whaling)",
+  "family": "Balaenopteridae",
+  "order": "Artiodactyla (Cetacea)",
+  "milestone": "SECOND BALAENOPTERIDAE at degree 279. Blue whale: largest animal in Earth's history (100-150 metric tons). 20 Hz infrasonic pulse: deepest sustained note in nature. E=5 because at/below human hearing threshold -- felt more than heard. Source level 180-188 dB; acoustically powerful but perceptually inaccessible to most humans. Balaenopteridae arc: humpback (278, E=9, maximum spectacle) to blue whale (279, E=5, maximum invisible depth). Combined E=13 with Seven Year Bitch (S36 279, E=8).",
+  "coordinates": {
+    "lat": 45.0,
+    "lon": -130.0,
+    "description": "NE Pacific open ocean. Blue whales are pelagic; occasional presence off Washington/Oregon coast in productive upwelling years. Primary habitat: open Pacific, including waters west of California and Pacific Northwest. Not regularly nearshore."
+  },
+  "acoustic_data": {
+    "frequency_hz": "~15-25 Hz primary vocalization; characteristic pulse at ~20 Hz. At or below human hearing threshold (~20 Hz lower limit for healthy young adults). Infrasonic for most adult human observers.",
+    "source_level_db": "~180-188 dB re 1 µPa @ 1m (underwater acoustic reference). Among the loudest sustained biological sounds measured. Acoustically very powerful; perceptually inaccessible to most humans at this frequency.",
+    "propagation": "Low-frequency sound travels farther in water. Via SOFAR channel (Sound Fixing and Ranging), blue whale pulses may propagate hundreds to thousands of kilometers. Primary function: long-range contact/mate-finding call across vast open ocean.",
+    "human_experience": "At 20 Hz threshold frequency, perceived as physical sensation (pressure, vibration) rather than as sound. Felt before heard. The largest animal in history is experienced as a physical presence, not an acoustic event, by most human observers.",
+    "e5_rationale": "E=5 for experiential intensity, not source level. The sound has tremendous acoustic power (180-188 dB) but is at/below human perceptual threshold. Present, real, significant -- but not directly accessible. The paradox: largest animal, least audible signal."
+  },
+  "nodes": [
+    {
+      "id": "second-balaenopteridae",
+      "type": "pattern",
+      "title": "Second Balaenopteridae -- The Arc",
+      "description": "Degree 279 is the second Balaenopteridae entry. Humpback (278, E=9, spectacle) to blue whale (279, E=5, invisible depth). Same family, opposite registers. The arc spans maximum physical presence to maximum perceptual absence.",
+      "connections": ["infrasonic-depth", "largest-animal"]
+    },
+    {
+      "id": "largest-animal",
+      "type": "concept",
+      "title": "Largest Animal in Earth's History",
+      "description": "Balaenoptera musculus: 100-150 metric tons, 24-30 meters. Exceeds any dinosaur. The largest biological mass in the fossil record across 3.8 billion years. Heart weighs ~600 kg (size of small car). Tongue weighs ~2.7 metric tons.",
+      "connections": ["second-balaenopteridae", "infrasonic-depth"]
+    },
+    {
+      "id": "infrasonic-depth",
+      "type": "concept",
+      "title": "The Paradox: Largest Animal, Least Audible Signal",
+      "description": "20 Hz at/below human hearing threshold. E=5 for experiential inaccessibility despite 180-188 dB source level. The largest animal speaks in the register that most humans cannot hear. Felt more than heard. Physical presence without acoustic accessibility.",
+      "connections": ["second-balaenopteridae", "largest-animal"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-278", "species": "Humpback whale breach", "relationship": "First Balaenopteridae. The arc: E=9 maximum spectacle (humpback breach) to E=5 maximum invisible depth (blue whale pulse). Same family, opposite registers."},
+    {"target": "SPS-280", "species": "Sperm whale click train", "relationship": "First Physeteridae. After the blue whale's infrasonic depth, the sperm whale enters with 230+ dB directional biosonar. Two great whale families in consecutive degrees."},
+    {"target": "SPS-276", "species": "Orca echolocation burst", "relationship": "Two acoustic extremes: orca clicks at 20-100 kHz (ultrasonic, above human hearing) vs. blue whale pulse at 20 Hz (infrasonic, below human hearing). Both beyond human perceptual range in opposite directions."},
+    {"target": "S36-279", "artist": "Seven Year Bitch", "relationship": "Combined E=13. Fierce, direct, audible (S36 E=8) vs. infrasonic, invisible, felt (SPS E=5). Both present; neither fully accessible."}
+  ]
+}

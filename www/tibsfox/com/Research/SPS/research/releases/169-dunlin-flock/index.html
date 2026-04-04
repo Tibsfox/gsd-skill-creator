@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 169&deg; &mdash; Dunlin Flock (sighing collective wind-sound) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #546E7A, #607D8B); color: #CFD8DC; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(84, 110, 122, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .murmuration-card { background: linear-gradient(135deg, #37474F, #455A64, #546E7A, #37474F); border: 2px solid #37474F; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .murmuration-card h3 { margin-top: 0; font-size: 1.1rem; color: #B0BEC5; }
+    .murmuration-card p { color: #CFD8DC; }
+    .murmuration-card strong { color: #ECEFF1; }
+
+    .tidal-card { background: linear-gradient(135deg, #006064, #00838F, #0097A7, #006064); border: 2px solid #006064; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B2EBF2; }
+    .tidal-card h3 { margin-top: 0; font-size: 1.1rem; color: #80DEEA; }
+    .tidal-card p { color: #B2EBF2; }
+    .tidal-card strong { color: #E0F7FA; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.flock { background: #546E7A; }
+    .theory-icon.wave { background: #006064; }
+    .theory-icon.falcon { background: #B71C1C; }
+    .theory-icon.tide { background: #0277BD; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-level.intermediate { background: #E0F7FA; color: #006064; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">169&deg;</div>
+      <div class="release-title-block">
+        <h2>Dunlin Flock &mdash; Sighing Collective Wind-Sound</h2>
+        <div class="scientific"><em>Calidris alpina</em> (Scolopacidae) &mdash; E=3 &mdash; The Murmuration Shorebird</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>SECOND SCOLOPACIDAE</strong> &mdash; thousands of Dunlin
+      wheeling in unison over tidal flats &mdash; the <strong>collective
+      wind-sound</strong> of thousands of wings creating a
+      <strong>sighing, rushing</strong> sound. NOT vocal. The sound of
+      the <strong>flock itself.</strong>
+      <strong>E=3. v1.49.309.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="murmuration-card">
+          <h3>Murmuration &mdash; Thousands Turning as One</h3>
+          <p>
+            Each bird responds to its nearest <strong>6&ndash;7 neighbors.</strong>
+            There is no leader. The coordination emerges from simple local
+            rules applied simultaneously by <strong>thousands of individuals.</strong>
+            The result is a fluid, organic, pulsating shape that moves as
+            one organism &mdash; ribbons, spheres, pancakes, tornadoes.
+            Turn waves propagate at <strong>3&times; individual flight speed.</strong>
+            At close range, the sound: a <strong>rushing, sighing, whooshing</strong>
+            collective wind-sound.
+          </p>
+        </div>
+        <div class="tidal-card">
+          <h3>Tidal Flat &mdash; The Stage</h3>
+          <p>
+            <strong>Padilla Bay, Skagit Bay, Nisqually NWR</strong> &mdash;
+            extensive mudflats provide winter habitat for <strong>5,000 to
+            50,000+</strong> Dunlin. Feeding at low tide, probing with
+            slightly decurved bills. Rising tide pushes the flock to
+            air &mdash; triggering <strong>murmuration.</strong> The
+            murmuration is the <strong>tidal transition.</strong>
+          </p>
+        </div>
+
+        <h2>The Collective Sound</h2>
+        <p>
+          The research focus is not the individual Dunlin&rsquo;s call but the
+          <strong>collective sound of the flock in murmuration.</strong>
+          Thousands of small wings beating and turning simultaneously create
+          a rushing, sighing sound &mdash; a collective wind-sound that is
+          the voice of the flock itself. The sound rises and falls with
+          the flock&rsquo;s movements. It is the sound of air being
+          displaced by the collective body.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-168 Wilson&rsquo;s Snipe Winnowing</strong>
+            <p>CONSECUTIVE SCOLOPACIDAE! Snipe (168) to Dunlin (169). Both non-vocal sounds. Winnowing (mechanical, individual) to collective wing-sound (aggregate, flock). Solitary vs thousands.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-167 Killdeer</strong>
+            <p>CHARADRIIFORMES! Three consecutive (167-169). Vocal alarm &gt; mechanical winnowing &gt; collective murmuration. Increasing abstraction from individual call.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-159 California Quail</strong>
+            <p>FLOCK SPECIES! Quail coveys (20-50). Dunlin flocks (5,000-50,000+). Both flock for predator defense. Scale difference is extreme.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-155 Ruffed Grouse Drumming</strong>
+            <p>NON-VOCAL! Grouse: wing percussion (individual instrument). Dunlin: collective wing-sound (flock orchestra). Both produce sound through wings.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon flock">M</div>
+            <div class="theory-content">
+              <h4>Murmuration &mdash; Collective Aerial Display</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Thousands wheeling as one. 6-7 nearest neighbors. No leader. Emergent coordination. Shape-shifting. Turn waves at 3x speed. Predator defense.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon wave">S</div>
+            <div class="theory-content">
+              <h4>Collective Wing-Sound &mdash; The Sighing Rush</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Aggregate of thousands of wings. Rushing, sighing, whooshing. Not vocal. Atmospheric. Rises and falls with flock movements. The voice of the flock.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon falcon">F</div>
+            <div class="theory-content">
+              <h4>Predator Defense &mdash; Falcon Trigger</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Peregrine Falcon or Merlin triggers most dramatic murmurations. Predator cannot target individual in coordinated mass. Defense through collective movement.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tide">T</div>
+            <div class="theory-content">
+              <h4>Tidal Flat Cycle</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Feed at low tide. Rising tide triggers flight and murmuration. Falling tide draws birds back. Winter phenomenon (Oct-Apr). Puget Sound estuaries.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Dunlin</div><div class="stat-detail"><em>Calidris alpina</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Scolopacidae</div><div class="stat-detail">2nd entry</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Collective sigh</div><div class="stat-detail">flock wing-sound</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 3</div><div class="stat-detail">atmospheric, gentle</div></div>
+        <div class="stat-card"><div class="stat-label">Flock size</div><div class="stat-value">5K&ndash;50K+</div><div class="stat-detail">most abundant winter shorebird</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Tidal flat</div><div class="stat-detail">mudflats, estuaries</div></div>
+        <div class="stat-card"><div class="stat-label">Season</div><div class="stat-value">Winter</div><div class="stat-detail">October&ndash;April</div></div>
+        <div class="stat-card"><div class="stat-label">Trigger</div><div class="stat-value">Falcon / tide</div><div class="stat-detail">predator defense</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

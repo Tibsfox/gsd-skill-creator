@@ -1,0 +1,1055 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ── COLOR SCHEME: Technology / Digital Creative ──────────────────────────────
+\definecolor{primary}{HTML}{1A3A5C}       % Deep navy — section headers
+\definecolor{secondary}{HTML}{E55F00}     % Blender orange — subsections
+\definecolor{tertiary}{HTML}{2E7D32}      % Forest green — subsubsections
+\definecolor{accent}{HTML}{F4A235}        % Amber — highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{E8EDF4}  % Light navy tint
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Light orange tint
+\definecolor{lighttertiary}{HTML}{E8F5E9} % Light green tint
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% ── SECTION FORMATTING ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── CUSTOM ENVIRONMENTS ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{orangebox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% ── TABLE HELPERS ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── HEADERS & FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Blender User Manual}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── HYPERLINKS ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Blender User Manual -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+%% ═════════════════════════════════════════════════════════════════════════════
+
+%% ── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Blender\\[0.3em]Comprehensive User Manual}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Complete 3D Creation Suite --- All Domains}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study and Production Mission}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{0.8cm}
+\begin{tcolorbox}[colback=lightsecondary, colframe=secondary, arc=3pt, boxrule=0.5pt,
+  left=16pt, right=16pt, top=10pt, bottom=10pt, width=0.82\textwidth]
+{\sffamily\textcolor{secondary}{\textbf{Deliverable:}} A verbose, example-rich user manual covering every major domain of
+Blender --- modeling, sculpting, materials, rendering, animation, rigging,
+simulation, compositing, video editing, Python scripting, and pipeline
+integration --- written for users from beginner through advanced production.}
+\end{tcolorbox}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 1, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6+ modules)  |  Estimated: 12--18 context windows across 6--8 sessions}}
+\end{center}
+\newpage
+
+%% ── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Blender User Manual --- Vision Guide}
+
+\metafield{Date:}{April 1, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Blender 4.4+ official documentation, blender.org, Blender Python API docs}
+\metafield{Context:}{Cold-start deep research mission. No prior conversation.}
+
+\subsection{Vision}
+
+Blender is one of the most remarkable pieces of software ever built by an open-source community. From a scrappy freeware tool released by Ton Roosendaal in 1998 to a production powerhouse used in Oscar-winning animated films, Hollywood VFX pipelines, game studios, and university classrooms worldwide, Blender has rewritten what is possible outside the walls of expensive commercial software. The 2024 Latvian film \textit{Flow} was made entirely in Blender's EEVEE render engine and received two nominations at the 97th Academy Awards, winning Best Animated Feature. Sony Pictures Imageworks used Blender's Grease Pencil on \textit{Spider-Man: Across the Spider-Verse}. This is no longer a hobbyist tool --- it is a professional standard.
+
+Yet despite this stature, a common thread in user feedback is the learning curve. Blender rewards patience and deliberate study; its unified pipeline, where modeling, sculpting, shading, rendering, animation, simulation, compositing, video editing, and Python scripting all live in the same application, means there is always more to discover. The interface was historically opaque to newcomers, though each major release has made it friendlier. A great comprehensive user manual --- verbose, packed with examples, use cases, and practical walkthroughs --- is exactly the kind of document that transforms frustrated beginners into productive artists and elevates intermediate users into professionals.
+
+This mission produces that document: a complete, deeply detailed Blender user manual organized into major domains, each chapter covering not just \textit{what} a tool does but \textit{when} and \textit{why} to use it, with concrete worked examples, common pitfalls, keyboard shortcuts, and production-relevant best practices. The manual is designed to sit on a desk (physical or digital) as a reference that a user can open at any chapter, on any day, and immediately apply.
+
+The mission is structured around six research and writing modules, each responsible for one major cluster of Blender capabilities. These run in two parallel tracks during Wave 1, converge into a synthesis and cohesion pass in Wave 2, and are assembled, cross-referenced, and polished into a publication-ready PDF in Wave 3.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{No single comprehensive manual exists at the right verbosity level.} The official Blender documentation is excellent as a reference but not written as a tutorial or user manual. Third-party books target narrow domains (modeling, scripting, etc.) but do not cover the full pipeline in one place with consistent depth, voice, and worked examples.
+
+  \item \textbf{Beginners cannot find the path through Blender's feature density.} Blender 4.4 supports modeling, sculpting, UV unwrapping, texture painting, shader nodes, Geometry Nodes, rigging, armatures, inverse kinematics, shape keys, the NLA editor, physics simulations, Mantaflow fluids, Bullet rigid bodies, particle systems, EEVEE, Cycles, Workbench, compositing nodes, the Video Sequence Editor, motion tracking, Grease Pencil, Python scripting, add-on development, and USD/FBX/glTF pipeline integration --- all within a single application. A new user has no map.
+
+  \item \textbf{Intermediate users plateau without understanding the cross-domain connections.} Knowing how to model does not automatically teach you how to rig; knowing how to rig does not automatically teach you how to render efficiently; knowing how to render does not teach you how to composite. A manual that exposes these connections and shows how the full pipeline flows from scene to final deliverable is missing in the community.
+
+  \item \textbf{Production workflows are underrepresented in tutorials.} Most free tutorials teach individual features in isolation. Studios and freelancers need to understand how to organize projects with linked libraries, use Blender's batch rendering tools, write Python scripts to automate repetitive tasks, and integrate Blender with external tools like ShotGrid, USD pipelines, and render farms. This practical, production-grade knowledge is scattered across blog posts and forum threads.
+
+  \item \textbf{Version-specific knowledge degrades quickly.} Blender releases three or more major versions per year. Many tutorials and books are based on older versions. A well-structured, version-current manual that is easy for an executor to keep updated chapter by chapter is a long-term community asset.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One Application, One Pipeline, One Manual.} Blender's power comes from the fact that everything lives in a single .blend file and a single application. The manual reflects this by organizing chapters not as isolated reference pages but as connected workflow stages --- the reader who completes the manual understands not just individual tools but the entire arc from blank scene to finished render.
+
+\subsubsection{Blender's Domain Architecture}
+
+\begin{asciibox}
+Blender 4.4 --- Complete 3D Creation Suite
+===========================================================================
+  INTERFACE & NAVIGATION       MODELING & SCULPTING
+  +-----------------------+    +---------------------------+
+  | Workspaces            |    | Mesh Edit Mode            |
+  | Viewport shading      |    | Modifier Stack            |
+  | Hotkeys & pie menus   |    | Geometry Nodes            |
+  | Properties panels     |    | Sculpt Mode / Dyntopo     |
+  +-----------------------+    +---------------------------+
+           |                              |
+           v                              v
+  SHADING & MATERIALS           ANIMATION & RIGGING
+  +-----------------------+    +---------------------------+
+  | Principled BSDF       |    | Armatures / Bone Collections|
+  | Shader node trees     |    | Inverse Kinematics (IK/FK)|
+  | UV Unwrapping         |    | Shape Keys / Drivers      |
+  | Texture Painting      |    | NLA Editor / Action Slots |
+  +-----------------------+    +---------------------------+
+           |                              |
+           v                              v
+  RENDERING                     SIMULATION
+  +-----------------------+    +---------------------------+
+  | EEVEE (real-time)     |    | Mantaflow (fluid/smoke)   |
+  | Cycles (path tracing) |    | Bullet (rigid/soft body)  |
+  | Workbench             |    | Particle Systems          |
+  | Third-party (Redshift)|    | Cloth / Dynamic Paint     |
+  +-----------------------+    +---------------------------+
+           |                              |
+           v                              v
+  POST & OUTPUT                 SCRIPTING & PIPELINE
+  +-----------------------+    +---------------------------+
+  | Compositing Nodes     |    | Python bpy API            |
+  | Video Sequence Editor |    | Add-on development        |
+  | Motion Tracking       |    | USD / FBX / glTF export   |
+  | Grease Pencil 2D/3D   |    | Render farm integration   |
+  +-----------------------+    +---------------------------+
+                        \\       /
+                         v     v
+                   [.blend file]
+                   Single unified
+                   project archive
+===========================================================================
+\end{asciibox}
+
+\subsubsection{Manual Module Architecture}
+
+\begin{asciibox}
+Manual Modules (6 parallel writing tracks)
+============================================================
+  MODULE A: Foundations & Interface
+    -> Installation, UI, navigation, workspaces, hotkeys
+    -> New user orientation; vocabulary building
+
+  MODULE B: Modeling, Sculpting & Geometry Nodes
+    -> Mesh edit mode, modifiers, sculpt tools, GN procedural
+    -> Largest single module; backbone of 3D creation
+
+  MODULE C: Shading, Materials & Rendering
+    -> Shader nodes, UV/textures, EEVEE vs Cycles, lighting
+    -> Output quality; the "look" of a project
+
+  MODULE D: Animation, Rigging & Simulation
+    -> Keyframes, armatures, IK, NLA, physics, cloth
+    -> Bringing scenes to life
+
+  MODULE E: Compositing, Post & Video Editing
+    -> Compositor nodes, VSE, motion tracking, Grease Pencil
+    -> Final output pipeline
+
+  MODULE F: Python Scripting, Add-ons & Pipeline
+    -> bpy API, operators, panels, automation, USD/FBX
+    -> Power user and studio integration
+
+  [ Wave 2: Cross-module synthesis & worked projects ]
+  [ Wave 3: Assemble, index, cross-reference, publish ]
+============================================================
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Foundations and Interface}
+
+Covers Blender's download and installation across Windows, macOS, and Linux; initial setup; the workspace system and how to customize layouts; the 3D Viewport and its shading modes (Solid, Material Preview, Rendered, Wireframe); the Properties Panel and all its sub-panels; navigation with mouse, numpad, and the view menu; the Outliner for scene organization; object types (mesh, curve, surface, metaball, text, armature, empty, camera, light); fundamental operations (add, delete, duplicate, link, parent, group); and the essential keyboard shortcuts every Blender user must internalize. This module also covers preferences, keymaps, and theme customization.
+
+\subsubsection{Module B: Modeling, Sculpting and Geometry Nodes}
+
+Covers mesh editing in Edit Mode with a full survey of selection methods, vertex/edge/face operations, loop cuts, extrusion, beveling, Boolean operations, knife tool, and proportional editing. Includes the complete modifier stack with detailed explanations of the most-used modifiers: Subdivision Surface, Boolean, Mirror, Array, Solidify, Shrinkwrap, Displace, and more. Covers UV Unwrapping and UV Editor for texture coordinates. Covers Sculpt Mode including brushes, dyntopo, multires, face sets, mesh filters, and the full brush palette. Covers Geometry Nodes with node types, attributes, fields, instancing, procedural terrain, scatter systems, and animation. Covers curves, surfaces, and text objects.
+
+\subsubsection{Module C: Shading, Materials and Rendering}
+
+Covers Blender's Principled BSDF shader node and Physically Based Rendering (PBR) workflow with albedo, roughness, metalness, and normal maps. Covers the Shader Editor and node tree building including mixing shaders, procedural textures (Noise, Voronoi, Wave, Musgrave), UV-mapped image textures, bump/displacement, subsurface scattering, glass, and emission. Covers EEVEE (real-time rasterization, EEVEE Next in Blender 4.2+) with screen-space reflections, SSGI, shadow maps, bloom, and depth of field. Covers Cycles (path tracing) with sampling, denoising (OptiX, OpenImageDenoise), GPU acceleration (CUDA, OptiX, Metal, HIP), light paths, caustics, and render settings optimization. Covers lighting setups: HDRI, area lights, sun lights, spotlights, mesh emission, IES profiles. Covers camera settings: focal length, depth of field, motion blur.
+
+\subsubsection{Module D: Animation, Rigging and Simulation}
+
+Covers keyframe animation: inserting, editing in the Dope Sheet, refining in the Graph Editor with bezier curves and interpolation modes. Covers the NLA Editor for layering and reusing actions, and Action Slots (Blender 4.4). Covers rigging: armature creation, bone collections, weight painting, envelope deformation, and the Rigify add-on for automated humanoid rigs. Covers constraints: IK solver, Copy Rotation, Track To, Floor, Child Of, and more. Covers shape keys for facial animation and muscle deformation. Covers drivers and expressions for procedural animation control. Covers physics: Mantaflow fluid and smoke simulations, Bullet rigid bodies and soft bodies, cloth simulation with collision, and the particle system for hair and rain/sparks effects.
+
+\subsubsection{Module E: Compositing, Post-Production and Video Editing}
+
+Covers the Compositing workspace and node tree: Render Layers node, color correction (Color Balance, Curves, Hue/Saturation), lens effects (Glare, Lens Distortion), masking, Cryptomatte, multi-pass compositing (diffuse, specular, shadow, AO, depth), and rendering to EXR sequences. Covers the Video Sequence Editor (VSE): importing clips and image sequences, cutting and trimming, transitions, speed effects, color grading strips, and audio synchronization. Covers motion tracking: camera solve, object tracking, and integrating tracked footage with 3D renders. Covers Grease Pencil: 2D animation in a 3D space, stroke sculpting, and the Fill tool, with use cases in storyboarding and 2D/3D hybrid animation (as used in \textit{Spider-Man: Across the Spider-Verse}).
+
+\subsubsection{Module F: Python Scripting, Add-on Development and Pipeline Integration}
+
+Covers Blender's embedded Python interpreter, the \texttt{bpy} module (data access, operators, context, scene graph), and the Text Editor / Scripting workspace. Covers writing operators, panels, and menus to extend the Blender UI. Covers building a minimal add-on from scratch: \texttt{bl\_info}, registration, operator classes, and preferences. Covers practical automation use cases: batch renaming objects, mass export to FBX/glTF, setting up render queues, and generating procedural scenes from data. Covers pipeline integration topics: USD import/export, ShotGrid/Kitsu integration patterns, linking and appending from asset libraries, Flamenco render farm orchestration, and running Blender headlessly from the command line.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: blender_user_manual
+  profile: fleet
+  models:
+    orchestrator: claude-opus-4-6       # synthesis, cross-module judgment
+    research_agents: claude-sonnet-4-6  # per-module writing, 6x parallel
+    haiku_tasks: claude-haiku-4-5       # shared schemas, templates, TOC
+  context_windows:
+    estimated_total: 15
+    per_module_write: 2.0
+    synthesis_pass: 1.5
+    publication: 1.5
+  token_budget:
+    per_module: 90000
+    synthesis: 60000
+    publication: 40000
+    total_estimate: 640000
+  parallelism:
+    wave_1_tracks: 2        # Track A: Modules A+B+C  |  Track B: Modules D+E+F
+    wave_1_agents: 6        # one writing agent per module
+  output:
+    format: pdf
+    target_pages: 250-350
+    verbosity: maximum
+    examples_per_chapter: 3-8
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+  \item All six module domains listed above, at maximum verbosity
+  \item Blender 4.4 (stable) as the primary version reference; notable 4.x changes noted
+  \item Worked examples and use-case walkthroughs in every major chapter
+  \item Complete keyboard shortcut tables for each domain
+  \item Production workflow notes: what professionals actually do vs.\ beginner default
+  \item Cross-references between chapters (e.g., UV mapping links to material shading)
+  \item Troubleshooting and common-pitfalls sections per chapter
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+  \item Third-party render engines (Redshift, Octane, Arnold) beyond overview mentions
+  \item Blender for iPad (in development as of 2025-07, not yet released)
+  \item Blender 5.0 features that are in beta/development as of April 2026
+  \item Game engine export to Unreal/Unity beyond brief mention of glTF export
+  \item Deep coverage of external DCC tools (Maya, Houdini, Cinema 4D)
+  \item Video tutorials, screenshots, or rendered diagrams (text-only deliverable)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All six modules delivered with a minimum of 25 pages of content each (estimated 250--350 total pages).
+  \item Every chapter contains at least three worked examples with step-by-step instructions and expected outcomes.
+  \item Every major tool or workflow has a ``When to Use This'' or ``Use Case'' subsection.
+  \item Module B (Modeling) covers Edit Mode, modifier stack, sculpt mode, and Geometry Nodes each with dedicated chapters.
+  \item Module C (Rendering) provides a clear EEVEE vs.\ Cycles decision matrix with at least 10 comparative criteria.
+  \item Module D (Animation) includes a complete walk-cycle tutorial and a character rigging walkthrough using Rigify.
+  \item Module E (Compositing) demonstrates a multi-pass EXR compositing workflow from render setup to final output.
+  \item Module F (Scripting) includes at least five complete, runnable Python script examples using the \texttt{bpy} API.
+  \item A unified keyboard shortcut reference index is produced as an appendix, organized by domain and mode.
+  \item All content is accurate to Blender 4.4 and validated against official docs.blender.org and blender.org/features/.
+  \item Cross-references between chapters are present: every module references at least two other modules.
+  \item Troubleshooting/common-pitfalls sections are present in every major chapter.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Blender Official Manual (docs.blender.org) & Primary source for technical accuracy; manual does not replace but complements with verbosity and examples & Published \\
+Blender Python API Docs (docs.blender.org/api) & Authoritative source for Module F scripting content & Published \\
+blender.org/features/ & Feature overview and official capability list used for scope & Published \\
+blender.org/download/releases/ & Version-specific release notes for 4.x accuracy & Published \\
+Blender Studio Training (studio.blender.org) & Reference for worked examples and production workflows & Published \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Blender is not just software --- it is a philosophy made executable. The Blender Foundation's commitment to keeping the tool free forever, governed by the GNU GPL, means that every improvement made by every contributor belongs to everyone. Students in Ann Arbor learning 3D for the first time use the same tools as animators at film studios. A freelancer in Nairobi and a studio pipeline TD in Amsterdam are both running the same application from the same download page. This is the GSD Ecosystem's Amiga Principle made real in 3D: architectural leverage through openness, where the quality of the foundation compounds over time because everyone benefits from and contributes to it.
+
+The manual this mission produces is itself an act of that philosophy: a complete, verbose, freely distributable reference that reduces the information asymmetry between someone with access to expensive training and someone learning on their own. Blender democratized professional 3D creation. This manual democratizes the knowledge to use it well.
+
+\newpage
+%% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Blender User Manual --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference contains the sourced findings and evidence base for each of the six writing modules. Writing agents should use this section to ensure factual accuracy, correct feature attribution to Blender versions, and appropriate sourcing for technical claims.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Blender Foundation} --- blender.org, official home of Blender; docs.blender.org for the manual; blender.org/download/releases/ for release notes
+  \item \textbf{Blender Studio} --- studio.blender.org, official training, open movies (Flow, Caminandes, etc.)
+  \item \textbf{Blender Developer Documentation} --- developer.blender.org, authoritative on feature internals
+  \item \textbf{Blender Python API} --- docs.blender.org/api/current/, authoritative for scripting content
+  \item \textbf{University of California, Santa Cruz Library Guides} --- for tutorial-level explanations of Cycles/EEVEE
+  \item \textbf{CG Wire} --- blog.cg-wire.com, production pipeline scripting expertise
+\end{itemize}
+
+\subsection{Module A: Foundations and Interface Reference}
+
+\subsubsection{Blender Overview and Status}
+
+Blender is a free and open-source 3D creation suite that supports the entirety of the 3D pipeline including modeling, rigging, animation, simulation, rendering, compositing, motion tracking, video editing, and game asset creation. It runs cross-platform on Linux, Windows, and macOS with a consistent OpenGL-based interface. The most recent stable release is Blender 4.4 (released March 18, 2025), with 4.4.3 being the latest patch. Blender 4.5 LTS is scheduled for release in July 2025 and will be supported until July 2027.
+
+The development team in winter 2024--2025 ran a ``Winter of Quality'' initiative, focusing on stability, bug fixes, technical debt reduction, and documentation improvements rather than new features. Blender 4.4 introduced Action Slots, which allow multiple data-blocks to share a single animation Action --- a significant architectural improvement for complex scenes.
+
+All library versions in Blender 4.4 are aligned with the VFX Reference Platform 2025, which facilitates studio pipeline integration.
+
+\subsubsection{Interface Architecture}
+
+Blender's interface is fully customizable using OpenGL. The workspace system allows users to save custom layouts of editor types. Standard workspaces include: Layout, Modeling, Sculpting, UV Editing, Texture Paint, Shading, Animation, Rendering, Compositing, Geometry Nodes, and Scripting. Each workspace can be reconfigured by dragging editor boundaries and splitting or joining panels.
+
+The Properties Panel contains: Scene, Render, Output, View Layer, Scene (data), World, Object, Modifier, Particles, Physics, Object Constraints, Object Data, Material, and Bone properties --- accessible via icon tabs. This panel is context-sensitive: switching object types changes which sub-panels are visible.
+
+\subsubsection{Object Types and Modes}
+
+Blender supports these object types: Mesh, Curve, Surface, Metaball, Text, Volume, Armature, Lattice, Empty, Camera, Light, Light Probe, Speaker, and Force Field. Each type has associated editing modes. For meshes: Object Mode, Edit Mode, Sculpt Mode, Vertex Paint, Weight Paint, and Texture Paint. For armatures: Object Mode, Edit Mode, and Pose Mode.
+
+\subsection{Module B: Modeling, Sculpting and Geometry Nodes Reference}
+
+\subsubsection{Edit Mode Mesh Operations}
+
+The mesh editing system provides vertex, edge, and face selection modes with linked selection, loop select, and region select tools. Key operations: Extrude (E), Loop Cut (Ctrl+R), Bevel (Ctrl+B), Inset Face (I), Knife (K), Merge (M), Subdivide, Bridge Edge Loops, and the powerful Proportional Editing mode (O) for organic deformation. The Overlay system shows normals, edge lengths, and face orientation.
+
+The modifier stack allows non-destructive operations stacked in order: each modifier can be viewed, toggled, applied, or deleted independently. The most production-relevant modifiers include: Subdivision Surface (for smoothing and adding resolution), Mirror (for symmetric modeling), Boolean (for subtractive and additive operations with other meshes), Array (for repeating geometry), Solidify (for adding thickness to surfaces), Shrinkwrap (for conforming geometry to another surface), and Remesh (for retopologizing mesh density).
+
+\subsubsection{Geometry Nodes}
+
+Geometry Nodes, significantly enhanced since their introduction in Blender 2.9 and reaching production maturity in Blender 3.0+, provide a node-based procedural system for creating and modifying geometry non-destructively. Key concepts include: node sockets (data types color-coded by type: geometry = teal, float = gray, integer = green, vector = purple, boolean = pink), fields (lazy-evaluated per-element computations), attributes (data stored per vertex/edge/face), and the Modifier stack integration (Geometry Nodes is applied as a modifier).
+
+Geometry Nodes power use cases include: scatter systems (distributing instances of objects across surfaces), procedural terrain generation, parametric hard-surface modeling, architectural city generation, and animatable effects. In Blender 4.4, the Triangulate node received a 30x--100x performance improvement, and the Sort Elements node became 50\% faster. Blender 5.0 further improves volumetric data support within Geometry Nodes.
+
+\subsubsection{Sculpt Mode}
+
+Blender's sculpt mode offers professional-grade digital sculpting with over 20 brushes including: Draw, Clay, Clay Strips, Inflate/Deflate, Smooth, Pinch, Crease, Blob, Snake Hook, Mask, Face Sets, and Cloth. Dynamic Topology (Dyntopo) allows the mesh to subdivide under the brush for fine detail without manual geometry management. The Multires modifier provides performance-efficient multiresolution sculpting. Face Sets allow isolated mesh regions for targeted sculpting. Mesh Filters apply global transformations like smooth, inflate, or noise.
+
+\subsection{Module C: Shading, Materials and Rendering Reference}
+
+\subsubsection{Shader Node System and PBR Workflow}
+
+Blender's material system is built on node trees in the Shader Editor. The Principled BSDF node implements the metalness PBR workflow. Key parameters: Base Color (albedo), Roughness (0=mirror, 1=diffuse), Metallic (0=dielectric, 1=metal), Normal (surface detail), Emission (self-illumination), Transmission (glass/water), Subsurface Scattering (skin/wax/marble). The shader system is mostly compatible between EEVEE and Cycles, with some EEVEE-specific nodes (Shader to RGB for toon effects) and Cycles-only features (accurate caustics, full volumetrics).
+
+The standard PBR texture maps used in production: Albedo/Diffuse, Roughness, Metallic, Normal Map, Ambient Occlusion, Height/Displacement, and Emission maps. These are typically created in Substance Painter or Quixel and imported as Image Texture nodes in Blender.
+
+\subsubsection{EEVEE}
+
+EEVEE is Blender's real-time rasterization renderer, replacing Blender Internal in version 2.80. It renders using OpenGL on the GPU. EEVEE Next (introduced in Blender 4.2 LTS) added screen-space global illumination (SSGI), virtual shadow mapping, sunlight extraction from HDRIs, improved volumetric rendering, support for displacement shaders, and an improved depth of field. EEVEE is ideal for: game asset previewing, stylized and non-photorealistic renders, animation pre-vis, architectural walkthroughs, and any workflow where render speed outweighs absolute realism. A typical EEVEE render completes in seconds where Cycles would require minutes.
+
+\subsubsection{Cycles}
+
+Cycles is Blender's production path-tracing renderer. It calculates physically accurate light bouncing, reflections, caustics, subsurface scattering, and global illumination. Supported hardware acceleration: NVIDIA CUDA/OptiX, AMD HIP, Intel OneAPI, Apple Metal (M-series and AMD GPUs). Key settings: Path Tracing samples (lower = faster but noisier; adaptive sampling reduces noise efficiently), Max Light Bounces (typically 4--12), Denoising (OptiX Denoiser for NVIDIA hardware, OpenImageDenoise for CPU). Cycles is preferred for: photorealistic product visualization, architectural rendering, final-quality animation frames, and any scene requiring accurate glass, caustics, or subsurface scattering.
+
+\subsubsection{EEVEE vs.\ Cycles Decision Guide}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Criterion} & \tableheader{EEVEE} & \tableheader{Cycles} \\
+\midrule
+Render speed & Very fast (real-time to seconds) & Slow (minutes to hours) \\
+Physical accuracy & Approximate (rasterization tricks) & High (path tracing) \\
+Glass/refraction & Limited (screen-space) & Accurate (ray-traced) \\
+Caustics & Not supported & Supported \\
+Subsurface scattering & Approximate & Accurate \\
+GPU requirement & Required & Optional (CPU fallback) \\
+Animation preview & Excellent & Poor \\
+Final film frames & Good for stylized & Preferred for realism \\
+Viewport interactivity & Real-time & Sampled (slower) \\
+Hardware ray tracing & Planned & Supported via OptiX \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module D: Animation, Rigging and Simulation Reference}
+
+\subsubsection{Animation System Architecture}
+
+Blender's animation system is built around F-Curves (function curves) stored per property. Keyframes set values at specific frames; F-Curves interpolate between them. The Dope Sheet provides a timeline view of all keyframe channels. The Graph Editor visualizes F-Curves for fine control over interpolation: Bezier, Linear, Constant, and Back/Bounce/Elastic ease types. The NLA (Non-Linear Animation) Editor layers Action Strips: pre-recorded animation sequences that can be scaled, offset, blended, and reused. Blender 4.4 introduced Action Slots, allowing a single Action to contain animation data for multiple data-blocks (e.g., animate an object's position and a camera's depth-of-field in one Action).
+
+\subsubsection{Rigging}
+
+A rig consists of an Armature object with bones. Bones have a head and tail, a roll angle, and inheritance settings. Bone Collections (replacing the old Layer system in Blender 4.0+) organize bones into named, nestly-visible groups for complex rigs. Weight Painting defines the influence of each bone on mesh vertices (0.0 = no influence, 1.0 = full influence). Automatic weights (Ctrl+P with ``With Automatic Weights'') provide a good starting point for humanoid characters.
+
+Constraints control bones and objects: IK Solver (Inverse Kinematics for limb posing), Copy Rotation/Location/Scale (copy transforms from another object), Track To (look-at behavior), Floor (prevent floor penetration), and Limit Location/Rotation/Scale. Rigify is Blender's official automated rigging add-on that generates a production-ready human or animal rig from a template.
+
+\subsubsection{Physics Simulations}
+
+Mantaflow is Blender's fluid and smoke simulation library, integrated since Blender 2.82. It simulates: liquids (FLIP solver), smoke and fire (gas simulation with temperature, buoyancy, and vorticity). Bullet Physics handles rigid body dynamics (objects colliding and bouncing) and soft body dynamics (deformable objects like jello or cloth). The Cloth simulation has dedicated settings for stiffness, damping, wind, and collision. Particles can simulate hair, rain, sparks, and dust with emission, forces (gravity, wind, turbulence), and lifetime settings.
+
+\subsection{Module E: Compositing, Post-Production and Video Editing Reference}
+
+\subsubsection{Compositor Node System}
+
+The Compositor uses a node tree to process rendered images and sequences. Render Passes allow isolating lighting components: Diffuse Color, Diffuse Light, Glossy Light, Shadow, Ambient Occlusion, Emission, Depth, Normal, and Object Index. These passes are exported as multi-layer EXR files and recombined in the compositor with full control. Key node types: Color Balance (lift/gamma/gain), Curves (RGB correction), Hue/Saturation/Value, Glare (bloom, streaks), Lens Distortion, Defocus, Mix (blend modes), Mask, and Cryptomatte (ID-based masking for objects and materials).
+
+\subsubsection{Video Sequence Editor}
+
+The VSE provides cut-based video editing with: Movie strips, Image strips, Sound strips, Scene strips, Text strips, and Effect strips (Transform, Speed, Color, Wipe transitions). It supports multichannel mixing, GPU-accelerated playback, and H.265/HEVC codec export (added in Blender 4.4). The VSE is suitable for assembling 3D renders with sound, titles, and basic color grading. Story tools for storyboarding from the VSE are planned for the 2025 roadmap.
+
+\subsubsection{Grease Pencil}
+
+Grease Pencil is Blender's 2D drawing system integrated in 3D space. Used in film production: Sony Pictures Imageworks used it for line-work and 2D FX in \textit{Spider-Man: Across the Spider-Verse}. Preston Mutanga used Blender (including Grease Pencil techniques) to create the Lego-style sequence in the same film. Grease Pencil supports: stroke drawing with pressure-sensitive brushes, fill tools, stroke sculpting, modifiers (Smooth, Subdivide, Offset, Lattice), and integration with the animation system for 2D character animation.
+
+\subsection{Module F: Python Scripting, Add-on Development and Pipeline Reference}
+
+\subsubsection{The bpy Module}
+
+Blender's embedded Python interpreter loads on startup. The primary module is \texttt{bpy}, which provides:
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{bpy.data} --- access to all scene data: objects, meshes, materials, animations, etc.
+  \item \texttt{bpy.ops} --- call any Blender operator (e.g., \texttt{bpy.ops.object.delete()})
+  \item \texttt{bpy.context} --- the current state: active object, selected objects, scene, mode
+  \item \texttt{bpy.props} --- define custom properties for add-ons
+  \item \texttt{bpy.types} --- base classes for operators, panels, menus, preferences
+  \item \texttt{mathutils} --- vectors, matrices, quaternions, Euler angles
+\end{itemize}
+
+A minimal operator that moves a vertex: \texttt{bpy.data.objects["Cube"].data.vertices[0].co.x += 1.0}. Operators are subclasses of \texttt{bpy.types.Operator} with \texttt{execute()}, \texttt{invoke()}, and \texttt{modal()} methods. Panels are subclasses of \texttt{bpy.types.Panel} that define UI in a specified region (e.g., \texttt{VIEW\_3D}, \texttt{N} sidebar).
+
+\subsubsection{Add-on Structure}
+
+An add-on is a Python module or package with a \texttt{bl\_info} dictionary and \texttt{register()} / \texttt{unregister()} functions. It is installed via Preferences > Add-ons > Install. The most common way to expose tools to artists is through registered operators and panels, enabling and disabling them cleanly. Studio pipelines often expose tools via startup scripts in \texttt{scripts/startup/} or via the \texttt{BLENDER\_USER\_SCRIPTS} environment variable.
+
+\subsubsection{Pipeline Integration Patterns}
+
+Studios use Blender's Python API to: enforce asset naming conventions, auto-fix common geometry errors (non-manifold mesh, zero-area faces), batch-export to FBX/USD/glTF, integrate with ShotGrid (Autodesk Flow Production Tracking) or open-source alternatives like Kitsu, and run Blender in headless mode for render farm queue processing via \texttt{blender -{}-background -{}-python script.py}. Flamenco is Blender's own open-source render farm orchestrator. USD (Universal Scene Description) import/export supports interoperability with Houdini, Unreal Engine, and large studio pipelines.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Guidance} & \tableheader{Priority} \\
+\midrule
+Version accuracy & All feature claims must be attributed to a specific Blender version; avoid mixing 4.x and 3.x features without noting the version & GATE \\
+Script safety & Python examples must include error handling; advise users to back up files before running scripts & GATE \\
+Render performance guidance & Avoid claiming specific render times; hardware varies widely & ANNOTATE \\
+GPU requirements & Note that Cycles GPU rendering requires compatible hardware (CUDA, OptiX, Metal, HIP); provide CPU fallback note & GATE \\
+Copyright of examples & All example assets must be original or use Blender's own bundled assets (monkey Suzanne, default cube) & ABSOLUTE \\
+Trademark & Use ``Blender'' not ``blender''; do not imply Anthropic/GSD affiliation with the Blender Foundation & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Blender Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item Blender Foundation. \textit{Blender 5.1 Manual}. docs.blender.org/manual/en/latest/
+  \item Blender Foundation. \textit{Blender Features Overview}. blender.org/features/
+  \item Blender Foundation. \textit{Blender 4.4 Release Notes}. blender.org/download/releases/4-4/
+  \item Blender Foundation. \textit{Python API Documentation}. docs.blender.org/api/current/
+  \item Blender Foundation. \textit{Animation \& Rigging Features}. blender.org/features/animation/
+  \item Blender Foundation. \textit{Projects to Look Forward in 2024}. blender.org/development/
+  \item Blender Developer Documentation. \textit{Animation \& Rigging Docs}. developer.blender.org
+  \item Blender Studio. \textit{Geometry Nodes from Scratch Course}. studio.blender.org
+\end{itemize}
+
+\subsubsection{Technical and Academic Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item University of California, Santa Cruz Library Guides. \textit{Blender --- Cycles and Shader Nodes}. guides.library.ucsc.edu (2026)
+  \item Golter, Paul. \textit{Blender Pipeline Integration}. github.com/paulgolter/blender-pipeline-integration
+  \item CG Wire. \textit{Blender Scripting for Animation Pipelines: 2026 Introduction}. blog.cg-wire.com (Feb 2026)
+  \item Render Pool. \textit{Rendering in Blender: Close-up of Workbench, Cycles and EEVEE}. renderpool.net (Dec 2025)
+  \item GarageFarm. \textit{EEVEE VS Cycles: Which Should You Choose?} garagefarm.net
+\end{itemize}
+
+\subsubsection{Professional and Community Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item Tech Indulger. \textit{Blender 2025 Review: Why Blender 4.4 Is the 3D Standard}. techindulger.com (Jul 2025)
+  \item RadarRender. \textit{Blender Eevee vs Cycles: Which is Better for Your Workflow in 2025?} radarrender.com (Apr 2025)
+  \item Wikipedia. \textit{Blender (software)}. en.wikipedia.org (Apr 2026 --- for film credits and history)
+  \item CGWire Awesome CG VFX Pipeline. github.com/cgwire/awesome-cg-vfx-pipeline
+  \item Dark Skies Film. \textit{How to Make an Animation with Blender: A Comprehensive Guide}. darkskiesfilm.com (Jul 2025)
+\end{itemize}
+
+\newpage
+%% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, verbose Blender user manual covering all six major domain modules (Foundations, Modeling/Sculpting/Geometry Nodes, Shading/Materials/Rendering, Animation/Rigging/Simulation, Compositing/Post/Video, and Scripting/Pipeline) as a single cohesive document. Each chapter must include worked examples, use-case walkthroughs, keyboard shortcut tables, production notes, and troubleshooting guidance. The deliverable is a publication-ready PDF (250--350 pages) with a complete index and cross-reference system.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+BLENDER USER MANUAL --- WAVE ARCHITECTURE
+===========================================================================
+  WAVE 0 [Sequential / Haiku]
+    W0.1  Shared schema: chapter template, shortcut table format, example box format
+    W0.2  Source index and version accuracy checklist
+    W0.3  Manual outline: all chapters, sections, subsections numbered
+  ---------------------------------------------------------------------------
+  WAVE 1 [Parallel / 2 tracks / Sonnet + Opus]
+    TRACK A                           TRACK B
+    W1A.1 Module A: Foundations       W1B.1 Module D: Animation & Rigging
+    W1A.2 Module B: Modeling          W1B.2 Module E: Compositing & Post
+    W1A.3 Module C: Rendering         W1B.3 Module F: Scripting & Pipeline
+  ---------------------------------------------------------------------------
+  WAVE 2 [Sequential / Opus]
+    W2.1  Cross-module synthesis: ensure cross-references are present
+    W2.2  Cohesion pass: unified voice, consistent terminology, version accuracy
+    W2.3  Production workflow chapter: connecting all modules into a full project
+    W2.4  Appendix compilation: shortcut index, glossary, quick-reference cards
+  ---------------------------------------------------------------------------
+  WAVE 3 [Sequential / Sonnet]
+    W3.1  PDF assembly with TOC, chapter numbers, running headers, page numbers
+    W3.2  Verification: accuracy spot-check against blender.org
+    W3.3  Index generation and cross-reference validation
+    W3.4  Final PDF delivery
+===========================================================================
+  DEPENDENCY: W0 -> W1 (parallel) -> W2 -> W3
+===========================================================================
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer (Wave 0)} --- Shared templates, schemas, source index. Ensures all writing agents use consistent formatting and version references.
+  \item \textbf{Content Production Layer (Wave 1)} --- Six parallel module writing streams producing the core chapter content.
+  \item \textbf{Synthesis Layer (Wave 2)} --- Cross-module integration, unified voice, production workflow chapter, and appendices.
+  \item \textbf{Publication Layer (Wave 3)} --- Final assembly, verification, indexing, and PDF delivery.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module A: Foundations & Min 25 pages; 3+ worked examples; interface + hotkey tables & W1A.1 \\
+2 & Module B: Modeling / Sculpting / GN & Min 50 pages; Edit Mode, modifiers, sculpt, GN each with dedicated chapters & W1A.2 \\
+3 & Module C: Shading / Materials / Rendering & Min 40 pages; EEVEE vs Cycles matrix; PBR workflow; 5+ lighting setups & W1A.3 \\
+4 & Module D: Animation / Rigging / Simulation & Min 45 pages; walk cycle tutorial; Rigify walkthrough; physics examples & W1B.1 \\
+5 & Module E: Compositing / Post / Video & Min 30 pages; multi-pass EXR workflow; VSE tutorial; Grease Pencil intro & W1B.2 \\
+6 & Module F: Scripting / Pipeline & Min 25 pages; 5+ runnable Python scripts; add-on tutorial; pipeline guide & W1B.3 \\
+7 & Production Workflow Chapter & Full project walkthrough: concept to final render, referencing all 6 modules & W2.3 \\
+8 & Keyboard Shortcut Index & Domain-organized appendix; all modes covered & W2.4 \\
+9 & Glossary & 60+ terms from all domains; concise, accurate definitions & W2.4 \\
+10 & Final Assembled PDF & 250--350 pages; TOC; headers/footers; cross-references verified & W3.4 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0.1 -- Shared Schema & None & Haiku & 8,000 \\
+W0.2 -- Source Index & Research Reference & Haiku & 6,000 \\
+W0.3 -- Manual Outline & Vision Guide & Haiku & 10,000 \\
+W1A.1 -- Module A & W0 complete & Sonnet & 80,000 \\
+W1A.2 -- Module B & W0 complete & Sonnet & 120,000 \\
+W1A.3 -- Module C & W0 complete & Sonnet & 100,000 \\
+W1B.1 -- Module D & W0 complete & Sonnet & 110,000 \\
+W1B.2 -- Module E & W0 complete & Sonnet & 75,000 \\
+W1B.3 -- Module F & W0 complete & Sonnet & 70,000 \\
+W2.1 -- Cross-module synthesis & W1A+W1B complete & Opus & 40,000 \\
+W2.2 -- Cohesion pass & W2.1 & Opus & 35,000 \\
+W2.3 -- Production workflow & W2.2 & Opus & 30,000 \\
+W2.4 -- Appendices & W1 complete & Sonnet & 25,000 \\
+W3.1 -- PDF assembly & W2 complete & Sonnet & 20,000 \\
+W3.2 -- Verification & W3.1 & Sonnet & 15,000 \\
+W3.3 -- Index generation & W3.2 & Sonnet & 12,000 \\
+W3.4 -- Final delivery & W3.3 & Sonnet & 5,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & & \textbf{$\approx$761,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned Tasks} & \tableheader{Rationale} \\
+\midrule
+Claude Opus 4.6 ($\sim$30\%) & Cross-module synthesis (W2.1), cohesion pass (W2.2), production workflow chapter (W2.3) & Requires judgment about cross-domain connections, voice consistency, and structural decisions spanning the full document \\
+Claude Sonnet 4.6 ($\sim$60\%) & All six module chapters (W1), appendices (W2.4), PDF assembly and verification (W3) & High-throughput content production with technical accuracy; six parallel streams benefit from Sonnet's speed/quality ratio \\
+Claude Haiku 4.5 ($\sim$10\%) & Shared schema (W0.1), source index (W0.2), manual outline (W0.3) & Structured templating tasks with low judgment requirement; maximum token efficiency for scaffolding work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Key Outputs} & \tableheader{Mode} & \tableheader{Model} \\
+\midrule
+0 & Foundation & Schema, source index, outline & Sequential & Haiku \\
+1 & Content Production & 6 module chapters ($\sim$250 pages) & Parallel & Sonnet \\
+2 & Synthesis & Integration, cohesion, appendices & Sequential & Opus \\
+3 & Publication & Final PDF, verification, index & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0.1 & Define shared chapter template: worked example box format, shortcut table format, ``When to Use'' section format, troubleshooting section format & Haiku & 8,000 \\
+W0.2 & Build source index: map every Blender feature claim to its authoritative source URL and version number & Haiku & 6,000 \\
+W0.3 & Generate complete manual outline: all chapter titles, section headings, and subsection headings for all 6 modules + appendices, numbered hierarchically & Haiku & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Content Production}
+
+\textbf{Track A} (Modules A, B, C) and \textbf{Track B} (Modules D, E, F) run simultaneously. Each track uses one Executor agent per module writing in parallel within the track.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task ID} & \tableheader{Module} & \tableheader{Key Content} & \tableheader{Tokens} \\
+\midrule
+W1A.1 & Foundations \& Interface & Installation, workspaces, Properties Panel, navigation, object types, modes, essential hotkeys, preferences & 80,000 \\
+W1A.2 & Modeling / Sculpting / GN & Edit Mode operations, modifier stack (all major modifiers), UV unwrapping, sculpt mode (all brushes), Geometry Nodes fundamentals and advanced, curves and text & 120,000 \\
+W1A.3 & Shading / Materials / Rendering & Principled BSDF, shader node tree, PBR textures, EEVEE setup, Cycles setup, GPU acceleration, lighting (8+ setups), camera, render output settings & 100,000 \\
+\midrule
+W1B.1 & Animation / Rigging / Sim & Keyframes, Dope Sheet, Graph Editor, NLA Editor, Action Slots, armature rigging, weight painting, Rigify, constraints, shape keys, drivers, Mantaflow, Bullet, cloth, particles & 110,000 \\
+W1B.2 & Compositing / Post / Video & Compositor nodes, render passes, multi-layer EXR workflow, VSE editing, motion tracking, Grease Pencil 2D/3D & 75,000 \\
+W1B.3 & Scripting \& Pipeline & bpy API tour, 5+ complete scripts, add-on development tutorial, headless rendering, USD/FBX/glTF pipeline, render farm (Flamenco), ShotGrid/Kitsu patterns & 70,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W2.1 & Cross-module synthesis: insert cross-references between all modules; verify each module references at least 2 others; add connecting callout boxes & Opus & 40,000 \\
+W2.2 & Cohesion pass: unify voice and terminology; standardize example box formatting; ensure version attributions are consistent throughout & Opus & 35,000 \\
+W2.3 & Production workflow chapter: a complete project from blank scene to delivered render, touching all 6 modules in realistic workflow order & Opus & 30,000 \\
+W2.4 & Appendix compilation: Keyboard Shortcut Index (all modes), Glossary (60+ terms), Quick Reference cards per domain & Sonnet & 25,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W3.1 & Full PDF assembly: integrate all modules + appendices; apply consistent headers/footers; generate TOC and chapter numbering & Sonnet & 20,000 \\
+W3.2 & Accuracy verification: spot-check 20+ technical claims against docs.blender.org and blender.org/features/ & Sonnet & 15,000 \\
+W3.3 & Index generation: build term index; validate all cross-references resolve; check all shortcut tables for completeness & Sonnet & 12,000 \\
+W3.4 & Final delivery packaging: clean PDF, chapter navigation bookmarks, cover page & Sonnet & 5,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Shared schema prefix caching}: The Wave 0 schema document (chapter template, terminology standards, source index) should be placed at the top of every Wave 1 agent's context to maximize prefix cache hit rate.
+  \item \textbf{Module isolation}: Each Wave 1 agent receives only its own module's section of the Research Reference (Stage 2), not the full document. This reduces context load and prevents confusion.
+  \item \textbf{Wave 2 integration}: The Opus synthesis agent receives all six Wave 1 outputs in a single pass, enabling it to see cross-module patterns holistically.
+  \item \textbf{Progressive PDF assembly}: Wave 3 assembly processes one module at a time into the growing PDF to avoid token overrun on a single large context.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Wave 0 & Foundation (3 tasks) & Haiku & 24,000 \\
+Wave 1A & Modules A, B, C & Sonnet & 300,000 \\
+Wave 1B & Modules D, E, F & Sonnet & 255,000 \\
+Wave 2 & Synthesis (4 tasks) & Opus+Sonnet & 130,000 \\
+Wave 3 & Publication (4 tasks) & Sonnet & 52,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total Estimated} & All waves & Mixed & \textbf{$\approx$761,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH --- BLENDER USER MANUAL MISSION
+============================================================
+  [W0.1 Schema] ---+
+  [W0.2 Sources] --+--> [W0 COMPLETE]
+  [W0.3 Outline] --+          |
+                              |
+              +---------------+---------------+
+              |   TRACK A                     |   TRACK B
+              v                               v
+     [W1A.1 Foundations]           [W1B.1 Animation/Rigging]
+     [W1A.2 Modeling/GN ]     ||   [W1B.2 Compositing/Post ]
+     [W1A.3 Rendering   ]          [W1B.3 Scripting/Pipeline]
+              |                               |
+              +---------------+---------------+
+                              |
+                              v
+                    [W2.1 Cross-module]
+                         |
+                    [W2.2 Cohesion]
+                         |
+                    [W2.3 Workflow]
+                         |
+                    [W2.4 Appendices]
+                         |
+                         v
+                    [W3.1 Assembly]
+                         |
+                    [W3.2 Verify]
+                         |
+                    [W3.3 Index]
+                         |
+                    [W3.4 Deliver] --> FINAL PDF
+============================================================
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & Version accuracy, script safety, copyright & Mandatory & BLOCK \\
+Core functionality & Chapter completeness, example count, shortcut tables & Required & BLOCK \\
+Integration & Cross-references, consistent terminology, workflow coherence & Required & BLOCK \\
+Edge cases & Obscure features, data gaps, version ambiguities & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-VER & Version accuracy & Every feature claim attributes a Blender version (4.x minimum); no 2.x features presented as current without noting they are historical \\
+SC-SRC & Source quality & All technical claims traceable to docs.blender.org, blender.org/features/, developer.blender.org, or blender.org/api/ \\
+SC-SCR & Script safety & All Python examples include comments; scripts that modify scene data note the need to save first; no examples that could cause data loss without warning \\
+SC-CPY & Copyright of examples & All example meshes use Blender's own bundled assets (Suzanne, default cube, bundled HDRIs) or generic primitives; no copyrighted character meshes \\
+SC-TRM & Trademark accuracy & ``Blender'' capitalized throughout; no claims of Blender Foundation endorsement \\
+SC-GPU & Hardware claims & GPU-specific rendering claims (OptiX, Metal, HIP) note hardware requirements; CPU fallback is always mentioned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Module page counts & Each module $\geq$ its stated minimum (A:25, B:50, C:40, D:45, E:30, F:25 pages) \\
+CF-02 & Worked example count & Every chapter has $\geq$3 worked examples with numbered steps and expected outcomes \\
+CF-03 & Keyboard shortcut tables & Every major mode (Object Mode, Edit Mode, Sculpt Mode, Pose Mode, Node Editor) has a shortcut table \\
+CF-04 & Use-case sections & Every major tool/workflow has a ``When to Use This'' or ``Use Case'' subsection \\
+CF-05 & EEVEE vs Cycles matrix & Decision matrix has $\geq$10 comparative criteria (verified: table in Research Reference has 10 rows) \\
+CF-06 & Walk cycle tutorial & Module D contains a complete walk cycle tutorial with contact, down, passing, and up poses described \\
+CF-07 & Rigify walkthrough & Module D includes a step-by-step Rigify humanoid rig setup with weight painting notes \\
+CF-08 & Multi-pass EXR workflow & Module E demonstrates: render pass setup, EXR export settings, and compositor reassembly \\
+CF-09 & Python script examples & Module F contains $\geq$5 complete, runnable Python scripts with bpy imports, error handling, and comments \\
+CF-10 & Add-on tutorial & Module F includes a step-by-step add-on tutorial producing a working operator and panel \\
+CF-11 & Troubleshooting sections & Every major chapter has a troubleshooting or common pitfalls subsection \\
+CF-12 & Glossary completeness & Appendix glossary contains $\geq$60 defined terms covering all 6 module domains \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Cross-module references & Every module contains explicit cross-references to $\geq$2 other modules with chapter/section pointers \\
+IN-02 & Terminology consistency & Key terms (``mesh'', ``armature'', ``shader node'', ``render pass'', ``F-Curve'') used with identical meaning across all modules \\
+IN-03 & Production workflow coherence & Wave 2 production workflow chapter connects all 6 modules in a believable, realistic project workflow \\
+IN-04 & Self-containment & A reader with no prior knowledge can read Module A through Module F sequentially and understand a complete project pipeline \\
+IN-05 & Version consistency & All Blender version references (4.0, 4.1, 4.2, 4.3, 4.4) are mutually consistent; no contradictions between modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All six modules delivered at minimum page counts & CF-01 & Pending \\
+2. Every chapter has $\geq$3 worked examples & CF-02 & Pending \\
+3. Every major tool has a use-case section & CF-04 & Pending \\
+4. Module B covers Edit Mode, modifiers, sculpt, GN & CF-01, CF-02 & Pending \\
+5. EEVEE vs Cycles decision matrix ($\geq$10 criteria) & CF-05 & Pending \\
+6. Walk cycle tutorial and Rigify walkthrough in Module D & CF-06, CF-07 & Pending \\
+7. Multi-pass EXR compositing workflow in Module E & CF-08 & Pending \\
+8. $\geq$5 runnable Python scripts in Module F & CF-09 & Pending \\
+9. Keyboard shortcut index appendix covers all modes & CF-03 & Pending \\
+10. All content accurate to Blender 4.4 & SC-VER, SC-SRC & Pending \\
+11. Cross-references between all modules present & IN-01 & Pending \\
+12. Troubleshooting sections in every major chapter & CF-11 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates; final quality decision \\
+PLAN & Planner & Wave decomposition; dependency management; token budget tracking \\
+SCOUT & Research Agent & Source gathering; verify technical claims against blender.org; web research for gaps \\
+EXEC-A1 & Module A Writer & Foundations \& Interface chapter production \\
+EXEC-A2 & Module B Writer & Modeling / Sculpting / Geometry Nodes chapter production \\
+EXEC-A3 & Module C Writer & Shading / Materials / Rendering chapter production \\
+EXEC-B1 & Module D Writer & Animation / Rigging / Simulation chapter production \\
+EXEC-B2 & Module E Writer & Compositing / Post / Video chapter production \\
+EXEC-B3 & Module F Writer & Scripting / Pipeline chapter production \\
+CRAFT-TECH & Technical Specialist & Reviews Python scripts for correctness; verifies hotkeys; checks Blender version accuracy \\
+CRAFT-UX & Voice Specialist & Ensures consistent, clear, beginner-accessible writing style throughout \\
+INTEG & Integration Agent & Cross-module reference insertion; terminology consistency; production workflow chapter \\
+VERIFY & Verification Agent & Spot-checks 20+ claims against official sources; SC-* test execution \\
+CAPCOM & HITL Interface & Human approval checkpoint at end of Wave 1 (content review before synthesis) \\
+BUDGET & Resource Manager & Token budget tracking; flags if any module exceeds allocation \\
+SURGEON & Health Monitor & Detects quality degradation; flags modules with thin examples or missing sections \\
+LOG & Chronicle Agent & Wave completion records; commit messages for each deliverable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6+ modules, full crew, 17 roles) \\
+Total Modules & 6 writing modules + synthesis + appendices \\
+Estimated Token Budget & $\sim$761,000 tokens across all waves \\
+Estimated Context Windows & 12--18 windows across 6--8 sessions \\
+Parallelism & Wave 1: 2 tracks, 3 agents each (6 simultaneous writers) \\
+Target Deliverable & 250--350 page PDF user manual \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Human Approval Gates & 1 gate (end of Wave 1 content review before synthesis) \\
+Primary Sources & docs.blender.org, blender.org, developer.blender.org \\
+Version Reference & Blender 4.4 (stable as of April 2026) \\
+Safety-Critical Tests & 6 (all mandatory-pass BLOCK) \\
+Total Tests & 23 (6 SC + 12 CF + 5 IN) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``Blender is the free and open source 3D creation suite. It supports the entirety of the 3D pipeline --- modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game asset creation.''}
+
+\vspace{0.5em}
+--- Blender Foundation, blender.org/features/
+
+\vspace{1em}
+\textit{This mission produces the manual that matches that ambition: comprehensive, honest about its learning curve, and committed to making every part of that pipeline accessible to every person who opens Blender for the first time --- or the ten-thousandth.}
+\end{quotebox}
+
+\end{document}

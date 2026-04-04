@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Agent Analysis — What the Open-Source Coding Agent Teaches
+Us — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        OOPS — Ecosystem Alignment &amp; Architecture Analysis<br>
+        PNW Research Series · <a href="../index.html">Back to OOPS Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="pi-agent-analysis-what-the-open-source-coding-agent-teaches-us">Pi
+    Agent Analysis — What the Open-Source Coding Agent Teaches Us</h1>
+    <p><strong>Date:</strong> 2026-03-31</p>
+    <h2 id="what-pi-is">What Pi Is</h2>
+    <p>Pi is a minimal terminal coding agent created by <strong>Mario
+    Zechner</strong> (creator of the libGDX game framework). It is NOT
+    Anthropic’s internal framework — it is an independent open-source
+    project (MIT licensed) that represents a fundamentally different
+    philosophy from Claude Code.</p>
+    <p><strong>Repository:</strong> <a
+    href="https://github.com/badlogic/pi-mono">github.com/badlogic/pi-mono</a>
+    <strong>Package:</strong> <code>@mariozechner/pi-coding-agent</code>
+    on npm</p>
+    <p>Where Claude Code is an integrated product with built-in features
+    (sub-agents, plan mode, teams, memory), Pi is a minimal core with
+    aggressive extensibility. Pi deliberately omits features and lets
+    users add exactly what they need through TypeScript extensions.</p>
+    <h2 id="core-architecture">Core Architecture</h2>
+    <p>Pi operates on four fundamental tools — the same four that Claude
+    Code uses as its foundation:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Pi</th>
+    <th>Claude Code</th>
+    <th>Our Usage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>read</code></td>
+    <td>Core</td>
+    <td>Read</td>
+    <td>Core</td>
+    </tr>
+    <tr>
+    <td><code>write</code></td>
+    <td>Core</td>
+    <td>Write</td>
+    <td>Core</td>
+    </tr>
+    <tr>
+    <td><code>edit</code></td>
+    <td>Core</td>
+    <td>Edit</td>
+    <td>Core</td>
+    </tr>
+    <tr>
+    <td><code>bash</code></td>
+    <td>Core</td>
+    <td>Bash</td>
+    <td>Core</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Everything else — sub-agents, planning, git checkpointing, MCP
+    servers, permission gates — is added through extensions. The system
+    prompt is under 1,000 tokens. The philosophy: “a coding agent needs
+    only four tools.”</p>
+    <h3 id="four-operating-modes">Four Operating Modes</h3>
+    <ol type="1">
+    <li><strong>Interactive</strong> — full terminal UI with message
+    queue</li>
+    <li><strong>Print/JSON</strong> — scripting and automation</li>
+    <li><strong>RPC</strong> — process integration via stdin/stdout</li>
+    <li><strong>SDK</strong> — embeddable in Node.js applications</li>
+    </ol>
+    <p>The SDK mode is particularly interesting for GSD integration — Pi
+    could be embedded as a worker inside a GSD convoy.</p>
+    <h2 id="the-skill-format-connection">The Skill Format
+    Connection</h2>
+    <p>Pi uses the <strong>agentskills.io</strong> SKILL.md format — the
+    same standard we use for our 41 skills. This means:</p>
+    <ul>
+    <li>Our skills are theoretically portable to Pi with minimal
+    adaptation</li>
+    <li>Pi users can use skills written for Claude Code</li>
+    <li>The agentskills.io ecosystem is genuinely multi-runtime</li>
+    </ul>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Pi skill format — identical to ours --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu"># My Skill</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Use this skill when the user asks about X.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Steps</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Do this</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Then that</span></code></pre></div>
+    <p>Skills are loaded from <code>~/.pi/agent/skills/</code> or
+    <code>.pi/skills/</code> — the same directory convention as Claude
+    Code’s <code>.claude/skills/</code>.</p>
+    <h2 id="typescript-extension-system">TypeScript Extension
+    System</h2>
+    <p>This is where Pi goes beyond what Claude Code offers to users.
+    Extensions are TypeScript modules that hook into Pi’s full
+    lifecycle:</p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> (pi<span class="op">:</span> ExtensionAPI) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add custom tools</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  pi<span class="op">.</span><span class="fu">registerTool</span>({ name<span class="op">:</span> <span class="st">&quot;deploy&quot;</span><span class="op">,</span> <span class="op">...</span> })<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add slash commands</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  pi<span class="op">.</span><span class="fu">registerCommand</span>(<span class="st">&quot;stats&quot;</span><span class="op">,</span> { <span class="op">...</span> })<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Hook into events</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  pi<span class="op">.</span><span class="fu">on</span>(<span class="st">&quot;tool_call&quot;</span><span class="op">,</span> <span class="kw">async</span> (<span class="bu">event</span><span class="op">,</span> ctx) <span class="kw">=&gt;</span> { <span class="op">...</span> })<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <p>Extensions can: - Replace built-in tools entirely - Add
+    sub-agents and planning modes - Implement custom compaction
+    strategies - Create permission gates and path protection - Add
+    custom UI components, editors, status lines - Implement git
+    checkpointing and auto-commit - Add SSH and sandbox execution -
+    Integrate MCP servers</p>
+    <h3 id="what-this-means-for-us">What This Means for Us</h3>
+    <p>Pi’s extension system proves that the patterns we built as skills
+    and hooks in Claude Code could be implemented as first-class
+    extensions in Pi. Our GUPP propulsion, sling-dispatch,
+    mayor-coordinator — these are behavioral patterns that map to Pi
+    extensions.</p>
+    <h2 id="multi-provider-support">Multi-Provider Support</h2>
+    <p>Pi works with virtually every LLM provider:</p>
+    <p><strong>Subscription-based:</strong> Anthropic Claude Pro/Max,
+    OpenAI ChatGPT Plus/Pro, GitHub Copilot, Google Gemini CLI, Google
+    Antigravity</p>
+    <p><strong>API-key:</strong> Anthropic, OpenAI, Azure OpenAI, Google
+    Gemini, Google Vertex, Amazon Bedrock, Mistral, Groq, Cerebras, xAI,
+    OpenRouter, Vercel AI Gateway</p>
+    <p>Custom providers via <code>models.json</code> if they support
+    OpenAI/Anthropic/Google APIs.</p>
+    <p>This aligns with our <strong>runtime-hal</strong> skill — the
+    Runtime Hardware Abstraction Layer that detects which AI assistant
+    is active. Pi’s multi-provider approach validates our
+    runtime-agnostic design.</p>
+    <h2 id="session-architecture">Session Architecture</h2>
+    <p>Pi stores sessions as JSONL with a tree structure (id/parentId).
+    Key features:</p>
+    <ul>
+    <li><strong>In-place branching</strong> without creating new session
+    files</li>
+    <li><strong>Full history preserved</strong> — compaction is lossy in
+    context but the JSONL retains everything</li>
+    <li><strong>Tree navigation</strong> via <code>/tree</code>
+    command</li>
+    <li><strong>Message queue</strong> — users can queue messages while
+    the agent works:
+    <ul>
+    <li>Enter = steering message (delivered after current tool
+    execution)</li>
+    <li>Alt+Enter = follow-up (delivered after all work completes)</li>
+    <li>Escape = abort</li>
+    </ul></li>
+    </ul>
+    <p>The message queue pattern is something Claude Code also supports
+    but Pi makes it more explicit. Our nudge-sync and mail-async
+    patterns serve a similar purpose for inter-agent communication.</p>
+    <h2
+    id="comparison-pi-vs-claude-code-vs-gsd-skill-creator">Comparison:
+    Pi vs Claude Code vs gsd-skill-creator</h2>
+    <table>
+    <colgroup>
+    <col style="width: 23%" />
+    <col style="width: 10%" />
+    <col style="width: 25%" />
+    <col style="width: 40%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Dimension</th>
+    <th>Pi</th>
+    <th>Claude Code</th>
+    <th>gsd-skill-creator</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Philosophy</td>
+    <td>Minimal core, max extensibility</td>
+    <td>Integrated product</td>
+    <td>Extension layer on Claude Code</td>
+    </tr>
+    <tr>
+    <td>Core tools</td>
+    <td>4</td>
+    <td>~10</td>
+    <td>Uses Claude Code’s tools</td>
+    </tr>
+    <tr>
+    <td>Skills format</td>
+    <td>agentskills.io</td>
+    <td>agentskills.io</td>
+    <td>agentskills.io + extensions</td>
+    </tr>
+    <tr>
+    <td>Extension model</td>
+    <td>TypeScript modules</td>
+    <td>Hooks + skills</td>
+    <td>Skills + hooks + agents + chipsets</td>
+    </tr>
+    <tr>
+    <td>Multi-agent</td>
+    <td>Via extensions</td>
+    <td>Built-in (teams, subagents)</td>
+    <td>Gastown convoy, fleet missions</td>
+    </tr>
+    <tr>
+    <td>Memory</td>
+    <td>Session JSONL</td>
+    <td>MEMORY.md + auto-memory</td>
+    <td>MEMORY.md + 58 files</td>
+    </tr>
+    <tr>
+    <td>Provider lock-in</td>
+    <td>None (multi-provider)</td>
+    <td>Anthropic only</td>
+    <td>Anthropic (via Claude Code)</td>
+    </tr>
+    <tr>
+    <td>License</td>
+    <td>MIT</td>
+    <td>Commercial</td>
+    <td>BSL 1.1</td>
+    </tr>
+    <tr>
+    <td>Sub-1000 token prompt</td>
+    <td>Yes</td>
+    <td>No (~10K+ system prompt)</td>
+    <td>No (inherits Claude Code’s)</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="what-we-can-learn-from-pi">What We Can Learn From Pi</h2>
+    <h3 id="minimal-system-prompts-work">1. Minimal System Prompts
+    Work</h3>
+    <p>Pi’s sub-1000-token system prompt proves that agents can be
+    effective with minimal instructions. Our system prompt (inherited
+    from Claude Code plus skills) is orders of magnitude larger.
+    Question: are we over-prompting? Could we achieve the same results
+    with leaner skill definitions?</p>
+    <h3 id="extensions-skills-for-behavioral-patterns">2. Extensions
+    &gt; Skills for Behavioral Patterns</h3>
+    <p>Our orchestration patterns (GUPP, DACP, convoy model) are
+    implemented as skill documents — markdown read by the LLM. Pi’s
+    extension model implements behavioral patterns as TypeScript code
+    executed by the runtime. Code is more reliable than prompt-based
+    behavior. Consider: should our most critical patterns be extensions
+    rather than skills?</p>
+    <h3 id="provider-portability-matters">3. Provider Portability
+    Matters</h3>
+    <p>Pi’s multi-provider support means a user can switch from Claude
+    to GPT to Gemini without changing their workflow. Our runtime-hal
+    skill was designed for this, but we haven’t tested it beyond Claude
+    Code. Pi proves the market wants provider agnosticism.</p>
+    <h3 id="session-trees-are-better-than-linear-history">4. Session
+    Trees Are Better Than Linear History</h3>
+    <p>Pi’s JSONL tree structure with branching is more sophisticated
+    than our linear session model. Context compaction is lossy but the
+    full history is preserved and navigable. This addresses the
+    PostCompact problem we identified in OOPS doc 04.</p>
+    <h3 id="the-message-queue-pattern">5. The Message Queue Pattern</h3>
+    <p>Pi’s explicit message queue (steering messages vs follow-ups vs
+    abort) is a cleaner model than our current approach of interleaving
+    user input with agent execution. Consider adopting this for the
+    convoy model.</p>
+    <h2 id="integration-opportunities-with-gsd2">Integration
+    Opportunities with GSD2</h2>
+    <p>The <a href="https://github.com/gsd-build/gsd-2">GSD2
+    framework</a> already supports 8 runtimes. Pi should be the 9th:</p>
+    <ol type="1">
+    <li><strong>Skill portability</strong> — Our 41 SKILL.md files are
+    already agentskills.io compatible. Test them on Pi.</li>
+    <li><strong>Extension bridge</strong> — Write a Pi extension that
+    loads GSD workflow patterns as native Pi behaviors</li>
+    <li><strong>Convoy on Pi</strong> — Pi’s SDK mode allows embedding
+    as a worker. A GSD convoy could dispatch Pi instances as lightweight
+    workers alongside Claude Code instances.</li>
+    <li><strong>Cross-runtime testing</strong> — Run the same task on
+    Claude Code and Pi, compare outputs. This feeds OPEN problem #5
+    (Non-Deterministic System Testing).</li>
+    </ol>
+    <h2 id="what-we-should-build">What We Should Build</h2>
+    <h3 id="immediate-this-week">Immediate (This Week)</h3>
+    <ul>
+    <li>Test our top 5 skills on Pi to verify agentskills.io
+    portability</li>
+    <li>Document any format differences or activation issues</li>
+    </ul>
+    <h3 id="short-term-30-days">Short-Term (30 Days)</h3>
+    <ul>
+    <li>Write a Pi extension that implements our fleet-mission
+    pattern</li>
+    <li>Add Pi as a supported runtime in runtime-hal skill</li>
+    <li>Test GSD2 workflow execution on Pi</li>
+    </ul>
+    <h3 id="medium-term-90-days">Medium-Term (90 Days)</h3>
+    <ul>
+    <li>Implement the convoy model with mixed Claude Code + Pi
+    workers</li>
+    <li>Build a skill compatibility matrix across runtimes</li>
+    <li>Contribute our patterns back to the Pi ecosystem</li>
+    </ul>
+    <h2 id="the-bigger-picture">The Bigger Picture</h2>
+    <p>Pi and Claude Code represent two valid approaches to the same
+    problem: how do you build an effective coding agent?</p>
+    <ul>
+    <li>Claude Code says: “integrate everything, optimize the
+    experience”</li>
+    <li>Pi says: “provide the minimum, let users build what they
+    need”</li>
+    </ul>
+    <p>gsd-skill-creator sits in between: we build on Claude Code’s
+    integrated foundation but extend it with our own patterns (skills,
+    agents, chipsets, orchestration). The existence of Pi proves that
+    our patterns have value beyond a single runtime. If our skills work
+    on Pi, they work anywhere that implements agentskills.io.</p>
+    <p>That’s the real lesson: <strong>build for the standard, not the
+    product.</strong> The standard is agentskills.io. The product is
+    Claude Code today, but the standard persists across products.</p>
+    <hr />
+    <p><em>Sources:</em> - <a
+    href="https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/README.md">Pi
+    Coding Agent README</a> - <a
+    href="https://github.com/disler/pi-vs-claude-code">Pi vs Claude Code
+    comparison</a> - <a
+    href="https://atalupadhyay.wordpress.com/2026/02/24/pi-agent-revolution-building-customizable-open-source-ai-coding-agents-that-outperform-claude-code/">Pi
+    Agent Revolution (blog)</a> - <a
+    href="https://www.danielkoller.me/en/blog/why-pi-is-my-new-coding-agent-of-choice">Why
+    Pi is my new coding agent (blog)</a> - <a
+    href="https://agentlas.pro/compare/pi-vs-claude-agent-sdk/">Pi vs
+    Claude Agent SDK comparison</a></p>
+    <div class="nav">
+        <a href="../index.html">← Back to OOPS Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/OOPS/">tibsfox.com/Research/OOPS</a>
+    </div>
+</body>
+</html>

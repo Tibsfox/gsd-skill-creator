@@ -1,0 +1,86 @@
+{
+  "degree": 189,
+  "artist": "Mudhoney",
+  "slug": "189-mudhoney",
+  "genre": "Punk/Grunge",
+  "energy": 7,
+  "era": "Punk/Grunge. E=7 -- THE HIP-HOP ERA IS OVER. 90 degrees of hip-hop (99-188) end. Grunge enters. Mudhoney is the foundational grunge band. v1.49.330.",
+  "location": {
+    "origin": "Central District, Seattle",
+    "formative": "Central District DIY scene. House shows. Green River lineage.",
+    "career": "Mudhoney. Sub Pop. 1988-present. Still active."
+  },
+  "formed": "Seattle, Washington",
+  "active": "1988-present",
+  "labels": ["Sub Pop"],
+  "members": [
+    {"name": "Mark Arm", "role": "vocals / guitar", "note": "Coined 'grunge.' Green River to Mudhoney. Still active."},
+    {"name": "Steve Turner", "role": "guitar", "note": "Green River to Mudhoney. Raw, distorted tone."},
+    {"name": "Dan Peters", "role": "drums", "note": "Pounding, relentless rhythm."},
+    {"name": "Guy Maddison", "role": "bass", "note": "Current bassist (replaced Matt Lukin)."}
+  ],
+  "former_members": [
+    {"name": "Matt Lukin", "role": "bass", "note": "Original bassist. Melvins alumnus."}
+  ],
+  "associated_musicians": [
+    {"name": "Green River", "relationship": "Predecessor band. Mark Arm + Steve Turner to Mudhoney; Stone Gossard + Jeff Ament to Pearl Jam."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "GENRE SHIFT: Hip-hop (99-188, 90 degrees) ends. Grunge enters at 189. The longest genre era ends at its peak (E=8). The axis shifts cleanly to Punk/Grunge.",
+      "level": "milestone",
+      "department": "engine-theory",
+      "college_path": ".college/music/theory/engine/genre-shift-hiphop-to-grunge.md",
+      "examples": [
+        "Hip-hop era: 99-188 (90 degrees).",
+        "Era ended at E=8 (absolute peak).",
+        "Grunge enters at 189 with Mudhoney.",
+        "First rock entry since degree 98."
+      ],
+      "description": "Genre shift. Hip-hop era over. Grunge enters.",
+      "genealogy": {
+        "ancestors": ["DoNormaal (188, E=8).", "Hip-hop era (99-188, 90 degrees)."],
+        "relationship": "Mudhoney at 189. The axis shifts."
+      }
+    },
+    {
+      "concept": "Sub Pop Records enters the engine. Founded 1986. Mudhoney was the first significant signing. The label that launched grunge.",
+      "level": "advanced",
+      "department": "label-theory",
+      "college_path": ".college/music/theory/labels/sub-pop-enters.md",
+      "examples": [
+        "Sub Pop founded 1986.",
+        "Mudhoney first significant signing.",
+        "'Touch Me I'm Sick' (1988) established the aesthetic.",
+        "Still independent. Still in Seattle."
+      ],
+      "description": "Sub Pop enters. The grunge label.",
+      "genealogy": {
+        "ancestors": ["Bruce Pavitt.", "Jonathan Poneman.", "Seattle indie scene."],
+        "relationship": "Mudhoney at 189. Sub Pop's cornerstone."
+      }
+    },
+    {
+      "concept": "Green River (1984-1988) splits into Mudhoney (raw, underground) and Pearl Jam (arena-ready). Two paths from one source. The split that shaped Seattle music.",
+      "level": "intermediate",
+      "department": "lineage-theory",
+      "college_path": ".college/music/theory/lineage/green-river-split.md",
+      "examples": [
+        "Green River: first grunge band.",
+        "Arm + Turner -> Mudhoney.",
+        "Gossard + Ament -> Mother Love Bone -> Pearl Jam.",
+        "Raw vs arena. Both valid."
+      ],
+      "description": "Green River genealogy. Two paths from one source.",
+      "genealogy": {
+        "ancestors": ["Green River (1984-1988).", "Seattle punk scene."],
+        "relationship": "Mudhoney at 189. The raw path."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 188, "artist": "DoNormaal (Late Career)", "relationship": "HIP-HOP ERA ENDS! E=8 was the absolute peak. 90 degrees of hip-hop end. Grunge enters at 189."},
+    {"degree": 99, "artist": "Hip-hop era begins", "relationship": "90 DEGREES! The longest genre era in engine history. 99-188. Ends at peak (E=8)."},
+    {"degree": 189, "species": "Risso's Dolphin (SPS)", "relationship": "DEGREE PAIR! Foundational band + deep-water survivor. Both scarred. Both persistent. Total E=11."}
+  ]
+}

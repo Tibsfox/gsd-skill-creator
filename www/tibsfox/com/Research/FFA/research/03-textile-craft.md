@@ -832,4 +832,22 @@ The physical techniques documented here provide ground truth for digital renderi
 
 ---
 
+---
+
+## Try This / DIY Project
+
+> **Study Guide: [Sewing Basics for Fursuit Makers](study-guides/sewing-basics-for-fursuit-makers.md)**
+> This module documents advanced textile techniques. The sewing basics study guide is the entry point --- machine threading, tension, hand stitches, faux fur cutting, and troubleshooting. Start here if the techniques in this module are new to you.
+
+> **Try Session: [Build Your First Fursuit Paws](try-sessions/first-fursuit-paws.md)**
+> Paws are the applied exercise for the skills in this module: pattern making, faux fur cutting from the backing, seam construction, pile extraction, and finishing. $30-50, 4-6 hours, wearable result.
+
+> **DIY Project: [Build a Fursuit Tail](try-sessions/fursuit-tail-construction.md)**
+> A simpler construction than paws that applies the same core techniques: cutting faux fur from the backing, sewing tapered panels, turning, stuffing, and ladder stitch closure.
+
+> **Try Session: [Sew Your First Stuffed Animal](try-sessions/first-plush-animal.md)**
+> Plush construction uses the same cutting, sewing, and stuffing techniques documented in this module, at a smaller and more forgiving scale.
+
+---
+
 *Module CRAFT-SEW. Cross-references: [CRAFT-BIO], [CRAFT-SUIT], [CRAFT-PLUSH], [CRAFT-RENDER]. Safety codes: SC-SAF, SC-IP.*

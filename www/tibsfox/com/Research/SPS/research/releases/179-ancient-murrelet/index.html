@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 179&deg; &mdash; Ancient Murrelet (shrill twitter) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #37474F, #455A64); color: #CFD8DC; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(55, 71, 79, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+    .elder-card { background: linear-gradient(135deg, #37474F, #455A64, #546E7A, #37474F); border: 2px solid #37474F; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .elder-card h3 { margin-top: 0; font-size: 1.1rem; color: #B0BEC5; }
+    .elder-card p { color: #CFD8DC; }
+    .elder-card strong { color: #ECEFF1; }
+    .departure-card { background: linear-gradient(135deg, #0D47A1, #1565C0, #1976D2, #0D47A1); border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #BBDEFB; }
+    .departure-card h3 { margin-top: 0; font-size: 1.1rem; color: #90CAF9; }
+    .departure-card p { color: #BBDEFB; }
+    .departure-card strong { color: #E3F2FD; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.chick { background: #0D47A1; }
+    .theory-icon.night { background: #311B92; }
+    .theory-icon.elder { background: #37474F; }
+    .theory-icon.alcid { background: #BF360C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #E3F2FD; color: #0D47A1; }
+    .theory-level.intermediate { background: #EDE7F6; color: #311B92; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .alcidae-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .alcidae-table th { background: #37474F; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .alcidae-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .alcidae-table tr:nth-child(even) { background: #ECEFF1; }
+    .alcidae-table tr:last-child { font-weight: 600; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">179&deg;</div>
+      <div class="release-title-block">
+        <h2>Ancient Murrelet &mdash; Shrill Twitter</h2>
+        <div class="scientific"><em>Synthliboramphus antiquus</em> (Alcidae) &mdash; E=4 &mdash; The Founding Elder</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>SIXTH ALCIDAE</strong> (174&ndash;179) &mdash; streak closes.
+      Chicks leave the nest at <strong>TWO DAYS OLD</strong>, leaping into
+      the dark sea. Named for its <strong>gray &ldquo;elder&rsquo;s shawl.&rdquo;</strong>
+      Nocturnal colony. Shrill twittering in darkness.
+      <strong>E=4. v1.49.319.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="elder-card">
+          <h3>The &ldquo;Ancient&rdquo; Name &mdash; An Elder&rsquo;s Gray Shawl</h3>
+          <p>
+            The breeding adult&rsquo;s <strong>gray back</strong> suggested to early
+            naturalists an old person&rsquo;s gray shawl. Fine <strong>white
+            streaks</strong> on the black head add to the &ldquo;aged&rdquo;
+            appearance. <em>Synthliboramphus antiquus</em> &mdash;
+            <strong>antiquus</strong> meaning &ldquo;ancient&rdquo; in Latin.
+            An understated, dignified plumage among the flashy puffins and guillemots.
+          </p>
+        </div>
+        <div class="departure-card">
+          <h3>Two-Day-Old Chicks at Sea &mdash; The Most Precocial Seabird</h3>
+          <p>
+            At <strong>1&ndash;3 days old</strong>, Ancient Murrelet chicks emerge
+            from their burrows at <strong>night</strong> and scramble toward the sea,
+            guided by <strong>parental calls.</strong> They have never eaten. They
+            cannot fly. They weigh <strong>25&ndash;30 grams.</strong> Once in the
+            water, the family swims away &mdash; potentially <strong>hundreds of
+            kilometers.</strong> The most dramatic departure in seabird biology.
+          </p>
+        </div>
+
+        <h2>Alcidae Streak Complete (174&ndash;179)</h2>
+        <table class="alcidae-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Nesting</th><th>E</th></tr></thead>
+          <tbody>
+            <tr><td>174</td><td>Pigeon Guillemot</td><td>Crevice</td><td>3</td></tr>
+            <tr><td>175</td><td>Rhinoceros Auklet</td><td>Nocturnal burrow</td><td>4</td></tr>
+            <tr><td>176</td><td>Tufted Puffin</td><td>Cliff burrow</td><td>5</td></tr>
+            <tr><td>177</td><td>Common Murre</td><td>Open cliff ledge</td><td>5</td></tr>
+            <tr><td>178</td><td>Marbled Murrelet</td><td>Old-growth tree branch</td><td>4</td></tr>
+            <tr><td>179</td><td>Ancient Murrelet</td><td>Island burrow</td><td>4</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-178 Marbled Murrelet</strong>
+            <p>MURRELET PAIR! Marbled (178) and Ancient (179). Two murrelets in sequence. Forest nester vs island burrower. Different mysteries, same family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-177 Common Murre</strong>
+            <p>CHICK DEPARTURE! Murre chick: leaps at 15-25 days. Murrelet chick: scrambles at 1-3 days. Both dramatic. Murrelet far more precocial.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-174 Pigeon Guillemot</strong>
+            <p>ALCIDAE STREAK! Guillemot opens (174). Ancient Murrelet closes (179). Six species. Six nesting strategies. Longest family streak.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-180 Harbor Seal</strong>
+            <p>TAXONOMIC SHIFT! After 6 Alcidae (birds), the engine enters MARINE MAMMALS at 180. The Alcidae streak bridges to the mammalian ocean.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon chick">2</div>
+            <div class="theory-content">
+              <h4>Two-Day Departure &mdash; Most Precocial Seabird</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Chicks leave at 1-3 days. Never eaten in nest. Cannot fly. 25-30g. Scramble to sea at night guided by parental calls. Most precocial seabird departure.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon night">N</div>
+            <div class="theory-content">
+              <h4>Nocturnal Colony &mdash; Shrill Twitter in Darkness</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Colony active at night. Shrill twittering creates eerie nocturnal soundscape. High-pitched, rapid, trilling. E=4 through context.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon elder">A</div>
+            <div class="theory-content">
+              <h4>The &ldquo;Ancient&rdquo; Plumage</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Gray back like elder's shawl. White head streaks. *antiquus* = ancient. Understated dignity among flashy Alcidae.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon alcid">6</div>
+            <div class="theory-content">
+              <h4>Alcidae Streak Closes (174&ndash;179)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Six consecutive Alcidae. Six nesting strategies. Longest family streak in the engine. The auks are complete (for now).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Ancient Murrelet</div><div class="stat-detail"><em>Synthliboramphus antiquus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Alcidae</div><div class="stat-detail">6th entry (streak closes)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Shrill twitter</div><div class="stat-detail">nocturnal, rapid, eerie</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #37474F;">E = 4</div><div class="stat-detail">penetrating, nocturnal</div></div>
+        <div class="stat-card"><div class="stat-label">Chick departure</div><div class="stat-value">1&ndash;3 days old</div><div class="stat-detail">most precocial seabird</div></div>
+        <div class="stat-card"><div class="stat-label">Chick weight</div><div class="stat-value">25&ndash;30g</div><div class="stat-detail">at sea departure</div></div>
+        <div class="stat-card"><div class="stat-label">Colony timing</div><div class="stat-value">Nocturnal</div><div class="stat-detail">active after dark</div></div>
+        <div class="stat-card"><div class="stat-label">Name meaning</div><div class="stat-value">&ldquo;Ancient&rdquo;</div><div class="stat-detail">gray elder&rsquo;s shawl</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

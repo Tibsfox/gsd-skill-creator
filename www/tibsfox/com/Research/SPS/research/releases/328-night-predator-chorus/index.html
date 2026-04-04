@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 328&deg; &mdash; GHO x2 + Coyote (Night Predator Chorus) &mdash; E=8 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0D0D1A, #1A237E, #283593); color: #9FA8DA; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 24px rgba(26,35,126,0.7); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #1A237E; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #1A237E; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .night-banner { background: linear-gradient(135deg, #0D0D1A, #1A237E); border: 2px solid #7986CB; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .night-banner h3 { margin: 0 0 0.75rem; color: #E8EAF6; font-size: 1.2rem; }
+    .night-banner p { color: #C5CAE9; margin: 0.4rem 0; line-height: 1.65; }
+    .species-stack { display: grid; gap: 0.5rem; margin: 1.5rem 0; }
+    .species-row { display: grid; grid-template-columns: 2.5rem 1fr auto; align-items: start; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 6px; }
+    .species-row.gho-m { background: #FFF8E1; border-left: 5px solid #F57F17; }
+    .species-row.gho-f { background: #FFF3E0; border-left: 5px solid #E65100; }
+    .species-row.coyote { background: #E8EAF6; border-left: 5px solid #303F9F; }
+    .species-num { font-weight: 700; font-size: 1.4rem; font-family: 'Georgia', serif; text-align: center; }
+    .gho-m .species-num { color: #F57F17; }
+    .gho-f .species-num { color: #E65100; }
+    .coyote .species-num { color: #303F9F; }
+    .species-info strong { font-size: 0.92rem; display: block; margin-bottom: 0.2rem; }
+    .gho-m .species-info strong { color: #F57F17; }
+    .gho-f .species-info strong { color: #E65100; }
+    .coyote .species-info strong { color: #303F9F; }
+    .species-info p { margin: 0; font-size: 0.82rem; color: #546E7A; font-family: system-ui, sans-serif; line-height: 1.4; }
+    .species-hz { font-size: 0.72rem; text-align: right; font-family: system-ui, sans-serif; font-weight: 600; white-space: nowrap; }
+    .gho-m .species-hz { color: #F57F17; }
+    .gho-f .species-hz { color: #E65100; }
+    .coyote .species-hz { color: #303F9F; }
+    .milestone-card { background: linear-gradient(135deg, #1A237E, #283593); border: 2px solid #FFD700; border-radius: 8px; padding: 1rem 1.25rem; margin: 1.5rem 0; color: #E8EAF6; }
+    .milestone-card strong { color: #FFD700; font-size: 1.1rem; }
+    .milestone-card p { margin: 0.3rem 0; color: #C5CAE9; font-size: 0.9rem; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #1A237E; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">328&deg;</div>
+      <div class="release-title-block">
+        <h2>GHO x2 + Coyote &mdash; Night Predator Chorus</h2>
+        <div style="font-style:italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif;">Multi-species &mdash; E=8 &mdash; FIRST CANID IN MULTI-SPECIES SPS &mdash; Two Great Horned Owls + Coyote &mdash; Forest Edge &mdash; Winter Night</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <em>Bubo virginianus</em> &times;2 + <em>Canis latrans</em> &mdash; <strong>FIRST CANID MULTI-SPECIES EVENT IN ENGINE</strong> &mdash; winter territorial peak &mdash; forest edge &mdash; E=8 nocturnal intensity
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="night-banner">
+          <h3>The Night Predator Chorus at E=8</h3>
+          <p>Two Great Horned Owls duetting in winter territory establishment. One Coyote responding with howl-yip sequences. The nocturnal acoustic exchange between the Pacific Northwest&rsquo;s apex avian predator pair and its most widespread canid. Winter forest edge, January-February. Combined frequency: 200&ndash;4,000 Hz. Combined amplitude: 80&ndash;90 dB at center of activity. FIRST CANID VOCALIZATION in a multi-species SPS event.</p>
+        </div>
+
+        <div class="milestone-card">
+          <strong>FIRST CANID MULTI-SPECIES EVENT IN SPS</strong>
+          <p>The Coyote (<em>Canis latrans</em>) appeared at SPS 208 (solo howl) and 209 (pup yipping). At degree 328, the Coyote appears for the first time simultaneously with another species in an active acoustic interaction. FIRST CANIDAE MEMBER IN MULTI-SPECIES SIMULTANEOUS SPS DOCUMENTATION.</p>
+        </div>
+
+        <h2>The Three Acoustic Voices</h2>
+        <div class="species-stack">
+          <div class="species-row gho-m">
+            <div class="species-num">&#x1D106;</div>
+            <div class="species-info">
+              <strong>GHO Male &mdash; SPS 135 / 136 / 299 / 309</strong>
+              <p>300&ndash;350 Hz fundamental. 5-note hoo-hoo-hoooo sequence. 0.4&ndash;0.8 sec per note. Total: 4&ndash;6 sec. 70&ndash;80 dB at 100m. Carries 1&ndash;2 km in still winter air. Initiates duet or responds to female.</p>
+            </div>
+            <div class="species-hz">300&ndash;<br>2,000 Hz</div>
+          </div>
+          <div class="species-row gho-f">
+            <div class="species-num">&#x2640;</div>
+            <div class="species-info">
+              <strong>GHO Female &mdash; Higher pitch (minor third above male)</strong>
+              <p>400&ndash;450 Hz fundamental. Same sequence structure. Alternates with male: female calls, male responds within 0.5&ndash;2 sec. Brief overlaps at transitions. Duet cycle repeats every 15&ndash;30 sec. Peak activity: January&ndash;February nest preparation.</p>
+            </div>
+            <div class="species-hz">400&ndash;<br>2,000 Hz</div>
+          </div>
+          <div class="species-row coyote">
+            <div class="species-num">&#x1F43A;</div>
+            <div class="species-info">
+              <strong>Coyote &mdash; SPS 208 / 209 &mdash; FIRST MULTI-SPECIES CANID</strong>
+              <p>Howl: 800&ndash;1,200 Hz rising, harmonics to 4,000 Hz, 2&ndash;5 sec, 75&ndash;85 dB at 100m. Carries 3&ndash;5 km. Howl-yip-yip-yip sequence: 3&ndash;8 yips at 1,000&ndash;3,000 Hz. Triggered by GHO duet. Pack response: 80&ndash;90 dB.</p>
+            </div>
+            <div class="species-hz">800&ndash;<br>4,000 Hz</div>
+          </div>
+        </div>
+
+        <h2>Why Coyotes Respond to Owls</h2>
+        <p>The acoustic interaction between Great Horned Owls and Coyotes is well-documented. GHOs prey on Coyote pups, creating a predator-prey relationship that may explain Coyotes&rsquo; alertness to GHO calls. Additionally, both species are territorial and may respond to any loud vocal signal in the environment as potential competition. The practical result: a GHO pair duet in winter frequently triggers Coyote howling, and Coyote howling can trigger increased GHO calling. The exchange is not aggressive encounter but acoustic cross-species territorial signaling &mdash; each species broadcasting its presence into the darkness.</p>
+
+        <h2>Winter Timing &mdash; The Peak</h2>
+        <p>January&ndash;February is the acoustic maximum because both species are simultaneously at peak vocal activity: Great Horned Owls in pre-egg pair-bond reinforcement (the earliest breeding large owl in North America), Coyotes in breeding season advertisement (peak mating February). Pacific Northwest winter nights (47&ndash;49&deg;N) provide 14&ndash;16 hours of darkness. The leafless winter forest edge provides excellent acoustic propagation: sound carries further through the winter forest than in summer. Three conditions converge: long nights, peak vocal behavior, acoustic transparency.</p>
+
+        <h2>E=8 Through Nocturnal Intensity</h2>
+        <p>Each species alone: GHO solo (SPS 135, E=5). GHO pair duet (SPS 136, E=5-6). Coyote howl (SPS 208, E=5). Together, in active acoustic interaction at the winter forest edge at night, the combined acoustic event reaches E=8. The E=8 is not about amplitude alone (80-90 dB combined) but about the quality of the nocturnal multi-species territorial exchange: three predators, two species, the darkness, winter, and the sounds of territory being established and defended simultaneously across two taxonomic families (Strigidae and Canidae).</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-135 GHO Single (E=5)</strong>
+            <p>First GHO entry. Solo territorial call. Degree 328 is the pair duet in multi-species context.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-136 GHO Pair Duet</strong>
+            <p>The duet isolated. Degree 328 is the duet plus Coyote response.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-208 Coyote Howl (E=5)</strong>
+            <p>Solo Coyote. Degree 328: FIRST CANID in multi-species event. Same species, new context.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-210 Gray Wolf Pack Howl</strong>
+            <p>Other Canidae. Wolf in wilderness. Coyote at forest edge. Different niches, same family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-309 GHO Pair (E=7)</strong>
+            <p>GHO pair in previous return. E=7 pair vs. E=8 pair + Coyote. The Coyote adds one energy unit.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-328 Seven Year Bitch metal (E=8)</strong>
+            <p>E=8 + E=8 = E=16. Maximum combined. Nocturnal predator aggression: ecological vs. cultural. First Canid + heaviest female-led band.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Night predator chorus</div>
+          <div class="stat-detail">GHO pair duet + Coyote</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 8</div>
+          <div class="stat-detail">Nocturnal multi-species intensity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Combined amplitude</div>
+          <div class="stat-value">80&ndash;90 dB</div>
+          <div class="stat-detail">At center of activity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency range</div>
+          <div class="stat-value">200&ndash;4,000 Hz</div>
+          <div class="stat-detail">GHO low to Coyote harmonic</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Forest edge</div>
+          <div class="stat-detail">PNW lowlands/foothills</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Winter</div>
+          <div class="stat-detail">Peak Jan&ndash;Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Strigidae + Canidae</div>
+          <div class="stat-detail">Two predator families</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value" style="color:#1A237E;font-size:0.85rem;">FIRST CANID MULTI-SPECIES</div>
+          <div class="stat-detail">First Canidae in simultaneous SPS event</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Seven Year Bitch (E=8)</div>
+          <div class="stat-detail">E=16. Max in sequence. Night predators.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

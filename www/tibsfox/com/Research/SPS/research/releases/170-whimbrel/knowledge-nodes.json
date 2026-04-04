@@ -1,0 +1,108 @@
+{
+  "degree": 170,
+  "species": "Whimbrel",
+  "scientific_name": "Numenius phaeopus",
+  "slug": "170-whimbrel",
+  "sound_type": "rippling curlew call -- rapid, evenly-spaced series of 7 whistled notes: 'pi-pi-pi-pi-pi-pi-pi', ~1 second total, clear, carrying, descending slightly. One of the most diagnostic shorebird calls. E=4",
+  "energy": 4,
+  "ecosystem": "Tidal flats, coastal mudflats, estuaries during migration. Breeds on Arctic/subarctic tundra. One of the most widely distributed shorebirds on Earth.",
+  "season": "Migrant through PNW. Spring (April-May) and fall (July-September). Not a common breeder or winterer in PNW.",
+  "family": "Scolopacidae (3rd entry)",
+  "order": "Charadriiformes",
+  "csv_substitute": false,
+  "original_species": "Whimbrel",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.30,
+    "lon": -122.55,
+    "description": "Whimbrel on Puget Sound tidal flats during spring and fall migration. Regular migrant at Padilla Bay, Skagit Bay."
+  },
+  "taxonomy_note": {
+    "description": "THIRD SCOLOPACIDAE entry. First curlew. Down-curved bill. Bill morphology progression: straight (snipe 168) > slightly decurved (Dunlin 169) > down-curved (Whimbrel 170). Begins curlew comparison pair with Long-billed Curlew (171).",
+    "current_family": "Scolopacidae (3rd entry)",
+    "new_family": false,
+    "family_count_in_engine": "Scolopacidae: Wilson's Snipe (168), Dunlin (169), Whimbrel (170).",
+    "name_etymology": "Numenius from Greek 'neoumenios' (new moon) -- referencing the curved bill shape. phaeopus from Greek 'phaios' (dusky) + 'pous' (foot). Whimbrel from historical English name, possibly imitative of the call.",
+    "genus_note": "Numenius -- curlews. ~8 species. The largest shorebirds. Long down-curved bills. Two in PNW: Whimbrel and Long-billed Curlew.",
+    "order_note": "Charadriiformes. Scolopacidae continuing from degrees 168-169.",
+    "family_position": "Third Scolopacidae. First curlew. Down-curved bill enters the engine."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1500-2500 Hz. Clear whistled tones.",
+    "peak_energy_band_hz": "~2000 Hz. Clean whistled quality.",
+    "song_frequency_hz": "~2000 Hz per note. 7 notes per call.",
+    "song_duration_s": "~1 second per rippling call (7 notes). Given repeatedly in flight.",
+    "note_structure": "Rippling call: 7 evenly-spaced whistled notes, 'pi-pi-pi-pi-pi-pi-pi'. Clear, slightly descending. Even spacing is diagnostic.",
+    "note_types": "Rippling call (primary -- flight/alarm), alarm (drawn-out version), display song (breeding grounds -- bubbling trill).",
+    "phrase_structure": "7-note rippling phrase. Complete in ~1 second. Repeated at intervals during flight.",
+    "timbre": "Clear, whistled, carrying. Wild, lonesome quality evoking vast distances. Clean tonal quality.",
+    "amplitude": "E=4. Strong, carrying, diagnostic. Several hundred meters range.",
+    "tempo": "7 notes in ~1 second = ~7 Hz note rate. Evenly spaced.",
+    "context": "Flight call during migration. Alarm. Territory. Given frequently in flight -- the diagnostic migrant shorebird call.",
+    "regional_variation": "Minimal. Call consistent across populations.",
+    "key_property": "RIPPLING CURLEW CALL -- 7 notes, ~1 second, clear whistled, diagnostic. First curlew. Down-curved bill. E=4. v1.49.310."
+  },
+  "plumage": {
+    "overall": "Brown streaked overall. Distinctive head pattern: dark crown with pale central stripe, bold dark eye-stripe. Long down-curved bill. Medium-large shorebird.",
+    "diagnostic_mark": "Down-curved bill. Bold head stripes (crown + eye-stripe). Brown streaked body. In flight: plain wings, no wingbar.",
+    "seasonal_variation": "Minimal. Similar year-round.",
+    "flight_pattern": "Strong, direct flight. Often gives rippling call in flight. Usually seen singly or in small groups during migration."
+  },
+  "physical_description": {
+    "overall": "Length: 40-46 cm. Weight: 270-490g. Bill: 7-9 cm, strongly down-curved. Medium-large, heavy-bodied shorebird.",
+    "diagnostic_mark": "Down-curved bill. Head stripes. Size. Rippling flight call.",
+    "field_id": "Medium-large shorebird on tidal flats during migration. Down-curved bill. Bold head stripes. Listen for diagnostic 7-note rippling call."
+  },
+  "nodes": [
+    {
+      "id": "rippling-call",
+      "type": "concept",
+      "title": "Rippling Curlew Call -- 7-Note Diagnostic",
+      "description": "Rapid, evenly-spaced series of 7 whistled notes in ~1 second. Clear, slightly descending. Instantly recognizable. One of the most diagnostic shorebird calls. The sound of vast distances.",
+      "connections": ["curlew-bill", "migration"]
+    },
+    {
+      "id": "curlew-bill",
+      "type": "concept",
+      "title": "Curlew Bill -- Down-Curved Morphology",
+      "description": "7-9 cm, strongly down-curved. Adapted for reaching into crevices and crab burrows. First curlew bill in the engine. Bill morphology progression: straight > decurved > down-curved.",
+      "connections": ["rippling-call", "curlew-pair"]
+    },
+    {
+      "id": "migration",
+      "type": "concept",
+      "title": "Incredible Migration -- Hemispheric Voyager",
+      "description": "One of Earth's great migrants. 4,000-8,000+ km between breeding and wintering. Transoceanic flights (5,000 km nonstop). Global distribution. Site fidelity to stopover locations.",
+      "connections": ["rippling-call"]
+    },
+    {
+      "id": "curlew-pair",
+      "type": "pattern",
+      "title": "Curlew Comparison Pair (170-171)",
+      "description": "Whimbrel (170): 7-9 cm bill, moderate curlew. Long-billed Curlew (171): up to 21 cm bill, extreme curlew. Comparison pair for curlew morphology and call. Short vs long.",
+      "connections": ["curlew-bill"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-169",
+      "species": "Dunlin flock",
+      "relationship": "CONSECUTIVE SCOLOPACIDAE! Dunlin (169) to Whimbrel (170). 3rd in sequence. Flock sound to individual call. Short bill to long bill."
+    },
+    {
+      "target": "SPS-168",
+      "species": "Wilson's Snipe Winnowing",
+      "relationship": "SCOLOPACIDAE STREAK! Snipe (168): straight bill, mechanical sound. Whimbrel (170): curved bill, vocal call. Bill morphology progression."
+    },
+    {
+      "target": "SPS-171",
+      "species": "Long-billed Curlew",
+      "relationship": "CURLEW COMPARISON PAIR! Whimbrel (170): 7-9 cm bill. Long-billed Curlew (171): up to 21 cm bill. Moderate vs extreme. Rippling vs rising."
+    },
+    {
+      "target": "SPS-167",
+      "species": "Killdeer",
+      "relationship": "CHARADRIIFORMES SEQUENCE! Four consecutive (167-170). Plover > snipe > sandpiper > curlew. Increasing bill specialization."
+    }
+  ]
+}

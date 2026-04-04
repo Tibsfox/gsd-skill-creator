@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 71&deg; &mdash; Red Fox &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Canidae new-family card */
+    .canidae-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 30%, #E64A19 60%, #FF5722 100%);
+      border: 3px solid #BF360C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .canidae-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFCCBC;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .canidae-card p {
+      color: #FBE9E7;
+    }
+    .canidae-card strong {
+      color: #FFFFFF;
+    }
+
+    /* Bark/scream acoustic card */
+    .bark-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+      border: 2px solid #1A1A2E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8E8F0;
+    }
+    .bark-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FF8A65;
+    }
+    .bark-card p {
+      color: #E8E8F0;
+    }
+    .bark-card strong {
+      color: #FFAB91;
+    }
+
+    /* Open country habitat card */
+    .open-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 40%, #689F38 70%, #8BC34A 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .open-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .open-card p {
+      color: #F1F8E9;
+    }
+    .open-card strong {
+      color: #FFFFFF;
+    }
+
+    /* Native fox debate card */
+    .debate-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .debate-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .debate-card p {
+      color: #EFEBE9;
+    }
+    .debate-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Elverum parallel card */
+    .elverum-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 50%, #455A64 100%);
+      border: 2px solid #1C2833;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .elverum-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .elverum-card p {
+      color: #ECEFF1;
+    }
+    .elverum-card strong {
+      color: #CFD8DC;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.canidae { background: #BF360C; }
+    .theory-icon.bark { background: #0F3460; }
+    .theory-icon.open { background: #558B2F; }
+    .theory-icon.crepuscular { background: #4A148C; }
+    .theory-icon.debate { background: #5D4037; }
+    .theory-icon.carnivore { background: #B71C1C; }
+    .theory-icon.intelligence { background: #E65100; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-icon.elverum { background: #37474F; }
+    .theory-icon.skunk-link { background: #533483; }
+    .theory-icon.raccoon-link { background: #1A237E; }
+    .theory-icon.otter-link { background: #0D47A1; }
+    .theory-icon.beaver-link { background: #4E342E; }
+    .theory-icon.owl-link { background: #311B92; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.personal { background: #FFF8E1; color: #F57F17; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">71&deg;</div>
+      <div class="release-title-block">
+        <h2>Red Fox</h2>
+        <div class="scientific">Vulpes vulpes</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      bark + screaming vixen call &mdash; open-country crepuscular/nocturnal predator, NEW FAMILY Canidae (31st family), FIRST NON-MUSTELOID CARNIVORE, tenth carnivore, twelfth mammalian entry, tenth mammalian species, first open-country mammal, second tautonym, E=5, year-round resident, open country
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Canidae New-Family Card -->
+        <div class="canidae-card">
+          <h3>Canidae Arrives &mdash; 31st Family, First Non-Musteloid Carnivore</h3>
+          <p>Nine consecutive musteloid carnivore entries. Six Mustelidae. One Mephitidae. One Procyonidae. Every carnivore in the engine from a single superfamily &mdash; Musteloidea. <strong>The Red Fox breaks the streak.</strong> Canidae is the dog family &mdash; wolves, coyotes, foxes, jackals. It belongs to the suborder Caniformia but NOT to the superfamily Musteloidea. The fox is as distant from the weasels and raccoons as taxonomy allows within Carnivora. The 31st family. The first non-musteloid carnivore. <strong>The fox enters the engine.</strong></p>
+        </div>
+
+        <!-- Bark/Scream Acoustic Card -->
+        <div class="bark-card">
+          <h3>The 72nd Acoustic Element: Bark + Screaming Vixen Call</h3>
+          <p>Two vocalizations. Two extremes. The <strong>bark</strong> is short, sharp, explosive &mdash; a territorial beacon repeating every few seconds with metronomic patience, carrying 300&ndash;500 meters across open country. The <strong>screaming vixen call</strong> is a sustained, blood-curdling shriek &mdash; 1&ndash;3 seconds of raspy wail that carries half a kilometer and is routinely mistaken for a human scream. The bark is order. The scream is chaos. No other species in 72 degrees combines such extreme vocal opposites. <strong>E=5</strong> &mdash; the highest energy in the mammalian era.</p>
+        </div>
+
+        <!-- Open Country Habitat Card -->
+        <div class="open-card">
+          <h3>Open Country &mdash; The First Open-Habitat Mammal</h3>
+          <p>Every mammal before degree 71 needed cover: water, forest, edge, or buildings. The Red Fox needs <strong>space</strong>. Grasslands. Meadows. Agricultural fields. Pastures. Clearcuts. The fox hunts by eye and ear across open terrain &mdash; the mousing pounce requires visibility and room. The fox is the first truly <strong>open-country species</strong> in the mammalian era. Not forest. Not creek. Not edge. Not urban. <strong>OPEN.</strong></p>
+        </div>
+
+        <!-- Native Fox Debate Card -->
+        <div class="debate-card">
+          <h3>The PNW Native Fox Debate</h3>
+          <p>Red Foxes in western Washington are complicated. The <strong>native Cascade Red Fox</strong> (<em>V. v. cascadensis</em>) is a mountain subspecies &mdash; subalpine meadows, glacial relict, rare, conservation concern. The <strong>introduced eastern Red Fox</strong> was brought for fur farming in the 19th century &mdash; lowland fields, feral populations, common. The lowland foxes most people encounter are likely introduced stock. One species, <strong>two conservation stories</strong>: the introduced fox thrives while the native mountain fox fades.</p>
+        </div>
+
+        <!-- Elverum Parallel Card -->
+        <div class="elverum-card">
+          <h3>The Phil Elverum / Mount Eerie Parallel</h3>
+          <p>Degree 71 pairs Red Fox with <strong>Phil Elverum / Mount Eerie</strong> in Part A &mdash; Indie/Folk, E=2, Anacortes. Both <strong>solitary</strong> &mdash; the hermit musician and the lone hunter. Both at the <strong>edges</strong> &mdash; Elverum at the edge of indie music, the fox at the edge of the field. Elverum&rsquo;s music is saturated with natural-world imagery &mdash; crows, fog, wind, mountains. The fox <strong>IS</strong> the natural world. E=5 meets E=2 &mdash; the fox screams, the hermit whispers. Both are watchful. Both are present in the landscape without dominating it.</p>
+        </div>
+
+        <h2>The Sound: Bark + Screaming Vixen Call (72nd Acoustic Element)</h2>
+        <p><strong>The bark:</strong> A short, sharp, explosive vocalization &mdash; percussive, clipped, high-pitched for a carnivore. Each bark is 0.1&ndash;0.3 seconds. Barks are produced in series of three to eight, with metronomic intervals of 3&ndash;8 seconds between each. The bark carries 300&ndash;500 meters across open country. It is a territorial beacon &mdash; &ldquo;I am here, this space is mine&rdquo; &mdash; and it repeats with the patience of a lighthouse. Produced by both sexes, year-round, peaking in the breeding season (December&ndash;February) [1, 2, 3, 8].</p>
+        <p><strong>The screaming vixen call:</strong> A sustained, blood-curdling shriek lasting 1&ndash;3 seconds. Rising pitch, sustained intensity, rapid drop. The scream is eerie, raspy, and deeply unsettling &mdash; it has been compared to a woman screaming, a child in distress, or a cat being killed. None of these comparisons are right. The vixen scream is its own thing, and it is unlike anything else in the PNW night. Produced primarily by females during the winter breeding season as a mate-attraction and estrus-advertisement call. Repeated 3&ndash;10 times in sequence with irregular intervals &mdash; you hear one scream, begin to relax, and then another rips through the darkness [1, 2, 3, 8].</p>
+        <p><strong>Human misidentification:</strong> The vixen scream is the most commonly misidentified wildlife sound in the PNW. Animal control and police departments receive calls about &ldquo;someone screaming&rdquo; in rural and suburban areas every winter. The scream activates the same alarm circuitry as a human distress call. It is genuinely disturbing.</p>
+        <p><strong>The contrast:</strong> The bark is order &mdash; short, sharp, controlled, regular, territorial. The scream is chaos &mdash; sustained, piercing, irregular, reproductive, primal. No other species in 72 degrees combines such extreme vocal opposites. The most dramatic acoustic contrast in any single species in the engine.</p>
+        <p><strong>Why E=5:</strong> The vixen scream carries 500+ meters across open country. The bark carries 300&ndash;500 meters. Both are produced in open habitat where sound propagates without forest dampening. The screaming vixen call is one of the most dramatic wildlife sounds in the PNW &mdash; a sound that stops you in your tracks. E=5 reflects the combined impact: the highest energy in the mammalian era. The fox is LOUD.</p>
+
+        <h2>Taxonomy: <em>Vulpes vulpes</em></h2>
+        <p><strong>Etymology:</strong> <em>Vulpes</em> from Latin <em>vulpes</em>, meaning &ldquo;fox.&rdquo; The species epithet repeats the genus: <em>Vulpes vulpes</em> = &ldquo;fox fox.&rdquo; A <strong>tautonym</strong> &mdash; genus and species are the same word. The second tautonym in the engine after <em>Mephitis mephitis</em> (Striped Skunk, degree 69). The tautonym says: this animal IS the word. No modifier needed. The common name &ldquo;fox&rdquo; derives from Proto-Germanic <em>*fuhsaz</em>, related to Proto-Indo-European <em>*pu&#x1e31;-</em>, meaning &ldquo;tail&rdquo; or &ldquo;bushy-tailed one.&rdquo; The fox is named for its tail [1, 2, 3].</p>
+        <p><strong>Classification:</strong> Order Carnivora, Family <strong>Canidae</strong> &mdash; the dog family. <strong>NEW FAMILY (31st)</strong>. Canidae contains approximately 13 genera and 37 species: wolves, coyotes, foxes, jackals, African wild dogs. The family is cosmopolitan &mdash; present on every continent except Antarctica. Canidae is in the suborder Caniformia but NOT in the superfamily Musteloidea. This makes the Red Fox the <strong>first non-musteloid carnivore</strong> in the engine, breaking the nine-entry musteloid streak (degrees 63&ndash;70) [1, 2, 4, 5].</p>
+        <p><strong>Range:</strong> The Red Fox (<em>Vulpes vulpes</em>) is the most widely distributed wild carnivore on Earth. Native range spans North America, Europe, Asia, and North Africa. Introduced to Australia in the 1850s for fox hunting. One species, five continents. The most successful canid on the planet [1, 2, 3].</p>
+
+        <h2>Physical Description: The Red One</h2>
+        <p><strong>Size:</strong> 900&ndash;1,120 mm total length (including tail), 3.6&ndash;6.8 kg (8&ndash;15 lbs). The tail alone is 300&ndash;450 mm &mdash; nearly a third of total length. Lean and agile &mdash; longer than the Raccoon (600&ndash;950 mm) but lighter, because the fox is built for speed, not bulk. Long legs. Narrow muzzle. Large, erect, pointed ears [1, 2, 3].</p>
+        <p><strong>The color:</strong> Rich reddish-orange over the back, sides, head, and upper tail. The most chromatically warm-toned mammal in the engine &mdash; no other entry approaches this vivid color. Black &ldquo;stockings&rdquo; on the lower legs and feet. Black ear backs. White chest and belly. And always, always: a <strong>white-tipped tail</strong>. The bushy tail (the &ldquo;brush&rdquo;) always carries a white tip &mdash; the single most diagnostic field mark. Even at distance, even at dusk, even on the run, the white tail tip identifies the fox [1, 2, 3].</p>
+        <p><strong>Color morphs:</strong> The cross fox (red-orange with a dark cross pattern on the shoulders) and silver fox (melanistic, dark silver-gray to black) are color morphs of the same species &mdash; not separate taxa. <em>Vulpes vulpes</em> in different coats.</p>
+        <p><strong>The gait:</strong> The Red Fox trots in a nearly straight line, with hindfoot tracks placed directly on forefoot tracks &mdash; direct-registering gait. The trail in snow or soft earth is a single line of prints. The fox moves through the landscape like a needle through fabric &mdash; precise, linear, minimal.</p>
+        <p><strong>Field ID:</strong> Distinguished from Coyote by smaller size, more slender build, vivid orange-red color (not gray-brown), and the white tail tip (coyotes have black tail tips). A medium-sized canid with orange-red fur, black stockings, and a white-tipped bushy tail trotting across open country at dusk is a Red Fox. No question.</p>
+
+        <h2>The Mousing Pounce</h2>
+        <p><strong>The signature hunting behavior:</strong> The fox walks slowly through open grass, head cocked, ears forward, listening for rodent movement beneath the grass or snow. When prey is located, the fox leaps high into the air &mdash; an arching, near-vertical pounce &mdash; and drives its forepaws down onto the prey. The mousing pounce is one of the most spectacular hunting behaviors of any PNW mammal [1, 2, 3].</p>
+        <p><strong>Magnetic orientation:</strong> Research suggests that Red Foxes may use the Earth&rsquo;s magnetic field to calibrate their mousing pounces. Foxes hunting on a northeast heading have significantly higher success rates, suggesting magnetoreception as a hunting aid. If confirmed, this makes the fox one of the few mammals known to use magnetic navigation for predation [1, 3].</p>
+
+        <h2>Open-Country Habitat: The First Open-Habitat Mammal</h2>
+        <p><strong>The habitat:</strong> Grasslands, meadows, agricultural fields, pastures, clearcuts, prairie remnants, rural roadsides, and open woodland margins. The fox hunts by eye and ear across open terrain. Forest is too dense for the mousing pounce. The fox needs sightlines, space, and open ground [1, 2, 3, 7].</p>
+        <p><strong>The contrast:</strong> Every mammal from degree 61 through degree 70 has been associated with cover &mdash; water, forest, edge, or urban structures. The Beaver builds in water. The mustelids hunt in forest and along streams. The Skunk uses woodland edge. The Raccoon dens in buildings. The Red Fox is the first mammal that does not need cover. It is the open-country predator &mdash; a fundamental ecological shift in the engine.</p>
+        <p><strong>Agricultural connection:</strong> The Red Fox thrives in agricultural landscape because farming creates open habitat with abundant rodents. Hay fields, crop margins, pasture edges &mdash; the fox follows agriculture as the Raccoon follows urbanism. Different human land uses, different mammalian beneficiaries.</p>
+
+        <h2>The PNW Native Fox Debate</h2>
+        <p><strong>The native fox:</strong> The Cascade Red Fox (<em>Vulpes vulpes cascadensis</em>) is a native mountain subspecies found in subalpine and alpine meadows of the Cascade Range. It is likely a glacial relict population. The Cascade Red Fox is rare, possibly declining, and is a species of conservation concern in Washington State. It lives above 1,500 meters in summer [1, 3, 6, 7].</p>
+        <p><strong>The introduced fox:</strong> In the 19th and early 20th centuries, eastern Red Foxes were brought to the Pacific Northwest for fur farming and fox hunting. Escaped and released farm foxes established feral populations in the Puget Sound lowlands. The lowland foxes that most people encounter are likely of introduced origin [1, 3, 6, 7].</p>
+        <p><strong>The genetic complexity:</strong> Some lowland Red Foxes in western Washington may be hybrids between introduced eastern stock and native Cascade populations. The genetic boundaries are blurred. One species, two origins, uncertain mixing [6, 7].</p>
+        <p><strong>The conservation paradox:</strong> The Red Fox as a species is Least Concern (IUCN) &mdash; abundant and increasing globally. But the native Cascade Red Fox may be threatened by habitat loss, climate change (warming pushes the subalpine zone higher), and genetic swamping from introduced lowland foxes. One species, two conservation stories. The engine&rsquo;s most complex native/introduced narrative.</p>
+
+        <h2>Crepuscular/Nocturnal Ecology</h2>
+        <p><strong>Activity pattern:</strong> The Red Fox is crepuscular/nocturnal &mdash; most active at dawn, dusk, and through the night. The crepuscular emphasis is distinctive: the fox hunts the edges of the light, the liminal hours when the world shifts between day and night. Dawn and dusk are fox time [1, 2, 3].</p>
+        <p><strong>The third nocturnal-primary mammal:</strong> After the Beaver&rsquo;s nocturnal chewing (62) and the Raccoon&rsquo;s strict nocturnality (70), the Red Fox is the mammalian era&rsquo;s third nocturnal-primary species. But the fox&rsquo;s crepuscular emphasis is different &mdash; the fox prefers twilight to full darkness. Dawn and dusk, not midnight.</p>
+
+        <h2>Diet: Third Consecutive Omnivore in Carnivora</h2>
+        <p><strong>The pattern continues:</strong> Striped Skunk (69), Raccoon (70), Red Fox (71). Three consecutive Carnivora omnivores. The order name describes ancestry, not diet &mdash; demonstrated three entries in a row. The Red Fox eats rodents (primary), rabbits, ground-nesting birds, insects, earthworms, fruit, berries, and garbage. The fox is a generalist &mdash; it eats what the landscape provides [1, 2, 3].</p>
+        <p><strong>Caching behavior:</strong> The fox buries surplus food at dozens or hundreds of individual cache sites across its territory &mdash; scatter caching. Each cache is separately buried and separately remembered for weeks to months. The spatial memory required is substantial. The fox thinks, remembers, and plans [1, 2, 3].</p>
+
+        <h2>Canid Intelligence</h2>
+        <p><strong>Problem-solving:</strong> Foxes are among the most intelligent PNW mammals. Complex caching behavior demonstrates spatial memory. The fox learns den sites, territorial boundaries, prey concentrations, and human patterns. In suburban areas, foxes learn which houses leave pet food out and which have dogs [1, 2, 3].</p>
+        <p><strong>Play:</strong> Red Foxes are among the most playful carnivores. Adults play &mdash; pouncing on leaves, chasing snowflakes, tossing objects, play-fighting. Play behavior persists well past juvenile development, suggesting cognitive complexity and something that might be called leisure [1, 2, 3].</p>
+
+        <h2>Reproduction</h2>
+        <p><strong>Breeding season:</strong> December&ndash;February in Washington. The vixen scream advertises estrus during these months. Gestation approximately 52 days. Litter of 4&ndash;6 kits, born March&ndash;April in underground dens [1, 2, 3].</p>
+        <p><strong>Biparental care:</strong> Both the male (dog fox) and female (vixen) provision the kits. The male brings food to the den during nursing. Some fox families include non-breeding helpers &mdash; usually female offspring from the previous year &mdash; that assist with kit-rearing. Cooperative breeding unusual among canids [1, 2, 3].</p>
+
+        <h2>The Mammalian Era Continues: Degree 71</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Habitat</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>61</td><td>American Beaver</td><td>Castoridae</td><td>Wetland/river</td><td>Tail slap alarm</td></tr>
+            <tr><td>62</td><td>American Beaver</td><td>Castoridae</td><td>Wetland/river</td><td>Nocturnal chewing</td></tr>
+            <tr><td>63</td><td>River Otter</td><td>Mustelidae</td><td>River/estuary</td><td>Social chuff (6 types)</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Mustelidae</td><td>Creek bank</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Old-growth canopy</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Dense forest</td><td>Loud scream (rare)</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Meadow-forest edge</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Open woodland</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Woodland edge</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td>70</td><td>Raccoon</td><td>Procyonidae</td><td>Riparian/urban</td><td>Churring / chittering young</td></tr>
+            <tr><td><strong>71</strong></td><td><strong>Red Fox</strong></td><td><strong>Canidae</strong></td><td><strong>Open country</strong></td><td><strong>Bark + screaming vixen call</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Eleven consecutive mammalian degrees (61&ndash;71). Twelve mammalian entries. Ten mammalian species. Two orders (Rodentia, Carnivora). Six families (Castoridae, Mustelidae, Mephitidae, Procyonidae, Canidae). Three consecutive new families (69&ndash;71). The musteloid monopoly is broken at degree 71.</p>
+
+        <h2>Family Tracker After Degree 71</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td>63, 64, 65, 66, 67, 68</td><td><strong>6 (sextet complete)</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Mephitidae</td><td>69</td><td>1</td></tr>
+            <tr><td>Procyonidae</td><td>70</td><td>1</td></tr>
+            <tr><td><strong>Canidae</strong></td><td><strong>71</strong></td><td><strong>1 (NEW &mdash; 31st family)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Thirty-one families across 72 entries. <strong>Canidae is the 31st family</strong> &mdash; three consecutive new families (Mephitidae 69, Procyonidae 70, Canidae 71). The first non-musteloid carnivore. 49 of 72 entries (68.1%) are Passeriformes. 12 of 72 entries (16.7%) are Mammalia. The mammalian era extends to eleven consecutive degrees (61&ndash;71).</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon canidae">C</div>
+            <div class="theory-content">
+              <h4>Canidae Arrives &mdash; 31st Family, First Non-Musteloid Carnivore <span class="theory-level landmark">landmark</span></h4>
+              <p>The 31st family. First non-musteloid carnivore. Canidae breaks the nine-entry musteloid monopoly in Carnivora. The dog family enters. Fourth Carnivora family represented.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bark">B</div>
+            <div class="theory-content">
+              <h4>Bark + Screaming Vixen Call &mdash; 72nd Acoustic Element <span class="theory-level landmark">landmark</span></h4>
+              <p>Two-part vocalization: bark (territorial, metronomic) and vixen scream (breeding, blood-curdling). E=5. The most dramatic acoustic contrast in any single species. The scream is mistaken for a human scream.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon open">O</div>
+            <div class="theory-content">
+              <h4>Open Country &mdash; First Open-Habitat Mammal <span class="theory-level landmark">landmark</span></h4>
+              <p>The first truly open-country species in the mammalian era. Not forest, not riparian, not edge, not urban. OPEN. Grasslands, meadows, agricultural fields. The fox needs space, not cover.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon crepuscular">D</div>
+            <div class="theory-content">
+              <h4>Crepuscular/Nocturnal &mdash; Dawn, Dusk, and Night <span class="theory-level foundational">foundational</span></h4>
+              <p>Active at dawn, dusk, and night. Third nocturnal-primary mammal. The crepuscular emphasis is distinctive &mdash; the fox hunts the edges of the light. Dawn and dusk are fox time.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon debate">N</div>
+            <div class="theory-content">
+              <h4>PNW Native Fox Debate <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Native Cascade Red Fox (mountain, conservation concern) vs. introduced eastern Red Fox (lowland, fur farming origin). One species, two conservation stories. The engine&rsquo;s most complex native/introduced narrative.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon carnivore">10</div>
+            <div class="theory-content">
+              <h4>Tenth Carnivore &mdash; Fourth Family, First Non-Musteloid <span class="theory-level foundational">foundational</span></h4>
+              <p>Carnivora grows to ten entries. Four families: Mustelidae (6), Mephitidae (1), Procyonidae (1), Canidae (1). First non-musteloid breaks the superfamily monopoly. Third consecutive omnivore.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon intelligence">I</div>
+            <div class="theory-content">
+              <h4>Canid Intelligence &mdash; Problem-Solving, Caching, Play <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Complex caching behavior with spatial memory across dozens of sites. Problem-solving. Play persists into adulthood. The fox thinks, remembers, and plays.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">11</div>
+            <div class="theory-content">
+              <h4>Eleventh Consecutive Original CSV Species <span class="theory-level foundational">foundational</span></h4>
+              <p>Degrees 61&ndash;71: ELEVEN consecutive original CSV species. Beyond the decade. Every mammalian entry is an original CSV species. The streak extends.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">12</div>
+            <div class="theory-content">
+              <h4>Twelfth Mammalian Entry, Tenth Species <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Ten mammalian species across twelve entries (61&ndash;71). Mammalian representation rises to 16.7% (12 of 72). Two orders, six families, ten species. Eleven consecutive mammalian degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon elverum">E</div>
+            <div class="theory-content">
+              <h4>Phil Elverum / Mount Eerie Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both solitary. Both edge-dwellers. Elverum&rsquo;s music saturated with natural-world imagery; the fox IS the natural world. E=5 vs. E=2 &mdash; the fox screams, the hermit whispers. Anacortes anchors both.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon skunk-link">S</div>
+            <div class="theory-content">
+              <h4>Striped Skunk Connection (SPS-069) <span class="theory-level foundational">foundational</span></h4>
+              <p>Both Carnivora nocturnal species. Both tautonyms (<em>Mephitis mephitis</em>, <em>Vulpes vulpes</em>). Different defense: spray vs. speed. Different families: Mephitidae vs. Canidae.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon raccoon-link">R</div>
+            <div class="theory-content">
+              <h4>Raccoon Connection (SPS-070) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both nocturnal generalists. Both intelligent. Both omnivorous carnivores. The raccoon manipulates with hands; the fox outmaneuvers with speed. Different families, different habitats.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon otter-link">V</div>
+            <div class="theory-content">
+              <h4>River Otter Connection (SPS-063) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Carnivora expansion: river vs. open country, aquatic specialist vs. terrestrial generalist. Both intelligent, both playful, both charismatic. Three families apart in taxonomy.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon beaver-link">B</div>
+            <div class="theory-content">
+              <h4>American Beaver Connection (SPS-061) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Ecosystem connections: the fox hunts beaver-pond margins. Beaver dams concentrate rodents and waterfowl. The beaver engineers the landscape; the fox exploits the engineering.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl-link">O</div>
+            <div class="theory-content">
+              <h4>Northern Spotted Owl Connection (SPS-004) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both nocturnal predators. Canopy vs. ground. Specialist vs. generalist. The owl drops from above; the fox pounces from below. Both iconic PNW predators.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-069: Striped Skunk</strong>
+            <p>CARNIVORA CONTINUES. Both nocturnal carnivores. Both tautonyms. Different defense &mdash; the skunk sprays, the fox runs. Different families: Mephitidae vs. Canidae. E=3 vs. E=5.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-070: Raccoon</strong>
+            <p>BOTH NOCTURNAL GENERALISTS. Both intelligent. Both omnivorous carnivores. The raccoon manipulates with hands; the fox outmaneuvers with speed. Different families (Procyonidae vs. Canidae).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-063: River Otter</strong>
+            <p>CARNIVORA EXPANSION. River vs. open country. Aquatic specialist vs. terrestrial generalist. Both social, both intelligent, both Carnivora. Three families apart in taxonomy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-061: American Beaver</strong>
+            <p>ECOSYSTEM CONNECTIONS. The fox hunts beaver-pond margins. Beaver dams concentrate rodents, waterfowl, and frogs. The beaver engineers the landscape; the fox exploits the engineering.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>BOTH NOCTURNAL PREDATORS. Canopy vs. ground. Specialist vs. generalist. The owl hunts from above in old-growth darkness; the fox pounces from below in open-country twilight.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Twelfth mammalian entry. Tenth mammalian species. Tenth Carnivora, first Canidae. NEW FAMILY (31st). First non-musteloid carnivore. Two orders, six families, ten species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Open-country habitat. First truly open-habitat mammal. Crepuscular/nocturnal predator. Native/introduced complexity. The PNW&rsquo;s most complex conservation narrative in a single species.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; Red Fox (<em>Vulpes vulpes</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;Red fox.&rdquo;</li>
+          <li>Lariviere, S. and Pasitschniak-Arts, M. (1996). &ldquo;<em>Vulpes vulpes</em>.&rdquo; <em>Mammalian Species</em> 537: 1&ndash;11.</li>
+          <li>Flynn, J.J. et al. (2005). &ldquo;Molecular phylogeny of the Carnivora (Mammalia): assessing the impact of increased sampling on resolving enigmatic relationships.&rdquo; <em>Systematic Biology</em> 54(2): 317&ndash;337.</li>
+          <li>Eizirik, E. et al. (2010). &ldquo;Pattern and timing of diversification of the mammalian order Carnivora inferred from multiple nuclear gene sequences.&rdquo; <em>Molecular Phylogenetics and Evolution</em> 56(1): 49&ndash;63.</li>
+          <li>Aubry, K.B. et al. (2009). &ldquo;Distribution and broadscale habitat relations of the Red Fox in Washington.&rdquo; <em>Northwest Science</em> 83(2): 97&ndash;108.</li>
+          <li>Perrine, J.D. et al. (2010). &ldquo;Red Fox.&rdquo; In <em>Ecology and Conservation of the Sierra Nevada Red Fox</em>. USDA Forest Service, Pacific Southwest Research Station.</li>
+          <li>Newton-Fisher, N. et al. (1993). &ldquo;The diet of foxes (<em>Vulpes vulpes</em>) in the Wytham area of Oxfordshire.&rdquo; <em>Journal of Zoology</em> 231(3): 555&ndash;566.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Red Foxes.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">71&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">Bark + Vixen Scream</div>
+          <div class="stat-detail">#72 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">Highest in the mammalian era</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">12th mammalian entry, 10th species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Canidae</div>
+          <div class="stat-detail">NEW &mdash; 31st family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">10th entry (4th family)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Bark + scream</div>
+          <div class="stat-detail">Most dramatic contrast in engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Open Country</div>
+          <div class="stat-detail">First open-habitat mammal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Resident throughout Washington</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">3.6&ndash;6.8 kg</div>
+          <div class="stat-detail">Lean, agile build</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">11th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Tautonym Pair</div>
+          <div class="stat-value">SPS-069</div>
+          <div class="stat-detail">Striped Skunk &mdash; both tautonyms</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nocturnal Generalist</div>
+          <div class="stat-value">SPS-070</div>
+          <div class="stat-detail">Raccoon &mdash; both intelligent, nocturnal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem Linkage</div>
+          <div class="stat-value">SPS-061</div>
+          <div class="stat-detail">American Beaver &mdash; fox hunts beaver ponds</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 71 of 360</p>
+  </footer>
+</body>
+</html>

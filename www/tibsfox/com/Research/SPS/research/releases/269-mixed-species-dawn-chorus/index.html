@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 269&deg; &mdash; Mixed-Species Dawn Chorus &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #E65100, #F57C00, #FF9800); color: #FFF3E0; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 24px rgba(230,81,0,0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+    .dawn-card { background: linear-gradient(135deg, #E65100 0%, #F57C00 20%, #FF9800 40%, #FFC107 60%, #FFD54F 80%, #FFF9C4 100%); border: 3px solid #E65100; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #4E342E; box-shadow: 0 0 24px rgba(230,81,0,0.4); }
+    .dawn-card h3 { margin-top: 0; font-size: 1.25rem; color: #4E342E; text-transform: uppercase; letter-spacing: 0.04em; }
+    .dawn-card p { color: #4E342E; }
+    .dawn-card strong { color: #B71C1C; }
+    .orca-approach-card { background: linear-gradient(135deg, #01579B, #0277BD, #0288D1); border: 2px solid #01579B; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E1F5FE; }
+    .orca-approach-card h3 { margin-top: 0; color: #B3E5FC; font-size: 1.1rem; }
+    .orca-approach-card p { color: #E1F5FE; margin: 0.4rem 0; }
+    .orca-approach-card strong { color: #B3E5FC; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.dawn { background: #E65100; }
+    .theory-icon.chorus { background: #F57C00; }
+    .theory-icon.edge { background: #33691E; }
+    .theory-icon.return { background: #00695C; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FBE9E7; color: #BF360C; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">269&deg;</div>
+      <div class="release-title-block">
+        <h2>Mixed-Species Dawn Chorus</h2>
+        <div style="font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif;">Multi-species community acoustic event &mdash; E=7 &mdash; BIOLOGY DEEPENS / ORCA ARC APPROACHES</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      layered polyrhythmic bird symphony &mdash; forest edge, spring dawn &mdash; <strong>20-40 species singing simultaneously</strong> &mdash; frequency partitioning, temporal partitioning, spatial partitioning &mdash; the most complex recurring acoustic event in the natural world &mdash; second biological entry after the 23-degree abiotic arc ends at degree 268
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Dawn Card -->
+        <div class="dawn-card">
+          <h3>The Dawn Chorus &mdash; The Community Sings</h3>
+          <p>
+            <strong>30-45 minutes before civil twilight:</strong> the first voices begin. By first light, 20-40 species are singing simultaneously from different heights, different frequency ranges, different microhabitats. The mixed-species dawn chorus is the natural world&rsquo;s most complex recurring acoustic event &mdash; not a concert but a community, each species in its own niche, the whole greater than any part.
+          </p>
+          <p>
+            <strong>E=7.</strong> One step above the Pacific Wren&rsquo;s E=5 at degree 268. The community is louder than the individual. The chorus deepens what the Pacific Wren began: biology returns at degree 268 with one voice at maximum complexity; at degree 269, the entire community arrives.
+          </p>
+        </div>
+
+        <!-- Orca Approach Card -->
+        <div class="orca-approach-card">
+          <h3>Orca Arc Approaches &mdash; Dawn Before Depth</h3>
+          <p>
+            Degree 270 (next): <strong>Puget Sound orca S01 pod call.</strong> The orca arc begins in full. The dawn chorus at 269 is the morning light before the marine depth &mdash; the last bird entry before the SPS track descends to Puget Sound&rsquo;s inland waters.
+          </p>
+          <p>
+            Forest edge at dawn (269) &rarr; inland sea (270). Birds to cetaceans. Air to water. The transition is one of the engine&rsquo;s most dramatic habitat shifts.
+          </p>
+        </div>
+
+        <h2>The Acoustic Ecology</h2>
+        <p>
+          The mixed-species dawn chorus works because different species occupy different acoustic niches. <strong>Frequency partitioning:</strong> high-frequency singers (Pacific Wren, Golden-crowned Kinglet) occupy the upper spectrum; low-frequency singers (Black-headed Grosbeak, Song Sparrow) occupy the lower range. The acoustic community has evolved to use the available frequency space efficiently &mdash; resource partitioning applied to sound.
+        </p>
+        <p>
+          <strong>Temporal partitioning:</strong> different species begin at different times within the dawn window. American Robins call before civil twilight; warblers join as light increases; the sparrows anchor the ground level at dawn. The chorus has a temporal structure that experienced listeners can read like a clock.
+        </p>
+        <p>
+          <strong>Spatial partitioning:</strong> canopy singers at the top (Robin, Grosbeak), understory singers at mid-height (Wilson&rsquo;s Warbler, Pacific Wren), ground-level singers at the base (Song Sparrow, Spotted Towhee). The chorus is three-dimensional, mirroring the three-dimensional structure of the forest edge habitat.
+        </p>
+
+        <h2>Why the Forest Edge</h2>
+        <p>
+          The mixed-species dawn chorus is most complex at <strong>forest edge</strong> &mdash; the transition zone between closed forest and open habitat. Forest edge holds higher species diversity than either pure forest or pure open habitat: it combines cavity-nesters and understory birds with open-habitat species. The acoustic complexity is proportional to the species diversity. The edge is the most productive acoustic environment. This is consistent with the engine&rsquo;s recurring theme: the margin, the transition zone, the edge as the place where things happen.
+        </p>
+
+        <h2>The Return Deepens</h2>
+        <p>
+          Degree 268: Pacific Wren, E=5. One species. Maximum individual complexity. Biology returns as a virtuoso.
+        </p>
+        <p>
+          Degree 269: Dawn Chorus, E=7. Twenty to forty species. Maximum community complexity. Biology returns as an orchestra.
+        </p>
+        <p>
+          The progression from individual virtuosity (268) to community symphony (269) is the engine&rsquo;s argument about the organization of the natural world: the community is the culmination.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-268 Pacific Wren (biology returns)</strong>
+            <p>First biology after 23 abiotic degrees. Individual complexity (113+ notes). The dawn chorus deepens the return: single virtuoso (268) to community orchestra (269). E=5 to E=7.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001/268 Pacific Wren (present in chorus)</strong>
+            <p>The chorus includes the Pacific Wren. The engine&rsquo;s first and most complex species is a voice in the community event at degree 269.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025 American Robin (present in chorus)</strong>
+            <p>The Robin is among the first dawn chorus voices &mdash; begins before civil twilight. Already appeared at degree 025. Returns as part of the community event.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018 Swainson&rsquo;s Thrush (present in chorus)</strong>
+            <p>The ascending spiral. Already appeared at degree 018. The Swainson&rsquo;s Thrush song is one of the chorus&rsquo;s most beautiful elements.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-270 Puget Sound Orca S01 Pod Call (next)</strong>
+            <p>ORCA ARC BEGINS at 270. Dawn chorus (bird community) precedes orca pod calls (cetacean community). Both are community acoustic events. Habitat transition: forest edge to inland sea.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon dawn">D</div>
+            <div class="theory-content">
+              <h4>Dawn Chorus &mdash; Community Acoustic Event</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>20-40 species singing simultaneously at forest edge. Frequency, temporal, and spatial partitioning. E=7. The natural world&rsquo;s most complex recurring acoustic event.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon chorus">C</div>
+            <div class="theory-content">
+              <h4>Reliability Signaling &mdash; Why Dawn</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Males sing at dawn when energy levels are naturally lower. Vigorous dawn singing honestly signals fitness. Females attend to dawn chorus performance as a fitness indicator. The hardest time to sing is when it matters most.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon edge">E</div>
+            <div class="theory-content">
+              <h4>Forest Edge &mdash; Maximum Diversity</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Forest edge holds higher species diversity than pure forest or pure open habitat. The transition zone is the most productive. The margin is where complexity lives.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon return">R</div>
+            <div class="theory-content">
+              <h4>Biology Returns &mdash; Individual to Community</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>268: Pacific Wren (1 species, E=5). 269: Dawn Chorus (20-40 species, E=7). The return deepens from virtuoso to orchestra. E=5 to E=7 as the community arrives.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Event Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Type</div>
+          <div class="stat-value">Dawn Chorus</div>
+          <div class="stat-detail">Multi-species community event</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Polyrhythmic symphony</div>
+          <div class="stat-detail">Layered simultaneous voices</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Multi-species</div>
+          <div class="stat-detail">No single taxonomic family</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #E65100;">E = 7</div>
+          <div class="stat-detail">Community &gt; individual (E=5 at 268)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Forest edge</div>
+          <div class="stat-detail">Spring dawn, PNW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Spring dawn</div>
+          <div class="stat-detail">March&ndash;June peak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Species count</div>
+          <div class="stat-value">20&ndash;40</div>
+          <div class="stat-detail">Depends on habitat quality</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Next (SPS 270)</div>
+          <div class="stat-value">Orca S01 pod</div>
+          <div class="stat-detail">ORCA ARC BEGINS</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,110 @@
+{
+  "degree": 141,
+  "species": "Northern Saw-whet Owl",
+  "scientific_name": "Aegolius acadicus",
+  "slug": "141-northern-saw-whet-owl",
+  "sound_type": "tooting too-too-too -- monotonous, repetitive series of whistled notes at ~1000 Hz, ~2 notes per second, sustained for minutes to hours; ventriloquial; metronomic regularity; the quietest owl vocalization in the Strigidae run",
+  "energy": 3,
+  "ecosystem": "Dense coniferous and mixed forest. Year-round resident in PNW mountains. Breeds in tree cavities. Strictly nocturnal. One of the most common owls in North America but one of the least seen.",
+  "season": "Year-round resident. Tooting call most frequent late January through May (breeding season). Nocturnal migration October-November. Irruptive movement linked to rodent cycles.",
+  "family": "Strigidae (7th consecutive: 135-136-137-138-139-140-141)",
+  "order": "Strigiformes",
+  "csv_substitute": false,
+  "original_species": "Northern Saw-whet Owl",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -121.80,
+    "description": "Northern Saw-whet Owls resident in forested areas throughout the Cascades and Olympics. Lower-elevation migration in winter."
+  },
+  "taxonomy_note": {
+    "description": "First Northern Saw-whet Owl entry. Seventh consecutive Strigidae. Fourth genus (Aegolius) in the run. Robin-sized -- one of the smallest owls. Nocturnal migration mystery. E=3 reflects monotonous, minimal tooting. Approaching Picidae nonet record.",
+    "current_family": "Strigidae (7th consecutive, 135-141)",
+    "new_family": false,
+    "family_count_in_engine": "Strigidae: eighth entry total. Seven consecutive at 135-141.",
+    "name_etymology": "Aegolius from Greek 'aegolios,' a type of owl. acadicus from Acadia (Nova Scotia), where the type specimen was collected.",
+    "genus_note": "Aegolius -- first entry. Fourth genus in the Strigidae run (after Bubo, Strix, Asio).",
+    "order_note": "Strigiformes. Eighth entry. Seven consecutive at 135-141.",
+    "family_position": "Strigidae continues for seventh consecutive degree. Approaching the Picidae nonet record. Two more to tie, three to break."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Tooting: ~1000 Hz fundamental with harmonics. Pure-toned whistle. Saw-sharpening call: 2000-4000 Hz sweep.",
+    "peak_energy_band_hz": "Tooting: ~1000 Hz. In the range of maximum human hearing sensitivity.",
+    "song_frequency_hz": "Tooting: ~1000 Hz. Saw-sharpening: 2000-4000 Hz.",
+    "song_duration_s": "Tooting: sustained for minutes to hours (15-30+ minutes continuous). Individual notes: 0.2-0.3 seconds with 0.2-0.3 seconds silence.",
+    "note_structure": "TOOTING: Single repeated note, ~1000 Hz, ~2 per second, indefinitely sustained. No variation in pitch, amplitude, or rhythm. Metronomic.",
+    "note_types": "Tooting call (primary, monotonous whistle), saw-sharpening call (rising rasp), whine (female), bark (alarm).",
+    "phrase_structure": "No phrase structure. Single note repeated without variation. The absence of phrase structure is the defining characteristic.",
+    "timbre": "Pure-toned whistle. Clean, simple. No harmonics emphasis. The purity contributes to the ventriloquial quality.",
+    "amplitude": "E=3. Moderate. Carries 200-400 meters in still forest. Softer than Barred Owl hoot. The repetition compensates for low amplitude.",
+    "tempo": "~2 notes per second. Metronomic. 100-130 notes per minute. Highly regular.",
+    "context": "Breeding advertisement (primary). Males call from fixed song posts near nest cavities. Strictly nocturnal. Peak calling late January through May.",
+    "regional_variation": "Minimal. The tooting call is consistent across the species' North American range.",
+    "key_property": "MONOTONOUS TOOTING -- E=3 METRONOMIC MINIMALISM. ~1000 Hz, ~2 notes/sec, sustained minutes to hours. No variation. Ventriloquial. Robin-sized. Most common but least seen owl. Migration mystery revealed by banding. Seventh consecutive Strigidae. Fourth genus (Aegolius). Energy descent continues."
+  },
+  "plumage": {
+    "overall": "Brown above with white spotting. White below with brown streaking. Reddish-brown facial disc with white eyebrow streaks. Bright yellow eyes. No ear tufts. Juveniles: solid chocolate-brown below with white forehead triangle.",
+    "diagnostic_mark": "Large round head with no ear tufts. Bright yellow eyes. Reddish-brown facial disc. White eyebrow streaks. Small size (robin-sized).",
+    "seasonal_variation": "Minimal. Juvenile plumage dramatically different from adult.",
+    "flight_pattern": "Direct, rapid wingbeats. Low flight through forest. Nocturnal. Rarely seen in flight."
+  },
+  "physical_description": {
+    "overall": "Length: 18-21 cm. Weight: 54-151 g. Wingspan: 42-48 cm. One of the smallest owls in North America. Smaller than a robin. Large head relative to body.",
+    "diagnostic_mark": "Tiny size, large round head, yellow eyes, no ear tufts. Extreme tameness -- freezes when discovered, often allowing close approach.",
+    "field_id": "Listen for the monotonous 'too-too-too' tooting at night in forested areas. If you find a day roost, the tiny owl with a large round head pressed against a tree trunk is unmistakable. Will often allow very close approach."
+  },
+  "nodes": [
+    {
+      "id": "monotonous-tooting",
+      "type": "concept",
+      "title": "Monotonous Tooting -- Metronomic Minimalism",
+      "description": "~1000 Hz, ~2 notes/sec, sustained minutes to hours. No variation. Ventriloquial. E=3. The quietest, most minimal owl vocalization in the Strigidae run. The owl equivalent of a metronome.",
+      "connections": ["migration-mystery", "robin-sized-predator", "strigidae-seven"]
+    },
+    {
+      "id": "migration-mystery",
+      "type": "concept",
+      "title": "Migration Mysteries -- The Invisible Movement",
+      "description": "Nocturnal migration unknown until 1990s banding stations. Hundreds captured per station per season. Irruptive pattern linked to rodent cycles. Possibly one of the most numerous raptors in North America. Hidden by small size and nocturnal habits.",
+      "connections": ["monotonous-tooting", "robin-sized-predator"]
+    },
+    {
+      "id": "robin-sized-predator",
+      "type": "concept",
+      "title": "Robin-Sized Predator -- Tiny but Lethal",
+      "description": "18-21 cm. Smaller than a robin. Freezes when discovered. Caches frozen prey and 'incubates' to thaw. Asymmetric ears for sound localization. Hunts deer mice from low perches.",
+      "connections": ["monotonous-tooting", "migration-mystery"]
+    },
+    {
+      "id": "strigidae-seven",
+      "type": "pattern",
+      "title": "Seventh Consecutive Strigidae (135-141)",
+      "description": "Seven consecutive owl entries. Four genera (Bubo, Strix, Asio, Aegolius). Five species. Approaching the Picidae nonet record (9). Energy descent: peak at E=6 (138), now E=3 (141). Two more to tie the record.",
+      "connections": ["monotonous-tooting", "energy-descent"]
+    },
+    {
+      "id": "energy-descent",
+      "type": "pattern",
+      "title": "Energy Descent in the Strigidae Run",
+      "description": "Energy pattern: 4, 5, 4, 6, 4, 5, 3. Peak at degree 138 (E=6 caterwauling). Descending since. E=3 at 141 is the lowest point. The owls are getting smaller, quieter, more secretive.",
+      "connections": ["strigidae-seven", "monotonous-tooting"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-139",
+      "species": "Long-eared Owl",
+      "relationship": "MINIMAL PAIR! Both quiet, nocturnal, forest-dwelling. Long-eared (E=4) vs. Saw-whet (E=3). Both secretive. Saw-whet is even smaller and more minimal."
+    },
+    {
+      "target": "SPS-135-140",
+      "species": "Strigidae series",
+      "relationship": "STRIGIDAE SEVEN! Seven consecutive. Four genera. Five species. Energy peak at E=6 (138), now E=3 (141). Approaching the Picidae nonet record."
+    },
+    {
+      "target": "SPS-138",
+      "species": "Barred Owl caterwauling",
+      "relationship": "ENERGY CONTRAST! E=6 caterwauling (138) vs. E=3 tooting (141). Maximum drama vs. maximum minimalism. The peak and the trough of the Strigidae run."
+    }
+  ]
+}

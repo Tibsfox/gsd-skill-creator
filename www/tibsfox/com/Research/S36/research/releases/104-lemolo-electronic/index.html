@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 104&deg; &mdash; Lemolo (Electronic) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .return-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E3F2FD;
+    }
+    .return-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #BBDEFB; font-family: system-ui, sans-serif; }
+    .return-card p { color: #E3F2FD; margin: 0.5rem 0; }
+    .return-card strong { color: #90CAF9; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>104 &mdash; Lemolo (Electronic)</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Electronic Pop &mdash; Genre Stage 86 &mdash; E=3 &mdash; Return Artist</h3>
+      <p>
+        <strong>Lemolo</strong> returns &mdash; first appeared at degree 56 (Indie Folk, dream haze).
+        Now in <strong>electronic context</strong>. <strong>SEVENTH return artist</strong> in the engine.
+        Electronic Pop at Genre Stage 86. E=3 (up from E=2).
+        Acoustic element 105. Pattern 105.
+        <strong>Back-to-back return artists</strong> at degrees 103&ndash;104.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">104&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Lemolo (Electronic)</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Electronic Pop</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 86</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="synth-card">
+          <h4>The Dream Circuit &mdash; Analog Haze Becomes Digital Pulse</h4>
+          <p>
+            The <strong>dream circuit</strong> is the 105th acoustic element.
+            Where degree 56 centered on Lemolo&rsquo;s <strong>dream haze</strong> &mdash;
+            the folk-based atmospheric quality of guitar reverb and layered vocals &mdash;
+            the electronic-context reframing reveals the
+            <strong>circuitry underneath the haze</strong>. Synthesizers, drum machines,
+            and electronic production replace acoustic instruments as the foundation.
+            The dream persists &mdash; but now it <strong>pulses</strong>.
+            <strong>Analog haze becomes digital pulse.</strong>
+          </p>
+        </div>
+
+        <div class="return-card">
+          <h4>The Seventh Return &mdash; Back-to-Back Returns at 103&ndash;104</h4>
+          <p>
+            Lemolo returns at degree 104 &mdash; first appeared at degree 56 (Indie Folk, dream haze, E=2).
+            Now in <strong>electronic context</strong> at E=3 (energy rises with electronic production density).
+            <strong>Seventh return artist</strong>. Combined with Briana Marela electronic at degree 103,
+            this creates <strong>back-to-back return artists</strong> &mdash; two consecutive degrees
+            featuring artists returning in electronic context. The electronic reframing becomes
+            a <strong>sustained engine pattern</strong>, not an isolated event.
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 86 &middot; Electronic Pop &middot; E=3 &middot; 105th Acoustic Element &middot; 105th Pattern &middot; Return Artist</h4>
+          <p>
+            <strong>Lemolo</strong> returns at Genre Stage 86. <strong>E=3</strong>.
+            Electronic Pop. Seventh return artist. Self-released. The electronic era
+            continues &mdash; ten electronic-adjacent entries since degree 86. Back-to-back
+            electronic returns at 103&ndash;104 establish the electronic reframing as
+            a sustained engine pattern.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 86: Electronic Pop</h2>
+          <p>
+            Degree 104 reaches <strong>Genre Stage 86</strong>. <strong>Electronic Pop</strong>
+            describes Lemolo in electronic context &mdash; the dream-haze practice from
+            degree 56 (Indie Folk) reframed as electronic production. The genre classification
+            shifts from Indie Folk (at 56) to Electronic Pop (at 104) because the electronic
+            foundation replaces the acoustic folk foundation.
+          </p>
+          <p>
+            Distinguished from <strong>Briana Marela electronic</strong> (degree 103, Art Pop/Electronic) &mdash;
+            Briana Marela dissolves voice into electronic texture. Lemolo keeps voice
+            <strong>atop</strong> the electronic foundation &mdash; the dream persists as
+            song structure while the accompaniment transforms from acoustic to electronic.
+          </p>
+          <p>
+            Distinguished from <strong>The Postal Service</strong> (degree 86, Electronic Pop) &mdash;
+            Postal Service&rsquo;s Electronic Pop is glitch-based, collaborative, and laptop-assembled.
+            Lemolo&rsquo;s Electronic Pop is <strong>dream-based</strong>, duo-driven, and
+            built from the same atmospheric impulse as the folk original.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 105: The Dream Circuit</h2>
+          <p>
+            The <strong>dream circuit</strong> is the one hundred fifth acoustic element.
+            It describes the quality produced when a dream-haze folk aesthetic is rebuilt
+            with electronic instruments &mdash; when the atmospheric quality of reverb-drenched
+            guitar and layered vocals is replicated through synthesizers and drum machines,
+            preserving the dreamy quality while adding an underlying <strong>pulse</strong>
+            that the acoustic version lacked.
+          </p>
+          <p>
+            Contrast with the <strong>layered dissolution</strong> (degree 103, Briana Marela electronic) &mdash;
+            voice dissolves into electronic texture. The dream circuit keeps the voice
+            <em>afloat</em> on the electronic surface. Contrast with the <strong>dream haze</strong>
+            (degree 56, Lemolo original) &mdash; acoustic foundation, no pulse.
+            The dream circuit adds the pulse. Contrast with the <strong>melodic ache</strong>
+            (degree 86, Postal Service) &mdash; glitch-based. The dream circuit is
+            <strong>haze-based</strong>.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 105: The Sustained Electronic Return</h2>
+          <p>
+            The <strong>sustained electronic return</strong> is the 105th artist-city pattern.
+            It describes the pattern where multiple artists return in electronic context
+            across consecutive degrees &mdash; establishing the electronic reframing as
+            a sustained engine mechanism rather than an isolated event. Briana Marela (103)
+            and Lemolo (104) are back-to-back electronic returns. The pattern confirms
+            that the electronic lens is a <strong>systematic analytical tool</strong>,
+            not a one-off.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">S36-056</span> Lemolo (original) &mdash; Indie Folk, dream haze, E=2. First appearance. Acoustic foundation. The electronic-context reframing at 104 rebuilds the dream with electronic instruments.</li>
+            <li><span class="ref-degree">S36-103</span> Briana Marela electronic &mdash; Back-to-back electronic return. Briana Marela dissolves voice into texture. Lemolo keeps voice atop electronic foundation. Two return strategies.</li>
+            <li><span class="ref-degree">S36-093</span> NAVVI &mdash; Dream Pop/Electronic. NAVVI&rsquo;s electronic atmosphere is fully electronic from the start. Lemolo arrives at electronic from folk origins.</li>
+            <li><span class="ref-degree">S36-072</span> Briana Marela &mdash; Art Pop. Briana Marela original at degree 72, Lemolo original at degree 56. Both return in electronic context (103, 104). Parallel return trajectories.</li>
+            <li><span class="ref-degree">S36-086</span> The Postal Service &mdash; Electronic Pop at degree 86. Postal Service&rsquo;s Electronic Pop is glitch-based. Lemolo&rsquo;s Electronic Pop is dream-based. Same genre, different aesthetic ancestry.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Dream Circuit</h4>
+              <div class="level advanced">Advanced</div>
+              <p>105th acoustic element. Dream-haze folk rebuilt with electronic instruments. The dream persists but now it pulses. Analog haze becomes digital pulse.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Sustained Electronic Return</h4>
+              <div class="level advanced">Advanced</div>
+              <p>105th artist-city pattern. Back-to-back electronic returns at 103-104 establish electronic reframing as a sustained engine pattern. Systematic, not one-off.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Electronic Pop &mdash; Genre Stage 86</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>Dream-based Electronic Pop. Distinguished from glitch-based Postal Service (86) and voice-dissolved Briana Marela (103). Same genre family, different aesthetic ancestry.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 &mdash; Energy Rises with Electronic Context</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>E=3 at degree 104 (up from E=2 at degree 56). Electronic production density increases the energy footprint. Second consecutive energy rise via electronic reframing (103 and 104).</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">104</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">86</span></div>
+          <div class="stat-row"><span class="stat-label">Acoustic Element</span><span class="stat-value">105</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">105</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Lemolo</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Electronic Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 3</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-Released</span></div>
+          <div class="stat-row"><span class="stat-label">Context</span><span class="stat-value">Electronic</span></div>
+          <div class="stat-row"><span class="stat-label">Original</span><span class="stat-value">Degree 56</span></div>
+          <div class="stat-row"><span class="stat-label">Return #</span><span class="stat-value">7th</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
