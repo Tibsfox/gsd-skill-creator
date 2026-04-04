@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed the Bees — GSD Research Mission Package</title>
+<style>
+:root { --bg:#04060c; --panel:#080c16; --border:rgba(255,255,255,0.06); --text:#c8d0e0; --dim:rgba(255,255,255,0.35); --green:#1B5E20; --green-light:#4CAF50; --blue:#1565C0; --brown:#4E342E; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.7; }
+a { color:var(--green-light); text-decoration:none; }
+a:hover { color:#81C784; }
+header { background:linear-gradient(135deg,#0a1a0a 0%,var(--green) 30%,#0a2a15 60%,var(--bg) 100%); padding:2.5rem 2rem; text-align:center; border-bottom:3px solid var(--green-light); }
+header h1 { font-size:2rem; color:#fff; font-weight:400; }
+header .sub { color:var(--green-light); font-size:0.95rem; font-style:italic; margin-top:0.3rem; }
+header .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; font-family:system-ui,sans-serif; }
+main { max-width:800px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1.2rem; color:#fff; margin:2rem 0 0.8rem; font-weight:400; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.5rem; margin:0.8rem 0; display:block; transition:border-color 0.2s; }
+.card:hover { border-color:rgba(76,175,80,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.3rem; }
+.card p { font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; }
+.card .size { font-size:0.75rem; color:var(--green-light); font-family:monospace; margin-top:0.5rem; }
+.stages { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; margin:1rem 0; }
+.stage { background:var(--panel); border:1px solid var(--border); border-radius:4px; padding:1rem; text-align:center; }
+.stage .num { font-size:1.5rem; color:var(--green-light); font-family:system-ui,sans-serif; }
+.stage .label { font-size:0.75rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+footer { max-width:800px; margin:0 auto; padding:1.5rem; text-align:center; font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+</style>
+</head>
+<body>
+<header>
+<h1>Feed the Bees</h1>
+<div class="sub">A PNW Pollinator Guide — GSD Research Mission Package</div>
+<div class="meta">Pacific Northwest | Indoor & Outdoor Growing | Grassroots Conservation</div>
+</header>
+<main>
+
+<div class="stages">
+<div class="stage"><div class="num">1</div><div class="label">Vision Guide</div></div>
+<div class="stage"><div class="num">2</div><div class="label">Research Reference</div></div>
+<div class="stage"><div class="num">3</div><div class="label">Mission Package</div></div>
+</div>
+
+<h2>Package Contents</h2>
+
+<a href="mission.pdf" class="card" download>
+<h3>mission.pdf</h3>
+<p>Complete 16-page research mission document. Three stages: Vision Guide (problem statement, bloom succession, modules), Research Reference (PNW ecology, garden design, global conservation), Mission Package (wave plan, deliverables, test plan, crew manifest).</p>
+<div class="size">PDF — 16 pages — Download</div>
+</a>
+
+<a href="mission.tex" class="card" download>
+<h3>mission.tex</h3>
+<p>XeLaTeX source. Recompile with: <code>xelatex -interaction=nonstopmode mission.tex</code> (3 passes). Requires DejaVu fonts, tcolorbox, booktabs, tabularx, fancyhdr packages.</p>
+<div class="size">.tex source — editable</div>
+</a>
+
+<h2>Three-Stage Structure</h2>
+
+<div class="card">
+<h3>Stage 1: Vision Guide</h3>
+<p>Problem statement (5 concrete problems), core concept (bloom succession), 5 research modules (PNW ecology, garden design, indoor growing, global conservation, getting-started guides), chipset configuration (Squadron, 12 roles), 12 success criteria, scope boundaries, through-line connecting to Fox Companies habitat restoration vision.</p>
+</div>
+
+<div class="card">
+<h3>Stage 2: Research Reference</h3>
+<p><strong>Module 1:</strong> 600 native bee species in WA, 6 families profiled, seasonal bloom calendar (28 plants, Feb-Oct), threats (habitat loss, pathogen spillover, climate), convergence zone habitat (118 species in 3 urban sites). <strong>Module 2:</strong> 40+ plant profiles with Latin names, bloom times, light/pollinator data. Bloom succession month-by-month. Bee lawn alternatives. Container gardens. <strong>Module 3:</strong> CCD breakthrough (USDA-ARS 2025), $235-577B/year pollination value, 4 grassroots programs, 3 citizen science programs, EU/US policy. All from USDA, Xerces, WSU/OSU Extension, UN FAO, IPBES.</p>
+</div>
+
+<div class="card">
+<h3>Stage 3: Mission Package</h3>
+<p>Wave execution plan (4 waves, 2 parallel tracks). 9 deliverables. 8 components with model assignments (25% Opus / 65% Sonnet / 10% Haiku). 32 tests (5 safety-critical, 14 core, 8 integration, 5 edge). Squadron crew manifest (12 roles). Estimated: 8 context windows across 2 sessions.</p>
+</div>
+
+<h2>How to Use</h2>
+
+<div class="card">
+<h3>Execute with GSD</h3>
+<p>This package is ready for handoff to gsd-skill-creator. The component specs in Stage 3 define the work. Each component maps to one agent invocation. The wave plan defines execution order. To execute:<br><br>
+<code>1. Read the wave plan (Stage 3)<br>
+2. Create .planning/ structure<br>
+3. /gsd:plan-phase for each component<br>
+4. /gsd:execute-phase with wave-based parallelization</code></p>
+</div>
+
+<div class="card">
+<h3>Recompile LaTeX</h3>
+<p>Edit mission.tex and recompile:<br>
+<code>xelatex -interaction=nonstopmode mission.tex<br>
+xelatex -interaction=nonstopmode mission.tex<br>
+xelatex -interaction=nonstopmode mission.tex</code><br>
+Three passes required for TOC, cross-references, and page numbers. Requires TeX Live with XeLaTeX.</p>
+</div>
+
+</main>
+<footer>
+GSD Research Mission Package — Feed the Bees<br>
+Vision &rarr; Research &rarr; Mission | Full Pipeline | Squadron Activation<br>
+April 3, 2026 | Artemis II Mission Series
+</footer>
+</body>
+</html>
