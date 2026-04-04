@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 266&deg; &mdash; The Accused &mdash; E=8 &mdash; Crossover Thrash &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #4A148C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #4A148C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #EDE7F6; color: #4A148C; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #4A148C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #EDE7F6; font-style: italic; color: #4A148C; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .island-card { background: linear-gradient(135deg, #1A237E 0%, #283593 40%, #3949AB 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .island-card h3 { margin-top: 0; color: #E8EAF6; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .island-card p { color: #C5CAE9; margin: 0.5rem 0; }
+    .island-card strong { color: #E8EAF6; }
+    .martha-card { background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .martha-card h3 { margin-top: 0; color: #F3E5F5; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .martha-card p { color: #E1BEE7; margin: 0.5rem 0; }
+    .martha-card strong { color: #F3E5F5; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>266 &mdash; The Accused (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">266&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">The Accused</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Crossover Thrash</span>
+          <span class="label-badge">Nastymix / Combat</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>FIRST WHIDBEY ISLAND BAND &mdash; FIRST ISLAND BAND &mdash; FIRST NON-MAINLAND ENTRY.</strong> 266 degrees into the engine and the geography leaves the mainland for the first time. Oak Harbor, Whidbey Island. The Accused are crossover thrash pioneers. Martha Splatterhead. E=8 for the second consecutive degree.
+        </div>
+
+        <div class="island-card">
+          <h3>Oak Harbor, Whidbey Island &mdash; First Island Entry</h3>
+          <p>Whidbey Island is the <strong>largest island in Puget Sound</strong> and the second-largest in the contiguous United States. Oak Harbor sits on the island&rsquo;s north end, adjacent to <strong>Naval Air Station Whidbey Island</strong>. The engine reaches the island for the first time at degree 266. To get here from mainland Seattle you cross <strong>Deception Pass</strong> &mdash; 180 feet above turbulent tidal currents &mdash; or take the Mukilteo ferry. The Accused formed in this geographic isolation and built one of the most important crossover thrash catalogs in American punk history.</p>
+        </div>
+
+        <div class="martha-card">
+          <h3>Martha Splatterhead &mdash; The Horror-Punk Persona</h3>
+          <p>Martha Splatterhead is The Accused&rsquo;s signature creation: a horror-punk alter ego drawn from the splatter film tradition (John Carpenter, Dario Argento) that gives the band&rsquo;s maximum-energy music a <strong>theatrical frame</strong>. The Martha Splatterhead character says: this is performance, this is cinema, this is horror movie entertainment. The extreme music is not nihilism &mdash; it is <strong>theater at E=8 velocity</strong>.</p>
+          <p><em>The Return of Martha Splatterhead</em> (1986) is the defining statement. One of the most memorable personae in Northwest punk history.</p>
+        </div>
+
+        <h2>Crossover Thrash: The Genre</h2>
+        <p>Crossover thrash emerged in the mid-1980s at the intersection of hardcore punk and thrash metal. Hardcore brought fast tempos, short songs, punk politics, DIY ethics. Thrash metal brought technical guitar playing, palm-muted riffing, metal production. Crossover thrash is the synthesis &mdash; songs at hardcore velocity with metal&rsquo;s guitar technique.</p>
+
+        <p>Among the defining bands: D.R.I. (Houston), Suicidal Tendencies (Los Angeles), Corrosion of Conformity (North Carolina), and from the Northwest &mdash; <strong>The Accused</strong>. The Accused tend toward the punk end of the crossover spectrum: shorter songs, rawer production, more hardcore directness than technical showmanship. The Martha Splatterhead theatrical element distinguishes them from all other crossover thrash bands.</p>
+
+        <blockquote>"Nastymix Records: Sir Mix-a-Lot's hip-hop label. The Accused: crossover thrash from Whidbey Island. The same label. This is Seattle music in the 1980s -- small enough that all the misfits knew each other, big enough to matter."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Nastymix / Combat: Two Worlds, One Band</h2>
+        <p>The Accused&rsquo;s label history is one of the engine&rsquo;s more surprising institutional facts. <strong>Nastymix Records</strong> was founded in 1985 by Sir Mix-a-Lot &mdash; Seattle hip-hop artist, not yet nationally famous, running an independent label on the strength of regional success. The Accused, a crossover thrash band from a Puget Sound island, signed with Nastymix. This is not an accident of categorization; it is a document of Seattle&rsquo;s music scene in the mid-1980s.</p>
+        <p>The Accused also released material through <strong>Combat Records</strong>, the heavy metal independent that also released D.R.I., Corrosion of Conformity, and Megadeth&rsquo;s early material. Nastymix + Combat: punk enough for the hip-hop label, metal enough for the metal label. A band that doesn&rsquo;t fit neatly anywhere fits everywhere.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Return of Martha Splatterhead (1986)</h4>
+            <span class="level milestone">Nastymix</span>
+            <p>The breakthrough and the definitive statement. Martha Splatterhead fully realized. Crossover thrash from Oak Harbor at maximum energy. The album that established The Accused's reputation.</p>
+          </div>
+          <div class="theory-card">
+            <h4>More Fun Than an Open Casket Funeral (1987)</h4>
+            <span class="level advanced">Nastymix / Combat</span>
+            <p>Second album. Tighter production, more developed arrangements. The horror-punk aesthetic continues in the title. Both Nastymix and Combat involvement.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The Curse of Martha Splatterhead (1988)</h4>
+            <span class="level advanced">Combat</span>
+            <p>Most metal-influenced recording. Longer songs, more complex arrangements, thrash metal production values. Combat Records home for the most technically ambitious work.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Straight Razor (1990)</h4>
+            <span class="level intermediate">Combat</span>
+            <p>Late-period original lineup. The band through the decade's end. Some lineup evolution but the core Martha Splatterhead identity maintained.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">265</span> Ten Minute Warning &mdash; E=8 streak continues. Proto-punk Capitol Hill to crossover thrash Oak Harbor. Maximum energy sustained.</li>
+          <li><span class="ref-degree">267</span> Candlebox (hard rock) &mdash; E=7. Energy steps down from maximum. Hard rock context.</li>
+          <li><span class="ref-degree">268</span> The Sonics &mdash; E=8 returns. Proto-Punk. Tacoma forefathers. Third engine appearance.</li>
+          <li><span class="ref-degree">SPS 266</span> Rockslide &mdash; E=7. Accelerating stone-fall percussion. Mass-movement arc continues in Cascade terrain.</li>
+          <li><span class="ref-degree">future</span> Sir Mix-a-Lot &mdash; Nastymix label connection established here. Hip-hop arc to cross with punk arc.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">266 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Crossover Thrash</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1981&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Oak Harbor</span></div>
+          <div class="stat-row"><span class="stat-label">Island</span><span class="stat-value">Whidbey Island</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Nastymix / Combat</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals (early)</span><span class="stat-value">Blaine Cook</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Tommy Niemeyer</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Alex Sibbald</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Dana Collins</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Milestones</h4>
+          <div class="stat-row"><span class="stat-label">Geography</span><span class="stat-value">FIRST ISLAND</span></div>
+          <div class="stat-row"><span class="stat-label">Streak</span><span class="stat-value">E=8 (2nd consec.)</span></div>
+          <div class="stat-row"><span class="stat-label">Label peer</span><span class="stat-value">Sir Mix-a-Lot</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Rockslide</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Persona</h4>
+          <div class="stat-row"><span class="stat-label">Character</span><span class="stat-value">Martha Splatterhead</span></div>
+          <div class="stat-row"><span class="stat-label">Tradition</span><span class="stat-value">Horror-punk</span></div>
+          <div class="stat-row"><span class="stat-label">Debut album</span><span class="stat-value">1986</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

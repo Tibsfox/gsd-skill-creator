@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 267&deg; &mdash; Mudslide (Oso type) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3E2723, #4E342E); color: #BCAAA4; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(62, 39, 35, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+    .memorial-card { background: #ECEFF1; border: 2px solid #90A4AE; border-left: 6px solid #455A64; border-radius: 0 6px 6px 0; padding: 1.5rem 1.75rem; margin: 1.5rem 0; }
+    .memorial-card h3 { margin-top: 0; color: #37474F; font-size: 1.1rem; font-weight: 700; }
+    .memorial-card p { color: #455A64; margin: 0.5rem 0; font-style: normal; line-height: 1.7; }
+    .geo-card { background: linear-gradient(135deg, #3E2723 0%, #4E342E 50%, #5D4037 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #BCAAA4; }
+    .geo-card h3 { margin-top: 0; color: #EFEBE9; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .geo-card p { color: #BCAAA4; margin: 0.5rem 0; }
+    .geo-card strong { color: #EFEBE9; }
+    .arc-card { background: linear-gradient(135deg, #37474F 0%, #455A64 60%, #546E7A 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .arc-card h3 { margin-top: 0; color: #CFD8DC; font-size: 1.1rem; }
+    .arc-card p { color: #ECEFF1; margin: 0.4rem 0; }
+    .arc-card strong { color: #CFD8DC; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.rumble { background: #3E2723; }
+    .theory-icon.geo { background: #4E342E; }
+    .theory-icon.arc { background: #37474F; }
+    .theory-icon.warning { background: #0277BD; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #EFEBE9; color: #3E2723; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">267&deg;</div>
+      <div class="release-title-block">
+        <h2>Mudslide (Oso type)</h2>
+        <div class="scientific">Deep rumbling wall movement &mdash; E=8 &mdash; Geophysics Arc closes (261&ndash;267)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      unstable slope &mdash; glacial till on clay substrate &mdash; episodic (heavy precipitation / rain-on-snow) &mdash; <strong>deep low-frequency rumble</strong>, sustained duration, infrasound component &mdash; E=8 maximum for the arc
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Memorial acknowledgment -- respectful, factual, first -->
+        <div class="memorial-card">
+          <h3>Oso, Washington &mdash; March 22, 2014</h3>
+          <p>The Oso landslide occurred on March 22, 2014, in Snohomish County, Washington. The slide destroyed the Steelhead Haven neighborhood in the North Fork Stillaguamish River valley and claimed <strong>43 lives</strong>. It was the deadliest landslide in United States history at that time. The community of Oso and all who were lost are remembered with respect.</p>
+          <p>This research documents the geological and acoustic mechanisms of this type of event. Understanding these mechanisms is how communities protect themselves. It is offered in that spirit.</p>
+        </div>
+
+        <div class="geo-card">
+          <h3>The Geology: Glacial Till on Clay</h3>
+          <p>The Oso landslide resulted from specific documented geological conditions: <strong>glacial till</strong> (unsorted glacially deposited sediment: sand, gravel, boulders) over a <strong>lacustrine clay layer</strong> deposited in a glacially formed lake. Clay saturated with water loses shear strength dramatically &mdash; it does not drain quickly because fine grain size resists water movement. When the clay layer beneath the heavy glacial till became sufficiently saturated, shear strength dropped below the weight above. The slope failed along the clay interface. The saturated materials then <strong>behaved as a viscous fluid</strong> and flowed rapidly across the valley floor. This type of geological structure is present throughout the Puget Lowland and Cascade foothills.</p>
+        </div>
+
+        <div class="arc-card">
+          <h3>Mass-Movement Trilogy Closes &mdash; Arc Maximum E=8</h3>
+          <p><strong>265:</strong> Glacier calving (ice) &mdash; sharp crack + rumble cascade &mdash; E=6</p>
+          <p><strong>266:</strong> Rockslide (rock) &mdash; accelerating stone-fall percussion &mdash; E=7</p>
+          <p><strong>267:</strong> Mudslide / Oso type (saturated soil) &mdash; deep rumbling wall movement &mdash; <strong>E=8 maximum</strong></p>
+          <p>The arc closes. After degree 267, the Pacific Wren returns biology to the engine at 268.</p>
+        </div>
+
+        <h2>The Acoustic Event: Deep Rumbling Wall Movement</h2>
+        <p>A major debris flow produces an acoustic signature fundamentally different from the other mass-movement events in this trilogy. Unlike the sharp crack of glacial ice fracture or the dry percussive impact of rockfall, a major debris flow produces <strong>deep, sustained, low-frequency rumbling</strong>. The sound comes from the mass of saturated material in continuous motion. The viscous flow of semi-liquid debris produces low-frequency acoustic energy that is <em>felt</em> as much as heard.</p>
+
+        <p>The <strong>infrasound component</strong> (below 20 Hz, below human hearing threshold) is substantial. People in proximity to a major debris flow often report a physical sensation &mdash; the sound felt in the chest before it is perceived consciously as audible. This is the infrasound at work. The duration of the main flow can extend from tens of seconds to several minutes &mdash; much longer than a glacier calving event or most rockslides. The sustained deep rumble over extended duration is the most acoustically overwhelming of the three mass-movement events.</p>
+
+        <h2>Acoustic Monitoring and Early Warning</h2>
+        <p>The distinctive low-frequency and infrasound signature of debris flows has become an important tool in monitoring and early warning systems. Networks of seismic and acoustic sensors deployed along debris-flow-prone valleys can detect the characteristic signal of a flow in its initiation phase &mdash; potentially before the flow reaches populated areas downstream. Following the Oso event, monitoring in the North Fork Stillaguamish valley and other Cascade drainages was upgraded. Understanding debris flow acoustics is directly connected to community safety.</p>
+
+        <h2>A PNW-Wide Geological Condition</h2>
+        <p>The geological conditions at Oso &mdash; glacial deposits over weaker sediments, slopes steepened by river erosion &mdash; are present throughout the Puget Lowland and Cascade foothills. The rivers that drain the Cascades actively undercut valley walls as they meander. Forest cover provides some protection (root systems bind near-surface soil); its removal can increase slope susceptibility. The geological hazard is regional, not local. Understanding it is part of living in the PNW.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-265 Glacier Calving Mt Rainier</strong>
+            <p>First of mass-movement trilogy. Ice fracture, E=6. The trilogy begins with the least intense event. Energy sequence: 6 → 7 → 8 across materials ice → rock → saturated soil.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-266 Rockslide</strong>
+            <p>Second of mass-movement trilogy. Accelerating stone-fall percussion, E=7. The bridge between ice and saturated soil. Dry percussion contrasts with low-frequency rumble.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-248 Rainforest Rain on Big-Leaf Maple</strong>
+            <p>Same moisture cycle, different scale. The gentle PNW rain of degree 248 and the catastrophic response of degree 267 are linked by the same hydrological process operating at opposite ends of the scale.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-268 Pacific Wren rain-day chorus</strong>
+            <p>Biology returns. Maximum contrast: from E=8 debris flow (abiotic, overwhelming) to Pacific Wren's 113+ note rain-day chorus (living, intricate). The engine crosses this boundary in one degree.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon rumble">R</div>
+            <div class="theory-content">
+              <h4>Deep Rumbling Wall Movement &mdash; Low-Frequency Dominance</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Viscous saturated debris in motion → low-frequency acoustic energy. Felt before heard. Infrasound component. Sustained duration (tens of seconds to minutes). E=8 maximum for the Geophysics arc.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon geo">G</div>
+            <div class="theory-content">
+              <h4>Glacial Till on Clay &mdash; The Failure Mechanism</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Clay saturates → shear strength drops → glacial till above exceeds clay's capacity → failure along clay interface → saturated mass flows as viscous fluid. The specific geological mechanism of the Oso type.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon warning">W</div>
+            <div class="theory-content">
+              <h4>Acoustic Monitoring &mdash; Sound as Early Warning</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Low-frequency and infrasound signature detectable by sensor networks. Post-Oso monitoring upgrades in Cascade drainages. Understanding debris flow acoustics = community safety.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon arc">A</div>
+            <div class="theory-content">
+              <h4>Geophysics Arc Closes &mdash; Maximum E=8</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Degree 267 closes the 7-degree Geophysics arc (261-267). The arc's highest energy event. After the mass-movement trilogy (265-267), biology returns to the engine at degree 268.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Mudslide</div>
+          <div class="stat-detail">Oso type: glacial till on clay</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #3E2723;">E = 8</div>
+          <div class="stat-detail">Maximum for Geophysics arc</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Unstable slope</div>
+          <div class="stat-detail">Glacial deposits over clay</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Episodic</div>
+          <div class="stat-detail">High-precip / rain-on-snow events</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Geophysics</div>
+          <div class="stat-detail">Final of arc 261&ndash;267</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Arc position</div>
+          <div class="stat-value">3 of 3</div>
+          <div class="stat-detail">Mass-movement trilogy closes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Next</div>
+          <div class="stat-value">Pacific Wren</div>
+          <div class="stat-detail">Biology returns at degree 268</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Candlebox</div>
+          <div class="stat-detail">E=7 &mdash; hard rock, Seattle</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
