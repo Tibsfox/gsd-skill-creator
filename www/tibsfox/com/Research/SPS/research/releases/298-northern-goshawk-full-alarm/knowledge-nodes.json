@@ -1,0 +1,56 @@
+{
+  "degree": 298,
+  "species": "Northern Goshawk",
+  "scientific_name": "Accipiter gentilis",
+  "slug": "298-northern-goshawk-full-alarm",
+  "sound_type": "sustained ka-ka-ka assault -- rapid staccato alarm call fired in continuous bursts for 5-15 minutes during nest defense; fundamental frequency 800-2000 Hz; carries 200-400 meters through dense conifer forest; escalates to physical diving attack with talon contact; most aggressive nest defense of any North American raptor",
+  "energy": 7,
+  "ecosystem": "Nest defense -- dense old-growth and mature second-growth conifer forest; nesting territory with active nest; requires large territories (1,500-3,000+ acres) of structurally complex forest",
+  "season": "Resident (year-round in suitable Pacific Northwest habitat; alarm behavior most intense April-August during nesting season; some altitudinal migration in winter)",
+  "family": "Accipitridae",
+  "genus": "Accipiter",
+  "order": "Accipitriformes",
+  "conservation_status": "Least Concern (IUCN). Pacific Northwest populations dependent on old-growth and mature forest availability. Federal Late-Successional Reserves (Northwest Forest Plan 1994) provide primary habitat protection. Old-growth indicator species.",
+  "milestone": "Third Accipitridae entry in SPS engine. First Accipiter genus documented (degrees 221 and 297 documented Haliaeetus). FIRST ACCIPITER IN ENGINE. Old-growth indicator species. Most aggressive nest defense of any North American raptor. Opens second consecutive Accipitridae entry at 297-298.",
+  "coordinates": {
+    "lat": 47.5,
+    "lon": -121.5,
+    "description": "Pacific Northwest breeding distribution: Cascades (primary), Olympics, Blue Mountains, Okanogan Highlands. Requires old-growth and mature conifer forest. Cascades breeding confirmed at multiple sites in national forests and national parks. Resident year-round in suitable habitat."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Ka-ka-ka alarm -- rapid staccato notes delivered in continuous bursts. Harsher and more insistent than any other PNW raptor alarm. Not modulated -- sustained at full intensity for duration of threat.",
+    "frequency_range": "800-2,000 Hz fundamental; harmonics extending higher. Frequency range appropriate for forest propagation. Carries 200-400 meters through closed canopy.",
+    "duration": "5-15 minutes of continuous alarm documented. Unusual among raptors which typically alarm in bursts with pauses. The Goshawk's continuous alarm is diagnostically distinctive.",
+    "physical_escalation": "Alarm → diving attack from behind → talon contact with back of head or shoulders → multiple simultaneous attacks by mated pair. Head wounds documented. Helmet requirement for nest surveys. The most physically committed nest defense in North American raptors.",
+    "e7_calibration": "E=7: sustained without modulation, physical contact accepted, real injury risk to intruder. Equal to Bald Eagle combat (297) by different mechanism: prolonged alarm + physical attack vs. aerial tumble."
+  },
+  "nodes": [
+    {
+      "id": "first-accipiter",
+      "type": "milestone",
+      "title": "First Accipiter Genus in Engine",
+      "description": "The Accipiter genus enters the SPS engine at degree 298. Two previous Accipitridae entries (221, 297) documented the sea eagle genus Haliaeetus. Degree 298 introduces Accipiter: short rounded wings, long tail, forest pursuit specialist, fundamentally different ecology and morphology from the soaring sea eagle. The Accipitridae family now documented with two distinct genera.",
+      "connections": ["nest-defense-most-aggressive", "old-growth-indicator"]
+    },
+    {
+      "id": "nest-defense-most-aggressive",
+      "type": "concept",
+      "title": "Most Aggressive Raptor Nest Defense",
+      "description": "The Northern Goshawk's willingness to make physical contact with human intruders is unique among North American raptors. Bald Eagles display but rarely contact; Red-tailed Hawks alarm but rarely contact. The Goshawk attacks and makes contact. Head wounds documented. Helmet protocol required. Sustained alarm without pause is similarly unique. E=7 is the correct calibration.",
+      "connections": ["first-accipiter"]
+    },
+    {
+      "id": "old-growth-indicator",
+      "type": "concept",
+      "title": "Old-Growth Indicator Species",
+      "description": "Northern Goshawk requires large territories of structurally complex old-growth or mature forest. Shares this dependency with Northern Spotted Owl (SPS 4, Strigidae) and Pileated Woodpecker (SPS 54, 108, 300, Picidae). Three old-growth specialists across three families: Strigidae, Accipitridae, Picidae. Northwest Forest Plan Late-Successional Reserves provide primary habitat protection.",
+      "connections": ["first-accipiter"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-221", "species": "Bald Eagle contact call", "relationship": "First Accipitridae E=5. Haliaeetus genus. Raptor era opens."},
+    {"target": "SPS-297", "species": "Bald Eagle aerial combat", "relationship": "Second Accipitridae E=7. Haliaeetus return. Locked-talon combat. Two consecutive Accipitridae both at E=7 at 297-298."},
+    {"target": "SPS-4", "species": "Northern Spotted Owl", "relationship": "Old-growth indicator species: Strigidae. Shares old-growth dependency with Goshawk (Accipitridae) and Pileated Woodpecker (Picidae)."},
+    {"target": "S36-298", "artist": "Treepeople return", "relationship": "E=8 + E=7 = E=15. Maximum pairing in return cluster. Unrelenting maximum effort: post-hardcore E=8 + raptor alarm E=7."}
+  ]
+}

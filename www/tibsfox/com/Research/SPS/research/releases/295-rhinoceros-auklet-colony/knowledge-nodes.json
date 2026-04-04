@@ -1,0 +1,61 @@
+{
+  "degree": 295,
+  "species": "Rhinoceros Auklet Colony Night",
+  "scientific_name": "Cerorhinca monocerata",
+  "slug": "295-rhinoceros-auklet-colony",
+  "sound_type": "burrow-entering moans -- low rhythmic moaning calls (200-600 Hz) from birds arriving at and entering burrow entrances at night; both arriving bird and waiting mate calling in exchange; acoustic pair-bond navigation in complete darkness; crash-landing wingbeat sounds in vegetation",
+  "energy": 6,
+  "ecosystem": "Island -- vegetated rocky islands with soil burrowing substrate; outer Pacific coast and Salish Sea; Protection Island NWR (Strait of Juan de Fuca, ~17,000 breeding pairs), Destruction Island, Three Arch Rocks NWR; strictly nocturnal colony activity",
+  "season": "Summer nights (colony occupancy April-August; peak acoustic activity 1-2 hours after sunset during incubation and chick-provisioning; strictly nocturnal arrivals and departures)",
+  "family": "Alcidae",
+  "order": "Charadriiformes",
+  "conservation_status": "Least Concern (IUCN globally). Pacific Northwest populations stable and healthy, unlike some alcid species. Protection Island colony healthy. Climate change prey availability changes monitored as long-term risk factor.",
+  "milestone": "Second ALCIDAE in SPS engine at degree 295. Nocturnal complement to Tufted Puffin (294). Together the two consecutive Alcidae entries document the outer coast rocky island alcid colony ecosystem across its full temporal range: day (Tufted Puffin) and night (Rhinoceros Auklet).",
+  "coordinates": {
+    "lat": 48.1,
+    "lon": -122.9,
+    "description": "Protection Island NWR (Juan de Fuca Strait, Jefferson County WA -- ~17,000 breeding pairs, closed to public), Destruction Island (Jefferson County WA), Three Arch Rocks NWR (Oregon coast). Pelagic non-breeding season: offshore Pacific."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Nocturnal burrow-entrance moaning. Low rhythmic moans at burrow entrance: both arriving bird and waiting mate calling in exchange. Acoustic pair-bond confirmation in complete darkness.",
+    "moan_call": "Low, rhythmic moan, approximately 0.5-1 second duration. Fundamental frequency 200-600 Hz. Quality: somewhat mournful, somewhat rhythmic. Not sharp, not piercing. Deep and slow and insistent.",
+    "frequency_range": "200-600 Hz. The lowest-frequency alcid vocalization in the engine. Fundamentally different from tern entries and even from Tufted Puffin grunt calls.",
+    "colony_texture": "Hundreds of burrow pairs calling simultaneously at peak arrival (1-2 hours after sunset). Crash-landing wingbeats in vegetation. Wind over island. Ocean background. Continuous low-frequency moan-chorus filling the night air.",
+    "e6_calibration": "E=6 as atmospheric total immersion: the low moaning fills the entire night acoustic space without peaks or alarm intensity. Deep presence without piercing quality. The most atmospherically distinctive entry in the coastal seabird arc."
+  },
+  "nodes": [
+    {
+      "id": "nocturnal-strategy",
+      "type": "biology",
+      "title": "Strict Nocturnality -- Predator Avoidance",
+      "description": "Rhinoceros Auklet's strict nocturnality at colony sites is behavioral predator avoidance. Primary avian predators (Bald Eagles, Peregrine Falcons) are diurnal. By restricting all colony activity to full darkness, the auklet removes itself almost entirely from their predation window. Cost: colony must operate on sound and spatial memory. Benefit: dramatically reduced predation at the colony's most vulnerable moments.",
+      "connections": ["acoustic-navigation", "protection-island"]
+    },
+    {
+      "id": "acoustic-navigation",
+      "type": "biology",
+      "title": "Acoustic Navigation in Darkness",
+      "description": "Evidence suggests Rhinoceros Auklets use vocalization and mate responses to navigate to their specific burrow entrance among hundreds of identical soil openings in complete darkness. The moan exchange (arriving bird calls; mate inside burrow responds) is both location signal and pair-bond confirmation. One of the most behaviorally sophisticated elements of any alcid colony biology.",
+      "connections": ["nocturnal-strategy"]
+    },
+    {
+      "id": "protection-island",
+      "type": "geography",
+      "title": "Protection Island NWR -- Major Pacific Northwest Colony",
+      "description": "364-acre island, Strait of Juan de Fuca, Jefferson County WA. One of largest Rhinoceros Auklet colonies in world: ~17,000 breeding pairs. Closed to public to protect nocturnal colony arrivals/departures. Visible from Dungeness Spit and Sequim. Annual USFWS population monitoring. Climate-sensitive indicator for PNW marine ecosystem health.",
+      "connections": ["nocturnal-strategy"]
+    },
+    {
+      "id": "alcidae-temporal-arc",
+      "type": "arc",
+      "title": "Alcidae Temporal Arc -- Day and Night",
+      "description": "Tufted Puffin (294) diurnal + Rhinoceros Auklet (295) nocturnal = the full temporal range of the outer coast alcid colony documented across two consecutive entries. Same family, same ecosystem (rocky island), same season (summer), but inverted temporal strategies. The engine's first two Alcidae entries are a complementary pair.",
+      "connections": ["nocturnal-strategy"]
+    }
+  ],
+  "cross_references": [
+    {"target": "S36-295", "artist": "Malfunkshun", "relationship": "E=7 + E=6 = E=13. Bainbridge Island band (the island glam punk origin) pairs with island alcid colony night (the nocturnal outer coast colony). Both island-derived, both full commitment in darkness."},
+    {"target": "SPS-294", "species": "Tufted Puffin colony", "relationship": "First Alcidae. Diurnal. Day to night: the two consecutive entries document the alcid colony's full temporal range. Tufted Puffin grunt (200-800 Hz) / Rhinoceros Auklet moan (200-600 Hz): similar frequency range, different behavioral context and temporal window."},
+    {"target": "SPS-296", "species": "Peregrine Falcon stoop", "relationship": "The Peregrine Falcon's daytime hunting is the primary selective pressure behind the Rhinoceros Auklet's nocturnality. The engine places the prey's adaptation (295) immediately before the predator's maximum-performance event (296). Ecological logic preserved in engine sequence."}
+  ]
+}
