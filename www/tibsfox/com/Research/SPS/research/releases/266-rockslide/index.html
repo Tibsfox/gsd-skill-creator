@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 266&deg; &mdash; Rockslide &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4E342E, #6D4C41); color: #D7CCC8; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(78, 52, 46, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+    .rock-card { background: linear-gradient(135deg, #4E342E 0%, #6D4C41 40%, #795548 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .rock-card h3 { margin-top: 0; color: #EFEBE9; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .rock-card p { color: #D7CCC8; margin: 0.5rem 0; }
+    .rock-card strong { color: #EFEBE9; }
+    .arc-card { background: linear-gradient(135deg, #37474F 0%, #455A64 60%, #546E7A 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .arc-card h3 { margin-top: 0; color: #CFD8DC; font-size: 1.1rem; }
+    .arc-card p { color: #ECEFF1; margin: 0.4rem 0; }
+    .arc-card strong { color: #CFD8DC; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.rock { background: #4E342E; }
+    .theory-icon.accel { background: #6D4C41; }
+    .theory-icon.geo { background: #37474F; }
+    .theory-icon.season { background: #5D4037; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">266&deg;</div>
+      <div class="release-title-block">
+        <h2>Rockslide</h2>
+        <div class="scientific">Accelerating stone-fall percussion &mdash; E=7 &mdash; Geophysics Arc / Mass-Movement Trilogy (265&ndash;267)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      cliff face &mdash; Cascade canyon terrain &mdash; episodic (spring peak) &mdash; <strong>accelerating percussion</strong> from initial impact through full cascade &mdash; freeze-thaw weathering, volcanic rock joint systems, tectonic uplift &mdash; E=7
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="rock-card">
+          <h3>Cascade Geology: Young Mountains, Constant Erosion</h3>
+          <p>The Cascades are built on <strong>Juan de Fuca Plate subduction</strong> &mdash; ongoing tectonic uplift opposed by continuous erosion. Volcanic rock fractured along cooling joints creates natural failure planes. <strong>Freeze-thaw cycles</strong> widen fractures through winter; spring melt releases the failures. Canyon walls throughout the range are inherently unstable: exposed faces of slopes that erosion has undercut. Rockslides are not rare events in the PNW &mdash; they are routine features of the mountain landscape.</p>
+        </div>
+
+        <div class="arc-card">
+          <h3>Mass-Movement Trilogy: 265&ndash;267</h3>
+          <p><strong>265:</strong> Glacier calving (ice) &mdash; sharp crack + rumble cascade &mdash; E=6</p>
+          <p><strong>266:</strong> Rockslide (rock) &mdash; accelerating stone-fall percussion &mdash; E=7</p>
+          <p><strong>267:</strong> Mudslide (saturated soil) &mdash; deep rumbling wall movement &mdash; E=8</p>
+          <p>Ice &rarr; rock &rarr; saturated soil. Energy escalates. Duration increases. The Cascades reshaping themselves in three acoustic languages.</p>
+        </div>
+
+        <h2>The Acoustic Event: Accelerating Stone-Fall Percussion</h2>
+        <p>A rockslide&rsquo;s acoustic signature evolves in phases. The <strong>initial impact</strong> is one or a few rock blocks striking cliff face below &mdash; sharp, dry, percussive. Higher frequency than glacial ice fracture. The rock impact has a hard, dense quality: this is stone striking stone.</p>
+        <p>Then the <strong>acceleration phase</strong>: falling rocks hit the slope below, bounce, and break apart. Each fragment follows its own trajectory; impacts multiply rapidly as fracture multiplies the number of acoustic events. The percussion <em>accelerates</em> &mdash; the time between impacts decreases as more fragments impact simultaneously. This acceleration is the defining character of the rockslide&rsquo;s acoustic signature.</p>
+        <p>At the height of a substantial rockslide, the event is <strong>continuous percussion</strong> &mdash; overlapping impacts varying in intensity as different-sized fragments strike different surfaces. Large blocks: deep, resonant. Small fragments: higher-frequency clatter. Gravity as drummer, the canyon as acoustic chamber.</p>
+
+        <h2>Spring Peak: When Rockslides Happen</h2>
+        <p>Spring is the season of maximum rockslide frequency. Winter&rsquo;s freeze-thaw has prepared many rock masses for failure: water penetrates fractures, freezes (expanding ~9% in volume, forcing fractures wider), and withdraws. After enough cycles, a rock mass that had been stable suddenly has no support remaining. Spring melt lubricates these prepared failure planes with water. March through May in the Cascades sees the highest frequency of significant rockslide events. WSDOT&rsquo;s SR-20 (North Cascades Highway) reopening process each spring regularly involves clearing rockslide debris from the road.</p>
+
+        <h2>Documented Terrain</h2>
+        <p>US-2 through the Skykomish Canyon on the west side of Stevens Pass runs through steep canyon walls prone to rockfall &mdash; rockfall nets and catchment ditches are visible along this corridor. SR-20 through the North Cascades has documented rockslide history at multiple locations. The Skagit River Canyon, Icicle Creek Canyon near Leavenworth, and the moraine terrain around Mt Rainier&rsquo;s glaciers all have active rockfall histories. These are not abstract geological facts &mdash; they are events that close highways, alter river channels, and occasionally affect people.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-265 Glacier Calving Mt Rainier</strong>
+            <p>Direct predecessor. Both are mass-movement events. Glacier calving (ice, E=6) and rockslide (rock, E=7) are acoustically related: crack + cascade. Different materials, related logic. Energy escalates from ice to rock.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-267 Mudslide (Oso type)</strong>
+            <p>Direct successor. Third mass-movement event. Saturated soil, E=8. The cascade of failure types completes: ice → rock → soil. Each material produces a distinct acoustic character and energy level.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-259 Thunderstorm Cascades</strong>
+            <p>Triggering weather. Intense precipitation events saturate rock fractures and trigger rockslides. The thunderstorm at 259 and the rockslide at 266 are connected by the same hydrological system.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-268 Pacific Wren (biology returns)</strong>
+            <p>After the mass-movement trilogy, the Pacific Wren restores biology at degree 268. 23 consecutive abiotic degrees end. The wren's rain-day chorus contrasts maximally with the rockslide's dry percussive cascade.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon rock">I</div>
+            <div class="theory-content">
+              <h4>Initial Impact &mdash; Stone on Stone</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>First rock contact: sharp, dry, percussive. Higher frequency than ice fracture. Dense, hard acoustic quality. The rockslide announces itself with a single struck note before accelerating into cascade.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon accel">A</div>
+            <div class="theory-content">
+              <h4>Acceleration Phase &mdash; Percussion Multiplying</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Fracture multiplies fragments; impacts multiply; percussion accelerates. The defining characteristic of a rockslide's acoustic signature. Gravity as the rhythm that accelerates toward maximum.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon geo">G</div>
+            <div class="theory-content">
+              <h4>Cascade Geology &mdash; Uplift vs. Erosion</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Juan de Fuca subduction produces tectonic uplift. Erosion opposes it. Volcanic rock joint systems provide natural failure planes. Freeze-thaw widens fractures. The rockslide is geology made audible.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon season">S</div>
+            <div class="theory-content">
+              <h4>Spring Peak &mdash; When Prepared Failures Release</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Winter freeze-thaw prepares; spring melt releases. March-May peak rockslide frequency. WSDOT SR-20 reopening involves regular debris clearing. The episodic event with seasonal pattern.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Rockslide</div>
+          <div class="stat-detail">Accelerating stone-fall percussion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #4E342E;">E = 7</div>
+          <div class="stat-detail">High percussion intensity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Cliff face</div>
+          <div class="stat-detail">Cascade canyon terrain</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Episodic</div>
+          <div class="stat-detail">Peak: spring thaw (Mar&ndash;May)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Geophysics</div>
+          <div class="stat-detail">Arc: degrees 261&ndash;267</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Arc position</div>
+          <div class="stat-value">2 of 3</div>
+          <div class="stat-detail">Mass-movement trilogy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">The Accused</div>
+          <div class="stat-detail">E=8 &mdash; crossover thrash, Whidbey Island</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
