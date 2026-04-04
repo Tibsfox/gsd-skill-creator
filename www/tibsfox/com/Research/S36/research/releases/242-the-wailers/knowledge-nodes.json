@@ -1,0 +1,23 @@
+{
+  "degree": 242, "artist": "The Wailers (Seattle/Tacoma)", "slug": "242-the-wailers", "genre": "Garage Rock", "energy": 7,
+  "era": "1959-1966 core. Garage Rock. E=7 -- instrumental rock powerhouse. Tacoma. Golden Crest Records.",
+  "location": { "origin": "Tacoma, Washington" }, "formed": "Tacoma, Washington, 1959", "active": "1959-1970s (reunions)",
+  "labels": ["Golden Crest Records", "Etiquette Records"],
+  "members": ["Robin Roberts (vocals)", "Rich Dangel (guitar)", "Mark Marush (guitar)", "Buck Ormsby (bass)", "Mike Burk (drums)", "Kent Morrill (keyboards/organ)"],
+  "disambiguation": "NOT Bob Marley's Wailers (Jamaica, 1963). Tacoma Wailers formed 1959 -- four years earlier. Different genre, different country, different history.",
+  "associated_musicians": ["The Sonics (Tacoma contemporaries)", "Buck Ormsby (also Etiquette Records founder)"],
+  "theory_nodes": [
+    { "concept": "FIRST NATIONALLY CHARTING PNW ROCK BAND. 'Tall Cool One' (1959) reached #36 Billboard Hot 100. An independent label record from Tacoma competing in the national Top 40. The Wailers opened the door for all subsequent PNW bands.", "level": "milestone", "department": "chart-history", "description": "First PNW rock band to chart nationally." },
+    { "concept": "Buck Ormsby dual role: Wailers bassist AND Etiquette Records founder. Simultaneously an artist and the infrastructure builder for the Northwest Sound. The scene's most important structural figure.", "level": "advanced", "department": "scene-infrastructure", "description": "Ormsby as musician and label executive." },
+    { "concept": "Northwest Sound template: The Wailers invented the formula before The Sonics existed. Organ + guitar + driving rhythm + aggressive vocals = Northwest Sound. The Wailers built the template; the Sonics pushed it to E=8.", "level": "intermediate", "department": "scene-theory", "description": "Wailers as Northwest Sound originators." }
+  ],
+  "cross_references": [
+    {"degree": 241, "artist": "The Sonics", "relationship": "Same city, same era, successor relationship. The Sonics pushed the Wailers' template to E=8 extremity."},
+    {"degree": 239, "artist": "The Ventures", "relationship": "Both PNW instrumental rock. The Ventures built global career; the Wailers built the local foundation that made the Ventures possible."},
+    {"degree": 244, "artist": "The Kingsmen", "relationship": "The Wailers reached #36 four years before the Kingsmen's 'Louie Louie'. Both essential to PNW garage legacy."}
+  ],
+  "sps_pair": {"degree": 242, "species": "Cutthroat Trout", "pairing_note": "E=7 vs E=2. The first nationally charting PNW rock band against the iconic PNW native trout. Both symbols of their respective worlds."},
+  "milestones": ["FIRST NATIONALLY CHARTING PNW ROCK BAND", "NORTHWEST SOUND TEMPLATE ORIGINATORS"],
+  "key_songs": ["Tall Cool One (1959, #36 Billboard)", "Mau Mau (1960)", "Out of Our Tree (1966)"],
+  "tags": ["garage-rock", "tacoma", "golden-crest", "etiquette-records", "tall-cool-one", "northwest-sound", "instrumental-rock", "buck-ormsby", "robin-roberts", "not-bob-marley", "fabulous-wailers", "nationally-charting"]
+}

@@ -1,0 +1,45 @@
+{
+  "degree": 244, "artist": "The Kingsmen", "slug": "244-the-kingsmen", "genre": "Garage Rock", "energy": 7,
+  "era": "1959-present. Garage Rock. E=7 -- 'Louie Louie.' Portland origin, Northwest circuit. Wand Records.",
+  "location": { "origin": "Portland, Oregon" }, "formed": "Portland, Oregon, 1959", "active": "1959-present (various lineups)",
+  "labels": ["Wand Records (Scepter subsidiary)", "various later labels"],
+  "members": ["Jack Ely (vocals, guitar)", "Lynn Easton (drums)", "Don Gallucci (keyboards)", "Norm Sundholm (bass)", "Mike Mitchell (guitar)"],
+  "louie_louie": {
+    "original_author": "Richard Berry (1955, Los Angeles)",
+    "original_style": "Jamaican-influenced calypso ballad",
+    "kingsmen_recording_date": "April 1963",
+    "studio": "Northwestern Inc., Portland, Oregon",
+    "cost": "$50",
+    "chart_peak": "#2 Billboard Hot 100, December 1963",
+    "recording_notes": "Microphone mounted too high; Jack Ely (wearing braces) sang at upward angle creating the distinctive slurred vocal; Don Gallucci on keyboards was reportedly 14-15 years old",
+    "fbi_investigation": {
+      "opened": "1964",
+      "closed": "May 1965",
+      "duration": "~2 years",
+      "conclusion": "Lyrics of the recording could not be interpreted; not possible to determine if obscene",
+      "estimated_cost": "~$100,000",
+      "result": "No charges filed; song became more famous"
+    },
+    "three_chord_structure": "A - D - Em (the most democratic rock song ever written; any band can play it)"
+  },
+  "richard_berry": {
+    "birth": 1935, "death": 1997,
+    "also_wrote": "Have Love Will Travel (covered by The Sonics, degree 241)",
+    "rights": "Sold rights for small sum before song's commercial peak; received little from national success",
+    "note": "Richard Berry connects The Sonics (241) and The Kingsmen (244) through authorship of both bands' most notable covers."
+  },
+  "theory_nodes": [
+    { "concept": "\"Louie Louie\" as the most famous garage rock song ever recorded. #2 Billboard December 1963. Three chords. $50. Jack Ely's braces and a mispositioned microphone created the unintelligible vocal that the FBI investigated for two years. The limitations were the art.", "level": "milestone", "department": "cultural-history", "description": "Louie Louie as the defining garage rock cultural monument." },
+    { "concept": "FBI investigation 1964-65: two years, ~$100,000, conclusion 'lyrics could not be interpreted.' Hoover-era FBI treating rock and roll as potential national security threat. Investigation made the song more famous, not less. The federal government was the best marketing campaign the Kingsmen ever had.", "level": "advanced", "department": "cultural-history", "description": "FBI investigation as inadvertent promotion." },
+    { "concept": "Richard Berry connection: 'Have Love Will Travel' (Sonics, 241) AND 'Louie Louie' (Kingsmen, 244) both written by Richard Berry. One songwriter links the proto-punk maximum and the most famous garage rock recording. Berry sold rights and received little from either song's commercial success.", "level": "intermediate", "department": "cross-reference", "description": "Richard Berry as connecting thread between degrees 241 and 244." }
+  ],
+  "cross_references": [
+    {"degree": 241, "artist": "The Sonics", "relationship": "Richard Berry connection: 'Have Love Will Travel' (Sonics) + 'Louie Louie' (Kingsmen). Same songwriter, two iconic Northwest Sound recordings."},
+    {"degree": 242, "artist": "The Wailers", "relationship": "Wailers recorded 'Louie Louie' before the Kingsmen. The song was a PNW standard before 1963."},
+    {"degree": 240, "artist": "Paul Revere and the Raiders", "relationship": "Recorded their own 'Louie Louie' at the same Portland studio, possibly the same day. Kingsmen's version became the definitive recording."}
+  ],
+  "sps_pair": {"degree": 244, "species": "White Sturgeon", "pairing_note": "E=7 vs E=4. FIRST ACIPENSERIDAE. 200+ million year lineage. Largest freshwater fish in North America. The most famous garage rock song against North America's largest freshwater fish."},
+  "milestones": ["'LOUIE LOUIE' -- MOST FAMOUS GARAGE ROCK SONG EVER RECORDED", "PNW GARAGE ROCK ERA COMPLETE (241-244)", "FBI INVESTIGATION AS CULTURAL MONUMENT"],
+  "key_songs": ["Louie Louie (1963, #2 Billboard)", "Jolly Green Giant (1965)", "The Krunch (1965)"],
+  "tags": ["garage-rock", "louie-louie", "portland", "wand-records", "richard-berry", "fbi-investigation", "jack-ely", "lynn-easton", "don-gallucci", "three-chords", "50-dollar-recording", "pnw-anthem", "most-covered-song", "northwest-sound-complete"]
+}
