@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 341&deg; &mdash; Full Elk + Storm + Eagle &mdash; E=8 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4A148C, #6A1B9A); color: #E1BEE7; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 24px rgba(74,20,140,0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #4A148C; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4A148C; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .convergence-banner { background: linear-gradient(135deg, #4A148C, #1B5E20, #1A237E); border: 2px solid #CE93D8; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #F3E5F5; }
+    .convergence-banner h3 { margin: 0 0 0.75rem; color: #CE93D8; font-size: 1.2rem; }
+    .convergence-banner p { color: #E1BEE7; margin: 0.4rem 0; line-height: 1.65; }
+    .three-streams { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .three-streams { grid-template-columns: 1fr; } }
+    .stream-card { border-radius: 6px; padding: 1rem; text-align: center; }
+    .stream-elk { background: linear-gradient(135deg, #1B5E20, #2E7D32); border: 1px solid #4CAF50; color: #E8F5E9; }
+    .stream-storm { background: linear-gradient(135deg, #1A237E, #283593); border: 1px solid #5C6BC0; color: #E8EAF6; }
+    .stream-eagle { background: linear-gradient(135deg, #E65100, #F57C00); border: 1px solid #FF9800; color: #FFF3E0; }
+    .stream-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .stream-card .freq { font-size: 0.78rem; font-family: 'Georgia', serif; margin-bottom: 0.3rem; opacity: 0.9; }
+    .stream-card .label { font-weight: 700; font-size: 1rem; font-family: system-ui, sans-serif; }
+    .stream-card .detail { font-size: 0.8rem; margin-top: 0.4rem; opacity: 0.85; line-height: 1.4; font-family: system-ui, sans-serif; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #4A148C; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .spectral-bar { display: flex; gap: 0.25rem; margin: 1rem 0; align-items: center; font-size: 0.78rem; font-family: system-ui, sans-serif; }
+    .spectral-seg { border-radius: 3px; height: 1.5rem; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.7rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">341&deg;</div>
+      <div class="release-title-block">
+        <h2>Full Elk + Storm + Eagle</h2>
+        <div style="font-style:italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif;"><em>Cervus canadensis</em> + Pacific Storm System + <em>Haliaeetus leucocephalus</em> &mdash; E=8 &mdash; Three Streams, One Valley, Fall Maximum &mdash; THE FINAL ASCENT OPENS</div>
+      </div>
+    </div>
+    <div style="font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem;">
+      Elk bugling in the valley &mdash; storm building off the Cascades &mdash; eagle on the thermal overhead &mdash; <strong>three spectral regions, zero masking</strong> &mdash; October ecological calendar alignment &mdash; E=8 through convergence &mdash; THE FINAL ASCENT OPENS AT E=16
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="convergence-banner">
+          <h3>The Final Ascent Opens &mdash; Three Streams Into One Valley</h3>
+          <p>
+            <strong>THE FINAL ASCENT OPENS.</strong> Degree 341 is the first step of the SPS engine&rsquo;s final escalating ramp: E=8 (elk+storm+eagle) &rarr; E=8 (sea lion colony storm) &rarr; E=9 (peregrine through tern colony) &rarr; E=10 (multi-species polyrhythmic apex &mdash; FIRST E=10 IN SPS ENGINE HISTORY). The ramp begins here: a Cascades river valley in early October, the elk rut at maximum, a Pacific storm arriving from the west, and a Bald Eagle circling overhead on a thermal. Three natural energy streams. Three distinct spectral regions. One valley that amplifies all of them simultaneously.
+          </p>
+        </div>
+
+        <h2>The Three Streams</h2>
+        <div class="three-streams">
+          <div class="stream-card stream-elk">
+            <div class="icon">&#x1F98C;</div>
+            <div class="freq">80&ndash;1,200+ Hz</div>
+            <div class="label">Elk Herd Bugling</div>
+            <div class="detail">Multiple bulls competing. Cows responding. Calves vocalizing. 3-4 km carry in valley. Episodic: 3&ndash;6 sec bugles, 30&ndash;120 sec gaps.</div>
+          </div>
+          <div class="stream-card stream-storm">
+            <div class="icon">&#x26A1;</div>
+            <div class="freq">50&ndash;2,000 Hz broadband</div>
+            <div class="label">Pacific Fall Storm</div>
+            <div class="detail">Wind in conifers (fir/pine/cedar). Thunder with valley reverberation 3&ndash;5 sec. Rain on river surface. Continuous broadband background.</div>
+          </div>
+          <div class="stream-card stream-eagle">
+            <div class="icon">&#x1F985;</div>
+            <div class="freq">2,000&ndash;8,000 Hz</div>
+            <div class="label">Bald Eagle Call</div>
+            <div class="detail">Thin descending kek-kek-kek. High-frequency counterpoint overhead. Punctuate: call sequences separated by 30+ sec silences. Thermal soaring.</div>
+          </div>
+        </div>
+
+        <h2>The Frequency Architecture</h2>
+        <p>The three components of degree 341 occupy separate spectral regions with minimal masking. The elk herd occupies the low-to-mid range (80&ndash;1,200+ Hz). The storm occupies broadband mid-range (50&ndash;2,000 Hz), dominant in the 100&ndash;800 Hz wind frequencies. The eagle occupies the high end (2,000&ndash;8,000 Hz). All three are audible simultaneously in their distinct frequency regions. The river valley concentrates and reflects each component: elk bugles carry 3&ndash;4 km (vs. 2 km in open terrain), thunder reverberates for 3&ndash;5 seconds off the valley walls, and the eagle&rsquo;s call descends from above the noise floor of the other two.</p>
+
+        <h2>The October Ecological Calendar</h2>
+        <p>The convergence at degree 341 is not staged. It is the natural consequence of October in a Cascades river valley:</p>
+        <p><strong>Elk rut</strong> peaks September&ndash;October in Washington. The bulls are at maximum territorial and reproductive urgency. Multiple bulls bugling simultaneously is the standard rut-season acoustic environment, not an exceptional event.</p>
+        <p><strong>Pacific storms</strong> begin arriving in October as the summer high-pressure pattern breaks down and Gulf of Alaska lows track southeast across the North Pacific. The first fall storms can be dramatic: rapidly falling temperatures, 30&ndash;60 mph gusts at ridge level, heavy precipitation, and occasional lightning as warm air masses lift over the Cascades.</p>
+        <p><strong>Bald Eagles</strong> concentrate in Cascades river valleys in October as fall Chinook, coho, and chum salmon run upstream. Eagles from British Columbia and Alaska move south along river corridors to follow the salmon. An October river valley with an active salmon run may have dozens of eagles visible simultaneously, some fishing, some perched, some soaring on thermals.</p>
+        <p>All three happen in October because the ecological calendar aligns them. The convergence is the calendar made acoustic.</p>
+
+        <h2>The Bull Elk Bugle</h2>
+        <p>The Rocky Mountain Elk bull&rsquo;s bugle is one of North America&rsquo;s most distinctive wildlife sounds. The acoustic sequence: a low guttural grunt (80&ndash;200 Hz), a rapid ascending whistle that peaks above 1,000 Hz, a sustained mid-frequency howl, and a trailing series of grunt coughs. Duration: 3&ndash;6 seconds per bugle. A single bull at 200 meters is overwhelming. Multiple bulls at different distances in a valley &mdash; each producing the complete sequence at overlapping intervals &mdash; creates the acoustic environment of being inside the sound rather than observing it from outside. Washington State supports 60,000&ndash;65,000 elk. The east-slope Cascades river valleys (Methow, Entiat, Wenatchee, Naches) are primary October rut habitat.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>S36-341 Pearl Jam heavy (E=8)</strong>
+            <p>E=8 + E=8 = E=16. FINAL ASCENT OPENS. Pearl Jam is five musicians from multiple predecessors converging. Elk+Storm+Eagle is three natural sources converging in one valley. Symmetric convergence structure on both tracks.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-340 Orca Breach Cascade (E=9)</strong>
+            <p>340 closes the metal summit via concentration (one animal, maximum behavior, three times). 341 opens the final ascent via convergence (three sources, one valley). Transition from concentration to convergence as the energy mechanism.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-221 Bald Eagle call (E=5)</strong>
+            <p>First Bald Eagle entry (degree 221, E=5, thin contact call). Returns here at E=8 as one of three convergent sources in a high-drama valley context. Eagle energy escalation across 120 degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-344 Multi-species apex (E=10)</strong>
+            <p>The ramp opens here at E=8. The imagined synthesis (E=10) closes it at degree 344. Both are multi-source convergences; 344 is the maximum imaginable synthesis of all SPS categories simultaneously.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Convergent apex</div>
+          <div class="stat-detail">Elk + storm + eagle</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 8</div>
+          <div class="stat-detail">Three-stream convergence</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">River valley</div>
+          <div class="stat-detail">East-slope Cascades</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Fall storm</div>
+          <div class="stat-detail">October, rut + storm + migration</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Multi-species</div>
+          <div class="stat-detail">Cervidae + storm + Accipitridae</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elk freq.</div>
+          <div class="stat-value">80&ndash;1,200+ Hz</div>
+          <div class="stat-detail">Episodic, 3&ndash;4 km carry</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Storm freq.</div>
+          <div class="stat-value">50&ndash;2,000 Hz</div>
+          <div class="stat-detail">Broadband continuous</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Eagle freq.</div>
+          <div class="stat-value">2,000&ndash;8,000 Hz</div>
+          <div class="stat-detail">Punctuate kek-kek-kek</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Pearl Jam (E=8)</div>
+          <div class="stat-detail">E=16. Convergence on both tracks.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ramp position</div>
+          <div class="stat-value" style="color:#4A148C; font-size:0.9rem;">STEP 1 OF 4</div>
+          <div class="stat-detail">341 E=8 &rarr; 342 E=8 &rarr; 343 E=9 &rarr; 344 E=10</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
