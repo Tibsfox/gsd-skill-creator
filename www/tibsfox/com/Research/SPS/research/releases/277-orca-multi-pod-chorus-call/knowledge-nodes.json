@@ -1,0 +1,55 @@
+{
+  "degree": 277,
+  "species": "Orca (Southern Resident Killer Whale)",
+  "scientific_name": "Orcinus orca",
+  "slug": "277-orca-multi-pod-chorus-call",
+  "sound_type": "Full clan simultaneous vocalizing -- J Pod, K Pod, and L Pod converging in greeting ceremony and vocalizing simultaneously, multi-dialect acoustic chorus, E=9",
+  "energy": 9,
+  "ecosystem": "Greeting ceremony -- multi-pod social convergence in Salish Sea waters",
+  "season": "Resident (year-round; ceremony events associated with pod reunions after separation)",
+  "family": "Delphinidae",
+  "order": "Artiodactyla (Cetacea)",
+  "milestone": "SPS MAXIMUM TIED at E=9. Two E=9 events in SPS: orca breaching (degree 273, physical maximum) and orca multi-pod chorus (degree 277, social maximum). The greeting ceremony is the most emotionally charged acoustic event in Pacific Northwest marine biology. Combined E=17 with Sleater-Kinney (S36 277, E=8).",
+  "coordinates": {
+    "lat": 48.53,
+    "lon": -123.10,
+    "description": "Southern Resident range throughout Salish Sea. Greeting ceremonies documented particularly in San Juan Islands and Haro Strait -- primary summer foraging areas where pods most frequently converge."
+  },
+  "ceremony_data": {
+    "behavioral_sequence": "Approach → lining up (pods face each other in rough lines) → charge (rush together, physical contact, rubbing) → simultaneous vocalization (all individuals, all dialects, multi-pod chorus) → extended association",
+    "participants": "J Pod (~23 individuals), K Pod (~17 individuals), L Pod (~35 individuals) = ~75 total Southern Resident Killer Whales",
+    "frequency_range_hz": "Social vocalizations approximately 1-10 kHz. Within or near human hearing range. Different from echolocation (20-100+ kHz, degree 276).",
+    "social_function": "Pod reunion and social bond renewal. Acoustic exchange of identity (each pod's dialect present simultaneously). Cultural behavior specific to SRKW ecotype.",
+    "dialect_structure": "J dialect, K dialect, L dialect -- each distinctive, learned socially, transmitted from mothers to offspring. Cross-pod familiarity: members of different pods recognize each other's dialects.",
+    "e9_rationale": "E=9 assigned for social and emotional intensity, not solely for acoustic source level. Physical E=9 (breach) = kinetic energy maximum. Social E=9 (chorus) = communal identity maximum. Both are genuine extremes in their respective registers."
+  },
+  "nodes": [
+    {
+      "id": "social-maximum",
+      "type": "pattern",
+      "title": "SPS Social Maximum -- E=9",
+      "description": "The multi-pod chorus is the most socially intense acoustic event in the SPS catalog. Two E=9 events: breach (physical) at 273, chorus (social) at 277. Both orca. The engine's two maximum events are the same species.",
+      "connections": ["greeting-ceremony", "pod-dialects"]
+    },
+    {
+      "id": "greeting-ceremony",
+      "type": "concept",
+      "title": "Greeting Ceremony -- Cultural Behavior",
+      "description": "Behavioral sequence: approach, line up, charge, simultaneous vocalization, extended association. Specific to SRKW ecotype (transient orcas do not perform equivalent ceremony). Transmitted culturally. Social bond renewal at clan level.",
+      "connections": ["social-maximum", "pod-dialects"]
+    },
+    {
+      "id": "pod-dialects",
+      "type": "concept",
+      "title": "Three Dialects Simultaneous",
+      "description": "J, K, and L Pod dialects are distinctive learned call repertoires. All three present simultaneously during multi-pod chorus. Acoustic exchange of identity: each pod asserting its acoustic signature while receiving the others'.",
+      "connections": ["social-maximum", "greeting-ceremony"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-273", "species": "Orca breaching", "relationship": "The other E=9 event. Physical maximum (breach) vs. social maximum (chorus). Both orca. Both E=9. Different registers of the same species' expressive range."},
+    {"target": "SPS-276", "species": "Orca echolocation burst", "relationship": "Orca arc closed at 276. Multi-pod chorus is post-arc, different register. Echolocation = perceptual acoustic system; chorus = social acoustic system."},
+    {"target": "SPS-270", "species": "Orca pod call", "relationship": "Pod call = building block of the chorus. Individual call at 270 is what each individual produces during ceremony at 277. Chorus = pod call scaled to clan level."},
+    {"target": "S36-277", "artist": "Sleater-Kinney", "relationship": "SPS MAXIMUM TIED. Combined E=17. Rock's most important Olympia-tradition band paired with the most socially powerful orca acoustic event. Convergence in both: Brownstein + Tucker creating complete sound; J/K/L pods creating clan chorus."}
+  ]
+}
