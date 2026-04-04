@@ -1,0 +1,21 @@
+{
+  "degree": 271, "artist": "Solger", "slug": "271-solger", "genre": "Hardcore Punk", "energy": 8,
+  "era": "1980-1981. Hardcore Punk. E=8 -- earliest Seattle hardcore, self-released, maximum raw energy, pre-infrastructure.",
+  "location": { "origin": "Seattle, WA (Capitol Hill area)" }, "formed": "Seattle, WA", "active": "1980-1981",
+  "labels": ["Independent (self-released)"],
+  "members": ["Paul Solger (guitar)", "other members (documentation incomplete)"],
+  "associated_musicians": ["Paul Solger (also in The Fartz, degree 270)"],
+  "theory_nodes": [
+    { "concept": "Earliest Seattle hardcore: Solger (1980) at or before The Fartz (1980). First wave of American hardcore. Parallel to Black Flag, Dead Kennedys, Minor Threat -- not in response to them.", "level": "advanced", "department": "scene-history", "description": "Being first. The condition of absence-of-documentation as evidence." },
+    { "concept": "Paul Solger cross-membership: guitar in Solger, bass in The Fartz (degree 270). Adjacent degrees, adjacent historical moments, same musician. Community is the continuity.", "level": "advanced", "department": "cross-reference", "description": "The small-scene cross-membership dynamic: more musical ideas than available musicians." },
+    { "concept": "Independent / self-released: no label, no commercial distribution, punk underground network only. Maximum Rocknroll, mail order, touring, hand-to-hand. The most raw artifact of the scene.", "level": "intermediate", "department": "distribution-history", "description": "Before the infrastructure existed. The recordings that survive are the rawest documents." }
+  ],
+  "cross_references": [
+    {"degree": 270, "artist": "The Fartz", "relationship": "PAUL SOLGER. Adjacent degrees, adjacent moments. Same musician in both bands. The Fartz had Alternative Tentacles; Solger was independent. Solger is earlier and rawer."},
+    {"degree": 272, "artist": "The U-Men", "relationship": "Post-punk follows hardcore. The arc modulates from E=8 hardcore (Solger, Fartz) to post-punk (U-Men). Capitol Hill continuity."},
+    {"degree": 265, "artist": "Ten Minute Warning", "relationship": "Seattle hardcore continuity. Duff McKagan connects Ten Minute Warning to The Fartz to the broader scene Solger initiated."}
+  ],
+  "sps_pair": {"degree": 271, "species": "Southern Resident Killer Whale", "pairing_note": "Complex whistles and clicks. Community-specific communication: Solger communicates within the Seattle hardcore community; the Southern Residents communicate within their three-pod community. Both are specific, both are endangered (Solger's recordings; the SRKW population)."},
+  "milestones": ["FIRST SOLGER ENGINE ENTRY", "EARLIEST SEATTLE HARDCORE", "SEATTLE HARDCORE ARC (2 OF 5)"],
+  "tags": ["hardcore-punk", "independent", "seattle", "paul-solger", "earliest-hardcore", "1980", "self-released", "pre-sub-pop", "e8"]
+}
