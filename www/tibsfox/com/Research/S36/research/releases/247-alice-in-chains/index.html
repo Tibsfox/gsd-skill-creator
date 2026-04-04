@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 247&deg; &mdash; Alice in Chains &mdash; E=8 &mdash; Hard Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1B2631, #212F3D, #2E4053); color: #85929E; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 20px rgba(27,38,49,0.5); }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1B2631; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #212F3D; color: #85929E; border: 1px solid #2E4053; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .album-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1B2631; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .album-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .album-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .album-card .level.masterpiece { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .album-card .level.essential { background: #ECEFF1; color: #37474F; }
+    .album-card .level.milestone { background: #E8F5E9; color: #2E7D32; }
+    .album-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1B2631; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1B2631; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #ECEFF1; font-style: italic; color: #37474F; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .dark-banner { background: linear-gradient(135deg, #1B2631, #2E4053); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #85929E; }
+    .dark-banner h3 { margin: 0 0 0.5rem; color: #CFD8DC; font-size: 1.2rem; }
+    .dark-banner p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: #AEB6BF; }
+    .memorial-card { background: linear-gradient(135deg, #212F3D, #1B2631); border: 1px solid #2E4053; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #AEB6BF; }
+    .memorial-card h3 { margin: 0 0 0.5rem; color: white; font-size: 1rem; }
+    .memorial-card p { margin: 0; font-size: 0.88rem; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>247 &mdash; Alice in Chains (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">247&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Alice in Chains</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Hard Rock / Grunge</span>
+          <span class="label-badge">Columbia</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="dark-banner">
+          <h3>ENGINE MAXIMUM &mdash; THE 245-247 CORRIDOR CLOSES</h3>
+          <p>Hendrix (245, E=8). Hendrix early (246, E=7). Alice in Chains (247, E=8). The engine&rsquo;s greatest three-degree run closes here. AIC brings the grunge era&rsquo;s maximum energy to a corridor that began with the psychedelic era&rsquo;s maximum. Layne Staley and Jerry Cantrell. <em>Dirt</em>. &ldquo;Rooster.&rdquo; &ldquo;Would?&rdquo; The darkest, heaviest, most emotionally direct band in Seattle&rsquo;s history.</p>
+        </div>
+
+        <div class="milestone-banner">
+          <strong>E=8 TIES ENGINE MAXIMUM.</strong> Alice in Chains is the fourth E=8 entry (with Hendrix 245, The Sonics 241, The Blood Brothers 218). The 245&ndash;247 run &mdash; three consecutive degrees at E=7 or E=8 &mdash; is the highest-density energy corridor in the engine. It will not be matched.
+        </div>
+
+        <h2>The Sound &mdash; Dark, Heavy, Irreducible</h2>
+        <p>Alice in Chains' sound has three defining elements: Jerry Cantrell's down-tuned guitar riffs (primarily dropped D and D standard, through Mesa Boogie amplification); the Staley-Cantrell dual vocal blend in dissonant intervals (minor seconds, tritones, parallel minor thirds); and a mid-tempo heaviness that emphasizes weight over speed. This formula, established on <em>Facelift</em> (1990) and perfected on <em>Dirt</em> (1992), has remained consistent across forty years and two vocalists.</p>
+
+        <blockquote>&ldquo;The Staley-Cantrell vocal blend is not conventional harmony. They sing in intervals that create dissonance &mdash; minor seconds, tritones, parallel minor thirds. It is the most distinctive vocal texture in grunge and has not been successfully replicated.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Albums</h2>
+        <div class="album-grid">
+          <div class="album-card">
+            <h4>Facelift (1990)</h4>
+            <span class="level essential">Columbia</span>
+            <p>"Man in the Box," "We Die Young," "Sea of Sorrow." The debut. 2M US copies. Formula established: down-tuned, dark, Staley-Cantrell harmonics.</p>
+          </div>
+          <div class="album-card">
+            <h4>Dirt (1992)</h4>
+            <span class="level masterpiece">Columbia &mdash; MASTERPIECE</span>
+            <p>"Would?," "Rooster," "Down in a Hole," "Them Bones." 4M US copies. Staley's addiction documented. The E=8 justification. The darkest album the grunge era produced.</p>
+          </div>
+          <div class="album-card">
+            <h4>Jar of Flies (1994)</h4>
+            <span class="level milestone">Columbia &mdash; #1 Billboard EP</span>
+            <p>First EP to debut at #1 on Billboard 200. All acoustic. "No Excuses," "I Stay Away." Demonstrated range beyond the heavy sound of Dirt.</p>
+          </div>
+          <div class="album-card">
+            <h4>MTV Unplugged (1996)</h4>
+            <span class="level essential">Columbia &mdash; Live</span>
+            <p>Staley visibly ill, vocally present. The last major public performance. One of the most significant Unplugged recordings in the series.</p>
+          </div>
+          <div class="album-card">
+            <h4>Black Gives Way to Blue (2009)</h4>
+            <span class="level essential">Virgin</span>
+            <p>Reunion album with William DuVall replacing Staley. Title track is Cantrell's tribute to Staley. Better than anyone expected. The reformation.</p>
+          </div>
+          <div class="album-card">
+            <h4>Rainier Fog (2018)</h4>
+            <span class="level essential">BMG</span>
+            <p>Named for Mt. Rainier. The continuing Alice in Chains. Recognizably AIC throughout. The band now has more albums with DuVall than with Staley.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Layne Staley</h2>
+        <div class="memorial-card">
+          <h3>Layne Thomas Staley &mdash; August 22, 1967 &ndash; April 5, 2002</h3>
+          <p>Born in Kirkland, Washington. Died alone in his Seattle apartment, April 5, 2002. Death discovered April 19 &mdash; two weeks later. Age 34. His voice: baritone-to-tenor with absolute control over vibrato and sustain, capable of gentle fragility on acoustic material and complete crushing weight on heavy material. His harmonics with Cantrell created the most distinctive vocal texture in grunge. <em>Dirt</em> documents his addiction with uncomfortable directness. His death marked the end of the era.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Big Four Context</h2>
+        <p>Alice in Chains is one of the Big Four Seattle grunge bands alongside Nirvana, Pearl Jam, and Soundgarden. The differentiation: Nirvana had pop melodism under noise; Pearl Jam had classic rock scope; Soundgarden had technical range; Alice in Chains had <em>Dirt</em>. The one Big Four album that is not merely heavy rock but a document of genuine human suffering. No other Big Four album is directly autobiographical about the illness that would kill its primary vocalist.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">245</span> Jimi Hendrix &mdash; E=8. The psychedelic era maximum. The 245-247 corridor begins there and ends here.</li>
+          <li><span class="ref-degree">246</span> Jimi Hendrix early &mdash; E=7. The formation. Between two maxima.</li>
+          <li><span class="ref-degree">248</span> Thunderpussy &mdash; E=7. Hard Rock. Capitol Hill. The contemporary Seattle women-led band follows the corridor.</li>
+          <li><span class="ref-degree">SPS 247</span> Sol Duc Falls &mdash; E=7. Olympic National Park canyon roar. Resonant, enclosed, amplified. The canyon-deep guitar tones of Alice in Chains find their natural pair.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">247 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hard Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1987&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Beacon Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Columbia</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members (original)</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Layne Staley</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar/Vocals</span><span class="stat-value">Jerry Cantrell</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Mike Starr / Inez</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Sean Kinney</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members (current)</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">William DuVall</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Jerry Cantrell</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Mike Inez</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Sean Kinney</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">68.6%</span></div>
+          <div class="stat-row"><span class="stat-label">E-streak</span><span class="stat-value">E=8 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">245-247 CORRIDOR</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row"><span class="stat-label">Debut</span><span class="stat-value">Facelift (1990)</span></div>
+          <div class="stat-row"><span class="stat-label">Peak</span><span class="stat-value">Dirt (1992)</span></div>
+          <div class="stat-row"><span class="stat-label">Live</span><span class="stat-value">MTV Unplugged 1996</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Sol Duc Falls</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
