@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 282&deg; &mdash; Tacocat &mdash; E=7 &mdash; Punk Pop &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.contemporary { background: #E8F5E9; color: #1B5E20; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .hardly-art-banner { background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border: 2px solid #66BB6A; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #1B5E20; }
+    .hardly-art-banner strong { color: #2E7D32; }
+    .palindrome-card { background: linear-gradient(135deg, #F3E5F5, #FCE4EC); border: 1px solid #CE93D8; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; text-align: center; }
+    .palindrome-card .word { font-size: 2rem; font-weight: 700; color: #6A1B9A; letter-spacing: 0.1em; font-family: 'Georgia', serif; }
+    .palindrome-card .note { font-size: 0.85rem; color: #7B1FA2; font-family: system-ui, sans-serif; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>282 &mdash; Tacocat (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">282&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Tacocat</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Punk Pop</span>
+          <span class="label-badge">Hardly Art</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="hardly-art-banner">
+          <strong>HARDLY ART ENTERS THE ENGINE.</strong> Sub Pop's subsidiary label, founded 2007, makes its first appearance at degree 282. Tacocat has been a Hardly Art band since 2013's <em>Strangles</em>. The Sub Pop institutional story expands from its grunge-era founding roster to include the Capitol Hill punk pop scene of the 2010s.
+        </div>
+
+        <div class="palindrome-card">
+          <div class="word">TACOCAT</div>
+          <div class="note">A palindrome &mdash; reads the same forwards and backwards. The name is an aesthetic blueprint: structural symmetry, playful wit, the mundane made clever.</div>
+        </div>
+
+        <h2>Capitol Hill Punk Pop</h2>
+        <p>Tacocat formed in Capitol Hill, Seattle in 2007: Emily Nokes (vocals/guitar), Bree McKenna (bass), Eric Randall (guitar), Lelah Maupin (drums). The sound is bright punk pop &mdash; hooks that stay, feminist content embedded in subject matter rather than manifesto, and a consistent sense of humor that is the band's primary political tool.</p>
+
+        <p>Where Wimps at degree 281 is deadpan and dry, Tacocat at degree 282 is warm and hook-driven. Both are punk, both are feminist, both are Capitol Hill. The difference is temperature: Wimps observes with a dry eye; Tacocat delivers the observation with a melody that won't leave your head.</p>
+
+        <blockquote>"The humor is not a retreat from the politics; it is the politics' delivery mechanism. The right hook makes the right observation land harder."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Hardly Art &mdash; Sub Pop's Subsidiary</h2>
+        <p>Hardly Art was founded in 2007 as a Sub Pop Records subsidiary dedicated to indie pop, punk pop, and Pacific Northwest acts that existed in a different sonic space from Sub Pop's grunge-rooted main catalog. The roster &mdash; Tacocat, Childbirth (degree 283), Chastity Belt, La Luz, King Tuff &mdash; defines a specific Capitol Hill aesthetic: indie pop with feminist or politically aware sensibilities and a sense of humor.</p>
+        <p>Sub Pop has been a presence in the engine since the early degrees. Its main roster established the grunge canon; Hardly Art extends the institutional story into the 2000s-2010s indie pop moment. The label range &mdash; Mudhoney to Tacocat via Hardly Art &mdash; documents thirty years of Seattle independent music evolution.</p>
+        <p>The Hardly Art roster is also connected by personnel: Bree McKenna plays in both Tacocat and Childbirth (degree 283). The label is a network as well as a catalog.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Feminist Content</h2>
+        <p>"Crimson Wave" addresses menstruation matter-of-factly, with a chorus that stays. "Men Explain Things to Me" addresses mansplaining directly. "Dana Katherine Scully" is a tribute to The X-Files&rsquo; skeptical scientist &mdash; the woman in the room who insists on evidence. The politics in Tacocat are in the subject matter, delivered in the tone of a hook-driven punk pop song.</p>
+        <p>This is not confrontation-mode feminism &mdash; it is normalization-mode feminism. The riot grrrl tradition (Bikini Kill at degree 276) made it safe to be explicit; Tacocat makes the explicit casual. Casual is a different kind of political act.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Bree McKenna Connection &mdash; Childbirth at 283</h2>
+        <p>Tacocat&rsquo;s bassist Bree McKenna co-founded Childbirth (degree 283), the Capitol Hill punk pop supergroup that also includes Julia Shapiro (Chastity Belt) and Stacy Peck. Two consecutive engine degrees share a musician &mdash; one of the tighter cross-reference links in the Capitol Hill chapter.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Strangles (2013)</h4>
+            <span class="level contemporary">Hardly Art</span>
+            <p>First Hardly Art release. Tacocat fully formed in the label relationship. Clean production, tight songs, integrated feminist content.</p>
+          </div>
+          <div class="theory-card">
+            <h4>NVM (2014)</h4>
+            <span class="level contemporary">Hardly Art</span>
+            <p>The breakthrough. "Bridge to Hawaii," "Crimson Wave," "Psychedelic Quinceañera." The songs that established Tacocat as a defining Seattle punk pop band.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Lost Time (2016)</h4>
+            <span class="level contemporary">Hardly Art</span>
+            <p>Expanded arrangements, more dynamic range. Sharon Van Etten collaborates. The band growing within its form.</p>
+          </div>
+          <div class="theory-card">
+            <h4>This Mess Is a Place (2019)</h4>
+            <span class="level advanced">Sub Pop</span>
+            <p>The band moves to Sub Pop main label. Larger platform, polished production. Still Tacocat: funny, feminist, hook-driven.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">281</span> Wimps &mdash; E=6 preceding. Kill Rock Stars. Deadpan sardonic. Tacocat's warmth contrasts directly with Wimps' dry observation. Both feminist, different temperatures.</li>
+          <li><span class="ref-degree">283</span> Childbirth &mdash; Bree McKenna connection. E=7. Punk pop supergroup. Same label, same neighborhood, shared personnel.</li>
+          <li><span class="ref-degree">276</span> Bikini Kill &mdash; Kill Rock Stars / riot grrrl antecedent. E=8. Tacocat's feminist warmth vs. riot grrrl ferocity: the spectrum of feminist punk.</li>
+          <li><span class="ref-degree">SPS 282</span> Pacific White-sided Dolphin pod &mdash; E=7 pair. Acrobatic, social, pod-based. Collective exuberance matched with Tacocat's hook-driven warmth.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">282 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Punk Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2007&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Hardly Art</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals / Guitar</span><span class="stat-value">Emily Nokes</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Bree McKenna</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Eric Randall</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Lelah Maupin</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">78.3%</span></div>
+          <div class="stat-row"><span class="stat-label">Label milestone</span><span class="stat-value">FIRST HARDLY ART</span></div>
+          <div class="stat-row"><span class="stat-label">McKenna link</span><span class="stat-value">Childbirth (283)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Associated</h4>
+          <div class="stat-row"><span class="stat-label">Parent label</span><span class="stat-value">Sub Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Label peers</span><span class="stat-value">Chastity Belt, La Luz</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Pacific W-S Dolphin</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
