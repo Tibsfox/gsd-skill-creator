@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 279&deg; &mdash; Seven Year Bitch &mdash; E=8 &mdash; Riot Grrrl &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #EF9A9A; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #FFEBEE; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFEBEE; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #C62828; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #B71C1C; color: #FFEBEE; border: 1px solid #C62828; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #FFCDD2; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #FFCDD2; border-left: 4px solid #C62828; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #C62828; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; font-size: 1.05rem; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .tribute-card { background: linear-gradient(135deg, #37474F 0%, #455A64 100%); border-radius: 8px; padding: 1.75rem 2rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .tribute-card h3 { margin-top: 0; color: #B0BEC5; font-size: 1.2rem; }
+    .tribute-card p { color: #ECEFF1; margin: 0.6rem 0; }
+    .tribute-card strong { color: #90A4AE; }
+    .defiance-card { background: linear-gradient(135deg, #B71C1C 0%, #C62828 60%, #D32F2F 100%); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFEBEE; }
+    .defiance-card h3 { margin-top: 0; color: #FFCDD2; font-size: 1.15rem; }
+    .defiance-card p { color: #FFEBEE; margin: 0.4rem 0; }
+    .defiance-card strong { color: #FFCDD2; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>279 &mdash; Seven Year Bitch (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">279&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #B71C1C;">Seven Year Bitch</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Riot Grrrl</span>
+          <span class="label-badge">C/Z &rarr; Atlantic</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>CAPITOL HILL RIOT GRRRL. C/Z RECORDS ENTERS. FIRST SEATTLE (NOT OLYMPIA) FEMINIST PUNK ENTRY.</strong> Seven Year Bitch brings riot grrrl-adjacent energy to Capitol Hill, Seattle. Selene Vigil. Valerie Agnew. Elizabeth Davis. Stefanie Sargent (founding guitarist, died June 1992 &mdash; remembered). Roisin Dunne. C/Z Records to Atlantic. Three albums, seven years, no apologies. Grief and defiance. &ldquo;&iexcl;Viva Zapata!&rdquo; named for Mia Zapata &mdash; a bridge to degree 280.
+        </div>
+
+        <div class="tribute-card">
+          <h3>Stefanie Sargent &mdash; Remembered</h3>
+          <p>Stefanie Sargent, founding guitarist of Seven Year Bitch, died on June 27, 1992. She was twenty-four years old. She had recorded the band&rsquo;s debut material before her death.</p>
+          <p>The band continued. The subsequent work &mdash; particularly &ldquo;&iexcl;Viva Zapata!&rdquo; &mdash; is made in full knowledge of this loss, <strong>without wallowing in it.</strong> The music carries grief the way defiance carries it: by continuing, by insisting, by being loud and alive. Stefanie Sargent is part of Seven Year Bitch&rsquo;s history, not a footnote to it.</p>
+        </div>
+
+        <div class="defiance-card">
+          <h3>&iexcl;Viva Zapata! (1994) &mdash; The Central Statement</h3>
+          <p>The album title is tribute to <strong>Mia Zapata of The Gits</strong> (degree 280), who was murdered on July 7, 1993. Selene Vigil and Mia Zapata were friends. The Capitol Hill feminist punk community lost two women in the space of a year: Sargent in June 1992, Zapata in July 1993.</p>
+          <p><strong>&ldquo;&iexcl;Viva Zapata!&rdquo; means &ldquo;Long live Zapata!&rdquo;</strong> &mdash; both the Mexican revolutionary and the murdered singer. The exclamation points insist on life. The album refuses to accept that Mia Zapata can be silenced. Released on Atlantic Records &mdash; a major label, a wider audience, without dilution.</p>
+        </div>
+
+        <blockquote>The defiance always wins. Grief is present; it does not defeat the music. The music defeats the grief, or at least it refuses to yield to it.</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Sound &mdash; E=8, Capitol Hill</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Selene Vigil</h4>
+            <span class="level advanced">Vocals</span>
+            <p>Direct, powerful, present. Dark humor and defiance. The lyrics are fierce and grief-inflected without being mournful. Vigil delivers them with full conviction. Capitol Hill feminist punk in its vocal fullest expression.</p>
+          </div>
+          <div class="theory-card">
+            <h4>C/Z Records</h4>
+            <span class="level milestone">Label Entry</span>
+            <p>Seattle-based independent label (also: Mudhoney, Love Battery). Enters the engine at degree 279. The first Seattle-based non-Sub Pop, non-Kill Rock Stars label in the riot grrrl register. C/Z then Atlantic for &ldquo;&iexcl;Viva Zapata!&rdquo;</p>
+          </div>
+          <div class="theory-card">
+            <h4>Capitol Hill vs. Olympia</h4>
+            <span class="level intermediate">Geography</span>
+            <p>Seattle Capitol Hill feminist punk ≠ Olympia riot grrrl. Same energy level (E=8), different community, different institutional infrastructure, different relationship to the movement. Both valid. Both important.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Grief and Defiance</h4>
+            <span class="level advanced">Character</span>
+            <p>Seven Year Bitch carries grief (Sargent 1992, Zapata 1993) through defiance, not through melancholy. The music responds to loss by being more alive, not less. This is the specific emotional achievement of &ldquo;&iexcl;Viva Zapata!&rdquo;</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">280</span> The Gits &mdash; E=8. Mia Zapata was murdered July 7, 1993. Seven Year Bitch named their central album in her tribute. Degrees 279 and 280 are connected by grief, by community, and by the specific solidarity of the Capitol Hill feminist punk scene responding to two devastating losses.</li>
+          <li><span class="ref-degree">276</span> Bikini Kill &mdash; E=8, Olympia, Kill Rock Stars. The Olympia riot grrrl movement that Seven Year Bitch is adjacent to but distinct from. Same values, different geography, different institutional roots.</li>
+          <li><span class="ref-degree">277</span> Sleater-Kinney &mdash; E=8, Olympia, Kill Rock Stars. The riot grrrl lineage that Seven Year Bitch parallels on the Seattle side. Contemporaries; different cities.</li>
+          <li><span class="ref-degree">SPS 279</span> Blue whale 20Hz pulse &mdash; E=5. SECOND BALAENOPTERIDAE. Deepest sustained note in nature. Felt, not heard. E=8 + E=5 = E=13. The fierce E=8 of Capitol Hill feminist punk paired with the deepest, most invisible sound in the ocean.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">279 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Riot Grrrl</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1990&ndash;1997</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">C/Z &rarr; Atlantic</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Selene Vigil</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Stefanie Sargent*</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Roisin Dunne</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Elizabeth Davis</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Valerie Agnew</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Albums</h4>
+          <div class="stat-row"><span class="stat-label">Scratch It Out</span><span class="stat-value">1992</span></div>
+          <div class="stat-row"><span class="stat-label">¡Viva Zapata!</span><span class="stat-value">1994</span></div>
+          <div class="stat-row"><span class="stat-label">Gato Negro</span><span class="stat-value">1996</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Milestones</h4>
+          <div class="stat-row"><span class="stat-label">C/Z Entry</span><span class="stat-value">279</span></div>
+          <div class="stat-row"><span class="stat-label">Capitol Hill</span><span class="stat-value">First grrrl entry</span></div>
+          <div class="stat-row"><span class="stat-label">Bridge to</span><span class="stat-value">280 (The Gits)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Pairing</h4>
+          <div class="stat-row"><span class="stat-label">SPS 279</span><span class="stat-value">Blue whale 20Hz</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=5</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=13</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">77.5%</span></div>
+          <div class="stat-row"><span class="stat-label">E=8 streak</span><span class="stat-value">4 (276&ndash;279)</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
