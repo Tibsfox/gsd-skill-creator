@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 242&deg; &mdash; The Wailers &mdash; E=7 &mdash; Garage Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .disambiguation-banner { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 2px solid #E65100; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #BF360C; }
+    .disambiguation-banner strong { color: #B71C1C; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>242 &mdash; The Wailers (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">242&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">The Wailers</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Garage Rock</span>
+          <span class="label-badge">Golden Crest</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="disambiguation-banner">
+          <strong>NOT BOB MARLEY'S WAILERS.</strong> Tacoma, Washington, 1959. "The Fabulous Wailers." Four years before the Jamaican group formed. First PNW rock band to chart nationally. "Tall Cool One" &mdash; #36 Billboard Hot 100, 1959.
+        </div>
+
+        <div class="milestone-banner">
+          <strong>FIRST NATIONALLY CHARTING PNW ROCK BAND.</strong> "Tall Cool One" (1959) reached #36 on the Billboard Hot 100 &mdash; the first national chart success for Pacific Northwest rock music. The Wailers opened the door.
+        </div>
+
+        <h2>Tacoma's Founding Band</h2>
+        <p>The Wailers formed in Tacoma in 1959 &mdash; one year before The Sonics, in the same city, in the same working-class milieu that produced the Northwest Sound. Where the Sonics would push to maximum extremity, the Wailers built a foundation: instrumental excellence, a band with actual chops, and the ambition to reach beyond the regional market.</p>
+
+        <blockquote>"Tall Cool One" (1959) reached #36 on the Billboard Hot 100 &mdash; an independent label record from Tacoma, Washington competing in the national Top 40 one year before The Sonics had even formed.</blockquote>
+
+        <p>The Wailers were fronted by Robin Roberts ("Rockin' Robin Roberts") in the early years, backed by Rich Dangel on guitar, Kent Morrill on organ, and Buck Ormsby on bass &mdash; the same Buck Ormsby who would found Etiquette Records and become the Northwest Sound's primary infrastructure builder. The dual role Ormsby played &mdash; musician and label executive &mdash; is one of the scene's most important structural facts.</p>
+
+        <hr class="section-divider">
+
+        <h2>Key Recordings</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Tall Cool One (1959)</h4>
+            <span class="level milestone">Golden Crest Records &mdash; #36 Billboard</span>
+            <p>The national charter. Primarily instrumental. Bluesy guitar, organ, driving rhythm. The first PNW rock single to reach the Billboard Hot 100.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Mau Mau (1960)</h4>
+            <span class="level advanced">Golden Crest</span>
+            <p>Driving instrumental with tribal-influenced title. Less polished than "Tall Cool One" but more aggressive &mdash; pointing toward the Sonics' direction.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Out of Our Tree (1966)</h4>
+            <span class="level intermediate">Etiquette Records</span>
+            <p>The defining later-period track. Most aggressive Wailers recording. Approaches the Sonics' energy level. The punk-adjacent late bloom.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Out of Our Tree (LP, 1966)</h4>
+            <span class="level intermediate">Etiquette Records</span>
+            <p>The album. Most important later-period Wailers document. Shows the band adapting to the British Invasion era while retaining its Northwest identity.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Golden Crest Records &amp; National Reach</h2>
+        <p>The Wailers' national success was enabled by Golden Crest Records &mdash; a New York independent label with national distribution. Having a New York deal was the difference between regional obscurity and Billboard chart positions. This distribution infrastructure is what separates "Tall Cool One" from the dozens of Northwest Sound singles that never left the regional market. The Wailers had the sound, the ambition, and the label connection to break nationally.</p>
+
+        <hr class="section-divider">
+
+        <h2>E=7 &mdash; One Below The Maximum</h2>
+        <p>The Wailers at E=7 are one step below The Sonics' E=8 maximum at degree 241. This is accurate: the Wailers were the founding generation; the Sonics were the extreme extension. The Wailers established the Northwest Sound template; the Sonics pushed it to its limit. E=7 gives the Wailers credit for their genuine aggression while acknowledging the broader musical vocabulary that distinguishes them from the Sonics' single-minded extremism.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">241</span> The Sonics &mdash; E=8. Same city, same era. The Sonics took the Wailers' template and pushed it to the extreme. The Wailers opened the door; the Sonics blew it off the hinges.</li>
+          <li><span class="ref-degree">239</span> The Ventures &mdash; Another PNW instrumental rock band. "Walk Don't Run." The Ventures built a global career; the Wailers built a local foundation.</li>
+          <li><span class="ref-degree">244</span> The Kingsmen &mdash; "Louie Louie." Garage era's most famous single. The Wailers got there four years earlier with "Tall Cool One."</li>
+          <li><span class="ref-degree">SPS 242</span> Cutthroat Trout &mdash; E=2. The iconic PNW native trout against the first nationally charting PNW rock band.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">242 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Garage Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1959&ndash;1966</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Tacoma, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Golden Crest</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members (Core)</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Robin Roberts</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Rich Dangel</span></div>
+          <div class="stat-row"><span class="stat-label">Organ</span><span class="stat-value">Kent Morrill</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Buck Ormsby</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Mike Burk</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">67.2%</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">FIRST NW CHARTER</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Associated</h4>
+          <div class="stat-row"><span class="stat-label">Label peer</span><span class="stat-value">The Sonics</span></div>
+          <div class="stat-row"><span class="stat-label">Ormsby role</span><span class="stat-value">Etiquette founder</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Cutthroat Trout</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

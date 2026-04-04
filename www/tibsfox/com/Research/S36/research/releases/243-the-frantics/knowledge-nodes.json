@@ -1,0 +1,20 @@
+{
+  "degree": 243, "artist": "The Frantics", "slug": "243-the-frantics", "genre": "Surf/Garage", "energy": 6,
+  "era": "1959-1966 core. Surf/Garage. E=6 -- Seattle chapter of Northwest Sound. Seafair / Dolton Records.",
+  "location": { "origin": "Seattle, Washington" }, "formed": "Seattle, Washington, 1959", "active": "1959-1966",
+  "labels": ["Seafair Records", "Dolton Records (Liberty subsidiary)"],
+  "associated_musicians": ["The Ventures (Dolton connection)", "The Sonics (Tacoma contemporaries)", "The Wailers (Tacoma contemporaries)"],
+  "theory_nodes": [
+    { "concept": "Northwest Sound geographic trio complete: Tacoma (Sonics 241, Wailers 242) + Seattle (Frantics 243) + Portland (Kingsmen 244). The Frantics represent Seattle's chapter of the regional movement: more polished, surf-influenced, less extreme than Tacoma output.", "level": "intermediate", "department": "scene-theory", "description": "Frantics as Seattle chapter of Northwest Sound." },
+    { "concept": "Dolton Records (Liberty subsidiary) connection: same label network as The Ventures. 'Walk Don't Run' (Ventures, Dolton) and Frantics recordings in same distribution ecosystem. National reach through Liberty.", "level": "advanced", "department": "label-history", "description": "Dolton/Liberty as national distribution vehicle." },
+    { "concept": "Surf-garage synthesis at E=6: cleaner guitar tones than Sonics (E=8), more aggressive than Ventures. The Dick Dale tremolo-and-reverb technique applied to Northwest Sound energy. The middle ground of the 1959-1966 era.", "level": "intermediate", "department": "genre-analysis", "description": "Surf-garage synthesis as distinct aesthetic position." }
+  ],
+  "cross_references": [
+    {"degree": 241, "artist": "The Sonics", "relationship": "Tacoma's extreme counterpart. Same era; E=8 vs E=6 reflects Tacoma extremism vs. Seattle polish."},
+    {"degree": 239, "artist": "The Ventures", "relationship": "Shared Dolton Records connection. The Ventures built global career from same distribution network."},
+    {"degree": 244, "artist": "The Kingsmen", "relationship": "Geographic arc completion: Tacoma + Seattle + Portland = full Northwest Sound map."}
+  ],
+  "sps_pair": {"degree": 243, "species": "Pacific Lamprey", "pairing_note": "E=6 vs E=1 (TIES MINIMUM). FIRST PETROMYZONTIDAE. The surf-garage Seattle band paired with the most ancient jawless fish in the engine. Five-point spread."},
+  "milestones": ["NORTHWEST SOUND SEATTLE CHAPTER", "Surf-garage synthesis documented"],
+  "tags": ["surf-rock", "garage-rock", "seattle", "seafair-records", "dolton-records", "northwest-sound", "instrumental-rock", "1960s-seattle", "surf-garage-synthesis"]
+}
