@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 62&deg; &mdash; Beaver Chewing &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Species-pair landmark card */
+    .pair-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 60%, #7B1FA2 100%);
+      border: 3px solid #311B92;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #CE93D8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pair-card p {
+      color: #F3E5F5;
+    }
+    .pair-card strong {
+      color: #CE93D8;
+    }
+
+    /* Gnawing element card */
+    .gnaw-card {
+      background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+      border: 2px solid #2A1B18;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .gnaw-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .gnaw-card p {
+      color: #EFEBE9;
+    }
+    .gnaw-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Nocturnal card */
+    .nocturnal-card {
+      background: linear-gradient(135deg, #0D1B2A 0%, #1B2838 60%, #263238 100%);
+      border: 2px solid #0A1520;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #CFD8DC;
+    }
+    .nocturnal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #90A4AE;
+    }
+    .nocturnal-card p {
+      color: #CFD8DC;
+    }
+    .nocturnal-card strong {
+      color: #B0BEC5;
+    }
+
+    /* Destruction/creation duality card */
+    .duality-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+      border: 2px solid #0D3B12;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .duality-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .duality-card p {
+      color: #E8F5E9;
+    }
+    .duality-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Aquatic quintet card */
+    .quintet-card {
+      background: linear-gradient(135deg, #01579B 0%, #0277BD 100%);
+      border: 2px solid #003E6B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E1F5FE;
+    }
+    .quintet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B3E5FC;
+    }
+    .quintet-card p {
+      color: #E1F5FE;
+    }
+    .quintet-card strong {
+      color: #81D4FA;
+    }
+
+    /* Incisor card */
+    .incisor-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .incisor-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .incisor-card p {
+      color: #FFF3E0;
+    }
+    .incisor-card strong {
+      color: #FFCC80;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.pair { background: #4A148C; }
+    .theory-icon.gnaw { background: #3E2723; }
+    .theory-icon.labor { background: #5D4037; }
+    .theory-icon.nocturnal { background: #0D1B2A; }
+    .theory-icon.night { background: #1B2838; }
+    .theory-icon.incisor { background: #E65100; }
+    .theory-icon.felling { background: #33691E; }
+    .theory-icon.duality { background: #1B5E20; }
+    .theory-icon.riparian { background: #004D40; }
+    .theory-icon.quintet { background: #01579B; }
+    .theory-icon.energy { background: #00695C; }
+    .theory-icon.flicker { background: #880E4F; }
+    .theory-icon.owl { background: #1A237E; }
+    .theory-icon.wood { background: #BF360C; }
+    .theory-icon.pickwick { background: #AD1457; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #F3E5F5; color: #4A148C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">62&deg;</div>
+      <div class="release-title-block">
+        <h2>Beaver Chewing</h2>
+        <div class="scientific">Castor canadensis</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      rhythmic gnawing woody percussion &mdash; the cyclic crunch of iron-reinforced incisors cutting into wood, SPECIES-PAIR #2 (same beaver as degree 61, different sound: tail slap vs. chewing, warning vs. labor), first primarily nocturnal element since degree 4 (58-degree gap), first acoustic element representing sustained LABOR rather than communication, fifth consecutive aquatic species, E=3, year-round resident, riparian
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Species-Pair Landmark Card -->
+        <div class="pair-card">
+          <h3>Species-Pair #2 &mdash; Same Beaver, Different Sound</h3>
+          <p>The American Beaver appeared at degree 61 with the <strong>tail slap</strong> (E=4, percussive warning, pond/creek). Now at degree 62, the same <em>Castor canadensis</em> returns with the <strong>chewing</strong> (E=3, rhythmic gnawing, riparian). Same species. Different acoustic mode. This is the engine&rsquo;s <strong>second species-pair</strong>, after the Northern Flicker at degrees 21&ndash;22 (voice + drumming). The Flicker pair was avian; the beaver pair is <strong>mammalian</strong>. Forty degrees separate the two pairs. The tail slap says <strong>danger</strong>. The chewing says <strong>I am working</strong>.</p>
+        </div>
+
+        <!-- Gnawing Element Card -->
+        <div class="gnaw-card">
+          <h3>The 63rd Acoustic Element: The Rhythmic Gnaw</h3>
+          <p>Steady <strong>chunk-chunk-chunk</strong> of iron-reinforced incisors cutting into wood. Broadband transients ~200&ndash;4,000 Hz, peak energy 300&ndash;1,500 Hz. Tempo ~30&ndash;60 bites/minute. Sessions lasting 10&ndash;30 minutes. E=3. Audible at 30&ndash;80 meters in quiet nocturnal conditions. The engine&rsquo;s <strong>first acoustic element that represents sustained labor</strong> rather than communication. Not a signal, not a call &mdash; the incidental sound of work. The beaver gnaws not to be heard but to eat and to build.</p>
+        </div>
+
+        <!-- Nocturnal Card -->
+        <div class="nocturnal-card">
+          <h3>Nocturnal Returns &mdash; First Night Sound Since Degree 4</h3>
+          <p>The beaver&rsquo;s gnawing is primarily <strong>nocturnal</strong> &mdash; most tree felling occurs between dusk and dawn. This is the first primarily nocturnal acoustic element since the <strong>Northern Spotted Owl</strong> (degree 4), a gap of <strong>58 degrees</strong>. For 58 degrees, the engine documented a predominantly diurnal soundscape. At night: wind drops, bird song ceases, water dominates. The beaver&rsquo;s low-frequency gnawing becomes part of the creek&rsquo;s night voice &mdash; a slow, rhythmic pulse underlying the water and the insects.</p>
+        </div>
+
+        <!-- Destruction/Creation Duality Card -->
+        <div class="duality-card">
+          <h3>Ecosystem Engineering Part 2 &mdash; Destruction as Creation</h3>
+          <p>Degree 61 documented what the beaver <strong>builds</strong> (dams, ponds, lodges). Degree 62 documents what the beaver <strong>destroys</strong> (fells trees, gnaws bark, opens canopy). <strong>Creation and destruction are the same process.</strong> The felled tree becomes dam material. The canopy gap stimulates regrowth. The stump resprouts. Every tree destroyed becomes raw material for creation. The gnawing sound is simultaneously a tree dying and a wetland being born.</p>
+        </div>
+
+        <!-- Aquatic Quintet Card -->
+        <div class="quintet-card">
+          <h3>Five Consecutive Aquatic Species (58&ndash;62)</h3>
+          <p>Wood Duck (58, E=3) &rarr; Mallard (59, E=5) &rarr; Grebe (60, E=4) &rarr; Beaver tail slap (61, E=4) &rarr; <strong>Beaver chewing (62, E=3)</strong>. The aquatic quartet becomes a <strong>quintet</strong>. Energy curve: <strong>3&ndash;5&ndash;4&ndash;4&ndash;3</strong> &mdash; a symmetric arc peaking at the Mallard. Five degrees, three orders, two classes. The longest sustained habitat affinity in engine history.</p>
+        </div>
+
+        <!-- Incisor Card -->
+        <div class="incisor-card">
+          <h3>Iron-Reinforced Self-Sharpening Incisors</h3>
+          <p>The acoustic instrument of degree 62. <strong>Orange</strong> iron-rich enamel (Mohs ~5.5) on the front surface is harder than the dentine on the back, creating a <strong>self-sharpening chisel edge</strong> through differential wear. The more the beaver gnaws, the sharper the teeth become. Grow continuously at ~4&ndash;5 cm/year. Can fell a 15 cm tree in ~30 minutes. <em>Rodentia</em> comes from Latin <em>rodere</em>, &ldquo;to gnaw&rdquo; &mdash; the beaver&rsquo;s chewing is the order&rsquo;s etymological act.</p>
+        </div>
+
+        <h2>The Sound: Rhythmic Gnawing</h2>
+        <p><strong>Mechanics:</strong> The beaver stands on hind legs, bracing with its flat tail as a tripod. Turns head sideways to position the chisel edge of the incisors against the trunk. Upper incisors anchor; lower incisors cut in an arc that levers wood chips 1&ndash;5 cm long from the trunk. Each bite produces a short <strong>crunch</strong> or <strong>scrape</strong>, repeated at a steady cadence of ~30&ndash;60 bites per minute. The gnawing creates an hourglass-shaped notch around the circumference of the trunk.</p>
+        <p><strong>Acoustic character:</strong> Broadband transients ~200&ndash;4,000 Hz, most energy below 2,000 Hz. Not tonal &mdash; each bite is a complex transient of wood fibers fracturing. The defining quality is the <strong>metronomic rhythm</strong>: bite after bite at a steady cadence, like a slow metronome in the dark. Has been compared to a heavy rasp on hardwood or a muffled chisel strike.</p>
+        <p><strong>Context:</strong> Primarily <strong>nocturnal</strong>. Most gnawing occurs between dusk and dawn, with peak activity in the first hours after sunset. E=3 &mdash; audible at 30&ndash;80 meters in quiet conditions. The sound rewards proximity and patience.</p>
+
+        <h2>Tree Felling: Selection, Technique, the Fall</h2>
+        <p><strong>Species preference:</strong> Soft-wooded deciduous trees &mdash; cottonwood (<em>Populus trichocarpa</em>), red alder (<em>Alnus rubra</em>), willow (<em>Salix</em> spp.), bigleaf maple (<em>Acer macrophyllum</em>). Conifers generally avoided (harder wood, resin, lower nutritional value).</p>
+        <p><strong>Size and proximity:</strong> Trees 5&ndash;15 cm diameter preferred for efficiency. Strongly prefer trees <strong>within 30 meters of water</strong>. Most felling occurs within 10&ndash;15 meters of the waterline. Prefer trees leaning toward water for easier transport.</p>
+        <p><strong>Scale:</strong> A family of 4&ndash;8 beavers fells <strong>200&ndash;300 trees per year</strong>. The cumulative effect across a watershed creates measurably more canopy gaps, shrub cover, downed wood, and structural complexity in riparian zones.</p>
+
+        <h2>Riparian Zone: The Beaver&rsquo;s Workshop</h2>
+        <p>Degree 61&rsquo;s habitat was the <strong>pond</strong> &mdash; the beaver&rsquo;s living room. Degree 62&rsquo;s habitat is the <strong>riparian zone</strong> &mdash; the beaver&rsquo;s workshop. The transitional strip where forest meets water. Beavers maintain riparian zones in perpetual disturbance: felling trees, opening gaps, stimulating regrowth, cycling between mature forest and early-successional shrubland. The result is a gradient of dense shrub growth near water (repeatedly harvested) transitioning to mature forest farther from the bank.</p>
+
+        <h2>E=3 vs. E=4: Persistent vs. Explosive</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Sound</th><th>Energy</th><th>Duration</th><th>Range</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>61</td><td>Tail slap</td><td>E=4</td><td>&lt;0.1 sec</td><td>200&ndash;500 m</td></tr>
+            <tr><td><strong>62</strong></td><td><strong>Chewing</strong></td><td><strong>E=3</strong></td><td><strong>10&ndash;30 min</strong></td><td><strong>30&ndash;80 m</strong></td></tr>
+          </tbody>
+        </table>
+        <p>The tail slap is <strong>loud but brief</strong>. The chewing is <strong>quiet but endless</strong>. The tail slap dominates the moment. The chewing dominates the night. E=3 reflects incidental amplitude &mdash; the sound is not produced to be heard, just the byproduct of iron meeting wood.</p>
+
+        <h2>The Pickwick Parallel</h2>
+        <p>Degree 62 pairs beaver chewing with <strong>Pickwick</strong> in Part A &mdash; a Capitol Hill indie/folk band (2010&ndash;2016). Parallel resonances: (1) <strong>Rhythmic energy</strong> &mdash; Pickwick&rsquo;s driving, propulsive sound mirrors the beaver&rsquo;s metronomic gnawing. Both produce a beat. (2) <strong>Concentrated effort</strong> &mdash; Pickwick&rsquo;s brief six-year career, like a beaver&rsquo;s gnawing session on a single tree, was concentrated work that left marks disproportionate to its duration. (3) <strong>Intensity over duration</strong> &mdash; both demonstrate that focused effort matters more than longevity.</p>
+
+        <h2>Family Tracker After Degree 62</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td><strong>Castoridae</strong></td><td><strong>61, 62</strong></td><td><strong>2 (back-to-back, species-pair)</strong></td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-seven families across 63 entries. <strong>Castoridae rises to 2 entries</strong> &mdash; matching Anatidae and Bombycillidae as back-to-back pairs. 49 of 63 entries (77.8%) are Passeriformes. 2 of 63 entries (3.2%) are Mammalia. Aves representation drops to 96.8%.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">2</div>
+            <div class="theory-content">
+              <h4>Species-Pair #2 <span class="theory-level landmark">landmark</span></h4>
+              <p>Same beaver, different sound. Tail slap (61, E=4, warning, pond) + chewing (62, E=3, labor, riparian). The engine&rsquo;s second species-pair after Northern Flicker (21&ndash;22). First mammalian pair. 40 degrees between pairs.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon gnaw">G</div>
+            <div class="theory-content">
+              <h4>The Rhythmic Gnaw &mdash; 63rd Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Chunk-chunk-chunk of incisors in wood. ~200&ndash;4,000 Hz. E=3. Tempo ~30&ndash;60 bites/min. First acoustic element representing sustained labor. Not a signal &mdash; the incidental sound of work.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon labor">L</div>
+            <div class="theory-content">
+              <h4>First Functional Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Every previous element (0&ndash;61) served a communicative function. The beaver chewing communicates nothing &mdash; it is the byproduct of tree felling. The engine&rsquo;s acoustic vocabulary expands from signals to include the sounds of work.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon nocturnal">N</div>
+            <div class="theory-content">
+              <h4>Nocturnal Returns <span class="theory-level foundational">foundational</span></h4>
+              <p>First primarily nocturnal element since Northern Spotted Owl (degree 4). 58 degrees of predominantly diurnal soundscape. The gnawing pulls the engine back into darkness. The night soundscape reconnects.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon night">A</div>
+            <div class="theory-content">
+              <h4>Night Acoustic Environment <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Wind drops, bird song ceases, water dominates, insects add high-frequency layers. The beaver&rsquo;s low-frequency gnawing becomes atmospherically dominant despite moderate amplitude. Part of the creek&rsquo;s night voice.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon incisor">I</div>
+            <div class="theory-content">
+              <h4>Iron-Reinforced Incisors <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Orange iron-rich enamel (Mohs ~5.5). Self-sharpening through differential wear. Grow at ~4&ndash;5 cm/year. Fell 15 cm trees in ~30 minutes. Rodentia from Latin rodere, &ldquo;to gnaw&rdquo; &mdash; the order&rsquo;s etymological act.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon felling">T</div>
+            <div class="theory-content">
+              <h4>Tree Felling <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Cottonwood, alder, willow, maple preferred. Within 30 m of water. Hourglass notch, tripod stance. 200&ndash;300 trees/year per family. Selective harvest creating measurable riparian structural changes.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon duality">D</div>
+            <div class="theory-content">
+              <h4>Destruction as Creation <span class="theory-level foundational">foundational</span></h4>
+              <p>Degree 61 = what the beaver builds. Degree 62 = what the beaver destroys. The felled tree becomes dam material. Canopy gaps stimulate regrowth. Every tree destroyed becomes raw material for creation. Same process.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon riparian">R</div>
+            <div class="theory-content">
+              <h4>Riparian Zone &mdash; The Workshop <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degree 61: the pond (living room). Degree 62: the riparian zone (workshop). Where forest meets water. Beavers maintain this zone in perpetual productive disturbance. The factory where the engineer works.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon quintet">Q</div>
+            <div class="theory-content">
+              <h4>Aquatic Quintet (58&ndash;62) <span class="theory-level foundational">foundational</span></h4>
+              <p>Five consecutive aquatic species, two classes, three orders. Energy arc: 3&ndash;5&ndash;4&ndash;4&ndash;3. Symmetric, peaking at the Mallard. Longest sustained habitat affinity in engine history.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=3 Persistent vs. E=4 Explosive <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Tail slap: loud, brief (&lt;0.1 sec, 200&ndash;500 m). Chewing: quiet, endless (10&ndash;30 min, 30&ndash;80 m). The slap dominates the moment; the gnawing dominates the night. Incidental amplitude, not communication.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon flicker">F</div>
+            <div class="theory-content">
+              <h4>Flicker Pair Echo <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Northern Flicker (21&ndash;22): voice + drumming. Beaver (61&ndash;62): tail slap + chewing. 40 degrees apart. Bird pair then mammal pair. The engine&rsquo;s structural rhyme for multi-modal acoustic species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl">O</div>
+            <div class="theory-content">
+              <h4>Spotted Owl Echo <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degree 4 (owl) to degree 62 (beaver chewing): 58 degrees of daylight. Both heard only in darkness. The owl called from old-growth canopy; the beaver gnaws at streamside trunks. The night reconnects.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wood">W</div>
+            <div class="theory-content">
+              <h4>Wood Modifiers <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Pileated Woodpecker (54) excavates cavities. Beaver (62) fells entire trees. Different scale: cubic centimeters vs. entire trunks. Both create habitat through wood destruction. Avian and mammalian.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pickwick">P</div>
+            <div class="theory-content">
+              <h4>Pickwick Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both defined by rhythm. Pickwick&rsquo;s driving sound mirrors the beaver&rsquo;s metronomic gnawing. Brief career (2010&ndash;2016) like a gnawing session: concentrated effort leaving marks disproportionate to duration.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">S</div>
+            <div class="theory-content">
+              <h4>Second Consecutive Original CSV <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degree 62 is the second consecutive original CSV species. Two in a row without substitution &mdash; first time since degrees 43&ndash;44. The engine appears to have exited the amphibian belt permanently.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-061: American Beaver (tail slap)</strong>
+            <p>SPECIES-PAIR #2. Same species, different sound. Tail slap (61, E=4, warning, pond) + chewing (62, E=3, labor, riparian). First mammalian species-pair. Warning vs. work. Explosion vs. rhythm.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022: Northern Flicker</strong>
+            <p>FIRST SPECIES-PAIR. Voice + drumming (degrees 21&ndash;22). Bird pair then mammal pair, 40 degrees apart. The engine&rsquo;s structural device for multi-modal acoustic species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-060: Pied-billed Grebe</strong>
+            <p>FIFTH CONSECUTIVE AQUATIC SPECIES. Aquatic quartet becomes quintet. Energy arc: 3&ndash;5&ndash;4&ndash;4&ndash;3. Two classes, three orders, five degrees of water.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>NOCTURNAL RETURNS. First primarily nocturnal element since degree 4 &mdash; 58-degree gap. Owl in old-growth canopy; beaver at streamside trunks. Both heard only in darkness.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-054: Pileated Woodpecker</strong>
+            <p>WOOD MODIFIERS. Both destroy wood to create habitat. Woodpecker: cavities in cubic centimeters. Beaver: entire trunks. One avian/diurnal, one mammalian/nocturnal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Second consecutive beaver entry. The chewing represents the beaver&rsquo;s primary ecological activity: tree harvest. Nocturnal, riparian, year-round. Mammalian representation rises to 3.2%.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Ecosystem engineering through selective tree harvest. Canopy gaps, shrub regrowth, dam material, riparian disturbance. 200&ndash;300 trees/year per family. Destruction as creation.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; American Beaver (<em>Castor canadensis</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;North American beaver.&rdquo;</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Beavers.</li>
+          <li>National Geographic &mdash; American Beaver.</li>
+          <li>Wikipedia &mdash; &ldquo;Castoridae.&rdquo;</li>
+          <li>Muller-Schwarze, D. (2011). <em>The Beaver: Its Life and Impact</em>. Cornell University Press.</li>
+          <li>Audubon / National Wildlife Federation &mdash; Beaver as keystone species.</li>
+          <li>Naiman, R.J., Johnston, C.A., and Kelley, J.C. (1988). &ldquo;Alteration of North American streams by beaver.&rdquo; <em>BioScience</em> 38(11): 753&ndash;762.</li>
+          <li>Pollock, M.M., et al. (2014). &ldquo;Using beaver dams to restore incised stream ecosystems.&rdquo; <em>BioScience</em> 64(4): 279&ndash;290.</li>
+          <li>Hood, G.A. and Bayley, S.E. (2008). &ldquo;Beaver mitigates effects of climate on open water area.&rdquo; <em>Biological Conservation</em> 141(2): 556&ndash;567.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">62&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Rhythmic Gnaw</div>
+          <div class="stat-detail">#63 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Persistent, nocturnal, ambient</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">2nd consecutive mammal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Castoridae</div>
+          <div class="stat-detail">2nd entry (species-pair)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">2nd consecutive entry</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Rhythmic gnawing</div>
+          <div class="stat-detail">~200&ndash;4,000 Hz broadband</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Riparian</div>
+          <div class="stat-detail">Streamside forest, where trees meet water</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Primarily nocturnal</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Species-Pair</div>
+          <div class="stat-value">#2</div>
+          <div class="stat-detail">Beaver: tail slap (61) + chewing (62)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">2nd consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species-Pair Partner</div>
+          <div class="stat-value">SPS-061</div>
+          <div class="stat-detail">American Beaver &mdash; tail slap</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Previous Species-Pair</div>
+          <div class="stat-value">SPS-021/022</div>
+          <div class="stat-detail">Northern Flicker &mdash; voice + drumming</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nocturnal Echo</div>
+          <div class="stat-value">SPS-004</div>
+          <div class="stat-detail">Spotted Owl &mdash; 58-degree gap</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 62 of 360</p>
+  </footer>
+</body>
+</html>

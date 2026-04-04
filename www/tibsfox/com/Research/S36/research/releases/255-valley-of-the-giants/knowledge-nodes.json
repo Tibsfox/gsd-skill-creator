@@ -1,0 +1,47 @@
+{
+  "degree": 255, "artist": "Valley of the Giants", "slug": "255-valley-of-the-giants", "genre": "Stoner Rock", "subgenre": "Heavy Psych", "energy": 6,
+  "era": "Seattle. Stoner Rock / Heavy Psych. E=6 -- fuzz-forward, psychedelically extended, meditative weight.",
+  "location": { "origin": "Seattle, Washington" }, "formed": "Seattle, Washington", "active": "Active",
+  "labels": ["Heavy Psych Sounds Records"],
+  "name_reference": {
+    "source": "Valley of the Giants: old-growth Douglas fir grove in the Oregon Coast Range",
+    "significance": "Explicitly PNW old-growth naming. Scale of ancient forest in the music."
+  },
+  "genre_lineage": {
+    "foundation": "Black Sabbath (Tony Iommi downtuned Laney amp, *Black Sabbath* 1970, *Paranoid* 1970, *Master of Reality* 1971)",
+    "desert_rock": "Kyuss (Palm Desert CA, 1987-1995); Queens of the Stone Age (Josh Homme); Fu Manchu; Monster Magnet",
+    "doom_stoner": "Sleep (*Dopesmoker* / *Jerusalem*: 63-minute single track, genre extreme endpoint)",
+    "pnw_adaptation": "More atmospheric, more interior, greyer than California desert rock. Forest not desert."
+  },
+  "heavy_psych_sounds": {
+    "founded": "2012 by Davide Sferra, Italy",
+    "format": "Vinyl-first, retro-referencing",
+    "roster_peers": ["Dead Meadow", "Earthless", "Acid King", "Elder", "Causa Sui", "Sergeant Thunderhoof", "Mothership"],
+    "european_festivals": ["Desertfest", "Psychedelic Circus", "Freak Valley Festival"],
+    "significance": "International heavy psych market. European distribution gives international profile to Seattle band."
+  },
+  "sound_analysis": {
+    "primary_tool": "Fuzz guitar: warm, harmonically rich, not harsh high-gain. Enormous and slightly out of focus.",
+    "tuning": "Downtuned (C or B standard typical)",
+    "song_structure": "Long songs (typically 8-12 min). Riff establishment → development → psychedelic extension/drift.",
+    "riff_philosophy": "Riff as mantra: slow repetition creates meditative states. Sleep's influence.",
+    "vocals": "Mid-range, buried in mix, another texture not the focal point.",
+    "e6_placement": "Mid-to-high energy. Physical presence AND psychedelic extension in equal measure. Not the speed attack of post-hardcore; not the maximum weight of sludge."
+  },
+  "pnw_heavy_spectrum_253_255": [
+    {"degree": 253, "artist": "Helms Alee", "type": "Sludge", "e": 7, "character": "Slow avalanche -- doom + hardcore"},
+    {"degree": 254, "artist": "Botch", "type": "Post-Hardcore/Mathcore", "e": 8, "character": "Mathematical ferocity -- time signatures"},
+    {"degree": 255, "artist": "Valley of the Giants", "type": "Stoner Rock/Heavy Psych", "e": 6, "character": "Meditative weight -- riff + psych extension"}
+  ],
+  "theory_nodes": [
+    { "concept": "Stoner rock lineage: Black Sabbath (1970) → Kyuss (1987-1995) → Sleep (*Dopesmoker*) → contemporary heavy psych. Tony Iommi's downtuned warm guitar tone is the genetic code of the genre. PNW adaptation: forest not desert, grey not sun, interior not expansive.", "level": "advanced", "department": "genre-theory", "description": "Stoner rock lineage from Sabbath through desert rock to PNW heavy psych." },
+    { "concept": "Heavy Psych Sounds Records (Italy, 2012): vinyl-first international label for stoner/doom/psych. Valley of the Giants on HPS = access to European festival circuit and international heavy psych audience. Disproportionate European market for American stoner/doom.", "level": "intermediate", "department": "label-context", "description": "HPS: Italian independent as international heavy psych infrastructure." }
+  ],
+  "cross_references": [
+    {"degree": 254, "artist": "Botch", "relationship": "E=8 to E=6. Post-hardcore to stoner rock. Mathematical ferocity to meditative weight. Tacoma to Seattle."},
+    {"degree": 256, "artist": "Monster Truck Thundercat", "relationship": "E=6 holds. Both stoner rock. Double stoner degree 255-256. Seattle continues."}
+  ],
+  "sps_pair": {"degree": 255, "sound": "Log Truck Road Vibration", "pairing_note": "FIRST ANTHROPOGENIC SPS entry. Low-frequency road percussion of heavy equipment on forest roads. Forest road meets forest music. Working PNW landscape in two registers: industrial and sonic."},
+  "milestones": ["STONER ROCK / HEAVY PSYCH enters engine", "HEAVY PSYCH SOUNDS RECORDS enters engine"],
+  "tags": ["stoner-rock", "heavy-psych", "heavy-psych-sounds", "fuzz-guitar", "downtuned", "extended-songs", "pnw-forest-imagery", "old-growth-reference", "black-sabbath-lineage", "kyuss-lineage", "sleep-influence", "meditative-riff"]
+}

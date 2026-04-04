@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 55&deg; &mdash; Bewick&rsquo;s Wren &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Yard song element card */
+    .yardsong-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .yardsong-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .yardsong-card p {
+      color: #E3F2FD;
+    }
+    .yardsong-card strong {
+      color: #BBDEFB;
+    }
+
+    /* Troglodytidae returns card */
+    .wren-return-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .wren-return-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .wren-return-card p {
+      color: #F1F8E9;
+    }
+    .wren-return-card strong {
+      color: #C5E1A5;
+    }
+
+    /* Cultural learning card */
+    .dialect-card {
+      background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .dialect-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .dialect-card p {
+      color: #F3E5F5;
+    }
+    .dialect-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Range contraction card */
+    .contraction-card {
+      background: linear-gradient(135deg, #BF360C 0%, #E64A19 100%);
+      border: 2px solid #8D2B0B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .contraction-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCCBC;
+    }
+    .contraction-card p {
+      color: #FBE9E7;
+    }
+    .contraction-card strong {
+      color: #FFAB91;
+    }
+
+    /* Two wrens card */
+    .duality-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #002E27;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .duality-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2DFDB;
+    }
+    .duality-card p {
+      color: #E0F2F1;
+    }
+    .duality-card strong {
+      color: #80CBC4;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.yardsong { background: #1565C0; }
+    .theory-icon.wren-return { background: #33691E; }
+    .theory-icon.dialect { background: #4A148C; }
+    .theory-icon.contraction { background: #BF360C; }
+    .theory-icon.duality { background: #004D40; }
+    .theory-icon.plumage { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">55&deg;</div>
+      <div class="release-title-block">
+        <h2>Bewick&rsquo;s Wren</h2>
+        <div class="scientific">Thryomanes bewickii</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loud melodious variable song &mdash; buzzes, trills, and whistles &mdash; the yard song, TROGLODYTIDAE RETURNS after 54 degrees (longest family return gap in engine history), same family as degree 1 Pacific Wren but different genus (<em>Thryomanes</em> vs. <em>Troglodytes</em>), master vocalist with 9&ndash;22 song types, cultural vocal learning from neighbors, geographic dialects, the suburban wren vs. the forest wren, eastern range contraction, E=3, brushy / suburban / open woodland, eleventh consecutive CSV substitution
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Oregon Slender Salamander</strong> (<em>Batrachoseps wrighti</em>) at degree 55. Because the SPS Part B engine is birds-and-mammals only, Bewick&rsquo;s Wren replaces it. The substitution preserves the original&rsquo;s <strong>low-elevation brushy/understory habitat</strong>. Both species are year-round residents of Pacific Northwest lowland habitats. This is the <strong>eleventh consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54, Oregon Slender Salamander at 55) &mdash; the engine remains deep in the lungless salamander zone of the original CSV&rsquo;s amphibian belt.</p>
+        </div>
+
+        <!-- Troglodytidae Returns Card -->
+        <div class="wren-return-card">
+          <h3>TROGLODYTIDAE RETURNS &mdash; After 54 Degrees, the Wrens Reunite</h3>
+          <p>The Bewick&rsquo;s Wren brings <strong>Troglodytidae</strong> back to the engine after a <strong>54-degree absence</strong> (last: degree 1, Pacific Wren) &mdash; <strong>the longest family return gap in engine history</strong>. This is the <strong>2nd Troglodytidae overall</strong> (1, 55) and introduces a <strong>new genus</strong>: <em>Thryomanes</em> (&ldquo;reed madness&rdquo;) vs. <em>Troglodytes</em> (&ldquo;cave diver&rdquo;). Same family, entirely different ecological strategy: the Pacific Wren is a deep forest specialist singing an innate cascade of 100+ notes. The Bewick&rsquo;s Wren is a <strong>suburban generalist</strong> singing a culturally learned repertoire of 9&ndash;22 variable song types from exposed perches. <strong>Passeriformes returns</strong> after the one-degree Piciformes interruption at degree 54.</p>
+        </div>
+
+        <!-- Yard Song Element Card -->
+        <div class="yardsong-card">
+          <h3>The 56th Acoustic Element: The Yard Song</h3>
+          <p>A <strong>loud, melodious, variable song</strong> of whistles, warbles, buzzes, and trills &mdash; learned from neighboring territory holders and varying geographically through cultural transmission. Named &ldquo;the yard song&rdquo; for three resonances: (1) the <strong>habitat</strong> &mdash; the Bewick&rsquo;s Wren is the yard bird, singing from fence posts and hedgerows in the suburban edge; (2) the <strong>cultural landscape</strong> &mdash; songs vary geographically because they are taught by neighbors, creating acoustic dialects that mirror physical neighborhoods; (3) the <strong>contrast</strong> &mdash; against the Pacific Wren&rsquo;s deep-forest cascade at degree 1, the yard song is wrens leaving old-growth and moving into the garden.</p>
+          <p>The yard song communicates through <strong>diversity</strong> (9&ndash;22 distinct song types per male) rather than density (100+ notes per cascade). Cultural vocal learning as acoustic identity.</p>
+        </div>
+
+        <!-- Cultural Learning Card -->
+        <div class="dialect-card">
+          <h3>Cultural Vocal Learning: Songs Learned from Neighbors</h3>
+          <p>Young male Bewick&rsquo;s Wrens <strong>learn their songs from neighboring territory holders</strong> &mdash; not from their fathers. A young male settles on a territory and memorizes the songs of males already holding adjacent territories. This <strong>horizontal cultural transmission</strong> produces geographic dialects that change gradually over distance: Seattle songs differ from Portland songs differ from Medford songs. Individual males hold <strong>9&ndash;22 distinct song types</strong> in their repertoire, cycling through them during singing bouts. The Bewick&rsquo;s Wren is a cultural animal &mdash; its song is not genetically determined but socially learned.</p>
+        </div>
+
+        <!-- Two Wrens Card -->
+        <div class="duality-card">
+          <h3>Two Wrens, Two Worlds: Forest vs. Suburb</h3>
+          <p>The <strong>Pacific Wren</strong> (degree 1, &ldquo;the cascade&rdquo;) and the <strong>Bewick&rsquo;s Wren</strong> (degree 55, &ldquo;the yard song&rdquo;) represent the two fundamental wren strategies in the Pacific Northwest. Both weigh <strong>8&ndash;12 grams</strong>. Both are year-round residents. Both are Troglodytidae. But the Pacific Wren hides in old-growth understory and pours out an innately structured cascade of 100+ notes. The Bewick&rsquo;s Wren perches on a fence post and delivers a culturally learned repertoire of variable songs. <strong>The forest and the yard. The cave diver and the reed-frenzy bird.</strong> The wrens bracket the engine: degree 1 and degree 55. The first wren sang from the deepest interior. The second sings from the nearest edge.</p>
+        </div>
+
+        <!-- Range Contraction Card -->
+        <div class="contraction-card">
+          <h3>The Eastern Range Contraction: A Species Lost Its Ground</h3>
+          <p>The Bewick&rsquo;s Wren has <strong>almost completely disappeared from eastern North America</strong> &mdash; one of the most dramatic range contractions among North American passerines. Once breeding from the Appalachians to the Midwest, the species is now essentially extirpated from its former eastern range. The primary driver: <strong>competitive displacement by the House Wren</strong> (<em>Troglodytes aedon</em>), an aggressive cavity competitor that destroys eggs and usurps nest sites. In the <strong>West, the species remains common and stable</strong> &mdash; the PNW is its stronghold. This is the <strong>opposite</strong> of the Lesser Goldfinch&rsquo;s range expansion (degree 44). The engine now has both vectors: expansion and contraction.</p>
+        </div>
+
+        <h2>Bewick&rsquo;s Reed-Frenzy Bird</h2>
+        <p><em>Thryomanes bewickii</em> &mdash; from Ancient Greek <em>thryon</em> (&ldquo;reed&rdquo;) + <em>manes</em> (&ldquo;madness, passion, frenzy&rdquo;) + <em>bewickii</em> (named by Audubon in 1827 for Thomas Bewick, 1753&ndash;1828, English wood engraver and naturalist). Full translation: <strong>&ldquo;Bewick&rsquo;s reed-frenzy bird.&rdquo;</strong> Monotypic genus &mdash; Bewick&rsquo;s Wren is the only species in <em>Thryomanes</em>. Compare the Pacific Wren&rsquo;s <em>Troglodytes pacificus</em> (&ldquo;Pacific cave diver&rdquo;) at degree 1: the cave diver hides in darkness; the reed-frenzy bird burns with restless energy in the open.</p>
+
+        <h2>The Sound: Master Vocalist of the Suburban Edge</h2>
+        <p><strong>Primary song:</strong> A loud, melodious, variable performance &mdash; a string of short whistles, warbles, burrs, buzzes, and musical trills delivered from an exposed perch. Frequency ~2.0&ndash;8.0 kHz, peak energy 3.0&ndash;6.0 kHz. Duration ~2&ndash;4 seconds per song. Structure: <strong>whistle-trill-finish</strong> three-part architecture &mdash; 1&ndash;2 clear whistled notes, a rapid trill or buzzy warble, a sharp terminal flourish. Enormously variable in specific notes. Bright, clear, musical quality.</p>
+        <p><strong>Repertoire:</strong> Individual males hold <strong>9&ndash;22 distinct song types</strong>, each a stereotyped pattern, cycled through in succession. Songs learned from neighboring territory holders, not from fathers. Geographic dialects change gradually over distance.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary song</td><td>2.0&ndash;8.0 kHz (peak 3.0&ndash;6.0)</td><td>~2&ndash;4 s</td><td>Territory, mate attraction</td></tr>
+            <tr><td>Scold call</td><td>2.5&ndash;6.0 kHz</td><td>~100&ndash;300 ms</td><td>Alarm, mobbing</td></tr>
+            <tr><td>Buzz/chatter</td><td>3.0&ndash;7.0 kHz</td><td>~200&ndash;500 ms series</td><td>Agitation, contact</td></tr>
+            <tr><td>Contact call</td><td>3.0&ndash;5.0 kHz</td><td>~50&ndash;150 ms</td><td>Pair contact</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Plumage: The Bold Supercilium</h2>
+        <p><strong>Bold white supercilium</strong> (eyebrow stripe) extending from bill base back past the eye &mdash; the defining field mark. <strong>Brown above</strong> (PNW form: richer brown, warm rufous tinge), <strong>pale gray below</strong> (PNW form: grayer than eastern). <strong>Long tail</strong> frequently cocked upward and flicked side to side &mdash; a behavioral field mark. Small size: 13&ndash;14 cm, <strong>8&ndash;12 g</strong> &mdash; essentially the same mass as the Pacific Wren (degree 1). Slender, slightly decurved bill for probing crevices. Separated from House Wren by bold supercilium; from Pacific Wren by longer tail, suburban habitat; from Marsh Wren by upland brush habitat.</p>
+
+        <h2>Habitat: The Yard Bird</h2>
+        <p>Breeds in <strong>brushy, scrubby, and edge habitats</strong> at lower elevations: suburban gardens, hedgerows, brush piles, blackberry tangles, Garry oak savanna, riparian brush, open woodlands, chaparral. Nests in birdhouses, mailboxes, tin cans, tool sheds, garages &mdash; extraordinary flexibility in nest site selection. The common thread is <strong>structure at ground level</strong>: dense, tangled vegetation or human structures with crevices for foraging and nesting. Year-round resident in western Washington. <strong>Dramatic contrast</strong> with the Pacific Wren&rsquo;s old-growth forest dependency.</p>
+
+        <h2>Nesting: The Cavity Opportunist</h2>
+        <p>Cavity nester with extraordinary flexibility: natural cavities, woodpecker holes, birdhouses, mailboxes, old boots, dryer vents, hanging planters. Male builds multiple &ldquo;dummy nests&rdquo;; female selects one. 5&ndash;7 white eggs with brown speckles. 14&ndash;16 day incubation (female only). 14&ndash;16 day nestling period. 1&ndash;2 broods per season in PNW.</p>
+
+        <h2>Family Tracker After Degree 55</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td><strong>Troglodytidae</strong></td><td><strong>1, 55</strong></td><td><strong>2 (returns after 54&deg; gap &mdash; longest return)</strong></td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-two families across 56 entries. No new family &mdash; Troglodytidae was already in the engine at degree 1. But the family&rsquo;s return after <strong>54 degrees</strong> is a landmark structural event &mdash; the longest family return gap in engine history. Troglodytidae rises from 1 to 2 members. The new genus (<em>Thryomanes</em>) adds a completely different wren archetype. 48 of 56 entries (85.7%) are Passeriformes.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon yardsong">Y</div>
+            <div class="theory-content">
+              <h4>The Yard Song <span class="theory-level foundational">foundational</span></h4>
+              <p>The 56th acoustic element. Loud melodious variable song of whistles, trills, and buzzes, learned from neighbors and varying geographically. First element defined by cultural vocal learning. Music-theory parallel: theme and variations &mdash; each song type is a variation on the whistle-trill-finish template, varying within the bird and across the landscape.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wren-return">W</div>
+            <div class="theory-content">
+              <h4>Troglodytidae Returns After 54 Degrees <span class="theory-level foundational">foundational</span></h4>
+              <p>2nd Troglodytidae overall (1, 55). Longest family return gap in engine history. New genus Thryomanes vs. Troglodytes. Suburban generalist vs. deep forest specialist. The wren theme returns transformed by 54 degrees of development. Music-theory parallel: the recapitulation &mdash; the main theme returns in the home key, changed by everything the music went through.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dialect">D</div>
+            <div class="theory-content">
+              <h4>Cultural Vocal Learning and Dialects <span class="theory-level foundational">foundational</span></h4>
+              <p>Young males learn songs from neighbors, not fathers. 9&ndash;22 song types per male. Geographic dialects change gradually across the landscape. Horizontal cultural transmission &mdash; the same mechanism that produces human linguistic dialects. Music-theory parallel: the folk tradition &mdash; songs that exist because singers learned from other singers, mutating gradually across geography.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contraction">C</div>
+            <div class="theory-content">
+              <h4>The Eastern Range Contraction <span class="theory-level foundational">foundational</span></h4>
+              <p>Near-total disappearance from eastern North America driven by House Wren competition. Opposite of Lesser Goldfinch range expansion (degree 44). The engine has both vectors: expansion and contraction. PNW is the stronghold. The eastern song dialects &mdash; an entire cultural tradition &mdash; were lost. Music-theory parallel: the lost school &mdash; a regional musical tradition that dies when the community disperses.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon duality">T</div>
+            <div class="theory-content">
+              <h4>Two Wrens, Two Worlds <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Pacific Wren (degree 1) and Bewick&rsquo;s Wren (degree 55): forest interior vs. suburban edge. Same mass (8&ndash;12 g), opposite strategies. Density vs. diversity. Hidden vs. displayed. Wilderness vs. domesticity. The wrens bracket the engine. Music-theory parallel: the double concerto &mdash; two soloists from the same family, different voices, different positions.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plumage">S</div>
+            <div class="theory-content">
+              <h4>The Bold White Supercilium <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The defining field mark: a bold white eyebrow stripe extending from bill base past the eye. Long tail cocked and flicked. PNW form richer brown above, grayer below. After the sapsucker&rsquo;s vivid red head (degree 54), a subtler visual identity &mdash; a precise structural mark, not a field of color. Music-theory parallel: the motif &mdash; a short, distinctive figure that instantly identifies the character.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-054: Red-breasted Sapsucker</strong>
+            <p>CONSECUTIVE DEGREES, SAME ENERGY. The sap-well rhythm (degree 54, E=3, arrhythmic percussion) yields to the yard song (degree 55, E=3, cultural vocal learning). Percussion to melody. Engineering to culture. Piciformes to Passeriformes &mdash; the order switches back.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>TROGLODYTIDAE REUNITED AFTER 54 DEGREES &mdash; longest family return gap in engine history. The cascade (degree 1, 100+ innate notes) vs. the yard song (degree 55, 9&ndash;22 learned types). Cave diver vs. reed-frenzy bird. Forest vs. suburb. Two wrens, two worlds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-048: White-crowned Sparrow</strong>
+            <p>TWO DIALECT SPECIES. The White-crowned Sparrow shows sharp dialect boundaries. The Bewick&rsquo;s Wren shows gradual, continuous dialect gradients. Both are cultural learners with neighbor-influenced vocal traditions. Different dialect architectures.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-044: Lesser Goldfinch</strong>
+            <p>OPPOSITE RANGE VECTORS. The Lesser Goldfinch (degree 44) expands northward. The Bewick&rsquo;s Wren (degree 55) contracted eastward. Range expansion vs. range contraction. The engine has both stories.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-045: Song Sparrow</strong>
+            <p>TWO SUBURBAN SINGERS. Both common suburban PNW birds with loud, melodious songs. Different architectures: the sparrow&rsquo;s preamble vs. the wren&rsquo;s whistle-trill-finish. Both frequent the brushy edges of human landscapes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-053: Steller&rsquo;s Jay</strong>
+            <p>NEST DESTROYER AND PREY RISK. Steller&rsquo;s Jays raid Bewick&rsquo;s Wren nests. The wren&rsquo;s scold call targets jays. The corvid alarm (degree 53) and the yard song (degree 55) share suburban habitat as predator and prey.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Bewick&rsquo;s Wren documented across western Washington and British Columbia. Year-round resident of brushy habitats and suburban areas. One of the most common yard birds in western Washington.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Edge habitat ecology. Suburban adaptation. Cultural vocal transmission and geographic dialects. Competitive displacement by House Wrens in eastern North America. The ecological interface between wildness and domesticity.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Bewick&rsquo;s Wren (<em>Thryomanes bewickii</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Bewick&rsquo;s Wren. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Bewick&rsquo;s Wren.</li>
+          <li>National Geographic &mdash; Bewick&rsquo;s Wren.</li>
+          <li>Wikipedia &mdash; &ldquo;Bewick&rsquo;s wren.&rdquo;</li>
+          <li>Wikipedia &mdash; &ldquo;Thryomanes.&rdquo;</li>
+          <li>Audubon &mdash; Bewick&rsquo;s Wren Field Guide.</li>
+          <li>Kroodsma, D. E. &mdash; Bewick&rsquo;s Wren vocal behavior and song learning studies.</li>
+          <li>Kennedy, E. D. and White, D. W. &mdash; Bewick&rsquo;s Wren in Birds of the World.</li>
+          <li>Sibley, D. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">55&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Yard Song</div>
+          <div class="stat-detail">#56 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Moderate-to-loud: melodious variable song</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Troglodytidae</div>
+          <div class="stat-detail">Returns after 54&deg; gap &mdash; 2nd member</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Thryomanes</em></div>
+          <div class="stat-detail">NEW genus &mdash; &ldquo;reed madness&rdquo; (monotypic)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Passeriformes</div>
+          <div class="stat-detail">Returns after 1-degree Piciformes break</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Brushy / Suburban</div>
+          <div class="stat-detail">Gardens, hedgerows, thickets, open woodland</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round; sedentary</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">53 unique</div>
+          <div class="stat-detail">56 entries (0&ndash;55)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">22</div>
+          <div class="stat-detail">Troglodytidae returns &mdash; no new family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Passeriformes resumes; no new order</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">8&ndash;12 g</div>
+          <div class="stat-detail">Same mass as Pacific Wren (degree 1)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">White Supercilium</div>
+          <div class="stat-detail">Bold eyebrow stripe; long cocked tail</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Cavity (Flexible)</div>
+          <div class="stat-detail">Natural + artificial: birdhouses, mailboxes, sheds</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Key Adaptation</div>
+          <div class="stat-value">Cultural Song Learning</div>
+          <div class="stat-detail">9&ndash;22 types learned from neighbors</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">IUCN; western stable, eastern collapsed</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Repertoire</div>
+          <div class="stat-value">9&ndash;22 Song Types</div>
+          <div class="stat-detail">Culturally transmitted; geographic dialects</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 055</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 98&deg; &mdash; Tree Cricket Song &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Pure tone card */
+    .pure-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 30%, #303F9F 60%, #3949AB 100%);
+      border: 3px solid #1A237E;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .pure-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #C5CAE9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pure-card p { color: #E8EAF6; }
+    .pure-card strong { color: #C5CAE9; }
+
+    /* Thermometer card */
+    .thermo-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 30%, #E64A19 60%, #F4511E 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .thermo-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCCBC;
+    }
+    .thermo-card p { color: #FBE9E7; }
+    .thermo-card strong { color: #FFCCBC; }
+
+    /* Gryllidae returns card */
+    .return-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 50%, #689F38 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .return-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .return-card p { color: #F1F8E9; }
+    .return-card strong { color: #DCEDC8; }
+
+    /* Gold Casio contrast card */
+    .contrast-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .contrast-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #80CBC4;
+    }
+    .contrast-card p { color: #E0F2F1; }
+    .contrast-card strong { color: #B2DFDB; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.pure { background: #1A237E; }
+    .theory-icon.thermo { background: #BF360C; }
+    .theory-icon.gryllidae { background: #33691E; }
+    .theory-icon.shrub { background: #006064; }
+    .theory-icon.contrast { background: #004D40; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">98&deg;</div>
+      <div class="release-title-block">
+        <h2>Tree Cricket Song</h2>
+        <div class="scientific"><em>Oecanthus fultoni</em> (Gryllidae) &mdash; Gryllidae RETURNS &mdash; &ldquo;Thermometer Cricket&rdquo;</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      pure sustained trill thermometer &mdash; Gryllidae RETURNS (first at degree 87). Same family, different species and acoustic character. The snowy tree cricket (<em>Oecanthus fultoni</em>) produces one of the purest tones in nature &mdash; a sustained, crystalline trill. &ldquo;Thermometer cricket&rdquo; &mdash; chirp rate correlates precisely with temperature (Dolbear&rsquo;s Law). E=3. Shrub habitat. Thirty-eighth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Pure Tone Card -->
+        <div class="pure-card">
+          <h3>The Purest Tone in Nature &mdash; Crystalline Sustained Trill</h3>
+          <p>The snowy tree cricket produces one of the <strong>purest tones in the natural world</strong> [1, 2]. A sustained, crystalline trill &mdash; a single frequency delivered with remarkable clarity and consistency. No harmonics, no buzz, no rasp &mdash; a <strong>clean, clear, sustained pitch</strong> that rings through the night like a tuning fork made of biology. <strong>E=3</strong>. The pure tone is moderate in volume but extraordinary in clarity. One cricket is gentle; many create a <strong>shimmering curtain of pure sound</strong>.</p>
+        </div>
+
+        <!-- Thermometer Card -->
+        <div class="thermo-card">
+          <h3>The Thermometer Cricket &mdash; Dolbear&rsquo;s Law</h3>
+          <p>The snowy tree cricket is called the <strong>&ldquo;thermometer cricket&rdquo;</strong> because its chirp rate correlates precisely with ambient temperature [1, 2, 3]. <strong>Dolbear&rsquo;s Law</strong> (1897): count the number of chirps in 13 seconds, add 40, and you have the temperature in Fahrenheit. This is not folklore &mdash; it is <strong>verified biophysics</strong>. The cricket&rsquo;s metabolic rate, which drives chirp rate, is directly temperature-dependent. <strong>The cricket IS a thermometer.</strong></p>
+        </div>
+
+        <!-- Gryllidae Returns Card -->
+        <div class="return-card">
+          <h3>Gryllidae RETURNS &mdash; Same Family, Different Species, Different Sound</h3>
+          <p><strong>Gryllidae</strong> returns from degree 87 (cricket chorus). The field cricket chorus at degree 87 was a <strong>dense rhythmic chirping</strong> &mdash; multiple species, percussive, pulsing. The tree cricket at degree 98 is a <strong>pure sustained trill</strong> &mdash; single species, tonal, crystalline. Same family, <strong>radically different acoustic character</strong>. The engine demonstrates that a single family can contain vastly different sound worlds.</p>
+        </div>
+
+        <!-- Gold Casio Contrast Card -->
+        <div class="contrast-card">
+          <h3>The Gold Casio Contrast</h3>
+          <p>Degree 98 pairs the tree cricket with <strong>Gold Casio</strong> in Part A &mdash; Indie Electronic, E=4. <strong>Both pure tones, both sustained.</strong> The tree cricket&rsquo;s crystalline trill is nature&rsquo;s pure sustained tone. Gold Casio&rsquo;s retro-synthetic shimmer is the synthesizer&rsquo;s sustained tone. <strong>Biological oscillator and electronic oscillator.</strong> Both produce clean, sustained, tonal sounds. The cricket as nature&rsquo;s synthesizer.</p>
+        </div>
+
+        <h2>The Sound: Pure Sustained Trill Thermometer (98th Acoustic Element, species side)</h2>
+        <p><strong>The call:</strong> The snowy tree cricket (<em>Oecanthus fultoni</em>) produces a <strong>pure, sustained trill</strong> by rubbing its wings together (stridulation) [1, 2]. Unlike the field cricket&rsquo;s chirp (a series of discrete pulses), the tree cricket&rsquo;s trill is <strong>continuous and tonal</strong> &mdash; a sustained pitch with extraordinary purity. The frequency is approximately <strong>2-4 kHz</strong>, and the tone is remarkably free of harmonics.</p>
+        <p><strong>Why E=3:</strong> The tree cricket&rsquo;s call is <strong>gentle but persistent</strong>. Individual calls are quieter than field crickets (87, E=4). The pure tone carries well but does not dominate the soundscape the way a dense cricket chorus does. E=3 reflects the crystalline clarity at moderate amplitude &mdash; pure but not loud. Higher than the stonefly (94, E=2) for sustained audibility. Lower than the cricket chorus (87, E=4) for overall volume.</p>
+
+        <h2>Taxonomy: Gryllidae RETURNS</h2>
+        <p><strong>Classification:</strong> Class <strong>Insecta</strong>. Order <strong>Orthoptera</strong>. Family <strong>Gryllidae</strong> &mdash; RETURNS (first at degree 87) [1, 2]. Genus <em>Oecanthus</em>. Species <em>O. fultoni</em> (snowy tree cricket).</p>
+        <p><strong>Gryllidae at degree 87:</strong> The field cricket chorus &mdash; dense rhythmic chirping from multiple species. Percussive, pulsing, E=4. Dry meadow habitat.</p>
+        <p><strong>Gryllidae at degree 98:</strong> The snowy tree cricket song &mdash; pure sustained trill from a single species. Tonal, crystalline, E=3. Shrub habitat.</p>
+        <p><strong>Same family, different sound world.</strong> The engine demonstrates taxonomic depth within a single family.</p>
+
+        <h2>Ecology: Dolbear&rsquo;s Law and the Shrub Habitat</h2>
+        <p><strong>Habitat:</strong> Shrub. Tree crickets live on shrubs, low trees, and herbaceous plants [1, 2]. They call from vegetation, not from the ground like field crickets. The elevated position helps the pure tone carry through the night air.</p>
+        <p><strong>Dolbear&rsquo;s Law:</strong> In 1897, physicist Amos Dolbear published the relationship between cricket chirp rate and temperature [3]. For the snowy tree cricket: <strong>T(&deg;F) = 40 + (chirps in 13 seconds)</strong>. The relationship is linear and reliable because the cricket&rsquo;s metabolic rate &mdash; which drives wing-rubbing speed &mdash; is directly proportional to ambient temperature. Warmer = faster chirps. Cooler = slower chirps.</p>
+        <p><strong>The purest tone:</strong> The snowy tree cricket&rsquo;s wing morphology produces an unusually pure tone &mdash; the file-and-scraper mechanism generates a nearly sinusoidal waveform with minimal harmonic content [1]. This is rare in stridulating insects, most of which produce complex, harmonic-rich sounds. The tree cricket is an acoustic outlier.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon pure">P</div>
+            <div class="theory-content">
+              <h4>Pure Sustained Trill &mdash; 98th Acoustic Element (species side)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>One of the purest tones in nature. Sustained, crystalline, nearly sinusoidal. E=3. Remarkable clarity. 2-4 kHz.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon thermo">T</div>
+            <div class="theory-content">
+              <h4>Thermometer Cricket &mdash; Dolbear&rsquo;s Law</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Chirp rate = temperature. T(&deg;F) = 40 + chirps/13s. Verified biophysics, not folklore. The cricket IS a thermometer.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon gryllidae">G</div>
+            <div class="theory-content">
+              <h4>Gryllidae Returns &mdash; Same Family, Different Sound</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Field cricket (87): dense rhythmic chirping, E=4, dry meadow. Tree cricket (98): pure sustained trill, E=3, shrub. Same family, different worlds.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon shrub">S</div>
+            <div class="theory-content">
+              <h4>Shrub Habitat &mdash; Elevated Calling Position</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Calls from shrubs and low trees. Elevated position helps pure tone carry. Not ground-dwelling like field crickets.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon contrast">C</div>
+            <div class="theory-content">
+              <h4>The Gold Casio Contrast</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Biological oscillator (E=3) and electronic oscillator (E=4). Both pure, sustained tones. Cricket as nature's synthesizer.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-087: Cricket Chorus</strong>
+            <p>SAME FAMILY GRYLLIDAE! Field cricket (87): dense rhythmic chirping, multiple species, E=4, dry meadow. Tree cricket (98): pure sustained trill, single species, E=3, shrub. Same family, radically different acoustic characters.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-088: Katydid</strong>
+            <p>Orthoptera connection. Both Orthoptera, different families. Katydid rasp (88) and tree cricket trill (98). Both stridulating insects; different acoustic textures. Katydid is raspy; tree cricket is pure.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-089: Cicada</strong>
+            <p>Insect sustained sound parallel. Cicada throb (89) and tree cricket trill (98). Both sustained insect sounds. Cicada is loud and pulsing (E=5); tree cricket is quiet and pure (E=3). Different mechanisms (tymbal vs stridulation).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-094: Stonefly</strong>
+            <p>Insect era context. Both low-energy insect entries. Stonefly (94, E=2) and tree cricket (98, E=3). The quiet end of the insect acoustic spectrum.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-090: Spring Peeper</strong>
+            <p>Pure tone parallel! Both produce remarkably pure tones. Spring Peeper's ascending peep and tree cricket's sustained trill -- both clean, clear, tonal. Different phyla (amphibian vs insect), convergent acoustic purity.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] Wikipedia &mdash; &ldquo;Oecanthus fultoni,&rdquo; &ldquo;Tree cricket,&rdquo; &ldquo;Snowy tree cricket.&rdquo;</li>
+          <li>[2] Walker, T.J. (1962). &ldquo;Factors responsible for intraspecific variation in the calling songs of crickets.&rdquo; <em>Evolution</em>, 16(4), 407-428.</li>
+          <li>[3] Dolbear, A.E. (1897). &ldquo;The cricket as a thermometer.&rdquo; <em>The American Naturalist</em>, 31(371), 970-971.</li>
+          <li>[4] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">98&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Pure tone. Crystalline clarity.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Gryllidae (returns)</div>
+          <div class="stat-detail">First at degree 87. Returns at 98.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Orthoptera</div>
+          <div class="stat-detail">Continuing. With Gryllidae and Tettigoniidae.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Insecta</div>
+          <div class="stat-detail">Insect era continues.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Shrub</div>
+          <div class="stat-detail">Low trees, herbaceous plants.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Pure sustained trill</div>
+          <div class="stat-detail">Nearly sinusoidal. 2-4 kHz.</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Snowy tree cricket</div>
+          <div class="stat-detail"><em>Oecanthus fultoni</em>.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dolbear&rsquo;s Law</div>
+          <div class="stat-value">T = 40 + chirps/13s</div>
+          <div class="stat-detail">Chirp rate = temperature (&deg;F).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Tone Purity</div>
+          <div class="stat-value">Near-sinusoidal</div>
+          <div class="stat-detail">Purest natural tone. Minimal harmonics.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Gryllidae (returns)</div>
+          <div class="stat-detail">Same family as degree 87.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Contrast</div>
+          <div class="stat-value">87 vs 98</div>
+          <div class="stat-detail">Dense chirp vs pure trill.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Insect Entries</div>
+          <div class="stat-value">11 (87-98)</div>
+          <div class="stat-detail">Insect era extends through 98.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (38th)</div>
+          <div class="stat-detail">Thirty-eighth consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

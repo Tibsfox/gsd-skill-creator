@@ -1,0 +1,74 @@
+{
+  "degree": 244, "species": "White Sturgeon", "slug": "244-white-sturgeon", "sound_type": "silent leaping splash (breach)", "energy": 4,
+  "scientific_name": "Acipenser transmontanus",
+  "family": "Acipenseridae",
+  "ecosystem": "major river (Columbia River primary; also Fraser, Snake, coastal rivers); estuarine habitat",
+  "season": "resident year-round; spawning spring (April-June); spawning migration in spring",
+  "taxonomy": {
+    "order": "Acipenseriformes",
+    "family": "Acipenseridae",
+    "genus": "Acipenser",
+    "class": "Actinopterygii (ray-finned fish; but with cartilaginous skeleton -- an ancestral character)",
+    "lineage_age_mya": 200,
+    "note": "FIRST ACIPENSERIDAE IN ENGINE. Second entry in ancient fish arc (after Petromyzontidae at 243). Living fossil: body plan stable since Mesozoic. Cartilaginous skeleton. Five rows of bony scutes instead of scales. Heterocercal tail."
+  },
+  "etymology": {
+    "acipenser": "Latin/Greek origin: possibly from akipesios (sharp-skin) or ancient Latin term for sturgeon",
+    "transmontanus": "Latin: beyond (trans) the mountains (montanus) -- referring to distribution west of the Rocky Mountains"
+  },
+  "size_records": {
+    "max_length_m": 6.1,
+    "max_length_ft": 20,
+    "max_weight_kg_verified": 630,
+    "max_weight_lbs_verified": 1400,
+    "max_weight_historical_kg": 816,
+    "max_age_years": 100,
+    "note": "Largest freshwater fish in North America. Age determined by fin-spine ring counting."
+  },
+  "life_history": {
+    "sexual_maturity": "Females: 15-25 years. Males: 10-20 years.",
+    "spawning_frequency": "Females every 2-5 years after maturity",
+    "spawning_season": "Spring (April-June)",
+    "habitat": "Deep river pools year-round; shallow gravel runs for spawning",
+    "skeleton": "Cartilaginous (ancestral character; no true bone)",
+    "armor": "Five rows of bony scutes (dorsal, 2 lateral, 2 ventral)"
+  },
+  "sound_profile": {
+    "type": "physical sound, not vocalization",
+    "behavior": "Breaching -- partial or full emergence from water, then surface re-entry",
+    "breach_sound": "Low-frequency boom/clap on water entry; secondary water splash cascade; subsurface pressure wave. Audible 500-1000m.",
+    "energy": "E=4 -- infrequent but physically impressive individual events; not continuous"
+  },
+  "columbia_river": {
+    "population_estimate": "Several hundred thousand fish across all size classes",
+    "world_status": "World's most abundant wild White Sturgeon population",
+    "management": "Size slot harvest regulations; creel limits; catch-and-release fishery; reservoir pool management",
+    "dam_effects": "400+ Columbia River dams fragment population into isolated reservoir segments. Upper Columbia and Snake River populations severely depleted.",
+    "snake_river_above_hells_canyon": "Functionally absent above Hell's Canyon Dam"
+  },
+  "indigenous_significance": {
+    "status": "Important food species; First Foods in some tribal traditions",
+    "tribes": ["Yakama", "Nez Perce", "Umatilla", "Warm Springs", "Chinook"],
+    "celilo_falls": "Third species in engine with fishing traditions destroyed by The Dalles Dam (1957). Also: Pacific Salmon (236) and Pacific Lamprey (243). One dam; three species lost.",
+    "traditional_fishing": "Lines with large hooks, dip nets, basket traps at known sturgeon pools. Year-round availability vs. seasonal salmon."
+  },
+  "conservation": {
+    "columbia_status": "Relatively stable in managed fishery; success story by global sturgeon standards",
+    "global_context": "50%+ of 27 sturgeon species worldwide are critically endangered (Beluga, Chinese Sturgeon)",
+    "threats": ["Climate change / water temperature increase", "contaminant bioaccumulation (PCBs, heavy metals)", "upper-river population depletion", "historical commercial overfishing (recovery took decades)"],
+    "management_tools": ["size slot regulations", "creel limits", "catch-and-release", "commercial fishing eliminated from lower Columbia"]
+  },
+  "theory_nodes": [
+    { "concept": "FIRST ACIPENSERIDAE IN ENGINE. ~200 million year lineage -- Mesozoic Era, early dinosaurs. Living fossil: cartilaginous skeleton, five rows of bony scutes, stable body plan for 100+ million years. Largest freshwater fish in North America: 6m (20ft), 630kg (1,400lbs), 100+ years. Columbia River = world's most abundant population.", "level": "milestone", "department": "taxonomy", "description": "Acipenseridae first entry; ancient fish arc continues from 243." },
+    { "concept": "Ancient fish arc (243-244): Pacific Lamprey (450 MYA, E=1) + White Sturgeon (200 MYA, E=4). Two consecutive living fossils. Both survived every mass extinction since their origins. Both are First Foods sacred species. Both declined severely (lamprey ~95%; sturgeon commercially collapsed then partially recovered). The engine documents the living fossils of Pacific Northwest rivers.", "level": "advanced", "department": "engine-structure", "description": "Ancient fish arc 243-244 as cohesive narrative unit." },
+    { "concept": "Celilo Falls triple: White Sturgeon (244) is the third species in the engine with tribal fishing traditions destroyed by The Dalles Dam in 1957. Pacific Salmon (236) and Pacific Lamprey (243) were first. One dam, three species, irreplaceable cultural losses. The Columbia River dam system as the most consequential single event in PNW indigenous food culture history.", "level": "advanced", "department": "cultural-ecology", "description": "Celilo Falls triple loss: salmon + lamprey + sturgeon." }
+  ],
+  "cross_references": [
+    {"degree": 243, "species": "Pacific Lamprey", "relationship": "Consecutive ancient fish arc. Lamprey (450 MYA) → Sturgeon (200 MYA). Both living fossils. Both First Foods. Both declined severely. Lamprey can be a sturgeon parasite in some systems."},
+    {"degree": 236, "species": "Pacific Salmon", "relationship": "Celilo Falls connection: both had tribal fishing traditions destroyed by The Dalles Dam 1957. Sturgeon eat salmon as part of diet. Shared Columbia River habitat."},
+    {"degree": 244, "artist_s36": "The Kingsmen", "relationship": "E=7 vs E=4. The most famous garage rock song against the largest freshwater fish in North America."}
+  ],
+  "s36_pair": {"degree": 244, "artist": "The Kingsmen", "pairing_note": "E=7 vs E=4. 'Louie Louie' ($50 recording, three chords, most famous garage rock song) paired with the largest, oldest freshwater fish in North America (100+ years, 20 feet, 200 million year lineage). The most accessible simple thing against the largest ancient thing."},
+  "milestones": ["FIRST ACIPENSERIDAE IN ENGINE", "LARGEST FRESHWATER FISH IN NORTH AMERICA", "Ancient fish arc 243-244 complete", "Celilo Falls triple loss documented (236, 243, 244)"],
+  "tags": ["acipenseridae", "first-acipenseridae", "white-sturgeon", "acipenser-transmontanus", "columbia-river", "living-fossil", "200-million-years", "largest-freshwater-fish", "100-year-lifespan", "ancient-fish-arc", "scutes", "cartilaginous-skeleton", "celilo-falls", "bonneville-dam", "first-foods"]
+}

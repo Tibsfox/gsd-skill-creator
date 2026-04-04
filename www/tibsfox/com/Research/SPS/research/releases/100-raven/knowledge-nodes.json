@@ -1,0 +1,137 @@
+{
+  "degree": 100,
+  "species": "Common Raven",
+  "scientific_name": "Corvus corax",
+  "slug": "100-raven",
+  "sound_type": "deep cronk + bell + hollow knock + mimicry -- among the most complex vocalizations in the animal kingdom, over 30 distinct call types",
+  "energy": 4,
+  "ecosystem": "Open forest. Cliffs, mountains, coastal areas, urban edges. One of the most widely distributed birds on Earth.",
+  "season": "Year-round resident. Vocal throughout the year. Breeding season: late winter through spring.",
+  "family": "Corvidae (NEW -- 49th family in engine)",
+  "order": "Passeriformes",
+  "csv_substitute": false,
+  "original_species": "Common Raven",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.75,
+    "lon": -122.30,
+    "description": "Reference for open forest and mountain habitat in the PNW, Washington. Ravens found throughout forested mountains, coastal cliffs, and urban edges."
+  },
+  "taxonomy_note": {
+    "description": "NEW FAMILY (49th): Corvidae. AVES RETURNS after 40 degrees (last bird: Pied-billed Grebe at degree 60). Corvidae connects to Steller's Jay at degree 53 -- same family, 47 degrees apart. The raven is the largest passerine (songbird). Centennial degree.",
+    "current_class": "Aves (RETURNS!)",
+    "new_class": false,
+    "class_count_in_engine": 4,
+    "current_infraclass": null,
+    "new_infraclass": false,
+    "infraclass_note": "Aves returns! Last bird at degree 60. 40 degrees of mammals, amphibians, and insects between.",
+    "current_family": "Corvidae (NEW)",
+    "new_family": true,
+    "family_count_in_engine": 49,
+    "name_etymology": "Corvus from Latin corvus ('raven'). corax from Greek korax ('raven'). Corvidae from Latin corvus. Common name 'raven' from Old English hraefn. The word is ancient across Indo-European languages -- the raven has been named since before recorded history.",
+    "genus_note": "Corvus -- crows and ravens. The largest genus in Corvidae. The Common Raven is the largest member -- the largest passerine on Earth.",
+    "order_note": "Passeriformes -- songbirds. The largest order of birds (~6,500 species). The raven is the largest member of this order.",
+    "class_note": "Aves -- RETURNS at degree 100! Last bird at degree 60 (Pied-billed Grebe). 40 degrees apart. After mammals (61-85), amphibians (90, 96, 97), and insects (87-89, 91, 94, 95, 98, 99), birds return at the centennial.",
+    "family_position": "Corvidae is the 49th family in the engine. NEW. Same family as Steller's Jay (degree 53). The Jay introduced Corvidae; the Raven is Corvidae's full declaration."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Variable. Deep cronk: 200-800 Hz. Bell-like tones: 1000-3000 Hz. Hollow knocks: broadband. Full repertoire spans an extraordinarily wide frequency range.",
+    "peak_energy_band_hz": "Deep cronk: 300-600 Hz. The signature call has energy concentrated in low frequencies. Bell tones peak higher. Total repertoire spans multiple octaves.",
+    "song_frequency_hz": "Highly variable. No fixed song structure. Over 30 distinct call types used in different contexts. Vocal exchanges can be rapid and varied.",
+    "song_duration_s": "Individual cronk: 0.3-1.0 seconds. Sequences: variable. Ravens can vocalize continuously for extended periods, especially during pair interactions.",
+    "note_structure": "Extraordinarily complex. Over 30 documented call types. No single note structure -- the raven's vocal repertoire is more like a language than a song.",
+    "note_types": "Deep cronk (territorial, long-range). Bell-like tones (pair-bonding, close). Hollow knocks (percussive, unusual). Gargling (complex, multi-tonal). Screams (alarm). Soft warbles (intimate). Mimicry (learned, cultural). And many more.",
+    "phrase_structure": "Variable. Context-dependent. Ravens combine call types in sequences that vary by social context, emotional state, and individual. Some phrases are culturally transmitted.",
+    "timbre": "Deep, resonant, hollow for the cronk. Clear, ringing, metallic for bell tones. Wooden, percussive for knocks. Raspy for gargling. Highly variable. The most timbral diversity of any species in the engine.",
+    "amplitude": "E=4. The deep cronk is loud and carrying -- audible at several hundred meters. Bell tones and knocks are moderate range. Soft warbles are intimate. The overall vocal presence is strong.",
+    "tempo": "Variable. Ravens adjust calling rate by context. Rapid exchanges during pair interactions. Slow, deliberate cronks during territorial display.",
+    "context": "MULTI-FUNCTIONAL. Territorial defense (cronk). Pair-bonding (bell, warble). Alarm (scream). Play (variable). Food discovery (specific calls). Social coordination (complex sequences). The vocal repertoire serves every aspect of social life.",
+    "regional_variation": "Significant. Raven vocalizations show geographic variation and cultural transmission. Local dialects documented. Individual recognition by voice. Cultural learning of novel sounds.",
+    "key_property": "DEEP CRONK + BELL + HOLLOW KNOCK + MIMICRY -- the 100th acoustic element (species side). Among the most complex vocalizations in the animal kingdom. Over 30 distinct call types. E=4. CORVIDAE -- NEW FAMILY (49th). AVES RETURNS after 40 degrees. Open forest habitat. Fortieth consecutive original CSV. CENTENNIAL DEGREE. One of the most intelligent animals on Earth."
+  },
+  "plumage": {
+    "overall": "Entirely black. Iridescent purple-blue-green sheen on feathers when viewed in sunlight. Large, powerful, commanding presence.",
+    "diagnostic_mark": "For degree 100: (1) ENTIRELY BLACK -- no white markings. (2) LARGE SIZE -- largest passerine, wingspan ~120-150 cm. (3) WEDGE-SHAPED TAIL -- diagnostic in flight (crows have fan-shaped). (4) THICK, HEAVY BILL -- much larger than crow. (5) SHAGGY THROAT FEATHERS -- hackles. (6) DEEP CRONK CALL -- diagnostic (crows caw, ravens cronk).",
+    "seasonal_variation": "None. Year-round black plumage.",
+    "flight_pattern": "Soaring flight on flat wings (crows flap constantly). Aerial acrobatics during play -- barrel rolls, inversions, dives. Powerful, confident flight."
+  },
+  "physical_description": {
+    "overall": "Largest passerine on Earth. Body length 54-67 cm. Wingspan 115-150 cm. Weight 0.7-1.5 kg. Entirely black with iridescent sheen. Heavy bill. Shaggy throat hackles. Wedge-shaped tail.",
+    "diagnostic_mark": "For degree 100: (1) SIZE -- much larger than crows. (2) WEDGE TAIL -- in flight, diagnostic. (3) THICK BILL -- heavy, curved. (4) HACKLES -- shaggy throat feathers. (5) DEEP VOICE -- cronk, not caw. (6) SOARING FLIGHT -- flat wings.",
+    "fur_detail": null,
+    "skin_detail": null,
+    "dental_detail": null,
+    "field_id": "Very large black bird, larger than a crow. Wedge-shaped tail in flight (crow = fan). Heavy, curved bill. Shaggy throat hackles. Soars on flat wings (crow flaps). Deep cronk call (crow caws). If the black bird soars, cronks, and seems impossibly large -- it is a raven."
+  },
+  "nodes": [
+    {
+      "id": "raven-vocal-complex",
+      "type": "concept",
+      "title": "Deep Cronk + Bell + Hollow Knock -- 100th Acoustic Element (species side)",
+      "description": "Among the most complex vocalizations in the animal kingdom. Over 30 distinct call types. Deep cronk, bell-like tones, hollow knocks, gargling, screams, warbles, mimicry. E=4. The most diverse vocal repertoire in the engine.",
+      "connections": ["corvidae-new-family", "aves-returns", "raven-intelligence"]
+    },
+    {
+      "id": "corvidae-new-family",
+      "type": "pattern",
+      "title": "Corvidae -- NEW FAMILY (49th)",
+      "description": "Corvids enter the engine. Same family as Steller's Jay (53). The raven is the corvid apex -- largest passerine, most vocal, most intelligent. 47 degrees between corvid entries.",
+      "connections": ["raven-vocal-complex", "aves-returns"]
+    },
+    {
+      "id": "aves-returns",
+      "type": "pattern",
+      "title": "AVES RETURNS -- After 40 Degrees, Birds Are Back",
+      "description": "Last bird at degree 60 (Pied-billed Grebe). 40 degrees of mammals, amphibians, and insects. Aves returns at degree 100 -- the centennial. Birds are back.",
+      "connections": ["raven-vocal-complex", "corvidae-new-family"]
+    },
+    {
+      "id": "raven-intelligence",
+      "type": "concept",
+      "title": "Intelligence -- Tool Use, Problem-Solving, Play, Cultural Transmission",
+      "description": "One of the most intelligent animals on Earth. Tool use and manufacture. Multi-step problem-solving. Future planning. Causal reasoning. Play behavior. Social cognition. Theory of mind. Cultural transmission of learned behaviors.",
+      "connections": ["raven-vocal-complex"]
+    },
+    {
+      "id": "centennial-milestone",
+      "type": "pattern",
+      "title": "The Centennial -- 100th Degree, 27.8% of 360",
+      "description": "100th degree. 27.8% of 360. Corvidae enters and Aves returns at the centennial. The raven marks the milestone. Fortieth consecutive original CSV -- FOUR DECADES.",
+      "connections": ["raven-vocal-complex", "corvidae-new-family", "aves-returns"]
+    },
+    {
+      "id": "summer-heart-contrast",
+      "type": "pattern",
+      "title": "The Summer Heart Contrast -- Electronic and Biological Complexity",
+      "description": "Both E=4. Both complex, layered voices. Summer Heart's nostalgic cascade layers synth textures. The raven layers 30+ call types. Electronic cascading and biological vocal orchestra.",
+      "connections": ["raven-vocal-complex"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-053",
+      "species": "Steller's Jay",
+      "relationship": "SAME FAMILY CORVIDAE! First corvid at degree 53. Same family, 47 degrees apart. The Jay introduced Corvidae; the Raven is Corvidae's full declaration. Both intelligent, both vocal. Jay is bright and loud; Raven is deep and complex."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "INTELLIGENCE AND OLD FOREST. Both highly intelligent birds of old forest habitats. Owl hunts silently; Raven vocalizes boldly. Both apex predators. Nocturnal stealth vs diurnal cognition."
+    },
+    {
+      "target": "SPS-071",
+      "species": "Red Fox",
+      "relationship": "INTELLIGENCE PARALLEL. Both among the most intelligent in the engine. Fox = Canidae intelligence (adaptable, cunning). Raven = Corvidae intelligence (tool use, cultural transmission). Different phyla, convergent cognition."
+    },
+    {
+      "target": "SPS-070",
+      "species": "Raccoon",
+      "relationship": "INTELLIGENCE AND DEXTERITY. Both highly intelligent, both problem-solvers. Raccoon manipulates with hands; Raven manipulates with beak and cognition. Both urban-adaptable. Mammalian vs avian intelligence."
+    },
+    {
+      "target": "SPS-014",
+      "species": "Great Blue Heron",
+      "relationship": "AVES RETURNS. Both large, commanding birds with unforgettable voices. Heron's pterodactyl croak at degree 14. Raven's complex repertoire at degree 100. The raven marks Aves' return after 40 degrees."
+    }
+  ]
+}

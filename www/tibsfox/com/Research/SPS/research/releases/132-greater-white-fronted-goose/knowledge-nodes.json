@@ -1,0 +1,120 @@
+{
+  "degree": 132,
+  "species": "Greater White-fronted Goose",
+  "scientific_name": "Anser albifrons",
+  "slug": "132-greater-white-fronted-goose",
+  "sound_type": "musical laughing call -- high-pitched yodeling 'kla-ha' or 'kow-yow' at 500-3000 Hz, liquid laughing cadence, most musically complex goose call in PNW, flock sounds like distant laughter, E=4 flock-amplified musical quality",
+  "energy": 4,
+  "ecosystem": "Field, winter visitor. Agricultural fields, flooded pastures, and wetlands in PNW lowlands. Breeds on Arctic tundra. Circumpolar distribution.",
+  "season": "Winter visitor (October-March). Breeds on Arctic tundra in summer. Migration through PNW in fall and spring.",
+  "family": "Anatidae (15th consecutive: 118-132 -- UNPRECEDENTED TERRITORY)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Greater White-fronted Goose",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 48.46,
+    "lon": -122.35,
+    "description": "Reference for Skagit Valley agricultural fields. Greater White-fronted Geese winter in mixed flocks with Canada Geese, Snow Geese, and swans."
+  },
+  "taxonomy_note": {
+    "description": "FIFTEENTH consecutive Anatidae (118-132). Unprecedented territory. First Anser (gray goose) genus in the engine. Genus shift from Branta (black geese, 129-131) to Anser (gray geese, 132). E=4 reflects the musical, laughing, yodeling quality of the call. Fourth goose in the goose era (129-134). 'Specklebelly' nickname from dark belly markings. Circumpolar distribution.",
+    "current_family": "Anatidae (15th consecutive -- UNPRECEDENTED, streak ongoing)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae: fifteen consecutive at degrees 118-132. Nearly doubled the Picidae record (9).",
+    "name_etymology": "Anser from Latin 'goose.' albifrons from Latin albi ('white') + frons ('forehead/front') -- 'white-fronted goose,' referring to the white band at the bill base.",
+    "genus_note": "Anser -- first entry. The gray goose genus. Genus shift from Branta (129-131) to Anser (132). Distinct visual and acoustic character from the black geese.",
+    "order_note": "Anseriformes. Fifteenth consecutive Anatidae. The streak enters unprecedented territory.",
+    "family_position": "Anatidae at fifteenth consecutive. Four genera (various duck genera, Cygnus, Branta, Anser). Three subfamilies. Nearly doubled the Picidae record."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-3,000 Hz. Highest-pitched goose in the engine. Higher than Canada Goose (200-2,500), Cackling Goose (400-2,000), and Brant (200-1,200).",
+    "peak_energy_band_hz": "700-1,800 Hz. Higher energy center than other geese. The bright, carrying quality comes from this higher pitch center.",
+    "song_frequency_hz": "Laughing call: 500-3,000 Hz. Alarm: sharper, more rapid. Flight call: same laughing quality.",
+    "song_duration_s": "Individual calls 0.5-1.5 seconds. Two to three syllables with rising pitch. Given in series.",
+    "note_structure": "MUSICAL LAUGHING CALL: High-pitched yodeling 'kla-ha' or 'kow-yow' or 'kla-hah-luk.' Pitch rises on second syllable. Liquid, musical quality. Distinctly resembles human laughter.",
+    "note_types": "Laughing call (primary, the defining sound), alarm call (sharper, more urgent), flight call (laughing quality maintained), contact call (softer version between pair members).",
+    "phrase_structure": "Series of laughing calls with moderate gaps. In flocks, the overlapping laughter creates a musical chattering chorus unlike any other goose flock sound.",
+    "timbre": "High. Liquid. Musical. Yodeling. The pitch modulation (rising and falling) creates the laughing quality. More complex structure than Branta honks/cackles/murmurs.",
+    "amplitude": "E=4. Individual call is musical and carrying but not overwhelming. Flock chorus is distinctive and pleasant. Comparable to Cackling Goose and Brant at E=4 but musically different.",
+    "tempo": "Moderate. Laughing calls at 2-4 second intervals. Faster when alarmed. The rhythm has a cheerful quality.",
+    "context": "Flock communication, flight coordination, alarm, pair bonding. The laughing call is used in all social contexts. Often the first detection cue in mixed goose flocks.",
+    "regional_variation": "North American and Eurasian populations have similar vocalizations. Minimal geographic variation. The call is largely innate rather than learned.",
+    "key_property": "MUSICAL LAUGHING CALL -- E=4 MOST MUSICALLY COMPLEX GOOSE CALL. High-pitched yodeling 'kla-ha' at 500-3,000 Hz. Liquid, laughing cadence. Flock sounds like distant laughter. FIFTEENTH CONSECUTIVE ANATIDAE (118-132) -- UNPRECEDENTED. First Anser genus. Genus shift Branta to Anser. 'Specklebelly' -- dark belly markings. Pink-orange bill with white band. Orange legs. Medium size. Circumpolar distribution. Arctic breeder. Agricultural field specialist in winter."
+  },
+  "plumage": {
+    "overall": "Gray-brown overall. No black head or neck (unlike Branta). White band at bill base ('white-fronted'). Dark belly bars and blotches ('specklebelly'). Pink-orange bill. Orange legs and feet.",
+    "diagnostic_mark": "White band at bill base. Dark belly markings. Pink-orange bill. Orange legs. Gray-brown head (no black). Unique appearance among PNW geese.",
+    "seasonal_variation": "Adults: belly markings develop with age (juveniles lack them). Juvenile: no white front, no belly markings, duller overall.",
+    "flight_pattern": "V-formation in flocks. Laughing flight calls. Gray-brown appearance in flight (no black head/neck of Branta). Orange bill and legs visible at close range."
+  },
+  "physical_description": {
+    "overall": "Body length 64-81 cm (25-32 inches). Weight 1.9-3.3 kg (4.2-7.3 lbs). Wingspan 130-165 cm. Medium-sized goose -- larger than Cackling and Brant, smaller than Canada Goose.",
+    "diagnostic_mark": "White band at bill base. Speckled belly. Pink-orange bill. Orange legs. No black head. In mixed flocks, the gray head and colored bill are immediately distinctive.",
+    "field_id": "Listen for the laughing call first -- it stands out in mixed goose flocks. Look for: gray-brown head (no black), pink-orange bill with white band, orange legs, speckled belly. The combination is diagnostic."
+  },
+  "nodes": [
+    {
+      "id": "musical-laugh",
+      "type": "concept",
+      "title": "Musical Laughing Call -- E=4 Most Complex Goose Call",
+      "description": "High-pitched yodeling 'kla-ha' at 500-3,000 Hz. Liquid, laughing cadence. Most musically complex goose call in PNW. Flock sounds like distant laughter. Voice as fastest detector in mixed flocks.",
+      "connections": ["genus-shift", "goose-quartet", "anatidae-streak"]
+    },
+    {
+      "id": "genus-shift",
+      "type": "concept",
+      "title": "First Anser Genus -- Gray Geese Enter the Engine",
+      "description": "Genus shift from Branta (black geese, 129-131) to Anser (gray geese, 132). Gray-brown head, pink-orange bill, orange legs. Visual shift parallels acoustic shift: laughing vs. honking/cackling/murmuring. A fundamentally different goose.",
+      "connections": ["musical-laugh", "goose-quartet"]
+    },
+    {
+      "id": "specklebelly",
+      "type": "concept",
+      "title": "The Specklebelly -- Identification and Field Marks",
+      "description": "Dark belly bars and blotches = 'specklebelly' nickname. White band at bill base = 'white-fronted.' Pink-orange bill. Orange legs. Medium size (1.9-3.3 kg). Circumpolar distribution. Arctic tundra breeder. Agricultural field specialist in winter.",
+      "connections": ["genus-shift", "musical-laugh"]
+    },
+    {
+      "id": "goose-quartet",
+      "type": "pattern",
+      "title": "Goose Quartet Position 4 (129-132)",
+      "description": "Canada (129, deep honk, E=5, Branta), Cackling (130, higher cackle, E=4, Branta), Brant (131, low murmur, E=4, Branta), Greater White-fronted (132, musical laugh, E=4, Anser). Four geese, four sounds, two genera. Goose era continues toward Snow Goose (133) and Ross's Goose (134).",
+      "connections": ["musical-laugh", "anatidae-streak"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Fifteenth Consecutive Anatidae (118-132) -- Unprecedented",
+      "description": "Nearly doubled the Picidae record (9). Post-climax E=4 plateau for three entries (130-132). Four genera. Three subfamilies. Ducks, swans, Branta geese, Anser geese. The streak enters uncharted territory.",
+      "connections": ["goose-quartet", "genus-shift"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-131",
+      "species": "Brant",
+      "relationship": "GOOSE ERA! Brant (131, E=4, marine murmur, Branta) to White-fronted (132, E=4, field laughter, Anser). Both E=4, different habitats, different genera. The genus shift from Branta to Anser."
+    },
+    {
+      "target": "SPS-129",
+      "species": "Canada Goose",
+      "relationship": "GOOSE QUARTET! Canada (129, E=5, deep honk), Cackling (130, E=4, higher cackle), Brant (131, E=4, low murmur), White-fronted (132, E=4, musical laugh). Four sounds, two genera, one family streak."
+    },
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "FIFTEEN CONSECUTIVE! Harlequin (118, E=5, stream) to White-fronted (132, E=4, field). Fifteen consecutive Anatidae. Nearly doubled the Picidae record."
+    },
+    {
+      "target": "SPS-128",
+      "species": "Trumpeter Swan",
+      "relationship": "E=4 PLATEAU! Trumpeter (128, E=6 climax). After descent: E=4, E=4, E=4 for three entries (130-132). The post-climax plateau stabilizes."
+    },
+    {
+      "target": "SPS-107-115",
+      "species": "Picidae (nine consecutive)",
+      "relationship": "NEARLY DOUBLED! Picidae held 9 consecutive (107-115). Anatidae now at 15 (118-132). Six more than the previous record. The streak is running away."
+    }
+  ]
+}

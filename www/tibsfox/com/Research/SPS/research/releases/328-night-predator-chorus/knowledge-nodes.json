@@ -1,0 +1,38 @@
+{
+  "degree": 328,
+  "species": "GHO x2 + Coyote -- Night Predator Chorus",
+  "scientific_name": "Bubo virginianus (Great Horned Owl) x2 + Canis latrans (Coyote)",
+  "slug": "328-night-predator-chorus",
+  "sound_type": "Night predator chorus: (1) GHO male 300-350 Hz fundamental, 5-note sequence 4-6 sec, harmonics to 2000 Hz, 70-80 dB at 100m; (2) GHO female 400-450 Hz fundamental, same sequence structure, alternating with male, duet cycle 15-30 sec; (3) Coyote howl 800-1200 Hz rising, harmonics to 4000 Hz, 2-5 sec, 75-85 dB at 100m, followed by yip sequence 1000-3000 Hz, 3-8 yips. Combined: 200-4000 Hz, 80-90 dB at center of activity. Temporal structure: GHO duet 15-30 sec periodic cycle + aperiodic Coyote response.",
+  "energy": 8,
+  "ecosystem": "Forest edge, Pacific Northwest lowlands and foothills. Winter. Leafless deciduous trees: acoustic transparency enhanced. Prey concentration at edge: deer mice, voles, rabbits, snowshoe hares. Habitat: Snoqualmie Valley edges, Cowlitz Valley, Puget Sound foothills, distributed PNW.",
+  "season": "Winter (December-February). Peak: January-February. GHO pair-bond reinforcement peak (earliest-breeding large owl in North America). Coyote breeding season (peak mating February). Long nights (14-16 hr darkness at 47-49°N). Acoustic transparency of leafless winter forest edge.",
+  "family": "Multi-species -- Strigidae (GHO) + Canidae (Coyote)",
+  "milestone": "FIRST CANID VOCALIZATION IN MULTI-SPECIES SIMULTANEOUS SPS EVENT. Coyote prior entries: SPS 208 (solo howl E=5) + SPS 209 (pup yipping E=4). Both solo-species. Degree 328: FIRST CANIDAE MEMBER IN SIMULTANEOUS MULTI-SPECIES ACOUSTIC CONTEXT. GHO prior entries: SPS 135 (single), 136 (pair duet), 299 (territorial), 309 (pair). Degree 328 is fourth GHO entry, first in multi-species context with Canidae. GHO pair duet: minor third interval between male (300-350 Hz) and female (400-450 Hz). Coyote response to GHO calls: documented behavior, possibly related to GHO predation on Coyote pups. Combined E=8: three predators, two families, winter, darkness.",
+  "coordinates": {
+    "lat": 47.5,
+    "lon": -121.9,
+    "description": "Distributed: forest edge ecosystems throughout PNW lowlands and foothills. Representative: Snoqualmie Valley edge habitat ~47.5°N 121.9°W, Cowlitz Valley edges, Puget Sound foothill zones."
+  },
+  "acoustic_data": {
+    "gho_male": "300-350 Hz fundamental. 5-note sequence (hoo-hoo-hoooo hoo-hoo). 0.4-0.8 sec per note. Total 4-6 sec. Harmonics to 2000 Hz. 70-80 dB at 100m. Carries 1-2 km in still winter air.",
+    "gho_female": "400-450 Hz fundamental (minor third above male). Same structure. Alternates with male: female initiates or responds within 0.5-2 sec. Brief overlaps at transitions. Duet cycle repeats every 15-30 sec.",
+    "coyote": "Howl: 800-1200 Hz rising fundamental, harmonics to 4000 Hz, 2-5 sec, 75-85 dB at 100m. Carries 3-5 km. Yip sequence: 1000-3000 Hz, 0.1-0.3 sec per yip, 3-8 yips. Pack response (if present): 80-90 dB. Triggered by GHO duet.",
+    "combined": "200-4000 Hz. 80-90 dB at center of activity. Temporal: GHO periodic (15-30 sec cycle) + Coyote aperiodic (triggered response). Structurally complex: two periodic sources + one responding source in real-time interaction.",
+    "e8_calibration": "E=8 through nocturnal multi-species territorial intensity. Each species alone: GHO solo E=5, GHO pair E=5-6, Coyote solo E=5. Together in winter forest edge with active interaction: E=8. The Coyote's addition to the GHO pair raises the energy by amplifying the territorial exchange across two predator families."
+  },
+  "nodes": [
+    {"id": "first-canid-multi-species", "type": "milestone", "title": "FIRST CANID IN MULTI-SPECIES SIMULTANEOUS SPS EVENT", "description": "Coyote (Canis latrans) appears at SPS 208 (solo howl) and 209 (pup yipping). At degree 328: first Canidae member in simultaneous multi-species acoustic context. Active interaction with Great Horned Owl pair. FIRST CANIDAE IN MULTI-SPECIES SPS.", "connections": ["gho-coyote-interaction"]},
+    {"id": "gho-coyote-interaction", "type": "concept", "title": "GHO-Coyote Acoustic Interaction -- Cross-Family Territorial Exchange", "description": "Great Horned Owls prey on Coyote pups. Adult Coyotes respond to GHO calls, possibly as territorial signal or predator awareness behavior. The practical result: GHO pair duet triggers Coyote howling; Coyote howling can trigger increased GHO calling. The acoustic exchange is cross-species territorial signaling, not aggressive encounter.", "connections": ["first-canid-multi-species"]},
+    {"id": "winter-peak-overlap", "type": "ecology", "title": "Winter Peak Overlap -- Both Species at Maximum Vocal Activity", "description": "GHO: earliest-breeding large owl in North America. Pair-bond reinforcement peak January-February. Coyote: breeding season peak February. Both species at maximum territorial vocal activity simultaneously. Long winter nights (14-16 hr). Acoustic transparency of leafless forest edge. Three converging conditions: peak behavior + long nights + transparency.", "connections": ["first-canid-multi-species"]}
+  ],
+  "cross_references": [
+    {"target": "SPS-135", "species": "Great Horned Owl (single)", "relationship": "First GHO entry. Solo territorial. 328 is pair + Coyote."},
+    {"target": "SPS-136", "species": "Great Horned Owl Pair Duet", "relationship": "The isolated duet. 328 is duet plus active Coyote response -- adds Canidae to the acoustic event."},
+    {"target": "SPS-208", "species": "Coyote Howl", "relationship": "Solo Coyote E=5. Degree 328: FIRST CANID IN MULTI-SPECIES EVENT. Same vocalization, new context."},
+    {"target": "SPS-209", "species": "Coyote Pup Yipping", "relationship": "Solo Coyote family group E=4. 328 documents adult Coyote in cross-species interaction."},
+    {"target": "SPS-210", "species": "Gray Wolf Pack Howl", "relationship": "Other Canidae. Wolf in wilderness. Coyote at forest edge. Different habitats, same family documented at 328."},
+    {"target": "SPS-309", "species": "Great Horned Owl Pair", "relationship": "GHO pair in earlier return at E=7. 328: pair + Coyote = E=8. The Coyote adds one energy unit."},
+    {"target": "S36-328", "artist": "Seven Year Bitch (metal)", "relationship": "E=8 + E=8 = E=16. MAXIMUM COMBINED ENERGY IN 325-328 SEQUENCE. Nocturnal predator aggression: ecological (winter forest edge) vs. cultural (heavy punk grief and rage). FIRST CANID + MOST INTENSE FEMALE-LED HEAVY BAND in the engine at the same degree."}
+  ]
+}

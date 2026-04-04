@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 122&deg; &mdash; Sabzi &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #BF360C, #D84315, #E64A19);
+      color: #FFCCBC;
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(191, 54, 12, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #BF360C;
+      color: #FFCCBC;
+      border: 1px solid #D84315;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .web-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #CE93D8;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #BF360C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #BF360C;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #FBE9E7; color: #BF360C; }
+    .theory-card .level.intermediate { background: #F3E5F5; color: #4A148C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .producer-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 30%, #E64A19 60%, #FF5722 100%);
+      border: 3px solid #BF360C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+      box-shadow: 0 0 24px rgba(191, 54, 12, 0.4);
+    }
+    .producer-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #FFCCBC;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .producer-card p { color: #FBE9E7; }
+    .producer-card strong { color: #FFCCBC; }
+
+    .web-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .web-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .web-card p { color: #F3E5F5; }
+    .web-card strong { color: #CE93D8; }
+
+    blockquote {
+      border-left: 3px solid #BF360C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #FBE9E7;
+      font-style: italic;
+      color: #BF360C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>122 &mdash; Sabzi</span>
+    </nav>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">122&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Sabzi</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Hip-Hop / Electronic</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="web-badge">99 + 101 + 122</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Producer Card -->
+        <div class="producer-card">
+          <h3>The Sample Architect</h3>
+          <p>
+            <strong>Saba Mohajerjasbi</strong> &mdash; Iranian-American, UW graduate.
+            Producer of <strong>Blue Scholars</strong> (degree 99) and
+            <strong>Common Market</strong> (degree 101). Jazz-influenced, sample-based,
+            layered beat construction. This entry: solo production under own name.
+            The architect examined separately from the buildings. Three engine degrees
+            linked to one producer &mdash; the tightest connection web in the engine.
+          </p>
+        </div>
+
+        <!-- Web Card -->
+        <div class="web-card">
+          <h3>The Producer Web &mdash; Three Degrees, One Figure</h3>
+          <p>
+            <strong>99&deg;:</strong> Blue Scholars (Sabzi + Geo) &rarr;
+            <strong>101&deg;:</strong> Common Market (Sabzi + RA Scion) &rarr;
+            <strong>122&deg;:</strong> Sabzi (solo). Three nodes, one connecting
+            figure. The producer is the <strong>constant</strong>; emcees are the
+            variables. The production DNA is recognizable across all three entries.
+            23 degrees separate the first and third nodes.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Production Style</h2>
+          <p>
+            <strong>Jazz sampling as foundation.</strong> Sabzi is a crate digger &mdash;
+            productions built from jazz, soul, funk, and international records. Not simple
+            loop-and-layer: he <strong>deconstructs and reconstructs</strong>, isolating
+            phrases, chopping into new patterns, rebuilding into compositions that honor
+            the source while creating something new.
+          </p>
+          <p>
+            <strong>Layered beat construction.</strong> Multiple sample sources stacked
+            and blended. Primary loops with secondary harmonic support. Dense but clear.
+            <strong>Boom-bap drums:</strong> punchy kick, snapping snare, shuffling hi-hat.
+            <strong>Melodic production:</strong> beats carry harmonic progressions and hooks
+            even without vocals. <strong>Electronic expansion:</strong> solo work adds
+            synthesizers and digital processing beyond pure sampling.
+          </p>
+          <blockquote>
+            The overall character is warm. Analog-leaning. The production sounds like
+            records, like rooms, like instruments played by people &mdash; even when
+            constructed from samples and electronic elements. The warmth is the signature.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Iranian-American Identity</h2>
+          <p>
+            One of the most prominent Iranian-American musicians in hip-hop.
+            <strong>Cross-cultural synthesis:</strong> Middle Eastern melodic sensibility
+            within American hip-hop and jazz sampling. Minor modes, ornamental figures,
+            a certain melancholy warmth. The immigrant narrative &mdash; social justice,
+            community, navigating between cultures &mdash; informed by his perspective
+            as a child of Iranian immigrants.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Seattle Hip-Hop Production</h2>
+          <p>
+            Part of a crate-digging lineage alongside Vitamin D, Jake One, Bean One.
+            The <strong>UW pipeline:</strong> Sabzi and Geo met at the University of
+            Washington. DIY infrastructure: Mass Line Media and artist-owned operations.
+            <strong>KEXP</strong> as accelerant &mdash; in-studio sessions gave exposure
+            beyond the live circuit. Seattle hip-hop is overwhelmingly independent.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Sample Architecture</h4>
+              <div class="level advanced">Advanced &mdash; 123rd Acoustic Element</div>
+              <p>
+                Jazz-influenced beat construction from deconstructed samples.
+                Crate-dug source material, multiple layers, boom-bap drums,
+                melodic hooks. Warmth. Analog-leaning. Records as raw material.
+                The production technique of conscious hip-hop.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Producer Web</h4>
+              <div class="level advanced">Advanced &mdash; Connection Pattern</div>
+              <p>
+                One producer, three entries (99, 101, 122). The tightest
+                connection web in the engine. In hip-hop, the producer
+                is the constant; emcees are the variables. Production DNA
+                spans 23 degrees. Personal web, not geographic.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Hip-Hop Production Enters</h4>
+              <div class="level intermediate">Intermediate &mdash; Genre Stage 98</div>
+              <p>
+                Hip-Hop Production as distinct from Hip-Hop performance.
+                The producer examined independently of emcees. The beat
+                as art object. Genre Stage 98 recognizes production as
+                its own creative discipline.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">99&deg;</span>
+              <strong>Blue Scholars</strong> &mdash; Producer web: first node.
+              Sabzi + Geo. Conscious hip-hop. The beat foundation of Seattle&rsquo;s
+              most important hip-hop duo.
+            </li>
+            <li>
+              <span class="ref-degree">101&deg;</span>
+              <strong>Common Market</strong> &mdash; Producer web: second node.
+              Sabzi + RA Scion. Jazz-rap expansion. Same production DNA,
+              different emcee, different territory.
+            </li>
+            <li>
+              <span class="ref-degree">121&deg;</span>
+              <strong>Smokey Brights</strong> &mdash; Consecutive electronic adjacency.
+              Both E=5, both layered production. Smokey Brights synthesizer-forward;
+              Sabzi sample-forward. Different tools, shared density.
+            </li>
+            <li>
+              <span class="ref-degree">120&deg;</span>
+              <strong>Mark Lanegan</strong> &mdash; Post-one-third trajectory.
+              Three consecutive dark/atmospheric entries (120-122) with escalating
+              density. E=4 &rarr; E=5 &rarr; E=5.
+            </li>
+            <li>
+              <span class="ref-degree">110&deg;</span>
+              <strong>Kinski</strong> &mdash; Seattle production depth.
+              Both E=5. Post-rock drone vs. hip-hop sampling. The city produces
+              world-class producers across genres.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">122&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Hip-Hop / Electronic</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Name</span>
+            <span class="stat-value">Saba Mohajerjasbi</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Heritage</span>
+            <span class="stat-value">Iranian-American</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">UW Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self / Mass Line</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Producer Web</h4>
+          <div class="stat-row">
+            <span class="stat-label">99&deg;</span>
+            <span class="stat-value">Blue Scholars</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">101&deg;</span>
+            <span class="stat-value">Common Market</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">122&deg;</span>
+            <span class="stat-value">Sabzi (solo)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Span</span>
+            <span class="stat-value">23 degrees</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#123 (Sample Arch.)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Producer Web</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">98 (Hip-Hop Prod.)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../121-smokey-brights/" style="color: var(--seattle-navy);">&larr; 121&deg; Smokey Brights</a>
+        <a href="../123-/" style="color: var(--seattle-navy);">123&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 122&deg; &mdash; Sabzi &mdash; Seattle 360 Engine &mdash; v1.49.262
+        <br>
+        Saba Mohajerjasbi. Iranian-American, UW Seattle. Producer of Blue Scholars (99)
+        and Common Market (101). Solo production: jazz-influenced, sample-based, layered.
+        Hip-Hop/Electronic, E=5. The sample architecture: crate-dug source material
+        deconstructed and rebuilt. The producer web: three degrees, one figure. The tightest
+        connection web in the engine.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 308&deg; &mdash; Melvins &mdash; E=8 &mdash; Sludge Metal &mdash; ABERDEEN ENTERS &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #B71C1C; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #B71C1C; font-family: system-ui, sans-serif; border-bottom: 1px solid #FFCDD2; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #FFF3E0; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 700; color: #B71C1C; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #7F0000, #B71C1C, #C62828); color: #FFCDD2; font-size: 2rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(183,28,28,0.5); }
+    .energy-badge { display: inline-block; padding: 0.25rem 0.7rem; border-radius: 3px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; border: 2px solid #FFD700; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #4A148C; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #37474F; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #FFCDD2; margin: 2.5rem 0; }
+    .aberdeen-banner { background: linear-gradient(135deg, #7F0000, #B71C1C); border: 3px solid #FFD700; border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .aberdeen-banner h3 { margin: 0 0 0.75rem; color: #FFD700; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .aberdeen-banner p { margin: 0.4rem 0; color: #FFCDD2; line-height: 1.6; }
+    .cobain-card { background: linear-gradient(135deg, #1B5E20, #2E7D32); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .cobain-card h3 { margin: 0 0 0.75rem; color: #A5D6A7; font-size: 1.2rem; }
+    .cobain-card p { color: #C8E6C9; margin: 0.5rem 0; line-height: 1.65; }
+    .cobain-card strong { color: #DCEDC8; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #FFCDD2; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.max { background: #FFCDD2; color: #B71C1C; border: 1px solid #B71C1C; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.cobain { background: #E8F5E9; color: #1B5E20; border: 1px solid #4CAF50; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #7F0000; }
+    .disc-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .disc-list li { padding: 0.5rem 0.75rem; border-bottom: 1px solid #FFEBEE; font-size: 0.88rem; display: flex; gap: 0.75rem; align-items: baseline; }
+    .disc-list li:last-child { border-bottom: none; }
+    .disc-year { font-weight: 700; color: #B71C1C; min-width: 2.5rem; font-family: system-ui, sans-serif; }
+    .disc-label-tag { font-size: 0.7rem; padding: 0.1rem 0.35rem; border-radius: 3px; background: #FFEBEE; color: #B71C1C; font-family: system-ui, sans-serif; font-weight: 600; border: 1px solid #FFCDD2; }
+    .disc-star { color: #FFD700; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: #B71C1C;">Seattle 360</a> &rsaquo; <a href="../" style="color: #B71C1C;">Releases</a> &rsaquo; <span>308 &mdash; Melvins &mdash; E=8 &mdash; ABERDEEN</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">308&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 2rem; color: #B71C1C;">Melvins</h1>
+        <div style="margin-top: 0.4rem;">
+          <span class="energy-badge">E = 8 &mdash; MAXIMUM</span>
+          <span class="genre-badge">Sludge Metal</span>
+          <span class="label-badge">Boner &rarr; Atlantic</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+
+        <div class="aberdeen-banner">
+          <h3>Aberdeen Enters the Engine &mdash; E=8 Maximum</h3>
+          <p><strong>First appearance. The heaviest band in the Pacific Northwest. The band that made Nirvana possible.</strong> King Buzzo (Buzz Osborne) and Dale Crover. Aberdeen / Montesano, Washington. 1983&ndash;present: over 40 years without compromise. <em>Houdini</em> (1993). <em>Stoner Witch</em> (1994). Kurt Cobain's primary musical hero. The first band Cobain ever saw live. The band he tried to join. The sonic template that informed everything he created. E=8: the S36 maximum. The engine's heaviest entry. Paired with Pacific Marten scream (SPS 308, E=9 &mdash; SPS maximum).</p>
+        </div>
+
+        <h2>Aberdeen / Montesano &mdash; The Timber Country Origin</h2>
+        <p>Aberdeen, Washington: population 16,000, at the confluence of the Wishkah and Chehalis Rivers, near Grays Harbor on the Washington coast, 100 miles southwest of Seattle. Timber economy built up, then declining severely through the 1980s &mdash; automation, market contraction, the beginning of Northern Spotted Owl logging restrictions. High unemployment, social stress, geographic isolation. This is where the Melvins formed. This is where Kurt Cobain grew up. The music that came from this place carries its weight directly.</p>
+        <p>The Melvins formed in Montesano (15 miles east of Aberdeen, population 4,000) &mdash; an even smaller timber country town. Most engine bands formed in Seattle neighborhoods with existing music infrastructure. The Melvins formed where there was almost none. They built their own context from scratch, in deliberate isolation from the commercial music world.</p>
+
+        <blockquote>"The Melvins were the first band I ever saw. Buzz Osborne played me records that changed my life." &mdash; Kurt Cobain (paraphrase of documented statements)</blockquote>
+
+        <hr class="section-divider">
+
+        <div class="cobain-card">
+          <h3>The Cobain Connection &mdash; The Melvins Made Nirvana</h3>
+          <p><strong>The first live show:</strong> The Melvins were the first band Kurt Cobain ever saw live &mdash; in Aberdeen/Montesano before either had external recognition. The experience of seeing the Melvins play: the volume, the weight, the deliberate strangeness, the refusal to pander &mdash; this was Cobain's primary model for what a band could be.</p>
+          <p><strong>The musical education:</strong> Buzz Osborne introduced Cobain to the Pixies (whose soft-loud dynamic became the Nirvana template), Black Flag, the Butthole Surfers, the Meat Puppets. Osborne was Cobain's curriculum. Cobain had extraordinary ears and an extraordinarily rapid capacity to absorb influence.</p>
+          <p><strong>The attempted joining:</strong> Cobain tried to join the Melvins in various capacities. He was not taken on as a full member. This was one of music history's most productive rejections: it forced Cobain to form his own band. That band was Nirvana.</p>
+          <p><strong>The Dale Demo (1988):</strong> Dale Crover played drums on Nirvana's first demo tape in 1988 &mdash; before Nirvana found a permanent drummer. Crover's drumming was so far beyond anything else in the Aberdeen underground that Cobain wanted him permanently. Crover was committed to the Melvins. Chad Channing came next, then Dave Grohl.</p>
+          <p><strong>Grohl learned from Crover:</strong> Dave Grohl has cited Dale Crover as a primary influence. Crover's combination of precision and power at slow tempos &mdash; the rarest combination in rock drumming &mdash; taught Grohl, via Melvins records, how to be heavy and exact simultaneously. <em>Nevermind</em>'s rhythm section carries Crover's DNA.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>King Buzzo + Dale Crover</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Buzz Osborne &mdash; "King Buzzo"</h4>
+            <span class="level max">Guitar / Vocals</span>
+            <p>Born April 25, 1964, Big Fork MT, raised Montesano WA. The architect. Down-tuned guitars (B standard and lower) + heavy distortion as texture. Riffs as monolithic geological weight. The King Buzzo persona: massive hair, refusal to pander, deliberate un-showmanship.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Dale Crover</h4>
+            <span class="level max">Drums</span>
+            <p>Born October 23, 1967, Aberdeen WA. Power at slow tempo: the rarest skill in rock drumming. The foundation the band requires. Played on Nirvana's first demo (1988). Dave Grohl's primary influence. 40+ years as the engine room. Crover + Buzz = the Melvins, everything else is variable.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The Sludge Metal Sound</h4>
+            <span class="level max">E=8 Definition</span>
+            <p>40&ndash;60 BPM. Down-tuned to dissolution. Distortion as low-frequency smear. Extreme dynamic contrast: crushing slowness to near-hardcore speed. Volume as physical event. Humor coexisting with annihilating weight. The genre they defined.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The Atlantic Period</h4>
+            <span class="level cobain">Cobain Produced</span>
+            <p><em>Houdini</em> (1993): Kurt Cobain produced "Cophead" and "Spread Eagle Beagle." The most deliberately inaccessible major-label debut of the grunge era. Atlantic signed them because of Cobain. The Melvins delivered exactly what they always delivered. The label was unprepared.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Discography &mdash; The Essential Records</h2>
+        <ul class="disc-list">
+          <li><span class="disc-year">1987</span><span>Gluey Porch Treatments <span class="disc-label-tag">Alchemy</span> &mdash; The debut. Teenagers in Montesano. Already demonstrating the core Melvins aesthetic.</span></li>
+          <li><span class="disc-year">1989</span><span>Ozma <span class="disc-label-tag">Boner</span> &mdash; First fully realized record. Crover's drumming at maximum authority. Template established.</span></li>
+          <li><span class="disc-year">1991</span><span>Bullhead <span class="disc-label-tag">Boner</span> <span class="disc-star">&#9733;</span> &mdash; "Boris": 14-minute slow-motion demolition. Gave a name to a Japanese band. One of the greatest heavy records ever made.</span></li>
+          <li><span class="disc-year">1992</span><span>Lysol <span class="disc-label-tag">Boner/C-Z</span> &mdash; One 30-minute track. Maximum uncompromise before the Atlantic signing.</span></li>
+          <li><span class="disc-year">1993</span><span>Houdini <span class="disc-label-tag">Atlantic</span> <span class="disc-star">&#9733;</span> &mdash; Major label debut. Cobain produced two tracks. "Hooch." The most hostile accessible-label debut of the decade.</span></li>
+          <li><span class="disc-year">1994</span><span>Stoner Witch <span class="disc-label-tag">Atlantic</span> &mdash; "Queen," "Magic Pig Detective." Heavy with strange pop structures inside. Atlantic period peak.</span></li>
+          <li><span class="disc-year">1999</span><span>The Maggot / The Bootlicker / The Crybaby <span class="disc-label-tag">Ipecac</span> &mdash; Mike Patton's label. Three-album trilogy exploring the full Melvins range.</span></li>
+          <li><span class="disc-year">2006</span><span>A Senile Animal <span class="disc-label-tag">Ipecac</span> <span class="disc-star">&#9733;</span> &mdash; Best late-period record. Big Business second rhythm section. Overwhelming.</span></li>
+          <li><span class="disc-year">2026</span><span>Still active <span class="disc-label-tag">ongoing</span> &mdash; Over 25 studio albums. Still recording. Still performing. 40+ years without compromise.</span></li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2>The Aberdeen-Ellensburg Parallel</h2>
+        <p>Degrees 307 (Screaming Trees, Ellensburg) and 308 (Melvins, Aberdeen/Montesano) are consecutive non-Seattle entries in the grunge cluster. The parallel is structural: both bands formed outside Seattle in towns with limited music infrastructure, chose to engage with the Seattle scene from the geographic periphery, and became central to the scene despite displacement. Ellensburg is 100 miles east, over the Cascades. Aberdeen is 100 miles southwest, on the coast. Both communities were experiencing economic stress in the 1980s. The music that emerged from both carries that pressure directly.</p>
+
+        <hr class="section-divider">
+
+        <h2>Legacy &mdash; The Band That Never Stopped</h2>
+        <p>40+ years, 25+ studio albums, never the expected move. The Melvins missed their commercial moment deliberately: when Atlantic signed them post-<em>Nevermind</em>, they made <em>Houdini</em> &mdash; the most sonically hostile major-label debut of the decade. Their influence includes Nirvana, Tool, Soundgarden (heavy material), Sleep, Electric Wizard, and virtually every sludge or doom metal band of the past 35 years. Commercial recognition a fraction of influence merited. As of 2026: still active. Still making new music. Buzz Osborne and Dale Crover in their 60s, still doing it.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">307</span> Screaming Trees &mdash; Ellensburg parallel. Barrett Martin connection (drums in Screaming Trees). Both outside-Seattle bands central to the scene.</li>
+          <li><span class="ref-degree">296</span> Mother Love Bone &mdash; Andrew Wood. The Aberdeen/Seattle mortality thread. Cobain, Wood, Staley.</li>
+          <li><span class="ref-degree">future</span> Nirvana &mdash; The full Cobain story will enter the engine. The Melvins are its necessary precedent.</li>
+          <li><span class="ref-degree">SPS 308</span> Marten scream &mdash; E=9. SPS maximum. E=8 + E=9 = E=17. The forest exceeds even the Melvins. The timber country and the old-growth that surrounds it.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">308 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8 &mdash; MAX</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Sludge Metal</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1983&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Aberdeen/Montesano</span></div>
+          <div class="stat-row"><span class="stat-label">Labels</span><span class="stat-value">Boner &rarr; Atlantic</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Core Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Buzz Osborne</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Dale Crover</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">85.6%</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">FIRST APPEARANCE</span></div>
+          <div class="stat-row"><span class="stat-label">S36 E=8</span><span class="stat-value">FIRST IN ENGINE</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Cobain Facts</h4>
+          <div class="stat-row"><span class="stat-label">Taught by Buzz</span><span class="stat-value">Pixies, Black Flag</span></div>
+          <div class="stat-row"><span class="stat-label">First show</span><span class="stat-value">The Melvins</span></div>
+          <div class="stat-row"><span class="stat-label">Tried to join</span><span class="stat-value">Rejected &rarr; Nirvana</span></div>
+          <div class="stat-row"><span class="stat-label">Dale Demo</span><span class="stat-value">1988</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Species</span><span class="stat-value">Pacific Marten</span></div>
+          <div class="stat-row"><span class="stat-label">SPS Energy</span><span class="stat-value">E=9 MAX</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=17</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

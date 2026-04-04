@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 89&deg; &mdash; Parenthetical Girls &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card .level.landmark { background: #FFEBEE; color: #B71C1C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .theatrical-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .theatrical-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #CE93D8;
+      font-family: system-ui, sans-serif;
+    }
+    .theatrical-card p {
+      color: #F3E5F5;
+      margin: 0.5rem 0;
+    }
+    .theatrical-card strong {
+      color: #E1BEE7;
+    }
+
+    .portland-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .portland-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .portland-card p {
+      color: #E8F5E9;
+      margin: 0.5rem 0;
+    }
+    .portland-card strong {
+      color: #C8E6C9;
+    }
+
+    .milestone-card {
+      background: linear-gradient(135deg, #880E4F 0%, #AD1457 50%, #C2185B 100%);
+      border: 2px solid #880E4F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FCE4EC;
+    }
+    .milestone-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #F48FB1;
+      font-family: system-ui, sans-serif;
+    }
+    .milestone-card p {
+      color: #FCE4EC;
+      margin: 0.5rem 0;
+    }
+    .milestone-card strong {
+      color: #F8BBD0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>089 &mdash; Parenthetical Girls</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Avant-Pop &mdash; Genre Stage 71 &mdash; Portland/Seattle &mdash; E=3 &mdash; Theatrical &amp; Baroque</h3>
+      <p>
+        <strong>Parenthetical Girls</strong> (later Parenthetical) &mdash; the project of
+        <strong>Zac Pennington</strong>. Theatrical, baroque, avant-pop music blending chamber pop,
+        cabaret, and experimental sounds. Portland-based but connected to Seattle through performances
+        and scene overlap. <strong>Avant-Pop</strong> at Genre Stage 71. <strong>E=3</strong>.
+        Dramatic, literary, operatic impulse in a lo-fi frame. 90th acoustic element. 90th pattern.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">89&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Parenthetical Girls</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Avant-Pop</span>
+          <span class="neighborhood-badge">Portland / Seattle</span>
+          <span class="record-badge">Genre Stage 71</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Theatrical Card -->
+        <div class="theatrical-card">
+          <h4>Theatrical Avant-Pop &mdash; Zac Pennington&rsquo;s Vision</h4>
+          <p>
+            <strong>Parenthetical Girls</strong> is the vehicle of <strong>Zac Pennington</strong> &mdash;
+            a singer, performer, and conceptualist whose work fuses <strong>chamber pop, cabaret,
+            experimental electronics, and baroque ornamentation</strong> into something that resists
+            easy genre assignment. The music is theatrical without being theater, literary without being
+            literature, operatic without being opera. Pennington&rsquo;s voice is the constant &mdash;
+            a dramatic, expressive instrument deployed across shifting instrumental frameworks.
+          </p>
+          <p>
+            The project is marked by <strong>conceptual ambition</strong>: subscription-only releases,
+            handmade packaging, collaborations across disciplines. The music refuses to separate itself
+            from its presentation &mdash; the theatrical is the medium and the message.
+          </p>
+        </div>
+
+        <!-- Portland Connection Card -->
+        <div class="portland-card">
+          <h4>Portland / Seattle &mdash; The PNW Experimental Corridor</h4>
+          <p>
+            Parenthetical Girls is Portland-based but connected to <strong>Seattle&rsquo;s
+            experimental scene</strong> through regular performances, collaborations, and the
+            porous border between the two cities&rsquo; underground music communities.
+            Portland and Seattle are three hours apart by car; the experimental and DIY
+            scenes have always overlapped. <strong>The PNW experimental corridor</strong>
+            treats the two cities as nodes in a single network rather than separate scenes.
+          </p>
+        </div>
+
+        <!-- Engine Events Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 71 &middot; Avant-Pop &middot; E=3 &middot; 90th Acoustic Element &middot; 90th Pattern</h4>
+          <p>
+            <strong>Parenthetical Girls</strong> enters at Genre Stage 71 with Avant-Pop.
+            <strong>E=3</strong> &mdash; theatrical presence without overwhelming volume.
+            The 90th acoustic element. The 90th artist-city pattern.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 71: Avant-Pop &mdash; The Theatrical Experiment</h2>
+          <p>
+            Degree 89 reaches <strong>Genre Stage 71</strong>. <strong>Avant-Pop</strong> describes
+            Parenthetical Girls&rsquo; music: pop structures exist but are refracted through
+            avant-garde sensibilities. The songs have melodies, verses, choruses &mdash; but wrapped
+            in chamber arrangements, electronic textures, cabaret theatrics, and literary conceits.
+            The &ldquo;pop&rdquo; is the skeleton; the &ldquo;avant&rdquo; is everything else.
+          </p>
+          <p>
+            Distinguished from prior experimental entries: <strong>Chong the Nomad</strong> (degree 44)
+            is experimental electronic &mdash; beat-driven, production-forward. Parenthetical Girls
+            is avant-pop &mdash; voice-driven, performance-forward. The experimental impulse serves
+            different masters: in Chong, the production <em>is</em> the art; in Parenthetical Girls,
+            the production serves the theatrical vision.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 90: The Baroque Whisper</h2>
+          <p>
+            The <strong>baroque whisper</strong> is the ninetieth acoustic element in the
+            Seattle 360 engine. It describes Parenthetical Girls&rsquo; sound &mdash; a voice
+            that oscillates between intimate whisper and dramatic operatic delivery, surrounded
+            by chamber instruments (strings, piano, accordion) and electronic textures. The
+            dynamic range is extreme: the music moves from near-silence to full orchestral
+            swell within a single phrase.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>bedroom strum</strong> (89th element,
+            Kimya Dawson at 88) was minimum production &mdash; one guitar, one voice. The
+            baroque whisper is maximum ornamentation &mdash; every surface decorated, every
+            silence filled with texture. The engine swings from stripped to ornate, from
+            lo-fi sincerity to theatrical artifice.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 90: The Theatrical Outsider</h2>
+          <p>
+            The <strong>theatrical outsider</strong> is the ninetieth artist-city pattern in the
+            Seattle 360 engine. It describes an artist whose work is fundamentally theatrical &mdash;
+            performance, costume, concept &mdash; but operates outside any theatrical institution.
+            No opera house, no theater company, no Broadway. The theatricality lives in the music
+            itself, in the live performance, in the packaging and presentation.
+          </p>
+          <blockquote>
+            The theatrical outsider is the artist who brings the stage to the club. Parenthetical
+            Girls perform in spaces designed for rock bands but deliver something closer to
+            cabaret &mdash; dramatic, literary, costumed, conceptual. The theatrical outsider
+            doesn&rsquo;t join the theater; the theatrical outsider makes the bar into a theater.
+            Every venue becomes a proscenium.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Baroque Whisper</h4>
+              <span class="level advanced">Advanced</span>
+              <p>90th acoustic element. Parenthetical Girls --
+              voice oscillating between whisper and operatic
+              delivery, chamber instruments, electronic textures.
+              Maximum ornamentation. Extreme dynamic range.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Theatrical Outsider</h4>
+              <span class="level advanced">Advanced</span>
+              <p>90th artist-city pattern. Theatrical work
+              outside theatrical institutions. Cabaret in
+              rock clubs. The stage brought to the bar.
+              Performance as the medium itself.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 71 &mdash; Avant-Pop</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>71st genre stage. Avant-Pop. Pop structures
+              refracted through avant-garde sensibilities.
+              Chamber pop meets cabaret meets experimental.
+              Voice-driven, performance-forward.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 &mdash; Theatrical Presence</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>E=3. Theatrical presence without overwhelming
+              volume. The drama is in the dynamics, not the
+              decibels. Intimate and operatic coexist.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Portland/Seattle Corridor</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Portland-based, Seattle-connected. The PNW
+              experimental corridor treats both cities as
+              nodes in a single network. Porous border.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Zac Pennington &mdash; The Conceptualist</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Parenthetical Girls as Pennington's vehicle.
+              Subscription releases, handmade packaging,
+              cross-discipline collaborations. Music inseparable
+              from its presentation.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">072</span>
+              <strong>Briana Marela</strong> &mdash; Art pop connection.
+              Both operate in art-pop territory but from different angles.
+              Marela is ethereal and ambient; Parenthetical Girls is theatrical
+              and baroque. Both prioritize artistic vision over accessibility.
+            </li>
+            <li>
+              <span class="ref-degree">017</span>
+              <strong>Reggie Watts</strong> &mdash; Uncategorizable performance.
+              Both artists resist genre assignment. Both are fundamentally
+              performers whose live presence defines the work. Watts uses
+              comedy and loops; Pennington uses cabaret and drama.
+            </li>
+            <li>
+              <span class="ref-degree">081</span>
+              <strong>Sara Bareilles</strong> &mdash; Theatrical trajectory.
+              Bareilles moved toward Broadway; Parenthetical Girls brings
+              the theatrical impulse to underground clubs. Both acknowledge
+              theater as a musical force &mdash; from opposite directions.
+            </li>
+            <li>
+              <span class="ref-degree">044</span>
+              <strong>Chong the Nomad</strong> &mdash; Experimental impulse.
+              Both experimental, both pushing boundaries. Chong is electronic
+              and beat-driven; Parenthetical Girls is acoustic/electronic
+              and voice-driven. Different experimental vocabularies.
+            </li>
+            <li>
+              <span class="ref-degree">071</span>
+              <strong>Phil Elverum</strong> &mdash; Lo-fi contrast.
+              Elverum&rsquo;s aesthetic is stripped, raw, personal. Parenthetical
+              Girls&rsquo; aesthetic is ornate, theatrical, conceptual. Both are
+              deeply committed to their visions. Maximum contrast in approach,
+              equal commitment to authenticity.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Parenthetical Girls &mdash; discography and project history.</li>
+            <li>AllMusic &mdash; Parenthetical Girls biography.</li>
+            <li>Pitchfork &mdash; Parenthetical Girls reviews and features.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">89&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Avant-Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Portland / Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Leader</span>
+            <span class="stat-value">Zac Pennington</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">71</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">90th Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">90th Pattern</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sonic Character</h4>
+          <div class="stat-row">
+            <span class="stat-label">Element</span>
+            <span class="stat-value">Baroque Whisper</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Theatrical Outsider</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Dynamic</span>
+            <span class="stat-value">Whisper to Operatic</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Context</h4>
+          <div class="stat-row">
+            <span class="stat-label">Style</span>
+            <span class="stat-value">Chamber / Cabaret</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Approach</span>
+            <span class="stat-value">Conceptual</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Corridor</span>
+            <span class="stat-value">PDX&ndash;SEA</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

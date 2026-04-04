@@ -1,0 +1,217 @@
+{
+  "project": "HEL",
+  "title": "Helium Supply Chain & Pacific Rim Semiconductor Infrastructure",
+  "created": "2026-03-31",
+  "nodes": [
+    {
+      "id": "he-psa",
+      "label": "Pressure Swing Adsorption",
+      "type": "technology",
+      "description": "Modular gas separation technology enabling small-scale helium extraction at wellheads. Viable at concentrations as low as 0.3%.",
+      "connections": ["modular-extraction", "virtual-plant", "economics"]
+    },
+    {
+      "id": "modular-extraction",
+      "label": "Modular Extraction Nodes",
+      "type": "infrastructure",
+      "description": "Small-scale PSA units ($50K-$250K) deployable at individual wellheads in months, producing crude helium at 50-70% purity.",
+      "connections": ["he-psa", "virtual-plant", "hub-spoke"]
+    },
+    {
+      "id": "virtual-plant",
+      "label": "Virtual Helium Plant",
+      "type": "architecture",
+      "description": "Distributed production model aggregating dozens of small nodes into a coordinated supply chain, inspired by Virtual Power Plants.",
+      "connections": ["modular-extraction", "hub-spoke", "digital-orchestration"]
+    },
+    {
+      "id": "hub-spoke",
+      "label": "Hub-and-Spoke Aggregation",
+      "type": "architecture",
+      "description": "Central purification/liquefaction hub receiving crude helium from distributed nodes. Shared capital, shared risk.",
+      "connections": ["virtual-plant", "i5-corridor", "grade-a"]
+    },
+    {
+      "id": "digital-orchestration",
+      "label": "Digital Orchestration Layer",
+      "type": "technology",
+      "description": "Cloud-based coordination of distributed nodes: inventory tracking, quality assurance, logistics optimization, automated settlement.",
+      "connections": ["virtual-plant", "hub-spoke"]
+    },
+    {
+      "id": "i5-corridor",
+      "label": "I-5 Corridor",
+      "type": "geography",
+      "description": "PNW Interstate 5 from Bellingham to Medford — cheap electricity, port access, existing distribution, fab proximity.",
+      "connections": ["hub-spoke", "silicon-forest", "port-tacoma", "pnw-power"]
+    },
+    {
+      "id": "silicon-forest",
+      "label": "Silicon Forest",
+      "type": "geography",
+      "description": "Portland/Hillsboro semiconductor cluster anchored by Intel D1X. 35-40K jobs, $52B+ Intel investment, 50 years of ecosystem development.",
+      "connections": ["i5-corridor", "intel-d1x", "chips-act"]
+    },
+    {
+      "id": "intel-d1x",
+      "label": "Intel D1X Complex",
+      "type": "facility",
+      "description": "Intel's most advanced development fab in Hillsboro, OR. Leading-edge process development. Largest PNW helium consumer.",
+      "connections": ["silicon-forest", "helium-fabs", "euv"]
+    },
+    {
+      "id": "helium-fabs",
+      "label": "Helium in Semiconductor Fabs",
+      "type": "application",
+      "description": "Wafer cooling, leak detection, carrier gas, EUV purging. Thousands of liters per month at Grade-A or Research Grade purity.",
+      "connections": ["intel-d1x", "grade-a", "recycling", "euv"]
+    },
+    {
+      "id": "euv",
+      "label": "EUV Lithography",
+      "type": "technology",
+      "description": "Extreme ultraviolet lithography requires helium-purged environments to prevent light absorption. Critical for leading-edge nodes.",
+      "connections": ["helium-fabs", "intel-d1x"]
+    },
+    {
+      "id": "grade-a",
+      "label": "Grade-A Helium (99.999%)",
+      "type": "specification",
+      "description": "Industrial standard purity for semiconductor and medical applications. Requires centralized purification hub with cryogenic capability.",
+      "connections": ["hub-spoke", "helium-fabs", "research-grade"]
+    },
+    {
+      "id": "research-grade",
+      "label": "Research Grade 6.0 (99.9999%)",
+      "type": "specification",
+      "description": "Highest purity grade for R&D fabs and precision research. Premium pricing, 3-10x above Grade-A.",
+      "connections": ["grade-a", "silicon-forest"]
+    },
+    {
+      "id": "recycling",
+      "label": "Closed-Loop Helium Recycling",
+      "type": "technology",
+      "description": "On-site cryocooler systems capturing 90-95% of helium boil-off. $1.5-3.5M systems with <12 month ROI at crisis prices.",
+      "connections": ["helium-fabs", "economics"]
+    },
+    {
+      "id": "qatar-crisis",
+      "label": "Qatar Force Majeure (March 2026)",
+      "type": "event",
+      "description": "March 2, 2026: Qatar Energy halts helium exports. ~33% of global supply offline. Strait of Hormuz closure.",
+      "connections": ["shortage-pattern", "economics", "ring-of-fire"]
+    },
+    {
+      "id": "shortage-pattern",
+      "label": "Recurring Shortage Pattern",
+      "type": "pattern",
+      "description": "Five crises since 2006, each worse, intervals shrinking. Root cause: concentrated production, depleting reserves.",
+      "connections": ["qatar-crisis", "federal-reserve", "virtual-plant"]
+    },
+    {
+      "id": "federal-reserve",
+      "label": "Federal Helium Reserve (1925-2021)",
+      "type": "history",
+      "description": "Bush Dome, Amarillo TX. ~32 Bcf stockpile sold off under 1996 Privatization Act. Depleted by 2021. Buffer gone.",
+      "connections": ["shortage-pattern"]
+    },
+    {
+      "id": "he3",
+      "label": "Helium-3",
+      "type": "isotope",
+      "description": "Rare isotope from tritium decay. ~40-60K L/year global supply. $2-3.5K/L. Critical for quantum computing dilution refrigerators.",
+      "connections": ["quantum-computing", "interlune", "pnnl"]
+    },
+    {
+      "id": "quantum-computing",
+      "label": "Quantum Computing Constraint",
+      "type": "application",
+      "description": "Every superconducting qubit processor needs a dilution refrigerator (20-40L He-3/He-4 mix). He-3 supply is a scaling bottleneck.",
+      "connections": ["he3", "microsoft-quantum"]
+    },
+    {
+      "id": "microsoft-quantum",
+      "label": "Microsoft Quantum (Redmond)",
+      "type": "organization",
+      "description": "Topological qubit research using He-3 dilution refrigerators. PNW anchor for quantum computing He-3 demand.",
+      "connections": ["quantum-computing", "he3", "i5-corridor"]
+    },
+    {
+      "id": "interlune",
+      "label": "Interlune (Seattle)",
+      "type": "organization",
+      "description": "Lunar He-3 extraction company. Founded by ex-Blue Origin president. $18M Series A. Headquartered in Seattle.",
+      "connections": ["he3", "i5-corridor"]
+    },
+    {
+      "id": "pnnl",
+      "label": "PNNL (Richland, WA)",
+      "type": "organization",
+      "description": "Pacific Northwest National Laboratory. Cryogenic R&D, neutron detection, He-3 alternative development.",
+      "connections": ["he3", "i5-corridor"]
+    },
+    {
+      "id": "ring-of-fire",
+      "label": "Ring of Fire Trading Network",
+      "type": "concept",
+      "description": "Pacific Rim as interconnected trading system. Mutual dependence: Australia extracts, US refines, Taiwan fabricates, everyone consumes.",
+      "connections": ["qatar-crisis", "east-asia", "australia", "port-tacoma"]
+    },
+    {
+      "id": "east-asia",
+      "label": "East Asian Semiconductor Hubs",
+      "type": "geography",
+      "description": "TSMC (Kaohsiung), Samsung/SK Hynix (Busan), various (Tokyo). 15-25 day shipping from PNW.",
+      "connections": ["ring-of-fire", "port-tacoma", "helium-fabs"]
+    },
+    {
+      "id": "australia",
+      "label": "Australia (Amadeus Basin)",
+      "type": "geography",
+      "description": "Potential 44 Bcf helium resource (~7x annual global demand). 8-14 day shipping to East Asia. Fastest Qatar alternative.",
+      "connections": ["ring-of-fire", "east-asia"]
+    },
+    {
+      "id": "port-tacoma",
+      "label": "Port of Tacoma / NWSA",
+      "type": "facility",
+      "description": "West Coast export gateway. 15-25 day container shipping to East Asian semiconductor hubs.",
+      "connections": ["i5-corridor", "east-asia", "ring-of-fire"]
+    },
+    {
+      "id": "pnw-power",
+      "label": "PNW Electricity Advantage",
+      "type": "economics",
+      "description": "$0.06-$0.08/kWh industrial rate. Significant cost advantage for energy-intensive helium liquefaction.",
+      "connections": ["i5-corridor", "economics"]
+    },
+    {
+      "id": "economics",
+      "label": "Crisis Window Economics",
+      "type": "economics",
+      "description": "Modular PSA IRR >50-100% at crisis prices. Recycling ROI <12 months. CHIPS Act + state grants available. Window opened March 2, 2026.",
+      "connections": ["pnw-power", "recycling", "chips-act", "qatar-crisis"]
+    },
+    {
+      "id": "chips-act",
+      "label": "CHIPS and Science Act",
+      "type": "policy",
+      "description": "$33B+ grants, $7B loans. Explicitly includes gas supply chain. Intel Oregon awarded up to $8.5B.",
+      "connections": ["economics", "silicon-forest", "regulatory"]
+    },
+    {
+      "id": "regulatory",
+      "label": "Regulatory Landscape",
+      "type": "policy",
+      "description": "BLM extraction permits, DOT hazmat shipping, WA co-op formation (RCW 23.86), SEPA environmental review. Well-established, navigable.",
+      "connections": ["chips-act", "i5-corridor"]
+    },
+    {
+      "id": "cooperative",
+      "label": "Co-operative Model",
+      "type": "business",
+      "description": "RCW 23.86: five persons, one-member-one-vote. Shared infrastructure, distributed risk, local benefit at every node.",
+      "connections": ["regulatory", "virtual-plant", "ring-of-fire"]
+    }
+  ]
+}

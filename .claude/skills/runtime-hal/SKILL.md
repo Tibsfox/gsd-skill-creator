@@ -1,6 +1,6 @@
 ---
 name: runtime-hal
-description: Runtime Hardware Abstraction Layer for multi-runtime agent orchestration. Detects the active AI coding assistant (Claude Code, Codex, Gemini, Cursor) and exposes a uniform interface for startup injection, GUPP enforcement, and communication strategy selection. Other chipset skills call HAL functions without knowing which runtime is active.
+description: Runtime HAL for multi-runtime agent orchestration. Detects active AI assistant (Claude Code, Codex, Gemini, Cursor) and exposes uniform interface for startup injection, GUPP enforcement, and communication selection.
 ---
 
 # Runtime HAL

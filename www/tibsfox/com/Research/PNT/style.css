@@ -1,0 +1,44 @@
+/* PNT — So You Want to Be a Painter
+   Rich purples and warm ochres — the artist's palette */
+
+:root {
+  --accent: #6b46c1;
+  --accent-light: #9f7aea;
+  --accent-dark: #553c9a;
+  --page-bg: #faf5ff;
+  --card-border: #d6bcfa;
+  --card-shadow: rgba(107, 70, 193, 0.12);
+  --text: #2d3748;
+  --text-light: #718096;
+  --link: #6b46c1;
+}
+
+body { background: var(--page-bg); color: var(--text); }
+header { background: linear-gradient(135deg, #553c9a 0%, #6b46c1 40%, #9f7aea 100%); border-bottom: 4px solid #d6bcfa; }
+header h1, header .subtitle, header nav a { color: #faf5ff; }
+header nav a:hover { color: #e9d8fd; }
+header nav a.active { color: #e9d8fd; font-weight: 700; border-bottom: 2px solid #d6bcfa; }
+
+h2 { color: var(--accent-dark); border-bottom: 2px solid #d6bcfa; padding-bottom: 0.3rem; }
+h3 { color: #6b46c1; }
+
+.card { border-left: 4px solid var(--accent); background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%); box-shadow: 0 2px 8px var(--card-shadow); border-radius: 8px; }
+.card:hover { box-shadow: 0 6px 24px rgba(107, 70, 193, 0.22); border-left-color: var(--accent-light); transform: translateY(-2px); }
+.card h3 { color: var(--accent-dark); }
+
+.stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.stat { background: #faf5ff; border: 1px solid #d6bcfa; border-radius: 8px; padding: 0.8rem 1.2rem; text-align: center; flex: 1; min-width: 100px; }
+.stat-value { color: var(--accent); font-size: 2rem; font-weight: 700; display: block; }
+.stat-label { color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+blockquote { border-left: 4px solid #9f7aea; background: rgba(159, 122, 234, 0.06); border-radius: 0 6px 6px 0; padding: 1rem 1.5rem; font-style: italic; }
+.tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.75rem; font-weight: 600; }
+.tag-resident { background: #e9d8fd; color: #553c9a; }
+
+th { background: var(--accent-dark); color: white; }
+tr:nth-child(even) { background: rgba(107, 70, 193, 0.04); }
+code { background: #e9d8fd; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+pre { background: #2d3748; color: #e2e8f0; border-radius: 6px; padding: 1rem; overflow-x: auto; }
+footer { border-top: 2px solid #d6bcfa; margin-top: 3rem; padding: 1.5rem; text-align: center; color: var(--text-light); }
+
+@media (max-width: 640px) { header { padding: 1.2rem; } header h1 { font-size: 1.3rem; } main { padding: 1rem; } .stats { flex-direction: column; } .card-grid { grid-template-columns: 1fr; } }

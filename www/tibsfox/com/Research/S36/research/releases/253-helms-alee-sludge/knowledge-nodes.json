@@ -1,0 +1,41 @@
+{
+  "degree": 253, "artist": "Helms Alee", "slug": "253-helms-alee-sludge", "genre": "Sludge Rock", "energy": 7,
+  "era": "2008-present. Sludge Rock. E=7 -- slow, massive, psychedelically heavy. Capitol Hill. Sargent House.",
+  "location": { "origin": "Capitol Hill, Seattle" }, "formed": "Seattle, Washington", "active": "2008-present",
+  "labels": ["Kemado (debut)", "Sargent House"],
+  "members": ["Ben Verellen (guitar/vocals)", "Dana James (bass/vocals)", "Hozoji Margullis (drums)"],
+  "associated_musicians": ["Russian Circles (Sargent House labelmates; Brian Cook Botch/Russian Circles bridge)", "Chelsea Wolfe (Sargent House)", "Deafheaven (Sargent House)", "Emma Ruth Rundle (Sargent House)"],
+  "genre_lineage": {
+    "primary": "Sludge metal/rock: doom metal + hardcore punk",
+    "new_orleans_origin": "Eyehategod (1988, *In the Name of Suffering* 1992), Crowbar, Acid Bath",
+    "pnw_adaptation": "Greyer, more psychedelic, more atmospheric than Southern Gothic original",
+    "tempo": "Slow (often 60 BPM or below). Riffs are long, repetitive, hypnotic.",
+    "tuning": "Downtuned 2-4 steps from standard EADGBE -- typically B or C standard"
+  },
+  "sargent_house": {
+    "founded": "1998 by Cathy Pellow, Los Angeles",
+    "origin": "Management company evolved into record label",
+    "roster_peers": ["Chelsea Wolfe", "Russian Circles", "Deafheaven", "Emma Ruth Rundle", "Torche", "Marriages"],
+    "aesthetic": "Heavy without genre affiliation, atmospheric, melodically sophisticated"
+  },
+  "discography": [
+    { "album": "Night Terror", "year": 2008, "label": "Kemado", "note": "Debut. Core approach established." },
+    { "album": "Weatherhead", "year": 2011, "label": "Sargent House", "note": "First Sargent House release. National profile begins." },
+    { "album": "Sleepwalking Sailors", "year": 2014, "label": "Sargent House", "note": "Dual vocal approach fully developed." },
+    { "album": "Stillicide", "year": 2017, "label": "Sargent House", "note": "Title from sound of dripping water. Most sophisticated production." },
+    { "album": "Keep This Be the Way", "year": 2020, "label": "Sargent House", "note": "Psych-sludge synthesis fully realized." },
+    { "album": "Noctiluca", "year": 2023, "label": "Sargent House", "note": "Bioluminescent plankton. Pacific Northwest coast imagery." }
+  ],
+  "theory_nodes": [
+    { "concept": "Sludge rock lineage: Eyehategod (New Orleans, 1988) created the template -- doom metal slowed to a crawl + hardcore aggression. PNW adapted it: greyer, more atmospheric. Helms Alee inherits both the New Orleans template and the PNW grey.", "level": "advanced", "department": "genre-theory", "description": "Sludge: doom + hardcore. New Orleans origin; PNW adaptation." },
+    { "concept": "Dana James's bass and dual vocals. In sludge, bass is typically support. James's bass is co-equal front-line instrument. Her clean melodic vocals floating above crushing instrumentation creates productive dissonance -- the genre's defining aesthetic device: clean voice against distorted wall.", "level": "advanced", "department": "band-analysis", "description": "Dual vocals and bass-as-lead: Helms Alee's distinctive contribution." },
+    { "concept": "Sargent House as heavy art music independent. Founded 1998 Cathy Pellow. Chelsea Wolfe, Russian Circles, Deafheaven, Emma Ruth Rundle. Brian Cook (Russian Circles) previously in Botch (254) -- label bridge to next degree.", "level": "intermediate", "department": "industry-context", "description": "Sargent House roster and Brian Cook bridge." }
+  ],
+  "cross_references": [
+    {"degree": 252, "artist": "No-Anchor", "relationship": "Noise rock to sludge. Underground to underground. E=7 holds. Speed changes: noise rock fast; sludge slow. Both self-sufficient, outside institutional music."},
+    {"degree": 254, "artist": "Botch", "relationship": "E rises to 8. Sludge to post-hardcore/mathcore. Capitol Hill to Tacoma. Brian Cook bridge: Botch → Russian Circles → Sargent House → Helms Alee."}
+  ],
+  "sps_pair": {"degree": 253, "sound": "Puget Sound Tidal Current", "pairing_note": "E=7 vs E=2. Both are low-frequency, both move at geological/hydraulic speed. Sludge moves sonic energy slowly; tidal current moves billions of cubic meters slowly. Mass against mass."},
+  "milestones": ["SLUDGE ROCK ENTERS ENGINE (first sludge entry)", "SARGENT HOUSE ENTERS ENGINE"],
+  "tags": ["sludge-rock", "sargent-house", "capitol-hill", "three-piece", "downtuned", "dual-vocals", "dana-james", "ben-verellen", "hozoji-margullis", "doom-punk-intersection", "pnw-heavy", "post-metal"]
+}

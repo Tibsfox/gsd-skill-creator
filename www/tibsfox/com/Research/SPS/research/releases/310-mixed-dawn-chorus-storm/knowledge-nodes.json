@@ -1,0 +1,19 @@
+{
+  "degree": 310, "species": "Mixed dawn chorus Pacific storm", "slug": "310-mixed-dawn-chorus-storm", "sound_type": "Overlapping calls in driving rain", "energy": 8,
+  "family": "Multi-species", "season": "Spring (April-June peak)", "ecosystem": "Storm morning",
+  "frequency_range": "300-8,000+ Hz combined; sub-bass 50-200 Hz wind drone",
+  "species_present": ["American Robin (Turdus migratorius)", "Pacific Wren (Troglodytes pacificus)", "Song Sparrow (Melospiza melodia)", "Swainson's Thrush (Catharus ustulatus)", "Black-capped Chickadee (Poecile atricapillus)", "Red-winged Blackbird (Agelaius phoeniceus)", "Dark-eyed Junco (Junco hyemalis)", "Common Raven (Corvus corax)"],
+  "theory_nodes": [
+    { "concept": "FIRST MULTI-SPECIES SPS MAXIMUM ZONE ENTRY. All previous SPS E=8+ entries document single species or specific paired events. Degree 310 documents the simultaneous presence of 8-15+ species calling through a Pacific storm. A new entry type: the acoustic complex rather than the single acoustic event.", "level": "milestone", "department": "entry-type", "description": "First multi-species acoustic complex in the SPS maximum zone." },
+    { "concept": "EXACT ENERGY MATCH with Mudhoney: E=8 + E=8 = E=16. Only exact energy match in the Grunge Summit cluster. Both events consist of multiple simultaneous acoustic signals remaining individually identifiable within combined event. The layering principle: additive not assimilative.", "level": "milestone", "department": "mudhoney-match", "description": "Exact E=8 energy match and structural parallel with Mudhoney's simultaneous guitar layering." },
+    { "concept": "Pacific storm acoustic augmentation: rain on alder/maple canopy (40-80 dB white noise floor), wind in Sitka spruce/Douglas fir (50-200 Hz drone), humidity carry effects (mid-frequency calls carry further in humid air). Storm not silencing chorus but transforming it: volume selection mechanism amplifies loud callers.", "level": "advanced", "department": "storm-acoustics", "description": "Pacific storm as acoustic transformer of the dawn chorus." },
+    { "concept": "Individual species roles: American Robin (anchor, first singer), Pacific Wren (8-10g, 30+ syllable types, most complex), Song Sparrow (8-20 song repertoire, most variable), Swainson's Thrush (spiral upward song, storm trigger), Common Raven (200-1,500 Hz sub-bass anchor).", "level": "advanced", "department": "species-roles", "description": "Species roles in the storm dawn chorus acoustic architecture." }
+  ],
+  "cross_references": [
+    {"degree": "309", "species": "Great Horned Owl pair", "relationship": "Preceding degree at E=9. Single-species coordinated pair event (E=9) followed by multi-species storm complex (E=8). Acoustic complexity increases as energy decreases by one unit."},
+    {"degree": "311", "species": "Orca greeting ceremony", "relationship": "Succeeding degree at E=9. Multi-species terrestrial (E=8) immediately precedes marine multi-voice (E=9). Storm dawn chorus bridges between the two E=9 peaks of the Summit cluster."}
+  ],
+  "s36_pair": {"degree": 310, "artist": "Mudhoney", "pairing_note": "E=8 + E=8 = E=16. Exact energy match. Multiple simultaneous guitar voices (Arm rhythm + Turner lead + Lukin bass) through the Sub Pop noise storm. Multiple simultaneous bird voices through the Pacific rain storm. Layering principle: individual identity preserved in simultaneous combination. The only exact energy match in the Grunge Summit."},
+  "milestones": ["FIRST MULTI-SPECIES SPS MAX ZONE", "EXACT E=8 MUDHONEY MATCH", "E=16 EXACT COMBINED"],
+  "tags": ["multi-species", "dawn-chorus", "pacific-storm", "american-robin", "pacific-wren", "song-sparrow", "swainsons-thrush", "black-capped-chickadee", "red-winged-blackbird", "common-raven", "spring", "e8", "grunge-summit", "mudhoney-pair"]
+}

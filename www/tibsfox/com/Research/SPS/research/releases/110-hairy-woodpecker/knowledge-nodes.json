@@ -1,0 +1,120 @@
+{
+  "degree": 110,
+  "species": "Hairy Woodpecker",
+  "scientific_name": "Dryobates villosus",
+  "slug": "110-hairy-woodpecker",
+  "sound_type": "sharp peek! call + stuttering drum -- emphatic metallic call at 2,000-6,000 Hz, rapid stuttering drum at ~25 strikes/sec, E=5",
+  "energy": 5,
+  "ecosystem": "Forest -- coniferous, mixed, deciduous, suburban, burned. Habitat generalist. Year-round resident, non-migratory.",
+  "season": "Year-round resident. Does not migrate. Drums most intensely in late winter through spring but drums year-round.",
+  "family": "Picidae (4th consecutive: 107-108-109-110)",
+  "order": "Piciformes",
+  "csv_substitute": false,
+  "original_species": "Hairy Woodpecker",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.65,
+    "lon": -122.30,
+    "description": "Reference for urban/suburban forest habitat in the Seattle area. Hairy Woodpeckers are generalists found from old-growth forest to suburban parks with large trees."
+  },
+  "taxonomy_note": {
+    "description": "Genus Dryobates enters the engine. Dryobates villosus -- tree-treader (where Dryocopus = tree-beater). Fourth consecutive Picidae (107-108-109-110). Consecutive same-genus entries coming (Hairy 110, Downy 111 -- both Dryobates). The Hairy-Downy pair is the most commonly confused bird pair in North American birding.",
+    "current_family": "Picidae (4th consecutive, 7th entry total)",
+    "new_family": false,
+    "family_count_in_engine": "Picidae count: 7 entries (Northern Flicker 21-22, Red-breasted Sapsucker 54, Pileated Woodpecker 54, Acorn Woodpecker 107, Pileated Woodpecker laughing 108, Pileated Woodpecker drumming 109, Hairy Woodpecker 110)",
+    "name_etymology": "Dryobates from Greek drys ('tree') + bates ('one who treads') -- 'tree-treader.' villosus from Latin villosus ('hairy, shaggy') -- referring to the shaggy appearance of the white back feathers. The Hairy Woodpecker: the shaggy tree-treader.",
+    "genus_note": "Dryobates (formerly Picoides) -- first appearance of this genus. The Downy Woodpecker (Dryobates pubescens) at degree 111 is in the same genus. Consecutive same-genus entries.",
+    "order_note": "Piciformes. Fourth consecutive (107-108-109-110).",
+    "family_position": "Picidae continues for a fourth consecutive degree. Halfway to the Sciuridae octet record (8 consecutive). The Downy at degree 111 would make five."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Call: 2,000-6,000 Hz (sharp peek!). Drum: 100-200 Hz fundamental.",
+    "peak_energy_band_hz": "Call: 3,000-5,000 Hz. Drum: 150-400 Hz.",
+    "song_frequency_hz": "Call: sharp metallic PEEK! at 2,000-6,000 Hz. Drum: stuttering roll at 100-200 Hz fundamental. Two distinct acoustic outputs.",
+    "song_duration_s": "Call: 0.05-0.1 sec per note (brief and explosive). Drum: 0.5-1.5 sec per roll.",
+    "note_structure": "PEEK! CALL: Single sharp metallic note. Explosive, brief, ringing. The most reliable acoustic field mark separating Hairy from Downy. DRUM: Rapid stuttering roll, ~25 strikes/sec, slight acceleration possible.",
+    "note_types": "Sharp peek! call (primary contact/alarm), stuttering drum (territorial), rattle call (agitation -- rapid series of peek notes), soft whinny (pair contact).",
+    "phrase_structure": "Call: single notes, often repeated at intervals. Drum: single sustained roll per event.",
+    "timbre": "Call: sharp, metallic, ringing. Clear and emphatic. Drum: snappy, rapid, somewhat higher-pitched and thinner than Pileated's booming roll. The timbre reflects the smaller body and smaller drumming surface.",
+    "amplitude": "E=5. The peek! call is loud and commanding -- carries well through forest. The drum is loud but not overwhelming. Both are emphatic but do not approach the physical dominance of the Pileated's E=6.",
+    "tempo": "Drum: ~25 strikes/sec. Faster than Pileated (15-16/sec). Less force per strike. The trade-off: speed for power.",
+    "context": "TERRITORIAL AND CONTACT. Peek! call for contact and alarm. Drum for territory advertisement and pair-bond. Year-round but most intense in breeding season (late winter through spring).",
+    "regional_variation": "Minimal variation in call and drum across range. The Hairy-Downy acoustic contrast is consistent throughout their shared range.",
+    "key_property": "SHARP PEEK! + STUTTERING DRUM. E=5. Fourth consecutive Picidae (107-110). Genus Dryobates enters ('tree-treader'). The Hairy-Downy pair begins -- most confused bird pair in NA birding. Hairy PEEK! vs. Downy pik is the diagnostic acoustic field mark. ~25 strikes/sec drum. Habitat generalist. 50th consecutive original CSV."
+  },
+  "plumage": {
+    "overall": "Medium-sized woodpecker. Black and white. Black upperparts with white back stripe (central). White underparts. Black wings with white spotting. Males have small red patch on back of head. Females lack red.",
+    "diagnostic_mark": "For degree 110: (1) BILL PROPORTION is the key visual mark separating Hairy from Downy. Hairy's bill is nearly as long as the head -- substantial, chisel-shaped. Downy's bill is ~1/3 head length -- short and dainty. (2) SIZE -- the Hairy is significantly larger than the Downy (~50% longer, ~3x heavier), but size is difficult to judge without direct comparison.",
+    "seasonal_variation": "Minimal. Year-round plumage. Males red on nape; females no red.",
+    "flight_pattern": "Undulating flight typical of woodpeckers. Less dramatic than the Pileated's deep undulations."
+  },
+  "physical_description": {
+    "overall": "Medium-sized woodpecker. Body length 18-26 cm. Wingspan 33-41 cm. Weight 40-95 g. Significantly larger than Downy (14-18 cm, 21-28 g) but much smaller than Pileated (40-49 cm, 250-400 g).",
+    "diagnostic_mark": "Bill proportion: nearly as long as the head. This is the single most reliable visual field mark. If the bill looks proportionally large relative to the head, it's a Hairy. If small, it's a Downy.",
+    "field_id": "Medium black-and-white woodpecker with a proportionally large bill. Sharp, emphatic PEEK! call. If you hear a ringing PEEK! from a black-and-white woodpecker, it's a Hairy. If you hear a soft pik, it's a Downy."
+  },
+  "nodes": [
+    {
+      "id": "peek-call",
+      "type": "concept",
+      "title": "Sharp Peek! -- The Diagnostic Call",
+      "description": "Sharp, emphatic, metallic PEEK! at 2,000-6,000 Hz. Brief and explosive. The most reliable acoustic field mark separating Hairy from Downy. Louder, sharper, lower-pitched than Downy's soft pik.",
+      "connections": ["hairy-downy-pair", "stuttering-drum", "picidae-streak"]
+    },
+    {
+      "id": "stuttering-drum",
+      "type": "concept",
+      "title": "The Stuttering Drum -- ~25 Strikes/Sec",
+      "description": "Rapid stuttering roll at ~25 strikes/sec. 100-200 Hz fundamental. 0.5-1.5 sec duration. Faster than Pileated but with less force. Sharp and snappy vs. deep and booming.",
+      "connections": ["peek-call", "acoustic-scaling"]
+    },
+    {
+      "id": "hairy-downy-pair",
+      "type": "pattern",
+      "title": "The Hairy-Downy Pair -- Most Confused Species Pair",
+      "description": "Hairy (110) and Downy (111) -- consecutive same-genus (Dryobates) entries. Nearly identical plumage. Key visual: bill proportion. Key acoustic: PEEK! vs. pik. Size (Hairy ~3x Downy mass). The most instructive acoustic scaling comparison in PNW birding.",
+      "connections": ["peek-call", "acoustic-scaling"]
+    },
+    {
+      "id": "acoustic-scaling",
+      "type": "pattern",
+      "title": "Acoustic Scaling: Pileated -> Hairy -> Downy",
+      "description": "Body size predicts acoustic output. Pileated (250-400g): E=6, 40-80 Hz, 15-16/sec. Hairy (40-95g): E=5, 100-200 Hz, ~25/sec. Downy (21-28g): E=?, 150-300 Hz, 15-25/sec. Smaller body = higher frequency, faster rate, less power.",
+      "connections": ["stuttering-drum", "hairy-downy-pair", "picidae-streak"]
+    },
+    {
+      "id": "picidae-streak",
+      "type": "pattern",
+      "title": "Fourth Consecutive Picidae (107-110)",
+      "description": "Acorn (107), Pileated laughing (108), Pileated drumming (109), Hairy (110). Halfway to Sciuridae record (8). Each acoustically unique. Downy at 111 would make five consecutive.",
+      "connections": ["peek-call", "acoustic-scaling"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-109",
+      "species": "Pileated Woodpecker (drumming)",
+      "relationship": "CONSECUTIVE PICIDAE + DRUM COMPARISON. Pileated drum (E=6, 40-80 Hz, 15-16/sec, LOUDEST) vs. Hairy drum (E=5, 100-200 Hz, ~25/sec, loud). Acoustic scaling: larger body = lower frequency, more power, slower rate."
+    },
+    {
+      "target": "SPS-108",
+      "species": "Pileated Woodpecker (laughing)",
+      "relationship": "THIRD AND FOURTH CONSECUTIVE PICIDAE. Same family, different genus (Dryocopus vs. Dryobates). Tree-beater vs. tree-treader."
+    },
+    {
+      "target": "SPS-107",
+      "species": "Acorn Woodpecker",
+      "relationship": "PICIDAE STREAK (4th consecutive, 107-110). Acorn started the streak. Four entries, four different sounds."
+    },
+    {
+      "target": "SPS-021",
+      "species": "Northern Flicker",
+      "relationship": "PICIDAE FAMILY. Flicker: wicka-wicka-wicka + rapid drum (25-30/sec). Hairy: sharp peek! + stuttering drum (~25/sec). Similar drum rates. Both generalists."
+    },
+    {
+      "target": "SPS-111",
+      "species": "Downy Woodpecker",
+      "relationship": "DRYOBATES PAIR (same genus, consecutive entries). The Hairy-Downy pair: most confused species pair in NA birding. Size, bill proportion, call (PEEK! vs. pik), and drum scaling."
+    }
+  ]
+}

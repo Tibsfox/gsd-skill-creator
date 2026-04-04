@@ -1,0 +1,59 @@
+{
+  "degree": 264, "sound": "Puget Sound Submarine Canyon", "slug": "264-puget-sound-submarine-canyon",
+  "acoustic_character": "Infrasonic flow sound",
+  "energy": 2,
+  "family": "Hydrology",
+  "mechanism": "Water movement through confined deep channels of glacially carved fjord system. Turbulent flow through irregular channel geometry produces infrasonic pressure variations. Internal waves at density stratification boundary. Tidal-frequency harmonics. Channel resonance at infrasonic frequencies determined by basin dimensions.",
+  "ecosystem": "Deep water",
+  "season": "Continuous",
+  "status": "GEOPHYSICS ARC CLOSES at degree 264. After volcanic tremor (261, E=5), lahar (262, E=7), earthquake P-wave (263, E=5), the arc closes at E=2: the continuous infrasonic flow of Puget Sound's deep water channels. Quietest geophysical sound in the engine.",
+  "puget_sound_data": {
+    "formation": "Puget Lobe, Cordilleran Ice Sheet. Glacial overdeepening during last ice age (18,000-15,000 years ago).",
+    "area_sq_miles": 1000,
+    "length_miles": 100,
+    "main_basin_max_depth_feet": 930,
+    "main_basin_max_depth_meters": 283,
+    "average_depth_feet": 450,
+    "average_depth_meters": 137,
+    "hood_canal_max_depth_feet": 600,
+    "admiralty_inlet_sill_depth_feet": 65,
+    "tidal_current_at_sill_knots": 4,
+    "deep_water_temperature_celsius": "7-9",
+    "deep_water_pressure_atm": 27
+  },
+  "infrasound_mechanisms": [
+    "Turbulent flow through irregular channel geometry: pressure variations at frequencies determined by channel dimensions and flow velocity",
+    "Internal waves at pycnocline (density stratification boundary): pressure variations at 0.001-0.01 Hz",
+    "Tidal-frequency harmonics and turbulent by-products in infrasonic range",
+    "Channel resonance: deep basins of specific dimensions have resonant infrasonic frequencies analogous to organ pipe"
+  ],
+  "density_stratification": {
+    "surface_layer": "Relatively fresh (diluted by Snohomish, Duwamish, Puyallup, Nisqually river input)",
+    "deep_layer": "More saline (replenished by tidal exchange with Strait of Juan de Fuca through Admiralty Inlet sill)",
+    "acoustic_significance": "Sound propagates differently at different depths; deep saline layer has specific acoustic properties"
+  },
+  "deep_ecosystem": {
+    "species": ["Pacific spiny dogfish", "Sablefish (black cod)", "Various flatfishes", "Sea cucumbers", "Brittle stars", "Amphipods", "Microbial communities in bottom sediments"],
+    "detection": "Organisms detect pressure through lateral line systems rather than hearing",
+    "hypoxia": "Periodic hypoxia in deep basins due to Admiralty Inlet sill restricting oxygenated water inflow. Exacerbated by nutrient loading.",
+    "anthropogenic_threats": "Ship propeller noise, underwater construction, naval sonar can interfere with natural deep acoustic environment"
+  },
+  "theory_nodes": [
+    { "concept": "GEOPHYSICS ARC CLOSES at degree 264. Arc complete: volcanic tremor (261, E=5) → lahar (262, E=7) → earthquake P-wave (263, E=5) → submarine canyon (264, E=2). Energy shape: medium open, peak, descent, quiet close. The arc moves from active geophysical events to passive continuous acoustic phenomena. The underground machinery documented from the volcano's surface to the sea floor.", "level": "milestone", "department": "engine-arc", "description": "Geophysics Arc complete: four degrees, three domains (volcanic, seismic, hydrological)." },
+    { "concept": "E=2 at the bottom. The quietest geophysical sound in the engine. Infrasonic, continuous, inaudible without specialized instrumentation. Channel resonance at frequencies determined by the glacially carved basin dimensions. Was there before the first human arrived at Puget Sound; will be there when the last one leaves. E=2 is the correct energy for a signal that is real but at the absolute minimum of acoustic presence.", "level": "advanced", "department": "acoustic-physics", "description": "E=2 deep water infrasound: real, continuous, inaudible." },
+    { "concept": "Maximum contrast pairing: Skin Yard (E=7, proto-metal, louder than ordinary) + Submarine Canyon (E=2, infrasonic, quieter than audible). Combined E=9 = Storm Arc maximum (degree 260 lightning strike). The highest combined energy in the engine achieved through maximum contrast (E=7 vs. E=2) rather than through matching intensity.", "level": "advanced", "department": "engine-pairing", "description": "E=7 + E=2 = E=9: maximum contrast produces Storm Arc equivalent combined energy." },
+    { "concept": "Puget Sound as glacially overdeepened fjord. Puget Lobe Cordilleran Ice Sheet carved the basin 18,000-15,000 years ago. 930 feet maximum depth (Main Basin), 450 feet average depth. Admiralty Inlet sill at 65 feet restricts water exchange with Strait of Juan de Fuca. The sill is simultaneously a hydraulic constriction and an acoustic generator (turbulence at 4+ knot tidal currents).", "level": "intermediate", "department": "physical-geography", "description": "Glacial origin of Puget Sound's exceptional depth and the acoustic significance of the sill." }
+  ],
+  "cross_references": [
+    { "degree": 263, "sound": "Earthquake P-wave Rumble", "relationship": "GEOPHYSICS ARC: seismic episodic (263, E=5) to hydrological continuous (264, E=2). Arc descends in energy to close." },
+    { "degree": 260, "sound": "Lightning Strike Tree", "relationship": "Combined energy: E=2 + E=7 (Skin Yard pair) = E=9. Same as Storm Arc maximum at degree 260. Maximum contrast achieves same combined energy as maximum intensity." }
+  ],
+  "s36_pair": { "degree": 264, "artist": "Skin Yard", "energy_s36": 7, "pairing_note": "E=2 + E=7 = E=9. MAXIMUM CONTRAST PAIRING. Quietest geophysical sound paired with loudest S36 cluster band. Puget Sound submarine canyon: 930 feet deep, continuous, inaudible. Skin Yard: proto-metal, Jack Endino's guitar, loud. The deep water silence and the surface noise occupy the same degree." },
+  "geophysics_arc_position": { "arc": "261-264", "position": 4, "status": "CLOSED", "arc_energy_shape": "E=5 open, E=7 peak, E=5 mid, E=2 close" },
+  "milestones": [
+    "GEOPHYSICS ARC COMPLETE (261-264)",
+    "ARC ENERGY SHAPE DOCUMENTED: E=5, E=7, E=5, E=2",
+    "MAXIMUM CONTRAST PAIRING: E=2 + E=7 = E=9"
+  ],
+  "tags": ["submarine-canyon", "infrasonic", "deep-water", "hydrology", "continuous", "puget-sound", "glacial-fjord", "admiralty-inlet", "tidal-flow", "geophysics-arc-close", "e2", "maximum-contrast"]
+}

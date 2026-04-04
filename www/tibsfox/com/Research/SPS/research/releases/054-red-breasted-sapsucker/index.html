@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 54&deg; &mdash; Red-breasted Sapsucker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Sap-well rhythm element card */
+    .rhythm-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 100%);
+      border: 2px solid #7F0000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFEBEE;
+    }
+    .rhythm-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCDD2;
+    }
+    .rhythm-card p {
+      color: #FFEBEE;
+    }
+    .rhythm-card strong {
+      color: #FFCDD2;
+    }
+
+    /* Picidae returns card */
+    .picidae-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #388E3C 100%);
+      border: 2px solid #0D3B0E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .picidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .picidae-card p {
+      color: #E8F5E9;
+    }
+    .picidae-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Keystone engineering card */
+    .keystone-card {
+      background: linear-gradient(135deg, #E65100 0%, #F57C00 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .keystone-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .keystone-card p {
+      color: #FFF3E0;
+    }
+    .keystone-card strong {
+      color: #FFCC80;
+    }
+
+    /* Hummingbird connection card */
+    .hummingbird-card {
+      background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .hummingbird-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .hummingbird-card p {
+      color: #F3E5F5;
+    }
+    .hummingbird-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Plumage card */
+    .plumage-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF5350 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .plumage-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.rhythm { background: #B71C1C; }
+    .theory-icon.picidae { background: #1B5E20; }
+    .theory-icon.keystone { background: #E65100; }
+    .theory-icon.hummingbird { background: #4A148C; }
+    .theory-icon.plumage { background: #C62828; }
+    .theory-icon.drumming { background: #4E342E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">54&deg;</div>
+      <div class="release-title-block">
+        <h2>Red-breasted Sapsucker</h2>
+        <div class="scientific">Sphyrapicus ruber</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      mewing cat-like call + irregular drumming &mdash; the sap-well rhythm, PICIDAE RETURNS after 32 degrees &mdash; new genus <em>Sphyrapicus</em>, 3rd Picidae overall, the most colorful woodpecker in PNW forests, keystone ecosystem engineer, sap wells feeding dozens of species, Rufous Hummingbird dependency (degree 35), PASSERIFORMES STREAK BROKEN at 16, E=3, mixed conifer / riparian forest, tenth consecutive CSV substitution
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Clouded Salamander</strong> (<em>Aneides ferreus</em>) at degree 54. Because the SPS Part B engine is birds-and-mammals only, Red-breasted Sapsucker replaces it. The substitution preserves the original&rsquo;s <strong>old-growth forest habitat</strong>. Both species are intimately associated with old-growth forest structure and are year-round residents. This is the <strong>tenth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54) &mdash; the engine reaches into the lungless salamander zone of the original CSV&rsquo;s amphibian belt.</p>
+        </div>
+
+        <!-- Picidae Returns Card -->
+        <div class="picidae-card">
+          <h3>PICIDAE RETURNS &mdash; After 32 Degrees, the Woodpeckers Are Back</h3>
+          <p>The Red-breasted Sapsucker brings <strong>Picidae</strong> back to the engine after a <strong>32-degree absence</strong> (last: degree 22, Northern Flicker). This is the <strong>3rd Picidae overall</strong> (21, 22, 54) and introduces a <strong>new genus</strong>: <em>Sphyrapicus</em> (&ldquo;hammer woodpecker&rdquo;) vs. <em>Colaptes</em> (&ldquo;chisel&rdquo;) for the flickers. Same family, entirely different ecological strategy: the flicker is a ground-foraging ant-eater that drums on dead wood. The sapsucker is a <strong>sap-extraction specialist</strong> that drills living trees. <strong>PASSERIFORMES STREAK BROKEN at 16</strong> &mdash; first Piciformes since degree 22, first non-Passeriformes since degree 37.</p>
+        </div>
+
+        <!-- Sap-Well Rhythm Element Card -->
+        <div class="rhythm-card">
+          <h3>The 55th Acoustic Element: The Sap-Well Rhythm</h3>
+          <p>An <strong>irregular, stuttering drumming pattern</strong> that starts fast, slows, and accelerates again &mdash; combined with a <strong>mewing, cat-like call</strong> that sounds nothing like a woodpecker. Named &ldquo;the sap-well rhythm&rdquo; for three resonances: (1) the <strong>physical rhythm</strong> &mdash; the irregular drumming that violates the metronomic expectation set by other woodpeckers; (2) the <strong>ecological rhythm</strong> &mdash; the patient cycle of drilling, leaving, returning, maintaining wells; (3) the <strong>community rhythm</strong> &mdash; the sap wells pulse with life on the sapsucker&rsquo;s schedule, feeding dozens of species.</p>
+          <p>The sap-well rhythm does not command the forest (corvid alarm, degree 53) or compete with the river (torrent-song, degree 52). It <strong>disrupts expectation through arrhythmia</strong>. The jazz drummer who refuses to play on the beat.</p>
+        </div>
+
+        <!-- Keystone Engineering Card -->
+        <div class="keystone-card">
+          <h3>Keystone Ecosystem Engineer: Sap Wells as Shared Infrastructure</h3>
+          <p>The Red-breasted Sapsucker drills <strong>neat rows of tiny holes</strong> in living tree bark, tapping phloem sap (sugar-rich) and xylem sap (mineral-rich). The wells are maintained over time &mdash; the bird returns periodically to enlarge them and keep sap flowing. These sap wells are a <strong>keystone resource</strong>: Rufous Hummingbirds (degree 35) nest near sap well trees and follow sapsuckers on maintenance rounds. Anna&rsquo;s Hummingbirds (degree 36) visit. Warblers drink sap and catch attracted insects. Squirrels lick sap. Bees, wasps, flies, and beetles aggregate at the wells. Abandoned nest cavities house Mountain Bluebirds, Northern Flying Squirrels, and other secondary cavity nesters. <strong>Dozens of species</strong> depend on infrastructure the sapsucker creates.</p>
+        </div>
+
+        <!-- Hummingbird Connection Card -->
+        <div class="hummingbird-card">
+          <h3>The Hidden Thread: Rufous Hummingbird Dependency</h3>
+          <p>The <strong>Rufous Hummingbird</strong> (degree 35, &ldquo;the thrum&rdquo;) and the <strong>Red-breasted Sapsucker</strong> (degree 54, &ldquo;the sap-well rhythm&rdquo;) are separated by 19 degrees but bound by one of the tightest ecological associations in Pacific Northwest forests. Rufous Hummingbirds arrive in early spring <strong>before most flowers bloom</strong> &mdash; sap wells provide a critical sugar source. They <strong>nest near active sap well trees</strong>, <strong>follow sapsuckers</strong> on maintenance rounds, and <strong>defend wells</strong> as territory. The connection was implicit at degree 35. It becomes explicit at degree 54. The sapsucker creates the resource; the hummingbird exploits it.</p>
+        </div>
+
+        <h2>The Red Hammer-Woodpecker</h2>
+        <p><em>Sphyrapicus ruber</em> &mdash; from Ancient Greek <em>sphyra</em> (&ldquo;hammer&rdquo;) + Latin <em>picus</em> (&ldquo;woodpecker&rdquo;) + <em>ruber</em> (Latin &ldquo;red&rdquo;). Full translation: <strong>&ldquo;Red hammer-woodpecker.&rdquo;</strong> The genus <em>Sphyrapicus</em> contains four North American species: Red-breasted, Red-naped, Yellow-bellied, and Williamson&rsquo;s Sapsuckers. Formerly lumped with Yellow-bellied and Red-naped as one species; <strong>split in 1983</strong>. Two subspecies: <em>S. r. ruber</em> (northern, darker &mdash; PNW populations) and <em>S. r. daggetti</em> (southern, paler). The PNW birds are the deepest-red form.</p>
+
+        <h2>The Sound: A Cat in the Forest</h2>
+        <p><strong>Mewing call:</strong> A nasal, descending <em>mew</em> or <em>meow</em> &mdash; nothing like a typical woodpecker call. Frequency ~1.5&ndash;4.0 kHz, peak energy 2.0&ndash;3.5 kHz. Given as single notes or loosely spaced series. Plaintive, questioning, cat-like. If you hear a kitten mewing overhead in a PNW forest, look up &mdash; it may be a sapsucker.</p>
+        <p><strong>Irregular drumming:</strong> Starts fast (~10&ndash;15 strikes/sec), <strong>slows</strong> (~5&ndash;8 strikes/sec), then <strong>accelerates again</strong> (~10&ndash;15 strikes/sec). This <strong>fast-slow-fast</strong> pattern is unique among PNW woodpeckers and immediately species-diagnostic. Duration ~1&ndash;3 seconds per bout. The rhythm the engine has been waiting for &mdash; Picidae percussion that refuses to keep strict time.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mew call</td><td>1.5&ndash;4.0 kHz (peak 2.0&ndash;3.5)</td><td>~300&ndash;600 ms</td><td>Contact, general purpose</td></tr>
+            <tr><td>Irregular drumming</td><td>500 Hz&ndash;8 kHz (broadband)</td><td>~1&ndash;3 s per bout</td><td>Territory, mate attraction</td></tr>
+            <tr><td>Squeal/wail call</td><td>2.0&ndash;5.0 kHz</td><td>~200&ndash;500 ms</td><td>Agitation, nest defense</td></tr>
+            <tr><td>Soft chatter</td><td>1.5&ndash;3.5 kHz</td><td>Variable series</td><td>Close-range pair contact</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Plumage Card -->
+        <div class="plumage-card">
+          <h3>The Most Colorful Woodpecker in PNW Forests</h3>
+          <p><strong>Entirely red head and upper breast</strong> &mdash; no other PNW woodpecker has this. Deep, rich crimson covering crown, nape, throat, and upper breast in an unbroken field. <strong>Yellow belly</strong> below the red. <strong>Black-and-white barred back</strong> with white &ldquo;braces&rdquo; patches. Three-zone color pattern (red/black-white/yellow) is unique and instantly diagnostic. Length 20&ndash;22 cm. Weight <strong>53&ndash;63 g</strong>. Straight, chisel-like bill. Where most woodpeckers wear red as an accent, the sapsucker wears red as its primary identity.</p>
+        </div>
+
+        <h2>Habitat: Old-Growth and Riparian Alder</h2>
+        <p>Breeds in <strong>mixed conifer and riparian forest</strong>: Douglas fir, western hemlock, Sitka spruce, western red cedar, grand fir, ponderosa pine, red alder, bigleaf maple. Strong preference for <strong>old-growth and mature forest</strong> with large-diameter trees and standing dead snags for nesting. Particularly fond of <strong>riparian alder stands</strong> &mdash; alder bark is soft, easy to drill, and sap flows readily. Year-round resident in western Washington with some altitudinal migration downslope in winter.</p>
+
+        <h2>Nesting: Primary Cavity Creator</h2>
+        <p>Excavates own nest cavity in dead or dying trees (snags). Both sexes excavate over 2&ndash;3 weeks. Entrance ~3.5 cm diameter. Cavity ~20&ndash;30 cm deep. 4&ndash;7 white eggs, 12&ndash;14 day incubation (both sexes, male at night), 25&ndash;29 day nestling period. <strong>Abandoned cavities</strong> used by Mountain Bluebirds, Northern Flying Squirrels, small owls, chickadees &mdash; the sapsucker&rsquo;s engineering extends from food infrastructure (sap wells) to shelter infrastructure (nest cavities).</p>
+
+        <h2>Family Tracker After Degree 54</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td><strong>Picidae</strong></td><td><strong>21, 22, 54</strong></td><td><strong>3 (returns after 32&deg; gap)</strong></td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-one families across 55 entries. No new family &mdash; Picidae was already in the engine. But the family&rsquo;s return after 32 degrees with a new genus (<em>Sphyrapicus</em>) is a significant structural event. Picidae rises from 2 to 3 members, tying with Trochilidae and Paridae. <strong>Passeriformes streak broken at 16.</strong> 47 of 55 entries (85.5%) are Passeriformes &mdash; the order dominance continues, but the streak is done.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon rhythm">R</div>
+            <div class="theory-content">
+              <h4>The Sap-Well Rhythm <span class="theory-level foundational">foundational</span></h4>
+              <p>The 55th acoustic element. Irregular drumming (fast-slow-fast) + mewing cat-like call. First arrhythmic percussion element &mdash; violates metronomic expectation. Physical rhythm, ecological rhythm, community rhythm. Music-theory parallel: rubato &mdash; the performer deliberately varies the tempo, speeding up and slowing down against the pulse.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon picidae">P</div>
+            <div class="theory-content">
+              <h4>Picidae Returns After 32 Degrees <span class="theory-level foundational">foundational</span></h4>
+              <p>3rd Picidae overall (21, 22, 54). New genus Sphyrapicus vs. Colaptes. Different ecological strategy: sap extraction vs. ground foraging. Passeriformes streak broken. The percussion section expands from timpani and snare to include the brush kit. Music-theory parallel: a drummer switching from sticks to brushes.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon keystone">K</div>
+            <div class="theory-content">
+              <h4>Keystone Ecosystem Engineering <span class="theory-level foundational">foundational</span></h4>
+              <p>Sap wells as shared infrastructure for dozens of species. Hummingbirds, warblers, squirrels, insects, cavity nesters all depend on sapsucker-created resources. First species whose primary ecological role is physical creation of shared infrastructure. Music-theory parallel: the ostinato bass line &mdash; the foundation that every other instrument builds upon.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hummingbird">H</div>
+            <div class="theory-content">
+              <h4>The Rufous Hummingbird Connection <span class="theory-level foundational">foundational</span></h4>
+              <p>Degree 35 and degree 54 linked by sap well dependency. 19 degrees apart, one of the tightest ecological associations in PNW forests. Hummingbirds nest near sap well trees, follow sapsuckers, defend wells. Implicit at degree 35, explicit at degree 54. Music-theory parallel: the callback &mdash; a passage that recontextualizes an earlier theme.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plumage">C</div>
+            <div class="theory-content">
+              <h4>The Most Colorful PNW Woodpecker <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Entirely red head and breast &mdash; no other PNW woodpecker has this. Three-zone color pattern: red head, black-and-white back, yellow belly. Red is pigmentary (carotenoid), not structural. Formerly lumped with Yellow-bellied and Red-naped until 1983 split. Music-theory parallel: the key signature &mdash; a bold declaration at the top of the score.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon drumming">D</div>
+            <div class="theory-content">
+              <h4>Irregular Drumming as Species Identity <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fast-slow-fast drumming pattern is species-diagnostic. Immediately separates sapsucker from all other PNW woodpeckers. The engine now has three Picidae rhythms: power (21), groove (22), rubato (54). Music-theory parallel: syncopation &mdash; accents falling where you do not expect them.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-053: Steller&rsquo;s Jay</strong>
+            <p>CONSECUTIVE DEGREES, DESCENDING ENERGY. The corvid alarm (degree 53, E=4, cognitive vocalization) yields to the sap-well rhythm (degree 54, E=3, arrhythmic percussion). The jay commands; the sapsucker builds. Passeriformes streak ends as Piciformes returns.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-022: Northern Flicker</strong>
+            <p>PICIDAE REUNITED AFTER 32 DEGREES. The flicker (degree 22, &ldquo;resonant percussion&rdquo;) drums at a steady 25 bps &mdash; metronomic. The sapsucker (degree 54, &ldquo;sap-well rhythm&rdquo;) drums fast-slow-fast &mdash; rubato. Same family, opposite rhythmic identities. Different genus (Colaptes vs. Sphyrapicus).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker (Hammer)</strong>
+            <p>THREE PICIDAE NOW. The hammer (21), resonant percussion (22), and the sap-well rhythm (54). Power, groove, and rubato. The family&rsquo;s full rhythmic vocabulary.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-035: Rufous Hummingbird</strong>
+            <p>THE HIDDEN THREAD. The Rufous Hummingbird (&ldquo;the thrum,&rdquo; degree 35) depends on sapsucker wells for early-spring sugar. Nests near sap well trees, follows sapsuckers, defends wells. 19 degrees apart, one of the tightest ecological associations in PNW forests.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-036: Anna&rsquo;s Hummingbird</strong>
+            <p>SECONDARY SAP WELL VISITOR. Anna&rsquo;s (&ldquo;the sonic boom,&rdquo; degree 36) also visits sapsucker wells, though the association is less tight than the Rufous dependency.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-051: Brown Creeper</strong>
+            <p>TWO BARK SPECIALISTS. The creeper (degree 51) reads the bark surface passively. The sapsucker (degree 54) writes on it &mdash; drilling wells that modify the tree. One reads. The other writes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-052: American Dipper</strong>
+            <p>TWO RESOURCE SPECIALISTS. The dipper enters water to extract aquatic insects. The sapsucker enters wood to extract sap. Both physically penetrate their medium to access food.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Red-breasted Sapsucker documented across western Washington and British Columbia. Year-round resident of mixed conifer and riparian forests. The most colorful woodpecker in PNW forests.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Keystone ecosystem engineering. Sap wells as shared infrastructure for dozens of species. Cavity creation for secondary nesters. Old-growth forest indicator. Hummingbird-sapsucker mutualism.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Red-breasted Sapsucker (<em>Sphyrapicus ruber</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Red-breasted Sapsucker. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Red-breasted Sapsucker.</li>
+          <li>National Geographic &mdash; Red-breasted Sapsucker.</li>
+          <li>Wikipedia &mdash; &ldquo;Red-breasted sapsucker.&rdquo;</li>
+          <li>Wikipedia &mdash; &ldquo;Sphyrapicus.&rdquo;</li>
+          <li>Audubon &mdash; Red-breasted Sapsucker Field Guide.</li>
+          <li>Walters, E. L. et al. &mdash; Red-breasted Sapsucker in Birds of the World. Sap well ecology and hummingbird associations.</li>
+          <li>Miller, R. S. and Nero, R. W. &mdash; Hummingbird-sapsucker association.</li>
+          <li>Sibley, D. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">54&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Sap-Well Rhythm</div>
+          <div class="stat-detail">#55 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Moderate: mewing call + irregular drum</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">Returns after 32&deg; gap &mdash; 3rd member</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Sphyrapicus</em></div>
+          <div class="stat-detail">NEW genus &mdash; &ldquo;hammer woodpecker&rdquo;</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Piciformes</div>
+          <div class="stat-detail">Breaks 16-degree Passeriformes streak</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mixed Conifer / Riparian</div>
+          <div class="stat-detail">Old-growth preference; alder stands</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round; some altitudinal migration</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">52 unique</div>
+          <div class="stat-detail">55 entries (0&ndash;54)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">21</div>
+          <div class="stat-detail">Picidae returns &mdash; no new family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Piciformes returns; Passeriformes streak ends</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">53&ndash;63 g</div>
+          <div class="stat-detail">Medium woodpecker; comparable to dipper</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">Entirely Red Head</div>
+          <div class="stat-detail">No other PNW woodpecker has this</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Excavated Cavity</div>
+          <div class="stat-detail">In snags; 3&ndash;20 m; reused by many species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Key Adaptation</div>
+          <div class="stat-value">Sap Wells</div>
+          <div class="stat-detail">Keystone resource for dozens of species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">IUCN; old-growth indicator species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Drumming Pattern</div>
+          <div class="stat-value">Fast-Slow-Fast</div>
+          <div class="stat-detail">Irregular; species-diagnostic</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 054</p>
+  </footer>
+</body>
+</html>

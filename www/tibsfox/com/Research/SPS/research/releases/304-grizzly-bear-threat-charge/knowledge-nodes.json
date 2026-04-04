@@ -1,0 +1,64 @@
+{
+  "degree": 304,
+  "species": "Grizzly Bear",
+  "scientific_name": "Ursus arctos horribilis",
+  "slug": "304-grizzly-bear-threat-charge",
+  "sound_type": "full roar + ground percussion -- threat charge in surprise encounter: multi-frequency roar (chest resonance 50-200 Hz + laryngeal burst 500-2000 Hz) combined with front paw ground percussion impacts from 400-790 lb animal at up to 35 mph; felt as vibration at close range (30-100 ft); multi-channel acoustic event: roar + percussion + vegetation displacement simultaneously; bluff charge and full charge acoustically identical",
+  "energy": 9,
+  "ecosystem": "Surprise encounter -- dense vegetation surprise encounter; river corridors, berry fields, salmon streams as high-probability settings; North Cascades grizzly bear recovery zone; residual habitat in North Cascades and Selkirk Mountains ecosystems",
+  "season": "Resident (year-round active except winter denning December-March/April; most encounters June-November; berry season and salmon run as concentrated food source settings)",
+  "family": "Ursidae",
+  "order": "Carnivora",
+  "conservation_status": "State Endangered (Washington). Federally Threatened (US). North Cascades population: fewer than 10, possibly functionally extirpated. Selkirk Mountains WA/ID/BC: 50-80. USFWS North Cascades designated recovery zone under ESA.",
+  "milestone": "THIRD CONSECUTIVE E=9. CLOSES APEX PREDATOR ARC (302-304). URSIDAE RETURNS AT MAXIMUM. Three different families (Felidae, Canidae, Ursidae) at E=9 in consecutive degrees: unprecedented in SPS engine history.",
+  "coordinates": {
+    "lat": 48.5,
+    "lon": -120.9,
+    "description": "North Cascades recovery zone: 9,800 sq miles of national park, wilderness, national forest in Okanogan, Chelan, Whatcom, Skagit counties. North Cascades NP. USFWS recovery zone designation under ESA. Current population possibly functionally absent. Selkirk Mountains (Pend Oreille County) has small confirmed population shared with ID and BC."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Vocal + mechanical percussion. Roar: multi-frequency larynx-produced vocalization. Ground percussion: mechanical impact of front paws at charge speed. Combined into multi-channel acoustic event at close range.",
+    "mechanics": "Roar: deep chest resonance (50-200 Hz) combined with intense laryngeal burst (500-2,000 Hz). Not purely low frequency -- burst quality gives cutting character. Perceived as vibration at 30-100 ft. Ground percussion: 400-790 lbs at 35 mph front paw impacts. Vegetation displacement adds directional elements.",
+    "frequency_range": "Roar: 50-2,000 Hz composite. Ground percussion: broadband impact below 500 Hz. Total event multi-frequency with both infrasonic and audible components at close range.",
+    "duration": "Individual roar burst: 1-3 seconds. Full charge with multiple vocalizations: 3-10 seconds. Bluff charge: same acoustic profile, shorter total distance.",
+    "encounter_distance": "30-100 feet typical for surprise encounter. At this range: vibration in chest from low frequencies, full roar and percussion volume overwhelming, source localization secondary to flight response.",
+    "e9_calibration": "E=9: physically overwhelming + close range vibrational component + bluff/full charge uncertainty maximizing psychological intensity + most forceful single-animal acoustic event in PNW + third independent E=9 justification in arc (not calibration inflation). Different properties from Cougar (timbre/escalation) and Wolf (harmonic/emotional) -- physical force."
+  },
+  "nodes": [
+    {
+      "id": "three-consecutive-e9-closes",
+      "type": "milestone",
+      "title": "Three Consecutive E=9 Closes -- Apex Predator Arc Complete",
+      "description": "Degree 304 closes the SPS engine's most concentrated maximum-energy sequence: Cougar (302, Felidae), Gray Wolf (303, Canidae), Grizzly Bear (304, Ursidae) at E=9, E=9, E=9. Three different families, three different paths to E=9, three consecutive degrees. Unprecedented in SPS history. The Pacific Northwest's three major terrestrial apex predator families documented at their acoustic extremes in a single arc.",
+      "connections": ["e9-physical-force", "north-cascades-status"]
+    },
+    {
+      "id": "e9-physical-force",
+      "type": "concept",
+      "title": "E=9 Through Physical Force -- Third Independent Path to Maximum",
+      "description": "The grizzly threat charge reaches E=9 through physical force and close-range overwhelming presence: roar felt as vibration + ground percussion + maximum mammalian mass at maximum velocity. This is a different E=9 justification from the cougar (timbre/escalation) and wolf (harmonic complexity/emotional depth). Three genuinely different maximum acoustic experiences.",
+      "connections": ["three-consecutive-e9-closes"]
+    },
+    {
+      "id": "north-cascades-status",
+      "type": "context",
+      "title": "North Cascades Grizzly -- Recovery Zone or Absence?",
+      "description": "USFWS recovery zone: 9,800 sq miles. Local population possibly functionally extirpated (fewer than 10, possibly 3-5). Augmentation proposals contested: local opposition (Okanogan, Chelan, Whatcom counties), varied tribal positions, conservation support. The engine documents the sound the North Cascades could again contain. The most uncertain ecological entry in the SPS engine.",
+      "connections": ["three-consecutive-e9-closes"]
+    },
+    {
+      "id": "ursidae-escalation",
+      "type": "arc",
+      "title": "Ursidae Escalation Complete: Black Bear to Grizzly",
+      "description": "Ursidae entered SPS at lower energy with the American black bear. Returns at E=9 with the grizzly. Family escalation pattern confirmed: common species first, extreme member at ceiling. The engine's consistent pattern for large mammal families.",
+      "connections": ["three-consecutive-e9-closes"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-303", "species": "Gray Wolf full pack howl", "relationship": "E=9. Previous degree. FIRST CANIDAE. Second consecutive E=9. Wolf and grizzly share North Cascades ecosystem; complex ecological interaction."},
+    {"target": "SPS-302", "species": "Cougar full scream", "relationship": "E=9. Two degrees prior. First of three consecutive max. Felidae. Three-family apex predator arc closes at 304."},
+    {"target": "SPS-301", "species": "Roosevelt Elk bugle", "relationship": "E=8. Gateway. Prey announces arc; predators follow. Arc narrative 301-304 complete."},
+    {"target": "SPS-earlier", "species": "Black Bear", "relationship": "Prior Ursidae entry. Lower energy. Common PNW bear. Grizzly at E=9 completes family escalation."},
+    {"target": "S36-304", "artist": "Hammerbox", "relationship": "E=7 + E=9 = E=16. Maximum combined arc energy. Female-fronted heavy grunge and grizzly threat charge. Apex arc maximum pair."}
+  ]
+}

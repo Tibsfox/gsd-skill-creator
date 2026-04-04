@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 98&deg; &mdash; Gold Casio &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+    .milestone-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6F00;
+      color: #FFF8E1;
+      border: 1px solid #FF8F00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .retro-card {
+      background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 30%, #FFA000 60%, #FFB300 100%);
+      border: 2px solid #FF6F00; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #3E2723;
+    }
+    .retro-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #4E342E; font-family: system-ui, sans-serif; }
+    .retro-card p { color: #3E2723; margin: 0.5rem 0; }
+    .retro-card strong { color: #BF360C; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>098 &mdash; Gold Casio</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Indie Electronic &mdash; Genre Stage 80 (Milestone!) &mdash; Self-Released &mdash; E=4</h3>
+      <p>
+        <strong>Gold Casio</strong> &mdash; Seattle indie electronic project. Synth-driven,
+        retro-influenced electronic pop. Self-released. <strong>Genre Stage 80</strong>
+        &mdash; the 80th genre stage! A milestone. E=4. The electronic era continues
+        deep into Quadrant II.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">98&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Gold Casio</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Indie Electronic</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 80</span>
+          <span class="milestone-badge">80th Genre Stage!</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="synth-card">
+          <h4>The Retro-Synthetic Shimmer &mdash; Nostalgia as Frequency</h4>
+          <p>
+            The <strong>retro-synthetic shimmer</strong> is the 99th acoustic element.
+            Gold Casio&rsquo;s sound is built on <strong>vintage synthesizer tones</strong>
+            &mdash; warm analog pads, arpeggiated sequences, and retro drum machines
+            filtered through modern production. The shimmer is <strong>nostalgia
+            made audible</strong> &mdash; the sound of 1980s synthesizers remembered
+            through 2020s sensibility. Not reproduction &mdash; <strong>reinterpretation</strong>.
+            The past as creative fuel.
+          </p>
+        </div>
+
+        <div class="retro-card">
+          <h4>The Self-Released Synthesist &mdash; Bedroom to Bandcamp</h4>
+          <p>
+            The <strong>self-released synthesist</strong> is the 99th artist-city pattern.
+            Gold Casio operates <strong>entirely self-released</strong> &mdash; no label,
+            no management, no intermediaries. The bedroom producer who releases directly
+            to streaming platforms and Bandcamp. Seattle&rsquo;s electronic scene provides
+            the audience; the internet provides the distribution. <strong>Zero infrastructure
+            overhead.</strong> The purest expression of DIY in the electronic era.
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 80 (Milestone!) &middot; Indie Electronic &middot; E=4 &middot; 99th Acoustic Element &middot; 99th Pattern</h4>
+          <p>
+            <strong>Gold Casio</strong> enters at Genre Stage 80 &mdash; the 80th genre
+            stage! A milestone. <strong>E=4</strong>. Ninth electronic-adjacent entry in
+            thirteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98). Third consecutive
+            Indie Electronic (96, 97, 98). Self-released.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 80: Indie Electronic (Milestone!)</h2>
+          <p>
+            Degree 98 reaches <strong>Genre Stage 80</strong> &mdash; the <strong>eightieth
+            genre stage</strong>. A milestone. Eighty distinct genre classifications across
+            98 degrees. <strong>Indie Electronic</strong> appears for the third consecutive
+            degree (STRFKR at 96, Postal Service electronic at 97, Gold Casio at 98),
+            but each expression is radically different: STRFKR is synth-pop pulse, the
+            Postal Service electronic is algorithmic tenderness, Gold Casio is
+            <strong>retro-synthetic shimmer</strong>.
+          </p>
+          <p>
+            Three consecutive Indie Electronic entries demonstrate that a single genre
+            classification can contain <strong>vastly different sonic architectures</strong>.
+            The genre label is a container; the acoustic elements are the content.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 99: The Retro-Synthetic Shimmer</h2>
+          <p>
+            The <strong>retro-synthetic shimmer</strong> is the ninety-ninth acoustic element.
+            It describes Gold Casio&rsquo;s distinctive sound: vintage synthesizer tones
+            &mdash; warm analog pads, arpeggiated sequences, retro drum machine patterns
+            &mdash; filtered through modern production sensibility. The shimmer is the
+            sonic quality of <strong>nostalgia reinterpreted</strong> &mdash; 1980s synthesizer
+            aesthetics heard through 2020s ears.
+          </p>
+          <p>
+            Where the synth-pop pulse (96, STRFKR) is driving and joyful, and the
+            algorithmic tenderness (97, Postal Service) is intimate and digital, the
+            retro-synthetic shimmer is <strong>warm, hazy, and wistful</strong>. The sound
+            of looking backward through electronic music.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 99: The Self-Released Synthesist</h2>
+          <p>
+            The <strong>self-released synthesist</strong> is the ninety-ninth artist-city
+            pattern. It describes a solo electronic producer who operates entirely outside
+            the label system &mdash; self-produced, self-released, self-promoted. The
+            bedroom-to-Bandcamp pipeline. Seattle&rsquo;s electronic scene provides the
+            audience and the community; the internet provides the distribution.
+          </p>
+          <blockquote>
+            The self-released synthesist is the logical endpoint of the DIY maximalist
+            (96, STRFKR). STRFKR operates with DIY ethos but uses indie label
+            infrastructure (Polyvinyl). Gold Casio eliminates even that layer &mdash;
+            entirely self-released. Zero intermediaries. The purest DIY expression
+            in the electronic era.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Retro-Synthetic Shimmer</h4>
+              <span class="level advanced">Advanced</span>
+              <p>99th acoustic element. Vintage synth tones
+              through modern production. Nostalgia as
+              frequency. Warm, hazy, wistful.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Self-Released Synthesist</h4>
+              <span class="level advanced">Advanced</span>
+              <p>99th artist-city pattern. Bedroom to
+              Bandcamp. Zero intermediaries. Purest
+              DIY in the electronic era.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 80 Milestone</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>80th genre stage! Third consecutive
+              Indie Electronic (96, 97, 98). Same genre,
+              three different sonic architectures.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Electronic Era Deepens</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Nine electronic entries in thirteen
+              degrees (86-98). The electronic current
+              runs deep into Quadrant II.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">095</span>
+              <strong>ODESZA</strong> &mdash;
+              Electronic spectrum. ODESZA is cinematic, festival-scale electronic (E=5). Gold Casio is retro, bedroom-scale electronic (E=4). Both Seattle electronic; vastly different scales and aesthetics.
+            </li>
+            <li>
+              <span class="ref-degree">096</span>
+              <strong>STRFKR</strong> &mdash;
+              Indie Electronic parallel. Both Indie Electronic. STRFKR is synth-pop pulse -- driving, joyful. Gold Casio is retro-synthetic shimmer -- warm, wistful. Same genre, different sonic architectures.
+            </li>
+            <li>
+              <span class="ref-degree">086</span>
+              <strong>The Postal Service</strong> &mdash;
+              Electronic genealogy. Postal Service (86) pioneered indie-electronic crossover. Gold Casio inherits the tradition -- electronic music with indie sensibility, now entirely self-released.
+            </li>
+            <li>
+              <span class="ref-degree">093</span>
+              <strong>NAVVI</strong> &mdash;
+              Dream pop/electronic parallel. Both atmospheric, both shimmer-oriented. NAVVI uses reverb-as-architecture; Gold Casio uses vintage synths as atmosphere. Different tools, similar haze.
+            </li>
+            <li>
+              <span class="ref-degree">094</span>
+              <strong>Erik Blood</strong> &mdash;
+              Electronic producer parallel. Both Seattle electronic producers. Erik Blood is experimental, genre-blending. Gold Casio is retro-focused, genre-specific. Different relationships to electronic tradition.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">98&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Electronic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">80 (Milestone!)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-Released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Electronic Context</h4>
+          <div class="stat-row">
+            <span class="stat-label">Indie Electronic Run</span>
+            <span class="stat-value">96, 97, 98</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Density</span>
+            <span class="stat-value">9 in 13 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Aesthetic</span>
+            <span class="stat-value">Retro synth</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">Bandcamp / streaming</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">99th</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">99th</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic Run</span>
+            <span class="stat-value">86,90,91,93-98</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">80th (Milestone)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

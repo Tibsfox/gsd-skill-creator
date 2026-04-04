@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 142&deg; &mdash; Western Screech-Owl &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5D4037, #6D4C41); color: #D7CCC8; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(93, 64, 55, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .trill-card { background: linear-gradient(135deg, #5D4037 0%, #6D4C41 30%, #795548 60%, #5D4037 100%); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .trill-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .trill-card p { color: #D7CCC8; }
+    .trill-card strong { color: #EFEBE9; }
+
+    .camo-card { background: linear-gradient(135deg, #37474F 0%, #455A64 30%, #546E7A 60%, #37474F 100%); border: 2px solid #263238; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #B0BEC5; }
+    .camo-card h3 { margin-top: 0; font-size: 1.1rem; color: #78909C; }
+    .camo-card p { color: #B0BEC5; }
+    .camo-card strong { color: #ECEFF1; }
+
+    .record-card { background: linear-gradient(135deg, #6A1B9A 0%, #7B1FA2 30%, #8E24AA 60%, #6A1B9A 100%); border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .record-card h3 { margin-top: 0; font-size: 1.1rem; color: #CE93D8; }
+    .record-card p { color: #E1BEE7; }
+    .record-card strong { color: #F3E5F5; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.trill { background: #5D4037; }
+    .theory-icon.camo { background: #37474F; }
+    .theory-icon.suburb { background: #2E7D32; }
+    .theory-icon.record { background: #6A1B9A; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
+    .comparison-table th { background: #5D4037; color: white; padding: 0.5rem 0.75rem; text-align: left; font-family: system-ui, sans-serif; font-weight: 600; }
+    .comparison-table td { padding: 0.4rem 0.75rem; border-bottom: 1px solid var(--card-border); }
+    .comparison-table tr:nth-child(even) { background: #EFEBE9; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">142&deg;</div>
+      <div class="release-title-block">
+        <h2>Western Screech-Owl</h2>
+        <div class="scientific"><em>Megascops kennicottii</em> (Strigidae) &mdash; E=3 &mdash; Bouncing-Ball Trill</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>Descending whinny trill</strong> &mdash; E=3 bouncing-ball rhythm.
+      <strong>Eighth consecutive Strigidae</strong> (135&ndash;142).
+      <strong>ONE AWAY</strong> from tying the Picidae nonet record.
+      New genus: <strong>Megascops</strong> (5th). Camouflaged. Suburban. Permanent resident.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="trill-card">
+          <h3>The Bouncing-Ball Trill</h3>
+          <p>
+            A series of whistled notes that <strong>accelerate and descend in pitch</strong>,
+            like a ball bouncing to rest. <strong>400&ndash;600 Hz</strong>,
+            <strong>3&ndash;5 seconds</strong>. The rhythm is the diagnostic feature:
+            widely spaced notes speeding to a rapid, low terminal trill.
+            Not a screech despite the name. E=3 &mdash; <strong>soft, mellow, neighborhood-scale</strong>.
+          </p>
+        </div>
+        <div class="camo-card">
+          <h3>Bark Mimicry &mdash; The Invisible Owl</h3>
+          <p>
+            Gray-brown plumage with intricate dark <strong>streaking and crossbarring</strong>
+            that perfectly mimics tree bark. When alarmed, raises <strong>ear tufts</strong>
+            and narrows its body to resemble a <strong>broken branch stub</strong>.
+            Pressed against a trunk, it <strong>disappears</strong>.
+            The most suburban owl &mdash; nesting in backyard trees and nest boxes
+            while homeowners sleep unaware.
+          </p>
+        </div>
+        <div class="record-card">
+          <h3>Eighth Consecutive &mdash; ONE Away from the Record</h3>
+          <p>
+            <strong>Eight consecutive Strigidae</strong> (135&ndash;142). Five genera.
+            Six species. The Picidae nonet record stands at <strong>nine</strong>.
+            One more owl at degree 143 would <strong>TIE</strong> the record.
+            Two more would <strong>BREAK</strong> it.
+          </p>
+        </div>
+
+        <h2>The E=3 Pair &mdash; Quiet Neighbors</h2>
+        <table class="comparison-table">
+          <thead><tr><th>Feature</th><th>N. Saw-whet (141)</th><th>W. Screech-Owl (142)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Call</strong></td><td>Monotonous tooting</td><td>Bouncing-ball trill</td></tr>
+            <tr><td><strong>Frequency</strong></td><td>~1000 Hz</td><td>400&ndash;600 Hz</td></tr>
+            <tr><td><strong>Duration</strong></td><td>Minutes to hours</td><td>3&ndash;5 seconds</td></tr>
+            <tr><td><strong>Rhythm</strong></td><td>Metronomic</td><td>Accelerating, descending</td></tr>
+            <tr><td><strong>Habitat</strong></td><td>Deep forest</td><td>Suburban/open woodland</td></tr>
+            <tr><td><strong>Energy</strong></td><td>E=3</td><td>E=3</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-141 Northern Saw-whet Owl</strong>
+            <p>E=3 PAIR! Two consecutive E=3 entries. Both quiet, nocturnal, small. Saw-whet: deep forest, monotonous. Screech-Owl: suburban, rhythmic.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-135&ndash;141 Strigidae Seven</strong>
+            <p>STRIGIDAE EIGHT! Eighth consecutive. Five genera. Six species. One away from tying the Picidae nonet. The owl era deepens.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-135 Great Horned Owl</strong>
+            <p>PREDATOR CONTRAST! The GHO preys on Screech-Owls. A Screech-Owl hearing a GHO hoot freezes in terror. Predator and prey documented in the same run.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon trill">B</div>
+            <div class="theory-content">
+              <h4>Bouncing-Ball Trill</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>400&ndash;600 Hz, 3&ndash;5 sec, accelerating and descending. The rhythm is diagnostic. Like a ball bouncing to rest. E=3 soft, mellow.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon camo">C</div>
+            <div class="theory-content">
+              <h4>Bark Mimicry Camouflage</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Plumage mimics tree bark. Ear tufts + narrowed body = branch stub. Invisible against trunk. The most cryptic daytime posture.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon suburb">S</div>
+            <div class="theory-content">
+              <h4>Suburban Owl</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>The most suburban owl in the PNW. Backyard trees. Nest boxes. Permanent resident. Invisible neighbor. Generalist diet.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon record">8</div>
+            <div class="theory-content">
+              <h4>Eighth Consecutive Strigidae</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>135&ndash;142. Five genera. Six species. ONE away from Picidae nonet tie. The record is in sight.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">W. Screech-Owl</div><div class="stat-detail"><em>Megascops kennicottii</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Strigidae</div><div class="stat-detail">8th consecutive (135&ndash;142)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Bouncing trill</div><div class="stat-detail">descending whinny</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 3</div><div class="stat-detail">soft, suburban</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">400&ndash;600 Hz</div><div class="stat-detail">mellow whistle</div></div>
+        <div class="stat-card"><div class="stat-label">Size</div><div class="stat-value">19&ndash;25 cm</div><div class="stat-detail">smaller than pigeon</div></div>
+        <div class="stat-card"><div class="stat-label">Activity</div><div class="stat-value">Nocturnal</div><div class="stat-detail">strictly night</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Suburban</div><div class="stat-detail">backyard trees</div></div>
+        <div class="stat-card"><div class="stat-label">Record</div><div class="stat-value">1 away</div><div class="stat-detail">Picidae nonet tie</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

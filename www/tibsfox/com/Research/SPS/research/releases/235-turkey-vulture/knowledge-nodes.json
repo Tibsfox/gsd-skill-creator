@@ -1,0 +1,40 @@
+{
+  "degree": 235, "species": "Turkey Vulture", "slug": "235-turkey-vulture", "sound_type": "hissing grunt only", "energy": 2,
+  "scientific_name": "Cathartes aura",
+  "family": "Cathartidae",
+  "ecosystem": "open country / thermals / ridges / agricultural areas",
+  "season": "summer (migratory; Mar/Apr to Sep/Oct in PNW)",
+  "taxonomy": {
+    "order": "Cathartiformes",
+    "family": "Cathartidae",
+    "genus": "Cathartes",
+    "species": "aura",
+    "genus_etymology": "purifier (Greek)",
+    "family_relationship": "NOT related to Old World vultures (Accipitridae); convergent evolution. More closely related to storks than to hawks."
+  },
+  "vocalization": {
+    "type": "non-vocalization",
+    "mechanism": "no syrinx; esophageal air forcing produces hiss and grunt",
+    "sounds": ["sustained hiss (defensive, at nest)", "low grunts (feeding competition)"],
+    "frequency_hz": "broadband 200-2000 Hz hiss; no structured vocalization",
+    "energy_placement": "E=2 -- near-minimum. Bird-level record low in engine."
+  },
+  "size": { "length_cm": "62-81", "wingspan_cm": "160-183", "weight_kg": "0.85-2.26" },
+  "special_ability": {
+    "olfaction": "Detects dimethyl sulfide (DMS) at 1 part per billion -- produced in first hours of animal death. Olfactory bulb 4x larger relative to body size than hawks.",
+    "thermal_soaring": "V-wing dihedral. Metabolic rate barely above resting in thermal flight. 100-200km per day on minimal energy."
+  },
+  "conservation": { "iucn": "Least Concern", "trend": "stable/expanding", "threats": ["lead poisoning from ammunition in gut piles", "rodenticide secondary poisoning", "vehicle collision"] },
+  "theory_nodes": [
+    { "concept": "FIRST CATHARTIDAE. New World vultures enter engine. Cathartidae = convergent evolution with Old World vultures (Accipitridae). Seven species: Turkey Vulture, Black Vulture, California Condor, Andean Condor, three others.", "level": "milestone", "department": "taxonomy", "description": "Cathartidae enters the engine at degree 235." },
+    { "concept": "WIDEST S36/SPS E-GAP IN ENGINE. Turkey Vulture (E=2) + Heart Hard Rock (E=7) = E-spread of 5. Record: no prior degree exceeds 4. Maximum vocal contrast.", "level": "milestone", "department": "engine-structure", "description": "Degree 235 holds the engine's widest S36/SPS energy gap." },
+    { "concept": "No syrinx. The Turkey Vulture is the first bird in the engine with no functional syrinx. E=2 reflects biological reality: esophageal air = hiss and grunt, not bird song.", "level": "advanced", "department": "biology", "description": "The physiological basis of E=2 -- the absent syrinx." }
+  ],
+  "cross_references": [
+    {"degree": 234, "species": "American Kestrel", "relationship": "Falconidae closes at 234. Cathartidae opens at 235. Immediate family transition: the falcon-to-vulture boundary."},
+    {"degree": 236, "species": "Pacific Salmon", "relationship": "FIRST FISH follows FIRST CATHARTIDAE. Two sequential family milestones. Engine expands rapidly at 235-236."}
+  ],
+  "s36_pair": {"degree": 235, "species_pair": "Heart (Hard Rock)", "pairing_note": "WIDEST E-GAP IN ENGINE. E=2 + E=7 = spread of 5. Near-silent bird + maximum female hard rock. Both underestimated by cultural reception; both more powerful than their reception suggests."},
+  "milestones": ["FIRST CATHARTIDAE", "WIDEST S36/SPS E-GAP (spread=5)", "Bird-level E=2 minimum in engine"],
+  "tags": ["cathartidae", "first-cathartidae", "turkey-vulture", "no-syrinx", "e2", "hissing-grunt", "thermal-soaring", "dihedral", "olfaction-dimethyl-sulfide", "e-gap-record", "summer-migrant", "carrion"]
+}

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 86&deg; &mdash; The Postal Service &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card .level.landmark { background: #FFEBEE; color: #B71C1C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .gibbard-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .gibbard-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+      font-family: system-ui, sans-serif;
+    }
+    .gibbard-card p {
+      color: #ECEFF1;
+      margin: 0.5rem 0;
+    }
+    .gibbard-card strong {
+      color: #CFD8DC;
+    }
+
+    .electronic-card {
+      background: linear-gradient(135deg, #311B92 0%, #4527A0 50%, #512DA8 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EDE7F6;
+    }
+    .electronic-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #B39DDB;
+      font-family: system-ui, sans-serif;
+    }
+    .electronic-card p {
+      color: #EDE7F6;
+      margin: 0.5rem 0;
+    }
+    .electronic-card strong {
+      color: #D1C4E9;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>086 &mdash; The Postal Service</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Indie Electronic &mdash; Genre Stage 68 &mdash; Sub Pop Records &mdash; E=4 &mdash; FIRST Electronic Genre &mdash; Gibbard&rsquo;s Third Appearance</h3>
+      <p>
+        The Postal Service = <strong>Ben Gibbard</strong> (Death Cab for Cutie, degrees 58/60) +
+        <strong>Jimmy Tamborello</strong> (Dntel). One album: <em>Give Up</em> (2003, Sub Pop) &mdash;
+        went platinum, one of the best-selling indie albums ever.
+        &ldquo;Such Great Heights,&rdquo; &ldquo;The District Sleeps Alone Tonight.&rdquo;
+        Gibbard&rsquo;s <strong>THIRD appearance</strong> (Death Cab 58, solo 60, Postal Service 86).
+        <strong>Indie Electronic</strong> at Genre Stage 68 &mdash; FIRST electronic genre in the engine.
+        <strong>E=4</strong>. Fourth Sub Pop artist.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">86&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">The Postal Service</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Indie Electronic</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="neighborhood-badge">Seattle / L.A.</span>
+          <span class="record-badge">Genre Stage 68</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Gibbard Card -->
+        <div class="gibbard-card">
+          <h4>Ben Gibbard&rsquo;s Third Appearance</h4>
+          <p>
+            <strong>Degree 58:</strong> Death Cab for Cutie &mdash; Indie Rock, E=4. The band.<br>
+            <strong>Degree 60:</strong> Ben Gibbard solo &mdash; Singer-Songwriter, E=2. The solo voice.<br>
+            <strong>Degree 86:</strong> The Postal Service &mdash; Indie Electronic, E=4. The collaboration.
+          </p>
+          <p>
+            Ben Gibbard is the <strong>first artist to appear THREE times</strong> in the engine.
+            Each appearance is a different project, a different genre, a different energy.
+            Death Cab (Indie Rock), solo (Singer-Songwriter), Postal Service (Indie Electronic).
+            E=4, E=2, E=4. The pattern: full energy with a band, quiet energy alone,
+            full energy with a different collaborator. Gibbard&rsquo;s range spans three genres
+            across 28 degrees.
+          </p>
+        </div>
+
+        <!-- Electronic Card -->
+        <div class="electronic-card">
+          <h4>FIRST Electronic Genre &mdash; Indie Electronic at Genre Stage 68</h4>
+          <p>
+            <strong>Indie Electronic</strong> is the engine&rsquo;s FIRST electronic genre.
+            After 85 degrees of acoustic, rock, folk, indie, and alternative genres, the engine
+            introduces <strong>electronic production</strong> for the first time. Synthesizers,
+            drum machines, programmed beats, digital textures. <em>Give Up</em> was created by
+            mailing tracks back and forth between Gibbard (Seattle) and Tamborello (Los Angeles)
+            &mdash; hence the name &ldquo;The Postal Service.&rdquo; Genre Stage 68 marks
+            a new sonic territory.
+          </p>
+        </div>
+
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 68 &middot; Indie Electronic &middot; E=4 &middot; Sub Pop &middot; First Electronic Genre &middot; Gibbard 3rd &middot; 87th Acoustic Element &middot; 87th Pattern</h4>
+          <p>
+            <strong>The Postal Service</strong> enters the engine as the first electronic act.
+            <strong>Indie Electronic</strong> at Genre Stage 68.
+            <strong>E=4</strong> &mdash; high energy, the programmed beats and layered
+            synths fill the frequency spectrum. The 87th acoustic element. The 87th
+            artist-city pattern. <strong>Sub Pop Records</strong> (fourth Sub Pop artist).
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 68: Indie Electronic &mdash; First Electronic Genre</h2>
+          <p>
+            Degree 86 reaches <strong>Genre Stage 68</strong>. The Postal Service introduces
+            <strong>Indie Electronic</strong> &mdash; the engine&rsquo;s first electronic genre.
+            This is a landmark: after 85 degrees of acoustic, rock, folk, indie, and alternative
+            genres, the engine encounters electronic production for the first time. Synthesizers,
+            drum machines, programmed beats, glitchy textures. The folk-return zone (82, 84, 85)
+            gives way to electronic sound.
+          </p>
+          <p>
+            The previous nearest electronic connection was <strong>Chong the Nomad</strong>
+            (degree 44) &mdash; electronic/hip-hop. But Chong was categorized under Hip-Hop.
+            The Postal Service is the first artist whose <strong>primary genre is electronic</strong>.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2><em>Give Up</em> (2003) &mdash; One Album, Platinum</h2>
+          <p>
+            The Postal Service released one album: <em>Give Up</em> (2003, Sub Pop Records).
+            It went <strong>platinum</strong> &mdash; one of only a few Sub Pop releases to
+            achieve that milestone. It became one of the <strong>best-selling indie albums ever</strong>.
+            &ldquo;Such Great Heights&rdquo; and &ldquo;The District Sleeps Alone Tonight&rdquo;
+            became generation-defining songs. The album was created by <strong>mailing tracks
+            back and forth</strong> between Gibbard in Seattle and Tamborello in Los Angeles &mdash;
+            hence the name &ldquo;The Postal Service.&rdquo;
+          </p>
+          <p>
+            One album. Platinum. Then silence for ten years, until a 2013 reunion tour.
+            The Postal Service proves that sometimes one album is enough.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Sub Pop Records &mdash; Fourth Artist</h2>
+          <p>
+            The Postal Service on <strong>Sub Pop Records</strong> makes this the label&rsquo;s
+            <strong>fourth appearance</strong> in the engine. Sub Pop is the most-represented
+            label in Seattle 360. <em>Give Up</em> is one of Sub Pop&rsquo;s most commercially
+            successful releases, alongside Nirvana&rsquo;s <em>Bleach</em> and The Shins&rsquo;
+            early work.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 87: The Electronic Pulse</h2>
+          <p>
+            The <strong>electronic pulse</strong> is the eighty-seventh acoustic element in the
+            Seattle 360 engine. It describes the sound of programmed electronic beats layered
+            with indie vocals &mdash; the hallmark of The Postal Service&rsquo;s sound.
+            Synthesizer arpeggios, glitchy drum machines, filtered bass, and Gibbard&rsquo;s
+            voice floating over the electronic texture. The pulse is <strong>constant</strong>
+            &mdash; the drum machine never tires, the synthesizer never breathes. The human
+            voice is the only organic element.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>stripped confession</strong> (86th element,
+            Votolato at 85) removed everything to reveal the voice. The electronic pulse
+            <strong>adds everything</strong> around the voice &mdash; programmed beats,
+            synth layers, digital processing. From maximum subtraction to maximum addition.
+            Both center on the voice. Different everything else.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 87: The Side Project</h2>
+          <p>
+            The <strong>side project</strong> is the eighty-seventh artist-city pattern in the
+            Seattle 360 engine. It describes an artist whose primary band has already appeared
+            in the engine (Death Cab at 58) forming a <strong>separate project</strong> with
+            a different collaborator, in a different genre, with a different sonic identity.
+            The Postal Service is Gibbard&rsquo;s side project &mdash; one album, one
+            collaborator, one genre that does not exist in his other work.
+          </p>
+          <blockquote>
+            The side project is what happens when an artist steps outside their primary
+            context. Death Cab is Gibbard&rsquo;s band. The solo work (60) is Gibbard alone.
+            The Postal Service is Gibbard with someone else, making something neither of
+            them would make alone. The side project reveals the artist&rsquo;s range &mdash;
+            what they are capable of when the constraints of the primary project are removed.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Electronic Pulse</h4>
+              <span class="level advanced">Advanced</span>
+              <p>87th acoustic element. Programmed electronic
+              beats layered with indie vocals. Constant pulse.
+              Synthesizers, drum machines, glitch. The voice
+              is the only organic element.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Side Project</h4>
+              <span class="level advanced">Advanced</span>
+              <p>87th artist-city pattern. Artist from an
+              existing band forms separate project with
+              different collaborator, genre, identity. One
+              album. Maximum range.</p>
+            </div>
+            <div class="theory-card">
+              <h4>First Electronic Genre</h4>
+              <span class="level landmark">Landmark</span>
+              <p>Indie Electronic is the engine's FIRST
+              electronic genre. After 85 degrees of acoustic/
+              rock/folk/indie. Genre Stage 68. A new sonic
+              territory.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Gibbard&rsquo;s Third Appearance</h4>
+              <span class="level landmark">Landmark</span>
+              <p>First artist to appear THREE times. Death Cab
+              (58, Indie Rock, E=4), solo (60, Singer-Songwriter,
+              E=2), Postal Service (86, Indie Electronic, E=4).
+              Three genres, 28 degrees.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=4 &mdash; Full Electronic Energy</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>E=4. Programmed beats fill the frequency
+              spectrum. Same energy as Death Cab (58).
+              Pattern: E=4, E=2, E=4. Full with band,
+              quiet alone, full with collaborator.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Sub Pop &mdash; Fourth Artist</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Fourth Sub Pop artist. Give Up went platinum.
+              One of Sub Pop's most successful releases.
+              The label's range: grunge to indie electronic.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">058</span>
+              <strong>Death Cab for Cutie</strong> &mdash; Gibbard&rsquo;s band.
+              Indie Rock at E=4. The primary project. Death Cab is the band;
+              Postal Service is the side project. Same vocalist, different genre,
+              different collaborators, different sonic identity.
+            </li>
+            <li>
+              <span class="ref-degree">060</span>
+              <strong>Ben Gibbard solo</strong> &mdash; Gibbard alone.
+              Singer-Songwriter at E=2. The solo voice. Three Gibbard contexts:
+              band (58), solo (60), side project (86). E=4, E=2, E=4.
+            </li>
+            <li>
+              <span class="ref-degree">044</span>
+              <strong>Chong the Nomad</strong> &mdash; Electronic connection.
+              Electronic/Hip-Hop. The nearest electronic precedent. But Chong was
+              categorized under Hip-Hop. Postal Service is the first primary
+              electronic genre.
+            </li>
+            <li>
+              <span class="ref-degree">067</span>
+              <strong>Chris Walla</strong> &mdash; Death Cab universe.
+              Death Cab guitarist/producer. Walla produced Death Cab&rsquo;s
+              early sound. Gibbard wrote the songs. The Postal Service is
+              Gibbard without Walla &mdash; a different sonic world.
+            </li>
+            <li>
+              <span class="ref-degree">068</span>
+              <strong>Sam Beam</strong> &mdash; Sub Pop.
+              Both on Sub Pop Records. Beam&rsquo;s quiet folk (E=2) and
+              Postal Service&rsquo;s electronic pulse (E=4) &mdash; Sub Pop&rsquo;s
+              range from whisper to synthesizer.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>The Postal Service &mdash; <em>Give Up</em> (2003, Sub Pop Records).</li>
+            <li>Sub Pop Records &mdash; The Postal Service catalog.</li>
+            <li>AllMusic &mdash; The Postal Service biography and discography.</li>
+            <li>RIAA &mdash; Platinum certification for <em>Give Up</em>.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">86&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Electronic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Sub Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle / L.A.</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">68</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">87th Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">87th Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sub Pop</span>
+            <span class="stat-value">4th artist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic</span>
+            <span class="stat-value">1st genre</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gibbard Arc</h4>
+          <div class="stat-row">
+            <span class="stat-label">058</span>
+            <span class="stat-value">Death Cab (E=4)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">060</span>
+            <span class="stat-value">Solo (E=2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">086</span>
+            <span class="stat-value">Postal Svc (E=4)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Span</span>
+            <span class="stat-value">28 degrees</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Give Up</h4>
+          <div class="stat-row">
+            <span class="stat-label">Year</span>
+            <span class="stat-value">2003</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Certification</span>
+            <span class="stat-value">Platinum</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Key Track</span>
+            <span class="stat-value">Such Great Heights</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

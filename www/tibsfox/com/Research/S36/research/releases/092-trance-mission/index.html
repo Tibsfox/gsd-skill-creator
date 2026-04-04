@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 92&deg; &mdash; Trance Mission &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card .level.landmark { background: #FFEBEE; color: #B71C1C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .world-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 50%, #E64A19 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .world-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #FFAB91;
+      font-family: system-ui, sans-serif;
+    }
+    .world-card p {
+      color: #FBE9E7;
+      margin: 0.5rem 0;
+    }
+    .world-card strong {
+      color: #FFCCBC;
+    }
+
+    .electronic-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .electronic-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+      color: #90CAF9;
+      font-family: system-ui, sans-serif;
+    }
+    .electronic-card p {
+      color: #E3F2FD;
+      margin: 0.5rem 0;
+    }
+    .electronic-card strong {
+      color: #BBDEFB;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>092 &mdash; Trance Mission</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>World/Electronic &mdash; Genre Stage 74 &mdash; City of Tribes Records &mdash; E=3 &mdash; San Francisco / Seattle</h3>
+      <p>
+        <strong>Trance Mission</strong> &mdash; San Francisco/Seattle world-music-meets-electronic group.
+        Blending global instruments (<strong>oud, tabla, didgeridoo</strong>) with electronic processing.
+        Connected to the PNW through performances and scene overlap.
+        <strong>World/Electronic</strong> at Genre Stage 74. <strong>E=3</strong>.
+        <strong>City of Tribes Records</strong>. Second degree of Quadrant II.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">92&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Trance Mission</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">World / Electronic</span>
+          <span class="label-badge">City of Tribes Records</span>
+          <span class="neighborhood-badge">San Francisco / Seattle</span>
+          <span class="record-badge">Genre Stage 74</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- World Music Card -->
+        <div class="world-card">
+          <h4>World/Electronic &mdash; Global Instruments Meet Electronic Processing</h4>
+          <p>
+            <strong>Trance Mission</strong> merged <strong>global instruments</strong> &mdash;
+            oud, tabla, didgeridoo, hammered dulcimer, erhu &mdash; with
+            <strong>electronic processing, sampling, and ambient textures</strong>.
+            The result was neither traditional world music nor conventional electronic
+            music but a hybrid that dissolved the boundary between acoustic tradition
+            and electronic transformation. World/Electronic at Genre Stage 74 &mdash;
+            the engine&rsquo;s first entry to explicitly fuse world music traditions
+            with electronic technology as a core aesthetic.
+          </p>
+        </div>
+
+        <!-- Electronic Card -->
+        <div class="electronic-card">
+          <h4>The Electronic Continuum &mdash; From Drone to World</h4>
+          <p>
+            The engine&rsquo;s last three entries trace an electronic continuum:
+            <strong>Sky Cries Mary</strong> (90) &mdash; ethereal/electronic, ambient drift.
+            <strong>Hovercraft</strong> (91) &mdash; drone/noise, sustained crush.
+            <strong>Trance Mission</strong> (92) &mdash; world/electronic, global fusion.
+            Three consecutive degrees, three different relationships between music and
+            electronics. Sky Cries Mary uses electronics for atmosphere. Hovercraft uses
+            electronics for obliteration. Trance Mission uses electronics for
+            <strong>cultural bridge-building</strong> &mdash; connecting musical traditions
+            across continents through shared electronic space.
+          </p>
+        </div>
+
+        <!-- Engine Events Card -->
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 74 &middot; World/Electronic &middot; E=3 &middot; 93rd Acoustic Element &middot; 93rd Pattern</h4>
+          <p>
+            <strong>Trance Mission</strong> enters at Genre Stage 74 with World/Electronic.
+            <strong>E=3</strong> &mdash; immersive but accessible. The 93rd acoustic element.
+            The 93rd pattern. Second degree of Quadrant II.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 74: World/Electronic &mdash; The Global Hybrid</h2>
+          <p>
+            Degree 92 reaches <strong>Genre Stage 74</strong>. <strong>World/Electronic</strong>
+            describes Trance Mission&rsquo;s music: traditional instruments from multiple
+            world music traditions processed through electronic effects, combined with
+            sampling, loops, and ambient textures. The genre is neither traditional
+            world music (which emphasizes cultural authenticity) nor conventional
+            electronic music (which emphasizes synthesis). It is a hybrid that uses
+            electronics to create a shared space where traditions can converse.
+          </p>
+          <p>
+            Distinguished from prior entries: <strong>Sky Cries Mary</strong> (degree 90)
+            blends world influences into ethereal/electronic. Trance Mission makes the
+            world music element <strong>primary and explicit</strong> &mdash; oud, tabla,
+            didgeridoo as lead instruments, not just influences. <strong>Philip Aaberg</strong>
+            (degree 65) incorporates world influences into piano work. Trance Mission
+            uses global instruments directly, not filtered through Western orchestration.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 93: The Global Weave</h2>
+          <p>
+            The <strong>global weave</strong> is the ninety-third acoustic element in the
+            Seattle 360 engine. It describes Trance Mission&rsquo;s sound &mdash; multiple
+            world music instruments from different traditions playing simultaneously,
+            connected and transformed by electronic processing. The oud&rsquo;s Middle
+            Eastern melody meets the tabla&rsquo;s Indian rhythm meets the didgeridoo&rsquo;s
+            Australian drone, all woven together through electronic loops and ambient
+            textures. The weave is global: no single tradition dominates.
+          </p>
+          <p>
+            Contrast with prior elements: the <strong>sustained crush</strong> (92nd element,
+            Hovercraft at 91) is monolithic &mdash; one massive wall of sound. The global
+            weave is polyphonic &mdash; multiple distinct voices from multiple traditions
+            interlocking. The engine moves from monolith to tapestry, from crushing
+            uniformity to woven diversity.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 93: The Cross-Pollinator</h2>
+          <p>
+            The <strong>cross-pollinator</strong> is the ninety-third artist-city pattern
+            in the Seattle 360 engine. It describes an artist or group that operates
+            across multiple cities and multiple musical traditions, pollinating each
+            scene with elements from the others. Trance Mission was based in San Francisco
+            but connected to the PNW through performances and scene overlap &mdash;
+            carrying world music traditions into electronic scenes and electronic
+            techniques into world music contexts.
+          </p>
+          <blockquote>
+            The cross-pollinator is the artist who belongs to no single scene because
+            they belong to all of them. Trance Mission carried the oud into the
+            electronic club and the sampler into the world music festival. They were
+            not visitors to any tradition but residents of the space between traditions.
+            The cross-pollinator creates new music by dissolving the borders that
+            separate old music.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Global Weave</h4>
+              <span class="level advanced">Advanced</span>
+              <p>93rd acoustic element. Trance Mission --
+              multiple world instruments from different
+              traditions woven through electronic processing.
+              Polyphonic. No single tradition dominates.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Cross-Pollinator</h4>
+              <span class="level advanced">Advanced</span>
+              <p>93rd artist-city pattern. Operating across
+              cities and traditions. Carrying elements between
+              scenes. Resident of the space between
+              traditions.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 74 &mdash; World/Electronic</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>74th genre stage. World/Electronic.
+              Global instruments + electronic processing.
+              Neither world nor electronic alone. A
+              hybrid that dissolves the boundary.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 &mdash; Immersive Accessibility</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>E=3. Immersive but accessible. The
+              world/electronic hybrid invites the
+              listener into unfamiliar traditions
+              through familiar electronic textures.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Electronic Continuum (90&ndash;92)</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>Three consecutive electronic-inflected
+              degrees: ethereal (90), drone (91), world (92).
+              Three different uses of electronics:
+              atmosphere, obliteration, bridge-building.</p>
+            </div>
+            <div class="theory-card">
+              <h4>City of Tribes Records</h4>
+              <span class="level intermediate">Intermediate</span>
+              <p>City of Tribes Records. San Francisco
+              label. World/electronic focus. Part of the
+              Bay Area&rsquo;s world music infrastructure.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">090</span>
+              <strong>Sky Cries Mary</strong> &mdash; World music/electronic.
+              Both blend world music elements with electronics. Sky Cries Mary
+              uses world influences within an ethereal framework; Trance Mission
+              makes world instruments primary. Both occupy the world/electronic
+              space but at different ratios.
+            </li>
+            <li>
+              <span class="ref-degree">086</span>
+              <strong>The Postal Service</strong> &mdash; Electronic.
+              Both electronic-centered. Postal Service is electronic pop;
+              Trance Mission is world/electronic. Different relationships
+              between electronics and musical tradition.
+            </li>
+            <li>
+              <span class="ref-degree">065</span>
+              <strong>Philip Aaberg</strong> &mdash; World influences.
+              Both incorporate world music elements. Aaberg filters them
+              through Western piano; Trance Mission uses global instruments
+              directly. Western mediation vs direct global voice.
+            </li>
+            <li>
+              <span class="ref-degree">044</span>
+              <strong>Chong the Nomad</strong> &mdash; Electronic.
+              Both electronic. Chong is beat-driven experimental;
+              Trance Mission is world-instrument-driven. Different
+              sources feeding into electronic transformation.
+            </li>
+            <li>
+              <span class="ref-degree">091</span>
+              <strong>Hovercraft</strong> &mdash; Electronic era.
+              Consecutive degrees. Hovercraft uses electronics for
+              obliteration (drone/noise); Trance Mission uses electronics
+              for cultural bridge-building (world/electronic).
+              Destruction vs connection.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sources -->
+        <section>
+          <h2>Sources</h2>
+          <ol style="font-size: 0.88rem; line-height: 1.6;">
+            <li>Trance Mission &mdash; discography and group history.</li>
+            <li>AllMusic &mdash; Trance Mission biography.</li>
+            <li>City of Tribes Records &mdash; catalog.</li>
+            <li>Engine internal analysis &mdash; structural events, energy, genre.</li>
+          </ol>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">92&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">World / Electronic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">City of Tribes</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">SF / Seattle</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Events</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">74</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">93rd Element</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">93rd Pattern</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Quadrant</span>
+            <span class="stat-value">II (degree 2)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sonic Character</h4>
+          <div class="stat-row">
+            <span class="stat-label">Element</span>
+            <span class="stat-value">Global Weave</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Cross-Pollinator</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instruments</span>
+            <span class="stat-value">Oud, tabla, didge</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Electronic Continuum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree 90</span>
+            <span class="stat-value">Ethereal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Degree 91</span>
+            <span class="stat-value">Drone</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Degree 92</span>
+            <span class="stat-value">World</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

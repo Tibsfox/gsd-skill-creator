@@ -1,0 +1,120 @@
+{
+  "degree": 129,
+  "species": "Canada Goose",
+  "scientific_name": "Branta canadensis",
+  "slug": "129-canada-goose",
+  "sound_type": "deep honk flock chorus -- two-syllable 'ah-HONK' at 200-2500 Hz, nasal brassy carrying, flock-amplified wall of sound, asynchronous overlapping honks, individual recognition by voice, E=5 collective power",
+  "energy": 5,
+  "ecosystem": "Lake/grass, resident. Year-round resident populations in urban parks, lakeshores, golf courses, agricultural fields throughout the PNW. Migratory populations augment resident flocks in winter.",
+  "season": "Year-round (resident populations) and winter visitor (migratory populations from Alaska/BC). V-formation migration peaks October-November and March-April. Honking is a 365-day phenomenon in the PNW.",
+  "family": "Anatidae (12th consecutive: 118-129 -- RECORD EXTENDS TO TWELVE)",
+  "order": "Anseriformes",
+  "csv_substitute": false,
+  "original_species": "Canada Goose",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.68,
+    "lon": -122.34,
+    "description": "Reference for Green Lake, Seattle -- one of the most prominent Canada Goose concentrations in urban PNW. Year-round resident flocks on the lake and surrounding grass."
+  },
+  "taxonomy_note": {
+    "description": "TWELFTH consecutive Anatidae (118-129). Record extends. E=5 through collective flock power. First Branta (black goose) genus in the engine -- genus shift from Cygnus (swans, 127-128) to Branta (geese, 129+). Begins goose comparison pair with Cackling Goose (degree 130). Most ubiquitous waterfowl in North America.",
+    "current_family": "Anatidae (12th consecutive -- RECORD EXTENDS, streak ongoing)",
+    "new_family": false,
+    "family_count_in_engine": "Anatidae: the most represented family. Twelve consecutive at degrees 118-129.",
+    "name_etymology": "Branta from Old Norse brandgás ('burnt goose,' referring to dark plumage). canadensis from Latin 'of Canada.' The black-headed goose from Canada.",
+    "genus_note": "Branta -- first entry. The black goose genus. Genus shift from Cygnus (swans, 127-128) to Branta (geese, 129+).",
+    "order_note": "Anseriformes. Twelfth consecutive Anatidae. The family streak continues into goose territory.",
+    "family_position": "Anatidae at twelfth consecutive. ALL-TIME RECORD EXTENDS. Ducks (118-126), swans (127-128), geese (129+). All three major PNW Anatidae subfamilies represented."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "200-2,500 Hz. The fundamental is in the low range (200-500 Hz), with harmonics extending upward. Deeper honk in larger subspecies.",
+    "peak_energy_band_hz": "300-1,000 Hz. The deep fundamental and first harmonics carry the most energy. The nasal, brassy quality comes from the syrinx structure.",
+    "song_frequency_hz": "Honk: 200-2,500 Hz. Alarm: sharp rapid series. Hiss: territorial defense. Gosling peep: high-pitched, whistle-like.",
+    "song_duration_s": "Single honk: 0.5-1 second. Given continuously in flocks. V-formation honking is continuous overlapping calls.",
+    "note_structure": "DEEP HONK: Two-syllable 'ah-HONK' with emphasis on second syllable. Nasal, brassy, carrying. Each individual distinct enough for voice recognition between mates and family.",
+    "note_types": "Contact honk (primary, flock communication), alarm honk (sharp, rapid), territorial hiss (aggressive defense), pair greeting (mutual honking), gosling peep (high-pitched juvenile).",
+    "phrase_structure": "Asynchronous flock chorus. No coordinated timing. Each bird honks independently, creating continuous overlapping texture. V-formation adds Doppler shift during flyover.",
+    "timbre": "Nasal. Brassy. Deep. Carrying. Less musical than Brant, less sharp than Cackling Goose. The rougher, more urgent quality of the flock chorus distinguishes it from swan baying.",
+    "amplitude": "E=5. Individual honk is moderate. Flock of 50-200 produces wall of sound. Collective power, not individual anatomy. Heard at 500+ meters single bird, 1-2 km flock.",
+    "tempo": "Continuous in flocks. Each bird honks at own rate. Irregular, asynchronous rhythm creates characteristic textured wall of honking.",
+    "context": "Flock communication, V-formation coordination, territorial defense, mate recognition, alarm signaling. The honk is multi-purpose: it is the Canada Goose's primary sound for all social contexts.",
+    "regional_variation": "Varies by subspecies. B. c. maxima produces deeper honks. Smaller subspecies produce higher-pitched honks. Body size correlates directly with pitch.",
+    "key_property": "DEEP HONK FLOCK CHORUS -- E=5 COLLECTIVE POWER. Two-syllable 'ah-HONK' at 200-2,500 Hz. Flock-amplified wall of sound. Individual recognition by voice. V-formation Doppler flyover. Most universally recognized waterfowl sound in N. America. TWELFTH CONSECUTIVE ANATIDAE (118-129). First Branta genus. Genus shift from Cygnus. Begins goose comparison pair with Cackling Goose (130). Seven subspecies. 2004 split created Cackling Goose. Resident populations 100K-200K+ in WA. Urban dominant."
+  },
+  "plumage": {
+    "overall": "Black head and neck with distinctive white cheek patch (chinstrap). Brown-gray body. Black tail with white undertail coverts. Black bill, legs, and feet. Seven subspecies varying greatly in size.",
+    "diagnostic_mark": "White cheek patch on black head and neck. Larger than Cackling Goose (130). Longer neck, larger bill, deeper honk. Body proportions distinguish from Cackling in the field.",
+    "seasonal_variation": "Adults similar year-round. Juveniles slightly duller. Some rust staining on head/neck from feeding in iron-rich water.",
+    "flight_pattern": "V-formation in flocks. Strong, steady wingbeats. Long neck extended. Continuous honking during flight. Doppler-shifted sound as formation passes overhead."
+  },
+  "physical_description": {
+    "overall": "Body length 76-110 cm. Weight 2.6-6.5 kg (up to 14.3 lbs in B. c. maxima). Wingspan 127-185 cm. Enormous size variation across seven subspecies.",
+    "diagnostic_mark": "White cheek patch. Black head and neck. Large size (vs. Cackling Goose). Longer neck and bill proportions.",
+    "field_id": "The white cheek patch on a black head is diagnostic. Distinguish from Cackling Goose (130) by larger size, longer neck, deeper honk, larger bill. In mixed flocks, size difference is apparent."
+  },
+  "nodes": [
+    {
+      "id": "deep-honk",
+      "type": "concept",
+      "title": "Deep Honk Flock Chorus -- E=5 Collective Power",
+      "description": "Two-syllable 'ah-HONK' at 200-2,500 Hz. Flock-amplified. Asynchronous overlapping creates wall of sound. Individual recognition by voice. Most universally recognized waterfowl sound in North America. V-formation Doppler flyover is the iconic migration sound.",
+      "connections": ["goose-pair", "urban-adaptation", "anatidae-streak"]
+    },
+    {
+      "id": "urban-adaptation",
+      "type": "concept",
+      "title": "Urban Adaptation Specialist -- The Ubiquitous Giant",
+      "description": "Resident populations 100K-200K+ in WA alone. Parks, golf courses, corporate campuses. Short grass near water = ideal habitat. Lost wariness of humans. Aggressive territorial defense. 500g droppings per bird per day. A victim of its own success -- so well-adapted it has become a management challenge.",
+      "connections": ["deep-honk", "v-formation"]
+    },
+    {
+      "id": "v-formation",
+      "type": "concept",
+      "title": "V-Formation Aerodynamics and Acoustics",
+      "description": "Upwash zone saves 10-14% flight energy. Leader rotation distributes fatigue. Honking coordination during flight. Doppler-shifted overhead passage is the iconic migration sound. First wild bird sound many PNW residents learn to identify.",
+      "connections": ["deep-honk", "goose-pair"]
+    },
+    {
+      "id": "goose-pair",
+      "type": "pattern",
+      "title": "Goose Comparison Pair Begins (129-130)",
+      "description": "Canada Goose (129, large, deep honk, E=5, resident) vs. Cackling Goose (130, small, higher cackle, E=4, winter visitor). Split in 2004 by AOU. Fifth comparison pair in SPS. Mirrors Hairy/Downy WP (110-111), Barrow's/Common Goldeneye (123-124), Tundra/Trumpeter Swan (127-128).",
+      "connections": ["deep-honk", "anatidae-streak"]
+    },
+    {
+      "id": "anatidae-streak",
+      "type": "pattern",
+      "title": "Twelfth Consecutive Anatidae (118-129) -- Record Extends",
+      "description": "Ducks (118-126), swans (127-128), geese (129+). All three PNW Anatidae subfamilies represented. Genus shift: Cygnus to Branta. Energy descends from E=6 climax (128) to E=5 (129). The streak enters goose territory. Twelve consecutive and counting.",
+      "connections": ["goose-pair", "deep-honk"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-130",
+      "species": "Cackling Goose",
+      "relationship": "GOOSE PAIR BEGINS! Canada (129, deep honk, E=5, large, resident) vs. Cackling (130, higher cackle, E=4, small, winter visitor). Split in 2004. Identification challenge. Degree 130 completes the pair."
+    },
+    {
+      "target": "SPS-128",
+      "species": "Trumpeter Swan",
+      "relationship": "ENERGY ARC! Trumpeter (128, E=6 climax) to Canada Goose (129, E=5). Energy descends from maximum. Genus shift: Cygnus to Branta."
+    },
+    {
+      "target": "SPS-127",
+      "species": "Tundra Swan",
+      "relationship": "FLOCK ENERGY! Tundra (127, baying flock, E=5) and Canada Goose (129, honking flock, E=5). Both E=5 through collective power. Different sounds: melodious baying vs. brassy honking."
+    },
+    {
+      "target": "SPS-118",
+      "species": "Harlequin Duck",
+      "relationship": "STREAK EXTENDED! Harlequin (118, E=5, stream) to Canada Goose (129, E=5, urban park). Twelve consecutive Anatidae. From torrential stream to urban landscape."
+    },
+    {
+      "target": "SPS-107-115",
+      "species": "Picidae (nine consecutive)",
+      "relationship": "RECORD MARGIN GROWS! Picidae held 9 consecutive (107-115). Anatidae now at 12 (118-129). Three more than the previous record."
+    }
+  ]
+}

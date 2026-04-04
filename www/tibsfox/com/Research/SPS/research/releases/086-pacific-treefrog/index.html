@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 86&deg; &mdash; Pacific Treefrog &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Amphibian return card */
+    .amphibian-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 30%, #388E3C 60%, #43A047 100%);
+      border: 3px solid #1B5E20;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .amphibian-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #A5D6A7;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .amphibian-card p {
+      color: #E8F5E9;
+    }
+    .amphibian-card strong {
+      color: #C8E6C9;
+    }
+
+    /* Night chorus card */
+    .chorus-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 30%, #1976D2 60%, #1E88E5 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .chorus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #90CAF9;
+    }
+    .chorus-card p {
+      color: #E3F2FD;
+    }
+    .chorus-card strong {
+      color: #BBDEFB;
+    }
+
+    /* New family card */
+    .family-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+      border: 2px solid #4A148C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .family-card p {
+      color: #F3E5F5;
+    }
+    .family-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Postal Service parallel card */
+    .postal-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #1A237E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .postal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .postal-card p {
+      color: #E8EAF6;
+    }
+    .postal-card strong {
+      color: #C5CAE9;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.amphibian { background: #1B5E20; }
+    .theory-icon.chorus { background: #0D47A1; }
+    .theory-icon.hylidae { background: #4A148C; }
+    .theory-icon.marsh { background: #2E7D32; }
+    .theory-icon.krek { background: #E65100; }
+    .theory-icon.postal-link { background: #1A237E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">86&deg;</div>
+      <div class="release-title-block">
+        <h2>Pacific Treefrog</h2>
+        <div class="scientific">Pseudacris regilla</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      amplified krek-krek wall of sound &mdash; AN AMPHIBIAN. After 25 consecutive mammalian entries (61&ndash;85) and 16 bird-to-bird substitutions replacing amphibians (45&ndash;60), an amphibian finally appears in its own right. Hylidae (tree frog family) &mdash; NEW FAMILY (37th). Amphibia RE-ENTERS the engine. The &ldquo;night chorus&rdquo; captures the collective breeding chorus. E=4 &mdash; the chorus is LOUD. Marsh habitat. Twenty-sixth consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Amphibian Return Card -->
+        <div class="amphibian-card">
+          <h3>AMPHIBIA Returns &mdash; A New Class Re-Enters the Engine</h3>
+          <p>After <strong>25 consecutive mammalian entries</strong> (degrees 61&ndash;85) and before that <strong>16 consecutive bird-to-bird substitutions</strong> replacing amphibians in the CSV (degrees 45&ndash;60), an <strong>AMPHIBIAN</strong> finally appears in its own right. The Pacific Treefrog is the first amphibian to enter the engine as a primary species. <strong>Amphibia re-enters</strong> &mdash; a new class returns. This is one of the engine&rsquo;s most significant structural events: the class barrier breaks.</p>
+        </div>
+
+        <!-- Night Chorus Card -->
+        <div class="chorus-card">
+          <h3>Night Chorus &mdash; Wall of Sound (87th Acoustic Element)</h3>
+          <p>The <strong>krek-krek night chorus</strong> is not an individual call but a <strong>collective breeding chorus</strong>. Hundreds or thousands of Pacific Treefrogs calling simultaneously from marsh edges on spring nights. The result is a <strong>wall of sound</strong> &mdash; an amplified, layered, continuous chorus that dominates the marsh soundscape. E=4 &mdash; the chorus is <strong>LOUD</strong>, audible from hundreds of meters. This is the <strong>most iconic sound of PNW wetlands</strong> &mdash; the sound that defines spring nights in the Pacific Northwest.</p>
+        </div>
+
+        <!-- New Family Card -->
+        <div class="family-card">
+          <h3>Hylidae &mdash; 37th Family &mdash; New Family</h3>
+          <p><strong>Hylidae</strong> (tree frog family) is a <strong>NEW FAMILY</strong> &mdash; the 37th family in the engine. This breaks the Cricetidae streak (83&ndash;85) and introduces not just a new family but a new <strong>CLASS</strong> (Amphibia). The family jump from Cricetidae (Mammalia) to Hylidae (Amphibia) crosses the class boundary.</p>
+        </div>
+
+        <!-- Postal Service Parallel Card -->
+        <div class="postal-card">
+          <h3>The Postal Service Parallel</h3>
+          <p>Degree 86 pairs Pacific Treefrog with <strong>The Postal Service</strong> in Part A &mdash; Indie Electronic, E=4. <strong>Both are walls of sound</strong>: the Postal Service layers programmed beats, synths, and voice into a dense electronic texture. The Pacific Treefrog night chorus layers hundreds of individual krek-krek calls into a dense acoustic texture. Both <strong>E=4</strong>. Both <strong>collective</strong>: the Postal Service is Gibbard + Tamborello combining distinct contributions. The treefrog chorus is hundreds of individuals combining identical calls. Both <strong>create something larger than any individual element</strong>.</p>
+        </div>
+
+        <h2>The Sound: Amplified Krek-Krek Wall of Sound (87th Acoustic Element)</h2>
+        <p><strong>The call:</strong> The Pacific Treefrog&rsquo;s call is a two-note <strong>&ldquo;krek-ek, krek-ek&rdquo;</strong> &mdash; a loud, high-pitched, rapidly repeated call produced by males from marsh edges during breeding season (late winter through spring). Individual calls are loud for such a small frog (approximately 80 dB at 1 meter). When hundreds or thousands call simultaneously, the result is a <strong>wall of sound</strong> &mdash; a continuous, pulsing chorus that fills the marsh soundscape [1, 2, 3].</p>
+        <p><strong>Why E=4:</strong> (1) Individual calls are already loud for body size &mdash; one of the loudest anurans relative to size. (2) The chorus is <strong>amplified</strong> by numbers &mdash; hundreds calling simultaneously. (3) Audible from <strong>hundreds of meters</strong>. (4) <strong>Dominates the marsh soundscape</strong> on spring nights. (5) E=4 reflects the overwhelming collective volume. This is the loudest SPS entry in the Amphibia class.</p>
+
+        <h2>Taxonomy: <em>Pseudacris regilla</em></h2>
+        <p><strong>Etymology:</strong> <em>Pseudacris</em> from Greek <em>pseudes</em> (&ldquo;false&rdquo;) + <em>akris</em> (&ldquo;locust&rdquo;), referring to the insect-like call. <em>regilla</em> from Latin &ldquo;regal&rdquo; or &ldquo;little queen.&rdquo; Formerly classified as <em>Hyla regilla</em>. Reclassified to <em>Pseudacris</em> based on molecular phylogenetics [1, 2].</p>
+        <p><strong>Classification:</strong> <strong>Class Amphibia</strong> &mdash; AMPHIBIA RETURNS. Order <strong>Anura</strong> (frogs). Family <strong>Hylidae</strong> &mdash; NEW FAMILY (37th in the engine). Genus <em>Pseudacris</em> &mdash; NEW GENUS. Also known as Pacific Chorus Frog [1, 2].</p>
+
+        <h2>Ecology: The Spring Chorus</h2>
+        <p><strong>Habitat:</strong> Marshes, ponds, wetlands, wet meadows, streams. Also found in gardens, forests, and grasslands &mdash; remarkably adaptable. Breeds in standing water. Marsh habitat shared with Muskrat (85), Wood Duck (58), Mallard (59) [1, 2, 3].</p>
+        <p><strong>Activity:</strong> Primarily nocturnal during breeding season. The night chorus is the defining behavior: males call from marsh edges, often partially submerged, from late winter through spring.</p>
+        <p><strong>Breeding:</strong> Males call to attract females. The chorus intensity peaks on warm, humid spring nights. Females deposit eggs in small clusters attached to submerged vegetation.</p>
+        <p><strong>Diet:</strong> Insectivorous. Spiders, beetles, flies, ants. Small invertebrates.</p>
+        <p><strong>Predators:</strong> Garter snakes, herons, raccoons, bullfrogs (invasive competitor). The Snowshoe Hare (73) is a prey contrast &mdash; both common, both preyed upon, entirely different trophic levels.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon amphibian">A</div>
+            <div class="theory-content">
+              <h4>Amphibia Returns &mdash; Class Barrier Breaks</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>First amphibian in its own right. After 25 mammalian entries and 16 bird substitutions replacing amphibians. Amphibia re-enters. The class barrier breaks.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon chorus">C</div>
+            <div class="theory-content">
+              <h4>Krek-Krek Night Chorus &mdash; 87th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Collective breeding chorus. Hundreds calling simultaneously. Wall of sound. E=4. The most iconic sound of PNW wetlands.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hylidae">H</div>
+            <div class="theory-content">
+              <h4>Hylidae &mdash; 37th Family &mdash; New Class</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>NEW FAMILY. Tree frog family. 37th family in engine. Breaks Cricetidae streak. Crosses class boundary from Mammalia to Amphibia.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon marsh">M</div>
+            <div class="theory-content">
+              <h4>Marsh Habitat &mdash; Shared with Muskrat (85)</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Consecutive marsh species (85-86). Muskrat and treefrog share marsh habitat. Mammal and amphibian in the same marsh.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon krek">K</div>
+            <div class="theory-content">
+              <h4>The Most Iconic PNW Wetland Sound</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>The Pacific Treefrog chorus defines spring nights in the Pacific Northwest. The sound used in films, TV, and media to signify &ldquo;nighttime outdoors.&rdquo;</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon postal-link">P</div>
+            <div class="theory-content">
+              <h4>The Postal Service Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both walls of sound. Both E=4. Both collective -- electronic layers vs frog chorus. Both create something larger than any individual element.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-085: Muskrat</strong>
+            <p>Marsh shared. Consecutive marsh species (85-86). Muskrat (quiet plop, E=3) and treefrog (loud chorus, E=4). Mammal and amphibian sharing the same marsh. The plop and the chorus on the same spring night.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>Marsh shared. Both in marsh/pond habitat. Mallard (Aves) and treefrog (Amphibia). Three classes sharing the marsh by degree 86: Aves, Mammalia, Amphibia.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-058: Wood Duck</strong>
+            <p>Pond/marsh. Both in marsh-adjacent aquatic habitat. Wood Duck (pond) and treefrog (marsh edge). Both breed in spring near standing water.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-061: American Beaver</strong>
+            <p>Pond/marsh builder. Beaver creates ponds that become treefrog breeding habitat. The dam builder creates the chorus stage. Ecological engineering enables the night chorus.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-073: Snowshoe Hare</strong>
+            <p>Prey contrast. Both common, both heavily preyed upon. But in different trophic levels and habitats. The hare in the forest understory, the treefrog at the marsh edge.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Pacific Treefrog (<em>Pseudacris regilla</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Pacific tree frog.&rdquo;</li>
+          <li>[3] Stebbins, R.C. (2003). <em>A Field Guide to Western Reptiles and Amphibians.</em> Houghton Mifflin.</li>
+          <li>[4] Engine internal analysis &mdash; structural event tracking, energy calibration, acoustic elements.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">86&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Chorus is LOUD. Wall of sound.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hylidae</div>
+          <div class="stat-detail">NEW FAMILY (37th). Tree frogs.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Amphibia</div>
+          <div class="stat-detail">AMPHIBIA RETURNS. Class barrier breaks.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Anura</div>
+          <div class="stat-detail">Frogs. First anuran in engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Marsh</div>
+          <div class="stat-detail">Consecutive marsh (85-86).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">3&ndash;5 cm</div>
+          <div class="stat-detail">Tiny frog. Huge voice.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Nocturnal chorus</div>
+          <div class="stat-detail">Spring breeding. Night calling.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Behavior</div>
+          <div class="stat-value">Collective chorus</div>
+          <div class="stat-detail">Hundreds calling simultaneously.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Cultural</div>
+          <div class="stat-value">Hollywood frog</div>
+          <div class="stat-detail">Used in films for &ldquo;night.&rdquo;</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Amphibian Entry</div>
+          <div class="stat-value">1st</div>
+          <div class="stat-detail">First amphibian. Class returns.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">37th family</div>
+          <div class="stat-detail">Hylidae. NEW. Tree frogs.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Cricetidae Streak</div>
+          <div class="stat-value">Broken at 86</div>
+          <div class="stat-detail">83-84-85 Cricetidae. Ends.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (26th)</div>
+          <div class="stat-detail">Twenty-sixth consecutive.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

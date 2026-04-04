@@ -1,0 +1,115 @@
+{
+  "degree": 139,
+  "species": "Long-eared Owl",
+  "scientific_name": "Asio otus",
+  "slug": "139-long-eared-owl",
+  "sound_type": "deep 'whooo' pumping -- single low-frequency notes at 300-400 Hz, spaced every 2-4 seconds, measured and persistent; the most minimal owl vocalization in the engine",
+  "energy": 4,
+  "ecosystem": "Open forest, forest edges, dense vegetation. Winter visitor in western PNW, year-round resident east of Cascades. Cryptic roosting. Communal winter roosts.",
+  "season": "Winter visitor in western WA (October-April). Year-round east of Cascades. Hooting peaks during breeding season (February-June). Silent outside breeding season.",
+  "family": "Strigidae (5th consecutive: 135-136-137-138-139)",
+  "order": "Strigiformes",
+  "csv_substitute": false,
+  "original_species": "Long-eared Owl",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.50,
+    "lon": -122.20,
+    "description": "Long-eared Owls winter in western Washington. Breeding primarily east of Cascades. Communal roosts in dense conifers."
+  },
+  "taxonomy_note": {
+    "description": "First Long-eared Owl entry. Fifth consecutive Strigidae. New genus: Asio (ear-tufted owls). First half of the Long-eared/Short-eared comparison pair (139-140). The most secretive owl in the PNW. Ear tufts are display feathers, not auditory structures.",
+    "current_family": "Strigidae (5th consecutive, 135-139)",
+    "new_family": false,
+    "family_count_in_engine": "Strigidae: sixth entry total. Five consecutive at 135-139.",
+    "name_etymology": "Asio from Latin 'horned owl' or 'eagle owl.' otus from Greek 'eared.' Both references to the ear tufts, which are not ears.",
+    "genus_note": "Asio -- first entry. New genus. Includes Long-eared (A. otus) and Short-eared (A. flammeus) owls. Different from Bubo (GHO) and Strix (Barred/Spotted).",
+    "order_note": "Strigiformes. Sixth entry. Five consecutive at 135-139.",
+    "family_position": "Strigidae continues for fifth consecutive degree. Third genus (Bubo, Strix, Asio)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "300-400 Hz. Deep, low-frequency single note. Pure and resonant.",
+    "peak_energy_band_hz": "320-380 Hz. Concentrated low-frequency energy.",
+    "song_frequency_hz": "Single 'whooo' note at 300-400 Hz. Clean, pure tone.",
+    "song_duration_s": "Individual note: 0.5-1.0 seconds. Inter-note interval: 2-4 seconds. Calling bouts: 1-15+ minutes.",
+    "note_structure": "SINGLE NOTE PUMPING: Deep 'whooo' repeated at regular 2-4 second intervals. The simplest owl vocalization in the engine. One note, one rhythm, sustained.",
+    "note_types": "Territorial hoot (deep single 'whooo'), catlike 'waow' alarm, female begging call, nestling begging.",
+    "phrase_structure": "No phrase structure. Single notes at regular intervals. Pumping rhythm: whooo... whooo... whooo...",
+    "timbre": "Pure, resonant, clean. Deep bass register without the hoarse quality of the Barred Owl or the booming power of the GHO. A quiet, meditative sound.",
+    "amplitude": "E=4. Moderate. Carries 200-300 meters in quiet conditions. Designed for dense vegetation communication, not long-range broadcasting.",
+    "tempo": "Slow and regular. One note every 2-4 seconds. Hypnotic, persistent rhythm.",
+    "context": "Territorial and mate attraction (breeding season). Primarily February-June. Silent outside breeding season. Strictly nocturnal.",
+    "regional_variation": "Minimal. The deep single hoot is consistent across the species' range.",
+    "key_property": "DEEP PUMPING 'WHOOO' -- E=4 MEASURED MINIMALISM. Single notes at 300-400 Hz every 2-4 seconds. The most minimal owl vocalization in the engine. Fifth consecutive Strigidae (135-139). Asio genus enters. Most secretive PNW owl. Cryptic roosting. Communal winter roosts. Ear tufts are not ears. First half of Long-eared/Short-eared pair (139-140)."
+  },
+  "plumage": {
+    "overall": "Mottled brown, buff, and gray. Prominent ear tufts (when raised). Orange-buff facial disc. Yellow-orange eyes. Slender build, elongated proportions.",
+    "diagnostic_mark": "Long ear tufts (when visible). Orange-buff facial disc. Slender proportions. When roosting, elongated posture with raised tufts resembles a tree branch.",
+    "seasonal_variation": "Minimal.",
+    "flight_pattern": "Silent flight. Long, broad wings. Buoyant, moth-like flight. Long tail. Slender silhouette distinguishes from stockier Barred and Great Horned Owls."
+  },
+  "physical_description": {
+    "overall": "Length: 35-40 cm. Weight: 220-435 g. Wingspan: 86-102 cm. Slender and elongated. Significantly smaller than Barred Owl (500-1050 g) and GHO (900-2500 g).",
+    "diagnostic_mark": "Ear tufts (close together on crown, unlike GHO's widely spaced tufts). Orange-buff facial disc. Yellow-orange eyes. Slender build.",
+    "field_id": "Extremely difficult to find. Look for dense conifer stands; check below for pellet accumulations. Listen at night (breeding season) for deep, regular 'whooo' pumping. Communal winter roosts are the best detection method."
+  },
+  "nodes": [
+    {
+      "id": "deep-pumping",
+      "type": "concept",
+      "title": "Deep Pumping 'Whooo' -- E=4 Minimal Hooting",
+      "description": "Single low-frequency notes at 300-400 Hz, spaced every 2-4 seconds. The most minimal owl vocalization in the engine. Measured, persistent, meditative. Breeding season only. Strictly nocturnal.",
+      "connections": ["secretive-species", "asio-genus", "strigidae-five"]
+    },
+    {
+      "id": "secretive-species",
+      "type": "concept",
+      "title": "Most Secretive PNW Owl -- Ghost Owl",
+      "description": "Cryptic roosting in dense vegetation. Elongated posture with raised ear tufts. Strict nocturnality. Communal winter roosts (20-50+ birds). Severely underdetected. Present but invisible. The 'ghost owl.'",
+      "connections": ["deep-pumping", "ear-tufts"]
+    },
+    {
+      "id": "ear-tufts",
+      "type": "concept",
+      "title": "Ear Tufts -- Display Feathers, Not Ears",
+      "description": "The 'long ears' are feather tufts, not auditory structures. Raised for display, camouflage, and communication. Real ears are asymmetrically placed beneath facial disc feathers for 3D sound localization.",
+      "connections": ["secretive-species", "deep-pumping"]
+    },
+    {
+      "id": "asio-genus",
+      "type": "pattern",
+      "title": "Asio Genus Enters -- Ear-Tufted Owls",
+      "description": "Third genus in the Strigidae streak: Bubo (GHO, 135-136), Strix (Barred Owl, 137-138), Asio (Long-eared, 139). The Long-eared/Short-eared pair (139-140) are both Asio.",
+      "connections": ["deep-pumping", "strigidae-five"]
+    },
+    {
+      "id": "strigidae-five",
+      "type": "pattern",
+      "title": "Fifth Consecutive Strigidae (135-139)",
+      "description": "Five consecutive owl entries. Three genera. Energy pattern: 4, 5, 4, 6, 4. The longest family streak in the engine extends further.",
+      "connections": ["deep-pumping", "asio-genus"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-140",
+      "species": "Short-eared Owl",
+      "relationship": "ASIO COMPARISON PAIR! Long-eared (139, E=4, nocturnal, forest, secretive) and Short-eared (140, E=5, diurnal, grassland, visible). The same genus, opposite habits. Yin and yang of the ear-tufted owls."
+    },
+    {
+      "target": "SPS-137-138",
+      "species": "Barred Owl",
+      "relationship": "STRIGIDAE CONTINUATION! Barred Owl (137-138, Strix) to Long-eared Owl (139, Asio). Third genus enters. From the chaotic E=6 caterwauling to the minimal E=4 pumping. Maximum to measured."
+    },
+    {
+      "target": "SPS-135-136",
+      "species": "Great Horned Owl",
+      "relationship": "STRIGIDAE STREAK! GHO (135-136, Bubo), Barred Owl (137-138, Strix), Long-eared Owl (139, Asio). Five consecutive. Three genera. The owl family era at full depth."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Spotted Owl",
+      "relationship": "STRIGIDAE FAMILY! Six entries total. Spotted Owl (4, Strix), GHO (135-136, Bubo), Barred Owl (137-138, Strix), Long-eared Owl (139, Asio). Three genera in the family."
+    }
+  ]
+}

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 79&deg; &mdash; Golden-mantled Ground Squirrel &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Quintet card */
+    .quintet-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 50%, #795548 100%);
+      border: 3px solid #3E2723;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .quintet-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BCAAA4;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quintet-card p {
+      color: #EFEBE9;
+    }
+    .quintet-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Forest edge card */
+    .forest-edge-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #43A047 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .forest-edge-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #A5D6A7;
+    }
+    .forest-edge-card p {
+      color: #E8F5E9;
+    }
+    .forest-edge-card strong {
+      color: #C8E6C9;
+    }
+
+    /* Chipmunk confusion card */
+    .chipmunk-card {
+      background: linear-gradient(135deg, #E65100 0%, #F57C00 50%, #FB8C00 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .chipmunk-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .chipmunk-card p {
+      color: #FFF3E0;
+    }
+    .chipmunk-card strong {
+      color: #FFCC80;
+    }
+
+    /* Marchant parallel card */
+    .marchant-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .marchant-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .marchant-card p {
+      color: #E8EAF6;
+    }
+    .marchant-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.quintet { background: #4E342E; }
+    .theory-icon.chip { background: #E65100; }
+    .theory-icon.forest { background: #1B5E20; }
+    .theory-icon.confuse { background: #F57C00; }
+    .theory-icon.predator { background: #BF360C; }
+    .theory-icon.marchant-link { background: #283593; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">79&deg;</div>
+      <div class="release-title-block">
+        <h2>Golden-mantled Ground Squirrel</h2>
+        <div class="scientific">Callospermophilus lateralis</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      sharp chip alarm &mdash; FIFTH CONSECUTIVE SCIURIDAE (75&ndash;76&ndash;77&ndash;78&ndash;79), the Sciuridae QUINTET! Matches the Mustelidae quintet (63&ndash;67) and Swallow quintet (26&ndash;30). Forest edge habitat &mdash; returns from grassland (78) to forest interface. Often confused with chipmunks. E=4, nineteenth consecutive original CSV
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Quintet Card -->
+        <div class="quintet-card">
+          <h3>The Sciuridae Quintet &mdash; Matches Mustelidae and Swallow Records</h3>
+          <p>FIFTH consecutive Sciuridae: <strong>Yellow-bellied Marmot</strong> (75), <strong>Hoary Marmot</strong> (76), <strong>Olympic Marmot</strong> (77), <strong>Townsend&rsquo;s Ground Squirrel</strong> (78), <strong>Golden-mantled Ground Squirrel</strong> (79). Five consecutive Sciuridae &mdash; <strong>matching the Mustelidae quintet</strong> (63&ndash;67) and the <strong>Swallow quintet</strong> (26&ndash;30). Three quintets in the engine. The longest family run is now a <strong>THREE-WAY TIE</strong>.</p>
+        </div>
+
+        <!-- Forest Edge Card -->
+        <div class="forest-edge-card">
+          <h3>Forest Edge Habitat &mdash; Returns from Grassland</h3>
+          <p>The Golden-mantled Ground Squirrel returns the engine to <strong>forest edge</strong> habitat after the grassland of degree 78. Forest edges, rocky clearings, open coniferous forest &mdash; the interface between forest and open ground. The engine oscillates: alpine (74&ndash;77), grassland (78), forest edge (79). Each Sciuridae quintet member occupies a <strong>different habitat</strong>.</p>
+        </div>
+
+        <!-- Chipmunk Confusion Card -->
+        <div class="chipmunk-card">
+          <h3>Not a Chipmunk &mdash; The Most Confused Mammal in the PNW</h3>
+          <p>The Golden-mantled Ground Squirrel is <strong>often confused with chipmunks</strong> due to similar body stripes. The key difference: <strong>no facial stripes</strong>. Chipmunks have stripes running through their eyes and across their cheeks. The Golden-mantled has a clean, unstriped face with a golden-brown &ldquo;mantle&rdquo; across the head and shoulders. Larger than any chipmunk (170&ndash;300 g vs. 30&ndash;70 g).</p>
+        </div>
+
+        <!-- Jesse Marchant Parallel Card -->
+        <div class="marchant-card">
+          <h3>The Jesse Marchant Parallel</h3>
+          <p>Degree 79 pairs Golden-mantled Ground Squirrel with <strong>Jesse Marchant</strong> in Part A &mdash; Folk, E=2, cinematic stillness. Both <strong>solitary</strong> &mdash; the squirrel is less colonial than Townsend&rsquo;s (78), Marchant is solo after the band (78). Both <strong>at the edge</strong> &mdash; forest edge habitat, artistic edge (Canadian-born, PNW-connected). Both <strong>often miscategorized</strong> &mdash; the squirrel confused with chipmunks, the artist sometimes lost between JBM and Jesse Marchant identities.</p>
+        </div>
+
+        <h2>The Sound: Sharp Chip Alarm (80th Acoustic Element)</h2>
+        <p><strong>The chip:</strong> A single, sharp, high-pitched &ldquo;chip&rdquo; &mdash; a brief, percussive alarm note, approximately 4,000&ndash;9,000 Hz, 0.05&ndash;0.15 seconds duration. Unlike the Townsend&rsquo;s rapid trill (78), the Golden-mantled&rsquo;s alarm is a single emphatic note, repeated at intervals [1, 2, 3].</p>
+        <p><strong>Why E=4:</strong> (1) Volume &mdash; audible at 50&ndash;150 meters through forest edge habitat. (2) Sharpness &mdash; the chip cuts through ambient forest sound. (3) Percussive quality &mdash; sudden onset, no buildup. (4) Repetition &mdash; when alarmed, repeated chips at 1&ndash;3 second intervals create persistent warning.</p>
+        <p><strong>Sciuridae quintet contrast:</strong> Yellow-bellied (75): chirp, E=4. Hoary (76): whistle, E=5. Olympic (77): multi-note, E=4. Townsend&rsquo;s (78): chirping trill, E=4. Golden-mantled (79): sharp chip, E=4. Five Sciuridae, five acoustic signatures.</p>
+
+        <h2>Taxonomy: <em>Callospermophilus lateralis</em></h2>
+        <p><strong>Etymology:</strong> <em>Callospermophilus</em> from Greek <em>kalos</em> (&ldquo;beautiful&rdquo;) + <em>spermophilus</em> (&ldquo;seed-lover&rdquo;). <em>lateralis</em> from Latin &ldquo;of the side,&rdquo; referring to the lateral body stripes. Described by Say (1823). Formerly placed in <em>Spermophilus</em>, split to <em>Callospermophilus</em> in 2009 [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Rodentia</strong>. Family <strong>Sciuridae</strong> &mdash; FIFTH consecutive (75&ndash;79). Genus <em>Callospermophilus</em> &mdash; NEW GENUS in the engine. Third ground squirrel genus after <em>Marmota</em> and <em>Urocitellus</em> [1, 2].</p>
+
+        <h2>Ecology: The Forest Edge Dweller</h2>
+        <p><strong>Habitat:</strong> Forest edge, rocky clearings, open coniferous forest, montane meadow margins. Elevation 1,000&ndash;3,500 meters. The interface between forest and open ground &mdash; returns from the pure grassland of degree 78 [1, 2, 3].</p>
+        <p><strong>Social:</strong> Less colonial than Townsend&rsquo;s (78). Loosely aggregated where habitat is suitable but not densely colonial. More solitary than the grassland ground squirrels.</p>
+        <p><strong>Diet:</strong> Seeds, nuts, berries, fungi, some insects. A true &ldquo;seed-lover&rdquo; (the genus name). Caches food for winter &mdash; a scatter-hoarder.</p>
+        <p><strong>Predators:</strong> Red Fox (71), weasels (67&ndash;68), raptors, American Marten (65). Forest edge habitat brings the marten connection &mdash; a canopy-to-ground predator-prey relationship.</p>
+
+        <h2>The Mammalian Era Continues: Degree 79</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Order</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Carnivora</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Carnivora</td><td>Loud scream</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Carnivora</td><td>Rapid chattering chirp</td></tr>
+            <tr><td>69</td><td>Striped Skunk</td><td>Mephitidae</td><td>Carnivora</td><td>Warning foot-stamp / hiss</td></tr>
+            <tr><td>70</td><td>Raccoon</td><td>Procyonidae</td><td>Carnivora</td><td>Churring / chittering</td></tr>
+            <tr><td>71</td><td>Red Fox</td><td>Canidae</td><td>Carnivora</td><td>Sharp bark / scream</td></tr>
+            <tr><td>72</td><td>Opossum</td><td>Didelphidae</td><td>Didelphimorphia</td><td>Low hiss / click</td></tr>
+            <tr><td>73</td><td>Snowshoe Hare</td><td>Leporidae</td><td>Lagomorpha</td><td>Foot thump / squeal</td></tr>
+            <tr><td>74</td><td>American Pika</td><td>Ochotonidae</td><td>Lagomorpha</td><td>High &ldquo;eenk&rdquo; bark</td></tr>
+            <tr><td>75</td><td>Yellow-bellied Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Sharp chirp</td></tr>
+            <tr><td>76</td><td>Hoary Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Loud whistle</td></tr>
+            <tr><td>77</td><td>Olympic Marmot</td><td>Sciuridae</td><td>Rodentia</td><td>Multi-note whistle</td></tr>
+            <tr><td>78</td><td>Townsend&rsquo;s Gnd Squirrel</td><td>Sciuridae</td><td>Rodentia</td><td>Chirping trill</td></tr>
+            <tr><td><strong>79</strong></td><td><strong>Golden-mantled Gnd Sq</strong></td><td><strong>Sciuridae</strong></td><td><strong>Rodentia</strong></td><td><strong>Sharp chip</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Nineteen degrees in the mammalian zone (61&ndash;79). Eighteen mammalian entries. Sixteen species. <strong>Sciuridae quintet (75&ndash;79) matches Mustelidae quintet (63&ndash;67) and Swallow quintet (26&ndash;30)</strong> &mdash; three-way tie for longest family run.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon quintet">Q</div>
+            <div class="theory-content">
+              <h4>Sciuridae Quintet (75&ndash;79) &mdash; Three-Way Tie</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Five consecutive Sciuridae. Matches Mustelidae (63&ndash;67) and Swallows (26&ndash;30). Three quintets. Longest run tied.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon chip">C</div>
+            <div class="theory-content">
+              <h4>Sharp Chip Alarm &mdash; 80th Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Single sharp chip. 4,000&ndash;9,000 Hz. E=4. Percussive, emphatic. Repeated at intervals. Cuts through forest sound.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon forest">F</div>
+            <div class="theory-content">
+              <h4>Forest Edge Habitat &mdash; Returns from Grassland</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Forest edge, rocky clearings, open coniferous forest. 1,000&ndash;3,500 m. Returns from pure grassland (78).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon confuse">!</div>
+            <div class="theory-content">
+              <h4>Not a Chipmunk &mdash; No Facial Stripes</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Often confused with chipmunks. Key: no facial stripes. Larger (170&ndash;300 g vs. 30&ndash;70 g). Golden mantle.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon predator">P</div>
+            <div class="theory-content">
+              <h4>Forest Edge Predator-Prey</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Hunted by marten (65), fox (71), weasels (67&ndash;68). Forest edge brings marten connection.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon marchant-link">M</div>
+            <div class="theory-content">
+              <h4>The Jesse Marchant Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both solitary. Both at the edge. Both often miscategorized. Three dimensions of parallel.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-078: Townsend&rsquo;s Ground Squirrel</strong>
+            <p>Sciuridae quintet. Ground squirrel to ground squirrel. Grassland (78) to forest edge (79). Trill vs. chip.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-075/076/077: Marmots</strong>
+            <p>Sciuridae quintet (75&ndash;79). Three marmots + two ground squirrels. Five acoustic signatures. Five habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-067: Short-tailed Weasel</strong>
+            <p>Forest edge shared. Predator-prey. The weasel hunts ground squirrels at forest edges.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-071: Red Fox</strong>
+            <p>Predator-prey. Fox hunts ground squirrels. Forest edge and meadow margins overlap.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>Canopy-to-ground predator-prey. Marten descends from conifer canopy to hunt ground squirrels at forest edge.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Golden-mantled Ground Squirrel (<em>Callospermophilus lateralis</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Golden-mantled ground squirrel.&rdquo;</li>
+          <li>[3] Bartels, M.A. &amp; Thompson, D.P. (1993). &ldquo;Spermophilus lateralis.&rdquo; <em>Mammalian Species</em> No. 440.</li>
+          <li>[4] Verts, B.J. &amp; Carraway, L.N. (1998). <em>Land Mammals of Oregon.</em> UC Press.</li>
+          <li>[5] Engine internal analysis &mdash; structural event tracking.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">79&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Sharp chip alarm. Percussive.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sciuridae</div>
+          <div class="stat-detail">FIFTH consecutive (75&ndash;79).</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">Sixth Rodentia in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elevation</div>
+          <div class="stat-value">1,000&ndash;3,500 m</div>
+          <div class="stat-detail">Forest edge, rocky clearings.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">170&ndash;300 g</div>
+          <div class="stat-detail">Larger than chipmunks.</div>
+        </div>
+
+        <h3>Behavior</h3>
+        <div class="stat-card">
+          <div class="stat-label">Hibernation</div>
+          <div class="stat-value">5&ndash;7 months</div>
+          <div class="stat-detail">True hibernator. Caches food.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Social</div>
+          <div class="stat-value">Loosely aggregated</div>
+          <div class="stat-detail">Less colonial than Townsend&rsquo;s.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Forest edge</div>
+          <div class="stat-detail">Open coniferous forest, clearings.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Mammalian Entry</div>
+          <div class="stat-value">18th</div>
+          <div class="stat-detail">16th species. 9 families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sciuridae Run</div>
+          <div class="stat-value">5 consecutive</div>
+          <div class="stat-detail">75&ndash;79. Ties Mustelidae &amp; Swallows.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat Shift</div>
+          <div class="stat-value">Grassland &rarr; Forest edge</div>
+          <div class="stat-detail">Returns to forest interface.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (19th)</div>
+          <div class="stat-detail">No substitution.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

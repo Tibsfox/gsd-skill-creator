@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 299&deg; &mdash; Love Battery (return) &mdash; E=6 &mdash; Punk/Psych &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #CE93D8; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4A148C; font-family: system-ui, sans-serif; border-bottom: 1px solid #F3E5F5; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F9F0FF; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: #4A148C; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #4A148C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .return-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #263238; color: #B0BEC5; border: 1px solid #37474F; margin-left: 0.3rem; }
+    .third-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #E65100; color: #FFE0B2; border: 1px solid #BF360C; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CE93D8; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CE93D8; border-left: 4px solid #6A1B9A; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #F3E5F5; color: #4A148C; }
+    .theory-card .level.intermediate { background: #E8F5E9; color: #1B5E20; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #6A1B9A; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #6A1B9A; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+    .third-appearance-banner { background: linear-gradient(135deg, #4A148C, #6A1B9A); border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .third-appearance-banner strong { color: #CE93D8; }
+    .approach-banner { background: linear-gradient(135deg, #E65100, #BF360C); border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .approach-banner strong { color: #FFCC80; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: #6A1B9A;">Seattle 360</a> &rsaquo; <a href="../" style="color: #6A1B9A;">Releases</a> &rsaquo; <span>299 &mdash; Love Battery return (E=6)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">299&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #4A148C;">Love Battery</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Punk/Psych</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="return-badge">3rd appearance &mdash; 221, 233, 299</span>
+          <span class="third-badge">One degree to 5/6 mark</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="third-appearance-banner">
+          <strong>THIRD APPEARANCE &mdash; GENRE REFRAME.</strong> Love Battery returns at degree 299 as Punk/Psych &mdash; not Psychedelic Rock. The accumulated engine context reveals the punk skeleton underneath the psychedelic surface. Ron Nine's fuzz guitar is not just textural decoration; it moves with punk directness. E=6 is the correct energy for the third view. The Stooges are in the DNA alongside the psychedelic tradition.
+        </div>
+
+        <div class="approach-banner">
+          <strong>ONE DEGREE FROM THE FIVE-SIXTHS MARK.</strong> 299/360 = 83.1%. Degree 300 = 83.3% = five-sixths. Love Battery at degree 299 is the penultimate entry in the return cluster. Sub Pop carries the engine to the milestone: Love Battery (299) then Pond (300).
+        </div>
+
+        <h2>Three Views of One Band</h2>
+        <p>Love Battery has now appeared in the engine at degrees 221, 233, and 299 &mdash; a span of seventy-eight degrees. Each appearance adds a layer:</p>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Degree 221 &mdash; Psychedelic Rock, E=5</h4>
+            <span class="level intermediate">First appearance</span>
+            <p>Foundation entry. Ron Nine's fuzz as texture. U-District enters the engine. Sub Pop's psychedelic wing. Jason Finn in two bands simultaneously.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Degree 233 &mdash; Psych Rock return, E=5</h4>
+            <span class="level intermediate">Second appearance</span>
+            <p>Deepens Sub Pop context. Psychedelic-grunge overlap. The genre classification holds at E=5. More catalog documentation.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Degree 299 &mdash; Punk/Psych, E=6</h4>
+            <span class="level advanced">Third appearance</span>
+            <p>Genre reframe. The punk skeleton revealed. E=6 escalation. Later catalog (<em>Far Gone</em>, <em>Confusion Au Go-Go</em>) reread through the Stooges inheritance. The synthesis complete.</p>
+          </div>
+        </div>
+
+        <blockquote>"The fuzz guitar in Love Battery is not purely a psychedelic tool. It has punk roots: the Stooges' <em>Fun House</em>, direct and overwhelming, not the dreamy remove of purely psychedelic music. Ron Nine draws from both. The synthesis produces Punk/Psych."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Punk/Psych &mdash; The Genre Synthesis</h2>
+        <p>Punk and psychedelia share 1960s roots that lead to the same place through different routes. Psychedelia found that heavy amplification and studio experimentation could produce intensity through immersion. Punk found that directness and maximum energy at minimum complexity could produce intensity through impact. Love Battery sits in the overlap: fuzz and reverb used with punk directness, songs short enough for punk economy but dense enough for psychedelic weight.</p>
+        <p>The canonical reference: the Stooges' <em>Fun House</em> (1970). Saxophone freakouts, distorted guitar, physical performance energy &mdash; punk and psychedelia synthesized before either category was fully named. Love Battery filters this inheritance through the Sub Pop 1990 context and U-District geography. The connection is direct.</p>
+
+        <hr class="section-divider">
+
+        <h2>Sub Pop Cluster: 299&ndash;300</h2>
+        <p>Degrees 297-298 were the C/Z Records double-return (Skin Yard, Treepeople). Degrees 299-300 are the Sub Pop double-return (Love Battery, Pond). The infrastructure transition mirrors the historical one: C/Z documented the 1985-1993 Seattle heavy underground; Sub Pop carried the commercial moment forward from 1988 onward. The engine follows the same arc as the history it documents.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">221</span> Love Battery first appearance &mdash; E=5, Psychedelic Rock. U-District enters. Sub Pop psychedelic wing. First Accipitridae pair.</li>
+          <li><span class="ref-degree">233</span> Love Battery second appearance &mdash; E=5, Psych Rock. Sub Pop context deepened.</li>
+          <li><span class="ref-degree">300</span> Pond return &mdash; five-sixths mark. Sub Pop cluster closes. E=6 held through both 299-300.</li>
+          <li><span class="ref-degree">297</span> Skin Yard return &mdash; C/Z closes. Proto-grunge. Infrastructure transition to Sub Pop at 299.</li>
+          <li><span class="ref-degree">298</span> Treepeople return &mdash; C/Z closes. Post-hardcore. Energy E=8 at adjacent degree.</li>
+          <li><span class="ref-degree">SPS 299</span> Great Horned Owl territorial war &mdash; E=6. Multi-night hooting battle. E=6 + E=6 = E=12. Sub Pop psych meets the great owl.</li>
+          <li><span class="ref-degree">future</span> Jason Finn / PUSA &mdash; established at degree 221. Future PUSA entry will reference Love Battery.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">299 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">6 (from E=5)</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Punk/Psych</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1989&ndash;1996</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">U-District</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Appearances</span><span class="stat-value">3 (221, 233, 299)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Ron Nine</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Kevin Whitworth</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Jim White</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Jason Finn</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">83.1%</span></div>
+          <div class="stat-row"><span class="stat-label">To 5/6 mark</span><span class="stat-value">1 degree</span></div>
+          <div class="stat-row"><span class="stat-label">Cluster</span><span class="stat-value">Sub Pop 299&ndash;300</span></div>
+          <div class="stat-row"><span class="stat-label">Return cluster</span><span class="stat-value">3 of 4 done</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Influences Cited</h4>
+          <div class="stat-row"><span class="stat-label">Primary</span><span class="stat-value">The Stooges</span></div>
+          <div class="stat-row"><span class="stat-label">Psych side</span><span class="stat-value">Spacemen 3</span></div>
+          <div class="stat-row"><span class="stat-label">Blues root</span><span class="stat-value">Blue Cheer</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Great Horned Owl</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

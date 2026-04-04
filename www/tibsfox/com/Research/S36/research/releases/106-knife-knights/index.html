@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 106&deg; &mdash; Knife Knights &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider { border: none; border-top: 2px solid #E8EAF6; margin: 2.5rem 0; }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #1A237E; font-family: system-ui, sans-serif; }
+    .theory-card .level {
+      display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: var(--seattle-navy); min-width: 3rem; display: inline-block; }
+
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white; padding: 1rem 1.5rem; border-radius: 6px; margin-bottom: 2rem; font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 { margin: 0 0 0.3rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .triangle-banner p { margin: 0; font-size: 0.88rem; line-height: 1.5; opacity: 0.9; }
+
+    .web-card {
+      background: #F3E5F5; border: 1px solid #CE93D8; border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0;
+    }
+    .web-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .web-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #4A148C; }
+
+    .synth-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 30%, #7B1FA2 60%, #9C27B0 100%);
+      border: 2px solid #4A148C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F3E5F5;
+    }
+    .synth-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E1BEE7; font-family: system-ui, sans-serif; }
+    .synth-card p { color: #F3E5F5; margin: 0.5rem 0; }
+    .synth-card strong { color: #F8BBD0; }
+
+    .hiphop-card {
+      background: linear-gradient(135deg, #212121 0%, #333333 30%, #424242 60%, #616161 100%);
+      border: 2px solid #212121; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #EEEEEE;
+    }
+    .hiphop-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #E0E0E0; font-family: system-ui, sans-serif; }
+    .hiphop-card p { color: #EEEEEE; margin: 0.5rem 0; }
+    .hiphop-card strong { color: #BDBDBD; }
+
+    .subpop-card {
+      background: linear-gradient(135deg, #B71C1C 0%, #C62828 30%, #D32F2F 60%, #E53935 100%);
+      border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2;
+    }
+    .subpop-card h4 { margin: 0 0 0.3rem; font-size: 1.1rem; color: #FFEBEE; font-family: system-ui, sans-serif; }
+    .subpop-card p { color: #FFCDD2; margin: 0.5rem 0; }
+    .subpop-card strong { color: #FFEBEE; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>106 &mdash; Knife Knights</span>
+    </nav>
+
+    <div class="triangle-banner">
+      <h3>Experimental Hip-Hop &mdash; Genre Stage 88 &mdash; E=4 &mdash; First Hip-Hop Entry</h3>
+      <p>
+        <strong>Knife Knights</strong> &mdash; the duo of <strong>Ishmael Butler</strong> (Shabazz Palaces, Digable Planets)
+        and <strong>Erik Blood</strong> (degree 94). <strong>FIRST HIP-HOP ENTRY</strong> in the engine.
+        Experimental Hip-Hop at Genre Stage 88. E=4. Sub Pop Records. Seattle.
+        Acoustic element 107. Pattern 107.
+        <strong>Sixth Sub Pop artist.</strong> Erik Blood&rsquo;s second appearance connects degrees 94 and 106.
+      </p>
+    </div>
+
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">106&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Knife Knights</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Experimental Hip-Hop</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Genre Stage 88</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="hiphop-card">
+          <h4>First Hip-Hop &mdash; 106 Degrees to Get Here</h4>
+          <p>
+            Knife Knights is the <strong>FIRST HIP-HOP ENTRY</strong> in the Seattle 360 engine.
+            One hundred six degrees of rock, electronic, folk, pop, noise, ambient, and experimental
+            music before hip-hop arrives. And when it arrives, it arrives as
+            <strong>experimental hip-hop</strong> &mdash; not mainstream, not commercial,
+            but the avant-garde edge of the form. Ishmael Butler brings the lineage:
+            <strong>Digable Planets</strong> (Grammy, 1994), <strong>Shabazz Palaces</strong>
+            (Sub Pop), and now Knife Knights. Hip-hop enters the engine through its
+            <strong>most experimental door</strong>.
+          </p>
+        </div>
+
+        <div class="synth-card">
+          <h4>The Beat Architecture &mdash; Where Hip-Hop Meets Electronic Experiment</h4>
+          <p>
+            The <strong>beat architecture</strong> is the 107th acoustic element.
+            It describes the quality produced when hip-hop&rsquo;s rhythmic foundation
+            is deconstructed and rebuilt through experimental electronic production &mdash;
+            when the beat is not a groove to ride but a <strong>structure to inhabit</strong>.
+            Ishmael Butler&rsquo;s voice operates within Erik Blood&rsquo;s electronic
+            landscapes. The <strong>beat is architecture, not accompaniment</strong>.
+          </p>
+        </div>
+
+        <div class="subpop-card">
+          <h4>Sub Pop Records &mdash; Sixth Sub Pop Artist in the Engine</h4>
+          <p>
+            Knife Knights on <strong>Sub Pop Records</strong> &mdash; the sixth Sub Pop artist
+            in the Seattle 360 engine. Sub Pop&rsquo;s signing of Shabazz Palaces and by
+            extension Knife Knights represents the label&rsquo;s evolution from grunge-era
+            rock to a broader experimental palette. The same label that launched Nirvana
+            now releases experimental hip-hop. <strong>Sub Pop as evolutionary document.</strong>
+          </p>
+        </div>
+
+        <div class="web-card">
+          <h4>Engine Events: Genre Stage 88 &middot; Experimental Hip-Hop &middot; E=4 &middot; 107th Acoustic Element &middot; 107th Pattern &middot; First Hip-Hop &middot; Erik Blood Connection</h4>
+          <p>
+            <strong>Knife Knights</strong> at Genre Stage 88. <strong>E=4</strong>.
+            Experimental Hip-Hop. First hip-hop entry in the engine.
+            Sub Pop Records. Sixth Sub Pop artist. Erik Blood (degree 94) connects
+            degrees 94 and 106. Ishmael Butler brings the Digable Planets/Shabazz
+            Palaces lineage. The electronic era continues.
+          </p>
+        </div>
+
+        <section>
+          <h2>Genre Stage 88: Experimental Hip-Hop</h2>
+          <p>
+            Degree 106 reaches <strong>Genre Stage 88</strong>. <strong>Experimental Hip-Hop</strong>
+            is a new genre in the engine &mdash; the first time hip-hop appears in any form.
+            The experimental qualifier is essential: Knife Knights is not mainstream hip-hop
+            but the <strong>avant-garde edge</strong>, where hip-hop&rsquo;s rhythmic and
+            vocal traditions meet electronic experimentation.
+          </p>
+          <p>
+            Distinguished from <strong>Erik Blood</strong> (degree 94, Electronic/Experimental) &mdash;
+            Blood&rsquo;s solo work is atmospheric electronic without hip-hop&rsquo;s vocal
+            and rhythmic conventions. Knife Knights adds Ishmael Butler&rsquo;s hip-hop
+            voice and flow to Blood&rsquo;s electronic production.
+          </p>
+          <p>
+            Distinguished from <strong>Chong the Nomad</strong> (degree 44, Electronic/Hip-Hop-adjacent) &mdash;
+            Chong&rsquo;s beat-driven production is more accessible and pop-inflected.
+            Knife Knights is more abrasive, more experimental, more deconstructed.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Acoustic Element 107: The Beat Architecture</h2>
+          <p>
+            The <strong>beat architecture</strong> is the one hundred seventh acoustic element.
+            It describes the quality produced when hip-hop&rsquo;s rhythmic foundation is
+            deconstructed and rebuilt through experimental electronic production &mdash;
+            when the beat becomes a spatial structure rather than a temporal groove.
+          </p>
+          <p>
+            Contrast with the <strong>theatrical circuit</strong> (degree 105, Parenthetical Girls electronic) &mdash;
+            the theatrical circuit rebuilds chamber music in electronic form. The beat architecture
+            rebuilds hip-hop in electronic form. Different source traditions, same electronic
+            reconstruction methodology. Contrast with the <strong>producer&rsquo;s atmosphere</strong>
+            (degree 94, Erik Blood) &mdash; Blood&rsquo;s solo work is atmospheric electronic
+            without hip-hop structure. Knife Knights adds hip-hop&rsquo;s voice and beat to
+            the atmosphere.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Pattern 107: The Genre Gateway</h2>
+          <p>
+            The <strong>genre gateway</strong> is the 107th artist-city pattern.
+            It describes the pattern where an entirely new genre enters the engine
+            through its experimental edge rather than its mainstream center.
+            Hip-hop arrives at degree 106 &mdash; not as commercial rap, but as
+            <strong>experimental hip-hop</strong> on Sub Pop. The engine&rsquo;s first
+            hip-hop entry is its most experimental variant. The gateway
+            opens at the <strong>avant-garde</strong>.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">S36-094</span> Erik Blood &mdash; MEMBER! Erik Blood is half of Knife Knights. Degree 94 (Electronic/Experimental, solo) connects to degree 106 (Experimental Hip-Hop, duo with Ishmael Butler). Blood produces; Butler voices. The studio-as-instrument becomes hip-hop stage.</li>
+            <li><span class="ref-degree">S36-044</span> Chong the Nomad &mdash; Hip-Hop/Electronic territory. Chong&rsquo;s beat-driven production is more accessible and pop-inflected. Knife Knights is more abrasive and experimental. Two approaches to the hip-hop/electronic intersection.</li>
+            <li><span class="ref-degree">S36-083</span> Pearl Jam &mdash; 1990s Seattle. Pearl Jam represents Seattle&rsquo;s rock identity. Knife Knights represents Seattle&rsquo;s hip-hop identity. Two faces of the same city, decades apart.</li>
+            <li><span class="ref-degree">S36-036</span> Jimi Hendrix &mdash; Black Seattle music lineage. Hendrix pioneered Black innovation in Seattle music (1960s). Ishmael Butler continues the lineage (1990s-present). Digable Planets, Shabazz Palaces, Knife Knights. The through-line of Black artistic innovation in Seattle.</li>
+            <li><span class="ref-degree">S36-091</span> Hovercraft &mdash; Sub Pop/Experimental. Both on Sub Pop. Both experimental. Hovercraft is noise/drone; Knife Knights is experimental hip-hop. Sub Pop&rsquo;s experimental range: from noise to hip-hop.</li>
+          </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Theory Nodes</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Beat Architecture</h4>
+              <div class="level advanced">Advanced</div>
+              <p>107th acoustic element. Hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production. The beat is architecture, not accompaniment.</p>
+            </div>
+            <div class="theory-card">
+              <h4>The Genre Gateway</h4>
+              <div class="level advanced">Advanced</div>
+              <p>107th artist-city pattern. An entirely new genre enters the engine through its experimental edge rather than its mainstream center. Hip-hop arrives avant-garde.</p>
+            </div>
+            <div class="theory-card">
+              <h4>Experimental Hip-Hop &mdash; Genre Stage 88</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>FIRST HIP-HOP in the engine. Experimental variant. Ishmael Butler (Digable Planets, Shabazz Palaces) + Erik Blood (degree 94). Sub Pop Records. Seattle.</p>
+            </div>
+            <div class="theory-card">
+              <h4>E=4 &mdash; Experimental Hip-Hop Energy</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>E=4 at degree 106. Moderate-high energy. The experimental hip-hop energy -- rhythmic intensity combined with atmospheric electronic textures. Not maximum aggression; controlled experimentation.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">106</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">88</span></div>
+          <div class="stat-row"><span class="stat-label">Acoustic Element</span><span class="stat-value">107</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">107</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Artist Data</h4>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Knife Knights</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Exp. Hip-Hop</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 4</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sub Pop</span></div>
+          <div class="stat-row"><span class="stat-label">Members</span><span class="stat-value">Butler + Blood</span></div>
+          <div class="stat-row"><span class="stat-label">First Hip-Hop</span><span class="stat-value">Yes</span></div>
+          <div class="stat-row"><span class="stat-label">Sub Pop #</span><span class="stat-value">6th</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

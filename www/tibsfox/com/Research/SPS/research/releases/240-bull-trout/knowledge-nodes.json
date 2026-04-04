@@ -1,0 +1,62 @@
+{
+  "degree": 240, "species": "Bull Trout", "slug": "240-bull-trout", "sound_type": "silent / water sound", "energy": 2,
+  "scientific_name": "Salvelinus confluentus",
+  "common_names": ["Bull Trout", "formerly confused with Dolly Varden"],
+  "family": "Salmonidae",
+  "genus": "Salvelinus (chars -- not Oncorhynchus true Pacific salmon)",
+  "ecosystem": "cold clear stream, mountain river, lake; coldest freshwater habitats in PNW",
+  "season": "resident (non-migratory populations year-round); fluvial fish move to tributaries late summer to spawn",
+  "taxonomy": {
+    "order": "Salmoniformes",
+    "family": "Salmonidae",
+    "genus": "Salvelinus",
+    "species": "S. confluentus",
+    "note": "Char, not true salmon. Genus Salvelinus (with Brook Trout, Lake Trout, Arctic Char, Dolly Varden). Separated from Dolly Varden as distinct species in 1980. Fifth and final Salmonidae chapter entry (236-240)."
+  },
+  "biology": {
+    "size": "0.5-2 kg (headwater populations); up to 8-10+ kg (large migratory fish)",
+    "coloration": "Dark olive-green to gray background with pale yellow, orange, red spots (no black spots -- char diagnostic character)",
+    "behavior": "Ambush predator; sit-and-wait; motionless in pools and undercut banks. Piscivorous (fish-eating) in larger size classes.",
+    "habitat_requirements": ["Water temp below 12-14C foraging, below 9C spawning", "Low sediment (clean spawning gravel)", "Connected cold-water patches (no barriers)", "Perennial cold flow"],
+    "dolly_varden_confusion": "Named 'Dolly Varden' throughout PNW until 1980 species separation"
+  },
+  "sound_profile": {
+    "type": "near-silence; physical water sound of habitat",
+    "description": "Bull Trout makes almost no detectable sound. The 'sound' is the cold mountain stream habitat: soft riffle over cobble, pool eddy. E=2: the water makes more sound than the fish. Ambush predator behavior reinforces silence.",
+    "energy_note": "E=2 -- lowest in Salmonidae chapter. One of the lowest acoustic profiles in the entire SPS engine."
+  },
+  "indicator_role": {
+    "significance": "Bull Trout presence = pristine cold water. If Bull Trout are present and reproducing: water is cold enough, clean enough, connected, adequately flowed, and undisturbed. Multi-parameter habitat quality certificate.",
+    "absence_interpretation": "Historical absence where Bull Trout should occur = one or more critical habitat parameters has failed."
+  },
+  "conservation": {
+    "esa_status": "Threatened -- entire US range (listed 1998)",
+    "us_states": ["Washington", "Oregon", "Idaho", "Nevada", "Montana"],
+    "threats": ["Climate warming (cold streams contracting upward)", "Habitat fragmentation (dams, culverts)", "Sediment (logging, road building)", "Brook Trout hybridization and competition", "Historic overfishing"],
+    "washington_populations": ["North Cascades (Methow, Okanogan, upper Columbia)", "Olympic Peninsula cold streams"],
+    "recovery": "Dam removal, culvert replacement, Brook Trout eradication, land use regulation"
+  },
+  "brook_trout_threat": {
+    "species": "Salvelinus fontinalis (Brook Trout) -- non-native eastern char widely introduced in West",
+    "threat": "Hybridizes with Bull Trout (infertile offspring), outcompetes in slightly warmer water. One of most insidious Bull Trout threats.",
+    "management": "Brook Trout eradication programs using piscicides (rotenone) in some headwater systems"
+  },
+  "salmonidae_chapter": {
+    "position": "5 of 5 (final entry)",
+    "energy_arc": "236 E=5 (genus overview) -> 237 E=6 (Chinook) -> 238 E=6 (Coho) -> 239 E=5 (Steelhead) -> 240 E=2 (Bull Trout). Rise then descent to silence.",
+    "taxonomic_range": "True Pacific salmon (236-238), anadromous trout (239), char (240)"
+  },
+  "theory_nodes": [
+    { "concept": "Bull Trout E=2: near-silent ambush predator in cold mountain pools. The 'sound' is the habitat: cold clear stream riffle. Lowest acoustic profile in Salmonidae chapter. Silence as indicator of pristine habitat -- the quietest water is the best water.", "level": "advanced", "department": "acoustics", "description": "Bull Trout as the chapter's acoustic conclusion: silence." },
+    { "concept": "Indicator species logic: Bull Trout presence = cold enough (<12-14C), clean enough (low sediment), connected, and undisturbed. Single species as habitat health certificate. Absence where historically present = habitat failure.", "level": "milestone", "department": "ecology", "description": "Bull Trout as multi-parameter cold-water habitat indicator." },
+    { "concept": "TWO-THIRDS MARK (240/360 = 66.7%): The Salmonidae chapter closes in silence at the engine's structural milestone. 240 SPS species and 240 S36 artists documented. 120 degrees remain. The silent fish holds the milestone.", "level": "milestone", "department": "engine-structure", "description": "Bull Trout at the two-thirds mark: silence closes the chapter." },
+    { "concept": "Salvelinus confluentus -- char, not salmon. Genus Salvelinus (Brook Trout, Lake Trout, Arctic Char, Dolly Varden). Light spots on dark background (reverse of Oncorhynchus). Separated from Dolly Varden 1980. The engine now holds the full taxonomic range of Salmonidae: Oncorhynchus (237-239) and Salvelinus (240).", "level": "advanced", "department": "taxonomy", "description": "Char taxonomy and its distinction from true salmon in the Salmonidae family." }
+  ],
+  "cross_references": [
+    {"degree": 236, "species": "Pacific Salmon overview", "relationship": "Salmonidae chapter opens at 236 with maximum diversity (5 species). Closes at 240 with the char. The chapter arc is complete."},
+    {"degree": 239, "species": "Steelhead leap", "relationship": "Previous Salmonidae species. Steelhead E=5; Bull Trout E=2. The chapter's sharpest energy drop. Steelhead = ocean traveler; Bull Trout = cold mountain pool permanent resident."}
+  ],
+  "s36_pair": {"degree": 240, "artist": "Paul Revere and the Raiders", "pairing_note": "TWO-THIRDS MARK. E=6 (theatrical garage rock) + E=2 (silent cold-water char) = E=8. Most dramatic S36-SPS contrast in 237-240 run. The Raiders wear Revolutionary War costumes and play organ-driven garage rock; the Bull Trout hides motionless in cold dark water. The loud and the silent at the milestone."},
+  "milestones": ["TWO-THIRDS MARK -- 240/360 = 66.7%", "Salmonidae chapter closes", "First char (Salvelinus) in engine", "Lowest-energy Salmonidae entry (E=2)"],
+  "tags": ["salmonidae", "char", "salvelinus", "bull-trout", "cold-water-indicator", "near-silence", "esa-threatened", "two-thirds-mark", "brook-trout-threat", "habitat-connectivity", "north-cascades", "olympic-peninsula", "1998-listing", "climate-sensitive"]
+}

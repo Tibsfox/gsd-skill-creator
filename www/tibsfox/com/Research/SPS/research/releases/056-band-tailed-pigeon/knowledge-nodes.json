@@ -1,0 +1,189 @@
+{
+  "degree": 56,
+  "species": "Band-tailed Pigeon",
+  "scientific_name": "Patagioenas fasciata",
+  "slug": "056-band-tailed-pigeon",
+  "sound_type": "soft owl-like cooing -- deep, low, resonant whooo-whooo",
+  "energy": 1,
+  "ecosystem": "mature mixed conifer and hardwood forests / oak woodlands / fruiting trees / mineral springs",
+  "season": "resident (year-round in PNW, some altitudinal migration)",
+  "family": "Columbidae",
+  "order": "Columbiformes",
+  "csv_substitution": {
+    "original_species": "Ensatina",
+    "original_scientific_name": "Ensatina eschscholtzii",
+    "reason": "SPS Part B engine is birds-and-mammals only. Band-tailed Pigeon replaces Ensatina, preserving the original's moist forest habitat association and E=1 quiet energy signature. The Ensatina is a lungless salamander of the moist forest floor -- secretive, quiet (soft squeak if handled, E=1), year-round in Pacific Northwest forests under logs and leaf litter. The Band-tailed Pigeon occupies the canopy of the same mature mixed forests, producing a deep, soft, owl-like cooing (E=1). Both are year-round residents of moist Pacific Northwest forests. Both are quiet. Twelfth consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54, Oregon Slender Salamander at 55, Ensatina at 56). The engine continues through the plethodontid heartland of the original CSV's amphibian belt.",
+    "preserved": ["moist forest habitat", "year-round resident status", "E=1 quiet energy"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Band-tailed Pigeons are year-round residents of mature mixed forests throughout western Washington, found from the Puget lowlands to mid-elevation in the Cascades and Olympics. Concentrated near food sources (acorn groves, fruiting trees) and mineral springs. The only native pigeon in PNW forests -- not the urban Rock Pigeon. Southern BC through WA/OR west of Cascades."
+  },
+  "taxonomy_note": {
+    "description": "Band-tailed Pigeon is the 1st COLUMBIDAE in the engine -- the 23rd family. NEW ORDER Columbiformes enters as the 6th order. First pigeon or dove in the engine. Patagioenas from Greek patageo (to clatter) + oinas (pigeon) = 'clattering pigeon.' fasciata from Latin fascia (band, stripe) = 'banded.' The genus was split from Columba based on molecular phylogenetics. Approximately 17 species in Patagioenas, all in the Americas. PASSERIFORMES INTERRUPTED AGAIN -- second time in three degrees (54 Piciformes, 55 Passeriformes, 56 Columbiformes).",
+    "current_family": "Columbidae",
+    "new_family": true,
+    "family_count_in_engine": 23,
+    "columbidae_count_in_engine": 1,
+    "name_etymology": "Patagioenas = Ancient Greek patageo (to clatter, to crash, to make a noise) + oinas (pigeon, dove). fasciata = Latin fascia (band, stripe, sash). Full translation: 'Banded clattering-pigeon.' Named by Thomas Say in 1823. Genus split from Columba by Reichenbach in 1853, elevated to genus rank based on molecular phylogenetics.",
+    "genus_note": "Patagioenas is new to the engine at degree 56. Contains approximately 17 New World pigeon species. The genus was formerly placed within Columba (Old World pigeons) but split based on molecular evidence. The Band-tailed Pigeon is the only Patagioenas species regularly occurring in the Pacific Northwest.",
+    "order_note": "Columbiformes enters the engine at degree 56 as the 6th order. First new order since Apodiformes at degree 35 -- a 21-degree gap without a new order, now broken. Columbiformes is an ancient order comprising a single family (Columbidae) with approximately 350 species worldwide. Passeriformes is interrupted for the second time in three degrees: 54 (Piciformes), 55 (Passeriformes resumes), 56 (Columbiformes). After degree 56: 49 of 57 entries (86.0%) are Passeriformes.",
+    "family_position": "Columbidae enters as the 23rd family at degree 56. The first pigeon or dove in the engine. Brings a fundamentally new acoustic signature (cooing), a new body plan (large-bodied frugivore at 240-390 g), and a new ecological niche (canopy frugivore and seed disperser). The last new family was Corvidae at degree 53, making this a 3-degree gap between new families."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "300-800",
+    "peak_energy_band_hz": "400-600",
+    "song_frequency_hz": "Primary coo: 300-800 Hz, fundamental 400-600 Hz. Coo series: 300-800 Hz over 3-10 seconds. Wing clap: broadband impulse. Distress call: 500-2,000 Hz.",
+    "song_duration_s": "Individual coo notes ~0.5-1.0 seconds. Coo series 2-6 repetitions over ~3-10 seconds with 1-3 second pauses between notes.",
+    "note_structure": "DEEP OWL-LIKE COOING: Low, resonant 'whooo-whooo' or 'coo-coo-coo' -- two to three deep, breathy notes in a slow, measured cadence. The quality is owl-like: deep, soft, hollow, resonant. Does not sound like a city pigeon. Sounds ancient and arboreal.",
+    "note_types": "LIMITED vocalization types. Primary coo (advertising/contact), coo series (pair bond/territory), wing clap (alarm/display), distress call (alarm). No learned repertoire -- vocalizations are innate. Dramatically simpler vocal repertoire than the Passeriformes-dominated engine.",
+    "phrase_structure": "Coo bouts of 2-6 repetitions from concealed canopy perch. Each note a discrete 0.5-1.0 second coo with 1-3 second pauses between notes. Simple, repetitive, measured cadence. No complex phrase structure -- pure repetition of a single coo type.",
+    "timbre": "Deep. Soft. Hollow. Resonant. Breathy. Woodwind quality -- closer to a blown bottle or soft bassoon note than to the bright, thin reed tones of passerine song. The large body size (240-390 g) and inflatable crop contribute to the resonance. Unlike anything else in the engine.",
+    "amplitude": "E=1 -- very quiet energy. The cooing carries through forest but does not project loudly. A sound noticed when the forest is quiet. The softest voice in the recent progression. Drops from E=3 (degree 55, Bewick's Wren) to E=1 -- a two-step energy decrease.",
+    "tempo": "Slow. Measured. 2-6 coo repetitions with 1-3 second pauses between notes. No rapid delivery. No trills, no cascades, no variable tempo. The slowest, most deliberate vocalization rhythm in the engine.",
+    "context": "Males coo primarily during breeding season (March-September) but also year-round. Cooing serves as advertising, mate attraction, and low-intensity territorial signaling. Delivered from concealed perch in canopy -- heard but rarely seen. Morning and evening peaks.",
+    "regional_variation": "MINIMAL geographic variation in cooing. Unlike the Bewick's Wren (degree 55) with its strong geographic dialects from cultural learning, the Band-tailed Pigeon's coo is innate and shows little regional variation. The coo is species-typical, not individually or regionally distinctive.",
+    "key_property": "THE FOREST COO -- the 57th acoustic element (species side). A deep, soft, owl-like cooing in the 400-600 Hz fundamental range, resonating from inside the canopy of mature mixed forest. Named 'the forest coo' for three resonances: (1) the habitat -- this pigeon coos from inside the forest canopy, the same mature forest that hosts the Pacific Wren, Brown Creeper, and Red-breasted Sapsucker; (2) the acoustic novelty -- a coo, not a song, not a call, not a drum. A fundamentally new vocalization type entering the engine; (3) the frequency register -- the lowest-frequency vocalization in the engine, an order of magnitude below the passerine chorus. The engine's acoustic palette extends into the bass register."
+  },
+  "plumage": {
+    "overall": "Large, handsome gray pigeon. Blue-gray to purple-gray overall. White nape crescent and iridescent bronze-green hindneck are the diagnostic marks. Yellow bill with dark tip. Pale gray terminal tail band. Larger and more colorful than Rock Pigeon.",
+    "diagnostic_mark": "WHITE NAPE CRESCENT + IRIDESCENT BRONZE-GREEN HINDNECK -- the Band-tailed Pigeon's two signature marks. A narrow white crescent crossing the back of the neck, bordered below by an area of iridescent bronze-green to bronze-purple structural coloration. Visible at moderate range.",
+    "upperparts": "Blue-gray to brownish-gray on back and wings. Wing coverts may show brownish wash.",
+    "underparts": "Paler gray on breast with soft wine-pink to purple-pink wash in fresh plumage. Whitish on belly and undertail coverts.",
+    "head": "Purplish-gray to wine-gray crown and face. Yellow bill with dark tip (brighter in breeding condition). Pale yellow to gold eyes with narrow red or pinkish orbital ring.",
+    "bill": "Yellow with dark tip. Distinctive among PNW pigeons. Stout and adapted for swallowing acorns and berries whole.",
+    "tail": "The namesake field mark. Gray with broad, pale gray terminal band visible in flight. Squared or slightly rounded.",
+    "undertail_coverts": "Whitish.",
+    "wing_edges": "Blue-gray flight feathers. Wing claps audible on takeoff.",
+    "field_id": "Large pigeon (33-40 cm, 240-390 g) in mature forest canopy. White nape crescent and iridescent bronze-green hindneck. Yellow bill with dark tip. Gray terminal tail band in flight. Deep, owl-like cooing. Found in mature mixed forest, NOT urban areas. The forest pigeon. Separated from Rock Pigeon by larger size, forest habitat, white nape crescent, yellow bill; from Mourning Dove by much larger size, shorter/squarer tail, deeper coo; from Eurasian Collared-Dove by larger size, forest habitat, nape crescent (not neck ring)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The forest coo -- the 57th acoustic element (species side): a deep, soft, owl-like cooing in the 400-600 Hz fundamental range, resonating from inside the canopy of mature mixed forest. The lowest-frequency vocalization in the engine by a wide margin. Named 'the forest coo' for three resonances: (1) the habitat -- the Band-tailed Pigeon coos from inside the forest canopy, the same mature forest that hosts the Pacific Wren, Brown Creeper, and Red-breasted Sapsucker; (2) the acoustic novelty -- a coo is a fundamentally different vocalization type from anything the engine has heard in 56 degrees. Not a song, not a call, not a drum, not a dive. A coo. The Columbidae signature; (3) the frequency register -- at 400-600 Hz fundamental, the forest coo opens the bass register. The engine's previous entries operated almost entirely in the 1,500-10,000 Hz range (the passerine register). The pigeon drops the floor by an octave. The acoustic palette now spans more than four octaves from 400 Hz (pigeon) to 10,000+ Hz (kinglet).",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/forest-coo/",
+      "examples": [
+        "Coo structure: 2-6 repetitions of a deep, breathy 'whooo-whooo' with 1-3 second pauses. Each note 0.5-1.0 seconds. Simple, repetitive, measured. No complex phrase structure -- pure rhythmic repetition of a single coo type. The antithesis of the passerine song complexity that dominates the engine.",
+        "Contrast with the yard song (degree 55): the yard song is bright (3,000-6,000 Hz), loud (E=3), variable (9-22 learned types), culturally transmitted, delivered from exposed perches. The forest coo is deep (400-600 Hz), soft (E=1), simple (single innate coo type), genetically determined, delivered from concealed canopy. One degree apart, maximally different in every dimension.",
+        "Contrast with the Northern Spotted Owl hoot (degree 4): both are low-frequency, both come from the forest, both might be confused by casual listeners. But the owl's four-note hoot is rhythmic, territorial, louder (E=2), and higher-pitched (~500-800 Hz). The pigeon's coo is softer, deeper, less structured, and serves as contact/advertising rather than long-distance territorial proclamation. The owl commands. The pigeon murmurs.",
+        "The bass register opens: at 400-600 Hz fundamental, the engine's frequency palette extends by approximately one octave below any previous entry. The passerine register (1,500-10,000+ Hz) has been the engine's only frequency domain for 56 degrees. The pigeon establishes a bass foundation beneath the entire songbird chorus.",
+        "The coo as vocalization type: the engine has heard songs (passerines), hoots (owl), drums (woodpeckers), dives (hummingbirds), and calls (various). The coo is a new category -- produced by the syrinx but shaped by the crop and large body mass into a resonant, woodwind-like tone. Columbidae bring their own voice type."
+      ],
+      "music_theory_parallel": "The pedal point -- a sustained or repeated bass note held beneath changing harmonies above. In organ music, the pedal point is literally a note held by the organist's foot on the pedal keyboard while the hands play melodies and harmonies in higher registers. The pedal point anchors the music to a tonal center, providing gravity and foundation. The Band-tailed Pigeon's forest coo is the engine's pedal point: a deep, sustained, repeated bass note (400-600 Hz) sounding beneath the entire passerine chorus above. The songbirds play their melodies in the treble. The pigeon holds the bass. The pedal point was always missing from the engine's acoustic architecture. At degree 56, it arrives."
+    },
+    {
+      "concept": "Columbidae enters the engine as the 23rd family -- the first pigeon or dove in 56 degrees. New order Columbiformes becomes the 6th order. First new order since Apodiformes at degree 35, breaking a 21-degree gap. Columbidae is a cosmopolitan family of approximately 350 species, including some of the most familiar birds on Earth (Rock Pigeon) and the most famous extinction (Passenger Pigeon). The family brings fundamentally new traits: cooing vocalizations, crop milk production, large-bodied frugivore ecology, single-egg clutches, and the pigeon body plan. Every previous species in the engine has been a passerine, hummingbird, owl, woodpecker, or heron. Columbidae opens a new branch of the avian tree.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/columbidae-enters/",
+      "examples": [
+        "23rd family from a global pool of approximately 350 Columbidae species. The engine waited 56 degrees for its first pigeon. Columbidae is the most delayed 'obvious' family -- everyone expects pigeons eventually. The delay makes the entry structurally significant.",
+        "6th order. Previous orders: Passeriformes (dominant), Strigiformes (1), Piciformes (3), Apodiformes (3), Pelecaniformes (1). Columbiformes adds a sixth with fundamentally different vocalization mechanics.",
+        "Passeriformes interrupted for the second time in three degrees: 54 (Piciformes), 55 (Passeriformes resumes), 56 (Columbiformes). The Passeriformes lock is loosening. The engine is diversifying at the order level.",
+        "The family brings crop milk -- a trait shared only with flamingos and some penguins. Both parents produce it. This is a fundamentally different feeding strategy for nestlings than anything in the engine's Passeriformes-dominated history.",
+        "Columbidae's single-egg clutch is the lowest reproductive rate of any species in the engine. This low fecundity made the Band-tailed Pigeon vulnerable to the same overhunting pressure that killed the Passenger Pigeon."
+      ],
+      "music_theory_parallel": "The new instrument -- the moment in a symphonic score when an instrument that has been silent for the entire piece suddenly enters. The effect is both surprising and inevitable: you did not notice it was missing until it arrived, and once it arrives you cannot imagine the piece without it. The bassoon enters a string quartet. The tuba joins a brass quintet. The Columbidae coo enters a 56-degree acoustic progression that has been built entirely on passerine song, owl hoots, woodpecker drums, and hummingbird dives. The pigeon is the new instrument. Its voice was always part of the forest's score. The engine just had not written it in yet."
+    },
+    {
+      "concept": "The Passenger Pigeon's shadow -- the Band-tailed Pigeon carries the conservation legacy of the most famous bird extinction in North American history. Ectopistes migratorius went from billions to zero between the 1870s and 1914. The Band-tailed Pigeon followed the same trajectory -- abundant, heavily hunted, population crashing -- but was saved by the conservation laws that the Passenger Pigeon's death helped create. The Migratory Bird Treaty Act of 1918 was the direct legislative response to the Passenger Pigeon's extinction. The Band-tailed Pigeon was one of its first beneficiaries. The species' slow recovery (limited by its single-egg clutch and 1-2 broods per year) demonstrates why prevention of decline is easier than recovery from it.",
+      "level": "foundational",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/passenger-pigeon-shadow/",
+      "examples": [
+        "Historical parallel: both Passenger Pigeon and Band-tailed Pigeon were large native pigeons, strongly flocking, dependent on mast crops, vulnerable to mass harvesting at concentrated food sources. The ecological profile predicted the vulnerability.",
+        "The Migratory Bird Treaty Act of 1918 was partly a response to the Passenger Pigeon's extinction. The Band-tailed Pigeon was already declining when the Act passed. Legal protection came just in time.",
+        "Single-egg clutch: the Band-tailed Pigeon lays one egg per clutch. This is the lowest clutch size in the engine. It means population recovery from hunting depletion takes decades, not years. Compare Bewick's Wren at 5-7 eggs per clutch.",
+        "Slow recovery: despite over a century of legal protection, Band-tailed Pigeon populations remain below historical levels. BBS data shows continued declines in parts of the range. The species is a game bird of conservation concern.",
+        "The eastern range contraction of the Bewick's Wren (degree 55) and the Band-tailed Pigeon's hunting crash tell complementary conservation stories: competitive displacement (wren) vs. direct exploitation (pigeon). The engine now has both mechanisms documented."
+      ],
+      "music_theory_parallel": "The elegy -- a musical composition expressing grief for the dead. Barber's Adagio for Strings, Elgar's Nimrod, Gorecki's Symphony No. 3. The elegy does not bring back what was lost. It holds the space where the lost thing once stood. The Band-tailed Pigeon is the living elegy for the Passenger Pigeon: same family, similar ecology, nearly the same fate. Every coo from a Band-tailed Pigeon in a PNW forest is both a living sound and a memorial for the billions of Passenger Pigeon voices that will never sound again. The forest coo is the elegy played in the bass register."
+    },
+    {
+      "concept": "E=1 via a different path -- the Band-tailed Pigeon is E=1, the same energy level as the Golden-crowned Kinglet (degree 8), Bushtit (degree 10), Pine Siskin (degree 12), and Brown Creeper (degree 51). But the pigeon reaches E=1 by an entirely different mechanism. The previous E=1 species are all tiny birds (5-12 g) whose soft sounds exist at the edge of perception because of their small body mass and high-pitched, thin vocalizations. The Band-tailed Pigeon is a large bird (240-390 g) whose soft sound exists because cooing is inherently a soft vocalization -- low-frequency, low-amplitude, resonant rather than projecting. The pigeon is quiet not because it is small, but because its voice type is inherently quiet. A large bird, softly cooing. A new acoustic pathway to E=1.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/quiet-by-design/",
+      "examples": [
+        "Previous E=1 species: Golden-crowned Kinglet (8 g, 7,000-10,000+ Hz), Bushtit (5-6 g, noise-floor murmur), Pine Siskin (12-18 g, thin flight call), Brown Creeper (7-10 g, high-thin sibilant descent). All tiny birds. All high-frequency.",
+        "Band-tailed Pigeon: 240-390 g, 400-600 Hz fundamental. Twenty to forty times heavier than the previous E=1 species. An order of magnitude lower in frequency. Quiet because cooing is quiet, not because the bird is small.",
+        "Two paths to E=1: (1) small body → small syrinx → thin, high, quiet sound (kinglet, bushtit, creeper); (2) large body → deep cooing → inherently soft vocalization type (pigeon). The engine now documents both paths.",
+        "E=1 rises from 4 to 5 entries (8.8%). The quiet-side majority strengthens: E=1 + E=2 + E=3 = 32 of 57 (56.1%) > E=4 + E=5 = 25 of 57 (43.9%).",
+        "The E=1 drop from E=3 (degree 55) is a two-step energy decrease. The engine goes from the loud yard song to the soft forest coo in a single degree. The dynamic contrast is dramatic."
+      ],
+      "music_theory_parallel": "Pianissimo by different means -- in orchestral scoring, pianissimo (pp, very soft) can be achieved in fundamentally different ways. A solo violin playing pp produces a thin, delicate, high-frequency whisper. A solo tuba playing pp produces a deep, warm, low-frequency murmur. Both are equally soft. Both are pp. But the character is entirely different -- the violin whispers from above; the tuba murmurs from below. The previous E=1 species are violin pianissimo: tiny, high, thin. The Band-tailed Pigeon is tuba pianissimo: large, deep, resonant. Same dynamic level, different timbral universe."
+    },
+    {
+      "concept": "The only native pigeon -- in a landscape dominated by the introduced Rock Pigeon (Columba livia) in cities and the invasive Eurasian Collared-Dove (Streptopelia decaocto) in towns, the Band-tailed Pigeon is the only native pigeon in most Pacific Northwest forests. The distinction matters: the Rock Pigeon is from the Mediterranean. The Eurasian Collared-Dove is from South Asia. The Band-tailed Pigeon is from here. When you hear cooing from inside the canopy of a mature Douglas fir stand, it is not an introduced species. It is the native pigeon -- the one that was here before the cities and farms. The only Columbidae that belongs to the old-growth.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/native-pigeon/",
+      "examples": [
+        "Rock Pigeon (Columba livia): introduced from Europe/Middle East. Confined to urban and agricultural areas. Smaller than Band-tailed Pigeon. Highly variable color. Not a forest bird.",
+        "Eurasian Collared-Dove (Streptopelia decaocto): recent invasive from South Asia. Spreading through PNW in towns and agricultural areas. Higher-pitched coo. Not a forest bird.",
+        "Mourning Dove (Zenaida macroura): native but prefers open and semi-open habitats. Smaller and slimmer with long pointed tail. Different, higher-pitched coo-OO-oo-oo-oo. Not a closed-canopy forest bird.",
+        "Band-tailed Pigeon: the ONLY native pigeon of the PNW's mature mixed forests. Found in the same canopy as Pacific Wren, Brown Creeper, and Red-breasted Sapsucker. The forest pigeon.",
+        "Perceptual importance: most people associate 'pigeon' with the urban Rock Pigeon. The Band-tailed Pigeon redefines the word -- this is what a pigeon looks and sounds like when it belongs to the forest rather than the city."
+      ],
+      "music_theory_parallel": "The authentic voice -- in ethnomusicology, the distinction between a musical tradition performed in its native context vs. the same music performed as an import or adaptation. A gamelan in Bali is the authentic voice. A gamelan in a concert hall in New York is a transplant. The Rock Pigeon coos in cities worldwide -- a transplanted voice. The Band-tailed Pigeon coos in the forests where it evolved -- the authentic voice of Columbidae in the Pacific Northwest. The forest coo is not borrowed, not introduced, not transplanted. It is native."
+    },
+    {
+      "concept": "Mineral spring congregations -- the Band-tailed Pigeon has a strong, well-documented affinity for mineral springs, salt licks, and mineral-rich soils. Known mineral springs in western Washington attract congregations of hundreds of pigeons. The mineral intake is thought to help neutralize secondary plant compounds (tannins, alkaloids) in the frugivorous diet. This behavior is ecologically unique in the engine -- no other species shows this kind of mineral-seeking behavior. The mineral springs function as social gathering points, concentrating a normally dispersed species into observable flocks.",
+      "level": "intermediate",
+      "department": "ecology/behavior",
+      "college_path": ".college/ecology/behavior/mineral-springs/",
+      "examples": [
+        "Known mineral springs in the Cascades and Olympics attract hundreds of Band-tailed Pigeons during breeding season. The springs are traditional sites visited year after year.",
+        "Detoxification hypothesis: the pigeon's frugivorous diet exposes it to tannins and alkaloids in acorns, berries, and other plant matter. Mineral intake (sodium, calcium) is thought to help neutralize or excrete these compounds.",
+        "Conservation significance: mineral springs are monitoring sites. Population surveys use spring counts as an index of population health. The springs concentrate birds, making them countable.",
+        "Historical vulnerability: mineral springs also concentrated pigeons for hunters. The same behavior that helps the pigeon detoxify its diet also made it easy to shoot in large numbers at known gathering sites.",
+        "Ecological uniqueness: no other species in the engine shows this mineral-seeking behavior. The Band-tailed Pigeon's mineral spring visits are a genuinely new behavioral dimension for the engine."
+      ],
+      "music_theory_parallel": "The gathering -- a musical event where musicians from a dispersed tradition converge at a traditional site to play together. Irish sessions at known pubs. Bluegrass festivals at established campgrounds. Jazz jams at legendary clubs. The musicians are normally dispersed across the landscape, pursuing their own paths. The gathering site concentrates them, creating a density and energy that does not exist in everyday life. The mineral spring is the Band-tailed Pigeon's gathering site: a traditional location where normally dispersed forest pigeons converge, concentrate, and interact. The springs are the pigeon's session pubs."
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-055",
+      "species": "Bewick's Wren",
+      "relationship": "CONSECUTIVE DEGREES, MAXIMUM CONTRAST. The yard song (degree 55, Troglodytidae, E=3, 3,000-6,000 Hz, cultural vocal learning, suburban brush) yields to the forest coo (degree 56, Columbidae, E=1, 400-600 Hz, innate cooing, mature forest canopy). Every dimension reversed: frequency (high to low), energy (loud to quiet), mechanism (learned to innate), habitat (suburb to forest), order (Passeriformes to Columbiformes). Maximum acoustic contrast in a single degree step."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "TWO LOW-FREQUENCY FOREST VOICES. The owl (degree 4, ~500-800 Hz, four-note hoot, E=2, nocturnal) and the pigeon (degree 56, 400-600 Hz, deep cooing, E=1, diurnal) are the engine's only entries in the sub-1,000 Hz range. Both vocalize from inside the forest canopy. Both are mistaken for each other by casual listeners. The owl is louder and rhythmic. The pigeon is softer and breathy. Day coo and night hoot."
+    },
+    {
+      "target": "SPS-001",
+      "species": "Pacific Wren",
+      "relationship": "SAME FOREST, OPPOSITE FREQUENCIES. The Pacific Wren (degree 1, 3,000-8,000 Hz, E=2, cascade from understory) and the Band-tailed Pigeon (degree 56, 400-600 Hz, E=1, coo from canopy) occupy the same mature forest but vocalize at opposite ends of the frequency spectrum. The wren sings from the darkest understory floor. The pigeon coos from the highest canopy. Treble and bass in the same cathedral."
+    },
+    {
+      "target": "SPS-051",
+      "species": "Brown Creeper",
+      "relationship": "TWO E=1 FOREST SPECIES. The Brown Creeper (degree 51, E=1, 6,000-10,000 Hz, high-thin sibilant descent) and the Band-tailed Pigeon (degree 56, E=1, 400-600 Hz, deep resonant coo) are both E=1, both in mature forest, but at opposite frequency extremes. The creeper whispers in the treble. The pigeon murmurs in the bass. Two paths to E=1."
+    },
+    {
+      "target": "SPS-008",
+      "species": "Golden-crowned Kinglet",
+      "relationship": "FREQUENCY EXTREMES OF THE ENGINE. The Golden-crowned Kinglet (degree 8, 7,000-10,000+ Hz, highest frequency, E=1) and the Band-tailed Pigeon (degree 56, 400-600 Hz, lowest frequency, E=1) define the engine's full frequency range. Both E=1. Both at the edges of perception. The kinglet at the top, the pigeon at the bottom. More than four octaves apart."
+    },
+    {
+      "target": "SPS-054",
+      "species": "Red-breasted Sapsucker",
+      "relationship": "MATURE FOREST GUILD. The sapsucker (degree 54, Picidae) and the pigeon (degree 56, Columbidae) both depend on mature forest. The sapsucker drills sap wells in living trees. The pigeon feeds on acorns and fruit in the canopy. Both are part of the guild of species that need forests that have had time to grow."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "Band-tailed Pigeon documented across western Washington and British Columbia. Year-round resident of mature mixed forests. The only native pigeon in most PNW forests. Concentrated near food sources and mineral springs."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Mature forest ecology. Frugivore and seed disperser role. Mineral spring congregations and detoxification behavior. Conservation history linked to Passenger Pigeon extinction. Single-egg reproductive strategy and slow population recovery."
+    }
+  ]
+}

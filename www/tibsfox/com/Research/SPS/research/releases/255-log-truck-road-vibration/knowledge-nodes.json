@@ -1,0 +1,69 @@
+{
+  "degree": 255, "sound": "Log Truck Road Vibration", "slug": "255-log-truck-road-vibration",
+  "acoustic_character": "Low-frequency road percussion",
+  "energy": 3,
+  "family": "Anthropogenic",
+  "domain": "Human industrial activity / logging transportation",
+  "mechanism": "Tire-road contact noise + ground-transmitted vibration + structural vibration of load + engine/exhaust",
+  "ecosystem": "Forest road",
+  "season": "Year-round (primary logging season spring-fall, weather dependent)",
+  "MILESTONE": "FIRST ANTHROPOGENIC SOUND IN THE SPS ENGINE",
+  "anthropogenic_concept": {
+    "definition": "Human-caused sound. Third category in ecological acoustics: geophony (physical) + biophony (biological) + anthrophony (human).",
+    "ecological_acoustics_source": "R. Murray Schafer (soundscape ecology); Bernie Krause (soundscape composition; three acoustic categories)",
+    "why_log_truck_is_first": "Pacific Northwest logging industry has been the dominant anthropogenic force in the regional soundscape since the 1880s. Log truck on forest road is the most regionally specific and historically deep anthropogenic sound."
+  },
+  "vehicle_specifications": {
+    "gross_vehicle_weight_lbs": 80000,
+    "permit_weights": "Washington State and Oregon allow higher weights on designated routes for logging trucks",
+    "load_lbs_range": "40000-60000",
+    "typical_log_count": "8-16",
+    "timber_species": ["Douglas fir", "Western red cedar", "Western hemlock", "Sitka spruce"],
+    "common_manufacturers": ["Kenworth", "Peterbilt", "Mack"],
+    "road_type": "Unpaved: gravel or compacted dirt, natural terrain contours, grades up to 10%",
+    "road_surface": "Angular volcanic rock typical in PNW"
+  },
+  "acoustic_mechanisms": {
+    "tire_road_contact": "Multiple drive axles, paired tires, compression/rebound over gravel. Aggregate: continuous dense low-frequency percussion.",
+    "ground_vibration": "Seismic-scale ground pressure propagates outward. Felt at hundreds of meters from road. Infrasonic components.",
+    "structural_vibration": "Cab, trailer frame, log load, binder chains. Log load irregularly shaped, loosely constrained: additional rattle.",
+    "engine_exhaust": "Diesel engine at high load on grades = maximum acoustic output.",
+    "jake_brake": {
+      "name": "Jacobs Engine Brake (Jake brake)",
+      "mechanism": "Compressed air released at end of compression stroke. Engine becomes air compressor for braking.",
+      "sound": "Staccato machine-gun-like exhaust: 'blat-blat-blat'",
+      "note": "Separate acoustic event from cruise vibration. Safety function on steep descents. Noise ordinances in towns.",
+      "note2": "Not the primary focus of this entry (cruise vibration is the ambient signature)"
+    }
+  },
+  "pnw_logging_context": {
+    "industry_start": "1880s with Northern Pacific Railroad enabling export",
+    "primary_timber_towns": ["Aberdeen", "Hoquiam", "Port Angeles", "Forks", "Raymond", "Shelton"],
+    "old_growth_to_second_growth": "Original old-growth (200-800 years, 200-300 ft) largely logged by late 20th century. Industry shifted to second-growth (40-80 year trees from replanted clearcuts).",
+    "spotted_owl_1990": "Northern spotted owl listed as threatened under ESA 1990. Federal old-growth logging dramatically reduced. Industry shifted to private/state/tribal lands.",
+    "current_ownership": ["Weyerhaeuser", "Green Diamond Resource Company", "Small private landowners", "Washington State DNR", "Tribal timberlands"]
+  },
+  "ecological_acoustics": {
+    "acoustic_masking_range_m": "100-500 (biophony masking by log truck noise)",
+    "habituation": "Animals along logging roads habituate to predictable truck timing",
+    "forest_road_as_corridor": "Cleared right-of-way creates edge habitat and travel routes for deer, elk, bear",
+    "acoustic_residue": "Silence between trucks is qualitatively different from undisturbed forest silence -- expectation of next truck present in soundscape"
+  },
+  "arc_context": {
+    "arc": "Infrastructure/Maritime Arc 253-255",
+    "arc_sequence": "Tidal Current (253, Hydrology, E=2) → Fog Horn (254, Maritime, E=3) → Log Truck (255, Anthropogenic, E=3)",
+    "arc_status": "COMPLETE at 255",
+    "following_arc": "Storm Arc 256-260 (Winter Storm Surf E=8 opens)"
+  },
+  "theory_nodes": [
+    { "concept": "FIRST ANTHROPOGENIC SPS ENTRY (degree 255). Ecological acoustics three categories: geophony + biophony + anthrophony. Degrees 000-254: geophony and biophony. 254: first human infrastructure (Maritime family -- fog horn). 255: first pure industrial anthrophony. The log truck is the correct first entry: Pacific Northwest logging is the most historically deep and regionally specific anthropogenic sound category.", "level": "milestone", "department": "engine-structure", "description": "First Anthropogenic SPS entry. Categorical shift." },
+    { "concept": "Log truck on forest road: four simultaneous acoustic mechanisms. (1) Tire-road contact noise -- aggregate of multiple-axle tire compressions over gravel. (2) Ground vibration -- seismic-scale pressure wave. (3) Structural vibration -- cab, trailer, log load, chains. (4) Engine/exhaust at load. The combination is specifically the working forest acoustic signature: not any single mechanism but all four simultaneously.", "level": "advanced", "department": "acoustic-physics", "description": "Four-mechanism acoustic signature of log truck on gravel." }
+  ],
+  "cross_references": [
+    {"degree": 254, "sound": "Fog Horn (Admiralty Inlet)", "relationship": "Arc 253-255 continues: Maritime (254) → Anthropogenic (255). Water infrastructure → maritime safety → industrial land transportation."},
+    {"degree": 256, "sound": "Winter Storm Surf", "relationship": "Storm Arc opens. Anthropogenic arc closes with log truck (E=3); Storm Arc opens with Winter Storm Surf (E=8). From the working forest to the open coast at maximum energy."}
+  ],
+  "s36_pair": {"degree": 255, "artist": "Valley of the Giants", "pairing_note": "E=6 stoner rock vs E=3 log truck. Valley of the Giants named after old-growth Douglas fir grove. Log truck is the sound of the industry that harvested most such groves. Contemplated forest vs. working forest. Stoner rock band in rehearsal space; log truck on forest road. Both sounds from within the same PNW landscape, heard from different positions."},
+  "milestones": ["FIRST ANTHROPOGENIC SOUND IN SPS ENGINE (255)", "ANTHROPOGENIC FAMILY ENTERS ENGINE (255)", "INFRASTRUCTURE/MARITIME ARC 253-255 COMPLETE"],
+  "tags": ["anthropogenic", "log-truck", "forest-road", "working-forest", "logging-industry", "pnw-timber", "road-vibration", "ground-vibration", "jake-brake", "diesel", "spotted-owl", "weyerhaeuser", "first-anthropogenic", "milestone"]
+}

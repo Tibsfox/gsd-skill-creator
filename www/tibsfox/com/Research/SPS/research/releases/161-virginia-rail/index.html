@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 161&deg; &mdash; Virginia Rail Descending Whinny Grunt &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5D4037, #6D4C41); color: #D7CCC8; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(93, 64, 55, 0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .family-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C, #1B5E20); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .family-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .family-card p { color: #C8E6C9; }
+    .family-card strong { color: #E8F5E9; }
+
+    .secretive-card { background: linear-gradient(135deg, #3E2723, #4E342E, #5D4037, #3E2723); border: 2px solid #3E2723; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D7CCC8; }
+    .secretive-card h3 { margin-top: 0; font-size: 1.1rem; color: #BCAAA4; }
+    .secretive-card p { color: #D7CCC8; }
+    .secretive-card strong { color: #EFEBE9; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.whinny { background: #E65100; }
+    .theory-icon.skulk { background: #3E2723; }
+    .theory-icon.toes { background: #1B5E20; }
+    .theory-icon.family { background: #0D47A1; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FFF3E0; color: #E65100; }
+    .theory-level.intermediate { background: #E8EAF6; color: #1A237E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+    <div class="release-header">
+      <div class="degree-badge">161&deg;</div>
+      <div class="release-title-block">
+        <h2>Virginia Rail &mdash; Descending Whinny Grunt</h2>
+        <div class="scientific"><em>Rallus limicola</em> (Rallidae) &mdash; E=4 &mdash; The Marsh Skulker</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST RALLIDAE.</strong> The rail family enters.
+      Descending whinny grunt &mdash; a rapid, pig-like series of grunting
+      notes that descend in pitch and accelerate.
+      <strong>Secretive</strong> marsh specialist.
+      <strong>Long-toed</strong> adaptation for floating vegetation.
+      More heard than seen. <strong>E=4. v1.49.301.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="family-card">
+          <h3>First Rallidae &mdash; The Rail Family Enters</h3>
+          <p>
+            The <strong>Rallidae</strong> (rails, coots, gallinules) enter the engine.
+            Laterally compressed &mdash; <strong>&ldquo;thin as a rail.&rdquo;</strong>
+            Long-toed. Obligate marsh specialists.
+            Among the <strong>most secretive</strong> birds in North America.
+            Detected primarily by voice. Three entries in this cluster:
+            <strong>Virginia Rail (161)</strong>, <strong>Sora (162)</strong>,
+            <strong>American Coot (164)</strong>.
+          </p>
+        </div>
+        <div class="secretive-card">
+          <h3>The Marsh Skulker &mdash; Thin as a Rail</h3>
+          <p>
+            <strong>Laterally compressed</strong> body slips between cattail stems.
+            Skulks at ground/water level. Runs through marsh rather than flying.
+            Dawn and dusk activity. The marsh is a fortress &mdash; impenetrable
+            vegetation provides food and cover. The <strong>descending whinny grunt</strong>
+            carries across the marsh while the bird stays <strong>invisible in the reeds.</strong>
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-162 Sora</strong>
+            <p>RALLIDAE COMPARISON PAIR! Virginia Rail (161) + Sora (162). Both secretive marsh rails. Whinny grunt vs. whinny + keek. Long bill vs. short bill. Different bills, same marsh.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-160 Mountain Quail</strong>
+            <p>SECRETIVE TRANSITION! Mountain Quail: secretive in dense brush (Odontophoridae). Virginia Rail: secretive in dense marsh (Rallidae). Different habitats, same detection paradox.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-164 American Coot</strong>
+            <p>RALLIDAE RANGE! Virginia Rail: invisible skulker. Coot: visible swimmer. Same family, opposite strategies. The full range of Rallidae behavior.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon whinny">W</div>
+            <div class="theory-content">
+              <h4>Descending Whinny Grunt</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Rapid descending series of pig-like grunts. 1000-4000 Hz. 1-3 seconds. Carries 100-300m. Called from within dense reeds. Primary detection method.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon skulk">S</div>
+            <div class="theory-content">
+              <h4>Lateral Compression</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>"Thin as a rail." Body shaped to slip between marsh stems. Skulks at ground level. Runs rather than flies. Crepuscular. The phrase derives from the bird.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon toes">T</div>
+            <div class="theory-content">
+              <h4>Long-Toed Adaptation</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Disproportionately long toes spread weight across floating vegetation. 1.5x expected length. Walks on lily pads and cattail mats. Precocial chicks walk immediately.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon family">R</div>
+            <div class="theory-content">
+              <h4>Rallidae Architecture</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Three entries: Virginia Rail (161), Sora (162), American Coot (164). All E=4. From invisible skulkers to visible swimmers. One family, full behavioral range.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Virginia Rail</div><div class="stat-detail"><em>Rallus limicola</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Rallidae</div><div class="stat-detail">1st entry &mdash; FIRST RALLIDAE</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Whinny grunt</div><div class="stat-detail">descending, pig-like</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value">E = 4</div><div class="stat-detail">distinctive marsh voice</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">1000&ndash;4000 Hz</div><div class="stat-detail">descending through phrase</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Freshwater marsh</div><div class="stat-detail">cattails, bulrushes, sedges</div></div>
+        <div class="stat-card"><div class="stat-label">Season</div><div class="stat-value">Summer</div><div class="stat-detail">breeder, some year-round</div></div>
+        <div class="stat-card"><div class="stat-label">Body</div><div class="stat-value">Laterally compressed</div><div class="stat-detail">&ldquo;thin as a rail&rdquo;</div></div>
+        <div class="stat-card"><div class="stat-label">Toes</div><div class="stat-value">Long-toed</div><div class="stat-detail">walks on floating vegetation</div></div>
+        <div class="stat-card"><div class="stat-label">Visibility</div><div class="stat-value">Very low</div><div class="stat-detail">detected almost exclusively by voice</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

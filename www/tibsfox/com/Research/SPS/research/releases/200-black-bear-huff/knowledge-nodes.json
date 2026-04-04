@@ -1,0 +1,111 @@
+{
+  "degree": 200,
+  "species": "American Black Bear",
+  "scientific_name": "Ursus americanus",
+  "slug": "200-black-bear-huff",
+  "sound_type": "warning huff -- explosive exhalation through nose and mouth. 100-600 Hz broadband. De-escalation. 'I see you. Back off.' E=5",
+  "energy": 5,
+  "ecosystem": "Forest (coniferous, mixed, deciduous), forest edge, riparian corridors. Year-round resident. Huff in any season when threatened.",
+  "season": "Year-round. Most common spring (mothers with cubs) and fall (pre-denning foraging).",
+  "family": "Ursidae (FIRST ENTRY -- bear family enters the engine)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "American Black Bear",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.60,
+    "lon": -122.30,
+    "description": "Black Bears throughout western Washington. In forests surrounding every major city. 25,000-30,000 statewide."
+  },
+  "taxonomy_note": {
+    "description": "FIRST URSIDAE. The bear family enters the engine at degree 200. After Cervidae (195-199). New mammalian family.",
+    "current_family": "Ursidae (FIRST ENTRY)",
+    "new_family": true,
+    "family_count_in_engine": "Ursidae: Black Bear Huff (200, E=5). First entry.",
+    "name_etymology": "Ursus from Latin 'bear'. americanus for the Americas.",
+    "genus_note": "Ursus -- true bears. Black Bear, Brown/Grizzly Bear, Polar Bear.",
+    "order_note": "Carnivora. First Carnivora entry. Despite the order name, Black Bears are primarily herbivorous.",
+    "family_position": "Ursidae: first entry. New family at milestone degree 200.",
+    "class_note": "Class Mammalia. 60-200 kg. Apex omnivore. Solitary."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "100-600 Hz. Broadband exhalation. Low-frequency emphasis.",
+    "peak_energy_band_hz": "150-400 Hz (huff peak).",
+    "song_frequency_hz": "Huff: 100-600 Hz. Jaw pop: 200-800 Hz. Growl: 60-300 Hz.",
+    "song_duration_s": "Huff: 0.3-1.0 sec. Repeated 2-5 times with 1-3 sec intervals.",
+    "note_structure": "Single explosive exhalation per huff. Repeated pattern during sustained warning.",
+    "note_types": "Huff (warning), jaw pop (threat), growl (aggression), woof (alarm), moan (contentment), cub cry (distress).",
+    "phrase_structure": "Repeated huffs at 1-3 second intervals. Often accompanied by head lowering and swaying.",
+    "timbre": "Broadband, breath-like, percussive. Not tonal. Low-frequency emphasis. Honest signal of body size.",
+    "amplitude": "E=5. Explosive and startling at close range (5-20 m). Short-range warning. Not a broadcast.",
+    "tempo": "Huffs at 1-3 second intervals. May escalate to faster repetition if threat persists.",
+    "context": "Warning/de-escalation. Bear has detected threat. Not aggressive -- attempting to avoid conflict.",
+    "regional_variation": "Minimal. Huff acoustically similar across Black Bear populations. Size variation affects depth.",
+    "key_property": "HUFF. Explosive warning exhalation. De-escalation. FIRST URSIDAE. E=5. ENERGY MATCH with Death Cab. v1.49.341."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Black to dark brown (most common in PNW). Occasionally cinnamon or blonde. Shorter muzzle than Grizzly. No shoulder hump. Straight face profile.",
+    "diagnostic_mark": "Black/dark brown fur. Straight face profile. No shoulder hump. Relatively short claws. Tan muzzle patch common.",
+    "seasonal_variation": "Thicker coat in winter. May appear shaggier in spring (molting). Cubs: black, sometimes with white chest patch.",
+    "swimming_pattern": null
+  },
+  "physical_description": {
+    "overall": "Adult: 60-200 kg (130-440 lbs). Males larger than females. 70-100 cm at shoulder. Strong, compact body.",
+    "diagnostic_mark": "Black/dark brown. No shoulder hump (distinguishes from Grizzly). Straight face profile. Short curved claws.",
+    "field_id": "Medium-large black/brown bear without shoulder hump. In forest, forest edge, or (increasingly) suburban settings. If huffing: do not run. Speak calmly, back away slowly. The bear wants you to leave."
+  },
+  "nodes": [
+    {
+      "id": "first-ursidae",
+      "type": "milestone",
+      "title": "FIRST URSIDAE -- Bear Family Enters",
+      "description": "New mammalian family at degree 200 milestone. Apex omnivore. Solitary. Intelligent. 25,000-30,000 in Washington. The huff as entry point.",
+      "connections": ["huff-warning", "de-escalation", "urban-wildland"]
+    },
+    {
+      "id": "huff-warning",
+      "type": "concept",
+      "title": "Huff -- Explosive Warning Exhalation",
+      "description": "100-600 Hz broadband. 0.3-1.0 sec. At 5-20 m range. Often misinterpreted as aggression. Actually de-escalation.",
+      "connections": ["first-ursidae", "de-escalation"]
+    },
+    {
+      "id": "de-escalation",
+      "type": "concept",
+      "title": "De-escalation Vocalization",
+      "description": "The huff is the opposite of aggression. An aggressive bear charges or jaw-pops. The huffing bear wants you to leave. Warning, not threat.",
+      "connections": ["first-ursidae", "huff-warning", "urban-wildland"]
+    },
+    {
+      "id": "urban-wildland",
+      "type": "concept",
+      "title": "Urban-Wildland Interface",
+      "description": "Bears in forests surrounding every PNW city. Suburban encounters increasing. Understanding bear communication essential for coexistence.",
+      "connections": ["first-ursidae", "de-escalation"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-195/196",
+      "species": "Black-tailed Deer",
+      "relationship": "CERVIDAE TO URSIDAE! Deer family (E=3-4) to bear family (E=5). New ecological niche."
+    },
+    {
+      "target": "SPS-197/199",
+      "species": "Roosevelt Elk",
+      "relationship": "SCALE COMPARISON! Elk bugle/roar (E=7) vs. bear huff (E=5). Display/combat vs. de-escalation."
+    },
+    {
+      "target": "SPS-198",
+      "species": "Roosevelt Elk Cow Call",
+      "relationship": "BOTH E=5! Cow call (connection) and bear huff (avoidance). Same energy, opposite intentions."
+    },
+    {
+      "target": "S36-200",
+      "artist": "Death Cab for Cutie",
+      "relationship": "ENERGY MATCH! Both E=5. Measured warning. Communicating something serious through control."
+    }
+  ]
+}

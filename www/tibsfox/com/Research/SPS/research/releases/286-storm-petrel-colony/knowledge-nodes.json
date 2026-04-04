@@ -1,0 +1,65 @@
+{
+  "degree": 286,
+  "species": "Leach's Storm-Petrel",
+  "scientific_name": "Oceanodroma leucorhoa",
+  "slug": "286-storm-petrel-colony",
+  "sound_type": "midnight chattering -- nocturnal colony vocalization; hundreds to thousands of birds calling from burrows, rock crevices, and in flight at night; churring/purring/chattering multi-phrase calls; acoustic mass through numbers; E=6",
+  "energy": 6,
+  "ecosystem": "Offshore island -- remote oceanic islands, rocky outcrops, headlands off Pacific Northwest coast; pelagic forager; nests in burrows and rock crevices on predator-free islands",
+  "season": "Summer (breeding; arrives April-May; chicks fledge August-September; rest of year at sea in open Pacific)",
+  "family": "Hydrobatidae",
+  "order": "Procellariiformes",
+  "conservation_status": "Vulnerable (IUCN). Documented colony declines. Primary threat: introduced predators (rats, American Mink) on breeding islands. Secondary: light attraction mortality (offshore platforms, lighthouses). Tertiary: climate change affecting offshore prey. Island biosecurity (predator eradication) is primary management tool.",
+  "coordinates": {
+    "lat": 50.8,
+    "lon": -129.1,
+    "description": "Triangle Island, British Columbia (50,000-100,000 breeding pairs; largest eastern Pacific colony). Three Arch Rocks NWR, Oregon. Destruction Island, Washington. Pelagic range: entire North Pacific basin, southward to subtropical waters in winter."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Complex multi-phrase call: churring, purring, chattering sequences. Rapid staccato; male and female calls differ. Functions: mate attraction, individual recognition, burrow location.",
+    "colony_environment": "Hundreds to thousands of birds calling simultaneously from burrows (muffled, subterranean), rock crevices, and in flight overhead. All in darkness. Calls appear to come from everywhere. Daytime colony is silent.",
+    "temporal_restriction": "Night only. Gulls cannot hunt in darkness; storm-petrels exploit temporal niche to avoid predation. Daylight colony = complete silence and apparent emptiness.",
+    "e6_calibration": "E=6: acoustic mass via numbers (hundreds to thousands of 35-55 g birds), not individual amplitude. Collective colony effect is substantial but each individual is small. Compare: Elephant Seal bull (E=8, single massive animal) vs. Storm-Petrel colony (E=6, thousands of tiny birds)."
+  },
+  "morphology": {
+    "size": "7-8 inches (18-21 cm); wingspan 17-19 inches (44-48 cm); weight 35-55 g",
+    "appearance": "Dark brown-black; white rump patch (diagnostic); forked tail (vs. Wilson's square tail); pale wing bars",
+    "flight_style": "Erratic, bounding, moth-like; irregular wingbeats with glides; direction changes unpredictably"
+  },
+  "nodes": [
+    {
+      "id": "first-hydrobatidae",
+      "type": "milestone",
+      "title": "First Hydrobatidae -- Storm-Petrels Enter the Engine",
+      "description": "Degree 286 is the first Hydrobatidae (storm-petrel family) in the engine. Smallest seabirds that venture into the open Pacific. Pelagic for most of the year; nocturnal at breeding colonies. The entry extends the engine into the offshore island and pelagic ocean acoustic environments.",
+      "connections": ["nocturnal-colony", "petrel-etymology"]
+    },
+    {
+      "id": "nocturnal-colony",
+      "type": "concept",
+      "title": "Nocturnal Colony Strategy -- Temporal Predator Avoidance",
+      "description": "Storm-petrels arrive at and depart from breeding burrows only at night, avoiding gull predation (gulls cannot hunt in darkness). Daytime colony = silence. Night colony = cacophony from hundreds/thousands of birds. One of the Pacific Northwest's most extraordinary and least-encountered wildlife soundscapes.",
+      "connections": ["first-hydrobatidae"]
+    },
+    {
+      "id": "petrel-etymology",
+      "type": "concept",
+      "title": "Petrel = Peter: Walking on Water",
+      "description": "'Petrel' derives from French 'Pétrel' (diminutive of Pierre/Peter), referring to the bird's surface-pattering foraging behavior -- appearing to walk on water like St. Peter on the Sea of Galilee. 'Storm-petrel': association with approaching bad weather. 'Mother Carey's Chickens': sailor mythology for souls of drowned sailors.",
+      "connections": ["first-hydrobatidae"]
+    },
+    {
+      "id": "triangle-island",
+      "type": "location",
+      "title": "Triangle Island BC -- 50,000-100,000 Breeding Pairs",
+      "description": "Triangle Island, approximately 25 km off northern Vancouver Island tip. Largest Leach's Storm-Petrel colony in the eastern Pacific. The midnight colony here is one of the most remarkable wildlife soundscapes in the Pacific Northwest. Inaccessible except by research vessel.",
+      "connections": ["nocturnal-colony"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-285", "species": "Northern Elephant Seal bull", "relationship": "E=8, Phocidae. Block contrast: 1,500-2,500 lb animal (E=8) vs. 35-55 g bird colony (E=6). Individual massive power vs. collective tiny mass."},
+    {"target": "SPS-287", "species": "Brandt's Cormorant colony", "relationship": "E=7. First Phalacrocoracidae. Both colonial. Storm-petrel colony nocturnal vs. Brandt's daytime. Hydrobatidae vs. Phalacrocoracidae. Both offshore island breeders."},
+    {"target": "S36-286", "artist": "Dead Kennedys influence", "relationship": "E=9. First S36 maximum. E=9 + E=6 = E=15. The most confrontational S36 entry paired with one of the most hidden SPS entries. Both require full commitment to the specific mode to experience."}
+  ],
+  "milestones": ["FIRST HYDROBATIDAE"]
+}

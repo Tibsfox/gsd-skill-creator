@@ -1,0 +1,61 @@
+{
+  "degree": 282,
+  "species": "Pacific White-sided Dolphin",
+  "scientific_name": "Lagenorhynchus obliquidens",
+  "slug": "282-pacific-white-sided-dolphin-pod",
+  "sound_type": "aerial acrobatics + call burst -- pod performing leaps and somersaults combined with whistles, burst-pulse calls, and echolocation; impact splash of multiple dolphins re-entering water; social vocal burst during active aerial display; E=7",
+  "energy": 7,
+  "ecosystem": "Open channel -- Puget Sound, Strait of Juan de Fuca, Salish Sea; resident year-round with prey-dependent distribution variability",
+  "season": "Resident",
+  "family": "Delphinidae",
+  "order": "Artiodactyla (Cetacea)",
+  "conservation_status": "Least Concern (IUCN). North Pacific population ~900,000-1,000,000. Historical drift net bycatch reduced after UN moratorium 1993. Threats: prey availability, vessel noise, PCB/DDT/mercury contamination, nearshore entanglement.",
+  "coordinates": {
+    "lat": 48.15,
+    "lon": -122.75,
+    "description": "Resident in Puget Sound and Salish Sea; distribution varies with herring and anchovy prey availability. Common in Strait of Juan de Fuca and deep channels."
+  },
+  "acoustic_data": {
+    "primary_event": "Aerial acrobatics + call burst: impact splash of leaping dolphins (130-200 lb animals re-entering water at speed) combined with simultaneous pod vocalizations (whistles, burst-pulse calls). Multiple individuals simultaneously airborne in a 10-50 animal pod produces significant combined acoustic event.",
+    "whistles": "Frequency-modulated tonal signals, primary social communication. Stereotyped and variable whistle types for group cohesion and coordination. Unlike bottlenose dolphin (individual signature whistles), Pacific White-sided Dolphin uses general whistle types.",
+    "burst_pulse": "Rapid pulse trains with rough acoustic quality; associated with social excitement and emotional arousal. Call rate increases during aerial activity and group excitement. Social context signal.",
+    "echolocation": "Broadband clicks, 20-100 kHz, primarily ultrasonic. Used for navigation and prey detection. Active during cooperative foraging on schooling fish.",
+    "e7_calibration": "Group-generated exuberance at E=7. Less than orca breach (E=9) or Steller Sea Lion bull roar (E=8). More than Dall's Porpoise rooster tail (E=6). The energy is collective: multiple animals, multiple acoustic events simultaneously."
+  },
+  "nodes": [
+    {
+      "id": "delphinidae-returns",
+      "type": "milestone",
+      "title": "Delphinidae Returns at Degree 282",
+      "description": "After orca arc (270-276, all Orcinus orca) and Phocoenidae (281, Dall's Porpoise), Delphinidae returns with a different representative. Pacific White-sided Dolphin: smaller, more acrobatic, less stable social structure than orca pods. Family's range documented across multiple entries.",
+      "connections": ["aerial-behavior", "pod-vocal"]
+    },
+    {
+      "id": "aerial-behavior",
+      "type": "concept",
+      "title": "Aerial Acrobatics -- Full Breach and Somersault",
+      "description": "Full breach (entire body clears surface) and somersault (long-axis rotation while airborne). Functions: communication, parasite removal, play, social bonding, prey herding. Multiple simultaneous aerial behaviors in a pod of 10-50 produce a significant combined splash and acoustic event.",
+      "connections": ["delphinidae-returns", "pod-vocal"]
+    },
+    {
+      "id": "pod-vocal",
+      "type": "concept",
+      "title": "Pod Vocal Burst -- Whistles + Burst-Pulse + Echolocation",
+      "description": "Three vocalization types: frequency-modulated whistles (social), burst-pulse calls (excitement/arousal, increases during aerial activity), echolocation clicks (20-100 kHz, foraging). All three increase during active social display. The burst-pulse component is the social excitement signal.",
+      "connections": ["delphinidae-returns", "aerial-behavior"]
+    },
+    {
+      "id": "cooperative-foraging",
+      "type": "concept",
+      "title": "Cooperative Foraging -- Bait Ball and Vocal Coordination",
+      "description": "Pod surrounds schooling fish into bait ball near surface. Individuals take turns rushing through while others maintain formation. Intense acoustic activity: echolocation, social calls, burst-pulse. Multi-species associations with Steller Sea Lions (degree 283) and humpback whales at productive sites.",
+      "connections": ["pod-vocal"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-270", "species": "Orca Pod Call", "relationship": "Delphinidae established at 270. Pacific White-sided Dolphin returns family at 282. Different representative: smaller, more acrobatic, less socially stable. Family range documented by both entries."},
+    {"target": "SPS-281", "species": "Dall's Porpoise Rooster Tail", "relationship": "Phocoenidae E=6 → Delphinidae E=7. Speed and individual quiet (281) to group acrobatics and vocal (282). Family transition; energy rises by 1 unit."},
+    {"target": "SPS-283", "species": "Steller Sea Lion Bull Roar", "relationship": "Otariidae enters at 283, E=8. Arc ascends: dolphin pod E=7 → Steller Sea Lion E=8. Multi-species association: Pacific White-sided Dolphins and Steller Sea Lions both aggregate at herring schools."},
+    {"target": "S36-282", "artist": "Tacocat", "relationship": "E=7 + E=7 = E=14. Capitol Hill punk pop collective exuberance paired with Pacific White-sided Dolphin pod collective exuberance. Both social, both group-generated, both at exactly E=7."}
+  ]
+}

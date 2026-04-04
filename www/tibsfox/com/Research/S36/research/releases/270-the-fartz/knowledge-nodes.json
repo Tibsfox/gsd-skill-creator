@@ -1,0 +1,22 @@
+{
+  "degree": 270, "artist": "The Fartz", "slug": "270-the-fartz", "genre": "Hardcore Punk", "energy": 8,
+  "era": "1981-1982. Hardcore Punk. E=8 -- maximum velocity, Capitol Hill, Alternative Tentacles. THREE-QUARTERS MARK. QUADRANT IV BEGINS.",
+  "location": { "origin": "Capitol Hill, Seattle" }, "formed": "Seattle, WA", "active": "1980-1983",
+  "labels": ["Alternative Tentacles"],
+  "members": ["Blaine Cook (vocals)", "Dave Ramberg (guitar)", "Paul Solger (bass)", "Duff McKagan (drums)", "Steve Verwolf (drums, later)"],
+  "associated_musicians": ["Duff McKagan (Ten Minute Warning, degree 265; Guns N' Roses)", "Blaine Cook (The Accused, degree 266)"],
+  "theory_nodes": [
+    { "concept": "THREE-QUARTERS MARK: 270/360 = 75%. QUADRANT IV BEGINS. The underground before the mainstream occupies the engine's most significant structural milestone in the final quarter.", "level": "milestone", "department": "engine-structure", "description": "The Fartz at 75%. Structural milestone." },
+    { "concept": "Duff McKagan trajectory: The Fartz (drums, 1981) → Ten Minute Warning (drums, 1983) → Guns N' Roses (bass, 1985) → 30M+ album sales. Seattle hardcore to global rock.", "level": "advanced", "department": "cross-reference", "description": "The most dramatic individual trajectory in the Seattle rock engine." },
+    { "concept": "Alternative Tentacles: founded by Jello Biafra (Dead Kennedys, 1979). Political hardcore label. The Fartz appearing here = cultural legitimacy + political alignment.", "level": "advanced", "department": "label-history", "description": "The Biafra imprimatur: the most important political punk label in America." }
+  ],
+  "cross_references": [
+    {"degree": 265, "artist": "Ten Minute Warning", "relationship": "DUFF McKAGAN. The Fartz → Ten Minute Warning → GN'R. Both Seattle hardcore bands. McKagan in both. Five degrees apart."},
+    {"degree": 266, "artist": "The Accused", "relationship": "Blaine Cook connection. Cook fronted both The Fartz and The Accused at various points. Capitol Hill hardcore continuity."},
+    {"degree": 271, "artist": "Solger", "relationship": "Seattle hardcore arc continues. Solger (1980) possibly predates The Fartz -- even earlier Seattle hardcore. E=8 continues."},
+    {"degree": 272, "artist": "The U-Men", "relationship": "Capitol Hill post-punk. Tom Price connects to Gas Huffer (262). The arc's long-running band."}
+  ],
+  "sps_pair": {"degree": 270, "species": "Puget Sound orca S01 pod call", "pairing_note": "E=8 on BOTH SIDES at the THREE-QUARTERS MARK. The Fartz E=8 + Orca S01 E=8. Maximum energy on both tracks simultaneously at 75%."},
+  "milestones": ["THREE-QUARTERS MARK (270/360 = 75%)", "QUADRANT IV BEGINS", "FIRST FARTZ ENGINE ENTRY", "SEATTLE HARDCORE ARC OPENS"],
+  "tags": ["hardcore-punk", "alternative-tentacles", "capitol-hill", "duff-mckagan", "jello-biafra", "three-quarters-mark", "quadrant-iv", "pre-grunge", "1981", "e8"]
+}

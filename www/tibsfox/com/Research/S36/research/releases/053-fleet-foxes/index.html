@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 53&deg; &mdash; Fleet Foxes &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .genealogy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+    }
+    .genealogy-table th {
+      background: #1A237E;
+      color: #9FA8DA;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .genealogy-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid #E8EAF6;
+      color: #424242;
+    }
+    .genealogy-table tr:nth-child(even) { background: #F5F5F5; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>053 &mdash; Fleet Foxes</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>9th Consecutive Folk-Adjacent &mdash; Pitchfork #1 of 2008 &mdash; The Cathedral Harmony</h3>
+      <p>
+        Fleet Foxes at degree 53&deg; extends the folk-adjacent record to
+        <strong>nine consecutive degrees</strong> (45&ndash;53). Robin Pecknold &mdash;
+        born Seattle, grew up in Kirkland, formed Fleet Foxes at twenty, earned
+        <strong>Pitchfork&rsquo;s #1 Album of 2008</strong> at twenty-two.
+        Signed to <strong>Sub Pop</strong> &mdash; fourth Sub Pop artist in the folk zone.
+        The Guardian: &ldquo;a landmark in American music &mdash; an instant classic.&rdquo;
+        Baroque vocal harmonies so dense they become architecture.
+        The fox in the engine.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">53&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Fleet Foxes</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Indie Folk</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="neighborhood-badge">Sand Point to Wedgwood</span>
+          <span class="record-badge">9th Folk-Adjacent &mdash; Record Extends</span>
+          <span class="first-badge">4th Sub Pop</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Most Critically Acclaimed Band of the 2000s</h2>
+          <p>
+            <strong>Robin Pecknold</strong> was born in Seattle on March 30, 1986.
+            His father Greg played in the 1960s Seattle soul band <strong>The Fathoms</strong>.
+            His great-grandfather Theodor Valaas immigrated from Norway in 1905.
+            Pecknold grew up in <strong>Kirkland, Washington</strong>, attending
+            <strong>Lake Washington High School</strong> alongside
+            <strong>Skyler Skjelset</strong>. They bonded over Bob Dylan and Neil Young.
+            At fourteen, Pecknold wrote his first song. In 2006, they co-founded
+            <strong>Fleet Foxes</strong> in Seattle.
+          </p>
+          <p>
+            Seattle producer <strong>Phil Ek</strong> (Modest Mouse, Built to Spill, The Shins,
+            Band of Horses) heard the demos and helped record the self-released
+            <em>Fleet Foxes EP</em> (2006). By late 2007, over <strong>250,000 Myspace plays</strong>
+            in two months caught <strong>Sub Pop&rsquo;s</strong> attention. The band signed on
+            <strong>January 18, 2008</strong> &mdash; the <strong>fourth Sub Pop artist</strong>
+            in the folk zone (after Jurado 45, Cahoone 48, Grand Archives 51).
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Fleet Foxes: Pitchfork #1 of 2008</h2>
+          <p>
+            The self-titled debut, <strong><em>Fleet Foxes</em></strong>, was released
+            <strong>June 3, 2008</strong>, on Sub Pop. Produced by <strong>Phil Ek</strong>.
+            Recorded at <strong>Avast! Recording Company</strong> and
+            <strong>London Bridge Studio</strong> in Seattle. The album cover: a detail from
+            <strong>Pieter Bruegel the Elder&rsquo;s</strong> <em>Netherlandish Proverbs</em>
+            (1559) &mdash; Dutch Renaissance, a village of fools.
+          </p>
+          <blockquote>
+            &ldquo;A landmark in American music &mdash; an instant classic.&rdquo;
+            &mdash; The Guardian, 5/5 stars
+          </blockquote>
+          <p>
+            <strong>Pitchfork:</strong> 9.0/10.
+            <strong>Metacritic:</strong> 87/100 (universal acclaim, 31 reviews).
+            <strong>Rolling Stone:</strong> 4/5 &mdash; compared to Beach Boys, Animal Collective, CSNY.
+            <strong>Mojo:</strong> &ldquo;Instant Classic.&rdquo;
+            <strong>Uncut:</strong> First-ever Music Award winner.
+            <strong>Pitchfork #1 Album of 2008.</strong>
+            <strong>The Times:</strong> #1 of 2008.
+            <strong>Billboard:</strong> Critics&rsquo; Choice Album of the Year.
+          </p>
+          <p>
+            <strong>&ldquo;White Winter Hymnal&rdquo;</strong> &mdash; a vocal round of
+            interlocking harmonies, Pecknold&rsquo;s lyrics &ldquo;fairly meaningless&rdquo; by
+            his own admission. The song is pure vocal architecture. Covered by
+            <strong>Pentatonix</strong> and distributed worldwide as choral sheet music.
+            <strong>&ldquo;Mykonos&rdquo;</strong> &mdash; the band&rsquo;s most-played
+            concert song, a soaring folk anthem from the <em>Sun Giant</em> EP.
+            Billboard 200 #36. UK #3.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Helplessness Blues: Billboard #4</h2>
+          <p>
+            <strong><em>Helplessness Blues</em></strong> (May 3, 2011, Sub Pop) debuted at
+            <strong>#4 on the Billboard 200</strong> &mdash; the band&rsquo;s commercial peak.
+            <strong>UK #2. Norway #1.</strong> Produced by Phil Ek across
+            Avast!, Bear Creek Studios, Dreamland Studios, and Reciprocal Recording.
+            <strong>Pitchfork:</strong> 8.8/10. <strong>Metacritic:</strong> 85.
+            Grammy nomination: <strong>Best Folk Album</strong> (2012).
+          </p>
+          <p>
+            <strong>Josh Tillman</strong> joined as drummer in 2008.
+            <strong>Morgan Henderson</strong> (formerly of <strong>The Blood Brothers</strong>)
+            joined in 2010, adding upright bass, woodwinds, violin, and saxophone.
+            After touring, Tillman departed in January 2012 to become
+            <strong>Father John Misty</strong> &mdash; one of the decade&rsquo;s most
+            distinctive solo voices. Pecknold: &ldquo;My relationship with Josh was
+            fully deteriorated by that point.&rdquo;
+          </p>
+          <p>
+            Fleet Foxes went on <strong>indefinite hiatus</strong>. Pecknold enrolled at
+            <strong>Columbia University</strong> (2013), majoring in English.
+            The most critically acclaimed indie folk band of the 21st century
+            simply stopped.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Crack-Up &amp; Shore: Return and Renewal</h2>
+          <p>
+            After six years, <strong><em>Crack-Up</em></strong> (June 16, 2017, Nonesuch)
+            marked the return. Co-produced by Pecknold and Skjelset. Experimental,
+            orchestral, progressive. Pitchfork compared it to <strong>Joanna Newsom&rsquo;s</strong>
+            <em>Ys</em> and <strong>Grizzly Bear&rsquo;s</strong> <em>Yellow House</em>.
+            <strong>Pitchfork:</strong> 8.7/10. <strong>Billboard 200:</strong> #9.
+            <strong>Metacritic:</strong> 81.
+          </p>
+          <p>
+            <strong><em>Shore</em></strong> (September 22, 2020, Anti-) was released on
+            the <strong>autumnal equinox</strong> &mdash; announced one day in advance,
+            dropped at the moment of astronomical transition. Brighter and more
+            celebratory than <em>Crack-Up</em>. Recorded across five studios
+            (New York, Paris, Los Angeles). <strong>Pitchfork:</strong> 8.3/10.
+            <strong>Metacritic:</strong> 87. Grammy nomination:
+            <strong>Best Alternative Music Album</strong> (2022).
+          </p>
+          <p>
+            Four albums. Four Pitchfork scores between 8.3 and 9.0.
+            Four Metacritic scores between 81 and 87.
+            <strong>Universal acclaim on every release.</strong>
+            No other band in the engine can claim this level of sustained
+            critical consensus.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Father John Misty Genealogy</h2>
+          <table class="genealogy-table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Fleet Foxes (53&deg;)</th>
+                <th>Father John Misty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Role in Fleet Foxes</td>
+                <td>Primary band</td>
+                <td>Drummer (2008&ndash;2012)</td>
+              </tr>
+              <tr>
+                <td>Post-departure</td>
+                <td>Continued (Crack-Up, Shore)</td>
+                <td>Solo career (Fear Fun, Pure Comedy, etc.)</td>
+              </tr>
+              <tr>
+                <td>Genre</td>
+                <td>Indie Folk (baroque, communal)</td>
+                <td>Indie Folk/Rock (sardonic, literary)</td>
+              </tr>
+              <tr>
+                <td>Register</td>
+                <td>Earnest, pastoral, reverberant</td>
+                <td>Ironic, confrontational, darkly comic</td>
+              </tr>
+              <tr>
+                <td>Label</td>
+                <td>Sub Pop &rarr; Nonesuch &rarr; Anti-</td>
+                <td>Sub Pop &rarr; Bella Union</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Cathedral Harmony</h4>
+              <div class="level advanced">Advanced &mdash; 54th Acoustic Element</div>
+              <p>
+                Layered vocal harmonies that achieve such density and reverberance
+                the sound transforms from voices singing into an architectural
+                space the listener inhabits. &ldquo;White Winter Hymnal&rdquo;
+                is a vocal round where seams disappear and the listener perceives
+                not singers but a structure made of voices. The communal harmony
+                (51) is the campfire; the cathedral harmony is the nave.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Prodigy Return</h4>
+              <div class="level advanced">Advanced &mdash; 54th Artist-City Pattern</div>
+              <p>
+                The artist who emerges from a city&rsquo;s suburban orbit young,
+                achieves world recognition, departs for education, and returns
+                to create from the original city network. Pecknold: Kirkland to
+                Seattle to Pitchfork #1 to Columbia University to Crack-Up at
+                Avast! and Anacortes. The circle closes.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Ancient Longing</h4>
+              <div class="level intermediate">Intermediate &mdash; 53rd Deployment</div>
+              <p>
+                The blue note that arrives from temporal displacement &mdash;
+                music that sounds centuries old, Bruegel cover art, Renaissance
+                mandolin figures, shape-note harmonies. The listener feels
+                homesick for a place they have never been. Nine consecutive
+                folk-adjacent blue notes (45&ndash;53).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>9th Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 34</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk Punk (49),
+                Indie Folk (50), Indie Folk (51), Folk/Rock (52), Indie Folk (53).
+                Nine degrees, nine production paradigms. The folk-adjacent nonad.
+                Longest genre-family streak in engine history.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Fleet Foxes</h4>
+              <div class="disco-years">2008 &middot; Sub Pop</div>
+              <p>
+                Pitchfork 9.0/10. #1 Album of 2008. Metacritic 87.
+                Guardian 5/5. Billboard 200 #36. UK #3.
+                &ldquo;White Winter Hymnal.&rdquo; &ldquo;Blue Ridge Mountains.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Helplessness Blues</h4>
+              <div class="disco-years">2011 &middot; Sub Pop</div>
+              <p>
+                Pitchfork 8.8/10. Billboard 200 #4. UK #2.
+                Metacritic 85. Grammy nom: Best Folk Album.
+                &ldquo;Helplessness Blues.&rdquo; &ldquo;Montezuma.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Crack-Up</h4>
+              <div class="disco-years">2017 &middot; Nonesuch</div>
+              <p>
+                Pitchfork 8.7/10. Billboard 200 #9. Metacritic 81.
+                Experimental. &ldquo;Third of May / Odaigahara.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Shore</h4>
+              <div class="disco-years">2020 &middot; Anti-</div>
+              <p>
+                Pitchfork 8.3/10. Metacritic 87. Billboard 200 #28.
+                Released on autumnal equinox. Grammy nom: Best Alt Album.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">51&deg;</span>
+              <strong>Grand Archives</strong> &mdash; Sub Pop harmony connection.
+              Communal harmony (51) and cathedral harmony (53): sunlit field
+              versus reverberant nave. Both Phil Ek&ndash;adjacent. Two degrees apart.
+            </li>
+            <li>
+              <span class="ref-degree">52&deg;</span>
+              <strong>Brandi Carlile</strong> &mdash; Consecutive degrees.
+              E=4 spike followed by E=3 return. Testimony roar (solo defiance)
+              versus cathedral harmony (collective transcendence).
+            </li>
+            <li>
+              <span class="ref-degree">48&deg;</span>
+              <strong>Sera Cahoone</strong> &mdash; Sub Pop folk quartet
+              (45, 48, 51, 53). Four Sub Pop artists in nine folk-adjacent degrees.
+            </li>
+            <li>
+              <span class="ref-degree">45&deg;</span>
+              <strong>Damien Jurado</strong> &mdash; Sub Pop origin.
+              The murmur (whispered solo) versus the cathedral harmony
+              (maximum collective sound). Poles of the Sub Pop folk spectrum.
+            </li>
+            <li>
+              <span class="ref-degree">0&deg;</span>
+              <strong>Quincy Jones</strong> &mdash; Mercury orchestras to Sub Pop
+              cathedral harmonies. The orchestral ambition becomes the human voice.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">53&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">34</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2006&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Critical Consensus</h4>
+          <div class="stat-row">
+            <span class="stat-label">Debut Pitchfork</span>
+            <span class="stat-value">9.0 / 10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Debut Metacritic</span>
+            <span class="stat-value">87 / 100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">HB Pitchfork</span>
+            <span class="stat-value">8.8 / 10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Crack-Up Pitchfork</span>
+            <span class="stat-value">8.7 / 10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shore Pitchfork</span>
+            <span class="stat-value">8.3 / 10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">HB Billboard</span>
+            <span class="stat-value">#4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy Noms</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sub Pop Folk Zone</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg;</span>
+            <span class="stat-value">Jurado</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">48&deg;</span>
+            <span class="stat-value">Cahoone</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">51&deg;</span>
+            <span class="stat-value">Grand Archives</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">53&deg;</span>
+            <span class="stat-value">Fleet Foxes</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">16</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">12</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#54</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#54</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#53</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Tracking</h4>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">14</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Male</span>
+            <span class="stat-value">40</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value">~25.9%</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        Degree 53&deg; &mdash; Fleet Foxes &mdash; Seattle 360 Engine &mdash; v1.49.189
+        <br>
+        Nine consecutive folk-adjacent degrees. The cathedral harmony. The fox in the engine.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "degree": 266,
+  "sound": "Rockslide",
+  "slug": "266-rockslide",
+  "sound_type": "accelerating stone-fall percussion -- initial impact crack through full cascade of overlapping impacts, valley amplification, E=7",
+  "energy": 7,
+  "ecosystem": "Cliff face -- Cascade canyon walls, talus slopes, road cuts in high-relief volcanic terrain",
+  "season": "Episodic (year-round; spring peak March-May due to freeze-thaw cycle completion and melt lubrication)",
+  "family": "Geophysics",
+  "domain": "Geophysics",
+  "cascade_geology_context": "Juan de Fuca subduction → tectonic uplift + volcanism. Volcanic rock joint systems as natural fracture planes. Freeze-thaw weathering (9% ice expansion). Canyon walls as inherently unstable exposed slope faces.",
+  "acoustic_physics": {
+    "phase_1_initial": "First rock impact: sharp, dry, percussive. Higher frequency than ice fracture. Stone-on-stone: dense, hard acoustic quality. Single struck note before acceleration.",
+    "phase_2_acceleration": "Fracture multiplies fragments → impacts multiply → percussion accelerates. Time between impacts decreases as more events occur simultaneously. The defining acoustic characteristic.",
+    "phase_3_full_cascade": "Continuous overlapping percussion. Large blocks: deep, resonant. Small fragments: high-frequency clatter. Gravity as drummer.",
+    "phase_4_tail": "Individual rocks and clatter continue in aftermath. Periodic impacts against fading echo background. Settles over seconds to minutes.",
+    "valley_amplification": "Canyon walls reflect and amplify. Narrow canyon = more reverberant, enclosed. Open slope = less reverberant, more diffuse.",
+    "fundamental_frequency_initial_hz": "500-3000 Hz for initial hard impact crack",
+    "fundamental_frequency_cascade_hz": "50-2000 Hz for full cascade (large blocks to small fragments)"
+  },
+  "nodes": [
+    {
+      "id": "initial-impact",
+      "type": "concept",
+      "title": "Initial Impact -- Stone on Stone",
+      "description": "First rock block contacts cliff face below. Sharp, dry, percussive. Higher frequency than ice fracture. Dense quality. The rockslide announces itself with a single struck note before accelerating.",
+      "connections": ["acceleration", "geology"]
+    },
+    {
+      "id": "acceleration",
+      "type": "concept",
+      "title": "Acceleration Phase -- Percussion Multiplying",
+      "description": "Fracture multiplies fragments; impacts multiply; percussion accelerates. The defining characteristic. Gravity as the rhythm that accelerates toward maximum.",
+      "connections": ["initial-impact", "cascade-full"]
+    },
+    {
+      "id": "geology",
+      "type": "pattern",
+      "title": "Cascade Geology -- Uplift vs. Erosion",
+      "description": "Juan de Fuca subduction → uplift. Volcanic rock joint systems → fracture planes. Freeze-thaw → fracture widening. The rockslide is geology made audible.",
+      "connections": ["initial-impact", "spring-peak"]
+    },
+    {
+      "id": "spring-peak",
+      "type": "connection",
+      "title": "Spring Peak -- Prepared Failures Release",
+      "description": "Winter freeze-thaw prepares; spring melt releases. March-May peak. WSDOT SR-20 reopening involves debris clearing. Episodic event with seasonal pattern.",
+      "connections": ["geology", "acceleration"]
+    },
+    {
+      "id": "mass-movement-arc",
+      "type": "pattern",
+      "title": "Mass-Movement Trilogy -- 265-267",
+      "description": "265 (glacier calving, ice, E=6) → 266 (rockslide, rock, E=7) → 267 (mudslide, saturated soil, E=8). Energy escalates. Duration increases. Three Cascade mass-movement mechanisms.",
+      "connections": ["acceleration", "geology"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-265", "sound": "Glacier Calving Mt Rainier", "relationship": "Direct predecessor in mass-movement trilogy. Both crack + cascade. Ice (E=6) vs rock (E=7). Energy escalates from ice to rock."},
+    {"target": "SPS-267", "sound": "Mudslide (Oso type)", "relationship": "Direct successor. Saturated soil, E=8. Arc completes: ice → rock → soil. Three acoustic languages of Cascade mass movement."},
+    {"target": "SPS-259", "sound": "Thunderstorm Cascades", "relationship": "Triggering weather. Intense precipitation saturates rock fractures. Thunderstorm and rockslide connected by same hydrological system."},
+    {"target": "SPS-268", "sound": "Pacific Wren rain-day chorus", "relationship": "Biology returns at 268 after three mass-movement degrees. Maximum contrast: dry percussive rockslide cascade vs. Pacific Wren's amplified rain-day song."}
+  ]
+}

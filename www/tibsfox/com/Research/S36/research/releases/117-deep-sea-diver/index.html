@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 117&deg; &mdash; Deep Sea Diver &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #311B92;
+      color: #D1C4E9;
+      border: 1px solid #4527A0;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1A237E;
+      color: #9FA8DA;
+      border: 1px solid #283593;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    .sideplayer-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3949AB);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sideplayer-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .sideplayer-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    blockquote {
+      border-left: 3px solid #311B92;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EDE7F6;
+      font-style: italic;
+      color: #311B92;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>117 &mdash; Deep Sea Diver</span>
+    </nav>
+
+    <!-- Sideplayer Banner -->
+    <div class="sideplayer-banner">
+      <h3>The Sideplayer&rsquo;s Own Voice &mdash; Sub Pop Returns &mdash; Jessica Dobson&rsquo;s Layered Architecture</h3>
+      <p>
+        Deep Sea Diver at degree 117&deg; is led by <strong>Jessica Dobson</strong> &mdash;
+        former touring guitarist for <strong>Beck</strong>, <strong>The Shins</strong>,
+        <strong>Conor Oberst</strong>, and <strong>Yeah Yeah Yeahs</strong>. Years of
+        sideplayer education synthesized into a <strong>Sub Pop</strong> band of layered
+        guitar architecture, big hooks, and emotional depth. The sideplayer becomes
+        the frontperson. E=5 &mdash; dense and powerful.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">117&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Deep Sea Diver</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Indie Rock</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="record-badge">Sideplayer &rarr; Frontperson</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Sideplayer&rsquo;s Own Voice</h2>
+          <p>
+            Jessica Dobson spent years as a touring guitarist for some of indie rock&rsquo;s
+            most prominent acts &mdash; <strong>Beck</strong> (experimental pop, genre fluidity),
+            <strong>The Shins</strong> (jangly melodic indie), <strong>Conor Oberst</strong>
+            (emotional directness, folk-inflected rock), and <strong>Yeah Yeah Yeahs</strong>
+            (angular art-rock). Each gig was an education. Deep Sea Diver is the
+            <strong>synthesis</strong> &mdash; everything Dobson absorbed, redirected into
+            her own voice.
+          </p>
+          <blockquote>
+            The sideplayer-to-frontperson trajectory inverts the usual band narrative.
+            Most musicians start with their own project and then collaborate. Dobson
+            proved herself in other people&rsquo;s bands first, then stepped to the front.
+            The result: a sound that carries the accumulated weight of multiple
+            musical vocabularies, expressed as a single, layered, hook-driven voice.
+          </blockquote>
+          <p>
+            The band&rsquo;s sound is built on three pillars: <strong>layered guitars</strong>
+            (multiple tracks creating dense, shifting textures &mdash; overdrive and clean tones
+            coexisting, effects used architecturally), <strong>big hooks</strong> (melodies that
+            cut through the textural density like a signal through noise), and
+            <strong>Dobson&rsquo;s vocals</strong> (powerful, clear, emotionally expressive &mdash;
+            the same person controlling voice and guitar gives the music internal coherence).
+            Sub Pop. E=5. Dense and powerful.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Sub Pop Returns</h2>
+          <p>
+            After the <strong>self-released reset</strong> at degree 116 (Pony Time &mdash; no
+            label, DIY absolute), <strong>Sub Pop Records</strong> returns at degree 117. The
+            label trajectory: Matador (115) &rarr; Self-Released (116) &rarr; Sub Pop (117).
+            From prestigious national indie to no label at all to Seattle&rsquo;s own.
+            Sub Pop at degree 117 is a <strong>homecoming</strong> &mdash; the engine returns
+            to its institutional center of gravity. The label that launched Nirvana at degree 1
+            is here again, 116 degrees later, still signing the most interesting music in Seattle.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Jessica Dobson &mdash; Guitar Hero Who Sings</h2>
+          <p>
+            Dobson&rsquo;s guitar work is the sonic signature. Her playing draws from the
+            extended vocabulary developed touring with Beck (experimentalism), The Shins
+            (melodic precision), Conor Oberst (emotional directness), and Yeah Yeah Yeahs
+            (angular energy). These influences don&rsquo;t compete &mdash; they&rsquo;re
+            synthesized into a style that is melodic but layered, technically accomplished
+            but emotionally present, structured but capable of explosive release.
+          </p>
+          <p>
+            Key albums: <strong>History Speaks</strong> (2020, Sub Pop) &mdash; full realization.
+            <strong>Impossible Weight</strong> (2022, Sub Pop) &mdash; expanded ambition. Each
+            album expands the sonic palette while maintaining the hook-driven core. Guitar
+            layers become more elaborate; production becomes more layered; emotional range deepens.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Sideplayer&rsquo;s Own Voice</h4>
+              <div class="level advanced">Advanced &mdash; 118th Acoustic Element</div>
+              <p>
+                A musician who spent years in other people&rsquo;s bands
+                synthesizes multiple vocabularies into a personal voice.
+                Layered complexity. Technical fluency without showmanship.
+                Big hooks inside dense architecture. Beck + Shins + Oberst
+                + YYYs = Deep Sea Diver.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Sideplayer-to-Frontperson Trajectory</h4>
+              <div class="level advanced">Advanced &mdash; 118th Pattern</div>
+              <p>
+                Learn in the background, then step to the front. The inverse
+                of the usual band narrative. Compounded influence from
+                multiple touring contexts. Each gig was an education.
+                The synthesis is greater than the sum.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Sub Pop Recurrence</h4>
+              <div class="level intermediate">Intermediate &mdash; Label Dynamics</div>
+              <p>
+                Sub Pop returns at degree 117 after the self-released
+                reset (116). Label trajectory: Matador (115) &rarr;
+                Self-Released (116) &rarr; Sub Pop (117). Seattle&rsquo;s
+                flagship label. A homecoming.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Layered Guitar Architecture</h4>
+              <div class="level intermediate">Intermediate &mdash; Sonic Structure</div>
+              <p>
+                Multiple guitar tracks creating dense textural webs.
+                Effects used architecturally. Overdrive + clean coexist.
+                Not ambient &mdash; hook-driven pop structure inside
+                elaborate sonic construction.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">116&deg;</span>
+              <strong>Pony Time</strong> &mdash; Consecutive contrast.
+              Self-released duo, garage rock, raw, minimal (116) vs. Sub Pop band,
+              indie rock, layered, dense (117). Same E=5. Minimalism vs. maximalism.
+              DIY absolute vs. Sub Pop homecoming.
+            </li>
+            <li>
+              <span class="ref-degree">113&deg;</span>
+              <strong>Minus the Bear</strong> &mdash; Guitar complexity.
+              Minus the Bear: intricate math-rock guitar (E=4).
+              Deep Sea Diver: layered melodic guitar (E=5).
+              Both feature guitar as the band&rsquo;s sonic identity.
+            </li>
+            <li>
+              <span class="ref-degree">115&deg;</span>
+              <strong>Pretty Girls Make Graves</strong> &mdash; Constructed density.
+              PGMG: angular post-punk architecture (Matador). Deep Sea Diver:
+              layered melodic architecture (Sub Pop). Both E=5.
+              Different blueprints, shared commitment to construction.
+            </li>
+            <li>
+              <span class="ref-degree">28&deg;</span>
+              <strong>Mudhoney</strong> &mdash; Sub Pop continuity.
+              Mudhoney: garage rock (E=5, Sub Pop). Deep Sea Diver:
+              indie rock (E=5, Sub Pop). Same label, same energy.
+              Mudhoney is raw; Deep Sea Diver is layered.
+            </li>
+            <li>
+              <span class="ref-degree">1&deg;</span>
+              <strong>Nirvana</strong> &mdash; Sub Pop lineage.
+              Nirvana: first Sub Pop entry (degree 1). Deep Sea Diver:
+              Sub Pop at degree 117. The label that launched the engine.
+              Nirvana was explosive; Dobson is architectural.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">117&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2013&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Sub Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Format</span>
+            <span class="stat-value">Band (Dobson-led)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Lead / Guitar</span>
+            <span class="stat-value">Jessica Dobson</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Drums</span>
+            <span class="stat-value">Peter Mansen</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bass</span>
+            <span class="stat-value">Garrett Gue</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Touring Background</h4>
+          <div class="stat-row">
+            <span class="stat-label">Beck</span>
+            <span class="stat-value">Experimental pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Shins</span>
+            <span class="stat-value">Melodic indie</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Conor Oberst</span>
+            <span class="stat-value">Folk-rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Yeah Yeah Yeahs</span>
+            <span class="stat-value">Art-rock</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#118 (Sideplayer)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#118 (Trajectory)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../116-pony-time/" style="color: var(--seattle-navy);">&larr; 116&deg; Pony Time</a>
+        <a href="../118-loomer/" style="color: var(--seattle-navy);">118&deg; Loomer &rarr;</a>
+      </div>
+      <p>
+        Degree 117&deg; &mdash; Deep Sea Diver &mdash; Seattle 360 Engine &mdash; v1.49.257
+        <br>
+        Sub Pop returns. Jessica Dobson &mdash; former touring guitarist for Beck, The Shins,
+        Conor Oberst, Yeah Yeah Yeahs &mdash; builds her own band of layered guitar architecture,
+        big hooks, and emotional depth. The sideplayer becomes the frontperson. The 118th acoustic
+        element: the sideplayer&rsquo;s own voice. The 118th pattern: the sideplayer-to-frontperson
+        trajectory. Learn in the background, then step to the front. E=5. Dense and powerful.
+        The synthesis is greater than the sum. Sub Pop homecoming after the DIY absolute (116).
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

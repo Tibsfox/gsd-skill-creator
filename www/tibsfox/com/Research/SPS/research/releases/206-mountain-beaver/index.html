@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 206&deg; &mdash; Mountain Beaver &mdash; Most Primitive Living Rodent &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #33691E, #558B2F, #689F38); color: #F1F8E9; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(51, 105, 30, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .fossil-card { background: linear-gradient(135deg, #33691E, #558B2F, #689F38); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #F1F8E9; }
+    .fossil-card h3 { margin-top: 0; font-size: 1.1rem; color: #C5E1A5; }
+    .fossil-card p { color: #F1F8E9; }
+    .fossil-card strong { color: white; }
+
+    .misnomer-card { background: linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .misnomer-card h3 { margin-top: 0; font-size: 1.1rem; color: #A5D6A7; }
+    .misnomer-card p { color: #C8E6C9; }
+    .misnomer-card strong { color: #E8F5E9; }
+
+    .understory-card { background: linear-gradient(135deg, #2E7D32, #388E3C, #43A047); border: 2px solid #1B5E20; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E8F5E9; }
+    .understory-card h3 { margin-top: 0; font-size: 1.1rem; color: #C8E6C9; }
+    .understory-card p { color: #E8F5E9; }
+    .understory-card strong { color: white; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.fossil { background: #33691E; }
+    .theory-icon.endemic { background: #1B5E20; }
+    .theory-icon.quiet { background: #558B2F; }
+    .theory-icon.misnomer { background: #2E7D32; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">206&deg;</div>
+      <div class="release-title-block">
+        <h2>Mountain Beaver</h2>
+        <div class="scientific"><em>Aplodontia rufa</em> (Aplodontidae) &mdash; E=2 &mdash; Living Fossil</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>FIRST APLODONTIDAE</strong> &mdash; the most primitive living rodent family.
+      Sole surviving species. <strong>~50 million year</strong> lineage.
+      Found <strong>nowhere on Earth</strong> except the PNW.
+      Thin whistle at <strong>2,000&ndash;6,000 Hz.</strong>
+      Barely audible. <strong>E=2</strong> &mdash; quietest mammal in the engine.
+      <strong>NOT a beaver.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="fossil-card">
+          <h3>Living Fossil &mdash; ~50 Million Years</h3>
+          <p>
+            Aplodontidae dates to the <strong>Eocene.</strong> Every other
+            living rodent family evolved after this one. <strong>Sole surviving
+            species</strong> &mdash; all other aplodontids extinct.
+            Primitive kidneys. Primitive thermoregulation. Ancient skull.
+            These are not deficiencies &mdash; they are the
+            <strong>original condition.</strong>
+          </p>
+        </div>
+
+        <div class="misnomer-card">
+          <h3>NOT a Beaver &mdash; The Misnomer</h3>
+          <p>
+            <strong>No relation</strong> to Castoridae. <strong>10&ndash;20x smaller</strong>
+            (0.8&ndash;1.5 kg vs. 15&ndash;30 kg). No dams. No lodges.
+            <strong>No flat tail</strong> (vestigial stub). Early settlers
+            saw gnawing + water proximity and made assumptions.
+            Some prefer <strong>&ldquo;sewellel&rdquo;</strong> (Chinook Jargon)
+            or simply <em>Aplodontia.</em>
+          </p>
+        </div>
+
+        <div class="understory-card">
+          <h3>Dense Understory &mdash; The Invisible Mammal</h3>
+          <p>
+            Lives beneath the canopy in the <strong>darkest, most dense</strong>
+            forest layer. Sword fern. Salal. Devil&rsquo;s club.
+            <strong>Burrow systems</strong> with 10&ndash;20+ entrances.
+            Cut fern fronds at a burrow entrance = occupancy sign.
+            <strong>Nocturnal.</strong> Rarely seen. Water-dependent
+            (primitive kidneys require constant moisture).
+          </p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-205 Bighorn Sheep Clash</strong>
+            <p>E=6 to E=2. Maximum to minimum. Canyon CRACK to understory whisper. Both rocky/forested terrain. Opposite acoustic strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-204 Mountain Goat Kid</strong>
+            <p>Kid mew (E=3) to Mountain Beaver whistle (E=2). The energy continues to drop. The engine goes quieter.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-206 The Black Tones</strong>
+            <p>ANCIENT LINEAGE! Blues rock (oldest genre, E=6) and Mountain Beaver (oldest rodent, E=2). Both ancient. Both PNW. Extreme contrast: +4 gap.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-195 Fawn Bleat</strong>
+            <p>Fawn (E=3, forest floor) and Mountain Beaver (E=2, burrow). Both quiet forest-floor voices. Mountain Beaver is even quieter.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon fossil">F</div>
+            <div class="theory-content">
+              <h4>First Aplodontidae &mdash; Most Primitive Living Rodent</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>~50 million year lineage. Sole surviving species. Every other rodent family evolved after this one. The original condition preserved.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon endemic">E</div>
+            <div class="theory-content">
+              <h4>PNW Endemic &mdash; Found Nowhere Else</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Southern BC through WA/OR to northern CA. The PNW's moist understory is the last habitat supporting this ancient lineage. Globally unique.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon quiet">Q</div>
+            <div class="theory-content">
+              <h4>E=2 &mdash; Quietest Mammal in the Engine</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Thin whistle, 2-10 m carry. Acoustic strategy: invisibility. Olfaction is primary. Sound is secondary. Don't be heard.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon misnomer">M</div>
+            <div class="theory-content">
+              <h4>The Misnomer &mdash; NOT a Beaver</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>No relation to Castoridae. 10-20x smaller. No dams. Vestigial tail. Early settler assumption based on gnawing + water.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Mountain Beaver</div><div class="stat-detail"><em>A. rufa</em> (NOT a beaver)</div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Aplodontidae</div><div class="stat-detail">FIRST &mdash; most primitive rodent</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Thin whistle</div><div class="stat-detail">barely audible &ldquo;eee&rdquo;</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #33691E;">E = 2</div><div class="stat-detail">quietest mammal in engine</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">2,000&ndash;6,000 Hz</div><div class="stat-detail">high, thin, no carry</div></div>
+        <div class="stat-card"><div class="stat-label">Carry distance</div><div class="stat-value">2&ndash;10 m</div><div class="stat-detail">burrow-to-burrow only</div></div>
+        <div class="stat-card"><div class="stat-label">Lineage</div><div class="stat-value">~50 mya</div><div class="stat-detail">Eocene origin</div></div>
+        <div class="stat-card"><div class="stat-label">Range</div><div class="stat-value">PNW only</div><div class="stat-detail">BC to N. California</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

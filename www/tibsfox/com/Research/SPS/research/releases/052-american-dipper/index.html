@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 52&deg; &mdash; American Dipper &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Torrent-song element card */
+    .torrent-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .torrent-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* New family card */
+    .family-card {
+      background: linear-gradient(135deg, #E0F2F1 0%, #80CBC4 100%);
+      border: 2px solid #00695C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #004D40;
+    }
+
+    /* Aquatic songbird card */
+    .aquatic-card {
+      background: linear-gradient(135deg, #E1F5FE 0%, #4FC3F7 100%);
+      border: 2px solid #0277BD;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .aquatic-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #01579B;
+    }
+
+    /* Muir card */
+    .muir-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .muir-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Water quality card */
+    .waterquality-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #81C784 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .waterquality-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Dome nest card */
+    .nest-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .nest-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.torrent { background: #1565C0; }
+    .theory-icon.family { background: #00695C; }
+    .theory-icon.aquatic { background: #0277BD; }
+    .theory-icon.muir { background: #F57F17; }
+    .theory-icon.waterquality { background: #2E7D32; }
+    .theory-icon.dome { background: #4E342E; }
+    .theory-icon.dipping { background: #6A1B9A; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">52&deg;</div>
+      <div class="release-title-block">
+        <h2>American Dipper</h2>
+        <div class="scientific">Cinclus mexicanus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loud bubbling wren-like song over rushing water &mdash; the torrent-song, 1st Cinclidae in the engine &mdash; 21st family, the ONLY aquatic songbird in North America, walks underwater on stream beds, John Muir&rsquo;s favorite bird, water quality indicator species, sings year-round through winter, E=3, mountain stream ecosystem, eighth consecutive CSV substitution, Passeriformes continues for a 15th consecutive entry
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Long-toed Salamander</strong> (<em>Ambystoma macrodactylum</em>) at degree 52. Because the SPS Part B engine is birds-and-mammals only, American Dipper replaces it. The substitution preserves the original&rsquo;s <strong>E=3 energy level</strong> and <strong>mountain stream habitat</strong>. Both species are aquatic ecosystem health indicators &mdash; the salamander through its permeable skin and sensitivity to water chemistry, the dipper through its dependence on clean, well-oxygenated streams with abundant EPT macroinvertebrate communities. This is the <strong>eighth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52) &mdash; the engine remains deep in the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- Aquatic Songbird Card -->
+        <div class="aquatic-card">
+          <h3>The Only Aquatic Songbird in North America</h3>
+          <p>The American Dipper is the <strong>only passerine in North America that forages underwater</strong>. It dives into fast-flowing mountain streams, walks along the stream bottom gripping rocks with strong claws, and forages on aquatic invertebrates beneath the surface. No other songbird does this &mdash; not in North America, not anywhere in the world outside the five species of Cinclidae. Adaptations include a <strong>nictitating membrane</strong> (third eyelid for underwater vision), <strong>nasal flaps</strong> (seal nostrils when diving), an <strong>extra-large preen gland</strong> (10x normal, for waterproofing), <strong>higher hemoglobin</strong> (increased oxygen-carrying capacity), and <strong>dense, waterproof plumage</strong> (50% more feathers per unit area than terrestrial passerines).</p>
+        </div>
+
+        <!-- New Family Card -->
+        <div class="family-card">
+          <h3>First Cinclidae &mdash; The 21st Family</h3>
+          <p>The American Dipper introduces the engine&rsquo;s <strong>21st family: Cinclidae</strong> (dippers). Monotypic in North America &mdash; <em>Cinclus mexicanus</em> is the only representative of the dipper family in the New World north of South America. The family contains five species worldwide, all in a single genus (<em>Cinclus</em>), distributed across Eurasia and the Americas. No other Cinclidae will enter the engine. Second consecutive new family entry (Certhiidae at 51, Cinclidae at 52) &mdash; back-to-back monotypic family introductions.</p>
+        </div>
+
+        <!-- Torrent-Song Element Card -->
+        <div class="torrent-card">
+          <h3>The 53rd Acoustic Element: The Torrent-Song</h3>
+          <p>A <strong>loud, complex, sustained, bubbling series of trills and warbles</strong> that competes with the roar of rushing water. Up to 10 minutes of continuous song. Named &ldquo;the torrent-song&rdquo; for three resonances: (1) the torrent itself &mdash; the song must overpower the noise of fast-flowing mountain streams; (2) the torrent of notes &mdash; a flood of complex, varied vocalization matching the flood of water; (3) the torrent-song as water quality signal &mdash; its presence indicates clean, well-oxygenated streams.</p>
+          <p>The torrent-song is the <strong>exact opposite</strong> of the bark-spiral (degree 51). The bark-spiral hides; the torrent-song fights. The Brown Creeper whispers at E=1; the American Dipper shouts at E=3. Crypsis yields to dominance. The first acoustic element defined by <strong>environmental competition</strong>.</p>
+        </div>
+
+        <!-- Muir Card -->
+        <div class="muir-card">
+          <h3>John Muir&rsquo;s Favorite Bird</h3>
+          <p>John Muir devoted Chapter 13 of <em>The Mountains of California</em> (1894) entirely to the American Dipper, then called the water ouzel. <em>&ldquo;He is the mountain streams&rsquo; own darling, the humming-bird of blooming waters, loving rocky ripple-slopes and sheets of foam as a bee loves flowers, as a lark loves sunshine and meadows. Among all the mountain birds, none has cheered me so much in my lonely wanderings, &mdash; none so unfailingly.&rdquo;</em> The bird that sings while icicles hang from frozen waterfalls &mdash; at the intersection of ornithology and American conservation history.</p>
+        </div>
+
+        <!-- Water Quality Card -->
+        <div class="waterquality-card">
+          <h3>Water Quality Indicator Species</h3>
+          <p>The American Dipper&rsquo;s presence and breeding success correlate directly with stream health. Dippers feed on <strong>EPT taxa</strong> (mayflies, stoneflies, caddisflies) &mdash; macroinvertebrates that are themselves indicators of clean, well-oxygenated water. On clean streams, dipper territories are smaller and reproductive output is higher. On degraded streams, territories expand and reproduction declines. Dippers have been used as bioindicators for selenium contamination in coal mine-affected streams and trace metal exposure in British Columbia watersheds. Where the torrent-song is heard, the water is clean.</p>
+        </div>
+
+        <!-- Dome Nest Card -->
+        <div class="nest-card">
+          <h3>The Dome Nest Behind the Waterfall</h3>
+          <p>A <strong>globe-shaped nest</strong> approximately 30 cm in diameter, built of living moss (which continues to grow in the nest), with a side entrance facing the water. Placed on rock ledges, bridge abutments, or cliff faces immediately over fast-flowing water &mdash; sometimes <strong>behind a waterfall</strong>, forcing the bird to fly through falling water to reach its eggs. The thick mossy outer shell (3&ndash;5 cm) absorbs spray while water-resistant inner grasses keep eggs and chicks dry. Where the Brown Creeper (degree 51) hides behind bark, the American Dipper hides behind water.</p>
+        </div>
+
+        <h2>The Tail-Wagging Waterside Bird of Mexico</h2>
+        <p><em>Cinclus mexicanus</em> &mdash; from Ancient Greek <em>kinklos</em>, a small tail-wagging waterside bird, + Latin <em>mexicanus</em>, &ldquo;of Mexico.&rdquo; William Swainson described the species in 1827 based on a specimen collected in Mexico by William Bullock. Full translation: <strong>&ldquo;The tail-wagging waterside bird of Mexico&rdquo;</strong> &mdash; a name that connects an ancient Greek observation of bobbing waterside birds to a specimen collected in the mountains of central Mexico. Formerly called the <strong>water ouzel</strong> &mdash; the name used by John Muir and most 19th-century naturalists.</p>
+
+        <h2>The Sound: Loud Bubbling Song Over Rushing Water</h2>
+        <p><strong>Song:</strong> Extended bouts lasting 1&ndash;10 minutes, 2.0&ndash;8.0 kHz. A complex mixture of high whistles, trills, buzzes, and melodious warbling phrases delivered at high volume to be heard over rushing water. Confrontation songs can exceed 5 minutes. Both sexes sing year-round &mdash; including through winter while standing on ice-covered rocks. One of very few North American songbirds that sings through the coldest months.</p>
+        <p><strong>Calls:</strong> <em>Jik</em> call (sharp, buzzy, 4.0&ndash;5.5 kHz, ~46 ms) &mdash; primary contact and alarm call, given in flight over streams. <em>Grawk</em> call (lower, harsher, 3.0&ndash;4.5 kHz, ~88 ms) &mdash; territorial confrontation. <em>Weep</em> call (4.0&ndash;6.0 kHz) &mdash; female at nest.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Song (full bout)</td><td>2.0&ndash;8.0 kHz</td><td>1&ndash;10 min</td><td>Territory, pair bond, confrontation</td></tr>
+            <tr><td>Song peak energy</td><td>3.0&ndash;6.0 kHz</td><td>&mdash;</td><td>Above stream noise (&lt;1 kHz)</td></tr>
+            <tr><td>Jik call</td><td>4.0&ndash;5.5 kHz</td><td>~46 ms</td><td>Contact, alarm, flight</td></tr>
+            <tr><td>Grawk call</td><td>3.0&ndash;4.5 kHz</td><td>~88 ms</td><td>Territorial confrontation</td></tr>
+            <tr><td>Weep call</td><td>4.0&ndash;6.0 kHz</td><td>Variable</td><td>Female nest call</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Walking Underwater: The Sole North American Strategy</h2>
+        <p>The American Dipper is the <strong>only songbird in North America</strong> that forages by walking, swimming, and diving in fast-flowing water. It wades into the current, dives from rocks or the surface, walks along the stream bottom gripping rocks with strong toes, and flips stones to find aquatic insect larvae. Can remain submerged for 15&ndash;30 seconds. Then surfaces, returns to a mid-stream boulder, and bobs in the characteristic dipping motion.</p>
+
+        <h3>Physical Adaptations</h3>
+        <ul>
+          <li><strong>Nictitating membrane</strong> &mdash; third eyelid allows underwater vision while protecting the eye</li>
+          <li><strong>Nasal flaps</strong> &mdash; movable scaled flaps seal nostrils shut when diving</li>
+          <li><strong>Extra-large preen gland</strong> &mdash; ~10x larger than typical passerine; copious oil waterproofs plumage; trapped air layer provides insulation and buoyancy</li>
+          <li><strong>Higher hemoglobin</strong> &mdash; increased oxygen-carrying capacity for sustained dives</li>
+          <li><strong>Dense plumage</strong> &mdash; ~50% more feathers per unit area than terrestrial passerines of similar size</li>
+          <li><strong>Strong legs and feet</strong> &mdash; proportionally large with strong curved claws for gripping wet rock</li>
+          <li><strong>Compact body</strong> &mdash; rotund shape minimizes surface-area-to-volume ratio, reducing heat loss in cold water</li>
+        </ul>
+
+        <h3>The Dipping Behavior</h3>
+        <p>The signature behavior: constant <strong>bobbing or dipping</strong> while perched on rocks &mdash; 40&ndash;60 dips per minute. A rhythmic curtsey-like motion that gives the family its name. Function debated: territorial signal, depth perception over moving water, or visual camouflage matching water motion over rocks. The <strong>white nictitating membrane flashes</strong> conspicuously when the bird blinks during dipping &mdash; a potential visual signal analogous to the Dark-eyed Junco&rsquo;s white tail flash (Sibley 2013).</p>
+
+        <h2>The Puget Sound Watershed Connection</h2>
+        <p>At degree 52, the engine enters the water for the first time &mdash; not the saltwater of the Sound itself, but the <strong>freshwater tributaries that feed it</strong>. Every mountain stream that drains into Puget Sound passes through American Dipper habitat. The dipper occupies the headwaters: the Snoqualmie, Skykomish, Sauk, Stillaguamish, Nooksack, and their mountain tributaries. The torrent-song is the first acoustic signal of the watershed that becomes, downstream, the Sound. The American Dipper is the <strong>upstream voice</strong> of Puget Sound.</p>
+
+        <h2>Family Tracker After Degree 52</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td><strong>Cinclidae</strong></td><td><strong>52</strong></td><td><strong>1 (NEW &mdash; 21st family)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-one families across 53 entries. Cinclidae enters as the only aquatic songbird family. Fifteen consecutive Passeriformes (38&ndash;52), but the ecological territory has shifted from forest to water. 45 of 53 entries (84.9%) are Passeriformes.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon torrent">T</div>
+            <div class="theory-content">
+              <h4>The Torrent-Song <span class="theory-level foundational">foundational</span></h4>
+              <p>The 53rd acoustic element. A loud, complex, sustained series of trills and warbles competing with rushing water. Up to 10 minutes continuous. The first element defined by environmental competition &mdash; sound shaped by the need to overpower a natural noise source. Music-theory parallel: the fortissimo obligato.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">C</div>
+            <div class="theory-content">
+              <h4>First Cinclidae &mdash; 21st Family <span class="theory-level foundational">foundational</span></h4>
+              <p>Monotypic North American representative. Five species worldwide in <em>Cinclus</em>, only <em>C. mexicanus</em> north of South America. Second consecutive new family. The only aquatic songbird family on Earth. Music-theory parallel: the new instrument &mdash; a hydraulophone entering the ensemble.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon aquatic">W</div>
+            <div class="theory-content">
+              <h4>The Only Aquatic Songbird <span class="theory-level foundational">foundational</span></h4>
+              <p>Dives, swims, walks on stream bottoms. Nictitating membrane, nasal flaps, extra-large preen gland, higher hemoglobin. No other passerine does this. The engine enters the water for the first time at degree 52. Music-theory parallel: the underwater microphone &mdash; recording sound in a medium no other instrument can reach.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon muir">M</div>
+            <div class="theory-content">
+              <h4>John Muir&rsquo;s Favorite Bird <span class="theory-level foundational">foundational</span></h4>
+              <p>&ldquo;The mountain streams&rsquo; own darling.&rdquo; Chapter 13 of <em>The Mountains of California</em> (1894). The intersection of ornithology and conservation history. Sings through winter while standing on ice. Music-theory parallel: the winter cadenza &mdash; a solo performance when the orchestra has fallen silent.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon waterquality">Q</div>
+            <div class="theory-content">
+              <h4>Water Quality Indicator <span class="theory-level foundational">foundational</span></h4>
+              <p>Presence = clean water. Absence = degraded stream. Feeds on EPT taxa (mayflies, stoneflies, caddisflies) that indicate stream health. The torrent-song is an acoustic report card. Music-theory parallel: the tuning fork &mdash; an absolute reference standard against which the health of the instrument (stream) is measured.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dome">N</div>
+            <div class="theory-content">
+              <h4>The Dome Nest Behind the Waterfall <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Globe-shaped nest of living moss, 30 cm diameter, placed behind waterfalls and in spray zones. Bird flies through falling water to reach eggs. The most dramatic nest site in the engine. Music-theory parallel: the reverb chamber &mdash; a performance space where the sound of water is the room tone.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dipping">D</div>
+            <div class="theory-content">
+              <h4>The Dipping Behavior <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Constant bobbing at 40&ndash;60 dips per minute. White nictitating membrane flashes with each blink. The signature behavior that names the family. Function debated: signal, depth perception, or camouflage matching water motion. Music-theory parallel: the ostinato &mdash; a rhythmic figure repeated persistently throughout the performance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-051: Brown Creeper</strong>
+            <p>CONSECUTIVE DEGREES, OPPOSITE ACOUSTIC STRATEGIES. The bark-spiral (degree 51, E=1, crypsis) yields to the torrent-song (degree 52, E=3, dominance). Both are monotypic family representatives in consecutive degrees. The creeper whispers on bark; the dipper shouts over water. From Certhiidae to Cinclidae &mdash; two singleton families, back to back.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>WATER BIRDS BOOKENDING THE FIRST ARC. The Great Blue Heron (degree 0) stands in shallow water. The American Dipper (degree 52) walks underwater. Degree 0 was still and silent at the water&rsquo;s edge. Degree 52 dives in and sings over the roar. The engine comes to water from both ends.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>WREN-LIKE SONG, STREAM ASSOCIATION. The Pacific Wren (degree 1) sings a complex, cascading song near forest streams. The American Dipper&rsquo;s song is described as &ldquo;wren-like&rdquo; in its bubbling complexity. Both are compact, short-tailed birds associated with water. The wren stays on the bank; the dipper goes in.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005: Red-breasted Nuthatch</strong>
+            <p>SUBSTRATE SPECIALISTS IN DIFFERENT MEDIA. The nuthatch descends bark (degree 5). The dipper walks on stream bottoms (degree 52). Both grip surfaces with specialized feet. Both navigate terrain that other passerines cannot. Bark vs. water &mdash; two impossible substrates, two specialized solutions.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018: Swainson&rsquo;s Thrush</strong>
+            <p>RIPARIAN STREAM ASSOCIATES. Swainson&rsquo;s Thrush (degree 18) sings its spiraling ascending song from streamside alder and willow. The American Dipper sings from a rock in the middle of the same stream. Riparian habitat above and in the water.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>ECOSYSTEM INDICATOR SPECIES. The Spotted Owl indicates old-growth forest health. The American Dipper indicates stream health. Both are living metrics: their presence means the ecosystem is functioning; their absence means something is broken. Forest canopy and stream bottom &mdash; two indicator species, two ecosystems.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>American Dipper documented across Washington State. Year-round resident of fast-flowing mountain streams. Found on virtually every clear, cold stream in the Cascades and Olympics. The only aquatic songbird in the PNW avifauna.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Mountain stream ecology. Aquatic macroinvertebrate food webs. EPT taxa as water quality indicators. The American Dipper connects riparian forest ecology to aquatic ecosystem health. The bird that reads the health of the stream by eating what lives in it.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; American Dipper (<em>Cinclus mexicanus</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; American Dipper. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; American Dipper.</li>
+          <li>National Geographic &mdash; American Dipper.</li>
+          <li>Wikipedia &mdash; &ldquo;American dipper.&rdquo;</li>
+          <li>Fite, K. R. (1984). &ldquo;Vocal behavior and acoustic analysis of the American Dipper (<em>Cinclus mexicanus</em>).&rdquo; M.S. Thesis.</li>
+          <li>Audubon &mdash; American Dipper Field Guide.</li>
+          <li>Wikipedia &mdash; &ldquo;Cinclus.&rdquo;</li>
+          <li>Roaring Fork Conservancy (2014). &ldquo;Survey of American Dipper Distribution and Reproductive Success as Indicator of Stream Health.&rdquo;</li>
+          <li>Morrissey, C. A. et al. (2011). &ldquo;American dippers indicate contaminant biotransport by Pacific salmon.&rdquo; <em>Environ. Sci. Technol.</em> 45(12): 5170&ndash;5175.</li>
+          <li>BotW &mdash; Sounds and Vocal Behavior: American Dipper.</li>
+          <li>Animal Diversity Web &mdash; <em>Cinclus mexicanus</em>.</li>
+          <li>Biology Insights &mdash; &ldquo;What Is a Dipper? The Aquatic Songbird Explained.&rdquo;</li>
+          <li>Muir, J. (1894). &ldquo;The Water-Ouzel.&rdquo; Chapter 13, <em>The Mountains of California</em>.</li>
+          <li>Sierra Club &mdash; &ldquo;The Water-Ouzel&rdquo; from <em>The Mountains of California</em>.</li>
+          <li>Wayland, M. et al. (2006). &ldquo;American Dipper as Bioindicator of Selenium Contamination.&rdquo; <em>Environ. Monit. Assess.</em> 123: 223&ndash;245.</li>
+          <li>Morrissey, C. A. et al. (2005). &ldquo;Trace-metal exposure to American Dippers in British Columbia.&rdquo; <em>Environ. Toxicol. Chem.</em> 24(4): 836&ndash;845.</li>
+          <li>Sibley, D. (2013). &ldquo;The white eyelid of American Dipper.&rdquo; sibleyguides.com.</li>
+          <li>National Park Service &mdash; &ldquo;American Dipper.&rdquo;</li>
+          <li>Alaska Dept. of Fish &amp; Game &mdash; American Dipper Species Profile.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">52&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Torrent-Song</div>
+          <div class="stat-detail">#53 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Loud song competing with stream noise</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Cinclidae</div>
+          <div class="stat-detail">NEW &mdash; 21st family, monotypic in N.A.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Cinclus</em></div>
+          <div class="stat-detail">1st of genus &mdash; only N.A. dipper</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain Stream</div>
+          <div class="stat-detail">Fast-flowing water, sea level&ndash;timberline</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round; vertical migration in winter</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">50 unique</div>
+          <div class="stat-detail">53 entries (0&ndash;52)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">21</div>
+          <div class="stat-detail">Cinclidae enters as 21st</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">15 consecutive Passeriformes (38&ndash;52)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~160,000 breeding</div>
+          <div class="stat-detail">IUCN Least Concern; CCS 12/20</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">46&ndash;64 g</div>
+          <div class="stat-detail">Heaviest songbird in engine since degree 4</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">Dipping Motion</div>
+          <div class="stat-detail">40&ndash;60 bobs/min + white eyelid flash</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Moss Dome</div>
+          <div class="stat-detail">Behind waterfalls, in spray zones</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Key Adaptation</div>
+          <div class="stat-value">Aquatic Foraging</div>
+          <div class="stat-detail">Walks underwater on stream bottoms</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 052</p>
+  </footer>
+</body>
+</html>

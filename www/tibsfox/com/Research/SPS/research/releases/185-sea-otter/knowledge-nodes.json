@@ -1,0 +1,118 @@
+{
+  "degree": 185,
+  "species": "Sea Otter",
+  "scientific_name": "Enhydra lutris",
+  "slug": "185-sea-otter",
+  "sound_type": "high whine + growl -- high-pitched whine/scream (distress, separation), growls/grunts (aggression), soft coos (bonding). Pup cry loud and piercing. E=4",
+  "energy": 4,
+  "ecosystem": "Kelp forests, nearshore rocky habitats, sheltered coastlines. Resident on Washington's outer coast. Slowly recolonizing.",
+  "season": "Year-round resident. Does not migrate. Pupping year-round with peak in spring.",
+  "family": "Mustelidae (RETURNS -- last at degrees 63-68 river otter)",
+  "order": "Carnivora",
+  "class": "Mammalia",
+  "csv_substitute": false,
+  "original_species": "Sea Otter",
+  "csv_substitution": null,
+  "coordinates": {
+    "lat": 47.89,
+    "lon": -124.63,
+    "description": "Sea Otter on Washington's Olympic Coast. Kelp forest habitat. Reintroduced population."
+  },
+  "taxonomy_note": {
+    "description": "MUSTELIDAE RETURNS -- weasel family, last seen at degrees 63-68 (river otter). The smallest marine mammal. The only marine mammal that uses tools. Keystone species of kelp forest ecosystems. Densest fur of any animal.",
+    "current_family": "Mustelidae (returns after 117 degrees)",
+    "new_family": false,
+    "family_count_in_engine": "Mustelidae: River Otter (63-68), Sea Otter (185).",
+    "name_etymology": "Enhydra from Greek 'en' (in) + 'hydra' (water) = 'in water.' lutris from Latin 'lutra' (otter). 'Sea Otter' for its exclusively marine habitat.",
+    "genus_note": "Enhydra -- monotypic genus. Only species: E. lutris. No close living relatives.",
+    "order_note": "Carnivora. Same order as Harbor Seal (180), Steller Sea Lion (182), California Sea Lion (183), Northern Fur Seal (184).",
+    "family_position": "Fifth marine mammal family in the engine: Phocidae (180-181), Otariidae (182-184), Mustelidae (185). Three families in 6 degrees.",
+    "class_note": "Class Mammalia. Marine mammal era continues (180-185+). Six consecutive marine mammals."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "200-6000 Hz. Wide range reflecting varied repertoire.",
+    "peak_energy_band_hz": "1000-4000 Hz (whine/scream). 200-800 Hz (growl).",
+    "song_frequency_hz": "Whine: 2000-4000 Hz. Growl: 300-600 Hz. Coo: 200-500 Hz.",
+    "song_duration_s": "Whine: 0.5-3 sec. Growl: 0.3-1.5 sec. Coo: continuous soft murmur.",
+    "note_structure": "High whine (distress), growl (aggression), coo (bonding), pup cry (loud, piercing).",
+    "note_types": "Whine/scream (alarm/separation), growl/grunt (territorial), coo/murmur (bonding), pup cry (separation).",
+    "phrase_structure": "Variable. Whines repeated when distressed. Growls in short bursts. Coos continuous.",
+    "timbre": "Whine: piercing, high. Growl: guttural, low. Coo: soft, warm. Pup cry: piercing, urgent.",
+    "amplitude": "E=4. Moderate average. Pup cry is loudest. Coos are softest. Varied and emotionally expressive.",
+    "tempo": "Variable by context. Alarm calls rapid. Social sounds irregular.",
+    "context": "Surface vocalizations (not underwater). Kelp beds, haul-outs, mother-pup groups.",
+    "regional_variation": "Some population-level differences in call structure. Individual recognition between mother and pup.",
+    "key_property": "HIGH WHINE + GROWL SURFACE. MUSTELIDAE RETURNS. Tool-user. Densest fur. Kelp keystone. E=4. v1.49.326."
+  },
+  "plumage": null,
+  "pelage": {
+    "overall": "Dark brown to black. Dense, luxurious fur -- up to 1 million hairs per square inch. Two layers: waterproof guard hairs + dense insulating underfur. Head often lighter (graying with age).",
+    "diagnostic_mark": "Dense dark fur. Light/gray face (older individuals). Rounded body floating on back. No external ears. Webbed hind feet. Forepaws with retractile claws.",
+    "seasonal_variation": "Minimal. Continuous molt (not seasonal). Fur maintained by constant grooming.",
+    "swimming_pattern": "Swims on back (unique among marine mammals). Hind feet and tail for propulsion. Forepaws for grooming and tool use. Often floats in kelp beds."
+  },
+  "physical_description": {
+    "overall": "Length: 1.0-1.5 m. Weight: 14-45 kg (smallest marine mammal). Long body. Webbed hind feet. Dexterous forepaws. Dense fur. No blubber.",
+    "diagnostic_mark": "Floating on back in kelp. Dense dark fur. Light face. Dexterous forepaws manipulating food or rocks. Smallest marine mammal.",
+    "field_id": "Small dark-furred mammal floating on back in kelp beds or nearshore. Often holding food or rock on belly. Light/gray face. Much smaller than seals or sea lions. Listen for high-pitched whine."
+  },
+  "nodes": [
+    {
+      "id": "tool-use",
+      "type": "milestone",
+      "title": "Tool Use -- Only Tool-Using Marine Mammal",
+      "description": "Rocks as anvils on belly. Favorite rocks stored in skin pouches. True tool use: selecting, transporting, using objects. Forward planning. Object recognition. Unique among marine mammals.",
+      "connections": ["kelp-keystone", "densest-fur", "mustelidae-returns"]
+    },
+    {
+      "id": "kelp-keystone",
+      "type": "concept",
+      "title": "Kelp Forest Keystone -- Trophic Cascade",
+      "description": "Otter eats urchin. Urchin eats kelp. Otters present: kelp forests thrive. Otters absent: urchin barrens. Estes & Palmisano 1974. Ecology's most famous cascade. Carbon sequestration. Biodiversity cascade.",
+      "connections": ["tool-use", "near-extinction"]
+    },
+    {
+      "id": "densest-fur",
+      "type": "concept",
+      "title": "Densest Fur -- 1 Million Hairs Per Square Inch",
+      "description": "No blubber. Fur-only insulation. Two layers. 10-15% of day grooming. Oil vulnerability. Exxon Valdez killed ~2,800. The densest fur of any animal on Earth.",
+      "connections": ["tool-use", "near-extinction"]
+    },
+    {
+      "id": "mustelidae-returns",
+      "type": "taxonomy",
+      "title": "Mustelidae Returns -- River to Sea",
+      "description": "Weasel family returns after 117 degrees. River otter (63-68, freshwater) to sea otter (185, marine). Same family, different world. Fifth marine mammal family in engine.",
+      "connections": ["tool-use"]
+    },
+    {
+      "id": "near-extinction",
+      "type": "conservation",
+      "title": "Near-Extinction and Recovery",
+      "description": "150-300K pre-exploitation to <2,000 by 1911. Fur trade. International Fur Seal Treaty (1911). ESA Threatened. WA: 59 reintroduced 1969-70, now ~2,500.",
+      "connections": ["densest-fur", "kelp-keystone"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-063-068",
+      "species": "North American River Otter",
+      "relationship": "MUSTELIDAE RETURNS! Same family, 117 degrees later. River otter (freshwater) to sea otter (marine). Weasel family from rivers to ocean."
+    },
+    {
+      "target": "SPS-180",
+      "species": "Harbor Seal",
+      "relationship": "MARINE MAMMAL ERA! Seal (Phocidae, 180) and otter (Mustelidae, 185). Different families. Same marine environment. The era continues."
+    },
+    {
+      "target": "SPS-182",
+      "species": "Steller Sea Lion",
+      "relationship": "MARINE MAMMALS! Sea lion (Otariidae, 182) and otter (Mustelidae, 185). Three marine mammal families in 6 degrees."
+    },
+    {
+      "target": "S36-185",
+      "artist": "Cosmic Zingaro",
+      "relationship": "TOOL-USING TRAVELER! Zingaro carries production tools through cosmic space. Otter carries rocks in skin pouches. Both self-reliant. Both defined by their tools."
+    }
+  ]
+}

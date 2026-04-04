@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 245&deg; &mdash; Jimi Hendrix &mdash; E=8 &mdash; Psychedelic Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(74,20,140,0.5); }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #4A148C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #6A1B9A; color: #E1BEE7; border: 1px solid #7B1FA2; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #4A148C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #EDE7F6; color: #4A148C; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #4A148C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #4A148C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #EDE7F6; font-style: italic; color: #4A148C; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .flagship-banner { background: linear-gradient(135deg, #4A148C, #6A1B9A); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .flagship-banner h3 { margin: 0 0 0.5rem; color: white; font-size: 1.2rem; }
+    .flagship-banner p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>245 &mdash; Jimi Hendrix (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">245&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Jimi Hendrix</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Psychedelic Rock</span>
+          <span class="label-badge">Reprise</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="flagship-banner">
+          <h3>ENGINE MAXIMUM &mdash; THE MOST IMPORTANT SEATTLE MUSICIAN</h3>
+          <p>Jimi Hendrix. Born November 27, 1942, Harborview Hospital, Seattle. Grew up in the Central District. The greatest electric guitarist in the history of recorded music. E=8 ties the engine ceiling. Degree 245 is the engine&rsquo;s landmark entry &mdash; the musician every prior degree has been building toward, the artist who defines what Seattle music can be.</p>
+        </div>
+
+        <div class="milestone-banner">
+          <strong>E=8 TIES ENGINE MAXIMUM.</strong> Jimi Hendrix joins The Sonics (241) and The Blood Brothers (218) at E=8. This is the first time the same artist appears twice in the engine at maximum energy (see degree 246 for early career). The 245&ndash;247 run &mdash; Hendrix, Hendrix early, Alice in Chains &mdash; is the densest high-energy corridor in the engine&rsquo;s history.
+        </div>
+
+        <h2>The Central District &mdash; Where It Began</h2>
+        <p>James Marshall Hendrix was born in Seattle and grew up in the Central District &mdash; historically Seattle's Black neighborhood, concentrated there in part by racial housing covenants that restricted where African American families could live. The CD was a dense, vibrant cultural environment: Black-owned businesses, COGIC churches whose gospel tradition runs through all of Hendrix's music, Garfield High School (also the school of Quincy Jones), the community structures that provided partial stability during a difficult childhood.</p>
+
+        <p>His mother Lucille died when Jimi was fifteen. His father Al raised him with help from grandmother Nora. The family moved frequently. Jimi received his first guitar &mdash; an acoustic, played upside-down by a left-handed boy in a right-handed world &mdash; around 1958. The physical constraint of playing a right-handed instrument would produce the most distinctive technique in rock history.</p>
+
+        <blockquote>"Playing upside-down and restrung, Hendrix could not use standard chord shapes. He developed his own &mdash; and in doing so, invented a harmonic vocabulary that funk, soul, and rock guitar still speak today."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>London 1966 &mdash; The Explosion</h2>
+        <p>After years on the Chitlin' Circuit (see degree 246 for the early career), bassist Chas Chandler discovered Hendrix at the Cafe Wha? in Greenwich Village in July 1966 and brought him to London. The British blues scene &mdash; Cream, the Yardbirds, the Rolling Stones &mdash; thought it represented the frontier of electric guitar. Hendrix arrived and moved the frontier.</p>
+
+        <p>Chandler assembled the Jimi Hendrix Experience: Noel Redding on bass, Mitch Mitchell on drums. The power trio gave Hendrix maximum sonic freedom. "Hey Joe" reached #6 in the UK in late 1966. "Purple Haze" introduced him to the US in 1967. The debut album <em>Are You Experienced</em> reached #5 on the Billboard 200. In nine months, Jimi Hendrix had gone from anonymous sideman to the most talked-about guitarist on earth.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Three Albums</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Are You Experienced (1967)</h4>
+            <span class="level advanced">Reprise / Track</span>
+            <p>"Purple Haze," "Foxy Lady," "The Wind Cries Mary," "Red House," "Fire." The debut. Full range established immediately: blues, psychedelia, R&amp;B, pop songwriting.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Axis: Bold as Love (1967)</h4>
+            <span class="level advanced">Reprise / Track</span>
+            <p>"Little Wing," "Spanish Castle Magic," "Castles Made of Sand." "Little Wing" is one of the most beautiful guitar compositions ever recorded &mdash; chord melody, voice-leading, open strings, impossible nuance.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Electric Ladyland (1968)</h4>
+            <span class="level milestone">Reprise / Track</span>
+            <p>"All Along the Watchtower," "Voodoo Child (Slight Return)," "Machine Gun." The double album. Dylan's "All Along the Watchtower" made definitive. "Voodoo Child" recorded in one take. The greatest display of electric guitar ever committed to tape.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Band of Gypsys (1970, live)</h4>
+            <span class="level intermediate">Capitol</span>
+            <p>Fillmore East, NYE 1969. All-Black band: Buddy Miles (drums), Billy Cox (bass). "Machine Gun" &mdash; 12-minute improvised anti-war blues. The political record.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Woodstock &mdash; August 18, 1969</h2>
+        <p>The final act at Woodstock, performing at dawn for what remained of the half-million crowd. The set included solo electric "The Star-Spangled Banner" &mdash; Hendrix playing the national anthem through controlled feedback, dive-bomb whammy bar, and pitch manipulation that evoked rockets, bombs, and the sonic texture of American violence. No words. No political statement explicit. The music said everything that needed saying about the country in 1969.</p>
+        <p>It remains the most significant political act in the history of popular music performed without a single spoken word.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Technique &mdash; What No One Else Has Done</h2>
+        <p>Hendrix's technical innovations are too numerous to fully catalogue. The core: <strong>thumb-over bass notes</strong> that allowed simultaneous bass and melody; <strong>chord voicings</strong> that became the harmonic vocabulary of funk and soul (Prince, Stevie Ray Vaughan, John Mayer descend directly from him); <strong>whammy bar integration</strong> as melodic element rather than decoration; <strong>feedback control</strong> as pitchable, sustainble musical texture; <strong>tone knob mastery</strong> during performance. He played a Fender Stratocaster upside-down and restrung, developing technique that no left-handed converted player has replicated.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">246</span> Jimi Hendrix (early career) &mdash; E=7. Chitlin' Circuit, Little Richard, Isley Brothers, Curtis Knight. The formation before fame.</li>
+          <li><span class="ref-degree">247</span> Alice in Chains &mdash; E=8 follows. The grunge era answers the psychedelic era. Both at engine maximum. The greatest Seattle artists from two different eras.</li>
+          <li><span class="ref-degree">241</span> The Sonics &mdash; E=8 (prior). Garage rock from Tacoma. Maximum energy before Hendrix's maximum energy. The Pacific Northwest loud tradition.</li>
+          <li><span class="ref-degree">SPS 245</span> River current over boulders &mdash; FIRST ABIOTIC SOUNDSCAPE. Polyrhythmic water over stone pairs with polyrhythmic guitar over rhythm section. Both are complex, continuous, and irreducible.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">245 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Psychedelic Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1964&ndash;1970</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Central District</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Reprise</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Born</h4>
+          <div class="stat-row"><span class="stat-label">Date</span><span class="stat-value">Nov 27, 1942</span></div>
+          <div class="stat-row"><span class="stat-label">Place</span><span class="stat-value">Seattle, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Died</span><span class="stat-value">Sep 18, 1970</span></div>
+          <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value">27</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>The Experience</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Jimi Hendrix</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Noel Redding</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Mitch Mitchell</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">68.1%</span></div>
+          <div class="stat-row"><span class="stat-label">E-streak</span><span class="stat-value">E=8 (ENGINE MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">ENGINE MAX / #1</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row"><span class="stat-label">Debut</span><span class="stat-value">Are You Experienced</span></div>
+          <div class="stat-row"><span class="stat-label">Peak</span><span class="stat-value">Electric Ladyland</span></div>
+          <div class="stat-row"><span class="stat-label">Live</span><span class="stat-value">Woodstock 1969</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">River over boulders</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

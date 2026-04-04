@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 183&deg; &mdash; California Sea Lion (rapid bark) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #E65100, #EF6C00, #F57C00); color: white; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 2px 8px rgba(230, 81, 0, 0.3); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .performer-card { background: linear-gradient(135deg, #E65100, #EF6C00, #F57C00); border: 2px solid #E65100; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .performer-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFF3E0; }
+    .performer-card p { color: #FFE0B2; }
+    .performer-card strong { color: #FFF8E1; }
+
+    .bark-card { background: linear-gradient(135deg, #BF360C, #D84315, #E64A19); border: 2px solid #BF360C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCCBC; }
+    .bark-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFE0B2; }
+    .bark-card p { color: #FFCCBC; }
+    .bark-card strong { color: #FFF3E0; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.performer { background: #E65100; }
+    .theory-icon.bark { background: #BF360C; }
+    .theory-icon.compare { background: #1B5E20; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.advanced { background: #FBE9E7; color: #BF360C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .compare-table th { background: #E65100; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .compare-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .compare-table tr:nth-child(even) { background: #FFF3E0; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">183&deg;</div>
+      <div class="release-title-block">
+        <h2>California Sea Lion &mdash; Rapid Bark</h2>
+        <div class="scientific"><em>Zalophus californianus</em> (Otariidae) &mdash; E=6 &mdash; The Performer</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      The <strong>&ldquo;circus seal.&rdquo;</strong> The one people picture.
+      <strong>Rapid &ldquo;arf arf arf&rdquo; bark</strong> that fills harbors and docks.
+      Exceptionally <strong>intelligent and trainable.</strong> Second Otariidae.
+      <strong>Steller/California comparison pair</strong> (182&ndash;183).
+      Expanding range into PNW waters.
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="performer-card">
+          <h3>The Performer &mdash; Everyone Knows This Animal</h3>
+          <p>
+            The <strong>California Sea Lion</strong> is the pinniped everyone
+            recognizes. The <strong>&ldquo;arf arf arf&rdquo;</strong> bark.
+            The aquarium star. The dock-hauler. US Navy mine detection.
+            <strong>Exceptionally intelligent</strong> &mdash; memory, reasoning,
+            vocal learning. The most <strong>trainable pinniped</strong> on Earth.
+          </p>
+        </div>
+
+        <div class="bark-card">
+          <h3>The Rapid Bark &mdash; E=6</h3>
+          <p>
+            <strong>200&ndash;4000 Hz.</strong> Higher-pitched than Steller.
+            <strong>2&ndash;4 barks per second.</strong> Rapid, rhythmic, insistent.
+            Dock acoustics amplify. Colony creates <strong>wall of sound.</strong>
+            Same E=6 as Steller but through <strong>speed and persistence</strong>
+            rather than depth and power.
+          </p>
+        </div>
+
+        <h2>Steller / California Comparison</h2>
+        <table class="compare-table">
+          <thead><tr><th>Attribute</th><th>Steller (182&deg;)</th><th>California (183&deg;)</th></tr></thead>
+          <tbody>
+            <tr><td>Male size</td><td>3.3m, 1,120 kg</td><td>2.4m, 390 kg</td></tr>
+            <tr><td>Sound</td><td>Deep, sustained roar</td><td>Rapid, rhythmic bark</td></tr>
+            <tr><td>Recognition</td><td>Specialist knowledge</td><td>Everyone knows</td></tr>
+            <tr><td>Habitat</td><td>Offshore islands</td><td>Docks, harbors</td></tr>
+            <tr><td>Status</td><td>Endangered (W DPS)</td><td>Least Concern</td></tr>
+            <tr><td>Energy</td><td>E=6</td><td>E=6</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-182 Steller Sea Lion</strong>
+            <p>COMPARISON PAIR! Largest vs most familiar. Deep roar vs rapid bark. Offshore vs docks. Same family, same energy, different worlds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-184 Northern Fur Seal</strong>
+            <p>OTARIIDAE TRIO! Sea lion (182-183) vs fur seal (184). Fur seal completes the eared seal sequence. Densest fur of any mammal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-180 Harbor Seal</strong>
+            <p>PINNIPED CONTRAST! True seal (Phocidae) vs eared seal (Otariidae). No ears vs external ears. Undulate vs walk. Different families.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-183 Raz Simone</strong>
+            <p>THE PERFORMER! Both command attention in their space. Raz Simone on Capitol Hill. Sea lion on the dock. Presence. Performance.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon performer">P</div>
+            <div class="theory-content">
+              <h4>The Performer &mdash; Everyone Knows This One</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>The &ldquo;circus seal.&rdquo; Trained by Navy. Aquarium star. Most recognizable pinniped. Intelligence and trainability unmatched.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon bark">B</div>
+            <div class="theory-content">
+              <h4>Rapid Bark &mdash; Speed and Persistence</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>2-4 barks per second. 200-4000 Hz. E=6 through rapid repetition. Dock acoustics amplify. Colony cacophony.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon compare">C</div>
+            <div class="theory-content">
+              <h4>Steller/California Comparison (182&ndash;183)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Same family, same energy, different animals. Giant vs performer. Offshore vs dock. Endangered vs thriving. The full Otariidae range.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">California Sea Lion</div><div class="stat-detail"><em>Zalophus californianus</em></div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Otariidae</div><div class="stat-detail">Second entry (eared seals)</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Rapid bark</div><div class="stat-detail">&ldquo;arf arf arf&rdquo; honk</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #E65100;">E = 6</div><div class="stat-detail">speed + persistence</div></div>
+        <div class="stat-card"><div class="stat-label">Male weight</div><div class="stat-value">Up to 390 kg</div><div class="stat-detail">860 lbs</div></div>
+        <div class="stat-card"><div class="stat-label">Intelligence</div><div class="stat-value">Exceptional</div><div class="stat-detail">Navy-trained, memory, reasoning</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Least Concern</div><div class="stat-detail">MMPA protected</div></div>
+        <div class="stat-card"><div class="stat-label">PNW range</div><div class="stat-value">Expanding</div><div class="stat-detail">northward into WA waters</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

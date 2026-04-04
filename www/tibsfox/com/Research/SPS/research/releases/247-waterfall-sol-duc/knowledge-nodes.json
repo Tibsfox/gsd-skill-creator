@@ -1,0 +1,55 @@
+{
+  "degree": 247, "name": "Waterfall Sol Duc", "slug": "247-waterfall-sol-duc",
+  "sound_type": "resonant canyon roar",
+  "energy": 7,
+  "family": "Hydrology",
+  "ecosystem": "Olympic (temperate rainforest)",
+  "season": "year-round",
+  "location": "Sol Duc River valley, Olympic National Park, Olympic Peninsula, Washington",
+  "height_feet": 48,
+  "falls_structure": "Three main cascades splitting around rock island; converging in narrow enclosed canyon",
+  "canyon_dimensions": { "width_m": "5-10", "depth_m": "15-20" },
+  "park": "Olympic National Park (est. 1938; UNESCO World Heritage Site)",
+  "river_source": "Seven Lakes Basin, Olympic Mountains interior",
+  "precipitation_annual_in": 140,
+  "geology": {
+    "type": "Accreted oceanic basalt (Olympic Peninsula); distinct from Cascade volcanic geology",
+    "formation": "Oceanic crust accreted to continent over millions of years; folded and faulted into Olympic massif"
+  },
+  "geothermal": {
+    "hot_springs_temp_f": 128,
+    "distance_mi": 12,
+    "mechanism": "Juan de Fuca plate subduction heating groundwater; same tectonic process as Cascade volcanoes"
+  },
+  "rainforest_context": {
+    "dominant_trees": ["Sitka spruce (200+ ft)", "Western red cedar", "Western hemlock", "Douglas fir", "Bigleaf maple"],
+    "moss_coverage": "Extensive; covers rocks, fallen trees, tree bases, branches",
+    "acoustic_effect": "Moss absorbs high frequencies; canyon roar low-frequency component travels farther through forest"
+  },
+  "acoustic_profile": {
+    "type": "Resonant canyon roar",
+    "mechanism": "Canyon walls act as resonance chamber; amplify low frequencies below 500 Hz; extend reverberation time",
+    "vs_open_falls": "More tonal than white-noise (Snoqualmie 246); canyon emphasizes specific frequency bands creating 'roar' character",
+    "audibility": "Canyon roar audible hundreds of meters along approach trail; announces falls before visible"
+  },
+  "indigenous_context": {
+    "peoples": ["Lower Elwha Klallam Tribe", "Quileute people"],
+    "note": "Sol Duc valley supported salmon runs (Chinook, Coho, Steelhead); hot springs area used by indigenous peoples; Olympic NP establishment (1938) displaced/restricted indigenous access"
+  },
+  "roosevelt_elk": {
+    "population": 5000,
+    "significance": "Largest Roosevelt Elk population in US; primary game species for Olympic Peninsula peoples; acoustically significant (bugling in rainforest near falls)"
+  },
+  "theory_nodes": [
+    { "concept": "Canyon as resonance chamber: Sol Duc's enclosed basalt canyon amplifies low frequencies (below 500 Hz) and extends reverberation time compared to open-air waterfalls. The canyon geometry is what distinguishes this entry from Snoqualmie (white-noise/open) and river current (distributed/polyrhythm).", "level": "advanced", "department": "acoustics", "description": "Canyon geometry as acoustic amplifier." },
+    { "concept": "Rainforest and canyon as acoustic complements: moss absorbs high frequencies (leaving low), canyon amplifies low frequencies (compensating for forest absorption). The result: the low-frequency canyon roar propagates effectively through the temperate rainforest environment.", "level": "advanced", "department": "acoustic-ecology", "description": "Forest and canyon working together acoustically." },
+    { "concept": "Olympic vs. Cascade geology: the waterfall arc moves from Cascade volcanic geology (245 river, 246 Snoqualmie on Columbia River Basalt) to Olympic accreted oceanic basalt (247 Sol Duc, 248 Hoh). Two different geological origins; two different acoustic and ecological contexts.", "level": "intermediate", "department": "geology", "description": "Geological transition within the waterfall arc." }
+  ],
+  "cross_references": [
+    {"degree": 246, "sound": "Snoqualmie Falls", "relationship": "The previous waterfall. Snoqualmie: open, white-noise, culturally saturated, 268 ft. Sol Duc: enclosed, resonant, remote wilderness, 48 ft. Two modes of waterfall sound."},
+    {"degree": 248, "sound": "Hoh Rainforest rain", "relationship": "The next entry in the Olympic Peninsula arc. Falls → precipitation. Same ecosystem region, different hydrological mode."}
+  ],
+  "s36_pair": {"degree": 247, "artist": "Alice in Chains", "pairing_note": "E=7 + E=8. Canyon resonance meets recording studio resonance. Sol Duc's enclosed basalt canyon amplifies and sustains roar; AIC's studio-recorded guitar tones are thick, warm, deeply resonant. Both use enclosed space as acoustic amplifier. Dirt and Sol Duc: two resonance chambers, one natural, one built."},
+  "milestones": ["WATERFALL ARC ENTRY 2: Olympic Peninsula", "Canyon resonance as acoustic category", "Olympic NP (UNESCO World Heritage) represented"],
+  "tags": ["hydrology", "sol-duc-falls", "olympic-national-park", "canyon-resonance", "temperate-rainforest", "olympic-peninsula", "basalt-canyon", "moss", "sitka-spruce", "geothermal", "sol-duc-hot-springs", "juan-de-fuca", "year-round"]
+}

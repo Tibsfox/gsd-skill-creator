@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 64&deg; &mdash; Jesse Sykes &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>064 &mdash; Jesse Sykes</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Barsuk Returns &mdash; The Dusk &mdash; Prairie Noir &mdash; The Dark-Folk Loner</h3>
+      <p>
+        Jesse Sykes at degree 64&deg; brings <strong>Barsuk Records</strong>
+        back into the engine after four degrees away (60&ndash;63). Fourth
+        Barsuk artist (57, 58, 59, 64). Fronts <strong>Jesse Sykes &amp; the
+        Sweet Hereafter</strong> with guitarist <strong>Phil Wandscher</strong>
+        (formerly of Whiskeytown with Ryan Adams). Dark atmospheric folk
+        &mdash; &ldquo;prairie noir&rdquo; &mdash; low haunted voice, cinematic
+        textures, twilight landscapes. Albums on Barsuk: <em>Reckless
+        Burning</em> (2002), <em>Oh, My Girl</em> (2004), <em>Marble Son</em>
+        (2011). <strong>E=2</strong> &mdash; the quiet register returns.
+        <strong>Folk</strong> at Genre Stage 46 &mdash; pure folk, breaking the
+        three-consecutive-hybrid streak. 19th non-male artist. The dusk as the
+        65th acoustic element. The dark-folk loner as the 65th artist-city
+        pattern. The slow burn as the 64th blue note.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">64&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Jesse Sykes</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Barsuk Records</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Prairie Noir</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Barsuk Returns &middot; Hybrid Streak Breaks &middot; E=2 Returns &middot; 19th Non-Male</h4>
+          <p>
+            <strong>Jesse Sykes</strong> is the engine&rsquo;s fourth Barsuk
+            artist &mdash; after Laura Gibson (57), Death Cab (58), and The
+            Long Winters (59). The Barsuk window reopens after four degrees
+            closed. <strong>Folk</strong> at Genre Stage 46 breaks the
+            three-consecutive-hybrid streak. <strong>E=2</strong> returns
+            &mdash; the quiet register. <strong>Phil Wandscher</strong>
+            (Whiskeytown / Ryan Adams) brings the alt-country lineage into
+            the engine. Dark atmospheric folk &mdash; &ldquo;prairie
+            noir&rdquo; &mdash; cinematic textures at twilight. Three albums
+            on Barsuk across two decades: curated, deliberate, unhurried.
+            The opposite of the FM sheen (degree 63). The dusk as acoustic
+            element. The dark-folk loner as artist-city pattern. The slow
+            burn as blue note.
+          </p>
+        </div>
+
+        <section>
+          <h2>Prairie Noir: Dark Folk at Twilight</h2>
+          <p>
+            <strong>Jesse Sykes</strong> is a Seattle-based singer-songwriter
+            and guitarist who fronts <strong>Jesse Sykes &amp; the Sweet
+            Hereafter</strong> with guitarist <strong>Phil Wandscher</strong>.
+            The music is dark, atmospheric folk with cinematic textures
+            &mdash; often described as &ldquo;prairie noir&rdquo; or
+            &ldquo;cosmic American music.&rdquo; Sykes&rsquo; voice is low,
+            haunted, deliberate &mdash; a contralto that stays in the
+            basement register, never rising to the heights of an Ann Wilson
+            or the FM brightness of a Kenny Loggins. The songs are slow. The
+            tempos are funereal. The mood is twilight.
+          </p>
+          <p>
+            The &ldquo;prairie noir&rdquo; label captures the specific
+            fusion: the &ldquo;prairie&rdquo; is the American landscape
+            rendered as wide-open emptiness, the &ldquo;noir&rdquo; is the
+            darkness that fills those spaces. The music evokes driving
+            through the Great Plains at dusk &mdash; the landscape impossibly
+            vast, the light fading, the radio pulling in a signal from
+            somewhere far away. Sykes lives in Seattle but her music sounds
+            like Montana, like the desert, like landscapes the Pacific
+            Northwest does not contain.
+          </p>
+          <blockquote>
+            The dusk does not come to the listener. The listener must go to
+            the dusk. Sykes&rsquo; music requires attention &mdash; full,
+            quiet, patient attention. The opposite of the FM sheen&rsquo;s
+            broadcast accessibility. The opposite of the three-minute single.
+            The slow burn as radical act.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Phil Wandscher and the Alt-Country Lineage</h2>
+          <p>
+            <strong>Phil Wandscher</strong> co-founded <strong>Whiskeytown</strong>
+            with <strong>Ryan Adams</strong> in Raleigh, North Carolina
+            &mdash; one of the defining bands of the 1990s alt-country
+            movement. Wandscher was the steady guitarist who grounded
+            Adams&rsquo; volatility. His work on <em>Strangers Almanac</em>
+            (1997) is precise, economical, country-inflected. When Wandscher
+            left Whiskeytown, he moved to Seattle and found Sykes. The
+            Whiskeytown firecracker became the Sweet Hereafter&rsquo;s slow
+            burn.
+          </p>
+          <p>
+            The Wandscher trajectory &mdash; from the center of a movement
+            to the margins of a scene &mdash; mirrors the engine&rsquo;s
+            interest in artists who choose depth over visibility. Adams chose
+            visibility: prolific output, major labels, tabloid presence.
+            Wandscher chose depth: a single collaboration, a small label,
+            an audience measured in hundreds. The Sweet Hereafter is what
+            happens when an alt-country guitarist trades ambition for
+            atmosphere.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Barsuk Returns: The Fourth Barsuk Artist</h2>
+          <p>
+            Jesse Sykes is the <strong>fourth Barsuk Records artist</strong>
+            in the engine &mdash; after Laura Gibson (57), Death Cab for
+            Cutie (58), and The Long Winters (59). The Barsuk window closed
+            at degree 60 and remained closed through 61, 62, and 63. It
+            reopens at 64. The pattern: open, open, open, closed, closed,
+            closed, closed, open.
+          </p>
+          <p>
+            The four Barsuk artists reveal a symmetry: the folk artists
+            (Gibson, Sykes) are at <strong>E=2</strong>; the indie rock
+            artists (Death Cab, Long Winters) are at <strong>E=4</strong>.
+            The folk bookends the indie rock. The quiet bookends the loud.
+            Both folk artists are women; both indie rock acts are male-led.
+            The Barsuk cluster is the engine&rsquo;s largest single-label
+            grouping within an eight-degree span.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Dusk</h4>
+              <div class="level advanced">Advanced &mdash; 65th Acoustic Element</div>
+              <p>
+                The acoustic quality of music that sounds like it was recorded
+                at twilight &mdash; the low voice, the reverb-soaked guitar,
+                the slow tempo, the narrow dynamic range. Everything receding,
+                everything almost-but-not-quite disappearing. Not silence
+                (E=1) but the threshold of audibility (E=2). The dusk is
+                quiet fullness, not quiet emptiness. The opposite of the FM
+                sheen&rsquo;s broadcast clarity. The dusk does not come to
+                the listener; the listener must go to the dusk.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Dark-Folk Loner</h4>
+              <div class="level advanced">Advanced &mdash; 65th Artist-City Pattern</div>
+              <p>
+                The pattern of an artist who lives within a city&rsquo;s music
+                scene but operates at its atmospheric margins &mdash; making
+                music too dark, too slow, too atmospheric to fit the dominant
+                aesthetic. Sykes lives in Seattle and records on Barsuk but
+                makes music that sounds like the Great Plains at midnight.
+                Present in the scene without being of the scene. Aesthetic
+                departure rather than physical departure.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Slow Burn</h4>
+              <div class="level intermediate">Intermediate &mdash; 64th Deployment</div>
+              <p>
+                The blue note that sounds when music takes so long to arrive
+                that the waiting becomes the emotional experience. Sykes&rsquo;
+                songs unfold at walking pace &mdash; melodies that take four
+                bars to complete a phrase most artists dispatch in two. The
+                slow burn is not melancholy in the conventional sense; it is
+                the melancholy of duration. A radical act in a culture of
+                three-minute singles.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk at Genre Stage 46</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 46</div>
+              <p>
+                Pure folk returns, breaking the three-consecutive-hybrid
+                streak (61, 62, 63). The hybrid is not the default after all.
+                But &ldquo;folk&rdquo; at degree 64 is prairie noir &mdash;
+                different from Gibson&rsquo;s literary landscape folk (57)
+                or Gibbard&rsquo;s bare-wire folk (60). Same genre label,
+                radically different music. Folk is a structural condition
+                &mdash; minimum mediation &mdash; not a sonic description.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Key Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Reckless Burning</h4>
+              <div class="disco-years">2002 &middot; Barsuk Records</div>
+              <p>
+                The debut. Dark atmospheric folk, fully formed. &ldquo;The
+                Dreaming Dead,&rdquo; &ldquo;Reckless Burning.&rdquo;
+                Wandscher&rsquo;s reverb-laden guitar. Slow tempos, low
+                vocals, cinematic textures. The prairie noir begins.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Oh, My Girl</h4>
+              <div class="disco-years">2004 &middot; Barsuk Records</div>
+              <p>
+                The expansion. Richer production, wider palette. &ldquo;The
+                Air is Thin,&rdquo; &ldquo;Hushed by Devotion.&rdquo;
+                Electric guitar noise, organ drones, strings. The prairie
+                noir deepens.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Marble Son</h4>
+              <div class="disco-years">2011 &middot; Barsuk Records</div>
+              <p>
+                The refinement. Seven years later. Darker, more spacious.
+                Songs stretch, tempos slow further, guitar becomes abstract.
+                Music approaching the vanishing point. The slow burn at its
+                most patient.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">57&deg;</span>
+              <strong>Laura Gibson</strong> &mdash; Barsuk bookend. Both folk
+              women at E=2 on the same label. Gibson: literary Pacific
+              Northwest landscape folk. Sykes: dark prairie noir. The Barsuk
+              folk thread &mdash; quiet, curated, female-led &mdash;
+              brackets the louder indie rock of degrees 58-59.
+            </li>
+            <li>
+              <span class="ref-degree">58&deg;</span>
+              <strong>Death Cab for Cutie</strong> &mdash; Barsuk shared.
+              Fourth Barsuk artist. Death Cab: melodic, emotionally
+              articulate, E=4. Sykes: atmospheric, mood-driven, E=2.
+              Same label, opposite aesthetics. Barsuk&rsquo;s range is the
+              distance between these two artists.
+            </li>
+            <li>
+              <span class="ref-degree">59&deg;</span>
+              <strong>The Long Winters</strong> &mdash; Barsuk shared.
+              Long Winters: verbose, literary indie rock. Sykes: sparse,
+              economical dark folk. Four Barsuk artists across eight
+              degrees &mdash; the engine&rsquo;s largest single-label
+              cluster in this span.
+            </li>
+            <li>
+              <span class="ref-degree">60&deg;</span>
+              <strong>Ben Gibbard (Solo)</strong> &mdash; E=2 and Folk
+              shared. Both quiet folk. Gibbard: the bare wire, stripped-down
+              minimalism. Sykes: the dusk, atmospheric layering. Same
+              energy, different acoustic physics. Folk-E=2 correlation
+              holds: three pure folk degrees, all E=2.
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Folk contrast. Fleet
+              Foxes: cathedral folk, bright harmonies, ascending sound,
+              the Pacific Northwest as luminous landscape. Sykes: prairie
+              folk, low voice, dark textures, the landscape as darkness.
+              Same genre label, opposite sonic DNA.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">64&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">46</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2000s&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">City</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Band</span>
+            <span class="stat-value">The Sweet Hereafter</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Barsuk Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Dark-Folk Loner</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">46 (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#65 (The Dusk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">The Dark-Folk Loner</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#64 (The Slow Burn)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Barsuk Cluster</h4>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Laura Gibson</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">58&deg;</span>
+            <span class="stat-value">Death Cab for Cutie</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">59&deg;</span>
+            <span class="stat-value">The Long Winters</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">64&deg;</span>
+            <span class="stat-value">Jesse Sykes</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">21</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">15</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">16</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#65 (The Dusk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#65 (Dark-Folk Loner)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#64 (Slow Burn)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Folk-E=2 Correlation</h4>
+          <div class="stat-row">
+            <span class="stat-label">57&deg; Gibson</span>
+            <span class="stat-value">Folk / E=2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">60&deg; Gibbard</span>
+            <span class="stat-value">Folk / E=2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">64&deg; Sykes</span>
+            <span class="stat-value">Folk / E=2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Laura Gibson</span>
+            <span class="stat-value">Barsuk/Folk/E=2 (57)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Death Cab</span>
+            <span class="stat-value">Barsuk shared (58)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Long Winters</span>
+            <span class="stat-value">Barsuk shared (59)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gibbard solo</span>
+            <span class="stat-value">E=2/Folk (60)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Fleet Foxes</span>
+            <span class="stat-value">Folk contrast (53)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../063-kenny-loggins/" style="color: var(--seattle-navy);">&larr; 63&deg; Kenny Loggins</a>
+        <a href="../065/" style="color: var(--seattle-navy);">65&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 64&deg; &mdash; Jesse Sykes &mdash; Seattle 360 Engine &mdash; v1.49.201
+        <br>
+        Jesse Sykes &amp; the Sweet Hereafter with Phil Wandscher (formerly of
+        Whiskeytown / Ryan Adams). Dark atmospheric folk &mdash; &ldquo;prairie
+        noir&rdquo; &mdash; low haunted voice, cinematic textures, twilight
+        landscapes. <em>Reckless Burning</em> (2002), <em>Oh, My Girl</em>
+        (2004), <em>Marble Son</em> (2011) on Barsuk Records. Fourth Barsuk
+        artist (57, 58, 59, 64). E=2 &mdash; the quiet register. Folk at
+        Genre Stage 46 &mdash; pure folk, breaking the three-hybrid streak.
+        The dusk &mdash; 65th acoustic element &mdash; music at twilight,
+        everything receding, the threshold of audibility. The dark-folk loner
+        &mdash; 65th artist-city pattern &mdash; present in Seattle&rsquo;s
+        scene without being of it, making music that sounds like the Great
+        Plains. The slow burn &mdash; 64th blue note &mdash; the melancholy
+        of duration, the waiting as the experience. 19th non-male artist.
+        Gender ratio 19:46 (~29.2%). Barsuk bookend: folk/E=2 women
+        bracketing indie-rock/E=4 men. The dusk does not come to the listener.
+        The listener must go to the dusk.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

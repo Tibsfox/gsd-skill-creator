@@ -1,0 +1,69 @@
+{
+  "degree": 283,
+  "species": "Steller Sea Lion",
+  "scientific_name": "Eumetopias jubatus",
+  "slug": "283-steller-sea-lion-bull-roar",
+  "sound_type": "sustained guttural roar colony -- dominant bull territorial roar at summer breeding rookery; multiple overlapping bull roars; 100-1,000 Hz, energy concentrated below 500 Hz; 1-5 seconds sustained; loudest pinniped vocalization in PNW; E=8",
+  "energy": 8,
+  "ecosystem": "Rookery -- rocky offshore islets, sea stacks, coastal outcrops used as summer breeding sites; Washington coast and Puget Sound area",
+  "season": "Summer (breeding season May-July; bulls arrive first, establish territories before females)",
+  "family": "Otariidae",
+  "order": "Carnivora (Pinnipedia)",
+  "conservation_status": "ENDANGERED (western stock, Aleutians/Gulf of Alaska). Population declined ~80% from 1970s to 1990s: 140,000-180,000 peak to ~30,000-40,000. ESA 1990 Threatened, 1997 Endangered western stock. Near Threatened (eastern stock; BC to CA, including Washington; recovering). Washington rookeries: Protection Island, Carroll Island, Sea Lion Rock.",
+  "milestone": "FIRST OTARIIDAE entry at degree 283. Eared seals distinct from Phocidae: external ear pinnae, rear flipper rotation for land locomotion, front flipper swimming. Largest Otariidae species (bulls up to 2,500 lbs, 11 ft). Named for Georg Wilhelm Steller (1709-1746), naturalist on Bering's Second Kamchatka Expedition 1741. Scientific name Eumetopias jubatus: 'broad forehead' (Greek) + 'maned' (Latin).",
+  "coordinates": {
+    "lat": 48.15,
+    "lon": -124.00,
+    "description": "Washington coast and Puget Sound area. Rookery sites: Protection Island, Carroll Island, Sea Lion Rock at Point Grenville. Haul-out sites throughout Salish Sea. Eastern stock animals."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Sustained guttural territorial roar. Not a bark (short, percussive) -- a held roar of 1-5 seconds from a 1,100-2,500 lb animal.",
+    "frequency_range": "100-1,000 Hz; energy concentrated below 500 Hz. Large body size (massive chest, thick neck, resonant cranial structures) produces fundamentally low-frequency output.",
+    "duration": "Individual roars 1-5 seconds or longer. Sustained sequences during territorial confrontation and display.",
+    "colony_sound": "Multiple simultaneous bull roars at active rookery; overlapping with female vocalizations (higher-pitched, shorter) and pup contact calls (bleating). Continuous, intense acoustic environment during summer breeding season.",
+    "travel_distance": "Low-frequency vocalizations travel farther in both air and water. Bull roars carry considerable distance across open water from rocky rookery sites.",
+    "e8_calibration": "E=8: the combination of vocalizer size (largest pinniped in Pacific Northwest), frequency and power, sustained duration, and colony acoustic environment. Not explosive like orca breach (E=9) but continuous and massive. Arc peak for degrees 281-284."
+  },
+  "nodes": [
+    {
+      "id": "first-otariidae",
+      "type": "milestone",
+      "title": "First Otariidae -- Eared Seals Enter Engine",
+      "description": "Degree 283 is the first Otariidae entry. Family distinct from Phocidae (true seals): external ear pinnae, rear flipper rotation, front flipper swimming. Pacific Northwest Otariidae: Steller Sea Lion (283) and California Sea Lion (284). Otariidae chapter spans two consecutive degrees.",
+      "connections": ["bull-roar", "steller-bio"]
+    },
+    {
+      "id": "bull-roar",
+      "type": "concept",
+      "title": "Bull Roar -- Sustained Low-Frequency Territorial Vocalization",
+      "description": "100-1,000 Hz, energy below 500 Hz. 1-5 seconds sustained. Massive chest and resonant structures of 2,500-lb bull. Colony sound: multiple simultaneous roars. E=8 arc peak. Not a bark -- a roar.",
+      "connections": ["first-otariidae", "rookery-behavior"]
+    },
+    {
+      "id": "steller-bio",
+      "type": "concept",
+      "title": "Georg Wilhelm Steller (1709-1746) -- The Naming",
+      "description": "German naturalist on Bering's Second Kamchatka Expedition 1741-1742. First European to document North Pacific systematically. Named: Steller Sea Lion, Steller's Jay, Steller's Eider, Steller's Sea Cow (now extinct). Died age 37 in Tyumen, Siberia, 1746. Steller, not Stellar.",
+      "connections": ["first-otariidae"]
+    },
+    {
+      "id": "western-stock-crisis",
+      "type": "conservation",
+      "title": "Western Stock Endangered -- ~80% Decline",
+      "description": "140,000-180,000 to ~30,000-40,000 from 1970s to 1990s. ESA 1990 Threatened, 1997 Endangered. Causes contested: nutritional stress (junk food hypothesis), killer whale predation, climate-driven prey shifts, fisheries interactions. Eastern stock (including Washington) Near Threatened and recovering.",
+      "connections": ["first-otariidae"]
+    },
+    {
+      "id": "rookery-behavior",
+      "type": "concept",
+      "title": "Rookery -- Territorial Bull System",
+      "description": "Bulls arrive May-June, establish territories before females. Harems of 3-20+ females. Bulls fast for weeks. Territorial combat: roaring + visual display + physical combat (neck-biting). Mane protects neck during combat; same anatomy contributes to roar's low-frequency resonance.",
+      "connections": ["bull-roar"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-282", "species": "Pacific White-sided Dolphin", "relationship": "Delphinidae E=7 (cetacean, social, acrobatic) → Otariidae E=8 (pinniped, territorial, massive). Family and energy transition. Marine mammal arc ascends."},
+    {"target": "SPS-284", "species": "California Sea Lion", "relationship": "Second Otariidae entry. E=7. Urban waterfront winter. Bark cacophony vs. bull roar. Energy steps down from E=8 to E=7. Otariidae chapter: two degrees, two species."},
+    {"target": "S36-283", "artist": "Childbirth", "relationship": "E=7 + E=8 = E=15. Confrontational dark feminist punk pop paired with sustained territorial bull roar. Both deliberately, productively uncomfortable. Both sustained. Different registers, same degree."}
+  ]
+}

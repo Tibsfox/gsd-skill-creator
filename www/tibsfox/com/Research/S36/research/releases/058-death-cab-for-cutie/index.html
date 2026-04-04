@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 58&deg; &mdash; Death Cab for Cutie &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+
+    .albums-link {
+      display: inline-block;
+      background: #303F9F;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .albums-link:hover { background: #1A237E; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>058 &mdash; Death Cab for Cutie</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Folk Streak Broken &mdash; The Ache &mdash; The Bellingham Ascent &mdash; Barsuk Trio 2/3</h3>
+      <p>
+        Death Cab for Cutie at degree 58&deg; breaks the
+        <strong>thirteen-degree folk-adjacent streak</strong> (45&ndash;57). Indie Rock
+        enters the engine for the first time since degree 44.
+        <strong>E=4</strong> shatters the E=2 three-peat (55-56-57) &mdash; the
+        biggest energy jump in the engine&rsquo;s recent history.
+        <strong>Bellingham</strong> enters the engine via Western Washington University.
+        <strong>Barsuk Records</strong> cluster continues: degree 2 of 3 (57-58-59).
+        <strong>14th E=4 artist.</strong>
+        Ben Gibbard&rsquo;s ache fills arenas. The quiet register ends.
+        The volume rises.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">58&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Death Cab for Cutie</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Indie Rock</span>
+          <span class="label-badge">Barsuk &rarr; Atlantic</span>
+          <span class="neighborhood-badge">Bellingham &rarr; Capitol Hill</span>
+          <span class="record-badge">Folk Streak Broken at 13</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Barsuk Cluster Card -->
+        <div class="web-card">
+          <h4>Barsuk Trio: Degree 2 of 3 &mdash; The Flagship Act</h4>
+          <p>
+            <strong>Barsuk Records</strong> (Seattle-based independent, est. 1998)
+            released Death Cab&rsquo;s first five studio albums, from
+            <em>Something About Airplanes</em> (1998) through <em>Transatlanticism</em>
+            (2003). Death Cab is Barsuk&rsquo;s flagship artist &mdash; the act that
+            proved an indie label could develop a band from college-town four-track
+            recordings to platinum-selling, Grammy-nominated arena headliners.
+            <strong>Barsuk cluster:</strong> Gibson (57, E=2), Death Cab (58, E=4),
+            The Long Winters (59, E=3) &mdash; the same label at three different
+            energy levels.
+          </p>
+        </div>
+
+        <a href="albums/" class="albums-link">Explore the Full Discography &rarr;</a>
+
+        <section>
+          <h2>The Bellingham Ascent</h2>
+          <p>
+            <strong>Death Cab for Cutie</strong> formed in <strong>1997</strong> at
+            <strong>Western Washington University</strong> in
+            <strong>Bellingham, Washington</strong> &mdash; a college town ninety miles
+            north of Seattle, perched between the Cascades and Bellingham Bay. The
+            band began as a solo project by <strong>Ben Gibbard</strong>, a photo
+            intern at the local alt-weekly who recorded four-track demos under the
+            name, borrowed from the Bonzo Dog Doo-Dah Band&rsquo;s 1967 song.
+            Guitarist <strong>Chris Walla</strong>, bassist
+            <strong>Nick Harmer</strong>, and drummer <strong>Nathan Good</strong>
+            filled out the lineup. The four-track aesthetic of
+            <em>You Can Play These Songs with Chords</em> (1997) captured the
+            lo-fi, DIY infrastructure of late-1990s college-town indie rock &mdash;
+            cassette dubbing, campus radio, house shows.
+          </p>
+          <p>
+            Bellingham entering the engine is structurally significant. Every prior
+            degree has been rooted in Seattle, Portland, Olympia, or the I-5
+            corridor&rsquo;s established nodes. Death Cab extends the geographic
+            reach northward &mdash; past Everett, past the Skagit Valley, to
+            the last major city before the Canadian border. The Bellingham Ascent
+            is not just the band&rsquo;s trajectory from college town to arenas;
+            it is the engine itself reaching beyond its established geography.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Something About Airplanes: Barsuk Begins (1998)</h2>
+          <p>
+            <strong><em>Something About Airplanes</em></strong> (1998,
+            <strong>Barsuk Records</strong>) &mdash; the debut full-length, and
+            one of Barsuk&rsquo;s earliest releases. Recorded by Chris Walla in
+            dorm rooms and borrowed spaces. The lo-fi production is not an
+            aesthetic choice but a material constraint &mdash; four-track tape,
+            limited microphones, no budget. Gibbard&rsquo;s lyrics already carry
+            the specificity that will define the catalog: not &ldquo;I miss
+            you&rdquo; but the exact geography and weather of missing someone.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>We Have the Facts and We're Voting Yes (2000)</h2>
+          <p>
+            <strong><em>We Have the Facts and We&rsquo;re Voting Yes</em></strong>
+            (2000, <strong>Barsuk Records</strong>) &mdash; the pivot album. Jason
+            McGerr replaces Nathan Good on drums, establishing the rhythm section
+            that will carry the band for two decades. The production cleans up:
+            Walla&rsquo;s engineering moves from constraint to choice. The songs
+            grow more intricate. <strong>KEXP</strong> rotation begins. The
+            Bellingham-to-Seattle migration accelerates &mdash; the band relocates
+            to <strong>Capitol Hill</strong>.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Photo Album (2001)</h2>
+          <p>
+            <strong><em>The Photo Album</em></strong> (2001,
+            <strong>Barsuk Records</strong>) &mdash; first national attention.
+            <strong>Pitchfork</strong> reviews. The synthesizer enters. Walla&rsquo;s
+            production grows more layered &mdash; guitars loop and interlock,
+            keyboards provide atmospheric depth. &ldquo;A Movie Script Ending&rdquo;
+            becomes the first Death Cab song to achieve widespread indie-radio
+            rotation. The ache sharpens: Gibbard writes about distance, departure,
+            photographs as evidence of time that has already passed.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Transatlanticism: The Masterwork (2003)</h2>
+          <p>
+            <strong><em>Transatlanticism</em></strong> (2003,
+            <strong>Barsuk Records</strong>) &mdash; the album that changed
+            everything. Produced by Chris Walla at <strong>Long View Farm</strong>
+            and <strong>Hall of Justice</strong> (Seattle). The title track builds
+            across eight minutes from a single piano note to a full-band crescendo,
+            Gibbard repeating &ldquo;I need you so much closer&rdquo; until the
+            distance itself becomes the subject. <strong>Pitchfork</strong> 8.0.
+            <strong>Gold certification</strong> (500,000 copies). Featured on
+            <em>The O.C.</em> &mdash; the Seth Cohen effect brings Death Cab to
+            an audience that had never heard of Barsuk Records.
+          </p>
+          <blockquote>
+            Transatlanticism is the Barsuk ceiling &mdash; the moment where an
+            indie label&rsquo;s flagship act outgrows the infrastructure that
+            built it. The album proves that Barsuk&rsquo;s artist-development
+            model works. It also proves that the model has a scale limit.
+            The next album will be on Atlantic Records.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Plans: The Major-Label Transition (2005)</h2>
+          <p>
+            <strong><em>Plans</em></strong> (2005,
+            <strong>Atlantic Records</strong>) &mdash; the major-label debut.
+            <strong>Platinum certification</strong> (1,000,000+ copies).
+            &ldquo;Soul Meets Body&rdquo; and &ldquo;I Will Follow You into
+            the Dark&rdquo; become the band&rsquo;s most recognized songs.
+            The latter &mdash; Gibbard alone with an acoustic guitar, singing
+            about following a loved one into death &mdash; is the ache at its
+            most distilled. <strong>Billboard Hot 100</strong>. <strong>Grammy
+            nomination</strong> for Best Alternative Music Album. The
+            Bellingham four-track project now sells a million records.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Narrow Stairs Through Asphalt Meadows (2008&ndash;2022)</h2>
+          <p>
+            <strong><em>Narrow Stairs</em></strong> (2008, Atlantic) &mdash;
+            <strong>#1 on the Billboard 200</strong>. The only indie-rooted
+            album from the Pacific Northwest to debut at number one during this
+            period. Darker, more angular. &ldquo;I Will Possess Your Heart&rdquo;
+            opens with a four-and-a-half-minute bass-driven instrumental.
+          </p>
+          <p>
+            <strong><em>Codes and Keys</em></strong> (2011, Atlantic) &mdash;
+            Gibbard&rsquo;s post-divorce album. Synthesizer-heavy. Walla&rsquo;s
+            last album with the band. <strong><em>Kintsugi</em></strong> (2015,
+            Atlantic) &mdash; first album without Walla. Rich Costey produces.
+            Dave Depper and Zac Rae join. <strong>Grammy nomination</strong>
+            for Best Rock Album.
+            <strong><em>Thank You for Today</em></strong> (2018, Atlantic) &mdash;
+            the gentrification album, Gibbard writing about Capitol Hill
+            changing around him. <strong><em>Asphalt Meadows</em></strong>
+            (2022, Atlantic) &mdash; pandemic-era recording, the band at
+            twenty-five years. Ten studio albums across twenty-five years.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Postal Service and Beyond</h2>
+          <p>
+            <strong>The Postal Service</strong> &mdash; Gibbard&rsquo;s side
+            project with <strong>Jimmy Tamborello</strong> (Dntel). <em>Give
+            Up</em> (2003, Sub Pop) is one of the best-selling indie albums
+            of the 2000s &mdash; <strong>platinum certification</strong>,
+            &ldquo;Such Great Heights&rdquo; as cultural ubiquity. The Postal
+            Service operates at E=5 despite a single album, demonstrating
+            Gibbard&rsquo;s ability to generate mass-audience connection
+            across genres.
+          </p>
+          <p>
+            Gibbard&rsquo;s solo work, his marriage to and divorce from
+            <strong>Zooey Deschanel</strong>, his marathon running, his
+            environmental activism, his 2020 livestream concerts from his
+            Capitol Hill home during the pandemic &mdash; the public figure
+            who emerged from the Bellingham four-track project is a Seattle
+            institution. He belongs to Capitol Hill in the way that the
+            Space Needle belongs to the skyline: visible from everywhere,
+            impossible to imagine the city without.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Ache</h4>
+              <div class="level advanced">Advanced &mdash; 59th Acoustic Element</div>
+              <p>
+                The acoustic quality of emotional precision under indie-rock
+                instrumentation &mdash; Gibbard&rsquo;s voice conveying the
+                exact distance between where you are and where you want to be.
+                Not the murmur&rsquo;s whispered intuition (45), the manuscript
+                page&rsquo;s literary construction (57), or the cathedral
+                harmony&rsquo;s choral immersion (53) &mdash; the specific
+                quality where yearning becomes the song&rsquo;s structural
+                element. You can <em>feel</em> the distance in the vocal
+                delivery. The ache is not sadness; it is the precise
+                measurement of longing.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Bellingham Ascent</h4>
+              <div class="level advanced">Advanced &mdash; 59th Artist-City Pattern</div>
+              <p>
+                The trajectory from college-town formation to arena-headliner
+                scale, carrying the origin city&rsquo;s identity through
+                every transition. Death Cab formed at WWU in Bellingham,
+                migrated to Capitol Hill, signed to a major label, sold a
+                million records, debuted at #1 on the Billboard 200 &mdash;
+                and still sounds like a band from a rainy college town.
+                The Bellingham Ascent is the pattern where geographic origin
+                becomes permanent acoustic identity regardless of commercial
+                scale.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Indie-to-Major Crossing</h4>
+              <div class="level intermediate">Intermediate &mdash; 58th Deployment</div>
+              <p>
+                The blue note that sounds when an indie band signs to a major
+                label and the audience splits &mdash; the fans who feel
+                betrayed, the fans who follow, the new fans who never knew
+                the indie years. Death Cab&rsquo;s move from Barsuk to
+                Atlantic is the canonical indie-to-major crossing of the
+                2000s. The blue note plays in the gap between
+                <em>Transatlanticism</em>&rsquo;s indie peak and
+                <em>Plans</em>&rsquo; platinum debut &mdash; the same
+                band, different infrastructure, different audience.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk-Adjacent Streak Broken at 13</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 40</div>
+              <p>
+                Indie Rock enters and the thirteen-degree folk-adjacent streak
+                (45&ndash;57) ends. Death Cab is not folk-adjacent: electric
+                guitars, full-band arrangements, arena-scale production,
+                synthesizers. The genre family shifts. Genre Stage 39 was Folk
+                at degree 57; Genre Stage 40 is Indie Rock at degree 58.
+                The engine pivots from the quiet register to the
+                mid-frequency range.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Something About Airplanes</h4>
+              <div class="disco-years">1998 &middot; Barsuk Records</div>
+              <p>
+                Debut. Four-track lo-fi. Bellingham dorm rooms.
+                Chris Walla engineering. The origin tape.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>We Have the Facts</h4>
+              <div class="disco-years">2000 &middot; Barsuk Records</div>
+              <p>
+                McGerr joins. Capitol Hill migration.
+                KEXP rotation begins. Production cleans up.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Photo Album</h4>
+              <div class="disco-years">2001 &middot; Barsuk Records</div>
+              <p>
+                First national attention. Synths enter.
+                &ldquo;A Movie Script Ending.&rdquo;
+                Pitchfork reviews. The ache sharpens.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Transatlanticism</h4>
+              <div class="disco-years">2003 &middot; Barsuk Records</div>
+              <p>
+                The masterwork. Gold (500K).
+                Pitchfork 8.0. <em>The O.C.</em> effect.
+                &ldquo;I need you so much closer.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Plans</h4>
+              <div class="disco-years">2005 &middot; Atlantic Records</div>
+              <p>
+                Major-label debut. Platinum (1M+).
+                Grammy nom. &ldquo;I Will Follow You
+                into the Dark.&rdquo; Billboard Hot 100.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Narrow Stairs</h4>
+              <div class="disco-years">2008 &middot; Atlantic Records</div>
+              <p>
+                #1 Billboard 200. Darker, angular.
+                &ldquo;I Will Possess Your Heart.&rdquo;
+                The commercial peak.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Kintsugi</h4>
+              <div class="disco-years">2015 &middot; Atlantic Records</div>
+              <p>
+                First album without Walla.
+                Grammy nom (Best Rock Album).
+                Depper and Rae join.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Asphalt Meadows</h4>
+              <div class="disco-years">2022 &middot; Atlantic Records</div>
+              <p>
+                Tenth album. Twenty-five years.
+                Pandemic-era recording.
+                The band endures.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">57&deg;</span>
+              <strong>Laura Gibson</strong> &mdash; Barsuk labelmate, consecutive
+              degrees. Gibson (E=2, Folk) and Death Cab (E=4, Indie Rock) share
+              a label but operate at fundamentally different scales. The same
+              Barsuk aesthetic &mdash; literary, emotionally precise &mdash; at
+              opposite energy levels. Manuscript page (57) yields to the ache (58).
+              The quiet register ends.
+            </li>
+            <li>
+              <span class="ref-degree">55&deg;</span>
+              <strong>Shelby Earl</strong> &mdash; Producer web connection.
+              John Roderick (Long Winters, degree 59, Barsuk) produced Earl&rsquo;s
+              debut. Death Cab and Long Winters share a label and a social graph.
+              Earl, Gibson, Death Cab, Long Winters &mdash; four consecutive degrees
+              connected through Barsuk infrastructure.
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Two PNW indie icons at different
+              registers. Fleet Foxes (E=3, Indie Folk) build cathedrals through
+              vocal harmony; Death Cab (E=4, Indie Rock) builds through Gibbard&rsquo;s
+              solo ache and Walla&rsquo;s production architecture. Both Pitchfork
+              darlings. Both Sub Pop adjacent (Postal Service on Sub Pop).
+            </li>
+            <li>
+              <span class="ref-degree">52&deg;</span>
+              <strong>Brandi Carlile</strong> &mdash; Two paths to arenas from
+              the PNW. Carlile (E=4, Folk/Rock) rises through raw vocal testimony;
+              Death Cab through emotional precision. Both Grammy-nominated.
+              Both fill the Gorge Amphitheatre. Different instruments, same scale.
+            </li>
+            <li>
+              <span class="ref-degree">47&deg;</span>
+              <strong>Pedro the Lion</strong> &mdash; Seattle indie-rock lineage.
+              Bazan and Gibbard share the narrative-lyric tradition &mdash; both
+              write songs that work as short stories. Pedro the Lion (E=3) stays
+              at indie scale; Death Cab (E=4) crosses to major-label arenas.
+              The same literary intent at different commercial trajectories.
+            </li>
+            <li>
+              <span class="ref-degree">45&deg;</span>
+              <strong>Damien Jurado</strong> &mdash; The murmur (45) to the ache (58).
+              Thirteen degrees from whispered lo-fi folk to platinum indie rock.
+              Both formed in the mid-to-late 1990s PNW indie ecosystem.
+              Jurado whispers in living rooms; Gibbard aches in arenas.
+              E=2 to E=4. The same emotional core at different volumes.
+            </li>
+            <li>
+              <span class="ref-degree">34&deg;</span>
+              <strong>Modest Mouse</strong> &mdash; The twin pillars of 2000s
+              PNW indie rock. Both formed in Washington college towns (Modest
+              Mouse in Issaquah, Death Cab in Bellingham). Both signed to major
+              labels after indie breakthroughs. Both debuted at #1 on the
+              Billboard 200. Different sonic signatures, parallel trajectories.
+            </li>
+            <li>
+              <span class="ref-degree">0&deg;</span>
+              <strong>Quincy Jones</strong> &mdash; From Mercury orchestras to
+              Bellingham four-track tapes to platinum indie rock. Fifty-nine
+              degrees of Seattle music. At degree 58: a college-town band
+              that became an arena headliner without ever losing the ache
+              in the singer&rsquo;s voice.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">58&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">40</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1997&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Bellingham, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Base</span>
+            <span class="stat-value">Capitol Hill, Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">1997 (WWU)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Barsuk / Atlantic</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">40 (Indie Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#59 (The Ache)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">The Bellingham Ascent</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Barsuk Trio</span>
+            <span class="stat-value">2 of 3</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Barsuk Cluster (57-58-59)</h4>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Gibson (E=2, Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">58&deg;</span>
+            <span class="stat-value">Death Cab (E=4, Indie Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">59&deg;</span>
+            <span class="stat-value">Long Winters (E=3)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">14</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#59 (The Ache)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#59 (Bellingham Ascent)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#58</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Milestones</h4>
+          <div class="stat-row">
+            <span class="stat-label">Transatlanticism</span>
+            <span class="stat-value">Gold (500K)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Plans</span>
+            <span class="stat-value">Platinum (1M+)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Narrow Stairs</span>
+            <span class="stat-value">#1 Billboard 200</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy Noms</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Current Lineup</h4>
+          <div class="stat-row">
+            <span class="stat-label">Vocals/Guitar</span>
+            <span class="stat-value">Ben Gibbard</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bass</span>
+            <span class="stat-value">Nick Harmer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Drums</span>
+            <span class="stat-value">Jason McGerr</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Guitar/Keys</span>
+            <span class="stat-value">Dave Depper</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Keys</span>
+            <span class="stat-value">Zac Rae</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Folk Streak (Ended)</h4>
+          <div class="stat-row">
+            <span class="stat-label">Run</span>
+            <span class="stat-value">13 degrees (45&ndash;57)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Broken by</span>
+            <span class="stat-value">Indie Rock (58)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2 three-peat</span>
+            <span class="stat-value">Broken (E=4)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../057-laura-gibson/" style="color: var(--seattle-navy);">&larr; 57&deg; Laura Gibson</a>
+        <a href="../059-the-long-winters/" style="color: var(--seattle-navy);">59&deg; The Long Winters &rarr;</a>
+      </div>
+      <p>
+        Degree 58&deg; &mdash; Death Cab for Cutie &mdash; Seattle 360 Engine &mdash; v1.49.196
+        <br>
+        The thirteen-degree folk-adjacent streak ends. Indie Rock enters. E=4 shatters the
+        E=2 three-peat. Bellingham enters the engine via Western Washington University.
+        Barsuk&rsquo;s flagship act &mdash; from four-track dorm recordings to platinum
+        arena headliners. Ten albums across twenty-five years. The ache in Gibbard&rsquo;s
+        voice is the sound of the distance between where you are and where you want to be.
+        The Bellingham Ascent. The Barsuk trio continues. The volume rises.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

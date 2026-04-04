@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 208&deg; &mdash; Coyote Howl &mdash; The Voice That Fills Valleys &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #BF360C, #E64A19, #FF5722); color: #FBE9E7; font-size: 2.5rem; font-weight: 700; width: 5.5rem; height: 5.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(191, 54, 12, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .howl-card { background: linear-gradient(135deg, #BF360C, #D84315, #E64A19); border: 2px solid #BF360C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCCBC; }
+    .howl-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFAB91; }
+    .howl-card p { color: #FFCCBC; }
+    .howl-card strong { color: white; }
+
+    .deception-card { background: linear-gradient(135deg, #D84315, #E64A19, #FF5722); border: 2px solid #BF360C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FBE9E7; }
+    .deception-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCCBC; }
+    .deception-card p { color: #FBE9E7; }
+    .deception-card strong { color: white; }
+
+    .urban-card { background: linear-gradient(135deg, #E64A19, #FF5722, #FF7043); border: 2px solid #D84315; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FBE9E7; }
+    .urban-card h3 { margin-top: 0; font-size: 1.1rem; color: #FFCCBC; }
+    .urban-card p { color: #FBE9E7; }
+    .urban-card strong { color: white; }
+
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.return { background: #BF360C; }
+    .theory-icon.howl { background: #D84315; }
+    .theory-icon.urban { background: #E64A19; }
+    .theory-icon.persist { background: #FF5722; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-level.intermediate { background: #EFEBE9; color: #4E342E; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    .comparison-table th { background: #BF360C; color: white; padding: 0.4rem 0.6rem; text-align: left; font-family: system-ui, sans-serif; }
+    .comparison-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--card-border); }
+    .comparison-table tr:nth-child(even) { background: #FBE9E7; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">208&deg;</div>
+      <div class="release-title-block">
+        <h2>Coyote Group Howl</h2>
+        <div class="scientific"><em>Canis latrans</em> (Canidae) &mdash; E=6 &mdash; The Voice That Fills Valleys</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      <strong>CANIDAE RETURNS</strong> &mdash; last seen at degree 71 (Red Fox).
+      <strong>137-degree gap.</strong> The ascending
+      <strong>yip-howl group chorus:</strong> 3&ndash;7 animals that sound like
+      <strong>twenty.</strong> Frequency-hopping acoustic deception.
+      <strong>E=6</strong> &mdash; carries <strong>3&ndash;5+ miles.</strong>
+      Most iconic mammalian sound in North America.
+      Found in <strong>every habitat.</strong>
+    </div>
+    <div class="release-grid">
+      <div class="content-body">
+        <div class="howl-card">
+          <h3>The Group Howl &mdash; Ascending Yip-Howl Chorus</h3>
+          <p>
+            Begins with <strong>sharp staccato yips</strong> at varied pitches.
+            Escalates to <strong>long, ascending, frequency-modulated howls.</strong>
+            The entire pack vocalizes simultaneously, each animal at
+            <strong>different pitches and rhythms.</strong>
+            Carries <strong>3&ndash;5+ miles</strong> in open terrain.
+            Duration: <strong>30 seconds to several minutes.</strong>
+            The most recognized wildlife sound on the continent.
+          </p>
+        </div>
+
+        <div class="deception-card">
+          <h3>Acoustic Deception &mdash; Three Sounds Like Twenty</h3>
+          <p>
+            Each Coyote <strong>frequency-hops</strong> &mdash; rapid pitch and
+            tone changes that make <strong>one animal sound like two or three.</strong>
+            A pack of <strong>3&ndash;7</strong> sounds like <strong>15&ndash;20+.</strong>
+            The deception serves <strong>territorial defense:</strong>
+            rival packs overestimate group size and stay away.
+            The howl is a <strong>force multiplier.</strong>
+            Social intelligence: each member adjusts in real-time.
+          </p>
+        </div>
+
+        <div class="urban-card">
+          <h3>The Ultimate Generalist &mdash; Thriving Everywhere</h3>
+          <p>
+            Every US state except Hawaii. Every Canadian province.
+            <strong>Forest, grassland, urban, suburban, alpine, desert.</strong>
+            Expanded range <strong>after wolf extirpation.</strong>
+            <strong>Persecution resilience:</strong> a century of systematic killing
+            has <strong>increased</strong> populations (larger litters, range expansion).
+            <strong>The more you kill, the more there are.</strong>
+          </p>
+        </div>
+
+        <h2>Canidae Energy Arc</h2>
+        <table class="comparison-table">
+          <thead><tr><th>Degree</th><th>Species</th><th>Sound</th><th>Energy</th></tr></thead>
+          <tbody>
+            <tr><td>71&deg;</td><td>Red Fox</td><td>Bark</td><td>E=3</td></tr>
+            <tr><td>208&deg;</td><td>Coyote</td><td>Group howl</td><td>E=6</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif;">
+          137-degree gap. Solitary bark (E=3) to group chorus (E=6). The family&rsquo;s full vocal range.
+        </p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-71 Red Fox</strong>
+            <p>CANIDAE REUNION! 137-degree gap. Solitary bark (E=3) to group chorus (E=6). Longest family gap in engine history.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-205 Bighorn Sheep Clash</strong>
+            <p>Both E=6. Impact force (ram) vs. vocal force (coyote). One collision, one chorus. Different paths to maximum energy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-208 Pickwick</strong>
+            <p>VOICE FILLS SPACE! Soul baritone fills venue. Coyote chorus fills valley. Both E=6. Total E=12. Vocal power as spatial illusion.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-207 Porcupine</strong>
+            <p>Eerie moans (E=3) to iconic howls (E=6). Night sounds. The Porcupine unsettles. The Coyote commands.</p>
+          </div>
+        </div>
+
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon return">C</div>
+            <div class="theory-content">
+              <h4>Canidae Returns &mdash; 137-Degree Gap</h4>
+              <span class="theory-level milestone">Milestone</span>
+              <p>Last Canidae at degree 71 (Red Fox, E=3). Longest family gap in engine. Now Coyote at E=6. Full family vocal range revealed.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon howl">H</div>
+            <div class="theory-content">
+              <h4>Acoustic Deception &mdash; Frequency-Hopping</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Each animal frequency-hops. One sounds like three. A pack of 3-7 sounds like 20. Force multiplier for territorial defense.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Ultimate Generalist &mdash; Every Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Forest to urban. Alaska to Mexico. Persecution resilience: more killing = larger litters = range expansion. Unkillable.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon persist">P</div>
+            <div class="theory-content">
+              <h4>Persecution Resilience &mdash; Population Paradox</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Century of systematic killing increased populations. Larger litters compensate for losses. Range expanded during persecution. Remarkable mammalian ecology.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card"><div class="stat-label">Species</div><div class="stat-value">Coyote</div><div class="stat-detail"><em>C. latrans</em> (group howl)</div></div>
+        <div class="stat-card"><div class="stat-label">Family</div><div class="stat-value">Canidae</div><div class="stat-detail">RETURNS &mdash; 137&deg; gap</div></div>
+        <div class="stat-card"><div class="stat-label">Sound</div><div class="stat-value">Group howl</div><div class="stat-detail">ascending yip-howl chorus</div></div>
+        <div class="stat-card"><div class="stat-label">Energy</div><div class="stat-value" style="color: #BF360C;">E = 6</div><div class="stat-detail">fills valleys, 3&ndash;5+ miles</div></div>
+        <div class="stat-card"><div class="stat-label">Frequency</div><div class="stat-value">300&ndash;3,000 Hz</div><div class="stat-detail">frequency-hopping</div></div>
+        <div class="stat-card"><div class="stat-label">Pack size</div><div class="stat-value">3&ndash;7</div><div class="stat-detail">sounds like 15&ndash;20+</div></div>
+        <div class="stat-card"><div class="stat-label">Carry distance</div><div class="stat-value">3&ndash;5+ miles</div><div class="stat-detail">open terrain</div></div>
+        <div class="stat-card"><div class="stat-label">Habitat</div><div class="stat-value">Everywhere</div><div class="stat-detail">most adaptable carnivore</div></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

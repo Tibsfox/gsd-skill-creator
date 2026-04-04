@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 132&deg; &mdash; Greater White-fronted Goose &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #E65100, #EF6C00);
+      color: #FFF3E0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 16px rgba(230, 81, 0, 0.5);
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    .laugh-card {
+      background: linear-gradient(135deg, #E65100 0%, #EF6C00 30%, #F57C00 60%, #E65100 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .laugh-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .laugh-card p { color: #FFF3E0; }
+    .laugh-card strong { color: #FFE0B2; }
+
+    .genus-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 30%, #689F38 60%, #33691E 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .genus-card p { color: #F1F8E9; }
+    .genus-card strong { color: #DCEDC8; }
+
+    .streak-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 30%, #6D4C41 60%, #4E342E 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .streak-card p { color: #EFEBE9; }
+    .streak-card strong { color: #D7CCC8; }
+
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.laugh { background: #E65100; }
+    .theory-icon.genus { background: #33691E; }
+    .theory-icon.speckle { background: #795548; }
+    .theory-icon.goose { background: #5D4037; }
+    .theory-icon.anatidae { background: #3E2723; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #FBE9E7; color: #BF360C; }
+
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+    .comparison-table th {
+      background: var(--puget-teal);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .comparison-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .comparison-table tr:nth-child(even) { background: var(--puget-light); }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">132&deg;</div>
+      <div class="release-title-block">
+        <h2>Greater White-fronted Goose</h2>
+        <div class="scientific"><em>Anser albifrons</em> (Anatidae) &mdash; E=4 &mdash; 15th Consecutive Anatidae &mdash; UNPRECEDENTED</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      musical laughing call &mdash; <strong>E=4</strong> &mdash;
+      the <strong>&ldquo;specklebelly&rdquo;</strong>. The most musically
+      complex goose call in the PNW &mdash; high-pitched yodeling
+      &ldquo;kla-ha&rdquo; at <strong>500&ndash;3,000 Hz</strong>.
+      First <strong><em>Anser</em></strong> (gray goose) genus &mdash;
+      genus shift from <em>Branta</em> (129&ndash;131).
+      <strong>Fifteenth consecutive Anatidae (118&ndash;132)</strong> &mdash;
+      unprecedented territory. Fourth goose in the goose era (129&ndash;134).
+      Arctic breeder. &ldquo;Specklebelly&rdquo; from dark belly markings.
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Laugh Card -->
+        <div class="laugh-card">
+          <h3>Musical Laughing Call &mdash; E=4</h3>
+          <p>
+            The Greater White-fronted Goose produces the <strong>most
+            musically complex call</strong> of any PNW goose &mdash;
+            a high-pitched, yodeling <strong>&ldquo;kla-ha&rdquo;</strong>
+            or &ldquo;kow-yow&rdquo; at <strong>500&ndash;3,000 Hz</strong>.
+            Liquid, laughing cadence. Genuinely resembles human laughter,
+            especially when multiple birds call simultaneously. A flock
+            produces a <strong>musical chattering chorus</strong> &mdash;
+            lighter, higher, more cheerful than any <em>Branta</em> goose.
+            Often detected by <strong>voice first</strong> in mixed flocks.
+          </p>
+        </div>
+
+        <!-- Genus Card -->
+        <div class="genus-card">
+          <h3>First <em>Anser</em> Genus &mdash; The Gray Geese</h3>
+          <p>
+            Genus shift from <strong><em>Branta</em></strong> (black geese,
+            129&ndash;131) to <strong><em>Anser</em></strong> (gray geese, 132).
+            Visually distinct: <strong>gray-brown head</strong> (no black),
+            <strong>pink-orange bill</strong> with white band at base,
+            <strong>orange legs</strong>. Dark belly markings =
+            &ldquo;<strong>specklebelly</strong>&rdquo; nickname.
+            The visual shift parallels the acoustic shift: laughing vs.
+            honking/cackling/murmuring. A fundamentally different goose.
+          </p>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-card">
+          <h3>Fifteenth Consecutive Anatidae (118&ndash;132) &mdash; Unprecedented</h3>
+          <p>
+            <strong>Fifteen consecutive</strong>. The Picidae nonet (107&ndash;115,
+            nine consecutive) is now dwarfed &mdash; nearly doubled. Energy
+            post-climax: E=6, E=5, <strong>E=4, E=4, E=4</strong> &mdash;
+            a plateau at E=4 for three entries (130&ndash;132). The streak
+            spans ducks (118&ndash;126), swans (127&ndash;128), <em>Branta</em>
+            geese (129&ndash;131), and now <em>Anser</em> geese (132).
+            <strong>Four genera. Three subfamilies. Unprecedented diversity.</strong>
+          </p>
+        </div>
+
+        <h2>Goose Quartet Acoustic Comparison (129&ndash;132)</h2>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Canada (129)</th>
+              <th>Cackling (130)</th>
+              <th>Brant (131)</th>
+              <th>White-fronted (132)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sound</strong></td>
+              <td>Deep honk</td>
+              <td>Higher cackle</td>
+              <td>Low murmur</td>
+              <td>Musical laugh</td>
+            </tr>
+            <tr>
+              <td><strong>Pitch</strong></td>
+              <td>200&ndash;2,500 Hz</td>
+              <td>400&ndash;2,000 Hz</td>
+              <td>200&ndash;1,200 Hz</td>
+              <td>500&ndash;3,000 Hz</td>
+            </tr>
+            <tr>
+              <td><strong>Energy</strong></td>
+              <td>E=5</td>
+              <td>E=4</td>
+              <td>E=4</td>
+              <td>E=4</td>
+            </tr>
+            <tr>
+              <td><strong>Genus</strong></td>
+              <td><em>Branta</em></td>
+              <td><em>Branta</em></td>
+              <td><em>Branta</em></td>
+              <td><em>Anser</em></td>
+            </tr>
+            <tr>
+              <td><strong>Habitat</strong></td>
+              <td>Urban/field</td>
+              <td>Field</td>
+              <td>Coastal bay</td>
+              <td>Field</td>
+            </tr>
+            <tr>
+              <td><strong>Weight</strong></td>
+              <td>2.6&ndash;6.5 kg</td>
+              <td>0.9&ndash;1.8 kg</td>
+              <td>1.0&ndash;1.8 kg</td>
+              <td>1.9&ndash;3.3 kg</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-131 Brant (goose era)</strong>
+            <p>GOOSE ERA CONTINUES! Brant (131, E=4, marine murmur) to White-fronted (132, E=4, field laughter). Both E=4, different habitats (coastal bay vs. agricultural field), different genera (Branta vs. Anser).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-129 Canada Goose (goose quartet)</strong>
+            <p>FOUR GEESE! Canada (129, deep honk, E=5), Cackling (130, higher cackle, E=4), Brant (131, low murmur, E=4), White-fronted (132, musical laugh, E=4). Four sounds, three genera, one family streak.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-118 Harlequin Duck (streak origin)</strong>
+            <p>FIFTEEN! Harlequin (118, E=5, stream) to White-fronted (132, E=4, field). Fifteen consecutive Anatidae. From torrential stream to agricultural field. The longest family run in the engine by far.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-128 Trumpeter Swan (energy plateau)</strong>
+            <p>E=4 PLATEAU! Trumpeter (128, E=6 climax) started the descent. After E=6, E=5: three consecutive E=4 entries (130-132). The post-climax plateau stabilizes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-107&ndash;115 Picidae (surpassed record)</strong>
+            <p>NEARLY DOUBLED! Picidae held 9 consecutive (107&ndash;115). Anatidae now at 15 (118&ndash;132). The streak has nearly doubled the previous record.</p>
+          </div>
+        </div>
+
+        <!-- Acoustic Map -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon laugh">L</div>
+            <div class="theory-content">
+              <h4>Musical Laughing Call &mdash; E=4</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>High-pitched yodeling &ldquo;kla-ha&rdquo; at 500&ndash;3,000 Hz. Most musically complex goose call in PNW. Laughing cadence. Liquid quality. Flock sounds like distant laughter. Voice as fastest detector in mixed flocks.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon genus">A</div>
+            <div class="theory-content">
+              <h4>First <em>Anser</em> Genus &mdash; Gray Geese Enter</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Genus shift: Branta (black geese, 129&ndash;131) to Anser (gray geese, 132). Gray-brown head, pink-orange bill, orange legs. Visual shift parallels acoustic shift. A fundamentally different goose.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon speckle">S</div>
+            <div class="theory-content">
+              <h4>The Specklebelly &mdash; Field Identification</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Dark belly bars and blotches = &ldquo;specklebelly&rdquo; nickname. White band at bill base = &ldquo;white-fronted.&rdquo; Orange bill and legs. Medium size. Circumpolar distribution.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon goose">4</div>
+            <div class="theory-content">
+              <h4>Goose Era Position 4 (129&ndash;134)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Fourth goose: Canada (129), Cackling (130), Brant (131), White-fronted (132). Two more expected: Snow Goose (133), Ross&rsquo;s Goose (134). The goose era extends.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon anatidae">15</div>
+            <div class="theory-content">
+              <h4>Fifteenth Consecutive Anatidae (118&ndash;132)</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Unprecedented. Nearly doubled the Picidae record (9). Post-climax E=4 plateau for three entries. Four genera. Three subfamilies. The streak enters uncharted territory.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Greater White-fronted Goose</div>
+          <div class="stat-detail"><em>Anser albifrons</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Anatidae</div>
+          <div class="stat-detail">15th consecutive &mdash; unprecedented</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Musical laughing call</div>
+          <div class="stat-detail">yodeling &ldquo;kla-ha,&rdquo; E=4</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">musical, flock-amplified</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Field</div>
+          <div class="stat-detail">winter visitor, agricultural</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">1.9&ndash;3.3 kg</div>
+          <div class="stat-detail">medium goose</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Anser</em></div>
+          <div class="stat-detail">first in engine (gray geese)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nickname</div>
+          <div class="stat-value">Specklebelly</div>
+          <div class="stat-detail">dark belly markings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Bill</div>
+          <div class="stat-value">Pink-orange</div>
+          <div class="stat-detail">white band at base</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Breeding</div>
+          <div class="stat-value">Arctic tundra</div>
+          <div class="stat-detail">circumpolar distribution</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "degree": 322,
+  "species": "Cascade Rock Avalanche -- cliff face mass movement event",
+  "scientific_name": null,
+  "slug": "322-cascade-rock-avalanche",
+  "sound_type": "Accelerating multi-ton percussion -- rock avalanche from cliff face. Self-amplifying acoustic event: initiation crack (2000-8000 Hz, brief) -> first block impact (broadband shock wave, 50-500 Hz dominant) -> acceleration phase (growing mass, 20-2000 Hz continuous rumble, self-amplifying as impacts dislodge additional material) -> deceleration tail (30-120 seconds). Total event duration 30-90 seconds for 100m cliff. Amplitude at 100m: 120+ dB. Valley reverberance extends perceived duration.",
+  "energy": 8,
+  "ecosystem": "Cliff face, alpine rock slope, Cascade Range high country, 4000-8000 feet elevation. Volcanic and non-volcanic cliff types. Mt. Rainier hydrothermal alteration zones. North Cascades crystalline basement. Glacially oversteepened cliff faces.",
+  "season": "Summer (peak frequency). Freeze-thaw winter progression opens fractures; summer thermal diurnal cycle provides daily stress; dry conditions remove water cohesion. Afternoon thermal maximum as typical trigger time.",
+  "family": "Geophysics -- mass movement event",
+  "milestone": "GEOPHYSICS RETURNS IN POST-SUMMIT SEQUENCE. E=8 through local mass-movement event (not plate-scale). Self-amplifying acoustic event: louder, broader in frequency, more massive as the event progresses. Cascade Range geological setting documented: volcanic arc geology, hydrothermal alteration, glacial oversteepening, freeze-thaw fracture progression.",
+  "coordinates": {
+    "lat": 47.8,
+    "lon": -121.7,
+    "description": "Cascade Range high country, Washington State. Specific active sites: Mt. Rainier (Sunset Amphitheater, Willis Wall, 2006 and 2015 documented events), North Cascades (Picket Range, Liberty Bell group, Washington Pass), Mt. Baker (Heliotrope Ridge zone), Cascade Pass area (Heather Hill 2003 event). Mt. St. Helens: 1980 eruption triggered by largest recorded North American rock avalanche (~2.5 km3)."
+  },
+  "acoustic_data": {
+    "initiation": "Fracture propagation: 2000-8000 Hz, 0.1-0.5 seconds before main event. High-frequency, brief. Not always audible; depends on proximity.",
+    "first_impact": "1000 kg block at 30 m/s: ~450,000 J kinetic energy. Broadband shock wave. Peak 50-500 Hz. Perceived as thunder crack with body-vibration low-frequency component.",
+    "acceleration_phase": "20-2000 Hz continuous rumble. Self-amplifying: each impact dislodges additional material. Growing mass at growing velocity. Dominant energy 100-500 Hz.",
+    "amplitude": "At 100m: 120+ dB. At 500m: 90-100 dB. At 2km: audible rumble. Valley wall reflections extend duration in glacial U-shaped valleys.",
+    "duration": "Full event: 30-90 seconds (100m cliff). Deceleration tail: 20-60 seconds after primary mass stops.",
+    "e8_calibration": "E=8 through: local mass-movement (not plate-scale, not E=9); self-amplifying character; broadband shock wave impact energy; 120+ dB at close range; reverberant alpine environment. Episodic (seconds-minutes) vs. tidal bore (hours) -- different temporal character, same E=8 level."
+  },
+  "nodes": [
+    {"id": "self-amplifying-cascade", "type": "concept", "title": "Self-Amplifying Acoustic Event", "description": "The rock avalanche grows louder, broader in frequency, and more massive as it progresses. Each impact dislodges additional material; the additional material produces more impacts. E=8 is reached at the event's maximum, not at its initiation.", "connections": ["geophysics-returns"]},
+    {"id": "geophysics-returns", "type": "milestone", "title": "Geophysics Returns in Post-Summit Sequence", "description": "After biological multi-layer (degree 321, E=7), geophysics returns at E=8. The post-summit SPS track is not monotone descending; geological events insert high energy at specific degrees.", "connections": ["self-amplifying-cascade"]},
+    {"id": "episodic-vs-sustained", "type": "calibration", "title": "Episodic vs. Sustained E=8", "description": "Rock avalanche (degree 322) E=8 through brief peak intensity (30-90 seconds). Tidal bore (degree 323) E=8 through sustained hydraulic mass (2-4 hours). Both E=8 through fundamentally different temporal mechanisms.", "connections": ["geophysics-returns"]}
+  ],
+  "cross_references": [
+    {"target": "S36-322", "artist": "Pond", "relationship": "E=7 + E=8 = E=15. Geophysics exceeds the working grunge band by one unit. The mountain is not competing; it simply exceeds."},
+    {"target": "SPS-312", "species": "Puget Sound Winter Storm Surge", "relationship": "Earlier geophysics at E=9. Storm surge: oceanographic, large-scale. Rock avalanche: terrestrial, local. E=9 vs. E=8 = scale difference."},
+    {"target": "SPS-323", "species": "Puget Sound Tidal Bore", "relationship": "Consecutive geophysics entries at E=8. Avalanche: brief episodic (30-90 sec). Tidal bore: sustained (hours). Two E=8 mechanisms in consecutive degrees."}
+  ]
+}

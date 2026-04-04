@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 241&deg; &mdash; The Sonics &mdash; E=8 &mdash; Garage Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFCDD2; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #8D1A1A; color: #FFCDD2; border: 1px solid #C62828; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .track-list { list-style: none; padding: 0; }
+    .track-list li { padding: 0.6rem 0.8rem; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; display: flex; align-items: baseline; gap: 0.8rem; }
+    .track-list li:last-child { border-bottom: none; }
+    .track-num { font-weight: 700; color: #B71C1C; min-width: 1.5rem; font-family: system-ui, sans-serif; font-size: 0.8rem; }
+    .track-name { font-weight: 600; color: #212121; }
+    .track-note { color: #757575; font-size: 0.82rem; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>241 &mdash; The Sonics (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">241&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">The Sonics</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Garage Rock</span>
+          <span class="label-badge">Etiquette Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>E=8 &mdash; TIES ENGINE MAXIMUM. PROTO-PUNK PROGENITOR.</strong> The Sonics are the loudest, most aggressive band of the 1960s Pacific Northwest. Gerry Roslie's screaming vocals. "Psycho." "Strychnine." "The Witch." A decade ahead of punk. Tacoma's greatest band. Pairs with Dolly Varden (SPS 241, E=2) &mdash; spread of 6, among the widest in the engine.
+        </div>
+
+        <h2>The Loudest Band in the Room</h2>
+        <p>The Sonics did not refine rock and roll &mdash; they detonated it. Where the Beatles were melodic, the Sonics were abrasive. Where the Beach Boys were harmonious, the Sonics were distorted past the point of comfort. Formed in Tacoma in 1960, the band built their sound around Gerry Roslie's howling, screaming vocal attack, Larry Parypa's maximally distorted guitar, and the hammered-chord organ work that gave every Sonics track its distinctive urgency. The result was music that nobody else in 1964-65 America had the nerve to make.</p>
+
+        <blockquote>"Some folks like water / Some folks like wine / But I like the taste of straight strychnine." &mdash; The Sonics, "Strychnine" (1965)</blockquote>
+
+        <p>The Sonics never had a national hit. They never appeared on national television. They toured primarily in the Pacific Northwest, releasing records on Tacoma's Etiquette Records to a regional audience that understood what they were doing. And yet they are cited as direct influences by the Stooges, the Cramps, the White Stripes, and virtually every punk and garage-rock band that came after. This is the Sonics paradox: maximum influence, zero commercial breakthrough.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Essential Songs</h2>
+        <ul class="track-list">
+          <li><span class="track-num">01</span><span class="track-name">Psycho</span><span class="track-note">1964/65 &mdash; Opens with a sustained howl. Horror-punk a decade early. The proto-punk founding document.</span></li>
+          <li><span class="track-num">02</span><span class="track-name">Strychnine</span><span class="track-note">1965 &mdash; A song about liking rat poison. Deliberate grotesquerie with a brilliant pop hook underneath.</span></li>
+          <li><span class="track-num">03</span><span class="track-name">The Witch</span><span class="track-note">1964 &mdash; The debut single. #4 on Northwest charts. Organ-heavy. The template established.</span></li>
+          <li><span class="track-num">04</span><span class="track-name">Have Love Will Travel</span><span class="track-note">1965 &mdash; Richard Berry cover. Rob Lind's sax. The Sonics' most accessible, most covered track.</span></li>
+          <li><span class="track-num">05</span><span class="track-name">Boss Hoss</span><span class="track-note">1965 &mdash; Maximum velocity. The driving limit of the formula.</span></li>
+          <li><span class="track-num">06</span><span class="track-name">Keep A Knockin'</span><span class="track-note">1965 &mdash; Little Richard cover, pushed to distortion. The Sonics claim their influences.</span></li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <h2>Etiquette Records &amp; The Northwest Sound</h2>
+        <p>Etiquette Records was founded by Buck Ormsby (musician, bassist, scene participant) in 1960 &mdash; the same year the Sonics formed. The label's small budget and Joe Boles' Seattle recording studio produced what historians now call the "Northwest Sound": rawer, more organ-heavy, and more aggressive than the garage rock being made in Los Angeles or New York. The rough production on Sonics records is not a limitation. It is an aesthetic. The limitations were the sound.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Here Are the Sonics (1965)</h4>
+            <span class="level milestone">Etiquette Records</span>
+            <p>The debut album and the most important Pacific Northwest record before Nirvana's <em>Nevermind</em>. "Psycho," "Strychnine," "The Witch," "Have Love Will Travel." The full statement.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Boom (1966)</h4>
+            <span class="level advanced">Etiquette Records</span>
+            <p>The second album. Equally essential. "Boss Hoss" in full flight. The Sonics formula extended and confirmed.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Introducing the Sonics (1967)</h4>
+            <span class="level intermediate">Etiquette Records</span>
+            <p>Third album. Slightly more polished but the core aggression intact. Late-period Sonics before the initial breakup.</p>
+          </div>
+          <div class="theory-card">
+            <h4>This Is the Sonics (2015)</h4>
+            <span class="level intermediate">Revox Records</span>
+            <p>First new studio album in nearly 50 years. Received strong reviews. Sounds absolutely current. Maximum aggression does not age.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Proto-Punk Genealogy</h2>
+        <p>The Sonics' influence runs through a clear genealogy. Iggy Pop and the Stooges (1969) are the next link in the chain &mdash; the Stooges' confrontational aggression is the Sonics' aggression filtered through Detroit. The Ramones identified the same essential formula ten years later and brought it to New York. The Cramps covered "Psycho" and made the horror-rock connection explicit. Jack White cited the Sonics as foundational to the White Stripes' approach. At each point, the rediscovery says the same thing: the Sonics already did this, first, loudest, with the best riffs.</p>
+
+        <hr class="section-divider">
+
+        <h2>Energy = 8 -- The Engine Maximum</h2>
+        <p>E=8 ties the engine's maximum energy reading, previously reached only by The Blood Brothers at degree 218. The Sonics at E=8 are the historical anchor for that reading &mdash; they invented the aesthetic that makes E=8 possible. The garage rock sequence peaks here at degree 241 before the engine continues with The Wailers (E=7), The Frantics (E=6), and The Kingsmen (E=7). The Sonics are the apex.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">218</span> The Blood Brothers &mdash; Only other E=8 in the engine. Post-hardcore screaming compared to proto-punk screaming. Four decades apart; same energy.</li>
+          <li><span class="ref-degree">240</span> Paul Revere and the Raiders &mdash; PNW garage contemporaries. E=6. More commercial. The polished version of the same era.</li>
+          <li><span class="ref-degree">242</span> The Wailers &mdash; Tacoma garage predecessors. "Tall Cool One." The instrumental tradition the Sonics pushed to its vocal extreme.</li>
+          <li><span class="ref-degree">244</span> The Kingsmen &mdash; "Louie Louie" &mdash; "Have Love Will Travel" shares author Richard Berry. The garage era's most famous song.</li>
+          <li><span class="ref-degree">SPS 241</span> Dolly Varden &mdash; E=2 contrast. Widest possible spread: E=8 screaming proto-punk against E=2 glacial stream silence.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">241 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Garage Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1960&ndash;1968</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Tacoma, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Etiquette Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals / Keys</span><span class="stat-value">Gerry Roslie</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Larry Parypa</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Andy Parypa</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Bob Bennett</span></div>
+          <div class="stat-row"><span class="stat-label">Sax / Guitar</span><span class="stat-value">Rob Lind</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">66.9%</span></div>
+          <div class="stat-row"><span class="stat-label">E-level</span><span class="stat-value">8 (PEAK)</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">E=8 TIES MAX</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Associated</h4>
+          <div class="stat-row"><span class="stat-label">Scene peers</span><span class="stat-value">The Wailers</span></div>
+          <div class="stat-row"><span class="stat-label">Label founder</span><span class="stat-value">Buck Ormsby</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Dolly Varden E=2</span></div>
+          <div class="stat-row"><span class="stat-label">Spread</span><span class="stat-value">6 (near widest)</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

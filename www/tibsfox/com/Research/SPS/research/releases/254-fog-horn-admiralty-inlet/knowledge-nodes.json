@@ -1,0 +1,70 @@
+{
+  "degree": 254, "sound": "Fog Horn (Admiralty Inlet)", "slug": "254-fog-horn-admiralty-inlet",
+  "acoustic_character": "Low periodic moan",
+  "energy": 3,
+  "family": "Maritime",
+  "domain": "Maritime safety infrastructure",
+  "mechanism": "Electric/compressed-air horn producing sustained low-frequency tone at regular intervals",
+  "ecosystem": "Shipping channel",
+  "season": "Fog (primarily late spring through early fall)",
+  "admiralty_inlet": {
+    "width_miles": "3-5 (narrows to ~2.5 at minimum)",
+    "orientation": "North-south",
+    "western_point": "Point Wilson (Port Townsend, Olympic Peninsula)",
+    "eastern_point": "Admiralty Head (Fort Casey, Whidbey Island)",
+    "function": "Primary channel for all deep-draft vessel traffic entering/exiting Puget Sound",
+    "tidal_current_knots": "3-5",
+    "vessel_traffic": ["Cargo ships (Seattle/Tacoma/Olympia)", "Oil tankers (Anacortes refineries)", "Alaska Marine Highway ferries", "WA State Ferry (Keystone-Port Townsend)", "Commercial fishing", "Recreational"]
+  },
+  "point_wilson_lighthouse": {
+    "established": 1879,
+    "current_tower": 1914,
+    "automated": 1977,
+    "fog_signal_type": "Electric fog horn (automated), triggers on visibility reduction below threshold",
+    "significance": "Critical navigational turning point: change course from Strait of Juan de Fuca into Admiralty Inlet"
+  },
+  "fog_horn_technology": [
+    {"type": "Steam fog horn", "era": "1850s-1920s", "mechanism": "Steam plant drives air through large horn", "note": "First major improvement over bells/cannons"},
+    {"type": "Diaphone", "era": "1907-present", "inventor": "John Philp Northey (Canada, 1907)", "mechanism": "Compressed air through slotted reciprocating piston", "signature": "Two-tone blast with characteristic 'grunt' at end"},
+    {"type": "Tyfon / Typhon", "era": "Early 20th century", "mechanism": "Diaphragm vibrated by compressed air or steam", "signature": "Single sustained note"},
+    {"type": "Electric/Electronic", "era": "1970s-present", "mechanism": "Electric air horn or electronic oscillator", "note": "Automated with Point Wilson (1977). Triggers on visibility threshold."}
+  ],
+  "acoustic_properties": {
+    "frequency_hz": "100-1000 Hz characteristic; moan quality in 200-400 Hz range",
+    "frequency_rationale": "Low frequency propagates farther through fog and turbulent air than high frequency",
+    "effective_range_miles": "5-10 in dense fog for major lighthouse signals",
+    "signal_codes": "Interval, duration, blasts per sequence identify station. Published in USCG light lists.",
+    "e3_placement": "Present and clearly audible at distance. Periodic, not continuous. Moderate energy.",
+    "moan_quality": "Sustained low note, several seconds, then silence, then again. Associated in literature with isolation, danger, and sublime uncertainty."
+  },
+  "cultural_references": {
+    "ray_bradbury": "'The Fog Horn' (1951): prehistoric sea creature drawn to lighthouse fog horn, mistaking it for call of another of its kind. The definitive literary treatment of fog horn emotional content.",
+    "cultural_embedding": "Fog horn as ambient sonic identity of maritime port communities. Part of the place-sound of Port Townsend.",
+    "literary_associations": ["Isolation", "Danger", "Melancholy", "Sublime uncertainty of navigating in reduced visibility"]
+  },
+  "port_townsend": {
+    "founded": 1851,
+    "function": "Customs port of entry (first point of arrival from Pacific)",
+    "1880s_expectation": "Expected to become dominant PNW city; railroad connection never arrived; Seattle grew instead",
+    "preservation": "Victorian commercial buildings preserved by economic stagnation",
+    "maritime_culture": ["Northwest Maritime Center", "Port Townsend Wooden Boat Festival (one of largest wooden boat festivals in US)", "Ambient fog horn as town sonic identity"]
+  },
+  "fog_patterns": {
+    "source": "Marine layer fog from Pacific, moves through Strait of Juan de Fuca westerly",
+    "primary_season": "Late spring through early fall",
+    "secondary": "Fall maritime fog events",
+    "visibility_conditions": "Dense marine layer: near-zero visibility. Temperature inversions can trap fog layer."
+  },
+  "theory_nodes": [
+    { "concept": "MARITIME FAMILY ENTERS SPS ENGINE (degree 254). Fog Horn is the first entry in the Maritime family. Previous families: Hydrology (tidal sounds), Meteorology (wind, rain), Biology (species sounds). Maritime family will document human maritime infrastructure: fog horns, ship horns, port sounds.", "level": "milestone", "department": "engine-structure", "description": "Maritime family first entry: degree 254." },
+    { "concept": "Diaphone (John Philp Northey, Canada, 1907): the fog horn technology of cultural memory. Two-tone blast with characteristic 'grunt' at end. Produced by compressed air through slotted reciprocating piston. The sound that appears in maritime literature and film.", "level": "advanced", "department": "technology-history", "description": "Diaphone: the definitive fog horn technology." },
+    { "concept": "Fog horn frequency rationale: 200-400 Hz optimal for fog propagation. Low frequency atmospheric absorption is lower than high frequency. The moan is not aesthetic choice but acoustic physics: low pitch = long range in fog.", "level": "intermediate", "department": "acoustic-physics", "description": "Fog horn frequency: acoustic physics of atmospheric propagation." }
+  ],
+  "cross_references": [
+    {"degree": 253, "sound": "Puget Sound Tidal Current", "relationship": "Both at Admiralty Inlet. The tidal current flows through the inlet (E=2, infrasonic); the fog horn signals across it (E=3, audible). Natural hydraulics and human maritime safety infrastructure at the same geographic point."},
+    {"degree": 255, "sound": "Log Truck Road Vibration", "relationship": "253-255 infrastructure arc: water (tidal current) → maritime safety (fog horn) → working forest (log truck). Human and natural infrastructure sequence."}
+  ],
+  "s36_pair": {"degree": 254, "artist": "Botch", "pairing_note": "E=8 post-hardcore vs E=3 maritime warning. Both are warning signals: Botch warns that something demanding is coming (adjust your perceptual tools); the fog horn warns ships that something solid is nearby (slow down, navigate carefully). Warning systems at the threshold of ordinary perception. Both demand a response."},
+  "milestones": ["MARITIME FAMILY ENTERS SPS ENGINE (254)", "POINT WILSON LIGHTHOUSE documented", "ADMIRALTY INLET documented as primary PNW maritime channel"],
+  "tags": ["fog-horn", "maritime", "admiralty-inlet", "point-wilson", "port-townsend", "lighthouse", "diaphone", "maritime-safety", "shipping-channel", "marine-layer-fog", "puget-sound-gateway", "human-infrastructure"]
+}

@@ -1,0 +1,70 @@
+{
+  "degree": 292,
+  "species": "Common Tern",
+  "scientific_name": "Sterna hirundo",
+  "slug": "292-common-tern-colony",
+  "sound_type": "sharp keerr colony screaming -- colonial nesting on sandy spit; sharp emphatic keerr or kee-arr calls overlapping from dozens of birds; 1,000-6,000 Hz; higher-pitched than all preceding gull entries; dive-bombing alarm behavior adds kinetic dimension",
+  "energy": 7,
+  "ecosystem": "Sandy spit -- flat exposed sandy spits, barrier beaches, gravel bars, lake islands; ground nesting, no topographic defense; coastal and freshwater; summer",
+  "season": "Summer (breeding May-August; peak acoustic activity during incubation and early chick-rearing when dive-bombing alarm is most frequent)",
+  "family": "Laridae",
+  "subfamily": "Sterninae (terns)",
+  "order": "Charadriiformes",
+  "conservation_status": "Least Concern (IUCN). Large global breeding population. Pacific Northwest breeding population small relative to Atlantic. Some colony site management required. Columbia River mouth (East Sand Island) important managed site.",
+  "milestone": "Fourth and FINAL Laridae entry at degree 292. LARIDAE ARC CLOSES. FIRST TERN in SPS engine. Sterninae sub-family enters the engine. Common Tern introduces higher-pitched tern acoustic register distinct from all three gull entries at 289-291. Dual arc closure at degree 292: S36 E=8 streak (290-292) and SPS Laridae arc (289-292) both close simultaneously.",
+  "coordinates": {
+    "lat": 46.3,
+    "lon": -124.0,
+    "description": "Pacific Northwest colony sites: Columbia River mouth (East Sand Island, managed colony with Common Tern, Caspian Tern, Forster's Tern), Dungeness Spit (Clallam County WA), occasional interior lake island sites. Migratory: arrives May, departs September. Winters in South America."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Colony screaming -- continuous overlapping keerr calls from dozens to hundreds of birds at active colonial nesting site. Higher-pitched and more staccato than gull colony sounds.",
+    "keerr_call": "Sharp emphatic 'keerr' or 'kee-arr'. Two-syllable, harsh, penetrating. Fundamental frequency approximately 2,000-4,000 Hz -- substantially higher than gull contact calls (800-1,500 Hz). Acoustic signature of tern sub-family.",
+    "frequency_range": "1,000-6,000 Hz overall. Keerr fundamental 2,000-4,000 Hz. Measurably higher frequency than large gull vocalizations (500-4,000 Hz). Higher pitch creates penetrating quality despite smaller body size.",
+    "dive_bombing": "Physical alarm behavior unique to terns in this arc. Birds fly at intruders and strike or narrowly miss with bill while calling sharply. Multiple birds dive-bombing simultaneously from different angles. Kinetic + acoustic alarm combined.",
+    "e7_calibration": "E=7: higher pitch provides penetrating quality equal to E=7 despite smaller body. Dive-bombing behavior amplifies alarm intensity above gull behavioral repertoire. Equal to Herring Gull alarm (290) and Western Gull colony (291) by different mechanisms."
+  },
+  "nodes": [
+    {
+      "id": "laridae-arc-complete",
+      "type": "milestone",
+      "title": "Laridae Arc Complete -- 289-292",
+      "description": "Four-degree arc closes at 292. Energy shape: E=6 (289) → E=7 (290-292). Seasonal: summer → winter → summer → summer. Geographic: Salish Sea → coast/beach → Pacific coast rocky island → sandy spit/river mouth. Taxonomic: Larus (289-291) → Sterna (292). The arc is a structured family portrait: most common species, wintering visitor, coast specialist, tern representative.",
+      "connections": ["first-tern", "dual-arc-closure"]
+    },
+    {
+      "id": "first-tern",
+      "type": "milestone",
+      "title": "First Tern in SPS Engine -- Sterninae Enters",
+      "description": "Common Tern is the first tern species in the SPS engine. Sterninae sub-family acoustically distinct from Laridae gulls: higher-pitched, sharper, more staccato. Forked tail / hirundo (swallow) body form. Plunge-dive foraging vs. gull surface foraging. Ground nesting on exposed substrates vs. gull colony site variety. Future tern entries measured against this first appearance.",
+      "connections": ["laridae-arc-complete"]
+    },
+    {
+      "id": "dual-arc-closure",
+      "type": "milestone",
+      "title": "Dual Arc Closure at Degree 292",
+      "description": "Two parallel arc structures close simultaneously at degree 292: S36 E=8 streak (290-292: These Arms Are Snakes, Alcohol Funnycar, Gas Huffer) and SPS Laridae arc (289-292: four gull/tern entries). The degree is a structural hinge. Both arcs complete; engine opens new territory at 293.",
+      "connections": ["laridae-arc-complete"]
+    },
+    {
+      "id": "dive-bombing",
+      "type": "concept",
+      "title": "Dive-Bombing Alarm -- Kinetic Acoustic Defense",
+      "description": "Common Tern's behavioral alarm response: fly directly at intruder, call sharply, strike or near-miss with bill. Multiple birds from different angles simultaneously. Unique in the Laridae arc -- no gull entry features this behavior. Reflects the exposed sandy spit colony's lack of passive topographic defense. The dive-bombing is the sign of maximum vulnerability requiring maximum behavioral investment.",
+      "connections": ["first-tern"]
+    },
+    {
+      "id": "hirundo-naming",
+      "type": "concept",
+      "title": "Sterna hirundo -- The Swallow Tern (Linnaeus 1758)",
+      "description": "Named by Linnaeus in 1758. Hirundo: Latin for swallow. The tern's deeply forked tail and buoyant flight style prompted the swallow comparison. The name captures the key distinction between terns and gulls: terns fly like swallows, not like gulls. The taxonomy encodes the behavior in the name.",
+      "connections": ["first-tern"]
+    }
+  ],
+  "cross_references": [
+    {"target": "S36-292", "artist": "Gas Huffer (return)", "relationship": "E=8 + E=7 = E=15. Both arcs close at degree 292. Punk-garage commitment (Gas Huffer: does not apologize for being punk, sustains approach throughout 13-year run) paired with tern colony commitment (Common Terns: do not stop dive-bombing, sustain alarm throughout breeding season). Commitment as theme."},
+    {"target": "SPS-289", "species": "Glaucous-winged Gull colony", "relationship": "First Laridae E=6. Arc opens at colonial nesting; arc closes at colonial nesting (292). The frame: both the founding and closing entries are summer colonial soundscapes. Arc closes where it opened."},
+    {"target": "SPS-290", "species": "Herring Gull flock alarm", "relationship": "Second Laridae E=7. The arc's winter entry and non-colonial entry. The exception that proves the colonial-nesting rule of the arc."},
+    {"target": "SPS-291", "species": "Western Gull colony", "relationship": "Third Laridae E=7. Rocky island second colony soundscape. The arc's largest-gull-most-aggressive-colony entry. Contrasts with tern's smaller body and sandy spit habitat."}
+  ]
+}

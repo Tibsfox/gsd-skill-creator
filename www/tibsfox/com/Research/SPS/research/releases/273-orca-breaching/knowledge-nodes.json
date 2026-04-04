@@ -1,0 +1,97 @@
+{
+  "degree": 273,
+  "species": "Orca",
+  "scientific_name": "Orcinus orca",
+  "slug": "273-orca-breaching",
+  "sound_type": "massive detonation body-slam -- Southern Resident Killer Whale fully airborne, crashing back to water surface, ~165 dB impact, E=9",
+  "energy": 9,
+  "ecosystem": "Open water -- Salish Sea, Strait of Juan de Fuca, open Pacific approaches",
+  "season": "Resident (year-round for Southern Residents in Salish Sea)",
+  "family": "Delphinidae",
+  "order": "Artiodactyla (Cetacea)",
+  "csv_substitute": false,
+  "original_species": "Orca",
+  "milestone": "E=9 TIES ABSOLUTE SPS MAXIMUM (with Lightning Strike at degree 260). ORCA ARC OPENS (degrees 270-276). COMBINED E=17 WITH S36 273 (The Refuzors) -- ENGINE APEX. First living creature to reach E=9 in engine.",
+  "coordinates": {
+    "lat": 48.52,
+    "lon": -123.00,
+    "description": "Southern Resident Killer Whale range: Salish Sea, San Juan Islands, Strait of Juan de Fuca, north to Gulf Islands BC. Primary summer range around San Juan Islands."
+  },
+  "taxonomy_note": {
+    "description": "Southern Resident Killer Whale (SRKW): a distinct population segment of Orcinus orca. Resident ecotype: fish-eating (primarily Chinook salmon). Three pods: J (~23), K (~17), L (~33). ~73 total individuals. ESA endangered since 2005. Peak population ~98 in 1995. Not the same ecotype as transient (mammal-eating) orcas documented at degree 272.",
+    "current_family": "Delphinidae",
+    "new_family": false,
+    "family_count_in_engine": "Delphinidae entries at degree 270+: orca arc degrees 270-276",
+    "name_etymology": "Orcinus from Latin orca (a kind of whale, from orcus, the underworld -- the Romans associated the orca's appearance with the realm of the dead). orca: the killer whale. Common name 'killer whale' is a translation of the Spanish ballena asesina or orca asesina observed by sailors watching orcas hunt other cetaceans.",
+    "order_note": "Cetacea (within Artiodactyla under modern phylogenetics). Whales, dolphins, and porpoises. Orcinus orca is the largest member of Delphinidae."
+  },
+  "sound_metrics": {
+    "fundamental_frequency_range_hz": "Broadband event -- breach impact is not tonal. Frequency range spans from low-frequency thumps (50-200 Hz) through mid-frequency water noise (200-2000 Hz) to higher-frequency spray sounds.",
+    "peak_energy_band_hz": "Low-to-mid frequency: breach impact dominated by 50-500 Hz energy, with broadband white noise from splash and spray.",
+    "sound_frequency_hz": "Broadband. Not a vocalization -- a physical impact event.",
+    "song_duration_s": "Impact: approximately 0.1-0.5 seconds for primary detonation. Water splash and wave propagation: several seconds. Underwater propagation: continues for many seconds at distance.",
+    "amplitude": "E=9. ~165 dB at close range (within 10 meters). Comparable to: rifle shot at shooter position (~160 dB), jet engine at 30 meters (~150 dB). At 100 meters: drops significantly but remains remarkable. Propagates in air (audible kilometers in calm conditions) and underwater (speed ~1500 m/s).",
+    "key_property": "E=9 -- TIES ABSOLUTE MAXIMUM (with Lightning Strike, degree 260). First living creature in engine to reach E=9. Six-ton (adult male SRKW 5400-6000 kg) adult animal fully airborne, reaching 3-5 meters above surface, returning in lateral body-slam. Impact ~165 dB. Orca arc opens at 273. Combined E=17 with The Refuzors (S36 273) = ENGINE APEX."
+  },
+  "physical_description": {
+    "overall": "Adult male Southern Resident Killer Whale: length 5.8-7.0 meters, mass 5,400-6,000 kg. Distinctive black-and-white coloration. Tall, straight dorsal fin (adult males up to 1.8 meters). White eye patch. Gray saddle patch behind dorsal fin -- individual variation allows photo-ID. Adult females: smaller, curved dorsal fin.",
+    "diagnostic_mark": "For degree 273 (breaching): the silhouette of an orca fully airborne -- black-and-white body against sky or water, water cascade beneath it, the arch of the body in the air. The impact plume is visible from kilometers. The sound reaches even further.",
+    "field_id": "A breach from an adult male Southern Resident is unmistakable: the six-ton body, the tall straight dorsal fin, the black-and-white pattern, the enormous impact. Nothing in the Salish Sea produces this event."
+  },
+  "behavioral_context": {
+    "breach_function": "Multifunctional -- communication (long-range underwater sound), ectoparasite removal (water-entry shear force), play/social bonding (socially contagious behavior), sensory exploration (aerial perspective). No single confirmed function. Energetically costly; unlikely to be purely casual.",
+    "social_context": "More frequent in socially excited contexts. Contagious: one animal breaches, others often follow. More common in certain individuals. Observed in all age classes. Cultural component: behavioral patterns transmitted within pods.",
+    "frequency_of_behavior": "Not constant -- bouts of breaching behavior occur, often multiple breaches in sequence from one or more individuals. More frequent in summer in primary SRKW range."
+  },
+  "nodes": [
+    {
+      "id": "e9-ties-maximum",
+      "type": "pattern",
+      "title": "E=9 Ties Absolute Maximum -- Engine Apex",
+      "description": "Second E=9 in engine history; first from a living creature (Lightning Strike at 260 was the first). Combined E=17 with The Refuzors (S36 273): engine apex. Highest combined energy in engine history.",
+      "connections": ["breach-physics", "orca-arc"]
+    },
+    {
+      "id": "breach-physics",
+      "type": "concept",
+      "title": "Breach Physics -- Six Tons Fully Airborne",
+      "description": "Adult male SRKW: 5,400-6,000 kg. Approach velocity 17-26 km/h. Maximum height 3-5 meters. Lateral body-slam impact: ~165 dB. Propagates in air and underwater. White water plume visible kilometers distant.",
+      "connections": ["e9-ties-maximum", "breach-function"]
+    },
+    {
+      "id": "srkw-endangered",
+      "type": "connection",
+      "title": "Southern Residents -- ~73 Individuals -- ESA Endangered 2005",
+      "description": "J, K, L pods. Three primary threats: Chinook decline (cross-ref degree 237), vessel noise, PCB/PBDE contaminants. Among most contaminated marine mammals globally. Culturally sophisticated: pod dialects, multi-generational knowledge transfer.",
+      "connections": ["e9-ties-maximum", "chinook-dependency"]
+    },
+    {
+      "id": "breach-function",
+      "type": "concept",
+      "title": "Breach Function -- Multifunctional Behavior",
+      "description": "Communication, ectoparasite removal, play/social bonding, sensory exploration. Contagious in social contexts. Too costly for pure play; context suggests multiple functions.",
+      "connections": ["breach-physics", "srkw-endangered"]
+    },
+    {
+      "id": "orca-arc",
+      "type": "pattern",
+      "title": "Orca Arc -- Seven Degrees (270-276)",
+      "description": "Most sustained single-species run in SPS catalog. Degrees 270-276 all Orcinus orca. 273 is the energy maximum (E=9); 276 is the perceptual maximum (224 dB echolocation). Arc closes at 276.",
+      "connections": ["e9-ties-maximum", "breach-physics"]
+    },
+    {
+      "id": "chinook-dependency",
+      "type": "connection",
+      "title": "Chinook Dependency -- Cross-Reference Degree 237",
+      "description": "SRKWs are fish-eating; primary prey is Chinook salmon. Chinook decline is primary SRKW population threat. Degree 237 documents Chinook; degree 273-276 documents the orca that depends on it. Direct ecological link in engine structure.",
+      "connections": ["srkw-endangered"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-260", "sound": "Lightning Strike (E=9)", "relationship": "Only previous E=9 in engine. Orca breaching ties it. Abiotic maximum = biological maximum. Atmospheric electrical discharge vs. living mammal at same energy level."},
+    {"target": "SPS-237", "species": "Chinook Salmon", "relationship": "SRKW primary prey. Chinook decline drives SRKW population crisis. Direct ecological dependency documented in engine: salmon at 237, orca at 273-276."},
+    {"target": "SPS-270", "species": "Orca S01 pod call", "relationship": "Orca arc beginning. Same species as vocal communicator (270) vs. physical force (273). Voice to body. Signature call to explosive breach."},
+    {"target": "SPS-276", "species": "Orca echolocation burst", "relationship": "Arc closing. Physical maximum (273 breach E=9) vs. perceptual maximum (276 echolocation 224 dB source). The arc's two extremes."},
+    {"target": "S36-273", "artist": "The Refuzors", "relationship": "ENGINE APEX. E=17 combined. E=8 + E=9. Seattle hardcore 40 years at maximum energy + orca's most explosive behavioral moment."}
+  ]
+}

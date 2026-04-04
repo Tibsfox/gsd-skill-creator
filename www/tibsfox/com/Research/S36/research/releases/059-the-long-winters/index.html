@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 59&deg; &mdash; The Long Winters &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>059 &mdash; The Long Winters</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Barsuk Trio Closes &mdash; The Digression &mdash; The Scene Intellectual &mdash; Indie Rock Confirmed</h3>
+      <p>
+        The Long Winters at degree 59&deg; close the
+        <strong>Barsuk Records trio</strong> (57&ndash;58&ndash;59). The third and final
+        Barsuk degree: Gibson (57, Folk, E=2), Death Cab (58, Indie Rock, E=4),
+        Long Winters (59, Indie Rock, E=4). <strong>Indie Rock</strong> confirmed at
+        Genre Stage 41 &mdash; second consecutive, the folk-streak break is real.
+        <strong>E=4</strong> continues &mdash; 15th deployment, extends lead over E=3.
+        <strong>John Roderick</strong> as scene intellectual &mdash; musician, podcaster,
+        cultural commentator. <strong>Sean Nelson</strong> of Harvey Danger. The
+        digression fills every measure with words.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">59&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">The Long Winters</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Indie Rock</span>
+          <span class="label-badge">Barsuk Records</span>
+          <span class="neighborhood-badge">Capitol Hill</span>
+          <span class="record-badge">Barsuk Trio 3/3</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Barsuk Cluster Card -->
+        <div class="web-card">
+          <h4>Barsuk Trio Complete: Degree 3 of 3 &mdash; The Closing Act</h4>
+          <p>
+            <strong>Barsuk Records</strong> (Seattle-based independent, est. 1998)
+            completes its three-degree cluster. The Long Winters close what
+            Laura Gibson (57) opened and Death Cab (58) anchored.
+            <strong>The trio:</strong> Gibson (57, E=2, Folk &mdash; the manuscript page),
+            Death Cab (58, E=4, Indie Rock &mdash; the ache),
+            Long Winters (59, E=4, Indie Rock &mdash; the digression).
+            One label. Three voices. One curatorial standard: literary,
+            precise, emotionally honest.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Scene Intellectual</h2>
+          <p>
+            <strong>John Roderick</strong> formed <strong>The Long Winters</strong>
+            on <strong>Capitol Hill, Seattle</strong>, circa <strong>2001</strong>.
+            Where Death Cab&rsquo;s Ben Gibbard is the ache &mdash; precise,
+            measured, emotionally devastating in four words &mdash; Roderick is
+            <strong>the digression</strong>: verbose, narrative-dense, the musician
+            who fills every available measure with another idea, another image,
+            another aside. Roderick is a raconteur by nature, a storyteller
+            whose gift for extended verbal narrative shapes everything he touches.
+          </p>
+          <p>
+            Before the band, during the band, and after the band&rsquo;s
+            recording output paused, Roderick has been <strong>Capitol Hill&rsquo;s
+            scene intellectual</strong> &mdash; the person who explains the scene
+            to itself. Through podcasting (<em>Roderick on the Line</em> with
+            Merlin Mann), music criticism, KEXP appearances, and the simple
+            fact of being present at every show and afterparty, Roderick became
+            the connective tissue of early-2000s Seattle indie rock. His cultural
+            reach extends well beyond album sales.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Harvey Danger Connection</h2>
+          <p>
+            <strong>Sean Nelson</strong> &mdash; keyboards, backing vocals, and
+            the crucial second voice of The Long Winters &mdash; is the lead
+            vocalist of <strong>Harvey Danger</strong>, the Seattle band whose
+            1997 single &ldquo;Flagpole Sitta&rdquo; became one of the most
+            ubiquitous songs of the late 1990s. Nelson brought musical versatility,
+            vocal complement, and cultural capital to the Long Winters. He is
+            also a music critic and writer for <em>The Stranger</em> &mdash;
+            making two of four Long Winters members people who <em>think about</em>
+            music as seriously as they <em>make</em> music.
+          </p>
+          <p>
+            <strong>Eric Corson</strong> (bass) provides melodic, active bass
+            lines that weave around Roderick&rsquo;s narrative vocals.
+            <strong>Nabil Ayers</strong> (drums, also of Radar Bros) brings
+            dynamic sensitivity and professional discipline. Ayers later became
+            a music industry executive and memoirist (<em>My Life in the
+            Sunshine</em>).
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Worst You Can Do Is Harm (2002)</h2>
+          <p>
+            <strong><em>The Worst You Can Do Is Harm</em></strong> (2002,
+            <strong>Barsuk Records</strong>) &mdash; the debut. Produced by
+            <strong>Chris Walla</strong> of Death Cab for Cutie, connecting
+            The Long Winters directly to Barsuk&rsquo;s sonic infrastructure.
+            Walla&rsquo;s signature clarity-over-gloss production applied to
+            Roderick&rsquo;s wordy, narrative-dense songs. The album announces
+            the approach: these songs are <em>stories</em>, not mood pieces.
+            Dense lyrics, specific images, choruses as brief melodic anchors
+            between floods of narrative.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>When I Pretend to Fall (2003)</h2>
+          <p>
+            <strong><em>When I Pretend to Fall</em></strong> (2003,
+            <strong>Barsuk Records</strong>) &mdash; the leap. Released the
+            same year as Death Cab&rsquo;s <em>Transatlanticism</em>.
+            The album refines the debut&rsquo;s approach: tighter songs,
+            more confident arrangements, Roderick&rsquo;s vocal delivery
+            more assured.
+          </p>
+          <blockquote>
+            &ldquo;The Commander Thinks Aloud&rdquo; &mdash; the album&rsquo;s
+            centerpiece, written about the Space Shuttle Columbia disaster
+            (February 1, 2003). The song narrates the crew&rsquo;s final
+            moments from the commander&rsquo;s perspective with devastating
+            restraint. No sensationalism, no metaphor for personal heartbreak
+            &mdash; just empathy rendered as music. Arguably the finest song
+            about spaceflight in the rock canon.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Putting the Days to Bed (2006)</h2>
+          <p>
+            <strong><em>Putting the Days to Bed</em></strong> (2006,
+            <strong>Barsuk Records</strong>) &mdash; the ambitious third album.
+            More expansive production, longer songs, more sonic territory
+            explored. &ldquo;Hindsight&rdquo; opens with uncharacteristic
+            concision. &ldquo;Fire Island, AK&rdquo; connects Roderick to
+            his Alaskan origins. The album reaches for something larger
+            than the previous work. After this album, the band entered
+            an indefinite hiatus that has lasted twenty years &mdash; no
+            breakup, no farewell, just suspension.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Cross-Degree Web: Shelby Earl (Degree 55)</h2>
+          <p>
+            John Roderick produced <strong>Shelby Earl&rsquo;s</strong> debut
+            album <em>Burn the Boats</em> (degree 55, Singer-Songwriter, E=2).
+            The production credit spans four degrees &mdash; the producer at
+            59 appearing after the artist he produced at 55. The five-degree
+            chain (55&ndash;59) is connected through the Barsuk social graph:
+            Earl (55, Roderick produces) &rarr; Lemolo (56) &rarr;
+            Gibson (57, Barsuk) &rarr; Death Cab (58, Barsuk) &rarr;
+            Long Winters (59, Barsuk). Every degree linked through label,
+            production, or personal relationship.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Roderick on the Line: Beyond Music</h2>
+          <p>
+            In 2011, Roderick and <strong>Merlin Mann</strong> launched
+            <strong>&ldquo;Roderick on the Line&rdquo;</strong> &mdash; a
+            weekly conversational podcast that ran for years and developed
+            a devoted audience. The podcast made Roderick a <strong>cultural
+            figure</strong> whose authority derives from breadth of knowledge
+            and storytelling quality rather than chart positions. People who
+            have never heard a Long Winters song know Roderick&rsquo;s voice
+            from hundreds of hours of podcast conversation. The podcast is
+            the E=4 mechanism: cultural reach exceeding the commercial music
+            footprint through multiple channels.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Digression</h4>
+              <div class="level advanced">Advanced &mdash; 60th Acoustic Element</div>
+              <p>
+                The acoustic quality produced when a vocalist treats a rock
+                song as an opportunity for extended narrative &mdash; filling
+                every measure with words, ideas, and verbal asides until the
+                song becomes a story that happens to have a melody. The
+                digression is thinking-out-loud set to music. Contrast with
+                the ache&rsquo;s precision (58), the manuscript page&rsquo;s
+                literary control (57), and the murmur&rsquo;s whispered
+                dissolution (45). The digression is abundance where the
+                ache is economy.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Scene Intellectual</h4>
+              <div class="level advanced">Advanced &mdash; 60th Artist-City Pattern</div>
+              <p>
+                The artist whose contribution to a city&rsquo;s music culture
+                extends beyond making music to include narrating,
+                contextualizing, and intellectualizing the scene itself.
+                Roderick as Capitol Hill&rsquo;s resident explainer &mdash;
+                through podcasting, criticism, KEXP appearances, and
+                the connective-tissue role in the social graph. The
+                scene intellectual explains; the explanation is itself
+                a creative act.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Incomplete Catalog</h4>
+              <div class="level intermediate">Intermediate &mdash; 59th Deployment</div>
+              <p>
+                The blue note that sounds when an artist produces a body
+                of work that feels unfinished &mdash; three albums between
+                2002 and 2006, then silence. No breakup. No farewell.
+                Just suspension. The catalog reads as a first act followed
+                by a twenty-year intermission. The music that exists is
+                excellent, which makes the absence of continuation
+                felt as loss.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Indie Rock Confirmed</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 41</div>
+              <p>
+                Second consecutive Indie Rock degree. The folk-streak break
+                at degree 58 was not a one-degree anomaly &mdash; it was
+                the beginning of a new zone. Genre Stage 41 establishes
+                an Indie Rock two-peat (58&ndash;59). Same genre, same
+                label, same neighborhood, same energy. The quiet register
+                is over.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Worst You Can Do Is Harm</h4>
+              <div class="disco-years">2002 &middot; Barsuk Records</div>
+              <p>
+                Debut. Chris Walla produces. Narrative-dense
+                indie rock. The storytelling approach established.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>When I Pretend to Fall</h4>
+              <div class="disco-years">2003 &middot; Barsuk Records</div>
+              <p>
+                The leap. &ldquo;The Commander Thinks Aloud&rdquo;
+                &mdash; the Columbia disaster song. The band&rsquo;s
+                masterwork. TV placements follow.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Putting the Days to Bed</h4>
+              <div class="disco-years">2006 &middot; Barsuk Records</div>
+              <p>
+                Ambitious third album. Expanded sonic palette.
+                The last studio recording. Twenty-year hiatus follows.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">58&deg;</span>
+              <strong>Death Cab for Cutie</strong> &mdash; Barsuk trio center.
+              Both Indie Rock, both E=4, both Capitol Hill. Walla produced
+              Long Winters&rsquo; debut. Gibbard and Roderick are friends
+              and scene contemporaries. The ache (58) and the digression
+              (59) &mdash; precision versus abundance, poetry versus prose.
+            </li>
+            <li>
+              <span class="ref-degree">57&deg;</span>
+              <strong>Laura Gibson</strong> &mdash; Barsuk trio opener.
+              Folk (E=2) to Indie Rock (E=4) x2. The label window&rsquo;s
+              full range: whispered folk, arena rock, verbose literary rock.
+              Manuscript page (57), ache (58), digression (59).
+            </li>
+            <li>
+              <span class="ref-degree">55&deg;</span>
+              <strong>Shelby Earl</strong> &mdash; Roderick produced her
+              debut <em>Burn the Boats</em>. Cross-degree production credit
+              spanning four degrees. The scene intellectual facilitating
+              the singer-songwriter&rsquo;s first album.
+            </li>
+            <li>
+              <span class="ref-degree">41&deg;</span>
+              <strong>Shawn Smith</strong> &mdash; Capitol Hill scene native.
+              Different era, same neighborhood, same creative infrastructure.
+              The Capitol Hill thread continues across multiple degrees.
+            </li>
+            <li>
+              <span class="ref-degree">43&deg;</span>
+              <strong>Ann Wilson</strong> &mdash; Seattle rock lineage.
+              Heart&rsquo;s arena power (E=5) versus Long Winters&rsquo;
+              intellectual density (E=4). Different scales, different eras,
+              same city&rsquo;s musical DNA.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">59&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">41</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2000&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Capitol Hill</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">~2001</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Barsuk Records</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">41 (Indie Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#60 (The Digression)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">The Scene Intellectual</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Barsuk Trio</span>
+            <span class="stat-value">3 of 3 (Complete)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Barsuk Cluster (57-58-59)</h4>
+          <div class="stat-row">
+            <span class="stat-label">57&deg;</span>
+            <span class="stat-value">Gibson (E=2, Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">58&deg;</span>
+            <span class="stat-value">Death Cab (E=4, Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">59&deg;</span>
+            <span class="stat-value">Long Winters (E=4, Rock)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">15</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#60 (The Digression)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#60 (Scene Intellectual)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#59</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Vocals/Guitar</span>
+            <span class="stat-value">John Roderick</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bass</span>
+            <span class="stat-value">Eric Corson</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Keys/Vocals</span>
+            <span class="stat-value">Sean Nelson</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Drums</span>
+            <span class="stat-value">Nabil Ayers</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Harvey Danger</span>
+            <span class="stat-value">Sean Nelson</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shelby Earl</span>
+            <span class="stat-value">Roderick produced</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Death Cab</span>
+            <span class="stat-value">Walla produced LW</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Podcast</span>
+            <span class="stat-value">Roderick on the Line</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../058-death-cab-for-cutie/" style="color: var(--seattle-navy);">&larr; 58&deg; Death Cab for Cutie</a>
+        <a href="../060-ben-gibbard/" style="color: var(--seattle-navy);">60&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 59&deg; &mdash; The Long Winters &mdash; Seattle 360 Engine &mdash; v1.49.197
+        <br>
+        The Barsuk trio closes. Three degrees, one label, one curatorial standard.
+        John Roderick&rsquo;s verbose, narrative-dense indie rock fills every measure
+        with words and ideas. Sean Nelson of Harvey Danger on keyboards. Three
+        albums on Barsuk. &ldquo;The Commander Thinks Aloud&rdquo; &mdash; the
+        Space Shuttle Columbia song. The scene intellectual explains the scene
+        to itself. The digression narrates what the ache felt and the manuscript
+        page wrote.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

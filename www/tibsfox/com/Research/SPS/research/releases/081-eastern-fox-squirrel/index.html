@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 81&deg; &mdash; Eastern Fox Squirrel &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Septet card */
+    .septet-card {
+      background: linear-gradient(135deg, #3E2723 0%, #4E342E 30%, #5D4037 60%, #795548 100%);
+      border: 3px solid #3E2723;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .septet-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BCAAA4;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .septet-card p {
+      color: #EFEBE9;
+    }
+    .septet-card strong {
+      color: #D7CCC8;
+    }
+
+    /* Urban card */
+    .urban-card {
+      background: linear-gradient(135deg, #37474F 0%, #455A64 50%, #546E7A 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .urban-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .urban-card p {
+      color: #ECEFF1;
+    }
+    .urban-card strong {
+      color: #CFD8DC;
+    }
+
+    /* Introduced card */
+    .introduced-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 50%, #E64A19 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .introduced-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFAB91;
+    }
+    .introduced-card p {
+      color: #FBE9E7;
+    }
+    .introduced-card strong {
+      color: #FFCCBC;
+    }
+
+    /* Bareilles parallel card */
+    .bareilles-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .bareilles-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .bareilles-card p {
+      color: #E8EAF6;
+    }
+    .bareilles-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.septet { background: #3E2723; }
+    .theory-icon.bark { background: #BF360C; }
+    .theory-icon.urban { background: #37474F; }
+    .theory-icon.introduced { background: #E64A19; }
+    .theory-icon.largest { background: #4E342E; }
+    .theory-icon.bareilles-link { background: #283593; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">81&deg;</div>
+      <div class="release-title-block">
+        <h2>Eastern Fox Squirrel</h2>
+        <div class="scientific">Sciurus niger</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      bark + chatter &mdash; SEVENTH CONSECUTIVE SCIURIDAE (75&ndash;81), BREAKS THE TIE! Now the LONGEST family streak in engine history, surpassing both the Mustelidae sextet (63&ndash;68) and Sciuridae&rsquo;s own previous record. INTRODUCED to PNW. Largest tree squirrel in North America. Urban park habitat. E=4, twenty-first consecutive original CSV.
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Septet Card -->
+        <div class="septet-card">
+          <h3>The Sciuridae Septet &mdash; Breaks the Tie! LONGEST Family Streak!</h3>
+          <p>SEVENTH consecutive Sciuridae: <strong>Yellow-bellied Marmot</strong> (75), <strong>Hoary Marmot</strong> (76), <strong>Olympic Marmot</strong> (77), <strong>Townsend&rsquo;s Ground Squirrel</strong> (78), <strong>Golden-mantled Ground Squirrel</strong> (79), <strong>Douglas Squirrel</strong> (80), <strong>Eastern Fox Squirrel</strong> (81). Seven consecutive Sciuridae &mdash; <strong>BREAKS THE TIE</strong> with the Mustelidae sextet (63&ndash;68). The longest family run in engine history is now <strong>SEVEN</strong>, held solely by Sciuridae.</p>
+        </div>
+
+        <!-- Introduced Card -->
+        <div class="introduced-card">
+          <h3>Introduced Species &mdash; Native to Eastern North America</h3>
+          <p>The Eastern Fox Squirrel is <strong>INTRODUCED</strong> to the Pacific Northwest &mdash; native to eastern and central North America. Brought to urban parks and campuses in the PNW where it now competes with native Douglas Squirrel (80). Second introduced species in the engine after Opossum (72).</p>
+        </div>
+
+        <!-- Urban Card -->
+        <div class="urban-card">
+          <h3>Urban Park Habitat &mdash; Second Urban Species</h3>
+          <p>The Eastern Fox Squirrel inhabits <strong>urban parks</strong>, college campuses, and suburban neighborhoods in the PNW. Second urban species in the engine after Raccoon (70). The habitat shift from conifer canopy (80, Douglas Squirrel) to urban park (81, Fox Squirrel) mirrors the introduced-vs-native dynamic.</p>
+        </div>
+
+        <!-- Bareilles Parallel Card -->
+        <div class="bareilles-card">
+          <h3>The Sara Bareilles Parallel</h3>
+          <p>Degree 81 pairs Eastern Fox Squirrel with <strong>Sara Bareilles</strong> in Part A &mdash; Pop/Soul, E=4, Broadway voice. Both <strong>E=4</strong>. Both <strong>outsiders who arrived</strong> &mdash; the Fox Squirrel is introduced to the PNW from eastern North America; Bareilles is from Eureka, CA, not the PNW. Both <strong>larger than life in their context</strong> &mdash; the Fox Squirrel is the largest tree squirrel; Bareilles&rsquo;s voice fills Broadway. Both <strong>thrive in urban/commercial spaces</strong> &mdash; the squirrel in urban parks, Bareilles on major labels.</p>
+        </div>
+
+        <h2>The Sound: Bark + Chatter (82nd Acoustic Element)</h2>
+        <p><strong>The bark:</strong> A loud, sharp, single-note alarm bark &mdash; &ldquo;quaa!&rdquo; &mdash; delivered at moderate rate. Lower-pitched than Douglas Squirrel. Approximately 1,500&ndash;6,000 Hz [1, 2, 3].</p>
+        <p><strong>The chatter:</strong> Following the bark, a rapid chatter of shorter notes. Less aggressive and less sustained than Douglas Squirrel&rsquo;s machine-gun rattle. More of a scolding conversation than a territorial assault [1, 2].</p>
+        <p><strong>Why E=4:</strong> (1) Volume &mdash; audible across urban parks but not as piercing as Douglas Squirrel. (2) Duration &mdash; bark-chatter sequences are shorter. (3) Lower pitch &mdash; deeper voice reflecting larger body size. (4) Less aggressive &mdash; scolding but not the relentless fury of the Douglas Squirrel. E=4 not E=5.</p>
+
+        <h2>Taxonomy: <em>Sciurus niger</em></h2>
+        <p><strong>Etymology:</strong> <em>Sciurus</em> from Greek <em>skiouros</em> (&ldquo;squirrel,&rdquo; from <em>skia</em> &ldquo;shadow&rdquo; + <em>oura</em> &ldquo;tail&rdquo;). <em>niger</em> Latin for &ldquo;black,&rdquo; referring to the melanistic morph (despite the species typically being rusty-brown/orange). Described by Linnaeus (1758) [1, 2].</p>
+        <p><strong>Classification:</strong> Order <strong>Rodentia</strong>. Family <strong>Sciuridae</strong> &mdash; SEVENTH consecutive (75&ndash;81). Genus <em>Sciurus</em> &mdash; NEW GENUS (fifth Sciuridae genus). Largest tree squirrel in North America [1, 2].</p>
+
+        <h2>Ecology: The Urban Park Squirrel</h2>
+        <p><strong>Habitat:</strong> Urban parks, college campuses, suburban neighborhoods with mature deciduous and mixed trees. The habitat contrast with Douglas Squirrel is stark: conifer canopy (native) vs. urban park (introduced) [1, 2, 3].</p>
+        <p><strong>Size:</strong> The LARGEST tree squirrel in North America. 450&ndash;1,000 g (1&ndash;2.2 lbs). 45&ndash;70 cm total length. Roughly THREE TIMES the mass of the Douglas Squirrel.</p>
+        <p><strong>Diet:</strong> Nuts, acorns, seeds, fruits, fungi. Generalist feeder. The broad diet contributes to urban success.</p>
+        <p><strong>Competition:</strong> Competes with native Douglas Squirrel in urban-forest edge habitats. The Fox Squirrel&rsquo;s larger size gives it a competitive advantage in direct encounters.</p>
+
+        <h2>The Mammalian Era Continues: Degree 81</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Sound</th><th>E</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>75</td><td>Yellow-bellied Marmot</td><td>Sciuridae</td><td>Sharp chirp</td><td>4</td></tr>
+            <tr><td>76</td><td>Hoary Marmot</td><td>Sciuridae</td><td>Loud whistle</td><td>5</td></tr>
+            <tr><td>77</td><td>Olympic Marmot</td><td>Sciuridae</td><td>Multi-note whistle</td><td>4</td></tr>
+            <tr><td>78</td><td>Townsend&rsquo;s Gnd Squirrel</td><td>Sciuridae</td><td>Chirping trill</td><td>4</td></tr>
+            <tr><td>79</td><td>Golden-mantled Gnd Sq</td><td>Sciuridae</td><td>Sharp chip</td><td>4</td></tr>
+            <tr><td>80</td><td>Douglas Squirrel</td><td>Sciuridae</td><td>Scolding chatter</td><td>5</td></tr>
+            <tr><td><strong>81</strong></td><td><strong>Eastern Fox Squirrel</strong></td><td><strong>Sciuridae</strong></td><td><strong>Bark + chatter</strong></td><td><strong>4</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Seven consecutive Sciuridae (75&ndash;81). <strong>BREAKS THE TIE</strong> with Mustelidae (63&ndash;68). The LONGEST family run in engine history: <strong>SEVEN</strong>. Three marmots + four squirrels. Five genera. Seven habitats. Alpine to urban.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon septet">7</div>
+            <div class="theory-content">
+              <h4>Sciuridae Septet (75&ndash;81) &mdash; BREAKS the Mustelidae Tie!</h4>
+              <span class="theory-level landmark">Landmark</span>
+              <p>Seven consecutive Sciuridae. SURPASSES Mustelidae (63&ndash;68). LONGEST family run in engine history. SEVEN.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bark">B</div>
+            <div class="theory-content">
+              <h4>Bark + Chatter &mdash; 82nd Acoustic Element</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Loud sharp bark followed by rapid chatter. 1,500&ndash;6,000 Hz. E=4. Lower-pitched than Douglas Squirrel. Less aggressive.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Urban Park Habitat &mdash; Second Urban Species</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Urban parks, campuses, suburban neighborhoods. Second urban species after Raccoon (70). Conifer canopy to urban park.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon introduced">I</div>
+            <div class="theory-content">
+              <h4>Introduced Species &mdash; Second in Engine</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Native to eastern North America. Introduced to PNW urban areas. Second introduced species after Opossum (72).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon largest">L</div>
+            <div class="theory-content">
+              <h4>Largest Tree Squirrel in North America</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>450&ndash;1,000 g. Three times the mass of Douglas Squirrel. Size advantage in competition.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bareilles-link">P</div>
+            <div class="theory-content">
+              <h4>The Sara Bareilles Parallel</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Both E=4. Both outsiders who arrived. Both larger than life. Both thrive in urban/commercial spaces.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-080: Douglas Squirrel</strong>
+            <p>Consecutive Sciuridae. Native (80) vs. introduced (81). Conifer canopy vs. urban park. Chatter (E=5) vs. bark+chatter (E=4). The native-introduced contrast within the same family run.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-070: Raccoon</strong>
+            <p>Urban habitat shared. Both urban-adapted mammals. Raccoon was the first urban species (70). Fox Squirrel is the second (81). Both generalist feeders in human-modified environments.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>Urban habitat parallel. Mallard thrives in urban waterways. Fox Squirrel thrives in urban parks. Both succeed in human-modified habitats. Both common and visible.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-072: Opossum</strong>
+            <p>Introduced species parallel. Both INTRODUCED to the PNW. Opossum (72) from eastern/southern North America. Fox Squirrel (81) from eastern North America. Two introductions from the same region.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-071: Red Fox</strong>
+            <p>Urban predator-prey. Red Fox (71) is an urban predator. Eastern Fox Squirrel (81) is urban prey. Both share urban park habitat. The urban food web.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>References</h2>
+        <ol class="sources">
+          <li>[1] NatureServe / IUCN &mdash; Eastern Fox Squirrel (<em>Sciurus niger</em>) species account.</li>
+          <li>[2] Wikipedia &mdash; &ldquo;Fox squirrel.&rdquo;</li>
+          <li>[3] Koprowski, J.L. (1994). <em>Sciurus niger.</em> <em>Mammalian Species</em> No. 479.</li>
+          <li>[4] Washington Department of Fish and Wildlife &mdash; Non-native wildlife.</li>
+          <li>[5] Engine internal analysis &mdash; structural event tracking, energy calibration.</li>
+        </ol>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">81&deg; / 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Bark + chatter. Lower than Douglas.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sciuridae</div>
+          <div class="stat-detail">SEVENTH consecutive (75&ndash;81). RECORD!</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Rodentia</div>
+          <div class="stat-detail">Eighth Rodentia in the engine.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value">Urban park</div>
+          <div class="stat-detail">Second urban species.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">450&ndash;1,000 g</div>
+          <div class="stat-detail">Largest tree squirrel in N. America.</div>
+        </div>
+
+        <h3>Status</h3>
+        <div class="stat-card">
+          <div class="stat-label">Native Range</div>
+          <div class="stat-value">Eastern N. America</div>
+          <div class="stat-detail">INTRODUCED to PNW.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Activity</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Does NOT hibernate.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diet</div>
+          <div class="stat-value">Generalist</div>
+          <div class="stat-detail">Nuts, acorns, seeds, fruits, fungi.</div>
+        </div>
+
+        <h3>Engine Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Mammalian Entry</div>
+          <div class="stat-value">20th</div>
+          <div class="stat-detail">18th species. 9 families.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sciuridae Run</div>
+          <div class="stat-value">7 consecutive</div>
+          <div class="stat-detail">75&ndash;81. RECORD! Breaks Mustelidae tie.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CSV</div>
+          <div class="stat-value">Original (21st)</div>
+          <div class="stat-detail">Twenty-first consecutive original.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

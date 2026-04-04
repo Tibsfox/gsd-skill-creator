@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 254&deg; &mdash; Botch &mdash; E=8 &mdash; Post-Hardcore / Mathcore &mdash; Tacoma &mdash; We Are the Romans</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFCDD2; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #7B1FA2; color: #E1BEE7; border: 1px solid #9C27B0; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #FFCDD2; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #FFCDD2; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.intermediate { background: #F3E5F5; color: #7B1FA2; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .romans-card { background: linear-gradient(135deg, #1A0000, #3E0000, #B71C1C); color: #FFCDD2; border-radius: 8px; padding: 1.75rem 2rem; margin: 1.5rem 0; }
+    .romans-card h3 { margin-top: 0; font-size: 1.3rem; color: white; letter-spacing: 0.06em; text-transform: uppercase; }
+    .romans-card strong { color: #FFD700; }
+    .tracklist { list-style: none; padding: 0; margin: 0.5rem 0; }
+    .tracklist li { padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.88rem; display: flex; gap: 0.75rem; }
+    .tracklist li:last-child { border-bottom: none; }
+    .track-num { opacity: 0.5; min-width: 1.5rem; }
+    .track-title { font-style: italic; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>254 &mdash; Botch (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">254&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #B71C1C;">Botch</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Post-Hardcore / Mathcore</span>
+          <span class="label-badge">Hydra Head</span>
+        </div>
+        <div style="margin-top: 0.4rem; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">Tacoma, Washington &mdash; 1993&ndash;2002</div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>E=8 &mdash; BATCH MAXIMUM ENERGY &mdash; LEGENDARY STATUS &mdash; TACOMA ENTERS ENGINE.</strong> Botch are one of the most important heavy bands ever to come from Washington State. <em>We Are the Romans</em> (1999) is a canonical text. E=8 matches the S36 engine's highest energy reading in this arc. Tacoma enters at degree 254.
+        </div>
+
+        <div class="romans-card">
+          <h3>We Are the Romans &mdash; 1999 &mdash; Hydra Head Records</h3>
+          <p><strong>Eight tracks. 37 minutes. Canonical.</strong> Every serious list of essential heavy music includes it. The technical ambition of mathcore combined with emotional devastation not commonly attempted in extreme music. The riffs change time signature within a single phrase. The bass is a contrapuntal voice, not support. The drums maintain multiple simultaneous meters. The vocals are instruments. Together they produce something that cannot be categorized by any single genre label.</p>
+          <ul class="tracklist">
+            <li><span class="track-num">01</span><span class="track-title">To Our Friends in the Great White North</span> &mdash; thesis statement. Meter changes without warning. 4.5 minutes.</li>
+            <li><span class="track-num">02</span><span class="track-title">Saint Matthew Returns to the Womb</span> &mdash; Catholic imagery, rhythmic displacement, brutal center.</li>
+            <li><span class="track-num">03</span><span class="track-title">C. Thomas Howell as the &ldquo;Soul Man&rdquo;</span> &mdash; cultural appropriation critique as post-hardcore attack.</li>
+            <li><span class="track-num">04</span><span class="track-title">Transitions from Persona to Object</span> &mdash; most dynamic. Near-silence to full eruption.</li>
+            <li><span class="track-num">05</span><span class="track-title">Swimming the Channel vs. Driving It</span> &mdash; aquatic imagery. Water as metaphor throughout.</li>
+            <li><span class="track-num">06</span><span class="track-title">Mondrian Was a Liar</span> &mdash; abstract painter as reference. Rectilinear time signatures.</li>
+            <li><span class="track-num">07</span><span class="track-title">I Wanna Be a Sex Symbol on My Own Terms</span> &mdash; sardonic title, devastating music.</li>
+            <li><span class="track-num">08</span><span class="track-title">Queen of the Surface Streets</span> &mdash; the closer. Longest track. The album does not end &mdash; it is interrupted.</li>
+          </ul>
+        </div>
+
+        <h2>The Band</h2>
+        <p>Botch formed in Tacoma in 1993. Dave Verellen on vocals: not a singer in the melodic sense but a physical presence, his voice an instrument operating at the same technical demand as the guitars. Brian Cook on bass: contrapuntal, operating at a different rhythmic layer from the guitars, creating polyrhythmic complexity in an already polyrhythmic environment. Cook's post-Botch trajectory &mdash; These Arms Are Snakes, then Russian Circles &mdash; traces how the Botch approach diffused into post-metal and post-rock internationally. Dave Knudson on guitar: angular riffs that interrogate and disrupt meter rather than establishing and maintaining it. Knudson later founded Minus the Bear. Tim Latona on guitar: interlocking with Knudson to create the time-signature displacement that defines the band. Tim Meskers on drums: the most technically demanding role, maintaining multiple simultaneous meters at high volume.</p>
+
+        <blockquote>"The dissolution in 2002 is an act of artistic integrity. They made the records they could make and stopped. The catalog is complete, finished, and fully realized. This is rare in rock music."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Mathcore -- The Genre Context</h2>
+        <p>Mathcore is extreme music with unusual time signatures (5/4, 7/8, 11/8), rapid meter changes, polyrhythm, and rhythmic displacement &mdash; combined with hardcore volume and aggression. The "math" refers to the apparent precision required: the musicians must simultaneously track multiple rhythmic layers while maintaining physical attack. The lineage runs through Slint's <em>Spiderland</em> (Louisville, 1991), Fugazi's rhythmic intelligence (Washington DC, 1987), and Refused's <em>The Shape of Punk to Come</em> (Sweden, 1998). Botch's closest contemporaries: Dillinger Escape Plan (New Jersey, 1997) and Converge (Salem MA, 1990). The Converge parallel is exact: <em>Jane Doe</em> (2001) is the East Coast equivalent of <em>We Are the Romans</em> &mdash; both technically demanding, emotionally devastating, and canonical.</p>
+
+        <hr class="section-divider">
+
+        <h2>Hydra Head Records</h2>
+        <p>Hydra Head Records was founded by Aaron Turner in Boston in 1993 &mdash; the same year Botch formed. Turner founded the label as a vehicle for his own band Isis (post-metal, 1997-2010) and expanded it into the defining label for intelligent heavy music in the late 1990s and 2000s. The roster: Botch, Isis, Cave In, Pelican, Oxbow, Harvey Milk, Khanate, Converge (briefly), Deadguy. Non-commercial by philosophy. Closed in 2012. The 20-year catalog represents post-hardcore, sludge, post-metal, and noise rock at their creative peak. *American Nervoso* (1998) and *We Are the Romans* (1999) are the two major Botch releases on Hydra Head.</p>
+
+        <hr class="section-divider">
+
+        <h2>Tacoma -- Industrial Port City</h2>
+        <p>Tacoma is 30 miles south of Seattle on Puget Sound: a port city, more industrial and working-class than Capitol Hill Seattle. The Tacoma waterfront is a working port. The Tacoma Narrows Bridge spans some of the strongest tidal currents in the Sound. The South Sound, the industrial waterfront, the specific combination of working-class Tacoma and the University of Puget Sound's liberal arts environment above the city &mdash; this geography shapes Botch. The technical ambition (UPS intellectual culture) and the physical aggression (Tacoma's industrial ground level) are both in the music.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>American Nervoso (1998)</h4>
+            <span class="level advanced">Hydra Head</span>
+            <p>First major statement. The Botch template established: time signature displacement, vocal ferocity, bass as contrapuntal voice. Less developed than Romans but fully formed.</p>
+          </div>
+          <div class="theory-card">
+            <h4>We Are the Romans (1999)</h4>
+            <span class="level milestone">Hydra Head &mdash; CANONICAL</span>
+            <p>The masterpiece. Eight tracks. 37 minutes. One of the most important heavy albums ever made. Every subsequent list includes it.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Unifying Themes Redux (2002)</h4>
+            <span class="level advanced">Second Nature</span>
+            <p>Final release before dissolution. The correct ending: no compromise, no drift. Complete.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Reunion Shows (2016, 2022)</h4>
+            <span class="level intermediate">Live only</span>
+            <p>No new studio material. A correct choice. The catalog requires no additions.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">253</span> Helms Alee &mdash; sludge to post-hardcore. E=7 to E=8. Capitol Hill to Tacoma. Sargent House to Hydra Head. Brian Cook bridge: Botch &rarr; Russian Circles &rarr; Sargent House &rarr; Helms Alee (253).</li>
+          <li><span class="ref-degree">255</span> Valley of the Giants &mdash; E drops to 6. Post-hardcore to stoner rock. Technical ferocity gives way to heavy psych.</li>
+          <li><span class="ref-degree">SPS 254</span> Fog Horn (Admiralty Inlet) &mdash; E=3 maritime warning. Both are warning sounds: Botch warns that something is coming; the fog horn warns ships of solid ground. Danger signals at the edge of perception.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">254 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Post-Hardcore</span></div>
+          <div class="stat-row"><span class="stat-label">Sub-genre</span><span class="stat-value">Mathcore</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1993&ndash;2002</span></div>
+          <div class="stat-row"><span class="stat-label">City</span><span class="stat-value">Tacoma, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Hydra Head</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Dave Verellen</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Brian Cook</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Dave Knudson</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Tim Latona</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Tim Meskers</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Album</h4>
+          <div class="stat-row"><span class="stat-label">Title</span><span class="stat-value">We Are the Romans</span></div>
+          <div class="stat-row"><span class="stat-label">Year</span><span class="stat-value">1999</span></div>
+          <div class="stat-row"><span class="stat-label">Tracks</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Runtime</span><span class="stat-value">~37 min</span></div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">Canonical</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Post-Botch</h4>
+          <div class="stat-row"><span class="stat-label">Cook</span><span class="stat-value">Russian Circles</span></div>
+          <div class="stat-row"><span class="stat-label">Knudson</span><span class="stat-value">Minus the Bear</span></div>
+          <div class="stat-row"><span class="stat-label">Verellen</span><span class="stat-value">Narrows</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Fog Horn (Adm. Inlet)</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

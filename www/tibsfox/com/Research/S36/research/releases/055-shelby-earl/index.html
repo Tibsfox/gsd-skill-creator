@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 55&deg; &mdash; Shelby Earl &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .gender-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>055 &mdash; Shelby Earl</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>11th Consecutive Folk-Adjacent &mdash; The Ember Glow &mdash; Producer Web Activated</h3>
+      <p>
+        Shelby Earl at degree 55&deg; extends the folk-adjacent record to
+        <strong>eleven consecutive degrees</strong> (45&ndash;55). Singer-songwriter,
+        <strong>Fremont</strong> neighborhood &mdash; 7th named neighborhood.
+        Debut produced by <strong>John Roderick</strong> (The Long Winters), featuring
+        <strong>Fleet Foxes</strong> members (degree 53). Second album produced by
+        <strong>Damien Jurado</strong> (degree 45) &mdash; recorded live at
+        <strong>Columbia City Theater</strong>. NPR&rsquo;s <strong>Ann Powers</strong>:
+        &ldquo;my new favorite songwriter.&rdquo;
+        E=2 rises to 17. <strong>15th non-male artist</strong> (~27.3%).
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">55&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Shelby Earl</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Singer-Songwriter</span>
+          <span class="label-badge">Local 638 / Self-released</span>
+          <span class="neighborhood-badge">Fremont</span>
+          <span class="record-badge">11th Folk-Adjacent</span>
+          <span class="gender-badge">15th Non-Male</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Producer Web Card -->
+        <div class="web-card">
+          <h4>The Folk Web: Producer Connections Activated</h4>
+          <p>
+            <strong>Damien Jurado</strong> (degree 45) produced <em>Swift Arrows</em>.
+            <strong>Fleet Foxes</strong> members (degree 53) played on <em>Burn the Boats</em>.
+            <strong>John Roderick</strong> (The Long Winters) produced the debut.
+            The social graph of the folk zone is densely connected &mdash; these are
+            people who know each other, play on each other&rsquo;s records, and share
+            studios and stages.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Songwriter in the Abbey</h2>
+          <p>
+            <strong>Shelby Earl</strong> is an American singer-songwriter based in
+            <strong>Seattle, Washington</strong>, in the <strong>Fremont</strong>
+            neighborhood. Earl&rsquo;s music centers the individual voice and the
+            acoustic guitar as the primary instruments of songwriting craft:
+            confessional lyrics, intimate vocal delivery, and a production aesthetic
+            that ranges from studio-full to stripped-live.
+          </p>
+          <p>
+            NPR music critic <strong>Ann Powers</strong> named Earl her
+            <strong>&ldquo;new favorite songwriter&rdquo;</strong> in 2011 &mdash;
+            not folk artist, not indie musician, but <em>songwriter</em>.
+            The identity is the craft.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Burn the Boats: The Community Debut (2011)</h2>
+          <p>
+            <strong><em>Burn the Boats</em></strong> (2011, <strong>Local 638 Records</strong>)
+            was produced by <strong>John Roderick</strong>, frontman of
+            <strong>The Long Winters</strong>. Roderick assembled a cast of Seattle
+            musicians for the sessions: members of <strong>Fleet Foxes</strong>
+            (degree 53), <strong>Telekinesis</strong>, and <strong>The Long Winters</strong>.
+            The debut sounds like a snapshot of Seattle&rsquo;s folk-indie community
+            in the studio together &mdash; collaborative, warm, densely populated
+            with familiar voices.
+          </p>
+          <p>
+            The album title &mdash; <em>Burn the Boats</em> &mdash; carries the
+            weight of irreversible commitment. For a debut album, the metaphor
+            is particular: this is the moment of no return. Earl burned the boats
+            and sang the songs.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Swift Arrows: Jurado Produces (2013)</h2>
+          <p>
+            <strong><em>Swift Arrows</em></strong> (2013, self-released) was
+            produced by <strong>Damien Jurado</strong> (degree 45) &mdash; the
+            folk zone&rsquo;s origin point, the murmur. Recorded
+            <strong>live at Columbia City Theater</strong> in Seattle &mdash; a
+            live-to-tape approach that captures the room, the air, the moment
+            of performance as part of the recording.
+          </p>
+          <p>
+            Praised by <strong>NPR</strong>, <strong>Salon</strong>, and
+            <strong>Rolling Stone</strong>. The critical attention confirmed that
+            the Ann Powers endorsement was not a one-time event &mdash; Earl&rsquo;s
+            craft sustained across a second album with a different production
+            approach and a different collaborator.
+          </p>
+          <blockquote>
+            The ten-degree gap between producer (45) and artist (55) spans
+            the entire folk-adjacent streak. Jurado has been present since the
+            beginning; at degree 55, he produces the newest arrival.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Man Who Made Himself a Name (2017)</h2>
+          <p>
+            Earl&rsquo;s third album, <strong><em>The Man Who Made Himself a
+            Name</em></strong> (2017, self-released), arrives after a four-year
+            gap. The title &mdash; a female songwriter&rsquo;s album named after
+            a man who constructed his own identity &mdash; carries the weight of
+            observation and critique: the gendered machinery of name-making,
+            seen clearly by someone outside it.
+          </p>
+          <p>
+            The seven-year arc: communal debut (Roderick) &rarr; intimate live
+            recording (Jurado) &rarr; mature statement. The spacing widens:
+            two years, then four. The craft deepens as the pace slows.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Ember Glow</h4>
+              <div class="level advanced">Advanced &mdash; 56th Acoustic Element</div>
+              <p>
+                Sustained warmth without flame &mdash; a solo voice and acoustic
+                guitar creating low-level luminosity that neither blazes nor
+                fades. The songwriter&rsquo;s craft as acoustic quality: lived
+                experience carried in the voice without straining for drama.
+                Not the murmur&rsquo;s whisper (45) or the jangle&rsquo;s
+                brightness (54) &mdash; the steady glow of embers after the
+                boats have burned.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Infrastructure Beneficiary</h4>
+              <div class="level advanced">Advanced &mdash; 56th Artist-City Pattern</div>
+              <p>
+                The artist sustained by ecosystem, not institution. No single
+                element is sufficient: Local 638 + KEXP + Ann Powers + Jurado +
+                Fleet Foxes session players + Fremont Abbey + Sonic Guild.
+                Together they form the web that allows an E=2 singer-songwriter
+                to exist with craft and dignity. The infrastructure beneficiary
+                is the artist the city makes possible.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Unfinished Catalog</h4>
+              <div class="level intermediate">Intermediate &mdash; 55th Deployment</div>
+              <p>
+                The ache of a small, finite body of recorded work that feels
+                like opening chapters of a longer story. Three albums across
+                seven years. Ann Powers&rsquo; &ldquo;new favorite songwriter&rdquo;
+                produced three albums and then the discography pauses.
+                The blue note plays in the waiting &mdash; in the open interval
+                where the fourth album would be.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>11th Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 36</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk Punk (49),
+                Indie Folk (50), Indie Folk (51), Folk/Rock (52), Indie Folk (53),
+                Folk (54), Singer-Songwriter (55). Eleven degrees. The first
+                Singer-Songwriter classification in the folk-adjacent streak.
+                New sub-genre at the eleventh degree.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Burn the Boats</h4>
+              <div class="disco-years">2011 &middot; Local 638</div>
+              <p>
+                Debut. Produced by John Roderick. Fleet Foxes
+                members, Telekinesis, Long Winters. Ann Powers:
+                &ldquo;my new favorite songwriter.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Swift Arrows</h4>
+              <div class="disco-years">2013 &middot; Self-released</div>
+              <p>
+                Produced by Damien Jurado (degree 45). Recorded live
+                at Columbia City Theater. NPR, Salon, Rolling Stone.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Man Who Made Himself a Name</h4>
+              <div class="disco-years">2017 &middot; Self-released</div>
+              <p>
+                Third album. Four-year gap. Mature songwriter
+                statement. The gendered machinery of fame, observed.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">45&deg;</span>
+              <strong>Damien Jurado</strong> &mdash; Produced <em>Swift Arrows</em>.
+              The folk zone&rsquo;s origin point shaping the eleventh degree.
+              Ten-degree gap spans the entire folk-adjacent streak.
+              Murmur (45) shapes ember glow (55).
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Members performed on
+              <em>Burn the Boats</em>. Cathedral harmony (53) musicians
+              contributing to ember glow (55). Personnel overlap
+              demonstrates Seattle&rsquo;s folk-adjacent social density.
+            </li>
+            <li>
+              <span class="ref-degree">54&deg;</span>
+              <strong>Ivan &amp; Alyosha</strong> &mdash; Consecutive
+              folk-adjacent degrees. Fraternal jangle (54) yields to
+              ember glow (55). Different neighborhoods: Capitol Hill
+              to Fremont. Different energies: E=3 to E=2.
+            </li>
+            <li>
+              <span class="ref-degree">52&deg;</span>
+              <strong>Brandi Carlile</strong> &mdash; Widest energy gap
+              between non-male folk-zone artists: E=4 to E=2.
+              Testimony roar fills arenas; ember glow fills the Abbey.
+              The craft is equivalent.
+            </li>
+            <li>
+              <span class="ref-degree">44&deg;</span>
+              <strong>Chong the Nomad</strong> &mdash; Columbia City
+              connection. Earl&rsquo;s <em>Swift Arrows</em> recorded
+              at Columbia City Theater. Two E=2 artists, two genres,
+              one neighborhood intersection.
+            </li>
+            <li>
+              <span class="ref-degree">0&deg;</span>
+              <strong>Quincy Jones</strong> &mdash; Mercury orchestras to
+              singer-songwriter ember glow. Fifty-six degrees of
+              infrastructure evolution. At degree 55, one voice,
+              one guitar, one room.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">55&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Singer-Songwriter</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">36</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2011&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Local 638 / Self</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Producers</span>
+            <span class="stat-value">Roderick / Jurado</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Folk-Adjacent Undecad</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg;</span>
+            <span class="stat-value">Jurado (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">46&deg;</span>
+            <span class="stat-value">Votolato (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">47&deg;</span>
+            <span class="stat-value">Pedro (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">48&deg;</span>
+            <span class="stat-value">Cahoone (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">49&deg;</span>
+            <span class="stat-value">Dawson (Folk Punk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">50&deg;</span>
+            <span class="stat-value">Mirah (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">51&deg;</span>
+            <span class="stat-value">Grand Arch. (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">52&deg;</span>
+            <span class="stat-value">Carlile (Folk/Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">53&deg;</span>
+            <span class="stat-value">Fleet Foxes (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">54&deg;</span>
+            <span class="stat-value">Ivan &amp; Alyosha (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">55&deg;</span>
+            <span class="stat-value">Earl (Singer-Songwriter)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#56</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#56</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#55</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Tracking</h4>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">15</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Male</span>
+            <span class="stat-value">41</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value">~27.3%</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Producer Web</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jurado (45&deg;)</span>
+            <span class="stat-value">Produced #2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Fleet Foxes (53&deg;)</span>
+            <span class="stat-value">Played on #1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Roderick</span>
+            <span class="stat-value">Produced #1</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        Degree 55&deg; &mdash; Shelby Earl &mdash; Seattle 360 Engine &mdash; v1.49.191
+        <br>
+        Eleven consecutive folk-adjacent degrees. The ember glow. Ann Powers&rsquo;
+        new favorite songwriter. The boats are burned. The arrows are swift.
+        The embers still glow.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

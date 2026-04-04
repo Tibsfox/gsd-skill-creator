@@ -1,0 +1,158 @@
+{
+  "degree": 82,
+  "species": "Northern Flying Squirrel",
+  "scientific_name": "Glaucomys sabrinus",
+  "slug": "082-northern-flying-squirrel",
+  "sound_type": "high thin 'tseet' contact call -- nearly ultrasonic, barely audible to humans, 8,000-20,000+ Hz, high thin contact note between individuals in nocturnal canopy, E=3, old-growth habitat",
+  "energy": 3,
+  "ecosystem": "old-growth coniferous forest. Nests in tree cavities in large-diameter trees. Old-growth dependent -- requires mature forest structure with cavity-bearing trees. Strictly nocturnal.",
+  "season": "year-round. Does NOT hibernate. Active all year but strictly nocturnal. Less active in severe winter weather but does not enter torpor.",
+  "family": "Sciuridae",
+  "order": "Rodentia",
+  "csv_substitute": false,
+  "original_species": "Northern Flying Squirrel",
+  "csv_substitution": null,
+  "species_pair": {
+    "partner_degree": [75, 76, 77, 78, 79, 80, 81],
+    "partner_species": ["Yellow-bellied Marmot", "Hoary Marmot", "Olympic Marmot", "Townsend's Ground Squirrel", "Golden-mantled Ground Squirrel", "Douglas Squirrel", "Eastern Fox Squirrel"],
+    "pair_type": "Sciuridae OCTET -- EIGHTH consecutive Sciuridae (75-76-77-78-79-80-81-82). The OCTET. LONGEST family run in engine history: EIGHT. Three marmots (Marmota, 75-77) + five squirrels (Urocitellus 78, Callospermophilus 79, Tamiasciurus 80, Sciurus 81, Glaucomys 82). Six genera. Eight habitats. Alpine to old-growth."
+  },
+  "coordinates": {
+    "lat": 47.80,
+    "lon": -121.80,
+    "description": "Reference for old-growth coniferous forest habitat in the Cascade Range, Washington. Mature Douglas-fir and western hemlock forest with cavity-bearing trees."
+  },
+  "taxonomy_note": {
+    "description": "EIGHTH CONSECUTIVE SCIURIDAE (75-82). Sciuridae octet. LONGEST family run: EIGHT. NEW GENUS Glaucomys -- sixth Sciuridae genus. Flying squirrels. Twenty-first mammalian entry. Nineteenth mammalian species. Ninth Rodentia. Sciuridae's eighth entry. First GLIDING mammal.",
+    "current_class": "Mammalia",
+    "new_class": false,
+    "class_count_in_engine": 2,
+    "current_infraclass": "Placentalia",
+    "new_infraclass": false,
+    "infraclass_note": "Placentalia continues.",
+    "current_family": "Sciuridae",
+    "new_family": false,
+    "family_count_in_engine": 34,
+    "sciuridae_count_in_engine": 8,
+    "name_etymology": "Glaucomys from Greek glaukos ('silver/gray') + mys ('mouse'). sabrinus from Latin Sabrinus, relating to the Severn River. Described by Shaw (1801).",
+    "genus_note": "Glaucomys -- NEW GENUS in the engine. Sixth Sciuridae genus after Marmota (75-77), Urocitellus (78), Callospermophilus (79), Tamiasciurus (80), Sciurus (81). Flying squirrels -- the first gliding genus.",
+    "order_note": "Rodentia -- ninth Rodentia in the engine.",
+    "class_note": "Mammalia -- twenty-first mammalian entry. Nineteenth mammalian species.",
+    "family_position": "Sciuridae's EIGHTH entry at degree 82. Eighth consecutive (75-82). The OCTET. LONGEST family run: EIGHT."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "Approximately 8,000-20,000+ Hz. Nearly ultrasonic. At the upper edge of human hearing.",
+    "peak_energy_band_hz": "Approximately 10,000-18,000 Hz. Many humans cannot hear this frequency range.",
+    "song_frequency_hz": "NOT a song. HIGH THIN 'TSEET' CONTACT CALL. Soft, brief, nearly ultrasonic contact notes between individuals.",
+    "song_duration_s": "0.05-0.15 seconds per note. Very brief. Barely detectable.",
+    "note_structure": "Single thin notes. High-pitched 'tseet.' Brief and soft. The quietest vocalization in the Sciuridae octet.",
+    "note_types": "Tseet (high thin contact call), soft chitter (social), squeak (distress).",
+    "phrase_structure": "Simple: isolated single notes or short series of contact calls. No sustained vocalization.",
+    "timbre": "Thin, high, ethereal. Nearly ultrasonic. Like the highest note on a piccolo but softer. Barely audible to most humans.",
+    "amplitude": "E=3. Very soft. Audible only at close range and only to listeners with good high-frequency hearing. Many people cannot hear it at all.",
+    "tempo": "Slow. Individual contact notes with significant pauses. Not rapid or sustained.",
+    "context": "CONTACT CALLS between individuals in nocturnal canopy. Social coordination in darkness. Not territorial aggression.",
+    "regional_variation": "Minimal variation documented.",
+    "key_property": "HIGH THIN 'TSEET' CONTACT CALL -- the 83rd acoustic element. Nearly ultrasonic. 8,000-20,000+ Hz. E=3. Barely audible. Nocturnal old-growth. The quietest and highest vocalization in the Sciuridae octet."
+  },
+  "plumage": null,
+  "physical_description": {
+    "overall": "Small nocturnal gliding squirrel. 110-230 g (4-8 oz). 25-37 cm total length including tail. Soft dense fur. Large dark eyes for nocturnal vision. Patagium (gliding membrane) from wrist to ankle. Flattened tail for steering.",
+    "diagnostic_mark": "For degree 82: (1) PATAGIUM -- skin membrane from wrist to ankle visible when gliding or when arms extended. The defining feature. (2) LARGE DARK EYES -- enormous eyes for nocturnal vision. (3) SOFT DENSE FUR -- silky, cinnamon-brown above, white below. (4) FLATTENED TAIL -- used as rudder during glides. (5) STRICTLY NOCTURNAL -- rarely seen during day.",
+    "fur_detail": "BODY: Soft, dense, silky. Cinnamon-brown to olive-brown above. Distinctly paler than Douglas Squirrel. BELLY: White to cream -- clean white underside. PATAGIUM: Furred. Visible as loose skin along flanks. TAIL: Flattened dorsoventrally. Used for steering in glides.",
+    "dental_detail": "Rodent dentition. Adapted for soft foods (truffles, lichens, fungi).",
+    "field_id": "Almost never seen due to nocturnal habits. If seen at night: a small squirrel with enormous dark eyes gliding silently between trees, or perched on a branch with loose patagium visible along flanks. White belly. Silent or nearly so. If you hear a barely audible high 'tseet' in old-growth forest at night, it may be a Northern Flying Squirrel."
+  },
+  "nodes": [
+    {
+      "id": "sciuridae-octet",
+      "type": "pattern",
+      "title": "Sciuridae Octet (75-82) -- EIGHT Consecutive!",
+      "description": "Eight consecutive Sciuridae. The OCTET. Longest family run in engine history: EIGHT. Three marmots + five squirrels. Six genera. Eight habitats. Alpine to old-growth.",
+      "connections": ["tseet-call", "gliding-mammal", "old-growth-dependent"]
+    },
+    {
+      "id": "tseet-call",
+      "type": "concept",
+      "title": "High Thin 'Tseet' Contact Call -- 83rd Acoustic Element",
+      "description": "Nearly ultrasonic contact call. 8,000-20,000+ Hz. E=3. Barely audible to humans. Brief, soft, ethereal. Nocturnal canopy communication. Quietest in the Sciuridae octet.",
+      "connections": ["sciuridae-octet", "gliding-mammal", "old-growth-dependent"]
+    },
+    {
+      "id": "gliding-mammal",
+      "type": "concept",
+      "title": "First Gliding Mammal -- The Patagium",
+      "description": "Patagium (skin membrane wrist-to-ankle) enables glides of 20-50 meters between trees. First 'flying' mammal in the engine. The engine goes airborne. Steering via flattened tail.",
+      "connections": ["sciuridae-octet", "old-growth-dependent"]
+    },
+    {
+      "id": "old-growth-dependent",
+      "type": "concept",
+      "title": "Old-Growth Dependent -- Cavity Nester",
+      "description": "Requires old-growth coniferous forest with cavity-bearing trees. Nests in tree cavities. Shares old-growth dependence with Pacific Wren (1) and Pileated Woodpecker (54). Old-growth logging is primary threat.",
+      "connections": ["sciuridae-octet", "truffle-mutualism", "spotted-owl-prey"]
+    },
+    {
+      "id": "truffle-mutualism",
+      "type": "pattern",
+      "title": "Truffle Mutualism -- American Marten Connection (65)",
+      "description": "Both eat truffles (hypogeous fungi). Both disperse mycorrhizal spores through fecal pellets. Truffle mutualism connects species across families and degrees. Essential for old-growth forest health.",
+      "connections": ["old-growth-dependent", "sciuridae-octet"]
+    },
+    {
+      "id": "spotted-owl-prey",
+      "type": "pattern",
+      "title": "Northern Spotted Owl Prey -- Key Ecological Link (SPS-004)",
+      "description": "The Northern Spotted Owl PREYS ON FLYING SQUIRRELS. Both old-growth dependent. Both nocturnal. The owl needs the squirrel. The squirrel needs the old-growth. Predator-prey in the nocturnal canopy.",
+      "connections": ["old-growth-dependent", "tseet-call"]
+    },
+    {
+      "id": "cavity-connection",
+      "type": "pattern",
+      "title": "Pileated Woodpecker Cavity Connection (SPS-054)",
+      "description": "Pileated Woodpecker creates cavities in large trees. Northern Flying Squirrel nests in cavities. The woodpecker's work becomes the squirrel's home. Cavity ecosystem linkage.",
+      "connections": ["old-growth-dependent"]
+    },
+    {
+      "id": "deathcab-parallel",
+      "type": "pattern",
+      "title": "The Death Cab Acoustic Parallel",
+      "description": "Both E=3. Both quieter versions of something bigger. Both nocturnal/intimate. Both reveal hidden dimensions. Acoustic intimacy meets nocturnal old-growth.",
+      "connections": ["tseet-call"]
+    },
+    {
+      "id": "csv-milestone",
+      "type": "pattern",
+      "title": "Twenty-Second Consecutive Original CSV",
+      "description": "Twenty-two consecutive original CSV species. No substitution. CSV reliability continues.",
+      "connections": ["sciuridae-octet"]
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-081",
+      "species": "Eastern Fox Squirrel",
+      "relationship": "SCIURIDAE OCTET. Urban park (81) to old-growth (82). Introduced (81) to native (82). Diurnal (81) to nocturnal (82). Bark+chatter (E=4) to tseet (E=3). Maximum contrast within consecutive Sciuridae."
+    },
+    {
+      "target": "SPS-065",
+      "species": "American Marten",
+      "relationship": "TRUFFLE MUTUALISM! Both eat truffles. Both disperse mycorrhizal spores. Marten (65) also preys on Douglas Squirrel (80). Cross-family truffle network. Essential for old-growth forest health."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Spotted Owl",
+      "relationship": "NORTHERN SPOTTED OWL PREYS ON FLYING SQUIRRELS -- key ecological link! Both old-growth dependent. Both nocturnal. Predator-prey in the nocturnal canopy. The owl needs the squirrel."
+    },
+    {
+      "target": "SPS-001",
+      "species": "Pacific Wren",
+      "relationship": "OLD-GROWTH SHARED. Both depend on old-growth forest structure. Pacific Wren in the understory, Flying Squirrel in the canopy. Two old-growth specialists across 82 degrees."
+    },
+    {
+      "target": "SPS-054",
+      "species": "Pileated Woodpecker",
+      "relationship": "CAVITY CONNECTION. Pileated Woodpecker creates cavities in large trees. Northern Flying Squirrel nests in cavities. The woodpecker's work becomes the squirrel's home."
+    }
+  ]
+}

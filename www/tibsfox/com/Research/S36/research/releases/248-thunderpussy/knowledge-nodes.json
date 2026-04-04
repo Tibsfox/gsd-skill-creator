@@ -1,0 +1,27 @@
+{
+  "degree": 248, "artist": "Thunderpussy", "slug": "248-thunderpussy", "genre": "Hard Rock", "energy": 7,
+  "era": "2014-present. Hard Rock. E=7. Capitol Hill, Seattle. Republic Records. All-female band.",
+  "location": { "origin": "Capitol Hill, Seattle, Washington" },
+  "formed": "Seattle, Washington, 2014",
+  "labels": ["Republic Records (Universal Music Group)"],
+  "members": ["Molly Sides (vocals)", "Whitney Petty (guitar)", "Leah Julius (bass)", "Ruby Dunphy (drums)"],
+  "albums": [
+    { "title": "Thunderpussy", "year": 2018, "label": "Republic", "key_tracks": ["Speed Queen", "Torpedo", "Velvet Noose", "Bangkok"] },
+    { "title": "Strike a Pose", "year": 2022, "label": "Republic" }
+  ],
+  "influences": ["Led Zeppelin", "Heart (Ann Wilson / Nancy Wilson)", "Aerosmith", "Deep Purple", "AC/DC", "Pat Benatar"],
+  "theory_nodes": [
+    { "concept": "All-female Seattle hard rock band: the engine's first all-female lineup. In the tradition of Heart (Ann and Nancy Wilson), but fully all-female. Statement about who makes hard rock and on what terms. The music requires no qualification.", "level": "intermediate", "department": "demographics", "description": "All-female hard rock in the Seattle tradition." },
+    { "concept": "E=7 post-corridor: degree 248 follows the 245-247 maximum run (E=8/7/8). The tradition continues at high-but-not-maximum energy. Hard rock persists in contemporary Capitol Hill even as the neighborhood's economic character shifts.", "level": "intermediate", "department": "engine-structure", "description": "E=7 as continuation after the engine's maximum corridor." },
+    { "concept": "Capitol Hill in the contemporary era: gentrified economically but culturally intact. Queer-positive, theatrically bold, politically engaged. CHOP/CHAZ 2020 as continued site of activism. Thunderpussy as Capitol Hill of 2014-present, not 1990s peak.", "level": "intermediate", "department": "geography", "description": "Capitol Hill's contemporary character vs. historical peak." }
+  ],
+  "cross_references": [
+    {"degree": 247, "artist": "Alice in Chains", "relationship": "E=8. The grunge maximum immediately prior. E=7 Thunderpussy follows E=8 AIC. The hard rock tradition continues."},
+    {"degree": 245, "artist": "Jimi Hendrix", "relationship": "E=8. The psychedelic maximum three degrees prior. The 245-248 arc from maximum to contemporary hard rock."}
+  ],
+  "sps_pair": {"degree": 248, "sound": "Rainforest rain on big-leaf maple", "pairing_note": "E=7 + E=4. Hoh Rainforest: complex patter-drip percussion. Thunderpussy's structured, human-made percussion (Dunphy's drums) pairs with rain's natural percussion. Both are percussion-forward; one is the most controlled form of human organization, the other is environmental chance."},
+  "milestones": ["FIRST ALL-FEMALE SEATTLE BAND IN ENGINE", "CONTEMPORARY CAPITOL HILL REPRESENTATION", "Republic Records major-label deal"],
+  "queer_community": true,
+  "capitol_hill_character": "Queer-positive, glam-inflected, theatrically bold, LGBTQ+ community embedded",
+  "tags": ["hard-rock", "capitol-hill", "republic-records", "all-female", "molly-sides", "whitney-petty", "contemporary-seattle", "heart-tradition", "glam-inflected", "queer-positive", "2014-present"]
+}

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 65&deg; &mdash; American Marten &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Mustelidae trio card */
+    .mustelid-trio-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #388E3C 100%);
+      border: 3px solid #0D3B13;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .mustelid-trio-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #C8E6C9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .mustelid-trio-card p {
+      color: #E8F5E9;
+    }
+    .mustelid-trio-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Aquatic break card */
+    .aquatic-break-card {
+      background: linear-gradient(135deg, #33691E 0%, #558B2F 60%, #689F38 100%);
+      border: 3px solid #1B5E20;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .aquatic-break-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #DCEDC8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .aquatic-break-card p {
+      color: #F1F8E9;
+    }
+    .aquatic-break-card strong {
+      color: #C5E1A5;
+    }
+
+    /* Chuckle-chatter acoustic card */
+    .chuckle-card {
+      background: linear-gradient(135deg, #4E342E 0%, #6D4C41 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .chuckle-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .chuckle-card p {
+      color: #EFEBE9;
+    }
+    .chuckle-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Arboreal predator card */
+    .arboreal-card {
+      background: linear-gradient(135deg, #263238 0%, #37474F 60%, #455A64 100%);
+      border: 2px solid #1C2830;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .arboreal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .arboreal-card p {
+      color: #ECEFF1;
+    }
+    .arboreal-card strong {
+      color: #90A4AE;
+    }
+
+    /* Old-growth card */
+    .oldgrowth-card {
+      background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+      border: 2px solid #003D33;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .oldgrowth-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2DFDB;
+    }
+    .oldgrowth-card p {
+      color: #E0F2F1;
+    }
+    .oldgrowth-card strong {
+      color: #80CBC4;
+    }
+
+    /* CSV streak card */
+    .csv-card {
+      background: linear-gradient(135deg, #37474F 0%, #455A64 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B0BEC5;
+    }
+    .csv-card p {
+      color: #ECEFF1;
+    }
+    .csv-card strong {
+      color: #90A4AE;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.mustelid-trio { background: #1B5E20; }
+    .theory-icon.aquatic-break { background: #33691E; }
+    .theory-icon.chuckle { background: #4E342E; }
+    .theory-icon.arboreal { background: #263238; }
+    .theory-icon.oldgrowth { background: #004D40; }
+    .theory-icon.canopy { background: #37474F; }
+    .theory-icon.owl-parallel { background: #4A148C; }
+    .theory-icon.wren-parallel { background: #1B5E20; }
+    .theory-icon.woodpecker { background: #5D4037; }
+    .theory-icon.aaberg { background: #283593; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-icon.scent { background: #880E4F; }
+    .theory-icon.subnivean { background: #01579B; }
+    .theory-icon.truffle { background: #4E342E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">65&deg;</div>
+      <div class="release-title-block">
+        <h2>American Marten</h2>
+        <div class="scientific">Martes americana</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      low chuckle + loud chatter &mdash; arboreal predator of old-growth canopy, THIRD MUSTELID (completing the Mustelidae trio: Otter 63, Mink 64, Marten 65), third carnivore, fifth mammalian entry, fourth mammalian species, BREAKS the seven-degree aquatic streak, first old-growth forest habitat since degree 54, first canopy predator, E=4, year-round resident, old-growth forest
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Mustelidae Trio Card -->
+        <div class="mustelid-trio-card">
+          <h3>The Mustelidae Trio Completes &mdash; Otter (63), Mink (64), Marten (65)</h3>
+          <p>Three consecutive Mustelidae. Three habitats. Three ecological strategies. River Otter: <strong>5&ndash;14 kg, social, river/estuary</strong>. Mink: <strong>0.5&ndash;1.5 kg, solitary, creek bank</strong>. Marten: <strong>0.5&ndash;1.2 kg, solitary, old-growth canopy</strong>. Water to margin to forest. Horizontal to vertical. The most dramatic habitat gradient documented within a single family in the engine.</p>
+        </div>
+
+        <!-- Aquatic Break Card -->
+        <div class="aquatic-break-card">
+          <h3>The Aquatic Era Breaks &mdash; Seven Degrees of Water End</h3>
+          <p>Seven consecutive aquatic-associated species (58&ndash;64): Wood Duck &rarr; Mallard &rarr; Grebe &rarr; Beaver &times;2 &rarr; Otter &rarr; Mink. <strong>The Marten ends the streak.</strong> Old-growth forest. No water. No creek. No bank. The longest habitat affinity run in engine history is over. The Marten goes <strong>up</strong> &mdash; from the water&rsquo;s edge into the trees.</p>
+        </div>
+
+        <!-- Chuckle-Chatter Card -->
+        <div class="chuckle-card">
+          <h3>The 66th Acoustic Element: The Chuckle-Chatter</h3>
+          <p>Low <strong>chuh-chuh-chuh-chuh</strong> chuckle (social, close-range, 500&ndash;2,000 Hz) + harsh <strong>cha-cha-cha-cha</strong> chatter (territorial, long-range, 1,500&ndash;4,000 Hz). E=4. Two registers: <strong>intimate and aggressive</strong>. Between the otter&rsquo;s six-type repertoire and the mink&rsquo;s single alarm. A sound that comes from <strong>above</strong> &mdash; from the canopy of old-growth trees.</p>
+        </div>
+
+        <!-- Arboreal Predator Card -->
+        <div class="arboreal-card">
+          <h3>First Canopy Predator &mdash; Hunting in Three Dimensions</h3>
+          <p>The Marten pursues squirrels through the <strong>three-dimensional maze of old-growth canopy</strong> &mdash; leaping between branches, running along trunks, navigating a world of vertical space. Not hunting FROM the canopy (Spotted Owl) but hunting <strong>IN</strong> the canopy. The engine&rsquo;s first arboreal pursuit predator. Semi-retractable claws, bushy balance-tail, explosive leaps.</p>
+        </div>
+
+        <!-- Old-Growth Card -->
+        <div class="oldgrowth-card">
+          <h3>Old-Growth Forest &mdash; The Canopy Returns</h3>
+          <p>The Marten requires <strong>mature and old-growth coniferous forest</strong>: large-diameter trees, closed canopy, complex vertical structure, abundant snags and downed wood. An old-growth obligate, like the Spotted Owl (degree 4). Both are <strong>indicators of old-growth health</strong>. Where martens persist, old-growth structure remains. Connects to Pacific Wren (1), Spotted Owl (4), Pileated Woodpecker (54).</p>
+        </div>
+
+        <!-- CSV Streak Card -->
+        <div class="csv-card">
+          <h3>Fifth Consecutive Original CSV Species</h3>
+          <p>Degrees 61&ndash;65: <strong>five consecutive original CSV species</strong>. The longest original streak in recent engine history. Every mammal in the engine was in the original plan. The CSV runs clean through the entire mammalian era.</p>
+        </div>
+
+        <h2>The Sound: Low Chuckle + Loud Chatter</h2>
+        <p><strong>The Chuckle:</strong> A series of low, throaty, rolling notes &mdash; chuh-chuh-chuh-chuh &mdash; at 2&ndash;4 notes per second. Frequency: 500&ndash;2,000 Hz. The marten&rsquo;s primary social vocalization, used in mother-kit communication and close encounters. Warmer and more tonal than the mink&rsquo;s shrill chitter.</p>
+        <p><strong>The Chatter:</strong> A rapid, harsh, higher-pitched series &mdash; cha-cha-cha-cha-cha &mdash; during agitation, territorial encounters, and alarm. Frequency: 1,500&ndash;4,000 Hz. Louder and more aggressive than the chuckle. Carries through the forest understory.</p>
+        <p><strong>Additional vocalizations:</strong> Screams (distress), hissing (close-range aggression), huffing (mild alarm). The marten&rsquo;s vocal repertoire sits between the otter&rsquo;s diversity (6 types) and the mink&rsquo;s minimalism (1 dominant). Two primary registers: social and defensive.</p>
+
+        <h2>Physical Description: The Arboreal Predator</h2>
+        <p><strong>Size:</strong> 50&ndash;68 cm total length, 0.5&ndash;1.2 kg. Males slightly larger than females. Elongated but more compact than the mink, with a broader, more triangular head and larger, rounded ears giving a fox-like expression.</p>
+        <p><strong>Feet:</strong> <strong>Semi-retractable claws</strong> &mdash; sharp, curved, gripping bark and branches like grappling hooks. Furred soles in winter for insulation and traction on snow. Built for climbing, not swimming.</p>
+        <p><strong>Fur:</strong> Rich golden-brown to dark brown with a prominent <strong>orange-gold throat patch</strong> (individually distinctive). Softer, longer, and less oily than the mink&rsquo;s waterproof fur. Historically trapped for fur; the Asian congener (Sable) produces the most valuable fur in the world.</p>
+        <p><strong>Tail:</strong> Long, bushy, used for balance during arboreal locomotion &mdash; a counterweight during canopy pursuits, functionally like a squirrel&rsquo;s tail.</p>
+
+        <h2>Diet: The Old-Growth Generalist</h2>
+        <p><strong>Primary prey:</strong> Red squirrels and Douglas squirrels, pursued through the canopy in dramatic three-dimensional chases. Also: voles, mice, shrews (forest floor and subnivean), birds and eggs (canopy nests), snowshoe hare (occasionally), insects, and berries (huckleberries in summer).</p>
+        <p><strong>Truffle mutualism:</strong> The marten consumes hypogeous fungi (truffles) and disperses their spores, maintaining the mycorrhizal networks that old-growth trees depend on. The marten is both predator and mutualist &mdash; a complex ecological role.</p>
+        <p><strong>Subnivean hunting:</strong> In winter, the marten accesses the network of tunnels and cavities beneath snowpack to hunt voles and shrews. This requires deep snow with structural integrity &mdash; another link to old-growth forest conditions.</p>
+
+        <h2>The Mustelidae Trio: Three Habitats</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Habitat</th><th>Strategy</th><th>Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>63</td><td>River Otter</td><td>River/estuary</td><td>Aquatic pursuit</td><td>5&ndash;14 kg</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Creek bank</td><td>Interface ambush</td><td>0.5&ndash;1.5 kg</td></tr>
+            <tr><td><strong>65</strong></td><td><strong>Am. Marten</strong></td><td><strong>Old-growth forest</strong></td><td><strong>Arboreal pursuit</strong></td><td><strong>0.5&ndash;1.2 kg</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Three consecutive Mustelidae documenting a complete habitat gradient: <strong>water to margin to canopy</strong>. River to creek bank to forest crown. No other family in the engine has been mapped across such a dramatic ecological range.</p>
+
+        <h2>The Philip Aaberg Parallel</h2>
+        <p>Degree 65 pairs American Marten with <strong>Philip Aaberg</strong> in Part A &mdash; New Age, E=1, Montana, Windham Hill Records. Parallel resonances: (1) <strong>Landscapes of space and old growth</strong> &mdash; Aaberg&rsquo;s Montana piano and the Marten&rsquo;s old-growth Cascades share forest ecosystems and vast scale. (2) <strong>Quiet presence</strong> &mdash; Aaberg E=1 (quietest); the Marten is quiet most of the time, vocalizing only when needed. Both let the landscape dominate. (3) <strong>Montana-Cascades connection</strong> &mdash; the marten ranges across both Montana&rsquo;s and Washington&rsquo;s forests. The music and the animal inhabit the same mountains.</p>
+
+        <h2>Family Tracker After Degree 65</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td><strong>63, 64, 65</strong></td><td><strong>3 (trio)</strong></td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-eight families across 66 entries. <strong>Mustelidae increases to 3 entries</strong> (trio: 63&ndash;64&ndash;65). No new family at degree 65. 49 of 66 entries (74.2%) are Passeriformes. 5 of 66 entries (7.6%) are Mammalia. Aves representation drops to 92.4%.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon mustelid-trio">T</div>
+            <div class="theory-content">
+              <h4>Mustelidae Trio Complete (63&ndash;64&ndash;65) <span class="theory-level landmark">landmark</span></h4>
+              <p>Otter &rarr; Mink &rarr; Marten. River &rarr; creek bank &rarr; old-growth canopy. Social &rarr; solitary &rarr; solitary. The most dramatic habitat gradient within a single family in the engine. Three consecutive entries, three radically different worlds.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon aquatic-break">B</div>
+            <div class="theory-content">
+              <h4>Aquatic Streak Breaks <span class="theory-level landmark">landmark</span></h4>
+              <p>Seven consecutive aquatic species (58&ndash;64) &mdash; the longest habitat affinity run in engine history &mdash; ends at degree 65. Old-growth forest. No water. The Marten goes UP into the trees. Terrestrial habitat returns.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon chuckle">A</div>
+            <div class="theory-content">
+              <h4>The Chuckle-Chatter &mdash; 66th Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Low chuckle (social, 500&ndash;2,000 Hz) + loud chatter (territorial, 1,500&ndash;4,000 Hz). Two registers between the otter&rsquo;s diversity and the mink&rsquo;s minimalism. The first mammalian sound from the canopy.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon arboreal">C</div>
+            <div class="theory-content">
+              <h4>First Canopy Predator <span class="theory-level foundational">foundational</span></h4>
+              <p>Pursues squirrels through old-growth canopy. Three-dimensional pursuit predation. Semi-retractable claws, bushy tail for balance. Hunting IN the canopy, not from it.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon oldgrowth">O</div>
+            <div class="theory-content">
+              <h4>Old-Growth Dependent <span class="theory-level foundational">foundational</span></h4>
+              <p>Requires mature forest with large trees, closed canopy, abundant snags. An old-growth obligate like the Spotted Owl (4). Indicator of old-growth health. Conservation thread spanning 61 degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon subnivean">S</div>
+            <div class="theory-content">
+              <h4>Subnivean Hunter <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Accesses the under-snow labyrinth in winter to hunt voles and shrews. Furred soles, light body weight, low foot-loading. Requires deep snowpack &mdash; vulnerable to climate-driven snow loss.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon truffle">F</div>
+            <div class="theory-content">
+              <h4>Truffle Dispersal Mutualism <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Consumes truffles and disperses their spores, maintaining the mycorrhizal networks that old-growth trees depend on. The marten is both predator and mutualist &mdash; a complex ecological role.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon scent">M</div>
+            <div class="theory-content">
+              <h4>Scent-Based Social System <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Communicates primarily through scent marks (abdominal glands, urine, feces). Chemical territory vs. the otter&rsquo;s vocal social world vs. the mink&rsquo;s aggressive exclusion. Solitary but chemically connected.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl-parallel">P</div>
+            <div class="theory-content">
+              <h4>Spotted Owl Parallel (SPS-004) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both old-growth dependents. Both solitary canopy predators. Both indicators of old-growth health. Both threatened by logging. Owl: sit-and-wait. Marten: pursuit. 61 degrees apart, same forest.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon woodpecker">W</div>
+            <div class="theory-content">
+              <h4>Cavity Chain with Pileated Woodpecker (SPS-054) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The Pileated Woodpecker creates cavities that the marten uses for denning. Woodpecker as architect; marten as tenant. A direct ecological dependency between degrees 54 and 65.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon aaberg">A</div>
+            <div class="theory-content">
+              <h4>Philip Aaberg Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both operate in vast landscapes of old growth and open space. Montana&rsquo;s forests connect to the Marten&rsquo;s habitat. Aaberg E=1, Marten E=4 &mdash; both quiet presences until the moment demands sound.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">5</div>
+            <div class="theory-content">
+              <h4>Fifth Consecutive Original CSV <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degrees 61&ndash;65: five consecutive original CSV species. The longest original streak in recent engine history. The entire mammalian era runs on original CSV entries.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">D</div>
+            <div class="theory-content">
+              <h4>Fifth Mammalian Entry <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fourth mammalian species. Five consecutive mammalian entries (61&ndash;65). Mammalian representation rises to 7.6%. Two orders, two families, four species. Three Mustelidae.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-064: Mink</strong>
+            <p>CONSECUTIVE MUSTELIDAE (TRIO). Creek bank vs. old-growth canopy. Ground vs. trees. Both small (~1 kg), both solitary. The Mink works the margin; the Marten works the canopy. Adjacent degrees, radically different habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-063: River Otter</strong>
+            <p>MUSTELIDAE TRIO COMPLETE (63&ndash;64&ndash;65). River &rarr; creek &rarr; forest. Aquatic &rarr; marginal &rarr; arboreal. Social &rarr; solitary &rarr; solitary. The trio maps the full Mustelidae habitat gradient in three degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>OLD-GROWTH DEPENDENTS. Both need mature forest. Both indicators of old-growth health. Both solitary canopy hunters. Owl: sit-and-wait. Marten: pursuit. 61 degrees apart, same conservation story.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>OLD-GROWTH FOREST CONNECTION. Wren = forest floor. Marten = forest canopy. Same old-growth forest, different vertical strata. Both depend on structural complexity.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-054: Pileated Woodpecker</strong>
+            <p>CAVITY CHAIN. Both depend on large trees. The woodpecker creates cavities the marten uses for denning. Architect and tenant. A direct ecological dependency.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Fifth mammalian entry. Fourth mammalian species. Third Carnivora, third Mustelidae. Mammalian representation rises to 7.6% (5 of 66). Two orders, two families, four species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Old-growth forest habitat. Arboreal predator. Subnivean hunting. Truffle dispersal mutualism. Old-growth indicator species. Conservation connection to Spotted Owl.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; American Marten (<em>Martes americana</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;American marten.&rdquo;</li>
+          <li>Clark, T.W. et al. (1987). &ldquo;<em>Martes americana</em>.&rdquo; <em>Mammalian Species</em> No. 289, pp. 1&ndash;8.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Marten.</li>
+          <li>Buskirk, S.W. and Ruggiero, L.F. (1994). &ldquo;American marten.&rdquo; In: <em>The Scientific Basis for Conserving Forest Carnivores</em>. USDA Forest Service GTR RM-254.</li>
+          <li>Thompson, I.D. and Colgan, P.W. (1987). &ldquo;Numerical responses of martens to food shortage.&rdquo; <em>J. Wildl. Manage.</em> 51(4): 824&ndash;835.</li>
+          <li>Slauson, K.M. et al. (2007). &ldquo;Habitat selection by American martens in coastal California.&rdquo; <em>J. Wildl. Manage.</em> 71(2): 458&ndash;468.</li>
+          <li>Moriarty, K.M. et al. (2015). &ldquo;Simplified forest structure and functional connectivity for Pacific martens.&rdquo; <em>Landscape Ecology</em> 30: 1865&ndash;1877.</li>
+          <li>Aubry, K.B. et al. (2004). &ldquo;Zoogeography, spacing patterns, and dispersal in forest carnivores.&rdquo; In: <em>Martens and Fishers in Human-Altered Environments</em>. Springer.</li>
+          <li>Dawson, N.G. and Cook, J.A. (2012). &ldquo;Behind the genes: diversification of North American martens.&rdquo; In: <em>Biology and Conservation of Martens, Sables, and Fishers</em>. Cornell University Press.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">65&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Chuckle-Chatter</div>
+          <div class="stat-detail">#66 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Conspicuous chatter, social chuckle</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">5th mammalian entry, 4th species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Mustelidae</div>
+          <div class="stat-detail">3rd entry (trio: 63&ndash;64&ndash;65)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">3rd entry (three consecutive)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Chuckle + chatter</div>
+          <div class="stat-detail">500&ndash;4,000 Hz, social + defensive</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Old-Growth Forest</div>
+          <div class="stat-detail">Canopy, arboreal predator</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Crepuscular, active year-round</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Aquatic Streak</div>
+          <div class="stat-value">BROKEN</div>
+          <div class="stat-detail">Ends at 64. Marten = terrestrial</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">5th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Mustelidae Trio</div>
+          <div class="stat-value">SPS-063/064</div>
+          <div class="stat-detail">Otter &rarr; Mink &rarr; Marten</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Old-Growth Parallel</div>
+          <div class="stat-value">SPS-004</div>
+          <div class="stat-detail">Spotted Owl &mdash; same forest, same threat</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Cavity Chain</div>
+          <div class="stat-value">SPS-054</div>
+          <div class="stat-detail">Pileated Woodpecker &mdash; architect/tenant</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 65 of 360</p>
+  </footer>
+</body>
+</html>

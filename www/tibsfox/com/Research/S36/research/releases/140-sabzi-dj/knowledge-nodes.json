@@ -1,0 +1,87 @@
+{
+  "degree": 140,
+  "artist": "Sabzi (DJ)",
+  "slug": "140-sabzi-dj",
+  "genre": "Hip-Hop/DJ/Live Performance",
+  "energy": 5,
+  "era": "2000s-present. Hip-Hop DJ and live performer. E=5 -- live performance energy. Mass Line Media collective. FOURTH ENTRY for Sabzi spanning 41 degrees (99, 101, 122, 140). Most entries by any figure.",
+  "location": {
+    "origin": "Seattle",
+    "formative": "Seattle hip-hop scene -- Blue Scholars, Common Market, solo production, Mass Line Media. Iranian-American producer/DJ.",
+    "career": "Sabzi (Saba Mohajerjasbi). Four S36 entries: Blue Scholars (99), Common Market (101), production (122), DJ (140). Mass Line Media. The most-entered figure in the engine."
+  },
+  "formed": "2000s",
+  "died": null,
+  "labels": ["Mass Line Media"],
+  "members": [
+    {"name": "Sabzi", "role": "DJ / Live performer", "note": "Saba Mohajerjasbi. Fourth entry in S36 engine (99, 101, 122, 140). 41-degree span -- widest range of any figure. This entry documents the live DJ and performance dimension. Mass Line Media collective. Iranian-American. E=5 live performance energy."}
+  ],
+  "former_members": [],
+  "associated_musicians": [
+    {"name": "Geologic", "role": "Blue Scholars MC (degree 99)", "note": "Prometheus Brown. Filipino-American MC. Blue Scholars duo. Sabzi's first S36 entry."},
+    {"name": "RA Scion", "role": "Common Market MC (degree 101)", "note": "Common Market duo. Jazz-influenced hip-hop. Sabzi's second entry."},
+    {"name": "Vitamin D", "role": "Seattle producer (degree 138)", "note": "Conception Records. E=5. CD producer/DJ. Sabzi and Vitamin D represent different nodes in Seattle's production network."},
+    {"name": "Jake One", "role": "Seattle producer (degree 139)", "note": "G-Unit / Rhymesayers. E=5. National crossover. Three Seattle producers: Sabzi (122/140), Vitamin D (138), Jake One (139)."},
+    {"name": "DJ Riz", "role": "Seattle DJ (degree 136)", "note": "206 Zulu. E=5. Community turntablist. Sabzi's DJ entry connects to the DJ lineage."}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Fourth entry for Sabzi -- most entries by any figure; 41-degree span (99-140); four facets: Blue Scholars (group), Common Market (group), production (solo), DJ (live); the full lifecycle of a hip-hop multi-hyphenate",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/figures/sabzi-four-entries.md",
+      "examples": [
+        "99: Blue Scholars (E=5). Producer/MC duo with Geologic.",
+        "101: Common Market (E=4). Producer/MC duo with RA Scion.",
+        "122: Production (E=4). Solo studio work.",
+        "140: DJ (E=5). Live performance. Mass Line Media."
+      ],
+      "description": "Four entries, 41 degrees. Most appearances. Four facets of one career.",
+      "genealogy": {
+        "ancestors": ["Sabzi production at degree 122.", "Blue Scholars at degree 99."],
+        "relationship": "Sabzi DJ at 140 completes the four-entry arc."
+      }
+    },
+    {
+      "concept": "Mass Line Media -- collective model; beyond traditional labels; events, releases, community; the evolution from Mass Line Records through Mass Line Media",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/labels/mass-line-media.md",
+      "examples": [
+        "Collective model: collaboration, shared resources, community over commerce.",
+        "Event platform: DJ nights, release parties, community gatherings.",
+        "Release platform: DJ mixes, instrumentals, collaborative works.",
+        "Evolution: Mass Line Records (label) to Mass Line Media (collective)."
+      ],
+      "description": "Mass Line Media. Collective model. Events and releases.",
+      "genealogy": {
+        "ancestors": ["206 Zulu (136) as community organization.", "Conception Records (138) as independent label."],
+        "relationship": "Mass Line Media at 140. Collective infrastructure."
+      }
+    },
+    {
+      "concept": "E=5 energy arc -- Sabzi's energy across four entries: E=5 (Blue Scholars, performance), E=4 (Common Market, relaxed), E=4 (production, studio), E=5 (DJ, performance); performance entries at E=5, studio entries at E=4",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/energy/sabzi-energy-arc.md",
+      "examples": [
+        "99: E=5 -- Blue Scholars live performance energy.",
+        "101: E=4 -- Common Market relaxed aesthetic.",
+        "122: E=4 -- solo production, introverted studio work.",
+        "140: E=5 -- DJ live performance energy. Returns to E=5."
+      ],
+      "description": "Sabzi energy arc: 5, 4, 4, 5. Performance high, studio lower.",
+      "genealogy": {
+        "ancestors": ["E=5 DJ tier established at 134-139.", "Sabzi production E=4 at 122."],
+        "relationship": "Sabzi DJ at 140 returns to E=5 performance energy."
+      }
+    }
+  ],
+  "cross_references": [
+    {"degree": 122, "artist": "Sabzi (production)", "relationship": "SAME FIGURE! Production (122, E=4, studio) and DJ (140, E=5, live). Introverted to extroverted. Studio to stage. 18-degree gap."},
+    {"degree": 99, "artist": "Blue Scholars", "relationship": "FIRST ENTRY! Blue Scholars (99, E=5, duo with Geologic). The starting point. 41 degrees to the fourth entry. Performance energy matches."},
+    {"degree": 101, "artist": "Common Market", "relationship": "SECOND ENTRY! Common Market (101, E=4, duo with RA Scion). Jazz-influenced. Two degrees after the first entry."},
+    {"degree": 138, "artist": "Vitamin D", "relationship": "SEATTLE PRODUCERS/DJS! Vitamin D (138, E=5, Conception, local) and Sabzi (140, E=5, Mass Line, collective). Both producer-DJs. Different labels."},
+    {"degree": 139, "artist": "Jake One", "relationship": "PRODUCER PROXIMITY! Jake One (139, E=5, national) immediately before Sabzi DJ (140, E=5, collective). Back-to-back Seattle figures."}
+  ]
+}

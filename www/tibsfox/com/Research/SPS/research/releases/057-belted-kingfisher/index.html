@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 57&deg; &mdash; Belted Kingfisher &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Rattle element card */
+    .rattle-card {
+      background: linear-gradient(135deg, #01579B 0%, #0277BD 100%);
+      border: 2px solid #014166;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E1F5FE;
+    }
+    .rattle-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B3E5FC;
+    }
+    .rattle-card p {
+      color: #E1F5FE;
+    }
+    .rattle-card strong {
+      color: #81D4FA;
+    }
+
+    /* Alcedinidae enters card */
+    .alcedinidae-card {
+      background: linear-gradient(135deg, #00695C 0%, #00897B 100%);
+      border: 2px solid #004D40;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E0F2F1;
+    }
+    .alcedinidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B2DFDB;
+    }
+    .alcedinidae-card p {
+      color: #E0F2F1;
+    }
+    .alcedinidae-card strong {
+      color: #80CBC4;
+    }
+
+    /* Reversed dimorphism card */
+    .dimorphism-card {
+      background: linear-gradient(135deg, #BF360C 0%, #D84315 100%);
+      border: 2px solid #8D2B0B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .dimorphism-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCCBC;
+    }
+    .dimorphism-card p {
+      color: #FBE9E7;
+    }
+    .dimorphism-card strong {
+      color: #FFAB91;
+    }
+
+    /* Stream specialist card */
+    .stream-card {
+      background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .stream-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .stream-card p {
+      color: #E3F2FD;
+    }
+    .stream-card strong {
+      color: #90CAF9;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Burrow nesting card */
+    .burrow-card {
+      background: linear-gradient(135deg, #4E342E 0%, #5D4037 100%);
+      border: 2px solid #3E2723;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EFEBE9;
+    }
+    .burrow-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D7CCC8;
+    }
+    .burrow-card p {
+      color: #EFEBE9;
+    }
+    .burrow-card strong {
+      color: #BCAAA4;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.rattle { background: #01579B; }
+    .theory-icon.alcedinidae { background: #00695C; }
+    .theory-icon.dimorphism { background: #BF360C; }
+    .theory-icon.stream { background: #1565C0; }
+    .theory-icon.burrow { background: #4E342E; }
+    .theory-icon.plunge { background: #0D47A1; }
+    .theory-icon.solitary { background: #37474F; }
+    .theory-icon.halcyon { background: #6A1B9A; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">57&deg;</div>
+      <div class="release-title-block">
+        <h2>Belted Kingfisher</h2>
+        <div class="scientific">Megaceryle alcyon</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loud mechanical rattling call &mdash; rapid, harsh, percussive chatter along cold waterways &mdash; the stream rattle, ALCEDINIDAE ENTERS ENGINE as 24th family and 7th order (Coraciiformes), first kingfisher, only kingfisher in PNW, reversed sexual dimorphism (female more colorful), plunge-diving hunter, burrow nester, stream health indicator, E=3, cold stream / river / lake / estuary, thirteenth consecutive CSV substitution
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Pacific Giant Salamander</strong> (<em>Dicamptodon tenebrosus</em>) at degree 57. Because the SPS Part B engine is birds-and-mammals only, Belted Kingfisher replaces it. The substitution preserves the original&rsquo;s <strong>cold stream habitat</strong> and <strong>E=3 energy</strong>. The Pacific Giant Salamander is one of the few salamanders that vocalizes &mdash; a low bark or yelp (E=3). The Belted Kingfisher patrols the airspace above the same cold streams with a loud mechanical rattle (E=3). Both are cold-stream specialists and year-round residents. This is the <strong>thirteenth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45 through Pacific Giant Salamander at 57) &mdash; the engine continues deep in the amphibian belt.</p>
+        </div>
+
+        <!-- Alcedinidae Enters Card -->
+        <div class="alcedinidae-card">
+          <h3>ALCEDINIDAE ENTERS ENGINE &mdash; 24th Family, 7th Order</h3>
+          <p>The Belted Kingfisher brings <strong>Alcedinidae</strong> (kingfishers) into the engine as the <strong>24th family</strong> and the first representative of <strong>order Coraciiformes</strong> &mdash; the engine&rsquo;s <strong>7th order</strong>. <strong>Second consecutive new order</strong> &mdash; Columbiformes at degree 56, Coraciiformes at degree 57. Back-to-back new-order entries are unprecedented. After a 21-degree gap (35&ndash;55), two new orders in two degrees. The Belted Kingfisher is the <strong>only kingfisher in the Pacific Northwest</strong> &mdash; sole representative of its family, order, and ecological guild. <strong>Passeriformes interrupted for the third time in four degrees</strong> (54 Piciformes, 55 Passeriformes, 56 Columbiformes, 57 Coraciiformes). The Passeriformes lock is dissolving.</p>
+        </div>
+
+        <!-- Rattle Element Card -->
+        <div class="rattle-card">
+          <h3>The 58th Acoustic Element: The Stream Rattle</h3>
+          <p>A <strong>loud, mechanical, dry rattling call</strong> &mdash; a rapid burst of harsh, staccato notes at approximately 8&ndash;15 notes per second, creating a continuous rolling chatter. Frequency ~2,000&ndash;8,000 Hz with peak energy at 3,000&ndash;5,000 Hz. Named &ldquo;the stream rattle&rdquo; for three resonances: (1) the <strong>habitat</strong> &mdash; the rattle maps waterways, always heard near streams, rivers, lakes, or estuaries; (2) the <strong>acoustic novelty</strong> &mdash; neither song nor call nor drum nor coo, but a <strong>percussive vocal burst</strong>, a new vocalization category; (3) the <strong>mechanical quality</strong> &mdash; sounds like a fishing reel, a heavy zipper, pebbles in a tin can. The most machine-like sound any bird in the engine produces.</p>
+          <p>The stream rattle communicates through <strong>percussive repetition</strong> rather than melody, tonal quality, or resonance. The antithesis of the forest coo (degree 56): where the pigeon murmurs softly in the bass register, the kingfisher clatters harshly in the mid-treble.</p>
+        </div>
+
+        <!-- Reversed Dimorphism Card -->
+        <div class="dimorphism-card">
+          <h3>Reversed Sexual Dimorphism: The Female Is More Colorful</h3>
+          <p>One of the <strong>few North American bird species where the female is more ornate than the male</strong>. Both sexes have blue-gray plumage, shaggy crest, white collar, and blue breast band. But the female adds a broad <strong>rusty-rufous belly band</strong> and rufous flanks &mdash; making her the more colorful bird. This reversal may reflect <strong>female-female competition</strong> for prime nesting banks: females compete aggressively for the best burrow sites near productive fishing water. The rusty band functions as a status signal in these contests. In most of the engine&rsquo;s 58 entries, the male is the more ornate sex (when dimorphism exists). The Belted Kingfisher inverts the pattern.</p>
+        </div>
+
+        <!-- Stream Specialist Card -->
+        <div class="stream-card">
+          <h3>Two Stream Specialists: Kingfisher and Dipper</h3>
+          <p>Degrees 52 and 57 give the engine <strong>two stream specialists</strong> that occupy the same cold mountain streams but exploit different trophic levels. The <strong>American Dipper</strong> (degree 52, Cinclidae, E=3) walks underwater on the stream bottom, feeding on EPT macroinvertebrates. The <strong>Belted Kingfisher</strong> (degree 57, Alcedinidae, E=3) plunge-dives from above, feeding on fish. The dipper monitors the <strong>invertebrate base</strong>; the kingfisher monitors the <strong>fish community</strong>. Both are stream health indicators. Both maintain linear stream territories. Both are E=3. Finding both on the same stream confirms the <strong>entire aquatic food web is functional</strong>.</p>
+        </div>
+
+        <!-- Burrow Nesting Card -->
+        <div class="burrow-card">
+          <h3>The Burrow Nester</h3>
+          <p>The Belted Kingfisher nests in <strong>burrows excavated in earthen banks</strong> &mdash; highly unusual among North American birds. Both sexes dig a tunnel <strong>1&ndash;2.5 meters long</strong> into vertical stream banks, road cuts, or gravel pits using their heavy bills and fused feet. The clutch of <strong>5&ndash;8 eggs</strong> is laid in a bare terminal chamber. Compare the Band-tailed Pigeon (degree 56) with its single egg: the kingfisher&rsquo;s high fecundity vs. the pigeon&rsquo;s conservative strategy. The dependence on <strong>exposed earthen banks</strong> creates a specific conservation vulnerability: bank stabilization and stream channelization destroy nesting habitat.</p>
+        </div>
+
+        <h2>The Great Halcyon Kingfisher</h2>
+        <p><em>Megaceryle alcyon</em> &mdash; from Ancient Greek <em>megas</em> (&ldquo;great, large&rdquo;) + <em>ceryle</em> (&ldquo;kingfisher&rdquo;) + <em>alcyon</em> (from Greek <em>alkuon</em>, the mythological kingfisher associated with calm seas). Full translation: <strong>&ldquo;Great halcyon kingfisher.&rdquo;</strong> Named by Linnaeus in 1758. In Greek myth, Alcyone was transformed into a kingfisher after her husband Ceyx drowned; the gods stilled the seas during the kingfisher&rsquo;s nesting &mdash; the <strong>&ldquo;halcyon days&rdquo;</strong> of calm and peace. The English phrase derives from this bird. Compare the Band-tailed Pigeon&rsquo;s <em>Patagioenas fasciata</em> (&ldquo;banded clattering-pigeon&rdquo;): the pigeon is named for its body and its clatter; the kingfisher is named for a myth about grief and transformation.</p>
+
+        <h2>The Sound: Mechanical Rattling Chatter</h2>
+        <p><strong>Primary rattle:</strong> A loud, harsh, rapid burst of staccato notes &mdash; <strong>8&ndash;15 notes per second</strong> fused into a continuous rolling chatter lasting 1&ndash;3 seconds (up to 5+ seconds in territorial encounters). Frequency ~2,000&ndash;8,000 Hz, peak energy 3,000&ndash;5,000 Hz. Quality: <strong>dry, harsh, mechanical, percussive</strong>. Often compared to a fishing reel being cranked, a heavy zipper, or pebbles rattling in a can. Accompanies <strong>every significant flight</strong> &mdash; the bird is almost never silent in motion.</p>
+        <p><strong>Vocalizations are innate</strong> &mdash; no cultural learning, no geographic dialects. Like the Band-tailed Pigeon&rsquo;s coo (degree 56), the rattle is genetically determined. But where the coo is soft, resonant, and warm, the rattle is loud, harsh, and cold. Two consecutive non-passerine voices, maximally different in character.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary rattle</td><td>2,000&ndash;8,000 Hz (peak 3,000&ndash;5,000)</td><td>~1&ndash;3 s</td><td>Territory, alarm, flight</td></tr>
+            <tr><td>Alarm rattle</td><td>2,000&ndash;8,000 Hz</td><td>~3&ndash;5+ s</td><td>Territorial conflict, disturbance</td></tr>
+            <tr><td>Screech</td><td>3,000&ndash;6,000 Hz</td><td>~0.5&ndash;1 s</td><td>Aggression</td></tr>
+            <tr><td>Quiet chatter</td><td>2,000&ndash;5,000 Hz</td><td>~0.5&ndash;1 s</td><td>Pair contact at nest</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Plumage: Blue Dagger With a Shaggy Crest</h2>
+        <p><strong>Blue-gray above</strong> &mdash; slate-blue to powder-blue head, back, wings, and tail. White collar. <strong>Blue-gray breast band</strong> (the &ldquo;belt&rdquo;). White underparts. <strong>Massive dagger-shaped bill</strong> &mdash; proportionally one of the largest of any North American bird. <strong>Shaggy, double-pointed crest</strong> &mdash; diagnostic at any distance, giving the bird a disheveled, punk silhouette. Small, weak, syndactyl (partially fused) feet adapted for burrow excavation. Length 28&ndash;35 cm, weight <strong>140&ndash;170 g</strong>.</p>
+        <p><strong>Female:</strong> All the above PLUS a broad <strong>rusty-rufous belly band</strong> and rufous flanks. The female is the more colorful sex &mdash; reversed sexual dimorphism.</p>
+
+        <h2>Hunting: The Plunge-Diver</h2>
+        <p><strong>Perch &rarr; scan &rarr; dive &rarr; capture &rarr; beat &rarr; swallow.</strong> The kingfisher sits motionless on an overhanging perch, scanning clear water below. When prey is located, it folds wings and plunges headfirst at up to <strong>40 km/h</strong>, seizing fish with its massive bill. Success rate approximately <strong>40&ndash;60%</strong>. Fish are beaten against the perch to kill, then swallowed whole, headfirst. When no perch is available, the kingfisher <strong>hovers</strong> on rapidly beating wings &mdash; energetically costly but effective. Diet: small fish (minnows, sticklebacks, sculpin, juvenile salmonids), plus crayfish, aquatic insects, and tadpoles.</p>
+
+        <h2>Habitat: Every Waterway in the PNW</h2>
+        <p>Found on <strong>virtually every type of waterway</strong> in the Pacific Northwest: mountain streams, lowland rivers, lakes, ponds, estuaries, tidal channels, and coastal waters. Requirements: <strong>clear water</strong> (for visual hunting), <strong>fish</strong> (for prey), <strong>perches</strong> (for hunting), <strong>earthen banks</strong> (for nesting). Year-round resident of western Washington and Oregon with some altitudinal movement in winter. Present on the same mountain streams as the American Dipper (degree 52) &mdash; the kingfisher above, the dipper below.</p>
+
+        <h2>Family Tracker After Degree 57</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td><strong>Alcedinidae</strong></td><td><strong>57</strong></td><td><strong>1 (NEW &mdash; 24th family, 7th order)</strong></td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-four families across 58 entries. <strong>Alcedinidae is the 24th family</strong> &mdash; the first kingfisher. <strong>Coraciiformes is the 7th order</strong> &mdash; second consecutive new order (Columbiformes at 56, Coraciiformes at 57). 49 of 58 entries (84.5%) are Passeriformes, but non-passerine entries are accelerating: three non-passerine orders in four degrees (54&ndash;57).</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon rattle">R</div>
+            <div class="theory-content">
+              <h4>The Stream Rattle <span class="theory-level foundational">foundational</span></h4>
+              <p>The 58th acoustic element. Loud, mechanical, dry rattling at 3,000&ndash;5,000 Hz peak &mdash; a percussive vocal burst, a new vocalization category. Neither song nor call nor drum nor coo. The most machine-like sound in the engine. Maps waterways acoustically. Music-theory parallel: the snare drum roll &mdash; a rapid, sustained, percussive burst that commands attention not through melody or harmony but through pure rhythmic energy.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon alcedinidae">A</div>
+            <div class="theory-content">
+              <h4>Alcedinidae Enters &mdash; 24th Family, 7th Order <span class="theory-level foundational">foundational</span></h4>
+              <p>First kingfisher in 57 degrees. New order Coraciiformes. Second consecutive new order (56 Columbiformes, 57 Coraciiformes). Only kingfisher in the PNW. Brings plunge-diving, burrow nesting, reversed dimorphism. Music-theory parallel: the guest soloist &mdash; a performer from an entirely different tradition who enters the ensemble for one movement and changes the piece&rsquo;s character.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dimorphism">D</div>
+            <div class="theory-content">
+              <h4>Reversed Sexual Dimorphism <span class="theory-level foundational">foundational</span></h4>
+              <p>Female more colorful than male &mdash; rusty belly band present only in female. One of few North American birds where the female is the more ornate sex. Reflects female-female competition for prime nesting territories. Inverts the expected pattern. Music-theory parallel: the inversion &mdash; a theme played upside down, maintaining its identity while reversing its direction.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon stream">S</div>
+            <div class="theory-content">
+              <h4>Stream Health Indicator &mdash; The Fish Trophic Level <span class="theory-level foundational">foundational</span></h4>
+              <p>Kingfisher presence indicates clear water + fish + stable banks = functional aquatic ecosystem. Pairs with the American Dipper (degree 52) as the second stream health indicator. Dipper monitors invertebrate base; kingfisher monitors fish community. Together they bracket the food web. Music-theory parallel: the counterpoint &mdash; two independent voices moving in the same musical space, each valid alone, richer together.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plunge">P</div>
+            <div class="theory-content">
+              <h4>The Plunge-Diver <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Hunts by plunging headfirst into water at up to 40 km/h. Optical adaptations compensate for refraction at the air-water interface. Heavy bill optimized for piercing surface tension. Success rate ~40&ndash;60%. A hunting strategy unique in the engine. Music-theory parallel: the sforzando &mdash; a sudden, sharp, forceful accent in the middle of a phrase.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon burrow">B</div>
+            <div class="theory-content">
+              <h4>Burrow Nesting <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Excavates 1&ndash;2.5-meter tunnels in earthen banks using bill and fused feet. Highly unusual among North American birds. Clutch of 5&ndash;8 eggs vs. the pigeon&rsquo;s single egg at degree 56 &mdash; maximum reproductive contrast. Bank dependence creates conservation vulnerability. Music-theory parallel: the ground bass &mdash; a recurring bass pattern dug into the foundation of the piece, supporting everything above.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon solitary">T</div>
+            <div class="theory-content">
+              <h4>The Solitary Patrol <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fundamentally solitary. Linear stream territory of 0.5&ndash;2 km. Males and females often maintain separate winter territories. Never seen in flocks. The rattle accompanies every flight, threading the day together acoustically. Music-theory parallel: the solo cadenza &mdash; one instrument alone, filling all the space, answerable to no one.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon halcyon">H</div>
+            <div class="theory-content">
+              <h4>The Halcyon Myth <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Named for Alcyone of Greek myth, transformed into a kingfisher after her husband drowned. The gods stilled the seas for the kingfisher&rsquo;s nesting &mdash; the &ldquo;halcyon days.&rdquo; The phrase lives in English; its avian origin is forgotten. The species carries 3,000 years of mythology in its name. Music-theory parallel: the leitmotif &mdash; a recurring theme that carries meaning beyond its notes, connecting the present to the ancient.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-056: Band-tailed Pigeon</strong>
+            <p>CONSECUTIVE NON-PASSERINE DEGREES. The forest coo (degree 56, Columbiformes, E=1, 400&ndash;600 Hz, deep/soft/resonant) yields to the stream rattle (degree 57, Coraciiformes, E=3, 3,000&ndash;5,000 Hz, harsh/loud/mechanical). Back-to-back new orders. Every acoustic dimension reversed: frequency (bass to mid-treble), energy (E=1 to E=3), quality (warm to harsh), habitat (forest canopy to waterway).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-052: American Dipper</strong>
+            <p>TWO STREAM SPECIALISTS. The dipper (E=3, Cinclidae, walks underwater, feeds on invertebrates) and the kingfisher (E=3, Alcedinidae, plunge-dives from above, feeds on fish). Same streams, different trophic levels. Both E=3, both linear territories, both stream health indicators. Invertebrate monitor + fish monitor = complete food web assessment.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-053: Steller&rsquo;s Jay</strong>
+            <p>TWO HARSH ALARM VOICES. The jay&rsquo;s shack-shack-shack (degree 53, discrete separated notes, forest) and the kingfisher&rsquo;s rattle (degree 57, continuous fused burst, waterway). Both loud, both harsh, both non-melodic. The jay&rsquo;s alarm is cognitive and mimetic; the kingfisher&rsquo;s rattle is mechanical and stereotyped.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>TWO WATERSIDE HUNTERS. The heron (degree 0, Ardeidae, still-hunting in shallows) and the kingfisher (degree 57, Alcedinidae, plunge-diving from perches). Both fish-eating. Both associated with PNW waterways. But the heron wades; the kingfisher dives. The heron is patient stillness; the kingfisher is explosive action.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-054: Red-breasted Sapsucker</strong>
+            <p>TWO EXCAVATORS. The sapsucker drills sap wells in living bark. The kingfisher digs nesting burrows in earthen banks. Both modify their substrate. Both create resources used by other species (sap wells attract hummingbirds; abandoned burrows shelter swallows).</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Belted Kingfisher documented on virtually every waterway in western Washington and Oregon. Year-round resident from mountain streams to tidal estuaries. The only kingfisher in the PNW. Linear stream territories. Cold-stream specialist and fish-community indicator.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Aquatic ecosystem indicator species. Plunge-diving piscivore. Salmonid ecology connection (predator of juvenile coho and steelhead). Burrow-nesting vulnerability to bank stabilization. Reversed sexual dimorphism. Halcyon mythology.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Belted Kingfisher (<em>Megaceryle alcyon</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Belted Kingfisher. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Belted Kingfisher.</li>
+          <li>National Geographic &mdash; Belted Kingfisher.</li>
+          <li>Wikipedia &mdash; &ldquo;Belted kingfisher.&rdquo;</li>
+          <li>Wikipedia &mdash; &ldquo;Alcedinidae.&rdquo;</li>
+          <li>Audubon &mdash; Belted Kingfisher Field Guide.</li>
+          <li>Hamas, M. J. &mdash; Belted Kingfisher (<em>Megaceryle alcyon</em>) in Birds of the World.</li>
+          <li>Sibley, D. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Kelly, J. F., Bridge, E. S., and Hamas, M. J. &mdash; Belted Kingfisher ecology and life history.</li>
+          <li>Wikipedia &mdash; &ldquo;Alcyone (mythology).&rdquo; Greek myth of Alcyone and the halcyon days.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">57&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Stream Rattle</div>
+          <div class="stat-detail">#58 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Moderate: loud mechanical rattle</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Alcedinidae</div>
+          <div class="stat-detail">NEW &mdash; 24th family. First kingfisher.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Megaceryle</em></div>
+          <div class="stat-detail">NEW genus &mdash; &ldquo;great kingfisher&rdquo;</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Coraciiformes</div>
+          <div class="stat-detail">NEW &mdash; 7th order. 2nd consecutive new order.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Mechanical rattle</div>
+          <div class="stat-detail">~3,000&ndash;5,000 Hz peak energy</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Cold stream</div>
+          <div class="stat-detail">Rivers, lakes, estuaries</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Resident throughout PNW</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sexual dimorphism</div>
+          <div class="stat-value">Reversed</div>
+          <div class="stat-detail">Female more colorful (rusty band)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">Yes</div>
+          <div class="stat-detail">Replaces Pacific Giant Salamander</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Stream Pair</div>
+          <div class="stat-value">SPS-052</div>
+          <div class="stat-detail">American Dipper &mdash; stream specialist</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Previous Degree</div>
+          <div class="stat-value">SPS-056</div>
+          <div class="stat-detail">Band-tailed Pigeon &mdash; consecutive new order</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Waterside Pair</div>
+          <div class="stat-value">SPS-000</div>
+          <div class="stat-detail">Great Blue Heron &mdash; waterside hunter</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 57 of 360</p>
+  </footer>
+</body>
+</html>
