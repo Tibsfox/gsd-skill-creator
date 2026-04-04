@@ -21,7 +21,7 @@ import argparse
 import psycopg2
 from sentence_transformers import SentenceTransformer
 
-DB_DSN = "host=localhost dbname=tibsfox user=postgres password=foxyuw5,&%cM#(C3"
+from db_config import DB_DSN
 MODEL = "all-MiniLM-L6-v2"
 BATCH = 64
 

@@ -21,7 +21,7 @@ import psycopg2
 from bs4 import BeautifulSoup
 import networkx as nx
 
-DB_DSN = "host=localhost dbname=tibsfox user=postgres password=foxyuw5,&%cM#(C3"
+from db_config import DB_DSN
 BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                     "www", "tibsfox", "com", "Research")
 

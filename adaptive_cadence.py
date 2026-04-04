@@ -23,7 +23,7 @@ from datetime import datetime, timezone, timedelta
 
 import psycopg2
 
-DB_DSN = "host=localhost dbname=tibsfox user=postgres password=foxyuw5,&%cM#(C3"
+from db_config import DB_DSN
 STATE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.cadence-state.json')
 
 # Cadence parameters

@@ -22,7 +22,7 @@ from glob import glob
 import psycopg2
 from sentence_transformers import SentenceTransformer
 
-DB_DSN = "host=localhost dbname=tibsfox user=postgres password=foxyuw5,&%cM#(C3"
+from db_config import DB_DSN
 MODEL = "all-MiniLM-L6-v2"
 BATCH = 64
 BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -222,10 +222,41 @@ def main():
             conn.commit()
             print(f"Embedded {count} previously unembedded pages")
 
+    # Refresh concepts (extract + embed new concepts from new pages)
+    try:
+        from extract_concepts import extract_and_store_concepts
+        print("Extracting concepts from new pages...")
+        concept_count = extract_and_store_concepts(cur)
+        conn.commit()
+        if concept_count:
+            print(f"  {concept_count} new concept refs added")
+            # Embed any new concepts
+            from embed_concepts import embed_new_concepts
+            embedded_concepts = embed_new_concepts(cur, model)
+            conn.commit()
+            if embedded_concepts:
+                print(f"  {embedded_concepts} concepts embedded")
+    except ImportError:
+        pass  # concept extraction not available, skip
+    except Exception as e:
+        print(f"  Concept extraction skipped: {e}")
+        conn.rollback()
+        conn.autocommit = False
+
     # Refresh graph
     print("Refreshing graph metrics...")
     refresh_graph_metrics(cur)
     conn.commit()
+
+    # Sync to ChromaDB backup if available
+    try:
+        from chroma_backup import sync_to_chroma
+        print("Syncing to ChromaDB backup...")
+        sync_to_chroma(cur)
+    except ImportError:
+        pass  # ChromaDB not configured, skip
+    except Exception as e:
+        print(f"  ChromaDB sync skipped: {e}")
 
     elapsed = time.time() - t0
     cur.execute("SELECT count(*) FROM artemis.research_pages")

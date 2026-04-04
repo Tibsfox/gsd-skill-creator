@@ -18,7 +18,7 @@ from collections import Counter, defaultdict
 
 import psycopg2
 
-DB_DSN = "host=localhost dbname=tibsfox user=postgres password=foxyuw5,&%cM#(C3"
+from db_config import DB_DSN
 
 # ─── Concept Extraction Patterns ──────────────────────────────────────────────
 # Each pattern: (category, compiled_regex)
