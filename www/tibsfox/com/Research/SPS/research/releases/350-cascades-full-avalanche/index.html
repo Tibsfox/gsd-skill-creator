@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 350&deg; &mdash; Cascades Full Avalanche Sequence &mdash; E=10 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #263238, #37474F, #455A64); color: #CFD8DC; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 24px rgba(38,50,56,0.8); }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #263238; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .avalanche-banner { background: linear-gradient(135deg, #263238, #37474F, #1C313A); border: 2px solid #78909C; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .avalanche-banner h3 { margin: 0 0 0.75rem; color: #B0BEC5; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .avalanche-banner p { color: #ECEFF1; margin: 0.4rem 0; line-height: 1.7; }
+    .avalanche-banner strong { color: #B0BEC5; }
+    .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1.5rem 0; }
+    @media (max-width: 700px) { .phase-grid { grid-template-columns: repeat(2, 1fr); } }
+    .phase-card { border-radius: 6px; padding: 0.85rem 0.75rem; text-align: center; }
+    .phase-1 { background: #ECEFF1; border: 2px solid #455A64; }
+    .phase-2 { background: #CFD8DC; border: 2px solid #37474F; }
+    .phase-3 { background: #B0BEC5; border: 2px solid #263238; }
+    .phase-4 { background: #90A4AE; border: 2px solid #1C313A; }
+    .phase-card .phase-num { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; font-weight: 700; }
+    .phase-1 .phase-num { color: #455A64; }
+    .phase-2 .phase-num { color: #37474F; }
+    .phase-3 .phase-num { color: #263238; }
+    .phase-4 .phase-num { color: #1C313A; }
+    .phase-card .phase-name { font-size: 0.88rem; font-weight: 700; font-family: system-ui, sans-serif; margin: 0.3rem 0 0.2rem; }
+    .phase-1 .phase-name { color: #263238; }
+    .phase-2 .phase-name { color: #1C313A; }
+    .phase-3 .phase-name { color: #1C313A; }
+    .phase-4 .phase-name { color: #1C313A; }
+    .phase-card .phase-desc { font-size: 0.75rem; color: #546E7A; font-family: system-ui, sans-serif; line-height: 1.4; }
+    .phase-2 .phase-desc, .phase-3 .phase-desc, .phase-4 .phase-desc { color: #37474F; }
+    .acoustic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .acoustic-card { background: white; border: 1px solid #CFD8DC; border-radius: 6px; padding: 0.85rem 1rem; }
+    .acoustic-card strong { display: block; font-size: 1.0rem; font-family: 'Georgia', serif; color: #263238; margin-bottom: 0.2rem; }
+    .acoustic-card span { font-size: 0.8rem; color: #546E7A; font-family: system-ui, sans-serif; display: block; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #263238, #1C313A, #263238); border: 3px solid #78909C; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #B0BEC5; }
+    .e20-display .e20-label { color: #ECEFF1; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #B0BEC5; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #263238; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    blockquote { border-left: 3px solid #455A64; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #ECEFF1; font-style: italic; color: #263238; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+  </header>
+  <div class="page-container">
+    <a href="../" class="back-link" style="color: #263238;">&larr; All Releases</a>
+
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+      <div class="degree-badge">350&deg;</div>
+      <div>
+        <h2 style="margin: 0; color: #263238;">Cascades Full Avalanche Sequence</h2>
+        <div style="margin-top: 0.3rem; font-family: system-ui, sans-serif; font-size: 0.88rem; color: #546E7A;">
+          <strong style="color: #263238;">E = 10 &mdash; MULTI-SLOPE RELEASE</strong> &nbsp;&bull;&nbsp; Alpine &nbsp;&bull;&nbsp; Rare Winter &nbsp;&bull;&nbsp; Geophysics
+        </div>
+      </div>
+    </div>
+
+    <div class="avalanche-banner">
+      <h3>THE CASCADES GEOPHYSICAL MAXIMUM &mdash; MULTI-SLOPE RELEASE</h3>
+      <p>
+        <strong>Multiple avalanche events across multiple terrain aspects.</strong> Occurring in sequence or near-simultaneously during rare winter conditions. The full four-phase acoustic sequence: fracture crack &rarr; mass in motion &rarr; runout impact &rarr; alpine echo. Multiple releases at different phases simultaneously. The acoustic complexity of a landscape in geological motion. <strong>E=10.</strong>
+      </p>
+      <p>Pairs with <strong>TAD Peak Intensity</strong> (S36 350, E=10) &mdash; sustained maximum physical force from multiple simultaneous sources. <strong>E=20.</strong></p>
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <h2>The Four Phases</h2>
+        <div class="phase-grid">
+          <div class="phase-card phase-1">
+            <div class="phase-num">Phase 1</div>
+            <div class="phase-name">Fracture Crack</div>
+            <div class="phase-desc">Infrasound impulse. Below 50 Hz. Felt as much as heard. Milliseconds. The sound of a state change.</div>
+          </div>
+          <div class="phase-card phase-2">
+            <div class="phase-num">Phase 2</div>
+            <div class="phase-name">Mass in Motion</div>
+            <div class="phase-desc">Broadband roar + sub-bass seismic vibration. 30 sec to several minutes. Air pressure wave precedes mass.</div>
+          </div>
+          <div class="phase-card phase-3">
+            <div class="phase-num">Phase 3</div>
+            <div class="phase-name">Runout Impact</div>
+            <div class="phase-desc">High-amplitude pulse at stopping zone. Debris settling. Then: sudden near-silence. The silence is an acoustic event.</div>
+          </div>
+          <div class="phase-card phase-4">
+            <div class="phase-num">Phase 4</div>
+            <div class="phase-name">Echo Decay</div>
+            <div class="phase-desc">Alpine bowl geometry. Multiple echo returns. Ridge reflection across valleys. The terrain map in acoustic form.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Acoustic Profile</h2>
+        <div class="acoustic-grid">
+          <div class="acoustic-card">
+            <strong>Below 50 Hz</strong>
+            <span>Fracture crack infrasound. Felt as vibration at chest level before the audible components arrive. Geological-scale impulse.</span>
+          </div>
+          <div class="acoustic-card">
+            <strong>Broadband roar</strong>
+            <span>Mass in motion: dry powder produces higher-pitched continuous roar; wet dense-flow produces lower-pitched irregular impacts.</span>
+          </div>
+          <div class="acoustic-card">
+            <strong>Seismic</strong>
+            <span>Sub-bass ground vibration from major avalanches propagates as seismic energy. Recorded on regional seismographs. The geological scale.</span>
+          </div>
+          <div class="acoustic-card">
+            <strong>Bowl echo</strong>
+            <span>Glacially carved cirques reflect and concentrate. Multiple echo returns per event, diminishing amplitude. The terrain made audible.</span>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Multi-Slope Event</h2>
+        <p>A single avalanche is common in the Cascades &mdash; the Washington Avalanche Center documents hundreds per season. A multi-slope release event is rare: conditions that produce simultaneous or near-simultaneous releases across multiple aspects (widespread weak layer failure, simultaneous storm loading, or sympathetic triggering by a large initial release) occur a handful of times per decade per area.</p>
+        <p>The multi-slope event is qualitatively different from the single-slope event. Multiple releases at different phases simultaneously: Phase 2 of one slide while another is in Phase 1, while a third is in Phase 4. The acoustic environment is not a single avalanche but the simultaneous and sequential complexity of a landscape in motion.</p>
+
+        <blockquote>&ldquo;The silence after the runout is loud. The sudden cessation of the broadband roar leaves the alpine bowl&rsquo;s ambient sounds to fill the space. The contrast makes the quiet extraordinary.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">Physical Force Maximum</div>
+          <div class="e20-sub">Cascades Full Avalanche E=10 + TAD Peak Intensity E=10 = E=20<br>MAXIMUM PHYSICAL FORCE FROM MULTIPLE SIMULTANEOUS SOURCES &mdash; GEOLOGICAL AND SONIC</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>S36-350: TAD Peak Intensity</strong>
+            <p>E=10 + E=10 = E=20. TAD = wall of sound from multiple simultaneous sonic sources. Cascades avalanche = wall of force from multiple simultaneous geological sources.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-346: Cascades Full Storm</strong>
+            <p>The storm creates the loading conditions; the avalanche is the release. Storm = meteorological maximum. Avalanche sequence = geophysical consequence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-335: Hurricane Ridge Wind</strong>
+            <p>Both alpine maximum events. Ridge wind = continuous atmospheric force. Avalanche = episodic geological release. Different timescales of maximum.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <div class="stat-card" style="background: linear-gradient(135deg, #263238, #37474F); border: 2px solid #78909C;">
+          <div class="stat-label" style="color:#B0BEC5;">Energy</div>
+          <div class="stat-value" style="color:#B0BEC5; font-size: 1.4rem;">E = 10</div>
+          <div class="stat-detail" style="color:#CFD8DC;">Multi-Slope Release</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound type</div>
+          <div class="stat-value">Multi-slope</div>
+          <div class="stat-detail">Multiple aspects, rare conditions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Alpine</div>
+          <div class="stat-detail">Cascade Range high alpine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Rare Winter</div>
+          <div class="stat-detail">Handful of times per decade</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Fracture freq.</div>
+          <div class="stat-value">&lt;50 Hz</div>
+          <div class="stat-detail">Infrasound, felt before heard</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Phases</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Crack + motion + impact + echo</div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #263238, #1C313A); border: 2px solid #78909C;">
+          <div class="stat-label" style="color:#B0BEC5;">Paired Energy</div>
+          <div class="stat-value" style="color:#B0BEC5;">S36: E=10 (TAD)</div>
+          <div class="stat-value" style="color:#B0BEC5; margin-top: 0.3rem;">SPS: E=10 (this)</div>
+          <div class="stat-value" style="color:white; font-size: 1.2rem; margin-top: 0.4rem;">Combined: E=20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
