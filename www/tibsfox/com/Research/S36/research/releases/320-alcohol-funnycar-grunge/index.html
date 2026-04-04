@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 320&deg; &mdash; Alcohol Funnycar &mdash; E=7 &mdash; Grunge/Punk &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #CE93D8; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4A148C; font-family: system-ui, sans-serif; border-bottom: 1px solid #F3E5F5; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F5F5F5; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: #4A148C; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #F3E5F5; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #6A1B9A; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #7B1FA2; color: #F3E5F5; border: 1px solid #9C27B0; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #616161; color: #F5F5F5; border: 1px solid #757575; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CE93D8; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CE93D8; border-left: 4px solid #6A1B9A; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #4A148C; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #F3E5F5; color: #4A148C; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F5F5F5; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #6A1B9A; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #6A1B9A; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+    .entry-banner { background: linear-gradient(135deg, #4A148C, #6A1B9A); border: 2px solid #CE93D8; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #F3E5F5; }
+    .entry-banner strong { color: #FFD700; }
+    .spectrum-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1.5rem 0; }
+    .spectrum-cell { padding: 0.75rem 0.5rem; border-radius: 4px; text-align: center; font-family: system-ui, sans-serif; font-size: 0.78rem; }
+    .spectrum-cell.metal { background: #BF360C; color: #FFE0B2; }
+    .spectrum-cell.commercial { background: #1A237E; color: #C5CAE9; }
+    .spectrum-cell.subpop { background: #1B5E20; color: #C8E6C9; }
+    .spectrum-cell.underground { background: #4A148C; color: #F3E5F5; border: 2px solid #CE93D8; }
+    .spectrum-label { font-weight: 700; font-size: 0.85rem; }
+    .spectrum-name { font-size: 0.7rem; margin-top: 0.2rem; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: #6A1B9A;">Seattle 360</a> &rsaquo; <a href="../" style="color: #6A1B9A;">Releases</a> &rsaquo; <span>320 &mdash; Alcohol Funnycar (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">320&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #4A148C;">Alcohol Funnycar</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Grunge / Punk</span>
+          <span class="label-badge">Empty Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="entry-banner">
+          <strong>FIRST APPEARANCE &mdash; THE PUNK END OF GRUNGE.</strong> Alcohol Funnycar represents the underground punk wing of Seattle grunge: Empty Records, faster tempos, rawer production, DIY ethos. Dave Dederer (guitar) &mdash; the pre-PUSA career. E=7 from velocity: the fourth mode of E=7 in the post-summit cooldown. Pairs with Raven Complex Vocalizing (SPS 320) &mdash; FIRST CORVIDAE in the engine.
+        </div>
+
+        <h2>The Grunge/Punk Spectrum</h2>
+        <div class="spectrum-grid">
+          <div class="spectrum-cell metal">
+            <div class="spectrum-label">Metal End</div>
+            <div class="spectrum-name">Melvins / TAD / Gruntruck &mdash; E=8-9</div>
+          </div>
+          <div class="spectrum-cell commercial">
+            <div class="spectrum-label">Commercial</div>
+            <div class="spectrum-name">Soundgarden / Pearl Jam / AIC &mdash; E=7-8</div>
+          </div>
+          <div class="spectrum-cell subpop">
+            <div class="spectrum-label">Sub Pop</div>
+            <div class="spectrum-name">Mudhoney / Nirvana &mdash; E=7-8</div>
+          </div>
+          <div class="spectrum-cell underground">
+            <div class="spectrum-label">Underground</div>
+            <div class="spectrum-name">Alcohol Funnycar &mdash; E=7. Punk end.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Empty Records &mdash; The Underground Label</h2>
+        <p>Empty Records was founded in Seattle in 1988 by Fred Canby &mdash; a small independent operating outside Sub Pop&rsquo;s commercial infrastructure and well outside the major-label system. Empty&rsquo;s catalog included Fastbacks, Flop, and a range of underground acts whose primary audience was the committed underground rock listener rather than the mainstream alternative audience. Empty was more explicitly DIY than Sub Pop: smaller budgets, faster recordings, rawer production, the punk ethos foregrounded rather than the savvy promotional image that made Sub Pop famous.</p>
+
+        <blockquote>&ldquo;The name Alcohol Funnycar &mdash; a reference to alcohol-fueled drag racing &mdash; signals that this band is not trying to be taken seriously in the commercial sense. The name is aggressive, slightly absurdist, and points toward the punk tradition of deliberately provocative identity.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Dave Dederer &mdash; Before PUSA</h2>
+        <p>Dave Dederer&rsquo;s time in Alcohol Funnycar is the pre-PUSA context. He and Chris Ballew co-founded The Presidents of the United States of America in 1993 with Jason Finn (who was simultaneously in Love Battery). PUSA&rsquo;s debut (1995, Maverick) sold over 1 million copies. &ldquo;Lump,&rdquo; &ldquo;Peaches,&rdquo; &ldquo;Kitty.&rdquo;</p>
+        <p>The distance between Alcohol Funnycar (Empty Records, underground punk-grunge, small committed audience) and PUSA (Maverick Records, 1M+ debut, MTV rotation) is one of the engine&rsquo;s most dramatic before-and-after career trajectories. What carries: the punk velocity, the economy of arrangement, the willingness to be absurd. PUSA&rsquo;s songs are short, punchy, and direct &mdash; the punk energy from Alcohol Funnycar applied to melodic pop-rock with comedic sensibility.</p>
+
+        <hr class="section-divider">
+
+        <h2>E=7 From Velocity &mdash; The Fourth Mode</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>317 &mdash; Temple of the Dog</h4>
+            <span class="level advanced">E=7 via grief</span>
+            <p>Cornell at peak range but constrained by memorial grief. Force held back. E=7 from emotional weight.</p>
+          </div>
+          <div class="theory-card">
+            <h4>318 &mdash; Candlebox</h4>
+            <span class="level advanced">E=7 via accessibility</span>
+            <p>Classic-rock inheritance, midrange hooks. E=7 from melodic accessibility and commercial construction.</p>
+          </div>
+          <div class="theory-card">
+            <h4>319 &mdash; Hammerbox</h4>
+            <span class="level advanced">E=7 via precision</span>
+            <p>Akre&rsquo;s controlled escalation, emotional specificity. E=7 from deliberate restraint.</p>
+          </div>
+          <div class="theory-card">
+            <h4>320 &mdash; Alcohol Funnycar</h4>
+            <span class="level milestone">E=7 via velocity</span>
+            <p>Fast tempos, short songs, raw production. E=7 from punk speed and direct attack. The fourth mode.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Sound &mdash; Fast, Raw, Direct</h2>
+        <p>Alcohol Funnycar&rsquo;s songs are faster than most grunge entries in the engine. Where Soundgarden builds slowly to E=8, Alcohol Funnycar arrives at E=7 immediately and departs before the listener expects it. The punk economy of the form: short songs, minimal repetition, no extended instrumentation. The production rawness is the aesthetic &mdash; Empty Records&rsquo; budget constraints and DIY ethos produce a roughness that is intentional, not accidental. The roughness is part of the punk identity.</p>
+        <p>The aggression comes from speed rather than from the slow-building heaviness of the metal-grunge tradition. This is E=7 from momentum rather than E=7 from weight. The difference is audible: metal-grunge (Gruntruck, E=8) presses down; punk-grunge (Alcohol Funnycar, E=7) pushes forward.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">317-319</span> Temple / Candlebox / Hammerbox &mdash; E=7 four consecutive. Four modes: grief, accessibility, precision, velocity. Cooldown stable. Range complete.</li>
+          <li><span class="ref-degree">221</span> Love Battery &mdash; Jason Finn in Love Battery + PUSA. Dave Dederer in Alcohol Funnycar + PUSA. Two different pre-PUSA bands, same future destination.</li>
+          <li><span class="ref-degree">308</span> Melvins (E=8) &mdash; Metal end of the grunge spectrum. Alcohol Funnycar (E=7) is the punk end. Spectrum complete: metal (308) through underground punk (320).</li>
+          <li><span class="ref-degree">SPS 320</span> Raven complex vocalizing &mdash; FIRST CORVIDAE. Both are first appearances at degree 320. The engine&rsquo;s most complex PNW vocalist enters alongside the grunge scene&rsquo;s most underground punk-grunge entry.</li>
+          <li><span class="ref-degree">future</span> PUSA &mdash; Dederer + Ballew + Finn. The commercial successor to both Alcohol Funnycar and Love Battery. The underground's transition to Maverick.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">320 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Grunge / Punk</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1990&ndash;1997</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Seattle</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Empty Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Connection</h4>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Dave Dederer</span></div>
+          <div class="stat-row"><span class="stat-label">Post-AFC</span><span class="stat-value">PUSA (1993)</span></div>
+          <div class="stat-row"><span class="stat-label">PUSA debut</span><span class="stat-value">1M+ copies</span></div>
+          <div class="stat-row"><span class="stat-label">Label jump</span><span class="stat-value">Empty &rarr; Maverick</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">First Appearance</span></div>
+          <div class="stat-row"><span class="stat-label">E-streak</span><span class="stat-value">E=7 (4th)</span></div>
+          <div class="stat-row"><span class="stat-label">Context</span><span class="stat-value">Post-Summit Cooldown</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Raven (FIRST CORVIDAE)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>E=7 Spectrum</h4>
+          <div class="stat-row"><span class="stat-label">317</span><span class="stat-value">Grief</span></div>
+          <div class="stat-row"><span class="stat-label">318</span><span class="stat-value">Accessibility</span></div>
+          <div class="stat-row"><span class="stat-label">319</span><span class="stat-value">Precision</span></div>
+          <div class="stat-row"><span class="stat-label">320</span><span class="stat-value">Velocity</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
