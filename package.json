@@ -4,11 +4,28 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "skill-creator": "./dist/cli.js"
+    "skill-creator": "./dist/cli.js",
+    "gsd-skill-creator": "./project-claude/install.cjs"
   },
   "files": [
     "dist",
     "project-claude"
+  ],
+  "description": "Adaptive learning layer for Claude Code — skills, agents, teams, and chipsets",
+  "author": "Tibsfox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tibsfox/gsd-skill-creator.git"
+  },
+  "keywords": [
+    "claude-code",
+    "ai-agents",
+    "skills",
+    "gsd",
+    "adaptive-learning",
+    "claude",
+    "anthropic"
   ],
   "engines": {
     "node": ">=18.0.0"
