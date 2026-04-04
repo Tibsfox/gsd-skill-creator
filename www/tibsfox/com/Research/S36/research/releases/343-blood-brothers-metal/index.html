@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 343&deg; &mdash; Blood Brothers &mdash; E=9 &mdash; Post-HC/Metal &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFCDD2; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #4A148C; }
+    .milestone-banner { background: linear-gradient(135deg, #B71C1C, #880E4F); border: 2px solid #EF9A9A; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .milestone-banner strong { color: #FFCDD2; }
+    .vocal-diagram { display: flex; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .vocal-diagram { flex-direction: column; } }
+    .vocal-card { flex: 1; border-radius: 6px; padding: 1rem; text-align: center; }
+    .whitney { background: linear-gradient(135deg, #B71C1C, #C62828); border: 1px solid #EF9A9A; color: #FFCDD2; }
+    .votolato { background: linear-gradient(135deg, #880E4F, #AD1457); border: 1px solid #F48FB1; color: #FCE4EC; }
+    .vocal-card .name { font-weight: 700; font-size: 1rem; font-family: system-ui, sans-serif; margin-bottom: 0.3rem; }
+    .vocal-card .freq { font-family: 'Georgia', serif; font-size: 0.88rem; margin-bottom: 0.3rem; }
+    .vocal-card .desc { font-size: 0.8rem; opacity: 0.88; line-height: 1.4; font-family: system-ui, sans-serif; }
+    .dual-arrow { display: flex; align-items: center; color: #B71C1C; font-size: 1.5rem; font-weight: 700; padding-top: 1.5rem; }
+    @media (max-width: 600px) { .dual-arrow { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>343 &mdash; Blood Brothers (E=9)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">343&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Blood Brothers</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 9</span>
+          <span class="genre-badge">Post-HC / Metal</span>
+          <span class="label-badge">Artist Direct</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>THE RAMP RISES TO E=9 &mdash; ONE STEP FROM THE HISTORIC CEILING.</strong> Blood Brothers lift the engine from E=8 (342 Gruntruck) to E=9 here. One degree remains before Botch breaks through to E=10 &mdash; the first E=10 in engine history. Shoreline enters the engine at its second-highest energy. Dual-screaming. Keyboard texture. <em>Crimes</em> 2004. Ross Robinson. The penultimate step.
+        </div>
+
+        <h2>The Dual Vocal Architecture</h2>
+        <div class="vocal-diagram">
+          <div class="vocal-card whitney">
+            <div class="name">Johnny Whitney</div>
+            <div class="freq">High &mdash; sharp &mdash; piercing</div>
+            <div class="desc">Extreme-register screaming at the upper end of the vocal range. Simultaneously plays keyboard &mdash; the architectural texture beneath the screaming. Both at maximum simultaneously.</div>
+          </div>
+          <div class="dual-arrow">+</div>
+          <div class="vocal-card votolato">
+            <div class="name">Cody Votolato</div>
+            <div class="freq">Lower &mdash; raw &mdash; darker</div>
+            <div class="desc">Extreme-register screaming at a lower pitch with a rawer timbre. Simultaneously plays guitar &mdash; the dissonant riff architecture beneath the screaming. Both at maximum simultaneously.</div>
+          </div>
+        </div>
+        <p>The Blood Brothers are not a one-screamer, one-melodic-vocalist band. Both primary vocalists operate in the extreme register simultaneously. The resulting vocal texture is unique in the engine: total saturation, two distinct extreme-register voices layered over keyboard and dissonant guitar. There is no melodic anchor in the conventional sense &mdash; the architecture is maximum intensity from the first note.</p>
+
+        <blockquote>"Love Rhymes With Hideous Car Wreck. Your Rooftop Is Burning and You&rsquo;re Standing on It. My First Kiss at the Public Execution. The Blood Brothers named their songs as if the disaster was the point."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Crimes (2004) &mdash; The Career Peak</h2>
+        <p><em>Crimes</em> (2004, Artist Direct) is the record the engine documents at E=9. Produced by Ross Robinson (Korn, Slipknot, Glassjaw). Robinson&rsquo;s maximalist, close-miked production captures the physical intensity of the Blood Brothers&rsquo; performance with the same approach he had applied to nu-metal &mdash; but the Blood Brothers&rsquo; compositional ambition and dual-screaming architecture produced results unique in his catalog.</p>
+        <p>&ldquo;Ambulance vs. Ambulance&rdquo; opens the record with immediate dual-screaming intensity. &ldquo;Rats and Rats and Rats for Candy&rdquo; is the most accessible track, demonstrating the band&rsquo;s capacity for hooks within the extreme context. &ldquo;Love Rhymes With Hideous Car Wreck&rdquo; is the post-hardcore peak. The keyboard textures (Whitney) and dissonant guitar (Votolato, Billie) create a total sonic environment of maximum density.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>...Burn Piano Island, Burn (2003)</h4>
+            <span class="level milestone">Artist Direct</span>
+            <p>The national breakthrough. Cecilia and the Silhouette Saloon. Guitarmy. The record that established the Blood Brothers&rsquo; profile in the post-hardcore and metal press beyond the DIY underground.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Crimes (2004)</h4>
+            <span class="level milestone">Artist Direct / Ross Robinson</span>
+            <p>The career peak. Ross Robinson producing. Ambulance vs. Ambulance, Love Rhymes With Hideous Car Wreck. The most complete realization of the dual-screaming keyboard-metal architecture. The E=9 document.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Young Machetes (2006)</h4>
+            <span class="level advanced">V2 / Equal Vision</span>
+            <p>The final studio album. More compositionally varied, more quiet passages, more explicit melody. Band dissolved 2007. Retrospective debate: compositional maturation or departure from the core intensity of Crimes?</p>
+          </div>
+          <div class="theory-card">
+            <h4>Early Period (1999&ndash;2001)</h4>
+            <span class="level intermediate">Small labels / DIY</span>
+            <p>Discord Harmony (1999), Spit Shine Your Black Clouds (2000), This Adultery Is Ripe EP (2000). DIY Shoreline-to-Seattle trajectory. The dual-screaming template being established, keyboard integration emerging.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Shoreline, Washington -- The First Shoreline Entry</h2>
+        <p>Shoreline is a suburban city immediately north of Seattle, incorporated 1995, population approximately 55,000. It is not the Capitol Hill or U-District neighborhoods that anchor most of the engine&rsquo;s Seattle entries. It is the North End &mdash; residential, modest, proximate to but not identical with the cultural infrastructure of Seattle proper.</p>
+        <p>The Blood Brothers are Shoreline&rsquo;s first and most notable entry in the engine, and they enter at E=9 &mdash; the second-highest energy in the engine&rsquo;s history, one below the E=10 that will be reached at degree 344. The suburb that gave the post-hardcore world the dual-screaming keyboard-metal architecture.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">342</span> Gruntruck &mdash; E=8 rises to E=9. Capitol Hill metal (E=8) precedes Shoreline post-HC/metal (E=9). The ramp lifts by one step here.</li>
+          <li><span class="ref-degree">218</span> Blood Brothers (previous) &mdash; Earlier engine entry. Degree 343 documents the metal peak specifically, at E=9, within the final ascent structure.</li>
+          <li><span class="ref-degree">344</span> Botch &mdash; E=9 rises to E=10. The historic ceiling. Botch&rsquo;s mathcore intensity at E=10 is the maximum the engine documents. The Blood Brothers are one step below.</li>
+          <li><span class="ref-degree">SPS 343</span> Peregrine through Tern Colony &mdash; E=9 + E=9 = E=18. The Peregrine stoops; the colony erupts in screaming chaos. The Blood Brothers&rsquo; music sounds like the inside of a tern colony when the Peregrine arrives.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">343 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">9</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Post-HC / Metal</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1997&ndash;2007</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Shoreline, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Artist Direct</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals / Keys</span><span class="stat-value">Johnny Whitney</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Cody Votolato</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Jordan Billie</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Mark Gajadhar</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Morgan Henderson</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">95.3%</span></div>
+          <div class="stat-row"><span class="stat-label">Ramp</span><span class="stat-value">STEP 3 OF 4</span></div>
+          <div class="stat-row"><span class="stat-label">Next</span><span class="stat-value">E=10 at 344</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Paired Energy</h4>
+          <div class="stat-row"><span class="stat-label">S36</span><span class="stat-value">E = 9 (Blood Bros)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS</span><span class="stat-value">E = 9 (Peregrine)</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E = 18</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Records</h4>
+          <div class="stat-row"><span class="stat-label">Burn Piano Island</span><span class="stat-value">2003, breakthrough</span></div>
+          <div class="stat-row"><span class="stat-label">Crimes</span><span class="stat-value">2004, Ross Robinson</span></div>
+          <div class="stat-row"><span class="stat-label">Young Machetes</span><span class="stat-value">2006, final</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
