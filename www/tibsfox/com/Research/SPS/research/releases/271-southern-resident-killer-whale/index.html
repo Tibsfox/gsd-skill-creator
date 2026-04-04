@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 271&deg; &mdash; Southern Resident Killer Whale (Whistles + Clicks) &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0D47A1, #1565C0, #1976D2); color: #BBDEFB; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 28px rgba(13,71,161,0.6); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .whistle-card { background: linear-gradient(135deg, #0D47A1 0%, #1565C0 30%, #1976D2 60%, #42A5F5 100%); border: 2px solid #0D47A1; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E3F2FD; }
+    .whistle-card h3 { margin-top: 0; color: #BBDEFB; font-size: 1.2rem; text-transform: uppercase; }
+    .whistle-card p { color: #E3F2FD; margin: 0.4rem 0; }
+    .whistle-card strong { color: #BBDEFB; }
+    .click-card { background: linear-gradient(135deg, #004D40 0%, #00695C 40%, #00897B 80%, #26A69A 100%); border: 2px solid #004D40; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #E0F2F1; }
+    .click-card h3 { margin-top: 0; color: #B2DFDB; font-size: 1.1rem; }
+    .click-card p { color: #E0F2F1; margin: 0.4rem 0; }
+    .click-card strong { color: #B2DFDB; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.whistle { background: #1565C0; }
+    .theory-icon.click { background: #00695C; }
+    .theory-icon.sanjuan { background: #E65100; }
+    .theory-icon.three { background: #1A237E; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #E8F5E9; color: #2E7D32; }
+    .theory-level.advanced { background: #E8EAF6; color: #1A237E; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">271&deg;</div>
+      <div class="release-title-block">
+        <h2>Southern Resident Killer Whale</h2>
+        <div style="font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif;"><em>Orcinus orca</em> (Delphinidae) &mdash; E=8 &mdash; Complex Whistles + Clicks &mdash; ORCA ARC (2 OF 7)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      complex whistles + echolocation clicks &mdash; San Juan Channel &mdash; <strong>ENDANGERED, ~73&ndash;75 individuals</strong>, J/K/L pods &mdash; second consecutive SRKW entry &mdash; whistle system (short-range social) + click system (echolocation, prey detection) &mdash; E=8
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Whistle Card -->
+        <div class="whistle-card">
+          <h3>Whistles &mdash; The Social Fabric</h3>
+          <p>
+            Whistles are the Southern Residents&rsquo; <strong>short-range social communication system</strong> &mdash; tonally pure, flexible, expressive. Used between individuals in close proximity: mother and calf, socializing adults, coordinating movement within a subgroup. Individual Southern Residents develop <strong>signature whistles</strong> &mdash; individually distinctive acoustic patterns that function as personal identifiers, like a name.
+          </p>
+          <p>
+            Unlike the stereotyped discrete calls (degree 270), whistles are <strong>flexible and variable</strong>. They can be modulated continuously. The contour and tone carry emotional or contextual information. The whistle system is the SRKW&rsquo;s most expressive acoustic channel.
+          </p>
+        </div>
+
+        <!-- Click Card -->
+        <div class="click-card">
+          <h3>Clicks &mdash; Seeing With Sound</h3>
+          <p>
+            Echolocation clicks are the Southern Residents&rsquo; <strong>sensory infrastructure</strong>. High-frequency broadband pulses (10,000&ndash;80,000+ Hz) produced through phonic lips, focused through the melon, received through the acoustic fat of the lower jaw. The returning echo constructs a three-dimensional acoustic image of the environment &mdash; <strong>seeing with sound</strong>.
+          </p>
+          <p>
+            During salmon hunting: click trains accelerate as distance to prey decreases. At close range, click rates exceed 500 per second. The SRKW echolocation can detect a Chinook salmon at 100&ndash;200+ meters, discriminate species, size, and orientation. <strong>Boat noise reduces the effective range</strong> &mdash; forcing the orcas to work harder to find food during an already nutritionally stressed period.
+          </p>
+        </div>
+
+        <h2>The San Juan Channel</h2>
+        <p>The San Juan Channel separates San Juan Island from Lopez Island, Shaw Island, and the surrounding archipelago. It connects Haro Strait to the Strait of Juan de Fuca, with strong tidal currents that concentrate marine life. <strong>Chinook salmon</strong> returning to their spawning rivers pass through the San Juan Channel &mdash; making it one of the most critical foraging habitats for the Southern Residents during the critical summer months.</p>
+
+        <p>From Lime Kiln Point State Park (&ldquo;Whale Watch Park&rdquo;) on San Juan Island, the Southern Residents are frequently visible during summer foraging. Shore-based hydrophones transmit their vocalizations in real time to visitors. The San Juan Island scientific community &mdash; Ken Balcomb&rsquo;s Center for Whale Research (1976&ndash;present), the longest-running wild cetacean population study &mdash; has documented every individual SRKW since 1976.</p>
+
+        <h2>Three Acoustic Systems -- Complete Portrait</h2>
+        <p><strong>Degree 270 (discrete calls):</strong> Stereotyped, culturally transmitted, pod-specific. Social coordination at range. Pod identity. 12-20+ call types per pod.</p>
+        <p><strong>Degree 271 (whistles + clicks):</strong> Whistles -- short-range, flexible, affiliative, signature-developing. Clicks -- echolocation, prey detection, navigation, also used in social "codas."</p>
+        <p>Together: one of the most sophisticated acoustic repertoires of any non-human animal. Three complementary systems serving three different functions -- long-range social identity, short-range social bonding, and sensory navigation. The acoustic portrait is complete across two consecutive engine degrees.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-270 Puget Sound Orca S01 Pod Call</strong>
+            <p>Prior entry. Discrete calls. Cultural dialect. THREE-QUARTERS MARK. Degree 271 deepens: whistles (short-range social) and clicks (echolocation). Complete acoustic portrait.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-272 Transient Orca Hunt Sequence</strong>
+            <p>CONTRAST. Southern Resident: continuously vocal, salmon-eating. Bigg&rsquo;s (transient): acoustically silent during hunting, mammal-eating. Same genus, opposite strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-236&ndash;242 Salmon Arc</strong>
+            <p>ECOLOGICAL LINK. Southern Residents are obligate Chinook eaters. Chinook decline = SRKW nutritional stress. The orca arc depends on the salmon arc.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-271 Solger (pairing)</strong>
+            <p>Both Solger and SRKW: small, specific communities with their own acoustic vocabularies, both rare, both from the same geographic region. Community-specific communicators.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon whistle">W</div>
+            <div class="theory-content">
+              <h4>Whistles &mdash; Signature and Social</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Tonally pure, flexible, individually variable. Short-range. Signature whistles as individual identifiers. Mother-calf contact. The SRKW&rsquo;s most expressive acoustic channel.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon click">C</div>
+            <div class="theory-content">
+              <h4>Echolocation &mdash; Seeing With Sound</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>10,000-80,000+ Hz. Focused through melon, received through mandibular fat. Detects Chinook at 100-200m. Accelerates during approach. Boat noise reduces effective range.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon sanjuan">SJ</div>
+            <div class="theory-content">
+              <h4>San Juan Channel &mdash; Critical Habitat</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Critical summer foraging. Chinook concentration. Lime Kiln Point shore access. Center for Whale Research (Balcomb 1976-present). Longest running cetacean population study.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon three">3</div>
+            <div class="theory-content">
+              <h4>Three Acoustic Systems -- Complete</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Degrees 270-271: discrete calls + whistles + clicks = complete SRKW acoustic portrait. Three complementary systems: long-range social, short-range social, sensory navigation.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">SRKW</div>
+          <div class="stat-detail"><em>Orcinus orca</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value" style="color: #B71C1C;">~73&ndash;75</div>
+          <div class="stat-detail">ENDANGERED (ESA 2005)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Focus</div>
+          <div class="stat-value">Whistles + clicks</div>
+          <div class="stat-detail">Social + echolocation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">San Juan Channel</div>
+          <div class="stat-detail">Critical summer habitat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #1A237E;">E = 8</div>
+          <div class="stat-detail">Maximum</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Whistle freq.</div>
+          <div class="stat-value">1&ndash;18 kHz</div>
+          <div class="stat-detail">Tonally pure</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Click freq.</div>
+          <div class="stat-value">10&ndash;80+ kHz</div>
+          <div class="stat-detail">Echolocation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Arc position</div>
+          <div class="stat-value">2 of 7</div>
+          <div class="stat-detail">Orca arc (270-276)</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
