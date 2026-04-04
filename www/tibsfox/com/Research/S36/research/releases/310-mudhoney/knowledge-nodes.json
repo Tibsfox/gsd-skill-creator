@@ -1,0 +1,33 @@
+{
+  "degree": 310, "artist": "Mudhoney", "slug": "310-mudhoney", "genre": "Grunge", "energy": 8,
+  "era": "1988-present. Grunge. E=8. Central District, Seattle. Sub Pop Records (primary). Reprise 1992-1998. The band that stayed.",
+  "location": { "origin": "Central District, Seattle, Washington" }, "formed": "Seattle, Washington, 1988", "active": "1988-present",
+  "labels": ["Sub Pop Records (1988-1992)", "Reprise Records (1992-1998)", "Sub Pop Records (1998-present)"],
+  "members": ["Mark Arm (guitar/vocals, born February 21 1962)", "Steve Turner (guitar)", "Matt Lukin (bass, 1988-1999)", "Dan Peters (drums)"],
+  "key_albums": [
+    "Touch Me I'm Sick single (1988, Sub Pop #18) -- first grunge single",
+    "Superfuzz Bigmuff EP (1988, Sub Pop) -- EP that exported Sub Pop grunge internationally",
+    "Mudhoney LP (1989, Sub Pop) -- debut album",
+    "Every Good Boy Deserves Fudge (1991, Sub Pop) -- pre-major lo-fi peak",
+    "Piece of Cake (1992, Reprise) -- major label debut",
+    "My Brother the Cow (1995, Reprise) -- Reprise peak",
+    "The Lucky Ones (2008, Sub Pop) -- best late-period",
+    "Digital Garbage (2018, Sub Pop) -- political, loud",
+    "Plastic Eternity (2023, Sub Pop) -- most recent"
+  ],
+  "theory_nodes": [
+    { "concept": "GREEN RIVER SPLIT (1988): Arm + Turner chose noise/fuzz direction -> Mudhoney. Ament + Gossard chose melodic/commercial direction -> Mother Love Bone -> Pearl Jam. The most productive single dissolution in Seattle grunge history. Both directions essential.", "level": "milestone", "department": "scene-history", "description": "Green River split as the fork producing Mudhoney and (indirectly) Pearl Jam." },
+    { "concept": "Touch Me I'm Sick (Sub Pop SP18, August 1988): the first true grunge single. Released same month Sub Pop launched. The single and the label define each other. Big Muff Pi + sneer-and-howl vocal = grunge form realized.", "level": "milestone", "department": "single-history", "description": "Touch Me I'm Sick as grunge's foundational single document." },
+    { "concept": "Superfuzz Bigmuff EP (Sub Pop, October 1988): named after guitar effects (Univox Super-Fuzz + Electro-Harmonix Big Muff Pi). The primary international export of Sub Pop grunge. European music press (NME, Melody Maker) reviews built the cult. Created the international Seattle myth before Nevermind.", "level": "advanced", "department": "export-vehicle", "description": "Superfuzz Bigmuff as the EP that exported grunge internationally." },
+    { "concept": "THE BAND THAT STAYED. Nirvana to DGC. Soundgarden to A&M. Pearl Jam to Epic. TAD to East West. Mudhoney to Reprise (1992-1998), then back to Sub Pop. The longest-running original Sub Pop act. The label's emblem of scene commitment.", "level": "milestone", "department": "label-history", "description": "Mudhoney as Sub Pop's longest-running act and emblem of original-scene commitment." },
+    { "concept": "Nirvana covered Touch Me I'm Sick on the 1990 Mudhoney/Nirvana split single. Mudhoney covered Parliament-Funkadelic's Maggot Brain. The exchange documents the Cobain-Arm peer relationship and Nirvana's engagement with the Sub Pop aesthetic.", "level": "advanced", "department": "cobain-connection", "description": "Nirvana-Mudhoney split single as peer documentation." }
+  ],
+  "cross_references": [
+    {"degree": 294, "artist": "Green River", "relationship": "Mudhoney's genesis. Arm + Turner from Green River split 1988. The noise/fuzz direction vs. the melodic direction. Both outcomes essential to the engine."},
+    {"degree": 309, "artist": "TAD", "relationship": "E=8 Summit companion. Both Sub Pop grunge at E=8. Different registers: TAD low-end density vs. Mudhoney fuzz-attitude. Both essential to the Summit's E=8 entry zone."},
+    {"degree": 311, "artist": "Nirvana", "relationship": "Nirvana covered Touch Me I'm Sick (1990 split single). Cobain-Arm peer relationship. Both Sub Pop; Nirvana left for DGC. Mudhoney ultimately stayed."}
+  ],
+  "sps_pair": {"degree": 310, "species": "Mixed dawn chorus Pacific storm", "pairing_note": "E=8 + E=8 = E=16. Exact energy match. Multiple overlapping voices in driving rain conditions. Mudhoney's multiple simultaneous fuzz guitars through the Sub Pop noise storm. Both at E=8 through simultaneous layered voices."},
+  "milestones": ["FIRST MUDHONEY APPEARANCE", "FIRST CENTRAL DISTRICT ENTRY", "GREEN RIVER SPLIT OUTCOME DOCUMENTED", "SUB POP LONGEST-RUNNING ACT"],
+  "tags": ["grunge", "sub-pop", "central-district", "mark-arm", "steve-turner", "touch-me-im-sick", "superfuzz-bigmuff", "green-river-split", "nirvana-connection", "grunge-summit", "e8-grunge", "reprise-period"]
+}
