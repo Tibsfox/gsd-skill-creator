@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 253&deg; &mdash; Helms Alee &mdash; E=7 &mdash; Sludge Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #283593; color: #C5CAE9; border: 1px solid #3949AB; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.intermediate { background: #E8EAF6; color: #283593; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .sludge-card { background: linear-gradient(135deg, #1A1A2E, #16213E, #0F3460); color: #B0BEC5; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; }
+    .sludge-card h3 { margin-top: 0; font-size: 1.2rem; color: white; letter-spacing: 0.04em; }
+    .sludge-card strong { color: #90CAF9; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>253 &mdash; Helms Alee (E=7)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">253&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Helms Alee</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 7</span>
+          <span class="genre-badge">Sludge Rock</span>
+          <span class="label-badge">Sargent House</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="sludge-card">
+          <h3>SLOW. MASSIVE. PSYCHEDELICALLY HEAVY. &mdash; CAPITOL HILL SLUDGE &mdash; 2008&ndash;PRESENT</h3>
+          <p>Helms Alee are the <strong>slow avalanche</strong> in Seattle's heavy tradition. Three instruments, downtuned low, played at maximum sustain. Ben Verellen's riffs weigh hundreds of imaginary pounds. Dana James's bass is co-equal, not support. Hozoji Margullis drives with jazz precision against the sludge. Sargent House &mdash; the label of Chelsea Wolfe, Russian Circles, Deafheaven &mdash; is their home. Six albums since 2008. Still moving, still heavy, still slow.</p>
+        </div>
+
+        <h2>What Sludge Rock Is</h2>
+        <p>Sludge rock sits at the intersection of doom metal and hardcore punk. The tempo is slow; the riffs are long; the distortion is maximum. The name describes the sound: thick, viscous, crushing, moving with the resistance of something dense. New Orleans created the template &mdash; Eyehategod, Crowbar, Acid Bath, drawing on Black Sabbath's doom architecture and Louisiana's blues tradition. The Pacific Northwest adapted it: greyer, more psychedelic, more atmospheric than the Southern Gothic original.</p>
+
+        <blockquote>"Eyehategod's *In the Name of Suffering* (1992) established the sludge template: Black Sabbath riffs slowed to a crawl, feedback production, vocals that are more howl than melody. Everything that follows reads from that text."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Band</h2>
+        <p>Three members, three instruments, one sound. Ben Verellen on guitar and vocals: the riff architect, saturated distortion, long sustain, downtuned low. Dana James on bass and vocals: the co-equal low end, and the melodic voice that floats above the crushing instrumentation in productive dissonance. Hozoji Margullis on drums: technically sophisticated, jazz-influenced, maintaining active rhythmic complexity against the guitar's deliberate slowness. The three-piece format forces each instrument to carry maximum weight &mdash; no second guitar to fill the midrange, no keyboard enriching the harmony.</p>
+
+        <hr class="section-divider">
+
+        <h2>Sargent House Records</h2>
+        <p>Sargent House was founded by Cathy Pellow in Los Angeles in 1998, beginning as management and evolving into one of the most important independent labels for heavy art music. The roster reads as a map of intelligent heaviness: Chelsea Wolfe (dark folk/doom), Russian Circles (post-metal instrumental, Chicago), Deafheaven (blackgaze), Emma Ruth Rundle (art-doom), Torche (heavy pop-metal). The Sargent House house style &mdash; if one exists &mdash; is heavy without genre affiliation, atmospheric, and melodically sophisticated. Helms Alee fits this template precisely.</p>
+        <p>The Russian Circles connection extends to the engine's next degree: Brian Cook, Russian Circles bassist, previously played in Botch (254) and These Arms Are Snakes. The Sargent House roster bridges Helms Alee (253) and Botch (254) through Cook's trajectory.</p>
+
+        <hr class="section-divider">
+
+        <h2>Discography</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Night Terror (2008)</h4>
+            <span class="level advanced">Kemado</span>
+            <p>Debut. The core approach established: heavy riffs, alternating harsh and clean vocals, three-piece dynamics.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Weatherhead (2011)</h4>
+            <span class="level advanced">Sargent House</span>
+            <p>First Sargent House release. Production sharper, psych-sludge balance more developed. National profile begins.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Sleepwalking Sailors (2014)</h4>
+            <span class="level advanced">Sargent House</span>
+            <p>Dual vocal approach fully developed. Verellen and James trading leads. Heavier, more confident.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Stillicide (2017)</h4>
+            <span class="level advanced">Sargent House</span>
+            <p>Title: the sound of dripping water. Most sophisticated production. Most dynamic songs.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Keep This Be the Way (2020)</h4>
+            <span class="level advanced">Sargent House</span>
+            <p>Psych-sludge synthesis fully realized. Released during pandemic. The most complete Helms Alee statement.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Noctiluca (2023)</h4>
+            <span class="level advanced">Sargent House</span>
+            <p>Bioluminescent plankton. Pacific Northwest coast glowing blue at night. The imagery is the band.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Energy = 7 &mdash; The Slow Avalanche</h2>
+        <p>E=7 in sludge is different from E=7 in straight rock. The energy is not derived from speed or aggression but from mass. A riff at 60 BPM, downtuned to B, played through maximum distortion at high volume creates energy through weight rather than velocity. The low-frequency physical experience &mdash; felt in the chest before registered as sound &mdash; is characteristic of sludge at volume. The slow avalanche analogy holds: the same destructive energy as an explosion, deployed at one-tenth the speed.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">252</span> No-Anchor &mdash; noise rock to sludge. Underground to underground. E=7 holds. Speed changes: noise rock fast; sludge slow.</li>
+          <li><span class="ref-degree">254</span> Botch &mdash; E rises to 8. Sludge to post-hardcore/mathcore. Tacoma enters. Brian Cook bridge: Botch &rarr; Russian Circles &rarr; Sargent House &rarr; Helms Alee.</li>
+          <li><span class="ref-degree">SPS 253</span> Puget Sound Tidal Current &mdash; subsonic low pulse, E=2. Low frequency against low frequency. Mass vs. mass. The tidal current moves billions of cubic meters slowly; sludge moves sonic energy slowly. Both are measured in bulk.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">253 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">7</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Sludge Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2008&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Sargent House</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Ben Verellen</span></div>
+          <div class="stat-row"><span class="stat-label">Bass / Vocals</span><span class="stat-value">Dana James</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Hozoji Margullis</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">70.3%</span></div>
+          <div class="stat-row"><span class="stat-label">Albums</span><span class="stat-value">6 (2008&ndash;2023)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Label Context</h4>
+          <div class="stat-row"><span class="stat-label">Roster peer</span><span class="stat-value">Russian Circles</span></div>
+          <div class="stat-row"><span class="stat-label">Roster peer</span><span class="stat-value">Chelsea Wolfe</span></div>
+          <div class="stat-row"><span class="stat-label">Roster peer</span><span class="stat-value">Deafheaven</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Tidal Current</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

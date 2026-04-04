@@ -1,0 +1,52 @@
+{
+  "degree": 258, "sound": "Olympic Peninsula Wind Storm", "slug": "258-olympic-peninsula-wind-storm",
+  "acoustic_character": "Howling multi-tonal chaos",
+  "energy": 8,
+  "domain": "Meteorology",
+  "mechanism": "Pacific frontal system driving sustained high winds over Olympic Mountain ridges; aeolian tones, background roar, tree fall, topographic amplification at saddles",
+  "ecosystem": "Ridge",
+  "season": "Winter",
+  "status": "Second entry in Storm Arc (257-260). E=8 continues. Storm moves inland from coast (257) to ridge (258).",
+  "olympic_mountains": {
+    "highest_peak": "Mount Olympus, 7,980 feet (2,432 m)",
+    "geology": "Basalt (subducted oceanic crust) and sedimentary rock; not volcanic unlike Cascades",
+    "hoh_rainforest_precipitation_inches": "140-170 annually (wettest location in lower 48)",
+    "sequim_rain_shadow_inches": 16,
+    "rain_shadow_gradient": "170 inches (west slope) to 16 inches (northeast, Sequim) across approximately 60 miles"
+  },
+  "acoustic_physics": {
+    "aeolian_tones": "Vortex shedding from obstacles (trunks, branches, twigs, rocks). Frequency determined by diameter and wind speed (Strouhal number). Large trunks = low drones; branches = mid whistles; twigs = high hisses. Many simultaneously = multi-tonal chaos.",
+    "background_roar": "Sum of thousands of turbulent events at all scales: eddies, vortices, boundary layer turbulence from every surface.",
+    "ridge_saddle_howl": "Topographic venturi effect: wind accelerated through narrow gap; sound amplified by constriction. Loudest point on ridge.",
+    "tree_fall_sequence": "Crack at base (wood failure) → whomp of crown hitting other trees → crash of trunk hitting ground → secondary branch sounds.",
+    "e8_criteria": "Full Pacific frontal violence at ridge elevation: gusts 80-100+ mph; continuous multi-tonal roar; frequent tree fall; topographic amplification."
+  },
+  "frontal_dynamics": {
+    "pacific_frontal_types": "Warm front, cold front, occluded front, atmospheric river (Pineapple Express)",
+    "wind_maximum": "At cold front boundary: steepest pressure gradients, maximum wind speeds at ridge level",
+    "post_frontal_winds": "Strong northwesterly 30-50 mph sustained, gusts to 70+ for 12-24 hours post-frontal",
+    "sitka_spruce_vulnerability": "Shallow root system due to waterlogged soil and competition. Blow over rather than break in major events. Blowdowns create chaotic acoustic events."
+  },
+  "columbus_day_storm": {
+    "date": "October 12, 1962",
+    "type": "Extratropical cyclone (migrated from tropical origin)",
+    "max_sustained_winds_mph": "100+ at exposed Olympic Peninsula locations; possible gusts exceeding 150",
+    "deaths": 46,
+    "property_damage_1962_dollars": 235000000,
+    "timber_blown_down_board_feet": "15 billion",
+    "significance": "Historical benchmark for maximum Pacific windstorm on Olympic Peninsula. Reference event for E=9 level occurrence."
+  },
+  "theory_nodes": [
+    { "concept": "Storm moves inland: same frontal system documented as Juan de Fuca Surf (coast, 257) and Olympic Peninsula Wind Storm (ridge, 258). The acoustic character transforms as the environment changes: sustained coastal roar → howling mountain ridge chaos. The energy level maintains E=8; the acoustic form changes completely.", "level": "advanced", "department": "storm-sequence", "description": "Storm system documentation from coast (257) to ridge (258): same energy, transformed acoustic character." },
+    { "concept": "Aeolian tone production at ridge: multi-tonal chaos. Vortex shedding from obstacles of all sizes produces aeolian tones at all frequencies simultaneously. Olympic ridge with mixed-size trees = natural pipe organ driven by storm wind. Background roar + foreground tones + episodic tree falls = the full E=8 ridge wind soundscape.", "level": "advanced", "department": "acoustic-physics", "description": "Aeolian multi-tonal chaos: mountain ridge as natural pipe organ in storm." },
+    { "concept": "Columbus Day Storm (October 12, 1962) as historical benchmark. Sustained winds exceeding 100 mph; possible gusts exceeding 150 mph; 15 billion board feet blown down; 46 deaths; $235M damage (1962). The reference event for Olympic Peninsula maximum wind. Characteristic major Pacific windstorm (10-20 year recurrence) = E=8; Columbus Day Storm level = arguable E=9.", "level": "advanced", "department": "historical-reference", "description": "Columbus Day Storm as the reference maximum for Olympic Peninsula wind events." }
+  ],
+  "cross_references": [
+    {"degree": 257, "sound": "Juan de Fuca Surf", "relationship": "Same frontal system, different position. Coast surf (257) → ridge wind storm (258). The storm moves inland."},
+    {"degree": 249, "sound": "Wind through Sitka Spruce", "relationship": "Gentle aeolian wind through forest documented at E=4. Olympic Peninsula Wind Storm (E=8) is the same acoustic mechanism at maximum violence: aeolian tones in Sitka spruce at 4x the energy scale."}
+  ],
+  "s36_pair": {"degree": 258, "artist": "Norm Greenbaum", "pairing_note": "E=8 vs E=5. Olympic ridge howling chaos vs. gospel rock fuzz warmth. The ridge cannot hear 'Spirit in the Sky'. Human optimism is smaller than the storm."},
+  "storm_arc_position": {"arc": "257-260", "position": 2, "e8_streak_position": 2, "note": "Storm moves inland from coast. E=8 continues. Degree 259 brings Cascade thunderstorm; degree 260 brings E=9."},
+  "milestones": ["STORM ARC DEGREE 2 OF 5", "E=8 STREAK DEGREE 2 OF 4"],
+  "tags": ["olympic-peninsula", "wind-storm", "ridge", "e8", "storm-arc", "aeolian", "multi-tonal", "columbus-day-storm", "hoh-rainforest", "sitka-spruce", "olympic-mountains", "frontal-passage", "meteorology", "tree-fall"]
+}
