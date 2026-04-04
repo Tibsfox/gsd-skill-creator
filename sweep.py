@@ -132,12 +132,42 @@ WX_DAY4 = {
     23: (6.5,  2.5,  "Calm",       72, 1004.5, "CLR",            "00000KT", "CLR",      21.0),
 }
 
+# Day 5: April 4, 2026 (Flight Day 4) — TRANSLUNAR COAST, APPROACHING HALFWAY
+# Ridge weakening, marine layer pushing in overnight, onshore flow developing
+# G2 geomagnetic storm watch (NOAA) — elevated Kp, solar wind increasing
+WX_DAY5 = {
+    0:  (6.0,  2.5,  "Calm",       74, 1004.0, "CLR",            "00000KT", "CLR",      20.5),
+    1:  (5.5,  2.2,  "Calm",       76, 1003.8, "FEW200",         "00000KT", "FEW200",   20.0),
+    2:  (5.2,  2.0,  "Calm",       78, 1003.5, "FEW180",         "00000KT", "FEW180",   19.5),
+    3:  (5.0,  2.0,  "Calm",       80, 1003.2, "FEW150",         "00000KT", "FEW150",   19.0),
+    4:  (4.8,  2.0,  "Calm",       81, 1003.0, "FEW120",         "00000KT", "FEW120",   19.0),
+    5:  (5.0,  2.0,  "Calm",       80, 1002.8, "FEW100",         "00000KT", "FEW100",   19.5),
+    6:  (5.5,  2.2,  "Calm",       78, 1002.5, "SCT080",         "00000KT", "SCT080",   20.0),
+    7:  (7.0,  2.5,  "S 5 km/h",   68, 1002.2, "SCT070",         "18003KT", "SCT070",   21.5),
+    8:  (8.5,  2.5,  "S 8 km/h",   58, 1002.0, "SCT060",         "18004KT", "SCT060",   23.0),
+    9:  (10.0, 2.5,  "S 10 km/h",  50, 1001.8, "BKN060",         "18005KT", "BKN060",   24.5),
+    10: (11.0, 3.0,  "S 12 km/h",  46, 1001.5, "BKN050",         "18006KT", "BKN050",   25.5),
+    11: (11.8, 3.5,  "S 14 km/h",  44, 1001.2, "BKN040",         "18008KT", "BKN040",   26.5),
+    12: (12.2, 4.0,  "S 15 km/h",  42, 1001.0, "BKN040 OVC080",  "18008KT", "BKN040",   27.0),
+    13: (12.5, 4.5,  "S 16 km/h",  42, 1000.8, "OVC040",         "18009KT", "OVC040",   27.5),
+    14: (12.2, 5.0,  "S 18 km/h",  45, 1000.5, "OVC035",         "18010KT", "OVC035",   27.5),
+    15: (11.8, 5.5,  "S 16 km/h",  48, 1000.2, "OVC030",         "18009KT", "OVC030",   27.0),
+    16: (11.2, 5.5,  "S 14 km/h",  52, 1000.0, "-RA OVC025",     "18008KT", "OVC025",   26.0),
+    17: (10.5, 6.0,  "S 12 km/h",  58,  999.8, "RA OVC020",      "18006KT", "OVC020",   25.0),
+    18: (9.8,  6.0,  "S 10 km/h",  64,  999.5, "-RA OVC025",     "18005KT", "OVC025",   24.0),
+    19: (9.2,  5.5,  "SSW 8 km/h", 68,  999.5, "BKN030",         "20004KT", "BKN030",   23.0),
+    20: (8.5,  5.0,  "SSW 6 km/h", 72,  999.5, "BKN035",         "20003KT", "BKN035",   22.0),
+    21: (8.0,  5.0,  "Calm",       75,  999.5, "SCT040",         "00000KT", "SCT040",   21.5),
+    22: (7.5,  4.5,  "Calm",       78,  999.5, "SCT050",         "00000KT", "SCT050",   21.0),
+    23: (7.0,  4.5,  "Calm",       80,  999.5, "FEW060",         "00000KT", "FEW060",   20.5),
+}
+
 # Day selector
-WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3, 4: WX_DAY4}
-WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2), 4: (2026, 4, 3)}
-WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9, 4: -33}  # hours from midnight to launch (negative = post-launch)
-WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2", 4: "v1.3"}
-WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380), 4: (1.33, 1.7, 370)}  # quiet geomagnetic
+WX_DAYS = {1: WX_DAY1, 2: WX_DAY2, 3: WX_DAY3, 4: WX_DAY4, 5: WX_DAY5}
+WX_DATES = {1: (2026, 3, 31), 2: (2026, 4, 1), 3: (2026, 4, 2), 4: (2026, 4, 3), 5: (2026, 4, 4)}
+WX_COUNTDOWNS = {1: 39, 2: 15, 3: -9, 4: -33, 5: -57}  # hours from midnight to launch (negative = post-launch)
+WX_VERSIONS = {1: "v1.0", 2: "v1.1", 3: "v1.2", 4: "v1.3", 5: "v1.4"}
+WX_KP = {1: (1.33, 3.3, 392), 2: (2.0, 3.7, 405), 3: (1.67, 2.0, 380), 4: (1.33, 1.7, 370), 5: (3.0, 5.0, 450)}  # G2 storm watch
 
 # Default for backward compat
 WX = WX_DAY1
@@ -377,8 +407,8 @@ def run_sweep(hour, args):
 def main():
     parser = argparse.ArgumentParser(description="Artemis II hourly sweep updater")
     parser.add_argument("hour", type=int, help="Hour of day (0-23)")
-    parser.add_argument("--day", type=int, default=1, choices=[1, 2, 3, 4],
-                        help="Mission day: 1=March 31, 2=April 1, 3=April 2, 4=April 3 (default: 1)")
+    parser.add_argument("--day", type=int, default=1, choices=[1, 2, 3, 4, 5],
+                        help="Mission day: 1=Mar 31, 2=Apr 1, 3=Apr 2, 4=Apr 3, 5=Apr 4 (default: 1)")
     parser.add_argument("--dry-run", action="store_true", help="Show changes without writing")
     parser.add_argument("--kp", type=float, help="Current Kp index")
     parser.add_argument("--kp-forecast", type=float, help="Forecast Kp index")
