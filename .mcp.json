@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+    "unison": {
+      "command": "/usr/bin/ucm",
+      "args": ["mcp"]
+    },
     "gsd-math-coprocessor": {
       "command": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/math-coprocessor/.venv/bin/python",
       "args": ["-m", "math-coprocessor"],
