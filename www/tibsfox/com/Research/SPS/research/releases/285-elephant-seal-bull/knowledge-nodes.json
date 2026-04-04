@@ -1,0 +1,66 @@
+{
+  "degree": 285,
+  "species": "Northern Elephant Seal",
+  "scientific_name": "Mirounga angustirostris",
+  "slug": "285-elephant-seal-bull",
+  "sound_type": "gargling machine-gun belch -- the loud, low-frequency, repetitive pulsed vocalization of the adult bull; proboscis-amplified dominance and territorial call; 50-500 Hz; pulsed at 4-10 beats per second; audible hundreds of meters; extraordinary and unlike any other PNW marine mammal sound; E=8",
+  "energy": 8,
+  "ecosystem": "Haul-out -- sandy beaches, rocky shores; primary range California coast (Ano Nuevo, Point Reyes, Channel Islands, Farallons); rare vagrant to Pacific Northwest coast and Puget Sound",
+  "season": "Rare (haul-out year-round in California; Pacific Northwest appearances primarily sub-adults/juvenile males; no regular breeding season presence in PNW)",
+  "family": "Phocidae",
+  "order": "Carnivora (Pinnipedia)",
+  "conservation_status": "Least Concern (IUCN). Population 220,000+; recovered from founding bottleneck of ~20-100 animals (1880s, Guadalupe Island, Mexico). MMPA 1972 protection. One of the most complete large mammal recoveries documented. Genetic bottleneck permanent: dramatically reduced diversity. New CA colonies: Ano Nuevo (1960s), Point Reyes.",
+  "coordinates": {
+    "lat": 48.0,
+    "lon": -124.7,
+    "description": "Rare vagrant to Pacific Northwest coast and Puget Sound. Occasional haul-outs on Washington outer coast (Olympic Peninsula coast), rare in Puget Sound interior. Primary range: California coast, Ano Nuevo (37.1°N), Point Reyes (38.0°N), Farallon Islands, Channel Islands."
+  },
+  "acoustic_data": {
+    "vocalization_type": "Pulsed dominance call. Rapid-fire sequence of deep, resonant belch-like sounds through inflated proboscis. Pattern: 4-10 pulses per second, sustained several seconds with brief pauses. Individual recognition: bulls identify rivals by specific pulse pattern across multiple seasons.",
+    "frequency_range": "50-500 Hz; energy concentrated 100-300 Hz. Very low frequency. Proboscis acts as resonating chamber: shifts frequency downward, amplifies amplitude. Audible hundreds of meters across beach.",
+    "proboscis": "Inflatable nasal structure 12-14 inches (30-36 cm) when extended. Develops at sexual maturity (age 4-5); full development in bulls >age 8-9. Functions as resonating/amplifying chamber for dominance call. One of the most extreme secondary sexual characteristics in any mammal.",
+    "e8_calibration": "E=8: extremely loud, produced with evident physical effort by very large animal (1,500-2,500 lbs), low-frequency, carries at distance. Comparable effective energy to Steller Sea Lion bull roar (E=8) with different acoustic character: pulsed vs. sustained. The SPS 285-288 block's highest energy."
+  },
+  "morphology": {
+    "bull_size": "13-16 feet (4-5 m); 1,500-2,500 lbs (700-1,100 kg)",
+    "female_size": "9-10 feet (2.7-3 m); 400-900 lbs (180-400 kg)",
+    "sexual_dimorphism": "Bulls 3-4x heavier than females. Among the most extreme sexual dimorphism of any mammal. Winner-takes-all polygyny drives selection for large male body size.",
+    "molt": "Catastrophic molt: large patches of skin and fur shed simultaneously during haul-out. Annual. Takes several weeks."
+  },
+  "nodes": [
+    {
+      "id": "first-phocidae",
+      "type": "milestone",
+      "title": "First Phocidae -- True Seal Enters the Engine",
+      "description": "Degree 285 is the first Phocidae (true seal / earless seal) in the engine. Previous pinniped entries were Otariidae (eared seals): Steller (283) and California (284). Phocidae enters with the most acoustically spectacular representative. Pinniped trifecta: Phocoenidae (cetacean, 281), Delphinidae (282), Otariidae (283-284), Phocidae (285). Otariidae vs. Phocidae: external ears vs. none; rear flippers rotate vs. fixed; front-flipper vs. rear-flipper swimming.",
+      "connections": ["proboscis-call", "recovery-story"]
+    },
+    {
+      "id": "proboscis-call",
+      "type": "concept",
+      "title": "Proboscis-Amplified Gargling Machine-Gun Call",
+      "description": "The inflatable proboscis (12-14 in. when extended) acts as resonating chamber for the dominance call. 50-500 Hz, 100-300 Hz predominant. Pulsed at 4-10 beats per second. Unlike any other Pacific Northwest marine mammal sound. Individual identity encoded in pulse pattern; bulls recognize rivals across multiple breeding seasons.",
+      "connections": ["first-phocidae"]
+    },
+    {
+      "id": "recovery-story",
+      "type": "concept",
+      "title": "Near-Extinction to 220,000 -- The Bottleneck",
+      "description": "Hunted to commercial extinction 1880s. Founding bottleneck: ~20-100 animals on Guadalupe Island, Mexico. Current population 220,000+. Permanent genetic signature: dramatically reduced diversity. MMPA 1972 protection. New CA colonies: Ano Nuevo (1960s), Point Reyes. One of the most complete large mammal recovery stories documented.",
+      "connections": ["first-phocidae"]
+    },
+    {
+      "id": "diving-champion",
+      "type": "concept",
+      "title": "1,500-Meter Diver -- North Pacific Forager",
+      "description": "Northern Elephant Seals dive to depths exceeding 1,500 meters (4,900 feet) on foraging trips that traverse the entire North Pacific basin. Foraging range extends from California breeding colonies to the Aleutians and waters off Japan. PNW vagrant appearances occur during these foraging migrations.",
+      "connections": ["first-phocidae"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-283", "species": "Steller Sea Lion", "relationship": "E=8, Otariidae. Both at E=8; different acoustic character: Steller's sustained roar (100-1,000 Hz) vs. Elephant Seal's pulsed gargling belch (50-500 Hz). Both massive animals. Otariidae vs. Phocidae chapter comparison."},
+    {"target": "SPS-284", "species": "California Sea Lion", "relationship": "E=7, Otariidae. Otariidae chapter closed at 284. Phocidae opens at 285. The family shift: from eared seals (283-284) to true seals (285+)."},
+    {"target": "S36-285", "artist": "The Fastbacks", "relationship": "E=7. E=8 + E=7 = E=15. Both characterized by unusual persistence: Fastbacks' 22-year run; Elephant Seal's recovery from near-extinction spanning a century. Extraordinary commitment in their respective categories."}
+  ],
+  "milestones": ["FIRST PHOCIDAE", "PINNIPED TRIFECTA COMPLETE (Otariidae + Phocidae documented)"]
+}
