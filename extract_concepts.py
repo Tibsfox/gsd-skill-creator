@@ -100,14 +100,14 @@ PLACE_NAMES = [
 
 SPECIES_PATTERNS = [
     # Bird families
-    r"(?:Tundra |Trumpeter )?Swan",
-    r"(?:Bald |Golden )?Eagle",
-    r"(?:Great Blue |Green )?Heron",
+    r"(?:Tundra |Trumpeter )Swan",
+    r"(?:Bald |Golden )Eagle",
+    r"(?:Great Blue |Green )Heron",
     r"(?:Townsend's |Wilson's |Yellow-rumped )?Warbler",
     r"(?:Red-tailed |Cooper's |Sharp-shinned )?Hawk",
     r"(?:Barred |Great Horned |Snowy |Northern Spotted )?Owl",
     r"(?:Rufous |Anna's )?Hummingbird",
-    r"(?:Steller's |Blue |Gray )?Jay",
+    r"(?:Steller's |Blue |Gray )Jay",
     r"(?:Northern |Red-shafted )?Flicker",
     r"(?:American |Pacific )?Robin",
     r"(?:Black-capped |Chestnut-backed )?Chickadee",
@@ -124,15 +124,15 @@ SPECIES_PATTERNS = [
     r"Pigeon Guillemot",
     r"Rhinoceros Auklet",
     # Mammals
-    r"(?:Black |Grizzly )?Bear",
-    r"(?:Mountain |Cougar|Puma)",
-    r"(?:Mule |Black-tailed |White-tailed )?Deer",
-    r"(?:Gray |Red )?Fox",
+    r"(?:Black |Grizzly )Bear",
+    r"(?:Mountain Lion|Cougar|Puma)",
+    r"(?:Mule |Black-tailed |White-tailed )Deer",
+    r"(?:Gray |Red )Fox",
     r"Coyote",
     r"River Otter",
     r"Harbor Seal",
     r"Orca",
-    r"(?:Gray |Humpback |Blue )?Whale",
+    r"(?:Gray |Humpback |Blue )Whale",
     r"Douglas Squirrel",
     # Trees & plants
     r"Douglas[- ]?[Ff]ir",
@@ -237,6 +237,13 @@ CANONICAL_MAP = {
     'bayesian': 'Bayesian inference',
     'orca': 'Orca',
     'harbor seal': 'Harbor Seal',
+    'matrix': 'matrix',
+    'rsa': 'RSA cryptography',
+    'fft': 'Fast Fourier Transform',
+    'gsd': 'GSD',
+    'sps': 'SPS',
+    'muk': 'MUK',
+    'fm': 'FM radio',
 }
 
 
