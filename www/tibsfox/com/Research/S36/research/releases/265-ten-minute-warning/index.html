@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 265&deg; &mdash; Ten Minute Warning &mdash; E=8 &mdash; Proto-Punk/Rock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFCDD2; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #B71C1C; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #C62828; color: #FFCDD2; border: 1px solid #D32F2F; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #B71C1C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #FFEBEE; color: #B71C1C; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-card .level.milestone { background: #FFF8E1; color: #E65100; border: 1px solid #FFD700; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #B71C1C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #B71C1C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFEBEE; font-style: italic; color: #B71C1C; }
+    .milestone-banner { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFD700; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #5D4037; }
+    .milestone-banner strong { color: #E65100; }
+    .origin-card { background: linear-gradient(135deg, #B71C1C 0%, #C62828 40%, #D32F2F 100%); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .origin-card h3 { margin-top: 0; color: #FFEBEE; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .origin-card p { color: #FFCDD2; margin: 0.5rem 0; }
+    .origin-card strong { color: #FFEBEE; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>265 &mdash; Ten Minute Warning (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">265&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Ten Minute Warning</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Proto-Punk / Rock</span>
+          <span class="label-badge">Independent</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="milestone-banner">
+          <strong>DUFF McKAGAN ORIGIN POINT.</strong> Before Guns N&rsquo; Roses, before Los Angeles, before <em>Appetite for Destruction</em> sold 30 million copies &mdash; there was Capitol Hill, 1982. Ten Minute Warning is where one of rock history&rsquo;s most recognizable bass players learned to play.
+        </div>
+
+        <div class="origin-card">
+          <h3>The Capitol Hill Origin Story</h3>
+          <p>Michael Andrew McKagan &mdash; <strong>Duff McKagan</strong> &mdash; was born in Seattle on February 5, 1964, and grew up in Capitol Hill. Ten Minute Warning was his band before Los Angeles. He played <strong>drums</strong> here &mdash; his original instrument &mdash; and brought the rhythmic discipline of Capitol Hill punk into every bass line he later played for GN&rsquo;R.</p>
+          <p><strong>The line from "Welcome to the Jungle" to Capitol Hill, Seattle, 1982 runs through Ten Minute Warning.</strong></p>
+        </div>
+
+        <h2>Proto-Punk from Capitol Hill, E=8</h2>
+        <p>Ten Minute Warning formed in 1982 in Seattle&rsquo;s Capitol Hill neighborhood &mdash; before grunge existed as a concept, before Sub Pop was a cultural force, before the world knew Seattle as a music city. The band operated in the proto-punk ecosystem that was Seattle&rsquo;s first coherent musical tradition: fast, loud, independent, rooted in the same DIY energy that would later produce Mudhoney and Nirvana.</p>
+
+        <p>E=8 ties the engine maximum for a Seattle rock band. The designation is earned. Ten Minute Warning was not gentle or polished &mdash; this was Capitol Hill in the early 1980s, an affordable and culturally marginal neighborhood where punk made sense as a natural expression. The songs are fast, McKagan&rsquo;s drumming is relentless, Steve Pearson&rsquo;s guitar uncompromising.</p>
+
+        <blockquote>"The drummer who became the world's most recognizable rock bassist. What he learned at the kit in Capitol Hill, he applied to every GN'R bass line he ever played."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Band: McKagan and Pearson</h2>
+        <p>Ten Minute Warning is primarily a McKagan-Pearson band. Duff McKagan played drums &mdash; his original instrument before the Los Angeles conversion to bass. Steve Pearson handled guitar and vocals. Pearson&rsquo;s guitar work anchors the band in proto-punk territory: less pure hardcore than the Fartz (McKagan&rsquo;s earlier band), more structured and melodic, with an approach that acknowledges rock history while operating at punk velocity. The two-guitar setup with Paul Solger gave the band density and textural range.</p>
+
+        <p>The band name itself is historically situated: "Ten Minute Warning" carried nuclear-apocalypse connotations in the early Cold War 1980s. A ten-minute warning was the time between detection and impact. Punk chose this language deliberately &mdash; the nihilism was culturally resonant.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Seattle Proto-Punk Ecosystem</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Fartz</h4>
+            <span class="level advanced">Predecessor</span>
+            <p>Pure hardcore. McKagan's earlier band, representing maximum aggression in the Seattle scene. Ten Minute Warning is the more mature evolution: same energy, more song structure.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The Fastbacks</h4>
+            <span class="level intermediate">Peer</span>
+            <p>Power-pop punk formed 1979. Kim Warnick and Kurt Bloch. McKagan briefly passed through. The Fastbacks lasted decades; they represent Seattle punk's melodic wing.</p>
+          </div>
+          <div class="theory-card">
+            <h4>U-Men</h4>
+            <span class="level intermediate">Peer</span>
+            <p>Post-punk, art-adjacent. More influenced by Nick Cave and Birthday Party than Black Flag. The atmospheric complement to Ten Minute Warning's direct aggression.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Green River</h4>
+            <span class="level advanced">Successor</span>
+            <p>Mark Arm, Steve Turner, Jeff Ament, Stone Gossard. The direct link from proto-punk to grunge. Ten Minute Warning is upstream of Green River in the Seattle genealogy.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Departure: Capitol Hill to Los Angeles</h2>
+        <p>McKagan left Seattle for Los Angeles in 1983&ndash;1984. Los Angeles was the center of the American rock industry &mdash; the Sunset Strip, the major labels, the industry infrastructure that Seattle did not yet have. A young musician who wanted to break through nationally had limited options. McKagan chose Los Angeles.</p>
+
+        <p>In Los Angeles he connected with Slash, Axl Rose, Izzy Stradlin, and Steven Adler. Guns N&rsquo; Roses formed in 1985. <em>Appetite for Destruction</em> was released in 1987 and went on to sell approximately 30 million copies worldwide. McKagan joined as bassist &mdash; converting from his Seattle role as drummer. His bass playing in GN&rsquo;R has the rhythmic authority of a drummer: driving, locked-in, foundational. Capitol Hill trained this quality into him.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">264</span> Prior degree &mdash; engine arrives at 265 through the full Seattle arc.</li>
+          <li><span class="ref-degree">266</span> The Accused &mdash; E=8 continues. Crossover thrash from Oak Harbor. First Whidbey Island band.</li>
+          <li><span class="ref-degree">268</span> The Sonics &mdash; E=8. Proto-Punk. Third appearance. The engine returns to the Tacoma forefathers.</li>
+          <li><span class="ref-degree">SPS 265</span> Glacier Calving Mt Rainier &mdash; E=6. Sharp crack and rumble cascade. 25 named glaciers. Geophysics arc continues.</li>
+          <li><span class="ref-degree">future</span> Guns N&rsquo; Roses &mdash; McKagan future appearance. Duff McKagan thread established at 265.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">265 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8 (MAX)</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Proto-Punk/Rock</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1982&ndash;1986</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Independent</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Duff McKagan</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar / Vocals</span><span class="stat-value">Steve Pearson</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Paul Solger</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">III</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">73.6%</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">McKagan Origin</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>McKagan Thread</h4>
+          <div class="stat-row"><span class="stat-label">Next band</span><span class="stat-value">Guns N&rsquo; Roses</span></div>
+          <div class="stat-row"><span class="stat-label">GN&rsquo;R debut</span><span class="stat-value">1987</span></div>
+          <div class="stat-row"><span class="stat-label">Sales</span><span class="stat-value">~30M (Appetite)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Glacier Calving</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
