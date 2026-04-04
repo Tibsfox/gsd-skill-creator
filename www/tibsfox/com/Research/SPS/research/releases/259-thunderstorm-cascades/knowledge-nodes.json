@@ -1,0 +1,58 @@
+{
+  "degree": 259, "sound": "Thunderstorm Cascades", "slug": "259-thunderstorm-cascades",
+  "acoustic_character": "Rolling crack + rumble",
+  "energy": 8,
+  "domain": "Meteorology",
+  "mechanism": "Lightning channel thermal expansion producing shock wave; extended channel length and mountain topography producing rolling multi-directional rumble",
+  "ecosystem": "High ridge",
+  "season": "Summer (July-August dominant)",
+  "status": "Third entry in Storm Arc (257-260). FINAL E=8 IN STREAK. Degree 260 brings E=9 NEW ABSOLUTE SPS MAXIMUM.",
+  "acoustic_physics": {
+    "lightning_channel_temperature_K": 30000,
+    "temperature_comparison": "Approximately 5x surface temperature of the sun",
+    "heating_duration": "Fraction of a millisecond",
+    "shock_wave": "Supersonic at origin; decays to sound wave as it expands outward",
+    "crack_source": "Direct arrival from nearest point of channel. Sharp, instantaneous.",
+    "rumble_mechanism_1": "Extended channel length (1-8 miles). Far end of 8-mile channel: acoustic arrival 40 seconds after near end.",
+    "rumble_mechanism_2": "Mountain reflection: valley walls, ridge faces return separate echoes at different delays. Each topographic feature = separate acoustic arrival.",
+    "valley_echo_duration_sec": "30-60 per bolt in deep Cascade valley",
+    "doppler_effect": "Approaching storm: each rumble louder than last. Departing storm: each rumble quieter. Acoustic signature of storm motion."
+  },
+  "cascade_thunderstorm_climate": {
+    "primary_mechanism": "Orographic convection + afternoon heating + continental air instability",
+    "peak_season": "July-August",
+    "geographic_focus": "Central Cascades (Rainier, Alpine Lakes), Eastern Cascades",
+    "fire_weather_connection": "Primary natural wildfire ignition source. Dry lightning + high temp + low RH = fire weather recipe.",
+    "lightning_fatality_pnw_per_year": "20-50 (WA + OR + ID)"
+  },
+  "cascade_geography": {
+    "range_length_miles": 250,
+    "range_width_miles": "30-80",
+    "washington_volcanoes": {
+      "mt_baker_ft": 10781,
+      "glacier_peak_ft": 10541,
+      "mt_rainier_ft": 14411
+    },
+    "alpine_lakes_wilderness_acres": 393000,
+    "passes": ["Snoqualmie Pass", "Stevens Pass", "North Cascades Highway"]
+  },
+  "lightning_safety": {
+    "30_30_rule": "Move to shelter if thunder arrives within 30 seconds of lightning (storm within 6 miles). Wait 30 minutes after last thunder.",
+    "high_ridge_risk": "Above treeline: person is tallest conductor. Maximum risk position.",
+    "precursors": "Hair-standing sensation, ozone smell = very close strike imminent.",
+    "max_strike_distance_miles": "10+ (from cloud)"
+  },
+  "theory_nodes": [
+    { "concept": "FINAL E=8 IN STORM ARC STREAK. Degrees 257, 258, 259 are all E=8 -- three consecutive. Thunderstorm Cascades is the last E=8. Degree 260 brings E=9 NEW ABSOLUTE SPS MAXIMUM (Lightning Strike Tree). Transition from storm as environment (259: rolling thunder surrounding the observer) to storm as event (260: lightning entering a specific tree). The arc escalates to its absolute peak.", "level": "milestone", "department": "engine-arc", "description": "Final E=8 in streak. E=9 arrives next. Environment transitions to event." },
+    { "concept": "Mountain topography converts single lightning bolt into 30-60 second acoustic event. Valley walls, ridge faces, and rock outcrops return reflected thunder at different delays. Cascade topography's acoustic geometry extends single-bolt duration from a few seconds (flat terrain) to a full minute (deep valley). The 'rolling' character of mountain thunder is the reflection landscape speaking.", "level": "advanced", "department": "acoustic-physics", "description": "Mountain reflection geometry: why Cascade thunder rolls and flat-land thunder does not." },
+    { "concept": "Summer Cascade thunderstorm connects directly to wildfire: the primary natural ignition source. Dry lightning + high temperature + low relative humidity = fire weather. Thunder (259) is the sound of the storm; Lightning Strike Tree (260) is the storm's most violent specific action. The arc 259→260 is the natural sequence from weather to ignition.", "level": "advanced", "department": "ecological-connection", "description": "Thunderstorm → lightning strike → wildfire: natural sequence documented across two consecutive degrees." }
+  ],
+  "cross_references": [
+    {"degree": 258, "sound": "Olympic Peninsula Wind Storm", "relationship": "Storm moves from winter Olympic ridge (258) to summer Cascade ridge (259). Different season, different mountain range, same E=8 storm arc level."},
+    {"degree": 260, "sound": "Lightning Strike Tree", "relationship": "TRANSITION TO E=9. Thunder (259) is the storm as environment; Lightning Strike Tree (260) is the storm as event. Rolling rumble → explosive crack. The absolute maximum arrives."}
+  ],
+  "s36_pair": {"degree": 259, "artist": "Ann Wilson", "pairing_note": "E=8 vs E=7. Rolling Cascade thunder vs. hard rock vocal belt. Both large, both convert physical energy into sustained sound. Biological process (vocal belt) vs. atmospheric process (lightning thermal expansion). Mountain thunder is louder; Ann Wilson's voice is more precise."},
+  "storm_arc_position": {"arc": "257-260", "position": 3, "e8_streak_position": 3, "status": "FINAL E=8 IN STREAK", "note": "E=9 arrives at degree 260. Storm Arc completes at maximum intensity."},
+  "milestones": ["FINAL E=8 IN STORM ARC STREAK", "TRANSITION TO E=9 IMMINENT (degree 260)", "STORM ARC DEGREE 3 OF 5"],
+  "tags": ["thunderstorm", "cascades", "high-ridge", "e8", "storm-arc", "lightning", "thunder", "rolling-rumble", "summer-storm", "orographic-convection", "alpine-lakes", "mt-rainier", "fire-weather", "acoustic-reflection", "valley-echo"]
+}
