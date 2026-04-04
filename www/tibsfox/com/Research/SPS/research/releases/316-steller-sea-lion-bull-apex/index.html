@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 316&deg; &mdash; Steller Sea Lion Bull Apex Roar &mdash; E=8 &mdash; Otariidae &mdash; THE SUMMIT CLOSES &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #BF360C, #D84315, #E64A19); color: #FFE0B2; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 20px rgba(191,54,12,0.5); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #D84315; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #D84315; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .apex-banner { background: linear-gradient(135deg, #BF360C, #D84315); border: 2px solid #FFAB91; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .apex-banner h3 { margin: 0 0 0.5rem; color: #FFE0B2; font-size: 1.1rem; }
+    .apex-banner p { color: #FFE0B2; margin: 0.3rem 0; }
+    .roar-display { text-align: center; font-size: 1.5rem; font-weight: 700; color: #BF360C; font-family: 'Georgia', serif; letter-spacing: 0.04em; margin: 1.5rem 0 0.5rem; }
+    .roar-sub { text-align: center; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .gruntruck-card { background: linear-gradient(135deg, #4A0020, #880E4F); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #F48FB1; border: 1px solid #FFAB91; }
+    .gruntruck-card h3 { margin: 0 0 0.5rem; color: #FFAB91; font-size: 1.1rem; }
+    .gruntruck-card p { color: #F8BBD9; margin: 0.4rem 0; line-height: 1.65; }
+    .gruntruck-card strong { color: #FFE0B2; }
+    .acoustic-card { background: linear-gradient(135deg, #BF360C, #8D2500); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFE0B2; }
+    .acoustic-card h3 { margin-top: 0; color: #FFAB91; font-size: 1.1rem; }
+    .acoustic-card p { color: #FFE0B2; margin: 0.4rem 0; }
+    .acoustic-card strong { color: #FFDDC1; }
+    .sps-arc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1.5rem 0; }
+    .arc-cell { padding: 0.75rem 0.5rem; border-radius: 4px; text-align: center; font-family: system-ui, sans-serif; font-size: 0.82rem; }
+    .arc-cell.e9 { background: linear-gradient(135deg, #0D0D0D, #1A1A2E); color: #FFD700; border: 2px solid #FFD700; }
+    .arc-cell.e8 { background: #BF360C; color: #FFE0B2; }
+    .arc-cell.e7 { background: #455A64; color: #ECEFF1; }
+    .arc-cell.e8-current { background: linear-gradient(135deg, #BF360C, #8D2500); color: #FFE0B2; border: 2px solid #FFAB91; }
+    .arc-label { font-weight: 700; font-size: 1rem; margin-top: 0.2rem; }
+    .arc-name { font-size: 0.72rem; margin-top: 0.15rem; opacity: 0.85; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #D84315; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">316&deg;</div>
+      <div class="release-title-block">
+        <h2>Steller Sea Lion Bull Apex Roar</h2>
+        <div class="scientific"><em>Eumetopias jubatus</em> &mdash; Schreber, 1776 &mdash; E=8 &mdash; OTARIIDAE MAXIMUM RETURNS &mdash; Apex bull territorial declaration &mdash; THE SUMMIT CLOSES AT SEA</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      sustained maximum territorial roar &mdash; <strong>100&ndash;1,500 Hz</strong> &mdash; 500+ kg bull &mdash; prime rock dominant position &mdash; summer breeding season &mdash; E=8 OTARIIDAE APEX DECLARATION
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="apex-banner">
+          <h3>Otariidae Maximum Returns &mdash; E=8 &mdash; The Summit Closes at Sea</h3>
+          <p>The grunge summit closes at degree 316 on both tracks at E=8. Gruntruck: the closing entry on Capitol Hill, the representative majority, Ben McMillan, Roadrunner Records. Steller Sea Lion bull: the apex declaration, the dominant beachmaster on prime rock, sustained territorial roar at maximum Otariidae volume. The E=8 first established at degree 306 (beach battle) returns not as combat but as declaration: the dominant bull, alone on prime rock, broadcasting his position. Both summit-closing entries at E=8. The grunge summit ends on land and at sea simultaneously, both at maximum, both representations of their majority condition.</p>
+        </div>
+
+        <h2>The SPS Summit Arc &mdash; Degrees 313&ndash;316</h2>
+        <div class="sps-arc">
+          <div class="arc-cell e9">
+            <div class="arc-label">E=9</div>
+            <div class="arc-name">313 Cougar-Wolf</div>
+            <div style="font-size:0.7rem;margin-top:0.15rem;">Peak. Two apex predators.</div>
+          </div>
+          <div class="arc-cell e8">
+            <div class="arc-label">E=8</div>
+            <div class="arc-name">314 Elk Herd</div>
+            <div style="font-size:0.7rem;margin-top:0.15rem;">Multiple bulls, river bottom.</div>
+          </div>
+          <div class="arc-cell e7">
+            <div class="arc-label">E=7</div>
+            <div class="arc-name">315 Varied Thrush</div>
+            <div style="font-size:0.7rem;margin-top:0.15rem;">One note. Fog. Quiet.</div>
+          </div>
+          <div class="arc-cell e8-current">
+            <div class="arc-label">E=8</div>
+            <div class="arc-name">316 Sea Lion Bull</div>
+            <div style="font-size:0.7rem;margin-top:0.15rem;">Apex. Declaration. Close.</div>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #FFAB91;margin:2rem 0;">
+
+        <div class="roar-display">ROAR &mdash;&mdash;&mdash; ROAR &mdash;&mdash;&mdash; ROAR</div>
+        <div class="roar-sub">The dominant bull raises his head &mdash; inflates his chest &mdash; delivers a sustained resonant roar at 100&ndash;1,500 Hz &mdash; 2&ndash;8 seconds duration &mdash; hundreds of times per day during peak breeding &mdash; the beachmaster&rsquo;s declaration: prime rock, breeding access, maximum body mass in maximum voice &mdash; the largest eared seal in the world &mdash; E=8</div>
+
+        <h2>Combat vs. Declaration &mdash; The Distinction from Degree 306</h2>
+        <p>The engine documents two distinct Steller Sea Lion bull acoustic events:</p>
+        <p><strong>Degree 306 &mdash; Beach Battle (E=8):</strong> Two bulls in direct physical combat. Continuous roaring from both animals simultaneously, heavy concussive body impact, foreflipper percussion. E=8 through the superposition of two animals and the physical percussion of combat.</p>
+        <p><strong>Degree 316 &mdash; Apex Bull Declaration (E=8):</strong> One dominant bull, alone on prime rock, delivering a sustained territorial roar. No combat percussion. No second animal. E=8 through the individual amplitude of a single dominant bull at maximum sustained vocalization &mdash; the deepest resonance chambers, the largest body mass, the loudest individual Otariidae vocalization in the PNW.</p>
+        <p>Both events are E=8 through different mechanisms. The battle reaches E=8 through two animals combining. The declaration reaches E=8 through one animal alone at maximum. The declaration is, in a sense, the more significant statement: one animal producing maximum Otariidae acoustic energy without the addition of another animal.</p>
+
+        <div class="acoustic-card">
+          <h3>Acoustic Profile &mdash; The Apex Bull Roar</h3>
+          <p><strong>Frequency:</strong> 100&ndash;1,500 Hz primary energy. Peak 200&ndash;800 Hz. Harmonics to 3,000+ Hz. The sub-bass content (100&ndash;400 Hz) is perceived as pressure at close range.</p>
+          <p><strong>Amplitude:</strong> 110&ndash;120 dB at 10&ndash;20 meters. Dominant over rookery ambient at 100+ meters. Comparable to a moderately loud rock concert at close range.</p>
+          <p><strong>Resonance anatomy:</strong> The massive chest and neck cavity of a 500+ kg bull amplifies specific harmonics, producing the deepest, most resonant roar in the family Otariidae. The largest resonance chamber = the deepest roar = the E=8 individual maximum.</p>
+          <p><strong>Duration:</strong> 2&ndash;8 seconds per roar event. Hundreds of events per day during peak breeding season. The highest sustained individual acoustic output of any Pacific Northwest pinniped.</p>
+        </div>
+
+        <h2>The Species</h2>
+        <p><em>Eumetopias jubatus</em>, Schreber, 1776. The largest member of Otariidae. Adult bulls 700&ndash;1,200 lbs, body length 9&ndash;11 feet. Extreme sexual dimorphism: bulls 2&ndash;3 times larger than cows. The characteristic mane of coarser fur around the neck and chest (the &ldquo;Steller&rdquo; of the common name) provides physical neck protection during combat. Range: Sea of Japan through the Gulf of Alaska south to California. Washington colonies: San Juan Islands haul-outs, Olympic Peninsula coast. Eastern stock population recovery (~40,000) is a Pacific Northwest marine mammal conservation success.</p>
+        <p>Polygynous breeding: dominant beachmaster bulls control prime rock and maintain harem access during the June-July peak. Beachmasters hold their position for 2&ndash;3 breeding seasons before being displaced by younger, larger competitors. The apex bull documented at degree 316 is at the peak of his physical and competitive development.</p>
+
+        <div class="gruntruck-card">
+          <h3>The Gruntruck Pairing &mdash; E=8 at the Summit&rsquo;s Close</h3>
+          <p><strong>Degree 316: S36 E=8 + SPS E=8.</strong> Gruntruck: Capitol Hill, Roadrunner Records, Ben McMillan, four years, two albums. The representative majority &mdash; the bands that were there at full force and did not cross over into commercial history. E=8: the grunge summit closes at the energy it opened (TAD, 309, E=8).</p>
+          <p><strong>Steller Sea Lion bull:</strong> Prime rock, summer breeding season, the dominant individual at maximum sustained territorial roar. The Otariidae maximum returns for the summit&rsquo;s close. E=8: the energy first established at degree 306 returns at the final degree.</p>
+          <p><strong>The parallel:</strong> <strong>Both closing entries are not the famous ones.</strong> Gruntruck is not Pearl Jam. The bull apex roar is not the E=9 of the Marten or the Cougar-Wolf encounter. Both are the maximum of their own thing &mdash; the Capitol Hill bands that did not cross over; the individual Otariidae territorial declaration. <strong>E=8: the correct final note for the grunge summit on both tracks.</strong></p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>S36-316 Gruntruck (E=8)</strong>
+            <p>The grunge summit closes simultaneously on both tracks at E=8. Ben McMillan. Capitol Hill. Both closing entries at E=8: representative majority, summit close.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-306 Steller Sea Lion Beach Battle (E=8)</strong>
+            <p>Combat event: two bulls, collision, percussion. Degree 316 is the declaration: one dominant bull, alone, at maximum sustained individual output. Both E=8, different mechanisms.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-315 Varied Thrush in Fog (E=7)</strong>
+            <p>Previous degree. One note. Fog. Quiet. The E=8 return at degree 316 closes the SPS arc that the Varied Thrush resolved to E=7.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-308 Marten Scream (E=9)</strong>
+            <p>SPS maximum individual. The Steller Sea Lion bull at E=8 is below the Marten by one unit &mdash; the most powerful individual Otariidae below the most startling individual Mustelidae.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-313 Cougar-Wolf (E=9)</strong>
+            <p>Grunge summit SPS maximum. E=9 through superposition. The Steller Sea Lion bull at E=8 closes the summit three degrees after the maximum peak.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Apex territorial roar</div>
+          <div class="stat-detail">Sustained dominant declaration</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 8</div>
+          <div class="stat-detail">Otariidae max. Summit close.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">100&ndash;1,500 Hz</div>
+          <div class="stat-detail">Sub-bass to mid. Resonant.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-style:italic;font-size:0.88rem;">Eumetopias jubatus</div>
+          <div class="stat-detail">Schreber, 1776</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Body mass (bull)</div>
+          <div class="stat-value">700&ndash;1,200 lbs</div>
+          <div class="stat-detail">Largest Otariidae. 500+ kg.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">May&ndash;Aug, peak June&ndash;July</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Prime rock</div>
+          <div class="stat-detail">Breeding rookery, offshore</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value" style="color:#D84315;">OTARIIDAE MAX RETURNS</div>
+          <div class="stat-detail">Summit close. Degree 316.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Gruntruck (E=8)</div>
+          <div class="stat-detail">E=16 combined. Summit closes.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
