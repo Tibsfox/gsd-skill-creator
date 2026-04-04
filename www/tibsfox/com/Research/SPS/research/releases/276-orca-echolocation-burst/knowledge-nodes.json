@@ -1,0 +1,72 @@
+{
+  "degree": 276,
+  "species": "Orca",
+  "scientific_name": "Orcinus orca",
+  "slug": "276-orca-echolocation-burst",
+  "sound_type": "rapid click trains -- Southern Resident Killer Whale biosonar at up to 224 dB source level, 20-100 kHz, 200-1,000+ clicks per second, Chinook salmon hunting, E=8",
+  "energy": 8,
+  "ecosystem": "Hunting -- active pursuit of Chinook salmon in Salish Sea waters",
+  "season": "Resident (year-round; Chinook-following seasonal movements within resident range)",
+  "family": "Delphinidae",
+  "order": "Artiodactyla (Cetacea)",
+  "milestone": "ORCA ARC CLOSES at degree 276. Seven-degree arc (270-276) complete. Most sustained single-species documentation in SPS catalog. Echolocation is the perceptual maximum of the arc -- 224 dB source level, the loudest biological sound documented in the engine. Combined E=16 with Bikini Kill (S36 276).",
+  "coordinates": {
+    "lat": 48.52,
+    "lon": -123.00,
+    "description": "Southern Resident hunting range throughout Salish Sea. Primary summer concentration San Juan Islands, Haro Strait, Boundary Pass -- following Chinook salmon."
+  },
+  "echolocation_data": {
+    "source_level_db": "Up to 224 dB re 1 μPa @ 1m (underwater acoustic reference). Among the highest measured for any biological sound. Near sperm whale (230-236 dB).",
+    "frequency_range_hz": "20-100+ kHz. Primarily ultrasonic. Below 20 kHz is the human hearing limit. SRKW echolocation clicks are largely inaudible to human observers.",
+    "click_rate_per_second": "200-1,000+ per second during active hunting. Near-continuous click train production.",
+    "click_duration": "Individual click duration: microseconds (microsecond scale). Brief, broadband pulses.",
+    "beam_directionality": "Directional forward beam produced by melon (fat-filled acoustic lens in forehead). Beam projected forward from melon. Animal can adjust direction by head orientation.",
+    "echo_reception": "Returning echoes received through acoustic fat in lower jaw, channeled to middle ear. Time delay = distance. Frequency characteristics = target properties (size, shape, composition).",
+    "anatomy": "Phonic lips (monkey lips) in nasal passage produce clicks. Melon shapes and focuses beam. Lower jaw acoustic fat receives echoes. Same basic system as vocalization but at ultrasonic frequencies.",
+    "simultaneous_production": "Orcas can produce vocalizations (social) and echolocation clicks simultaneously. Same anatomy, two functional modes at once.",
+    "key_property": "ORCA ARC CLOSES at degree 276. 224 dB source level -- among the loudest biological sounds on Earth. 20-100 kHz ultrasonic click trains. 200-1,000+ clicks per second. Chinook salmon prey detection. Perceptual maximum of the orca arc. Physical maximum was E=9 breach (degree 273); perceptual maximum is E=8 echolocation (degree 276)."
+  },
+  "nodes": [
+    {
+      "id": "arc-close",
+      "type": "pattern",
+      "title": "Orca Arc Closes -- Seven Degrees Complete",
+      "description": "Degrees 270-276: all Orcinus orca. Most sustained single-species documentation in SPS. Arc narrative: Voice (270 pod call) → Body (273-275 breach/spy-hop/pec-slap) → Perception (276 echolocation). Complete.",
+      "connections": ["224-db", "chinook-hunting"]
+    },
+    {
+      "id": "224-db",
+      "type": "concept",
+      "title": "224 dB Source Level -- Near Biological Maximum",
+      "description": "Up to 224 dB re 1 μPa @ 1m. Among the highest measured for any biological sound. Near sperm whale maximum (230-236 dB). The orca's 224 dB is the power required to detect Chinook at depth in turbid water at hunting range.",
+      "connections": ["arc-close", "chinook-hunting"]
+    },
+    {
+      "id": "biosonar-anatomy",
+      "type": "concept",
+      "title": "Biosonar Anatomy -- Same System as Voice",
+      "description": "Phonic lips produce clicks. Melon shapes directional beam. Lower jaw acoustic fat receives echoes. Same basic anatomy as vocalization (pod call, degree 270) but at ultrasonic frequencies for different function. Simultaneous production of voice and echolocation documented.",
+      "connections": ["224-db", "arc-close"]
+    },
+    {
+      "id": "chinook-hunting",
+      "type": "connection",
+      "title": "Chinook Salmon Hunting -- Cross-Reference Degree 237",
+      "description": "Echolocation is used to detect, track, and pursue Chinook salmon in turbid Salish Sea waters. Salmon at degree 237; acoustic system designed to find them at degree 276. The prey-predator acoustic link documented in engine structure.",
+      "connections": ["224-db", "arc-close"]
+    },
+    {
+      "id": "perceptual-maximum",
+      "type": "concept",
+      "title": "Physical vs. Perceptual Maximum",
+      "description": "Breach (273) = physical maximum (E=9, six tons airborne, body-slam). Echolocation (276) = perceptual maximum (E=8, 224 dB biosonar, hunting with sound). Both represent orca extremes in different registers. Arc contains both extremes.",
+      "connections": ["arc-close", "224-db"]
+    }
+  ],
+  "cross_references": [
+    {"target": "SPS-270", "species": "Orca pod call", "relationship": "Arc beginning. Social voice (0.5-20 kHz, communication). Same anatomy as echolocation. Distance from voice (270) to biosonar (276): identity to perception. The arc's full span."},
+    {"target": "SPS-273", "species": "Orca breaching", "relationship": "Physical maximum (E=9 breach) vs. perceptual maximum (E=8 echolocation). Arc's explosive physical extreme vs. its internal acoustic extreme. Both are orca maxima."},
+    {"target": "SPS-237", "species": "Chinook Salmon", "relationship": "DIRECT ECOLOGICAL LINK. Echolocation hunts Chinook. Salmon documented at 237; acoustic hunting system documented at 276. The prey-predator acoustic relationship in engine structure."},
+    {"target": "S36-276", "artist": "Bikini Kill", "relationship": "ORCA ARC CLOSES. E=16 combined. Riot grrrl E=8 maximum energy. Kathleen Hanna's voice spanning whisper to scream. Orca biosonar spanning silence to 224 dB. Maximum intensity in different registers. Both Pacific Northwest."}
+  ]
+}

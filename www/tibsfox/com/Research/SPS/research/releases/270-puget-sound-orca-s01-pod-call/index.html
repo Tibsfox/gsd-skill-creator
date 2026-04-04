@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 270&deg; &mdash; Puget Sound Orca S01 Pod Call &mdash; THREE-QUARTERS MARK &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A237E, #283593, #3949AB); color: #C5CAE9; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 32px rgba(26,35,126,0.7); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: var(--puget-teal); font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--puget-teal); margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .three-quarters-orca {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 15%, #1565C0 30%, #0277BD 45%, #01579B 60%, #006064 80%, #00695C 100%);
+      border: 3px solid #1A237E;
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+      box-shadow: 0 0 40px rgba(26,35,126,0.6);
+    }
+    .three-quarters-orca h3 { margin-top: 0; font-size: 1.5rem; color: #C5CAE9; text-transform: uppercase; letter-spacing: 0.06em; }
+    .three-quarters-orca p { color: #E8EAF6; margin: 0.6rem 0; }
+    .three-quarters-orca strong { color: #90CAF9; }
+    .endangered-card { background: linear-gradient(135deg, #B71C1C, #C62828); border: 2px solid #B71C1C; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .endangered-card h3 { margin-top: 0; color: #EF9A9A; font-size: 1.1rem; }
+    .endangered-card p { color: #FFCDD2; margin: 0.4rem 0; }
+    .endangered-card strong { color: #EF9A9A; }
+    .acoustic-map { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .acoustic-map h3 { margin-top: 0; font-size: 1.1rem; }
+    .theory-node { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,105,92,0.12); }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; color: white; font-weight: 700; }
+    .theory-icon.orca { background: #1A237E; }
+    .theory-icon.dialect { background: #0277BD; }
+    .theory-icon.endangered { background: #B71C1C; }
+    .theory-icon.salmon { background: #E65100; }
+    .theory-icon.three { background: #6A1B9A; }
+    .theory-content h4 { margin: 0; font-size: 0.92rem; color: var(--earth-brown); font-family: system-ui, sans-serif; }
+    .theory-content p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .theory-level { display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.1rem 0.45rem; border-radius: 3px; font-family: system-ui, sans-serif; font-weight: 600; }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #E8EAF6; color: #1A237E; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: var(--puget-teal); font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">270&deg;</div>
+      <div class="release-title-block">
+        <h2>Puget Sound Orca &mdash; S01 Pod Call</h2>
+        <div style="font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif;"><em>Orcinus orca</em> (Delphinidae) &mdash; E=8 &mdash; THREE-QUARTERS MARK &mdash; ORCA ARC BEGINS</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      repertoire-specific calls, clan dialect &mdash; <strong>THREE-QUARTERS MARK: 270/360 = 75%</strong> &mdash; ORCA ARC BEGINS &mdash; Southern Resident Killer Whale, <strong>~73 individuals, ENDANGERED</strong>, J/K/L pods, salmon-dependent &mdash; Puget Sound, Salish Sea &mdash; E=8 on BOTH SIDES
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- THREE-QUARTERS MARK + ORCA ARC -->
+        <div class="three-quarters-orca">
+          <h3>270&deg; &mdash; Three-Quarters Mark &mdash; Orca Arc Begins</h3>
+          <p>
+            <strong>270/360 = 75%.</strong> Three-quarters of the SPS engine complete. Quadrant IV begins. The three-quarters mark on the SPS side belongs to the <strong>Southern Resident Killer Whale</strong> &mdash; the most acoustically documented, most culturally significant, most endangered marine mammal in the Pacific Northwest.
+          </p>
+          <p>
+            <strong>E=8 ON BOTH SIDES at degree 270:</strong> The Fartz (S36, hardcore punk, Alternative Tentacles) and the Puget Sound orca S01 pod (SPS, SRKW, Salish Sea). Maximum energy simultaneously at the engine&rsquo;s three-quarters milestone.
+          </p>
+          <p>
+            The <strong>ORCA ARC</strong> (degrees 270&ndash;276) is the SPS engine&rsquo;s emotional centerpiece &mdash; seven degrees documenting the Southern Resident Killer Whale and the transient (Bigg&rsquo;s) orca. It begins here, at maximum energy, at the engine&rsquo;s most significant structural milestone.
+          </p>
+        </div>
+
+        <!-- Endangered Card -->
+        <div class="endangered-card">
+          <h3>Endangered &mdash; ~73 Individuals</h3>
+          <p>
+            The Southern Resident Killer Whale was listed as <strong>ENDANGERED</strong> under the US Endangered Species Act in 2005. Current population: approximately <strong>73&ndash;75 individuals</strong> in three pods (J, K, L). The population has not shown sustained recovery under the ESA listing.
+          </p>
+          <p>
+            Primary threats: <strong>Chinook salmon decline</strong> (the Southern Residents are obligate Chinook eaters), acoustic disturbance from boat traffic (forces louder vocalizations, interferes with echolocation), and persistent organic pollutants (PCBs concentrated through the salmon they eat). The salmon connection cross-references to engine degrees 236-242.
+          </p>
+        </div>
+
+        <h2>The Acoustic Dialect</h2>
+        <p>Each Southern Resident pod has a <strong>culturally transmitted acoustic repertoire</strong> &mdash; a set of call types that are learned, not genetically encoded. Calves learn their pod&rsquo;s calls from their mothers and other pod members. The calls are cultural in the strict biological sense: they are produced by learning, vary among groups, and are maintained by social transmission.</p>
+
+        <p>John Ford&rsquo;s landmark 1989 research established that killer whale pods have distinct acoustic dialects &mdash; one of the clearest demonstrations of animal culture in biology. The Southern Resident discrete calls have <strong>characteristic frequency contours</strong> (pitch change over time), characteristic durations, and characteristic rhythms. Each call type has an acoustic fingerprint recognizable from spectrographic analysis.</p>
+
+        <p>Vocalization types: <strong>discrete calls</strong> (stereotyped, pod-specific, social coordination), <strong>whistles</strong> (tonally pure, short-range social communication), <strong>clicks</strong> (echolocation pulses, navigation and prey detection). The S01 pod call refers to the repertoire of discrete calls characteristic of the Southern Resident community &mdash; the acoustic identity of the pods.</p>
+
+        <h2>J, K, and L Pods</h2>
+        <p>The Southern Resident community is structured into three matrilineal pods:</p>
+        <ul style="font-size: 0.95rem; line-height: 1.8;">
+          <li><strong>J Pod:</strong> The smallest and most studied. Approximately 23-25 individuals. Most consistently observed in Puget Sound and the Strait of Juan de Fuca.</li>
+          <li><strong>K Pod:</strong> Approximately 18-20 individuals. More offshore-ranging than J Pod. Less frequently observed in inland waters.</li>
+          <li><strong>L Pod:</strong> The largest. Approximately 32-35 individuals. Most diverse ranging; frequently in offshore waters.</li>
+        </ul>
+        <p>When pods come together (called a "superpod"), the acoustic environment becomes extraordinarily rich: all three pods&rsquo; repertoires overlapping in the water simultaneously. Superpods are celebratory behavioral events -- associated with socializing, play, and high-energy surface behavior.</p>
+
+        <h2>Puget Sound -- The Orca&rsquo;s Ocean</h2>
+        <p>Puget Sound is an inland sea: enclosed, deep, tidal, approximately 100 miles long. The Southern Residents historically used all of Puget Sound, the Strait of Juan de Fuca, and the Salish Sea as their core range, following Chinook salmon through the seasons. The summer concentration area has been the waters between the San Juan Islands and the Fraser River (Canada), where Chinook returning to spawn are intercepted.</p>
+
+        <p>The acoustic environment of Puget Sound has significantly degraded since the mid-20th century: commercial shipping, recreational boats, and naval operations all contribute to anthropogenic noise. The Southern Residents compensate with louder vocalizations (the Lombard effect) &mdash; an energy cost that reduces fitness. Boat noise is a threat documented by NOAA&rsquo;s SRKW recovery plan.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-271 Southern Resident Killer Whale (next)</strong>
+            <p>ORCA ARC CONTINUES. Complex whistles and clicks. The acoustic detail of the SRKW communication system deepens at degree 271.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-272 Transient Orca Hunt Sequence</strong>
+            <p>The Bigg&rsquo;s (transient) orca contrast. Mammal-eating, acoustically silent during hunting. A different ecotype with different behavior, different diet, different acoustic strategy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-236&ndash;242 Salmon Arc (cross-ref)</strong>
+            <p>SALMON DEPENDENCE. Southern Residents are obligate Chinook eaters. The salmon arc documents the salmon that the orca arc depends on. The arcs are ecologically linked.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-269 Mixed-Species Dawn Chorus</strong>
+            <p>HABITAT TRANSITION. Forest edge (269) to inland sea (270). Bird community to cetacean community. Both community acoustic events. The transition is one of the engine&rsquo;s most dramatic.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+          <div class="theory-node">
+            <div class="theory-icon three">3/4</div>
+            <div class="theory-content">
+              <h4>Three-Quarters Mark &mdash; E=8 on Both Sides</h4>
+              <span class="theory-level advanced">Milestone</span>
+              <p>270/360 = 75%. E=8 on SPS (orca S01 pod) and S36 (The Fartz) simultaneously. Maximum energy at the engine&rsquo;s most significant structural milestone.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon dialect">D</div>
+            <div class="theory-content">
+              <h4>Cultural Dialect &mdash; Learned, Not Encoded</h4>
+              <span class="theory-level advanced">Advanced</span>
+              <p>Pod-specific calls are culturally transmitted (learned from mother and pod members). Not genetically encoded. Animal culture in the strict biological sense. Ford 1989.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon endangered">!</div>
+            <div class="theory-content">
+              <h4>Endangered &mdash; ~73 Individuals</h4>
+              <span class="theory-level advanced">Critical</span>
+              <p>ESA listed 2005. ~73-75 individuals in J/K/L pods. Primary threat: Chinook salmon decline. Secondary: acoustic disturbance, PCBs. Not recovering under ESA protection.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon salmon">S</div>
+            <div class="theory-content">
+              <h4>Salmon Dependence &mdash; Obligate Chinook</h4>
+              <span class="theory-level intermediate">Intermediate</span>
+              <p>Southern Residents eat almost exclusively Chinook salmon. Chinook decline = SRKW nutritional stress = declining birth rate. Cross-reference to salmon arc degrees 236-242.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon orca">O</div>
+            <div class="theory-content">
+              <h4>Orca Arc Begins &mdash; Seven Degrees</h4>
+              <span class="theory-level foundational">Foundational</span>
+              <p>Degrees 270-276. Pod vocalization (270), whistles/clicks (271), transient hunt (272), arc continues. The emotional centerpiece of the SPS engine.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Orca / SRKW</div>
+          <div class="stat-detail"><em>Orcinus orca</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value" style="color: #B71C1C;">~73&ndash;75</div>
+          <div class="stat-detail">ENDANGERED (ESA 2005)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pods</div>
+          <div class="stat-value">J, K, L</div>
+          <div class="stat-detail">Three matrilineal pods</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Delphinidae</div>
+          <div class="stat-detail">Dolphin family, largest member</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Pod calls + whistles</div>
+          <div class="stat-detail">Culturally transmitted dialect</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #1A237E;">E = 8</div>
+          <div class="stat-detail">Maximum</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diet</div>
+          <div class="stat-value">Chinook salmon</div>
+          <div class="stat-detail">Obligate, highly selective</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value">THREE-QUARTERS</div>
+          <div class="stat-detail">270/360 = 75% exact</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

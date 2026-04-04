@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 270&deg; &mdash; The Fartz &mdash; E=8 &mdash; THREE-QUARTERS MARK &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #CE93D8; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6A1B9A; font-family: system-ui, sans-serif; border-bottom: 1px solid #E1BEE7; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: #6A1B9A; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 20px rgba(106,27,154,0.5); }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #6A1B9A; color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #7B1FA2; color: #E1BEE7; border: 1px solid #9C27B0; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #E1BEE7; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #E1BEE7; border-left: 4px solid #6A1B9A; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #37474F; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #F3E5F5; color: #6A1B9A; }
+    .theory-card .level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #6A1B9A; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #6A1B9A; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #F3E5F5; font-style: italic; color: #4A148C; }
+    .three-quarters-banner {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 20%, #7B1FA2 40%, #9C27B0 60%, #AB47BC 80%, #CE93D8 100%);
+      border: 3px solid #4A148C;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+      box-shadow: 0 0 32px rgba(74,20,140,0.5);
+    }
+    .three-quarters-banner h3 { margin-top: 0; font-size: 1.4rem; color: #E1BEE7; text-transform: uppercase; letter-spacing: 0.05em; }
+    .three-quarters-banner p { color: #F3E5F5; margin: 0.5rem 0; }
+    .three-quarters-banner strong { color: #CE93D8; }
+    .duff-card { background: linear-gradient(135deg, #1A237E, #283593); border: 2px solid #1A237E; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .duff-card h3 { margin-top: 0; color: #9FA8DA; }
+    .duff-card p { color: #C5CAE9; margin: 0.4rem 0; }
+    .duff-card strong { color: #9FA8DA; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: #6A1B9A;">Seattle 360</a> &rsaquo; <a href="../" style="color: #6A1B9A;">Releases</a> &rsaquo; <span>270 &mdash; The Fartz (E=8)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">270&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: #6A1B9A;">The Fartz</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 8</span>
+          <span class="genre-badge">Hardcore Punk</span>
+          <span class="label-badge">Alternative Tentacles</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+
+        <!-- THREE-QUARTERS MARK -->
+        <div class="three-quarters-banner">
+          <h3>270&deg; &mdash; Three-Quarters Mark &mdash; Quadrant IV Begins</h3>
+          <p><strong>270 / 360 = 75%.</strong> Three-quarters of the engine complete. One quarter remaining. This is the largest structural milestone since degree 180 (the halfway point). The engine enters its final quadrant at degree 270.</p>
+          <p>The three-quarters mark belongs to <strong>The Fartz</strong> &mdash; Capitol Hill hardcore, 1981, Alternative Tentacles. The underground before the mainstream. The infrastructure before the fame. <strong>Duff McKagan on drums.</strong> The engine&rsquo;s deepest link from Seattle hardcore to global rock sits at its most significant structural milestone.</p>
+        </div>
+
+        <!-- Duff McKagan Card -->
+        <div class="duff-card">
+          <h3>Duff McKagan &mdash; The Three-Quarters Link</h3>
+          <p>
+            The Fartz&rsquo;s drummer was <strong>Duff McKagan</strong> &mdash; born Michael Andrew McKagan in Seattle, 1964. After The Fartz, McKagan joined <strong>Ten Minute Warning</strong> (degree 265). Then he relocated to Los Angeles and co-founded <strong>Guns N&rsquo; Roses</strong> with Axl Rose, Slash, Izzy Stradlin, and Steven Adler. <em>Appetite for Destruction</em> (1987) sold over 30 million copies.
+          </p>
+          <p>
+            The arc: <strong>The Fartz</strong> (Capitol Hill hardcore, 1981) &rarr; <strong>Ten Minute Warning</strong> (Seattle hardcore, 1983) &rarr; <strong>Guns N&rsquo; Roses</strong> (Los Angeles, 1985) &rarr; global rock stardom. The engine documents the first two steps at degrees 265 and 270.
+          </p>
+        </div>
+
+        <h2>Alternative Tentacles</h2>
+        <p>The Fartz releasing on Alternative Tentacles is not incidental. Alternative Tentacles was founded in 1979 by Jello Biafra &mdash; co-founder of the Dead Kennedys, the most politically significant American punk band of the era. The label&rsquo;s catalog includes the Dead Kennedys, Nomeansno, MDC, DOA, The Crucifucks: the defining bands of American political hardcore.</p>
+
+        <p>The Fartz appearing on Alternative Tentacles places them in this company explicitly. Biafra chose to release their music because he considered it significant. The political alignment was also genuine: Alternative Tentacles was anti-corporate, anti-authoritarian, committed to documenting hardcore across North America. The Fartz shared these commitments. This is worth stating: Seattle&rsquo;s hardcore scene had real political content, not just aesthetic aggression.</p>
+
+        <blockquote>&ldquo;The three-quarters mark of the engine belongs to the underground that preceded the empire &mdash; Capitol Hill hardcore, 1981, Alternative Tentacles. Duff McKagan on drums. The infrastructure before the fame.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Capitol Hill, 1981</h2>
+        <p>Capitol Hill in 1981 was cheaper than it would become by the 1990s. The combination of affordable rent, proximity to downtown, and a community of artists, queers, and political activists made it the natural center for Seattle&rsquo;s punk scene. The Fartz were rooted here &mdash; not just geographically but socially and politically. The community that produced them was the same community that would later produce the alternative rock venues, the zine culture, and the DIY infrastructure that grunge inherited.</p>
+
+        <p>The engine has returned to Capitol Hill many times: The Fartz (270), The U-Men (272), Ten Minute Warning (265), The Accused (266), Love Battery (221). The neighborhood&rsquo;s density of cultural production is the engine&rsquo;s most consistent geographic pattern. Hardcore is its earliest and rawest expression.</p>
+
+        <hr class="section-divider">
+
+        <h2>The Sound -- Hardcore Punk, E=8</h2>
+        <p>The Fartz play fast. The defining characteristic of early 1980s American hardcore is tempo &mdash; songs at the maximum velocity the instruments can maintain. Song length: 90 seconds to two and a half minutes. Guitar: downstroke-driven power chords. Vocals: rhythmically precise aggression, syllables as percussion at maximum speed.</p>
+
+        <p>Blaine Cook&rsquo;s vocals are not melodic in the traditional sense. They function as a percussion instrument delivering confrontational content at tempo. This is a genuinely distinct vocal tradition &mdash; different from blues-influenced rock shouting, different from punk-pop singing. Hardcore vocals are their own category, and Cook is among the best practitioners of early 1980s West Coast hardcore.</p>
+
+        <hr class="section-divider">
+
+        <h2>Seattle Hardcore Arc (270&ndash;274)</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Fartz (270) &mdash; 1981-1982</h4>
+            <span class="level advanced">Alternative Tentacles</span>
+            <p>Capitol Hill. Duff McKagan on drums. The entry point of the arc. E=8.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Solger (271) &mdash; 1980-1981</h4>
+            <span class="level advanced">Independent</span>
+            <p>Possibly Seattle&rsquo;s earliest hardcore band. Even earlier than The Fartz. E=8.</p>
+          </div>
+          <div class="theory-card">
+            <h4>The U-Men (272) &mdash; 1981-1989</h4>
+            <span class="level intermediate">Black Label</span>
+            <p>Post-punk. Tom Price (later Gas Huffer). Capitol Hill. The arc&rsquo;s long-running band.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Infrastructure Legacy</h4>
+            <span class="level intermediate">Pre-grunge</span>
+            <p>These bands built the venues, the zines, the DIY ethos, and the community that grunge inherited. The underground before the mainstream.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">265</span> Ten Minute Warning &mdash; Duff McKagan connection. McKagan in both bands. Seattle hardcore continuity.</li>
+          <li><span class="ref-degree">269</span> Heart (Live Barracuda Era) &mdash; E=8 continues. Hard rock to hardcore. Portrait Records to Alternative Tentacles.</li>
+          <li><span class="ref-degree">271</span> Solger &mdash; E=8 continues. Seattle hardcore arc. Possibly Seattle&rsquo;s earliest hardcore band (1980).</li>
+          <li><span class="ref-degree">272</span> The U-Men &mdash; Post-punk. Tom Price connects to Gas Huffer (262). Capitol Hill arc continues.</li>
+          <li><span class="ref-degree">SPS 270</span> Puget Sound orca S01 pod call &mdash; E=8 on both sides. THREE-QUARTERS MARK on both tracks. Orca arc begins in full.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">270 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">8</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Hardcore Punk</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1981&ndash;1982</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Capitol Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Alternative Tentacles</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Blaine Cook</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Dave Ramberg</span></div>
+          <div class="stat-row"><span class="stat-label">Bass</span><span class="stat-value">Paul Solger</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Duff McKagan</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV (OPENS HERE)</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">75.0% EXACT</span></div>
+          <div class="stat-row"><span class="stat-label">Milestone</span><span class="stat-value">THREE-QUARTERS</span></div>
+          <div class="stat-row"><span class="stat-label">E-streak</span><span class="stat-value">E=8 (continues)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row"><span class="stat-label">Duff next band</span><span class="stat-value">Ten Min. Warning</span></div>
+          <div class="stat-row"><span class="stat-label">Duff final</span><span class="stat-value">Guns N&rsquo; Roses</span></div>
+          <div class="stat-row"><span class="stat-label">Label founder</span><span class="stat-value">Jello Biafra</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Orca S01 pod</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
