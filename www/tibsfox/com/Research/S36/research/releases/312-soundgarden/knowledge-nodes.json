@@ -1,0 +1,40 @@
+{
+  "degree": 312, "artist": "Soundgarden", "slug": "312-soundgarden", "genre": "Grunge/Metal", "energy": 9,
+  "era": "1984-1997 (first period), 2010-2017 (reunion). Grunge/Metal. E=9. University District, Seattle. Sub Pop to SST to A&M. First Seattle grunge band on a major label.",
+  "location": { "origin": "University District, Seattle, Washington" }, "formed": "Seattle, Washington, 1984", "active": "1984-1997; 2010-2017",
+  "labels": ["Sub Pop Records (1987-1989)", "SST Records (1988)", "A&M Records (1989-1997)", "Universal/Interscope (2010-2017)"],
+  "members": [
+    "Chris Cornell (vocals/guitar, born July 20 1964 Seattle WA, died May 18 2017 Detroit MI, age 52)",
+    "Kim Thayil (guitar, born September 4 1960 Seattle WA)",
+    "Matt Cameron (drums, born November 28 1962 San Diego CA)",
+    "Ben Shepherd (bass, from 1990)",
+    "Hiro Yamamoto (bass, 1984-1989, original)"
+  ],
+  "key_albums": [
+    "Screaming Life EP (1987, Sub Pop) -- Sub Pop debut",
+    "Ultramega OK (1988, SST) -- full-length debut, Grammy nomination Best Metal Performance",
+    "Louder Than Love (1989, A&M) -- first major label record, first Seattle grunge band on major",
+    "Badmotorfinger (1991, A&M) -- critical peak, Rusty Cage, Outshined, Jesus Christ Pose; same date as Nevermind",
+    "Superunknown (1994, A&M) -- commercial peak, Black Hole Sun, Spoonman, Fell on Black Days, #1 US, 2 Grammys, 9M worldwide",
+    "Down on the Upside (1996, A&M) -- final pre-hiatus album",
+    "King Animal (2012, Universal) -- reunion studio record"
+  ],
+  "theory_nodes": [
+    { "concept": "FIRST SEATTLE GRUNGE BAND ON A MAJOR LABEL. A&M Records signing 1989: two years before Nirvana/DGC, three years before Pearl Jam/Epic. The signing demonstrated the path was possible. Made the scene's commercial breakthrough imaginable before Nevermind proved it at scale.", "level": "milestone", "department": "first-major-signing", "description": "Soundgarden as the first grunge band to demonstrate the Sub Pop-to-major path." },
+    { "concept": "Chris Cornell (July 20 1964 - May 18 2017). Four-octave voice range. Control: whisper-to-scream within a phrase, full-voice sustained high notes. Lyrical concerns: existential dread, surface vs. depth, alienation. Died May 18 2017 Detroit after Fox Theatre concert, age 52. The artistry is the lasting record.", "level": "milestone", "department": "cornell-biography", "description": "Cornell's voice, artistry, and death documented with factual respect." },
+    { "concept": "Kim Thayil: open tunings, custom alternate tunings, detuning below standard. Harmonic strangeness: minor-major sevenths, suspended fourths, modal harmony. Volume control as expressive parameter. The most theoretically sophisticated guitar approach in the grunge canon.", "level": "advanced", "department": "guitar-theory", "description": "Thayil's guitar approach as grunge's most theoretically sophisticated." },
+    { "concept": "Badmotorfinger + Nevermind released same day: September 24 1991. Two most important grunge records of 1991 entered the market simultaneously. Nevermind outsold Badmotorfinger dramatically in months following; Badmotorfinger's breakthrough came gradually.", "level": "advanced", "department": "release-coincidence", "description": "Badmotorfinger-Nevermind same-day release and different commercial trajectories." },
+    { "concept": "Superunknown (March 8 1994): #1 US, 9M worldwide, 2 Grammys. Black Hole Sun (alternate tuning, odd phrasing, surreal video). Spoonman (7/4 time). Released 28 days before Cobain's death April 5 1994. The commercial peak of grunge and its ending crossed in March-April 1994.", "level": "milestone", "department": "superunknown", "description": "Superunknown's commercial peak and its temporal proximity to Cobain's death." },
+    { "concept": "HIRO YAMAMOTO THREAD: original bassist 1984-1989, Screaming Life through Louder Than Love. Left for Truly (degrees 220, 302). Personnel thread: Soundgarden (312) -> Yamamoto -> Truly (220/302) -> Capitol Hill post-grunge. The engine cross-reference runs through biography.", "level": "advanced", "department": "yamamoto-thread", "description": "Yamamoto as personnel thread connecting Soundgarden to Truly across three engine degrees." },
+    { "concept": "TEMPLE OF THE DOG (degree 225): Cornell + Cameron (Soundgarden) + Gossard + Ament + McCready + Vedder (pre-Pearl Jam). Andrew Wood tribute 1991. Hunger Strike: first Cornell-Vedder duet. The Soundgarden-Pearl Jam connection at its most direct and musically significant.", "level": "advanced", "department": "temple-connection", "description": "Temple of the Dog as the Soundgarden-Pearl Jam connection and Andrew Wood memorial." }
+  ],
+  "cross_references": [
+    {"degree": 225, "artist": "Temple of the Dog", "relationship": "Cornell's Andrew Wood tribute. Cornell + Cameron + pre-Pearl Jam lineup. Hunger Strike: first Cornell-Vedder duet. The Soundgarden-Pearl Jam direct connection."},
+    {"degree": "220/302", "artist": "Truly / Hiro Yamamoto", "relationship": "Yamamoto was Soundgarden's original bassist 1984-1989. Left to form Truly. Personnel thread connecting Soundgarden to Capitol Hill post-grunge across three engine degrees."},
+    {"degree": 311, "artist": "Nirvana", "relationship": "Both at E=9 in the Summit. Badmotorfinger and Nevermind released same day September 24 1991. Cornell and Cobain were Seattle peers. Both lost to deaths. Both handled with respect."},
+    {"degree": 308, "artist": "Melvins", "relationship": "Melvins in Soundgarden influence network. The sludge metal approach informed Soundgarden's heaviest material. Shared Seattle extreme rock ecosystem."}
+  ],
+  "sps_pair": {"degree": 312, "species": "Puget Sound winter storm surge", "pairing_note": "E=9 + E=9 = E=18. Full coastline impact resonance paired with Soundgarden's full-band sonic impact. Black Hole Sun's ominous beautiful weight and the Pacific winter storm's ominous beautiful power. Both at E=9."},
+  "milestones": ["FIRST SOUNDGARDEN APPEARANCE", "FIRST U-DISTRICT SUMMIT ENTRY", "FIRST A&M GRUNGE BAND", "CORNELL DOCUMENTED WITH RESPECT", "YAMAMOTO THREAD COMPLETE"],
+  "tags": ["grunge", "metal", "u-district", "chris-cornell", "kim-thayil", "matt-cameron", "ben-shepherd", "hiro-yamamoto", "sub-pop", "sst", "a-m", "badmotorfinger", "superunknown", "black-hole-sun", "spoonman", "temple-of-the-dog", "grunge-summit", "e9-summit", "first-major-label"]
+}
