@@ -1,0 +1,22 @@
+{
+  "degree": 323, "artist": "Ten Minute Warning", "slug": "323-ten-minute-warning-proto-grunge", "genre": "Proto-Grunge", "energy": 8,
+  "era": "1982-1986. Proto-Grunge. E=8 -- heavy, dark, aggressive, before the name existed.",
+  "location": { "origin": "Capitol Hill, Seattle" }, "formed": "Seattle, Washington", "active": "1982-1986",
+  "labels": ["Independent (self-released)"],
+  "members": ["Paul Solger (vocals)", "Steve Turner (guitar)", "Greg Gilmore (drums)"],
+  "associated_musicians": ["Steve Turner (Green River, Mudhoney S36-310)", "Greg Gilmore (Mother Love Bone, Pearl Jam lineage S36-314)", "U-Men (Seattle underground parallel)"],
+  "theory_nodes": [
+    { "concept": "Ten Minute Warning as grunge family tree oldest branch. Steve Turner -> Green River -> Mudhoney (S36-310). Greg Gilmore -> Mother Love Bone -> Pearl Jam lineage (S36-314). No other pre-grunge band seeds as many summit entries through direct personnel.", "level": "advanced", "department": "lineage", "description": "The genealogical root of two grunge summit entries." },
+    { "concept": "Proto-grunge at E=8: the sound was complete in 1982-1986 before the commercial infrastructure to support it existed. E=8 is retroactive sonic assessment, not commercial. The genre arrived; the market arrived four years later.", "level": "advanced", "department": "calibration", "description": "E=8 as sonic truth vs. commercial obscurity." },
+    { "concept": "The last high-energy pre-summit echo: E=8 in the post-summit sequence. E=7 plateau (317-322) broken at 323. After 324 (Swallow, E=7) the arc returns to the lower energy post-summit zone.", "level": "intermediate", "department": "energy-arc", "description": "E=8 local peak in post-summit: the retrospective echo of the summit's maximum." }
+  ],
+  "cross_references": [
+    {"degree": 322, "artist": "Pond", "relationship": "E=7 to E=8. E=7 plateau ends. Post-summit arc reaches back to 1982."},
+    {"degree": 324, "artist": "Swallow", "relationship": "E=8 to E=7. The E=8 peak is local; the post-summit arc continues at E=7 with the 1989 founding-moment Sub Pop band."},
+    {"degree": 310, "artist": "Mudhoney", "relationship": "Steve Turner summit connection. Ten Minute Warning (1982) -> Green River (1984) -> Mudhoney (1988). The guitar vocabulary is continuous."},
+    {"degree": 314, "artist": "Pearl Jam", "relationship": "Greg Gilmore summit connection. Ten Minute Warning -> Mother Love Bone -> Temple of the Dog -> Pearl Jam."}
+  ],
+  "sps_pair": {"degree": 323, "species": "Puget Sound Tidal Bore", "pairing_note": "E=8 + E=8 = E=16. Both sustained pressure events. Proto-grunge at maximum sustained output; tidal bore at maximum hydraulic sustained output. The pressure pairing."},
+  "milestones": ["E=8 RETURNS IN POST-SUMMIT", "LAST HIGH-ENERGY PRE-SUMMIT ECHO", "OLDEST BRANCH OF GRUNGE FAMILY TREE"],
+  "tags": ["proto-grunge", "independent", "capitol-hill", "steve-turner", "greg-gilmore", "mudhoney-lineage", "pearl-jam-lineage", "1982", "before-the-name"]
+}
