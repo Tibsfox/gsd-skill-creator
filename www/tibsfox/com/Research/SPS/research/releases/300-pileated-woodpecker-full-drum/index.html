@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 300&deg; &mdash; Pileated Woodpecker Full Drum &mdash; E=7 &mdash; FIVE-SIXTHS MARK &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F); color: #FFCDD2; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 28px rgba(183, 28, 28, 0.7); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: #B71C1C; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #B71C1C; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .five-sixths-banner { background: linear-gradient(135deg, #B71C1C, #7F0000); border: 3px solid #FFD700; border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #FFCDD2; text-align: center; }
+    .five-sixths-banner .fraction-display { font-size: 2.2rem; font-weight: 700; color: #FFD700; font-family: 'Georgia', serif; }
+    .five-sixths-banner h3 { margin: 0 0 0.5rem; font-size: 1.3rem; color: #FFD700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .five-sixths-banner p { color: #FFCDD2; margin: 0.4rem 0; }
+    .drum-display { text-align: center; font-size: 1.3rem; font-weight: 700; color: #B71C1C; font-family: 'Georgia', serif; letter-spacing: 0.06em; margin: 1.5rem 0 0.5rem; }
+    .drum-sub { text-align: center; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .callback-card { background: linear-gradient(135deg, #1B5E20, #2E7D32); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #C8E6C9; }
+    .callback-card h3 { margin-top: 0; color: #A5D6A7; font-size: 1.1rem; }
+    .callback-card p { color: #C8E6C9; margin: 0.4rem 0; }
+    .callback-card strong { color: #A5D6A7; }
+    .arc-card { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .arc-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--earth-brown); }
+    .arc-row { display: flex; gap: 1rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(183,28,28,0.08); font-size: 0.88rem; }
+    .arc-row:last-child { border-bottom: none; }
+    .arc-deg { font-weight: 700; color: #B71C1C; min-width: 3rem; font-family: system-ui, sans-serif; }
+    .arc-detail { flex: 1; color: #37474F; }
+    .arc-row.current { background: rgba(183,28,28,0.06); border-radius: 4px; border-left: 3px solid #FFD700; padding-left: 0.5rem; }
+    .acoustic-card { background: linear-gradient(135deg, #B71C1C, #7F0000); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #FFCDD2; }
+    .acoustic-card h3 { margin-top: 0; color: #EF9A9A; font-size: 1.1rem; }
+    .acoustic-card p { color: #FFCDD2; margin: 0.4rem 0; }
+    .acoustic-card strong { color: #EF9A9A; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #B71C1C; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">300&deg;</div>
+      <div class="release-title-block">
+        <h2>Pileated Woodpecker Full Drum</h2>
+        <div class="scientific"><em>Dryocopus pileatus</em> &mdash; E=7 &mdash; Picidae &mdash; 3rd APPEARANCE &mdash; ENGINE NAMESAKE &mdash; FIVE-SIXTHS MARK</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      industrial machine-gun on dead fir &mdash; <strong>200&ndash;2,000 Hz broadband</strong> &mdash; carries 500m&ndash;1km &mdash; old-growth snag &mdash; resident &mdash; THIRD PILEATED APPEARANCE &mdash; E=5 (54) &rarr; E=6 (108) &rarr; E=7 (300) &mdash; FIVE-SIXTHS MARK
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="five-sixths-banner">
+          <h3>The Engine's Namesake Species at the Engine's Five-Sixths Mark</h3>
+          <div class="fraction-display">300 &frasl; 360 &mdash; E=5 &rarr; E=6 &rarr; E=7</div>
+          <p>The Pileated Woodpecker returns for the third time at the engine's major structural milestone. Three appearances: degree 54 (general, E=5), degree 108 (wild laughing call, E=6 &mdash; the engine's first double-maximum), degree 300 (full drum, E=7 &mdash; five-sixths mark). Three consecutive escalations across 246 degrees. The species that defined the SPS engine's acoustic ambition reaches its highest energy level at the engine's most important structural milestone since the halfway point.</p>
+        </div>
+
+        <div class="callback-card">
+          <h3>Degree 108 Callback &mdash; The Engine's First Double-Maximum</h3>
+          <p><strong>Degree 108:</strong> Pileated Woodpecker wild laughing call (E=6) + Veronica Lipgloss (S36 108, E=6) = E=6 on both tracks simultaneously &mdash; the first time in the engine's history. The laughing wuk-wuk-wuk in old-growth. The primal scream. FIRST DOUBLE-MAXIMUM.</p>
+          <p><strong>Degree 300: 192 degrees later.</strong> The Pileated escalates to E=7. The engine's threshold expands. The species that produced the first double-maximum returns at the five-sixths mark with a different behavior (drum vs. laugh) at higher energy (E=7 vs. E=6). The callback spans 192 degrees &mdash; more than half the full rotation.</p>
+          <p><strong>The species is the thread.</strong> From degree 54 to degree 300: 246 degrees. The Pileated Woodpecker has been in the engine for more than two-thirds of the full rotation, escalating at each return. No other species spans as wide an arc.</p>
+        </div>
+
+        <div class="drum-display">THWACK &mdash; THWACK-THWACK-THWACK &mdash; THWACK-THWACK-THWACK-THWACK-THWACK</div>
+        <div class="drum-sub">Accelerating machine-gun sequence on 200-year-old dead Douglas-fir &mdash; broadband impact 200&ndash;2,000 Hz &mdash; snag amplifies to 500m+ &mdash; territorial and foraging simultaneously &mdash; the old-growth forest at its most percussive</div>
+
+        <div class="acoustic-card">
+          <h3>Acoustic Profile &mdash; Full Drum Sequence</h3>
+          <p><strong>Impact mechanics:</strong> Up to 20 strikes per second. Skull spongy bone absorbs impact. Hyoid bone wraps skull for protection. Asymmetric bill tip prevents slippage. The largest woodpecker delivering maximum force.</p>
+          <p><strong>Snag resonance:</strong> Large dead Douglas-fir or Western red cedar (2-4 foot diameter) acts as resonating chamber. The hollower the interior, the louder and more resonant the drum. Old-growth snags produce the best resonance; young stand snags do not.</p>
+          <p><strong>Frequency:</strong> Broadband impact sound, energy concentrated 200-2,000 Hz. Low-frequency component (the deep thwack) carries through forest at long range. Audible 500m to over 1km.</p>
+          <p><strong>E=7 vs. E=6 laughing:</strong> The drum is sustained for minutes at a session; the laughing call is dramatic but brief. E=7 for sustained duration + long-range carry. E=6 for the dramatic but shorter laughing vocalization.</p>
+        </div>
+
+        <h2>Three-Appearance Arc &mdash; Complete</h2>
+        <div class="arc-card">
+          <h3>Pileated Woodpecker in the SPS Engine &mdash; Three Degrees Across 246</h3>
+          <div class="arc-row"><span class="arc-deg">54</span><span class="arc-detail">General species ecology &mdash; E=5 &mdash; first appearance &mdash; Pileated in old-growth forest, presence and biology documented. 54th degree.</span></div>
+          <div class="arc-row"><span class="arc-deg">108</span><span class="arc-detail">Wild laughing call (wuk-wuk-wuk) &mdash; E=6 &mdash; FIRST DOUBLE-MAXIMUM in engine history. E=6 on both S36 and SPS simultaneously. The primal scream. Return from 54; 54-degree gap.</span></div>
+          <div class="arc-row current"><span class="arc-deg">300</span><span class="arc-detail"><strong>Full drum sequence on dead fir &mdash; E=7 &mdash; FIVE-SIXTHS MARK &mdash; THIRD APPEARANCE &mdash; ENGINE NAMESAKE. 192-degree gap from 108. [CURRENT]</strong></span></div>
+        </div>
+
+        <h2>The Old-Growth Snag &mdash; Why E=7 Requires Centuries</h2>
+        <p>The full drum at E=7 is only possible on a large old-growth snag. A Douglas-fir of 2-4 feet diameter, dead and partially hollow, acting as a resonating chamber &mdash; this substrate requires 150-200+ years of tree growth followed by decades of decay. The E=7 drum is a function of old-growth. Young plantation forests lack this substrate. The sound is not possible without the centuries that produce it.</p>
+        <p>The Pileated is the Pacific Northwest's keystone cavity excavator: the rectangular holes it creates in snags are taken over by Wood Duck, goldeneye, Barred Owl, Northern Flying Squirrel, Vaux's Swift. The drum is not just territorial announcement &mdash; it is the first strike of infrastructure creation.</p>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-108 Pileated laughing (wuk-wuk-wuk)</strong>
+            <p>Second appearance E=6. FIRST DOUBLE-MAXIMUM. The callback 192 degrees later. Laughing call (syrinx) vs. drum (mechanical): same species, different behaviors.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-54 Pileated general</strong>
+            <p>First appearance E=5. Species overview. 246 degrees ago. The beginning of the arc that closes here.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-4 Northern Spotted Owl</strong>
+            <p>Old-growth indicator. Old-growth thread connects degrees 4, 54, 108, 298, 299, 300. The engine begins in old-growth and five-sixths-marks in old-growth.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-300 Pond return</strong>
+            <p>E=6 + E=7 = E=13. Five-sixths mark pairing. Old-growth forest + Fremont neighborhood. The engine's ecological ambition and human-scale music at the milestone.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-297 Bald Eagle combat</strong>
+            <p>Raptor cluster opens. Three behavioral entries 297-299 precede the Pileated milestone. The cluster closes with the engine's most significant species.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Full drum sequence</div>
+          <div class="stat-detail">Industrial machine-gun</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #B71C1C;">E = 7</div>
+          <div class="stat-detail">Up from E=6 at degree 108</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">200&ndash;2,000 Hz</div>
+          <div class="stat-detail">Broadband; snag-amplified</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-style: italic; font-size: 0.88rem;">Dryocopus pileatus</div>
+          <div class="stat-detail">Linnaeus, 1758; tree striker</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Drum peaks late winter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Old-growth snag</div>
+          <div class="stat-detail">Requires centuries of growth</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Engine status</div>
+          <div class="stat-value" style="color: #B71C1C; font-weight: 700;">NAMESAKE SPECIES</div>
+          <div class="stat-detail">3 appearances: 54, 108, 300</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value" style="color: #B71C1C;">FIVE-SIXTHS MARK</div>
+          <div class="stat-detail">300/360 = 83.3%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Pond (return)</div>
+          <div class="stat-detail">E=6, Grunge/Indie, Sub Pop</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
