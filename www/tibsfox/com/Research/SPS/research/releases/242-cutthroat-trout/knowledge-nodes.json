@@ -1,0 +1,55 @@
+{
+  "degree": 242, "species": "Cutthroat Trout", "slug": "242-cutthroat-trout", "sound_type": "silent / surface rise dimple", "energy": 2,
+  "scientific_name": "Oncorhynchus clarkii",
+  "family": "Salmonidae",
+  "ecosystem": "mountain lake (primary); cold mountain streams; coastal rivers",
+  "season": "resident year-round; spawning spring (March-June)",
+  "taxonomy": {
+    "order": "Salmoniformes",
+    "family": "Salmonidae",
+    "genus": "Oncorhynchus",
+    "class": "Actinopterygii",
+    "note": "FINAL Salmonidae entry in engine (arc 236-242). Species epithet 'clarkii' honors William Clark of the Lewis and Clark Expedition. ~14 recognized subspecies, most taxonomically complex native PNW salmonid."
+  },
+  "washington_subspecies": [
+    { "name": "Coastal Cutthroat", "scientific": "O. c. clarkii", "range": "Coastal streams, mountain lakes, sea-run form", "status": "Generally secure" },
+    { "name": "Westslope Cutthroat", "scientific": "O. c. lewisi", "range": "Eastern Washington, upper Columbia drainage", "status": "Species of Concern, hybridization threat" }
+  ],
+  "wa_state_fish": { "designated": 1969, "note": "Washington State Fish since 1969. Cultural centerpiece of PNW freshwater angling." },
+  "lewis_clark_connection": {
+    "year": 1805,
+    "describer": "William Clark, Corps of Discovery",
+    "formal_naming": "Charles Girard, 1856",
+    "location": "Upper Missouri River drainage (present-day Montana)",
+    "notes": "First scientific documentation in western science. Clark described 'red streaks' along jaw and 'remarkably fine flavour.'"
+  },
+  "sound_profile": {
+    "type": "near-silence (not a vocalization)",
+    "components": ["surface rise: sip (midge, E=1)", "dimple (dry fly, E=2 -- documented here)", "slash rise (active feeding, E=2-3)"],
+    "energy": "E=2 -- the delicate acoustic signature of a trout feeding at the surface; the primary auditory cue in PNW mountain lake flyfishing"
+  },
+  "ecology": {
+    "diet": ["aquatic invertebrates (mayfly, caddisfly, stonefly)", "terrestrial insects (surface feeding)", "small fish", "amphibians (in some lake systems)"],
+    "spawning": "Spring (March-June), tributary streams, clean gravel redds",
+    "ecological_role": "Apex predator in mountain lake ecosystem; top-down regulator of invertebrate community"
+  },
+  "conservation": {
+    "primary_threat": "Rainbow Trout (O. mykiss) hybridization producing 'Cuttbow' hybrids; replaces pure populations over generations",
+    "secondary_threats": ["habitat degradation", "climate change and warming streams", "historical overfishing", "Yellowstone Lake: Lake Trout introduction caused Cutthroat collapse"],
+    "recovery_tools": ["barrier construction", "non-native fish removal (rotenone)", "hatchery reform", "protective regulations"],
+    "wa_westslope_status": "Species of Concern"
+  },
+  "theory_nodes": [
+    { "concept": "FINAL SALMONIDAE in engine. Arc 236-242 closes. Seven consecutive degrees of salmon, trout, char. Arc began with Pacific Salmon's loud spawning runs (E=5); closes with Cutthroat's quiet surface rise (E=2). Beginning and end within the same family.", "level": "milestone", "department": "engine-structure", "description": "Salmonidae arc closure at degree 242." },
+    { "concept": "Lewis and Clark first description 1805: William Clark documented Oncorhynchus clarkii in the upper Missouri drainage. Species epithet 'clarkii' permanently honors Clark's role. Formal naming by Charles Girard 1856. One of the few PNW species precisely dated to a specific historical event.", "level": "advanced", "department": "natural-history", "description": "Lewis and Clark as founding moment for scientific documentation of cutthroat." },
+    { "concept": "The surface rise as the iconic sound of PNW flyfishing. E=2 acoustic profile: the sip or gentle plop of a feeding trout in still mountain water. In near-silence, audible from 20-30m. The acoustic cue that precedes the cast.", "level": "intermediate", "department": "acoustic-ecology", "description": "Surface rise as acoustic signature and cultural artifact." }
+  ],
+  "cross_references": [
+    {"degree": 241, "species": "Dolly Varden", "relationship": "Final two Salmonidae: both E=2, both quiet cold-water species, both under pressure from introduced fish. Consecutive placement closes the char/trout section."},
+    {"degree": 236, "species": "Pacific Salmon", "relationship": "Arc bookends: Pacific Salmon (E=5, spawning splash) opens Salmonidae; Cutthroat (E=2, surface rise) closes it. Same family, opposite acoustic profiles."},
+    {"degree": 243, "species": "Pacific Lamprey", "relationship": "The species immediately following. Transition from Salmonidae (242) to Petromyzontidae (243) -- the most dramatic taxonomic jump in SPS. From elegant native trout to 450-million-year-old jawless fish."}
+  ],
+  "s36_pair": {"degree": 242, "artist": "The Wailers (Tacoma)", "pairing_note": "E=7 vs E=2. The original PNW rock band (Wailers, 1959) against the original PNW native trout (Cutthroat, state fish since 1969). Both 'original natives' of their respective domains."},
+  "milestones": ["FINAL SALMONIDAE IN ENGINE", "Salmonidae arc 236-242 complete", "LEWIS AND CLARK SPECIES (1805)"],
+  "tags": ["salmonidae", "final-salmonidae", "cutthroat-trout", "oncorhynchus-clarkii", "mountain-lake", "surface-rise", "flyfishing", "washington-state-fish", "lewis-and-clark", "clark", "e2-minimum", "rainbow-trout-hybridization", "cuttbow"]
+}
