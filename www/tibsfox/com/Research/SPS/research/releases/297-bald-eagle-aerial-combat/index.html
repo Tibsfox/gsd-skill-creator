@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 297&deg; &mdash; Bald Eagle Aerial Combat &mdash; E=7 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2); color: #E1BEE7; font-size: 2.5rem; font-weight: 700; width: 5rem; height: 5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 18px rgba(74, 20, 140, 0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.15rem; color: #4A148C; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4A148C; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .return-banner { background: linear-gradient(135deg, #4A148C, #6A1B9A); border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E1BEE7; }
+    .return-banner h3 { margin-top: 0; font-size: 1.1rem; color: #CE93D8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .return-banner p { color: #CE93D8; margin: 0.5rem 0; }
+    .combat-display { text-align: center; font-size: 1.6rem; font-weight: 700; color: #4A148C; font-family: 'Georgia', serif; letter-spacing: 0.05em; margin: 1.5rem 0 0.5rem; }
+    .combat-sub { text-align: center; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .acoustic-card { background: linear-gradient(135deg, #4A148C, #311B92); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; color: #D1C4E9; }
+    .acoustic-card h3 { margin-top: 0; color: #CE93D8; font-size: 1.1rem; }
+    .acoustic-card p { color: #D1C4E9; margin: 0.4rem 0; }
+    .acoustic-card strong { color: #CE93D8; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #4A148C; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .raptor-arc { background: var(--puget-light); border: 1px solid var(--card-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .raptor-arc h3 { margin-top: 0; font-size: 1.1rem; color: var(--earth-brown); }
+    .arc-row { display: flex; gap: 1rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(74,20,140,0.08); font-size: 0.88rem; }
+    .arc-row:last-child { border-bottom: none; }
+    .arc-deg { font-weight: 700; color: #4A148C; min-width: 2.5rem; font-family: system-ui, sans-serif; }
+    .arc-detail { flex: 1; color: #37474F; }
+    .arc-row.current { background: rgba(74,20,140,0.06); border-radius: 4px; padding-left: 0.5rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">297&deg;</div>
+      <div class="release-title-block">
+        <h2>Bald Eagle Aerial Combat</h2>
+        <div class="scientific"><em>Haliaeetus leucocephalus</em> &mdash; E=7 &mdash; Accipitridae &mdash; 2nd ACCIPITRIDAE &mdash; RETURN FROM DEGREE 221</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      shrieking locked-talon tumble &mdash; <strong>territorial freefall display</strong> &mdash; riparian and coastal territory &mdash; year-round resident &mdash; SECOND ACCIPITRIDAE &mdash; E=5 contact call (221) &rarr; E=7 aerial combat (297)
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="return-banner">
+          <h3>Return from Degree 221 &mdash; E=5 to E=7</h3>
+          <p>The Bald Eagle first appeared at degree 221 with the contact call (kee-kee-kee, E=5) &mdash; the FIRST ACCIPITRIDAE in the engine. The return at degree 297 documents a completely different behavior at a completely different energy level. The contact call is ambient communication. The locked-talon aerial combat is maximum territorial commitment. E=5 to E=7: the behavioral escalation tracked precisely.</p>
+        </div>
+
+        <div class="combat-display">KEE-KEE-KEE &mdash; TALONS LOCKED &mdash; FREEFALL</div>
+        <div class="combat-sub">Two eagles grappling at height &mdash; talons locked, spinning in freefall &mdash; screaming throughout &mdash; separation before impact &mdash; E=7 &mdash; the most dramatic territorial display in the Pacific Northwest sky</div>
+
+        <div class="acoustic-card">
+          <h3>Acoustic Profile &mdash; Aerial Combat Sound</h3>
+          <p><strong>Vocalization:</strong> The kee-kee-kee contact call pushed to maximum urgency &mdash; continuous, high-pitched screaming from both birds throughout the locked-talon display. Not a different call: the same call, fully amplified and sustained.</p>
+          <p><strong>Audibility:</strong> Audible from hundreds of meters. Two adult Bald Eagles at maximum territorial commitment produce a combined sound that carries across the territory. Witnesses report hearing the screaming before seeing the display.</p>
+          <p><strong>E=7 calibration:</strong> Maximum territorial behavior. The display requires full physical commitment, accepts risk of injury, and communicates willingness to escalate beyond ambient contact. E=7: not ambient (E=3-4), not the contact call (E=5), but maximum behavioral engagement short of actual injurious combat.</p>
+        </div>
+
+        <h2>The Locked-Talon Tumble &mdash; The Physics</h2>
+        <p>Two eagles approach in conflict. At the moment of contact, both extend their talons and lock together &mdash; grasping each other's feet with their powerful grip. The combined weight of two adults (typically 5-9 lbs each) plus aerodynamic forces acting on the locked pair produces tumbling, cartwheeling freefall. Eagles have been documented tumbling 100 feet or more before separation. The timing of separation &mdash; releasing the grip and spreading wings to arrest descent &mdash; requires precision. Occasionally birds fail to separate in time and hit the ground or water together; drowning is a documented outcome when birds land in water while unable to disengage.</p>
+        <p>The display is primarily communicative: the territory holder demonstrates willingness to commit to extreme physical engagement. An intruder that experiences or witnesses this response learns the territory holder will escalate without limit. The display ends most territorial disputes without further escalation.</p>
+
+        <h2>Haliaeetus leucocephalus &mdash; Pacific Northwest Context</h2>
+        <p>Washington State has one of the highest Bald Eagle populations in the contiguous United States. The Skagit River valley concentrates hundreds of eagles in November-January for the chum salmon run &mdash; one of the most significant wildlife spectacles in the Pacific Northwest. The San Juan Islands, Puget Sound shorelines, and major coastal rivers hold resident breeding populations year-round. The species was delisted from the federal endangered species list in 2007 after a remarkable recovery from DDT-related population collapse. The recovery is one of North American conservation's most successful stories.</p>
+
+        <h2>Raptor Arc &mdash; Degrees 297&ndash;299</h2>
+        <div class="raptor-arc">
+          <h3>Three Consecutive Raptor/Owl Degrees at Five-Sixths Approach</h3>
+          <div class="arc-row current"><span class="arc-deg">297</span><span class="arc-detail"><strong>Bald Eagle aerial combat &mdash; E=7 &mdash; Accipitridae. Locked-talon freefall. SECOND ACCIPITRIDAE. [CURRENT]</strong></span></div>
+          <div class="arc-row"><span class="arc-deg">298</span><span class="arc-detail">Northern Goshawk full alarm &mdash; E=7 &mdash; Accipitridae. Sustained ka-ka-ka assault. Most aggressive nest defense of any raptor.</span></div>
+          <div class="arc-row"><span class="arc-deg">299</span><span class="arc-detail">Great Horned Owl territorial war &mdash; E=6 &mdash; Strigidae. Multi-night hooting battle. Winter territorial establishment.</span></div>
+          <div class="arc-row"><span class="arc-deg">300</span><span class="arc-detail">Pileated Woodpecker full drum &mdash; E=7 &mdash; Picidae. FIVE-SIXTHS MARK. Engine namesake species.</span></div>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-221 Bald Eagle contact call</strong>
+            <p>First appearance E=5. FIRST ACCIPITRIDAE. kee-kee-kee contact. Raptor era opens. E=5 → E=7 behavioral escalation on return.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-298 Northern Goshawk full alarm</strong>
+            <p>Second Accipitridae at 298. E=7. Sustained ka-ka-ka. The most aggressive nest defense. Accipitridae holds E=7 at both 297 and 298.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36-297 Skin Yard return</strong>
+            <p>E=7 + E=7 = E=14. Proto-grunge riff architecture and locked-talon combat. Sustained structural effort at altitude. Jack Endino. C/Z Records.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-300 Pileated Woodpecker</strong>
+            <p>Three degrees ahead: five-sixths mark. Engine namesake species. E=7. Industrial drum on dead fir. The ecological endpoint of the cluster.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Locked-talon tumble</div>
+          <div class="stat-detail">Screaming aerial combat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #4A148C;">E = 7</div>
+          <div class="stat-detail">Up from E=5 at degree 221</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-style: italic; font-size: 0.88rem;">Haliaeetus leucocephalus</div>
+          <div class="stat-detail">Linnaeus, 1766</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Territory</div>
+          <div class="stat-detail">Riparian, coastal, lake</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Combat peaks late winter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Accipitridae</div>
+          <div class="stat-detail">2nd appearance; 1st at 221</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">First appearance</div>
+          <div class="stat-value">Degree 221</div>
+          <div class="stat-detail">Contact call, E=5</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Skin Yard (return)</div>
+          <div class="stat-detail">E=7, Proto-Grunge, C/Z</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
