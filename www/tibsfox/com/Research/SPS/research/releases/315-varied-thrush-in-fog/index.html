@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 315&deg; &mdash; Varied Thrush in Fog &mdash; E=7 &mdash; FIRST TURDIDAE &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #37474F, #455A64, #546E7A); color: #CFD8DC; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 16px rgba(55,71,79,0.4); }
+    .release-title-block h2 { margin: 0; font-size: 1.8rem; color: var(--earth-brown); border: none; padding: 0; }
+    .release-title-block .scientific { font-style: italic; color: var(--page-text-light); font-size: 1.05rem; font-family: 'Georgia', serif; }
+    .release-subtitle { font-size: 0.95rem; color: var(--puget-mid); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #455A64; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #455A64; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .turdidae-banner { background: linear-gradient(135deg, #263238, #37474F, #455A64); border: 2px solid #B0BEC5; border-radius: 8px; padding: 1.75rem 2rem; margin: 1.5rem 0; color: #ECEFF1; }
+    .turdidae-banner h3 { margin: 0 0 0.75rem; color: #B0BEC5; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .turdidae-banner p { margin: 0.4rem 0; color: #ECEFF1; line-height: 1.65; }
+    .note-display { text-align: center; font-size: 1.8rem; font-weight: 700; color: #37474F; font-family: 'Georgia', serif; letter-spacing: 0.3em; margin: 2rem 0 0.5rem; }
+    .note-sub { text-align: center; font-size: 0.85rem; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 1.5rem; line-height: 1.6; }
+    .fog-card { background: linear-gradient(135deg, #263238, #37474F); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #CFD8DC; }
+    .fog-card h3 { margin: 0 0 0.5rem; color: #B0BEC5; font-size: 1.15rem; }
+    .fog-card p { color: #CFD8DC; margin: 0.4rem 0; line-height: 1.65; }
+    .fog-card strong { color: #ECEFF1; }
+    .ff-card { background: linear-gradient(135deg, #2D0057, #4A148C); border-radius: 8px; padding: 1.5rem 2rem; margin: 1.5rem 0; color: #E1BEE7; border: 1px solid #B0BEC5; }
+    .ff-card h3 { margin: 0 0 0.5rem; color: #CE93D8; font-size: 1.1rem; }
+    .ff-card p { color: #E1BEE7; margin: 0.4rem 0; line-height: 1.65; }
+    .ff-card strong { color: #F3E5F5; }
+    .turdidae-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .turdidae-list li { padding: 0.5rem 0; border-bottom: 1px solid #ECEFF1; font-size: 0.9rem; display: flex; gap: 0.75rem; }
+    .turdidae-list li:last-child { border-bottom: none; }
+    .turdidae-list .deg { font-weight: 700; color: #455A64; min-width: 3rem; font-family: system-ui, sans-serif; }
+    .turdidae-list .current-marker { font-size: 0.7rem; background: #455A64; color: white; padding: 0.1rem 0.3rem; border-radius: 2px; font-family: system-ui, sans-serif; font-weight: 700; }
+    .xref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .xref-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; }
+    .xref-card strong { color: #455A64; font-size: 0.88rem; }
+    .xref-card p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <div class="release-header">
+      <div class="degree-badge">315&deg;</div>
+      <div class="release-title-block">
+        <h2>Varied Thrush in Fog</h2>
+        <div class="scientific"><em>Ixoreus naevius</em> &mdash; Gmelin, 1789 &mdash; E=7 &mdash; FIRST TURDIDAE SINGLE-NOTE &mdash; Turdidae &mdash; Old-growth winter &mdash; THE QUIET AFTER THE STORM</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      single haunting note, canyon reverb &mdash; <strong>1,800&ndash;5,000 Hz</strong> &mdash; pure tone, low harmonics &mdash; fog diffusion &mdash; winter old-growth &mdash; E=7 &mdash; FIRST TURDIDAE SINGLE-NOTE IN ENGINE
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <div class="turdidae-banner">
+          <h3>First Turdidae Single-Note &mdash; E=7 &mdash; The Quiet After the Storm</h3>
+          <p><strong>The most iconic single-note bird sound in the Pacific Northwest.</strong> One bird. One pure sustained tone. Silence. A different pitch. Silence again. The Varied Thrush sings into fog-filled canyons in old-growth winter, and the fog and the canyon walls extend the note beyond its natural duration, hanging it in the cold air. E=7 is deliberately lower than degrees 313 (E=9) and 314 (E=8): this is the post-storm quietude, the resolution of the grunge summit's SPS arc, the note that remains when the peak has passed. The most beautiful counterpoint the engine has produced. <em>Ixoreus naevius</em>. First Turdidae single-note entry.</p>
+        </div>
+
+        <div class="note-display">. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .</div>
+        <div class="note-sub">Each dot is one note &mdash; a single pure tone at a different pitch from the last &mdash; separated by 5&ndash;15 seconds of silence &mdash; delivered into fog-filled canyon &mdash; reverberating off tree masses and canyon walls &mdash; the note fades and the silence returns &mdash; then another note arrives, different pitch, unexpected &mdash; winter old-growth, E=7</div>
+
+        <h2>First Turdidae &mdash; The Family in the Engine</h2>
+        <ul class="turdidae-list">
+          <li><span class="deg">007</span><span>Hermit Thrush &mdash; <em>Catharus guttatus</em> &mdash; E=6. The acclaimed forest flute. Complex ascending spirals.</span></li>
+          <li><span class="deg">018</span><span>Swainson&rsquo;s Thrush &mdash; <em>Catharus ustulatus</em> &mdash; E=5. Ascending spiral, dense understory.</span></li>
+          <li><span class="deg">019</span><span>Veery &mdash; <em>Catharus fuscescens</em> &mdash; E=5. Descending veer, riparian.</span></li>
+          <li><span class="deg">025</span><span>American Robin &mdash; <em>Turdus migratorius</em> &mdash; E=5. Dawn chorus anchor. Most widespread Turdidae.</span></li>
+          <li><span class="deg">315</span><span>Varied Thrush &mdash; <em>Ixoreus naevius</em> &mdash; E=7. <span class="current-marker">THIS ENTRY</span> Single pure tone, fog canyon, winter. The note that stops you.</span></li>
+        </ul>
+
+        <p>Degree 315 is the first Turdidae entry documenting the single-note call type. All prior Turdidae in the engine sing complex melodies. The Varied Thrush sings one note. The simplicity is the point.</p>
+
+        <hr style="border:none;border-top:1px solid #ECEFF1;margin:2rem 0;">
+
+        <div class="fog-card">
+          <h3>The Song &mdash; One Note Into Fog</h3>
+          <p><strong>Structure:</strong> A single sustained pure tone (1&ndash;3 seconds), followed by silence (5&ndash;15 seconds), followed by a single pure tone at a different pitch. Repeat. No melody in the conventional sense &mdash; no phrase, no development, no resolution. Just notes, separated by silence.</p>
+          <p><strong>Frequency:</strong> 1,800&ndash;5,000 Hz per note (varies by individual and note position). Remarkably pure: very low harmonic content compared to most passerine songs. The purity is what makes the note stand out in cold fog. It does not sound like most birds. It sounds like something between a musical instrument and a forest spirit.</p>
+          <p><strong>Pitch variation:</strong> No two consecutive notes are at the same pitch. The range across a full singing sequence covers approximately 1.5 octaves. Each note arrives at an unexpected pitch, creating a melodic sequence without a recognizable melodic pattern.</p>
+          <p><strong>The reverb:</strong> In fog-filled canyon terrain, the pure tone reflects off canyon walls and tree masses and extends beyond its natural duration. The fog itself softly diffuses the high-frequency note. The winter silence &mdash; no insects, no breeding birds, minimal wind &mdash; means the note stands in near-silence with exceptional clarity before fading and giving way to the canyon&rsquo;s quiet.</p>
+        </div>
+
+        <h2>The Fog-Filled Canyon</h2>
+        <p>The specific acoustic environment of this entry is not incidental. Western Washington winter fog &mdash; advection fog pooling in the drainage systems of the Coast Range and western Cascades &mdash; creates the concert hall. The fog reduces visibility to tens of meters. The canyon walls trap and amplify sound. The dense coniferous canopy provides overhead reflection. The flowing river provides an ambient acoustic baseline of white noise against which the Varied Thrush&rsquo;s pure tone stands in complete contrast.</p>
+        <p>The Varied Thrush occupies precisely this habitat in winter: lower elevation fog zones in the western slope forest, riparian corridors, old-growth canyon systems. The fog and the bird have a natural ecological relationship. The habitat produces the acoustic event; the acoustic event is the habitat expressed in sound.</p>
+
+        <h2>The Species</h2>
+        <p><em>Ixoreus naevius</em>, Gmelin, 1789. The only member of its genus. Body length 9.5&ndash;10 inches &mdash; large for a thrush. Blue-gray upperparts, warm orange underparts, broad orange supercilium, orange wingbar. Males: bold dark breast band. Females: narrower band, slightly duller. Unmistakable in the field &mdash; one of the most striking-looking birds in the PNW winter landscape.</p>
+        <p>Breeds in old-growth and mature forest of the Pacific mountains from northern California through Alaska. Winters along the Pacific coast, most abundantly in Washington, Oregon, and northern California. In Washington: present year-round in the Coast Range and western Cascades, descending to lower elevations in winter.</p>
+
+        <div class="ff-card">
+          <h3>The Foo Fighters Pairing &mdash; E=7 Meets E=7 &mdash; Two Continuations</h3>
+          <p><strong>Foo Fighters (S36-315, E=7):</strong> Dave Grohl, six months after Cobain&rsquo;s death, recording alone, all instruments, one person. Post-grunge: the continuation of the grunge moment&rsquo;s DNA into a new form. One voice, into silence, making music as the response to the end of the defining band of the decade.</p>
+          <p><strong>Varied Thrush in fog (SPS-315, E=7):</strong> One bird, one note, into the fog and the canyon silence. The note that remains when the E=9 and E=8 storm has passed. The PNW winter&rsquo;s most solitary, most beautiful acoustic expression.</p>
+          <p><strong>Both are the continuation.</strong> Both are <strong>one voice</strong>, delivered into a larger silence, persisting after the maximum has passed. The pairing at degree 315 is the engine&rsquo;s most precise: E=7 exactly, one voice exactly, continuation exactly, quiet counterpoint to the preceding maximum exactly.</p>
+        </div>
+
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>S36-315 Foo Fighters (E=7)</strong>
+            <p>Post-grunge continuation. One man recording alone. The note that persists. E=7 + E=7 = E=14. Both the continuation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007 Hermit Thrush (E=6)</strong>
+            <p>Fellow Turdidae. Complex ascending spirals. The Hermit Thrush is more acclaimed in ornithology; the Varied Thrush is more instantly arresting to the lay listener in winter.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-313 Cougar-Wolf (E=9)</strong>
+            <p>Two degrees prior. Maximum energy through superposition. The Varied Thrush at E=7 is the deliberate resolution: from maximum to the quietest beautiful thing.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-314 Elk Herd (E=8)</strong>
+            <p>Previous degree. Multiple bulls simultaneous. The herd at maximum. The Varied Thrush answers the herd with one voice, one note.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018 Swainson&rsquo;s Thrush (E=5)</strong>
+            <p>Early Turdidae. Complex song. Neotropical migrant, absent in winter. The Varied Thrush fills the winter Turdidae space with the single-note type the family&rsquo;s other representatives do not use.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <h3>Sound Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Single note / fog reverb</div>
+          <div class="stat-detail">Pure tone, canyon extension</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 7</div>
+          <div class="stat-detail">Quiet counterpoint. Post-storm.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1,800&ndash;5,000 Hz</div>
+          <div class="stat-detail">Pure tone, low harmonics</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-style:italic;font-size:0.88rem;">Ixoreus naevius</div>
+          <div class="stat-detail">Gmelin, 1789. Monotypic.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Turdidae</div>
+          <div class="stat-detail" style="color:#455A64;font-weight:700;">FIRST single-note</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Winter</div>
+          <div class="stat-detail">Nov&ndash;Mar, fog mornings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Fog-filled canyon</div>
+          <div class="stat-detail">Old-growth, western slopes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Milestone</div>
+          <div class="stat-value" style="color:#455A64;">FIRST TURDIDAE SINGLE-NOTE</div>
+          <div class="stat-detail">Pure tone type, winter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">S36 pair</div>
+          <div class="stat-value">Foo Fighters (E=7)</div>
+          <div class="stat-detail">E=14 combined. One voice.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
