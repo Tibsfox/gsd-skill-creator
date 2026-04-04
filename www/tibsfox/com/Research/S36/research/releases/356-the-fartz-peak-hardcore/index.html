@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 356&deg; &mdash; The Fartz &mdash; E=10 &mdash; Hardcore Punk &mdash; THE FOUNDING GENERATION &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #BF360C, #E64A19, #BF360C); color: #FFCCBC; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(191,54,12,0.5); }
+    .energy-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #BF360C, #D84315); color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #BF360C; color: #FFCCBC; border: 1px solid #E64A19; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #BF360C; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 4px solid #BF360C; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FBE9E7; font-style: italic; color: #BF360C; font-size: 1.05rem; }
+    .founding-banner { background: linear-gradient(135deg, #BF360C, #E64A19, #BF360C); border: 3px solid #FFAB91; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FBE9E7; box-shadow: 0 0 32px rgba(191,54,12,0.4); }
+    .founding-banner h3 { margin: 0 0 0.75rem; color: #FFAB91; font-size: 1.4rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .founding-banner p { color: #FFCCBC; margin: 0.5rem 0; line-height: 1.7; font-size: 1rem; }
+    .gen-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .gen-pair { grid-template-columns: 1fr; } }
+    .gp-card { background: white; border: 1px solid #FFCCBC; border-top: 4px solid; border-radius: 0 0 6px 6px; padding: 1rem; }
+    .gp-355 { border-top-color: #37474F; }
+    .gp-356 { border-top-color: #BF360C; }
+    .gp-card h4 { margin: 0 0 0.3rem; font-size: 0.95rem; font-family: system-ui, sans-serif; }
+    .gp-355 h4 { color: #37474F; }
+    .gp-356 h4 { color: #BF360C; }
+    .gp-card p { margin: 0; font-size: 0.84rem; color: #424242; line-height: 1.5; }
+    .genealogy-card { background: white; border: 1px solid #FFCCBC; border-left: 4px solid #BF360C; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+    .genealogy-card .gen-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; color: #BF360C; font-family: system-ui, sans-serif; margin-bottom: 0.5rem; }
+    .genealogy-card .gen-steps { font-size: 0.9rem; color: #37474F; font-family: system-ui, sans-serif; line-height: 2; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #BF360C, #E64A19, #BF360C); border: 3px solid #FFAB91; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #FFAB91; }
+    .e20-display .e20-label { color: #FFCCBC; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #FFAB91; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>356 &mdash; The Fartz (THE FOUNDING GENERATION)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">356&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">The Fartz</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10 &mdash; THE FOUNDING GENERATION</span>
+          <span class="genre-badge">Hardcore Punk</span>
+          <span class="label-badge">Alternative Tentacles</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="founding-banner">
+          <h3>CAPITOL HILL, 1981 &mdash; DUFF MCKAGAN&rsquo;S FIRST BAND &mdash; ALTERNATIVE TENTACLES</h3>
+          <p>
+            <strong>DEGREE 356. THE SEATTLE HARDCORE FOUNDING GENERATION COMPLETES.</strong> Solger (355) + The Fartz (356): two bands, one founding moment, one city. The Fartz on Alternative Tentacles &mdash; Jello Biafra&rsquo;s label &mdash; took the Seattle underground to national distribution. Duff McKagan&rsquo;s first band. Capitol Hill. <em>Because This Fuckin&rsquo; World Still Stinks</em> (1982). E=10 paired with Pacific Wren storm-chorus: the loudest sound from the smallest source.
+          </p>
+        </div>
+
+        <h2>The Founding Pair</h2>
+        <div class="gen-pair">
+          <div class="gp-card gp-355">
+            <h4>Solger &mdash; Degree 355</h4>
+            <p>1980. First. Independent. Purely underground. No distribution. The origin in its pure form.</p>
+          </div>
+          <div class="gp-card gp-356">
+            <h4>The Fartz &mdash; Degree 356</h4>
+            <p>1981&ndash;1982. Second. Capitol Hill. Alternative Tentacles. National distribution. The origin with infrastructure.</p>
+          </div>
+        </div>
+        <p>Together: the founding generation of Seattle hardcore. Two bands, one window (1979&ndash;1982), one city. Neither exists without the other as context. The engine places them at consecutive degrees to acknowledge the founding pairing.</p>
+
+        <hr class="section-divider">
+
+        <h2>Capitol Hill &mdash; The Geographic Base</h2>
+        <p>Capitol Hill is the neighborhood the engine has documented throughout as Seattle&rsquo;s most consistently radical cultural geography. The dense, walkable, counter-cultural center of the city &mdash; clubs, record stores, houses, small venues. The Fartz operated here in 1980&ndash;1982, playing in the small club spaces that constituted the entire Seattle hardcore infrastructure at the time.</p>
+
+        <blockquote><em>Because This Fuckin&rsquo; World Still Stinks</em> (1982, Alternative Tentacles). The title announces the aesthetic completely: not ironic, not metaphorical, genuinely and directly confrontational with the world.</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Duff McKagan Genealogy</h2>
+        <div class="genealogy-card">
+          <div class="gen-label">The Path: Capitol Hill &rarr; Los Angeles &rarr; Global</div>
+          <div class="gen-steps">
+            The Fartz, Seattle (1980&ndash;1984) &rarr;
+            Los Angeles underground (1984&ndash;1985) &rarr;
+            Guns N&rsquo; Roses (1985) &rarr;
+            <em>Appetite for Destruction</em> (1987) &rarr;
+            Arena rock / mainstream breakthrough &rarr;
+            Return to Seattle (later career, writing, chronicling)
+          </div>
+        </div>
+        <p>McKagan born February 5, 1964, Seattle. Active in local punk/hardcore scene from adolescence. His trajectory from Capitol Hill hardcore to arena rock is one of the most complete genealogies of underground-to-mainstream absorption in Pacific Northwest music. His book <em>It&rsquo;s So Easy (and other lies)</em> (2011) documents the full arc with characteristic directness.</p>
+
+        <hr class="section-divider">
+
+        <h2>Alternative Tentacles &mdash; The National Infrastructure</h2>
+        <p>Founded by Jello Biafra in 1979 in San Francisco. Home label for Dead Kennedys. In 1982, one of the two or three most important independent hardcore labels in America. Being on Alternative Tentacles meant:</p>
+        <p><strong>National distribution</strong> through the same channels as Dead Kennedys records. <strong>Credibility</strong> within the underground hierarchy. <strong>Community</strong> connection to the national hardcore scene. For a Seattle band in 1982, this was the mechanism by which local founding became legible nationally.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">The Loudest Sound from the Smallest Source</div>
+          <div class="e20-sub">The Fartz E=10 + Pacific Wren Storm-Chorus E=10<br>BOTH FILL THEIR ACOUSTIC ENVIRONMENT COMPLETELY &mdash; BOTH SMALL-BY-SCALE, MAXIMUM-BY-OUTPUT</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">355</span> Solger &mdash; Founding generation, first band. Degree 355 + 356 together = the founding pair. Two bands, one moment, one city.</li>
+          <li><span class="ref-degree">357</span> Bikini Kill &mdash; Next degree. The sequence moves from Seattle founding hardcore (1980&ndash;1982) to Olympia riot grrrl (1993&ndash;1997). The tradition passed forward, geography shifted south.</li>
+          <li><span class="ref-degree">SPS-356</span> Pacific Wren Storm-Chorus &mdash; E=10 + E=10 = E=20. Ten wrens, 10 grams each, filling wet old-growth during a storm. The Fartz: small clubs, small audience, maximum output per unit. Both: the loudest expression possible from a small source. E=10 is about output-to-capacity ratio, not output-to-volume.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card" style="background: linear-gradient(135deg, #BF360C, #E64A19); border: 2px solid #FFAB91;">
+          <h4 style="color: #FFAB91;">THE FOUNDING GENERATION</h4>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">Degree</span><span class="stat-value" style="color:#FFAB91;">356 / 360</span></div>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">Energy</span><span class="stat-value" style="color:#FFAB91; font-size: 1.2rem;">10</span></div>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">Genre</span><span class="stat-value" style="color:#FFAB91;">Hardcore Punk</span></div>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">Origin</span><span class="stat-value" style="color:#FFAB91;">Capitol Hill, Seattle</span></div>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">Label</span><span class="stat-value" style="color:#FFAB91;">Alternative Tentacles</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members (Peak)</h4>
+          <div class="stat-row"><span class="stat-label">Bass / Drums</span><span class="stat-value">Duff McKagan</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals</span><span class="stat-value">Loud Walt</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Paul Solger</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Peak Album</h4>
+          <div class="stat-row"><span class="stat-label">Title</span><span class="stat-value">Because This Fuckin&rsquo;</span></div>
+          <div class="stat-row"><span class="stat-label">&nbsp;</span><span class="stat-value">World Still Stinks</span></div>
+          <div class="stat-row"><span class="stat-label">Year</span><span class="stat-value">1982</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Alt. Tentacles</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">356 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">98.9%</span></div>
+          <div class="stat-row"><span class="stat-label">Remaining</span><span class="stat-value">4 degrees</span></div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #BF360C, #E64A19); border: 2px solid #FFAB91;">
+          <h4 style="color: #FFAB91;">Paired Energy</h4>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">S36</span><span class="stat-value" style="color:#FFAB91;">E=10 (The Fartz)</span></div>
+          <div class="stat-row" style="border-color: #E64A19;"><span class="stat-label" style="color:#FFCCBC;">SPS</span><span class="stat-value" style="color:#FFAB91;">E=10 (Pac. Wren)</span></div>
+          <div class="stat-row" style="border-color: #E64A19; border-bottom: none;"><span class="stat-label" style="color:#FFCCBC;">Combined</span><span class="stat-value" style="color:white; font-size: 1.15rem;">E=20</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
