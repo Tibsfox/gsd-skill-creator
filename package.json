@@ -4,8 +4,8 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "skill-creator": "./dist/cli.js",
-    "gsd-skill-creator": "./project-claude/install.cjs"
+    "skill-creator": "dist/cli.js",
+    "gsd-skill-creator": "project-claude/install.cjs"
   },
   "files": [
     "dist",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tibsfox/gsd-skill-creator.git"
+    "url": "git+https://github.com/Tibsfox/gsd-skill-creator.git"
   },
   "keywords": [
     "claude-code",
