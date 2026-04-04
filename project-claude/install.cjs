@@ -11,10 +11,47 @@ const dryRun = args.includes('--dry-run');
 const force = args.includes('--force');
 const quiet = args.includes('--quiet');
 const uninstall = args.includes('--uninstall');
+const isGlobal = args.includes('--global');
+const isLocal = args.includes('--local');
+const showHelp = args.includes('--help') || args.includes('-h');
+
+// --- Help ---
+if (showHelp) {
+  console.log(`
+gsd-skill-creator — Install project-specific Claude Code skills, agents, and hooks
+
+Usage:
+  npx gsd-skill-creator             Install to current project (./.claude/)
+  npx gsd-skill-creator --global    Install to global (~/.claude/)
+  npx gsd-skill-creator --local     Install to current project (./.claude/)
+  npx gsd-skill-creator --dry-run   Preview changes without writing
+  npx gsd-skill-creator --force     Overwrite modified files
+  npx gsd-skill-creator --uninstall Remove installed components
+  npx gsd-skill-creator --quiet     Suppress output
+  npx gsd-skill-creator --help      Show this help
+
+Installs: skills, agents, commands, hooks, settings, and CLAUDE.md.
+Existing GSD installation required (.claude/ directory must exist).
+`);
+  process.exit(0);
+}
 
 // --- Paths ---
-const projectRoot = path.resolve(__dirname, '..');
+// When run via npx, __dirname is inside node_modules/.cache or a temp dir.
+// sourceDir always points to project-claude/ (where this script lives).
+// projectRoot depends on scope:
+//   --global: install to $HOME (targets ~/.claude/)
+//   --local (default): install to cwd (targets ./.claude/)
 const sourceDir = __dirname;
+const projectRoot = isGlobal
+  ? require('os').homedir()
+  : (isLocal ? process.cwd() : (() => {
+      // Auto-detect: if we're inside node_modules, target cwd. Otherwise target parent.
+      if (__dirname.includes('node_modules') || __dirname.includes('.npm')) {
+        return process.cwd();
+      }
+      return path.resolve(__dirname, '..');
+    })());
 const claudeDir = path.join(projectRoot, '.claude');
 
 // --- Counters ---
@@ -782,10 +819,26 @@ function uninstallIntegration() {
 
 // --- Main ---
 function main() {
-  // Verify .claude/ exists
+  // Show install target
+  const scope = isGlobal ? 'GLOBAL' : 'LOCAL';
+  log(`Target: ${projectRoot} (${scope})`);
+  log(`Claude dir: ${claudeDir}`);
+  log('');
+
+  // Verify .claude/ exists, or create it
   if (!fs.existsSync(claudeDir)) {
-    console.error('Error: .claude/ directory not found. Install GSD first.');
-    process.exit(1);
+    if (isGlobal || isLocal) {
+      // When explicitly scoped, create .claude/ if missing
+      if (!dryRun) {
+        fs.mkdirSync(claudeDir, { recursive: true });
+      }
+      log(`Created: ${claudeDir}`);
+    } else {
+      console.error('Error: .claude/ directory not found.');
+      console.error('Run with --global to install to ~/.claude/ or --local to install to ./.claude/');
+      console.error('Or install GSD first: npx get-shit-done-cc --claude --global');
+      process.exit(1);
+    }
   }
 
   // Read manifest
