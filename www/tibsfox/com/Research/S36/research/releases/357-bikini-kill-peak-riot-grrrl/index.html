@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 357&deg; &mdash; Bikini Kill &mdash; E=10 &mdash; Riot Grrrl &mdash; THE OLYMPIA SEQUENCE &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #E0E0E0; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #F0F0F0; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: #880E4F; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #880E4F, #AD1457, #880E4F); color: #FCE4EC; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(136,14,79,0.5); }
+    .energy-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #880E4F, #AD1457); color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #880E4F; color: #FCE4EC; border: 1px solid #AD1457; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #37474F; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #FCE4EC; margin: 2.5rem 0; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #880E4F; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 4px solid #880E4F; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FCE4EC; font-style: italic; color: #880E4F; font-size: 1.05rem; }
+    .olympia-banner { background: linear-gradient(135deg, #880E4F, #AD1457, #880E4F); border: 3px solid #F48FB1; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FCE4EC; box-shadow: 0 0 32px rgba(136,14,79,0.4); }
+    .olympia-banner h3 { margin: 0 0 0.75rem; color: #F48FB1; font-size: 1.4rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .olympia-banner p { color: #FCE4EC; margin: 0.5rem 0; line-height: 1.7; font-size: 1rem; }
+    .olympia-seq { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .olympia-seq { grid-template-columns: 1fr; } }
+    .os-card { background: white; border: 1px solid #F8BBD9; border-top: 4px solid; border-radius: 0 0 6px 6px; padding: 1rem; }
+    .os-357 { border-top-color: #880E4F; background: linear-gradient(180deg, #FCE4EC 0%, white 30%); }
+    .os-358 { border-top-color: #AD1457; }
+    .os-359 { border-top-color: #C62828; }
+    .os-card h4 { margin: 0 0 0.3rem; font-size: 0.95rem; font-family: system-ui, sans-serif; }
+    .os-357 h4 { color: #880E4F; }
+    .os-358 h4 { color: #AD1457; }
+    .os-359 h4 { color: #C62828; }
+    .os-card p { margin: 0; font-size: 0.84rem; color: #424242; line-height: 1.5; }
+    .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .member-card { background: white; border: 1px solid #F8BBD9; border-left: 4px solid #880E4F; border-radius: 0 6px 6px 0; padding: 0.9rem 1rem; }
+    .member-card .mc-name { font-size: 1rem; font-weight: 700; color: #880E4F; font-family: system-ui, sans-serif; }
+    .member-card .mc-role { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: #AD1457; font-family: system-ui, sans-serif; margin-bottom: 0.4rem; }
+    .member-card .mc-desc { font-size: 0.82rem; color: #37474F; font-family: system-ui, sans-serif; line-height: 1.5; }
+    .record-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .record-grid { grid-template-columns: 1fr; } }
+    .rec-card { background: white; border: 1px solid #F8BBD9; border-top: 4px solid #880E4F; border-radius: 0 0 6px 6px; padding: 1rem; }
+    .rec-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #880E4F; font-family: system-ui, sans-serif; }
+    .rec-card .rec-year { font-size: 0.72rem; color: #AD1457; font-family: system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .rec-card p { margin: 0; font-size: 0.84rem; color: #37474F; line-height: 1.5; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #880E4F, #AD1457, #880E4F); border: 3px solid #F48FB1; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #F48FB1; }
+    .e20-display .e20-label { color: #FCE4EC; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #F48FB1; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>357 &mdash; Bikini Kill (THE OLYMPIA SEQUENCE)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">357&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Bikini Kill</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10 &mdash; THE OLYMPIA SEQUENCE BEGINS</span>
+          <span class="genre-badge">Riot Grrrl</span>
+          <span class="label-badge">Kill Rock Stars</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="olympia-banner">
+          <h3>OLYMPIA, 1990 &mdash; THE ORIGIN &mdash; KILL ROCK STARS</h3>
+          <p>
+            <strong>DEGREE 357. THE OLYMPIA SEQUENCE BEGINS.</strong> The engine&rsquo;s final three entries are all Olympia bands on Kill Rock Stars. Bikini Kill opens the sequence: the origin point of riot grrrl, the most politically consequential punk formation of the Pacific Northwest 1990s. Kathleen Hanna. Tobi Vail. Kathi Wilcox. Billy Karren. <em>Pussy Whipped</em> (1993). <em>Rebel Girl.</em> E=10.
+          </p>
+        </div>
+
+        <h2>The Olympia Sequence</h2>
+        <div class="olympia-seq">
+          <div class="os-card os-357">
+            <h4>357 &mdash; Bikini Kill</h4>
+            <p>Origin point. Riot grrrl. Kathleen Hanna. The movement begins here. E=10.</p>
+          </div>
+          <div class="os-card os-358">
+            <h4>358 &mdash; Sleater-Kinney</h4>
+            <p>Architectural development. <em>Dig Me Out.</em> No bass. Three voices. E=10.</p>
+          </div>
+          <div class="os-card os-359">
+            <h4>359 &mdash; Unwound</h4>
+            <p>Final statement. <em>Leaves Turn Inside You.</em> The engine closes. E=10.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Band</h2>
+        <div class="member-grid">
+          <div class="member-card">
+            <div class="mc-name">Kathleen Hanna</div>
+            <div class="mc-role">Vocals</div>
+            <div class="mc-desc">Vocal as political act. Scream as structural unit. Direct address as compositional device. Trained-as-rejection-of-training. The movement&rsquo;s articulation center.</div>
+          </div>
+          <div class="member-card">
+            <div class="mc-name">Tobi Vail</div>
+            <div class="mc-role">Drums</div>
+            <div class="mc-desc"><em>Jigsaw</em> zine co-founder of riot grrrl alongside Hanna. Direct, forceful drumming. Documented conversations with Kurt Cobain as influence on Nirvana&rsquo;s political consciousness.</div>
+          </div>
+          <div class="member-card">
+            <div class="mc-name">Kathi Wilcox</div>
+            <div class="mc-role">Bass</div>
+            <div class="mc-desc">Co-writer with Hanna. Contributed to visual and textual culture of the band. Low-end directness matching the band&rsquo;s entire approach.</div>
+          </div>
+          <div class="member-card">
+            <div class="mc-name">Billy Karren</div>
+            <div class="mc-role">Guitar</div>
+            <div class="mc-desc">Hardcore-adjacent guitar approach. Loud, fast, maximally committed. Provides the sonic context for Hanna&rsquo;s vocal deployment.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Records</h2>
+        <div class="record-grid">
+          <div class="rec-card">
+            <h4>Bikini Kill EP</h4>
+            <div class="rec-year">1992 &mdash; Kill Rock Stars</div>
+            <p>&ldquo;Rebel Girl&rdquo; &mdash; female solidarity as subject. &ldquo;Suck My Left One&rdquo; &mdash; direct documentation without sensationalism. The movement&rsquo;s most recognized songs. The origin in its most concentrated form.</p>
+          </div>
+          <div class="rec-card">
+            <h4>Pussy Whipped</h4>
+            <div class="rec-year">1993 &mdash; Kill Rock Stars</div>
+            <p>The full-length. Maximum confrontational sequencing. &ldquo;Rebel Girl&rdquo; re-recorded. &ldquo;Alien She,&rdquo; &ldquo;Blood One,&rdquo; &ldquo;Liar.&rdquo; No rest periods. The band at peak political and creative focus.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Riot Grrrl &mdash; Political Formation, Not Genre</h2>
+        <p>Riot grrrl emerged simultaneously in Olympia and Washington, D.C. in 1991. The zines came before the music: the <em>Bikini Kill</em> zine and Tobi Vail&rsquo;s <em>Jigsaw</em> were the founding documents of a movement that organized around feminist critique of punk&rsquo;s structural misogyny. The political formation preceded the songs; the songs documented the community.</p>
+        <p>The specific critique: punk culture&rsquo;s complicity with the male-front-of-stage expectation, the aggressive response to women performers, the absence of women in creative roles. At shows, Bikini Kill explicitly invited women to the front. The spatial reorganization of the punk venue was the movement&rsquo;s politics enacted in real time.</p>
+
+        <blockquote>&ldquo;The media blackout of 1992&ndash;1993 &mdash; refusing <em>Newsweek</em> and <em>Spin</em>&rsquo;s terms of representation &mdash; is the most precise document of riot grrrl&rsquo;s politics: controlling the frame rather than being framed.&rdquo;</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Olympia Geography</h2>
+        <p>Olympia is not a suburb of Seattle. The state capitol, 50 miles to the south, had a distinct infrastructure: The Evergreen State College (founded 1967, no grades, interdisciplinary liberal arts), Calvin Johnson&rsquo;s K Records and the International Pop Underground, and a DIY community built outside Sub Pop&rsquo;s commercial channels. The engine closes here because the most significant creative work of the Pacific Northwest 1990s underground was made here.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">Female Expertise at the Operational Center</div>
+          <div class="e20-sub">Bikini Kill E=10 + Orca Female-Led Hunt (SPS 357) E=10<br>KATHLEEN HANNA&rsquo;S PRECISION ORGANIZES THE MOVEMENT &mdash; THE MATRIARCH&rsquo;S KNOWLEDGE ORGANIZES THE HUNT</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">S36-358</span> Sleater-Kinney &mdash; Kill Rock Stars, Olympia, feminist punk development. Bikini Kill origin; Sleater-Kinney architectural peak. Both E=10.</li>
+          <li><span class="ref-degree">S36-359</span> Unwound &mdash; Same label, same city, different tradition (experimental not riot grrrl). The Kill Rock Stars Olympia trilogy closes at 359.</li>
+          <li><span class="ref-degree">S36-355</span> Solger &mdash; Both are origin-point E=10 entries: Solger at Seattle hardcore origin (1980); Bikini Kill at riot grrrl origin (1990). Origin-point calibration consistent.</li>
+          <li><span class="ref-degree">SPS-357</span> Orca Female-Led Hunt &mdash; E=20 pair. Female expertise at operational center of two maximum-energy structures.</li>
+        </ul>
+
+      </main>
+
+      <div class="sidebar">
+        <div class="stat-card" style="background: linear-gradient(135deg, #880E4F, #AD1457); border: 2px solid #F48FB1;">
+          <div style="color: #F48FB1; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem;">Energy</div>
+          <div style="color: #F48FB1; font-size: 1.4rem; font-weight: 700;">E = 10</div>
+          <div style="color: #FCE4EC; font-size: 0.78rem;">Origin Point</div>
+        </div>
+        <div class="stat-card">
+          <h4>Release Info</h4>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Olympia, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Formed</span><span class="stat-value">1990</span></div>
+          <div class="stat-row"><span class="stat-label">Active</span><span class="stat-value">1990&ndash;1997</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Kill Rock Stars</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Riot Grrrl</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Records</h4>
+          <div class="stat-row"><span class="stat-label">EP</span><span class="stat-value">1992 KRS</span></div>
+          <div class="stat-row"><span class="stat-label">Pussy Whipped</span><span class="stat-value">1993 KRS</span></div>
+          <div class="stat-row"><span class="stat-label">CD Version</span><span class="stat-value">1994</span></div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #880E4F, #5D1049); border: 2px solid #F48FB1;">
+          <div style="color: #F48FB1; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem;">Paired Energy</div>
+          <div style="color: #F48FB1; font-weight: 600;">S36: E=10 (Bikini Kill)</div>
+          <div style="color: #F48FB1; font-weight: 600; margin-top: 0.3rem;">SPS: E=10 (Orca Hunt)</div>
+          <div style="color: white; font-size: 1.2rem; font-weight: 700; margin-top: 0.4rem;">Combined: E=20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 354&deg; &mdash; Orca Breach + Bird Colony Chaos &mdash; E=10 &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    .release-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #004D40, #00695C, #00897B); color: #E0F2F1; font-size: 2rem; font-weight: 700; width: 4.5rem; height: 4.5rem; border-radius: 50%; flex-shrink: 0; font-family: 'Georgia', serif; box-shadow: 0 0 24px rgba(0,77,64,0.6); }
+    .release-grid { display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; }
+    @media (max-width: 768px) { .release-grid { grid-template-columns: 1fr; } }
+    .sidebar .stat-card { background: white; border: 1px solid var(--card-border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .sidebar .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--page-text-light); font-family: system-ui, sans-serif; margin-bottom: 0.15rem; }
+    .sidebar .stat-card .stat-value { font-size: 1.05rem; color: #004D40; font-weight: 600; }
+    .sidebar .stat-card .stat-detail { font-size: 0.78rem; color: var(--page-text-light); font-family: system-ui, sans-serif; }
+    .sidebar h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #004D40; margin: 1.5rem 0 0.5rem; font-family: system-ui, sans-serif; }
+    .event-banner { background: linear-gradient(135deg, #004D40, #00695C, #1B5E20); border: 2px solid #80CBC4; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #E0F2F1; }
+    .event-banner h3 { margin: 0 0 0.75rem; color: #80CBC4; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .event-banner p { color: #B2DFDB; margin: 0.4rem 0; line-height: 1.7; }
+    .event-banner strong { color: #80CBC4; }
+    .species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .sp-card { background: white; border: 1px solid #B2DFDB; border-left: 4px solid #004D40; border-radius: 0 6px 6px 0; padding: 0.85rem 1rem; }
+    .sp-card .sp-name { font-weight: 700; font-size: 0.9rem; color: #004D40; font-family: system-ui, sans-serif; }
+    .sp-card .sp-sci { font-style: italic; font-size: 0.78rem; color: #546E7A; font-family: system-ui, sans-serif; }
+    .sp-card p { margin: 0.3rem 0 0; font-size: 0.82rem; color: #424242; line-height: 1.5; }
+    .sequence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .sequence-grid { grid-template-columns: 1fr; } }
+    .seq-card { border-radius: 6px; padding: 0.6rem 0.75rem; border: 1px solid; }
+    .seq-354 { background: linear-gradient(135deg, #004D40, #00695C); border-color: #80CBC4; }
+    .seq-355 { background: #E8F5E9; border-color: #2E7D32; }
+    .seq-356 { background: #F3E5F5; border-color: #6A1B9A; }
+    .seq-357 { background: #E0F2F1; border-color: #006064; }
+    .seq-358 { background: #E8EAF6; border-color: #283593; }
+    .seq-359 { background: #212121; border-color: #616161; }
+    .seq-card .sc-name { font-size: 0.78rem; font-weight: 700; font-family: system-ui, sans-serif; }
+    .seq-card .sc-deg { font-size: 0.68rem; font-family: system-ui, sans-serif; }
+    .seq-354 .sc-name { color: #80CBC4; } .seq-354 .sc-deg { color: #B2DFDB; }
+    .seq-355 .sc-name { color: #2E7D32; } .seq-355 .sc-deg { color: #388E3C; }
+    .seq-356 .sc-name { color: #6A1B9A; } .seq-356 .sc-deg { color: #7B1FA2; }
+    .seq-357 .sc-name { color: #006064; } .seq-357 .sc-deg { color: #00838F; }
+    .seq-358 .sc-name { color: #283593; } .seq-358 .sc-deg { color: #3949AB; }
+    .seq-359 .sc-name { color: #BDBDBD; } .seq-359 .sc-deg { color: #9E9E9E; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #004D40, #1B5E20, #004D40); border: 3px solid #80CBC4; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #80CBC4; text-shadow: 0 0 20px rgba(128,203,196,0.4); }
+    .e20-display .e20-label { color: #B2DFDB; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #80CBC4; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+    .content-body h2 { margin-top: 2rem; font-size: 1.35rem; }
+    .content-body p { line-height: 1.75; margin: 0.75rem 0; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .section-divider { border: none; border-top: 2px solid #B2DFDB; margin: 2.5rem 0; }
+    blockquote { border-left: 3px solid #004D40; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E0F2F1; font-style: italic; color: #004D40; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+  </header>
+  <div class="page-container">
+    <a href="../" class="back-link" style="color: #004D40;">&larr; All Releases</a>
+
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+      <div class="degree-badge">354&deg;</div>
+      <div>
+        <h2 style="margin: 0; color: #004D40;">Orca Breach + Bird Colony Chaos</h2>
+        <div style="margin-top: 0.3rem; font-family: system-ui, sans-serif; font-size: 0.88rem; color: #546E7A;">
+          <strong style="color: #004D40;">E = 10 &mdash; THE SPS FINAL SIX BEGIN</strong> &nbsp;&bull;&nbsp; Simultaneous Detonations &nbsp;&bull;&nbsp; Coastal Cliff &nbsp;&bull;&nbsp; Summer
+        </div>
+      </div>
+    </div>
+
+    <div class="event-banner">
+      <h3>SIMULTANEOUS DETONATIONS &mdash; THE COASTAL CLIFF AT MAXIMUM</h3>
+      <p>
+        <strong>An orca breach at the cliff base. A multi-species bird colony in full alarm.</strong> Both events at the same moment, in the same acoustic space. The breach triggers the colony. The colony fills the space the breach opened. The whole exceeds the sum of parts because one event causes the other. Coastal cliff, Pacific Northwest, summer. The largest single marine mammal acoustic event + the largest sustained colonial seabird acoustic event. Simultaneously. <strong>E=10.</strong>
+      </p>
+    </div>
+
+    <div class="release-grid">
+      <div class="content-body">
+
+        <h2>The SPS Final Six</h2>
+        <div class="sequence-grid">
+          <div class="seq-card seq-354">
+            <div class="sc-name">Orca Breach + Colony</div>
+            <div class="sc-deg">354 &mdash; Coastal Cliff &mdash; E=10</div>
+          </div>
+          <div class="seq-card seq-355">
+            <div class="sc-name">Stonefly Emergence</div>
+            <div class="sc-deg">355 &mdash; Major River &mdash; E=10</div>
+          </div>
+          <div class="seq-card seq-356">
+            <div class="sc-name">Pacific Wren Chorus</div>
+            <div class="sc-deg">356 &mdash; Old-Growth &mdash; E=10</div>
+          </div>
+          <div class="seq-card seq-357">
+            <div class="sc-name">Orca Female Hunt</div>
+            <div class="sc-deg">357 &mdash; Salish Sea &mdash; E=10</div>
+          </div>
+          <div class="seq-card seq-358">
+            <div class="sc-name">All-Species Dawn Chorus</div>
+            <div class="sc-deg">358 &mdash; Puget Sound Edge &mdash; E=10</div>
+          </div>
+          <div class="seq-card seq-359">
+            <div class="sc-name">Puget Sound in Silence</div>
+            <div class="sc-deg">359 &mdash; Full Salish Sea &mdash; E=10 FINAL</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Breach</h2>
+        <p>A full body breach by an adult male orca: 5,000&ndash;6,000 kg of body mass accelerating from depth, clearing 80&ndash;100% of body length above the water surface, re-entering at angle with a concussive impact audible over a kilometer in calm conditions. The impact generates a percussive acoustic event in the audible range and low-frequency pressure waves in the infrasonic range simultaneously. The water column carries the pressure wave. The air carries the impact sound. The cliff face receives both within seconds of each other.</p>
+
+        <blockquote>The breach is not random &mdash; it is a calculated display event, used for communication over distances of several kilometers. Six tons, intentional, structural. The Blood Brothers play the same way.</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>The Colony Species</h2>
+        <div class="species-grid">
+          <div class="sp-card">
+            <div class="sp-name">Common Murre</div>
+            <div class="sp-sci">Uria aalge</div>
+            <p>Most numerous. 20 birds per square meter on open ledges. Alarm call: high-pitched cackling screech. 10,000+ birds in full alarm = most sustained high-amplitude colonial seabird event.</p>
+          </div>
+          <div class="sp-card">
+            <div class="sp-name">Glaucous-winged Gull</div>
+            <div class="sp-sci">Larus glaucescens</div>
+            <p>Acoustically dominant when alarmed. Long-call: extremely loud, carries great distances. Fills the upper frequency range above the murres during colony alarm.</p>
+          </div>
+          <div class="sp-card">
+            <div class="sp-name">Tufted Puffin</div>
+            <div class="sp-sci">Fratercula cirrhata</div>
+            <p>Burrow-nesting. Alarm: low growling + bill-clapping. Mid-register contribution. Less prominent visually; acoustically present in the full alarm event.</p>
+          </div>
+          <div class="sp-card">
+            <div class="sp-name">Pelagic Cormorant</div>
+            <div class="sp-sci">Phalacrocorax pelagicus</div>
+            <p>Grunting, croaking base register. Mass takeoff generates broadband wing-sound. Largest-bodied of common colonial species; wing-thunder adds the acoustic floor.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Convergence</h2>
+        <p><strong>The breach occurs at the cliff base.</strong> The concussive impact reaches the cliff face within seconds. Every bird on every ledge receives the trigger simultaneously.</p>
+        <p><strong>The first wave:</strong> Birds on the lowest ledges launch, adding wing-sound and alarm calls to the acoustic field. Their motion triggers the next tier. Colonial alarm propagates up the cliff face like a wave, each tier responding to both the original stimulus and the response of the tier below.</p>
+        <p><strong>Full colony alarm:</strong> Within seconds, the entire cliff is in alarm. Murre screeches in the mid-upper range, gull long-calls in the upper range, cormorant grunts in the lower range, guillemot whistles in the highest register, and broadband wing-sound from thousands of simultaneous wing-beats beneath everything.</p>
+        <p><strong>The overlap:</strong> The orca breach pressure wave (still moving through the acoustic environment) and the colony alarm (aerial, multi-species) coexist in the same acoustic space. The two events overlap. The breach has not finished propagating before the colony&rsquo;s response begins.</p>
+        <p>This is the multiplicative event. The orca breach alone would be E=8. The colony alarm alone at full activation would be E=8. The two converging at the same cliff in the same moment, with the breach physically triggering the colony response: E=10.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">The First of the Final Six</div>
+          <div class="e20-sub">Orca Breach + Bird Colony E=10 + The Blood Brothers E=10<br>SIMULTANEOUS DETONATIONS &mdash; MULTIPLICATIVE, NOT ADDITIVE</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <p><strong>S36-354: The Blood Brothers</strong> &mdash; E=10 + E=10 = E=20. Dual vocal chaos as architecture. Johnny Whitney opens the upper register; Cody Votolato fills the lower; together they generate a combined sound neither alone could produce. The breach opens the cliff&rsquo;s acoustic space; the colony fills it. Same architecture, two domains.</p>
+        <p><strong>SPS-355:</strong> Stonefly Emergence Full River. The next SPS entry. Shifts from coastal cliff to inland river. From detonation to emergence. From largest to most numerous.</p>
+        <p><strong>SPS-348:</strong> Full SRKW Greeting. Earlier entry at E=10. The same species (Orcinus orca) appears at maximum in two different modes: the full community greeting ceremony (348) and the breach-triggered coastal cliff event (354). Two routes to E=10 for the same species.</p>
+
+      </div>
+
+      <div class="sidebar">
+        <div class="stat-card" style="background: linear-gradient(135deg, #004D40, #00695C); border: 2px solid #80CBC4;">
+          <div class="stat-label" style="color:#80CBC4;">Energy</div>
+          <div class="stat-value" style="color:#80CBC4; font-size: 1.4rem;">E = 10</div>
+          <div class="stat-detail" style="color:#B2DFDB;">SPS FINAL SIX BEGIN</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Event Type</div>
+          <div class="stat-value">Simultaneous</div>
+          <div class="stat-detail">Breach + Colony Chaos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orca mass</div>
+          <div class="stat-value">5,000&ndash;6,000 kg</div>
+          <div class="stat-detail">Adult male; full body breach</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Colony species</div>
+          <div class="stat-value">4+ species</div>
+          <div class="stat-detail">Murre, Gull, Puffin, Cormorant</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Peak breeding population, max presence</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Coastal Cliff</div>
+          <div class="stat-detail">Pacific Northwest; Protection Island, Tatoosh, Destruction Island type</div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #004D40, #1B5E20); border: 2px solid #80CBC4;">
+          <div class="stat-label" style="color:#80CBC4;">Paired Energy</div>
+          <div class="stat-value" style="color:#80CBC4;">SPS: E=10 (Breach+Colony)</div>
+          <div class="stat-value" style="color:#80CBC4; margin-top: 0.3rem;">S36: E=10 (Blood Brothers)</div>
+          <div class="stat-value" style="color:white; font-size: 1.2rem; margin-top: 0.4rem;">Combined: E=20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

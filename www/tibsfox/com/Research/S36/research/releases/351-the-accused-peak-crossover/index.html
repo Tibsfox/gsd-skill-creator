@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 351&deg; &mdash; The Accused Peak Crossover &mdash; E=10 &mdash; Crossover Thrash &mdash; Oak Harbor &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #9FA8DA; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--seattle-navy); font-family: system-ui, sans-serif; border-bottom: 1px solid #E8EAF6; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #283593, #0D47A1); color: #C5CAE9; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(26,35,126,0.5); }
+    .energy-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: system-ui, sans-serif; background: linear-gradient(135deg, #E65100, #BF360C); color: white; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #E65100; color: #FFF8E1; border: 1px solid #BF360C; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #455A64; color: #CFD8DC; border: 1px solid #546E7A; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #CFD8DC; margin: 2.5rem 0; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 4px solid #E65100; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #FFF8E1; font-style: italic; color: #E65100; font-size: 1.05rem; }
+    .accused-banner { background: linear-gradient(135deg, #E65100, #BF360C, #E65100); border: 3px solid #FFCC02; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.5rem 0; color: #FFF8E1; }
+    .accused-banner h3 { margin: 0 0 0.75rem; color: #FFCC02; font-size: 1.3rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .accused-banner p { color: #FFF8E1; margin: 0.5rem 0; line-height: 1.7; }
+    .synthesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .synthesis-grid { grid-template-columns: 1fr; } }
+    .syn-card { border-radius: 6px; padding: 1rem 1.2rem; }
+    .syn-punk { background: #FCE4EC; border-left: 4px solid #880E4F; }
+    .syn-metal { background: #FFF8E1; border-left: 4px solid #E65100; }
+    .syn-card h4 { margin: 0 0 0.4rem; font-size: 0.95rem; font-family: system-ui, sans-serif; }
+    .syn-punk h4 { color: #880E4F; }
+    .syn-metal h4 { color: #E65100; }
+    .syn-card p { font-size: 0.82rem; color: #546E7A; font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    .synthesis-result { background: linear-gradient(135deg, #E65100, #880E4F); border-radius: 6px; padding: 1rem 1.2rem; margin-top: 0.75rem; text-align: center; color: white; font-weight: 700; font-family: system-ui, sans-serif; }
+    .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .album-card { background: white; border: 1px solid #CFD8DC; border-left: 4px solid #E65100; border-radius: 0 6px 6px 0; padding: 0.85rem 1rem; }
+    .album-card h4 { margin: 0 0 0.2rem; font-size: 0.95rem; color: #E65100; font-family: system-ui, sans-serif; }
+    .album-card p { font-size: 0.82rem; color: #546E7A; font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    .e20-display { text-align: center; background: linear-gradient(135deg, #E65100, #BF360C, #E65100); border: 3px solid #FFCC02; border-radius: 8px; padding: 2rem; margin: 1.5rem 0; }
+    .e20-display .e20-num { font-size: 5rem; font-weight: 700; font-family: 'Georgia', serif; color: #FFCC02; }
+    .e20-display .e20-label { color: #FFF8E1; font-family: system-ui, sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .e20-display .e20-sub { color: #FFCC02; font-family: system-ui, sans-serif; font-size: 0.82rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>351 &mdash; The Accused Peak Crossover (E=10)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">351&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">The Accused &mdash; Peak Crossover</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 10</span>
+          <span class="genre-badge">Crossover Thrash</span>
+          <span class="label-badge">Combat Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="accused-banner">
+      <h3>THE PNW CROSSOVER THRASH ORIGIN POINT &mdash; 1986-1987</h3>
+      <p>
+        <strong>Martha Splatterhead&rsquo;s Maddest Stories (1986) + More Fun Than an Open Casket Funeral (1987).</strong> Combat Records. Oak Harbor, Whidbey Island. Tommy Niemeyer&rsquo;s palm-muted riff architecture at hardcore velocity. The synthesis of two genres into a third thing. The Pacific Northwest contribution to the national crossover conversation, before grunge made PNW famous. <strong>E=10.</strong>
+      </p>
+      <p>Pairs with <strong>Insect + Bird + Rain Maximum</strong> (SPS 351, E=10) &mdash; peak spring Hoh Rainforest, all biodiversity layers simultaneously. <strong>E=20.</strong></p>
+    </div>
+
+    <div class="release-layout">
+      <main>
+        <h2>The Synthesis</h2>
+        <p>Crossover thrash is not a compromise between hardcore punk and thrash metal. It is a third genre created when the velocity principle of hardcore meets the technique principle of thrash. The challenge is simultaneity: maintaining speed AND maintaining precision at the same time. The Accused solved it.</p>
+
+        <div class="synthesis-grid">
+          <div class="syn-card syn-punk">
+            <h4>Hardcore Punk</h4>
+            <p>Short songs. Fast tempos. Aggressive vocal delivery. Forward momentum. No slow parts. The energy is in the constant pressure of the fast.</p>
+          </div>
+          <div class="syn-card syn-metal">
+            <h4>Thrash Metal</h4>
+            <p>Palm-muted riffs. Downpicking technique. Rhythmic precision. Structural complexity. The energy is in the tightness of the low-end at speed.</p>
+          </div>
+        </div>
+        <div class="synthesis-result">CROSSOVER THRASH &mdash; BOTH SIMULTANEOUSLY &mdash; A THIRD THING</div>
+
+        <hr class="section-divider">
+
+        <h2>The Peak Records</h2>
+        <div class="album-grid">
+          <div class="album-card">
+            <h4>Martha Splatterhead&rsquo;s Maddest Stories Ever Told (1986)</h4>
+            <p>Combat Records. The origin document. Pre-dates mainstream crossover genre recognition. Martha Splatterhead character: horror-fiction tradition as container for extreme content. Niemeyer&rsquo;s riff vocabulary at maximum synthesis. The PNW ceiling for 1986.</p>
+          </div>
+          <div class="album-card">
+            <h4>More Fun Than an Open Casket Funeral (1987)</h4>
+            <p>Combat Records. The compositional peak. Faster, cleaner production, more defined songs. The title: darkly comic, signals the aesthetic register. Chewy Kunstler&rsquo;s vocal approach fully developed. The ceiling held and surpassed.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Tommy Niemeyer &mdash; The Guitar Architecture</h2>
+        <p>Niemeyer is the primary creative force and the constant across the band&rsquo;s lineup changes. His guitar approach is the definition of crossover thrash at the PNW ceiling: palm-muted eighth-note patterns under high-gain distortion, combined with faster lead passages that carry the melodic content of the hardcore tradition.</p>
+        <p>The crossover challenge: do not slow down to demonstrate heaviness. Pack the maximum heavy content into each bar while maintaining the speed. Niemeyer&rsquo;s solution: riffs that are structurally complex in the thrash sense while moving at the tempos of hardcore punk. Both simultaneously. The synthesis is in the guitar.</p>
+
+        <hr class="section-divider">
+
+        <h2>Oak Harbor &mdash; The Island Origin</h2>
+        <p>Oak Harbor is on Whidbey Island &mdash; the largest island in Puget Sound, approximately 50 miles north of Seattle, accessible by ferry or the Deception Pass Bridge. Naval Air Station Whidbey Island defines the community: transient population, military families, a social intensity that the more cosmopolitan Seattle neighborhoods did not contain.</p>
+
+        <blockquote>&ldquo;The engine&rsquo;s periphery-produces-maximum pattern holds even on an island. The most geographically remote E=10 origin point in the engine: a naval air station community in the Salish Sea.&rdquo;</blockquote>
+
+        <p>The Accused were part of the national Combat Records crossover conversation (Megadeth, Testament, D.R.I.) before grunge made the Pacific Northwest internationally famous. The pre-grunge contribution to the national extreme music discourse is documented here.</p>
+
+        <hr class="section-divider">
+
+        <div class="e20-display">
+          <div class="e20-num">E=20</div>
+          <div class="e20-label">Maximum Simultaneous Layered Complexity</div>
+          <div class="e20-sub">The Accused Peak E=10 + Insect + Bird + Rain Maximum E=10 = E=20<br>PNW CROSSOVER THRASH ORIGIN PAIRED WITH PEAK SPRING HOH RAINFOREST BIODIVERSITY</div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">329</span> The Accused catalog (E=9) &mdash; Prior entry for full discography. Degree 351 at E=10 for the 1985-1988 peak period specifically.</li>
+          <li><span class="ref-degree">350</span> TAD Peak &mdash; Both closing arc extreme wing. TAD = Sub Pop industrial heaviness. The Accused = Combat Records crossover precision. Adjacent degrees, adjacent territories, different routes to E=10.</li>
+          <li><span class="ref-degree">352</span> Botch WATR &mdash; The arc continues. 1986-1987 crossover thrash (Accused) followed by 1999-2002 mathcore (Botch). 15-year arc of the PNW technical extreme wing.</li>
+          <li><span class="ref-degree">SPS&nbsp;351</span> Insect + Bird + Rain Maximum &mdash; E=10 + E=10 = E=20. Multiple simultaneous layers at individual maximums. Crossover thrash = simultaneous punk + metal. Hoh Rainforest = simultaneous insects + birds + rain.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">351 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">E = 10</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Crossover Thrash</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1985&ndash;1988</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Oak Harbor, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Combat Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Guitar</span><span class="stat-value">Tommy Niemeyer</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals (peak)</span><span class="stat-value">Chewy Kunstler</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals (early)</span><span class="stat-value">Blaine Cook</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Peak Records</h4>
+          <div class="stat-row"><span class="stat-label">1986</span><span class="stat-value">Martha Splatterhead</span></div>
+          <div class="stat-row"><span class="stat-label">1987</span><span class="stat-value">More Fun Than...</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Combat Records</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Quadrant</span><span class="stat-value">IV</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">97.5%</span></div>
+          <div class="stat-row"><span class="stat-label">Arc</span><span class="stat-value">CLOSING (3/5)</span></div>
+          <div class="stat-row"><span class="stat-label">Combined E</span><span class="stat-value">E=20 (SPS 351)</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>SPS Pair</h4>
+          <div class="stat-row"><span class="stat-label">Sound</span><span class="stat-value">Insect+Bird+Rain</span></div>
+          <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value">Hoh Rainforest</span></div>
+          <div class="stat-row"><span class="stat-label">Season</span><span class="stat-value">Peak Spring</span></div>
+          <div class="stat-row"><span class="stat-label">Combined</span><span class="stat-value">E=20</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
