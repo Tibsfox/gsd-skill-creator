@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-04T04:15:00Z",
-  "source": "sweep-v1.3.21.1",
+  "updated": "2026-04-04T03:00:00Z",
+  "source": "sweep-v1.3.20",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "translunar",
-    "status": "TRANSLUNAR COAST — MET +2d 05:25 — Integrity ~175,000 mi from Earth, outbound. FD4 evening. Codebase intelligence research: 10/15 agents complete, strategy synthesized (596 lines). Clean-room reverse engineering plan: embeddings (all-MiniLM-L6-v2), knowledge graph (pgvector), hybrid search (vector+FTS), MCP integration. Session 5: 24+ pages, BEE 9 pages, 15 research agents. 22/24 Day 4.",
+    "status": "TRANSLUNAR COAST — MET +2d 04:25 — Integrity ~170,000 mi from Earth, outbound. FD4 evening. EMBEDDINGS LIVE: 1,158 pages embedded (all-MiniLM-L6-v2, 384-dim, 9.1s local GPU). FTS index operational. 15 codebase intelligence projects researched, strategy synthesized. Session 5: 24+ pages, BEE 9 pages, pgvector populated. 21/24 Day 4.",
     "go_probability": 99,
     "weather_go_pct": 100
   },
