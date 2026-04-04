@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 336&deg; &mdash; Alice in Chains &mdash; E=9 &mdash; Metal/Grunge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .release-layout { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+    @media (max-width: 800px) { .release-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+    .sidebar { position: sticky; top: 1.5rem; }
+    .sidebar .stat-card { background: white; border: 1px solid #263238; border-radius: 6px; padding: 1.2rem; margin-bottom: 1rem; }
+    .sidebar .stat-card h4 { margin: 0 0 0.8rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: #1A237E; font-family: system-ui, sans-serif; border-bottom: 1px solid #263238; padding-bottom: 0.4rem; }
+    .sidebar .stat-row { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.88rem; border-bottom: 1px solid #F3F4F6; }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: #1A237E; }
+    .degree-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #1A237E, #0D1B2A, #263238); color: #B0BEC5; font-size: 1.8rem; font-weight: 700; font-family: system-ui, sans-serif; margin-right: 1rem; flex-shrink: 0; box-shadow: 0 0 24px rgba(26,35,126,0.5); }
+    .energy-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; background: #1A237E; color: #C5CAE9; }
+    .genre-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #0D1B2A; color: #90A4AE; border: 1px solid #263238; margin-left: 0.3rem; }
+    .label-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; background: #263238; color: #B0BEC5; border: 1px solid #37474F; margin-left: 0.3rem; }
+    .section-divider { border: none; border-top: 2px solid #263238; margin: 2.5rem 0; }
+    .theory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .theory-card { background: white; border: 1px solid #263238; border-left: 4px solid #1A237E; border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; }
+    .theory-card h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #263238; font-family: system-ui, sans-serif; }
+    .theory-card .level { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; font-family: system-ui, sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .theory-card .level.advanced { background: #ECEFF1; color: #37474F; }
+    .theory-card .level.milestone { background: #1A237E; color: #C5CAE9; }
+    .theory-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: #424242; }
+    .cross-ref-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .cross-ref-list li { padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.9rem; }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree { font-weight: 700; color: #1A237E; min-width: 3rem; display: inline-block; }
+    blockquote { border-left: 3px solid #1A237E; margin: 1.5rem 0; padding: 0.8rem 1.2rem; background: #E8EAF6; font-style: italic; color: #1A237E; }
+    .summit-close-banner { background: linear-gradient(135deg, #0D1B2A, #1A237E, #263238); border: 2px solid #37474F; border-radius: 6px; padding: 1rem 1.4rem; margin: 1.5rem 0; color: #C5CAE9; }
+    .summit-close-banner strong { color: #90CAF9; }
+    .memorial-note { background: #F5F5F5; border: 1px solid #BDBDBD; border-left: 4px solid #757575; border-radius: 0 6px 6px 0; padding: 0.8rem 1.2rem; margin: 1.5rem 0; font-size: 0.9rem; color: #424242; font-family: system-ui, sans-serif; }
+    .memorial-note strong { color: #37474F; }
+    .summit-summary { background: white; border: 1px solid #263238; border-radius: 6px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+    .summit-summary h4 { margin: 0 0 0.8rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.04em; color: #1A237E; font-family: system-ui, sans-serif; }
+    .summit-row { display: grid; grid-template-columns: 2.5rem 1fr 2.5rem 3rem; gap: 0.5rem; padding: 0.4rem 0; border-bottom: 1px solid #ECEFF1; font-size: 0.88rem; align-items: center; }
+    .summit-row:last-child { border-bottom: none; }
+    .summit-deg { font-weight: 700; color: #1A237E; font-family: system-ui, sans-serif; }
+    .summit-band { color: #212121; }
+    .summit-energy { font-weight: 700; text-align: right; }
+    .summit-geo { font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo; <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo; <span>336 &mdash; Alice in Chains (E=9)</span>
+    </nav>
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">336&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.8rem; color: var(--seattle-navy);">Alice in Chains</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 9</span>
+          <span class="genre-badge">Metal / Grunge</span>
+          <span class="label-badge">Columbia</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <main>
+        <div class="summit-close-banner">
+          <strong>THE METAL SUMMIT CLOSES.</strong> Position 4 of 4. The dark synthesis: metal's weight + grunge's melodic directness + Cantrell-Staley guitar-vocal harmony = the grunge era's heaviest melodic layer. <em>Dirt</em> (1992) &mdash; the most emotionally intense record of its era. Beacon Hill completes the arc.
+        </div>
+
+        <div class="memorial-note">
+          <strong>Layne Staley (August 22, 1967 &mdash; April 5, 2002)</strong> &mdash; died of speedball overdose in Seattle at age 34. April 5 is also Kurt Cobain's death date (1994), eight years earlier. Both are remembered here with full respect. Their work stands as document of the Seattle scene's most difficult personal dimension.
+        </div>
+
+        <h2>The Metal Summit &mdash; Complete</h2>
+        <div class="summit-summary">
+          <h4>Degrees 333&ndash;336: The Heaviest Arc in the Engine</h4>
+          <div class="summit-row">
+            <div class="summit-deg">333</div>
+            <div class="summit-band">These Arms Are Snakes</div>
+            <div class="summit-energy" style="color:#37474F;">E=8</div>
+            <div class="summit-geo">Capitol Hill</div>
+          </div>
+          <div class="summit-row">
+            <div class="summit-deg">334</div>
+            <div class="summit-band">Melvins</div>
+            <div class="summit-energy" style="color:#B71C1C;">E=9</div>
+            <div class="summit-geo">Aberdeen</div>
+          </div>
+          <div class="summit-row">
+            <div class="summit-deg">335</div>
+            <div class="summit-band">Soundgarden</div>
+            <div class="summit-energy" style="color:#B71C1C;">E=9</div>
+            <div class="summit-geo">U-District</div>
+          </div>
+          <div class="summit-row">
+            <div class="summit-deg">336</div>
+            <div class="summit-band">Alice in Chains</div>
+            <div class="summit-energy" style="color:#B71C1C;">E=9</div>
+            <div class="summit-geo">Beacon Hill</div>
+          </div>
+        </div>
+
+        <h2>Beacon Hill &mdash; The South Seattle Origin</h2>
+        <p>Alice in Chains formed in 1987 in Beacon Hill &mdash; south-central Seattle, working-class, diverse, outside the established music neighborhoods. Jerry Cantrell (Tacoma) and Layne Staley (Kirkland) connected in Seattle and found the specific sound within the year: down-tuned guitars, Cantrell's guitar-vocal harmony system, Staley's mid-range power vocal that carries emotional weight without falsetto-based spectacle. The Beacon Hill origin is the correct geographic completion for the Metal Summit: from Capitol Hill through Aberdeen and the U-District to the south of the city. The arc traverses the full Seattle-Aberdeen geography.</p>
+
+        <blockquote>"The guitar riff and the vocal melody are the same thing. One is just played on guitar and one is sung. The harmony between them is the song."</blockquote>
+
+        <hr class="section-divider">
+
+        <h2>Dirt (1992) &mdash; The Darkest Statement</h2>
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Rooster</h4>
+            <span class="level advanced">Vietnam War Combat History</span>
+            <p>Cantrell wrote this for his father, Jerry Cantrell Sr., who served as a Vietnam War infantryman. "Rooster" was the elder Cantrell's war nickname. A metal song with a specific personal combat narrative. Neither romanticized nor cynical.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Would?</h4>
+            <span class="level advanced">Andrew Wood Tribute</span>
+            <p>Tribute to Andrew Wood (Mother Love Bone), who died of heroin overdose in March 1990. Cornell wrote "Hunger Strike" for Wood; Cantrell wrote "Would?" Not sentimental -- genuinely grief-stricken. The Seattle scene's two most important tributes to the same person.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Down in a Hole</h4>
+            <span class="level milestone">Staley's Direct Statement</span>
+            <p>The most emotionally direct track in the AIC catalog. Staley's voice at its most exposed. The guitar-vocal harmony at its most intimate. The weight is earned, not performed.</p>
+          </div>
+          <div class="theory-card">
+            <h4>Nutshell (Jar of Flies, 1994)</h4>
+            <span class="level milestone">Acoustic Maximum</span>
+            <p>The quietest and most devastating track in the AIC catalog. Acoustic, no distortion. Staley at minimum armor. The arc from Dirt's full-distortion heaviness to Nutshell's acoustic vulnerability: the same weight, different delivery mechanism.</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <h2>The Guitar-Vocal Harmony System</h2>
+        <p>The most immediately identifiable feature of Alice in Chains' sound is the harmonic relationship between Cantrell's guitar (and his harmony vocals) and Staley's melody. Many metal bands have guitar riffs and lead vocals that are independent; in AIC, the guitar riff is written to function in harmonic relationship with the vocal melody. Cantrell frequently sings a lower harmony against Staley's lead, using intervals that include minor thirds (mildly consonant), perfect fifths (stable), minor seconds (dissonant), and tritones in passing. The dissonant intervals create an unsettled quality even in quiet passages &mdash; the harmony system is not reassuring but pressured.</p>
+
+        <hr class="section-divider">
+
+        <h2>Cross-References</h2>
+        <ul class="cross-ref-list">
+          <li><span class="ref-degree">335</span> Soundgarden &mdash; Metal Summit positions 3 and 4. Both E=9. Cornell and Staley: two of Seattle's most distinctive vocalists, both died young, both documented with full respect.</li>
+          <li><span class="ref-degree">334</span> Melvins &mdash; AIC absorbed the sludge-metal down-tuned vocabulary and combined it with melody. The sludge primogeniture feeding the melodic synthesis.</li>
+          <li><span class="ref-degree">SPS 336</span> Wolf Howl + Thunder Crack &mdash; E=9 + E=9 = E=18. Wolf's howl cut by lightning: held melodic beauty suddenly interrupted. AIC's held harmonic beauty against earned darkness. The most dramatic natural pairing with the engine's most melodically dark music.</li>
+          <li><span class="ref-degree">Andrew Wood</span> Temple of the Dog &mdash; "Would?" (AIC tribute) and "Hunger Strike" (Soundgarden tribute) for the same person. Two degrees, one loss.</li>
+        </ul>
+      </main>
+
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Data</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">336 / 360</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">9</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Metal / Grunge</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">1987&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Beacon Hill</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Columbia</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row"><span class="stat-label">Vocals (orig.)</span><span class="stat-value">Layne Staley</span></div>
+          <div class="stat-row"><span class="stat-label">Guitar/Vocals</span><span class="stat-value">Jerry Cantrell</span></div>
+          <div class="stat-row"><span class="stat-label">Drums</span><span class="stat-value">Sean Kinney</span></div>
+          <div class="stat-row"><span class="stat-label">Vocals (current)</span><span class="stat-value">William DuVall</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row"><span class="stat-label">Summit Pos.</span><span class="stat-value">4 of 4 (Final)</span></div>
+          <div class="stat-row"><span class="stat-label">Pair energy</span><span class="stat-value">E=18</span></div>
+          <div class="stat-row"><span class="stat-label">Completion</span><span class="stat-value">93.3%</span></div>
+        </div>
+        <div class="stat-card">
+          <h4>Key Records</h4>
+          <div class="stat-row"><span class="stat-label">1990</span><span class="stat-value">Facelift</span></div>
+          <div class="stat-row"><span class="stat-label">1992</span><span class="stat-value">Dirt</span></div>
+          <div class="stat-row"><span class="stat-label">1994</span><span class="stat-value">Jar of Flies</span></div>
+          <div class="stat-row"><span class="stat-label">1995</span><span class="stat-value">Alice in Chains (s/t)</span></div>
+          <div class="stat-row"><span class="stat-label">SPS pair</span><span class="stat-value">Wolf+Thunder</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
