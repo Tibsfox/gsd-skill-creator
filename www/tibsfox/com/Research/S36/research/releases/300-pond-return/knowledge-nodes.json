@@ -1,0 +1,26 @@
+{
+  "degree": 300, "artist": "Pond", "slug": "300-pond-return", "genre": "Grunge/Indie", "energy": 6,
+  "era": "1992-1998 core. Grunge/Indie. E=6 -- melodic weight, mid-energy grunge with indie rock sophistication. Fremont, Seattle. Portland-Seattle axis.",
+  "location": { "origin": "Fremont, Seattle (Portland origin)" }, "formed": "Portland, Oregon, 1992", "active": "1992-1998",
+  "labels": ["Sub Pop"],
+  "members": ["Charlie Campbell (guitar/vocals)", "Dave Triebwasser (bass)", "Chris Brady (drums)"],
+  "associated_musicians": ["Brad (Stone Gossard, Shawn Smith, Regan Hagar)", "Satchel", "Stone Gossard (Pearl Jam)", "Shawn Smith"],
+  "status": "return",
+  "first_appearance": 230,
+  "theory_nodes": [
+    { "concept": "FIVE-SIXTHS MARK: 300/360 = 83.3%. Penultimate major structural milestone. Five of six segments complete. Sixty degrees remain. The arc of the full rotation is visible from here.", "level": "milestone", "department": "engine-sequencing", "description": "Degree 300 is the engine's five-sixths structural marker. The most precise fraction since three-quarters at degree 270." },
+    { "concept": "Return cluster 297-300 closes: Skin Yard, Treepeople, Love Battery, Pond. Two C/Z (297-298) then two Sub Pop (299-300). Energy: E=7, E=8, E=6, E=6. Cluster consolidates Seattle history before final sixth.", "level": "advanced", "department": "engine-sequencing", "description": "The four-degree return cluster closes at the five-sixths mark." },
+    { "concept": "Sub Pop double-return 299-300 closes: Love Battery + Pond. C/Z to Sub Pop infrastructure transition mirroring historical transition complete.", "level": "intermediate", "department": "infrastructure", "description": "Sub Pop carries the engine to the five-sixths mark." },
+    { "concept": "SPS 300 Pileated Woodpecker: third appearance, engine namesake at five-sixths mark. Callback to degree 108 double-maximum. Escalation: E=5 (54) → E=6 (108) → E=7 (300).", "level": "advanced", "department": "sps-callback", "description": "The species that defines the engine's acoustic ambition returns at its major structural milestone." }
+  ],
+  "cross_references": [
+    {"degree": 230, "artist": "Pond", "relationship": "First appearance E=6, Grunge/Indie. Portland-Seattle axis. Charlie Campbell. Brad/Satchel connection."},
+    {"degree": 297, "artist": "Skin Yard return", "relationship": "Return cluster opens at 297. C/Z Records."},
+    {"degree": 298, "artist": "Treepeople return", "relationship": "E=8 peak of return cluster. C/Z closes."},
+    {"degree": 299, "artist": "Love Battery return", "relationship": "Sub Pop opens at 299. One degree before milestone."}
+  ],
+  "sps_pair": {"degree": 300, "species": "Pileated Woodpecker full drum", "pairing_note": "E=6 + E=7 = E=13. Five-sixths mark pairing. Engine namesake species at major structural milestone. Callback to degree 108 double-maximum. Pileated escalates: E=5 (54) → E=6 (108) → E=7 (300)."},
+  "milestones": ["FIVE-SIXTHS MARK (300/360 = 83.3%)", "RETURN CLUSTER 297-300 CLOSES", "SUB POP DOUBLE-RETURN 299-300 CLOSES", "RETURN FROM DEGREE 230"],
+  "structural_note": "Degree 300 is the engine's five-sixths structural marker. 300 degrees complete. 60 degrees remain (301-360). The five-sixths mark is the final major structural milestone before the closing rotation.",
+  "tags": ["grunge-indie", "sub-pop", "fremont", "five-sixths-mark", "milestone", "return", "charlie-campbell", "portland-seattle", "return-cluster-closes", "structural-milestone"]
+}

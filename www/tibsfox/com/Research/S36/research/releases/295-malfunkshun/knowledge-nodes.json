@@ -1,0 +1,23 @@
+{
+  "degree": 295, "artist": "Malfunkshun", "slug": "295-malfunkshun", "genre": "Glam Punk/Grunge", "energy": 7,
+  "era": "1980-1988. Glam Punk/Grunge. E=7 -- theatrical, heavy, the glam-punk synthesis. Bainbridge Island. Independent.",
+  "location": { "origin": "Bainbridge Island, Washington" }, "formed": "Bainbridge Island, Washington, c.1980", "active": "1980-1988",
+  "labels": ["Independent", "C/Z Records (Deep Six appearance)"],
+  "members": ["Andrew Wood (vocals/bass)", "Kevin Wood (guitar)"],
+  "associated_musicians": ["Mother Love Bone (Andrew Wood with Gossard + Ament)", "Temple of the Dog (Chris Cornell tribute to Andrew Wood)", "Love Battery (Bruce Fairweather connection)"],
+  "theory_nodes": [
+    { "concept": "FIRST BAINBRIDGE ISLAND entry in engine at degree 295. The island across the ferry from Seattle. Andrew Wood grew up there -- island isolation + access to Bowie/Bolan records + ferry connection to Seattle scene = the glam punk/grunge synthesis that no one else in the city was developing.", "level": "advanced", "department": "geography", "description": "Bainbridge Island enters the engine at 295." },
+    { "concept": "Andrew Wood -- L'Andrew the Love God. Power-rock tenor with theatrical commitment. Bowie, Bolan, Plant as primary influences. In the flannel-and-denim scene, performed in tights, scarves, gold lame. Not irony: genuine commitment to theatricality as artistic principle.", "level": "advanced", "department": "musician-profile", "description": "Andrew Wood: the voice, the persona, the synthesis." },
+    { "concept": "Deep Six (1986): Malfunkshun alongside Green River, Soundgarden, Melvins, Skin Yard, U-Men. Jack Endino at Reciprocal. Through Deep Six, Wood met Gossard + Ament. The connection that produced Mother Love Bone.", "level": "advanced", "department": "compilation-history", "description": "Deep Six: Malfunkshun at the founding document." },
+    { "concept": "Glam punk/grunge synthesis: Wood's primary influences (Bowie, Bolan, Plant) + proto-grunge guitar heaviness = something no other Seattle band was doing. This synthesis, scaled up with Gossard/Ament in Mother Love Bone, produced the most ambitious Seattle record of the pre-Nevermind era.", "level": "intermediate", "department": "genre-analysis", "description": "The synthesis Andrew Wood invented on Bainbridge Island." }
+  ],
+  "cross_references": [
+    {"degree": 294, "artist": "Green River", "relationship": "Deep Six companion. Gossard + Ament left Green River to join Wood in Mother Love Bone. 294 and 295 are consecutive because they are consecutive steps in the same origin story."},
+    {"degree": 296, "artist": "Mother Love Bone", "relationship": "Malfunkshun is the origin; Mother Love Bone is the convergence. Wood's glam punk synthesis + Gossard/Ament's proto-grunge architecture. The synthesis at full scale."},
+    {"degree": 225, "artist": "Temple of the Dog", "relationship": "Cornell's tribute to Andrew Wood. Malfunkshun is the first chapter. ToD is the memorial. Pearl Jam is the aftermath."},
+    {"degree": 221, "artist": "Love Battery", "relationship": "Bruce Fairweather, who played in Malfunkshun, became a founding member of Love Battery. The Malfunkshun-Love Battery personnel connection."}
+  ],
+  "sps_pair": {"degree": 295, "species": "Rhinoceros Auklet colony night", "pairing_note": "E=7 (Malfunkshun) + E=6 (Rhinoceros Auklet) = E=13. Bainbridge Island band pairs with island alcid colony. Both island-derived, both carrying full identity into the night."},
+  "milestones": ["FIRST BAINBRIDGE ISLAND ENTRY", "DEEP SIX (1986) PARTICIPANT", "ANDREW WOOD ORIGIN BAND", "GLAM PUNK/GRUNGE SYNTHESIS INVENTED HERE"],
+  "tags": ["glam-punk-grunge", "bainbridge-island", "andrew-wood", "kevin-wood", "deep-six", "independent", "1980-1988", "glam-rock", "proto-grunge", "l-andrew-the-love-god"]
+}
