@@ -1,0 +1,117 @@
+{
+  "mission": "1.33",
+  "title": "Ranger 6 (Atlas-Agena B)",
+  "description": "Open datasets and source materials relevant to Ranger 6 (1964), which achieved the most accurate lunar impact in the Ranger program but returned zero photographs due to camera failure, Thuja plicata (Western Red Cedar), Bohemian Waxwing (Bombycilla garrulus), and electromagnetic compatibility in spacecraft design",
+  "sources": [
+    {
+      "id": "nssdc-ranger-6",
+      "name": "NSSDC Master Catalog -- Ranger 6",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1964-007A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Ranger 6. Spacecraft description (381.3 kg, Block III configuration), instrument manifest (six RCA television cameras), Atlas-Agena B launch vehicle details, mission timeline for the 65.5-hour transit, and impact coordinates in Mare Tranquillitatis. NSSDC designation 1964-007A.",
+      "mission_relevance": "Definitive source for Ranger 6 spacecraft specifications, trajectory parameters, and mission outcomes. Documents the most accurate lunar impact in the Ranger program (within 32 km of aim point) and the complete failure of the camera system."
+    },
+    {
+      "id": "ntrs-ranger-6",
+      "name": "NASA Technical Reports Server -- Ranger 6 Reports",
+      "url": "https://ntrs.nasa.gov/search?q=ranger%206",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Full-text technical report archive containing JPL engineering reports, failure investigation documentation, trajectory analyses, and mission summaries for Ranger 6. Includes the camera failure investigation report identifying the electromagnetic transient and Paschen minimum arcing mechanism.",
+      "mission_relevance": "Primary documentation for Ranger 6's camera failure investigation, the electromagnetic shielding redesign that followed, and the 100+ recommendations that were implemented for Ranger 7."
+    },
+    {
+      "id": "nasa-sp-4210",
+      "name": "Hall, R. Cargill -- Lunar Impact: A History of Project Ranger (NASA SP-4210)",
+      "url": "https://ntrs.nasa.gov/citations/19780007206",
+      "type": "primary-source",
+      "category": "program-history",
+      "format": "PDF",
+      "access": "open",
+      "description": "The definitive history of the Ranger program, covering Rangers 1-9 in detail. Chapter 10 focuses on Ranger 6, including the political pressures on JPL, the Congressional review, and the failure investigation. Published 1977.",
+      "mission_relevance": "Provides the institutional and political context for Ranger 6 — the program was on the verge of cancellation after six consecutive failures. The failure investigation and redesign documented here enabled Rangers 7-9 to succeed."
+    },
+    {
+      "id": "jpl-horizons-ranger6",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's ephemeris computation service for reconstructing Ranger 6's trajectory from launch through lunar impact.",
+      "mission_relevance": "Enables precise reconstruction of Ranger 6's transit trajectory, midcourse correction, and terminal approach geometry."
+    },
+    {
+      "id": "usda-feis-cedar",
+      "name": "USDA Fire Effects Information System -- Thuja plicata",
+      "url": "https://www.fs.usda.gov/database/feis/plants/tree/thupli/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive ecological profile of western red cedar in North American forests. Covers growth rates, fire sensitivity, shade tolerance, decay resistance, and old-growth characteristics.",
+      "mission_relevance": "Establishes the complete biological context for the organism pairing. Western red cedar's thin bark (fire vulnerability), shade tolerance, and extraordinary decay resistance mirror Ranger 6's thin electromagnetic shielding, institutional persistence, and lasting contribution to the program."
+    },
+    {
+      "id": "duwamish-tribal",
+      "name": "Duwamish Tribal Organization -- Cultural Resources",
+      "url": "https://www.duwamishtribe.org/",
+      "type": "primary-source",
+      "category": "cultural",
+      "format": "HTML",
+      "access": "open",
+      "description": "Resources from the Duwamish Tribal Organization documenting the cultural significance of western red cedar to Coast Salish peoples.",
+      "mission_relevance": "Provides the cultural context for western red cedar as the Tree of Life — the material foundation of Coast Salish civilization in the Pacific Northwest."
+    },
+    {
+      "id": "nasa-image-library-ranger",
+      "name": "NASA Image and Video Library -- Ranger 6",
+      "url": "https://images.nasa.gov/search?q=ranger+6&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "Historical photographs from the Ranger program: spacecraft assembly at JPL, Atlas-Agena B on the launch pad, camera system details, and mission control during the ill-fated camera activation attempt.",
+      "mission_relevance": "Visual documentation of Ranger 6 hardware. The camera system photographs show the six RCA vidicon cameras that were destroyed by the staging transient."
+    },
+    {
+      "id": "mary-jackson-nasa",
+      "name": "NASA Langley Archives -- Mary Jackson",
+      "url": "https://www.nasa.gov/langley/mary-w-jackson-biography",
+      "type": "secondary-source",
+      "category": "biography",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA biographical materials on Mary Jackson, the first African American female engineer at NASA, who worked on boundary layer analysis at supersonic speeds.",
+      "mission_relevance": "Provides the biographical context for the mission dedication. Jackson's work on atmospheric boundary layer effects connects to Ranger 6's camera failure in the atmospheric pressure transition zone."
+    },
+    {
+      "id": "cornell-bohemian-waxwing",
+      "name": "Cornell Lab of Ornithology -- Bohemian Waxwing",
+      "url": "https://www.allaboutbirds.org/guide/Bohemian_Waxwing",
+      "type": "secondary-source",
+      "category": "ornithology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Species account for Bombycilla garrulus including range, behavior, irruptive movements, and identification. Documents the waxwing's nomadic winter behavior and berry-stripping feeding strategy.",
+      "mission_relevance": "Provides ecological and behavioral data for the SPS bird pairing. The Bohemian Waxwing's irruptive arrival — perfectly timed, impossible to document — mirrors Ranger 6's perfectly aimed but undocumented lunar impact."
+    },
+    {
+      "id": "ebird-bohemian-waxwing",
+      "name": "eBird -- Bohemian Waxwing Range and Occurrence Data",
+      "url": "https://ebird.org/species/bohwax",
+      "type": "primary-source",
+      "category": "ornithology",
+      "format": "HTML/CSV",
+      "access": "open",
+      "description": "Citizen science data on Bohemian Waxwing sightings across North America, showing the irruptive pattern of winter invasions into the Pacific Northwest.",
+      "mission_relevance": "Documents the unpredictable arrival pattern of Bohemian Waxwings — some winters they appear in thousands, other winters they are absent entirely."
+    }
+  ]
+}

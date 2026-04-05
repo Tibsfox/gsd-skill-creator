@@ -1,0 +1,104 @@
+{
+  "mission": "1.33",
+  "title": "Ranger 6 (Atlas-Agena B)",
+  "date": "1964-01-30",
+  "organism": "Thuja plicata",
+  "organism_common": "Western Red Cedar",
+  "organism_location": "The Tree of Life of the Pacific Northwest — dominant in wet lowland forests, riparian corridors, and north-facing slopes from Southeast Alaska through British Columbia, Washington, Oregon, to northern California. The most culturally significant tree to Coast Salish peoples. Old-growth specimens reaching 50-65 m height, 3-6 m diameter, and 1,500+ years in age.",
+  "bird": "Bombycilla garrulus",
+  "bird_common": "Bohemian Waxwing",
+  "dedication": {
+    "name": "Mary Jackson",
+    "born": "1921-04-09",
+    "died": "2005-02-11",
+    "birthplace": "Hampton, Virginia",
+    "field": "Aerospace engineering, boundary layer analysis, supersonic aerodynamics",
+    "resonance": "Mary Jackson was the first African American female engineer at NASA, working on boundary layer effects at supersonic speeds — the physics of how vehicles interact with atmospheric gas during transition. Ranger 6's cameras were destroyed by an interaction between electronics and atmospheric gas at a specific transitional pressure. Both Jackson and Ranger 6 dealt with the critical regime where simple assumptions do not apply — the boundary layer where atmosphere and vacuum coexist, where the physics requires more careful analysis than either extreme. Jackson's work was foundational but invisible for decades. Ranger 6's trajectory was perfect but invisible because the cameras were dead. Both contributed structural foundations that enabled visible successes by others."
+  },
+  "nodes": [
+    {
+      "id": "paschen-breakdown",
+      "concept": "Paschen breakdown — the minimum voltage required to create an electrical arc in a gas depends on pressure",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.7",
+      "description": "Paschen's Law (1889) describes how the breakdown voltage of a gas depends on the product of pressure and electrode gap distance (p×d). The relationship traces a U-shaped curve: at high p×d, many gas molecules absorb electron energy before it can cause ionization. At very low p×d (near-vacuum), there are too few gas molecules to sustain an avalanche. At the minimum of the curve — the Paschen minimum — the mean free path of electrons is optimally matched to the electrode gap, and breakdown occurs at the lowest possible voltage. For air, the Paschen minimum occurs at p×d ≈ 0.567 torr·cm with V_min ≈ 327 V. Ranger 6's cameras operated at >10,000 V. When the staging transient energized the cameras at ~90 km altitude inside the launch shroud, the residual gas pressure was near the Paschen minimum. The cameras were operating at 30× the minimum breakdown voltage. Arcing was not merely possible — it was certain.",
+      "resonance": "Western red cedar bark is thin — 1-2 cm compared to Douglas-fir's 15-30 cm. Fire is the forest's Paschen minimum: the environmental condition at which the tree's protection is weakest. A moderate ground fire that Douglas-fir survives easily kills a red cedar. Both Ranger 6 and red cedar have a vulnerability at a specific environmental threshold — a pressure range for the cameras, a fire intensity for the bark. Both are perfectly designed for their intended conditions (vacuum / wet sites) and vulnerable in the transitional regime (Paschen minimum / fire).",
+      "worked_example": {
+        "description": "Plot the Paschen breakdown curve and identify the danger zone for Ranger 6's cameras",
+        "parameters": {
+          "A_air": 15.0,
+          "B_air": 365.0,
+          "gamma": 0.01,
+          "V_camera": 10000
+        },
+        "formula": "V_bd = B*(p*d) / (ln(A*(p*d)) - ln(ln(1 + 1/gamma)))",
+        "result": "At p*d ≈ 0.5-5 torr·cm, V_bd ranges from ~330 to ~2000 V. Camera voltage of 10,000 V exceeds breakdown by 5-30×. Arc is inevitable.",
+        "python": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA, B, gamma = 15.0, 365.0, 0.01\npd = np.logspace(-0.5, 3, 500)\nV_bd = B * pd / (np.log(A * pd) - np.log(np.log(1 + 1/gamma)))\nV_bd = np.where(V_bd > 0, V_bd, np.nan)\n\nplt.figure(figsize=(10,6))\nplt.loglog(pd, V_bd, 'b-', linewidth=2)\nplt.axhline(y=10000, color='r', linestyle='--', label='Camera voltage (10 kV)')\nplt.fill_between(pd, 0, V_bd, where=(V_bd < 10000), alpha=0.3, color='red', label='ARC ZONE')\nplt.xlabel('p × d (torr·cm)')\nplt.ylabel('Breakdown Voltage (V)')\nplt.title('Paschen Curve — Ranger 6 Camera Failure')\nplt.legend()\nplt.grid(True, alpha=0.3)\nplt.ylim(100, 100000)\nplt.savefig('paschen_ranger6.png', dpi=150)\nplt.show()\nprint('At 10 kV camera voltage, arcing occurs across the entire')\nprint('Paschen minimum region. The cameras never had a chance.')"
+      }
+    },
+    {
+      "id": "lunar-intercept-accuracy",
+      "concept": "Lunar intercept accuracy — hitting a target on the Moon from Earth",
+      "department": "orbital-mechanics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.7",
+      "description": "Ranger 6 achieved a targeting accuracy of 32 km from an Earth-Moon distance of 384,400 km — a fractional error of 0.0083% (8.3 × 10⁻⁵). This angular accuracy of approximately 17 arcseconds was achieved using 1964-era tracking and computing technology: the Deep Space Network's Goldstone and Canberra stations provided Doppler and range measurements, an IBM mainframe computed the trajectory, and the onboard hydrazine engine executed a single midcourse correction burn. The accuracy was limited by: (1) knowledge of the lunar ephemeris (the Moon's exact position), (2) knowledge of the spacecraft's velocity from Doppler tracking, (3) the precision of the midcourse correction engine, and (4) unmodeled perturbations (solar radiation pressure, gravitational variations). Despite these limitations, Ranger 6 hit within 32 km — the best in the program.",
+      "resonance": "Bohemian Waxwings arrive at berry-laden trees with uncanny precision — timing their irruptions to coincide with peak berry production across hundreds of kilometers of boreal and temperate forest. The waxwing's 'targeting accuracy' in finding food sources is achieved through a combination of environmental cues, social information (following other birds), and learned landscape knowledge. Like Ranger 6's navigation team, the waxwing uses multiple information sources to converge on a target. Unlike Ranger 6, the waxwing's 'cameras' work perfectly — it sees the berries and eats them. Ranger 6 found the Moon but could not see it.",
+      "worked_example": {
+        "description": "Calculate Ranger 6 targeting accuracy as angular error, fractional error, and real-world analogy",
+        "parameters": {
+          "miss_distance_km": 32,
+          "earth_moon_distance_km": 384400
+        },
+        "formula": "angular_error = arctan(miss/distance), fractional_error = miss/distance",
+        "result": "Angular error: 17.2 arcseconds. Fractional error: 8.3 × 10⁻⁵. Like hitting a 3.2-meter target from 384 km — a car-sized bullseye from beyond the horizon.",
+        "python": "import numpy as np\nmiss = 32  # km\ndist = 384400  # km\nang_rad = np.arctan(miss/dist)\nang_arcsec = np.degrees(ang_rad) * 3600\nfrac = miss / dist\nprint(f'Miss: {miss} km from {dist:,} km')\nprint(f'Angular error: {ang_arcsec:.1f} arcseconds')\nprint(f'Fractional error: {frac:.2e} ({frac*100:.4f}%)')\nprint(f'Moon angular diameter: ~1860 arcseconds')\nprint(f'Miss as fraction of Moon: {ang_arcsec/1860*100:.1f}%')\nprint(f'Like hitting a dinner plate from {dist/miss * 0.25:.0f} meters')"
+      }
+    },
+    {
+      "id": "electromagnetic-compatibility",
+      "concept": "Electromagnetic compatibility — ensuring electrical transients from one system don't destroy another",
+      "department": "electrical-engineering",
+      "level": "advanced",
+      "tspb_layer": 7,
+      "tspb_section": "7.4",
+      "description": "Electromagnetic compatibility (EMC) is the engineering discipline of ensuring that electromagnetic emissions from one system do not interfere with the operation of another system in the same environment. Ranger 6's camera failure was a classic EMC failure: the electromagnetic transient from Atlas booster staging coupled into the camera power bus through shared structural grounds and inadequately shielded wiring. The corrective actions — shielded harnesses, isolated power buses, transient suppressors — became standard spacecraft EMC practice. Modern EMC testing includes simulation of the full ascent environment, including the pressure-dependent arcing regime that killed Ranger 6's cameras.",
+      "resonance": "In a forest ecosystem, EMC has a biological equivalent: chemical allelopathy. Some trees release compounds that inhibit the growth of nearby species — a form of chemical interference. Western red cedar's thujaplicins, while primarily anti-fungal, also affect soil chemistry in ways that influence which species can grow nearby. The cedar's chemical emissions do not 'interfere' with other trees in the destructive way that a staging transient interfered with Ranger 6's cameras, but the principle is analogous: one organism's byproducts affecting the function of a nearby organism. In a well-designed forest (natural old-growth), these interactions are balanced. In a poorly designed spacecraft (Ranger 6), they are catastrophic.",
+      "worked_example": {
+        "description": "Model the electromagnetic coupling between a transient source and a sensitive receiver",
+        "parameters": {
+          "V_transient": 500,
+          "coupling_factor": 0.05,
+          "V_induced": 25,
+          "V_threshold": 5
+        },
+        "formula": "V_induced = V_transient × coupling_factor; damage if V_induced > V_threshold",
+        "result": "A 500V staging transient with 5% coupling induces 25V on the camera bus. Camera activation threshold is ~5V. The induced voltage is 5× the activation threshold — more than enough to power the cameras during the Paschen minimum window.",
+        "python": "V_transient = 500  # V (staging transient estimate)\ncoupling = 0.05   # 5% coupling factor (poor shielding)\nV_induced = V_transient * coupling\nV_threshold = 5    # V (camera activation threshold)\n\nprint(f'Staging transient: {V_transient} V')\nprint(f'Coupling factor: {coupling*100:.0f}% (inadequate shielding)')\nprint(f'Induced voltage on camera bus: {V_induced:.0f} V')\nprint(f'Camera activation threshold: {V_threshold} V')\nprint(f'Margin: {V_induced/V_threshold:.0f}× over threshold')\nprint(f'\\nWith improved shielding (Ranger 7):')\ncoupling_fixed = 0.001  # 0.1% coupling\nV_fixed = V_transient * coupling_fixed\nprint(f'Coupling factor: {coupling_fixed*100:.1f}%')\nprint(f'Induced voltage: {V_fixed:.1f} V')\nprint(f'Below threshold: cameras survive.')"
+      }
+    },
+    {
+      "id": "cedar-decay-resistance",
+      "concept": "Thujaplicin chemistry — the natural preservatives that make cedar wood nearly indestructible",
+      "department": "biochemistry",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.6",
+      "description": "Western red cedar heartwood contains thujaplicins (α, β, and γ isomers) — tropolone-derived compounds that are toxic to wood-decay fungi, bacteria, and many insects. These compounds give cedar its characteristic aroma and its extraordinary rot resistance. A cedar log on the forest floor retains structural integrity for 300-500 years, compared to 50-100 years for Douglas-fir. The thujaplicins work by chelating metal ions essential for fungal enzyme function, effectively disabling the biochemical machinery of decay. Cedar's decay resistance is a form of chemical shielding — protection against environmental destruction agents. Ranger 6's cameras lacked equivalent shielding against the electromagnetic transient that destroyed them.",
+      "resonance": "Thujaplicin chemistry is cedar's electromagnetic shielding. The compound protects the wood interior from fungal destruction the way a properly shielded wiring harness protects camera electronics from electromagnetic transients. Both are barriers between a destructive agent and a functional system. Cedar evolved its shielding over millions of years. Ranger 6's shielding was designed in months. The evolutionary timescale produced a solution that works for centuries. The engineering timescale produced a solution that failed in 107 seconds.",
+      "worked_example": {
+        "description": "Compare decay rates of cedar vs Douglas-fir nurse logs",
+        "parameters": {
+          "cedar_halflife_years": 250,
+          "fir_halflife_years": 60
+        },
+        "formula": "M(t) = M_0 * exp(-0.693 * t / t_half)",
+        "result": "After 200 years: cedar retains 57% of mass, Douglas-fir retains 10%. Cedar outlasts fir by 4:1 in structural persistence.",
+        "python": "import numpy as np\nt = np.arange(0, 500)\ncedar = np.exp(-0.693 * t / 250)\nfir = np.exp(-0.693 * t / 60)\n\nprint('Nurse Log Persistence (fraction remaining):')\nprint(f'{\"Year\":>6} | {\"Cedar\":>8} | {\"Fir\":>8}')\nprint('-' * 30)\nfor y in [0, 50, 100, 200, 300, 500]:\n    c = np.exp(-0.693 * y / 250)\n    f = np.exp(-0.693 * y / 60)\n    print(f'{y:>6} | {c:>8.1%} | {f:>8.1%}')\nprint(f'\\nCedar nurse logs support seedlings for centuries.')\nprint(f'Ranger 6 failure analysis supports missions for decades.')\nprint(f'Both outlast their visible existence.')"
+      }
+    }
+  ]
+}

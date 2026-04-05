@@ -1,0 +1,62 @@
+* Electromagnetic Transient Coupling — Ranger 6 Failure Mode
+* Mission 1.33 — Ranger 6 (Atlas-Agena B)
+*
+* Simulates the electromagnetic coupling between the Atlas staging
+* pyrotechnic circuit and the Ranger 6 camera power bus.
+*
+* The staging transient (modeled as a fast voltage spike on the
+* pyrotechnic line) couples into the camera bus through mutual
+* inductance (transformer coupling) of parallel wire runs.
+*
+* Two cases:
+*   1. Ranger 6 (poor shielding): high coupling coefficient → cameras energized
+*   2. Ranger 7 (improved shielding): low coupling coefficient → cameras safe
+
+.title Ranger 6 Staging Transient Coupling
+
+* Pyrotechnic firing circuit (transient source)
+* Models the Atlas booster staging explosive bolt firing
+V_pyro 1 0 PULSE(0 500 0.1ms 50ns 50ns 2us 100ms)
+R_pyro 1 2 1
+
+* === RANGER 6 CONFIGURATION (poor shielding, k=0.05) ===
+* Pyrotechnic line inductor
+L_pyro_r6 2 0 10uH
+* Camera bus inductor (coupled to pyro line)
+L_cam_r6 3 0 10uH
+* Coupling coefficient (poor shielding)
+K_r6 L_pyro_r6 L_cam_r6 0.05
+* Camera bus load (vidicon tube equivalent)
+R_cam_r6 3 0 10k
+* Camera activation threshold monitor
+* If V(3) > 5V, cameras attempt to power up
+
+* === RANGER 7 CONFIGURATION (improved shielding, k=0.001) ===
+* Pyrotechnic line inductor (same transient)
+L_pyro_r7 2 0 10uH
+* Camera bus inductor (improved shielding)
+L_cam_r7 4 0 10uH
+* Coupling coefficient (improved shielding)
+K_r7 L_pyro_r7 L_cam_r7 0.001
+* Camera bus load
+R_cam_r7 4 0 10k
+
+* Simulation
+.tran 10ns 0.5ms
+
+* Measurements
+.meas tran V_cam_r6_peak MAX V(3)
+.meas tran V_cam_r7_peak MAX V(4)
+
+.control
+run
+echo "=== Staging Transient Coupling Analysis ==="
+echo "Ranger 6 camera bus peak: $&V_cam_r6_peak V (cameras killed)"
+echo "Ranger 7 camera bus peak: $&V_cam_r7_peak V (cameras survived)"
+echo ""
+echo "Camera activation threshold: ~5V"
+echo "Ranger 6: transient EXCEEDS threshold → cameras power up at Paschen minimum → ARC"
+echo "Ranger 7: transient BELOW threshold → cameras remain safe"
+.endc
+
+.end

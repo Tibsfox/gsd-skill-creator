@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranger 7 Descent Viewer | v1.34</title>
+<style>
+  body { margin: 0; background: #111; color: #eee; font-family: 'Courier New', monospace; overflow: hidden; }
+  canvas { display: block; margin: 0 auto; }
+  #hud { position: absolute; top: 20px; left: 20px; font-size: 14px; line-height: 1.6; }
+  #hud .label { color: #888; }
+  #hud .value { color: #0f0; font-weight: bold; }
+  #controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; }
+  #controls input { width: 400px; }
+  #controls label { display: block; margin-top: 5px; color: #888; font-size: 12px; }
+</style>
+</head>
+<body>
+<canvas id="moon" width="800" height="600"></canvas>
+<div id="hud">
+  <div><span class="label">RANGER 7 DESCENT CAMERA</span></div>
+  <div><span class="label">Altitude: </span><span class="value" id="altitude">2,110 km</span></div>
+  <div><span class="label">Resolution: </span><span class="value" id="resolution">1,017 m/px</span></div>
+  <div><span class="label">Frame: </span><span class="value" id="frame">1 / 4,308</span></div>
+  <div><span class="label">Craters visible: </span><span class="value" id="craters">~10 / km²</span></div>
+</div>
+<div id="controls">
+  <input type="range" id="altitude-slider" min="0" max="1000" value="0">
+  <label>Drag to descend toward the Moon (0 = 2,110 km → 1000 = impact)</label>
+</div>
+<script>
+const canvas = document.getElementById('moon');
+const ctx = canvas.getContext('2d');
+const slider = document.getElementById('altitude-slider');
+
+// Seeded random for consistent crater field
+function seededRandom(seed) {
+  let x = Math.sin(seed) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+function drawCraters(zoom) {
+  ctx.fillStyle = '#1a1a1a';
+  ctx.fillRect(0, 0, 800, 600);
+  
+  const numScales = Math.min(8, Math.floor(1 + zoom * 7));
+  
+  for (let scale = 0; scale < numScales; scale++) {
+    const craterSize = Math.max(2, 80 / Math.pow(2, scale) * (1 + zoom * 0.5));
+    const count = Math.floor(Math.pow(2, scale) * 3 * (1 + zoom));
+    
+    for (let i = 0; i < count; i++) {
+      const seed = scale * 10000 + i;
+      const x = seededRandom(seed * 1.1) * 800;
+      const y = seededRandom(seed * 2.3) * 600;
+      const r = craterSize * (0.3 + seededRandom(seed * 3.7) * 0.7);
+      
+      // Crater shadow (dark interior)
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(10, 10, 10, ${0.3 + scale * 0.05})`;
+      ctx.fill();
+      
+      // Crater rim (bright edge, sun from left)
+      ctx.beginPath();
+      ctx.arc(x - r * 0.2, y - r * 0.2, r * 1.1, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(60, 60, 55, ${0.2 + scale * 0.05})`;
+      ctx.lineWidth = Math.max(0.5, r * 0.15);
+      ctx.stroke();
+    }
+  }
+}
+
+function updateHUD(progress) {
+  const altitude = 2110 * (1 - progress);
+  const resolution = altitude * 0.482;  // GSD in meters
+  const frame = Math.floor(1 + progress * 4307);
+  const craters = altitude > 0 ? Math.floor(1e7 * Math.pow(Math.max(resolution, 0.5), -2)) : 0;
+  
+  document.getElementById('altitude').textContent = 
+    altitude > 1 ? `${altitude.toFixed(0)} km` : `${(altitude * 1000).toFixed(0)} m`;
+  document.getElementById('resolution').textContent = 
+    resolution > 1 ? `${resolution.toFixed(0)} m/px` : `${(resolution * 100).toFixed(0)} cm/px`;
+  document.getElementById('frame').textContent = `${frame.toLocaleString()} / 4,308`;
+  document.getElementById('craters').textContent = 
+    craters < 1e6 ? `~${craters.toLocaleString()} / km²` : `~${(craters/1e6).toFixed(1)}M / km²`;
+}
+
+slider.addEventListener('input', function() {
+  const progress = this.value / 1000;
+  drawCraters(progress);
+  updateHUD(progress);
+});
+
+// Initial render
+drawCraters(0);
+updateHUD(0);
+</script>
+</body>
+</html>

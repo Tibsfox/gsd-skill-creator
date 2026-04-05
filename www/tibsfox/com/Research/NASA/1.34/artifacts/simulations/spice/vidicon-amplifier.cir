@@ -1,0 +1,32 @@
+* Ranger 7 Vidicon Output Amplifier
+* Mission 1.34 — NASA Mission Series
+*
+* Simplified model of the video amplifier that processed
+* the vidicon tube output signal before transmission.
+* The vidicon generates a current proportional to scene brightness;
+* this amplifier converts it to a voltage suitable for the FM transmitter.
+*
+* Components: single-stage transimpedance amplifier
+* Bandwidth: ~2 MHz (sufficient for 1150-line video at 2.56 sec/frame)
+*
+.title Ranger 7 Vidicon Output Amplifier
+
+* Power supply
+VCC 1 0 DC 28V
+
+* Vidicon output (modeled as current source)
+* ~1 uA dark current, ~10 uA at full illumination
+I_vidicon 0 2 PULSE(1u 10u 0 100u 100u 50u 200u)
+
+* Transimpedance amplifier
+R_feedback 3 2 100k
+Q1 3 2 4 2N2222
+R_emitter 4 0 1k
+R_collector 1 3 4.7k
+
+* Output coupling
+C_out 3 5 100n
+R_load 5 0 10k
+
+.tran 1u 1m
+.end

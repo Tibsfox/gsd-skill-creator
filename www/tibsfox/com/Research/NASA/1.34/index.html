@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.34 — Ranger 7 + Cassin's Finch | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --bark-dark: #2A1A0E;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --success-dark: #1A6A1A;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-floor); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(168,216,168,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 18% 75%, rgba(10,46,10,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 65% 80%, rgba(45,106,45,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 92% 8%, rgba(11,61,145,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  header { background: linear-gradient(160deg, var(--forest-floor) 0%, var(--canopy-deep) 25%, var(--canopy-mid) 50%, var(--canopy-emerald) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--success); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(168,216,168,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168,216,168,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(45,154,45,0.15); border: 1px solid var(--success); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--success-light); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+  .status-success { background: rgba(45,154,45,0.3); border: 1px solid var(--success); color: var(--success-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+  .content { min-width: 0; }
+  .card { background: rgba(10,46,10,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--light-bright); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .resonance-card { border-color: var(--success); background: rgba(45,106,45,0.06); }
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(168,216,168,0.12); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num { background: var(--success); color: var(--forest-floor); font-weight: 700; font-size: 0.8rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--light-bright); }
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .organism-card { background: rgba(10,46,10,0.5); border: 1px solid var(--canopy-emerald); border-radius: 8px; padding: 1.5rem; }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--light-canopy); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--light-canopy); font-size: 0.85rem; margin-bottom: 0.75rem; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(13,26,13,0.6); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--light-bright); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  .dedication-card { background: rgba(212,168,48,0.08); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; }
+  .dedication-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .data-links { background: rgba(11,61,145,0.15); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+  .tracks-card { background: rgba(26,26,58,0.4); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .tracks-card h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .track-item { display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid rgba(11,61,145,0.15); font-size: 0.85rem; }
+  .track-item:last-child { border-bottom: none; }
+  .track-num { background: rgba(11,61,145,0.3); color: #7EB8DA; font-weight: 700; font-size: 0.7rem; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .nav-card { background: rgba(10,46,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--light-canopy); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-canopy); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.34</span>
+      <span>NASA Mission Series</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>Ranger 7 &mdash; First Light</h1>
+    <p class="subtitle">The first American close-up photographs of the Moon, and the finch that sees from the treeline</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> July 28&ndash;31, 1964</span>
+      <span><span class="label">Program:</span> Ranger (NASA/JPL)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Atlas-Agena B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On July 31, 1964, Ranger 7 became the first American spacecraft to return close-up photographs of the lunar surface. In the final 17 minutes and 13 seconds before impact, six television cameras transmitted 4,308 images of the approaching terrain in Mare Cognitum &mdash; the Sea That Has Become Known. Resolution improved from approximately 2 kilometers in the first frames to 0.5 meters in the last, revealing a surface cratered at every scale: craters within craters, boulders casting shadows, a geological landscape that no telescope had ever resolved. The images proved that the lunar surface was rough but solid &mdash; not the deep dust sea some scientists had feared &mdash; and became the foundation for Apollo landing site selection.</p>
+      <p>Ranger 7 succeeded after six consecutive failures. Rangers 1 and 2 were stranded in Earth orbit by Agena B malfunctions. Ranger 3 missed the Moon by 36,793 km with dead cameras. Ranger 4 hit the Moon blind. Ranger 5 lost power en route. Ranger 6 hit the Moon perfectly but its cameras never turned on &mdash; an electrical arc during launch had killed the TV system. Six different failure modes. $170 million. Zero photographs. Congressional hearings. JPL reorganized its entire quality assurance process. The seventh spacecraft worked.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 365.7 kg (Block III Ranger &mdash; cameras only, no landing capsule)</li>
+        <li><strong>Cameras:</strong> Six vidicon TV cameras in two independent chains (F-channel: 2 wide-angle 25mm; P-channel: 4 cameras, two 25mm + two 76mm telephoto)</li>
+        <li><strong>Imaging window:</strong> 17 minutes 13 seconds (camera activation at 2,110 km to impact)</li>
+        <li><strong>Total images:</strong> 4,308 (F-channel full-scan at 2.56 s/frame + P-channel partial-scan at 0.2 s/frame)</li>
+        <li><strong>Resolution:</strong> ~2 km (first frame) to ~0.5 m (last frame)</li>
+        <li><strong>Transmitter:</strong> 960 MHz, ~60 W</li>
+        <li><strong>Launch vehicle:</strong> Atlas-Agena B</li>
+        <li><strong>Impact velocity:</strong> 2.62 km/s at 10.63&deg;S, 20.68&deg;W (Mare Cognitum)</li>
+        <li><strong>Key design feature:</strong> Dual redundant camera chains (response to Ranger 6&rsquo;s total camera failure)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>What the Images Showed</h2>
+      <p>Before Ranger 7, a significant debate existed about the lunar surface. Thomas Gold hypothesized that the maria were covered in deep dust that would swallow a landing spacecraft. Eugene Shoemaker and Gerard Kuiper predicted a solid basaltic surface cratered at all scales. Ranger 7&rsquo;s 4,308 photographs decisively confirmed Shoemaker and Kuiper: craters followed a power-law size-frequency distribution (N &gt; D proportional to D<sup>-2</sup>) from kilometers down to sub-meter scales. The surface was battered, ancient (~3.5 billion years), and solid enough to land on.</p>
+      <p>The images transformed the Moon from an astronomical object into a geological landscape. Crater rims had boulders. Boulders cast shadows. The &ldquo;smooth&rdquo; maria were fractal landscapes of overlapping impacts. Apollo landing site planners finally had the data they needed: the surface was rough but navigable, cratered but firm. Without Ranger 7&rsquo;s close-ups, Apollo was guessing.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Ranger 7 descent image simulator &mdash; generate synthetic frames at decreasing altitudes showing resolution improvement over a procedurally cratered surface</li>
+        <li><strong>Blender:</strong> Descent animation from Ranger 7&rsquo;s camera perspective &mdash; procedural lunar surface resolving from blur to geological detail as altitude decreases (60 sec, Cycles)</li>
+        <li><strong>GLSL:</strong> Fractal Moon surface shader &mdash; infinite-zoom lunar terrain with power-law crater distribution, new craters appearing at every zoom level</li>
+        <li><strong>Godot 4:</strong> Ranger mission planner &mdash; configure cameras, trajectory, and data rate; maximize useful images before impact</li>
+        <li><strong>Arduino:</strong> Descent altimeter with resolution display ($25) &mdash; ultrasonic sensor measures distance, OLED shows equivalent Ranger 7 altitude and image resolution</li>
+        <li><strong>GMAT:</strong> Ranger 7 trajectory reconstruction &mdash; Earth-Moon transfer, terminal approach, and impact geometry at Mare Cognitum</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Calculate image resolution at different altitudes &mdash; derive GSD = h &times; d_pixel / f and compute resolution for Ranger 7&rsquo;s cameras from 2,110 km to 480 m (30 min, Python or calculator)</li>
+        <li><strong>TRY 2:</strong> Count craters in a Ranger 7 image &mdash; download a PDS image, count craters by size, plot log-log distribution, verify power-law slope of -2 (45 min, ruler + graph paper or Python)</li>
+        <li><strong>TRY 3:</strong> Identify Cassin&rsquo;s Finch by song &mdash; compare recordings of House, Purple, and Cassin&rsquo;s Finches; learn the resolution skill that John Cassin applied to specimens (30 min, eBird/Xeno-canto)</li>
+        <li><strong>DIY 1:</strong> Arduino crater counter with photoresistor scanning ($30) &mdash; optical scanner detects brightness transitions in printed lunar images</li>
+        <li><strong>DIY 2:</strong> Pinhole camera resolution experiment ($5) &mdash; photograph the same object from multiple distances, measure resolution degradation</li>
+        <li><strong>DIY 3:</strong> Plant a ponderosa pine seedling ($5) &mdash; build Cassin&rsquo;s Finch habitat; in 50-100 years, the tree may host a singing male at its crown</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><a href="artifacts/stories/the-seventeen-minutes.html" style="color: var(--light-bright);">Story: &ldquo;The Seventeen Minutes&rdquo;</a> <a href="artifacts/stories/the-seventeen-minutes.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a> &mdash; Told from Ranger 7&rsquo;s camera: seventeen minutes of seeing, then impact</li>
+        <li><a href="artifacts/audio/descent-sonification.dsp" style="color: #7EB8DA;">Audio: Descent Sonification</a> &mdash; FAUST VST/LV2 (resolution mapped to harmonic complexity, 90 sec)</li>
+        <li><a href="artifacts/audio/cassins-finch-warble.dsp" style="color: #7EB8DA;">Audio: Cassin&rsquo;s Finch Warble</a> &mdash; FAUST generative (complex warbling song with mimicry elements, 3.5 kHz center)</li>
+        <li><a href="artifacts/circuits/crater-scanner.md" style="color: var(--light-bright);">Circuit: Crater Scanner</a> &mdash; Photoresistor array scanning printed lunar images ($30)</li>
+        <li><a href="artifacts/circuits/resolution-display.md" style="color: var(--light-bright);">Circuit: Resolution Display</a> &mdash; Ultrasonic distance &rarr; Ranger 7 resolution mapping ($25)</li>
+        <li><a href="artifacts/screensaver/ranger7-screensaver.frag" style="color: #7EB8DA;">Screensaver: Fractal Moon GLSL</a> &mdash; Infinite-zoom lunar surface with power-law craters</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Resolution through proximity:</span> Ranger 7 resolved the Moon by getting close &mdash; 2,110 km to 480 m in seventeen minutes, resolution improving 4,000-fold. Cassin&rsquo;s Finch was resolved as a species by John Cassin examining specimens at arm&rsquo;s length &mdash; bill length, undertail coverts, plumage details invisible through binoculars. Both transformations required closing the distance between observer and subject.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Persistence through failure:</span> Rangers 1-6 failed six different ways: two Agena restarts, a guidance error, a dead computer, a power failure, a camera arc-over. Each failure taught a specific lesson. Cassin&rsquo;s Finch persists through irruptive years &mdash; descending to lower elevations when mountain cone crops fail, surviving and returning. Both forms of persistence are adaptive: learn from the failure, redesign, try again.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">The framework and the performance:</span> Ranger 7&rsquo;s photographs became the framework for Apollo landing site selection &mdash; the first reliable data about what the lunar surface actually looked like at landing-relevant scales. Larry English provided the rhythmic framework in Seattle R&amp;B &mdash; the groove that other musicians performed over. The framework is invisible when it works. The performance depends on it entirely.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Named for the observer:</span> John Cassin described 198 bird species without leaving Philadelphia. He examined specimens, not living birds. The finch named for him lives in mountains he never visited. Ranger 7 was unmanned. Mare Cognitum means &ldquo;the sea that has become known.&rdquo; Both the finch and the mare are named for the act of knowing, not the act of arriving.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">The power law at every scale:</span> Ranger 7 found craters at every resolution &mdash; the power-law size distribution held from kilometers to sub-meter. Cassin&rsquo;s Finch song contains structure at every temporal scale &mdash; from the overall song duration (seconds) to syllable types (tenths of seconds) to frequency modulations within syllables (milliseconds). Both are fractal: self-similar at every magnification.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">The view from altitude:</span> Cassin&rsquo;s Finch sings from the tops of mountain conifers &mdash; the highest exposed perches in the montane forest, where the view is widest and the song carries farthest. Ranger 7&rsquo;s cameras activated at 2,110 km and recorded everything they saw as they descended. Both the finch and the spacecraft occupy a vantage point defined by altitude, and both transmit information &mdash; song, images &mdash; from that vantage to receivers below.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Seven-Mission Arc</h2>
+      <p>The Ranger program spans three years: August 1961 to March 1965. Nine missions. Six failures. Three successes (Rangers 7, 8, 9). The first six failures nearly killed the program. The last three successes &mdash; 4,308 + 7,137 + 5,814 = 17,259 total images &mdash; made Apollo possible.</p>
+      <p><strong>Ranger 1 (Aug 1961):</strong> Agena failed. Stranded in LEO. <strong>Ranger 2 (Nov 1961):</strong> Agena failed. Stranded in LEO. <strong>Ranger 3 (Jan 1962):</strong> Missed Moon by 36,793 km, cameras dead. <strong>Ranger 4 (Apr 1962):</strong> Hit Moon blind &mdash; computer dead. <strong>Ranger 5 (Oct 1962):</strong> Lost power, missed by 725 km. <strong>Ranger 6 (Jan 1964):</strong> Perfect trajectory, dead cameras &mdash; electrical arc. <strong>Ranger 7 (Jul 1964):</strong> SUCCESS. 4,308 images. <strong>Ranger 8 (Feb 1965):</strong> SUCCESS. 7,137 images of Mare Tranquillitatis. <strong>Ranger 9 (Mar 1965):</strong> SUCCESS. 5,814 images of Alphonsus crater, live television broadcast.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.33/index.html">&larr; v1.33</a>
+      <a href="../1.35/index.html">v1.35 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Haemorhous cassinii (Cassin&rsquo;s Finch)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">16cm</div>
+          <div class="stat-label">Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">28g</div>
+          <div class="stat-label">Weight</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2000m</div>
+          <div class="stat-label">Breeding elev.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">E. Cascades</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The mountain finch. Breeds in open montane coniferous forests &mdash; ponderosa pine and Douglas-fir stands above 1,200 m in the eastern Cascades. Males wear a bright crimson crown on an otherwise modest plumage. The song is the longest and most complex of the three western Haemorhous finches, including mimicry of other species. Sings from exposed perches at the very tops of the tallest conifers, projecting its elaborate warble across open mountain terrain. Named for John Cassin, the Philadelphia ornithologist who described 198 bird species without ever leaving his desk. The finch lives in mountains Cassin never visited, singing a song he never heard.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Haemorhous cassinii (Cassin&rsquo;s Finch)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 33. The finch that resolved the red finch confusion. For decades, House Finch, Purple Finch, and Cassin&rsquo;s Finch were conflated by casual observers. Resolution came from close examination: bill shape, undertail coverts, plumage pattern, song complexity, elevational habitat. Each diagnostic character is subtle individually. Together, they resolve three species as clearly as Ranger 7&rsquo;s photographs resolved the lunar surface. Before Ranger, the Moon was a blur at telescope resolution. After Ranger, it was a geological landscape. Before Cassin, the red finches were one. After Cassin, they were three.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to John Cassin</h3>
+      <p style="font-size:0.85rem;">September 6, 1813 &mdash; January 10, 1869</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The most prolific bird describer in nineteenth-century North America. 198 species named from his desk at the Academy of Natural Sciences in Philadelphia, examining specimens shipped from expeditions he never joined. Cassin never traveled west of the Mississippi, yet he described dozens of western species &mdash; including, indirectly, the finch Baird named in his honor. The cabinet ornithologist who resolved species from skins the way Ranger 7 resolved the Moon from photographs: through close examination of evidence brought from a distance. Died likely of arsenical poisoning from the preservatives on the specimens he spent his career examining. The work killed the worker. The knowledge survived.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (mathematics.md)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1964-041A">NSSDC &mdash; Ranger 7</a>
+      <a href="https://pds-imaging.jpl.nasa.gov/volumes/ranger.html">PDS &mdash; Ranger 7 Image Archive</a>
+      <a href="https://ntrs.nasa.gov/search?q=ranger+7+photographs">NASA NTRS &mdash; Ranger 7 Reports</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS Ephemeris</a>
+      <a href="https://astrogeology.usgs.gov/search?pmi-target=moon">USGS Lunar Geologic Maps</a>
+      <a href="https://wms.lroc.asu.edu/lroc/">LROC &mdash; Ranger 7 Impact Site</a>
+      <a href="https://ebird.org/species/casfin">eBird &mdash; Cassin&rsquo;s Finch</a>
+      <a href="https://images.nasa.gov/search?q=ranger+7&media=image">NASA Image Library</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/tree/pinpon/all.html">USDA FEIS &mdash; Ponderosa Pine</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--light-canopy);">&ldquo;Four thousand frames fall &mdash; craters resolve into ground, the Moon becomes real.&rdquo;</p>
+</footer>
+
+</body>
+</html>

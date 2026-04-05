@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariner 2 Venus Flyby — Interactive Simulation</title>
+<style>
+  body { margin: 0; background: #000; color: #eee; font-family: 'Courier New', monospace; overflow: hidden; }
+  canvas { display: block; }
+  #hud { position: absolute; top: 10px; left: 10px; font-size: 13px; line-height: 1.6; }
+  .label { color: #A8D8A8; }
+  .value { color: #FFD700; }
+  .alert { color: #CC3300; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud">
+  <div><span class="label">Mission:</span> <span class="value">Mariner 2 — Venus Flyby</span></div>
+  <div><span class="label">Date:</span> <span class="value" id="date">December 14, 1962</span></div>
+  <div><span class="label">Distance:</span> <span class="value" id="dist">34,773 km</span></div>
+  <div><span class="label">Velocity:</span> <span class="value" id="vel">11.0 km/s</span></div>
+  <div><span class="label">Surface T:</span> <span class="alert" id="temp">460°C</span></div>
+  <div><span class="label">Magnetic Field:</span> <span class="value" id="mag">NONE DETECTED</span></div>
+  <div style="margin-top:8px; font-size:11px; color:#666;">Click to restart simulation</div>
+</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H, t = 0;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const venus = { x: 0, y: 0, r: 80 }; // Venus visual radius
+let mariner = { x: -300, y: 250, vx: 3, vy: -2 };
+
+function drawStars() {
+  for (let i = 0; i < 200; i++) {
+    const x = (Math.sin(i * 127.1) * 0.5 + 0.5) * W;
+    const y = (Math.cos(i * 311.7) * 0.5 + 0.5) * H;
+    const b = 0.3 + 0.7 * ((Math.sin(i * 73.3 + t * 0.01) + 1) / 2);
+    ctx.fillStyle = `rgba(255,255,255,${b * 0.5})`;
+    ctx.fillRect(x, y, 1, 1);
+  }
+}
+
+function drawVenus() {
+  const cx = W / 2 + venus.x;
+  const cy = H / 2 + venus.y;
+
+  // Cloud layer
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, venus.r);
+  grad.addColorStop(0, '#E8D8A0');
+  grad.addColorStop(0.7, '#D4C488');
+  grad.addColorStop(1, '#998860');
+  ctx.beginPath();
+  ctx.arc(cx, cy, venus.r, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Surface glow (460°C)
+  const glow = ctx.createRadialGradient(cx, cy, venus.r, cx, cy, venus.r + 20);
+  glow.addColorStop(0, 'rgba(204, 51, 0, 0.3)');
+  glow.addColorStop(1, 'rgba(204, 51, 0, 0)');
+  ctx.beginPath();
+  ctx.arc(cx, cy, venus.r + 20, 0, Math.PI * 2);
+  ctx.fillStyle = glow;
+  ctx.fill();
+
+  // Label
+  ctx.fillStyle = '#E8D8A0';
+  ctx.font = '12px monospace';
+  ctx.fillText('VENUS', cx - 20, cy + venus.r + 20);
+  ctx.fillText('460°C beneath clouds', cx - 65, cy + venus.r + 35);
+}
+
+function drawMariner() {
+  const cx = W / 2 + mariner.x;
+  const cy = H / 2 + mariner.y;
+
+  // Spacecraft dot
+  ctx.fillStyle = '#FFD700';
+  ctx.beginPath();
+  ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Trail
+  ctx.strokeStyle = 'rgba(255, 215, 0, 0.3)';
+  ctx.beginPath();
+  ctx.moveTo(cx - mariner.vx * 100, cy - mariner.vy * 100);
+  ctx.lineTo(cx, cy);
+  ctx.stroke();
+
+  // Scan lines during close approach
+  const dist = Math.sqrt(mariner.x**2 + mariner.y**2);
+  if (dist < 200) {
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.4)';
+    ctx.setLineDash([3, 3]);
+    for (let i = -1; i <= 1; i++) {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(W/2 + venus.x + i * 30, H/2 + venus.y);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+  }
+
+  // Label
+  ctx.fillStyle = '#FFD700';
+  ctx.font = '11px monospace';
+  ctx.fillText('MARINER 2', cx + 10, cy - 10);
+}
+
+function update() {
+  t++;
+
+  // Simple gravity toward Venus
+  const dx = venus.x - mariner.x;
+  const dy = venus.y - mariner.y;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  const grav = 500 / (dist * dist + 100);
+  mariner.vx += grav * dx / dist * 0.3;
+  mariner.vy += grav * dy / dist * 0.3;
+
+  mariner.x += mariner.vx;
+  mariner.y += mariner.vy;
+
+  // Update HUD
+  const distKm = Math.round(dist * 200);
+  document.getElementById('dist').textContent = distKm.toLocaleString() + ' km';
+
+  if (dist < 200) {
+    document.getElementById('temp').textContent = '460°C — CONFIRMED';
+    document.getElementById('mag').textContent = 'NONE DETECTED — NO DIPOLE FIELD';
+  }
+}
+
+function draw() {
+  ctx.fillStyle = '#000010';
+  ctx.fillRect(0, 0, W, H);
+  drawStars();
+  drawVenus();
+  drawMariner();
+  update();
+  requestAnimationFrame(draw);
+}
+
+canvas.addEventListener('click', () => {
+  mariner = { x: -300, y: 250, vx: 3, vy: -2 };
+  t = 0;
+});
+
+draw();
+</script>
+</body>
+</html>
