@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering SOPs — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ECEFF1;
+    color: #212121;
+    line-height: 1.6;
+  }
+  header {
+    background: #263238;
+    color: white;
+    padding: 3.5rem 2rem 2.5rem;
+    text-align: center;
+    border-bottom: 4px solid #1565C0;
+  }
+  header .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #90A4AE;
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ECEFF1;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  header .subtitle {
+    font-size: 1.1rem;
+    color: #B0BEC5;
+    margin-bottom: 1.5rem;
+  }
+  .pipeline {
+    font-size: 0.85rem;
+    color: #0277BD;
+    letter-spacing: 0.1em;
+    background: rgba(2,119,189,0.12);
+    display: inline-block;
+    padding: 0.3rem 1.1rem;
+    border-radius: 2rem;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+  .meta-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .meta-chip {
+    background: #CFD8DC;
+    color: #37474F;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0277BD;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .files-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 600px) { .files-grid { grid-template-columns: 1fr; } }
+  .file-card {
+    background: #CFD8DC;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: background 0.15s, transform 0.12s;
+    border: 1px solid #B0BEC5;
+  }
+  .file-card:hover { background: #B0BEC5; transform: translateY(-2px); }
+  .file-card .file-type {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1565C0;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .file-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    color: #263238;
+    margin-bottom: 0.3rem;
+  }
+  .file-card p {
+    font-size: 0.82rem;
+    color: #546E7A;
+  }
+  .contents-box {
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #263238;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .contents-box h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: #263238;
+    margin-bottom: 1rem;
+  }
+  .stage-block { margin-bottom: 1rem; }
+  .stage-block .stage-title {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #1565C0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .stage-block ul {
+    list-style: none;
+    padding-left: 1rem;
+  }
+  .stage-block ul li {
+    font-size: 0.85rem;
+    color: #546E7A;
+    padding: 0.15rem 0;
+  }
+  .stage-block ul li::before {
+    content: "›  ";
+    color: #0277BD;
+    font-weight: 700;
+  }
+  .usage-box {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #CFD8DC;
+  }
+  .usage-box h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: #263238;
+    margin-bottom: 1rem;
+  }
+  .usage-box ol {
+    padding-left: 1.2rem;
+  }
+  .usage-box ol li {
+    font-size: 0.88rem;
+    color: #37474F;
+    margin-bottom: 0.5rem;
+  }
+  .code-block {
+    background: #263238;
+    color: #90A4AE;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+  .quote-box {
+    background: #ECEFF1;
+    border-left: 4px solid #0277BD;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-box p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: #37474F;
+  }
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    color: #90A4AE;
+    background: #263238;
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">GSD Research Mission Package</div>
+  <h1>Engineering the Process<br>Standard Operating Procedures</h1>
+  <div class="subtitle">Policy, Procedure, and Technical Work Discipline</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<main>
+  <div class="meta-row">
+    <span class="meta-chip">April 5, 2026</span>
+    <span class="meta-chip">Squadron Profile — 12 Roles</span>
+    <span class="meta-chip">5 Research Modules</span>
+    <span class="meta-chip">29 Pages</span>
+    <span class="meta-chip">~143K Token Budget</span>
+    <span class="meta-chip">Ready for GSD Orchestrator</span>
+  </div>
+
+  <div class="section-label">Mission Files</div>
+  <div class="files-grid">
+    <a class="file-card" href="sop_mission.pdf" download>
+      <div class="file-type">PDF — Primary Deliverable</div>
+      <h3>sop_mission.pdf</h3>
+      <p>Full 29-page mission package. Three stages in one document. Hand to GSD orchestrator.</p>
+    </a>
+    <a class="file-card" href="sop_mission.tex" download>
+      <div class="file-type">LaTeX Source</div>
+      <h3>sop_mission.tex</h3>
+      <p>Full XeLaTeX source. Recompile with: <code>xelatex sop_mission.tex</code> × 3 passes.</p>
+    </a>
+  </div>
+
+  <div class="contents-box">
+    <h2>Document Contents</h2>
+
+    <div class="stage-block">
+      <div class="stage-title">Stage 1 — Vision Document</div>
+      <ul>
+        <li>Vision narrative: procedure as architecture; Amiga Principle applied to process</li>
+        <li>5 concrete problem statements (Lost Expert, Static Doc Trap, Scope Creep, Measurement Gap, Agentic Transition)</li>
+        <li>Domain map: SOP Engineering Landscape (ASCII)</li>
+        <li>Module Architecture with dependency graph</li>
+        <li>5 research module descriptions</li>
+        <li>Chipset configuration (Squadron, 30/60/10 allocation)</li>
+        <li>Scope boundaries (in/out)</li>
+        <li>12 testable success criteria</li>
+        <li>Relationship table to other GSD documents</li>
+        <li>Through-line connecting to GSD ecosystem philosophy</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-title">Stage 2 — Research Reference</div>
+      <ul>
+        <li>M1: SOP Anatomy — canonical 8-section template, writing discipline, format patterns</li>
+        <li>M2: Process Maturity — CMMI 5-level mapping, NASA NPR 7150.2D, ISO/IEC 12207</li>
+        <li>M3: Governance &amp; Lifecycle — lifecycle model, version-control SOP, policy hierarchy, failure modes</li>
+        <li>M4: AI-Augmented SOPs — DACP spec, living-doc architecture, human review gates</li>
+        <li>M5: GSD Implementation — SKILL.md mapping, wave-as-SOP, 20% change rule, staging discipline</li>
+        <li>Safety &amp; sensitivity considerations table</li>
+        <li>Full source bibliography (NASA, CMMI, ISO, IEEE, SEI, practitioner)</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-title">Stage 3 — Mission Package</div>
+      <ul>
+        <li>Milestone specification with 10 deliverables table</li>
+        <li>Wave architecture diagram (Wave 0 → 1A/1B parallel → 2 → 3)</li>
+        <li>Component breakdown with model assignments and token estimates</li>
+        <li>Full wave execution plan with per-wave task tables</li>
+        <li>Cache optimization strategy</li>
+        <li>Token budget (~143K, 2–3 sessions)</li>
+        <li>Test plan: 3 safety-critical (BLOCK), 8 core, 4 integration, 5 edge cases</li>
+        <li>Verification matrix mapping 12 criteria to test IDs</li>
+        <li>12-role Squadron crew manifest</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage-box">
+    <h2>How to Use This Package</h2>
+    <ol>
+      <li>Open <code>sop_mission.pdf</code> and review Stage 1 (Vision) with Tibsfox before execution.</li>
+      <li>Hand Stage 3 (Mission Package) to the GSD orchestrator in Claude Code on the <code>dev</code> or <code>nasa</code> branch.</li>
+      <li>Orchestrator loads Stage 2 (Research Reference) as the primary context cache for all Wave 1 agents — no re-searching needed.</li>
+      <li>Execute Wave 0 (Foundation schema generation), then trigger Wave 1 parallel tracks simultaneously.</li>
+      <li>CAPCOM gate after Wave 1: Tibsfox reviews research outputs before Wave 2 synthesis begins.</li>
+      <li>Execute Wave 2 (Opus-led M5 synthesis + cross-module patterns).</li>
+      <li>CAPCOM gate after Wave 2: Tibsfox reviews synthesis before publication.</li>
+      <li>Execute Wave 3: self-assessment tool, MV SOP template, verification report, final delivery.</li>
+    </ol>
+    <div class="code-block">
+# Recompile PDF from source (run 3 times):
+xelatex -interaction=nonstopmode sop_mission.tex
+xelatex -interaction=nonstopmode sop_mission.tex
+xelatex -interaction=nonstopmode sop_mission.tex
+    </div>
+  </div>
+
+  <div class="quote-box">
+    <p>"Every SKILL.md is a procedure. Every wave plan is a workflow. Every CAPCOM gate is a checkpoint. The GSD ecosystem already implements SOP engineering at every layer. This mission names what has always been true, makes it explicit, and gives the next builder a known starting state."</p>
+  </div>
+</main>
+
+<footer>
+  GSD Ecosystem / Tibsfox, Inc. — Engineering SOPs Mission Package — April 5, 2026
+</footer>
+</body>
+</html>
