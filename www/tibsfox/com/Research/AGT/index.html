@@ -21,6 +21,11 @@
       <a href="page.html?doc=05-iot-security-usb-stacks">IoT &amp; USB</a>
       <a href="page.html?doc=06-system-design-reliability">System Design</a>
       <a href="page.html?doc=07-synthesis-ordering-guarantees">Synthesis</a>
+      <a href="page.html?doc=01-mcp-protocol-orchestration">MCP Protocol</a>
+      <a href="page.html?doc=02-agent-security-identity">Agent Security</a>
+      <a href="page.html?doc=03-stateful-agents-token-management">State &amp; Tokens</a>
+      <a href="page.html?doc=04-agent-architecture-patterns">Architecture</a>
+      <a href="page.html?doc=05-tool-integration-patterns">Integration</a>
       <a href="mission.html">Mission Pack</a>
     </nav>
   </header>
@@ -34,8 +39,8 @@
     </blockquote>
 
     <div class="stats">
-      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Research Modules</span></div>
-      <div class="stat"><span class="stat-value">15</span><span class="stat-label">Talks Analyzed</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">32</span><span class="stat-label">Talks Analyzed</span></div>
       <div class="stat"><span class="stat-value">~750</span><span class="stat-label">Min. Source Video</span></div>
       <div class="stat"><span class="stat-value">5</span><span class="stat-label">Conferences/Series</span></div>
       <div class="stat"><span class="stat-value">55x</span><span class="stat-label">Peak Optimization</span></div>
@@ -85,6 +90,36 @@
         <h3>M7: Synthesis &mdash; Ordering Guarantees Across Scales</h3>
         <div class="meta"><span class="tag tag-synth">Synthesis</span> Cross-talk &middot; Architecture Isomorphisms</div>
         <p>The isomorphism between MCP orchestration and memory consistency. Sequential consistency = convoy sync. Acquire-release = GUPP handoffs. Relaxed = nudge-sync. Trust boundaries as synchronization points. Allowlists as fences. Choose the minimum necessary ordering. The cost of correctness guarantees is real, measurable, and often avoidable.</p>
+      </a>
+
+      <a href="page.html?doc=01-mcp-protocol-orchestration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M8: MCP Protocol &amp; Orchestration</h3>
+        <div class="meta"><span class="tag tag-mcp">MCP</span> Anthropic + Obot + GitHub &middot; Protocol Evolution</div>
+        <p>The next MCP spec: async tasks with polling, code execution replacing tool-call JSON. Token compression via SDK-over-tools pattern. MCP registry co-maintained by GitHub. 3,600x adoption growth since Nov 2024. Framework-specific MCP servers (Svelte, Figma) as domain knowledge bridges. Conversational workflow automation replacing visual flowcharts.</p>
+      </a>
+
+      <a href="page.html?doc=02-agent-security-identity" class="card" style="text-decoration:none;color:inherit">
+        <h3>M9: Agent Security &amp; Identity</h3>
+        <div class="meta"><span class="tag tag-iot">Security</span> IBM Research + Edison.watch + IETF &middot; Trust Layer</div>
+        <p>Simon Willison&rsquo;s lethal trifecta: untrusted content + private data + external communication = exfiltration risk. Open Edison agentic firewall. MCP security pitfalls from IBM Research. Agent Identity Protocol with IETF 125 standardization. CIMD for client metadata verification. VS Code extension supply chain attacks. Layered defense architecture.</p>
+      </a>
+
+      <a href="page.html?doc=03-stateful-agents-token-management" class="card" style="text-decoration:none;color:inherit">
+        <h3>M10: Stateful Agents &amp; Token Management</h3>
+        <div class="meta"><span class="tag tag-mem">State</span> Concierge AI + Undo.io &middot; State &amp; Budget Layer</div>
+        <p>Transactional MCP with Postgres-backed ACID guarantees. Stage-based workflows with legal transitions. Token bloat: 100K tokens consumed by copy-paste operations. Code execution as 60&ndash;80% compression. Time-travel debugging for agent decision auditing. Checkpoint/resume for crash recovery. Global vs stage-local state scoping.</p>
+      </a>
+
+      <a href="page.html?doc=04-agent-architecture-patterns" class="card" style="text-decoration:none;color:inherit">
+        <h3>M11: Agent Architecture Patterns</h3>
+        <div class="meta"><span class="tag tag-sys">Architecture</span> Alpek + MCP Cloud + NimbleBrain &middot; Deployment Layer</div>
+        <p>Skybridge dual-interface framework: synchronized text + visual widget channels. Complementary, not duplicative interfaces. MCP Cloud proxy platform approaching 1,000 hosted servers. Proxy architecture for authentication, observability, rate limiting. Build-once deploy-everywhere across ChatGPT and MCP platforms.</p>
+      </a>
+
+      <a href="page.html?doc=05-tool-integration-patterns" class="card" style="text-decoration:none;color:inherit">
+        <h3>M12: Tool Integration Patterns</h3>
+        <div class="meta"><span class="tag tag-mcp">Integration</span> XDST + Obot &middot; Composition Layer</div>
+        <p>API wrappers as knowledge bridges for niche tools. Figma MCP: design token extraction, component listing, layout hierarchy. Framework-specific MCP servers filling LLM knowledge gaps. Centralized OAuth management replacing per-server auth. Dynamic client registration (RFC 7591) for ephemeral agents. Pipeline, gateway, enrichment, and validation composition patterns.</p>
       </a>
     </div>
 
