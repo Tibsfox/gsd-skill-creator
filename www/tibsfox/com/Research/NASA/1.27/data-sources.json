@@ -1,0 +1,117 @@
+{
+  "mission": "1.27",
+  "title": "Ranger 2 (Atlas-Agena B)",
+  "description": "Open datasets and source materials relevant to Ranger 2 (1961), stranded in parking orbit by Agena B gyroscope failure, Polystichum munitum (western sword fern), Purple Martin (Progne subis), and parking orbit dynamics",
+  "sources": [
+    {
+      "id": "nssdc-ranger-2",
+      "name": "NSSDC Master Catalog -- Ranger 2",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-032A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Ranger 2. Spacecraft description (304 kg hexagonal bus with 5.2 m solar panels), instrument manifest (Lyman-alpha telescope, rubidium magnetometer, electrostatic analyzers, particle detectors, cosmic-ray detectors, cosmic dust detectors, scintillation counters), Atlas-Agena B launch vehicle details, orbital parameters (150 x 242 km, 33.3° inclination, 88.3 min period), and failure analysis (inoperative roll gyroscope prevented Agena B restart).",
+      "mission_relevance": "Definitive source for Ranger 2 spacecraft specifications, trajectory parameters, and failure mechanism. Documents the second consecutive Ranger parking orbit stranding, the 23-hour operational period before power loss, and atmospheric reentry on November 20, 1961."
+    },
+    {
+      "id": "nasa-sp-4210-ranger",
+      "name": "Hall, R. Cargill. 'Lunar Impact: A History of Project Ranger' (NASA SP-4210)",
+      "url": "https://history.nasa.gov/SP-4210/pages/Cover.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "Complete NASA history of the Ranger program from conception through Ranger 9. Detailed accounts of Ranger 1 and 2 Block I test flights, Agena restart failure analysis, institutional context (JPL-NASA Headquarters relations, congressional oversight), and the engineering evolution from Block I through Block III. The definitive reference for Ranger program management, technical decisions, and political pressure.",
+      "mission_relevance": "Provides the full institutional and technical narrative for Ranger 2, including the Agena B gyroscope failure analysis, the spacecraft's 23-hour operational performance in the parking orbit, and the programmatic implications of two consecutive launch vehicle failures."
+    },
+    {
+      "id": "ntrs-ranger-reports",
+      "name": "NASA Technical Reports Server -- Ranger 2 Reports",
+      "url": "https://ntrs.nasa.gov/search?q=ranger%202",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Full-text technical report archive containing JPL engineering reports, failure analyses, instrument performance data, and mission summaries for Ranger 2. Includes the post-flight Agena B failure investigation, spacecraft telemetry analysis during the 23-hour contact period, and instrument calibration data from the parking orbit operations.",
+      "mission_relevance": "Primary technical documentation for Ranger 2's operational performance, instrument data, and Agena B failure mechanism. Contains the engineering data that validated the three-axis attitude control system and informed the Mariner spacecraft design."
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's ephemeris computation service. While Ranger 2 reentered the atmosphere and no longer exists as a trackable object, HORIZONS provides the orbital elements for the planned mission trajectory and for comparison objects (Moon position on November 18, 1961; Atlas-Agena B parking orbit parameters).",
+      "mission_relevance": "Enables reconstruction of the planned highly elliptical orbit and comparison with the actual parking orbit trajectory. Essential for the parking orbit dynamics knowledge node."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "format": "TSV/HTML",
+      "access": "open",
+      "description": "Comprehensive launch database including the complete Atlas-Agena B launch history, Ranger 2 orbital data (COSPAR 1961-032A, USAF Sat Cat 206), and vehicle performance records. Documents the Agena B reliability record across military and civilian missions.",
+      "mission_relevance": "Contextualizes Ranger 2 within the Atlas-Agena B launch record and the broader Agena vehicle reliability history. Provides quantitative basis for the launch vehicle reliability analysis."
+    },
+    {
+      "id": "usda-plants-sword-fern",
+      "name": "USDA PLANTS Database -- Polystichum munitum",
+      "url": "https://plants.usda.gov/home/plantProfile?symbol=POMU",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Distribution maps, habitat descriptions, and conservation status for western sword fern. Shows the range from southeastern Alaska to central California, with disjunct populations in Idaho and Montana. Includes county-level occurrence data for Washington State.",
+      "mission_relevance": "Establishes the geographic range and habitat requirements for the organism pairing. Sword fern's range in western Washington, centered on the moist, shaded understory habitat, provides the basis for the resonance with Ranger 2's environment-dependent survival."
+    },
+    {
+      "id": "usda-feis-sword-fern",
+      "name": "USDA Fire Effects Information System -- Polystichum munitum",
+      "url": "https://www.fs.usda.gov/database/feis/plants/fern/polmun/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive ecological profile of western sword fern covering growth rates, reproductive biology (spore production, gametophyte ecology, fertilization requirements), fire response (rhizome survival, post-fire resprouting), wildlife associations, and role in forest succession. Includes quantitative data on frond production rates, spore dispersal distances, and establishment success rates.",
+      "mission_relevance": "Provides the ecological data for the organism pairing's quantitative resonance: spore production rates (millions per plant per year), establishment success rates (very low per spore), post-disturbance recovery patterns, and the parallel redundancy that contrasts with Ranger 2's serial vulnerability."
+    },
+    {
+      "id": "wdfw-purple-martin",
+      "name": "WDFW -- Purple Martin Conservation",
+      "url": "https://wdfw.wa.gov/species-habitats/species/progne-subis-arboricola",
+      "type": "primary-source",
+      "category": "ornithology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Washington Department of Fish and Wildlife species profile for the western Purple Martin subspecies (Progne subis arboricola). Documents the species' status as a Species of Greatest Conservation Need, its dependence on human-provided nesting structures, population trends, and conservation threats including competition from invasive European Starlings and House Sparrows.",
+      "mission_relevance": "Provides the conservation context for the bird connection: the Purple Martin's dependence on external infrastructure mirrors Ranger 2's dependence on the Agena B upper stage. Both are vulnerable to failures in systems they do not control."
+    },
+    {
+      "id": "nasa-image-library",
+      "name": "NASA Image and Video Library -- Ranger 2",
+      "url": "https://images.nasa.gov/search?q=ranger+2&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "Historical photographs from the Ranger program: Ranger Block I spacecraft assembly at JPL, Atlas-Agena B on Launch Complex 12, mission control operations, and diagrams of the planned highly elliptical orbit. Public domain imagery.",
+      "mission_relevance": "Visual documentation of Ranger 2 hardware, the Atlas-Agena B vehicle, and the JPL mission operations team."
+    },
+    {
+      "id": "asa-gray-herbaria",
+      "name": "Harvard University Herbaria -- Asa Gray Archives",
+      "url": "https://huh.harvard.edu/libraries/archives/asa-gray",
+      "type": "primary-source",
+      "category": "biography",
+      "format": "Various",
+      "access": "open (with registration)",
+      "description": "Archival collection of Asa Gray's correspondence, field notebooks, botanical manuscripts, and personal papers. Includes Gray's correspondence with Charles Darwin, his botanical descriptions of North American plant species, and drafts of Gray's Manual.",
+      "mission_relevance": "Provides the biographical and scientific context for the dedication. Gray's systematic classification of American plants parallels Ranger 2's systematic measurement of the space environment: both create frameworks of knowledge that persist after the individual mission."
+    }
+  ]
+}

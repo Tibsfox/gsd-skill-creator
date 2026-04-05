@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.29 — Ranger 4 + Bracken Fern | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --bark-dark: #2A1A0E;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --success-dark: #1A6A1A;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+    --warning: #CC6600;
+    --warning-light: #FF8C00;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-floor);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(168,216,168,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 18% 75%, rgba(10,46,10,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 80%, rgba(45,106,45,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--forest-floor) 0%, #1A1A2E 25%, #2A2A4E 50%, #3A3A5E 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--warning);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(168,216,168,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,216,168,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(204,102,0,0.15);
+    border: 1px solid var(--warning);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--warning-light);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--light-bright);
+  }
+
+  .status-partial {
+    background: rgba(204,102,0,0.3);
+    border: 1px solid var(--warning);
+    color: var(--warning-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(10,46,10,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--light-bright);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--warning);
+    background: rgba(204,102,0,0.06);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(204,102,0,0.12);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--warning);
+    color: var(--forest-floor);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--warning-light); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(10,46,10,0.5);
+    border: 1px solid var(--canopy-emerald);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--light-canopy);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--light-canopy);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(13,26,13,0.6);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--light-bright);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dedication-card {
+    background: rgba(212,168,48,0.08);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .dedication-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card {
+    background: rgba(26,26,58,0.4);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .tracks-card h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.15);
+    font-size: 0.85rem;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    background: rgba(11,61,145,0.3);
+    color: #7EB8DA;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-card {
+    background: rgba(10,46,10,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .nav-card a {
+    color: var(--light-canopy);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--light-bright); }
+
+  footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--light-canopy); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.29</span>
+      <span>NASA Mission Series</span>
+      <span class="status-partial">PARTIAL</span>
+    </div>
+    <h1>Ranger 4 &mdash; Dead on Arrival</h1>
+    <p class="subtitle">The first American spacecraft to reach the Moon, and the fern that arrives everywhere but persists nowhere</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> April 23, 1962</span>
+      <span><span class="label">Program:</span> Ranger (NASA/JPL)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Atlas-Agena B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On April 23, 1962, Ranger 4 launched from Cape Canaveral on an Atlas-Agena B, achieving the most accurate translunar trajectory in the Ranger program to date &mdash; precise enough for lunar impact without midcourse correction. Approximately one hour after launch, the master clock timer failed, disabling the entire command sequencer. Solar panels did not deploy. The high-gain antenna did not point toward Earth. Science instruments did not activate. The seismometer capsule did not separate. For sixty-four hours, the Deep Space Network tracked a carrier signal &mdash; a steady, unmodulated tone that said &ldquo;I am here&rdquo; and nothing else.</p>
+      <p>At 12:49:53 UTC on April 26, 1962, Ranger 4 struck the far side of the Moon at approximately 2.67 km/s. Impact coordinates: ~15.5&deg;S, 130.7&deg;W. It became the first American spacecraft to reach another celestial body. It returned no images, no spectra, no seismic data, no science of any kind. The television camera that would have sent back the first American close-up photographs of the lunar surface was never activated. The seismometer that would have been the first instrument to operate on another world was destroyed on impact, still attached to the bus, still waiting for a command that was never sent.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 331 kg (Block II Ranger &mdash; hexagonal bus, ~1.5 m across, 3.6 m tall deployed)</li>
+        <li><strong>Instruments:</strong> Vidicon TV camera, gamma-ray spectrometer, radar altimeter, 42 kg seismometer capsule (balsa wood impact limiter, retro-rocket, 30-day battery)</li>
+        <li><strong>Power:</strong> Two deployable solar panels (~135 W) &mdash; never deployed</li>
+        <li><strong>Communications:</strong> High-gain directional antenna (never pointed) + omnidirectional backup (carrier only)</li>
+        <li><strong>Midcourse engine:</strong> Liquid-propellant engine (~50 m/s capability) &mdash; never fired</li>
+        <li><strong>Builder:</strong> Jet Propulsion Laboratory (for NASA)</li>
+        <li><strong>Launch vehicle:</strong> Atlas-Agena B (Atlas D #133D + Agena B #6903)</li>
+        <li><strong>Key failure:</strong> Master clock timer &mdash; single-point failure that disabled all sequenced commands</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Timer Failure</h2>
+      <p>The master clock timer was a quartz crystal oscillator that provided the timing signal for every event in the mission. Every command &mdash; from solar panel deployment to camera activation to seismometer separation &mdash; was triggered by the command sequencer at pre-programmed times relative to this clock. When the oscillator failed approximately one hour after launch, the sequencer went silent. Every downstream system waited for commands that never came.</p>
+      <p>The timer was not the most complex or expensive component on the spacecraft. It was a component whose failure probability was assessed as acceptably low. The assessment was statistically correct and specifically wrong. On this flight, this oscillator failed, and when it failed, the $10 million spacecraft and $15 million launch became a 331 kg unguided projectile aimed at the Moon. The camera worked. The spectrometer worked. The seismometer was intact. Everything functioned except the one component that told everything else when to function.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Lunar impact trajectory simulator &mdash; compute Ranger 4&rsquo;s transfer orbit from Earth to Moon, overlay Ranger 3&rsquo;s miss trajectory, mark timer failure point and carrier-only tracking</li>
+        <li><strong>Minecraft:</strong> Far-side impact crater at 1:1 scale &mdash; ~15-block crater in gray concrete with scattered debris blocks and a wall of deepslate blocking line-of-sight to Earth</li>
+        <li><strong>Blender:</strong> Dead on Arrival animation (90 sec) &mdash; spacecraft loses color as timer fails, coasts gray toward Moon, impacts far side, camera pulls back to show invisible impact from Earth</li>
+        <li><strong>GLSL:</strong> 4-mode screensaver &mdash; bracken crozier uncoiling, Ranger 4 trajectory, far-side impact silence, Tree Swallow in flight</li>
+        <li><strong>Arduino:</strong> Dead signal indicator ($15) &mdash; 8 LEDs start flashing (telemetry), then 7 go dark (timer failure), leaving one carrier LED that fades with distance</li>
+        <li><strong>Godot 4:</strong> Ranger mission planner &mdash; manage spacecraft systems during lunar transit; random failures require diagnosis and backup activation</li>
+        <li><strong>GMAT:</strong> Ranger 4 trajectory reconstruction &mdash; April 23 launch to April 26 far-side impact, compared with Ranger 3&rsquo;s miss</li>
+        <li><strong>Radio:</strong> AM detector stage ($16) &mdash; diode envelope detector extracts audio from AM carrier. Connected to v1.28&rsquo;s IF output, it produces silence when there is no modulation &mdash; what the DSN heard from Ranger 4</li>
+        <li><strong>Screensaver:</strong> Bracken &rarr; Ranger 4 &rarr; Far Side &rarr; Tree Swallow (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Single-point failure analysis &mdash; design a 5-component system, identify the SPF, calculate reliability with and without redundancy. Show that a 99% reliable SPF dominates a 85% reliable non-SPF (45 min, Python or pencil)</li>
+        <li><strong>TRY 2:</strong> Doppler tracking with sound &mdash; record a passing car, measure frequency shift with a smartphone spectrum analyzer, calculate speed from the Doppler equation (30 min, smartphone)</li>
+        <li><strong>TRY 3:</strong> Bracken fern field survey &mdash; find bracken near a disturbed area, measure frond height and density in quadrats, map abundance vs. distance from forest edge (60 min, outdoors)</li>
+        <li><strong>DIY 1:</strong> SPF demonstration circuit ($12) &mdash; 5 LEDs in series with one deliberately unreliable connection. Show that one loose wire kills all five lights. Add a bypass (redundancy)</li>
+        <li><strong>DIY 2:</strong> Doppler shift detector ($20) &mdash; spinning piezo buzzer + stationary microphone + spectrum analyzer. Hear and measure the Doppler effect in real time</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-far-side.html" style="color: var(--light-bright);">Story: &ldquo;The Far Side&rdquo;</a>
+          <a href="artifacts/stories/the-far-side.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; Told from the perspective of Ranger 4&rsquo;s seismometer capsule, waiting for a command that never comes
+        </li>
+        <li><a href="artifacts/audio/dead-carrier.dsp" style="color: #7EB8DA;">Audio: Dead Carrier</a> &mdash; FAUST DSP: 120 seconds of 64-hour mission compressed. Rich telemetry tones cut to single carrier at T+2s, fading with 1/r&sup2;, Doppler shift at lunar approach, silence at impact</li>
+        <li><a href="artifacts/audio/tree-swallow-liquid.dsp" style="color: #7EB8DA;">Audio: Tree Swallow Song</a> &mdash; FAUST generative: liquid warbling at 3-7 kHz, iridescent frequency glides, dawn chorus layering</li>
+        <li><a href="artifacts/circuits/dead-signal-indicator.md" style="color: var(--light-bright);">Circuit: Dead Signal Indicator</a> &mdash; 8 LEDs that lose telemetry, leaving only the carrier LED ($15)</li>
+        <li><a href="artifacts/circuits/radio-am-detector.md" style="color: var(--light-bright);">Circuit: AM Detector</a> &mdash; Germanium diode envelope detector, the radio series v1.29 ($16)</li>
+        <li><a href="artifacts/screensaver/ranger4-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Bracken crozier, Ranger 4 trajectory, far-side impact, Tree Swallow</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Arrival without function:</span> Bracken arrives everywhere &mdash; every continent, every disturbed habitat, every opening in the forest. But the visible plant is annual; the fronds die each autumn. Ranger 4 arrived at the Moon &mdash; the first American spacecraft to reach another celestial body &mdash; but with dead instruments. Both arrive at their destinations with the mechanisms of purpose disabled.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">The hidden network:</span> Bracken&rsquo;s real organism is underground &mdash; a rhizome system that can be centuries old, invisible from the surface. Ranger 4&rsquo;s real contribution was also hidden: the trajectory precision, the proof of Atlas-Agena B capability, the identification of the timer as a single-point failure. The visible fronds (the impact, the headlines) died. The rhizome (the engineering knowledge) spread through every subsequent Ranger mission.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">The colonist that builds nothing permanent:</span> Bracken dominates disturbed ground for years but builds no wood, no trunk, no canopy. It holds the space until trees overtake it. Ranger 4 held the &ldquo;first US lunar spacecraft&rdquo; territory but produced no images, no spectra, no seismic data. It held the space until Ranger 7 arrived with working cameras and 4,316 photographs.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Reproduction by saturation:</span> Bracken produces millions of spores, of which an infinitesimal fraction produce new plants. The Ranger program launched nine spacecraft at the Moon, of which six failed entirely or partially. Both overwhelm probability with volume. Bracken&rsquo;s three-in-a-million spore success rate and Ranger&rsquo;s three-in-nine mission success rate are different scales of the same approach.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Fire adaptation as failure adaptation:</span> Bracken survives fire because its essential structures are underground. The fronds burn; the rhizomes persist. The Ranger program survived its six failures because the essential structures &mdash; the engineering team, the institutional knowledge, the trajectory design capability &mdash; were underground, safe from the fires of Congressional hearings and newspaper headlines. Rangers 7, 8, and 9 grew from the same rhizome.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">The cosmopolitan that is always local:</span> Bracken is the most widespread fern on Earth, but every stand is local. Ranger 4 was part of a global space race, but its failure was local &mdash; one timer, one oscillator circuit, one component. The global program continued. The local mission was lost.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Ranger Arc: Six Failures, Three Successes</h2>
+      <p><strong>Ranger 1 (Aug 23, 1961):</strong> Agena A failed to restart. Trapped in LEO for 7 days. Reentry.</p>
+      <p><strong>Ranger 2 (Nov 18, 1961):</strong> Agena A failed to restart. LEO for 1 day. Reentry.</p>
+      <p><strong>Ranger 3 (Jan 26, 1962):</strong> Left Earth orbit. Guidance error + inverted midcourse correction. Missed Moon by 36,793 km. Spacecraft worked.</p>
+      <p><strong>Ranger 4 (Apr 23, 1962):</strong> Hit the Moon (far side). Timer failed. Dead on arrival. No data.</p>
+      <p><strong>Ranger 5 (Oct 18, 1962):</strong> Solar panel/battery failure. Missed Moon by 725 km. Dead spacecraft.</p>
+      <p><strong>Ranger 6 (Jan 30, 1964):</strong> Hit the Moon (near side). Camera failed at terminal approach. No images.</p>
+      <p><strong>Ranger 7 (Jul 28, 1964):</strong> SUCCESS. 4,316 photographs. First close-up images of another world.</p>
+      <p><strong>Ranger 8 (Feb 17, 1965):</strong> SUCCESS. 7,137 photographs of Mare Tranquillitatis.</p>
+      <p><strong>Ranger 9 (Mar 21, 1965):</strong> SUCCESS. 5,814 photographs. Live television broadcast.</p>
+    </div>
+
+    <div class="card">
+      <h2>Still There</h2>
+      <p>Somewhere on the far side of the Moon, in the ancient highland regolith south of the crater Ley, there is a small crater that was not there before April 26, 1962. Scattered around and within it are the fragments of Ranger 4 &mdash; twisted aluminum, shattered solar cells, the remains of a camera that would have sent back the first American close-up photographs of the lunar surface, the pieces of a seismometer that would have been the first instrument on another world. No weather erodes them. No biology decomposes them. They will be there for billions of years, slowly ground down by micrometeorite bombardment. The first American artifact on another celestial body. Silent. Permanent. Unseen.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.28/index.html">&larr; v1.28 Ranger 3</a>
+      <a href="../1.30/index.html">v1.30 Ranger 5 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Pteridium aquilinum (Bracken fern)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">2.5m</div>
+          <div class="stat-label">Frond Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1m+</div>
+          <div class="stat-label">Rhizome Depth</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Global</div>
+          <div class="stat-label">Distribution</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">55M yr</div>
+          <div class="stat-label">Fossil Record</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The most widespread fern on Earth &mdash; every continent except Antarctica. Colonizes disturbed ground with explosive speed: the first fern after fire, the dominant plant in clearcuts. But the fronds are annual, dying each autumn. The real organism is underground: a rhizome network centuries old, invisible, persisting through fires that destroy everything above ground. Named Pteridium (&ldquo;little wing&rdquo;) for the wing-shaped frond divisions. The fern that arrives everywhere and whose visible structure dies everywhere. Ranger 4 arrived at the Moon and its instruments were dead. Bracken arrives at every clearcut and its fronds are dead by November.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Tachycineta bicolor (Tree Swallow)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 28. An iridescent blue-green aerial insectivore that depends on infrastructure it cannot create &mdash; obligate cavity nester requiring pre-existing holes in snags or nest boxes. Without the cavity, the bird cannot nest regardless of food abundance or habitat quality. The single-point failure is the cavity, not the bird. Ranger 4&rsquo;s single-point failure was the timer, not the instruments. Both depend on a component they do not control. The Tree Swallow&rsquo;s liquid, warbling song carries across open fields at dawn &mdash; a signal that collapses when anthropogenic noise overwhelms it.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Booker T. Washington</h3>
+      <p style="font-size:0.85rem;">April 5, 1856 &mdash; November 14, 1915</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born into slavery on the wall-clock date of this release, 170 years apart. Built Tuskegee Institute from an empty field and a $2,000 appropriation into 100+ buildings and 1,500 students. Arrived at institutional prominence with systems fundamentally broken &mdash; Jim Crow, legal segregation, the Atlanta Compromise. The body arrived. The full mission was constrained. Washington&rsquo;s kiln failed three times before producing usable bricks. Ranger 4&rsquo;s timer failed once, and there was no second kiln. Both built from nothing. Both arrived. Both are remembered for the fact of arrival and for the silence where the full achievement should have been.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (mathematics.md)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-012A">NSSDC &mdash; Ranger 4</a>
+      <a href="https://history.nasa.gov/SP-4210/pages/Cover.htm">NASA SP-4210 &mdash; Lunar Impact (Ranger History)</a>
+      <a href="https://ntrs.nasa.gov/search?q=ranger%204">NASA NTRS &mdash; Ranger 4 Reports</a>
+      <a href="https://www.lroc.asu.edu/">LROC &mdash; Lunar Reconnaissance Orbiter Camera</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS Ephemeris</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/fern/pteaqu/all.html">USDA FEIS &mdash; Bracken Fern</a>
+      <a href="https://www.allaboutbirds.org/guide/Tree_Swallow">Cornell Lab &mdash; Tree Swallow</a>
+      <a href="https://www.tuskegee.edu/libraries/university-archives">Tuskegee University Archives</a>
+      <a href="https://images.nasa.gov/search?q=ranger+4&media=image">NASA Image Library</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--warning-light);">&ldquo;The carrier hums to no one. The far side holds the dust.&rdquo;</p>
+</footer>
+
+</body>
+</html>

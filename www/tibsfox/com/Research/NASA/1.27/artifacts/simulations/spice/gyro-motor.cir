@@ -1,0 +1,32 @@
+* Gyroscope Motor Drive Circuit -- Ranger 2 / Agena B Roll Gyroscope
+* Mission 1.27 — Simplified model of a gyroscope spin motor
+*
+* The Agena B gyroscope used a small hysteresis synchronous motor
+* to spin the rotor at ~24,000 RPM. When the motor or bearings failed,
+* the rotor slowed to a stop and the attitude reference was lost.
+*
+* This SPICE model simulates the drive circuit and shows the
+* back-EMF waveform that indicates spin rate. When the motor
+* stalls (R_bearing increases), the back-EMF drops to zero.
+*
+* .PARAM R_bearing = 10 (normal) or 1000 (seized)
+
+.param R_bearing=10
+
+* AC source (400 Hz, 3-phase simplified as single phase)
+V1 in 0 SIN(0 28 400 0 0)
+
+* Motor winding
+L_motor in mid 10mH
+R_winding mid out 5
+
+* Bearing resistance (increases with failure)
+R_bearing out 0 {R_bearing}
+
+* Back-EMF sensing
+.control
+tran 0.1m 50m
+plot v(in) v(out) v(mid)
+.endc
+
+.end

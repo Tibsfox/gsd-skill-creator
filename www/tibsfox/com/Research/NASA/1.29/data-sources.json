@@ -1,0 +1,117 @@
+{
+  "mission": "1.29",
+  "title": "Ranger 4 (Atlas-Agena B)",
+  "description": "Open datasets and source materials relevant to Ranger 4 (1962), the first US spacecraft to reach the Moon (far-side impact, systems failed), Pteridium aquilinum (bracken fern), Tachycineta bicolor (Tree Swallow), and spacecraft reliability engineering",
+  "sources": [
+    {
+      "id": "nssdc-ranger-4",
+      "name": "NSSDC Master Catalog — Ranger 4",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-012A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Ranger 4. Spacecraft ID: 1962-012A. Documents the Block II Ranger spacecraft (331 kg), Atlas-Agena B launch vehicle, timer failure, carrier-only tracking, and far-side lunar impact at approximately 15.5°S, 130.7°W on April 26, 1962.",
+      "mission_relevance": "Definitive source for Ranger 4 spacecraft specifications, failure analysis, and impact coordinates. Confirms first US spacecraft to reach another celestial body."
+    },
+    {
+      "id": "nasa-sp-4210",
+      "name": "NASA SP-4210 — Lunar Impact: A History of Project Ranger",
+      "url": "https://history.nasa.gov/SP-4210/pages/Cover.htm",
+      "type": "primary-source",
+      "category": "history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "R. Cargill Hall's definitive history of the Ranger program (1977). Covers all nine Ranger missions with full access to JPL internal documents, failure investigation reports, and Congressional testimony. Chapter 8 details Ranger 4's timer failure, the institutional response, and the path toward Ranger 7's success.",
+      "mission_relevance": "The primary historical source for understanding the Ranger program arc from six consecutive failures to three consecutive successes. Provides the institutional context for Ranger 4's role in forcing JPL's quality assurance reforms."
+    },
+    {
+      "id": "ntrs-ranger-4",
+      "name": "NASA Technical Reports Server — Ranger 4",
+      "url": "https://ntrs.nasa.gov/search?q=ranger%204",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Technical report archive containing JPL post-flight reports, timer failure investigation, trajectory reconstruction, and DSN tracking analysis for Ranger 4.",
+      "mission_relevance": "Primary technical documentation for the timer failure analysis, carrier-only tracking data, and impact trajectory reconstruction."
+    },
+    {
+      "id": "lroc-farside",
+      "name": "LROC — Lunar Reconnaissance Orbiter Camera",
+      "url": "https://www.lroc.asu.edu/",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "TIFF/PNG",
+      "access": "open",
+      "description": "High-resolution imagery of the lunar surface from the Lunar Reconnaissance Orbiter. The LROC archive includes imagery of the Ranger 4 impact region on the far side (~15.5°S, 130.7°W). The estimated 15-20 m crater is near the resolution limit for definitive identification.",
+      "mission_relevance": "Provides the best available imagery of the terrain where Ranger 4 impacted. Used for the crater detection ML exercise and for contextualizing the impact site within the far-side highland geology."
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's ephemeris computation service. Provides lunar position data for April 23-26, 1962, enabling trajectory reconstruction of Ranger 4's Earth-Moon transfer.",
+      "mission_relevance": "Essential for the trajectory simulation (Python A1) and GMAT reconstruction. Provides the lunar position at time of impact for coordinate verification."
+    },
+    {
+      "id": "mcdowell-lv-db",
+      "name": "McDowell Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-vehicle",
+      "format": "CSV/HTML",
+      "access": "open",
+      "description": "Jonathan McDowell's comprehensive database of orbital launch attempts. Records Ranger 4's Atlas-Agena B (Atlas D serial 133D, Agena B serial 6903) launch details, payload mass, and orbital parameters.",
+      "mission_relevance": "Provides launch vehicle serial numbers and performance data for the Atlas-Agena B configuration used on Ranger 4."
+    },
+    {
+      "id": "usda-bracken",
+      "name": "USDA FEIS — Pteridium aquilinum",
+      "url": "https://www.fs.usda.gov/database/feis/plants/fern/pteaqu/all.html",
+      "type": "primary-source",
+      "category": "organism",
+      "format": "HTML",
+      "access": "open",
+      "description": "USDA Forest Service Fire Effects Information System entry for bracken fern. Distribution, ecology, fire response, allelopathic properties, rhizome persistence, and management considerations across North American biomes.",
+      "mission_relevance": "Primary ecological source for the organism pairing. Documents bracken's post-disturbance colonization behavior, rhizome survival through fire, and allelopathic effects — the key resonance axes with Ranger 4."
+    },
+    {
+      "id": "allaboutbirds-tree-swallow",
+      "name": "Cornell Lab — All About Birds: Tree Swallow",
+      "url": "https://www.allaboutbirds.org/guide/Tree_Swallow",
+      "type": "secondary-source",
+      "category": "bird",
+      "format": "HTML",
+      "access": "open",
+      "description": "Cornell Lab of Ornithology species profile for Tachycineta bicolor (Tree Swallow). Range, habitat, behavior, vocalizations, and conservation status. Tree Swallows are cavity-nesting aerial insectivores common throughout the PNW.",
+      "mission_relevance": "Species data for the degree 28 bird. Tree Swallows are cavity nesters that depend on finding pre-existing holes (natural cavities or nest boxes) — they cannot create their own. The dependence on external infrastructure mirrors Ranger 4's dependence on the timer for all command sequencing."
+    },
+    {
+      "id": "tuskegee-archives",
+      "name": "Tuskegee University Archives",
+      "url": "https://www.tuskegee.edu/libraries/university-archives",
+      "type": "primary-source",
+      "category": "dedication",
+      "format": "HTML",
+      "access": "open",
+      "description": "Historical records of Booker T. Washington's founding and administration of Tuskegee Institute. Includes correspondence, photographs, institutional records, and student records from the founding period (1881-1915).",
+      "mission_relevance": "Primary historical source for the dedication to Booker T. Washington. Documents the brick-by-brick construction of Tuskegee and the institutional infrastructure that survived Washington's death."
+    },
+    {
+      "id": "nasa-images-ranger",
+      "name": "NASA Image Library — Ranger Program",
+      "url": "https://images.nasa.gov/search?q=ranger+4&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "NASA image archive with photographs of Ranger spacecraft assembly, testing, launch, and mission control operations. Includes Ranger 4-specific imagery from Cape Canaveral and JPL.",
+      "mission_relevance": "Visual documentation of the Ranger 4 spacecraft and launch for the index.html landing page and Blender animation reference."
+    }
+  ]
+}

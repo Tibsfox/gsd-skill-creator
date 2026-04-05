@@ -1,0 +1,151 @@
+{
+  "mission": "1.27",
+  "title": "Ranger 2 (Atlas-Agena B)",
+  "date": "1961-11-18",
+  "organism": "Polystichum munitum",
+  "organism_common": "Western sword fern",
+  "organism_location": "Dominant understory fern of the Pacific Northwest -- from southeastern Alaska through Washington, Oregon, and California. Sea level to 1,500 m. The evergreen constant of the PNW forest floor.",
+  "bird": "Progne subis",
+  "bird_common": "Purple Martin",
+  "dedication": {
+    "name": "Asa Gray",
+    "born": "1810-11-18",
+    "died": "1888-01-30",
+    "birthplace": "Sauquoit, New York",
+    "field": "Botany, taxonomy, systematic biology",
+    "resonance": "Asa Gray was born on November 18, 1810 -- exactly 151 years before Ranger 2 launched. He was the most important American botanist of the nineteenth century, author of Gray's Manual, Darwin's American champion, and the systematist who classified the North American flora. Gray made the invisible visible: he took the bewildering diversity of American plants and organized them into a system anyone could use. Ranger 2 was designed to do the same for the space environment -- to take invisible radiation, unmeasurable magnetic fields, and undetectable cosmic dust and reduce them to systematic measurements. Both were framework-builders. Gray's Manual is still in print. The Ranger spacecraft bus became the Mariner bus. The system survives its setbacks."
+  },
+  "nodes": [
+    {
+      "id": "parking-orbit-dynamics",
+      "concept": "Parking orbit -- temporary orbit before injection burn to deep space",
+      "department": "orbital-mechanics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.27",
+      "description": "A parking orbit is a temporary low Earth orbit used as a staging point before a spacecraft performs an injection burn to reach its final trajectory. The technique was pioneered by the Ranger program in 1961. Instead of launching directly into the escape or deep-space trajectory (the Pioneer approach with solid upper stages), the Atlas-Agena placed the spacecraft in a ~200 km circular orbit first. The spacecraft coasted for a fraction of one orbit (typically 10-60 minutes), and then the Agena reignited to perform the injection burn. This two-burn profile decoupled the launch window from the trajectory geometry, expanding the window from seconds to minutes. The cost was the restart requirement: the Agena had to work twice, with the second burn occurring in microgravity after thermal cycling, propellant redistribution, and mechanical component degradation. Ranger 2's Agena B reached the 150x242 km parking orbit successfully, but the roll gyroscope failed before the restart, preventing the injection burn. The spacecraft was stranded in a low orbit that decayed within two days.",
+      "resonance": "A sword fern spore that lands on a suitable substrate faces its own parking orbit problem: it must survive the gametophyte stage -- a tiny, vulnerable, water-dependent phase -- before it can develop into the robust sporophyte. The gametophyte is the biological parking orbit: a temporary, unfavorable phase that the organism must transit before reaching its permanent state. If conditions during the gametophyte stage fail (drought, predation, competition), the cycle stops -- just as Ranger 2's mission stopped when the parking orbit transit could not be completed.",
+      "worked_example": {
+        "description": "Calculate the orbital parameters and decay time for Ranger 2's parking orbit",
+        "parameters": {
+          "perigee_km": 150,
+          "apogee_km": 242,
+          "inclination_deg": 33.3,
+          "spacecraft_mass_kg": 304,
+          "cross_section_m2": 4.0
+        },
+        "formula": "T = 2*pi*sqrt(a^3/mu); decay rate from atmospheric drag at perigee altitude",
+        "result": "Semi-major axis: 6567 km. Period: 88.3 minutes. At 150 km perigee, atmospheric density ~2e-10 kg/m^3 causes measurable drag. Orbital lifetime: approximately 2-3 days, consistent with Ranger 2's reentry on November 20.",
+        "python": "import numpy as np\n\nmu = 3.986e14  # Earth gravitational parameter (m^3/s^2)\nR_e = 6.371e6  # Earth radius (m)\n\n# Ranger 2 parking orbit\nh_perigee = 150e3  # m\nh_apogee = 242e3   # m\nr_p = R_e + h_perigee\nr_a = R_e + h_apogee\na = (r_p + r_a) / 2  # semi-major axis\ne = (r_a - r_p) / (r_a + r_p)  # eccentricity\nT = 2 * np.pi * np.sqrt(a**3 / mu)  # period\n\nprint('RANGER 2 PARKING ORBIT')\nprint('=' * 50)\nprint(f'Perigee:       {h_perigee/1e3:.0f} km ({r_p/1e3:.0f} km from center)')\nprint(f'Apogee:        {h_apogee/1e3:.0f} km ({r_a/1e3:.0f} km from center)')\nprint(f'Semi-major:    {a/1e3:.0f} km')\nprint(f'Eccentricity:  {e:.4f}')\nprint(f'Period:        {T:.0f} s = {T/60:.1f} min')\nprint(f'Velocity at perigee: {np.sqrt(mu*(2/r_p - 1/a)):.0f} m/s')\nprint(f'Velocity at apogee:  {np.sqrt(mu*(2/r_a - 1/a)):.0f} m/s')\nprint()\nprint(f'This orbit was a temporary staging point.')\nprint(f'The Agena B was supposed to reignite here.')\nprint(f'The gyroscope failed. The door stayed shut.')\nprint(f'Ranger 2 reentered 2 days later.')"
+      }
+    },
+    {
+      "id": "gyroscope-physics",
+      "concept": "Gyroscope physics -- angular momentum and attitude reference",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.28",
+      "description": "A gyroscope is a spinning mass whose angular momentum vector resists changes in orientation. The fundamental equation is L = I*omega, where L is angular momentum, I is the moment of inertia, and omega is the angular velocity. For a spinning rotor, the angular momentum vector points along the spin axis. External torques cause the spin axis to precess (rotate slowly about the torque axis) rather than tilt directly -- a counterintuitive behavior that makes gyroscopes useful as stable attitude references. In the Agena B guidance system, three orthogonal gyroscopes defined an inertial reference frame. Each gyroscope's spin axis maintained its orientation in space regardless of the vehicle's rotation, allowing the guidance computer to measure the vehicle's actual attitude by comparing it to the gyroscope-defined reference. When Ranger 2's roll gyroscope stopped spinning, it lost its angular momentum and therefore its resistance to rotation about the roll axis. The guidance system could no longer determine the vehicle's roll angle, which prevented the precision attitude alignment required for the restart burn.",
+      "resonance": "Sword fern fronds are arranged in a radial pattern around the central crown, creating a rotationally symmetric structure. Each frond's orientation is fixed relative to the crown -- the fern maintains its own 'attitude reference' through the mechanical structure of its rhizome. Unlike a gyroscope, which resists changes through angular momentum, the fern resists changes through structural rigidity and gravitropism (growth response to gravity). But both are systems that maintain orientation: the gyroscope through spin, the fern through growth.",
+      "worked_example": {
+        "description": "Calculate the angular momentum of a typical spacecraft gyroscope and the precession rate under torque",
+        "parameters": {
+          "rotor_mass_kg": 0.5,
+          "rotor_radius_m": 0.03,
+          "spin_rate_rpm": 24000,
+          "applied_torque_Nm": 0.001
+        },
+        "formula": "L = I*omega; precession_rate = torque/L",
+        "result": "Angular momentum: 0.0189 kg*m^2/s. Precession rate under 1 mN*m torque: 0.053 rad/s (3 deg/s). Without spin: zero angular momentum, no resistance to rotation.",
+        "python": "import numpy as np\n\n# Gyroscope parameters (typical 1960s spacecraft gyro)\nm = 0.5        # rotor mass (kg)\nr = 0.03       # rotor radius (m)\nrpm = 24000    # spin rate (rpm)\nomega = rpm * 2 * np.pi / 60  # angular velocity (rad/s)\n\n# Moment of inertia (solid cylinder)\nI = 0.5 * m * r**2\n\n# Angular momentum\nL = I * omega\n\nprint('GYROSCOPE PHYSICS -- AGENA B ATTITUDE REFERENCE')\nprint('=' * 55)\nprint(f'Rotor mass:     {m} kg')\nprint(f'Rotor radius:   {r*100:.0f} cm')\nprint(f'Spin rate:      {rpm} rpm = {omega:.0f} rad/s')\nprint(f'Moment of inertia: {I:.6f} kg*m^2')\nprint(f'Angular momentum:  {L:.4f} kg*m^2/s')\nprint()\n\n# Precession under applied torque\ntau = 0.001  # applied torque (N*m)\nomega_p = tau / L  # precession rate\nprint(f'Applied torque:  {tau*1000:.1f} mN*m')\nprint(f'Precession rate: {omega_p:.4f} rad/s = {np.degrees(omega_p):.2f} deg/s')\nprint()\nprint(f'The gyroscope resists rotation with angular momentum.')\nprint(f'When it stops spinning: L = 0, no resistance.')\nprint(f'The Agena B cannot hold attitude without roll reference.')\nprint(f'The restart cannot proceed without attitude knowledge.')\nprint(f'One gyroscope. One failure. Mission over.')"
+      }
+    },
+    {
+      "id": "three-axis-stabilization",
+      "concept": "Three-axis stabilization -- fixing spacecraft orientation in all three dimensions",
+      "department": "spacecraft-engineering",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.29",
+      "description": "Three-axis stabilization is a spacecraft attitude control technique that fixes the spacecraft's orientation in all three rotational degrees of freedom (roll, pitch, yaw) relative to an external reference (typically the Sun and Earth). Unlike spin stabilization (where the spacecraft rotates continuously, using gyroscopic stiffness for stability), three-axis stabilization allows the spacecraft to point different faces in different directions simultaneously: solar panels toward the Sun, antenna toward Earth, instruments toward the target. Ranger 2 was the first American deep-space spacecraft designed for three-axis stabilization. Its system used Sun sensors (for Sun direction), Earth sensors (for Earth direction), rate gyroscopes (for measuring rotation rates), and cold-gas nitrogen thrusters (for applying corrective torques). The system worked correctly for the 23 hours that Ranger 2 had power in the parking orbit, validating the concept even though the mission failed. This validation was directly applied to the Mariner 2 Venus mission, which used an evolved version of the same three-axis control system.",
+      "resonance": "A sword fern maintains three-axis orientation through its growth pattern: the fronds radiate outward and upward from the crown (positive phototaxis), the roots grow downward (positive gravitropism), and the crown maintains its position relative to gravity. The fern is 'three-axis stabilized' by biological mechanisms -- growth responses to light, gravity, and moisture gradients -- that serve the same function as the spacecraft's sensors and thrusters. Both systems maintain a specific orientation in space to optimize resource capture: the fern orients to maximize light interception and minimize water loss; the spacecraft orients to maximize solar power and maintain communication.",
+      "worked_example": {
+        "description": "Calculate the nitrogen gas consumption for Ranger 2's attitude control in the parking orbit",
+        "parameters": {
+          "shadow_transits": 13,
+          "N2_per_transit_grams": 15,
+          "total_N2_supply_grams": 200,
+          "thruster_specific_impulse_s": 65
+        },
+        "formula": "delta_v_per_pulse = Isp * g * m_propellant / m_spacecraft; total_expenditure = N * N2_per_transit",
+        "result": "Approximately 195 grams of nitrogen consumed in 13 shadow transits over 20 hours, exhausting the ~200 gram supply. Each transit required reorientation as the Sun sensors lost and reacquired the Sun.",
+        "python": "import numpy as np\n\n# Ranger 2 attitude control budget\nm_sc = 304        # spacecraft mass (kg)\nN2_total = 0.200  # total nitrogen supply (kg)\nIsp = 65          # specific impulse of cold-gas thrusters (s)\ng = 9.81          # gravitational acceleration (m/s^2)\n\n# Nitrogen consumption per shadow transit\nN2_per_transit = 0.015  # kg (estimated)\nn_transits = 13         # number of shadow transits in 20 hours\n\ntotal_used = n_transits * N2_per_transit\nremaining = N2_total - total_used\n\nprint('RANGER 2 NITROGEN ATTITUDE CONTROL BUDGET')\nprint('=' * 55)\nprint(f'Spacecraft mass:     {m_sc} kg')\nprint(f'N2 supply:           {N2_total*1000:.0f} g')\nprint(f'N2 per transit:      ~{N2_per_transit*1000:.0f} g')\nprint(f'Shadow transits:     {n_transits} (in ~20 hours)')\nprint(f'Total consumed:      {total_used*1000:.0f} g')\nprint(f'Remaining:           {remaining*1000:.0f} g')\nprint()\nprint(f'The nitrogen was sized for deep space: occasional corrections.')\nprint(f'In the parking orbit: corrections every 88 minutes.')\nprint(f'A deep-space budget spent at low-orbit rates.')\nprint(f'The sword fern in the desert, spending water it cannot replace.')"
+      }
+    },
+    {
+      "id": "serial-system-reliability",
+      "concept": "Serial system reliability -- how one failed component kills an entire chain",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.27",
+      "description": "In a serial system, all components must function for the system to succeed. The system reliability is the product of individual component reliabilities: R_system = R_1 * R_2 * ... * R_n. For n identical components each with reliability p, R_system = p^n. Ranger 2's mission required a serial chain: Atlas first stage (R~0.90), Atlas sustainer (R~0.95), Agena first burn (R~0.93), Agena gyroscopes (R~0.95), Agena restart (R~0.85), spacecraft separation (R~0.98), spacecraft attitude control (R~0.95), spacecraft instruments (R~0.90). The overall chain reliability: approximately 0.90 * 0.95 * 0.93 * 0.95 * 0.85 * 0.98 * 0.95 * 0.90 ≈ 0.50. A coin flip. The Agena gyroscope was the weakest link on this flight, but the entire chain was marginal. This analysis explains why early space missions failed so often: even with 90%+ reliability per component, a chain of 8-10 serial components yields system reliability below 50%.",
+      "resonance": "Sword fern's life cycle is also a serial chain -- spore production, dispersal, germination, gametophyte survival, fertilization, sporophyte establishment -- but the fern compensates with massive parallelism. Each plant produces millions of spores, running millions of serial chains simultaneously. The probability that at least one chain completes is essentially 1.0, even though any individual chain has a success probability near zero. This is the biological solution to serial reliability: you cannot make the chain stronger, so you run it millions of times.",
+      "worked_example": {
+        "description": "Calculate mission reliability for Ranger 2 as a serial chain",
+        "parameters": {
+          "components": ["Atlas Stage 1", "Atlas Sustainer", "Agena 1st Burn", "Agena Gyros", "Agena Restart", "Separation", "Attitude Ctrl", "Instruments"],
+          "reliabilities": [0.90, 0.95, 0.93, 0.95, 0.85, 0.98, 0.95, 0.90]
+        },
+        "formula": "R_system = product(R_i); P_failure = 1 - R_system",
+        "result": "System reliability: ~0.50 (50%). The mission was approximately a coin flip even before launch. The gyroscope failure (R=0.95) was not the weakest link -- the Agena restart (R=0.85) was -- but it failed first on this flight.",
+        "python": "import numpy as np\n\ncomponents = [\n    ('Atlas Stage 1',   0.90),\n    ('Atlas Sustainer',  0.95),\n    ('Agena 1st Burn',  0.93),\n    ('Agena Gyros',     0.95),\n    ('Agena Restart',   0.85),\n    ('Separation',      0.98),\n    ('Attitude Ctrl',   0.95),\n    ('Instruments',     0.90),\n]\n\nprint('RANGER 2: SERIAL SYSTEM RELIABILITY')\nprint('=' * 55)\nprint(f'{\"Component\":<20} {\"Reliability\":>12} {\"Cumulative\":>12}')\nprint('-' * 55)\n\nR_cum = 1.0\nfor name, R in components:\n    R_cum *= R\n    print(f'{name:<20} {R:>12.3f} {R_cum:>12.4f}')\n\nprint('-' * 55)\nprint(f'{\"SYSTEM\"::<20} {\"\":>12} {R_cum:>12.4f}')\nprint(f'\\nMission success probability: {R_cum*100:.1f}%')\nprint(f'Mission failure probability: {(1-R_cum)*100:.1f}%')\nprint(f'\\nEvery component above 85%. System below 50%.')\nprint(f'Serial chains are merciless. One gyroscope stops.')\nprint(f'The entire chain breaks. The mission is over.')"
+      }
+    },
+    {
+      "id": "spore-dispersal-model",
+      "concept": "Spore dispersal -- sword fern reproduction as a broadcast communication system",
+      "department": "ecology",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.28",
+      "description": "Western sword fern (Polystichum munitum) reproduces via spores -- tiny, single-celled propagules approximately 30-40 micrometers in diameter, released from sporangia on the undersurface of fertile fronds. A single mature plant may produce tens of millions of spores per year. Spores are dispersed by wind and follow a dispersal kernel that combines gravitational settling (Stokes' law for small particles) with horizontal transport by wind. The dispersal distance depends on release height (frond tip, 0.5-1.5 m above ground), wind speed (typically 0.1-2 m/s in the forest understory), and settling velocity (approximately 2-5 cm/s for spores this size). Most spores land within 1-10 meters of the parent plant, but the tail of the distribution extends to hundreds of meters or more, especially when spores are lofted above the forest canopy by convective updrafts. Establishment success requires a moist, shaded substrate with adequate nutrients -- conditions that are common in the PNW understory but rare in other environments.",
+      "resonance": "Ranger 2's radio signal propagated from the spacecraft in all directions, following the inverse-square law for power density. The signal's 'dispersal kernel' is the radiation pattern of the omnidirectional antenna, modified by the inverse-square attenuation. Most of the signal energy was 'deposited' far from Earth (spreading into deep space where no receiver exists), with only a tiny fraction reaching the ground stations -- analogous to the tiny fraction of spores that land on suitable substrate. Both systems broadcast widely and succeed rarely. The efficiency of information transfer is low, but the reliability of at least one success is high because of the massive broadcast rate.",
+      "worked_example": {
+        "description": "Model sword fern spore dispersal distance and compare to Ranger 2 signal coverage",
+        "parameters": {
+          "spore_diameter_um": 35,
+          "settling_velocity_ms": 0.03,
+          "wind_speed_ms": 0.5,
+          "release_height_m": 1.0,
+          "spores_per_plant": 10000000
+        },
+        "formula": "dispersal_distance = wind_speed * release_height / settling_velocity; survival = spores * p_germination * p_gametophyte * p_fertilization * p_establishment",
+        "result": "Median dispersal distance: ~17 m. 99th percentile: ~200 m. Establishment success per spore: ~10^-6. Expected successful establishments per plant per year: ~10.",
+        "python": "import numpy as np\n\n# Spore dispersal physics\nv_settle = 0.03    # settling velocity (m/s)\nv_wind = 0.5       # mean understory wind speed (m/s)\nh_release = 1.0    # release height (m)\n\n# Time to reach ground\nt_fall = h_release / v_settle\n\n# Horizontal distance during fall\nd_median = v_wind * t_fall\n\n# Dispersal kernel (exponential model)\nn_spores = 10_000_000  # per plant per year\n\nprint('SWORD FERN SPORE DISPERSAL MODEL')\nprint('=' * 55)\nprint(f'Spore settling velocity: {v_settle*100:.1f} cm/s')\nprint(f'Wind speed (understory): {v_wind} m/s')\nprint(f'Release height:          {h_release} m')\nprint(f'Fall time:               {t_fall:.0f} s')\nprint(f'Median dispersal:        {d_median:.0f} m')\nprint(f'Spores per plant/year:   {n_spores:,}')\nprint()\n\n# Establishment success chain\np_land_suitable = 0.01     # 1% land on suitable substrate\np_germinate = 0.1          # 10% of those germinate\np_gametophyte = 0.01       # 1% survive gametophyte stage\np_fertilize = 0.1          # 10% achieve fertilization\np_establish = 0.1          # 10% establish as sporophyte\n\np_total = p_land_suitable * p_germinate * p_gametophyte * p_fertilize * p_establish\nn_success = n_spores * p_total\n\nprint(f'Establishment probability per spore: {p_total:.2e}')\nprint(f'Expected successes per plant/year:   {n_success:.0f}')\nprint()\nprint(f'Ten million spores. Ten new plants.')\nprint(f'Success rate: 0.0001%.')\nprint(f'But ten plants per year is enough.')\nprint(f'The species dominates the PNW understory.')\nprint(f'Massive parallelism compensates for serial fragility.')"
+      }
+    },
+    {
+      "id": "atmospheric-reentry",
+      "concept": "Atmospheric reentry -- what happens when a spacecraft's orbit decays",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 2,
+      "tspb_section": "2.27",
+      "description": "When a spacecraft in low Earth orbit loses altitude due to atmospheric drag, it eventually reenters the dense atmosphere and is destroyed by aerodynamic heating. The process is governed by the conversion of kinetic energy to thermal energy: at orbital velocity (~7.8 km/s), the kinetic energy of a 304 kg object is approximately 9.3 GJ. During reentry, this energy is deposited into the surrounding air and the spacecraft surface as heat. Surface temperatures exceed 2,000°C -- far above the melting point of aluminum (660°C) and the structural limits of any unshielded spacecraft. Ranger 2 reentered on November 20, 1961, approximately 48 hours after launch. Without a heat shield, the spacecraft disintegrated between 80 and 60 km altitude, converting its mass to incandescent plasma. No debris reached the surface.",
+      "resonance": "A sword fern frond that falls from the plant in autumn does not persist indefinitely on the forest floor. It decomposes -- consumed by fungi, bacteria, and invertebrates -- converting its organic matter back to soil nutrients over a period of months to years. The frond's 'reentry' into the soil ecosystem is the biological analog of the spacecraft's reentry into the atmosphere: a return to the system from which it originated, with the conversion of structured matter (frond/spacecraft) into distributed energy and material (soil nutrients/atmospheric plasma). The difference is that the frond's reentry is productive -- the nutrients feed the next generation. Ranger 2's reentry produced nothing but a streak of light.",
+      "worked_example": {
+        "description": "Calculate the kinetic energy and heating during Ranger 2's atmospheric reentry",
+        "parameters": {
+          "mass_kg": 304,
+          "velocity_ms": 7800,
+          "altitude_of_destruction_km": 70
+        },
+        "formula": "KE = 0.5 * m * v^2; heat_flux = 0.5 * rho * v^3 * Cd * A",
+        "result": "Kinetic energy: 9.25 GJ (equivalent to 2.2 tonnes of TNT). At 70 km altitude, surface temperature exceeds the melting point of aluminum within seconds of encountering significant atmosphere.",
+        "python": "import numpy as np\n\nm = 304           # spacecraft mass (kg)\nv = 7800          # orbital velocity (m/s)\n\nKE = 0.5 * m * v**2\n\nprint('RANGER 2 ATMOSPHERIC REENTRY')\nprint('=' * 50)\nprint(f'Spacecraft mass:  {m} kg')\nprint(f'Orbital velocity: {v} m/s = {v/1e3:.1f} km/s')\nprint(f'Kinetic energy:   {KE:.3e} J = {KE/1e9:.2f} GJ')\nprint(f'TNT equivalent:   {KE/4.184e9:.1f} tonnes')\nprint()\nprint(f'Without a heat shield, aluminum melts at 660°C.')\nprint(f'Reentry heating exceeds 2000°C.')\nprint(f'Ranger 2 became plasma at ~70 km altitude.')\nprint(f'November 20, 1961. Two days after launch.')\nprint(f'304 kg of instruments, solar panels, and ambition,')\nprint(f'redistributed as ionized metal in the upper atmosphere.')"
+      }
+    }
+  ]
+}
