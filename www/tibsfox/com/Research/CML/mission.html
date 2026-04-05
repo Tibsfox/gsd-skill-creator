@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; CMU ML in Production</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cml">
+  <header>
+    <h1>CMU ML in Production</h1>
+    <div class="subtitle">Requirements Engineering &middot; Model Quality &middot; Teams &middot; Behavioral Testing &middot; Deployment &middot; Data Quality</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-requirements-goals-decomposition">Requirements</a>
+      <a href="page.html?doc=02-model-quality-measurement">Model Quality</a>
+      <a href="page.html?doc=03-teams-conflict-premortems">Teams</a>
+      <a href="page.html?doc=04-behavioral-model-testing">Testing</a>
+      <a href="page.html?doc=05-pipeline-testing-ci">Pipelines</a>
+      <a href="page.html?doc=06-deployment-architecture">Deployment</a>
+      <a href="page.html?doc=07-data-quality">Data Quality</a>
+      <a href="page.html?doc=08-synthesis-engineering-ml-systems">Synthesis</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The hardest single part of building a software system is deciding precisely what to build.
+      &mdash; Fred Brooks, The Mythical Man-Month (1975). This complete 16-lecture course from
+      Carnegie Mellon covers the entire engineering discipline between &ldquo;we trained a model&rdquo;
+      and &ldquo;it works in production.&rdquo;
+    </blockquote>
+
+    <h3>Mission Objectives</h3>
+    <ol>
+      <li><strong>Complete course coverage</strong> &mdash; all 16 lectures of CMU 17-214/17-614 (Spring 2025), from requirements through fairness and operations</li>
+      <li><strong>Extract the engineering discipline</strong> that distinguishes ML research from ML production: requirements, testing, deployment, monitoring, data quality</li>
+      <li><strong>Map pedagogical patterns</strong> &mdash; how Kastner and Le Goues teach complex engineering concepts through case studies, breakouts, and deliberate provocation</li>
+      <li><strong>Connect to our architecture</strong> &mdash; Gastown chipset, GSD workflow, and the Amiga Principle as production ML infrastructure</li>
+    </ol>
+
+    <h3>Course Structure</h3>
+    <table>
+      <thead><tr><th>Lecture</th><th>Topic</th><th>Instructor</th><th>Module</th></tr></thead>
+      <tbody>
+        <tr><td>L3</td><td>Goals &amp; Requirements</td><td>Le Goues</td><td>M1</td></tr>
+        <tr><td>L5</td><td>Model Quality</td><td>Le Goues / Kastner</td><td>M2</td></tr>
+        <tr><td>L6</td><td>Teams</td><td>Kastner</td><td>M3</td></tr>
+        <tr><td>L7</td><td>Behavioral Testing</td><td>Le Goues</td><td>M4</td></tr>
+        <tr><td>L8</td><td>Pipeline Testing &amp; CI</td><td>Kastner</td><td>M5</td></tr>
+        <tr><td>L9</td><td>Deployment Architecture</td><td>Kastner</td><td>M6</td></tr>
+        <tr><td>L11</td><td>Data Quality</td><td>Kastner</td><td>M7</td></tr>
+        <tr><td>L12-16</td><td>Monitoring, Fairness, Ops</td><td>Both</td><td>M8 (prior analysis)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Case Studies</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Target Canada ($5.4B Failure)</h3>
+        <p>75,000 products entered by inexperienced staff. ~30% accuracy. Wrong dimensions meant items didn&rsquo;t fit shipping containers. 133 stores closed. Stock price rose on announcement.</p>
+      </div>
+      <div class="card">
+        <h3>The Legal Chatbot</h3>
+        <p>CTO explicitly wanted 80% accuracy. A perfect chatbot would cannibalize lead generation. Data scientists optimizing accuracy were working against the business objective.</p>
+      </div>
+      <div class="card">
+        <h3>Booking.com 150-Model Study</h3>
+        <p>Zero correlation between offline accuracy and online conversion rates across 150 deployed models. Hypothesized uncanny valley: too-accurate recommendations felt creepy.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>CMU ML in Production &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
