@@ -2,7 +2,14 @@
   "mcpServers": {
     "unison": {
       "command": "/usr/bin/ucm",
-      "args": ["mcp"]
+      "args": ["mcp"],
+      "expectedTools": [
+        "ucm_find",
+        "ucm_list",
+        "ucm_view",
+        "ucm_type_lookup",
+        "ucm_docs"
+      ]
     },
     "gsd-math-coprocessor": {
       "command": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/math-coprocessor/.venv/bin/python",
@@ -10,7 +17,28 @@
       "cwd": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator",
       "env": {
         "MATH_COPROCESSOR_CONFIG": "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/data/chipset/math-coprocessor.yaml"
-      }
+      },
+      "expectedTools": [
+        "algebrus_det",
+        "algebrus_eigen",
+        "algebrus_gemm",
+        "algebrus_solve",
+        "algebrus_svd",
+        "fourier_fft",
+        "fourier_ifft",
+        "fourier_spectrum",
+        "math_capabilities",
+        "math_streams",
+        "math_vram",
+        "statos_describe",
+        "statos_monte_carlo",
+        "statos_regression",
+        "symbex_eval",
+        "symbex_verify",
+        "vectora_batch_eval",
+        "vectora_gradient",
+        "vectora_transform"
+      ]
     }
   }
 }
