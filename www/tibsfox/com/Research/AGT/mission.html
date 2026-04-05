@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Agentic Infrastructure &amp; Systems</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Infrastructure &amp; Systems</h1>
+    <div class="subtitle">MCP Orchestration &middot; Memory Consistency &middot; Work Contracts &middot; System Design &middot; IoT Security &middot; USB Stacks</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-mcp-orchestration-registry">MCP Orchestration</a>
+      <a href="page.html?doc=02-memory-consistency-models">Memory Consistency</a>
+      <a href="page.html?doc=03-work-contracts-concurrency">Work Contracts</a>
+      <a href="page.html?doc=04-compiler-in-the-loop-agentic">Compiler-in-Loop</a>
+      <a href="page.html?doc=05-iot-security-usb-stacks">IoT &amp; USB</a>
+      <a href="page.html?doc=06-system-design-reliability">System Design</a>
+      <a href="page.html?doc=07-synthesis-ordering-guarantees">Synthesis</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The isomorphism between MCP orchestration and memory consistency models reveals a deep
+      principle: ordering guarantees are expensive, measurable, and often avoidable without
+      sacrificing actual safety. Sequential consistency costs 55x more than acquire-release
+      for the same correctness. Choose the minimum necessary ordering.
+    </blockquote>
+
+    <h3>Mission Objectives</h3>
+    <ol>
+      <li><strong>Map the agentic infrastructure stack</strong> from silicon (memory fences, cache coherence) through systems (work contracts, USB protocol) to orchestration (MCP registry, agentic patterns)</li>
+      <li><strong>Identify the ordering isomorphism</strong> &mdash; sequential consistency = convoy sync, acquire-release = GUPP handoffs, relaxed = nudge-sync</li>
+      <li><strong>Extract security architecture</strong> from ARM&rsquo;s billion-device IoT perspective: plan for failure, security is not a cost option, trust boundaries are synchronization points</li>
+      <li><strong>Connect to our systems</strong> &mdash; Gastown chipset synchronization audit, .mcp.json configuration evolution, HI-7/HI-10 harness integrity patterns</li>
+    </ol>
+
+    <h3>Source Talks</h3>
+    <table>
+      <thead><tr><th>Talk</th><th>Speaker</th><th>Series</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td>MCP Orchestration (NimbleBrain)</td><td>Matt</td><td>Agentic AI Foundation</td><td>~28 min</td></tr>
+        <tr><td>GitHub MCP Registry + Obot</td><td>Padilla / McMillan</td><td>Agentic AI Foundation</td><td>~25 min</td></tr>
+        <tr><td>Svelte MCP Auto-Fixer</td><td>Paulo Bruti</td><td>Agentic AI Foundation</td><td>~39 min</td></tr>
+        <tr><td>Beyond Sequential Consistency</td><td>Chris Frretz</td><td>CppCon 2025</td><td>~68 min</td></tr>
+        <tr><td>Work Contracts in Action</td><td>Michael Maniscalco</td><td>CppCon 2025</td><td>~56 min</td></tr>
+        <tr><td>USB Stack with Modern C++</td><td>Maline Schneider</td><td>CppCon 2025</td><td>~62 min</td></tr>
+        <tr><td>Move Semantics</td><td>Dan Saks</td><td>CppCon 2025</td><td>~63 min</td></tr>
+        <tr><td>Static Reflection Type Traits</td><td>Tech Lead, Morphec</td><td>CppCon 2025</td><td>~55 min</td></tr>
+        <tr><td>IoT Security: The Ugly Truth</td><td>Mike Muller</td><td>IoT Security Foundation</td><td>~36 min</td></tr>
+        <tr><td>System Design for Data Pros</td><td>Amit</td><td>DataVerse Hub</td><td>~67 min</td></tr>
+        <tr><td>Why Systems Crash</td><td>Ama Siddiki</td><td>DataVerse Hub</td><td>~48 min</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Performance Progression (Memory Consistency)</h3>
+    <table>
+      <thead><tr><th>Optimization</th><th>Records/sec</th><th>Cycles/record</th><th>Improvement</th></tr></thead>
+      <tbody>
+        <tr><td>Naive (seq_cst, packed)</td><td>~10M</td><td>~260</td><td>Baseline</td></tr>
+        <tr><td>Acquire-release (packed)</td><td>~175M</td><td>~15</td><td>17x</td></tr>
+        <tr><td>Acquire-release (aligned)</td><td>~210M</td><td>~12</td><td>21x</td></tr>
+        <tr><td>Cached index snapshots</td><td>~550M+</td><td>~4&ndash;5</td><td>55x+</td></tr>
+      </tbody>
+    </table>
+
+    <h3>DIY Sessions</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Session 1: MCP Orchestration Pipeline</h3>
+        <p>Build a multi-server MCP orchestration combining a public API with a local SQLite database. Package as MCPB bundle. Write a prompt-based playbook. Add LLM evaluation step.</p>
+      </div>
+      <div class="card">
+        <h3>Session 2: Measure the Sequential Consistency Tax</h3>
+        <p>Implement naive vs. optimized ring buffers in C++. Benchmark at 8-byte to 1KB record sizes. Compare emitted assembly on Compiler Explorer. Quantify the ordering cost on your hardware.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Agentic Infrastructure &amp; Systems &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
