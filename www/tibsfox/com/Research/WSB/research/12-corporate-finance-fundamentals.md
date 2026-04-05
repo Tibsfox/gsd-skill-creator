@@ -1,7 +1,7 @@
 # Corporate Finance Fundamentals
 
 > **Domain:** Corporate Finance & Valuation
-> **Module:** 9 -- NPV, Cost of Capital, Valuation Drivers, DCF Analysis
+> **Module:** 12 -- NPV, Cost of Capital, Valuation Drivers, DCF Analysis
 > **Through-line:** *Every company's value reduces to three numbers: how fast it grows, how much it keeps, and how efficiently it converts capital into revenue. The discipline of corporate finance exists to make these numbers rigorous.*
 > **Source:** Aswath Damodaran, NYU Stern School of Business (5 lectures); Full Financial Accounting Course
 > **Rosetta Clusters:** Business (primary), Science, AI & Computation

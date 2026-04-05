@@ -1,7 +1,7 @@
 # Accounting and Financial Statements
 
 > **Domain:** Financial Accounting & Bookkeeping
-> **Module:** 10 -- The Language of Business, Double-Entry Bookkeeping, Financial Statement Preparation
+> **Module:** 13 -- The Language of Business, Double-Entry Bookkeeping, Financial Statement Preparation
 > **Through-line:** *Accounting is not math — it's language. The six words (assets, liabilities, equity, revenue, expenses, dividends) form a grammar that lets you read any business like a book. Master the grammar, and the numbers speak.*
 > **Source:** Full Financial Accounting Course (~10 hours), CPA Small Business Accounting, Crash Course Business Entrepreneurship
 > **Rosetta Clusters:** Business (primary), Infrastructure, Creative
