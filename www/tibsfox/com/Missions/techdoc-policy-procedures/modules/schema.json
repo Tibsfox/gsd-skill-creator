@@ -1,0 +1,69 @@
+{
+  "mission": "Technical Documentation for Policy & Procedures",
+  "version": "1.0",
+  "date": "2026-04-05",
+  "taxonomy_schema": {
+    "document_types": {
+      "policy": {"level": 1, "binding": true, "origin": "NIST 800-53, ISO 27001", "voice": "third person", "example": "All production systems must be patched within 30 days of a critical CVE"},
+      "standard": {"level": 2, "binding": true, "origin": "NIST, ISACA", "voice": "third person", "example": "Passwords must be minimum 12 characters, rotated every 90 days"},
+      "procedure": {"level": 3, "binding": true, "origin": "NIST 800-100", "voice": "second person", "example": "1. Open change ticket. 2. Schedule maintenance window..."},
+      "guideline": {"level": 4, "binding": false, "origin": "ISO 27002", "voice": "second person", "example": "Consider using ephemeral credentials for CI/CD pipelines"},
+      "control": {"level": "cross-cutting", "binding": true, "origin": "ISO 27005, NIST", "voice": "third person", "example": "MFA implementation, firewall rule, access control list"}
+    },
+    "document_fields": ["id", "title", "type", "owner", "lifecycle_state", "review_cadence", "audience", "framework_refs", "scope", "purpose", "body_sections", "approval_block", "version", "last_reviewed", "next_review"],
+    "lifecycle_states": ["Draft", "Review", "Approved", "Published", "Under Review", "Retired"],
+    "lifecycle_gates": {
+      "Draft_to_Review": "Owner submits for review",
+      "Review_to_Approved": "SME + compliance sign-off",
+      "Approved_to_Published": "Publication date set",
+      "Published_to_UnderReview": "Scheduled review cycle or change event",
+      "UnderReview_to_Published": "Update approved",
+      "Published_to_Retired": "Archive with timestamp"
+    }
+  },
+  "audience_personas": {
+    "senior_engineer": {"goal": "Understand design rationale", "reading_mode": "Scan + deep read", "content_needs": "Architecture decisions, constraints, edge cases"},
+    "new_hire": {"goal": "Get operational quickly", "reading_mode": "Step-by-step", "content_needs": "SOPs, runbooks, setup guides, glossary"},
+    "compliance_auditor": {"goal": "Verify controls documented", "reading_mode": "Search by control ID", "content_needs": "Policy hierarchy, control mappings, evidence artifacts"},
+    "operations_staff": {"goal": "Execute repeatable tasks", "reading_mode": "Follow procedure", "content_needs": "Step-by-step procedures, checklists, decision trees"},
+    "product_manager": {"goal": "Understand system capabilities", "reading_mode": "Overview + summary", "content_needs": "High-level summaries, capability maps"}
+  },
+  "document_templates": {
+    "policy": {"sections": ["Purpose", "Scope", "Policy Statement", "Roles & Responsibilities", "Compliance", "Exceptions", "Related Documents", "Revision History"], "approval": "requires governance body sign-off"},
+    "procedure": {"sections": ["Purpose", "Scope", "Prerequisites", "Steps", "Expected Results", "Troubleshooting", "Related Documents", "Revision History"], "approval": "requires SME + owner review"},
+    "sop": {"sections": ["Purpose", "Scope", "Definitions", "Responsibilities", "Procedure Steps", "Quality Checks", "Records", "Revision History"], "approval": "requires operations manager sign-off"}
+  },
+  "source_index": {
+    "government": [
+      {"id": "nist-800-53", "ref": "NIST SP 800-53 R5, Security and Privacy Controls for Information Systems and Organizations, 2020"},
+      {"id": "nist-800-100", "ref": "NIST SP 800-100, Information Security Handbook, 2006"},
+      {"id": "nist-csf-2", "ref": "NIST Cybersecurity Framework 2.0, 2024"},
+      {"id": "nist-800-171", "ref": "NIST SP 800-171 R2, Protecting CUI, 2021"},
+      {"id": "uk-home-office", "ref": "UK Home Office Engineering, Write Effective Documentation, 2024"},
+      {"id": "usu-ewc", "ref": "Utah State University Engineering Writing Center, Technical Writing Standards, 2024"}
+    ],
+    "standards": [
+      {"id": "oasis-dita", "ref": "OASIS DITA v1.3, Darwin Information Typing Architecture, 2015"},
+      {"id": "iso-27001", "ref": "ISO/IEC 27001:2022, Information Security Management Systems"},
+      {"id": "iso-27002", "ref": "ISO/IEC 27002:2022, Information Security Controls"},
+      {"id": "scf", "ref": "Secure Controls Framework, Policy vs Standard vs Procedure"}
+    ],
+    "research": [
+      {"id": "dora-2025", "ref": "Google Cloud DORA 2025, State of AI-Assisted Software Development"},
+      {"id": "stackoverflow-2025", "ref": "Stack Overflow 2025 Developer Survey"},
+      {"id": "altexsoft-2024", "ref": "AltexSoft, Technical Documentation in Software Development, 2024"},
+      {"id": "paligo-2025", "ref": "Paligo, The Essential Guide to Effective Technical Documentation, Oct 2025"},
+      {"id": "overcast-2026", "ref": "Overcast Blog, AI-Driven Documentation in 2026, Nov 2025"},
+      {"id": "kong-2025", "ref": "Kong Inc., What is Docs as Code?, April 2025"},
+      {"id": "ibm-2026", "ref": "IBM Think, AI Code Documentation: Benefits and Top Tips, March 2026"},
+      {"id": "secureframe-2025", "ref": "Secureframe, NIST 800-53 Required Policies and Procedures, 2025"},
+      {"id": "instinctools-2024", "ref": "Instinctools, DITA XML: Exploring the Darwin Information Typing Architecture Standard, May 2024"}
+    ]
+  },
+  "safety_rules": {
+    "SC-01": "No PII in documentation examples. Use synthetic data or named placeholder conventions (Alice Smith, 555-0100).",
+    "SC-02": "Security-sensitive content (incident response, vulnerability handling) must not appear in public-facing deliverables.",
+    "SC-03": "Every statistic must have a traceable citation to government agency, peer-reviewed source, or professional organization.",
+    "SC-04": "AI-generated sections must be marked [PENDING REVIEW] until human review gate passes."
+  }
+}
