@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.30 — Ranger 5 + Stair-Step Moss | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --bark-dark: #2A1A0E;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --success-dark: #1A6A1A;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+    --fail: #C43030;
+    --fail-light: #FF5050;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-floor);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(168,216,168,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 18% 75%, rgba(10,46,10,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 80%, rgba(45,106,45,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--forest-floor) 0%, #1A0D0D 25%, #2E1A1A 50%, #3A2020 75%, #4A2020 100%);
+    border-bottom: 3px solid var(--fail);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(168,216,168,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,216,168,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(196,48,48,0.15);
+    border: 1px solid var(--fail);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--fail-light);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+
+  .status-fail { background: rgba(196,48,48,0.3); border: 1px solid var(--fail); color: var(--fail-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+  .content { min-width: 0; }
+
+  .card { background: rgba(10,46,10,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--light-bright); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card { border-color: var(--success); background: rgba(45,106,45,0.06); }
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(168,216,168,0.12); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num { background: var(--success); color: var(--forest-floor); font-weight: 700; font-size: 0.8rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--light-bright); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card { background: rgba(10,46,10,0.5); border: 1px solid var(--canopy-emerald); border-radius: 8px; padding: 1.5rem; }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--light-canopy); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--light-canopy); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(13,26,13,0.6); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--light-bright); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .dedication-card { background: rgba(212,168,48,0.08); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; }
+  .dedication-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.75rem; }
+
+  .data-links { background: rgba(11,61,145,0.15); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card { background: rgba(26,26,58,0.4); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .tracks-card h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .track-item { display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid rgba(11,61,145,0.15); font-size: 0.85rem; }
+  .track-item:last-child { border-bottom: none; }
+  .track-num { background: rgba(11,61,145,0.3); color: #7EB8DA; font-weight: 700; font-size: 0.7rem; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .nav-card { background: rgba(10,46,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--light-canopy); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-canopy); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.30</span>
+      <span>NASA Mission Series</span>
+      <span class="status-fail">FAILED</span>
+    </div>
+    <h1>Ranger 5 &mdash; Lights Out</h1>
+    <p class="subtitle">Solar panels died at seventy-five minutes, the Moon waited at seven hundred twenty-five kilometers</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> October 18, 1962</span>
+      <span><span class="label">Program:</span> Ranger (NASA/JPL)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Atlas-Agena B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On October 18, 1962, Ranger 5 launched flawlessly on an Atlas-Agena B from Cape Canaveral. The last of the Block II Rangers, it carried a TV camera, gamma-ray spectrometer, radar altimeter, and a balsa-wood-encased seismometer capsule designed to survive lunar impact. For seventy-five minutes, everything worked. Then a short circuit in the power-switching logic severed the solar panels from the spacecraft bus. The backup battery lasted 8 hours and 44 minutes. Four hours of gamma-ray background data were collected before the spectrometer died. The midcourse correction was never executed. Ranger 5 sailed past the Moon at 725 km &mdash; close enough for the cameras to have resolved 500-meter features &mdash; and entered heliocentric orbit, where it remains. The sixth consecutive Ranger failure. Congress investigated. JPL was reorganized. The Block II design was abandoned.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 342.5 kg (Block II Ranger, identical to Rangers 3 and 4)</li>
+        <li><strong>Instruments:</strong> TV camera, gamma-ray spectrometer, radar altimeter, seismometer capsule with retrorocket and balsa impact limiter</li>
+        <li><strong>Power:</strong> 8,680 solar cells on two wing panels (135 W nominal), silver-zinc backup battery (~1,000 Wh)</li>
+        <li><strong>Communications:</strong> Two 960 MHz transmitters (3 W and 50 mW), high-gain antenna, omnidirectional antenna</li>
+        <li><strong>Span:</strong> 5.2 m across deployed solar panels</li>
+        <li><strong>Builder:</strong> Jet Propulsion Laboratory</li>
+        <li><strong>Launch vehicle:</strong> Atlas-Agena B (performed flawlessly)</li>
+        <li><strong>Failure:</strong> Short circuit in power-switching logic at T+75 minutes; battery depleted at T+8h44m; 725 km lunar miss</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Failure</h2>
+      <p><strong>T+0 (~16:59 UTC):</strong> Atlas-Agena B lifts off from LC-12, Cape Canaveral. The launch vehicle performs flawlessly through boost, staging, parking orbit, coast, and translunar injection.</p>
+      <p><strong>T+0 to T+75 min:</strong> Ranger 5 separates from the Agena. Solar panels deploy. Sun and Earth acquisition proceeds normally. Telemetry is nominal. All instruments check out. The spacecraft is alive and on course for lunar impact.</p>
+      <p><strong>T+75 min:</strong> A short circuit develops in the power-switching logic during cruise attitude acquisition. The solar panel output is severed from the spacecraft bus. Isolation diodes prevent the battery from draining through the fault. The spacecraft transfers to battery power. The 8,680 solar cells continue generating 135 W of electricity with nowhere to send it.</p>
+      <p><strong>T+75 min to T+8h44m:</strong> The silver-zinc battery sustains all spacecraft systems at 110 W draw. The gamma-ray spectrometer collects approximately four hours of cosmic-ray background data. Ground controllers attempt a midcourse correction &mdash; the power-switching malfunction prevents command execution. The battery voltage drops steadily.</p>
+      <p><strong>T+8h44m:</strong> Battery voltage falls below the minimum operating threshold. All systems die. Ranger 5 goes dark. The spacecraft becomes 342.5 kg of inert hardware on a ballistic trajectory.</p>
+      <p><strong>T+64 hours:</strong> Ranger 5 passes the Moon at approximately 725 km. The TV camera, gamma-ray spectrometer, radar altimeter, and seismometer capsule are all intact and unpowered. The Moon&rsquo;s gravity bends the trajectory slightly. Ranger 5 continues into heliocentric orbit.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Battery depletion + trajectory drift simulator &mdash; watch Ranger 5&rsquo;s power drain in real time alongside the unpowered trajectory sailing past the Moon at 725 km</li>
+        <li><strong>Minecraft:</strong> The 725-km flyby at 1:10,000 scale &mdash; Moon surface in gray concrete, single gold block drifting 72.5 blocks above it</li>
+        <li><strong>Blender:</strong> &ldquo;Lights Out&rdquo; animation &mdash; spacecraft goes dark system by system, then drifts past the Moon in silence (Cycles, 120 sec)</li>
+        <li><strong>GLSL:</strong> 4-mode screensaver &mdash; stair-step moss growth, battery depletion, 725-km flyby, rough-winged swallow flight</li>
+        <li><strong>Arduino:</strong> Power failure LED display ($15) &mdash; ascending LEDs that go dark partway up, leaving only a blinking red beacon</li>
+        <li><strong>Godot 4:</strong> Power budget manager &mdash; triage spacecraft systems to extend battery life after solar panel failure</li>
+        <li><strong>GMAT:</strong> Ranger 5 trajectory reconstruction &mdash; uncorrected flyby at 725 km vs. the corrected impact trajectory that would have succeeded</li>
+        <li><strong>Radio:</strong> AM detector stage ($12) &mdash; germanium diode envelope detector, the next stage in the radio receiver series</li>
+        <li><strong>Screensaver:</strong> Moss growth &rarr; battery drain &rarr; 725-km flyby &rarr; swallow silhouette (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Battery life calculator &mdash; compute how long Ranger 5&rsquo;s battery lasts at various power draw levels. Implement load shedding: turn off systems one by one and see how battery life extends. At what draw rate does the battery last to the Moon? (30 min, Python or pencil)</li>
+        <li><strong>TRY 2:</strong> Moss rehydration timer &mdash; collect dry moss, time the rehydration in a dish of water, observe the color change and unfurling of fronds. The biological equivalent of power restoration (30 min, hands-on)</li>
+        <li><strong>TRY 3:</strong> Failure mode taxonomy &mdash; classify all six Ranger failures by subsystem and type. Identify the pattern: no subsystem fails twice. Conclude: the root cause is organizational (45 min, Python + critical thinking)</li>
+        <li><strong>DIY 1:</strong> Solar panel power monitor ($25) &mdash; Arduino + INA219 sensor + small solar panel + OLED display. Watch power generation rise and fall with sunlight. Shade the panel to simulate Ranger 5&rsquo;s failure</li>
+        <li><strong>DIY 2:</strong> Moss terrarium with humidity monitor ($20) &mdash; sealed jar + moss + BME280 sensor. Monitor the moss&rsquo;s humidity-dependent activity cycle</li>
+        <li><strong>DIY 3:</strong> AM detector radio stage ($12) &mdash; 1N34A germanium diode envelope detector for the radio receiver series</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><a href="artifacts/stories/the-steps.html" style="color: var(--light-bright);">Story: &ldquo;The Steps&rdquo;</a> <a href="artifacts/stories/the-steps.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a> &mdash; A stair-step moss colony narrates fifty years of growth, one step per year, until drought silences the narrative</li>
+        <li><a href="artifacts/audio/power-down-sequence.dsp" style="color: #7EB8DA;">Audio: Power Down Sequence</a> &mdash; FAUST synth of instruments dropping out one by one until only the 50 mW beacon pulse remains (90 seconds)</li>
+        <li><a href="artifacts/audio/rough-winged-buzz.dsp" style="color: #7EB8DA;">Audio: Rough-Winged Buzz</a> &mdash; FAUST generative (low buzzy trill, solitary, over river ambience)</li>
+        <li><a href="artifacts/circuits/power-failure-leds.md" style="color: var(--light-bright);">Circuit: Power Failure LEDs</a> &mdash; Ascending LEDs that go dark partway up, red beacon blinks ($15)</li>
+        <li><a href="artifacts/circuits/radio-am-detector.md" style="color: var(--light-bright);">Circuit: AM Detector</a> &mdash; Germanium diode envelope detector, radio series v1.30 ($12)</li>
+        <li><a href="artifacts/screensaver/ranger5-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Moss growth, battery drain, 725-km flyby, swallow silhouette</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Lights out:</span> Stair-step moss goes dormant when the atmosphere dries &mdash; alive but metabolically inert, waiting for rain. Ranger 5 went dark when the battery died &mdash; structurally intact but functionally dead, waiting for power that will never come. Both organisms experience the same event: the power supply fails. The moss can recover. The spacecraft cannot. The difference is not in the failure but in the recovery architecture.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">725 kilometers of near-miss:</span> Ranger 5 passed the Moon at 725 km &mdash; 0.19% of the total Earth-Moon distance. The cameras were intact. The spectrometer was functional. A 3.5 m/s correction would have converted the flyby into an impact. The spacecraft had the capability. It did not have the power. Stair-step moss grows 2-3 cm per year, always advancing, always decaying at the base &mdash; perpetually arriving, never reaching a destination. Both are defined by proximity without contact.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">No roots, no backup:</span> Stair-step moss has no roots, no vascular system, no mechanism for drawing water from the soil. Its only water source is the atmosphere. When the atmosphere fails, the moss has no backup. Ranger 5&rsquo;s solar panels were the spacecraft&rsquo;s only sustainable power source. The battery was a temporary backup, not a replacement. Both systems are single-path architectures with no alternative supply chain. The failure mode is identical: lose the primary source, lose everything.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">The staircase of annual failures:</span> Stair-step moss builds a visible staircase of annual growth increments &mdash; each step a year, each year recorded in the morphology. The Ranger program built a staircase of annual failures: Ranger 1 (August 1961), Ranger 2 (November 1961), Ranger 3 (January 1962), Ranger 4 (April 1962), Ranger 5 (October 1962). Each failure is a step. Each step records what went wrong. The staircase continues upward &mdash; Rangers 7, 8, and 9 are the steps that finally reach the canopy.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">The solitary and the overlooked:</span> The Northern Rough-winged Swallow is the least colorful, least colonial, least remarked-upon swallow in North America. It nests alone in whatever hole it finds. Ranger 5 is the least remembered Ranger failure &mdash; no dramatic explosion (Pioneer 0), no landmark first (Ranger 4&rsquo;s first US lunar impact), no spectacular success (Ranger 7&rsquo;s photographs). A quiet power failure and a silent drift past the Moon. The rough-winged swallow of the space program.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Six-Mission Reckoning</h2>
+      <p>Ranger 5 was the sixth consecutive Ranger failure. The congressional investigation that followed was the space program&rsquo;s first institutional crisis. Representative Karth&rsquo;s subcommittee found that JPL&rsquo;s quality assurance was inadequate, its testing protocols were insufficient, and its management structure lacked the checks and balances needed for reliable spacecraft production. The Block II design was abandoned. The seismometer capsule, the retrorocket, and the complex deployment sequences were eliminated. In their place: cameras. Just cameras. Six of them, on a simplified bus, with redundant power paths and improved testing.</p>
+      <p>Ranger 6 launched in January 1964 and hit the Moon perfectly &mdash; but the cameras failed to activate (yet another failure mode, the seventh). Then Ranger 7 launched in July 1964 and returned 4,308 photographs of the lunar surface in the final 17 minutes before impact. The images were a thousand times more detailed than anything visible from Earth. The program that had failed six times in a row delivered one of the most important datasets in the history of lunar science. The staircase continued. The canopy was reached.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.29/index.html">&larr; v1.29 Ranger 4</a>
+      <a href="../1.33/index.html">v1.33 Ranger 6 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Hylocomium splendens (Stair-step moss)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">2-3cm</div>
+          <div class="stat-label">Annual Growth</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10-15cm</div>
+          <div class="stat-label">Colony Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">&lt;10%</div>
+          <div class="stat-label">Survival Water</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The dominant floor moss of PNW old-growth conifer forests. No roots, no vascular tissue &mdash; absorbs water and nutrients directly from the atmosphere. Each year&rsquo;s growth forms a distinct &ldquo;step&rdquo; layered on the previous year, creating a miniature staircase of annual increments. Survives complete desiccation through molecular-level protection: trehalose sugars, LEA proteins, and antioxidant enzymes. Resumes photosynthesis within minutes of rewetting. The organism that goes dormant when the power runs out &mdash; and comes back when it rains.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Stelgidopteryx serripennis (Northern Rough-winged Swallow)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 29. The solitary swallow. Nests alone in whatever crevice it finds &mdash; old burrows, drain pipes, eroded banks, bridge gaps. Drab brown above, dingy white below &mdash; the least colorful swallow in North America. Named for tiny serrations on the outer primary feathers whose function remains debated after 188 years of study. Does not advertise, does not congregate, does not draw attention. Arrives, breeds, departs, unremarked. Ranger 5 was the Ranger mission that drew the least attention &mdash; no dramatic explosion, no landmark first, just a quiet power failure and a silent drift past the Moon.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Chuck Berry</h3>
+      <p style="font-size:0.85rem;">October 18, 1926 &mdash; March 18, 2017</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born on the exact day Ranger 5 launched, 36 years apart. Berry invented the guitar vocabulary of rock and roll &mdash; the double-stop leads, the driving rhythm, the duck walk. His power was always on. The guitar signal was the one constant across seven decades of personal adversity and industry exploitation. Ranger 5&rsquo;s solar panels were designed to provide the same constant power. When they failed, the mission died. Berry&rsquo;s power never failed. He is the anti-Ranger-5: the power supply that outlasted everything built on top of it.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (mathematics.md)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-055A">NSSDC &mdash; Ranger 5</a>
+      <a href="https://science.nasa.gov/mission/ranger-5/">NASA Science &mdash; Ranger 5</a>
+      <a href="https://ntrs.nasa.gov/search?q=ranger%205">NASA NTRS &mdash; Ranger 5 Reports</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS Ephemeris</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://images.nasa.gov/search?q=ranger+5&media=image">NASA Image Library</a>
+      <a href="https://www.allaboutbirds.org/guide/Northern_Rough-winged_Swallow/">Cornell &mdash; Rough-winged Swallow</a>
+      <a href="https://andrewsforest.oregonstate.edu/data">OSU Andrews Forest Data</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--light-canopy);">&ldquo;Seventy-five minutes of light. Seven hundred twenty-five kilometers of dark.&rdquo;</p>
+</footer>
+
+</body>
+</html>

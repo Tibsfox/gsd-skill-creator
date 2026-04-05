@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.23 — Mercury-Atlas 7 / Aurora 7 + Devil's Club | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --bark-dark: #2A1A0E;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --warning: #D4A830;
+    --warning-light: #E8C860;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+    --thorn: #8B4513;
+    --thorn-light: #B5651D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-floor); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(139,69,19,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(181,101,29,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  header { background: linear-gradient(160deg, var(--forest-floor) 0%, var(--bark-dark) 25%, var(--thorn) 50%, var(--canopy-emerald) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--warning); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(168,216,168,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168,216,168,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(212,168,48,0.15); border: 1px solid var(--warning); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--warning-light); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+  .status-warning { background: rgba(212,168,48,0.3); border: 1px solid var(--warning); color: var(--warning-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .status-breaker { background: rgba(252,61,33,0.3); border: 1px solid var(--nasa-red); color: #FF8866; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+  .content { min-width: 0; }
+  .card { background: rgba(10,46,10,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--light-bright); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .resonance-card { border-color: var(--thorn-light); background: rgba(139,69,19,0.06); }
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(181,101,29,0.15); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num { background: var(--thorn); color: #fff; font-weight: 700; font-size: 0.8rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--thorn-light); }
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .organism-card { background: rgba(74,52,32,0.4); border: 1px solid var(--thorn-light); border-radius: 8px; padding: 1.5rem; }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--thorn-light); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--thorn-light); font-size: 0.85rem; margin-bottom: 0.75rem; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(13,26,13,0.6); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--light-bright); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  .dedication-card { background: rgba(212,168,48,0.08); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; }
+  .dedication-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .data-links { background: rgba(11,61,145,0.15); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+  .tracks-card { background: rgba(26,26,58,0.4); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .tracks-card h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .track-item { display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid rgba(11,61,145,0.15); font-size: 0.85rem; }
+  .track-item:last-child { border-bottom: none; }
+  .track-num { background: rgba(11,61,145,0.3); color: #7EB8DA; font-weight: 700; font-size: 0.7rem; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .nav-card { background: rgba(10,46,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--light-canopy); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-canopy); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.23</span>
+      <span>NASA Mission Series</span>
+      <span class="status-breaker">SEQUENCE BREAKER</span>
+      <span class="status-warning">402 km OVERSHOOT</span>
+    </div>
+    <h1>Aurora 7 &mdash; The Cost of Curiosity</h1>
+    <p class="subtitle">The mission that solved the firefly mystery and overshot the landing zone by 402 kilometers</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 24, 1962</span>
+      <span><span class="label">Pilot:</span> M. Scott Carpenter</span>
+      <span><span class="label">Program:</span> Mercury</span>
+      <span><span class="label">Orbits:</span> 3</span>
+      <span><span class="label">Vehicle:</span> Atlas LV-3B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On May 24, 1962, Scott Carpenter became the second American to orbit Earth. His three-orbit mission aboard Aurora 7 was the most scientifically ambitious Mercury flight &mdash; and the most operationally troubled. Carpenter solved the &ldquo;firefly&rdquo; mystery that Glenn had reported on Friendship 7: the luminous particles were ice crystals sublimating from the spacecraft hull at orbital dawn. He tapped the capsule wall and watched the particles bloom outward. Mystery solved. But the investigation consumed attitude control fuel at an alarming rate.</p>
+      <p>By end of orbit two, 75% of manual fuel was consumed. Flight Director Chris Kraft watched the numbers drop. The retrofire burn was 3 seconds late and the spacecraft was yawed 25 degrees off nominal. cos(25&deg;) = 0.906 &mdash; only 91% of the retro-thrust was directed retrograde. Aurora 7 splashed down 402 kilometers beyond the recovery zone. Carpenter spent three hours alone in the Atlantic. NASA never flew him again. He went to the ocean floor instead &mdash; SEALAB II, the Navy&rsquo;s underwater habitat. The man who orbited Earth became the man who lived beneath the sea.</p>
+      <p><strong>This is the SEQUENCE BREAKER</strong> &mdash; a parallel entry for MA-7 at degree 22, bridging the established catalog (1.1&ndash;1.22) with the new frontier (1.24+). See <a href="../1.22/index.html" style="color: var(--warning-light);">v1.22</a> for the primary entry with Aequorea victoria (Crystal Jellyfish).</p>
+    </div>
+
+    <div class="card">
+      <h2>The Science Experiments</h2>
+      <ul>
+        <li><strong>Firefly Investigation:</strong> Carpenter solved the mystery of Glenn&rsquo;s luminous particles by tapping the hull and observing ice crystals dislodged by the vibration. Water vapor from the heat exchanger condensed on the cold hull during orbital night, froze, and sublimated at dawn. The fireflies were thermodynamics, not biology.</li>
+        <li><strong>Liquid Behavior:</strong> Water formed perfect spheres in microgravity. Mercury collected into a single droplet. Air bubbles migrated to the center. First sustained observations of capillary behavior in weightlessness &mdash; data used in propellant management design for decades.</li>
+        <li><strong>Multicolor Balloon:</strong> A 76 cm Mylar balloon deployed on a 30-meter tether to test atmospheric drag and color visibility. Tether did not fully extend &mdash; partial success.</li>
+        <li><strong>Terrain Photography:</strong> Modified Hasselblad 500C for orbital photography of ground features.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The 402-Kilometer Overshoot</h2>
+      <p><strong>The chain:</strong> Scientific curiosity during orbits 1&ndash;2 &rarr; unscheduled attitude maneuvers &rarr; 75% manual fuel consumed by end of orbit 2 &rarr; insufficient fuel for precise retrofire alignment &rarr; horizon scanner malfunction compounding the problem &rarr; retrofire 3 seconds late + 25&deg; yaw error &rarr; cos(25&deg;) &times; 152 m/s = 138 m/s effective retrograde (deficit of 14 m/s) &rarr; shallower reentry angle &rarr; extended atmospheric skip &rarr; 402 km overshoot &rarr; 3 hours alone in the Atlantic &rarr; career grounded.</p>
+      <p>The math: 25 km per m/s of delta-v deficit &times; 14 m/s = 350 km. Plus 23 km from the 3-second timing delay. Plus cross-range drift. Total: 402 km. The trigonometry does not care about intentions.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Retrofire error propagation simulator &mdash; interactive sliders for yaw angle and timing delay, real-time splashdown overshoot calculation</li>
+        <li><strong>Minecraft:</strong> Three-orbit path with overshoot &mdash; planned landing zone (green) vs. actual (red, 402 blocks away), redstone fuel depletion display</li>
+        <li><strong>Blender:</strong> Firefly particle animation &mdash; hull tap releasing ice crystals at orbital dawn, first-person POV (60s, Cycles)</li>
+        <li><strong>GLSL:</strong> Devil&rsquo;s Club procedural growth &mdash; L-system spine distribution, palmate leaves, fractal defense surface</li>
+        <li><strong>Arduino:</strong> Fuel depletion display ($25) &mdash; potentiometer for activities, OLED shows remaining fuel, buzzer warns at retrofire threshold</li>
+        <li><strong>Godot 4:</strong> The Carpenter Dilemma &mdash; balance science observations against fuel, then attempt retrofire with remaining fuel determining precision</li>
+        <li><strong>GMAT:</strong> MA-7 three-orbit trajectory reconstruction with retrofire error analysis, comparing nominal vs. actual splashdown coordinates</li>
+        <li><strong>Audio:</strong> Red-shafted Flicker drumming &mdash; FAUST, 25 beats/sec on resonant surfaces, mapped to mission timeline (90s)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> The Overshoot Calculator &mdash; Python script: input yaw angle and timing delay, output splashdown distance. Feel the sensitivity: 25&deg; = 402 km, but 5&deg; = only 35 km (30 min, Python)</li>
+        <li><strong>TRY 2:</strong> Identify Devil&rsquo;s Club on a PNW trail &mdash; wet ravines, massive palmate leaves, unmistakable spines. DO NOT TOUCH. (1&ndash;2 hours, $0)</li>
+        <li><strong>TRY 3:</strong> Fuel budget spreadsheet &mdash; model Aurora 7&rsquo;s fuel consumption, watch the reserve shrink as science observations accumulate (30 min)</li>
+        <li><strong>DIY 1:</strong> Arduino fuel gauge with overshoot warning ($25) &mdash; physical simulation of Aurora 7&rsquo;s fuel depletion</li>
+        <li><strong>DIY 2:</strong> Devil&rsquo;s Club spine study under magnification ($5) &mdash; document barbed tip morphology, brittle base fracture</li>
+        <li><strong>DIY 3:</strong> Drumming resonance experiment ($0) &mdash; tap different surfaces, rank by volume, discover why flickers choose metal</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Thorns and medicine:</span> Devil&rsquo;s Club cannot be harvested without accepting its spines. Carpenter&rsquo;s science could not be conducted without consuming fuel. The cost and the value are physically inseparable &mdash; the thorns ARE part of the medicine.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Indicator species:</span> Devil&rsquo;s Club indicates old-growth conditions. The fireflies indicated spacecraft thermodynamics. Both make visible what is otherwise hidden. The plant marks the invisible water table. The particles marked the invisible thermal cycling.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">The thicket:</span> A devil&rsquo;s club thicket is a single organism with multiple stems sharing a root system. Aurora 7&rsquo;s experiments were a single investigation with multiple expressions sharing a fuel supply. Stress on one stem affects the others.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Small errors, large consequences:</span> A 2 mm spine produces a 30 mm welt (15:1 amplification). A 25&deg; yaw produces a 402 km overshoot (~16 km/degree). Both systems amplify small inputs into disproportionate outputs through nonlinear dynamics.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Traditional knowledge:</span> Indigenous peoples learned to harvest devil&rsquo;s club safely through generations of transmitted knowledge. NASA learned to fly spacecraft through accumulated mission experience. Each failure&rsquo;s lessons transmitted to the next. Carpenter&rsquo;s lessons were transmitted to Gemini and Apollo.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">The bear and the berries:</span> Bears wade into devil&rsquo;s club thickets for the berries, absorbing the spines as cost. Carpenter pursued the firefly investigation, absorbing the fuel cost. The bear is large enough that the spines are manageable. Was Carpenter&rsquo;s margin large enough that the fuel cost was manageable? The answer was: no.
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.22/index.html">&larr; v1.22 MA-7 (Primary)</a>
+      <a href="../1.24/index.html">v1.24 MA-8 / Sigma 7 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Oplopanax horridus (Devil&rsquo;s Club)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">1-3m</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">35cm</div>
+          <div class="stat-label">Leaf Span</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">38+</div>
+          <div class="stat-label">Nations&rsquo; Use</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The armed all-healer. Every surface carries thorns &mdash; stems, petioles, leaf undersides. Casual contact is punished with spines that break off in skin and cause persistent inflammation. Yet the inner bark is among the most medicinally important plants in Pacific Northwest Indigenous pharmacology: anti-diabetic, antimicrobial, anti-inflammatory, and spiritual cleanser. 38+ Indigenous nations document its use. The thorns are the margin. The medicine is the science. Carpenter&rsquo;s mission was devil&rsquo;s club: prickly on the outside, invaluable inside.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection (SPS)</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Colaptes auratus cafer (Red-shafted Flicker)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Sound Pairing Species &mdash; Red-shafted Flicker Drumming. Degree 22. The flicker drums on resonant surfaces not to excavate but to communicate &mdash; territory, courtship, presence. It chooses the loudest surface available: metal chimney flashing, hollow snags, aluminum siding. Twenty-five beats per second on a surface selected for acoustic amplification. Carpenter&rsquo;s curiosity was a drumroll on the hull of Aurora 7 &mdash; each tap releasing a shower of luminous ice crystals that answered a question no one had formally asked.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Booker T. Washington</h3>
+      <p style="font-size:0.85rem;">April 5, 1856 &mdash; November 14, 1915</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born on the wall-clock date of this mission&rsquo;s creation. Built Tuskegee Institute from nothing &mdash; brick by brick, student by student. His philosophy: learn a practical skill, apply it, build a life, lift a community. The College of Knowledge&rsquo;s Learn &rarr; Practice &rarr; Create &rarr; Contribute pathway is Washington&rsquo;s educational vision expressed in 21st-century terms. Carpenter was grounded by NASA but reinvented himself as an ocean scientist and educator. Washington was born into slavery but built one of America&rsquo;s most influential educational institutions. Both converted adversity into teaching.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (mathematics.md)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-019A">NSSDC &mdash; Mercury-Atlas 7</a>
+      <a href="https://ntrs.nasa.gov/search?q=mercury+atlas+7+aurora">NASA NTRS &mdash; Aurora 7 Reports</a>
+      <a href="https://plants.usda.gov/home/plantProfile?symbol=OPHO">USDA PLANTS &mdash; Devil&rsquo;s Club</a>
+      <a href="https://xeno-canto.org/species/Colaptes-auratus">Xeno-canto &mdash; Northern Flicker</a>
+      <a href="https://images.nasa.gov/search?q=mercury+atlas+7&media=image">NASA Image Library &mdash; MA-7</a>
+      <a href="https://www.tuskegee.edu/about-us/library/special-collections-and-archives">Tuskegee Archives</a>
+      <a href="http://naeb.brit.org/uses/search/?string=oplopanax">Native Ethnobotany DB &mdash; Oplopanax</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--thorn-light);">&ldquo;The thorns are the margin. The medicine is the science. You cannot get one without accepting the other.&rdquo;</p>
+</footer>
+
+</body>
+</html>

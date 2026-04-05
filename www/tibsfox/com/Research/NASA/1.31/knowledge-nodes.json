@@ -1,0 +1,156 @@
+{
+  "mission": "1.31",
+  "title": "Mariner 1 (Atlas-Agena B)",
+  "date": "1962-07-22",
+  "organism": "Hirundo rustica",
+  "organism_common": "Barn Swallow",
+  "organism_location": "Cosmopolitan — breeds across the entire Northern Hemisphere in association with human structures (barns, bridges, culverts, eaves). In the PNW, a common summer resident from April to September. The most widespread swallow species on Earth, found on every continent except Antarctica.",
+  "bird": "Hirundo rustica",
+  "bird_common": "Barn Swallow",
+  "dedication": {
+    "name": "Grace Hopper",
+    "born": "1906-12-09",
+    "died": "1992-01-01",
+    "birthplace": "New York City, New York",
+    "field": "Computer science, mathematics, naval operations, compiler design, debugging",
+    "resonance": "Rear Admiral Grace Murray Hopper was the pioneer of debugging — both the concept and the practice. In 1947, while working on the Harvard Mark II computer, her team found a moth trapped in a relay, causing a malfunction. They taped the moth to the logbook with the notation 'First actual case of bug being found.' The term 'debugging' entered the vocabulary of computing. Hopper spent her career building tools to prevent exactly the kind of error that destroyed Mariner 1: she developed the first compiler (A-0, 1952), which translated human-readable mathematical notation into machine code automatically, eliminating the hand-transcription step that introduced the fatal overbar omission. She championed COBOL and the concept of machine-independent programming languages — the idea that code should be written in terms humans can verify, not in raw numerical instructions where a missing symbol is invisible. Mariner 1 was destroyed because a human being hand-copied a mathematical equation into Fortran and missed one symbol. Hopper's life work was building systems that made such hand-copying unnecessary. The compiler IS the solution to the problem that destroyed Mariner 1. Hopper died on January 1, 1992 — New Year's Day — the first day of the rest of computing. Mariner 1 was destroyed on July 22, 1962, the last day that anyone at NASA believed hand-transcribed guidance code was safe."
+  },
+  "nodes": [
+    {
+      "id": "software-verification",
+      "concept": "Software verification — proving that code does what the specification says",
+      "department": "software-engineering",
+      "level": "foundational",
+      "tspb_layer": 7,
+      "tspb_section": "7.6",
+      "description": "Software verification is the process of confirming that a program's implementation matches its specification — that the code does what the math says it should do. Mariner 1 was destroyed because this verification failed at a single point: a hand-transcribed equation in the Atlas guidance software omitted an overbar (vinculum) that indicated time-averaging of radar tracking data. The specification said R-dot-bar-sub-n (the smoothed rate of change of the nth tracking parameter). The code said R-dot-sub-n (the raw, unsmoothed rate). The difference was one symbol. The consequence was that the guidance computer processed noisy radar data as real trajectory deviations, commanding corrections to phantom errors. The Atlas began oscillating, heading toward shipping lanes. Range Safety destroyed it at T+293 seconds. The verification gap was between the mathematical specification (written on paper with standard mathematical notation including overbars) and the Fortran implementation (typed on punch cards where overbars have no direct representation). The hand-transcription step — a human reading mathematical notation and typing Fortran — was the unverified link. Modern software engineering addresses this with automated compilation from specifications, formal verification (mathematical proof that code matches spec), and extensive testing. All of these practices trace their urgency, in part, to Mariner 1.",
+      "resonance": "A Barn Swallow's nest construction is a verification problem. The bird applies each mud pellet and tests it — pressing, adjusting, waiting for it to dry. The verification is physical: does the pellet hold weight? Does the structure support the bird's body? Each pellet is verified locally before the next is applied. But local verification does not guarantee global stability — a nest can pass every pellet-level test and still fail under the weight of eggs and chicks. Mariner 1's code passed local verification — each equation was checked individually. The system-level verification that would have caught the missing overbar was not performed. The Barn Swallow and the guidance programmer share the same verification gap: the component works, but the system fails.",
+      "worked_example": {
+        "description": "Demonstrate the effect of the missing overbar: compare smoothed vs. raw radar data processing",
+        "parameters": {
+          "radar_noise_std_dev": 10.0,
+          "smoothing_window": 5,
+          "true_velocity": 1000.0,
+          "sample_rate_hz": 10
+        },
+        "formula": "R_dot_bar = (1/N) * sum(R_dot_i) for i in window; guidance_correction = K * (R_dot - R_dot_target)",
+        "result": "With smoothing: corrections are small and stable (responding to real trajectory). Without smoothing: corrections oscillate wildly, responding to radar noise, exactly as Mariner 1 experienced.",
+        "python": "import numpy as np\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\n\nnp.random.seed(1962)  # The year\n\n# Simulate radar tracking data\nt = np.linspace(0, 30, 300)  # 30 seconds, 10 Hz\ntrue_velocity = 1000 + 50 * t  # accelerating spacecraft\nnoise = np.random.normal(0, 50, len(t))  # radar noise\nraw_data = true_velocity + noise\n\n# Smoothed data (what the code SHOULD have used)\nwindow = 5\nsmoothed = np.convolve(raw_data, np.ones(window)/window, mode='same')\n\n# Guidance corrections\nK = 0.1  # gain\ntarget = true_velocity  # perfect tracking target\ncorr_smoothed = K * (smoothed - target)\ncorr_raw = K * (raw_data - target)\n\nfig, axes = plt.subplots(3, 1, figsize=(12, 8))\n\naxes[0].plot(t, true_velocity, 'g-', label='True velocity', linewidth=2)\naxes[0].plot(t, raw_data, 'r.', alpha=0.3, markersize=2, label='Raw radar')\naxes[0].plot(t, smoothed, 'b-', label='Smoothed (with overbar)', linewidth=1.5)\naxes[0].set_ylabel('Velocity (m/s)')\naxes[0].set_title('MARINER 1: The Missing Overbar')\naxes[0].legend(fontsize=8)\naxes[0].grid(alpha=0.3)\n\naxes[1].plot(t, corr_smoothed, 'b-', label='Corrections (smoothed)', linewidth=1.5)\naxes[1].axhline(0, color='gray', linestyle='--', alpha=0.5)\naxes[1].set_ylabel('Correction (m/s²)')\naxes[1].set_title('With Overbar: Smooth, stable corrections')\naxes[1].legend(fontsize=8)\naxes[1].grid(alpha=0.3)\n\naxes[2].plot(t, corr_raw, 'r-', label='Corrections (raw — NO overbar)', linewidth=1)\naxes[2].axhline(0, color='gray', linestyle='--', alpha=0.5)\naxes[2].set_ylabel('Correction (m/s²)')\naxes[2].set_title('WITHOUT Overbar: Wild oscillations → range safety destruct')\naxes[2].legend(fontsize=8)\naxes[2].grid(alpha=0.3)\n\nplt.tight_layout()\nplt.savefig('mariner1_overbar.png', dpi=150)\nprint('One missing symbol. Wild oscillations. Range safety at T+293s.')\nprint('The most expensive hyphen in history was actually an overbar.')"
+      }
+    },
+    {
+      "id": "range-safety",
+      "concept": "Range safety — the decision to destroy a vehicle that threatens populated areas",
+      "department": "aerospace-safety",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.6",
+      "description": "Range safety is the system and authority responsible for terminating a launch vehicle's flight if it deviates from its planned trajectory toward populated areas, shipping lanes, or other hazards. At Cape Canaveral in 1962, the Range Safety Officer (RSO) monitored each launch from a dedicated console, tracking the vehicle's position against pre-computed destruct limits — boundaries beyond which the vehicle could not be allowed to fly. If the vehicle crossed a destruct limit, the RSO sent a coded radio command that detonated explosive charges on the vehicle, breaking it apart. For Mariner 1, Range Safety Officer Jack Broadbent observed the Atlas deviating from its planned trajectory beginning around T+200 seconds. The guidance system was commanding erratic pitch and yaw corrections (due to the unsmoothed radar data), and the vehicle began heading northeast toward shipping lanes. Broadbent waited as long as the trajectory margins allowed — the RSO's job is to destroy the vehicle only if absolutely necessary, since every destruct is an $18.5 million loss. At T+293 seconds, the vehicle crossed the destruct limit, and Broadbent sent the command. The Atlas and its Mariner 1 payload were destroyed. Broadbent's decision was correct, necessary, and one of the most expensive split-second decisions in the history of rocketry.",
+      "resonance": "A Barn Swallow parent will abandon a nest if the nest site becomes dangerous — if a predator discovers the location, if structural damage makes the nest unstable, if persistent disturbance (human activity, weather) threatens the brood. The abandonment decision is the biological analog of range safety: sacrifice the current investment to protect the larger asset (the parents' future reproductive potential). A Barn Swallow that dies defending a doomed nest cannot raise another brood. An RSO who lets a rogue rocket fly cannot launch the backup. Both range safety and nest abandonment are decisions to accept a certain loss to prevent an uncertain but potentially greater loss.",
+      "worked_example": {
+        "description": "Model the range safety decision: when does the expected cost of destruction become less than the expected cost of continuation?",
+        "parameters": {
+          "mission_cost_M": 18.5,
+          "probability_recovery": 0.05,
+          "probability_populated_impact": 0.15,
+          "populated_impact_cost_M": 500,
+          "probability_ocean_impact": 0.80,
+          "ocean_impact_cost_M": 0
+        },
+        "formula": "E[cost_continue] = P_recovery * 0 + P_populated * C_populated + P_ocean * C_ocean; E[cost_destruct] = C_mission",
+        "result": "E[continue] = 0.05*0 + 0.15*500 + 0.80*0 = $75M. E[destruct] = $18.5M. Destruct is the rational decision by a factor of 4. Broadbent was right.",
+        "python": "import numpy as np\n\nprint('RANGE SAFETY DECISION: MARINER 1')\nprint('=' * 55)\n\n# Mission parameters\nmission_cost = 18.5  # million dollars (1962)\n\n# Scenario probabilities at T+293s\n# Guidance recovering on its own\np_recovery = 0.05\n# Vehicle impacts populated area\np_populated = 0.15\n# Vehicle impacts open ocean\np_ocean = 0.80\n\n# Costs\nc_populated = 500  # million dollars (human lives + property)\nc_ocean = 0  # debris in ocean, no additional cost\nc_recovery = 0  # mission proceeds normally\n\n# Expected cost of CONTINUING flight\ne_continue = (p_recovery * c_recovery + \n              p_populated * c_populated + \n              p_ocean * c_ocean)\n\n# Expected cost of DESTRUCT\ne_destruct = mission_cost\n\nprint(f'Scenario probabilities at T+293s:')\nprint(f'  Guidance self-corrects:    {p_recovery*100:.0f}%')\nprint(f'  Impacts populated area:    {p_populated*100:.0f}%')\nprint(f'  Impacts open ocean:        {p_ocean*100:.0f}%')\nprint()\nprint(f'Expected cost of continuing:  ${e_continue:.1f}M')\nprint(f'Expected cost of destruct:    ${e_destruct:.1f}M')\nprint(f'Ratio: {e_continue/e_destruct:.1f}x')\nprint()\nif e_destruct < e_continue:\n    print('DECISION: DESTRUCT')\n    print('Broadbent was right. The math confirms it.')\nelse:\n    print('DECISION: CONTINUE')\nprint()\nprint('At T+293 seconds, Jack Broadbent had less than')\nprint('a second to make this calculation. He got it right.')"
+      }
+    },
+    {
+      "id": "venus-transfer-orbit",
+      "concept": "Venus transfer orbit — the Hohmann trajectory from Earth to Venus",
+      "department": "orbital-mechanics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.7",
+      "description": "Mariner 1 was targeted for a Venus flyby via a Hohmann-like transfer orbit — an elliptical path with perihelion near Venus's orbit (0.72 AU) and aphelion near Earth's orbit (1.00 AU). The transfer requires launching when Earth and Venus are in the correct relative positions: Venus must be approximately 108 days ahead of Earth in its orbit at launch, so that the spacecraft arrives at Venus's orbital distance when Venus is there to meet it. The 1962 Venus window opened in late July and closed in early September. Mariner 1 launched on July 22 at the opening of this window. After Mariner 1's destruction, the window remained open long enough for Mariner 2 to launch on August 27. The Venus transfer orbit has a semi-major axis of approximately 0.86 AU (midway between Earth and Venus), a period of approximately 146 days (the trip time from Earth to Venus), and requires a departure velocity of approximately 11.5 km/s from Earth (escape velocity plus the transfer orbit injection delta-v). The Atlas-Agena B was designed to provide exactly this departure energy.",
+      "resonance": "Barn Swallow migration follows a transfer orbit of its own — not Keplerian, but atmospheric. The birds fly from their Northern Hemisphere breeding grounds to Southern Hemisphere wintering grounds, a journey of 10,000-15,000 km that takes 4-6 weeks. The timing is as critical as the Venus window: leave too early and insects have not peaked at stopover sites; leave too late and cold weather overtakes the migration. The Barn Swallow's 'launch window' opens in late August (PNW) and closes by mid-September. Miss the window and the bird faces winter without food. Mariner 1 missed its window by 293 seconds of flight time. The Barn Swallow cannot afford to miss its window at all.",
+      "worked_example": {
+        "description": "Calculate the Hohmann transfer orbit from Earth to Venus",
+        "parameters": {
+          "r_earth_AU": 1.00,
+          "r_venus_AU": 0.723,
+          "mu_sun": 1.327e20,
+          "AU_m": 1.496e11
+        },
+        "formula": "a_transfer = (r_earth + r_venus) / 2; T_transfer = pi * sqrt(a_transfer^3 / mu_sun); delta_v = v_transfer - v_earth",
+        "result": "Transfer semi-major axis: 0.862 AU. Trip time: 146 days. Departure delta-v from Earth orbit: 2.5 km/s above circular velocity. Total departure velocity: 32.3 km/s (heliocentric).",
+        "python": "import numpy as np\n\nAU = 1.496e11  # meters\nmu_sun = 1.327e20  # m^3/s^2\n\nr_earth = 1.000 * AU\nr_venus = 0.723 * AU\n\nprint('VENUS TRANSFER ORBIT (Mariner 1 Target)')\nprint('=' * 55)\n\n# Hohmann transfer\na_t = (r_earth + r_venus) / 2\nprint(f'Transfer semi-major axis: {a_t/AU:.3f} AU')\n\n# Transfer orbit period and trip time\nT_t = 2 * np.pi * np.sqrt(a_t**3 / mu_sun)\nt_trip = T_t / 2  # half orbit = Earth to Venus\nprint(f'Transfer orbit period:    {T_t/86400:.0f} days')\nprint(f'Trip time (half orbit):   {t_trip/86400:.0f} days')\n\n# Velocities\nv_earth = np.sqrt(mu_sun / r_earth)  # Earth circular\nv_departure = np.sqrt(mu_sun * (2/r_earth - 1/a_t))  # vis-viva at departure\ndelta_v_depart = v_departure - v_earth\n\nv_venus = np.sqrt(mu_sun / r_venus)  # Venus circular\nv_arrival = np.sqrt(mu_sun * (2/r_venus - 1/a_t))  # vis-viva at Venus\ndelta_v_arrive = v_venus - v_arrival\n\nprint(f'\\nEarth orbital velocity:   {v_earth/1e3:.2f} km/s')\nprint(f'Departure velocity:       {v_departure/1e3:.2f} km/s')\nprint(f'Departure delta-v:        {delta_v_depart/1e3:.2f} km/s')\nprint(f'\\nVenus orbital velocity:   {v_venus/1e3:.2f} km/s')\nprint(f'Arrival velocity:         {v_arrival/1e3:.2f} km/s')\nprint(f'Arrival delta-v:          {abs(delta_v_arrive)/1e3:.2f} km/s')\nprint(f'\\nMariner 1 never reached this orbit.')\nprint(f'It was destroyed at T+293 seconds, still in Earth\\'s')\nprint(f'atmosphere, {t_trip/86400:.0f} days and {abs(delta_v_depart)/1e3:.1f} km/s short of Venus.')"
+      }
+    },
+    {
+      "id": "error-propagation",
+      "concept": "Error propagation — how small errors amplify through feedback systems",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.2",
+      "description": "Error propagation in feedback systems describes how a small initial error can amplify through the system's response dynamics. In Mariner 1's guidance system, the error propagation chain was: (1) radar tracks the Atlas and produces noisy position/velocity data, (2) the guidance computer should smooth this data using a time-averaging filter (the overbar), (3) the smoothed data is compared to the planned trajectory, (4) the difference drives corrections to the Atlas autopilot, (5) the corrections change the vehicle's trajectory. Without step 2 (the smoothing), the noise in step 1 propagated directly to step 4 as phantom corrections. Each correction changed the vehicle's actual trajectory (step 5), which changed the next radar measurement (step 1), creating a feedback loop where noise was amplified with each cycle. The system's gain (how strongly it corrected) determined how fast the oscillations grew. With high gain, the oscillations grew exponentially — the vehicle hunted back and forth with increasing amplitude until the trajectory crossed the range safety destruct limit at T+293 seconds.",
+      "resonance": "Error propagation in Barn Swallow nest construction follows a similar feedback pattern. If an early pellet is misaligned, subsequent pellets laid against it propagate the misalignment. The structural error compounds with each layer — a 5-degree tilt at the base becomes a 15-degree tilt at the rim, shifting the center of gravity until the nest fails. The swallow cannot smooth construction errors after the fact (the mud has dried), just as Mariner 1's guidance could not smooth radar data after the overbar was omitted. Prevention at the source is the only solution. The swallow learns nest geometry through experience. The guidance programmer should have caught the overbar through code review.",
+      "worked_example": {
+        "description": "Model error amplification in a feedback guidance loop with and without smoothing",
+        "parameters": {
+          "gain": 0.5,
+          "noise_std": 10.0,
+          "smoothing_factor": 0.1,
+          "time_steps": 300
+        },
+        "formula": "x[n+1] = x[n] + K * (measurement[n] - target); measurement = x + noise (or smoothed_x + noise)",
+        "result": "Without smoothing: position oscillations grow exponentially, crossing destruct limits in ~293 steps. With smoothing: oscillations are damped, vehicle stays on course.",
+        "python": "import numpy as np\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\n\nnp.random.seed(293)  # T+293 seconds\n\nN = 400  # time steps (seconds)\nK = 0.3  # guidance gain\nnoise_std = 5.0  # radar noise standard deviation\nalpha = 0.1  # smoothing factor (exponential moving average)\ndestruct_limit = 50.0  # lateral deviation limit (km)\n\n# With smoothing (correct code)\nx_smooth = np.zeros(N)\nsmoothed_measurement = 0.0\n\nfor i in range(1, N):\n    noise = np.random.normal(0, noise_std)\n    measurement = x_smooth[i-1] + noise\n    smoothed_measurement = alpha * measurement + (1-alpha) * smoothed_measurement\n    correction = -K * smoothed_measurement\n    x_smooth[i] = x_smooth[i-1] + correction + np.random.normal(0, 0.5)\n\n# Without smoothing (Mariner 1 — missing overbar)\nx_raw = np.zeros(N)\ndestruct_time = N\n\nfor i in range(1, N):\n    noise = np.random.normal(0, noise_std)\n    measurement = x_raw[i-1] + noise\n    correction = -K * measurement  # NO SMOOTHING\n    x_raw[i] = x_raw[i-1] + correction + np.random.normal(0, 0.5)\n    if abs(x_raw[i]) > destruct_limit and destruct_time == N:\n        destruct_time = i\n\nfig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 6), sharex=True)\n\nt = np.arange(N)\nax1.plot(t, x_smooth, 'b-', linewidth=1, label='With smoothing (correct)')\nax1.axhline(destruct_limit, color='r', linestyle='--', alpha=0.5)\nax1.axhline(-destruct_limit, color='r', linestyle='--', alpha=0.5)\nax1.set_ylabel('Lateral deviation (km)')\nax1.set_title('Correct guidance code: vehicle stays on course')\nax1.legend()\nax1.grid(alpha=0.3)\nax1.set_ylim(-80, 80)\n\nax2.plot(t[:destruct_time+10], x_raw[:destruct_time+10], 'r-', linewidth=1, label='Without smoothing (Mariner 1)')\nax2.axhline(destruct_limit, color='r', linestyle='--', alpha=0.5, label='Destruct limit')\nax2.axhline(-destruct_limit, color='r', linestyle='--', alpha=0.5)\nax2.axvline(destruct_time, color='orange', linewidth=2, label=f'DESTRUCT T+{destruct_time}s')\nax2.set_ylabel('Lateral deviation (km)')\nax2.set_xlabel('Time (seconds)')\nax2.set_title(f'Missing overbar: oscillations grow → destruct at T+{destruct_time}s')\nax2.legend()\nax2.grid(alpha=0.3)\nax2.set_ylim(-80, 80)\n\nplt.suptitle('MARINER 1: Error Amplification from Missing Overbar', fontsize=14)\nplt.tight_layout()\nplt.savefig('mariner1_error_propagation.png', dpi=150)\nprint(f'Destruct at T+{destruct_time}s (actual: T+293s)')\nprint('One missing symbol. Exponential error growth. Range safety.')"
+      }
+    },
+    {
+      "id": "barn-swallow-aerodynamics",
+      "concept": "Barn Swallow flight aerodynamics — the forked tail as guidance system",
+      "department": "biophysics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.8",
+      "description": "The Barn Swallow (Hirundo rustica) has the deepest tail fork of any swallow — the outermost tail feathers (streamers) extend 3-8 cm beyond the inner feathers, creating a distinctive V-shaped tail. This fork serves as an aerodynamic control surface: by spreading, closing, and tilting the tail, the swallow can generate asymmetric drag and lift forces that enable extreme maneuverability. Turn radii as small as 10-20 cm at speeds of 10-15 m/s, roll rates exceeding 1,000 degrees per second, and near-instantaneous direction changes during aerial insect pursuit. The forked tail acts as a differential air brake and rudder — spreading one streamer while closing the other generates a yawing moment that turns the bird without banking. The tail is the swallow's guidance system: rapid, responsive, and adaptive. Unlike Mariner 1's guidance, which processed data through a vulnerable software chain, the Barn Swallow's guidance is hardwired in feather geometry and muscle response — there is no transcription step, no overbar to omit. The control surface IS the algorithm.",
+      "resonance": "Mariner 1 was destroyed because its guidance system responded to noise instead of signal. The Barn Swallow's guidance system processes sensory data (vision, proprioception, wind detection) through neural circuits honed by 30 million years of evolution — circuits that are inherently noise-tolerant because they evolved in a noisy environment. The swallow does not need a smoothing function because its neural processing IS a smoothing function. The reflexive tail adjustments integrate sensory input over time, averaging out momentary wind gusts and visual distractions. The 'overbar' is built into the hardware. Mariner 1's overbar was in the software, and software can have typos.",
+      "worked_example": {
+        "description": "Calculate the aerodynamic forces generated by the Barn Swallow's forked tail during a turning maneuver",
+        "parameters": {
+          "mass_g": 19,
+          "speed_ms": 12,
+          "turn_radius_m": 0.15,
+          "tail_area_cm2": 25,
+          "air_density_kg_m3": 1.225
+        },
+        "formula": "F_centripetal = m * v^2 / r; L_tail = 0.5 * rho * v^2 * A * C_L",
+        "result": "Centripetal force required: 18.2 N (93x body weight!). Tail lift coefficient needed: ~2.4. This is near the stall limit — the Barn Swallow operates at the edge of aerodynamic possibility during tight turns.",
+        "python": "import numpy as np\n\nprint('BARN SWALLOW TURNING AERODYNAMICS')\nprint('=' * 55)\n\nm = 0.019  # mass (kg)\nv = 12.0   # speed (m/s)\nr = 0.15   # turn radius (m)\nrho = 1.225  # air density (kg/m^3)\nA_tail = 25e-4  # tail area (m^2)\n\n# Centripetal force for the turn\nF_c = m * v**2 / r\ng_load = F_c / (m * 9.81)\n\nprint(f'Mass:          {m*1000:.0f} g')\nprint(f'Speed:         {v:.0f} m/s ({v*3.6:.0f} km/h)')\nprint(f'Turn radius:   {r*100:.0f} cm')\nprint(f'Centripetal F:  {F_c:.2f} N')\nprint(f'G-load:        {g_load:.0f}g')\nprint()\n\n# Tail contribution to turning force\n# Assume tail provides ~30% of total turning force\nF_tail = 0.3 * F_c\nC_L_tail = F_tail / (0.5 * rho * v**2 * A_tail)\n\nprint(f'Tail area:      {A_tail*1e4:.0f} cm²')\nprint(f'Tail force:     {F_tail:.2f} N (30% of centripetal)')\nprint(f'Tail C_L:       {C_L_tail:.1f}')\nprint(f'  (max C_L for a flat plate ≈ 2.0)')\nprint(f'  The swallow operates NEAR STALL during tight turns.')\nprint()\nprint('The forked tail is the guidance system that Mariner 1 lacked.')\nprint('It responds in milliseconds, processes noisy air, and never')\nprint('needs an overbar — the physics IS the smoothing function.')"
+      }
+    },
+    {
+      "id": "mission-redundancy",
+      "concept": "Mission redundancy — building two spacecraft when you can only launch one",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 7,
+      "tspb_section": "7.7",
+      "description": "The Mariner program's decision to build two identical spacecraft (Mariner 1 and Mariner 2) was a deliberate redundancy strategy. The cost of building two spacecraft was perhaps 40% more than building one — the design, tooling, testing infrastructure, and team were already in place. But the benefit was enormous: if one mission failed, the backup could launch within the same planetary window. Without Mariner 2, the Mariner 1 failure would have cost NASA its entire 1962 Venus opportunity — the next window was 19 months away, in February 1964. With Mariner 2, the failure cost 36 days. The redundancy strategy has been standard practice for NASA planetary missions ever since: Mars Exploration Rovers (Spirit and Opportunity), Viking (1 and 2), Voyager (1 and 2), GRAIL, and others. The cost of building two is far less than the cost of losing a planetary window.",
+      "resonance": "Barn Swallows are double-brooded — they raise two broods per season in most of their range. This is biological redundancy: if the first brood fails (predation, weather, nest failure), the second brood can still fledge before fall migration. The timing is tight — in the Pacific Northwest, the first brood fledges in June and the second in August, leaving barely enough time before September migration. If both broods succeed, the pair produces 8-10 fledglings. If only one succeeds, 4-5. The double-brooding strategy mirrors the dual-spacecraft strategy: accept the modest additional cost (energy for a second clutch) to protect against catastrophic failure (zero reproductive output). Mariner 2 was NASA's second brood.",
+      "worked_example": {
+        "description": "Calculate the expected value of dual-spacecraft vs. single-spacecraft mission strategy",
+        "parameters": {
+          "single_cost_M": 18.5,
+          "dual_cost_M": 25.9,
+          "launch_success_prob": 0.70,
+          "science_value_M": 100,
+          "window_cost_M": 50
+        },
+        "formula": "E[value_single] = P_success * V_science - C_single - (1-P_success) * C_window; E[value_dual] = (1 - (1-P)^2) * V_science - C_dual - (1-P)^2 * C_window",
+        "result": "Single spacecraft: E[value] = 0.70*100 - 18.5 - 0.30*50 = $36.5M. Dual spacecraft: E[value] = 0.91*100 - 25.9 - 0.09*50 = $60.6M. Dual strategy nearly doubles expected value.",
+        "python": "import numpy as np\n\nprint('MISSION REDUNDANCY: SINGLE vs. DUAL SPACECRAFT')\nprint('=' * 55)\n\np = 0.70  # individual launch success probability\nC_single = 18.5  # cost of one spacecraft ($M)\nC_dual = 25.9   # cost of two spacecraft ($M, ~40% more)\nV = 100.0       # science return value ($M)\nC_window = 50.0  # cost of missing the window ($M)\n\n# Single spacecraft\np_success_single = p\ne_single = p * V - C_single - (1-p) * C_window\n\n# Dual spacecraft (at least one succeeds)\np_success_dual = 1 - (1-p)**2\ne_dual = p_success_dual * V - C_dual - (1-p_success_dual) * C_window\n\nprint(f'Individual launch success: {p*100:.0f}%')\nprint(f'\\nSINGLE SPACECRAFT:')\nprint(f'  Cost: ${C_single:.1f}M')\nprint(f'  P(success): {p_success_single*100:.0f}%')\nprint(f'  E[value]: ${e_single:.1f}M')\nprint(f'\\nDUAL SPACECRAFT:')\nprint(f'  Cost: ${C_dual:.1f}M')\nprint(f'  P(at least one succeeds): {p_success_dual*100:.0f}%')\nprint(f'  E[value]: ${e_dual:.1f}M')\nprint(f'\\nDual strategy advantage: ${e_dual - e_single:.1f}M')\nprint(f'  ({(e_dual/e_single - 1)*100:.0f}% higher expected value)')\nprint(f'\\nMariner 1 failed. Mariner 2 succeeded.')\nprint(f'The dual strategy saved the Venus program.')"
+      }
+    }
+  ]
+}
