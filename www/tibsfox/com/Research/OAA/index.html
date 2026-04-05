@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations &amp; Admin Automation &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-oaa">
+  <header>
+    <h1>Operations &amp; Admin Automation</h1>
+    <div class="subtitle">Workflow Orchestration &middot; Document Pipelines &middot; Multi-Agent Task Coordination</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-convoy-workflow-orchestration">Workflow Orchestration</a>
+      <a href="page.html?doc=02-document-pipeline-automation">Document Pipelines</a>
+      <a href="page.html?doc=03-multi-agent-task-coordination">Task Coordination</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every office has workflows that somebody built by hand and nobody documented.
+      Approval chains live in email threads, document pipelines live in somebody's
+      cron job, and project status lives in a spreadsheet that three people update
+      differently. The GSD orchestration layer &mdash; convoy routing, document
+      generation, token-budget enforcement &mdash; is office automation at machine scale.
+      The patterns are identical; the execution speed is not.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Research Projects</span></div>
+      <div class="stat"><span class="stat-value">42</span><span class="stat-label">Study Guide Topics</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">DIY Try Sessions</span></div>
+      <div class="stat"><span class="stat-value">45+</span><span class="stat-label">Cross-Domain Mappings</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Industry Comparisons</span></div>
+    </div>
+
+    <h2>Research Projects</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-convoy-workflow-orchestration" class="card" style="text-decoration:none;color:inherit">
+        <h3><span class="tag tag-workflow">BPM</span> Convoy Workflow Orchestration</h3>
+        <div class="meta">OAA-CWO &middot; GUPP/Sling/Mayor-Coordinator &middot; 15 study topics &middot; 3 try sessions</div>
+        <p>How GSD's convoy dispatch model maps to Business Process Management. GUPP work assignment as process instantiation, sling-dispatch as a task router, mayor-coordinator as an orchestration engine. Compared to Camunda, Temporal.io, and Apache Airflow.</p>
+      </a>
+
+      <a href="page.html?doc=02-document-pipeline-automation" class="card" style="text-decoration:none;color:inherit">
+        <h3><span class="tag tag-doc">Pipeline</span> Document Pipeline Automation</h3>
+        <div class="meta">OAA-DPA &middot; Sweep daemon + publish-pipeline + FTP sync &middot; 13 study topics &middot; 3 try sessions</div>
+        <p>Scheduled document generation, multi-format output, and automated publishing. The sweep daemon as a cron-driven content pipeline, transcript-compactor as document summarization, publish-pipeline as release management. Compared to Power Automate, n8n, and Zapier.</p>
+      </a>
+
+      <a href="page.html?doc=03-multi-agent-task-coordination" class="card" style="text-decoration:none;color:inherit">
+        <h3><span class="tag tag-coord">Coord</span> Multi-Agent Task Coordination</h3>
+        <div class="meta">OAA-MTC &middot; Beads-state + token-budget + event-log &middot; 14 study topics &middot; 3 try sessions</div>
+        <p>Task assignment, progress tracking, resource allocation, and budget constraints at agent scale. Beads-state as a project ledger, token-budget as resource leveling, event-log as an audit trail. Compared to Jira, Asana, and Monday.com.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Office/Admin Concept</th>
+          <th>GSD Implementation</th>
+          <th>Industry Tool</th>
+          <th>Appears In</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Workflow engine</td><td>Mayor-coordinator + convoy model</td><td>Camunda, Temporal.io</td><td>M1</td></tr>
+        <tr><td>Task routing</td><td>Sling-dispatch</td><td>Airflow scheduler</td><td>M1</td></tr>
+        <tr><td>Work assignment</td><td>GUPP propulsion</td><td>Jira auto-assign</td><td>M1, M3</td></tr>
+        <tr><td>Document generation</td><td>Sweep daemon + publish-pipeline</td><td>Power Automate</td><td>M2</td></tr>
+        <tr><td>Content summarization</td><td>Transcript-compactor</td><td>n8n document nodes</td><td>M2</td></tr>
+        <tr><td>Scheduled publishing</td><td>Sweep cron + FTP sync</td><td>Zapier scheduled zaps</td><td>M2</td></tr>
+        <tr><td>Project state tracking</td><td>Beads-state persistence</td><td>Jira board</td><td>M3</td></tr>
+        <tr><td>Resource allocation</td><td>Token-budget enforcement</td><td>Monday.com workload</td><td>M3</td></tr>
+        <tr><td>Audit trail</td><td>Event-log (append-only JSONL)</td><td>Asana activity log</td><td>M3</td></tr>
+        <tr><td>Escalation policy</td><td>Mayor-coordinator nudge/mail</td><td>PagerDuty escalation</td><td>M1, M3</td></tr>
+        <tr><td>SLA management</td><td>Budget warning thresholds</td><td>ServiceNow SLA</td><td>M1, M3</td></tr>
+        <tr><td>Version control</td><td>Git-friendly sorted JSON</td><td>SharePoint versioning</td><td>M2, M3</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+GSD OFFICE AUTOMATION LAYER -- DOMAIN MAP
+===============================================================
+
+  WORKFLOW LAYER              DOCUMENT LAYER          COORDINATION LAYER
+  +------------------+       +------------------+    +------------------+
+  | Mayor-Coordinator|       | Sweep Daemon     |    | Beads-State      |
+  | Convoy routing   |       | Cron scheduling  |    | Project ledger   |
+  | Process engine   |       | Template render  |    | State snapshots  |
+  +------------------+       +------------------+    +------------------+
+        |                          |                        |
+        v                          v                        v
+  +------------------+       +------------------+    +------------------+
+  | Sling-Dispatch   |       | Transcript       |    | Token-Budget     |
+  | Task router      |       | Compactor        |    | Resource limits  |
+  | Queue management |       | Summarization    |    | Per-agent caps   |
+  +------------------+       +------------------+    +------------------+
+        |                          |                        |
+        v                          v                        v
+  +------------------+       +------------------+    +------------------+
+  | GUPP Propulsion  |       | Publish-Pipeline |    | Event-Log        |
+  | Work assignment  |       | FTP sync, deploy |    | Append-only audit|
+  | Agent dispatch   |       | Multi-format out |    | Query + stats    |
+  +------------------+       +------------------+    +------------------+
+        |                          |                        |
+        +-------------------------+------------------------+
+                                  |
+                    +-------------+-------------+
+                    |   GASTOWN CHIPSET CORE    |
+                    |                           |
+                    |  State Manager            |
+                    |  Validate Chipset         |
+                    |  Barrel Exports (index)   |
+                    |  TypeScript + Vitest      |
+                    +---------------------------+
+    </pre>
+
+  </main>
+
+  <footer>
+    <p>Operations &amp; Admin Automation &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
