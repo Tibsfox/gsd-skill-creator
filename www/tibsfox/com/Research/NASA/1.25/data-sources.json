@@ -1,0 +1,117 @@
+{
+  "mission": "1.25",
+  "title": "Mercury-Atlas 9 / Faith 7",
+  "description": "Open datasets and source materials relevant to Mercury-Atlas 9 / Faith 7 (1963), the final Mercury mission, Arbutus menziesii (Pacific Madrone), Western Tanager (Piranga ludoviciana), and human spaceflight endurance",
+  "sources": [
+    {
+      "id": "nssdc-ma9",
+      "name": "NSSDC Master Catalog -- Mercury-Atlas 9 (Faith 7)",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1963-015A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Mercury-Atlas 9. Spacecraft number 20, call sign Faith 7, astronaut L. Gordon Cooper Jr. Mission timeline, orbital parameters (160 x 267 km, 88.5 minute period), 22 orbits, 34 hours 19 minutes 49 seconds mission elapsed time. Documents the systems failures beginning on orbit 19, the manual reentry, and the 6.4 km splashdown accuracy.",
+      "mission_relevance": "Definitive source for MA-9 spacecraft specifications, orbital parameters, and mission outcomes. Documents the final Mercury mission and the transition point between Mercury and Gemini programs."
+    },
+    {
+      "id": "nasa-sp45",
+      "name": "NASA SP-45: Mercury Project Summary",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Official NASA special publication summarizing the entire Mercury program including comprehensive coverage of MA-9. Contains spacecraft systems performance data, biomedical telemetry from Cooper's 34-hour flight, environmental control system performance curves showing CO2 accumulation, battery discharge profiles, and the complete timeline of systems failures on orbits 19-22.",
+      "mission_relevance": "Primary technical source for the systems endurance data that makes MA-9 unique. The battery discharge curves, CO2 partial pressure trends, and attitude control fuel consumption data quantify the spacecraft's approach to its operational limits. Essential for understanding how Cooper managed consumables over 34 hours."
+    },
+    {
+      "id": "nasa-sp4201",
+      "name": "This New Ocean: A History of Project Mercury (NASA SP-4201)",
+      "url": "https://history.nasa.gov/SP-4201/toc.htm",
+      "type": "secondary-source",
+      "category": "history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "The official NASA history of Project Mercury by Swenson, Grimwood, and Alexander. Covers all six crewed flights in technical and institutional detail. The MA-9 chapters document the decision process behind the 22-orbit mission, the debate about whether to extend Mercury or transition to Gemini, and Cooper's manual reentry procedure.",
+      "mission_relevance": "Provides the institutional and decision-making context that is essential for understanding why MA-9 was flown at all. Documents the cancelled MA-10 (48-orbit mission) and the logic behind ending Mercury after Cooper's flight."
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's general-purpose ephemeris computation service. Can compute Earth's position and orbital elements at MA-9's launch epoch (May 15, 1963), enabling precise orbital mechanics calculations for the mission.",
+      "mission_relevance": "Enables reconstruction of MA-9's ground track over 22 orbits, the lighting conditions for Cooper's visual observations, and the geometry of the retrofire and reentry sequence."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "format": "TSV/HTML",
+      "access": "open",
+      "description": "Comprehensive database of all orbital and suborbital launches. Includes all Mercury-Atlas launch records, Atlas D/130-D vehicle specifications, and orbital parameters for all Mercury missions. Enables comparison of MA-9 orbital parameters with previous Mercury flights.",
+      "mission_relevance": "Provides the quantitative comparison data for the Mercury program progression: MR-3 (suborbital, 15 min) through MA-9 (22 orbits, 34 hr). Essential for the endurance progression analysis."
+    },
+    {
+      "id": "usda-feis-madrone",
+      "name": "USDA Fire Effects Information System -- Arbutus menziesii",
+      "url": "https://www.fs.usda.gov/database/feis/plants/tree/arbmen/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive ecological profile of Pacific Madrone in North American forests. Covers growth rates, maximum dimensions (30-40 m height), fire ecology (root crown resprouting after top-kill), drought adaptations (deep root penetration into fractured bedrock), distribution range (BC to San Diego), and wildlife habitat values including berry production for birds.",
+      "mission_relevance": "Establishes the biological and ecological context for the organism pairing. Madrone's edge-habitat specialization, bark exfoliation, and fire resprouting are the primary resonance features with Cooper's edge-of-envelope flight and recovery from systems failure."
+    },
+    {
+      "id": "flora-north-america-arbutus",
+      "name": "Flora of North America -- Arbutus menziesii",
+      "url": "http://floranorthamerica.org/",
+      "type": "primary-source",
+      "category": "taxonomy",
+      "format": "HTML",
+      "access": "open",
+      "description": "Taxonomic description, morphological characterization, and distribution data for Arbutus menziesii. Formal botanical treatment including diagnostic features (bark exfoliation, evergreen leaves, urn-shaped flowers, red berries), phylogenetic placement in Ericaceae, and relationship to the Mediterranean Arbutus species.",
+      "mission_relevance": "Provides the taxonomic foundation for the organism pairing, including the Ericaceae family connection to salal (mission 1.3) and the Menzies naming connection to Douglas-fir (mission 1.5)."
+    },
+    {
+      "id": "nasa-image-library-mercury",
+      "name": "NASA Image and Video Library -- Mercury-Atlas 9",
+      "url": "https://images.nasa.gov/search?q=mercury+atlas+9&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "Historical photographs from MA-9: Cooper in the capsule, the Atlas 130-D on LC-14, Faith 7 capsule closeups, recovery operations from USS Kearsarge, and Cooper's post-flight press conference. Public domain imagery.",
+      "mission_relevance": "Visual documentation of the MA-9 hardware, launch, flight, and recovery. Essential for understanding the physical scale of the Mercury capsule (1.89m x 1.89m) and the conditions Cooper endured for 34 hours."
+    },
+    {
+      "id": "ebird-western-tanager",
+      "name": "eBird -- Western Tanager (Piranga ludoviciana)",
+      "url": "https://ebird.org/species/westan",
+      "type": "primary-source",
+      "category": "ornithology",
+      "format": "HTML/API",
+      "access": "open",
+      "description": "Citizen science occurrence data for Western Tanager across its full range. Includes spring and fall migration timing in the Pacific Northwest, breeding season distribution in conifer forests, and autumn aggregation data at fruiting trees including Arbutus menziesii.",
+      "mission_relevance": "Documents the Western Tanager's migration phenology and its dietary use of Madrone berries, establishing the literal ecological connection between the organism and bird pairings."
+    },
+    {
+      "id": "national-forest-inventory",
+      "name": "USDA Forest Service National Forest Inventory (FIA)",
+      "url": "https://www.fia.fs.usda.gov/",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "CSV/Database",
+      "access": "open",
+      "description": "The Forest Inventory and Analysis program's permanent plot network includes extensive Arbutus menziesii measurements across its Pacific coast range. Tree diameter, height, crown condition, mortality, and regeneration data from thousands of plots where Madrone occurs.",
+      "mission_relevance": "Provides population-level statistics for Madrone: growth rates, survival probabilities, size distributions, and habitat associations. Enables quantitative comparison of tree endurance (centuries) with spacecraft endurance (hours)."
+    }
+  ]
+}

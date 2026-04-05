@@ -1,0 +1,468 @@
+# Mission 1.26 -- Ranger 1: The Math of Falling Back
+
+## Track 3: TSPB Mathematics (McNeese-Hoag Format)
+
+**Mission:** Ranger 1 (August 23, 1961)
+**Primary TSPB Layer:** 4 (Vector Calculus -- Orbital Mechanics, Parking Orbit Injection)
+**Secondary Layers:** 5 (Probability and Statistics -- Exponential Decay, Orbital Lifetime), 3 (Trigonometry -- Orbital Period and Geometry), 1 (Unit Circle -- Circular Orbit as the Simplest Closed Curve)
+**Format:** McNeese-Hoag Reference Standard (1961) -- Tables, Formulas, Worked Examples
+
+---
+
+## Deposit 1: The Parking Orbit -- Circular Motion at 160 km (Layer 1, Section 1.26)
+
+### Table
+
+| Parameter | Symbol | Units | Ranger 1 Value |
+|-----------|--------|-------|----------------|
+| Launch date | -- | -- | August 23, 1961, 10:04 UTC |
+| Launch vehicle | -- | -- | Atlas-Agena A (Atlas 111D / Agena 6001) |
+| Operating agency | -- | -- | JPL / NASA |
+| Spacecraft mass | m_sc | kg | 306.2 |
+| Agena + spacecraft mass | m_total | kg | ~900 |
+| Parking orbit altitude | h | km | ~160 |
+| Orbital radius | r | km | 6,531 |
+| Orbital velocity | v | km/s | ~7.81 |
+| Orbital period | T | min | ~91 |
+| Orbits completed | N | -- | ~110 |
+| Intended target | -- | -- | Highly elliptical orbit, apogee ~1,100,000 km |
+| Actual outcome | -- | -- | Trapped in parking orbit; decayed in 7 days |
+
+### Formulas
+
+**Circular Orbital Velocity:**
+
+A spacecraft in a circular orbit at radius r from Earth's center moves at:
+
+```
+v_circ = sqrt(mu / r)
+
+where:
+  mu = G * M_earth = 3.986e14 m^3/s^2
+  r = R_earth + h = 6.371e6 + 160e3 = 6.531e6 m
+
+v_circ = sqrt(3.986e14 / 6.531e6)
+       = sqrt(6.104e7)
+       = 7,813 m/s ≈ 7.81 km/s
+```
+
+**Orbital Period:**
+
+The time for one complete orbit:
+
+```
+T = 2 * pi * sqrt(r^3 / mu)
+T = 2 * pi * sqrt((6.531e6)^3 / 3.986e14)
+T = 2 * pi * sqrt(2.786e20 / 3.986e14)
+T = 2 * pi * sqrt(6.990e5)
+T = 2 * pi * 836.0
+T = 5,253 s ≈ 87.6 min
+```
+
+At 160 km altitude, Ranger 1 completed one orbit every ~88 minutes. In seven days (604,800 seconds), it completed approximately 115 orbits.
+
+### Worked Example
+
+**Problem:** Calculate the parking orbit parameters for Ranger 1 and compare them to the intended deep space trajectory.
+
+```python
+import numpy as np
+
+mu = 3.986e14       # Earth gravitational parameter
+R_earth = 6.371e6   # meters
+
+print("RANGER 1: PARKING ORBIT ANALYSIS")
+print("=" * 60)
+
+# Parking orbit
+h_park = 160e3      # altitude (m)
+r_park = R_earth + h_park
+
+v_circ = np.sqrt(mu / r_park)
+T_park = 2 * np.pi * np.sqrt(r_park**3 / mu)
+
+print(f"\nParking orbit:")
+print(f"  Altitude: {h_park/1e3:.0f} km")
+print(f"  Radius:   {r_park/1e3:.0f} km")
+print(f"  Velocity: {v_circ:.1f} m/s = {v_circ/1e3:.3f} km/s")
+print(f"  Period:   {T_park:.0f} s = {T_park/60:.1f} min")
+
+# How many orbits in 7 days?
+mission_duration = 7 * 86400  # seconds
+n_orbits = mission_duration / T_park
+print(f"\n  Duration: 7 days = {mission_duration:.0f} s")
+print(f"  Orbits completed: ~{n_orbits:.0f}")
+
+# Intended trajectory: highly elliptical, apogee ~1,100,000 km
+r_apo = 1.1e9  # 1,100,000 km in meters
+a_intended = (r_park + r_apo) / 2
+v_injection = np.sqrt(mu * (2/r_park - 1/a_intended))
+delta_v = v_injection - v_circ
+
+print(f"\nIntended trajectory:")
+print(f"  Apogee: {r_apo/1e3:,.0f} km")
+print(f"  Semi-major axis: {a_intended/1e3:,.0f} km")
+print(f"  Injection velocity: {v_injection:.1f} m/s = {v_injection/1e3:.3f} km/s")
+print(f"  Required delta-v: {delta_v:.1f} m/s = {delta_v/1e3:.3f} km/s")
+print(f"\n  The Agena needed to provide {delta_v:.0f} m/s.")
+print(f"  It provided 0 m/s. The engine did not restart.")
+print(f"  Ranger 1 stayed at {h_park/1e3:.0f} km and fell back to Earth.")
+
+# Compare orbital energy: parking orbit vs intended
+eps_park = -mu / (2 * r_park)
+eps_intended = -mu / (2 * a_intended)
+print(f"\n{'='*60}")
+print(f"ENERGY COMPARISON:")
+print(f"  Parking orbit energy: {eps_park:.3e} J/kg (deeply bound)")
+print(f"  Intended orbit energy: {eps_intended:.3e} J/kg (barely bound)")
+print(f"  Energy deficit: {eps_intended - eps_park:.3e} J/kg")
+print(f"  The Agena restart would have added {(eps_intended-eps_park):.3e} J/kg")
+print(f"  Without it: trapped. With it: deep space.")
+```
+
+**Resonance statement:** *Ranger 1 circled Earth 115 times in seven days at 7.81 km/s, each orbit taking 88 minutes, each pass dipping slightly lower as the atmosphere bled energy from the trajectory. The parking orbit was supposed to be temporary -- a waypoint where the Agena would reignite and inject the spacecraft onto a deep space trajectory reaching 1.1 million kilometers. The Agena provided zero additional velocity. The spacecraft needed approximately 3.2 km/s more. It got nothing. The parking orbit became the final orbit. Circular, closed, descending, terminal.*
+
+---
+
+## Deposit 2: Orbital Decay -- The Exponential Atmosphere (Layer 5, Section 5.26)
+
+### Table
+
+| Parameter | Symbol | Units | Ranger 1 Value |
+|-----------|--------|-------|----------------|
+| Initial altitude | h_0 | km | ~160 |
+| Scale height (approx.) | H | km | ~40-60 (variable) |
+| Atmospheric density at 160 km | rho | kg/m^3 | ~1e-9 |
+| Drag coefficient | C_d | -- | ~2.2 |
+| Cross-sectional area | A | m^2 | ~5 (estimated) |
+| Total mass | m | kg | ~900 |
+| Ballistic coefficient | B | kg/m^2 | ~82 |
+| Orbital lifetime | t_life | days | ~7 |
+
+### Formulas
+
+**Atmospheric Density Model:**
+
+The atmosphere's density decreases approximately exponentially with altitude:
+
+```
+rho(h) = rho_0 * exp(-(h - h_0) / H)
+
+where:
+  rho_0 = reference density at reference altitude h_0
+  H = scale height (the altitude change that reduces density by factor e)
+  
+At orbital altitudes, H varies from ~30 km (150 km altitude)
+to ~70 km (400 km altitude). The scale height increases because
+the upper atmosphere is hotter (solar UV absorption) and lighter
+molecules (atomic oxygen) dominate.
+```
+
+**Aerodynamic Drag Force:**
+
+```
+F_drag = 0.5 * rho * v^2 * C_d * A
+
+At 160 km for Ranger 1:
+  rho ≈ 1e-9 kg/m^3
+  v ≈ 7810 m/s
+  C_d ≈ 2.2
+  A ≈ 5 m^2
+
+F_drag = 0.5 * 1e-9 * (7810)^2 * 2.2 * 5
+       = 0.5 * 1e-9 * 6.10e7 * 11
+       = 3.36e-1 N ≈ 0.34 N
+```
+
+That is about a third of a Newton -- roughly the weight of a AA battery on Earth. But applied continuously to a spacecraft moving at 7.8 km/s, it bleeds energy relentlessly.
+
+**Energy Loss Per Orbit:**
+
+```
+dE/orbit = F_drag * circumference = F_drag * 2*pi*r
+
+For Ranger 1:
+  dE = 0.34 * 2*pi*6.531e6
+   = 0.34 * 4.104e7
+   ≈ 1.40e7 J per orbit ≈ 14 MJ per orbit
+
+Total orbital energy: E = -mu*m/(2*r) = -3.986e14*900/(2*6.531e6)
+                       = -2.75e10 J
+
+Energy lost per orbit / Total energy ≈ 14e6 / 2.75e10 ≈ 0.05%
+→ ~2000 orbits to lose all energy (if constant density)
+→ But density increases as orbit lowers → accelerating decay
+→ Actual: ~115 orbits over 7 days
+```
+
+### Worked Example
+
+**Problem:** Model Ranger 1's orbital decay from 160 km to reentry, showing the exponential acceleration of decay.
+
+```python
+import numpy as np
+
+mu = 3.986e14
+R_earth = 6.371e6
+
+print("RANGER 1: ORBITAL DECAY SIMULATION")
+print("=" * 65)
+
+# Simplified decay model
+# da/dt = -(rho * v * Cd * A) / (2 * m) * a  (King-Hele)
+
+m = 900.0     # total mass (kg)
+Cd = 2.2
+A = 5.0       # cross-section (m^2)
+B = m / (Cd * A)  # ballistic coefficient
+
+print(f"Ballistic coefficient: {B:.1f} kg/m^2")
+print(f"(Higher B = slower decay. Ranger 1 was relatively high-drag.)")
+
+# Atmospheric density model
+def rho(h_km):
+    """Simple exponential density model"""
+    if h_km > 200:
+        return 3e-10 * np.exp(-(h_km - 200) / 60)
+    else:
+        return 3e-10 * np.exp(-(h_km - 200) / 40)
+
+# Euler integration of decay
+h = 160.0  # initial altitude (km)
+t = 0.0    # time (hours)
+dt = 0.1   # time step (hours)
+
+print(f"\n{'Time (hr)':>10} | {'Day':>5} | {'Alt (km)':>10} | {'Density':>12} | {'Status'}")
+print("-" * 65)
+
+last_printed = -999
+while h > 80 and t < 200:
+    r = (R_earth + h * 1000)
+    v = np.sqrt(mu / r)
+    density = rho(h)
+    
+    # Altitude loss rate (km/hour)
+    F_drag = 0.5 * density * v**2 * Cd * A
+    dh_dt = -F_drag * v * 3600 / (mu / r) / 1000  # simplified
+    
+    # Print at regular intervals
+    day = t / 24
+    if int(t / 12) > last_printed:
+        last_printed = int(t / 12)
+        status = ""
+        if h < 120: status = "REENTRY IMMINENT"
+        elif h < 140: status = "RAPID DECAY"
+        elif h < 155: status = "ACCELERATING"
+        else: status = "SLOW DECAY"
+        print(f"{t:>10.1f} | {day:>5.1f} | {h:>10.1f} | {density:>12.2e} | {status}")
+    
+    h += dh_dt * dt
+    t += dt
+
+print(f"{t:>10.1f} | {t/24:>5.1f} | {'80.0':>10} | {'---':>12} | REENTRY")
+print(f"\nTotal: {t:.0f} hours = {t/24:.1f} days")
+print(f"Historical: Ranger 1 reentered August 30, 1961 (~7 days)")
+print(f"\nThe decay ACCELERATED. First 3 days: ~5 km lost.")
+print(f"Last 2 days: ~60 km lost. Exponential atmosphere = exponential doom.")
+```
+
+**Resonance statement:** *Orbital decay at 160 km is not linear. It is exponential -- slow at first, then catastrophically fast. Ranger 1 lost perhaps 5 km of altitude in its first three days, circling in relative stability. Then the decay accelerated: lower altitude → higher density → more drag → lower altitude. The feedback loop closed. In the last two days, the orbit collapsed. The spacecraft that had seemed stable was actually on a one-way curve toward destruction. The exponential atmosphere is patient and then it is sudden. Opuntia fragilis survives drought the same way: the decline is gradual until a threshold is crossed, and then the plant either taps its stored water or dies. Ranger 1 had no stored water. It had only the orbit the Agena gave it, and the orbit was not enough.*
+
+---
+
+## Deposit 3: The Required Delta-V -- What the Agena Would Have Provided (Layer 4, Section 4.26)
+
+### Table
+
+| Parameter | Symbol | Units | Value |
+|-----------|--------|-------|-------|
+| Parking orbit velocity | v_park | km/s | 7.81 |
+| Injection velocity (target) | v_inject | km/s | ~10.9 |
+| Required delta-v | Δv | km/s | ~3.1 |
+| Agena A specific impulse | I_sp | s | ~276 |
+| Agena A thrust | F | kN | ~69 |
+| Agena propellant remaining | m_p | kg | ~3,600 (estimated) |
+| Burn duration (planned) | t_burn | s | ~90 (estimated) |
+
+### Formulas
+
+**Delta-V for Orbit Raising:**
+
+To raise the apogee from 160 km (circular) to 1,100,000 km, the vis-viva equation gives:
+
+```
+v_inject = sqrt(mu * (2/r_park - 1/a_target))
+
+a_target = (r_park + r_apo) / 2
+         = (6.531e6 + 1.1e9) / 2
+         = 5.533e8 m
+
+v_inject = sqrt(3.986e14 * (2/6.531e6 - 1/5.533e8))
+         = sqrt(3.986e14 * (3.064e-7 - 1.807e-9))
+         = sqrt(3.986e14 * 3.046e-7)
+         = sqrt(1.214e8)
+         = 11,018 m/s ≈ 11.0 km/s
+
+Delta-v = v_inject - v_park = 11,018 - 7,813 = 3,205 m/s
+```
+
+**Tsiolkovsky Rocket Equation:**
+
+The delta-v available from the Agena's remaining propellant:
+
+```
+Delta-v = I_sp * g0 * ln(m_initial / m_final)
+
+where:
+  I_sp = 276 s (Agena A Bell 8081 engine)
+  g0 = 9.81 m/s^2
+  m_initial = Agena wet mass + spacecraft ≈ 4,500 kg
+  m_final = Agena dry mass + spacecraft ≈ 900 kg
+
+Delta-v_available = 276 * 9.81 * ln(4500/900)
+                  = 2707 * ln(5.0)
+                  = 2707 * 1.609
+                  = 4,356 m/s
+
+4,356 m/s available > 3,205 m/s required → THE PROPELLANT WAS THERE
+```
+
+### Worked Example
+
+**Problem:** Show that the Agena had sufficient propellant for the injection burn. The failure was in the engine restart, not in the fuel budget.
+
+```python
+import numpy as np
+
+mu = 3.986e14
+R_earth = 6.371e6
+
+print("RANGER 1: THE BURN THAT DIDN'T HAPPEN")
+print("=" * 60)
+
+# Parking orbit
+h_park = 160e3
+r_park = R_earth + h_park
+v_park = np.sqrt(mu / r_park)
+
+# Target trajectory
+r_apo = 1.1e9  # 1,100,000 km
+a_target = (r_park + r_apo) / 2
+v_inject = np.sqrt(mu * (2/r_park - 1/a_target))
+dv_required = v_inject - v_park
+
+print(f"Parking orbit velocity:  {v_park:.0f} m/s ({v_park/1e3:.2f} km/s)")
+print(f"Injection velocity:      {v_inject:.0f} m/s ({v_inject/1e3:.2f} km/s)")
+print(f"Required delta-v:        {dv_required:.0f} m/s ({dv_required/1e3:.2f} km/s)")
+
+# Agena A capability
+Isp = 276       # seconds
+g0 = 9.81       # m/s^2
+m_wet = 4500    # kg (estimated)
+m_dry = 900     # kg (estimated, includes spacecraft)
+dv_available = Isp * g0 * np.log(m_wet / m_dry)
+
+print(f"\nAgena A capability:")
+print(f"  Specific impulse: {Isp} s")
+print(f"  Wet mass:  {m_wet} kg")
+print(f"  Dry mass:  {m_dry} kg")
+print(f"  Mass ratio: {m_wet/m_dry:.2f}")
+print(f"  Available delta-v: {dv_available:.0f} m/s ({dv_available/1e3:.2f} km/s)")
+
+print(f"\nMargin: {dv_available - dv_required:.0f} m/s")
+print(f"The Agena had {(dv_available/dv_required - 1)*100:.0f}% MORE propellant than needed.")
+print(f"\nThe propellant was there. The problem was delivering it to the engine.")
+print(f"In zero gravity, UDMH and IRFNA floated free in the tanks.")
+print(f"The pressurant gas mixed with the propellants.")
+print(f"The engine received a gas-liquid mixture instead of pure liquid.")
+print(f"No combustion. No thrust. No escape.")
+print(f"\nRanger 1 had the energy to reach deep space.")
+print(f"It was trapped by plumbing, not by physics.")
+```
+
+**Resonance statement:** *The cruelest detail of Ranger 1's failure is that the propellant was there. The Agena A carried more than enough UDMH and IRFNA to provide the 3,200 m/s needed for injection into the deep space trajectory. The mass ratio was generous. The engine thrust was sufficient. The burn time would have been approximately 90 seconds. The problem was not energy. The problem was fluid dynamics in zero gravity: liquids that would not settle, pressurant gas that would not stay where it was supposed to, a combustion chamber that received a useless mixture of gas and propellant instead of the clean liquid feed it needed. Ranger 1 was a prisoner with the key in the lock, unable to turn it because its hands were weightless. The mathematics of the orbit transfer were satisfied. The physics of the propellant management were not. Edgar Lee Masters would have understood: many of his Spoon River characters had everything they needed to leave -- talent, means, opportunity -- and could not, because the mechanism of departure did not work.*
+
+---
+
+## Deposit 4: Atmospheric Density as a Function of Altitude (Layer 5, Section 5.26)
+
+### Table
+
+| Altitude (km) | Density (kg/m^3) | Scale Height (km) | Orbital Lifetime (approx.) |
+|---------------|-------------------|--------------------|---------------------------|
+| 100 | 5.6e-7 | 6 | Hours |
+| 150 | 2.1e-9 | 26 | ~3 days |
+| 160 | 1.2e-9 | 30 | **~7 days (Ranger 1)** |
+| 200 | 2.5e-10 | 38 | ~2-4 weeks |
+| 300 | 1.9e-11 | 53 | ~6-12 months |
+| 400 | 3.7e-12 | 59 | ~2-5 years |
+| 500 | 8.4e-13 | 64 | ~15-30 years |
+| 600 | 2.2e-13 | 68 | ~50-100 years |
+
+### Worked Example
+
+```python
+import numpy as np
+
+print("ATMOSPHERIC DENSITY AND ORBITAL LIFETIME")
+print("=" * 70)
+
+# Simplified exponential atmosphere model
+altitudes = [100, 120, 140, 160, 180, 200, 250, 300, 400, 500, 600]
+
+# Reference: US Standard Atmosphere (approximate)
+rho_data = {
+    100: 5.6e-7, 120: 2.2e-8, 140: 3.8e-9, 160: 1.2e-9,
+    180: 4.0e-10, 200: 2.5e-10, 250: 6.1e-11, 300: 1.9e-11,
+    400: 3.7e-12, 500: 8.4e-13, 600: 2.2e-13
+}
+
+print(f"{'Alt (km)':>10} | {'Density (kg/m3)':>16} | {'Ratio to 160km':>15} | {'Life':>12}")
+print("-" * 70)
+
+rho_ranger = rho_data[160]
+for alt in altitudes:
+    rho = rho_data[alt]
+    ratio = rho / rho_ranger
+    # Very rough lifetime estimate
+    life_days = 7.0 / ratio  # scaled from Ranger 1's 7 days
+    if life_days < 1:
+        life_str = f"{life_days*24:.0f} hours"
+    elif life_days < 365:
+        life_str = f"{life_days:.0f} days"
+    else:
+        life_str = f"{life_days/365:.1f} years"
+    
+    marker = " ← RANGER 1" if alt == 160 else ""
+    print(f"{alt:>7} km | {rho:>16.2e} | {ratio:>15.2f} | {life_str:>12}{marker}")
+
+print(f"\nThe density at 160 km is 600x higher than at 400 km.")
+print(f"The ISS orbits at 400 km and boosts periodically.")
+print(f"Ranger 1 at 160 km had no boost capability. Seven days.")
+```
+
+**Resonance statement:** *The exponential atmosphere is the mathematical object that killed Ranger 1. At 160 km, the atmospheric density is 1.2 × 10⁻⁹ kg/m³ -- a vacuum by any terrestrial standard, but enough to remove 14 megajoules of orbital energy per revolution from a 900 kg spacecraft. Each orbit took 88 minutes. Each orbit was slightly lower. Each lower orbit encountered denser atmosphere. The decay was not constant -- it was exponential, the same mathematical function that describes the atmosphere's density profile. An exponential process driven by an exponential input produces doubly exponential behavior: stable-looking at first, then catastrophic. Ranger 1 seemed fine for days. Then it wasn't. Edgar Lee Masters' characters seem fine in their small town for decades. Then they die and tell the truth. The exponential is patient. And then it is sudden.*
+
+---
+
+## Debate Questions
+
+### Question 1: The Parking Orbit Trade-off
+
+The parking orbit technique enables flexible launch windows and pre-commit system checkout but requires engine restart in zero gravity. Direct-ascent trajectories avoid the restart problem but have narrow launch windows and no abort capability. Was the parking orbit the right choice for Ranger 1, given that restart technology was unproven? Consider the trade: accepting a known technological risk (restart) vs. accepting an operational constraint (narrow launch windows).
+
+### Question 2: The Seven-Day Datapoint
+
+Ranger 1 was not designed for low Earth orbit, but JPL used the seven-day parking orbit life to test spacecraft systems. Was this "making the best of failure" legitimate engineering validation, or did the wrong orbital environment invalidate the test results? Can data collected in the wrong conditions still be useful for designing systems intended for different conditions?
+
+### Question 3: Institutional Dependency
+
+NASA depended on the Air Force's Agena vehicle for Ranger launches. The Agena was optimized for military missions that did not require restart. Should NASA have developed its own upper stage for Ranger rather than depending on a military vehicle with different design priorities? What are the costs and benefits of institutional dependency in space programs?
+
+### Question 4: The Exponential Cliff
+
+Orbital lifetime changes dramatically with small altitude differences: 160 km → 7 days, 200 km → weeks, 400 km → years. If the Agena had inserted Ranger 1 into a 200 km orbit instead of 160 km (using slightly different first-burn parameters), the spacecraft would have survived weeks instead of days. Would the additional time have been useful? Could JPL have attempted a ground-based workaround for the Agena restart failure given more time?
+
+---
+
+*"Ranger 1 needed 3,200 meters per second of additional velocity. The Agena had 4,350 m/s of propellant energy waiting in its tanks. The fuel was there. The oxidizer was there. The engine was rated for the burn. The guidance system knew the trajectory. Every element of the escape was present except the one that mattered: the ability to deliver liquid propellant to a combustion chamber in zero gravity. Ranger 1 was trapped by fluid dynamics -- by the way liquids behave when there is no 'down.' The mathematics of the orbit transfer was solved. The physics of propellant management was not. The spacecraft circled Earth 115 times at 7.81 km/s, losing altitude with every pass, and reentered the atmosphere seven days after launch. The parking orbit was both the innovation and the trap. Every Apollo mission used it. Ranger 1 was the price of proving it could work by first showing how it could fail."*

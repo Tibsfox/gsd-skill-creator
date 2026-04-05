@@ -1,0 +1,117 @@
+{
+  "mission": "1.26",
+  "title": "Ranger 1",
+  "description": "Open datasets and source materials relevant to Ranger 1 (1961), the first Ranger lunar probe that failed to leave Earth orbit, Opuntia fragilis (brittle prickly pear cactus), American Robin (Turdus migratorius), and orbital decay physics",
+  "sources": [
+    {
+      "id": "nssdc-ranger-1",
+      "name": "NSSDC Master Catalog -- Ranger 1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-021A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Ranger 1. Spacecraft designation 1961-021A. Mass 306.2 kg, launched on Atlas-Agena A from Cape Canaveral LC-12. Documents the Agena A upper stage restart failure that stranded the spacecraft in a ~160 km parking orbit. Records the 7-day orbital life and reentry on August 30, 1961. Contains spacecraft bus description: hexagonal base, deployable solar panels, omnidirectional and high-gain antennas, cold-gas attitude control.",
+      "mission_relevance": "Definitive source for Ranger 1 spacecraft specifications, orbital parameters, and failure analysis. Confirms that the spacecraft bus operated normally in parking orbit while the Agena upper stage restart was the single point of failure. Essential for all orbital mechanics calculations and the parking orbit knowledge node."
+    },
+    {
+      "id": "nasa-sp-4210",
+      "name": "NASA SP-4210: Lunar Impact -- A History of Project Ranger",
+      "url": "https://history.nasa.gov/SP-4210/pages/Cover.htm",
+      "type": "primary-source",
+      "category": "historical-record",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "R. Cargill Hall's definitive NASA history of Project Ranger, published 1977. Full-text available online. Covers the program from conception through Ranger 9, with detailed accounts of each mission. Chapter 4 covers Block I Rangers (1 and 2), documenting the Agena A restart failure, the institutional dynamics between NASA/JPL/Air Force, and the spacecraft bus performance during the 7-day parking orbit life.",
+      "mission_relevance": "The primary historical source for Ranger 1's mission narrative. Provides the engineering detail on the Agena A propellant management failure, the parking orbit parameters, the spacecraft telemetry received during the 7-day life, and the institutional context of the NASA-Air Force relationship that complicated launch vehicle management."
+    },
+    {
+      "id": "ntrs-ranger",
+      "name": "NASA Technical Reports Server -- Ranger Project Reports",
+      "url": "https://ntrs.nasa.gov/search?q=ranger%201%20spacecraft",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Archive of JPL engineering reports, post-flight analyses, and mission summaries for the Ranger program. Includes Ranger 1 post-flight trajectory analysis, Agena A failure investigation reports, and Block I spacecraft bus performance data collected during the 7-day parking orbit life.",
+      "mission_relevance": "Technical documentation for Ranger 1's orbital parameters, spacecraft bus performance, and Agena A failure mode. Contains the engineering data that JPL extracted from the parking orbit -- thermal cycling data, attitude control performance, power system margins -- that informed subsequent Ranger designs."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "format": "TSV/HTML",
+      "access": "open",
+      "description": "Comprehensive launch database including the complete Atlas-Agena launch history. Documents all Ranger launches, including Atlas-Agena A (Rangers 1-2) and Atlas-Agena B (Rangers 3-9). Provides payload masses, orbital elements, and success/failure classification. Ranger 1 classified as failure -- Agena upper stage restart failure, spacecraft stranded in LEO.",
+      "mission_relevance": "Contextualizes Ranger 1 within the Atlas-Agena launch record and the broader history of upper stage restart technology. Provides the quantitative basis for comparing Agena A reliability (restart failures on Rangers 1-2) with Agena B reliability (successful restarts on Rangers 3+)."
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's ephemeris computation service. While Ranger 1 itself has no surviving orbital elements (it reentered), HORIZONS provides the Moon's position on August 23, 1961, enabling reconstruction of the intended trajectory geometry and the translunar injection window that the Agena restart was supposed to exploit.",
+      "mission_relevance": "Enables computation of the intended trajectory: from the 160 km parking orbit, through the Agena restart burn, to the highly elliptical orbit with 1.1 million km apogee. Essential for the delta-v calculation and the vis-viva equation worked examples."
+    },
+    {
+      "id": "usda-plants-opuntia",
+      "name": "USDA PLANTS Database -- Opuntia fragilis",
+      "url": "https://plants.usda.gov/home/plantProfile?symbol=OPFR",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "USDA distribution map and habitat description for Opuntia fragilis. Shows the species' range from British Columbia to Wisconsin, including disjunct populations in western Washington. Documents the species' status as the northernmost Opuntia in the Western Hemisphere. Includes wetland indicator status (obligate upland -- never found in wet habitats) and conservation rankings by state.",
+      "mission_relevance": "Establishes the geographic and ecological context for the organism pairing. The USDA data confirms Opuntia fragilis's presence in western Washington -- the anomalous PNW populations that form the basis of the 'wrong environment' resonance with Ranger 1's parking orbit."
+    },
+    {
+      "id": "usda-feis-opuntia",
+      "name": "USDA Fire Effects Information System -- Opuntia fragilis",
+      "url": "https://www.fs.usda.gov/database/feis/plants/cactus/opufra/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive ecological profile of Opuntia fragilis. Covers vegetative reproduction (pad fragmentation as primary dispersal), fire response (pads killed by fire but resprout from protected roots), cold tolerance (-40°C), CAM photosynthesis, and habitat requirements (well-drained, south-facing, low competition). Includes the species' role as a pioneer on bare rock and its successional relationships.",
+      "mission_relevance": "Provides the complete biological basis for the organism pairing. The FEIS data on pad fragmentation (reproductive strategy), cold tolerance (survival in wrong climate), CAM metabolism (resource conservation), and pioneer ecology (first vascular plant on bare rock) directly supports the resonance axes linking Opuntia fragilis to Ranger 1."
+    },
+    {
+      "id": "cornell-robin",
+      "name": "Cornell Lab of Ornithology -- All About Birds: American Robin",
+      "url": "https://www.allaboutbirds.org/guide/American_Robin",
+      "type": "secondary-source",
+      "category": "ornithology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive species account for Turdus migratorius. Covers identification, habitat, behavior, dawn song characteristics ('cheerily cheer-up cheerio'), nesting, diet, and population status. The American Robin is the most abundant land bird in North America with an estimated population of 370 million. Year-round resident in the PNW. The dawn song is the most recognized wild birdsong on the continent.",
+      "mission_relevance": "Establishes the ornithological context for the degree 25 bird pairing. The robin's status as the archetype -- the bird whose song other species are compared to, the 'original' after the approximations at degrees 23-24 -- parallels Ranger 1's status as the first approximation in a program converging on an archetype (Ranger 7)."
+    },
+    {
+      "id": "us-standard-atmosphere",
+      "name": "US Standard Atmosphere 1976",
+      "url": "https://ntrs.nasa.gov/citations/19770009539",
+      "type": "primary-source",
+      "category": "atmospheric-data",
+      "format": "PDF/Tables",
+      "access": "open",
+      "description": "Standard reference for Earth's atmospheric properties (temperature, pressure, density) as a function of altitude from sea level to 1000 km. Essential for orbital decay calculations. Provides the exponential density profile that determines orbital lifetime at any altitude. The scale height increases with altitude from ~8 km near the surface to ~50-80 km at orbital altitudes due to solar UV heating of the upper atmosphere.",
+      "mission_relevance": "Provides the atmospheric density model needed for Ranger 1's orbital decay simulation. At 160 km, the density is approximately 1e-9 kg/m^3 -- enough to cause reentry in approximately 7 days for a 900 kg vehicle with ~5 m^2 cross-section. Essential for all orbital lifetime calculations and the exponential decay worked examples."
+    },
+    {
+      "id": "space-track",
+      "name": "Space-Track TLE Archive",
+      "url": "https://www.space-track.org/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "TLE/JSON",
+      "access": "open (registration required)",
+      "description": "US Space Force maintained archive of Two-Line Element sets for tracked objects. Contains historical tracking data for objects from the early space age. While Ranger 1's specific TLEs may not be archived (the object reentered within 7 days), the database provides context for orbital decay rates of similar objects at comparable altitudes.",
+      "mission_relevance": "Provides validation data for orbital decay models. Comparing predicted decay rates for objects at 160 km altitude with actual reentry dates confirms the atmospheric density models used in the Ranger 1 decay simulation."
+    }
+  ]
+}
