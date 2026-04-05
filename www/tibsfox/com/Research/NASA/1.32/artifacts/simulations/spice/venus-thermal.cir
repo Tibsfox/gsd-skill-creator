@@ -1,0 +1,48 @@
+* Venus Thermal Balance — Mission 1.32 Analog Simulation
+* RC thermal model of Venus's greenhouse effect
+*
+* Models Venus's atmosphere as a chain of RC elements:
+*   Solar input → cloud reflection → atmospheric absorption → surface emission
+*   Each atmospheric layer absorbs and re-emits infrared
+*   The CO2 opacity creates thermal resistance that traps heat
+*
+* Mariner 2 measured the result: 460°C at the surface
+
+.title Venus Greenhouse Thermal Model
+
+* Solar input (constant power source representing sunlight)
+I_sun 0 clouds DC 2.601m
+
+* Cloud reflection (77% albedo — most sunlight reflected)
+R_albedo clouds 0 770
+
+* Solar energy reaching atmosphere
+R_clouds clouds atm1 100
+
+* Atmospheric layers (3 CO2 absorption layers)
+* Each layer has thermal capacity (C) and re-radiation (R)
+R1 atm1 atm2 50
+C1 atm1 0 100u
+R2 atm2 atm3 50
+C2 atm2 0 100u
+R3 atm3 surface 50
+C3 atm3 0 100u
+
+* Surface thermal mass
+C_surface surface 0 1m
+
+* Surface radiation to space (this is what CO2 blocks)
+* High resistance = strong greenhouse (Venus)
+* Low resistance = weak greenhouse (Mars)
+R_greenhouse surface 0 500
+
+.tran 1m 10
+.control
+run
+plot v(surface) v(atm1) v(atm2) v(atm3)
+print v(surface)
+* Surface voltage represents temperature (scaled)
+* Venus: expect high steady-state value (greenhouse trapping)
+.endc
+
+.end

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.33 — Ranger 6 + Western Red Cedar | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --cedar-deep: #2A1008;
+    --cedar-mid: #5C2E0E;
+    --cedar-warm: #8B4513;
+    --cedar-bark: #6B3A1F;
+    --bark-grey: #7A6E64;
+    --light-cedar: #D4A574;
+    --light-bright: #E8D4B8;
+    --forest-floor: #0D0A08;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #5C2E0E;
+    --warning: #CC8800;
+    --warning-light: #FFB030;
+    --warning-dark: #996600;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-floor);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(212,165,116,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(92,46,14,0.06) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(212,165,116,0.03) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(232,212,184,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(92,46,14,0.05) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,165,116,0.03) 0%, transparent 100%),
+      radial-gradient(2px 2px at 18% 75%, rgba(42,16,8,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 80%, rgba(92,46,14,0.05) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--forest-floor) 0%, var(--cedar-deep) 25%, var(--cedar-mid) 50%, var(--cedar-warm) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--warning);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212,165,116,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,165,116,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,136,0,0.15); border: 1px solid var(--warning);
+    border-radius: 6px; padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--warning-light); margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+
+  .status-partial {
+    background: rgba(204,136,0,0.3); border: 1px solid var(--warning);
+    color: var(--warning-light); padding: 0.2rem 0.6rem; border-radius: 4px;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-cedar); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(42,16,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--light-bright); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card { border-color: var(--warning); background: rgba(92,46,14,0.06); }
+
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(212,165,116,0.12); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num { background: var(--warning); color: var(--forest-floor); font-weight: 700; font-size: 0.8rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--light-bright); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card { background: rgba(42,16,8,0.5); border: 1px solid var(--cedar-warm); border-radius: 8px; padding: 1.5rem; }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--light-cedar); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--light-cedar); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(13,10,8,0.6); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--light-bright); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .dedication-card { background: rgba(212,168,48,0.08); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; }
+  .dedication-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.75rem; }
+
+  .data-links { background: rgba(11,61,145,0.15); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card { background: rgba(26,26,58,0.4); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .tracks-card h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .track-item { display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid rgba(11,61,145,0.15); font-size: 0.85rem; }
+  .track-item:last-child { border-bottom: none; }
+  .track-num { background: rgba(11,61,145,0.3); color: #7EB8DA; font-weight: 700; font-size: 0.7rem; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .nav-card { background: rgba(42,16,8,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--light-cedar); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-cedar); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.33</span>
+      <span>NASA Mission Series</span>
+      <span class="status-partial">PARTIAL FAILURE</span>
+    </div>
+    <h1>Ranger 6 &mdash; Perfect Aim, Blind Eyes</h1>
+    <p class="subtitle">The most accurate lunar impact in NASA history, and six dead cameras</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> January 30, 1964</span>
+      <span><span class="label">Program:</span> Ranger (NASA/JPL)</span>
+      <span><span class="label">Epoch:</span> 2 &mdash; Lunar Reconnaissance</span>
+      <span><span class="label">Vehicle:</span> Atlas-Agena B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On January 30, 1964, Ranger 6 launched from Cape Canaveral on an Atlas-Agena B, carrying six RCA television cameras aimed at the Sea of Tranquility. Sixty-five and a half hours later, the 381-kilogram spacecraft struck the Moon at 9.39 km/s, within 32 kilometers of the aim point &mdash; the most accurate lunar impact in the Ranger program&rsquo;s history. The trajectory was flawless. The navigation was a masterpiece.</p>
+      <p>But thirteen minutes before impact, when JPL sent the command to activate the cameras, the telemetry showed nothing. All six cameras were dead. They had been killed 65 hours earlier, at T+107 seconds, when an electromagnetic transient during Atlas booster staging briefly energized the camera power bus inside the launch shroud. At 90 km altitude, the residual atmosphere was at the Paschen minimum &mdash; the pressure regime where electrical arcing occurs at the lowest voltage. The camera vidicon tubes, operating at 10,000+ volts, arced and burned out in less than a second. Ranger 6 flew for almost three days carrying six corpses where its eyes should have been.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 381.3 kg (Block III configuration &mdash; simplified, cameras-only)</li>
+        <li><strong>Cameras:</strong> Six RCA vidicon cameras &mdash; two full-scan (1,152-line) and four partial-scan (300-line)</li>
+        <li><strong>Power:</strong> Solar panels (200 W) with silver-zinc batteries</li>
+        <li><strong>Communication:</strong> S-band high-gain antenna (960 MHz)</li>
+        <li><strong>Propulsion:</strong> Monopropellant hydrazine midcourse correction engine</li>
+        <li><strong>Launch vehicle:</strong> Atlas-Agena B (Atlas D booster + Agena B restartable upper stage)</li>
+        <li><strong>Target:</strong> Mare Tranquillitatis (Sea of Tranquility)</li>
+        <li><strong>Impact accuracy:</strong> 32 km from aim point (best in program)</li>
+        <li><strong>Images returned:</strong> Zero</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Camera Failure</h2>
+      <p><strong>T+0 (15:49:00 UTC):</strong> Atlas-Agena B launches from LC-12, Cape Canaveral. Nominal.</p>
+      <p><strong>T+107 seconds:</strong> Atlas booster staging. Explosive bolts fire. Electromagnetic transient surges through wiring harness. Camera power bus briefly energized. At 90 km altitude, residual atmosphere inside the launch shroud is at Paschen minimum pressure. Camera vidicon tubes (&gt;10 kV) arc. All six cameras destroyed. <em>Nobody knows yet.</em></p>
+      <p><strong>T+12 min:</strong> Agena B achieves parking orbit. Nominal.</p>
+      <p><strong>T+32 min:</strong> Agena B second burn &mdash; translunar injection. Nominal.</p>
+      <p><strong>T+16 hr:</strong> Midcourse correction. Near-perfect.</p>
+      <p><strong>T+65 hr 15 min:</strong> Camera activation command sent. No response. Manual commands sent. No response. All six cameras confirmed dead.</p>
+      <p><strong>T+65 hr 28 min (09:24:32 UTC, Feb 2):</strong> Impact. Mare Tranquillitatis, 9.39&deg;N, 21.48&deg;E. Velocity 9.39 km/s. Within 32 km of target. Zero photographs.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Ranger 6 trajectory + Paschen breakdown visualizer &mdash; two-panel simulation showing the perfect approach and the physics that killed the cameras</li>
+        <li><strong>Python:</strong> Ranger program convergence chart &mdash; nine missions, six failures, three successes, the wall of zeros then the breakthrough</li>
+        <li><strong>Web:</strong> Interactive Paschen curve explorer &mdash; adjust pressure, gap, voltage and see whether an arc occurs</li>
+        <li><strong>Blender:</strong> Camera failure animation &mdash; launch, staging flash, blind transit, impact with no imaging (Cycles, 90 sec)</li>
+        <li><strong>GLSL:</strong> 4-mode screensaver &mdash; cedar cathedral, Ranger 6 transit, Paschen arc, waxwing flock</li>
+        <li><strong>Arduino/DIY:</strong> EMC shielding demonstrator ($12) &mdash; shielded vs unshielded wire, relay transient, LED indicator</li>
+        <li><strong>Arduino/DIY:</strong> Paschen arc demonstrator ($8) &mdash; piezo igniter in a jar with hand pump for pressure variation</li>
+        <li><strong>Godot 4:</strong> EMC challenge game &mdash; route wiring through a spacecraft, balance shielding vs mass budget</li>
+        <li><strong>GMAT:</strong> Ranger 6 trajectory reconstruction &mdash; compare targeting accuracy with Rangers 3 and 5</li>
+        <li><strong>Radio:</strong> LC filter stage ($15) &mdash; transient suppression on the power bus, the fix that was missing</li>
+        <li><strong>Screensaver:</strong> Cedar cathedral &rarr; Ranger transit &rarr; Paschen arc &rarr; Waxwing flock (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Paschen breakdown &mdash; plot the breakdown curve, find the minimum, mark Ranger 6&rsquo;s danger zone (30 min, Python)</li>
+        <li><strong>TRY 2:</strong> Targeting accuracy &mdash; compute angular error, fractional error, and real-world analogy for 32-km miss from 384,400 km (30 min, Python)</li>
+        <li><strong>TRY 3:</strong> Ranger program convergence &mdash; chart all nine missions, identify the pattern of failure modes (45 min, Python + matplotlib)</li>
+        <li><strong>TRY 4:</strong> Zero-information paradox &mdash; argue that the mission returning zero images was the most informative in the program (30 min, discussion)</li>
+        <li><strong>DIY 1:</strong> EMC shielding demonstrator ($12) &mdash; relay transient, shielded vs unshielded wire, LED indicators</li>
+        <li><strong>DIY 2:</strong> Paschen arc demonstrator ($8) &mdash; piezo igniter in a jar with adjustable pressure</li>
+        <li><strong>DIY 3:</strong> Cedar bark fiber experiment (free) &mdash; strip, process, and twist cedar bark into cordage</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-blind-transit.html" style="color: var(--light-bright);">Story: &ldquo;The Blind Transit&rdquo;</a>
+          <a href="artifacts/stories/the-blind-transit.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; 65.5 hours through the dark, told from the spacecraft&rsquo;s perspective
+        </li>
+        <li><a href="artifacts/audio/camera-death-transient.dsp" style="color: #7EB8DA;">Audio: Camera Death Transient</a> &mdash; FAUST VST/LV2 (launch, arc, 60 seconds of silence, impact)</li>
+        <li><a href="artifacts/audio/bohemian-waxwing-flock.dsp" style="color: #7EB8DA;">Audio: Bohemian Waxwing Flock</a> &mdash; FAUST generative (thin trilling calls, Doppler flock movement)</li>
+        <li><a href="artifacts/circuits/emc-shielding-demo.md" style="color: var(--light-bright);">Circuit: EMC Shielding Demonstrator</a> &mdash; Relay transient, shielded vs unshielded ($12)</li>
+        <li><a href="artifacts/circuits/paschen-arc-demo.md" style="color: var(--light-bright);">Circuit: Paschen Arc Demonstrator</a> &mdash; Piezo igniter, adjustable pressure ($8)</li>
+        <li><a href="artifacts/screensaver/ranger6-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Cedar cathedral, Ranger transit, Paschen arc, Waxwing flock</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Perfect arrival, blind eyes:</span> Ranger 6 hit the Moon within 32 km of the aim point &mdash; the most accurate impact in the program. But six dead cameras meant zero photographs. Western red cedar arrives in the forest with perfect ecological timing &mdash; shade-tolerant, rot-resistant, exactly where needed. But it does not tower above the canopy. Both arrive perfectly. Both are measured by the wrong metric.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">The foundation that outlasts the builder:</span> Ranger 6&rsquo;s failure analysis produced 100+ recommendations that enabled Rangers 7-9 to return 17,267 photographs combined. Cedar nurse logs persist for 300-500 years, supporting generations of trees that outlive the nurse log itself. Both build foundations that outlast their visible existence.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">Thin bark, thick wood:</span> Cedar bark is thin &mdash; 1-2 cm, vulnerable to fire. But the heartwood is nearly indestructible, protected by thujaplicins that resist decay for centuries. Ranger 6&rsquo;s electromagnetic shielding was thin &mdash; vulnerable to the staging transient. But the trajectory engineering beneath was nearly perfect. Surface vulnerability, core strength.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">The arc at staging:</span> Atlas booster staging created an electromagnetic transient that coupled into the camera power bus. Cedar is most vulnerable during the fire events that periodically sweep through PNW forests. Both face their greatest danger during moments of transition &mdash; configuration changes that create transient conditions. The arc lasts less than a second. The fire passes in minutes. The destruction is permanent.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">The Tree of Life:</span> Coast Salish peoples call western red cedar the Tree of Life because every part serves a purpose &mdash; wood, bark, roots, boughs. Ranger 6, despite returning zero photographs, served purposes: trajectory validation, navigation confirmation, failure analysis, electromagnetic shielding redesign. The mission that returned nothing returned everything the program needed to succeed.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">Invisible structural contribution:</span> Luther Rabb played bass in War &mdash; the groove that held the hits together, structurally essential but commercially invisible. Mary Jackson did boundary layer engineering at NASA Langley &mdash; foundational work recognized decades later. Ranger 6 delivered navigation data and failure analysis that no one celebrated at the time. Cedar builds the material culture. All four did work that was essential and invisible.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Ranger Program: From Failure to Triumph</h2>
+      <p>Rangers 1-6 returned zero scientific data from the Moon. Six missions, six different failure modes: Agena failure (twice), trajectory miss, computer failure, power failure, camera failure. The program consumed $170 million with no photographs. Congress questioned whether JPL could deliver. NASA ordered a comprehensive review.</p>
+      <p>Then Ranger 6&rsquo;s failure investigation produced 100+ corrective recommendations. Every one was implemented for Ranger 7. Six months later, on July 31, 1964, Ranger 7 struck the Moon and returned 4,316 photographs &mdash; the first close-up images of the lunar surface from an American spacecraft. Ranger 8 followed with 7,137 images. Ranger 9 added 5,814 more. The program that returned zero for six missions returned 17,267 images in its final three.</p>
+      <p>Ranger 6 was the last failure. Everything after it worked. The failure analysis was the bridge.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.32/index.html">&larr; v1.32</a>
+      <a href="../1.34/index.html">v1.34 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Thuja plicata (Western Red Cedar)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">65m</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6m</div>
+          <div class="stat-label">Diameter</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1500+</div>
+          <div class="stat-label">Lifespan (yrs)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The Tree of Life of the Pacific Northwest. Not a true cedar &mdash; belongs to the cypress family (Cupressaceae), not the cedar family (Pinaceae). Coast Salish peoples used every part: wood for longhouses and canoes, bark for weaving, roots for baskets, boughs for ceremony. Shade-tolerant, rot-resistant (thujaplicins protect heartwood for centuries), slow-growing, patient. Arrives perfectly in the forest understory and waits. The tree that gives everything and towers over nothing. The material foundation of an entire civilization.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Bombycilla garrulus (Bohemian Waxwing)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 32. An irruptive winter visitor to the PNW &mdash; appears unpredictably in enormous flocks when boreal berry crops fail. Strips mountain ash trees in minutes, then vanishes. Sleek, masked, with distinctive waxy red tips on the secondary feathers (keratin ornaments of unknown function). The bird that arrives with perfect timing and vanishes before the camera focuses. Perfect arrival. No documentation. Ranger 6 with feathers.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Mary Jackson</h3>
+      <p style="font-size:0.85rem;">April 9, 1921 &mdash; February 11, 2005</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">First African American female engineer at NASA. Worked on boundary layer analysis at supersonic speeds &mdash; the physics of the atmosphere-vacuum transition where Ranger 6&rsquo;s cameras died. Her structural contributions to aerospace engineering were invisible for decades, recognized with the naming of NASA Headquarters in 2020. Like Ranger 6, she did essential work that was undervalued in its time and foundational in retrospect.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1964-007A">NSSDC &mdash; Ranger 6</a>
+      <a href="https://ntrs.nasa.gov/search?q=ranger%206">NASA NTRS &mdash; Ranger 6 Reports</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS Ephemeris</a>
+      <a href="https://images.nasa.gov/search?q=ranger+6&media=image">NASA Image Library</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/tree/thupli/all.html">USDA FEIS &mdash; Western Red Cedar</a>
+      <a href="https://www.duwamishtribe.org/">Duwamish Tribal Organization</a>
+      <a href="https://www.allaboutbirds.org/guide/Bohemian_Waxwing">Cornell &mdash; Bohemian Waxwing</a>
+      <a href="https://ebird.org/species/bohwax">eBird &mdash; Bohemian Waxwing</a>
+      <a href="https://www.nasa.gov/langley/mary-w-jackson-biography">NASA &mdash; Mary Jackson</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--light-cedar);">&ldquo;Six dead cameras. The groove hits the Moon on time. Cedar in the shade.&rdquo;</p>
+</footer>
+
+</body>
+</html>

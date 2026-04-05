@@ -1,0 +1,61 @@
+{
+  "mission": "1.34",
+  "title": "Ranger 7 (Atlas-Agena B)",
+  "date": "1964-07-28",
+  "organism": "Haemorhous cassinii",
+  "organism_common": "Cassin's Finch",
+  "organism_location": "Montane coniferous forests of western North America -- breeding in open ponderosa pine and Douglas-fir forests from 1,200 to 2,800 m elevation in the Cascades, Sierra Nevada, and Rocky Mountains. The finch that climbs highest among the western Haemorhous finches, preferring the open canopy zone where the forest thins toward treeline.",
+  "bird": "Haemorhous cassinii",
+  "bird_common": "Cassin's Finch",
+  "dedication": {
+    "name": "John Cassin",
+    "born": "1813-09-06",
+    "died": "1869-01-10",
+    "birthplace": "Providence Township, Delaware County, Pennsylvania",
+    "field": "Ornithology, taxonomy, museum science",
+    "resonance": "John Cassin was the most prolific describer of new bird species in nineteenth-century North America, identifying 198 species from his desk at the Academy of Natural Sciences in Philadelphia -- without ever visiting the western mountains where many of his species lived. The finch named in his honor breeds at 2,000 meters in the Cascades, a landscape Cassin never saw. Ranger 7 was an unmanned spacecraft -- no human visited the Moon with it. Both Cassin and Ranger achieved their greatest contributions through remote observation: Cassin through preserved specimens shipped to Philadelphia, Ranger through photographs transmitted to Goldstone. The observer need not be present where the observation is made. The specimen, the image, the data -- these carry the information across the distance."
+  },
+  "nodes": [
+    {
+      "id": "crater-size-frequency",
+      "concept": "Crater size-frequency distribution -- the power law that describes impact crater populations",
+      "department": "planetary-science",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.34",
+      "description": "Ranger 7's 4,308 photographs revealed that lunar craters follow a cumulative size-frequency distribution described by the power law N(>D) = k * D^b, where b ≈ -2 for mare surfaces. This means that for every tenfold decrease in crater diameter, the number of craters increases by a hundredfold. The distribution held continuously from the largest craters visible in the first wide-angle frames (~10 km diameter) to the smallest craters resolved in the final telephoto frames (~1 m diameter). There was no scale at which the surface became smooth -- craters existed at every resolution Ranger 7 could achieve. This power-law distribution arises from the size distribution of the impacting bodies (asteroids and comets), which itself follows a power law. The crater production function has been used ever since to date planetary surfaces throughout the solar system: more craters per unit area means an older surface, with the relationship calibrated by radiometric ages from Apollo and Luna sample return missions.",
+      "resonance": "Cassin's Finch song elements follow a distribution of their own: common syllable types appear frequently, while rare syllable types (including mimicked elements) appear infrequently. The distribution of syllable diversity across individuals in a population follows a roughly log-normal pattern, with a few individuals possessing exceptionally complex repertoires and most possessing moderate complexity. Both the crater distribution and the song distribution are emergent properties of cumulative processes -- billions of years of impacts for the Moon, years of learning and social interaction for the finch. Both are measured by counting and classifying: craters by diameter, syllables by type.",
+      "worked_example": {
+        "description": "Calculate the expected number of craters at different size thresholds for Mare Cognitum",
+        "parameters": {
+          "k": 1e7,
+          "b": -2.0,
+          "area_km2": 1.0
+        },
+        "formula": "N(>D) = k * D^b, where D is in meters",
+        "result": "Craters >1m: ~10,000,000/km^2. >10m: ~100,000/km^2. >100m: ~1,000/km^2. >1km: ~10/km^2. The power law spans seven orders of magnitude in crater count across four orders of magnitude in diameter.",
+        "python": "import numpy as np\n\nk = 1e7\nb = -2.0\n\nfor D in [1, 10, 100, 1000, 10000]:\n    N = k * D**b\n    print(f'D > {D:>6} m: {N:>12,.0f} craters/km^2')\n\nprint(f'\\nRanger 7 resolved from {k * 2000**b:.0f} to {k * 0.5**b:.0f} craters/km^2')\nprint(f'That is {k * 0.5**b / (k * 2000**b):.0f}x more craters visible in the last frame.')"
+      }
+    },
+    {
+      "id": "image-resolution-altitude",
+      "concept": "Ground sample distance -- the relationship between camera altitude and image resolution",
+      "department": "imaging-science",
+      "level": "intermediate",
+      "tspb_layer": 1,
+      "tspb_section": "1.34",
+      "description": "The ground sample distance (GSD) of a camera is the size of one pixel projected onto the surface: GSD = h * d_pixel / f, where h is the altitude, d_pixel is the physical size of one pixel on the detector, and f is the focal length. For Ranger 7's P-channel telephoto camera (76mm focal length, 300-line vidicon with 11mm image area), d_pixel = 36.7 micrometers. At the camera activation altitude of 2,110 km, GSD = 1,018 m. At the final frame altitude of 480 m, GSD = 0.23 m. Resolution improves linearly with decreasing altitude. This is the fundamental imaging equation: get twice as close, resolve twice as small.",
+      "resonance": "Cassin's Finch song detail resolves with proximity in the same way. From 100 meters, the song is an undifferentiated warble. From 30 meters, individual syllable types become distinguishable. From 10 meters, the mimicry elements are identifiable -- a stolen Red Crossbill phrase, a Mountain Chickadee fragment. From 3 meters (with a directional microphone), the microstructure of each syllable is visible on a spectrogram: frequency modulation patterns, harmonic ratios, amplitude envelopes. The acoustic 'resolution' improves linearly with decreasing distance, just as Ranger's optical resolution improved linearly with decreasing altitude."
+    },
+    {
+      "id": "redundant-camera-design",
+      "concept": "Redundancy as reliability engineering -- dual independent camera chains",
+      "department": "engineering",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.34",
+      "description": "Ranger 7's camera system was designed with full redundancy after Ranger 6's total camera failure. Two completely independent camera chains (F-channel and P-channel), each with its own power supply, electronics, and transmitter, ensured that a single-point failure could not kill the entire imaging system. The probability of both chains failing independently is P_fail = P_F * P_P, where P_F and P_P are the individual chain failure probabilities. If each chain has 95% reliability, the system reliability is 1 - (0.05 * 0.05) = 99.75%. The redundancy architecture transformed Ranger 7 from a single-string system (one failure kills everything, as on Ranger 6) to a fault-tolerant system where only a simultaneous double failure could prevent imaging.",
+      "resonance": "Cassin's Finch maintains vocal redundancy through its mimicry repertoire. If the primary song fails to attract a mate or deter a rival (perhaps because the listener is familiar with that song type), the singer can switch to mimicked elements -- a different acoustic signal from a different source species. The mimicry functions as a backup communication channel: same message (territorial claim, mate attraction), different encoding. The finch's repertoire diversity provides the same kind of fault tolerance that Ranger 7's dual camera chains provided."
+    }
+  ]
+}
