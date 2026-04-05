@@ -55,8 +55,32 @@ SCHEDULE = {
     45: ['drift_check', 'commit'],
 }
 
+# Peak cadence schedule: every 15 min gets full sweep + embed
+# Used during lunar flyby window (Day 8, 06:00-18:00 EDT = 10:00-22:00 UTC)
+PEAK_SCHEDULE = {
+    0:  ['sweep', 'embed', 'ftp_sync', 'commit'],
+    15: ['sweep', 'embed', 'concept_check', 'commit'],
+    30: ['sweep', 'embed', 'nasa_check', 'chroma_sync', 'commit'],
+    45: ['sweep', 'embed', 'drift_check', 'commit'],
+}
+
+# Peak cadence windows: (mission_day, start_hour_utc, end_hour_utc)
+PEAK_WINDOWS = [
+    (8, 10, 22),  # Day 8 (Apr 7): lunar flyby, 06:00-18:00 EDT
+]
+
 # NASA briefing playlist
 NASA_PLAYLIST = 'PL2aBZuCeDwlSoxUrYsYWZr6NBTTKGir8U'
+
+
+def is_peak_cadence(mission_day):
+    """Check if current time falls within a peak cadence window."""
+    now_utc = datetime.now(timezone.utc)
+    hour_utc = now_utc.hour
+    for day, start_h, end_h in PEAK_WINDOWS:
+        if mission_day == day and start_h <= hour_utc < end_h:
+            return True
+    return False
 
 
 def load_state():
@@ -157,7 +181,7 @@ for f in ['index.html', 'series.js']:
         with open(local, 'rb') as fh:
             ftp.storbinary(f'STOR {f}', fh)
         count += 1
-for subdir in ['OPEN/problems', 'LIVE', 'MUK/sims', 'MUK']:
+for subdir in ['OPEN/problems', 'LIVE', 'MUK/sims', 'MUK', 'NASA/artemis-ii']:
     local_dir = os.path.join(local_base, subdir)
     if not os.path.isdir(local_dir): continue
     try: ftp.cwd(f'/{subdir}')
@@ -258,7 +282,8 @@ def action_chroma_sync(dry_run=False):
 
 def run_mark(hour, minute, day, ver_prefix, state, dry_run=False):
     """Execute all actions for a given mark."""
-    actions = SCHEDULE.get(minute, [])
+    schedule = PEAK_SCHEDULE if is_peak_cadence(day) else SCHEDULE
+    actions = schedule.get(minute, [])
     if not actions:
         return
 
@@ -307,6 +332,7 @@ def daemon_loop(day_override=None, dry_run=False, once=False):
 
     print(f"Sweep Daemon started at {datetime.now().strftime('%H:%M:%S %Z')}")
     print(f"Schedule: {', '.join(f':{m:02d}' for m in sorted(SCHEDULE.keys()))}")
+    print(f"Peak windows: {', '.join(f'Day {d} {s:02d}:00-{e:02d}:00 UTC' for d, s, e in PEAK_WINDOWS)}")
     print(f"Dry run: {dry_run}")
 
     last_executed = -1
@@ -327,7 +353,8 @@ def daemon_loop(day_override=None, dry_run=False, once=False):
 
         # Check if we're at a scheduled mark and haven't already executed it
         mark_key = hour * 100 + minute
-        if minute in SCHEDULE and mark_key != last_executed:
+        active_schedule = PEAK_SCHEDULE if is_peak_cadence(day) else SCHEDULE
+        if minute in active_schedule and mark_key != last_executed:
             run_mark(hour, minute, day, ver_prefix, state, dry_run)
             last_executed = mark_key
 
