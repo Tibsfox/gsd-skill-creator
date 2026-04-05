@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Infrastructure &amp; Systems &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Infrastructure &amp; Systems</h1>
+    <div class="subtitle">MCP Orchestration &middot; Memory Consistency &middot; Work Contracts &middot; System Design &middot; IoT Security &middot; USB Stacks</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-mcp-orchestration-registry">MCP Orchestration</a>
+      <a href="page.html?doc=02-memory-consistency-models">Memory Consistency</a>
+      <a href="page.html?doc=03-work-contracts-concurrency">Work Contracts</a>
+      <a href="page.html?doc=04-compiler-in-the-loop-agentic">Compiler-in-Loop</a>
+      <a href="page.html?doc=05-iot-security-usb-stacks">IoT &amp; USB</a>
+      <a href="page.html?doc=06-system-design-reliability">System Design</a>
+      <a href="page.html?doc=07-synthesis-ordering-guarantees">Synthesis</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      It&rsquo;s almost a primitive on its own. And that is by design. So this is a very simple
+      system. There&rsquo;s no bells and whistles. It is just the lean smallest part you can get
+      into a concurrency library. &mdash; Michael Maniscalco, Lime Trading, on work contracts.
+      Two million messages per second, zero loss, fair distribution. Nobody&rsquo;s getting starved.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">15</span><span class="stat-label">Talks Analyzed</span></div>
+      <div class="stat"><span class="stat-value">~750</span><span class="stat-label">Min. Source Video</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Conferences/Series</span></div>
+      <div class="stat"><span class="stat-value">55x</span><span class="stat-label">Peak Optimization</span></div>
+      <div class="stat"><span class="stat-value">2K</span><span class="stat-label">MCP Servers Published</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-mcp-orchestration-registry" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: MCP Orchestration &amp; Registry</h3>
+        <div class="meta"><span class="tag tag-mcp">MCP</span> NimbleBrain + GitHub &middot; Protocol Layer</div>
+        <p>Conversational workflow replacing diagram-based automation. MCPB bundles eliminating cold-start (90s to &lt;10s). Public/private MCP orchestration for enterprise. LLM judges evaluating execution success. The open-source MCP registry with ~2,000 servers. GitHub&rsquo;s curated downstream with enterprise governance via allow-list policies.</p>
+      </a>
+
+      <a href="page.html?doc=02-memory-consistency-models" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Memory Consistency Models</h3>
+        <div class="meta"><span class="tag tag-mem">Memory</span> CppCon 2025 &middot; Bloomberg Ticker Plant</div>
+        <p>Sequential consistency is the default and the slowest. Acquire-release yields 17x improvement on x86. x86 natively implements acquire-release; ARM requires explicit fences. False sharing creates hidden 20&ndash;30% contention. Cached index snapshots achieve 55x improvement at ~4&ndash;5 cycles/record. The standard memory model cannot be beaten by hand.</p>
+      </a>
+
+      <a href="page.html?doc=03-work-contracts-concurrency" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Work Contracts &amp; Low-Latency Concurrency</h3>
+        <div class="meta"><span class="tag tag-conc">Concurrency</span> CppCon 2025 &middot; Lime Trading</div>
+        <p>A concurrency primitive, not a framework. Three-state machine: idle, pending, executing. Scheduling coalescence eliminates contention. 128 WebSocket consumers on 4 cores at 2M msg/sec with zero loss and fair distribution. Scale is sublinear in threads. More data than all financial exchanges combined on commodity hardware.</p>
+      </a>
+
+      <a href="page.html?doc=04-compiler-in-the-loop-agentic" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Compiler-in-the-Loop Agentic Patterns</h3>
+        <div class="meta"><span class="tag tag-mcp">Agentic</span> Svelte MCP + CppCon &middot; Feedback Loops</div>
+        <p>LLMs frozen at training cutoff vs. syntax-breaking framework upgrades. The auto-fixer tool as &ldquo;the right way to build every MCP server.&rdquo; Suggestion-based feedback outperforms direct correction. C++ static reflection and type traits via P2996. Move semantics: ownership transfer as resource lifecycle management.</p>
+      </a>
+
+      <a href="page.html?doc=05-iot-security-usb-stacks" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: IoT Security &amp; USB Stack Design</h3>
+        <div class="meta"><span class="tag tag-iot">IoT</span> ARM CTO + CppCon &middot; Hardware Layer</div>
+        <p>You will fail and you must plan for that failure. Security cannot be a cost option &mdash; even for cheap sensors. The flat security model is broken at billion-device scale. Designing a USB 2.0 stack with modern C++: modular, hardware-agnostic, macro-free. Scatter spans, PMR vectors, reference-counted device trees.</p>
+      </a>
+
+      <a href="page.html?doc=06-system-design-reliability" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: System Design &amp; Reliability</h3>
+        <div class="meta"><span class="tag tag-sys">Systems</span> DataVerse Hub &middot; Four Pillars</div>
+        <p>Scalability, reliability, performance, maintainability as the four pillars. $5,600/minute downtime cost. Load balancing as non-negotiable. Know your system before you design it. Trade-off negotiation as the core skill. Foundational thinking beats memorization of 500 articles on payment system design.</p>
+      </a>
+
+      <a href="page.html?doc=07-synthesis-ordering-guarantees" class="card" style="text-decoration:none;color:inherit">
+        <h3>M7: Synthesis &mdash; Ordering Guarantees Across Scales</h3>
+        <div class="meta"><span class="tag tag-synth">Synthesis</span> Cross-talk &middot; Architecture Isomorphisms</div>
+        <p>The isomorphism between MCP orchestration and memory consistency. Sequential consistency = convoy sync. Acquire-release = GUPP handoffs. Relaxed = nudge-sync. Trust boundaries as synchronization points. Allowlists as fences. Choose the minimum necessary ordering. The cost of correctness guarantees is real, measurable, and often avoidable.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>MCP protocol / registry / orchestration</td><td>M1, M4, M7</td><td>LLM, AIH, CFU</td></tr>
+        <tr><td>Memory ordering (seq_cst / acq-rel / relaxed)</td><td>M2, M7</td><td>SYS, LED</td></tr>
+        <tr><td>Lock-free data structures / ring buffers</td><td>M2, M3</td><td>SYS, LED</td></tr>
+        <tr><td>Work contracts / scheduling coalescence</td><td>M3, M7</td><td>GSD2, SYS</td></tr>
+        <tr><td>Compiler-in-the-loop / auto-fixer pattern</td><td>M4</td><td>LLM, AIH</td></tr>
+        <tr><td>C++ type system / static reflection</td><td>M4, M5</td><td>LED, SYS</td></tr>
+        <tr><td>IoT security at scale / ARM architecture</td><td>M5, M7</td><td>SHE, LED, CMH</td></tr>
+        <tr><td>USB protocol / hardware abstraction</td><td>M5</td><td>LED, SHE</td></tr>
+        <tr><td>System design / load balancing / scaling</td><td>M6, M7</td><td>SYS, K8S</td></tr>
+        <tr><td>MESI protocol / cache coherence</td><td>M2, M7</td><td>LED, SYS, PCS</td></tr>
+        <tr><td>Agent coordination / Gastown patterns</td><td>M1, M2, M7</td><td>GSD2, CML</td></tr>
+        <tr><td>Trust boundaries / tool allowlists</td><td>M1, M5, M7</td><td>SYS, CML</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+AGENTIC INFRASTRUCTURE STACK -- FROM SILICON TO ORCHESTRATION
+=====================================================================
+
+  [PROTOCOL LAYER]               [SYSTEMS LAYER]              [HARDWARE LAYER]
+       |                              |                              |
+  +----+----+                   +-----+-----+               +-------+-------+
+  |         |                   |           |               |               |
+MCP        AGENTIC            MEMORY      WORK            IoT            USB
+Registry   Patterns           CONSISTENCY CONTRACTS       SECURITY       STACK
+NimbleBrain Svelte MCP        seq_cst     3-state FSM     ARM CTO        Modern C++
+GitHub Gov. Compiler-loop     acq-rel     Coalescence     Billion-scale  Hardware-
+LLM Judge   Auto-fixer        relaxed     2M msg/sec      Plan for       agnostic
+Playbooks   Suggestions       MESI cache  Sublinear       failure        Macro-free
+  |         |                   |           |               |               |
+  +----+----+                   +-----+-----+               +-------+-------+
+       |                              |                              |
+       +------------------------------+------------------------------+
+                                      |
+                       [SYSTEM DESIGN &amp; RELIABILITY]
+                       Four pillars: scalability, reliability,
+                       performance, maintainability
+                       $5,600/min downtime cost
+                       Load balancing as non-negotiable
+                                      |
+                            [SYNTHESIS: ORDERING]
+                            MCP orchestration ≅ memory consistency
+                            Trust boundaries = synchronization points
+                            Allowlists = memory fences
+                            Minimum necessary ordering principle
+    </pre>
+  </main>
+
+  <footer>
+    <p>Agentic Infrastructure &amp; Systems &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
