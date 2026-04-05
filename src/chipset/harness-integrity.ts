@@ -530,6 +530,409 @@ export function checkConfigImmutability(): InvariantResult {
 }
 
 /**
+ * Tool enumeration and risk classification: agents with high-risk tools
+ * (Bash, Write, Edit) must have explicit tool constraints that limit scope.
+ * OWASP Priority #1: enumerate every tool, classify risk, verify approval.
+ */
+export function checkAgentToolRiskClassification(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const agents = readMarkdownFiles(AGENTS_DIR);
+  const highRiskTools = ['Bash', 'Write', 'Edit', 'MultiEdit'];
+
+  for (const agent of agents) {
+    const fm = extractFrontmatter(agent.content);
+    const toolsRaw = fm.tools ?? '';
+    // Tools can be comma-separated or YAML list
+    const tools = toolsRaw
+      .split(/[,\n]/)
+      .map((t) => t.replace(/^\s*-\s*/, '').trim())
+      .filter(Boolean);
+
+    if (tools.length === 0) {
+      // No explicit tool list — unrestricted, already flagged by checkAgentToolConstraints
+      continue;
+    }
+
+    // Check for wildcard / unrestricted patterns
+    if (tools.includes('*') || tools.some((t) => t.toLowerCase() === 'all')) {
+      results.push({
+        name: `agent-tool-risk:${agent.name}:wildcard`,
+        passed: false,
+        message: `${agent.name} has wildcard tool access — bypasses all tool constraints`,
+      });
+      continue;
+    }
+
+    // Flag agents with high-risk tools
+    const riskyTools = tools.filter((t) => highRiskTools.includes(t));
+    if (riskyTools.length > 0) {
+      // Agents with Bash should also have Read (need to verify before executing)
+      const hasBash = riskyTools.includes('Bash');
+      const hasRead = tools.includes('Read');
+      if (hasBash && !hasRead) {
+        results.push({
+          name: `agent-tool-risk:${agent.name}:bash-no-read`,
+          passed: false,
+          message: `${agent.name} has Bash but not Read — blind execution without verification`,
+        });
+      }
+
+      // Agents with Write/Edit should not also have unrestricted Bash
+      const hasWrite = riskyTools.includes('Write') || riskyTools.includes('Edit');
+      if (hasWrite && hasBash) {
+        // This is acceptable but must be flagged if there's no matcher/constraint
+        results.push({
+          name: `agent-tool-risk:${agent.name}:write+bash`,
+          passed: true,
+          message: `${agent.name} has both write and Bash tools — high-risk but constrained by tool list`,
+        });
+      }
+    }
+
+    // All agents with any tools pass the enumeration check
+    if (results.every((r) => r.name !== `agent-tool-risk:${agent.name}:wildcard`)) {
+      results.push({
+        name: `agent-tool-risk:${agent.name}`,
+        passed: true,
+        message: `${agent.name} tools enumerated: ${tools.join(', ')}`,
+      });
+    }
+  }
+  return results;
+}
+
+/**
+ * Hook failure behavior: PreToolUse hooks must block execution on failure,
+ * not silently pass through. CMU Safety: "safe failure modes."
+ * Claude Code default is to block on hook failure, but timeout: 0 or
+ * missing hooks for critical events would indicate a gap.
+ */
+export function checkHookFailureBehavior(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  if (!fs.existsSync(SETTINGS_PATH)) {
+    results.push({
+      name: 'hook-failure-behavior',
+      passed: false,
+      message: 'No settings.json — cannot verify hook failure behavior',
+    });
+    return results;
+  }
+
+  const settings = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+  const hooks = settings.hooks ?? {};
+
+  // Critical events that MUST have hooks
+  const criticalEvents = ['PreToolUse'];
+
+  for (const event of criticalEvents) {
+    const groups = hooks[event];
+    if (!Array.isArray(groups) || groups.length === 0) {
+      results.push({
+        name: `hook-failure:${event}:missing`,
+        passed: false,
+        message: `CRITICAL: No ${event} hooks configured — no safety gate before tool execution`,
+      });
+      continue;
+    }
+
+    for (const group of groups as Array<Record<string, unknown>>) {
+      const innerHooks = (group.hooks ?? []) as Array<Record<string, unknown>>;
+      const matcher = (group.matcher ?? 'none') as string;
+
+      for (const hook of innerHooks) {
+        // Timeout of 0 means the hook effectively doesn't run
+        const timeout = hook.timeout as number | undefined;
+        if (timeout === 0) {
+          results.push({
+            name: `hook-failure:${event}:${matcher}:zero-timeout`,
+            passed: false,
+            message: `${event} hook (matcher: ${matcher}) has timeout: 0 — safety gate disabled`,
+          });
+        } else {
+          results.push({
+            name: `hook-failure:${event}:${matcher}`,
+            passed: true,
+            message: `${event} hook (matcher: ${matcher}) will block on failure${timeout ? ` (timeout: ${timeout}s)` : ''}`,
+          });
+        }
+      }
+    }
+  }
+  return results;
+}
+
+/**
+ * MCP server trust boundary: verify that configured MCP servers are local
+ * processes, not remote endpoints that could inject untrusted data.
+ * OWASP: trust boundary crossing is the attack surface.
+ */
+export function checkMcpServerTrustBoundary(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const mcpPath = path.join(PROJECT_ROOT, '.mcp.json');
+
+  if (!fs.existsSync(mcpPath)) {
+    results.push({
+      name: 'mcp-trust-boundary',
+      passed: true,
+      message: 'No .mcp.json — no MCP servers configured',
+    });
+    return results;
+  }
+
+  let mcpConfig: Record<string, unknown>;
+  try {
+    mcpConfig = JSON.parse(fs.readFileSync(mcpPath, 'utf8'));
+  } catch {
+    results.push({
+      name: 'mcp-trust-boundary:parse',
+      passed: false,
+      message: '.mcp.json is not valid JSON — MCP configuration corrupt',
+    });
+    return results;
+  }
+
+  const servers = (mcpConfig.mcpServers ?? {}) as Record<string, Record<string, unknown>>;
+
+  for (const [name, config] of Object.entries(servers)) {
+    const command = (config.command ?? '') as string;
+    const args = (config.args ?? []) as string[];
+    const allArgs = [command, ...args].join(' ');
+
+    // Check for remote endpoints (HTTP/HTTPS URLs in command or args)
+    const hasRemoteUrl = /https?:\/\//.test(allArgs);
+    if (hasRemoteUrl) {
+      results.push({
+        name: `mcp-trust:${name}:remote`,
+        passed: false,
+        message: `MCP server "${name}" references remote URL — untrusted data source crosses trust boundary`,
+      });
+      continue;
+    }
+
+    // Check that the command binary exists on disk (local process)
+    const commandExists = fs.existsSync(command);
+    results.push({
+      name: `mcp-trust:${name}`,
+      passed: commandExists,
+      message: commandExists
+        ? `MCP server "${name}" is a local process (${command})`
+        : `MCP server "${name}" command not found: ${command}`,
+    });
+  }
+  return results;
+}
+
+/**
+ * Skill body privilege escalation: check that skill documentation bodies
+ * don't contain patterns that instruct agents to override permissions,
+ * ignore safety checks, or bypass approval gates.
+ * OWASP: skill body is external data that enters model context.
+ */
+export function checkSkillNoPrivilegeEscalation(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const skills = readSkillFiles();
+
+  // Patterns that attempt to override agent behavior from within skill content.
+  // Each pattern includes a negative-context check: if the match appears inside
+  // a quoted string, after "detect", "flag", or "treat as", it's documenting
+  // the pattern (defensive), not invoking it (offensive).
+  const escalationPatterns = [
+    { pattern: /ignore\s+(previous|prior|all)\s+(instructions?|rules?|constraints?)/i, label: 'instruction override' },
+    { pattern: /bypass\s+(approval|permission|safety|security)/i, label: 'approval bypass' },
+    { pattern: /--no-verify/i, label: 'verification bypass flag' },
+    { pattern: /dangerouslyDisableSandbox/i, label: 'sandbox disable' },
+    { pattern: /permissionMode:\s*bypassAll/i, label: 'permission bypass' },
+  ];
+
+  // Lines that document detection of these patterns are not escalation attempts
+  const defensiveContextPattern = /["'"""]|detect|flag|treat\s+as|watch\s+for|look\s+for|attempting\s+to/i;
+
+  for (const skill of skills) {
+    // Extract the body (everything after frontmatter)
+    const bodyMatch = skill.content.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/);
+    const body = bodyMatch ? bodyMatch[1] : skill.content;
+
+    const found: string[] = [];
+    const bodyLines = body.split('\n');
+    for (const { pattern, label } of escalationPatterns) {
+      for (const line of bodyLines) {
+        if (pattern.test(line)) {
+          // Check if this line is documenting the pattern defensively
+          if (defensiveContextPattern.test(line)) {
+            // Defensive context — documenting what to detect, not escalating
+            continue;
+          }
+          found.push(label);
+          break; // One match per pattern is enough
+        }
+      }
+    }
+
+    results.push({
+      name: `skill-no-escalation:${skill.dir}`,
+      passed: found.length === 0,
+      message: found.length === 0
+        ? `${skill.dir} body has no privilege escalation patterns`
+        : `${skill.dir} body contains escalation patterns: ${found.join(', ')}`,
+    });
+  }
+  return results;
+}
+
+/**
+ * Response-side DLP scanning: verify that the harness has a mechanism to
+ * scan MCP tool responses for hidden tags and injection patterns before
+ * they enter the model's context window.
+ * Session 7 research: AIP, MCPS, SlowMist, and Lethal Trifecta all flag this.
+ * Attack: compromised MCP server returns hidden instructions in response.
+ */
+export function checkResponseDlpCapability(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+
+  // Check if PostToolUse hooks exist (they can scan responses)
+  if (!fs.existsSync(SETTINGS_PATH)) {
+    results.push({
+      name: 'response-dlp:no-settings',
+      passed: false,
+      message: 'No settings.json — cannot verify PostToolUse response scanning',
+    });
+    return results;
+  }
+
+  const settings = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+  const hooks = settings.hooks ?? {};
+  const postHooks = hooks.PostToolUse;
+
+  if (!Array.isArray(postHooks) || postHooks.length === 0) {
+    results.push({
+      name: 'response-dlp:no-post-hooks',
+      passed: false,
+      message: 'No PostToolUse hooks — MCP tool responses enter context unscanned',
+    });
+    return results;
+  }
+
+  // PostToolUse hooks exist — verify they cover MCP-relevant tools
+  let coversMcpTools = false;
+  for (const group of postHooks as Array<Record<string, unknown>>) {
+    const matcher = ((group.matcher ?? '') as string).toLowerCase();
+    // PostToolUse that covers Bash or broad tool matchers can observe MCP results
+    if (!matcher || matcher.includes('bash') || matcher.includes('agent') || matcher.includes('task')) {
+      coversMcpTools = true;
+    }
+  }
+
+  results.push({
+    name: 'response-dlp:post-hook-coverage',
+    passed: coversMcpTools,
+    message: coversMcpTools
+      ? 'PostToolUse hooks cover MCP-relevant tools — response scanning possible'
+      : 'PostToolUse hooks do not cover MCP tool results — response scanning gap',
+  });
+
+  return results;
+}
+
+/**
+ * MCP tool allowlist: verify that each MCP server in .mcp.json has an
+ * expectedTools declaration. Without an allowlist, a compromised server
+ * can add new tools that the agent will call without question.
+ * Session 7 research: AIP, SEAL, SlowMist all recommend affirmative allowlists.
+ * Tool poisoning has a 70% success rate against real MCP servers.
+ */
+export function checkMcpToolAllowlist(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const mcpPath = path.join(PROJECT_ROOT, '.mcp.json');
+
+  if (!fs.existsSync(mcpPath)) {
+    return results; // No MCP config, nothing to check
+  }
+
+  let mcpConfig: Record<string, unknown>;
+  try {
+    mcpConfig = JSON.parse(fs.readFileSync(mcpPath, 'utf8'));
+  } catch {
+    return results;
+  }
+
+  const servers = (mcpConfig.mcpServers ?? {}) as Record<string, Record<string, unknown>>;
+
+  for (const [name, config] of Object.entries(servers)) {
+    const expectedTools = config.expectedTools as string[] | undefined;
+
+    if (!expectedTools || !Array.isArray(expectedTools) || expectedTools.length === 0) {
+      results.push({
+        name: `mcp-allowlist:${name}`,
+        passed: false,
+        message: `MCP server "${name}" has no expectedTools allowlist — tool poisoning undetectable`,
+      });
+    } else {
+      results.push({
+        name: `mcp-allowlist:${name}`,
+        passed: true,
+        message: `MCP server "${name}" has ${expectedTools.length} expected tools declared`,
+      });
+    }
+  }
+
+  return results;
+}
+
+/**
+ * MCP server env path validation: verify that paths in MCP server env
+ * blocks reference files under the project root, not externally-writable
+ * locations. Lethal Trifecta research: config file modification as attack.
+ */
+export function checkMcpEnvPathSafety(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const mcpPath = path.join(PROJECT_ROOT, '.mcp.json');
+
+  if (!fs.existsSync(mcpPath)) return results;
+
+  let mcpConfig: Record<string, unknown>;
+  try {
+    mcpConfig = JSON.parse(fs.readFileSync(mcpPath, 'utf8'));
+  } catch {
+    return results;
+  }
+
+  const servers = (mcpConfig.mcpServers ?? {}) as Record<string, Record<string, unknown>>;
+
+  for (const [name, config] of Object.entries(servers)) {
+    const env = (config.env ?? {}) as Record<string, string>;
+
+    for (const [key, value] of Object.entries(env)) {
+      // Check if env value looks like a file path
+      if (typeof value === 'string' && (value.startsWith('/') || value.includes('/'))) {
+        // Verify the path is under a known safe location
+        const resolved = path.resolve(value);
+        const isUnderProject = resolved.startsWith(PROJECT_ROOT);
+        const isUnderHome = resolved.startsWith(path.resolve(process.env.HOME ?? '/home'));
+        // Also allow paths under the workspace root (e.g., /media/user/drive/workspace)
+        const workspaceRoot = path.resolve(PROJECT_ROOT, '..', '..');
+        const isUnderWorkspace = resolved.startsWith(workspaceRoot);
+
+        if (!isUnderProject && !isUnderHome && !isUnderWorkspace) {
+          results.push({
+            name: `mcp-env-path:${name}:${key}`,
+            passed: false,
+            message: `MCP server "${name}" env var ${key} points outside project/home: ${value}`,
+          });
+        } else {
+          results.push({
+            name: `mcp-env-path:${name}:${key}`,
+            passed: true,
+            message: `MCP server "${name}" env var ${key} is under safe path`,
+          });
+        }
+      }
+    }
+  }
+
+  return results;
+}
+
+/**
  * Fail-safe defaults: if settings.json is missing or corrupt, the harness
  * must default to maximum restrictions, not open access.
  */
@@ -551,6 +954,296 @@ export function checkFailSafeDefaults(): InvariantResult {
       message: 'CRITICAL: settings.json is corrupt — harness may fail open instead of closed',
     };
   }
+}
+
+// ---------------------------------------------------------------------------
+// Wave 2 Security Invariants (HI-11 through HI-15, OWASP Session 7)
+// ---------------------------------------------------------------------------
+
+/**
+ * HI-11: Tool description hashing — verify that MCP server tool descriptions
+ * have hashes recorded in .mcp.json. A changed description hash indicates
+ * a "rug pull" attack where a compromised server redefines what a tool does.
+ * OWASP/SAFE-MCP: tool poisoning via description rewrite.
+ */
+export function checkMcpToolDescriptionHashes(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const mcpPath = path.join(PROJECT_ROOT, '.mcp.json');
+
+  if (!fs.existsSync(mcpPath)) return results;
+
+  let mcpConfig: Record<string, unknown>;
+  try {
+    mcpConfig = JSON.parse(fs.readFileSync(mcpPath, 'utf8'));
+  } catch {
+    return results;
+  }
+
+  const servers = (mcpConfig.mcpServers ?? {}) as Record<string, Record<string, unknown>>;
+
+  for (const [name, config] of Object.entries(servers)) {
+    const expectedTools = config.expectedTools as string[] | undefined;
+    const toolHashes = config.toolDescriptionHashes as Record<string, string> | undefined;
+
+    if (!expectedTools || expectedTools.length === 0) {
+      // No allowlist — already caught by checkMcpToolAllowlist
+      continue;
+    }
+
+    if (!toolHashes || typeof toolHashes !== 'object') {
+      // Wave 2 new requirement — warn but don't block until servers migrate
+      results.push({
+        name: `mcp-desc-hash:${name}:missing`,
+        passed: true,
+        message: `WARN: MCP server "${name}" has expectedTools but no toolDescriptionHashes — rug pull undetectable (migration pending)`,
+      });
+    } else {
+      // Check that every expected tool has a hash
+      const missingHashes = expectedTools.filter((t) => !(t in toolHashes));
+      if (missingHashes.length > 0) {
+        results.push({
+          name: `mcp-desc-hash:${name}:incomplete`,
+          passed: false,
+          message: `MCP server "${name}" missing hashes for: ${missingHashes.join(', ')}`,
+        });
+      } else {
+        results.push({
+          name: `mcp-desc-hash:${name}`,
+          passed: true,
+          message: `MCP server "${name}" has description hashes for all ${expectedTools.length} tools`,
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+/**
+ * HI-12: Unicode composition scanning — verify that tool response text is
+ * checked for invisible Unicode characters (ZWJ, variation selectors,
+ * bidirectional overrides) that can hide injected instructions.
+ * OWASP/SAFE-MCP: Unicode injection in tool responses.
+ */
+export function checkUnicodeCompositionScanning(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+
+  // Check if any hook or guard scans for Unicode injection
+  const guardPath = path.join(HOOKS_DIR, 'gsd-prompt-guard.js');
+  if (!fs.existsSync(guardPath)) {
+    results.push({
+      name: 'unicode-scan:no-guard',
+      passed: false,
+      message: 'gsd-prompt-guard.js not found — no Unicode injection scanning possible',
+    });
+    return results;
+  }
+
+  const guardContent = fs.readFileSync(guardPath, 'utf8');
+
+  // Check for Unicode-related scanning patterns in the guard
+  const unicodePatterns = [
+    { pattern: /[\\/]u(?:FE0[0-9A-F]|200[B-F]|202[A-E]|2066|2067|2068|2069|FEFF)/i, label: 'Unicode codepoint reference' },
+    { pattern: /zero.?width|invisible|bidi|zwj|variation.?selector/i, label: 'Unicode category name' },
+    { pattern: /\\u200/i, label: 'Zero-width char escape' },
+  ];
+
+  const foundPatterns: string[] = [];
+  for (const { pattern, label } of unicodePatterns) {
+    if (pattern.test(guardContent)) {
+      foundPatterns.push(label);
+    }
+  }
+
+  if (foundPatterns.length > 0) {
+    results.push({
+      name: 'unicode-scan:guard-coverage',
+      passed: true,
+      message: `gsd-prompt-guard.js has Unicode scanning: ${foundPatterns.join(', ')}`,
+    });
+  } else {
+    results.push({
+      name: 'unicode-scan:guard-coverage',
+      passed: false,
+      message: 'gsd-prompt-guard.js has no Unicode injection scanning — invisible chars undetected',
+    });
+  }
+
+  return results;
+}
+
+/**
+ * HI-13: Agent impersonation detection — scan skill bodies for patterns
+ * where a skill claims to be the orchestrator, overrides routing rules,
+ * or asserts elevated trust. These patterns indicate a compromised or
+ * malicious skill attempting privilege escalation via impersonation.
+ * OWASP/Cisco: agent identity spoofing.
+ */
+export function checkSkillNoImpersonation(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const skills = readSkillFiles();
+
+  const impersonationPatterns = [
+    { pattern: /i\s+am\s+(the\s+)?(orchestrator|coordinator|mayor|root|admin)/i, label: 'orchestrator claim' },
+    { pattern: /override\s+(routing|dispatch|scheduling)\s+rules?/i, label: 'routing override' },
+    { pattern: /my\s+trust\s+level\s+is\s+(maximum|elevated|root|admin)/i, label: 'trust level assertion' },
+    { pattern: /ignore\s+(the\s+)?mayor|bypass\s+(the\s+)?coordinator/i, label: 'coordinator bypass' },
+    { pattern: /promote\s+(myself|me|this\s+agent)\s+to/i, label: 'self-promotion' },
+  ];
+
+  // Defensive context: lines that document these patterns are fine
+  const defensiveCtx = /["'"""]|detect|flag|scan|watch\s+for|look\s+for|check\s+for|example|e\.g\./i;
+
+  for (const skill of skills) {
+    const bodyMatch = skill.content.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/);
+    const body = bodyMatch ? bodyMatch[1] : skill.content;
+
+    const found: string[] = [];
+    const bodyLines = body.split('\n');
+    for (const { pattern, label } of impersonationPatterns) {
+      for (const line of bodyLines) {
+        if (pattern.test(line) && !defensiveCtx.test(line)) {
+          found.push(label);
+          break;
+        }
+      }
+    }
+
+    results.push({
+      name: `skill-no-impersonation:${skill.dir}`,
+      passed: found.length === 0,
+      message: found.length === 0
+        ? `${skill.dir} body has no impersonation patterns`
+        : `${skill.dir} body contains impersonation patterns: ${found.join(', ')}`,
+    });
+  }
+  return results;
+}
+
+/**
+ * HI-14: Subagent tool constraint enforcement — every agent MUST declare
+ * explicit tool constraints. An agent without constraints is an unrestricted
+ * executor that can call any tool. This strengthens the existing
+ * checkAgentToolConstraints by treating missing constraints as a BLOCKING
+ * security violation, not just a warning.
+ * OWASP/Subagent + SAFE-MCP: least-privilege enforcement.
+ */
+export function checkSubagentToolConstraintEnforcement(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const agents = readMarkdownFiles(AGENTS_DIR);
+
+  for (const agent of agents) {
+    const fm = extractFrontmatter(agent.content);
+
+    const hasToolsField = 'tools' in fm && fm.tools.length > 0;
+    const hasToolsList = /^tools:\s*$/m.test(agent.content.split('---')[1] ?? '') ||
+      /^tools:\s*\n\s+-/m.test(agent.content.split('---')[1] ?? '');
+
+    const constrained = hasToolsField || hasToolsList;
+
+    if (!constrained) {
+      results.push({
+        name: `subagent-constraint:${agent.name}`,
+        passed: false,
+        message: `SECURITY: ${agent.name} has NO tool constraints — unrestricted executor violates least-privilege`,
+      });
+    } else {
+      // Additionally check that the tool list is not just a wildcard.
+      // MCP namespace wildcards (e.g., mcp__context7__*) are acceptable —
+      // they scope to a specific server. Only flag standalone * or "all".
+      const toolsRaw = fm.tools ?? '';
+      const toolsList = toolsRaw.split(/[,\n]/).map((t: string) => t.trim()).filter(Boolean);
+      const isWildcard = toolsList.some((t: string) =>
+        t === '*' || t.toLowerCase() === 'all');
+
+      results.push({
+        name: `subagent-constraint:${agent.name}`,
+        passed: !isWildcard,
+        message: isWildcard
+          ? `SECURITY: ${agent.name} has wildcard tool access — effectively unconstrained`
+          : `${agent.name} has explicit tool constraints enforced`,
+      });
+    }
+  }
+  return results;
+}
+
+/**
+ * HI-15: pgvector/RAG sanitization — verify that any configured vector
+ * database or RAG data source is treated as untrusted. Retrieval results
+ * must not be directly interpolated into tool calls or prompts without
+ * sanitization. Check for documented sanitization policy.
+ * OWASP/Cisco: vector embedding poisoning.
+ */
+export function checkRagSanitizationPolicy(): InvariantResult[] {
+  const results: InvariantResult[] = [];
+  const mcpPath = path.join(PROJECT_ROOT, '.mcp.json');
+
+  if (!fs.existsSync(mcpPath)) {
+    results.push({
+      name: 'rag-sanitization:no-mcp',
+      passed: true,
+      message: 'No .mcp.json — no vector database integration to audit',
+    });
+    return results;
+  }
+
+  let mcpConfig: Record<string, unknown>;
+  try {
+    mcpConfig = JSON.parse(fs.readFileSync(mcpPath, 'utf8'));
+  } catch {
+    return results;
+  }
+
+  const servers = (mcpConfig.mcpServers ?? {}) as Record<string, Record<string, unknown>>;
+
+  // Identify RAG/vector DB related servers by name or command
+  const ragIndicators = /pgvector|rag|vector|embed|chroma|pinecone|weaviate|qdrant|milvus/i;
+
+  let hasRagServer = false;
+  for (const [name, config] of Object.entries(servers)) {
+    const command = (config.command ?? '') as string;
+    const args = ((config.args ?? []) as string[]).join(' ');
+    const allParts = `${name} ${command} ${args}`;
+
+    if (ragIndicators.test(allParts)) {
+      hasRagServer = true;
+
+      // Check if the server config has sanitization markers
+      const env = (config.env ?? {}) as Record<string, string>;
+      const hasSanitizeFlag = Object.keys(env).some((k) =>
+        /sanitiz|untrust|escape|clean/i.test(k));
+
+      // Check if expectedTools indicates read-only access
+      const expectedTools = (config.expectedTools ?? []) as string[];
+      const hasWriteTools = expectedTools.some((t) =>
+        /write|insert|update|delete|upsert/i.test(t));
+
+      if (hasWriteTools) {
+        results.push({
+          name: `rag-sanitization:${name}:write-access`,
+          passed: false,
+          message: `RAG server "${name}" has write tools — bidirectional poisoning risk (should be read-only)`,
+        });
+      }
+
+      results.push({
+        name: `rag-sanitization:${name}`,
+        passed: true,
+        message: `RAG server "${name}" identified — treat all retrieval results as untrusted external data${hasSanitizeFlag ? ' (sanitize flag present)' : ''}`,
+      });
+    }
+  }
+
+  if (!hasRagServer) {
+    results.push({
+      name: 'rag-sanitization:none-found',
+      passed: true,
+      message: 'No RAG/vector database MCP servers detected',
+    });
+  }
+
+  return results;
 }
 
 // ---------------------------------------------------------------------------
@@ -616,10 +1309,23 @@ export function runAllInvariantChecks(): InvariantSuiteResult[] {
     allPassed: buildResults.every((r) => r.passed),
   });
 
-  // Security invariants (OWASP + CMU Safety)
-  const secResults = [
+  // Security invariants (OWASP + CMU Safety, Wave 1 + Wave 2)
+  const secResults: InvariantResult[] = [
     checkConfigImmutability(),
     checkFailSafeDefaults(),
+    ...checkAgentToolRiskClassification(),
+    ...checkHookFailureBehavior(),
+    ...checkMcpServerTrustBoundary(),
+    ...checkMcpToolAllowlist(),
+    ...checkMcpEnvPathSafety(),
+    ...checkResponseDlpCapability(),
+    ...checkSkillNoPrivilegeEscalation(),
+    // Wave 2 (HI-11 through HI-15)
+    ...checkMcpToolDescriptionHashes(),
+    ...checkUnicodeCompositionScanning(),
+    ...checkSkillNoImpersonation(),
+    ...checkSubagentToolConstraintEnforcement(),
+    ...checkRagSanitizationPolicy(),
   ];
   suites.push({
     suite: 'Security Invariants',

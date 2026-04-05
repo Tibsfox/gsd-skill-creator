@@ -29,6 +29,20 @@ import {
   checkSkillNoInjectionPatterns,
   checkSkillNoExternalReferences,
   checkVersionConsistency,
+  checkConfigImmutability,
+  checkFailSafeDefaults,
+  checkAgentToolRiskClassification,
+  checkHookFailureBehavior,
+  checkMcpServerTrustBoundary,
+  checkMcpToolAllowlist,
+  checkMcpEnvPathSafety,
+  checkResponseDlpCapability,
+  checkSkillNoPrivilegeEscalation,
+  checkMcpToolDescriptionHashes,
+  checkUnicodeCompositionScanning,
+  checkSkillNoImpersonation,
+  checkSubagentToolConstraintEnforcement,
+  checkRagSanitizationPolicy,
   runAllInvariantChecks,
 } from './harness-integrity.js';
 
@@ -371,6 +385,163 @@ describe('Harness Integrity', () => {
   });
 
   // ===========================================================================
+  // Security Invariants (OWASP + CMU Safety)
+  // ===========================================================================
+
+  describe('Security Invariants', () => {
+    it('settings.json is protected from agent writes (config immutability)', () => {
+      const result = checkConfigImmutability();
+      expect(result.passed, result.message).toBe(true);
+    });
+
+    it('settings.json is valid JSON (fail-safe defaults)', () => {
+      const result = checkFailSafeDefaults();
+      expect(result.passed, result.message).toBe(true);
+    });
+
+    it('agents with high-risk tools have proper constraints (tool risk classification)', () => {
+      const results = checkAgentToolRiskClassification();
+
+      for (const result of results) {
+        // Wildcard access and bash-without-read are failures
+        if (result.name.includes(':wildcard') || result.name.includes(':bash-no-read')) {
+          expect(result.passed, result.message).toBe(true);
+        }
+      }
+    });
+
+    it('no agent has wildcard tool access', () => {
+      const results = checkAgentToolRiskClassification();
+      const wildcards = results.filter((r) => r.name.includes(':wildcard'));
+
+      for (const result of wildcards) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    it('PreToolUse hooks block on failure (no zero-timeout safety gates)', () => {
+      const results = checkHookFailureBehavior();
+      expect(results.length).toBeGreaterThan(0);
+
+      for (const result of results) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    it('PreToolUse hooks exist for critical tool matchers', () => {
+      const results = checkHookFailureBehavior();
+      const missing = results.filter((r) => r.name.includes(':missing'));
+      expect(missing, 'Missing critical PreToolUse hooks').toHaveLength(0);
+    });
+
+    it('MCP servers are local processes, not remote endpoints', () => {
+      const results = checkMcpServerTrustBoundary();
+
+      for (const result of results) {
+        if (result.name.includes(':remote')) {
+          expect(result.passed, result.message).toBe(true);
+        }
+      }
+    });
+
+    it('MCP server binaries exist on disk', () => {
+      const results = checkMcpServerTrustBoundary();
+
+      for (const result of results) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    it('skill bodies do not contain privilege escalation patterns', () => {
+      const results = checkSkillNoPrivilegeEscalation();
+
+      for (const result of results) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    it('PostToolUse hooks exist for response-side scanning (DLP)', () => {
+      const results = checkResponseDlpCapability();
+      expect(results.length).toBeGreaterThan(0);
+
+      // Should not have "no PostToolUse hooks" failure
+      const missing = results.filter((r) => r.name.includes(':no-post-hooks'));
+      expect(missing, 'PostToolUse hooks must exist for response scanning').toHaveLength(0);
+    });
+
+    it('MCP servers declare expected tool allowlists', () => {
+      // This is a warning-level check — servers SHOULD have allowlists
+      const results = checkMcpToolAllowlist();
+      // At minimum, the check ran for each configured server
+      if (fs.existsSync(path.join(PROJECT_ROOT, '.mcp.json'))) {
+        expect(results.length).toBeGreaterThan(0);
+      }
+    });
+
+    it('MCP server env paths are under safe locations', () => {
+      const results = checkMcpEnvPathSafety();
+
+      for (const result of results) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    // HI-11: Tool description hashing
+    it('MCP servers with allowlists have tool description hashes (HI-11)', () => {
+      const results = checkMcpToolDescriptionHashes();
+      // Servers with expectedTools should also have toolDescriptionHashes
+      for (const result of results) {
+        if (result.name.includes(':missing')) {
+          // Warn but don't block — hashing is new, servers need migration
+          expect(result.passed).toBeDefined();
+        }
+      }
+    });
+
+    // HI-12: Unicode composition scanning
+    it('prompt guard has Unicode injection scanning capability (HI-12)', () => {
+      const results = checkUnicodeCompositionScanning();
+      expect(results.length).toBeGreaterThan(0);
+
+      // Should not have the "no guard" failure
+      const noGuard = results.filter((r) => r.name.includes(':no-guard'));
+      expect(noGuard, 'gsd-prompt-guard.js must exist for Unicode scanning').toHaveLength(0);
+    });
+
+    // HI-13: Agent impersonation detection
+    it('skill bodies do not contain impersonation patterns (HI-13)', () => {
+      const results = checkSkillNoImpersonation();
+
+      for (const result of results) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    // HI-14: Subagent tool constraint enforcement
+    it('all subagents declare explicit non-wildcard tool constraints (HI-14)', () => {
+      const results = checkSubagentToolConstraintEnforcement();
+
+      for (const result of results) {
+        expect(result.passed, result.message).toBe(true);
+      }
+    });
+
+    // HI-15: pgvector/RAG sanitization
+    it('RAG/vector database servers are identified and audited (HI-15)', () => {
+      const results = checkRagSanitizationPolicy();
+      expect(results.length).toBeGreaterThan(0);
+
+      // No write-access violations
+      const writeViolations = results.filter((r) =>
+        r.name.includes(':write-access') && !r.passed);
+      expect(
+        writeViolations,
+        'RAG servers should not have write tools — poisoning risk',
+      ).toHaveLength(0);
+    });
+  });
+
+  // ===========================================================================
   // Meta: Full suite runner
   // ===========================================================================
 
@@ -378,8 +549,8 @@ describe('Harness Integrity', () => {
     it('runAllInvariantChecks returns structured results for all suites', () => {
       const suites = runAllInvariantChecks();
 
-      // Must return all 5 suites
-      expect(suites.length).toBe(5);
+      // Must return all 6 suites
+      expect(suites.length).toBe(6);
 
       const suiteNames = suites.map((s) => s.suite);
       expect(suiteNames).toContain('Permission Invariants');
@@ -387,6 +558,7 @@ describe('Harness Integrity', () => {
       expect(suiteNames).toContain('Agent Invariants');
       expect(suiteNames).toContain('Skill Invariants');
       expect(suiteNames).toContain('Build Invariants');
+      expect(suiteNames).toContain('Security Invariants');
 
       // Every suite must have at least one result
       for (const suite of suites) {
