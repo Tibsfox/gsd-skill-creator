@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranger 1 Orbital Decay — Interactive | v1.26</title>
+<style>
+  body { margin: 0; background: #0D0A08; color: #E8E0D8; font-family: 'Courier New', monospace; overflow: hidden; }
+  canvas { display: block; margin: 0 auto; }
+  #hud { position: absolute; top: 20px; left: 20px; font-size: 14px; line-height: 1.8; }
+  #controls { position: absolute; bottom: 20px; left: 20px; font-size: 12px; }
+  label { color: #8FAE43; }
+  input[type=range] { width: 200px; }
+  .val { color: #D4A830; font-weight: bold; }
+  .fail { color: #CC5540; }
+  .ok { color: #6B8E23; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud">
+  <div>RANGER 1 — ORBITAL DECAY</div>
+  <div>Altitude: <span id="alt" class="val">160.0</span> km</div>
+  <div>Period: <span id="period" class="val">87.6</span> min</div>
+  <div>Density: <span id="density" class="val">1.2e-9</span> kg/m³</div>
+  <div>Day: <span id="day" class="val">1</span> / 7</div>
+  <div>Orbits: <span id="orbits" class="val">0</span></div>
+  <div>Agena: <span id="agena" class="fail">NO RESTART</span></div>
+</div>
+<div id="controls">
+  <label>Speed: <input type="range" id="speed" min="1" max="20" value="5"></label>
+  <button onclick="reset()" style="margin-left:10px;padding:4px 12px;background:#3A2010;color:#E8E0D8;border:1px solid #6B5030;cursor:pointer;">Reset</button>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W, H, cx, cy, scale;
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  cx = W / 2; cy = H / 2;
+  scale = Math.min(W, H) * 0.35;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const R_EARTH = 6371; // km
+const MU = 3.986e5;   // km^3/s^2 (note: km units)
+
+let altitude = 160;
+let angle = 0;
+let time_hours = 0;
+let orbit_count = 0;
+let last_angle = 0;
+let reentry = false;
+let trail = [];
+
+function atmDensity(h) {
+  if (h < 150) return 2.1e-9 * Math.exp(-(h - 150) / 22);
+  if (h < 300) return 2.1e-9 * Math.exp(-(h - 150) / 40);
+  return 2.1e-9 * Math.exp(-(150) / 40) * Math.exp(-(h - 300) / 58);
+}
+
+function reset() {
+  altitude = 160; angle = 0; time_hours = 0; orbit_count = 0;
+  last_angle = 0; reentry = false; trail = [];
+}
+
+function update(dt_real) {
+  if (reentry) return;
+  
+  const speed = parseInt(document.getElementById('speed').value);
+  const dt_hours = dt_real / 1000 * speed * 0.5; // sim hours per real second
+  
+  const r_km = R_EARTH + altitude;
+  const v_km_s = Math.sqrt(MU / r_km);
+  const omega = v_km_s / r_km; // rad/s
+  
+  angle += omega * dt_hours * 3600;
+  
+  // Track orbits
+  if (angle - last_angle > 2 * Math.PI) {
+    orbit_count++;
+    last_angle += 2 * Math.PI;
+  }
+  
+  time_hours += dt_hours;
+  
+  // Drag decay
+  const rho = atmDensity(altitude);
+  const Cd = 2.2, A = 5.0, m = 900;
+  const F_drag = 0.5 * rho * (v_km_s * 1000) ** 2 * Cd * A; // N
+  const dh = -F_drag * r_km * 1000 / (m * v_km_s * 1000) * 3.6 / 1000; // km/hr
+  
+  altitude += dh * dt_hours;
+  
+  if (altitude <= 80) {
+    altitude = 80;
+    reentry = true;
+  }
+  
+  // Trail
+  const norm_r = (R_EARTH + altitude) / (R_EARTH + 200);
+  const tx = cx + Math.cos(angle) * norm_r * scale;
+  const ty = cy + Math.sin(angle) * norm_r * scale;
+  trail.push({ x: tx, y: ty, t: time_hours });
+  if (trail.length > 500) trail.shift();
+}
+
+function draw() {
+  ctx.fillStyle = '#0D0A08';
+  ctx.fillRect(0, 0, W, H);
+  
+  // Stars
+  for (let i = 0; i < 100; i++) {
+    const sx = (Math.sin(i * 127.1 + i * 311.7) * 0.5 + 0.5) * W;
+    const sy = (Math.sin(i * 269.5 + i * 183.3) * 0.5 + 0.5) * H;
+    ctx.fillStyle = `rgba(200,200,220,${0.3 + 0.3 * Math.sin(Date.now() / 1000 + i)})`;
+    ctx.fillRect(sx, sy, 1, 1);
+  }
+  
+  // Earth
+  const earth_r = (R_EARTH / (R_EARTH + 200)) * scale;
+  ctx.beginPath();
+  ctx.arc(cx, cy, earth_r, 0, Math.PI * 2);
+  const grad = ctx.createRadialGradient(cx - earth_r * 0.3, cy - earth_r * 0.3, 0, cx, cy, earth_r);
+  grad.addColorStop(0, '#1A4A6A');
+  grad.addColorStop(0.5, '#0A3050');
+  grad.addColorStop(1, '#082040');
+  ctx.fillStyle = grad;
+  ctx.fill();
+  
+  // Atmosphere ring
+  const atmo_r = ((R_EARTH + 80) / (R_EARTH + 200)) * scale;
+  ctx.beginPath();
+  ctx.arc(cx, cy, atmo_r, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(204,85,64,0.3)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  
+  // Trail
+  for (let i = 1; i < trail.length; i++) {
+    const alpha = i / trail.length * 0.6;
+    const age = (time_hours - trail[i].t) / 168;
+    let r, g, b;
+    if (age < 0.6) { r = 212; g = 168; b = 48; }
+    else if (age < 0.85) { r = 255; g = 140; b = 0; }
+    else { r = 204; g = 85; b = 64; }
+    ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(trail[i-1].x, trail[i-1].y);
+    ctx.lineTo(trail[i].x, trail[i].y);
+    ctx.stroke();
+  }
+  
+  // Spacecraft
+  if (!reentry) {
+    const norm_r = (R_EARTH + altitude) / (R_EARTH + 200);
+    const sx = cx + Math.cos(angle) * norm_r * scale;
+    const sy = cy + Math.sin(angle) * norm_r * scale;
+    
+    ctx.beginPath();
+    ctx.arc(sx, sy, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#D4A830';
+    ctx.fill();
+    
+    // Glow
+    const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, 20);
+    glow.addColorStop(0, 'rgba(212,168,48,0.3)');
+    glow.addColorStop(1, 'rgba(212,168,48,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(sx - 20, sy - 20, 40, 40);
+  } else {
+    // Reentry flash
+    ctx.fillStyle = 'rgba(255,150,50,0.3)';
+    ctx.font = '24px monospace';
+    ctx.fillText('REENTRY — SIGNAL LOST', cx - 160, cy + scale + 40);
+  }
+  
+  // Update HUD
+  document.getElementById('alt').textContent = altitude.toFixed(1);
+  const r_km = R_EARTH + altitude;
+  const T = 2 * Math.PI * Math.sqrt(r_km ** 3 / MU) / 60;
+  document.getElementById('period').textContent = T.toFixed(1);
+  document.getElementById('density').textContent = atmDensity(altitude).toExponential(1);
+  document.getElementById('day').textContent = Math.min(7, Math.floor(time_hours / 24) + 1);
+  document.getElementById('orbits').textContent = orbit_count;
+}
+
+let lastTime = Date.now();
+function loop() {
+  const now = Date.now();
+  const dt = now - lastTime;
+  lastTime = now;
+  update(dt);
+  draw();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

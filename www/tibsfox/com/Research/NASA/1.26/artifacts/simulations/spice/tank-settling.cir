@@ -1,0 +1,48 @@
+* Propellant Tank Settling Analog — Ranger 1 / Mission 1.26
+* SPICE simulation of an RC network modeling propellant settling dynamics
+* 
+* The circuit models the Agena A propellant tank as an RC network where:
+*   - Voltage = propellant height (settled position)
+*   - Current = flow rate toward feed line
+*   - R_baffle = baffle resistance to flow
+*   - C_tank = tank volume
+*   - V_ullage = ullage motor thrust (small impulse settling propellant)
+*
+* When V_ullage is applied (brief pulse), the propellant settles (voltage rises).
+* When V_ullage is zero (coast phase), the propellant drifts (voltage decays).
+*
+* The Agena A had insufficient ullage (V_ullage too brief, R_baffle too high).
+* The Agena B had improved baffles (lower R_baffle) and stronger ullage.
+
+.title Ranger 1 Agena A Propellant Settling Model
+
+* Supply
+V_power 1 0 DC 5V
+
+* Ullage motor pulse (brief, insufficient for Agena A)
+V_ullage_A ullage_a 0 PULSE(0 3 0.1s 0.01s 0.01s 0.5s 10s)
+
+* Tank model — Agena A (high baffle resistance, small ullage)
+R_baffle_A ullage_a tank_a 10K
+C_tank_A tank_a 0 100uF
+R_leak_A tank_a 0 50K  ; propellant drifting away from feed line
+
+* Tank model — Agena B (improved baffles, stronger ullage)
+V_ullage_B ullage_b 0 PULSE(0 5 0.1s 0.01s 0.01s 2s 10s)
+R_baffle_B ullage_b tank_b 2K
+C_tank_B tank_b 0 100uF
+R_leak_B tank_b 0 50K
+
+* Restart threshold detector (comparator)
+* If tank voltage > 3V (settled), engine restarts
+* If tank voltage < 3V (unsettled), engine fails
+V_threshold threshold 0 DC 3V
+
+.tran 0.01s 20s
+
+.control
+run
+plot v(tank_a) v(tank_b) v(threshold) title "Propellant Settling: Agena A vs Agena B"
+.endc
+
+.end
