@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranger 5 Power Budget Simulator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #00ff41; min-height: 100vh; padding: 1rem; }
+  h1 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #00cc33; }
+  .subtitle { font-size: 0.8rem; color: #666; margin-bottom: 1rem; }
+  .container { max-width: 700px; margin: 0 auto; }
+  .gauge { width: 100%; height: 30px; background: #111; border: 1px solid #333; margin: 0.5rem 0; position: relative; }
+  .gauge-fill { height: 100%; transition: width 0.3s; }
+  .gauge-label { position: absolute; top: 50%; left: 8px; transform: translateY(-50%); font-size: 0.7rem; color: #ccc; z-index: 1; }
+  .system { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; border-bottom: 1px solid #1a1a1a; }
+  .system label { flex: 1; font-size: 0.85rem; }
+  .system .power { width: 50px; text-align: right; font-size: 0.8rem; color: #999; }
+  .system input[type=checkbox] { accent-color: #00ff41; }
+  .stats { margin-top: 1rem; padding: 0.5rem; border: 1px solid #333; background: #0d0d0d; }
+  .stat-row { display: flex; justify-content: space-between; padding: 0.2rem 0; font-size: 0.85rem; }
+  .dead { color: #ff0000 !important; }
+  .warning { color: #ffaa00; }
+  .ok { color: #00ff41; }
+  button { background: #1a1a1a; color: #00ff41; border: 1px solid #333; padding: 0.4rem 1rem; cursor: pointer; font-family: inherit; margin-top: 0.5rem; }
+  button:hover { background: #222; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>RANGER 5 — POWER BUDGET SIMULATOR</h1>
+  <p class="subtitle">Solar panels offline. Battery: 1000 Wh. Manage the shutdown sequence.</p>
+
+  <div class="gauge" id="batteryGauge">
+    <div class="gauge-fill" id="batteryFill" style="width:100%; background: linear-gradient(90deg, #00ff41, #00cc33);"></div>
+    <span class="gauge-label" id="batteryLabel">1000 Wh — 9.1 hours remaining</span>
+  </div>
+
+  <div id="systems"></div>
+
+  <div class="stats">
+    <div class="stat-row"><span>Total draw:</span><span id="totalDraw">110 W</span></div>
+    <div class="stat-row"><span>Battery life:</span><span id="batteryLife">9.1 hours</span></div>
+    <div class="stat-row"><span>Time to Moon:</span><span>~64 hours</span></div>
+    <div class="stat-row"><span>Can reach Moon?</span><span id="reachMoon" class="dead">NO — 55h short</span></div>
+    <div class="stat-row"><span>Midcourse correction?</span><span id="correction" class="dead">BLOCKED — power fault</span></div>
+  </div>
+
+  <button onclick="resetAll()">Reset All Systems</button>
+  <p style="font-size:0.7rem; color:#444; margin-top:1rem;">
+    Note: Even with all non-essential systems off, the power-switching fault prevents
+    the midcourse correction motor from firing. The trajectory cannot be changed.
+    725 km miss is locked in.
+  </p>
+</div>
+
+<script>
+const BATTERY = 1000; // Wh
+const MOON_TIME = 64; // hours
+
+const systems = [
+  { name: 'Gamma-ray spectrometer', power: 15, essential: false, on: true },
+  { name: 'TV camera', power: 30, essential: false, on: true },
+  { name: 'Radar altimeter', power: 10, essential: false, on: true },
+  { name: 'Attitude control', power: 25, essential: true, on: true },
+  { name: 'Telemetry transmitter (3W)', power: 20, essential: true, on: true },
+  { name: 'Command receiver', power: 10, essential: true, on: true },
+];
+
+function render() {
+  const container = document.getElementById('systems');
+  container.innerHTML = '';
+  let totalPower = 0;
+
+  systems.forEach((sys, i) => {
+    const div = document.createElement('div');
+    div.className = 'system';
+    const checked = sys.on ? 'checked' : '';
+    const essLabel = sys.essential ? ' <span style="color:#666">[essential]</span>' : '';
+    div.innerHTML = `
+      <input type="checkbox" ${checked} onchange="toggle(${i})">
+      <label>${sys.name}${essLabel}</label>
+      <span class="power">${sys.on ? sys.power + 'W' : 'OFF'}</span>
+    `;
+    container.appendChild(div);
+    if (sys.on) totalPower += sys.power;
+  });
+
+  const life = totalPower > 0 ? BATTERY / totalPower : Infinity;
+  const pct = Math.min(100, (life / MOON_TIME) * 100);
+
+  document.getElementById('totalDraw').textContent = totalPower + ' W';
+  document.getElementById('batteryLife').textContent =
+    life === Infinity ? '∞' : life.toFixed(1) + ' hours';
+
+  const fill = document.getElementById('batteryFill');
+  fill.style.width = Math.min(100, (life / 10) * 100) + '%';
+  fill.style.background = life > 20 ? '#00ff41' : life > 10 ? '#ffaa00' : '#ff0000';
+  document.getElementById('batteryLabel').textContent =
+    `${BATTERY} Wh — ${life === Infinity ? '∞' : life.toFixed(1)} hours remaining`;
+
+  const reach = document.getElementById('reachMoon');
+  if (life >= MOON_TIME) {
+    reach.textContent = 'YES (battery survives to Moon)';
+    reach.className = 'ok';
+  } else {
+    reach.textContent = `NO — ${(MOON_TIME - life).toFixed(1)}h short`;
+    reach.className = 'dead';
+  }
+}
+
+function toggle(i) {
+  systems[i].on = !systems[i].on;
+  render();
+}
+
+function resetAll() {
+  systems.forEach(s => s.on = true);
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

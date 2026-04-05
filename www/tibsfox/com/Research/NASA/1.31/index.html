@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.31 — Mariner 1 + Barn Swallow | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --failure: #8B2020;
+    --failure-light: #CC4444;
+    --failure-dark: #5A1010;
+    --sky-deep: #1A2A4A;
+    --sky-mid: #2A3A5A;
+    --sky-light: #4A6A8A;
+    --barn-brown: #5C3A1E;
+    --barn-dark: #3A2210;
+    --mud-ochre: #8B7355;
+    --swallow-blue: #1A3A5A;
+    --swallow-rust: #8B4513;
+    --light-sky: #A8C8E8;
+    --light-bright: #C8E0F0;
+    --dusk-floor: #0D1520;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D4A6D;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--dusk-floor);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(168,200,232,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(74,106,138,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(168,200,232,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(200,224,240,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(74,106,138,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(168,200,232,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--dusk-floor) 0%, var(--sky-deep) 25%, var(--failure-dark) 50%, var(--failure) 75%, var(--nasa-red) 100%);
+    border-bottom: 3px solid var(--failure);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(168,200,232,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,200,232,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(139,32,32,0.15); border: 1px solid var(--failure);
+    border-radius: 6px; padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-light);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+
+  .status-failure {
+    background: rgba(139,32,32,0.3); border: 1px solid var(--failure);
+    color: var(--failure-light); padding: 0.2rem 0.6rem; border-radius: 4px;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-sky); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+  .content { min-width: 0; }
+
+  .card { background: rgba(26,42,74,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--light-bright); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card { border-color: var(--failure); background: rgba(139,32,32,0.06); }
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(168,200,232,0.12); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num { background: var(--failure); color: #fff; font-weight: 700; font-size: 0.8rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--light-bright); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .organism-card { background: rgba(26,42,74,0.5); border: 1px solid var(--sky-light); border-radius: 8px; padding: 1.5rem; }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--light-sky); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--light-sky); font-size: 0.85rem; margin-bottom: 0.75rem; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(13,21,32,0.6); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--light-bright); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .dedication-card { background: rgba(212,168,48,0.08); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; }
+  .dedication-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.75rem; }
+
+  .data-links { background: rgba(11,61,145,0.15); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card { background: rgba(26,26,58,0.4); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .tracks-card h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .track-item { display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid rgba(11,61,145,0.15); font-size: 0.85rem; }
+  .track-item:last-child { border-bottom: none; }
+  .track-num { background: rgba(11,61,145,0.3); color: #7EB8DA; font-weight: 700; font-size: 0.7rem; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .nav-card { background: rgba(26,42,74,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--light-sky); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-sky); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.31</span>
+      <span>NASA Mission Series</span>
+      <span class="status-failure">FAILED</span>
+    </div>
+    <h1>Mariner 1 &mdash; The Most Expensive Hyphen in History</h1>
+    <p class="subtitle">A missing overbar, 293 seconds of flight, and the spacecraft that never reached Venus</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> July 22, 1962</span>
+      <span><span class="label">Program:</span> Mariner (NASA/JPL)</span>
+      <span><span class="label">Epoch:</span> 2 &mdash; Interplanetary Reconnaissance</span>
+      <span><span class="label">Vehicle:</span> Atlas-Agena B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On July 22, 1962, Mariner 1 launched from Cape Canaveral on an Atlas-Agena B, bound for Venus &mdash; the first American interplanetary mission. At T+293 seconds, Range Safety Officer Jack Broadbent sent the destruct command. The guidance software contained a fatal error: a missing overbar (vinculum) in a hand-transcribed equation caused the Atlas to process raw radar tracking noise as real trajectory deviations. The vehicle oscillated wildly, heading toward shipping lanes, and was destroyed. Cost: $18.5 million (1962). Arthur C. Clarke called it &ldquo;the most expensive hyphen in history,&rdquo; though the symbol was technically an overbar, not a hyphen.</p>
+      <p>The backup spacecraft, Mariner 2, launched 36 days later from the same pad with corrected software. On December 14, 1962, it flew past Venus at 34,773 km &mdash; the first successful interplanetary mission in history. It measured Venus&rsquo;s surface temperature at 425&deg;C, detected no magnetic field, and characterized the solar wind for 3.5 months. Everything Mariner 1 was built to do, Mariner 2 did. The nest fell. The swallow rebuilt.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 202.8 kg &mdash; the most capable interplanetary probe yet built</li>
+        <li><strong>Instruments:</strong> Microwave radiometer, infrared radiometer, magnetometer, ion chamber, cosmic dust detector, solar plasma spectrometer</li>
+        <li><strong>Power:</strong> Two solar panels, 5.05 m total span</li>
+        <li><strong>Communication:</strong> High-gain directional antenna, S-band</li>
+        <li><strong>Attitude control:</strong> Sun sensor + Earth sensor, nitrogen gas jets</li>
+        <li><strong>Builder:</strong> Jet Propulsion Laboratory (for NASA)</li>
+        <li><strong>Launch vehicle:</strong> Atlas-Agena B (Atlas D first stage + Agena B upper stage)</li>
+        <li><strong>Target:</strong> Venus flyby via Hohmann transfer (~146 day trip)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Failure</h2>
+      <p><strong>T+0 (09:21:23 UTC):</strong> Atlas-Agena B ignition from LC-12, Cape Canaveral. Three Atlas engines produce 390,000 lbs total thrust. Liftoff is clean.</p>
+      <p><strong>T+0 to T+120:</strong> Booster phase nominal. Atlas boosters jettison on schedule. Sustainer engine continues. Guidance system processes radar tracking data from Cape Canaveral ground stations. The software error is already active &mdash; the missing overbar means every radar noise spike is processed as a real trajectory deviation &mdash; but the vehicle is still within the guidance correction envelope.</p>
+      <p><strong>T+120 to T+200:</strong> Guidance oscillations begin. The Atlas autopilot receives increasingly erratic steering commands as the unsmoothed radar data drives corrections to phantom deviations. The vehicle begins yawing and pitching abnormally. Telemetry shows the guidance system commanding corrections at frequencies that correspond to radar noise, not real trajectory errors.</p>
+      <p><strong>T+200 to T+293:</strong> The oscillations amplify through the feedback loop. Each correction creates a real trajectory change, which the radar measures, which the unsmoothed code interprets as a new deviation, which drives another correction. The vehicle heads northeast toward shipping lanes and populated areas. Range Safety Officer Broadbent monitors the trajectory against destruct limits.</p>
+      <p><strong>T+293:</strong> The Atlas crosses the range safety destruct limit. Broadbent sends the coded destruct command. Explosive charges sever the vehicle. Mariner 1, the Atlas, and the Agena B fall into the Atlantic Ocean approximately 290 miles from Cape Canaveral. The first American Venus mission lasts four minutes and fifty-three seconds.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Error</h2>
+      <p>The guidance equations were specified in standard mathematical notation, including overbars (vinculums) to indicate time-averaged values. When these equations were hand-transcribed into Fortran code on punch cards, one overbar was omitted. The overbar indicated that a tracking velocity parameter should be smoothed before use. Without it, raw radar data &mdash; including measurement noise from atmospheric refraction, thermal receiver noise, and resolution limits &mdash; was processed as real trajectory information.</p>
+      <p>The smoothing function was a simple moving average: take the last N samples, divide by N. This operation reduces noise by a factor of approximately &radic;N. For a 5-sample window, noise is reduced by more than half. Without it, every noise spike drove a guidance correction. The corrections created real deviations, which created more noise-contaminated measurements, which drove larger corrections. Classic feedback instability, caused by insufficient filtering in a high-gain closed loop.</p>
+      <p>The error was not caught during code review because the equation &ldquo;looked correct&rdquo; to human reviewers &mdash; the Fortran representation of the unsmoothed variable was syntactically valid. The overbar was a mathematical annotation, not a Fortran keyword. There was no compiler warning for its absence. The gap between mathematical specification and code implementation was the verification gap that destroyed the mission.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Guidance stability analysis &mdash; interactive simulation comparing smoothed vs. unsmoothed radar processing, with adjustable gain and noise parameters</li>
+        <li><strong>Godot 4:</strong> Range Safety Decision game &mdash; the player is the RSO watching a deviating rocket; score based on optimal destruct timing</li>
+        <li><strong>Blender:</strong> T+293 animation &mdash; Mariner 1 launch, guidance oscillation, and destruction sequence (60 sec, Cycles)</li>
+        <li><strong>GLSL:</strong> Barn Swallow aerial pursuit screensaver &mdash; forked-tail aerodynamics visualized as flow lines during insect chase</li>
+        <li><strong>Arduino:</strong> Smoothing filter demonstrator ($25) &mdash; physical toggle between raw and filtered signals, LEDs show oscillation vs. stability</li>
+        <li><strong>Radio:</strong> Analog smoothing filter circuit ($12) &mdash; RC low-pass filter demonstrating the physical overbar</li>
+        <li><strong>Screensaver:</strong> Barn Swallow flight &rarr; Mariner destruct sequence &rarr; Mariner 2 launch &rarr; Venus arrival (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Write code with a deliberate bug &mdash; implement a smoothing function in Python, then remove it and observe the output divergence (30 min)</li>
+        <li><strong>TRY 2:</strong> Observe Barn Swallows building nests &mdash; find a nest site, count mud pellet trips, look for failed nests (30-60 min, spring/summer)</li>
+        <li><strong>TRY 3:</strong> Calculate the Venus launch window &mdash; synodic period, Hohmann transfer geometry, why Mariner 2 had only 36 days (30 min, Python)</li>
+        <li><strong>DIY 1:</strong> Arduino bug detector ($20) &mdash; toggle smoothing on/off, watch LEDs oscillate or stabilize</li>
+        <li><strong>DIY 2:</strong> Mud nest construction test ($5) &mdash; test mud-to-grass ratios, find the optimal composite for wall adhesion</li>
+        <li><strong>DIY 3:</strong> Paper Venus transfer orbit ($0) &mdash; draw Earth, Venus, and the Hohmann ellipse, find the launch geometry</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-overbar.html" style="color: var(--light-bright);">Story: &ldquo;The Overbar&rdquo;</a>
+          <a href="artifacts/stories/the-overbar.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; The symbol that was never written tells the story of the spacecraft it could not save
+        </li>
+        <li><a href="artifacts/audio/destruct-sequence.dsp" style="color: #7EB8DA;">Audio: Destruct Sequence</a> &mdash; FAUST DSP (launch rumble &rarr; oscillating telemetry &rarr; silence &rarr; Barn Swallow call, 90 seconds)</li>
+        <li><a href="artifacts/audio/barn-swallow-twitter.dsp" style="color: #7EB8DA;">Audio: Barn Swallow Song</a> &mdash; FAUST generative (liquid twittering at 3-6 kHz, aerial pursuit rhythms)</li>
+        <li><a href="artifacts/circuits/analog-smoothing-filter.md" style="color: var(--light-bright);">Circuit: Analog Smoothing Filter</a> &mdash; RC low-pass filter, the physical overbar ($12)</li>
+        <li><a href="artifacts/circuits/range-safety-indicator.md" style="color: var(--light-bright);">Circuit: Range Safety Indicator</a> &mdash; LED deviation display with destruct threshold ($18)</li>
+        <li><a href="artifacts/screensaver/mariner1-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Barn Swallow flight, Mariner destruct, Mariner 2 launch, Venus approach</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">The nest that falls:</span> A Barn Swallow nest fails from a single structural weakness &mdash; one pellet that did not bond. Mariner 1 failed from a single code error &mdash; one overbar that was not transcribed. Both systems require every component to hold. A single weak point cascades into total failure. And both are followed by rebuilding: the swallow rebuilds the nest within days. NASA launched Mariner 2 within 36 days.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Guidance and the fork:</span> The Barn Swallow&rsquo;s deeply forked tail is a biological guidance system &mdash; responsive, noise-tolerant, evolved for real-time course correction. Mariner 1&rsquo;s digital guidance was precise, powerful, and fatally dependent on correct software. The swallow&rsquo;s system is analog and inherently smoothed. Mariner 1&rsquo;s system required explicit smoothing that was accidentally omitted.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">The backup brood:</span> Barn Swallows raise two broods per season &mdash; biological redundancy. NASA built two Mariners &mdash; engineering redundancy. In both cases, the backup succeeded because the first failure identified the danger. Without redundancy, both the species and the program face catastrophic loss from a single failure event.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Ray Charles and the fusion:</span> Charles fused gospel and blues &mdash; a combination that violated both traditions&rsquo; rules. The Barn Swallow fuses mud and grass into a composite. Mariner 1&rsquo;s guidance fused radar tracking with digital computation. Charles&rsquo;s fusion created soul music. The swallow&rsquo;s fusion creates nests. Mariner 1&rsquo;s fusion created 293 seconds. The difference: Charles verified his fusion nightly in the Central District clubs.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Grace Hopper&rsquo;s ghost:</span> Hopper built compilers to eliminate hand-transcription errors. The A-0 compiler (1952) translated mathematical notation into machine code automatically. Mariner 1 was destroyed in 1962 by exactly the kind of hand-transcription error Hopper&rsquo;s tools were designed to prevent. The gap between specification and implementation &mdash; the gap where the overbar was lost &mdash; is the gap Hopper spent her life closing.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Mariner Arc: Failure as Foundation</h2>
+      <p>Mariner 1 was the first of ten Mariner missions. Three failed (1, 3, and 8). Seven succeeded. The program discovered Venus&rsquo;s surface temperature, Mars&rsquo;s cratered terrain, Mercury&rsquo;s magnetic field, and the gravity-assist technique. Every success was downstream of the 36-day scramble to launch Mariner 2 after Mariner 1&rsquo;s destruction.</p>
+      <p>The most expensive hyphen in history was also the most productive. The Mariner 1 failure established software verification as a discipline. It demonstrated the value of building backup spacecraft. It proved that range safety worked. And it launched the investigation that fixed the guidance code in time for Mariner 2 to reach Venus and change planetary science forever.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.29/index.html">&larr; v1.29 Ranger 4</a>
+      <a href="../1.32/index.html">v1.32 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Hirundo rustica (Barn Swallow)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">17cm</div>
+          <div class="stat-label">Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">19g</div>
+          <div class="stat-label">Mass</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10K+km</div>
+          <div class="stat-label">Migration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Apr-Sep</div>
+          <div class="stat-label">PNW Season</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The most widespread swallow in the world. Builds mud-pellet nests on human structures &mdash; barns, bridges, eaves. The deeply forked tail is a flight control surface enabling extreme aerial maneuverability: turn radii under 20 cm, 90+g centripetal loads during insect pursuit. Nests fail regularly from substrate adhesion, structural cracking, or predation. The swallow rebuilds within days. Two broods per season provide biological redundancy. Migration spans 10,000+ km between hemispheres. The bird that chose to live alongside humanity, and rebuilds when the architecture fails.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Hirundo rustica (Barn Swallow)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 30 &mdash; Ray Charles. Organism and bird converge: the Barn Swallow is both pairings for this degree. The forked tail that guides the swallow through aerial pursuit is the guidance system that Mariner 1 lacked &mdash; biological, analog, noise-tolerant, verified by 30 million years of evolution. The swallow&rsquo;s response to failure is not analysis &mdash; it is mud. Build again. The same rafter or the next one.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Grace Hopper</h3>
+      <p style="font-size:0.85rem;">December 9, 1906 &mdash; January 1, 1992</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Rear Admiral Grace Murray Hopper &mdash; pioneer of debugging, inventor of the compiler, champion of human-readable code. Her A-0 compiler (1952) automated the translation from mathematical notation to machine code, eliminating the hand-transcription step that destroyed Mariner 1. She found the first literal computer bug (a moth in the Harvard Mark II, 1947) and spent her life building tools to find the figurative ones. The overbar that destroyed Mariner 1 would not have been lost in a Hopper-designed system. The gap between specification and implementation &mdash; the gap where the symbol was lost &mdash; is the gap she spent forty years closing.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MARIN1">NSSDC &mdash; Mariner 1</a>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-041A">NSSDC &mdash; Mariner 2</a>
+      <a href="https://ntrs.nasa.gov/search?q=mariner%201%20failure">NASA NTRS &mdash; Mariner 1 Reports</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://ebird.org/species/barswa">eBird &mdash; Barn Swallow</a>
+      <a href="https://www.allaboutbirds.org/guide/Barn_Swallow/">Cornell &mdash; Barn Swallow</a>
+      <a href="https://americanhistory.si.edu/collections/object-groups/grace-hopper">Smithsonian &mdash; Grace Hopper</a>
+      <a href="https://images.nasa.gov/search?q=mariner+1&media=image">NASA Image Library</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--failure-light);">"One bar left undrawn &mdash; Venus waits another month, the swallow rebuilds"</p>
+</footer>
+
+</body>
+</html>

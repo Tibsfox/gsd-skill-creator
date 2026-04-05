@@ -1,0 +1,93 @@
+{
+  "mission": "1.23",
+  "title": "Mercury-Atlas 7 / Aurora 7",
+  "date": "1962-05-24",
+  "organism": "Oplopanax horridus",
+  "organism_common": "Devil's Club",
+  "organism_location": "Wet coniferous forest understory throughout the Pacific Northwest — from southeast Alaska through British Columbia, Washington, and Oregon. Dominant in ravines, streamside thickets, and avalanche chutes below 1,500 m. Indicator species for old-growth conditions: deep soil, sustained moisture, mature canopy. Particularly abundant in the Hoh Rainforest, Quinault Valley, and western Cascades foothills including Snohomish County riparian corridors.",
+  "bird": "Colaptes auratus cafer",
+  "bird_common": "Red-shafted Flicker",
+  "dedication": {
+    "name": "Booker T. Washington",
+    "born": "1856-04-05",
+    "died": "1915-11-14",
+    "birthplace": "Hale's Ford, Franklin County, Virginia",
+    "field": "Education, institution building, civil rights",
+    "resonance": "Born April 5 — the wall-clock date of this mission's creation. Washington built Tuskegee Institute from nothing, brick by brick, arguing that practical education was the path from dependency to self-sufficiency. His philosophy — learn a skill, apply it, build a life, lift a community — is the College of Knowledge's pedagogical chain made manifest a century early. Carpenter was grounded by NASA but reinvented himself as an ocean scientist and educator. Washington was born into slavery but reinvented himself as the most influential African American educator of his era. Both men converted adversity into teaching."
+  },
+  "nodes": [
+    {
+      "id": "reentry-error-propagation",
+      "concept": "Reentry error propagation — how small retrofire errors amplify into large splashdown position errors",
+      "department": "aerospace-engineering",
+      "level": "advanced",
+      "tspb_layer": 3,
+      "tspb_section": "3.7",
+      "description": "Aurora 7's retrofire was 3 seconds late and yawed 25 degrees from the correct attitude. The 25-degree yaw reduced the effective retrograde delta-v by a factor of cos(25°) = 0.906, creating a 14 m/s deficit. The 3-second delay shifted the deorbit point 23 km downrange. Combined with atmospheric dynamics amplifying the shallower entry angle, the total overshoot was 402 km. The sensitivity is approximately 25 km per m/s of delta-v deficit and 15 km per degree of yaw error — numbers that were known before the mission and that defined the fuel margin requirements Carpenter exceeded.",
+      "resonance": "Devil's Club spines penetrate skin at shallow angles and break off, with the embedded fragment causing inflammation disproportionate to its size. A 2 mm spine produces a 30 mm welt. The amplification factor (15:1 in spatial terms) parallels the retrofire sensitivity: a 25-degree angular error produces a 402 km position error — an amplification of approximately 16 km per degree, measured in completely different units but showing the same mathematical structure of small inputs producing large outputs through nonlinear dynamics."
+    },
+    {
+      "id": "resource-constrained-optimization",
+      "concept": "Resource-constrained optimization — the knapsack problem applied to mission planning",
+      "department": "operations-research",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.8",
+      "description": "Aurora 7's fuel budget was a classic constrained optimization problem: maximize scientific return subject to the constraint that fuel_remaining ≥ fuel_retrofire_minimum at the end of orbit three. Carpenter's choices — which observations to pursue, how long to spend on each, which to skip — were knapsack problem decisions with imperfect information (he could not predict the horizon scanner failure that would increase retrofire fuel requirements). The optimal solution, computed in retrospect, would have included the firefly investigation (high value, moderate cost) but excluded some terrain photography (moderate value, high cost). The actual solution included everything, exceeding the fuel constraint."
+    },
+    {
+      "id": "ethnobotanical-pharmacology",
+      "concept": "Ethnobotanical pharmacology — traditional plant medicine validated by modern chemistry",
+      "department": "ethnobotany",
+      "level": "advanced-research",
+      "tspb_layer": 5,
+      "tspb_section": "5.6",
+      "description": "Oplopanax horridus is documented in the ethnobotanical record of 38+ Indigenous nations for anti-diabetic, antimicrobial, anti-inflammatory, and spiritual uses. Modern pharmacological studies have identified the active compounds: sesquiterpenes (oplopanone, oplopandiol), polyacetylenes (falcarinol), and polysaccharides. The traditional whole-bark preparations may achieve synergistic effects that isolated compounds do not replicate. This pattern — traditional knowledge identifying bioactive organisms centuries before laboratory validation — is increasingly recognized as a valid form of empirical science operating on different time scales and with different methodology than Western laboratory chemistry."
+    },
+    {
+      "id": "acoustic-amplification-selection",
+      "concept": "Acoustic amplification selection — how the Red-shafted Flicker chooses resonant drumming surfaces",
+      "department": "bioacoustics",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.6",
+      "description": "The Northern Flicker (Colaptes auratus cafer) drums on surfaces selected for acoustic amplification rather than for food extraction. The bird's drumming rate (approximately 25 beats per second) is a species-specific signal used for territory defense and mate attraction. The bird preferentially selects surfaces with high acoustic impedance mismatch to the surrounding air — metal chimney caps, hollow dead snags, aluminum siding — because these surfaces convert the mechanical energy of the bill strike into acoustic radiation more efficiently than solid wood. The selection process is an optimization over the acoustic transfer function of available surfaces: the bird tests surfaces and returns to the loudest one."
+    },
+    {
+      "id": "mercury-capsule-thermodynamics",
+      "concept": "Mercury capsule thermodynamics — the ice crystal sublimation cycle that created the 'fireflies'",
+      "department": "thermodynamics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.9",
+      "description": "The 'fireflies' that Glenn reported on Friendship 7 and Carpenter solved on Aurora 7 were ice crystals formed by a thermodynamic cycle: (1) water vapor from the environmental control system's heat exchanger vented through the pressure relief valve; (2) vapor condensed on the cold exterior spacecraft surface during orbital night (-100°C); (3) condensed water froze; (4) at orbital dawn, solar radiation warmed the hull surface, and the ice sublimated (solid → vapor, bypassing liquid — because the near-vacuum of orbital space is below the triple point pressure for water); (5) sublimating ice crystals detached from the hull and drifted away, catching sunlight. The cycle repeated every orbit. Carpenter confirmed the mechanism by tapping the hull and observing a shower of particles dislodged by the mechanical vibration."
+    },
+    {
+      "id": "sensitivity-analysis",
+      "concept": "Sensitivity analysis — identifying operating points where systems are vulnerable to small errors",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 3,
+      "tspb_section": "3.8",
+      "description": "Sensitivity analysis quantifies how output uncertainty depends on input uncertainty. For Aurora 7's reentry, the key sensitivity was ∂(range)/∂(entry_angle) at shallow angles. Range scales approximately as 1/sin(γ) for shallow entries, meaning ∂(range)/∂γ ≈ -cos(γ)/sin²(γ) — a function that diverges as γ approaches zero. At the nominal entry angle of -1.5°, the sensitivity is approximately 130 km per 0.1° change in entry angle. This extreme sensitivity at shallow angles is why Mercury reentry margins were designed to be generous — and why consuming those margins on science observations had disproportionate consequences."
+    },
+    {
+      "id": "practical-education-philosophy",
+      "concept": "Practical education philosophy — Booker T. Washington's model and its resonance with experiential learning",
+      "department": "education-theory",
+      "level": "foundational",
+      "tspb_layer": 5,
+      "tspb_section": "5.8",
+      "description": "Booker T. Washington's educational philosophy, articulated in 'Up from Slavery' (1901) and implemented at Tuskegee Institute, emphasized practical skill acquisition as the foundation for economic independence and social advancement. Students at Tuskegee learned by building — literally constructing the campus buildings, operating the farm, managing the infrastructure. The learning was embedded in the doing. The College of Knowledge's pedagogical chain (Learn → Practice → Create → Contribute) is Washington's philosophy recast for the 21st century. Carpenter's mission embodies the same principle: the firefly investigation was not abstract science. It was hands-on, in-the-moment, empirical investigation — tapping the hull, observing the result, forming and testing hypotheses in real time. The most effective learning happens when the learner has skin in the game."
+    },
+    {
+      "id": "devils-club-spine-mechanics",
+      "concept": "Devil's club spine mechanics — the biomechanics of retrorsely-barbed defensive spines",
+      "department": "biomechanics",
+      "level": "intermediate",
+      "tspb_layer": 8,
+      "tspb_section": "8.4",
+      "description": "Oplopanax horridus spines are modified trichomes — lignified plant hairs — approximately 3-10 mm long with a characteristic morphology: rigid shaft, retrorsely curved tip (pointing toward the spine base), and brittle base that fractures cleanly when lateral force is applied. This design ensures that: (1) the spine penetrates on forward contact (sharp tip); (2) withdrawal is resisted (recurved barb catches tissue); (3) the spine breaks off at the base when the animal pulls away, leaving the tip embedded. The embedded fragment produces an inflammatory response disproportionate to its size, creating a persistent deterrent. The spine distribution follows hierarchical scaling rules: large spines on main stems (high mechanical stress = thick spines), small spines on leaves (low stress = thin spines), with density increasing toward growing tips."
+    }
+  ]
+}
