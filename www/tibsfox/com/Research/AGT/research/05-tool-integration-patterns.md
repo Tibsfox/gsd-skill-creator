@@ -2,175 +2,291 @@
 
 > **Domain:** Agentic Infrastructure & Systems
 > **Module:** AGT-05 -- Integration Layer
-> **Through-line:** *The MCP ecosystem's real power is not any single server but the composition of many -- a Figma server feeding a code generator, an OAuth server guarding a database server, a framework server filling an LLM's knowledge gaps. Tool integration patterns determine whether this composition is coherent or chaotic.*
+> **Through-line:** *MCP transforms every API, every design tool, every database, and every SaaS product into a tool an AI agent can use. But the challenge is not making tools available -- it is making them discoverable, composable, secure, and efficient. The patterns that emerge from early MCP integrations echo the same lessons the web services industry learned over two decades, compressed into months.*
 
 ---
 
 ## Table of Contents
 
-1. [The Integration Challenge](#1-the-integration-challenge)
-2. [API Wrappers as Knowledge Bridges](#2-api-wrappers-as-knowledge-bridges)
-3. [Figma MCP: Design-to-Code Pipeline](#3-figma-mcp-design-to-code-pipeline)
-4. [Framework-Specific MCP Servers](#4-framework-specific-mcp-servers)
-5. [Centralized OAuth for MCP](#5-centralized-oauth-for-mcp)
-6. [Dynamic Client Registration](#6-dynamic-client-registration)
-7. [Composition Patterns](#7-composition-patterns)
-8. [Cross-References](#8-cross-references)
-9. [Sources](#9-sources)
+1. [MCP Tool Registration and Discovery](#1-mcp-tool-registration-and-discovery)
+2. [Figma MCP: Design-to-Code Bridge](#2-figma-mcp-design-to-code-bridge)
+3. [Framework-Specific Knowledge Servers](#3-framework-specific-knowledge-servers)
+4. [MCP Analytics and Observability](#4-mcp-analytics-and-observability)
+5. [Tool Composition and Chaining](#5-tool-composition-and-chaining)
+6. [OAuth and Permission Models](#6-oauth-and-permission-models)
+7. [Plugin Ecosystems and Supply Chain](#7-plugin-ecosystems-and-supply-chain)
+8. [Production Deployment: MCP Cloud](#8-production-deployment-mcp-cloud)
+9. [Cross-References](#9-cross-references)
+10. [Sources](#10-sources)
 
 ---
 
-## 1. The Integration Challenge
+## 1. MCP Tool Registration and Discovery
 
-Connecting a single MCP server to an AI agent is simple. Connecting five or ten servers and having them work together coherently is hard. The integration challenge is not about individual tool calls but about tool composition -- how the output of one tool becomes the input of another, how authentication flows across server boundaries, and how the agent reasons about multi-tool workflows.
+The MCP registry, co-maintained by GitHub's Toby and Obot's Adam as part of the MCP steering committee, serves as the central discovery mechanism for MCP servers. Its role is analogous to npm for Node packages, Docker Hub for container images, or PyPI for Python libraries: a searchable catalog where developers can discover, evaluate, and connect to MCP servers.
 
-The 17 agentic transcripts reveal two integration patterns that address different aspects of this challenge: API wrapper servers that bridge knowledge gaps between LLMs and niche tools, and centralized OAuth management that provides a unified authentication layer across all connected servers.
+The registry addresses three fundamental questions:
+- **Discovery**: What MCP servers exist for the task I need to accomplish?
+- **Evaluation**: Is this server trustworthy, well-maintained, and compatible with my client?
+- **Connection**: How do I configure my agent to connect to this server?
 
-## 2. API Wrappers as Knowledge Bridges
-
-LLMs have asymmetric knowledge. They are deeply trained on popular frameworks, languages, and tools (React, Python, PostgreSQL) but have shallow or outdated knowledge of niche tools (Contentful, Sanity, Sitecore, Optimizely). This asymmetry creates a practical problem: an AI coding assistant that cannot work with the specific tools a team uses is significantly less valuable.
-
-MCP servers solve this by providing structured tool access to the niche tool's API. Instead of trying to prompt-engineer the LLM into knowing about Contentful's content model or Sanity's GROQ query language, a developer builds an MCP server that wraps the tool's API and exposes its operations as tools with clear descriptions, typed parameters, and documented return values.
-
-The pattern:
+The registration model follows a pattern familiar from package registries:
 
 ```
-Niche Tool API (e.g., Figma, Contentful, Strapi)
+Developer                Registry                 Consumer
+    |                       |                        |
+    |-- publish(server) --->|                        |
+    |                       |-- index, validate      |
+    |                       |                        |
+    |                       |<--- search(query) -----|
+    |                       |---- results[] -------->|
+    |                       |                        |
+    |                       |<--- metadata(id) ------|
+    |                       |---- server_info ------>|
+    |                       |                        |
+    |                       |              connect to server
+```
+
+GitHub's approach to MCP adoption is significant: they have "gone all in," with the GitHub MCP server becoming one of the most popular in the ecosystem. MCP was "in every conversation" at GitHub Universe. The enterprise governance layer -- allow-list policies for which MCP servers an organization's developers can use -- recognizes that unrestricted tool access creates security and compliance risks.
+
+The governance tension is real: MCP's open protocol ethos (celebrated by Shinszo, who came from the blockchain world and saw MCP as similarly decentralized and community-driven) creates the same openness-versus-security challenge that package registries face. npm learned this lesson through incidents like event-stream; the MCP registry is building governance proactively rather than reactively.
+
+## 2. Figma MCP: Design-to-Code Bridge
+
+Anton Tishinka, CTO of XDST (a web development company working with NextJS, React, Astro, and Svelte), built an open-source Figma MCP server as a side product of their agency work.
+
+The problem the Figma MCP solves: designers create components, layouts, and design systems in Figma. Developers implement them in code. The translation between design and code is manual, error-prone, and time-consuming. AI coding tools can generate code from descriptions, but they lack direct access to the design specifications -- colors, spacing, typography, component hierarchy.
+
+The Figma MCP wraps Figma's REST API as MCP tools:
+
+```
+Figma API                    MCP Server                    Agent
+    |                            |                           |
+    |                            |<-- tools/list ------------|
+    |                            |--- tool definitions ----->|
+    |                            |                           |
+    |                            |<-- get_design_tokens -----|
+    |<-- GET /files/:key/styles  |                           |
+    |--- style definitions ----->|                           |
+    |                            |--- tokens: {colors,       |
+    |                            |    spacing, typography} ->|
+    |                            |                           |
+    |                            |<-- get_component(:id) ----|
+    |<-- GET /files/:key/nodes   |                           |
+    |--- component tree -------->|                           |
+    |                            |--- component spec ------->|
+```
+
+The MCP server provides structured access to:
+- **Design tokens**: Colors, spacing scales, typography definitions, shadow values
+- **Component specifications**: Component hierarchy, properties, constraints, auto-layout rules
+- **Layout information**: Frame dimensions, padding, alignment, responsive breakpoints
+- **Asset references**: Image fills, icon components, exportable assets
+
+XDST's experience with niche CMS products (Contentful, Strapi, Optimizely, Sanity, Sitecore) informed the approach: LLMs have strong knowledge of mainstream technologies but are "not quite good" with niche tools. Rather than trying to train better models or engineer better prompts, build an MCP server that provides the missing knowledge as structured tool access.
+
+This is a general pattern: **bridge the knowledge gap through tools, not training.** When an LLM lacks domain expertise, the most cost-effective solution is an MCP server that exposes the domain's API as structured tools, not fine-tuning or prompt engineering.
+
+## 3. Framework-Specific Knowledge Servers
+
+Paulo Bruti (Paris, second appearance on The Context) built a Svelte MCP server that exemplifies the framework-specific knowledge pattern. LLMs trained on internet-scale data have deep knowledge of React and Vue (heavily represented in training data) but struggle with niche frameworks like Svelte, Solid, or Qwik.
+
+The Svelte MCP server provides:
+- **API documentation**: Svelte 5 runes, component lifecycle, store contracts
+- **Component patterns**: Recommended patterns for common UI elements in Svelte idiom
+- **Migration guidance**: Svelte 4 to Svelte 5 migration patterns (runes replacing stores)
+- **Build configuration**: SvelteKit routing, adapter configuration, deployment patterns
+
+The show host noted this was a framework "you care deeply about -- this is obviously your baby." The emotional investment reflects a broader pattern: framework-specific MCP servers are often built by framework enthusiasts who see AI tools as force multipliers for their preferred technology.
+
+The auto-fixer pattern Paulo described was called "the right way to build every MCP server": the MCP server does not just provide documentation but includes a tool that takes broken code, runs the framework's compiler, extracts error messages, and suggests fixes. This creates a compiler-in-the-loop feedback cycle where the agent iterates toward correct code with the compiler as its oracle.
+
+```
+Agent writes code
+     |
+     v
+MCP auto-fixer tool
+     |
+     v
+Framework compiler
+     |
+     +-- Errors? --> Extract error messages --> Return to agent
+     |
+     +-- Clean? --> Return success
+```
+
+This pattern is applicable beyond Svelte: any technology with a fast compiler or type checker can provide this feedback loop. TypeScript's `tsc`, Rust's `cargo check`, Go's `go vet` -- each can serve as an oracle that guides agent code generation toward correctness.
+
+## 4. MCP Analytics and Observability
+
+Shinszo, a developer with five years of blockchain experience, built MCP analytics tools motivated by the parallels between blockchain's decentralized protocol ethos and MCP's open architecture.
+
+The analytics MCP server provides observability into MCP server usage patterns:
+- **Invocation metrics**: Which tools are called, how frequently, by which clients
+- **Latency tracking**: Response times per tool, per server, over time
+- **Error rates**: Tool failures, timeout patterns, degradation trends
+- **Usage patterns**: Sequences of tool calls that indicate common workflows
+
+The blockchain parallel is instructive: blockchain networks track every transaction on a public ledger, enabling analytics, auditing, and anomaly detection. MCP does not have a built-in ledger, but analytics MCP servers can provide equivalent visibility by instrumenting the tool call layer.
+
+For production deployments, MCP analytics serves the same role as application performance monitoring (APM) tools like Datadog or New Relic: it makes the agent's tool usage visible, measurable, and debuggable. Without analytics, an MCP deployment is a black box -- you know what the agent produced but not how it got there.
+
+## 5. Tool Composition and Chaining
+
+MCP tools are atomic operations: get a file, query a database, send a message. Real workflows require composing multiple atomic operations into higher-level behaviors. The composition patterns:
+
+**Sequential chaining:** Tool A's output feeds Tool B's input.
+```
+get_user(id) -> user_data -> get_orders(user_data.email) -> orders
+```
+
+**Parallel fan-out:** Multiple tools invoked simultaneously, results aggregated.
+```
+[get_weather(SEA), get_weather(PDX), get_weather(SFO)] -> compare_weather(results)
+```
+
+**Conditional branching:** Tool selection depends on previous tool results.
+```
+check_inventory(sku) -> if in_stock: create_order() else: add_to_waitlist()
+```
+
+**Iterative refinement:** A tool is called repeatedly with modified parameters until a condition is met.
+```
+search(query) -> not_enough_results -> search(refined_query) -> sufficient
+```
+
+**Cross-server composition:** Tools from different MCP servers are combined in a single workflow.
+```
+figma.get_component(id) -> tokens -> github.create_file(component.tsx, generated_code)
+```
+
+The composition layer is where agent intelligence matters most. Individual tool calls are deterministic (given the same input, the same output). The agent's contribution is deciding which tools to call, in what order, with what parameters, and how to handle the results. This is the "reasoning" that differentiates a capable agent from a simple automation.
+
+The code execution approach from the token management research (AGT-03) has implications for composition: when the agent writes code rather than making individual tool calls, composition becomes explicit in the code structure. Loops, conditionals, error handling, and data transformation are expressed in a programming language rather than inferred by the model from tool descriptions.
+
+## 6. OAuth and Permission Models
+
+Bill Maxwell (co-founder at Obot, 15-year colleague of the show host Shannon) presented the centralized OAuth management model for MCP deployments.
+
+The fundamental challenge: agents are ephemeral. Traditional OAuth 2.0 assumes semi-permanent clients -- a web application registers once, receives client credentials, and uses them for months or years. AI agents spin up, connect to MCP servers, do work, and terminate. New agents continuously appear. This lifecycle mismatch breaks static client registration.
+
+**Dynamic Client Registration (RFC 7591)** addresses this:
+
+```
+Agent starts
     |
     v
-MCP Server (wraps API, exposes as tools)
-    |-- Tool: get_components() -> list of design components
-    |-- Tool: get_styles() -> design tokens and style definitions
-    |-- Tool: export_assets() -> image/SVG exports
-    |-- Tool: get_layout() -> page structure and hierarchy
+Register with OAuth server (DCR)
+    |-- client_id, client_secret (ephemeral)
     |
     v
-AI Agent (calls tools through MCP protocol)
-    |-- Receives structured data about the niche tool
-    |-- Can reason about it and generate code accordingly
-```
-
-This is a pragmatic alternative to fine-tuning. Fine-tuning an LLM on Figma documentation would be expensive, slow to update, and limited to one model provider. An MCP server works with any MCP-compatible client, can be updated independently, and costs nothing beyond development time.
-
-## 3. Figma MCP: Design-to-Code Pipeline
-
-Anton Tishinka, CTO of XDST (a web development company working with NextJS, React, Astro, and Svelte), built an open-source community Figma MCP server as a side product of their agency work. XDST also works with niche CMS products -- Contentful, Strapi, Optimizely, Sanity, Sitecore -- where LLMs are "not quite good."
-
-The Figma MCP server wraps Figma's REST API to provide design-to-code capabilities:
-
-**Design token extraction**: The server reads Figma's design system and extracts color palettes, typography scales, spacing values, border radii, and shadow definitions. These are returned as structured data that an AI coding agent can use to generate CSS variables, Tailwind configurations, or styled-components themes.
-
-**Component listing and structure**: The server enumerates Figma components (buttons, cards, headers, navigation elements) with their properties, variants, and nesting structure. An AI agent can use this to generate React/Svelte component skeletons that match the design system.
-
-**Layout and hierarchy**: The server reads Figma frames and auto-layout settings to determine page structure -- how elements are arranged, what flexbox or grid properties they use, what responsive breakpoints are defined. This enables AI-generated HTML/CSS that matches the designer's intended layout.
-
-**Asset export**: The server can trigger Figma's export API to generate PNG, SVG, or PDF renditions of specific layers or components.
-
-The open-source decision was deliberate. XDST built the MCP server for their own workflow efficiency (translating client Figma designs into code is a core agency activity) and published it because the broader community has the same need. The community benefit model -- build what you need, share what others need -- is a recurring pattern in the MCP ecosystem.
-
-## 4. Framework-Specific MCP Servers
-
-Paulo Bruti (Paris, second appearance on The Context) built a dedicated MCP server for the Svelte framework. The motivation: LLMs trained primarily on React and Vue documentation produce Svelte code that uses React-like patterns (explicit state management, manual reactivity) instead of idiomatic Svelte patterns (reactive declarations, built-in stores, compile-time reactivity).
-
-A framework-specific MCP server addresses this by providing:
-
-- **Current documentation**: The server exposes up-to-date Svelte API documentation as tool responses, preventing the LLM from using deprecated patterns or outdated syntax
-- **Idiomatic patterns**: The server provides curated examples of idiomatic Svelte code for common tasks (routing, state management, component composition, transitions)
-- **Component library awareness**: The server knows about popular Svelte component libraries and their APIs
-- **Migration guidance**: For developers moving from React or Vue to Svelte, the server provides pattern-translation guidance
-
-The host of The Context noted Paulo's passion: "You care deeply about Svelte. This is obviously your baby." This personal investment is a feature of the MCP ecosystem -- individual developers who care deeply about a specific technology are the ones building its MCP server, bringing domain expertise that no general-purpose server could match.
-
-The pattern generalizes beyond frontend frameworks. Any technology where the LLM's training data is sparse, outdated, or biased toward a competing technology benefits from a dedicated MCP server: niche databases, specialized build tools, industry-specific platforms, regional APIs.
-
-## 5. Centralized OAuth for MCP
-
-Bill Maxwell, co-founder at Obot (and a 15-year colleague of show host Shannon), presented the case for centralized OAuth management in MCP deployments.
-
-The fundamental problem: traditional OAuth assumes semi-permanent clients. A web application registers with an OAuth provider once, receives a client ID and secret, and uses them for months or years. Tokens expire and refresh, but the client identity persists.
-
-AI agents break this assumption. They are ephemeral -- an agent spins up, connects to MCP servers, performs work, and terminates. Another agent spins up minutes later. In a multi-agent system, dozens of agents may be created and destroyed per hour. Static client registration is impractical at this lifecycle velocity.
-
-Without centralized management, each MCP server developer implements their own OAuth flow:
-
-```
-MCP Server A: Custom OAuth with Google
-MCP Server B: Custom OAuth with GitHub  
-MCP Server C: Custom API key validation
-MCP Server D: No authentication (!)
-```
-
-This creates inconsistency, security gaps, and duplicated effort. Server D's missing authentication is a security hole. Server A's custom implementation may have bugs that Server B's does not. Every server developer reinvents the same authentication wheel.
-
-Centralized OAuth management consolidates these concerns:
-
-```
-Central OAuth Platform
-    |-- Standardized token implementation
-    |-- Token issuance, rotation, and revocation
-    |-- Security policy enforcement (scope limits, rate limits)
-    |-- Audit logging (who authenticated, when, for what)
+Request access token for MCP Server X
+    |-- scope: [tool_a, tool_b]
     |
-    |-- MCP Server A: trusts central platform
-    |-- MCP Server B: trusts central platform
-    |-- MCP Server C: trusts central platform
-    |-- MCP Server D: trusts central platform
+    v
+Call MCP Server X with bearer token
+    |
+    v
+MCP Server X validates token with OAuth server
+    |-- Is the token valid?
+    |-- Does the scope include the requested tool?
+    |-- Is the client within rate limits?
+    |
+    v
+Tool execution proceeds (or is rejected)
 ```
 
-Individual MCP server developers do not implement OAuth themselves. They delegate to the central platform, which handles the complexity, and trust the platform's token validation. This is the same pattern used by API gateway products in traditional web services.
+**Centralized management** means a platform team handles:
+- **Token issuance**: Standard OAuth flows (client credentials, authorization code)
+- **Token rotation**: Automatic refresh before expiration, revocation on compromise
+- **Policy enforcement**: Scope restrictions, rate limits, time-based access
+- **Audit logging**: Who requested what token, when, for what purpose
 
-## 6. Dynamic Client Registration
+Individual MCP server developers do not implement OAuth themselves. They delegate authentication to the centralized system and focus on tool logic. This separation of concerns mirrors the evolution of web services: early APIs handled authentication inline, then API gateways (Kong, Apigee) centralized the concern.
 
-MCP addresses the ephemeral-agent problem through **dynamic client registration** (RFC 7591), where clients can register programmatically at runtime without manual administrator intervention.
+**Permission granularity** for MCP tools follows a hierarchy:
+1. **Server-level**: Can this agent access this MCP server at all?
+2. **Tool-level**: Which tools within the server can this agent invoke?
+3. **Parameter-level**: What parameter values are permitted? (e.g., can this agent query any database, or only the analytics database?)
+4. **Data-level**: What data can be returned? (e.g., PII fields may be redacted for some agents)
 
-The flow:
+The CIMD (Client ID Metadata Documents) integration provides the initial trust signal: when an agent dynamically registers, it presents its CIMD, which the OAuth server evaluates against its trust policy before issuing tokens.
 
-1. **Agent starts**: A new agent instance begins execution
-2. **Registration**: The agent sends a registration request to the OAuth server, including CIMD metadata (Client ID Metadata Document -- see [Agent Security](02-agent-security-identity.md))
-3. **Credential issuance**: The OAuth server validates the metadata, creates a client record, and issues credentials (client ID, client secret, initial access token)
-4. **MCP server access**: The agent uses the issued token to authenticate to MCP servers
-5. **Token lifecycle**: The central platform handles token refresh, rotation, and expiration
-6. **Termination**: When the agent's work is complete, the session credentials are revoked
+## 7. Plugin Ecosystems and Supply Chain
 
-Dynamic registration combined with CIMD metadata creates a trust chain:
+The Checkmarks security researcher's findings on VS Code extensions apply directly to MCP server ecosystems. The parallels:
 
-- The CIMD document attests to who built the agent, what it claims to need, and who vouches for it
-- The OAuth server evaluates these attestations against its security policy
-- The issued token carries scopes that match the policy evaluation
-- MCP servers trust the token because they trust the OAuth platform
+| VS Code Extensions | MCP Servers |
+|-------------------|-------------|
+| Run with user privileges | Run with host process privileges |
+| Auto-update mechanism | Some deployment patterns auto-update |
+| Marketplace with trust badges | Registry with metadata and ratings |
+| Hidden npm dependencies | Arbitrary dependency trees |
+| Single publisher can push malicious update | Server author can modify behavior |
 
-This chain enables fine-grained authorization without per-server configuration. A data analysis agent receives tokens scoped to read-only database access. A deployment agent receives tokens scoped to CI/CD operations. A customer service agent receives tokens scoped to CRM read/write. The scoping is determined by policy, not by manual configuration.
+**Supply chain defense layers for MCP:**
 
-Bill Maxwell emphasized the institutional maturity behind this: he and Shannon have worked together for 15 years on identity systems. The patterns they are applying to MCP (dynamic registration, centralized token management, policy-driven scoping) are proven at scale in traditional web services. The innovation is applying them to the specific lifecycle challenges of AI agents.
+1. **Registry vetting**: Automated scanning of submitted MCP servers for known vulnerabilities, malicious patterns, and excessive permission requests
+2. **Dependency auditing**: Recursive analysis of MCP server dependencies (npm packages, system libraries) for known CVEs
+3. **Privilege sandboxing**: Running MCP servers with minimal necessary permissions (read-only filesystem, restricted network, limited CPU/memory)
+4. **Update verification**: Cryptographic signing of MCP server releases, with client-side verification before loading updates
+5. **Behavioral monitoring**: Runtime analysis of MCP server behavior for anomalous patterns (unexpected network connections, file access outside declared scope, resource consumption spikes)
 
-## 7. Composition Patterns
+The "lethal trifecta" from AGT-02 is the ultimate risk: a compromised MCP server that introduces untrusted content into the agent's context, accesses private data through other tools, and can communicate externally through its own capabilities. Each supply chain defense layer reduces the probability of this convergence.
 
-Synthesizing across the integration transcripts, several composition patterns emerge:
+## 8. Production Deployment: MCP Cloud
 
-**Pipeline composition**: The output of one MCP server feeds the input of another. Figma MCP exports design tokens, which a code-generation agent uses to create CSS, which a framework MCP server validates against framework-specific patterns. This is a linear pipeline with each step adding value.
+Vali and Alex from MCP Cloud AI presented the platform they built to bridge the gap between local MCP development and production deployment.
 
-**Gateway composition**: A centralized OAuth or proxy server mediates access to all downstream MCP servers. Every tool call flows through the gateway, which handles authentication, rate limiting, and logging. This is a star topology with the gateway at the center.
+The problem: developing MCP servers locally is straightforward. They run as processes on the developer's machine, communicate over stdio or local HTTP, and connect to local tools. But delivering MCP capabilities to customers requires internet-reachable endpoints with TLS, authentication, scaling, monitoring, and reliability guarantees.
 
-**Enrichment composition**: A framework-specific MCP server enriches the agent's context alongside a general-purpose tool. The Svelte MCP does not replace the agent's general coding capabilities; it augments them with Svelte-specific knowledge. This is additive composition where multiple servers contribute to a richer context.
+MCP Cloud provides a proxy platform:
 
-**Validation composition**: An MCP server acts as a validator for another server's output. A type-checking MCP server validates the code generated by a code-writing agent. A schema validation MCP server checks the data structures produced by a data transformation tool. This is quality-gate composition.
+```
+Local MCP Server                MCP Cloud Proxy              Client
+       |                             |                          |
+       |-- register(server) -------->|                          |
+       |                             |-- provision endpoint     |
+       |                             |-- configure TLS          |
+       |                             |-- setup auth             |
+       |                             |                          |
+       |                             |<--- connect(token) ------|
+       |                             |---- validate token       |
+       |<--- forward(tool_call) -----|                          |
+       |---- result ----------------->|                          |
+       |                             |---- result ------------->|
+```
 
-Each pattern has different implications for token consumption (see [Stateful Agents](03-stateful-agents-token-management.md)), security (see [Agent Security](02-agent-security-identity.md)), and deployment (see [Architecture Patterns](04-agent-architecture-patterns.md)).
+The platform is approaching 1,000 hosted MCP servers. Key capabilities:
+- **Cloud hosting**: MCP servers run in managed infrastructure, accessible via public endpoints
+- **Authentication**: OAuth integration, API key management, token validation
+- **Scaling**: Automatic scaling based on request volume
+- **Monitoring**: Request logging, error tracking, latency measurement
 
-## 8. Cross-References
+The MCP Cloud model is analogous to API management platforms (Apigee, Kong, AWS API Gateway): it wraps existing services with production infrastructure without modifying the service itself. The MCP server developer writes tool logic; the platform handles everything else.
 
-- [MCP Protocol and Orchestration](01-mcp-protocol-orchestration.md) -- Framework-specific servers as MCP extension pattern
-- [Agent Security and Identity](02-agent-security-identity.md) -- CIMD, OAuth, and trust chains
-- [Stateful Agents and Token Management](03-stateful-agents-token-management.md) -- Token bloat from tool composition
-- [Agent Architecture Patterns](04-agent-architecture-patterns.md) -- Proxy layer for tool integration
-- ACE cluster: `01-claude-code-agentic-architecture.md` -- Tool dispatch model
-- Trust system: `src/chipset/trust-relationship.ts` -- Earned trust parallels OAuth trust delegation
+For our deployment patterns, MCP Cloud represents the "hosted" option on a spectrum:
+- **Local**: MCP server runs on the user's machine (development, personal use)
+- **Self-hosted**: MCP server runs on user's infrastructure (on-premise, private cloud)
+- **Cloud-hosted**: MCP server runs on MCP Cloud (SaaS, public API)
 
-## 9. Sources
+The FTP sync pattern we use for tibsfox.com (deploy static files to a hosted server) is the simplest version of this spectrum. MCP Cloud is the fully managed version.
 
-- The Context (Obot weekly show): Episodes featuring Anton Tishinka (XDST, Figma MCP), Paulo Bruti (Svelte MCP), Bill Maxwell (Obot, OAuth management)
-- Analysis: `artifacts/analysis-agentic-orphan-batch.md`, Clusters A and E
+## 9. Cross-References
+
+- [MCP Protocol and Orchestration](01-mcp-protocol-orchestration.md) -- Registry architecture and framework MCP servers
+- [Agent Security and Identity](02-agent-security-identity.md) -- OAuth, CIMD, supply chain security
+- [Stateful Agents and Token Management](03-stateful-agents-token-management.md) -- Token budget impact of tool registration
+- [Agent Architecture Patterns](04-agent-architecture-patterns.md) -- Tool composition across agent boundaries
+- Gastown chipset: `src/chipset/gastown/` -- Our tool dispatch model
+- Security-hygiene skill: Context window monitoring for suspicious tool behavior
+- FTP sync: `memory/ftp-sync-setup.md` -- Our deployment pattern
+
+## 10. Sources
+
+- The Context (Obot weekly show): Episodes featuring Anton Tishinka (XDST/Figma MCP), Paulo Bruti (Svelte MCP), Shinszo (MCP Analytics), Bill Maxwell (Obot/OAuth), Checkmarks researcher (supply chain), Vali & Alex (MCP Cloud)
+- Analysis: `artifacts/analysis-agentic-orphan-batch.md`, Clusters D and E
 - RFC 7591: OAuth 2.0 Dynamic Client Registration Protocol
-- Figma REST API documentation
+- MCP specification: tools/list, tool definitions, transport protocols
 
-> **Related:** [MCP Protocol](01-mcp-protocol-orchestration.md), [Agent Security](02-agent-security-identity.md), [Architecture Patterns](04-agent-architecture-patterns.md)
+> **Related:** [MCP Protocol](01-mcp-protocol-orchestration.md), [Agent Security](02-agent-security-identity.md), [Stateful Agents](03-stateful-agents-token-management.md), [Architecture Patterns](04-agent-architecture-patterns.md)
