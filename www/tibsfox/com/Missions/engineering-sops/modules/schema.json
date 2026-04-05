@@ -1,0 +1,162 @@
+{
+  "mission": "engineering-sops",
+  "title": "Engineering the Process — Standard Operating Procedures",
+  "subtitle": "Policy, Procedure, and Technical Work Discipline",
+  "date": "2026-04-05",
+  "status": "STAGED — Ready for GSD Orchestrator",
+  "activation_profile": "Squadron (12 roles, 5 modules, 2 parallel tracks)",
+  "token_budget": "~143K across 2-3 sessions",
+  "modules": {
+    "M1": {
+      "name": "SOP Anatomy and Structure",
+      "track": "1A",
+      "model": "sonnet",
+      "est_tokens": 12000,
+      "dependencies": ["schema"],
+      "deliverables": ["SOP Anatomy Reference"]
+    },
+    "M2": {
+      "name": "Process Maturity Frameworks",
+      "track": "1A",
+      "model": "sonnet+opus",
+      "est_tokens": 18000,
+      "dependencies": ["schema"],
+      "deliverables": ["Process Maturity Guide"]
+    },
+    "M3": {
+      "name": "Policy Architecture and Governance",
+      "track": "1B",
+      "model": "sonnet",
+      "est_tokens": 14000,
+      "dependencies": ["schema"],
+      "deliverables": ["Governance Policy Framework"]
+    },
+    "M4": {
+      "name": "AI-Augmented SOP Development",
+      "track": "1B",
+      "model": "sonnet+opus",
+      "est_tokens": 16000,
+      "dependencies": ["schema", "M2"],
+      "deliverables": ["AI-Augmented SOP Playbook"]
+    },
+    "M5": {
+      "name": "GSD-Specific SOP Implementation",
+      "track": "2",
+      "model": "opus",
+      "est_tokens": 22000,
+      "dependencies": ["M1", "M2", "M3", "M4"],
+      "deliverables": ["GSD SOP Implementation Guide", "Cross-Module Synthesis"]
+    }
+  },
+  "waves": {
+    "0": {
+      "name": "Foundation",
+      "mode": "sequential",
+      "model": "haiku",
+      "tasks": ["source_schema", "sop_schema", "template_stubs", "source_validation"]
+    },
+    "1A": {
+      "name": "Research Track A",
+      "mode": "parallel",
+      "model": "sonnet",
+      "modules": ["M1", "M2"],
+      "gate_after": true
+    },
+    "1B": {
+      "name": "Research Track B",
+      "mode": "parallel",
+      "model": "sonnet",
+      "modules": ["M3", "M4"],
+      "gate_after": true
+    },
+    "2": {
+      "name": "Synthesis",
+      "mode": "sequential",
+      "model": "opus",
+      "modules": ["M5"],
+      "gate_after": true
+    },
+    "3": {
+      "name": "Publication + Verification",
+      "mode": "sequential",
+      "model": "sonnet",
+      "tasks": ["self_assessment_tool", "mv_sop_template", "source_validation", "verification_report", "final_assembly"]
+    }
+  },
+  "sop_canonical_sections": {
+    "1.0": { "name": "Purpose", "description": "Intent of the document; 1-2 sentences maximum" },
+    "2.0": { "name": "Scope", "description": "Who and what the procedure applies to; explicitly states what is NOT in scope" },
+    "3.0": { "name": "References", "description": "All documents, standards, and tools needed to understand and execute the procedure" },
+    "4.0": { "name": "Definitions", "description": "Terms that may not be universally understood; acronyms; context-specific meanings" },
+    "5.0": { "name": "Roles & Responsibilities", "description": "Who performs, who reviews, who approves. RACI matrix preferred" },
+    "6.0": { "name": "Procedure", "description": "Step-by-step instructions in execution order. Measurable criteria in steps" },
+    "7.0": { "name": "Quality Checks", "description": "Inspection points, critical dimensions, and verification steps" },
+    "8.0": { "name": "Records / Success Criteria", "description": "Evidence the procedure was followed and succeeded. Audit-ready outputs" }
+  },
+  "skill_md_mapping": {
+    "1.0_Purpose": "description: front-matter field",
+    "2.0_Scope": "When to Use / When NOT to Use",
+    "3.0_References": "references/ subdirectory",
+    "4.0_Definitions": "Domain-specific terms in skill body",
+    "5.0_Roles": "Chipset configuration (Opus/Sonnet/Haiku)",
+    "6.0_Procedure": "Primary Workflow section",
+    "7.0_Quality_Checks": "Quality Checks section",
+    "8.0_Success_Criteria": "Implicit in deliverable spec"
+  },
+  "sources": {
+    "government": [
+      { "id": "NASA-NPR-7150.2D", "title": "NASA Procedural Requirements 7150.2D: Software Engineering Requirements", "org": "NASA", "modules": ["M2", "M5"] },
+      { "id": "NASA-HDBK-2203", "title": "NASA Software Engineering Handbook", "org": "NASA", "modules": ["M2"] },
+      { "id": "NASA-STD-8739.8A", "title": "NASA Software Assurance and Software Safety Standard", "org": "NASA", "modules": ["M2"] },
+      { "id": "NASA-SPAN", "title": "Software Processes Across NASA (SPAN)", "org": "NASA", "modules": ["M2", "M3"] },
+      { "id": "NASA-LLIS", "title": "NASA Lessons Learned Information System", "org": "NASA", "modules": ["M3"] },
+      { "id": "NASA-DOC-STD", "title": "NASA Software Documentation Standard (NTRS 19940004991)", "org": "NASA", "modules": ["M1"] }
+    ],
+    "standards": [
+      { "id": "ISO-12207", "title": "ISO/IEC/IEEE 12207:2017 Software life cycle processes", "org": "ISO/IEC", "modules": ["M2", "M3"] },
+      { "id": "ISO-15289", "title": "ISO/IEC/IEEE 15289:2017 Content of life-cycle information items", "org": "ISO/IEC", "modules": ["M1", "M3"] },
+      { "id": "CMMI-V3", "title": "CMMI Version 3.0 (2023)", "org": "CMMI Institute / ISACA", "modules": ["M2"] },
+      { "id": "IEEE-829", "title": "IEEE Std 829-2008 Software and System Test Documentation", "org": "IEEE", "modules": ["M1"] },
+      { "id": "IEEE-1028", "title": "IEEE Std 1028 Software Reviews and Audits", "org": "IEEE", "modules": ["M3"] }
+    ],
+    "research": [
+      { "id": "CMMI-DEV-1.3", "title": "CMMI for Development, Version 1.3", "authors": "Chrissis, Konrad, Shrum", "modules": ["M2"] },
+      { "id": "EFFECTIVE-SOPS", "title": "Effective SOPs", "authors": "Johnston, Giles", "modules": ["M1"] },
+      { "id": "SEI-2002-TN-012", "title": "Software Process Improvement and Product Line Practice", "authors": "Jones, Soule", "year": 2002, "modules": ["M2"] },
+      { "id": "SOP-AGENT", "title": "SOP-Agent: Empower General Purpose AI Agent with Domain-Specific SOPs", "authors": "Ye et al.", "year": 2025, "arxiv": "2501.09316", "modules": ["M4"] },
+      { "id": "SPECINNOVATIONS", "title": "How to Write Effective SOPs for Systems Engineering", "year": 2025, "modules": ["M1"] },
+      { "id": "TRACTIAN", "title": "Standard Operating Procedure: Full Implementation Guide", "year": 2026, "modules": ["M1", "M3"] },
+      { "id": "TECHWRITERHQ", "title": "Document Lifecycle Management", "year": 2026, "modules": ["M3"] },
+      { "id": "GUIDELESS-AI", "title": "AI-Powered SOPs: How Modern Teams Document and Train Faster", "year": 2025, "modules": ["M4"] }
+    ]
+  },
+  "success_criteria": [
+    { "id": 1, "description": "Complete SOP anatomy template covering all 8 canonical sections with worked examples", "test_ids": ["CF-01"] },
+    { "id": 2, "description": "CMMI 5-level mapping to observable team behaviors with improvement paths", "test_ids": ["CF-02"] },
+    { "id": 3, "description": "Policy hierarchy framework: org-wide, project-level, task-level relationships", "test_ids": ["CF-03"] },
+    { "id": 4, "description": "SOP lifecycle model with explicit gates, roles, version-control requirements", "test_ids": ["CF-03", "CF-06"] },
+    { "id": 5, "description": "AI-augmented SOP patterns catalogued with human review guidance", "test_ids": ["SC-01", "CF-04"] },
+    { "id": 6, "description": "DACP documented as concrete specification for agent-executable procedures", "test_ids": ["CF-04"] },
+    { "id": 7, "description": "SKILL.md formally characterized as bounded SOP with anatomy mapping", "test_ids": ["CF-05"] },
+    { "id": 8, "description": "Maturity self-assessment tool with CMMI observable indicators", "test_ids": ["CF-08"] },
+    { "id": 9, "description": "Change-control workflow: triggers, review roles, version bump rules", "test_ids": ["SC-03", "CF-06"] },
+    { "id": 10, "description": "NASA NPR 7150.2D compliance mapped to GSD wave-plan equivalents", "test_ids": ["CF-07"] },
+    { "id": 11, "description": "MV SOP template validated against 3 existing GSD skills", "test_ids": ["CF-05"] },
+    { "id": 12, "description": "3+ cross-module architectural patterns unifying SOP + GSD design", "test_ids": ["Integration"] }
+  ],
+  "crew_manifest": {
+    "FLIGHT": { "model": "opus", "role": "Mission orchestration; M5 synthesis; go/no-go gates" },
+    "PLAN": { "model": "sonnet", "role": "Wave decomposition; parallel track optimization" },
+    "SCOUT": { "model": "sonnet", "role": "Additional source gathering; gap-fill research" },
+    "EXEC_A": { "model": "sonnet", "role": "M1 SOP Anatomy + M2 Process Maturity production" },
+    "EXEC_B": { "model": "sonnet", "role": "M3 Governance + M4 AI-Augmented production" },
+    "CRAFT_PROC": { "model": "opus", "role": "CMMI depth; NASA SE methodology; maturity assessment" },
+    "CRAFT_GOV": { "model": "sonnet", "role": "Policy hierarchy; lifecycle modeling; version-control SOP" },
+    "VERIFY": { "model": "sonnet", "role": "Source validation; accuracy checking; criteria verification" },
+    "INTEG": { "model": "opus", "role": "Cross-module validation; SKILL.md mapping validation" },
+    "CAPCOM": { "model": "human", "role": "Wave boundary approval; synthesis review; final gate" },
+    "BUDGET": { "model": "haiku", "role": "Token budget tracking; session planning" },
+    "SURGEON": { "model": "haiku", "role": "Research quality monitoring; coverage gap alerts" },
+    "LOG": { "model": "haiku", "role": "Commit messages; audit trail; status tracking" }
+  }
+}

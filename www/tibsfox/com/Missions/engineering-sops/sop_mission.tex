@@ -1,0 +1,1116 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% --- COLOR SCHEME: Technology Domain ---
+\definecolor{primary}{HTML}{263238}       % Steel blue-black — section headers
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue — subsection headers
+\definecolor{tertiary}{HTML}{37474F}      % Graphite — subsubsection headers
+\definecolor{accent}{HTML}{0277BD}        % Process blue — highlights
+\definecolor{lightprimary}{HTML}{ECEFF1}  % Light steel — quote boxes
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{passgreen}{HTML}{1B5E20}
+
+%% --- SECTION FORMATTING ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% --- CUSTOM ENVIRONMENTS ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% --- TABLE HELPERS ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% --- HEADERS & FOOTERS ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Engineering SOPs}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% --- HYPERLINKS ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox Inc.},
+  pdftitle={Engineering Standard Operating Procedures -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{0.6em}
+
+%% =========================================================
+\begin{document}
+%% =========================================================
+
+%% --- TITLE PAGE ---
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Engineering the Process\\[0.3em]Standard Operating Procedures}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Policy, Procedure, and Technical Work Discipline}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 5, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+%% --- TABLE OF CONTENTS ---
+\tableofcontents
+\newpage
+
+%% =========================================================
+%% STAGE 1 — VISION DOCUMENT
+%% =========================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Engineering SOPs --- Vision Guide}
+
+\metafield{Date:}{April 5, 2026}
+\metafield{Status:}{Initial Vision / Ready for Research Execution}
+\metafield{Depends On:}{gsd-skill-creator v1.49.x architecture; GSD ecosystem philosophy}
+\metafield{Context:}{Cold-start deep research mission — SOP engineering for technical work and agentic development}
+\metafield{Activation Profile:}{Squadron (12 roles, 5 modules, 2 parallel tracks)}
+
+\subsection{Vision}
+
+Every engineering discipline that has ever produced reliable, reproducible outcomes — from semiconductor fabrication to space mission operations — rests on the same substrate: a written, tested, version-controlled description of how work gets done. This is not bureaucracy. This is how the craft becomes transmittable. A procedure is a compressed form of hard-won experience. It is what prevents the next practitioner from rediscovering the same failure modes at the same cost.
+
+The GSD ecosystem is, at its core, a procedure-generating machine. Every skill, every wave, every component spec is a form of SOP: a bounded description of a repeatable task that any correctly configured agent or human can pick up and execute to a known standard. The irony is that most engineering organizations --- including most software shops --- treat their internal processes the way they treat technical debt: as something to be addressed later, after the real work is done. The process IS the real work. The procedure is the architecture. Without it, you are not building a system. You are building a collection of individual habits that disappear when people do.
+
+This research mission maps the full territory of SOP engineering for technical work: from the anatomy of a well-formed procedure to the process maturity models that measure how far an organization has come, from governance and lifecycle management to the AI-augmented future of living documentation. The GSD-specific implementation module closes the loop by translating all of this into concrete patterns for the gsd-skill-creator ecosystem --- because a framework that cannot document its own processes is a framework that cannot scale.
+
+The Amiga Principle applies here with particular force. The Amiga's custom chipset didn't succeed because Commodore wrote more documentation than anyone else. It succeeded because the documentation was architecturally correct: each chip had a clear, non-overlapping responsibility, and the interface between chips was precisely specified. That is the model for engineering SOPs. Not more paper. Correct paper. Precisely bounded. Architecturally sound.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+
+\item \textbf{The Lost Expert Problem.} Engineering knowledge is predominantly tribal. It lives in the heads of the people who built the system. When those people leave --- through attrition, promotion, or burnout --- the knowledge leaves with them. There is no procedure to catch it. The next person rediscovers the failure modes from scratch. This is not a people problem. It is an architectural problem: the organization has no mechanism for converting experience into transmittable form.
+
+\item \textbf{The Static Document Trap.} Organizations that do write SOPs typically write them once, store them in a shared drive, and leave them to rot. Outdated SOPs are often worse than no SOPs: they create false confidence. Engineers follow a procedure that no longer reflects reality, and the gap between the document and the system becomes a failure vector. A procedure that cannot evolve is a liability, not an asset.
+
+\item \textbf{The Scope Creep Problem.} Many organizations write procedures that try to cover too much in a single document. The result is a 40-page manual that no one reads because no one can find the relevant section under time pressure. Good SOP architecture requires the same decomposition thinking as good software architecture: single responsibility, clear boundaries, composable units. Most engineering organizations do not apply software thinking to their documentation systems.
+
+\item \textbf{The Measurement Gap.} Process maturity frameworks like CMMI have existed since 1991. Most engineering organizations --- and nearly all software shops --- have never formally assessed their process maturity. They operate at Level 1 (ad hoc, heroic, unpredictable) while believing they operate at Level 3 (defined, standardized). Without measurement, improvement is random. Without a maturity model, the organization cannot know what ``better'' looks like.
+
+\item \textbf{The Agentic Transition Challenge.} AI-augmented engineering workflows --- including GSD-style agentic pipelines --- require a new kind of procedure. The traditional SOP was written for humans. An agentic SOP must be machine-parseable, deterministic, and composable at runtime. The emerging DACP (Deterministic Agent Communication Protocol) pattern addresses this, but organizations need a clear framework for translating human-readable policy into agent-executable specification.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Procedure as Architecture:} An SOP is not a description of how one person happens to do a task. It is a specification of the minimum viable, repeatable path through a process that any qualified actor --- human or agent --- can execute to a known standard. Good SOP architecture applies the same principles as good system architecture: single responsibility, clear inputs and outputs, explicit dependencies, versioned interfaces, and testable success criteria.
+
+\subsubsection{Domain Map: SOP Engineering Landscape}
+
+\begin{asciibox}
+  SOP ENGINEERING LANDSCAPE
+  ==========================
+
+  FOUNDATION LAYER
+  ├── Anatomy (Purpose / Scope / Roles / Steps / Success Criteria)
+  ├── Format patterns (Linear / Hierarchical / Flowchart / Checklist)
+  └── Writing discipline (Clarity / Brevity / Measurability)
+
+  MATURITY LAYER
+  ├── CMMI Level 1: Initial (ad hoc / heroic)
+  ├── CMMI Level 2: Managed (project-level tracking)
+  ├── CMMI Level 3: Defined (organizational standards)
+  ├── CMMI Level 4: Quantitatively Managed (metrics-driven)
+  └── CMMI Level 5: Optimizing (continuous improvement)
+
+  GOVERNANCE LAYER
+  ├── Lifecycle (Draft → Review → Approve → Publish → Retire)
+  ├── Version control (change tracking / audit trail)
+  ├── Policy hierarchy (Agency → Center → Project → Task)
+  └── Role-based access (author / reviewer / approver / user)
+
+  AI-AUGMENTED LAYER
+  ├── AI-assisted drafting (video capture / prompt-based generation)
+  ├── Living documents (real-time update triggers)
+  ├── Agent-executable SOPs (DACP / structured bundles)
+  └── Feedback loops (usage analytics / gap detection)
+
+  GSD IMPLEMENTATION LAYER
+  ├── Skill-as-SOP (SKILL.md = bounded procedure spec)
+  ├── Wave-as-workflow (wave plan = sequential SOP with gates)
+  ├── Component spec = machine-parseable procedure unit
+  └── CAPCOM gate = human approval checkpoint in SOP chain
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE DEPENDENCY GRAPH
+  =======================
+
+  [M1: SOP Anatomy]──────────────────────────┐
+       │                                      │
+       ▼                                      ▼
+  [M2: Process Maturity]         [M3: Governance & Lifecycle]
+       │                                      │
+       └──────────────┬───────────────────────┘
+                      ▼
+             [M4: AI-Augmented SOPs]
+                      │
+                      ▼
+             [M5: GSD Implementation]
+
+  Wave 1 parallel: M1 + M3 (no shared dependencies)
+  Wave 1 parallel: M2 + M4 (M2 informs M4 framing)
+  Wave 2 sequential: M5 (depends on all four)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: SOP Anatomy and Structure}
+The building blocks of a well-formed procedure: purpose, scope, references, definitions, roles and responsibilities, procedure body, quality checks, and success criteria. Format patterns (linear steps, hierarchical, flowchart, checklist). Writing discipline principles drawn from engineering and regulatory practice. Common failure modes (over-length, over-jargon, unmeasurable steps, missing roles).
+
+\subsubsection{Module 2: Process Maturity Frameworks}
+Capability Maturity Model Integration (CMMI v3.0): the five maturity levels and their operational signatures. NASA Software Engineering Requirements (NPR 7150.2D) and the NASA Software Engineering Handbook. ISO/IEC 12207 software lifecycle processes. How to assess current maturity and plan improvement. The relationship between process discipline and outcome predictability.
+
+\subsubsection{Module 3: Policy Architecture and Governance}
+SOP lifecycle management: draft, review, approve, publish, train, implement, review, revise, archive. Version control for procedural documents. Policy hierarchy design (organization-wide, project-level, task-level). Role-based access and approval workflows. Audit trail requirements. Change control as an engineering discipline. Common governance failure modes and their downstream consequences.
+
+\subsubsection{Module 4: AI-Augmented SOP Development}
+AI-assisted SOP drafting: prompt-based generation, video-capture-to-procedure, template automation. Living documents: how real-time triggers and usage analytics can drive automated review flags. Agent-executable SOPs: the DACP pattern and the transition from human-readable to machine-parseable procedures. Risks of over-reliance on AI-generated procedures and human review requirements.
+
+\subsubsection{Module 5: GSD-Specific SOP Implementation}
+Translating SOP engineering principles into GSD ecosystem patterns: SKILL.md as bounded procedure spec, component specs as machine-parseable SOP units, wave plans as sequential workflows with explicit gates, CAPCOM as the human-in-the-loop approval checkpoint. The 20\% bounded learning rule as a change-control mechanism. The push.default=nothing staging discipline as version-control SOP. How gsd-skill-creator can become a self-documenting system.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+  CHIPSET: Squadron Profile — 5-Module SOP Engineering Mission
+  =============================================================
+
+  chipset:
+    flight: claude-opus-4        # Mission orchestration; M5 synthesis
+    plan:   claude-sonnet-4      # Wave decomposition; track optimization
+    scout:  claude-sonnet-4      # Source gathering; evidence compilation
+    exec_a: claude-sonnet-4      # M1 + M2 document production (Track A)
+    exec_b: claude-sonnet-4      # M3 + M4 document production (Track B)
+    craft_proc: claude-opus-4    # CRAFT-PROC: procedural design analysis
+    craft_gov:  claude-sonnet-4  # CRAFT-GOV: governance/policy analysis
+    verify: claude-sonnet-4      # Source validation; accuracy checking
+    integ:  claude-opus-4        # Cross-module relationship validation
+    capcom: [HUMAN]              # Approval at wave boundaries
+    budget: claude-haiku-4       # Token budget tracking
+    surgeon: claude-haiku-4      # Research quality monitoring
+    log:    claude-haiku-4       # Commit messages; audit trail
+
+  model_allocation:
+    opus:   ~30%   # Synthesis, judgment-heavy analysis, M5 integration
+    sonnet: ~60%   # Survey, document assembly, verification
+    haiku:  ~10%   # Scaffolding, monitoring, logging
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item SOP anatomy, structure, and writing discipline for engineering and technical work
+  \item Process maturity frameworks: CMMI (all versions through v3.0), NASA NPR 7150.2D, ISO/IEC 12207
+  \item SOP lifecycle management, version control, and governance policy design
+  \item AI-augmented SOP development, living documentation, and agent-executable procedures
+  \item GSD ecosystem SOP patterns: SKILL.md, component specs, wave plans, CAPCOM gates
+  \item Assessment methodology: how to evaluate current maturity and plan improvement
+  \item Integration with version-controlled repositories (git/DoltHub)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Industry-specific regulatory compliance (FDA, FAA, NRC) beyond cited examples
+  \item SOP implementation for non-engineering domains (HR, finance, legal)
+  \item Hardware fabrication SOPs (cleanroom, semiconductor process)
+  \item Specific vendor SOP management platforms (ClickUp, Fluency, NewgenONE)
+  \item CMMI appraisal certification process and formal benchmarking
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item A complete SOP anatomy template is produced, covering all eight canonical sections with worked examples.
+  \item The five CMMI maturity levels are mapped to observable engineering team behaviors with actionable improvement paths for each transition.
+  \item A policy hierarchy framework is documented, defining the relationship between organization-wide, project-level, and task-level procedures.
+  \item An SOP lifecycle model is specified with explicit gates, roles, and version-control requirements at each stage.
+  \item AI-augmented SOP patterns are catalogued with specific guidance on human review requirements and validation steps.
+  \item The DACP (Deterministic Agent Communication Protocol) is documented as a concrete specification format for agent-executable procedures.
+  \item GSD SKILL.md is formally characterized as a bounded SOP specification, with a mapping from SOP anatomy sections to SKILL.md structure.
+  \item A maturity self-assessment tool is produced, allowing a team to place themselves on the CMMI ladder using observable indicators.
+  \item A change-control workflow for procedural documents is specified, including trigger conditions, review roles, and version bump rules.
+  \item NASA Software Engineering Requirements (NPR 7150.2D) compliance checklist items are mapped to GSD wave-plan equivalents.
+  \item A minimum viable SOP template for gsd-skill-creator skill development is produced and validated against three existing skills.
+  \item Cross-module synthesis identifies at least three architectural patterns that unify SOP engineering with GSD ecosystem design.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+gsd-chipset-architecture-vision & Depends On & Chipset defines execution model; SOPs govern it \\
+gsd-skill-creator analysis & Feeds Into & Skills ARE SOPs; this mission formalizes that relationship \\
+gsd-mission-management-roles & Complements & Crew roles = RACI chart; SOPs specify their procedures \\
+gsd-staging-layer-vision & Informs & Staging discipline = version-control SOP in practice \\
+The Space Between (ch. 1--5) & Philosophical & Mathematical foundations inform precision SOP writing \\
+NASA Mission Series (nasa branch) & Parallel & NASA SE methodology is the gold standard for SOP discipline \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The deepest insight of the Amiga Principle is not that specialization is efficient. It is that specialization requires specification. You cannot build a custom chip without a precise description of what that chip does, what it does not do, and what the interface between it and every other chip looks like. The SOP is the chip specification. The process maturity model is the quality gate. The governance framework is the configuration management system. And the living document is the chip that updates its own datasheet when the silicon changes.
+
+The GSD ecosystem was built on the intuition that agentic pipelines require the same architectural rigor as silicon: bounded responsibilities, explicit interfaces, testable behavior, version-controlled state. This research mission makes that intuition explicit and actionable. The output is not just a reference document. It is the foundation for a self-documenting engineering system --- one that gives people their time back by encoding the knowledge of how the work gets done, so that anyone (or any agent) who picks it up next starts from a known state, not from zero.
+
+\newpage
+
+%% =========================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% =========================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Engineering SOPs --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings across five research modules. Each section is keyed to a module and contains sourced findings, quantitative data where available, and annotated patterns. Agents executing this mission should use these findings as the authoritative factual substrate for document production.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{CMMI Institute / ISACA} --- Capability Maturity Model Integration (all versions)
+  \item \textbf{Carnegie Mellon University Software Engineering Institute (SEI)} --- CMMI origin and research base
+  \item \textbf{NASA / GSFC / MSFC} --- NPR 7150.2D, NASA Software Engineering Handbook, SPAN
+  \item \textbf{ISO/IEC} --- ISO/IEC 12207 (software lifecycle), ISO/IEC 15289 (lifecycle information items)
+  \item \textbf{IEEE Computer Society} --- IEEE 12207, IEEE 829 (test documentation), IEEE 1028 (reviews/audits)
+  \item \textbf{Smartsheet / The FDA Group} --- SOP writing best practices (practitioner level)
+  \item \textbf{Tractian / NewgenONE / Fluency} --- AI-augmented SOP lifecycle management
+\end{itemize}
+
+\subsection{Module 1: SOP Anatomy and Structure}
+
+\subsubsection{The Canonical Eight Sections}
+
+A well-formed engineering SOP contains the following sections. Each is necessary; none is sufficient alone.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{\#} & \tableheader{Section} & \tableheader{Content and Purpose} \\
+\midrule
+1.0 & Purpose & Intent of the document; 1--2 sentences maximum. Enables a reader to recognize relevance without reading further. \\
+2.0 & Scope & Who and what the procedure applies to; explicitly states what is NOT in scope. If anything is left to interpretation, the scope is incomplete. \\
+3.0 & References & All documents, standards, and tools needed to understand and execute the procedure. Includes SOPs that feed into or follow from this one. \\
+4.0 & Definitions & Terms that may not be universally understood; acronyms; context-specific meanings. Written for the end user, not the expert. \\
+5.0 & Roles \& Responsibilities & Who performs, who reviews, who approves. A RACI matrix is the most rigorous form. Narrow scope if the roles list becomes long. \\
+6.0 & Procedure & Step-by-step instructions in execution order. Each step is a cause-and-effect statement. Measurable criteria embedded in steps (``heat to 150°F'', not ``heat until warm''). \\
+7.0 & Quality Checks & Inspection points, critical dimensions, and verification steps. Identifies what to measure and how often. Involves both engineering and operators. \\
+8.0 & Records / Success Criteria & What evidence proves the procedure was followed and succeeded. Audit-ready outputs. Defines completion. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Writing Discipline Principles}
+
+The FDA Group and Smartsheet both identify ``failure to follow written procedures'' as among the most common regulatory citations. The root cause is almost always a writing problem, not a compliance problem: procedures that are unclear, over-technical, or unmeasurable. Core writing rules for engineering SOPs:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Write for the operator, not the expert. If the author cannot follow their own instructions after six months, the SOP has failed.
+  \item Every instruction must be measurable. ``Tighten the bolt'' fails. ``Torque to 25 Nm'' passes.
+  \item Use cause-and-effect structure: ``When [condition], perform [action] until [measurable result].''
+  \item Prefer pictures over paragraphs for physical procedures. Visual SOPs reduce cognitive translation load and variability.
+  \item Test every SOP before release. If a qualified operator cannot execute it successfully on first attempt, revise it.
+  \item SOPs are living documents. Define a review trigger (annual, or when: new tools, regulatory changes, process changes, reported failures).
+\end{itemize}
+
+\subsubsection{Format Patterns}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Format} & \tableheader{Best Use} & \tableheader{When to Avoid} \\
+\midrule
+Linear step list & Sequential tasks with no branching; assembly, setup, shutdown & Processes with conditional paths \\
+Hierarchical (numbered) & Complex procedures with sub-steps; regulatory compliance & When operators need rapid lookup \\
+Flowchart / diagram & Decision-heavy workflows; escalation paths; triage sequences & Very long processes (becomes unreadable) \\
+Checklist & Verification steps; pre-flight checks; audit readiness & When sequence and timing matter critically \\
+Hybrid & Systems engineering; multi-role workflows & Simple, single-operator tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Process Maturity Frameworks}
+
+\subsubsection{CMMI: The Maturity Ladder}
+
+CMMI (Capability Maturity Model Integration) was developed at Carnegie Mellon's Software Engineering Institute beginning in 1987, initially for defense software contracts. Version 3.0 was published in 2023. The five-level staged model remains the dominant framework for engineering process maturity assessment.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{2.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{L} & \tableheader{Level} & \tableheader{Organizational Signature} & \tableheader{Improvement Target} \\
+\midrule
+1 & Initial & Processes ad hoc and unpredictable; success depends on individual heroics; high risk and cost overrun & Establish basic project tracking \\
+2 & Managed & Basic project management established; planning, monitoring, and control exist at project level & Standardize across projects \\
+3 & Defined & Organizational processes well-documented and standardized; consistent across teams & Add measurement and quantitative control \\
+4 & Quantitatively Managed & Statistical process control; performance measured quantitatively; variation understood & Focus on continuous improvement \\
+5 & Optimizing & Continuous improvement is the primary focus; processes updated from quantitative feedback & Maintain and sustain \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Maturity transition timelines (SEI historical data):} Median movement from Level 1 to Level 2 is approximately 5 months under CMMI. From Level 2 to Level 3 averages an additional 21 months. Organizations often overestimate their maturity level: many teams operating at Level 1 believe they are at Level 3.
+
+\subsubsection{NASA Software Engineering Requirements (NPR 7150.2D)}
+
+NASA's NPR 7150.2D establishes engineering requirements for software acquisition, development, maintenance, retirement, operations, and management across the agency. Key structural elements relevant to SOP engineering:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Software classification:} NASA classifies software by safety criticality (Class A--G), with SOP rigor scaled accordingly. Class A (safety-critical, human-rated) requires the most rigorous procedure documentation.
+  \item \textbf{Software Development or Management Plan:} Required documentation for all NASA software projects; equivalent to an organization's SOP master document.
+  \item \textbf{Independent Verification and Validation (IV\&V):} Separate from the development team; equivalent to having a reviewer who did not write the SOP verify its correctness.
+  \item \textbf{Configuration management:} NASA requires documented CM processes for all software; includes change control, version tracking, and audit trail requirements directly applicable to SOP governance.
+  \item \textbf{Lessons Learned (LLIS):} NASA maintains a formal Lessons Learned Information System. Every significant procedure failure generates a lessons learned entry that feeds back into SOP revision. This is a formalized version of the ``living document'' principle.
+  \item \textbf{Software Processes Across NASA (SPAN):} Agency-wide process asset library of best practices; the organizational equivalent of a centralized SOP repository.
+\end{itemize}
+
+\subsubsection{ISO/IEC 12207 Software Lifecycle Processes}
+
+ISO/IEC/IEEE 12207:2017 defines a comprehensive framework for software lifecycle processes, organized into three classes: agreement processes, organizational project-enabling processes, and technical processes. It is the international standard for software process definition and serves as the foundation for most national and agency-specific engineering process standards. Key SOP-relevant requirements: process documentation, process control, process improvement, and configuration management.
+
+\subsection{Module 3: Policy Architecture and Governance}
+
+\subsubsection{SOP Lifecycle Stages}
+
+\begin{asciibox}
+  SOP LIFECYCLE
+  =============
+
+  [DRAFT] ──► [REVIEW] ──► [APPROVE] ──► [PUBLISH] ──► [TRAIN]
+                                                            │
+                                                            ▼
+  [ARCHIVE] ◄── [RETIRE] ◄── [REVISE] ◄── [IMPLEMENT] ◄──┘
+                                │
+                                └──► Back to [REVIEW] if changes needed
+
+  Review triggers (any one sufficient):
+  - Annual scheduled review
+  - New tool or technology introduction
+  - Regulatory or standards update
+  - Reported procedure failure or near-miss
+  - Organizational restructuring affecting roles
+  - Process performance metric degradation
+\end{asciibox}
+
+\subsubsection{Policy Hierarchy Design}
+
+Engineering organizations require a layered policy architecture. Lower layers inherit from higher layers but may be more restrictive; they may not contradict higher-layer requirements.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Layer} & \tableheader{Owner} & \tableheader{Content} \\
+\midrule
+Organization & CTO / VP Engineering & Baseline process standards; compliance requirements; version control policy \\
+Program / Product & Program Manager & Product-specific adaptations; release process; review cadence \\
+Project / Team & Tech Lead & Team-level workflows; sprint procedures; on-call runbooks \\
+Task & Individual contributor & Task-specific checklists; step-by-step execution guides \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Version Control for Procedural Documents}
+
+The same disciplines applied to source code must be applied to procedural documents. Key version-control SOP requirements:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Semantic versioning:} Major version bump for scope changes; minor for content additions; patch for corrections. Document all changes in a changelog entry.
+  \item \textbf{Single source of truth:} One canonical location for the current version. All distribution uses links to the source, never copies. This is the ``push.default=nothing'' principle applied to documents.
+  \item \textbf{Immutable audit trail:} Every change is logged with who, when, and why. No in-place edits without a new version number. Regulatory compliance often requires this for audit readiness.
+  \item \textbf{Change control:} No change without a stated reason and a reviewer who did not make the change. The reviewer role is equivalent to a PR reviewer in a code review workflow.
+  \item \textbf{Retirement, not deletion:} Old versions are archived, not destroyed. An operator following an archived procedure after a system rollback is a known and legitimate use case.
+\end{itemize}
+
+\subsubsection{Governance Failure Modes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Failure Mode} & \tableheader{Consequence and Remedy} \\
+\midrule
+Outdated SOP in active use & False confidence; procedures reflect old reality; operators follow wrong steps. Remedy: mandatory review-date fields and automated expiry alerts. \\
+Version confusion & Multiple ``final'' copies in circulation; operators don't know which is current. Remedy: single-source-of-truth repository with access control. \\
+Knowledge siloing & SOPs written by one expert, reviewed by no one, understood by no one. Remedy: operator-involvement in drafting; mandatory outsider review before approval. \\
+Over-formalization & SOPs so long and jargon-heavy that operators bypass them. Remedy: single-responsibility decomposition; visual aids; 2-page maximum for task-level SOPs. \\
+No measurement & SOPs published but never validated or measured for effectiveness. Remedy: embed measurable success criteria; track compliance metrics. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: AI-Augmented SOP Development}
+
+\subsubsection{AI-Assisted Drafting Patterns}
+
+The AI-augmented SOP landscape has matured rapidly. Key patterns as of 2025--2026:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Video-to-procedure:} Tools like KaizenUp analyze video of expert operators performing tasks and generate draft SOPs with step segmentation and annotated screenshots. A process that once took a full day to document can be captured and published in approximately two hours. The resulting SOP captures tacit knowledge (nuance, technique) that is typically lost in text-based drafting.
+  \item \textbf{Prompt-based generation:} AI generates initial SOP drafts from natural language descriptions; humans become editors and validators rather than authors from blank page. This shifts the burden from creation to verification.
+  \item \textbf{Template automation:} AI populates standardized sections from structured inputs, ensuring consistency across all SOPs in an organization.
+  \item \textbf{Multi-language translation:} AI-generated SOPs can be translated automatically, maintaining consistency across distributed teams.
+\end{itemize}
+
+\subsubsection{Living Documents: Real-Time Update Architecture}
+
+\begin{asciibox}
+  LIVING SOP ARCHITECTURE
+  =======================
+
+  [Process Execution] ──► [Usage Analytics] ──► [AI Analysis]
+          │                                           │
+          │                                           ▼
+          │                               [Gap / Staleness Detection]
+          │                                           │
+          ▼                                           ▼
+  [Performance Metrics] ──────────────► [Review Flag / Alert]
+                                                      │
+                                                      ▼
+                                          [Human Review Decision]
+                                                      │
+                                    ┌─────────────────┴──────────────┐
+                                    ▼                                 ▼
+                              [No Change]                      [Revise SOP]
+                            (document log)               (version bump + changelog)
+\end{asciibox}
+
+\subsubsection{Agent-Executable SOPs: The DACP Pattern}
+
+The Deterministic Agent Communication Protocol (DACP) defines a three-part bundle structure for agent-to-agent procedure handoff:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Layer} & \tableheader{Content} & \tableheader{Consumer} \\
+\midrule
+Human Intent & Natural language description of purpose, scope, and expected outcome & Human reviewer; audit trail \\
+Structured Data & JSON/YAML specification: inputs, outputs, preconditions, postconditions, error paths & Orchestration layer; other agents \\
+Executable & Shell commands, code blocks, or parameterized templates ready for direct execution & Executor agent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Critical safeguard:} AI-generated SOPs should never replace human judgment. They accelerate drafting and surface completeness gaps. A qualified engineer must review and validate every AI-generated procedure before it enters the active library. Human review is a gate, not a checkbox.
+
+\subsection{Module 5: GSD-Specific SOP Implementation}
+
+\subsubsection{SKILL.md as Bounded SOP}
+
+The GSD SKILL.md file is, formally, a bounded SOP specification. Mapping to the canonical eight sections:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{SOP Section} & \tableheader{SKILL.md Element} & \tableheader{Notes} \\
+\midrule
+1.0 Purpose & \texttt{description:} front-matter field & One-paragraph bounded statement of what skill does \\
+2.0 Scope & When to Use / When NOT to Use & Critical for triggering accuracy; explicit boundary conditions \\
+3.0 References & Reference files listed in SKILL.md & \texttt{references/} subdirectory; must be read before execution \\
+4.0 Definitions & Domain-specific terms in skill body & Embedded in skill description \\
+5.0 Roles \& Responsibilities & Chipset configuration (Opus/Sonnet/Haiku) & Model assignment = role assignment \\
+6.0 Procedure & Primary Workflow section & Step-by-step numbered workflow \\
+7.0 Quality Checks & Quality Checks section & Pre-delivery checklist items \\
+8.0 Success Criteria & Implicit in deliverable spec & Should be made explicit in all skills \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave Plan as Sequential SOP with Gates}
+
+A GSD wave execution plan is a CMMI Level 3 construct: a defined, documented, organizational standard for how multi-agent work flows through time-bounded stages. The CAPCOM role is the human approval gate at wave boundaries — equivalent to the ``approve'' stage in the SOP lifecycle.
+
+\subsubsection{The 20\% Bounded Learning Rule as Change Control}
+
+The GSD ``20\% max change per skill update'' rule is an SOP change-control mechanism. It prevents runaway self-modification (the equivalent of making breaking API changes without version bumps) while enabling genuine evolution. This maps directly to semantic versioning: a 20\% change boundary is a minor version bump boundary. Changes exceeding 20\% require architectural review and a major version increment.
+
+\subsubsection{push.default=nothing as Version-Control SOP}
+
+The GSD staging discipline (all commits staged before merge, push.default=nothing enforced) is an SOP for source control. It is the procedural equivalent of the document management rule: no change reaches the shared baseline without explicit review and approval. This is CMMI Level 3 configuration management practice.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rule} & \tableheader{Type} & \tableheader{Notes} \\
+\midrule
+Safety-critical SOPs require independent review & ABSOLUTE & Any SOP governing human safety or system integrity must be reviewed by someone who did not write it \\
+NASA Class A software procedures require IV\&V & ABSOLUTE & Independent Verification and Validation is non-negotiable for human-rated systems \\
+AI-generated SOPs require human validation gate & GATE & AI drafts are starting points; qualified engineer must approve before active use \\
+Version control required for all published SOPs & GATE & No in-place editing of published documents; all changes create new version with changelog \\
+Regulatory compliance requirements take precedence & GATE & Industry-specific standards (FDA, FAA, NRC) override any internal convenience \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item NASA Procedural Requirements 7150.2D: Software Engineering Requirements. NASA Office of the Chief Engineer.
+  \item NASA Software Engineering Handbook (NASA-HDBK-2203, Version B). NASA Technical Handbook.
+  \item NASA Software Assurance and Software Safety Standard (NASA-STD-8739.8A).
+  \item NASA Software Documentation Standard. NTRS Citation 19940004991.
+  \item Software Processes Across NASA (SPAN). NASA Engineering Network.
+  \item NASA Lessons Learned Information System (LLIS). NASA Engineering Network.
+\end{itemize}
+
+\subsubsection{Standards Organizations}
+\begin{itemize}[leftmargin=1.5em]
+  \item ISO/IEC/IEEE 12207:2017. Systems and software engineering — Software life cycle processes. International Organization for Standardization.
+  \item ISO/IEC/IEEE 15289:2017. Systems and software engineering — Content of life-cycle information items.
+  \item CMMI Version 3.0 (2023). CMMI Institute / ISACA.
+  \item IEEE Std 829-2008. IEEE Standard for Software and System Test Documentation. IEEE Computer Society.
+  \item IEEE Std 1028. IEEE Standard for Software Reviews and Audits. IEEE Computer Society.
+\end{itemize}
+
+\subsubsection{Research \& Practitioner Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Chrissis, Konrad, and Shrum. \textit{CMMI for Development, Version 1.3} (SEI Series in Software Engineering). Addison-Wesley.
+  \item Johnston, Giles. \textit{Effective SOPs}. Cited via Smartsheet SOP reference guide.
+  \item Jones, L. and Soule, A. (2002). ``Software Process Improvement and Product Line Practice.'' CMU/SEI-2002-TN-012.
+  \item Ye, Anbang et al. (2025). ``SOP-Agent: Empower General Purpose AI Agent with Domain-Specific SOPs.'' arXiv:2501.09316.
+  \item Specinnovations.com. ``How to Write Effective SOPs for Systems Engineering'' (September 2025).
+  \item Tractian.com. ``Standard Operating Procedure: Full Implementation Guide'' (January 2026).
+  \item Technicalwriterhq.com. ``Document Lifecycle Management'' (2026).
+  \item Guideless.ai. ``AI-Powered SOPs: How Modern Teams Document and Train Faster'' (November 2025).
+\end{itemize}
+
+\newpage
+
+%% =========================================================
+%% STAGE 3 — MISSION PACKAGE
+%% =========================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, GSD-ready SOP engineering reference that formalizes Standard Operating Procedure design, process maturity assessment, governance architecture, AI-augmented procedure development, and GSD ecosystem SOP patterns into a single executable knowledge package. The output serves both as a standalone engineering reference and as a live foundation for the gsd-skill-creator system's internal process documentation.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE ARCHITECTURE
+  =================
+
+  WAVE 0: Foundation (Sequential, Haiku)
+  ├── Shared schema: SOP canonical structure (JSON)
+  ├── Source index: all 20+ sources indexed by module
+  └── Template library: SKILL.md ↔ SOP mapping table
+
+  WAVE 1: Parallel Research Tracks (Sonnet + Opus)
+  ├── TRACK A: M1 (SOP Anatomy) + M2 (Process Maturity)
+  └── TRACK B: M3 (Governance) + M4 (AI-Augmented SOPs)
+          │
+      [CAPCOM GATE] ──► Human review of Wave 1 outputs
+          │
+  WAVE 2: Synthesis (Sequential, Opus)
+  └── M5 (GSD Implementation) + cross-module integration
+
+          │
+      [CAPCOM GATE] ──► Human review of synthesis
+          │
+  WAVE 3: Publication + Verification (Sequential, Sonnet)
+  ├── Final document assembly
+  ├── Source validation pass
+  ├── Self-assessment tool generation
+  └── Minimum viable SOP template production
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Schema Layer:} Shared data structures for SOP components, maturity assessments, and lifecycle stage definitions
+  \item \textbf{Research Layer:} Sourced findings per module with citations and quantitative data
+  \item \textbf{Synthesis Layer:} Cross-module integration; GSD-specific pattern mapping; architectural observations
+  \item \textbf{Tool Layer:} Maturity self-assessment tool; minimum viable SOP template; SKILL.md ↔ SOP mapping
+  \item \textbf{Publication Layer:} Final document suite with verification matrix and audit trail
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{0.5cm}L{4cm}XL{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+1 & Shared source schema (JSON) & All 20+ sources indexed; module tags applied & Wave 0 \\
+2 & SOP Anatomy Reference & 8-section template with worked engineering examples & Wave 1A \\
+3 & Process Maturity Guide & CMMI 5 levels + NASA NPR mapping; self-assessment tool & Wave 1A \\
+4 & Governance Policy Framework & Lifecycle model + version-control SOP + hierarchy diagram & Wave 1B \\
+5 & AI-Augmented SOP Playbook & DACP spec + living-doc architecture + human review gates & Wave 1B \\
+6 & GSD SOP Implementation Guide & SKILL.md mapping + wave-plan-as-SOP + 3 existing skill validations & Wave 2 \\
+7 & Cross-Module Synthesis & 3+ architectural patterns; through-line narrative & Wave 2 \\
+8 & Maturity Self-Assessment Tool & Observable indicators for each CMMI level; scoring rubric & Wave 3 \\
+9 & Minimum Viable SOP Template & 2-page template; validated against 3 existing GSD skills & Wave 3 \\
+10 & Verification Report & All 12 success criteria verified with evidence references & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}L{2cm}L{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Source Schema (W0) & None & Haiku & 4K \\
+SOP Anatomy Module (M1) & Schema & Sonnet & 12K \\
+Process Maturity Module (M2) & Schema & Sonnet + Opus & 18K \\
+Governance Module (M3) & Schema & Sonnet & 14K \\
+AI-Augmented Module (M4) & Schema, M2 framing & Sonnet + Opus & 16K \\
+GSD Implementation (M5) & M1, M2, M3, M4 & Opus & 22K \\
+Cross-Module Synthesis & M1--M5 & Opus & 12K \\
+Self-Assessment Tool & M2 & Sonnet & 8K \\
+MV SOP Template & M1, M5 & Sonnet & 6K \\
+Verification Report & All & Sonnet & 8K \\
+\midrule
+\textbf{Total Estimate} & & & \textbf{$\sim$120K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & $\sim$30\% & M5 synthesis; cross-module integration; CRAFT-PROC domain analysis; judgment-heavy architectural observations \\
+Sonnet & $\sim$60\% & M1, M3, M4 document production; source compilation; self-assessment tool; MV SOP template; verification \\
+Haiku & $\sim$10\% & Schema generation; token budget tracking; commit messages; health monitoring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Primary Model} & \tableheader{Key Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source schema; source index; template stubs \\
+1A & Research Track A & Parallel & Sonnet & M1 Anatomy; M2 Maturity \\
+1B & Research Track B & Parallel & Sonnet & M3 Governance; M4 AI-Augmented \\
+[GATE] & CAPCOM Review & Human & --- & Wave 1 approval \\
+2 & Synthesis & Sequential & Opus & M5 GSD Implementation; cross-module patterns \\
+[GATE] & CAPCOM Review & Human & --- & Synthesis approval \\
+3 & Publication & Sequential & Sonnet & All deliverables finalized and verified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Generate source schema (JSON) & BUDGET/LOG & \texttt{sources.json} — all sources indexed by module, URL, type \\
+Generate SOP section schema & LOG & \texttt{sop\_schema.json} — canonical 8-section structure as data \\
+Stub deliverable templates & LOG & Empty shells for each of 10 deliverables \\
+Validate source index completeness & VERIFY & Confirm all cited sources are reachable and indexed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: SOP Anatomy + Process Maturity (EXEC\_A, CRAFT-PROC)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Produce M1 SOP Anatomy Reference & EXEC\_A & 8-section template with worked examples; writing discipline principles \\
+Produce M2 Process Maturity Guide & CRAFT-PROC & CMMI 5-level mapping; NASA NPR 7150.2D key requirements; ISO 12207 mapping \\
+Validate M1 + M2 sources & VERIFY & Source confirmation; accuracy check on all quantitative claims \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Governance + AI-Augmented SOPs (EXEC\_B, CRAFT-GOV)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Produce M3 Governance Framework & EXEC\_B & Lifecycle model; version-control SOP; policy hierarchy; failure modes \\
+Produce M4 AI-Augmented SOP Playbook & CRAFT-GOV & DACP spec; living-doc architecture; human review gate definitions \\
+Validate M3 + M4 sources & VERIFY & Source confirmation; DACP spec completeness check \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Produce M5 GSD Implementation Guide & FLIGHT & SKILL.md mapping; wave-plan SOP; 20\% rule as change control; staging as version SOP \\
+Validate SKILL.md mapping against 3 skills & INTEG & Validation report; gap list for existing skills \\
+Produce Cross-Module Synthesis & FLIGHT & 3+ architectural patterns; Amiga Principle connection; through-line \\
+Integration review of all five modules & INTEG & Dependency check; cross-reference validation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Produce Maturity Self-Assessment Tool & EXEC\_A & Observable indicators per CMMI level; scoring rubric \\
+Produce Minimum Viable SOP Template & EXEC\_B & 2-page template; validated against 3 GSD skills \\
+Final source validation pass & VERIFY & All 20+ sources confirmed; broken link check \\
+Produce Verification Report & VERIFY & All 12 success criteria verified with evidence \\
+Final document assembly and publication & PLAN & Delivery-ready package \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Cache the shared source schema (\texttt{sources.json}) and SOP schema (\texttt{sop\_schema.json}) at Wave 0; reference in all subsequent waves.
+  \item Cache the Stage 2 Research Reference (this document) as the primary context for all Wave 1--3 agents. It replaces individual web search calls.
+  \item In parallel tracks, each executor receives only the research relevant to their track. Do not pass Track A context to Track B agents.
+  \item At Wave 2, FLIGHT receives the full cache of Wave 1 outputs. This is the largest single context load; plan for 30--40K token context.
+  \item Wave 3 agents receive synthesis outputs and verification matrix only; not raw research modules.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Agents Active} & \tableheader{Est. Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 3 (LOG, BUDGET, VERIFY) & 8K & Minimal; schema and stub generation \\
+Wave 1A & 3 (EXEC\_A, CRAFT-PROC, VERIFY) & 35K & Research compilation; two modules \\
+Wave 1B & 3 (EXEC\_B, CRAFT-GOV, VERIFY) & 32K & Research compilation; two modules \\
+Wave 2 & 4 (FLIGHT, INTEG, LOG, SURGEON) & 40K & Synthesis is largest single agent context \\
+Wave 3 & 5 (EXEC\_A, EXEC\_B, VERIFY, PLAN, LOG) & 28K & Publication and verification \\
+\midrule
+\textbf{Total} & & \textbf{$\sim$143K} & \textbf{Across 2--3 sessions} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  DEPENDENCY GRAPH
+  ================
+
+  [sources.json] ──────────────────────────────────────┐
+  [sop_schema.json] ────────────────────────────────────┤
+                                                        │
+                    ┌───────────────────────────────────┤
+                    │                                   │
+             [M1 Anatomy]                    [M3 Governance]
+             [M2 Maturity]                  [M4 AI-Augmented]
+                    │                                   │
+                    └──────────────┬────────────────────┘
+                                   │
+                           [M5 GSD Impl]
+                           [Synthesis]
+                                   │
+                    ┌──────────────┼──────────────┐
+                    │              │              │
+              [Self-Assess]  [MV Template]  [Verification]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 3 & P0 & BLOCK — mission may not proceed \\
+Core Functionality & 8 & P1 & Must resolve before Wave 3 \\
+Integration & 4 & P2 & Must resolve before delivery \\
+Edge Cases & 5 & P3 & Document; fix in v1.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK Authority)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result / Pass Condition} \\
+\midrule
+SC-01 & Human review gate for AI-generated SOPs & DACP spec explicitly requires human approval before any AI-generated SOP enters active use. Must be present in M4 deliverable. \\
+SC-02 & Safety-critical SOP independent review & M1 and M2 deliverables explicitly state that safety-critical procedures require independent review by someone who did not author them. \\
+SC-03 & Version control for published SOPs & Governance framework explicitly prohibits in-place editing of published documents. All changes require new version number and changelog entry. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Success Criterion} & \tableheader{Test} \\
+\midrule
+CF-01 & SOP anatomy template complete & Template covers all 8 sections with worked examples. Independent reader can construct a valid engineering SOP using template alone. \\
+CF-02 & CMMI 5-level mapping observable & Each level has 3+ observable team behavioral indicators. An engineer unfamiliar with CMMI can self-assess within 30 minutes. \\
+CF-03 & Policy hierarchy defined & Hierarchy covers all 4 layers with explicit inheritance rules. No gap between organization-level and task-level. \\
+CF-04 & DACP spec complete & Three-part bundle (intent/data/executable) defined with concrete examples. A GSD agent can produce a valid DACP bundle from the spec. \\
+CF-05 & SKILL.md mapping validated & All 8 SOP sections mapped to SKILL.md elements. Three existing skills validated against the mapping. \\
+CF-06 & Change-control workflow specified & Trigger conditions, review roles, and version bump rules are explicit. No ambiguity about when a major vs minor bump applies. \\
+CF-07 & NASA compliance checklist mapped & At least 5 NPR 7150.2D requirements mapped to GSD wave-plan equivalents. \\
+CF-08 & Self-assessment tool functional & An engineer can complete self-assessment in under 45 minutes. Output is a CMMI level placement with a gap list. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{0.5cm}L{5.5cm}L{2.5cm}L{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion (abbreviated)} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & SOP anatomy template produced & CF-01 & Pending \\
+2 & CMMI levels mapped with improvement paths & CF-02 & Pending \\
+3 & Policy hierarchy framework documented & CF-03 & Pending \\
+4 & SOP lifecycle model specified & CF-03, CF-06 & Pending \\
+5 & AI-augmented SOP patterns catalogued & SC-01, CF-04 & Pending \\
+6 & DACP documented as concrete spec & CF-04 & Pending \\
+7 & SKILL.md characterized as bounded SOP & CF-05 & Pending \\
+8 & Maturity self-assessment tool produced & CF-08 & Pending \\
+9 & Change-control workflow specified & SC-03, CF-06 & Pending \\
+10 & NASA NPR compliance mapped to GSD & CF-07 & Pending \\
+11 & MV SOP template validated against 3 skills & CF-05 & Pending \\
+12 & 3+ architectural patterns identified & Integration & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go gates; M5 synthesis \\
+PLAN & Planner (Sonnet) & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent (Sonnet) & Additional source gathering; gap-fill research if needed \\
+EXEC\_A & Executor A (Sonnet) & M1 SOP Anatomy; M2 Process Maturity document production \\
+EXEC\_B & Executor B (Sonnet) & M3 Governance; M4 AI-Augmented document production \\
+CRAFT-PROC & Process Specialist (Opus) & CMMI depth analysis; NASA SE methodology; maturity assessment design \\
+CRAFT-GOV & Governance Specialist (Sonnet) & Policy hierarchy design; lifecycle modeling; version-control SOP \\
+VERIFY & Verification Agent (Sonnet) & Source validation; accuracy checking; success criteria verification \\
+INTEG & Integration Agent (Opus) & Cross-module relationship validation; SKILL.md mapping validation \\
+CAPCOM & Human (Tibsfox) & Wave boundary approval; synthesis review; final delivery gate \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning; wave boundary cost reports \\
+SURGEON & Health Monitor (Haiku) & Research quality degradation detection; coverage gap alerts \\
+LOG & Chronicle Agent (Haiku) & Commit messages; audit trail; deliverable status tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles, 5 modules) \\
+Research Modules & 5 (SOP Anatomy, Maturity, Governance, AI-Augmented, GSD Impl) \\
+Parallel Tracks & 2 (Wave 1A and 1B simultaneous) \\
+CAPCOM Gates & 2 (after Wave 1, after Wave 2) \\
+Total Deliverables & 10 \\
+Success Criteria & 12 (all testable and measurable) \\
+Safety-Critical Tests & 3 (all BLOCK authority) \\
+Estimated Token Budget & $\sim$143K across 2--3 sessions \\
+Primary Model (30\%) & Claude Opus 4 --- synthesis, judgment, M5, integration \\
+Secondary Model (60\%) & Claude Sonnet 4 --- surveys, production, verification \\
+Support Model (10\%) & Claude Haiku 4 --- scaffolding, monitoring, logging \\
+Source Count & 20+ (NASA, CMMI Institute, ISO, IEEE, SEI, practitioner) \\
+Handoff Target & gsd-skill-creator orchestrator; nasa branch milestone pipeline \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The procedure is not the enemy of creativity. It is the infrastructure that makes creativity possible. Without a known, reliable baseline for how the work gets done, every act of innovation is also an act of system-building — and most of the system-building is unnecessary rediscovery. The procedure frees the engineer to work at the frontier, not the foundation.''} \\[0.8em]
+\textbf{--- GSD Ecosystem Through-Line, April 2026} \\[0.5em]
+\small\textit{Every SKILL.md is a procedure. Every wave plan is a workflow. Every CAPCOM gate is a checkpoint. The GSD ecosystem already implements SOP engineering at every layer. This mission names what has always been true, makes it explicit, and gives the next builder a known starting state.}
+\end{quotebox}
+
+\end{document}
