@@ -1,0 +1,116 @@
+{
+  "mission": "1.28",
+  "title": "Ranger 3",
+  "description": "Open datasets and source materials relevant to Ranger 3 (1962), the first Ranger Block II lunar impact probe that missed the Moon by 36,793 km due to a guidance error, Ramalina menziesii (lace lichen), Violet-green Swallow (Tachycineta thalassina), and midcourse guidance physics",
+  "sources": [
+    {
+      "id": "nssdc-ranger-3",
+      "name": "NSSDC Master Catalog -- Ranger 3",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-001A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Ranger 3. Spacecraft designation 1962-001A. Mass 329.8 kg (330 kg with capsule). Launched January 26, 1962 on Atlas-Agena B from Cape Canaveral LC-12. Documents the guidance error — sign inversion in booster autopilot pitch-rate switching amplifier combined with Atlas guidance computer error — that produced an excess velocity of approximately 375 m/s, resulting in a lunar flyby at 36,793 km instead of planned impact. Confirms spacecraft bus operated normally: solar panels deployed, attitude control functional, midcourse correction attempted but insufficient. Entered heliocentric orbit.",
+      "mission_relevance": "Definitive source for Ranger 3 specifications, trajectory parameters, and failure analysis. Confirms the dual-error nature of the guidance failure and provides the flyby distance that anchors all orbital mechanics calculations."
+    },
+    {
+      "id": "nasa-sp-4210",
+      "name": "NASA SP-4210: Lunar Impact -- A History of Project Ranger",
+      "url": "https://history.nasa.gov/SP-4210/pages/Cover.htm",
+      "type": "primary-source",
+      "category": "historical-record",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "R. Cargill Hall's definitive NASA history of Project Ranger, published 1977. Chapter 6 covers Ranger 3 in detail: the Block II spacecraft design, the Atlas-Agena B launch vehicle, the guidance error diagnosis, the midcourse correction attempt, and the aftermath within JPL and NASA. Provides the engineering narrative of the sign inversion and the institutional consequences of the third consecutive Ranger failure.",
+      "mission_relevance": "The primary historical source for Ranger 3's complete mission narrative. Provides engineering detail on the spacecraft bus (television camera system, gamma-ray spectrometer, seismometer capsule), the Atlas-Agena B launch vehicle performance, and the post-flight failure investigation that identified the dual guidance errors."
+    },
+    {
+      "id": "jpl-tm-33-103",
+      "name": "JPL Technical Memorandum 33-103: Ranger III Flight Path and Its Determination from Tracking Data",
+      "url": "https://ntrs.nasa.gov/search?q=ranger%203%20flight%20path",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "JPL post-flight trajectory analysis for Ranger 3. Contains the detailed reconstruction of the trajectory deviation, the midcourse correction burn parameters, and the final flyby geometry. Documents the 36,793 km miss distance and the spacecraft's entry into heliocentric orbit. Includes the tracking data from the Deep Space Network stations that followed Ranger 3 past the Moon.",
+      "mission_relevance": "Provides the quantitative trajectory data needed for all orbital mechanics calculations. The miss distance, the excess velocity, and the midcourse correction parameters are the foundation for the mathematics track's worked examples."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "format": "TSV/HTML",
+      "access": "open",
+      "description": "Comprehensive launch database including the Atlas-Agena B launch history. Documents all Ranger launches with payload masses, orbital elements, and success/failure classification. Ranger 3 classified as failure — guidance error, lunar flyby at 36,793 km instead of planned impact.",
+      "mission_relevance": "Contextualizes Ranger 3 within the Atlas-Agena B launch record and the broader Ranger program failure sequence."
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's ephemeris computation service. Provides the Moon's position on January 28, 1962 (date of closest approach), enabling reconstruction of the flyby geometry and the angular error in the trajectory. Also provides the heliocentric orbital elements that Ranger 3 entered after the lunar flyby.",
+      "mission_relevance": "Enables computation of the intended impact trajectory vs. actual flyby trajectory. Essential for the delta-v error calculation and the hyperbolic flyby geometry worked examples."
+    },
+    {
+      "id": "usda-feis-ramalina",
+      "name": "Consortium of North American Lichen Herbaria -- Ramalina menziesii",
+      "url": "https://lichenportal.org/cnalh/taxa/index.php?taxon=54881",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Distribution and specimen records for Ramalina menziesii across North America. Documents the species' coastal range from Alaska to Baja California, its habitat preferences (coastal fog belt, riparian corridors, oak woodlands), and its status as California's state lichen. Includes specimen images showing the characteristic pendant, net-like morphology.",
+      "mission_relevance": "Establishes the geographic and ecological context for the organism pairing. The coastal fog-belt distribution and the passive fog-capture morphology are central to the resonance with Ranger 3's near-miss trajectory."
+    },
+    {
+      "id": "fog-lichen-ecology",
+      "name": "Ecology of Fog-Dependent Lichens in Pacific Coast Forests",
+      "url": "https://www.fs.usda.gov/database/feis/",
+      "type": "secondary-source",
+      "category": "ecology",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "Research on fog-dependent epiphytic lichen communities in PNW coastal forests. Documents Ramalina menziesii's role as a fog-water interceptor, its contribution to canopy water budgets through fog drip, and its sensitivity to air quality as a bioindicator species. Includes measurements of fog capture rates and thallus water content dynamics.",
+      "mission_relevance": "Provides the biological basis for the organism pairing. Fog capture rates, desiccation tolerance thresholds, and surface-area-to-volume optimization data support the resonance axes and the mathematics track's worked examples on fog interception efficiency."
+    },
+    {
+      "id": "cornell-vgsw",
+      "name": "Cornell Lab of Ornithology -- All About Birds: Violet-green Swallow",
+      "url": "https://www.allaboutbirds.org/guide/Violet-green_Swallow",
+      "type": "secondary-source",
+      "category": "ornithology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive species account for Tachycineta thalassina. Covers identification (iridescent green-violet upperparts, white underparts extending onto face), habitat (open forests, clearings, cliffs, suburban areas), aerial insectivory behavior, migration timing, and population status. Breeding range spans from Alaska to Mexico.",
+      "mission_relevance": "Establishes the ornithological context for the degree 27 bird pairing. The swallow's real-time trajectory correction during aerial feeding — continuous visual tracking and flight path adjustment — contrasts with Ranger 3's open-loop guidance failure."
+    },
+    {
+      "id": "bessie-coleman-archives",
+      "name": "Smithsonian National Air and Space Museum -- Bessie Coleman",
+      "url": "https://airandspace.si.edu/explore/stories/bessie-coleman",
+      "type": "secondary-source",
+      "category": "biography",
+      "format": "HTML",
+      "access": "open",
+      "description": "Smithsonian biographical profile of Bessie Coleman (January 26, 1892 — April 30, 1926), the first African American woman and first Native American to hold a pilot's license. Documents her journey from Waxahachie, Texas to France (where she earned her license because American flight schools refused Black applicants) and her career as a barnstorming exhibition pilot.",
+      "mission_relevance": "Provides the biographical foundation for the mission dedication. Coleman's redirect from American to French flight schools — a trajectory correction forced by institutional bias — parallels Ranger 3's guidance error theme. Her birth on January 26 matches Ranger 3's launch date exactly."
+    },
+    {
+      "id": "space-track",
+      "name": "Space-Track TLE Archive",
+      "url": "https://www.space-track.org/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "TLE/JSON",
+      "access": "open (registration required)",
+      "description": "US Space Force maintained archive of Two-Line Element sets. While Ranger 3 entered heliocentric orbit and is no longer tracked, the archive provides context for tracking capabilities during the early 1960s and the Deep Space Network stations that followed Ranger 3 past the Moon."
+    }
+  ]
+}

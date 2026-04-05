@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.27 — Ranger 2 + Sword Fern | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --fern-deep: #0A1E0A;
+    --fern-mid: #1A3A1A;
+    --fern-emerald: #2D5A2D;
+    --fern-light: #4A8A4A;
+    --understory: #0D160D;
+    --bark-brown: #3A2A18;
+    --text: #D8D8D8;
+    --text-dim: #909090;
+    --border: #2A4A2A;
+    --failure: #8B2020;
+    --failure-light: #CC4444;
+    --failure-dark: #5A1010;
+    --gold: #B89830;
+    --gold-light: #D4B850;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--understory);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 15% 20%, rgba(74,138,74,0.05) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 50%, rgba(42,74,42,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 55% 15%, rgba(74,138,74,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 60%, rgba(42,74,42,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 25%, rgba(74,138,74,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--understory) 0%, var(--fern-deep) 30%, var(--fern-mid) 60%, var(--failure-dark) 100%);
+    border-bottom: 3px solid var(--failure);
+    padding: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(139,32,32,0.15);
+    border: 1px solid var(--failure);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--failure-light);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #E0C0C0; }
+  .status-failure { background: rgba(139,32,32,0.3); border: 1px solid var(--failure); color: var(--failure-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: #A0C0A0; font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+  .card { background: rgba(10,30,10,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: #C0E0C0; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card { border-color: var(--fern-emerald); background: rgba(45,90,45,0.06); }
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(74,138,74,0.12); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num { background: var(--fern-emerald); color: var(--understory); font-weight: 700; font-size: 0.8rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: #C0E0C0; }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .organism-card { background: rgba(10,30,10,0.5); border: 1px solid var(--fern-emerald); border-radius: 8px; padding: 1.5rem; }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: #A0D0A0; margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: #A0D0A0; font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(13,22,13,0.6); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: #C0E0C0; }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .dedication-card { background: rgba(184,152,48,0.08); border: 1px solid var(--gold); border-radius: 8px; padding: 1.5rem; }
+  .dedication-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.75rem; }
+
+  .data-links { background: rgba(11,61,145,0.15); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card { background: rgba(26,26,58,0.4); border: 1px solid rgba(11,61,145,0.3); border-radius: 8px; padding: 1.5rem; }
+  .tracks-card h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .track-item { display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid rgba(11,61,145,0.15); font-size: 0.85rem; }
+  .track-item:last-child { border-bottom: none; }
+  .track-num { background: rgba(11,61,145,0.3); color: #7EB8DA; font-weight: 700; font-size: 0.7rem; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .nav-card { background: rgba(10,30,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: #A0D0A0; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #C0E0C0; }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: #A0D0A0; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.27</span>
+      <span>NASA Mission Series</span>
+      <span class="status-failure">FAILED</span>
+    </div>
+    <h1>Ranger 2 &mdash; The Gyro That Would Not Roll</h1>
+    <p class="subtitle">A spacecraft stranded by a stopped gyroscope, and the fern that holds the forest floor</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> November 18, 1961</span>
+      <span><span class="label">Program:</span> Ranger (NASA/JPL)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Atlas-Agena B</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On November 18, 1961 &mdash; the birthday of Asa Gray, America&rsquo;s greatest botanist &mdash; Ranger 2 launched from Cape Canaveral on an Atlas-Agena B. The Atlas performed nominally. The Agena B&rsquo;s first burn placed the 304-kilogram spacecraft into a parking orbit at 150 &times; 242 km. Then the roll gyroscope in the Agena B guidance system stopped spinning. Without roll reference, the engine could not restart. Ranger 2 was stranded.</p>
+      <p>For twenty-three hours, the spacecraft functioned exactly as designed &mdash; the three-axis attitude control system held orientation, the instruments returned data, the solar panels generated power. But each 88-minute orbit carried the spacecraft through Earth&rsquo;s shadow, forcing attitude corrections that consumed nitrogen propellant. By orbit 13, the nitrogen was exhausted. The spacecraft began to tumble. The batteries died. The signal was lost. Two days later, on November 20, 1961, Ranger 2 reentered the atmosphere and burned up. The second consecutive Ranger mission stranded in parking orbit. Same outcome as Ranger 1, different mechanism &mdash; a gyroscope bearing instead of a restart sequence.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 304 kg (hexagonal bus, 1.5 m across, 4 m tower)</li>
+        <li><strong>Solar panels:</strong> Two wings, 5.2 m tip-to-tip, ~200 W in sunlight</li>
+        <li><strong>Instruments:</strong> Lyman-alpha telescope, rubidium-vapor magnetometer, electrostatic analyzers, particle detectors, cosmic-ray ionization chamber, cosmic dust detectors, scintillation counter (8 experiments total)</li>
+        <li><strong>Attitude control:</strong> Three-axis stabilization &mdash; Sun sensors, Earth sensors, cold-gas nitrogen thrusters (first American deep-space spacecraft with three-axis control)</li>
+        <li><strong>Antenna:</strong> High-gain directional dish + omnidirectional backup</li>
+        <li><strong>Builder:</strong> Jet Propulsion Laboratory</li>
+        <li><strong>Launch vehicle:</strong> Atlas-Agena B (Atlas 117D, Agena B with Bell 8247 engine)</li>
+        <li><strong>Failure mode:</strong> Agena B roll gyroscope inoperative &rarr; restart aborted &rarr; stranded in parking orbit</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Failure</h2>
+      <p><strong>T+0 (08:12:21.5 UTC):</strong> Atlas-Agena B ignition from LC-12, Cape Canaveral. Atlas 117D booster nominal. MA-2 propulsion system produces 1,600 kN of thrust.</p>
+      <p><strong>Atlas phase:</strong> Booster engine jettison at T+130s. Sustainer burns to completion. Atlas separates cleanly. Agena B ignites.</p>
+      <p><strong>Agena B first burn:</strong> Bell 8247 engine nominal. 71.2 kN thrust. Burns to completion. Ranger 2 + Agena B enter 150 &times; 242 km parking orbit, 33.3&deg; inclination, 88.3-minute period.</p>
+      <p><strong>Parking orbit coast:</strong> Spacecraft and Agena coast for one orbit. The Agena&rsquo;s roll-control gyroscope &mdash; a precision spinning rotor providing attitude reference on the roll axis &mdash; ceases to function. Probable cause: bearing lubrication failure in vacuum environment.</p>
+      <p><strong>Restart window:</strong> Guidance system attempts to align for injection burn. Roll axis uncontrolled. Attitude tolerance check fails. <strong>RESTART ABORTED.</strong></p>
+      <p><strong>T+0 to T+23 hours:</strong> Spacecraft separates from Agena. Three-axis attitude control maintains Sun-pointing. Instruments return data. Shadow transits consume nitrogen. By orbit 13 (~20 hours): nitrogen exhausted. Tumble begins.</p>
+      <p><strong>T+23 hours:</strong> Battery depleted. Signal lost.</p>
+      <p><strong>November 20, 1961:</strong> Orbit decays. Ranger 2 reenters atmosphere and is destroyed.</p>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Wrong environment, right organism:</span> Sword fern is adapted for moist shade &mdash; in full sun on dry soil, it wilts in days. Ranger 2 was adapted for deep space &mdash; stranded in a parking orbit, it exhausted its nitrogen in hours. Both organisms are exquisitely matched to their intended habitat and helpless in the wrong one. The environment defines survival.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Parallel vs. serial:</span> Sword fern produces millions of spores per year. Each is an independent chance. Failure rate per spore: 99.9999%. But millions of attempts yield dominance. Ranger 2 had one serial chain of components. One gyroscope stopped. One mission lost. The fern&rsquo;s math compensates for fragility through volume. The Ranger&rsquo;s math cannot.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">The foundation persists:</span> Ranger 2 failed as a mission but succeeded as an engineering test. The three-axis attitude control worked. The instruments functioned. The spacecraft bus was validated. These validations were applied directly to Mariner 2 (Venus, 1962) and all subsequent Rangers. The sword fern&rsquo;s decomposing fronds feed the soil that grows the next forest. The foundation holds even when the mission fails.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Evergreen constancy:</span> Sword fern maintains its fronds through the PNW winter &mdash; photosynthesizing slowly when deciduous plants are dormant. The Ranger program persisted through six consecutive failures (Rangers 1-6) over three years &mdash; building, launching, failing, learning, and building again. The program was the institutional equivalent of the evergreen fern: always present, always growing, even in the dark.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">The understory holds:</span> In a PNW forest, the sword fern defines the herb layer &mdash; the foundation of the living understory. Remove the canopy (Douglas-fir), and the fern persists. Remove the shrubs (salal), and the fern persists. It is the most resilient structural layer. Ranger 2&rsquo;s spacecraft bus &mdash; the hexagonal platform with its solar panels and instrument mounts &mdash; persisted as a design through Mariner, Surveyor, and beyond. The bus was the understory of the space program: the foundation that held while missions above it failed.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Parking orbit decay simulator &mdash; model Ranger 2&rsquo;s 2-day orbital decay with atmospheric drag, showing the exponential acceleration as perigee drops into denser air</li>
+        <li><strong>GLSL:</strong> Parking orbit screensaver &mdash; spacecraft dot circling Earth, dimming with each orbit, eventually streaking to reentry</li>
+        <li><strong>Godot 4:</strong> Escape the parking orbit game &mdash; manage gyroscope, nitrogen, battery while waiting for restart window</li>
+        <li><strong>Arduino:</strong> Gyroscope failure demonstration ($20) &mdash; MPU-6050 module showing ACTIVE/LOST states on OLED display</li>
+        <li><strong>Blender:</strong> Two-day arc animation &mdash; Ranger 2 from parking orbit through tumble to reentry (Cycles render)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><a href="artifacts/stories/the-door.html" style="color: #C0E0C0;">Story: &ldquo;The Door&rdquo;</a> &mdash; The attitude control computer watches the gyroscope fail</li>
+        <li><a href="artifacts/audio/parking-orbit-decay.dsp" style="color: #7EB8DA;">Audio: Parking Orbit Decay</a> &mdash; FAUST synthesis: repeating tone decaying over 33 cycles</li>
+        <li><a href="artifacts/circuits/gyroscope-indicator.md" style="color: #C0E0C0;">Circuit: Gyroscope Indicator LEDs</a> &mdash; Spinning LEDs that stop when switch toggled ($12)</li>
+        <li><a href="artifacts/screensaver/ranger2-parking-orbit.frag" style="color: #7EB8DA;">Screensaver: Parking Orbit Decay</a> &mdash; GLSL shader</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.26/index.html">&larr; v1.26 Ranger 1</a>
+      <a href="../1.28/index.html">v1.28 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Polystichum munitum (Western sword fern)</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-value">1.8m</div><div class="stat-label">Frond Length</div></div>
+        <div class="stat"><div class="stat-value">100+</div><div class="stat-label">Fronds/Plant</div></div>
+        <div class="stat"><div class="stat-value">500+</div><div class="stat-label">Lifespan (yrs)</div></div>
+        <div class="stat"><div class="stat-value">10M+</div><div class="stat-label">Spores/yr</div></div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">THE Pacific Northwest understory fern. Evergreen, persistent, covering 60-90% of the forest floor in mature stands. Once-pinnate fronds with sword-like pinnae armed with spine-tipped teeth. Produces millions of spores per year &mdash; each a potential new plant, each facing near-impossible odds. The species compensates for individual fragility with massive parallelism: ten million spores per plant per year, ten plants per year established. The understory constant that holds the ground through disturbance, through canopy change, through centuries.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Progne subis (Purple Martin)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 26. The largest swallow in North America &mdash; and in Washington, the most vulnerable. Western Purple Martins (P. s. arboricola) depend on human-provided nesting structures: nest boxes on pilings, maintained by volunteers. Remove the boxes and the martins disappear. The bird&rsquo;s dependence on external infrastructure mirrors Ranger 2&rsquo;s dependence on the Agena B: when the platform fails, the organism is stranded. But the martin returns every spring, 5,000 miles from the Amazon Basin, to try again.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Asa Gray</h3>
+      <p style="font-size:0.85rem;">November 18, 1810 &mdash; January 30, 1888</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born on the exact day Ranger 2 launched, 151 years apart. America&rsquo;s most important botanist. Author of Gray&rsquo;s Manual &mdash; the systematic classification of North American plants that every subsequent botanist has relied upon. Darwin&rsquo;s American champion. Gray made the invisible visible: he organized the bewildering diversity of American plants into a system anyone could use. Ranger 2 was designed to systematize the space environment the same way. Both built frameworks of knowledge that persist after the individual mission ends. Gray&rsquo;s Manual is still in print. The Ranger bus became the Mariner bus.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-032A">NSSDC &mdash; Ranger 2</a>
+      <a href="https://history.nasa.gov/SP-4210/pages/Cover.htm">NASA SP-4210 &mdash; Lunar Impact</a>
+      <a href="https://ntrs.nasa.gov/search?q=ranger%202">NASA NTRS &mdash; Ranger 2 Reports</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS Ephemeris</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://plants.usda.gov/home/plantProfile?symbol=POMU">USDA PLANTS &mdash; Sword Fern</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/fern/polmun/all.html">USDA FEIS &mdash; Sword Fern</a>
+      <a href="https://wdfw.wa.gov/species-habitats/species/progne-subis-arboricola">WDFW &mdash; Purple Martin</a>
+      <a href="https://images.nasa.gov/search?q=ranger+2&media=image">NASA Image Library</a>
+      <a href="https://huh.harvard.edu/libraries/archives/asa-gray">Harvard Herbaria &mdash; Asa Gray</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; April 5, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:#A0D0A0;">&ldquo;The understory holds the ground. The gyroscope does not.&rdquo;</p>
+</footer>
+
+</body>
+</html>
