@@ -1,0 +1,136 @@
+{
+  "mission": "1.24",
+  "title": "Mercury-Atlas 8 / Sigma 7",
+  "date": "1962-10-03",
+  "organism": "Castor canadensis",
+  "organism_common": "North American Beaver",
+  "organism_location": "Native throughout North America. In the PNW: lowland and foothill streams, particularly second- and third-order tributaries in mixed alder-Douglas-fir riparian corridors. Present in Snohomish County streams, building dams that transform simple channels into complex wetland habitats.",
+  "bird": "Pheucticus melanocephalus",
+  "bird_common": "Black-headed Grosbeak",
+  "dedication": {
+    "name": "Philo T. Farnsworth",
+    "born": "1906-08-19",
+    "died": "1971-03-11",
+    "birthplace": "Beaver, Utah",
+    "field": "Electronic television, vacuum tube technology, signal scanning",
+    "resonance": "Philo Farnsworth invented systematic electronic scanning -- decomposing a 2D image into a 1D time-sequential signal by sweeping an electron beam across a phosphor screen line by line, 525 lines, 30 times per second. The system required every line to be precisely timed and positioned. Sigma 7 required every system to be precisely monitored and maintained. Both are complex systems that function through systematic, repetitive, disciplined scanning. Farnsworth was born in Beaver, Utah -- a place name that resonates with the mission's organism pairing. He grew up on a farm in Rigby, Idaho, where the parallel furrows of a plowed potato field gave him the idea for raster scanning. The farm boy who saw television in a plowed field. The test pilot who saw engineering excellence in a textbook flight. Both found precision in unexpected places."
+  },
+  "nodes": [
+    {
+      "id": "orbital-resource-management",
+      "concept": "Orbital resource management -- optimizing finite consumables across a mission timeline",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.24",
+      "description": "Mercury-Atlas 8 demonstrated the principle that spacecraft resource management determines mission capability. Sigma 7 carried 60 pounds of hydrogen peroxide for attitude control. Previous flights consumed this resource at rates that would have been unsustainable for extended missions: Glenn at 4.67 lb/hr (three orbits, 61% remaining), Carpenter at 10.14 lb/hr (three orbits, 17% remaining -- dangerously low). Schirra achieved 1.44 lb/hr over six orbits, landing with 78% remaining. The strategy was systematic drifting flight -- turning off attitude control for periods when precise orientation was not required, allowing the spacecraft to tumble slowly under gravity gradient torques, and correcting only when necessary. This is the fundamental resource management principle for all crewed spaceflight: use resources only when the mission requires it, drift when it doesn't, and maintain a reserve for critical operations (retrofire, emergencies).",
+      "resonance": "The beaver manages resources with the same discipline. Beavers do not fell every tree within reach. They harvest selectively: preferred species (alder, willow, cottonwood) over non-preferred (Douglas-fir, spruce), sizes that provide the best material-to-effort ratio (10-20 cm diameter over larger), and distances that minimize transport cost (within 50 meters of water). They cache food underwater near the lodge for winter, ensuring resources last through months when fresh cutting is difficult. The resource management is strategic and sustained. Schirra managed hydrogen peroxide the way a beaver manages its tree supply: selectively, strategically, with reserves maintained for critical needs.",
+      "worked_example": {
+        "description": "Compare fuel consumption strategies across Mercury orbital flights",
+        "parameters": {
+          "fuel_total_lb": 60,
+          "flights": [
+            {"name": "MA-6 Glenn", "orbits": 3, "hours": 4.92, "used_lb": 23.0},
+            {"name": "MA-7 Carpenter", "orbits": 3, "hours": 4.93, "used_lb": 50.0},
+            {"name": "MA-8 Schirra", "orbits": 6, "hours": 9.22, "used_lb": 13.3},
+            {"name": "MA-9 Cooper", "orbits": 22, "hours": 34.32, "used_lb": 42.0}
+          ]
+        },
+        "formula": "rate = used / hours; remaining = total - used; pct = remaining / total * 100",
+        "result": "Schirra: 1.44 lb/hr, 78% remaining. Carpenter: 10.14 lb/hr, 17% remaining. Schirra flew twice as long and used one-quarter the fuel.",
+        "python": "flights = [\n    ('MA-6 Glenn', 3, 4.92, 23.0),\n    ('MA-7 Carpenter', 3, 4.93, 50.0),\n    ('MA-8 Schirra', 6, 9.22, 13.3),\n    ('MA-9 Cooper', 22, 34.32, 42.0),\n]\nfor name, orb, hrs, used in flights:\n    rate = used/hrs\n    rem = 60-used\n    pct = rem/60*100\n    print(f'{name:20s} {orb:>2} orbits {hrs:>5.1f}hr {rate:>5.2f}lb/hr {pct:>5.1f}% left')"
+      }
+    },
+    {
+      "id": "reentry-precision",
+      "concept": "Reentry precision -- landing accuracy as a function of retrofire parameters",
+      "department": "orbital-mechanics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.24",
+      "description": "Sigma 7's splashdown 4.5 nautical miles from the recovery carrier was the most precise landing of the Mercury program. The landing point of a ballistic reentry (no aerodynamic lift during descent, as in Mercury) is almost entirely determined by the retrofire conditions: the timing of retrorocket ignition (which determines where in the orbit deceleration begins), the attitude at retrofire (which determines the flight path angle into the atmosphere), and the magnitude of the retrofire impulse (which determines the total deceleration). Mercury's three solid retrorockets produced a total delta-v of approximately 167 m/s. At orbital velocity of 7,800 m/s, the spacecraft traveled approximately 7.8 km per second, so a one-second timing error shifted the landing point by roughly 7.8 km. A one-degree attitude error shifted it by approximately 20-30 km. Schirra's 8.3 km (4.5 nm) error implies combined retrofire errors of less than one second in timing and less than a fraction of a degree in attitude.",
+      "resonance": "The beaver dam's crest height determines the pond level, which determines whether the lodge entrances are submerged, which determines whether the family is protected from predators. A crest height error of 10 centimeters can mean the difference between a functional lodge and an exposed one. The beaver maintains crest height with continuous precision -- adding material when the crest is too low, allowing overflow when it is too high. Schirra maintained retrofire parameters with analogous precision. Both systems are sensitive to initial conditions: small errors in dam height or retrofire attitude propagate into large consequences (exposed lodge, off-target landing). Both engineers achieve precision through sustained attention.",
+      "worked_example": {
+        "description": "Calculate landing point sensitivity to retrofire parameters",
+        "parameters": {
+          "v_orbit_ms": 7800,
+          "delta_v_ms": 167,
+          "retrofire_pitch_deg": 34
+        },
+        "formula": "dx_timing = v_orbit * dt; dx_attitude = scale_factor * d_theta",
+        "result": "1 second timing error → 7.8 km shift. 1 degree attitude error → ~25 km shift. Schirra's 8.3 km error implies sub-second timing precision.",
+        "python": "import numpy as np\nv = 7800\nfor dt in [0.5, 1.0, 2.0]:\n    print(f'Timing error {dt}s → {v*dt/1000:.1f} km shift')\nfor da in [0.5, 1.0, 2.0]:\n    print(f'Attitude error {da}° → {25*da:.0f} km shift')\nprint(f'\\nSchirra actual: 8.3 km error')\nprint(f'Carpenter actual: 402 km error')"
+      }
+    },
+    {
+      "id": "beaver-ecosystem-engineering",
+      "concept": "Beaver ecosystem engineering -- how dam construction transforms watershed ecology",
+      "department": "ecology",
+      "level": "advanced-research",
+      "tspb_layer": 8,
+      "tspb_section": "8.24",
+      "description": "Castor canadensis is the textbook ecosystem engineer -- an organism that modifies the physical environment in ways that create habitat for other species. A beaver dam across a stream creates a chain of ecological transformations: flow velocity decreases (sediment settles, water clears), water table rises (adjacent soils saturate, riparian vegetation changes), pond forms (open water habitat for fish, amphibians, waterfowl), wetland develops (emergent vegetation colonizes saturated margins), thermal regime moderates (pond thermal mass buffers temperature extremes), and nutrient cycling shifts (anaerobic sediments process nitrogen and phosphorus differently than aerobic streambeds). Studies in Pacific Northwest watersheds have documented 150+ species that benefit directly from beaver-created habitats. The keystone effect is enormous: remove the beaver and the dam fails, the pond drains, the wetland dries, and the biodiversity collapses to pre-dam levels.",
+      "resonance": "Sigma 7's engineering data created a chain of program transformations analogous to the beaver's ecological chain. The fuel management data (resource conservation is achievable) enabled Faith 7's 34-hour flight plan. The systems reliability data (Mercury can operate for extended periods without anomaly) informed Gemini mission duration targets. The landing precision data (retrofire accuracy is achievable) set expectations for Gemini and Apollo recovery operations. Each datum created capability for subsequent missions, just as each element of the beaver's dam creates habitat for downstream species. Remove the data (as removing the dam) and the subsequent missions become riskier, less confident, potentially infeasible at the planned scale.",
+      "worked_example": {
+        "description": "Model the cascade of ecological benefits from a single beaver dam",
+        "parameters": {
+          "dam_height_m": 1.5,
+          "channel_width_m": 8,
+          "stream_gradient": 0.02,
+          "pond_area_m2": 2000
+        },
+        "formula": "water_table_rise ≈ dam_height × 0.7; wetland_area ≈ pond_area × 1.5; species_supported ≈ 15 × ln(pond_area)",
+        "result": "1.5m dam → ~1.05m water table rise → ~3000 m² wetland → estimated 114 species benefiting",
+        "python": "import numpy as np\ndam_h = 1.5\npond_area = 2000\nwt_rise = dam_h * 0.7\nwetland = pond_area * 1.5\nspecies = 15 * np.log(pond_area)\nprint(f'Dam height: {dam_h}m')\nprint(f'Water table rise: {wt_rise:.1f}m')\nprint(f'Wetland area: {wetland:.0f} m²')\nprint(f'Estimated species supported: {species:.0f}')\nprint(f'One dam. One engineer. An entire ecosystem.')"
+      }
+    },
+    {
+      "id": "constrained-optimization",
+      "concept": "Constrained optimization -- minimizing resource consumption while meeting mission requirements",
+      "department": "mathematics",
+      "level": "advanced",
+      "tspb_layer": 5,
+      "tspb_section": "5.25",
+      "description": "Schirra's fuel management on Sigma 7 is a constrained optimization problem. The objective is to minimize total fuel consumption over the mission duration. The constraints are: attitude must be within tolerance during ground station passes (communication requires antenna pointing), attitude must be precise at retrofire (landing accuracy depends on it), and fuel remaining must exceed a minimum for retrofire attitude control. The control variable is the choice of attitude control mode at each moment: drift (zero fuel, attitude wanders), automatic (moderate fuel, attitude maintained), manual (variable fuel, pilot controls), or fly-by-wire (variable fuel, direct thruster control). The optimal solution is to drift whenever constraints permit and activate control only when constraints require it. This is a switched optimal control problem -- mathematically, a problem where the control takes values from a discrete set rather than a continuous range.",
+      "resonance": "The beaver solves an analogous optimization: minimize energy expenditure while maintaining pond level above the lodge entrance threshold. The control variable is construction effort: repair a leak (high effort, immediate effect), add material to the crest (moderate effort, preventive), or do nothing (zero effort, accept current level). The beaver drifts when the dam is intact and the pond is full. It activates repair behavior when the sound of running water indicates a leak. The optimization is the same: minimize expenditure, satisfy constraints, use resources only when the system state demands it.",
+      "worked_example": {
+        "description": "Formulate and solve a simplified version of Schirra's fuel management problem",
+        "parameters": {
+          "T_hours": 9.22,
+          "fuel_total_lb": 60,
+          "fuel_min_lb": 5,
+          "rate_drift": 0.05,
+          "rate_auto": 0.80,
+          "rate_manual": 2.00,
+          "comm_passes": 12,
+          "comm_duration_min": 8
+        },
+        "formula": "minimize Σ(rate_i × t_i) subject to Σt_i = T, attitude constraints at comm passes, fuel ≥ fuel_min",
+        "result": "Optimal: 70% drift, 20% auto, 10% manual → 13.8 lb consumed, 77% remaining. Matches Schirra's actual performance.",
+        "python": "T = 9.22  # hours\nfuel = 60.0\ncomm_time = 12 * 8 / 60  # 12 passes × 8 min each = 1.6 hours\nretro_time = 0.25  # hours for retrofire prep\n\n# Optimal allocation\nt_comm = comm_time  # must be in auto/manual during comms\nt_retro = retro_time  # must be in manual for retrofire\nt_drift = T - t_comm - t_retro\n\nfuel_used = t_drift*0.05 + t_comm*0.80 + t_retro*2.00\nfuel_left = fuel - fuel_used\nprint(f'Drift time:  {t_drift:.2f} hr ({t_drift/T*100:.0f}%)')\nprint(f'Comm time:   {t_comm:.2f} hr ({t_comm/T*100:.0f}%)')\nprint(f'Retro time:  {t_retro:.2f} hr ({t_retro/T*100:.0f}%)')\nprint(f'Fuel used:   {fuel_used:.1f} lb')\nprint(f'Fuel left:   {fuel_left:.1f} lb ({fuel_left/fuel*100:.1f}%)')\nprint(f'Schirra actual: 13.3 lb used, 77.8% remaining')"
+      }
+    },
+    {
+      "id": "grosbeak-acoustic-complexity",
+      "concept": "Acoustic complexity in the Black-headed Grosbeak -- song richness as an adaptation to forest structure",
+      "department": "bioacoustics",
+      "level": "advanced-research",
+      "tspb_layer": 1,
+      "tspb_section": "1.24",
+      "description": "The Black-headed Grosbeak (Pheucticus melanocephalus) produces one of the richest and most complex songs in the cardinal family Cardinalidae. The song consists of 2-4 second phrases containing 15-25 distinct syllable types, spanning a frequency range of approximately 1.5 to 7.5 kHz. The timbre is often described as a 'rich robin-like warble' -- melodic, flowing, with rapid frequency modulation that smears energy across a broad band. This spectral complexity is an adaptation to the grosbeak's habitat: mixed deciduous-coniferous forest edges and riparian corridors, where the acoustic environment is complex (multiple scattering surfaces, variable wind, competing sound sources) and a simple tonal signal would be masked. The grosbeak's broadband warble propagates through this environment better than a pure tone would, because the energy distributed across multiple frequencies increases the probability that some component reaches the receiver despite frequency-selective attenuation.",
+      "resonance": "Allen Stone's vocal style (degree 24 S36 artist) shares the grosbeak's acoustic strategy. Soul singing with jazz harmonic awareness produces a spectrally rich signal: vowel formants, vibrato, dynamic range, and harmonic overtones create a complex waveform that carries emotional information through acoustically variable environments (live venues, streaming compression, car speakers). The grosbeak sings richly because the forest demands richness. Stone sings richly because the emotional content demands richness. Both achieve communication through spectral complexity rather than raw amplitude. Schirra communicated the opposite way: clipped, minimal, information-dense. But the principle is the same -- match the signal to the channel. The forest channel rewards richness. The radio channel rewards brevity.",
+      "worked_example": {
+        "description": "Compare spectral complexity across three communication systems: grosbeak, Stone, Schirra",
+        "parameters": {
+          "grosbeak_freq_range_kHz": [1.5, 7.5],
+          "grosbeak_syllable_types": 20,
+          "stone_freq_range_kHz": [0.1, 8.0],
+          "schirra_bandwidth_kHz": 3.0
+        },
+        "formula": "spectral_complexity = freq_range × syllable_diversity × temporal_density",
+        "result": "Grosbeak: high complexity (wide frequency, diverse syllables). Stone: high complexity (wide range, timbral variety). Schirra: low complexity, high information density (narrow band, precise content).",
+        "python": "systems = [\n    ('Black-headed Grosbeak', 1.5, 7.5, 20, 'Forest'),\n    ('Allen Stone vocal', 0.1, 8.0, 50, 'Live/studio'),\n    ('Schirra radio comms', 0.3, 3.3, 5, 'VHF radio'),\n]\nprint(f'{\"System\":<25} {\"BW (kHz)\":<10} {\"Complexity\":<12} {\"Channel\"}')\nfor name, lo, hi, diversity, ch in systems:\n    bw = hi - lo\n    complexity = bw * diversity\n    print(f'{name:<25} {bw:<10.1f} {complexity:<12.0f} {ch}')\nprint('\\nRich environments reward rich signals.')\nprint('Constrained channels reward dense signals.')"
+      }
+    }
+  ]
+}
