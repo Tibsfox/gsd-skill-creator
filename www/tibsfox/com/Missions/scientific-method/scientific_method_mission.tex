@@ -1,0 +1,1016 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── Color Scheme: Academic / Epistemological ──────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — section headers
+\definecolor{secondary}{HTML}{004D40}     % Dark teal — subsection headers
+\definecolor{tertiary}{HTML}{4A148C}      % Deep purple — subsubsection headers
+\definecolor{accent}{HTML}{283593}        % Accent indigo
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Quote boxes, highlights
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{F3E5F5}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── Section Formatting ────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── Custom Environments ───────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ─── Table Helpers ─────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── Headers and Footers ───────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Scientific Method}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── Hyperlinks ────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={The Scientific Method -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═══════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ═══════════════════════════════════════════════════════════════════════════
+
+% ─── Title Page ────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Scientific Method\\[0.3em]A Deep Epistemological Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{History · Philosophy · Integrity · Futures}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ─── Table of Contents ─────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Scientific Method --- Vision Guide}
+
+\metafield{Date:}{April 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{None (foundational topic)}
+\metafield{Context:}{GSD Ecosystem --- College of Knowledge / \emph{The Space Between} proof companion}
+
+\subsection{Vision}
+
+The scientific method is humanity's most durable piece of software. Written not in code but in practice, refined not by a single architect but by centuries of colliding minds, it remains the only reliable mechanism we have for distinguishing what is true from what merely feels true. Its history is not a clean line from ignorance to enlightenment --- it is a recursive argument, a standing debate between the empiricists who trust the senses and the rationalists who distrust them, between those who believe science discovers truth and those who believe it only navigates toward it.
+
+For the GSD ecosystem, this is personal territory. The Amiga Principle --- specialized sampling outperforms brute-force enumeration --- is itself a claim that must survive the scientific method's scrutiny. The \emph{Space Between} textbook's 923 pages are grounded in the premise that mathematical structure underlies the observable world, which is precisely the premise the scientific method was built to test. Every wave-based execution plan, every CAPCOM gate, every bounded-learning constraint in gsd-skill-creator embodies the core logic of empirical science: form a hypothesis (the architecture), design an experiment (the mission), observe the result (the test suite), revise accordingly.
+
+This research mission maps the full terrain of the scientific method: its ancient origins, its philosophical fractures, its institutional failures, and its AI-augmented futures. The goal is not merely historical survey but architectural intelligence --- understanding the method well enough to build systems that embody it, teach it, and extend it across the College of Knowledge curriculum.
+
+The spaces between the steps --- between observation and hypothesis, between experiment and conclusion, between replication and consensus --- are where science actually lives. That is where this mission goes.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The method is taught as ritual, not reasoning.} Most science education presents the scientific method as a fixed five-step procedure (observe, hypothesize, experiment, analyze, conclude), stripping away the philosophical complexity that makes it meaningful. Students memorize the steps without understanding why they exist, leaving them unable to detect pseudoscience, evaluate evidence quality, or adapt when the standard procedure does not fit their domain.
+
+  \item \textbf{The replication crisis reveals structural failure.} Over 70\% of researchers have tried and failed to reproduce another scientist's results (Nature, 2016). In the landmark Reproducibility Project, only 36\% of 100 psychology studies replicated successfully, with effect sizes averaging half the originals. The incentive structures of modern science --- publish or perish, novelty bias, p-hacking, HARKing --- have systemically corrupted the method's self-correcting mechanism.
+
+  \item \textbf{Popper vs.\ Kuhn remains unresolved in practice.} Karl Popper's falsificationism demands that scientists actively try to disprove their theories; Thomas Kuhn's paradigm model shows that scientists almost never do. Both accounts are partly correct, and this tension has never been resolved into practical guidance for researchers. The debate is active: philosophy of science has largely abandoned the search for a single universal method, leaving practitioners without epistemological scaffolding.
+
+  \item \textbf{AI is disrupting hypothesis generation without consensus on validity.} Large language models now generate novel scientific hypotheses, design experiments, and synthesize literature at scale (FutureHouse, 2025; Ludwig \& Mullainathan, 2024). But the relationship between AI-generated hypotheses and Popperian testability is poorly understood. Biases in training data can skew hypotheses toward well-studied pathways. The field lacks frameworks for evaluating AI's role as a legitimate scientific instrument vs.\ a sophisticated pattern-matcher.
+
+  \item \textbf{Non-Western and Indigenous epistemologies are systematically excluded.} The dominant account of the scientific method is Eurocentric: Aristotle to Bacon to Newton to Popper. This erases the contributions of Islamic scholars (Ibn al-Haytham, al-Biruni, Ibn Sina), Indian philosophical schools (Nyaya, Vaisheshika), and Indigenous knowledge systems that have sustained empirical relationships with ecosystems for millennia. A complete account of how humans know things must include these traditions without subordinating them.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The scientific method is not a fixed procedure --- it is a family of epistemological commitments operating within a self-correcting social system.}
+
+Those commitments are: observation over authority; hypothesis before conclusion; public testing over private belief; replication as the price of acceptance; revision as the mark of health. The procedure varies by domain and era. The commitments do not.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    THE SCIENTIFIC METHOD — DOMAIN MAP
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │                      EPISTEMOLOGICAL ROOTS                      │
+  │   Ancient Greece ─── Islamic Golden Age ─── Scientific Rev.    │
+  └───────────────────────────────┬─────────────────────────────────┘
+                                  │
+           ┌───────────────────────┼───────────────────────┐
+           ▼                       ▼                       ▼
+  ┌─────────────────┐   ┌──────────────────┐   ┌──────────────────┐
+  │   MODULE 1      │   │   MODULE 2       │   │   MODULE 3       │
+  │  HISTORICAL     │   │  CORE MECHANICS  │   │  PHILOSOPHICAL   │
+  │  EVOLUTION      │   │  (The Method     │   │  FRAMEWORKS      │
+  │  (2600 years)   │   │   Itself)        │   │  Popper/Kuhn/    │
+  │                 │   │                  │   │  Lakatos/Feyer.  │
+  └─────────────────┘   └──────────────────┘   └──────────────────┘
+           │                       │                       │
+           └───────────────────────┼───────────────────────┘
+                                   │
+           ┌────────────────────────┼───────────────────────┐
+           ▼                        ▼                       ▼
+  ┌─────────────────┐    ┌──────────────────┐   ┌──────────────────┐
+  │   MODULE 4      │    │   MODULE 5       │   │   SYNTHESIS      │
+  │  INTEGRITY &    │    │  AI & FUTURE     │   │  Cross-Module    │
+  │  REPLICATION    │    │  TRAJECTORIES    │   │  Integration     │
+  │  (Crisis +      │    │  (LLMs, Self-    │   │  (Opus)          │
+  │   Open Science) │    │   Driving Labs)  │   │                  │
+  └─────────────────┘    └──────────────────┘   └──────────────────┘
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE          SCOPE                             MODEL    WAVES
+  ─────────────── ────────────────────────────────  ───────  ──────
+  M1: History     2600 BCE–1900 CE lineage          Sonnet   W1-A
+  M2: Mechanics   Hypothesis–Test–Revise loop       Sonnet   W1-B
+  M3: Philosophy  Popper/Kuhn/Lakatos/Feyerabend    Opus     W1-A
+  M4: Integrity   Replication crisis + open sci.    Sonnet   W1-B
+  M5: AI Futures  LLM hypothesis gen, auto-labs     Sonnet   W1-B
+  SYNTHESIS       Cross-module integration          Opus     W2
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Historical Evolution}
+
+From Aristotle's rejection of pure deduction to the Islamic Golden Age's marriage of observation and instrument-making, to Francis Bacon's \emph{Novum Organum} (1620) and the Scientific Revolution. Maps the full 2,600-year arc of how humans formalized inquiry, including non-Western contributions that standard accounts erase.
+
+\subsubsection{Module 2: Core Mechanics}
+
+The operational loop: observation, hypothesis formation, experimental design, data collection, analysis, conclusion, and iteration. Covers the difference between induction and deduction, the role of controls and variables, statistical significance, and the special challenges of observational vs.\ experimental science.
+
+\subsubsection{Module 3: Philosophical Frameworks}
+
+The great debates: Popper's falsificationism (a theory is scientific only if it can be disproven), Kuhn's paradigm shifts (science progresses through revolutionary replacements of consensus frameworks), Lakatos's research programmes (protective belts allow paradigms to survive anomalies), and Feyerabend's epistemological anarchism (\emph{anything goes}). Includes the 1965 Popper--Kuhn debate at University of London.
+
+\subsubsection{Module 4: Integrity and Reproducibility}
+
+The replication crisis: why it happened, what it means, and how the open science movement is responding. Covers publication bias, p-hacking, HARKing, the Reproducibility Project results (36\% replication rate in psychology), preregistration, open data, and registered reports. Draws on Nature's 2016 survey of 1,576 researchers.
+
+\subsubsection{Module 5: AI and Future Trajectories}
+
+Large language models as hypothesis generators: FutureHouse's PaperQA/Crow/Owl (2024--2025), Ludwig \& Mullainathan's \emph{Quarterly Journal of Economics} framework (2024), self-driving laboratories, and the challenge of validating machine-generated hypotheses under Popperian criteria. Examines the risk that AI-augmented science inherits and amplifies existing biases.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+  # Scientific Method Mission — Chipset Configuration
+  chipset:
+    agnus:                    # Opus — coordination + synthesis
+      role: FLIGHT + SYNTHESIS
+      allocation: 30%
+      responsibilities:
+        - Cross-module philosophical integration
+        - Popper/Kuhn/Lakatos synthesis (Module 3)
+        - AI validity framework (Module 5 synthesis)
+        - Final through-line authorship
+    denise:                   # Sonnet — structural execution
+      role: EXEC (x2) + CRAFT
+      allocation: 60%
+      responsibilities:
+        - Module 1 historical survey
+        - Module 2 mechanics documentation
+        - Module 4 replication crisis reference
+        - Module 5 AI landscape survey
+        - Index HTML + publication assembly
+    paula:                    # Haiku — scaffolding
+      role: PLAN + LOG + BUDGET
+      allocation: 10%
+      responsibilities:
+        - Shared schemas (source format, citation template)
+        - Token budget tracking
+        - Commit messages and audit trail
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Western philosophical tradition from Aristotle through contemporary Bayesian epistemology
+  \item Islamic Golden Age contributions (Ibn al-Haytham, al-Biruni, Ibn Sina)
+  \item Indian philosophical traditions (Nyaya, Vaisheshika) with appropriate attribution
+  \item Core mechanics of hypothesis--test--revise loops across all empirical sciences
+  \item Popper, Kuhn, Lakatos, and Feyerabend in sufficient depth for curriculum use
+  \item Replication crisis: causes, data, and open science responses
+  \item AI hypothesis generation: current capabilities, limitations, and governance questions
+  \item Integration with \emph{The Space Between} mathematical framework
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Full survey of Indigenous Knowledge Systems (requires nation-specific OCAP® consultation --- separate mission)
+  \item Domain-specific method variations (clinical trials, archaeology, economics --- each warrants its own mission)
+  \item Detailed statistics curriculum (handled by dedicated GSD math modules)
+  \item Science policy and funding structures (future Fox Infrastructure Group research track)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{Historical arc completeness:} Module 1 covers at minimum 8 distinct historical periods from ancient Greece through the 21st century, with named contributors from at least 3 non-Western traditions.
+  \item \textbf{Core mechanics accuracy:} Module 2 correctly distinguishes inductive from deductive reasoning, defines falsifiability operationally, and provides at least 3 worked examples across different scientific domains.
+  \item \textbf{Philosophical depth:} Module 3 accurately represents Popper, Kuhn, Lakatos, and Feyerabend with direct textual support from their primary works, and identifies the specific points of agreement and disagreement between them.
+  \item \textbf{Replication crisis quantification:} Module 4 cites the 2016 Nature survey (n=1,576), the Reproducibility Project results (36\% replication rate), and at least 2 structural causes with attributed sources.
+  \item \textbf{AI landscape currency:} Module 5 covers developments no older than 2024, includes named systems (FutureHouse, PaperQA, FieldSHIFT, etc.), and correctly frames the Popperian validity challenge.
+  \item \textbf{Cross-module integration:} Synthesis produces at least 3 explicit connections between modules (e.g., how the replication crisis validates Kuhn's anomaly model; how AI hypothesis generation maps to Popper's testability criterion).
+  \item \textbf{GSD ecosystem resonance:} Through-line connects the scientific method to the Amiga Principle, wave-based execution, and the \emph{Space Between} mathematical spine.
+  \item \textbf{Curriculum readiness:} Each module can stand alone as a College of Knowledge lesson unit with clear learning objectives, key terms, and assessment questions.
+  \item \textbf{Source quality:} All factual claims attributed to peer-reviewed journals, government agencies, university research programs, or named philosophical texts. Zero entertainment media or unsourced blogs.
+  \item \textbf{Non-Western inclusion:} At minimum one dedicated subsubsection per non-Western tradition covered, with nation/culture-specific attribution (never generic ``Eastern science'').
+  \item \textbf{Compilation:} LaTeX source compiles without errors in three XeLaTeX passes.
+  \item \textbf{Handoff readiness:} Package is self-contained --- a GSD orchestrator can begin execution with zero additional context from the human.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection} \\
+\midrule
+\emph{The Space Between} & Philosophical spine & Scientific method is the epistemological ground for all 33 chapters \\
+GSD Learn Kung Fu Pack & Pedagogy parallel & Same vision: teach reasoning, not ritual \\
+College of Knowledge (.college/) & Primary consumer & This research seeds the Epistemology department \\
+NASA Mission Series & Applied example & Each NASA mission is a case study in the scientific method \\
+gsd-skill-creator (all versions) & Living embodiment & The skill's test-driven architecture \emph{is} the scientific method \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The scientific method and the GSD ecosystem share a single architectural insight: \emph{the map is not the territory, but a good map is the only way to navigate}. Popper understood this --- his falsificationism is not a claim that science reaches truth but that it navigates toward it by systematically eliminating falsehood. The GSD wave-based execution model embodies this: each wave is a hypothesis about what the next correct state of the system looks like; each CAPCOM gate is a falsification test; each retrospective is the revision step.
+
+The Amiga Principle --- specialized sampling from the relevant population outperforms brute-force enumeration --- is itself a scientific claim. It was validated by convergent discovery when the thepopebot analysis confirmed GSD's architecture without cross-pollination. That validation event is a microcosm of how science works: independent replication is the strongest signal. When the College of Knowledge teaches the scientific method, it is teaching students the same logic that underlies every architectural decision in this ecosystem. The spaces between the steps are where thinking happens. That is where learning lives.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Scientific Method --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference aggregates findings from web research conducted April 2026 across peer-reviewed literature, university-hosted philosophical resources, and government/agency publications. Agents should treat this as the authoritative source for the mission. Web searches should only be conducted to fill gaps not covered here.
+
+\textbf{Key source organizations and primary sources:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Stanford Encyclopedia of Philosophy (\url{plato.stanford.edu}) --- authoritative philosophical coverage
+  \item Internet Encyclopedia of Philosophy (\url{iep.utm.edu}) --- Popper entry
+  \item Nature (journal) --- replication crisis surveys and metascience
+  \item Quarterly Journal of Economics --- Ludwig \& Mullainathan (2024) ML hypothesis generation
+  \item NBER Working Papers --- economics of scientific discovery
+  \item PMC / PubMed Central --- open access peer-reviewed science coverage
+  \item Wikipedia (History of Scientific Method) --- cross-linked, well-cited historical survey
+  \item Frontiers in Artificial Intelligence --- AI in scientific discovery (2025)
+\end{itemize}
+
+\subsection{Module 1: Historical Evolution}
+
+\subsubsection{Ancient Origins (600 BCE -- 200 CE)}
+
+The story does not begin with Bacon. Multiple ancient traditions developed empirical inquiry independently.
+
+In ancient Greece, Aristotle (384--322 BCE) pioneered what we recognize as scientific method by rejecting purely deductive frameworks in favor of generalizations made from observation. He introduced empirical evidence and systematic categorization, and his work on logic shaped inquiry for two millennia. Crucially, Aristotle equated science with reliability --- \emph{scientia} in Latin, meaning knowledge that can be rationally and logically explained. Earlier Greek philosophers (Thales, Pythagoras, Heraclitus) had moved away from mythological explanations toward reason and observation, but Aristotle formalized the approach.
+
+In parallel, Indian philosophical schools developed distinct epistemological frameworks. The Nyaya school formalized rules of inference and valid reasoning. The Vaisheshika school classified natural phenomena through an atomistic lens. The Charvaka materialists rejected inference entirely in favor of direct perception --- an early empiricism that made all inference provisional.
+
+Ancient libraries catalyzed science: the Library of Alexandria (c.\ 200 BCE) introduced library cataloguing, enabling the first systematic literature reviews --- a practice central to modern science.
+
+\subsubsection{Islamic Golden Age (800--1200 CE)}
+
+This is the most systematically underrepresented chapter in Western accounts of scientific methodology. Starting in the early ninth century, Muslim scholars made experiment a primary source of knowledge in ways Classical antiquity had not.
+
+\textbf{Ibn al-Haytham (965--1040 CE)} is arguably the first scientist in the modern sense. His \emph{Book of Optics} demonstrated that light travels from objects to the eye (not vice versa) through systematic experiments with dark chambers --- the first documented use of controlled experiments. He articulated a recognizable hypothesis--test--revise loop.
+
+\textbf{Al-Biruni (973--1048 CE)} developed systematic approaches to comparative study, insisting on multiple independent confirmations before accepting a claim.
+
+\textbf{Ibn Sina (Avicenna, 980--1037 CE)} formalized clinical trials in medicine, including controlled conditions and the elimination of confounding factors --- centuries before the European clinical trial framework.
+
+Islamic scholars did not merely preserve Greek knowledge; they added to it and were the catalyst for a scientific method recognizable to modern practitioners.
+
+\subsubsection{The Scientific Revolution (1543--1700 CE)}
+
+\textbf{Francis Bacon (1561--1626)} is conventionally called the father of the modern scientific method. His \emph{Novum Organum} (1620) argued that knowledge should derive from observation and experimentation through inductive reasoning, not from classical authority or deductive logic alone. He formalized the ``tables of presence and absence'' --- systematic documentation of where a phenomenon does and does not occur --- as the basis for causal inference.
+
+\textbf{René Descartes (1596--1650)} took the opposing view: rational deduction from clear first principles. His framework competed with Bacon's and the tension between empiricism and rationalism remains one of the structuring debates in philosophy of science.
+
+\textbf{Galileo Galilei (1564--1642)} put both frameworks into practice, combining mathematical analysis with experimental observation. Kepler (1571--1630) extended this to celestial mechanics, demonstrating that the method could combine observation, mathematical reasoning, and theory testing.
+
+\textbf{Isaac Newton (1642--1727)} cemented Bacon's empirical approach in his \emph{Principia} (1687), insisting that scientists be driven by observation and evidence rather than by desire to prove a predetermined conclusion. Newton's embrace of the method --- and his success --- made it the dominant framework.
+
+\subsubsection{19th Century Refinements}
+
+John Stuart Mill (1806--1873) systematized inductive inference in \emph{A System of Logic} (1843), formalizing the methods of agreement, difference, and concomitant variation that remain foundational to experimental design. Claude Bernard brought the scientific method to medicine in \emph{An Introduction to the Study of Experimental Medicine} (1865), emphasizing the need to distinguish between observation and experiment, and the danger of confirmation bias.
+
+\subsection{Module 2: Core Mechanics}
+
+\subsubsection{The Operational Loop}
+
+The standard account presents a linear sequence: observation $\to$ question $\to$ hypothesis $\to$ experiment $\to$ analysis $\to$ conclusion. This is a pedagogical simplification. In practice, the process is recursive: conclusions generate new observations; failed hypotheses require revised questions; anomalous data triggers redesigned experiments.
+
+The scientific community and philosophers of science generally recognize these core components, while acknowledging that not all steps occur in every inquiry, nor always in the same order. The method requires intelligence, imagination, and creativity rather than rigid adherence to procedure.
+
+\subsubsection{Key Distinctions}
+
+\textbf{Induction vs.\ Deduction:} Inductive reasoning moves from specific observations to general principles (``all observed ravens are black; therefore all ravens are black''). Deductive reasoning moves from general principles to specific predictions (``if all ravens are black, this raven will be black''). Science uses both. The Raven Paradox --- which Miles has encountered directly through the Amiga Principle validation --- illustrates the limits of pure induction.
+
+\textbf{Hypothesis vs.\ Theory vs.\ Law:} In scientific usage, a hypothesis is a testable prediction, a theory is a well-substantiated explanation supported by substantial evidence, and a law is a descriptive generalization. These are not stages in a hierarchy of confidence --- they are different types of claims.
+
+\textbf{Controls and Variables:} The experimental core of the method requires holding all variables constant except the one being tested (controlled experiment) or explicitly measuring and accounting for all varying factors (observational study with statistical controls).
+
+\subsubsection{Statistical Significance and Its Limits}
+
+The p-value (probability of obtaining a result at least as extreme as the observed result, assuming the null hypothesis is true) became the dominant metric for scientific acceptance in the 20th century. The standard threshold of p $<$ 0.05 was never meant to be a universal truth criterion --- it was a practical convention. The replication crisis (Module 4) has revealed the damage done by treating it as one.
+
+\subsection{Module 3: Philosophical Frameworks}
+
+\subsubsection{Logical Positivism (1920s--1960s)}
+
+The Vienna Circle sought to understand what distinguishes science from other intellectual enterprises by importing scientific methodology into philosophy. Their logical positivism held that meaningful statements are either analytically true (mathematical) or empirically verifiable. This framework collapsed by the 1960s, largely due to the work of Karl Popper, who demonstrated that verificationism cannot account for how science actually progresses.
+
+\subsubsection{Popper: Falsificationism}
+
+Karl Popper (1902--1994) proposed falsificationism as the demarcation criterion between science and non-science. A theory is scientific if and only if it produces hypotheses that could in principle be falsified by observable evidence. For Popper, science should attempt to disprove theories, not confirm them. His key insight: no finite number of confirming observations can prove a theory true, but a single reproducible counter-instance can prove it false.
+
+The classic example: ``All swans are white'' is falsified by a single black swan. More importantly, psychoanalysis and Marxism (Popper's primary targets) make no falsifiable predictions and are therefore not scientific.
+
+Popper's \emph{The Logic of Scientific Discovery} (1934, German; 1959, English) is widely considered the single most important contribution to philosophy of science ever written. His contributions to peer review procedures and to demarcating genuine science from pseudoscience are immense, even though his naive falsificationism is now widely recognized as incomplete.
+
+\textbf{Limitation:} The history of science shows that scientists rarely abandon theories when they are falsified. Newton's gravitational theory was falsified by early observations of the moon's orbit --- and was correctly maintained anyway. What Popper describes is prescriptive (what science should do), not descriptive (what scientists actually do).
+
+\subsubsection{Kuhn: Paradigm Shifts}
+
+Thomas Kuhn (1922--1996) responded to Popper with a historical account rather than a prescriptive one. His \emph{The Structure of Scientific Revolutions} (1962) argued that science does not progress by continuous falsification but through periods of \emph{normal science} --- puzzle-solving within an accepted paradigm --- punctuated by revolutionary \emph{paradigm shifts} when anomalies accumulate to crisis level.
+
+Normal science is not falsificationist; it presupposes the paradigm is true and works to extend it. Paradigms shift not because they are falsified but because anomalies accumulate, a crisis develops, and a competing framework emerges that better accommodates the full body of evidence. Kuhn's example: the Copernican Revolution did not occur because Ptolemaic astronomy was falsified --- it occurred because the accumulation of corrections to account for observations became untenable.
+
+\textbf{The Kuhn--Popper Debate (1965):} At the University of London's International Colloquium in the Philosophy of Science, Kuhn and Popper engaged directly. Popper was more idealistic, urging scientists to hold themselves accountable beyond their paradigm. Kuhn was more pragmatic, arguing that Popper's account only described extraordinary science and missed the structure of how science normally operates. The conflict concerned the future of science and the standards scientists should be held to.
+
+\subsubsection{Lakatos: Research Programmes}
+
+Imre Lakatos (a student of Popper, later a colleague) confronted Popper's falsificationism with the historical record and developed the \emph{methodology of scientific research programmes}. A research programme has a ``hard core'' of central assumptions protected by a ``protective belt'' of auxiliary hypotheses. Falsifying evidence hits the belt, not the core. Progress occurs when the programme generates new, testable predictions; degeneration occurs when it only accommodates existing anomalies without prediction.
+
+Lakatos's framework explains why scientists rationally maintain theories in the face of anomalies --- they are protecting a progressive research programme, not irrationally ignoring disconfirming evidence.
+
+\subsubsection{Feyerabend: Epistemological Anarchism}
+
+Paul Feyerabend (1924--1994) argued in \emph{Against Method} (1975) that no description of scientific method is broad enough to include all approaches actually used by scientists, and that there are no useful, exception-free methodological rules. His conclusion: if one rule must be named, it is ``anything goes.'' Science progresses by violating methodology, not by following it.
+
+This remains the most radical position in philosophy of science. Feyerabend is not arguing that science is worthless but that its \emph{method} is a retrospective myth imposed on a messier reality. His critics --- including Popper and Gauch (2003) --- strongly disagree.
+
+\subsection{Module 4: Integrity and Reproducibility}
+
+\subsubsection{The Replication Crisis}
+
+The replication crisis --- also called the reproducibility or replicability crisis --- refers to widespread failures to reproduce published scientific results. Because reproducibility is the cornerstone of the scientific method, such failures directly challenge the credibility of large portions of the scientific corpus. The phrase was coined in the early 2010s as awareness of the problem grew.
+
+\textbf{Key data points:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Study} & \tableheader{Field} & \tableheader{Finding} \\
+\midrule
+Reproducibility Project (2015) & Psychology & 36\% of 100 studies replicated; effect sizes averaged 50\% of original \\
+Nature Survey (2016) & All sciences (n=1,576) & 70\%+ failed to reproduce another's results; 50\%+ failed to reproduce their own \\
+US Federal Reserve (2015) & Economics & 49\% of 59 studies from 13 journals replicated successfully \\
+Fanelli (2010) & Psychiatry/Psychology & 91.5\% of studies confirmed hypothesized effects (improbably high) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Structural Causes}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Publication bias:} Journals prioritize novel and positive results, so negative findings and replication studies rarely appear.
+  \item \textbf{P-hacking:} Manipulating data analysis (running multiple tests, selective exclusion) until p $<$ 0.05 is achieved.
+  \item \textbf{HARKing (Hypothesizing After Results are Known):} Presenting post-hoc hypotheses as if they were predicted in advance.
+  \item \textbf{Publish-or-perish culture:} Incentive structures that reward quantity over quality and novelty over rigor.
+  \item \textbf{Insufficient documentation:} Study descriptions often lack sufficient detail for replication, and data/code are rarely shared.
+\end{itemize}
+
+Philosopher and historian Jerome Ravetz predicted this crisis in 1971, arguing that as science scaled from small research communities to ``big science,'' its internal quality control would suffer as the shared norms that held smaller communities accountable became impossible to maintain at scale.
+
+\subsubsection{Open Science Responses}
+
+The open science movement addresses the replication crisis through transparency, collaboration, and accessibility. Key interventions include:
+
+\textbf{Preregistration:} Researchers log hypotheses, study protocol, and anticipated statistical analyses before data collection, making the distinction between confirmatory and exploratory analysis explicit and verifiable.
+
+\textbf{Open data and code:} Making raw data and analysis pipelines publicly available enables direct replication and error detection. Tools like StatCheck identify statistical inconsistencies automatically.
+
+\textbf{Registered reports:} Peer review of study design before data collection, with acceptance contingent on methodology rather than results, directly counters publication bias.
+
+\textbf{Preprint servers} (arXiv, bioRxiv): Accelerate dissemination and invite criticism before formal peer review, decoupling publication from quality gatekeeping.
+
+\textbf{Metascience} has emerged as a new discipline using empirical research methods to study research practices themselves --- applying the scientific method to the scientific method.
+
+\subsection{Module 5: AI and Future Trajectories}
+
+\subsubsection{The Current Landscape (2024--2026)}
+
+AI is disrupting scientific discovery at multiple stages of the hypothesis--test--revise loop. The transition from large language models as writing assistants to LLMs as active participants in hypothesis generation represents a qualitative shift.
+
+\textbf{FutureHouse} (MIT-founded, 2024--2025) has deployed a suite of AI agents: Crow (literature synthesis, formerly PaperQA), Owl (experiment detection, formerly ``Has Anyone''), and Falcon (deep multi-source review). The platform's thesis is that ``natural language is the real language of science'' and that discoveries are represented and reasoned about in text, not in DNA sequences or protein structures. One researcher used the platform to identify a candidate gene for polycystic ovary syndrome and generate a treatment hypothesis.
+
+\textbf{FieldSHIFT} (Tufts/Harvard, 2024): An in-context learning framework using LLMs to generate novel hypotheses by mapping concepts between disparate fields. It generated quantitatively significant predictions about gene overlap between cognitive processes and developmental morphogenesis, which were then validated bioinformatically.
+
+\textbf{Ludwig \& Mullainathan (2024)}, published in the \emph{Quarterly Journal of Economics}, demonstrated ML as a tool for hypothesis generation: given only the pixels in defendants' mugshots, an algorithm accounted for up to half of predictable variation in judge decisions. Their framework produced hypotheses that were both novel (not explained by known demographics) and not tacitly known to experts.
+
+\subsubsection{The Popperian Challenge}
+
+AI hypothesis generation raises a fundamental epistemological question: does an AI-generated hypothesis satisfy Popper's falsifiability criterion in the same way a human-generated one does?
+
+The answer is complicated by the fact that AI systems generate hypotheses through latent-space proximity in their training data --- statistical patterns, not causal mechanisms. ``Sceptics rightly warn that latent-space proximity does not equate to causation and that biases in training data can skew suggested hypotheses toward well-studied pathways'' (Frontiers in Artificial Intelligence, 2025). A hypothesis that is technically testable but is generated by an algorithm systematically biased toward known results is not scientifically novel in the meaningful sense.
+
+The next frontier lies in coupling generative models with causal inference tools and active-learning loops --- iteratively steering agents toward genuinely unexplored parameter regions.
+
+\subsubsection{Self-Driving Laboratories}
+
+Beyond hypothesis generation, fully automated experimental systems --- ``self-driving laboratories'' --- are beginning to close the full scientific loop. These systems can propose hypotheses, design experiments, execute them robotically, analyze results, and revise hypotheses without human intervention at the operational level. CAPCOM gates (human oversight at wave boundaries) are the appropriate governance response: autonomous execution within human-defined boundaries, with obligatory review before proceeding to the next wave.
+
+This is, not coincidentally, the architecture of GSD.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Boundary Type} & \tableheader{Guidance} \\
+\midrule
+Non-Western traditions & ABSOLUTE & Use nation/culture-specific attribution (never ``Eastern science'' or generic groupings) \\
+Indigenous knowledge systems & GATE & Requires nation-specific OCAP® consultation before inclusion; defer to dedicated mission \\
+AI validity claims & ANNOTATE & Distinguish between AI-generated hypotheses and validated scientific findings \\
+Replication crisis data & GATE & Cite specific studies and sample sizes; never generalize ``science is broken'' \\
+Statistical claims & ANNOTATE & Always specify the statistical test, p-value convention, and effect size metric \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Philosophical Texts}
+\begin{itemize}[leftmargin=1.5em]
+  \item Popper, K.R. (1959). \emph{The Logic of Scientific Discovery}. Hutchinson, London.
+  \item Kuhn, T.S. (1962). \emph{The Structure of Scientific Revolutions}. University of Chicago Press.
+  \item Feyerabend, P. (1975). \emph{Against Method}. New Left Books, London.
+  \item Lakatos, I. (1970). Falsification and the methodology of scientific research programmes. In \emph{Criticism and the Growth of Knowledge}. Cambridge University Press.
+  \item Bacon, F. (1620). \emph{Novum Organum}. London.
+  \item Bernard, C. (1865). \emph{An Introduction to the Study of Experimental Medicine}. Paris.
+  \item Mill, J.S. (1843). \emph{A System of Logic}. London.
+\end{itemize}
+
+\subsubsection{Encyclopedia and Reference Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Stanford Encyclopedia of Philosophy: Scientific Method entry. \url{plato.stanford.edu/entries/scientific-method/}
+  \item Internet Encyclopedia of Philosophy: Karl Popper entry. \url{iep.utm.edu/pop-sci/}
+  \item Wikipedia: History of Scientific Method. \url{en.wikipedia.org/wiki/History_of_scientific_method}
+  \item Wikipedia: Replication crisis. \url{en.wikipedia.org/wiki/Replication_crisis}
+  \item Wikipedia: Kuhn--Popper debate. \url{en.wikipedia.org/wiki/Kuhn-Popper_debate}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=1.5em]
+  \item Open Science Collaboration (2015). Estimating the reproducibility of psychological science. \emph{Science}, 349(6251).
+  \item Baker, M. (2016). 1,500 scientists lift the lid on reproducibility. \emph{Nature}, 533, 452--454.
+  \item Ludwig, J., \& Mullainathan, S. (2024). Machine learning as a tool for hypothesis generation. \emph{The Quarterly Journal of Economics}, 139(2), 751--827.
+  \item O'Brien, T., et al.\ (2024). Machine learning for hypothesis generation in biology and medicine: FieldSHIFT. \emph{Digital Discovery}, RSC Publishing.
+  \item PMC (2021). The Scientific Method: A Need for Something Better? \url{pmc.ncbi.nlm.nih.gov/articles/PMC7965632/}
+  \item Frontiers in Artificial Intelligence (2025). AI, agentic models and lab automation for scientific discovery. \url{frontiersin.org}
+  \item Munafò, M.R., et al.\ (2017). A manifesto for reproducible science. \emph{Nature Human Behaviour}, 1(1), 0021.
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, curriculum-ready research reference on the scientific method comprising five research modules and one synthesis document, totaling approximately 80,000--120,000 words of structured content. The output package will seed the College of Knowledge Epistemology department, serve as the philosophical foundation for the \emph{Space Between} proof companion, and provide a rigorous AI-age reframing of how humanity produces reliable knowledge.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  SCIENTIFIC METHOD MISSION — WAVE ARCHITECTURE
+
+  ┌─────────────────────────────────────────────────────────┐
+  │  WAVE 0: FOUNDATION                                     │
+  │  Paula (Haiku)                                          │
+  │  Shared schemas · Source index · Citation template      │
+  │  Sequential · ~2 context windows                        │
+  └───────────────────────────┬─────────────────────────────┘
+                              │
+           ┌──────────────────┼──────────────────┐
+           ▼                  │                  ▼
+  ┌─────────────────┐         │        ┌──────────────────┐
+  │  WAVE 1-A       │         │        │  WAVE 1-B        │
+  │  Track Alpha    │         │        │  Track Beta      │
+  │                 │         │        │                  │
+  │  M1: History    │  (CAPCOM│GATE)   │  M2: Mechanics   │
+  │  M3: Philosophy │         │        │  M4: Integrity   │
+  │                 │         │        │  M5: AI Futures  │
+  │  Sonnet + Opus  │         │        │  Sonnet (x2)     │
+  │  ~3 cxt windows │         │        │  ~4 cxt windows  │
+  └─────────────────┘         │        └──────────────────┘
+                              │
+                    ┌─────────▼─────────┐
+                    │  WAVE 2: SYNTHESIS │
+                    │  Opus             │
+                    │  Cross-module     │
+                    │  integration +    │
+                    │  through-line     │
+                    │  ~2 cxt windows   │
+                    └─────────┬─────────┘
+                              │
+                    ┌─────────▼──────────┐
+                    │  WAVE 3: PUBLISH   │
+                    │  Sonnet            │
+                    │  LaTeX compile +   │
+                    │  Index HTML +      │
+                    │  Verification      │
+                    │  ~1 cxt window     │
+                    └────────────────────┘
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} (Wave 0): Shared schemas, source index, citation templates, module interface contracts
+  \item \textbf{Research Layer} (Wave 1): Five parallel/semi-parallel document modules --- the core intellectual work
+  \item \textbf{Synthesis Layer} (Wave 2): Cross-module integration, philosophical through-line, GSD ecosystem connections
+  \item \textbf{Publication Layer} (Wave 3): LaTeX compilation, HTML index, verification matrix completion
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 1: Historical Evolution & 8+ periods, 3+ non-Western traditions & 15,000--25,000 words \\
+2 & Module 2: Core Mechanics & Induction/deduction, controls, statistics & 10,000--15,000 words \\
+3 & Module 3: Philosophical Frameworks & Popper/Kuhn/Lakatos/Feyerabend with primary text support & 20,000--30,000 words \\
+4 & Module 4: Integrity \& Reproducibility & Quantitative data, structural causes, open science responses & 10,000--15,000 words \\
+5 & Module 5: AI \& Future Trajectories & 2024+ sources, named systems, Popperian validity analysis & 10,000--15,000 words \\
+6 & Synthesis Document & 3+ explicit cross-module connections, GSD through-line & 5,000--8,000 words \\
+7 & LaTeX PDF & Compiles without errors, all criteria met & Full document \\
+8 & index.html & File cards, usage instructions, LaTeX recompilation guide & Standard template \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} & \tableheader{Notes} \\
+\midrule
+Shared schema (W0) & None & Haiku & 8,000 & Source index, citation template \\
+M1: History & Schema & Sonnet & 35,000 & W1-A; CRAFT-HIST leads \\
+M3: Philosophy & Schema & Opus & 45,000 & W1-A; Opus required for nuance \\
+M2: Mechanics & Schema & Sonnet & 20,000 & W1-B; straightforward survey \\
+M4: Integrity & Schema & Sonnet & 20,000 & W1-B; quantitative focus \\
+M5: AI Futures & Schema & Sonnet & 20,000 & W1-B; 2024+ sources \\
+Synthesis & M1--M5 & Opus & 25,000 & W2; sequential, judgment-heavy \\
+LaTeX compile & Synthesis & Sonnet & 8,000 & W3; 3-pass XeLaTeX \\
+Index HTML & PDF & Sonnet & 5,000 & W3; standard template \\
+Verification & All & Sonnet & 6,000 & W3; criteria matrix \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total Estimated Tokens:}} & \textbf{192,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Reason} & \tableheader{Allocation} \\
+\midrule
+Philosophy synthesis & Opus & Requires nuanced judgment: Popper vs.\ Kuhn tensions, Lakatos's hard core logic & High \\
+Cross-module integration & Opus & Connecting 5 distinct modules requires holistic reasoning & High \\
+Historical survey & Sonnet & Well-documented domain; systematic survey & Medium \\
+Mechanics, Integrity, AI & Sonnet & Structured content assembly from research sources & Medium \\
+Scaffolding, logging & Haiku & Deterministic template work & Low \\
+\midrule
+\multicolumn{3}{r}{\textbf{30/60/10 Allocation (Opus/Sonnet/Haiku):}} & \textbf{On target} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index \\
+1-A & Track Alpha & Parallel & Sonnet+Opus & M1 + M3 \\
+1-B & Track Beta & Parallel & Sonnet (x2) & M2 + M4 + M5 \\
+2 & Synthesis & Sequential & Opus & Integration doc + through-line \\
+3 & Publication & Sequential & Sonnet & PDF, HTML, verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Create citation schema & Paula & JSON template for all sources \\
+Build source index & Paula & All research sources from Stage 2 indexed \\
+Define module interface & Paula & Inter-module reference protocol \\
+Set token budget checkpoints & Paula & Budget milestones per wave \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate:} Human reviews schemas before Wave 1 begins. Confirm module scope boundaries and any additions to the source list.
+
+\subsection{Wave 1-A: Track Alpha (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+M1: Historical survey (all periods) & EXEC-A & Sonnet & CRAFT-HIST assists with non-Western sections \\
+M3: Philosophy deep-dive & EXEC-B & Opus & Popper/Kuhn/Lakatos/Feyerabend; primary text citations required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1-B: Track Beta (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+M2: Core mechanics document & EXEC-C & Sonnet & Include worked examples across 3 domains \\
+M4: Replication crisis \& open science & EXEC-C & Sonnet & Quantitative data required; cite all statistics \\
+M5: AI futures survey & EXEC-D & Sonnet & Sources must be 2024+; verify all system names \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate:} Human reviews all five modules before Wave 2. Identify any content gaps, accuracy concerns, or scope creep before synthesis begins.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Cross-module integration analysis & INTEG (Opus) & Document of 3+ explicit connections \\
+GSD ecosystem through-line & FLIGHT (Opus) & 1,000--2,000 word closing narrative \\
+Curriculum structure proposal & CRAFT-EDU (Sonnet) & Module-to-lesson-unit mapping \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Assemble full LaTeX document & EXEC-A (Sonnet) & .tex source \\
+Three-pass XeLaTeX compilation & EXEC-A (Sonnet) & .pdf output, no errors \\
+Generate index.html & EXEC-B (Sonnet) & Landing page with download links \\
+Run verification matrix & VERIFY (Sonnet) & All 12 criteria checked \\
+Generate audit trail & LOG (Haiku) & Commit messages, session summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Stage 2 research reference (this document) is the primary cache asset; load it at the start of each Wave 1 agent context
+  \item Module schemas from Wave 0 should be included in every Wave 1 agent context to ensure consistent formatting
+  \item Wave 1-A and Wave 1-B can run simultaneously in separate context windows; they share no intermediate dependencies
+  \item Wave 2 synthesis agent receives all five completed modules as context; allocate a full context window
+  \item Wave 3 agents receive the synthesis document + this mission package; they do not need full module content
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Est.\ Input} & \tableheader{Est.\ Output} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 5,000 & 8,000 & Schema and index creation \\
+Wave 1-A (x2) & 40,000 & 80,000 & Two parallel contexts \\
+Wave 1-B (x2) & 40,000 & 60,000 & Two parallel contexts \\
+Wave 2 & 150,000 & 25,000 & All 5 modules as input \\
+Wave 3 & 50,000 & 15,000 & Synthesis + mission as input \\
+\midrule
+\textbf{Total} & \textbf{285,000} & \textbf{188,000} & \textbf{~8--12 context windows} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Schema]──────────────────────────────────┐
+        │                                        │
+        ├──► [W1-A: M1 History]     (parallel)  │
+        │    [W1-A: M3 Philosophy]  (parallel)  │
+        │                                        │
+        └──► [W1-B: M2 Mechanics]   (parallel)  │
+             [W1-B: M4 Integrity]   (parallel)  │
+             [W1-B: M5 AI Futures]  (parallel)  │
+                                                │
+  [CAPCOM gate: Human review all 5 modules]     │
+              │                                  │
+              ▼                                  │
+         [W2: Synthesis] ◄───────────────────────┘
+              │
+              ▼
+  [CAPCOM gate: Human reviews synthesis]
+              │
+              ▼
+  [W3: LaTeX PDF + HTML + Verification]
+              │
+              ▼
+          [DONE ✓]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Gate Action} \\
+\midrule
+Safety-Critical & 4 & Mandatory & BLOCK on failure \\
+Core Functionality & 12 & High & Flag, report, human decides \\
+Integration & 6 & Medium & Log, continue \\
+Edge Case & 4 & Low & Log \\
+\midrule
+\textbf{Total} & \textbf{26} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & Non-Western attribution accuracy & No generic ``Eastern science'' language; all traditions named with culture-specific attribution \\
+SC-02 & AI validity claims appropriately hedged & No AI-generated hypotheses presented as validated scientific findings without explicit qualification \\
+SC-03 & Statistical claims attributed & Every percentage, replication rate, and survey figure has a named source with sample size \\
+SC-04 & Indigenous knowledge boundary respected & No Indigenous knowledge system content included without nation-specific attribution; defer to OCAP® mission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{5cm}L{3.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Historical arc: 8+ periods, 3+ non-Western traditions & SC-01, CORE-01 & \textit{Pending} \\
+2 & Core mechanics: induction/deduction, 3 worked examples & CORE-02, CORE-03 & \textit{Pending} \\
+3 & Philosophy: Popper/Kuhn/Lakatos/Feyerabend with primary texts & CORE-04, CORE-05 & \textit{Pending} \\
+4 & Replication crisis: Nature survey + Repro.\ Project cited & SC-03, CORE-06 & \textit{Pending} \\
+5 & AI landscape: 2024+ sources, named systems & CORE-07, CORE-08 & \textit{Pending} \\
+6 & Cross-module integration: 3+ explicit connections & INTEG-01 & \textit{Pending} \\
+7 & GSD ecosystem through-line present & INTEG-02 & \textit{Pending} \\
+8 & Curriculum-ready: each module has learning objectives & CORE-09 & \textit{Pending} \\
+9 & Source quality: all claims attributed, no entertainment media & SC-03, CORE-10 & \textit{Pending} \\
+10 & Non-Western sections present with specific attribution & SC-01, SC-04 & \textit{Pending} \\
+11 & LaTeX compiles without errors (3 passes) & CORE-11 & \textit{Pending} \\
+12 & Package is self-contained for handoff & CORE-12 & \textit{Pending} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Opus & Mission direction; go/no-go gates; final synthesis authorship \\
+PLAN & Planner & Haiku & Wave decomposition; dependency management \\
+SCOUT & Research Agent & Sonnet & Gap-fill web research; source validation \\
+EXEC-A & Alpha Executor & Sonnet & M1 (History) + LaTeX assembly \\
+EXEC-B & Beta Executor & Opus & M3 (Philosophy) \\
+EXEC-C & Gamma Executor & Sonnet & M2 (Mechanics) + M4 (Integrity) \\
+EXEC-D & Delta Executor & Sonnet & M5 (AI Futures) + index.html \\
+CRAFT-HIST & History Specialist & Sonnet & Non-Western tradition research; Islamic Golden Age detail \\
+CRAFT-EDU & Education Specialist & Sonnet & Curriculum structure; learning objectives per module \\
+VERIFY & Verification Agent & Sonnet & Source validation; criteria matrix; SC test execution \\
+INTEG & Integration Agent & Opus & Cross-module connections; GSD ecosystem through-line \\
+CAPCOM & HITL Interface & --- & Human approval at wave boundaries \\
+SURGEON & Health Monitor & Sonnet & Research quality degradation detection \\
+LOG & Chronicle Agent & Haiku & Audit trail; commit messages; milestone summaries \\
+BUDGET & Resource Manager & Haiku & Token budget tracking; session planning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 active roles + 3 scaffold) \\
+Research Modules & 5 primary + 1 synthesis \\
+Estimated Word Count & 80,000--120,000 words \\
+Estimated Token Budget & 473,000 (input + output) \\
+Estimated Context Windows & 8--12 \\
+Estimated Sessions & 4--6 \\
+Parallel Tracks & 2 (Wave 1-A and 1-B) \\
+CAPCOM Gates & 2 (post-Wave 1, post-Wave 2) \\
+Safety-Critical Tests & 4 (all mandatory-pass) \\
+Total Tests & 26 \\
+LaTeX Compilation Passes & 3 (XeLaTeX, nonstopmode) \\
+Primary Output Destination & \texttt{tibsfox.com/Missions/scientific-method/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily Through-Line Echo}
+
+\medskip
+
+The scientific method is not a procedure --- it is a commitment to revision. Every GSD wave is a hypothesis. Every CAPCOM gate is a falsification test. Every retrospective is the revision step. When the College of Knowledge teaches students how scientists know things, it is teaching the same logic that underlies every architectural decision in this ecosystem: hold your beliefs lightly, test them honestly, and revise without ego. The spaces between observation and conclusion are where thinking happens. That is where knowledge lives.
+
+\medskip
+
+\textit{--- Miles Tiberius Foxglove, The Space Between}
+\end{quotebox}
+
+\end{document}
