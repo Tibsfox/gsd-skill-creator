@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scientific Method — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A237E;
+    --gold: #F57F17;
+    --green: #1B5E20;
+    --indigo: #283593;
+    --navy-light: #E8EAF6;
+    --gold-light: #FFF8E1;
+    --border: #C5CAE9;
+    --subtle: #757575;
+    --dark: #212121;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FAFAFA;
+    color: var(--dark);
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--indigo) 60%, #0D47A1 100%);
+    color: white;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--gold);
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(245,127,23,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(245,127,23,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,127,23,0.9);
+    margin-bottom: 14px;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: rgba(245,127,23,0.9); }
+  header .subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 24px;
+  }
+  .pipeline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .pipeline span { color: rgba(245,127,23,0.9); }
+
+  /* ── MAIN ────────────────────────────────────────────────────── */
+  main { max-width: 900px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  /* ── FILE CARDS ──────────────────────────────────────────────── */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 48px; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 26px;
+    box-shadow: 0 2px 8px rgba(26,35,126,0.08);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover { box-shadow: 0 6px 24px rgba(26,35,126,0.14); transform: translateY(-2px); }
+
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .card-icon.pdf { background: var(--navy-light); }
+  .card-icon.tex { background: var(--gold-light); }
+
+  .card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+  .card p { font-size: 13px; color: var(--subtle); margin-bottom: 18px; line-height: 1.5; }
+
+  .btn-download {
+    display: inline-block;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-primary { background: var(--navy); color: white; }
+  .btn-primary:hover { background: #0D1B6E; }
+  .btn-secondary { background: var(--gold-light); color: var(--gold); border: 1px solid var(--gold); }
+  .btn-secondary:hover { background: var(--gold); color: white; }
+
+  /* ── SECTION LABEL ───────────────────────────────────────────── */
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+
+  /* ── STAGES GRID ─────────────────────────────────────────────── */
+  .stages { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+  @media (max-width: 650px) { .stages { grid-template-columns: 1fr; } }
+
+  .stage {
+    background: white;
+    border-left: 4px solid var(--border);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 16px;
+  }
+  .stage.s1 { border-color: var(--navy); }
+  .stage.s2 { border-color: var(--gold); }
+  .stage.s3 { border-color: var(--green); }
+
+  .stage-num {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stage.s1 .stage-num { color: var(--navy); }
+  .stage.s2 .stage-num { color: var(--gold); }
+  .stage.s3 .stage-num { color: var(--green); }
+
+  .stage h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .stage ul { list-style: none; padding: 0; }
+  .stage ul li { font-size: 12.5px; color: var(--subtle); padding: 2px 0 2px 12px; position: relative; }
+  .stage ul li::before { content: '\2013'; position: absolute; left: 0; color: var(--border); }
+
+  /* ── MODULES ─────────────────────────────────────────────────── */
+  .modules { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 48px; }
+  @media (max-width: 600px) { .modules { grid-template-columns: 1fr; } }
+
+  .mod {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .mod-badge {
+    min-width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--navy-light);
+    color: var(--navy);
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mod-badge.m2 { background: #E3F2FD; color: #0D47A1; }
+  .mod-badge.m3 { background: #F3E5F5; color: #6A1B9A; }
+  .mod-badge.m4 { background: #E8F5E9; color: var(--green); }
+  .mod-badge.m5 { background: var(--gold-light); color: #E65100; }
+  .mod-badge.m6 { background: #FFF8E1; color: #F57F17; }
+
+  .mod-text h5 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+  .mod-text p  { font-size: 12px; color: var(--subtle); line-height: 1.45; }
+
+  /* ── USAGE ───────────────────────────────────────────────────── */
+  .usage {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .usage ol { padding-left: 20px; }
+  .usage li { font-size: 14px; color: var(--dark); margin-bottom: 10px; line-height: 1.55; }
+  .usage li strong { color: var(--navy); }
+
+  /* ── RECOMPILE BOX ───────────────────────────────────────────── */
+  .recompile {
+    background: #1A1A2E;
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 40px;
+  }
+  .recompile .rc-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,127,23,0.9); margin-bottom: 10px; font-weight: 600; }
+  .recompile pre {
+    font-family: 'DM Sans Mono', 'DejaVu Sans Mono', monospace;
+    font-size: 13px;
+    color: #A5D6A7;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .recompile pre .comment { color: #6B8FA3; }
+
+  /* ── META ────────────────────────────────────────────────────── */
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    background: var(--navy-light);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 48px;
+  }
+  .meta-item { font-size: 12.5px; }
+  .meta-item .label { font-weight: 700; color: var(--navy); }
+  .meta-item .val { color: var(--subtle); }
+
+  /* ── QUOTE ───────────────────────────────────────────────────── */
+  blockquote {
+    border-left: 4px solid rgba(245,127,23,0.8);
+    padding: 16px 20px;
+    background: var(--gold-light);
+    border-radius: 0 8px 8px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #3E2000;
+    margin-bottom: 16px;
+  }
+  .quote-attr { font-size: 12px; color: var(--subtle); font-style: normal; font-family: 'DM Sans', sans-serif; }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--border);
+    padding: 24px;
+    border-top: 1px solid #E0E0E0;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 13px;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">GSD Research Mission Package</div>
+  <h1>The Scientific <span>Method</span></h1>
+  <div class="subtitle">Foundations of Empirical Inquiry &mdash; Full Pipeline Execution</div>
+  <div class="pipeline">
+    Vision <span>&rarr;</span> Research <span>&rarr;</span> Mission <span>|</span> Ready for GSD Orchestrator
+  </div>
+</header>
+
+<main>
+
+  <a href="../index.html" class="back-link">&larr; Back to SCM Overview</a>
+
+  <!-- META ROW -->
+  <div class="meta-row">
+    <div class="meta-item"><span class="label">Date: </span><span class="val">April 2026</span></div>
+    <div class="meta-item"><span class="label">Profile: </span><span class="val">Squadron (12 roles)</span></div>
+    <div class="meta-item"><span class="label">Status: </span><span class="val">Complete &mdash; 62,746 words</span></div>
+    <div class="meta-item"><span class="label">Pages: </span><span class="val">28</span></div>
+    <div class="meta-item"><span class="label">Modules: </span><span class="val">5 research + synthesis</span></div>
+    <div class="meta-item"><span class="label">Cluster: </span><span class="val">Science</span></div>
+  </div>
+
+  <!-- FILE CARDS -->
+  <div class="section-label">Package Files</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon pdf">&#128196;</div>
+      <h3>scientific_method_mission.pdf</h3>
+      <p>Complete 3-stage mission package &mdash; Vision Guide, Research Reference, and Mission execution plan. 28 pages, print-ready.</p>
+      <a href="scientific_method_mission.pdf" download class="btn-download btn-primary">Download PDF</a>
+    </div>
+    <div class="card">
+      <div class="card-icon tex">&#128221;</div>
+      <h3>scientific_method_mission.tex</h3>
+      <p>XeLaTeX source file. Fully editable: modify sections, update findings, add annotations, and recompile.</p>
+      <a href="scientific_method_mission.tex" download class="btn-download btn-secondary">Download .tex</a>
+    </div>
+  </div>
+
+  <!-- STAGES -->
+  <div class="section-label">Document Structure</div>
+  <h2>Three-Stage Pipeline</h2>
+  <div class="stages">
+    <div class="stage s1">
+      <div class="stage-num">Stage 1 &mdash; Vision</div>
+      <h4>Vision Guide</h4>
+      <ul>
+        <li>5-problem statement</li>
+        <li>Core concept + ASCII maps</li>
+        <li>Domain architecture diagram</li>
+        <li>5 research modules defined</li>
+        <li>12 success criteria</li>
+        <li>GSD ecosystem through-line</li>
+      </ul>
+    </div>
+    <div class="stage s2">
+      <div class="stage-num">Stage 2 &mdash; Research</div>
+      <h4>Research Reference</h4>
+      <ul>
+        <li>Historical arc (2600 BCE+)</li>
+        <li>Islamic Golden Age coverage</li>
+        <li>Popper / Kuhn / Lakatos / Feyerabend</li>
+        <li>Replication crisis data</li>
+        <li>AI hypothesis generation landscape</li>
+        <li>Annotated bibliography</li>
+      </ul>
+    </div>
+    <div class="stage s3">
+      <div class="stage-num">Stage 3 &mdash; Mission</div>
+      <h4>Mission Package</h4>
+      <ul>
+        <li>Wave execution plan (W0&ndash;W3)</li>
+        <li>Component breakdown + token budget</li>
+        <li>Dependency graph (ASCII)</li>
+        <li>26-test test plan</li>
+        <li>4 safety-critical gate tests</li>
+        <li>12-role crew manifest</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="section-label">Research Modules</div>
+  <h2>Six Content Tracks</h2>
+  <div class="modules">
+    <div class="mod">
+      <div class="mod-badge">M1</div>
+      <div class="mod-text">
+        <h5>Historical Evolution</h5>
+        <p>2,600-year arc from Aristotle through the Islamic Golden Age to modern science. 10,913 words.</p>
+      </div>
+    </div>
+    <div class="mod">
+      <div class="mod-badge m2">M2</div>
+      <div class="mod-text">
+        <h5>Core Mechanics</h5>
+        <p>The operational loop, induction vs. deduction, controls, variables, statistical significance. 9,851 words.</p>
+      </div>
+    </div>
+    <div class="mod">
+      <div class="mod-badge m3">M3</div>
+      <div class="mod-text">
+        <h5>Philosophical Frameworks</h5>
+        <p>Popper, Kuhn, Lakatos, Feyerabend &mdash; the 1965 debate and research programmes. 20,086 words.</p>
+      </div>
+    </div>
+    <div class="mod">
+      <div class="mod-badge m4">M4</div>
+      <div class="mod-text">
+        <h5>Integrity &amp; Reproducibility</h5>
+        <p>The replication crisis, structural causes, open science responses. Quantitative data. 8,605 words.</p>
+      </div>
+    </div>
+    <div class="mod">
+      <div class="mod-badge m5">M5</div>
+      <div class="mod-text">
+        <h5>AI &amp; Future Trajectories</h5>
+        <p>FutureHouse, FieldSHIFT, self-driving labs, the Popperian challenge. Sources 2024+. 7,870 words.</p>
+      </div>
+    </div>
+    <div class="mod">
+      <div class="mod-badge m6">S</div>
+      <div class="mod-text">
+        <h5>Synthesis &mdash; The Spaces Between</h5>
+        <p>Cross-module integration, GSD through-line, curriculum structure proposal. 5,421 words.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- USAGE -->
+  <div class="section-label">How to Use This Package</div>
+  <h2>Handing Off to GSD Orchestrator</h2>
+  <div class="usage">
+    <ol>
+      <li><strong>Download both files</strong> (PDF and .tex) and place them in your GSD project directory.</li>
+      <li><strong>Open Claude Code</strong> and hand the PDF to your GSD orchestrator agent: <em>"Here is the mission package. Execute the Scientific Method mission."</em></li>
+      <li><strong>The orchestrator runs Wave 0</strong> (Foundation: schema, source index, outline) &mdash; Haiku model, sequential. Approve the outline before continuing.</li>
+      <li><strong>Wave 1 runs in parallel</strong> &mdash; Five writing agents produce the research modules. Historical arc, core mechanics, philosophy, integrity, and AI futures execute simultaneously.</li>
+      <li><strong>Human approval gate at end of Wave 1</strong> &mdash; Review all five modules against the 12 success criteria before authorizing synthesis. CAPCOM agent manages this checkpoint.</li>
+      <li><strong>Wave 2 synthesis</strong> &mdash; Opus model performs cross-module integration, the GSD through-line pass, and cross-reference compilation.</li>
+      <li><strong>Wave 3 publication</strong> &mdash; Final verification, index generation, and delivery to <code>Research/SCM/</code>.</li>
+    </ol>
+  </div>
+
+  <!-- RECOMPILE -->
+  <div class="recompile">
+    <div class="rc-label">Recompile LaTeX Source</div>
+    <pre><span class="comment"># Requires XeLaTeX (TeX Live 2023+) and DejaVu fonts</span>
+xelatex -interaction=nonstopmode scientific_method_mission.tex
+xelatex -interaction=nonstopmode scientific_method_mission.tex
+xelatex -interaction=nonstopmode scientific_method_mission.tex
+<span class="comment"># Three passes required for TOC, cross-references, and page count</span></pre>
+  </div>
+
+  <!-- QUOTE -->
+  <blockquote>
+    The scientific method is not a procedure &mdash; it is a commitment to revision. Every GSD wave is a hypothesis. Every CAPCOM gate is a falsification test. Every retrospective is the revision step. The spaces between observation and conclusion are where thinking happens. That is where knowledge lives.
+    <br><br>
+    <span class="quote-attr">&mdash; Miles Tiberius Foxglove, <em>The Space Between</em></span>
+  </blockquote>
+
+</main>
+
+<footer>GSD Research Mission Package &middot; The Scientific Method &middot; SCM &middot; April 2026 &middot; Science Cluster</footer>
+
+</body>
+</html>
