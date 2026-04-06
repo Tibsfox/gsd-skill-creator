@@ -267,7 +267,7 @@ This dual-production model makes aquaponics particularly attractive for food sov
 
 Phosphorus dynamics in aquaponics are more complex than nitrogen dynamics. Fish feed contains phosphorus; some is retained in fish bone and muscle tissue, some is excreted in feces as particulate matter that settles rather than entering the water column, and some dissolves into the recirculating water. Effective phosphorus capture requires either settling tanks to collect and process fish feces or worm composting systems (vermiaquaponics) that convert solid organic waste into plant-available nutrients. Without explicit management of the solid fraction, phosphorus can accumulate in sediments and periodically spike in water chemistry, requiring partial water exchange.
 
-### 4.3 Scale and Current Limitations
+### 4.5 Scale and Current Limitations
 
 Commercial aquaponic operations have demonstrated viability at the farm-to-restaurant scale, but several constraints limit expansion to the scales achieved by conventional hydroponic greenhouse operations.
 
@@ -389,7 +389,7 @@ The transition period is economically difficult. Input substitution during the e
 
 The long-term economic argument is compelling: a system that produces 50 pounds per acre of nitrogen from the atmosphere, mobilizes decades of legacy soil phosphorus, and generates healthy soil organic matter that reduces water stress vulnerability has structurally lower input costs than a system that must purchase all these services from external suppliers. The question is whether individual producers can finance the transition period — a policy and capital access question that falls outside this module's scope.
 
-### 5.5 Carbon Co-Benefits
+### 5.9 Carbon Co-Benefits
 
 Project Drawdown estimates the carbon sequestration potential of regenerative and managed grazing land at 2.6–13.6 gigatons of CO2 equivalent annually at global scale. This range reflects the diversity of regenerative practice implementations, soil types, climate zones, and baseline conditions across which the estimate must be applied.
 

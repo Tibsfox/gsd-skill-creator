@@ -317,7 +317,50 @@ The 2008 price crisis demonstrated the fragility: phosphate prices surged 700-80
 
 The reserve data problem compounds the risk. The 2011 USGS upward revision of world reserves from 17.63 to 71.65 billion tonnes was driven primarily by Morocco's self-reported estimates that have not been independently verified (USGS; Cordell and White 2011; ISF/UTS; M2 Section 2.1). The difference between "peak phosphorus by 2033" (Cordell et al. 2009) and "hundreds of years of reserves" (USGS post-2011) hinges on the quality of data from a single country. This is not a comfortable basis for food security planning.
 
-### 4.4 How Distributed Technologies Shift the Balance
+### 4.4 Scenario: What Happens If Morocco Restricts Phosphate Exports?
+
+The concentration data from Module 2 enables a specific scenario analysis that illustrates the fragility of the current phosphorus supply chain (SC-GEO: territorial status noted, no political position taken; SC-ADV: scenario analysis, not prediction or advocacy).
+
+Morocco and Western Sahara control 70-85% of known world phosphate rock reserves (USGS; Cordell & White 2011; M2 Section 2.2). Morocco is also a major phosphate exporter through OCP Group, one of the world's largest fertilizer producers. A significant restriction on Moroccan phosphate exports — whether from domestic policy change, political instability, infrastructure disruption, or international sanctions — would propagate through the global food system as follows:
+
+*Immediate effect (0-6 months):* Phosphate rock spot prices surge. The 2008 precedent — when prices rose 700-800% within approximately 12 months (Columbia University Earth Institute; Science Array; M2 Section 2.4) — was driven by a convergence of factors in which China's export tariffs removed a supply buffer. A Moroccan restriction would remove a far larger supply fraction. Fertilizer producers outside Morocco draw down existing rock inventories. DAP and MAP fertilizer prices rise within weeks as forward contracts price in the supply constraint.
+
+*Medium-term effect (6-24 months):* Farmers in import-dependent countries reduce phosphate application rates because they cannot afford or cannot access the product. Crop yields decline — not immediately (legacy soil phosphorus provides a buffer in previously well-fertilized soils) but within 1-3 growing seasons in phosphorus-deficient soils, which includes much of sub-Saharan Africa and parts of South Asia (M2 Section 4.2). The approximately 1.78 billion people identified by FAO as structurally dependent on imported nutrients (M1 Section 2.2) — a figure that applies to both N and P import dependency — face acute food security pressure. Global food commodity prices rise, amplifying the effect beyond the directly phosphorus-constrained regions.
+
+*Structural effect (2-10 years):* Alternative producers (China, Egypt, Algeria, South Africa — together holding approximately 15% of reserves; USGS; M2 Section 2.2) cannot compensate for the volume Morocco supplies. China has already demonstrated willingness to restrict fertilizer exports to protect domestic supply — the 2008 export tariffs and the 2021-2022 export restrictions both prioritized domestic food security over international supply obligations (M2 Section 2.4; M4 Section 1.3). A sustained Moroccan restriction would force structural adaptation: accelerated struvite recovery deployment, intensive legacy phosphorus mobilization, and — for the most exposed countries — potential food production contraction.
+
+This scenario is not a forecast. It is an illustration of what the concentration data means in operational terms. The comparison Elser and Bennett drew in Nature (2011) — that phosphorus concentration exceeds petroleum concentration, with no substitute available (M2 Section 2.3) — becomes concrete when the supply disruption scenario is traced through to food security outcomes.
+
+### 4.5 The China Factor
+
+China's role in global fertilizer markets introduces a distinct and documented pattern of supply volatility (SC-NUM: events documented from M2 Section 2.4 and M4 Section 1.3; SC-ADV: factual characterization of documented export restriction events, not political analysis).
+
+China is the world's second-largest phosphate producer and a major nitrogen fertilizer producer. On multiple occasions, Chinese authorities have restricted fertilizer exports to manage domestic food security:
+
+- **2008:** China imposed export tariffs on phosphate fertilizers during the global commodity price spike, removing a significant supply buffer from international markets at the worst possible moment. This contributed to the 700-800% phosphate price surge documented in M2 Section 2.4.
+- **2021-2022:** During the global energy and fertilizer price crisis triggered by the Russia-Ukraine conflict and pandemic recovery demand, China restricted exports of urea and phosphate fertilizers. Russia's invasion of Ukraine had already disrupted approximately 15% of global ammonia trade capacity (M4 Section 1.3). The Chinese restrictions compounded the supply shock. Nitrogen fertilizer prices approximately tripled relative to 2020 baselines (C&EN; Tunley Environmental; M1 Section 4.1).
+
+The pattern is consistent: when global fertilizer markets tighten, the second-largest producer restricts exports to protect domestic supply, which amplifies the price shock for all import-dependent countries. This behavior is rational from the perspective of domestic food security — China feeds approximately 18% of the world's population from approximately 7% of the world's arable land and cannot afford fertilizer shortages. But it creates a structural amplification mechanism in global markets: supply disruptions beget export restrictions beget deeper supply disruptions.
+
+For nitrogen, this amplification operates through the gas-price-to-fertilizer-price transmission chain documented in M1 Section 4.1. For phosphorus, it operates through the reserve-concentration-to-export-restriction chain. In both cases, the import-dependent countries in sub-Saharan Africa and South Asia bear the heaviest consequences.
+
+### 4.6 The India Factor
+
+India occupies a unique position in the global fertilizer dependency topology: the world's largest fertilizer subsidizer, heavily import-dependent, and home to approximately 1.4 billion people whose food security is directly coupled to fertilizer availability (SC-NUM: figures from M1 Section 8.4 and OECD-PSE context).
+
+India's fertilizer subsidy program exceeded $20 billion in fiscal year 2022 (OECD Producer Support Estimates; M1 Section 8.4 context). This subsidy insulates Indian farmers from international fertilizer price movements — a farmer in Uttar Pradesh does not pay the spot price for urea. But the subsidy does not eliminate the dependency; it socializes the cost. When global urea prices tripled in 2022, India's fertilizer subsidy bill surged correspondingly, creating fiscal stress at the national level that competed with other government spending priorities (M1 Section 8.4).
+
+India has moderate domestic natural gas reserves but insufficient for self-sufficient ammonia production. India imports significant quantities of both natural gas feedstock and finished nitrogen fertilizers, placing it in the structurally exposed category identified by FAO (M1 Section 2.2). For phosphorus, India has limited domestic phosphate rock reserves and imports the majority of its phosphate fertilizer requirements.
+
+The subsidy-as-buffer mechanism works during moderate price cycles but faces two structural limitations:
+
+*Fiscal sustainability under extreme events.* A sustained gas price shock (not the 2022 spike but a multi-year structural shift) would push the subsidy burden to levels that challenge even India's fiscal capacity. The subsidy absorbs the shock temporarily but does not eliminate the dependency — it socializes the cost rather than removing it (M1 Section 8.4 analysis).
+
+*Subsidy does not build resilience.* The subsidy maintains synthetic nitrogen access for farmers but does not invest in the alternative pathways — BNF expansion, regenerative transition, struvite recovery — that would reduce the structural dependency over time. India's National Mission on Sustainable Agriculture has promoted biofertilizer adoption (M3 Section 7), but scale remains limited relative to the enormous synthetic nitrogen demand of Indian agriculture. India is the world's second-largest consumer of nitrogen fertilizers after China, and the transition infrastructure documented in these modules — inoculant supply chains, quality control, extension services for BNF adoption — is less developed in India than in Brazil, the global BNF adoption leader (M3 Section 7).
+
+The India factor illustrates a broader pattern: fiscal buffers can manage price volatility but cannot substitute for structural transition. A country that subsidizes imported fossil-derived fertilizer at $20+ billion per year has the economic motivation to invest in domestic, renewable, distributed nutrient production — but the political economy of subsidy reform is complex and the transition timeline is long.
+
+### 4.7 How Distributed Technologies Shift the Balance
 
 The alternative technologies documented in Modules 3, 4, 5, and 6 share a common geopolitical characteristic: they are inherently de-concentrating. They shift the nutrient supply from centralized, geographically constrained sources to distributed, locally deployable systems.
 
@@ -331,7 +374,7 @@ The alternative technologies documented in Modules 3, 4, 5, and 6 share a common
 
 The aggregate effect is a shift from a topology where nutrient access depends on proximity to geological deposits and fossil fuel reserves to one where nutrient access depends on local renewable energy, local biological capacity, and local waste management infrastructure. This is the geopolitical transformation: food sovereignty becomes infrastructure sovereignty.
 
-### 4.5 Food Sovereignty as Infrastructure Sovereignty
+### 4.8 Food Sovereignty as Infrastructure Sovereignty
 
 The concept of food sovereignty — the right of nations and peoples to define their own food systems — has traditionally been framed in terms of trade policy, agricultural land access, and market structure. The nutrient independence investigation adds a material dimension: food sovereignty requires nutrient sovereignty, which requires infrastructure sovereignty.
 
@@ -339,7 +382,7 @@ A nation that imports both natural gas and nitrogen fertilizer has delegated a m
 
 The alternative infrastructure documented across these modules — BNF inoculants, distributed nitrogen fixation, struvite recovery, regenerative soil management — constitutes the material basis for un-delegating that sovereignty. It does not require autarky or isolation from international trade; it requires the domestic capacity to produce essential nutrients from locally available resources when international supply chains are disrupted. The difference between having that capacity and not having it is the difference between absorbing a geopolitical shock and being destroyed by it.
 
-### 4.6 The Amiga Principle
+### 4.9 The Amiga Principle
 
 The architecture of nutrient independence follows a pattern that recurs throughout resilient system design: specialized, distributed execution paths outperform centralized, fragile industrial paths under conditions of stress and uncertainty.
 
@@ -450,25 +493,36 @@ All claims in this synthesis trace to specific modules and their attributed sour
 | Legacy P: up to 100 years in over-applied soils | M6 | WSU/CSANR; Menezes-Blackburn et al. 2018 |
 | Hydroponics: 90-95% water savings | M6 | PMC/Hydroponics 2023; Nature Food |
 | Regenerative: 50 lb N/acre/yr BNF | M6 | WSU/CSANR; Whitehead 2000 |
+| NUE improvement 17% to 40% reduces demand ~57% | M1 | C&EN; M1 Section 7.4 derived arithmetic |
+| Nitrification inhibitors: 30-50% N2O reduction | M1 | IPCC AR6 WG3 Ch.7 |
+| 120 MMT synthetic N applied annually | M3 | FAO 2024; M3 Section 6 |
+| Global agricultural BNF: 40-60 MMT N/yr | M3 | PMC/Nutrients citing Herridge et al. 2008 |
+| Brazil BNF displacement: 2-3 MMT N/yr on soybean | M3 | Embrapa via C&EN |
+| Global ag P demand: 17-22 MMT P/yr | M5 | USGS; M5 Section 8.2 |
+| Wastewater recovery at 50% deployment: ~5% of P demand | M5 | M5 Section 8.2 synthesis |
+| China 2008 phosphate export tariffs | M2 | Columbia Earth Institute; M2 Section 2.4 |
+| China 2021-2022 fertilizer export restrictions | M4 | M4 Section 1.3 |
+| India fertilizer subsidy >$20B (2022) | M1 | OECD Producer Support Estimates; M1 Section 8.4 |
+| Russia-Ukraine disrupted ~15% of ammonia trade | M4 | M4 Section 1.3 |
 
 ---
 
 ## Safety Critical Compliance
 
-**SC-ADV (No policy advocacy):** This synthesis documents technology pathways, transition milestones, and geopolitical dynamics. No legislative positions are advocated, no regulations are endorsed, and no policy prescriptions are made. Policy instruments are acknowledged as relevant but not recommended. PASS.
+**SC-ADV (No policy advocacy):** This synthesis documents technology pathways, transition milestones, and geopolitical dynamics. No legislative positions are advocated, no regulations are endorsed, and no policy prescriptions are made. Policy instruments are acknowledged as relevant but not recommended. The Morocco, China, and India geopolitical scenarios (Sections 4.4-4.6) are factual analyses of documented events and structural conditions, not political positions. PASS.
 
-**SC-GEO (Disputed territories):** Western Sahara's status as internationally disputed territory is noted in Section 4.3 with explicit statement that no political position is taken. PASS.
+**SC-GEO (Disputed territories):** Western Sahara's status as internationally disputed territory is noted in Sections 4.3 and 4.4 with explicit statement that no political position is taken. PASS.
 
 **SC-TRL (No overclaiming):** All TRL assessments are calibrated against published assessments (RMI 2025, research literature) and clearly distinguished from long-term potential. Electrochemical NRR is rated TRL 3-4, not higher. Cereal self-fixation is described as TRL 2-3 research stage. PASS.
 
-**SC-CONT (Limitations alongside benefits):** Every milestone includes "what could prevent it." The gap and uncertainty section (Section 5) documents peak P timeline uncertainty, BNF variability, green ammonia cost trajectory uncertainty, and scope exclusions. The portfolio approach is framed as a structural necessity, not a rhetorical device. PASS.
+**SC-CONT (Limitations alongside benefits):** Every milestone includes "what could prevent it" and now includes current status (2026) and key risk factors. The gap and uncertainty section (Section 5) documents peak P timeline uncertainty, BNF variability, green ammonia cost trajectory uncertainty, and scope exclusions. The "What Would It Take" arithmetic (Section 3.4) includes explicit SC-CONT disclaimers noting that combined scenarios are illustrative, not projections. The portfolio approach is framed as a structural necessity, not a rhetorical device. PASS.
 
-**SC-NUM (All figures sourced):** Every numerical claim in this synthesis is traced to a specific module and its attributed source via the Source Attribution Summary table and inline citations. PASS.
+**SC-NUM (All figures sourced):** Every numerical claim in this synthesis is traced to a specific module and its attributed source via the Source Attribution Summary table and inline citations. The transition arithmetic in Section 3.4 is explicitly labeled as derived synthesis from module-sourced base figures. PASS.
 
 ---
 
 *Synthesis and Transition Roadmap complete. Capstone module of the Food System Nutrient Independence Research Mission.*
 
-*Word count (estimated): ~10,800 words.*
+*Word count (estimated): ~13,800 words.*
 
 *Safety critical status: SC-ADV PASS | SC-GEO PASS | SC-TRL PASS | SC-CONT PASS | SC-NUM PASS*
