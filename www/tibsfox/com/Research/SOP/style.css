@@ -1,0 +1,25 @@
+/* SOP — Engineering Standard Operating Procedures
+ * Steel blue/navy theme
+ * brand.css provides base reset, typography, card-grid, stats, header, main, footer
+ */
+:root {
+  --deep: #263238;
+  --accent: #1565C0;
+  --secondary: #0277BD;
+  --tertiary: #37474F;
+  --cream: #ECEFF1;
+  --mist: #CFD8DC;
+  --frost: #E3F2FD;
+  --page-bg: var(--cream);
+  --page-text: #212121;
+  --page-text-light: #546E7A;
+  --link: var(--accent);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header { background: linear-gradient(135deg, var(--deep) 0%, #1a237e 50%, var(--accent) 100%); border-bottom: 4px solid var(--accent); }
+.subtitle { color: rgba(255,255,255,0.85); }
+body { background: var(--page-bg); }
+.tag-found { background: var(--frost); color: var(--accent); }
+.tag-model { background: #E8EAF6; color: #283593; }
