@@ -95,6 +95,60 @@ The concentration is stark: five countries hold an estimated 85% or more of worl
 
 For the United States specifically, USGS estimates domestic reserves at approximately 1 billion tonnes, with Florida and North Carolina as the primary active production regions and Idaho as an additional significant deposit (USGS Mineral Commodity Summaries: Phosphate Rock). At 2020s-era production rates, domestic reserves represent a roughly 25-year supply, after which the United States would become wholly dependent on imports — primarily from Morocco — for agricultural phosphate (Columbia University Earth Institute, "Phosphorus: Essential to Life"). The US already imports heavily from Morocco despite having active domestic production.
 
+### 2.2a US Domestic Supply: Declining Grades, Environmental Constraints, and the Import Dependency Trajectory
+
+The United States occupies an unusual and increasingly precarious position in the global phosphate supply chain. It was once a net exporter of phosphate fertilizers and a dominant force in global phosphate trade. That position has eroded steadily over the past four decades, and the trajectory of domestic reserves, ore quality, and extraction economics points toward growing import dependency in the coming decades — a shift with significant strategic implications.
+
+#### Florida: Declining Grade and Environmental Headwinds
+
+Florida has been the historical center of US phosphate production since the late 19th century. The Central Florida Phosphate District, spanning roughly 4,000 km² across Polk, Hillsborough, Manatee, Hardee, and DeSoto counties, contains the largest remaining domestic reserves and accounts for the majority of US phosphate rock output. However, the production picture in Florida is constrained by two intersecting trends.
+
+**Ore grade decline.** The highest-grade phosphate matrix in Florida's Bone Valley Formation has been substantially mined out. Remaining ore tends to be lower grade, thinner, and more intermixed with overburden. Processing more rock per unit of P₂O₅ recovered increases water consumption, sulfuric acid consumption, energy costs, and phosphogypsum waste generation per tonne of product. The economic margin per tonne of phosphoric acid produced from Florida ore has therefore narrowed over time, and new mine permitting is required to access progressively less favorable deposits (USGS; Florida Department of Environmental Protection).
+
+**Environmental permitting.** New phosphate mine development in Florida requires permits under the federal Clean Water Act Section 404 (dredge-and-fill permits from the US Army Corps of Engineers) and state environmental review. The karst geology of central Florida — characterized by a thin soil profile over porous limestone underlain by the Floridan Aquifer System, which supplies drinking water to millions of residents — makes phosphate mining permitting increasingly contentious. Overburden removal disturbs the confining layers above the aquifer, creating pathways for surface contamination. Wetland impacts associated with mining are extensive; Florida law requires mitigation but the overall land footprint of active and legacy mining sites is substantial (Florida Department of Environmental Protection; Army Corps of Engineers permitting records).
+
+Several proposed mine expansions in Florida have faced extended permitting delays or opposition through the 2010s and 2020s, slowing the permitting pipeline for new production areas. The combination of permitting difficulty and declining ore quality means that Florida's contribution to domestic production is unlikely to increase and may decline as existing permitted areas are exhausted.
+
+#### Idaho and Utah: Harder to Extract, Lower Current Development
+
+The Western Phosphate Field, centered in Caribou County in southeastern Idaho and extending into adjacent areas of Utah and Wyoming, contains the second-largest concentration of domestic phosphate rock. Idaho's known reserves are substantial — USGS estimates several hundred million tonnes of economically relevant rock — and the deposits are in the Permian Phosphoria Formation, a regionally extensive sedimentary unit.
+
+However, several factors limit Western Phosphate Field production relative to its reserve size:
+
+**Depth and terrain.** Phosphoria Formation deposits in Idaho are often in mountainous terrain with significant overburden depths. Open-pit mining requires substantial stripping ratios (overburden removed per tonne of ore), increasing costs relative to Florida's relatively flat, shallow deposits.
+
+**Selenium contamination.** The Phosphoria Formation is naturally enriched in selenium, and selenium-bearing leachate from mine waste rock has contaminated streams and soils in some Idaho mining areas, causing documented impacts on aquatic life and livestock health (USGS; EPA Superfund program, Smoky Canyon Mine area). This adds environmental management costs and regulatory complexity to Idaho operations.
+
+**Cadmium in Western ore.** Western Phosphate Field rock has variable cadmium content; some formations fall within the range acceptable for EU markets, others do not. The cadmium profile of Idaho ore has been a consideration in its marketability for some export applications.
+
+As a result, while Idaho produces phosphate and has significant reserves, its production scale is considerably smaller than Florida's, and significant expansion faces cost and environmental management barriers that are not easily overcome with current technology and prices (USGS Mineral Commodity Summaries; Idaho Department of Environmental Quality).
+
+#### The Import Dependency Trajectory
+
+The structural consequence of declining Florida ore quality, environmental permitting constraints on new Florida mine development, and the limited scalability of Western Phosphate Field production is a widening gap between US domestic phosphate rock production and US fertilizer demand — a gap that has historically been filled by imports, primarily from Morocco.
+
+**Historical shift.** In the 1980s, the United States was a significant phosphate exporter. Domestic production capacity exceeded domestic consumption, and US producers — primarily Cargill, Mosaic (then IMC Global and Cargill fertilizer operations), and others — exported to Europe, Latin America, and Asia. By the 2000s, the balance had shifted and the US had become a net importer of phosphate rock and phosphoric acid on a consistent basis. By the 2020s, the United States imports a substantial fraction of its phosphate fertilizer requirements, with Morocco as the dominant source (USGS; TFI — The Fertilizer Institute).
+
+**Morocco's share of US imports.** USGS trade data for the 2018–2023 period consistently shows Morocco as the largest single source of US phosphate rock imports, in some years accounting for more than 80% of total US phosphate rock import volume. This creates a bilateral dependency structure that is not reflected in domestic reserve statistics, which might suggest a 25-year domestic supply horizon — that horizon assumes current production rates are maintained, which requires continued access to permitted mine areas and adequate economics for domestic production.
+
+**Strategic comparison to rare earth elements.** The US import dependency on Moroccan phosphate rock is structurally analogous to — and in several respects more consequential than — the rare earth element (REE) dependency on China that became a recognized national security concern after 2010.
+
+The structural parallels are direct:
+
+| Dimension | Rare Earth Elements (REE) | Phosphate Rock |
+|---|---|---|
+| Global reserve concentration | ~60% in China (USGS) | ~70–85% in Morocco (USGS; Cordell & White 2011) |
+| US self-sufficiency trajectory | Once largely self-sufficient (Mountain Pass, CA); allowed to lapse | Once a net exporter; now a net importer |
+| Primary US import source | China | Morocco |
+| End-use criticality | Electronics, defense, energy transition | Food production (no substitute) |
+| Substitutability | Partial for some applications | None |
+| Export restriction risk | Demonstrated (2010 China REE export restriction) | Demonstrated (2008 China phosphate export tariff) |
+| US strategic response | Critical minerals designation; Mountain Pass reopened; diversification programs | Critical minerals designation; limited diversification action |
+
+The end-use comparison is the sharpest differentiator: REEs support electronics, permanent magnets, and defense systems — important but partially substitutable applications. Phosphate rock supports food production, which has no substitute and no margin for supply interruption measured in growing seasons. Elser and Bennett (2011) explicitly drew this comparison, noting that the food-system dependence on phosphate makes its geopolitical concentration more acute than any other strategic mineral dependency.
+
+**Policy gap.** Despite the critical minerals designation for phosphate rock by USGS, the US policy response to phosphate import dependency has been less developed than the response to REE dependency. The REE situation prompted substantial investment in domestic production reopening (Mountain Pass Mine, California, reopened in 2017 after a closure period), international supply chain diversification, and allied-nation coordination. The analogous policy infrastructure for phosphate — domestic production investment, phosphorus recovery and recycling mandates, strategic reserve considerations — is less developed (USGS; TFI; Columbia University Earth Institute). This gap represents a policy risk that will become more operationally significant as Florida ore quality and production capacity decline over the coming decades.
+
 ### 2.3 Morocco, Western Sahara, and the Geopolitical Dimension
 
 **Note on disputed territory (SC-GEO):** A significant portion of Morocco's phosphate production capacity, including the world's largest individual phosphate mine at Bou Craa, is located in Western Sahara. Western Sahara is a disputed territory; its legal status is contested and has been the subject of UN Security Council resolutions and ongoing negotiations. The United Nations does not recognize Moroccan sovereignty over Western Sahara. This document presents the geographic and geopolitical facts as they affect supply-chain analysis without taking a position on the territorial dispute.
