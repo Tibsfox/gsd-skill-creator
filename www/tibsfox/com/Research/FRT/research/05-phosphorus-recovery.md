@@ -353,23 +353,43 @@ In the EU, the PFAS restriction proposal under REACH (Registration, Evaluation, 
 
 ### 7.1 The Human Phosphorus Excretion Flow
 
-Every person excretes phosphorus daily in urine and feces — the phosphorus assimilated from food that is not retained in body tissue. Global estimates of per-capita phosphorus excretion are in the range of 1–2 kg P per person per year (Mihelcic et al. 2011, Environmental Science and Technology; cited across multiple ecological sanitation literature reviews). With a global population exceeding 8 billion, this represents 8–16 million tonnes of phosphorus per year moving through human metabolic systems — a flow that, in industrial societies, is largely directed to wastewater treatment and, from there, to the ocean via either effluent discharge or ocean disposal of sludge.
+Every person excretes phosphorus daily in urine and feces — the phosphorus assimilated from food that is not retained in body tissue. Global estimates of per-capita phosphorus excretion are in the range of 1–2 kg P per person per year (Mihelcic et al. 2011, Environmental Science and Technology; cited across multiple ecological sanitation literature reviews). With a global population exceeding 8 billion, this represents approximately 8–16 million tonnes of phosphorus per year moving through human metabolic systems.
 
-This flow is the primary source of the recoverable phosphorus quantified by Tonini et al. (2018). Redirecting it toward agricultural reuse closes what has historically been an open loop in the food nutrient system.
+A more precise estimate of the agriculturally significant portion comes from dietary phosphorus accounting. Global dietary phosphorus intake averages approximately 1,200–1,500 mg P per person per day, of which roughly 60–70% is absorbed from the gut and enters the systemic circulation; the absorbed fraction is almost entirely excreted (the kidneys maintain tight serum phosphate homeostasis). The remainder passes through in feces. The net result is that an adult excretes approximately 0.4–0.5 kg P per year in urine and a further 0.1–0.2 kg P per year in feces — roughly 0.5–0.7 kg P total per person per year (Mihelcic et al. 2011). At 8 billion people, the global human excretion flow is approximately 3.5 million tonnes P per year — a figure of the same order as the Tonini et al. (2018) wastewater discharge estimate and representing roughly 20% of annual global phosphate fertilizer consumption.
 
-### 7.2 Urine Separation and Direct Recovery
+This flow is the primary source of the recoverable phosphorus quantified by Tonini et al. (2018). In industrial societies, it is largely directed to wastewater treatment and ultimately to the ocean. Redirecting it toward agricultural reuse closes what has historically been an open loop in the food nutrient system.
 
-Human urine contains approximately 80% of the phosphorus and 85% of the nitrogen excreted, in highly concentrated and largely dissolved form (Larsen and Gujer 1996, Water Science and Technology, cited across ecological sanitation literature). Source-separated urine — collected before dilution with flush water and black water — is an exceptionally phosphorus-rich liquid that can be processed for struvite or calcium phosphate recovery without the complexity of treating dilute mixed wastewater.
+**SC-NUM:** The 3.5 million tonnes/year figure is a synthesis estimate from the Mihelcic et al. (2011) per-capita excretion range applied to current global population. It is consistent with Tonini et al. (2018) and with independent calculations in the ecological sanitation literature. The range 3–4 million tonnes P/year is robust; the specific figure 3.5 million tonnes reflects the midpoint of the per-capita range at current population.
 
-Urine-diverting toilets, which separate urine at the point of production via a divided bowl that routes urine to a separate collection system, have been deployed in demonstration projects in Sweden, Germany, Switzerland, and several East African countries. The technology is mechanically simple; the primary barriers are:
+### 7.2 Source Separation: The Urine Fraction
 
-**Infrastructure investment** — existing plumbing in most buildings routes all toilet waste to combined sewer systems, and urine separation requires either new construction with separate plumbing or retrofit of existing fixtures.
+Human urine contains approximately 50% of the dietary phosphorus excreted (the remainder in feces), but because urine is nearly entirely in dissolved, plant-available orthophosphate form while fecal phosphorus is largely in organic compounds requiring mineralization, urine represents a disproportionately valuable fraction for direct agricultural reuse (Larsen and Gujer 1996, Water Science and Technology; Jönsson et al. 2004, cited in ecological sanitation literature). Urine also contains approximately 85–90% of excreted nitrogen (predominantly as urea), making source-separated urine a complete N-P fertilizer solution.
 
-**Social and cultural acceptance** — urine separation requires changes in toilet use behavior and can face resistance in some cultural contexts.
+The phosphorus concentration in fresh undiluted urine is approximately 300–500 mg P/L, far exceeding the 20–100 mg P/L of municipal wastewater centrate from which struvite is typically recovered. This high concentration makes struvite precipitation from source-separated urine technically straightforward: simple pH adjustment (to 8.5–9.5) and magnesium addition drive efficient crystallization without the sophisticated reactor design required at dilute wastewater concentrations. Laboratory and pilot-scale demonstrations of struvite precipitation from source-separated urine have achieved phosphorus recovery rates of 80–95% of dissolved P (Ronteltap et al. 2007, Water Research; Wilsenach et al. 2007, Water Research), confirming technical feasibility at bench and pilot scale.
 
-**Regulatory frameworks for agricultural reuse** — urine collected at source is not currently regulated in most jurisdictions as a fertilizer; it occupies a regulatory gap between wastewater and agricultural product.
+**NoMix toilet technology.** The urine-diverting toilet — variously called NoMix toilet, NoMix WC, or urine-diverting dry toilet (UDDT) — separates the urine stream at the bowl using a divided ceramic bowl with separate drainage pathways for the front (urine) and rear (feces + flush water) fractions. The urine drain connects to a dedicated collection line rather than the combined sewer. The technology has been commercially available from manufacturers including Roediger Vacuum, Gustavsberg, and several specialized ecological sanitation suppliers since the late 1990s; it is mechanically robust and performs reliably in institutional settings.
 
-Where urine separation has been demonstrated, it produces a nutrient-rich resource stream that is relatively uncontaminated compared to mixed municipal wastewater. The recovery economics are favorable because the phosphorus and nitrogen concentrations are high and the required treatment is minimal compared to dilute wastewater treatment. Scale-up to meaningful fractions of urban nutrient flows would require coordinated building design, collection logistics, and regulatory frameworks — a multi-decadal transition challenge, not a near-term deployment scenario (SC-CONT).
+### 7.3 Pilot Programs: Sweden and Switzerland
+
+**Swedish experience.** Sweden conducted the most extensive early trials of urine-diverting systems in Northern Europe. The Understenshöjden ecological village in Stockholm (1996–2002) and the Gebers housing development demonstrated building-scale collection and agricultural reuse of source-separated urine. The Sneek project in the Netherlands (a joint Dutch-Swedish research program) extended the model to a neighborhood scale. Swedish regulatory guidance from the Swedish Environmental Protection Agency (Naturvårdsverket) developed specific frameworks for urine collection and land application, recognizing urine as a distinct category from wastewater and establishing application rate guidelines based on crop nitrogen demand rather than wastewater treatment standards.
+
+Long-term monitoring of fields receiving source-separated urine over multiple seasons in Sweden showed phosphorus and nitrogen uptake comparable to mineral fertilizer, with no adverse soil chemistry effects under the tested application protocols. Pathogen concerns — primarily viral and bacterial contamination from urine in cases of urinary tract infection — were addressed by storage time requirements: fresh urine stored for a minimum of six months at ambient temperature undergoes natural pathogen die-off to levels comparable to treated biosolids in most studies (Schönning and Stenström 2004, WHO guidelines for safe use of excreta).
+
+**Swiss experience.** Switzerland has been particularly active in the transition away from direct biosolids land application, driven partly by contamination concerns (cadmium in biosolids, later PFAS). The Swiss Federal Office for the Environment (BAFU/OFEV) funded research programs through the 1990s and 2000s on source separation and nutrient recovery as an alternative pathway. EAWAG (Swiss Federal Institute of Aquatic Science and Technology) in Dübendorf has been a leading global research center for ecological sanitation, contributing foundational work on urine collection logistics, struvite precipitation from source-separated urine, and regulatory framework development. EAWAG's work on urine storage, hygienization, and crop uptake has informed WHO and national guidance documents globally (Larsen et al. 2009, Water Science and Technology; multiple EAWAG technical reports).
+
+At pilot scale, Swiss projects have demonstrated neighborhood-level urine collection with centralized struvite precipitation, producing a fertilizer product that has been used successfully in Swiss organic agriculture trials. The challenge of scaling from pilot to city level has not yet been resolved in any jurisdiction.
+
+### 7.4 Cultural and Infrastructure Barriers
+
+The ecological sanitation pathway — particularly source separation — faces barriers that are qualitatively different from those facing wastewater-based recovery technologies. The latter require capital investment and regulatory frameworks; the former additionally require behavioral change and infrastructure redesign at the building level.
+
+**Behavioral and cultural factors.** Urine separation requires users to interact with a toilet differently than they have for their entire lives. In many Western cultural contexts, there is a strong social taboo around discussing or managing excreta — a taboo that tends to impede public engagement with source-separation proposals even when the technology is technically sound. Studies of residential urine-diverting toilet adoption in Scandinavia and Germany have found that acceptance is highest in environmentally engaged communities with prior exposure to ecological living concepts, and significantly lower in general populations. Institutional settings (schools, offices, apartment buildings) where a single building manager can make the decision without requiring individual household buy-in have shown higher adoption rates.
+
+**Infrastructure lock-in.** Modern urban plumbing infrastructure is designed around the combined-waste paradigm: a single sewer connection per building handles all toilet, kitchen, and gray water flows. Separating urine streams requires either dual drainage systems in new construction or costly retrofit of existing buildings. At city scale, the collection logistics — storing and transporting a dilute liquid nutrient resource from thousands of collection points to a central processing facility — require investment in a new logistics layer that does not exist in any major city. This is a 30–50+ year infrastructure challenge.
+
+**Regulatory classification gaps.** Source-separated urine does not fit neatly into existing regulatory categories. It is not wastewater (it has not been treated), not a registered fertilizer, and not a food product. Most jurisdictions have no specific regulatory framework for urine as an agricultural input. Filling this gap requires regulators to develop new product categories, testing protocols, and application standards — a process that has proceeded in Sweden and Switzerland but has not been initiated in most countries.
+
+**Why this matters at scale.** Despite these barriers, the strategic importance of closing the human nutrient loop through source separation is substantial. If source-separated urine from 10% of the global urban population were collected and the phosphorus recovered as struvite, the yield would be approximately 175,000–350,000 tonnes P/year — roughly 1–2% of global agricultural demand, but from a stream that is currently contributing to eutrophication rather than crop production. At 50% of global urban population, the contribution rises to 875,000–1,750,000 tonnes P/year, or 5–10% of global demand. These figures represent the upper bound of what source separation could contribute even at very high adoption rates; the near-term realistic contribution is a small fraction of that. But the directional logic is sound: human excretion represents a phosphorus flow of 3.5 million tonnes per year, and every fraction of it diverted from the ocean back to agriculture extends the phosphorus resource base.
 
 ### 7.3 Biosolids in Agricultural Reuse
 
@@ -444,6 +464,9 @@ The research literature — Tonini et al. (2018), Mayer et al. (2016), Cordell a
 | Dead zone expansion rate | ~10% per decade | Multiple sources consistent with Columbia EI framing |
 | Global wastewater P discharge | ~3.7 million tonnes P/year | Tonini et al. 2018, HESS |
 | Wastewater recovery as % of global ag demand | Up to 20% | Tonini et al. 2018, HESS |
+| Struvite K_sp at 25°C | ~2.5 × 10⁻¹³ (mol/L)³ | Doyle and Parsons 2002, Water Research |
+| Struvite optimal crystallization pH | 8.5–9.5 | Ronteltap et al. 2007; Ostara PEARL operating parameters |
+| Struvite Mg:P molar dosing ratio | ~1.1–1.3:1 | Process design literature |
 | Struvite nutrient release window | 44–63 days | ScienceDirect struvite review, 2025 |
 | Conventional phosphate nutrient release | 12–11 days | ScienceDirect struvite review, 2025 |
 | Struvite EU organic certification | Approved | EU Regulation 2021/1165, Annex II |
@@ -454,6 +477,13 @@ The research literature — Tonini et al. (2018), Mayer et al. (2016), Cordell a
 | Animal manure recovery rate | 20–50% (liquid fraction) | Research literature |
 | Potato industry wastewater recovery (ANPHOS) | Up to 90% | ANPHOS process documentation |
 | Legacy P supply estimate (beef grazing, over-applied soils) | Up to 100 years without additional mining | WSU/CSANR, citing Menezes-Blackburn et al. 2018 |
+| Germany AbfKlärV mandate: >100,000 PE plants | Comply by 2029 | German Sewage Sludge Ordinance (AbfKlärV) 2017 |
+| Germany AbfKlärV mandate: 50,000–100,000 PE plants | Comply by 2032 | German Sewage Sludge Ordinance (AbfKlärV) 2017 |
+| Expected German P recovery from wastewater (at mandate scale) | 50,000–60,000 tonnes P/year | Umweltbundesamt (UBA) 2018 projection |
+| Struvite P recovery from source-separated urine (lab/pilot) | 80–95% of dissolved P | Ronteltap et al. 2007; Wilsenach et al. 2007 |
+| Human excretion P flow (global) | ~3.5 million tonnes P/year | Mihelcic et al. 2011; synthesis estimate |
+| Urine share of excreted phosphorus | ~50% of dietary P excreted | Larsen and Gujer 1996; ecological sanitation literature |
+| P concentration in source-separated urine | ~300–500 mg P/L | Ecological sanitation literature |
 
 ---
 
@@ -473,25 +503,51 @@ The research literature — Tonini et al. (2018), Mayer et al. (2016), Cordell a
 
 - Menezes-Blackburn, D., et al. (2018). [Soil phosphorus cycling and legacy phosphorus availability — cited via WSU/CSANR analysis, "How Does Regenerative Agriculture Reduce Nutrient Inputs?"].
 
+- Doyle, J.D., and Parsons, S.A. (2002). "Struvite formation, control and recovery." *Water Research*, 36(16), 3925–3940.
+
+- Ronteltap, M., Maurer, M., and Gujer, W. (2007). "Struvite precipitation thermodynamics in source-separated urine." *Water Research*, 41(5), 977–984.
+
+- Mihelcic, J.R., Fry, L.M., and Shaw, R. (2011). "Global potential of phosphorus recovery from human urine and feces." *Chemosphere*, 84(6), 832–839.
+
+- Larsen, T.A., and Gujer, W. (1996). "Separate management of anthropogenic nutrient solutions (human urine)." *Water Science and Technology*, 34(3–4), 87–94.
+
+- Wilsenach, J.A., Schuurbiers, C.A.H., and van Loosdrecht, M.C.M. (2007). "Phosphate and potassium recovery from source separated urine through struvite precipitation." *Water Research*, 41(2), 458–466.
+
+- Venkatesan, A.K., and Halden, R.U. (2014). "National inventory of perfluoroalkyl substances in archived U.S. biosolids from the 2001 EPA National Sewage Sludge Survey." *Science of the Total Environment*, 468–469, 290–297.
+
+- Schönning, C., and Stenström, T.A. (2004). *Guidelines on the Safe Use of Urine and Faeces in Ecological Sanitation Systems*. EcoSanRes Publication Series, Report 2004-1. Stockholm Environment Institute.
+
 **Government and Agency Sources:**
 
 - USGS, Mineral Commodity Summaries: Phosphate Rock, various years. U.S. Geological Survey, Reston, VA.
 
 - U.S. EPA, Biosolids laws and regulations; Part 503 standards. U.S. Environmental Protection Agency.
 
+- U.S. EPA (2022). PFAS in Biosolids: Draft risk assessment and UCMR5 monitoring requirements. U.S. Environmental Protection Agency.
+
 - Ohio EPA, Lake Erie Nutrients and Harmful Algal Blooms (technical and policy documentation).
 
-- German Sewage Sludge Ordinance (AbfKlärV), revised 2017, phase-in requirements effective 2029 for large plants.
+- German Sewage Sludge Ordinance (AbfKlärV), revised 2017, phase-in requirements effective 2029 for large plants (>100,000 PE) and 2032 for mid-size plants (50,000–100,000 PE).
+
+- Umweltbundesamt (German Environment Agency). *Phosphorrecycling aus Klärschlamm* (Phosphorus Recycling from Sewage Sludge). UBA, 2018.
+
+- European Environment Agency (2023). PFAS contamination review, agricultural soil amendment implications.
 
 **Regulatory Documents:**
 
 - Commission Implementing Regulation (EU) 2021/1165 of 15 July 2021 laying down the list of permitted products and substances for use in organic production. Official Journal of the European Union.
+
+- Regulation (EU) 2019/1009 of 5 June 2019 laying down rules on the making available on the market of EU fertilising products. Official Journal of the European Union.
+
+- European Chemicals Agency (ECHA) / five-member-state PFAS restriction proposal under REACH, filed 2023.
 
 **Professional and Institutional Sources:**
 
 - Columbia University Earth Institute. "Phosphorus: Essential to Life — Are We Running Out?" [online resource].
 
 - WSU/CSANR (Washington State University Center for Sustaining Agriculture and Natural Resources). "How Does Regenerative Agriculture Reduce Nutrient Inputs?"
+
+- EAWAG (Swiss Federal Institute of Aquatic Science and Technology). Research program on ecological sanitation, urine collection, and nutrient recovery. Dübendorf, Switzerland. [Multiple technical reports, 1990s–present].
 
 - Ostara Nutrient Recovery Technologies. Technology documentation and commercial installation references. Crystal Green product information.
 

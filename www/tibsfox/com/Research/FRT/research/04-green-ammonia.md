@@ -628,7 +628,7 @@ This section fulfills success criterion 9: rating each technology on four dimens
 
 **Notes on fossil reduction ratings:** All pathways receive a 5 when powered by renewables because all eliminate fossil hydrogen or fossil energy from the nitrogen fixation step itself. None receives a lower rating on this dimension — the fossil reduction potential is intrinsic to the pathway design.
 
-### 9.3 Technology-Specific Observations
+### 12.3 Technology-Specific Observations
 
 **Green ammonia** is the only pathway where the technology risk is essentially zero — the chemistry is proven. The risk is economic: whether renewable hydrogen achieves cost parity with fossil hydrogen before the energy transition creates alternative demand for that hydrogen. The timeline of 1–5 years to commercially viable projects reflects that large-scale commercial plants are under development now; "commercial viability" means economically competitive, which is a higher bar and may be 5–10 years out at scale.
 
@@ -642,9 +642,9 @@ This section fulfills success criterion 9: rating each technology on four dimens
 
 ---
 
-## 10. Integration with Food System Nutrient Independence
+## 13. Integration with Food System Nutrient Independence
 
-### 10.1 Pathway Portfolio Logic
+### 13.1 Pathway Portfolio Logic
 
 No single alternative to conventional Haber-Bosch is adequate on its own. A food system aiming for nutrient independence must think in terms of a portfolio:
 
@@ -654,19 +654,19 @@ No single alternative to conventional Haber-Bosch is adequate on its own. A food
 
 - **Long term (2040+):** Electrochemical NRR, if the Faradaic efficiency challenge is resolved, and photocatalytic fixation, if quantum yield improves, could enable truly decentralized solar-and-air nitrogen fixation. This is the aspirational end state.
 
-### 10.2 Relationship to Biological Nitrogen Fixation
+### 13.2 Relationship to Biological Nitrogen Fixation
 
 Module 3 (Biological Nitrogen Fixation) covers the parallel pathway of using engineered or naturally occurring microorganisms to fix nitrogen at ambient conditions. The electrochemical and plasma pathways in this module and the BNF pathways in Module 3 are not competing strategies — they address different niches.
 
 BNF is most relevant for grain and legume crops where symbiotic or associative organisms are agronomically compatible. Electrochemical and plasma fixation is relevant for crops where BNF is not viable, for greenhouse or controlled environment production, and for situations where a manufactured nitrogen fertilizer product is required. A complete nutrient independence strategy deploys both.
 
-### 10.3 Geopolitical Dimension
+### 13.3 Geopolitical Dimension
 
 Conventional Haber-Bosch ammonia production is concentrated in natural-gas-rich regions (Russia, Middle East, North America). This geographic concentration creates supply chain risk for import-dependent countries — the same vulnerability documented for phosphate rock in Module 2. Green ammonia and distributed electrochemical/plasma fixation are inherently de-concentrating: any region with renewable energy resources (solar, wind, hydro) can produce nitrogen fertilizer locally. This is not merely an environmental argument; it is a food sovereignty argument. Countries that currently import both natural gas and ammonia-based fertilizer could, with distributed nitrogen fixation technology, produce fertilizer from domestic renewable electricity and atmospheric nitrogen.
 
 This strategic argument is captured in the WEF's Top 10 Emerging Technology designation for green nitrogen fixation (WEF, 2025) and in the FAO's analysis of energy and food security implications of transitioning synthetic nitrogen fertilizers to net-zero emissions (FAO).
 
-### 10.4 The Modular Advantage
+### 13.4 The Modular Advantage
 
 A consistent theme across the non-Haber-Bosch pathways is modularity. Plasma reactors, electrochemical cells, and photocatalytic systems are all inherently modular — unlike Haber-Bosch plants, which require minimum scale (1,000–1,500 t/day) for economic viability. Modularity has several strategic advantages:
 
@@ -679,7 +679,7 @@ The modular paradigm is not without constraints: manufacturing costs per unit ca
 
 ---
 
-## 11. Source Bibliography
+## 14. Source Bibliography
 
 **Primary sources used in this module:**
 
@@ -692,6 +692,8 @@ The modular paradigm is not without constraints: manufacturing costs per unit ca
 - WEF / The Innovator. (2025, September). "How Green Nitrogen Fixation Could Feed and Fuel The World." *The Innovator* (World Economic Forum Top 10 Emerging Technologies of 2025 coverage).
 
 ### Peer-Reviewed Literature
+
+- Andersen, S.Z. et al. (2019). A rigorous electrochemical ammonia synthesis protocol with quantitative isotope measurements. *ACS Energy Letters*, 4(6), 1255–1260. [Foundational reproducibility standards for eNRR field; cited in sections 3.5 and 3.6]
 
 - Suryanto, B.H.R., Du, H.-L., Wang, D., Chen, J., Simonov, A.N., and MacFarlane, D.R. (2021). Challenges and prospects in the catalysis of electroreduction of nitrogen to ammonia. *Science*, 372(6547), 1187–1191. [Primary source for Li-mediated NRR Faradaic efficiency results]
 
@@ -719,6 +721,16 @@ The modular paradigm is not without constraints: manufacturing costs per unit ca
 
 - CF Industries. Green ammonia partnership disclosures.
 
+### Energy and Policy Organizations
+
+- IRENA (International Renewable Energy Agency). (2024). *Renewable Power Generation Costs in 2023*. International Renewable Energy Agency. [Solar LCOE 89% decline 2010–2023; onshore wind LCOE 69% decline; cited in section 9.2]
+
+- IMO (International Maritime Organization). (2023). *2023 IMO Strategy on Reduction of GHG Emissions from Ships*. International Maritime Organization. [Shipping GHG targets; ammonia as marine fuel context; cited in section 11.2]
+
+- IEA (International Energy Agency). *World Energy Outlook 2023*. International Energy Agency. [Green ammonia as hydrogen carrier; shipping sector fuel consumption; cited in sections 8.4 and 11.1]
+
+- European Commission. Carbon Border Adjustment Mechanism (CBAM) — legislative framework and phase-in schedule. [EU carbon pricing and CBAM effect on ammonia cost competitiveness; cited in section 9.5]
+
 ### General Background
 
 - Bradenkelley.com. Green nitrogen fixation overview and technology landscape.
@@ -730,12 +742,12 @@ The modular paradigm is not without constraints: manufacturing costs per unit ca
 | Success Criterion | Status | Evidence |
 |---|---|---|
 | SC-4: Green ammonia pathways compared with TRL table | COMPLETE | Section 1, TRL table present |
-| SC-9: All alternatives rated on 4 dimensions | COMPLETE | Section 9, comparative assessment matrix |
+| SC-9: All alternatives rated on 4 dimensions | COMPLETE | Section 12, comparative assessment matrix |
 | SC-11: All numerical claims attributed to specific sources | COMPLETE | All cost/energy figures attributed to RMI 2025, MacFarlane/Monash, C&EN |
 | SC-TRL: TRL assessments match published assessments | COMPLETE | TRL 7-8, 3-4, 4-5, 4-5, 2-3 per RMI 2025 and research literature |
 | SC-NUM: Cost estimates attributed | COMPLETE | All cost figures attributed to RMI 2025 |
 | SC-ADV: No vendor advocacy | COMPLETE | All company discussions are factual characterizations |
 | SC-CONT: Limitations alongside potential | COMPLETE | Each section includes current limitations |
 
-**Word count target:** 8,000–10,000 words  
+**Word count target:** 10,000–11,000 words (deepened per mission brief)  
 **Module status:** COMPLETE — ready for VERIFY review
