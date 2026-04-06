@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food System Nutrient Independence — GSD Research Mission</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #2E5902;
+      --primary-light: #EAF5E1;
+      --secondary: #6B3A10;
+      --secondary-light: #F5EDE3;
+      --tertiary: #1A5276;
+      --tertiary-light: #D6EAF8;
+      --accent: #4A7C15;
+      --text: #212121;
+      --muted: #6B6B6B;
+      --border: #BDBDBD;
+      --bg: #FAFAFA;
+      --card: #FFFFFF;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a3600 60%, var(--tertiary) 100%);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    header .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+      font-style: italic;
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    header .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    header .tag {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .pipeline {
+      background: rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding: 0.8rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .pipeline span { opacity: 0.6; margin: 0 0.5rem; }
+
+    main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* Stats bar */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat {
+      background: var(--primary-light);
+      border: 1px solid #c5e0a8;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* File cards */
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.15rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--secondary-light);
+    }
+
+    .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+    @media (max-width: 600px) { .files { grid-template-columns: 1fr; } }
+
+    .file-card {
+      background: #1e3a06;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
+    .file-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+    .file-card .file-icon { font-size: 1.8rem; }
+    .file-card .file-name { font-weight: 600; font-size: 1rem; }
+    .file-card .file-desc { font-size: 0.82rem; opacity: 0.75; }
+    .file-card .file-type {
+      margin-top: auto;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.55;
+    }
+
+    /* Contents */
+    .contents {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stage {
+      margin-bottom: 1.25rem;
+    }
+
+    .stage-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stage-badge {
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+    }
+
+    .badge-vision { background: var(--primary-light); color: var(--primary); }
+    .badge-research { background: var(--secondary-light); color: var(--secondary); }
+    .badge-mission { background: var(--tertiary-light); color: var(--tertiary); }
+
+    .stage ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .stage ul li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 0.2rem 0;
+    }
+
+    .stage ul li::before { content: "— "; opacity: 0.5; }
+
+    /* Usage instructions */
+    .instructions {
+      background: var(--tertiary-light);
+      border: 1px solid #a8d0ec;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .instructions ol {
+      padding-left: 1.25rem;
+    }
+
+    .instructions ol li {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .instructions code {
+      background: rgba(26,82,118,0.12);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.83rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Compile box */
+    .compile {
+      background: #1a2612;
+      color: #a8d878;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.83rem;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .compile .comment { color: #5a8a30; }
+
+    /* Quote */
+    .quote {
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      background: var(--primary-light);
+      border-radius: 0 8px 8px 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>Food System Nutrient Independence</h1>
+  <div class="subtitle">Breaking the Fossil Fuel Grip on the Global Food Supply</div>
+  <div class="tags">
+    <span class="tag">Nitrogen Fertilizers</span>
+    <span class="tag">Haber-Bosch</span>
+    <span class="tag">Peak Phosphorus</span>
+    <span class="tag">Biofertilizers</span>
+    <span class="tag">Green Ammonia</span>
+    <span class="tag">Struvite Recovery</span>
+    <span class="tag">Hydroponics</span>
+    <span class="tag">Regenerative Agriculture</span>
+  </div>
+  <div class="pipeline">
+    <strong>Vision</strong> <span>→</span> <strong>Research</strong> <span>→</span> <strong>Mission</strong>
+    &nbsp;&nbsp;|&nbsp;&nbsp; Full Pipeline Execution
+  </div>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">31</span><span class="stat-label">Pages</span></div>
+    <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+    <div class="stat"><span class="stat-value">12</span><span class="stat-label">Success Criteria</span></div>
+    <div class="stat"><span class="stat-value">45</span><span class="stat-label">Test Cases</span></div>
+    <div class="stat"><span class="stat-value">Fleet</span><span class="stat-label">Profile</span></div>
+    <div class="stat"><span class="stat-value">18</span><span class="stat-label">Crew Roles</span></div>
+  </div>
+
+  <p class="section-title">📦 Mission Files</p>
+  <div class="files">
+    <a href="fertilizer_mission.pdf" download class="file-card">
+      <span class="file-icon">📄</span>
+      <span class="file-name">fertilizer_mission.pdf</span>
+      <span class="file-desc">Complete 31-page mission package: Vision Guide, Research Reference, and Mission Package. Ready for GSD orchestrator handoff.</span>
+      <span class="file-type">PDF · Primary Deliverable</span>
+    </a>
+    <a href="fertilizer_mission.tex" download class="file-card">
+      <span class="file-icon">⚙️</span>
+      <span class="file-name">fertilizer_mission.tex</span>
+      <span class="file-desc">Full XeLaTeX source. Edit and recompile to customize any section, update data, or extend modules.</span>
+      <span class="file-type">LaTeX · Source File</span>
+    </a>
+  </div>
+
+  <p class="section-title">📋 Contents</p>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-title"><span class="stage-badge badge-vision">Stage 1</span> Vision Guide</div>
+      <ul>
+        <li>Narrative vision: the fossil-fuel food system and the spaces between</li>
+        <li>5 concrete problem statements (N dependency, P geopolitics, peak P, N cascade, TRL gap)</li>
+        <li>Nutrient dependency architecture — current state and target state ASCII diagrams</li>
+        <li>6 research modules defined: Nitrogen Crisis, Phosphorus Predicament, Biological N Alternatives, Green Ammonia, P Recovery, Alternative Farming</li>
+        <li>Chipset configuration (Fleet: 30% Opus / 60% Sonnet / 10% Haiku)</li>
+        <li>12 testable success criteria</li>
+        <li>The through-line: Amiga Principle applied to nutrient sovereignty</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-title"><span class="stage-badge badge-research">Stage 2</span> Research Reference</div>
+      <ul>
+        <li>Module 1: Haber-Bosch energy/emissions/food dependency metrics, nitrogen cascade</li>
+        <li>Module 2: Phosphate rock geopolitical map, peak phosphorus models (2033–2070+), price history</li>
+        <li>Module 3: All 6 BNF pathways — mechanisms, yield data, commercial products (Pivot Bio, etc.)</li>
+        <li>Module 4: Green ammonia TRL table, electrochemical NRR, plasma, photocatalytic, key players 2025–2026</li>
+        <li>Module 5: Struvite properties, recovery rates by stream, wastewater 20% global P potential</li>
+        <li>Module 6: Hydroponics/vertical farming metrics, regenerative ag nutrient mechanisms, WSU legacy P data</li>
+        <li>Sourced bibliography: 13+ peer-reviewed, 5+ government/agency, 7+ professional organization sources</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-title"><span class="stage-badge badge-mission">Stage 3</span> Mission Package</div>
+      <ul>
+        <li>Wave execution plan: 5 waves, 3 CAPCOM gates, Fleet profile</li>
+        <li>Transition roadmap: 8 milestones across near (2025–2030), medium (2030–2040), and long (2040–2050) horizons</li>
+        <li>Component breakdown with model assignments and token estimates (432,000 total)</li>
+        <li>18-role crew manifest (FLIGHT, PLAN, SCOUT, 6 CRAFT specialists, EXEC×2, VERIFY, INTEG, CAPCOM, BUDGET, SURGEON, LOG, TOPO)</li>
+        <li>45 test cases: 8 safety-critical (all BLOCK), 20 core functionality, 11 integration, 6 edge cases</li>
+        <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+        <li>Cache optimization strategy and dependency graph</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="section-title">🚀 How to Use This Package</p>
+  <div class="instructions">
+    <ol>
+      <li>Download <code>fertilizer_mission.pdf</code> — review the Vision Guide (Stage 1) and confirm framing matches your research goals.</li>
+      <li>Open a new Claude Code session and hand it <code>fertilizer_mission.pdf</code> with the instruction: <em>"Execute this GSD research mission starting at Wave 0."</em></li>
+      <li>The orchestrator will request CAPCOM approval at three gates: after Wave 0 (foundation), after Wave 2 (modules 1–6 complete), and after Wave 3 (synthesis).</li>
+      <li>Final output: a structured 6-module research document + 8-milestone transition roadmap + verification report.</li>
+      <li>Optionally seed the <code>.planning/staging/inbox/</code> via planning-bridge MCP for persistent mission tracking.</li>
+    </ol>
+  </div>
+
+  <p class="section-title">🔧 Recompile LaTeX</p>
+  <div class="compile">
+    <span class="comment"># Three-pass XeLaTeX compilation (requires DejaVu fonts)</span><br>
+    xelatex -interaction=nonstopmode fertilizer_mission.tex<br>
+    xelatex -interaction=nonstopmode fertilizer_mission.tex<br>
+    xelatex -interaction=nonstopmode fertilizer_mission.tex<br>
+    <br>
+    <span class="comment"># Install DejaVu fonts if needed (Ubuntu)</span><br>
+    sudo apt-get install fonts-dejavu-core
+  </div>
+
+  <div class="quote">
+    "The spaces between our dependencies are where sovereignty lives. Between the nitrogen crisis and the biological alternatives, between the phosphorus predicament and the struvite loop — each space is a leverage point. Giving people their lives back starts at the soil level."
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · Food System Nutrient Independence · April 5, 2026<br>
+  Tibsfox, Inc. · Mukilteo, WA · <em>Vision → Research → Mission</em>
+</footer>
+
+</body>
+</html>
