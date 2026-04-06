@@ -336,23 +336,35 @@ def daemon_loop(day_override=None, dry_run=False, once=False):
     print(f"Dry run: {dry_run}")
 
     last_executed = -1
+    last_day = None
 
     while True:
         now = datetime.now()
         minute = now.minute
         hour = now.hour
 
-        # Determine mission day
+        # Determine mission day from wall clock (--day override only for testing)
         day = day_override or get_mission_day()
         if day is None:
             print(f"[{now.strftime('%H:%M')}] No mission day for {now.strftime('%Y-%m-%d')} — sleeping")
             time.sleep(60)
             continue
 
+        # Day boundary: reset tracking when day changes
+        if last_day is not None and day != last_day:
+            print(f"\n{'='*60}")
+            print(f"DAY BOUNDARY: Day {last_day} → Day {day}")
+            print(f"{'='*60}")
+            last_executed = -1
+            state['last_sweep_hour'] = -1
+            state['last_mark_minute'] = -1
+            save_state(state)
+        last_day = day
+
         ver_prefix = MISSION_DAYS[day][1]
 
         # Check if we're at a scheduled mark and haven't already executed it
-        mark_key = hour * 100 + minute
+        mark_key = day * 10000 + hour * 100 + minute
         active_schedule = PEAK_SCHEDULE if is_peak_cadence(day) else SCHEDULE
         if minute in active_schedule and mark_key != last_executed:
             run_mark(hour, minute, day, ver_prefix, state, dry_run)
