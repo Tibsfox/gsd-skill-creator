@@ -177,6 +177,32 @@ The field is moving rapidly in terms of publication volume but has faced reprodu
 
 The transition from TRL 3 to TRL 5 for eNRR requires demonstrating sustained, validated NH3 production at rates of at least 10−8 mol cm−2 s−1 with FE > 20% in a system that can operate for hundreds of hours without significant degradation. As of 2025, this milestone has not been reached in a reproducible, independently validated system.
 
+### 3.6 Faradaic Efficiency: The Core Bottleneck
+
+Faradaic efficiency (FE) is the fraction of total charge passed through an electrochemical cell that results in the desired product — in this case, ammonia. A Faradaic efficiency of 100% would mean every electron transferred at the cathode reduces N2 to NH3; an FE of 10% means nine out of ten electrons go elsewhere, overwhelmingly to the competing hydrogen evolution reaction (HER).
+
+**Current state of the field.** Most validated eNRR systems under aqueous conditions achieve FE of less than 15% for ammonia production at ambient temperature and pressure (Andersen et al., ACS Energy Letters, 2019; subsequent literature). Many early reports claiming higher FE have been retraced after stricter contamination controls — a subject addressed in section 3.5. The validated empirical floor, with rigorous isotopic labeling and control experiments, places the preponderance of genuine results in the 1–10% FE range for aqueous systems at ambient conditions. A small number of non-aqueous or engineered systems report higher values; these are discussed below.
+
+**Why HER dominates mechanistically.** The competition between HER and eNRR at the cathode is not incidental — it is structural to the electrochemistry. In aqueous electrolyte, protons (H⁺) are abundant, mobile, and highly reactive at most metal surfaces. The HER barrier is low: on platinum-group metals, it is nearly activationless. N₂, by contrast, is the most inert diatomic in practical chemistry — the N≡N triple bond carries 945 kJ/mol of dissociation energy, and the molecule has zero dipole moment and very low polarizability, making it exceptionally difficult to adsorb and activate at an electrode surface under ambient conditions.
+
+The thermodynamic reduction potential for N₂ to NH₃ (at pH 0, relative to the standard hydrogen electrode) is approximately −0.16 V, which is less negative than many HER onset potentials on poor HER catalysts. This suggests that, in principle, selective N₂ reduction is thermodynamically accessible. The practical problem is kinetic: N₂ activation requires overcoming large kinetic barriers that push the actual operating potential far more negative, where HER proceeds rapidly regardless of catalyst choice. Essentially, getting the electrode negative enough to activate N₂ guarantees that H⁺ reduction is thermodynamically and kinetically overwhelmingly favored.
+
+This is the mechanistic trap of aqueous eNRR: the same potential window needed to do useful work on N₂ is the same window where H₂ production runs away. No conventional metal catalyst has escaped this trap cleanly in aqueous media at synthetically relevant rates.
+
+**What commercial viability requires.** The target for electrochemical N₂ fixation to become commercially relevant has been estimated at approximately 60–80% Faradaic efficiency at a current density of at least 10 mA/cm² and a production rate of at least 10⁻⁸ mol NH₃ cm⁻² s⁻¹, sustained over hundreds of operational hours without significant degradation (MacFarlane group; RMI 2025 framing of technical milestones). The 60–80% FE threshold is not arbitrary — it reflects the minimum efficiency at which the cost of electricity input per unit of ammonia becomes competitive with green ammonia via electrolysis-plus-Haber-Bosch, given realistic cell voltages and balance-of-plant assumptions. Below this threshold, the economics of direct eNRR are worse than simply producing H₂ via electrolysis and feeding it to a conventional Haber-Bosch reactor.
+
+**Promising catalyst directions.** Three catalyst design strategies have produced the most credible improvements in FE or selectivity relative to conventional transition metals:
+
+*Single-atom catalysts (SACs).* In single-atom catalysts, individual metal atoms are dispersed on a support (often nitrogen-doped carbon or a metal oxide) and are stabilized by coordination to the support rather than existing as bulk metal. The isolated metal center can, in principle, be engineered to bind N₂ preferentially over H⁺ by tuning the coordination environment and electronic structure. Several SAC systems — Mo, Fe, Ru, and Bi single atoms on various supports — have been reported with improved N₂-to-NH₃ selectivity. The proposed mechanism is that the under-coordinated single metal site has binding geometry and energy that matches N₂ end-on coordination better than flat metal surfaces, where HER dominates. SAC results require careful 15N₂ isotopic validation; some early SAC reports have been questioned on contamination grounds.
+
+*Defect engineering.* Introducing controlled surface defects — vacancies, grain boundaries, edge sites — into catalysts such as transition metal dichalcogenides (MoS₂, MoSe₂), oxides (TiO₂, In₂O₃), or boron-containing materials (boron nitride, B-doped carbon) can create locally under-coordinated sites that adsorb and activate N₂ more effectively than pristine surfaces. Boron-based materials are a particularly active research direction: boron has a formal analogy to the FeMo-cofactor active site in nitrogenase in terms of its ability to accept electron density back-donated from N₂. Defect density and type are highly sensitive to synthesis conditions, creating reproducibility challenges.
+
+*Metal-organic frameworks (MOFs) and porous coordination polymers.* MOFs offer the possibility of designing N₂-binding sites at the molecular level within a porous scaffold that can exclude bulky hydrated protons while allowing N₂ access to active metal centers. This selectivity-by-architecture approach mimics, conceptually, the steric protection of the active site in biological nitrogenase. MOF-based eNRR catalysts are a relatively recent entry (post-2019); results are promising but system-level testing at relevant current densities and durations has not yet been published for most MOF systems.
+
+**The reproducibility crisis and its resolution.** The eNRR literature carries a specific methodological burden. Between approximately 2016 and 2019, a substantial number of papers reporting high apparent Faradaic efficiencies were published without the experimental controls necessary to distinguish genuine N₂ reduction from reduction of trace ammonia contamination in reagents, gases, or glassware. A landmark 2019 perspective by Andersen et al. in ACS Energy Letters systematically reviewed reported eNRR results and identified that a significant fraction were likely artifacts. The proposed minimum standards — including blank experiments with inert Ar gas substituted for N₂, isotopic labeling with ¹⁵N₂ gas confirmed by ¹⁵NH₃ detection via NMR or mass spectrometry, and quantification of absolute NH₃ amounts down to nanomolar levels — have since become the de facto experimental standard.
+
+Post-2019 literature with rigorous controls presents a considerably more modest picture than the pre-2019 literature, but it is a cleaner foundation. The community has largely accepted the stricter standards, and peer review has tightened. The practical implication for technology assessment is that TRL 3–4 for direct eNRR is appropriate: genuine proof-of-concept exists, but it does not support the higher TRL claims implied by some pre-2019 literature, and the gap to TRL 5 (component validation in relevant environment) remains substantial.
+
 ---
 
 ## 4. Lithium-Mediated NRR
@@ -397,11 +423,188 @@ Solar PV and onshore wind have experienced the fastest cost declines of any ener
 
 ---
 
-## 9. Comparative Assessment Matrix
+## 9. Cost Trajectory and Crossover Analysis
+
+### 9.1 Current Cost Benchmarks
+
+The economics of green ammonia relative to conventional Haber-Bosch are well-characterized by RMI's 2025 review. The current spread is significant:
+
+- **Fossil-fuel ammonia (SMR-based Haber-Bosch):** approximately $200–400 per metric ton at current natural gas prices (RMI, 2025). The low end reflects US Gulf Coast production with low-cost shale gas; the high end reflects regions dependent on imported natural gas.
+- **Green ammonia (electrolytic hydrogen, current):** approximately $600–1,200 per metric ton, with the range driven primarily by the cost of renewable electricity and electrolyzer capital costs in the specific deployment context (RMI, 2025).
+
+The $400–800/t premium for green ammonia today is primarily the cost of the hydrogen production step. Electrolytic hydrogen currently costs $3–8/kg H₂ in most markets; since approximately 180 kg of H₂ is required per metric ton of NH₃, the hydrogen feedstock cost alone adds $540–1,440/t NH₃ before accounting for any nitrogen separation, Haber-Bosch synthesis, or product handling costs.
+
+**Note (SC-NUM):** All cost figures in this section are attributed to RMI (2025), *Low-Carbon Ammonia Technology: Blue, Green, and Beyond*, unless otherwise specified.
+
+### 9.2 The Renewable Electricity Cost Trajectory
+
+The foundational driver of green ammonia cost reduction is the long-run decline in renewable electricity costs. IRENA's *Renewable Power Generation Costs* reports document this trajectory quantitatively:
+
+- Solar PV global weighted-average levelized cost of electricity (LCOE) fell approximately 89% between 2010 and 2023 (IRENA, *Renewable Power Generation Costs in 2023*, published 2024). In 2010, utility-scale solar averaged approximately $0.40/kWh; by 2023, the global weighted average was approximately $0.044/kWh, with the lowest-cost projects reaching $0.02/kWh or below in high-irradiance regions.
+- Onshore wind LCOE fell approximately 69% over the same period (IRENA, 2024), from approximately $0.10/kWh to approximately $0.033/kWh globally weighted.
+
+This is not a one-time correction — IRENA's analysis projects continued cost reduction through 2030 as manufacturing scale increases, financing improves, and project experience accumulates. The Department of Energy's Hydrogen Shot program targets $1/kg H₂ ("1-1-1": $1/kg in 1 kg quantities within 1 decade), which, if achieved, would bring green hydrogen cost below current SMR hydrogen cost in most markets.
+
+The implications for green ammonia: if electrolyzer costs decline in parallel with electricity costs (which historical trends in solar and battery manufacturing suggest is plausible for modular electrochemical technologies), and if renewable electricity reaches $0.02/kWh at scale in high-resource regions, green hydrogen at $1.5–2/kg becomes achievable, implying green ammonia production cost of roughly $300–450/t — overlapping with or below the high end of current conventional ammonia costs.
+
+### 9.3 Crossover Scenarios
+
+No single authoritative source provides a definitive crossover date for green versus fossil ammonia cost parity, and this module does not overclaim one. What published analysis supports is a range of scenario-dependent projections:
+
+**Base case (RMI 2025 projection range):** Green ammonia could reach $300–600/t by 2030 under favorable but not extreme assumptions about renewable electricity cost and electrolyzer capital cost reduction. This overlaps with the upper range of conventional ammonia costs during natural gas price spikes.
+
+**Optimistic scenario:** In regions with exceptional renewable resources — the Arabian Peninsula, northern Chile (Atacama), Western Australia, the US Southwest — renewable electricity costs are already approaching $0.02–0.025/kWh for dedicated installations. In these locations, green hydrogen at $2/kg is a near-term target, placing green ammonia at $400–500/t. At this cost, green ammonia is already competitive with conventional ammonia in periods of elevated natural gas prices and approaches competitiveness at baseline natural gas prices in regions with high ammonia import costs.
+
+**Conservative scenario:** In regions with lower renewable resources, or where grid electricity is used rather than dedicated renewable generation, green ammonia remains $700–1,000/t through 2030. Cost parity with conventional production under normal natural gas prices is not projected before 2035–2040 in this scenario.
+
+**Note (SC-TRL):** These scenario projections derive from the RMI 2025 analysis and are conditional on assumptions about technology trajectories. They are not guaranteed forecasts.
+
+### 9.4 Geographic Variation in Current Competitiveness
+
+The global cost average obscures the fact that green ammonia is already approaching or reaching cost competitiveness in specific geographic contexts:
+
+**Chile (Atacama region):** Solar irradiance in the Atacama is among the highest on Earth. Several green ammonia projects are under development here, targeting both domestic fertilizer needs and export. The combination of world-class solar resources, available land, and proximity to agricultural regions in South America creates a genuinely competitive context.
+
+**Australia (Pilbara, Western Australia):** High solar irradiance combined with strong offshore wind resources and available land. The Australian government and several private developers have identified green ammonia export as a strategic priority. The HIF pilot in Chile and analogous Australian projects suggest that cost-competitiveness at export scale is achievable within this decade in these specific locations.
+
+**Middle East and North Africa (MENA):** Several MENA countries (Saudi Arabia, Oman, Morocco) have announced large-scale green hydrogen and green ammonia projects leveraging exceptional solar and wind resources. These projects are partly motivated by the recognition that fossil fuel revenues will decline as global energy transition proceeds, and diversification into green ammonia export provides an alternative revenue stream using the same industrial infrastructure base.
+
+The pattern: where renewable electricity is cheapest (below $0.025/kWh), green ammonia is already economically competitive with conventional production during periods of moderate-to-high natural gas prices. The global average cost figures obscure early-mover competitiveness in the best-resourced locations.
+
+### 9.5 Carbon Pricing and the Competitiveness Inflection
+
+Carbon pricing changes the cost comparison by adding a cost to conventional (fossil-based) ammonia production without adding cost to green ammonia. The magnitude depends on the carbon price and the emissions intensity of conventional production:
+
+- Conventional SMR-based ammonia emits approximately 1.5–2.0 tonnes CO₂ per tonne of NH₃ produced (RMI 2025; C&EN), primarily from the SMR step.
+- At a carbon price of $100/t CO₂, this adds $150–200/t NH₃ to the cost of conventional production.
+- At $150/t CO₂, the addition is $225–300/t NH₃.
+
+Current EU Emissions Trading Scheme (ETS) carbon prices have ranged from €60–100/t CO₂ in 2023–2024. At €80/t CO₂ (~$88/t), conventional EU ammonia production incurs roughly $130–175/t additional cost relative to green ammonia, which has near-zero direct emissions. This is a material shift in the competitive economics.
+
+The European Carbon Border Adjustment Mechanism (CBAM), phasing in from 2026, extends a carbon cost to imported ammonia as well — meaning imports from fossil-based producers will face carbon costs at the EU border. This levels the playing field between EU green ammonia producers and fossil-based imports. The CBAM is not yet at full rate, but it establishes a policy trajectory that accelerates the economic case for green ammonia within the EU market.
+
+At a global carbon price of $150/t CO₂ — a level discussed in various climate policy contexts as necessary for meaningful emissions reduction — conventional ammonia production would carry $225–300/t in carbon costs, bringing it fully above the $300–600/t projected range for green ammonia in 2030. Carbon pricing at this level would make green ammonia economically preferred even at current renewable electricity costs in most markets.
+
+**Note (SC-NUM):** EU ETS price range from publicly reported market data; CBAM policy timeline from European Commission official publications. Carbon cost calculations use RMI 2025 emissions factors.
+
+---
+
+## 10. Distributed vs. Centralized Production Architecture
+
+### 10.1 The Conventional Centralized Model
+
+The contemporary global ammonia industry is built around a fundamentally centralized architecture, optimized for the thermodynamic and economic realities of Haber-Bosch synthesis:
+
+- **Plant scale:** Economically viable Haber-Bosch plants operate at approximately 1,000–1,500 metric tons of ammonia per day (RMI 2025; C&EN). Below roughly 500 t/day, per-unit capital and operating costs become progressively unfavorable due to economies of scale in compression equipment, heat integration, and catalyst systems.
+- **Capital intensity:** A world-scale ammonia plant (1,000–1,500 t/day) requires approximately $1–2 billion in capital investment (RMI 2025 context; industry references). This capital intensity creates high barriers to entry and concentrates production among a small number of large industrial producers.
+- **Operational continuity:** As noted in section 2.5, Haber-Bosch reactors are designed for continuous operation at 90%+ capacity factors. The capital investment is amortized over long operational periods; frequent start-stop cycling is destructive to both catalyst and equipment.
+
+This centralized architecture means that nitrogen fertilizer, once produced, must be transported from a relatively small number of production centers to tens of millions of farms globally. That transportation burden is substantial.
+
+### 10.2 The Transportation Cost Argument
+
+Fertilizer transportation costs are frequently underweighted in production-focused economic analyses. For remote or inland agricultural regions, transportation can represent a significant fraction of the delivered cost of nitrogen fertilizer:
+
+- In the United States, ammonia is distributed via a network of approximately 3,000 miles of dedicated pipeline, concentrated in the Corn Belt. Farms outside this network receive ammonia by truck or rail, adding $30–80/t depending on distance and mode (RMI 2025; general fertilizer market context).
+- In sub-Saharan Africa, where agricultural land is frequently remote from ports and road infrastructure is limited, delivered fertilizer prices can be 2–4x the FOB price at origin (FAO; World Bank agricultural development context). A metric ton of urea (a common nitrogen fertilizer derived from ammonia) that costs $300 at a Middle Eastern production facility can arrive at a farm in the African interior at $600–800 due to port handling, inland freight, and last-mile distribution.
+- In remote island nations or mountainous agricultural regions (Nepal, Bolivia, Pacific island chains), transportation costs can exceed production costs entirely.
+
+A 2025 RMI analysis notes that in regions with high transport cost and poor ammonia infrastructure, on-farm or near-farm production from distributed electrochemical or plasma systems could be cost-competitive with delivered conventional ammonia even when the production cost per tonne is higher. The relevant economic metric is total delivered nitrogen cost, not production cost at the plant gate.
+
+This reframing is significant for technology assessment: plasma and electrochemical technologies that appear economically disadvantaged on a $/t NH₃ (at plant gate) comparison may be competitive or superior on a $/kg N (delivered to field) basis in specific geographies.
+
+### 10.3 Distributed Electrochemical Systems: Scale Characteristics
+
+Electrochemical systems — whether direct eNRR, Li-mediated NRR, or green ammonia via miniaturized electrolysis — can in principle operate at scales of 1–10 metric tons of ammonia equivalent per day. At these scales, a single farm or agricultural cooperative could operate its own nitrogen production unit powered by on-site solar or wind generation.
+
+The economic and logistical implications of this architecture are different from the centralized model in several important ways:
+
+**Capital investment:** A 1–10 t/day electrochemical nitrogen unit, even at higher per-unit capital cost than a large Haber-Bosch plant, requires $1–10 million rather than $1–2 billion. This is accessible to agricultural cooperatives, development finance institutions, and government rural electrification programs in ways that large ammonia plants are not.
+
+**No dedicated transport infrastructure:** The US ammonia pipeline network, the specialized ammonia ships that dominate global trade, and the pressurized road tankers required for anhydrous ammonia delivery represent a substantial sunk infrastructure cost that is concentrated in regions already served. Regions not currently served face the full cost of building this infrastructure or, alternatively, can leapfrog it entirely with distributed production. The analogy to mobile phones bypassing landline telephone infrastructure is direct.
+
+**Safety profile:** Anhydrous ammonia is a hazardous material requiring specialized storage (pressurized vessels), handling equipment, and trained personnel. Small-scale distributed systems that produce liquid NOx-based fertilizers (as NitroCapt and Nitricity do) or that produce dilute ammonia solution (aqueous ammonia) sidestep the most acute safety concerns associated with bulk anhydrous ammonia.
+
+**Coupling to rural electrification:** Distributed nitrogen fixation units powered by solar or wind can be co-located with rural electrification infrastructure. A solar microgrid serving a farming community could operate both a nitrogen fixation unit and general electrical loads, with the fertilizer production acting as a flexible load that absorbs excess generation during peak solar hours. This dual use improves the economics of the renewable installation.
+
+### 10.4 When Centralized Stays Competitive
+
+The centralized model's advantages are not easily replicated at small scale:
+
+- **Heat integration:** Large Haber-Bosch plants recover substantial energy from exothermic synthesis reactions, improving overall efficiency. Small-scale units lose the benefit of this heat integration.
+- **Economies of scale in compression:** Nitrogen separation from air and hydrogen compression to synthesis pressure are capital-intensive steps that become proportionally more expensive at small scale.
+- **Operator expertise:** Large plants run by specialized operators achieve better availability and efficiency than small distributed units, which may be operated by farmers without chemical process expertise.
+
+For high-value agricultural regions with good infrastructure and reliable supply chains — the US Corn Belt, northern Europe, the Australian wheatbelt — the centralized model with green ammonia (electrolysis plus Haber-Bosch at scale) is likely to remain the most cost-effective pathway through 2030 and beyond. The distributed electrochemical and plasma options are not universal replacements but are competitive replacements for specific market segments: remote, poorly served, and high-transport-cost regions.
+
+---
+
+## 11. Ammonia as Energy Carrier
+
+### 11.1 The Dual-Use Architecture
+
+Ammonia has a second identity in the emerging clean energy economy: as a hydrogen carrier and energy storage medium. This dual-use characteristic is strategically important for understanding the trajectory of green ammonia economics.
+
+Green hydrogen — produced by electrolysis from renewable electricity — is widely seen as a key decarbonization fuel for sectors that cannot easily electrify directly (long-haul shipping, certain industrial processes, potentially aviation). However, hydrogen has a fundamental logistics problem: it is the lightest element, has very low energy density per unit volume, and is technically difficult to transport and store at scale. It must be either compressed to very high pressure (350–700 bar, requiring heavy pressure vessels), liquefied to cryogenic temperatures (−253°C, close to absolute zero), or chemically converted to a carrier molecule.
+
+Ammonia is one of the most practical hydrogen carriers. Key properties that make it attractive:
+- Ammonia contains 17.8% hydrogen by weight — higher than many other proposed carriers.
+- Liquefaction temperature at atmospheric pressure: −33°C, far more tractable than liquid hydrogen at −253°C.
+- Global ammonia shipping infrastructure already exists: tens of millions of tonnes per year are shipped as refrigerated liquid. The Haber-Bosch industry built this infrastructure over a century.
+- Ammonia can be cracked back to N₂ and H₂ at the point of use (ammonia cracking: 2NH₃ → N₂ + 3H₂) over iron or ruthenium catalysts at moderate temperatures, recovering the hydrogen.
+- Alternatively, ammonia can be burned directly as a fuel in combustion turbines or used in fuel cells without cracking.
+
+This hydrogen-carrier role for ammonia is recognized in the IEA's *World Energy Outlook 2023* and in the Japanese and South Korean hydrogen strategies, both of which specifically identify green ammonia imports as a preferred hydrogen delivery vector. Japan has announced plans to import ammonia both for direct co-firing in coal power plants (as an emissions reduction measure) and as a hydrogen carrier.
+
+### 11.2 Maritime Fuel and IMO Decarbonization
+
+The International Maritime Organization (IMO) adopted a revised greenhouse gas strategy in 2023, targeting at least a 50% reduction in shipping GHG emissions from 2008 levels by 2050, with an aspirational goal of reaching net-zero by or around 2050 (IMO, *2023 IMO Strategy on Reduction of GHG Emissions from Ships*). This creates a large, policy-driven demand signal for zero-carbon marine fuels.
+
+Ammonia is a leading candidate zero-carbon marine fuel for several reasons:
+- High energy density relative to other green fuel candidates (e.g., methanol, which has lower volumetric energy density).
+- Established large-scale global shipping infrastructure.
+- Zero CO₂ emissions when burned (the products are N₂ and water vapor, with some NOx requiring aftertreatment).
+- Multiple engine manufacturers (MAN Energy Solutions, Wärtsilä) are developing dual-fuel ammonia-capable marine engines for deployment from 2025 onward.
+
+The shipping sector consumes approximately 300 million metric tons of fuel oil equivalent per year (IEA). Converting even 10% of this to ammonia would require roughly 80–100 million metric tonnes of ammonia annually — approximately 40–65% of current total global ammonia production. This scale of demand, if it materializes, would transform the economics of green ammonia production by creating a large non-agricultural buyer willing to pay a green premium.
+
+**Note (SC-TRL):** Marine ammonia fuel engines are at TRL 6–7 as of 2025, with several commercial demonstration vessels announced. The IMO targets are policy commitments, not guaranteed market outcomes. Ammonia as marine fuel faces real technical challenges including toxicity, slow flame speed, and NOx aftertreatment requirements.
+
+### 11.3 How Energy Sector Demand Accelerates Agricultural Ammonia Economics
+
+The dual-use dynamic creates a specific economic feedback loop relevant to agricultural ammonia:
+
+1. Energy sector demand (shipping, power generation, hydrogen import) creates large-scale procurement commitments for green ammonia.
+2. These commitments justify investment in large-scale green ammonia production infrastructure: electrolyzer gigafactories, offshore wind and solar dedicated to ammonia production, port handling facilities.
+3. Increased production scale drives down costs via manufacturing learning curves and economies of scale — the same dynamic that drove solar PV costs down 89% over 13 years.
+4. Lower-cost green ammonia production infrastructure reduces the cost of agricultural green ammonia, because the same production plants can serve both markets.
+
+This cross-sector demand aggregation is not speculative — it is the explicit logic underlying several large-scale green ammonia projects. The NEOM project in Saudi Arabia (Helios Green Fuels), for example, is targeting both export hydrogen/ammonia and domestic industrial use, with agricultural ammonia as one potential application stream. Similar logic applies to Australian and Chilean export projects.
+
+The implication for agricultural nitrogen fertilizer is that the agricultural sector may benefit from cost reductions driven primarily by energy sector investment. Agricultural ammonia demand alone (~150–230 MMT/yr) is large but concentrated in price-sensitive markets with limited willingness to pay a green premium. Maritime and energy sector demand adds buyers with policy mandates and potentially higher willingness to pay, which accelerates production scale-up and cost reduction that ultimately benefits the agricultural buyer.
+
+### 11.4 Infrastructure Overlap and Dual-Use Investment
+
+The physical infrastructure for green ammonia as an energy carrier and as a fertilizer feedstock is largely identical:
+- Electrolysis plants producing H₂ from renewable electricity.
+- Air separation units producing N₂ from atmosphere.
+- Haber-Bosch synthesis reactors.
+- Liquid ammonia storage at ports and distribution hubs.
+- Tanker ships for international transport.
+
+Where infrastructure diverges is at the point of use: agricultural ammonia requires further processing to fertilizer forms (urea, ammonium nitrate, or direct anhydrous application) and farm-level distribution; energy-sector ammonia requires cracking to H₂ or direct combustion infrastructure. But the production and bulk transport infrastructure is common.
+
+This means that capital investment in green ammonia export infrastructure serves both markets simultaneously. A port terminal capable of receiving green ammonia tankers can distribute product to both agricultural users and energy sector users in the same receiving country. This infrastructure duality reduces the per-unit capital cost allocation to each use sector, improving the economics of the green ammonia value chain overall.
+
+**Note (SC-ADV):** Specific project references (NEOM/Helios) are included as illustrative examples of the dual-use investment logic, not as endorsements of specific projects or their commercial prospects.
+
+---
+
+## 12. Comparative Assessment Matrix
 
 This section fulfills success criterion 9: rating each technology on four dimensions. Ratings use a five-point qualitative scale (1=Very Low, 2=Low, 3=Moderate, 4=High, 5=Very High) and are calibrated against current technology status and published assessments. These ratings are assessments of current and near-term capability, not long-term potential.
 
-### 9.1 Dimension Definitions
+### 12.1 Dimension Definitions
 
 1. **Scalability potential:** Capacity to reach meaningful fraction of global nitrogen fertilizer demand (150–230 MMT NH3/yr equivalent), considering resource requirements, manufacturing constraints, and deployment barriers.
 
@@ -411,7 +614,7 @@ This section fulfills success criterion 9: rating each technology on four dimens
 
 4. **Timeline to commercial viability:** Estimated timeframe before the technology can compete economically at meaningful scale under favorable but realistic conditions.
 
-### 9.2 Comparative Ratings
+### 12.2 Comparative Ratings
 
 | Technology | Scalability | Tech Readiness | Fossil Reduction | Timeline | Notes |
 |---|---|---|---|---|---|
