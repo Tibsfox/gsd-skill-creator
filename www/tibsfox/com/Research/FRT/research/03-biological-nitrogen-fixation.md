@@ -10,7 +10,7 @@
 
 ## Overview
 
-For 3.5 billion years, life solved the nitrogen problem without fossil fuels. The nitrogenase enzyme — a molecular machine of extraordinary antiquity and precision — has fixed atmospheric dinitrogen into biologically available ammonia since before the Cambrian explosion. The Haber-Bosch process, by contrast, is a century old, consumes 3–5% of global natural gas supply, and contributes 1–2% of global CO₂ emissions annually (FAO; C&EN).
+For 3.5 billion years, life solved the nitrogen problem without fossil fuels. The nitrogenase enzyme — a molecular machine of extraordinary antiquity and precision — has fixed atmospheric dinitrogen into biologically available ammonia since before the Cambrian explosion. The Haber-Bosch process, by contrast, is a century old, consumes 3–5% of global natural gas supply, and contributes 1–2% of global CO₂ emissions annually (FAO; C&EN; see Module 1, Section 1.3 and Table 1.2 for full fossil fuel accounting).
 
 The question this module addresses is not whether biological nitrogen fixation (BNF) can replace Haber-Bosch entirely — it cannot, not today, not at current agricultural scale. The question is: across which crops, in which contexts, and through which mechanisms can BNF meaningfully reduce synthetic nitrogen dependency? The answer is substantial, specific, and already happening at commercial scale in several pathways.
 
@@ -29,13 +29,15 @@ The canonical Mo-nitrogenase consists of two component proteins:
 - **Dinitrogenase (MoFe protein):** The catalytic component, encoded by *nifD* and *nifK*, containing the FeMo-cofactor (FeMoco) at its active site — an iron-sulfur-molybdenum cluster of composition [Mo-7Fe-9S-C-homocitrate]. This is where the N≡N triple bond, with a bond dissociation energy of 945 kJ/mol, is successively reduced.
 - **Dinitrogenase reductase (Fe protein):** Encoded by *nifH*, this homodimer transfers electrons one at a time to the MoFe protein, each transfer requiring ATP hydrolysis.
 
-The overall stoichiometry of the reaction under standard conditions (Seefeldt et al., J. Am. Chem. Soc., 2020, referenced in PMC/Nutrients) is:
+The overall stoichiometry of the reaction under standard conditions (Seefeldt, L.C. et al., "Reduction of Substrates by Nitrogenases," *Chemical Reviews*, 120(12), 5082–5106, 2020; referenced in PMC/Nutrients) is:
 
 > N₂ + 8H⁺ + 8e⁻ + 16 ATP → 2NH₃ + H₂ + 16 ADP + 16 Pᵢ
 
 This 16 ATP per N₂ (yielding 2 NH₃) equates to approximately 16 ATP per 2 reduced nitrogen atoms, or roughly 8 ATP per nitrogen atom fixed. At the macroscale, BNF requires approximately 5–6 grams of carbohydrate per gram of nitrogen fixed by symbiotic systems — energy that legumes supply from photosynthate transported to root nodules (PMC/Nutrients review on nitrogen use efficiency, 2025).
 
 **Critical note on the "same energy as Haber-Bosch" claim:** On a per-kilogram-of-nitrogen basis, the theoretical energy requirements converge, but the sources differ fundamentally. Haber-Bosch draws energy from fossil methane; nitrogenase draws energy from photosynthetically captured solar radiation converted to ATP in the host plant or microorganism. The energy expenditure is real — symbiotic BNF imposes a metabolic cost on the host plant — but it is a cost paid in sunlight, not in natural gas (PMC/Nutrients).
+
+**The carbon cost and crop yield trade-off.** The approximately 5–6 grams of carbohydrate required per gram of nitrogen fixed (PMC/Nutrients) has a direct agronomic consequence: photosynthate diverted to root nodules is photosynthate not available for grain fill, vegetative growth, or stress tolerance. In a well-nodulated soybean crop fixing 200 kg N/ha, the carbon cost to the plant is on the order of 1,000–1,200 kg of carbohydrate — equivalent to roughly 4–12% of total net photosynthate depending on growing conditions and cultivar (Kaschuk, G., Kuyper, T.W., Leffelaar, P.A., Hungria, M., and Giller, K.E., "Are the rates of photosynthesis stimulated by the carbon sink strength of rhizobial and arbuscular mycorrhizal symbioses?", *Soil Biology and Biochemistry*, 41(6), 1233–1244, 2009). This carbon tax explains why plants have evolved the autoregulation of nodulation (AON) system described in Section 4.6: under conditions of adequate soil nitrogen, investing carbon in BNF is a losing trade compared to direct nitrogen uptake from the soil pool. It also explains why BNF-dependent legume yields are sometimes 5–15% lower than the same cultivar supplied with abundant synthetic nitrogen under otherwise identical conditions — the carbon cost is real and measurable at the crop level. For the nutrient independence calculus, this means BNF does not come "free" even though it eliminates fossil fuel inputs: it trades fossil energy for solar energy captured by the crop, with a yield cost that varies by crop, climate, and management (see Module 1, Section 6.2 for the energy comparison between Haber-Bosch and nitrogenase).
 
 ### 1.2 Oxygen Sensitivity
 
@@ -365,7 +367,7 @@ Pivot Bio is the most commercially advanced company in this space. Their product
 
 The result is a diazotroph that "leaks" fixed nitrogen to the plant rather than retaining it for its own growth, creating a more mutualistic relationship than wild-type associative strains (C&EN 2023 coverage of Pivot Bio technology).
 
-**Deployment scale:** As of 2023 reporting (C&EN), Pivot Bio's PROVEN product line had been deployed on millions of hectares of U.S. corn and was expanding to wheat and other crops. This is not a laboratory or pilot-scale technology — it is a commercially deployed system operating at agricultural scale.
+**Deployment scale:** As of 2023 reporting (C&EN), Pivot Bio's PROVEN product line — including PROVEN 40, their flagship corn product designed to provide up to 40 lb N/acre (approximately 45 kg N/ha) of microbially fixed nitrogen per season — had been deployed on millions of hectares of U.S. corn and was expanding to wheat and other crops. This is not a laboratory or pilot-scale technology — it is a commercially deployed system operating at agricultural scale.
 
 **Documented yield effects:** Pivot Bio's published trial data (company data, referenced in C&EN) shows average corn yield increases of 5–10 bushels/acre (approximately 315–630 kg/ha) in replicated trials, with some trials showing equivalent yields to conventional nitrogen applications at reduced synthetic N rates. Independent university trials show more variable outcomes, consistent with the field variability theme that runs through all BNF research. The University of Minnesota finding (Daniel Kaiser, C&EN 2023) — that N-producing microbes increased yield at one site but not others — applies to Pivot Bio products as well as traditional inoculants.
 
@@ -474,7 +476,7 @@ Cover crop BNF has been shown to replace 40–80% of synthetic nitrogen requirem
 
 **Existing mineral nitrogen:** As discussed, high soil nitrate suppresses nodulation. The BNF inhibition threshold varies by species but is often cited at 50–100 kg N/ha for established soybeans. Managing nitrogen application timing (avoiding early-season synthetic N in legumes) and rate (not over-applying N) is essential to allow BNF to contribute.
 
-**Phosphorus:** BNF has high phosphorus demand — phosphorus is required for ATP synthesis supporting the energetically costly nitrogenase reaction, and for leghaemoglobin synthesis in nodules. Phosphorus-deficient soils show reduced BNF even when all other conditions are favorable. The BNF-phosphorus coupling means that phosphorus management (Module 5) and nitrogen management are not independent problems.
+**Phosphorus:** BNF has high phosphorus demand — phosphorus is required for ATP synthesis supporting the energetically costly nitrogenase reaction, and for leghaemoglobin synthesis in nodules. Phosphorus-deficient soils show reduced BNF even when all other conditions are favorable. The BNF-phosphorus coupling means that phosphorus management and nitrogen management are not independent problems (see Module 2, Section 5.2a for the soil chemistry of phosphorus fixation that limits plant-available P; see Module 5 for phosphorus recovery technologies that address the supply side of this constraint).
 
 **Molybdenum:** The FeMo-cofactor of nitrogenase requires molybdenum. Molybdenum deficiency is rare but can limit BNF in highly weathered tropical soils. Seed treatment with molybdenum compounds is a low-cost intervention that significantly improves BNF in molybdenum-limited soils.
 
@@ -541,7 +543,7 @@ Several documented effects of climate change on BNF efficacy deserve attention, 
 
 ### The Scale Constraint
 
-Global agriculture currently applies approximately 120 million metric tons of synthetic nitrogen per year (FAO 2024 data; cross-referenced with IFA statistics cited in Meers 2022). The entire global BNF contribution to agricultural systems is estimated at approximately 40–60 million metric tons of nitrogen per year (PMC/Nutrients citing Herridge et al. 2008 estimates), including both symbiotic and non-symbiotic pathways. This means BNF at current levels supplies roughly 30–35% of agricultural nitrogen — a substantial fraction, but one that has not grown proportionally with the Green Revolution's expansion of synthetic nitrogen applications.
+Global agriculture currently applies approximately 120 million metric tons of synthetic nitrogen per year (FAO 2024 data; cross-referenced with IFA statistics cited in Meers 2022; see Module 1, Section 1.2 and Table 9.1 for the broader Haber-Bosch production context of 150–230 MMT total ammonia, of which 75–90% goes to fertilizer, yielding the ~112–207 MMT agricultural nitrogen range). The entire global BNF contribution to agricultural systems is estimated at approximately 40–60 million metric tons of nitrogen per year (PMC/Nutrients citing Herridge et al. 2008 estimates), including both symbiotic and non-symbiotic pathways. This means BNF at current levels supplies roughly 30–35% of agricultural nitrogen — a substantial fraction, but one that has not grown proportionally with the Green Revolution's expansion of synthetic nitrogen applications.
 
 Growing BNF to replace Haber-Bosch entirely would require:
 - Expanding legume cultivation to an estimated 30–40% of global cropland (substantially above the current approximately 12–15% in major cereal-producing regions)
@@ -627,6 +629,8 @@ This module was specified to document all six BNF pathways with mechanism, yield
 - PMC/NCBI: Meers et al. (2022), "How can we possibly resolve the planet's nitrogen dilemma?" — global BNF contribution estimates, nitrogen dilemma framing
 - Springer Nature/Scientific Reports (2025): Mung bean multi-year PGPR study — 62% nodulation enhancement, 32% yield increase vs. 46% from urea
 - Preprints.org (2025): Biofertilizers for Enhanced Nitrogen Use Efficiency — consortium performance data, ambiguity of yield vs. BNF attribution
+- Kaschuk, G., Kuyper, T.W., Leffelaar, P.A., Hungria, M., and Giller, K.E. (2009): "Are the rates of photosynthesis stimulated by the carbon sink strength of rhizobial and arbuscular mycorrhizal symbioses?", *Soil Biology and Biochemistry*, 41(6), 1233–1244 — carbon cost of BNF (4–12% of net photosynthate), yield trade-off quantification
+- Seefeldt, L.C., Yang, Z.-Y., Lukoyanov, D.A., Harris, D.F., Dean, D.R., Raugei, S., and Hoffman, B.M. (2020): "Reduction of Substrates by Nitrogenases," *Chemical Reviews*, 120(12), 5082–5106, DOI: 10.1021/acs.chemrev.9b00556 — nitrogenase stoichiometry and mechanism
 
 **Government and Professional Organizations:**
 

@@ -172,7 +172,7 @@ When soil microorganisms process nitrate and ammonium in agricultural soils thro
 
 | Metric | Value | Source |
 |---|---|---|
-| N2O Global Warming Potential (GWP100) relative to CO2 | ~300× more potent | PMC/Tunley Environmental; consistent with IPCC AR6 values |
+| N2O Global Warming Potential (GWP100) relative to CO2 | ~273× (IPCC AR6); often rounded to ~300× in older literature (IPCC AR5) | IPCC AR6 WG1 Ch.7 (273×); PMC/Tunley Environmental (~300×, reflecting AR5 convention) |
 | N2O atmospheric lifetime | ~114 years | IPCC AR6 |
 | Agricultural soils share of global anthropogenic N2O | ~60% | PMC Preprints, 2025 |
 | N2O contribution to total greenhouse forcing | ~6% of global radiative forcing | IPCC AR6 context |
@@ -199,7 +199,7 @@ Continuous high-rate synthetic nitrogen application disrupts this balance throug
 
 1. **Carbon depletion:** Elevated nitrogen availability accelerates microbial decomposition of soil organic carbon, drawing down the C:N ratio over time and reducing the soil's structural carbon stock. This is sometimes described as "mining" the soil's biological capital.
 
-2. **Microbial community shift:** High-nitrogen conditions favor bacteria over fungi in soil microbial communities. Fungal networks — particularly mycorrhizal associations — are critical for phosphorus mobilization and soil aggregate formation. Suppression of fungal communities impairs these services, creating a second-order dependency on synthetic phosphorus fertilizers.
+2. **Microbial community shift:** High-nitrogen conditions favor fast-growing copiotrophic bacteria over slower-growing oligotrophic fungi in soil microbial communities. Specifically, ammonia-oxidizing bacteria such as *Nitrosomonas europaea* and *Nitrosospira* spp. proliferate under elevated ammonium concentrations, accelerating nitrification and N₂O production. Meanwhile, arbuscular mycorrhizal fungi (AMF) — particularly genera *Glomus*, *Rhizophagus*, and *Funneliformis* — are suppressed because the host plant reduces carbon allocation to mycorrhizal partners when nitrogen is abundant from synthetic sources (Treseder, K.K., "A meta-analysis of mycorrhizal responses to nitrogen, phosphorus, and atmospheric CO₂ in field studies," *New Phytologist*, 164(2), 347–355, 2004). AMF networks are critical for phosphorus mobilization and soil aggregate formation. Their suppression impairs these services, creating a second-order dependency on synthetic phosphorus fertilizers (see Module 2, Section 5.2a for the soil chemistry of phosphorus fixation that AMF networks help overcome).
 
 The net result, documented across long-term agricultural soil monitoring programs, is a trend toward reduced soil organic matter content in intensively managed agricultural soils — even as surface crop yields remain high due to synthetic input substitution (The-Compost-Gardener; consistent with USDA NRCS soil health literature).
 
@@ -285,7 +285,7 @@ Smallholder farmers in food-insecure nations have few or none of these options. 
 | **Food** | Total structurally N-dependent population | ~1.78 billion | FAO |
 | **Efficiency** | Nitrogen reaching human food (system NUE) | 17–20% | C&EN; Mission schema |
 | **Environment** | Global coastal dead zones | 400+ | EPA |
-| **Environment** | N2O GWP100 relative to CO2 | ~300× | IPCC AR6; PMC/Tunley |
+| **Environment** | N2O GWP100 relative to CO2 | ~273× (IPCC AR6); ~300× in older literature (AR5) | IPCC AR6 WG1 Ch.7; PMC/Tunley |
 | **Environment** | Agricultural N2O share of global anthropogenic N2O | ~60% | PMC Preprints, 2025 |
 | **Environment** | Soil C:N optimum disrupted by synthetic N | 20:1 ratio | The-Compost-Gardener |
 | **Price** | 2022 nitrogen price increase (relative to 2020) | ~3× | C&EN; Tunley Environmental |
@@ -304,7 +304,7 @@ Before the Haber-Bosch process, agricultural nitrogen came from a finite set of 
 
 **Guano deposits:** Seabird and bat excrement, concentrated over geological time in specific coastal and island locations, provided a concentrated nitrogen and phosphorus source that was mined extensively during the 19th century. Deposits in Peru, the Chincha Islands, and Pacific islands were exhausted within decades of intensive extraction, contributing to the geopolitical conflicts over resource access (the Guano Islands Act of 1856 in the United States; the War of the Pacific 1879–1884 among South American nations competing for nitrate deposits).
 
-**Synthetic nitrates (pre-Haber):** The Birkeland-Eyde process and other arc-based nitrogen fixation methods produced nitrates from atmospheric nitrogen using electricity, but were economically and energetically uncompetitive at scale.
+**Synthetic nitrates (pre-Haber) — the Birkeland-Eyde process:** In 1903, Norwegian scientists Kristian Birkeland and Sam Eyde developed the first industrial process for fixing atmospheric nitrogen, using an electric arc to heat air to approximately 3,000°C — temperatures at which N₂ and O₂ combine to form nitric oxide (NO), subsequently oxidized and absorbed in water to produce nitric acid. The Birkeland-Eyde process was commercialized at Notodden and Rjukan in Norway, powered by abundant and cheap hydroelectric power (Smil, V., *Enriching the Earth: Fritz Haber, Carl Bosch, and the Transformation of World Food Production*, MIT Press, 2001). However, the energy cost was enormous: approximately 60–70 MWh per metric ton of fixed nitrogen, compared to the Haber-Bosch process's approximately 10 MWh per metric ton in modern plants — roughly a 6–7× energy penalty. The Birkeland-Eyde process was economically viable only where electricity was nearly free, and it was rendered obsolete within two decades by the superior thermodynamic efficiency of Haber-Bosch. The historical parallel is striking: today's electrochemical nitrogen reduction research (see Module 4, Section 2) is, in a sense, revisiting the Birkeland-Eyde concept with modern catalysts and renewable electricity, seeking to close the energy gap that made the original electric arc approach uncompetitive. The arc process consumed approximately 15 GWh per kiloton of nitrogen; modern electrocatalytic approaches aim for energy costs approaching the Haber-Bosch thermodynamic floor of ~5 MWh/tonne — a 12–14× improvement over the original electric method.
 
 The Haber-Bosch process disrupted all of these constraints by converting atmospheric nitrogen — the most abundant gas on Earth at 78% of the atmosphere — into reactive nitrogen at industrial scale. The thermodynamic barrier that the process overcame (the N≡N triple bond, with a dissociation energy of 945 kJ/mol) is why natural nitrogen fixation is limited to specialized biological systems with nitrogenase enzymes.
 
@@ -318,7 +318,7 @@ N2 + 8H+ + 8e− + 16ATP → 2NH3 + H2 + 16ADP + 16Pi
 
 The energy cost in biological terms is high — approximately 16 ATP per N2 — but the energy source is solar-derived (photosynthate in the case of symbiotic systems, or solar-captured electrons in photosynthetic BNF). The system operates without fossil fuel inputs by definition.
 
-This contrast — industrial Haber-Bosch requiring 10 MWh/tonne at 400–550°C versus biological nitrogenase operating at 25°C — is the fundamental design challenge for alternatives research. Module 3 addresses the biological pathways in detail; Module 4 addresses electrochemical alternatives.
+This contrast — industrial Haber-Bosch requiring 10 MWh/tonne at 400–550°C versus biological nitrogenase operating at 25°C — is the fundamental design challenge for alternatives research. Module 3 addresses the biological pathways in detail (see Module 3, Section 1.1 for the nitrogenase stoichiometry and Section 1.2 for the oxygen sensitivity that constrains BNF engineering); Module 4 addresses electrochemical alternatives.
 
 ### 6.3 Fritz Haber's Legacy
 
@@ -339,7 +339,7 @@ The lifeline-liability duality of the Haber-Bosch process, described qualitative
 | **Food production** | ~50% of current global food production would not exist without synthetic N | C&EN | Only 17–20% of applied synthetic N reaches human food; 80–83% escapes to environment | C&EN; Mission schema |
 | **Historical scale** | World population grew from ~1.6 billion (1900) to ~8.2 billion (2024) — synthetic N a primary enabler of the post-1950 increase | Wikipedia, Haber process; UN | The process industrialized in 1913 has now created a dependency from which ~4 billion people cannot be fed without it in any short-run transition | C&EN; FAO |
 | **Marine ecosystems** | N/A (no direct lifeline function in marine systems) | — | 400+ documented coastal hypoxic zones globally, driven primarily by agricultural nitrogen loading | EPA |
-| **Climate** | N/A (no direct climate benefit attributable to synthetic N per se) | — | ~60% of global anthropogenic N2O emissions from agricultural soils; N2O is ~300× CO2 GWP100 and contributes ~6% of radiative forcing | PMC Preprints 2025; IPCC AR6 |
+| **Climate** | N/A (no direct climate benefit attributable to synthetic N per se) | — | ~60% of global anthropogenic N2O emissions from agricultural soils; N2O is ~273× CO2 GWP100 (IPCC AR6) and contributes ~6% of radiative forcing | PMC Preprints 2025; IPCC AR6 WG1 Ch.7 |
 | **Energy system** | The same 1–2% of world energy that produces synthetic N supports the food system for half of humanity | C&EN | 1–2% of global CO2 emissions attributable to ammonia synthesis alone — comparable to the aviation sector | C&EN |
 | **Geopolitics** | Low-cost nitrogen has democratized high-yield agriculture across countries that could not otherwise sustain Green Revolution productivity | FAO; C&EN | Gas-price-to-food-price coupling exposed food-insecure nations to ~3× nitrogen fertilizer price spikes in 2022 | C&EN; Tunley Environmental |
 | **Soil** | High-N input systems sustain crop yields that organic systems alone could not replicate at current population scales | C&EN; FAO | Continuous synthetic N application disrupts soil C:N optimum (20:1), suppresses mycorrhizal networks, and draws down soil organic carbon over decade-to-century timescales | The-Compost-Gardener; USDA NRCS context |
@@ -442,7 +442,7 @@ Current: 100 units applied × 17% efficiency = 17 units in food
 Target:   57 units applied × 40% efficiency = 22.8 units in food (exceeds current)
 ```
 
-More precisely: to deliver 17 units of food-nitrogen at 40% efficiency requires 17/0.40 = 42.5 units applied, versus 17/0.17 = 100 units today — a reduction of approximately 57 percent in nitrogen application with no reduction in food nitrogen delivery. Given that agricultural nitrogen use is approximately 112–207 million metric tons annually (derived from IFA production data), a 57 percent reduction would represent a cut of roughly 64–118 million metric tons per year — reducing synthetic nitrogen production demand by approximately half, with corresponding reductions in natural gas consumption, CO2 emissions, N2O emissions, nitrate leaching, and dead zone formation. No new technology is required for this scenario; only deployment of agronomic practices that already exist at commercial scale.
+More precisely: to deliver 17 units of food-nitrogen at 40% efficiency requires 17/0.40 = 42.5 units applied, versus 17/0.17 = 100 units today — a reduction of approximately 57 percent in nitrogen application with no reduction in food nitrogen delivery. Given that agricultural ammonia use is approximately 112–207 million metric tons annually (derived from IFA production data as 75–90% of total ammonia production; equivalent to approximately 92–170 million metric tons of elemental nitrogen at 82.3% N by mass in NH₃), a 57 percent reduction in nitrogen application would represent a cut of roughly 52–97 million metric tons of N per year — reducing synthetic nitrogen production demand by approximately half, with corresponding reductions in natural gas consumption, CO2 emissions, N2O emissions, nitrate leaching, and dead zone formation. No new technology is required for this scenario; only deployment of agronomic practices that already exist at commercial scale.
 
 ---
 
@@ -514,16 +514,16 @@ To fully characterize the challenge of reducing Haber-Bosch dependency, the scop
 | Parameter | Value | Implication |
 |---|---|---|
 | Annual ammonia production to replace or reduce | 150–230 million metric tons | At 10 MWh/tonne, this is 1.5–2.3 billion MWh of energy annually |
-| Of which to agriculture (75–90%) | ~112–207 million metric tons | Direct food system exposure |
+| Of which to agriculture (75–90%) | ~112–207 MMT ammonia (~92–170 MMT N) | Direct food system exposure |
 | Population depending on this nitrogen | ~4.1 billion (50% of 8.2B) | Cannot reduce without alternative supply or demand reduction |
 | Structural import dependency | ~1.78 billion (FAO) | Highest immediate risk if supply disrupts |
-| N2O emission reduction possible at 100% replacement | ~60% of anthropogenic N2O | ~360 Gt CO2-eq reduction over a century at 300× GWP |
+| N2O emission reduction possible at 100% replacement | ~60% of anthropogenic N2O | Substantial CO₂-eq reduction over a century at ~273× GWP100 (IPCC AR6); derived estimate — magnitude depends on baseline emission rate assumptions |
 
 No single alternative pathway covers the full demand at current technology readiness levels. This is the defining constraint of the transition challenge:
 
-- **Biological nitrogen fixation (BNF):** Can supply 20–50% replacement in appropriate crop systems (Module 3 detail); not universal across all crops and conditions
-- **Green ammonia:** Currently at TRL 7–8 for electrolysis-based H-B routes; economically competitive only where renewable electricity is extremely cheap (Module 4 detail)
-- **Electrochemical N2 reduction (eNRR):** TRL 3–4; laboratory scale, not yet near commercial viability (Module 4)
+- **Biological nitrogen fixation (BNF):** Can supply 20–50% replacement in appropriate crop systems (see Module 3, Section 2 for the six pathways and Section 5 for field performance synthesis); not universal across all crops and conditions
+- **Green ammonia:** Currently at TRL 7–8 for electrolysis-based H-B routes; economically competitive only where renewable electricity is extremely cheap (see Module 4, Section 1 for green ammonia pathways)
+- **Electrochemical N2 reduction (eNRR):** TRL 3–4; laboratory scale, not yet near commercial viability (see Module 4, Section 2 — note the historical continuity with the Birkeland-Eyde process described in Section 6.1 of this module)
 - **Nitrogen use efficiency improvement:** Precision agriculture, inhibitors, slow-release formulations can reduce the total requirement without eliminating synthetic production; ceiling effect not yet characterized
 - **Dietary shift:** Reduced animal protein consumption lowers system-level nitrogen demand (indirect pathway not detailed in this module)
 
@@ -543,7 +543,7 @@ The portfolio is not a fallback for lack of ambition — it is the correct struc
 The Haber-Bosch process occupies a unique position in human history: it is simultaneously the technology most responsible for the current scale of human civilization and one of the most significant sources of ongoing ecological damage. This is not a framing — it is the documented arithmetic:
 
 - **Lifeline:** Without it, food production would be insufficient for approximately 4 billion people at current dietary patterns; the Green Revolution that prevented famine in South and Southeast Asia in the 1960s–1980s depended on it; it underlies the nitrogen in approximately 40–50% of human body tissue
-- **Liability:** It consumes 1–2% of global energy, emits 1–2% of global CO2, produces the feedstock for ~60% of anthropogenic N2O, drives 400+ coastal dead zones, and couples food security to fossil fuel geopolitics in ways that amplify vulnerability for the most exposed populations
+- **Liability:** It consumes 1–2% of global energy, emits 1–2% of global CO2, produces the feedstock for ~60% of anthropogenic N2O (at ~273× CO2 warming potential per IPCC AR6), drives 400+ coastal dead zones, and couples food security to fossil fuel geopolitics in ways that amplify vulnerability for the most exposed populations
 
 Neither framing alone is accurate. A transition path that ignores the lifeline function proposes solutions that would cause immediate catastrophic harm. A path that ignores the liability dimension accepts perpetuation of an ecologically destructive system with compounding consequences. The research mission that this module begins is designed to characterize both dimensions honestly and to document the alternatives in the same evidentiary register.
 
@@ -575,6 +575,8 @@ All factual claims in this module are attributed to sources in the following reg
 | IPCC-AR6-WG1-CH7 | IPCC | Sixth Assessment Report, Working Group I, Chapter 7: The Earth's Energy Budget, Climate Feedbacks and Climate Sensitivity | N2O GWP100 = ~273 CO2-eq (100-year horizon); N2O atmospheric lifetime ~114 years; authoritative climate forcing values |
 | IPCC-AR6-WG3-CH7 | IPCC | Sixth Assessment Report, Working Group III, Chapter 7: Agriculture, Forestry and Other Land Uses (AFOLU) | Nitrification inhibitors as best-evidenced agricultural N2O mitigation option; DCD and DMPP N2O reduction 30–50%; paddy rice denitrification losses context |
 | IPCC-AR6-WG3-CH6 | IPCC | Sixth Assessment Report, Working Group III, Chapter 6: Energy Systems | Ammonia synthesis CO2 context within global industrial emissions; green ammonia technology readiness context |
+| SMIL-2001 | Smil, Vaclav | *Enriching the Earth: Fritz Haber, Carl Bosch, and the Transformation of World Food Production*, MIT Press, 2001 | Birkeland-Eyde process history, energy comparison (60–70 MWh/t N), Notodden/Rjukan commercialization |
+| TRESEDER-2004 | Treseder, K.K. | "A meta-analysis of mycorrhizal responses to nitrogen, phosphorus, and atmospheric CO₂ in field studies," *New Phytologist*, 164(2), 347–355, 2004 | AMF suppression under high synthetic N; *Glomus*, *Rhizophagus*, *Funneliformis* genera affected |
 
 **Professional and Organizational Sources:**
 
@@ -612,7 +614,7 @@ This module establishes five foundational findings that inform all subsequent mo
 
 **Finding 2 — The fossil fuel coupling is structural, not incidental.** Approximately 90 percent of the monetary cost of nitrogen fertilizer is natural gas (Resilience.org/Wenzel). The process consumes 3–5 percent of world natural gas production (Wikipedia; C&EN) and 1–2 percent of world energy supply (C&EN; Tunley Environmental). Decoupling nitrogen from fossil fuels requires either a different hydrogen source (green ammonia) or a different nitrogen fixation mechanism (biological or electrochemical).
 
-**Finding 3 — The environmental cascade is large and multi-dimensional.** Only 17–20 percent of applied nitrogen reaches human food (C&EN; Mission schema). The 80–83 percent remainder drives 400+ coastal dead zones (EPA), ~60 percent of anthropogenic N2O emissions (PMC Preprints 2025) at 300× CO2 warming potential (IPCC AR6), ammonia volatilization and PM2.5 formation, and progressive soil organic carbon depletion.
+**Finding 3 — The environmental cascade is large and multi-dimensional.** Only 17–20 percent of applied nitrogen reaches human food (C&EN; Mission schema). The 80–83 percent remainder drives 400+ coastal dead zones (EPA), ~60 percent of anthropogenic N2O emissions (PMC Preprints 2025) at ~273× CO2 warming potential (IPCC AR6 WG1 Ch.7), ammonia volatilization and PM2.5 formation, and progressive soil organic carbon depletion.
 
 **Finding 4 — Food security exposure is concentrated and asymmetric.** Approximately 1.78 billion people are structurally dependent on imported nitrogen or imported gas feedstock (FAO), with disproportionate exposure in food-insecure nations lacking domestic gas resources. Price shocks of the 2022 magnitude — ~3× nitrogen fertilizer prices (C&EN; Tunley Environmental) — propagate directly to food insecurity in these populations.
 
