@@ -1,0 +1,170 @@
+{
+  "mission": "personal-care",
+  "title": "Personal Care: Physical & Mental",
+  "subtitle": "The Whole-System Human: Evidence-Based Self-Care",
+  "date": "2026-04-05",
+  "status": "STAGED — Ready for GSD Orchestrator",
+  "activation_profile": "Squadron (12 roles, 5 modules, 2 parallel tracks)",
+  "token_budget": "~66,500 across 3-4 sessions",
+  "core_concept": "The human body-mind is an interdependent system; targeted inputs to any one pillar propagate improvements across all others. Pillars are multiplicative, not additive.",
+  "through_line": "Personal care is the power supply rail — the quietest, least glamorous component, but degrade it and every downstream component performs below specification.",
+  "modules": {
+    "A": {
+      "name": "Physical Foundations",
+      "track": "1A",
+      "model": "sonnet",
+      "est_tokens": 8000,
+      "word_target": "2000-3000",
+      "dependencies": ["schema"],
+      "content": "Movement/exercise science (DHHS guidelines), nutritional science (USDA/NIH), sleep architecture and circadian biology (NHLBI/CDC)",
+      "deliverables": ["Module A Survey"]
+    },
+    "B": {
+      "name": "Mental and Emotional Health",
+      "track": "1A",
+      "model": "sonnet",
+      "est_tokens": 7000,
+      "word_target": "1500-2500",
+      "dependencies": ["schema"],
+      "content": "Stress physiology (HPA axis, cortisol, allostatic load), cognitive health and neuroplasticity (BDNF), emotional regulation frameworks",
+      "deliverables": ["Module B Survey"]
+    },
+    "C": {
+      "name": "Social Connection",
+      "track": "1B",
+      "model": "sonnet",
+      "est_tokens": 6000,
+      "word_target": "1500-2000",
+      "dependencies": ["schema"],
+      "content": "Loneliness epidemiology, Holt-Lunstad 2024, WHO Commission 2025, Surgeon General 2023, intervention evidence",
+      "deliverables": ["Module C Survey"]
+    },
+    "D": {
+      "name": "Lifestyle Systems and Habit Architecture",
+      "track": "2",
+      "model": "sonnet",
+      "est_tokens": 8000,
+      "word_target": "2000-3000",
+      "dependencies": ["A", "B", "C", "E"],
+      "content": "ACLM six pillars, behavior change science, implementation intentions, environmental design, identity-based habits, Northwestern Four Pillars",
+      "deliverables": ["Module D Survey"]
+    },
+    "E": {
+      "name": "Mind-Body Interface",
+      "track": "1B",
+      "model": "sonnet",
+      "est_tokens": 6000,
+      "word_target": "1500-2000",
+      "dependencies": ["schema"],
+      "content": "Gut-brain axis (Verma 2024), psychoneuroimmunology (Dillon), HPA axis and allostatic load mechanisms",
+      "deliverables": ["Module E Survey"]
+    }
+  },
+  "waves": {
+    "0": {
+      "name": "Foundation",
+      "mode": "sequential",
+      "model": "haiku",
+      "tasks": ["source_index_schema", "shared_safety_checklist", "module_output_template", "test_harness"]
+    },
+    "1A": {
+      "name": "Physical + Mental",
+      "mode": "parallel",
+      "model": "sonnet",
+      "modules": ["A", "B"],
+      "gate_after": true
+    },
+    "1B": {
+      "name": "Social + Mind-Body",
+      "mode": "parallel",
+      "model": "sonnet",
+      "modules": ["C", "E"],
+      "gate_after": true
+    },
+    "2": {
+      "name": "Lifestyle Systems",
+      "mode": "sequential",
+      "model": "sonnet",
+      "modules": ["D"],
+      "note": "Reads all Wave 1 outputs; cross-references A, B, C, E findings"
+    },
+    "3": {
+      "name": "Synthesis",
+      "mode": "sequential",
+      "model": "opus",
+      "tasks": ["pillar_interaction_model", "practical_protocol_guide", "personalization_framework", "gap_uncertainty_summary"],
+      "gate_after": true
+    },
+    "4": {
+      "name": "Publication + Verification",
+      "mode": "sequential",
+      "model": "sonnet",
+      "tasks": ["final_document_assembly", "verification_pass", "index_page"]
+    }
+  },
+  "safety_critical": [
+    { "id": "SC-01", "area": "Clinical mental illness", "type": "ABSOLUTE GATE", "rule": "Never substitute for licensed professional assessment or treatment" },
+    { "id": "SC-02", "area": "Medication interactions", "type": "ABSOLUTE GATE", "rule": "No pharmaceutical or supplement dosing recommendations" },
+    { "id": "SC-03", "area": "Clinical eating disorders", "type": "ABSOLUTE GATE", "rule": "Nutritional content must not include restrictive framing; refer to NEDA/ANAD" },
+    { "id": "SC-04", "area": "Chronic disease management", "type": "GATE", "rule": "General principles only; defer specific protocols to care team" }
+  ],
+  "success_criteria": [
+    { "id": 1, "description": "All factual claims attributed to NIH, CDC, WHO, peer-reviewed journals, or ACLM sources" },
+    { "id": 2, "description": "Physical Foundations module covers exercise, nutrition, and sleep with dose-response data" },
+    { "id": 3, "description": "Sleep module includes NHLBI adult duration guidelines and circadian biology fundamentals" },
+    { "id": 4, "description": "Social connection module integrates 2025 WHO Commission and 2023 Surgeon General Advisory" },
+    { "id": 5, "description": "Mind-Body Interface module identifies at least three distinct mechanistic pathways" },
+    { "id": 6, "description": "Habit Architecture module includes at least one evidence-based behavior change model" },
+    { "id": 7, "description": "Cross-module synthesis produces a practical pillar interaction model" },
+    { "id": 8, "description": "All five modules are independently verifiable (each cites primary sources)" },
+    { "id": 9, "description": "Safety-critical tests pass: no unsourced clinical claims; no contraindicated advice" },
+    { "id": 10, "description": "Personalization framework provides differentiation criteria without clinical assessment" },
+    { "id": 11, "description": "Final document suitable for direct use by non-specialist reader" },
+    { "id": 12, "description": "LaTeX compiles cleanly in three XeLaTeX passes; PDF renders without errors" }
+  ],
+  "sources": {
+    "government": [
+      { "id": "CDC-SLEEP", "title": "About Sleep", "org": "CDC", "url": "cdc.gov/sleep", "modules": ["A"] },
+      { "id": "CDC-PA", "title": "Physical Activity Guidelines", "org": "CDC", "modules": ["A"] },
+      { "id": "NHLBI-SLEEP", "title": "Sleep Deprivation and Deficiency", "org": "NHLBI", "modules": ["A"] },
+      { "id": "NIH-NURSING", "title": "Nursing Health Promotion: Healthy Lifestyle", "org": "NIH/NCBI", "ref": "NBK615357", "modules": ["A", "D"] },
+      { "id": "NIH-LM-WELLBEING", "title": "Lifestyle Mental Wellbeing for Primary Care Visit", "org": "NIH/NCBI", "ref": "NBK587344", "modules": ["B", "D"] },
+      { "id": "NIH-LM-PREVENTION", "title": "Lifestyle Prevention Measures for Clinic Visit", "org": "NIH/NCBI", "ref": "NBK587343", "modules": ["D"] },
+      { "id": "USDA-MYPLATE", "title": "MyPlate Nutritional Guidelines 2020-2025", "org": "USDA", "modules": ["A"] },
+      { "id": "DHHS-PA", "title": "Physical Activity Guidelines for Americans, 2nd Ed", "org": "U.S. DHHS", "year": 2018, "modules": ["A"] },
+      { "id": "SG-SOCIAL", "title": "Advisory on Social Connection and Community", "org": "U.S. Surgeon General", "year": 2023, "modules": ["C"] },
+      { "id": "WHO-MENTAL", "title": "New Framework for Mental Health, Brain Health and Substance Use", "org": "WHO", "year": 2024, "modules": ["B"] },
+      { "id": "WHO-SOCIAL", "title": "Commission on Social Connection — Flagship Report", "org": "WHO", "year": 2025, "modules": ["C"] }
+    ],
+    "peer_reviewed": [
+      { "id": "HOLT-LUNSTAD-2024", "title": "Social connection as a critical factor for mental and physical health", "journal": "World Psychiatry", "vol": "23", "pages": "312-332", "year": 2024, "modules": ["C"] },
+      { "id": "PRABAKAR-2024", "title": "The Power of Thought: Psychological Attentiveness in Patient Trajectories", "journal": "Yale J Biol Med", "vol": "97(3)", "pages": "335-347", "year": 2024, "modules": ["B"] },
+      { "id": "DOLEZAL-2017", "title": "Interrelationship between Sleep and Exercise: A Systematic Review", "journal": "Advances in Preventive Medicine", "year": 2017, "modules": ["A", "E"] },
+      { "id": "VERMA-2024", "title": "Gut-Brain Axis: Role of Microbiome, Metabolomics, Hormones, and Stress in Mental Health Disorders", "journal": "Cells", "vol": "13(17)", "year": 2024, "modules": ["E"] },
+      { "id": "KANG-2024", "title": "Loneliness and the experiences of everyday stress and stressor-related emotion", "journal": "Stress and Health", "year": 2024, "modules": ["C"] },
+      { "id": "SHAMS-WHITE-2023", "title": "Healthy Eating Index-2020", "journal": "J Acad Nutr Diet", "vol": "123(9)", "pages": "1280-1288", "year": 2023, "modules": ["A"] },
+      { "id": "DIGITAL-LONELINESS-2025", "title": "Digital interventions for loneliness — Meta-analysis", "journal": "ScienceDirect / Computers in Human Behavior", "year": 2025, "modules": ["C"] }
+    ],
+    "professional": [
+      { "id": "ACLM", "title": "American College of Lifestyle Medicine", "url": "lifestylemedicine.org", "modules": ["D"] },
+      { "id": "APA", "title": "American Psychological Association", "url": "apa.org", "modules": ["B"] },
+      { "id": "SLEEP-FOUNDATION", "title": "Sleep Foundation", "url": "sleepfoundation.org", "modules": ["A"] },
+      { "id": "NORTHWESTERN-4P", "title": "Four Pillars of Self-Care Framework", "org": "Northwestern Medicine", "modules": ["D"] },
+      { "id": "NEDA", "title": "National Alliance for Eating Disorders", "url": "allianceforeatingdisorders.com", "modules": ["safety"] }
+    ]
+  },
+  "crew_manifest": {
+    "FLIGHT": { "model": "opus", "role": "Mission orchestration; synthesis; pillar interaction model; practical protocol" },
+    "PLAN": { "model": "sonnet", "role": "Wave decomposition; parallel track optimization; dependency management" },
+    "SCOUT": { "model": "sonnet", "role": "Additional source gathering; gap-fill research" },
+    "EXEC_A": { "model": "sonnet", "role": "Module A (Physical) + Module B (Mental) production" },
+    "EXEC_B": { "model": "sonnet", "role": "Module C (Social) + Module E (Mind-Body) production" },
+    "CRAFT_PHY": { "model": "sonnet", "role": "Exercise/nutrition/sleep specialist — dose-response data" },
+    "CRAFT_PSY": { "model": "sonnet", "role": "Mental health/stress/cognition specialist — HPA axis, BDNF" },
+    "VERIFY": { "model": "sonnet", "role": "Source validation; safety-critical test enforcement; criteria verification" },
+    "INTEG": { "model": "opus", "role": "Cross-module integration; pillar interaction validation" },
+    "CAPCOM": { "model": "human", "role": "Wave boundary approval; safety review; final delivery gate" },
+    "BUDGET": { "model": "haiku", "role": "Token budget tracking; session planning" },
+    "SURGEON": { "model": "haiku", "role": "Safety-critical content monitoring; clinical boundary enforcement" }
+  }
+}
