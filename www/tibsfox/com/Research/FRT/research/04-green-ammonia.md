@@ -69,6 +69,8 @@ Green ammonia is not a new chemistry — it is conventional Haber-Bosch with the
 **Water electrolysis:** 2H2O → 2H2 + O2 (powered by wind, solar, or other renewables)  
 **Haber-Bosch synthesis:** N2 + 3H2 → 2NH3 (iron catalyst, high T and P)
 
+In conventional Haber-Bosch production, the hydrogen feedstock comes from a two-step process: steam methane reforming (CH₄ + H₂O → CO + 3H₂ at ~700–1000°C) followed by the water-gas shift reaction (CO + H₂O → CO₂ + H₂ at ~200–400°C), as detailed in Module 1, Section 2.2. It is the water-gas shift step that generates the CO₂ that makes conventional ammonia production carbon-intensive — roughly 1.5–2.0 tonnes CO₂ per tonne of NH₃ (RMI, 2025). Green ammonia eliminates both steps entirely by sourcing hydrogen from water electrolysis, which produces no carbon-containing byproducts.
+
 The nitrogen feedstock comes from air separation via cryogenic distillation or pressure swing adsorption, identical to conventional plants. Only the hydrogen sourcing changes. This means that the substantial body of Haber-Bosch engineering knowledge — catalyst development, reactor design, safety protocols — is fully applicable. Green ammonia leverages a century of chemical engineering rather than requiring a wholesale redesign.
 
 ### 2.2 TRL Status: 7–8
@@ -190,6 +192,8 @@ The thermodynamic reduction potential for N₂ to NH₃ (at pH 0, relative to th
 This is the mechanistic trap of aqueous eNRR: the same potential window needed to do useful work on N₂ is the same window where H₂ production runs away. No conventional metal catalyst has escaped this trap cleanly in aqueous media at synthetically relevant rates.
 
 **What commercial viability requires.** The target for electrochemical N₂ fixation to become commercially relevant has been estimated at approximately 60–80% Faradaic efficiency at a current density of at least 10 mA/cm² and a production rate of at least 10⁻⁸ mol NH₃ cm⁻² s⁻¹, sustained over hundreds of operational hours without significant degradation (MacFarlane group; RMI 2025 framing of technical milestones). The 60–80% FE threshold is not arbitrary — it reflects the minimum efficiency at which the cost of electricity input per unit of ammonia becomes competitive with green ammonia via electrolysis-plus-Haber-Bosch, given realistic cell voltages and balance-of-plant assumptions. Below this threshold, the economics of direct eNRR are worse than simply producing H₂ via electrolysis and feeding it to a conventional Haber-Bosch reactor.
+
+For context, the lithium-mediated indirect pathway (Section 4) has demonstrated Faradaic efficiency of approximately 69 ± 1% for NH₃ production using an ethanol proton relay in a tetrahydrofuran-based electrolyte (Suryanto et al. 2021, *Science*, 372(6547), 1187–1191) — the highest rigorously validated FE for any electrochemical N₂ fixation pathway to date. This result, confirmed with ¹⁵N₂ isotopic labeling, establishes a concrete benchmark against which direct eNRR systems must be measured. The gap between direct eNRR's validated 1–10% FE range and the Li-mediated pathway's ~69% FE illustrates the magnitude of the catalysis challenge that direct eNRR must overcome.
 
 **Promising catalyst directions.** Three catalyst design strategies have produced the most credible improvements in FE or selectivity relative to conventional transition metals:
 
@@ -387,7 +391,7 @@ Nium's positioning as "emerging commercial stage" suggests it is beyond early la
 | Plasma fixation (current, range) | ~140–2,800 (per kg N x 5.7 to normalize) | Arabian Journal of Chemistry review; van Rooij et al. |
 | Photocatalytic (theoretical, not demonstrated at scale) | Indeterminate | Research stage; no system estimates available |
 
-Green ammonia's energy footprint (9–14 MWh/t NH3) is modest relative to plasma pathways because it retains the thermodynamically efficient Haber-Bosch reactor — only the hydrogen sourcing changes. The penalty relative to conventional H-B is primarily the efficiency loss in the electrolysis step (current alkaline and PEM electrolyzers operate at 60–80% efficiency; RMI 2025).
+Green ammonia's energy footprint (9–14 MWh/t NH3) is modest relative to plasma pathways because it retains the thermodynamically efficient Haber-Bosch reactor — only the hydrogen sourcing changes. The penalty relative to conventional H-B is primarily the efficiency loss in the electrolysis step. Current electrolyzer technologies differ in their efficiency characteristics: alkaline electrolyzers (the more mature technology) achieve approximately 65–75% efficiency on a higher heating value (HHV) basis, while proton exchange membrane (PEM) electrolyzers achieve approximately 60–70% HHV efficiency but offer superior dynamic response to variable power input — a critical advantage for coupling to intermittent renewable generation (RMI 2025; IEA, *Global Hydrogen Review 2023*). Solid oxide electrolysis cells (SOEC), operating at high temperature (~700–850°C), can achieve efficiencies above 80% HHV when waste heat is available, but are at an earlier stage of commercial deployment (TRL 6–7). The combined electrolysis efficiency range of 60–80% cited in this module reflects the envelope across these three technologies (RMI, 2025).
 
 ### 8.2 Cost Context
 
@@ -551,8 +555,8 @@ Ammonia is one of the most practical hydrogen carriers. Key properties that make
 - Ammonia contains 17.8% hydrogen by weight — higher than many other proposed carriers.
 - Liquefaction temperature at atmospheric pressure: −33°C, far more tractable than liquid hydrogen at −253°C.
 - Global ammonia shipping infrastructure already exists: tens of millions of tonnes per year are shipped as refrigerated liquid. The Haber-Bosch industry built this infrastructure over a century.
-- Ammonia can be cracked back to N₂ and H₂ at the point of use (ammonia cracking: 2NH₃ → N₂ + 3H₂) over iron or ruthenium catalysts at moderate temperatures, recovering the hydrogen.
-- Alternatively, ammonia can be burned directly as a fuel in combustion turbines or used in fuel cells without cracking.
+- Ammonia can be cracked back to N₂ and H₂ at the point of use (ammonia cracking: 2NH₃ → N₂ + 3H₂) over iron or ruthenium catalysts at moderate temperatures (450–650°C for conventional catalysts; lower with advanced ruthenium-based catalysts), recovering the hydrogen. The cracking step carries a significant energy penalty: the reaction is endothermic (ΔH ≈ +46 kJ/mol NH₃), requiring approximately 15–30% of the energy content of the hydrogen produced to drive the decomposition, depending on catalyst, temperature, and heat recovery efficiency (IEA, *Global Hydrogen Review 2023*; Lucentini et al. 2021, *Industrial & Engineering Chemistry Research*). This round-trip efficiency loss — electricity → H₂ → NH₃ → transport → NH₃ cracking → H₂ — means that the overall energy efficiency of the ammonia-as-hydrogen-carrier pathway is approximately 25–35% from renewable electricity to delivered H₂, a factor that must be weighed against ammonia's superior transport logistics.
+- Alternatively, ammonia can be burned directly as a fuel in combustion turbines or used in fuel cells without cracking, avoiding the decomposition energy penalty but requiring NOx aftertreatment.
 
 This hydrogen-carrier role for ammonia is recognized in the IEA's *World Energy Outlook 2023* and in the Japanese and South Korean hydrogen strategies, both of which specifically identify green ammonia imports as a preferred hydrogen delivery vector. Japan has announced plans to import ammonia both for direct co-firing in coal power plants (as an emissions reduction measure) and as a hydrogen carrier.
 
@@ -703,6 +707,8 @@ The modular paradigm is not without constraints: manufacturing costs per unit ca
 
 - van Rooij, G.J. et al. (2023). Energy efficiency of plasma nitrogen fixation. *Journal of Physics D: Applied Physics*. [Plasma energy range 0.5–10 MJ/g N; cited in Arabian Journal of Chemistry review]
 
+- Lucentini, I., Garcia, X., Cobber, X., Llorca, J., and Ramirez de la Piscina, P. (2021). Review of the decomposition of ammonia to generate hydrogen. *Industrial & Engineering Chemistry Research*, 60(51), 18560–18611. [Ammonia cracking energy penalty and catalyst requirements; cited in section 11.1]
+
 - C&EN (American Chemical Society). "The industrialization of the Haber-Bosch process." *Chemical and Engineering News*.
 
 - C&EN. "Industrial ammonia production emits more CO2 than any other chemical-making reaction." *Chemical and Engineering News*.
@@ -722,6 +728,8 @@ The modular paradigm is not without constraints: manufacturing costs per unit ca
 - CF Industries. Green ammonia partnership disclosures.
 
 ### Energy and Policy Organizations
+
+- IEA (International Energy Agency). (2023). *Global Hydrogen Review 2023*. International Energy Agency. [Electrolyzer efficiency by type (alkaline, PEM, SOEC); ammonia cracking energy requirements; cited in sections 8.1 and 11.1]
 
 - IRENA (International Renewable Energy Agency). (2024). *Renewable Power Generation Costs in 2023*. International Renewable Energy Agency. [Solar LCOE 89% decline 2010–2023; onshore wind LCOE 69% decline; cited in section 9.2]
 

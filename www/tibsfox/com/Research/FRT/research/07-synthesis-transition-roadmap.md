@@ -86,19 +86,19 @@ The following matrix rates all alternative pathways documented across Modules 3,
 
 ### 2.2 Comparative Ratings
 
-| Technology | Scalability | TRL Rating | Fossil Fuel Reduction | Timeline | Source Modules |
-|---|---|---|---|---|---|
-| Symbiotic BNF (legumes) | 4 | 5 | 5 | 5 | M3 |
-| Engineered microbes (Pivot Bio) | 4 | 4 | 5 | 5 | M3 |
-| PGPR consortia | 4 | 4 | 4 | 5 | M3 |
-| Green ammonia (electrolysis + H-B) | 5 | 4 | 5 | 4 | M4 |
-| Electrochemical NRR | 4 | 2 | 5 | 2 | M4 |
-| Plasma-catalytic | 3 | 3 | 5 | 3 | M4 |
-| Struvite recovery (wastewater) | 3 | 4 | 3 | 5 | M5 |
-| Struvite (sewage sludge ash) | 2 | 3 | 3 | 3 | M5 |
-| Hydroponics | 4 | 5 | 3 | 5 | M6 |
-| Vertical farming | 3 | 5 | 3 | 5 | M6 |
-| Regenerative agriculture | 5 | 5 | 4 | 5 | M6 |
+| Technology | Scalability | TRL Rating | Fossil Fuel Reduction | Timeline | Quantitative Basis | Source Modules |
+|---|---|---|---|---|---|---|
+| Symbiotic BNF (legumes) | 4 | 5 | 5 | 5 | 180M ha global legume crop; 50-300 kg N/ha/yr; $3.5B inoculant market (2023) | M3 |
+| Engineered microbes (Pivot Bio) | 4 | 4 | 5 | 5 | Millions of ha US corn deployed; EPA FIFRA approved; 20% annual market growth 2020-2024 | M3 |
+| PGPR consortia | 4 | 4 | 4 | 5 | 20-50% synthetic N replacement documented; >$4B biostimulant market (2024) at 14% CAGR | M3 |
+| Green ammonia (electrolysis + H-B) | 5 | 4 | 5 | 4 | Can replace full 150-230 MMT/yr NH3; $600-1,200/t vs $200-400/t conventional (RMI 2025) | M4 |
+| Electrochemical NRR | 4 | 2 | 5 | 2 | Faradaic efficiency 1-10% aqueous; needs >60% FE at >10 mA/cm2 for viability | M4 |
+| Plasma-catalytic | 3 | 3 | 5 | 3 | NitroCapt/Nitricity pre-commercial; energy 10-100x worse than H-B per unit N; intermittency-tolerant | M4 |
+| Struvite recovery (wastewater) | 3 | 4 | 3 | 5 | 3.7M tonnes P/yr recoverable; ~20% of ag P demand at full deployment (Tonini 2018) | M5 |
+| Struvite (sewage sludge ash) | 2 | 3 | 3 | 3 | Up to 84.92% recovery demonstrated; Germany mandating by 2029; concentrated in incinerating jurisdictions | M5 |
+| Hydroponics | 4 | 5 | 3 | 5 | $5B global market (2023) at 12.4% CAGR; 80-90% fertilizer reduction per unit; crop-type bounded | M6 |
+| Vertical farming | 3 | 5 | 3 | 5 | 7x energy premium vs greenhouse (38.8 vs 5.4 kWh/kg); leafy greens viable, staples structurally excluded | M6 |
+| Regenerative agriculture | 5 | 5 | 4 | 5 | Applicable to 4.8B ha (1.4B crop + 3.4B pasture); 50 lb N/acre/yr BNF in mature systems | M6 |
 
 ### 2.3 Rating Explanations
 
@@ -144,16 +144,16 @@ The roadmap is organized across three time horizons with milestones that build s
 
 ### 3.2 Milestone Table
 
-| Horizon | # | Milestone | Description | Dependencies | Key Metric |
-|---------|---|-----------|-------------|--------------|------------|
-| Near (2025-2030) | 1 | Scale biofertilizers to 10% of cereal N demand | Deploy PGPR and engineered microbes on sufficient cereal hectarage to displace 10% of synthetic N applied to cereals globally | M3 | % of cereal N from BNF sources |
-| Near (2025-2030) | 2 | Deploy struvite at 500+ wastewater plants | Close the P loop on 5-10% of agricultural P demand through wastewater recovery | M5 | Number of plants with operational recovery |
-| Near (2025-2030) | 3 | Green ammonia cost parity pilot | Demonstrate green ammonia at regional scale at or near cost parity with fossil ammonia | M4 | $/ton NH3 gap versus conventional |
-| Medium (2030-2040) | 4 | BNF covers 30-50% of cereal N | Engineered microbes and PGPR at commercial scale across major cereal regions | M3 | % synthetic N displaced in cereals |
-| Medium (2030-2040) | 5 | Struvite covers 15-20% of global P | Full-scale recovery infrastructure at wastewater plants, SSA facilities, and manure treatment | M5 | Million tonnes P recovered/yr |
-| Medium (2030-2040) | 6 | Green ammonia replaces 25% of H-B | Multiple large-scale green ammonia plants operational, servicing major agricultural markets | M4 | Million tonnes green NH3/yr |
-| Long (2040-2050) | 7 | Closed-loop P for 50% of agriculture | Circular P economy combining wastewater recovery, SSA processing, manure management, legacy mobilization, and ecological sanitation | M5 + M6 | % P from recycled sources |
-| Long (2040-2050) | 8 | Fossil-free N fixation for 50%+ of demand | Combined bio + electrochemical + green ammonia meeting majority of N demand without fossil fuels | M3 + M4 | % of global N from fossil-free sources |
+| Horizon | # | Milestone | Description | Current Status (2026) | Key Risk Factors | Dependencies | Key Metric |
+|---------|---|-----------|-------------|----------------------|------------------|--------------|------------|
+| Near (2025-2030) | 1 | Scale biofertilizers to 10% of cereal N demand | Deploy PGPR and engineered microbes on sufficient cereal hectarage to displace 10% of synthetic N applied to cereals globally | ~2-5% of cereal N from biological sources; Pivot Bio on millions of US corn hectares; Brazil at 15M ha Azospirillum; biofertilizer market growing ~20%/yr | Field variability (Daniel Kaiser problem); EU GMO regulatory barriers; natural gas price collapse removing economic incentive | M3 | % of cereal N from BNF sources |
+| Near (2025-2030) | 2 | Deploy struvite at 500+ wastewater plants | Close the P loop on 5-10% of agricultural P demand through wastewater recovery | ~50-100 plants with operational recovery globally (Ostara, PhosphoGREEN, NuReSys, PHOSPAQ); Germany mandate (2029) driving EU deployment; EU organic certification granted | Mined phosphate price competition; regulatory fragmentation outside EU; capital constraints in developing countries | M5 | Number of plants with operational recovery |
+| Near (2025-2030) | 3 | Green ammonia cost parity pilot | Demonstrate green ammonia at regional scale at or near cost parity with fossil ammonia | Green NH3 at $600-1,200/t vs conventional $200-400/t; Yara Porsgrunn, CF Industries Donaldsonville projects in development; green H2 at $3-8/kg vs $1-2 target | Electrolyzer manufacturing bottlenecks; PGM supply constraints for PEM; H-B intermittency coupling unresolved | M4 | $/ton NH3 gap versus conventional |
+| Medium (2030-2040) | 4 | BNF covers 30-50% of cereal N | Engineered microbes and PGPR at commercial scale across major cereal regions | Total agricultural BNF ~40-60 MMT N/yr (~30-35% of ag N); cereal-specific BNF substantially lower; cereal nodulation at TRL 2-3 | Climate change degrading BNF above 35C; biological complexity of cereal-microbe engineering; farmer resistance to N-reduction risk | M3 | % synthetic N displaced in cereals |
+| Medium (2030-2040) | 5 | Struvite covers 15-20% of global P | Full-scale recovery infrastructure at wastewater plants, SSA facilities, and manure treatment | Wastewater recovery ~0.9-1.1 MMT P/yr at 50% deployment (~5% of demand); animal manure recovery largely pilot-stage; SSA recovery pre-commercial | Infrastructure costs in developing countries; persistent price advantage of mined rock; competition from legacy P mobilization | M5 | Million tonnes P recovered/yr |
+| Medium (2030-2040) | 6 | Green ammonia replaces 25% of H-B | Multiple large-scale green ammonia plants operational, servicing major agricultural markets | Pre-commercial demonstration stage; no 1,000+ t/day green ammonia plant yet operational; cost gap narrowing from both directions | Enormous capital investment; competing renewable electricity demand from transport/heating; blue ammonia cost competition | M4 | Million tonnes green NH3/yr |
+| Long (2040-2050) | 7 | Closed-loop P for 50% of agriculture | Circular P economy combining wastewater recovery, SSA processing, manure management, legacy mobilization, and ecological sanitation | Combined recovery pathways at ~5-10% of demand; ecological sanitation at demonstration stage; legacy P mobilization documented but not systematically deployed | Generational infrastructure transformation (50-100 yr sanitation system lifespans); cultural barriers to urine separation; regional specificity of legacy P reserves | M5 + M6 | % P from recycled sources |
+| Long (2040-2050) | 8 | Fossil-free N fixation for 50%+ of demand | Combined bio + electrochemical + green ammonia meeting majority of N demand without fossil fuels | BNF at ~30-35% of total ag N; green ammonia pre-commercial; eNRR at TRL 3-4; plasma at TRL 4-5; combined fossil-free N well below 50% of total | Population growth increasing total demand; climate change degrading BNF; eNRR breakthrough timing inherently unpredictable | M3 + M4 | % of global N from fossil-free sources |
 
 ### 3.3 Milestone Analysis
 
@@ -220,6 +220,76 @@ The roadmap is organized across three time horizons with milestones that build s
 *What could prevent it:* The arithmetic is demanding: 50% of current synthetic nitrogen production is 60+ million metric tons per year. BNF at 30-50% of cereals plus green ammonia at 25% of industrial production does not necessarily sum to 50% of total demand because the categories overlap and the percentages apply to different denominators. Population growth and dietary shifts could increase total demand faster than alternatives displace conventional production. Climate change degrading BNF performance (M3 Section 5) could reduce the biological contribution.
 
 *Evidence it is achievable:* The portfolio logic from M3 and M4 converges on this target: BNF for the biological fraction, green ammonia for the industrial fraction, efficiency improvements to reduce total demand. Current BNF already supplies approximately 30-35% of total agricultural nitrogen (M3 Section 6). Green ammonia projects are scaling. Nitrogen use efficiency improvements — precision agriculture, nitrification inhibitors, slow-release formulations — could reduce total demand by 20-30% without yield loss (M1 Section 9.1). The combination is plausible within 25 years under sustained investment and favorable policy conditions.
+
+### 3.4 What Would It Take: The Arithmetic of Transition
+
+The portfolio approach described in Section 1.5 and rated in Section 2 is a qualitative argument. This section makes it quantitative: if the alternative pathways documented across Modules 1-6 reach the milestones described above, what fraction of fossil-coupled nutrient dependency would be displaced? The following calculations use module-sourced figures throughout (SC-NUM: all base figures are attributed to specific modules; the arithmetic combining them is synthesis performed for this analysis).
+
+**The Nitrogen Arithmetic**
+
+The starting point: global agriculture applies approximately 120 million metric tons of synthetic nitrogen per year (FAO 2024; M3 Section 6), produced from approximately 150-230 million metric tons of ammonia (IFA 2021-2022; M1 Table 1.1), consuming 3-5% of world natural gas supply and emitting 1-2% of global CO2 (C&EN; M1 Section 1.3).
+
+Three levers operate simultaneously:
+
+*Lever 1: BNF displaces 30% of synthetic N (Milestone 4 lower bound).* Thirty percent of 120 MMT synthetic N = 36 MMT N displaced. At 82.3% N content in ammonia, this is equivalent to approximately 44 MMT of ammonia production avoided — roughly 19-29% of total ammonia production. This nitrogen would instead come from atmospheric N2 fixed by biological systems powered by solar-derived photosynthate, with zero fossil fuel input on the production side (M3 Section 1.1). Current agricultural BNF already contributes approximately 40-60 MMT N/yr (Herridge et al. 2008 via PMC/Nutrients; M3 Section 6), so a 36 MMT increase represents a 60-90% expansion of existing biological fixation — ambitious but not unprecedented given that Brazil has already demonstrated national-scale BNF adoption displacing 2-3 MMT N/yr on soybean alone (Embrapa; M3 Section 7).
+
+*Lever 2: Green ammonia replaces 25% of remaining H-B production (Milestone 6).* After BNF displacement, remaining ammonia demand is approximately 106-186 MMT/yr. Twenty-five percent of this = 27-47 MMT of green ammonia, produced from electrolytic hydrogen and renewable electricity rather than steam methane reforming. This eliminates the fossil hydrogen feedstock for that fraction (M4 Section 2.1). At current energy intensity of approximately 9-14 MWh/t for green ammonia including electrolysis (RMI 2025; M4 Section 8.1), this requires 240-650 TWh of renewable electricity — substantial but within the scale of projected global renewable capacity additions (IEA context; M4 Section 8.4).
+
+*Lever 3: NUE improvement from 17% to 40% reduces total demand by ~57% (M1 Section 7.4).* This is the most powerful lever and requires no new production technology — only deployment of agronomic practices that already exist: split application timing, nitrification inhibitors (DCD, DMPP reducing N2O by 30-50%; IPCC AR6 WG3), variable rate application, and slow-release formulations (M1 Section 7.4). If system-level NUE doubles from the current 17-20% to 40%, the same food output can be achieved with approximately 51 MMT of synthetic N instead of 120 MMT — a reduction of 69 MMT, or 57% of current applications (M1 Section 7.4, derived arithmetic). This lever simultaneously reduces the nitrogen cascade: fewer dead zones, less N2O, less groundwater contamination (M1 Section 3).
+
+*Combined effect:* The three levers do not simply add because they interact. If NUE improvement reduces total synthetic N demand to ~51 MMT, and BNF covers 30% of that reduced demand (~15 MMT), the remaining synthetic N requirement is ~36 MMT — roughly 30% of today's 120 MMT. If green ammonia produces 25% of the remaining ammonia needed, approximately 11 MMT of ammonia is fossil-free. The net result: fossil-fuel-dependent nitrogen fertilizer production falls from 120 MMT N/yr to approximately 27 MMT N/yr — a reduction of roughly 75-80%. Natural gas consumption by the ammonia sector falls proportionally: from 3-5% of world gas supply to under 1%.
+
+SC-CONT: This combined arithmetic is illustrative, not a projection. It assumes all three levers reach their milestone targets simultaneously, which is optimistic. Partial achievement of each lever would still produce substantial fossil fuel displacement. The interaction effects (NUE reducing the denominator that BNF and green ammonia operate on) mean the combination is more powerful than the sum of its parts.
+
+**The Phosphorus Arithmetic**
+
+Global agricultural phosphorus demand is approximately 17-22 million tonnes P/yr (USGS; M5 Section 8.2). The current system loses approximately 80% of all mined phosphorus to the environment (Columbia University Earth Institute; M5 Section 1.1).
+
+Four levers:
+
+*Lever 1: Wastewater struvite recovery at moderate deployment.* At 50% of theoretical maximum deployment, approximately 0.9-1.1 MMT P/yr recoverable — roughly 5% of global demand (M5 Section 8.2). At full deployment (Tonini et al. 2018 theoretical maximum), up to 3.7 MMT P/yr — roughly 20% (M5 Section 3.2).
+
+*Lever 2: Animal manure recovery at meaningful scale.* Potentially 0.5-1.0 MMT P/yr — roughly 3-5% of global demand (M5 Section 8.2).
+
+*Lever 3: Legacy soil phosphorus mobilization.* Regenerative agriculture practices — mycorrhizal network restoration extending root phosphorus access by 10-100x (PMC/Nutrients 2025; M6 Section 6.3), reduced tillage preserving fungal networks, diverse rotations — progressively reduce the demand for new phosphorus inputs. WSU/CSANR estimates that over-fertilized grazing soils contain legacy phosphorus sufficient for up to 100 years without additional mining in relevant regions (WSU/CSANR; Menezes-Blackburn et al. 2018; M6 Section 6.1). This is not a supply source but a demand reducer: if 20-30% of agricultural land transitions to practices that access legacy P rather than requiring new inputs, the effective demand reduction is 5-15% of global mined phosphate.
+
+*Lever 4: CEA nutrient efficiency.* Controlled environment agriculture achieves 80-90% reduction in fertilizer use per unit production through precision delivery and recirculation (M6 Section 7.1). CEA is crop-type bounded (leafy greens, herbs, not staple grains) but growing at 12.4% CAGR (McGill Innovation Fund 2025; M6 Section 1.4). Its phosphorus demand reduction is meaningful for the crops it serves but does not address the bulk of agricultural phosphorus use.
+
+*Combined effect:* At moderate scenario (50% recovery deployment + manure recovery + 20% legacy mobilization + CEA growth): combined displacement of approximately 15-25% of mined phosphate demand by 2040. At aggressive scenario (full recovery + widespread regenerative adoption): 30-40% displacement. Neither scenario reaches 50% without generational infrastructure transformation including ecological sanitation (M5 Section 7), which operates on 30-50+ year timescales.
+
+The phosphorus arithmetic is less dramatic than the nitrogen arithmetic because phosphorus has no atmospheric reservoir — there is no equivalent of "fixing P from the air." Every phosphorus atom in the biosphere was ultimately weathered from rock. The transition for phosphorus is therefore a materials-cycling transition (recovering and reusing what we already have) rather than the energy transition that characterizes nitrogen. This fundamental asymmetry, identified in Section 1.1, determines the different ambition levels in the nitrogen and phosphorus milestones.
+
+### 3.5 Critical Path Dependencies
+
+The eight milestones are not independent — they form a dependency network where certain prerequisites must be met before downstream milestones become achievable. The following text-form dependency graph maps what must happen first.
+
+**Layer 0: Foundation Prerequisites (must be in place before any milestone advances)**
+
+- *Renewable electricity infrastructure at scale.* Green ammonia (Milestones 3, 6), electrochemical NRR, and plasma fixation all require abundant, low-cost renewable electricity. The entire nitrogen-side transition is, at root, an electrification strategy (M4 Section 8.4). Without continued decline in renewable electricity costs toward and below $0.02-0.03/kWh in high-resource locations, the economic case for green ammonia does not close. Solar PV and onshore wind costs have fallen approximately 90% and 70% since 2010 (IEA; M4 Section 8.4); continued progress on this trajectory is a prerequisite, not a given.
+
+- *Regulatory frameworks for recovered fertilizer products.* Struvite recovery (Milestones 2, 5, 7) requires that recovered phosphorus products have legal market access as fertilizers. The EU has led with Regulation 2021/1165 granting organic certification to struvite (M5 Section 2.4) and Germany has mandated recovery by 2029 (M5 Section 4.6). The United States lacks a comprehensive federal framework for recovered phosphorus fertilizers (M5 Section 6.3). Without regulatory clarity in major agricultural markets, the technology works but the product cannot be sold.
+
+**Layer 1: Near-Term Enablers (2025-2030) — must succeed for medium-term milestones to be feasible**
+
+- Milestone 1 (biofertilizers to 10% cereal N) enables Milestone 4 (BNF to 30-50% cereal N). The near-term milestone validates that engineered microbes and PGPR can perform reliably across diverse geographies and soil types — narrowing the Daniel Kaiser variability problem (M3 Section 2). Without this validation, farmer confidence for the medium-term scale-up does not develop.
+
+- Milestone 3 (green ammonia cost parity pilot) enables Milestone 6 (green ammonia at 25% of H-B). The pilot must demonstrate that green ammonia can be produced at costs approaching conventional ammonia during gas price spikes ($600+/t). Without this economic proof point, the capital investment for dozens of world-scale facilities will not flow.
+
+- Milestone 2 (struvite at 500+ plants) enables Milestone 5 (struvite at 15-20% of global P). The near-term deployment proves facility-level economics and builds the operational track record that other jurisdictions need to see before adopting Germany-style mandatory recovery regulations.
+
+**Layer 2: Cross-Domain Dependencies**
+
+- *BNF scale-up (Milestones 1, 4) depends on phosphorus availability (Milestones 2, 5).* Nitrogenase requires ATP, and ATP synthesis requires phosphorus. Phosphorus-deficient soils show reduced BNF even when all other conditions are favorable (M3 Section 4.5). The nitrogen transition through biological pathways requires that the phosphorus transition provides adequate P to support BNF. Struvite recovery and legacy P mobilization are therefore not just phosphorus solutions — they are nitrogen transition prerequisites.
+
+- *Green ammonia (Milestones 3, 6) competes for renewable electricity with transport electrification, building heating, and industrial decarbonization.* If renewable capacity additions do not outpace demand from these competing sectors, electricity costs for hydrogen production may not reach the $0.02-0.03/kWh needed for green ammonia competitiveness. This is a macro-energy system dependency that no fertilizer-sector investment can resolve alone.
+
+- *Inoculant supply chains in developing countries (Milestone 1 prerequisite for Milestone 4 in sub-Saharan Africa and South Asia).* Brazil and the United States have mature inoculant supply chains with cold storage, quality control, and distribution infrastructure. Sub-Saharan Africa and parts of South Asia do not. Scaling BNF to global impact requires building these supply chains where they do not yet exist — a logistics and institutional challenge as much as a technology challenge.
+
+- *Financing mechanisms for the regenerative transition (Milestones 4, 7, 8).* Farmers transitioning from synthetic-input-dependent systems to regenerative practices face a 3-10 year period of potentially reduced yields and increased management complexity before the biological systems mature (M6 Section 5.4). Without transition financing — whether through carbon credit programs, government transition payments, or patient private capital — risk-averse farmers will not make the switch, particularly smallholders operating at subsistence margins.
+
+**Layer 3: Long-Term Convergence (2040-2050)**
+
+- Milestones 7 and 8 (closed-loop P at 50% and fossil-free N at 50%+) require the cumulative success of all preceding milestones plus generational infrastructure changes (urban sanitation redesign for P, distributed renewable-powered fixation for N). These milestones are achievable only if the near-term and medium-term milestones create sufficient momentum — demonstrated economics, proven supply chains, established regulatory frameworks — to sustain political and investment commitment across multi-decade timescales. The critical risk is that partial success in the near term is declared "good enough," and the transformative investment needed for the long-term milestones never materializes.
 
 ---
 
