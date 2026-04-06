@@ -161,7 +161,7 @@ The significance for food security analysis is as follows: to the extent that a 
 
 The 2008 phosphate price crisis provides a concrete case study in supply-demand fragility.
 
-Between 2007 and mid-2008, the price of diammonium phosphate (DAP), the dominant phosphate fertilizer in global trade, increased by approximately 700–800% (Columbia University Earth Institute, "Phosphorus: Essential to Life"; Science Array, multiple analyses). The proximate causes operated in combination:
+Between 2007 and mid-2008, the price of diammonium phosphate (DAP), the dominant phosphate fertilizer in global trade, increased by approximately 700–800% relative to pre-spike lows — from roughly $150–200/tonne in early 2007 to peaks exceeding $1,200/tonne in mid-2008 (Columbia University Earth Institute, "Phosphorus: Essential to Life"; the magnitude of the percentage increase depends on the baseline date selected, with 2006–2007 lows producing the largest percentage figures). The proximate causes operated in combination:
 
 **Elevated energy costs.** Phosphate rock processing is energy-intensive. The oil price run-up of 2007–2008 — with Brent crude peaking above $140/barrel — increased production and transport costs across the fertilizer supply chain.
 
@@ -526,7 +526,7 @@ Unlike nitrogen, phosphorus cannot be fixed from air by any biological or indust
 | Morocco's share of world reserves | 70–85% | USGS; Cordell & White 2011 | Upper bound includes post-2011 upward revision based on unverified self-reported data |
 | 5-country share of world reserves | ~85% | Cordell et al. 2009; USGS | Morocco + China + Algeria + Syria + Jordan |
 | US domestic reserve lifetime | ~25 years | USGS; Columbia Earth Institute | At current extraction rates; does not account for demand growth |
-| 2008 phosphate price spike magnitude | ~700–800% | Columbia Earth Institute; Science Array | DAP price; occurred within ~12 months |
+| 2008 phosphate price spike magnitude | ~700–800% (from 2006–2007 lows to mid-2008 peak) | Columbia Earth Institute | DAP price; ~$150–200/t to >$1,200/t; percentage depends on baseline date |
 | Global food price increase 2005–2008 | ~80% | Columbia Earth Institute | Phosphate supply was one of multiple drivers |
 | Share of mined P lost to environment | ~80% | Cordell et al. 2009; Elser & Bennett 2011 | Full supply-chain estimate |
 | Number of coastal dead zones | 400+ | Columbia Earth Institute; EPA | Late 2010s data; expanding at ~10%/decade |
@@ -571,7 +571,7 @@ Unlike nitrogen, phosphorus cannot be fixed from air by any biological or indust
 
 **International Fertilizer Development Center (IFDC).** World Phosphate Rock Reserves and Resources (2010 assessment). As cited in Cordell and White 2011. [IFDC]
 
-**Science Array.** Analysis of 2008 phosphate price spike and global food price transmission. [SCIENCE-ARRAY]
+**Science Array.** Analysis of 2008 phosphate price spike and global food price transmission. [SCIENCE-ARRAY] [UNVERIFIED — needs primary source check: "Science Array" does not appear to be a peer-reviewed journal or recognized agency; claims attributed to this source should be cross-verified against Cordell et al. 2009 or Columbia Earth Institute before final publication]
 
 **Resilience.org.** Peak Phosphorus — resource compilation and synthesis. [RESILIENCE]
 

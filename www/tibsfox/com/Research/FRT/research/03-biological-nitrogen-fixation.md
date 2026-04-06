@@ -543,7 +543,7 @@ Several documented effects of climate change on BNF efficacy deserve attention, 
 
 ### The Scale Constraint
 
-Global agriculture currently applies approximately 120 million metric tons of synthetic nitrogen per year (FAO 2024 data; cross-referenced with IFA statistics cited in Meers 2022; see Module 1, Section 1.2 and Table 9.1 for the broader Haber-Bosch production context of 150–230 MMT total ammonia, of which 75–90% goes to fertilizer, yielding the ~112–207 MMT agricultural nitrogen range). The entire global BNF contribution to agricultural systems is estimated at approximately 40–60 million metric tons of nitrogen per year (PMC/Nutrients citing Herridge et al. 2008 estimates), including both symbiotic and non-symbiotic pathways. This means BNF at current levels supplies roughly 30–35% of agricultural nitrogen — a substantial fraction, but one that has not grown proportionally with the Green Revolution's expansion of synthetic nitrogen applications.
+Global agriculture currently applies approximately 120 million metric tons of synthetic nitrogen per year (FAO 2024 data; cross-referenced with IFA statistics cited in Meers 2022; see Module 1, Section 1.2 and Table 9.1 for the broader Haber-Bosch production context of 150–230 MMT total ammonia, of which 75–90% goes to agriculture as ~112–207 MMT ammonia, equivalent to ~92–170 MMT elemental nitrogen). The entire global BNF contribution to agricultural systems is estimated at approximately 40–60 million metric tons of nitrogen per year (PMC/Nutrients citing Herridge et al. 2008 estimates), including both symbiotic and non-symbiotic pathways. This means BNF at current levels supplies roughly 30–35% of agricultural nitrogen — a substantial fraction, but one that has not grown proportionally with the Green Revolution's expansion of synthetic nitrogen applications.
 
 Growing BNF to replace Haber-Bosch entirely would require:
 - Expanding legume cultivation to an estimated 30–40% of global cropland (substantially above the current approximately 12–15% in major cereal-producing regions)
@@ -627,6 +627,7 @@ This module was specified to document all six BNF pathways with mechanism, yield
 - PMC/Nutrients (2025): Nitrogen Use Efficiency in Agriculture — mechanistic BNF data, energy requirements, 20–50% synthetic N replacement figures, BNF-phosphorus coupling
 - PMC (2022): Cyanobacterial nitrogen fixation scaling — 1 hectare cultivation/100 hectare fertilization figure
 - PMC/NCBI: Meers et al. (2022), "How can we possibly resolve the planet's nitrogen dilemma?" — global BNF contribution estimates, nitrogen dilemma framing
+- Herridge, D.F., Peoples, M.B., and Boddey, R.M. (2008): "Global inputs of biological nitrogen fixation in agricultural systems," *Plant and Soil*, 311(1–2), 1–18. DOI: 10.1007/s11104-008-9668-3 — 40–60 MMT N/year global BNF estimate, symbiotic and non-symbiotic contributions
 - Springer Nature/Scientific Reports (2025): Mung bean multi-year PGPR study — 62% nodulation enhancement, 32% yield increase vs. 46% from urea
 - Preprints.org (2025): Biofertilizers for Enhanced Nitrogen Use Efficiency — consortium performance data, ambiguity of yield vs. BNF attribution
 - Kaschuk, G., Kuyper, T.W., Leffelaar, P.A., Hungria, M., and Giller, K.E. (2009): "Are the rates of photosynthesis stimulated by the carbon sink strength of rhizobial and arbuscular mycorrhizal symbioses?", *Soil Biology and Biochemistry*, 41(6), 1233–1244 — carbon cost of BNF (4–12% of net photosynthate), yield trade-off quantification
@@ -637,6 +638,7 @@ This module was specified to document all six BNF pathways with mechanism, yield
 - FAO: Energy and food security implications of transitioning synthetic nitrogen fertilizers — global Haber-Bosch figures; nitrogen tonnage data
 - WSU/CSANR: How Does Regenerative Agriculture Reduce Nutrient Inputs? — 50 lb/acre/year grass-legume BNF, citing Whitehead 2000; cover crop N fixation ranges
 - ATTRA/NCAT: Cover crop nitrogen fixation ranges (hairy vetch, crimson clover)
+- Frontiers in Nutrition (2025): Regenerative agriculture review — cover crop BNF replacement potential (40–80% synthetic N reduction) [UNVERIFIED — specific article title, authors, and DOI needed for full citation; the 40–80% range is corroborated by WSU/CSANR data]
 
 **Professional Scientific Journalism:**
 
@@ -657,7 +659,7 @@ This module was specified to document all six BNF pathways with mechanism, yield
 BNF does not exist in isolation from the broader nitrogen efficiency problem. Even the most productive BNF systems lose nitrogen to the environment through the same pathways as synthetic nitrogen: leaching of nitrate formed by nitrification of ammonium, N₂O emissions from denitrification of soil nitrate, and volatilization of ammonia from surface-applied organic matter. The environmental co-benefits of BNF over synthetic nitrogen are real but require careful accounting:
 
 **What BNF genuinely avoids:**
-- The fossil energy input to synthesize anhydrous ammonia via Haber-Bosch (approximately 33–37 GJ per tonne N produced; FAO synthesis)
+- The fossil energy input to synthesize anhydrous ammonia via Haber-Bosch (approximately 33–37 GJ per tonne N produced in best-available-technology plants; FAO synthesis; equivalent to approximately 7.5–8.5 MWh per tonne NH₃ — consistent with the ~10 MWh/t NH₃ average and ~5 MWh/t thermodynamic minimum cited in Module 1, Section 1.1)
 - The CO₂ emissions from natural gas reforming (approximately 1.5–2 tonnes CO₂ per tonne N in modern plants; C&EN)
 - The N₂O emissions from ammonia production itself (a minor but non-zero source)
 

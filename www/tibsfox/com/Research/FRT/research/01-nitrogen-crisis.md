@@ -44,7 +44,7 @@ The thermodynamic minimum energy requirement is approximately 5 MWh per metric t
 
 | Metric | Value | Source |
 |---|---|---|
-| Global annual ammonia production | 150–230 million metric tons | IFA, 2021–2022 data |
+| Global annual ammonia production | 150–230 million metric tons (lower bound reflects lower-production years; upper bound reflects installed capacity; typical recent-year production ~180–190 MMT) | IFA, 2021–2022 data |
 | Share used for fertilizers | 75–90% | Wikipedia, Haber process |
 | Share used for other applications | 10–25% | Wikipedia, Haber process |
 | Year process was industrialized | 1913 | Wikipedia, Haber process |
