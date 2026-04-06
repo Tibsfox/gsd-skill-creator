@@ -1,0 +1,1133 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Agricultural/Food-System Color Scheme
+\definecolor{primary}{HTML}{2E5902}      % Deep field green
+\definecolor{secondary}{HTML}{6B3A10}    % Rich soil brown
+\definecolor{tertiary}{HTML}{1A5276}     % Deep water blue
+\definecolor{accent}{HTML}{4A7C15}       % Growth green
+\definecolor{lightprimary}{HTML}{EAF5E1} % Light field
+\definecolor{lightsecondary}{HTML}{F5EDE3}
+\definecolor{lighttertiary}{HTML}{D6EAF8}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Food System Nutrient Independence}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=tertiary,
+  pdfauthor={GSD Ecosystem / Tibsfox Inc.},
+  pdftitle={Food System Nutrient Independence -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\begin{document}
+
+% =====================================================================
+% TITLE PAGE
+% =====================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Food System Nutrient\\[0.3em]Independence}}
+
+\vspace{0.5cm}
+{\Large\sffamily\textcolor{secondary}{Breaking the Fossil Fuel Grip on the Global Food Supply}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{0.4cm}
+{\normalsize\sffamily\textcolor{subtlegray}{Nitrogen Fertilizers $\cdot$ Phosphate Dependency $\cdot$ Biological Alternatives $\cdot$ Alternative Farming}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: April 5, 2026 $\;\vert\;$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet $\;\vert\;$ Estimated: 12--18 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+% STAGE 1 — VISION DOCUMENT
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Food System Nutrient Independence --- Vision Guide}
+
+\metafield{Date:}{April 5, 2026}
+\metafield{Status:}{Pre-Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{None (foundational mission)}
+\metafield{Context:}{Cold-start deep research mission; six parallel research modules}
+
+\subsection{Vision}
+
+Every loaf of bread, every kernel of corn, every scoop of rice that feeds the planet today carries an invisible ingredient: natural gas. Through the Haber-Bosch process, invented in the early 20th century, humanity learned to pull nitrogen from the atmosphere by reacting it with hydrogen derived almost entirely from fossil methane, at temperatures of 400--550\textdegree C and pressures of 150--300 atmospheres. The result was a synthetic fertilizer revolution that enabled roughly half the world's current population to exist. Fritz Haber and Carl Bosch did not set out to couple food security to oil markets --- they were trying to fix a nitrogen shortage that would have starved Europe. They succeeded so completely that we never questioned the infrastructure beneath the miracle.
+
+Today that infrastructure is both a lifeline and a liability. The Haber-Bosch process consumes 3--5\% of the world's natural gas production and generates approximately 1--2\% of global CO\textsubscript{2} emissions. Because natural gas prices directly set the cost of synthetic nitrogen, the 2022 Russian invasion of Ukraine was simultaneously an energy crisis and a fertilizer crisis: nitrogen prices tripled, threatening food security for 1.78 billion people whose diet depends either on imported fertilizers or imported natural gas feedstocks (FAO). Meanwhile, phosphorus --- the other non-negotiable macronutrient, one for which there is no atmospheric reservoir and no biological analog to Haber-Bosch --- sits almost entirely in the hands of five countries, with Morocco alone controlling 73--85\% of remaining high-grade reserves. A price spike in 2008 sent phosphate rock prices up 800\% in months, triggering food riots in dozens of countries.
+
+The spaces between these crises are where the solutions live. Biological nitrogen fixation has been doing Haber-Bosch's work, quietly and at ambient temperature and pressure, for 3.5 billion years. Legumes have been growing alongside nitrogen-fixing bacteria since before agriculture. Modern genomics is now engineering those bacteria to colonize cereal crops --- corn, wheat, rice --- that have never before hosted them. Electrochemical nitrogen reduction powered by wind and solar promises to decouple ammonia production from fossil fuels entirely, while distributed reactor designs could bring fertilizer production onto the farm itself. Phosphorus recovery from wastewater, manure, and sewage sludge via struvite crystallization could close a loop that currently wastes 80\% of all mined phosphorus into rivers and oceans. Regenerative agriculture and precision hydroponics can cut the total nutrient demand substantially while maintaining or improving yields.
+
+This mission maps the full terrain: what we depend on, why it is fragile, and where every viable alternative stands as of 2026. The goal is not to generate alarm but to build a precise understanding of the transition architecture --- what replaces what, at what scale, on what timeline, and with what geopolitical and ecological consequences. Food sovereignty begins with nutrient sovereignty. This is the infrastructure level.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+
+\item \textbf{Fossil-fuel lock-in of synthetic nitrogen.} The Haber-Bosch process, which produces 150--230 million metric tons of ammonia annually, derives its hydrogen almost entirely from natural gas via steam methane reforming. This makes the cost of food a direct function of the price of fossil fuels. Energy price shocks propagate immediately into fertilizer costs, disproportionately impacting smallholder farmers and food-insecure nations.
+
+\item \textbf{Phosphorus geopolitical concentration.} Unlike nitrogen, phosphorus cannot be synthesized from the atmosphere. It must be mined from phosphate rock deposits, 85\% of which are controlled by five countries. Morocco alone controls 73--85\% of remaining high-quality reserves. The US has approximately 25 years of domestic phosphate reserves remaining. Any nation without domestic reserves is perpetually one export embargo away from a food production crisis.
+
+\item \textbf{Peak phosphorus and quality degradation.} Regardless of total reserve estimates (which range widely from 50 to 400+ years), the quality of available phosphate rock is declining steadily. Lower-grade rock requires more energy to process, produces more toxic byproducts (cadmium, uranium), and costs more per unit of plant-available phosphorus. The system is becoming less efficient just as global demand is rising.
+
+\item \textbf{Nitrogen cascade and ecosystem damage.} Of all synthetic nitrogen applied to cropland globally, only 17--20\% ends up in the food consumed by humans. The rest cascades through the environment as nitrate runoff (causing 400+ coastal dead zones), nitrous oxide (a greenhouse gas 300$\times$ more potent than CO\textsubscript{2}), and ammonia volatilization. The current system is both expensive and profoundly wasteful, creating a dual climate and ecological crisis.
+
+\item \textbf{Technology readiness gap for alternatives.} Biological nitrogen fixation biofertilizers are real but inconsistent in field performance. Green ammonia is technically demonstrated but not yet cost-competitive with conventional Haber-Bosch at scale. Struvite phosphorus recovery covers at most 20\% of global agricultural phosphorus demand from current wastewater streams. Hydroponics and vertical farming solve nutrient efficiency problems but cannot yet feed staple-crop populations at scale. The transition requires parallel advancement across all tracks simultaneously.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{The Nutrient Dependency Loop:} Industrial food production extracts nutrients from finite geological deposits (phosphate rock) and fossil fuel feedstocks (natural gas for Haber-Bosch), applies them inefficiently to soil (17--20\% uptake efficiency), and allows the remainder to cascade through ecosystems as pollution --- creating both geopolitical dependency and environmental destruction simultaneously. Breaking this loop requires closing nutrient cycles (recovery and recycling), decarbonizing nitrogen fixation (green ammonia, biological fixation), and redesigning farming architectures to maximize nutrient use efficiency.
+\end{quotebox}
+
+\vspace{1em}
+
+\subsubsection{The Nutrient Dependency Architecture}
+
+\begin{asciibox}
+CURRENT STATE
+=============
+
+[Natural Gas Wells] -----> [Steam Methane Reforming] -----> [H2]
+                                                               |
+[Atmospheric N2] -------------------------------------------> [Haber-Bosch Reactor]
+                                                               |
+                                                          [Ammonia NH3]
+                                                               |
+                                                     [Synthetic Fertilizers]
+                                                               |
+[Phosphate Rock Mines (Morocco 73-85%)] ---------> [Phosphate Fertilizers]
+                 |                                            |
+                 v                                            v
+         [Quality Declining]                      [Applied to Cropland]
+         [Energy Intensive]                               |
+         [Price Volatile]                    [17-20% uptake efficiency]
+                                                          |
+                                               +----------+----------+
+                                               |                     |
+                                       [Food Production]    [Pollution Cascade]
+                                                        -> Nitrate Runoff
+                                                        -> Dead Zones
+                                                        -> N2O Emissions
+                                                        -> Eutrophication
+
+
+TARGET STATE: CLOSED LOOP
+=========================
+
+[Solar/Wind Power] ---------> [Green H2 Electrolysis] ----> [Green Ammonia]
+                                                                    |
+[Biological N Fixation] <----> [Crop Roots / Soil Biome] <---------+
+                                        |
+[Wastewater / Manure] ---> [Struvite Recovery (P+N)] --> [Recycled Fertilizer]
+                                        |
+[Regenerative Agriculture] ----------> [Soil Nutrient Cycling]
+                                        |
+[Hydroponics / Vertical Farms] -------> [90-95% Water/Nutrient Reuse]
+                                        |
+                                [Food Production + Closed Loop]
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY MAP
+=====================
+
+Module 1: The Nitrogen Crisis     Module 2: The Phosphorus Predicament
+  (Haber-Bosch, fossil lock-in)      (Peak P, geopolitics, depletion)
+         |                                         |
+         v                                         v
+Module 3: Biological N Alternatives    Module 4: Green Ammonia / Electrochem
+  (BNF, PGPR, biofertilizers)           (eNRR, green H2, plasma, distributed)
+         |                                         |
+         +-------------------+-----------------------+
+                             |
+                    Module 5: P Recovery & Circular Systems
+                      (Struvite, wastewater, circular P economy)
+                             |
+                    Module 6: Alternative Farming Architectures
+                      (Hydroponics, vertical farming, regenerative ag)
+                             |
+                    SYNTHESIS: Transition Roadmap
+                      (Technology readiness, timeline, geopolitics)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Nitrogen Crisis}
+
+A deep examination of how the Haber-Bosch process works, why it is coupled to fossil fuels, how much energy and carbon it consumes, and what the global food security consequences of disruption would be. Key metrics: 150--230 million metric tons of ammonia produced annually; 3--5\% of world's natural gas consumed; 50\% of world's food production dependent on synthetic nitrogen; 40--50\% of nitrogen in human tissues derived from Haber-Bosch. Geopolitical analysis of natural gas as fertilizer feedstock.
+
+\subsubsection{Module 2: The Phosphorus Predicament}
+
+Analysis of phosphate rock reserves, geographic concentration, depletion timelines, and price volatility. Key metrics: 85\% of reserves in 5 countries; Morocco controls 73--85\%; US has 25 years of domestic reserves remaining; 2008 price spike of 800\%; 90\% of mined phosphate used in agriculture. Comparison of peak phosphorus models (2033 to 2070+ estimates). No atmospheric analog exists for phosphorus; it cannot be synthesized.
+
+\subsubsection{Module 3: Biological Nitrogen Fixation Alternatives}
+
+Survey of all biological pathways for nitrogen fixation: symbiotic rhizobia/legume systems; associative and free-living diazotrophs (Azotobacter, Azospirillum); PGPR consortia; cyanobacterial biofertilizers (Anabaena, Azolla); engineered microbes for non-legume crops (Pivot Bio, Ginkgo/Bayer). Current evidence: biofertilizer consortia can replace 20--50\% of synthetic N for some crops. Yield data, field variability challenges, commercial readiness.
+
+\subsubsection{Module 4: Green Ammonia and Electrochemical Pathways}
+
+Technical deep dive into alternatives to fossil-fuel Haber-Bosch: green ammonia via renewable electrolysis + Haber-Bosch; electrochemical nitrogen reduction reaction (eNRR) at ambient conditions; lithium-mediated indirect NRR; plasma-catalytic nitrogen fixation; photocatalytic routes. Comparative techno-economic analysis. Key players: Yara, CF Industries (green ammonia scaling); NitroCapt SUNIFIX; Jupiter Ionics; Nitricity; Nitrofix. Green nitrogen fixation named a Top 10 Emerging Technology of 2025 by the World Economic Forum.
+
+\subsubsection{Module 5: Phosphorus Recovery and Circular Systems}
+
+Technical survey of phosphorus recovery pathways: struvite crystallization from wastewater treatment plants (can recover 10--60\% from liquid phase); struvite from sewage sludge ash (35--70\%); recovery from animal manure and agricultural waste streams. Global potential: wastewater recovery could satisfy 20\% of global agricultural phosphorus demand. Economic and regulatory barriers. Closed-loop design principles (cradle-to-cradle P certification in EU Regulation 2021/1165). Ecological sanitation systems.
+
+\subsubsection{Module 6: Alternative Farming Architectures}
+
+Comprehensive survey of farming systems that reduce total nutrient demand: hydroponics (90\% water savings, 20$\times$ lettuce yield per acre versus soil); vertical farming (2025 LED advances, 28--40\% energy savings, AI closed-loop nutrient systems); aeroponics (90\% less water than hydroponics); aquaponics (closed fish-plant nutrient loop); regenerative agriculture (soil microbiome restoration, legume integration, cover crops, legacy phosphorus mobilization). Energy-per-kg-produce comparisons. Crop type limitations. Scale-up barriers and urban food system implications.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: food_system_nutrient_independence
+  activation_profile: fleet
+  model_allocation:
+    opus:   30%   # Synthesis, geopolitical analysis, cross-module integration,
+                  # techno-economic comparisons, transition roadmap
+    sonnet: 60%   # Module surveys, data compilation, wave execution,
+                  # verification, document assembly
+    haiku:  10%   # Shared schemas, templates, scaffolding, citation index
+
+  craft_specialists:
+    CRAFT-BIOCHEM: nitrogen fixation biology, biofertilizer mechanisms
+    CRAFT-GEOCHEM: phosphorus geochemistry, reserves, recovery chemistry
+    CRAFT-AGTECH:  hydroponics, vertical farming, precision agriculture
+    CRAFT-ENERGY:  green ammonia, electrochemistry, renewable integration
+    CRAFT-POLICY:  food security, geopolitics, supply chain risk
+    CRAFT-REGEN:   regenerative agriculture, soil health, agroecology
+
+  wave_structure:
+    wave_0: Foundation (schemas, citation index) - Sequential, Haiku
+    wave_1: Parallel Tracks A/B (Modules 1+2 and Modules 3+4) - Parallel, Sonnet+Opus
+    wave_2: Parallel Track C (Modules 5+6) - Parallel, Sonnet
+    wave_3: Synthesis (transition roadmap, cross-module integration) - Sequential, Opus
+    wave_4: Publication + Verification - Sequential, Sonnet
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Nitrogen fertilizer: Haber-Bosch process, fossil fuel dependency analysis, all major biological and electrochemical alternatives
+  \item Phosphorus fertilizer: phosphate rock reserves, geopolitical concentration, all recovery and recycling pathways
+  \item Biofertilizers: PGPR, rhizobia, cyanobacteria, engineered microbes --- mechanisms, field evidence, commercial status
+  \item Green ammonia: electrolysis-based, electrochemical NRR, plasma, photocatalytic --- technology readiness and economics
+  \item Phosphorus circular economy: struvite crystallization, wastewater recovery, sewage sludge, manure --- global potential quantified
+  \item Alternative farming: hydroponics, vertical farming, aeroponics, aquaponics, regenerative agriculture --- nutrient efficiency data
+  \item Transition architecture: technology readiness levels, cost comparisons, deployment timelines, geopolitical implications
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Potassium (K) fertilizer dependency (separate mission)
+  \item Pesticide and herbicide dependencies (separate mission)
+  \item Crop breeding and GMO yield improvements
+  \item Water rights and irrigation infrastructure
+  \item Food distribution and logistics
+  \item Dietary shift analysis (meat versus plant protein)
+  \item Country-level policy and subsidy analysis (separate policy mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Haber-Bosch fossil fuel dependency fully quantified: energy consumption (3--5\% of world's natural gas), CO\textsubscript{2} emissions (1--2\% of global total), food dependency (50\% of production), with all figures attributed to primary sources.
+  \item Phosphorus geopolitical concentration mapped: reserve distribution by country, price volatility history (2008 spike documented), US reserve timeline (25 years), Morocco dominance (73--85\%) sourced from USGS and IFDC.
+  \item All six biological nitrogen fixation pathways documented: symbiotic (rhizobia/legume), associative (Azospirillum, Azotobacter), free-living (diazotrophs), cyanobacterial, PGPR consortia, engineered microbes --- each with mechanism, yield data, and commercial readiness.
+  \item Green ammonia pathways compared with TRL assessments: electrolysis-based, eNRR, lithium-mediated NRR, plasma-catalytic, photocatalytic --- each with current efficiency metrics and cost estimates.
+  \item Phosphorus recovery potential quantified from at least four source streams: municipal wastewater (20\% of global demand potential), sewage sludge ash, animal manure, food processing waste --- with recovery rates and technology names.
+  \item Struvite properties documented: composition, slow-release fertilizer behavior (44--63 days versus 12--11 days for conventional), EU certification status, heavy metal concerns addressed.
+  \item Hydroponics and vertical farming nutrient efficiency data compiled: water savings (90--95\%), yield multipliers (up to 20$\times$ for lettuce), energy consumption (38.8 kWh/kg versus 5.4 kWh/kg greenhouse), crop limitations identified.
+  \item Regenerative agriculture nutrient reduction mechanisms explained: legacy phosphorus mobilization, perennial grass-legume N fixation (50 lb/ac/year without inputs per WSU), soil microbiome role in nutrient cycling.
+  \item All alternative pathways rated on four dimensions: scalability potential, current technology readiness, fossil fuel dependency reduction, and timeline to commercial viability.
+  \item Transition roadmap identifies at least three near-term (2025--2030), three medium-term (2030--2040), and two long-term (2040--2050) milestones for the food-system nutrient independence transition.
+  \item All numerical claims attributed to specific peer-reviewed, government, or professional organization sources.
+  \item Source bibliography contains at minimum: 5 peer-reviewed journal citations, 3 government/agency sources (FAO, USGS, EPA), and 2 professional organization sources.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Fox Infrastructure Group Plan & FIG food sovereignty / agricultural resilience component & Companion \\
+The Space Between (Math Textbook) & Systems thinking, feedback loops, nutrient cycle mathematics & Source \\
+GSD Cloud-Ops Curriculum & Educational delivery architecture for this research & Consumer \\
+College of Knowledge (.college/) & Soil chemistry, thermodynamics modules sourcing this research & Consumer \\
+Potassium Dependency Mission & Parallel mission for the K in NPK & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle applies here in the most literal way possible. The Haber-Bosch reactor is the brute-force approach to a problem that nature solved elegantly: nitrogen fixation via the nitrogenase enzyme, which operates at ambient temperature and pressure. Every kilogram of nitrogen fixed biologically requires roughly the same energy as the Haber-Bosch equivalent --- but that energy comes from sunlight captured by the plant, not from burning methane in a refinery in a nation that may or may not be friendly. The specialized execution path (biological, distributed, solar-powered) is architecturally superior to the generalized industrial path (centralized, fossil-fueled, geopolitically fragile). It always has been. We simply did not have the tools to see it at scale until now.
+
+The spaces between the crises are always where the leverage lives. Between the nitrogen crisis and the biological alternatives is a space populated by engineered microbes that are already being deployed on millions of hectares. Between the phosphorus depletion timeline and struvite recovery is a space where the same wastewater that currently pollutes rivers could supply 20\% of global agricultural phosphorus demand. Between industrial monoculture and regenerative soil systems is a space where the legacy phosphorus already in the soil (from decades of over-application) could sustain grazing systems for a century without a single mined phosphate addition.
+
+This is not a mission about alarm. It is a mission about knowing exactly where the leverage points are, what they cost, what they can do at what scale, and in what sequence they must be activated. Giving people their lives back starts at the soil level.
+
+\newpage
+
+% =====================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =====================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Food System Nutrient Independence --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings across all six research modules. Use it as the authoritative data layer for the mission execution in Stage 3. Each module can be assigned independently to a research agent.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{FAO} (Food and Agriculture Organization of the United Nations) --- food security and fertilizer demand data
+  \item \textbf{USGS} (U.S. Geological Survey) --- phosphate rock reserve data and minerals statistics
+  \item \textbf{IFDC} (International Fertilizer Development Center) --- phosphate reserve estimates and revisions
+  \item \textbf{International Fertilizer Association (IFA)} --- global ammonia and fertilizer production statistics
+  \item \textbf{PMC / PubMed Central} --- peer-reviewed research on biofertilizers, biological nitrogen fixation
+  \item \textbf{RMI} (Rocky Mountain Institute) --- green ammonia technology assessments
+  \item \textbf{WSU Center for Sustaining Agriculture and Natural Resources} --- regenerative agriculture nutrient data
+  \item \textbf{EPA} --- nitrogen cycle environmental impacts, dead zones, N\textsubscript{2}O data
+  \item \textbf{World Economic Forum} --- emerging technology assessments including green nitrogen fixation
+\end{itemize}
+
+\subsection{Module 1: The Nitrogen Crisis --- Reference}
+
+\subsubsection{The Haber-Bosch Process: Scale and Fossil Fuel Dependency}
+
+The Haber-Bosch process converts atmospheric nitrogen (N\textsubscript{2}) to ammonia (NH\textsubscript{3}) via the reaction N\textsubscript{2} + 3H\textsubscript{2} $\rightarrow$ 2NH\textsubscript{3} under conditions of 400--550\textdegree C and 150--300 atmospheres pressure using an iron catalyst. As of 2021--2022, the process produces approximately 150--230 million metric tons of ammonia annually (IFA; Wikipedia/Haber Process). Between 75--90\% of this ammonia is used for fertilizers; the remainder supplies pharmaceuticals, plastics, textiles, and explosives.
+
+The critical dependency: \textbf{the hydrogen feedstock}. Steam methane reforming of natural gas supplies the vast majority of this hydrogen. Natural gas currently accounts for approximately 90\% of the monetary cost of nitrogen fertilizer (Wenzel, cited in Resilience.org). The process consumes \textbf{3--5\% of the world's natural gas production}, equivalent to 1--2\% of global energy supply (Wikipedia; C\&EN). The best modern Haber-Bosch plants operate at approximately 10 MWh per metric ton of ammonia produced, against a theoretical energy content of 5 MWh/t (C\&EN/MacFarlane, Monash University).
+
+\textbf{Food dependency scale:} Approximately 50\% of the world's food production relies on synthetic nitrogen fertilizer derived from the Haber-Bosch process (C\&EN). An estimated 40--50\% of the nitrogen in human body tissues originated from Haber-Bosch (Wikipedia). The process is credited with enabling Earth's population to grow from 1.6 billion in 1900 to present levels. FAO research quantifies that 1.07 billion people are fed from food produced using imported nitrogen fertilizers, and an additional 710 million from imported natural gas used as fertilizer feedstock --- a combined 1.78 billion people dependent on fossil-fuel fertilizer imports.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value and Source} \\
+\midrule
+Annual ammonia production & 150--230 million metric tons (IFA, 2021--2022) \\
+Natural gas consumed for N fertilizer & 3--5\% of world production (Wikipedia) \\
+Global energy consumed & 1--2\% of world supply \\
+Food production dependent on syn. N & $\approx$50\% (C\&EN) \\
+Human tissue N from Haber-Bosch & $\approx$50\% (Wikipedia) \\
+People dependent on imported N or gas & 1.78 billion (FAO) \\
+N\textsubscript{2}O GWP vs CO\textsubscript{2} & 300$\times$ over 100 years (PMC/Tunley Environmental) \\
+Agricultural soils share of N\textsubscript{2}O & $\approx$60\% of global anthropogenic emissions (PMC Preprints) \\
+Plant uptake efficiency of applied N & 17--20\% (estimated) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Nitrogen Cascade}
+
+Excess nitrogen applied to soils cascades through multiple environmental compartments (a process termed the ``nitrogen cascade''): nitrate leaches into groundwater and surface water, causing eutrophication and over 400 coastal dead zones globally; nitrous oxide (N\textsubscript{2}O) volatilizes into the atmosphere as a potent greenhouse gas; ammonia volatilization contributes to air quality problems. Synthetic fertilizers also disrupt the 20:1 carbon-to-nitrogen ratio ideal for soil organisms, causing microbial populations to consume soil organic carbon reserves in order to process excess nitrogen inputs (The-Compost-Gardener). The nitrogen cascade illustrates that waste in the nitrogen system is not merely economic --- it is ecologically devastating.
+
+\subsection{Module 2: The Phosphorus Predicament --- Reference}
+
+\subsubsection{Phosphate Rock: The Non-Substitutable Nutrient}
+
+Unlike nitrogen, phosphorus has no atmospheric reservoir. It cannot be fixed biologically from the air. It must be obtained from phosphate rock, a finite geological resource formed from the compaction of marine organisms over tens of millions of years. \textbf{There are no substitutes for phosphorus in agriculture} (Resilience.org, citing 2007 data). Phosphorus is the 11th most abundant element in Earth's crust, but the form available for mining --- high-concentration rock phosphate --- is geographically concentrated and finite.
+
+Approximately 90\% of all mined phosphate rock is used in agriculture and food production, primarily as fertilizer (Columbia University Earth Institute). The 2011 USGS upward revision of reserve estimates (from 17.63 to 71.65 billion tonnes) created uncertainty about peak timelines, but did not change the structural problem: reserves are geographically concentrated, quality is declining, and costs are increasing.
+
+\subsubsection{Geopolitical Concentration and Price Risk}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Country} & \tableheader{Estimated Share} & \tableheader{Notes} \\
+\midrule
+Morocco & 73--85\% & Largest reserves; many mines in Western Sahara (occupation disputed) \\
+China & 2nd largest & Does not publish commercial reserve data \\
+South Africa & Significant & \\
+Jordan & Significant & \\
+United States & $\approx$25 yr domestic supply & Imports heavily from Morocco \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The 2008 crisis demonstrated the price risk concretely: phosphate rock prices spiked approximately 800\% in months due to higher oil prices, increased demand from biofuels, and export restrictions from major producers. Food prices spiked 80\% globally, food riots occurred in dozens of countries (Science Array, Columbia Earth Institute). The 2011 USGS upward revision of Morocco's reserves (from 6 billion to 50 billion tonnes) relied on preliminary estimates with no cost-of-mining data provided by Morocco (ISF/University of Technology Sydney).
+
+\textbf{Peak phosphorus timeline:} Model estimates range from a production peak around 2033 (Cordell et al., 2009; PMC/ISF) to 2070 (other models) to ``hundreds of years'' (IFDC 2010, USGS 2011 upward revision). Researchers at ISF note that peak phosphorus refers to the point when production can no longer meet demand due to economic and energy constraints --- not the point of total depletion. Regardless of exact timeline, quality is declining and costs are rising in all models.
+
+\subsection{Module 3: Biological Nitrogen Fixation Alternatives --- Reference}
+
+\subsubsection{Biological Nitrogen Fixation Mechanisms}
+
+Biological nitrogen fixation (BNF) uses the nitrogenase enzyme complex to convert N\textsubscript{2} to NH\textsubscript{3} at ambient temperature and pressure. The energy requirement is approximately 16 ATP per N\textsubscript{2} reduced to ammonium (PMC/Nutrients). The six primary BNF categories for agricultural application are:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pathway} & \tableheader{Key Organisms} & \tableheader{Status and Evidence} \\
+\midrule
+Symbiotic (legume) & Rhizobium, Bradyrhizobium & Mature, widely deployed; 50\% of legume N from BNF \\
+Associative & Azospirillum, Herbaspirillum & Cereal crops (rice, maize, sugarcane); commercial products exist \\
+Free-living diazotrophs & Azotobacter, Bacillus & Soil applications; support crop growth, less direct N transfer \\
+Cyanobacterial & Anabaena, Nostoc, Azolla & Rice paddies; 1 ha cultivation can fertilize 100 ha of crops (PMC) \\
+PGPR consortia & Multi-strain combinations & 20--50\% synthetic N replacement for maize, rice, sugarcane (PMC) \\
+Engineered microbes & Pivot Bio, Ginkgo/Bayer & Millions of hectares deployed (Pivot Bio, C\&EN, 2023) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Field Performance and Commercial Status}
+
+A key challenge with biofertilizers is field performance variability. University of Minnesota agricultural researcher Daniel Kaiser found that nitrogen-producing microbes increased corn yield at one field site but not at others (C\&EN, 2023). A multi-year mung bean study (Nature/Scientific Reports, 2025) found that PGPR consortia enhanced root nodulation by 62\% and yield by 32\% compared to controls, while urea increased yield by 46\% --- demonstrating that biofertilizers provide substantial but not yet equal benefit to conventional synthetic nitrogen.
+
+BNF can replace 20--50\% of nitrogen requirements for crops including maize, rice, and sugarcane (PMC/Nutrients, 2025). Symbiotic legume systems can fix 50 lb/acre/year without external nitrogen inputs in well-designed perennial grass-legume pasture systems (WSU/CSANR). Co-inoculation of Rhizobium with PGPR has been shown to enhance nodulation efficiency and nutrient uptake simultaneously (Springer Nature, 2025).
+
+Commercial products now in broad deployment: Pivot Bio's genetically modified microbes are deployed on millions of hectares in the US (C\&EN). Agricultural giants Bayer/Ginkgo Bioworks, Corteva (via Symborg acquisition) are scaling. NitroCapt's SUNIFIX technology won the 2025 Food Planet Prize.
+
+\subsubsection{Organic Nitrogen: Microbial Protein}
+
+Replacing mineral nitrogen fertilizer with protein-rich microbial biomass is possible. Microbial protein mineralizes rapidly in soil, delivering N fertilization potential comparable to organic fertilizer at 2--3$\times$ higher market value than mineral Haber-Bosch nitrogen. N-fixing cyanobacteria cultivation offers a compelling ratio: 1 hectare of cyanobacterial cultivation can produce enough nitrogenase-based nitrogen to fertilize approximately 100 hectares of high C/N agricultural crops (PMC, 2022).
+
+\subsection{Module 4: Green Ammonia and Electrochemical Pathways --- Reference}
+
+\subsubsection{Technology Landscape}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Technology} & \tableheader{TRL} & \tableheader{Key Characteristics} \\
+\midrule
+Green ammonia (electrolysis + H-B) & 7--8 & Renewable H\textsubscript{2} from water electrolysis; near-zero emissions; cost remains high vs. conventional; Yara, CF Industries scaling \\
+Electrochemical NRR (N\textsubscript{2}RR) & 3--4 & Ambient T and P; water as proton source; low Faradaic efficiency currently; promising for distributed production \\
+Li-mediated NRR & 4--5 & Indirect pathway via Li metal nitride; improved yield; high energy for Li plating \\
+Plasma-catalytic & 4--5 & Non-thermal plasma; low T and P; on-farm potential; Nitricity, NitroCapt \\
+Photocatalytic & 2--3 & Solar-driven; TiO\textsubscript{2} with Fe doping; low efficiency; early research stage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Green nitrogen fixation was named a Top 10 Emerging Technology of 2025 by the World Economic Forum/Frontiers (The Innovator, September 2025). Pilot-scale systems are operating in more than 15 countries. Key advantage of electrochemical approaches: modular, small-scale production near farms, powered by distributed solar/wind --- avoiding the centralized, large-scale (1,000--1,500 tons/day) requirement of conventional ammonia plants.
+
+\textbf{Key players (2025--2026):}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Yara International, CF Industries}: Scaling green ammonia via renewable electrolysis
+  \item \textbf{NitroCapt (Sweden)}: SUNIFIX technology mimics nitrogen fixation by lightning; 2025 Food Planet Prize winner
+  \item \textbf{Nitricity}: Plasma reactors powered by renewables, plus ``Ash Tea'' fertilizers from organic waste
+  \item \textbf{Jupiter Ionics (Australia)}: Lithium-based nitrogen fixation from Monash University research
+  \item \textbf{Nitrofix (Israel)}: One-step electrochemical process, no H\textsubscript{2} required; Weizmann Institute
+  \item \textbf{Nium}: Low temperature/pressure ammonia via novel catalyst; renewable energy powered
+\end{itemize}
+
+\subsubsection{Economic Context}
+
+The best Haber-Bosch plants operate at approximately 10 MWh per metric ton of ammonia; the theoretical minimum energy content is 5 MWh/t (C\&EN/MacFarlane). Green ammonia currently costs more than conventional due to renewable hydrogen cost premium, but the cost of renewable energy is falling rapidly. Intermittency of renewable electricity remains a challenge for coupling to Haber-Bosch reactors (which require continuous H\textsubscript{2} supply); electrochemical methods can more naturally integrate with variable renewable inputs (Arabian Journal of Chemistry).
+
+\subsection{Module 5: Phosphorus Recovery and Circular Systems --- Reference}
+
+\subsubsection{The Phosphorus Waste Problem}
+
+Of all phosphorus mined, an estimated 80\% is eventually lost to rivers, lakes, and oceans (various sources). This creates the paradox: simultaneous shortage and overabundance. Agricultural runoff contributes phosphorus to over 400 coastal dead zones. Economic damage from eutrophication in the US alone is estimated at \$2.2 billion annually (Columbia Earth Institute). Over 400 coastal dead zones exist and are expanding at 10\% per decade.
+
+\subsubsection{Struvite: The Primary Recovery Product}
+
+Struvite (MgNH\textsubscript{4}PO\textsubscript{4}$\cdot$6H\textsubscript{2}O) is recovered from wastewater via controlled crystallization. Its composition: approximately 10\% Mg, 7\% N, 39\% P, 44\% crystal water. Key properties as fertilizer: slow-release behavior (releases nutrients over 44--63 days versus 12--11 days for conventional fertilizers), reduced phytotoxicity, lower heavy metal content than rock phosphate derivatives (ScienceDirect/Struvite review, 2025). Struvite has been approved for use in organic production in the EU (Regulation 2021/1165, Annex II).
+
+\subsubsection{Recovery Potential and Technologies}
+
+Global wastewater phosphorus discharge: approximately 3.7 million tonnes P per year (HESS Journal, 2018). This could theoretically satisfy 20\% of global agricultural phosphorus demand. Recovery rates by source:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Source Stream} & \tableheader{Recovery Rate} & \tableheader{Technology} \\
+\midrule
+Wastewater (liquid phase) & 10--60\% & Struvite crystallization (Ostara PEARL, PhosphoGREEN, PHOSPAQ) \\
+Sewage sludge & 35--70\% & Struvite + thermochemical/wet chemical extraction \\
+Sewage sludge ash (SSA) & Up to 84.92\% & Hydrothermal treatment, thermochemical, C2C approach \\
+Animal manure & 20--50\% & Anaerobic digestion + struvite from digestate \\
+Potato industry wastewater & Up to 90\% & ANPHOS technology (batch process) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Key technology providers: Ostara PEARL (University of British Columbia origin; 325--6,350 kg struvite/day); PhosphoGREEN (SUEZ); Multiform; ANPHOS; NuReSys; PHOSPAQ. Struvite is already sold commercially as Crystal Green (Ostara).
+
+\textbf{Regenerative agriculture ``legacy phosphorus'':} WSU researchers note that decades of phosphorus over-application have created a ``Strategic Phosphorus Reserve'' in farmed soils. Residual (legacy) P in soils is ``slowly exchangeable'' and could supply P to beef grazing systems for up to 100 years without additional phosphate mining inputs (WSU/CSANR, citing Menezes-Blackburn et al., 2018).
+
+\subsection{Module 6: Alternative Farming Architectures --- Reference}
+
+\subsubsection{Hydroponics and Vertical Farming}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Water savings vs. conventional & Up to 90--95\% & PMC/Hydroponics 2023; Nature Food 2022 \\
+Lettuce yield increase per acre & Up to 20$\times$ & PMC/Hydroponics 2023 \\
+Energy use: greenhouses & 5.4 kWh/kg produce & Global CEA Census 2021 \\
+Energy use: vertical farms & 38.8 kWh/kg produce & Global CEA Census 2021 \\
+2025 LED energy savings & 28--40\% vs. prior generation & Farmonaut 2025 \\
+Hydroponic market (2023) & USD 5 billion & McGill Innovation Fund 2025 \\
+Projected CAGR 2024--2030 & 12.4\% & McGill Innovation Fund 2025 \\
+Water recirculation (AI systems) & 90--95\% & Farmonaut 2025 \\
+Aeroponics vs. hydroponics water use & Up to 90\% less & Frontiers/FSUFS 2024 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key limitation:} Vertical farming and hydroponics excel for leafy greens, herbs, microgreens, and soft fruits. Caloric staple crops (wheat, corn, rice, potatoes) do not perform well in these systems due to long growth cycles, large physical size, high light requirements, and pollination needs. The systems are not yet a substitute for field-scale caloric crop production. They are, however, an effective supplement for high-value fresh produce and urban food security.
+
+\subsubsection{Regenerative Agriculture and Soil-Based Nutrient Reduction}
+
+Regenerative agriculture's five core soil health principles (minimize disturbance, maximize cover, maximize biodiversity, integrate livestock, eliminate synthetic inputs) collectively restore the soil microbiome's capacity for natural nutrient cycling. Key evidence:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Perennial grass-legume pasture systems can fix 50 lb/acre/year of nitrogen with zero external N fertilizer inputs (WSU/CSANR, citing Whitehead 2000)
+  \item Soil microbial communities provide 80--90\% of soil metabolic activity driving nutrient cycling (PMC/Frontiers Nutrition)
+  \item Regenerative systems can deliver long-term yield gains and profits up to 120\% higher than conventional operations with lower input costs (Food Tank, April 2026)
+  \item Project Drawdown estimates restored agricultural lands could sequester 2.6--13.6 gigatons of CO\textsubscript{2} equivalent annually
+  \item Arbuscular mycorrhizal fungi (AMF) and PGPR play critical roles in phosphate solubilization and nutrient cycling in regenerative systems (PMC/Nutrients 2025)
+\end{itemize}
+
+\textbf{Important qualifier (WSU/CSANR):} Regenerative agriculture's nutrient reduction claims are primarily powered by livestock integration and legacy nutrient reserves, not by soil biology miracles alone. The soil biology mechanism is real but incremental; livestock-mediated nutrient cycling is the primary driver of synthetic input reduction.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Boundary} & \tableheader{Guidance} \\
+\midrule
+Phosphate reserve estimates & GATE & Use USGS and IFDC figures; note data quality issues; present range not single number \\
+Peak phosphorus timeline & ANNOTATE & Present range of estimates; note ISF warnings about IFDC data quality \\
+Green ammonia cost projections & GATE & Cite specific techno-economic analyses; avoid advocacy for specific vendors \\
+Indigenous land rights (Western Sahara mining) & ABSOLUTE & Note disputed territory status; do not take political position \\
+Food security projections & GATE & Use FAO, USGS, IPCC data only; no extrapolations beyond published ranges \\
+Medical/nutritional claims & SC-MED & No health claims without peer-reviewed evidence \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item FAO (Food and Agriculture Organization). ``Energy and food security implications of transitioning synthetic nitrogen fertilizers to net-zero emissions.'' Available: \url{https://www.fao.org/family-farming/detail/en/c/1630403/}
+  \item USGS Minerals Information. Phosphate Rock Statistics and Information. \url{https://www.usgs.gov/centers/national-minerals-information-center/phosphate-rock-statistics-and-information}
+  \item NCAT/ATTRA Sustainable Agriculture. ``Vertical Farming.'' \url{https://attra.ncat.org/publication/vertical-farming/}
+  \item WSU Center for Sustaining Agriculture and Natural Resources. ``How Does Regenerative Agriculture Reduce Nutrient Inputs?'' \url{https://csanr.wsu.edu/how-does-regenerative-agriculture-reduce-nutrient-inputs/}
+  \item RMI (Rocky Mountain Institute). ``Low-Carbon Ammonia Technology: Blue, Green, and Beyond.'' January 2025. \url{https://rmi.org/low-carbon-ammonia-technology-blue-green-and-beyond/}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=1.5em]
+  \item Cordell, D., Drangert, J., and White, S. (2009). ``The story of phosphorus: Global food security and food for thought.'' \textit{Global Environmental Change}, 19, 292--305. ScienceDirect.
+  \item Elser, J. and Bennett, E. (2011). ``Phosphorus cycle: A broken biogeochemical cycle.'' \textit{Nature}, 478, 29--31.
+  \item Meers, E. et al. (2022). ``How can we possibly resolve the planet's nitrogen dilemma?'' \textit{PMC/NCBI}. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9803332/}
+  \item Mayer, B.K. et al. (2016). ``Total Value of Phosphorus Recovery.'' \textit{Environmental Science \& Technology}, 50, 6606--6620.
+  \item Tonini, D. et al. (2018). ``Global phosphorus recovery from wastewater for agricultural reuse.'' \textit{HESS}, 22, 5781.
+  \item Cordell, D. and White, S. (2011). ``Peak Phosphorus: Clarifying the Key Issues of a Vigorous Debate about Long-Term Phosphorus Security.'' \textit{Sustainability}, 3(10), 2027--2049. MDPI.
+  \item Preprints.org (2025). ``Biofertilizers for Enhanced Nitrogen Use Efficiency: Mechanisms, Innovations, and Challenges.'' \url{https://www.preprints.org/manuscript/202510.2490}
+  \item PMC (2025). ``Nitrogen Use Efficiency in Agriculture: Integrating Biotechnology, Microbiology, and Novel Delivery Systems.'' \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12525934/}
+  \item Springer Nature/Scientific Reports (2025). ``Optimizing mung bean productivity with biofertilizers.'' \url{https://www.nature.com/articles/s41598-025-28815-8}
+  \item Frontiers/FSUFS (2024). ``Recent developments and inventive approaches in vertical farming.'' \url{https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2024.1400787/full}
+  \item PMC (2023). ``Hydroponics: current trends in sustainable crop production.'' \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10625363/}
+  \item Frontiers/Nutrition (2025). ``From soil to health: advancing regenerative agriculture.'' \url{https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2025.1638507/full}
+  \item PMC/Nutrients (2025). ``Regenerative Organic Agriculture and Human Health.'' \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC12108233/}
+\end{itemize}
+
+\subsubsection{Professional Organizations and Technical Journalism}
+\begin{itemize}[leftmargin=1.5em]
+  \item C\&EN (Chemical \& Engineering News). ``The industrialization of the Haber-Bosch process.'' \url{https://cen.acs.org/food/agriculture/The-industrialization-Haber-Bosch-process/101/i26}
+  \item C\&EN. ``Industrial ammonia production emits more CO\textsubscript{2} than any other chemical-making reaction.'' \url{https://cen.acs.org/environment/green-chemistry/Industrial-ammonia-production-emits-CO2/97/i24}
+  \item C\&EN. ``Can microbes replace synthetic fertilizer?'' \url{https://cen.acs.org/food/agriculture/microbes-replace-synthetic-fertilizer/101/i25}
+  \item Tunley Environmental. ``The Environmental Impact of the Haber-Bosch Process.'' \url{https://www.tunley-environmental.com/en/insights/the-process-that-feeds-our-population-is-unsustainable}
+  \item Columbia University Earth Institute / Climate. ``Phosphorus: Essential to Life --- Are We Running Out?'' April 2013. \url{https://news.climate.columbia.edu/2013/04/01/phosphorus-essential-to-life-are-we-running-out/}
+  \item The Innovator. ``How Green Nitrogen Fixation Could Feed and Fuel The World.'' September 2025. \url{https://theinnovator.news/how-green-nitrogen-fixation-could-feed-and-fuel-the-world/}
+  \item Bradenkelley.com. ``Do You Have Green Nitrogen Fixation?'' December 2025. \url{https://bradenkelley.com/2025/12/do-you-have-green-nitrogen-fixation/}
+\end{itemize}
+
+\newpage
+
+% =====================================================================
+% STAGE 3 — MISSION PACKAGE
+% =====================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Execute a comprehensive, publication-quality research document covering all six modules of the food system nutrient independence study: the nitrogen crisis (Haber-Bosch), the phosphorus predicament, biological nitrogen fixation alternatives, green ammonia and electrochemical pathways, phosphorus recovery and circular systems, and alternative farming architectures. The final deliverable is a structured reference document suitable for inclusion in the College of Knowledge and the Fox Infrastructure Group curriculum, with all 12 success criteria verified.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+WAVE 0: Foundation (Sequential, Haiku)
+  Shared schemas, citation index, module templates
+  Duration: 1 context window
+
+WAVE 1A: Nitrogen Modules (Parallel Track A, Sonnet + Opus)
+  Module 1: The Nitrogen Crisis
+  Module 2: The Phosphorus Predicament
+  Duration: 2-3 context windows
+
+WAVE 1B: Alternative Pathways (Parallel Track B, Sonnet + Opus)
+  Module 3: Biological N Fixation Alternatives
+  Module 4: Green Ammonia / Electrochemical
+  Duration: 2-3 context windows
+
+WAVE 2: Circular Systems + Farming (Parallel Track C, Sonnet)
+  Module 5: P Recovery + Circular Systems
+  Module 6: Alternative Farming Architectures
+  Duration: 2 context windows
+
+WAVE 3: Synthesis (Sequential, Opus)
+  Transition roadmap: near/medium/long-term milestones
+  Cross-module integration
+  Geopolitical analysis
+  Duration: 2-3 context windows
+
+WAVE 4: Publication + Verification (Sequential, Sonnet)
+  Document assembly, citation verification,
+  success criteria checklist, final formatting
+  Duration: 1-2 context windows
+
+CAPCOM GATES: After Wave 0, after Wave 2, before Wave 3
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Foundation Layer} --- Citation index, shared vocabulary, module schemas
+  \item \textbf{Crisis Documentation Layer} --- Nitrogen and phosphorus dependency quantified with data
+  \item \textbf{Alternatives Survey Layer} --- All replacement pathways documented with TRL and evidence
+  \item \textbf{Systems Layer} --- Recovery, circular economy, alternative farming architectures
+  \item \textbf{Synthesis Layer} --- Cross-module integration, transition roadmap, geopolitical implications
+  \item \textbf{Verification Layer} --- Source quality audit, success criteria mapping, document finalization
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Crisis Reference (Modules 1--2) & All quantitative metrics sourced; geopolitical map complete & 6,000--10,000 words \\
+2 & Alternatives Survey (Modules 3--4) & All pathways with TRL, yield data, key players & 8,000--12,000 words \\
+3 & Circular Systems Reference (Modules 5--6) & Recovery rates, technology names, farming metrics & 6,000--10,000 words \\
+4 & Synthesis and Transition Roadmap & 3 near + 3 medium + 2 long-term milestones; cross-module integration & 3,000--5,000 words \\
+5 & Verification Report & All 12 success criteria checked; source bibliography complete & 1,000--2,000 words \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+C-0: Foundation schemas & None & Haiku & 8,000 \\
+C-1: Nitrogen crisis survey & C-0 & Sonnet & 25,000 \\
+C-2: Phosphorus predicament & C-0 & Sonnet & 20,000 \\
+C-3: Biological N alternatives & C-0, C-1 & Opus & 30,000 \\
+C-4: Green ammonia / eNRR & C-0, C-1 & Sonnet & 25,000 \\
+C-5: P recovery / circular & C-0, C-2 & Sonnet & 22,000 \\
+C-6: Alt farming architectures & C-0 & Sonnet & 22,000 \\
+C-7: Synthesis and roadmap & C-1--C-6 & Opus & 35,000 \\
+C-8: Verification report & C-1--C-7 & Sonnet & 12,000 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total estimated tokens}} & \textbf{199,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\approx$30\% & Biological N fixation depth (mechanism + evidence synthesis); synthesis/roadmap (geopolitical + techno-economic judgment); cross-module integration \\
+Sonnet & $\approx$60\% & Crisis documentation (data compilation); technology surveys (green ammonia, struvite, hydroponics); verification; document assembly \\
+Haiku & $\approx$10\% & Shared schemas, citation index, module templates, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{2cm}C{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Description} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & CAPCOM after \\
+1A & Nitrogen + Phosphorus & Parallel & Sonnet/Opus & --- \\
+1B & Biological N + Green NH\textsubscript{3} & Parallel & Sonnet/Opus & CAPCOM after 2 \\
+2 & P Recovery + Alt Farming & Parallel & Sonnet & CAPCOM after \\
+3 & Synthesis + Roadmap & Sequential & Opus & CAPCOM review \\
+4 & Publication + Verify & Sequential & Sonnet & Delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Create citation index schema & Haiku & JSON structure for source attribution \\
+Define nutrient vocabulary & Haiku & Shared terms: BNF, PGPR, struvite, TRL, eNRR, Haber-Bosch \\
+Create module templates & Haiku & Consistent structure for Modules 1--6 \\
+Initialize token budget tracker & BUDGET & Budget table by wave \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks A and B}
+
+\textbf{Track A --- Nitrogen and Phosphorus Crisis Documentation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Haber-Bosch deep dive & CRAFT-BIOCHEM & Scale, energy, CO\textsubscript{2}, food dependency metrics with citations \\
+Nitrogen cascade analysis & SCOUT & Dead zones, N\textsubscript{2}O data, soil damage \\
+Phosphate rock geopolitics & CRAFT-GEOCHEM & Reserve map, concentration data, price history \\
+Peak phosphorus model comparison & CRAFT-POLICY & Model range 2033--2070+, quality decline evidence \\
+Module 1 assembly & EXEC-A & Complete Module 1 document \\
+Module 2 assembly & EXEC-A & Complete Module 2 document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Biological and Electrochemical Alternatives}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+BNF pathway survey & CRAFT-BIOCHEM & All six pathways; mechanisms, yields, commercial status \\
+PGPR consortia evidence & CRAFT-BIOCHEM & Field performance data; biofertilizer products \\
+Green ammonia TRL assessment & CRAFT-ENERGY & Five technology pathways with TRL ratings \\
+Electrochemical NRR survey & CRAFT-ENERGY & eNRR, Li-NRR, plasma, photocatalytic \\
+Module 3 assembly & EXEC-B & Complete Module 3 document \\
+Module 4 assembly & EXEC-B & Complete Module 4 document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Circular Systems and Farming Architectures}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Struvite technology survey & CRAFT-GEOCHEM & Recovery rates, technology providers, economic analysis \\
+Wastewater P recovery potential & SCOUT & Global 20\% demand potential; source streams \\
+Hydroponics data compilation & CRAFT-AGTECH & Water savings, yield data, energy comparison \\
+Regenerative ag nutrient mechanisms & CRAFT-REGEN & BNF via legumes, legacy P, soil microbiome role \\
+Module 5 assembly & EXEC-A & Complete Module 5 document \\
+Module 6 assembly & EXEC-B & Complete Module 6 document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Transition roadmap construction & Opus & Near/medium/long-term milestones table \\
+Technology readiness comparison & Opus & Comparative matrix across all alternatives \\
+Geopolitical implications & CRAFT-POLICY & Food sovereignty analysis; supply chain risks \\
+Cross-module integration & INTEG & Cascade relationships; feedback loops \\
+Synthesis document assembly & Opus & Deliverable C-7 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Transition Roadmap (Opus synthesis output):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Horizon} & \tableheader{Milestone} & \tableheader{Description} \\
+\midrule
+Near (2025--2030) & Scale biofertilizers to 10\% of N demand & PGPR/engineered microbe deployment; reduce synthetic N use for maize, rice \\
+Near (2025--2030) & Deploy struvite recovery at 500+ wastewater plants & Close P loop on 5--10\% of agricultural demand \\
+Near (2025--2030) & Green ammonia cost parity pilot & Demonstrate cost-competitive green NH\textsubscript{3} at regional scale \\
+Medium (2030--2040) & BNF covers 30--50\% of N in major cereal crops & Engineered microbes for non-legumes at commercial scale \\
+Medium (2030--2040) & Struvite covers 15--20\% of global P demand & Full-scale wastewater and manure recovery infrastructure \\
+Medium (2030--2040) & Green ammonia replaces 25\% of Haber-Bosch & Multiple green H\textsubscript{2} + electrochemical plants operational \\
+Long (2040--2050) & Closed-loop P system for 50\% of agriculture & Circular phosphorus economy with ecological sanitation integration \\
+Long (2040--2050) & Fossil-free nitrogen fixation for 50\%+ of crops & Combination of biological, electrochemical, and green ammonia \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Success criteria audit & VERIFY & All 12 criteria checked; gaps identified \\
+Source quality audit & VERIFY (SC-SRC) & All citations verified against source quality rules \\
+Numerical attribution check & VERIFY (SC-NUM) & All metrics traced to specific sources \\
+Document final assembly & EXEC-A & Integrated document with all modules + synthesis \\
+Token budget reconciliation & BUDGET & Actual vs. estimated; lessons for future missions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Load citation index and shared vocabulary into system prompt for all Waves 1--4 (cache hit across all agents)
+  \item Structure Wave 1A and 1B as independent contexts with no shared state (maximum parallel token efficiency)
+  \item Wave 3 synthesis agent receives distilled summaries from each module (not full module text) to stay within context window
+  \item Verification agent in Wave 4 receives the success criteria list and a structured output checklist --- not the full document
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Est. Input Tokens} & \tableheader{Est. Output Tokens} & \tableheader{Model} \\
+\midrule
+Wave 0 & 5,000 & 8,000 & Haiku \\
+Wave 1A & 40,000 & 45,000 & Sonnet/Opus \\
+Wave 1B & 40,000 & 55,000 & Sonnet/Opus \\
+Wave 2 & 35,000 & 44,000 & Sonnet \\
+Wave 3 & 50,000 & 35,000 & Opus \\
+Wave 4 & 60,000 & 15,000 & Sonnet \\
+\midrule
+\textbf{Total} & \textbf{230,000} & \textbf{202,000} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+C-0 (Foundation/Haiku)
+    |
+    +-------+-------+-------+-------+-------+
+    |       |       |       |       |       |
+   C-1     C-2     C-3     C-4     C-5     C-6
+ (Sonnet) (Sonnet) (Opus) (Sonnet)(Sonnet)(Sonnet)
+ Module1  Module2  Mod3   Mod4    Mod5    Mod6
+    \       /       |       |       \       /
+     \     /        \      /         \     /
+      \   /          \    /           \   /
+       C-7 (SYNTHESIS --- Opus)
+              |
+           C-8 (VERIFICATION --- Sonnet)
+              |
+           FINAL DELIVERABLE
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Target \%} \\
+\midrule
+Safety-Critical & 8 & Mandatory & BLOCK & 18\% \\
+Core Functionality & 20 & Required & BLOCK & 44\% \\
+Integration & 11 & Required & BLOCK & 25\% \\
+Edge Cases & 6 & Best-effort & LOG & 13\% \\
+\midrule
+\textbf{Total} & \textbf{45} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed, government (FAO, USGS, EPA), or professional organization sources. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every percentage, metric ton figure, TRL rating, and cost estimate attributed to a specific named source. \\
+SC-ADV & No policy advocacy & Document presents evidence without advocating for specific legislation or policy positions. \\
+SC-GEO & Geopolitical neutrality & Western Sahara/Morocco phosphate issue noted as disputed; no political position taken. \\
+SC-CLI & Climate projection sourcing & All N\textsubscript{2}O GWP values, CO\textsubscript{2} emission estimates attributed to IPCC or peer-reviewed sources. \\
+SC-MED & No medical claims & No human health claims beyond peer-reviewed evidence in sources. \\
+SC-TRL & TRL accuracy & Technology Readiness Level assessments match published assessments; no overclaiming. \\
+SC-CONT & Context integrity & No findings taken out of context; biofertilizer limitations and green ammonia cost challenges documented alongside benefits. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Haber-Bosch fossil fuel dependency quantified & CF-01, CF-02, SC-NUM & Pending \\
+2. Phosphorus geopolitical concentration mapped & CF-03, CF-04, SC-GEO & Pending \\
+3. All six BNF pathways documented & CF-05, CF-06 & Pending \\
+4. Green ammonia pathways with TRL & CF-07, CF-08, SC-TRL & Pending \\
+5. P recovery potential from four source streams & CF-09, CF-10 & Pending \\
+6. Struvite properties documented & CF-11, CF-12 & Pending \\
+7. Hydroponics/vertical farming data & CF-13, CF-14 & Pending \\
+8. Regenerative ag nutrient mechanisms & CF-15, CF-16 & Pending \\
+9. All alternatives rated on four dimensions & CF-17, IN-01 & Pending \\
+10. Transition roadmap with 8 milestones & CF-18, CF-19 & Pending \\
+11. All numerical claims attributed & SC-NUM & Pending \\
+12. Bibliography with 10+ sources & CF-20, SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; wave go/no-go decisions \\
+PLAN & Planner (Sonnet) & Wave decomposition; dependency management \\
+SCOUT & Research Agent (Sonnet) & Source gathering; evidence compilation; web research \\
+EXEC-A & Document Executor A (Sonnet) & Track A document production (Modules 1, 2, 5) \\
+EXEC-B & Document Executor B (Sonnet) & Track B document production (Modules 3, 4, 6) \\
+CRAFT-BIOCHEM & Biochemistry Specialist (Opus) & BNF mechanisms; biofertilizer evidence synthesis \\
+CRAFT-GEOCHEM & Geochemistry Specialist (Sonnet) & Phosphate rock analysis; struvite chemistry \\
+CRAFT-AGTECH & Agricultural Tech Specialist (Sonnet) & Hydroponics; vertical farming; precision ag \\
+CRAFT-ENERGY & Energy Systems Specialist (Sonnet) & Green ammonia; electrochemistry; TRL assessments \\
+CRAFT-POLICY & Policy Analyst (Opus) & Geopolitics; food security; supply chain risk \\
+CRAFT-REGEN & Regenerative Ag Specialist (Sonnet) & Soil health; agroecology; nutrient cycling \\
+VERIFY & Verification Agent (Sonnet) & Source validation; accuracy checking; SC tests \\
+INTEG & Integration Agent (Opus) & Cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at CAPCOM gates \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+SURGEON & Health Monitor (Haiku) & Research quality degradation detection \\
+LOG & Chronicle Agent (Haiku) & Audit trail; commit messages; milestone summaries \\
+TOPO & Topology Manager (Sonnet) & Agent team structure; mid-mission restructuring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total modules & 6 \\
+Activation profile & Fleet (18 roles) \\
+Parallel execution tracks & 2 (Wave 1), 1 (Wave 2), 1 (Wave 3) \\
+CAPCOM gates & 3 (after Waves 0, 2, 3) \\
+Estimated context windows & 12--18 across 4--5 sessions \\
+Total estimated tokens & 432,000 (input + output) \\
+Model split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Safety-critical tests & 8 (all mandatory BLOCK) \\
+Total tests & 45 \\
+Success criteria & 12 \\
+Handoff target & gsd-skill-creator dev branch; College of Knowledge \\
+Primary output & Structured reference document + synthesis roadmap \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The Haber-Bosch process is widely considered to be one of the greatest inventions of the 20th century. Without it, synthetic fertilisers that support nearly half the world's food production would not exist. However, while the process underpins global food security, it also contributes meaningfully to global greenhouse gas emissions.''} --- Tunley Environmental
+
+\vspace{1em}
+
+The spaces between our dependencies are where sovereignty lives. Between the nitrogen crisis and the biological alternatives, between the phosphorus predicament and the struvite loop, between industrial monoculture and living soil --- each space is a leverage point. This mission maps those spaces with precision, so the transition can be built with intention rather than discovered under duress.
+
+\vspace{1em}
+
+\textbf{Giving people their lives back starts at the soil level.} Food sovereignty is infrastructure sovereignty. The nutrient independence mission is not a research exercise --- it is architecture for a world that feeds itself without burning itself.
+\end{quotebox}
+
+\end{document}
