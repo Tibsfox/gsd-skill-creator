@@ -48,10 +48,13 @@ MISSION_DAYS = {
 }
 
 # Sub-mark schedule: minute → actions
+# Discovery engine runs at :30 on hours 0, 6, 12, 18 (every 6 hours)
+DISCOVERY_HOURS = {0, 6, 12, 18}
+
 SCHEDULE = {
     0:  ['sweep', 'embed', 'ftp_sync', 'commit'],
     15: ['concept_check', 'commit'],
-    30: ['nasa_check', 'chroma_sync', 'commit'],
+    30: ['nasa_check', 'chroma_sync', 'discovery_check', 'commit'],
     45: ['drift_check', 'commit'],
 }
 
@@ -280,6 +283,22 @@ def action_chroma_sync(dry_run=False):
     return success
 
 
+def action_discovery_check(dry_run=False):
+    """Run research discovery engine (every 6 hours at :30)."""
+    now = datetime.now()
+    if now.hour not in DISCOVERY_HOURS:
+        print(f"    Skipped (not a discovery hour, next at :{min(h for h in DISCOVERY_HOURS if h > now.hour) if any(h > now.hour for h in DISCOVERY_HOURS) else min(DISCOVERY_HOURS)}:30)")
+        return True
+    print(f"    Running discovery engine (6-hour cadence)...")
+    cmd = "python3 discovery_engine.py"
+    success, output = run_cmd(cmd, dry_run, timeout=300)
+    if success:
+        for line in output.split('\n'):
+            if 'NEW:' in line or 'Total this run' in line or 'Appended' in line:
+                print(f"    {line.strip()}")
+    return success
+
+
 def run_mark(hour, minute, day, ver_prefix, state, dry_run=False):
     """Execute all actions for a given mark."""
     schedule = PEAK_SCHEDULE if is_peak_cadence(day) else SCHEDULE
@@ -312,6 +331,8 @@ def run_mark(hour, minute, day, ver_prefix, state, dry_run=False):
                 action_drift_check(dry_run)
             elif action_name == 'chroma_sync':
                 action_chroma_sync(dry_run)
+            elif action_name == 'discovery_check':
+                action_discovery_check(dry_run)
         except Exception as e:
             print(f"    ERROR: {e}")
             state['errors'].append({'time': str(now), 'action': action_name, 'error': str(e)})
