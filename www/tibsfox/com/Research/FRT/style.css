@@ -1,0 +1,23 @@
+/* FRT — Food System Nutrient Independence
+ * Earth green / brown agricultural theme
+ */
+:root {
+  --deep: #2E5902;
+  --accent: #4A7C15;
+  --secondary: #6B3A10;
+  --tertiary: #1A5276;
+  --cream: #FAFAFA;
+  --mist: #EAF5E1;
+  --frost: #F5EDE3;
+  --page-bg: var(--cream);
+  --page-text: #212121;
+  --page-text-light: #5D4037;
+  --link: var(--deep);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+header { background: linear-gradient(135deg, var(--deep) 0%, #1a3600 60%, var(--tertiary) 100%); border-bottom: 4px solid var(--accent); }
+.subtitle { color: rgba(255,255,255,0.85); }
+body { background: var(--page-bg); }
+.tag-found { background: var(--mist); color: var(--deep); }

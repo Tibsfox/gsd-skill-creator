@@ -1,0 +1,60 @@
+/* PCA — Personal Care: Physical & Mental
+ * Green/blue health theme
+ * brand.css provides: reset, body, a, h1-h4, p, blockquote, table, code/pre,
+ *   ul/ol/li, .card-grid/.card, .tag base, .stats/.stat, header, main,
+ *   .pdf-container, footer, @media 640px base
+ */
+
+/* ── Palette ── */
+:root {
+  --deep: #1565C0;
+  --accent: #2E7D32;
+  --secondary: #0277BD;
+  --tertiary: #455A64;
+  --cream: #FAFAFA;
+  --mist: #E3F2FD;
+  --frost: #E8F5E9;
+  --page-bg: var(--cream);
+  --page-text: #212121;
+  --page-text-light: #546E7A;
+  --link: var(--accent);
+  --card-border: var(--mist);
+  --border: var(--mist);
+}
+
+/* ── Header ── */
+header { background: linear-gradient(135deg, var(--deep) 0%, var(--secondary) 60%, var(--accent) 100%); border-bottom: 4px solid var(--accent); }
+.subtitle { color: rgba(255,255,255,0.85); }
+
+/* ── Body ── */
+body { background: var(--page-bg); }
+
+/* ── Color overrides ── */
+h2 { color: var(--deep); border-bottom-color: var(--mist); }
+h3 { color: var(--accent); }
+th { background: var(--deep); }
+td { border-bottom-color: var(--mist); }
+tr:nth-child(even) { background: rgba(21, 101, 192, 0.04); }
+tr:hover { background: rgba(21, 101, 192, 0.08); }
+blockquote { border-left-color: var(--accent); background: rgba(46, 125, 50, 0.06); }
+code { background: var(--mist); }
+pre { background: #0d1b2a; color: #80CBC4; }
+.stat-value { color: var(--deep); }
+
+/* ── Tags ── */
+.tag-found { background: var(--frost); color: var(--accent); }
+.tag-physical { background: #E3F2FD; color: #0D47A1; }
+.tag-mental { background: #F3E5F5; color: #6A1B9A; }
+.tag-social { background: #FFF8E1; color: #E65100; }
+.tag-lifestyle { background: #E8F5E9; color: #1B5E20; }
+.tag-mindbody { background: #E0F7FA; color: #006064; }
+.tag-synthesis { background: #FCE4EC; color: #880E4F; }
+.tag-verify { background: #F1F8E9; color: #33691E; }
+.tag-mission { background: #E8EAF6; color: #283593; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  header { padding: 1.2rem; }
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1rem; }
+}
