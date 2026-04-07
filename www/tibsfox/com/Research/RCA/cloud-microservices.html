@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud &amp; Microservices RCA &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Cloud &amp; Microservices RCA</h1>
+    <div class="subtitle">DynaCausal, CHASE, MetaRCA, Service Dependency Graphs, Trace Analysis</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html" class="active">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      In microservice architectures with hundreds of interdependent services, a latency spike in one service can cascade into full outages across the system. Cloud-native RCA demands automated causal reasoning over service dependency graphs, distributed traces, and multi-modal telemetry at scales no human investigator can process manually.
+    </blockquote>
+
+    <!-- DYNACAUSAL -->
+    <h2>DynaCausal &mdash; Dynamic Causality-Aware Fault Propagation</h2>
+    <p><strong>DynaCausal</strong> addresses a fundamental limitation of static dependency graphs: in real microservice systems, causal relationships between services <strong>change dynamically</strong> based on load, configuration, and deployment state. A service that is an upstream dependency under normal conditions may become a downstream consumer during failover.</p>
+    <div class="card">
+      <p><strong>Key innovations:</strong></p>
+      <ul>
+        <li><strong>Dynamic causal graph construction:</strong> Continuously updated from distributed traces rather than static service manifests</li>
+        <li><strong>Cascading fault propagation modeling:</strong> Tracks how failures propagate through the dynamic graph, accounting for circuit breakers, retries, and fallback paths</li>
+        <li><strong>Temporal causality:</strong> Distinguishes between correlation and causation using time-lagged analysis &mdash; service B degraded after service A, but did A cause B&rsquo;s degradation?</li>
+        <li><strong>Multi-hop root cause identification:</strong> Traces the causal chain back through multiple service hops to the originating failure</li>
+      </ul>
+    </div>
+
+    <!-- CHASE -->
+    <h2>CHASE &mdash; Causal Hypergraph for Microservice Systems</h2>
+    <p><strong>CHASE</strong> extends traditional causal graph approaches by modeling microservice interactions as <strong>hypergraphs</strong> &mdash; where a single edge can connect multiple nodes simultaneously, capturing the reality that a failure often involves <strong>multiple interacting services</strong> rather than simple pairwise dependencies.</p>
+    <p>CHASE processes <strong>multimodal data</strong>: metrics (CPU, memory, latency), logs (error patterns, stack traces), and traces (request paths). Each modality provides different causal signals, and CHASE fuses them through a learned attention mechanism that weights each modality based on its informativeness for the specific failure type.</p>
+
+    <!-- METARCA -->
+    <h2>MetaRCA &mdash; Generalizable Production Fault Analysis</h2>
+    <p><strong>MetaRCA</strong> tackles the generalization problem: most cloud RCA systems are trained on specific microservice deployments and fail when applied to new systems. MetaRCA uses <strong>meta-learning</strong> to extract transferable patterns from fault incidents across multiple production environments.</p>
+    <ul>
+      <li><strong>Few-shot fault diagnosis:</strong> Given only 3&ndash;5 examples of a new failure type, MetaRCA can accurately identify root causes</li>
+      <li><strong>Cross-system transfer:</strong> Patterns learned from one microservice deployment transfer to architecturally different systems</li>
+      <li><strong>Incident embedding:</strong> Represents each incident as a vector in a learned space where similar root causes cluster together</li>
+    </ul>
+
+    <!-- SERVICE DEPENDENCY GRAPHS -->
+    <h2>Service Dependency Graphs &amp; Trace Analysis</h2>
+    <p>The foundation of all cloud-native RCA is the <strong>service dependency graph</strong> &mdash; a directed graph where nodes are services and edges represent communication channels (HTTP, gRPC, message queues, shared databases).</p>
+    <table>
+      <thead><tr><th>Data Source</th><th>RCA Signal</th><th>Limitation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Distributed traces</strong></td><td>Request path, per-service latency, error propagation</td><td>Sampling rate reduces coverage; async flows may not be captured</td></tr>
+        <tr><td><strong>Service mesh telemetry</strong></td><td>Traffic volume, error rates, retry counts between services</td><td>Mesh overhead; not all communication goes through the mesh</td></tr>
+        <tr><td><strong>Log correlation</strong></td><td>Error messages, stack traces, request IDs</td><td>Inconsistent log formats; high volume requires aggregation</td></tr>
+        <tr><td><strong>Metric anomaly detection</strong></td><td>Latency spikes, CPU saturation, memory pressure</td><td>Correlation is not causation; baseline drift causes false positives</td></tr>
+        <tr><td><strong>Change events</strong></td><td>Deployments, config changes, scaling events</td><td>Lag between change and observable effect</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ANOMALY CORRELATION -->
+    <h2>Anomaly Correlation Across Service Meshes</h2>
+    <p>Modern cloud RCA systems combine multiple signals through anomaly correlation:</p>
+    <div class="card">
+      <ol>
+        <li><strong>Detect:</strong> Identify anomalous metrics/logs/traces across all services simultaneously</li>
+        <li><strong>Cluster:</strong> Group related anomalies by temporal proximity and causal connectivity</li>
+        <li><strong>Rank:</strong> Score each service by its likelihood of being the root cause, using graph centrality and temporal precedence</li>
+        <li><strong>Validate:</strong> Cross-check the top candidate against change events, deployment timelines, and known failure patterns</li>
+        <li><strong>Explain:</strong> Generate a human-readable causal chain from the root cause through intermediate services to the user-facing symptom</li>
+      </ol>
+    </div>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>227 related projects</strong> across 1 knowledge domain with 8 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>CML</td><td>CMU ML in Production</td><td>general</td><td>0.227</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
+        <tr><td>M05</td><td>Module Split Analysis</td><td>general</td><td>0.194</td></tr>
+        <tr><td>HFR</td><td>Hi-Fidelity Audio Reproduction</td><td>general</td><td>0.193</td></tr>
+        <tr><td>OOPS</td><td>Ecosystem Alignment &amp; Architecture Analysis</td><td>general</td><td>0.176</td></tr>
+        <tr><td>forest</td><td>PNW Forest &mdash; Distributed Ecosystem Simulation</td><td>general</td><td>0.101</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (227). Complex plane: z = 0.1673 + 0.1135i, |z| = 0.2022.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="software-sre.html">Software &amp; SRE</a></li>
+        <li><a href="ai-agent-debugging.html">AI Agent Debugging</a></li>
+        <li><a href="llm-rca-failures.html">LLM Reasoning Failures</a></li>
+        <li><a href="mathematical-foundations.html">Mathematical Foundations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Cloud &amp; Microservices RCA &middot; Root Cause Analysis &middot; 227 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

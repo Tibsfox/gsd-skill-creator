@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Electronics Projects &mdash; Artemis Learning Resources</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alr">
+  <header>
+    <h1>DIY Electronics Projects</h1>
+    <div class="subtitle">Vacuum Tubes, LED Controllers, 555 Timers, IoT Sensors, BESS Monitoring, RTL-SDR, Photonics &mdash; Build It Yourself</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ai-programming.html">AI Programming</a>
+      <a href="diy-electronics.html" class="active">DIY Electronics</a>
+      <a href="study-guides.html">Study Guides</a>
+      <a href="live-expansion.html">LIVE Pages</a>
+      <a href="open-math-problems.html">Math Problems</a>
+      <a href="open-cs-problems.html">CS Problems</a>
+      <a href="open-physics-problems.html">Physics Problems</a>
+      <a href="open-science.html">DIY Science</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Seven electronics projects spanning analog heritage to modern IoT, drawn from the Artemis II research corpus and the Electronics Rosetta cluster. Each project includes a bill of materials, safety considerations, and connections to the 226 related corpus projects. Corpus analysis reveals strong ties to the LED, Smart Home, 555 Timer IC, and AM Radio heritage projects.
+    </blockquote>
+
+    <div class="safety-warning">
+      <strong>Safety first:</strong> Several projects involve mains voltage (vacuum tube amplifier), soldering, and lithium batteries (BESS). Always use proper safety equipment, follow local electrical codes, and never work on live circuits. If you are under 18, work with an experienced adult.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 1: Vacuum Tube Amplifier                              -->
+    <!-- ============================================================ -->
+
+    <h2>1. Vacuum Tube Amplifier Build</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-advanced">Advanced</span> <span class="source-badge">ELE</span> <span class="source-badge">HFE</span></p>
+      <p>Build a single-ended Class A vacuum tube amplifier based on the CastlePast series. This project connects analog audio heritage to modern electronics understanding.</p>
+
+      <div class="safety-warning">
+        <strong>High voltage warning:</strong> Tube amplifiers operate at 250&ndash;400V DC plate voltage. Lethal voltages are present even when unpowered (capacitor discharge). This project requires experience with high-voltage circuits.
+      </div>
+
+      <h4>Bill of Materials</h4>
+      <ul>
+        <li>12AX7 preamp tube, EL84 or 6V6 power tube, 5Y3 rectifier tube</li>
+        <li>Output transformer (5K primary, 4/8/16 ohm secondary)</li>
+        <li>Power transformer (250V secondary, 6.3V filament winding)</li>
+        <li>Electrolytic capacitors (47uF/450V), film coupling caps, resistors</li>
+        <li>Chassis, tube sockets, terminal strips, hook-up wire</li>
+      </ul>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>Thermionic emission and vacuum tube operating principles</li>
+        <li>Class A bias, load lines, and impedance matching</li>
+        <li>Power supply design with tube rectification and LC filtering</li>
+        <li>Audio signal path from grid to plate to output transformer</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 2: LED Controller                                     -->
+    <!-- ============================================================ -->
+
+    <h2>2. LED Controller with Arduino/ESP32</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-beginner">Beginner</span> <span class="source-badge">LED</span> <span class="source-badge">SHE</span></p>
+      <p>Build a programmable LED strip controller using an ESP32 microcontroller with WiFi control, animations, and home automation integration.</p>
+      <h4>Bill of Materials</h4>
+      <ul>
+        <li>ESP32 development board (NodeMCU-32S or similar)</li>
+        <li>WS2812B addressable LED strip (5V, 60 LEDs/m)</li>
+        <li>5V power supply rated for LED current (60mA per LED at full white)</li>
+        <li>Logic level shifter (3.3V to 5V), 470 ohm data resistor, 1000uF capacitor</li>
+      </ul>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>PWM signal generation and addressable LED protocols (WS2812B timing)</li>
+        <li>ESP32 WiFi stack and web server for remote control</li>
+        <li>Animation algorithms: rainbow, chase, fire, breathing patterns</li>
+        <li>Home Assistant or MQTT integration for smart home control</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 3: 555 Timer                                          -->
+    <!-- ============================================================ -->
+
+    <h2>3. 555 Timer Circuit Projects</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-beginner">Beginner</span> <span class="source-badge">T55</span> <span class="source-badge">ELE</span></p>
+      <p>Three progressive builds with the NE555 timer IC &mdash; the most versatile analog IC ever made. From the Philips semiconductor heritage (the 555 was designed at Signetics, later Philips).</p>
+      <h4>Three Builds</h4>
+      <ol>
+        <li><strong>Astable oscillator:</strong> Variable-frequency square wave generator with LED blinker</li>
+        <li><strong>Monostable pulse generator:</strong> Debounced button input with adjustable pulse width</li>
+        <li><strong>PWM motor controller:</strong> Variable-speed DC motor control using 555 PWM</li>
+      </ol>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>Internal comparator, flip-flop, and discharge transistor architecture</li>
+        <li>RC timing networks: frequency = 1.44 / ((R1 + 2*R2) * C)</li>
+        <li>Duty cycle control and PWM generation without microcontrollers</li>
+        <li>Reading datasheets and calculating component values from specifications</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 4: IoT Sensor Networks                                -->
+    <!-- ============================================================ -->
+
+    <h2>4. IoT Sensor Networks &mdash; Security-First Design</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-intermediate">Intermediate</span> <span class="source-badge">SHE</span> <span class="source-badge">AGT</span></p>
+      <p>Deploy a mesh of environmental sensors with security as the primary design constraint, not an afterthought. Connects to the Artemis II LIVE page infrastructure.</p>
+      <h4>Bill of Materials (per node)</h4>
+      <ul>
+        <li>ESP32-C3 (RISC-V core with hardware crypto acceleration)</li>
+        <li>BME280 (temperature, humidity, pressure) or SHT31 sensor</li>
+        <li>SSD1306 OLED display (128x64), solar panel + LiPo battery</li>
+        <li>Weatherproof enclosure (IP65 rated)</li>
+      </ul>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>TLS 1.3 on embedded devices with hardware crypto offload</li>
+        <li>MQTT with client certificates &mdash; no password-based auth</li>
+        <li>ESP-NOW mesh networking for local sensor-to-sensor communication</li>
+        <li>OTA firmware updates with signed image verification</li>
+        <li>Power budgeting for solar-powered deployment (target: indefinite runtime)</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 5: BESS Monitoring                                    -->
+    <!-- ============================================================ -->
+
+    <h2>5. BESS Battery Monitoring Dashboard</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-intermediate">Intermediate</span> <span class="source-badge">ENE</span> <span class="source-badge">SHE</span></p>
+      <p>Build a monitoring dashboard for Battery Energy Storage Systems (BESS), tracking cell voltage, temperature, state of charge, and cycle count. Connects to the Energy Systems research cluster.</p>
+      <h4>Bill of Materials</h4>
+      <ul>
+        <li>ESP32 with INA219 current/voltage sensor (per cell or pack)</li>
+        <li>DS18B20 temperature sensors (one per cell group)</li>
+        <li>InfluxDB + Grafana for time-series visualization</li>
+        <li>Relay module for emergency disconnect (over-voltage/over-temp protection)</li>
+      </ul>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>Coulomb counting and open-circuit voltage for state-of-charge estimation</li>
+        <li>Cell balancing fundamentals (passive resistive balancing)</li>
+        <li>Thermal runaway detection and emergency disconnect protocols</li>
+        <li>Time-series data architecture with InfluxDB retention policies</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 6: RTL-SDR                                            -->
+    <!-- ============================================================ -->
+
+    <h2>6. RTL-SDR Radio Receiver Projects</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-beginner">Beginner</span> <span class="source-badge">AMR</span> <span class="source-badge">CBC</span></p>
+      <p>Use a $25 RTL-SDR dongle to receive everything from FM radio to aircraft ADS-B transponders, weather satellites, and the hydrogen line at 1420 MHz.</p>
+      <h4>Bill of Materials</h4>
+      <ul>
+        <li>RTL-SDR Blog V4 dongle (0.5 MHz &ndash; 1.7 GHz)</li>
+        <li>Dipole antenna kit (included with V4) or DIY ground plane antenna</li>
+        <li>Optional: LNA (low-noise amplifier) for weak signals, bandpass filters</li>
+        <li>Software: SDR++ or GQRX (Linux), CubicSDR (cross-platform)</li>
+      </ul>
+      <h4>Progressive Projects</h4>
+      <ol>
+        <li><strong>FM broadcast reception:</strong> Listen to local stations, visualize in waterfall display</li>
+        <li><strong>ADS-B aircraft tracking:</strong> Receive 1090 MHz transponder data, feed to FlightAware</li>
+        <li><strong>NOAA weather satellite:</strong> Decode APT images from NOAA 15/18/19 at 137 MHz</li>
+        <li><strong>Hydrogen line 1420 MHz:</strong> Detect galactic hydrogen for radio astronomy (see DIY Science module)</li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 7: Photonic Experiments                               -->
+    <!-- ============================================================ -->
+
+    <h2>7. Photonic Experiments with Fiber Optics</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-intermediate">Intermediate</span> <span class="source-badge">ELE</span> <span class="source-badge">HPC</span></p>
+      <p>Explore photonic computing concepts with hands-on fiber optic experiments, connecting to the AGT research on WDM micro-resonator comb lasers and photonic integration.</p>
+      <h4>Bill of Materials</h4>
+      <ul>
+        <li>Plastic optical fiber (POF) 1mm diameter, 10m length</li>
+        <li>LED transmitter and photodiode receiver modules</li>
+        <li>Fiber cleaver, polishing kit, and ST/SC connectors</li>
+        <li>Arduino for signal generation and measurement</li>
+      </ul>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>Total internal reflection, numerical aperture, and modal dispersion</li>
+        <li>Wavelength Division Multiplexing (WDM) concepts with colored LEDs</li>
+        <li>Optical power measurement and loss budgeting</li>
+        <li>Signal modulation: OOK, pulse-position, and analog intensity modulation</li>
+        <li>Connection to photonic computing research &mdash; light as a compute medium</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+
+    <div class="card">
+      <p>Pipeline analysis identified 226 related projects across 4 knowledge domains (general, infrastructure, ecology, electronics). The aggregate complex plane position <strong>z = 0.167 + 0.113i</strong> (|z| = 0.202) reflects the breadth of electronics connections across the corpus.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>LED</td><td>LED Lighting &amp; Controllers</td><td>General</td><td>LED driver design, addressable protocols</td></tr>
+        <tr><td>SHE</td><td>Smart Home Technologies &amp; DIY Electronics</td><td>General</td><td>IoT integration, home automation</td></tr>
+        <tr><td>T55</td><td>555 Timer IC</td><td>General</td><td>Timer circuit heritage, Signetics/Philips</td></tr>
+        <tr><td>ELE</td><td>Electronics</td><td>Electronics</td><td>Core electronics cluster</td></tr>
+        <tr><td>AMR</td><td>The AM Radio Dial</td><td>General</td><td>Radio heritage, SDR connections</td></tr>
+        <tr><td>ECO</td><td>From Tahoma&rsquo;s Summit to the Salish Sea Floor</td><td>Ecology</td><td>Environmental sensing</td></tr>
+        <tr><td>BCM</td><td>Building Construction Mastery</td><td>Infrastructure</td><td>Electrical systems, wiring</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../LED/index.html">LED &mdash; Lighting &amp; Controllers</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../ENE/index.html">ENE &mdash; Energy Systems</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+        <li><a href="../ECO/index.html">ECO &mdash; PNW Ecology</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>DIY Electronics Projects &middot; Artemis Learning Resources &middot; 7 projects &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

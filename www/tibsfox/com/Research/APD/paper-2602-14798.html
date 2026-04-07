@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overthinking Loops in MCP &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Overthinking Loops: Structural Risk in MCP Tools</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-security">Cost &amp; Risk</span></div>
+      <h3>Overthinking Loops: Structural Risk in MCP Tool Interactions</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.14798" target="_blank"><span class="arxiv-id">2602.14798</span></a></p>
+      <p><strong>Authors:</strong> Lee et al.</p>
+      <p><strong>Date:</strong> February 2026 &middot; <strong>Categories:</strong> cs.AI, cs.SE</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>Agents interacting with MCP tools enter cyclic tool-call trajectories that amplify token consumption by up to 142.4x. The paper analyzes 14 malicious tools across 3 servers, demonstrating that decoding-time controls are ineffective against structural overthinking. The root cause is the absence of progress detection in agent-tool interaction loops. Tool-call structure analysis is required to identify and break cyclic patterns.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number critical">142.4&times;</span> token amplification from cyclic tool-call trajectories</li>
+      <li><span class="key-number critical">658&times;</span> maximum cost inflation from overthinking loops (cluster-wide finding)</li>
+      <li><span class="key-number warn">12&ndash;18%</span> of complex multi-tool tasks trigger overthinking</li>
+      <li>Three loop patterns: verification spirals (median 340x), exploration loops, plan oscillation (58% most frequent)</li>
+      <li>Decoding-time controls are ineffective &mdash; the problem is structural, not generative</li>
+      <li>14 malicious tools across 3 servers tested; all trigger cyclic patterns</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Loop Pattern</th><th>Frequency</th><th>Median Cost</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        <tr><td>Verification spirals</td><td>24%</td><td>340x inflation</td><td>Repeatedly checks work without corrections</td></tr>
+        <tr><td>Exploration loops</td><td>18%</td><td>180x inflation</td><td>Re-reads same outputs seeking absent info</td></tr>
+        <tr><td>Plan oscillation</td><td>58%</td><td>95x inflation</td><td>Alternates approaches without committing</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Proposed Defenses</h2>
+    <div class="card">
+      <p>Four circuit breaker patterns proposed:</p>
+      <ol>
+        <li><strong>Max-iteration limits</strong> per tool &mdash; hard cap on repeated invocations</li>
+        <li><strong>Diminishing-returns detection</strong> &mdash; flag when new tool calls produce &lt;5% new information</li>
+        <li><strong>Cost budget enforcement</strong> with graceful degradation &mdash; stop before economic damage</li>
+        <li><strong>Progress heuristics</strong> based on output entropy change &mdash; detect stagnation</li>
+      </ol>
+    </div>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <h3>Current Coverage</h3>
+      <p>Our GUPP propulsion system and polecat-worker pattern already implement progress detection via diminishing-returns heuristics. The token-budget skill enforces cost limits. This paper quantifies the remaining risk: 12-18% of complex tasks still trigger overthinking.</p>
+      <h3>Action Items</h3>
+      <ul>
+        <li>Formalize all four circuit breaker patterns in the token-budget skill</li>
+        <li>Add output entropy tracking to detect verification spirals (the most costly pattern at 340x)</li>
+        <li>The 58% plan oscillation rate validates our &ldquo;planning is the hard part&rdquo; principle &mdash; plan once, then execute deterministically</li>
+        <li>Overthinking is structural, not generative &mdash; decoding-time controls won't help</li>
+      </ul>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (230 projects, 246-project corpus)</h4>
+      <span class="ref-tag">TKN &mdash; Token Economics</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+      <span class="ref-tag">SAA &mdash; Skills &amp; Teams</span>
+      <span class="ref-tag">HEL &mdash; Helium Supply Chain</span>
+      <span class="ref-tag">BCM &mdash; Building Construction</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2504-08623.html">Enterprise MCP: IAM &amp; Zero-Trust</a></li>
+        <li><a href="paper-2604-04131.html">Profile-Then-Reason: Bounded Complexity</a></li>
+        <li><a href="paper-2604-00824.html">STITCH: Sliding-Memory Trajectories</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2602.14798 &middot; Overthinking Loops</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

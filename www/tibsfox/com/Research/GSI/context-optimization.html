@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Window Optimization &mdash; GSD-Skill-Creator Improvements &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsi">
+  <header>
+    <h1>Context Window Optimization</h1>
+    <div class="subtitle">Token Reduction, Progressive Loading, Ghost Tokens, Context Rot &mdash; Applied to gsd-skill-creator</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="skill-security.html">Skill Security</a>
+      <a href="context-optimization.html" class="active">Context Optimization</a>
+      <a href="orchestration-patterns.html">Orchestration</a>
+      <a href="verification-pipeline.html">Verification</a>
+      <a href="agent-identity.html">Agent Identity</a>
+      <a href="mcp-hardening.html">MCP Hardening</a>
+      <a href="ecosystem-alignment.html">Ecosystem</a>
+      <a href="learning-system.html">Learning System</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>The Context Budget Problem</h2>
+
+    <blockquote>
+      gsd-skill-creator loads 34 skills, 57 commands, and extensive system prompts into every session. Tool definitions alone consume approximately 100K tokens at baseline. With a 200K context window, half the budget is spent before the user types their first message. Every improvement here directly increases the usable context available for actual work.
+    </blockquote>
+
+    <p>Context is the scarcest resource in agentic systems. The OOPS ecosystem alignment analysis measured the token costs of the current skill-creator configuration and identified seven concrete optimization opportunities, each with measured or estimated savings.</p>
+
+    <!-- ================================================================== -->
+    <h2>1. Tool Definition Token Reduction</h2>
+
+    <div class="card">
+      <p><strong>Current state:</strong> ~100K tokens consumed by tool definitions, skill descriptions, and system prompt content at session start<br>
+      <strong>Target:</strong> Reduce to ~30K through progressive loading and definition compression</p>
+    </div>
+
+    <p>Tool definitions are the largest single consumer of context budget. Each tool&rsquo;s JSON schema includes parameter descriptions, type annotations, and usage examples. Many tools share common parameter patterns (file paths, glob patterns, regex) that could use shared references instead of repeated inline definitions.</p>
+
+    <h3>Compression Strategies</h3>
+    <table>
+      <thead><tr><th>Strategy</th><th>Estimated Savings</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Shared parameter schemas</strong></td><td>15&ndash;20%</td><td>Low &mdash; model already understands $ref patterns</td></tr>
+        <tr><td><strong>Description truncation</strong></td><td>10&ndash;15%</td><td>Medium &mdash; must preserve activation signals</td></tr>
+        <tr><td><strong>Deferred tool loading</strong></td><td>40&ndash;60%</td><td>Low &mdash; already implemented via ToolSearch</td></tr>
+        <tr><td><strong>Example removal</strong></td><td>5&ndash;10%</td><td>Medium &mdash; some tools need examples for correct usage</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>2. Progressive 3-Tier Skill Loading (94% Savings)</h2>
+
+    <p>Not all 34 skills need to be loaded at session start. A 3-tier loading strategy activates skills based on actual need rather than speculative preloading.</p>
+
+    <table>
+      <thead><tr><th>Tier</th><th>When Loaded</th><th>Skills</th><th>Token Cost</th></tr></thead>
+      <tbody>
+        <tr><td><span class="safety-badge safety-critical">Always</span></td><td>Session start</td><td>gsd-workflow, security-hygiene, session-awareness (3 skills)</td><td>~2K tokens</td></tr>
+        <tr><td><span class="safety-badge safety-info">On-Demand</span></td><td>First relevant trigger detected</td><td>beautiful-commits, test-generator, code-review, etc. (20 skills)</td><td>~0 at start</td></tr>
+        <tr><td><span class="safety-badge safety-warn">Deferred</span></td><td>Explicit user invocation only</td><td>Specialized skills: uc-lab, fleet-mission, research-engine (11 skills)</td><td>~0 at start</td></tr>
+      </tbody>
+    </table>
+
+    <p>At session start, only 3 skills consume context instead of 34. The <code>alwaysApply</code> flag in YAML front matter already distinguishes always-on from triggered skills. The 94% savings estimate comes from loading ~2K instead of ~35K in skill descriptions alone.</p>
+
+    <!-- ================================================================== -->
+    <h2>3. Ghost Token Detection and Elimination</h2>
+
+    <p>Ghost tokens are context entries that consume budget but provide no value to the current task. They accumulate through several mechanisms:</p>
+
+    <ul>
+      <li><strong>Stale system reminders:</strong> MCP server instructions loaded for servers not in active use</li>
+      <li><strong>Duplicate skill listings:</strong> Some skills appear in both their native and fully-qualified forms (e.g., <code>gsd-workflow</code> and <code>gsd:workflow</code>)</li>
+      <li><strong>Expired session state:</strong> Context from previous tasks that survived compaction</li>
+      <li><strong>Redundant tool schemas:</strong> Deferred tools listed by name that will never be invoked in this session</li>
+    </ul>
+
+    <p>A ghost token audit of the current system-reminder block would likely recover 5&ndash;15% of context budget. The <code>sc:status</code> skill already tracks per-skill token consumption &mdash; extend it to flag ghost entries.</p>
+
+    <!-- ================================================================== -->
+    <h2>4. Read Deduplication (8&ndash;30% Savings)</h2>
+
+    <p>In long sessions, the same files are often read multiple times. Each read injects the full file content into context even if it has not changed since the last read. A read cache that tracks file content hashes can suppress duplicate reads.</p>
+
+    <h3>Implementation</h3>
+    <pre>
+// Read dedup pseudocode
+const readCache = new Map&lt;string, { hash: string, turnId: number }&gt;();
+
+function shouldRead(path: string): boolean {
+  const cached = readCache.get(path);
+  if (!cached) return true;
+  const currentHash = hashFile(path);
+  return currentHash !== cached.hash;
+}</pre>
+
+    <p>The 8&ndash;30% savings range depends on session type: code review sessions (high file re-reading) see the upper bound; greenfield development sessions see the lower bound.</p>
+
+    <!-- ================================================================== -->
+    <h2>5. Context Rot Prevention at 25% Fill</h2>
+
+    <p>Context rot is the degradation of model output quality as the context window fills. Research from the AGT digest and OOPS alignment both point to 25% fill as the threshold where quality begins to degrade measurably. The model starts losing track of earlier instructions, forgets constraints, and produces outputs that conflict with established context.</p>
+
+    <h3>Prevention Strategies</h3>
+    <ul>
+      <li><strong>Proactive compaction:</strong> Trigger compaction at 25% fill rather than waiting for the window to approach capacity</li>
+      <li><strong>Instruction anchoring:</strong> Pin critical instructions (safety constraints, project rules) at both the beginning and end of the context window</li>
+      <li><strong>Staleness scoring:</strong> Track when each context entry was last referenced; deprioritize entries with high staleness for compaction</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>6. Compaction Strategy Improvement (60&ndash;70% Loss Reduction)</h2>
+
+    <p>The current PostCompact hook fires after compaction occurs, but the compaction itself is a black box that loses 60&ndash;70% of context detail. The new Claude Code v2.1.88 PostCompact hook allows injecting recovery context after compaction.</p>
+
+    <div class="card">
+      <p><strong>Recovery injection:</strong> After compaction fires, read <code>.planning/STATE.md</code> and the current phase&rsquo;s <code>PLAN.md</code> back into context. These files contain the most critical state that compaction tends to lose. This is a form of external memory that supplements the compressed conversation history.</p>
+    </div>
+
+    <!-- ================================================================== -->
+    <h2>7. Sub-Agent Context Isolation (90.2% Improvement)</h2>
+
+    <p>Sub-agents spawned by the skill-creator inherit the parent&rsquo;s full context, even when their task requires only a fraction of it. The new Claude Code subagent fields (<code>isolation: worktree</code>, <code>memory</code>, <code>skills</code>, <code>mcpServers</code>) enable precise context scoping per sub-agent.</p>
+
+    <table>
+      <thead><tr><th>Sub-Agent Type</th><th>Needed Context</th><th>Current Load</th><th>Optimized Load</th></tr></thead>
+      <tbody>
+        <tr><td>GSD executor</td><td>Phase plan + relevant source files</td><td>Full parent context</td><td>Plan + targeted file list</td></tr>
+        <tr><td>GSD verifier</td><td>UAT criteria + test results</td><td>Full parent context</td><td>Verification spec only</td></tr>
+        <tr><td>Fleet worker</td><td>Single task assignment</td><td>Full parent context</td><td>Task brief + minimal tools</td></tr>
+      </tbody>
+    </table>
+
+    <p>The 90.2% improvement figure comes from measuring the context delta between a full-inheritance sub-agent and a scoped sub-agent for typical GSD executor tasks.</p>
+
+    <!-- ================================================================== -->
+    <h2>Corpus Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related Projects (from corpus analysis &mdash; 15 projects, z = 0.3175)</h4>
+      <ul>
+        <li><a href="../OOPS/index.html">OOPS &mdash; Ecosystem Alignment</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../GSA/index.html">GSA &mdash; GSD System Architecture</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Complex plane state:</strong> z = 0.2595 + 0.1829i, |z| = 0.3175 &mdash; highest magnitude among the eight GSI modules, indicating stronger existing research connections. TKN (Token Economics) at magnitude 1.291 is the strongest single connection, reflecting the direct relevance of token budget management to context optimization.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Context Window Optimization &middot; GSD-Skill-Creator Improvements &middot; PNW Research Series</p>
+    <p><a href="index.html">GSI Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

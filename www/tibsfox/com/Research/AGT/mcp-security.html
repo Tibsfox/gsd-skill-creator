@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Security &mdash; Agentic Technologies &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Infrastructure &amp; Systems</h1>
+    <div class="subtitle">Architecture, Security &amp; Scaling &mdash; April 2026 Research Synthesis</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="agent-architecture.html">Agent Architecture</a>
+      <a href="mcp-security.html" class="active">MCP Security</a>
+      <a href="ml-production.html">ML Production</a>
+      <a href="hardware-energy.html">Hardware &amp; Energy</a>
+      <a href="engineering-plm.html">Engineering &amp; PLM</a>
+      <a href="business-legal.html">Business &amp; Legal</a>
+      <a href="context-engineering.html">Context Engineering</a>
+      <a href="papers.html">Papers</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>MCP Security: The Agent Attack Surface</h2>
+
+    <blockquote>
+      &ldquo;MCP tools are taking 100,000 tokens of just definitions. I&rsquo;ve only got 3.9% of the context left.&rdquo;
+      &mdash; Adam Jones, Anthropic (AgenticAI Foundation Dev Summit)
+    </blockquote>
+
+    <p>Sixteen independent sources &mdash; six videos from OWASP and the AgenticAI Foundation Dev Summit, ten GitHub repositories, two CMU and OWASP deep-dive lectures, and one arXiv supply-chain paper &mdash; converge on a single conclusion: the Model Context Protocol is simultaneously the most powerful integration layer in agentic AI and the widest attack surface. This page synthesizes the key findings across tool poisoning, agent identity, indirect prompt injection, supply-chain attacks, and the open-source security landscape.</p>
+
+    <!-- ================================================================== -->
+    <h2>1. The MCP Attack Surface</h2>
+
+    <div class="card">
+      <p><strong>Sources:</strong> Adam Jones (Anthropic), Edison.watch founder, SlowMist checklist, OWASP talks<br>
+      <strong>Key idea:</strong> Tool definitions consume the context window before any work begins; tool responses flow into context unchecked</p>
+    </div>
+
+    <p>The MCP attack surface operates at three layers: tool definitions that consume context budget, tool invocations that accept adversary-controlled input, and tool responses that inject unchecked content back into the agent&rsquo;s reasoning context.</p>
+
+    <h3>Token Bloat: The Silent Budget Crisis</h3>
+    <p>Adam Jones at Anthropic measured the cost directly: MCP tool definitions alone can consume <strong>100,000 tokens</strong> &mdash; 50% of a 200K context window &mdash; before the first user message. With bloated toolsets, tool selection accuracy drops from <strong>43% to 14%</strong>. Context quality degrades from 93% to 76% MRCR accuracy at 256K fill. After 2&ndash;3 compaction events, <strong>88&ndash;95% cumulative information loss</strong> occurs.</p>
+
+    <h3>Tool Poisoning: 70% Success Rate</h3>
+    <p>Harsh Kadam (Indeed) demonstrated at OWASP that tool poisoning attacks against real MCP servers achieve a <strong>70% success rate</strong>. The attack embeds malicious instructions in tool descriptions and documentation &mdash; the docstrings that agents read to decide which tool to call and how to call it. A compromised MCP server returning hidden instructions (<code>&lt;SECRET&gt;</code>, <code>&lt;SYSTEM&gt;</code>) in response payloads can steer agent behavior without any visible indication.</p>
+
+    <h3>The Lethal Trifecta</h3>
+    <p>The Edison.watch founder identified three converging risks in MCP data flows:</p>
+    <table>
+      <thead><tr><th>Risk</th><th>Mechanism</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Data exfiltration</strong></td>
+          <td>Tool responses carry sensitive data back into context where it can be redirected</td>
+          <td>RBAC breakdown &mdash; &ldquo;the agent doesn&rsquo;t really know what data should belong in what data buckets&rdquo;</td>
+        </tr>
+        <tr>
+          <td><strong>Response-side injection</strong></td>
+          <td>Compromised server returns hidden instructions in tool response payload</td>
+          <td>Agent reasoning is steered by injected content from untrusted source</td>
+        </tr>
+        <tr>
+          <td><strong>Session-level tracking gap</strong></td>
+          <td>No per-session cost or permission tracking across tool invocations</td>
+          <td>658&times; cost inflation possible through unmonitored recursive tool calls</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The Binary Check Gap</h3>
+    <p>SlowMist&rsquo;s production audit checklist (824 GitHub stars) identified a fundamental gap: <strong>binary exists &ne; binary is correct.</strong> Current MCP server validation confirms a binary path exists but does not verify the binary is the expected one. Without SHA-256 integrity pins, a replaced binary passes all existing checks.</p>
+
+    <!-- ================================================================== -->
+    <h2>2. Agent Identity Protocol (AIP)</h2>
+
+    <div class="card">
+      <p><strong>Sources:</strong> James Gow (Ironwood Cyber) at AgenticAI Foundation, Katie (Hash Security) at OWASP, AIP GitHub repo, MCPS IETF draft<br>
+      <strong>Key idea:</strong> Stop asking &ldquo;does my agent have credentials?&rdquo; and start asking &ldquo;what is it allowed to access right now, under these exact runtime conditions?&rdquo;</p>
+    </div>
+
+    <p>Two independent efforts &mdash; the Agent Identity Protocol (AIP) and the IETF-125 MCPS draft &mdash; converge on a two-layer architecture for agent authentication: a root registry that issues cryptographic identities, and runtime tokens that encode what an agent is allowed to do in this specific session.</p>
+
+    <h3>Two-Layer Architecture</h3>
+    <table>
+      <thead><tr><th>Layer</th><th>Function</th><th>Implementation</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Root Registry</strong></td>
+          <td>Issues and manages persistent agent identities</td>
+          <td>AIP Go proxy, SPIFFE/SPIRE alignment for workload identities</td>
+        </tr>
+        <tr>
+          <td><strong>Runtime Tokens (AAT)</strong></td>
+          <td>Short-lived, scoped to current session and task</td>
+          <td>Agent Authentication Tokens with DLP scanning and HITL gates</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Zero Trust Through Machine Identity</h3>
+    <p>Katie from Hash Security at OWASP argued that the agent identity question is fundamentally a zero-trust problem. Traditional credential systems ask &ldquo;who are you?&rdquo; once at authentication time. Agent systems must continuously verify &ldquo;what are you allowed to access right now?&rdquo; based on runtime conditions, delegation chains, and environmental context.</p>
+
+    <blockquote>
+      &ldquo;We need to stop asking &lsquo;does my AI agent have credentials?&rsquo; and start asking &lsquo;what is it allowed to access right now, under these exact runtime conditions?&rsquo;&rdquo;
+      &mdash; Katie, Hash Security (OWASP)
+    </blockquote>
+
+    <h3>The SEAL Three-Tier Model</h3>
+    <p>The SEAL (Secure MCP) project implements a three-tier policy engine using Ed25519 cryptographic signing:</p>
+    <ul>
+      <li><strong>Deny:</strong> Explicitly blocked operations &mdash; highest priority, no override</li>
+      <li><strong>Allow:</strong> Explicitly permitted operations &mdash; affirmative allowlist</li>
+      <li><strong>Default-deny:</strong> Everything not explicitly allowed is blocked</li>
+    </ul>
+
+    <h3>Protocol Timeline</h3>
+    <table>
+      <thead><tr><th>Date</th><th>Event</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>Apr 25, 2026</td><td>MCP Anniversary Release (Tasks + Client ID Metadata)</td><td>Async operations, identity propagation</td></tr>
+        <tr><td>Spring 2026</td><td>MCP Transport + Extension Discovery</td><td>Bidirectional streaming</td></tr>
+        <tr><td>Ongoing</td><td>IETF-125 (Shenzhen) &mdash; agentic auth standards</td><td>AIP/MCPS alignment</td></tr>
+        <tr><td>Ongoing</td><td>OWASP Agentic Top 10</td><td>ASI02 (tool misuse), ASI03 (identity abuse)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>3. OWASP Indirect Prompt Injection</h2>
+
+    <div class="card">
+      <p><strong>Sources:</strong> Will (Trail of Bits AI Assurance Team) at OWASP Global AppSec, CMU ML Safety lecture, Nvidia red team<br>
+      <strong>Key idea:</strong> Assume tool input is adversary-controlled; most core issues are AppSec issues before they are AI issues</p>
+    </div>
+
+    <p>Indirect prompt injection requires three components, all of which must be present for a vulnerability (the first two alone are only a risk):</p>
+
+    <h3>Three Components</h3>
+    <table>
+      <thead><tr><th>#</th><th>Component</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Malicious instructions in external data</strong></td><td>Adversary embeds instructions in documents, emails, web pages, or databases</td></tr>
+        <tr><td>2</td><td><strong>Trust boundary crossing</strong></td><td>AI system retrieves and processes untrusted data via tool calls during inference</td></tr>
+        <tr><td>3</td><td><strong>Dangerous action without confirmation</strong></td><td>System takes action based on injected instructions without human approval</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Trust Boundary Crossing</h3>
+    <p>The architecture is straightforward: users write data into stores (emails, calendars, databases). The AI agent reads from those stores via tools. The data crosses a trust boundary when it moves from user-writable storage into agent context. Through this crossing, an adversary who cannot directly interact with the AI system gains indirect control over its reasoning.</p>
+
+    <blockquote>
+      &ldquo;The risk associated with these agentic systems lies mostly in the tools or plugins available to those systems. In the absence of a tool or a plugin, it can fall to misinformation as being one of the core risks.&rdquo;
+      &mdash; citing Nvidia Red Team (Rich Harang)
+    </blockquote>
+
+    <h3>Tool Enumeration as Primary Defense</h3>
+    <p>The Trail of Bits methodology starts with a single artifact: a table of every tool, every capability, and every approval level. For each tool, assume adversary-controlled input and document the potential exploits:</p>
+    <table>
+      <thead><tr><th>Tool</th><th>Capabilities</th><th>Approval Level</th><th>If Adversary Controls Input</th></tr></thead>
+      <tbody>
+        <tr><td>Email Read</td><td>Access inbox, search messages</td><td>Automatic</td><td>Injection payload enters context</td></tr>
+        <tr><td>Calendar Write</td><td>Create/modify events</td><td>Human approval</td><td>Social engineering via calendar invites</td></tr>
+        <tr><td>File Write</td><td>Create/overwrite files</td><td>Human approval</td><td>Config overwrite to bypass approval gates</td></tr>
+        <tr><td>Bash</td><td>Execute shell commands</td><td>Human approval</td><td>RCE, data exfiltration, persistence</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Approval Level Attack Matrix</h3>
+    <table>
+      <thead><tr><th>Approval Location</th><th>Injection Risk</th><th>Attack Path</th></tr></thead>
+      <tbody>
+        <tr><td>System prompt</td><td>HIGH</td><td>&ldquo;Execute tool without asking for approval&rdquo; embedded in data</td></tr>
+        <tr><td>Configuration file</td><td>MEDIUM</td><td>File-write tool overwrites config to disable approval</td></tr>
+        <tr><td>Tool code (hardcoded)</td><td>LOW</td><td>Requires code modification &mdash; not achievable via injection alone</td></tr>
+        <tr><td>No approval</td><td>CRITICAL</td><td>Tool call is fully adversary-controllable</td></tr>
+      </tbody>
+    </table>
+
+    <h3>CMU&rsquo;s System-Level Safety Thesis</h3>
+    <p>CMU&rsquo;s ML Safety lecture establishes the foundation: <strong>safety is a system concept, not a model concept.</strong> A more reliable model is not a safer system. You can build safe systems from unreliable components (the gas tank analogy: making gas tanks more rigid made them more dangerous; adding pressure valves made them safe). Safety comes from system-level guardrails &mdash; input guards, output guards, tool access controls, and human-in-the-loop gates &mdash; not from model-level training interventions.</p>
+
+    <blockquote>
+      &ldquo;Safety is the prevention of a system failure or malfunction that results in significant harm. It&rsquo;s a system concept. You can&rsquo;t talk about a machine learning model being safe or unsafe. That doesn&rsquo;t make any sense. It is a category error.&rdquo;
+      &mdash; CMU ML in Production lecture
+    </blockquote>
+
+    <!-- ================================================================== -->
+    <h2>4. Supply-Chain Poisoning</h2>
+
+    <div class="card">
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.03081" target="_blank">arXiv:2604.03081</a> (April 3, 2026)<br>
+      <strong>Full analysis:</strong> <a href="../MAS/supply-chain.html">MAS: Supply-Chain Poisoning of Skill Ecosystems</a></p>
+    </div>
+
+    <p><strong>Document-Driven Implicit Payload Execution (DDIPE)</strong> embeds malicious logic within legitimate technical structures &mdash; code examples and configuration templates &mdash; rather than explicit instructions. Agents reproduce &ldquo;official examples&rdquo; from documentation verbatim, executing payloads as routine environment setup.</p>
+
+    <h3>Key Results</h3>
+    <table>
+      <thead><tr><th>Finding</th><th>Value</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td>Bypass rate range</td><td><strong>2.3% &ndash; 33.5%</strong></td><td>Across 4 frameworks &times; 5 models; explicit injection achieves 0% on strongest config</td></tr>
+        <tr><td>Adversarial skills generated</td><td><strong>1,070</strong></td><td>From 81 expert seeds via 6 camouflage + 2 composition operators</td></tr>
+        <tr><td>MITRE ATT&amp;CK categories</td><td><strong>15</strong></td><td>From pip hijack to reverse shell to container escape</td></tr>
+        <tr><td>Cross-model simultaneous bypass</td><td><strong>1.6%</strong></td><td>Only 17 samples bypass all 3 models &mdash; heterogeneous deployment compresses surface</td></tr>
+        <tr><td>Alignment amplification (weak model)</td><td><strong>11.3&times;</strong></td><td>GLM-4.7: 26 DER on Claude Code vs. 290 on OpenHands</td></tr>
+        <tr><td>Confirmed production CVEs</td><td><strong>4</strong></td><td>Codex, Gemini CLI, Claude Code, OpenHands (all confirmed/fixed)</td></tr>
+      </tbody>
+    </table>
+
+    <p>The paper&rsquo;s central finding: <strong>strong alignment makes architecture nearly redundant; weak alignment makes architecture critical.</strong> Cross-model diversity as a defense compresses the attack surface from 13&ndash;20% down to below 2%.</p>
+
+    <!-- ================================================================== -->
+    <h2>5. GitHub Security Landscape</h2>
+
+    <div class="card">
+      <p><strong>Sources:</strong> 10 GitHub repositories analyzed during Session 7 research sweep<br>
+      <strong>Key idea:</strong> The open-source MCP security ecosystem is nascent &mdash; from 0-star prototypes to 6.5K-star production tools</p>
+    </div>
+
+    <table>
+      <thead><tr><th>Repo</th><th>Stars</th><th>Focus</th><th>Key Contribution</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>agentidentityprotocol</strong></td>
+          <td>23</td>
+          <td>AIP: Go proxy, AAT tokens</td>
+          <td>Agent authentication with DLP scanning and HITL gates</td>
+        </tr>
+        <tr>
+          <td><strong>cybersecai-uk/mcps</strong></td>
+          <td>2</td>
+          <td>IETF draft implementation</td>
+          <td>ECDSA signing, 128-bit nonce, &plusmn;5m replay window</td>
+        </tr>
+        <tr>
+          <td><strong>secure-model-context-protocol</strong></td>
+          <td>0</td>
+          <td>SEAL: three-tier policy</td>
+          <td>Ed25519 signing, PolicyEngine, default-deny</td>
+        </tr>
+        <tr>
+          <td><strong>SlowMist/MCP-Security-Checklist</strong></td>
+          <td>824</td>
+          <td>Production audit</td>
+          <td>Supply chain risks, binary integrity gaps, comprehensive checklist</td>
+        </tr>
+        <tr>
+          <td><strong>jayminwest/overstory</strong></td>
+          <td>1.2K</td>
+          <td>SQLite mail, 3-tier watchdog</td>
+          <td>Token instrumentation, per-agent cost tracking</td>
+        </tr>
+        <tr>
+          <td><strong>ComposioHQ/agent-orchestrator</strong></td>
+          <td>5.8K</td>
+          <td>PR-as-coordination</td>
+          <td>Reaction system with 7 plugin interfaces for event-driven feedback</td>
+        </tr>
+        <tr>
+          <td><strong>dsifry/metaswarm</strong></td>
+          <td>180</td>
+          <td>Adversarial review</td>
+          <td>Self-reflect pattern, selective knowledge priming (<code>bd prime</code>)</td>
+        </tr>
+        <tr>
+          <td><strong>alexgreensh/token-optimizer</strong></td>
+          <td>190</td>
+          <td>Ghost tokens, checkpoints</td>
+          <td>Progressive checkpointing, read-cache, 8&ndash;30% dedup savings</td>
+        </tr>
+        <tr>
+          <td><strong>vasilyevdm/ai-agent-handbook</strong></td>
+          <td>56</td>
+          <td>30+ framework analysis</td>
+          <td>Context rot research: degradation starts at ~25% fill, not 100%</td>
+        </tr>
+        <tr>
+          <td><strong>mksglu/context-mode</strong></td>
+          <td>6.5K</td>
+          <td>98% compression</td>
+          <td>FTS5/BM25 session continuity, 315KB &rarr; 5.4KB sandbox compression</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The landscape splits into two tiers: <strong>security-first projects</strong> (AIP, MCPS, SEAL, SlowMist) that address authentication, signing, and audit; and <strong>context management projects</strong> (Overstory, token-optimizer, ai-agent-handbook, context-mode) that address the token economics that make security controls expensive. The Composio orchestrator and metaswarm bridge both concerns through event-driven feedback and adversarial review patterns.</p>
+
+    <!-- ================================================================== -->
+    <h2>6. Key Numbers</h2>
+
+    <div class="card">
+      <p>Metrics consolidated across all 16 sources &mdash; videos, repos, papers, and lectures</p>
+    </div>
+
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Tool definitions consume before first message</td><td><strong>100K tokens</strong> (50% of 200K window)</td><td>Adam Jones, Anthropic</td></tr>
+        <tr><td>Tool selection accuracy with bloated toolset</td><td><strong>43% &rarr; 14%</strong></td><td>ai-agent-handbook</td></tr>
+        <tr><td>Context quality drop at 256K fill</td><td><strong>93% &rarr; 76%</strong> MRCR accuracy</td><td>token-optimizer</td></tr>
+        <tr><td>Compaction loss per event</td><td><strong>60&ndash;70%</strong> of conversation</td><td>token-optimizer</td></tr>
+        <tr><td>After 2&ndash;3 compactions</td><td><strong>88&ndash;95%</strong> cumulative loss</td><td>token-optimizer</td></tr>
+        <tr><td>Context rot onset</td><td><strong>~25% fill</strong> (not 100%)</td><td>Chroma Research via handbook</td></tr>
+        <tr><td>Tool poisoning success rate</td><td><strong>70%</strong> against real MCP servers</td><td>Harsh Kadam, Indeed (OWASP)</td></tr>
+        <tr><td>DDIPE bypass rate (strongest config)</td><td><strong>2.3%</strong> (Claude Code + Sonnet)</td><td>arXiv:2604.03081</td></tr>
+        <tr><td>DDIPE bypass rate (weakest config)</td><td><strong>33.5%</strong> (OpenHands + GLM)</td><td>arXiv:2604.03081</td></tr>
+        <tr><td>Progressive 3-tier skill loading savings</td><td><strong>94%</strong> token reduction</td><td>ai-agent-handbook</td></tr>
+        <tr><td>Context compression (sandbox approach)</td><td><strong>98%</strong> (315KB &rarr; 5.4KB)</td><td>context-mode</td></tr>
+        <tr><td>Read deduplication savings</td><td><strong>8&ndash;30%</strong></td><td>token-optimizer</td></tr>
+        <tr><td>Sub-agent context isolation improvement</td><td><strong>90.2%</strong></td><td>ai-agent-handbook</td></tr>
+        <tr><td>Cross-model simultaneous DDIPE bypass</td><td><strong>1.6%</strong> (17 of 1,070 samples)</td><td>arXiv:2604.03081</td></tr>
+        <tr><td>AppSec program adoption drop (culture failure)</td><td><strong>70%</strong> of 220 applications</td><td>OWASP AppSec (Max Alejandro)</td></tr>
+        <tr><td>AppSec recovery (re-adoption)</td><td><strong>180 apps</strong>, 250+ teams</td><td>OWASP AppSec</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>7. Gap Analysis</h2>
+
+    <div class="card">
+      <p>Critical gaps identified across all sources, prioritized by risk and implementability</p>
+    </div>
+
+    <h3>Tier 1: Critical</h3>
+    <table>
+      <thead><tr><th>Gap</th><th>Problem</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>G1. Response-side DLP scanning</strong></td>
+          <td>Inbound param scanning exists; MCP tool responses flow into context unchecked</td>
+          <td><code>validateToolResponse()</code> with recursive string-walking + hidden-tag detection</td>
+        </tr>
+        <tr>
+          <td><strong>G2. Compaction trigger too late</strong></td>
+          <td>Triggers at 60% fill; research shows degradation at 25%</td>
+          <td>Progressive checkpoints at 20%/35%/50% + full compaction at 60%</td>
+        </tr>
+        <tr>
+          <td><strong>G3. Per-server tool allowlist</strong></td>
+          <td>Deny patterns exist but no affirmative allowlist; poisoned server adding tools goes undetected</td>
+          <td><code>expectedTools</code> field per server in <code>.mcp.json</code> with invariant enforcement</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tier 2: High Priority</h3>
+    <table>
+      <thead><tr><th>Gap</th><th>Problem</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>G4. Decoy MCP tools</strong></td>
+          <td>No passive detection of compromised agents</td>
+          <td>1&ndash;3 honeytrap tools with privileged-sounding names that alert on any invocation</td>
+        </tr>
+        <tr>
+          <td><strong>G5. Token instrumentation</strong></td>
+          <td>No per-agent cost visibility at 50+ project scale</td>
+          <td>JSONL transcript parsing for per-convoy, per-agent token tracking</td>
+        </tr>
+        <tr>
+          <td><strong>G6. Delegation lineage</strong></td>
+          <td>AgentMessage has no delegation chain</td>
+          <td><code>lineage: string[]</code> field: [initiator &rarr; delegator &rarr; current] with convoy ID</td>
+        </tr>
+        <tr>
+          <td><strong>G7. Event-driven feedback loops</strong></td>
+          <td>No post-dispatch feedback or re-engagement mechanism</td>
+          <td>Named reactions (ci-failed, changes-requested, approved-and-green) with retry limits</td>
+        </tr>
+        <tr>
+          <td><strong>G8. Server binary integrity pins</strong></td>
+          <td>Path existence confirmed but binary identity not verified</td>
+          <td>SHA-256 pins in <code>mcp-integrity.json</code>, checked at harness validation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tier 3: Medium Priority (Design Phase)</h3>
+    <table>
+      <thead><tr><th>Gap</th><th>Problem</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>G9. Progressive 3-tier skill loading</strong></td>
+          <td>21 skills fully loaded at session start (~12K tokens before work)</td>
+          <td>Tier-1 stub &rarr; Tier-2 full on first use &rarr; Tier-3 reference on invocation (94% savings)</td>
+        </tr>
+        <tr>
+          <td><strong>G10. Nonce + replay window</strong></td>
+          <td>No replay protection on inter-agent messages</td>
+          <td>128-bit nonce + <code>issuedAt</code> timestamp; reject duplicates or &gt;30s old</td>
+        </tr>
+        <tr>
+          <td><strong>G11. Adversarial review loop</strong></td>
+          <td>Witness observes but does not independently validate</td>
+          <td>IMPLEMENT &rarr; VALIDATE &rarr; ADVERSARIAL REVIEW &rarr; COMMIT per work item</td>
+        </tr>
+        <tr>
+          <td><strong>G12. Selective knowledge priming</strong></td>
+          <td>435+ docs growing; agent initialization will hit context exhaustion</td>
+          <td>Filter institutional memory by affected files, keywords, work type before launch</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tier 4: Future (Track for Adoption)</h3>
+    <ul>
+      <li><strong>G14. Cryptographic agent credentials</strong> &mdash; SPIFFE/SPIRE alignment; interim: convoy-scoped HMAC tokens</li>
+      <li><strong>G15. MCP Tasks (async operations)</strong> &mdash; awaiting April 25 anniversary release; exact use case for math coprocessor Monte Carlo</li>
+      <li><strong>G16. SQLite session continuity</strong> &mdash; FTS5/BM25 retrieval of relevant segments post-compaction; after pgvector infrastructure proven</li>
+    </ul>
+
+    <h3>What We&rsquo;re Doing Right</h3>
+    <p>Cross-referenced against all 10 GitHub repos and 6 video sources, these existing features were validated as meeting or exceeding external implementations:</p>
+    <table>
+      <thead><tr><th>Feature</th><th>External Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Trust lifecycle (quarantine &rarr; provisional &rarr; trusted)</td><td>More sophisticated than any of the 4 security repos</td></tr>
+        <tr><td>Familiarity tiers (home/neighborhood/town/stranger)</td><td>Richer than binary trusted/untrusted in all repos</td></tr>
+        <tr><td>Prompt guard blocking settings.json + hooks writes</td><td>Not replicated in any repo &mdash; original and valuable</td></tr>
+        <tr><td>Inbound param scanning (invocation-validator.ts)</td><td>Matches or exceeds MCPS OWASP Top 10 coverage</td></tr>
+        <tr><td>Sequential refinery merge (never auto-resolve)</td><td>Architecturally safer than Overstory&rsquo;s AI-assisted auto-resolve</td></tr>
+        <tr><td>Sling-dispatch 7-stage pipeline</td><td>More rigorous than all 3 orchestration repos</td></tr>
+        <tr><td>Deterministic hooks (shell scripts, not prompts)</td><td>Aligns with both CMU and OWASP: deterministic &gt; model-based</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>Sources</h2>
+
+    <h3>Videos (6)</h3>
+    <ul>
+      <li>V1: Harsh Kadam (Indeed) &mdash; &ldquo;MCP Deception Incubator: Honeytraps for Zero Trust AI&rdquo; (OWASP)</li>
+      <li>V2: Katie (Hash Security) &mdash; &ldquo;Trust No One: Zero Trust Through Machine Identity&rdquo; (OWASP)</li>
+      <li>V3: James Gow (Ironwood Cyber) &mdash; &ldquo;Agent Identity Protocol (AIP)&rdquo; (AgenticAI Foundation)</li>
+      <li>V4: Adam Jones (Anthropic) &mdash; &ldquo;Code Execution with MCP: Fix Tool Token Bloat&rdquo; (AgenticAI Foundation)</li>
+      <li>V5: Edison.watch founder &mdash; &ldquo;Securing the Lethal Trifecta: MCP Data Flow Attacks&rdquo; (AgenticAI Foundation)</li>
+      <li>V6: David Soria Parra (Anthropic) &mdash; &ldquo;What&rsquo;s Changing in the Next MCP Release&rdquo; (AgenticAI Foundation)</li>
+    </ul>
+
+    <h3>Lectures (2)</h3>
+    <ul>
+      <li>CMU ML in Production &mdash; Safety lecture (Christian Kastner, co-taught)</li>
+      <li>OWASP Global AppSec &mdash; &ldquo;Indirect Prompt Injection: Architectural Testing Approaches&rdquo; (Will, Trail of Bits)</li>
+    </ul>
+
+    <h3>GitHub Repositories (10)</h3>
+    <ul>
+      <li>openagentidentityprotocol/agentidentityprotocol (23 stars)</li>
+      <li>cybersecai-uk/mcps (2 stars)</li>
+      <li>100monkeys-ai/secure-model-context-protocol (0 stars)</li>
+      <li>SlowMist/MCP-Security-Checklist (824 stars)</li>
+      <li>jayminwest/overstory (1.2K stars)</li>
+      <li>ComposioHQ/agent-orchestrator (5.8K stars)</li>
+      <li>dsifry/metaswarm (180 stars)</li>
+      <li>alexgreensh/token-optimizer (190 stars)</li>
+      <li>vasilyevdm/ai-agent-handbook (56 stars)</li>
+      <li>mksglu/context-mode (6.5K stars)</li>
+    </ul>
+
+    <h3>Papers</h3>
+    <ul>
+      <li>Qu, Y. et al. <a href="https://arxiv.org/abs/2604.03081" target="_blank">arXiv:2604.03081</a> &mdash; Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems (April 3, 2026)</li>
+    </ul>
+
+    <h3>AppSec Program Research</h3>
+    <ul>
+      <li>Max Alejandro (Latangs) &mdash; &ldquo;5 Lessons from an 8-Year AppSec Program Journey&rdquo; (OWASP Global AppSec)</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Agentic Infrastructure &amp; Systems &middot; PNW Research Series &middot; gsd-skill-creator</p>
+    <p>Cluster 2: MCP Security &middot; April 2026</p>
+    <p><a href="index.html">AGT Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

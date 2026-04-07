@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supply-Chain Poisoning of Skill Ecosystems &mdash; Multi-Agent Systems &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mas">
+  <header>
+    <h1>Multi-Agent Systems Research</h1>
+    <div class="subtitle">Architecture, Security &amp; Scaling &mdash; April 2026 Paper Survey</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="supply-chain.html" class="active">Supply-Chain Attacks</a>
+      <a href="orgagent.html">OrgAgent</a>
+      <a href="single-vs-multi.html">Single vs Multi</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems</h2>
+
+    <div class="card">
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.03081" target="_blank">arXiv:2604.03081</a><br>
+      <strong>Authors:</strong> Yubin Qu, Yi Liu, Tongcheng Geng, Gelei Deng, Yuekang Li, Leo Yu Zhang, Ying Zhang, Lei Ma<br>
+      <strong>Date:</strong> April 3, 2026<br>
+      <strong>Categories:</strong> cs.CR (Cryptography &amp; Security), cs.AI, cs.CL</p>
+    </div>
+
+    <blockquote>
+      LLM-based coding agents extend their capabilities via third-party agent skills distributed through open marketplaces without mandatory security review. Unlike traditional packages, these skills are executed as operational directives with system-level privileges, so a single malicious skill can compromise the host.
+    </blockquote>
+
+    <h2>1. The Attack: DDIPE</h2>
+
+    <p><strong>Document-Driven Implicit Payload Execution</strong> embeds malicious logic within legitimate technical structures of skill documentation &mdash; code examples and configuration templates &mdash; rather than explicit instructions. Agents copy-paste what they treat as &ldquo;official examples&rdquo; from documentation during in-context learning, executing the payload without anyone asking.</p>
+
+    <h3>Two Embedding Strategies</h3>
+    <table>
+      <thead><tr><th>Strategy</th><th>Mechanism</th><th>Exploitation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Code Example Poisoning</strong></td><td>Malicious logic in Markdown code blocks (<code>```python</code>, <code>```bash</code>)</td><td>Models reproduce &ldquo;official examples&rdquo; verbatim</td></tr>
+        <tr><td><strong>Config Template Poisoning</strong></td><td>Backdoored YAML/JSON/Makefile templates</td><td>Agents apply configuration files without scrutiny</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Three Camouflage Techniques</h3>
+    <ul>
+      <li><strong>Functional compliance disguise:</strong> Package data theft as &ldquo;environment telemetry&rdquo; or &ldquo;security auditing&rdquo;</li>
+      <li><strong>Silent exception suppression:</strong> Wrap malicious calls in <code>try/except: pass</code> for uninterrupted execution</li>
+      <li><strong>False authority suggestion:</strong> Add compliance certification language; name C2 endpoints to resemble internal services</li>
+    </ul>
+
+    <h2>2. Scale: 15 MITRE ATT&amp;CK Categories</h2>
+
+    <p>Using a seed&ndash;mutation&ndash;validation loop with 6 camouflage operators and 2 composition operators, the researchers generated <strong>1,070 adversarial skills</strong> from 81 expert-crafted seeds (13.2&times; expansion).</p>
+
+    <table>
+      <thead><tr><th>Category</th><th>MITRE ID</th><th>Distribution</th></tr></thead>
+      <tbody>
+        <tr><td>Supply-Chain Poison (pip/npm hijack)</td><td>T1195.002</td><td>47.5%</td></tr>
+        <tr><td>Env Variable Theft</td><td>T1528</td><td>11.9%</td></tr>
+        <tr><td>Credential Theft (git, API keys, SSH)</td><td>T1552.004</td><td>8.6%</td></tr>
+        <tr><td>Reverse Shell / RCE</td><td>T1059.004</td><td>&mdash;</td></tr>
+        <tr><td>Container Escape</td><td>T1611</td><td>&mdash;</td></tr>
+        <tr><td>Malicious Config Write</td><td>T1565.001</td><td>&mdash;</td></tr>
+        <tr><td>Codebase Injection (XSS, Git hooks)</td><td>T1059</td><td>&mdash;</td></tr>
+        <tr><td>IaC Attack (Terraform/CF poisoning)</td><td>T1496</td><td>&mdash;</td></tr>
+        <tr><td>Persistence Implant (crontab, systemd)</td><td>T1053, T1543</td><td>&mdash;</td></tr>
+        <tr><td>SSH Backdoor</td><td>T1098.004</td><td>&mdash;</td></tr>
+        <tr><td>HTTP Exfiltration</td><td>T1048.003</td><td>&mdash;</td></tr>
+        <tr><td>DNS Hijack Exfiltration</td><td>T1048.003</td><td>&mdash;</td></tr>
+        <tr><td>Webhook Exfiltration (Slack/Discord)</td><td>T1567.002</td><td>&mdash;</td></tr>
+        <tr><td>Cryptomining (XMRig)</td><td>T1496</td><td>0.4%</td></tr>
+        <tr><td>Composite / Multi-stage</td><td>&mdash;</td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Results: 4 Frameworks &times; 5 Models</h2>
+
+    <table>
+      <thead><tr><th>Framework</th><th>Model</th><th>Refused</th><th>Generated</th><th>Executed</th><th>Bypass Rate</th><th>DER</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Code</td><td>Sonnet 4.6</td><td>85.9%</td><td>11.1%</td><td>2.3%</td><td>13.5%</td><td><strong>2.3%</strong></td></tr>
+        <tr><td>Claude Code</td><td>GLM-4.7</td><td>81.9%</td><td>14.4%</td><td>2.4%</td><td>16.8%</td><td>2.4%</td></tr>
+        <tr><td>Claude Code</td><td>MiniMax-M2.5</td><td>78.0%</td><td>7.2%</td><td>13.3%</td><td>20.5%</td><td>13.3%</td></tr>
+        <tr><td>OpenHands</td><td>Sonnet 4.6</td><td>65.4%</td><td>11.2%</td><td>10.7%</td><td>22.0%</td><td>10.7%</td></tr>
+        <tr><td>OpenHands</td><td>GLM-4.7</td><td>56.4%</td><td>6.4%</td><td>27.1%</td><td>33.5%</td><td><strong>27.1%</strong></td></tr>
+        <tr><td>OpenHands</td><td>MiniMax-M2.5</td><td>8.5%</td><td>1.5%</td><td>25.5%</td><td>27.0%</td><td>25.5%</td></tr>
+        <tr><td>Codex</td><td>GPT-5.4</td><td>27.4%</td><td>7.8%</td><td>3.8%</td><td>11.6%</td><td>3.8%</td></tr>
+        <tr><td>Gemini CLI</td><td>Gemini 2.5 Pro</td><td>79.4%</td><td>9.8%</td><td>4.2%</td><td>14.0%</td><td>4.2%</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Baseline comparison:</strong> Explicit instruction injection achieves <strong>0%</strong> under Claude Code + Sonnet 4.6. DDIPE achieves 2.3% on the same configuration.</p>
+
+    <h2>4. Key Insights</h2>
+
+    <h3>Brevity Evades Safety</h3>
+    <p>Executed payloads average <strong>1,850 bytes</strong> vs. 2,214 bytes for refused. A universal pip configuration breach &mdash; 479 bytes, 9-line Python script &mdash; was executed by all three models under Claude Code, interpreted as routine environment setup.</p>
+
+    <h3>Alignment + Architecture Asymmetry</h3>
+    <table>
+      <thead><tr><th>Model Alignment</th><th>Claude Code DER</th><th>OpenHands DER</th><th>Amplification</th><th>Sleeper Payloads</th></tr></thead>
+      <tbody>
+        <tr><td>Sonnet 4.6 (strong)</td><td>25</td><td>115</td><td>4.6&times;</td><td>5 (4.3%)</td></tr>
+        <tr><td>GLM-4.7 (weak)</td><td>26</td><td>290</td><td>11.3&times;</td><td>219 (75.8%)</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Implication:</strong> Strong alignment makes architecture nearly redundant. Weak alignment makes architecture critical.</p>
+
+    <h3>Cross-Model Diversity as Defense</h3>
+    <p>Only <strong>17 samples (1.6%)</strong> bypass all three models simultaneously on Claude Code. Heterogeneous model deployment compresses attack surface from 13&ndash;20% to below 2%.</p>
+
+    <h2>5. Four Confirmed Production Vulnerabilities</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Framework</th><th>Vulnerability</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Codex CLI</td><td>Sandbox semantic bypass &mdash; pip.conf/npmrc persist after session, poisoning subsequent package installs</td><td>Confirmed via Bugcrowd</td></tr>
+        <tr><td>2</td><td>Gemini CLI</td><td>CI/CD auto-trust via <code>.gemini/settings.json</code> pre-approves shell commands in headless mode</td><td>Confirmed via Google VRP</td></tr>
+        <tr><td>3</td><td>Claude Code</td><td>Skill content treated as executable instructions without dedicated permission prompt</td><td>Confirmed via HackerOne</td></tr>
+        <tr><td>4</td><td>OpenHands</td><td>No trust boundary between agent instructions and repository content</td><td>Fixed (PR #2XX5) with trust-boundary annotation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>6. Defense Recommendations</h2>
+
+    <ol>
+      <li><strong>Multi-model verification ensemble</strong> &mdash; deploy heterogeneous models as security barriers; compresses attack surface from 20% to &lt;2%</li>
+      <li><strong>Semantic intent analysis</strong> &mdash; audit skill semantics beyond lexical patterns; current static analysis catches 90.7% but 2.5% evade both detection AND alignment</li>
+      <li><strong>Per-skill permission scoping</strong> &mdash; grant execution privileges at individual skill level, not blanket authorization</li>
+      <li><strong>Architecture calibrated to alignment</strong> &mdash; prioritize model updates for strong models, robust sandboxing for weak ones</li>
+      <li><strong>Explicit trust-boundary annotations</strong> &mdash; mark repository-provided content as untrusted in system prompts (validated by OpenHands fix)</li>
+      <li><strong>Supply-chain integrity verification</strong> &mdash; mandatory security review for marketplace skills (631,813 with none currently)</li>
+      <li><strong>Treat skill documentation as executable code</strong> &mdash; signature verification and content-integrity checks before context injection</li>
+    </ol>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>Qu, Y. et al. <a href="https://arxiv.org/abs/2604.03081" target="_blank">arXiv:2604.03081</a>. April 3, 2026.</li>
+      <li>Full paper: <a href="https://arxiv.org/html/2604.03081" target="_blank">arxiv.org/html/2604.03081</a></li>
+      <li>MITRE ATT&amp;CK Framework: <a href="https://attack.mitre.org/" target="_blank">attack.mitre.org</a></li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Multi-Agent Systems Research &middot; AI &amp; Computation Cluster</p>
+    <p>Paper 1: Supply-Chain Poisoning &middot; April 2026</p>
+    <p><a href="index.html">MAS Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

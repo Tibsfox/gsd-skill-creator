@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classical RCA Methods &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Classical RCA Methods</h1>
+    <div class="subtitle">Five Whys, Ishikawa Fishbone, Fault Tree Analysis, FMEA, Barrier Analysis</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html" class="active">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The classical methods form the bedrock of all root cause analysis. Every modern framework &mdash; from STAMP to AgentRx &mdash; can trace its intellectual lineage back to these five foundational techniques developed between the 1930s and the 1960s.
+    </blockquote>
+
+    <!-- FIVE WHYS -->
+    <h2>Five Whys</h2>
+    <p>Developed by <strong>Sakichi Toyoda</strong> in the 1930s and formalized within the <strong>Toyota Production System (TPS)</strong>, the Five Whys technique is iterative interrogation at its simplest. Starting from the observable problem, the investigator asks &ldquo;why?&rdquo; repeatedly (typically five times, though the number is not fixed) until the root cause is exposed.</p>
+    <div class="card">
+      <p><strong>Example chain:</strong></p>
+      <p>1. Why did the machine stop? &mdash; The fuse blew due to overload.</p>
+      <p>2. Why was there an overload? &mdash; The bearing was not lubricated.</p>
+      <p>3. Why was the bearing not lubricated? &mdash; The lubrication pump was not working.</p>
+      <p>4. Why was the pump not working? &mdash; The shaft was worn out.</p>
+      <p>5. Why was the shaft worn out? &mdash; There was no filtration on the intake, allowing metal particles in.</p>
+      <p><strong>Root cause:</strong> Missing intake filter. <strong>Corrective action:</strong> Install filter on lubrication pump intake.</p>
+    </div>
+    <p><strong>Strengths:</strong> Simple, requires no tools, accessible to any team member. <strong>Weaknesses:</strong> Can converge on a single causal chain when multiple root causes exist; susceptible to investigator bias; lacks structural rigor for complex systems.</p>
+
+    <!-- ISHIKAWA / FISHBONE -->
+    <h2>Ishikawa Fishbone Diagram</h2>
+    <p>Created by <strong>Kaoru Ishikawa</strong> at the University of Tokyo in the 1960s, the fishbone (cause-and-effect) diagram provides structured brainstorming for potential causes organized into categories. The standard <strong>6M framework</strong> classifies causes into:</p>
+    <table>
+      <thead><tr><th>Category</th><th>Scope</th><th>Example Causes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Man</strong> (People)</td><td>Human factors, training, fatigue</td><td>Operator error, insufficient training, communication failure</td></tr>
+        <tr><td><strong>Machine</strong></td><td>Equipment, tools, technology</td><td>Wear, miscalibration, software bug</td></tr>
+        <tr><td><strong>Material</strong></td><td>Raw materials, consumables, data</td><td>Contaminated input, wrong specification, corrupt data</td></tr>
+        <tr><td><strong>Method</strong></td><td>Procedures, processes, workflows</td><td>Missing step, wrong sequence, outdated SOP</td></tr>
+        <tr><td><strong>Measurement</strong></td><td>Metrics, instrumentation, inspection</td><td>Uncalibrated gauge, wrong metric, sampling bias</td></tr>
+        <tr><td><strong>Mother Nature</strong></td><td>Environment, external conditions</td><td>Temperature, humidity, seismic event, regulatory change</td></tr>
+      </tbody>
+    </table>
+    <p>The diagram&rsquo;s visual structure prevents tunnel vision by forcing consideration of all six categories before converging on a root cause.</p>
+
+    <!-- FAULT TREE ANALYSIS -->
+    <h2>Fault Tree Analysis (FTA)</h2>
+    <p>Developed at Bell Labs in 1961 for the Minuteman missile program, FTA is a <strong>top-down, deductive</strong> analysis technique. Starting from an undesired top event, the analyst constructs a Boolean logic tree using <strong>AND gates</strong> (all inputs must occur) and <strong>OR gates</strong> (any input suffices) to decompose the failure into basic events.</p>
+    <div class="card">
+      <p><strong>Key concepts:</strong></p>
+      <ul>
+        <li><strong>Top event:</strong> The undesired system-level failure being investigated</li>
+        <li><strong>Intermediate events:</strong> Failures that contribute to the top event through logical gates</li>
+        <li><strong>Basic events:</strong> Leaf nodes &mdash; the initiating failures with known probability</li>
+        <li><strong>Minimal cut sets:</strong> The smallest combination of basic events that causes the top event</li>
+        <li><strong>Quantitative FTA:</strong> Assigns probabilities to basic events, calculates top event probability</li>
+      </ul>
+    </div>
+    <p>FTA remains the standard in aerospace, nuclear, and defense for safety-critical system analysis. Its mathematical foundation connects directly to Boolean algebra and probability theory (see <a href="mathematical-foundations.html">Mathematical Foundations</a>).</p>
+
+    <!-- FMEA -->
+    <h2>Failure Mode and Effects Analysis (FMEA)</h2>
+    <p>Originating in US military procedure MIL-P-1629 (1949) and adopted widely after the Apollo program, FMEA systematically catalogs every potential failure mode for each component, its effects, and a risk score.</p>
+    <div class="formula">
+      RPN = Severity &times; Occurrence &times; Detection
+    </div>
+    <p>Each factor is rated 1&ndash;10. The <strong>Risk Priority Number (RPN)</strong> ranges from 1 to 1,000. High RPNs drive corrective action priority. FMEA variants include Design FMEA (DFMEA), Process FMEA (PFMEA), and Software FMEA.</p>
+    <p><strong>Limitation:</strong> RPN conflates severity and likelihood &mdash; an RPN of 100 could be 10&times;10&times;1 (catastrophic but detectable) or 2&times;5&times;10 (minor and undetectable). Modern approaches supplement RPN with action priority tables.</p>
+
+    <!-- BARRIER ANALYSIS -->
+    <h2>Barrier Analysis &amp; Swiss Cheese Model</h2>
+    <p>Based on the <strong>energy transfer model</strong> (Haddon, 1973), barrier analysis asks: what barriers existed between the hazard and the target, and which barriers failed? <strong>James Reason</strong>&rsquo;s Swiss Cheese Model (1990) visualizes defenses as slices of cheese &mdash; each slice has holes (latent conditions), and an accident occurs when holes in successive slices align, allowing hazard energy to pass through all barriers.</p>
+    <div class="card">
+      <p><strong>Barrier types:</strong> Physical (guards, containment), Procedural (checklists, SOPs), Administrative (training, supervision), Active (alarms, shutoffs), Passive (structural design, redundancy)</p>
+      <p><strong>Key insight:</strong> Accidents are rarely caused by a single barrier failure. They require the alignment of multiple latent conditions across organizational layers &mdash; from management decisions to front-line actions.</p>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <h2>When to Use Each Method</h2>
+    <table>
+      <thead><tr><th>Method</th><th>Best For</th><th>Complexity</th><th>Output</th><th>Team Size</th></tr></thead>
+      <tbody>
+        <tr><td>Five Whys</td><td>Simple, single-thread problems</td><td>Low</td><td>Causal chain</td><td>1&ndash;3</td></tr>
+        <tr><td>Fishbone</td><td>Brainstorming multiple cause categories</td><td>Low&ndash;Medium</td><td>Cause-effect diagram</td><td>3&ndash;8</td></tr>
+        <tr><td>FTA</td><td>Safety-critical systems, quantitative risk</td><td>High</td><td>Boolean logic tree + probabilities</td><td>2&ndash;5 specialists</td></tr>
+        <tr><td>FMEA</td><td>Proactive design/process review</td><td>Medium&ndash;High</td><td>RPN-ranked failure catalog</td><td>Cross-functional team</td></tr>
+        <tr><td>Barrier Analysis</td><td>Accident investigation, defense-in-depth</td><td>Medium</td><td>Barrier status matrix</td><td>Investigation team</td></tr>
+      </tbody>
+    </table>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>37 related projects</strong> across 5 knowledge domains with 30 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>HPC</td><td>High Performance Computing</td><td>general</td><td>0.763</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>CMN</td><td>Camano Island</td><td>general</td><td>0.309</td></tr>
+        <tr><td>GPE</td><td>Global Power Efficiency Rankings</td><td>energy</td><td>0.405</td></tr>
+        <tr><td>CML</td><td>CMU ML in Production</td><td>general</td><td>0.227</td></tr>
+        <tr><td>ENE</td><td>Energy</td><td>general</td><td>0.206</td></tr>
+        <tr><td>BPS</td><td>Biological Physics Sensing Systems</td><td>general</td><td>0.204</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (26), ecology (7), ai (2), energy (1), music (1). Complex plane: z = 0.1953 + 0.1302i, |z| = 0.2348.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="systems-thinking.html">Systems-Theoretic Approaches</a></li>
+        <li><a href="manufacturing-quality.html">Manufacturing &amp; Quality</a></li>
+        <li><a href="mathematical-foundations.html">Mathematical Foundations</a></li>
+        <li><a href="healthcare-aviation.html">Healthcare &amp; Aviation</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Classical RCA Methods &middot; Root Cause Analysis &middot; 37 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

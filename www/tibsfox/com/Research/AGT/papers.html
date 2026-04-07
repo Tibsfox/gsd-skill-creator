@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papers &amp; Formal Research &mdash; Agentic Technologies &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Technologies</h1>
+    <div class="subtitle">Papers &amp; Formal Research &mdash; Curated Catalog</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="agent-architecture.html">Agent Architecture</a>
+      <a href="mcp-security.html">MCP Security</a>
+      <a href="ml-production.html">ML Production</a>
+      <a href="hardware-energy.html">Hardware &amp; Energy</a>
+      <a href="engineering-plm.html">Engineering &amp; PLM</a>
+      <a href="business-legal.html">Business &amp; Legal</a>
+      <a href="context-engineering.html">Context Engineering</a>
+      <a href="papers.html" class="active">Papers</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      A curated catalog of all papers encountered during the Agentic Technologies research program. Three papers received deep analysis with dedicated pages; a growing queue of related work maps the broader landscape of agent security, architecture, psychometrics, and production deployment.
+    </blockquote>
+
+    <h2>1. Core Papers (Deep-Dived)</h2>
+
+    <p>These three papers were selected for full analysis during the first week of April 2026. Each has a dedicated research page with extracted design principles, benchmark results, and mappings to our architecture.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>arXiv ID</th>
+          <th>Title</th>
+          <th>Authors</th>
+          <th>Key Finding</th>
+          <th>Page</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.03081" target="_blank">2604.03081</a></td>
+          <td>Supply-Chain Poisoning of LLM Skill Ecosystems</td>
+          <td>Qu, Liu, Geng, Deng, Li, Zhang, Zhang, Ma</td>
+          <td>DDIPE attack embeds malicious payloads in skill documentation; 1,070 adversarial skills across 15 MITRE ATT&amp;CK categories; 11.6&ndash;33.5% bypass rates</td>
+          <td><a href="../MAS/supply-chain.html"><span class="safety-badge safety-critical">CRITICAL</span></a></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.01020" target="_blank">2604.01020</a></td>
+          <td>OrgAgent: Organize Your Multi-Agent System like a Company</td>
+          <td>Wang, Shen, Han, Backes, Chen, Ho</td>
+          <td>Three-layer hierarchy (governance/execution/compliance) yields 102.73% improvement over flat MAS with 74.52% token reduction</td>
+          <td><a href="../MAS/orgagent.html"><span class="safety-badge safety-info">ARCHITECTURE</span></a></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.02460" target="_blank">2604.02460</a></td>
+          <td>Single-Agent Beats Multi-Agent for Reasoning</td>
+          <td>Tran, Kiela (Stanford)</td>
+          <td>Information-theoretic proof via Data Processing Inequality; SAS consistently matches or outperforms MAS under equal thinking-token budgets</td>
+          <td><a href="../MAS/single-vs-multi.html"><span class="safety-badge safety-warn">CALIBRATION</span></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>2. MIRAGE Benchmark</h2>
+
+    <div class="card">
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2603.21687" target="_blank">arXiv:2603.21687</a> &mdash; MIRAGE: Evaluating LLM-Generated Misinformation With Realistic AI-Grounded Experiments<br>
+      <strong>Status:</strong> <span class="cluster-badge cluster-papers">Referenced</span></p>
+
+      <p>The MIRAGE benchmark measures <strong>epistemic mimicry</strong> &mdash; the ability of LLMs to generate text that appears authoritative while containing fabricated claims. Key findings:</p>
+      <ul>
+        <li><strong>60%+ fabrication rate</strong> when models are prompted to generate plausible-sounding scientific claims without source constraints</li>
+        <li>The <strong>B-Clean framework</strong> provides a structured methodology for detecting and filtering LLM-generated misinformation in research contexts</li>
+        <li>Directly relevant to our data-fidelity skill and fact-checking pipeline &mdash; epistemic mimicry is the adversarial scenario our verification layer must defend against</li>
+        <li>Complements the supply-chain poisoning findings (2604.03081): DDIPE embeds malicious intent in documentation; MIRAGE shows models can also <em>generate</em> authoritative-sounding falsehoods without adversarial prompting</li>
+      </ul>
+    </div>
+
+    <h2>3. Related Papers Discovered</h2>
+
+    <p>Papers surfaced through the discovery engine during research sweeps. Each extends or contextualizes the core findings.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>arXiv ID</th>
+          <th>Title / Topic</th>
+          <th>Relevance</th>
+          <th>Cluster</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.03081" target="_blank">2604.03081</a></td>
+          <td>DDIPE Supply-Chain Attack on Skill Ecosystems</td>
+          <td>Core paper &mdash; documentation-embedded payload injection across 631K+ skills</td>
+          <td><span class="cluster-badge cluster-security">Security</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.04426" target="_blank">2604.04426</a></td>
+          <td>ShieldNet: Network-Level Guardrails Against Supply-Chain Injections</td>
+          <td>Defense counterpart to DDIPE &mdash; network-layer filtering before payloads reach agents</td>
+          <td><span class="cluster-badge cluster-security">Security</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.04323" target="_blank">2604.04323</a></td>
+          <td>Skills in the Wild: How Well Do Agentic Skills Work</td>
+          <td>Empirical evaluation of skill ecosystems in production &mdash; success rates, failure modes, domain gaps</td>
+          <td><span class="cluster-badge cluster-agent">Agent</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.03201" target="_blank">2604.03201</a></td>
+          <td>SCRAT: Coupled Control for Multi-Agent Systems</td>
+          <td>Structured coupling constraints for coordinated agent execution &mdash; maps to convoy orchestration</td>
+          <td><span class="cluster-badge cluster-agent">Agent</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.00594" target="_blank">2604.00594</a></td>
+          <td>Agent Psychometrics: Personality Profiling of LLM Agents</td>
+          <td>Measuring stable behavioral traits in agent populations &mdash; relevant to muse personality design</td>
+          <td><span class="cluster-badge cluster-agent">Agent</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.00824" target="_blank">2604.00824</a></td>
+          <td>STITCH: Training via Structured Instruction Chaining</td>
+          <td>Multi-step instruction decomposition for agent training &mdash; parallels GSD phase planning</td>
+          <td><span class="cluster-badge cluster-ml">ML</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2602.14798" target="_blank">2602.14798</a></td>
+          <td>MCP Overthinking Loops: Structural Risk via MCP Tools</td>
+          <td>658&times; cost inflation from agent tool-call loops &mdash; directly motivates our token-budget skill</td>
+          <td><span class="cluster-badge cluster-context">Context</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2504.08623" target="_blank">2504.08623</a></td>
+          <td>Enterprise MCP Security: Governance at Scale</td>
+          <td>Enterprise allow-list registries, per-org policy enforcement, audit logging &mdash; validates our security-hygiene approach</td>
+          <td><span class="cluster-badge cluster-security">Security</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2604.01647" target="_blank">2604.01647</a></td>
+          <td>Environmental Data Management for AI Agents</td>
+          <td>Structured environmental context injection &mdash; relevant to weather sweep and data-source pipelines</td>
+          <td><span class="cluster-badge cluster-engineering">Engineering</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Papers Queue</h2>
+
+    <div class="card">
+      <p><strong>281 items</strong> remain in DISCOVERED status in the discovery engine queue. These represent arXiv papers, conference talks, and related work citations that have been flagged but not yet triaged for deep analysis.</p>
+
+      <p>The queue is prioritized by:</p>
+      <ul>
+        <li><strong>Citation overlap</strong> &mdash; papers cited by multiple core papers rise to the top</li>
+        <li><strong>Cluster relevance</strong> &mdash; papers that bridge two or more Rosetta clusters get priority</li>
+        <li><strong>Recency</strong> &mdash; April 2026 papers take precedence over older work</li>
+        <li><strong>Actionability</strong> &mdash; papers with concrete design implications for our architecture rank higher than pure theory</li>
+      </ul>
+
+      <p>Processing continues as hourly sweeps surface new related work. Papers that survive triage will receive dedicated analysis pages or be folded into existing cluster pages.</p>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>Qu, Y. et al. <cite>Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems</cite>. <a href="https://arxiv.org/abs/2604.03081" target="_blank">arXiv:2604.03081</a>. April 3, 2026.</li>
+      <li>Wang, Y. et al. <cite>OrgAgent: Organize Your Multi-Agent System like a Company</cite>. <a href="https://arxiv.org/abs/2604.01020" target="_blank">arXiv:2604.01020</a>. April 1, 2026.</li>
+      <li>Tran, D. and Kiela, D. <cite>Single-Agent LLMs Outperform Multi-Agent Systems</cite>. <a href="https://arxiv.org/abs/2604.02460" target="_blank">arXiv:2604.02460</a>. April 2, 2026.</li>
+      <li><cite>MIRAGE: Evaluating LLM-Generated Misinformation</cite>. <a href="https://arxiv.org/abs/2603.21687" target="_blank">arXiv:2603.21687</a>. March 2026.</li>
+      <li><cite>Overthinking Loops in Agents via MCP Tools</cite>. <a href="https://arxiv.org/abs/2602.14798" target="_blank">arXiv:2602.14798</a>. February 2026.</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Cluster 8: Papers &amp; Formal Research &middot; April 2026</p>
+    <p><a href="index.html">AGT Overview</a> &middot; <a href="../MAS/index.html">Multi-Agent Systems</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

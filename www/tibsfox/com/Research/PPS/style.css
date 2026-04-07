@@ -1,0 +1,195 @@
+/* PPS — Picnic Point Parking Structure Feasibility
+   Engineering/infrastructure palette: slate blues, concrete grays, steel accents
+   Base layout from ../../brand.css */
+
+:root {
+  --pps-steel: #37474F;
+  --pps-slate: #455A64;
+  --pps-concrete: #78909C;
+  --pps-rebar: #B0BEC5;
+  --pps-blueprint: #1565C0;
+  --pps-steel-blue: #1976D2;
+  --pps-deck: #546E7A;
+  --pps-girder: #263238;
+  --pps-sand: #ECEFF1;
+  --pps-mist: #E3E8EC;
+  --pps-text: #212121;
+  --pps-text-light: #546E7A;
+  --pps-border: #B0BEC5;
+
+  --page-bg: var(--pps-sand);
+  --page-text: var(--pps-text);
+  --page-text-light: var(--pps-text-light);
+  --link: var(--pps-steel);
+  --link-hover: var(--pps-blueprint);
+  --accent: var(--pps-steel);
+  --accent-light: var(--pps-slate);
+  --accent-dark: var(--pps-girder);
+  --card-bg: #FFFFFF;
+  --card-border: var(--pps-border);
+  --card-shadow: rgba(55, 71, 79, 0.1);
+  --border: var(--pps-border);
+  --content-width: 56rem;
+}
+
+body {
+  background: var(--pps-sand) !important;
+  color: var(--pps-text) !important;
+}
+
+header {
+  background: linear-gradient(135deg, var(--pps-girder) 0%, var(--pps-steel) 50%, var(--pps-slate) 100%);
+  color: white;
+  padding: 2.5rem 2rem;
+}
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+header .subtitle {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+}
+header nav a {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+header nav a:hover {
+  background: rgba(255,255,255,0.3);
+}
+header nav a.active {
+  background: rgba(255,255,255,0.95);
+  color: var(--pps-steel);
+}
+
+h2 {
+  color: var(--pps-steel);
+  border-bottom: 2px solid var(--pps-slate);
+  padding-bottom: 0.4rem;
+}
+h3 { color: var(--pps-girder); }
+
+blockquote {
+  border-left: 3px solid var(--pps-slate);
+  background: var(--pps-mist);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--pps-text-light);
+}
+
+.safety-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  color: white;
+}
+.safety-gate { background: #C62828; }
+.safety-absolute { background: #4A148C; }
+.safety-annotate { background: #E65100; }
+
+.source-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  background: var(--pps-mist);
+  color: var(--pps-text-light);
+  border: 1px solid var(--pps-border);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+th {
+  background: var(--pps-steel);
+  color: white;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--pps-border);
+  font-size: 0.88rem;
+}
+tr:nth-child(even) { background: var(--pps-mist); }
+
+.module-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+.module-nav a {
+  color: var(--pps-text-light);
+  background: var(--pps-mist);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.module-nav a:hover { background: rgba(55,71,79,0.15); color: var(--pps-steel); }
+.module-nav a.active { background: var(--pps-steel); color: white; }
+
+/* Corpus Cross-Reference sections (Research Co-Processor output) */
+.corpus-crossref {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px dashed var(--pps-steel-blue);
+}
+.corpus-crossref h2 {
+  color: var(--pps-steel-blue);
+  border-bottom-color: var(--pps-steel-blue);
+  font-size: 1.3rem;
+}
+.corpus-crossref h3 {
+  color: var(--pps-blueprint);
+  font-size: 1rem;
+}
+.corpus-crossref .meta {
+  color: var(--pps-text-light);
+  font-size: 0.82rem;
+  font-style: italic;
+}
+.corpus-crossref blockquote {
+  border-left-color: var(--pps-steel-blue);
+  font-family: 'Fira Code', 'SF Mono', monospace;
+  font-style: normal;
+  font-size: 0.88rem;
+}
+.corpus-crossref table th {
+  background: var(--pps-blueprint);
+}
+
+/* Complex plane visualization badge */
+.z-badge {
+  display: inline-block;
+  font-family: 'Fira Code', 'SF Mono', monospace;
+  font-size: 0.78rem;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  background: rgba(25, 118, 210, 0.1);
+  color: var(--pps-blueprint);
+  border: 1px solid rgba(25, 118, 210, 0.3);
+}
+
+footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--pps-text-light);
+  border-top: 1px solid var(--pps-border);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+footer a { color: var(--pps-steel); }

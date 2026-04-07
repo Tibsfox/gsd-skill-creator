@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Fundamentals &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Linux Fundamentals</h1>
+    <div class="subtitle">Kernel, Boot, Packages, Filesystems, Users, Processes, Shells, Permissions, Scheduling</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html" class="active">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Linux runs on everything from Raspberry Pis to 100% of the world&rsquo;s top 500 supercomputers. For systems administrators, deep Linux knowledge is not optional &mdash; it is the foundation on which every other skill in this digest rests.
+    </blockquote>
+
+    <!-- KERNEL ARCHITECTURE -->
+    <h2>Kernel Architecture</h2>
+    <p>The Linux kernel is <strong>monolithic but modular</strong>. All core services (process scheduling, memory management, filesystem drivers, network stack) run in kernel space, but functionality can be extended at runtime through <strong>loadable kernel modules (LKMs)</strong> without recompilation.</p>
+    <div class="card">
+      <p><strong>Key kernel subsystems:</strong></p>
+      <ul>
+        <li><strong>Process scheduler:</strong> CFS (Completely Fair Scheduler) since 2.6.23, replaced by EEVDF in 6.6+</li>
+        <li><strong>Memory management:</strong> Virtual memory, page tables, OOM killer, cgroups v2 memory controller</li>
+        <li><strong>VFS (Virtual Filesystem Switch):</strong> Abstraction layer enabling ext4, XFS, Btrfs, NFS to coexist</li>
+        <li><strong>Network stack:</strong> Netfilter (iptables/nftables), TC (traffic control), XDP/eBPF for programmable networking</li>
+        <li><strong>Device model:</strong> sysfs, udev, device trees for hardware abstraction</li>
+      </ul>
+    </div>
+
+    <!-- BOOT PROCESS -->
+    <h2>Boot Process</h2>
+    <p>Understanding the boot sequence is essential for troubleshooting startup failures:</p>
+    <table>
+      <thead><tr><th>Stage</th><th>Component</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>1. Firmware</td><td>BIOS / UEFI</td><td>Hardware initialization, POST, locate bootloader</td></tr>
+        <tr><td>2. Bootloader</td><td>GRUB2 / systemd-boot</td><td>Load kernel + initramfs into memory</td></tr>
+        <tr><td>3. Kernel init</td><td>Linux kernel</td><td>Mount initramfs, detect hardware, mount real root</td></tr>
+        <tr><td>4. Init system</td><td>systemd (PID 1)</td><td>Start services in dependency order, reach target</td></tr>
+        <tr><td>5. Login</td><td>getty / display manager</td><td>Present login prompt or graphical login</td></tr>
+      </tbody>
+    </table>
+    <p>systemd has replaced SysVinit on all major distributions. Its unit files (<code>.service</code>, <code>.timer</code>, <code>.socket</code>, <code>.mount</code>) provide declarative service management with dependency resolution, socket activation, and cgroup-based resource control.</p>
+
+    <!-- PACKAGE MANAGEMENT -->
+    <h2>Package Management</h2>
+    <p>Every distribution family has its own package format and manager. A sysadmin working across environments must know all four:</p>
+    <table>
+      <thead><tr><th>Family</th><th>Format</th><th>Low-Level</th><th>High-Level</th><th>Distributions</th></tr></thead>
+      <tbody>
+        <tr><td>Debian</td><td>.deb</td><td>dpkg</td><td><strong>apt</strong></td><td>Debian, Ubuntu, Mint</td></tr>
+        <tr><td>Red Hat</td><td>.rpm</td><td>rpm</td><td><strong>dnf</strong> (yum legacy)</td><td>RHEL, Fedora, Rocky, Alma</td></tr>
+        <tr><td>Arch</td><td>pkg.tar.zst</td><td>makepkg</td><td><strong>pacman</strong></td><td>Arch, Manjaro, EndeavourOS</td></tr>
+        <tr><td>SUSE</td><td>.rpm</td><td>rpm</td><td><strong>zypper</strong></td><td>openSUSE, SLES</td></tr>
+      </tbody>
+    </table>
+    <p>Universal formats (<strong>Flatpak</strong>, <strong>Snap</strong>, <strong>AppImage</strong>) supplement distro packages for desktop applications but are generally avoided on servers due to sandboxing overhead and update control concerns.</p>
+
+    <!-- FILESYSTEM HIERARCHY STANDARD -->
+    <h2>Filesystem Hierarchy Standard (FHS)</h2>
+    <p>The FHS defines the directory structure of Linux systems. Key directories every sysadmin must know:</p>
+    <div class="card">
+      <p><code>/etc</code> &mdash; System configuration files (editable text)</p>
+      <p><code>/var</code> &mdash; Variable data: logs (<code>/var/log</code>), mail, spool, databases</p>
+      <p><code>/usr</code> &mdash; User programs and libraries (read-only after install)</p>
+      <p><code>/home</code> &mdash; User home directories</p>
+      <p><code>/tmp</code> &mdash; Temporary files (cleared on reboot)</p>
+      <p><code>/proc</code> &mdash; Virtual filesystem exposing kernel and process info</p>
+      <p><code>/sys</code> &mdash; Virtual filesystem for device and driver information</p>
+      <p><code>/opt</code> &mdash; Third-party application packages</p>
+      <p><code>/srv</code> &mdash; Data served by the system (web, FTP)</p>
+    </div>
+
+    <!-- USER MANAGEMENT -->
+    <h2>User Management</h2>
+    <p>User authentication in Linux is a layered stack:</p>
+    <p><strong>PAM (Pluggable Authentication Modules)</strong> provides the framework &mdash; modular, stackable authentication that can enforce password policies, two-factor authentication, and account lockouts. <strong>NSS (Name Service Switch)</strong> resolves user/group lookups, abstracting whether the source is <code>/etc/passwd</code>, LDAP, or SSSD. For centralized environments, <strong>LDAP</strong> (via OpenLDAP or FreeIPA) provides directory services, while <strong>SSSD</strong> caches and connects to Active Directory or IPA.</p>
+
+    <!-- PROCESS MANAGEMENT -->
+    <h2>Process Management</h2>
+    <p>Core tools: <code>ps</code> (snapshot), <code>top</code>/<code>htop</code> (real-time), <code>kill</code>/<code>pkill</code> (signals), <code>nice</code>/<code>renice</code> (priority). Understanding process states (Running, Sleeping, Stopped, Zombie, Dead) and signal semantics (SIGTERM vs SIGKILL vs SIGHUP) is fundamental.</p>
+    <p><strong>cgroups v2</strong> and <strong>namespaces</strong> provide the kernel primitives that underpin containers. A sysadmin who understands cgroups understands the resource isolation model of Docker and Kubernetes at the kernel level.</p>
+
+    <!-- SHELL SCRIPTING -->
+    <h2>Shell Scripting</h2>
+    <p>Bash remains the default shell on nearly all Linux distributions. POSIX shell compatibility matters for portability across systems. Key scripting patterns for sysadmins: log rotation, backup scripts, health checks, user provisioning, and automated deployments. Modern alternatives include Python for complex logic and <strong>shellcheck</strong> for static analysis of shell scripts.</p>
+
+    <!-- PERMISSIONS -->
+    <h2>Permissions &amp; Access Control</h2>
+    <p>Linux permissions operate at multiple layers:</p>
+    <table>
+      <thead><tr><th>Layer</th><th>Mechanism</th><th>Scope</th></tr></thead>
+      <tbody>
+        <tr><td>DAC (Discretionary)</td><td><code>chmod</code>, <code>chown</code>, <code>chgrp</code></td><td>Owner/group/other rwx bits, setuid/setgid/sticky</td></tr>
+        <tr><td>ACLs (Extended)</td><td><code>setfacl</code>, <code>getfacl</code></td><td>Fine-grained per-user/per-group permissions beyond rwx</td></tr>
+        <tr><td>MAC (Mandatory)</td><td>SELinux / AppArmor</td><td>Kernel-enforced policy, prevents privilege escalation even by root</td></tr>
+        <tr><td>Capabilities</td><td><code>setcap</code>, <code>getcap</code></td><td>Granular root privileges (e.g., bind to port 80 without full root)</td></tr>
+      </tbody>
+    </table>
+    <p><strong>SELinux</strong> (Red Hat family) uses labels and policies to confine every process. <strong>AppArmor</strong> (Debian/Ubuntu family) uses path-based profiles. Both implement mandatory access control but with different configuration models.</p>
+
+    <!-- SCHEDULING -->
+    <h2>Job Scheduling</h2>
+    <p><strong>cron</strong> remains ubiquitous for time-based job scheduling. The crontab format (<code>minute hour day month weekday command</code>) is universal knowledge. <strong>systemd timers</strong> provide an alternative with better logging integration, dependency management, and calendar event expressions. For one-time tasks, <code>at</code> and <code>batch</code> handle deferred execution.</p>
+    <pre><code># systemd timer equivalent of a daily cron job
+[Timer]
+OnCalendar=*-*-* 02:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target</code></pre>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>17 related projects</strong> across 3 knowledge domains with 83 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>QBS</td><td>Quantum Biosensing &amp; Synthetic Cells</td><td>general</td><td>0.294</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>space</td><td>0.292</td></tr>
+        <tr><td>GSI</td><td>GSD-Skill-Creator Improvements</td><td>general</td><td>0.269</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>VKD</td><td>Vulkan Desktop</td><td>general</td><td>0.189</td></tr>
+        <tr><td>SRD</td><td>SSH &amp; Remote Desktop Protocols</td><td>general</td><td>0.163</td></tr>
+        <tr><td>GSD</td><td>GSD &amp; Skill Creator</td><td>general</td><td>0.153</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (15), ai (1), space (1). Complex plane: z = 0.1458 + 0.0972i, |z| = 0.1753.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+        <li><a href="storage-filesystems.html">Storage &amp; Filesystems</a></li>
+        <li><a href="networking.html">Networking</a></li>
+        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Linux Fundamentals &middot; Systems Administration &middot; 83 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

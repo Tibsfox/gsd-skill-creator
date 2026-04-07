@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orchestration Pattern Refinement &mdash; GSD-Skill-Creator Improvements &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsi">
+  <header>
+    <h1>Orchestration Pattern Refinement</h1>
+    <div class="subtitle">OrgAgent Mapping, Single vs Multi-Agent, Token Hierarchy, Mode Selection &mdash; Applied to gsd-skill-creator</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="skill-security.html">Skill Security</a>
+      <a href="context-optimization.html">Context Optimization</a>
+      <a href="orchestration-patterns.html" class="active">Orchestration</a>
+      <a href="verification-pipeline.html">Verification</a>
+      <a href="agent-identity.html">Agent Identity</a>
+      <a href="mcp-hardening.html">MCP Hardening</a>
+      <a href="ecosystem-alignment.html">Ecosystem</a>
+      <a href="learning-system.html">Learning System</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>From Flat to Hierarchical</h2>
+
+    <blockquote>
+      OrgAgent&rsquo;s 3-layer hierarchy achieved 102.73% improvement over flat multi-agent systems on SQuAD 2.0 while reducing token consumption by 74.52%. The Data Processing Inequality proves mathematically that single-agent systems preserve more information for multi-hop reasoning tasks. The question is not &ldquo;single or multi&rdquo; but &ldquo;when each, and how to switch.&rdquo;
+    </blockquote>
+
+    <p>gsd-skill-creator already uses multiple orchestration patterns: the mayor-coordinator for convoys, fleet-mission for parallel dispatch, and single-agent execution for focused tasks. The research from arXiv:2604.01020 and 2604.02460 provides the theoretical framework to make pattern selection systematic rather than ad hoc.</p>
+
+    <!-- ================================================================== -->
+    <h2>1. OrgAgent 3-Layer Mapping to GSD</h2>
+
+    <p>OrgAgent organizes multi-agent systems into three layers modeled on corporate hierarchy: governance, execution, and compliance. This maps directly to the existing GSD architecture.</p>
+
+    <table>
+      <thead><tr><th>OrgAgent Layer</th><th>Function</th><th>GSD Equivalent</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Governance</strong></td><td>Task decomposition, resource allocation, strategic decisions</td><td>mayor-coordinator &mdash; creates convoys, dispatches work via sling, monitors progress</td></tr>
+        <tr><td><strong>Execution</strong></td><td>Actual task work, tool invocation, artifact production</td><td>polecat-worker &mdash; ephemeral autonomous execution, GUPP autonomous mode</td></tr>
+        <tr><td><strong>Compliance</strong></td><td>Output verification, quality gates, constraint enforcement</td><td>gsd-verify-work + adversarial-pr-review &mdash; UAT validation and spec-compliance checking</td></tr>
+      </tbody>
+    </table>
+
+    <p>The key insight from OrgAgent: the governance layer should <strong>never execute tasks directly</strong>. Its sole job is decomposition and assignment. When the mayor-coordinator attempts direct execution (a pattern seen in early GSD versions), it conflates governance and execution, losing the hierarchical token savings.</p>
+
+    <!-- ================================================================== -->
+    <h2>2. Single-Agent for Deep Reasoning (Data Processing Inequality)</h2>
+
+    <div class="card">
+      <p><strong>The DPI proof:</strong> For any chain of information processing X &rarr; Y &rarr; Z, mutual information can only decrease: I(X;Z) &le; I(X;Y). Every inter-agent handoff is an information-lossy channel. For multi-hop reasoning tasks, a single agent preserves more information than a multi-agent pipeline.</p>
+    </div>
+
+    <p>arXiv:2604.02460 demonstrates that single-agent LLMs outperform multi-agent systems on multi-hop reasoning benchmarks. The information-theoretic explanation is rigorous: each agent boundary is a lossy channel. The more hops, the more information loss.</p>
+
+    <h3>When Single-Agent Wins</h3>
+    <ul>
+      <li><strong>Deep reasoning chains:</strong> Mathematical proofs, complex debugging, architectural analysis</li>
+      <li><strong>Context-dependent decisions:</strong> Tasks where every prior step informs the next</li>
+      <li><strong>Small search space:</strong> Tasks with well-defined scope that fit in one context window</li>
+    </ul>
+
+    <h3>When Multi-Agent Wins</h3>
+    <ul>
+      <li><strong>Embarrassingly parallel tasks:</strong> Independent file processing, batch operations</li>
+      <li><strong>Large search space:</strong> Tasks requiring exploration of many alternatives</li>
+      <li><strong>Diverse tool requirements:</strong> Tasks needing different tool sets that would bloat a single context</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>3. Multi-Agent Fleet Pattern</h2>
+
+    <p>The fleet-mission skill already implements parallel agent dispatch. Refine it based on the OrgAgent findings to enforce the governance/execution separation:</p>
+
+    <pre>
+// Fleet dispatch with OrgAgent hierarchy
+governance: mayor-coordinator
+  |-- decomposes task into N independent work items
+  |-- assigns each to a polecat-worker via sling-dispatch
+  |
+execution: polecat-worker[1..N]
+  |-- each receives: task brief, scoped tools, token budget
+  |-- each operates in isolated context (worktree isolation)
+  |-- returns: structured result artifact
+  |
+compliance: witness-observer
+  |-- monitors all workers for stalls, errors, drift
+  |-- aggregates results into unified output
+  |-- triggers adversarial review on suspicious results</pre>
+
+    <!-- ================================================================== -->
+    <h2>4. Hierarchical Token Reduction (74.52%)</h2>
+
+    <p>The 74.52% token reduction from OrgAgent comes from three mechanisms that apply directly to GSD:</p>
+
+    <table>
+      <thead><tr><th>Mechanism</th><th>Token Savings</th><th>GSD Implementation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Task decomposition</strong></td><td>~30%</td><td>Break large tasks into focused sub-tasks with minimal context each</td></tr>
+        <tr><td><strong>Scoped tool loading</strong></td><td>~25%</td><td>Each worker loads only the tools needed for its specific sub-task</td></tr>
+        <tr><td><strong>Result summarization</strong></td><td>~20%</td><td>Workers return structured results, not full conversation transcripts</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>5. Execution Mode Selection: DIRECT / LIGHT / FULL</h2>
+
+    <p>Instead of always launching the full GSD pipeline (discuss &rarr; plan &rarr; execute &rarr; verify), select execution mode based on task complexity:</p>
+
+    <table>
+      <thead><tr><th>Mode</th><th>When</th><th>Pipeline</th><th>Token Cost</th></tr></thead>
+      <tbody>
+        <tr><td><span class="safety-badge safety-confirmed">DIRECT</span></td><td>Trivial tasks, single-file changes</td><td>Execute inline, no sub-agents</td><td>Minimal</td></tr>
+        <tr><td><span class="safety-badge safety-info">LIGHT</span></td><td>Moderate tasks, 2&ndash;5 file changes</td><td>Plan &rarr; execute (skip discuss, minimal verify)</td><td>~40% of FULL</td></tr>
+        <tr><td><span class="safety-badge safety-warn">FULL</span></td><td>Complex tasks, architectural changes</td><td>Discuss &rarr; plan &rarr; execute &rarr; verify with sub-agents</td><td>Full budget</td></tr>
+      </tbody>
+    </table>
+
+    <p>The existing <code>gsd-fast</code> and <code>gsd-quick</code> commands already implement DIRECT and LIGHT modes respectively. The improvement is making mode selection <strong>automatic</strong> based on task analysis rather than requiring the user to choose.</p>
+
+    <h3>Mode Selection Heuristics</h3>
+    <ul>
+      <li><strong>File count:</strong> 1 file = DIRECT, 2&ndash;5 = LIGHT, 6+ = FULL</li>
+      <li><strong>Reasoning depth:</strong> Single-step = DIRECT, multi-hop = FULL</li>
+      <li><strong>Risk level:</strong> Read-only = DIRECT, writes = LIGHT, config changes = FULL</li>
+      <li><strong>User override:</strong> Always allow explicit mode selection via command flags</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>6. Dynamic Skill Profile Assignment</h2>
+
+    <p>When dispatching workers from the pool, assign each a dynamic skill profile based on its task rather than loading the full skill set. The <code>skills</code> field in the new subagent configuration enables this:</p>
+
+    <pre>
+// Dynamic skill profile for a code review worker
+{
+  effort: 0.8,
+  maxTurns: 15,
+  isolation: "worktree",
+  skills: ["code-review", "security-hygiene", "typescript-patterns"],
+  mcpServers: []  // no external tools needed
+}
+
+// Dynamic skill profile for a research worker
+{
+  effort: 1.0,
+  maxTurns: 30,
+  isolation: "worktree",
+  skills: ["research-engine", "data-fidelity"],
+  mcpServers: ["gsd-math-coprocessor"]
+}</pre>
+
+    <!-- ================================================================== -->
+    <h2>Corpus Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related Projects (from corpus analysis &mdash; 21 projects, z = 0.2086)</h4>
+      <ul>
+        <li><a href="../OOPS/index.html">OOPS &mdash; Ecosystem Alignment</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../MAS/index.html">MAS &mdash; Multi-Agent Systems</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../GSA/index.html">GSA &mdash; GSD System Architecture</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Complex plane state:</strong> z = 0.1702 + 0.1206i, |z| = 0.2086 &mdash; under-researched with 21 related projects spanning 4 domains (general, ecology, ai, governance). TKN (Token Economics) at magnitude 1.291 is the strongest connection, reflecting the direct relevance of token reduction metrics. The <strong>governance</strong> domain (PSC) offers cross-domain synthesis opportunities with OrgAgent&rsquo;s corporate hierarchy model.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Orchestration Pattern Refinement &middot; GSD-Skill-Creator Improvements &middot; PNW Research Series</p>
+    <p><a href="index.html">GSI Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

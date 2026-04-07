@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Networking &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Networking</h1>
+    <div class="subtitle">OSI Model, TCP/IP, DNS, SSH, Firewalls, Load Balancing, VPN, Routing</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html" class="active">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Networking is the connective tissue of all distributed systems. A sysadmin who cannot read a packet capture, configure a firewall rule, or troubleshoot DNS resolution is operating blind. Every outage investigation eventually arrives at the network layer.
+    </blockquote>
+
+    <!-- OSI MODEL -->
+    <h2>OSI 7-Layer Model</h2>
+    <p>The OSI model provides the conceptual framework for understanding network communication. While TCP/IP is the practical implementation, the OSI model remains the standard reference for troubleshooting and documentation.</p>
+    <table>
+      <thead><tr><th>Layer</th><th>Name</th><th>Protocol Examples</th><th>Sysadmin Tools</th></tr></thead>
+      <tbody>
+        <tr><td>7</td><td>Application</td><td>HTTP, SMTP, DNS, SSH</td><td>curl, wget, dig, ssh</td></tr>
+        <tr><td>6</td><td>Presentation</td><td>TLS/SSL, MIME, compression</td><td>openssl, certbot</td></tr>
+        <tr><td>5</td><td>Session</td><td>NetBIOS, RPC, SOCKS</td><td>ss, netstat</td></tr>
+        <tr><td>4</td><td>Transport</td><td>TCP, UDP, SCTP</td><td>ss, netstat, tcpdump</td></tr>
+        <tr><td>3</td><td>Network</td><td>IP, ICMP, OSPF, BGP</td><td>ip, ping, traceroute, mtr</td></tr>
+        <tr><td>2</td><td>Data Link</td><td>Ethernet, ARP, VLAN (802.1Q)</td><td>ip link, bridge, ethtool</td></tr>
+        <tr><td>1</td><td>Physical</td><td>Cables, fiber, radio</td><td>ethtool, dmesg</td></tr>
+      </tbody>
+    </table>
+
+    <!-- DNS -->
+    <h2>DNS</h2>
+    <p>DNS is arguably the most critical infrastructure service. When DNS fails, everything fails. Sysadmins must understand recursive resolution, authoritative servers, zone files, record types (A, AAAA, CNAME, MX, NS, TXT, SRV, PTR), TTL tuning, and DNSSEC.</p>
+    <p><strong>Server implementations:</strong> BIND (the reference implementation, complex), <strong>Unbound</strong> (recursive resolver, lightweight), <strong>PowerDNS</strong> (database-backed authoritative), <strong>CoreDNS</strong> (Kubernetes default, plugin-based). DNS-over-HTTPS (DoH) and DNS-over-TLS (DoT) add encryption to prevent eavesdropping.</p>
+
+    <!-- DHCP -->
+    <h2>DHCP</h2>
+    <p>Dynamic Host Configuration Protocol automates IP address assignment. Key concepts: lease lifecycle (DORA: Discover, Offer, Request, Acknowledge), reservation by MAC address, scope configuration, relay agents for multi-subnet environments. <strong>ISC DHCP</strong> is being replaced by <strong>Kea</strong> (ISC&rsquo;s modern replacement with REST API management).</p>
+
+    <!-- HTTP/TLS -->
+    <h2>HTTP &amp; TLS Certificate Management</h2>
+    <p>Every sysadmin manages TLS certificates. <strong>Let&rsquo;s Encrypt</strong> (2015) transformed certificate management from an annual paid process into automated 90-day renewals via ACME protocol. Tools: <code>certbot</code>, <code>acme.sh</code>, Caddy (automatic HTTPS). Understanding certificate chains, key types (RSA vs ECDSA), OCSP stapling, and HSTS is essential.</p>
+    <p>HTTP/2 multiplexing and HTTP/3 (QUIC) change connection behavior in ways that affect load balancing and firewall rules.</p>
+
+    <!-- SSH -->
+    <h2>SSH Key Management</h2>
+    <p>SSH is the sysadmin&rsquo;s primary tool for remote access. Best practices:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Key-based authentication only</strong> &mdash; disable password auth in <code>sshd_config</code></li>
+        <li><strong>Ed25519 keys</strong> &mdash; smaller, faster, more secure than RSA</li>
+        <li><strong>SSH agent forwarding</strong> &mdash; use with caution (prefer ProxyJump)</li>
+        <li><strong>ProxyJump (-J)</strong> &mdash; multi-hop SSH without agent forwarding risk</li>
+        <li><strong>SSH certificates</strong> &mdash; replace authorized_keys at scale (HashiCorp Vault, Smallstep)</li>
+        <li><strong>Port knocking / fail2ban</strong> &mdash; additional brute-force protection layers</li>
+      </ul>
+    </div>
+
+    <!-- FIREWALLS -->
+    <h2>Firewalls</h2>
+    <p>Linux firewall evolution: <strong>ipchains</strong> (2.2) &rarr; <strong>iptables</strong> (2.4, Netfilter) &rarr; <strong>nftables</strong> (3.13+, unified framework). <strong>UFW</strong> (Uncomplicated Firewall) provides a simplified frontend for iptables on Ubuntu. <strong>firewalld</strong> provides zone-based management on RHEL/Fedora.</p>
+    <p>Key concepts: chains (INPUT, OUTPUT, FORWARD), tables (filter, nat, mangle), connection tracking (conntrack), stateful vs stateless rules, DNAT/SNAT for port forwarding and masquerading.</p>
+
+    <!-- LOAD BALANCING -->
+    <h2>Load Balancing</h2>
+    <p><strong>HAProxy</strong> (Layer 4/7, high-performance, production standard) and <strong>Nginx</strong> (web server + reverse proxy + L7 load balancer) dominate. Algorithms: round-robin, least connections, IP hash, weighted. Health checks ensure traffic routes only to healthy backends. <strong>keepalived</strong> provides VRRP-based failover for high availability.</p>
+
+    <!-- VPN -->
+    <h2>VPN Technologies</h2>
+    <table>
+      <thead><tr><th>Technology</th><th>Protocol</th><th>Key Advantage</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WireGuard</strong></td><td>UDP, kernel-space</td><td>~4,000 lines of code, fastest, simplest</td><td>Modern default for site-to-site and remote access</td></tr>
+        <tr><td><strong>OpenVPN</strong></td><td>UDP/TCP, userspace</td><td>Mature, highly configurable, TLS-based</td><td>Legacy environments, complex routing</td></tr>
+        <tr><td><strong>IPsec</strong></td><td>ESP/AH, kernel-space</td><td>Standards-based, vendor interop</td><td>Enterprise site-to-site (strongSwan, Libreswan)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- NETWORK MONITORING -->
+    <h2>Network Monitoring Tools</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Layer</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>tcpdump</code></td><td>L2&ndash;L7</td><td>Packet capture and analysis (CLI)</td></tr>
+        <tr><td><code>Wireshark</code></td><td>L2&ndash;L7</td><td>GUI packet analysis with protocol dissectors</td></tr>
+        <tr><td><code>ss</code> / <code>netstat</code></td><td>L4</td><td>Socket and connection state</td></tr>
+        <tr><td><code>mtr</code></td><td>L3</td><td>Combined traceroute + ping for path analysis</td></tr>
+        <tr><td><code>nmap</code></td><td>L3&ndash;L4</td><td>Network discovery and port scanning</td></tr>
+        <tr><td><code>iperf3</code></td><td>L4</td><td>Bandwidth and throughput testing</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ROUTING -->
+    <h2>BGP, OSPF, VLANs &amp; Subnetting</h2>
+    <p><strong>BGP</strong> (Border Gateway Protocol) is the routing protocol of the Internet &mdash; every ISP and cloud provider uses it. <strong>OSPF</strong> (Open Shortest Path First) handles internal routing within autonomous systems. Sysadmins managing on-premise infrastructure need to understand <strong>VLANs</strong> (802.1Q tagging for logical network segmentation), <strong>subnetting</strong> (CIDR notation, calculating broadcast/network addresses), and <strong>inter-VLAN routing</strong>.</p>
+    <div class="formula">CIDR: 10.0.0.0/24 = 256 addresses (254 usable) | /16 = 65,536 | /8 = 16,777,216</div>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>228 related projects</strong> across 1 knowledge domain with 76 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>BEACH</td><td>Water Access, Boating &amp; Fishing</td><td>general</td><td>0.252</td></tr>
+        <tr><td>DHP</td><td>DHCP Protocol</td><td>general</td><td>0.225</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>DNS</td><td>DNS Protocol</td><td>general</td><td>0.196</td></tr>
+        <tr><td>TCP</td><td>TCP/IP Protocol</td><td>general</td><td>0.172</td></tr>
+        <tr><td>SRD</td><td>SSH &amp; Remote Desktop Protocols</td><td>general</td><td>0.163</td></tr>
+        <tr><td>OCN</td><td>Open Compute Node</td><td>general</td><td>0.115</td></tr>
+        <tr><td>PIN</td><td>The Post-Industrial Network</td><td>general</td><td>0.188</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228). Complex plane: z = 0.1674 + 0.1136i, |z| = 0.2024.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
+        <li><a href="cloud-containers.html">Cloud &amp; Containers</a></li>
+        <li><a href="linux-fundamentals.html">Linux Fundamentals</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Networking &middot; Systems Administration &middot; 76 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

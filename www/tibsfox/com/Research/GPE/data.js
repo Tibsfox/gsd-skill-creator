@@ -106,30 +106,60 @@ const GPE_PERIOD_AVERAGES = [
 const GPE_INTENSITY_LABELS = ['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
 
 const GPE_INTENSITY_DATASETS = [
+  /* --- GLOBAL REFERENCE --- */
   {
-    label: 'World',
+    label: 'World Average',
     data: [100,99.2,98.5,97.8,97.0,96.2,95.3,94.4,93.5,92.8,92.0,90.2,88.4,86.7,85.0,83.3,81.6,80.0,78.4,76.9,76.3,75.7,74.2,73.3,72.6],
-    borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3, borderWidth: 2.5, pointRadius: 2, pointHoverRadius: 5
+    borderColor: '#94a3b8', backgroundColor: 'rgba(148,163,184,0.08)', fill: true, tension: 0.3, borderWidth: 3, borderDash: [8,4], pointRadius: 0, pointHoverRadius: 4
   },
+  /* --- AMERICAS (greens) --- */
   {
     label: 'USA',
     data: [100,98.0,96.5,95.0,93.5,92.0,90.5,88.5,86.5,85.0,83.0,81.0,79.0,77.0,75.0,73.0,71.0,69.0,67.0,65.0,64.0,63.0,57.5,54.0,52.5],
-    borderColor: '#10b981', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2, pointRadius: 2, pointHoverRadius: 5
+    borderColor: '#10b981', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2.5, pointRadius: 2, pointHoverRadius: 5
   },
   {
-    label: 'China',
-    data: [100,98.5,100,103.5,107,105,101,97,93,89,85,81.8,78.7,75.7,72.8,70,67.3,64.7,62.2,59.8,58.5,57.5,56.5,56.8,56.2],
-    borderColor: '#f59e0b', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2, pointRadius: 2, pointHoverRadius: 5
+    label: 'Brazil',
+    data: [100,99.5,99.0,98.0,97.0,96.0,95.0,93.5,92.0,91.0,90.0,88.5,87.0,85.5,84.0,82.5,81.5,80.5,79.5,78.5,78.0,77.0,76.0,75.5,75.0],
+    borderColor: '#34d399', backgroundColor: 'transparent', tension: 0.3, borderWidth: 1.5, borderDash: [4,3], pointRadius: 1, pointHoverRadius: 4
   },
+  /* --- EUROPE (blues/purples) --- */
   {
     label: 'EU',
     data: [100,98.5,97.5,96.5,95.5,94.5,93.5,92.5,91.5,90.5,89.0,87.5,86.0,84.5,83.0,81.5,80.0,78.5,77.0,75.5,74.0,72.5,66.5,63.0,60.5],
-    borderColor: '#8b5cf6', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2, pointRadius: 2, pointHoverRadius: 5
+    borderColor: '#3b82f6', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2.5, pointRadius: 2, pointHoverRadius: 5
+  },
+  {
+    label: 'UK',
+    data: [100,98.0,96.5,95.5,94.0,93.0,91.5,90.0,88.0,86.5,85.0,82.5,80.0,77.5,75.0,72.5,70.0,68.0,66.0,64.0,62.5,61.0,56.0,53.5,51.0],
+    borderColor: '#818cf8', backgroundColor: 'transparent', tension: 0.3, borderWidth: 1.5, borderDash: [4,3], pointRadius: 1, pointHoverRadius: 4
+  },
+  /* --- ASIA-PACIFIC (reds/oranges/ambers) --- */
+  {
+    label: 'China',
+    data: [100,98.5,100,103.5,107,105,101,97,93,89,85,81.8,78.7,75.7,72.8,70,67.3,64.7,62.2,59.8,58.5,57.5,56.5,56.8,56.2],
+    borderColor: '#ef4444', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2.5, pointRadius: 2, pointHoverRadius: 5
   },
   {
     label: 'India',
     data: [100,98.5,97.0,95.5,94.0,92.5,91.0,89.5,88.0,86.5,85.0,83.3,81.6,80.0,78.4,76.8,75.3,73.8,72.3,70.9,69.5,68.2,66.9,65.5,64.2],
-    borderColor: '#06b6d4', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2, borderDash: [5,3], pointRadius: 1.5, pointHoverRadius: 4
+    borderColor: '#f97316', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2, pointRadius: 2, pointHoverRadius: 5
+  },
+  {
+    label: 'Japan',
+    data: [100,99.0,98.0,97.5,97.0,96.0,95.0,94.0,92.5,91.5,90.5,89.0,87.5,86.0,84.5,83.5,82.5,81.0,79.5,78.0,77.0,76.0,74.5,73.0,72.0],
+    borderColor: '#fbbf24', backgroundColor: 'transparent', tension: 0.3, borderWidth: 1.5, borderDash: [4,3], pointRadius: 1, pointHoverRadius: 4
+  },
+  /* --- AFRICA & MIDDLE EAST (teals/pinks) --- */
+  {
+    label: 'Africa (avg)',
+    data: [100,99.5,99.0,98.5,98.0,97.5,97.0,96.5,96.0,95.5,95.0,94.2,93.5,92.8,92.0,91.5,91.0,90.5,90.0,89.5,89.0,88.5,88.0,87.5,87.0],
+    borderColor: '#ec4899', backgroundColor: 'transparent', tension: 0.3, borderWidth: 2, pointRadius: 2, pointHoverRadius: 5
+  },
+  {
+    label: 'Middle East (avg)',
+    data: [100,100.5,101,101.5,102,102.5,103,103.5,104,103.5,103,102,101,100,99.5,99.0,98.5,98.0,97.5,97.0,96.5,96.0,95.0,94.5,94.0],
+    borderColor: '#a855f7', backgroundColor: 'transparent', tension: 0.3, borderWidth: 1.5, borderDash: [6,4], pointRadius: 1, pointHoverRadius: 4
   }
 ];
 

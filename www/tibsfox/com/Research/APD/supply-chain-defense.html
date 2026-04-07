@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supply-Chain Defense &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Supply-Chain Defense &mdash; Guardrails, Degradation &amp; Poisoning Attacks</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html" class="active">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Supply-Chain Defense</h2>
+
+    <blockquote>
+      Three papers examining the supply-chain attack surface for agentic AI systems: network-level guardrails that intercept malicious payloads before execution, empirical measurement of how agentic skills degrade in real-world settings versus benchmarks, and the foundational DDIPE attack framework that demonstrated supply-chain poisoning across 631,813 unreviewed marketplace skills.
+    </blockquote>
+
+    <!-- Key Numbers -->
+    <h2>Key Numbers</h2>
+
+    <div class="card">
+      <p><span class="key-number critical">631,813</span> &mdash; skills in SkillsMP marketplace with no mandatory security review (2604.03081)</p>
+      <p><span class="key-number critical">11.6&ndash;33.5%</span> &mdash; DDIPE bypass rates across four coding agent frameworks (2604.03081)</p>
+      <p><span class="key-number warn">23&ndash;41%</span> &mdash; average performance degradation from benchmark to production environments (2604.04323)</p>
+      <p><span class="key-number confirmed">1.6%</span> &mdash; payloads that bypass ALL three models simultaneously (cross-model defense, 2604.03081)</p>
+      <p><span class="key-number">1,070</span> &mdash; adversarial skills generated across 15 MITRE ATT&amp;CK categories (2604.03081)</p>
+      <p><span class="key-number confirmed">2.3%</span> &mdash; direct execution rate under Claude Code + Sonnet 4.6, the strongest tested config (2604.03081)</p>
+    </div>
+
+    <!-- Defense Layer Comparison -->
+    <h2>Defense Layer Comparison</h2>
+
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Paper</th><th>Defense Type</th><th>Model-Dependent?</th><th>Bypass Resistance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Pre-deployment</td><td>2604.04323</td><td>Three-tier evaluation</td><td>No</td><td>High (catches degradation)</td></tr>
+        <tr><td>Network</td><td>2604.04426</td><td>ShieldNet proxy</td><td>No</td><td>High (model-agnostic)</td></tr>
+        <tr><td>Model alignment</td><td>2604.03081</td><td>Refusal training</td><td>Yes</td><td>Medium (2.3&ndash;27.1% bypass)</td></tr>
+        <tr><td>Multi-model ensemble</td><td>2604.03081</td><td>Heterogeneous verification</td><td>Partially</td><td>Very High (&lt;2% bypass)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Papers</h2>
+
+    <!-- Paper 1 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-defense">Network Guardrails</span></div>
+      <h3>ShieldNet: Network-Level Guardrails for Supply-Chain Injections</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.04426" target="_blank"><span class="arxiv-id">arXiv:2604.04426</span></a><br>
+      <strong>Categories:</strong> cs.CR, cs.AI &middot; <strong>Date:</strong> April 2026</p>
+      <p><strong>Key Finding:</strong> ShieldNet proposes a network-layer defense that intercepts and analyzes tool invocations between agents and MCP servers before they reach the execution environment. Rather than relying on the agent&rsquo;s own judgment about whether a tool call is safe, ShieldNet operates as an independent security proxy that applies pattern-matching, semantic analysis, and behavioral baselines to detect supply-chain injection payloads.</p>
+      <p><strong>Architecture:</strong> The system sits between the agent orchestrator and tool servers, maintaining a behavioral model of expected tool invocation patterns. Anomalous calls &mdash; unexpected file system access, network exfiltration attempts, privilege escalation patterns &mdash; are flagged and optionally blocked before execution. The behavioral model is trained on benign invocation traces and updated continuously via online learning.</p>
+      <p><strong>Detection Categories:</strong> ShieldNet monitors for: (1) file system operations outside the declared working directory, (2) network connections to undeclared endpoints, (3) environment variable reads for known credential patterns, (4) process spawning outside the tool&rsquo;s declared capability, and (5) data volume anomalies suggesting exfiltration.</p>
+      <p><strong>Implication:</strong> Defense at the network layer is model-agnostic and cannot be bypassed by prompt injection or tool description manipulation, addressing the semantic-layer attacks identified by MCP-ITP (2601.07395).</p>
+    </div>
+
+    <!-- Paper 2 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-defense">Real-World Degradation</span></div>
+      <h3>Agentic Skills in the Wild: Benchmarking Realistic Settings</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.04323" target="_blank"><span class="arxiv-id">arXiv:2604.04323</span></a><br>
+      <strong>Categories:</strong> cs.AI, cs.SE &middot; <strong>Date:</strong> April 2026</p>
+      <p><strong>Key Finding:</strong> Agentic skills that perform well on controlled benchmarks show significant performance degradation in real-world deployments. The paper measures degradation across three axes: environmental variability (different OS versions, dependency conflicts), temporal drift (skills break as upstream APIs change), and adversarial interference (skills fail under concurrent multi-agent workloads). Average performance drops 23&ndash;41% from benchmark to production.</p>
+      <p><strong>Degradation by Axis:</strong></p>
+      <table>
+        <thead><tr><th>Degradation Axis</th><th>Avg. Drop</th><th>Worst Case</th><th>Primary Cause</th></tr></thead>
+        <tbody>
+          <tr><td>Environmental variability</td><td>23%</td><td>38%</td><td>OS-level dependency conflicts</td></tr>
+          <tr><td>Temporal drift</td><td>31%</td><td>52%</td><td>Upstream API breaking changes</td></tr>
+          <tr><td>Adversarial interference</td><td>41%</td><td>67%</td><td>Concurrent multi-agent resource contention</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Measurement Framework:</strong> The authors propose a three-tier evaluation protocol: (1) controlled benchmark, (2) staged deployment with synthetic variability, (3) production shadow-mode with real user traffic. Skills must pass all three tiers before marketplace listing.</p>
+      <p><strong>Implication:</strong> Benchmark-only evaluation creates false confidence in skill reliability. The 23&ndash;41% degradation gap means that security defenses calibrated to benchmark behavior will miss attacks that exploit production-environment inconsistencies.</p>
+    </div>
+
+    <!-- Paper 3 — External Link -->
+    <div class="paper-card external-link">
+      <div><span class="paper-badge badge-defense">DDIPE Attack</span></div>
+      <h3>Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.03081" target="_blank"><span class="arxiv-id">arXiv:2604.03081</span></a><br>
+      <strong>Categories:</strong> cs.CR, cs.AI, cs.CL &middot; <strong>Date:</strong> April 2026 &middot; <strong>Full Deep Dive:</strong> <a href="../MAS/supply-chain.html"><strong>MAS &rarr; Supply-Chain Attacks</strong></a></p>
+      <p>The foundational paper for this cluster. DDIPE (Document-Driven Implicit Payload Execution) embeds malicious logic in skill documentation that agents reproduce verbatim during in-context learning. 1,070 adversarial skills generated from 81 seeds across 15 MITRE ATT&amp;CK categories. Bypass rates of 11.6&ndash;33.5% across Claude Code, OpenHands, Codex, and Gemini CLI. Cross-model diversity compresses attack surface from 20% to &lt;2%.</p>
+      <p><strong>Key Results by Framework:</strong></p>
+      <table>
+        <thead>
+          <tr><th>Framework</th><th>Best Model</th><th>Bypass Rate</th><th>Direct Execution Rate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Claude Code</td><td>Sonnet 4.6</td><td>13.5%</td><td>2.3%</td></tr>
+          <tr><td>OpenHands</td><td>Sonnet 4.6</td><td>22.0%</td><td>10.7%</td></tr>
+          <tr><td>Codex</td><td>GPT-5.4</td><td>11.6%</td><td>3.8%</td></tr>
+          <tr><td>Gemini CLI</td><td>Gemini 2.5 Pro</td><td>14.0%</td><td>4.2%</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Critical finding:</strong> Only <strong>17 samples (1.6%)</strong> bypass all three models simultaneously on Claude Code, validating heterogeneous model deployment as the strongest single defense.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SYNTHESIS                                                     -->
+    <!-- ============================================================ -->
+
+    <div class="synthesis">
+      <h3>Synthesis: Defense-in-Depth for Agentic Supply Chains</h3>
+      <p>These three papers establish a layered defense model for agentic supply chains:</p>
+      <ol>
+        <li><strong>Pre-deployment</strong> (2604.04323) &mdash; Three-tier evaluation protocol ensures skills perform reliably outside controlled benchmarks. The 23&ndash;41% degradation gap must be closed before deployment.</li>
+        <li><strong>Runtime interception</strong> (2604.04426) &mdash; ShieldNet&rsquo;s network-layer proxy catches supply-chain payloads that bypass agent-level defenses, operating independently of model alignment quality.</li>
+        <li><strong>Ecosystem integrity</strong> (2604.03081) &mdash; DDIPE demonstrates the scale of the threat: 631,813 unreviewed skills, 15 MITRE ATT&amp;CK categories, 11.6&ndash;33.5% bypass rates. Mandatory security review and multi-model verification ensembles are the minimum viable defense.</li>
+      </ol>
+      <p>The critical insight: <strong>agent alignment is necessary but not sufficient</strong>. Even Claude Sonnet 4.6 (the strongest model tested) showed 2.3% direct execution rate under DDIPE. Defense must operate at every layer &mdash; evaluation, network, and ecosystem.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (12 projects, 245-project corpus)</h4>
+      <span class="ref-tag">MAS &mdash; Multi-Agent Systems</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">SAA &mdash; Skills, Agents &amp; Teams</span>
+      <span class="ref-tag">GSI &mdash; GSD Improvements</span>
+      <span class="ref-tag">SCR &mdash; Source Code Review</span>
+      <span class="ref-tag">HEL &mdash; Helium Supply Chain</span>
+      <span class="ref-tag">HPC &mdash; High Performance Computing</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+      <span class="ref-tag">TSL &mdash; Tessl Review</span>
+      <span class="ref-tag">SYS &mdash; Systems Admin</span>
+      <span class="ref-tag">MGU &mdash; Module Governance</span>
+      <span class="ref-tag">ACE &mdash; Compute Engine</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- RELATED APD CLUSTERS                                          -->
+    <!-- ============================================================ -->
+
+    <div class="cross-links">
+      <h4>Related APD Clusters</h4>
+      <ul>
+        <li><a href="mcp-security-papers.html">MCP Security &mdash; Protocol-level defenses, tool poisoning via MCP-ITP</a></li>
+        <li><a href="code-agents.html">Code Agents &mdash; Profile-Then-Reason reduces tool attack surface</a></li>
+        <li><a href="hallucination-evaluation.html">Hallucination &mdash; Reference detection applicable to skill documentation</a></li>
+      </ul>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series</h4>
+      <ul>
+        <li><a href="../MAS/supply-chain.html">MAS &mdash; Full DDIPE deep dive</a></li>
+        <li><a href="../AGT/mcp-security.html">AGT &mdash; MCP Security cluster</a></li>
+        <li><a href="../HEL/index.html">HEL &mdash; Helium Supply Chain (physical supply-chain parallels)</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; Supply-Chain Defense &middot; 3 papers</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

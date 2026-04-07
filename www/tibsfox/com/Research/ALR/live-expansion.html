@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIVE Page Coverage Expansion &mdash; Artemis Learning Resources</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alr">
+  <header>
+    <h1>LIVE Page Coverage Expansion</h1>
+    <div class="subtitle">Artemis Dashboard, Weather Stations, Earthquake Monitor, Tides, AQI, ISS Tracker, Solar Monitor &mdash; Real-Time PNW Data</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ai-programming.html">AI Programming</a>
+      <a href="diy-electronics.html">DIY Electronics</a>
+      <a href="study-guides.html">Study Guides</a>
+      <a href="live-expansion.html" class="active">LIVE Pages</a>
+      <a href="open-math-problems.html">Math Problems</a>
+      <a href="open-cs-problems.html">CS Problems</a>
+      <a href="open-physics-problems.html">Physics Problems</a>
+      <a href="open-science.html">DIY Science</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Seven real-time monitoring pages extending the LIVE hub with data feeds from NASA, NOAA, USGS, and community sensor networks. Each page connects to open data APIs and updates on configurable intervals via the sweep.py daemon. Corpus cross-referencing identified 26 related projects, with the Mukilteo Observatory (|z| = 0.942) as the strongest single connection.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">LIVE Pages</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">METAR Sources</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">NWS/CWOP/NDBC</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Satellite Feeds</span></div>
+      <div class="stat"><span class="stat-value amber">35+</span><span class="stat-label">Sweep Targets</span></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 1: Artemis II Dashboard                                  -->
+    <!-- ============================================================ -->
+
+    <h2>1. Artemis II Mission Dashboard</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">NASA</span></p>
+      <p>Enhanced real-time telemetry dashboard for the Artemis II mission, displaying crew status, trajectory, and mission phase with automatic sweep updates.</p>
+      <h4>Data Sources</h4>
+      <ul>
+        <li><strong>NASA HORIZONS:</strong> ephemeris data for spacecraft position (API: ssd.jpl.nasa.gov)</li>
+        <li><strong>NASA OSDR:</strong> mission timeline and phase markers</li>
+        <li><strong>Space-Track.org:</strong> TLE data for orbit visualization</li>
+      </ul>
+      <h4>Implementation</h4>
+      <ul>
+        <li>Client-side JavaScript with fetch() to CORS-enabled NASA APIs</li>
+        <li>SVG trajectory visualization with Earth-Moon system to scale</li>
+        <li>Mission elapsed time (MET) counter with phase boundary markers</li>
+        <li>Sweep interval: 15 minutes during active mission phases</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 2: Weather Stations                                      -->
+    <!-- ============================================================ -->
+
+    <h2>2. Weather Station Network &mdash; Mukilteo Convergence Zone</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">MUK</span> <span class="source-badge">MRW</span></p>
+      <p>A network of weather data sources focused on the Puget Sound Convergence Zone, the mesoscale weather phenomenon that creates localized precipitation when marine air masses converge behind the Olympic Mountains.</p>
+      <h4>Data Sources (19 total)</h4>
+      <table>
+        <thead><tr><th>Type</th><th>Count</th><th>Stations</th></tr></thead>
+        <tbody>
+          <tr><td>METAR (ASOS/AWOS)</td><td>8</td><td>KPAE, KBFI, KSEA, KOLM, KCLM, KNUW, KORS, KTIW</td></tr>
+          <tr><td>NWS/CWOP/NDBC</td><td>7</td><td>Community weather stations and marine buoys</td></tr>
+          <tr><td>Satellite imagery</td><td>4</td><td>GOES-18 visible, IR, water vapor, mesoscale sector</td></tr>
+        </tbody>
+      </table>
+      <h4>Implementation</h4>
+      <ul>
+        <li>METAR parsing with Python <code>metar</code> library for decoded observations</li>
+        <li>Convergence zone detection algorithm: wind direction divergence between KPAE and KSEA</li>
+        <li>GOES-18 satellite loop with 5-minute refresh for cloud pattern tracking</li>
+        <li>Community stations via CWOP APRS feed for micro-climate granularity</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 3: Earthquake Monitor                                    -->
+    <!-- ============================================================ -->
+
+    <h2>3. Earthquake Monitor &mdash; Cascadia Subduction Zone</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">ECO</span></p>
+      <p>Real-time earthquake monitoring focused on the Cascadia Subduction Zone and the South Whidbey Island Fault Zone (SWIFZ), which runs directly beneath the Mukilteo area.</p>
+      <h4>Data Sources</h4>
+      <ul>
+        <li><strong>USGS Earthquake API:</strong> real-time GeoJSON feed (earthquake.usgs.gov/fdsnws)</li>
+        <li><strong>PNSN (Pacific Northwest Seismic Network):</strong> regional seismograph data from UW</li>
+        <li><strong>ShakeAlert:</strong> early warning system status for Cascadia</li>
+      </ul>
+      <h4>Implementation</h4>
+      <ul>
+        <li>Leaflet.js map with magnitude-scaled markers and depth-based coloring</li>
+        <li>Filter by region: Puget Sound, Cascadia plate boundary, Juan de Fuca Ridge</li>
+        <li>72-hour rolling window with configurable magnitude threshold (default M1.0+)</li>
+        <li>SWIFZ trace overlay showing the fault zone geometry</li>
+        <li>Sweep interval: 5 minutes for M3.0+, 30 minutes for M1.0+</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 4: Tide Prediction                                       -->
+    <!-- ============================================================ -->
+
+    <h2>4. Tide Prediction &mdash; Puget Sound</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">SPS</span> <span class="source-badge">BEACH</span></p>
+      <p>Tide predictions and real-time water level data for Puget Sound NOAA stations, essential for beach access, forage fish surveys, and marine ecology monitoring.</p>
+      <h4>Data Sources</h4>
+      <ul>
+        <li><strong>NOAA CO-OPS:</strong> tidesandcurrents.noaa.gov API for predictions and observations</li>
+        <li><strong>Stations:</strong> Seattle (#9447130), Mukilteo, Edmonds, Everett, Port Townsend</li>
+        <li><strong>Harmonic constituents:</strong> 37 tidal components for local prediction</li>
+      </ul>
+      <h4>Implementation</h4>
+      <ul>
+        <li>SVG tide chart with predicted vs observed water levels</li>
+        <li>Next high/low tide countdown with height prediction</li>
+        <li>King tide alerts when predicted height exceeds MHHW + 2 feet</li>
+        <li>Integration with forage fish spawning survey timing (DIY Science module)</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 5: Air Quality                                           -->
+    <!-- ============================================================ -->
+
+    <h2>5. Air Quality Index &mdash; PNW Wildfire Season</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">AWF</span></p>
+      <p>Real-time AQI monitoring for the PNW with wildfire smoke tracking, particularly important during August&ndash;October fire season when PM2.5 levels can exceed 300 (hazardous).</p>
+      <h4>Data Sources</h4>
+      <ul>
+        <li><strong>AirNow API:</strong> EPA official AQI data (airnow.gov)</li>
+        <li><strong>PurpleAir:</strong> community sensor network for hyperlocal PM2.5</li>
+        <li><strong>NOAA HMS (Hazard Mapping System):</strong> satellite-detected fire and smoke plumes</li>
+        <li><strong>NIFC InciWeb:</strong> active wildfire locations and perimeters</li>
+      </ul>
+      <h4>Implementation</h4>
+      <ul>
+        <li>Color-coded AQI map: green (0&ndash;50) through maroon (301&ndash;500)</li>
+        <li>PM2.5 time series with 24-hour rolling average</li>
+        <li>Smoke plume overlay from NOAA HMS satellite data</li>
+        <li>Health advisory generation based on AQI bracket</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 6: ISS Tracker                                           -->
+    <!-- ============================================================ -->
+
+    <h2>6. ISS Tracker &mdash; Visible Passes for PNW</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">NASA</span> <span class="source-badge">MST</span></p>
+      <p>Track the International Space Station with predictions for visible passes over the Pacific Northwest, computed from TLE orbital elements.</p>
+      <h4>Data Sources</h4>
+      <ul>
+        <li><strong>CelesTrak:</strong> current TLE data for ISS (NORAD ID 25544)</li>
+        <li><strong>Spot the Station:</strong> NASA visible pass predictions for verification</li>
+        <li><strong>Clear Sky Chart:</strong> cloud cover overlay for viewing conditions</li>
+      </ul>
+      <h4>Implementation</h4>
+      <ul>
+        <li>SGP4 orbital propagation in JavaScript (satellite.js library)</li>
+        <li>Real-time ground track on Leaflet.js map with footprint circle</li>
+        <li>Next 7 days of visible passes with magnitude, direction, and elevation</li>
+        <li>Observer location: configurable, default Mukilteo (47.9445&deg;N, 122.3046&deg;W)</li>
+        <li>Brightness filter: only show passes brighter than magnitude -1.0</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE 7: Solar Monitor                                         -->
+    <!-- ============================================================ -->
+
+    <h2>7. Solar Activity Monitor</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-live">LIVE</span> <span class="source-badge">NASA</span></p>
+      <p>Real-time solar activity monitoring from NOAA SWPC (Space Weather Prediction Center) with aurora probability for the PNW latitude.</p>
+      <h4>Data Sources</h4>
+      <ul>
+        <li><strong>NOAA SWPC:</strong> solar wind, sunspot number, X-ray flux, geomagnetic indices</li>
+        <li><strong>SDO (Solar Dynamics Observatory):</strong> AIA 193&#8491; and HMI magnetogram imagery</li>
+        <li><strong>DSCOVR/ACE:</strong> real-time solar wind at L1 point (Bz component for aurora forecasting)</li>
+      </ul>
+      <h4>Implementation</h4>
+      <ul>
+        <li>Kp index display with aurora visibility threshold for 48&deg;N latitude (Kp &ge; 6)</li>
+        <li>Solar X-ray flux chart with flare classification (C/M/X class)</li>
+        <li>SDO image carousel with latest solar disc imagery</li>
+        <li>OVATION aurora probability map for northern hemisphere</li>
+        <li>Sweep interval: 15 minutes for solar wind, 6 hours for SDO imagery</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+
+    <div class="card">
+      <p>Pipeline analysis identified 26 related projects across 4 knowledge domains (general, space, ecology, energy). The Mukilteo Observatory project (|z| = 0.942) is the strongest single connection, nearly at unit circle convergence. Aggregate position <strong>z = 0.180 + 0.120i</strong> (|z| = 0.217).</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>MUK</td><td>Mukilteo Microclimate Observatory</td><td>General</td><td>Primary weather station research</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>Space</td><td>Artemis dashboard, ISS tracking</td></tr>
+        <tr><td>LIVE</td><td>LIVE Pages Hub</td><td>General</td><td>Integration target for all pages</td></tr>
+        <tr><td>AWF</td><td>Clean Air, Water &amp; Food</td><td>Ecology</td><td>AQI monitoring, environmental quality</td></tr>
+        <tr><td>MRW</td><td>Minecraft Real-Time Weather</td><td>General</td><td>Weather data integration patterns</td></tr>
+        <tr><td>SPS</td><td>The Sound of Puget Sound</td><td>General</td><td>Tidal data, marine ecology</td></tr>
+        <tr><td>MST</td><td>Global Telescope Mesh Network</td><td>General</td><td>Satellite tracking, astronomy</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../LIVE/index.html">LIVE &mdash; Real-Time Pages</a></li>
+        <li><a href="../MUK/index.html">MUK &mdash; Mukilteo Observatory</a></li>
+        <li><a href="../ECO/index.html">ECO &mdash; PNW Ecology</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../ENE/index.html">ENE &mdash; Energy Systems</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>LIVE Page Coverage Expansion &middot; Artemis Learning Resources &middot; 7 pages &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

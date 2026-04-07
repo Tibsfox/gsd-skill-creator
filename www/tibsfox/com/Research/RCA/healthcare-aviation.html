@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare &amp; Aviation RCA &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Healthcare &amp; Aviation RCA</h1>
+    <div class="subtitle">Joint Commission, NASA ASRS, NTSB Methodology, HRO Principles</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html" class="active">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Healthcare and aviation are the two domains where root cause analysis carries the highest stakes &mdash; failures cost lives. Both have developed mature investigation cultures, mandatory reporting systems, and regulatory frameworks that the software industry is only beginning to approach. Their decades of experience provide essential lessons for any RCA practice.
+    </blockquote>
+
+    <!-- JOINT COMMISSION -->
+    <h2>Joint Commission Sentinel Events</h2>
+    <p>The Joint Commission (formerly JCAHO) requires accredited healthcare organizations to perform RCA for all <strong>sentinel events</strong> &mdash; unexpected occurrences involving death or serious physical or psychological injury. The Joint Commission&rsquo;s RCA framework mandates:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Team composition:</strong> Multidisciplinary team including front-line staff, not just managers</li>
+        <li><strong>Timeline reconstruction:</strong> Detailed chronology of events leading to the sentinel event</li>
+        <li><strong>Causal analysis:</strong> Identify contributing factors at the individual, team, equipment, environment, and organizational levels</li>
+        <li><strong>Root cause identification:</strong> Drill down to systemic factors, not individual blame</li>
+        <li><strong>Action plan:</strong> Specific, measurable corrective actions with responsible parties and timelines</li>
+        <li><strong>Monitoring:</strong> Follow-up to verify effectiveness of corrective actions</li>
+      </ul>
+    </div>
+    <p>Common sentinel event types: wrong-site surgery, medication errors, patient falls, treatment delays, and hospital-acquired infections. The Joint Commission publishes anonymized data on sentinel event patterns to enable system-wide learning.</p>
+
+    <!-- NASA ASRS -->
+    <h2>NASA Aviation Safety Reporting System (ASRS)</h2>
+    <p>Established in 1976, <strong>ASRS</strong> is a voluntary, confidential reporting system for aviation safety incidents. Administered by NASA (not the FAA) to maintain independence from the regulatory body, ASRS receives approximately 100,000 reports annually.</p>
+    <p>Key design principles that make ASRS effective:</p>
+    <ul>
+      <li><strong>Confidentiality:</strong> Reporter identity is protected; reports cannot be used for enforcement</li>
+      <li><strong>Immunity incentive:</strong> Good-faith reporting provides limited immunity from FAA enforcement action</li>
+      <li><strong>De-identification:</strong> All published data is stripped of identifying information</li>
+      <li><strong>Analysis and publication:</strong> NASA analysts identify trends and publish ASRS Callback newsletters</li>
+      <li><strong>Alert bulletins:</strong> Urgent safety issues trigger immediate notifications to FAA and industry</li>
+    </ul>
+    <p>ASRS demonstrates that <strong>voluntary reporting with confidentiality protections</strong> captures far more safety data than mandatory punitive systems. This principle directly informs Google&rsquo;s blameless postmortem culture (see <a href="software-sre.html">SRE</a>).</p>
+
+    <!-- NTSB -->
+    <h2>NTSB Investigation Methodology</h2>
+    <p>The <strong>National Transportation Safety Board</strong> conducts independent investigations of aviation accidents (and major surface transportation accidents). The NTSB methodology is the gold standard for accident investigation:</p>
+    <table>
+      <thead><tr><th>Phase</th><th>Activities</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Field Investigation</strong></td><td>Go-team deployment, wreckage mapping, CVR/FDR recovery, witness interviews, perishable evidence</td><td>Days&ndash;weeks</td></tr>
+        <tr><td><strong>Factual Investigation</strong></td><td>Systems group, structures group, operations group, human performance group &mdash; each produces factual reports</td><td>Months</td></tr>
+        <tr><td><strong>Analysis</strong></td><td>Integrate factual group findings, apply causal frameworks, identify probable cause and contributing factors</td><td>Months</td></tr>
+        <tr><td><strong>Board Meeting</strong></td><td>Public meeting where board members deliberate, amend analysis, vote on probable cause determination</td><td>12&ndash;24 months after accident</td></tr>
+        <tr><td><strong>Recommendations</strong></td><td>Safety recommendations to FAA, manufacturers, operators &mdash; tracked for implementation</td><td>Ongoing</td></tr>
+      </tbody>
+    </table>
+    <p>The NTSB deliberately uses <strong>&ldquo;probable cause&rdquo;</strong> rather than &ldquo;root cause&rdquo; &mdash; acknowledging that complex accidents have multiple contributing factors and that certainty about the single &ldquo;root&rdquo; cause is often impossible.</p>
+
+    <!-- STAMP VS TRADITIONAL IN HEALTHCARE -->
+    <h2>STAMP vs Traditional RCA in Healthcare</h2>
+    <p>Research comparing STAMP-based analysis to traditional RCA methods in healthcare settings reveals significant differences:</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Dimension</th><th>Traditional RCA</th><th>STAMP/CAST Analysis</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Causes identified</strong></td><td>3&ndash;5 per incident</td><td>15&ndash;25 per incident</td></tr>
+          <tr><td><strong>Depth</strong></td><td>Stops at proximate causes</td><td>Traces through organizational control structure</td></tr>
+          <tr><td><strong>Recommendations</strong></td><td>Often procedural (&ldquo;retrain staff&rdquo;)</td><td>Systemic (redesign control structure, feedback channels)</td></tr>
+          <tr><td><strong>Blame tendency</strong></td><td>Higher (often identifies individuals)</td><td>Lower (focuses on control structure failures)</td></tr>
+          <tr><td><strong>Recurrence rate</strong></td><td>Higher (similar incidents recur)</td><td>Lower (addresses systemic conditions)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The evidence strongly favors systems-theoretic approaches for complex healthcare incidents, though traditional methods remain appropriate for simpler failure modes.</p>
+
+    <!-- HUMAN FACTORS -->
+    <h2>Human Factors Engineering &amp; Cognitive Bias in RCA</h2>
+    <p>Both healthcare and aviation have learned that human error is rarely the root cause &mdash; it is the starting point for investigation. Cognitive biases that affect RCA practitioners themselves:</p>
+    <ul>
+      <li><strong>Hindsight bias:</strong> Knowing the outcome makes the failure seem more predictable than it was</li>
+      <li><strong>Outcome bias:</strong> Judging decisions by their outcomes rather than the information available at the time</li>
+      <li><strong>Fundamental attribution error:</strong> Attributing failures to individuals rather than situational factors</li>
+      <li><strong>Counterfactual thinking:</strong> &ldquo;If only they had...&rdquo; &mdash; creating a narrative of a single decision point that &ldquo;caused&rdquo; the accident</li>
+    </ul>
+
+    <!-- HRO -->
+    <h2>High-Reliability Organizations (HRO)</h2>
+    <p>Karl Weick and Kathleen Sutcliffe identified five principles that characterize organizations operating successfully in high-hazard environments:</p>
+    <div class="card">
+      <ol>
+        <li><strong>Preoccupation with failure:</strong> Treating near-misses as windows into the system&rsquo;s vulnerabilities</li>
+        <li><strong>Reluctance to simplify:</strong> Resisting easy explanations and single root causes</li>
+        <li><strong>Sensitivity to operations:</strong> Maintaining awareness of current system state at all levels</li>
+        <li><strong>Commitment to resilience:</strong> Building capacity to recover from unexpected situations, not just prevent anticipated ones</li>
+        <li><strong>Deference to expertise:</strong> Decision-making migrates to whoever has the most relevant knowledge, regardless of hierarchy</li>
+      </ol>
+    </div>
+    <p>HRO principles provide the <em>cultural</em> foundation for effective RCA &mdash; without these organizational characteristics, even the best analytical methods will be undermined by blame culture, oversimplification, and authority bias.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>16 related projects</strong> across 3 knowledge domains with 16 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>space</td><td>0.292</td></tr>
+        <tr><td>HFE</td><td>Hi-Fidelity Audio Engineering</td><td>general</td><td>0.216</td></tr>
+        <tr><td>BPS</td><td>Biological Physics Sensing Systems</td><td>general</td><td>0.204</td></tr>
+        <tr><td>THE</td><td>Thermal &amp; Hydrogen Energy Systems</td><td>general</td><td>0.201</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>general</td><td>0.185</td></tr>
+        <tr><td>LLM</td><td>Local LLM Ecosystem</td><td>ai</td><td>0.178</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (13), ai (2), space (1). Complex plane: z = 0.1965 + 0.1310i, |z| = 0.2361.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="systems-thinking.html">Systems-Theoretic Approaches</a></li>
+        <li><a href="classical-methods.html">Classical Methods</a></li>
+        <li><a href="manufacturing-quality.html">Manufacturing &amp; Quality</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Healthcare &amp; Aviation RCA &middot; Root Cause Analysis &middot; 16 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

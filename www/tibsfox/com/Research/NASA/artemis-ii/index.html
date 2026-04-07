@@ -270,6 +270,8 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   <a href="crew-life.html">Life Aboard</a> &middot;
   <a href="papers.html">Papers</a> &middot;
   <a href="navigation.html">Nav</a> &middot;
+  <a href="study-guide.html">Study Guide</a> &middot;
+  <a href="apollo-comparison.html">Apollo&rarr;Artemis</a> &middot;
   <a href="../../SOL/index.html">Sun &amp; Moon</a> &middot;
   <a href="../../MUK/index.html">Mukilteo</a>
 </div>
@@ -322,6 +324,24 @@ a:hover { color: #e0cc80; text-decoration:underline; }
       <a href="dedication.html">Sophie Germain Dedication</a><br>
       <a href="artemis-ii-research.pdf" style="color:var(--dim);">PDF: Research Baseline</a>
     </div>
+    <div class="info-title" style="margin-top:0.8rem;">Science</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
+      <a href="laser-comms.html">O2O Laser Communications</a><br>
+      <a href="cubesats.html">CubeSat Secondary Payloads</a><br>
+      <a href="radiation.html">Deep-Space Radiation Environment</a>
+    </div>
+    <div class="info-title" style="margin-top:0.8rem;">Education</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
+      <a href="study-guide.html">Study Guide (3 Levels)</a><br>
+      <a href="diy-projects.html">DIY Projects (8 Hands-On)</a><br>
+      <a href="ai-guide.html">AI Programming Guide</a>
+    </div>
+    <div class="info-title" style="margin-top:0.8rem;">Humanities</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
+      <a href="apollo-comparison.html">Apollo to Artemis &mdash; 54 Years</a><br>
+      <a href="earth-ecology.html">Earth &amp; Ecology from Space</a><br>
+      <a href="canada-csa.html">Canada &amp; CSA</a>
+    </div>
   </div>
   <div class="info-cell">
     <div class="info-title">Connected Observatories</div>
@@ -336,7 +356,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   <div class="info-cell">
     <div class="info-title"><a href="watch.html" style="color:inherit;">Watch Launch</a></div>
     <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
-      <strong style="color:var(--artemis-gold);">April 1 &mdash; 3:24 PM PDT</strong><br>
+      <strong style="color:var(--artemis-gold);">April 1 &mdash; 3:35 PM PDT</strong><br>
       <span style="color:var(--dim);">7:45 AM EDT</span> &mdash; Tanking ops (YouTube)<br>
       <span style="color:var(--dim);">12:50 PM EDT</span> &mdash; Official broadcast<br>
       <span style="color:var(--dim);">Platforms:</span> NASA+, YouTube, Prime<br>
@@ -505,7 +525,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <h3>Mission Profile</h3>
     <div class="stat"><div class="stat-label">Type</div><div class="stat-value">Free-Return Lunar Flyby</div></div>
     <div class="stat"><div class="stat-label">Duration</div><div class="stat-value">~10 days</div></div>
-    <div class="stat"><div class="stat-label">Lunar Closest Approach</div><div class="stat-value">~6,513 km (far side)</div></div>
+    <div class="stat"><div class="stat-label">Lunar Closest Approach</div><div class="stat-value">~6,546 km / ~4,067 mi (far side)</div></div>
     <div class="stat"><div class="stat-label">Max Distance Beyond Moon</div><div class="stat-value">~7,600 km</div></div>
     <div class="stat"><div class="stat-label">Re-entry Speed</div><div class="stat-value">40,000 km/h (Mach 32)</div></div>
     <div class="stat"><div class="stat-label">Entry Profile</div><div class="stat-value">Direct (steep) &mdash; modified from skip</div></div>
@@ -519,7 +539,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <div class="stat"><div class="stat-label">AVATAR</div><div class="stat-value">Organ-on-chip, radiation effects</div></div>
     <div class="stat"><div class="stat-label">ARCHAR</div><div class="stat-value">Crew health monitors + biomarkers</div></div>
     <div class="stat"><div class="stat-label">O2O Optical Comms</div><div class="stat-value">Laser link, 260 Mbps downlink</div></div>
-    <div class="stat"><div class="stat-label">CubeSats</div><div class="stat-value">5 international payloads</div></div>
+    <div class="stat"><div class="stat-label">CubeSats</div><div class="stat-value">4 international payloads</div></div>
     <div class="stat"><div class="stat-label">TACHELES</div><div class="stat-value">Germany &mdash; electronics in deep space</div></div>
     <div class="stat"><div class="stat-label">ATENEA</div><div class="stat-value">Argentina &mdash; radiation shielding</div></div>
     <div class="stat"><div class="stat-label">K-RadCube</div><div class="stat-value">South Korea &mdash; dosimetry</div></div>
@@ -551,7 +571,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 //  DSN XML feed, tibsfox.com mission data API
 // ============================================================
 
-var LAUNCH_UTC = new Date('2026-04-01T22:24:00Z');
+var LAUNCH_UTC = new Date('2026-04-01T22:35:00Z');
 var SPEED_OF_LIGHT = 299792.458; // km/s
 var MOON_RADIUS = 1737.4; // km
 var EARTH_RADIUS = 6371; // km
@@ -576,7 +596,7 @@ var TRAJ = [
   [  172800,   170000,   2.8,  0.0, 'outbound',  'Day 2 — outbound coast'],
   [  259200,   285000,   1.5,  0.0, 'outbound',  'Day 3 — deep space'],
   [  324000,   360000,   1.1,  0.0, 'outbound',  'Day 3.75 — lunar approach'],
-  [  345600,   392650,   1.0,  0.0, 'lunar',     'Closest approach — 6,513 km from surface'],
+  [  345600,   392884,   1.0,  0.0, 'lunar',     'Closest approach — ~4,067 mi (~6,546 km) from surface'],
   [  352800,   393737,   1.3,  0.0, 'lunar',     'Beyond the Moon — max distance'],
   [  432000,   340000,   1.4,  0.0, 'return',    'Day 5 — return coast begins'],
   [  518400,   260000,   1.8,  0.0, 'return',    'Day 6 — homeward bound'],
@@ -910,7 +930,7 @@ var EVENTS = [
   { t: 90000,    label: 'Day 1+', desc: 'TLI burn \u2014 ESM OMS engine, escape velocity' },
   { t: 172800,   label: 'Day 2',  desc: 'Outbound coast \u2014 mid-course correction' },
   { t: 259200,   label: 'Day 3',  desc: 'Deep space \u2014 approaching lunar SOI' },
-  { t: 345600,   label: 'Day 4',  desc: 'Lunar flyby \u2014 closest approach 6,513 km' },
+  { t: 345600,   label: 'Day 4',  desc: 'Lunar flyby \u2014 closest approach ~4,067 mi (~6,546 km)' },
   { t: 352800,   label: 'Day 4+', desc: 'Free-return gravity assist \u2014 beyond the Moon' },
   { t: 432000,   label: 'Day 5',  desc: 'Return coast begins \u2014 homeward bound' },
   { t: 604800,   label: 'Day 7',  desc: 'Mid-return \u2014 Earth growing larger' },
@@ -1047,7 +1067,7 @@ function drawTrajectory() {
   ctx.beginPath(); ctx.arc(moonX, moonY, flybyR, 0, Math.PI*2); ctx.stroke();
   ctx.setLineDash([]);
   ctx.fillStyle = 'rgba(255,255,255,0.25)'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
-  ctx.fillText('6,513 km', moonX + flybyR + 4, moonY - 3);
+  ctx.fillText('~4,067 mi', moonX + flybyR + 4, moonY - 3);
 
   // Lunar sphere of influence (~66,000 km)
   var lsoiR = (moonX - earthX) * 0.12;
@@ -1059,7 +1079,7 @@ function drawTrajectory() {
   // === FREE-RETURN TRAJECTORY ===
   // Artemis II follows a free-return figure-8 path:
   // — Outbound: departs Earth, curves ABOVE the Earth-Moon line, approaches Moon from above-right
-  // — Flyby: swings behind the Moon (far side), closest approach ~6,513 km
+  // — Flyby: swings behind the Moon (far side), closest approach ~4,067 mi (~6,546 km)
   // — Return: departs below the Moon, curves BELOW the Earth-Moon line back to Earth
   // This creates an asymmetric figure-8 when projected onto the orbital plane.
 

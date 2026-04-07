@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCA in Our Architecture &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>RCA in Our Architecture</h1>
+    <div class="subtitle">gsd-forensics, incident-analyzer, security-hygiene, verification pipeline, trust system</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html" class="active">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      gsd-skill-creator is a self-modifying system where agents create, execute, and verify their own skills. This makes it both a practitioner and a subject of root cause analysis &mdash; we build RCA tools and we need them for our own failures. Every method in this research digest maps to a concrete component of our architecture.
+    </blockquote>
+
+    <!-- MAPPING TABLE -->
+    <h2>RCA Method to Architecture Mapping</h2>
+    <table>
+      <thead><tr><th>RCA Method</th><th>Our Component</th><th>How It Maps</th></tr></thead>
+      <tbody>
+        <tr><td>Five Whys</td><td><code>gsd-forensics</code> skill</td><td>Iterative investigation through git history, artifacts, and state to diagnose failed workflows</td></tr>
+        <tr><td>Fishbone / 6M</td><td><code>gsd-forensics</code> category analysis</td><td>Classifies failure causes: agent (Man), tooling (Machine), context (Material), workflow (Method), metrics (Measurement), environment (Mother Nature)</td></tr>
+        <tr><td>FMEA</td><td><code>security-hygiene</code> skill</td><td>Proactive threat assessment for self-modifying skills &mdash; Severity &times; Likelihood &times; Detectability</td></tr>
+        <tr><td>FTA</td><td>Verification pipeline</td><td>Boolean decomposition of test failures into component causes through AND/OR dependency trees</td></tr>
+        <tr><td>STAMP</td><td>Trust system</td><td>Models agent trust as a control problem: trust relationships are control actions, verification is feedback</td></tr>
+        <tr><td>Blameless postmortem</td><td><code>gsd-forensics</code> output format</td><td>Structured investigation reports focusing on systemic factors, not agent blame</td></tr>
+        <tr><td>Error budgets</td><td>Wave-based execution</td><td>Each wave has an implicit error budget &mdash; failures within budget trigger retry, exhausted budget triggers RCA</td></tr>
+        <tr><td>Observability (3 pillars)</td><td><code>incident-analyzer</code> agent</td><td>Correlates logs (git log), metrics (test results), and traces (execution traces) for diagnosis</td></tr>
+        <tr><td>AgentRx CFS</td><td>Error-as-feedback loops</td><td>Identifying the critical failure step in multi-agent execution and routing corrective feedback</td></tr>
+        <tr><td>Causal inference</td><td>Complex plane analysis</td><td>Maps research state to complex numbers; causal relationships expressed as phase relationships</td></tr>
+      </tbody>
+    </table>
+
+    <!-- GSD-FORENSICS -->
+    <h2>gsd-forensics Skill</h2>
+    <p>The <code>gsd-forensics</code> skill is our primary RCA tool. Triggered after GSD workflow failures, it performs:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Git archaeology:</strong> Analyze commit history, diff chains, and branch topology to reconstruct the failure timeline</li>
+        <li><strong>Artifact inspection:</strong> Read PLAN.md, STATE.md, ROADMAP.md to identify discrepancies between plan and execution</li>
+        <li><strong>State reconstruction:</strong> Rebuild the system state at the point of failure from .planning/ artifacts</li>
+        <li><strong>Causal chain construction:</strong> Five Whys-style iterative analysis through the evidence</li>
+        <li><strong>Recommendation generation:</strong> Specific, actionable corrective measures</li>
+      </ul>
+    </div>
+    <p>The forensics skill implements a blameless approach by design &mdash; it investigates systemic factors (missing verification steps, incomplete plans, ambiguous requirements) rather than attributing failure to specific agents.</p>
+
+    <!-- INCIDENT-ANALYZER -->
+    <h2>incident-analyzer Agent</h2>
+    <p>The <code>incident-analyzer</code> agent is the three-pillar observability component of our architecture:</p>
+    <ul>
+      <li><strong>Logs:</strong> Git log, agent execution logs, hook output &mdash; reconstructs the sequence of events</li>
+      <li><strong>Metrics:</strong> Test pass/fail counts, execution time, file change volume &mdash; quantifies the impact</li>
+      <li><strong>Traces:</strong> Agent call chains, skill activation sequences, subagent delegation paths &mdash; identifies where in the execution chain the failure originated</li>
+    </ul>
+    <p>Correlation across these three sources enables identification of the <strong>critical failure step</strong> &mdash; the specific agent action that first introduced the error (mapping directly to AgentRx&rsquo;s CFS concept from <a href="ai-agent-debugging.html">AI Agent Debugging</a>).</p>
+
+    <!-- SECURITY-HYGIENE -->
+    <h2>security-hygiene Skill</h2>
+    <p>The <code>security-hygiene</code> skill implements proactive FMEA for our self-modifying system:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Skill modification review:</strong> When a skill is created or modified, assess the risk (Severity &times; Likelihood &times; Detectability)</li>
+        <li><strong>Boundary enforcement:</strong> Verify that src/ never imports desktop/ and vice versa &mdash; a structural barrier (Swiss Cheese defense layer)</li>
+        <li><strong>Credential scanning:</strong> Prevent accidental commit of .env, API keys, tokens &mdash; barrier analysis for data leakage</li>
+        <li><strong>Self-modification audit:</strong> Track which skills modified which other skills, creating an audit trail for forensic investigation</li>
+      </ul>
+    </div>
+
+    <!-- CONTEXT ROT -->
+    <h2>Context Rot as Root Cause</h2>
+    <p>In long-running agent sessions, <strong>context rot</strong> emerges as a uniquely AI-native root cause. As the context window fills with intermediate results, earlier instructions and constraints degrade or are lost during compaction. This manifests as:</p>
+    <ul>
+      <li>Agents forgetting project conventions established early in the session</li>
+      <li>Contradictory actions in later phases that violate decisions from earlier phases</li>
+      <li>Gradual drift from the original plan as compacted context loses nuance</li>
+      <li>Knowledge degradation: the agent &ldquo;knows less&rdquo; about the project than it did 30 minutes ago</li>
+    </ul>
+    <p>Our mitigation: <strong>externalized state</strong> in .planning/ files, CLAUDE.md, and MEMORY.md. The agent&rsquo;s critical knowledge is stored on disk, not in context. This is a barrier analysis approach &mdash; adding a defense layer between the hazard (context compaction) and the target (correct execution).</p>
+
+    <!-- ERROR-AS-FEEDBACK -->
+    <h2>Error-as-Feedback Loops</h2>
+    <p>In our architecture, errors are not terminal &mdash; they are feedback signals. The meta-agentic bootstrapping pattern treats every failure as information:</p>
+    <div class="card">
+      <p><strong>Loop:</strong> Agent executes &rarr; Failure detected &rarr; Error analyzed (forensics) &rarr; Correction synthesized &rarr; Agent re-executes with correction &rarr; Success or next iteration</p>
+      <p>This maps directly to the STAMP control loop: the agent is the controller, the codebase is the controlled process, test results are feedback, and corrective actions are control actions. When the loop fails, it is because the agent&rsquo;s process model (its understanding of the codebase) became inconsistent with reality.</p>
+    </div>
+
+    <!-- TRUST SYSTEM FAILURE MODES -->
+    <h2>Trust System Failure Modes</h2>
+    <p>The trust-relationship system (95 tests passing) models agent trust as a <strong>control problem</strong> with specific failure modes:</p>
+    <table>
+      <thead><tr><th>Failure Mode</th><th>STAMP Mapping</th><th>Detection</th></tr></thead>
+      <tbody>
+        <tr><td>Trust inflation &mdash; agent gains unearned trust</td><td>Inadequate control action (verification too lenient)</td><td>Trust audit against verification history</td></tr>
+        <tr><td>Trust stagnation &mdash; agent cannot earn trust despite good work</td><td>Missing feedback channel (results not propagated)</td><td>Trust score trend analysis</td></tr>
+        <tr><td>Trust decay violation &mdash; trust persists after failures</td><td>Process model inconsistency (trust state diverges from reality)</td><td>Trust-to-verification correlation check</td></tr>
+        <tr><td>Circular trust &mdash; agents mutually elevate trust</td><td>Conflicting control actions (no independent verification)</td><td>Trust graph cycle detection</td></tr>
+      </tbody>
+    </table>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>237 related projects</strong> across 3 knowledge domains with 42 keyword matches &mdash; the highest connectivity of any module.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>GSI</td><td>GSD-Skill-Creator Improvements</td><td>general</td><td>0.269</td></tr>
+        <tr><td>ECO</td><td>From Tahoma&rsquo;s Summit to the Salish Sea Floor</td><td>ecology</td><td>0.231</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>general</td><td>0.183</td></tr>
+        <tr><td>GSD</td><td>GSD &amp; Skill Creator</td><td>general</td><td>0.153</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (227), ecology (7), ai (3). Complex plane: z = 0.1671 + 0.1134i, |z| = 0.2020.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="ai-agent-debugging.html">AI Agent Debugging</a></li>
+        <li><a href="systems-thinking.html">Systems-Theoretic Approaches</a></li>
+        <li><a href="software-sre.html">Software &amp; SRE</a></li>
+        <li><a href="llm-rca-failures.html">LLM Reasoning Failures</a></li>
+        <li><a href="classical-methods.html">Classical Methods</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>RCA in Our Architecture &middot; Root Cause Analysis &middot; 237 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

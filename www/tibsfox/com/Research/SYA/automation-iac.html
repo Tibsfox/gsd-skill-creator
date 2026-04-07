@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation &amp; Infrastructure as Code &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Automation &amp; Infrastructure as Code</h1>
+    <div class="subtitle">Ansible, Terraform, GitOps, CI/CD, Immutable Infrastructure, Drift Detection</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html" class="active">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The sysadmin who manually configures servers is doing archaeology. The modern sysadmin writes code that configures servers &mdash; code that is version-controlled, tested, reviewed, and reproducible. Infrastructure as Code is not a trend; it is the professional standard.
+    </blockquote>
+
+    <!-- CONFIG MANAGEMENT COMPARISON -->
+    <h2>Configuration Management</h2>
+    <p>Configuration management tools enforce desired state across server fleets. The four major tools represent different philosophies:</p>
+    <table>
+      <thead><tr><th>Tool</th><th>Language</th><th>Architecture</th><th>Agent</th><th>Learning Curve</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ansible</strong></td><td>YAML + Jinja2</td><td>Agentless (SSH push)</td><td>No</td><td>Low</td><td>Ad-hoc tasks, provisioning, mixed environments</td></tr>
+        <tr><td><strong>Puppet</strong></td><td>Puppet DSL</td><td>Agent-server (pull)</td><td>Yes</td><td>Medium</td><td>Large fleets, compliance enforcement</td></tr>
+        <tr><td><strong>Chef</strong></td><td>Ruby DSL</td><td>Agent-server (pull)</td><td>Yes</td><td>High</td><td>Complex logic, developer-oriented shops</td></tr>
+        <tr><td><strong>SaltStack</strong></td><td>YAML + Jinja2</td><td>Agent (ZeroMQ) or SSH</td><td>Optional</td><td>Medium</td><td>Real-time orchestration, event-driven</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Ansible</strong> dominates due to its agentless architecture and low barrier to entry. A playbook is readable by anyone who knows YAML. Ansible collections provide reusable modules for cloud providers, network devices, and applications.</p>
+    <pre><code># Ansible playbook: ensure Nginx is installed and running
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Start and enable Nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes</code></pre>
+
+    <!-- IaC PROVISIONING -->
+    <h2>Infrastructure Provisioning</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Approach</th><th>State</th><th>Cloud Support</th><th>Key Feature</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Terraform</strong></td><td>Declarative (HCL)</td><td>Remote state file</td><td>Multi-cloud (900+ providers)</td><td>Plan/apply workflow, module registry</td></tr>
+        <tr><td><strong>Pulumi</strong></td><td>Imperative (Python/TS/Go)</td><td>Pulumi Cloud or local</td><td>Multi-cloud</td><td>Real programming languages, testing</td></tr>
+        <tr><td><strong>CloudFormation</strong></td><td>Declarative (JSON/YAML)</td><td>AWS-managed</td><td>AWS only</td><td>Deep AWS integration, stack sets</td></tr>
+        <tr><td><strong>OpenTofu</strong></td><td>Declarative (HCL)</td><td>Compatible with TF</td><td>Multi-cloud</td><td>Open-source fork of Terraform (post BSL)</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Terraform</strong> remains the industry standard for infrastructure provisioning. The plan/apply workflow provides a safety net: <code>terraform plan</code> shows exactly what will change before <code>terraform apply</code> executes it. <strong>OpenTofu</strong> emerged after HashiCorp changed Terraform&rsquo;s license from MPL to BSL in August 2023, maintained by the Linux Foundation.</p>
+
+    <!-- GITOPS -->
+    <h2>GitOps</h2>
+    <p>GitOps uses Git as the single source of truth for infrastructure and application state. Changes are made via pull requests, and a reconciliation controller continuously ensures the live environment matches the Git repository.</p>
+    <div class="card">
+      <p><strong>Principles:</strong></p>
+      <ul>
+        <li><strong>Declarative:</strong> Desired state described in Git, not imperative scripts</li>
+        <li><strong>Versioned:</strong> Every change has a commit, enabling audit and rollback</li>
+        <li><strong>Automated:</strong> Reconciliation controllers detect and correct drift</li>
+        <li><strong>Observable:</strong> Divergence between desired and actual state is visible</li>
+      </ul>
+    </div>
+    <p><strong>ArgoCD</strong> (Kubernetes-native, web UI, multi-cluster) and <strong>Flux</strong> (lightweight, CNCF graduated, toolkit-based) are the two leading GitOps controllers. Both watch Git repositories and reconcile Kubernetes manifests automatically.</p>
+
+    <!-- CI/CD -->
+    <h2>CI/CD Integration</h2>
+    <p>Infrastructure changes must go through the same CI/CD pipeline as application code: lint (tflint, ansible-lint), validate (terraform validate), security scan (tfsec, checkov, Snyk IaC), plan/diff, approval gate, apply. <strong>GitHub Actions</strong>, <strong>GitLab CI</strong>, and <strong>Jenkins</strong> all support IaC pipelines. The key principle: <strong>no manual changes to production infrastructure</strong>.</p>
+
+    <!-- IMMUTABLE INFRASTRUCTURE -->
+    <h2>Immutable Infrastructure</h2>
+    <p>Instead of updating servers in place (mutable), build new machine images with every change and replace old instances. <strong>Packer</strong> builds AMIs/images from templates. <strong>Golden images</strong> contain the base OS, security hardening, and monitoring agents &mdash; application teams layer on top. This eliminates configuration drift and makes rollback trivial: deploy the previous image.</p>
+
+    <!-- DRIFT DETECTION -->
+    <h2>Drift Detection</h2>
+    <p>Infrastructure drift occurs when live state diverges from declared state &mdash; caused by manual changes, failed applies, or external modifications. Detection approaches:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Terraform plan:</strong> Detects drift by comparing state file to live resources</li>
+        <li><strong>NSync (Netflix):</strong> Continuous reconciliation between desired state and AWS resources, automated paper on drift patterns</li>
+        <li><strong>InfraFix:</strong> Technology-agnostic IaC repair &mdash; detects misconfigured infrastructure and generates fixes</li>
+        <li><strong>IaCGen:</strong> Deployability-centric code generation evaluated across 153 real-world scenarios</li>
+        <li><strong>Driftctl:</strong> Open-source drift detection for Terraform-managed cloud resources</li>
+      </ul>
+    </div>
+    <p>The NSync paper from Netflix and the InfraFix research represent the frontier of automated drift remediation &mdash; moving from detection to autonomous correction.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>229 related projects</strong> across 2 knowledge domains with 101 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>HEL</td><td>HEL &mdash; Helium Supply Chain &amp; Semiconductor Infrastructure</td><td>general</td><td>0.340</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>OAA</td><td>Operations &amp; Admin Automation</td><td>general</td><td>0.210</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+        <tr><td>BCM</td><td>Building Construction Mastery</td><td>infrastructure</td><td>0.154</td></tr>
+        <tr><td>OCN</td><td>Open Compute Node</td><td>general</td><td>0.115</td></tr>
+        <tr><td>CFU</td><td>ComfyUI Integration</td><td>general</td><td>0.165</td></tr>
+        <tr><td>ANM</td><td>The Golden Screen</td><td>general</td><td>0.204</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228), infrastructure (1). Complex plane: z = 0.1673 + 0.1135i, |z| = 0.2022.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="cloud-containers.html">Cloud &amp; Containers</a></li>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
+        <li><a href="aiops-future.html">AIOps &amp; The Future</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Automation &amp; IaC &middot; Systems Administration &middot; 101 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

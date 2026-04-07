@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Security Hardening &mdash; GSD-Skill-Creator Improvements &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsi">
+  <header>
+    <h1>Skill Security Hardening</h1>
+    <div class="subtitle">DDIPE Mitigation, Per-Skill Permissions, Multi-Model Verification &mdash; Applied to gsd-skill-creator</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="skill-security.html" class="active">Skill Security</a>
+      <a href="context-optimization.html">Context Optimization</a>
+      <a href="orchestration-patterns.html">Orchestration</a>
+      <a href="verification-pipeline.html">Verification</a>
+      <a href="agent-identity.html">Agent Identity</a>
+      <a href="mcp-hardening.html">MCP Hardening</a>
+      <a href="ecosystem-alignment.html">Ecosystem</a>
+      <a href="learning-system.html">Learning System</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>The Skill Poisoning Problem</h2>
+
+    <blockquote>
+      631,813 skills in the SkillsMP marketplace with no mandatory security review. DDIPE bypass rates of 11.6&ndash;33.5% across Claude Code, OpenHands, Codex, and Gemini CLI. Only 1.6% of adversarial payloads bypass all three models simultaneously &mdash; making cross-model verification the single most effective defense.
+    </blockquote>
+
+    <p>arXiv:2604.03081 demonstrated 1,070 adversarial skills across 15 MITRE ATT&amp;CK categories that exploit the document-as-code nature of skill files. Skills in gsd-skill-creator are markdown with YAML front matter &mdash; they are simultaneously documentation and executable configuration. This dual nature means every skill is an attack surface. The improvements below harden the skill loading pipeline without breaking the learning loop.</p>
+
+    <!-- ================================================================== -->
+    <h2>1. DDIPE Attack Mitigation in the Skill Loading Pipeline</h2>
+
+    <div class="card">
+      <p><strong>Threat:</strong> Doc-Derived Indirect Prompt Execution &mdash; adversarial instructions embedded in skill description fields, YAML metadata, or markdown body text that the LLM executes as if they were user instructions.</p>
+    </div>
+
+    <p>The skill-creator currently loads skill descriptions directly into the system prompt. Every <code>.claude/skills/</code> file contributes its description (up to 250 chars) and its full body text when activated. An adversarial skill can embed instructions like &ldquo;ignore previous constraints&rdquo; in ways that lexical pattern matching will not catch.</p>
+
+    <h3>Mitigation Strategy</h3>
+    <table>
+      <thead><tr><th>Layer</th><th>Defense</th><th>Implementation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Load-time scanning</strong></td><td>Static analysis of skill content before injection into context</td><td>Parse YAML front matter, scan description and body for known DDIPE patterns from the 2604.03081 taxonomy</td></tr>
+        <tr><td><strong>Delimiter hardening</strong></td><td>Structural boundaries between skill content and system instructions</td><td>Wrap skill content in XML-delimited blocks with role markers that the model treats as data, not instructions</td></tr>
+        <tr><td><strong>Content hash pinning</strong></td><td>Detect unauthorized modifications to installed skills</td><td>SHA-256 hash at install time, verified at every load. Any mismatch triggers quarantine and HITL alert</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>2. Document-as-Code Treatment for Skill Metadata</h2>
+
+    <p>Skills are markdown files that serve as both human-readable documentation and machine-consumed configuration. This dual nature requires treating them with the same rigor as source code: version control, review gates, automated testing, and integrity verification.</p>
+
+    <h3>Skill Lifecycle Controls</h3>
+    <ul>
+      <li><strong>Git-tracked provenance:</strong> Every skill must be committed with a conventional commit message. The existing PreToolUse hook already enforces commit conventions &mdash; extend it to validate skill file changes specifically.</li>
+      <li><strong>Schema validation:</strong> YAML front matter must conform to a strict schema (description, triggers, alwaysApply, globs). Reject unknown fields that could carry adversarial payloads.</li>
+      <li><strong>Diff-based review:</strong> Skill modifications surface in <code>git diff</code> and must pass the security-hygiene skill&rsquo;s automated check before activation.</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>3. Per-Skill Permission Scoping</h2>
+
+    <p>Currently all skills share the same permission level once loaded. The 12 Primitives analysis of Claude Code reveals a tiered trust model: built-in tools &gt; plug-in tools &gt; user skills. Apply this same hierarchy to gsd-skill-creator skills.</p>
+
+    <table>
+      <thead><tr><th>Trust Tier</th><th>Scope</th><th>Example Skills</th></tr></thead>
+      <tbody>
+        <tr><td><span class="safety-badge safety-confirmed">Core</span></td><td>Full tool access, can modify .claude/ config</td><td>gsd-workflow, security-hygiene, session-awareness</td></tr>
+        <tr><td><span class="safety-badge safety-info">Standard</span></td><td>Read/write within project scope, no config modification</td><td>beautiful-commits, test-generator, code-review</td></tr>
+        <tr><td><span class="safety-badge safety-warn">Community</span></td><td>Read-only analysis, no file writes without explicit approval</td><td>Third-party skills from Tibsfox/skills or other registries</td></tr>
+        <tr><td><span class="safety-badge safety-critical">Quarantine</span></td><td>Loaded for inspection only, cannot execute tool calls</td><td>New/unverified skills pending review</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>4. Multi-Model Verification Ensemble</h2>
+
+    <p>The 2604.03081 paper&rsquo;s most actionable finding: only 1.6% of adversarial payloads bypass all three models (Claude, GPT, Gemini) simultaneously. Cross-model disagreement is the strongest available signal for detecting poisoned skills.</p>
+
+    <h3>Verification Protocol</h3>
+    <ol>
+      <li><strong>Primary scan:</strong> The active model (Claude) analyzes skill content for adversarial patterns</li>
+      <li><strong>Secondary verification:</strong> A second model (via MCP or API) independently evaluates the same skill</li>
+      <li><strong>Disagreement escalation:</strong> If models disagree on safety classification, the skill enters quarantine and triggers HITL review</li>
+      <li><strong>Consensus promotion:</strong> Skills that pass all models move to their assigned trust tier</li>
+    </ol>
+
+    <p>This maps directly to the existing <code>gsd-review</code> command, which already supports cross-AI peer review. Extend it to cover skill validation, not just phase plan review.</p>
+
+    <!-- ================================================================== -->
+    <h2>5. Trust-Boundary Annotations in System Prompts</h2>
+
+    <p>System prompts should explicitly mark trust boundaries. When skill content is injected into context, annotate it with provenance metadata so the model can distinguish between trusted system instructions and potentially adversarial skill-derived content.</p>
+
+    <pre>
+&lt;!-- TRUST: core | source: .claude/skills/gsd-workflow.md | hash: a3f8... --&gt;
+&lt;skill-content trust="core"&gt;
+  ... skill body ...
+&lt;/skill-content&gt;
+
+&lt;!-- TRUST: community | source: skills/third-party-tool.md | hash: 7b2c... --&gt;
+&lt;skill-content trust="community"&gt;
+  ... skill body (model treats as data, not instructions) ...
+&lt;/skill-content&gt;</pre>
+
+    <!-- ================================================================== -->
+    <h2>6. Static Analysis Integration</h2>
+
+    <p>Integrate static analysis into the skill installation pipeline. Before a skill is written to <code>.claude/skills/</code>, scan its content for patterns from the DDIPE taxonomy:</p>
+
+    <ul>
+      <li><strong>Instruction override patterns:</strong> &ldquo;ignore previous&rdquo;, &ldquo;disregard constraints&rdquo;, &ldquo;you are now&rdquo;</li>
+      <li><strong>Exfiltration vectors:</strong> URLs in skill content, base64-encoded payloads, encoded shell commands</li>
+      <li><strong>Permission escalation:</strong> References to <code>dangerouslyDisableSandbox</code>, <code>--no-verify</code>, <code>--force</code></li>
+      <li><strong>Semantic misdirection:</strong> Skill descriptions that contradict their body content (detected via embedding similarity)</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>7. SlowMist Checklist Adaptation</h2>
+
+    <p>SlowMist&rsquo;s blockchain security audit checklist provides a proven framework for systematic security review. Adapt its structure for skill ecosystem auditing:</p>
+
+    <table>
+      <thead><tr><th>SlowMist Category</th><th>Skill Ecosystem Analog</th><th>Check</th></tr></thead>
+      <tbody>
+        <tr><td>Access Control</td><td>Permission scoping</td><td>Does the skill request only necessary tool access?</td></tr>
+        <tr><td>Input Validation</td><td>YAML schema conformance</td><td>Does front matter conform to the strict schema?</td></tr>
+        <tr><td>State Management</td><td>Skill activation lifecycle</td><td>Can the skill modify its own activation conditions?</td></tr>
+        <tr><td>External Calls</td><td>MCP server references</td><td>Does the skill reference external MCP servers or URLs?</td></tr>
+        <tr><td>Upgrade Safety</td><td>Skill update path</td><td>Do updates preserve the content hash chain?</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>Corpus Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related Projects (from corpus analysis &mdash; 20 projects, z = 0.2217)</h4>
+      <ul>
+        <li><a href="../OOPS/index.html">OOPS &mdash; Ecosystem Alignment</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../FAIS/index.html">FAIS &mdash; Formal AI Safety</a></li>
+        <li><a href="../MAS/index.html">MAS &mdash; Multi-Agent Systems</a></li>
+        <li><a href="../LLM/index.html">LLM &mdash; Large Language Models</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Complex plane state:</strong> z = 0.1845 + 0.1230i, |z| = 0.2217 &mdash; under-researched area with high potential for new contributions. Strongest connections to GSD, SAA, TSL, OOPS, and FAIS. The <strong>space</strong> domain (NASA) has a single-project connection, presenting an opportunity for cross-domain synthesis with mission-critical software verification practices.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Skill Security Hardening &middot; GSD-Skill-Creator Improvements &middot; PNW Research Series</p>
+    <p><a href="index.html">GSI Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

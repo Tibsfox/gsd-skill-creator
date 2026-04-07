@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Practice &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Professional Practice</h1>
+    <div class="subtitle">On-Call, Change Management, Incident Response, Postmortems, Toil, Career Paths, Ethics</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html" class="active">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Systems administration is ultimately a human discipline. The tools change every few years, but the practices &mdash; on-call rotations, incident response, knowledge management, mentorship &mdash; have deep roots. With LOPSA&rsquo;s dissolution in 2025, preserving and transmitting this professional knowledge becomes the responsibility of every practicing sysadmin.
+    </blockquote>
+
+    <!-- ON-CALL -->
+    <h2>On-Call Best Practices</h2>
+    <p>On-call is the defining feature of systems administration work. Done well, it provides fast incident response with sustainable human cost. Done poorly, it burns out teams and degrades reliability.</p>
+    <div class="card">
+      <ul>
+        <li><strong>Rotation structure:</strong> Primary + secondary, weekly rotation, follow-the-sun for global teams</li>
+        <li><strong>Escalation paths:</strong> Clear escalation from primary to secondary to management to vendor</li>
+        <li><strong>Runbooks:</strong> Every alert links to a runbook with diagnostic steps and remediation actions</li>
+        <li><strong>Compensation:</strong> On-call time must be compensated &mdash; either financially or with time off</li>
+        <li><strong>Load balancing:</strong> Track pages per person per rotation; redistribute if imbalanced</li>
+        <li><strong>Rest after incidents:</strong> Extended incidents should trigger rest periods (follow the sun or next-day off)</li>
+      </ul>
+    </div>
+    <p>Google&rsquo;s SRE book recommends that on-call engineers handle no more than 2 events per 12-hour shift on average. More than that indicates systemic reliability problems, not personnel problems.</p>
+
+    <!-- CHANGE MANAGEMENT -->
+    <h2>ITIL Change Management</h2>
+    <p>Change management controls the lifecycle of infrastructure changes to minimize risk. The <strong>ITIL</strong> framework defines:</p>
+    <table>
+      <thead><tr><th>Change Type</th><th>Approval</th><th>Example</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Standard</strong></td><td>Pre-approved</td><td>Patching, adding a user, scaling</td><td>Low</td></tr>
+        <tr><td><strong>Normal</strong></td><td>CAB (Change Advisory Board)</td><td>New service deployment, network change</td><td>Medium</td></tr>
+        <tr><td><strong>Emergency</strong></td><td>Expedited (post-hoc CAB review)</td><td>Security patch for active exploit</td><td>High</td></tr>
+      </tbody>
+    </table>
+    <p>Modern organizations implement change management through CI/CD pipelines and GitOps: a pull request is the change request, code review is the CAB, and merge-to-main triggers the deployment. This automates approval workflows while preserving the audit trail.</p>
+
+    <!-- DOCUMENTATION -->
+    <h2>Documentation &amp; Knowledge Base</h2>
+    <p>Documentation is the institutional memory of the team. Without it, knowledge walks out the door when people leave. Essential documentation types:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Runbooks:</strong> Step-by-step procedures for common operational tasks and incident response</li>
+        <li><strong>Architecture diagrams:</strong> Network topology, service dependencies, data flow</li>
+        <li><strong>Decision records (ADRs):</strong> Why a particular technology or architecture was chosen</li>
+        <li><strong>Post-incident reviews:</strong> What happened, why, what was learned, what changed</li>
+        <li><strong>Onboarding guides:</strong> What a new team member needs to know in their first week</li>
+      </ul>
+    </div>
+    <p>Tools: <strong>Confluence</strong> (enterprise), <strong>Notion</strong> (modern), <strong>MkDocs/Docusaurus</strong> (docs-as-code), <strong>wiki.js</strong> (open source). The docs-as-code approach (Markdown in Git) is increasingly preferred because it keeps documentation in the same review workflow as code.</p>
+
+    <!-- INCIDENT RESPONSE -->
+    <h2>Incident Response</h2>
+    <p>Effective incident response follows a structured process:</p>
+    <table>
+      <thead><tr><th>Phase</th><th>Actions</th><th>Key Principle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Detection</strong></td><td>Alert fires, user report, monitoring dashboard</td><td>Fastest detection wins</td></tr>
+        <tr><td><strong>Triage</strong></td><td>Classify severity (SEV1&ndash;4), assign incident commander</td><td>Severity drives response urgency</td></tr>
+        <tr><td><strong>Mitigation</strong></td><td>Restore service ASAP (rollback, failover, scale)</td><td>Mitigate first, investigate later</td></tr>
+        <tr><td><strong>Communication</strong></td><td>Status page updates, stakeholder notifications</td><td>Silence breeds fear; over-communicate</td></tr>
+        <tr><td><strong>Resolution</strong></td><td>Root cause fix deployed and verified</td><td>Verified in production, not just staging</td></tr>
+        <tr><td><strong>Post-incident</strong></td><td>Blameless postmortem, action items tracked</td><td>Every incident improves the system</td></tr>
+      </tbody>
+    </table>
+
+    <!-- BLAMELESS POSTMORTEMS -->
+    <h2>Blameless Postmortems</h2>
+    <p>The blameless postmortem (formalized by Google SRE) focuses on system and process failures, not individual blame. The goal is learning, not punishment.</p>
+    <div class="card">
+      <p><strong>Postmortem template:</strong></p>
+      <ul>
+        <li><strong>Summary:</strong> What happened, when, impact scope</li>
+        <li><strong>Timeline:</strong> Minute-by-minute from detection to resolution</li>
+        <li><strong>Root cause:</strong> Why the failure occurred (technical and organizational)</li>
+        <li><strong>What went well:</strong> Detection speed, team coordination, tooling that helped</li>
+        <li><strong>What went wrong:</strong> Delays, tool gaps, communication failures</li>
+        <li><strong>Action items:</strong> Specific, assigned, time-bound improvements</li>
+      </ul>
+    </div>
+    <p>For deeper methodology on root cause investigation, see <a href="../RCA/software-sre.html">RCA: Software Engineering &amp; SRE</a>.</p>
+
+    <!-- TOIL ELIMINATION -->
+    <h2>Toil Elimination</h2>
+    <p>Google SRE defines <strong>toil</strong> as manual, repetitive, automatable, tactical, devoid of enduring value, and scaling linearly with service growth. SRE teams should spend no more than 50% of their time on toil; the rest goes to engineering work that reduces future toil.</p>
+    <p>Toil elimination ROI calculation: if a task takes 10 minutes, happens 5 times per week, and automation takes 8 hours to build, the breakeven is ~10 weeks. Beyond breakeven, every week returns 50 minutes. The <strong>xkcd &ldquo;Is It Worth the Time?&rdquo;</strong> chart remains the canonical reference for this calculation.</p>
+
+    <!-- CAREER PATHS -->
+    <h2>Career Paths</h2>
+    <p>The sysadmin career has evolved from a single role into a family of specializations:</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-year">Entry</span>
+        <span class="timeline-text"><strong>Junior Linux Administrator</strong> &mdash; system setup, user management, basic troubleshooting, ticket resolution</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">Mid</span>
+        <span class="timeline-text"><strong>Systems Administrator / DevOps Engineer</strong> &mdash; automation, CI/CD, infrastructure as code, monitoring</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">Senior</span>
+        <span class="timeline-text"><strong>Senior SRE / Staff Engineer</strong> &mdash; reliability architecture, SLO design, incident management, mentorship</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">Principal</span>
+        <span class="timeline-text"><strong>Platform Engineer / Principal SRE</strong> &mdash; internal developer platform design, organization-wide infrastructure strategy</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">Leadership</span>
+        <span class="timeline-text"><strong>Director of Infrastructure / VP Engineering</strong> &mdash; team building, budget, vendor management, organizational reliability culture</span>
+      </div>
+    </div>
+    <p>Certifications that carry weight: <strong>RHCSA/RHCE</strong> (Red Hat), <strong>CKA/CKAD/CKS</strong> (Kubernetes), <strong>AWS SAA/SAP</strong> (cloud), <strong>CompTIA Linux+</strong> (entry). Experience consistently outweighs certifications for hiring, but certifications validate baseline knowledge.</p>
+
+    <!-- ETHICS -->
+    <h2>LOPSA/SAGE Ethics Code</h2>
+    <p>The LOPSA Code of Ethics (adapted from SAGE) established professional standards that remain relevant despite the organization&rsquo;s dissolution:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Professionalism:</strong> Maintain and improve technical skills continuously</li>
+        <li><strong>Personal integrity:</strong> Be honest about capabilities and limitations</li>
+        <li><strong>Privacy:</strong> Respect the privacy of users; access data only as required for duty</li>
+        <li><strong>Laws and policies:</strong> Operate within legal and organizational policy boundaries</li>
+        <li><strong>Communication:</strong> Share knowledge, educate users, communicate risks clearly</li>
+        <li><strong>System integrity:</strong> Maintain system security and availability as a primary duty</li>
+        <li><strong>Education:</strong> Contribute to the profession through teaching and mentorship</li>
+      </ul>
+    </div>
+    <p>The most critical ethical obligation for a sysadmin is <strong>not abusing privileged access</strong>. Root access to production systems means access to all data, all communications, and all credentials. This trust must be earned and maintained through consistent professional behavior.</p>
+
+    <!-- MENTORSHIP -->
+    <h2>Mentorship &amp; Teaching</h2>
+    <p>With LOPSA gone, mentorship falls to individual practitioners and informal communities. Effective mentorship practices: pair on-call rotations (senior + junior), incident debriefs as teaching moments, code review of infrastructure changes, brown-bag sessions on new technologies, and conference talk encouragement. The best sysadmins are also teachers.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>11 related projects</strong> across 3 knowledge domains with 83 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>OAA</td><td>Operations &amp; Admin Automation</td><td>general</td><td>0.210</td></tr>
+        <tr><td>COK</td><td>College of Knowledge</td><td>general</td><td>0.204</td></tr>
+        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
+        <tr><td>MCS</td><td>Maritime Platform Cost Model</td><td>general</td><td>0.201</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>SYS</td><td>Systems Administration: The Spaces In Between</td><td>general</td><td>0.185</td></tr>
+        <tr><td>SCR</td><td>The Source Code Tells the Story</td><td>general</td><td>0.149</td></tr>
+        <tr><td>BRC</td><td>Black Rock City</td><td>creative</td><td>0.086</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (9), ai (1), creative (1). Complex plane: z = 0.1339 + 0.0892i, |z| = 0.1609.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+        <li><a href="history-evolution.html">History &amp; Evolution</a></li>
+        <li><a href="aiops-future.html">AIOps &amp; The Future</a></li>
+        <li><a href="../RCA/software-sre.html">RCA: Software Engineering &amp; SRE</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Professional Practice &middot; Systems Administration &middot; 83 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

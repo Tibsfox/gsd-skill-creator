@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structural Engineering &mdash; Picnic Point Parking Structure &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pps">
+  <header>
+    <h1>Picnic Point Parking Structure Feasibility</h1>
+    <div class="subtitle">Ground Level + 2-Floor Parking Structure with Overpass Integration &mdash; Snohomish County, WA</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="geotechnical.html">Geotechnical</a>
+      <a href="structural.html" class="active">Structural</a>
+      <a href="permitting.html">Permitting</a>
+      <a href="stormwater.html">Stormwater</a>
+      <a href="cost-funding.html">Cost</a>
+      <a href="transportation.html">Transit</a>
+      <a href="corpus-analysis.html">Corpus</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Module B: Structural Engineering</h2>
+
+    <blockquote>
+      Structural system selection and load analysis presented here are feasibility-level assessments for a pre-design study. All structural design must be performed by a licensed Washington State structural engineer. Drawings referenced are conceptual (30% level) and do not constitute construction documents.
+    </blockquote>
+
+    <div class="module-nav">
+      <a href="#system-selection">System Selection</a>
+      <a href="#gravity-loads">Gravity Loads</a>
+      <a href="#lateral-seismic">Lateral &amp; Seismic</a>
+      <a href="#overpass-bridge">Overpass Bridge</a>
+      <a href="#ada-circulation">ADA Circulation</a>
+      <a href="#sources">Sources</a>
+    </div>
+
+    <!-- ============================================================
+         1. STRUCTURAL SYSTEM SELECTION
+         ============================================================ -->
+    <section id="system-selection">
+      <h2>1. Structural System Selection</h2>
+
+      <p>The two primary structural systems considered for the Picnic Point parking structure are precast/prestressed concrete and cast-in-place post-tensioned concrete. Both systems are well-established in Pacific Northwest parking structure construction and are capable of meeting the seismic demands of Seismic Design Category D (confirmed at S<sub>DS</sub> = 0.829g, S<sub>D1</sub> = 0.506g per Module A). The selection between them is driven by cost, construction schedule, site access constraints, lifecycle maintenance burden, and the specific geometric requirements of the overpass tie-in bridge at Level 3.</p>
+
+      <p><a href="https://www.clarkpacific.com/" target="_blank">Clark Pacific</a> has developed the <strong>Precast Hybrid Moment Frame (PHMF)</strong> system, a post-tensioned, self-centering technology specifically designed for seismic zones. The PHMF uses unbonded post-tensioning tendons through beam-column joints that act as restoring forces after a seismic event, pulling the frame back to vertical &mdash; a fundamental advantage over conventional systems that suffer permanent deformation after significant shaking. This self-centering behavior enables <strong>immediate post-earthquake re-occupancy</strong>, a critical performance objective for a public facility serving as the primary park access point. The system eliminates the need for interior shear walls or cross-bracing, resulting in greater sight-line visibility and open floor plans that improve driver navigation and perceived safety. Clark Pacific's PHMF is PCI-Certified and designed for SDC D and E zones (Clark Pacific, 2025).</p>
+
+      <p>The benchmark project for the PHMF system is the <strong>UC Berkeley Bancroft Parking Structure</strong>: 663 stalls, full PHMF lateral system, with completion scheduled for August 2026. This project demonstrates the system's viability at a scale comparable to the Picnic Point program and provides a direct reference for cost, schedule, and performance data. Clark Pacific reports <strong>30&ndash;50% schedule savings</strong> over cast-in-place construction for large parking facilities, attributable to factory fabrication of double-tee deck panels, spandrel beams, and columns with minimal site formwork (Clark Pacific, 2025).</p>
+
+      <p><a href="https://www.schaeferinc.com/" target="_blank">Schaefer Inc</a>, a Pacific Northwest parking structure specialist, provides a detailed comparison of the two systems relevant to project selection (Schaefer, 2024):</p>
+
+      <table>
+        <thead><tr><th>Criterion</th><th>Precast Concrete</th><th>Cast-in-Place</th></tr></thead>
+        <tbody>
+          <tr><td>Initial construction cost</td><td>Lower ($22,500&ndash;$30,100/stall PNW)</td><td>Higher ($36,500&ndash;$48,600/stall PNW)</td></tr>
+          <tr><td>Construction schedule</td><td>4&ndash;5 months faster</td><td>Standard duration</td></tr>
+          <tr><td>Quality control</td><td>Plant-controlled fabrication</td><td>Field-dependent</td></tr>
+          <tr><td>Beam spacing</td><td>Varies by double-tee width</td><td>20&ndash;24 ft apart (better lighting)</td></tr>
+          <tr><td>Joint maintenance</td><td>Sealant joints every 5&ndash;7 years; potentially &gt;$100K/year after year 5</td><td>Fewer joints, lower maintenance</td></tr>
+          <tr><td>Lifecycle cost (20+ yr)</td><td>Higher (joint maintenance drives cost)</td><td>Lower (monolithic construction)</td></tr>
+        </tbody>
+      </table>
+
+      <p>The decision framework emerging from the Schaefer analysis is: <strong>precast for speed and initial cost advantage</strong>; <strong>cast-in-place for 20+ year lifecycle economy</strong>. For a county parks facility where long-term maintenance budgets are constrained and political cycles may defer maintenance funding, the lifecycle cost differential is a significant factor. The feasibility recommendation is precast concrete as the baseline system for the parking structure body, with cast-in-place considered as an alternative for the Level 3 bridge element where connection geometry may favor monolithic construction.</p>
+    </section>
+
+    <!-- ============================================================
+         2. GRAVITY & LATERAL LOAD ANALYSIS
+         ============================================================ -->
+    <section id="gravity-loads">
+      <h2>2. Gravity &amp; Lateral Load Analysis</h2>
+
+      <p>Gravity load design follows ASCE 7-22 and IBC 2021 provisions for parking structures, specifically IBC Section 406 for open parking garages. The primary load combinations include dead load (self-weight of precast double-tees, topping slab, beams, and columns), live load (40 psf uniform per IBC Table 1607.1 for passenger vehicle garages), and applicable snow load for the top (uncovered) deck. The Snohomish County ground snow load (p<sub>g</sub>) per ASCE 7-22 Figure 7.2-1 governs the top-deck design, though the open-air configuration allows for reduced exposure factors.</p>
+
+      <p>Column loads for a typical 60-foot span, 30-foot bay precast structure supporting 3 levels of parking range from approximately 200 kips (interior columns) to 500 kips (columns carrying the overpass bridge dead load). These loads flow into the geotechnical module's foundation design (Module A) and inform the cost module's structural material quantities (Module E). IBC Chapter 16 governs the structural design load combinations, while IBC Chapter 18 addresses the soils and foundations interface with Module A's geotechnical parameters.</p>
+
+      <p>The lateral force-resisting system for Seismic Design Category D must satisfy the redundancy and detailing requirements of ASCE 7-22 Chapter 12 and ACI 318-19. For precast concrete parking structures, the typical system is a combination of moment frames in one direction and shear walls in the other, with emulative or hybrid connections designed to achieve the required ductility capacity. The Clark Pacific PHMF system eliminates the need for shear walls entirely by providing self-centering moment resistance in both directions &mdash; a significant advantage for the open floor plan and sight-line requirements of a parking structure. The design base shear is determined by the site-specific seismic parameters from Module A (S<sub>DS</sub> = 0.829g, S<sub>D1</sub> = 0.506g).</p>
+    </section>
+
+    <!-- ============================================================
+         3. SEISMIC DESIGN CONSIDERATIONS
+         ============================================================ -->
+    <section id="lateral-seismic">
+      <h2>3. Seismic Design Considerations</h2>
+
+      <p>Seismic Design Category D classification imposes the most stringent requirements for connection detailing and system ductility in precast concrete structures. The Northridge earthquake (1994) demonstrated the vulnerability of precast parking structures to seismic forces, leading to fundamental changes in design philosophy reflected in current ACI 318-19 provisions. The Picnic Point structure must be designed to these post-Northridge standards, with particular attention to connection ductility, diaphragm continuity, and gravity load path redundancy. SCC 30.52F Part 300 independently confirms SDC D for the Picnic Point site.</p>
+
+      <p>The lateral force-resisting system options include special moment frames (R=8), special shear walls (R=5&ndash;6), or dual systems combining both. The Clark Pacific PHMF represents the current state-of-the-art for the moment frame approach: unbonded post-tensioning provides the self-centering restoring force, while mild steel energy dissipators at beam-column joints provide the hysteretic energy dissipation required for code-level ductility. This system was validated by the PRESSS (Precast Seismic Structural Systems) research program at UC San Diego (Priestley et al., 1999) and has been refined through two decades of commercial deployment. The key performance advantage is that post-earthquake inspection and repair costs are dramatically reduced because the structure returns to plumb &mdash; permanent drift, which is the primary driver of post-earthquake repair cost in conventional systems, is essentially eliminated.</p>
+
+      <p>Diaphragm design is a critical consideration for precast parking structures in high-seismic zones. The topped precast diaphragm must transfer inertial forces from the double-tee deck panels to the lateral force-resisting elements through a continuous system of chord reinforcement, collector elements, and panel-to-panel connections. ASCE 7-22 Section 12.10.3 provides the alternative diaphragm design procedure that has become standard practice for precast parking structures. The diaphragm must be designed for the amplified forces at re-entrant corners and at the Level 3 bridge connection point, where the geometric discontinuity introduces stress concentrations.</p>
+    </section>
+
+    <!-- ============================================================
+         4. LEVEL 3 OVERPASS BRIDGE & EXISTING OVERPASS
+         ============================================================ -->
+    <section id="overpass-bridge">
+      <h2>4. Level 3 Deck-to-Overpass Tie-In Bridge</h2>
+
+      <p>The most architecturally and structurally distinctive element of the proposed parking structure is the Level 3 deck-to-overpass bridge &mdash; a pedestrian connection from the top parking level directly to the existing BNSF overpass that provides beach access. This bridge element transforms the parking structure from a utilitarian facility into an integrated access system, eliminating the current ground-level walk from the parking lot to the overpass stairway.</p>
+
+      <p>The existing pedestrian overpass was built in the <strong>late 1970s or 1980s</strong> as one of several overpasses constructed along the BNSF corridor after fatal pedestrian collisions on the rail line. It is a <strong>steel-frame structure with concrete decking</strong> that has received no significant renovation since its original construction. The structure's age, original design loading, and current condition are critical unknowns that must be resolved before any physical connection is designed. A structural condition assessment of the existing overpass &mdash; including steel member section loss measurement, connection inspection, and concrete deck core sampling &mdash; is a prerequisite for the tie-in bridge design.</p>
+
+      <p>Comparable pedestrian overpass projects in the Puget Sound region provide cost benchmarks for this element. The <strong>2016 Snohomish County Parks Advisory Board</strong> estimated a comparable new overpass at approximately <strong>$9 million</strong>. The <strong>Carkeek Park pedestrian overpass replacement</strong> in Seattle was completed at <strong>$7.4 million</strong> (City of Seattle). The <strong>Chambers Creek Regional Park overpass</strong> in Pierce County was completed at <strong>$967,000</strong>, though that project's lower cost reflects a shorter span and simpler site conditions. For the Picnic Point project, the tie-in bridge is a shorter span than a full overpass replacement, but the connection engineering and BNSF coordination add complexity that offsets the span reduction.</p>
+
+      <p>Structural considerations for the bridge include the differential movement joint between the parking structure and the overpass (which will experience different seismic displacements due to differing dynamic properties), seismic isolation requirements at the connection, and the load path for transferring pedestrian bridge loads into both structures without introducing incompatible deformation demands. BNSF Railway coordination (Module C) is a prerequisite, as the overpass crosses BNSF's active mainline right-of-way. BNSF requires a minimum vertical clearance of <strong>21 feet 6 inches</strong> above top of rail for any new or modified structure spanning the tracks.</p>
+    </section>
+
+    <!-- ============================================================
+         5. ADA VERTICAL CIRCULATION
+         ============================================================ -->
+    <section id="ada-circulation">
+      <h2>5. ADA Vertical Circulation</h2>
+
+      <p>ADA-compliant vertical circulation between parking levels and the Level 3 overpass bridge is a fundamental design requirement governed by the Americans with Disabilities Act Accessibility Guidelines (ADAAG), the U.S. Access Board's Public Rights-of-Way Accessibility Guidelines (PROWAG), and Washington State accessibility provisions (WAC 51-50, Chapter 11). The parking structure must provide accessible routes from every parking level to the overpass bridge connection and to the ground-level park facilities.</p>
+
+      <p>The primary vertical circulation elements include an ADA-compliant elevator (minimum 80-inch by 54-inch cab for wheelchair access) and an accessible ramp or stairway system. For a 3-level structure with approximately 10&ndash;12 feet of floor-to-floor height, the elevator provides the most direct accessible route to the Level 3 bridge. The elevator tower also serves as a potential location for a structural shear wall element in the lateral force-resisting system, integrating accessibility and structural functions.</p>
+
+      <p>Accessible parking stalls must be provided on each level in accordance with IBC Table 1106.1, with van-accessible stalls on the ground level where vertical clearance is not constrained by overhead structure. The accessible route from each stall to the elevator and stairway must maintain the required clear width, slope, and surface conditions specified in ADAAG and PROWAG.</p>
+    </section>
+
+    <!-- ============================================================
+         6. COST COMPARISON — PER-STALL ECONOMICS
+         ============================================================ -->
+    <section id="cost-comparison">
+      <h2>6. Cost Comparison &mdash; Per-Stall Economics</h2>
+
+      <p>The structural system selection has direct cost implications that flow into Module E. Current per-stall cost data for the Pacific Northwest, adjusted for the Seattle metropolitan area location factor of +5.2% over national median (Mortenson Q4 2025), yields the following comparison:</p>
+
+      <table>
+        <thead><tr><th>System</th><th>Per-Stall Cost (PNW 2025&ndash;2026)</th><th>Per SF Cost (Seattle-adjusted)</th></tr></thead>
+        <tbody>
+          <tr><td>Precast concrete</td><td>$22,500&ndash;$30,100</td><td>$58&ndash;$93/SF</td></tr>
+          <tr><td>Cast-in-place post-tensioned</td><td>$36,500&ndash;$48,600</td><td>&mdash;</td></tr>
+          <tr><td>National median (all types)</td><td>$29,900 (WGI, 2024)</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+
+      <p>The national median of $29,900 per stall reported in the <cite>WGI 2024 Parking Structure Cost Outlook</cite> represents a +3.1% year-over-year increase, driven by labor cost escalation (+5.6% in Seattle) and materials cost increases (+9.1% for structural materials in the PNW, per Mortenson Q4 2025 market report). The Seattle location factor of +5.2% over national applies to all system types. These per-stall figures inform the order-of-magnitude cost estimate in Module E and provide the basis for the precast vs. cast-in-place lifecycle comparison that drives the system selection recommendation.</p>
+    </section>
+
+    <!-- ============================================================
+         SOURCES
+         ============================================================ -->
+    <section id="sources">
+      <h2>Sources</h2>
+      <ul>
+        <li>IBC. <cite>International Building Code</cite>. International Code Council. 2021. Chapters 16, 18, Section 406.</li>
+        <li>ASCE. <cite>Minimum Design Loads and Associated Criteria for Buildings and Other Structures</cite>. ASCE/SEI 7-22. 2022.</li>
+        <li>ACI. <cite>Building Code Requirements for Structural Concrete</cite>. ACI 318-19. American Concrete Institute. 2019.</li>
+        <li>PCI. <cite>PCI Design Handbook: Precast and Prestressed Concrete</cite>. 8th Edition. Precast/Prestressed Concrete Institute. 2017.</li>
+        <li>Clark Pacific. <cite>Precast Hybrid Moment Frame (PHMF) System</cite>. <a href="https://www.clarkpacific.com/" target="_blank">clarkpacific.com</a>. PCI-Certified, SDC D/E. UC Berkeley Bancroft reference project (663 stalls, completion August 2026).</li>
+        <li>Schaefer Inc. <cite>Precast vs. Cast-in-Place Parking Structure Comparison</cite>. <a href="https://www.schaeferinc.com/" target="_blank">schaeferinc.com</a>. Pacific Northwest project data. 2024.</li>
+        <li>WGI. <cite>2024 Parking Structure Cost Outlook</cite>. National median $29,900/stall, +3.1% YoY.</li>
+        <li>Mortenson. <cite>Q4 2025 Market Report</cite>. Seattle location factor +5.2%, labor +5.6%, materials +9.1%.</li>
+        <li>Priestley, M.J.N., S. Sritharan, J.R. Conley, and S. Pampanin. <cite>Preliminary Results and Conclusions from the PRESSS Five-Story Precast Concrete Test Building</cite>. PCI Journal. 1999.</li>
+        <li>U.S. Access Board. <cite>Public Rights-of-Way Accessibility Guidelines (PROWAG)</cite>. 2023.</li>
+        <li>Snohomish County. <cite>Building Code</cite>. SCC 30.52F Part 300. SDC D confirmation.</li>
+        <li>Snohomish County Parks Advisory Board. Overpass cost estimate (~$9M). 2016.</li>
+        <li>City of Seattle. Carkeek Park pedestrian overpass replacement ($7.4M).</li>
+        <li>Pierce County. Chambers Creek Regional Park overpass ($967K).</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         CORPUS CROSS-REFERENCE
+         ============================================================ -->
+    <section class="corpus-crossref">
+      <h2>Corpus Cross-Reference &mdash; Module B: Structural Engineering</h2>
+      <p class="meta">Research Co-Processor (Unison pipeline) &middot; 239-project corpus &middot; 91 cross-refs &middot; 7 passes (highest) &middot; score 0.575</p>
+
+      <h3>Key Connections</h3>
+      <table>
+        <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr></thead>
+        <tbody>
+          <tr><td>BCM</td><td><a href="../BCM/index.html">Building Construction</a></td><td>infrastructure</td><td>Strongest &mdash; structural concrete, IBC codes, construction methods</td></tr>
+          <tr><td>USGS</td><td><a href="../USGS/index.html">USGS Seismic Observatory</a></td><td>general</td><td>&ldquo;Seismic&rdquo; keyword bridge to earthquake science</td></tr>
+          <tr><td>PPP</td><td><a href="../PPP/index.html">Picnic Point Park</a></td><td>ecology</td><td>Mission 1 predecessor &mdash; overpass as shared physical element</td></tr>
+        </tbody>
+      </table>
+      <p><em>&ldquo;Design&rdquo; and &ldquo;bridge&rdquo; keywords drove the largest expansion cycles. 91 cross-refs across 7 passes represents the highest pass count of any PPS module.</em></p>
+
+      <h3>Expansion Analysis</h3>
+      <ul>
+        <li><strong>&ldquo;design&rdquo;</strong> &mdash; connected to nearly every project in the corpus that contains design methodology, inflating cross-ref count.</li>
+        <li><strong>&ldquo;bridge&rdquo;</strong> &mdash; unlocked infrastructure and transportation projects through literal bridge references.</li>
+        <li><strong>BCM (Building Construction)</strong> is the strongest infrastructure connection &mdash; the only project with significant overlap in structural engineering vocabulary.</li>
+      </ul>
+
+      <h3>Complex Plane Analysis</h3>
+      <blockquote>
+        91 cross-refs &middot; 7 passes &middot; score 0.575<br>
+        Highest cross-ref count but moderate score &mdash; breadth without depth<br>
+        Generic keywords (&ldquo;design,&rdquo; &ldquo;bridge&rdquo;) inflate connections without engineering specificity
+      </blockquote>
+      <p>The structural module's paradox: highest cross-ref count (91) but lower composite score (0.575) than the geotechnical module (0.695). The &ldquo;design&rdquo; keyword is so ubiquitous in the corpus that it generates many weak connections. The signal-to-noise ratio is lower than Module A, where novel terms like &ldquo;geotechnical&rdquo; kept the expansion focused.</p>
+
+      <h3>Knowledge Gaps</h3>
+      <ul>
+        <li><strong>Precast concrete engineering</strong> has no direct corpus parallel beyond BCM's general construction coverage.</li>
+        <li><strong>Seismic structural design</strong> connects to USGS but through seismology, not structural engineering practice.</li>
+        <li><strong>ADA/PROWAG accessibility</strong> is entirely novel to the corpus &mdash; no existing project addresses physical accessibility standards.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Picnic Point Parking Structure &mdash; Engineering Feasibility &middot; Infrastructure Cluster</p>
+    <p>Module B: Structural Engineering &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="corpus-analysis.html">Corpus Analysis</a></p>
+  </footer>
+</body>
+</html>

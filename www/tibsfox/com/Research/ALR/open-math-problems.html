@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Problems &mdash; Mathematics &mdash; Artemis Learning Resources</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alr">
+  <header>
+    <h1>Open Problems &mdash; Mathematics</h1>
+    <div class="subtitle">Riemann, Collatz, P vs NP, BSD, Navier-Stokes, Yang-Mills, Twin Primes, Goldbach, ABC, Hodge, Erd&#337;s Problems</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ai-programming.html">AI Programming</a>
+      <a href="diy-electronics.html">DIY Electronics</a>
+      <a href="study-guides.html">Study Guides</a>
+      <a href="live-expansion.html">LIVE Pages</a>
+      <a href="open-math-problems.html" class="active">Math Problems</a>
+      <a href="open-cs-problems.html">CS Problems</a>
+      <a href="open-physics-problems.html">Physics Problems</a>
+      <a href="open-science.html">DIY Science</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The great unsolved problems of mathematics, organized by Millennium Prize status and Erd&#337;s prize eligibility. The Artemis II mission research program tracks 105 Erd&#337;s problems with a combined $53K prize pool. Each problem below includes the current state of the art, known bounds, and computational approaches.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Millennium Problems</span></div>
+      <div class="stat"><span class="stat-value">105</span><span class="stat-label">Erd&#337;s Problems</span></div>
+      <div class="stat"><span class="stat-value amber">$53K</span><span class="stat-label">Erd&#337;s Pool</span></div>
+      <div class="stat"><span class="stat-value">$7M</span><span class="stat-label">Millennium Pool</span></div>
+      <div class="stat"><span class="stat-value">223</span><span class="stat-label">Corpus Links</span></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 1: Riemann Hypothesis                                 -->
+    <!-- ============================================================ -->
+
+    <h2>1. Riemann Hypothesis</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Millennium $1M</span> <span class="source-badge">OPEN</span></p>
+      <p>All non-trivial zeros of the Riemann zeta function have real part equal to 1/2.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Verified computationally:</strong> first 10<sup>13</sup> zeros all lie on the critical line (Platt, 2021)</li>
+        <li><strong>Montgomery-Dyson conjecture:</strong> zero spacing statistics match eigenvalue distributions of random Hermitian matrices (GUE)</li>
+        <li><strong>Known consequences:</strong> prime counting function error bounds, Lindel&ouml;f hypothesis, distribution of primes in arithmetic progressions</li>
+      </ul>
+      <h4>Artemis II Connection</h4>
+      <p>The RH/Montgomery-Dyson research thread explores eigenvalue spacing vs zeta zeros using GPU computation on RTX 4060 Ti. Arbitrary precision arithmetic via MPFR library for high-zero verification.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 2: Collatz Conjecture                                 -->
+    <!-- ============================================================ -->
+
+    <h2>2. Collatz Conjecture</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">OPEN</span></p>
+      <p>For any positive integer n: if n is even, divide by 2; if odd, compute 3n+1. The conjecture states all starting values eventually reach 1.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Verified computationally:</strong> all integers up to 2<sup>68</sup> (~2.95 &times; 10<sup>20</sup>) reach 1</li>
+        <li><strong>Tao (2019):</strong> proved almost all Collatz orbits attain almost boundedly low values (logarithmic density result)</li>
+        <li><strong>Known difficulty:</strong> Erd&#337;s offered $500 &mdash; &ldquo;mathematics is not yet ready for such problems&rdquo;</li>
+      </ul>
+      <h4>Computational Approach</h4>
+      <p>GPU-accelerated verification using CUDA on RTX 4060 Ti. Binary representation optimization: trailing zeros handled by bit shift, odd step is (3n+1)/2 combined. Target: extend verification frontier.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 3: P vs NP                                            -->
+    <!-- ============================================================ -->
+
+    <h2>3. P vs NP</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Millennium $1M</span> <span class="source-badge">OPEN</span> <span class="source-badge">CSP</span></p>
+      <p>Can every problem whose solution can be verified in polynomial time also be solved in polynomial time?</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Consensus:</strong> most complexity theorists believe P &ne; NP (Gasarch survey: 81%)</li>
+        <li><strong>Barriers:</strong> relativization (Baker-Gill-Solovay), natural proofs (Razborov-Rudich), algebrization (Aaronson-Wigderson)</li>
+        <li><strong>Practical impact:</strong> cryptography, optimization, AI planning all depend on this separation</li>
+      </ul>
+      <h4>CS Connection</h4>
+      <p>The open CS problems module explores related questions about agentic reasoning limits and code generation correctness, both of which touch complexity-theoretic boundaries.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 4: BSD Conjecture                                     -->
+    <!-- ============================================================ -->
+
+    <h2>4. Birch and Swinnerton-Dyer Conjecture</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Millennium $1M</span> <span class="source-badge">OPEN</span></p>
+      <p>The rank of an elliptic curve over the rationals equals the order of vanishing of its L-function at s = 1.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Rank 0 and 1:</strong> proved by Gross-Zagier and Kolyvagin (1980s)</li>
+        <li><strong>Higher ranks:</strong> wide open; largest known rank is 29 (Elkies, 2024 update)</li>
+        <li><strong>Computational evidence:</strong> extensive numerical verification for curves of moderate conductor</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 5: Navier-Stokes                                      -->
+    <!-- ============================================================ -->
+
+    <h2>5. Navier-Stokes Existence and Smoothness</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Millennium $1M</span> <span class="source-badge">OPEN</span></p>
+      <p>Do smooth solutions to the 3D incompressible Navier-Stokes equations always exist, and do they remain smooth for all time?</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>2D case:</strong> solved (Ladyzhenskaya, 1960s) &mdash; smooth solutions exist globally</li>
+        <li><strong>3D case:</strong> open; partial results for small data, short time, or with additional regularity</li>
+        <li><strong>Tao (2016):</strong> constructed finite-time blowup for an averaged version of the equations</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 6: Yang-Mills                                         -->
+    <!-- ============================================================ -->
+
+    <h2>6. Yang-Mills Mass Gap</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Millennium $1M</span> <span class="source-badge">OPEN</span></p>
+      <p>Prove that quantum Yang-Mills theory exists on R<sup>4</sup> and has a positive mass gap.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Lattice QCD:</strong> numerical evidence strongly supports the mass gap</li>
+        <li><strong>Constructive QFT:</strong> rigorous construction exists in 2D and 3D; 4D remains open</li>
+        <li><strong>Physical evidence:</strong> glueball mass spectra from lattice calculations agree with experimental bounds</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 7: Twin Primes                                        -->
+    <!-- ============================================================ -->
+
+    <h2>7. Twin Prime Conjecture</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">OPEN</span></p>
+      <p>There are infinitely many pairs of primes that differ by 2 (twin primes: 3&ndash;5, 5&ndash;7, 11&ndash;13, ...).</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Zhang (2013):</strong> proved infinitely many prime pairs with gap &le; 70,000,000</li>
+        <li><strong>Maynard-Tao (2014):</strong> reduced gap bound to 246 using Selberg sieve optimization</li>
+        <li><strong>Polymath8b:</strong> current best is gap &le; 246 (unconditionally); gap &le; 6 under Elliott-Halberstam</li>
+        <li><strong>Gap of 2:</strong> remains open and may require fundamentally new techniques</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 8: Goldbach                                           -->
+    <!-- ============================================================ -->
+
+    <h2>8. Goldbach Conjecture</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">OPEN</span></p>
+      <p>Every even integer greater than 2 can be expressed as the sum of two primes.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Ternary Goldbach:</strong> proved by Helfgott (2013) &mdash; every odd integer &gt; 5 is the sum of three primes</li>
+        <li><strong>Binary Goldbach:</strong> verified computationally to 4 &times; 10<sup>18</sup></li>
+        <li><strong>Chen (1966):</strong> every sufficiently large even number is the sum of a prime and a semiprime (product of at most two primes)</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 9: ABC Conjecture                                     -->
+    <!-- ============================================================ -->
+
+    <h2>9. ABC Conjecture</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Disputed</span> <span class="source-badge">OPEN</span></p>
+      <p>For coprime positive integers a + b = c, the product of distinct prime factors of abc is usually not much smaller than c.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Mochizuki (2012):</strong> claimed proof via Inter-universal Teichm&uuml;ller theory (IUT); 600+ pages</li>
+        <li><strong>Controversy:</strong> proof remains disputed; Scholze and Stix identified a gap in Corollary 3.12 (2018)</li>
+        <li><strong>Published (2021):</strong> PRIMS journal accepted the paper, but mathematical community consensus remains divided</li>
+        <li><strong>Implications if true:</strong> would resolve Fermat-Catalan, Szpiro, and many other conjectures</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 10: Hodge Conjecture                                  -->
+    <!-- ============================================================ -->
+
+    <h2>10. Hodge Conjecture</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Millennium $1M</span> <span class="source-badge">OPEN</span></p>
+      <p>Every Hodge class on a projective complex algebraic variety is a rational linear combination of classes of algebraic cycles.</p>
+      <h4>Current State</h4>
+      <ul>
+        <li><strong>Known cases:</strong> true for divisors (Lefschetz 1-1 theorem) and in dimension &le; 3</li>
+        <li><strong>Counterexample attempts:</strong> Grothendieck generalized Hodge conjecture has known counterexamples</li>
+        <li><strong>Approach:</strong> heavily algebraic geometry; connects to motives, derived categories, and intersection theory</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ERDOS PROBLEMS                                                -->
+    <!-- ============================================================ -->
+
+    <h2>Erd&#337;s Prize Problems</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">105 Tracked</span> <span class="source-badge">ERDOS-TRACKER.md</span></p>
+      <p>Paul Erd&#337;s offered cash prizes for solutions to problems he considered important. The Artemis II mission tracks 105 prize-eligible problems in ERDOS-TRACKER.md at the repository root.</p>
+      <h4>Prize Distribution</h4>
+      <table>
+        <thead><tr><th>Prize Amount</th><th>Count</th><th>Example Problem</th></tr></thead>
+        <tbody>
+          <tr><td>$10,000</td><td>1</td><td>Erd&#337;s-Tur&aacute;n conjecture on additive bases</td></tr>
+          <tr><td>$5,000</td><td>3</td><td>Erd&#337;s conjecture on arithmetic progressions</td></tr>
+          <tr><td>$1,000</td><td>12</td><td>Various graph theory and combinatorics problems</td></tr>
+          <tr><td>$500</td><td>28</td><td>Collatz conjecture, assorted number theory</td></tr>
+          <tr><td>$250</td><td>31</td><td>Combinatorial and graph-theoretic problems</td></tr>
+          <tr><td>$100</td><td>30</td><td>Various problems across discrete mathematics</td></tr>
+        </tbody>
+      </table>
+      <h4>Tracking Method</h4>
+      <p>Each problem in ERDOS-TRACKER.md includes: problem statement, prize amount, current best known bounds, references, and status (open/partially resolved/resolved). GPU computation targets Collatz verification and prime gap analysis.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+
+    <div class="card">
+      <p>Pipeline analysis identified 223 related projects in the general domain. The OPEN project (|z| = 0.438) is the strongest direct connection. Aggregate position <strong>z = 0.167 + 0.113i</strong> (|z| = 0.202).</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>OPEN</td><td>Unsolved Problems &amp; Open Research</td><td>General</td><td>Primary open problems hub</td></tr>
+        <tr><td>CMH</td><td>The Computational Mesh</td><td>General</td><td>Computational verification methods</td></tr>
+        <tr><td>HPC</td><td>High Performance Computing</td><td>General</td><td>GPU computation for number theory</td></tr>
+        <tr><td>ABM</td><td>A Beautiful Mind</td><td>General</td><td>Mathematical biography, Nash equilibria</td></tr>
+        <tr><td>CSP</td><td>Computer Science &amp; Programming</td><td>General</td><td>P vs NP, complexity theory</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../OPEN/index.html">OPEN &mdash; Unsolved Problems</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+        <li><a href="../CSP/index.html">CSP &mdash; Computer Science</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Open Problems &mdash; Mathematics &middot; Artemis Learning Resources &middot; 10 problems + 105 Erd&#337;s &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

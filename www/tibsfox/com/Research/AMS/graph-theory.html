@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Theory &mdash; Artemis Math &amp; Science</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ams">
+  <header>
+    <h1>Graph Theory</h1>
+    <div class="subtitle">DAGs, Topological Sort, Knowledge Graphs, ShieldNet &mdash; Artemis Math &amp; Science</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="information-theory.html">Info Theory</a>
+      <a href="complex-analysis.html">Complex Analysis</a>
+      <a href="graph-theory.html" class="active">Graph Theory</a>
+      <a href="optimization.html">Optimization</a>
+      <a href="probability-statistics.html">Probability</a>
+      <a href="dynamical-systems.html">Dynamical Systems</a>
+      <a href="control-theory.html">Control Theory</a>
+      <a href="signal-processing.html">Signal Processing</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Graph theory provides the structural backbone for agentic systems &mdash; from DAG-based task scheduling to knowledge graphs that power retrieval-augmented generation. Every dependency chain, every agent hierarchy, and every trust boundary is a graph.
+    </blockquote>
+
+    <!-- MODULE OVERVIEW -->
+
+    <h2>Module Overview</h2>
+
+    <div class="card">
+      <p>This module covers five graph-theoretic structures that appear throughout the agentic technology research: directed acyclic graphs for wave-based task execution, topological sorting for dependency resolution, knowledge graphs in LightRAG&rsquo;s entity voting system, hierarchical agent organization as DAGs, and ShieldNet&rsquo;s network guardrail graph filtering.</p>
+    </div>
+
+    <!-- KEY MATHEMATICAL CONCEPTS -->
+
+    <h2>Key Mathematical Concepts</h2>
+
+    <h3>Directed Acyclic Graphs (DAGs)</h3>
+    <div class="formula-block">
+      G = (V, E) where E &sube; V &times; V<br>
+      Acyclic: no path v<sub>1</sub> &rarr; v<sub>2</sub> &rarr; ... &rarr; v<sub>1</sub><br><br>
+      Wave scheduling: W<sub>k</sub> = {v &isin; V : all predecessors &isin; &cup;<sub>i&lt;k</sub> W<sub>i</sub>}
+    </div>
+    <p>Wave-based execution in gsd-skill-creator partitions a DAG into waves. Each wave contains tasks whose predecessors all completed in earlier waves. This is the mathematical foundation of the Gastown convoy model &mdash; 50+ projects can execute in parallel within a wave because they share no dependencies.</p>
+
+    <h3>Topological Sort</h3>
+    <div class="formula-block">
+      Given DAG G = (V, E), find ordering &sigma; : V &rarr; {1,...,|V|}<br>
+      such that (u,v) &isin; E &rArr; &sigma;(u) &lt; &sigma;(v)<br><br>
+      Algorithm: Kahn&rsquo;s (BFS) or DFS-based, O(|V| + |E|)
+    </div>
+    <p>Topological sorting linearizes task dependencies into a valid execution order. The GSD workflow uses this to determine which phases can run and which are blocked. Multiple valid topological orderings exist for most DAGs &mdash; wave-based scheduling selects the one that maximizes parallelism.</p>
+
+    <h3>Knowledge Graphs and Entity Voting</h3>
+    <div class="formula-block">
+      KG = (E, R, T) where:<br>
+      E = entities, R = relations, T = triples (e<sub>1</sub>, r, e<sub>2</sub>)<br><br>
+      LightRAG voting: score(e) = &sum;<sub>t &isin; T(e)</sub> relevance(t, query)
+    </div>
+    <p>LightRAG builds a knowledge graph layer above vector embeddings. Entities vote on relevance through their relation triples &mdash; an entity with many high-relevance connections to the query wins. This graph structure captures semantic relationships that flat vector similarity misses.</p>
+
+    <h3>Agent Hierarchy as DAG</h3>
+    <p>OrgAgent&rsquo;s three-layer corporate hierarchy (executive &rarr; department &rarr; worker) is a DAG where edges represent delegation. The 102.73% improvement over flat MAS on SQuAD 2.0 comes from structured information routing through the graph rather than broadcast to all agents. Each level in the hierarchy filters and focuses the task.</p>
+
+    <h3>ShieldNet Graph Filtering</h3>
+    <p>Network guardrails model trust relationships as a graph where nodes are agents and edges carry trust scores. ShieldNet filters communication by requiring minimum trust weight on the path between sender and receiver. Graph cut algorithms identify the minimum set of edges to sever to isolate a compromised agent.</p>
+
+    <!-- CONNECTIONS TO AGENTIC TECHNOLOGIES -->
+
+    <h2>Connections to Agentic Technologies</h2>
+
+    <div class="card">
+      <ul>
+        <li><strong>GSD wave execution:</strong> Phases execute in topologically-sorted waves, maximizing parallelism</li>
+        <li><strong>Gastown convoy:</strong> 50+ projects as DAG nodes, sling-dispatch assigns work along edges</li>
+        <li><strong>College of Knowledge:</strong> COK organizes curriculum as a knowledge graph (|z| = 0.204)</li>
+        <li><strong>LightRAG entity voting:</strong> Graph-aware retrieval outperforms flat vector search for cross-reference queries</li>
+        <li><strong>MCP trust boundaries:</strong> Zero-trust agent architectures model allowed interactions as graph edges</li>
+      </ul>
+    </div>
+
+    <!-- CORPUS CROSS-REFERENCE -->
+
+    <h2>Corpus Cross-Reference</h2>
+
+    <p>225 projects identified across 2 knowledge domains: general (223), ai (2). 8 keyword matches.</p>
+
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>|z|</th></tr></thead>
+      <tbody>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>COK</td><td>College of Knowledge</td><td>general</td><td>0.204</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>PIN</td><td>The Post-Industrial Network</td><td>general</td><td>0.188</td></tr>
+        <tr><td>MST</td><td>Global Telescope Mesh Network</td><td>general</td><td>0.186</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>general</td><td>0.183</td></tr>
+      </tbody>
+    </table>
+
+    <div class="formula-block">
+      Complex plane state: z = 0.1672 + 0.1135i<br>
+      |z| = 0.2021 (magnitude &mdash; research depth)<br>
+      arg(z) = 0.5964 rad (phase &mdash; breadth/depth balance)
+    </div>
+
+    <p><strong>Knowledge gaps:</strong> 165 related projects have shallow coverage. Network concepts (MST, PIN) connect to graph theory but have not been formally linked. The Cartoon Network project (CNA, |z| = 0.109) appears as a keyword match for &ldquo;network&rdquo; but represents a different domain entirely.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="optimization.html">Optimization &mdash; greedy vs optimal scheduling</a></li>
+        <li><a href="control-theory.html">Control Theory &mdash; feedback loop structure</a></li>
+        <li><a href="dynamical-systems.html">Dynamical Systems &mdash; network synchronization</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Module 3: Graph Theory &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

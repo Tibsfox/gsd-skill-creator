@@ -1,0 +1,401 @@
+/* APD — Artemis Papers Deep Dive
+   Academic palette: deep navy, journal cream, citation blue, highlight gold
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --apd-navy: #1E3A5F;
+  --apd-navy-dark: #0F1D30;
+  --apd-navy-mid: #2A4A6F;
+  --apd-cream: #FDF6E3;
+  --apd-cream-dark: #F5EDDA;
+  --apd-blue: #2563EB;
+  --apd-blue-light: #DBEAFE;
+  --apd-blue-dark: #1D4ED8;
+  --apd-gold: #CA8A04;
+  --apd-gold-light: #FEF9C3;
+  --apd-gold-dark: #A16207;
+  --apd-emerald: #059669;
+  --apd-emerald-light: #D1FAE5;
+  --apd-red: #DC2626;
+  --apd-red-light: #FEE2E2;
+  --apd-violet: #7C3AED;
+  --apd-violet-light: #EDE9FE;
+  --apd-slate-100: #F1F5F9;
+  --apd-slate-200: #E2E8F0;
+  --apd-slate-300: #CBD5E1;
+  --apd-slate-500: #64748B;
+  --apd-slate-700: #334155;
+  --apd-slate-900: #0F172A;
+
+  --page-bg: var(--apd-cream);
+  --page-text: var(--apd-slate-900);
+  --page-text-light: var(--apd-slate-500);
+  --link: var(--apd-blue);
+  --link-hover: var(--apd-blue-dark);
+  --accent: var(--apd-blue);
+  --accent-light: var(--apd-blue-light);
+  --accent-dark: var(--apd-navy);
+  --card-bg: #FFFFFF;
+  --card-border: var(--apd-slate-200);
+  --card-shadow: rgba(30, 58, 95, 0.08);
+  --border: var(--apd-slate-200);
+  --content-width: 58rem;
+}
+
+/* 2. BODY */
+
+body {
+  background: var(--apd-cream) !important;
+  color: var(--apd-slate-900) !important;
+}
+
+/* 3. HEADER */
+
+header {
+  background: linear-gradient(135deg, #0A1628 0%, var(--apd-navy) 35%, #1E3A5F 65%, #162D4A 100%);
+  color: white;
+  padding: 2.5rem 2rem;
+  border-bottom: 3px solid var(--apd-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 40%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
+              radial-gradient(ellipse at 75% 30%, rgba(202, 138, 4, 0.10) 0%, transparent 40%),
+              radial-gradient(ellipse at 50% 80%, rgba(5, 150, 105, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+header .subtitle {
+  color: rgba(219, 234, 254, 0.85);
+  font-size: 1rem;
+}
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+header nav a {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+header nav a:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+header nav a.active {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--apd-navy);
+  font-weight: 600;
+}
+
+/* 4. TYPOGRAPHY */
+
+h2 {
+  color: var(--apd-navy);
+  border-bottom: 2px solid var(--apd-gold);
+  padding-bottom: 0.4rem;
+}
+h3 { color: var(--apd-blue-dark); }
+h4 { color: var(--apd-slate-700); }
+
+/* 5. BLOCKQUOTE */
+
+blockquote {
+  border-left: 3px solid var(--apd-gold);
+  background: var(--apd-gold-light);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--apd-navy-mid);
+}
+
+/* 6. BADGES */
+
+.paper-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  color: white;
+}
+.badge-security { background: var(--apd-red); }
+.badge-defense { background: var(--apd-gold-dark); color: white; }
+.badge-reasoning { background: var(--apd-blue); }
+.badge-code { background: var(--apd-emerald); }
+.badge-hallucination { background: var(--apd-violet); }
+.badge-context { background: #0891B2; }
+.badge-social { background: #DB2777; }
+
+.cluster-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+}
+.cluster-security { background: var(--apd-red-light); color: #991B1B; }
+.cluster-defense { background: var(--apd-gold-light); color: var(--apd-gold-dark); }
+.cluster-reasoning { background: var(--apd-blue-light); color: var(--apd-blue-dark); }
+.cluster-code { background: var(--apd-emerald-light); color: #065F46; }
+.cluster-hallucination { background: var(--apd-violet-light); color: #5B21B6; }
+.cluster-context { background: #ECFDF5; color: #047857; }
+.cluster-social { background: #FDF2F8; color: #9D174D; }
+
+.arxiv-id {
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  font-size: 0.82rem;
+  color: var(--apd-blue);
+  font-weight: 600;
+}
+
+/* 7. TABLE */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+th {
+  background: var(--apd-navy);
+  color: white;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--apd-slate-200);
+  font-size: 0.88rem;
+}
+tr:nth-child(even) { background: var(--apd-slate-100); }
+tr:hover { background: rgba(37, 99, 235, 0.06); }
+
+/* 8. CATEGORY GRID & CARDS */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.category-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--apd-slate-200);
+  border-radius: 8px;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px var(--card-shadow);
+  border-left: 3px solid var(--apd-gold);
+}
+.category-card:hover {
+  border-color: var(--apd-blue);
+  border-left-color: var(--apd-blue);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  transform: translateY(-1px);
+}
+.category-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+}
+.category-card p {
+  margin: 0.3rem 0;
+  font-size: 0.82rem;
+  color: var(--apd-slate-500);
+}
+
+.paper-card {
+  background: var(--card-bg);
+  border: 1px solid var(--apd-slate-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px var(--card-shadow);
+  border-left: 3px solid var(--apd-blue);
+}
+.paper-card.external-link {
+  border-left-color: var(--apd-gold);
+  background: var(--apd-cream);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--apd-slate-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+/* 9. STATS RIBBON */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.stat {
+  background: white;
+  border: 1px solid var(--apd-slate-200);
+  border-radius: 6px;
+  padding: 0.8rem;
+  text-align: center;
+}
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--apd-blue);
+}
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--apd-slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+.stat-value.gold { color: var(--apd-gold); }
+.stat-value.emerald { color: var(--apd-emerald); }
+.stat-value.navy { color: var(--apd-navy); }
+.stat-value.red { color: var(--apd-red); }
+
+/* 10. KEY NUMBERS */
+
+.key-number {
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  font-weight: 700;
+  color: var(--apd-blue);
+}
+.key-number.warn { color: var(--apd-gold); }
+.key-number.critical { color: var(--apd-red); }
+.key-number.confirmed { color: var(--apd-emerald); }
+
+/* 11. SYNTHESIS SECTION */
+
+.synthesis {
+  background: var(--apd-cream-dark);
+  border: 1px solid var(--apd-gold);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+.synthesis h3 {
+  color: var(--apd-navy);
+  margin-top: 0;
+}
+
+/* 12. PRE/CODE */
+
+pre {
+  background: var(--apd-navy-dark);
+  color: var(--apd-blue-light);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--apd-gold);
+}
+code {
+  background: var(--apd-blue-light);
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  color: var(--apd-blue-dark);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* 13. CROSS-REFERENCES */
+
+.cross-links {
+  background: white;
+  border: 1px solid var(--apd-slate-200);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  color: var(--apd-blue-dark);
+}
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--apd-blue-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  color: var(--apd-blue-dark);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: var(--apd-slate-200); text-decoration: none; }
+
+/* 14. CORPUS CROSS-REF */
+
+.corpus-refs {
+  background: var(--apd-cream-dark);
+  border: 1px solid var(--apd-slate-300);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.corpus-refs h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  color: var(--apd-navy);
+}
+.corpus-refs .ref-tag {
+  display: inline-block;
+  background: var(--apd-gold-light);
+  color: var(--apd-gold-dark);
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0.15rem;
+}
+
+/* 15. FOOTER */
+
+footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--apd-slate-500);
+  border-top: 1px solid var(--apd-slate-200);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+footer a { color: var(--apd-blue); }
+
+/* 16. RESPONSIVE */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .category-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Agents &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Code Agents &mdash; Review, Psychometrics, Training &amp; Bounded Complexity</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html" class="active">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Code Agents</h2>
+
+    <blockquote>
+      Four papers examining AI agents that write, review, and reason about code: the gap between industry claims and empirical reality for code review agents, psychometric profiling that predicts task-level agent performance (ICLR 2026), STITCH training reaching 63% on SWE-bench, and Profile-Then-Reason for managing semantic complexity in tool-augmented code agents. Together they calibrate expectations for what code agents can and cannot reliably do.
+    </blockquote>
+
+    <!-- Key Numbers -->
+    <h2>Key Numbers</h2>
+
+    <div class="card">
+      <p><span class="key-number confirmed">63%</span> &mdash; SWE-bench performance from STITCH process-aware training (2604.00824)</p>
+      <p><span class="key-number confirmed">78%</span> &mdash; task-level prediction accuracy from psychometric profiling (2604.00594)</p>
+      <p><span class="key-number warn">O(n!) &rarr; O(k!)</span> &mdash; decision space reduction from Profile-Then-Reason (2604.04131)</p>
+      <p><span class="key-number">6</span> &mdash; psychometric capability dimensions: comprehension, navigation, API, testing, debugging, refactoring (2604.00594)</p>
+      <p><span class="key-number">5</span> &mdash; STITCH training phases: gather, hypothesize, implement, integrate feedback, refine (2604.00824)</p>
+    </div>
+
+    <!-- Maturity Comparison Table -->
+    <h2>Code Agent Maturity Levels</h2>
+
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Capability</th><th>Paper</th><th>Reliability</th><th>Human Oversight</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Pattern matching (style, anti-patterns)</td><td>2604.03196</td><td>High</td><td>Minimal</td></tr>
+        <tr><td>2</td><td>Task routing via psychometrics</td><td>2604.00594</td><td>78% accurate</td><td>Escalation on mismatch</td></tr>
+        <tr><td>3</td><td>Process-aware debugging</td><td>2604.00824</td><td>63% SWE-bench</td><td>Review required</td></tr>
+        <tr><td>4</td><td>Bounded tool complexity</td><td>2604.04131</td><td>Research frontier</td><td>Architecture-dependent</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Papers</h2>
+
+    <!-- Paper 1 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">Reality Gap</span></div>
+      <h3>Code Review Agents: Industry Claims vs. Empirical Reality</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.03196" target="_blank"><span class="arxiv-id">arXiv:2604.03196</span></a><br>
+      <strong>Categories:</strong> cs.SE, cs.AI &middot; <strong>Date:</strong> April 2026</p>
+      <p><strong>Key Finding:</strong> A systematic evaluation of code review agents reveals a significant gap between industry marketing claims and empirical performance. While vendors claim &ldquo;human-level code review,&rdquo; controlled studies show agents consistently miss: (1) architectural design issues that require system-level context, (2) subtle concurrency bugs that depend on execution ordering, and (3) security vulnerabilities that require understanding of data flow across module boundaries.</p>
+      <p><strong>Where Agents Excel:</strong> Style consistency, API usage patterns, documentation completeness, and known anti-pattern detection. These are the categories where pattern-matching on local context is sufficient.</p>
+      <p><strong>Implication:</strong> Code review agents are best deployed as first-pass filters that handle the mechanical aspects of review, freeing human reviewers to focus on architectural, security, and concurrency issues. Claims of autonomous code review are premature by the paper&rsquo;s measurements.</p>
+    </div>
+
+    <!-- Paper 2 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">ICLR 2026</span></div>
+      <h3>Agent Psychometrics: Task-Level Performance Prediction</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.00594" target="_blank"><span class="arxiv-id">arXiv:2604.00594</span></a></p>
+      <p><strong>Key Finding:</strong> Adapts psychometric methods from educational testing to predict agent performance on specific tasks <em>before execution</em>. By profiling an agent&rsquo;s capabilities across a standardized battery (analogous to IQ subtests), the framework predicts whether a given agent will succeed on a novel task with 78% accuracy. This enables pre-flight task routing &mdash; assigning tasks to agents whose profiles match the required capability dimensions.</p>
+      <p><strong>Capability Dimensions:</strong> The psychometric battery measures: code comprehension, multi-file navigation, API integration, test generation, debugging, and refactoring. Each dimension is scored independently, producing a capability profile rather than a single aggregate score.</p>
+      <p><strong>Implication:</strong> Psychometric profiling transforms agent selection from trial-and-error to evidence-based routing. For multi-agent systems, this enables optimal task allocation based on measured capability rather than assumed capability. Accepted at ICLR 2026.</p>
+    </div>
+
+    <!-- Paper 3 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">SWE-bench</span></div>
+      <h3>STITCH: Training for 63% SWE-bench Performance</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.00824" target="_blank"><span class="arxiv-id">arXiv:2604.00824</span></a></p>
+      <p><strong>Key Finding:</strong> STITCH (Structured Training for Integrated Tool-Chain Handling) is a training methodology that achieves 63% on SWE-bench &mdash; a significant improvement over prior methods. The key innovation is training on structured traces that include not just the final code patch but the entire tool-use trajectory: file exploration, test execution, error diagnosis, and iterative refinement. This teaches the model the <em>process</em> of software engineering, not just the product.</p>
+      <p><strong>Training Architecture:</strong> STITCH generates training data from expert trajectories that are decomposed into: (1) information gathering phase, (2) hypothesis formation, (3) implementation attempt, (4) test feedback integration, and (5) refinement. Each phase is separately supervised, creating a curriculum that matches the natural structure of debugging work.</p>
+      <p><strong>Implication:</strong> Process-aware training significantly outperforms outcome-only training for software engineering tasks. The 63% SWE-bench result suggests that the ceiling for code agents is substantially higher than current production systems achieve, limited more by training methodology than model capability.</p>
+    </div>
+
+    <!-- Paper 4 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">Complexity Bounds</span></div>
+      <h3>Profile-Then-Reason: Bounded Semantic Complexity</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.04131" target="_blank"><span class="arxiv-id">arXiv:2604.04131</span></a></p>
+      <p><strong>Key Finding:</strong> Tool-augmented agents face a combinatorial explosion in semantic complexity as the number of available tools increases. Profile-Then-Reason addresses this by first profiling the task to estimate its semantic complexity, then selecting a minimal tool subset sufficient for the task. This bounded-complexity approach prevents the overthinking loops documented in 2602.14798 while maintaining task completion rates.</p>
+      <p><strong>Profiling Mechanism:</strong> The system extracts semantic features from the task description (required operations, data types, output format) and matches them against tool capability profiles. Tools outside the matched set are hidden from the agent, reducing the decision space from O(n!) to O(k!) where k &lt;&lt; n.</p>
+      <p><strong>Implication:</strong> Profile-Then-Reason connects directly to the MCP overthinking problem: by reducing the visible tool set, agents make faster and more reliable decisions. This is the agent-side complement to ShieldNet&rsquo;s network-side guardrails &mdash; reducing attack surface and computational waste simultaneously.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SYNTHESIS                                                     -->
+    <!-- ============================================================ -->
+
+    <div class="synthesis">
+      <h3>Synthesis: The Code Agent Maturity Model</h3>
+      <p>These four papers define a maturity model for code agent deployment:</p>
+      <ol>
+        <li><strong>Level 1 &mdash; Pattern Matching</strong> (2604.03196): Current production code review agents. Reliable for style, API patterns, known anti-patterns. Unreliable for architecture, concurrency, cross-module security.</li>
+        <li><strong>Level 2 &mdash; Task Routing</strong> (2604.00594): Psychometric profiling enables matching tasks to agent capabilities. 78% prediction accuracy means 1-in-5 tasks will still be misrouted, requiring human oversight.</li>
+        <li><strong>Level 3 &mdash; Process Awareness</strong> (2604.00824): STITCH-style training teaches the debugging process, not just outcomes. 63% SWE-bench shows the potential; the remaining 37% likely requires architectural reasoning beyond current capabilities.</li>
+        <li><strong>Level 4 &mdash; Bounded Complexity</strong> (2604.04131): Profile-Then-Reason manages the tool proliferation problem. Without complexity bounds, more tools paradoxically reduces performance (overthinking).</li>
+      </ol>
+      <p>The practical guideline: deploy code agents at Level 1 for all reviews, Level 2 for task routing in multi-agent systems, and treat Levels 3&ndash;4 as the near-term research frontier that will define the next generation of production systems.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (8 projects, 245-project corpus)</h4>
+      <span class="ref-tag">SCR &mdash; Source Code Review</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+      <span class="ref-tag">HPC &mdash; High Performance Computing</span>
+      <span class="ref-tag">TSL &mdash; Tessl Review</span>
+      <span class="ref-tag">GSI &mdash; GSD Improvements</span>
+      <span class="ref-tag">SAA &mdash; Skills, Agents &amp; Teams</span>
+      <span class="ref-tag">MAS &mdash; Multi-Agent Systems</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- REVIEW CAPABILITY BREAKDOWN                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Code Review Capability Breakdown</h2>
+
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Agent Reliability</th><th>Requires</th><th>Production Ready?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Style consistency</td><td>High</td><td>Local context</td><td>Yes</td></tr>
+        <tr><td>API usage patterns</td><td>High</td><td>Local context + docs</td><td>Yes</td></tr>
+        <tr><td>Documentation completeness</td><td>High</td><td>Local context</td><td>Yes</td></tr>
+        <tr><td>Known anti-patterns</td><td>High</td><td>Pattern matching</td><td>Yes</td></tr>
+        <tr><td>Architectural design issues</td><td>Low</td><td>System-level context</td><td>No</td></tr>
+        <tr><td>Concurrency bugs</td><td>Low</td><td>Execution ordering</td><td>No</td></tr>
+        <tr><td>Cross-module security</td><td>Low</td><td>Data flow analysis</td><td>No</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================================================ -->
+    <!-- RELATED APD CLUSTERS                                          -->
+    <!-- ============================================================ -->
+
+    <div class="cross-links">
+      <h4>Related APD Clusters</h4>
+      <ul>
+        <li><a href="mcp-security-papers.html">MCP Security &mdash; Overthinking loops (658x) solved by Profile-Then-Reason</a></li>
+        <li><a href="supply-chain-defense.html">Supply-Chain &mdash; Skill degradation benchmarking for code tools</a></li>
+        <li><a href="agent-reasoning.html">Agent Reasoning &mdash; SCRAT verification applicable to code agent traces</a></li>
+        <li><a href="hallucination-evaluation.html">Hallucination &mdash; BAS confidence scoring for code generation</a></li>
+      </ul>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series</h4>
+      <ul>
+        <li><a href="../SCR/index.html">SCR &mdash; Source Code Review</a></li>
+        <li><a href="../GSI/index.html">GSI &mdash; GSD Improvements</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../TSL/index.html">TSL &mdash; Tessl Skill Review</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; Code Agents &middot; 4 papers</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

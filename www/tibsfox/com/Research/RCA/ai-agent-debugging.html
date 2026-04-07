@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Debugging &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>AI Agent Debugging</h1>
+    <div class="subtitle">AgentRx, OpenRCA, AgentDebug, Failure Taxonomy, Critical Step Identification</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html" class="active">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      When the system under investigation is itself an AI agent, RCA enters uncharted territory. Non-deterministic reasoning chains, hallucinated tool calls, and emergent multi-step failures demand fundamentally new approaches. Three research threads &mdash; AgentRx, OpenRCA, and AgentDebug &mdash; are defining this frontier.
+    </blockquote>
+
+    <!-- AGENTRX -->
+    <h2>AgentRx &mdash; Microsoft Research</h2>
+    <p><strong>AgentRx</strong> (Microsoft Research, 2026) introduces a <strong>4-stage pipeline</strong> for automated root cause analysis of AI agent failures. It achieves <span class="key-number confirmed">+23.6%</span> improvement in fault localization accuracy over baseline approaches.</p>
+    <div class="card">
+      <p><strong>The 4-stage pipeline:</strong></p>
+      <ol>
+        <li><strong>Trajectory Normalization:</strong> Convert diverse agent execution traces into a standardized format, handling variations in tool calling conventions, retry patterns, and output formatting across different agent frameworks</li>
+        <li><strong>Constraint Synthesis:</strong> Automatically derive correctness constraints from successful execution trajectories &mdash; what should have happened based on the task specification and historical successes</li>
+        <li><strong>Guarded Evaluation:</strong> Compare failed trajectories against synthesized constraints, identifying the specific step where divergence occurred while accounting for acceptable variation in non-deterministic execution</li>
+        <li><strong>LLM Judge:</strong> Use a separate LLM as a calibrated evaluator to classify the identified failure step, categorize the failure type, and generate an actionable diagnosis</li>
+      </ol>
+    </div>
+    <p>AgentRx&rsquo;s key insight: agent failures are best understood not by examining the final output, but by identifying the <strong>critical failure step</strong> &mdash; the specific point in the trajectory where the agent&rsquo;s reasoning first went off-track.</p>
+
+    <!-- 9-CATEGORY TAXONOMY -->
+    <h2>Agent Failure Taxonomy</h2>
+    <p>AgentRx introduces a <strong>9-category taxonomy</strong> for classifying AI agent failures:</p>
+    <table>
+      <thead><tr><th>Category</th><th>Description</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tool Selection Error</strong></td><td>Agent chose the wrong tool for the task</td><td>Using web search when file read was needed</td></tr>
+        <tr><td><strong>Parameter Error</strong></td><td>Correct tool, wrong parameters</td><td>Passing filename instead of file path</td></tr>
+        <tr><td><strong>Hallucinated Action</strong></td><td>Agent fabricated a tool call or result</td><td>Claiming to have read a file that does not exist</td></tr>
+        <tr><td><strong>Premature Termination</strong></td><td>Agent stopped before task completion</td><td>Declaring success after partial implementation</td></tr>
+        <tr><td><strong>Infinite Loop</strong></td><td>Agent repeats the same action without progress</td><td>Retrying a failed API call indefinitely</td></tr>
+        <tr><td><strong>Context Confusion</strong></td><td>Agent lost track of prior actions or state</td><td>Re-reading a file it already has in context</td></tr>
+        <tr><td><strong>Reasoning Error</strong></td><td>Logical error in the agent&rsquo;s planning</td><td>Implementing the inverse of the requirement</td></tr>
+        <tr><td><strong>Constraint Violation</strong></td><td>Agent violated explicit task constraints</td><td>Modifying a file marked as read-only</td></tr>
+        <tr><td><strong>Cascading Failure</strong></td><td>Early error propagates through subsequent steps</td><td>Wrong assumption in step 2 corrupts steps 3&ndash;10</td></tr>
+      </tbody>
+    </table>
+
+    <!-- OPENRCA -->
+    <h2>OpenRCA Benchmark</h2>
+    <p><strong>OpenRCA</strong> provides the first large-scale benchmark for evaluating AI agent debugging tools. Key metrics:</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-value red">335</span><span class="stat-label">Real Failures</span></div>
+      <div class="stat"><span class="stat-value blue">68 GB</span><span class="stat-label">Telemetry Data</span></div>
+      <div class="stat"><span class="stat-value amber">9</span><span class="stat-label">Failure Categories</span></div>
+      <div class="stat"><span class="stat-value green">4</span><span class="stat-label">Agent Frameworks</span></div>
+    </div>
+    <p>The benchmark includes failures from multiple agent frameworks (LangChain, AutoGen, CrewAI, custom) across diverse tasks (code generation, data analysis, web browsing, multi-step reasoning). Each failure includes the full execution trajectory, environment state, and human-annotated root cause labels.</p>
+
+    <!-- AGENTDEBUG -->
+    <h2>AgentDebug &mdash; Corrective Feedback</h2>
+    <p><strong>AgentDebug</strong> takes a different approach: rather than post-hoc analysis, it provides <strong>corrective feedback during execution</strong>. By monitoring the agent&rsquo;s trajectory in real-time and comparing it against expected behavior patterns, AgentDebug can intervene at the critical failure step before the error cascades.</p>
+    <p>Results: <span class="key-number confirmed">+24%</span> accuracy improvement in task completion when AgentDebug&rsquo;s corrective feedback is active. The improvement is largest for multi-step tasks (&gt;10 tool calls) where early errors have the most opportunity to cascade.</p>
+
+    <!-- CRITICAL FAILURE STEP -->
+    <h2>Critical Failure Step Identification</h2>
+    <p>All three approaches converge on a fundamental concept: the <strong>critical failure step</strong> (CFS). In any failed agent trajectory, there exists a specific step where:</p>
+    <div class="card">
+      <ul>
+        <li>The agent&rsquo;s internal state (beliefs, plans) first diverged from correctness</li>
+        <li>All subsequent failures can be traced back to this divergence</li>
+        <li>Intervention at this step (and not later) would have prevented the failure</li>
+      </ul>
+      <p>CFS identification is complicated by <strong>non-deterministic reasoning chains</strong>: the same prompt can produce different action sequences, making it impossible to define a single &ldquo;correct&rdquo; trajectory. AgentRx handles this through constraint synthesis from the distribution of successful trajectories, not from any single golden path.</p>
+    </div>
+    <p>The CFS concept maps directly to STAMP&rsquo;s notion of unsafe control actions (see <a href="systems-thinking.html">Systems Thinking</a>) &mdash; the agent is a controller whose process model became inconsistent with reality at the CFS.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>230 related projects</strong> across 2 knowledge domains with 8 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>PNW</td><td>Pacific Northwest Research Series</td><td>general</td><td>1.399</td></tr>
+        <tr><td>TKN</td><td>Token Economics Research</td><td>general</td><td>1.291</td></tr>
+        <tr><td>OPEN</td><td>Unsolved Problems &amp; Open Research</td><td>general</td><td>0.438</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>general</td><td>0.183</td></tr>
+        <tr><td>LLM</td><td>Local LLM Ecosystem</td><td>ai</td><td>0.178</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (227), ai (3). Complex plane: z = 0.1675 + 0.1137i, |z| = 0.2025.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="llm-rca-failures.html">LLM Reasoning Failures</a></li>
+        <li><a href="cloud-microservices.html">Cloud &amp; Microservices</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+        <li><a href="systems-thinking.html">Systems-Theoretic Approaches</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>AI Agent Debugging &middot; Root Cause Analysis &middot; 230 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

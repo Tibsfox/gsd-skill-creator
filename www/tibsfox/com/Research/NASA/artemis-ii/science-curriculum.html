@@ -345,8 +345,8 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 
 <div class="mission-header">
   <h1>Science Curriculum: Artemis II Edition</h1>
-  <div class="subtitle">From launch physics to crew biology &mdash; the science you need to understand this mission</div>
-  <div class="catalog-id">Track 4 &middot; Eight disciplines, one mission &middot; High-school accessible with real data</div>
+  <div class="subtitle">From launch physics to crew biology &mdash; the science you need to understand this mission &mdash; Updated FD6</div>
+  <div class="catalog-id">Track 4 &middot; Eight disciplines, one mission &middot; High-school accessible with real data &middot; Flight Day 5&ndash;6 instruments verified</div>
 </div>
 
 <div class="content">
@@ -831,10 +831,40 @@ Iron (Fe-56) at 1 GeV/nucleon:
       </p>
     </div>
 
+    <div class="callout" style="border-color:rgba(252,61,33,0.3); background:rgba(252,61,33,0.04);">
+      <div class="callout-title" style="color:var(--artemis-red);">Flight Day 5&ndash;6 Update &mdash; Deep Space Radiation Instruments Active</div>
+      <p>
+        By Flight Day 5, Orion has transited both Van Allen belts and is fully exposed to the
+        unshielded deep-space radiation environment. Two key instruments are now collecting
+        unprecedented data:
+      </p>
+      <p style="margin-top:0.6rem;">
+        <strong style="color:var(--artemis-gold);">CERN Timepix detectors (6 units)</strong> &mdash;
+        Built by the ADVACAM/Medipix2 collaboration at CERN, these are the same hybrid pixel
+        detector technology used at the Large Hadron Collider, miniaturized for spaceflight.
+        Each 256&times;256 pixel sensor (55 &mu;m pitch) identifies individual particles by their
+        track shape: protons leave compact blobs, HZE ions leave long straight tracks, electrons
+        leave curving worm-like traces. Unlike traditional dosimeters that report only total dose,
+        Timepix builds a real-time, particle-by-particle map of the radiation field &mdash;
+        species, energy, direction, and arrival time. Six units provide directional coverage
+        around the crew cabin.
+      </p>
+      <p style="margin-top:0.6rem;">
+        <strong style="color:var(--artemis-gold);">AVATAR organ-on-chip</strong> &mdash;
+        Now beyond the Van Allen belts, the organ chips containing crew members' own bone marrow
+        tissue are exposed to the combined GCR + microgravity environment for the first time
+        in human spaceflight. Previous organ-chip experiments on the ISS tested microgravity
+        alone, shielded by Earth's magnetosphere. AVATAR is measuring whether the unshielded
+        deep-space radiation field disrupts hematopoietic stem cell differentiation differently
+        than either factor in isolation.
+      </p>
+    </div>
+
     <ul class="links-list">
       <li><a href="science.html#avatar">AVATAR Experiment</a> &mdash; organ-on-chip details <span class="tspb-tag">TSPB L2</span></li>
       <li><a href="science.html#archar">ARCHAR Study</a> &mdash; crew health monitoring</li>
       <li><a href="papers.html">Artemis II Papers</a> &mdash; NASA radiation dose limits and SPE models</li>
+      <li><a href="papers.html">Paper #37: CERN Timepix</a> &mdash; particle-by-particle dosimetry</li>
       <li><a href="../../OPEN/index.html">Open Problems</a> &mdash; GCR shielding mass-efficiency tradeoffs</li>
     </ul>
   </div>
@@ -950,9 +980,31 @@ N = 1e-9 / 1.28e-19 = <span class="result">~7.8 billion photons/sec</span>
       </p>
     </div>
 
+    <div class="callout" style="border-color:rgba(252,61,33,0.3); background:rgba(252,61,33,0.04);">
+      <div class="callout-title" style="color:var(--artemis-red);">Flight Day 5&ndash;6 Update &mdash; O2O Achieving 260 Mbps from Lunar Distance</div>
+      <p>
+        The O2O optical communications system &mdash; built around MIT Lincoln Lab's MAScOT
+        (Modular Advanced Space Communications Terminal) &mdash; is achieving its target
+        <strong style="color:#fff;">260 Mbps</strong> downlink rate during the lunar flyby phase.
+        This confirms the theoretical predictions from the diffraction and photon-counting
+        derivations above. At 384,400 km, the 1550 nm laser beam produces a footprint of
+        approximately 14.5 km at the ground terminal &mdash; tight enough to concentrate
+        sufficient photon flux for gigabit-class detection using superconducting nanowire
+        single-photon detectors (SNSPDs).
+      </p>
+      <p style="margin-top:0.6rem;">
+        The practical result: HD video from lunar orbit streamed in real time. For comparison,
+        Apollo missions communicated at about 51.2 kbps. Artemis II's optical link is
+        <strong style="color:#fff;">5,000 times faster</strong>. This technology demonstration
+        validates the path to optical communications for Mars missions, where even at conjunction
+        (2.5 AU), optical links can maintain data rates orders of magnitude higher than radio.
+      </p>
+    </div>
+
     <ul class="links-list">
       <li><a href="science.html">O2O System Details</a> &mdash; architecture and performance specs</li>
       <li><a href="math.html">Math: Beam Divergence Derivation</a> &mdash; full worked example <span class="tspb-tag">TSPB L4</span></li>
+      <li><a href="papers.html">Paper #36: O2O at 260 Mbps</a> &mdash; MIT Lincoln Lab MAScOT results</li>
       <li><a href="../../OPEN/index.html">Open Problems</a> &mdash; adaptive optics for deep space links</li>
     </ul>
   </div>
@@ -1465,7 +1517,7 @@ H_s = 0.0016 * (U^2 / g) * sqrt(F * g / U^2)
   Eight disciplines, one mission &middot;
   <a href="papers.html">Papers</a> &middot;
   tibsfox.com/Research/NASA/artemis-ii/ &middot;
-  Last updated: 2026-04-07T00:00Z (sweep v1.6.17)
+  Last updated: 2026-04-06T23:00Z (sweep v1.6.18, FD5&ndash;6 updates)
 </div>
 
 </body>

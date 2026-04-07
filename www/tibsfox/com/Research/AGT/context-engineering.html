@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering &mdash; Agentic Technologies &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Technologies Research</h1>
+    <div class="subtitle">Context Engineering &mdash; The Bottleneck Between Agents and Useful Work</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=04-agent-architecture-patterns">Agent Architecture</a>
+      <a href="page.html?doc=02-agent-security-identity">MCP Security</a>
+      <a href="page.html?doc=05-tool-integration-patterns">ML Production</a>
+      <a href="page.html?doc=05-iot-security-usb-stacks">Hardware &amp; Energy</a>
+      <a href="page.html?doc=04-compiler-in-the-loop-agentic">Engineering &amp; PLM</a>
+      <a href="page.html?doc=06-system-design-reliability">Business &amp; Legal</a>
+      <a href="context-engineering.html" class="active">Context Engineering</a>
+      <a href="page.html?doc=07-synthesis-ordering-guarantees">Papers</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      &ldquo;MCP tools are taking 100,000 tokens of just definitions. I&rsquo;ve only got 3.9% of the context left.&rdquo;
+      &mdash; Adam Jones, Anthropic
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value critical">100K</span><span class="stat-label">Tokens Lost to Tool Defs</span></div>
+      <div class="stat"><span class="stat-value amber">25%</span><span class="stat-label">Context Rot Onset</span></div>
+      <div class="stat"><span class="stat-value">98%</span><span class="stat-label">Best Compression</span></div>
+      <div class="stat"><span class="stat-value red">88&ndash;95%</span><span class="stat-label">Cumulative Compaction Loss</span></div>
+      <div class="stat"><span class="stat-value emerald">94%</span><span class="stat-label">3-Tier Loading Savings</span></div>
+      <div class="stat"><span class="stat-value navy">1,250x</span><span class="stat-label">RAG vs LLM Cost Ratio</span></div>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>1. The Context Crisis</h2>
+
+    <p>The agentic era introduced an unexpected resource constraint: context windows are consumed before the first user message arrives. Tool definitions, system prompts, agent instructions, and memory documents compete for the same fixed budget that reasoning needs to occupy.</p>
+
+    <h3>Tool Definition Bloat</h3>
+    <p>Adam Jones at Anthropic (AgenticAI Foundation, 2026) demonstrated that MCP tool definitions alone can consume <span class="key-number critical">100,000 tokens</span> &mdash; half of a 200K context window &mdash; before any work begins. With tool selection accuracy collapsing from <span class="key-number">43%</span> to <span class="key-number critical">14%</span> under bloated toolsets, the problem is not just resource waste but active quality degradation.</p>
+
+    <h3>Context Rot Starts Early</h3>
+    <p>Chroma Research (via the AI Agent Handbook, R9) found that context quality degradation begins at approximately <span class="key-number amber">25% fill</span> &mdash; not at 100%. The assumption that a 200K window gives you 200K of useful space is wrong. Effective capacity may be closer to 50K before accuracy begins to erode.</p>
+
+    <h3>The Compaction Death Spiral</h3>
+    <p>When the window fills, compaction events discard <span class="key-number critical">60&ndash;70%</span> of conversation per event. After 2&ndash;3 compaction cycles, cumulative loss reaches <span class="key-number critical">88&ndash;95%</span>. Ivett Ordog (Queue #38) described the resulting sawtooth pattern: the window fills, compacts, drops, fills again &mdash; each cycle losing fidelity. Agent MD files and memory documents that survived the first compaction consume space that the second compaction needs for actual work.</p>
+
+    <div class="card">
+      <h4>The Compaction Cascade</h4>
+      <p><strong>Cycle 1:</strong> System prompt + agent MD + tool defs fill to ~60%. Compaction removes 60&ndash;70% of conversation. Surviving context still includes all static documents.</p>
+      <p><strong>Cycle 2:</strong> Compacted context + new work fills remaining space. Second compaction has less useful material to preserve. Static documents crowd out working memory.</p>
+      <p><strong>Cycle 3:</strong> By this point, 88&ndash;95% of the original session intent is lost. The agent is operating on fragments.</p>
+    </div>
+
+    <!-- Section 2 -->
+    <h2>2. Context as Formula</h2>
+
+    <p>Chris (Queue #34, Clip Cannon / OCR Provenance) argues there is exactly one correct framework for building AI systems. It reduces to a formula:</p>
+
+    <pre>
+Output = AI_Model(Context_Window(Start, End, Prompt, Memory))
+
+Where:
+  Start  = current system state (loaded into context at session start)
+  End    = desired output state (defined as precisely as possible)
+  Prompt = the bridge description between start and end
+  Memory = external corpus accessible via RAG with provenance</pre>
+
+    <h3>Define the Output First</h3>
+    <p>The key inversion: start from what you want, not from what you have. Chris maintains 16 documents describing his codebase, loaded into Claude&rsquo;s 1M context window at session start. &ldquo;Read these documents and then stop. So you can understand the system.&rdquo; The AI needs both anchors &mdash; start and end &mdash; to build a high-probability connection.</p>
+
+    <h3>Epistemic Symmetry</h3>
+    <p>The theoretical foundation: given an answer or output, LLMs can generate the questions that would have produced it with claimed &gt;90% semantic similarity. Question and answer become bidirectional. This is why defining the end state clearly is more important than crafting the perfect question &mdash; the model can derive the reasoning path from the destination.</p>
+
+    <h3>Full State Verification</h3>
+    <p>After the AI builds an initial connection, you must stop and verify every transformation. Chris calls this &ldquo;full state verification&rdquo; and insists: never proceed to the next step until the current step is verified. This is the critical counterweight to the formula &mdash; the model finds the path, the human validates each step.</p>
+
+    <blockquote>
+      &ldquo;AI will get me most of the way there, but then I will need to do full state verification &mdash; manually testing everything and fine-tuning at each step till I get everything perfectly just the way I want it before I move on to the next step.&rdquo; &mdash; Chris, Queue #34
+    </blockquote>
+
+    <h3>Anti-Pattern: Parallel Generation</h3>
+    <p>Chris argues explicitly against generating multiple competing solutions. Five parallel agents create five crude connections; you then evaluate all five. Better: make one connection and iteratively optimize it. The exception &mdash; and Chris does not address this &mdash; is parallel agents working on <em>independent</em> start-end pairs, which avoids the evaluation bottleneck.</p>
+
+    <!-- Section 3 -->
+    <h2>3. LightRAG &amp; Graph RAG</h2>
+
+    <p>Standard vector RAG (Pinecone, Supabase, 2024&ndash;2025 era) chunks documents, embeds them, and retrieves by cosine similarity. LightRAG (Queue #9) adds a second layer: during ingestion, it extracts <strong>entities</strong> and <strong>relationships</strong> to build a knowledge graph.</p>
+
+    <h3>Why Graph Matters</h3>
+    <p>Vector search is a sophisticated ctrl+F &mdash; it finds semantically similar chunks but cannot answer cross-document questions. A knowledge graph connects &ldquo;Anthropic&rdquo; to &ldquo;Claude Code&rdquo; via a &ldquo;created&rdquo; edge. Traversing these edges surfaces connections that pure embedding similarity would never discover.</p>
+
+    <table>
+      <thead><tr><th>Dimension</th><th>Naive RAG</th><th>Graph RAG (LightRAG)</th></tr></thead>
+      <tbody>
+        <tr><td>Retrieval</td><td>Cosine similarity on chunks</td><td>Vector similarity + graph traversal</td></tr>
+        <tr><td>Cross-document reasoning</td><td>No</td><td>Yes &mdash; entity/relationship edges</td></tr>
+        <tr><td>Cost vs. context window</td><td>Cheaper than full context at scale</td><td><span class="key-number">1,250x</span> cheaper (July 2025 study)</td></tr>
+        <tr><td>Breakpoint</td><td>Always viable</td><td>~500&ndash;2,000 pages (~1M tokens)</td></tr>
+        <tr><td>Infrastructure</td><td>Vector DB only</td><td>Vector DB + graph store (Postgres supported)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Provenance Is Non-Negotiable</h3>
+    <p>The OCR Provenance system (Chris, Queue #34) demonstrates a critical principle: every chunk must link back to its source document. Standard RAG returns a chunk with no context. Provenance-based RAG returns a chunk plus the original document location, allowing the model to navigate to full context when needed. Chris built 13 embedders including custom temporal and cause-effect embedders where causes and effects are adjacent in semantic space.</p>
+
+    <h3>Skills as RAG Endpoints</h3>
+    <p>The integration pattern wraps LightRAG&rsquo;s REST API (Docker container on port 9621) as Claude Code skills. Query, upload, explore, and status endpoints become auto-activating capabilities. The system can also run fully local via Ollama for both embeddings and LLM work.</p>
+
+    <!-- Section 4 -->
+    <h2>4. Token Optimization</h2>
+
+    <p>Three distinct approaches to reclaiming context space, each targeting a different layer of the problem.</p>
+
+    <h3>Ghost Tokens (token-optimizer, R8)</h3>
+    <p>Ghost tokens are placeholders that represent compacted information without consuming full token budgets. Combined with progressive checkpoints at <span class="key-number">20%</span> / <span class="key-number">35%</span> / <span class="key-number">50%</span> fill levels (lightweight snapshots rather than full compaction), and a read-deduplication layer saving <span class="key-number">8&ndash;30%</span>, the approach aims to flatten the compaction sawtooth into a gentler curve.</p>
+
+    <p>The critical finding from R8: context quality drops from <span class="key-number">93%</span> to <span class="key-number critical">76%</span> MRCR accuracy at 256K fill. This is the empirical basis for moving compaction triggers earlier.</p>
+
+    <h3>98% Compression via Sandbox (context-mode, R10)</h3>
+    <p>The context-mode project achieves <span class="key-number confirmed">98%</span> compression (<span class="key-number">315KB</span> down to <span class="key-number">5.4KB</span>) by virtualizing the context into a sandbox with FTS5/BM25 retrieval. Instead of loading full session history into the window, only the segments relevant to the current query are retrieved. This transforms the context window from a flat buffer into an indexed store.</p>
+
+    <h3>Progressive 3-Tier Skill Loading (R9)</h3>
+    <p>The AI Agent Handbook documents a pattern achieving <span class="key-number confirmed">94%</span> token reduction for skill-heavy sessions:</p>
+    <table>
+      <thead><tr><th>Tier</th><th>Content</th><th>When Loaded</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tier 1</strong></td><td>Description stub only (~50 tokens)</td><td>Always &mdash; session start</td></tr>
+        <tr><td><strong>Tier 2</strong></td><td>Full skill definition (~500&ndash;2K tokens)</td><td>On first use</td></tr>
+        <tr><td><strong>Tier 3</strong></td><td>Reference docs, examples, edge cases</td><td>On explicit invocation</td></tr>
+      </tbody>
+    </table>
+    <p>This is lazy loading for agent instructions. Sub-agent context isolation provided an additional <span class="key-number confirmed">90.2%</span> improvement by preventing skill bleed between agents in multi-agent sessions.</p>
+
+    <!-- Section 5 -->
+    <h2>5. Cognitive Load</h2>
+
+    <p>Ivett Ordog (Queue #38) frames the context problem through cognitive science: &ldquo;If it doesn&rsquo;t fit your head, you can&rsquo;t reason about it.&rdquo; The principle applies equally to humans reviewing AI output and to AI agents processing their context.</p>
+
+    <h3>The Developer Burden</h3>
+    <p>Chris Lattner (Queue #31) observes that AI tools shifted the engineering role from <span class="key-number">20%</span> thinking / <span class="key-number">80%</span> coding to <span class="key-number">80%</span> thinking / <span class="key-number">20%</span> coding &mdash; &ldquo;quite taxing&rdquo; in his words. Kilo (Queue #3, 25 trillion tokens across 1.5 million developers) reports that half of all developers do not use AI every day. The trust ladder &mdash; autocomplete, chat, single agent, orchestration &mdash; breaks at any rung when latency exceeds 200ms or when the agent edits the wrong file.</p>
+
+    <h3>Agent MD Files Hit Diminishing Returns</h3>
+    <p>Ordog cites research asking &ldquo;Are Repository Level Context Files Helpful for Coding Agents?&rdquo; &mdash; the answer: not really. The mechanism: context window fills with system prompt + agent MD + user prompt + tool calls + file reads. Larger agent MD files compress the working space available for reasoning. The agent becomes &ldquo;a day worker who reads all the books, does the job, and leaves&rdquo; &mdash; but the books crowd out the work.</p>
+
+    <h3>Habit Hooks as Lazy Context Injection</h3>
+    <p>Ordog&rsquo;s solution: move behavioral rules out of static context files and into deterministic triggers. A habit hook is a post-commit script that detects a specific code smell (duplication, feature envy, functions &gt;15 lines) and injects a short action plan into the agent&rsquo;s context only when relevant. This is demand-driven context injection &mdash; the difference between eager and lazy evaluation applied to agent instructions.</p>
+
+    <div class="card">
+      <h4>Static vs. Dynamic Context</h4>
+      <table>
+        <thead><tr><th>Approach</th><th>Token Cost</th><th>Trigger</th><th>Effectiveness</th></tr></thead>
+        <tbody>
+          <tr><td>Agent MD rules</td><td>Always loaded</td><td>None (always present)</td><td>Forgotten after compaction</td></tr>
+          <tr><td>Habit hooks</td><td>Injected on detection</td><td>Deterministic code analysis</td><td>Fresh, targeted, actionable</td></tr>
+          <tr><td>Auto-activating skills</td><td>Loaded on context match</td><td>LLM-based context detection</td><td>Adaptive but less precise</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The 80% Demo Problem</h3>
+    <p>Lattner identifies a failure mode where someone builds an 80% demo with AI tools and declares success. &ldquo;Having some crazy thing that&rsquo;s really exciting and very cool is not actually success. What is success is when code gets in the product and ships.&rdquo; The cognitive load of closing the remaining 20% &mdash; tests, integration, edge cases &mdash; is where AI amplifies existing discipline or the lack of it.</p>
+
+    <!-- Section 6 -->
+    <h2>6. The Evaluation Problem</h2>
+
+    <p>Jess from Braintrust (Queue #2) makes the case that most teams ship AI features based on &ldquo;vibes&rdquo; &mdash; a PM trying a few prompts and saying it looks good. This does not work.</p>
+
+    <h3>10&ndash;15% Non-Determinism</h3>
+    <p>Identical eval configurations can swing <span class="key-number amber">10&ndash;15%</span> across runs due to LLM non-determinism. With small datasets (10 rows), a single failure shifts the score by 10%. Multiple trials per task are essential. Jess explicitly states she would not publish results from a single run.</p>
+
+    <h3>The Four-Part Eval Structure</h3>
+    <table>
+      <thead><tr><th>Component</th><th>Purpose</th><th>Anti-Pattern</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dataset</strong></td><td>Golden cases, edge cases, failure modes</td><td>Tiny samples that swing on one failure</td></tr>
+        <tr><td><strong>Task</strong></td><td>Prompt + model configuration</td><td>Tuning to benchmarks instead of real workloads</td></tr>
+        <tr><td><strong>Scoring</strong></td><td>Deterministic, LLM-as-judge, or human</td><td><code>expect(result).toBeTruthy()</code></td></tr>
+        <tr><td><strong>Experiment</strong></td><td>Dataset + task + scorer = one run</td><td>Single-run conclusions</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Agentic Search vs. Vector Search</h3>
+    <p>In Braintrust&rsquo;s experiment: agentic search (Claude Code using grep, find, cat to follow references) matched or beat vector search on accuracy (<span class="key-number">68%</span> vs <span class="key-number">60%</span> on SWE-Bench/Django) while being cheaper in tokens. The insight: vector search provides proximity but lacks connective tissue &mdash; import chains, call graphs, type definitions &mdash; that agentic search discovers through chain-of-thought exploration.</p>
+
+    <h3>Drift as Organizational Risk</h3>
+    <p>Al Shalloway (Queue #36, AmpGPT) identifies drift as the primary deployment risk for axiom-based AI systems. When organizational context layers on top of foundational reasoning without preserving the connection to first principles, the system diverges. His three-layer architecture (objectives / capabilities / practices) with drift detection built in addresses this. The parallel to context engineering: agent instructions that drift from their original intent after compaction cycles produce the same category of failure.</p>
+
+    <!-- Section 7 -->
+    <h2>7. Key Numbers</h2>
+
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Source</th><th>Severity</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Tool definitions before first message</td>
+          <td><span class="key-number critical">100K tokens</span> (50% of 200K window)</td>
+          <td>Adam Jones, Anthropic</td>
+          <td><span class="safety-badge safety-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td>Context quality at 256K fill</td>
+          <td><span class="key-number critical">93% &rarr; 76%</span> MRCR accuracy</td>
+          <td>token-optimizer (R8)</td>
+          <td><span class="safety-badge safety-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td>Compaction loss per event</td>
+          <td><span class="key-number critical">60&ndash;70%</span> of conversation</td>
+          <td>token-optimizer (R8)</td>
+          <td><span class="safety-badge safety-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td>Cumulative loss after 2&ndash;3 compactions</td>
+          <td><span class="key-number critical">88&ndash;95%</span></td>
+          <td>token-optimizer (R8)</td>
+          <td><span class="safety-badge safety-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td>Context rot onset</td>
+          <td><span class="key-number amber">~25% fill</span></td>
+          <td>Chroma Research via R9</td>
+          <td><span class="safety-badge safety-warn">Warning</span></td>
+        </tr>
+        <tr>
+          <td>Tool selection accuracy under bloat</td>
+          <td><span class="key-number critical">43% &rarr; 14%</span></td>
+          <td>AI Agent Handbook (R9)</td>
+          <td><span class="safety-badge safety-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td>3-tier skill loading savings</td>
+          <td><span class="key-number confirmed">94% token reduction</span></td>
+          <td>AI Agent Handbook (R9)</td>
+          <td><span class="safety-badge safety-confirmed">Positive</span></td>
+        </tr>
+        <tr>
+          <td>Context compression (sandbox)</td>
+          <td><span class="key-number confirmed">98%</span> (315KB &rarr; 5.4KB)</td>
+          <td>context-mode (R10)</td>
+          <td><span class="safety-badge safety-confirmed">Positive</span></td>
+        </tr>
+        <tr>
+          <td>Read deduplication savings</td>
+          <td><span class="key-number">8&ndash;30%</span></td>
+          <td>token-optimizer (R8)</td>
+          <td><span class="safety-badge safety-info">Info</span></td>
+        </tr>
+        <tr>
+          <td>Sub-agent context isolation</td>
+          <td><span class="key-number confirmed">90.2% improvement</span></td>
+          <td>AI Agent Handbook (R9)</td>
+          <td><span class="safety-badge safety-confirmed">Positive</span></td>
+        </tr>
+        <tr>
+          <td>RAG vs. pure LLM cost at scale</td>
+          <td><span class="key-number confirmed">1,250x cheaper</span></td>
+          <td>July 2025 study via Queue #9</td>
+          <td><span class="safety-badge safety-confirmed">Positive</span></td>
+        </tr>
+        <tr>
+          <td>Eval non-determinism</td>
+          <td><span class="key-number amber">10&ndash;15% variance</span></td>
+          <td>Braintrust, Queue #2</td>
+          <td><span class="safety-badge safety-warn">Warning</span></td>
+        </tr>
+        <tr>
+          <td>Tool poisoning success rate</td>
+          <td><span class="key-number critical">70%</span> against real MCP servers</td>
+          <td>OWASP MCP Deception (V1)</td>
+          <td><span class="safety-badge safety-critical">Critical</span></td>
+        </tr>
+        <tr>
+          <td>Developer daily AI usage</td>
+          <td><span class="key-number amber">&lt;50%</span> use daily</td>
+          <td>Kilo (25T tokens), Queue #3</td>
+          <td><span class="safety-badge safety-warn">Warning</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Sources</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Source</th><th>Key Contribution</th></tr></thead>
+      <tbody>
+        <tr><td>V4</td><td>Adam Jones, Anthropic &mdash; Code Execution with MCP</td><td>Tool token bloat quantified, progressive disclosure</td></tr>
+        <tr><td>R8</td><td>token-optimizer (GitHub, 190 stars)</td><td>Ghost tokens, progressive checkpoints, MRCR degradation</td></tr>
+        <tr><td>R9</td><td>AI Agent Handbook (GitHub, 56 stars)</td><td>30+ framework analysis, context rot research, 3-tier loading</td></tr>
+        <tr><td>R10</td><td>context-mode (GitHub, 6.5K stars)</td><td>98% compression, FTS5/BM25 session continuity</td></tr>
+        <tr><td>Q2</td><td>Jess, Braintrust &mdash; Real Evals for Coding Agents</td><td>10&ndash;15% non-determinism, four-part eval structure</td></tr>
+        <tr><td>Q3</td><td>Scott, Kilo &mdash; 25 Trillion Tokens</td><td>Trust ladder, context as unlock, cognitive shift</td></tr>
+        <tr><td>Q9</td><td>Chase &mdash; Claude Code + LightRAG</td><td>Graph RAG integration, 1,250x cost reduction</td></tr>
+        <tr><td>Q31</td><td>Chris Lattner &mdash; Every Engineer Is a Manager Now</td><td>AI as amplifier, 80% demo problem, cognitive load shift</td></tr>
+        <tr><td>Q34</td><td>Chris (Clip Cannon) &mdash; Context Engineering Is a Formula</td><td>Start-End-Connection model, epistemic symmetry, provenance RAG</td></tr>
+        <tr><td>Q36</td><td>Al Shalloway &mdash; AmpGPT Across the Organization</td><td>Axiom-based training, 3-layer org model, drift as risk</td></tr>
+        <tr><td>Q38</td><td>Ivett Ordog &mdash; Managing Cognitive Load</td><td>Habit hooks, constraint tests, demand-driven context injection</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Cross-References</h4>
+      <ul>
+        <li><a href="page.html?doc=03-stateful-agents-token-management">M10: Stateful Agents &amp; Token Management</a></li>
+        <li><a href="page.html?doc=01-mcp-protocol-orchestration">M8: MCP Protocol &amp; Orchestration</a></li>
+        <li><a href="page.html?doc=02-agent-security-identity">M9: Agent Security &amp; Identity</a></li>
+        <li><a href="../MAS/index.html">MAS: Multi-Agent Systems Research</a></li>
+        <li><a href="../index.html">PNW Research Series</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Cluster 7: Context Engineering &middot; April 2026</p>
+    <p><a href="index.html">AGT Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

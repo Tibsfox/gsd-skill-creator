@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storage &amp; Filesystems &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Storage &amp; Filesystems</h1>
+    <div class="subtitle">Block, File, Object Storage &mdash; RAID, LVM, Backups, DR, Database Administration</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html" class="active">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Data is the reason systems exist. Storage and filesystem decisions are among the most consequential a sysadmin makes &mdash; they affect performance, reliability, and recoverability for years after the initial choice. Getting backups wrong is an extinction-level event for any organization.
+    </blockquote>
+
+    <!-- STORAGE TYPES -->
+    <h2>Storage Types Comparison</h2>
+    <table>
+      <thead><tr><th>Type</th><th>Interface</th><th>Access Pattern</th><th>Use Cases</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Block</strong></td><td>SAN (iSCSI, FC)</td><td>Random read/write, low latency</td><td>Databases, VMs, boot volumes</td><td>EBS, Ceph RBD, LUNs</td></tr>
+        <tr><td><strong>File</strong></td><td>NFS, CIFS/SMB</td><td>Hierarchical, shared access</td><td>Home directories, shared docs, media</td><td>NFS v4, Samba, EFS</td></tr>
+        <tr><td><strong>Object</strong></td><td>HTTP REST API</td><td>Key-value, immutable, scalable</td><td>Backups, archives, static assets, data lakes</td><td>S3, MinIO, GCS, Swift</td></tr>
+      </tbody>
+    </table>
+
+    <!-- FILESYSTEM COMPARISON -->
+    <h2>Filesystem Comparison</h2>
+    <table>
+      <thead><tr><th>Filesystem</th><th>Max Volume</th><th>Snapshots</th><th>Checksums</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ext4</strong></td><td>1 EiB</td><td>No (LVM only)</td><td>Metadata only</td><td>General purpose, default on most distros</td></tr>
+        <tr><td><strong>XFS</strong></td><td>8 EiB</td><td>No (LVM only)</td><td>No</td><td>Large files, high throughput (RHEL default)</td></tr>
+        <tr><td><strong>Btrfs</strong></td><td>16 EiB</td><td>Yes (native)</td><td>Yes (data + metadata)</td><td>Snapshots, subvolumes, SSD optimization</td></tr>
+        <tr><td><strong>ZFS</strong></td><td>256 ZiB</td><td>Yes (native)</td><td>Yes (data + metadata)</td><td>Data integrity critical, NAS, enterprise storage</td></tr>
+      </tbody>
+    </table>
+    <p><strong>ZFS</strong> provides the strongest data integrity guarantees with copy-on-write, built-in RAID (RAIDZ1/2/3), deduplication, compression, and send/receive for replication. Its main limitation on Linux is the CDDL license incompatibility with GPL, requiring out-of-tree kernel modules via OpenZFS.</p>
+
+    <!-- RAID -->
+    <h2>RAID Levels</h2>
+    <table>
+      <thead><tr><th>Level</th><th>Min Disks</th><th>Redundancy</th><th>Usable Capacity</th><th>Performance</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>RAID 0</strong></td><td>2</td><td>None</td><td>100%</td><td>Best read/write</td><td>Scratch/temp (never for data you care about)</td></tr>
+        <tr><td><strong>RAID 1</strong></td><td>2</td><td>1 disk failure</td><td>50%</td><td>Good read, normal write</td><td>OS drives, small critical data</td></tr>
+        <tr><td><strong>RAID 5</strong></td><td>3</td><td>1 disk failure</td><td>N-1</td><td>Good read, degraded write</td><td>General purpose (avoid for large disks)</td></tr>
+        <tr><td><strong>RAID 6</strong></td><td>4</td><td>2 disk failures</td><td>N-2</td><td>Good read, slower write</td><td>Large arrays where rebuild time exceeds MTBF</td></tr>
+        <tr><td><strong>RAID 10</strong></td><td>4</td><td>1 per mirror pair</td><td>50%</td><td>Best for random I/O</td><td>Databases, high-IOPS workloads</td></tr>
+      </tbody>
+    </table>
+    <p><strong>RAID is not a backup.</strong> RAID protects against disk failure, not against accidental deletion, ransomware, corruption, or site loss. RAID and backups serve orthogonal purposes.</p>
+
+    <!-- LVM -->
+    <h2>LVM (Logical Volume Management)</h2>
+    <p>LVM adds a flexible abstraction layer between physical disks and filesystems. <strong>Physical Volumes (PVs)</strong> are grouped into <strong>Volume Groups (VGs)</strong>, which are carved into <strong>Logical Volumes (LVs)</strong>. This enables online resizing, snapshots, thin provisioning, and migration across physical disks without downtime.</p>
+    <pre><code># Create a thin-provisioned LV with snapshot support
+pvcreate /dev/sdb1
+vgcreate data_vg /dev/sdb1
+lvcreate -L 100G --thinpool thin_pool data_vg
+lvcreate -V 50G --thin -n app_data data_vg/thin_pool</code></pre>
+
+    <!-- BACKUP STRATEGIES -->
+    <h2>Backup Strategies</h2>
+    <p>The <strong>3-2-1 rule</strong> is the minimum viable backup strategy:</p>
+    <div class="card">
+      <p><strong>3</strong> copies of data (1 primary + 2 backups)</p>
+      <p><strong>2</strong> different storage media types</p>
+      <p><strong>1</strong> copy offsite (geographic separation)</p>
+    </div>
+    <p>Backup types: <strong>Full</strong> (complete copy, slow, large), <strong>Incremental</strong> (changes since last backup, fast, small, requires chain for restore), <strong>Differential</strong> (changes since last full, medium, requires only last full for restore). Modern tools: <strong>restic</strong> (dedup, encrypted, multi-backend), <strong>BorgBackup</strong> (dedup, compressed), <strong>rsync</strong> (efficient delta transfer), <strong>Veeam</strong> (enterprise VM backup).</p>
+    <p><strong>Test your restores.</strong> An untested backup is not a backup. Schedule regular restore drills.</p>
+
+    <!-- DISASTER RECOVERY -->
+    <h2>Disaster Recovery</h2>
+    <p>Two metrics define DR requirements:</p>
+    <div class="formula">RTO (Recovery Time Objective) = maximum acceptable downtime<br>RPO (Recovery Point Objective) = maximum acceptable data loss (time)</div>
+    <p>A 4-hour RTO with 1-hour RPO means the system must be restored within 4 hours, losing at most 1 hour of data. These metrics drive architecture decisions: synchronous replication for RPO=0, warm standby for low RTO, cold backups for cost-optimized high-RTO scenarios.</p>
+
+    <!-- DATABASE ADMIN -->
+    <h2>Database Administration</h2>
+    <p>Sysadmins frequently manage database infrastructure even when they are not DBAs:</p>
+    <table>
+      <thead><tr><th>Database</th><th>Type</th><th>Key Sysadmin Tasks</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PostgreSQL</strong></td><td>Relational (ACID)</td><td>pg_dump/pg_restore, replication (streaming/logical), connection pooling (PgBouncer), VACUUM, WAL management</td></tr>
+        <tr><td><strong>MySQL/MariaDB</strong></td><td>Relational (ACID)</td><td>mysqldump, replication (primary-replica), InnoDB tuning, binary log management</td></tr>
+        <tr><td><strong>Redis</strong></td><td>In-memory key-value</td><td>Persistence (RDB/AOF), Sentinel for HA, cluster mode, memory management, eviction policies</td></tr>
+      </tbody>
+    </table>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>228 related projects</strong> across 1 knowledge domain with 79 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>SYS</td><td>Systems Administration: The Spaces In Between</td><td>general</td><td>0.185</td></tr>
+        <tr><td>SAN</td><td>SANS Institute</td><td>general</td><td>0.126</td></tr>
+        <tr><td>MCR</td><td>Minecraft World Data as RAG</td><td>general</td><td>0.078</td></tr>
+        <tr><td>MDS</td><td>Markup, Data Flow &amp; Real-Time Systems</td><td>general</td><td>0.116</td></tr>
+        <tr><td>BPS</td><td>Biological Physics Sensing Systems</td><td>general</td><td>0.204</td></tr>
+        <tr><td>FCC</td><td>FCC Catalog of Rules &amp; Regulations</td><td>general</td><td>0.188</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228). Complex plane: z = 0.1674 + 0.1136i, |z| = 0.2024.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="linux-fundamentals.html">Linux Fundamentals</a></li>
+        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+        <li><a href="cloud-containers.html">Cloud &amp; Containers</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Storage &amp; Filesystems &middot; Systems Administration &middot; 79 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

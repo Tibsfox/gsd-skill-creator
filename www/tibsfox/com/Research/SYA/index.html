@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Systems Administration</h1>
+    <div class="subtitle">From 1950s Mainframes to Self-Healing Infrastructure &mdash; 70+ Years of Keeping Systems Running &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      From the first operators loading punch cards into IBM mainframes in the 1950s to autonomous AI agents remediating production incidents in closed-loop pipelines, systems administration has undergone one of the most dramatic professional transformations in computing history. This research digest traces that entire arc &mdash; seven decades of practice, 10 modules, 986 cross-references across a 247-project corpus. Along the way, we lost our only professional guild: LOPSA dissolved in December 2025, leaving sysadmins as one of the few engineering disciplines without a dedicated professional organization.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- RESEARCH PROGRAM STATISTICS                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">986</span><span class="stat-label">Cross-References</span></div>
+      <div class="stat"><span class="stat-value">247</span><span class="stat-label">Corpus Projects</span></div>
+      <div class="stat"><span class="stat-value">70+</span><span class="stat-label">Years of Practice</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Rosetta Clusters</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Eras Covered</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Eras covered:</strong> Mainframe (1950s), Unix Revolution (1970s), Client-Server (1980s), Internet/LAMP (1990s), Cloud &amp; Containers (2006&ndash;2015), AIOps &amp; Self-Healing (2020s)</p>
+      <p><strong>Research method:</strong> Extract primary sources, trace tooling lineage, cross-reference against 247-project PNW Research Series corpus, map professional practice evolution to complex plane</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="history-evolution.html" class="category-card">
+        <div><span class="cluster-badge cluster-history">History</span></div>
+        <h3>History &amp; Evolution</h3>
+        <p>Mainframe era (1950s IBM), Unix revolution (1970s Thompson/Ritchie), client-server (1980s), Internet/LAMP (1990s), cloud (2006 AWS), containers (Docker 2013, K8s 2015), serverless (Lambda 2014), professional organizations (SAGE, LISA, LOPSA 2004&ndash;2025).</p>
+        <p><strong>Pipeline:</strong> 232 related projects, 236 cross-refs</p>
+      </a>
+
+      <a href="linux-fundamentals.html" class="category-card">
+        <div><span class="cluster-badge cluster-linux">Linux</span></div>
+        <h3>Linux Fundamentals</h3>
+        <p>Kernel architecture, boot process (BIOS/UEFI/GRUB/systemd), package management (apt/yum/dnf/pacman), FHS, user management (PAM/NSS/LDAP), process management, shell scripting, permissions (chmod/chown/ACLs/SELinux/AppArmor), cron/systemd timers.</p>
+        <p><strong>Pipeline:</strong> 17 related projects, 83 cross-refs</p>
+      </a>
+
+      <a href="networking.html" class="category-card">
+        <div><span class="cluster-badge cluster-network">Network</span></div>
+        <h3>Networking</h3>
+        <p>OSI model, TCP/IP stack, DNS/DHCP, HTTP/TLS, SSH key management, firewalls (iptables/nftables), load balancing (HAProxy/Nginx), VPN (WireGuard/OpenVPN), network monitoring tools, BGP/OSPF routing, VLANs, subnetting/CIDR.</p>
+        <p><strong>Pipeline:</strong> 228 related projects, 76 cross-refs</p>
+      </a>
+
+      <a href="storage-filesystems.html" class="category-card">
+        <div><span class="cluster-badge cluster-storage">Storage</span></div>
+        <h3>Storage &amp; Filesystems</h3>
+        <p>Block/file/object storage comparison, filesystem comparison (ext4/XFS/Btrfs/ZFS), RAID levels, LVM, backup strategies (3-2-1 rule), disaster recovery (RTO/RPO), database administration (PostgreSQL/MySQL/Redis).</p>
+        <p><strong>Pipeline:</strong> 228 related projects, 79 cross-refs</p>
+      </a>
+
+      <a href="monitoring-observability.html" class="category-card">
+        <div><span class="cluster-badge cluster-monitor">Monitor</span></div>
+        <h3>Monitoring &amp; Observability</h3>
+        <p>Three pillars (logs/metrics/traces), Prometheus/Grafana, ELK stack, OpenTelemetry, alerting and on-call, SLOs/SLIs/error budgets, capacity planning, health checks and synthetic monitoring.</p>
+        <p><strong>Pipeline:</strong> 229 related projects, 72 cross-refs</p>
+      </a>
+
+      <a href="security-hardening.html" class="category-card">
+        <div><span class="cluster-badge cluster-security">Security</span></div>
+        <h3>Security &amp; Hardening</h3>
+        <p>CIS benchmarks, patch management, IDS/IPS (Suricata/OSSEC), SIEM, SSH hardening, firewall rules, MAC (SELinux/AppArmor), PKI/TLS certificate management, secrets management (Vault), compliance (NIST/SOC2/PCI-DSS).</p>
+        <p><strong>Pipeline:</strong> 235 related projects, 98 cross-refs</p>
+      </a>
+
+      <a href="automation-iac.html" class="category-card">
+        <div><span class="cluster-badge cluster-automation">Automation</span></div>
+        <h3>Automation &amp; Infrastructure as Code</h3>
+        <p>Config management (Ansible/Puppet/Chef/Salt), Terraform/Pulumi/CloudFormation/OpenTofu, GitOps (ArgoCD/Flux), CI/CD integration, immutable infrastructure, drift detection (NSync), InfraFix, IaCGen (153 scenarios).</p>
+        <p><strong>Pipeline:</strong> 229 related projects, 101 cross-refs</p>
+      </a>
+
+      <a href="cloud-containers.html" class="category-card">
+        <div><span class="cluster-badge cluster-cloud">Cloud</span></div>
+        <h3>Cloud &amp; Container Orchestration</h3>
+        <p>AWS/Azure/GCP comparison, Kubernetes architecture (control plane, etcd, scheduler), pod lifecycle, service mesh (Istio/Linkerd), Helm, container runtimes (containerd/CRI-O), Docker security, registry management, RBAC.</p>
+        <p><strong>Pipeline:</strong> 12 related projects, 70 cross-refs</p>
+      </a>
+
+      <a href="aiops-future.html" class="category-card">
+        <div><span class="cluster-badge cluster-aiops">AIOps</span></div>
+        <h3>AIOps &amp; The Future</h3>
+        <p>Self-healing infrastructure, LLM-driven ops copilots, Agentic SRE (closed-loop), AIOps 1.0 to 2.0 evolution, telemetry manipulation attacks (&ldquo;AI Oops&rdquo;), eBPF observability, platform engineering, FinOps.</p>
+        <p><strong>Pipeline:</strong> 229 related projects, 88 cross-refs</p>
+      </a>
+
+      <a href="professional-practice.html" class="category-card">
+        <div><span class="cluster-badge cluster-practice">Practice</span></div>
+        <h3>Professional Practice</h3>
+        <p>On-call practices, ITIL change management, documentation and knowledge bases, incident response, blameless postmortems, toil elimination, career paths (Linux Admin to Platform Engineer), LOPSA/SAGE ethics, mentorship.</p>
+        <p><strong>Pipeline:</strong> 11 related projects, 83 cross-refs</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- KEY NUMBERS                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Key Numbers</h2>
+
+    <div class="card">
+      <p><span class="key-number evidence">236</span> &mdash; cross-references in the History module alone, the highest-connected module in this digest</p>
+      <p><span class="key-number critical">Dec 2025</span> &mdash; LOPSA (League of Professional System Administrators) dissolved, ending the only dedicated sysadmin professional guild</p>
+      <p><span class="key-number confirmed">101</span> &mdash; cross-references in the Automation &amp; IaC module, reflecting the field&rsquo;s shift toward infrastructure as code</p>
+      <p><span class="key-number warn">153</span> &mdash; real-world scenarios in IaCGen, the largest benchmark for infrastructure code generation</p>
+      <p><span class="key-number evidence">1969</span> &mdash; Unix creation at Bell Labs by Thompson and Ritchie &mdash; the operating system that defines modern sysadmin practice</p>
+      <p><span class="key-number">986</span> &mdash; total corpus cross-references across all 10 modules</p>
+      <p><span class="key-number confirmed">2006</span> &mdash; AWS EC2 launch, beginning the cloud computing era that transformed operations forever</p>
+      <p><span class="key-number warn">3-2-1</span> &mdash; the backup rule: 3 copies, 2 different media, 1 offsite &mdash; still the gold standard</p>
+      <p><span class="key-number critical">99.999%</span> &mdash; five nines availability = 5.26 minutes downtime per year, the aspirational target for critical infrastructure</p>
+      <p><span class="key-number evidence">70+</span> &mdash; years of professional practice, from IBM operators to platform engineers</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CROSS-REFERENCES                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../SYS/index.html">SYS &mdash; Systems Administration: The Spaces In Between</a></li>
+        <li><a href="../K8S/index.html">K8S &mdash; Kubernetes Ecosystem</a></li>
+        <li><a href="../RCA/index.html">RCA &mdash; Root Cause Analysis</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../GSI/index.html">GSI &mdash; GSD-Skill-Creator Improvements</a></li>
+        <li><a href="../OAA/index.html">OAA &mdash; Operations &amp; Admin Automation</a></li>
+        <li><a href="../DRP/index.html">DRP &mdash; Disaster Recovery</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+        <li><a href="../OPS/index.html">OPS &mdash; OpenStack Cloud Platform</a></li>
+        <li><a href="../SRD/index.html">SRD &mdash; SSH &amp; Remote Desktop Protocols</a></li>
+        <li><a href="../RFC/index.html">RFC &mdash; RFC Archive &amp; Authorship</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Rosetta Cluster:</strong> Infrastructure &middot; This digest surveys systems administration from its mainframe origins through the Unix revolution, cloud transformation, and into the AIOps frontier. The Linux and networking modules connect to the AI &amp; Computation cluster. Security and automation modules bridge to the Business cluster. Professional practice connects to the Creative cluster through knowledge management and mentorship traditions.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Systems Administration &middot; Infrastructure Cluster &middot; 10 research modules &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

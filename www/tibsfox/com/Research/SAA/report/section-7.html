@@ -90,6 +90,11 @@
       <a href="section-8.html">8. Future</a>
       <a href="section-9.html">9. DevOps</a>
       <a href="section-10.html">10. GSD</a>
+      <a href="section-11.html">11. Hooks</a>
+      <a href="section-12.html">12. Teams</a>
+      <a href="section-13.html">13. Orchestration</a>
+      <a href="section-14.html">14. Memory</a>
+      <a href="section-15.html">15. Case Studies</a>
       <a href="references.html">References</a>
     </div>
   </header>
@@ -99,7 +104,7 @@
         <span class="section-number">7</span>
         <h1>Improving Accuracy with AI Agents</h1>
         <p class="subtitle">Advanced prompt engineering techniques, evaluation frameworks, guardrails, and hallucination prevention strategies for production-ready AI agents</p>
-        <p class="research-date" style="margin-top: 1rem;">Research current as of: January 2026</p>
+        <p class="research-date" style="margin-top: 1rem;">Research current as of: April 2026</p>
     </header>
 
     <div class="container">
@@ -2227,7 +2232,7 @@ Report PASS or FAIL for each criterion."""</span>
 
         <section class="references">
             <h2>References</h2>
-            <p class="research-date">Research current as of: January 2026</p>
+            <p class="research-date">Research current as of: April 2026</p>
 
             <div class="ref-group">
                 <h3>Academic Papers</h3>
@@ -2338,8 +2343,168 @@ Report PASS or FAIL for each criterion."""</span>
             </div>
         </section>
 
+        <!-- v3.0 Extended Thinking and Effort Levels -->
+        <section class="content-section">
+            <h2>8. Extended Thinking and Effort-Based Accuracy Control</h2>
+
+            <p>Claude Code introduces <strong>extended thinking</strong> (referred to as "ultrathink" in skill definitions) as a mechanism to allocate more reasoning compute to complex problems. This represents a practical implementation of the test-time compute scaling research, where accuracy improves by giving the model more time to reason before producing output.</p>
+
+            <h3>8.1 Effort Levels and Their Accuracy Impact</h3>
+
+            <p>Claude Code supports configurable effort levels that control the depth of reasoning applied to each task. These map directly to token budget allocation and reasoning chain depth:</p>
+
+            <table class="benchmark-table">
+                <thead>
+                    <tr>
+                        <th>Effort Level</th>
+                        <th>Reasoning Depth</th>
+                        <th>Typical Use Case</th>
+                        <th>Accuracy Impact</th>
+                        <th>Cost Multiplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Low</strong></td>
+                        <td>Minimal reasoning, direct response</td>
+                        <td>Simple lookups, formatting, boilerplate</td>
+                        <td class="score-medium">Baseline</td>
+                        <td class="score-high">1x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medium</strong></td>
+                        <td>Standard reasoning chains</td>
+                        <td>Code review, documentation, standard tasks</td>
+                        <td class="score-high">+15-25%</td>
+                        <td class="score-medium">2-3x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High</strong></td>
+                        <td>Deep reasoning with exploration</td>
+                        <td>Architecture decisions, complex debugging, research</td>
+                        <td class="score-high">+25-40%</td>
+                        <td class="score-medium">4-6x</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max (Ultrathink)</strong></td>
+                        <td>Full extended thinking with backtracking</td>
+                        <td>Critical decisions, novel problems, safety-critical code</td>
+                        <td class="score-high">+35-50%</td>
+                        <td class="score-low">8-12x</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <h4>Production Pattern: Effort Routing</h4>
+                <p>The GSD framework uses effort levels strategically: <strong>low</strong> effort for file reads and simple edits, <strong>medium</strong> for standard code generation, <strong>high</strong> for planning and verification, and <strong>max</strong> for architecture decisions and security-critical operations. This maps directly to the Plan-and-Execute cost optimization pattern&mdash;allocate compute where it produces the most accuracy gain.</p>
+            </div>
+
+            <h3>8.2 Extended Thinking in Practice</h3>
+
+            <p>In Claude Code skills, extended thinking is triggered via the <code>ultrathink</code> directive in skill descriptions. When activated, Claude allocates significantly more reasoning tokens before producing output, enabling deeper exploration of solution spaces and more thorough error checking.</p>
+
+            <pre><code># Skill definition with extended thinking
+# The skill description triggers ultrathink for complex operations
+description: |
+  Security review with extended thinking enabled.
+  Analyze code for OWASP Top 10 vulnerabilities.
+  Use ultrathink for thorough threat modeling.
+
+# Subagent with effort control
+options:
+  effort: "high"        # Controls reasoning depth
+  maxTurns: 15          # Limits execution scope
+  isolation: "worktree" # Sandboxed execution</code></pre>
+        </section>
+
+        <!-- Self-Modifying System Safety -->
+        <section class="content-section">
+            <h2>9. Self-Modifying System Safety</h2>
+
+            <p>Self-modifying agent systems&mdash;where agents can create, edit, or delete their own skills and configurations&mdash;present unique accuracy and safety challenges. The GSD skill-creator project implements several patterns to ensure self-modification remains bounded and auditable.</p>
+
+            <h3>9.1 The Security-Hygiene Skill Pattern</h3>
+
+            <p>The <code>security-hygiene</code> skill activates automatically whenever skills, agents, or hooks are created, edited, or deleted. It enforces safety invariants:</p>
+
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <div class="technique-title">File Path Restrictions</div>
+                    <div class="technique-description">Skills can only be created or modified in designated directories (<code>.claude/skills/</code>, <code>.claude/agents/</code>, <code>.claude/hooks/</code>). Attempts to write skill-like files outside these paths are blocked.</div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="technique-title">Bounded Learning Guards</div>
+                    <div class="technique-description">The <code>skill-integration</code> skill manages bounded learning: skills can observe patterns and suggest improvements, but modifications require explicit validation. Token budgets cap per-skill consumption to prevent runaway learning loops.</div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="technique-title">Audit Trails Through Hooks</div>
+                    <div class="technique-description">Every skill modification is logged through the hook system. <code>PreToolUse</code> hooks validate that file operations target allowed paths. <code>PostToolUse</code> hooks record what changed and why. The git history provides a permanent, tamper-evident audit trail.</div>
+                </div>
+            </div>
+
+            <h3>9.2 The "Never Guess from Memory" Rule</h3>
+
+            <div class="highlight-box">
+                <h4>Critical Accuracy Principle</h4>
+                <p>A standing rule in production agent systems: <strong>never guess from memory&mdash;verify before acting.</strong> This means agents must read files before editing them, check git status before committing, verify test results before claiming success, and confirm branch state before merging. This rule directly implements the external verification research (Huang et al., ICLR 2024) at the operational level.</p>
+            </div>
+
+            <p>In practice, this rule is enforced through multiple mechanisms:</p>
+            <ul>
+                <li><strong>Read-before-edit requirement:</strong> The Edit tool rejects modifications to files that have not been read in the current session</li>
+                <li><strong>Pre-commit hooks:</strong> Validate commit message format and file contents before allowing commits</li>
+                <li><strong>Verification commands:</strong> <code>/gsd:verify-work</code> runs after each phase to confirm outcomes match goals</li>
+                <li><strong>Agent supervision:</strong> Check reads and writes against instructions&mdash;if misaligned, pause and investigate</li>
+            </ul>
+
+            <h3>9.3 Hook-Based Validation Patterns</h3>
+
+            <p><code>PreToolUse</code> hooks provide deterministic safety checks that execute before any tool call, independent of the LLM's reasoning. This creates a hard safety layer that cannot be bypassed by prompt injection or reasoning errors.</p>
+
+            <pre><code>// PreToolUse hook for commit validation
+// Runs deterministically before every Bash(git commit) call
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "input.command matches 'git commit'",
+        "hooks": [{
+          "type": "command",
+          "command": "validate-commit-msg.sh"
+          // Enforces: conventional commits format
+          // Enforces: subject < 72 chars
+          // Enforces: imperative mood, lowercase
+          // Rejects: commits to .planning/ files
+        }]
+      }
+    ]
+  }
+}</code></pre>
+
+            <h3>9.4 Agent Supervision Patterns</h3>
+
+            <p>When running multi-agent workflows, the supervising agent must verify that worker agents follow their instructions accurately. Key patterns from production experience:</p>
+
+            <ul>
+                <li><strong>Check reads against writes:</strong> If a worker agent was instructed to modify file A but also modified file B, flag and investigate</li>
+                <li><strong>Task sizing:</strong> 5-6 tasks per teammate maximum. Single teammate per milestone for complex work</li>
+                <li><strong>Failure handling:</strong> Agent failures happen&mdash;always have a fallback plan to write directly rather than relying on agent delegation</li>
+                <li><strong>Sort by complexity:</strong> Assign simple tasks first to verify agent reliability before escalating to complex work</li>
+                <li><strong>Context is RAM:</strong> Agent context is volatile. Persist state to disk, use structured handoff documents, and never assume cross-session memory</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>Lesson from Production</h4>
+                <p>In multi-agent orchestration with 4+ parallel agents, the supervision overhead is real. The <code>witness-observer</code> skill runs patrol loops, detects stalled agents, sends nudges, and escalates to the coordinator when agents fail to respond. Without this monitoring layer, agents can silently stall or produce incorrect output that propagates through the pipeline undetected.</p>
+            </div>
+        </section>
+
 <section class="content-section">
-    <h2>v2.0 Update: Goal-Backward Verification and Agent Team Quality Hooks</h2>
+    <h2>v3.0 Update: Goal-Backward Verification and Agent Team Quality Hooks</h2>
 
     <h3>Goal-Backward Verification for Agent Teams</h3>
     <p>Goal-backward verification ensures that agent teams deliver what was promised rather than just completing task lists. The verifier agent works backward from the stated goal to check whether the codebase actually achieves it. This prevents the common failure mode where all tasks are marked "done" but the feature doesn't actually work.</p>
@@ -2435,8 +2600,8 @@ Report PASS or FAIL for each criterion."""</span>
     </div>
 
     <footer>
-        <p>Section 7: Improving Accuracy with AI Agents | Research current as of January 30, 2026</p>
-        <p>Part of: Cutting-Edge Techniques in AI Agentic Programming and Design</p>
+        <p>Section 7: Improving Accuracy with AI Agents | Research current as of April 2026</p>
+        <p>Skills, Agents &amp; Teams</p>
     </footer>
 
     <script>
@@ -2519,7 +2684,7 @@ Report PASS or FAIL for each criterion."""</span>
   </div>
 
   <footer>
-    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+    <p>Skills, Agents &amp; Teams &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
   </footer>
 </body>
 </html>

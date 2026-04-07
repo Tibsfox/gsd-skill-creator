@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosystem Alignment Updates &mdash; GSD-Skill-Creator Improvements &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsi">
+  <header>
+    <h1>Ecosystem Alignment Updates</h1>
+    <div class="subtitle">GSD Upstream, Claude Code Hooks, Subagent Fields, S-PATH RAG, Context-Packet DAG</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="skill-security.html">Skill Security</a>
+      <a href="context-optimization.html">Context Optimization</a>
+      <a href="orchestration-patterns.html">Orchestration</a>
+      <a href="verification-pipeline.html">Verification</a>
+      <a href="agent-identity.html">Agent Identity</a>
+      <a href="mcp-hardening.html">MCP Hardening</a>
+      <a href="ecosystem-alignment.html" class="active">Ecosystem</a>
+      <a href="learning-system.html">Learning System</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Upstream Movement</h2>
+
+    <blockquote>
+      gsd-skill-creator exists at the intersection of two rapidly evolving upstreams: GSD (get-shit-done) and Claude Code. Both shipped significant features in March&ndash;April 2026 that directly affect the skill-creator&rsquo;s architecture. This module tracks those changes and maps them to implementation opportunities across the other seven GSI modules.
+    </blockquote>
+
+    <!-- ================================================================== -->
+    <h2>1. GSD Upstream v1.30.0 SDK Additions</h2>
+
+    <div class="card">
+      <p><strong>Release:</strong> gsd-pi v2.59.0 (March 27, 2026)<br>
+      <strong>Key addition:</strong> SDK for programmatic GSD workflow access. 8 runtime support. Standalone CLI.</p>
+    </div>
+
+    <p>The GSD SDK enables programmatic access to workflow primitives that were previously only available through the CLI. For gsd-skill-creator, this means skills and agents can drive GSD workflows without shell-escaping through Bash tool calls.</p>
+
+    <h3>SDK Capabilities Relevant to GSI</h3>
+    <table>
+      <thead><tr><th>SDK Feature</th><th>GSI Module Impact</th><th>Improvement</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Programmatic phase execution</strong></td><td>Orchestration</td><td>Mode selection (DIRECT/LIGHT/FULL) can be driven by SDK calls instead of CLI parsing</td></tr>
+        <tr><td><strong>State queries</strong></td><td>Context Optimization</td><td>Read .planning/ state without file I/O, reducing context pollution from read operations</td></tr>
+        <tr><td><strong>Workflow events</strong></td><td>Verification</td><td>Subscribe to phase completion events for automated verification triggers</td></tr>
+        <tr><td><strong>8 runtime support</strong></td><td>Learning System</td><td>Skills can be authored in any of 8 runtimes, not just TypeScript</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>2. Claude Code v2.1.88 New Hooks</h2>
+
+    <p>Three new hooks expand the deterministic control points available to gsd-skill-creator:</p>
+
+    <table>
+      <thead><tr><th>Hook</th><th>Fires When</th><th>GSI Application</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>PostCompact</strong></td>
+          <td>After context compaction occurs</td>
+          <td><strong>Context Optimization:</strong> Re-inject critical state (STATE.md, current PLAN.md, safety constraints) into the compressed context. This is the single most impactful hook for combating context rot.</td>
+        </tr>
+        <tr>
+          <td><strong>FileChanged</strong></td>
+          <td>When a watched file is modified externally</td>
+          <td><strong>Learning System:</strong> Monitor skill files for external modifications. If a skill changes outside the agent&rsquo;s control, trigger integrity verification before the next activation.</td>
+        </tr>
+        <tr>
+          <td><strong>PermissionDenied</strong></td>
+          <td>When a tool call is blocked by permissions</td>
+          <td><strong>Agent Identity:</strong> Log denied tool calls to the immutable audit trail. Track patterns of denied requests as a signal for misconfigured permissions or adversarial probing.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Hook + if-conditions</h3>
+    <p>The new <code>if-conditions</code> feature allows hooks to fire conditionally based on context state. This enables hooks that are aware of the current GSD phase, the active skill profile, or the agent&rsquo;s trust tier.</p>
+
+    <pre>
+// Conditional PostCompact hook
+{
+  "hook": "PostCompact",
+  "if": "phase.type === 'execute' && phase.risk > 'medium'",
+  "action": "inject-safety-context",
+  "files": [".planning/STATE.md", ".planning/SAFETY-CONSTRAINTS.md"]
+}</pre>
+
+    <!-- ================================================================== -->
+    <h2>3. New Subagent Fields</h2>
+
+    <p>Claude Code v2.1.88 introduced new fields for subagent configuration that directly enable several GSI improvements:</p>
+
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>GSI Application</th></tr></thead>
+      <tbody>
+        <tr><td><code>effort</code></td><td>0.0&ndash;1.0</td><td>Orchestration: set effort based on task complexity. DIRECT=0.3, LIGHT=0.6, FULL=1.0</td></tr>
+        <tr><td><code>maxTurns</code></td><td>integer</td><td>MCP Hardening: cap turns to prevent overthinking loops. Workers get 15, verifiers get 10.</td></tr>
+        <tr><td><code>isolation</code></td><td>&ldquo;worktree&rdquo;</td><td>Context Optimization: workers operate in isolated worktrees with clean context (90.2% improvement)</td></tr>
+        <tr><td><code>memory</code></td><td>boolean</td><td>Learning System: enable/disable memory for sub-agents. Verifiers should have memory disabled for clean evaluation.</td></tr>
+        <tr><td><code>skills</code></td><td>string[]</td><td>Orchestration: dynamic skill profile assignment per worker task</td></tr>
+        <tr><td><code>mcpServers</code></td><td>string[]</td><td>MCP Hardening: scope MCP server access per sub-agent. Math workers get math-coprocessor; research workers get nothing.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ================================================================== -->
+    <h2>4. Skill Description 250-char Cap</h2>
+
+    <p>Claude Code now enforces a 250-character limit on skill descriptions. All 6 gsd-skill-creator skills that exceeded this limit were trimmed in the March ecosystem alignment update. This constraint has implications for skill security:</p>
+
+    <ul>
+      <li><strong>Reduced attack surface:</strong> Shorter descriptions mean fewer tokens for adversarial DDIPE payloads to hide in</li>
+      <li><strong>Activation precision:</strong> Tighter descriptions reduce false-positive activations, combating ghost token accumulation</li>
+      <li><strong>Token savings:</strong> 34 skills &times; ~50 char reduction = ~1,700 characters (~425 tokens) saved at session start</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>5. S-PATH RAG: Graph-Aware Retrieval</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> arXiv:2603.23512 &mdash; S-PATH proposes graph-aware retrieval that traverses relationship edges between documents, using a verifier pattern and path budget to control exploration depth.</p>
+    </div>
+
+    <p>For gsd-skill-creator, S-PATH maps to the cross-reference traversal problem in the PNW Research Series. The corpus of 242 projects has rich inter-project connections (the Complex Plane analysis shows these as magnitude and phase values). S-PATH&rsquo;s path budget concept aligns with the token budget tracking already implemented in the token-budget skill.</p>
+
+    <h3>Integration Points</h3>
+    <ul>
+      <li><strong>Skill discovery:</strong> When a task requires capabilities not in the loaded skill set, traverse the skill graph to find related skills (S-PATH&rsquo;s graph layer above vector embeddings)</li>
+      <li><strong>Research navigation:</strong> The research co-processor can use S-PATH to traverse research project connections when building synthesis documents</li>
+      <li><strong>Context building:</strong> Instead of loading all potentially relevant context, use S-PATH&rsquo;s verifier to evaluate each traversal step and stop when the path budget is exhausted</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>6. Context-Packet DAG Resolver</h2>
+
+    <p>The gsd-build project introduced context-packet: a DAG context resolver with token budget awareness. It models context dependencies as a directed acyclic graph and resolves them within a token budget, dropping lowest-priority nodes when the budget is exceeded.</p>
+
+    <h3>DAG for Skill Loading</h3>
+    <pre>
+// Context-packet DAG for a typical GSD execute-phase session
+root
+  |-- system-prompt (required, ~2K tokens)
+  |-- safety-constraints (required, ~500 tokens)
+  |-- project-state (required, ~1K tokens)
+  |     |-- STATE.md
+  |     |-- current PLAN.md
+  |
+  |-- active-skills (on-demand, budget-aware)
+  |     |-- gsd-workflow (always)
+  |     |-- security-hygiene (always)
+  |     |-- [task-specific skills] (triggered)
+  |
+  |-- tool-definitions (deferred, loaded via ToolSearch)
+  |     |-- core-tools: Read, Edit, Write, Bash, Grep, Glob
+  |     |-- [MCP tools loaded on first use]
+  |
+  |-- conversation-history (compactable, lowest priority)
+        |-- recent turns (high priority)
+        |-- older turns (low priority, compaction candidates)</pre>
+
+    <p>The DAG resolver ensures that safety-critical context is never dropped, even under severe budget pressure. This directly supports the context rot prevention strategy from module 2.</p>
+
+    <!-- ================================================================== -->
+    <h2>Corpus Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related Projects (from corpus analysis &mdash; 22 projects, z = 0.2071)</h4>
+      <ul>
+        <li><a href="../OOPS/index.html">OOPS &mdash; Ecosystem Alignment</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../GSA/index.html">GSA &mdash; GSD System Architecture</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../LLM/index.html">LLM &mdash; Large Language Models</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Complex plane state:</strong> z = 0.1692 + 0.1196i, |z| = 0.2071 &mdash; 22 related projects spanning 3 domains (general, ai, space). TKN (Token Economics) at magnitude 1.291 is the strongest connection. The upstream GSD projects (GSA, GSD, GSD2, GPO) cluster together, reflecting the tight coupling between ecosystem alignment and GSD architecture. NASA provides the space domain bridge.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Ecosystem Alignment Updates &middot; GSD-Skill-Creator Improvements &middot; PNW Research Series</p>
+    <p><a href="index.html">GSI Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

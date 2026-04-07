@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflective Context Learning &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Reflective Context Learning: Optimization Primitives</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-context">Context &amp; Knowledge</span></div>
+      <h3>Reflective Context Learning with Optimization Primitives</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.03189" target="_blank"><span class="arxiv-id">2604.03189</span></a></p>
+      <p><strong>Authors:</strong> Vassilyev et al.</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.AI, cs.LG</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>Introduces two operators for in-context learning optimization: reflection converts execution trajectories into update signals, and mutation applies those signals to improve agent behavior. The framework borrows classical optimization concepts (batching, auxiliary losses, variance reduction) for context-space optimization. Evaluated on AppWorld, BrowseComp+, and RewardBench2, demonstrating that reflective learning in context can approach the effectiveness of weight-space optimization.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><strong>Reflection operator:</strong> converts execution trajectories into structured update signals</li>
+      <li><strong>Mutation operator:</strong> applies update signals to improve future behavior</li>
+      <li>Classical optimization primitives (batching, auxiliary losses) transfer to context space</li>
+      <li>Variance reduction techniques improve learning stability across episodes</li>
+      <li>Effective on AppWorld (tool use), BrowseComp+ (browsing), RewardBench2 (reward)</li>
+      <li>Context-space optimization approaches weight-space optimization effectiveness</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <p>The reflection operator extracts structured lessons from agent execution traces: what worked, what failed, and why. The mutation operator modifies the agent's system prompt or context window using these lessons. Classical optimization concepts are adapted: batch reflections across multiple episodes, use auxiliary losses to preserve previously learned behaviors, and reduce variance through ensemble reflection.</p>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Benchmark</th><th>Domain</th><th>Improvement</th></tr></thead>
+      <tbody>
+        <tr><td>AppWorld</td><td>Tool use tasks</td><td>Significant via reflection</td></tr>
+        <tr><td>BrowseComp+</td><td>Web browsing</td><td>Consistent across episodes</td></tr>
+        <tr><td>RewardBench2</td><td>Reward modeling</td><td>Variance reduced</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>This is the theoretical foundation for our skill-creator's observation/suggestion cycle. Our sc:observe and sc:digest skills implement a version of the reflection operator &mdash; extracting patterns from session data. The mutation operator maps to our skill suggestion acceptance workflow. The classical optimization framing (batching, auxiliary losses) suggests we should batch observations across sessions rather than reacting to each individually, and preserve prior learned patterns when incorporating new ones.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (3 projects, 246-project corpus)</h4>
+      <span class="ref-tag">ALR &mdash; Artemis Learning Resources</span>
+      <span class="ref-tag">GSI &mdash; GSD Improvements</span>
+      <span class="ref-tag">NASA &mdash; NASA Mission Series</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-00901.html">HERA: Experience as Compass</a></li>
+        <li><a href="paper-2604-01647.html">EnviSmart: Environmental Data Workflows</a></li>
+        <li><a href="paper-2604-04157.html">Readable Minds: Memory &amp; ToM</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.03189 &middot; Reflective Context Learning</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

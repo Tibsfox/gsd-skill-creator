@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory &amp; State Management &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card, .memory-card, .state-card,
+    .lifecycle-card, .handoff-card, .warning-card, .antipattern-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid, .memory-grid,
+    .lifecycle-grid, .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+    .warning-card { border-left: 4px solid #e94560; }
+    .antipattern-card { border-left: 4px solid #ff6b6b; background: rgba(233,69,96,0.08); }
+    .memory-type-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-user { background: rgba(100,149,237,0.3); color: #6495ed; }
+    .badge-feedback { background: rgba(46,204,113,0.3); color: #2ecc71; }
+    .badge-project { background: rgba(241,196,15,0.3); color: #f1c40f; }
+    .badge-reference { background: rgba(155,89,182,0.3); color: #9b59b6; }
+    .state-flow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+    .state-flow .state {
+      background: var(--saa-accent);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--saa-border);
+    }
+    .state-flow .state.active {
+      background: rgba(233,69,96,0.3);
+      border-color: var(--saa-highlight);
+      color: white;
+    }
+    .state-flow .arrow { color: var(--saa-text-muted); }
+    .hierarchy-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .hierarchy-list li {
+      padding: 0.6rem 1rem;
+      border-left: 3px solid var(--saa-border);
+      margin-bottom: 0.4rem;
+      background: rgba(255,255,255,0.03);
+    }
+    .hierarchy-list li:first-child { border-left-color: var(--saa-highlight); }
+    .hierarchy-list li:nth-child(2) { border-left-color: #6495ed; }
+    .hierarchy-list li:nth-child(3) { border-left-color: #2ecc71; }
+    .hierarchy-list li:nth-child(4) { border-left-color: #f1c40f; }
+    .hierarchy-list li strong { color: var(--saa-highlight-light); }
+    .handoff-structure {
+      background: rgba(15,52,96,0.4);
+      border: 1px solid var(--saa-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>Memory &amp; State Management
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html">3. Multi-Agent</a>
+      <a href="section-4.html">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html">10. GSD</a>
+      <a href="section-11.html">11. Hooks</a>
+      <a href="section-12.html">12. MCP</a>
+      <a href="section-13.html">13. Orchestration</a>
+      <a href="section-14.html" class="active">14. Memory</a>
+      <a href="section-15.html">15. Security</a>
+      <a href="references.html">References</a>
+    </div>
+  </header>
+
+
+    <header>
+        <span class="section-number">14</span>
+        <h1>Memory &amp; State Management</h1>
+        <p class="research-date">Research current as of: April 2026</p>
+        <div class="breadcrumb">
+            <a href="../index.html">Report Home</a> / Section 14
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="navigation">
+            <a href="section-13.html" class="nav-button">
+                <span>&larr; 13. Orchestration Patterns</span>
+            </a>
+            <a href="section-15.html" class="nav-button next">
+                <span>15. Security &amp; Trust &rarr;</span>
+            </a>
+        </nav>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>In This Section</h3>
+            <ul>
+                <li><a href="#memory-problem">14.1 The Memory Problem in Agentic Systems</a></li>
+                <li><a href="#instructions-hierarchy">14.2 CLAUDE.md &mdash; The Instructions Hierarchy</a></li>
+                <li><a href="#auto-memory">14.3 Auto Memory System</a></li>
+                <li><a href="#what-not-to-save">14.4 What NOT to Save</a></li>
+                <li><a href="#context-handoffs">14.5 Context Handoffs &mdash; Session Continuity</a></li>
+                <li><a href="#beads-state">14.6 Beads State &mdash; Crash-Recoverable Persistence</a></li>
+                <li><a href="#thread-management">14.7 Thread Management &mdash; Cross-Session Work</a></li>
+                <li><a href="#state-machines">14.8 State Machines in Agentic Workflows</a></li>
+                <li><a href="#memory-lifecycle">14.9 The Memory Lifecycle</a></li>
+                <li><a href="#scaling-memory">14.10 Scaling Memory Across Projects</a></li>
+                <li><a href="#practical-patterns">14.11 Practical Patterns</a></li>
+            </ul>
+        </div>
+
+
+        <!-- 14.1 The Memory Problem in Agentic Systems -->
+        <section class="content-section" id="memory-problem">
+            <h2>14.1 The Memory Problem in Agentic Systems</h2>
+
+            <p>Every agentic system eventually runs into the same wall: the agent forgets. Not because it lacks intelligence, but because its memory is fundamentally ephemeral. A conversation ends, a context window fills, a process restarts, and everything the agent learned &mdash; every decision rationale, every discovered constraint, every hard-won understanding of the codebase &mdash; vanishes. This is not a theoretical limitation. It is the single most practical obstacle to using AI agents for sustained, multi-session work.</p>
+
+            <p>Having operated an agentic system across 190+ research projects and months of continuous development, we can report that memory management is not an afterthought or a nice-to-have feature. It is the foundation on which everything else rests. Without reliable memory, skills cannot adapt, orchestration cannot coordinate, and agents cannot build on prior work. Every session starts from zero.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Context Windows Are Finite</h4>
+                    <p>Even with 1M-token context windows, there is always more project state than fits in context. A codebase with 21,000+ tests, 34 skills, 57 commands, and hundreds of source files simply cannot be loaded in its entirety. The agent must know <em>what</em> to load and <em>when</em>, which requires memory about the project that exists outside the context window itself.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Sessions End, Context Resets</h4>
+                    <p>A conversation that runs for 8 hours builds an enormous amount of implicit state: which approaches were tried and rejected, which files were modified, which constraints were discovered. When that session ends &mdash; whether by choice, by crash, or by reaching context limits &mdash; all of that state disappears unless it has been explicitly persisted. The next session starts with a blank slate and a system prompt.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Multiple Agents Need Shared State</h4>
+                    <p>When four parallel agents are executing different waves of a mission pack, they each operate in independent context windows. Agent A discovers that a CSS variable name changed. Agent B is about to use the old name. Without shared state outside any individual context window, coordination is impossible. The filesystem becomes the shared memory bus.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Conversation Memory vs. Persistent Knowledge</h4>
+                    <p>There is a fundamental gap between what an agent remembers within a conversation (everything said so far) and what it knows across conversations (nothing, by default). Bridging this gap is the entire memory problem. The solution is not to make context windows infinitely large &mdash; it is to build structured persistence systems that load the right knowledge at the right time.</p>
+                </div>
+            </div>
+
+            <h3>Why File-Based Persistence Wins</h3>
+
+            <p>After extensive experimentation, a clear pattern emerges: <strong>file-based persistence outperforms every alternative for agentic memory</strong>. This is counterintuitive if you come from a database-centric background, but the reasons are compelling:</p>
+
+            <div class="comparison-card">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>File-Based</th>
+                            <th>Database-Based</th>
+                            <th>In-Context Only</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Git integration</strong></td>
+                            <td>Native &mdash; version controlled, diffable, branchable</td>
+                            <td>Requires export/import</td>
+                            <td>Not applicable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Agent readability</strong></td>
+                            <td>Direct &mdash; agents read files natively</td>
+                            <td>Requires query tools</td>
+                            <td>Already in context</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Human readability</strong></td>
+                            <td>Open in any editor</td>
+                            <td>Requires client</td>
+                            <td>Visible in transcript</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cross-session durability</strong></td>
+                            <td>Survives everything</td>
+                            <td>Survives everything</td>
+                            <td>Lost on session end</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-agent access</strong></td>
+                            <td>Any agent can read any file</td>
+                            <td>Connection required</td>
+                            <td>Only the current agent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crash recovery</strong></td>
+                            <td>Files survive crashes</td>
+                            <td>Transaction-dependent</td>
+                            <td>Lost completely</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Portability</strong></td>
+                            <td>Copy the directory</td>
+                            <td>Migration required</td>
+                            <td>Not portable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>The filesystem is the universal interface. Every agent can read files. Every tool can write files. Git tracks changes. Humans can inspect and edit directly. There is no impedance mismatch, no connection pooling, no schema migration. A markdown file in <code>.planning/</code> is simultaneously a memory store, a documentation artifact, and a version-controlled record of decisions.</p>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Practitioner Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p>We maintain 50+ memory files, dozens of planning documents, structured handoffs, and state machines &mdash; all as plain files on disk. This is not a prototype. It is a production system that has supported months of continuous operation across hundreds of sessions. The filesystem is the most reliable, most debuggable, and most portable persistence layer available to agentic systems today.</p>
+                </div>
+            </aside>
+        </section>
+
+
+        <!-- 14.2 CLAUDE.md — The Instructions Hierarchy -->
+        <section class="content-section" id="instructions-hierarchy">
+            <h2>14.2 CLAUDE.md &mdash; The Instructions Hierarchy</h2>
+
+            <p>Before an agent processes its first message, before any skill loads or any memory file is consulted, there is an instructions layer that shapes everything the agent does. In Claude Code, this layer is the <code>CLAUDE.md</code> hierarchy &mdash; a cascade of configuration files that define project conventions, user preferences, local overrides, and enterprise policies. Understanding this hierarchy is essential because instructions are the <em>highest-priority</em> form of memory: they load automatically, they are always in context, and they override default behavior.</p>
+
+            <h3>The Four-Level Hierarchy</h3>
+
+            <p>Instructions cascade from most specific to most general, with more specific instructions taking precedence when conflicts arise:</p>
+
+            <ul class="hierarchy-list">
+                <li><strong>Enterprise / Managed Instructions</strong> &mdash; Highest priority. Set by organization administrators. Cannot be overridden by users or projects. Used to enforce security policies, compliance requirements, and organizational standards. Developers cannot modify or see the full content of these instructions.</li>
+                <li><strong>Project Instructions (<code>.claude/CLAUDE.md</code>)</strong> &mdash; Checked into the repository. Shared by all contributors. Defines the project's tech stack, commit conventions, build commands, file layout, and architectural constraints. This is where team-wide agreements live.</li>
+                <li><strong>User Instructions (<code>~/.claude/CLAUDE.md</code>)</strong> &mdash; Global to the user, across all projects. Defines personal preferences like verbosity level, commit message style, or preferred testing frameworks. Applies everywhere unless overridden by project-level instructions.</li>
+                <li><strong>Local Instructions (<code>.claude/CLAUDE.local.md</code>)</strong> &mdash; Gitignored. Per-developer, per-machine configuration. Used for local paths, environment-specific settings, or experimental overrides that should not be committed to the repository.</li>
+            </ul>
+
+            <h3>What Belongs Where</h3>
+
+            <div class="card-grid">
+                <div class="pattern-card">
+                    <h4>Project Instructions</h4>
+                    <p><em>Committed to the repo, shared by the team</em></p>
+                    <ul>
+                        <li>Tech stack and language versions</li>
+                        <li>Build, test, and lint commands</li>
+                        <li>Commit message conventions</li>
+                        <li>Key file locations and architecture</li>
+                        <li>Boundary rules (e.g., "src/ never imports desktop/")</li>
+                        <li>Important caveats about the codebase</li>
+                    </ul>
+<pre><code># Example: .claude/CLAUDE.md
+
+## Tech Stack
+- TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
+- Build: `npm run build`
+- Test: `npm test` (Vitest, 21,298 tests)
+
+## Commit Convention
+- Conventional Commits: &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+- Imperative mood, lowercase, no period
+
+## Strict Boundary
+- src/ never imports desktop/@tauri-apps/api
+- desktop/ never imports Node.js modules</code></pre>
+                </div>
+                <div class="pattern-card">
+                    <h4>User Instructions</h4>
+                    <p><em>Global preferences, all projects</em></p>
+                    <ul>
+                        <li>Preferred verbosity level</li>
+                        <li>Default editor and tool preferences</li>
+                        <li>Personal coding style preferences</li>
+                        <li>How to handle commit authorship</li>
+                        <li>Session startup behavior</li>
+                    </ul>
+<pre><code># Example: ~/.claude/CLAUDE.md
+
+## Preferences
+- Lowest verbosity in conversation
+- Full verbosity in documentation
+- Never suggest pruning docs
+- Ask what I'm working on first
+- Autonomous execution preferred</code></pre>
+                </div>
+            </div>
+
+            <h3>Path-Specific Rules with Glob Patterns</h3>
+
+            <p>Instructions can be scoped to specific file paths using glob patterns. This enables rules that only apply when working in certain parts of the codebase:</p>
+
+<pre><code># In CLAUDE.md:
+# When working in the test directory:
+# *.test.ts files should use describe/it blocks, not test()
+# Mock external services, never hit real APIs
+
+# When working in src-tauri/:
+# All Rust code must handle errors with Result, never unwrap()
+# Use serde for serialization</code></pre>
+
+            <p>This is especially powerful in monorepos or projects with distinct subsystems. The instructions for the Rust backend can differ entirely from the instructions for the TypeScript frontend, and both coexist in the same <code>CLAUDE.md</code> file.</p>
+
+            <h3>Modular Instructions with @include</h3>
+
+            <p>As instruction files grow, the <code>@include</code> directive allows splitting them into focused modules:</p>
+
+<pre><code># CLAUDE.md
+@include .claude/instructions/commit-rules.md
+@include .claude/instructions/testing-conventions.md
+@include .claude/instructions/architecture-boundaries.md</code></pre>
+
+            <p>Each included file is loaded as if its contents were inline at the include point. This keeps the root <code>CLAUDE.md</code> concise while allowing detailed conventions to be maintained in dedicated files. It also enables conditional inclusion &mdash; different team members can include different instruction sets in their local configuration.</p>
+
+            <div class="warning-card">
+                <h4>Instructions Are Not Memory</h4>
+                <p>A common mistake is treating <code>CLAUDE.md</code> as a memory dump &mdash; recording everything the agent should know. This is wrong. Instructions define <em>behavior</em>: how the agent should act, what conventions to follow, what rules to enforce. Factual knowledge about the project (current state, recent decisions, open questions) belongs in the memory system, not in instructions. Overloading <code>CLAUDE.md</code> with project state makes it bloated, unstable, and hard to maintain.</p>
+            </div>
+        </section>
+
+
+        <!-- 14.3 Auto Memory System -->
+        <section class="content-section" id="auto-memory">
+            <h2>14.3 Auto Memory System</h2>
+
+            <p>Claude Code provides a built-in persistent memory system that bridges the gap between ephemeral conversations and long-term knowledge. Unlike the instructions hierarchy which defines <em>behavior</em>, the memory system stores <em>knowledge</em> &mdash; facts about the user, the project, decisions made, and lessons learned. This memory persists across conversations automatically, loading relevant memories based on semantic matching against the current context.</p>
+
+            <p>The system supports five distinct memory types, each serving a specific purpose. Understanding these types and using them correctly is the difference between a memory system that helps and one that becomes noise.</p>
+
+            <h3><span class="memory-type-badge badge-user">User</span> User Memories</h3>
+
+            <p>User memories capture who the developer is &mdash; their expertise, background, and working style. These memories shape how Claude approaches problems and communicates solutions. They persist across all projects because the user is the same person regardless of which codebase they are working in.</p>
+
+            <div class="card-grid">
+                <div class="memory-card">
+                    <h4>Expertise Profiling</h4>
+                    <p>Recording a developer's skill set allows the agent to calibrate its explanations and suggestions. A "senior Go developer, new to React" will receive different guidance than a "junior developer learning both." The agent can skip basics in areas of expertise and provide more scaffolding in unfamiliar territory.</p>
+<pre><code>---
+name: developer-expertise
+description: Developer skill profile for response calibration
+type: user
+---
+Senior TypeScript/Rust developer. 20+ years systems programming.
+Familiar with: GPU compute, CUDA, shader languages, embedded.
+New to: Unison language (actively exploring).
+
+Why: Calibrate explanations - skip basics in TS/Rust,
+provide more context for Unison patterns.
+
+How to apply: Default to expert-level code suggestions.
+Explain Unison concepts with comparisons to familiar langs.</code></pre>
+                </div>
+                <div class="memory-card">
+                    <h4>Working Style</h4>
+                    <p>Capturing preferences about communication, workflow, and interaction style prevents the agent from repeatedly violating the developer's preferences. This is especially important because these preferences are often non-obvious and specific to the individual.</p>
+<pre><code>---
+name: working-style
+description: Communication and workflow preferences
+type: user
+---
+Lowest verbosity in conversation.
+Full verbosity in documentation and research output.
+Autonomous execution preferred - don't stop for input.
+Never suggest pruning documentation.
+
+Why: Developer values efficiency in dialogue but
+thoroughness in artifacts.
+
+How to apply: Keep conversational responses concise.
+Write exhaustively in docs, research, and release notes.</code></pre>
+                </div>
+            </div>
+
+            <h3><span class="memory-type-badge badge-feedback">Feedback</span> Feedback Memories</h3>
+
+            <p>Feedback memories are corrections and confirmations &mdash; what to do and what not to do, learned from actual interaction. These are the most operationally important memories because they prevent the agent from repeating mistakes. Every time the developer says "don't do that" or "yes, that was the right call," it is a feedback memory waiting to be saved.</p>
+
+            <div class="card-grid">
+                <div class="memory-card">
+                    <h4>Corrections</h4>
+                    <p>When the agent does something wrong, the correction should be captured immediately so it never happens again. The key is recording not just the rule but <em>why</em> it matters.</p>
+<pre><code>---
+name: no-planning-commits
+description: Never commit .planning/ files to git
+type: feedback
+---
+HARD RULE: NEVER git add/commit/push .planning files.
+
+Why: .planning/ is gitignored by design. It contains
+local-only state, personal notes, and IP that must
+never reach the remote repository.
+
+How to apply: Before any git add, check that no paths
+start with .planning/. If the user asks to commit
+planning files, warn them and refuse.</code></pre>
+                </div>
+                <div class="memory-card">
+                    <h4>Confirmations</h4>
+                    <p>Positive feedback is equally valuable. When the agent makes a good decision, recording it reinforces the pattern for future sessions.</p>
+<pre><code>---
+name: release-pipeline-quality
+description: Release quality over quantity approach
+type: feedback
+---
+ONE release at a time, sequential, with
+carry-forward retrospectives. No batching.
+
+Why: User confirmed this approach produces higher
+quality output. Each release improves on the last.
+
+How to apply: Never batch multiple releases.
+Complete one fully before starting the next.
+Include retrospective in every release.</code></pre>
+                </div>
+            </div>
+
+            <h3><span class="memory-type-badge badge-project">Project</span> Project Memories</h3>
+
+            <p>Project memories capture ongoing work context &mdash; active initiatives, architectural decisions, constraints, and current state. These are the most dynamic memories, changing as the project evolves. They answer the question: "What is happening in this project right now?"</p>
+
+            <div class="memory-card">
+                <h4>Active Initiative Tracking</h4>
+<pre><code>---
+name: artemis-ii-launch
+description: Artemis II mission tracking on artemis-ii branch
+type: project
+---
+Artemis II LAUNCHED on artemis-ii branch (2026-04-01).
+Subtitle: "The Space Between the Moon and the Earth"
+pgvector DB: maple@tibsfox, schema artemis, 6 tables.
+1,087 pages loaded. sweep.py for hourly updates.
+35+ live pages. Day 8 operations.
+
+Why: Primary active project. All work happens here.
+Branch context critical for every operation.
+
+How to apply: Default to artemis-ii branch.
+Check sweep.py status before page updates.
+Never merge to main without explicit request.</code></pre>
+            </div>
+
+            <p>A critical rule for project memories: <strong>convert relative dates to absolute dates</strong>. "Last week we decided..." becomes meaningless after the next session. "On 2026-03-29 we decided..." remains useful forever. This seems obvious but is routinely violated.</p>
+
+            <h3><span class="memory-type-badge badge-reference">Reference</span> Reference Memories</h3>
+
+            <p>Reference memories are pointers to external systems &mdash; where to find information that lives outside the codebase. They do not contain the information itself; they contain the directions for finding it.</p>
+
+            <div class="memory-card">
+                <h4>External System Pointers</h4>
+<pre><code>---
+name: gsd2-setup
+description: GSD-2 CLI location and configuration
+type: reference
+---
+gsd-pi v2.59.0, standalone CLI.
+Commands: /gsd auto + doctor + KNOWLEDGE.md
+Coexists with GSD v1.
+
+Why: Developer uses both GSD versions. Need to know
+which CLI to invoke and where it's installed.
+
+How to apply: When GSD commands are needed, check
+which version is appropriate for the task.</code></pre>
+            </div>
+
+            <h3>The MEMORY.md Index</h3>
+
+            <p>Every conversation begins by loading <code>MEMORY.md</code> &mdash; a single index file that provides one-line pointers to all memory files. This is the most constrained artifact in the entire memory system: it has a <strong>hard limit of 200 lines</strong>. Everything that exceeds 200 lines is truncated and lost to the session.</p>
+
+            <p>This constraint is fundamental, not incidental. Loading all memory into every session would be wasteful and noisy. The index provides just enough context for the agent to know what memories exist and when to load them in full. The design forces discipline: each memory gets a single line, organized by semantic topic.</p>
+
+            <div class="info-card">
+                <h4>MEMORY.md Structure</h4>
+<pre><code># Memory: project-name
+
+## HOT -- Current State (always in context)
+**Active initiative** -- summary
+- [Detail link](detail-file.md) -- one-line description
+- Key fact or constraint
+
+## WARM -- Reference (session start)
+### Completed Milestones (Condensed)
+- Milestone summary with key numbers
+
+### Standing Rules
+- **HARD RULE**: critical behavioral constraint
+- Session startup protocol description
+
+## COLD -- Archive
+- Archived project context (rarely needed)</code></pre>
+                <p>The HOT/WARM/COLD organization mirrors CPU cache hierarchy. HOT memories are always relevant. WARM memories are useful at session start. COLD memories are archived context that is rarely needed but preserved for reference. The agent reads HOT first, consults WARM as needed, and only reaches into COLD when specifically asked.</p>
+            </div>
+
+            <p>Operating at 50+ memory files, we have found that the 200-line limit on MEMORY.md is simultaneously the system's greatest constraint and its greatest discipline mechanism. It forces ruthless prioritization. If a memory is not important enough to earn a line in the index, it is either not important enough to save, or it needs to be consolidated with another memory. The limit prevents the index from becoming a dumping ground.</p>
+        </section>
+
+
+        <!-- 14.4 What NOT to Save -->
+        <section class="content-section" id="what-not-to-save">
+            <h2>14.4 What NOT to Save</h2>
+
+            <p>The memory system's effectiveness depends as much on what you exclude as what you include. Every unnecessary memory adds noise, consumes index lines, and increases the chance that the agent acts on stale information. The single most common mistake in agentic memory systems is saving too much.</p>
+
+            <div class="card-grid">
+                <div class="antipattern-card">
+                    <h4>Code Patterns</h4>
+                    <p><strong>Don't save:</strong> "The authentication module uses JWT with RS256 signing."</p>
+                    <p><strong>Why not:</strong> The code itself is the authoritative source. The agent can read <code>auth.ts</code> directly. A memory about code patterns becomes stale the moment the code changes, and the agent has no way to know the memory is outdated without reading the code anyway.</p>
+                    <p><strong>Instead:</strong> Save a reference memory pointing to where authentication is implemented, if the location is non-obvious.</p>
+                </div>
+                <div class="antipattern-card">
+                    <h4>Git History</h4>
+                    <p><strong>Don't save:</strong> "In commit abc123 we refactored the database layer."</p>
+                    <p><strong>Why not:</strong> Git is a better database for git history than memory files. The agent can run <code>git log</code>, <code>git diff</code>, and <code>git blame</code>. Duplicating this information in memory creates a shadow history that diverges from the real one.</p>
+                    <p><strong>Instead:</strong> Save the <em>decision</em> behind the refactor if it is non-obvious from the commit message.</p>
+                </div>
+                <div class="antipattern-card">
+                    <h4>Debugging Solutions</h4>
+                    <p><strong>Don't save:</strong> "Fixed the race condition by adding a mutex around the counter."</p>
+                    <p><strong>Why not:</strong> The fix is in the code. If someone asks about it, they can read the code and the commit message. Saving debugging narratives creates archaeological layers of "we tried X, then Y, then Z" that are useless after the fix ships.</p>
+                    <p><strong>Instead:</strong> If the debugging revealed a systemic issue (e.g., "this library has a known concurrency bug"), save that as a project constraint.</p>
+                </div>
+                <div class="antipattern-card">
+                    <h4>CLAUDE.md Content</h4>
+                    <p><strong>Don't save:</strong> "The project uses Conventional Commits with imperative mood."</p>
+                    <p><strong>Why not:</strong> This is already in <code>CLAUDE.md</code>, which loads automatically into every session. Duplicating it in memory creates two sources of truth that can diverge. When the convention changes, you have to update both places.</p>
+                    <p><strong>Instead:</strong> Keep conventions in <code>CLAUDE.md</code> exclusively. Use memory only for things that don't belong in instructions.</p>
+                </div>
+                <div class="antipattern-card">
+                    <h4>Ephemeral Task Details</h4>
+                    <p><strong>Don't save:</strong> "Currently debugging the WebSocket timeout issue on line 342."</p>
+                    <p><strong>Why not:</strong> This information is useful for exactly one session. By the next session, the issue is either fixed (making the memory stale) or the line number has changed (making the memory wrong). Ephemeral task state belongs in the conversation, not in persistent memory.</p>
+                    <p><strong>Instead:</strong> If the task spans sessions, use a context handoff document (Section 14.5) rather than a memory file.</p>
+                </div>
+                <div class="antipattern-card">
+                    <h4>Obvious Tooling</h4>
+                    <p><strong>Don't save:</strong> "Use npm install to install dependencies."</p>
+                    <p><strong>Why not:</strong> The agent already knows standard tooling. Saving obvious facts wastes index lines and implies that the agent needs to be taught things it was trained on. Save only non-obvious tooling quirks.</p>
+                    <p><strong>Instead:</strong> Save unusual build requirements, like "must run the install script before building" or "requires CUDA 12.1 specifically."</p>
+                </div>
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Decision Rule</span>
+                </div>
+                <div class="callout-content">
+                    <p>Before saving a memory, apply this test: <strong>"If this memory were deleted, would the agent be unable to recover the information from the codebase, git history, or CLAUDE.md?"</strong> If the answer is no &mdash; if the information can be recovered from existing sources &mdash; don't save it. Memory is for knowledge that exists nowhere else: decisions, preferences, constraints, and cross-project context.</p>
+                </div>
+            </aside>
+        </section>
+
+
+        <!-- 14.5 Context Handoffs — Session Continuity -->
+        <section class="content-section" id="context-handoffs">
+            <h2>14.5 Context Handoffs &mdash; Session Continuity</h2>
+
+            <p>Context handoffs are the bridge between sessions. When a session ends &mdash; whether planned or forced by context limits &mdash; the handoff document captures everything the next session needs to continue seamlessly. This is not a memory file; it is a structured transfer document designed for a specific moment in time. Memories store long-term knowledge. Handoffs store short-term session state.</p>
+
+            <p>The distinction matters operationally. A memory file about "branch strategy" is relevant for months. A handoff document about "what I was doing 30 minutes ago when the context window filled" is relevant for exactly one resumption. Mixing the two degrades both.</p>
+
+            <h3>The Handoff Structure</h3>
+
+            <p>Effective handoffs follow a rigid structure. We developed this format through trial and error across hundreds of sessions, and every field exists because its absence caused a resumption failure at some point:</p>
+
+            <div class="handoff-structure">
+# HANDOFF &mdash; [Project/Session Identifier]<br>
+## Date and Duration<br>
+Session started: 2026-04-06 14:30 PST<br>
+Session ended: 2026-04-06 23:00 PST (8.5 hours)<br>
+<br>
+## What Was Accomplished<br>
+- [Concrete deliverable 1 with metrics]<br>
+- [Concrete deliverable 2 with metrics]<br>
+- [Concrete deliverable 3 with metrics]<br>
+<br>
+## Current State<br>
+- Branch: artemis-ii<br>
+- Last commit: [hash] [message]<br>
+- Build status: clean / broken (details)<br>
+- Test status: 21,298 passing, 0 failing<br>
+<br>
+## Decisions Made<br>
+1. **[Decision]**: [What was decided]<br>
+&nbsp;&nbsp;&nbsp;Rationale: [Why this choice]<br>
+&nbsp;&nbsp;&nbsp;Alternatives considered: [What was rejected and why]<br>
+&nbsp;&nbsp;&nbsp;Revisit if: [Conditions that would change this decision]<br>
+<br>
+## Open Questions<br>
+- [ ] [Question 1] &mdash; blocking / non-blocking<br>
+- [ ] [Question 2] &mdash; needs user input / can decide independently<br>
+<br>
+## What To Do Next<br>
+1. [Immediate next step]<br>
+2. [Following step]<br>
+3. [Step after that]<br>
+<br>
+## Gotchas and Warnings<br>
+- [Thing that will bite you if you don't know about it]<br>
+- [Constraint that isn't obvious from the code]<br>
+            </div>
+
+            <h3>Real-World Handoff Example</h3>
+
+            <p>Our <code>HANDOFF-ARTEMIS-II-SESSION-003.md</code> captures 8.5 hours of mission operations work. It records that 35+ live pages were updated via <code>sweep.py</code>, that the pgvector database holds 1,087 loaded pages across 6 tables, that math sections 8-10 were developed (live telemetry, O2O Shannon entropy, circadian drift analysis), and that specific research threads were started but not completed. Without this handoff, the next session would have spent its first hour rediscovering what was already done.</p>
+
+            <div class="card-grid">
+                <div class="pattern-card">
+                    <h4>What Makes a Good Handoff</h4>
+                    <ul>
+                        <li><strong>Concrete, not vague:</strong> "Wrote 3 sections, 4,200 words" not "made progress on the report"</li>
+                        <li><strong>Verifiable state:</strong> "Last commit abc123, build clean, 21,298 tests passing" not "everything works"</li>
+                        <li><strong>Decision rationale:</strong> Record <em>why</em>, not just <em>what</em>. Future you will ask "why did we..."</li>
+                        <li><strong>Revisit conditions:</strong> "Revisit if the API changes" prevents decisions from becoming dogma</li>
+                        <li><strong>Gotchas first:</strong> Put warnings at the top of mind, not buried at the bottom</li>
+                    </ul>
+                </div>
+                <div class="pattern-card">
+                    <h4>The Resume Protocol</h4>
+                    <ol>
+                        <li><strong>Read the handoff</strong> &mdash; Load the full document, not just the summary</li>
+                        <li><strong>Verify state</strong> &mdash; Check git status, branch, build, tests. The handoff might be stale if someone else worked between sessions</li>
+                        <li><strong>Check for drift</strong> &mdash; Compare handoff's "current state" against actual state. If they diverge, the handoff is partially outdated</li>
+                        <li><strong>Ask the user</strong> &mdash; "The handoff says X. Are we continuing from there, or has the plan changed?"</li>
+                        <li><strong>Continue</strong> &mdash; Pick up from "What To Do Next" in the handoff</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h3>When to Create Handoffs</h3>
+
+            <p>Handoffs should be created in three situations:</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Planned Session Ends</h4>
+                    <p>The user says "I'm done for the day" or "let's wrap up." Create a thorough handoff while the full context is still available. This is the easiest case because there is time to be comprehensive.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Context Window Approaching Limits</h4>
+                    <p>When the conversation is getting long and the agent starts compacting context, it is time to write a handoff <em>before</em> information is lost. The worst handoffs are written after the context has already degraded. Proactive handoff creation is a skill that develops with practice.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Task Switching</h4>
+                    <p>When the user needs to switch to a different project or branch mid-stream, create a handoff for the current work before switching. This is essentially a bookmark that preserves the full context of the interrupted work.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 14.6 Beads State — Crash-Recoverable Persistence -->
+        <section class="content-section" id="beads-state">
+            <h2>14.6 Beads State &mdash; Crash-Recoverable Persistence</h2>
+
+            <p>Handoffs are written by agents for agents. But what about state that needs to be machine-readable, atomically updated, and recoverable after crashes? This is where structured state persistence comes in. The Beads State pattern &mdash; named for its use in the Gastown orchestration chipset &mdash; provides git-friendly, crash-recoverable JSON state files that track agent identities, work items, and checkpoint/restore state.</p>
+
+            <h3>Design Principles</h3>
+
+            <div class="card-grid">
+                <div class="state-card">
+                    <h4>Git-Friendly JSON</h4>
+                    <p>State files are JSON with deterministic key ordering and consistent formatting. This means <code>git diff</code> shows meaningful changes, not noise from reordered keys or reformatted whitespace. Every state change produces a clean, reviewable diff. The files can be committed alongside code, creating a version-controlled history of state transitions.</p>
+<pre><code>{
+  "agent_id": "cedar-executor-003",
+  "state": "executing",
+  "phase": "72",
+  "wave": 2,
+  "checkpoint": {
+    "completed_items": ["72.1", "72.2", "72.3"],
+    "current_item": "72.4",
+    "started_at": "2026-04-06T14:30:00Z",
+    "last_update": "2026-04-06T16:45:00Z"
+  }
+}</code></pre>
+                </div>
+                <div class="state-card">
+                    <h4>Agent Identity Persistence</h4>
+                    <p>When orchestrating multiple agents, each needs a stable identity that persists across process restarts. Beads State assigns each agent a unique identifier tied to its role, and records its current state so that if the process crashes and restarts, the agent can resume from its last checkpoint rather than starting over.</p>
+                    <p>In our system, agent identities follow a naming convention: <code>[role]-[function]-[sequence]</code>. This makes state files self-documenting &mdash; you can tell what <code>cedar-executor-003</code> is doing without reading anything else.</p>
+                </div>
+            </div>
+
+            <h3>Atomic Writes Prevent Corruption</h3>
+
+            <p>The core safety mechanism is atomic writes: state is written to a temporary file first, then renamed to the target path. On POSIX systems, file rename is an atomic operation &mdash; it either succeeds completely or fails completely. There is no state where the file is half-written.</p>
+
+<pre><code>// Atomic state write pattern
+async function writeState(path: string, state: object): Promise&lt;void&gt; {
+  const tmp = path + '.tmp.' + process.pid;
+  const content = JSON.stringify(state, null, 2) + '\n';
+  await fs.writeFile(tmp, content, 'utf-8');
+  await fs.rename(tmp, path);  // Atomic on POSIX
+}</code></pre>
+
+            <p>This pattern means that a crash during a write leaves either the old state (rename didn't happen yet) or the new state (rename completed). It never leaves a corrupted intermediate state. For agentic systems where crashes are not exceptional but expected &mdash; context windows fill, processes are killed, machines restart &mdash; this guarantee is essential.</p>
+
+            <h3>Work Item Tracking with Checkpoint/Restore</h3>
+
+            <p>Beads State tracks work items through their lifecycle, providing checkpoint and restore capabilities that enable crash recovery:</p>
+
+            <div class="state-flow">
+                <span class="state">queued</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state">assigned</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state active">executing</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state">checkpoint</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state">completed</span>
+            </div>
+
+            <p>Each transition is recorded with a timestamp and the agent that performed it. If an agent crashes while executing, the recovery protocol reads the state file, finds the last checkpoint, and resumes from there. Items that were assigned but never checkpointed are returned to the queue. Items that were checkpointed can be restored to their checkpoint state.</p>
+
+            <h3>Recovery Protocol</h3>
+
+            <div class="implementation-card">
+                <h4>Crash Recovery Steps</h4>
+                <ol>
+                    <li><strong>Read state file</strong> &mdash; If it exists and parses correctly, the last known state is recovered</li>
+                    <li><strong>Check agent identity</strong> &mdash; Verify the agent claiming this state matches the recorded identity</li>
+                    <li><strong>Scan for orphaned work</strong> &mdash; Items in "executing" state with no active agent are orphaned and returned to the queue</li>
+                    <li><strong>Restore from checkpoint</strong> &mdash; If the agent's last action was a checkpoint, restore that state and continue</li>
+                    <li><strong>Verify filesystem</strong> &mdash; Check that files referenced in the state actually exist on disk (they might have been partially written)</li>
+                    <li><strong>Resume or restart</strong> &mdash; If the state is consistent, resume. If not, log the inconsistency and restart the work item from scratch</li>
+                </ol>
+            </div>
+
+            <h3>Integration with Orchestration</h3>
+
+            <p>Beads State integrates with the orchestration patterns described in Section 13. The Mayor-Coordinator reads state files to understand which agents are alive and what they are working on. The Sling-Dispatch pattern writes state files when assigning work. The Witness-Observer reads state files to detect stalled agents. The state files are the shared memory that makes distributed agent coordination possible without a central database.</p>
+        </section>
+
+
+        <!-- 14.7 Thread Management — Cross-Session Work -->
+        <section class="content-section" id="thread-management">
+            <h2>14.7 Thread Management &mdash; Cross-Session Work</h2>
+
+            <p>Threads are persistent context containers for work that spans multiple sessions but does not warrant a full project. Where handoffs capture the state at a single session boundary, threads maintain a continuous narrative across many sessions. Where memory files store atomic facts, threads store evolving context for a specific initiative.</p>
+
+            <h3>When to Use Each Persistence Mechanism</h3>
+
+            <div class="comparison-card">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Mechanism</th>
+                            <th>Scope</th>
+                            <th>Lifetime</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Memory files</strong></td>
+                            <td>Single fact or rule</td>
+                            <td>Indefinite</td>
+                            <td>Preferences, constraints, standing rules</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Handoffs</strong></td>
+                            <td>Session boundary</td>
+                            <td>Until consumed</td>
+                            <td>Session continuity, task switching</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Threads</strong></td>
+                            <td>Multi-session initiative</td>
+                            <td>Weeks to months</td>
+                            <td>Research tracks, feature branches, ongoing investigations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beads State</strong></td>
+                            <td>Machine state</td>
+                            <td>Duration of operation</td>
+                            <td>Agent coordination, work item tracking, crash recovery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CLAUDE.md</strong></td>
+                            <td>Behavioral rules</td>
+                            <td>Project lifetime</td>
+                            <td>Conventions, build commands, architectural boundaries</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Thread Lifecycle</h3>
+
+            <p>Threads follow a creation-resumption-archival lifecycle:</p>
+
+            <div class="card-grid">
+                <div class="lifecycle-card">
+                    <h4>Creation</h4>
+                    <p>A thread is created when a piece of work is identified as spanning multiple sessions. The creation captures the initial context: what the work is, why it matters, what the current state of knowledge is, and what the expected outcomes are. Thread names should be descriptive and stable &mdash; they become the identifier used to resume work across sessions.</p>
+<pre><code># Thread: RH-Montgomery-Dyson Research
+## Created: 2026-04-03
+## Status: active
+
+### Context
+Investigating eigenvalue spacing patterns in
+random matrices (Montgomery-Dyson) and their
+connection to Riemann Hypothesis zeta zeros.
+
+### Current State
+- Literature review: 12 papers read
+- Numerical experiments: GUE ensemble generated
+- Open question: pair correlation convergence rate
+
+### Next Actions
+- Reproduce Montgomery's 1973 pair correlation
+- Compare with actual zeta zero spacing data</code></pre>
+                </div>
+                <div class="lifecycle-card">
+                    <h4>Resumption</h4>
+                    <p>Resuming a thread loads the thread document and picks up from the last recorded state. Unlike handoffs, which are consumed and discarded, threads are <em>updated</em> &mdash; each session appends its contributions to the thread's history. This creates a running log of progress that becomes valuable documentation in its own right.</p>
+                </div>
+                <div class="lifecycle-card">
+                    <h4>Archival</h4>
+                    <p>When a thread's work is complete, it is archived rather than deleted. The archive preserves the decision history, research findings, and lessons learned. Archived threads can be referenced later if the topic resurfaces. In our system, archived threads are moved to a <code>completed/</code> subdirectory with a final status summary.</p>
+                </div>
+            </div>
+
+            <h3>Thread vs. Handoff: The Decision Rule</h3>
+
+            <p>The distinction is simple: <strong>a handoff is a bookmark; a thread is a notebook</strong>. If you are stopping work temporarily and will resume exactly where you left off, create a handoff. If you are tracking an ongoing initiative that will evolve over many sessions with different subtasks and changing priorities, create a thread. In practice, many handoffs get promoted to threads when work that was expected to be brief turns out to be extended.</p>
+        </section>
+
+
+        <!-- 14.8 State Machines in Agentic Workflows -->
+        <section class="content-section" id="state-machines">
+            <h2>14.8 State Machines in Agentic Workflows</h2>
+
+            <p>Agentic workflows are, at their core, state machines. The agent is always in some state, and its available actions depend on that state. Making this state machine explicit &mdash; rather than implicit in the conversation flow &mdash; is one of the most impactful architectural decisions in agentic system design. Explicit state machines make workflows debuggable, recoverable, and auditable.</p>
+
+            <h3>GSD Workflow States</h3>
+
+            <p>The GSD (Get Shit Done) orchestrator implements a five-state workflow that governs all project work:</p>
+
+            <div class="state-flow">
+                <span class="state">discuss</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state">plan</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state active">execute</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state">verify</span>
+                <span class="arrow">&rarr;</span>
+                <span class="state">ship</span>
+            </div>
+
+            <div class="card-grid">
+                <div class="state-card">
+                    <h4>Discuss</h4>
+                    <p>Gather context, clarify requirements, identify constraints. The agent asks questions, surfaces assumptions, and ensures alignment before planning begins. No code is written in this state. No plans are created. The only output is shared understanding.</p>
+                    <p><strong>Transition guard:</strong> User confirms that requirements are understood and scope is agreed upon.</p>
+                </div>
+                <div class="state-card">
+                    <h4>Plan</h4>
+                    <p>Break work into phases, create detailed plans with verification criteria, analyze dependencies, and estimate effort. Each phase gets a <code>PLAN.md</code> with specific deliverables, test criteria, and implementation steps.</p>
+                    <p><strong>Transition guard:</strong> Plan document exists and has been reviewed. Dependencies are identified.</p>
+                </div>
+                <div class="state-card">
+                    <h4>Execute</h4>
+                    <p>Implement the plan. Write code, run tests, commit changes. Execution follows the plan unless a blocking issue is discovered, in which case the state machine transitions back to plan (replanning) rather than improvising.</p>
+                    <p><strong>Transition guard:</strong> All plan items are implemented. Build passes. Tests pass.</p>
+                </div>
+                <div class="state-card">
+                    <h4>Verify</h4>
+                    <p>Validate that the implementation meets the requirements defined in the discuss phase and the criteria specified in the plan phase. Run UAT, check edge cases, verify performance. This is adversarial &mdash; the goal is to find problems, not confirm success.</p>
+                    <p><strong>Transition guard:</strong> All verification criteria pass. No blocking issues found.</p>
+                </div>
+                <div class="state-card">
+                    <h4>Ship</h4>
+                    <p>Create PR, run review, merge to target branch, create release notes. This is the final gate. Code that reaches this state has been discussed, planned, executed, and verified. Shipping is a formality, not a decision point.</p>
+                    <p><strong>Transition guard:</strong> PR approved, CI passes, release notes written.</p>
+                </div>
+            </div>
+
+            <h3>STATE.md as Single Source of Truth</h3>
+
+            <p>The current workflow state is recorded in <code>.planning/STATE.md</code>. This file is the single source of truth for "where are we in the workflow?" Every session reads this file at startup to determine the current state and available transitions.</p>
+
+<pre><code># Project State
+
+## Current Phase: 72
+## State: execute
+## Branch: dev
+
+### Phase 72: Trust Relationship Provider
+- Milestone: v1.50
+- Started: 2026-04-05
+- Plan: .planning/phases/72/PLAN.md
+- Status: Wave 2 of 3 complete
+- Blocking: None
+- Next: Execute wave 3 (integration tests)</code></pre>
+
+            <p>The state file serves multiple purposes simultaneously: it tells the agent what to do, it tells the human what is happening, it provides crash recovery (if the agent restarts, it reads STATE.md and knows where to resume), and it enables audit (the git history of STATE.md is a complete log of workflow transitions).</p>
+
+            <h3>Recovering from Invalid States</h3>
+
+            <p>State machines can enter invalid states through crashes, manual edits, or bugs. The recovery strategy is: <strong>always fall back to the last valid state</strong>. The GSD health check (<code>/gsd-health</code>) diagnoses state inconsistencies and suggests repairs:</p>
+
+            <div class="card-grid">
+                <div class="warning-card">
+                    <h4>Common Invalid States</h4>
+                    <ul>
+                        <li><strong>State says "execute" but no PLAN.md exists:</strong> State was advanced without creating a plan. Fix: revert to "plan" state.</li>
+                        <li><strong>State says "verify" but build is broken:</strong> Execution did not complete successfully. Fix: revert to "execute" state and fix the build.</li>
+                        <li><strong>State says "ship" but there are uncommitted changes:</strong> Execution artifacts were not committed. Fix: commit first, then continue shipping.</li>
+                        <li><strong>Phase number in state doesn't match any roadmap entry:</strong> The roadmap was renumbered without updating the state. Fix: reconcile phase numbers.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>How State Drives Agent Behavior</h3>
+
+            <p>The state machine is not just a tracking mechanism &mdash; it actively shapes what the agent does. An agent in "discuss" state will ask questions and refuse to write code. An agent in "execute" state will follow the plan and refuse to change scope. An agent in "verify" state will look for problems rather than writing new features. The state machine provides behavioral guardrails that prevent the agent from jumping ahead, going backward, or doing the wrong kind of work for the current phase.</p>
+
+            <p>This is more disciplined than how most humans work, and that is precisely the point. Humans naturally blend planning and execution, mixing design decisions into implementation. Agents amplify this tendency because they can generate code very quickly. The state machine forces separation of concerns: think first, plan second, build third, check fourth, ship fifth. The discipline is externalized into the state machine rather than relying on the agent's self-control.</p>
+        </section>
+
+
+        <!-- 14.9 The Memory Lifecycle -->
+        <section class="content-section" id="memory-lifecycle">
+            <h2>14.9 The Memory Lifecycle</h2>
+
+            <p>Memories are not static artifacts. They are born, they age, they become stale, they are updated, and eventually they are archived or deleted. Treating memories as immutable records &mdash; write once, read forever &mdash; leads to a memory system that becomes progressively less trustworthy over time. Active lifecycle management is essential.</p>
+
+            <div class="lifecycle-grid">
+                <div class="lifecycle-card">
+                    <h4>Creation: Save Immediately</h4>
+                    <p>When you learn something useful &mdash; a user preference, a project constraint, a decision rationale &mdash; save it immediately. Do not wait until the end of the session. Context degrades as conversations get longer, and memories written late in a session are often incomplete or imprecise. The best memory is one written at the moment of learning, when the context is fresh and the reasoning is clear.</p>
+                    <p><strong>Rule:</strong> If the information would be valuable in the next session, save it in this session. Do not defer.</p>
+                </div>
+                <div class="lifecycle-card">
+                    <h4>Validation: Verify Before Acting</h4>
+                    <p>Memories describe the world as it was when the memory was created. The world changes. A memory that says "the config module is in <code>src/config/index.ts</code>" might be wrong if someone moved it last week. Before acting on a memory that references specific files, functions, or system states, <strong>verify it against the current codebase</strong>.</p>
+                    <p><strong>Rule:</strong> If a memory names a file or function, verify it exists before using it. Trust but verify.</p>
+                </div>
+                <div class="lifecycle-card">
+                    <h4>Staleness: Memories Decay</h4>
+                    <p>Every memory has a half-life. Project memories decay fastest (current state changes constantly). User memories decay slowest (people's expertise and preferences are relatively stable). Feedback memories are somewhere in between (conventions evolve). Actively monitor for stale memories and update or remove them.</p>
+                    <p><strong>Rule:</strong> If a memory conflicts with observable reality, update the memory, not your understanding of reality.</p>
+                </div>
+                <div class="lifecycle-card">
+                    <h4>Cleanup: Prune the Dead</h4>
+                    <p>Memories that are wrong are worse than no memory at all. A wrong memory causes the agent to take confident action in the wrong direction, which is harder to detect and correct than starting from ignorance. Regularly review memories and remove ones that are outdated, superseded, or no longer relevant.</p>
+                    <p><strong>Rule:</strong> A smaller, accurate memory system outperforms a larger, partially-stale one every time.</p>
+                </div>
+            </div>
+
+            <div class="warning-card">
+                <h4>The "Never Guess from Memory" Rule</h4>
+                <p>This is the most important operational rule in the memory system: <strong>if a memory names a specific file, function, API endpoint, or system state, verify that it still exists before acting on it</strong>. Memories are hints, not facts. They point you in the right direction, but the codebase is the source of truth. An agent that blindly trusts its memories will eventually try to import a module that was renamed, call a function that was deleted, or write to a file that was moved. Always verify.</p>
+                <p>This rule applies even to memories that were saved minutes ago. In a multi-agent system where several agents are modifying the codebase simultaneously, a file that existed when the memory was created might have been moved by another agent since then.</p>
+            </div>
+        </section>
+
+
+        <!-- 14.10 Scaling Memory Across Projects -->
+        <section class="content-section" id="scaling-memory">
+            <h2>14.10 Scaling Memory Across Projects</h2>
+
+            <p>A single project with a handful of memory files is manageable by intuition. Fifty memory files across multiple projects, with cross-project dependencies and shared user preferences, requires deliberate organization. We operate at this scale, and the patterns described here were discovered by necessity.</p>
+
+            <h3>Per-Project Memory Directories</h3>
+
+            <p>Claude Code stores project-specific memories in <code>~/.claude/projects/[project-path]/memory/</code>. Each project gets its own directory, its own <code>MEMORY.md</code> index, and its own namespace for memory files. This isolation is critical: memories about the Rust backend of one project should not pollute the context of a TypeScript-only project.</p>
+
+<pre><code>~/.claude/
+  CLAUDE.md                          # Global user instructions
+  projects/
+    -media-foxy-ai-project-alpha/
+      memory/
+        MEMORY.md                    # 200-line index for project alpha
+        trust-system.md
+        branch-strategy.md
+        ...
+    -media-foxy-ai-project-beta/
+      memory/
+        MEMORY.md                    # 200-line index for project beta
+        api-architecture.md
+        deployment-constraints.md
+        ...</code></pre>
+
+            <h3>Cross-Project Patterns</h3>
+
+            <p>User memories are global &mdash; they apply across all projects because the user is the same person everywhere. This is where preferences, expertise profiles, and behavioral rules live. They are stored in <code>~/.claude/CLAUDE.md</code> (instructions) and the user-level memory directory.</p>
+
+            <p>However, some knowledge genuinely spans projects without being user-specific. A team's coding conventions, a shared library's quirks, or an infrastructure constraint that affects multiple services &mdash; these need to be duplicated or referenced across project memory directories. The practical approach is to keep one canonical memory file and reference it from other projects' MEMORY.md indices:</p>
+
+<pre><code>## Cross-Project References
+- **Shared infra constraints:** See project-alpha/memory/infra-constraints.md
+- **Team conventions:** Defined in ~/.claude/CLAUDE.md, apply everywhere</code></pre>
+
+            <h3>Memory Organization at Scale</h3>
+
+            <p>At 50+ memory files, flat organization breaks down. MEMORY.md becomes the organizational backbone, using semantic sections to group related memories:</p>
+
+            <div class="info-card">
+                <h4>Organizational Pattern for Large Memory Systems</h4>
+<pre><code># Memory: gsd-skill-creator
+
+## HOT -- Current State (always in context)
+**Active project 1** -- one-line summary
+- [detail](file.md) -- pointer
+**Active project 2** -- one-line summary
+- [detail](file.md) -- pointer
+
+### Core Skills &amp; Tools
+- [Skill reference](skill.md) -- what it does
+- [Tool reference](tool.md) -- when to use it
+
+### Key Subsystems
+- Subsystem A: files, lines, test count
+- Subsystem B: files, lines, test count
+
+## WARM -- Reference (session start)
+### Completed Milestones (Condensed)
+- v1.49: score 4.75, DACP capstone
+- v1.48: score 4.50, physical infrastructure
+
+### Standing Rules
+- HARD RULE: never commit .planning/
+- Branch strategy: dev/main/v1.50
+
+### Agent Lessons
+- Task sizing: 5-6 per agent
+- 4 agents for synthesis, 3 for docs</code></pre>
+            </div>
+
+            <h3>Keeping MEMORY.md Under 200 Lines</h3>
+
+            <p>The 200-line limit is a hard constraint, not a target. Strategies for staying under it:</p>
+
+            <div class="card-grid">
+                <div class="pattern-card">
+                    <h4>Consolidation</h4>
+                    <p>When two memories cover related topics, merge them into one. Five memory files about different aspects of the branch strategy become one comprehensive branch-strategy.md with a single MEMORY.md line.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Compression</h4>
+                    <p>Replace verbose summaries with terse pointers. "The trust system build plan was approved on March 9 with 12 design decisions reviewed by the muse council" becomes "Trust system: 12 decisions approved, [detail](trust-system.md)."</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Archival</h4>
+                    <p>Completed project memories move from HOT to WARM to archived. A milestone that shipped three months ago does not need the same index space as the currently active work. Condense it to a single line with key metrics.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Pruning</h4>
+                    <p>Some memories outlive their usefulness. A debugging constraint that was discovered and fixed does not need to persist. A reference to an external system that is no longer used can be deleted. Regular pruning keeps the index relevant.</p>
+                </div>
+            </div>
+
+            <h3>Archival Patterns for Completed Work</h3>
+
+            <p>When a project or milestone is completed, its memories should not be deleted &mdash; they contain decision rationale and lessons learned that may be valuable later. Instead, they are compressed and moved to the WARM or COLD sections of MEMORY.md:</p>
+
+<pre><code># Before (HOT, 8 lines):
+**Trust System Build** -- 12 design decisions, muse council reviewed
+- [Trust system details](trust-system.md) -- full design
+- Stage 1 DONE: trust-relationship.ts (63 tests)
+- Stage 1 DONE: trust-relationship-provider.ts (32 tests)
+- Total: 95 tests passing
+- Build order: 3a -> 4 -> 2 -> 3b -> 5 -> 6
+- Next: Stage 3a (trust evaluation)
+- Blocking: None
+
+# After (WARM, 2 lines):
+### Completed: Trust System
+- Stages 1-2 complete: 95 tests, [details](trust-system.md)</code></pre>
+
+            <p>This compression ratio &mdash; 8 lines to 2 &mdash; is typical. The detail file still exists and can be read on demand. The index just needs to acknowledge its existence and provide the pointer.</p>
+        </section>
+
+
+        <!-- 14.11 Practical Patterns -->
+        <section class="content-section" id="practical-patterns">
+            <h2>14.11 Practical Patterns</h2>
+
+            <p>The theory of agentic memory is useful. The practice is what matters. These patterns are not derived from first principles &mdash; they are extracted from months of daily operation, each one motivated by a specific failure or inefficiency that the pattern resolved.</p>
+
+            <h3>Session Startup Protocol</h3>
+
+            <p>Every session should begin the same way, regardless of what work is planned. The consistency ensures that no critical context is missed and that the agent and the user are aligned before any work begins.</p>
+
+            <div class="implementation-card">
+                <h4>The Five-Step Startup</h4>
+                <ol>
+                    <li><strong>Load memory</strong> &mdash; MEMORY.md is loaded automatically. Scan HOT section for current state. Note any items flagged as blocking or urgent.</li>
+                    <li><strong>Check state</strong> &mdash; Read <code>.planning/STATE.md</code> to determine workflow state. Verify branch, phase, and wave. Check for pending handoffs.</li>
+                    <li><strong>Verify environment</strong> &mdash; Run build, check test status, verify git state. Ensure the environment matches what the memory and state files describe. If it does not, investigate before proceeding.</li>
+                    <li><strong>Ask the user</strong> &mdash; "What are we working on today?" Do not assume. The user may have changed priorities, received new requirements, or want to work on something completely different from what the state files suggest.</li>
+                    <li><strong>Confirm and begin</strong> &mdash; Confirm the plan, verify the branch, and start work. This takes 60 seconds and prevents 60 minutes of wasted effort on the wrong task.</li>
+                </ol>
+            </div>
+
+            <h3>Decision Documentation</h3>
+
+            <p>Every non-trivial decision should be documented with its rationale. This is not bureaucracy &mdash; it is a direct investment in future efficiency. When a future session asks "why did we use RSA instead of Ed25519?" the decision memory provides the answer instantly instead of requiring a 30-minute archaeological dig through git history and old conversations.</p>
+
+            <div class="memory-card">
+                <h4>Decision Memory Format</h4>
+<pre><code>---
+name: auth-signing-algorithm
+description: Choice of RSA-256 for JWT signing
+type: project
+---
+Decision: Use RS256 (RSA) for JWT signing, not Ed25519.
+
+Why: Our deployment target requires FIPS 140-2 compliance.
+Ed25519 is not FIPS-approved. RS256 with 2048-bit keys is.
+
+Alternatives considered:
+- Ed25519: faster, smaller keys, but not FIPS-compliant
+- ES256: FIPS-compliant but less widely supported by
+  our client libraries
+- HS256: symmetric, not suitable for multi-service auth
+
+Revisit if: FIPS requirement is removed, or Ed25519
+gains FIPS approval (NIST is evaluating as of 2026).</code></pre>
+            </div>
+
+            <p>The "revisit if" clause is critical. Without it, decisions become permanent by default. With it, they are explicitly tied to the conditions that justified them. When those conditions change, the decision is automatically flagged for reconsideration.</p>
+
+            <h3>Standing Rules</h3>
+
+            <p>Some behavioral instructions are permanent and non-negotiable. These are standing rules &mdash; they apply to every session, every task, every agent. They belong in both CLAUDE.md (for automatic loading) and in a feedback memory (for reinforcement).</p>
+
+            <div class="card-grid">
+                <div class="pattern-card">
+                    <h4>Examples of Standing Rules</h4>
+                    <ul>
+                        <li><strong>"Never commit .planning/ files"</strong> &mdash; These are gitignored and contain local-only state and potentially sensitive IP. Committing them would leak internal planning artifacts into the public repository.</li>
+                        <li><strong>"Ask the user what they're working on before starting"</strong> &mdash; Prevents the agent from assuming context and doing the wrong work. A 10-second question saves minutes or hours of misdirected effort.</li>
+                        <li><strong>"Autonomous execution, no stopping for input during batch work"</strong> &mdash; Once the user approves a plan, execute it fully. Do not pause every 30 seconds to ask "should I continue?" The approval was the checkpoint.</li>
+                        <li><strong>"Docs are the story. Never suggest pruning documentation."</strong> &mdash; Documentation is a first-class artifact, not overhead. It is part of the deliverable.</li>
+                    </ul>
+                </div>
+                <div class="pattern-card">
+                    <h4>Standing Rule Characteristics</h4>
+                    <ul>
+                        <li><strong>Unconditional:</strong> They apply always, with no exceptions based on context</li>
+                        <li><strong>Brief:</strong> One or two sentences, not paragraphs of explanation</li>
+                        <li><strong>Actionable:</strong> They describe a specific behavior to follow or avoid</li>
+                        <li><strong>Motivated:</strong> Each rule exists because violating it caused a problem</li>
+                        <li><strong>Durable:</strong> They change infrequently, if ever</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Unanswered Questions Tracker</h3>
+
+            <p>In long-running projects, questions get asked and never answered. Sometimes the user is thinking about it. Sometimes the question was lost in the flow of conversation. Sometimes nobody noticed it was asked. An unanswered questions tracker prevents this information loss.</p>
+
+            <div class="implementation-card">
+                <h4>The Pattern</h4>
+                <p>When a question is asked and not answered in the current session, record it in the handoff or thread document with its status:</p>
+<pre><code>## Unanswered Questions
+- [ ] Should we support WebSocket fallback for HTTP/2 clients?
+      Asked: 2026-04-03. Context: API design discussion.
+      Blocking: No, but affects architecture decision.
+
+- [ ] What is the latency budget for the trust evaluation pipeline?
+      Asked: 2026-04-05. Context: Trust system Stage 3a planning.
+      Blocking: Yes - determines caching strategy.
+
+- [x] Do we need FIPS compliance for the signing algorithm?
+      Asked: 2026-04-02. Answered: 2026-04-03. Answer: Yes.
+      Resolution: Use RS256, documented in auth-signing-algorithm.md</code></pre>
+                <p>The key discipline is <strong>resurfacing</strong>: at the start of each session, check for unanswered blocking questions and raise them before doing any other work. Non-blocking questions can wait, but blocking questions should be resolved before the work they block is attempted.</p>
+            </div>
+
+            <h3>Branch Strategy Memory</h3>
+
+            <p>Multi-branch workflows create a persistent need for branch context. Which branch is for what purpose? What can be merged where? What is the current branch? These answers need to be immediately available, not discovered by reading git config.</p>
+
+            <div class="memory-card">
+                <h4>Branch Strategy Example</h4>
+<pre><code>---
+name: branch-strategy
+description: Branch purposes and merge rules
+type: project
+---
+## Branches
+- **dev** -- active working branch heading to main
+- **main** -- human-verified merges from dev
+- **v1.50** -- Unit Circle review branch (long-running)
+- **artemis-ii** -- Mission tracking and research
+- **nasa** -- NASA mission catalog (720 missions)
+
+## Rules
+- BRANCH RULE: Work on dev, NOT main
+- Main receives merges from dev after human review
+- Never force-push to main
+- artemis-ii is independent, does not merge to dev
+
+Why: Prevents accidental pushes to main and keeps
+long-running branches isolated from each other.
+
+How to apply: Check current branch before any commit.
+If on main, switch to dev first.</code></pre>
+            </div>
+
+            <h3>Cross-Session Research Continuity</h3>
+
+            <p>Research work is especially vulnerable to memory loss because insights build on each other over many sessions. A research thread on eigenvalue spacing in random matrices (Montgomery-Dyson conjecture) spans weeks of sessions, each building on the last. Without persistent memory, each session would re-derive insights that were discovered three sessions ago.</p>
+
+            <p>The pattern that works: maintain a research thread document that accumulates findings, and link it from MEMORY.md. Each session reads the thread, adds its contributions, and updates the thread. The thread becomes both memory and documentation &mdash; it captures the research journey as it unfolds, and at the end, it is a nearly publication-ready artifact.</p>
+
+            <h3>Multi-Agent Memory Coordination</h3>
+
+            <p>When multiple agents operate concurrently, their memory needs are different from single-agent systems. Each agent has its own context window but shares the filesystem. The coordination pattern is:</p>
+
+            <div class="card-grid">
+                <div class="pattern-card">
+                    <h4>Shared State Files</h4>
+                    <p>Agents coordinate through files, not through shared memory. Agent A writes its state to <code>.state/agent-a.json</code>. Agent B reads it. This is the only reliable cross-agent communication channel because it survives crashes, works across process boundaries, and is debuggable with standard tools.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Memory File Conventions</h4>
+                    <p>Agent-specific discoveries go in agent-specific state files (ephemeral). Cross-cutting discoveries &mdash; "this CSS variable was renamed" &mdash; go in shared memory files that all agents read. The distinction prevents memory conflicts where two agents try to write the same memory file simultaneously.</p>
+                </div>
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Operational Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p>After operating this memory system across 190+ projects, hundreds of sessions, and months of continuous development, the most important lesson is this: <strong>memory management is not a feature you add to an agentic system. It is the foundation on which everything else is built.</strong> Skills, orchestration, multi-agent coordination, state machines &mdash; all of these depend on reliable, well-organized, actively-maintained memory. Invest in it early, maintain it continuously, and treat it with the same discipline you give to your codebase. Because in an agentic system, memory <em>is</em> the codebase for the agent's understanding of the world.</p>
+                </div>
+            </aside>
+        </section>
+
+    </div><!-- /.container -->
+
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-13.html" style="margin-right:auto">&larr; 13. Orchestration Patterns</a><a href="section-15.html" style="margin-left:auto">15. Security &amp; Trust &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

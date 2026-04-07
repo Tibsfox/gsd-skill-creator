@@ -1,0 +1,4 @@
+/* PSC — Political Science, History & the Complex Plane */
+.project-psc { --project-color: #4A148C; --project-accent: #1565C0; }
+.project-psc header { background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #1565C0 100%); }
+.project-psc .card:hover { border-color: #4A148C; }
