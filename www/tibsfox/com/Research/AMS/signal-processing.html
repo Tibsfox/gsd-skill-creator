@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal Processing &mdash; Artemis Math &amp; Science</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ams">
+  <header>
+    <h1>Signal Processing</h1>
+    <div class="subtitle">Fourier, Noise vs Signal, Sound Propagation, Photonic WDM, Schumann &mdash; Artemis Math &amp; Science</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="information-theory.html">Info Theory</a>
+      <a href="complex-analysis.html">Complex Analysis</a>
+      <a href="graph-theory.html">Graph Theory</a>
+      <a href="optimization.html">Optimization</a>
+      <a href="probability-statistics.html">Probability</a>
+      <a href="dynamical-systems.html">Dynamical Systems</a>
+      <a href="control-theory.html">Control Theory</a>
+      <a href="signal-processing.html" class="active">Signal Processing</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Signal processing bridges the physical and computational worlds &mdash; from Fourier transforms decomposing VLIW instruction streams into frequency components, to the paradox where LLM threat models must separate genuine adversarial signal from noise, to photonic computing that multiplexes data on light waves.
+    </blockquote>
+
+    <!-- MODULE OVERVIEW -->
+
+    <h2>Module Overview</h2>
+
+    <div class="card">
+      <p>This module covers five signal processing topics from the agentic research: Fourier analysis applied to VLIW instruction scheduling, the noise vs signal paradox in LLM threat modeling, sound propagation over water with 6&ndash;10 dB attenuation, photonic WDM micro-resonator frequency combs for optical computing, and Schumann resonance at 7.83 Hz as a brain-as-transmitter hypothesis.</p>
+    </div>
+
+    <!-- KEY MATHEMATICAL CONCEPTS -->
+
+    <h2>Key Mathematical Concepts</h2>
+
+    <h3>Fourier Analysis in Instruction Scheduling</h3>
+    <div class="formula-block">
+      F(&omega;) = &int;<sub>-&infin;</sub><sup>&infin;</sup> f(t) e<sup>-i&omega;t</sup> dt<br><br>
+      DFT: X[k] = &sum;<sub>n=0</sub><sup>N-1</sup> x[n] e<sup>-i2&pi;kn/N</sup><br><br>
+      Any periodic signal decomposes into sinusoidal components.
+    </div>
+    <p>VLIW (Very Long Instruction Word) architectures use trace scheduling to pack multiple operations into each instruction word. The scheduling problem has a frequency-domain interpretation: instruction streams exhibit periodic patterns (loop bodies, pipeline stages) that Fourier analysis can decompose. Identifying the dominant frequencies reveals the natural parallelism of the workload. CppCon&rsquo;s coverage of these &ldquo;impossible computers&rdquo; connects directly to this analysis.</p>
+
+    <h3>Noise vs Signal in LLM Threat Modeling</h3>
+    <div class="formula-block">
+      SNR = P<sub>signal</sub> / P<sub>noise</sub><br>
+      SNR<sub>dB</sub> = 10 log<sub>10</sub>(P<sub>signal</sub> / P<sub>noise</sub>)<br><br>
+      Detection threshold: SNR &gt; SNR<sub>min</sub>
+    </div>
+    <p>LLM threat modeling faces a fundamental signal-to-noise problem: adversarial inputs (signal) are embedded in legitimate traffic (noise). The DDIPE bypass rates of 11.6&ndash;33.5% represent a low-SNR regime where malicious prompts are difficult to distinguish from benign ones. The 1.6% cross-model bypass rate suggests that ensembling multiple detectors (analogous to matched filtering) dramatically improves detection SNR.</p>
+
+    <h3>Sound Propagation Over Water</h3>
+    <div class="formula-block">
+      L(d) = L<sub>0</sub> - 20 log<sub>10</sub>(d/d<sub>0</sub>) - &alpha;d<br><br>
+      Attenuation: 6&ndash;10 dB over water (frequency-dependent)<br>
+      Speed of sound in water: ~1,480 m/s (vs 343 m/s in air)
+    </div>
+    <p>Sound propagates differently over water than over land. The 6&ndash;10 dB attenuation range is frequency-dependent &mdash; lower frequencies travel farther. This connects to the Possession Sound Heritage project (PSH, |z| = 0.281) and The Sound of Puget Sound (SPS) in the PNW corpus. The physics of sound propagation over Puget Sound directly inform the weather station and environmental monitoring research.</p>
+
+    <h3>Photonic WDM and Micro-Resonator Frequency Combs</h3>
+    <div class="formula-block">
+      WDM channels: &lambda;<sub>1</sub>, &lambda;<sub>2</sub>, ..., &lambda;<sub>N</sub><br>
+      Channel spacing: &Delta;&nu; = c / (&lambda;<sup>2</sup> &middot; &Delta;&lambda;)<br><br>
+      Comb laser: f<sub>n</sub> = f<sub>0</sub> + n &middot; f<sub>rep</sub><br>
+      where f<sub>rep</sub> = free spectral range of micro-resonator
+    </div>
+    <p>Wavelength Division Multiplexing (WDM) packs multiple data channels onto a single optical fiber by assigning each channel a different wavelength of light. Micro-resonator comb lasers generate hundreds of equally-spaced frequencies simultaneously, enabling massively parallel optical computing. Asianometry&rsquo;s coverage of photonic computing connects this to the memory-centric computing research &mdash; moving data as photons eliminates the 60&ndash;90% energy cost of electronic data movement.</p>
+
+    <h3>Schumann Resonance</h3>
+    <div class="formula-block">
+      f<sub>n</sub> &asymp; (c / 2&pi;R) &radic;(n(n+1))<br><br>
+      Fundamental: f<sub>1</sub> &asymp; 7.83 Hz<br>
+      R = Earth radius, c = speed of light<br>
+      Cavity: Earth surface &harr; ionosphere
+    </div>
+    <p>The Schumann resonance is the electromagnetic resonance of the Earth-ionosphere cavity. The fundamental frequency of 7.83 Hz falls within the range of brain alpha waves (8&ndash;12 Hz), leading to the brain-as-transmitter hypothesis explored in the Nic Rouleau consciousness research. While speculative, the frequency overlap raises questions about electromagnetic coupling between biological and geophysical systems &mdash; a cross-domain connection between signal processing and neuroscience.</p>
+
+    <!-- CONNECTIONS TO AGENTIC TECHNOLOGIES -->
+
+    <h2>Connections to Agentic Technologies</h2>
+
+    <div class="card">
+      <ul>
+        <li><strong>PNW Signal Stack (PSS):</strong> Direct corpus match for signal processing in the PNW context (|z| = 0.211)</li>
+        <li><strong>Signal &amp; Light (SGL):</strong> Electromagnetic signal research in the corpus (|z| = 0.187)</li>
+        <li><strong>Frequency Continuum (FQC):</strong> Frequency-domain research spanning radio to optical (|z| = 0.096)</li>
+        <li><strong>Photonic computing:</strong> WDM connects to the memory-centric computing research &mdash; 60&ndash;90% energy in data movement</li>
+        <li><strong>Possession Sound Heritage:</strong> Sound propagation over water connects PNW geography to physics (|z| = 0.281)</li>
+      </ul>
+    </div>
+
+    <!-- CORPUS CROSS-REFERENCE -->
+
+    <h2>Corpus Cross-Reference</h2>
+
+    <p>226 projects identified across 4 knowledge domains: general (223), ecology (1), ai (1), governance (1). 15 keyword matches.</p>
+
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>|z|</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>PSH</td><td>Possession Sound Heritage</td><td>general</td><td>0.281</td></tr>
+        <tr><td>BEACH</td><td>Water Access, Boating &amp; Fishing</td><td>general</td><td>0.252</td></tr>
+        <tr><td>AWF</td><td>Clean Air, Water &amp; Food</td><td>ecology</td><td>0.239</td></tr>
+        <tr><td>PSS</td><td>PNW Signal Stack</td><td>general</td><td>0.211</td></tr>
+        <tr><td>M05</td><td>Module Split Analysis</td><td>general</td><td>0.194</td></tr>
+        <tr><td>SGL</td><td>Signal &amp; Light</td><td>general</td><td>0.187</td></tr>
+        <tr><td>SPS</td><td>The Sound of Puget Sound</td><td>general</td><td>0.178</td></tr>
+        <tr><td>LLM</td><td>Local LLM Ecosystem</td><td>ai</td><td>0.178</td></tr>
+        <tr><td>GRV</td><td>Green River &amp; the Seattle Sound</td><td>general</td><td>0.124</td></tr>
+        <tr><td>PSC</td><td>Political Science &amp; the Complex Plane</td><td>governance</td><td>0.121</td></tr>
+        <tr><td>FQC</td><td>The Frequency Continuum</td><td>general</td><td>0.096</td></tr>
+      </tbody>
+    </table>
+
+    <div class="formula-block">
+      Complex plane state: z = 0.1666 + 0.1131i<br>
+      |z| = 0.2014 (magnitude &mdash; research depth)<br>
+      arg(z) = 0.5964 rad (phase &mdash; breadth/depth balance)
+    </div>
+
+    <p><strong>Knowledge gaps:</strong> The ecology, ai, and governance domains each have single-project bridges. The strongest cross-domain opportunity is connecting the PNW acoustic research (PSH, SPS, BEACH) to formal signal processing theory. The &ldquo;sound&rdquo; keyword matches 4 projects but most are cultural (California Sound, Seattle Sound) rather than physical acoustics.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="information-theory.html">Information Theory &mdash; channel capacity and noise</a></li>
+        <li><a href="complex-analysis.html">Complex Analysis &mdash; frequency domain via Fourier</a></li>
+        <li><a href="dynamical-systems.html">Dynamical Systems &mdash; oscillation and resonance</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Module 8: Signal Processing &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

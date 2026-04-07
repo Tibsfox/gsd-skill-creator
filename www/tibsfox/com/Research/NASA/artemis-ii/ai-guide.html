@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Programming Guide &mdash; Building Mission Coverage Systems</title>
+<style>
+:root {
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --blue: #4a90d9;
+  --red: #FC3D21;
+  --green: #4CAF50;
+  --purple: #9a6ad8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:#e0cc80; }
+
+header {
+  background:linear-gradient(135deg, #0B3D91 0%, #061830 50%, var(--bg) 100%);
+  padding:1.5rem 2rem; text-align:center;
+  border-bottom:2px solid rgba(196,163,90,0.2);
+}
+header h1 { font-size:1.6rem; font-weight:400; color:#fff; letter-spacing:0.04em; }
+header .subtitle { color:var(--gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.8rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.5rem; }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(196,163,90,0.7); border-left:3px solid var(--gold);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+h3 {
+  font-size:1rem; color:#fff; margin:1.5rem 0 0.5rem; font-weight:600;
+}
+
+.stats-bar {
+  display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+  padding:1rem 0; margin-bottom:1.5rem;
+  font-family:monospace; font-size:0.85rem; color:var(--dim);
+  border-bottom:1px solid var(--border);
+}
+.stats-bar strong { color:#fff; }
+
+.insight {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; margin:1rem 0;
+}
+.insight h3 { font-size:1rem; color:#fff; margin:0 0 0.4rem; }
+.insight p { font-size:0.85rem; color:var(--dim); line-height:1.5; font-family:system-ui,sans-serif; }
+.insight .num { color:var(--gold); font-family:monospace; font-size:1.1rem; }
+
+.code-block {
+  background:#0c1018; border:1px solid var(--border); border-radius:4px;
+  padding:1rem 1.2rem; margin:0.8rem 0 1.2rem; overflow-x:auto;
+  font-family:'SF Mono','Cascadia Mono','Consolas',monospace;
+  font-size:0.78rem; line-height:1.6; color:#b8c4d8;
+}
+.code-block .comment { color:rgba(255,255,255,0.3); }
+.code-block .keyword { color:#c678dd; }
+.code-block .string { color:#98c379; }
+.code-block .func { color:#61afef; }
+.code-block .num { color:#d19a66; }
+.code-block .label {
+  display:block; font-family:system-ui,sans-serif; font-size:0.7rem;
+  color:var(--dim); margin-bottom:0.6rem; text-transform:uppercase; letter-spacing:0.05em;
+}
+
+.arch-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:1rem; margin:1rem 0;
+}
+.arch-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.2rem;
+}
+.arch-card h4 {
+  font-size:0.85rem; color:var(--gold); margin-bottom:0.4rem;
+  font-family:system-ui,sans-serif; font-weight:600;
+}
+.arch-card p {
+  font-size:0.8rem; color:var(--dim); line-height:1.5;
+  font-family:system-ui,sans-serif;
+}
+.arch-card code {
+  font-family:'SF Mono','Cascadia Mono','Consolas',monospace;
+  font-size:0.75rem; color:var(--blue); background:rgba(74,144,217,0.1);
+  padding:0.1rem 0.3rem; border-radius:2px;
+}
+
+.checklist {
+  list-style:none; padding:0; margin:0.8rem 0;
+  font-family:system-ui,sans-serif; font-size:0.85rem;
+}
+.checklist li {
+  padding:0.4rem 0 0.4rem 1.8rem; position:relative;
+  color:var(--text); border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.checklist li::before {
+  content:'\2610'; position:absolute; left:0.2rem; top:0.4rem;
+  color:var(--gold); font-size:1rem;
+}
+.checklist li code {
+  font-family:'SF Mono','Cascadia Mono','Consolas',monospace;
+  font-size:0.78rem; color:var(--blue); background:rgba(74,144,217,0.1);
+  padding:0.1rem 0.3rem; border-radius:2px;
+}
+
+.api-table {
+  width:100%; border-collapse:collapse; margin:1rem 0;
+  font-family:system-ui,sans-serif; font-size:0.82rem;
+}
+.api-table th {
+  text-align:left; padding:0.6rem 0.8rem; color:var(--dim);
+  border-bottom:1px solid var(--border); font-weight:400;
+  text-transform:uppercase; letter-spacing:0.05em; font-size:0.7rem;
+}
+.api-table td {
+  padding:0.5rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.03);
+  color:var(--text);
+}
+.api-table tr:hover td { background:rgba(255,255,255,0.02); }
+.api-table a { font-size:0.78rem; }
+
+.tip {
+  border-left:3px solid var(--green); padding:0.6rem 1rem; margin:0.8rem 0;
+  background:rgba(76,175,80,0.05); font-family:system-ui,sans-serif; font-size:0.82rem;
+}
+.tip strong { color:var(--green); }
+
+.warn {
+  border-left:3px solid var(--red); padding:0.6rem 1rem; margin:0.8rem 0;
+  background:rgba(252,61,33,0.05); font-family:system-ui,sans-serif; font-size:0.82rem;
+}
+.warn strong { color:var(--red); }
+
+.flow-diagram {
+  display:flex; align-items:center; gap:0; justify-content:center;
+  margin:1.5rem 0; flex-wrap:wrap;
+  font-family:system-ui,sans-serif; font-size:0.78rem;
+}
+.flow-box {
+  background:var(--panel); border:1px solid var(--border); border-radius:4px;
+  padding:0.5rem 0.8rem; text-align:center; color:var(--text);
+  min-width:100px;
+}
+.flow-box .flow-label { color:var(--gold); font-weight:600; font-size:0.72rem; text-transform:uppercase; }
+.flow-arrow { color:var(--dim); font-size:1.2rem; padding:0 0.3rem; }
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI Programming Guide &mdash; Building Mission Coverage Systems</h1>
+  <div class="subtitle">How we built automated research coverage for Artemis II &mdash; and how you can build your own</div>
+  <nav>
+    <a href="index.html">Mission Tracker</a>
+    <a href="ai-coverage.html">AI Coverage</a>
+    <a href="papers.html">Papers</a>
+    <a href="../../OPEN/index.html">OPEN</a>
+    <a href="../../LIVE/index.html">LIVE</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <div class="stats-bar">
+    <span><strong>5</strong> Python scripts</span>
+    <span><strong>1,087+</strong> embedded pages</span>
+    <span><strong>6</strong> free APIs</span>
+    <span><strong>15-min</strong> sweep cadence</span>
+    <span><strong>0</strong> API keys required</span>
+    <span>All code runs locally &mdash; no cloud dependencies</span>
+  </div>
+
+  <blockquote>
+    Our Artemis II coverage system updates 35+ live HTML pages every hour with weather data, space weather,
+    mission telemetry, and research papers &mdash; all automated, all local, zero cloud costs.
+    This guide explains the architecture so you can build something similar for your own domain.
+  </blockquote>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>1. Architecture Overview</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-box"><div class="flow-label">sweep.py</div>Hourly updates</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box"><div class="flow-label">embed_incremental.py</div>Vector embeddings</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box"><div class="flow-label">PostgreSQL + pgvector</div>Semantic search</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box"><div class="flow-label">FTP sync</div>Deploy to site</div>
+  </div>
+  <div class="flow-diagram" style="margin-top:0.5rem;">
+    <div class="flow-box"><div class="flow-label">sweep_daemon.py</div>Cadence manager</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box"><div class="flow-label">discovery_engine.py</div>6-hourly research scan</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box"><div class="flow-label">ChromaDB</div>Local vector backup</div>
+  </div>
+
+  <div class="arch-grid">
+    <div class="arch-card">
+      <h4>sweep.py</h4>
+      <p>Hourly content updater. Regex-based templated HTML replacement for weather data,
+      version strings, timestamps, and counters across 35+ pages. Accepts CLI overrides
+      for space weather (<code>--kp</code>, <code>--solar-wind</code>) and content counts
+      (<code>--papers</code>, <code>--samples</code>).</p>
+    </div>
+    <div class="arch-card">
+      <h4>sweep_daemon.py</h4>
+      <p>Long-running process manager. 15-minute sub-marks (00/15/30/45) with distinct
+      action sets per mark. Peak cadence windows increase frequency during high-activity
+      periods like lunar flyby. State persisted to <code>.sweep-daemon-state.json</code>.</p>
+    </div>
+    <div class="arch-card">
+      <h4>embed_incremental.py</h4>
+      <p>Vector embedding pipeline using <code>all-MiniLM-L6-v2</code> (384-dim, CPU-capable).
+      Scans for new/changed HTML files, strips tags, embeds text, stores in PostgreSQL with
+      pgvector. Batch size 64. Includes PageRank graph refresh via NetworkX.</p>
+    </div>
+    <div class="arch-card">
+      <h4>discovery_engine.py</h4>
+      <p>6-hourly research scanner checking arXiv, YouTube (31 channels via yt-dlp),
+      Hacker News, and Google Scholar. Deduplication via seen-ID sets.
+      Discoveries appended to <code>RESEARCH-QUEUE.md</code> as DISCOVERED status.</p>
+    </div>
+    <div class="arch-card">
+      <h4>FTP Sync</h4>
+      <p>Python <code>ftplib</code> deployment after each sweep. Uploads changed HTML files
+      across target directories. Credentials from <code>.env</code> file (never committed).
+      Always-upload strategy for frequently-changing files.</p>
+    </div>
+    <div class="arch-card">
+      <h4>PostgreSQL + pgvector</h4>
+      <p>Semantic search over 1,087+ pages. Schema: <code>artemis.research_pages</code>
+      with path, title, content, word count, and <code>vector(384)</code> embedding column.
+      Cosine similarity queries for retrieval. Graph links tracked in <code>page_links</code>.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>2. Data Pipeline &mdash; Building Your Own</h2>
+
+  <h3>Step 1: Identify Free APIs</h3>
+  <p style="font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; margin-bottom:0.5rem;">
+    Every data source used in our system is free and requires no API key for basic access.
+  </p>
+
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Data</th>
+        <th>URL</th>
+        <th>Auth</th>
+        <th>Format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:600;color:#fff;">NOAA/NWS</td>
+        <td>Weather observations &amp; forecasts</td>
+        <td><a href="https://api.weather.gov">api.weather.gov</a></td>
+        <td style="color:var(--green);">None</td>
+        <td>JSON</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">SWPC</td>
+        <td>Space weather (Kp index, solar wind)</td>
+        <td><a href="https://services.swpc.noaa.gov">services.swpc.noaa.gov</a></td>
+        <td style="color:var(--green);">None</td>
+        <td>JSON/TXT</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">JPL Horizons</td>
+        <td>Ephemeris, orbital elements</td>
+        <td><a href="https://ssd.jpl.nasa.gov/horizons_batch.cgi">ssd.jpl.nasa.gov</a></td>
+        <td style="color:var(--green);">None</td>
+        <td>CSV/TXT</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">DSN Now</td>
+        <td>Deep Space Network status</td>
+        <td><a href="https://eyes.nasa.gov/dsn/data/dsn.xml">eyes.nasa.gov/dsn</a></td>
+        <td style="color:var(--green);">None</td>
+        <td>XML</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">USGS Water</td>
+        <td>River flow, water levels</td>
+        <td><a href="https://waterservices.usgs.gov">waterservices.usgs.gov</a></td>
+        <td style="color:var(--green);">None</td>
+        <td>JSON</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">arXiv API</td>
+        <td>Research papers (Atom feed)</td>
+        <td><a href="http://export.arxiv.org/api/query">export.arxiv.org/api</a></td>
+        <td style="color:var(--green);">None</td>
+        <td>XML/Atom</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Step 2: Build a Sweep Script</h3>
+  <p style="font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; margin-bottom:0.5rem;">
+    The core pattern: fetch data from APIs, then regex-replace templated values in your HTML files.
+  </p>
+
+  <div class="code-block">
+    <span class="label">sweep.py &mdash; core pattern</span>
+<span class="keyword">import</span> re, os, glob, json
+<span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timezone
+
+<span class="keyword">def</span> <span class="func">fetch_weather</span>(station=<span class="string">'KPAE'</span>):
+    <span class="comment">"""Fetch current obs from NWS. No API key needed."""</span>
+    url = <span class="string">f'https://api.weather.gov/stations/{station}/observations/latest'</span>
+    req = urlopen(url)
+    data = json.loads(req.read())[<span class="string">'properties'</span>]
+    <span class="keyword">return</span> {
+        <span class="string">'temp_c'</span>: data[<span class="string">'temperature'</span>][<span class="string">'value'</span>],
+        <span class="string">'wind'</span>: data[<span class="string">'windSpeed'</span>][<span class="string">'value'</span>],
+        <span class="string">'pressure'</span>: data[<span class="string">'barometricPressure'</span>][<span class="string">'value'</span>],
+    }
+
+<span class="keyword">def</span> <span class="func">sweep_file</span>(path, replacements):
+    <span class="comment">"""Regex-replace templated values in an HTML file."""</span>
+    <span class="keyword">with</span> open(path, <span class="string">'r'</span>) <span class="keyword">as</span> f:
+        html = f.read()
+    <span class="keyword">for</span> pattern, value <span class="keyword">in</span> replacements.items():
+        html = re.sub(pattern, value, html)
+    <span class="keyword">with</span> open(path, <span class="string">'w'</span>) <span class="keyword">as</span> f:
+        f.write(html)
+
+<span class="comment"># Example: update all pages with current timestamp + weather</span>
+wx = <span class="func">fetch_weather</span>()
+now = datetime.now(timezone.utc).strftime(<span class="string">'%Y-%m-%dT%H:%MZ'</span>)
+<span class="keyword">for</span> page <span class="keyword">in</span> glob.glob(<span class="string">'www/**/*.html'</span>, recursive=<span class="keyword">True</span>):
+    <span class="func">sweep_file</span>(page, {
+        <span class="string">r'Last updated: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z'</span>: <span class="string">f'Last updated: {now}'</span>,
+        <span class="string">r'data-temp="[^"]*"'</span>: <span class="string">f'data-temp="{wx["temp_c"]}"'</span>,
+    })
+  </div>
+
+  <div class="tip">
+    <strong>Tip:</strong> Use templated markers in your HTML like <code>data-temp="--"</code> or
+    <code>Last updated: 0000-00-00T00:00Z</code>. Regex replacement is simpler and more reliable
+    than DOM parsing for static site updates.
+  </div>
+
+  <h3>Step 3: Add a Daemon for Cadence Management</h3>
+
+  <div class="code-block">
+    <span class="label">sweep_daemon.py &mdash; cadence loop</span>
+<span class="keyword">import</span> time, json, os, subprocess
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timezone
+
+STATE_FILE = <span class="string">'.sweep-daemon-state.json'</span>
+
+SCHEDULE = {
+    <span class="num">0</span>:  [<span class="string">'sweep'</span>, <span class="string">'embed'</span>, <span class="string">'ftp_sync'</span>],    <span class="comment"># top of hour</span>
+    <span class="num">15</span>: [<span class="string">'concept_check'</span>],                  <span class="comment"># quarter past</span>
+    <span class="num">30</span>: [<span class="string">'nasa_check'</span>, <span class="string">'chroma_sync'</span>],       <span class="comment"># half past</span>
+    <span class="num">45</span>: [<span class="string">'drift_check'</span>],                    <span class="comment"># quarter to</span>
+}
+
+<span class="keyword">def</span> <span class="func">load_state</span>():
+    <span class="keyword">if</span> os.path.exists(STATE_FILE):
+        <span class="keyword">with</span> open(STATE_FILE) <span class="keyword">as</span> f: <span class="keyword">return</span> json.load(f)
+    <span class="keyword">return</span> {<span class="string">'last_mark'</span>: <span class="num">-1</span>, <span class="string">'marks_hit'</span>: <span class="num">0</span>}
+
+<span class="keyword">def</span> <span class="func">save_state</span>(state):
+    tmp = STATE_FILE + <span class="string">'.tmp'</span>
+    <span class="keyword">with</span> open(tmp, <span class="string">'w'</span>) <span class="keyword">as</span> f: json.dump(state, f, indent=<span class="num">2</span>)
+    os.replace(tmp, STATE_FILE)  <span class="comment"># atomic write</span>
+
+<span class="keyword">def</span> <span class="func">run_daemon</span>():
+    state = <span class="func">load_state</span>()
+    <span class="keyword">while True</span>:
+        now = datetime.now(timezone.utc)
+        minute = (now.minute // <span class="num">15</span>) * <span class="num">15</span>  <span class="comment"># snap to 15-min mark</span>
+        <span class="keyword">if</span> minute != state[<span class="string">'last_mark'</span>]:
+            <span class="keyword">for</span> action <span class="keyword">in</span> SCHEDULE.get(minute, []):
+                subprocess.run([<span class="string">'python3'</span>, <span class="string">f'{action}.py'</span>])
+            state[<span class="string">'last_mark'</span>] = minute
+            state[<span class="string">'marks_hit'</span>] += <span class="num">1</span>
+            <span class="func">save_state</span>(state)
+        time.sleep(<span class="num">30</span>)  <span class="comment"># check every 30s</span>
+  </div>
+
+  <div class="tip">
+    <strong>Cron vs. daemon:</strong> Cron is simpler for hourly jobs. A daemon gives you sub-hour marks,
+    peak cadence windows, and state persistence. We use the daemon because lunar flyby needs 15-minute updates.
+  </div>
+
+  <h3>Step 4: FTP/rsync Deployment</h3>
+
+  <div class="code-block">
+    <span class="label">ftp_sync.py &mdash; deploy to static hosting</span>
+<span class="keyword">import</span> ftplib, os
+
+<span class="keyword">def</span> <span class="func">sync_to_site</span>(local_dir, remote_dir, env_path=<span class="string">'.env'</span>):
+    <span class="comment">"""Upload changed HTML files via FTP."""</span>
+    env = {}
+    <span class="keyword">for</span> line <span class="keyword">in</span> open(env_path):
+        <span class="keyword">if</span> <span class="string">'='</span> <span class="keyword">in</span> line <span class="keyword">and not</span> line.startswith(<span class="string">'#'</span>):
+            k, v = line.strip().split(<span class="string">'='</span>, <span class="num">1</span>)
+            env[k] = v.strip(<span class="string">'\'"'</span>)
+
+    ftp = ftplib.FTP(env[<span class="string">'FTP_HOST'</span>], timeout=<span class="num">60</span>)
+    ftp.login(env[<span class="string">'FTP_USER'</span>], env[<span class="string">'FTP_PASS'</span>])
+    ftp.cwd(remote_dir)
+
+    count = <span class="num">0</span>
+    <span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(local_dir):
+        <span class="keyword">if not</span> fname.endswith(<span class="string">'.html'</span>): <span class="keyword">continue</span>
+        <span class="keyword">with</span> open(os.path.join(local_dir, fname), <span class="string">'rb'</span>) <span class="keyword">as</span> fh:
+            ftp.storbinary(<span class="string">f'STOR {fname}'</span>, fh)
+        count += <span class="num">1</span>
+    ftp.quit()
+    <span class="keyword">return</span> count
+  </div>
+
+  <div class="warn">
+    <strong>Gotcha:</strong> FTP size-based sync is unreliable. If your regex replacement produces a string
+    of the same byte length as the original, <code>lftp --only-newer</code> will skip it. Use an always-upload
+    strategy for files that change frequently.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>3. Embedding Pipeline</h2>
+
+  <div class="insight">
+    <h3>Model Choice</h3>
+    <p><strong>all-MiniLM-L6-v2</strong> &mdash; <span class="num">384</span> dimensions, <span class="num">80MB</span> model,
+    runs on CPU at ~100 pages/sec. Good enough for semantic search over research content.
+    GPU (our RTX 4060 Ti) speeds it up 10x but is not required.</p>
+  </div>
+
+  <div class="code-block">
+    <span class="label">embed_incremental.py &mdash; embedding pipeline</span>
+<span class="keyword">import</span> hashlib, re, os
+<span class="keyword">from</span> glob <span class="keyword">import</span> glob
+<span class="keyword">import</span> psycopg2
+<span class="keyword">from</span> sentence_transformers <span class="keyword">import</span> SentenceTransformer
+
+MODEL = <span class="string">"all-MiniLM-L6-v2"</span>
+BATCH = <span class="num">64</span>
+
+<span class="keyword">def</span> <span class="func">extract_text</span>(html_path):
+    <span class="comment">"""Strip HTML tags, return (title, plaintext)."""</span>
+    <span class="keyword">with</span> open(html_path) <span class="keyword">as</span> f: html = f.read()
+    text = re.sub(<span class="string">r'&lt;script.*?&lt;/script&gt;'</span>, <span class="string">''</span>, html, flags=re.DOTALL)
+    text = re.sub(<span class="string">r'&lt;style.*?&lt;/style&gt;'</span>, <span class="string">''</span>, text, flags=re.DOTALL)
+    text = re.sub(<span class="string">r'&lt;[^&gt;]+&gt;'</span>, <span class="string">' '</span>, text)
+    title = re.search(<span class="string">r'&lt;title&gt;([^&lt;]+)&lt;/title&gt;'</span>, html)
+    <span class="keyword">return</span> title.group(<span class="num">1</span>) <span class="keyword">if</span> title <span class="keyword">else</span> <span class="string">'untitled'</span>, text.strip()
+
+<span class="keyword">def</span> <span class="func">embed_and_store</span>(pages, cur, model):
+    <span class="comment">"""Batch-embed pages and UPDATE pgvector column."""</span>
+    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="num">0</span>, len(pages), BATCH):
+        batch = pages[i:i+BATCH]
+        texts = [p[<span class="num">1</span>][:<span class="num">2000</span>] <span class="keyword">for</span> p <span class="keyword">in</span> batch]  <span class="comment"># truncate to 2K chars</span>
+        embeddings = model.encode(texts, normalize_embeddings=<span class="keyword">True</span>)
+        <span class="keyword">for</span> (page_id, _), emb <span class="keyword">in</span> zip(batch, embeddings):
+            cur.execute(
+                <span class="string">"UPDATE artemis.research_pages SET embedding = %s::vector WHERE id = %s"</span>,
+                (emb.tolist(), page_id)
+            )
+
+<span class="comment"># Semantic search query</span>
+<span class="keyword">def</span> <span class="func">search</span>(query, cur, model, limit=<span class="num">10</span>):
+    <span class="comment">"""Cosine similarity search over embedded pages."""</span>
+    emb = model.encode([query], normalize_embeddings=<span class="keyword">True</span>)[<span class="num">0</span>]
+    cur.execute(<span class="string">"""
+        SELECT title, path, 1 - (embedding &lt;=&gt; %s::vector) AS similarity
+        FROM artemis.research_pages
+        WHERE embedding IS NOT NULL
+        ORDER BY embedding &lt;=&gt; %s::vector
+        LIMIT %s
+    """</span>, (emb.tolist(), emb.tolist(), limit))
+    <span class="keyword">return</span> cur.fetchall()
+  </div>
+
+  <h3>Database Schema</h3>
+
+  <div class="code-block">
+    <span class="label">PostgreSQL + pgvector schema</span>
+<span class="keyword">CREATE EXTENSION IF NOT EXISTS</span> vector;
+<span class="keyword">CREATE SCHEMA IF NOT EXISTS</span> artemis;
+
+<span class="keyword">CREATE TABLE</span> artemis.research_pages (
+    id            <span class="func">SERIAL PRIMARY KEY</span>,
+    path          <span class="func">TEXT UNIQUE NOT NULL</span>,     <span class="comment">-- relative path from Research/</span>
+    title         <span class="func">TEXT</span>,
+    category      <span class="func">TEXT</span>,                      <span class="comment">-- derived from directory</span>
+    content_text  <span class="func">TEXT</span>,                      <span class="comment">-- stripped plaintext (first 10K chars)</span>
+    word_count    <span class="func">INTEGER</span>,
+    embedding     <span class="func">vector(384)</span>,               <span class="comment">-- all-MiniLM-L6-v2 output</span>
+    content_hash  <span class="func">TEXT</span>,                      <span class="comment">-- SHA-256 prefix for change detection</span>
+    updated_at    <span class="func">TIMESTAMPTZ DEFAULT NOW()</span>
+);
+
+<span class="keyword">CREATE TABLE</span> artemis.page_links (
+    source_page_id  <span class="func">INTEGER REFERENCES</span> artemis.research_pages(id),
+    target_page_id  <span class="func">INTEGER REFERENCES</span> artemis.research_pages(id),
+    link_text       <span class="func">TEXT</span>,                  <span class="comment">-- 'semantic:0.85' for similarity links</span>
+    <span class="keyword">PRIMARY KEY</span> (source_page_id, target_page_id)
+);
+
+<span class="comment">-- Index for fast cosine similarity search</span>
+<span class="keyword">CREATE INDEX</span> ON artemis.research_pages
+    <span class="keyword">USING</span> ivfflat (embedding vector_cosine_ops) <span class="keyword">WITH</span> (lists = <span class="num">20</span>);
+  </div>
+
+  <div class="tip">
+    <strong>Incremental strategy:</strong> Hash page content with SHA-256. Only re-embed pages whose hash has changed.
+    On our 1,087-page corpus, a full re-embed takes ~11 seconds on CPU; incremental takes &lt;1 second for typical sweeps.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>4. Research Discovery Engine</h2>
+
+  <div class="code-block">
+    <span class="label">discovery_engine.py &mdash; arXiv search</span>
+<span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen, Request
+<span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote_plus
+<span class="keyword">import</span> re
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+
+QUERIES = [
+    (<span class="string">"agent orchestration"</span>, <span class="string">"cs.AI"</span>),
+    (<span class="string">"MCP server security"</span>, <span class="string">"cs.CR"</span>),
+    (<span class="string">"nitrogen fixation"</span>, <span class="string">"q-bio.MN"</span>),
+    (<span class="string">"LLM hallucination detection"</span>, <span class="string">"cs.CL"</span>),
+]
+
+<span class="keyword">def</span> <span class="func">search_arxiv</span>(query, category, max_results=<span class="num">5</span>, days_back=<span class="num">7</span>):
+    <span class="comment">"""Search arXiv API. Returns list of {id, title, date}. No key needed."""</span>
+    encoded = quote_plus(query)
+    url = (<span class="string">f"http://export.arxiv.org/api/query?"</span>
+           <span class="string">f"search_query=all:{encoded}+AND+cat:{category}"</span>
+           <span class="string">f"&amp;sortBy=submittedDate&amp;sortOrder=descending"</span>
+           <span class="string">f"&amp;max_results={max_results}"</span>)
+
+    req = Request(url, headers={<span class="string">'User-Agent'</span>: <span class="string">'ResearchEngine/1.0'</span>})
+    xml = urlopen(req, timeout=<span class="num">15</span>).read().decode()
+
+    papers = []
+    <span class="keyword">for</span> entry <span class="keyword">in</span> re.findall(<span class="string">r'&lt;entry&gt;(.*?)&lt;/entry&gt;'</span>, xml, re.DOTALL):
+        arxiv_id = re.search(<span class="string">r'&lt;id&gt;.*?/abs/([^&lt;]+)&lt;/id&gt;'</span>, entry)
+        title = re.search(<span class="string">r'&lt;title&gt;(.*?)&lt;/title&gt;'</span>, entry, re.DOTALL)
+        pub = re.search(<span class="string">r'&lt;published&gt;(\d{4}-\d{2}-\d{2})'</span>, entry)
+        <span class="keyword">if</span> arxiv_id <span class="keyword">and</span> title:
+            papers.append({
+                <span class="string">'id'</span>: arxiv_id.group(<span class="num">1</span>).strip(),
+                <span class="string">'title'</span>: re.sub(<span class="string">r'\s+'</span>, <span class="string">' '</span>, title.group(<span class="num">1</span>)).strip(),
+                <span class="string">'date'</span>: pub.group(<span class="num">1</span>) <span class="keyword">if</span> pub <span class="keyword">else</span> <span class="string">'unknown'</span>,
+            })
+    <span class="keyword">return</span> papers
+  </div>
+
+  <h3>Deduplication</h3>
+  <div class="code-block">
+    <span class="label">Title similarity + DOI matching</span>
+<span class="keyword">def</span> <span class="func">is_duplicate</span>(new_title, seen_titles, threshold=<span class="num">0.85</span>):
+    <span class="comment">"""Simple word-overlap similarity for title dedup."""</span>
+    new_words = set(new_title.lower().split())
+    <span class="keyword">for</span> seen <span class="keyword">in</span> seen_titles:
+        seen_words = set(seen.lower().split())
+        overlap = len(new_words &amp; seen_words)
+        union = len(new_words | seen_words)
+        <span class="keyword">if</span> union &gt; <span class="num">0</span> <span class="keyword">and</span> overlap / union &gt; threshold:
+            <span class="keyword">return True</span>
+    <span class="keyword">return False</span>
+
+<span class="comment"># Seen-ID sets prevent re-processing across runs</span>
+<span class="comment"># State file keeps last 500 YouTube IDs, 200 arXiv IDs</span>
+state[<span class="string">'seen_arxiv_ids'</span>] = list(seen)[<span class="num">-200</span>:]  <span class="comment"># rolling window</span>
+  </div>
+
+  <h3>Auto-Cataloging</h3>
+  <p style="font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; margin:0.5rem 0;">
+    Discovered items are appended to a Markdown queue as formatted table rows. Human reviews
+    and promotes to QUEUED status. Concept extraction pulls keywords from titles and abstracts
+    into knowledge graph nodes for cross-reference.
+  </p>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>5. Real-Time Dashboard Patterns</h2>
+
+  <h3>Multi-Timezone Clocks</h3>
+  <div class="code-block">
+    <span class="label">Client-side JavaScript &mdash; no server needed</span>
+<span class="keyword">function</span> <span class="func">updateClocks</span>() {
+  <span class="keyword">const</span> now = <span class="keyword">new</span> Date();
+  <span class="keyword">const</span> fmt = (tz) =&gt; now.toLocaleTimeString(<span class="string">'en-US'</span>, {
+    timeZone: tz, hour12: <span class="keyword">false</span>,
+    hour: <span class="string">'2-digit'</span>, minute: <span class="string">'2-digit'</span>, second: <span class="string">'2-digit'</span>
+  });
+  document.getElementById(<span class="string">'utc'</span>).textContent = fmt(<span class="string">'UTC'</span>);
+  document.getElementById(<span class="string">'pdt'</span>).textContent = fmt(<span class="string">'America/Los_Angeles'</span>);
+  document.getElementById(<span class="string">'edt'</span>).textContent = fmt(<span class="string">'America/New_York'</span>);
+}
+setInterval(<span class="func">updateClocks</span>, <span class="num">1000</span>);
+  </div>
+
+  <h3>Status Badges</h3>
+  <div class="code-block">
+    <span class="label">CSS status badges &mdash; pure CSS, no JavaScript</span>
+<span class="keyword">.badge</span> {
+  display: inline-block; padding: <span class="num">0.15rem 0.5rem</span>;
+  border-radius: <span class="num">3px</span>; font-size: <span class="num">0.7rem</span>;
+  font-family: system-ui, sans-serif; font-weight: <span class="num">600</span>;
+  text-transform: uppercase; letter-spacing: <span class="num">0.05em</span>;
+}
+<span class="keyword">.badge-live</span>    { background: <span class="string">rgba(76,175,80,0.2)</span>;  color: <span class="string">#4CAF50</span>; }
+<span class="keyword">.badge-flyby</span>   { background: <span class="string">rgba(196,163,90,0.2)</span>; color: <span class="string">#C4A35A</span>; }
+<span class="keyword">.badge-return</span>  { background: <span class="string">rgba(74,144,217,0.2)</span>; color: <span class="string">#4a90d9</span>; }
+<span class="keyword">.badge-pending</span> { background: <span class="string">rgba(255,255,255,0.06)</span>; color: <span class="string">rgba(255,255,255,0.35)</span>; }
+  </div>
+
+  <h3>Responsive Card Grids</h3>
+  <div class="code-block">
+    <span class="label">CSS Grid &mdash; auto-fit responsive layout</span>
+<span class="keyword">.card-grid</span> {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(<span class="num">280px</span>, <span class="num">1fr</span>));
+  gap: <span class="num">1rem</span>;
+}
+<span class="keyword">.card</span> {
+  background: <span class="string">#080c16</span>;
+  border: <span class="num">1px</span> solid <span class="string">rgba(255,255,255,0.06)</span>;
+  border-radius: <span class="num">6px</span>; padding: <span class="num">1.2rem</span>;
+}
+
+<span class="comment">/* Progressive enhancement: works without JS, enhanced with it */</span>
+<span class="keyword">.card[data-live]::after</span> {
+  content: attr(data-live);
+  <span class="comment">/* Populated by sweep.py, readable without JavaScript */</span>
+}
+  </div>
+
+  <div class="tip">
+    <strong>Progressive enhancement:</strong> Our pages render all content as static HTML. JavaScript adds
+    live clocks and interactive features. If JS fails, you still see the last swept data.
+    The sweep script writes values directly into HTML attributes and text content.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>6. ChromaDB Integration</h2>
+
+  <div class="code-block">
+    <span class="label">Backup/sync from PostgreSQL to ChromaDB</span>
+<span class="keyword">import</span> chromadb
+<span class="keyword">import</span> psycopg2
+<span class="keyword">from</span> db_config <span class="keyword">import</span> DB_DSN
+
+<span class="keyword">def</span> <span class="func">sync_to_chroma</span>(chroma_dir=<span class="string">'.chroma'</span>):
+    <span class="comment">"""Mirror pgvector embeddings to local ChromaDB for offline use."""</span>
+    client = chromadb.PersistentClient(path=chroma_dir)
+    collection = client.get_or_create_collection(
+        name=<span class="string">"research_pages"</span>,
+        metadata={<span class="string">"hnsw:space"</span>: <span class="string">"cosine"</span>}
+    )
+
+    conn = psycopg2.connect(DB_DSN)
+    cur = conn.cursor()
+    cur.execute(<span class="string">"""
+        SELECT id, path, title, content_text, embedding::text
+        FROM artemis.research_pages
+        WHERE embedding IS NOT NULL
+    """</span>)
+
+    ids, docs, metas, embeddings = [], [], [], []
+    <span class="keyword">for</span> row <span class="keyword">in</span> cur.fetchall():
+        page_id, path, title, content, emb_str = row
+        emb = [float(x) <span class="keyword">for</span> x <span class="keyword">in</span> emb_str.strip(<span class="string">'[]'</span>).split(<span class="string">','</span>)]
+        ids.append(str(page_id))
+        docs.append(content[:<span class="num">5000</span>] <span class="keyword">if</span> content <span class="keyword">else</span> <span class="string">''</span>)
+        metas.append({<span class="string">'path'</span>: path, <span class="string">'title'</span>: title <span class="keyword">or</span> <span class="string">''</span>})
+        embeddings.append(emb)
+
+    <span class="keyword">if</span> ids:
+        collection.upsert(ids=ids, documents=docs,
+                          metadatas=metas, embeddings=embeddings)
+    cur.close(); conn.close()
+    <span class="keyword">return</span> len(ids)
+  </div>
+
+  <div class="insight">
+    <h3>Local-First Architecture</h3>
+    <p>PostgreSQL is the primary store; ChromaDB is a local backup that enables offline semantic search.
+    No cloud vector databases, no API keys, no per-query billing. The entire system runs on a single machine.
+    Our setup: <span class="num">60GB RAM</span>, <span class="num">RTX 4060 Ti</span> (8GB VRAM), but a laptop with 16GB RAM works fine for
+    1,000-page corpora.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>7. Lessons Learned</h2>
+
+  <div class="insight">
+    <h3>FTP sync is trickier than you think</h3>
+    <p>Size-based sync tools like <code>lftp --only-newer</code> will skip files where the replacement
+    string has the same byte length as the original. Example: replacing <code>v1.6.17</code> with <code>v1.6.18</code>
+    produces an identical file size. Solution: always-upload for sweep-targeted files. We sync ~40 files per hour;
+    the overhead is negligible.</p>
+  </div>
+
+  <div class="insight">
+    <h3>State persistence matters</h3>
+    <p>The daemon writes state to JSON on disk after every mark. If it crashes mid-sweep, it resumes from the
+    last completed mark. Atomic writes (<code>os.replace(tmp, file)</code>) prevent corruption from partial writes.
+    Rolling windows on seen-ID sets (<span class="num">500</span> YouTube, <span class="num">200</span> arXiv) prevent unbounded growth.</p>
+  </div>
+
+  <div class="insight">
+    <h3>Peak cadence windows</h3>
+    <p>Normal cadence: sweep at :00, sub-marks at :15/:30/:45. During lunar flyby (Day 8, 06:00-18:00 EDT),
+    the daemon switches to peak cadence: full sweep + embed at every 15-minute mark. This is defined as
+    a configuration list, not hardcoded logic &mdash; add a new peak window in one line.</p>
+  </div>
+
+  <div class="insight">
+    <h3>Version stamping enables bisect</h3>
+    <p>Every sweep stamps <code>v{major}.{minor}.{hour}</code> into every file. When something breaks,
+    <code>git log --oneline</code> shows exactly which sweep introduced the regression. 7 days of hourly sweeps =
+    168+ versions, all bisectable. Commit messages follow <code>feat(sweep): v1.6.18</code> convention.</p>
+  </div>
+
+  <div class="insight">
+    <h3>Regex replacement, not DOM parsing</h3>
+    <p>Our sweep script uses <code>re.sub()</code> with precise patterns, not Beautiful Soup or lxml.
+    It is faster (no parse/serialize cycle), preserves exact formatting, and never introduces unintended
+    whitespace changes. The tradeoff: patterns must be unique per file. We enforce this by convention.</p>
+  </div>
+
+  <div class="insight">
+    <h3>Timestamps need three layers</h3>
+    <p>We track three distinct timestamps for every data point: <strong>source_ts</strong> (when the source
+    produced the data), <strong>capture_ts</strong> (when we fetched it), and <strong>storage_ts</strong>
+    (when we committed it to DB/git). This makes debugging time-zone and latency issues straightforward.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>8. Getting Started Checklist</h2>
+
+  <h3>Prerequisites</h3>
+  <ul class="checklist">
+    <li><code>Python 3.10+</code> &mdash; f-strings, type hints, match statements</li>
+    <li><code>PostgreSQL 15+</code> with <code>pgvector</code> extension &mdash; <code>CREATE EXTENSION vector;</code></li>
+    <li><code>pip install sentence-transformers psycopg2-binary chromadb</code></li>
+    <li><code>yt-dlp</code> for YouTube channel monitoring (optional)</li>
+    <li>Static web hosting with FTP/SFTP access (or use rsync to a VPS)</li>
+  </ul>
+
+  <h3>Time Estimates</h3>
+  <ul class="checklist">
+    <li><strong>~2 hours:</strong> Basic sweep pipeline (fetch API data, regex-replace into HTML, FTP deploy)</li>
+    <li><strong>~3 hours:</strong> Add daemon with 15-minute cadence and state persistence</li>
+    <li><strong>~4 hours:</strong> Full embedding pipeline (PostgreSQL + pgvector + semantic search)</li>
+    <li><strong>~2 hours:</strong> Discovery engine (arXiv + one more source)</li>
+    <li><strong>~1 hour:</strong> ChromaDB backup sync</li>
+  </ul>
+
+  <h3>Hardware</h3>
+  <ul class="checklist">
+    <li><strong>Minimum:</strong> Any laptop, 8GB RAM, CPU-only embedding (~100 pages/sec)</li>
+    <li><strong>Our setup:</strong> RTX 4060 Ti (8GB VRAM), 60GB RAM, NVMe SSD</li>
+    <li>GPU accelerates embedding 10x but is not required for corpora under 10K pages</li>
+    <li>PostgreSQL with pgvector handles 100K+ vectors on modest hardware</li>
+  </ul>
+
+  <h3>Free APIs &mdash; Quick Start</h3>
+  <table class="api-table">
+    <thead>
+      <tr><th>API</th><th>One-Liner Test</th><th>Returns</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:600;color:#fff;">NWS Weather</td>
+        <td style="font-family:monospace;font-size:0.75rem;">curl -s api.weather.gov/stations/KPAE/observations/latest | python3 -m json.tool</td>
+        <td>Current temp, wind, pressure, conditions</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">SWPC Kp Index</td>
+        <td style="font-family:monospace;font-size:0.75rem;">curl -s services.swpc.noaa.gov/products/noaa-planetary-k-index.json</td>
+        <td>3-hour Kp values, geomagnetic activity</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">arXiv Search</td>
+        <td style="font-family:monospace;font-size:0.75rem;">curl -s "export.arxiv.org/api/query?search_query=all:agent+orchestration&amp;max_results=3"</td>
+        <td>Paper titles, abstracts, authors, dates</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#fff;">DSN Now</td>
+        <td style="font-family:monospace;font-size:0.75rem;">curl -s eyes.nasa.gov/dsn/data/dsn.xml</td>
+        <td>Active spacecraft contacts, signal strength</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip" style="margin-top:1.5rem;">
+    <strong>Start small:</strong> Build the sweep script first. Get one API feeding one HTML page,
+    deployed via FTP. Then add the daemon, then embeddings. Each layer is independent &mdash;
+    you can run sweep.py manually from cron for months before adding the daemon.
+  </div>
+
+</main>
+
+<footer>
+  <a href="index.html">Mission Tracker</a> &middot;
+  <a href="ai-coverage.html">AI Coverage</a> &middot;
+  <a href="papers.html">Papers</a> &middot;
+  <a href="../../LIVE/index.html">Live</a> &middot;
+  <a href="../../index.html">Tibsfox Research</a> &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  Artemis II AI Programming Guide &mdash; from the mission tracking system powering live coverage since Day 1<br>
+  Stack: Python 3 + PostgreSQL/pgvector + sentence-transformers + ChromaDB + ftplib<br>
+  Last updated: 2026-04-06
+</footer>
+
+</body>
+</html>

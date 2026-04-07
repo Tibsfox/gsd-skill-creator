@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Root Cause Analysis</h1>
+    <div class="subtitle">Classical Methods, Systems Thinking, SRE, AI Agent Debugging, Cloud &amp; Microservices &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      From Sakichi Toyoda asking &ldquo;why?&rdquo; five times on the Toyota factory floor in the 1930s to Microsoft Research&rsquo;s AgentRx pipeline achieving +23.6% fault localization in 2026, root cause analysis has evolved from a single-method shop-floor discipline into a multi-paradigm investigation science spanning healthcare sentinel events, aviation black boxes, cloud telemetry, and AI agent trajectory debugging. This research digest traces that entire arc &mdash; eight decades of methodology, 10 modules, 879 cross-references across a 246-project corpus.
+    </blockquote>
+
+    <!-- ============================================================ -->
+    <!-- RESEARCH PROGRAM STATISTICS                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Research Program Statistics</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">879</span><span class="stat-label">Cross-References</span></div>
+      <div class="stat"><span class="stat-value">246</span><span class="stat-label">Corpus Projects</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Decades Spanned</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Rosetta Clusters</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Industry Domains</span></div>
+    </div>
+
+    <div class="card">
+      <p><strong>Domains covered:</strong> Manufacturing &amp; Quality, Healthcare &amp; Patient Safety, Aviation &amp; Aerospace, Software &amp; Site Reliability Engineering, Cloud &amp; Microservices, AI Agent Systems</p>
+      <p><strong>Research method:</strong> Extract primary sources, identify foundational papers, trace methodology lineage, cross-reference against 246-project PNW Research Series corpus, map to complex plane</p>
+      <p><strong>Mission period:</strong> April 2026 &middot; Artemis II branch &middot; Research Co-Processor v2</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODULE OVERVIEW                                               -->
+    <!-- ============================================================ -->
+
+    <h2>Module Overview</h2>
+
+    <div class="category-grid">
+      <a href="classical-methods.html" class="category-card">
+        <div><span class="cluster-badge cluster-classical">Classical</span></div>
+        <h3>Classical Methods</h3>
+        <p>Five Whys (Toyota/Toyoda, 1930s), Ishikawa Fishbone Diagrams (6M categories), Fault Tree Analysis (Boolean AND/OR gates), FMEA (Risk Priority Numbers), Barrier Analysis (Swiss Cheese model). The foundational toolkit that shaped every subsequent method.</p>
+        <p><strong>Pipeline:</strong> 37 related projects, 30 keyword matches</p>
+      </a>
+
+      <a href="systems-thinking.html" class="category-card">
+        <div><span class="cluster-badge cluster-systems">Systems</span></div>
+        <h3>Systems-Theoretic Approaches</h3>
+        <p>STAMP (Leveson, MIT), STPA (proactive hazard analysis), CAST (retrospective), HFACS (aviation), Swiss Cheese Model (Reason), Safety-III. The paradigm shift from component failure to emergent system-level control breakdowns.</p>
+        <p><strong>Pipeline:</strong> 230 related projects, 19 keyword matches</p>
+      </a>
+
+      <a href="software-sre.html" class="category-card">
+        <div><span class="cluster-badge cluster-sre">SRE</span></div>
+        <h3>Software Engineering &amp; SRE</h3>
+        <p>Google blameless postmortems, observability (logs/metrics/traces), error budgets, DORA metrics, chaos engineering, cascading failure analysis, circuit breakers. How software engineering adapted RCA for continuous deployment.</p>
+        <p><strong>Pipeline:</strong> 14 related projects, 13 keyword matches</p>
+      </a>
+
+      <a href="ai-agent-debugging.html" class="category-card">
+        <div><span class="cluster-badge cluster-agent">AI Agents</span></div>
+        <h3>AI Agent Debugging</h3>
+        <p>AgentRx (Microsoft, 4-stage pipeline, +23.6% localization), OpenRCA (335 failures, 68GB telemetry), AgentDebug (+24% accuracy), 9-category failure taxonomy. The frontier of RCA applied to non-deterministic reasoning chains.</p>
+        <p><strong>Pipeline:</strong> 230 related projects, 8 keyword matches</p>
+      </a>
+
+      <a href="cloud-microservices.html" class="category-card">
+        <div><span class="cluster-badge cluster-cloud">Cloud</span></div>
+        <h3>Cloud &amp; Microservices</h3>
+        <p>DynaCausal (dynamic causality-aware cascading), CHASE (causal hypergraph), MetaRCA (generalizable fault incidents), service dependency graphs, distributed trace analysis, anomaly correlation across service meshes.</p>
+        <p><strong>Pipeline:</strong> 227 related projects, 8 keyword matches</p>
+      </a>
+
+      <a href="llm-rca-failures.html" class="category-card">
+        <div><span class="cluster-badge cluster-llm">LLM Failures</span></div>
+        <h3>LLM Reasoning Failures</h3>
+        <p>Why AI agents systematically fail at cloud RCA (Kim et al., 1,675 runs, 5 models, 12 pitfall types). Stalled, Biased, and Confused reasoning categories. Architecture-level failures, not model-level. FVDebug formal verification.</p>
+        <p><strong>Pipeline:</strong> 230 related projects, 11 keyword matches</p>
+      </a>
+
+      <a href="healthcare-aviation.html" class="category-card">
+        <div><span class="cluster-badge cluster-healthcare">Healthcare</span></div>
+        <h3>Healthcare &amp; Aviation</h3>
+        <p>Joint Commission sentinel events, NASA ASRS, NTSB investigation methodology, STAMP vs traditional RCA in patient safety, human factors engineering, High-Reliability Organizations (HRO), preoccupation with failure.</p>
+        <p><strong>Pipeline:</strong> 16 related projects, 16 keyword matches</p>
+      </a>
+
+      <a href="manufacturing-quality.html" class="category-card">
+        <div><span class="cluster-badge cluster-manufacturing">Manufacturing</span></div>
+        <h3>Manufacturing &amp; Quality</h3>
+        <p>Toyota Production System / Kaizen, Six Sigma DMAIC, 8D (Ford), Statistical Process Control, AI-driven manufacturing RCA, zero-defect programs, digital twins, Pareto analysis (80/20 rule).</p>
+        <p><strong>Pipeline:</strong> 25 related projects, 24 keyword matches</p>
+      </a>
+
+      <a href="our-architecture.html" class="category-card">
+        <div><span class="cluster-badge cluster-architecture">Our Architecture</span></div>
+        <h3>RCA in Our Architecture</h3>
+        <p>Mapping RCA methods to gsd-skill-creator: gsd-forensics skill, incident-analyzer agent, security-hygiene, verification pipeline, error-as-feedback loops, context rot as root cause, trust system failure modes.</p>
+        <p><strong>Pipeline:</strong> 237 related projects, 42 keyword matches</p>
+      </a>
+
+      <a href="mathematical-foundations.html" class="category-card">
+        <div><span class="cluster-badge cluster-math">Math</span></div>
+        <h3>Mathematical Foundations</h3>
+        <p>Causal inference (Pearl, do-calculus), Bayesian networks, information theory for fault localization, graph theory (fault propagation), Markov chains, Granger causality. The formal machinery beneath every RCA method.</p>
+        <p><strong>Pipeline:</strong> 229 related projects, 14 keyword matches</p>
+      </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- KEY NUMBERS                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>Key Numbers</h2>
+
+    <div class="card">
+      <p><span class="key-number critical">12</span> &mdash; pitfall types identified in LLM-based RCA (Kim et al., 1,675 agent runs across 5 models)</p>
+      <p><span class="key-number evidence">1,675</span> &mdash; agent runs in the largest systematic study of AI RCA failures</p>
+      <p><span class="key-number confirmed">+23.6%</span> &mdash; fault localization improvement from AgentRx 4-stage pipeline (Microsoft Research)</p>
+      <p><span class="key-number warn">68 GB</span> &mdash; telemetry in the OpenRCA benchmark (335 real-world agent failures)</p>
+      <p><span class="key-number evidence">99</span> &mdash; cross-references in the highest-connected module (our-architecture)</p>
+      <p><span class="key-number">879</span> &mdash; total corpus cross-references across all 10 modules</p>
+      <p><span class="key-number confirmed">+24%</span> &mdash; accuracy improvement from AgentDebug corrective feedback approach</p>
+      <p><span class="key-number warn">80/20</span> &mdash; Pareto principle: 80% of defects from 20% of causes (Juran, 1941)</p>
+      <p><span class="key-number critical">RPN</span> &mdash; Risk Priority Number = Severity &times; Occurrence &times; Detection (FMEA core formula)</p>
+      <p><span class="key-number evidence">1930s</span> &mdash; Five Whys origin at Toyota (Sakichi Toyoda), the oldest method still in active use</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CROSS-REFERENCES                                              -->
+    <!-- ============================================================ -->
+
+    <h2>Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../GSI/index.html">GSI &mdash; GSD-Skill-Creator Improvements</a></li>
+        <li><a href="../AMS/index.html">AMS &mdash; Artemis Math &amp; Science</a></li>
+        <li><a href="../MAS/index.html">MAS &mdash; Multi-Agent Systems</a></li>
+        <li><a href="../FAIS/index.html">FAIS &mdash; Formal AI Safety</a></li>
+        <li><a href="../LLM/index.html">LLM &mdash; Large Language Models</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../CML/index.html">CML &mdash; CMU ML in Production</a></li>
+        <li><a href="../DRP/index.html">DRP &mdash; Disaster Recovery</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+        <li><a href="../K8S/index.html">K8S &mdash; Kubernetes Ecosystem</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Rosetta Cluster:</strong> AI &amp; Computation &middot; This digest surveys root cause analysis from its manufacturing origins through systems theory to AI-native debugging. The classical and manufacturing modules connect to the Infrastructure cluster. Healthcare and aviation modules bridge to the Science cluster. Mathematical foundations connect to AMS and the formal methods lineage.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Root Cause Analysis &middot; AI &amp; Computation Cluster &middot; 10 research modules &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

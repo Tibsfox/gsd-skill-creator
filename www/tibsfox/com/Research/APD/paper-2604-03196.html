@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Review Agents &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Code Review Agents: Industry Claims vs Empirical Reality</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">Code Agents</span></div>
+      <h3>Code Review Agents: Industry Claims vs Empirical Reality</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.03196" target="_blank"><span class="arxiv-id">2604.03196</span></a></p>
+      <p><strong>Authors:</strong> Chowdhury et al.</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.SE, cs.AI</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>An empirical study of 19,450 pull requests on the AIDev platform comparing code review agent performance against human reviewers. CRA-only PRs achieve 45.20% merge rate versus 68.37% for human-only reviews. Signal-to-noise ratio sits in the 0-30% range for most agents, with 60.2% of CRA-generated PRs being closed without merge. 12 of 13 evaluated agents fall below 60% signal quality.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number">19,450</span> PRs analyzed on AIDev platform</li>
+      <li><span class="key-number warn">45.20%</span> merge rate for CRA-only PRs vs <span class="key-number confirmed">68.37%</span> for human-only</li>
+      <li><span class="key-number critical">60.2%</span> of CRA-generated PRs closed without merge</li>
+      <li><span class="key-number critical">12/13</span> agents fall below 60% signal quality threshold</li>
+      <li>Signal-to-noise ratio in 0-30% range for most agents</li>
+      <li>Industry marketing claims significantly overstate actual performance</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Review Type</th><th>Merge Rate</th><th>Signal Quality</th><th>Noise Level</th></tr></thead>
+      <tbody>
+        <tr><td>Human-only</td><td>68.37%</td><td>High</td><td>Low</td></tr>
+        <tr><td>CRA-assisted</td><td>55-60%</td><td>Moderate</td><td>Moderate</td></tr>
+        <tr><td>CRA-only</td><td>45.20%</td><td>0-30% range</td><td>High (60.2% closed)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Methodology</h2>
+    <p>Large-scale empirical study on AIDev platform analyzing 19,450 PRs across three conditions: CRA-only (agent reviews without human involvement), human-only (traditional review), and CRA-assisted (agent findings reviewed by humans). Signal-to-noise measured as the ratio of actionable comments to total comments. Merge rate tracked as the primary outcome metric.</p>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <h3>Validation</h3>
+      <p>Validates our adversarial-pr-review and code-review skill design: human-in-the-loop is essential, not optional. The 45.2% vs 68.37% gap quantifies the cost of fully automated review.</p>
+      <h3>Design Principles</h3>
+      <ul>
+        <li>Use agents for signal <em>generation</em> (finding issues), humans for signal <em>evaluation</em> (deciding on fixes)</li>
+        <li>The 0-30% signal-to-noise range means most agent comments are noise &mdash; present as suggestions, never auto-merge</li>
+        <li>12/13 agents below 60% signal quality confirms the need for adversarial review of the reviewer itself</li>
+        <li>Our issue-triage-pr-review skill already follows this pattern; this paper quantifies why it's right</li>
+      </ul>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (229 projects, 246-project corpus)</h4>
+      <span class="ref-tag">SCR &mdash; Source Code Review</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+      <span class="ref-tag">SAA &mdash; Skills &amp; Teams</span>
+      <span class="ref-tag">PSS &mdash; PNW Signal Stack</span>
+      <span class="ref-tag">TSL &mdash; Tessl Skill Review</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-00824.html">STITCH: Training Code Agents</a></li>
+        <li><a href="paper-2604-00594.html">Agent Psychometrics: IRT Profiling</a></li>
+        <li><a href="paper-2604-04131.html">Profile-Then-Reason: Bounded Complexity</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.03196 &middot; Code Review Agents</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production-Proven Orchestration Patterns &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card, .pipeline-card,
+    .component-card, .channel-card, .lesson-card, .stage-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid, .pipeline-grid,
+    .component-grid, .channel-grid, .lesson-grid, .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+    .highlight-box {
+      background: rgba(233, 69, 96, 0.08);
+      border-left: 3px solid var(--saa-highlight);
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      margin: 1.5rem 0;
+    }
+    .highlight-box h4 { color: var(--saa-highlight); margin: 0 0 0.5rem; }
+    .intro-box {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .content-section { margin: 2.5rem 0; }
+    .arch-diagram {
+      background: #0d1117;
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+    .arch-diagram pre {
+      text-align: left;
+      margin: 0;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #e0e0e0;
+    }
+    .diagram-title {
+      font-weight: 700;
+      color: var(--saa-highlight);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .code-example {
+      position: relative;
+      margin: 1rem 0;
+    }
+    .code-example .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--saa-border);
+      color: var(--saa-text-muted);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .code-example .copy-btn:hover { background: var(--saa-highlight); color: white; }
+    .code-example .copy-btn.copied { background: #2ecc71; color: white; border-color: #2ecc71; }
+    .stats-highlight {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .stat-box {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-box:hover { transform: translateY(-2px); border-color: var(--saa-highlight); }
+    .stat-box .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--saa-highlight);
+      display: block;
+    }
+    .stat-box .stat-label {
+      color: var(--saa-text-muted);
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+    }
+    .pipeline-stage {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    .pipeline-stage .stage {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      color: var(--saa-highlight-light);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pipeline-stage .arrow {
+      color: var(--saa-text-muted);
+      font-size: 1.1rem;
+    }
+    .research-callout {
+      background: rgba(15, 52, 96, 0.3);
+      border: 1px solid var(--saa-accent);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .callout-header { font-weight: 700; color: var(--saa-highlight); margin-bottom: 0.5rem; }
+    .sources-list { list-style: none; padding: 0; }
+    .sources-list li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(42, 42, 74, 0.5);
+      font-size: 0.9rem;
+    }
+    .sources-list li:last-child { border-bottom: none; }
+    .comparison-table { width: 100%; margin: 1rem 0; border-collapse: collapse; }
+    .comparison-table th {
+      background: var(--saa-accent);
+      color: white;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+    .comparison-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid var(--saa-border);
+      color: var(--saa-text);
+      vertical-align: top;
+    }
+    .comparison-table tr:nth-child(even) { background: rgba(15, 52, 96, 0.15); }
+    .pattern-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    .pattern-flow .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pattern-flow .flow-label {
+      min-width: 180px;
+      color: var(--saa-highlight);
+      font-weight: 600;
+      font-size: 0.9rem;
+      font-family: 'Courier New', monospace;
+    }
+    .pattern-flow .flow-desc {
+      color: var(--saa-text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>Orchestration Patterns &mdash; Production at Scale
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html">3. Multi-Agent</a>
+      <a href="section-4.html">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html">10. GSD</a>
+      <a href="section-11.html">11. Trust</a>
+      <a href="section-12.html">12. Security</a>
+      <a href="section-13.html" class="active">13. Orchestration</a>
+      <a href="section-14.html">14. Research</a>
+      <a href="section-15.html">15. Mail/Nudge</a>
+      <a href="references.html">References</a>
+    </div>
+  </header>
+
+    <header>
+        <span class="section-number">13</span>
+        <h1>Production-Proven Orchestration Patterns</h1>
+        <p class="subtitle">Battle-Hardened Multi-Agent Coordination from 190+ Research Projects</p>
+        <p class="research-date">Research current as of: April 2026</p>
+    </header>
+
+    <div class="container">
+        <nav class="navigation">
+            <div class="nav-links" style="border-top: none; margin-top: 0;">
+                <a href="section-12.html" style="margin-right:auto">&larr; 12. Security</a>
+                <a href="section-14.html" style="margin-left:auto">14. Research &rarr;</a>
+            </div>
+        </nav>
+
+        <div class="intro-box">
+            <p><strong>This section documents orchestration patterns that emerged from building, testing, and shipping over 190 research projects at production scale.</strong> These are not theoretical frameworks extracted from papers or conference talks. They are working systems, forged in the pressure of real deadlines, real context limits, and real multi-agent failures. Every pattern described here has been run at scale, has failed at least once, has been repaired, and has been proven reliable enough to trust with autonomous execution across dozens of parallel agents. This is where the SAA architecture stops being a survey of the field and starts speaking from direct, hard-won experience.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>In This Section</h3>
+            <ul>
+                <li><a href="#13-1">13.1 The Orchestration Challenge</a></li>
+                <li><a href="#13-2">13.2 Fleet Mission &mdash; Parallel Agent Dispatch</a></li>
+                <li><a href="#13-3">13.3 Gastown Convoy Model &mdash; Multi-Agent Orchestration</a></li>
+                <li><a href="#13-4">13.4 GUPP Propulsion &mdash; Polled-to-Proactive Execution</a></li>
+                <li><a href="#13-5">13.5 Sling Dispatch &mdash; Work Routing Pipeline</a></li>
+                <li><a href="#13-6">13.6 Communication Patterns</a></li>
+                <li><a href="#13-7">13.7 Refinery Merge &mdash; Deterministic Merge Queue</a></li>
+                <li><a href="#13-8">13.8 Done Retirement &mdash; Completion Pipeline</a></li>
+                <li><a href="#13-9">13.9 Beads State &mdash; Crash-Recoverable Persistence</a></li>
+                <li><a href="#13-10">13.10 Runtime HAL &mdash; Multi-Runtime Abstraction</a></li>
+                <li><a href="#13-11">13.11 Token Budget Management</a></li>
+                <li><a href="#13-12">13.12 Composing Patterns &mdash; The Full Stack</a></li>
+                <li><a href="#13-13">13.13 Lessons Learned at Scale</a></li>
+            </ul>
+        </div>
+
+        <div class="stats-highlight">
+            <div class="stat-box">
+                <span class="stat-value">190+</span>
+                <span class="stat-label">Research projects shipped</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">13</span>
+                <span class="stat-label">Rosetta clusters</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">50+</span>
+                <span class="stat-label">Parallel convoy scale</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">12</span>
+                <span class="stat-label">Named orchestration patterns</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">600K+</span>
+                <span class="stat-label">Lines of output</span>
+            </div>
+        </div>
+
+        <!-- 13.1 The Orchestration Challenge -->
+        <section class="content-section" id="13-1">
+            <h2>13.1 The Orchestration Challenge</h2>
+
+            <p>Every AI agent system starts the same way: one agent, one task, one context window. The agent reads a prompt, thinks through the problem, calls some tools, and produces output. It works beautifully for small, self-contained tasks. And then you try to scale it.</p>
+
+            <h3>Where Single-Agent Execution Breaks</h3>
+
+            <p>The fundamental constraint of large language model agents is the context window. Even with modern models offering 200K or 1M token windows, there is a hard ceiling on how much state a single agent can hold simultaneously. When your project involves generating 28 research documents across a coordinated series, no single context window can hold the outline, style guide, cross-references, source material, previously generated documents, and the working draft of the current document all at once. The math simply does not work.</p>
+
+            <p>But context size is only the most visible constraint. The deeper problem is <strong>coordination overhead</strong>. A single agent writing 28 documents sequentially will spend an enormous proportion of its token budget on re-establishing context. Each time the context resets&mdash;whether from hitting the window limit, from a crash, or from session boundaries&mdash;the agent must reload project state, recall what has been completed, figure out what comes next, and re-derive any decisions it made in previous sessions. In our early attempts at sequential execution, we measured coordination overhead consuming 30&ndash;40% of total token spend. On a 28-document series, that is the equivalent of throwing away 8&ndash;11 full documents worth of compute just on bookkeeping.</p>
+
+            <p>Parallel execution solves the throughput problem but introduces an entirely new category of failures: merge conflicts, inconsistent cross-references, duplicated effort, and partial completions that leave the system in an unrecoverable state. You need coordination, but coordination requires shared state, and shared state requires communication channels, and communication channels require protocols, and protocols require enforcement. This is the orchestration problem.</p>
+
+            <div class="highlight-box">
+                <h4>The Core Tension</h4>
+                <p>Orchestration exists to manage a fundamental tension: <strong>agents need autonomy to be effective, but autonomous agents need coordination to be coherent.</strong> Every pattern in this section is a different approach to resolving that tension for a specific class of problems. None of them replace the others. They compose.</p>
+            </div>
+
+            <h3>State Management Across Context Resets</h3>
+
+            <p>Context resets are not exceptional events in agentic systems&mdash;they are the normal operating condition. Every agent session has a finite lifetime. Context windows fill. Sessions time out. Crashes happen. Users close terminals. The question is not whether state will be lost, but what the recovery cost will be when it happens.</p>
+
+            <p>Traditional software engineering solved this problem decades ago with databases, transaction logs, and checkpoint/restart protocols. But AI agent state is fundamentally different from application state. An agent's most valuable state is not the data it has produced but the <em>reasoning context</em> it has accumulated: the decisions it made and why, the alternatives it rejected, the constraints it discovered. This reasoning context is implicit in the conversation history and cannot be serialized into a JSON file without significant loss.</p>
+
+            <p>Our approach accepts this loss as unavoidable and designs around it. Instead of trying to perfectly preserve reasoning context, we externalize decision outcomes into durable state files and design our systems so that any agent can reconstruct enough context from those files to continue the work. The key insight is that <strong>decisions need to survive context resets, but the reasoning behind those decisions does not</strong>. An agent resuming from a checkpoint does not need to know why a particular document structure was chosen; it needs to know what structure was chosen and what remains to be done.</p>
+
+            <h3>The Pattern Language</h3>
+
+            <p>Over the course of 190+ projects, a coherent pattern language has emerged. These patterns did not arrive as a designed system. They grew organically from repeated failures and their solutions, each pattern addressing a specific class of problem that appeared often enough to warrant a named, reusable solution.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Problem Addressed</th>
+                        <th>Scale Proven</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fleet Mission</strong></td>
+                        <td>Need to run N independent tasks in parallel</td>
+                        <td>28-document series</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gastown Convoy</strong></td>
+                        <td>Need coordinated multi-agent orchestration with monitoring</td>
+                        <td>50+ projects</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GUPP Propulsion</strong></td>
+                        <td>Agents are reactive by default; need proactive execution</td>
+                        <td>All production runs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sling Dispatch</strong></td>
+                        <td>Need reliable work routing with audit trail</td>
+                        <td>Every convoy dispatch</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mail Async</strong></td>
+                        <td>Need durable cross-session communication</td>
+                        <td>Multi-day missions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nudge Sync</strong></td>
+                        <td>Need immediate state signaling between agents</td>
+                        <td>Health monitoring loops</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Refinery Merge</strong></td>
+                        <td>Parallel agents producing code that must merge cleanly</td>
+                        <td>Multi-branch development</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Done Retirement</strong></td>
+                        <td>Need deterministic completion pipeline with cleanup</td>
+                        <td>Every project completion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beads State</strong></td>
+                        <td>Need crash-recoverable agent state persistence</td>
+                        <td>All long-running work</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Runtime HAL</strong></td>
+                        <td>Need skills that work across different AI runtimes</td>
+                        <td>4 runtime targets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Token Budget</strong></td>
+                        <td>Need cost control across parallel agents</td>
+                        <td>Fleet-level enforcement</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The remainder of this section details each pattern: its architecture, its interface, the specific failure modes it addresses, and the lessons learned from running it at scale. Where possible, we include the actual command interfaces and state file formats used in production.</p>
+        </section>
+
+        <!-- 13.2 Fleet Mission -->
+        <section class="content-section" id="13-2">
+            <h2>13.2 Fleet Mission &mdash; Parallel Agent Dispatch</h2>
+
+            <p>Fleet Mission is the simplest and most frequently used orchestration pattern. A commander agent dispatches N worker agents, each with an independent task, monitors their completion, and merges their results into a unified output. It is the parallel equivalent of a <code>for</code> loop: when tasks are independent and can run simultaneously, Fleet Mission eliminates the serial bottleneck.</p>
+
+            <h3>Architecture</h3>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">Fleet Mission Architecture</div>
+<pre>
+                    +------------------+
+                    |    COMMANDER     |
+                    |  (orchestrator)  |
+                    +--------+---------+
+                             |
+              +--------------+--------------+
+              |              |              |
+        +-----v----+  +-----v----+  +------v---+
+        | AGENT #1 |  | AGENT #2 |  | AGENT #N |
+        |  task-a   |  |  task-b   |  |  task-n   |
+        +-----+----+  +-----+----+  +------+---+
+              |              |              |
+              +--------------+--------------+
+                             |
+                    +--------v---------+
+                    |    AGGREGATOR    |
+                    | merge results    |
+                    +------------------+
+</pre>
+            </div>
+
+            <p>The commander is responsible for three things: decomposing the work into independent units, dispatching agents with clear instructions, and aggregating the results once all agents have completed. The workers are ephemeral&mdash;they spin up, do their work, write their output to a known location, and terminate. The commander monitors completion by checking for the presence and validity of output files.</p>
+
+            <h3>When to Use Fleet Mission</h3>
+
+            <div class="card-grid">
+                <div class="pattern-card">
+                    <h4>Independent Research Tasks</h4>
+                    <p>When you need analysis of multiple topics where each analysis is self-contained. The 28-document HEL (Higher Education Landscape) series used Fleet Mission with 4 agents running in parallel, each producing complete documents that were later cross-referenced.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Parallel File Generation</h4>
+                    <p>When producing multiple output files from a shared specification. The 12-document OPEN (Open Problems in Every Neighborhood) series dispatched agents to generate LaTeX-formatted research documents simultaneously, cutting production time by 75%.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Multi-Aspect Analysis</h4>
+                    <p>When a single subject requires analysis from multiple angles. Rather than one agent switching contexts repeatedly, dispatch separate agents for financial analysis, technical review, competitive landscape, and regulatory assessment.</p>
+                </div>
+            </div>
+
+            <h3>Implementation</h3>
+
+            <p>Fleet Mission relies on Claude Code's <code>run_in_background</code> capability to launch agents without blocking the commander's context. Each agent receives its task specification as a complete, self-contained prompt that includes all necessary context&mdash;no references to shared state, no assumptions about what other agents are doing.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Fleet Mission dispatch — conceptual interface
+fleet-mission dispatch \
+  --agents 4 \
+  --task-file tasks.json \
+  --output-dir ./results/ \
+  --aggregate SUMMARY.md \
+  --timeout 30m
+
+# tasks.json structure
+{
+  "fleet_id": "hel-series-2026-04",
+  "agents": [
+    {
+      "id": "agent-1",
+      "task": "Research document: Community Colleges",
+      "output": "results/hel-community-colleges.html",
+      "context_files": ["outline.md", "style-guide.md"]
+    },
+    {
+      "id": "agent-2",
+      "task": "Research document: Trade Schools",
+      "output": "results/hel-trade-schools.html",
+      "context_files": ["outline.md", "style-guide.md"]
+    }
+    // ... additional agents
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Task Sizing</h3>
+
+            <p>Through repeated iteration across dozens of fleet dispatches, we converged on a reliable rule: <strong>5&ndash;6 tasks per teammate is the optimal load.</strong> Fewer than 5 and the overhead of agent setup is not amortized. More than 6 and context exhaustion becomes a risk, especially on tasks requiring detailed research or code generation.</p>
+
+            <p>This number is not arbitrary. It reflects the practical limits of Claude Code agent sessions. Each agent needs context for its task specification, any reference materials, its working state, and its accumulated output. At 5&ndash;6 tasks, the total context stays comfortably within the usable range of the context window, leaving headroom for the agent to reason and iterate without hitting compaction boundaries prematurely.</p>
+
+            <div class="highlight-box">
+                <h4>Fleet Mission Sizing Guidelines</h4>
+                <p><strong>4 agents</strong> for synthesis tasks (research, analysis, document generation). Synthesis requires more context per task and benefits from deeper reasoning. Four agents balance throughput with quality.</p>
+                <p><strong>3 agents</strong> for pure documentation runs (straightforward content generation from existing sources). Documentation tasks are more mechanical and benefit from having fewer agents to coordinate.</p>
+                <p><strong>5&ndash;6 tasks per agent</strong> regardless of agent count. This is the load ceiling. Beyond it, quality degrades measurably.</p>
+            </div>
+
+            <h3>Error Handling and Partial Failure Recovery</h3>
+
+            <p>In a fleet of 4 agents running 5 tasks each, individual task failures are inevitable. The question is not whether failures will occur but how the system responds when they do.</p>
+
+            <p>Fleet Mission implements a <strong>partial completion model</strong>. When a task fails, its output slot is marked as incomplete but the fleet continues. The commander tracks which tasks succeeded and which failed. After all agents complete (or time out), the commander produces the aggregated output from successful tasks and a failure report for unsuccessful ones.</p>
+
+            <p>This approach is critical for production use. In the HEL series, agent #3 failed on document 14 (a particularly complex topic requiring data from multiple paywalled sources). Rather than failing the entire 28-document fleet, the system completed the other 27 documents, flagged document 14 for manual retry, and produced the aggregated series index with a placeholder for the missing document. The manual retry succeeded on the second attempt with revised source instructions.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Failure Mode</th>
+                        <th>Detection</th>
+                        <th>Recovery Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Agent timeout</strong></td>
+                        <td>No output file after deadline</td>
+                        <td>Mark incomplete, retry with simpler prompt</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Partial output</strong></td>
+                        <td>Output file exists but fails validation</td>
+                        <td>Preserve partial, dispatch repair agent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complete failure</strong></td>
+                        <td>Agent crashes, no output</td>
+                        <td>Log context, retry with fresh agent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quality failure</strong></td>
+                        <td>Output passes validation but fails review</td>
+                        <td>Queue for second-pass revision agent</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Proven Scale</h3>
+
+            <p>Fleet Mission has been validated on the following production workloads:</p>
+
+            <div class="stats-highlight">
+                <div class="stat-box">
+                    <span class="stat-value">28</span>
+                    <span class="stat-label">HEL series documents</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">12</span>
+                    <span class="stat-label">OPEN problems documents</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">91K</span>
+                    <span class="stat-label">Words (HEL series)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">75%</span>
+                    <span class="stat-label">Time reduction vs. serial</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13.3 Gastown Convoy Model -->
+        <section class="content-section" id="13-3">
+            <h2>13.3 Gastown Convoy Model &mdash; Multi-Agent Orchestration</h2>
+
+            <p>If Fleet Mission is a parallel <code>for</code> loop, the Gastown Convoy Model is a full operating system for multi-agent work. Named after Gastown, Vancouver's oldest neighborhood&mdash;a place where steam clocks, cobblestone streets, and modern restaurants coexist in carefully coordinated density&mdash;the Gastown model manages the full lifecycle of large-scale agent operations: creation, dispatch, monitoring, recovery, and retirement.</p>
+
+            <p>The name is deliberate. Gastown the neighborhood works because decades of careful coordination keep its disparate elements functioning together. Remove the coordination and you get gridlock, noise, and decay. The same is true of multi-agent systems. The agents themselves are simple. The orchestration is everything.</p>
+
+            <h3>Architecture</h3>
+
+            <p>Gastown is composed of four named components, each with a specific role in the orchestration lifecycle. These components are implemented as separate skills that compose into the full system.</p>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">Gastown Convoy Model &mdash; Component Architecture</div>
+<pre>
+  +=====================================================+
+  |                  MAYOR-COORDINATOR                  |
+  |  Convoy creation | Agent allocation | Progress      |
+  +========+====================+===========+==========+
+           |                    |           |
+           v                    v           v
+  +-----------------+  +----------------+  +------------------+
+  | SLING-DISPATCH  |  | WITNESS-       |  | BEADS-STATE      |
+  | 7-stage routing |  | OBSERVER       |  | Crash-recoverable|
+  | pipeline        |  | Health monitor |  | persistence      |
+  +---------+-------+  | Stall detect   |  +------------------+
+            |          | Nudge sending  |
+            v          +--------+-------+
+  +-----------------+           |
+  | POLECAT-WORKER  |           |
+  | Ephemeral       |&lt;----------+  (health checks)
+  | autonomous work |
+  +-----------------+
+</pre>
+            </div>
+
+            <h3>Mayor-Coordinator</h3>
+
+            <p>The mayor-coordinator is the central nervous system of Gastown. It creates convoys (logical groupings of related work items), allocates agents to work items within each convoy, tracks progress across all active convoys, and handles escalation when things go wrong.</p>
+
+            <p>A convoy is not just a batch of tasks. It is a coherent unit of work with dependencies, ordering constraints, and shared context. When the PNW Research Series needed 50+ projects generated, the mayor-coordinator organized them into convoys by Rosetta cluster: Ecology projects in one convoy, Electronics in another, Music in a third. This clustering meant that agents within a convoy shared domain context, reducing the per-task context loading cost.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Mayor-coordinator — convoy creation
+mayor-coordinator create-convoy \
+  --name "ecology-cluster" \
+  --work-items ecology-tasks.json \
+  --max-agents 4 \
+  --token-budget 2000000 \
+  --timeout 2h
+
+# Convoy state file (.gastown/convoys/ecology-cluster.json)
+{
+  "convoy_id": "ecology-cluster",
+  "status": "active",
+  "created": "2026-03-31T14:00:00Z",
+  "agents": {
+    "agent-eco-1": { "status": "working", "current_task": "forest-ecology" },
+    "agent-eco-2": { "status": "working", "current_task": "marine-biology" },
+    "agent-eco-3": { "status": "idle",    "completed": 3 },
+    "agent-eco-4": { "status": "working", "current_task": "watershed-analysis" }
+  },
+  "progress": { "total": 12, "completed": 7, "failed": 0, "in_progress": 3 },
+  "token_usage": { "budget": 2000000, "consumed": 1340000, "remaining": 660000 }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Sling Dispatch</h3>
+
+            <p>Sling dispatch is the work routing pipeline that connects the mayor-coordinator to the polecat workers. It implements a 7-stage routing process that ensures every work item is properly prepared, validated, and dispatched with a complete audit trail. (Sling dispatch is detailed fully in Section 13.5.)</p>
+
+            <h3>Witness-Observer</h3>
+
+            <p>The witness-observer runs a continuous patrol loop, checking on the health of all active agents in the convoy. It detects stalled agents (agents that have not produced output within a configurable threshold), sends nudge signals to stalled agents, and escalates to the mayor-coordinator when nudging fails to restore progress.</p>
+
+            <p>Stall detection is surprisingly important in practice. Agents do not crash cleanly&mdash;they often enter degenerate states where they are still technically running but making no progress. Common causes include: infinite tool call loops, context windows filling with error messages, and agents getting stuck in revision cycles where each revision introduces new problems. The witness-observer catches these cases by monitoring output file modification times and agent heartbeat signals.</p>
+
+            <h3>Polecat-Worker</h3>
+
+            <p>The polecat-worker is the ephemeral execution unit. Each polecat spins up, receives its work item from sling dispatch, enters autonomous execution mode via GUPP (see Section 13.4), completes its task, writes its output, and terminates. Polecats are stateless by design&mdash;all persistent state lives in beads-state files managed by the mayor-coordinator.</p>
+
+            <p>The name "polecat" reflects the pattern's characteristics: small, fast, independent, and not particularly concerned with what anyone else is doing. A polecat worker does not coordinate with other polecats. It does not know about the convoy it belongs to. It receives a task, does the task, and exits. All coordination happens above it, in the mayor-coordinator and sling dispatch layers.</p>
+
+            <h3>Convoy Lifecycle</h3>
+
+            <div class="pipeline-stage">
+                <span class="stage">CREATE</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">POPULATE</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">DISPATCH</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">MONITOR</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">COMPLETE</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">ARCHIVE</span>
+            </div>
+
+            <p><strong>Create:</strong> The mayor-coordinator creates a convoy definition with a name, token budget, agent limit, and timeout. The convoy state file is written to <code>.gastown/convoys/</code>.</p>
+
+            <p><strong>Populate:</strong> Work items are loaded into the convoy. Each work item includes a task specification, required context files, expected output location, and validation criteria. The mayor-coordinator checks that the total estimated cost fits within the token budget before accepting the work items.</p>
+
+            <p><strong>Dispatch:</strong> The mayor-coordinator feeds work items into sling dispatch, which routes them to available polecat workers. Dispatch is not all-at-once; the sling manages a single-active-work-item model per agent to prevent overloading.</p>
+
+            <p><strong>Monitor:</strong> The witness-observer runs patrol loops at configurable intervals. Each patrol checks agent health, updates the convoy progress tracker, and sends nudge signals to stalled agents. The mayor-coordinator checks for convoy-level conditions: budget exhaustion, timeout, or all work items completed.</p>
+
+            <p><strong>Complete:</strong> When all work items are done (or the convoy times out / exhausts budget), the mayor-coordinator transitions the convoy to the complete state. A completion report is generated listing all successful tasks, failed tasks, and resource usage.</p>
+
+            <p><strong>Archive:</strong> The convoy state is moved from the active directory to the archive. Output files are left in place for consumption by downstream processes. The archive serves as an audit trail for debugging and post-mortem analysis.</p>
+
+            <h3>Proven Scale: The PNW Research Series</h3>
+
+            <p>The Gastown model was proven at its largest scale during the PNW Research Series, a 190+ project research program spanning 13 Rosetta clusters. The series produced over 2,439 files totaling more than 600,000 lines of content across topics ranging from ecology and electronics to music theory and space science.</p>
+
+            <p>At peak execution, the system ran 4 parallel agents per convoy across multiple convoys, with the mayor-coordinator managing 50+ active work items simultaneously. The witness-observer detected and recovered from 12 agent stalls during the full run. Total completion rate across all convoys was 97.3%, with the remaining 2.7% handled by manual retry after automated attempts failed.</p>
+
+            <div class="research-callout">
+                <div class="callout-header">Production Observation</div>
+                <div class="callout-content">
+                    <p>The Gastown model's greatest strength is not its throughput but its <strong>recoverability</strong>. When Agent #2 stalled on the Electronics convoy at 2:00 AM during an overnight run, the witness-observer detected the stall within 3 minutes, sent a nudge, and when the nudge failed, escalated to the mayor-coordinator which redistributed the stalled work to Agent #4 (which had just completed its queue). The entire recovery happened autonomously. No human intervention was required. The overnight run completed all 14 Electronics projects by morning.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13.4 GUPP Propulsion -->
+        <section class="content-section" id="13-4">
+            <h2>13.4 GUPP Propulsion &mdash; Polled-to-Proactive Execution</h2>
+
+            <p>GUPP stands for <strong>Get Up and Push Protocol</strong>. It addresses a fundamental limitation of AI assistant runtimes: they are inherently reactive. An AI agent waits for input, processes it, produces output, and then waits again. Left to its default behavior, an agent will complete one task and then sit idle until the next instruction arrives. In a multi-agent system, this means your expensive, capable agents spend most of their time doing nothing.</p>
+
+            <h3>The Reactive Problem</h3>
+
+            <p>Consider a typical agent session. The user dispatches a task. The agent completes it in 3 minutes. The agent then waits. If the user is managing 4 agents and checking them in round-robin, Agent #1 might wait 10&ndash;15 minutes before receiving its next task. In a 2-hour session, each agent might complete only 8 tasks despite being capable of 24+. Two-thirds of the compute capacity is wasted on waiting.</p>
+
+            <p>The root cause is that AI runtimes are <strong>pull-based</strong>. The agent pulls work from the user. In production orchestration, we need <strong>push-based</strong> execution: the system pushes work to agents as soon as they are ready, with zero idle time between tasks.</p>
+
+            <h3>The GUPP Solution: Interrupt Controller</h3>
+
+            <p>GUPP converts polled execution to proactive execution by implementing an interrupt controller pattern. Instead of returning to idle after completing a task, the GUPP-enabled agent checks a hook-persistence file for the next work item. If one exists, the agent picks it up and begins execution immediately, without waiting for user input.</p>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">GUPP Interrupt Controller Flow</div>
+<pre>
+  +------------------+
+  |  Agent completes  |
+  |  current task     |
+  +--------+---------+
+           |
+           v
+  +------------------+     YES    +------------------+
+  | Check hook file  +----------&gt;| Load next work   |
+  | for pending work |            | item from hook   |
+  +--------+---------+            +--------+---------+
+           |                               |
+           | NO                            v
+           v                      +------------------+
+  +------------------+            | Enter autonomous |
+  | Dead Man's Switch|            | execution mode   |
+  | - report idle    |            +--------+---------+
+  | - await dispatch |                     |
+  +------------------+                     v
+                                  +------------------+
+                                  | Execute task     |
+                                  | Write output     |
+                                  +--------+---------+
+                                           |
+                                           v
+                                  (loop back to top)
+</pre>
+            </div>
+
+            <h3>Per-Runtime Strategies</h3>
+
+            <p>Different AI runtimes have different capabilities, constraints, and hook mechanisms. GUPP implements per-runtime strategies that achieve the same "always be working" behavior through runtime-appropriate mechanisms.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Runtime</th>
+                        <th>Hook Mechanism</th>
+                        <th>GUPP Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Claude Code</strong></td>
+                        <td>PostToolUse hooks, settings.json</td>
+                        <td>Hook-persistence file checked after each tool call. CLAUDE.md instructions for autonomous behavior. Subagent dispatch via Agent tool.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Codex</strong></td>
+                        <td>Task queue, environment persistence</td>
+                        <td>Task queue integration. Environment variables for work item location. Sequential task processing via queue drain.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gemini</strong></td>
+                        <td>Function calling, conversation context</td>
+                        <td>Function call chain that includes next-task retrieval. System instruction modifications for proactive behavior.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cursor</strong></td>
+                        <td>.cursorrules, composer context</td>
+                        <td>Rules file injection with work queue. Composer instructions for continuous execution. File-based task signaling.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Configurable Thresholds</h3>
+
+            <p>GUPP includes configurable thresholds that control the transition between proactive and idle states:</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># GUPP configuration
+{
+  "gupp": {
+    "enabled": true,
+    "check_interval_ms": 5000,
+    "idle_timeout_s": 300,
+    "max_consecutive_tasks": 20,
+    "dead_mans_switch": {
+      "enabled": true,
+      "heartbeat_interval_s": 60,
+      "stale_threshold_s": 180
+    },
+    "hook_file": ".gupp/pending-work.json",
+    "runtime": "claude-code"
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <p>The <strong>Dead Man's Switch</strong> is a safety mechanism. If an agent's heartbeat file has not been updated within the stale threshold, the system assumes the agent has crashed or stalled and makes its queued work available for redistribution. This prevents the silent failure mode where a crashed agent holds work items hostage indefinitely.</p>
+
+            <h3>The "Always Be Working" Philosophy</h3>
+
+            <p>GUPP embodies a philosophical position about how AI agents should behave in production systems: <strong>idle agents are wasted capacity.</strong> When you are paying per-token for compute and your agents are sitting idle between tasks, you are paying for nothing. GUPP eliminates the idle gap by making the agent itself responsible for seeking its next unit of work.</p>
+
+            <p>This is a departure from most agent frameworks, which treat agents as passive tools that respond to explicit invocations. GUPP treats agents as active workers in a production line. They do not wait to be told what to do. They check the work queue. If there is work, they do it. If there is no work, they signal that they are available. The orchestrator (mayor-coordinator) manages the queue. The agent manages itself.</p>
+
+            <div class="highlight-box">
+                <h4>GUPP in Practice</h4>
+                <p>In the PNW Research Series, GUPP reduced agent idle time from an estimated 40% (under manual dispatch) to under 5% (under automated GUPP-driven dispatch). For a 4-agent fleet running a 6-hour mission, this recovered approximately 5.6 agent-hours of productive work that would otherwise have been lost to waiting.</p>
+            </div>
+        </section>
+
+        <!-- 13.5 Sling Dispatch -->
+        <section class="content-section" id="13-5">
+            <h2>13.5 Sling Dispatch &mdash; Work Routing Pipeline</h2>
+
+            <p>Sling Dispatch is the routing pipeline that connects work items to available agents. It is the delivery mechanism for the entire Gastown system. Every piece of work that flows from the mayor-coordinator to a polecat worker passes through sling dispatch's 7-stage pipeline.</p>
+
+            <h3>The 7-Stage Pipeline</h3>
+
+            <div class="pipeline-stage">
+                <span class="stage">FETCH</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">ALLOCATE</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">PREPARE</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">HOOK</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">DISPATCH</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">CONFIRM</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">ARCHIVE</span>
+            </div>
+
+            <div class="card-grid">
+                <div class="stage-card">
+                    <h4>1. Fetch</h4>
+                    <p>Retrieve the next work item from the convoy's work queue. The fetch stage respects ordering constraints: if work item B depends on work item A, B will not be fetched until A is complete. Fetch also checks that the convoy's token budget has remaining capacity for the estimated cost of the work item.</p>
+                </div>
+                <div class="stage-card">
+                    <h4>2. Allocate</h4>
+                    <p>Select an available agent from the convoy's agent pool. Allocation considers agent load (current active tasks), agent history (agents that previously failed on similar tasks are deprioritized), and agent specialization (if configured). The single-active-work-item model means each agent can only be allocated one task at a time.</p>
+                </div>
+                <div class="stage-card">
+                    <h4>3. Prepare</h4>
+                    <p>Assemble the complete context package for the work item. This includes the task specification, any context files referenced by the work item, the output format requirements, and the validation criteria. The prepare stage resolves file paths, verifies that referenced files exist, and packages everything into a self-contained instruction set.</p>
+                </div>
+                <div class="stage-card">
+                    <h4>4. Hook</h4>
+                    <p>Write the prepared instruction to the target agent's hook-persistence file (the file monitored by GUPP). This is an atomic file operation: the hook file is written to a temporary location and then renamed to the target path, ensuring that partial writes never leave the hook file in a corrupt state.</p>
+                </div>
+                <div class="stage-card">
+                    <h4>5. Dispatch</h4>
+                    <p>Signal the target agent that work is available. For Claude Code agents, this is implicit (the GUPP check will find the hook file). For other runtimes, dispatch may involve an explicit API call or message. The dispatch stage records the dispatch timestamp and the agent assignment in the convoy state.</p>
+                </div>
+                <div class="stage-card">
+                    <h4>6. Confirm</h4>
+                    <p>Verify that the target agent has acknowledged the work item. Confirmation is detected by monitoring the agent's heartbeat or checking for the presence of a work-in-progress marker file. If confirmation does not arrive within a configurable timeout, the sling retries dispatch or escalates to the mayor-coordinator.</p>
+                </div>
+                <div class="stage-card">
+                    <h4>7. Archive</h4>
+                    <p>Once the work item is confirmed as dispatched, the dispatch record is archived for audit purposes. The archive includes the full instruction package, the agent assignment, the timestamps for each stage, and the outcome. This archive is essential for post-mortem debugging and for training the system's allocation heuristics.</p>
+                </div>
+            </div>
+
+            <h3>Single-Active-Work-Item Model</h3>
+
+            <p>Sling dispatch enforces a strict <strong>single-active-work-item model</strong>: each agent has at most one active task at any time. This constraint is deliberate. AI agents do not context-switch well. Unlike human developers who can hold multiple projects in their heads and switch between them, an LLM agent's "memory" is its context window. Giving an agent two tasks simultaneously means both tasks share the context window, reducing the effective context available for each.</p>
+
+            <p>The single-active-work-item model means agents complete their current task before receiving the next one. This maximizes the quality of each individual task at the cost of slightly higher dispatch overhead. In practice, the dispatch overhead is negligible compared to the quality loss from context sharing.</p>
+
+            <h3>File-Based Dispatch with Atomic Operations</h3>
+
+            <p>All sling dispatch operations use the filesystem as the coordination layer. This is a deliberate architectural choice. File-based dispatch is:</p>
+
+            <ul>
+                <li><strong>Observable:</strong> Any process can read the dispatch state by listing files in known directories. No special client libraries or API connections required.</li>
+                <li><strong>Durable:</strong> Files survive process crashes. A half-dispatched work item can be detected and recovered by inspecting file states.</li>
+                <li><strong>Atomic:</strong> File rename operations on POSIX systems are atomic. The write-to-temp-then-rename pattern ensures that no process ever reads a partially-written dispatch file.</li>
+                <li><strong>Debuggable:</strong> When something goes wrong, the entire dispatch history is a directory of JSON files that can be inspected with standard tools.</li>
+            </ul>
+
+            <h3>Failure Modes and Recovery</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Failure Mode</th>
+                        <th>Recovery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fetch</strong></td>
+                        <td>Empty queue or budget exhausted</td>
+                        <td>Wait for queue replenishment or convoy completion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Allocate</strong></td>
+                        <td>No available agents</td>
+                        <td>Queue the work item; dispatch when an agent frees up</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prepare</strong></td>
+                        <td>Missing context files</td>
+                        <td>Fail the work item with diagnostic; do not dispatch incomplete instructions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hook</strong></td>
+                        <td>Filesystem write failure</td>
+                        <td>Retry with exponential backoff; escalate if persistent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dispatch</strong></td>
+                        <td>Agent unreachable</td>
+                        <td>Mark agent as unhealthy; reallocate work item</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Confirm</strong></td>
+                        <td>No acknowledgment within timeout</td>
+                        <td>Retry dispatch; if retry fails, reallocate to different agent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Archive</strong></td>
+                        <td>Archive write failure</td>
+                        <td>Non-critical; log warning but do not block pipeline</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 13.6 Communication Patterns -->
+        <section class="content-section" id="13-6">
+            <h2>13.6 Communication Patterns</h2>
+
+            <p>Multi-agent systems need inter-agent communication. Agents need to share status, coordinate decisions, signal completion, and request assistance. The challenge is that AI agents do not have sockets, message queues, or shared memory. They have filesystems and tool calls. Three communication patterns have emerged from production use, each optimized for a different temporal and durability requirement.</p>
+
+            <h3>Mail-Async &mdash; Durable Asynchronous Messaging</h3>
+
+            <p>Mail-async is a write-once, read-many filesystem mail system. It is designed for communication that must survive across context resets, session boundaries, and even multi-day mission timelines. When Agent A needs to tell Agent B something that Agent B might not read for hours or days, mail-async is the correct channel.</p>
+
+            <h4>Architecture</h4>
+
+            <p>Mail-async uses a directory-based mailbox structure. Each agent has an inbox directory. Sending a message writes a timestamped envelope file to the recipient's inbox. The envelope contains the message payload, sender identity, timestamp, and optional priority and expiry fields.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Mail-async directory structure
+.mail/
+  agent-eco-1/
+    inbox/
+      2026-04-01T14-30-00Z_from-mayor.json
+      2026-04-01T15-45-00Z_from-agent-eco-3.json
+    sent/
+      2026-04-01T14-00-00Z_to-mayor.json
+
+# Envelope format
+{
+  "envelope_id": "msg-2026-04-01-143000-mayor",
+  "from": "mayor-coordinator",
+  "to": "agent-eco-1",
+  "timestamp": "2026-04-01T14:30:00Z",
+  "priority": "normal",
+  "expires": null,
+  "subject": "Cross-reference update",
+  "body": "Document ECO-07 has been completed. Update your
+           cross-references to include the watershed data
+           from ECO-07 section 3.2.",
+  "attachments": ["results/eco-07-watershed-data.json"]
+}</code></pre>
+                </div>
+            </div>
+
+            <h4>Properties</h4>
+
+            <div class="card-grid">
+                <div class="channel-card">
+                    <h4>Write-Once, Read-Many</h4>
+                    <p>Messages are immutable after writing. No process ever modifies a sent message. This eliminates an entire class of race conditions and makes the mail history a reliable audit trail.</p>
+                </div>
+                <div class="channel-card">
+                    <h4>Persistence Across Resets</h4>
+                    <p>Because messages are files on disk, they survive context resets, session timeouts, and process crashes. An agent resuming from a crash can check its inbox and find all messages that arrived while it was down.</p>
+                </div>
+                <div class="channel-card">
+                    <h4>When to Use</h4>
+                    <p>Cross-session communication where the recipient may not be active. Audit trails that must survive the entire mission lifecycle. Complex instructions that need to be referenced multiple times. Asynchronous coordination between convoys operating on different timelines.</p>
+                </div>
+            </div>
+
+            <h3>Nudge-Sync &mdash; Synchronous Immediate Signaling</h3>
+
+            <p>Nudge-sync is the opposite of mail-async: it is designed for immediate, ephemeral state signaling. Where mail-async prioritizes durability, nudge-sync prioritizes latency. The pattern uses a <strong>latest-wins single-file</strong> approach: each agent has a single nudge file, and writing to it overwrites whatever was there before.</p>
+
+            <h4>Architecture</h4>
+
+            <p>Each agent monitors a single file at a known path. Any process that needs to signal the agent writes to that file. The agent checks the file at its GUPP polling interval. Because the file is overwritten on each write, only the most recent signal matters. This makes nudge-sync ideal for state changes ("your convoy status changed"), health checks ("are you alive?"), and coordination signals ("pause your current work").</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Nudge file location
+.nudge/agent-eco-1.json
+
+# Nudge payload (latest-wins — overwrites previous)
+{
+  "nudge_type": "health_check",
+  "from": "witness-observer",
+  "timestamp": "2026-04-01T14:30:00Z",
+  "payload": {
+    "action": "report_status",
+    "respond_to": ".nudge/witness-response.json"
+  }
+}
+
+# Agent response (written to respond_to path)
+{
+  "agent": "agent-eco-1",
+  "status": "working",
+  "current_task": "forest-ecology",
+  "progress": "section 4 of 7",
+  "timestamp": "2026-04-01T14:30:02Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <h4>Near-Zero Latency</h4>
+
+            <p>Nudge-sync achieves near-zero signaling latency because it requires no queue processing, no message routing, and no delivery confirmation. The sender writes a file; the receiver reads the file at its next poll. With GUPP's 5-second check interval, the maximum latency is 5 seconds. In practice, because GUPP checks are interleaved with tool calls, the effective latency is often under 2 seconds.</p>
+
+            <h4>When to Use</h4>
+
+            <ul>
+                <li><strong>State changes:</strong> Notifying an agent that its convoy status has changed (e.g., budget reduced, priority increased).</li>
+                <li><strong>Health checks:</strong> The witness-observer checking whether an agent is responsive.</li>
+                <li><strong>Immediate coordination:</strong> Telling an agent to pause work because a dependency has changed.</li>
+                <li><strong>NOT for durable messages:</strong> If the message needs to survive a context reset, use mail-async instead.</li>
+            </ul>
+
+            <h3>SendMessage &mdash; Built-in Agent Teams Messaging</h3>
+
+            <p>The third communication channel is not one we built but one we adopted: Claude Code's native <code>sendMessage</code> function for agent teams. When multiple agents are running within a single Claude Code session as an official team (with defined roles and the <code>Agent</code> tool), <code>sendMessage</code> provides direct teammate-to-teammate communication within the session context.</p>
+
+            <h4>Properties</h4>
+
+            <p><code>sendMessage</code> is session-scoped: messages exist only within the active session and do not persist. It is synchronous: the sending agent blocks until the receiving agent processes the message and responds. It is typed: the Claude Code SDK defines the message format, ensuring consistency. These properties make it the best choice for real-time coordination within a team session, but unsuitable for cross-session or cross-process communication.</p>
+
+            <h4>When to Use</h4>
+
+            <ul>
+                <li>Within official Claude Code agent team sessions where all agents share a session context.</li>
+                <li>When immediate, synchronous response is needed and both agents are active in the same session.</li>
+                <li>NOT for cross-session communication (messages do not persist).</li>
+                <li>NOT for cross-process communication (sendMessage is scoped to the Claude Code session).</li>
+            </ul>
+
+            <h3>Choosing the Right Channel</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Mail-Async</th>
+                        <th>Nudge-Sync</th>
+                        <th>SendMessage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Durability</strong></td>
+                        <td>Persistent (survives crashes)</td>
+                        <td>Ephemeral (latest-wins)</td>
+                        <td>Session-scoped (lost on exit)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Latency</strong></td>
+                        <td>High (read on next inbox check)</td>
+                        <td>Low (5s max, ~2s typical)</td>
+                        <td>Immediate (synchronous)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Delivery guarantee</strong></td>
+                        <td>At-least-once (persisted)</td>
+                        <td>At-most-once (overwritten)</td>
+                        <td>Exactly-once (synchronous)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cross-session</strong></td>
+                        <td>Yes</td>
+                        <td>Partially (file persists)</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audit trail</strong></td>
+                        <td>Complete (write-once)</td>
+                        <td>None (overwritten)</td>
+                        <td>Session log only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best for</strong></td>
+                        <td>Instructions, cross-refs, reports</td>
+                        <td>Health checks, state signals</td>
+                        <td>Real-time team coordination</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 13.7 Refinery Merge -->
+        <section class="content-section" id="13-7">
+            <h2>13.7 Refinery Merge &mdash; Deterministic Merge Queue</h2>
+
+            <p>When multiple agents produce code or content simultaneously, their outputs must eventually converge into a single coherent artifact. Git merge is the standard tool for this, but parallel agent development introduces merge conflicts at a rate that makes manual resolution impractical. Refinery Merge solves this by implementing a sequential, deterministic merge queue that processes merge requests one at a time, ensuring that each merge is clean before the next begins.</p>
+
+            <h3>Architecture</h3>
+
+            <p>Refinery Merge operates as a <strong>DMA (Direct Memory Access) pattern</strong>: merge requests are queued and processed in order, with each request having exclusive access to the target branch during its processing window. No two merges ever execute simultaneously. This eliminates merge conflicts caused by concurrent modifications.</p>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">Refinery Merge Queue</div>
+<pre>
+  Agent #1 ──┐
+  Agent #2 ──┤     +------------------+     +------------------+
+  Agent #3 ──┼────&gt;| MERGE QUEUE      |────&gt;| MERGE PROCESSOR  |
+  Agent #4 ──┤     | (FIFO ordering)  |     | 1. checkout      |
+  Agent #N ──┘     +------------------+     | 2. rebase        |
+                                            | 3. verify        |
+                                            | 4. merge         |
+                                            | 5. push          |
+                                            +------------------+
+                                                     |
+                                                     v
+                                            +------------------+
+                                            |   main branch    |
+                                            | (always clean)   |
+                                            +------------------+
+</pre>
+            </div>
+
+            <h3>The Merge Process</h3>
+
+            <p>Each merge request passes through a 5-step process:</p>
+
+            <ol>
+                <li><strong>Checkout:</strong> The merge processor checks out the agent's feature branch and the current state of the target branch (typically main).</li>
+                <li><strong>Rebase:</strong> The feature branch is rebased onto the latest target branch. This applies the agent's changes on top of whatever other agents have already merged. If the rebase produces conflicts, the merge is rejected and sent back to the originating agent with conflict details.</li>
+                <li><strong>Verify:</strong> After rebasing, the merge processor runs validation checks: build succeeds, tests pass, lint is clean. This ensures that the rebase did not introduce subtle breakage even if it completed without explicit conflicts.</li>
+                <li><strong>Merge:</strong> The rebased and verified branch is merged into the target branch using a fast-forward merge. The fast-forward strategy is intentional: it produces a linear history that is easier to bisect and debug.</li>
+                <li><strong>Push:</strong> The updated target branch is pushed to the remote. The merge processor holds a lock on the target branch during this step to prevent race conditions with external pushes.</li>
+            </ol>
+
+            <h3>Why Sequential Processing Matters</h3>
+
+            <p>The natural instinct is to parallelize merges. After all, if we are parallelizing the work, why serialize the integration? The answer is that merge conflicts are inherently order-dependent. Two branches that merge cleanly against the current main may conflict with each other. By processing merges sequentially, each merge sees the most current state of main, including all previously merged changes. This means that conflicts are detected at rebase time rather than at merge time, and they are detected by the agent that caused them rather than by a downstream agent that cannot resolve them.</p>
+
+            <p>In practice, sequential merge processing is fast enough that it does not become a bottleneck. Individual merges typically complete in 30&ndash;90 seconds. Even with a queue of 10 pending merges, the total queue drain time is under 15 minutes. The time saved by avoiding manual conflict resolution far exceeds the time spent waiting in the queue.</p>
+
+            <h3>Integration with Done-Retirement</h3>
+
+            <p>Refinery Merge is tightly coupled with the Done-Retirement pipeline (Section 13.8). When an agent completes its work, it submits a merge request to the refinery queue as the second stage of the retirement pipeline. The merge must succeed before the agent's work is considered complete. If the merge fails, the retirement pipeline halts and the agent is given the conflict details to resolve before retrying.</p>
+        </section>
+
+        <!-- 13.8 Done Retirement -->
+        <section class="content-section" id="13-8">
+            <h2>13.8 Done Retirement &mdash; Completion Pipeline</h2>
+
+            <p>Completing work is harder than doing work. In agent systems, the "last mile" of a task&mdash;validating output, committing changes, pushing to the remote, notifying the coordinator, cleaning up temporary state, and shutting down cleanly&mdash;is where most silent failures occur. Done Retirement is a 7-stage pipeline that makes completion deterministic and observable.</p>
+
+            <h3>The 7-Stage Pipeline</h3>
+
+            <div class="pipeline-stage">
+                <span class="stage">VALIDATE</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">COMMIT</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">PUSH</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">SUBMIT</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">NOTIFY</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">CLEANUP</span>
+                <span class="arrow">&rarr;</span>
+                <span class="stage">TERMINATE</span>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Action</th>
+                        <th>Entry Criteria</th>
+                        <th>Exit Criteria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Validate</strong></td>
+                        <td>Run output validation against task spec</td>
+                        <td>Agent reports task complete</td>
+                        <td>All validation checks pass</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Commit</strong></td>
+                        <td>Stage and commit output files</td>
+                        <td>Validation passed</td>
+                        <td>Clean git commit with conventional message</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Push</strong></td>
+                        <td>Push branch to remote</td>
+                        <td>Commit succeeded</td>
+                        <td>Remote branch updated</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Submit</strong></td>
+                        <td>Submit merge request to refinery queue</td>
+                        <td>Push succeeded</td>
+                        <td>Merge request accepted into queue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notify</strong></td>
+                        <td>Send completion notification to mayor</td>
+                        <td>Submit succeeded</td>
+                        <td>Mayor acknowledges completion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cleanup</strong></td>
+                        <td>Remove temporary files, clear hook persistence</td>
+                        <td>Notify succeeded</td>
+                        <td>Working directory clean</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Terminate</strong></td>
+                        <td>Agent exits cleanly</td>
+                        <td>Cleanup succeeded</td>
+                        <td>Agent process ended</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Partial Completion Recovery</h3>
+
+            <p>Each stage writes its completion state to a progress file before advancing to the next stage. If the agent crashes mid-pipeline, the recovery process reads the progress file and resumes from the last completed stage. This means a crash during the PUSH stage does not re-run VALIDATE and COMMIT&mdash;it picks up at PUSH and continues forward.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Done-retirement progress file
+# .done-retirement/agent-eco-1-task-forest-ecology.json
+{
+  "task_id": "forest-ecology",
+  "agent_id": "agent-eco-1",
+  "pipeline_state": "push",
+  "stages": {
+    "validate": { "status": "complete", "timestamp": "2026-04-01T16:00:00Z" },
+    "commit":   { "status": "complete", "timestamp": "2026-04-01T16:00:15Z",
+                  "commit_sha": "a1b2c3d" },
+    "push":     { "status": "in_progress", "started": "2026-04-01T16:00:20Z" },
+    "submit":   { "status": "pending" },
+    "notify":   { "status": "pending" },
+    "cleanup":  { "status": "pending" },
+    "terminate":{ "status": "pending" }
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Atomic Operations</h3>
+
+            <p>Each stage is designed to be atomic: it either completes fully or fails without leaving partial state. The COMMIT stage uses <code>git commit</code> which is inherently atomic. The PUSH stage uses <code>git push</code> which either succeeds completely or fails completely. The CLEANUP stage deletes files one at a time but tracks each deletion, so a crash during cleanup can resume by checking which files still exist.</p>
+
+            <p>This atomicity is critical because the Done-Retirement pipeline often runs in degraded conditions. By the time an agent reaches the retirement pipeline, its context window is typically near capacity (the agent has been doing work and accumulating context throughout the task). Failures are more likely in this state, making recovery capability especially important.</p>
+
+            <h3>Real Example: Research Project Completion</h3>
+
+            <p>When Agent #2 completed the Marine Biology research project (ECO-09) in the Ecology convoy:</p>
+
+            <ol>
+                <li><strong>Validate:</strong> Checked that the output file contained all 7 required sections, that section word counts met minimums, that all cross-references resolved, and that the HTML validated against the template.</li>
+                <li><strong>Commit:</strong> Staged the output file and committed with message <code>feat(research): ECO-09 marine biology</code>.</li>
+                <li><strong>Push:</strong> Pushed the agent's branch to the remote.</li>
+                <li><strong>Submit:</strong> Submitted a merge request to the refinery queue.</li>
+                <li><strong>Notify:</strong> Sent a mail-async message to the mayor-coordinator reporting completion with the commit SHA and a summary.</li>
+                <li><strong>Cleanup:</strong> Removed the hook-persistence file, cleared the GUPP pending-work entry, deleted draft files from the working directory.</li>
+                <li><strong>Terminate:</strong> Agent exited cleanly. The witness-observer detected the exit and updated the convoy state to show Agent #2 as available for reallocation.</li>
+            </ol>
+        </section>
+
+        <!-- 13.9 Beads State -->
+        <section class="content-section" id="13-9">
+            <h2>13.9 Beads State &mdash; Crash-Recoverable Persistence</h2>
+
+            <p>Beads State is the persistence layer for the entire Gastown system. It provides git-friendly, crash-recoverable state management for agent identities, work item tracking, and convoy progress. The name reflects the design: each state update is a bead on a string, forming an ordered sequence that can be replayed from any point.</p>
+
+            <h3>Agent Identity Persistence</h3>
+
+            <p>In a system where agents are ephemeral (polecat workers spin up and terminate for each task), there is still a need for persistent identity. The same logical agent&mdash;"agent-eco-1"&mdash;may be instantiated across multiple sessions over the lifetime of a convoy. Beads State maintains the identity mapping: which logical agent is assigned to which work items, what its completion history looks like, and where its output should be written.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Beads state — agent identity file
+# .gastown/beads/agents/agent-eco-1.json
+{
+  "agent_id": "agent-eco-1",
+  "convoy_id": "ecology-cluster",
+  "created": "2026-04-01T14:00:00Z",
+  "session_count": 4,
+  "current_session": null,
+  "completed_tasks": [
+    "forest-ecology",
+    "alpine-meadows",
+    "riparian-zones"
+  ],
+  "failed_tasks": [],
+  "total_tokens_consumed": 485000,
+  "heartbeat": "2026-04-01T18:30:00Z",
+  "state": "idle"
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Work Item Tracking</h3>
+
+            <p>Every work item in the system has a beads state file that records its lifecycle: creation, assignment, progress checkpoints, completion, and archival. The state file is updated at each lifecycle transition using atomic write operations (write-to-temp, rename-to-target).</p>
+
+            <h3>Checkpoint and Restore</h3>
+
+            <p>For long-running tasks, agents can write checkpoint data to their beads state. A checkpoint captures the agent's progress at a specific point: which sections of a document have been written, which data sources have been processed, what intermediate results have been computed. If the agent crashes and is restarted, it reads the checkpoint and resumes from that point rather than starting the entire task over.</p>
+
+            <p>Checkpoints are especially valuable for research tasks that involve web fetches, database queries, or other operations whose results cannot be reproduced exactly. By checkpointing after expensive operations, the system avoids repeating them on restart.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Beads state — work item with checkpoint
+# .gastown/beads/work/forest-ecology.json
+{
+  "work_id": "forest-ecology",
+  "convoy_id": "ecology-cluster",
+  "assigned_to": "agent-eco-1",
+  "status": "in_progress",
+  "checkpoint": {
+    "timestamp": "2026-04-01T15:30:00Z",
+    "sections_completed": [1, 2, 3, 4],
+    "sections_remaining": [5, 6, 7],
+    "intermediate_data": {
+      "species_count": 342,
+      "data_sources_processed": ["usda-plants", "gbif", "inat"],
+      "draft_word_count": 4200
+    }
+  },
+  "history": [
+    { "event": "created",    "timestamp": "2026-04-01T14:10:00Z" },
+    { "event": "assigned",   "timestamp": "2026-04-01T14:10:05Z", "agent": "agent-eco-1" },
+    { "event": "started",    "timestamp": "2026-04-01T14:15:00Z" },
+    { "event": "checkpoint", "timestamp": "2026-04-01T15:30:00Z", "sections": 4 }
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Git Friendliness</h3>
+
+            <p>All beads state files are JSON, which diffs cleanly in git. State files are organized in a directory hierarchy that mirrors the convoy structure (<code>.gastown/beads/agents/</code>, <code>.gastown/beads/work/</code>, <code>.gastown/beads/convoys/</code>). This means the entire orchestration state can be committed to git, providing version-controlled history of the orchestration itself.</p>
+
+            <p>In practice, we commit beads state at convoy lifecycle boundaries (creation, completion, archival) but not at every state update. The intermediate state updates happen at high frequency (every few minutes) and committing each one would create excessive git history. The atomic write operations ensure that the on-disk state is always consistent even without git commits at every update.</p>
+
+            <h3>Recovery from Mid-Operation Crashes</h3>
+
+            <p>The recovery protocol when the system restarts after a crash:</p>
+
+            <ol>
+                <li><strong>Scan convoy directories</strong> for active convoys (status != "archived").</li>
+                <li><strong>For each active convoy,</strong> scan agent state files. Mark any agent whose heartbeat is older than the Dead Man's Switch threshold as "presumed_crashed".</li>
+                <li><strong>For each presumed-crashed agent,</strong> scan its assigned work items. Items with checkpoints are resumed from the checkpoint. Items without checkpoints are returned to the convoy work queue for reassignment.</li>
+                <li><strong>Restart the witness-observer</strong> with the updated convoy state. The observer begins its patrol loop and detects any agents that are actually still running (their heartbeat will update, changing them from "presumed_crashed" to "healthy").</li>
+                <li><strong>Resume sling dispatch</strong> for any queued work items. The dispatch pipeline checks the allocate stage to see if the queue has capacity for new assignments.</li>
+            </ol>
+
+            <p>This recovery protocol has been tested extensively across the PNW Research Series. The most extreme recovery was a system crash during an overnight run that left 3 convoys with 8 active agents in mid-task. On restart, the recovery protocol correctly identified 6 tasks that had checkpoints, resumed them without rework, and reassigned the 2 tasks without checkpoints to fresh agents. Total recovery time was under 4 minutes. No work was lost.</p>
+        </section>
+
+        <!-- 13.10 Runtime HAL -->
+        <section class="content-section" id="13-10">
+            <h2>13.10 Runtime HAL &mdash; Multi-Runtime Abstraction</h2>
+
+            <p>Runtime HAL (Hardware Abstraction Layer) addresses a practical problem: the orchestration patterns described in this section were developed on Claude Code, but they should work on any AI runtime capable of tool use and file operations. Different runtimes have different capabilities, different tool interfaces, different context window sizes, and different hook mechanisms. Runtime HAL provides an abstraction layer that detects the active runtime and adapts skill behavior accordingly.</p>
+
+            <h3>The Problem</h3>
+
+            <p>Consider a skill like GUPP that needs to check a hook file for pending work. On Claude Code, this is straightforward: the skill reads a file using the Read tool and checks its contents. On Codex, the same operation requires a different tool call. On Gemini, it might require a function call with different parameter names. On Cursor, it requires reading from a different location with different conventions.</p>
+
+            <p>Without Runtime HAL, every skill would need per-runtime conditional logic: "if Claude Code, do X; if Codex, do Y; if Gemini, do Z." This creates a maintenance nightmare as the number of skills multiplied by the number of runtimes produces a combinatorial explosion of code paths.</p>
+
+            <h3>Architecture</h3>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">Runtime HAL Abstraction Layer</div>
+<pre>
+  +-------------------+  +-------------------+  +-------------------+
+  |   GUPP Skill      |  |   Sling Skill     |  |   Mail Skill      |
+  |   (portable)      |  |   (portable)      |  |   (portable)      |
+  +--------+----------+  +--------+----------+  +--------+----------+
+           |                       |                       |
+           +--------- HAL API -----+-----------------------+
+                         |
+            +------------+------------+
+            |                         |
+  +---------v---------+    +----------v--------+
+  |  RUNTIME DETECTOR |    | CAPABILITY MAP    |
+  |  - env variables  |    | - tool names      |
+  |  - file markers   |    | - file paths      |
+  |  - process names  |    | - hook mechanisms  |
+  +-------------------+    | - context limits   |
+                           +-------------------+
+
+  Detected Runtimes:
+  +-------------+  +-------------+  +-------------+  +-------------+
+  | Claude Code |  |    Codex    |  |   Gemini    |  |   Cursor    |
+  | - Read/Write|  | - file ops  |  | - func call |  | - composer  |
+  | - Agent tool|  | - task API  |  | - extensions|  | - .rules    |
+  | - hooks API |  | - env vars  |  | - context   |  | - chat API  |
+  +-------------+  +-------------+  +-------------+  +-------------+
+</pre>
+            </div>
+
+            <h3>Capability Detection</h3>
+
+            <p>Runtime HAL detects the active runtime through a cascade of checks:</p>
+
+            <ol>
+                <li><strong>Environment variables:</strong> Claude Code sets <code>CLAUDE_CODE</code>; Codex sets <code>CODEX_SANDBOX</code>; each runtime has telltale environment markers.</li>
+                <li><strong>File markers:</strong> The presence of <code>.claude/</code> indicates Claude Code. <code>.cursor/</code> indicates Cursor. Configuration files in known locations indicate specific runtimes.</li>
+                <li><strong>Process introspection:</strong> Checking the parent process name or the available tool set can disambiguate when environment variables are ambiguous.</li>
+            </ol>
+
+            <p>Once the runtime is detected, HAL loads a capability map that describes what the runtime can do: which tools are available, what their parameter signatures look like, what file paths the runtime uses for configuration, and what the context window limits are.</p>
+
+            <h3>Feature Negotiation</h3>
+
+            <p>Not all runtimes support all features. Claude Code has subagent dispatch via the Agent tool; Cursor does not. Codex has persistent environment; Gemini does not. Runtime HAL handles this through feature negotiation: skills query HAL for capability support before attempting to use runtime-specific features.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Runtime HAL — capability query
+{
+  "runtime": "claude-code",
+  "version": "2.1.88",
+  "capabilities": {
+    "subagent_dispatch": true,
+    "background_execution": true,
+    "hook_system": true,
+    "file_operations": true,
+    "web_fetch": true,
+    "web_search": true,
+    "mcp_support": true,
+    "max_context_tokens": 1000000,
+    "max_output_tokens": 32000,
+    "tool_names": {
+      "read_file": "Read",
+      "write_file": "Write",
+      "edit_file": "Edit",
+      "execute": "Bash",
+      "search": "Grep",
+      "dispatch_agent": "Agent"
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Portable Skill Execution</h3>
+
+            <p>With Runtime HAL in place, skills are written against the HAL API rather than against runtime-specific tool names. When a skill needs to read a file, it calls <code>hal.readFile(path)</code> rather than using the Claude Code Read tool directly. HAL translates the abstract operation into the runtime-specific implementation. This means a skill written and tested on Claude Code works on Codex without modification (assuming the runtime supports the required capabilities).</p>
+
+            <p>The four runtimes currently supported represent the major agent development platforms as of April 2026. As new runtimes emerge, they can be added to HAL with a new capability map and detector, without modifying any existing skills.</p>
+        </section>
+
+        <!-- 13.11 Token Budget Management -->
+        <section class="content-section" id="13-11">
+            <h2>13.11 Token Budget Management</h2>
+
+            <p>Multi-agent orchestration without cost control is a fast path to unexpected bills. When you dispatch 4 agents to run 5 tasks each, the total token consumption is not 4x a single agent&mdash;it is potentially much higher, because each agent loads its own context, generates its own reasoning tokens, and may retry failed operations. Token Budget Management provides hard limits with pre-execution checking, per-convoy token allocation, and real-time budget tracking.</p>
+
+            <h3>Hard Limits with Pre-Execution Checking</h3>
+
+            <p>Every convoy has a token budget set at creation time. Before any work item is dispatched, the sling dispatch pipeline (at the FETCH stage) checks that the convoy's remaining budget can accommodate the estimated cost of the work item. If the budget is insufficient, the work item stays in the queue and the convoy enters a "budget_exhausted" state that triggers escalation to the mayor-coordinator.</p>
+
+            <p>Cost estimation uses a model based on historical consumption data. For research document generation, the average token cost is approximately 50,000 tokens per document (including input context, reasoning, tool calls, and output). For code generation tasks, the average is higher: approximately 80,000 tokens per file due to the iterative test-fix cycles. These averages include a 20% safety margin to account for variance.</p>
+
+            <h3>Per-Convoy Token Allocation</h3>
+
+            <p>The mayor-coordinator allocates token budgets at the convoy level, not the individual agent level. This allows the system to redistribute budget dynamically. If Agent #1 completes its tasks under budget, the surplus becomes available for Agent #3 which might be running over budget on a complex task. Per-convoy allocation prevents the failure mode where one agent exhausts its individual budget on a hard task while other agents have unused budget sitting idle.</p>
+
+            <div class="code-example">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-content">
+<pre><code># Token budget tracking — convoy level
+{
+  "convoy_id": "ecology-cluster",
+  "budget": {
+    "total": 2000000,
+    "allocated": {
+      "agent-eco-1": 520000,
+      "agent-eco-2": 480000,
+      "agent-eco-3": 340000,
+      "agent-eco-4": 0
+    },
+    "consumed": 1340000,
+    "remaining": 660000,
+    "estimated_remaining_cost": 450000,
+    "budget_health": "sufficient"
+  },
+  "cost_history": [
+    { "task": "forest-ecology",    "tokens": 52000 },
+    { "task": "alpine-meadows",    "tokens": 48000 },
+    { "task": "riparian-zones",    "tokens": 61000 },
+    { "task": "marine-biology",    "tokens": 55000 },
+    { "task": "watershed-analysis","tokens": 73000 }
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Budget Tracking Across Multiple Agents</h3>
+
+            <p>Each agent reports its token consumption at task completion as part of the Done-Retirement pipeline (at the NOTIFY stage). The mayor-coordinator aggregates these reports to maintain a real-time view of convoy-level budget consumption. The witness-observer includes budget health in its patrol reports, flagging convoys that are consuming tokens faster than estimated.</p>
+
+            <h3>The Economics of Orchestration at Scale</h3>
+
+            <p>Orchestration itself has a cost. The mayor-coordinator, witness-observer, and sling dispatch all consume tokens. In our measurements, orchestration overhead typically accounts for 8&ndash;12% of total convoy token consumption. This is the "tax" you pay for coordination. The question is whether the productivity gains from orchestration exceed this tax.</p>
+
+            <p>For the PNW Research Series, the math was clear. Without orchestration, a single agent producing 190+ projects sequentially would have required an estimated 12.5 million tokens (including the 30&ndash;40% coordination overhead of re-establishing context after each reset). With Gastown orchestration, the total consumption was approximately 9.8 million tokens: 8.6 million for productive work and 1.2 million for orchestration overhead. The orchestrated approach consumed 22% fewer tokens while completing the work in one-quarter of the wall-clock time.</p>
+
+            <div class="stats-highlight">
+                <div class="stat-box">
+                    <span class="stat-value">22%</span>
+                    <span class="stat-label">Token savings vs. serial</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">8-12%</span>
+                    <span class="stat-label">Orchestration overhead</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">4x</span>
+                    <span class="stat-label">Wall-clock speedup</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">20%</span>
+                    <span class="stat-label">Safety margin in estimates</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13.12 Composing Patterns -->
+        <section class="content-section" id="13-12">
+            <h2>13.12 Composing Patterns &mdash; The Full Stack</h2>
+
+            <p>No individual pattern in this section operates in isolation. The power of the system comes from composition: each pattern handles one concern, and together they form a complete orchestration operating system. Understanding how the patterns compose is essential for understanding the system as a whole.</p>
+
+            <h3>The Full Composition Stack</h3>
+
+            <div class="pattern-flow">
+                <div class="flow-row">
+                    <span class="flow-label">Runtime HAL</span>
+                    <span class="flow-desc">&rarr; detects active runtime, loads capability map, provides portable API</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Mayor-coordinator</span>
+                    <span class="flow-desc">&rarr; creates convoys, allocates agents, tracks global progress</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Token Budget</span>
+                    <span class="flow-desc">&rarr; enforces per-convoy spending limits, gates dispatch decisions</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Sling Dispatch</span>
+                    <span class="flow-desc">&rarr; routes work items through 7-stage pipeline to available agents</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">GUPP Propulsion</span>
+                    <span class="flow-desc">&rarr; converts agents from reactive to proactive, eliminates idle time</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Polecat Worker</span>
+                    <span class="flow-desc">&rarr; ephemeral autonomous execution of individual work items</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Fleet Mission</span>
+                    <span class="flow-desc">&rarr; parallel dispatch for independent tasks within a convoy</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Mail + Nudge</span>
+                    <span class="flow-desc">&rarr; inter-agent communication (durable + immediate channels)</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Witness-Observer</span>
+                    <span class="flow-desc">&rarr; health monitoring, stall detection, nudge-based recovery</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Beads State</span>
+                    <span class="flow-desc">&rarr; crash-recoverable persistence, checkpoint/restore, identity tracking</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Done Retirement</span>
+                    <span class="flow-desc">&rarr; 7-stage completion pipeline with partial recovery</span>
+                </div>
+                <div class="flow-row">
+                    <span class="flow-label">Refinery Merge</span>
+                    <span class="flow-desc">&rarr; deterministic merge queue, sequential integration, clean history</span>
+                </div>
+            </div>
+
+            <h3>Full System Architecture</h3>
+
+            <div class="arch-diagram">
+                <div class="diagram-title">Complete Gastown Orchestration Stack</div>
+<pre>
++=========================================================================+
+|                         RUNTIME HAL (Layer 0)                           |
+|  Detects: Claude Code | Codex | Gemini | Cursor                        |
+|  Provides: Portable tool API, capability map, feature negotiation       |
++=========================================================================+
+         |
++========v================================================================+
+|                     MAYOR-COORDINATOR (Layer 1)                         |
+|  +-----------+  +---------------+  +----------+  +-----------------+   |
+|  | Convoy    |  | Agent         |  | Progress |  | Token Budget    |   |
+|  | Manager   |  | Allocator     |  | Tracker  |  | Enforcer        |   |
+|  +-----------+  +---------------+  +----------+  +-----------------+   |
++=========================================================================+
+         |                                           |
++========v=================+  +======================v====================+
+| SLING DISPATCH (Layer 2) |  | WITNESS-OBSERVER (Layer 2)               |
+| fetch &rarr; allocate &rarr; prepare |  | patrol loop &rarr; stall detect &rarr; nudge &rarr; escalate |
+| hook &rarr; dispatch &rarr; confirm  |  | heartbeat monitor &rarr; health report         |
+| archive                  |  +=============================================+
++==========================+                         |
+         |                                           |
++========v===========================================v====================+
+|                     COMMUNICATION (Layer 3)                             |
+|  +------------------+  +------------------+  +--------------------+    |
+|  | MAIL-ASYNC       |  | NUDGE-SYNC       |  | SENDMESSAGE        |    |
+|  | durable, ordered  |  | ephemeral, fast   |  | session-scoped     |    |
+|  | write-once WORM   |  | latest-wins       |  | synchronous        |    |
+|  +------------------+  +------------------+  +--------------------+    |
++=========================================================================+
+         |
++========v================================================================+
+|                     EXECUTION (Layer 4)                                  |
+|  +------------------+  +------------------+  +--------------------+    |
+|  | GUPP PROPULSION  |  | FLEET MISSION    |  | POLECAT WORKER     |    |
+|  | poll &rarr; proactive  |  | parallel dispatch |  | ephemeral execute  |    |
+|  | interrupt control |  | monitor &amp; merge   |  | autonomous mode    |    |
+|  +------------------+  +------------------+  +--------------------+    |
++=========================================================================+
+         |
++========v================================================================+
+|                     PERSISTENCE (Layer 5)                               |
+|  +------------------+       +------------------+                        |
+|  | BEADS STATE      |       | CHECKPOINT DATA  |                        |
+|  | agent identity   |       | work progress    |                        |
+|  | convoy state     |       | intermediate     |                        |
+|  | crash recovery   |       | results          |                        |
+|  +------------------+       +------------------+                        |
++=========================================================================+
+         |
++========v================================================================+
+|                     COMPLETION (Layer 6)                                 |
+|  +------------------+       +------------------+                        |
+|  | DONE RETIREMENT  |       | REFINERY MERGE   |                        |
+|  | validate &rarr; commit |       | queue &rarr; rebase    |                        |
+|  | push &rarr; submit    |       | verify &rarr; merge    |                        |
+|  | notify &rarr; cleanup  |       | push (linear)    |                        |
+|  | terminate         |       +------------------+                        |
+|  +------------------+                                                    |
++=========================================================================+
+</pre>
+            </div>
+
+            <h3>Data Flow Through the Stack</h3>
+
+            <p>To understand how the patterns compose, trace a single work item through the full system:</p>
+
+            <ol>
+                <li><strong>Runtime HAL</strong> detects that we are running on Claude Code with 1M context, subagent support, and hook capabilities. It loads the Claude Code capability map.</li>
+                <li><strong>Mayor-coordinator</strong> creates an Ecology convoy with 12 work items, 4 agents, and a 2M token budget. The Token Budget Enforcer confirms the budget is sufficient for the estimated work.</li>
+                <li><strong>Sling Dispatch</strong> fetches the first work item ("forest-ecology"), allocates it to agent-eco-1, prepares the instruction package, writes it to agent-eco-1's hook-persistence file, dispatches, and waits for confirmation.</li>
+                <li><strong>GUPP Propulsion</strong> on agent-eco-1 detects the hook file, loads the work item, and enters autonomous execution mode.</li>
+                <li><strong>Polecat Worker</strong> executes the task autonomously. It generates the forest ecology research document, writing sections 1 through 7.</li>
+                <li><strong>Beads State</strong> records checkpoints at sections 3 and 5. If the agent crashes, it will resume from the latest checkpoint rather than starting over.</li>
+                <li><strong>Witness-Observer</strong> patrols every 60 seconds, checking agent-eco-1's heartbeat via <strong>Nudge-Sync</strong>. Agent-eco-1 responds to each health check, confirming it is working on section 6.</li>
+                <li>Agent-eco-1 completes the document. <strong>Done Retirement</strong> kicks in: validate (all 7 sections present), commit, push, submit merge request.</li>
+                <li><strong>Refinery Merge</strong> picks up the merge request, checks out agent-eco-1's branch, rebases onto main, verifies the output, and merges.</li>
+                <li>Done Retirement continues: notify mayor (via <strong>Mail-Async</strong>), cleanup temporary files, terminate agent.</li>
+                <li><strong>Mayor-coordinator</strong> receives the completion notification, updates convoy progress (1/12 complete), and signals Sling Dispatch to send the next work item to the now-available agent-eco-1.</li>
+                <li>The cycle repeats until all 12 work items are complete and the convoy transitions to COMPLETE and then ARCHIVE.</li>
+            </ol>
+
+            <p>This entire flow&mdash;from convoy creation to final archive&mdash;runs autonomously. No human intervention is required unless an escalation is triggered (budget exhaustion, repeated agent failures, or validation failures that exceed the retry limit).</p>
+        </section>
+
+        <!-- 13.13 Lessons Learned at Scale -->
+        <section class="content-section" id="13-13">
+            <h2>13.13 Lessons Learned at Scale</h2>
+
+            <p>Theory is cheap. Production is expensive. The patterns in this section were not designed on a whiteboard and then implemented. They were extracted from production failures, refined through iteration, and validated through repeated use at increasing scale. The lessons documented here represent hundreds of hours of agent execution time and dozens of post-mortem analyses.</p>
+
+            <h3>Agent Supervision: Trust but Verify</h3>
+
+            <div class="highlight-box">
+                <h4>Standing Rule</h4>
+                <p><strong>Always check agent reads and writes against instructions.</strong> Agents will occasionally misinterpret their instructions, especially when the context window is under pressure. An agent told to "write the marine biology section" might write the freshwater ecology section instead, because a similar document was in its context from a previous task. The witness-observer's job is not just to check if agents are alive but to verify that their outputs match their assignments.</p>
+            </div>
+
+            <p>This rule emerged from a production incident during the Music cluster generation. Agent #2 was assigned to write the "Jazz Harmony" document but instead wrote a second copy of "Blues Origins" (which Agent #1 had already completed). The agent's context had retained too much of Agent #1's output from a shared reference file, and the similarity between the two topics caused the agent to drift. After this incident, we added output-title validation to the Done Retirement VALIDATE stage: the output document's title must match the assigned task specification. A simple check that would have caught the error in under 1 second.</p>
+
+            <h3>Task Sizing: The 5-6 Rule</h3>
+
+            <p>We arrived at the "5&ndash;6 tasks per teammate" guideline through empirical measurement across dozens of fleet dispatches. Below are the actual observations:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tasks per Agent</th>
+                        <th>Completion Rate</th>
+                        <th>Quality Score (avg)</th>
+                        <th>Context Exhaustion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1&ndash;2</strong></td>
+                        <td>100%</td>
+                        <td>4.5/5.0</td>
+                        <td>Never</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3&ndash;4</strong></td>
+                        <td>98%</td>
+                        <td>4.3/5.0</td>
+                        <td>Rare (&lt;5%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5&ndash;6</strong></td>
+                        <td>95%</td>
+                        <td>4.1/5.0</td>
+                        <td>Occasional (10%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7&ndash;8</strong></td>
+                        <td>85%</td>
+                        <td>3.6/5.0</td>
+                        <td>Frequent (30%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>9+</strong></td>
+                        <td>70%</td>
+                        <td>3.1/5.0</td>
+                        <td>Common (50%+)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The 5&ndash;6 range represents the sweet spot where completion rate remains acceptably high (95%), quality stays above 4.0, and context exhaustion is manageable. Below 5, you are underutilizing agents. Above 6, the quality drop and failure rate increase the total cost (including rework) beyond the savings from reduced agent count.</p>
+
+            <h3>Simple First, Complex Later</h3>
+
+            <p>When loading a convoy with work items, sort them by complexity: <strong>put the simplest tasks first</strong>. This is counterintuitive&mdash;you might think it is better to tackle the hardest tasks first while the agents are fresh. But there are two practical reasons for simple-first ordering:</p>
+
+            <ol>
+                <li><strong>Early success builds momentum.</strong> An agent that successfully completes its first three tasks has demonstrated that its context, tools, and instructions are working correctly. Any failures on subsequent harder tasks can be attributed to the task difficulty rather than to systemic setup problems.</li>
+                <li><strong>Debugging is easier.</strong> If an agent fails on its first task, you do not know whether the failure is due to the task, the instructions, the context, or the tooling. If it succeeds on three simple tasks and then fails on a complex one, the diagnosis space is much narrower.</li>
+            </ol>
+
+            <h3>Agent Failures Are Normal</h3>
+
+            <p>This is perhaps the most important lesson: <strong>agent failures happen, and they are not exceptional.</strong> In any fleet of 4 agents running 5 tasks each, you should expect 1&ndash;2 task failures. The question is not how to prevent all failures (you cannot) but how to design for graceful recovery.</p>
+
+            <p>The fallback plan is always the same: <strong>write it directly.</strong> If an agent fails on a task after two retries, do not keep retrying. Switch to direct execution: the commander agent (or a human) takes the failed task and completes it manually. This is faster than diagnosing why the agent failed and cheaper than a third retry that will probably also fail.</p>
+
+            <div class="card-grid">
+                <div class="lesson-card">
+                    <h4>4 Agents for Synthesis</h4>
+                    <p>Research, analysis, and document generation tasks benefit from 4 parallel agents. These tasks require more context per task, more reasoning depth, and more iteration. Four agents provide good throughput without overwhelming the orchestrator's monitoring capacity.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>3 Agents for Doc Runs</h4>
+                    <p>Straightforward documentation generation (converting existing source material into formatted output) works best with 3 agents. The tasks are more predictable, the context requirements are lower, and the reduced agent count simplifies coordination.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Context Is RAM</h4>
+                    <p>Treat the agent's context window as volatile memory. Anything in the context will be lost on reset. Anything that must survive must be written to disk (state on disk). Design every interaction assuming the context could reset at any moment. This is not pessimism; it is production thinking.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>State Is on Disk</h4>
+                    <p>The corollary of "context is RAM" is "state is on disk." Every decision, every checkpoint, every progress marker must be persisted to the filesystem. The beads-state system exists for exactly this purpose. An agent that does not persist its state is an agent that loses its state.</p>
+                </div>
+            </div>
+
+            <h3>Never Self-Interrupt</h3>
+
+            <p>During autonomous execution, an agent should <strong>never stop to ask for input.</strong> If the agent encounters ambiguity, it should make a reasonable default choice, document the choice, and continue. Stopping for input breaks the GUPP flow, wastes context on re-establishing state after the human responds, and defeats the purpose of autonomous execution.</p>
+
+            <p>This rule has a corollary: <strong>every task specification must be complete enough for the agent to execute without clarification.</strong> If an agent regularly stops to ask questions, the problem is not the agent; it is the task specification. Invest more in the PREPARE stage of sling dispatch to ensure that every work item is self-contained.</p>
+
+            <h3>Post-Mortem Discipline</h3>
+
+            <p>Every convoy that experiences a failure gets a post-mortem analysis. The analysis examines:</p>
+
+            <ul>
+                <li><strong>Root cause:</strong> Was the failure due to task specification, agent behavior, tooling, or external factors?</li>
+                <li><strong>Detection latency:</strong> How long between the failure occurring and the system detecting it? If the witness-observer took more than 5 minutes to detect a stall, the patrol interval needs adjustment.</li>
+                <li><strong>Recovery cost:</strong> How many tokens and how much wall-clock time did recovery consume? Is there a pattern improvement that would reduce this cost for future convoys?</li>
+                <li><strong>Prevention:</strong> Can the failure mode be prevented in future runs? If so, does the prevention belong in the task specification, the sling dispatch pipeline, the validation stage, or the agent instructions?</li>
+            </ul>
+
+            <p>Post-mortem findings are fed back into the pattern implementations. The current versions of every pattern in this section reflect dozens of such improvements. The sling dispatch pipeline started with 4 stages and grew to 7 after post-mortems revealed gaps in the prepare and confirm stages. The Done-Retirement pipeline added the VALIDATE stage after a post-mortem found that agents were committing output that did not match specifications. The witness-observer's stall detection thresholds were tuned based on 47 separate stall incidents across 3 months of production use.</p>
+
+            <div class="research-callout">
+                <div class="callout-header">The Meta-Lesson</div>
+                <div class="callout-content">
+                    <p>The meta-lesson from 190+ projects is this: <strong>orchestration patterns are not invented, they are discovered.</strong> Every pattern in this section started as a manual workaround for a specific failure. When the same workaround was applied three times, it became a named pattern. When it was applied ten times, it became a reusable skill. When it was applied fifty times, it became part of the system architecture. The system grew from the bottom up, shaped by the specific pressures of production use. Patterns that were theoretically elegant but did not survive production contact were discarded. Patterns that were ugly but reliable were kept and refined. The result is a system that is neither clean nor beautiful but is deeply practical. It works because every piece of it has been tested against the harsh reality of what agents actually do when you give them real work at scale.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="content-section">
+            <h2>Sources and References</h2>
+
+            <h3>Production Systems</h3>
+            <ul class="sources-list">
+                <li>PNW Research Series &mdash; 190+ research projects, 13 Rosetta clusters, 2,439+ files, 600K+ lines of content (2025&ndash;2026)</li>
+                <li>HEL (Higher Education Landscape) Series &mdash; 28 documents, 91K words, Fleet Mission validated at 4-agent scale (2026)</li>
+                <li>OPEN (Open Problems in Every Neighborhood) Series &mdash; 12 documents, parallel LaTeX generation (2026)</li>
+                <li>GSD Skill Creator &mdash; Self-modifying skill system, 34 skills + 57 commands, 21,298 tests (2025&ndash;2026)</li>
+            </ul>
+
+            <h3>Architecture and Patterns</h3>
+            <ul class="sources-list">
+                <li><a href="https://docs.anthropic.com/en/docs/agents-and-tools" target="_blank">Claude Agent SDK Documentation &mdash; Anthropic, 2026</a></li>
+                <li><a href="https://modelcontextprotocol.io/" target="_blank">Model Context Protocol (MCP) Specification &mdash; Anthropic, 2025</a></li>
+                <li><a href="https://google.github.io/A2A/" target="_blank">Agent-to-Agent (A2A) Protocol &mdash; Google, 2025</a></li>
+                <li><a href="https://arxiv.org/abs/2308.11432" target="_blank">A Survey on Large Language Model based Autonomous Agents &mdash; Wang et al., 2024</a></li>
+                <li><a href="https://arxiv.org/abs/2603.23512" target="_blank">S-PATH: Graph-Aware Retrieval with Verifier Pattern &mdash; arXiv, 2026</a></li>
+            </ul>
+
+            <h3>Orchestration Frameworks (Comparative)</h3>
+            <ul class="sources-list">
+                <li><a href="https://langchain-ai.github.io/langgraph/" target="_blank">LangGraph: Multi-Agent Orchestration &mdash; LangChain, 2025</a></li>
+                <li><a href="https://docs.crewai.com/" target="_blank">CrewAI: Role-Based Agent Framework &mdash; CrewAI, 2025</a></li>
+                <li><a href="https://microsoft.github.io/autogen/" target="_blank">AutoGen: Multi-Agent Conversation Framework &mdash; Microsoft Research, 2024</a></li>
+                <li><a href="https://github.com/openai/swarm" target="_blank">Swarm: Lightweight Multi-Agent Orchestration &mdash; OpenAI, 2024</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Section 13 of 15: Production-Proven Orchestration Patterns | <a href="section-12.html">&larr; Previous</a> | <a href="section-14.html">Next &rarr;</a></p>
+        <p>Report generated April 2026 | <a href="../index.html">Return to Index</a> | <a href="references.html">View All References</a></p>
+    </footer>
+
+    <script>
+    function copyCode(button) {
+        var codeBlock = button.closest('.code-example').querySelector('.code-content code');
+        var text = codeBlock.textContent || codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(function(err) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+    </script>
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-12.html" style="margin-right:auto">&larr; 12. Security</a><a href="section-14.html" style="margin-left:auto">14. Research &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

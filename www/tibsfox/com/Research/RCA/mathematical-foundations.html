@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematical Foundations &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Mathematical Foundations of RCA</h1>
+    <div class="subtitle">Causal Inference, Bayesian Networks, Information Theory, Graph Theory, Markov Chains, Granger Causality</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html" class="active">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every RCA method rests on mathematical foundations, whether acknowledged or not. The Five Whys implicitly traverses a directed acyclic graph. FTA is Boolean algebra. FMEA is a risk function. Making these mathematical structures explicit enables formal reasoning about causality, optimality, and correctness in root cause analysis.
+    </blockquote>
+
+    <!-- CAUSAL INFERENCE -->
+    <h2>Causal Inference &mdash; Pearl&rsquo;s Framework</h2>
+    <p><strong>Judea Pearl</strong> (Turing Award, 2011) formalized causal reasoning through <strong>Directed Acyclic Graphs (DAGs)</strong> and the <strong>do-calculus</strong>. This framework distinguishes between:</p>
+    <ul>
+      <li><strong>Observation:</strong> P(Y | X = x) &mdash; the probability of Y given that we <em>observe</em> X = x</li>
+      <li><strong>Intervention:</strong> P(Y | do(X = x)) &mdash; the probability of Y given that we <em>set</em> X = x</li>
+    </ul>
+    <p>The do-calculus provides rules for computing interventional probabilities from observational data, when the causal DAG is known:</p>
+    <div class="formula">
+      P(Y | do(X)) = &sum;<sub>z</sub> P(Y | X, Z = z) &middot; P(Z = z)
+    </div>
+    <p>This is the <strong>adjustment formula</strong> (back-door criterion). It allows us to answer: &ldquo;if we fix X, what happens to Y?&rdquo; &mdash; which is precisely the question RCA asks about root causes.</p>
+
+    <h3>The Ladder of Causation</h3>
+    <table>
+      <thead><tr><th>Level</th><th>Question</th><th>Mathematical Tool</th><th>RCA Application</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Association</strong></td><td>What if I observe?</td><td>P(Y | X)</td><td>Correlation-based anomaly detection</td></tr>
+        <tr><td><strong>Intervention</strong></td><td>What if I do?</td><td>P(Y | do(X))</td><td>Root cause identification (will fixing X fix Y?)</td></tr>
+        <tr><td><strong>Counterfactual</strong></td><td>What if I had done differently?</td><td>P(Y<sub>x</sub> | X = x&prime;, Y = y)</td><td>Post-incident analysis (would a different action have prevented the failure?)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- BAYESIAN NETWORKS -->
+    <h2>Bayesian Networks</h2>
+    <p>A <strong>Bayesian Network</strong> is a probabilistic graphical model that represents causal relationships as a DAG with conditional probability tables at each node. For RCA:</p>
+    <div class="formula">
+      P(Root Cause | Symptoms) = P(Symptoms | Root Cause) &middot; P(Root Cause) / P(Symptoms)
+    </div>
+    <p>This is Bayes&rsquo; theorem applied to fault diagnosis. Given observed symptoms (alerts, error messages, metric anomalies), we compute the posterior probability of each potential root cause.</p>
+    <div class="card">
+      <p><strong>Advantages for RCA:</strong></p>
+      <ul>
+        <li>Handles uncertainty: each root cause gets a probability, not a binary determination</li>
+        <li>Incorporates prior knowledge: known failure rates inform the analysis</li>
+        <li>Updates incrementally: as new evidence arrives, probabilities are updated via belief propagation</li>
+        <li>Handles missing data: can reason even when some observations are unavailable</li>
+      </ul>
+      <p><strong>Limitation:</strong> Requires a known or learned causal structure. Learning the DAG from data is itself an NP-hard problem in general.</p>
+    </div>
+
+    <!-- INFORMATION THEORY -->
+    <h2>Information Theory for Fault Localization</h2>
+    <p><strong>Shannon&rsquo;s information theory</strong> provides tools for quantifying how much information each observation provides about the root cause:</p>
+    <div class="formula">
+      I(Root Cause; Observation) = H(Root Cause) &minus; H(Root Cause | Observation)
+    </div>
+    <p>The <strong>mutual information</strong> I measures how much observing a particular metric, log, or trace <em>reduces uncertainty</em> about the root cause. This enables:</p>
+    <ul>
+      <li><strong>Optimal observation ordering:</strong> Check the most informative signals first (maximize information gain per step)</li>
+      <li><strong>Redundancy detection:</strong> Two signals with high mutual information between them provide redundant evidence</li>
+      <li><strong>Sufficient statistic identification:</strong> The minimal set of observations needed to determine the root cause</li>
+    </ul>
+    <p><strong>Entropy of the root cause distribution</strong> H(RC) quantifies overall diagnostic difficulty. High entropy means many equally likely root causes; low entropy means the evidence strongly favors one cause.</p>
+
+    <!-- GRAPH THEORY -->
+    <h2>Graph Theory &mdash; Fault Propagation</h2>
+    <p>Service dependency graphs, fault trees, and causal DAGs are all graphs. Graph-theoretic tools for RCA:</p>
+    <table>
+      <thead><tr><th>Concept</th><th>Application</th><th>Formula / Algorithm</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Shortest path</strong></td><td>Minimum-hop causal chain from root cause to symptom</td><td>Dijkstra / BFS on weighted dependency graph</td></tr>
+        <tr><td><strong>Centrality</strong></td><td>Identify the most influential nodes (services, components)</td><td>Betweenness centrality = &sum; &sigma;<sub>st</sub>(v) / &sigma;<sub>st</sub></td></tr>
+        <tr><td><strong>Minimum cut</strong></td><td>Smallest set of edges whose removal disconnects fault propagation</td><td>Max-flow min-cut theorem (Ford-Fulkerson)</td></tr>
+        <tr><td><strong>Dominator trees</strong></td><td>Identify single points of failure</td><td>Lengauer-Tarjan algorithm</td></tr>
+        <tr><td><strong>Cycle detection</strong></td><td>Identify circular dependencies (deadlock potential)</td><td>DFS with back-edge detection</td></tr>
+        <tr><td><strong>Topological sort</strong></td><td>Determine the order in which failures propagated</td><td>Kahn&rsquo;s algorithm on the DAG</td></tr>
+      </tbody>
+    </table>
+    <p>Graph centrality is particularly useful in cloud RCA (see <a href="cloud-microservices.html">Cloud &amp; Microservices</a>): the service with the highest betweenness centrality is often the root cause, as failures through it affect the most downstream services.</p>
+
+    <!-- MARKOV CHAINS -->
+    <h2>Markov Chains &mdash; State Transition Analysis</h2>
+    <p>Markov chains model systems as states with transition probabilities. For RCA, they answer: given the system is in a failure state, what was the most likely path through state space that led here?</p>
+    <div class="formula">
+      P(S<sub>t+1</sub> = s&prime; | S<sub>t</sub> = s) = T(s, s&prime;)
+    </div>
+    <p>Where T is the transition matrix. Applications:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Failure probability:</strong> Absorbing Markov chains model the probability of reaching a failure state from any starting state</li>
+        <li><strong>Mean time to failure:</strong> Expected number of steps before reaching an absorbing (failure) state</li>
+        <li><strong>Most likely failure path:</strong> Viterbi algorithm finds the most probable sequence of states leading to failure</li>
+        <li><strong>Steady-state analysis:</strong> Long-run probability of being in each state &mdash; identifies chronically degraded components</li>
+      </ul>
+    </div>
+    <p>Hidden Markov Models (HMMs) extend this when the true system state is not directly observable &mdash; we observe symptoms (emissions) and infer the hidden state sequence.</p>
+
+    <!-- GRANGER CAUSALITY -->
+    <h2>Granger Causality</h2>
+    <p><strong>Granger causality</strong> (Clive Granger, Nobel Prize 2003) provides a statistical test for whether one time series &ldquo;causes&rdquo; another, in the sense that past values of X improve prediction of Y beyond Y&rsquo;s own past values:</p>
+    <div class="formula">
+      Y<sub>t</sub> = &sum;<sub>i=1</sub><sup>p</sup> &alpha;<sub>i</sub> Y<sub>t-i</sub> + &sum;<sub>j=1</sub><sup>p</sup> &beta;<sub>j</sub> X<sub>t-j</sub> + &epsilon;<sub>t</sub>
+    </div>
+    <p>If the &beta; coefficients are jointly significant (F-test), X Granger-causes Y. Applications in RCA:</p>
+    <ul>
+      <li><strong>Metric causality:</strong> Does CPU utilization of service A Granger-cause latency in service B?</li>
+      <li><strong>Temporal ordering:</strong> Establishes which metric changes preceded which failures</li>
+      <li><strong>Spurious correlation filtering:</strong> Distinguishes genuine causal relationships from coincidental correlations</li>
+    </ul>
+    <p><strong>Limitation:</strong> Granger causality is about predictive precedence, not true causation. A confounding variable C that causes both X and Y will make X appear to Granger-cause Y even though neither causes the other.</p>
+
+    <!-- CONNECTING TO RCA METHODS -->
+    <h2>Mathematical Foundations of Each Method</h2>
+    <table>
+      <thead><tr><th>RCA Method</th><th>Mathematical Foundation</th><th>Key Formula</th></tr></thead>
+      <tbody>
+        <tr><td>Five Whys</td><td>DAG traversal</td><td>Path enumeration on causal graph</td></tr>
+        <tr><td>FTA</td><td>Boolean algebra + probability</td><td>P(Top) = 1 &minus; &prod;(1 &minus; P(basic<sub>i</sub>)) for OR gates</td></tr>
+        <tr><td>FMEA</td><td>Risk function</td><td>RPN = S &times; O &times; D</td></tr>
+        <tr><td>Bayesian RCA</td><td>Probabilistic inference</td><td>P(C|E) = P(E|C) &middot; P(C) / P(E)</td></tr>
+        <tr><td>AgentRx</td><td>Constraint satisfaction</td><td>CFS = argmin<sub>t</sub> d(trajectory<sub>t</sub>, constraints)</td></tr>
+        <tr><td>STAMP</td><td>Control theory</td><td>Feedback loop stability: G(s) / (1 + G(s)H(s))</td></tr>
+        <tr><td>Cloud RCA</td><td>Graph centrality + Granger</td><td>C<sub>B</sub>(v) = &sum; &sigma;<sub>st</sub>(v) / &sigma;<sub>st</sub></td></tr>
+      </tbody>
+    </table>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>229 related projects</strong> across 3 knowledge domains with 14 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>PNW</td><td>Pacific Northwest Research Series</td><td>general</td><td>1.399</td></tr>
+        <tr><td>MUS</td><td>Music Theory &amp; Performance</td><td>music</td><td>0.630</td></tr>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>space</td><td>0.292</td></tr>
+        <tr><td>BHK</td><td>Black Holes &amp; Spacetime</td><td>general</td><td>0.225</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+        <tr><td>MCS</td><td>Maritime Platform Cost Model</td><td>general</td><td>0.201</td></tr>
+        <tr><td>M05</td><td>Module Split Analysis</td><td>general</td><td>0.194</td></tr>
+        <tr><td>SST</td><td>States, Symbols &amp; Tape</td><td>general</td><td>0.162</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (227), music (1), space (1). Complex plane: z = 0.1692 + 0.1148i, |z| = 0.2044.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="classical-methods.html">Classical Methods</a></li>
+        <li><a href="systems-thinking.html">Systems-Theoretic Approaches</a></li>
+        <li><a href="cloud-microservices.html">Cloud &amp; Microservices</a></li>
+        <li><a href="ai-agent-debugging.html">AI Agent Debugging</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Mathematical Foundations &middot; Root Cause Analysis &middot; 229 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering &amp; PLM &mdash; Agentic Technologies &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Technologies</h1>
+    <div class="subtitle">Engineering &amp; Product Lifecycle Management</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="agent-architecture.html">Agent Architecture</a>
+      <a href="mcp-security.html">MCP Security</a>
+      <a href="ml-production.html">ML Production</a>
+      <a href="hardware-energy.html">Hardware &amp; Energy</a>
+      <a href="engineering-plm.html" class="active">Engineering &amp; PLM</a>
+      <a href="business-legal.html">Business &amp; Legal</a>
+      <a href="context-engineering.html">Context Engineering</a>
+      <a href="papers.html">Papers</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The agentic protocol layer feeds context to the tools that design physical things, which must survive real-world forces on devices that must be secured from silicon to cloud, all while training the next generation of practitioners who increasingly depend on software they may not fully understand.
+    </blockquote>
+
+    <h2>1. Design Intent as Context</h2>
+
+    <p>Two tools &mdash; <strong>Drafter</strong> and <strong>Trace.Space</strong> &mdash; are rewiring how engineering intent flows from conception to manufacturing. The distinction matters: AI-native design tools treat intent as structured context from the start, while bolted-on AI retrofits intelligence onto workflows that were never designed for it.</p>
+
+    <div class="card">
+      <h3>Drafter: Go-to-Manufacturing 2D Drawing Generation</h3>
+      <p>Drafter generates manufacturing-ready 2D drawings from 3D CAD models, automating the tedious last mile of the design-to-production pipeline. The key insight: 2D drawings remain the legal contract between engineering and manufacturing. No matter how sophisticated the 3D model, the shop floor reads prints.</p>
+
+      <h3>Trace.Space: AI-Native Requirements Engineering</h3>
+      <p>Trace.Space approaches requirements as a context problem. Rather than bolting AI onto existing requirements management tools (DOORS, Jama), it treats requirements as structured data from inception &mdash; traceable, versionable, and machine-readable. This maps directly to our GSD planning architecture: requirements are context that flows through the execution pipeline.</p>
+
+      <h3>AI-Native vs. Bolted-On</h3>
+      <table>
+        <thead><tr><th>Approach</th><th>Character</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AI-Native</strong></td><td>Intent is structured context from day one; AI participates in design decisions</td><td>Trace.Space, Drafter</td></tr>
+          <tr><td><strong>Bolted-On</strong></td><td>AI added as afterthought to existing workflow; limited to automation of existing tasks</td><td>Most PLM vendor &ldquo;AI features&rdquo;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Configuration Management</h2>
+
+    <p>BOM (Bill of Materials) management is where engineering complexity meets manufacturing reality. The configuration management problem is deceptively simple at small scale and catastrophically complex at enterprise scale.</p>
+
+    <div class="card">
+      <h3>The BOM Chaos Problem</h3>
+      <p>A single product can have hundreds of variants. The <strong>150% BOM</strong> approach lists every possible component for every possible configuration in a single structure, with variant rules determining which subset applies to each specific configuration. This is the industry-standard solution, but it creates its own complexity:</p>
+
+      <ul>
+        <li><strong>150% BOM</strong> &mdash; superset BOM containing all possible components across all variants</li>
+        <li><strong>Variant rules</strong> &mdash; conditional logic (if option A, include parts X, Y; if option B, include parts X, Z)</li>
+        <li><strong>Effectivity</strong> &mdash; time-based or serial-number-based activation of configuration changes</li>
+        <li><strong>As-designed vs. as-built vs. as-maintained</strong> &mdash; three distinct BOMs for the same product at different lifecycle stages</li>
+      </ul>
+
+      <h3>CM Primitives</h3>
+      <p>Configuration management reduces to a small set of primitives that parallel version control in software:</p>
+      <table>
+        <thead><tr><th>CM Primitive</th><th>Software Equivalent</th><th>Function</th></tr></thead>
+        <tbody>
+          <tr><td>Configuration Item (CI)</td><td>File / module</td><td>Atomic unit of managed change</td></tr>
+          <tr><td>Baseline</td><td>Git tag / release</td><td>Approved configuration at a point in time</td></tr>
+          <tr><td>Change Request</td><td>Pull request</td><td>Proposed modification to a baseline</td></tr>
+          <tr><td>Effectivity</td><td>Feature flag</td><td>Conditional activation of a change</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Structural Engineering</h2>
+
+    <p>Two deep-dive transcripts on structural dynamics reveal the gap between textbook math and physical-world consequences.</p>
+
+    <div class="card">
+      <h3>Stiffness Methods &amp; Truss Analysis</h3>
+      <p>Training next-generation truss designers who increasingly depend on FEA software they may not fully understand. The foundational equation &omega;<sub>n</sub> = &radic;(K/M) hides the most expensive trap in mechanical engineering: <strong>static stiffness can differ from dynamic stiffness by an order of magnitude</strong> because polymer chains lock up under rapid oscillation.</p>
+
+      <h3>Impact Dynamics vs. Textbook Math</h3>
+      <p>The Shock Response Spectrum (SRS) measures the &ldquo;bruise,&rdquo; not the &ldquo;punch&rdquo; &mdash; it calculates maximum structural deflection response, not the frequency content of the input shock pulse. Engineers constantly confuse these with catastrophic results.</p>
+
+      <h3>The Four Horsemen of Bad Vibration Data</h3>
+      <table>
+        <thead><tr><th>Horseman</th><th>Cause</th><th>Consequence</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Clipping</strong></td><td>Gain too high; peaks chopped at ADC limit</td><td>Artificial high-frequency harmonics, reduced RMS</td></tr>
+          <tr><td><strong>Instrumentation Noise</strong></td><td>Gain too low; signal buried below noise floor</td><td>Real vibrations invisible in data</td></tr>
+          <tr><td><strong>Aliasing</strong></td><td>Sampling below Nyquist limit</td><td>Phantom frequencies (10,500 Hz appears as 50 Hz ghost)</td></tr>
+          <tr><td><strong>Quantization Error</strong></td><td>16-bit ADC discretization</td><td>Permanent white noise floor, amplified by oversampling</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Three Damping Mechanisms</h3>
+      <table>
+        <thead><tr><th>Type</th><th>Mechanism</th><th>Force Dependency</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Viscous</strong></td><td>Fluid forced through orifices</td><td>Proportional to velocity</td><td>Car shock absorber</td></tr>
+          <tr><td><strong>Coulomb</strong></td><td>Dry friction (asperity welding/shearing)</td><td>Constant</td><td>Steel on concrete</td></tr>
+          <tr><td><strong>Structural</strong></td><td>Internal molecular friction</td><td>Displacement amplitude, frequency-independent</td><td>Steel beam under cyclic load</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Critical modeling error:</strong> Engineers frequently model structural damping as viscous. Viscous damping increases energy dissipation with frequency; structural does not. This causes FEA simulations to predict heavy damping at high frequencies that does not exist physically, leading to fatigue failure at frequencies the simulation declared safe.</p>
+    </div>
+
+    <h2>4. Construction &amp; Fabrication</h2>
+
+    <div class="card">
+      <h3>Hover Bracket System</h3>
+      <p>A modular construction bracket system rated from <strong>150 to 3,000 lb capacity</strong>. The engineering interest is in the standardization approach: a single bracket geometry scaled across load ratings, with the connection interface remaining constant while material thickness and fastener grade vary.</p>
+
+      <p>This parallels software component design &mdash; a stable interface with scaling implementation details. The bracket system demonstrates that even in physical fabrication, the API/implementation boundary produces better outcomes than bespoke design for each load case.</p>
+    </div>
+
+    <h2>5. The Engineer&rsquo;s Mindset</h2>
+
+    <div class="card">
+      <h3>Four Cognitive Pillars</h3>
+      <p>Engineering cognition distilled to four foundational modes of thinking:</p>
+      <table>
+        <thead><tr><th>Pillar</th><th>Character</th><th>Application</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Systems Thinking</strong></td><td>See the whole before the parts; understand emergent behavior</td><td>Architecture, integration, failure analysis</td></tr>
+          <tr><td><strong>Analytical Thinking</strong></td><td>Decompose, quantify, model; math as language</td><td>Structural analysis, optimization, verification</td></tr>
+          <tr><td><strong>Design Thinking</strong></td><td>Iterate, prototype, validate; embrace ambiguity</td><td>Requirements, UI/UX, creative problem-solving</td></tr>
+          <tr><td><strong>Critical Thinking</strong></td><td>Question assumptions, challenge defaults, seek disconfirmation</td><td>Safety reviews, testing, peer review</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Systems Engineering as Bias-Aware Framework</h3>
+      <p>The systems engineering process is explicitly designed to counteract cognitive biases. Requirements traceability prevents scope creep (anchoring bias). Verification against requirements prevents confirmation bias. Independent review prevents groupthink. The V-model&rsquo;s left side (decomposition) and right side (integration) force engineers to think at multiple abstraction levels, preventing the tunnel vision that comes from working at a single level for too long.</p>
+
+      <p>This maps directly to our GSD workflow: discuss (requirements) &rarr; plan (decomposition) &rarr; execute (implementation) &rarr; verify (integration testing). The phases are not bureaucracy &mdash; they are cognitive bias countermeasures.</p>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>Agentic AI + IoT Security + PLM/CAD + Mechanical Engineering batch analysis (2026-04-04)</li>
+      <li>Mechanical Engineering: Resonance, Shock, and Precision Manufacturing batch analysis (2026-04-05)</li>
+      <li>Strykvisionz6890, <cite>Mechanical Engineering Made Simple</cite> podcast &mdash; Episode 127: Defeating Resonance and Structural Shock</li>
+      <li>PLM/CAD podcast &mdash; Drafter (go-to-manufacturing) and Trace.Space (AI-native requirements)</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Cluster 5: Engineering &amp; PLM &middot; April 2026</p>
+    <p><a href="index.html">AGT Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Learning System &mdash; GSD-Skill-Creator Improvements &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsi">
+  <header>
+    <h1>Adaptive Learning System Refinement</h1>
+    <div class="subtitle">Meta-Agentic Bootstrapping, Recursive Composition, Psychometrics, Pluripotent Differentiation</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="skill-security.html">Skill Security</a>
+      <a href="context-optimization.html">Context Optimization</a>
+      <a href="orchestration-patterns.html">Orchestration</a>
+      <a href="verification-pipeline.html">Verification</a>
+      <a href="agent-identity.html">Agent Identity</a>
+      <a href="mcp-hardening.html">MCP Hardening</a>
+      <a href="ecosystem-alignment.html">Ecosystem</a>
+      <a href="learning-system.html" class="active">Learning System</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>The Skill-Creator&rsquo;s Core Loop</h2>
+
+    <blockquote>
+      gsd-skill-creator is a self-modifying system. It observes developer behavior, suggests new skills, validates those skills against safety criteria, and installs them into the active skill set. The learning loop &mdash; observe, suggest, validate, install, monitor &mdash; is the system&rsquo;s primary value proposition and its greatest vulnerability. Every improvement in this module must strengthen the loop without breaking it.
+    </blockquote>
+
+    <p>Six research findings from the Artemis II program map directly to improvements in the adaptive learning system. Each addresses a specific gap identified through 190+ completed missions and 34 active skills.</p>
+
+    <!-- ================================================================== -->
+    <h2>1. Meta-Agentic Bootstrapping for Skill Generation</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> p3nGu1nZz (Dr. Dimitrios Geromichalos) &mdash; embed an already-capable agent inside a rule-based world that governs success. The scaffold defines what a valid skill looks like; the agent generates candidates within those constraints.</p>
+    </div>
+
+    <p>The current skill generation process is ad hoc: the sc:observe skill watches behavior, sc:suggest proposes new skills, and the human reviews. Meta-agentic bootstrapping formalizes this into a scaffold-agent-validator pattern:</p>
+
+    <table>
+      <thead><tr><th>Component</th><th>Role</th><th>GSD Implementation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Scaffold</strong></td><td>Defines the artifact grammar for valid skills</td><td>Skill schema: YAML front matter (description &le;250 chars, triggers, globs, alwaysApply) + markdown body</td></tr>
+        <tr><td><strong>Agent</strong></td><td>Generates skill candidates from observed patterns</td><td>sc:suggest enhanced with structured output conforming to the scaffold schema</td></tr>
+        <tr><td><strong>Validator</strong></td><td>External quality gate that the agent cannot bypass</td><td>security-hygiene skill + multi-model verification ensemble (from module 1)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The Self-Correcting Engine Applied</h3>
+    <ol>
+      <li>Agent generates a skill candidate from observed patterns</li>
+      <li>Validator scans against scaffold rules: schema conformance, DDIPE patterns, permission scope</li>
+      <li>Failures produce targeted error signals: &ldquo;description exceeds 250 chars&rdquo;, &ldquo;trigger pattern too broad&rdquo;, &ldquo;references unauthorized tools&rdquo;</li>
+      <li>Agent repairs and regenerates until all quality gates pass</li>
+      <li>Validated skill enters quarantine tier (module 1) for human review before promotion</li>
+    </ol>
+
+    <!-- ================================================================== -->
+    <h2>2. Recursive Composition: Scaffold-Agent-Validation Nesting</h2>
+
+    <p>The scaffold + agent + validation pattern is itself composable. A skill that generates other skills is a meta-skill. A team of meta-skills governed by a meta-scaffold is a skill-generation pipeline.</p>
+
+    <pre>
+Level 0: Individual skill execution
+  scaffold: skill schema
+  agent: polecat-worker
+  validator: security-hygiene
+
+Level 1: Skill generation
+  scaffold: meta-skill grammar (defines what a valid skill-generator looks like)
+  agent: sc:suggest (generates skill candidates)
+  validator: multi-model ensemble + human review
+
+Level 2: Skill-generation pipeline
+  scaffold: pipeline grammar (defines valid pipeline configurations)
+  agent: mayor-coordinator (orchestrates multiple skill generators)
+  validator: ecosystem-alignment skill (checks upstream compatibility)</pre>
+
+    <p>Each level can be composed into a single component at the next level. The recursion has a natural depth limit: Level 0 is execution, Level 1 is generation, Level 2 is orchestration. Going deeper adds complexity without proportional value.</p>
+
+    <!-- ================================================================== -->
+    <h2>3. Skills-in-the-Wild Degradation Calibration</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> arXiv:2604.04323 &mdash; Agentic Skills in the Wild documents how skills degrade when deployed in real-world conditions versus controlled benchmarks. Performance drops of 15&ndash;40% are typical, caused by distribution shift between training and deployment environments.</p>
+    </div>
+
+    <p>In gsd-skill-creator, skills degrade because:</p>
+
+    <ul>
+      <li><strong>Codebase drift:</strong> The codebase evolves but the skill&rsquo;s assumptions remain static. A skill written for v1.45 may not work correctly at v1.50.</li>
+      <li><strong>Context pollution:</strong> As more skills are added, interaction effects between skills create unexpected behaviors not present when each was tested individually.</li>
+      <li><strong>Model updates:</strong> Upstream model changes alter how the model interprets skill instructions, causing subtle behavioral shifts.</li>
+      <li><strong>Usage pattern shift:</strong> The developer&rsquo;s workflow evolves, making some skills increasingly irrelevant while creating gaps that new skills should fill.</li>
+    </ul>
+
+    <h3>Calibration Protocol</h3>
+    <p>Run periodic calibration sweeps that test each skill against current conditions. The sc:digest skill already generates performance data. Extend it with a degradation score that triggers re-evaluation when a skill&rsquo;s effectiveness drops below threshold.</p>
+
+    <!-- ================================================================== -->
+    <h2>4. Agent Psychometrics: Task-Level Performance Prediction</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> arXiv:2604.00594 &mdash; Agent Psychometrics applies psychometric testing methodology (IRT, CTT) to predict agent performance on specific task types before execution.</p>
+    </div>
+
+    <p>Instead of treating all agents as equally capable on all tasks, psychometric profiling creates a capability map per agent configuration (model + skill set + MCP servers). This enables better task routing in the orchestration layer.</p>
+
+    <table>
+      <thead><tr><th>Psychometric Dimension</th><th>What It Measures</th><th>GSD Application</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Task difficulty</strong></td><td>How hard is this task for agents in general?</td><td>Mode selection: easy tasks get DIRECT, hard tasks get FULL</td></tr>
+        <tr><td><strong>Agent ability</strong></td><td>How capable is this specific agent configuration?</td><td>Worker assignment: match worker skill profiles to task requirements</td></tr>
+        <tr><td><strong>Discrimination</strong></td><td>How well does this task distinguish between capable and incapable agents?</td><td>Verification: high-discrimination tasks need externalized verification</td></tr>
+        <tr><td><strong>Guessing parameter</strong></td><td>Probability of correct output by chance</td><td>Confidence calibration: high-guessing tasks need stronger verification</td></tr>
+      </tbody>
+    </table>
+
+    <p>The 190+ completed missions provide the training data for psychometric calibration. Each mission&rsquo;s execution logs, verification results, and retrospective notes contribute to the capability map.</p>
+
+    <!-- ================================================================== -->
+    <h2>5. Error-as-Feedback Loop for Skill Improvement</h2>
+
+    <p>Errors are not failures &mdash; they are targeted learning signals. When a skill fails or produces suboptimal output, the error signal should feed back into the skill improvement cycle rather than being discarded.</p>
+
+    <h3>Feedback Loop Architecture</h3>
+    <pre>
+SKILL EXECUTION
+  |
+  +-- success --&gt; increment success counter, update psychometric profile
+  |
+  +-- failure --&gt; CLASSIFY ERROR
+                    |
+                    +-- recoverable: retry with modified parameters
+                    |     (max 3 retries, then escalate)
+                    |
+                    +-- systematic: log pattern for sc:digest analysis
+                    |     (recurring errors trigger skill re-evaluation)
+                    |
+                    +-- novel: flag for human review
+                          (new error types may indicate codebase drift)</pre>
+
+    <p>The sc:observe skill captures error events. The sc:digest skill aggregates them into patterns. The sc:suggest skill uses those patterns to propose skill modifications. This closes the feedback loop from execution back to generation.</p>
+
+    <!-- ================================================================== -->
+    <h2>6. Pluripotent Differentiation Model for Muse Agents</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> Amazon + UC Berkeley STEM Agent paper (March 2026) &mdash; undifferentiated agents that self-specialize based on environment and task. Borrowed from developmental biology: stem cells differentiate into specialized cell types based on environmental signals.</p>
+    </div>
+
+    <p>The Muse Team (13+1 agents, two arcs) already implements a form of differentiation: each muse has a specific personality, domain focus, and grove assignment. The pluripotent model makes this differentiation lifecycle explicit:</p>
+
+    <table>
+      <thead><tr><th>Stage</th><th>Biological Analog</th><th>Muse Agent Behavior</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pluripotent</strong></td><td>Stem cell</td><td>New muse with no specialization &mdash; pure reasoning capability</td></tr>
+        <tr><td><strong>Crystallized</strong></td><td>Cell fate commitment</td><td>Pattern detected from 3+ successful activations in a domain</td></tr>
+        <tr><td><strong>Committed</strong></td><td>Progenitor cell</td><td>10+ successes &mdash; gets priority routing for matching tasks</td></tr>
+        <tr><td><strong>Mature</strong></td><td>Fully differentiated</td><td>Established domain expert (Cedar=filter, Hemlock=CAS, Foxy=ECO, etc.)</td></tr>
+        <tr><td><strong>Apoptosis</strong></td><td>Programmed cell death</td><td>Success rate drops below threshold &mdash; muse reverts to pluripotent state for re-differentiation</td></tr>
+      </tbody>
+    </table>
+
+    <p>The key insight: apoptosis is not failure &mdash; it is the system recognizing that the environment has changed and the current specialization is no longer optimal. The muse reverts to a pluripotent state and can re-differentiate based on the new environment. This prevents the skill ecosystem from accumulating &ldquo;zombie skills&rdquo; that were once useful but are now dead weight consuming context tokens.</p>
+
+    <h3>Differentiation Signals</h3>
+    <ul>
+      <li><strong>Task success rate:</strong> Above threshold = promote to next stage; below = trigger apoptosis</li>
+      <li><strong>Context cost:</strong> Skills that consume disproportionate context for their contribution are candidates for pruning</li>
+      <li><strong>Activation frequency:</strong> Skills that activate fewer than once per 10 sessions may be ghost tokens</li>
+      <li><strong>Cross-skill interaction:</strong> Skills that conflict with other skills more often than they complement are differentiation failures</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>Corpus Cross-References</h2>
+
+    <div class="cross-links">
+      <h4>Related Projects (from corpus analysis &mdash; 228 projects, z = 0.2038)</h4>
+      <ul>
+        <li><a href="../OOPS/index.html">OOPS &mdash; Ecosystem Alignment</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills, Agents &amp; Teams</a></li>
+        <li><a href="../FAIS/index.html">FAIS &mdash; Formal AI Safety</a></li>
+        <li><a href="../MAS/index.html">MAS &mdash; Multi-Agent Systems</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High-Performance Computing</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Complex plane state:</strong> z = 0.1687 + 0.1145i, |z| = 0.2038 &mdash; 228 related projects spanning 4 domains (general, ai, music, ecology). HPC at magnitude 0.763 and MUS at 0.630 are unexpectedly strong connections. HPC connects through performance optimization patterns applicable to skill execution. MUS connects through the Music Theory project&rsquo;s pattern recognition work, which parallels the skill-creator&rsquo;s pattern-based learning approach.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Adaptive Learning System &middot; GSD-Skill-Creator Improvements &middot; PNW Research Series</p>
+    <p><a href="index.html">GSI Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

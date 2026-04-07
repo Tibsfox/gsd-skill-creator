@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manufacturing &amp; Quality RCA &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Manufacturing &amp; Quality RCA</h1>
+    <div class="subtitle">TPS/Kaizen, Six Sigma DMAIC, 8D, SPC, AI-Driven RCA, Pareto Analysis</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html" class="active">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Manufacturing is where root cause analysis was born. From Toyota&rsquo;s production floors in the 1930s through Ford&rsquo;s 8D methodology to modern AI-driven quality systems with digital twins and predictive analytics, the manufacturing sector has eight decades of accumulated wisdom in finding and eliminating the sources of defects.
+    </blockquote>
+
+    <!-- TPS / KAIZEN -->
+    <h2>Toyota Production System &amp; Kaizen</h2>
+    <p>The <strong>Toyota Production System (TPS)</strong> is the birthplace of systematic root cause analysis. Developed by Sakichi Toyoda, Kiichiro Toyoda, and Taiichi Ohno, TPS embeds RCA into the daily operation of the factory through:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Jidoka (autonomation):</strong> Machines that stop automatically when a defect is detected, forcing immediate investigation</li>
+        <li><strong>Andon:</strong> Visual signal system allowing any worker to halt the production line when a problem is detected</li>
+        <li><strong>Five Whys:</strong> The primary investigation method (see <a href="classical-methods.html">Classical Methods</a>)</li>
+        <li><strong>Genchi Genbutsu:</strong> &ldquo;Go and see&rdquo; &mdash; investigate at the actual place where the problem occurred</li>
+        <li><strong>Kaizen:</strong> Continuous improvement &mdash; every problem is an opportunity to improve the process</li>
+        <li><strong>Hansei:</strong> Reflection &mdash; honestly acknowledge mistakes and commit to improvement</li>
+      </ul>
+    </div>
+    <p>The cultural dimension is critical: TPS succeeds not because of its tools but because of a culture where stopping the line to investigate a problem is celebrated, not punished.</p>
+
+    <!-- SIX SIGMA DMAIC -->
+    <h2>Six Sigma &amp; DMAIC</h2>
+    <p>Originally developed at Motorola (1986) and popularized by GE under Jack Welch, Six Sigma applies statistical methods to achieve near-zero defect rates (3.4 defects per million opportunities). The <strong>DMAIC</strong> framework structures problem-solving:</p>
+    <table>
+      <thead><tr><th>Phase</th><th>Purpose</th><th>RCA Tools Used</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Define</strong></td><td>Scope the problem, identify stakeholders, set goals</td><td>SIPOC, Voice of Customer, project charter</td></tr>
+        <tr><td><strong>Measure</strong></td><td>Quantify the current state and problem magnitude</td><td>Data collection, measurement system analysis, process mapping</td></tr>
+        <tr><td><strong>Analyze</strong></td><td>Identify root causes using statistical analysis</td><td>Fishbone, 5 Whys, hypothesis testing, regression, DOE</td></tr>
+        <tr><td><strong>Improve</strong></td><td>Develop and implement solutions targeting root causes</td><td>Brainstorming, piloting, optimization, FMEA</td></tr>
+        <tr><td><strong>Control</strong></td><td>Sustain improvements and prevent recurrence</td><td>SPC, control plans, standardized work, poka-yoke</td></tr>
+      </tbody>
+    </table>
+    <p>DMAIC integrates many classical RCA methods into a structured improvement cycle. The Analyze phase is where RCA happens; the Control phase prevents root causes from recurring.</p>
+
+    <!-- 8D -->
+    <h2>8D Problem Solving (Ford Motor Company)</h2>
+    <p>The <strong>Eight Disciplines (8D)</strong> methodology was formalized by Ford Motor Company in the 1980s as a team-based approach to solving chronic quality problems:</p>
+    <div class="card">
+      <ol>
+        <li><strong>D1 &mdash; Establish team:</strong> Assemble a cross-functional team with process knowledge</li>
+        <li><strong>D2 &mdash; Describe problem:</strong> Quantify the problem using IS/IS NOT analysis</li>
+        <li><strong>D3 &mdash; Interim containment:</strong> Protect the customer while investigating</li>
+        <li><strong>D4 &mdash; Root cause analysis:</strong> Identify and verify root causes (5 Whys, Fishbone, FTA)</li>
+        <li><strong>D5 &mdash; Permanent corrective actions:</strong> Develop solutions that address root causes</li>
+        <li><strong>D6 &mdash; Implement and validate:</strong> Deploy solutions and verify effectiveness</li>
+        <li><strong>D7 &mdash; Prevent recurrence:</strong> Modify systems to prevent similar problems</li>
+        <li><strong>D8 &mdash; Congratulate the team:</strong> Recognize team contributions (often overlooked but critical for culture)</li>
+      </ol>
+    </div>
+    <p>The 8D methodology is widely used in the automotive supply chain. Suppliers are often required to submit 8D reports to OEMs when quality issues arise.</p>
+
+    <!-- SPC -->
+    <h2>Statistical Process Control (SPC)</h2>
+    <p>Developed by <strong>Walter Shewhart</strong> at Bell Labs in the 1920s, SPC uses control charts to distinguish between <strong>common cause variation</strong> (inherent in the process) and <strong>special cause variation</strong> (assignable to a specific root cause):</p>
+    <ul>
+      <li><strong>Control limits:</strong> &plusmn;3&sigma; from the process mean &mdash; points outside indicate special causes requiring RCA</li>
+      <li><strong>Run rules:</strong> Patterns within control limits that signal process shifts (7 consecutive points above/below mean, trending patterns, cycles)</li>
+      <li><strong>Process capability:</strong> Cp and Cpk indices measuring whether the process can consistently produce within specification</li>
+    </ul>
+    <p>SPC provides the <strong>detection mechanism</strong> for RCA &mdash; it tells you <em>when</em> to investigate by distinguishing signal from noise in process data.</p>
+
+    <!-- AI-DRIVEN RCA -->
+    <h2>AI-Driven RCA in Manufacturing</h2>
+    <p>Modern manufacturing increasingly applies AI and machine learning to automate root cause identification:</p>
+    <table>
+      <thead><tr><th>Approach</th><th>Method</th><th>Advantage</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Anomaly detection</strong></td><td>ML models trained on normal process data flag deviations</td><td>Detects subtle patterns humans miss</td></tr>
+        <tr><td><strong>Digital twins</strong></td><td>Virtual process model enables what-if analysis</td><td>Test root cause hypotheses without disrupting production</td></tr>
+        <tr><td><strong>Predictive analytics</strong></td><td>Predict failures before they occur based on sensor trends</td><td>Proactive RCA &mdash; fix causes before symptoms appear</td></tr>
+        <tr><td><strong>Computer vision</strong></td><td>Automated defect detection and classification from images</td><td>100% inspection at production speed</td></tr>
+        <tr><td><strong>NLP on maintenance logs</strong></td><td>Extract patterns from unstructured maintenance records</td><td>Identify recurring failure patterns across shifts and sites</td></tr>
+      </tbody>
+    </table>
+
+    <!-- PARETO -->
+    <h2>Pareto Analysis &mdash; The 80/20 Rule</h2>
+    <p>Named after economist Vilfredo Pareto and applied to quality by <strong>Joseph Juran</strong> (1941), Pareto analysis identifies the &ldquo;vital few&rdquo; causes that account for the majority of defects:</p>
+    <div class="card">
+      <p><strong>Procedure:</strong> Collect defect data &rarr; categorize by type &rarr; rank by frequency or cost &rarr; calculate cumulative percentage &rarr; focus RCA on the top 20% of categories that cause 80% of problems.</p>
+      <p><strong>Key principle:</strong> Not all root causes are equally important. Pareto analysis provides the <strong>prioritization</strong> that determines which root causes to investigate first. In a manufacturing environment with dozens of defect types, this prevents the team from spending equal effort on trivial and critical causes.</p>
+    </div>
+
+    <!-- ZERO DEFECT -->
+    <h2>Zero-Defect Manufacturing</h2>
+    <p>The zero-defect philosophy (Philip Crosby, 1979) holds that the goal is not to <em>reduce</em> defects but to <em>eliminate</em> them entirely. This reframes RCA from reactive problem-solving to proactive system design:</p>
+    <ul>
+      <li><strong>Poka-yoke:</strong> Mistake-proofing &mdash; design the process so errors are physically impossible</li>
+      <li><strong>Built-in quality:</strong> Inspect at the source, not at the end of the line</li>
+      <li><strong>Standard work:</strong> Documented best practices that eliminate variation</li>
+      <li><strong>Cost of quality:</strong> Track prevention, appraisal, internal failure, and external failure costs</li>
+    </ul>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>25 related projects</strong> across 3 knowledge domains with 24 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>GSI</td><td>GSD-Skill-Creator Improvements</td><td>general</td><td>0.269</td></tr>
+        <tr><td>LED</td><td>LED Lighting &amp; Controllers</td><td>general</td><td>0.252</td></tr>
+        <tr><td>CML</td><td>CMU ML in Production</td><td>general</td><td>0.227</td></tr>
+        <tr><td>ALR</td><td>Artemis Learning Resources</td><td>general</td><td>0.221</td></tr>
+        <tr><td>BPS</td><td>Biological Physics Sensing Systems</td><td>general</td><td>0.204</td></tr>
+        <tr><td>M05</td><td>Module Split Analysis</td><td>general</td><td>0.194</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (22), ai (2), creative (1). Complex plane: z = 0.1844 + 0.1230i, |z| = 0.2217.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="classical-methods.html">Classical Methods</a></li>
+        <li><a href="healthcare-aviation.html">Healthcare &amp; Aviation</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+        <li><a href="mathematical-foundations.html">Mathematical Foundations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Manufacturing &amp; Quality RCA &middot; Root Cause Analysis &middot; 25 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

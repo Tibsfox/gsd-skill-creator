@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Engineering &amp; SRE &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Software Engineering &amp; SRE</h1>
+    <div class="subtitle">Blameless Postmortems, Observability, Error Budgets, DORA, Chaos Engineering</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html" class="active">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Google&rsquo;s SRE discipline transformed RCA from a blame-finding exercise into a systematic learning process. The blameless postmortem, error budgets, and the three pillars of observability represent software engineering&rsquo;s most significant contributions to root cause analysis methodology.
+    </blockquote>
+
+    <!-- BLAMELESS POSTMORTEMS -->
+    <h2>Google Blameless Postmortems</h2>
+    <p>The blameless postmortem culture, codified in Google&rsquo;s <em>Site Reliability Engineering</em> book (2016), rests on a core principle: <strong>human error is a symptom, not a cause</strong>. If a person made a mistake, the system allowed that mistake to have consequences. The investigation focuses on systemic factors, not individual blame.</p>
+    <div class="card">
+      <p><strong>Postmortem template structure:</strong></p>
+      <ul>
+        <li><strong>Summary:</strong> 2&ndash;3 sentence description of the incident</li>
+        <li><strong>Impact:</strong> Duration, affected users, revenue impact, SLO consumption</li>
+        <li><strong>Timeline:</strong> Minute-by-minute reconstruction from detection through resolution</li>
+        <li><strong>Root causes:</strong> Systemic factors that allowed the incident (not &ldquo;who did it&rdquo;)</li>
+        <li><strong>Trigger:</strong> The proximate cause that initiated the incident</li>
+        <li><strong>Detection:</strong> How the incident was detected (automated vs. user report)</li>
+        <li><strong>Resolution:</strong> Steps taken to resolve</li>
+        <li><strong>Action items:</strong> Prioritized list with owners and deadlines &mdash; categorized as prevent, detect, mitigate</li>
+        <li><strong>Lessons learned:</strong> What went well, what went poorly, where the team got lucky</li>
+      </ul>
+    </div>
+    <p>The &ldquo;where we got lucky&rdquo; section is critical &mdash; it identifies near-misses and latent risks that did not manifest this time but could in the future.</p>
+
+    <!-- OBSERVABILITY -->
+    <h2>Observability &mdash; The Three Pillars</h2>
+    <p>Effective RCA in software systems requires <strong>observability</strong>: the ability to infer internal system state from external outputs. The three pillars:</p>
+    <table>
+      <thead><tr><th>Pillar</th><th>What It Captures</th><th>RCA Use</th><th>Key Tools</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Logs</strong></td><td>Discrete events with timestamps</td><td>Reconstruct exact sequence of events leading to failure</td><td>ELK, Loki, CloudWatch</td></tr>
+        <tr><td><strong>Metrics</strong></td><td>Numeric measurements over time</td><td>Detect anomalies, correlate timing, measure SLIs</td><td>Prometheus, Datadog, Grafana</td></tr>
+        <tr><td><strong>Traces</strong></td><td>Request path across services</td><td>Identify which service in a distributed call chain caused latency or errors</td><td>Jaeger, Zipkin, OpenTelemetry</td></tr>
+      </tbody>
+    </table>
+    <p>Modern observability adds a fourth dimension: <strong>profiling</strong> (continuous profiling of CPU, memory, and allocation patterns). Together, these form the evidence base for any SRE postmortem.</p>
+
+    <!-- ERROR BUDGETS -->
+    <h2>Error Budgets and SLO-Driven RCA</h2>
+    <p>Error budgets quantify the acceptable level of unreliability. An SLO of 99.9% means a monthly error budget of ~43 minutes of downtime. RCA is triggered when:</p>
+    <ul>
+      <li>A single incident consumes &gt;10% of the error budget</li>
+      <li>The error budget is exhausted for the period</li>
+      <li>A pattern of incidents indicates systemic issues</li>
+    </ul>
+    <p>This approach ties RCA directly to business impact and prevents over-investigation of minor incidents while ensuring thorough analysis of budget-consuming events.</p>
+
+    <!-- DORA METRICS -->
+    <h2>DORA Metrics</h2>
+    <p>The DORA (DevOps Research and Assessment) metrics provide a <strong>causal model for software delivery performance</strong>:</p>
+    <table>
+      <thead><tr><th>Metric</th><th>Measures</th><th>RCA Connection</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Deployment Frequency</strong></td><td>How often code reaches production</td><td>Low frequency = large batch sizes = harder to isolate root causes</td></tr>
+        <tr><td><strong>Lead Time for Changes</strong></td><td>Commit to production duration</td><td>Long lead times indicate process bottlenecks</td></tr>
+        <tr><td><strong>Change Failure Rate</strong></td><td>% of deployments causing incidents</td><td>Direct measure of code quality and testing effectiveness</td></tr>
+        <tr><td><strong>Mean Time to Recovery</strong></td><td>How quickly service is restored</td><td>Measures detection speed, diagnosis speed, and resolution speed</td></tr>
+      </tbody>
+    </table>
+    <p>DORA research demonstrates that these metrics are <strong>correlated, not independent</strong> &mdash; teams that deploy more frequently also have lower change failure rates, contradicting the stability-vs-speed trade-off assumption.</p>
+
+    <!-- CHAOS ENGINEERING -->
+    <h2>Chaos Engineering &amp; Proactive RCA</h2>
+    <p>Rather than waiting for failures to perform RCA retroactively, chaos engineering deliberately injects faults to discover weaknesses:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Steady-state hypothesis:</strong> Define what &ldquo;normal&rdquo; looks like in measurable terms</li>
+        <li><strong>Introduce variables:</strong> Inject faults (latency, server termination, network partition, disk fill)</li>
+        <li><strong>Observe:</strong> Does the system maintain its steady state?</li>
+        <li><strong>Learn:</strong> If not, the failure mode becomes an action item &mdash; proactive RCA before any real incident</li>
+      </ul>
+      <p><strong>Game Days:</strong> Scheduled exercises where teams practice incident response and RCA under controlled conditions. Netflix&rsquo;s Chaos Monkey (2011) pioneered this approach; modern tooling includes Gremlin, Litmus, and AWS Fault Injection Simulator.</p>
+    </div>
+
+    <!-- CASCADING FAILURES -->
+    <h2>Cascading Failure Analysis</h2>
+    <p>In distributed systems, failures cascade: one service fails, increasing load on others, which then fail, creating a chain reaction. RCA for cascading failures requires understanding:</p>
+    <ul>
+      <li><strong>Dependency graphs:</strong> Which services depend on which, and with what criticality</li>
+      <li><strong>Circuit breakers:</strong> Where they exist, their thresholds, and whether they activated</li>
+      <li><strong>Retry storms:</strong> Exponential backoff failures that amplify load during outages</li>
+      <li><strong>Resource exhaustion:</strong> Thread pools, connection pools, memory &mdash; which resource was the bottleneck</li>
+      <li><strong>Blast radius:</strong> How far the cascade propagated before containment</li>
+    </ul>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>14 related projects</strong> across 4 knowledge domains with 13 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>ECO</td><td>From Tahoma&rsquo;s Summit to the Salish Sea Floor</td><td>ecology</td><td>0.231</td></tr>
+        <tr><td>ALR</td><td>Artemis Learning Resources</td><td>general</td><td>0.221</td></tr>
+        <tr><td>HFE</td><td>Hi-Fidelity Audio Engineering</td><td>general</td><td>0.216</td></tr>
+        <tr><td>M05</td><td>Module Split Analysis</td><td>general</td><td>0.194</td></tr>
+        <tr><td>CHS</td><td>Making Sense of Chaos</td><td>general</td><td>0.183</td></tr>
+        <tr><td>BCM</td><td>Building Construction Mastery</td><td>infrastructure</td><td>0.154</td></tr>
+        <tr><td>FEC</td><td>Forward Error Correction</td><td>general</td><td>0.118</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (11), ecology (1), ai (1), infrastructure (1). Complex plane: z = 0.1492 + 0.0994i, |z| = 0.1793.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="cloud-microservices.html">Cloud &amp; Microservices</a></li>
+        <li><a href="ai-agent-debugging.html">AI Agent Debugging</a></li>
+        <li><a href="llm-rca-failures.html">LLM Reasoning Failures</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Software Engineering &amp; SRE &middot; Root Cause Analysis &middot; 14 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

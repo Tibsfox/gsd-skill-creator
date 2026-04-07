@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIY Projects &mdash; Artemis II</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === CONTENT === */
+.page-content { max-width:960px; margin:0 auto; padding:2rem 2rem 1rem; }
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.section-header {
+  padding: 1rem 1.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.01);
+}
+.section-header h2 {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+.section-header .section-tag {
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.2rem;
+}
+.section-body { padding: 1.2rem 1.5rem; }
+.section-body p { margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.7; }
+.section-body p:last-child { margin-bottom: 0; }
+
+/* === STAT ROWS === */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stat-cell {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.stat-value {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 400;
+}
+.stat-value.gold { color: var(--artemis-gold); }
+.stat-value.red { color: var(--artemis-red); }
+.stat-value.silver { color: var(--orion-silver); }
+.stat-note {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === HIGHLIGHT BOX === */
+.highlight {
+  background: rgba(196,163,90,0.06);
+  border-left: 3px solid var(--artemis-gold);
+  padding: 0.8rem 1.2rem;
+  margin: 0.8rem 0;
+  font-size: 0.82rem;
+  color: var(--orion-silver);
+  line-height: 1.7;
+}
+.highlight strong { color: var(--artemis-gold); font-weight: 500; }
+
+/* === MATERIALS LIST === */
+.materials-list { list-style: none; margin: 0.5rem 0; }
+.materials-list li {
+  position: relative;
+  padding: 0.3rem 0 0.3rem 1.5rem;
+  font-size: 0.82rem;
+  color: var(--orion-silver);
+}
+.materials-list li::before {
+  content: '\25CB';
+  position: absolute;
+  left: 0.2rem;
+  color: var(--artemis-gold);
+  font-size: 0.7rem;
+}
+
+/* === STEPS LIST === */
+.steps-list { list-style: none; margin: 0.5rem 0; counter-reset: step-counter; }
+.steps-list li {
+  position: relative;
+  padding: 0.4rem 0 0.4rem 2rem;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border);
+  counter-increment: step-counter;
+}
+.steps-list li:last-child { border-bottom: none; }
+.steps-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: rgba(196,163,90,0.12);
+  border: 1px solid rgba(196,163,90,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  top: 0.45rem;
+}
+
+/* === LEARNING TAGS === */
+.learning-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0; }
+.learning-tag {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(11,61,145,0.2);
+  border: 1px solid rgba(11,61,145,0.3);
+  border-radius: 2px;
+  color: var(--orion-silver);
+  letter-spacing: 0.04em;
+}
+
+/* === DIFFICULTY STARS === */
+.difficulty {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+.difficulty .filled { color: var(--artemis-gold); }
+.difficulty .empty { color: rgba(255,255,255,0.12); }
+
+/* === INTRO SECTION === */
+.intro-text {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--orion-silver);
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+/* === FOOTER === */
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+.data-source-bar {
+  padding:0.4rem 2rem; text-align:center; font-size:0.65rem;
+  color:rgba(255,255,255,0.15); background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .page-content { max-width: 1300px; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .page-content { max-width: 1500px; }
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .page-content { padding: 1.2rem 1rem 1rem; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-body { padding: 1rem; }
+}
+@media(max-width:480px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <a href="watch.html">Watch</a> &middot;
+  <strong style="color:var(--orion-silver);">DIY Projects</strong> &middot;
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a>
+</div>
+
+<div class="mission-header">
+  <h1>DIY Projects</h1>
+  <div class="subtitle">Hands-on activities tied to Artemis II mission concepts</div>
+  <div class="catalog-id">Artemis II &middot; Mission 1.190 &middot; 8 Projects &middot; Beginner to Advanced</div>
+</div>
+
+<div class="page-content">
+
+<p class="intro-text">
+  Each project connects directly to an Artemis II mission system or scientific investigation.
+  Difficulty ranges from one star (spreadsheet or observation only) to three stars (coding
+  and hardware integration). All projects use open-source tools or inexpensive materials.
+  No project requires specialized lab equipment.
+</p>
+
+<!-- ============================================================
+     PROJECT 1: FREE-RETURN TRAJECTORY SIMULATOR
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 1 &mdash; Orbital Mechanics</div>
+    <h2>Free-Return Trajectory Simulator</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;&#9733;&#9733;</span></span></div>
+        <div class="stat-note">advanced</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">2&ndash;4 hours</div>
+        <div class="stat-note">setup + coding + visualization</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">$0</div>
+        <div class="stat-note">open source tools</div>
+      </div>
+    </div>
+
+    <p>
+      Build a Python simulation that models the free-return trajectory Artemis II will fly.
+      A free-return trajectory is an orbital path that uses lunar gravity to swing the spacecraft
+      back toward Earth without requiring an engine burn &mdash; a critical safety feature that
+      guarantees the crew can return home even if propulsion fails after trans-lunar injection.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Python 3.8+ with pip</li>
+      <li>poliastro (open-source astrodynamics library)</li>
+      <li>matplotlib for trajectory visualization</li>
+      <li>NumPy and SciPy for numerical integration</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Install poliastro: <code style="color:var(--artemis-gold);">pip install poliastro matplotlib</code></li>
+      <li>Define initial conditions: spacecraft mass, TLI delta-v (~3.1 km/s), and Moon position at injection time</li>
+      <li>Set up the restricted three-body problem (Earth, Moon, spacecraft) using poliastro's propagation tools</li>
+      <li>Propagate the trajectory forward, logging position at each timestep</li>
+      <li>Plot the resulting path in 2D (Earth-Moon rotating frame) and verify the free-return loop</li>
+      <li>Experiment: vary TLI delta-v by +/- 50 m/s and observe how the trajectory changes</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">orbital mechanics</span>
+      <span class="learning-tag">numerical integration</span>
+      <span class="learning-tag">restricted 3-body problem</span>
+      <span class="learning-tag">Python</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> The mission's hybrid free-return trajectory
+      is its primary abort safety net. After TLI, if all engines fail, lunar gravity alone
+      redirects the spacecraft back to Earth. Your simulation models the same physics that
+      mission designers at JSC used to certify this trajectory for crew safety.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 2: LED OPTICAL COMMUNICATIONS DEMO
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 2 &mdash; Photonics</div>
+    <h2>LED Optical Communications Demo</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9733;</span></span></div>
+        <div class="stat-note">intermediate</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">2&ndash;3 hours</div>
+        <div class="stat-note">assembly + coding + testing</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">~$30&ndash;50</div>
+        <div class="stat-note">electronics components</div>
+      </div>
+    </div>
+
+    <p>
+      Transmit text data across a room using pulses of visible light &mdash; the same
+      fundamental principle behind the O2O laser communications system on Orion. The O2O
+      system uses a 1550 nm infrared laser at 260 Mbps; your LED version will be slower
+      but demonstrates the identical concept: encoding information in light instead of radio waves.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Arduino Uno or Nano</li>
+      <li>High-brightness LED (any color)</li>
+      <li>Photodiode or phototransistor</li>
+      <li>Breadboard and jumper wires</li>
+      <li>220-ohm and 10K-ohm resistors</li>
+      <li>USB cable for Arduino programming</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Wire the LED to an Arduino digital output pin through a 220-ohm current-limiting resistor</li>
+      <li>Wire the photodiode to an analog input pin with a 10K-ohm pull-down resistor</li>
+      <li>Write a transmitter sketch that blinks the LED in a pattern encoding ASCII characters (on = 1, off = 0)</li>
+      <li>Write a receiver sketch that reads the photodiode voltage and decodes the bit pattern back to text</li>
+      <li>Start at 1 meter distance, then increase separation and measure when the signal degrades</li>
+      <li>Calculate your achieved data rate (bits per second) and compare to the O2O system's 260 Mbps</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">signal processing</span>
+      <span class="learning-tag">modulation</span>
+      <span class="learning-tag">photonics</span>
+      <span class="learning-tag">Arduino</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> The O2O optical terminal on Orion achieves
+      130x the data rate of S-band radio by concentrating energy into a tight laser beam.
+      Your LED demo shows why optical beats radio &mdash; the photodiode only responds when
+      it catches the light, demonstrating the directional advantage that lets O2O send
+      HD video from lunar distance.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 3: COSMIC RAY DETECTOR (CLOUD CHAMBER)
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 3 &mdash; Particle Physics</div>
+    <h2>Cosmic Ray Detector (Cloud Chamber)</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9733;</span></span></div>
+        <div class="stat-note">intermediate</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">1&ndash;2 hours</div>
+        <div class="stat-note">build + observation</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">~$20&ndash;30</div>
+        <div class="stat-note">dry ice is the main expense</div>
+      </div>
+    </div>
+
+    <p>
+      Build a diffusion cloud chamber and watch cosmic ray tracks with your own eyes.
+      The same high-energy particles that leave visible trails in your chamber &mdash;
+      muons, alpha particles, and secondary cosmic rays &mdash; are the radiation hazard
+      that the Artemis II crew faces beyond the Van Allen belts. On the ISS, Earth's
+      magnetosphere deflects most of this. On a lunar flyby, the crew is fully exposed.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Clear glass or plastic container (aquarium, glass jar, or petri dish)</li>
+      <li>Black felt or fabric (for the bottom surface)</li>
+      <li>99% isopropyl alcohol</li>
+      <li>Dry ice (1&ndash;2 kg block)</li>
+      <li>Bright flashlight or LED strip (side illumination)</li>
+      <li>Gloves for handling dry ice</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Line the bottom of the container with black felt and saturate it with isopropyl alcohol</li>
+      <li>Seal the container and place it upside-down on the dry ice block</li>
+      <li>Wait 5&ndash;10 minutes for a temperature gradient to establish (cold bottom, warm top)</li>
+      <li>Shine a bright light across the bottom of the chamber at a shallow angle</li>
+      <li>Watch for thin white vapor trails &mdash; each trail is a charged particle ionizing alcohol molecules</li>
+      <li>Identify track types: short fat tracks (alpha particles), long straight tracks (muons), branching tracks (nuclear interactions)</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">particle physics</span>
+      <span class="learning-tag">radiation</span>
+      <span class="learning-tag">supersaturation</span>
+      <span class="learning-tag">cosmic rays</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> The ARCHAR crew health study and K-RadCube
+      CubeSat both measure the deep space radiation environment. Your cloud chamber makes
+      this invisible hazard visible. Every track you see represents a particle that, in
+      deep space without Earth's magnetic shielding, would pass through the crew cabin
+      and potentially damage DNA in the astronauts' cells.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 4: HEAT SHIELD ABLATION TEST
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 4 &mdash; Thermal Protection</div>
+    <h2>Heat Shield Ablation Test</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9733;</span></span></div>
+        <div class="stat-note">intermediate</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">1 hour</div>
+        <div class="stat-note">setup + tests + analysis</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">~$15</div>
+        <div class="stat-note">household materials</div>
+      </div>
+    </div>
+
+    <p>
+      Compare ablative versus reflective thermal protection strategies using kitchen
+      materials. Orion's AVCOAT heat shield works by ablation &mdash; the material
+      deliberately chars and vaporizes, carrying heat away from the spacecraft as it
+      burns off. This is fundamentally different from reflective insulation, which tries
+      to bounce heat away. Both approaches have trade-offs that this experiment reveals.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Marshmallows (ablative test material)</li>
+      <li>Aluminum foil (reflective test material)</li>
+      <li>Heat gun or kitchen torch</li>
+      <li>Thermocouple or infrared thermometer</li>
+      <li>Metal baking sheet (safe work surface)</li>
+      <li>Timer and notebook for recording data</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Set up two identical test stations on the baking sheet, each with a thermocouple behind the test material</li>
+      <li>Station A: stack marshmallows as the thermal barrier (ablative approach)</li>
+      <li>Station B: wrap multiple layers of aluminum foil as the thermal barrier (reflective approach)</li>
+      <li>Apply heat from the same distance and angle to both stations for 30 seconds</li>
+      <li>Record the temperature behind each barrier every 5 seconds</li>
+      <li>Observe: the marshmallow chars and sacrifices material (ablation), while the foil reflects but eventually conducts heat through</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">thermodynamics</span>
+      <span class="learning-tag">materials science</span>
+      <span class="learning-tag">ablation</span>
+      <span class="learning-tag">heat transfer</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> Orion's 5-meter AVCOAT heat shield will
+      endure temperatures exceeding 2,760&deg;C (5,000&deg;F) during reentry at ~11 km/s.
+      The ablative principle is the same as your marshmallow: the material sacrifices itself,
+      and the vaporized gas creates a boundary layer that blocks further heat transfer.
+      Artemis II uses a steeper direct reentry (unlike Artemis I's skip entry), putting
+      different thermal loads on the shield.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 5: DSN SIGNAL DELAY CALCULATOR
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 5 &mdash; Communications</div>
+    <h2>DSN Signal Delay Calculator</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;</span><span class="empty">&#9733;&#9733;</span></span></div>
+        <div class="stat-note">beginner</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">30 min</div>
+        <div class="stat-note">setup + calculations</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">$0</div>
+        <div class="stat-note">spreadsheet or Python</div>
+      </div>
+    </div>
+
+    <p>
+      Calculate the speed-of-light communication delay between Earth and spacecraft at
+      various distances, then experience what it feels like to operate under that constraint.
+      At lunar distance, the delay is about 1.3 seconds each way. Manageable, but noticeable.
+      At Mars distance, it becomes 4 to 24 minutes &mdash; making real-time conversation impossible.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Spreadsheet (Google Sheets, Excel, LibreOffice) or Python</li>
+      <li>Timer or stopwatch app</li>
+      <li>A partner for the communication delay simulation</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Calculate one-way light time: distance / 299,792.458 km/s. Moon = 384,400 km = 1.28 seconds</li>
+      <li>Build a table of delays: ISS (0.0013s), Moon (1.28s), Mars closest (182s), Mars farthest (1,342s), Jupiter (33&ndash;54 min)</li>
+      <li>Simulate lunar delay: text a partner, but enforce a 2.6-second round-trip pause before reading each reply</li>
+      <li>Simulate Mars delay: enforce an 8&ndash;48 minute round-trip pause. Try to coordinate a simple task under this constraint</li>
+      <li>Discuss: how would mission control procedures change when real-time guidance is impossible?</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">speed of light</span>
+      <span class="learning-tag">communication constraints</span>
+      <span class="learning-tag">mission planning</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> Mission Control at JSC communicates with
+      Orion through the Deep Space Network. At maximum lunar distance, commands take 1.3
+      seconds to arrive. The crew must handle emergencies semi-autonomously during that
+      gap. This project makes the constraint visceral &mdash; and reveals why future Mars
+      crews will need far more onboard autonomy than any previous mission.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 6: BUILD A STAR TRACKER
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 6 &mdash; Navigation</div>
+    <h2>Build a Star Tracker</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;&#9733;&#9733;</span></span></div>
+        <div class="stat-note">advanced</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">4&ndash;6 hours</div>
+        <div class="stat-note">hardware + software + calibration</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">~$60&ndash;80</div>
+        <div class="stat-note">Raspberry Pi + camera module</div>
+      </div>
+    </div>
+
+    <p>
+      Build a device that photographs the night sky, identifies stars in the image, and
+      calculates which direction the camera is pointing. This is the same principle behind
+      Orion's star tracker navigation system, which determines the spacecraft's attitude
+      by matching observed star patterns against a catalog of known star positions.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Raspberry Pi (3B+ or later)</li>
+      <li>Raspberry Pi Camera Module (v2 or HQ)</li>
+      <li>MicroSD card (16GB+) with Raspberry Pi OS</li>
+      <li>astrometry.net (open-source plate solving software)</li>
+      <li>Tripod or stable mount</li>
+      <li>Clear night with low light pollution</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Set up Raspberry Pi with camera module and install astrometry.net: <code style="color:var(--artemis-gold);">sudo apt install astrometry.net</code></li>
+      <li>Download the appropriate index files for your camera's field of view (astrometry.net provides these freely)</li>
+      <li>Mount the camera on a tripod, point at the night sky, and capture a long-exposure image (2&ndash;10 seconds)</li>
+      <li>Run the plate solver: <code style="color:var(--artemis-gold);">solve-field your_image.fits</code></li>
+      <li>The solver identifies stars in your image, matches them against the catalog, and returns precise RA/Dec coordinates</li>
+      <li>Compare the computed pointing direction against where you know the camera was aimed &mdash; measure the accuracy</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">astrometry</span>
+      <span class="learning-tag">coordinate systems</span>
+      <span class="learning-tag">computer vision</span>
+      <span class="learning-tag">Raspberry Pi</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> Orion's star trackers are a critical
+      navigation backup. If GPS and ground-based tracking were both lost, the spacecraft
+      could determine its orientation from star observations alone &mdash; the same method
+      sailors used for centuries, now automated with cameras and pattern-matching algorithms.
+      Your Raspberry Pi version uses the exact same plate-solving mathematics.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 7: SPACE WEATHER MONITOR
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 7 &mdash; Space Weather</div>
+    <h2>Space Weather Monitor</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9733;</span></span></div>
+        <div class="stat-note">intermediate</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">2&ndash;3 hours</div>
+        <div class="stat-note">coding + dashboard design</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">$0</div>
+        <div class="stat-note">NOAA data is public</div>
+      </div>
+    </div>
+
+    <p>
+      Build a live dashboard that pulls real-time space weather data from NOAA's Space
+      Weather Prediction Center &mdash; the same data source NASA mission planners monitor
+      when deciding whether conditions are safe for extravehicular activity or, in extreme
+      cases, whether to shelter crew in a more shielded area of the spacecraft.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Python 3 with requests and matplotlib (or a web stack: HTML/CSS/JavaScript)</li>
+      <li>NOAA SWPC JSON API (free, no API key required)</li>
+      <li>Optional: Plotly or Grafana for a more polished dashboard</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Fetch the planetary Kp index from <code style="color:var(--artemis-gold);">services.swpc.noaa.gov/products/noaa-planetary-k-index.json</code></li>
+      <li>Fetch solar wind speed and density from <code style="color:var(--artemis-gold);">services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json</code></li>
+      <li>Fetch the IMF Bz component (interplanetary magnetic field) from <code style="color:var(--artemis-gold);">services.swpc.noaa.gov/products/solar-wind/mag-7-day.json</code></li>
+      <li>Display current values with color-coded alerts: green (quiet), yellow (unsettled), red (storm)</li>
+      <li>Add threshold alerts: Kp &ge; 5 means geomagnetic storm; Bz strongly southward (&lt; -10 nT) means increased radiation risk</li>
+      <li>Run the dashboard continuously and check it during the Artemis II mission window</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">space weather</span>
+      <span class="learning-tag">API consumption</span>
+      <span class="learning-tag">data visualization</span>
+      <span class="learning-tag">Python</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> Space weather directly affects crew safety.
+      A solar particle event during the mission would expose the crew to elevated radiation
+      levels, especially beyond the Van Allen belts where Earth's magnetic field provides
+      no shielding. The Saudi Arabian Space Weather CubeSat-1 will measure these conditions
+      in situ. Your dashboard monitors the same environment from the ground.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROJECT 8: LUNAR OBSERVATION SESSION
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Project 8 &mdash; Lunar Science</div>
+    <h2>Lunar Observation Session</h2>
+  </div>
+  <div class="section-body">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Difficulty</div>
+        <div class="stat-value"><span class="difficulty"><span class="filled">&#9733;</span><span class="empty">&#9733;&#9733;</span></span></div>
+        <div class="stat-note">beginner</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Time</div>
+        <div class="stat-value gold">1&ndash;2 hours</div>
+        <div class="stat-note">clear night required</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cost</div>
+        <div class="stat-value">$0&ndash;50</div>
+        <div class="stat-note">binoculars optional</div>
+      </div>
+    </div>
+
+    <p>
+      Observe the same lunar features assigned to the Artemis II crew for visual
+      documentation during their flyby. The crew will photograph and describe approximately
+      30 targets including impact craters, volcanic mare, mountain ranges, and the
+      Orientale basin &mdash; a massive multi-ring impact structure on the Moon's western limb.
+      You can see many of these from your backyard.
+    </p>
+
+    <p><strong style="color:#fff;">Materials</strong></p>
+    <ul class="materials-list">
+      <li>Binoculars (7x50 or 10x50 are ideal) or a small telescope (60&ndash;80mm aperture)</li>
+      <li>Lunar map or atlas (free printable versions available from lunar observation societies)</li>
+      <li>Sketchbook and pencil (or a smartphone camera held to the eyepiece)</li>
+      <li>Red flashlight to preserve night vision</li>
+      <li>Clear night with the Moon above the horizon (first or last quarter is best for surface detail)</li>
+    </ul>
+
+    <p><strong style="color:#fff;">Steps</strong></p>
+    <ol class="steps-list">
+      <li>Plan your session: check the Moon's phase and identify which features will be near the terminator (the day/night boundary), where shadows reveal the most surface detail</li>
+      <li>Start with naked-eye observation: identify the major mare (dark plains) &mdash; Mare Tranquillitatis, Mare Serenitatis, Oceanus Procellarum</li>
+      <li>With binoculars: locate prominent craters &mdash; Tycho (bright ray system), Copernicus (terraced walls), Aristarchus (brightest spot on the Moon)</li>
+      <li>With a telescope: sketch the Orientale basin region on the western limb (best seen during favorable libration)</li>
+      <li>For each feature, note the date, time, instrument used, seeing conditions, and make a sketch or photograph</li>
+      <li>Compare your observations to NASA imagery of the same features &mdash; the Lunar Reconnaissance Orbiter Camera provides high-resolution reference images</li>
+    </ol>
+
+    <div class="learning-tags">
+      <span class="learning-tag">lunar geology</span>
+      <span class="learning-tag">observation techniques</span>
+      <span class="learning-tag">scientific sketching</span>
+      <span class="learning-tag">selenography</span>
+    </div>
+
+    <div class="highlight">
+      <strong>Connection to Artemis II:</strong> The crew's visual observation campaign
+      continues a tradition stretching back to Apollo. Human eyes notice details that cameras
+      sometimes miss &mdash; subtle color variations, transient lighting effects, and context
+      that helps geologists interpret surface processes. Your observation session parallels
+      exactly what the crew will do as they sweep past the Moon at closest approach.
+    </div>
+  </div>
+</div>
+
+</div><!-- .page-content -->
+
+<div class="data-source-bar">
+  Sources: NASA Artemis II Press Kit &middot; poliastro.space &middot; astrometry.net &middot; NOAA Space Weather Prediction Center &middot; NASA O2O Optical Communications &middot; NASA Lunar Reconnaissance Orbiter Camera
+</div>
+
+<div class="nav-links" style="border-top:1px solid var(--border);">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <a href="watch.html">Watch</a> &middot;
+  <strong style="color:var(--orion-silver);">DIY Projects</strong>
+</div>
+
+<div class="page-footer">
+  Artemis II &middot; Mission 1.190 &middot; NASA Exploration Systems Development &middot;
+  Data: NASA, ESA, CSA, JPL &middot; <a href="RESEARCH.md">Research Baseline</a> &middot;
+  tibsfox.com/Research/NASA/artemis-ii/
+</div>
+
+</body>
+</html>

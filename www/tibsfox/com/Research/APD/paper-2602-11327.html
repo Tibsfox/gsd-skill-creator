@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Threat Modeling: MCP/A2A/Agora/ANP &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Security Threat Modeling Across 4 Agent Protocols</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-security">Protocol Comparison</span></div>
+      <h3>Security Threat Modeling: MCP, A2A, Agora, ANP</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2602.11327" target="_blank"><span class="arxiv-id">2602.11327</span></a></p>
+      <p><strong>Authors:</strong> Anbiaee et al.</p>
+      <p><strong>Date:</strong> February 2026 &middot; <strong>Categories:</strong> cs.CR, cs.DC</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>Comparative threat modeling across four agent communication protocols using STRIDE-based analysis. MCP optimizes for tool integration but lacks built-in mutual authentication. A2A provides stronger identity guarantees at higher latency. Agora enables marketplace discovery at the cost of trust-on-first-use vulnerabilities. ANP offers the most complete security model but has the lowest adoption. The paper identifies 12 protocol-level risks across creation, operation, and update lifecycle phases.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number">12</span> protocol-level risks identified across 4 agent communication protocols</li>
+      <li><span class="key-number">4</span> lifecycle phases analyzed: creation, operation, update, and discovery</li>
+      <li>MCP scores worst on Spoofing and Elevation of Privilege due to trust-the-transport design</li>
+      <li>ANP scores worst on Denial of Service due to complex handshake requirements</li>
+      <li>No single protocol provides complete security &mdash; layering is required</li>
+      <li>First protocol-centric risk assessment framework for agentic systems</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Protocol</th><th>Primary Use</th><th>Auth Model</th><th>Worst STRIDE</th></tr></thead>
+      <tbody>
+        <tr><td>MCP</td><td>Tool integration</td><td>Transport-level only</td><td>Spoofing, Elevation</td></tr>
+        <tr><td>A2A</td><td>Inter-agent trust</td><td>Mutual authentication</td><td>Information Disclosure</td></tr>
+        <tr><td>Agora</td><td>Marketplace discovery</td><td>Trust-on-first-use</td><td>Tampering</td></tr>
+        <tr><td>ANP</td><td>Agent networking</td><td>Full identity model</td><td>Denial of Service</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>Validates our multi-protocol approach: MCP for tool binding, with trust-relationship.ts providing the mutual authentication layer that MCP lacks. The wrong-provider tool execution measurement directly applies to our skill loading &mdash; we should verify skill provider identity, not just skill content. The lifecycle phase model (creation/operation/update) maps to our skill installation, execution, and update workflows.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (227 projects, 246-project corpus)</h4>
+      <span class="ref-tag">DHP &mdash; DHCP Protocol</span>
+      <span class="ref-tag">DNS &mdash; DNS Protocol</span>
+      <span class="ref-tag">TCP &mdash; TCP/IP Protocol</span>
+      <span class="ref-tag">SRD &mdash; SSH &amp; Remote Desktop</span>
+      <span class="ref-tag">OAA &mdash; Operations Automation</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2503-23278.html">MCP Landscape: 16 Threats, 4 Attacker Categories</a></li>
+        <li><a href="paper-2504-08623.html">Enterprise MCP: IAM &amp; Zero-Trust</a></li>
+        <li><a href="paper-2604-04426.html">ShieldNet: Network-Level Guardrails</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2602.11327 &middot; Protocol Security Comparison</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise MCP Security &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Enterprise MCP Security: IAM &amp; Zero-Trust</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Paper Card -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-security">MCP Security</span></div>
+      <h3>Enterprise-Grade Security for the Model Context Protocol</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2504.08623" target="_blank"><span class="arxiv-id">2504.08623</span></a></p>
+      <p><strong>Authors:</strong> Narajala, Habler</p>
+      <p><strong>Date:</strong> April 2025 &middot; <strong>Categories:</strong> cs.CR, cs.AI</p>
+    </div>
+
+    <!-- Abstract -->
+    <h2>Abstract</h2>
+    <p>Enterprise MCP deployments require IAM integration with Azure AD, Okta, and SAML/OIDC federation. This paper establishes a zero-trust architecture pattern where every tool invocation must pass through identity verification, session binding, and permission scoping &mdash; treating MCP servers as first-class security principals rather than transparent proxies. The paper proposes structured approval workflows incorporating security, data governance, privacy, and legal considerations, with periodic recertification of deployed tools.</p>
+
+    <!-- Key Findings -->
+    <h2>Key Findings</h2>
+    <ol>
+      <li>MCP servers must be treated as <strong>first-class security principals</strong> with per-tool permission manifests declaring required scopes</li>
+      <li>Session-bound tokens that expire with the agent's context window prevent credential leakage across sessions</li>
+      <li>Audit trails must link every tool invocation to both the requesting agent and the authorizing user</li>
+      <li>Break-glass procedures for emergency access generate elevated alerts while bypassing normal approval</li>
+      <li>Without IAM federation, MCP servers become <strong>privilege escalation vectors</strong> inheriting ambient credentials</li>
+    </ol>
+
+    <!-- Methodology -->
+    <h2>Methodology</h2>
+    <p>Architecture analysis of enterprise MCP deployment patterns, examining IAM integration requirements across Azure AD and Okta identity providers. The authors propose a four-component security architecture: per-tool permission manifests, session-bound tokens, audit trail linking, and break-glass procedures. Evaluated against existing enterprise API management patterns to identify gaps.</p>
+    <p>The evaluation methodology compares MCP security requirements against established patterns from OAuth 2.0, SAML federation, and OIDC flows. Each proposed component is assessed for compatibility with existing enterprise identity infrastructure, deployment complexity, and operational overhead. The paper also analyzes failure modes when individual components are missing.</p>
+
+    <!-- Results -->
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Component</th><th>Function</th><th>Gap Without It</th></tr></thead>
+      <tbody>
+        <tr><td>Permission manifests</td><td>Per-tool scope declarations</td><td>Ambient credential inheritance</td></tr>
+        <tr><td>Session tokens</td><td>Context-window-scoped auth</td><td>Cross-session credential leakage</td></tr>
+        <tr><td>Audit trails</td><td>Agent+user provenance linking</td><td>Untraceable tool invocations</td></tr>
+        <tr><td>Break-glass</td><td>Emergency bypass with alerts</td><td>All-or-nothing access control</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Implications -->
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <h3>Direct Relevance</h3>
+      <p>Directly relevant to gsd-skill-creator's security-hygiene skill and the trust-relationship system. Our trust model already separates identity from capability &mdash; this paper validates the need for per-tool permission manifests (analogous to our skill permission declarations) and session-scoped credentials.</p>
+      <h3>Pattern Mapping</h3>
+      <ul>
+        <li><strong>Permission manifests</strong> &rarr; Our skill permission declarations in .claude/skills/</li>
+        <li><strong>Session-bound tokens</strong> &rarr; Context-window-scoped agent identity in beads-state</li>
+        <li><strong>Audit trails</strong> &rarr; Hook-based invocation logging in PreToolUse/PostToolUse</li>
+        <li><strong>Break-glass</strong> &rarr; Security-hygiene skill's emergency override pattern</li>
+      </ul>
+      <h3>Future Work</h3>
+      <p>Enterprise IAM integration should inform FoxCompute's authentication layer. The SAML/OIDC federation model provides a template for cross-organization skill sharing in our planned skill marketplace.</p>
+    </div>
+
+    <!-- Corpus Cross-References -->
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (6 projects, 246-project corpus)</h4>
+      <span class="ref-tag">CFU &mdash; ComfyUI Integration</span>
+      <span class="ref-tag">CGI &mdash; Caliber Integration</span>
+      <span class="ref-tag">MCR &mdash; Minecraft RAG</span>
+      <span class="ref-tag">MDS &mdash; Markup &amp; Data Flow</span>
+      <span class="ref-tag">MGU &mdash; Module Governance</span>
+      <span class="ref-tag">PSC &mdash; Political Science &amp; Complex Plane</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2511-20920.html">Securing MCP: Risks, Controls, Governance</a></li>
+        <li><a href="paper-2602-11327.html">Security Threat Modeling: MCP/A2A/Agora/ANP</a></li>
+        <li><a href="paper-2503-23278.html">MCP Landscape Survey</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2504.08623 &middot; Enterprise MCP Security</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

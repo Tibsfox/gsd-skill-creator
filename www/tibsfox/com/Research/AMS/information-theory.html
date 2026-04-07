@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Information Theory &mdash; Artemis Math &amp; Science</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ams">
+  <header>
+    <h1>Information Theory</h1>
+    <div class="subtitle">DPI, Shannon, Mutual Information, Token Budgets &mdash; Artemis Math &amp; Science</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="information-theory.html" class="active">Info Theory</a>
+      <a href="complex-analysis.html">Complex Analysis</a>
+      <a href="graph-theory.html">Graph Theory</a>
+      <a href="optimization.html">Optimization</a>
+      <a href="probability-statistics.html">Probability</a>
+      <a href="dynamical-systems.html">Dynamical Systems</a>
+      <a href="control-theory.html">Control Theory</a>
+      <a href="signal-processing.html">Signal Processing</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Information theory provides the formal language for understanding why single agents can outperform multi-agent chains, how token budgets constrain communication bandwidth, and where context compression necessarily loses signal. The Data Processing Inequality is the foundational result.
+    </blockquote>
+
+    <!-- MODULE OVERVIEW -->
+
+    <h2>Module Overview</h2>
+
+    <div class="card">
+      <p>This module formalizes five information-theoretic concepts that emerged from agentic technology research during the Artemis II mission: the Data Processing Inequality as proof of single-agent advantage, Shannon channel capacity as a model for token budget limits, mutual information as the measure of agent communication quality, token budgets as information bandwidth, and context compression as quantifiable information loss.</p>
+    </div>
+
+    <!-- KEY MATHEMATICAL CONCEPTS -->
+
+    <h2>Key Mathematical Concepts</h2>
+
+    <h3>Data Processing Inequality (DPI)</h3>
+    <div class="formula-block">
+      I(Y; C) &ge; I(Y; M)<br><br>
+      For any Markov chain X &rarr; Y &rarr; Z:<br>
+      I(X; Y) &ge; I(X; Z)<br><br>
+      Processing cannot create information &mdash; only destroy or preserve it.
+    </div>
+    <p>The DPI proves that when a query Y passes through a coordinator C to reach the model M, mutual information can only decrease. A single agent with direct access to context preserves more information than a multi-agent relay chain. This result from Cover &amp; Thomas underpins the finding in arXiv:2604.02460 that single-agent LLMs outperform multi-agent systems on multi-hop reasoning.</p>
+
+    <h3>Shannon Channel Capacity</h3>
+    <div class="formula-block">
+      C = max<sub>p(x)</sub> I(X; Y)<br><br>
+      For a noisy channel with input X and output Y,<br>
+      capacity C is the supremum of mutual information<br>
+      over all possible input distributions p(x).
+    </div>
+    <p>Token budgets in LLM systems are analogous to channel capacity. The context window defines a hard bandwidth limit. Every token consumed by system prompts, tool outputs, or conversation history reduces the remaining capacity for task-relevant information. Shannon&rsquo;s 1948 theorem gives the theoretical ceiling.</p>
+
+    <h3>Mutual Information in Agent Communication</h3>
+    <div class="formula-block">
+      I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)<br><br>
+      = &sum;<sub>x,y</sub> p(x,y) log [ p(x,y) / (p(x)p(y)) ]
+    </div>
+    <p>When two agents exchange messages, mutual information quantifies how much one agent&rsquo;s state tells us about the other&rsquo;s. Low mutual information between coordinator and worker indicates a lossy handoff &mdash; the worker is operating on incomplete context. High mutual information means the communication channel is efficient.</p>
+
+    <h3>Context Compression and Information Loss</h3>
+    <p>Compressing a 200K-token context into a 4K-token summary necessarily discards information. The rate-distortion function <span class="formula">R(D)</span> gives the minimum bit rate needed to represent a source within distortion D. In agentic systems, aggressive context compression trades fidelity for bandwidth, and the DPI guarantees the compressed version can never contain more task-relevant information than the original.</p>
+
+    <!-- CONNECTIONS TO AGENTIC TECHNOLOGIES -->
+
+    <h2>Connections to Agentic Technologies</h2>
+
+    <div class="card">
+      <ul>
+        <li><strong>Single vs multi-agent:</strong> arXiv:2604.02460 proves information-theoretically that each relay hop in a multi-agent chain loses mutual information (DPI)</li>
+        <li><strong>OrgAgent token reduction:</strong> 74.52% fewer tokens via hierarchical routing &mdash; information is directed, not broadcast (arXiv:2604.01020)</li>
+        <li><strong>Token budget chipset:</strong> The gsd-skill-creator token-budget skill enforces Shannon-like capacity constraints on convoy execution</li>
+        <li><strong>LightRAG:</strong> Graph-layer retrieval above vector embeddings increases mutual information between query and retrieved context</li>
+        <li><strong>Context engineering formula:</strong> &ldquo;Define output first, construct start state&rdquo; maximizes I(input; desired_output)</li>
+      </ul>
+    </div>
+
+    <!-- CORPUS CROSS-REFERENCE -->
+
+    <h2>Corpus Cross-Reference</h2>
+
+    <p>225 projects identified across the 242-project PNW Research Series corpus. 7 keyword matches, 2 knowledge domains (general, ai).</p>
+
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>|z|</th></tr></thead>
+      <tbody>
+        <tr><td>TKN</td><td>Token Economics Research</td><td>general</td><td>1.291</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>general</td><td>0.183</td></tr>
+        <tr><td>MCR</td><td>Minecraft World Data as RAG</td><td>general</td><td>0.078</td></tr>
+      </tbody>
+    </table>
+
+    <div class="formula-block">
+      Complex plane state: z = 0.1672 + 0.1135i<br>
+      |z| = 0.2021 (magnitude &mdash; research depth)<br>
+      arg(z) = 0.5964 rad (phase &mdash; breadth/depth balance)
+    </div>
+
+    <p><strong>Knowledge gaps:</strong> Low corpus magnitude (0.20) indicates information theory is under-researched relative to the corpus. 165 related projects have shallow coverage. Strong opportunities for cross-domain synthesis between the general and ai domains.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="optimization.html">Optimization &mdash; token budget constraints</a></li>
+        <li><a href="signal-processing.html">Signal Processing &mdash; noise vs signal</a></li>
+        <li><a href="complex-analysis.html">Complex Analysis &mdash; corpus state mapping</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Module 1: Information Theory &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

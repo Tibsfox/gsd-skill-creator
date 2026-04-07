@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II &mdash; Canada &amp; CSA</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+  --canada-red: #FF1C1C;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(255,28,28,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+.sub-nav {
+  display:flex; justify-content:center; flex-wrap:wrap; gap:0.3rem 1.2rem;
+  padding:0.5rem 2rem; font-size:0.75rem;
+  background: var(--void); border-bottom:1px solid var(--border);
+}
+.sub-nav a { color: var(--orion-silver); }
+.sub-nav a:hover { color: var(--artemis-gold); }
+.sub-nav .active { color: var(--artemis-gold); border-bottom:1px solid var(--artemis-gold); }
+
+/* === CONTENT SECTIONS === */
+.content-section { max-width:1000px; margin:0 auto; padding:2rem 1.5rem; }
+.content-section + .content-section { padding-top:0; }
+.content-section > h2 {
+  font-family:Georgia,serif; font-size:1.1rem; font-weight:400; color:#fff;
+  letter-spacing:0.04em; margin-bottom:0.3rem;
+}
+.content-section > .section-sub {
+  font-size:0.7rem; color:var(--dim); margin-bottom:1.5rem;
+  text-transform:uppercase; letter-spacing:0.1em;
+}
+
+/* === INFO CARD === */
+.info-card {
+  background: var(--panel); border:1px solid var(--border);
+  padding:1.5rem 1.8rem; margin-bottom:1.2rem;
+  position:relative;
+}
+.info-card::before {
+  content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+}
+.info-card.canada::before { background: var(--canada-red); }
+.info-card.robotics::before { background: var(--orion-silver); }
+.info-card.gateway::before { background: var(--artemis-blue); }
+.info-card.accords::before { background: var(--artemis-gold); }
+.info-card.industry::before { background: rgba(255,255,255,0.25); }
+.info-card.culture::before { background: var(--canada-red); }
+
+.card-header { display:flex; align-items:baseline; flex-wrap:wrap; gap:0.5rem 1rem; margin-bottom:0.8rem; }
+.info-card .name {
+  font-family:Georgia,serif; font-size:1.15rem; color:#fff; font-weight:400;
+}
+.role-tag {
+  font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;
+  padding:0.15rem 0.6rem; border-radius:2px; display:inline-block;
+}
+.role-tag.ms2 { background:rgba(184,192,204,0.12); color:var(--orion-silver); border:1px solid rgba(184,192,204,0.2); }
+.role-tag.backup { background:rgba(255,255,255,0.05); color:var(--dim); border:1px solid rgba(255,255,255,0.1); }
+.role-tag.heritage { background:rgba(184,192,204,0.12); color:var(--orion-silver); border:1px solid rgba(184,192,204,0.2); }
+.role-tag.future { background:rgba(11,61,145,0.25); color:#6fa8ff; border:1px solid rgba(11,61,145,0.4); }
+.role-tag.policy { background:rgba(196,163,90,0.2); color:var(--artemis-gold); border:1px solid rgba(196,163,90,0.3); }
+.role-tag.ind { background:rgba(255,255,255,0.05); color:var(--dim); border:1px solid rgba(255,255,255,0.1); }
+.role-tag.national { background:rgba(255,28,28,0.15); color:var(--canada-red); border:1px solid rgba(255,28,28,0.3); }
+
+.agency-line { font-size:0.75rem; color:var(--dim); margin-bottom:0.6rem; }
+.agency-line .agency { color: var(--orion-silver); }
+
+/* === DETAIL LIST === */
+.detail-list { padding-left:1rem; }
+.detail-item {
+  position:relative; padding-left:1.2rem; padding-bottom:0.6rem;
+  border-left:1px solid rgba(255,255,255,0.08);
+  font-size:0.8rem; color:rgba(255,255,255,0.6);
+}
+.detail-item:last-child { border-left-color:transparent; padding-bottom:0; }
+.detail-item::before {
+  content:''; position:absolute; left:-4px; top:0.35rem;
+  width:7px; height:7px; border-radius:50%;
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
+}
+.detail-item.highlight::before {
+  background: var(--artemis-gold); border-color: var(--artemis-gold);
+  box-shadow: 0 0 6px rgba(196,163,90,0.3);
+}
+.detail-item.canada-hl::before {
+  background: var(--canada-red); border-color: var(--canada-red);
+  box-shadow: 0 0 6px rgba(255,28,28,0.3);
+}
+.detail-item .label { color:var(--dim); font-size:0.7rem; min-width:3rem; display:inline-block; }
+.detail-item .event { color:#c8d0e0; }
+.detail-item .note { color:var(--dim); font-size:0.7rem; font-style:italic; display:block; margin-top:0.1rem; }
+
+/* === QUOTE BLOCK === */
+.quote-block {
+  background: var(--panel); border:1px solid var(--border);
+  border-left:3px solid var(--artemis-gold);
+  padding:1.2rem 1.5rem; margin:1.2rem 0;
+  font-size:0.85rem; color:rgba(255,255,255,0.7);
+  font-style:italic; line-height:1.7;
+  font-family:Georgia,serif;
+}
+.quote-block .attribution {
+  font-style:normal; font-size:0.7rem; color:var(--dim);
+  margin-top:0.6rem; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace;
+}
+
+/* === STATS ROW === */
+.stats-row {
+  display:flex; flex-wrap:wrap; gap:0.6rem 1.5rem;
+  margin-bottom:1rem; padding-bottom:0.8rem;
+  border-bottom:1px solid var(--border);
+}
+.stat-chip {
+  font-size:0.7rem; color:#c8d0e0;
+}
+.stat-chip .label { color:var(--dim); }
+.stat-chip .value { color:#fff; font-weight:500; }
+
+/* === FIRSTS GRID (reused for heritage) === */
+.heritage-grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:1px; background:rgba(255,255,255,0.03);
+}
+.heritage-card {
+  background: var(--panel); padding:1rem 1.2rem;
+  border-left:2px solid var(--orion-silver);
+}
+.heritage-card .heritage-title {
+  font-family:Georgia,serif; font-size:0.9rem; color:var(--orion-silver);
+  margin-bottom:0.3rem;
+}
+.heritage-card .heritage-desc { font-size:0.78rem; color:rgba(255,255,255,0.55); }
+.heritage-card .heritage-years { font-size:0.7rem; color:var(--dim); margin-top:0.3rem; }
+
+/* === CONTEXT PANEL === */
+.context-panel {
+  background: var(--panel); border:1px solid var(--border);
+  padding:1.2rem 1.5rem; font-size:0.8rem; color:rgba(255,255,255,0.55);
+  line-height:1.7;
+}
+.context-panel p { margin-bottom:0.8rem; }
+.context-panel p:last-child { margin-bottom:0; }
+
+/* === FOOTER === */
+.data-source-bar {
+  padding:0.4rem 2rem; text-align:center; font-size:0.65rem;
+  color:rgba(255,255,255,0.15); background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .content-section { max-width: 1300px; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .content-section { max-width: 1500px; }
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .info-card { padding:1.2rem; }
+  .stats-row { gap:0.4rem 1rem; }
+  .heritage-grid { grid-template-columns:1fr; }
+}
+@media(max-width:480px) {
+  .content-section { padding:1.5rem 1rem; }
+  .card-header { flex-direction:column; gap:0.3rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a> &middot;
+  <a href="../roadmap.html">Roadmap</a>
+</div>
+
+<div class="mission-header">
+  <h1>Canada &amp; CSA &mdash; Our Partner at the Moon</h1>
+  <div class="subtitle">From Canadarm to the lunar frontier. Six decades of space partnership.</div>
+  <div class="catalog-id">Mission 1.190 &middot; Epoch 6: Artemis &middot; Canadian Space Agency</div>
+</div>
+
+<div class="sub-nav">
+  <a href="index.html">Tracker</a>
+  <a href="crew.html">Crew</a>
+  <a href="vehicle.html">Vehicle</a>
+  <a href="science.html">Science</a>
+  <a href="math.html">Math</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="watch.html">Watch</a>
+  <a class="active" href="canada-csa.html">Canada</a>
+</div>
+
+<!-- ============================================================ -->
+<!--  JEREMY HANSEN                                                -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>Jeremy Hansen &mdash; First Canadian in Deep Space</h2>
+  <div class="section-sub">Mission Specialist 2 &middot; Canadian Space Agency &middot; Royal Canadian Air Force</div>
+
+  <div class="info-card canada">
+    <div class="card-header">
+      <a href="crew-hansen.html" class="name" style="color:#fff;">Colonel Jeremy Hansen</a>
+      <span class="role-tag ms2">Mission Specialist 2</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">CSA</span> &middot; Canadian Forces Colonel &middot; CF-18 Hornet fighter pilot &middot; London, Ontario
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Selection: </span><span class="value">CSA 2009</span></div>
+      <div class="stat-chip"><span class="label">Spaceflight: </span><span class="value">1st (and it's the Moon)</span></div>
+      <div class="stat-chip"><span class="label">ISS role: </span><span class="value">CAPCOM (Exp. 44/45)</span></div>
+      <div class="stat-chip"><span class="label">Analog: </span><span class="value">NEEMO 19 aquanaut</span></div>
+    </div>
+    <div class="detail-list">
+      <div class="detail-item">
+        <span class="event">Royal Canadian Air Force fighter pilot &mdash; CF-18 Hornet</span>
+        <span class="note">Fighter weapons instructor, top graduate of tactical fighter course</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">First Canadian to lead a NASA astronaut class</span>
+        <span class="note">Unprecedented international leadership role within NASA's astronaut corps</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Served extensively as CAPCOM (Capsule Communicator) for ISS missions</span>
+        <span class="note">Expeditions 44 and 45 &mdash; the voice between ground control and crew</span>
+      </div>
+      <div class="detail-item canada-hl">
+        <span class="event">First spaceflight &mdash; and it's a trip to the Moon</span>
+        <span class="note">No training flights, no ISS warmup. Straight to deep space.</span>
+      </div>
+      <div class="detail-item canada-hl">
+        <span class="event">First non-American to fly beyond low Earth orbit</span>
+        <span class="note">Every previous beyond-LEO crew was exclusively American (Apollo, 1968&ndash;1972)</span>
+      </div>
+      <div class="detail-item canada-hl">
+        <span class="event">First non-American to travel to the Moon</span>
+        <span class="note">Breaking a boundary that stood for over half a century</span>
+      </div>
+      <div class="detail-item highlight">
+        <span class="event">Two live space-to-Earth video connections with Canadians during mission</span>
+        <span class="note">Scheduled live downlinks connecting the crew to Canadian audiences</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Conducted 41-minute manual control evaluation on Flight Day 4 (with Koch)</span>
+        <span class="note">Hands-on piloting of Orion spacecraft &mdash; testing manual override capabilities</span>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      &ldquo;From the cabin of Integrity here, as we surpass the furthest distance humans have ever traveled from planet Earth&hellip;&rdquo;
+      <div class="attribution">&mdash; Jeremy Hansen, lunar flyby, aboard Orion CM-003 &ldquo;Integrity&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  JENNI GIBBONS                                                -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>Jenni Gibbons &mdash; Backup &amp; CAPCOM</h2>
+  <div class="section-sub">Backup crew member &middot; Canadian Space Agency &middot; Artemis ground control</div>
+
+  <div class="info-card canada">
+    <div class="card-header">
+      <a href="crew-gibbons.html" class="name" style="color:#fff;">Jenni Gibbons</a>
+      <span class="role-tag backup">Backup</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">CSA</span> &middot; Flight Test Engineer &middot; Selected by CSA 2017
+    </div>
+    <div class="detail-list">
+      <div class="detail-item">
+        <span class="event">Serves as backup crew member for Artemis II</span>
+        <span class="note">Ready to step into the mission specialist role if needed</span>
+      </div>
+      <div class="detail-item highlight">
+        <span class="event">Active as Artemis CAPCOM from ground control throughout the flight</span>
+        <span class="note">Voice of mission control for Canadian crew communications</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Represents Canada's deep bench of astronaut capability</span>
+        <span class="note">CSA's 2017 recruitment class &mdash; flight test engineering background from NRC Canada</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  CANADARM HERITAGE                                            -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>The Canadarm Heritage</h2>
+  <div class="section-sub">Four decades of robotic arms that built the space program</div>
+
+  <div class="heritage-grid">
+    <div class="heritage-card">
+      <div class="heritage-title">Canadarm</div>
+      <div class="heritage-desc">The original Shuttle Remote Manipulator System. Flew on 90 Space Shuttle missions, deployed the Hubble Space Telescope, and assembled the International Space Station piece by piece.</div>
+      <div class="heritage-years">1981&ndash;2011 &middot; 90 missions &middot; 15.2 meters</div>
+    </div>
+    <div class="heritage-card">
+      <div class="heritage-title">Canadarm2</div>
+      <div class="heritage-desc">The ISS robotic arm. 17.6 meters of articulated precision, used for every major ISS assembly task &mdash; module berthing, cargo capture, crew support, and external maintenance.</div>
+      <div class="heritage-years">2001&ndash;present &middot; 17.6 meters &middot; ISS permanent installation</div>
+    </div>
+    <div class="heritage-card">
+      <div class="heritage-title">Dextre (SPDM)</div>
+      <div class="heritage-desc">The two-armed Special Purpose Dexterous Manipulator. Performs delicate external ISS maintenance that would otherwise require risky and time-consuming spacewalks.</div>
+      <div class="heritage-years">2008&ndash;present &middot; dual-arm dexterous robot</div>
+    </div>
+    <div class="heritage-card">
+      <div class="heritage-title">The Ticket to Deep Space</div>
+      <div class="heritage-desc">This robotics expertise &mdash; unmatched globally &mdash; is Canada's contribution to deep space exploration. The Canadarm legacy directly secured Canada's seat at the Moon.</div>
+      <div class="heritage-years">40+ years of space robotics heritage</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  CANADARM3 — GATEWAY                                          -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>Canadarm3 &mdash; Gateway Contribution</h2>
+  <div class="section-sub">Next-generation autonomous robotics for the Lunar Gateway station</div>
+
+  <div class="info-card gateway">
+    <div class="card-header">
+      <span class="name">Canadarm3</span>
+      <span class="role-tag future">Gateway System</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">CSA / MDA</span> &middot; Lunar Gateway &middot; Next-generation robotic system
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Builder: </span><span class="value">MDA (MacDonald, Dettwiler and Associates)</span></div>
+      <div class="stat-chip"><span class="label">Autonomy: </span><span class="value">AI-assisted operations</span></div>
+      <div class="stat-chip"><span class="label">Signal delay: </span><span class="value">Can operate without real-time control</span></div>
+    </div>
+    <div class="detail-list">
+      <div class="detail-item">
+        <span class="event">Next-generation robotic system for the Gateway lunar station</span>
+        <span class="note">Smaller, smarter, and more autonomous than its predecessors</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">AI-assisted operations &mdash; can work without real-time human control</span>
+        <span class="note">Essential capability: Earth-Moon signal delay makes teleoperation impractical for precision tasks</span>
+      </div>
+      <div class="detail-item canada-hl">
+        <span class="event">Canada's Canadarm3 contribution secured Jeremy Hansen's seat on Artemis II</span>
+        <span class="note">The direct link between hardware commitment and crew assignment</span>
+      </div>
+      <div class="detail-item highlight">
+        <span class="event">Future Canadian astronaut missions to Gateway also secured through this agreement</span>
+        <span class="note">Canadarm3 guarantees ongoing Canadian presence in deep space operations</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  ARTEMIS ACCORDS & POLICY                                     -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>Artemis Accords &amp; Canadian Space Policy</h2>
+  <div class="section-sub">International framework for peaceful lunar exploration</div>
+
+  <div class="info-card accords">
+    <div class="card-header">
+      <span class="name">Artemis Accords</span>
+      <span class="role-tag policy">Policy Framework</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">CSA / NASA</span> &middot; Signed 2020 &middot; Multilateral space cooperation
+    </div>
+    <div class="detail-list">
+      <div class="detail-item highlight">
+        <span class="event">Canada was one of the original Artemis Accords signatories (2020)</span>
+        <span class="note">Among the first nations to commit to the principles of peaceful lunar exploration</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Accords establish principles for peaceful, transparent lunar exploration</span>
+        <span class="note">Interoperability, emergency assistance, registration of space objects, scientific data sharing</span>
+      </div>
+      <div class="detail-item canada-hl">
+        <span class="event">Canada committed C$2.05 billion over 24 years to lunar exploration</span>
+        <span class="note">Long-term national investment in deep space infrastructure and capability</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">CSA Deep Space Health Program: researching astronaut health for long-duration missions</span>
+        <span class="note">Radiation exposure, bone density, cardiovascular health, and psychological factors beyond LEO</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  CANADIAN SPACE INDUSTRY                                      -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>Canadian Space Industry</h2>
+  <div class="section-sub">The companies and institutions behind Canada's space capability</div>
+
+  <div class="info-card industry">
+    <div class="card-header">
+      <span class="name">Industry &amp; Research</span>
+      <span class="role-tag ind">National Ecosystem</span>
+    </div>
+    <div class="detail-list">
+      <div class="detail-item canada-hl">
+        <span class="event">MDA (MacDonald, Dettwiler and Associates)</span>
+        <span class="note">Builder of all three Canadarms. Now designing and building Canadarm3 for Gateway.</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Telesat</span>
+        <span class="note">LEO broadband constellation experience &mdash; communications infrastructure for deep space support</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Canadian universities: contributing research instruments and analysis</span>
+        <span class="note">University of Alberta, McGill, Western, Toronto &mdash; space science and engineering research programs</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Strong heritage in Earth observation (RADARSAT series)</span>
+        <span class="note">RADARSAT-1 (1995), RADARSAT-2 (2007), RADARSAT Constellation Mission (2019) &mdash; synthetic aperture radar expertise</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  CULTURAL SIGNIFICANCE                                        -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <h2>Cultural Significance</h2>
+  <div class="section-sub">A national moment for Canada</div>
+
+  <div class="info-card culture">
+    <div class="card-header">
+      <span class="name">Canada at the Moon</span>
+      <span class="role-tag national">National Moment</span>
+    </div>
+    <div class="detail-list">
+      <div class="detail-item canada-hl">
+        <span class="event">Estimated 8 million Canadians watched launch coverage</span>
+        <span class="note">Roughly one in five Canadians tuned in &mdash; the largest space viewership in Canadian history</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Schools across Canada holding Artemis watch parties and curriculum activities</span>
+        <span class="note">CSA-supported educational programming from coast to coast to coast</span>
+      </div>
+      <div class="detail-item highlight">
+        <span class="event">Hansen carried Canadian symbols and artifacts aboard Orion</span>
+        <span class="note">National tokens representing Canada's presence at the farthest point humans have ever traveled</span>
+      </div>
+      <div class="detail-item">
+        <span class="event">Bilingual mission communications (English/French)</span>
+        <span class="note">Reflecting Canada's official bilingualism in humanity's return to the Moon</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  PARTNERSHIP CONTEXT                                          -->
+<!-- ============================================================ -->
+
+<div class="content-section">
+  <div class="context-panel">
+    <p>
+      Canada's role in Artemis II is the culmination of a partnership that began with the Space Shuttle program in 1981. The original Canadarm transformed how NASA assembled and serviced hardware in orbit, and its successors &mdash; Canadarm2 and Dextre &mdash; became indispensable to ISS operations. When NASA designed the Artemis architecture, Canada's commitment to build Canadarm3 for the Gateway station made the country an essential partner in the return to the Moon.
+    </p>
+    <p>
+      That commitment is what put Jeremy Hansen on the crew. His selection as Mission Specialist 2 was not symbolic &mdash; it was contractual, tied directly to Canada's C$2.05 billion investment in lunar exploration infrastructure. Hansen brings fighter pilot discipline, CAPCOM experience, and NEEMO underwater analog training to a crew already rich in operational expertise. His 41-minute manual control evaluation on Flight Day 4, conducted alongside Christina Koch, demonstrated that the international dimension of Artemis is substantive, not ceremonial.
+    </p>
+    <p>
+      The Canadian Space Agency's astronaut bench extends beyond Hansen. Jenni Gibbons, selected by CSA in 2017, served as both backup crew member and active CAPCOM throughout the mission. The agreement that secured Canadarm3 also guarantees future Canadian astronaut assignments to Gateway, ensuring that Canada's presence in deep space exploration will continue well beyond Artemis II.
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  FOOTER                                                       -->
+<!-- ============================================================ -->
+
+<div class="data-source-bar">
+  Sources: Canadian Space Agency &middot; NASA Artemis II Mission Page &middot; MDA Space &middot; Government of Canada Space Policy &middot; Artemis Accords
+</div>
+
+<div class="page-footer">
+  Artemis II &middot; Canada &amp; CSA &middot; NASA / CSA &middot;
+  <a href="index.html">Mission Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="RESEARCH.md">Research Baseline</a> &middot;
+  tibsfox.com/Research/NASA/artemis-ii/canada-csa.html
+</div>
+
+</body>
+</html>

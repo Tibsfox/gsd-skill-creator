@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIY Science Projects &mdash; Artemis Learning Resources</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alr">
+  <header>
+    <h1>DIY Science Projects</h1>
+    <div class="subtitle">Weather Stations, Citizen Science, Ecology Plots, Radio Astronomy, Water Quality, Soil Analysis, Microscopy</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ai-programming.html">AI Programming</a>
+      <a href="diy-electronics.html">DIY Electronics</a>
+      <a href="study-guides.html">Study Guides</a>
+      <a href="live-expansion.html">LIVE Pages</a>
+      <a href="open-math-problems.html">Math Problems</a>
+      <a href="open-cs-problems.html">CS Problems</a>
+      <a href="open-physics-problems.html">Physics Problems</a>
+      <a href="open-science.html" class="active">DIY Science</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Seven citizen science and DIY science projects rooted in the PNW landscape. Each project follows established scientific methodology, contributes data to real research programs, and connects to the 33 related projects in the Artemis II corpus. The ecology cluster (7 projects: AWF, AVI, CAS, ECO, MAM) provides the strongest domain connections.
+    </blockquote>
+
+    <div class="safety-warning">
+      <strong>Citizen science protocols:</strong> All projects below follow established methodology from their respective scientific communities. Data contributed to research programs must meet quality standards. Follow local regulations for specimen collection and waterway access.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 1: Weather Station                                    -->
+    <!-- ============================================================ -->
+
+    <h2>1. Weather Station Build &mdash; Raspberry Pi + BME280</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-beginner">Beginner</span> <span class="source-badge">MUK</span> <span class="source-badge">MRW</span></p>
+      <p>Build a personal weather station that feeds data to the CWOP (Citizen Weather Observer Program) network and connects to the Mukilteo convergence zone monitoring infrastructure.</p>
+      <h4>Bill of Materials</h4>
+      <ul>
+        <li>Raspberry Pi 4 or Pi Zero 2 W (WiFi required)</li>
+        <li>BME280 sensor (temperature, humidity, barometric pressure) via I2C</li>
+        <li>Wind speed: anemometer with reed switch (Davis 6410 or DIY)</li>
+        <li>Rain gauge: tipping bucket (Davis 7852 or 3D-printed)</li>
+        <li>Stevenson screen or radiation shield for sensor housing</li>
+      </ul>
+      <h4>Data Pipeline</h4>
+      <ul>
+        <li>Read BME280 via Python <code>smbus2</code> library at 1-minute intervals</li>
+        <li>Store locally in SQLite with timestamp, temp, humidity, pressure, wind, rain</li>
+        <li>Upload to CWOP via APRS-IS protocol (requires CWOP station ID registration)</li>
+        <li>Optional: feed to Weather Underground and PWSWeather for redundancy</li>
+        <li>Integration with LIVE page weather station network</li>
+      </ul>
+      <h4>What You Learn</h4>
+      <ul>
+        <li>I2C bus communication and sensor calibration</li>
+        <li>APRS packet format and internet gateway protocol</li>
+        <li>Time-series data management and quality control</li>
+        <li>Microclimate effects: urban heat island, rain shadow, convergence zone behavior</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 2: Forage Fish Survey                                 -->
+    <!-- ============================================================ -->
+
+    <h2>2. Citizen Science Forage Fish Spawning Survey</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-intermediate">Intermediate</span> <span class="source-badge">SPS</span> <span class="source-badge">BEACH</span></p>
+      <p>Participate in the WDFW (Washington Department of Fish and Wildlife) forage fish spawning survey, collecting beach sediment samples to identify surf smelt and sand lance eggs.</p>
+      <h4>Equipment</h4>
+      <ul>
+        <li>Sample collection: plastic scraper, labeled ziplock bags, cooler with ice</li>
+        <li>Field notebook, GPS coordinates (phone GPS sufficient), tide chart</li>
+        <li>Microscope: 40x stereomicroscope minimum for egg identification</li>
+        <li>Reference cards: WDFW forage fish egg identification guide</li>
+      </ul>
+      <h4>Protocol</h4>
+      <ol>
+        <li>Sample at beach during low tide (+0.0 to -2.0 ft MLLW preferred)</li>
+        <li>Collect upper 2cm of sediment at the high-tide wrack line</li>
+        <li>Transport samples on ice within 24 hours to lab or home microscope</li>
+        <li>Sort sediment through 1mm and 0.5mm sieves; examine under microscope</li>
+        <li>Identify eggs by size, shape, and adhesion: surf smelt (~1mm, sticky) vs sand lance (~0.7mm, buried)</li>
+        <li>Report findings to WDFW Forage Fish Program</li>
+      </ol>
+      <h4>Timing</h4>
+      <p>Surf smelt: October&ndash;March (winter spawners). Sand lance: November&ndash;February. Sample during spring low tides for best access. Coordinate with tide prediction page (LIVE module).</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 3: Ecology Plots                                      -->
+    <!-- ============================================================ -->
+
+    <h2>3. Backyard Ecology Plot Monitoring</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-beginner">Beginner</span> <span class="source-badge">ECO</span> <span class="source-badge">AVI</span></p>
+      <p>Establish a permanent 10m &times; 10m ecology monitoring plot in your yard or a nearby natural area, tracking species composition, diversity, and seasonal phenology.</p>
+      <h4>Equipment</h4>
+      <ul>
+        <li>Four corner stakes (rebar or wooden), 10m measuring tape</li>
+        <li>Plant identification guide (PNW: Pojar &amp; MacKinnon &ldquo;Plants of the Pacific Northwest Coast&rdquo;)</li>
+        <li>Quadrat frame (0.5m &times; 0.5m PVC pipe)</li>
+        <li>Camera for photo documentation, field notebook</li>
+        <li>Optional: iNaturalist app for AI-assisted species identification</li>
+      </ul>
+      <h4>Protocol</h4>
+      <ol>
+        <li>Establish plot with permanent corner markers; record GPS coordinates</li>
+        <li>Monthly survey: identify all plant species, estimate percent cover per quadrat</li>
+        <li>Seasonal phenology: record first bloom, leaf-out, fruiting, leaf-drop dates</li>
+        <li>Bird survey: 10-minute point count at plot center, monthly (connects to AVI project)</li>
+        <li>Invertebrate survey: pitfall traps (quarterly) for ground-dwelling arthropods</li>
+      </ol>
+      <h4>Data Contribution</h4>
+      <p>Submit observations to iNaturalist (species records), eBird (bird counts), and Nature&rsquo;s Notebook (phenology). All contribute to real ecological research databases.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 4: Radio Astronomy                                    -->
+    <!-- ============================================================ -->
+
+    <h2>4. Radio Astronomy &mdash; Hydrogen Line 1420 MHz</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-intermediate">Intermediate</span> <span class="source-badge">AMR</span> <span class="source-badge">MST</span></p>
+      <p>Detect the 21cm hydrogen emission line at 1420.405 MHz using an RTL-SDR receiver, confirming galactic hydrogen structure from your backyard.</p>
+      <h4>Equipment</h4>
+      <ul>
+        <li>RTL-SDR Blog V4 dongle (or better: Airspy Mini for improved dynamic range)</li>
+        <li>1420 MHz bandpass filter (SAW or cavity; essential to reject RFI)</li>
+        <li>Low-noise amplifier (LNA): Nooelec SAWbird+ H1 (filtered LNA in one unit)</li>
+        <li>Antenna: horn antenna (DIY from aluminum sheet) or parabolic dish (&ge;60cm)</li>
+        <li>Software: GNU Radio for signal processing, custom Python scripts for integration</li>
+      </ul>
+      <h4>What You Detect</h4>
+      <ul>
+        <li><strong>Galactic hydrogen:</strong> 21cm line emission from neutral hydrogen clouds in the Milky Way</li>
+        <li><strong>Doppler shift:</strong> line broadening reveals rotational velocity of galactic arms</li>
+        <li><strong>Galactic rotation curve:</strong> with multiple observations at different galactic longitudes, reconstruct the rotation curve that implied dark matter</li>
+      </ul>
+      <h4>Integration</h4>
+      <p>Connects to the RTL-SDR project (DIY Electronics module), the ISS tracker (LIVE module), and the Global Telescope Mesh Network corpus project. Data can be contributed to the DSPIRA (Digital Signal Processing in Radio Astronomy) educational program.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 5: Water Quality                                      -->
+    <!-- ============================================================ -->
+
+    <h2>5. Water Quality Testing &mdash; Puget Sound</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-intermediate">Intermediate</span> <span class="source-badge">AWF</span> <span class="source-badge">SPS</span></p>
+      <p>Establish a water quality monitoring station at a local stream or shoreline, measuring parameters critical to Puget Sound ecological health.</p>
+      <h4>Equipment</h4>
+      <ul>
+        <li>Dissolved oxygen: Hanna HI98193 meter or Winkler titration kit</li>
+        <li>pH: digital pH meter (calibrated) or colorimetric test strips</li>
+        <li>Temperature: digital thermometer (0.1&deg;C resolution)</li>
+        <li>Turbidity: Secchi disk (DIY: black/white painted disk on measuring line)</li>
+        <li>Nutrients: LaMotte or Hach test kits for nitrate, phosphate, ammonia</li>
+        <li>Fecal coliform: Coliscan Easygel (requires incubator at 35&deg;C for 24h)</li>
+      </ul>
+      <h4>Protocol</h4>
+      <ol>
+        <li>Select a consistent sampling location with safe access</li>
+        <li>Sample weekly, same time of day, same tidal state (if marine)</li>
+        <li>Record: date, time, weather, tide, air temp before water measurements</li>
+        <li>Measure in situ: DO, pH, temperature, turbidity, conductivity</li>
+        <li>Collect grab sample for nutrient and coliform analysis</li>
+      </ol>
+      <h4>Data Contribution</h4>
+      <p>Report to Puget Sound Stewardship &amp; Stormwater Program or King County DNRP water quality monitoring. Meets Ecology WAC 173-201A surface water quality standards for citizen science data.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 6: Soil Analysis                                      -->
+    <!-- ============================================================ -->
+
+    <h2>6. Soil Analysis for PNW Gardens</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-beginner">Beginner</span> <span class="source-badge">AGR</span> <span class="source-badge">ECO</span></p>
+      <p>Analyze your garden soil to understand PNW-specific conditions: acidic glacial till soils, clay content, organic matter, and mycorrhizal health.</p>
+      <h4>Equipment</h4>
+      <ul>
+        <li>Soil sampling tube or clean trowel and bags</li>
+        <li>pH meter or test kit (PNW soils typically pH 5.5&ndash;6.5)</li>
+        <li>Jar test for texture: sand, silt, clay proportions by sedimentation</li>
+        <li>WSU Extension soil test kit (mail-in for comprehensive analysis: $25)</li>
+        <li>Microscope (40&ndash;100x) for mycorrhizal hyphae observation</li>
+      </ul>
+      <h4>PNW-Specific Considerations</h4>
+      <ul>
+        <li><strong>Glacial till:</strong> dense compacted layer below topsoil common in Puget lowlands</li>
+        <li><strong>Acidity:</strong> PNW rainfall leaches calcium; most gardens need lime amendment</li>
+        <li><strong>Douglas fir duff:</strong> conifer needle decomposition creates acidic organic layer</li>
+        <li><strong>Mycorrhizal networks:</strong> native fungi critical for PNW forest ecology (connects to forest sim research)</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROJECT 7: Diatom Microscopy                                  -->
+    <!-- ============================================================ -->
+
+    <h2>7. Microscopy &mdash; Diatom Identification in Puget Sound</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-advanced">Advanced</span> <span class="source-badge">SPS</span> <span class="source-badge">AWF</span></p>
+      <p>Collect, prepare, and identify diatoms from Puget Sound water samples. Diatoms are single-celled algae with silica frustules (glass shells) that indicate water quality and ecological conditions.</p>
+      <h4>Equipment</h4>
+      <ul>
+        <li>Compound microscope: 400&ndash;1000x magnification with oil immersion lens</li>
+        <li>Plankton net (20 &mu;m mesh) or syringe filtration for water samples</li>
+        <li>Slides, coverslips, and Naphrax or Pleurax mounting medium</li>
+        <li>Hydrogen peroxide (30%) for cleaning frustules (remove organic matter)</li>
+        <li>Reference: &ldquo;Diatoms of North America&rdquo; (online database at diatoms.org)</li>
+      </ul>
+      <h4>Protocol</h4>
+      <ol>
+        <li>Collect 1L water sample from consistent location and depth</li>
+        <li>Filter through 20 &mu;m mesh; transfer concentrate to centrifuge tube</li>
+        <li>Clean with H<sub>2</sub>O<sub>2</sub> at 90&deg;C for 2 hours to remove organic material</li>
+        <li>Rinse 3x with distilled water by centrifugation</li>
+        <li>Mount on slide with permanent mounting medium; dry at 120&deg;C</li>
+        <li>Identify using valve morphology: shape, striae pattern, raphe structure</li>
+      </ol>
+      <h4>Indicator Species</h4>
+      <table>
+        <thead><tr><th>Genus</th><th>Habitat</th><th>Water Quality Indication</th></tr></thead>
+        <tbody>
+          <tr><td><em>Skeletonema</em></td><td>Marine plankton</td><td>Normal marine conditions</td></tr>
+          <tr><td><em>Chaetoceros</em></td><td>Marine plankton</td><td>Spring bloom indicator</td></tr>
+          <tr><td><em>Pseudo-nitzschia</em></td><td>Marine plankton</td><td>Potential domoic acid producer (HAB)</td></tr>
+          <tr><td><em>Didymosphenia</em></td><td>Freshwater benthic</td><td>Low-nutrient streams</td></tr>
+          <tr><td><em>Navicula</em></td><td>Ubiquitous</td><td>General water quality baseline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+
+    <div class="card">
+      <p>Pipeline analysis identified 33 related projects across 4 knowledge domains (general, ecology, governance, infrastructure). The ecology domain contributes 7 direct connections, the strongest cluster link among all ALR modules. Aggregate position <strong>z = 0.161 + 0.107i</strong> (|z| = 0.193).</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>AWF</td><td>Clean Air, Water &amp; Food</td><td>Ecology</td><td>Water quality, environmental monitoring</td></tr>
+        <tr><td>ECO</td><td>From Tahoma&rsquo;s Summit to the Salish Sea Floor</td><td>Ecology</td><td>PNW ecology, species identification</td></tr>
+        <tr><td>AVI</td><td>Wings of the Pacific Northwest</td><td>Ecology</td><td>Bird surveys, habitat monitoring</td></tr>
+        <tr><td>SPS</td><td>The Sound of Puget Sound</td><td>General</td><td>Marine ecology, tidal systems</td></tr>
+        <tr><td>BEACH</td><td>Water Access, Boating &amp; Fishing</td><td>General</td><td>Beach access, forage fish habitat</td></tr>
+        <tr><td>BNY</td><td>Bill Nye the Science Guy</td><td>General</td><td>Science education heritage</td></tr>
+        <tr><td>AGR</td><td>PNW Agriculture</td><td>General</td><td>Soil science, garden ecology</td></tr>
+        <tr><td>CAS</td><td>The Vertical Wilderness</td><td>Ecology</td><td>Forest ecology, mycorrhizal networks</td></tr>
+        <tr><td>MAM</td><td>Fur, Fin &amp; Fang</td><td>Ecology</td><td>Marine mammals, ecosystem health</td></tr>
+        <tr><td>MUK</td><td>Mukilteo Microclimate Observatory</td><td>General</td><td>Weather station integration</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../ECO/index.html">ECO &mdash; PNW Ecology</a></li>
+        <li><a href="../AWF/index.html">AWF &mdash; Clean Air, Water &amp; Food</a></li>
+        <li><a href="../MUK/index.html">MUK &mdash; Mukilteo Observatory</a></li>
+        <li><a href="../LIVE/index.html">LIVE &mdash; Real-Time Pages</a></li>
+        <li><a href="../SPS/index.html">SPS &mdash; Sound of Puget Sound</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>DIY Science Projects &middot; Artemis Learning Resources &middot; 7 projects &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

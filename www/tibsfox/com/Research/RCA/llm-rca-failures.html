@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Reasoning Failures in RCA &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>LLM Reasoning Failures in RCA</h1>
+    <div class="subtitle">12 Pitfall Types, 1,675 Agent Runs, Architecture-Level vs Model-Level Failures</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html" class="active">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The most important finding in AI-driven RCA is not how to make it work &mdash; it is understanding why it systematically fails. Kim et al.&rsquo;s study of 1,675 agent runs across 5 models reveals that LLM reasoning failures in root cause analysis are architectural, not model-level. Swapping models does not fix the fundamental pitfalls.
+    </blockquote>
+
+    <!-- THE STUDY -->
+    <h2>The Study: 1,675 Agent Runs, 5 Models, 12 Pitfalls</h2>
+    <p>Kim et al. conducted the largest systematic study of LLM-based root cause analysis, running <strong>1,675 agent executions</strong> across 5 frontier models (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, Llama 3.1 70B, Mistral Large) on real cloud incident data. The study identified <strong>12 distinct pitfall types</strong> that cause AI agents to fail at RCA tasks.</p>
+    <p>The central finding: <strong>these pitfalls persist across all models</strong>. They are not quirks of a specific model but structural limitations of how LLMs approach investigation tasks. This means the solution lies in architecture and scaffolding, not in model upgrades.</p>
+
+    <!-- THREE FAILURE CATEGORIES -->
+    <h2>Three Failure Categories</h2>
+    <p>The 12 pitfalls cluster into three high-level categories of reasoning failure:</p>
+
+    <h3>Stalled Reasoning</h3>
+    <p>The agent gets stuck and cannot make progress toward identifying the root cause:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Exploration paralysis:</strong> Agent collects data but never converges on a hypothesis</li>
+        <li><strong>Tool call loops:</strong> Repeating the same tool call expecting different results</li>
+        <li><strong>Premature termination:</strong> Declaring a root cause without sufficient evidence</li>
+        <li><strong>Scope fixation:</strong> Investigating one subsystem while ignoring relevant others</li>
+      </ul>
+    </div>
+
+    <h3>Biased Reasoning</h3>
+    <p>The agent reaches a conclusion, but the conclusion is systematically skewed:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Confirmation bias:</strong> Seeking evidence that supports the first hypothesis while ignoring contradictory data</li>
+        <li><strong>Recency bias:</strong> Attributing the root cause to the most recent change, even when evidence points elsewhere</li>
+        <li><strong>Familiarity bias:</strong> Defaulting to common root causes from training data rather than investigating the specific incident</li>
+        <li><strong>Authority anchoring:</strong> Over-weighting information from &ldquo;authoritative&rdquo; sources (documentation, runbooks) even when the data contradicts them</li>
+      </ul>
+    </div>
+
+    <h3>Confused Reasoning</h3>
+    <p>The agent&rsquo;s reasoning process becomes internally inconsistent:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Hallucinated data interpretation:</strong> Describing patterns in data that do not exist, or misreading metric values</li>
+        <li><strong>Causal inversion:</strong> Confusing cause and effect (e.g., treating the symptom as the root cause)</li>
+        <li><strong>Context window artifacts:</strong> Losing track of earlier findings as the context fills with tool outputs</li>
+        <li><strong>Contradictory conclusions:</strong> Stating incompatible root causes within the same analysis</li>
+      </ul>
+    </div>
+
+    <!-- 12 PITFALL TYPES TABLE -->
+    <h2>The 12 Pitfall Types</h2>
+    <table>
+      <thead><tr><th>#</th><th>Pitfall</th><th>Category</th><th>Prevalence</th><th>Model-Independent?</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Exploration paralysis</td><td>Stalled</td><td>High</td><td>Yes</td></tr>
+        <tr><td>2</td><td>Tool call loops</td><td>Stalled</td><td>Medium</td><td>Yes</td></tr>
+        <tr><td>3</td><td>Premature termination</td><td>Stalled</td><td>High</td><td>Yes</td></tr>
+        <tr><td>4</td><td>Scope fixation</td><td>Stalled</td><td>Medium</td><td>Yes</td></tr>
+        <tr><td>5</td><td>Confirmation bias</td><td>Biased</td><td>Very High</td><td>Yes</td></tr>
+        <tr><td>6</td><td>Recency bias</td><td>Biased</td><td>High</td><td>Yes</td></tr>
+        <tr><td>7</td><td>Familiarity bias</td><td>Biased</td><td>High</td><td>Yes</td></tr>
+        <tr><td>8</td><td>Authority anchoring</td><td>Biased</td><td>Medium</td><td>Yes</td></tr>
+        <tr><td>9</td><td>Hallucinated data interpretation</td><td>Confused</td><td>Very High</td><td>Yes</td></tr>
+        <tr><td>10</td><td>Causal inversion</td><td>Confused</td><td>Medium</td><td>Yes</td></tr>
+        <tr><td>11</td><td>Context window artifacts</td><td>Confused</td><td>High</td><td>Partially (varies by context length)</td></tr>
+        <tr><td>12</td><td>Contradictory conclusions</td><td>Confused</td><td>Medium</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ARCHITECTURE VS MODEL -->
+    <h2>Architecture-Level, Not Model-Level</h2>
+    <p>The study&rsquo;s most consequential finding: when the same RCA task is given to different models with identical prompting and tooling, <strong>the same pitfalls appear at similar rates</strong>. This means:</p>
+    <div class="card">
+      <ul>
+        <li>Upgrading from GPT-4o to Claude 3.5 does not fix confirmation bias in RCA</li>
+        <li>Larger context windows reduce but do not eliminate context window artifacts</li>
+        <li>Better reasoning models (o1-style) reduce but do not eliminate hallucinated data interpretation</li>
+        <li>The fix must be <strong>architectural</strong>: structured investigation protocols, external verification, guardrails that prevent specific pitfall patterns</li>
+      </ul>
+    </div>
+    <p>This finding aligns with AgentRx&rsquo;s approach (see <a href="ai-agent-debugging.html">AI Agent Debugging</a>): the solution is a pipeline with multiple stages, constraints, and evaluation &mdash; not a better single-call prompt.</p>
+
+    <!-- FVDEBUG -->
+    <h2>FVDebug &mdash; Formal Verification for Debugging</h2>
+    <p><strong>FVDebug</strong> applies formal verification techniques to AI agent debugging. Rather than relying on LLM judgment (which suffers from the same pitfalls), FVDebug uses <strong>symbolic methods</strong> to verify whether an agent&rsquo;s reasoning chain satisfies logical constraints:</p>
+    <ul>
+      <li>Does the conclusion follow from the evidence?</li>
+      <li>Is the evidence consistent (no contradictions)?</li>
+      <li>Were all relevant data sources consulted?</li>
+      <li>Does the causal chain satisfy temporal ordering?</li>
+    </ul>
+    <p>FVDebug represents a promising direction: using formal methods to verify LLM reasoning rather than replacing it.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>230 related projects</strong> across 2 knowledge domains with 11 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>WSB</td><td>WA Small Business Startup</td><td>general</td><td>0.246</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>general</td><td>0.183</td></tr>
+        <tr><td>LLM</td><td>Local LLM Ecosystem</td><td>ai</td><td>0.178</td></tr>
+        <tr><td>MCR</td><td>Minecraft World Data as RAG</td><td>general</td><td>0.078</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (227), ai (3). Complex plane: z = 0.1675 + 0.1137i, |z| = 0.2025.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="ai-agent-debugging.html">AI Agent Debugging</a></li>
+        <li><a href="cloud-microservices.html">Cloud &amp; Microservices</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+        <li><a href="mathematical-foundations.html">Mathematical Foundations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>LLM Reasoning Failures &middot; Root Cause Analysis &middot; 230 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

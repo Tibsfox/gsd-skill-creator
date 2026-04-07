@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Psychometrics &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Agent Psychometrics: IRT for Task-Level Prediction (ICLR 2026)</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">Code Agents</span></div>
+      <h3>Agent Psychometrics: Task-Level Performance Prediction</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00594" target="_blank"><span class="arxiv-id">2604.00594</span></a></p>
+      <p><strong>Authors:</strong> Ge et al.</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.AI, cs.CL &middot; <strong>Venue:</strong> ICLR 2026</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>Applies Item Response Theory (IRT) to agent evaluation, decomposing performance into LLM ability and scaffold ability components. Augmented with rich features, the framework predicts task-level performance on unseen benchmarks, reducing the need for expensive evaluations. The key insight is that agents are not monolithic &mdash; the LLM and its scaffolding contribute independently measurable capabilities.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li>IRT decomposes agent performance into <strong>LLM ability</strong> and <strong>scaffold ability</strong> components</li>
+      <li>Rich features augment classical IRT for more accurate prediction</li>
+      <li>Unseen benchmark prediction reduces expensive evaluation runs</li>
+      <li>LLM and scaffold contributions are independently measurable and separable</li>
+      <li>Task difficulty parameters transfer across agent configurations</li>
+      <li>ICLR 2026 acceptance validates the psychometric approach to agent evaluation</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <p>Item Response Theory models adapted from educational testing applied to agent benchmark results. Each benchmark task is treated as a &ldquo;test item&rdquo; with difficulty and discrimination parameters. Agent ability is decomposed into base LLM capability and scaffold-provided capability using a two-parameter model. Rich features (task type, domain, complexity) augment the model for cross-benchmark prediction.</p>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Component</th><th>Contribution</th><th>Measurability</th></tr></thead>
+      <tbody>
+        <tr><td>LLM ability</td><td>Base reasoning, knowledge</td><td>IRT theta parameter</td></tr>
+        <tr><td>Scaffold ability</td><td>Tool use, planning, memory</td><td>Augmented IRT features</td></tr>
+        <tr><td>Task difficulty</td><td>Benchmark complexity</td><td>IRT beta parameter</td></tr>
+        <tr><td>Prediction</td><td>Unseen benchmark accuracy</td><td>Cross-validated</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>The LLM/scaffold decomposition is precisely our architecture: Claude (LLM) + gsd-skill-creator (scaffold). This paper gives us a framework to measure how much of our system's performance comes from Claude vs from our skills, hooks, and agents. We should implement IRT-based evaluation in our test suite &mdash; our 21,298 tests could be parameterized with difficulty/discrimination values. The scaffold ability metric could drive our skill improvement decisions.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (231 projects, 246-project corpus)</h4>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+      <span class="ref-tag">HPC &mdash; High Performance Computing</span>
+      <span class="ref-tag">LLM &mdash; Local LLM Ecosystem</span>
+      <span class="ref-tag">MAS &mdash; Multi-Agent Systems</span>
+      <span class="ref-tag">SAA &mdash; Skills &amp; Teams</span>
+      <span class="ref-tag">MUS &mdash; Music Theory</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-00824.html">STITCH: Training Methodology</a></li>
+        <li><a href="paper-2604-03196.html">Code Review Agents: Empirical Reality</a></li>
+        <li><a href="paper-2604-04131.html">Profile-Then-Reason</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.00594 &middot; Agent Psychometrics (ICLR 2026)</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

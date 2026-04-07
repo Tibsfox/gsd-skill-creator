@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud &amp; Container Orchestration &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Cloud &amp; Container Orchestration</h1>
+    <div class="subtitle">AWS, Azure, GCP, Kubernetes Architecture, Service Mesh, Docker, RBAC</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html" class="active">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The cloud did not eliminate systems administration; it transformed it. Instead of racking servers, sysadmins now architect VPCs, configure IAM policies, and manage container orchestration at a scale that would have been unimaginable a decade ago. The complexity did not decrease &mdash; it moved up the stack.
+    </blockquote>
+
+    <!-- CLOUD PROVIDERS -->
+    <h2>Cloud Provider Comparison</h2>
+    <table>
+      <thead><tr><th>Feature</th><th>AWS</th><th>Azure</th><th>GCP</th></tr></thead>
+      <tbody>
+        <tr><td>Compute</td><td>EC2, Lambda, ECS, EKS</td><td>VMs, Functions, AKS, Container Apps</td><td>Compute Engine, Cloud Run, GKE</td></tr>
+        <tr><td>Object Storage</td><td>S3</td><td>Blob Storage</td><td>Cloud Storage</td></tr>
+        <tr><td>Managed K8s</td><td>EKS</td><td>AKS</td><td>GKE (Autopilot)</td></tr>
+        <tr><td>Serverless</td><td>Lambda</td><td>Functions</td><td>Cloud Functions / Cloud Run</td></tr>
+        <tr><td>Networking</td><td>VPC, ALB/NLB, Route 53</td><td>VNet, App Gateway, Traffic Manager</td><td>VPC, Cloud Load Balancing, Cloud DNS</td></tr>
+        <tr><td>IAM</td><td>IAM (policy-based)</td><td>Azure AD / Entra ID (RBAC)</td><td>IAM (resource hierarchy)</td></tr>
+        <tr><td>Market Position</td><td>~31% share, broadest service catalog</td><td>~25% share, enterprise/hybrid strength</td><td>~12% share, strongest K8s/data/AI</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Multi-cloud</strong> strategies use Terraform or Pulumi to abstract provider differences. In practice, most organizations have a primary cloud with selective use of others for specific capabilities.</p>
+
+    <!-- KUBERNETES ARCHITECTURE -->
+    <h2>Kubernetes Architecture</h2>
+    <p>Kubernetes (from Google&rsquo;s internal Borg system) is the standard container orchestration platform. Understanding its architecture is non-negotiable for modern sysadmins.</p>
+    <div class="card">
+      <p><strong>Control Plane:</strong></p>
+      <ul>
+        <li><strong>kube-apiserver:</strong> RESTful API, all communication passes through it</li>
+        <li><strong>etcd:</strong> Distributed key-value store, source of truth for cluster state</li>
+        <li><strong>kube-scheduler:</strong> Assigns pods to nodes based on resource requirements, affinity, taints</li>
+        <li><strong>kube-controller-manager:</strong> Runs control loops (ReplicaSet, Deployment, Node, Job controllers)</li>
+        <li><strong>cloud-controller-manager:</strong> Cloud-provider-specific controllers (load balancers, volumes)</li>
+      </ul>
+      <p><strong>Worker Nodes:</strong></p>
+      <ul>
+        <li><strong>kubelet:</strong> Node agent, ensures containers run in pods according to PodSpec</li>
+        <li><strong>kube-proxy:</strong> Network proxy implementing Service abstraction (iptables/IPVS)</li>
+        <li><strong>Container runtime:</strong> containerd (default), CRI-O (Red Hat)</li>
+      </ul>
+    </div>
+
+    <!-- POD LIFECYCLE -->
+    <h2>Pod Lifecycle &amp; Workload Types</h2>
+    <p>Pods move through states: Pending &rarr; Running &rarr; Succeeded/Failed. Workload controllers manage pod replicas:</p>
+    <table>
+      <thead><tr><th>Controller</th><th>Use Case</th><th>Key Behavior</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Deployment</strong></td><td>Stateless applications</td><td>Rolling updates, rollback, scaling</td></tr>
+        <tr><td><strong>StatefulSet</strong></td><td>Stateful applications (databases)</td><td>Stable network identity, ordered scaling, persistent volumes</td></tr>
+        <tr><td><strong>DaemonSet</strong></td><td>One pod per node (monitoring, logging)</td><td>Runs on every node matching selector</td></tr>
+        <tr><td><strong>Job / CronJob</strong></td><td>Batch and scheduled tasks</td><td>Run-to-completion, retry policies, scheduling</td></tr>
+      </tbody>
+    </table>
+
+    <!-- SERVICE MESH -->
+    <h2>Service Mesh</h2>
+    <p>Service meshes add observability, traffic management, and security to microservice communication without application code changes.</p>
+    <table>
+      <thead><tr><th>Mesh</th><th>Architecture</th><th>Key Feature</th><th>Complexity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Istio</strong></td><td>Envoy sidecar proxies</td><td>Full feature set: mTLS, traffic splitting, fault injection, telemetry</td><td>High</td></tr>
+        <tr><td><strong>Linkerd</strong></td><td>Rust-based micro-proxy</td><td>Lightweight, CNCF graduated, simpler operations</td><td>Medium</td></tr>
+        <tr><td><strong>Cilium</strong></td><td>eBPF (sidecar-free)</td><td>Kernel-level networking, no proxy overhead</td><td>Medium</td></tr>
+      </tbody>
+    </table>
+
+    <!-- HELM -->
+    <h2>Helm</h2>
+    <p>Helm is the package manager for Kubernetes. <strong>Charts</strong> are templated Kubernetes manifests with configurable values. Helm manages releases (install, upgrade, rollback) and provides a chart repository ecosystem. <strong>Helmfile</strong> manages multiple releases declaratively. <strong>Kustomize</strong> (built into kubectl) provides an alternative templating approach using overlay patches.</p>
+
+    <!-- CONTAINER RUNTIMES & DOCKER -->
+    <h2>Container Runtimes &amp; Docker Security</h2>
+    <p><strong>containerd</strong> (CNCF graduated) is the default runtime for Kubernetes since dockershim removal in K8s 1.24. <strong>CRI-O</strong> is the minimal runtime for OpenShift/RHEL. Docker remains the primary tool for building images.</p>
+    <p>Docker security best practices:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Multi-stage builds:</strong> Minimize final image size, exclude build dependencies</li>
+        <li><strong>Non-root user:</strong> <code>USER nonroot</code> in Dockerfile, avoid running as PID 1 root</li>
+        <li><strong>Image scanning:</strong> Trivy, Grype, or Snyk for CVE detection before deployment</li>
+        <li><strong>Minimal base images:</strong> Alpine, distroless, or scratch where possible</li>
+        <li><strong>Read-only filesystem:</strong> <code>--read-only</code> flag prevents container filesystem writes</li>
+        <li><strong>Seccomp &amp; AppArmor profiles:</strong> Restrict syscalls available to containers</li>
+      </ul>
+    </div>
+
+    <!-- REGISTRY MANAGEMENT -->
+    <h2>Registry Management</h2>
+    <p>Container registries store and distribute images. <strong>Harbor</strong> (CNCF graduated) provides vulnerability scanning, RBAC, replication, and audit logging for private registries. Cloud-managed options: ECR (AWS), ACR (Azure), Artifact Registry (GCP). <strong>Sigstore/cosign</strong> signs images cryptographically for supply chain security.</p>
+
+    <!-- RBAC -->
+    <h2>RBAC (Role-Based Access Control)</h2>
+    <p>Kubernetes RBAC controls who can do what within the cluster. Four objects: <strong>Role</strong> (namespace-scoped permissions), <strong>ClusterRole</strong> (cluster-wide), <strong>RoleBinding</strong> (assigns Role to subjects), <strong>ClusterRoleBinding</strong> (assigns ClusterRole). Follow the principle of least privilege: grant only the permissions each workload or user needs.</p>
+    <pre><code># ClusterRole: read-only access to pods
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]</code></pre>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>12 related projects</strong> across 4 knowledge domains with 70 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>NASA</td><td>NASA Mission Series</td><td>space</td><td>0.292</td></tr>
+        <tr><td>LED</td><td>LED Lighting &amp; Controllers</td><td>general</td><td>0.252</td></tr>
+        <tr><td>K8S</td><td>Kubernetes Ecosystem</td><td>general</td><td>0.144</td></tr>
+        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+        <tr><td>BCM</td><td>Building Construction Mastery</td><td>infrastructure</td><td>0.154</td></tr>
+        <tr><td>PSC</td><td>Political Science, History &amp; the Complex Plane</td><td>governance</td><td>0.121</td></tr>
+        <tr><td>CMH</td><td>The Computational Mesh</td><td>general</td><td>0.095</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (9), infrastructure (1), governance (1), space (1). Complex plane: z = 0.1494 + 0.0996i, |z| = 0.1795.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
+        <li><a href="networking.html">Networking</a></li>
+        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Cloud &amp; Containers &middot; Systems Administration &middot; 70 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

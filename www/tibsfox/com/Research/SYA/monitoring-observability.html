@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoring &amp; Observability &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Monitoring &amp; Observability</h1>
+    <div class="subtitle">Three Pillars, Prometheus, ELK, OpenTelemetry, SLOs, Alerting, Capacity Planning</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html" class="active">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Monitoring tells you when something is broken. Observability tells you why. The distinction matters: monitoring is necessary but insufficient for complex distributed systems where failure modes cannot be predicted in advance.
+    </blockquote>
+
+    <!-- THREE PILLARS -->
+    <h2>The Three Pillars of Observability</h2>
+    <table>
+      <thead><tr><th>Pillar</th><th>What It Captures</th><th>Tools</th><th>Query Pattern</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Logs</strong></td><td>Discrete events with timestamps and context</td><td>Elasticsearch, Loki, Fluentd, journald</td><td>&ldquo;What happened at 3:42 AM?&rdquo;</td></tr>
+        <tr><td><strong>Metrics</strong></td><td>Numeric measurements over time (counters, gauges, histograms)</td><td>Prometheus, InfluxDB, StatsD, Graphite</td><td>&ldquo;What is the request rate trend?&rdquo;</td></tr>
+        <tr><td><strong>Traces</strong></td><td>Request path across distributed services with timing</td><td>Jaeger, Zipkin, Tempo, OpenTelemetry</td><td>&ldquo;Why is this request slow?&rdquo;</td></tr>
+      </tbody>
+    </table>
+    <p>The industry is converging on <strong>OpenTelemetry (OTel)</strong> as the unified standard for collecting all three pillars through a single SDK and collector pipeline. OTel is vendor-neutral and backed by the CNCF.</p>
+
+    <!-- PROMETHEUS/GRAFANA -->
+    <h2>Prometheus &amp; Grafana Stack</h2>
+    <p><strong>Prometheus</strong> is a pull-based time-series database that scrapes metrics endpoints at configured intervals. Its query language (<strong>PromQL</strong>) is the de facto standard for metric querying. Key components:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Exporters:</strong> node_exporter (system metrics), blackbox_exporter (probing), mysqld_exporter, etc.</li>
+        <li><strong>Alertmanager:</strong> Routes, groups, silences, and deduplicates alerts</li>
+        <li><strong>Grafana:</strong> Visualization layer with dashboards, supports multiple data sources</li>
+        <li><strong>Thanos / Cortex / Mimir:</strong> Long-term storage and multi-cluster federation</li>
+      </ul>
+    </div>
+    <pre><code># PromQL: 95th percentile latency over 5 minutes
+histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+
+# Alert rule: high error rate
+- alert: HighErrorRate
+  expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+  for: 10m
+  labels:
+    severity: critical</code></pre>
+
+    <!-- ELK STACK -->
+    <h2>ELK Stack</h2>
+    <p><strong>Elasticsearch</strong> (search and analytics engine) + <strong>Logstash</strong> (log pipeline and transformation) + <strong>Kibana</strong> (visualization). The ELK stack handles centralized log aggregation and analysis. <strong>Filebeat</strong> replaces Logstash for lightweight log shipping. <strong>Elastic SIEM</strong> adds security analytics on top of the same infrastructure.</p>
+    <p>Alternative: <strong>Grafana Loki</strong> takes a log-label approach (like Prometheus for logs), avoiding full-text indexing for dramatically lower resource consumption.</p>
+
+    <!-- OPENTELEMETRY -->
+    <h2>OpenTelemetry</h2>
+    <p>OTel provides a unified observability framework: auto-instrumentation SDKs for major languages, the <strong>OTLP</strong> (OpenTelemetry Protocol) for data transmission, and the <strong>OTel Collector</strong> for receiving, processing, and exporting telemetry to any backend. This eliminates vendor lock-in and reduces instrumentation burden.</p>
+    <p>The collector supports pipelines: receivers (OTLP, Prometheus, Jaeger) &rarr; processors (batching, filtering, tail sampling) &rarr; exporters (to any backend). This architecture allows switching observability backends without re-instrumenting applications.</p>
+
+    <!-- ALERTING -->
+    <h2>Alerting &amp; On-Call</h2>
+    <p>Effective alerting follows key principles:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Alert on symptoms, not causes</strong> &mdash; &ldquo;error rate &gt; 5%&rdquo; not &ldquo;CPU &gt; 80%&rdquo;</li>
+        <li><strong>Every alert must be actionable</strong> &mdash; if it fires and nobody needs to act, delete it</li>
+        <li><strong>Use severity levels</strong> &mdash; P1 (page immediately), P2 (respond within hours), P3 (next business day)</li>
+        <li><strong>Runbooks for every alert</strong> &mdash; link in the alert itself, reduce mean time to resolve</li>
+        <li><strong>Alert fatigue kills</strong> &mdash; noisy alerts train people to ignore them; prune aggressively</li>
+      </ul>
+    </div>
+    <p>On-call tools: <strong>PagerDuty</strong>, <strong>OpsGenie</strong> (Atlassian), <strong>Grafana OnCall</strong> (open source). Rotation patterns: follow-the-sun (global teams), weekly rotation, primary/secondary escalation.</p>
+
+    <!-- SLOs -->
+    <h2>SLOs, SLIs &amp; Error Budgets</h2>
+    <p>The Google SRE framework formalized service-level management:</p>
+    <table>
+      <thead><tr><th>Concept</th><th>Definition</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SLI</strong> (Indicator)</td><td>The metric that measures service quality</td><td>Latency p99, availability %, error rate</td></tr>
+        <tr><td><strong>SLO</strong> (Objective)</td><td>The target value for the SLI</td><td>99.9% availability over 30 days</td></tr>
+        <tr><td><strong>SLA</strong> (Agreement)</td><td>The contractual commitment with consequences</td><td>99.9% availability or credit refund</td></tr>
+        <tr><td><strong>Error Budget</strong></td><td>100% minus SLO = acceptable failure allowance</td><td>99.9% SLO = 43.2 min/month error budget</td></tr>
+      </tbody>
+    </table>
+    <div class="formula">Error Budget = (1 - SLO) &times; time period<br>99.9% SLO = 0.1% budget = 43.2 minutes/month = 8.76 hours/year</div>
+    <p>When error budget is exhausted, teams freeze feature releases and focus on reliability. This creates an objective framework for balancing velocity against stability.</p>
+
+    <!-- CAPACITY PLANNING -->
+    <h2>Capacity Planning</h2>
+    <p>Capacity planning prevents outages before they happen. Key practices: trending analysis (extrapolate current growth curves), load testing (simulate peak traffic), headroom maintenance (keep utilization below 70% for burst absorption), and cost modeling (right-size instances before and after scaling events).</p>
+
+    <!-- HEALTH CHECKS -->
+    <h2>Health Checks &amp; Synthetic Monitoring</h2>
+    <p><strong>Health checks</strong> verify that services are functioning correctly. Types: liveness (is the process alive?), readiness (can it accept traffic?), startup (has it finished initializing?). Kubernetes uses all three for pod lifecycle management.</p>
+    <p><strong>Synthetic monitoring</strong> runs scripted user journeys against production at regular intervals, detecting issues before real users encounter them. Tools: Grafana Synthetic Monitoring, Checkly, Uptime Robot.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>229 related projects</strong> across 2 knowledge domains with 72 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>HPC</td><td>High Performance Computing</td><td>general</td><td>0.763</td></tr>
+        <tr><td>MUS</td><td>Music Theory &amp; Performance</td><td>music</td><td>0.630</td></tr>
+        <tr><td>QBS</td><td>Quantum Biosensing &amp; Synthetic Cells</td><td>general</td><td>0.294</td></tr>
+        <tr><td>FEC</td><td>Forward Error Correction</td><td>general</td><td>0.118</td></tr>
+        <tr><td>FAD</td><td>First Aid &amp; Health Studies</td><td>general</td><td>0.138</td></tr>
+        <tr><td>OCN</td><td>Open Compute Node</td><td>general</td><td>0.115</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228), music (1). Complex plane: z = 0.1690 + 0.1147i, |z| = 0.2042.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="aiops-future.html">AIOps &amp; The Future</a></li>
+        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
+        <li><a href="professional-practice.html">Professional Practice</a></li>
+        <li><a href="cloud-containers.html">Cloud &amp; Containers</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Monitoring &amp; Observability &middot; Systems Administration &middot; 72 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

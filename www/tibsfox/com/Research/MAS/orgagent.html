@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrgAgent: Company-Style Hierarchy &mdash; Multi-Agent Systems &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mas">
+  <header>
+    <h1>Multi-Agent Systems Research</h1>
+    <div class="subtitle">Architecture, Security &amp; Scaling &mdash; April 2026 Paper Survey</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="supply-chain.html">Supply-Chain Attacks</a>
+      <a href="orgagent.html" class="active">OrgAgent</a>
+      <a href="single-vs-multi.html">Single vs Multi</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>OrgAgent: Organize Your Multi-Agent System like a Company</h2>
+
+    <div class="card">
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.01020" target="_blank">arXiv:2604.01020</a><br>
+      <strong>Authors:</strong> Yiru Wang, Xinyue Shen, Yaohui Han, Michael Backes, Pin-Yu Chen, Tsung-Yi Ho<br>
+      <strong>Date:</strong> April 1, 2026<br>
+      <strong>Categories:</strong> cs.MA (Multiagent Systems), cs.AI</p>
+    </div>
+
+    <blockquote>
+      While large language model-based multi-agent systems have shown strong potential for complex reasoning, how to effectively organize multiple agents remains an open question. OrgAgent separates collaboration into governance, execution, and compliance layers.
+    </blockquote>
+
+    <h2>1. Three-Layer Architecture</h2>
+
+    <h3>Layer A: Governance</h3>
+    <table>
+      <thead><tr><th>Role</th><th>Function</th><th>Our Equivalent</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CEO</strong></td><td>Strategic alignment &mdash; determines what needs to be done</td><td>lab-director</td></tr>
+        <tr><td><strong>CTO</strong></td><td>Technical soundness &mdash; ensures approach is valid</td><td>gsd-planner</td></tr>
+        <tr><td><strong>COO</strong></td><td>Resource efficiency &mdash; optimizes cost and throughput</td><td>mayor-coordinator</td></tr>
+      </tbody>
+    </table>
+    <p>The governance layer determines the <strong>execution mode</strong> for each task based on complexity assessment, routing simple tasks to DIRECT mode and complex tasks to FULL MAS.</p>
+
+    <h3>Layer B: Execution</h3>
+    <table>
+      <thead><tr><th>Role</th><th>Function</th><th>Our Equivalent</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Drafter</strong></td><td>Generates initial answers</td><td>gsd-executor</td></tr>
+        <tr><td><strong>Reviewer</strong></td><td>Examines quality, provides feedback</td><td>gsd-verifier</td></tr>
+        <tr><td><strong>Specialist</strong></td><td>Targeted domain expertise</td><td>security-reviewer, performance-profiler, etc.</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Three execution modes:</strong></p>
+    <ul>
+      <li><strong>DIRECT</strong> &mdash; single generation, cheapest (simple factual questions)</li>
+      <li><strong>LIGHT MAS</strong> &mdash; with review loop (moderate complexity)</li>
+      <li><strong>FULL MAS</strong> &mdash; with specialist support (complex multi-step reasoning)</li>
+    </ul>
+
+    <h3>Layer C: Compliance</h3>
+    <table>
+      <thead><tr><th>Role</th><th>Function</th><th>Our Equivalent</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CSO</strong></td><td>Benchmark-aligned final answer validation</td><td>adversarial-pr-review</td></tr>
+        <tr><td><strong>CCO</strong></td><td>Structural format compliance (no reasoning)</td><td>gsd-plan-checker</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. Execution Policies</h2>
+    <table>
+      <thead><tr><th>Policy</th><th>Character</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>STRICT</strong></td><td>Conservative, tight resource constraints</td><td>Cost-sensitive production</td></tr>
+        <tr><td><strong>BALANCE</strong></td><td>Middle ground</td><td>General use</td></tr>
+        <tr><td><strong>NOCAP</strong></td><td>Minimal constraints, flexible resources</td><td>Quality-critical tasks</td></tr>
+        <tr><td><strong>AUTO</strong></td><td>Adaptive based on task characteristics</td><td>Mixed workloads</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Six Skill Profiles</h2>
+    <p>Workers are assigned dynamically from a pool of reusable skill profiles rather than fixed to specific benchmarks:</p>
+    <table>
+      <thead><tr><th>Profile</th><th>Strength</th></tr></thead>
+      <tbody>
+        <tr><td>Technical</td><td>Engineering, systems, implementation</td></tr>
+        <tr><td>Quantitative</td><td>Math, statistics, numerical reasoning</td></tr>
+        <tr><td>Reasoning</td><td>Logic, multi-step deduction</td></tr>
+        <tr><td>Domain</td><td>Subject-matter expertise</td></tr>
+        <tr><td>Communications</td><td>Clarity, formatting, presentation</td></tr>
+        <tr><td>Data</td><td>Tables, extraction, comparison</td></tr>
+      </tbody>
+    </table>
+    <p>Stronger models (GPT-5 mini, GPT-OSS-120B) developed <strong>sharper specialization</strong> under hierarchy; weaker models (Llama-3.1-8B) showed diffuse skill distribution.</p>
+
+    <h2>4. Benchmark Results</h2>
+
+    <p>Tested on MuSR (multistep reasoning), MuSiQue (multi-hop QA), and SQuAD 2.0 (reading comprehension with unanswerable questions).</p>
+
+    <table>
+      <thead><tr><th>Benchmark</th><th>Improvement vs Flat MAS</th><th>Token Reduction</th></tr></thead>
+      <tbody>
+        <tr><td>SQuAD 2.0 (GPT-OSS-120B)</td><td><strong>+102.73%</strong></td><td><strong>&minus;74.52%</strong></td></tr>
+        <tr><td>SQuAD 2.0 (best config)</td><td>+120.47%</td><td>&minus;79.31%</td></tr>
+        <tr><td>MuSiQue (range)</td><td>+18.97% to +123.99%</td><td>&minus;46.38% to &minus;79.31%</td></tr>
+        <tr><td>MuSR</td><td>Mixed</td><td>Consistent savings</td></tr>
+      </tbody>
+    </table>
+
+    <h2>5. Key Findings</h2>
+
+    <h3>Hierarchy Improves &ldquo;Knowing What You Don&rsquo;t Know&rdquo;</h3>
+    <p>Abstention rates on unanswerable questions increased up to <strong>39.78%</strong> under hierarchy. The compliance layer (CSO/CCO) catches cases where the execution layer generates confident but wrong answers. This maps to our gsd-verifier catching false completions.</p>
+
+    <h3>When Hierarchy Works Best</h3>
+    <ul>
+      <li><strong>Stable skill assignment</strong> &mdash; workers keep their specialization across tasks</li>
+      <li><strong>Controlled information flow</strong> &mdash; governance decides what context each worker sees</li>
+      <li><strong>Layered verification</strong> &mdash; every answer passes through review before compliance</li>
+    </ul>
+
+    <h3>When Hierarchy Doesn&rsquo;t Help</h3>
+    <p>MuSR (multistep soft reasoning) showed mixed results. Tasks requiring creative synthesis rather than structured decomposition may not benefit from corporate-style hierarchy. This aligns with 2604.02460&rsquo;s finding that single agents handle deep reasoning better.</p>
+
+    <h2>6. Design Principles Extracted</h2>
+
+    <div class="card">
+      <ol>
+        <li><strong>Separate planning from execution</strong> &mdash; governance decides mode before work begins</li>
+        <li><strong>Match execution mode to task complexity</strong> &mdash; DIRECT for simple, FULL for complex</li>
+        <li><strong>Compliance is not optional</strong> &mdash; format validation + answer validation are distinct roles</li>
+        <li><strong>Dynamic skill assignment</strong> &mdash; workers draw from a skill pool, not fixed personas</li>
+        <li><strong>Hierarchy saves tokens</strong> &mdash; routing simple tasks to DIRECT mode avoids unnecessary MAS overhead</li>
+        <li><strong>Strong models specialize; weak models don&rsquo;t</strong> &mdash; hierarchy amplifies model capability</li>
+      </ol>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>Wang, Y. et al. <a href="https://arxiv.org/abs/2604.01020" target="_blank">arXiv:2604.01020</a>. April 1, 2026.</li>
+      <li>Full paper: <a href="https://arxiv.org/html/2604.01020" target="_blank">arxiv.org/html/2604.01020</a></li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Multi-Agent Systems Research &middot; AI &amp; Computation Cluster</p>
+    <p>Paper 2: OrgAgent &middot; April 2026</p>
+    <p><a href="index.html">MAS Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Landscape Survey &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; MCP Landscape: Security Threats &amp; Future Research</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-security">Landscape Survey</span></div>
+      <h3>MCP Landscape: Security Threats &amp; Future Research</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2503.23278" target="_blank"><span class="arxiv-id">2503.23278</span></a></p>
+      <p><strong>Authors:</strong> Hou et al.</p>
+      <p><strong>Date:</strong> March 2025 &middot; <strong>Categories:</strong> cs.CR, cs.AI</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>A landscape survey of the MCP ecosystem identifying 12 distinct threat categories, 16 threat scenarios, and 47 specific attack vectors. The survey maps the gap between MCP's rapid adoption (110M SDK downloads, 3,600x growth since November 2024) and the maturity of its security tooling. Categorizes attackers into four types: malicious developers, external attackers, users, and security flaws. Proposes safeguards organized by lifecycle phase.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number">110M</span> MCP SDK downloads as of early 2025</li>
+      <li><span class="key-number">3,600&times;</span> adoption growth since November 2024</li>
+      <li><span class="key-number warn">16</span> distinct threat scenarios across 4 lifecycle phases</li>
+      <li><span class="key-number warn">47</span> specific attack vectors identified</li>
+      <li><span class="key-number">4</span> attacker categories: malicious developers, external attackers, users, security flaws</li>
+      <li>Supply-chain compromise and credential leakage have the highest real-world impact scores</li>
+      <li>Security tooling remains at &ldquo;early prototype&rdquo; maturity for most categories</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Lifecycle Phase</th><th>Activities</th><th>Top Threats</th></tr></thead>
+      <tbody>
+        <tr><td>Creation</td><td>Tool development, description writing</td><td>Malicious tool injection</td></tr>
+        <tr><td>Discovery</td><td>Marketplace listing, search ranking</td><td>Supply-chain compromise</td></tr>
+        <tr><td>Operation</td><td>Tool invocation, data handling</td><td>Credential leakage, exfiltration</td></tr>
+        <tr><td>Update</td><td>Version management, migration</td><td>Dependency confusion</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>The adoption-security gap is directly relevant to our skill marketplace design. With 110M SDK downloads and growing, MCP will replicate npm/PyPI supply-chain crises at a larger scale due to higher privilege levels. Our skill-integration system should implement lifecycle-phase-aware security: creation-time validation, discovery-time provenance checking, operation-time sandboxing, and update-time dependency analysis. The four attacker categories should map to threat models in our security-hygiene skill.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (10 projects, 246-project corpus)</h4>
+      <span class="ref-tag">APD &mdash; Papers Deep Dive</span>
+      <span class="ref-tag">HPC &mdash; High Performance Computing</span>
+      <span class="ref-tag">MUS &mdash; Music Theory</span>
+      <span class="ref-tag">OAA &mdash; Operations Automation</span>
+      <span class="ref-tag">PSC &mdash; Political Science</span>
+      <span class="ref-tag">SOP &mdash; Standard Operating Procedures</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2602-11327.html">Security Threat Modeling: 4 Protocols</a></li>
+        <li><a href="paper-2601-07395.html">MCP-ITP: Automated Tool Poisoning</a></li>
+        <li><a href="paper-2604-04426.html">ShieldNet: Network-Level Guardrails</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2503.23278 &middot; MCP Landscape Survey</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

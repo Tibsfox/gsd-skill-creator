@@ -87,10 +87,78 @@ footer {
 
 <main>
   <div class="stats-bar">
-    <span><strong>34</strong> papers cataloged</span>
-    <span><strong>7</strong> sweeps</span>
-    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, Planetary Society, ESA, USU SmallSat, NASA Science</span>
-    <span>Last update: v1.2.20 (MET+1d05:00)</span>
+    <span><strong>40</strong> papers cataloged</span>
+    <span><strong>8</strong> sweeps</span>
+    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, Planetary Society, ESA, USU SmallSat, NASA Science, CERN, NSF, MIT Lincoln Lab</span>
+    <span>Last update: v1.6.18 (MET+5d02:00)</span>
+  </div>
+
+  <div class="sweep-header">v1.6.18 &mdash; April 6, 6:00 PM CDT (MET+5d02:00) &mdash; LUNAR FLYBY, FLIGHT DAYS 5&ndash;6</div>
+
+  <div class="paper">
+    <h3><a href="papers/35.html" style="color:#fff;text-decoration:none;"><span class="paper-num">#35</span> Apollo 13 Distance Record Broken &mdash; 252,760 Miles from Earth</a></h3>
+    <div class="source">NASA Artemis II Flight Day 6 Status, April 6, 2026 &middot; <a href="https://blogs.nasa.gov/artemis-ii/">NASA Blog</a></div>
+    <div class="why"><strong>History made at 12:56 PM CDT:</strong> Orion surpassed the Apollo 13 record of 248,655 miles (400,171 km), reaching 252,760 miles (406,774 km) from Earth. Four humans are now farther from home than any have ever been. Apollo 13 set the record accidentally &mdash; their free-return trajectory swung wide after the service module explosion. Artemis II broke it by design, on a nominal trajectory optimized for lunar science.</div>
+    <div class="tspb">TSPB Layer 1 (Unit Circle):<code>Apollo 13 record: 248,655 miles (400,171 km) &mdash; April 15, 1970
+Artemis II: 252,760 miles (406,774 km) &mdash; April 6, 2026
+Difference: 4,105 miles (6,603 km)
+56 years, 0 days between records. The longest-standing human spaceflight record.</code></div>
+    <div class="lesson">Apollo 13 reached the record by accident, trying to survive. Artemis II reached it on purpose, doing science. That is 56 years of progress.</div>
+  </div>
+
+  <div class="paper">
+    <h3><a href="papers/36.html" style="color:#fff;text-decoration:none;"><span class="paper-num">#36</span> O2O Laser Comms Achieving 260 Mbps from Lunar Distance</a></h3>
+    <div class="source">MIT Lincoln Lab / NASA GSFC, April 2026 &middot; <a href="https://www.ll.mit.edu/r-d/projects/optical-communications">MIT Lincoln Lab</a></div>
+    <div class="why"><strong>Broadband from the Moon:</strong> The O2O (Orion-to-Orbit-to-Ground) optical terminal &mdash; built around MIT Lincoln Lab's MAScOT (Modular Advanced Space Communications Terminal) &mdash; is achieving its target 260 Mbps downlink rate at lunar distance. This is 130&times; faster than S-band radio. The 4-inch telescope transmits 1550 nm laser pulses received by ground terminals at White Sands and Table Mountain. HD video from lunar orbit in real time.</div>
+    <div class="tspb">TSPB Layer 7 (Information Theory):<code>Shannon capacity: C = B &times; log2(1 + SNR)
+At lunar distance (384,400 km): beam footprint ~ 14.5 km
+Received power: ~ nanowatts (photon counting regime)
+260 Mbps at 1.3 light-seconds delay &mdash; proof that optical beats radio.</code></div>
+    <div class="lesson">The internet reaches the Moon. Not in theory, in practice. 260 megabits per second through a 4-inch telescope.</div>
+  </div>
+
+  <div class="paper">
+    <h3><a href="papers/37.html" style="color:#fff;text-decoration:none;"><span class="paper-num">#37</span> CERN Timepix Radiation Detectors &mdash; Particle-by-Particle Deep Space Dosimetry</a></h3>
+    <div class="source">ADVACAM / Medipix2 Collaboration (CERN), 2026 &middot; <a href="https://medipix.web.cern.ch/">CERN Medipix</a></div>
+    <div class="why"><strong>CERN technology beyond LEO:</strong> Six Timepix detectors from the ADVACAM/Medipix2 collaboration are aboard Orion, providing particle-by-particle radiation field characterization. Unlike traditional dosimeters that measure cumulative dose, Timepix identifies individual particle species, energy, and direction in real time &mdash; building a 3D map of the deep space radiation environment. Each 256&times;256 pixel sensor is a miniature particle physics detector, the same technology used at the LHC.</div>
+    <div class="tspb">TSPB Layer 4 (Vector Calculus):<code>Timepix: 256 &times; 256 pixels, 55 &mu;m pitch
+Each pixel measures: charge deposited (energy), time-over-threshold, arrival time
+Particle ID from track shape: protons = blobs, HZE = long tracks, electrons = worms
+6 units on Orion &mdash; directional coverage of radiation field</code></div>
+    <div class="lesson">Knowing the total dose is not enough. You need to know what hit you, from which direction, with how much energy. Timepix turns dosimetry into particle physics.</div>
+  </div>
+
+  <div class="paper">
+    <h3><a href="papers/38.html" style="color:#fff;text-decoration:none;"><span class="paper-num">#38</span> AVATAR Organ-on-Chip &mdash; First Deep-Space Deployment Beyond Van Allen Belts</a></h3>
+    <div class="source">NASA Science / Advanced Science, April 2026 &middot; <a href="https://science.nasa.gov/biological-physical/investigations/avatar/">NASA Science</a></div>
+    <div class="why"><strong>FD5&ndash;6 update:</strong> AVATAR organ chips &mdash; containing bone marrow tissue from the actual crew members' cells &mdash; have now transited both Van Allen belts and are exposed to the unshielded deep-space radiation environment. This is the first time organ-on-chip technology has operated beyond LEO. The chips are measuring real-time changes in blood cell production under combined GCR + microgravity conditions that cannot be replicated on Earth or the ISS.</div>
+    <div class="tspb">TSPB Layer 8 (L-Systems):<code>Hematopoietic stem cell tree: HSC &rarr; MPP &rarr; CMP/CLP &rarr; blood cells
+GCR + microgravity may disrupt branching at any level.
+ISS data: microgravity alone shifts differentiation ratios.
+AVATAR FD6: first data point for GCR + microgravity combined.</code></div>
+    <div class="lesson">We sent their own cells ahead of them into deep space, then brought the crew to see what happened. Personalized space medicine starts here.</div>
+  </div>
+
+  <div class="paper">
+    <h3><a href="papers/39.html" style="color:#fff;text-decoration:none;"><span class="paper-num">#39</span> NSF Green Bank Telescope Tuning to Artemis II Signals</a></h3>
+    <div class="source">NSF Green Bank Observatory, April 2026 &middot; <a href="https://greenbankobservatory.org/">Green Bank Observatory</a></div>
+    <div class="why"><strong>The world's largest steerable radio telescope:</strong> The 100-meter Green Bank Telescope in West Virginia &mdash; normally used for radio astronomy and SETI &mdash; has been tuned to receive Artemis II signals during the lunar flyby phase. At 100 meters in diameter, it provides extraordinary sensitivity for tracking spacecraft signals and can serve as a backup communications relay. GBT is in the National Radio Quiet Zone, making it one of the most radio-silent locations on Earth.</div>
+    <div class="tspb">TSPB Layer 7 (Information Theory):<code>GBT: 100 m diameter, 2.3 acres of collecting area
+Gain at S-band (2.2 GHz): ~ 70 dBi
+Compared to DSN 34m dish: ~ 57 dBi
+13 dB advantage = 20&times; more signal power received</code></div>
+    <div class="lesson">When you are sending humans farther than they have ever been, you point every ear you have at the sky.</div>
+  </div>
+
+  <div class="paper">
+    <h3><a href="papers/40.html" style="color:#fff;text-decoration:none;"><span class="paper-num">#40</span> CubeSat Deployment &mdash; TACHELES, ATENEA, K-RadCube, SWC-1</a></h3>
+    <div class="source">USU SmallSat / DLR / CONAE / KARI / KACST, April 2026 &middot; <a href="https://digitalcommons.usu.edu/smallsat/2025/E-S2-2025/1/">USU Digital Commons</a></div>
+    <div class="why"><strong>Four nations deployed:</strong> All four CubeSats released from the Orion Stage Adapter: <strong>TACHELES</strong> (Germany/DLR, radiation effects on commercial electronics), <strong>ATENEA</strong> (Argentina/CONAE, radiation shielding + GPS at lunar distance), <strong>K-RadCube</strong> (South Korea/KARI, human-tissue-analog dosimeter + Samsung/SK Hynix chip radiation testing), <strong>Space Weather CubeSat-1</strong> (Saudi Arabia/KACST, high-orbit space weather monitoring). All four are now transmitting science data from cislunar space.</div>
+    <div class="tspb">TSPB Layer 5 (Set Theory):<code>CubeSat coverage: {radiation effects} &cup; {shielding} &cup; {dosimetry} &cup; {space weather}
+Each measures a different aspect of the same environment.
+Intersection: all four see the same GCR/SPE flux from different instruments.
+Union: complete characterization of cislunar radiation + comms + navigation.</code></div>
+    <div class="lesson">Four countries, four CubeSats, four science objectives, one ride to the Moon. The secondary payloads are as international as the primary crew.</div>
   </div>
 
   <div class="sweep-header">v1.2.20 &mdash; April 2, 8:00 PM PDT (MET+1d05:00) &mdash; TRANSLUNAR COAST, DAY 2</div>
@@ -382,7 +450,7 @@ In deep space, no sunrise/sunset zeitgeber — free-running oscillator</code></d
 
 <footer>
   <a href="index.html">Artemis II Tracker</a> &middot;
-  Wall-Clock Papers &middot; 34 cataloged &middot;
+  Wall-Clock Papers &middot; 40 cataloged &middot;
   <a href="../../index.html">Tibsfox Research</a>
 </footer>
 

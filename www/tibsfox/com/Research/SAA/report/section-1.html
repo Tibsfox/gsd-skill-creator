@@ -90,6 +90,11 @@
       <a href="section-8.html">8. Future</a>
       <a href="section-9.html">9. DevOps</a>
       <a href="section-10.html">10. GSD</a>
+      <a href="section-11.html">11. Hooks</a>
+      <a href="section-12.html">12. Teams</a>
+      <a href="section-13.html">13. Orchestration</a>
+      <a href="section-14.html">14. Memory</a>
+      <a href="section-15.html">15. Case Studies</a>
       <a href="references.html">References</a>
     </div>
   </header>
@@ -98,7 +103,7 @@
     <header>
         <span class="section-number">1</span>
         <h1>AI Agentic Programming Fundamentals</h1>
-        <p class="research-date">Research current as of: January 2026</p>
+        <p class="research-date">Research current as of: April 2026</p>
         <div class="breadcrumb">
             <a href="../index.html">Report Home</a> / Section 1
         </div>
@@ -107,15 +112,43 @@
     <div class="container">
         <nav class="navigation">
             <a href="../index.html" class="nav-button">
-                <span>← Back to Index</span>
+                <span>&larr; Back to Index</span>
             </a>
             <a href="section-2.html" class="nav-button next">
-                <span>Section 2: AI Agent Skills →</span>
+                <span>Section 2: AI Agent Skills &rarr;</span>
             </a>
         </nav>
 
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h3>Section Contents</h3>
+            <ul>
+                <li><a href="#rise-of-agentic-ai">The Rise of Agentic AI</a></li>
+                <li><a href="#agentic-vs-traditional">Agentic AI vs. Traditional Automation</a></li>
+                <li><a href="#core-architecture">Core Architectural Patterns</a></li>
+                <li><a href="#react-pattern">The ReAct Pattern</a></li>
+                <li><a href="#tool-use">Tool Use and Function Calling</a></li>
+                <li><a href="#mcp">Model Context Protocol (MCP)</a></li>
+                <li><a href="#a2a">Agent2Agent Protocol (A2A)</a></li>
+                <li><a href="#other-protocols">Other Agent Communication Standards</a></li>
+                <li><a href="#design-patterns">Foundational Agentic Design Patterns</a></li>
+                <li><a href="#memory-systems">Agent Memory Systems</a></li>
+                <li><a href="#framework-comparison">Multi-Agent Framework Comparison</a></li>
+                <li><a href="#claude-code-platform">Claude Code as Agentic Platform</a></li>
+                <li><a href="#claude-agent-sdk">Claude Agent SDK</a></li>
+                <li><a href="#skills-agents-teams-hooks">The Skills-Agents-Teams-Hooks Architecture</a></li>
+                <li><a href="#plugins-system">The Plugins System</a></li>
+                <li><a href="#self-modifying-systems">The Self-Modifying System Pattern</a></li>
+                <li><a href="#content-addressed-code">Content-Addressed Code (Unison)</a></li>
+                <li><a href="#market-context">Updated Market Context</a></li>
+                <li><a href="#implementation-examples">Implementation Examples</a></li>
+                <li><a href="#gsd-integration">GSD Integration</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </nav>
+
         <!-- Introduction -->
-        <section class="content-section">
+        <section class="content-section" id="rise-of-agentic-ai">
             <h2>Introduction: The Rise of Agentic AI</h2>
 
             <p>AI agentic programming represents a transformative paradigm shift in artificial intelligence, moving beyond simple question-answering systems to autonomous agents capable of planning, executing complex tasks, and interacting with external tools and environments.<sup class="citation" data-ref="1"><a href="#ref-1" aria-describedby="tooltip-1">1</a><span class="citation-tooltip" id="tooltip-1" role="tooltip"><span class="source-type academic">Academic</span><strong>A Survey on Large Language Model based Autonomous Agents</strong><span class="authors">Wang et al., 2024</span><a href="https://arxiv.org/abs/2308.11432" target="_blank" rel="noopener">View Paper</a></span></sup> Unlike traditional AI systems that operate within predetermined parameters, agentic AI systems are goal-driven, self-adjusting, and capable of learning from interactions.<sup class="citation" data-ref="2"><a href="#ref-2" aria-describedby="tooltip-2">2</a><span class="citation-tooltip" id="tooltip-2" role="tooltip"><span class="source-type academic">Academic</span><strong>The Rise and Potential of Large Language Model Based Agents: A Survey</strong><span class="authors">Xi et al., 2024</span><a href="https://arxiv.org/abs/2309.07864" target="_blank" rel="noopener">View Paper</a></span></sup></p>
@@ -125,7 +158,7 @@
                 <p>AI agentic programming is an emerging paradigm where Large Language Models (LLMs) autonomously plan, execute, and interact with external tools to achieve user-defined goals.<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3">3</a><span class="citation-tooltip" id="tooltip-3" role="tooltip"><span class="source-type academic">Academic</span><strong>LLM Powered Autonomous Agents</strong><span class="authors">Lilian Weng, 2024</span><a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" rel="noopener">View Post</a></span></sup> Rather than following fixed rules, agentic AI systems think through problems, take actions using tools, observe results, and iteratively decide what to do next until the objective is achieved.</p>
             </div>
 
-            <p>The year 2025 marked a pivotal transition point where AI agents moved from experimental prototypes to production-ready autonomous systems. By 2028, agentic AI is expected to drive 33% of enterprise software applications, up from just 1% in 2024. Furthermore, 85% of customer interactions are expected to be managed by AI by 2026, according to Gartner predictions.</p>
+            <p>The period from 2025 through early 2026 has been the pivotal transition where AI agents moved from experimental prototypes to production-ready autonomous systems. By 2028, agentic AI is expected to drive 33% of enterprise software applications, up from just 1% in 2024. Furthermore, 85% of customer interactions are expected to be managed by AI by 2026, according to Gartner predictions. The release of Claude Opus 4.6 with its 1-million-token context window in early 2026 marked a particularly significant inflection point, enabling agents to hold entire codebases and project histories in context simultaneously.</p>
 
             <div class="stats-highlight">
                 <div class="stat-box">
@@ -140,6 +173,10 @@
                     <div class="stat-value">72%</div>
                     <div class="stat-label">Enterprise AI projects using multi-agent architectures (2025)</div>
                 </div>
+                <div class="stat-box">
+                    <div class="stat-value">1M</div>
+                    <div class="stat-label">Token context window (Opus 4.6, April 2026)</div>
+                </div>
             </div>
 
             <aside class="research-callout">
@@ -147,13 +184,13 @@
                     <span class="callout-icon">Research Insight</span>
                 </div>
                 <div class="callout-content">
-                    <p>Academic research has converged on a common formulation: <strong>Agent = LLM + Memory + Planning + Tool Use</strong>.<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3b">3</a><span class="citation-tooltip" id="tooltip-3b" role="tooltip"><span class="source-type academic">Academic</span><strong>LLM Powered Autonomous Agents</strong><span class="authors">Lilian Weng, 2024</span><a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" rel="noopener">View Post</a></span></sup> This formulation, widely cited across agent research, identifies four core architectural components that appear across successful implementations: profiling (identity), memory (persistence), planning (decomposition), and action (tool execution).</p>
+                    <p>Academic research has converged on a common formulation: <strong>Agent = LLM + Memory + Planning + Tool Use</strong>.<sup class="citation" data-ref="3"><a href="#ref-3" aria-describedby="tooltip-3b">3</a><span class="citation-tooltip" id="tooltip-3b" role="tooltip"><span class="source-type academic">Academic</span><strong>LLM Powered Autonomous Agents</strong><span class="authors">Lilian Weng, 2024</span><a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" rel="noopener">View Post</a></span></sup> This formulation, widely cited across agent research, identifies four core architectural components that appear across successful implementations: profiling (identity), memory (persistence), planning (decomposition), and action (tool execution). By April 2026, a fifth component has emerged in practice: <strong>self-modification</strong>&mdash;the ability of agent systems to update their own skills and configuration at runtime.</p>
                 </div>
             </aside>
         </section>
 
         <!-- Agentic AI vs Traditional Automation -->
-        <section class="content-section">
+        <section class="content-section" id="agentic-vs-traditional">
             <h2>Agentic AI vs. Traditional Automation</h2>
 
             <p>Understanding the fundamental differences between agentic AI and traditional automation is critical for determining when to apply each approach. While both seek to improve efficiency and reduce manual work, they operate on fundamentally different principles.</p>
@@ -199,18 +236,18 @@
 
             <h3>Business Impact</h3>
 
-            <p>A 2025 analysis found that companies deploying AI agents report operational efficiency gains exceeding 50% and cost reductions of around 35%. A study by AskUI found that companies using agentic AI saw a 30% reduction in customer support queries due to the AI's ability to navigate ambiguity and escalate issues intelligently.</p>
+            <p>A 2025 analysis found that companies deploying AI agents report operational efficiency gains exceeding 50% and cost reductions of around 35%. A study by AskUI found that companies using agentic AI saw a 30% reduction in customer support queries due to the AI&rsquo;s ability to navigate ambiguity and escalate issues intelligently.</p>
 
             <div class="highlight-box">
                 <h4>When to Use Each Approach</h4>
                 <p><strong>Traditional Automation:</strong> Best for repeatable, tightly regulated processes where consistency and compliance matter most. Use when workflows are structured, consistent, and predictable.</p>
                 <p><strong>Agentic AI:</strong> Better for work that benefits from adaptability, judgment, and autonomy. Use for complex, multi-step tasks requiring decision-making across variable conditions.</p>
-                <p><strong>Hybrid Approach:</strong> The consensus in 2025 is that the real advantage comes from knowing how to blend the two approaches, not choosing one over the other.</p>
+                <p><strong>Hybrid Approach:</strong> The consensus in 2025&ndash;2026 is that the real advantage comes from knowing how to blend the two approaches, not choosing one over the other.</p>
             </div>
         </section>
 
         <!-- Foundational Architecture Patterns -->
-        <section class="content-section">
+        <section class="content-section" id="core-architecture">
             <h2>Core Architectural Patterns</h2>
 
             <p>Agentic AI systems are built on several foundational architectural components and patterns. Understanding these patterns is essential for designing effective agent systems.</p>
@@ -220,8 +257,8 @@
             <p>Every agentic AI system comprises several essential modules:<sup class="citation" data-ref="7"><a href="#ref-7" aria-describedby="tooltip-7">7</a><span class="citation-tooltip" id="tooltip-7" role="tooltip"><span class="source-type academic">Academic</span><strong>Cognitive Architectures for Language Agents (CoALA)</strong><span class="authors">Sumers et al., 2024 (TMLR)</span><a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">View Paper</a></span></sup></p>
 
             <ul>
-                <li><strong>Perception Module:</strong> The agent's sensory system using natural language processing (NLP), computer vision, and APIs to interpret input from users, systems, or environments.</li>
-                <li><strong>Cognitive Module (Reasoning Engine):</strong> The "brain" responsible for interpreting information, setting goals, generating plans, and making decisions. This is where the LLM's reasoning capabilities are applied.</li>
+                <li><strong>Perception Module:</strong> The agent&rsquo;s sensory system using natural language processing (NLP), computer vision, and APIs to interpret input from users, systems, or environments.</li>
+                <li><strong>Cognitive Module (Reasoning Engine):</strong> The &ldquo;brain&rdquo; responsible for interpreting information, setting goals, generating plans, and making decisions. This is where the LLM&rsquo;s reasoning capabilities are applied.</li>
                 <li><strong>Memory Systems:</strong> Both short-term (working context within a session) and long-term (persistent knowledge across sessions) memory enable agents to maintain state and learn from past interactions.</li>
                 <li><strong>Tool Integration Layer:</strong> Mechanisms for accessing and executing external functions, APIs, databases, and services.</li>
                 <li><strong>Action/Execution Module:</strong> The component that carries out decisions by invoking tools, generating responses, or triggering workflows.</li>
@@ -231,7 +268,7 @@
 
             <h4>1. Single-Agent Architecture</h4>
 
-            <p>A single-agent system uses an AI model, a defined set of tools, and a comprehensive system prompt to autonomously handle a user request. The agent relies on the model's reasoning capabilities to interpret requests, plan steps, and decide which tools to use.</p>
+            <p>A single-agent system uses an AI model, a defined set of tools, and a comprehensive system prompt to autonomously handle a user request. The agent relies on the model&rsquo;s reasoning capabilities to interpret requests, plan steps, and decide which tools to use.</p>
 
             <div class="highlight-box">
                 <h4>Best Use Case</h4>
@@ -275,7 +312,7 @@
 
                 <div class="protocol-card">
                     <h4>Collaborative Peer Group</h4>
-                    <p>Agents share outputs iteratively and refine each other's results through feedback loops, mimicking human team collaboration.</p>
+                    <p>Agents share outputs iteratively and refine each other&rsquo;s results through feedback loops, mimicking human team collaboration.</p>
                     <p><strong>Use case:</strong> Creative tasks, problem-solving, and scenarios requiring diverse perspectives.</p>
                 </div>
             </div>
@@ -286,7 +323,7 @@
         </section>
 
         <!-- ReAct Pattern -->
-        <section class="content-section">
+        <section class="content-section" id="react-pattern">
             <h2>The ReAct Pattern: Reasoning and Acting</h2>
 
             <p>The ReAct (Reasoning and Acting) pattern is the foundational design pattern for modern AI agents, combining chain-of-thought reasoning with the ability to take actions through tools.<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4">4</a><span class="citation-tooltip" id="tooltip-4" role="tooltip"><span class="source-type academic">Academic</span><strong>ReAct: Synergizing Reasoning and Acting in Language Models</strong><span class="authors">Yao et al., 2023 (ICLR)</span><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">View Paper</a></span></sup> This enables AI systems to solve complex problems autonomously by creating a feedback loop between thinking and doing.</p>
@@ -299,11 +336,11 @@
                 <div class="diagram-title">ReAct Pattern Flow</div>
                 <div class="flow-container">
                     <div class="flow-box">Reasoning<br><small>Analyze request, determine next action</small></div>
-                    <div class="flow-arrow">→</div>
+                    <div class="flow-arrow">&rarr;</div>
                     <div class="flow-box">Action<br><small>Execute tool/function with arguments</small></div>
-                    <div class="flow-arrow">→</div>
+                    <div class="flow-arrow">&rarr;</div>
                     <div class="flow-box">Observation<br><small>Process results, update understanding</small></div>
-                    <div class="flow-arrow">↻</div>
+                    <div class="flow-arrow">&#8635;</div>
                 </div>
                 <p style="margin-top: 1rem; color: var(--text-muted);">The loop continues until the agent has sufficient information to provide a final answer</p>
             </div>
@@ -311,13 +348,13 @@
             <h3>Three-Phase Operation</h3>
 
             <h4>Phase 1: Reasoning</h4>
-            <p>The agent analyzes the user's request and current context to determine what action to take next. It reasons about which tools might help and what information is still needed. This leverages the LLM's chain-of-thought capabilities to break down complex problems.</p>
+            <p>The agent analyzes the user&rsquo;s request and current context to determine what action to take next. It reasons about which tools might help and what information is still needed. This leverages the LLM&rsquo;s chain-of-thought capabilities to break down complex problems.</p>
 
             <h4>Phase 2: Action</h4>
-            <p>Based on its reasoning, the agent selects and invokes a specific tool with appropriate arguments. Actions might include searching the web, querying a database, performing calculations, calling an API, or executing code. The agent must correctly format the tool request based on the tool's schema.</p>
+            <p>Based on its reasoning, the agent selects and invokes a specific tool with appropriate arguments. Actions might include searching the web, querying a database, performing calculations, calling an API, or executing code. The agent must correctly format the tool request based on the tool&rsquo;s schema.</p>
 
             <h4>Phase 3: Observation</h4>
-            <p>The agent receives and processes the tool's output, incorporating new information into its understanding. It then decides whether to take another action (returning to the Reasoning phase) or provide a final answer to the user.</p>
+            <p>The agent receives and processes the tool&rsquo;s output, incorporating new information into its understanding. It then decides whether to take another action (returning to the Reasoning phase) or provide a final answer to the user.</p>
 
             <aside class="research-callout">
                 <div class="callout-header">
@@ -328,16 +365,16 @@
                 </div>
             </aside>
 
-            <h3>Implementation in 2025-2026</h3>
+            <h3>Implementation in 2025&ndash;2026</h3>
 
-            <p>As of 2025, LangChain's development team recommends using <strong>LangGraph</strong> for all new ReAct agent implementations.<sup class="citation" data-ref="16"><a href="#ref-16" aria-describedby="tooltip-16">16</a><span class="citation-tooltip" id="tooltip-16" role="tooltip"><span class="source-type industry">Industry</span><strong>LangGraph: Building Stateful AI Agents</strong><span class="authors">LangChain, 2024-2025</span><a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">View Docs</a></span></sup> While LangChain agents continue to be supported, LangGraph offers a more flexible and production-ready architecture for complex workflows.</p>
+            <p>As of 2025, LangChain&rsquo;s development team recommends using <strong>LangGraph</strong> for all new ReAct agent implementations.<sup class="citation" data-ref="16"><a href="#ref-16" aria-describedby="tooltip-16">16</a><span class="citation-tooltip" id="tooltip-16" role="tooltip"><span class="source-type industry">Industry</span><strong>LangGraph: Building Stateful AI Agents</strong><span class="authors">LangChain, 2024&ndash;2025</span><a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">View Docs</a></span></sup> While LangChain agents continue to be supported, LangGraph offers a more flexible and production-ready architecture for complex workflows. Claude Code, Anthropic&rsquo;s official CLI, natively implements ReAct through its built-in tool ecosystem without requiring an external framework.</p>
 
             <div class="highlight-box">
                 <h4>LangGraph Implementation Architecture</h4>
                 <p>LangGraph implements ReAct through a graph-based state machine with the following components:</p>
                 <ul>
                     <li><strong>call_model node:</strong> Uses the model_with_tools to invoke the LLM and generate reasoning + action decisions</li>
-                    <li><strong>call_tool node:</strong> Executes tool methods using LangGraph's prebuilt ToolNode</li>
+                    <li><strong>call_tool node:</strong> Executes tool methods using LangGraph&rsquo;s prebuilt ToolNode</li>
                     <li><strong>should_continue edge:</strong> Conditional routing that decides whether to call tools or return the final answer</li>
                     <li><strong>State management:</strong> Maintains conversation history and context across reasoning-action cycles</li>
                 </ul>
@@ -348,6 +385,7 @@
             <p>Beyond LangGraph, several platforms have emerged with built-in ReAct support:</p>
 
             <ul>
+                <li><strong>Claude Code:</strong> Anthropic&rsquo;s official agentic coding platform implements ReAct natively through its tool ecosystem (Read, Write, Edit, Bash, Grep, Glob, Agent, WebFetch, WebSearch). No external framework required.</li>
                 <li><strong>AgentScope:</strong> Offers built-in ReAct agent support with tools, skills, human-in-the-loop steering, memory, planning, realtime voice, evaluation and model finetuning, along with built-in support for MCP and A2A protocols.</li>
                 <li><strong>Google Gemini 2.5 + LangGraph:</strong> Google AI for Developers published a comprehensive guide on building ReAct agents from scratch with Gemini and LangGraph (December 2025).</li>
                 <li><strong>AutoGen, CrewAI, LlamaIndex:</strong> All major agent frameworks include ReAct as a core pattern.</li>
@@ -366,7 +404,7 @@
                 <p><strong>Challenges:</strong></p>
                 <ul>
                     <li>The iterative, multi-step nature of the loop can lead to higher end-to-end latency compared to a single query</li>
-                    <li>Agent effectiveness is highly dependent on the quality of the AI model's reasoning capabilities</li>
+                    <li>Agent effectiveness is highly dependent on the quality of the AI model&rsquo;s reasoning capabilities</li>
                     <li>An error or misleading result from a tool in one observation step can propagate and cause the final answer to be incorrect</li>
                 </ul>
             </div>
@@ -384,10 +422,10 @@
         </section>
 
         <!-- Tool Use Pattern -->
-        <section class="content-section">
+        <section class="content-section" id="tool-use">
             <h2>Tool Use and Function Calling</h2>
 
-            <p>Tool calling (also referred to as function calling) is the cornerstone capability that enables AI agents to move beyond conversation and take action in the real world.<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5">5</a><span class="citation-tooltip" id="tooltip-5" role="tooltip"><span class="source-type academic">Academic</span><strong>Toolformer: Language Models Can Teach Themselves to Use Tools</strong><span class="authors">Schick et al., 2024 (NeurIPS)</span><a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">View Paper</a></span></sup> This pattern focuses on "doing" rather than just "knowing," transforming LLMs from passive responders into active participants in complex workflows.</p>
+            <p>Tool calling (also referred to as function calling) is the cornerstone capability that enables AI agents to move beyond conversation and take action in the real world.<sup class="citation" data-ref="5"><a href="#ref-5" aria-describedby="tooltip-5">5</a><span class="citation-tooltip" id="tooltip-5" role="tooltip"><span class="source-type academic">Academic</span><strong>Toolformer: Language Models Can Teach Themselves to Use Tools</strong><span class="authors">Schick et al., 2024 (NeurIPS)</span><a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">View Paper</a></span></sup> This pattern focuses on &ldquo;doing&rdquo; rather than just &ldquo;knowing,&rdquo; transforming LLMs from passive responders into active participants in complex workflows.</p>
 
             <h3>What is Tool Calling?</h3>
 
@@ -399,13 +437,13 @@
                 <div class="diagram-title">Tool Calling Flow</div>
                 <div class="flow-container">
                     <div class="flow-box">1. Declare<br><small>Tool schemas defined</small></div>
-                    <div class="flow-arrow">→</div>
+                    <div class="flow-arrow">&rarr;</div>
                     <div class="flow-box">2. Request<br><small>Model returns functionCall</small></div>
-                    <div class="flow-arrow">→</div>
+                    <div class="flow-arrow">&rarr;</div>
                     <div class="flow-box">3. Execute<br><small>App runs the function</small></div>
-                    <div class="flow-arrow">→</div>
+                    <div class="flow-arrow">&rarr;</div>
                     <div class="flow-box">4. Return<br><small>Send results to model</small></div>
-                    <div class="flow-arrow">→</div>
+                    <div class="flow-arrow">&rarr;</div>
                     <div class="flow-box">5. Synthesize<br><small>Generate final answer</small></div>
                 </div>
             </div>
@@ -430,7 +468,7 @@
                     <span class="callout-icon">Claude Code Implementation</span>
                 </div>
                 <div class="callout-content">
-                    <p><strong>Claude Code naturally implements the ReAct pattern</strong> through its diverse tool ecosystem: Read, Write, Edit, Bash, Grep, and Glob. Each tool call represents an action; Claude's reasoning determines what to do next based on observations. The GSD (Get-Shit-Done) workflow system extends this with explicit planning phases, structured verification, and deviation handling rules that embody academic recommendations for bounded autonomy.<sup class="citation" data-ref="13"><a href="#ref-13" aria-describedby="tooltip-13">13</a><span class="citation-tooltip" id="tooltip-13" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, December 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View Guide</a></span></sup></p>
+                    <p><strong>Claude Code naturally implements the ReAct pattern</strong> through its diverse tool ecosystem: Read, Write, Edit, Bash, Grep, Glob, Agent, WebFetch, and WebSearch. Each tool call represents an action; Claude&rsquo;s reasoning determines what to do next based on observations. The GSD (Get-Shit-Done) workflow system extends this with explicit planning phases, structured verification, and deviation handling rules that embody academic recommendations for bounded autonomy.<sup class="citation" data-ref="13"><a href="#ref-13" aria-describedby="tooltip-13">13</a><span class="citation-tooltip" id="tooltip-13" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, December 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View Guide</a></span></sup></p>
                 </div>
             </aside>
 
@@ -441,12 +479,12 @@
                     <h4>1. Direct API Calls</h4>
                     <p>The agent makes direct HTTP requests to APIs using libraries like <code>requests</code> or <code>axios</code>.</p>
                     <p><strong>Pros:</strong> Lower latency for simple requests, full control over implementation</p>
-                    <p><strong>Best for:</strong> Quick prototypes, connecting to 1-2 well-documented APIs</p>
+                    <p><strong>Best for:</strong> Quick prototypes, connecting to 1&ndash;2 well-documented APIs</p>
                 </div>
 
                 <div class="protocol-card">
                     <h4>2. Tool/Function Calling</h4>
-                    <p>Model-native pattern popularized by OpenAI, Google, and Anthropic where you define available "tools" with structured schemas.</p>
+                    <p>Model-native pattern popularized by OpenAI, Google, and Anthropic where you define available &ldquo;tools&rdquo; with structured schemas.</p>
                     <p><strong>Pros:</strong> Native LLM support, standardized approach</p>
                     <p><strong>Best for:</strong> Production agents with multiple tools</p>
                 </div>
@@ -473,18 +511,19 @@
                 </div>
             </div>
 
-            <h3>2025 Adoption and Frameworks</h3>
+            <h3>2025&ndash;2026 Adoption and Frameworks</h3>
 
             <p>2025 was marked as the year of AI agents, with organizations deploying AI agents widely across industries and functions. Popular frameworks with robust tool calling support include:</p>
 
             <ul>
-                <li><strong>OpenAI:</strong> Function calling API, Assistants API with built-in tools<sup class="citation" data-ref="17"><a href="#ref-17" aria-describedby="tooltip-17">17</a><span class="citation-tooltip" id="tooltip-17" role="tooltip"><span class="source-type industry">Industry</span><strong>Function Calling and Tools</strong><span class="authors">OpenAI, 2024-2025</span><a href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="noopener">View Docs</a></span></sup></li>
+                <li><strong>OpenAI:</strong> Function calling API, Assistants API with built-in tools<sup class="citation" data-ref="17"><a href="#ref-17" aria-describedby="tooltip-17">17</a><span class="citation-tooltip" id="tooltip-17" role="tooltip"><span class="source-type industry">Industry</span><strong>Function Calling and Tools</strong><span class="authors">OpenAI, 2024&ndash;2025</span><a href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="noopener">View Docs</a></span></sup></li>
+                <li><strong>Anthropic Claude Code:</strong> First-party agentic CLI with 10+ built-in tools, Agent subagent spawning, and MCP server integration</li>
                 <li><strong>LangChain/LangGraph:</strong> Extensive tool ecosystem and custom tool creation</li>
                 <li><strong>LlamaIndex:</strong> Tool use with focus on RAG and data integration</li>
                 <li><strong>AutoGen:</strong> Conversational tool use with multi-agent support</li>
                 <li><strong>CrewAI:</strong> Role-based tool assignment for agent teams</li>
-                <li><strong>Semantic Kernel:</strong> Microsoft's enterprise-focused framework</li>
-                <li><strong>Google ADK (Agent Development Kit):</strong> Google's agent framework with Interactions API<sup class="citation" data-ref="18"><a href="#ref-18" aria-describedby="tooltip-18">18</a><span class="citation-tooltip" id="tooltip-18" role="tooltip"><span class="source-type industry">Industry</span><strong>Agent Development Kit (ADK)</strong><span class="authors">Google, 2025</span><a href="https://google.github.io/adk-docs/" target="_blank" rel="noopener">View Docs</a></span></sup></li>
+                <li><strong>Semantic Kernel:</strong> Microsoft&rsquo;s enterprise-focused framework</li>
+                <li><strong>Google ADK (Agent Development Kit):</strong> Google&rsquo;s agent framework with Interactions API<sup class="citation" data-ref="18"><a href="#ref-18" aria-describedby="tooltip-18">18</a><span class="citation-tooltip" id="tooltip-18" role="tooltip"><span class="source-type industry">Industry</span><strong>Agent Development Kit (ADK)</strong><span class="authors">Google, 2025</span><a href="https://google.github.io/adk-docs/" target="_blank" rel="noopener">View Docs</a></span></sup></li>
             </ul>
 
             <aside class="research-callout">
@@ -498,10 +537,10 @@
         </section>
 
         <!-- Model Context Protocol -->
-        <section class="content-section">
+        <section class="content-section" id="mcp">
             <h2>Model Context Protocol (MCP)</h2>
 
-            <p>The Model Context Protocol has emerged as the de facto standard for connecting AI systems to real-world data and tools.<sup class="citation" data-ref="14"><a href="#ref-14" aria-describedby="tooltip-14">14</a><span class="citation-tooltip" id="tooltip-14" role="tooltip"><span class="source-type industry">Industry</span><strong>Model Context Protocol (MCP)</strong><span class="authors">Anthropic, November 2024</span><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">View Spec</a></span></sup> Twelve months after its launch in November 2024, MCP has been adopted by OpenAI, Google DeepMind, Microsoft, and thousands of developers building production agents.</p>
+            <p>The Model Context Protocol has emerged as the de facto standard for connecting AI systems to real-world data and tools.<sup class="citation" data-ref="14"><a href="#ref-14" aria-describedby="tooltip-14">14</a><span class="citation-tooltip" id="tooltip-14" role="tooltip"><span class="source-type industry">Industry</span><strong>Model Context Protocol (MCP)</strong><span class="authors">Anthropic, November 2024</span><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">View Spec</a></span></sup> Eighteen months after its launch in November 2024, MCP has been adopted by OpenAI, Google DeepMind, Microsoft, and thousands of developers building production agents. Its donation to the Linux Foundation&rsquo;s Agentic AI Foundation in December 2025 cemented its status as the industry&rsquo;s universal tool integration protocol.</p>
 
             <h3>What is MCP?</h3>
 
@@ -527,14 +566,14 @@
                 <div class="diagram-title">MCP Architecture</div>
                 <div class="flow-container">
                     <div class="flow-box">AI Agent<br><small>(MCP Client)</small></div>
-                    <div class="flow-arrow">↔</div>
+                    <div class="flow-arrow">&harr;</div>
                     <div class="flow-box">MCP Protocol<br><small>(JSON-RPC 2.0)</small></div>
-                    <div class="flow-arrow">↔</div>
+                    <div class="flow-arrow">&harr;</div>
                     <div class="flow-box">MCP Server<br><small>(Notion, Slack, DB)</small></div>
                 </div>
             </div>
 
-            <h3>Ecosystem Growth in 2025</h3>
+            <h3>Ecosystem Growth</h3>
 
             <p>The MCP ecosystem has experienced remarkable growth since its introduction:</p>
 
@@ -562,7 +601,7 @@
             <ul>
                 <li><strong>November 2024:</strong> Anthropic releases MCP as an open standard with SDKs for Python and TypeScript</li>
                 <li><strong>March 2025:</strong> OpenAI officially adopts MCP, integrating the standard across its products including the ChatGPT desktop app</li>
-                <li><strong>May 2025:</strong> Google, Microsoft and GitHub indicate support for MCP. GitHub and Microsoft announce joining MCP's steering committee at Microsoft's Build 2025 conference (May 19)</li>
+                <li><strong>May 2025:</strong> Google, Microsoft and GitHub indicate support for MCP. GitHub and Microsoft announce joining MCP&rsquo;s steering committee at Microsoft&rsquo;s Build 2025 conference (May 19)</li>
                 <li><strong>December 2025:</strong> Anthropic donates MCP to the Agentic AI Foundation (AAIF), a directed fund under the Linux Foundation, co-founded by Anthropic, Block and OpenAI, with support from Google, Microsoft, AWS, Cloudflare, and Bloomberg</li>
             </ul>
 
@@ -573,48 +612,34 @@
             <ul>
                 <li><strong>AI Platforms:</strong> ChatGPT, Claude, Gemini, Microsoft Copilot, Cursor, Visual Studio Code, and other popular AI products</li>
                 <li><strong>Enterprise Infrastructure:</strong> AWS, Cloudflare, Google Cloud, Microsoft Azure provide enterprise-grade MCP hosting and management</li>
-                <li><strong>Developer Tools:</strong> Codeium's Cascade, thousands of independently developed MCP servers for services like GitHub, Slack, Blender</li>
+                <li><strong>Developer Tools:</strong> Codeium&rsquo;s Cascade, thousands of independently developed MCP servers for services like GitHub, Slack, Blender</li>
             </ul>
 
             <h3>Real-World Case Studies</h3>
 
             <div class="case-study">
-                <h4>Block (Square) - 75% Reduction in Engineering Time</h4>
+                <h4>Block (Square) &mdash; 75% Reduction in Engineering Time</h4>
                 <p>At Block, MCP tools help refactor legacy software, migrate databases, run unit tests, and automate repetitive coding tasks. Design, product, and customer support teams use MCP-powered Goose to generate documentation, process tickets, and build prototypes.</p>
-                <p>Data teams rely on MCP to connect with internal systems, with integrations to Snowflake, Jira, Slack, Google Drive, and internal task-specific APIs. <strong>Thousands of Block's employees use Goose and cut up to 75% of the time spent on daily engineering tasks.</strong></p>
+                <p>Data teams rely on MCP to connect with internal systems, with integrations to Snowflake, Jira, Slack, Google Drive, and internal task-specific APIs. <strong>Thousands of Block&rsquo;s employees use Goose and cut up to 75% of the time spent on daily engineering tasks.</strong></p>
             </div>
 
             <div class="case-study">
-                <h4>Bloomberg - Accelerating Production Deployment</h4>
+                <h4>Bloomberg &mdash; Accelerating Production Deployment</h4>
                 <p>At the MCP Developer Summit, Sabhav Kothari, Head of AI Productivity at Bloomberg, focused on how his team utilizes MCP internally to help AI developers reduce the time required to ship demos into production.</p>
             </div>
 
             <div class="case-study">
-                <h4>Cloudflare - Cloud-Scale MCP Hosting</h4>
+                <h4>Cloudflare &mdash; Cloud-Scale MCP Hosting</h4>
                 <p>Cloudflare transforms MCP from a local-only technology into a scalable, cloud-based solution. By hosting MCP servers in the cloud, Cloudflare removes the need for users to configure and maintain servers locally, enabling enterprise-scale deployments.</p>
             </div>
 
-            <h3>Industry-Specific Use Cases</h3>
-
-            <h4>Healthcare</h4>
-            <p>MCP connects Electronic Health Records (EHRs), symptom checkers, and diagnostic tools. AI assistants suggest treatment using real-time vitals plus patient history, resulting in safer, faster clinical decisions.</p>
-
-            <h4>Financial Services</h4>
-            <p>Risk analysis requires multi-model inputs (credit, fraud, behavioral data). MCP aggregates inputs from multiple data sources. AI bankers can review credit scores, transactions, and fraud alerts in one session, leading to smarter financial advice and approvals.</p>
-
-            <h4>Sales & Marketing</h4>
-            <p>MCP servers connect CRM, market intelligence platforms, content management systems, and internal knowledge bases. Sales teams typically see improvements in conversion rates (10-25% increases), deal velocity, and more accurate sales forecasting.</p>
-
-            <h4>Cybersecurity</h4>
-            <p>MCP Servers can be leveraged by CISOs, SOC teams, red teamers, and threat intelligence analysts to automate real-world cybersecurity scenarios, integrating threat intelligence feeds, SIEM systems, and security tools.</p>
-
             <h3>Future Outlook</h3>
 
-            <p>75% of companies are planning to implement MCP in the next year, signaling widespread enterprise adoption. The donation of MCP to the Linux Foundation's Agentic AI Foundation positions it as a long-term industry standard, similar to how other open protocols have shaped technology ecosystems.</p>
+            <p>75% of companies are planning to implement MCP in the next year, signaling widespread enterprise adoption. The donation of MCP to the Linux Foundation&rsquo;s Agentic AI Foundation positions it as a long-term industry standard, similar to how other open protocols have shaped technology ecosystems.</p>
         </section>
 
         <!-- Agent2Agent Protocol -->
-        <section class="content-section">
+        <section class="content-section" id="a2a">
             <h2>Agent2Agent Protocol (A2A)</h2>
 
             <p>While the Model Context Protocol focuses on how agents use tools, the Agent2Agent Protocol (A2A) addresses how agents communicate with each other.<sup class="citation" data-ref="15"><a href="#ref-15" aria-describedby="tooltip-15">15</a><span class="citation-tooltip" id="tooltip-15" role="tooltip"><span class="source-type industry">Industry</span><strong>Agent2Agent Protocol (A2A)</strong><span class="authors">Google, April 2025</span><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">View Announcement</a></span></sup> Launched by Google in April 2025, A2A provides a universal standard for agent-to-agent communication, enabling agents built on different vendors, frameworks, or clouds to find, communicate, and collaborate securely.</p>
@@ -657,7 +682,7 @@
 
             <div class="highlight-box">
                 <h4>How MCP and A2A Work Together</h4>
-                <p>While Anthropic's Model Context Protocol focused on how agents use tools, Agent2Agent addressed how agents communicate with each other. Crucially, <strong>the two protocols were designed to work together</strong>:</p>
+                <p>While Anthropic&rsquo;s Model Context Protocol focused on how agents use tools, Agent2Agent addressed how agents communicate with each other. Crucially, <strong>the two protocols were designed to work together</strong>:</p>
                 <ul>
                     <li><strong>MCP:</strong> Defines how an individual agent accesses external data and tools</li>
                     <li><strong>A2A:</strong> Defines how multiple agents discover each other, communicate, and coordinate work</li>
@@ -665,33 +690,20 @@
                 </ul>
             </div>
 
-            <h3>Use Cases and Applications</h3>
-
-            <h4>Cross-Platform Enterprise Workflows</h4>
-            <p>A customer service agent (on one platform) can discover and delegate to a billing agent (on another platform) to process a refund, even if they were built by different vendors using different frameworks.</p>
-
-            <h4>Supply Chain Coordination</h4>
-            <p>Inventory agents, shipping agents, and demand forecasting agents from different organizations can coordinate in real-time to optimize supply chain operations.</p>
-
-            <h4>Federated AI Systems</h4>
-            <p>Healthcare providers can allow their AI agents to securely communicate with pharmacy agents, insurance verification agents, and lab result agents while maintaining data privacy and sovereignty.</p>
-
             <h3>Governance and Future Direction</h3>
 
-            <p>The donation of A2A to the Linux Foundation signals a commitment to open, vendor-neutral governance. This follows the pattern established by MCP's donation to the Agentic AI Foundation, creating a cohesive ecosystem of open protocols for the agentic AI era.</p>
-
-            <p>The combination of MCP (tool use) and A2A (agent communication) provides a complete foundation for building interoperable, scalable multi-agent systems across organizational and platform boundaries.</p>
+            <p>The donation of A2A to the Linux Foundation signals a commitment to open, vendor-neutral governance. This follows the pattern established by MCP&rsquo;s donation to the Agentic AI Foundation, creating a cohesive ecosystem of open protocols for the agentic AI era. The combination of MCP (tool use) and A2A (agent communication) provides a complete foundation for building interoperable, scalable multi-agent systems across organizational and platform boundaries.</p>
         </section>
 
         <!-- Other Agent Communication Standards -->
-        <section class="content-section">
+        <section class="content-section" id="other-protocols">
             <h2>Other Agent Communication Standards</h2>
 
             <p>Beyond MCP and A2A, several other protocols and standards have emerged to address specific aspects of agent communication and coordination.</p>
 
             <h3>Agent Communication Protocol (ACP)</h3>
 
-            <p>IBM's Agent Communication Protocol (ACP) was an open, vendor-neutral standard under the Linux Foundation for standardizing communication between AI agents. ACP defined RESTful, HTTP-based interfaces for task invocation, lifecycle management, and both synchronous/asynchronous messaging.</p>
+            <p>IBM&rsquo;s Agent Communication Protocol (ACP) was an open, vendor-neutral standard under the Linux Foundation for standardizing communication between AI agents. ACP defined RESTful, HTTP-based interfaces for task invocation, lifecycle management, and both synchronous/asynchronous messaging.</p>
 
             <div class="highlight-box">
                 <h4>ACP Merger with A2A</h4>
@@ -709,25 +721,11 @@
                 <li>Enterprise-grade security with mutual TLS and fine-grained access control</li>
             </ul>
 
-            <p><strong>Use case:</strong> High-frequency trading systems, real-time IoT agent networks, gaming AI agents</p>
+            <h3>Industry Impact and Standardization</h3>
 
-            <h3>Multi-Agent Communication Standards Research</h3>
+            <p>According to Gartner&rsquo;s 2025 research, 40% of enterprise applications will integrate AI agents by 2026, yet communication barriers remain the primary cause of implementation failures. Organizations using standardized protocols reduce integration time by 60&ndash;70% compared to custom development.</p>
 
-            <p>Academic research has identified critical directions for next-generation protocols:</p>
-
-            <ul>
-                <li><strong>Adaptability:</strong> Protocols that can dynamically adjust communication patterns based on context</li>
-                <li><strong>Privacy Preservation:</strong> Built-in mechanisms for differential privacy and secure multi-party computation</li>
-                <li><strong>Group-Based Interaction:</strong> Native support for group dynamics, consensus protocols, and collective decision-making</li>
-                <li><strong>Layered Architectures:</strong> Separation of concerns between transport, semantics, and application layers</li>
-                <li><strong>Collective Intelligence Infrastructures:</strong> Protocols designed for emergent behavior and swarm intelligence</li>
-            </ul>
-
-            <h3>Industry Impact and Standardization Efforts</h3>
-
-            <p>According to Gartner's 2025 research, 40% of enterprise applications will integrate AI agents by 2026, yet communication barriers remain the primary cause of implementation failures. Organizations using standardized protocols reduce integration time by 60-70% compared to custom development.</p>
-
-            <p>The Linux Foundation's creation of the Agentic AI Foundation in late 2025 signals an effort to establish shared standards and best practices that could play a role similar to the World Wide Web Consortium (W3C) in shaping an open, interoperable agent ecosystem.</p>
+            <p>The Linux Foundation&rsquo;s creation of the Agentic AI Foundation in late 2025 signals an effort to establish shared standards and best practices that could play a role similar to the World Wide Web Consortium (W3C) in shaping an open, interoperable agent ecosystem.</p>
 
             <div class="highlight-box">
                 <h4>The Path Forward</h4>
@@ -736,18 +734,16 @@
         </section>
 
         <!-- Agentic Design Patterns -->
-        <section class="content-section">
+        <section class="content-section" id="design-patterns">
             <h2>Foundational Agentic Design Patterns</h2>
 
-            <p>Recent research has identified a collection of 12 agentic design patterns categorized as Foundational, Cognitive & Decisional, Execution & Interaction, and Adaptive & Learning. These patterns offer reusable, structural solutions to recurring problems in agent design.</p>
+            <p>Recent research has identified a collection of 12 agentic design patterns categorized as Foundational, Cognitive &amp; Decisional, Execution &amp; Interaction, and Adaptive &amp; Learning. These patterns offer reusable, structural solutions to recurring problems in agent design.</p>
 
             <h3>1. Planning Pattern</h3>
             <p>The planning-agent pattern is useful for tasks requiring coordinated action sequences.<sup class="citation" data-ref="11"><a href="#ref-11" aria-describedby="tooltip-11">11</a><span class="citation-tooltip" id="tooltip-11" role="tooltip"><span class="source-type academic">Academic</span><strong>Understanding the Planning of LLM Agents: A Survey</strong><span class="authors">Huang et al., 2024</span><a href="https://arxiv.org/abs/2402.02716" target="_blank" rel="noopener">View Paper</a></span></sup> The agent breaks down complex goals into step-by-step plans, evaluates alternative approaches, and executes actions in a logical sequence.</p>
-            <p><strong>Example:</strong> A travel booking agent that plans multi-city itineraries by breaking down the task into flight search, hotel booking, ground transportation, and activity scheduling.</p>
 
             <h3>2. Reflection Pattern</h3>
             <p>The reflection agent is useful for tasks requiring improvement over time.<sup class="citation" data-ref="10"><a href="#ref-10" aria-describedby="tooltip-10">10</a><span class="citation-tooltip" id="tooltip-10" role="tooltip"><span class="source-type academic">Academic</span><strong>Reflexion: Language Agents with Verbal Reinforcement Learning</strong><span class="authors">Shinn et al., 2024 (NeurIPS)</span><a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">View Paper</a></span></sup> The agent stores results, compares them to goals, evaluates performance, and updates its strategy based on outcomes.</p>
-            <p><strong>Example:</strong> A code review agent that learns from accepted vs. rejected suggestions to improve its recommendations over time.</p>
 
             <h3>3. Tool Use Pattern</h3>
             <p>As covered extensively in previous sections, this pattern enables agents to extend their capabilities by invoking external functions, APIs, and services. This is the foundation of practical agent systems.</p>
@@ -757,33 +753,26 @@
 
             <h3>5. Multi-Agent Collaboration Pattern</h3>
             <p>Multiple specialized agents work together, each contributing unique expertise. Coordination can be hierarchical (supervisor-worker), peer-to-peer (network), or collaborative (shared workspace).</p>
-            <p><strong>Example:</strong> A software development team of agents including a requirements analyst, architect, coder, tester, and deployment specialist.</p>
 
             <h3>6. Sequential Workflow Pattern</h3>
             <p>Tasks are processed through a defined sequence of steps, with each step potentially involving different agents or tools. This pattern ensures consistency and auditability.</p>
-            <p><strong>Example:</strong> Document approval workflows in enterprises, where documents flow through drafting → review → approval → publication stages.</p>
 
             <h3>7. Human-in-the-Loop Pattern</h3>
             <p>Critical decisions or uncertain situations trigger human involvement. The agent recognizes its limitations and requests human guidance when confidence is low or stakes are high.</p>
-            <p><strong>Example:</strong> Medical diagnosis agents that provide recommendations but require physician approval before treatment.</p>
 
             <h3>Dual Paradigm Framework</h3>
-
-            <p>A novel dual-paradigm framework categorizes agentic systems into two distinct lineages:</p>
 
             <div class="protocol-grid">
                 <div class="protocol-card">
                     <h4>Symbolic/Classical Paradigm</h4>
                     <p>Relies on algorithmic planning, persistent state, and explicit knowledge representation. These systems use traditional AI techniques like search algorithms, logical reasoning, and rule-based systems.</p>
                     <p><strong>Strengths:</strong> Deterministic, explainable, verifiable</p>
-                    <p><strong>Examples:</strong> Classical robotics, expert systems, game-playing AI</p>
                 </div>
 
                 <div class="protocol-card">
                     <h4>Neural/Generative Paradigm</h4>
                     <p>Leverages stochastic generation, prompt-driven orchestration, and emergent capabilities of large language models. These systems use neural networks for reasoning and decision-making.</p>
                     <p><strong>Strengths:</strong> Flexible, handles ambiguity, natural language interaction</p>
-                    <p><strong>Examples:</strong> LLM-based agents, conversational AI, generative workflows</p>
                 </div>
             </div>
 
@@ -791,18 +780,18 @@
         </section>
 
         <!-- Memory Systems -->
-        <section class="content-section">
+        <section class="content-section" id="memory-systems">
             <h2>Agent Memory Systems</h2>
 
             <p>Memory has emerged as a core capability of foundation model-based agents.<sup class="citation" data-ref="8"><a href="#ref-8" aria-describedby="tooltip-8">8</a><span class="citation-tooltip" id="tooltip-8" role="tooltip"><span class="source-type academic">Academic</span><strong>Generative Agents: Interactive Simulacra of Human Behavior</strong><span class="authors">Park et al., 2023 (UIST)</span><a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">View Paper</a></span></sup> However, traditional taxonomies such as long/short-term memory have proven insufficient to capture the diversity of contemporary agent memory systems. Modern agents employ sophisticated memory architectures that enable them to maintain context, learn from experience, and build persistent knowledge.</p>
 
             <h3>Short-Term Memory (STM)</h3>
 
-            <p>Short-term memory provides an agent with immediate context, current conversation state, and prior exchanges within that session. The most common form of short-term memory is working memory—an active, temporary context accessible during a session.</p>
+            <p>Short-term memory provides an agent with immediate context, current conversation state, and prior exchanges within that session. The most common form of short-term memory is working memory&mdash;an active, temporary context accessible during a session.</p>
 
             <h4>Implementation Approaches:</h4>
             <ul>
-                <li><strong>Sliding Window:</strong> Most common approach, maintains recent context within the language model's prompt input</li>
+                <li><strong>Sliding Window:</strong> Most common approach, maintains recent context within the language model&rsquo;s prompt input</li>
                 <li><strong>Conversation Buffer:</strong> Frameworks like LangChain and AutoGen employ techniques to maintain recent exchanges</li>
                 <li><strong>Session State:</strong> Temporary variables and context that exist only for the current interaction</li>
             </ul>
@@ -821,29 +810,24 @@
 
             <h3>Memory Extraction Strategies</h3>
 
-            <p>The extraction process supports three built-in memory strategies:</p>
-
             <div class="protocol-grid">
                 <div class="protocol-card">
                     <h4>Semantic Memory</h4>
                     <p>Extracts facts, concepts, and general knowledge. This is context-independent information that remains true across interactions.</p>
-                    <p><strong>Example:</strong> "User prefers Python over JavaScript," "Company uses AWS for cloud infrastructure"</p>
                 </div>
 
                 <div class="protocol-card">
                     <h4>Preference Memory</h4>
                     <p>Tailors towards individual preferences, habits, and user-specific patterns.</p>
-                    <p><strong>Example:</strong> "User prefers concise answers," "Typically works on backend systems"</p>
                 </div>
 
                 <div class="protocol-card">
                     <h4>Summarization Memory</h4>
                     <p>Distills complex information and long interactions into concise summaries for better context management.</p>
-                    <p><strong>Example:</strong> Summarizing a month-long project discussion into key decisions and action items</p>
                 </div>
             </div>
 
-            <h3>Advanced Memory Architectures (2025)</h3>
+            <h3>Advanced Memory Architectures (2025&ndash;2026)</h3>
 
             <h4>Mem0: Production-Ready Long-Term Memory</h4>
             <p>Mem0 provides a scalable framework for building production AI agents with sophisticated long-term memory. Features include parallel processing (multiple memory strategies process independently), automatic memory decay to prevent bloat, and cross-session knowledge persistence.</p>
@@ -851,95 +835,37 @@
             <h4>Zep: Temporal Knowledge Graph</h4>
             <p>Zep implements memory as a temporal knowledge graph, capturing not just facts but also relationships, temporal sequences, and contextual connections between information.</p>
 
-            <h4>EverMemOS: Self-Organizing Memory</h4>
-            <p>A self-organizing memory operating system for structured long-horizon reasoning, enabling agents to autonomously organize and structure their memory over time.</p>
-
-            <h4>Memoria: Scalable Conversational Memory</h4>
-            <p>A scalable agentic memory framework specifically designed for personalized conversational AI, managing user-specific context across extended conversations.</p>
-
             <h3>Memory Decay and Management</h3>
 
-            <p>It's crucial to decay stored memories in AI systems to prevent memory bloat and maintain efficiency. As an AI agent interacts over time, it accumulates a massive amount of information, some of which becomes irrelevant or outdated.</p>
-
-            <p>Modern memory systems implement:</p>
-            <ul>
-                <li><strong>Time-based decay:</strong> Older memories gradually lose importance</li>
-                <li><strong>Relevance scoring:</strong> Frequently accessed memories are retained, rarely used ones are archived</li>
-                <li><strong>Compression:</strong> Detailed memories are summarized over time to save space while preserving key information</li>
-                <li><strong>Forgetting mechanisms:</strong> Explicit removal of outdated or contradictory information</li>
-            </ul>
-
-            <h3>Multi-Agent Shared Memory</h3>
+            <p>It is crucial to decay stored memories in AI systems to prevent memory bloat and maintain efficiency. Modern memory systems implement time-based decay (older memories gradually lose importance), relevance scoring (frequently accessed memories are retained), compression (detailed memories are summarized over time), and forgetting mechanisms (explicit removal of outdated or contradictory information).</p>
 
             <aside class="gsd-callout">
                 <div class="callout-header">
                     <span class="callout-icon">GSD Workflow Memory</span>
                 </div>
                 <div class="callout-content">
-                    <p><strong>GSD implements academic memory patterns through file-based state.</strong> STATE.md serves as episodic memory (accumulated decisions, session continuity). SUMMARY.md files function as semantic memory (distilled knowledge from completed work). The skill system (.claude/get-shit-done/) embodies procedural memory - learned patterns for task execution that persist across sessions. This parallels the cognitive architecture research recommendation for distinct memory systems.<sup class="citation" data-ref="7"><a href="#ref-7" aria-describedby="tooltip-7b">7</a><span class="citation-tooltip" id="tooltip-7b" role="tooltip"><span class="source-type academic">Academic</span><strong>Cognitive Architectures for Language Agents (CoALA)</strong><span class="authors">Sumers et al., 2024 (TMLR)</span><a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+                    <p><strong>GSD implements academic memory patterns through file-based state.</strong> STATE.md serves as episodic memory (accumulated decisions, session continuity). SUMMARY.md files function as semantic memory (distilled knowledge from completed work). The skill system (.claude/get-shit-done/) embodies procedural memory&mdash;learned patterns for task execution that persist across sessions. This parallels the cognitive architecture research recommendation for distinct memory systems.<sup class="citation" data-ref="7"><a href="#ref-7" aria-describedby="tooltip-7b">7</a><span class="citation-tooltip" id="tooltip-7b" role="tooltip"><span class="source-type academic">Academic</span><strong>Cognitive Architectures for Language Agents (CoALA)</strong><span class="authors">Sumers et al., 2024 (TMLR)</span><a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">View Paper</a></span></sup></p>
                 </div>
             </aside>
-
-            <p>In multi-agent systems, shared memory enables coordination. Agents can:</p>
-            <ul>
-                <li>Read from a shared knowledge base to stay synchronized</li>
-                <li>Write observations and learnings that benefit other agents</li>
-                <li>Coordinate tasks by checking what other agents have done</li>
-                <li>Avoid redundant work by seeing completed actions</li>
-            </ul>
-
-            <h3>Implementation Platforms</h3>
-
-            <p>LangGraph + MongoDB, Redis, and other frameworks provide integrated memory solutions:</p>
-
-            <ul>
-                <li><strong>LangGraph + MongoDB:</strong> Announced partnership for powering long-term memory for agents</li>
-                <li><strong>Redis:</strong> Build smarter AI agents with managed short-term and long-term memory</li>
-                <li><strong>AWS AgentCore:</strong> Long-term memory deep dive for building smarter AI agents</li>
-            </ul>
         </section>
 
         <!-- Framework Comparison -->
-        <section class="content-section">
+        <section class="content-section" id="framework-comparison">
             <h2>Multi-Agent Framework Comparison</h2>
 
-            <p>Three major frameworks have emerged as leaders in the multi-agent space: LangGraph, CrewAI, and AutoGen.<sup class="citation" data-ref="9"><a href="#ref-9" aria-describedby="tooltip-9b">9</a><span class="citation-tooltip" id="tooltip-9b" role="tooltip"><span class="source-type academic">Academic</span><strong>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</strong><span class="authors">Wu et al., 2024 (ICML)</span><a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">View Paper</a></span></sup> Each takes a different architectural approach to agent collaboration.</p>
+            <p>Three major frameworks have emerged as leaders in the multi-agent space: LangGraph, CrewAI, and AutoGen.<sup class="citation" data-ref="9"><a href="#ref-9" aria-describedby="tooltip-9b">9</a><span class="citation-tooltip" id="tooltip-9b" role="tooltip"><span class="source-type academic">Academic</span><strong>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</strong><span class="authors">Wu et al., 2024 (ICML)</span><a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">View Paper</a></span></sup> Each takes a different architectural approach to agent collaboration. Alongside these third-party frameworks, first-party solutions from model providers&mdash;notably Claude Code&rsquo;s Agent tool and OpenAI&rsquo;s Agents SDK&mdash;have emerged as production-grade alternatives that require no external dependencies.</p>
 
             <h3>LangGraph: Graph-Based State Machines</h3>
 
-            <p>LangGraph adopts a graph-based workflow design that treats agent interactions as nodes in a directed graph, providing exceptional flexibility for complex decision-making pipelines with conditional logic, branching workflows, and dynamic adaptation.<sup class="citation" data-ref="16"><a href="#ref-16" aria-describedby="tooltip-16b">16</a><span class="citation-tooltip" id="tooltip-16b" role="tooltip"><span class="source-type industry">Industry</span><strong>LangGraph: Building Stateful AI Agents</strong><span class="authors">LangChain, 2024-2025</span><a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">View Docs</a></span></sup></p>
-
-            <h4>Key Characteristics:</h4>
-            <ul>
-                <li><strong>Architecture:</strong> State machines with nodes, edges, and conditional routing</li>
-                <li><strong>Control Flow:</strong> Explicit, traceable, debuggable flows</li>
-                <li><strong>Best For:</strong> Complex, multi-step reasoning requiring precise control over agent workflows</li>
-                <li><strong>Complexity:</strong> Steeper learning curve but maximum flexibility</li>
-            </ul>
+            <p>LangGraph adopts a graph-based workflow design that treats agent interactions as nodes in a directed graph, providing exceptional flexibility for complex decision-making pipelines with conditional logic, branching workflows, and dynamic adaptation.<sup class="citation" data-ref="16"><a href="#ref-16" aria-describedby="tooltip-16b">16</a><span class="citation-tooltip" id="tooltip-16b" role="tooltip"><span class="source-type industry">Industry</span><strong>LangGraph: Building Stateful AI Agents</strong><span class="authors">LangChain, 2024&ndash;2025</span><a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">View Docs</a></span></sup></p>
 
             <h3>CrewAI: Role-Based Coordination</h3>
 
-            <p>CrewAI's strength lies in its intuitive approach to agent coordination and built-in support for common business workflow patterns. CrewAI prioritizes role-based team coordination, excelling in scenarios where multiple agents collaborate.</p>
-
-            <h4>Key Characteristics:</h4>
-            <ul>
-                <li><strong>Architecture:</strong> Coordinator-worker model inspired by organizational structures</li>
-                <li><strong>Collaboration Pattern:</strong> Role-based teams with defined responsibilities</li>
-                <li><strong>Best For:</strong> Business processes with clear task decomposition and specialization</li>
-                <li><strong>Ease of Use:</strong> Intuitive, quick to prototype, lower learning curve</li>
-            </ul>
+            <p>CrewAI&rsquo;s strength lies in its intuitive approach to agent coordination and built-in support for common business workflow patterns. CrewAI prioritizes role-based team coordination, excelling in scenarios where multiple agents collaborate.</p>
 
             <h3>AutoGen: Conversational Multi-Agent</h3>
 
             <p>AutoGen focuses on conversational agent architecture, emphasizing natural language interactions and dynamic role-playing. It excels at creating flexible, conversation-driven workflows where agents can adapt their roles based on context.</p>
-
-            <h4>Key Characteristics:</h4>
-            <ul>
-                <li><strong>Architecture:</strong> Conversational interactions with defined roles and communication patterns</li>
-                <li><strong>Collaboration Pattern:</strong> Agents converse and collaborate like human teams</li>
-                <li><strong>Best For:</strong> Scenarios requiring natural dialogue and dynamic role adaptation</li>
-                <li><strong>Unique Feature:</strong> Mirrors human team collaboration through conversation</li>
-            </ul>
 
             <h3>Framework Selection Guide</h3>
 
@@ -968,6 +894,11 @@
                         <td>Natural language interactions between agents</td>
                     </tr>
                     <tr>
+                        <td>Software development with tool use</td>
+                        <td>Claude Code</td>
+                        <td>First-party agentic platform with native subagent spawning and 10+ built-in tools</td>
+                    </tr>
+                    <tr>
                         <td>RAG-centric applications</td>
                         <td>LlamaIndex</td>
                         <td>Optimized for retrieval and data integration</td>
@@ -985,28 +916,507 @@
             <p>72% of enterprise AI projects now involve multi-agent architectures, up from 23% in 2024. The shift from single agents to orchestrated multi-agent AI workflows is accelerating across marketing, SaaS, and e-commerce verticals.</p>
         </section>
 
-        <!-- Conclusion -->
-        <section class="content-section">
-            <h2>Conclusion</h2>
+        <!-- NEW: Claude Code as Agentic Platform -->
+        <section class="content-section" id="claude-code-platform">
+            <h2>Claude Code as Agentic Platform</h2>
 
-            <p>The fundamentals of AI agentic programming rest on a foundation of well-established patterns (ReAct, Tool Use, Planning, Reflection), emerging standards (MCP, A2A), and sophisticated architectural approaches (single-agent, multi-agent, hierarchical, hybrid). The rapid standardization around MCP and A2A, backed by major technology companies and the Linux Foundation, signals a maturing ecosystem moving toward interoperability and production readiness.</p>
+            <p>Claude Code is Anthropic&rsquo;s official command-line interface for Claude, representing a fundamentally different approach to agentic AI compared to framework-based solutions. Rather than requiring developers to compose agents from library primitives, Claude Code provides a fully integrated agentic environment where the model, tools, permissions, and orchestration are unified into a single coherent system.</p>
 
-            <p>Key takeaways:</p>
+            <h3>Platform Surfaces</h3>
+
+            <p>Claude Code is available across multiple interfaces, each sharing the same underlying agentic architecture:</p>
 
             <ul>
-                <li><strong>Paradigm Shift:</strong> Agentic AI represents a fundamental shift from static automation to autonomous, goal-driven systems</li>
-                <li><strong>ReAct as Foundation:</strong> The Reasoning-Acting pattern remains the cornerstone of most agent implementations<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4d">4</a><span class="citation-tooltip" id="tooltip-4d" role="tooltip"><span class="source-type academic">Academic</span><strong>ReAct: Synergizing Reasoning and Acting in Language Models</strong><span class="authors">Yao et al., 2023 (ICLR)</span><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">View Paper</a></span></sup></li>
-                <li><strong>Standardization is Critical:</strong> MCP and A2A reduce integration time by 60-70% compared to custom development<sup class="citation" data-ref="14"><a href="#ref-14" aria-describedby="tooltip-14c">14</a><span class="citation-tooltip" id="tooltip-14c" role="tooltip"><span class="source-type industry">Industry</span><strong>Model Context Protocol (MCP)</strong><span class="authors">Anthropic, November 2024</span><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">View Spec</a></span></sup><sup class="citation" data-ref="15"><a href="#ref-15" aria-describedby="tooltip-15b">15</a><span class="citation-tooltip" id="tooltip-15b" role="tooltip"><span class="source-type industry">Industry</span><strong>Agent2Agent Protocol (A2A)</strong><span class="authors">Google, April 2025</span><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">View Announcement</a></span></sup></li>
-                <li><strong>Multi-Agent is Growing:</strong> 72% of enterprise projects now use multi-agent architectures</li>
-                <li><strong>Memory Matters:</strong> Sophisticated memory systems distinguish production agents from prototypes</li>
-                <li><strong>Framework Choice Depends on Use Case:</strong> LangGraph for control, CrewAI for coordination, AutoGen for conversation</li>
+                <li><strong>CLI (Command Line):</strong> The original and most powerful interface. Runs in any terminal, integrates with shell workflows, and supports piping and scripting. Invoked with <code>claude</code> or <code>claude "prompt"</code> for one-shot execution.</li>
+                <li><strong>Desktop Application:</strong> A standalone desktop app providing the same agentic capabilities with a graphical interface for conversation management and file browsing.</li>
+                <li><strong>Web Application:</strong> Browser-based access to Claude Code functionality, enabling agentic coding without local installation.</li>
+                <li><strong>IDE Extensions:</strong> Integrations for VS Code and other editors that embed Claude Code directly into the development environment.</li>
             </ul>
 
-            <p>As we move into Section 2, we'll explore how these fundamental patterns are packaged into reusable, modular "skills" that enable rapid agent development and deployment.</p>
+            <h3>The Tool Ecosystem</h3>
+
+            <p>Claude Code&rsquo;s power comes from its rich, purpose-built tool ecosystem. Each tool has a well-defined schema and clear behavioral contract:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Category</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Read</strong></td>
+                        <td>File I/O</td>
+                        <td>Read files, images, PDFs, notebooks with line numbers and pagination</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Write</strong></td>
+                        <td>File I/O</td>
+                        <td>Create new files or completely rewrite existing ones</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Edit</strong></td>
+                        <td>File I/O</td>
+                        <td>Surgical string replacements in existing files (diff-based)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bash</strong></td>
+                        <td>Execution</td>
+                        <td>Run shell commands with timeout, background execution, and sandboxing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Glob</strong></td>
+                        <td>Search</td>
+                        <td>Fast file pattern matching across any codebase size</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grep</strong></td>
+                        <td>Search</td>
+                        <td>Content search with regex, file filtering, and context lines (built on ripgrep)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent</strong></td>
+                        <td>Orchestration</td>
+                        <td>Spawn autonomous subagents for parallel or independent work</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WebFetch</strong></td>
+                        <td>Network</td>
+                        <td>Retrieve content from URLs for analysis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WebSearch</strong></td>
+                        <td>Network</td>
+                        <td>Search the web for current information</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ToolSearch</strong></td>
+                        <td>Discovery</td>
+                        <td>Discover and load deferred tool schemas dynamically</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>This tool set implements the complete ReAct loop natively: Claude reasons about the task, selects tools, observes results, and iterates. No external framework or ReAct implementation is needed.</p>
+
+            <h3>Conversation-Driven Development</h3>
+
+            <p>Claude Code introduces a development paradigm where the primary interface is natural language conversation. Developers describe intent, and the agent translates that into file operations, code changes, test execution, and verification. This differs from traditional coding assistants (which suggest completions) and from framework-based agents (which require programmatic setup).</p>
+
+            <p>Key characteristics of conversation-driven development:</p>
+
+            <ul>
+                <li><strong>Progressive disclosure:</strong> Start with a simple prompt; add constraints only as needed</li>
+                <li><strong>Context accumulation:</strong> The conversation maintains full history; prior observations inform future actions</li>
+                <li><strong>Autonomous execution:</strong> The agent can execute multi-step plans without interruption, committing code, running tests, and fixing failures iteratively</li>
+                <li><strong>Human-in-the-loop by default:</strong> Permission prompts for destructive operations unless configured otherwise</li>
+            </ul>
+
+            <h3>Permission Modes</h3>
+
+            <p>Claude Code provides a graduated permission model that controls how much autonomy the agent has, mapping directly to the &ldquo;bounded autonomy&rdquo; principle from Anthropic&rsquo;s own research on building effective agents:<sup class="citation" data-ref="13"><a href="#ref-13" aria-describedby="tooltip-13b">13</a><span class="citation-tooltip" id="tooltip-13b" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, December 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View Guide</a></span></sup></p>
+
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <h4>default</h4>
+                    <p>Asks permission for file writes, code execution, and other side-effectful operations. Reads and searches proceed without prompting. The safest mode for exploratory work.</p>
+                </div>
+
+                <div class="protocol-card">
+                    <h4>acceptEdits</h4>
+                    <p>Automatically approves file edits and writes but still prompts for shell commands. Useful for code refactoring sessions where file changes are expected.</p>
+                </div>
+
+                <div class="protocol-card">
+                    <h4>auto</h4>
+                    <p>Approves most operations automatically, prompting only for potentially destructive actions (force pushes, deletions). Recommended for experienced users with well-configured hooks.</p>
+                </div>
+
+                <div class="protocol-card">
+                    <h4>plan</h4>
+                    <p>Read-only mode where the agent can analyze code and propose changes but cannot execute any writes or commands. Useful for code review and analysis workflows.</p>
+                </div>
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Claude Code&rsquo;s permission model implements graduated autonomy in practice.</strong> The progression from <code>default</code> to <code>auto</code> mirrors the trust-building trajectory described in agent safety research. Combined with hooks (lifecycle automation that can intercept and validate operations), this creates a layered safety architecture where human oversight can be precisely calibrated to the risk level of each operation category.</p>
+                </div>
+            </aside>
+        </section>
+
+        <!-- NEW: Claude Agent SDK -->
+        <section class="content-section" id="claude-agent-sdk">
+            <h2>Claude Agent SDK</h2>
+
+            <p>While Claude Code provides a complete agentic environment for interactive use, the Claude Agent SDK enables developers to build custom agent applications programmatically. The SDK provides the building blocks for constructing agents that leverage Claude&rsquo;s capabilities within custom software systems.</p>
+
+            <h3>SDK Architecture</h3>
+
+            <p>The SDK is available in both Python and TypeScript, with the Python SDK being the primary implementation. It provides:</p>
+
+            <ul>
+                <li><strong>Agent class:</strong> Define agent behavior, system prompts, available tools, and model selection</li>
+                <li><strong>Tool definitions:</strong> Create custom tools with typed parameters and JSON Schema validation</li>
+                <li><strong>Streaming support:</strong> Real-time streaming of agent reasoning and tool calls</li>
+                <li><strong>Batch processing:</strong> Run multiple agent queries in parallel for throughput-optimized workloads</li>
+                <li><strong>Structured outputs:</strong> Constrain agent responses to typed schemas for reliable parsing</li>
+                <li><strong>Multi-turn conversations:</strong> Maintain conversational state across multiple interactions</li>
+            </ul>
+
+            <h3>Model Family (April 2026)</h3>
+
+            <p>The Claude model family provides a range of capability and cost trade-offs for agent applications:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Context Window</th>
+                        <th>Best For</th>
+                        <th>Key Capability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Claude Opus 4.6</strong></td>
+                        <td>1,000,000 tokens</td>
+                        <td>Complex reasoning, large codebases, deep analysis</td>
+                        <td>Extended thinking, adaptive compute allocation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude Sonnet 4.6</strong></td>
+                        <td>200,000 tokens</td>
+                        <td>Balanced performance/cost for production agents</td>
+                        <td>Fast reasoning with strong tool use</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude Haiku 4.5</strong></td>
+                        <td>200,000 tokens</td>
+                        <td>High-throughput, cost-sensitive applications</td>
+                        <td>Fastest response times in the family</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Extended Thinking</h3>
+
+            <p>Extended thinking (also called &ldquo;thinking mode&rdquo; or &ldquo;ultrathink&rdquo;) is a capability unique to the Claude model family that allows the model to allocate variable amounts of compute to reasoning before responding. This is particularly valuable for agent applications:</p>
+
+            <ul>
+                <li><strong>Adaptive compute:</strong> The model dynamically allocates more reasoning time to complex decisions and less to simple ones</li>
+                <li><strong>Visible reasoning:</strong> Thinking traces can be streamed to the application, enabling transparency into the agent&rsquo;s decision-making process</li>
+                <li><strong>Budget control:</strong> Applications can set thinking budgets to balance reasoning depth against latency and cost</li>
+                <li><strong>Planning quality:</strong> Extended thinking significantly improves multi-step plan generation and tool selection accuracy</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>SDK vs. Claude Code</h4>
+                <p><strong>Claude Code</strong> is best for interactive development, code review, debugging, and autonomous coding workflows where a human is in the loop. <strong>The Agent SDK</strong> is best for building custom applications&mdash;CI/CD bots, automated review systems, data pipelines&mdash;where the agent runs programmatically within a larger system. The two can be combined: Claude Code can invoke SDK-built agents via Bash, and SDK agents can shell out to Claude Code for development tasks.</p>
+            </div>
+        </section>
+
+        <!-- NEW: Skills-Agents-Teams-Hooks Architecture -->
+        <section class="content-section" id="skills-agents-teams-hooks">
+            <h2>The Skills-Agents-Teams-Hooks Architecture</h2>
+
+            <p>Claude Code&rsquo;s extensibility model is built on four composable primitives: Skills, Agents, Teams, and Hooks. Together, these form a layered architecture for customizing and orchestrating agentic behavior without modifying the underlying platform.</p>
+
+            <h3>Skills: Modular Capabilities</h3>
+
+            <p>Skills are Markdown files placed in <code>.claude/skills/</code> that provide Claude with additional knowledge, instructions, and behavioral patterns. They activate automatically based on context or can be invoked explicitly.</p>
+
+            <ul>
+                <li><strong>Location:</strong> <code>.claude/skills/*.md</code> for project-level, <code>~/.claude/skills/*.md</code> for user-level</li>
+                <li><strong>Activation:</strong> Automatic based on file patterns, tool usage, or explicit invocation via the Skill tool</li>
+                <li><strong>Content:</strong> Natural language instructions, code patterns, decision trees, and behavioral rules</li>
+                <li><strong>Scope:</strong> Skills can be scoped to specific projects, users, or organizations</li>
+            </ul>
+
+            <p>Skills represent the &ldquo;procedural memory&rdquo; of the agent system&mdash;learned patterns and expertise that persist across sessions and can be shared across teams.</p>
+
+            <h3>Agents: Specialized Subagents</h3>
+
+            <p>Agents are Markdown files in <code>.claude/agents/</code> that define specialized subagents with constrained tools, focused system prompts, and specific missions. They are spawned by the main agent using the Agent tool.</p>
+
+            <ul>
+                <li><strong>Location:</strong> <code>.claude/agents/*.md</code></li>
+                <li><strong>Capabilities:</strong> Each agent definition specifies allowed tools, model preferences, and behavioral constraints</li>
+                <li><strong>Isolation:</strong> Subagents run in their own context, preventing cross-contamination between tasks</li>
+                <li><strong>Communication:</strong> Results flow back to the parent agent; inter-agent communication uses file-based patterns</li>
+            </ul>
+
+            <h3>Teams: Multi-Session Coordination</h3>
+
+            <p>Teams are an experimental feature (as of April 2026) that enables multiple Claude Code sessions to coordinate on complex projects. A team consists of a leader agent and one or more worker agents, with structured communication through task lists and mailboxes.</p>
+
+            <ul>
+                <li><strong>Leader-worker topology:</strong> One session acts as coordinator, distributing tasks to worker sessions</li>
+                <li><strong>Task assignment:</strong> Work items are defined and tracked through shared state</li>
+                <li><strong>Parallel execution:</strong> Workers operate concurrently on independent tasks</li>
+                <li><strong>Result aggregation:</strong> The leader collects and synthesizes worker outputs</li>
+            </ul>
+
+            <h3>Hooks: Lifecycle Automation</h3>
+
+            <p>Hooks are deterministic scripts configured in <code>.claude/settings.json</code> that execute at specific lifecycle points in the Claude Code workflow. Unlike skills (which are advisory), hooks are mandatory&mdash;they run automatically and can block operations.</p>
+
+            <ul>
+                <li><strong>PreToolUse:</strong> Runs before a tool is executed; can validate, modify, or block the operation</li>
+                <li><strong>PostToolUse:</strong> Runs after a tool completes; can process results or trigger side effects</li>
+                <li><strong>PreCompact:</strong> Runs before context compaction; can preserve critical state</li>
+                <li><strong>PostCompact:</strong> Runs after context compaction; can restore context</li>
+                <li><strong>FileChanged:</strong> Runs when a file is modified; can trigger linting, formatting, or validation</li>
+            </ul>
+
+            <h3>Composition Model</h3>
+
+            <p>The four primitives compose in a natural hierarchy:</p>
+
+            <div class="diagram">
+                <div class="diagram-title">Skills-Agents-Teams-Hooks Composition</div>
+                <div class="flow-container">
+                    <div class="flow-box">Hooks<br><small>Lifecycle gates</small></div>
+                    <div class="flow-arrow">&rarr;</div>
+                    <div class="flow-box">Skills<br><small>Knowledge + behavior</small></div>
+                    <div class="flow-arrow">&rarr;</div>
+                    <div class="flow-box">Agents<br><small>Specialized workers</small></div>
+                    <div class="flow-arrow">&rarr;</div>
+                    <div class="flow-box">Teams<br><small>Multi-session coordination</small></div>
+                </div>
+            </div>
+
+            <p><strong>Hooks trigger skills:</strong> A PreToolUse hook on commit operations activates the commit-validation skill. <strong>Skills spawn agents:</strong> A workflow skill like GSD creates subagents for planning, execution, and verification. <strong>Agents form teams:</strong> Multiple agent sessions coordinate through shared file state to parallelize large projects.</p>
+
+            <p>This architecture enables a single developer to orchestrate complex multi-agent workflows using only Markdown files and JSON configuration&mdash;no compiled code required.</p>
+        </section>
+
+        <!-- NEW: Plugins System -->
+        <section class="content-section" id="plugins-system">
+            <h2>The Plugins System</h2>
+
+            <p>Building on the Skills-Agents-Teams-Hooks architecture, Claude Code&rsquo;s plugins system provides a packaging and distribution mechanism for bundling related skills, agents, hooks, and configuration into installable units.</p>
+
+            <h3>Plugin Structure</h3>
+
+            <p>A plugin is a directory or repository containing a <code>plugin.json</code> manifest that declares the plugin&rsquo;s contents and installation targets:</p>
+
+            <ul>
+                <li><strong>Skills:</strong> Markdown skill files to install into <code>.claude/skills/</code></li>
+                <li><strong>Agents:</strong> Agent definitions to install into <code>.claude/agents/</code></li>
+                <li><strong>Hooks:</strong> Hook configurations to merge into <code>.claude/settings.json</code></li>
+                <li><strong>Commands:</strong> Custom slash-command definitions</li>
+                <li><strong>MCP Servers:</strong> MCP server configurations to register</li>
+            </ul>
+
+            <h3>Plugin Lifecycle</h3>
+
+            <p>Plugins follow a standard lifecycle:</p>
+
+            <ol>
+                <li><strong>Discovery:</strong> Plugins can be found via npm registry, GitHub repositories, or local paths</li>
+                <li><strong>Installation:</strong> <code>claude plugin install &lt;source&gt;</code> copies files and merges configurations</li>
+                <li><strong>Activation:</strong> Installed skills and hooks activate automatically based on their defined triggers</li>
+                <li><strong>Updates:</strong> Plugins can be updated in place, with configuration merging handled automatically</li>
+                <li><strong>Removal:</strong> Clean uninstallation removes all installed files and configuration entries</li>
+            </ol>
+
+            <h3>Enterprise Distribution</h3>
+
+            <p>For organizations, plugins can be distributed through managed settings&mdash;centrally controlled configurations that apply to all Claude Code instances within an organization. This enables:</p>
+
+            <ul>
+                <li><strong>Standard tooling:</strong> All developers get the same skills, hooks, and agent definitions</li>
+                <li><strong>Security policies:</strong> Hooks that enforce security practices (no secrets in code, required review patterns)</li>
+                <li><strong>Compliance:</strong> Pre-configured MCP servers for approved data sources and tools</li>
+                <li><strong>Onboarding:</strong> New developers get project-specific capabilities immediately</li>
+            </ul>
+        </section>
+
+        <!-- NEW: Self-Modifying System Pattern -->
+        <section class="content-section" id="self-modifying-systems">
+            <h2>The Self-Modifying System Pattern</h2>
+
+            <p>One of the most significant developments in agentic AI architecture is the emergence of systems that modify their own skills and agents at runtime. This pattern, which goes beyond the traditional Reflection pattern, involves agents that can create, update, and retire their own capabilities based on observed needs and performance.</p>
+
+            <h3>How Self-Modification Works</h3>
+
+            <p>In a self-modifying system, the agent has write access to its own skill and agent definition files. When the agent observes repeated patterns, discovers new approaches, or encounters novel situations, it can:</p>
+
+            <ul>
+                <li><strong>Create new skills:</strong> Write new <code>.claude/skills/*.md</code> files that encode learned patterns</li>
+                <li><strong>Update existing skills:</strong> Modify skill files to incorporate new knowledge or correct outdated patterns</li>
+                <li><strong>Spawn new agent types:</strong> Define new specialized agents for recurring task categories</li>
+                <li><strong>Adjust hook configurations:</strong> Modify lifecycle automation in response to workflow needs</li>
+            </ul>
+
+            <h3>Security Implications</h3>
+
+            <p>Self-modification introduces significant security concerns. An agent that can modify its own instructions could potentially:</p>
+
+            <ul>
+                <li>Weaken its own safety constraints over time</li>
+                <li>Introduce circular dependencies between skills</li>
+                <li>Create skills that bypass intended permission boundaries</li>
+                <li>Accumulate stale or contradictory instructions</li>
+            </ul>
+
+            <h3>Safety Boundaries: The Security-Hygiene Pattern</h3>
+
+            <p>Production self-modifying systems require explicit safety boundaries. In our implementation, a dedicated <code>security-hygiene</code> skill acts as a meta-level guardian:</p>
+
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <h4>Validation Gates</h4>
+                    <p>Every skill or agent modification passes through validation that checks for: permission escalation (does the new skill request more tools than its predecessor?), constraint preservation (are safety rules maintained?), and content review (does the modification align with project goals?).</p>
+                </div>
+
+                <div class="protocol-card">
+                    <h4>Bounded Learning Guards</h4>
+                    <p>Self-modification operates within explicit boundaries: a token budget per skill (prevents unbounded growth), a maximum number of active skills (prevents capability sprawl), and mandatory review for skills that access sensitive tools (Bash, Write).</p>
+                </div>
+            </div>
+
+            <aside class="research-callout">
+                <div class="callout-header">
+                    <span class="callout-icon">Research Insight</span>
+                </div>
+                <div class="callout-content">
+                    <p><strong>Self-modification is the practical frontier of agent learning.</strong> While academic research has focused on in-context learning (temporary) and fine-tuning (permanent but slow), self-modifying skill systems occupy a middle ground: persistent behavioral changes that are human-readable, version-controlled, and reversible. This bridges the gap between session-scoped learning and model-level adaptation, and may prove to be the most practical form of agent learning for production systems.</p>
+                </div>
+            </aside>
+        </section>
+
+        <!-- NEW: Content-Addressed Code (Unison) -->
+        <section class="content-section" id="content-addressed-code">
+            <h2>Content-Addressed Code: The Unison Paradigm</h2>
+
+            <p>Content-addressed code is a programming paradigm where code is identified by its content (a hash of its abstract syntax tree) rather than by its name or file location. Unison, the most mature implementation of this paradigm, offers architectural insights that map directly to agent system design.</p>
+
+            <h3>How Content-Addressing Works</h3>
+
+            <p>In a content-addressed system:</p>
+
+            <ul>
+                <li><strong>Definitions are immutable:</strong> Once a function is defined, its hash never changes. A &ldquo;change&rdquo; creates a new definition with a new hash.</li>
+                <li><strong>Names are metadata:</strong> The name <code>sort</code> is a pointer to a hash, not an identity. Renaming is free and doesn&rsquo;t break dependents.</li>
+                <li><strong>Dependencies are exact:</strong> A function depends on specific hashes, not names. There are no version conflicts or diamond dependency problems.</li>
+                <li><strong>Distribution is trivial:</strong> Share a hash; the code travels with it. No build systems, package managers, or dependency resolution needed.</li>
+            </ul>
+
+            <h3>Mapping to Agent Architecture</h3>
+
+            <p>Content-addressed code maps remarkably well to agent system design:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Unison Concept</th>
+                        <th>Agent Architecture Analog</th>
+                        <th>Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Immutable definitions</td>
+                        <td>Versioned skill files</td>
+                        <td>Every skill version is preserved; rollback is trivial</td>
+                    </tr>
+                    <tr>
+                        <td>Names as metadata</td>
+                        <td>Skill activation triggers</td>
+                        <td>Skills activate by context, not by being &ldquo;called&rdquo;</td>
+                    </tr>
+                    <tr>
+                        <td>Hash-based dependencies</td>
+                        <td>Capability fingerprints</td>
+                        <td>Agent capabilities are precisely specified, not approximated</td>
+                    </tr>
+                    <tr>
+                        <td>Trivial distribution</td>
+                        <td>Plugin portability</td>
+                        <td>Skills travel with their dependencies; no installation conflicts</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Research Co-Processor Prototype</h3>
+
+            <p>Our research co-processor prototype explores using content-addressed code principles for agent orchestration. The core idea: when an agent develops a research methodology that works (a sequence of tool calls, analysis patterns, and verification steps), that methodology is hashed and stored as a reusable &ldquo;research primitive.&rdquo; Future agents can reference the exact methodology by hash, guaranteeing reproducibility regardless of how the surrounding system evolves.</p>
+
+            <p>This approach is particularly valuable for research-oriented agent systems where reproducibility and provenance tracking are essential. The research co-processor defines eight atomic operations&mdash;QUERY, COMPUTE, OBSERVE, COMPARE, CONNECT, PUBLISH, COMMIT, VERIFY&mdash;each of which can be composed and hashed as content-addressed primitives.</p>
+        </section>
+
+        <!-- NEW: Updated Market Context -->
+        <section class="content-section" id="market-context">
+            <h2>Updated Market Context: April 2026</h2>
+
+            <p>The agentic AI market has undergone dramatic acceleration since the initial version of this report. Several developments have reshaped the competitive landscape and industry trajectory.</p>
+
+            <h3>The 1-Million-Token Inflection Point</h3>
+
+            <p>Claude Opus 4.6, released in early 2026 with a 1-million-token context window, represents a qualitative shift in what agents can accomplish. Previous context limitations (8K, 32K, 128K, 200K tokens) forced agents to chunk their work, losing coherence across boundaries. With 1M tokens, an agent can hold:</p>
+
+            <ul>
+                <li>An entire medium-sized codebase (50,000+ lines) in context simultaneously</li>
+                <li>Complete project documentation, requirements, and architectural decisions</li>
+                <li>Full conversation histories spanning dozens of complex interactions</li>
+                <li>Multiple large files for cross-reference analysis without retrieval augmentation</li>
+            </ul>
+
+            <p>This eliminates the &ldquo;lost context&rdquo; problem that plagued earlier agent implementations and reduces the need for complex RAG pipelines in many development scenarios.</p>
+
+            <h3>Market Projections (Updated)</h3>
+
+            <div class="stats-highlight">
+                <div class="stat-box">
+                    <div class="stat-value">$47B</div>
+                    <div class="stat-label">Projected agentic AI market by 2030 (Gartner, updated Q1 2026)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-label">Enterprise apps integrating AI agents by end of 2026</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">75%</div>
+                    <div class="stat-label">Companies planning MCP implementation in next 12 months</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">150+</div>
+                    <div class="stat-label">Organizations supporting A2A protocol</div>
+                </div>
+            </div>
+
+            <h3>Competitive Landscape</h3>
+
+            <p>The agentic AI platform market has consolidated around several major approaches:</p>
+
+            <ul>
+                <li><strong>First-party platforms:</strong> Claude Code (Anthropic), OpenAI Agents SDK, Google ADK&mdash;model providers offering integrated agent environments</li>
+                <li><strong>Framework ecosystems:</strong> LangGraph, CrewAI, AutoGen&mdash;open-source frameworks for custom agent construction</li>
+                <li><strong>Enterprise platforms:</strong> Microsoft Copilot Studio, AWS AgentCore, Salesforce Agentforce&mdash;enterprise-grade agent deployment and management</li>
+                <li><strong>Developer tools:</strong> Cursor, Windsurf, GitHub Copilot&mdash;IDE-integrated agent assistants for coding workflows</li>
+            </ul>
+
+            <h3>Gartner Predictions Update</h3>
+
+            <p>Gartner&rsquo;s revised predictions for the agentic AI space (Q1 2026) include:</p>
+
+            <ul>
+                <li>By 2028, 33% of enterprise software applications will include agentic AI, up from less than 1% in 2024</li>
+                <li>By 2027, autonomous AI agents will reduce enterprise software engineering effort by 50%</li>
+                <li>Agentic AI is identified as the top strategic technology trend for 2026</li>
+                <li>The distinction between &ldquo;AI assistant&rdquo; and &ldquo;AI agent&rdquo; has become a key market segmentation factor, with agents commanding 3&ndash;5x higher value in enterprise deployments</li>
+            </ul>
         </section>
 
         <!-- Implementation Examples -->
-        <section class="content-section implementation-section">
+        <section class="content-section implementation-section" id="implementation-examples">
             <h2>Implementation Examples</h2>
             <p>Practical Claude Code patterns demonstrating the fundamental concepts from this section. These examples use the Claude Agent SDK to implement ReAct patterns, tool use, and basic agent queries.</p>
 
@@ -1056,7 +1466,7 @@ asyncio.run(main())</code></pre>
             </div>
 
             <h3>ReAct Pattern with Streaming Output</h3>
-            <p>Demonstrates the think-act-observe loop described in Section 1, showing how Claude reasons about each step before taking action. This pattern forms the foundation for all agentic behavior.<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4f">4</a><span class="citation-tooltip" id="tooltip-4f" role="tooltip"><span class="source-type academic">Academic</span><strong>ReAct: Synergizing Reasoning and Acting in Language Models</strong><span class="authors">Yao et al., 2023 (ICLR)</span><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">View Paper</a></span></sup></p>
+            <p>Demonstrates the think-act-observe loop, showing how Claude reasons about each step before taking action.</p>
 
             <div class="code-example">
                 <div class="code-header">
@@ -1088,8 +1498,8 @@ asyncio.run(main())</code></pre>
 asyncio.run(react_with_streaming())</code></pre>
             </div>
 
-            <h3>Tool Use with Function Definitions</h3>
-            <p>This example shows how to define custom tools following the patterns described in the Tool Learning research.<sup class="citation" data-ref="6"><a href="#ref-6" aria-describedby="tooltip-6b">6</a><span class="citation-tooltip" id="tooltip-6b" role="tooltip"><span class="source-type academic">Academic</span><strong>Tool Learning with Foundation Models</strong><span class="authors">Qin et al., 2024 (ACL)</span><a href="https://arxiv.org/abs/2304.08354" target="_blank" rel="noopener">View Paper</a></span></sup> Claude selects appropriate tools based on the task.</p>
+            <h3>Subagent Spawning</h3>
+            <p>This example demonstrates the multi-agent pattern using Claude Code&rsquo;s Agent tool to spawn specialized subagents for parallel work.</p>
 
             <div class="code-example">
                 <div class="code-header">
@@ -1098,21 +1508,24 @@ asyncio.run(react_with_streaming())</code></pre>
                 </div>
                 <pre class="code-content"><code><span class="keyword">from</span> claude_agent_sdk <span class="keyword">import</span> query, ClaudeAgentOptions
 
-<span class="comment"># Claude Code's built-in tools implement the tool use pattern</span>
-<span class="comment"># Read, Write, Edit, Bash, Grep, Glob - each with clear schemas</span>
+<span class="comment"># Parent agent spawns specialized subagents</span>
+<span class="comment"># Each subagent gets isolated context and constrained tools</span>
 <span class="keyword">async for</span> message <span class="keyword">in</span> query(
-    prompt=<span class="string">"Find all TODO comments in the codebase and create a summary"</span>,
+    prompt=<span class="string">"""Analyze this codebase in parallel:
+    1. Spawn an agent to review security patterns
+    2. Spawn an agent to analyze test coverage
+    3. Spawn an agent to check dependency health
+    Synthesize all findings into a single report."""</span>,
     options=ClaudeAgentOptions(
-        <span class="comment"># Tool selection based on task requirements</span>
-        allowed_tools=[<span class="string">"Grep"</span>, <span class="string">"Glob"</span>, <span class="string">"Read"</span>, <span class="string">"Write"</span>],
-        permission_mode=<span class="string">"acceptEdits"</span>
+        allowed_tools=[<span class="string">"Agent"</span>, <span class="string">"Read"</span>, <span class="string">"Write"</span>],
+        permission_mode=<span class="string">"auto"</span>
     )
 ):
-    <span class="keyword">pass</span>  <span class="comment"># Agent handles tool selection automatically</span></code></pre>
+    <span class="keyword">pass</span>  <span class="comment"># Agent orchestrates subagents automatically</span></code></pre>
             </div>
 
             <h3>CLI Quick Start</h3>
-            <p>The simplest way to use Claude Code follows Anthropic's "Building Effective Agents" guidance<sup class="citation" data-ref="13"><a href="#ref-13" aria-describedby="tooltip-13b">13</a><span class="citation-tooltip" id="tooltip-13b" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, December 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View Guide</a></span></sup>: start simple, add complexity only as needed.</p>
+            <p>The simplest way to use Claude Code follows Anthropic&rsquo;s &ldquo;Building Effective Agents&rdquo; guidance<sup class="citation" data-ref="13"><a href="#ref-13" aria-describedby="tooltip-13c">13</a><span class="citation-tooltip" id="tooltip-13c" role="tooltip"><span class="source-type industry">Industry</span><strong>Building Effective Agents</strong><span class="authors">Anthropic, December 2024</span><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View Guide</a></span></sup>: start simple, add complexity only as needed.</p>
 
             <div class="code-example">
                 <div class="code-header">
@@ -1126,12 +1539,15 @@ claude <span class="string">"Refactor the database connection to use connection 
 claude <span class="string">"Review @src/auth/login.py for security issues"</span>
 
 <span class="comment"># Multi-step task with planning</span>
-claude <span class="string">"Create a REST API endpoint for user registration with validation"</span></code></pre>
+claude <span class="string">"Create a REST API endpoint for user registration with validation"</span>
+
+<span class="comment"># Using a custom agent definition</span>
+claude <span class="string">"Run the security-review agent on the payments module"</span></code></pre>
             </div>
         </section>
 
         <!-- GSD Integration: Research to Practice -->
-        <section class="content-section implementation-section">
+        <section class="content-section implementation-section" id="gsd-integration">
             <h2>GSD Integration: Research Concepts in Practice</h2>
 
             <p>The get-shit-done-cc (GSD) workflow system demonstrates how academic research on agent architectures translates into practical implementation. GSD implements research patterns through structured agents, file-based state management, and explicit deviation handling protocols.</p>
@@ -1184,7 +1600,13 @@ claude <span class="string">"Create a REST API endpoint for user registration wi
                         <td><strong>Bounded autonomy</strong></td>
                         <td>Anthropic 2024<sup class="citation" data-ref="13"><a href="#ref-13">13</a></sup></td>
                         <td>Plan sizing rules</td>
-                        <td>2-3 tasks per plan, 50% context budget, checkpoint gates</td>
+                        <td>2&ndash;3 tasks per plan, 50% context budget, checkpoint gates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Self-modification</strong></td>
+                        <td>This report</td>
+                        <td><code>skill-integration</code> + <code>security-hygiene</code></td>
+                        <td>Bounded learning with validation gates and token budgets</td>
                     </tr>
                 </tbody>
             </table>
@@ -1222,7 +1644,7 @@ claude <span class="string">"Create a REST API endpoint for user registration wi
 
             <h3>Deviation Rules: Structured Autonomy</h3>
 
-            <p>GSD's deviation rules implement bounded autonomy by categorizing unexpected situations into clear response patterns. This maps to the ReAct pattern's reasoning phase, but with explicit rules rather than implicit reasoning:</p>
+            <p>GSD&rsquo;s deviation rules implement bounded autonomy by categorizing unexpected situations into clear response patterns. This maps to the ReAct pattern&rsquo;s reasoning phase, but with explicit rules rather than implicit reasoning:</p>
 
             <div class="code-example">
                 <div class="code-header">
@@ -1254,77 +1676,89 @@ claude <span class="string">"Create a REST API endpoint for user registration wi
                     <span class="callout-icon">GSD Pattern: Deviation Rules Implement ReAct</span>
                 </div>
                 <div class="callout-content">
-                    <p><strong>GSD implements the ReAct reasoning pattern through explicit deviation rules.</strong> Where ReAct uses implicit reasoning to decide actions, GSD codifies this into four rules that categorize situations by their autonomy requirements. Rules 1-3 (auto-fix) enable confident autonomous action; Rule 4 (ask) ensures human oversight for architectural decisions. This structured approach reduces ambiguity and makes agent behavior predictable and auditable.</p>
+                    <p><strong>GSD implements the ReAct reasoning pattern through explicit deviation rules.</strong> Where ReAct uses implicit reasoning to decide actions, GSD codifies this into four rules that categorize situations by their autonomy requirements. Rules 1&ndash;3 (auto-fix) enable confident autonomous action; Rule 4 (ask) ensures human oversight for architectural decisions. This structured approach reduces ambiguity and makes agent behavior predictable and auditable.</p>
                 </div>
             </aside>
+        </section>
 
-            <h3>Enhancement Ideas</h3>
+        <!-- Conclusion -->
+        <section class="content-section" id="conclusion">
+            <h2>Conclusion</h2>
 
-            <p>Based on research patterns, several enhancements could extend GSD capabilities:</p>
+            <p>The fundamentals of AI agentic programming rest on a foundation of well-established patterns (ReAct, Tool Use, Planning, Reflection), emerging standards (MCP, A2A), and sophisticated architectural approaches (single-agent, multi-agent, hierarchical, hybrid). The rapid standardization around MCP and A2A, backed by major technology companies and the Linux Foundation, signals a maturing ecosystem moving toward interoperability and production readiness.</p>
+
+            <p>The April 2026 landscape adds several critical dimensions to these fundamentals:</p>
 
             <ul>
-                <li><strong>Adversarial verification:</strong> Implement Du et al.'s multi-agent debate pattern for ambiguous decisions (multiple agents argue, consensus emerges)</li>
-                <li><strong>Reflexion integration:</strong> Add Shinn et al.'s verbal reinforcement learning for iterative improvement on failed verifications</li>
-                <li><strong>Dynamic skill discovery:</strong> Auto-suggest agents based on task analysis (match task requirements to agent capabilities)</li>
-                <li><strong>Retrieval-augmented tools:</strong> Apply Gorilla patterns to ground tool invocations in documentation (reduce API hallucination)</li>
+                <li><strong>Paradigm Shift:</strong> Agentic AI represents a fundamental shift from static automation to autonomous, goal-driven systems</li>
+                <li><strong>ReAct as Foundation:</strong> The Reasoning-Acting pattern remains the cornerstone of most agent implementations, now natively supported by first-party platforms<sup class="citation" data-ref="4"><a href="#ref-4" aria-describedby="tooltip-4d">4</a><span class="citation-tooltip" id="tooltip-4d" role="tooltip"><span class="source-type academic">Academic</span><strong>ReAct: Synergizing Reasoning and Acting in Language Models</strong><span class="authors">Yao et al., 2023 (ICLR)</span><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">View Paper</a></span></sup></li>
+                <li><strong>Standardization is Critical:</strong> MCP and A2A reduce integration time by 60&ndash;70% compared to custom development<sup class="citation" data-ref="14"><a href="#ref-14" aria-describedby="tooltip-14c">14</a><span class="citation-tooltip" id="tooltip-14c" role="tooltip"><span class="source-type industry">Industry</span><strong>Model Context Protocol (MCP)</strong><span class="authors">Anthropic, November 2024</span><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">View Spec</a></span></sup><sup class="citation" data-ref="15"><a href="#ref-15" aria-describedby="tooltip-15b">15</a><span class="citation-tooltip" id="tooltip-15b" role="tooltip"><span class="source-type industry">Industry</span><strong>Agent2Agent Protocol (A2A)</strong><span class="authors">Google, April 2025</span><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">View Announcement</a></span></sup></li>
+                <li><strong>First-Party Platforms Mature:</strong> Claude Code, OpenAI Agents SDK, and Google ADK provide integrated agent environments that reduce reliance on third-party frameworks</li>
+                <li><strong>Skills-Agents-Teams-Hooks:</strong> A composable architecture for extending agent behavior using only Markdown and JSON&mdash;no compiled code required</li>
+                <li><strong>Self-Modification Emerges:</strong> Production systems now modify their own capabilities at runtime, requiring new safety patterns</li>
+                <li><strong>1M Context Changes Everything:</strong> Claude Opus 4.6&rsquo;s million-token context eliminates the chunking problem that plagued earlier agent systems</li>
+                <li><strong>Memory Matters:</strong> Sophisticated memory systems distinguish production agents from prototypes</li>
+                <li><strong>Content-Addressed Paradigms:</strong> Unison-style approaches offer new models for agent capability management and reproducibility</li>
             </ul>
+
+            <p>As we move into Section 2, we will explore how these fundamental patterns are packaged into reusable, modular &ldquo;skills&rdquo; that enable rapid agent development and deployment.</p>
         </section>
 
         <!-- References (Research Citations) -->
         <section class="references">
             <h2>References</h2>
-            <p class="research-date">Research current as of: January 2026</p>
+            <p class="research-date">Research current as of: April 2026</p>
 
             <div class="ref-group">
                 <h3>Academic Papers</h3>
                 <ol class="ref-list">
                     <li id="ref-1">
                         <span class="ref-number">[1]</span>
-                        <span class="ref-content">Wang et al. (2024). "A Survey on Large Language Model based Autonomous Agents." <em>Frontiers of Computer Science</em>. <a href="https://arxiv.org/abs/2308.11432" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Wang et al. (2024). &ldquo;A Survey on Large Language Model based Autonomous Agents.&rdquo; <em>Frontiers of Computer Science</em>. <a href="https://arxiv.org/abs/2308.11432" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-2">
                         <span class="ref-number">[2]</span>
-                        <span class="ref-content">Xi et al. (2024). "The Rise and Potential of Large Language Model Based Agents: A Survey." <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2309.07864" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Xi et al. (2024). &ldquo;The Rise and Potential of Large Language Model Based Agents: A Survey.&rdquo; <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2309.07864" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-3">
                         <span class="ref-number">[3]</span>
-                        <span class="ref-content">Weng, Lilian. (2024). "LLM Powered Autonomous Agents." <em>Lil'Log</em>. <a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">Weng, Lilian. (2024). &ldquo;LLM Powered Autonomous Agents.&rdquo; <em>Lil&rsquo;Log</em>. <a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-4">
                         <span class="ref-number">[4]</span>
-                        <span class="ref-content">Yao et al. (2023). "ReAct: Synergizing Reasoning and Acting in Language Models." <em>ICLR 2023</em>. <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Yao et al. (2023). &ldquo;ReAct: Synergizing Reasoning and Acting in Language Models.&rdquo; <em>ICLR 2023</em>. <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-5">
                         <span class="ref-number">[5]</span>
-                        <span class="ref-content">Schick et al. (2024). "Toolformer: Language Models Can Teach Themselves to Use Tools." <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Schick et al. (2024). &ldquo;Toolformer: Language Models Can Teach Themselves to Use Tools.&rdquo; <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-6">
                         <span class="ref-number">[6]</span>
-                        <span class="ref-content">Qin et al. (2024). "Tool Learning with Foundation Models." <em>ACL 2024</em>. <a href="https://arxiv.org/abs/2304.08354" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Qin et al. (2024). &ldquo;Tool Learning with Foundation Models.&rdquo; <em>ACL 2024</em>. <a href="https://arxiv.org/abs/2304.08354" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-7">
                         <span class="ref-number">[7]</span>
-                        <span class="ref-content">Sumers et al. (2024). "Cognitive Architectures for Language Agents (CoALA)." <em>TMLR 2024</em>. <a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Sumers et al. (2024). &ldquo;Cognitive Architectures for Language Agents (CoALA).&rdquo; <em>TMLR 2024</em>. <a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-8">
                         <span class="ref-number">[8]</span>
-                        <span class="ref-content">Park et al. (2023). "Generative Agents: Interactive Simulacra of Human Behavior." <em>UIST 2023</em>. <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Park et al. (2023). &ldquo;Generative Agents: Interactive Simulacra of Human Behavior.&rdquo; <em>UIST 2023</em>. <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-9">
                         <span class="ref-number">[9]</span>
-                        <span class="ref-content">Wu et al. (2024). "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation." <em>ICML 2024</em>. <a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Wu et al. (2024). &ldquo;AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation.&rdquo; <em>ICML 2024</em>. <a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-10">
                         <span class="ref-number">[10]</span>
-                        <span class="ref-content">Shinn et al. (2024). "Reflexion: Language Agents with Verbal Reinforcement Learning." <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Shinn et al. (2024). &ldquo;Reflexion: Language Agents with Verbal Reinforcement Learning.&rdquo; <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-11">
                         <span class="ref-number">[11]</span>
-                        <span class="ref-content">Huang et al. (2024). "Understanding the Planning of LLM Agents: A Survey." <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2402.02716" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Huang et al. (2024). &ldquo;Understanding the Planning of LLM Agents: A Survey.&rdquo; <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2402.02716" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                     <li id="ref-12">
                         <span class="ref-number">[12]</span>
-                        <span class="ref-content">Patil et al. (2024). "Gorilla: Large Language Model Connected with Massive APIs." <em>ICML 2024</em>. <a href="https://arxiv.org/abs/2305.15334" target="_blank" rel="noopener">arXiv</a></span>
+                        <span class="ref-content">Patil et al. (2024). &ldquo;Gorilla: Large Language Model Connected with Massive APIs.&rdquo; <em>ICML 2024</em>. <a href="https://arxiv.org/abs/2305.15334" target="_blank" rel="noopener">arXiv</a></span>
                     </li>
                 </ol>
             </div>
@@ -1334,35 +1768,43 @@ claude <span class="string">"Create a REST API endpoint for user registration wi
                 <ol class="ref-list" start="13">
                     <li id="ref-13">
                         <span class="ref-number">[13]</span>
-                        <span class="ref-content">Anthropic. "Building Effective Agents." December 2024. <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">Anthropic. &ldquo;Building Effective Agents.&rdquo; December 2024. <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-14">
                         <span class="ref-number">[14]</span>
-                        <span class="ref-content">Anthropic. "Model Context Protocol (MCP)." November 2024. <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">Anthropic. &ldquo;Model Context Protocol (MCP).&rdquo; November 2024. <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-15">
                         <span class="ref-number">[15]</span>
-                        <span class="ref-content">Google. "Agent2Agent Protocol (A2A): A New Era of Agent Interoperability." April 2025. <a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">Google. &ldquo;Agent2Agent Protocol (A2A): A New Era of Agent Interoperability.&rdquo; April 2025. <a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-16">
                         <span class="ref-number">[16]</span>
-                        <span class="ref-content">LangChain. "LangGraph: Building Stateful AI Agents." 2024-2025. <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">LangChain. &ldquo;LangGraph: Building Stateful AI Agents.&rdquo; 2024&ndash;2025. <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-17">
                         <span class="ref-number">[17]</span>
-                        <span class="ref-content">OpenAI. "Function Calling and Tools." 2024-2025. <a href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">OpenAI. &ldquo;Function Calling and Tools.&rdquo; 2024&ndash;2025. <a href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-18">
                         <span class="ref-number">[18]</span>
-                        <span class="ref-content">Google. "Agent Development Kit (ADK)." 2025. <a href="https://google.github.io/adk-docs/" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">Google. &ldquo;Agent Development Kit (ADK).&rdquo; 2025. <a href="https://google.github.io/adk-docs/" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-19">
                         <span class="ref-number">[19]</span>
-                        <span class="ref-content">Anthropic. "Tool Use (Function Calling) with Claude." 2024-2025. <a href="https://docs.anthropic.com/en/docs/tool-use" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">Anthropic. &ldquo;Tool Use (Function Calling) with Claude.&rdquo; 2024&ndash;2025. <a href="https://docs.anthropic.com/en/docs/tool-use" target="_blank" rel="noopener">View</a></span>
                     </li>
                     <li id="ref-20">
                         <span class="ref-number">[20]</span>
-                        <span class="ref-content">OpenAI. "Assistants API." 2024-2025. <a href="https://platform.openai.com/docs/assistants/overview" target="_blank" rel="noopener">View</a></span>
+                        <span class="ref-content">OpenAI. &ldquo;Assistants API.&rdquo; 2024&ndash;2025. <a href="https://platform.openai.com/docs/assistants/overview" target="_blank" rel="noopener">View</a></span>
+                    </li>
+                    <li id="ref-21">
+                        <span class="ref-number">[21]</span>
+                        <span class="ref-content">Anthropic. &ldquo;Claude Code: Agentic Coding Tool.&rdquo; 2025&ndash;2026. <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">View</a></span>
+                    </li>
+                    <li id="ref-22">
+                        <span class="ref-number">[22]</span>
+                        <span class="ref-content">Anthropic. &ldquo;Claude Agent SDK.&rdquo; 2025&ndash;2026. <a href="https://docs.anthropic.com/en/docs/agents-and-tools" target="_blank" rel="noopener">View</a></span>
                     </li>
                 </ol>
             </div>
@@ -1372,82 +1814,52 @@ claude <span class="string">"Create a REST API endpoint for user registration wi
         <section class="sources">
             <h3>Additional Sources</h3>
             <ul>
-                <li><a href="https://www.promptingguide.ai/techniques/react" target="_blank">ReAct Prompting - Prompt Engineering Guide</a></li>
-                <li><a href="https://www.digitalapplied.com/blog/langchain-ai-agents-guide-2025" target="_blank">LangChain AI Agents: Complete Implementation Guide 2025 - Digital Applied</a></li>
-                <li><a href="https://www.marktechpost.com/2025/10/12/5-most-popular-agentic-ai-design-patterns-every-ai-engineer-should-know/" target="_blank">5 Most Popular Agentic AI Design Patterns - MarkTechPost</a></li>
-                <li><a href="https://cloud.google.com/architecture/choose-design-pattern-agentic-ai-system" target="_blank">Choose a Design Pattern for Your Agentic AI System - Google Cloud</a></li>
-                <li><a href="https://www.ibm.com/think/topics/react-agent" target="_blank">What is a ReAct Agent? - IBM</a></li>
-                <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank">Introducing the Model Context Protocol - Anthropic</a></li>
-                <li><a href="https://modelcontextprotocol.io/specification/2025-11-25" target="_blank">MCP Specification - Model Context Protocol</a></li>
-                <li><a href="https://www.pento.ai/blog/a-year-of-mcp-2025-review" target="_blank">A Year of MCP: From Internal Experiment to Industry Standard - Pento</a></li>
-                <li><a href="http://blog.modelcontextprotocol.io/posts/2025-11-25-first-mcp-anniversary/" target="_blank">One Year of MCP: November 2025 Spec Release - MCP Blog</a></li>
-                <li><a href="https://thenewstack.io/why-the-model-context-protocol-won/" target="_blank">Why the Model Context Protocol Won - The New Stack</a></li>
-                <li><a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank">Donating MCP and Establishing Agentic AI Foundation - Anthropic</a></li>
-                <li><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank">Announcing the Agent2Agent Protocol (A2A) - Google Developers Blog</a></li>
-                <li><a href="https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade" target="_blank">Agent2Agent Protocol Getting an Upgrade - Google Cloud Blog</a></li>
-                <li><a href="https://www.linuxfoundation.org/press/linux-foundation-launches-the-agent2agent-protocol-project-to-enable-secure-intelligent-communication-between-ai-agents" target="_blank">Linux Foundation Launches A2A Protocol Project - Linux Foundation</a></li>
-                <li><a href="https://www.ibm.com/think/topics/agent2agent-protocol" target="_blank">What Is Agent2Agent (A2A) Protocol? - IBM</a></li>
-                <li><a href="https://www.ruh.ai/blogs/ai-agent-protocols-2026-complete-guide" target="_blank">AI Agent Protocols 2026: The Complete Guide - RUH.AI</a></li>
-                <li><a href="https://www.ssonetwork.com/intelligent-automation/columns/ai-agent-protocols-10-modern-standards-shaping-the-agentic-era" target="_blank">AI Agent Protocols: 10 Modern Standards - SSO Network</a></li>
-                <li><a href="https://arxiv.org/abs/2504.16736" target="_blank">A Survey of AI Agent Protocols - arXiv</a></li>
-                <li><a href="https://orq.ai/blog/ai-agent-architecture" target="_blank">AI Agent Architecture: Core Principles & Tools in 2025 - ORQ</a></li>
-                <li><a href="https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system" target="_blank">Choose Design Pattern for Agentic AI System - Google Cloud</a></li>
-                <li><a href="https://www.exabeam.com/explainers/agentic-ai/agentic-ai-architecture-types-components-best-practices/" target="_blank">Agentic AI Architecture: Types, Components, and Best Practices - Exabeam</a></li>
-                <li><a href="https://arxiv.org/html/2510.25445v1" target="_blank">Agentic AI: A Comprehensive Survey - arXiv</a></li>
-                <li><a href="https://www.fullstack.com/labs/resources/blog/agentic-ai-vs-traditional-ai-what-sets-ai-agents-apart" target="_blank">Agentic AI vs Traditional AI - FullStack</a></li>
-                <li><a href="https://wizr.ai/blog/agentic-ai-vs-traditional-automation/" target="_blank">Agentic AI vs. Traditional Automation: Why Enterprises Shift in 2025 - Wizr</a></li>
-                <li><a href="https://www.iamdave.ai/blog/top-10-model-context-protocol-use-cases-complete-guide-for-2025/" target="_blank">Top 10 Model Context Protocol Use Cases: Complete Guide for 2025 - DaveAI</a></li>
-                <li><a href="https://xenoss.io/blog/mcp-model-context-protocol-enterprise-use-cases-implementation-challenges" target="_blank">MCP in Enterprise: Real-World Applications and Challenges - Xenoss</a></li>
-                <li><a href="https://github.com/langchain-ai/react-agent" target="_blank">LangGraph ReAct Agent Template - GitHub</a></li>
-                <li><a href="https://dylancastillo.co/posts/react-agent-langgraph.html" target="_blank">Building ReAct Agents with LangGraph - Dylan Castillo</a></li>
-                <li><a href="https://www.datacamp.com/tutorial/crewai-vs-langgraph-vs-autogen" target="_blank">CrewAI vs LangGraph vs AutoGen - DataCamp</a></li>
-                <li><a href="https://www.langflow.org/blog/the-complete-guide-to-choosing-an-ai-agent-framework-in-2025" target="_blank">The Complete Guide to Choosing an AI Agent Framework in 2025 - Langflow</a></li>
-                <li><a href="https://redis.io/blog/build-smarter-ai-agents-manage-short-term-and-long-term-memory-with-redis/" target="_blank">Build Smarter AI Agents: Manage Memory with Redis - Redis</a></li>
-                <li><a href="https://aws.amazon.com/blogs/machine-learning/building-smarter-ai-agents-agentcore-long-term-memory-deep-dive/" target="_blank">Building Smarter AI Agents: AgentCore Long-Term Memory - AWS</a></li>
-                <li><a href="https://arxiv.org/abs/2512.13564" target="_blank">Memory in the Age of AI Agents - arXiv</a></li>
-                <li><a href="https://medium.com/@sayalisureshkumbhar/how-tools-are-called-in-ai-agents-complete-2025-guide-with-examples-42dcdfe6ba38" target="_blank">How Tools Are Called in AI Agents: Complete 2025 Guide - Medium</a></li>
-                <li><a href="https://composio.dev/blog/apis-ai-agents-integration-patterns" target="_blank">APIs for AI Agents: The 5 Integration Patterns - Composio</a></li>
+                <li><a href="https://www.promptingguide.ai/techniques/react" target="_blank">ReAct Prompting &mdash; Prompt Engineering Guide</a></li>
+                <li><a href="https://www.digitalapplied.com/blog/langchain-ai-agents-guide-2025" target="_blank">LangChain AI Agents: Complete Implementation Guide 2025 &mdash; Digital Applied</a></li>
+                <li><a href="https://www.marktechpost.com/2025/10/12/5-most-popular-agentic-ai-design-patterns-every-ai-engineer-should-know/" target="_blank">5 Most Popular Agentic AI Design Patterns &mdash; MarkTechPost</a></li>
+                <li><a href="https://cloud.google.com/architecture/choose-design-pattern-agentic-ai-system" target="_blank">Choose a Design Pattern for Your Agentic AI System &mdash; Google Cloud</a></li>
+                <li><a href="https://www.ibm.com/think/topics/react-agent" target="_blank">What is a ReAct Agent? &mdash; IBM</a></li>
+                <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank">Introducing the Model Context Protocol &mdash; Anthropic</a></li>
+                <li><a href="https://modelcontextprotocol.io/specification/2025-11-25" target="_blank">MCP Specification &mdash; Model Context Protocol</a></li>
+                <li><a href="https://www.pento.ai/blog/a-year-of-mcp-2025-review" target="_blank">A Year of MCP: From Internal Experiment to Industry Standard &mdash; Pento</a></li>
+                <li><a href="http://blog.modelcontextprotocol.io/posts/2025-11-25-first-mcp-anniversary/" target="_blank">One Year of MCP: November 2025 Spec Release &mdash; MCP Blog</a></li>
+                <li><a href="https://thenewstack.io/why-the-model-context-protocol-won/" target="_blank">Why the Model Context Protocol Won &mdash; The New Stack</a></li>
+                <li><a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank">Donating MCP and Establishing Agentic AI Foundation &mdash; Anthropic</a></li>
+                <li><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank">Announcing the Agent2Agent Protocol (A2A) &mdash; Google Developers Blog</a></li>
+                <li><a href="https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade" target="_blank">Agent2Agent Protocol Getting an Upgrade &mdash; Google Cloud Blog</a></li>
+                <li><a href="https://www.linuxfoundation.org/press/linux-foundation-launches-the-agent2agent-protocol-project-to-enable-secure-intelligent-communication-between-ai-agents" target="_blank">Linux Foundation Launches A2A Protocol Project &mdash; Linux Foundation</a></li>
+                <li><a href="https://www.ibm.com/think/topics/agent2agent-protocol" target="_blank">What Is Agent2Agent (A2A) Protocol? &mdash; IBM</a></li>
+                <li><a href="https://www.ruh.ai/blogs/ai-agent-protocols-2026-complete-guide" target="_blank">AI Agent Protocols 2026: The Complete Guide &mdash; RUH.AI</a></li>
+                <li><a href="https://www.ssonetwork.com/intelligent-automation/columns/ai-agent-protocols-10-modern-standards-shaping-the-agentic-era" target="_blank">AI Agent Protocols: 10 Modern Standards &mdash; SSO Network</a></li>
+                <li><a href="https://arxiv.org/abs/2504.16736" target="_blank">A Survey of AI Agent Protocols &mdash; arXiv</a></li>
+                <li><a href="https://orq.ai/blog/ai-agent-architecture" target="_blank">AI Agent Architecture: Core Principles &amp; Tools in 2025 &mdash; ORQ</a></li>
+                <li><a href="https://www.exabeam.com/explainers/agentic-ai/agentic-ai-architecture-types-components-best-practices/" target="_blank">Agentic AI Architecture: Types, Components, and Best Practices &mdash; Exabeam</a></li>
+                <li><a href="https://arxiv.org/html/2510.25445v1" target="_blank">Agentic AI: A Comprehensive Survey &mdash; arXiv</a></li>
+                <li><a href="https://www.fullstack.com/labs/resources/blog/agentic-ai-vs-traditional-ai-what-sets-ai-agents-apart" target="_blank">Agentic AI vs Traditional AI &mdash; FullStack</a></li>
+                <li><a href="https://wizr.ai/blog/agentic-ai-vs-traditional-automation/" target="_blank">Agentic AI vs. Traditional Automation &mdash; Wizr</a></li>
+                <li><a href="https://www.datacamp.com/tutorial/crewai-vs-langgraph-vs-autogen" target="_blank">CrewAI vs LangGraph vs AutoGen &mdash; DataCamp</a></li>
+                <li><a href="https://www.langflow.org/blog/the-complete-guide-to-choosing-an-ai-agent-framework-in-2025" target="_blank">The Complete Guide to Choosing an AI Agent Framework in 2025 &mdash; Langflow</a></li>
+                <li><a href="https://redis.io/blog/build-smarter-ai-agents-manage-short-term-and-long-term-memory-with-redis/" target="_blank">Build Smarter AI Agents: Manage Memory with Redis &mdash; Redis</a></li>
+                <li><a href="https://aws.amazon.com/blogs/machine-learning/building-smarter-ai-agents-agentcore-long-term-memory-deep-dive/" target="_blank">Building Smarter AI Agents: AgentCore Long-Term Memory &mdash; AWS</a></li>
+                <li><a href="https://arxiv.org/abs/2512.13564" target="_blank">Memory in the Age of AI Agents &mdash; arXiv</a></li>
+                <li><a href="https://composio.dev/blog/apis-ai-agents-integration-patterns" target="_blank">APIs for AI Agents: The 5 Integration Patterns &mdash; Composio</a></li>
+                <li><a href="https://unison-lang.org/" target="_blank">Unison: A New Approach to Distributed Programming &mdash; Unison Computing</a></li>
             </ul>
-        </section>
-
-        <section class="content-section">
-            <h2>v2.0 Update: Opus 4.6, Agent SDK, and DevOps Integration</h2>
-
-            <h3>Claude Opus 4.6 Capabilities</h3>
-            <p>Released February 2026, Claude Opus 4.6 represents a major leap in agentic AI capabilities with <strong>1 million token context window</strong>, <strong>adaptive thinking</strong> (dynamic compute allocation), and native support for <strong>parallel subagent execution</strong>. These capabilities fundamentally change how agents can be architected.</p>
-
-            <table class="comparison-table">
-                <thead>
-                    <tr><th>Capability</th><th>Opus 4.6</th><th>Impact on Agents</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Context Window</td><td>1M tokens</td><td>Entire codebases fit in context; eliminates chunking for most projects</td></tr>
-                    <tr><td>Adaptive Thinking</td><td>Dynamic compute</td><td>Model allocates more reasoning for complex tasks, less for simple ones</td></tr>
-                    <tr><td>Parallel Subagents</td><td>Native support</td><td>Multiple specialized agents run concurrently via Task tool</td></tr>
-                    <tr><td>Agent Teams</td><td>Leader-worker topology</td><td>Coordinated multi-agent workflows with task lists and mailboxes</td></tr>
-                </tbody>
-            </table>
-
-            <h3>Claude Agent SDK</h3>
-            <p>The Claude Agent SDK (v0.1.31) enables programmatic creation of custom agents with Python. It provides the <code>Agent</code> class for defining agent behavior, <code>Tool</code> definitions for MCP integration, and built-in support for multi-turn conversations with tool use. The SDK works alongside Claude Code's declarative agent definitions (.claude/agents/*.md) for different use cases.</p>
-
-            <h3>MCP + A2A as Universal Integration Layer</h3>
-            <p>The Model Context Protocol (MCP) and Agent-to-Agent (A2A) protocol together form the universal integration layer for agent systems. MCP provides standardized tool access (agent-to-tool), while A2A enables structured inter-agent communication. In DevOps, MCP connects agents to Git, CI/CD, cloud APIs, and monitoring systems, while A2A coordinates agent actions across lifecycle phases. See <a href="section-9.html">Section 9</a> for the complete DevOps lifecycle mapping.</p>
         </section>
 
         <nav class="navigation">
             <a href="../index.html" class="nav-button">
-                <span>← Back to Index</span>
+                <span>&larr; Back to Index</span>
             </a>
             <a href="section-2.html" class="nav-button next">
-                <span>Section 2: AI Agent Skills →</span>
+                <span>Section 2: AI Agent Skills &rarr;</span>
             </a>
         </nav>
     </div>
 
     <footer>
-        <p>Section 1 of 8 - AI Agentic Programming Fundamentals</p>
-        <p>Research compiled January 30, 2026</p>
+        <p>Section 1 of 15 &mdash; AI Agentic Programming Fundamentals</p>
+        <p>Research current as of April 2026</p>
     </footer>
 
     <script>
@@ -1533,12 +1945,13 @@ claude <span class="string">"Create a REST API endpoint for user registration wi
 
   <div class="container">
     <div class="nav-links">
+      <a href="index.html">&larr; Report Index</a>
       <a href="section-2.html" style="margin-left:auto">2. Skills &rarr;</a>
     </div>
   </div>
 
   <footer>
-    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+    <p>Skills, Agents &amp; Teams &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
   </footer>
 </body>
 </html>

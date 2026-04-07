@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Problems &mdash; Computer Science &mdash; Artemis Learning Resources</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-alr">
+  <header>
+    <h1>Open Problems &mdash; Computer Science</h1>
+    <div class="subtitle">Agentic Reasoning, Context Scaling, Tool Poisoning, Agent Identity, MCP Verification, Code Gen, MIRAGE Grounding</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="ai-programming.html">AI Programming</a>
+      <a href="diy-electronics.html">DIY Electronics</a>
+      <a href="study-guides.html">Study Guides</a>
+      <a href="live-expansion.html">LIVE Pages</a>
+      <a href="open-math-problems.html">Math Problems</a>
+      <a href="open-cs-problems.html" class="active">CS Problems</a>
+      <a href="open-physics-problems.html">Physics Problems</a>
+      <a href="open-science.html">DIY Science</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Seven open problems at the frontier of computer science, focused on the challenges discovered during Artemis II agentic technology research. Unlike classical CS open problems (P vs NP is covered in the Math module), these problems are emergent &mdash; they arose from the rapid deployment of LLM-based agents in 2024&ndash;2026 and do not yet have formal theoretical frameworks. Corpus analysis found 16 strongly related projects.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Open Problems</span></div>
+      <div class="stat"><span class="stat-value">16</span><span class="stat-label">Corpus Links</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">arXiv Papers</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Knowledge Domains</span></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 1: Agentic Reasoning Limits                           -->
+    <!-- ============================================================ -->
+
+    <h2>1. Agentic Reasoning Limits: Single vs Multi-Agent</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">MAS</span> <span class="source-badge">AGT</span></p>
+      <p><strong>Question:</strong> Under what conditions do multi-agent systems outperform single agents, and when does the coordination overhead exceed the parallelism benefit?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>arXiv:2604.02460:</strong> single-agent LLMs outperform multi-agent on multi-hop reasoning (Data Processing Inequality proof)</li>
+        <li><strong>arXiv:2604.01020:</strong> OrgAgent hierarchical MAS achieves 102.73% improvement on parallelizable tasks</li>
+        <li><strong>Practical observation:</strong> multi-agent excels at embarrassingly parallel work, single-agent excels at deep reasoning chains</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Is there a formal characterization of tasks where MAS provably outperforms single agents?</li>
+        <li>Can information-theoretic bounds quantify the coordination cost?</li>
+        <li>Does the Data Processing Inequality fully explain single-agent advantage on multi-hop, or are there exceptions?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 2: Context Window Scaling Laws                        -->
+    <!-- ============================================================ -->
+
+    <h2>2. Context Window Scaling Laws</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">AGT</span> <span class="source-badge">CSP</span></p>
+      <p><strong>Question:</strong> How does reasoning quality scale with context window size, and what are the fundamental limits of in-context learning?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>Chinchilla scaling laws:</strong> relate compute, data, and model size but not context window</li>
+        <li><strong>Empirical observation:</strong> &ldquo;lost in the middle&rdquo; effect &mdash; models attend to beginning and end of context</li>
+        <li><strong>658x cost inflation:</strong> from MCP overthinking loops demonstrates pathological scaling (arXiv:2602.14798)</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Is there a power law relating context length to retrieval accuracy?</li>
+        <li>What is the fundamental information-theoretic capacity of transformer attention at length N?</li>
+        <li>Can context compression maintain reasoning quality below some critical compression ratio?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 3: Tool Poisoning Completeness                        -->
+    <!-- ============================================================ -->
+
+    <h2>3. Tool Poisoning Detection Completeness</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">AGT</span> <span class="source-badge">FAIS</span></p>
+      <p><strong>Question:</strong> Is complete detection of tool poisoning attacks against LLM agents computationally tractable?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>arXiv:2604.03081:</strong> 1,070 adversarial skills across 15 MITRE ATT&amp;CK categories; 11.6&ndash;33.5% bypass rates</li>
+        <li><strong>Cross-model defense:</strong> only 1.6% of payloads bypass all three models simultaneously</li>
+        <li><strong>631,813 unreviewed skills:</strong> in SkillsMP marketplace as of April 2026</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Is tool poisoning detection reducible to a known decidable problem, or is it undecidable in general?</li>
+        <li>Can static analysis provide sound (no false negatives) detection at practical false-positive rates?</li>
+        <li>Does the 1.6% cross-model bypass rate converge to zero as ensemble size grows, or asymptote above zero?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 4: Agent Identity Verification                        -->
+    <!-- ============================================================ -->
+
+    <h2>4. Agent Identity Verification at Scale</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">AGT</span> <span class="source-badge">SAA</span></p>
+      <p><strong>Question:</strong> How do you verify the identity and capabilities of an AI agent in a decentralized ecosystem with 110M+ SDK installations?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>Agent Identity Protocol (AIP):</strong> proposed at IETF-125, still in draft</li>
+        <li><strong>MCP Dev Summit:</strong> identified identity as a top-3 open problem for the protocol</li>
+        <li><strong>Current practice:</strong> OAuth2 for human users; no standard for agent-to-agent authentication</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Can agent identity be separated from the identity of the human who deployed it?</li>
+        <li>How do you revoke capabilities from a compromised agent in a decentralized network?</li>
+        <li>Is there a capability-based security model that scales to millions of interacting agents?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 5: MCP Formal Verification                            -->
+    <!-- ============================================================ -->
+
+    <h2>5. MCP Protocol Formal Verification</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">AGT</span> <span class="source-badge">DHP</span></p>
+      <p><strong>Question:</strong> Can the Model Context Protocol be formally verified for safety properties (no unauthorized tool execution, no information leakage, no denial of service)?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>Protocol status:</strong> MCP specification is evolving rapidly; 3,600x adoption growth since November 2024</li>
+        <li><strong>No formal model:</strong> the protocol has not been modeled in TLA+, Alloy, or any formal verification framework</li>
+        <li><strong>Analogy:</strong> TLS 1.3 was formally verified (miTLS, ProVerif); MCP needs equivalent treatment</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Can MCP&rsquo;s tool execution model be expressed in a process calculus suitable for verification?</li>
+        <li>What safety invariants should a formal model enforce?</li>
+        <li>Is the current specification even self-consistent, or are there hidden race conditions?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 6: Code Generation Correctness                        -->
+    <!-- ============================================================ -->
+
+    <h2>6. Code Generation Correctness Guarantees</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">CSP</span> <span class="source-badge">FAIS</span></p>
+      <p><strong>Question:</strong> Can LLM-generated code come with formal correctness guarantees, or is post-hoc verification the best achievable?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>Current practice:</strong> generate then test &mdash; correctness is probabilistic, not guaranteed</li>
+        <li><strong>Formal methods integration:</strong> some work on LLM-assisted proof generation (Lean, Coq) but not code-level guarantees</li>
+        <li><strong>Content-addressed code:</strong> Unison&rsquo;s approach (content-addressed definitions) could provide a foundation</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Can type-driven development with dependent types constrain LLM output to correct programs?</li>
+        <li>Is there a practical refinement type system that makes verification of LLM output tractable?</li>
+        <li>Can we bound the probability of correctness for a given LLM + verification pipeline?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROBLEM 7: MIRAGE Grounding                                   -->
+    <!-- ============================================================ -->
+
+    <h2>7. Multi-Modal Grounding Verification (MIRAGE Problem)</h2>
+
+    <div class="card">
+      <p><span class="level-badge level-research">Open</span> <span class="source-badge">AGT</span></p>
+      <p><strong>Question:</strong> How do you verify that a model&rsquo;s description of visual content is grounded in actual observation rather than fabricated from training priors?</p>
+      <h4>Current State of the Art</h4>
+      <ul>
+        <li><strong>arXiv:2603.21687 (MIRAGE):</strong> models fabricate visual descriptions for absent images at &gt;60% rate</li>
+        <li><strong>No reliable detector:</strong> current methods cannot distinguish grounded from fabricated visual descriptions</li>
+        <li><strong>Implication:</strong> multi-modal AI systems cannot be trusted for visual verification without external grounding</li>
+      </ul>
+      <h4>Open Questions</h4>
+      <ul>
+        <li>Is there a computational test to distinguish grounded vs fabricated visual descriptions?</li>
+        <li>Can adversarial probing reliably detect when a model is generating from priors vs observation?</li>
+        <li>Does the 60%+ fabrication rate decrease with model scale, or is it an architectural limitation?</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <h2>Corpus Cross-References</h2>
+
+    <div class="card">
+      <p>Pipeline analysis identified 16 related projects across 3 knowledge domains (general, AI, energy). The aggregate complex plane position <strong>z = 0.210 + 0.140i</strong> (|z| = 0.252) is the highest magnitude among ALR modules, reflecting the density of connections to active research.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>OPEN</td><td>Unsolved Problems &amp; Open Research</td><td>General</td><td>Primary open problems hub</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>General</td><td>MCP security, agent research</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>General</td><td>Single vs multi-agent papers</td></tr>
+        <tr><td>CSP</td><td>Computer Science &amp; Programming</td><td>General</td><td>Complexity theory, formal methods</td></tr>
+        <tr><td>FAIS</td><td>Formal AI Safety</td><td>AI</td><td>Safety verification, agent trust</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>AI</td><td>Agent identity, skill security</td></tr>
+        <tr><td>GPE</td><td>Global Power Efficiency Rankings</td><td>Energy</td><td>Compute cost of verification</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series Projects</h4>
+      <ul>
+        <li><a href="../OPEN/index.html">OPEN &mdash; Unsolved Problems</a></li>
+        <li><a href="../AGT/index.html">AGT &mdash; Agentic Technologies</a></li>
+        <li><a href="../MAS/index.html">MAS &mdash; Multi-Agent Systems</a></li>
+        <li><a href="../FAIS/index.html">FAIS &mdash; Formal AI Safety</a></li>
+        <li><a href="../SAA/index.html">SAA &mdash; Skills &amp; Agents</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Open Problems &mdash; Computer Science &middot; Artemis Learning Resources &middot; 7 problems &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

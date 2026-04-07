@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Securing MCP: Risks, Controls, Governance &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Securing MCP: Risks, Controls &amp; Governance</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-security">Governance</span></div>
+      <h3>Securing MCP: Risks, Controls, Governance</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2511.20920" target="_blank"><span class="arxiv-id">2511.20920</span></a></p>
+      <p><strong>Date:</strong> November 2025 &middot; <strong>Categories:</strong> cs.CR, cs.SE</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>A comprehensive risk taxonomy for MCP deployments covering data exfiltration, prompt injection through tool responses, server impersonation, and cascading failures in multi-server topologies. The paper contrasts dynamic user-driven agent systems with static API integrations, demonstrating that traditional API security models are insufficient for agentic contexts where tool selection is non-deterministic. Proposes a three-tier governance model spanning platform, operational, and policy controls.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number critical">78%</span> of MCP security incidents stem from missing operational controls</li>
+      <li>Three-tier governance model: platform controls (TLS 1.3, mTLS), operational controls (audit logging, rate limiting), policy controls (tool allowlists, data classification)</li>
+      <li>Dynamic agent systems introduce risks absent in static API integrations &mdash; non-deterministic tool selection creates attack surfaces</li>
+      <li>MCP governance cannot be bolted on after deployment; it must be designed in from the start</li>
+      <li>Certificate pinning for known MCP endpoints prevents server impersonation attacks</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <p>Risk taxonomy development based on analysis of MCP deployment patterns in enterprise environments. Comparative analysis between dynamic agent-driven tool selection and static API integration security models. Framework validated against known incident patterns.</p>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Control Tier</th><th>Components</th><th>Incident Coverage</th></tr></thead>
+      <tbody>
+        <tr><td>Platform</td><td>TLS 1.3, mTLS, certificate pinning</td><td>Transport-level attacks</td></tr>
+        <tr><td>Operational</td><td>Audit logging, rate limiting, anomaly detection</td><td>78% of incidents</td></tr>
+        <tr><td>Policy</td><td>Tool allowlists, data classification, retention</td><td>Authorization failures</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>The three-tier model maps directly to our GSD skill security layers: platform controls align with hook-based enforcement, operational controls with the security-hygiene skill's audit patterns, and policy controls with skill permission manifests. The 78% operational gap finding validates our emphasis on deterministic hooks over advisory guardrails. The policy-based access control model should inform the trust-relationship provider's permission scoping.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (13 projects, 246-project corpus)</h4>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+      <span class="ref-tag">MAS &mdash; Multi-Agent Systems</span>
+      <span class="ref-tag">SAA &mdash; Skills, Agents &amp; Teams</span>
+      <span class="ref-tag">MGU &mdash; Module Governance</span>
+      <span class="ref-tag">PSC &mdash; Political Science</span>
+      <span class="ref-tag">DRP &mdash; Disaster Recovery</span>
+      <span class="ref-tag">SYS &mdash; Systems Admin</span>
+      <span class="ref-tag">LED &mdash; LED Controllers</span>
+      <span class="ref-tag">BPS &mdash; Biological Physics</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2504-08623.html">Enterprise MCP: IAM &amp; Zero-Trust</a></li>
+        <li><a href="paper-2602-11327.html">Security Threat Modeling: 4 Protocols</a></li>
+        <li><a href="paper-2601-07395.html">MCP-ITP: Automated Tool Poisoning</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2511.20920 &middot; Securing MCP</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

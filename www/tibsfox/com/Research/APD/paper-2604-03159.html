@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BibTeX Citation Hallucinations &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; BibTeX Citation Hallucinations in Scientific Publishing</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-hallucination">Hallucination</span></div>
+      <h3>BibTeX Citation Hallucinations in Scientific Publishing Agents</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.03159" target="_blank"><span class="arxiv-id">2604.03159</span></a></p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.CL, cs.DL</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>A taxonomy of citation fabrication patterns in LLM-generated BibTeX entries used by scientific publishing agents. The paper provides agent-by-agent comparison of hallucination rates, develops a citation verification pipeline, and proposes mitigation strategies for research automation. Fabrication patterns include plausible-but-nonexistent papers, wrong-author attribution, incorrect venue/year combinations, and DOI fabrication.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li>Fabrication taxonomy: nonexistent papers, wrong authors, incorrect venues, DOI fabrication</li>
+      <li>Agent-by-agent comparison reveals significant variation in hallucination rates</li>
+      <li>Citation verification pipeline catches most fabrications but adds latency</li>
+      <li>Plausible-but-nonexistent papers are the hardest to detect automatically</li>
+      <li>DOI fabrication exploits the fact that DOI format is predictable</li>
+      <li>Mitigation strategies reduce but cannot fully eliminate citation hallucinations</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Fabrication Type</th><th>Detection Difficulty</th><th>Frequency</th></tr></thead>
+      <tbody>
+        <tr><td>Nonexistent papers</td><td>Hard (plausible metadata)</td><td>Most common</td></tr>
+        <tr><td>Wrong-author attribution</td><td>Medium (verifiable)</td><td>Common</td></tr>
+        <tr><td>Incorrect venue/year</td><td>Easy (database lookup)</td><td>Moderate</td></tr>
+        <tr><td>DOI fabrication</td><td>Easy (DOI resolution)</td><td>Less common</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>Directly applicable to our research-engine and publish-pipeline. Our 190+ completed research missions generate thousands of citations &mdash; each is a potential hallucination vector. We should add a BibTeX verification stage to the publish-pipeline that resolves DOIs, checks CrossRef, and flags plausible-but-unverified entries. The fabrication taxonomy should be encoded in the data-fidelity skill's detection patterns. Priority: DOI resolution is cheap and catches the easiest fabrications first.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (227 projects, 246-project corpus)</h4>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">MAS &mdash; Multi-Agent Systems</span>
+      <span class="ref-tag">OAA &mdash; Operations Automation</span>
+      <span class="ref-tag">SCM &mdash; Scientific Method</span>
+      <span class="ref-tag">PNW &mdash; Research Series</span>
+      <span class="ref-tag">TKN &mdash; Token Economics</span>
+      <span class="ref-tag">OPEN &mdash; Unsolved Problems</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-03173.html">Reference Hallucination Detection</a></li>
+        <li><a href="paper-2603-21687.html">MIRAGE: Visual Fabrication</a></li>
+        <li><a href="paper-2604-04177.html">Neurosymbolic Fact-Checking</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.03159 &middot; BibTeX Hallucinations</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

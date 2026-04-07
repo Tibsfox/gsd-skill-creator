@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History &amp; Evolution &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>History &amp; Evolution</h1>
+    <div class="subtitle">From IBM Mainframes to Serverless &mdash; Seven Decades of Systems Administration</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html" class="active">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The history of systems administration is the history of computing itself. Every era introduced new hardware, new abstractions, and new expectations &mdash; and with them, new categories of people who kept the machines running. From the first IBM operators in white lab coats to the SREs writing Terraform at 2 AM, the thread is continuous: someone has to make it work.
+    </blockquote>
+
+    <!-- MAINFRAME ERA -->
+    <h2>The Mainframe Era (1950s&ndash;1960s)</h2>
+    <p>Systems administration begins with IBM. The <strong>IBM 701</strong> (1952) and <strong>IBM 7090</strong> (1959) required dedicated operators who managed batch job queues, mounted tape reels, and maintained hardware in climate-controlled rooms. The role was physical: operators were the interface between programmers and the machine.</p>
+    <p><strong>Time-sharing</strong> systems like MIT&rsquo;s <strong>CTSS</strong> (1961) and <strong>Multics</strong> (1965) introduced the concept of multiple users sharing a single machine, creating the first access control problems and the first system administrators in the modern sense &mdash; people who managed user accounts, disk quotas, and uptime.</p>
+    <div class="card">
+      <p><strong>Key insight:</strong> The mainframe era established the fundamental tension that defines all of sysadmin: the machine is expensive and shared, so someone must arbitrate access, ensure availability, and manage capacity. Every subsequent era is a variation on this theme.</p>
+    </div>
+
+    <!-- UNIX REVOLUTION -->
+    <h2>The Unix Revolution (1969&ndash;1980s)</h2>
+    <p><strong>Ken Thompson</strong> and <strong>Dennis Ritchie</strong> created Unix at Bell Labs in 1969, initially on a PDP-7. Rewritten in C (1973), Unix became portable across hardware platforms &mdash; a first. The <strong>Unix philosophy</strong> (&ldquo;do one thing well,&rdquo; pipes, plain text) shaped every sysadmin tool that followed.</p>
+    <p>BSD Unix (1977) at UC Berkeley added TCP/IP networking. The <strong>sendmail</strong> MTA, <strong>bind</strong> DNS server, and <strong>vi</strong> editor all emerged from BSD. AT&amp;T&rsquo;s System V introduced <code>/etc/init.d</code> service management and the <code>/etc/passwd</code> user database &mdash; conventions still recognizable in modern Linux.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-year">1952</span>
+        <span class="timeline-text">IBM 701 &mdash; first commercially available scientific computer, dedicated operators required</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1961</span>
+        <span class="timeline-text">MIT CTSS &mdash; first time-sharing system, multiple users on one machine</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1965</span>
+        <span class="timeline-text">Multics &mdash; ambitious multi-user OS, influenced Unix design through contrast</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1969</span>
+        <span class="timeline-text">Unix created at Bell Labs by Thompson and Ritchie on a PDP-7</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1973</span>
+        <span class="timeline-text">Unix rewritten in C &mdash; first portable operating system</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1977</span>
+        <span class="timeline-text">BSD Unix at UC Berkeley &mdash; adds TCP/IP, spawns open-source tradition</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1983</span>
+        <span class="timeline-text">Sun Microsystems founded &mdash; the workstation era begins</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1991</span>
+        <span class="timeline-text">Linux 0.01 released by Linus Torvalds &mdash; Unix for everyone</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1993</span>
+        <span class="timeline-text">Debian and Slackware &mdash; first Linux distributions with package management</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1995</span>
+        <span class="timeline-text">Apache HTTP Server &mdash; open-source web server dominates the Internet</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1998</span>
+        <span class="timeline-text">LAMP stack crystallizes: Linux + Apache + MySQL + PHP/Perl/Python</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2006</span>
+        <span class="timeline-text">AWS EC2 launches &mdash; servers become API calls, cloud era begins</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2013</span>
+        <span class="timeline-text">Docker 1.0 &mdash; containers go mainstream, immutable infrastructure arrives</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2014</span>
+        <span class="timeline-text">AWS Lambda &mdash; serverless computing, sysadmins abstract away the server</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2015</span>
+        <span class="timeline-text">Kubernetes 1.0 released by Google &mdash; container orchestration standard</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2025</span>
+        <span class="timeline-text">LOPSA dissolves &mdash; the last dedicated sysadmin professional organization closes</span>
+      </div>
+    </div>
+
+    <!-- CLIENT-SERVER ERA -->
+    <h2>Client-Server &amp; the Network (1980s&ndash;1990s)</h2>
+    <p>The rise of PCs and local area networks transformed sysadmins from mainframe operators into <strong>network administrators</strong>. Novell NetWare, Windows NT, and NFS created heterogeneous environments. The sysadmin now managed multiple platforms, user directories, print queues, and email servers. <strong>Tom Limoncelli</strong>&rsquo;s <em>The Practice of System and Network Administration</em> (first edition 2001) codified the discipline.</p>
+
+    <!-- INTERNET ERA -->
+    <h2>The Internet &amp; LAMP Era (1990s&ndash;2000s)</h2>
+    <p>The commercial Internet created explosive demand for web hosting, email, and DNS. The <strong>LAMP stack</strong> (Linux, Apache, MySQL, PHP) became the default platform. Sysadmins became responsible for public-facing infrastructure with uptime expectations measured in nines. Configuration management emerged: <strong>CFEngine</strong> (1993) was the first, followed by Puppet (2005), Chef (2009), and Ansible (2012).</p>
+
+    <!-- CLOUD ERA -->
+    <h2>Cloud Computing (2006&ndash;Present)</h2>
+    <p><strong>AWS EC2</strong> (2006) made servers available via API. The sysadmin&rsquo;s unit of work shifted from physical hardware to virtual instances, then to containers. <strong>Docker</strong> (2013) commoditized application packaging. <strong>Kubernetes</strong> (2015, from Google&rsquo;s internal Borg system) became the orchestration standard. <strong>AWS Lambda</strong> (2014) introduced serverless, abstracting away the server entirely.</p>
+    <p>This era fractured the sysadmin role into specializations: <strong>DevOps Engineers</strong>, <strong>Site Reliability Engineers</strong> (SRE, formalized by Google&rsquo;s 2016 SRE book), <strong>Cloud Engineers</strong>, and <strong>Platform Engineers</strong>.</p>
+
+    <!-- PROFESSIONAL ORGANIZATIONS -->
+    <h2>Professional Organizations</h2>
+    <p>The sysadmin profession organized around two bodies:</p>
+    <table>
+      <thead><tr><th>Organization</th><th>Period</th><th>Contribution</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SAGE</strong> (System Administrators Guild)</td><td>1992&ndash;2011</td><td>Special technical group within USENIX, ran LISA conference</td><td>Merged into USENIX</td></tr>
+        <tr><td><strong>LISA Conference</strong></td><td>1986&ndash;present</td><td>Premier sysadmin conference, now USENIX SREcon lineage</td><td>Continues as SREcon</td></tr>
+        <tr><td><strong>LOPSA</strong></td><td>2004&ndash;2025</td><td>Independent guild with ethics code, local chapters, mentorship</td><td><span class="safety-badge safety-critical">Dissolved Dec 2025</span></td></tr>
+      </tbody>
+    </table>
+    <p>LOPSA&rsquo;s dissolution in December 2025 marked the end of the only independent professional organization dedicated exclusively to system administrators. The profession now relies on broader communities (DevOpsDays, SREcon, CNCF) that serve adjacent roles but lack sysadmin-specific advocacy.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>232 related projects</strong> across 4 knowledge domains with 236 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>HPC</td><td>High Performance Computing</td><td>general</td><td>0.763</td></tr>
+        <tr><td>SYS</td><td>Systems Administration: The Spaces In Between</td><td>general</td><td>0.185</td></tr>
+        <tr><td>K8S</td><td>Kubernetes Ecosystem</td><td>general</td><td>0.144</td></tr>
+        <tr><td>OAA</td><td>Operations &amp; Admin Automation</td><td>general</td><td>0.210</td></tr>
+        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
+        <tr><td>BHM</td><td>Bellingham Market</td><td>general</td><td>0.224</td></tr>
+        <tr><td>DFQ</td><td>Dead Frequencies &amp; Living History</td><td>general</td><td>0.188</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228), ai (2), governance (1), creative (1). Complex plane: z = 0.1670 + 0.1134i, |z| = 0.2019.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="linux-fundamentals.html">Linux Fundamentals</a></li>
+        <li><a href="cloud-containers.html">Cloud &amp; Containers</a></li>
+        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
+        <li><a href="professional-practice.html">Professional Practice</a></li>
+        <li><a href="aiops-future.html">AIOps &amp; The Future</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>History &amp; Evolution &middot; Systems Administration &middot; 236 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

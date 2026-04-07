@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIOps &amp; The Future &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>AIOps &amp; The Future</h1>
+    <div class="subtitle">Self-Healing Infrastructure, LLM Copilots, Agentic SRE, eBPF, Platform Engineering, FinOps</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html" class="active">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The question is no longer whether AI will transform operations, but how quickly the transformation will happen and what guardrails are needed. We are moving from AIOps 1.0 (pattern recognition on telemetry) to AIOps 2.0 (autonomous agents that detect, diagnose, and remediate without human intervention). The risks of getting this wrong are as significant as the benefits of getting it right.
+    </blockquote>
+
+    <!-- SELF-HEALING -->
+    <h2>Self-Healing Infrastructure</h2>
+    <p>Self-healing systems automatically detect and remediate failures without human intervention. Kubernetes provides basic self-healing through liveness probes, restart policies, and replica controllers. The frontier extends this to application-level and infrastructure-level autonomous remediation.</p>
+    <div class="card">
+      <p><strong>Self-healing spectrum:</strong></p>
+      <ul>
+        <li><strong>Level 0:</strong> Manual &mdash; human detects, human fixes</li>
+        <li><strong>Level 1:</strong> Automated detection &mdash; alerts fire, human fixes</li>
+        <li><strong>Level 2:</strong> Automated remediation &mdash; predefined runbooks execute automatically</li>
+        <li><strong>Level 3:</strong> Adaptive remediation &mdash; system selects remediation based on context</li>
+        <li><strong>Level 4:</strong> Predictive &mdash; system prevents failures before they occur</li>
+      </ul>
+    </div>
+    <p>Most organizations operate at Level 1&ndash;2. Level 3+ requires high-confidence diagnosis and robust blast radius controls to prevent remediation actions from causing cascading failures.</p>
+
+    <!-- LLM OPS COPILOTS -->
+    <h2>LLM-Driven Operations Copilots</h2>
+    <p>Large Language Models are being integrated into operations workflows as copilots that assist (but do not replace) human operators:</p>
+    <table>
+      <thead><tr><th>Capability</th><th>Current State</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td>Log analysis / summarization</td><td>Production-ready, high value</td><td>Low (read-only)</td></tr>
+        <tr><td>Runbook generation</td><td>Useful for drafts, requires human review</td><td>Medium (incorrect steps)</td></tr>
+        <tr><td>Incident triage / classification</td><td>Works well for known patterns</td><td>Medium (novel incidents)</td></tr>
+        <tr><td>Root cause suggestion</td><td>Promising for correlation, not diagnosis</td><td>Medium (false confidence)</td></tr>
+        <tr><td>Automated remediation</td><td>Experimental, limited blast radius</td><td>High (wrong action amplification)</td></tr>
+      </tbody>
+    </table>
+    <p>The key constraint is <strong>trust calibration</strong>: operators must understand when the AI is confident (and correctly so) versus when it is hallucinating plausible-sounding but incorrect remediation steps.</p>
+
+    <!-- AGENTIC SRE -->
+    <h2>Agentic SRE</h2>
+    <p>Agentic SRE represents the closed-loop pipeline: <strong>Detect &rarr; Diagnose &rarr; Remediate</strong> with minimal human involvement. Unlike copilots (human-in-the-loop), agentic systems operate autonomously within defined guardrails.</p>
+    <div class="card">
+      <p><strong>Architecture pattern:</strong></p>
+      <ul>
+        <li><strong>Detection agent:</strong> Monitors telemetry streams, identifies anomalies using ML models</li>
+        <li><strong>Diagnosis agent:</strong> Correlates signals across logs/metrics/traces, proposes root cause</li>
+        <li><strong>Remediation agent:</strong> Executes pre-approved actions (restart, scale, failover, rollback)</li>
+        <li><strong>Verification agent:</strong> Confirms remediation succeeded, closes the loop</li>
+        <li><strong>Human escalation:</strong> Triggers when confidence is below threshold or blast radius is high</li>
+      </ul>
+    </div>
+
+    <!-- AIOPS EVOLUTION -->
+    <h2>AIOps 1.0 to 2.0</h2>
+    <table>
+      <thead><tr><th>Dimension</th><th>AIOps 1.0</th><th>AIOps 2.0</th></tr></thead>
+      <tbody>
+        <tr><td>Approach</td><td>Pattern recognition on historical data</td><td>Agentic execution with real-time context</td></tr>
+        <tr><td>Human role</td><td>Human interprets AI suggestions</td><td>Human defines guardrails, AI executes</td></tr>
+        <tr><td>Learning</td><td>Static models trained offline</td><td>Continuous learning from incident feedback</td></tr>
+        <tr><td>Scope</td><td>Single-signal anomaly detection</td><td>Multi-signal correlation and causal reasoning</td></tr>
+        <tr><td>Action</td><td>Alert generation</td><td>Autonomous remediation within blast radius</td></tr>
+        <tr><td>Risk</td><td>False positive alerts</td><td>False positive actions (cascading harm)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- AI OOPS -->
+    <h2>Telemetry Manipulation Attacks (&ldquo;AI Oops&rdquo;)</h2>
+    <p>As AIOps systems gain autonomous remediation capabilities, they become attack targets. <strong>Telemetry manipulation attacks</strong> inject false signals into monitoring pipelines to trick AIOps into taking harmful actions:</p>
+    <div class="card">
+      <p><span class="safety-badge safety-critical">Attack Vector</span> Inject false metrics showing a healthy service as overloaded, triggering unnecessary scaling that exhausts capacity budgets</p>
+      <p><span class="safety-badge safety-critical">Attack Vector</span> Suppress real error signals in log streams, preventing detection of an active incident</p>
+      <p><span class="safety-badge safety-critical">Attack Vector</span> Feed adversarial patterns into anomaly detection models, causing them to classify attacks as normal behavior</p>
+    </div>
+    <p>Defenses include telemetry authentication (signing metric data at source), anomaly detection on the detection system itself (meta-monitoring), and blast radius limits on any single automated action.</p>
+
+    <!-- eBPF -->
+    <h2>eBPF Observability</h2>
+    <p><strong>eBPF</strong> (extended Berkeley Packet Filter) enables programmable instrumentation of the Linux kernel without loading kernel modules. For observability, this means:</p>
+    <ul>
+      <li><strong>Zero-instrumentation tracing:</strong> Capture syscalls, network events, and application behavior without modifying code</li>
+      <li><strong>Low overhead:</strong> Programs run in kernel space with safety guarantees (verified before loading)</li>
+      <li><strong>Tools:</strong> <strong>Cilium</strong> (networking + security), <strong>Pixie</strong> (auto-telemetry), <strong>bpftrace</strong> (scripted tracing), <strong>Tetragon</strong> (security observability)</li>
+    </ul>
+    <p>eBPF is replacing sidecar proxies for service mesh networking (Cilium) and enabling observability without OpenTelemetry SDK instrumentation (Pixie, Grafana Beyla).</p>
+
+    <!-- PLATFORM ENGINEERING -->
+    <h2>Platform Engineering</h2>
+    <p>Platform engineering builds <strong>Internal Developer Platforms (IDPs)</strong> that abstract infrastructure complexity behind self-service interfaces. Instead of every team managing their own Kubernetes manifests, Terraform configs, and CI/CD pipelines, the platform team provides <strong>golden paths</strong> &mdash; pre-configured, opinionated workflows that encode best practices.</p>
+    <p>Tools: <strong>Backstage</strong> (Spotify, service catalog and developer portal), <strong>Kratix</strong> (platform API framework), <strong>Humanitec</strong> (score-based deployment). The platform engineering movement represents the evolution of sysadmin from infrastructure operator to infrastructure product manager.</p>
+
+    <!-- FINOPS -->
+    <h2>FinOps</h2>
+    <p><strong>FinOps</strong> (Cloud Financial Operations) brings financial accountability to cloud spending. Sysadmins are directly involved because infrastructure decisions drive costs:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Right-sizing:</strong> Match instance types to actual workload requirements (most instances are over-provisioned)</li>
+        <li><strong>Reserved Instances / Savings Plans:</strong> Commit to usage for 40&ndash;72% discounts</li>
+        <li><strong>Spot / Preemptible instances:</strong> 60&ndash;90% savings for fault-tolerant workloads</li>
+        <li><strong>Idle resource detection:</strong> Terminate unused instances, unattached volumes, stale snapshots</li>
+        <li><strong>Tagging and allocation:</strong> Every resource tagged with owner, team, environment, cost center</li>
+        <li><strong>Tools:</strong> Kubecost, Infracost, AWS Cost Explorer, OpenCost (CNCF)</li>
+      </ul>
+    </div>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>229 related projects</strong> across 2 knowledge domains with 88 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>HEL</td><td>HEL &mdash; Helium Supply Chain &amp; Semiconductor Infrastructure</td><td>general</td><td>0.340</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>OAA</td><td>Operations &amp; Admin Automation</td><td>general</td><td>0.210</td></tr>
+        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
+        <tr><td>HFE</td><td>Hi-Fidelity Audio Engineering</td><td>general</td><td>0.216</td></tr>
+        <tr><td>MCS</td><td>Maritime Platform Cost Model</td><td>general</td><td>0.201</td></tr>
+        <tr><td>BCM</td><td>Building Construction Mastery</td><td>infrastructure</td><td>0.154</td></tr>
+        <tr><td>OOPS</td><td>OOPS &mdash; Ecosystem Alignment &amp; Architecture Analysis</td><td>general</td><td>0.176</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228), infrastructure (1). Complex plane: z = 0.1673 + 0.1135i, |z| = 0.2022.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
+        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
+        <li><a href="cloud-containers.html">Cloud &amp; Containers</a></li>
+        <li><a href="professional-practice.html">Professional Practice</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>AIOps &amp; The Future &middot; Systems Administration &middot; 88 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimization &mdash; Artemis Math &amp; Science</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ams">
+  <header>
+    <h1>Optimization</h1>
+    <div class="subtitle">Pareto, Token Budgets, Cost-Accuracy Tradeoffs &mdash; Artemis Math &amp; Science</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="information-theory.html">Info Theory</a>
+      <a href="complex-analysis.html">Complex Analysis</a>
+      <a href="graph-theory.html">Graph Theory</a>
+      <a href="optimization.html" class="active">Optimization</a>
+      <a href="probability-statistics.html">Probability</a>
+      <a href="dynamical-systems.html">Dynamical Systems</a>
+      <a href="control-theory.html">Control Theory</a>
+      <a href="signal-processing.html">Signal Processing</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Optimization theory formalizes the tradeoffs inherent in every agentic system &mdash; more agents vs fewer tokens, accuracy vs cost, breadth vs depth. Pareto frontiers reveal the set of solutions where no objective can improve without degrading another.
+    </blockquote>
+
+    <!-- MODULE OVERVIEW -->
+
+    <h2>Module Overview</h2>
+
+    <div class="card">
+      <p>This module examines five optimization problems from the agentic technology research: Pareto hypervolume for multi-objective agent orchestration, token budget optimization under hard constraints, cost-accuracy tradeoffs in financial document processing, the iron triangle as a constraint-based engineering framework, and greedy scheduling vs optimal assignment in parallel execution.</p>
+    </div>
+
+    <!-- KEY MATHEMATICAL CONCEPTS -->
+
+    <h2>Key Mathematical Concepts</h2>
+
+    <h3>Pareto Optimality and Hypervolume</h3>
+    <div class="formula-block">
+      x* is Pareto optimal if &nexist; x such that:<br>
+      f<sub>i</sub>(x) &le; f<sub>i</sub>(x*) for all i, and<br>
+      f<sub>j</sub>(x) &lt; f<sub>j</sub>(x*) for some j<br><br>
+      Hypervolume HV(S) = &lambda;({q : &exist; p &isin; S, p dominates q, q dominates r})
+    </div>
+    <p>OrgAgent (arXiv:2604.01020) achieves a 102.73% improvement by finding a Pareto-optimal point that simultaneously reduces token usage (74.52% reduction) and improves accuracy. The Pareto frontier for agent orchestration has at least three objectives: accuracy, latency, and token cost. Hypervolume measures the &ldquo;volume&rdquo; of objective space dominated by the solution set.</p>
+
+    <h3>Token Budget Optimization</h3>
+    <div class="formula-block">
+      maximize quality(x) subject to:<br>
+      &sum;<sub>i</sub> tokens(x<sub>i</sub>) &le; B (budget constraint)<br>
+      x<sub>i</sub> &ge; x<sub>min</sub> (minimum context per agent)<br><br>
+      This is a variant of the knapsack problem.
+    </div>
+    <p>Given a fixed token budget B, the optimizer must allocate tokens across agents to maximize output quality. Each agent requires minimum context (x<sub>min</sub>) to function. The MCP overthinking loop problem (658x cost inflation, arXiv:2602.14798) shows what happens when this constraint is violated &mdash; unbounded token consumption with diminishing returns.</p>
+
+    <h3>Cost-Accuracy Tradeoffs</h3>
+    <div class="formula-block">
+      minimize cost(x) subject to accuracy(x) &ge; &alpha;<br>
+      or equivalently:<br>
+      maximize accuracy(x) subject to cost(x) &le; C
+    </div>
+    <p>Financial document processing demands both low cost and high accuracy. The dual formulation shows these are equivalent problems &mdash; you either minimize cost for a given accuracy floor or maximize accuracy for a given budget ceiling. The 658x overthinking multiplier demonstrates that naive optimization (just keep trying) fails catastrophically.</p>
+
+    <h3>Iron Triangle Constraints</h3>
+    <p>The project management iron triangle &mdash; scope, time, cost &mdash; maps to a constrained optimization problem. Fixing any two determines the third. In agent orchestration, the three constraints become: task complexity (scope), latency budget (time), and token/compute cost. The Gastown convoy model fixes scope per convoy and optimizes the time-cost tradeoff.</p>
+
+    <h3>Greedy vs Optimal Scheduling</h3>
+    <p>Greedy scheduling assigns each task to the first available agent. Optimal scheduling (NP-hard in general) considers global task dependencies. For DAG-structured workloads, the gap between greedy and optimal narrows because topological constraints limit choices. The wave model is a practical middle ground: optimal within each wave, greedy across waves.</p>
+
+    <!-- CONNECTIONS TO AGENTIC TECHNOLOGIES -->
+
+    <h2>Connections to Agentic Technologies</h2>
+
+    <div class="card">
+      <ul>
+        <li><strong>OrgAgent:</strong> 102.73% improvement via Pareto-optimal hierarchical routing (arXiv:2604.01020)</li>
+        <li><strong>Token budget skill:</strong> Hard constraint enforcement at convoy level, preventing overthinking loops</li>
+        <li><strong>Bloomberg ticker plant:</strong> 55x optimization via cached index snapshots at 4&ndash;5 cycles/record</li>
+        <li><strong>Lime Trading:</strong> 2M msg/sec zero-loss fair distribution on 4 cores via work contracts</li>
+        <li><strong>GSD wave execution:</strong> Greedy-within-wave scheduling as a practical approximation to global optimum</li>
+      </ul>
+    </div>
+
+    <!-- CORPUS CROSS-REFERENCE -->
+
+    <h2>Corpus Cross-Reference</h2>
+
+    <p>225 projects identified across 2 knowledge domains: general (223), ai (2). 5 keyword matches.</p>
+
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>|z|</th></tr></thead>
+      <tbody>
+        <tr><td>TKN</td><td>Token Economics Research</td><td>general</td><td>1.291</td></tr>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>SAA</td><td>Skills, Agents &amp; Teams</td><td>ai</td><td>0.193</td></tr>
+        <tr><td>MAS</td><td>Multi-Agent Systems Research</td><td>general</td><td>0.183</td></tr>
+      </tbody>
+    </table>
+
+    <div class="formula-block">
+      Complex plane state: z = 0.1672 + 0.1135i<br>
+      |z| = 0.2021 (magnitude &mdash; research depth)<br>
+      arg(z) = 0.5964 rad (phase &mdash; breadth/depth balance)
+    </div>
+
+    <p><strong>Knowledge gaps:</strong> Only 5 keyword matches despite optimization being foundational to every agentic system. The low hit count reflects that optimization is applied implicitly rather than studied as a named discipline within the corpus.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="information-theory.html">Information Theory &mdash; capacity constraints</a></li>
+        <li><a href="graph-theory.html">Graph Theory &mdash; scheduling on DAGs</a></li>
+        <li><a href="probability-statistics.html">Probability &mdash; stochastic optimization</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Module 4: Optimization &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

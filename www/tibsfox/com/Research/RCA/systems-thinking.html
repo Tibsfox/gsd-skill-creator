@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems-Theoretic Approaches &mdash; Root Cause Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-rca">
+  <header>
+    <h1>Systems-Theoretic Approaches</h1>
+    <div class="subtitle">STAMP, STPA, CAST, HFACS, Swiss Cheese, Safety-III</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="classical-methods.html">Classical</a>
+      <a href="systems-thinking.html" class="active">Systems</a>
+      <a href="software-sre.html">SRE</a>
+      <a href="ai-agent-debugging.html">AI Agents</a>
+      <a href="cloud-microservices.html">Cloud</a>
+      <a href="llm-rca-failures.html">LLM Failures</a>
+      <a href="healthcare-aviation.html">Healthcare</a>
+      <a href="manufacturing-quality.html">Manufacturing</a>
+      <a href="our-architecture.html">Our Arch</a>
+      <a href="mathematical-foundations.html">Math</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Accidents are not caused by component failures. They emerge from inadequate control of system-level interactions. This paradigm shift &mdash; from linear causality chains to systems-theoretic control structures &mdash; is the single most important development in root cause analysis since the Five Whys.
+    </blockquote>
+
+    <!-- EVOLUTION -->
+    <h2>The Evolution from Linear to Systemic Causality</h2>
+    <p>Classical RCA methods (Five Whys, FTA, FMEA) assume that accidents result from <strong>component failures propagating through chains</strong>. This works for simple, tightly coupled systems. But modern systems &mdash; software-intensive, sociotechnical, with complex feedback loops &mdash; exhibit emergent failures that no single component &ldquo;caused.&rdquo;</p>
+    <p>The systems-theoretic revolution, led by <strong>Nancy Leveson</strong> at MIT, reframes accidents as <strong>control problems</strong>: the system&rsquo;s safety constraints were violated because the control structure failed to enforce them. This shift has profound implications for how we investigate and prevent failures.</p>
+
+    <!-- STAMP -->
+    <h2>STAMP &mdash; Systems-Theoretic Accident Model and Processes</h2>
+    <p>Developed by <strong>Nancy Leveson</strong> at MIT, STAMP models safety as a <strong>control problem</strong> rather than a reliability problem. Key concepts:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Safety constraints:</strong> System-level requirements that must be enforced at every level</li>
+        <li><strong>Hierarchical control structure:</strong> Controllers (human and automated) enforcing constraints on controlled processes</li>
+        <li><strong>Process models:</strong> Each controller&rsquo;s mental/software model of the controlled process &mdash; accidents occur when process models become inconsistent with reality</li>
+        <li><strong>Control actions:</strong> Commands from controllers that can be unsafe (wrong, too late, out of sequence, stopped too soon)</li>
+        <li><strong>Feedback:</strong> Information from the controlled process back to the controller</li>
+      </ul>
+    </div>
+    <p>STAMP provides the theoretical foundation for two analysis techniques: STPA (proactive) and CAST (retrospective).</p>
+
+    <!-- STPA -->
+    <h2>STPA &mdash; Systems-Theoretic Process Analysis</h2>
+    <p>STPA is the <strong>proactive hazard analysis</strong> technique derived from STAMP. Unlike FMEA (which enumerates component failures) or FTA (which decomposes from a top event), STPA identifies <strong>unsafe control actions</strong> and the <strong>causal scenarios</strong> that lead to them.</p>
+    <div class="card">
+      <p><strong>STPA four-step process:</strong></p>
+      <ol>
+        <li><strong>Define purpose:</strong> Identify system-level losses, hazards, and safety constraints</li>
+        <li><strong>Model the control structure:</strong> Map all controllers, control actions, and feedback channels</li>
+        <li><strong>Identify unsafe control actions:</strong> For each control action, determine how it can be unsafe (provided when not needed, not provided when needed, wrong timing, wrong duration)</li>
+        <li><strong>Identify loss scenarios:</strong> Determine why each unsafe control action could occur (controller failures, inadequate feedback, conflicting control, process model flaws)</li>
+      </ol>
+    </div>
+    <p>STPA has been adopted by the FAA, NASA, the automotive industry (ISO 21448 SOTIF), and increasingly in software safety analysis.</p>
+
+    <!-- CAST -->
+    <h2>CAST &mdash; Causal Analysis using Systems Theory</h2>
+    <p>CAST is the <strong>retrospective accident investigation</strong> counterpart to STPA. Given an accident that has occurred, CAST works backward through the control structure to identify:</p>
+    <ul>
+      <li>Which safety constraints were violated</li>
+      <li>Which control actions were unsafe and why</li>
+      <li>How each controller&rsquo;s process model became incorrect</li>
+      <li>What interactions between controllers contributed to the failure</li>
+      <li>How the overall safety control structure degraded over time</li>
+    </ul>
+    <p>Unlike traditional investigation methods that terminate at a &ldquo;root cause,&rdquo; CAST traces the systemic conditions that made the accident possible &mdash; organizational, managerial, and technical.</p>
+
+    <!-- HFACS -->
+    <h2>HFACS &mdash; Human Factors Analysis and Classification System</h2>
+    <p>Developed by <strong>Wiegmann and Shappell</strong> for aviation accident investigation, HFACS provides a taxonomy of human error at four levels:</p>
+    <table>
+      <thead><tr><th>Level</th><th>Category</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>1. Unsafe Acts</td><td>Errors and violations by front-line operators</td><td>Skill-based errors, decision errors, perceptual errors, routine/exceptional violations</td></tr>
+        <tr><td>2. Preconditions</td><td>Conditions enabling unsafe acts</td><td>Adverse mental states, physical limitations, crew resource management, technological environment</td></tr>
+        <tr><td>3. Unsafe Supervision</td><td>Supervisory failures</td><td>Inadequate supervision, planned inappropriate operations, failure to correct, supervisory violations</td></tr>
+        <tr><td>4. Organizational Influences</td><td>Management and organizational factors</td><td>Resource management, organizational climate, organizational processes</td></tr>
+      </tbody>
+    </table>
+    <p>HFACS bridges the gap between human factors research and practical accident investigation, providing a structured framework for coding human error contributions.</p>
+
+    <!-- SWISS CHEESE REVISITED -->
+    <h2>Swiss Cheese Model &mdash; Reason&rsquo;s Framework Revisited</h2>
+    <p>While introduced in the <a href="classical-methods.html">Classical Methods</a> module as barrier analysis, James Reason&rsquo;s Swiss Cheese Model (1990) also embodies systems thinking. The key insight is the distinction between:</p>
+    <ul>
+      <li><strong>Active failures:</strong> Errors and violations at the sharp end (operators, front-line staff)</li>
+      <li><strong>Latent conditions:</strong> Organizational decisions, management trade-offs, and design flaws that create the holes in the cheese slices long before an accident occurs</li>
+    </ul>
+    <p>Reason&rsquo;s model shifted investigation from blaming the last person who touched the system to examining the organizational conditions that made the error inevitable.</p>
+
+    <!-- SAFETY-III -->
+    <h2>Safety-III &mdash; Beyond Linear Causality</h2>
+    <p>The evolution of safety paradigms:</p>
+    <table>
+      <thead><tr><th>Paradigm</th><th>Core Question</th><th>View of Failure</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Safety-I</strong></td><td>What went wrong?</td><td>Failure is the absence of success; eliminate failures</td></tr>
+        <tr><td><strong>Safety-II</strong> (Hollnagel)</td><td>What goes right?</td><td>Success and failure have the same sources; learn from both</td></tr>
+        <tr><td><strong>Safety-III</strong></td><td>How does the system adapt?</td><td>Safety emerges from system-level adaptation; focus on resilience, not compliance</td></tr>
+      </tbody>
+    </table>
+    <p>Safety-III moves beyond even systems-theoretic models to embrace <strong>complexity science</strong>: systems are non-linear, adaptive, and irreducible to component interactions. RCA in this paradigm is less about finding &ldquo;the cause&rdquo; and more about understanding the system&rsquo;s adaptive capacity and how it was overwhelmed.</p>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>230 related projects</strong> across 3 knowledge domains with 19 keyword matches.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>DRP</td><td>Disaster Recovery &amp; Protective Systems</td><td>general</td><td>1.006</td></tr>
+        <tr><td>MUS</td><td>Music Theory &amp; Performance</td><td>music</td><td>0.630</td></tr>
+        <tr><td>FAIS</td><td>FAIS &mdash; AI Agents in Game Systems</td><td>ai</td><td>0.311</td></tr>
+        <tr><td>BPS</td><td>Biological Physics Sensing Systems</td><td>general</td><td>0.204</td></tr>
+        <tr><td>MCS</td><td>Maritime Platform Cost Model</td><td>general</td><td>0.201</td></tr>
+        <tr><td>SVB</td><td>Student Voice Broadcasting</td><td>general</td><td>0.201</td></tr>
+        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
+        <tr><td>SYS</td><td>Systems Administration</td><td>general</td><td>0.185</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (227), ai (2), music (1). Complex plane: z = 0.1691 + 0.1148i, |z| = 0.2044.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="classical-methods.html">Classical Methods</a></li>
+        <li><a href="healthcare-aviation.html">Healthcare &amp; Aviation</a></li>
+        <li><a href="software-sre.html">Software &amp; SRE</a></li>
+        <li><a href="our-architecture.html">Our Architecture</a></li>
+        <li><a href="mathematical-foundations.html">Mathematical Foundations</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Systems-Theoretic Approaches &middot; Root Cause Analysis &middot; 230 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security &amp; Hardening &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sya">
+  <header>
+    <h1>Security &amp; Hardening</h1>
+    <div class="subtitle">CIS Benchmarks, IDS/IPS, SIEM, SSH, SELinux, PKI, Vault, Compliance</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="history-evolution.html">History</a>
+      <a href="linux-fundamentals.html">Linux</a>
+      <a href="networking.html">Networking</a>
+      <a href="storage-filesystems.html">Storage</a>
+      <a href="monitoring-observability.html">Monitoring</a>
+      <a href="security-hardening.html" class="active">Security</a>
+      <a href="automation-iac.html">Automation</a>
+      <a href="cloud-containers.html">Cloud</a>
+      <a href="aiops-future.html">AIOps</a>
+      <a href="professional-practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Security is not a feature you add; it is a property of the entire system. Every decision &mdash; from which ports to open to how secrets are stored &mdash; either strengthens or weakens the overall security posture. The sysadmin is the last line of defense between the attacker and the data.
+    </blockquote>
+
+    <!-- CIS BENCHMARKS -->
+    <h2>CIS Benchmarks</h2>
+    <p>The <strong>Center for Internet Security (CIS)</strong> publishes hardening benchmarks for every major operating system, cloud platform, and application. CIS benchmarks are the industry standard for baseline security configuration. They provide two profiles:</p>
+    <div class="card">
+      <p><strong>Level 1:</strong> Basic security settings that can be applied broadly without significant performance impact or functionality loss</p>
+      <p><strong>Level 2:</strong> Defense-in-depth settings for high-security environments, may restrict some functionality</p>
+    </div>
+    <p>Automated scanning tools like <strong>OpenSCAP</strong>, <strong>Lynis</strong>, and <strong>CIS-CAT</strong> verify compliance against benchmarks and generate remediation reports.</p>
+
+    <!-- PATCH MANAGEMENT -->
+    <h2>Patch Management</h2>
+    <p>Unpatched systems are the most exploited attack vector. A mature patch management process includes: vulnerability scanning (Nessus, OpenVAS, Qualys), risk-based prioritization (CVSS scores, CISA KEV catalog), staged rollout (dev &rarr; staging &rarr; production), rollback plans, and compliance reporting. <strong>Unattended-upgrades</strong> (Debian) and <strong>dnf-automatic</strong> (RHEL) automate security patches on individual hosts. <strong>Spacewalk</strong>, <strong>Foreman</strong>, and <strong>WSUS</strong> manage patching at fleet scale.</p>
+
+    <!-- IDS/IPS -->
+    <h2>Intrusion Detection &amp; Prevention</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>Type</th><th>Detection Method</th><th>Deployment</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Suricata</strong></td><td>NIDS/NIPS</td><td>Signature + protocol anomaly, multi-threaded</td><td>Inline (IPS) or passive (IDS)</td></tr>
+        <tr><td><strong>OSSEC / Wazuh</strong></td><td>HIDS</td><td>Log analysis, file integrity, rootkit detection</td><td>Agent on each host, central manager</td></tr>
+        <tr><td><strong>Snort</strong></td><td>NIDS/NIPS</td><td>Signature-based, single-threaded</td><td>Classic, being superseded by Suricata</td></tr>
+        <tr><td><strong>AIDE</strong></td><td>File integrity</td><td>Cryptographic hash comparison of filesystem</td><td>Cron-based scan on each host</td></tr>
+      </tbody>
+    </table>
+
+    <!-- SIEM -->
+    <h2>SIEM (Security Information and Event Management)</h2>
+    <p>SIEM platforms aggregate logs from all systems, apply correlation rules, and generate security alerts. They are the central nervous system of security operations. Key platforms: <strong>Elastic SIEM</strong> (open source, built on ELK), <strong>Splunk</strong> (commercial leader), <strong>Wazuh</strong> (open source, OSSEC-based), <strong>QRadar</strong> (IBM). Effective SIEM requires tuning: out-of-box rules generate excessive false positives. Iterative refinement based on environment-specific baselines is essential.</p>
+
+    <!-- SSH HARDENING -->
+    <h2>SSH Hardening</h2>
+    <p>SSH is the most critical service to harden because it provides direct system access:</p>
+    <pre><code># /etc/ssh/sshd_config — hardened settings
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+MaxAuthTries 3
+LoginGraceTime 30
+AllowUsers deploy monitor
+X11Forwarding no
+AllowTcpForwarding no
+ClientAliveInterval 300
+ClientAliveCountMax 2</code></pre>
+    <p>Additional layers: <strong>fail2ban</strong> (ban IPs after failed attempts), <strong>port knocking</strong> (hide SSH port), <strong>SSH certificates</strong> (replace static authorized_keys with time-limited certificates issued by a CA).</p>
+
+    <!-- MAC -->
+    <h2>Mandatory Access Control</h2>
+    <p><strong>SELinux</strong> and <strong>AppArmor</strong> implement mandatory access control at the kernel level, confining processes to only the resources their policy allows &mdash; even if the process runs as root.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>SELinux</th><th>AppArmor</th></tr></thead>
+      <tbody>
+        <tr><td>Policy model</td><td>Label-based (type enforcement)</td><td>Path-based (profile per binary)</td></tr>
+        <tr><td>Default distros</td><td>RHEL, Fedora, CentOS, Rocky</td><td>Ubuntu, Debian, SUSE</td></tr>
+        <tr><td>Complexity</td><td>High (steeper learning curve)</td><td>Medium (more approachable)</td></tr>
+        <tr><td>Modes</td><td>Enforcing, Permissive, Disabled</td><td>Enforce, Complain</td></tr>
+        <tr><td>Troubleshooting</td><td><code>ausearch</code>, <code>audit2allow</code>, <code>sealert</code></td><td><code>aa-status</code>, <code>aa-logprof</code>, <code>aa-complain</code></td></tr>
+      </tbody>
+    </table>
+    <p><strong>Never disable SELinux.</strong> If something breaks, switch to permissive mode, diagnose with <code>audit2allow</code>, and create a custom policy module. Disabling MAC is a security regression that most compliance frameworks will flag.</p>
+
+    <!-- PKI/TLS -->
+    <h2>PKI &amp; TLS Certificate Management</h2>
+    <p>Public Key Infrastructure underpins all encrypted communication. Sysadmins manage certificate lifecycles: generation (CSR), signing (CA or Let&rsquo;s Encrypt), deployment, renewal, and revocation. <strong>cert-manager</strong> automates certificate lifecycle in Kubernetes. <strong>Smallstep</strong> and <strong>HashiCorp Vault PKI</strong> provide private CA infrastructure for internal services.</p>
+
+    <!-- SECRETS MANAGEMENT -->
+    <h2>Secrets Management</h2>
+    <p><strong>HashiCorp Vault</strong> is the standard for secrets management: dynamic secrets (database credentials generated on demand), secret rotation, audit logging, and integration with Kubernetes, Terraform, and CI/CD pipelines. Alternatives: <strong>AWS Secrets Manager</strong>, <strong>Azure Key Vault</strong>, <strong>SOPS</strong> (encrypted files in git), <strong>age</strong> (simple file encryption).</p>
+    <p><strong>Rule:</strong> Secrets never belong in source code, environment variables in Dockerfiles, or configuration files committed to version control.</p>
+
+    <!-- COMPLIANCE -->
+    <h2>Compliance Frameworks</h2>
+    <table>
+      <thead><tr><th>Framework</th><th>Scope</th><th>Key Requirements for Sysadmins</th></tr></thead>
+      <tbody>
+        <tr><td><strong>NIST 800-53</strong></td><td>US federal systems</td><td>Access control, audit logging, incident response, configuration management</td></tr>
+        <tr><td><strong>SOC 2</strong></td><td>SaaS / service providers</td><td>Security, availability, processing integrity, confidentiality, privacy</td></tr>
+        <tr><td><strong>PCI-DSS</strong></td><td>Payment card processing</td><td>Network segmentation, encryption, vulnerability scanning, access control</td></tr>
+        <tr><td><strong>HIPAA</strong></td><td>Healthcare data (US)</td><td>PHI encryption, access audit trails, disaster recovery, risk assessments</td></tr>
+        <tr><td><strong>ISO 27001</strong></td><td>International information security</td><td>ISMS framework, risk treatment, continuous improvement</td></tr>
+      </tbody>
+    </table>
+
+    <!-- CORPUS CROSS-REFERENCES -->
+    <h2>Corpus Cross-References</h2>
+    <p>Pipeline analysis identified <strong>235 related projects</strong> across 2 knowledge domains with 98 cross-references.</p>
+    <table>
+      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
+      <tbody>
+        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
+        <tr><td>RCA</td><td>Root Cause Analysis</td><td>general</td><td>0.249</td></tr>
+        <tr><td>BEACH</td><td>Water Access, Boating &amp; Fishing</td><td>general</td><td>0.252</td></tr>
+        <tr><td>RFC</td><td>RFC Archive &amp; Authorship</td><td>general</td><td>0.204</td></tr>
+        <tr><td>SRD</td><td>SSH &amp; Remote Desktop Protocols</td><td>general</td><td>0.163</td></tr>
+        <tr><td>FCC</td><td>FCC Catalog of Rules &amp; Regulations</td><td>general</td><td>0.188</td></tr>
+        <tr><td>SYS</td><td>Systems Administration: The Spaces In Between</td><td>general</td><td>0.185</td></tr>
+        <tr><td>ECO</td><td>From Tahoma&rsquo;s Summit to the Salish Sea Floor</td><td>ecology</td><td>0.231</td></tr>
+      </tbody>
+    </table>
+    <p>Domains: general (228), ecology (7). Complex plane: z = 0.1670 + 0.1133i, |z| = 0.2019.</p>
+
+    <div class="cross-links">
+      <h4>Related Modules</h4>
+      <ul>
+        <li><a href="linux-fundamentals.html">Linux Fundamentals</a></li>
+        <li><a href="networking.html">Networking</a></li>
+        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
+        <li><a href="professional-practice.html">Professional Practice</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Security &amp; Hardening &middot; Systems Administration &middot; 98 corpus cross-references &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldNet &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; ShieldNet: Network-Level Guardrails for Supply-Chain Injections</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-defense">Supply-Chain Defense</span></div>
+      <h3>ShieldNet: Network-Level Guardrails for Supply-Chain Injections</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.04426" target="_blank"><span class="arxiv-id">2604.04426</span></a></p>
+      <p><strong>Authors:</strong> Yuan et al.</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.CR, cs.AI</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>ShieldNet introduces network-level guardrails against supply-chain injections using SC-Inject-Bench, a benchmark of 10,000+ malicious tools across 25+ attack types. A man-in-the-middle proxy event extractor intercepts and classifies tool interactions in real time. Achieves F1=0.995 with only 0.8% false positive rate, making it practical for production deployment without significant interference to legitimate tool use.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number confirmed">F1 = 0.995</span> detection accuracy for supply-chain injection attacks</li>
+      <li><span class="key-number confirmed">0.8%</span> false positive rate &mdash; low enough for production deployment</li>
+      <li><span class="key-number">10,000+</span> malicious tools in the SC-Inject-Bench benchmark</li>
+      <li><span class="key-number">25+</span> distinct attack types catalogued</li>
+      <li>Man-in-the-middle proxy architecture enables transparent interception</li>
+      <li>Event extractor classifies tool interactions without modifying the tool or the agent</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <p>Man-in-the-middle proxy positioned between agent and MCP server intercepts all tool invocations. An event extractor analyzes request/response patterns against learned attack signatures. SC-Inject-Bench provides standardized evaluation with 10K+ malicious tools covering 25+ attack categories.</p>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td>F1 Score</td><td>0.995</td><td>Near-perfect detection</td></tr>
+        <tr><td>False Positive Rate</td><td>0.8%</td><td>Production-viable</td></tr>
+        <tr><td>Benchmark Size</td><td>10,000+ tools</td><td>Comprehensive coverage</td></tr>
+        <tr><td>Attack Types</td><td>25+</td><td>Broad attack taxonomy</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <h3>Hook System Mapping</h3>
+      <p>The MITM proxy pattern maps directly to our hook system &mdash; PreToolUse and PostToolUse hooks already intercept tool invocations at the boundary. ShieldNet's event extractor pattern could be implemented as a security hook that classifies tool interactions against known attack signatures.</p>
+      <h3>Deployment Considerations</h3>
+      <ul>
+        <li>The 0.8% FP rate is acceptable for our use case where false positives generate warnings rather than hard blocks</li>
+        <li>SC-Inject-Bench should be added to our test suite for security validation</li>
+        <li>The 25+ attack type taxonomy provides a classification framework for our security-hygiene skill</li>
+        <li>Network-level interception catches attacks that code-level analysis misses (see MCP-ITP)</li>
+      </ul>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (227 projects, 246-project corpus)</h4>
+      <span class="ref-tag">OCN &mdash; Open Compute Node</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">AAR &mdash; Architecture Alignment</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-04323.html">Skills in the Wild: Degradation Benchmarking</a></li>
+        <li><a href="paper-2601-07395.html">MCP-ITP: Automated Tool Poisoning</a></li>
+        <li><a href="paper-2503-23278.html">MCP Landscape Survey</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.04426 &middot; ShieldNet</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

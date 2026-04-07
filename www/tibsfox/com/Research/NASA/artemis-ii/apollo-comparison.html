@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II &mdash; Apollo to Artemis &mdash; 54 Years Between Missions</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === CONTENT === */
+.page-content { max-width:960px; margin:0 auto; padding:2rem 2rem 1rem; }
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.section-header {
+  padding: 1rem 1.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.01);
+}
+.section-header h2 {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+.section-header .section-tag {
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.2rem;
+}
+.section-body { padding: 1.2rem 1.5rem; }
+.section-body p { margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.7; }
+.section-body p:last-child { margin-bottom: 0; }
+
+/* === STAT ROWS === */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stat-cell {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.stat-value {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 400;
+}
+.stat-value.gold { color: var(--artemis-gold); }
+.stat-value.red { color: var(--artemis-red); }
+.stat-value.silver { color: var(--orion-silver); }
+.stat-note {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === HIGHLIGHT BOX === */
+.highlight {
+  background: rgba(196,163,90,0.06);
+  border-left: 3px solid var(--artemis-gold);
+  padding: 0.8rem 1.2rem;
+  margin: 0.8rem 0;
+  font-size: 0.82rem;
+  color: var(--orion-silver);
+  line-height: 1.7;
+}
+.highlight strong { color: var(--artemis-gold); font-weight: 500; }
+
+/* === DATA TABLE === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.8rem;
+}
+.data-table th {
+  text-align: left;
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.data-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table .dim-cell { color: var(--dim); }
+.data-table .gold-cell { color: var(--artemis-gold); }
+.data-table .red-cell { color: var(--artemis-red); }
+.data-table .record-cell { color: var(--artemis-gold); font-weight: 500; }
+
+/* === COMPARISON BLOCK === */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin: 0.8rem 0;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.comparison-side {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.comparison-side.old { border-right: 1px solid var(--border); }
+.comparison-side.new { border-left: 1px solid var(--border); }
+.comparison-vs {
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  padding: 0 0.6rem;
+  font-size: 0.65rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.comparison-metric {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+.comparison-value {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 400;
+}
+.comparison-detail {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === DIFFERENCE LIST === */
+.diff-list { list-style: none; margin: 0.5rem 0; }
+.diff-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border);
+}
+.diff-list li:last-child { border-bottom: none; }
+.diff-list li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--artemis-gold);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.diff-new { color: #fff; }
+.diff-detail { color: var(--dim); font-size: 0.75rem; }
+
+/* === UNCHANGED LIST === */
+.unchanged-list { list-style: none; margin: 0.5rem 0; }
+.unchanged-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border);
+}
+.unchanged-list li:last-child { border-bottom: none; }
+.unchanged-list li::before {
+  content: '=';
+  position: absolute;
+  left: 0;
+  color: var(--orion-silver);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.unchanged-name { color: #fff; }
+.unchanged-detail { color: var(--dim); font-size: 0.75rem; }
+
+/* === FOOTER === */
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+.data-source-bar {
+  padding:0.4rem 2rem; text-align:center; font-size:0.65rem;
+  color:rgba(255,255,255,0.15); background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+
+/* === TABLE WRAP (for scrollable comparison) === */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .page-content { max-width: 1300px; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .page-content { max-width: 1500px; }
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .page-content { padding: 1.2rem 1rem 1rem; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .comparison { grid-template-columns: 1fr; }
+  .comparison-vs { justify-content: center; padding: 0.4rem; }
+  .comparison-side.old { border-right: none; border-bottom: 1px solid var(--border); }
+  .comparison-side.new { border-left: none; border-top: 1px solid var(--border); }
+  .section-body { padding: 1rem; }
+}
+@media(max-width:480px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+  .data-table { font-size: 0.7rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <a href="watch.html">Watch</a> &middot;
+  <strong style="color:var(--orion-silver);">Apollo Comparison</strong> &middot;
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a>
+</div>
+
+<div class="mission-header">
+  <h1>Apollo to Artemis &mdash; 54 Years Between Missions</h1>
+  <div class="subtitle">What changed, what didn't, and what it means</div>
+  <div class="catalog-id">Artemis II &middot; Mission 1.190 &middot; Historical Comparison &middot; December 1972 &ndash; April 2026</div>
+</div>
+
+<div class="page-content">
+
+<!-- ============================================================
+     OPENING
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">54 Years</div>
+    <h2>The Longest Gap in Human Deep Space Exploration</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      On December 14, 1972, Gene Cernan climbed back into the lunar module Challenger
+      and left the surface of the Moon. No human has traveled beyond low Earth orbit since.
+      Fifty-four years later, in April 2026, Artemis II sends four astronauts around the Moon
+      on a free-return trajectory &mdash; the first crewed deep space mission of the 21st century.
+    </p>
+    <p>
+      The physics haven't changed. The Moon is still 240,000 miles away. Light still takes
+      1.3 seconds to get there. The reentry corridor is still razor-thin. But the technology,
+      the crew, and the ambition behind the mission look nothing like Apollo. This page
+      puts the two eras side by side.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Last Deep Space Mission</div>
+        <div class="stat-value">Apollo 17</div>
+        <div class="stat-note">December 7&ndash;19, 1972</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Gap</div>
+        <div class="stat-value gold">54 Years</div>
+        <div class="stat-note">longest in spaceflight history</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Next Deep Space Mission</div>
+        <div class="stat-value gold">Artemis II</div>
+        <div class="stat-note">April 2026</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Apollo Astronauts to the Moon</div>
+        <div class="stat-value">24</div>
+        <div class="stat-note">all American men, 1968&ndash;1972</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SIDE-BY-SIDE TECHNICAL COMPARISON TABLE
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Technical Comparison</div>
+    <h2>Side-by-Side: Apollo Missions vs. Artemis II</h2>
+  </div>
+  <div class="section-body">
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Apollo 8 (1968)</th>
+          <th>Apollo 10 (1969)</th>
+          <th>Apollo 13 (1970)</th>
+          <th>Artemis II (2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mission type</td>
+          <td>Lunar orbit (10 orbits)</td>
+          <td>Lunar orbit (LM test)</td>
+          <td class="red-cell">Free-return (emergency)</td>
+          <td class="gold-cell">Free-return (planned)</td>
+        </tr>
+        <tr>
+          <td>Crew size</td>
+          <td>3</td>
+          <td>3</td>
+          <td>3</td>
+          <td class="record-cell">4 (record)</td>
+        </tr>
+        <tr>
+          <td>Closest to Moon</td>
+          <td>~69 mi (orbit)</td>
+          <td>~9 mi (LM descent)</td>
+          <td>~158 mi</td>
+          <td>~4,067 mi</td>
+        </tr>
+        <tr>
+          <td>Farthest from Earth</td>
+          <td>~234,000 mi</td>
+          <td>~235,000 mi</td>
+          <td>248,655 mi</td>
+          <td class="record-cell">252,760 mi (RECORD)</td>
+        </tr>
+        <tr>
+          <td>International crew</td>
+          <td class="dim-cell">No</td>
+          <td class="dim-cell">No</td>
+          <td class="dim-cell">No</td>
+          <td class="gold-cell">Yes (Canada)</td>
+        </tr>
+        <tr>
+          <td>Communications</td>
+          <td>S-band ~51 kbps</td>
+          <td>S-band</td>
+          <td>S-band</td>
+          <td class="gold-cell">S-band + Ka + laser 260 Mbps</td>
+        </tr>
+        <tr>
+          <td>Duration</td>
+          <td>6 days</td>
+          <td>8 days</td>
+          <td>6 days</td>
+          <td class="gold-cell">10 days</td>
+        </tr>
+        <tr>
+          <td>Vehicle mass</td>
+          <td>~63,500 lb (CSM)</td>
+          <td>~96,000 lb (CSM+LM)</td>
+          <td>~96,000 lb</td>
+          <td>~78,000 lb (Orion+ESM)</td>
+        </tr>
+        <tr>
+          <td>Computers</td>
+          <td>AGC 74KB RAM</td>
+          <td>AGC</td>
+          <td>AGC</td>
+          <td class="gold-cell">5 independent flight computers</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FIRSTS ACHIEVED BY ARTEMIS II
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Historic Firsts</div>
+    <h2>Firsts Achieved by Artemis II</h2>
+  </div>
+  <div class="section-body">
+    <ul class="diff-list">
+      <li>
+        <span class="diff-new">First woman to fly to the Moon</span>
+        <div class="diff-detail">Christina Koch &mdash; Mission Specialist 1. Fourth woman to fly on a crewed lunar mission profile (none flew during Apollo).</div>
+      </li>
+      <li>
+        <span class="diff-new">First person of color at the Moon</span>
+        <div class="diff-detail">Victor Glover &mdash; Pilot. First Black astronaut on a deep space mission.</div>
+      </li>
+      <li>
+        <span class="diff-new">First non-American beyond low Earth orbit</span>
+        <div class="diff-detail">Jeremy Hansen &mdash; Mission Specialist 2. Canadian Space Agency. All 24 Apollo lunar astronauts were American.</div>
+      </li>
+      <li>
+        <span class="diff-new">Most humans in deep space simultaneously</span>
+        <div class="diff-detail">4 crew members. Apollo carried 3. No other program has sent humans beyond LEO.</div>
+      </li>
+      <li>
+        <span class="diff-new">Farthest humans from Earth</span>
+        <div class="diff-detail">252,760 miles &mdash; exceeding Apollo 13's record of 248,655 miles set during the emergency free-return in April 1970.</div>
+      </li>
+      <li>
+        <span class="diff-new">First laser communications from crewed deep-space mission</span>
+        <div class="diff-detail">O2O optical terminal providing 260 Mbps downlink. Apollo used S-band radio at ~51 kbps &mdash; a 5,000x improvement.</div>
+      </li>
+      <li>
+        <span class="diff-new">Fastest crewed reentry</span>
+        <div class="diff-detail">~25,000 mph (Mach 32). Returning from a trajectory that reaches farther than any previous crewed mission.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================
+     WHAT CHANGED (TECHNOLOGY)
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Technology Evolution</div>
+    <h2>What Changed</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      Fifty-four years of engineering advancement separate the Apollo Command Module from
+      Orion. Every major subsystem has been redesigned, though the fundamental mission
+      architecture &mdash; a capsule on a free-return trajectory &mdash; remains the same.
+    </p>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">Apollo AGC</div>
+        <div class="comparison-value" style="color:var(--dim);">74 KB RAM</div>
+        <div class="comparison-detail">single flight computer</div>
+        <div class="comparison-detail">rope-core memory</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Orion Flight Computers</div>
+        <div class="comparison-value gold">5 Independent</div>
+        <div class="comparison-detail">millions of times more powerful</div>
+        <div class="comparison-detail">radiation-hardened, redundant</div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">Apollo S-Band Radio</div>
+        <div class="comparison-value" style="color:var(--dim);">~51 kbps</div>
+        <div class="comparison-detail">voice + telemetry</div>
+        <div class="comparison-detail">no video streaming</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Artemis O2O Laser</div>
+        <div class="comparison-value gold">260 Mbps</div>
+        <div class="comparison-detail">5,000x faster than Apollo radio</div>
+        <div class="comparison-detail">HD video from deep space</div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">Apollo Heat Shield</div>
+        <div class="comparison-value" style="color:var(--dim);">Ablative</div>
+        <div class="comparison-detail">original AVCOAT formulation</div>
+        <div class="comparison-detail">~25,000 mph reentry</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Orion Heat Shield</div>
+        <div class="comparison-value gold">Evolved AVCOAT</div>
+        <div class="comparison-detail">larger diameter (5m vs 3.9m)</div>
+        <div class="comparison-detail">higher speed rated</div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">Apollo Power</div>
+        <div class="comparison-value" style="color:var(--dim);">Fuel Cells</div>
+        <div class="comparison-detail">H2 + O2 reactant supply</div>
+        <div class="comparison-detail">limited mission duration</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Orion ESM Power</div>
+        <div class="comparison-value gold">Solar Arrays</div>
+        <div class="comparison-detail">11 kW generation capacity</div>
+        <div class="comparison-detail">4 deployable wing arrays</div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">Apollo Navigation</div>
+        <div class="comparison-value" style="color:var(--dim);">Sextant + Ground</div>
+        <div class="comparison-detail">manual star sightings</div>
+        <div class="comparison-detail">ground-based tracking</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Orion Navigation</div>
+        <div class="comparison-value gold">Multi-System</div>
+        <div class="comparison-detail">star trackers + IMUs + DSN</div>
+        <div class="comparison-detail">GPS (in Earth orbit phase)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     WHAT DIDN'T CHANGE (PHYSICS)
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Orbital Mechanics</div>
+    <h2>What Didn't Change</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      The laws of physics don't care about the calendar. Every constraint that shaped
+      Apollo mission planning applies identically to Artemis II. The Moon is the same
+      distance away, gravity works the same way, and the speed of light hasn't increased.
+    </p>
+
+    <ul class="unchanged-list">
+      <li>
+        <span class="unchanged-name">Free-return trajectory geometry is identical</span>
+        <div class="unchanged-detail">Same Moon, same gravity, same figure-eight path around the Earth-Moon system. The mathematics Euler described in the 18th century still governs the route.</div>
+      </li>
+      <li>
+        <span class="unchanged-name">Travel time to Moon: ~3 days</span>
+        <div class="unchanged-detail">Still limited by the same orbital mechanics. Chemical rockets produce the same delta-v. The transfer orbit hasn't gotten shorter.</div>
+      </li>
+      <li>
+        <span class="unchanged-name">Radiation environment unchanged</span>
+        <div class="unchanged-detail">Same Van Allen belts, same galactic cosmic rays, same solar cycle risks. The crew transits the same radiation hazards Apollo astronauts faced.</div>
+      </li>
+      <li>
+        <span class="unchanged-name">Signal delay: 1.3 seconds to the Moon</span>
+        <div class="unchanged-detail">The speed of light hasn't changed. Round-trip communication delay at lunar distance is still ~2.6 seconds. No technology can fix this.</div>
+      </li>
+      <li>
+        <span class="unchanged-name">Reentry corridor: &plusmn;0.5&deg;</span>
+        <div class="unchanged-detail">Too steep and the spacecraft burns up. Too shallow and it skips off the atmosphere into deep space. The margin is the same razor-thin window Apollo faced.</div>
+      </li>
+    </ul>
+
+    <div class="highlight">
+      <strong>The fundamental lesson:</strong> Technology advances. Physics does not. Every
+      improvement in computers, communications, and materials serves one purpose &mdash; to
+      operate more precisely within the same physical constraints that Apollo navigated
+      with slide rules and sextants.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PERSONAL CONNECTIONS
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Across the Generations</div>
+    <h2>Personal Connections</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      The thread between Apollo and Artemis isn't only technical. The people who flew
+      those missions are still alive, still watching, and still connected to the crews
+      who follow them.
+    </p>
+
+    <ul class="diff-list">
+      <li>
+        <span class="diff-new">Jim Lovell sent recorded encouragement to the Artemis II crew</span>
+        <div class="diff-detail">The Apollo 8 and Apollo 13 commander &mdash; the first human to fly to the Moon twice &mdash; sent a message received on Flight Day 6.</div>
+      </li>
+      <li>
+        <span class="diff-new">Apollo astronaut Charlie Duke sent a special message</span>
+        <div class="diff-detail">Duke, who walked on the Moon during Apollo 16, sent a message received on Flight Day 5. One of the last living moonwalkers reaching out to the next generation.</div>
+      </li>
+      <li>
+        <span class="diff-new">Crew proposed naming two lunar craters</span>
+        <div class="diff-detail">"Integrity" for the spacecraft and "Carroll" honoring Commander Wiseman's late wife &mdash; carrying personal meaning alongside the mission's technical objectives.</div>
+      </li>
+      <li>
+        <span class="diff-new">Apollo 17 was the last crewed lunar mission</span>
+        <div class="diff-detail">December 14, 1972. Gene Cernan's final footprints. 54 years, 3 months, and counting until Artemis II closes the gap.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================
+     THE DIVERSITY ARC
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Who Flies</div>
+    <h2>The Diversity Arc</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      The Apollo program sent 24 astronauts to the Moon between 1968 and 1972. All 24
+      were white American men. This was not a technical requirement &mdash; it was a
+      reflection of who had access to military test pilot programs and NASA's astronaut
+      selection pipeline in the 1960s.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Apollo Lunar Astronauts</div>
+        <div class="stat-value">24</div>
+        <div class="stat-note">all white American men</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Women on Apollo Lunar Missions</div>
+        <div class="stat-value" style="color:var(--dim);">0</div>
+        <div class="stat-note">none selected for lunar crews</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Non-American Apollo Lunar Crew</div>
+        <div class="stat-value" style="color:var(--dim);">0</div>
+        <div class="stat-note">US-only program</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Artemis II Crew</div>
+        <div class="stat-value gold">4</div>
+        <div class="stat-note">3 NASA + 1 CSA</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">First Woman at the Moon</div>
+        <div class="stat-value gold">Christina Koch</div>
+        <div class="stat-note">Mission Specialist 1</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">First Black Astronaut at Moon</div>
+        <div class="stat-value gold">Victor Glover</div>
+        <div class="stat-note">Pilot</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">First Non-American Beyond LEO</div>
+        <div class="stat-value gold">Jeremy Hansen</div>
+        <div class="stat-note">Canadian Space Agency</div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>The Artemis commitment:</strong> The Artemis program commits to landing the
+      first woman and first person of color on the lunar surface on Artemis III and
+      subsequent missions. Artemis II is the proving flight &mdash; demonstrating that the
+      vehicle, the trajectory, and the crew support systems work before anyone sets foot
+      on the Moon again.
+    </div>
+
+    <p>
+      Two women were short-listed for the Artemis II crew; one was selected. The crew
+      represents three demographic firsts simultaneously &mdash; not as a symbolic gesture,
+      but because the astronaut corps in 2026 reflects a broader pool of talent than it
+      did in 1968. The selection criteria haven't been lowered. The pipeline was opened.
+    </p>
+  </div>
+</div>
+
+</div><!-- .page-content -->
+
+<div class="data-source-bar">
+  Sources: NASA Artemis II Press Kit &middot; NASA Apollo Mission Reports &middot; NASA History Division &middot;
+  Apollo 8/10/13 Flight Journals &middot; NASA Astronaut Biographies &middot; CSA Artemis Program
+</div>
+
+<div class="nav-links" style="border-top:1px solid var(--border);">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <a href="watch.html">Watch</a> &middot;
+  <strong style="color:var(--orion-silver);">Apollo Comparison</strong>
+</div>
+
+<div class="page-footer">
+  Artemis II &middot; Mission 1.190 &middot; NASA Exploration Systems Development &middot;
+  Data: NASA, ESA, CSA, JPL &middot; <a href="RESEARCH.md">Research Baseline</a> &middot;
+  tibsfox.com/Research/NASA/artemis-ii/
+</div>
+
+</body>
+</html>

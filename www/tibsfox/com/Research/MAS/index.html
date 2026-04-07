@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent Systems Research &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mas">
+  <header>
+    <h1>Multi-Agent Systems Research</h1>
+    <div class="subtitle">Architecture, Security &amp; Scaling &mdash; April 2026 Paper Survey</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="supply-chain.html">Supply-Chain Attacks</a>
+      <a href="orgagent.html">OrgAgent</a>
+      <a href="single-vs-multi.html">Single vs Multi</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Three papers published in the first week of April 2026 converge on a single question: how should we organize AI agent systems? The answers arrive from opposite directions &mdash; an attacker decomposing skill ecosystems, an architect layering corporate hierarchy onto agents, and an information theorist proving when one agent beats many. Together they define the design envelope for production multi-agent systems.
+    </blockquote>
+
+    <section class="summary">
+      <h2>The Convergence</h2>
+      <p>The multi-agent systems field is undergoing a phase transition. SDK downloads for agent protocols now exceed 110 million. Open marketplaces host 631,813+ skills without mandatory security review. Conference talks from OWASP and the Agentic AI Foundation (April 2&ndash;3, 2026) independently focus on MCP server security, agent identity, and zero-trust. These three papers provide the academic underpinning for what practitioners are discovering empirically.</p>
+      <p>The papers complement each other precisely: <strong>2604.03081</strong> maps the attack surface that any agent architecture must defend against; <strong>2604.01020</strong> demonstrates that hierarchical organization reduces tokens by 74% while doubling performance; <strong>2604.02460</strong> proves that single-agent systems outperform multi-agent for reasoning under equal compute budgets &mdash; with a clear boundary where that reverses. The design implication is layered: use hierarchy for orchestration, single agents for deep reasoning, and multi-agent diversity for defense.</p>
+    </section>
+
+    <h2>Papers</h2>
+
+    <div class="category-grid">
+      <a href="supply-chain.html" class="category-card">
+        <h3>Supply-Chain Poisoning of Skill Ecosystems</h3>
+        <p>arXiv:2604.03081 &middot; Qu, Liu, Geng, Deng, Li, Zhang, Zhang, Ma</p>
+        <p>DDIPE attack embeds malicious payloads in skill documentation. 1,070 adversarial skills across 15 MITRE ATT&amp;CK categories. 11.6&ndash;33.5% bypass rates across Claude Code, OpenHands, Codex, Gemini CLI. Four confirmed production vulnerabilities.</p>
+        <div><span class="safety-badge safety-critical">CRITICAL</span> <span class="source-badge">cs.CR</span> <span class="source-badge">cs.AI</span></div>
+      </a>
+
+      <a href="orgagent.html" class="category-card">
+        <h3>OrgAgent: Company-Style Hierarchy</h3>
+        <p>arXiv:2604.01020 &middot; Wang, Shen, Han, Backes, Chen, Ho</p>
+        <p>Three-layer framework: governance (CEO/CTO/COO), execution (Drafter/Reviewer/Specialist), compliance (CSO/CCO). 102.73% improvement over flat MAS with 74.52% token reduction on SQuAD 2.0. Six reusable skill profiles.</p>
+        <div><span class="safety-badge safety-info">ARCHITECTURE</span> <span class="source-badge">cs.MA</span> <span class="source-badge">cs.AI</span></div>
+      </a>
+
+      <a href="single-vs-multi.html" class="category-card">
+        <h3>Single-Agent Beats Multi-Agent for Reasoning</h3>
+        <p>arXiv:2604.02460 &middot; Tran, Kiela (Stanford)</p>
+        <p>Information-theoretic proof via Data Processing Inequality. Under equal thinking-token budgets, SAS consistently matches or outperforms MAS on multi-hop reasoning. MAS advantage emerges only when context is corrupted (&alpha;&ge;0.5).</p>
+        <div><span class="safety-badge safety-warn">CALIBRATION</span> <span class="source-badge">cs.CL</span> <span class="source-badge">cs.MA</span></div>
+      </a>
+    </div>
+
+    <h2>Design Implications</h2>
+    <table>
+      <thead><tr><th>Task Type</th><th>Recommended Pattern</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>Deep reasoning (plan quality, architecture)</td><td>Single agent, max context</td><td>2604.02460 &mdash; SAS wins under equal budgets</td></tr>
+        <tr><td>Parallelizable work (builds, research, file writes)</td><td>Multi-agent fleet</td><td>2604.01020 &mdash; hierarchy for task distribution</td></tr>
+        <tr><td>Orchestration &amp; coordination</td><td>Hierarchical governance layer</td><td>2604.01020 &mdash; 74% token reduction</td></tr>
+        <tr><td>Noisy/degraded context</td><td>Multi-agent decomposition</td><td>2604.02460 &mdash; MAS wins at &alpha;&ge;0.5 corruption</td></tr>
+        <tr><td>Security-critical skill execution</td><td>Multi-model verification ensemble</td><td>2604.03081 &mdash; cross-model reduces attack surface from 20% to &lt;2%</td></tr>
+        <tr><td>Skill marketplace ingestion</td><td>Treat docs as executable code</td><td>2604.03081 &mdash; DDIPE exploits doc-as-instruction</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mapping to Our Architecture</h2>
+    <div class="card">
+      <table>
+        <thead><tr><th>OrgAgent Layer</th><th>Our System</th><th>Validated By</th></tr></thead>
+        <tbody>
+          <tr><td>CEO (strategic)</td><td>lab-director / flight-ops</td><td>2604.01020</td></tr>
+          <tr><td>CTO (technical)</td><td>gsd-planner</td><td>2604.01020</td></tr>
+          <tr><td>COO (resource)</td><td>mayor-coordinator</td><td>2604.01020</td></tr>
+          <tr><td>Drafter</td><td>gsd-executor</td><td>2604.01020</td></tr>
+          <tr><td>Reviewer</td><td>gsd-verifier</td><td>2604.01020</td></tr>
+          <tr><td>Specialist</td><td>domain agents (security-reviewer, etc.)</td><td>2604.01020</td></tr>
+          <tr><td>CSO (validation)</td><td>adversarial-pr-review</td><td>2604.01020</td></tr>
+          <tr><td>CCO (compliance)</td><td>gsd-plan-checker</td><td>2604.01020</td></tr>
+          <tr><td>Single deep reasoning</td><td>Opus for plans, architecture</td><td>2604.02460</td></tr>
+          <tr><td>Parallel fleet</td><td>fleet-mission, research agents</td><td>2604.02460</td></tr>
+          <tr><td>Security hygiene</td><td>security-hygiene skill</td><td>2604.03081</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Key Numbers</h2>
+    <div class="card">
+      <p><strong>631,813</strong> &mdash; skills in SkillsMP marketplace with no mandatory security review (2604.03081)<br>
+      <strong>2.3%</strong> &mdash; direct execution rate of DDIPE on Claude Code + Sonnet 4.6, strongest defense tested (2604.03081)<br>
+      <strong>1.6%</strong> &mdash; payloads that bypass ALL three models simultaneously (2604.03081)<br>
+      <strong>658&times;</strong> &mdash; cost inflation from MCP overthinking loops (arXiv:2602.14798, related work)<br>
+      <strong>102.73%</strong> &mdash; OrgAgent improvement over flat MAS on SQuAD 2.0 (2604.01020)<br>
+      <strong>74.52%</strong> &mdash; token reduction from hierarchy vs flat (2604.01020)<br>
+      <strong>39.78%</strong> &mdash; increase in abstention on unanswerable questions under hierarchy (2604.01020)<br>
+      <strong>I(Y;C) &ge; I(Y;M)</strong> &mdash; Data Processing Inequality guaranteeing SAS &ge; MAS under perfect context (2604.02460)<br>
+      <strong>&alpha; &ge; 0.5</strong> &mdash; corruption threshold where MAS becomes competitive (2604.02460)</p>
+    </div>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>Qu, Y. et al. <cite>Supply-Chain Poisoning Attacks Against LLM Coding Agent Skill Ecosystems</cite>. <a href="https://arxiv.org/abs/2604.03081" target="_blank">arXiv:2604.03081</a>. April 3, 2026.</li>
+      <li>Wang, Y. et al. <cite>OrgAgent: Organize Your Multi-Agent System like a Company</cite>. <a href="https://arxiv.org/abs/2604.01020" target="_blank">arXiv:2604.01020</a>. April 1, 2026.</li>
+      <li>Tran, D. and Kiela, D. <cite>Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets</cite>. <a href="https://arxiv.org/abs/2604.02460" target="_blank">arXiv:2604.02460</a>. April 2, 2026.</li>
+      <li>arXiv:2602.14798 &mdash; Overthinking Loops in Agents: A Structural Risk via MCP Tools (related)</li>
+      <li>arXiv:2604.04323 &mdash; How Well Do Agentic Skills Work in the Wild (related)</li>
+      <li>arXiv:2604.04426 &mdash; ShieldNet: Network-Level Guardrails Against Supply-Chain Injections (related)</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Multi-Agent Systems Research &middot; AI &amp; Computation Cluster</p>
+    <p>3 papers &middot; April 2026</p>
+    <p><a href="../SAA/index.html">Skills, Agents &amp; Teams</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

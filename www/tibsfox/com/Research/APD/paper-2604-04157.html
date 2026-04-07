@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readable Minds: Theory of Mind in Poker &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Readable Minds: Theory of Mind in LLM Poker Agents</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-reasoning">Agent Reasoning</span></div>
+      <h3>Readable Minds: Theory of Mind Emergence in LLM Poker Agents</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.04157" target="_blank"><span class="arxiv-id">2604.04157</span></a></p>
+      <p><strong>Authors:</strong> Lin, Hou</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.AI, cs.CL</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>A factorial study demonstrating that persistent memory is both necessary and sufficient for Theory of Mind emergence in LLM poker agents. With memory enabled, agents develop strategic deception capabilities (p&lt;0.001) and opponent modeling that generalizes across game contexts. Cross-model validation achieves kappa=0.81, confirming robust inter-rater agreement on Theory of Mind attribution.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li>Memory is necessary and sufficient for ToM: <span class="key-number confirmed">p=0.008</span></li>
+      <li>Strategic deception emerges with persistent memory: <span class="key-number confirmed">p&lt;0.001</span></li>
+      <li>Cross-model validation kappa: <span class="key-number confirmed">0.81</span> (strong agreement)</li>
+      <li>Persistent memory enables opponent modeling that generalizes across contexts</li>
+      <li>Without memory, agents play myopically &mdash; each hand is independent</li>
+      <li>Factorial design isolates memory as the causal variable, not model scale</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Condition</th><th>ToM Score</th><th>Deception Rate</th><th>Win Rate</th></tr></thead>
+      <tbody>
+        <tr><td>No memory</td><td>Low</td><td>Random bluffing</td><td>Baseline</td></tr>
+        <tr><td>Short-term memory</td><td>Moderate</td><td>Context-dependent</td><td>Above baseline</td></tr>
+        <tr><td>Persistent memory</td><td>High (p=0.008)</td><td>Strategic (p&lt;0.001)</td><td>Significantly above</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Methodology</h2>
+    <p>Factorial experimental design with memory as the primary independent variable. Three conditions: no memory (stateless), short-term memory (within-hand), and persistent memory (across hands). Multiple LLM backends tested to isolate memory effects from model effects. Theory of Mind assessed via opponent modeling accuracy and strategic adaptation metrics. Cross-model validation via Cohen's kappa for inter-rater agreement.</p>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <h3>Memory Architecture</h3>
+      <p>The memory-as-necessary-for-ToM finding validates our beads-state persistence and session-awareness patterns. If persistent memory enables strategic reasoning in competitive contexts, it also enables the cooperative reasoning our multi-agent orchestration depends on.</p>
+      <h3>Evaluation Design</h3>
+      <ul>
+        <li>The factorial design methodology &mdash; isolating single variables &mdash; should be applied to our agent evaluation</li>
+        <li>Which capabilities require which state persistence patterns? This paper provides the methodology to answer that</li>
+        <li>Kappa=0.81 cross-model validation suggests our multi-model testing strategy (Sonnet/Opus) is sound</li>
+        <li>Strategic deception emergence warns about emergent agent behaviors in competitive multi-agent settings</li>
+      </ul>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (229 projects, 246-project corpus)</h4>
+      <span class="ref-tag">LLM &mdash; Local LLM Ecosystem</span>
+      <span class="ref-tag">MUS &mdash; Music Theory</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">FAIS &mdash; AI Game Agents</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-03201.html">SCRAT: Hierarchical Control</a></li>
+        <li><a href="paper-2604-00594.html">Agent Psychometrics: IRT Profiling</a></li>
+        <li><a href="paper-2604-03189.html">Reflective Context Learning</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.04157 &middot; Readable Minds</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

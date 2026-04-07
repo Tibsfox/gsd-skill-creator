@@ -56,6 +56,48 @@
       "wing": "Dynamical Systems",
       "level": "advanced",
       "description": "Model of synchronization in biological systems. Fireflies adjust flash timing toward neighbors, producing collective synchronization from individual phase coupling. Classic emergence."
+    },
+    {
+      "concept": "O2O laser communications",
+      "department": "optical-communications",
+      "wing": "Deep Space Links",
+      "level": "advanced",
+      "description": "MAScOT terminal on Orion achieves 260 Mbps downlink at lunar distance via 1550 nm laser to ground stations. MIT Lincoln Lab heritage from LLCD. 130x improvement over S-band radio. First crewed deep-space optical link."
+    },
+    {
+      "concept": "CubeSat secondary payloads",
+      "department": "aerospace-engineering",
+      "wing": "Small Satellite Systems",
+      "level": "intermediate",
+      "description": "Four international CubeSats deployed from Orion's stage adapter ring during HEO: TACHELES (Germany, electronics radiation), ATENEA (Argentina, shielding materials), K-RadCube (South Korea, dosimetry), SWC-1 (Saudi Arabia, space weather). First CubeSats beyond LEO with crew."
+    },
+    {
+      "concept": "Deep-space radiation environment",
+      "department": "aerospace-medicine",
+      "wing": "Radiation Physics",
+      "level": "advanced",
+      "description": "Beyond LEO, crew faces Van Allen belt transit (trapped protons/electrons), galactic cosmic rays (GCR, heavy ions at ~1 GeV/nucleon), and solar energetic particles (SEPs). HERA active dosimeter and Timepix sensors provide real-time monitoring. First crewed exposure since Apollo 17."
+    },
+    {
+      "concept": "Apollo-Artemis comparison",
+      "department": "space-history",
+      "wing": "Human Spaceflight Heritage",
+      "level": "beginner",
+      "description": "54-year gap between Apollo 17 (1972) and Artemis II (2026). Technology evolved from 74 KB guidance computers to multi-core flight systems, but the physics — orbital mechanics, delta-v budgets, re-entry heating — remains unchanged. Free-return trajectory geometry identical to Apollo 13."
+    },
+    {
+      "concept": "Overview effect",
+      "department": "ecology",
+      "wing": "Earth Observation",
+      "level": "beginner",
+      "description": "Cognitive shift reported by astronauts upon viewing Earth from space. Heightened awareness of ecological interconnection, atmospheric fragility, and planetary unity. Artemis II crew will observe Earth from lunar distance — the farthest human perspective since Apollo."
+    },
+    {
+      "concept": "Canadian space program",
+      "department": "space-history",
+      "wing": "International Partnerships",
+      "level": "intermediate",
+      "description": "CSA contribution spans from Canadarm (1981 Shuttle) through Canadarm2 (ISS) to Canadarm3 (Gateway). Jeremy Hansen becomes first Canadian beyond LEO. Gateway robotic arm secures Canadian astronaut lunar access. Heritage of robotics excellence enabling human exploration."
     }
   ]
 }

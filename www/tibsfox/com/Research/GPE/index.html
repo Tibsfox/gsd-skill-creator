@@ -71,14 +71,12 @@
     <section class="section" id="intensity-trends">
       <div class="section-header">
         <h2>Energy Intensity Trends (2000-2024)</h2>
-        <p class="section-desc">Tracking the decline in energy intensity across major economies</p>
+        <p class="section-desc">Tracking the decline in energy intensity across major economies, grouped by region</p>
       </div>
       <div class="chart-container">
         <div class="canvas-wrapper canvas-wrapper-tall"><canvas id="intensityChart"></canvas></div>
         <div class="citation">Sources: IEA Energy Efficiency Reports 2023-2025, Enerdata Global Energy Yearbook 2025, World Bank SDG7 Tracking</div>
       </div>
-
-      <!-- Period Averages -->
       <div class="data-table-container" style="margin-top:1rem">
         <table>
           <thead>
@@ -150,34 +148,84 @@
       </div>
     </section>
 
-    <!-- Full Rankings Table -->
-    <section class="section" id="rankings">
+    <!-- Data & Analysis -->
+    <section class="section">
       <div class="section-header">
-        <h2>Complete Rankings: Top 75 Power Consumers</h2>
-        <p class="section-desc">Ranked by electricity intensity (lower values indicate more efficient conversion of electricity to economic output)</p>
+        <h2>Data &amp; Analysis</h2>
+        <p class="section-desc">Interactive charts, rankings, and AI strategy deep-dives</p>
       </div>
-      <div class="methodology-note">
-        <strong>Methodology:</strong> Electricity Intensity = Total Electricity Consumption (TWh) / (GDP per Capita x Population) x 1,000,000. Data: IEA, Ember, Energy Institute, World Bank, IMF WEO October 2025.
+      <div class="region-nav">
+        <a href="charts.html" class="region-card" style="border-top:3px solid #3b82f6">
+          <h3>Data Visualizations</h3>
+          <div class="region-count">5 charts &bull; Intensity trends &bull; AI projections</div>
+        </a>
+        <a href="rankings.html" class="region-card" style="border-top:3px solid #10b981">
+          <h3>Complete Rankings</h3>
+          <div class="region-count">75 countries &bull; Search &bull; Filter by tier/region</div>
+        </a>
+        <a href="strategies.html" class="region-card" style="border-top:3px solid #8b5cf6">
+          <h3>AI Strategies &amp; Careers</h3>
+          <div class="region-count">25 AI strategies &bull; 125 career pathways</div>
+        </a>
+        <a href="lawmakers.html" class="region-card" style="border-top:3px solid #ef4444">
+          <h3>Immediate Action for Lawmakers</h3>
+          <div class="region-count">15 proven strategies &bull; Model legislation &bull; Funding</div>
+        </a>
       </div>
-      <div class="table-controls" style="margin-top:1rem">
-        <input type="text" id="search-input" placeholder="Search countries...">
-        <select id="tier-filter">
-          <option value="all">All Tiers</option>
-          <option value="Elite">Elite</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-        </select>
-        <select id="region-filter">
-          <option value="all">All Regions</option>
-          <option value="europe">Europe</option>
-          <option value="asia-pacific">Asia-Pacific</option>
-          <option value="americas">Americas</option>
-          <option value="africa">Africa</option>
-          <option value="middle-east">Middle East &amp; N. Africa</option>
-        </select>
+    </section>
+
+    <!-- Deep Research Modules -->
+    <section class="section" id="research">
+      <div class="section-header">
+        <h2>Deep Research Modules</h2>
+        <p class="section-desc">In-depth analysis with AI learning pathways, DIY projects, and College of Knowledge integration</p>
       </div>
-      <div class="data-table-container" id="rankings-table"></div>
-      <div class="citation" style="margin-top:1rem">Data: <a href="https://ember-energy.org/latest-insights/global-electricity-review-2025/" target="_blank" style="color:var(--accent-blue)">Ember 2025</a>, <a href="https://www.energyinst.org/statistical-review" target="_blank" style="color:var(--accent-blue)">Energy Institute 2025</a>, <a href="https://www.imf.org/en/Publications/WEO" target="_blank" style="color:var(--accent-blue)">IMF WEO Oct 2025</a>, <a href="https://data.worldbank.org/" target="_blank" style="color:var(--accent-blue)">World Bank</a></div>
+      <div class="region-nav">
+        <a href="page.html?doc=ai-learning-pathways" class="region-card" style="border-top:3px solid #10b981">
+          <h3>AI Learning Pathways</h3>
+          <div class="region-count">8 DIY projects &bull; Complex Plane</div>
+        </a>
+        <a href="page.html?doc=industrial-energy-efficiency" class="region-card" style="border-top:3px solid #ef4444">
+          <h3>Industrial Efficiency</h3>
+          <div class="region-count">Supply chain &bull; Scope 3</div>
+        </a>
+        <a href="page.html?doc=transport-electrification" class="region-card" style="border-top:3px solid #3b82f6">
+          <h3>Transport Electrification</h3>
+          <div class="region-count">Beyond EVs &bull; Maritime &bull; Aviation</div>
+        </a>
+        <a href="page.html?doc=geothermal-nuclear-grid-storage" class="region-card" style="border-top:3px solid #f59e0b">
+          <h3>Geothermal, Nuclear &amp; Storage</h3>
+          <div class="region-count">EGS &bull; SMRs &bull; Long-duration</div>
+        </a>
+        <a href="page.html?doc=behavioral-economics-energy" class="region-card" style="border-top:3px solid #8b5cf6">
+          <h3>Behavioral Economics</h3>
+          <div class="region-count">Nudges &bull; Rebound effects</div>
+        </a>
+        <a href="page.html?doc=just-transition-workforce" class="region-card" style="border-top:3px solid #ec4899">
+          <h3>Just Transition</h3>
+          <div class="region-count">Workforce &bull; Indigenous sovereignty</div>
+        </a>
+        <a href="page.html?doc=thermal-networks-district-energy" class="region-card" style="border-top:3px solid #14b8a6">
+          <h3>Thermal Networks</h3>
+          <div class="region-count">District energy &bull; Waste heat</div>
+        </a>
+        <a href="page.html?doc=building-equity-decarbonization" class="region-card" style="border-top:3px solid #f97316">
+          <h3>Building Equity</h3>
+          <div class="region-count">BPS &bull; Energy burden &bull; Tenant rights</div>
+        </a>
+        <a href="page.html?doc=climate-adaptation-cooling" class="region-card" style="border-top:3px solid #06b6d4">
+          <h3>Climate Adaptation: Cooling</h3>
+          <div class="region-count">6,200 TWh challenge &bull; Passive cooling</div>
+        </a>
+        <a href="page.html?doc=energy-data-literacy" class="region-card" style="border-top:3px solid #84cc16">
+          <h3>Energy Data Literacy</h3>
+          <div class="region-count">Units &bull; Bills &bull; Grid ops &bull; Entry point</div>
+        </a>
+      </div>
+      <div style="text-align:center; margin-top:0.75rem; font-size:0.85rem; color:var(--text-muted)">
+        <a href="page.html?doc=verification-matrix" style="color:var(--text-secondary)">Verification Matrix</a> &middot;
+        <a href="page.html?doc=source-verification-2026" style="color:var(--text-secondary)">Source Audit (April 2026)</a>
+      </div>
     </section>
 
     <!-- Sources -->
@@ -214,6 +262,8 @@
 
   <footer>
     <a href="../index.html">Research</a> &middot;
+    <a href="charts.html">Charts</a> &middot;
+    <a href="rankings.html">Rankings</a> &middot;
     <a href="strategies.html">AI Strategies</a> &middot;
     <a href="europe.html">Europe</a> &middot;
     <a href="asia-pacific.html">Asia-Pacific</a> &middot;
@@ -346,31 +396,6 @@
         }
       }
     });
-
-    // Rankings table with filtering
-    (function() {
-      var searchInput = document.getElementById('search-input');
-      var tierFilter = document.getElementById('tier-filter');
-      var regionFilter = document.getElementById('region-filter');
-
-      function render() {
-        var q = searchInput.value.toLowerCase();
-        var tier = tierFilter.value;
-        var region = regionFilter.value;
-        var filtered = GPE_DATA.filter(function(d) {
-          if (q && d.country.toLowerCase().indexOf(q) === -1) return false;
-          if (tier !== 'all' && d.tier !== tier) return false;
-          if (region !== 'all' && d.region !== region) return false;
-          return true;
-        });
-        gpeRenderTable('rankings-table', filtered);
-      }
-
-      searchInput.addEventListener('input', render);
-      tierFilter.addEventListener('change', render);
-      regionFilter.addEventListener('change', render);
-      render();
-    })();
   </script>
 </body>
 </html>

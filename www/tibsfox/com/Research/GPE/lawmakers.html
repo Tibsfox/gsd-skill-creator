@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Immediate Action for Lawmakers — Global Power Efficiency Rankings</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Print-friendly overrides */
+    @media print {
+      body { background: #fff; color: #111; max-width: 100%; font-size: 10pt; }
+      .back-nav, footer { display: none; }
+      header { background: #fff; border-bottom: 2px solid #333; }
+      header h1 { background: none; -webkit-text-fill-color: #111; color: #111; }
+      .subtitle, .section-desc { color: #333; }
+      .metrics-badge { background: #eee; border-color: #999; color: #333; }
+      .strategy-section, .card, .chart-container, .stats-bar, .data-table-container,
+      .source-section, .case-studies, .action-item, .ai-sidebar { background: #f8f8f8; border-color: #ccc; }
+      .strategy-title, h2, h3, h4, .action-text strong { color: #111; }
+      .strategy-text, .strategy-subtitle, .section-desc, p, td, .action-text,
+      .source-item, .citation, .case-studies p, .ai-sidebar p { color: #333; }
+      .stat-value { color: #006600; }
+      a { color: #0066cc; }
+      .tier-label, .priority-badge, .level-badge { border: 1px solid #999; }
+      .canvas-wrapper canvas { max-height: 300px !important; }
+      .strategy-section { page-break-inside: avoid; }
+      table { font-size: 9pt; }
+      th { background: #e0e0e0; color: #111; }
+      td { color: #333; border-color: #ccc; }
+    }
+    /* Lawmakers-specific styles */
+    .urgency-banner {
+      background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(245,158,11,0.15));
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .urgency-banner .urgency-stat {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent-red);
+      font-family: 'Playfair Display', serif;
+    }
+    .urgency-banner .urgency-label {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+    .urgency-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .urgency-item { text-align: center; }
+    .tier-tag {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+    .tier-immediate { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+    .tier-nearterm { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
+    .tier-structural { background: rgba(139,92,246,0.2); color: var(--accent-purple); }
+    .policy-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+    .policy-number.imm { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+    .policy-number.near { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
+    .policy-number.str { background: rgba(139,92,246,0.2); color: var(--accent-purple); }
+    .policy-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .policy-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .evidence-box {
+      background: rgba(16,185,129,0.08);
+      border-left: 3px solid var(--accent-green);
+      border-radius: 0 0.4rem 0.4rem 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .evidence-box strong { color: var(--accent-green); }
+    .template-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .template-box h4 {
+      color: var(--accent-cyan);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .template-box ul {
+      margin: 0.5rem 0 0 1.5rem;
+      padding: 0;
+    }
+    .template-box li {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .kpi-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+    }
+    .kpi-card .kpi-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+    .kpi-card .kpi-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+    .complex-plane-diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 600px;
+      margin: 1.5rem auto;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    .quadrant {
+      padding: 1.25rem;
+      text-align: center;
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+    .quadrant strong { display: block; margin-bottom: 0.3rem; font-size: 0.85rem; }
+    .q2 { background: rgba(245,158,11,0.08); color: var(--text-secondary); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .q1 { background: rgba(16,185,129,0.08); color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+    .q3 { background: rgba(239,68,68,0.08); color: var(--text-secondary); border-right: 1px solid var(--border-color); }
+    .q4 { background: rgba(139,92,246,0.08); color: var(--text-secondary); }
+    .toc-list {
+      columns: 2;
+      column-gap: 2rem;
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .toc-list li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      break-inside: avoid;
+    }
+    .toc-list a { color: var(--accent-blue); text-decoration: none; }
+    .toc-list a:hover { text-decoration: underline; }
+    .toc-number { color: var(--text-muted); margin-right: 0.5rem; font-weight: 600; }
+    @media (max-width: 768px) {
+      .urgency-row { gap: 1.5rem; }
+      .urgency-banner .urgency-stat { font-size: 2.5rem; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .complex-plane-diagram { max-width: 100%; }
+      .toc-list { columns: 1; }
+    }
+    @media print {
+      .urgency-banner { border: 2px solid #cc0000; background: #fff5f5; }
+      .urgency-banner .urgency-stat { color: #cc0000; }
+      .evidence-box { background: #f0fff4; border-color: #006600; }
+      .evidence-box strong { color: #006600; }
+      .tier-tag { border: 1px solid #999; }
+    }
+  </style>
+</head>
+<body>
+  <div class="back-nav">
+    <a href="../index.html">Research</a> /
+    <a href="index.html">GPE</a> /
+    <strong style="color:var(--text-primary)">Lawmakers</strong>
+    <span style="float:right; font-size:0.8rem; color:var(--text-muted)">
+      <a href="charts.html">Charts</a> &middot;
+      <a href="rankings.html">Rankings</a> &middot;
+      <a href="strategies.html">Strategies</a> &middot;
+      <a href="europe.html">Europe</a> &middot;
+      <a href="americas.html">Americas</a>
+    </span>
+  </div>
+
+  <header>
+    <h1 style="background:linear-gradient(135deg, var(--accent-red) 0%, var(--accent-amber) 50%, var(--accent-green) 100%); -webkit-background-clip:text; background-clip:text">Immediate Action for Lawmakers</h1>
+    <p class="subtitle">Evidence-based policies that reduce energy waste, lower costs, and cut emissions. Fifteen proven strategies organized by implementation timeline, with measured impact data, model legislation, funding mechanisms, and accountability frameworks. Not advocacy. Evidence.</p>
+    <span class="metrics-badge">15 Strategies &bull; 3 Implementation Tiers &bull; 75-Country Dataset &bull; Printer-Friendly</span>
+  </header>
+
+  <main class="container">
+
+    <!-- ============================================================ -->
+    <!-- TABLE OF CONTENTS                                             -->
+    <!-- ============================================================ -->
+    <section class="section" style="padding-top:1.5rem">
+      <div class="section-header">
+        <h2>Contents</h2>
+      </div>
+      <ol class="toc-list">
+        <li><a href="#urgency"><span class="toc-number">1</span>The Case for Urgency</a></li>
+        <li><a href="#tier1"><span class="toc-number">2a</span>Tier 1: Immediate Action (0-6 months)</a></li>
+        <li><a href="#tier2"><span class="toc-number">2b</span>Tier 2: Near-Term Programs (6-18 months)</a></li>
+        <li><a href="#tier3"><span class="toc-number">2c</span>Tier 3: Structural Change (18-36 months)</a></li>
+        <li><a href="#prioritization"><span class="toc-number">3</span>Data-Driven Prioritization</a></li>
+        <li><a href="#model-legislation"><span class="toc-number">4</span>Model Legislation &amp; Frameworks</a></li>
+        <li><a href="#funding"><span class="toc-number">5</span>Funding Mechanisms</a></li>
+        <li><a href="#accountability"><span class="toc-number">6</span>Accountability &amp; Measurement</a></li>
+        <li><a href="#complex-plane"><span class="toc-number">7</span>The Complex Plane of Energy Policy</a></li>
+        <li><a href="#quick-reference"><span class="toc-number">8</span>Quick Reference Tables</a></li>
+      </ol>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: THE CASE FOR URGENCY                               -->
+    <!-- ============================================================ -->
+    <section class="section" id="urgency">
+      <div class="section-header">
+        <h2>1. The Case for Urgency</h2>
+        <p class="section-desc">Energy efficiency is the cheapest, fastest, most impactful tool available to any government. The International Energy Agency calls it the "first fuel" because every unit of energy you do not waste is a unit you do not need to generate, transmit, or pay for. The data is unambiguous: we have the technologies; we are deploying them 3 to 10 times too slowly.</p>
+      </div>
+
+      <!-- Urgency Banner -->
+      <div class="urgency-banner">
+        <div class="urgency-stat">25%</div>
+        <div class="urgency-label">Global energy efficiency improvement rate in 2024 (~1.0%/year) as a fraction of the COP28 target (4.0%/year by 2030)</div>
+        <div class="urgency-row">
+          <div class="urgency-item">
+            <div class="stat-value" style="font-size:1.6rem">~1.0%</div>
+            <div class="stat-label">2024 Improvement Rate</div>
+          </div>
+          <div class="urgency-item">
+            <div class="stat-value" style="font-size:1.6rem; color:var(--accent-amber)">~1.8%</div>
+            <div class="stat-label">2025 Preliminary Rate</div>
+          </div>
+          <div class="urgency-item">
+            <div class="stat-value" style="font-size:1.6rem; color:var(--accent-green)">4.0%</div>
+            <div class="stat-label">COP28 Target by 2030</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <h3>The First Fuel</h3>
+          <p>In November 2025, the IEA published its <em>Energy Efficiency 2025</em> report confirming that global primary energy intensity improved approximately 1.0% in 2024 &mdash; a slowdown year that fell well below the post-2019 average of ~1.3%/year. Preliminary 2025 data shows improvement picking up to approximately 1.8%, but this remains less than half the 4.0%/year rate that nearly 200 governments agreed to pursue at COP28 in Dubai in December 2023.</p>
+
+          <p>Why does this matter? Because every 1% improvement in global energy intensity avoids approximately <strong>$200 billion in energy costs</strong> and reduces CO&#8322; emissions by roughly 600 million tonnes &mdash; equivalent to the total annual emissions of Germany. The cumulative impact of closing the gap between current performance and the COP28 target would be on the order of <strong>$1 trillion per year in avoided energy costs by 2030</strong> and the single largest contributor to emissions reductions this decade.</p>
+
+          <p>The IEA's <em>Energy Efficiency Policy Toolkit 2025</em> &mdash; the most comprehensive policy guidance the agency has ever published on efficiency &mdash; identifies that around half of countries globally still do not have efficiency standards for new buildings. Appliance standards, where they exist, could reduce consumption by 25% by 2030 if updated and enforced. The technologies exist. The economics are favorable. The missing ingredient is legislative and executive action at every level of government.</p>
+
+          <h3>The Efficiency Gap in the GPE Data</h3>
+          <p>The Global Power Efficiency rankings track 75 countries by electricity intensity &mdash; kWh consumed per $1,000 of GDP per capita. The spread between tiers tells the story:</p>
+        </div>
+      </div>
+
+      <!-- GPE Tier Gap Chart -->
+      <div class="chart-container">
+        <div class="canvas-wrapper"><canvas id="tierGapChart"></canvas></div>
+        <div class="citation">GPE data: Elite tier avg intensity ~1.8 kWh/$1K vs Medium tier avg ~7.8 kWh/$1K. The 4.3x gap between tiers IS the efficiency opportunity. Source: GPE Rankings 2025, IEA Energy Efficiency 2025</div>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <p>The 44 countries in the Elite tier (intensity below 2.5 kWh per $1,000 GDP per capita) demonstrate that high economic output and low electricity intensity are compatible. Ireland (0.65), Switzerland (0.68), the UK (0.80), Denmark (0.89), and Germany (1.10) all maintain sophisticated industrial economies with intensities below 1.2. At the other end, the Medium tier countries &mdash; Egypt (6.05), Kuwait (7.29), Libya (8.55), Iran (8.58), Uzbekistan (8.63) &mdash; consume 4 to 13 times as much electricity per unit of economic output.</p>
+
+          <p>This gap is not destiny. It is the result of policy choices accumulated over decades: building codes that were or were not adopted, appliance standards that were or were not updated, utility incentive structures that did or did not reward efficiency, and grid infrastructure that was or was not modernized. <strong>The gap between Elite and Medium tiers represents the single largest actionable opportunity in global energy policy.</strong> Every country that moves even one tier improves life for its citizens while reducing strain on its grid, its fiscal budget, and the global climate.</p>
+
+          <h3>The Investment Case</h3>
+          <p>Global investment in energy efficiency reached approximately <strong>$800 billion in 2025</strong>, up 6% year-on-year and 70% above 2015 levels (IEA Energy Efficiency 2025). Yet this investment remains concentrated in advanced economies. The IEA's analysis shows that efficiency spending generates returns of 15-30% &mdash; higher than most alternative investments &mdash; with payback periods measured in months to years, not decades.</p>
+
+          <p>For lawmakers, this translates to a simple proposition: efficiency programs generate more economic return per dollar of public expenditure than almost any other category of infrastructure investment. They create local jobs (electricians, insulators, HVAC technicians, energy auditors), reduce utility bills for constituents, lower peak demand on strained grids, improve public health through better indoor air quality, and reduce emissions. The policy challenge is not economic &mdash; it is organizational. The following fifteen strategies address that challenge.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2a: TIER 1 — IMMEDIATE (0-6 MONTHS)                   -->
+    <!-- ============================================================ -->
+    <section class="section" id="tier1">
+      <div class="section-header">
+        <h2>2a. Tier 1 &mdash; Immediate Action (0-6 Months)</h2>
+        <p class="section-desc">Legislative or executive actions that can be enacted within a single session. These are proven policies with extensive track records &mdash; no pilot programs needed. The evidence base is measured in trillions of dollars of cumulative savings.</p>
+        <div style="margin-top:0.75rem"><span class="tier-tag tier-immediate">Tier 1: Immediate</span></div>
+      </div>
+
+      <!-- Strategy 1: Building Performance Standards -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number imm">1</span>
+          <span class="policy-title">Building Performance Standards (BPS)</span>
+        </div>
+        <div class="strategy-text">
+          <p>Building Performance Standards set mandatory emissions or energy intensity limits for existing buildings, typically targeting the largest buildings first and ratcheting down over time. Unlike building energy codes (which apply to new construction), BPS address the <em>existing</em> building stock &mdash; which accounts for roughly 75% of the buildings that will be standing in 2050.</p>
+
+          <p><strong>Where BPS have been adopted:</strong> Over 50 U.S. cities and jurisdictions now have building energy performance requirements. Nine have enacted strict BPS with penalties, including New York City (Local Law 97), Washington D.C., Boston (BERDO 2.0), Denver, Seattle, St. Louis, Chula Vista (CA), Montgomery County (MD), and Cambridge (MA). In 2025, Evanston (IL) became the first city to pass a BPS, and Newton (MA) adopted one in December 2024. The National BPS Coalition has committed dozens more cities to adoption by 2026. At the state level, Washington's Clean Buildings Performance Standard and Colorado's building performance requirements are leading examples.</p>
+
+          <p><strong>In the EU:</strong> The revised Energy Performance of Buildings Directive (EPBD, Directive 2024/1275), which entered into force on 28 May 2024, requires Member States to renovate the 16% worst-performing non-residential buildings by 2030 and the 26% worst-performing by 2033. All new public buildings must be zero-emission by 2028, and all new buildings by 2030. Member States must transpose this directive by 29 May 2026.</p>
+        </div>
+
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> NYC Local Law 97 covers buildings over 25,000 sq ft &mdash; approximately 50,000 buildings representing roughly 60% of citywide building emissions. The NYC Department of Buildings reports that 89% of covered buildings comply with the 2024-2029 limits, but 57% currently exceed their 2030 caps, meaning substantial retrofits are needed. Penalties are $268 per metric ton of CO&#8322;e over the limit. Boston's BERDO 2.0 targets a 50% emissions reduction from covered buildings by 2030 with carbon neutrality by 2050. Denver targets 30% reduction in existing building energy consumption by 2030.
+        </div>
+
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For state legislators:</strong> Adopt a statewide BPS covering commercial and multifamily buildings over 25,000 sq ft. Use Washington State's Clean Buildings Act as a template. Phase in compliance starting with the largest buildings.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">2</div>
+            <div class="action-text"><strong>For city councils:</strong> Pass a benchmarking-first ordinance requiring energy reporting for all buildings above a threshold, then layer BPS on top within 12-18 months. The data from benchmarking creates the baseline for performance standards.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">3</div>
+            <div class="action-text"><strong>For EU Member States:</strong> Begin EPBD transposition immediately. The May 2026 deadline for national law implementation is less than one legislative cycle away. Identify the 16% worst-performing non-residential buildings now.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 2: Appliance & Equipment Standards -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number imm">2</span>
+          <span class="policy-title">Appliance &amp; Equipment Standards</span>
+        </div>
+        <div class="strategy-text">
+          <p>Minimum energy performance standards (MEPS) for appliances and equipment are the single most cost-effective energy policy ever implemented in the United States. The DOE's appliance standards program has delivered cumulative consumer savings exceeding <strong>$2 trillion through 2030</strong> (ACEEE/ASAP analysis), with additional savings of nearly <strong>$1 trillion over 30 years</strong> from standards advanced during the Biden-Harris Administration alone. Cumulative water savings through 2050 are estimated at 4.8 trillion gallons.</p>
+
+          <p>The IEA's <em>Energy Efficiency Policy Toolkit 2025</em> identifies that by 2030, appliances could consume 25% less energy globally if standards are updated and enforced. The mechanism is straightforward: standards remove the least efficient products from the market, shifting the entire stock toward higher performance over time as old appliances are replaced.</p>
+
+          <p><strong>Update cycles matter:</strong> Every year of delay in updating a standard locks in additional waste for the 10-20 year lifespan of the equipment being sold. A refrigerator standard delayed by two years means every refrigerator sold during those two years operates below achievable efficiency for its entire 15-year service life. The ACEEE's 2025 analysis identifies 49 product categories where updated standards could cumulatively reduce CO&#8322; emissions by 933 million metric tons through 2050.</p>
+
+          <p><strong>Current threat:</strong> In 2025, the U.S. administration paused implementation of new DOE appliance efficiency standards. This pause represents a direct cost to consumers: every month of delay in standards for residential refrigerators and freezers alone costs American households millions in avoidable energy spending over the lifetime of units sold during the delay period.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> U.S. appliance standards have saved consumers more than $2 trillion cumulative through 2030. The LED lighting transition alone &mdash; driven in significant part by standards phasing out inefficient lighting &mdash; has avoided more than 500 TWh/year in residential consumption and approximately 800 TWh/year in commercial/services consumption globally. Average LED efficacy has doubled since 2015, with best-available products reaching 230 lm/W &mdash; nearly 12x the efficiency of halogen lamps. Source: DOE, ACEEE/ASAP 2025, IEA.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For national legislators:</strong> Mandate that appliance standards be updated on a maximum 6-year review cycle. Prohibit rollbacks of existing standards. Fund DOE/equivalent standards-setting bodies adequately for timely rulemaking.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">2</div>
+            <div class="action-text"><strong>For state legislators:</strong> Where federal standards are paused or weakened, adopt state-level standards. California, Washington, and several Northeast states have done this for products not covered by federal preemption.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">3</div>
+            <div class="action-text"><strong>For developing countries:</strong> Adopt the IEA's recommended MEPS for air conditioners, lighting, and electric motors &mdash; the three product categories with the highest global savings potential. Use the CLASP (Collaborative Labeling and Appliance Standards Program) technical assistance resources.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 3: Utility Rate Reform -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number imm">3</span>
+          <span class="policy-title">Utility Rate Reform</span>
+        </div>
+        <div class="strategy-text">
+          <p>The structure of electricity prices is itself a policy lever. When utilities earn more revenue by selling more electricity, they have a structural disincentive to help customers use less. Three rate reforms address this directly:</p>
+
+          <p><strong>Time-of-use (TOU) pricing</strong> charges different rates at different times of day, reflecting the actual cost of generation and grid stress. California has been the most extensive U.S. laboratory for TOU: the state's demand response programs use price signals, emergency load reduction, and demand-side grid support to manage peak demand. The 2025 California Demand Response Potential Study (LBNL) documents strategies to "Shape" load profiles through price response, "Shift" consumption to periods of surplus renewable generation, and "Shed" loads during grid emergencies. Dynamic rates reflect real-time electricity costs, providing direct incentives for load shifting.</p>
+
+          <p><strong>Revenue decoupling</strong> separates utility revenue from sales volume, removing the incentive to sell more electricity. Under decoupling, the utility's allowed revenue is set independently of how much electricity it sells, eliminating the "throughput incentive." California, New York, and several other states have implemented decoupling for both electric and gas utilities.</p>
+
+          <p><strong>Demand charges</strong> for large commercial and industrial users create direct financial incentives to reduce peak demand through efficiency, load management, and on-site storage.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> California's demand response programs manage gigawatts of flexible load. The Emergency Load Reduction Program (ELRP) activates during grid emergencies May through October. The Demand Side Grid Support (DSGS) program compensates participants up to $80/kW for summer capacity on 4-hour systems. Revenue decoupling, implemented in approximately 20 U.S. states, enables utilities to invest in customer efficiency programs without financial penalty. Source: CPUC, LBNL 2025 California DR Potential Study.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For state legislators / utility commissions:</strong> Mandate TOU rate structures for all residential customers, with an opt-out (not opt-in) design. Implement revenue decoupling for all regulated utilities. These are administrative actions that can be ordered within months.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 4: LED Lighting Mandates -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number imm">4</span>
+          <span class="policy-title">LED Lighting Mandates</span>
+        </div>
+        <div class="strategy-text">
+          <p>Lighting consumes approximately 8% of global electricity demand &mdash; around 2,200 TWh per year across buildings and outdoor applications (IEA, 2024 data). The LED transition is one of the most successful efficiency interventions in history, but it remains incomplete: globally, 30% of residential lamps have yet to be upgraded to LED.</p>
+
+          <p>If lighting technology efficacies and market shares had remained at their 2015 levels, annual residential lighting consumption alone would be more than <strong>500 TWh higher today</strong> &mdash; roughly equivalent to the total electricity demand of South Korea. In the services sector, indoor lighting consumption would be approximately <strong>800 TWh higher</strong> &mdash; exceeding the total electricity consumption of the entire African continent.</p>
+
+          <p>China and India lead global LED adoption with market shares exceeding 85% and 75% respectively. The EU banned fluorescent lighting in September 2023. Many developing countries and some U.S. states still permit the sale of inefficient lighting products.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> The global LED transition has already avoided approximately 1,300 TWh/year of electricity consumption relative to a frozen-technology baseline. Completing the remaining 30% of the residential transition, plus accelerating commercial and outdoor conversions, would save an additional 300-500 TWh/year. Average LED efficacy has doubled since 2015, reaching 230 lm/W for best-available products. The cost of LED bulbs has fallen over 90% since 2010. Source: IEA Lighting (2025), IEA Energy Efficiency Policy Toolkit 2025.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For any jurisdiction:</strong> Ban the sale of non-LED general-purpose lighting. The EU did this in 2023. The technology is mature, affordable, and universally available. This is a one-line legislative action with massive cumulative impact.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 5: Building Energy Disclosure -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number imm">5</span>
+          <span class="policy-title">Building Energy Disclosure &amp; Benchmarking</span>
+        </div>
+        <div class="strategy-text">
+          <p>Mandatory energy benchmarking requires building owners to measure and publicly report their building's energy consumption, typically using standardized tools like EPA's ENERGY STAR Portfolio Manager. The policy insight: <strong>disclosure alone, without mandates, drives measurable reductions</strong>. When building owners and tenants can see how a building performs relative to peers, market pressure and operational awareness produce improvements without additional regulation.</p>
+
+          <p>Multiple U.S. jurisdictions have implemented benchmarking ordinances with expanding coverage. Washington D.C. expanded its requirement in 2025 to cover all privately-owned buildings over 10,000 sq ft. Maryland began requiring direct emissions data reporting in 2025. Detroit phased in coverage, with buildings between 25,000 and 100,000 sq ft beginning reporting in 2025. California's statewide benchmarking program covers large commercial and multifamily buildings.</p>
+
+          <p>The key design principle: benchmarking creates the information infrastructure that makes BPS possible. Cities that implemented benchmarking first found that it created public awareness, established data baselines, and built political support for performance standards. The sequence matters: disclosure first, then standards layered on top of the disclosed data.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> Research consistently shows that mandatory benchmarking and disclosure alone produce 3-8% reductions in building energy consumption within the first few years, with larger reductions (7-14%) over 5-10 year periods, driven by competitive pressure and operational awareness. EPA's ENERGY STAR Portfolio Manager benchmarks over 600,000 buildings representing over 50 billion sq ft of space. Buildings that earn ENERGY STAR certification use an average of 35% less energy than typical buildings. Source: EPA ENERGY STAR, IMT, ACEEE State Scorecard 2025.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For any jurisdiction without benchmarking:</strong> Pass a benchmarking ordinance covering commercial and multifamily buildings above 25,000 sq ft. Require annual reporting using ENERGY STAR Portfolio Manager. Make data publicly accessible. This is the lowest-barrier-to-entry efficiency policy with proven results.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2b: TIER 2 — NEAR-TERM (6-18 MONTHS)                  -->
+    <!-- ============================================================ -->
+    <section class="section" id="tier2">
+      <div class="section-header">
+        <h2>2b. Tier 2 &mdash; Near-Term Programs (6-18 Months)</h2>
+        <p class="section-desc">Program design, funding allocation, and institutional development. These strategies require more lead time but have extensive precedent. They build on the information and regulatory foundations established in Tier 1.</p>
+        <div style="margin-top:0.75rem"><span class="tier-tag tier-nearterm">Tier 2: Near-Term</span></div>
+      </div>
+
+      <!-- Strategy 6: Weatherization & Retrofit Programs -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number near">6</span>
+          <span class="policy-title">Weatherization &amp; Retrofit Programs</span>
+        </div>
+        <div class="strategy-text">
+          <p>The U.S. Weatherization Assistance Program (WAP) has operated since 1976, improving the energy efficiency of more than <strong>7.2 million homes</strong>. It is the nation's largest and longest-running residential energy efficiency program. WAP provides grants to states, which fund local agencies to weatherize homes of low-income families &mdash; insulation, air sealing, heating system repair and replacement, and health and safety measures.</p>
+
+          <p>For fiscal year 2025, WAP received $326 million in appropriations plus $30 million for the Weatherization Readiness Fund and $10 million for training and technical assistance. The program supports approximately 8,500 jobs and serves roughly 32,000 homes per year using DOE funds alone. These figures represent a fraction of the need: the DOE estimates that over 37 million low-income households are eligible for weatherization services.</p>
+
+          <p>The Inflation Reduction Act (IRA) allocated nearly <strong>$8.8 billion</strong> for two complementary rebate programs: the Home Efficiency Rebates (HOMES) program and the Home Electrification and Appliance Rebates (HEAR) program. HOMES provides rebates for whole-home efficiency upgrades reducing energy use by at least 20%. HEAR supports replacing fossil-fuel appliances with electric alternatives. As of early 2025, these rebates are rolling out state by state, with electrification rebates available in Arizona, California, Colorado, Georgia, Maine, and several other states. Some states have paused or delayed programs due to uncertainty regarding federal funding.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> WAP participants save an average of $372 or more per year in energy costs (2022 dollars). Total health and household benefits average $14,148 per household, including an average decrease of $514 in out-of-pocket medical expenses. The combined benefit-cost ratio exceeds 2.78:1 when health, comfort, and safety co-benefits are included. Energy savings persist for 15-20 years per home weatherized. Source: DOE WAP National Evaluation, Oak Ridge National Laboratory.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For state legislators:</strong> Fully match federal WAP and IRA rebate funding. Launch state HOMES and HEAR programs expeditiously. Expand eligibility to 200% of federal poverty level where possible. Streamline contractor certification processes.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">2</div>
+            <div class="action-text"><strong>For EU/national legislators:</strong> Scale the EU Renovation Wave initiative targeting 35 million buildings by 2030. Prioritize pre-1980 building stock with the highest energy waste. Pair mandates with accessible financing to avoid regressive impacts on low-income households.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 7: Industrial Energy Management -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number near">7</span>
+          <span class="policy-title">Industrial Energy Management (ISO 50001)</span>
+        </div>
+        <div class="strategy-text">
+          <p>Industry accounts for approximately 37% of global final energy consumption. The ISO 50001 Energy Management Systems standard provides a systematic framework for organizations to improve energy performance through planning, implementation, monitoring, and continuous improvement.</p>
+
+          <p>The savings potential is enormous: ISO estimates that implementing ISO 50001 globally could cumulatively cut industrial energy use by <strong>62 exajoules by 2030</strong>, saving more than <strong>$600 billion in energy costs</strong> and avoiding 6,500 megatonnes of CO&#8322; emissions. These are not theoretical numbers &mdash; they are extrapolations from measured company results.</p>
+
+          <p><strong>Documented results:</strong> Canadian industrial companies implementing ISO 50001 have achieved average cumulative energy performance improvements of nearly 10% within the first two years, with large companies saving up to $2 million annually. BMW reduced energy consumption by approximately 40% per vehicle manufactured. Coca-Cola Hellenic achieved a 16% reduction in energy consumption. The DOE's Better Plants program, which partners with over 260 organizations representing 13% of U.S. manufacturing energy consumption, has documented over $10 billion in cumulative energy savings.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> First-adopter industrial facilities typically achieve 10-20% energy reduction within 3 years of ISO 50001 implementation. Global potential: 62 EJ cumulative savings by 2030, $600B+ in avoided costs, 6,500 Mt CO&#8322; avoided. ISO 50001 can save up to 30% of total energy use in industry and up to 40% in commercial buildings. Source: ISO, Natural Resources Canada, IEA Energy Efficiency Policy Toolkit 2025.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For national/state legislators:</strong> Offer tax credits or accelerated depreciation for ISO 50001 certification costs. Require energy management systems for industrial facilities above a threshold energy consumption (e.g., 100 TJ/year). India's Perform, Achieve and Trade (PAT) scheme is a model for mandatory industrial energy targets with tradable certificates.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 8: Public Building Retrofit -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number near">8</span>
+          <span class="policy-title">Public Building Retrofit: Government Leads by Example</span>
+        </div>
+        <div class="strategy-text">
+          <p>Government buildings represent a significant share of the building stock in every jurisdiction &mdash; schools, courthouses, offices, libraries, fire stations, military installations, hospitals. Retrofitting public buildings first serves three purposes: it reduces government operating costs (returning savings to taxpayers), it demonstrates the feasibility of retrofit technologies, and it builds the local contractor workforce needed for broader building performance programs.</p>
+
+          <p>Energy Savings Performance Contracts (ESPCs) allow governments to retrofit buildings <strong>with no upfront capital costs</strong>. An energy service company (ESCO) conducts a comprehensive energy audit, designs and constructs improvements, arranges financing, and guarantees that the energy cost savings will pay for the project over the contract term. The savings are verified annually through measurement and verification (M&amp;V) protocols.</p>
+
+          <p><strong>Scale of impact:</strong> Since 1998, federal agencies have used DOE IDIQ ESPCs to significantly reduce energy and operating costs. Hawaii awarded the largest single ESPC in U.S. history: a $158 million contract to retrofit 12 state airports, with guaranteed energy savings exceeding <strong>$606 million over 15 years</strong> and a 49% annual energy savings target. The ESCO industry serves approximately $8-10 billion per year in project investment across the United States.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> ESPCs deliver average energy savings of 20-35% in federal buildings with zero upfront cost to the government. Hawaii's airport ESPC: 49% annual energy savings, $606M guaranteed savings over 15 years. The UK public sector retrofit target aims for 30% reduction by 2030. ESPCs eliminate the appropriations barrier &mdash; no new budget authority required. Source: DOE FEMP, Federal Performance Contracting Coalition.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For governors and mayors:</strong> Issue an executive order requiring energy audits of all government buildings within 12 months and ESPC procurement for all buildings that fail to meet energy performance targets. The ESPCs require no appropriation &mdash; this is a budget-neutral executive action.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 9: Transportation Electrification -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number near">9</span>
+          <span class="policy-title">Transportation Electrification</span>
+        </div>
+        <div class="strategy-text">
+          <p>Electric vehicles are approximately 3-4 times more energy efficient than internal combustion engines, converting 85-90% of electrical energy to motion versus 20-35% for ICE vehicles. Fleet electrification is both a transportation policy and an energy efficiency policy: every ICE vehicle replaced by an EV reduces total energy consumption even when accounting for electricity generation losses.</p>
+
+          <p>The policy toolkit for transportation electrification combines purchase incentives, charging infrastructure mandates, fleet procurement requirements, and fuel economy standards. For lawmakers focused on efficiency, the highest-impact actions target <strong>fleet vehicles</strong> (government, transit, school buses, delivery) because fleets have predictable routes, centralized charging, and high utilization rates that maximize the efficiency benefit.</p>
+
+          <p>The IEA's <em>Energy Efficiency Policy Toolkit 2025</em> identifies transport as a sector where "an integrated policy approach combining regulation, information and incentives is the most effective way to achieve efficiency goals." This includes not only electrification but also mode shift, land use planning, and freight logistics optimization.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> An electric bus saves approximately 135,000 liters of diesel over its service life compared to an equivalent diesel bus. Electric last-mile delivery vehicles reduce energy consumption per package by 60-80%. Government fleet electrification requirements create guaranteed demand that supports charging infrastructure buildout and drives down costs through volume purchasing. Source: IEA Transport Policy Toolkit 2025, NREL.
+        </div>
+      </div>
+
+      <!-- Strategy 10: District Energy & Thermal Networks -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number near">10</span>
+          <span class="policy-title">District Energy &amp; Thermal Networks</span>
+        </div>
+        <div class="strategy-text">
+          <p>District heating and cooling systems distribute thermal energy from centralized or distributed sources through a network of insulated pipes. They are among the most efficient heating technologies available because they can aggregate diverse heat sources &mdash; waste heat from industrial processes, data centers, wastewater treatment, combined heat and power plants, large-scale heat pumps, and geothermal &mdash; at efficiencies impossible for individual building systems to achieve.</p>
+
+          <p><strong>Copenhagen is the global benchmark.</strong> The city's district heating network covers 25 municipalities, delivers 10,000 GWh per year to more than 1 million inhabitants, and serves <strong>98% of end users</strong>. The system produces 40% less carbon emissions than individual gas boilers and 50% less than oil boilers. The Greater Copenhagen Utility (HOFOR) is making the system carbon-neutral by transitioning to sustainable biomass, large-scale heat pumps harnessing seawater and wastewater, and waste heat recovery. By 2033, up to 10 electrically powered heat pumps will collectively produce 300 MW of heat using green wind power.</p>
+
+          <p>The legislative barriers to district energy are often enabling legislation: rights-of-way for pipe networks, utility integration rules, connection mandates for new development in served areas, and heat planning requirements. Denmark's success rests on a 1979 Heat Supply Act that required municipal heat planning &mdash; a policy decision made during the oil crisis that has paid dividends for five decades.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> Copenhagen district heating: 98% coverage, 10,000 GWh/year, 40% fewer emissions than gas boilers, on track for carbon neutrality. Denmark's system produces among the lowest heating costs in Europe despite high energy taxes. The EU's forthcoming thermal network regulations under the EPBD recast will accelerate district energy planning across Member States. Source: HOFOR, C40 Cities, RAP (2025).
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2c: TIER 3 — STRUCTURAL (18-36 MONTHS)                 -->
+    <!-- ============================================================ -->
+    <section class="section" id="tier3">
+      <div class="section-header">
+        <h2>2c. Tier 3 &mdash; Structural Change (18-36 Months)</h2>
+        <p class="section-desc">Systemic reforms that reshape markets, price signals, and institutional frameworks. These strategies require longer implementation timelines but produce the deepest and most durable efficiency gains. They address the structures that generate inefficiency, not just the symptoms.</p>
+        <div style="margin-top:0.75rem"><span class="tier-tag tier-structural">Tier 3: Structural</span></div>
+      </div>
+
+      <!-- Strategy 11: Grid Modernization & Smart Meters -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number str">11</span>
+          <span class="policy-title">Grid Modernization &amp; Smart Meters</span>
+        </div>
+        <div class="strategy-text">
+          <p>Smart meters are the information infrastructure that makes demand response, time-of-use pricing, and vehicle-to-grid (V2G) integration possible. Without granular, real-time data on electricity consumption, the sophisticated rate structures and grid management tools described in Strategy 3 cannot function.</p>
+
+          <p>The UK provides the most detailed policy case study. As of September 2025, 70% of all meters in Great Britain were smart meters. The government has set a target to complete the domestic rollout by 31 December 2030 (100% coverage), with energy suppliers required to submit annual deployment plans to Ofgem. The post-2025 policy framework projects net present value benefits of <strong>&pound;590 million to &pound;1.8 billion</strong> (2025 prices), depending on coverage achieved. Consumers with smart meters achieve sustained savings of <strong>3% for electricity and 2.2% for gas</strong>, with additional network benefits from improved fault detection and grid management. Environmental benefits from reduced consumption amount to &pound;187-564 million.</p>
+
+          <p>Beyond the UK, Italy completed near-universal smart meter deployment by 2011 (the first major economy to do so), Sweden reached 100% by 2009, and Ontario, Canada, reached universal deployment by 2014. The common pattern: regulatory mandate drives deployment, and the information infrastructure then enables further efficiency policies.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> UK smart meters: 3% electricity savings, 2.2% gas savings per household. Net benefits: &pound;590M-&pound;1.8B NPV. Environmental benefits: &pound;187-564M from reduced consumption. Smart meters enable demand response, TOU pricing, V2G, faster outage restoration, and better grid planning. Source: UK DESNZ Smart Metering Policy Framework Post 2025, Ofgem.
+        </div>
+      </div>
+
+      <!-- Strategy 12: Carbon Pricing -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number str">12</span>
+          <span class="policy-title">Carbon Pricing</span>
+        </div>
+        <div class="strategy-text">
+          <p>Carbon pricing &mdash; whether through emissions trading systems (ETS) or carbon taxes &mdash; creates a price signal that makes energy waste more expensive and efficiency investments more profitable. The EU Emissions Trading System (EU ETS) is the world's largest and longest-running carbon market, and its measured results over 20 years provide the strongest available evidence for carbon pricing as an efficiency driver.</p>
+
+          <p><strong>EU ETS results:</strong> Emissions from covered power and industry installations are now approximately <strong>50% below 2005 levels</strong>, and the system is on track to achieve the 2030 target of -62%. In 2024 alone, ETS emissions fell 5% compared to 2023, with the power sector driving reductions (down nearly 11% year-on-year). The share of emissions from hard coal combustion reached a historical low in 2024. Revenue from the EU ETS reached <strong>&euro;38.8 billion in 2024</strong>, providing substantial funding for the clean energy transition. Carbon prices averaged around &euro;80 in 2022-2023 before decreasing to approximately &euro;65 in 2024.</p>
+
+          <p>In 2024, maritime transport emissions were included in the EU ETS for the first time. The EU is also launching ETS2 for buildings and road transport, with trading beginning in 2027, which will bring carbon pricing to sectors that account for a large share of energy consumption and inefficiency. A Social Climate Fund of up to <strong>&euro;65 billion</strong> (2026-2032) will support vulnerable households affected by the new carbon costs.</p>
+
+          <p>The OECD's <em>Effective Carbon Rates 2025</em> report documents carbon pricing developments across 72 countries covering 87% of global energy-related CO&#8322; emissions. Global coverage of explicit carbon pricing (ETS + carbon taxes) has expanded to approximately 23% of global emissions.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> EU ETS: 50% emissions reduction in covered sectors since 2005. 2024 revenue: &euro;38.8B. On track for -62% by 2030. The carbon price signal drives efficiency investment by making waste more expensive. Revenue recycling funds transition programs. Source: European Commission 2025 Carbon Market Report, OECD Effective Carbon Rates 2025.
+        </div>
+      </div>
+
+      <!-- Strategy 13: Just Transition Frameworks -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number str">13</span>
+          <span class="policy-title">Just Transition Frameworks</span>
+        </div>
+        <div class="strategy-text">
+          <p>Energy efficiency policy is not politically sustainable if the costs fall disproportionately on workers and communities that depend on energy-intensive industries. Just Transition frameworks ensure that the economic benefits of efficiency &mdash; new jobs, lower energy costs, improved health &mdash; reach the communities most affected by the shift away from fossil fuels.</p>
+
+          <p><strong>The jobs case is strong:</strong> Energy efficiency generates 3-4 times as many jobs per dollar invested as energy generation. Centralia, Washington &mdash; a coal-dependent community &mdash; documented that energy efficiency initiatives added jobs at twice the national rate from 2016 to 2018 because efficiency upgrades are more labor-intensive than energy generation. Coal workers have transferable skills: experience with hazardous environments, heavy equipment, and sophisticated monitoring systems. Retraining costs are modest &mdash; a Wyoming study found upskilling costs of $3,060 to $7,201 per worker for renewable energy roles.</p>
+
+          <p><strong>Policy mechanisms:</strong> The EU's Just Transition Mechanism directs approximately <strong>$183 billion</strong> (2021-2027) to fossil-fuel-intensive and carbon-intensive regions. The U.S. Energy Infrastructure Reinvestment program extends $250 billion in loan guarantee authority to "retool, repower, repurpose, or replace" energy infrastructure in affected communities, backed by a $5 billion appropriation. Community benefit agreements, local hiring requirements, and prevailing wage standards ensure that efficiency investments create quality local employment.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> Energy efficiency creates 3-4x more jobs per dollar than energy generation. Retraining costs: $3,060-$7,201 per worker. Centralia, WA: job growth at 2x national rate from efficiency investments. EU Just Transition Mechanism: $183B allocated. U.S. Energy Infrastructure Reinvestment: $250B loan guarantee authority. Source: OECD, WRI, Brookings Institution, UNECE Good Practices for Just Transition (2025).
+        </div>
+      </div>
+
+      <!-- Strategy 14: Energy Efficiency Resource Standards -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number str">14</span>
+          <span class="policy-title">Energy Efficiency Resource Standards (EERS)</span>
+        </div>
+        <div class="strategy-text">
+          <p>An Energy Efficiency Resource Standard establishes mandatory long-term energy savings targets that utilities must achieve through customer-facing efficiency programs. EERS policies are the structural backbone of utility efficiency programs in the United States: <strong>26 states plus the District of Columbia</strong> have them, and these states account for over <strong>80% of all utility energy efficiency program savings nationally</strong>.</p>
+
+          <p>Targets typically range from 0.5% to 3% annual energy savings relative to baseline sales, with the ACEEE's 2025 analysis noting requirements of 2.24% annual savings in 2025-2026, increasing to 2.5% thereafter. In 2023, utilities achieved 99% of their EERS goals on average, demonstrating that these targets are both ambitious and achievable.</p>
+
+          <p>The ACEEE's <em>Next Generation Energy Efficiency Resource Standards</em> update (2025) identifies 23 states implementing "next generation" elements including increased low-income program activity, electrification integration, and demand flexibility. Ohio requires cumulative energy savings of 22% by 2025. The most advanced states are approaching 3% annual savings targets &mdash; demonstrating that the technical and economic potential for efficiency far exceeds what most jurisdictions currently capture.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> EERS states account for 80%+ of U.S. utility efficiency savings. States with EERS reduce consumption 1-2%/year faster than states without. 26 states + DC have EERS policies. Average utility achievement rate: 99% of targets in 2023. The EERS creates the structural requirement that drives utility investment in efficiency. Source: ACEEE State Scorecard 2025, ACEEE EERS Database, NCSL.
+        </div>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">1</div>
+            <div class="action-text"><strong>For state legislators without EERS:</strong> Adopt an EERS requiring utilities to achieve 1.5%/year energy savings, ramping to 2.5%/year over 5 years. Require cost-effectiveness testing (Total Resource Cost or Societal Cost Test). Include low-income carve-outs of at least 20% of program budgets.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy 15: Long-Term Building Renovation Strategy -->
+      <div class="strategy-section">
+        <div class="policy-header">
+          <span class="policy-number str">15</span>
+          <span class="policy-title">Long-Term Building Renovation Strategy</span>
+        </div>
+        <div class="strategy-text">
+          <p>The EU's EPBD recast requires every Member State to produce a national building renovation plan establishing a roadmap for decarbonizing the entire building stock by 2050. This is not a suggestion &mdash; it is a legal requirement with milestones every five years starting in 2030, expressed as a decrease in average primary energy consumption (kWh/m&sup2;/year) across the residential building stock.</p>
+
+          <p>The renovation plan requirement addresses a fundamental problem: building-by-building mandates and incentives produce incremental improvements, but without a comprehensive stock-level strategy, the overall pace of renovation remains too slow. Current EU renovation rates are approximately 1% per year; achieving the 2050 target requires at least 2-3% per year. The renovation strategy forces governments to articulate <em>how</em> they will close that gap &mdash; which building segments will be prioritized, what financing will be available, how the workforce will be scaled, and what the intermediate milestones are.</p>
+
+          <p><strong>This approach is transferable to any jurisdiction.</strong> U.S. states, Canadian provinces, and developing nations can all benefit from a comprehensive building stock assessment and renovation roadmap, regardless of whether they have EU-style legal requirements. The exercise of mapping the building stock by age, type, fuel source, and energy performance &mdash; and then identifying the most cost-effective renovation pathways &mdash; generates the strategic clarity that ad hoc programs lack.</p>
+        </div>
+        <div class="evidence-box">
+          <strong>Measured Impact:</strong> The EU targets renovation of 35 million buildings by 2030 under the Renovation Wave. The EPBD requires all new buildings to be zero-emission by 2030 and the worst-performing existing buildings to be progressively renovated. Doubling the renovation rate from 1% to 2-3%/year would reduce EU building sector emissions by approximately 60% by 2030 relative to 2015 levels. Source: European Commission, EPBD Directive 2024/1275, Efficient Buildings Europe Implementation Guide.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: DATA-DRIVEN PRIORITIZATION                         -->
+    <!-- ============================================================ -->
+    <section class="section" id="prioritization">
+      <div class="section-header">
+        <h2>3. How to Identify Critical Areas (Data-Driven Prioritization)</h2>
+        <p class="section-desc">Lawmakers operating with limited budgets and political capital need to target efficiency investments where they will have the greatest impact. Six data-driven methods identify where to focus.</p>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <h3>3.1 Energy Burden Mapping</h3>
+          <p>Energy burden &mdash; the percentage of household income spent on energy costs &mdash; is the most direct measure of where energy inefficiency causes human hardship. The standard threshold is <strong>6% of gross household income</strong>: above this level, households are considered "energy burdened." The national average for low-income households (0-80% AMI) is approximately 6% &mdash; three times the 2% average for non-low-income households.</p>
+
+          <p>The DOE's <strong>Low-Income Energy Affordability Data (LEAD) Tool</strong> provides energy burden data at the national, state, county, tribal, city, disadvantaged community, and census tract level across all 50 states, DC, Puerto Rico, and federally recognized tribes. Research shows that <strong>16% of U.S. households</strong> experience energy poverty (spending &gt;6% on energy), with more than 5.2 million households above the Federal Poverty Line facing energy poverty. The burden falls disproportionately on Black, Hispanic, and Native American communities.</p>
+
+          <p><strong>How lawmakers use this:</strong> Overlay energy burden maps with building age data, utility program coverage, and income data to identify census tracts where efficiency programs will produce the greatest per-dollar reduction in energy burden. Target weatherization and retrofit programs to these areas first.</p>
+
+          <h3>3.2 Building Stock Analysis</h3>
+          <p>The age, type, and fuel source of buildings determine where the highest savings potential lies. Pre-1980 buildings were typically constructed before modern energy codes and have the highest energy waste per square foot. Natural gas-heated buildings face both efficiency and decarbonization challenges. In most U.S. jurisdictions, the highest-impact segment is <strong>pre-1980 multifamily buildings with gas heating in low-income census tracts</strong> &mdash; this intersects building inefficiency, energy burden, and health co-benefits.</p>
+
+          <h3>3.3 Industrial Cluster Analysis</h3>
+          <p>Which industries in your jurisdiction have the highest electricity intensity? The GPE data shows that national-level intensity varies by a factor of 13x across the dataset. Sub-national variation is even greater. A jurisdiction with significant aluminum smelting, data center operations, steel production, or chemical manufacturing will have different efficiency priorities than one dominated by services and light manufacturing. State-level industrial energy audits identify the specific facilities and processes where ISO 50001 implementation or equipment upgrades will have the greatest impact.</p>
+
+          <h3>3.4 Grid Congestion Mapping</h3>
+          <p>Where transmission and distribution infrastructure is constrained, efficiency is more valuable than new generation or new transmission lines. Every kWh saved in a grid-congested area avoids not only generation costs but also congestion costs, line losses, and the capital cost of grid upgrades. Utility planning data (Integrated Resource Plans, distribution system plans) identifies these constrained areas. Targeted efficiency programs in congested zones can defer billions in transmission investment.</p>
+
+          <h3>3.5 Transportation Emissions Hotspots</h3>
+          <p>Corridor analysis identifies the transportation routes and fleet segments with the highest fuel consumption and emissions per vehicle-mile. Urban freight corridors, school bus fleets, municipal vehicle fleets, and transit systems are high-impact targets for electrification and efficiency investment. Fleet composition data (available from state DMV records and fleet management systems) identifies the oldest, least efficient vehicles for prioritized replacement.</p>
+
+          <h3>3.6 AI Tools for Policy Targeting</h3>
+          <p>Satellite-based building analysis can identify energy waste at the individual building level by detecting thermal signatures and envelope condition. Smart meter analytics can identify buildings with abnormal consumption patterns that indicate equipment malfunction or insulation failure. Machine learning models trained on utility billing data, building characteristics, and weather data can predict which buildings will benefit most from specific efficiency measures. These tools are documented in detail in the <a href="strategies.html">AI Strategies</a> page of this research series.</p>
+
+          <h3>3.7 Sub-National GPE Methodology</h3>
+          <p>The GPE ranking methodology &mdash; electricity consumption per unit of economic output per capita &mdash; can be applied at the state, county, or city level using utility data and local GDP/income statistics. This creates a local efficiency diagnostic comparable across jurisdictions. A state with intensity of 5.0+ kWh/$1,000 GDP per capita is operating at the level of India or China in the GPE rankings, regardless of what the national average shows. Sub-national benchmarking reveals which regions need the most urgent attention.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: MODEL LEGISLATION & FRAMEWORKS                     -->
+    <!-- ============================================================ -->
+    <section class="section" id="model-legislation">
+      <div class="section-header">
+        <h2>4. Model Legislation &amp; Frameworks</h2>
+        <p class="section-desc">Template legislation and key provisions drawn from the highest-performing jurisdictions. These are not theoretical models &mdash; they are distilled from enacted laws with measured results.</p>
+      </div>
+
+      <div class="template-box">
+        <h4>Template: Building Performance Standard</h4>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.75rem;">Key provisions based on NYC LL97, Washington Clean Buildings Act, Boston BERDO 2.0, and Denver BPS:</p>
+        <ul>
+          <li><strong>Coverage threshold:</strong> All commercial and multifamily buildings above 25,000 gross square feet. Phase in smaller buildings (10,000+ sq ft) in year 3-5.</li>
+          <li><strong>Metric:</strong> Greenhouse gas emissions per square foot (site EUI or GHG intensity), with building-type-specific limits adjusted by climate zone.</li>
+          <li><strong>Compliance periods:</strong> 5-year compliance cycles with progressively stricter limits. First period sets limits achievable by the top 75% of buildings; subsequent periods ratchet down to achieve net-zero by 2050.</li>
+          <li><strong>Penalties:</strong> Per-ton-of-CO&#8322;e penalties above the limit (NYC: $268/tCO&#8322;e). Penalties must be high enough to motivate compliance but not so high as to create political opposition before the law can demonstrate results.</li>
+          <li><strong>Reporting:</strong> Annual emissions reporting via ENERGY STAR Portfolio Manager, due by May 1 each year. Data publicly accessible.</li>
+          <li><strong>Equity provisions:</strong> Affordable housing exemptions or extended timelines. Low-income building owners eligible for enhanced technical assistance and financing.</li>
+          <li><strong>Flexibility mechanisms:</strong> Renewable energy credits, carbon offsets (limited to 10-20% of compliance), and early action credits for buildings that exceed standards ahead of schedule.</li>
+        </ul>
+      </div>
+
+      <div class="template-box">
+        <h4>Template: Energy Efficiency Resource Standard (EERS)</h4>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.75rem;">Key provisions based on top-performing EERS states (MA, CA, MN, VT, RI):</p>
+        <ul>
+          <li><strong>Annual savings target:</strong> 1.5% of prior-year retail sales in year 1, ramping to 2.5% by year 5. Both electric and gas savings required.</li>
+          <li><strong>Cost-effectiveness test:</strong> Total Resource Cost (TRC) test or Societal Cost Test (SCT) including non-energy benefits (health, comfort, productivity, environmental).</li>
+          <li><strong>Low-income carve-out:</strong> Minimum 20% of program spending directed to low-income households and disadvantaged communities.</li>
+          <li><strong>Performance incentives:</strong> Utility shareholder incentives for exceeding targets (typically 5-10% of net benefits) and penalties for underperformance.</li>
+          <li><strong>Third-party evaluation:</strong> Independent evaluation, measurement, and verification (EM&amp;V) of all claimed savings by qualified third parties.</li>
+          <li><strong>Triennial review:</strong> Savings targets reviewed and updated every 3 years based on updated technical potential studies.</li>
+          <li><strong>Electrification integration:</strong> Allow beneficial electrification measures (heat pumps replacing gas furnaces) to count toward savings targets.</li>
+        </ul>
+      </div>
+
+      <div class="template-box">
+        <h4>Template: Benchmarking &amp; Transparency Ordinance</h4>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:0.75rem;">Key provisions based on DC, NYC, Seattle, California, and ACEEE best practices:</p>
+        <ul>
+          <li><strong>Coverage:</strong> All commercial, institutional, and multifamily buildings above 25,000 sq ft. Phase in 10,000+ sq ft within 2 years.</li>
+          <li><strong>Reporting tool:</strong> EPA ENERGY STAR Portfolio Manager. Standardized, free, widely understood.</li>
+          <li><strong>Data disclosure:</strong> Annual reporting, results publicly accessible via online portal. Property listings (sale or lease) must include energy performance data.</li>
+          <li><strong>Utility data access:</strong> Require utilities to provide aggregated whole-building energy data to building owners upon request, in a format compatible with Portfolio Manager.</li>
+          <li><strong>Compliance assistance:</strong> Free technical assistance for first-time reporters. Helpline and workshops. Partner with local building owner associations.</li>
+          <li><strong>Enforcement:</strong> Modest penalties for non-reporting ($500-2,000/year), escalating for repeated non-compliance. The goal is data collection, not punishment.</li>
+        </ul>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <h3>ACEEE 2025 State Scorecard: What Top States Do Differently</h3>
+          <p>The ACEEE's 16th edition <em>State Energy Efficiency Scorecard</em> (2025) ranks states across six policy areas: utility programs, transportation, buildings, state government-led initiatives, industrial efficiency, and appliance standards. The top finishers &mdash; <strong>California (#1), Massachusetts (#2), New York (#3), Maryland and Vermont (tied #4)</strong>, followed by Washington, Colorado, New Jersey, Oregon, and Minnesota &mdash; share common characteristics:</p>
+          <ul style="margin:0.75rem 0 0 1.5rem; color:var(--text-secondary)">
+            <li>Strong EERS with savings targets above 2%/year</li>
+            <li>Comprehensive building energy codes updated on a regular cycle</li>
+            <li>Mandatory benchmarking for large commercial buildings</li>
+            <li>State-level appliance standards where federal standards are insufficient</li>
+            <li>Dedicated low-income efficiency programs with substantial funding</li>
+            <li>Revenue decoupling for regulated utilities</li>
+            <li>Transportation efficiency policies including EV incentives and transit investment</li>
+            <li>State government leading by example with public building retrofit programs</li>
+          </ul>
+          <p style="margin-top:1rem">Colorado, Louisiana, and New Jersey were among the most improved states since the 2022 scorecard. The bottom-ranked states consistently lack EERS policies, have outdated building codes, and do not require energy benchmarking.</p>
+
+          <h3>EU Energy Efficiency Directive: Key Articles for Transposition</h3>
+          <p>The EU Energy Efficiency Directive (EED, Directive 2023/1791) establishes a binding EU target to reduce final energy consumption by 11.7% by 2030 relative to 2020 projections. Key transposition guidance for Member States:</p>
+          <ul style="margin:0.75rem 0 0 1.5rem; color:var(--text-secondary)">
+            <li><strong>Article 4:</strong> National energy efficiency contributions with binding targets</li>
+            <li><strong>Article 5:</strong> Public sector leading by example &mdash; annual 1.9% energy consumption reduction in public bodies' buildings</li>
+            <li><strong>Article 6:</strong> Renovation of public buildings &mdash; minimum 3% annual renovation rate</li>
+            <li><strong>Article 7:</strong> Energy efficiency in public procurement</li>
+            <li><strong>Article 8-9:</strong> Energy savings obligation schemes (EERS-equivalent for EU)</li>
+            <li><strong>Article 11:</strong> Energy management systems for large enterprises</li>
+            <li><strong>Article 22:</strong> Energy poverty and vulnerable consumers</li>
+            <li><strong>Article 24:</strong> District heating and cooling assessment and planning</li>
+          </ul>
+
+          <h3>IEA Energy Efficiency Policy Toolkit 2025</h3>
+          <p>The IEA's most comprehensive policy guidance document identifies ten strategic principles and sector-by-sector policy packages for buildings, industry, transport, appliances, and cross-cutting measures. The core framework: <strong>regulation + information + incentives</strong> in combination. No single policy type is sufficient; the greatest efficiency gains are achieved by packages that combine mandatory standards, transparent information (labels, benchmarks, audits), and financial incentives (rebates, tax credits, preferential financing). The Toolkit recommends doubling both the global building retrofit rate and the coverage of building energy codes by 2030, and notes that replacing fossil fuel boilers with high-efficiency heat pumps can reduce energy use by up to 75%.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: FUNDING MECHANISMS                                  -->
+    <!-- ============================================================ -->
+    <section class="section" id="funding">
+      <div class="section-header">
+        <h2>5. Funding Mechanisms</h2>
+        <p class="section-desc">The financing landscape for energy efficiency has expanded dramatically since 2020. The challenge is no longer a lack of funding &mdash; it is connecting available funding to projects at the pace required.</p>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <h3>5.1 U.S. Inflation Reduction Act (IRA) Energy Efficiency Provisions</h3>
+          <p>The IRA represents the largest federal investment in energy efficiency in U.S. history. Key provisions available now:</p>
+          <ul style="margin:0.5rem 0 1rem 1.5rem; color:var(--text-secondary)">
+            <li><strong>Home Efficiency Rebates (HOMES):</strong> Up to $8,000 per household for whole-home energy efficiency upgrades that reduce energy use by at least 35% (lower rebates for 20-35% reductions). Income-qualified households eligible for higher rebates.</li>
+            <li><strong>Home Electrification and Appliance Rebates (HEAR):</strong> Point-of-sale rebates for heat pumps (up to $8,000), heat pump water heaters ($1,750), electric stoves ($840), electric panel upgrades ($4,000), and insulation ($1,600).</li>
+            <li><strong>25C Tax Credits:</strong> 30% tax credit (up to $1,200/year) for qualified energy efficiency improvements including insulation, windows, doors, and energy audits. Heat pump tax credit up to $2,000/year.</li>
+            <li><strong>179D Commercial Building Deduction:</strong> Up to $5.00/sq ft for energy-efficient commercial building improvements meeting prevailing wage and apprenticeship requirements.</li>
+            <li><strong>45L New Energy Efficient Home Credit:</strong> Up to $5,000 per qualifying new energy-efficient home.</li>
+          </ul>
+          <p>Total IRA allocation for home energy rebate programs: approximately $8.8 billion. Rollout is state-by-state; lawmakers should ensure their State Energy Office has applied for and is administering these funds.</p>
+
+          <h3>5.2 Green Banks &amp; Revolving Loan Funds</h3>
+          <p>Green banks are public, quasi-public, or nonprofit financing entities that use public capital to leverage private investment in clean energy and efficiency projects. Their key advantage: revolving fund mechanisms ensure that loan repayments continuously recapitalize the institution, creating sustainable financing that multiplies the impact of initial public investment.</p>
+          <p>As of 2025, multiple U.S. states operate green banks or green-bank-like entities. The Connecticut Green Bank (established 2011) has deployed over $2 billion in clean energy investment from an initial public capitalization of approximately $150 million &mdash; a leverage ratio exceeding 13:1. The Illinois Climate Bank operates a revolving loan fund for energy efficiency administered through the Illinois Finance Authority.</p>
+
+          <h3>5.3 PACE (Property Assessed Clean Energy) Financing</h3>
+          <p>PACE programs allow property owners to finance energy improvements through a voluntary property tax assessment, repaid over 15-25 years through the tax bill. The improvement stays with the property (not the owner), solving the split-incentive problem for properties that may be sold before the payback period ends. As of end of 2024, <strong>$9.7 billion in commercial PACE (C-PACE) financing</strong> has funded 3,581 projects nationwide. C-PACE is available in 40+ states. Eligible measures include HVAC, LED lighting, solar, windows, building envelope, and low-flow plumbing.</p>
+
+          <h3>5.4 On-Bill Financing &amp; Repayment</h3>
+          <p>On-bill repayment (OBR) allows property owners to finance energy upgrades with no upfront cost, repaying through a line item on their monthly utility bill. When designed correctly, the energy savings exceed the monthly repayment &mdash; making the program immediately cash-flow positive for the participant. JCP&amp;L (New Jersey) launched a 0% interest OBR program effective January 2025, with financing up to $25,000 per project. Colorado passed HB25-1268 in 2025, creating a state-run on-bill repayment program for investor-owned utilities serving more than 500,000 customers. The DOE provides an <em>On-Bill Financing for Energy Efficiency Improvements Toolkit</em> for jurisdictions designing new programs.</p>
+
+          <h3>5.5 Energy Savings Performance Contracts (ESPCs)</h3>
+          <p>As described in Strategy 8: ESPCs allow public buildings to be retrofitted with zero upfront cost, financed entirely by guaranteed energy savings. The ESCO industry invests approximately $8-10 billion per year in U.S. projects. Hawaii's airport ESPC ($158M, 49% savings, $606M guaranteed over 15 years) demonstrates the scale achievable. ESPCs are available to federal, state, and local government buildings and can include comprehensive modernization (HVAC, lighting, controls, envelope, renewables, water).</p>
+
+          <h3>5.6 EU Green Deal Funding Mechanisms</h3>
+          <p>The EU's combined Green Deal financing exceeds <strong>&euro;1 trillion</strong>:</p>
+          <ul style="margin:0.5rem 0 1rem 1.5rem; color:var(--text-secondary)">
+            <li><strong>Recovery and Resilience Facility (RRF):</strong> &euro;723 billion (2021-2026), the largest EU grant source for building and transport decarbonization. Note: the RRF expires in 2026, creating a potential funding gap.</li>
+            <li><strong>InvestEU:</strong> &euro;279 billion combining public and private investment to 2030.</li>
+            <li><strong>Just Transition Mechanism:</strong> &euro;100 billion for regions most affected by the transition.</li>
+            <li><strong>Social Climate Fund:</strong> Up to &euro;65 billion (2026-2032) for vulnerable households.</li>
+            <li><strong>EU Modernisation Fund:</strong> &euro;2.4 billion invested in 2023 alone across seven EU countries.</li>
+            <li><strong>EU ETS Revenue:</strong> &euro;38.8 billion in 2024, significant portion directed to climate action.</li>
+          </ul>
+
+          <h3>5.7 Multilateral Development Bank Energy Efficiency Lending</h3>
+          <p>For developing countries, the multilateral development banks (World Bank, ADB, AfDB, EBRD, IDB) provide concessional financing for energy efficiency at scales not available from domestic sources. However, financing flows remain concentrated in advanced economies and China, with developing countries receiving only $21.6 billion in clean energy financial flows in 2023 (up for three consecutive years but still below the 2016 peak). The IRENA/World Bank <em>Tracking SDG7</em> 2025 report identifies that investment risks must be minimized and low-cost financing provided to developing countries as an immediate priority.</p>
+
+          <h3>5.8 Carbon Credit Revenue Recycling</h3>
+          <p>Jurisdictions with carbon pricing can dedicate a portion of revenue to energy efficiency programs, creating a virtuous cycle: carbon pricing raises the cost of waste, generating revenue that funds efficiency programs that further reduce waste. The EU ETS generated &euro;38.8 billion in 2024; California's cap-and-trade program directs significant revenue to the Greenhouse Gas Reduction Fund, which finances efficiency and equity programs. The design principle: earmark a minimum percentage of carbon revenue (25-50%) for efficiency and just transition programs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: ACCOUNTABILITY & MEASUREMENT                       -->
+    <!-- ============================================================ -->
+    <section class="section" id="accountability">
+      <div class="section-header">
+        <h2>6. Accountability &amp; Measurement</h2>
+        <p class="section-desc">Policies without measurement are aspirations. This section defines the Key Performance Indicators (KPIs) that lawmakers should track, the reporting cadence, and the adjustment mechanisms that keep policies effective over time.</p>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <h3>6.1 KPIs for Lawmakers</h3>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-value">%/yr</div>
+            <div class="kpi-label">Energy Intensity Improvement Rate</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">kWh/$1K</div>
+            <div class="kpi-label">Jurisdiction Electricity Intensity</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">%</div>
+            <div class="kpi-label">Buildings Benchmarked / Compliant</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">TWh</div>
+            <div class="kpi-label">Annual Energy Savings (Utility Programs)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">$/yr</div>
+            <div class="kpi-label">Consumer Energy Cost Savings</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">Jobs</div>
+            <div class="kpi-label">Efficiency Sector Employment</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">%</div>
+            <div class="kpi-label">Energy Burden (Low-Income Census Tracts)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">MtCO&#8322;e</div>
+            <div class="kpi-label">Emissions Avoided from Efficiency</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">$B</div>
+            <div class="kpi-label">Investment in Efficiency Programs</div>
+          </div>
+        </div>
+
+        <div class="strategy-text">
+          <h3>6.2 Annual Jurisdiction-Level Reporting</h3>
+          <p>Every jurisdiction that adopts efficiency policies should publish an annual energy intensity report that includes:</p>
+          <ul style="margin:0.5rem 0 1rem 1.5rem; color:var(--text-secondary)">
+            <li>Jurisdiction-level electricity intensity (kWh per $1,000 of local GDP per capita) with year-over-year trend</li>
+            <li>Comparison to GPE peer countries and peer states (ACEEE scorecard ranking)</li>
+            <li>Utility program savings achieved vs. targets (for EERS jurisdictions)</li>
+            <li>Building benchmarking compliance rate and portfolio-level energy performance trend</li>
+            <li>Energy burden by census tract with year-over-year improvement</li>
+            <li>Efficiency sector employment and investment figures</li>
+            <li>Emissions reduction attributable to efficiency programs (verified by independent M&amp;V)</li>
+          </ul>
+
+          <h3>6.3 Independent Verification (M&amp;V)</h3>
+          <p>All claimed energy savings must be independently verified through Evaluation, Measurement, and Verification (EM&amp;V) protocols. The International Performance Measurement and Verification Protocol (IPMVP) provides the globally recognized framework. Key principle: the entity claiming savings should never be the same entity verifying them. EERS programs, ESPCs, and building performance standards all require third-party EM&amp;V to maintain credibility and ensure that reported savings reflect actual consumption reductions.</p>
+
+          <h3>6.4 Public Dashboards &amp; Transparency</h3>
+          <p>Energy performance data for covered buildings, utility programs, and government operations should be accessible to the public through online dashboards. Transparency creates accountability: when citizens can see which buildings in their city are the worst performers, which utilities are meeting their savings targets, and how their jurisdiction compares to peers, political pressure for improvement follows naturally. The DOE's LEAD Tool, EPA's ENERGY STAR Portfolio Manager, and ACEEE's State Scorecard are models for this type of public transparency.</p>
+
+          <h3>6.5 Sunset Clauses &amp; Policy Adjustment Triggers</h3>
+          <p>Efficiency policies should include built-in review mechanisms:</p>
+          <ul style="margin:0.5rem 0 1rem 1.5rem; color:var(--text-secondary)">
+            <li><strong>Triennial review:</strong> All savings targets, building performance limits, and program budgets reviewed every 3 years against updated technical potential studies and cost-effectiveness analyses.</li>
+            <li><strong>Ratchet mechanisms:</strong> Performance standards that automatically tighten on a published schedule (5-year compliance periods with progressively stricter limits).</li>
+            <li><strong>Cost-effectiveness triggers:</strong> If a program's cost of saved energy exceeds a threshold (e.g., 150% of avoided cost), it must be redesigned or replaced.</li>
+            <li><strong>Equity triggers:</strong> If low-income participation rates fall below program targets, program design must be adjusted to address barriers (language access, contractor availability, eligibility requirements).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 7: THE COMPLEX PLANE OF ENERGY POLICY                 -->
+    <!-- ============================================================ -->
+    <section class="section" id="complex-plane">
+      <div class="section-header">
+        <h2>7. The Complex Plane of Energy Policy</h2>
+        <p class="section-desc">A mathematical framework for understanding why technically effective policies sometimes fail politically, and why popular policies sometimes fail to deliver measurable results. The unit circle marks the balance point between what a policy achieves and what citizens experience.</p>
+      </div>
+
+      <div class="strategy-section">
+        <div class="strategy-text">
+          <p>The research series' complex plane framework (detailed in <a href="strategies.html">AI Strategies &amp; Complex Plane</a>) applies directly to policy evaluation. Every energy policy has two dimensions:</p>
+
+          <p><strong>R(t) &mdash; the real component:</strong> Measurable policy outputs. Standards enacted, buildings retrofitted, kWh saved, emissions reduced, dollars of investment mobilized, compliance rates achieved. These are tracked through the KPIs in Section 6. A policy with high R(t) is technically effective.</p>
+
+          <p><strong>X(t) &mdash; the imaginary component:</strong> Experienced outcomes. Energy bills, thermal comfort, indoor air quality, jobs created, community investment, sense of fairness, public trust in institutions. These are harder to measure but determine whether a policy is politically sustainable. A policy with high X(t) is felt as beneficial by the people it affects.</p>
+        </div>
+
+        <div class="complex-plane-diagram">
+          <div class="quadrant q2">
+            <strong>Quadrant II: Popular but Ineffective</strong>
+            High X(t), Low R(t)<br>
+            Symbolic gestures, programs with high satisfaction but unmeasured savings, politically convenient but technically inadequate targets
+          </div>
+          <div class="quadrant q1">
+            <strong>Quadrant I: Effective and Experienced</strong>
+            High R(t), High X(t)<br>
+            Denmark's district heating, WAP health co-benefits, LED transition, well-designed EERS. The goal.
+          </div>
+          <div class="quadrant q3">
+            <strong>Quadrant III: Failed on Both Axes</strong>
+            Low R(t), Low X(t)<br>
+            Underfunded mandates, unenforced standards, programs that neither save energy nor improve lives
+          </div>
+          <div class="quadrant q4">
+            <strong>Quadrant IV: Effective but Resented</strong>
+            High R(t), Low X(t)<br>
+            France's fuel tax (Gilets Jaunes), UK Green Deal loans, aggressive mandates without equity provisions
+          </div>
+        </div>
+
+        <div class="strategy-text">
+          <h3>Quadrant IV: The Policy Trap</h3>
+          <p>The most dangerous quadrant for lawmakers is Quadrant IV: policies that are technically effective (high R(t)) but experienced negatively (low X(t)). France's carbon tax increase in 2018 was a textbook R(t) policy &mdash; economically efficient, revenue-neutral on paper, endorsed by economists. But the experienced reality for rural and low-income households was a direct cost increase on essential transport fuel, imposed by a government perceived as indifferent to their economic stress. The Gilets Jaunes movement forced the tax to be withdrawn, damaging the political viability of carbon pricing in France for years.</p>
+
+          <p>The UK's Green Deal (2013) asked energy-burdened households to take on upfront loans for insulation &mdash; a technically sound energy measure that ignored the lived reality of households already struggling with energy costs. The program was scrapped in 2015 after minimal uptake. The National Audit Office's post-mortem identified the fundamental error: the policy was designed on the R(t) axis without modeling X(t) dynamics.</p>
+
+          <h3>Moving Toward the Unit Circle</h3>
+          <p>The <strong>unit circle</strong> &mdash; the set of all policy states where |z| = sqrt(R(t)&sup2; + X(t)&sup2;) = 1 &mdash; represents the calibration point where measurable impact and felt benefit are in balance. Policies that operate on or beyond the unit circle in Quadrant I are both effective and experienced as legitimate. Every strategy in this guide is designed with both axes in mind:</p>
+          <ul style="margin:0.5rem 0 1rem 1.5rem; color:var(--text-secondary)">
+            <li><strong>BPS (Strategy 1):</strong> High R(t) through mandatory emissions limits. X(t) supported by exemptions for affordable housing, financing assistance, and long compliance timelines.</li>
+            <li><strong>WAP (Strategy 6):</strong> High on both axes. R(t): measurable energy savings of $372/year. X(t): health co-benefits of $14,148/household, tangible comfort improvement, no cost to participants.</li>
+            <li><strong>EERS (Strategy 14):</strong> High R(t) through utility savings requirements. X(t) supported by low-income carve-outs (20%+ of budgets) and on-bill financing.</li>
+            <li><strong>Carbon pricing (Strategy 12):</strong> High R(t) (EU ETS: -50% since 2005). X(t) requires revenue recycling through the Social Climate Fund (&euro;65B) to avoid Quadrant IV.</li>
+          </ul>
+
+          <h3>Connection to Democratic Legitimacy</h3>
+          <p>Energy policy is a test case for the <a href="../PSC/research/infrastructure-dividend-essay.md">infrastructure dividend thesis</a>: the proposition that citizens who fund public infrastructure should see returns from it. When energy efficiency policies save money but the savings are captured by utilities, landlords, or equipment manufacturers rather than reaching households, the policy scores high on R(t) but low on X(t). When efficiency improvements reduce emissions but raise costs for low-income households, the policy addresses one form of the commons while eroding another.</p>
+
+          <p>The complex plane framework is a diagnostic tool, not a prescriptive formula. Its value to lawmakers is this: <strong>before enacting any efficiency policy, model both axes.</strong> What will the policy achieve that can be measured? What will the affected population experience? If the answers diverge &mdash; if the measurable outputs are strong but the experienced outcomes are negative or uncertain &mdash; the policy is in danger of Quadrant IV, regardless of its technical merits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 8: QUICK REFERENCE TABLES                             -->
+    <!-- ============================================================ -->
+    <section class="section" id="quick-reference">
+      <div class="section-header">
+        <h2>8. Quick Reference Tables</h2>
+        <p class="section-desc">Summary tables for rapid consultation. Printable reference for legislative staff and policy advisors.</p>
+      </div>
+
+      <!-- Table 8.1: 15 Strategies Summary -->
+      <div class="strategy-section">
+        <h3>8.1 Fifteen Strategies: Impact, Timeline, Cost, Evidence</h3>
+        <div class="data-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Strategy</th>
+                <th>Tier</th>
+                <th>Typical Impact</th>
+                <th>Timeline</th>
+                <th>Public Cost</th>
+                <th>Evidence Base</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Building Performance Standards</td><td><span class="tier-label tier-4">Immediate</span></td><td>20-40% building emissions reduction (5 yr)</td><td>0-6 months to enact</td><td>Low (regulatory)</td><td>NYC LL97, WA, Boston, EU EPBD</td></tr>
+              <tr><td>2</td><td>Appliance &amp; Equipment Standards</td><td><span class="tier-label tier-4">Immediate</span></td><td>$2T+ cumulative savings (US); 25% global reduction possible</td><td>0-6 months to enact</td><td>Low (regulatory)</td><td>DOE 40+ years, ACEEE/ASAP</td></tr>
+              <tr><td>3</td><td>Utility Rate Reform</td><td><span class="tier-label tier-4">Immediate</span></td><td>3-12% peak demand reduction</td><td>0-6 months (admin)</td><td>Low (administrative)</td><td>CA TOU, 20+ state decoupling</td></tr>
+              <tr><td>4</td><td>LED Lighting Mandates</td><td><span class="tier-label tier-4">Immediate</span></td><td>1,300+ TWh/yr avoided globally</td><td>0-6 months to enact</td><td>Zero</td><td>IEA, EU fluorescent ban</td></tr>
+              <tr><td>5</td><td>Building Energy Disclosure</td><td><span class="tier-label tier-4">Immediate</span></td><td>3-14% reduction from disclosure alone</td><td>0-6 months to enact</td><td>Low</td><td>40+ US cities, EPA ENERGY STAR</td></tr>
+              <tr><td>6</td><td>Weatherization &amp; Retrofits</td><td><span class="tier-label tier-3">Near-Term</span></td><td>$372/yr savings + $14K health benefits/home</td><td>6-18 months</td><td>Moderate ($326M/yr WAP)</td><td>DOE WAP 7.2M homes, IRA $8.8B</td></tr>
+              <tr><td>7</td><td>Industrial Energy Management</td><td><span class="tier-label tier-3">Near-Term</span></td><td>10-20% energy reduction (3 yr), $600B global potential</td><td>6-18 months</td><td>Low (incentives)</td><td>ISO 50001, 62 EJ savings potential</td></tr>
+              <tr><td>8</td><td>Public Building Retrofit</td><td><span class="tier-label tier-3">Near-Term</span></td><td>20-49% energy savings, zero upfront cost</td><td>6-18 months</td><td>Zero (ESPC)</td><td>DOE FEMP, Hawaii $606M ESPC</td></tr>
+              <tr><td>9</td><td>Transportation Electrification</td><td><span class="tier-label tier-3">Near-Term</span></td><td>60-80% energy reduction (fleet)</td><td>6-18 months</td><td>Moderate (incentives)</td><td>NREL, IEA Transport Toolkit</td></tr>
+              <tr><td>10</td><td>District Energy</td><td><span class="tier-label tier-3">Near-Term</span></td><td>40-50% emissions reduction vs. individual systems</td><td>6-18 months (enabling)</td><td>High (infrastructure)</td><td>Copenhagen 98%, Denmark 1979 Act</td></tr>
+              <tr><td>11</td><td>Grid Modernization &amp; Smart Meters</td><td><span class="tier-label tier-1">Structural</span></td><td>3% electricity, 2.2% gas savings per household</td><td>18-36 months</td><td>High (deployment)</td><td>UK &pound;590M-&pound;1.8B NPV</td></tr>
+              <tr><td>12</td><td>Carbon Pricing</td><td><span class="tier-label tier-1">Structural</span></td><td>50% reduction (EU ETS since 2005)</td><td>18-36 months</td><td>Revenue-positive (&euro;38.8B/yr)</td><td>EU ETS 20 years, 72 countries</td></tr>
+              <tr><td>13</td><td>Just Transition Frameworks</td><td><span class="tier-label tier-1">Structural</span></td><td>3-4x more jobs than generation per dollar</td><td>18-36 months</td><td>Moderate ($183B EU JTM)</td><td>EU JTM, US $250B loan authority</td></tr>
+              <tr><td>14</td><td>Energy Efficiency Resource Standards</td><td><span class="tier-label tier-1">Structural</span></td><td>1-2%/yr faster consumption reduction</td><td>18-36 months</td><td>Low (regulatory, utility-funded)</td><td>26 states + DC, 80%+ of US savings</td></tr>
+              <tr><td>15</td><td>Building Renovation Strategy</td><td><span class="tier-label tier-1">Structural</span></td><td>60% building emissions reduction by 2030 (if doubled)</td><td>18-36 months</td><td>Varies (planning)</td><td>EU EPBD requirement, Renovation Wave</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 8.2: Top 10 GPE Countries and Their Policies -->
+      <div class="strategy-section">
+        <h3>8.2 Top 10 GPE Countries: What Policies They Implemented</h3>
+        <div class="data-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Country</th>
+                <th>Intensity</th>
+                <th>Key Efficiency Policies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Ireland</td><td>0.65</td><td>EU EPBD compliance, BER (Building Energy Rating) mandatory disclosure, aggressive heat pump incentives, SEAI retrofit grants, carbon tax (&euro;56/tCO&#8322;)</td></tr>
+              <tr><td>2</td><td>Nigeria</td><td>0.67</td><td>Low consumption per capita (access-limited), National Energy Efficiency Action Plan (2016), NESP building codes, LED distribution programs</td></tr>
+              <tr><td>3</td><td>Switzerland</td><td>0.68</td><td>Building Programme (Geb&auml;udeprogramm), cantonal energy standards (MuKEn), carbon levy on fossil fuels, near-universal hydroelectric base</td></tr>
+              <tr><td>4</td><td>Luxembourg</td><td>0.75</td><td>EU EED transposition, passive house standard for new buildings, premium subsidies for renovation, near-zero-energy building requirement</td></tr>
+              <tr><td>5</td><td>UK</td><td>0.80</td><td>Climate Change Act (2008), EPC mandatory disclosure, smart meter rollout (70%+), Net Zero Strategy, building regulations Part L</td></tr>
+              <tr><td>6</td><td>Ethiopia</td><td>0.84</td><td>Low per-capita consumption (access-limited), hydroelectric-dominant grid (GERD), National Electrification Program, efficient cookstove programs</td></tr>
+              <tr><td>7</td><td>Denmark</td><td>0.89</td><td>Heat Supply Act (1979), 98% district heating, building codes (BR18), energy labeling mandatory, carbon tax, offshore wind integration</td></tr>
+              <tr><td>8</td><td>Kenya</td><td>1.04</td><td>Low per-capita consumption, geothermal-dominant grid, Kenya National Energy Efficiency and Conservation Strategy, solar home system programs</td></tr>
+              <tr><td>9</td><td>Singapore</td><td>1.09</td><td>Green Mark building certification, MEPS for 9 product categories, Green Plan 2030, mandatory energy audits for large consumers, district cooling</td></tr>
+              <tr><td>10</td><td>Germany</td><td>1.10</td><td>Energiewende, GEG building code, KfW retrofit financing, EU ETS participation, Geb&auml;udeenergiegesetz (2024), 10,000 Houses Program (Bavaria)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 8.3: Bottom 10 GPE Countries and Policy Needs -->
+      <div class="strategy-section">
+        <h3>8.3 Lowest-Ranked GPE Countries: Priority Policy Needs</h3>
+        <div class="data-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Country</th>
+                <th>Intensity</th>
+                <th>Primary Drivers of High Intensity</th>
+                <th>Priority Policies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>66</td><td>China</td><td>5.00</td><td>Manufacturing-heavy GDP, coal-dominated grid, rapid industrial growth</td><td>Industrial ISO 50001, coal plant efficiency standards, building codes enforcement, EV fleet transition</td></tr>
+              <tr><td>67</td><td>Ukraine</td><td>5.40</td><td>War damage to infrastructure, Soviet-era building stock, heavy industry</td><td>Post-war reconstruction to modern efficiency standards, district heating modernization, building envelope retrofit</td></tr>
+              <tr><td>68</td><td>Russia</td><td>5.47</td><td>Cold climate, energy-intensive industry, subsidized energy prices, aging infrastructure</td><td>Energy price reform, industrial efficiency mandates, building insulation standards, district heating modernization</td></tr>
+              <tr><td>69</td><td>South Africa</td><td>5.70</td><td>Mining/smelting economy, coal-dependent grid, Eskom capacity constraints</td><td>Industrial efficiency standards, grid modernization, solar water heating mandates, building codes</td></tr>
+              <tr><td>70</td><td>Vietnam</td><td>5.91</td><td>Rapid industrialization, manufacturing growth, limited efficiency standards</td><td>Industrial MEPS, building codes for commercial buildings, appliance standards, EERS equivalent</td></tr>
+              <tr><td>71</td><td>Egypt</td><td>6.05</td><td>Subsidized electricity, cooling demand, energy-intensive industry</td><td>Subsidy reform, air conditioning MEPS, building insulation codes, solar thermal mandates</td></tr>
+              <tr><td>72</td><td>Kuwait</td><td>7.29</td><td>Extreme cooling demand, subsidized electricity, low efficiency standards</td><td>Electricity subsidy reform, aggressive building envelope codes, A/C MEPS, district cooling</td></tr>
+              <tr><td>73</td><td>Libya</td><td>8.55</td><td>Conflict damage, subsidized energy, minimal efficiency governance</td><td>Post-conflict infrastructure standards, basic building codes, LED distribution, institutional capacity building</td></tr>
+              <tr><td>74</td><td>Iran</td><td>8.58</td><td>Heavily subsidized energy, energy-intensive industry, aging building stock</td><td>Energy subsidy reform, industrial efficiency mandates, building insulation requirements, appliance MEPS</td></tr>
+              <tr><td>75</td><td>Uzbekistan</td><td>8.63</td><td>Soviet-era infrastructure, subsidized energy, gas-intensive economy</td><td>Energy price reform, building retrofit program, industrial energy audits, appliance standards</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="citation">Common pattern in high-intensity countries: subsidized energy prices remove the economic signal for efficiency. Price reform paired with targeted protection for low-income households is the single highest-impact structural reform available to these jurisdictions.</div>
+      </div>
+
+      <!-- Table 8.4: ACEEE Top/Bottom 10 US States -->
+      <div class="strategy-section">
+        <h3>8.4 US State Rankings (ACEEE 2025 Scorecard)</h3>
+        <div class="data-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ACEEE Rank</th>
+                <th>State</th>
+                <th>Key Strengths</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>California</td><td>Strongest EERS (2.24%+), Title 24 building codes, benchmarking, appliance standards, TOU rates, decoupling, EV mandates</td></tr>
+              <tr><td>2</td><td>Massachusetts</td><td>Aggressive EERS (3%+ target), Mass Save program, stretch building code, benchmarking (BERDO), BPS</td></tr>
+              <tr><td>3</td><td>New York</td><td>LL97 BPS, benchmarking (LL84), NY-Sun, NYSERDA programs, Climate Act targets, strong EERS</td></tr>
+              <tr><td>T4</td><td>Maryland</td><td>EmPOWER Maryland (EERS), BPS for state buildings, emissions reporting (2025), building codes</td></tr>
+              <tr><td>T4</td><td>Vermont</td><td>Efficiency Vermont (independent utility), thermal efficiency programs, building codes, small-scale model</td></tr>
+              <tr><td>6</td><td>Washington</td><td>Clean Buildings Act (BPS), EERS, commercial benchmarking, state appliance standards, heat pump incentives</td></tr>
+              <tr><td>7</td><td>Colorado</td><td>Most improved; BPS (Denver), on-bill repayment (HB25-1268), building codes, efficiency programs</td></tr>
+              <tr><td>8</td><td>New Jersey</td><td>Most improved; JCP&amp;L OBR program, clean energy programs, building codes update</td></tr>
+              <tr><td>9</td><td>Oregon</td><td>Energy Trust of Oregon, building codes, industrial efficiency, appliance standards</td></tr>
+              <tr><td>10</td><td>Minnesota</td><td>Conservation Improvement Program (EERS), Next Generation Energy Act, utility programs</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="citation">Bottom-ranked states consistently lack EERS policies, have outdated building codes, do not require benchmarking, and have not adopted revenue decoupling. The policy gap between top and bottom states mirrors the GPE country-level gap. Source: ACEEE 2025 State Energy Efficiency Scorecard.</div>
+      </div>
+
+      <!-- Table 8.5: Funding Sources Quick Reference -->
+      <div class="strategy-section">
+        <h3>8.5 Funding Sources Quick Reference</h3>
+        <div class="data-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Scale</th>
+                <th>Eligible Uses</th>
+                <th>Access</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>IRA HOMES Rebates</td><td>Up to $8,000/home</td><td>Whole-home efficiency upgrades (&ge;20% savings)</td><td>Via State Energy Office</td></tr>
+              <tr><td>IRA HEAR Rebates</td><td>Up to $14,000/home</td><td>Heat pumps, electric appliances, panel upgrades, insulation</td><td>Via State Energy Office</td></tr>
+              <tr><td>IRA 25C Tax Credit</td><td>30% (up to $1,200/yr)</td><td>Insulation, windows, doors, energy audits</td><td>Federal tax filing</td></tr>
+              <tr><td>IRA 179D Deduction</td><td>Up to $5.00/sq ft</td><td>Commercial building efficiency improvements</td><td>Federal tax filing</td></tr>
+              <tr><td>WAP Grants</td><td>$326M/yr (2025)</td><td>Low-income home weatherization</td><td>Via State/local agencies</td></tr>
+              <tr><td>ESPCs</td><td>No limit (self-financing)</td><td>Public building comprehensive retrofit</td><td>Direct ESCO procurement</td></tr>
+              <tr><td>C-PACE</td><td>$9.7B deployed to date</td><td>Commercial building energy improvements</td><td>40+ states, local PACE administrators</td></tr>
+              <tr><td>On-Bill Financing</td><td>Varies ($5K-$25K typical)</td><td>Residential/commercial efficiency upgrades</td><td>Participating utilities</td></tr>
+              <tr><td>Green Banks</td><td>13:1 leverage ratio (CT)</td><td>All clean energy and efficiency projects</td><td>State/regional green bank</td></tr>
+              <tr><td>EU RRF</td><td>&euro;723B (2021-2026)</td><td>Building and transport decarbonization</td><td>EU Member State programs</td></tr>
+              <tr><td>EU Just Transition</td><td>&euro;100B (2021-2027)</td><td>Transition-affected regions</td><td>EU Territorial Just Transition Plans</td></tr>
+              <tr><td>EU Social Climate Fund</td><td>&euro;65B (2026-2032)</td><td>Vulnerable household support</td><td>EU Member State programs</td></tr>
+              <tr><td>Carbon Revenue Recycling</td><td>&euro;38.8B/yr (EU ETS 2024)</td><td>Efficiency programs, just transition</td><td>Via carbon pricing jurisdiction</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SOURCES                                                        -->
+    <!-- ============================================================ -->
+    <section class="section">
+      <div class="source-section">
+        <h4>Sources &amp; References</h4>
+        <div class="source-grid">
+          <div class="source-item">
+            <span class="source-name">IEA Energy Efficiency 2025</span><br>
+            <a href="https://www.iea.org/reports/energy-efficiency-2025">iea.org/reports/energy-efficiency-2025</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">IEA Energy Efficiency Policy Toolkit 2025</span><br>
+            <a href="https://www.iea.org/reports/energy-efficiency-policy-toolkit-2025">iea.org/reports/energy-efficiency-policy-toolkit-2025</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">ACEEE 2025 State Scorecard</span><br>
+            <a href="https://www.aceee.org/research-report/u2502">aceee.org/research-report/u2502</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">ACEEE EERS Database</span><br>
+            <a href="https://database.aceee.org/state/energy-efficiency-resource-standards">database.aceee.org/state/energy-efficiency-resource-standards</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">ACEEE/ASAP Appliance Standards</span><br>
+            <a href="https://appliance-standards.org/more-savings-ahead-potential-future-appliance-standards">appliance-standards.org</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">EU EPBD Directive 2024/1275</span><br>
+            <a href="https://eur-lex.europa.eu/eli/dir/2024/1275/oj/eng">eur-lex.europa.eu</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">EU ETS Carbon Market Report 2025</span><br>
+            <a href="https://climate.ec.europa.eu/news-other-reads/news/2025-carbon-market-report-eu-ets-lowers-power-sector-emissions-and-expands-maritime-transport-2025-12-03_en">climate.ec.europa.eu</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">OECD Effective Carbon Rates 2025</span><br>
+            <a href="https://www.oecd.org/en/publications/effective-carbon-rates-2025_a5a5d71f-en.html">oecd.org</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">NYC Local Law 97</span><br>
+            <a href="https://accelerator.nyc/ll97">accelerator.nyc/ll97</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">IMT Building Performance Standards</span><br>
+            <a href="https://imt.org/public-policy/building-performance-standards/">imt.org/public-policy/building-performance-standards</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">DOE Weatherization Assistance Program</span><br>
+            <a href="https://www.energy.gov/cmei/scep/wap/weatherization-assistance-program">energy.gov/wap</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">DOE LEAD Tool (Energy Burden)</span><br>
+            <a href="https://www.energy.gov/scep/low-income-energy-affordability-data-lead-tool">energy.gov/scep/lead-tool</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">DOE FEMP (ESPCs)</span><br>
+            <a href="https://www.energy.gov/femp/energy-savings-performance-contracts-federal-agencies">energy.gov/femp/espc</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">DOE On-Bill Financing Toolkit</span><br>
+            <a href="https://www.energy.gov/scep/articles/bill-financing-energy-efficiency-improvements-toolkit">energy.gov/scep/obf</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">UK Smart Metering Post-2025</span><br>
+            <a href="https://www.gov.uk/government/consultations/smart-metering-policy-framework-post-2025">gov.uk/smart-metering-post-2025</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">IEA Lighting (2025)</span><br>
+            <a href="https://www.iea.org/energy-system/buildings/lighting">iea.org/energy-system/buildings/lighting</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">Copenhagen District Heating (HOFOR)</span><br>
+            <a href="https://www.hofor.dk/english/hofor-utilities/district-heating/">hofor.dk/district-heating</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">IRENA / Tracking SDG7 (2025)</span><br>
+            <a href="https://www.irena.org/Publications/2025/Jun/Tracking-SDG-7-The-Energy-Progress-Report-2025">irena.org/tracking-sdg7-2025</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">ISO 50001 Energy Management</span><br>
+            <a href="https://www.iso.org/iso-50001-energy-management.html">iso.org/iso-50001</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">EPA ENERGY STAR Portfolio Manager</span><br>
+            <a href="https://www.energystar.gov/buildings">energystar.gov/buildings</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">Ember Global Electricity Review 2025</span><br>
+            <a href="https://ember-energy.org/latest-insights/global-electricity-review-2025/">ember-energy.org/global-electricity-review-2025</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">Climate Policy Initiative: Green Banks 2025</span><br>
+            <a href="https://www.climatepolicyinitiative.org/publication/the-state-of-green-banks-2025-learnings-from-green-financing-structures-around-the-world/">climatepolicyinitiative.org/green-banks-2025</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">UNECE Just Transition Good Practices (2025)</span><br>
+            <a href="https://unece.org/sites/default/files/2026-01/UNECE%20Good%20Practices%20for%20Just%20Transition.pdf">unece.org/just-transition</a>
+          </div>
+          <div class="source-item">
+            <span class="source-name">WRI Building a Just Clean Energy Transition</span><br>
+            <a href="https://www.wri.org/insights/steps-aid-us-fossil-fuel-workers-clean-energy-transition">wri.org/just-transition</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology Note -->
+    <div class="methodology-note" style="margin-bottom:2rem">
+      <strong>Methodology:</strong> This policy guide synthesizes data from the IEA Energy Efficiency 2025 report, the IEA Energy Efficiency Policy Toolkit 2025, the ACEEE 2025 State Energy Efficiency Scorecard, the EU EPBD Directive 2024/1275, the European Commission 2025 Carbon Market Report, U.S. DOE program evaluations, and the Global Power Efficiency Rankings dataset (75 countries, kWh per $1,000 GDP per capita). All impact figures are sourced from measured outcomes, not projections, unless explicitly noted. The complex plane framework is developed in the <a href="strategies.html" style="color:var(--accent-blue)">AI Strategies &amp; Complex Plane</a> research supplement. Last updated: April 2026.
+    </div>
+  </main>
+
+  <footer>
+    <a href="index.html">GPE Home</a> &middot;
+    <a href="charts.html">Charts</a> &middot;
+    <a href="rankings.html">Rankings</a> &middot;
+    <a href="strategies.html">AI Strategies</a> &middot;
+    <a href="europe.html">Europe</a> &middot;
+    <a href="americas.html">Americas</a> &middot;
+    <a href="asia-pacific.html">Asia-Pacific</a> &middot;
+    <a href="africa.html">Africa</a> &middot;
+    <a href="middle-east.html">Middle East</a>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = 'rgba(100,116,139,0.2)';
+    Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+    // Tier Gap Chart — show average intensity by GPE tier
+    (function() {
+      var elite = GPE_DATA.filter(function(d) { return d.tierNum === 1; });
+      var high = GPE_DATA.filter(function(d) { return d.tierNum === 2; });
+      var medium = GPE_DATA.filter(function(d) { return d.tierNum === 3; });
+
+      function avg(arr) {
+        var sum = 0;
+        for (var i = 0; i < arr.length; i++) sum += arr[i].intensity;
+        return (sum / arr.length).toFixed(2);
+      }
+
+      var labels = [
+        'Elite Tier (' + elite.length + ' countries)',
+        'High Tier (' + high.length + ' countries)',
+        'Medium Tier (' + medium.length + ' countries)'
+      ];
+      var values = [parseFloat(avg(elite)), parseFloat(avg(high)), parseFloat(avg(medium))];
+      var colors = ['rgba(16,185,129,0.8)', 'rgba(245,158,11,0.8)', 'rgba(239,68,68,0.8)'];
+
+      new Chart(document.getElementById('tierGapChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Avg Electricity Intensity (kWh/$1K GDP/cap)',
+            data: values,
+            backgroundColor: colors,
+            borderColor: colors.map(function(c) { return c.replace('0.8', '1'); }),
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: 'Average Electricity Intensity by GPE Tier — The Efficiency Gap',
+              font: { size: 13, weight: '600' }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: 'rgba(100,116,139,0.15)' },
+              title: { display: true, text: 'kWh per $1,000 GDP per capita', font: { size: 11 } }
+            },
+            y: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

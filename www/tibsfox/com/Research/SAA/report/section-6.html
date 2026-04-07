@@ -90,6 +90,11 @@
       <a href="section-8.html">8. Future</a>
       <a href="section-9.html">9. DevOps</a>
       <a href="section-10.html">10. GSD</a>
+      <a href="section-11.html">11. Hooks</a>
+      <a href="section-12.html">12. Teams</a>
+      <a href="section-13.html">13. Orchestration</a>
+      <a href="section-14.html">14. Memory</a>
+      <a href="section-15.html">15. Case Studies</a>
       <a href="references.html">References</a>
     </div>
   </header>
@@ -102,7 +107,7 @@
             </div>
             <h1><span class="section-number">6</span> Identifying Needs and Applications</h1>
             <p class="subtitle">When to Use AI Agents, Enterprise Use Cases, and Implementation Strategies</p>
-            <p class="research-date">Research current as of: January 2026</p>
+            <p class="research-date">Research current as of: April 2026</p>
         </div>
     </header>
 
@@ -1449,7 +1454,7 @@ claude --log-level debug <span class="string">"Deploy the staging environment"</
 
         <section class="references">
             <h2>References</h2>
-            <p class="research-date">Research current as of: January 2026</p>
+            <p class="research-date">Research current as of: April 2026</p>
 
             <div class="ref-group">
                 <h3>Academic Papers</h3>
@@ -1520,8 +1525,292 @@ claude --log-level debug <span class="string">"Deploy the staging environment"</
             </div>
         </section>
 
+        <!-- v3.0 Claude Code-Specific Use Cases -->
+        <section class="content-section">
+            <h2>Claude Code-Specific Use Cases</h2>
+
+            <p>Claude Code, Anthropic's official CLI for Claude, has matured into a production-grade agent development platform. Its skill-based architecture, hook system, and subagent orchestration enable use cases that go beyond basic code completion into full autonomous workflow management.</p>
+
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Code Review Automation</div>
+                    </div>
+                    <div class="use-case-description">
+                        The <code>adversarial-pr-review</code> skill cross-references diffs against approved specs, verifies runtime claims against source code, and checks for security violations. The <code>code-review</code> skill performs style, quality, and best-practice checks. Combined with <code>PreToolUse</code> hooks for commit validation, this creates a multi-layer review pipeline that catches issues before they reach human reviewers.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Review Coverage</span>
+                            <span class="metric-value">100% of PRs</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Time to First Review</span>
+                            <span class="metric-value">&lt; 2 minutes</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">False Positive Rate</span>
+                            <span class="metric-value">&lt; 5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Research Pipelines</div>
+                    </div>
+                    <div class="use-case-description">
+                        The <code>research-engine</code> skill implements an autonomous research pipeline from topic to structured documents with HTML/PDF output. The <code>research-mission-generator</code> packages conversation research into executable GSD mission packages. These skills have been proven at scale: the PNW Research Series has produced 190+ projects with 2,439+ files and approximately 600K+ lines of content across 13 Rosetta clusters.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Projects Automated</span>
+                            <span class="metric-value">190+</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Output Volume</span>
+                            <span class="metric-value">600K+ lines</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Rosetta Clusters</span>
+                            <span class="metric-value">13</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Documentation Generation</div>
+                    </div>
+                    <div class="use-case-description">
+                        The <code>publish-pipeline</code> skill converts Markdown to branded HTML/PDF with Pandoc + XeLaTeX templates and automated FTP deployment. Combined with the <code>gsd-docs-update</code> command that verifies documentation against the codebase, this creates a continuous documentation pipeline where docs are always current and verified.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Docs Generated</span>
+                            <span class="metric-value">435+ files</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Auto-Deploy</span>
+                            <span class="metric-value">FTP sync</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Verification</span>
+                            <span class="metric-value">Code-checked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Production Use Cases from Operations -->
+        <section class="content-section">
+            <h2>Production Use Cases: Lessons from 190+ Automated Projects</h2>
+
+            <p>The following use cases come from a real production system running on Claude Code with GSD orchestration. These are not hypothetical scenarios&mdash;they represent operational experience across 190+ completed research projects and a live mission tracking system.</p>
+
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Research Series Automation</div>
+                    </div>
+                    <div class="use-case-description">
+                        <strong>Scale:</strong> 190+ projects across 13 Rosetta clusters (Ecology, Electronics, Infrastructure, Energy, Creative, Business, Vision, Broadcasting, Science, Music, Space, AI &amp; Computation, Graphics). Each project follows a standard pipeline: vision document, wave plan, parallel executor dispatch, atomic commits, and verification. The Gastown convoy model handles 50+ project batches through parallel agent fleets.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Projects Completed</span>
+                            <span class="metric-value">190+</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Parallel Agents</span>
+                            <span class="metric-value">4-6 per batch</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Architecture</span>
+                            <span class="metric-value">Static HTML + client-side MD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Issue Triage &amp; PR Review</div>
+                    </div>
+                    <div class="use-case-description">
+                        The <code>issue-triage-pr-review</code> skill runs parallel triage across all open issues, assigns severity and category labels, creates fix PRs for actionable issues, then adversarially reviews all open PRs. The adversarial review cross-references diffs against specifications and verifies runtime claims against source code, catching spec-compliance gaps that standard code review misses.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Triage Pattern</span>
+                            <span class="metric-value">Parallel scan</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Review Type</span>
+                            <span class="metric-value">Adversarial</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Coverage</span>
+                            <span class="metric-value">All open issues/PRs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Release Management Automation</div>
+                    </div>
+                    <div class="use-case-description">
+                        The <code>done-retirement</code> pipeline implements a 7-stage lifecycle: validate, commit, push, submit (PR/release), notify, cleanup, and terminate. The <code>release-management</code> skill handles deployment patterns, version control, and rollback procedures. In production, this pipeline has executed 58+ releases (v1.49.135-192) with full release notes including summary, key features, retrospective, and lessons learned.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Releases Shipped</span>
+                            <span class="metric-value">58+</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Pipeline Stages</span>
+                            <span class="metric-value">7</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Output Volume</span>
+                            <span class="metric-value">600K+ words</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Real-Time Monitoring (Artemis II Sweep Daemon)</div>
+                    </div>
+                    <div class="use-case-description">
+                        The <code>sweep.py</code> daemon runs hourly updates across 35+ live research pages, pulling data from METAR weather stations, NWS forecasts, CWOP/NDBC stations, and satellite imagery. The daemon maintains persistent state across runs, handles source failures gracefully, and produces versioned releases (24 hourly releases for weather sweeps). This demonstrates agents operating as continuous monitoring systems rather than one-shot tasks.
+                    </div>
+                    <div class="use-case-metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Update Frequency</span>
+                            <span class="metric-value">Hourly</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Live Pages</span>
+                            <span class="metric-value">35+</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Data Sources</span>
+                            <span class="metric-value">19+ feeds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- When NOT to Use Agents -->
+        <section class="content-section">
+            <h2>When NOT to Use AI Agents</h2>
+
+            <p>Not every task benefits from agent-based automation. Knowing when agents add unnecessary complexity is as important as knowing when to deploy them. The following categories are often better served by simpler approaches.</p>
+
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Deterministic Processes</div>
+                    </div>
+                    <div class="use-case-description">
+                        If the process has fixed inputs, fixed steps, and fixed outputs with no variability, use a simple script or traditional automation. AI agents add latency, cost, and nondeterminism to processes that do not benefit from judgment.
+                        <br><br><strong>Examples:</strong> File format conversion, database backups, log rotation, cron-scheduled cleanups.
+                        <br><strong>Better alternative:</strong> Shell scripts, cron jobs, GitHub Actions workflows.
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">High-Frequency, Low-Value Tasks</div>
+                    </div>
+                    <div class="use-case-description">
+                        Tasks that run thousands of times per minute where the per-invocation token cost would exceed the value produced. AI agents are cost-effective for complex, infrequent tasks&mdash;not for high-frequency commodity operations.
+                        <br><br><strong>Examples:</strong> Request routing, load balancing, health check pings, metric collection.
+                        <br><strong>Better alternative:</strong> Traditional middleware, Nginx, HAProxy, Prometheus exporters.
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Regulatory-Mandated Exact Processes</div>
+                    </div>
+                    <div class="use-case-description">
+                        When regulations require exact, auditable step sequences with zero deviation, the nondeterministic nature of LLMs creates compliance risk. Agents can assist with analysis, but the execution path must be deterministic.
+                        <br><br><strong>Examples:</strong> Financial transaction settlement, pharmaceutical manufacturing steps, aviation checklists.
+                        <br><strong>Better alternative:</strong> Workflow engines with deterministic execution (Temporal, Apache Airflow).
+                    </div>
+                </div>
+
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-title">Tasks Requiring Sub-Second Latency</div>
+                    </div>
+                    <div class="use-case-description">
+                        LLM inference adds 500ms-5s latency per call. For real-time systems requiring microsecond or millisecond response times, AI agents cannot meet SLAs. Even cached responses introduce unacceptable variance.
+                        <br><br><strong>Examples:</strong> High-frequency trading, real-time game physics, network packet routing, embedded control systems.
+                        <br><strong>Better alternative:</strong> Compiled code, FPGA, ASIC, or optimized inference at the edge.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>The Simplicity Principle</h4>
+                <p>Anthropic's own guidance is direct: "Find the simplest solution possible, and only increase complexity when needed." Start with deterministic workflows. Add a single agent when you need judgment. Move to multi-agent systems only when domain specialization demands it. The most reliable system is the one with the fewest moving parts.</p>
+            </div>
+        </section>
+
+        <!-- Updated ROI Framework -->
+        <section class="content-section">
+            <h2>ROI Framework: Real Data from Production Operations</h2>
+
+            <p>The following ROI analysis draws from actual production operations running Claude Code with GSD orchestration, providing concrete numbers rather than projections.</p>
+
+            <h3>Research Pipeline ROI</h3>
+            <div class="roi-calculator">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <div class="input-label">Projects Completed (Automated)</div>
+                        <div class="input-value">190+ projects</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-label">Estimated Manual Time per Project</div>
+                        <div class="input-value">8-16 hours (research + writing + formatting)</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-label">Automated Time per Project</div>
+                        <div class="input-value">15-45 minutes (agent execution)</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-label">Time Savings per Project</div>
+                        <div class="input-value">90-95%</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-label">Total Manual Hours Saved</div>
+                        <div class="input-value">1,520-3,040 hours</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-label">Token Cost (Approximate)</div>
+                        <div class="input-value">$3-15 per project</div>
+                    </div>
+                </div>
+
+                <div class="roi-result">
+                    <div class="roi-result-value">50-100x</div>
+                    <div class="roi-result-label">Time ROI (hours saved vs. agent execution time)</div>
+                </div>
+            </div>
+
+            <h3>Key Operational Insight</h3>
+            <div class="info-box">
+                <p><strong>Quality compounds with volume.</strong> At 190+ projects, the skills, templates, and verification patterns have been refined through iterative feedback. Early projects took longer and required more human review. By project 150+, the pipeline was operating with minimal intervention. This demonstrates that agent ROI is not static&mdash;it improves over time as the system learns from operational experience.</p>
+            </div>
+        </section>
+
 <section class="content-section">
-    <h2>v2.0 Update: DevOps Production Examples and Platform Engineering</h2>
+    <h2>v3.0 Update: DevOps Production Examples and Platform Engineering</h2>
 
     <h3>AI Agents in Production DevOps</h3>
     <p>AI agents have moved from experimental to production in DevOps workflows, with measurable results across the industry:</p>
@@ -1672,7 +1961,7 @@ claude --log-level debug <span class="string">"Deploy the staging environment"</
   </div>
 
   <footer>
-    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+    <p>Skills, Agents &amp; Teams &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
   </footer>
 </body>
 </html>

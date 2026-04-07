@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Report &mdash; Skills &amp; Agents Architecture</title>
+  <title>Report &mdash; Skills, Agents &amp; Teams</title>
   <link rel="stylesheet" href="../../../brand.css">
   <link rel="stylesheet" href="../style.css">
   <script src="../../series.js" defer></script>
 </head>
 <body class="project-saa">
   <header>
-    <h1>Skills &amp; Agents Architecture</h1>
-    <div class="subtitle">Comprehensive Analysis Report &mdash; 10 sections, 150+ citations</div>
+    <h1>Skills, Agents &amp; Teams</h1>
+    <div class="subtitle">Comprehensive Analysis Report &mdash; v3.0 &mdash; 15 sections, 200+ citations</div>
     <nav>
       <a href="../index.html">Overview</a>
       <a href="../agents/index.html">Agents</a>
@@ -27,67 +27,78 @@
     </div>
 
     <blockquote>
-      The field of AI agentic programming has undergone a dramatic transformation, with 2025 marking a pivotal year where AI agents moved from experimental prototypes to production-ready autonomous systems. This report covers fundamentals through implementation, from the ReAct pattern and Model Context Protocol to the GSD Orchestrator and DevOps lifecycle automation.
+      Version 3.0 reflects two months of production operation at scale &mdash; 190+ research projects, 21,298 tests, 34 skills, 26 custom agents, and proven orchestration patterns running across 6 concurrent branches. This isn't a theoretical survey; it's a practitioner's guide written from the inside of a system that ships daily. Five new sections cover hooks, agent teams, orchestration patterns, memory management, and production case studies &mdash; the hard-won knowledge that transforms experimental agent setups into reliable, autonomous workflows.
     </blockquote>
 
-    <h2>Report Sections</h2>
+    <h2>Foundations (Sections 1&ndash;3)</h2>
 
     <div class="section-grid">
       <a href="section-1.html" class="card">
         <span class="section-number">1</span>
         <h3>AI Agentic Programming Fundamentals</h3>
-        <p>Core concepts, architectural patterns, the Model Context Protocol (MCP), and agent-to-agent communication standards.</p>
+        <p>Core concepts, architectural patterns, the Model Context Protocol (MCP), agent-to-agent communication, and the Claude Code platform.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">ReAct Pattern</span>
+          <span class="topic-tag">ReAct</span>
           <span class="topic-tag">MCP</span>
-          <span class="topic-tag">A2A Protocol</span>
+          <span class="topic-tag">Agent SDK</span>
+          <span class="topic-tag">Plugins</span>
         </div>
       </a>
 
       <a href="section-2.html" class="card">
         <span class="section-number">2</span>
-        <h3>AI Agent Skills: Definition and Creation</h3>
-        <p>Understanding agent skills as modular capabilities, skill structures, content types, and best practices for creation.</p>
+        <h3>Skills &mdash; The Modular Capability Layer</h3>
+        <p>SKILL.md format, frontmatter reference, activation control, supporting files, shell injection, bundled skills, and production patterns.</p>
         <div style="margin-top:0.8rem">
           <span class="topic-tag">SKILL.md</span>
-          <span class="topic-tag">Modularity</span>
-          <span class="topic-tag">Composability</span>
+          <span class="topic-tag">Frontmatter</span>
+          <span class="topic-tag">context: fork</span>
+          <span class="topic-tag">Bundled</span>
         </div>
       </a>
 
       <a href="section-3.html" class="card">
         <span class="section-number">3</span>
-        <h3>Combining Skills and Agents for Complex Tasks</h3>
-        <p>Multi-agent architectures, orchestration frameworks, patterns for collaboration, and real-world implementations.</p>
+        <h3>Custom Subagents &mdash; Specialized AI Workers</h3>
+        <p>Subagent architecture, complete frontmatter reference, model routing, worktree isolation, persistent memory, MCP scoping, and 26 production agents.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">Orchestration</span>
-          <span class="topic-tag">LangChain</span>
-          <span class="topic-tag">CrewAI</span>
+          <span class="topic-tag">Subagents</span>
+          <span class="topic-tag">Worktrees</span>
+          <span class="topic-tag">Model Routing</span>
+          <span class="topic-tag">Memory</span>
         </div>
       </a>
+    </div>
 
+    <h2>Optimization (Sections 4&ndash;5)</h2>
+
+    <div class="section-grid">
       <a href="section-4.html" class="card">
         <span class="section-number">4</span>
         <h3>Token Optimization Techniques</h3>
-        <p>Token economics, reduction strategies, prompt compression, context caching, model routing, and RAG optimization.</p>
+        <p>Token economics at 1M context scale, reduction strategies, prompt compression, context caching, model routing, and subagent context savings.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">Cost Reduction</span>
+          <span class="topic-tag">1M Context</span>
           <span class="topic-tag">Caching</span>
-          <span class="topic-tag">BatchPrompt</span>
+          <span class="topic-tag">Model Routing</span>
         </div>
       </a>
 
       <a href="section-5.html" class="card">
         <span class="section-number">5</span>
         <h3>Performance Improvement Methods</h3>
-        <p>Memory architecture, performance metrics, scaling techniques, and agentic RAG performance patterns.</p>
+        <p>Memory architecture, performance metrics, scaling techniques, extended thinking, and agentic RAG patterns.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">Memory Types</span>
+          <span class="topic-tag">Extended Thinking</span>
           <span class="topic-tag">Scaling</span>
-          <span class="topic-tag">CRAG</span>
+          <span class="topic-tag">Effort Levels</span>
         </div>
       </a>
+    </div>
 
+    <h2>Applications (Sections 6&ndash;8)</h2>
+
+    <div class="section-grid">
       <a href="section-6.html" class="card">
         <span class="section-number">6</span>
         <h3>Identifying Needs and Applications</h3>
@@ -102,44 +113,112 @@
       <a href="section-7.html" class="card">
         <span class="section-number">7</span>
         <h3>Improving Accuracy with AI Agents</h3>
-        <p>Prompt engineering best practices, structured outputs, evaluation and testing, guardrails and safety measures.</p>
+        <p>Prompt engineering, structured outputs, evaluation frameworks, guardrails, safety measures, and self-modifying system security.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">Few-Shot</span>
-          <span class="topic-tag">Chain-of-Thought</span>
+          <span class="topic-tag">Accuracy</span>
           <span class="topic-tag">Guardrails</span>
+          <span class="topic-tag">Security</span>
         </div>
       </a>
 
       <a href="section-8.html" class="card">
         <span class="section-number">8</span>
         <h3>Future Trends and Recommendations</h3>
-        <p>Emerging trends for 2026, key recommendations for teams and organizations, and risk considerations.</p>
+        <p>2026 H2 outlook, Claude Agent SDK, plugins ecosystem, content-addressed code, and strategic recommendations.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">2026 Trends</span>
-          <span class="topic-tag">SLMs</span>
-          <span class="topic-tag">Governance</span>
+          <span class="topic-tag">2026 H2</span>
+          <span class="topic-tag">Agent SDK</span>
+          <span class="topic-tag">Plugins</span>
         </div>
       </a>
+    </div>
 
+    <h2>Infrastructure (Sections 9&ndash;12)</h2>
+
+    <div class="section-grid">
       <a href="section-9.html" class="card">
         <span class="section-number">9</span>
-        <h3>DevOps Lifecycle Automation with AI Agents</h3>
-        <p>Complete 8-phase DevOps lifecycle mapping with AI agents, MCP/A2A integration, AIOps, platform engineering, and FinOps automation.</p>
+        <h3>DevOps Lifecycle Automation</h3>
+        <p>Complete 8-phase DevOps lifecycle with AI agents, CI/CD integration, issue triage, release management, and infrastructure patterns.</p>
         <div style="margin-top:0.8rem">
           <span class="topic-tag">DevOps</span>
+          <span class="topic-tag">CI/CD</span>
           <span class="topic-tag">AIOps</span>
-          <span class="topic-tag">Platform Engineering</span>
         </div>
       </a>
 
       <a href="section-10.html" class="card">
         <span class="section-number">10</span>
         <h3>The GSD Orchestrator</h3>
-        <p>From conversational interface to distributed multi-agent DevOps system. Messaging evolution, agent coordination, and implementation roadmap.</p>
+        <p>From conversational interface to distributed multi-agent system. 57 commands, wave-based execution, and the discuss-plan-execute-verify lifecycle.</p>
         <div style="margin-top:0.8rem">
-          <span class="topic-tag">GSD Agent</span>
+          <span class="topic-tag">GSD</span>
           <span class="topic-tag">Orchestration</span>
-          <span class="topic-tag">Event Streaming</span>
+          <span class="topic-tag">Lifecycle</span>
+        </div>
+      </a>
+
+      <a href="section-11.html" class="card">
+        <span class="section-number">11</span>
+        <h3>Hooks &mdash; The Automation Backbone</h3>
+        <p>4 hook types across 20+ lifecycle events. Command, HTTP, prompt, and agent hooks with if-conditions, permission management, and production patterns.</p>
+        <div style="margin-top:0.8rem">
+          <span class="topic-tag">Hooks</span>
+          <span class="topic-tag">Lifecycle</span>
+          <span class="topic-tag">Automation</span>
+          <span class="topic-tag">NEW</span>
+        </div>
+      </a>
+
+      <a href="section-12.html" class="card">
+        <span class="section-number">12</span>
+        <h3>Agent Teams &mdash; Multi-Session Orchestration</h3>
+        <p>Coordinating multiple Claude Code instances. Shared task lists, teammate messaging, split-pane display, and team coordination patterns.</p>
+        <div style="margin-top:0.8rem">
+          <span class="topic-tag">Teams</span>
+          <span class="topic-tag">Multi-Session</span>
+          <span class="topic-tag">Coordination</span>
+          <span class="topic-tag">NEW</span>
+        </div>
+      </a>
+    </div>
+
+    <h2>Advanced Patterns (Sections 13&ndash;15)</h2>
+
+    <div class="section-grid">
+      <a href="section-13.html" class="card">
+        <span class="section-number">13</span>
+        <h3>Orchestration Patterns &mdash; Production at Scale</h3>
+        <p>Battle-tested patterns: Fleet Mission, Gastown Convoy, GUPP Propulsion, Sling Dispatch, inter-agent communication, and crash-recoverable state.</p>
+        <div style="margin-top:0.8rem">
+          <span class="topic-tag">Fleet Mission</span>
+          <span class="topic-tag">Gastown</span>
+          <span class="topic-tag">GUPP</span>
+          <span class="topic-tag">NEW</span>
+        </div>
+      </a>
+
+      <a href="section-14.html" class="card">
+        <span class="section-number">14</span>
+        <h3>Memory &amp; State Management</h3>
+        <p>Auto memory (5 types), CLAUDE.md hierarchy, context handoffs, persistent threads, beads-state crash recovery, and the memory lifecycle.</p>
+        <div style="margin-top:0.8rem">
+          <span class="topic-tag">Memory</span>
+          <span class="topic-tag">CLAUDE.md</span>
+          <span class="topic-tag">Handoffs</span>
+          <span class="topic-tag">NEW</span>
+        </div>
+      </a>
+
+      <a href="section-15.html" class="card">
+        <span class="section-number">15</span>
+        <h3>Production Case Studies</h3>
+        <p>Real results: 190+ research projects, NASA mission catalog, Artemis II live coverage, GPU math co-processor, and self-modifying system safety.</p>
+        <div style="margin-top:0.8rem">
+          <span class="topic-tag">190+ Projects</span>
+          <span class="topic-tag">Scale</span>
+          <span class="topic-tag">Metrics</span>
+          <span class="topic-tag">NEW</span>
         </div>
       </a>
     </div>
@@ -148,13 +227,13 @@
     <div class="card-grid">
       <a href="references.html" class="card">
         <h3>All Citations</h3>
-        <p>Complete bibliography with numbered citations referenced throughout all 10 sections. Research sources, frameworks, and standards.</p>
+        <p>Complete bibliography with numbered citations referenced throughout all 15 sections. Research sources, Anthropic documentation, frameworks, and standards.</p>
       </a>
     </div>
   </main>
 
   <footer>
-    <p>Skills &amp; Agents Architecture v2.0 &mdash; February 2026</p>
+    <p>Skills, Agents &amp; Teams v3.0 &mdash; April 2026</p>
     <p><a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
   </footer>
 </body>

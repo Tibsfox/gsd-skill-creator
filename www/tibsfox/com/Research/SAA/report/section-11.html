@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooks &mdash; The Automation Backbone &mdash; SAA Report</title>
+  <link rel="stylesheet" href="../../../brand.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../series.js" defer></script>
+  <style>
+    /* Report section overrides */
+    header { text-align: center; padding: 3rem 2rem 2rem; }
+    header h1 { font-size: 2rem; }
+    .container { max-width: 64rem; margin: 0 auto; padding: 2rem; }
+    .section-number { width: 48px; height: 48px; line-height: 48px; font-size: 1.5rem; }
+    h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+    .concept-card, .info-card, .summary-card, .metric-card, .implementation-card,
+    .pattern-card, .framework-card, .tool-card, .recommendation-card, .risk-card,
+    .phase-card, .trend-card, .strategy-card, .comparison-card, .case-study,
+    .agent-card, .team-card, .skill-card, .use-case-card, .hook-card, .event-card,
+    .decision-card, .lifecycle-card, .warning-card {
+      background: var(--saa-card-bg);
+      border: 1px solid var(--saa-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .concept-grid, .card-grid, .metrics-grid, .phase-grid, .comparison-grid,
+    .trend-grid, .tool-grid, .framework-grid, .strategy-grid, .hook-grid,
+    .event-grid, .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--saa-border);
+      margin-top: 2rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+    .nav-links a { color: var(--saa-highlight); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      max-width: var(--content-width, 64rem);
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .section-nav a {
+      color: var(--saa-text-muted);
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { background: rgba(233,69,96,0.2); color: white; text-decoration: none; }
+    .section-nav a.active { background: var(--saa-highlight); color: white; }
+    code { font-size: 0.85em; }
+    pre { margin: 1rem 0; }
+    .highlight { color: var(--saa-highlight); }
+    .muted { color: var(--saa-text-muted); }
+    .toc { margin: 1.5rem 0; }
+    .toc ul { columns: 2; column-gap: 2rem; }
+    @media (max-width: 768px) { .toc ul { columns: 1; } }
+    .lifecycle-diagram {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--saa-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      white-space: pre;
+      color: var(--saa-text);
+    }
+    .event-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: system-ui, sans-serif;
+    }
+    .event-badge.sync { background: rgba(78,205,196,0.2); color: #4ecdc4; }
+    .event-badge.async { background: rgba(233,69,96,0.2); color: #e94560; }
+    .event-badge.decision { background: rgba(255,183,77,0.2); color: #ffb74d; }
+    .decision-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .decision-table th, .decision-table td {
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid var(--saa-border);
+      font-size: 0.9rem;
+    }
+    .decision-table th { font-weight: 600; color: var(--saa-highlight); }
+    .precedence-chain {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .precedence-item {
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .precedence-item.deny { background: rgba(244,67,54,0.2); color: #f44336; }
+    .precedence-item.defer { background: rgba(255,152,0,0.2); color: #ff9800; }
+    .precedence-item.ask { background: rgba(255,235,59,0.2); color: #fdd835; }
+    .precedence-item.allow { background: rgba(76,175,80,0.2); color: #4caf50; }
+    .precedence-arrow { color: var(--saa-text-muted); font-size: 1.2rem; }
+    .warning-card {
+      border-left: 3px solid #ff9800;
+    }
+    .warning-card h4 { color: #ff9800; margin-top: 0; }
+  </style>
+</head>
+<body class="project-saa">
+  <header>
+    <div class="breadcrumb" style="margin-bottom:1rem">
+      <a href="../index.html">SAA</a><span class="sep">/</span><a href="index.html">Report</a><span class="sep">/</span>Hooks &mdash; The Automation Backbone
+    </div>
+    <div class="section-nav">
+      <a href="section-1.html">1. Fundamentals</a>
+      <a href="section-2.html">2. Skills</a>
+      <a href="section-3.html">3. Multi-Agent</a>
+      <a href="section-4.html">4. Tokens</a>
+      <a href="section-5.html">5. Performance</a>
+      <a href="section-6.html">6. Applications</a>
+      <a href="section-7.html">7. Accuracy</a>
+      <a href="section-8.html">8. Future</a>
+      <a href="section-9.html">9. DevOps</a>
+      <a href="section-10.html">10. GSD</a>
+      <a href="section-11.html" class="active">11. Hooks</a>
+      <a href="section-12.html">12. Teams</a>
+      <a href="section-13.html">13. Orchestration</a>
+      <a href="section-14.html">14. Memory</a>
+      <a href="section-15.html">15. Case Studies</a>
+      <a href="references.html">References</a>
+    </div>
+  </header>
+
+    <nav>
+        <div class="nav-links">
+            <a href="../index.html">&larr; Back to Index</a>
+            <a href="section-10.html">&larr; Previous Section</a>
+            <a href="section-12.html">Next Section &rarr;</a>
+        </div>
+    </nav>
+
+    <header>
+        <span class="section-number">Section 11</span>
+        <h1>Hooks &mdash; The Automation Backbone</h1>
+        <p class="subtitle">Deterministic Control Points in an Agentic System</p>
+        <p class="research-date">Research current as of: April 2026</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-box">
+            <p><strong>Hooks are the deterministic layer beneath the probabilistic intelligence of an agentic system.</strong> While skills provide adaptive behavior and agents bring autonomous reasoning, hooks provide the hard guarantees: every commit will be validated, every session will load context, every destructive operation will be intercepted. In a production system running 190+ research projects with multi-agent orchestration, hooks are not optional infrastructure &mdash; they are the safety rails, the context injectors, the quality gates, and the automation backbone that makes everything else possible. This section is written from hands-on operational experience with hook-based automation at scale.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>In This Section</h3>
+            <ul>
+                <li><a href="#architecture">11.1 The Hook Architecture</a></li>
+                <li><a href="#lifecycle">11.2 Lifecycle Events &mdash; The Complete Map</a></li>
+                <li><a href="#decisions">11.3 Decision Control &mdash; Permission Management Through Hooks</a></li>
+                <li><a href="#types">11.4 Hook Types Deep Dive</a></li>
+                <li><a href="#production">11.5 Production Patterns &mdash; What We&rsquo;ve Built</a></li>
+                <li><a href="#skills-agents">11.6 Hooks in Skills and Agents</a></li>
+                <li><a href="#if-conditions">11.7 If-Conditions &mdash; Precise Targeting</a></li>
+                <li><a href="#best-practices">11.8 Best Practices and Troubleshooting</a></li>
+                <li><a href="#automation-stack">11.9 The Automation Stack &mdash; Hooks + Skills + Agents</a></li>
+            </ul>
+        </div>
+
+        <!-- 11.1 The Hook Architecture -->
+        <section id="architecture" class="content-section">
+            <h2>11.1 The Hook Architecture</h2>
+
+            <p>A hook is a user-defined action that executes at a specific point in the Claude Code lifecycle. At its simplest, a hook is a shell command that runs when a tool is called. At its most sophisticated, a hook is a subagent with full tool access that performs complex verification before allowing an operation to proceed. The four hook types &mdash; <code>command</code>, <code>http</code>, <code>prompt</code>, and <code>agent</code> &mdash; cover the full spectrum from fast deterministic checks to nuanced AI-evaluated decisions.</p>
+
+            <p>The fundamental insight behind hooks is <strong>separation of determinism from intelligence</strong>. An LLM can reason about what to do, but it cannot guarantee it will always check for TypeScript errors before committing. A hook can. By placing deterministic control points at lifecycle boundaries, we get the benefits of autonomous agents with the guarantees of traditional CI/CD pipelines &mdash; except the pipeline runs inside the agentic loop, not after it.</p>
+
+            <h3>The Four Hook Types</h3>
+
+            <div class="hook-grid">
+                <div class="hook-card">
+                    <h4>Command</h4>
+                    <p><strong>Shell scripts and executables.</strong> The workhorse of hook automation. A command hook runs a shell command, reads input from stdin as JSON, and communicates results through exit codes and stdout JSON. Exit code 0 means success, exit code 2 means blocking error. Fast, composable, and language-agnostic.</p>
+                    <p class="muted">Best for: build checks, file guards, state persistence, context injection</p>
+                </div>
+                <div class="hook-card">
+                    <h4>HTTP</h4>
+                    <p><strong>POST to an endpoint.</strong> Sends the hook event payload as a JSON POST request to a URL. Headers can interpolate environment variables for authentication. The response body is treated as hook output. Enables integration with external services, webhooks, and monitoring systems.</p>
+                    <p class="muted">Best for: external notifications, audit logging, CI/CD triggers, team dashboards</p>
+                </div>
+                <div class="hook-card">
+                    <h4>Prompt</h4>
+                    <p><strong>Single-turn LLM evaluation.</strong> Sends a natural-language prompt to a model for a yes/no decision. The prompt has access to the event context and the model returns a structured judgment. Useful when the decision requires understanding intent rather than pattern matching. Runs as a single inference call, not a multi-turn conversation.</p>
+                    <p class="muted">Best for: semantic code review, intent validation, policy compliance checks</p>
+                </div>
+                <div class="hook-card">
+                    <h4>Agent</h4>
+                    <p><strong>Subagent with tool access.</strong> Launches a lightweight agent with access to tools like Read, Grep, and Glob. The agent can inspect files, search code, and make complex decisions that require understanding project context. The most powerful hook type, but also the slowest. Use sparingly and with timeouts.</p>
+                    <p class="muted">Best for: multi-file verification, architectural compliance, complex security checks</p>
+                </div>
+            </div>
+
+            <h3>Configuration Locations</h3>
+
+            <p>Hooks can be defined in four locations, each with different scope and precedence:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Scope</th>
+                        <th>File Path</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>User settings</strong></td>
+                        <td>All projects for this user</td>
+                        <td><code>~/.claude/settings.json</code></td>
+                        <td>Personal safety rails, universal formatting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Project settings</strong></td>
+                        <td>This repository</td>
+                        <td><code>.claude/settings.json</code></td>
+                        <td>Build checks, commit validation, project context</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plugin / Enterprise</strong></td>
+                        <td>Organization-wide</td>
+                        <td>Managed policy file</td>
+                        <td>Security policies, compliance requirements, audit trails</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skill/Agent frontmatter</strong></td>
+                        <td>Component lifetime</td>
+                        <td>YAML frontmatter in <code>.claude/skills/</code> or <code>.claude/agents/</code></td>
+                        <td>Scoped automation that activates and deactivates with the component</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>All four locations use the same JSON schema. When multiple locations define hooks for the same event, <strong>all hooks run</strong> &mdash; they are additive, not overriding. The exception is decision hooks (PreToolUse), where the most restrictive decision wins according to a defined precedence chain (Section 11.3).</p>
+
+            <h3>JSON Configuration Format</h3>
+
+            <p>The settings.json <code>hooks</code> object maps lifecycle event names to arrays of hook groups. Each group contains a <code>hooks</code> array (the actions to run), an optional <code>matcher</code> (which tool or event to match), and an optional <code>if</code> condition (fine-grained filtering).</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Hook Configuration Structure (settings.json)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/commit-check.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/load-context.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/context-monitor.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}</code></div>
+            </div>
+
+            <p>Key fields in the hook definition:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>type</code></td>
+                        <td>string</td>
+                        <td><code>"command"</code>, <code>"http"</code>, <code>"prompt"</code>, or <code>"agent"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>command</code></td>
+                        <td>string</td>
+                        <td>Shell command to execute (command type only)</td>
+                    </tr>
+                    <tr>
+                        <td><code>url</code></td>
+                        <td>string</td>
+                        <td>Endpoint URL (http type only)</td>
+                    </tr>
+                    <tr>
+                        <td><code>timeout</code></td>
+                        <td>number</td>
+                        <td>Seconds before the hook is killed (default varies by type)</td>
+                    </tr>
+                    <tr>
+                        <td><code>matcher</code></td>
+                        <td>string</td>
+                        <td>Pipe-separated tool names or event subtypes to match</td>
+                    </tr>
+                    <tr>
+                        <td><code>if</code></td>
+                        <td>string</td>
+                        <td>Permission-rule-style condition for precise targeting</td>
+                    </tr>
+                    <tr>
+                        <td><code>once</code></td>
+                        <td>boolean</td>
+                        <td>If true, the hook runs only once and then deregisters</td>
+                    </tr>
+                    <tr>
+                        <td><code>async</code></td>
+                        <td>boolean</td>
+                        <td>If true, the hook runs asynchronously (fire-and-forget)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 11.2 Lifecycle Events -->
+        <section id="lifecycle" class="content-section">
+            <h2>11.2 Lifecycle Events &mdash; The Complete Map</h2>
+
+            <p>Every hook is anchored to a lifecycle event. Understanding the complete event map is essential for building effective automation. Events fall into three categories: <strong>session events</strong> (beginning and end of interaction), <strong>agentic loop events</strong> (the core tool-use cycle), and <strong>async events</strong> (fires independently of the main loop).</p>
+
+            <h3>Session-Level Lifecycle</h3>
+
+            <div class="lifecycle-diagram">
+SessionStart
+    |
+    v
+InstructionsLoaded -----> [CLAUDE.md, MEMORY.md, skills loaded]
+    |
+    v
+UserPromptSubmit -------> [user types a message]
+    |
+    v
++-------------------------------------------+
+| AGENTIC LOOP (repeats per tool call)      |
+|                                           |
+|  PreToolUse ----+                         |
+|       |         |                         |
+|  [decision]     |                         |
+|   allow  deny  defer  ask                 |
+|       |         |      |     |            |
+|       v         X      |     v            |
+|  Tool Executes         | PermissionReq    |
+|       |                |     |            |
+|       v                |     v            |
+|  PostToolUse           | [user decides]   |
+|  PostToolUseFailure    |                  |
+|       |                |                  |
+|       v                |                  |
+|  [next tool or done]   |                  |
+|                                           |
+|  SubagentStart / SubagentStop             |
+|  TaskCreated / TaskCompleted              |
++-------------------------------------------+
+    |
+    v
+Stop / StopFailure
+    |
+    v
+TeammateIdle -----------> [agent exhausted options or complete]
+    |
+    v
+PreCompact / PostCompact -> [context window management]
+    |
+    v
+SessionEnd</div>
+
+            <h3>Core Lifecycle Events Reference</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>When It Fires</th>
+                        <th>Matcher Matches On</th>
+                        <th>Key Input Fields</th>
+                        <th>Decisions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SessionStart</strong> <span class="event-badge sync">sync</span></td>
+                        <td>Claude Code session begins</td>
+                        <td>Session type: <code>human</code>, <code>agent</code>, <code>resume</code></td>
+                        <td><code>session_id</code>, <code>cwd</code>, <code>session_type</code></td>
+                        <td>Context injection only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>InstructionsLoaded</strong> <span class="event-badge sync">sync</span></td>
+                        <td>After CLAUDE.md and memory files are read</td>
+                        <td>N/A</td>
+                        <td><code>instructions</code>, <code>memory</code>, <code>skills</code></td>
+                        <td>Context injection only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UserPromptSubmit</strong> <span class="event-badge sync">sync</span></td>
+                        <td>User submits a prompt (before LLM processes it)</td>
+                        <td>N/A</td>
+                        <td><code>prompt_text</code>, <code>session_id</code></td>
+                        <td>Can modify prompt, block</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PreToolUse</strong> <span class="event-badge decision">decision</span></td>
+                        <td>Before any tool executes</td>
+                        <td>Tool name: <code>Bash</code>, <code>Write</code>, <code>Edit</code>, <code>Read</code>, etc.</td>
+                        <td><code>tool_name</code>, <code>tool_input</code>, <code>session_id</code></td>
+                        <td><code>allow</code>, <code>deny</code>, <code>ask</code>, <code>defer</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>PermissionRequest</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When a tool needs user approval (from <code>ask</code>)</td>
+                        <td>Tool name</td>
+                        <td><code>tool_name</code>, <code>tool_input</code>, <code>permission_type</code></td>
+                        <td>Modify dialog, provide context</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PermissionDenied</strong> <span class="event-badge async">async</span></td>
+                        <td>When user denies a permission request</td>
+                        <td>Tool name</td>
+                        <td><code>tool_name</code>, <code>tool_input</code></td>
+                        <td>Logging only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PostToolUse</strong> <span class="event-badge sync">sync</span></td>
+                        <td>After a tool executes successfully</td>
+                        <td>Tool name</td>
+                        <td><code>tool_name</code>, <code>tool_input</code>, <code>tool_output</code></td>
+                        <td>Inject context, block (error)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PostToolUseFailure</strong> <span class="event-badge sync">sync</span></td>
+                        <td>After a tool execution fails</td>
+                        <td>Tool name</td>
+                        <td><code>tool_name</code>, <code>tool_input</code>, <code>error</code></td>
+                        <td>Error handling, context</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SubagentStart</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When a subagent (Task/Agent tool) launches</td>
+                        <td>Agent/Task name</td>
+                        <td><code>agent_id</code>, <code>instructions</code>, <code>tools</code></td>
+                        <td>Context injection</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SubagentStop</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When a subagent terminates</td>
+                        <td>Agent/Task name</td>
+                        <td><code>agent_id</code>, <code>result</code>, <code>exit_reason</code></td>
+                        <td>Cleanup, result capture</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TaskCreated</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When a new task is created</td>
+                        <td>Task name</td>
+                        <td><code>task_id</code>, <code>task_name</code>, <code>instructions</code></td>
+                        <td>Validate, inject context</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TaskCompleted</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When a task completes</td>
+                        <td>Task name</td>
+                        <td><code>task_id</code>, <code>result</code>, <code>status</code></td>
+                        <td>Result processing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stop</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When the agent decides to stop (normal termination)</td>
+                        <td>N/A</td>
+                        <td><code>reason</code>, <code>session_id</code></td>
+                        <td>Context injection, cleanup</td>
+                    </tr>
+                    <tr>
+                        <td><strong>StopFailure</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When a stop attempt fails</td>
+                        <td>N/A</td>
+                        <td><code>error</code>, <code>session_id</code></td>
+                        <td>Error handling</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TeammateIdle</strong> <span class="event-badge sync">sync</span></td>
+                        <td>When an agent teammate becomes idle</td>
+                        <td>Teammate name</td>
+                        <td><code>teammate_id</code>, <code>idle_reason</code></td>
+                        <td>Reassign work, quality gates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PreCompact</strong> <span class="event-badge sync">sync</span></td>
+                        <td>Before context window compaction</td>
+                        <td>N/A</td>
+                        <td><code>context_tokens</code>, <code>threshold</code></td>
+                        <td>Save critical state</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PostCompact</strong> <span class="event-badge sync">sync</span></td>
+                        <td>After context window compaction</td>
+                        <td>N/A</td>
+                        <td><code>tokens_before</code>, <code>tokens_after</code></td>
+                        <td>Re-inject critical context</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SessionEnd</strong> <span class="event-badge sync">sync</span></td>
+                        <td>Session terminates</td>
+                        <td>Session type</td>
+                        <td><code>session_id</code>, <code>duration</code></td>
+                        <td>State persistence, cleanup</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Understanding the Agentic Loop</h3>
+
+            <p>The agentic loop &mdash; the cycle of PreToolUse, tool execution, and PostToolUse &mdash; is the heartbeat of an agentic session. A single user prompt can trigger dozens or hundreds of iterations through this loop as the agent reasons, writes code, runs tests, fixes errors, and iterates. Every iteration passes through the hook system, which means hooks see the full behavioral trace of the agent.</p>
+
+            <p>This has profound implications for automation design. A PreToolUse hook on <code>Bash</code> will fire for every shell command the agent runs &mdash; not just the commands you are thinking about. If your hook is slow, it compounds across hundreds of tool calls. If your hook has false positives, it blocks the agent repeatedly. The key insight is that <strong>hooks must be designed for the agentic loop's cadence</strong>, not for the human interaction cadence you might expect.</p>
+
+            <p>In practice, a single "execute phase 73" command in our system generates approximately 40-80 tool calls across 4 parallel agents. Each tool call passes through 3-4 hooks (prompt guard, build check, context monitor). That is 120-320 hook invocations per phase execution. At 100ms per hook, you add 12-32 seconds of overhead. At 500ms per hook, you add 60-160 seconds. The difference between a fast hook and a slow hook is the difference between a smooth development flow and an unusable system.</p>
+
+            <h3>Event Ordering and Guarantees</h3>
+
+            <p>Within a single hook group (one entry in the array), hooks execute sequentially. Between hook groups on the same event, execution is also sequential in array order. This gives you ordering guarantees when you need them.</p>
+
+            <div class="info-card">
+                <h4>Ordering Example</h4>
+                <p>Our SessionStart has three hook groups in a specific order: update check first (so the user sees update notices immediately), state restore second (so the session has context), snapshot injection third (so the narrative builds on the restored state). Changing the order would break the context pipeline &mdash; you cannot inject a snapshot that references state that has not been restored yet.</p>
+            </div>
+
+            <p>For PostToolUse hooks with <code>async: true</code>, no ordering guarantee exists. Async hooks fire in the background and may complete in any order. Do not use async hooks for anything that has ordering dependencies.</p>
+
+            <h3>Async Events</h3>
+
+            <p>Async events fire independently of the main agentic loop. They respond to environmental changes rather than tool-use cycles.</p>
+
+            <div class="event-grid">
+                <div class="event-card">
+                    <h4>WorktreeCreate / WorktreeRemove</h4>
+                    <p>Fires when a git worktree is created or removed. Worktrees are used for isolated agent execution &mdash; each subagent can operate in its own worktree without interfering with the main working directory. Hooks here can initialize worktree-specific configuration or clean up after completion.</p>
+                </div>
+                <div class="event-card">
+                    <h4>Notification</h4>
+                    <p>Fires when Claude Code sends a notification. The matcher matches on notification type (e.g., <code>error</code>, <code>warning</code>, <code>info</code>). Useful for routing notifications to external systems like Slack, Discord, or pagers.</p>
+                </div>
+                <div class="event-card">
+                    <h4>ConfigChange</h4>
+                    <p>Fires when settings.json or CLAUDE.md changes during a session. Enables hot-reload patterns where configuration changes take effect without restarting the session.</p>
+                </div>
+                <div class="event-card">
+                    <h4>CwdChanged</h4>
+                    <p>Fires when the working directory changes. Critical for multi-project setups where different directories have different hook configurations, skills, or agent definitions.</p>
+                </div>
+                <div class="event-card">
+                    <h4>FileChanged</h4>
+                    <p>Fires when a watched file changes on disk (external to Claude Code). The matcher matches on file path patterns. Enables reactive automation: when a test file changes, re-run tests; when a config file changes, re-validate.</p>
+                </div>
+                <div class="event-card">
+                    <h4>Elicitation / ElicitationResult</h4>
+                    <p>Fires when Claude Code asks the user a question (Elicitation) and when the user responds (ElicitationResult). Hooks can intercept questions to provide automated answers in headless/CI mode, or log the Q&amp;A for audit trails.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11.3 Decision Control -->
+        <section id="decisions" class="content-section">
+            <h2>11.3 Decision Control &mdash; Permission Management Through Hooks</h2>
+
+            <p>The most powerful application of hooks is <strong>decision control</strong> through PreToolUse hooks. When a tool is about to execute, PreToolUse hooks can intercept the call and return one of four decisions. This is how you build deterministic safety rails around an autonomous agent without crippling its ability to work.</p>
+
+            <h3>The Four Decisions</h3>
+
+            <div class="hook-grid">
+                <div class="decision-card">
+                    <h4 style="color: #4caf50">allow</h4>
+                    <p>The tool call proceeds without user confirmation. Use this to pre-approve known-safe operations. For example, allowing <code>Read</code> on any file, or allowing <code>Bash(npm test)</code> without prompting.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span>Allow Decision Output</span>
+                            <button onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <div class="code-content"><code>// Hook stdout (JSON):
+{ "decision": "allow" }
+// Exit code: 0</code></div>
+                    </div>
+                </div>
+                <div class="decision-card">
+                    <h4 style="color: #f44336">deny</h4>
+                    <p>The tool call is blocked entirely. The agent receives an error message explaining why. Use this for hard safety boundaries: blocking <code>git push --force</code>, preventing writes to protected files, rejecting destructive commands.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span>Deny Decision Output</span>
+                            <button onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <div class="code-content"><code>// Hook stdout (JSON):
+{ "decision": "block",
+  "reason": "Protected path: .claude/settings.json" }
+// Exit code: 2</code></div>
+                    </div>
+                </div>
+                <div class="decision-card">
+                    <h4 style="color: #fdd835">ask</h4>
+                    <p>The operation requires explicit user confirmation. The hook can provide additional context that appears in the permission dialog. This is the default behavior for most tool calls when no hook overrides it.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span>Ask Decision Output</span>
+                            <button onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <div class="code-content"><code>// Hook stdout (JSON):
+{ "decision": "ask",
+  "message": "This will modify 12 files" }
+// Exit code: 0</code></div>
+                    </div>
+                </div>
+                <div class="decision-card">
+                    <h4 style="color: #ff9800">defer</h4>
+                    <p>The tool call is deferred &mdash; it does not execute now, but it is not denied. The agent can resume it later. This is critical for <strong>headless/CI mode</strong> where no human is available to approve. The tool emits a <code>tool_deferred</code> event and can be resumed programmatically.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span>Defer Decision Output</span>
+                            <button onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <div class="code-content"><code>// Hook stdout (JSON):
+{ "decision": "defer",
+  "reason": "Awaiting CI approval" }
+// Exit code: 0</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Decision Precedence</h3>
+
+            <p>When multiple hooks return different decisions for the same tool call, the <strong>most restrictive decision wins</strong>:</p>
+
+            <div class="precedence-chain">
+                <span class="precedence-item deny">deny</span>
+                <span class="precedence-arrow">&gt;</span>
+                <span class="precedence-item defer">defer</span>
+                <span class="precedence-arrow">&gt;</span>
+                <span class="precedence-item ask">ask</span>
+                <span class="precedence-arrow">&gt;</span>
+                <span class="precedence-item allow">allow</span>
+            </div>
+
+            <p>This means a user-level hook that allows all <code>Read</code> operations can be overridden by a project-level hook that denies reads of <code>.env</code> files. The deny always wins. This is a security-first design: it is impossible for a lower-privilege hook to override a higher-privilege restriction.</p>
+
+            <div class="info-card">
+                <h4>Why Precedence Matters in Multi-Agent Systems</h4>
+                <p>In a multi-agent orchestration system, different agents have different trust levels. A human-supervised session might allow <code>git push</code>, but a subagent running autonomously should not. By layering hooks &mdash; organization-level deny for destructive ops, project-level allow for known-safe ops, skill-level ask for edge cases &mdash; you build a permission model that scales with team complexity without requiring every agent to understand the full policy.</p>
+            </div>
+
+            <h3>PermissionRequest Hooks</h3>
+
+            <p>When a tool call results in an <code>ask</code> decision (either from a hook or from the default permission system), a PermissionRequest event fires. Hooks on this event can modify the permission dialog &mdash; adding context, warnings, or recommendations that help the user make an informed decision.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>PermissionRequest Context Injection</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>// A PermissionRequest hook that adds file change statistics
+const input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
+const filePath = input.tool_input?.file_path;
+
+if (filePath) {
+  const { execSync } = require('child_process');
+  const log = execSync(`git log --oneline -5 -- "${filePath}" 2>/dev/null`,
+                        { encoding: 'utf8' });
+  const output = {
+    hookSpecificOutput: {
+      hookEventName: 'PermissionRequest',
+      additionalContext: `Recent changes to ${filePath}:\n${log || 'No git history'}`
+    }
+  };
+  process.stdout.write(JSON.stringify(output));
+}</code></div>
+            </div>
+
+            <h3>PostToolUse Blocking and Context Injection</h3>
+
+            <p>PostToolUse hooks execute after a tool completes. While they cannot undo the tool execution, they serve two critical purposes:</p>
+
+            <ul>
+                <li><strong>Context injection:</strong> Add information to the agent's context based on what just happened. For example, after a <code>Write</code> to a test file, inject a reminder to run tests. After a <code>Bash(git commit)</code>, inject the commit hash for tracking.</li>
+                <li><strong>Blocking error:</strong> If a PostToolUse hook exits with code 2, it signals a blocking error. The agent receives the error and must address it before continuing. This is how you implement "lint after write" patterns &mdash; the write succeeds, the linter runs, and if it fails, the agent must fix the issues.</li>
+            </ul>
+
+            <h3>updatedInput &mdash; Modifying Tool Parameters</h3>
+
+            <p>PreToolUse hooks can modify the tool's input parameters before execution by returning an <code>updatedInput</code> field. This is a surgical capability: the hook can rewrite the command, change the file path, or adjust parameters without the agent being aware of the modification.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>updatedInput: Rewriting a Command</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>// PreToolUse hook that adds --dry-run to destructive git commands
+const input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
+const cmd = input.tool_input?.command || '';
+
+if (/^git\s+(clean|reset|checkout)\s/.test(cmd) && !cmd.includes('--dry-run')) {
+  const output = {
+    decision: "allow",
+    updatedInput: {
+      command: cmd + ' --dry-run'
+    },
+    hookSpecificOutput: {
+      additionalContext: "Safety: added --dry-run to destructive git command"
+    }
+  };
+  process.stdout.write(JSON.stringify(output));
+  process.exit(0);
+}
+process.exit(0);</code></div>
+            </div>
+
+            <div class="warning-card">
+                <h4>Use updatedInput with Caution</h4>
+                <p>Modifying tool inputs is powerful but can create confusing behavior if the agent does not understand why its command was changed. Always include <code>additionalContext</code> when using <code>updatedInput</code> so the agent knows what happened and can adjust its strategy. Silent input modification leads to debugging nightmares.</p>
+            </div>
+        </section>
+
+        <!-- 11.4 Hook Types Deep Dive -->
+        <section id="types" class="content-section">
+            <h2>11.4 Hook Types Deep Dive</h2>
+
+            <h3>Command Hooks</h3>
+
+            <p>Command hooks are the foundation of hook automation. A command hook runs a shell command, receives the event payload on stdin as JSON, and communicates results through exit codes and stdout.</p>
+
+            <h4>Exit Code Protocol</h4>
+
+            <table class="decision-table">
+                <thead>
+                    <tr>
+                        <th>Exit Code</th>
+                        <th>Meaning</th>
+                        <th>Agent Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>0</code></td>
+                        <td>Success</td>
+                        <td>Stdout parsed as JSON; <code>decision</code>, <code>hookSpecificOutput</code>, and <code>updatedInput</code> fields are processed. If no JSON on stdout, treated as silent success.</td>
+                    </tr>
+                    <tr>
+                        <td><code>2</code></td>
+                        <td>Blocking error</td>
+                        <td>Tool execution is blocked. Stdout is sent to the agent as an error message. For PreToolUse, this is equivalent to a <code>deny</code> decision. For PostToolUse, signals that the agent must address the problem.</td>
+                    </tr>
+                    <tr>
+                        <td>Any other</td>
+                        <td>Hook failure</td>
+                        <td>The hook itself failed. The tool call proceeds as if the hook did not exist. This is a safety net: a broken hook does not break the agent.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>JSON Output Format</h4>
+
+            <p>Command hooks communicate through structured JSON on stdout. The format depends on the event type:</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>PreToolUse Hook JSON Output</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "decision": "allow" | "deny" | "ask" | "defer",
+  "reason": "Human-readable explanation",
+  "updatedInput": {
+    "command": "modified command string"
+  },
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "additionalContext": "Context injected into agent's next turn"
+  }
+}</code></div>
+            </div>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>SessionStart Hook JSON Output</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>// For SessionStart, stdout content becomes context injection.
+// It can be plain text or structured JSON:
+{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "Project: gsd-skill-creator\nBranch: dev\nLast commit: feat(sweep): v1.7.3"
+  }
+}</code></div>
+            </div>
+
+            <h4>Async Command Hooks</h4>
+
+            <p>When a command hook has <code>"async": true</code>, it runs in the background. The agent does not wait for it to complete, and its output is not processed. Use async hooks for logging, metrics emission, and notifications where latency is unacceptable.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Async Logging Hook</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/emit-metrics.js",
+            "async": true,
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}</code></div>
+            </div>
+
+            <h3>HTTP Hooks</h3>
+
+            <p>HTTP hooks send the event payload as a JSON POST request to a URL. They enable integration with external systems without requiring local scripts.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>HTTP Hook Configuration</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://hooks.example.com/claude/session-start",
+            "headers": {
+              "Authorization": "Bearer $CLAUDE_HOOK_TOKEN",
+              "X-Project": "$PROJECT_NAME"
+            },
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}</code></div>
+            </div>
+
+            <p>Headers support environment variable interpolation with the <code>$VAR_NAME</code> syntax. The response body is processed the same way as command hook stdout &mdash; parsed as JSON for decisions and context injection. A non-2xx response is treated as a hook failure (tool call proceeds).</p>
+
+            <h4>HTTP Hook Use Cases</h4>
+            <ul>
+                <li><strong>Audit logging:</strong> Send every tool invocation to a compliance endpoint</li>
+                <li><strong>Team dashboards:</strong> POST session events to a real-time monitoring service</li>
+                <li><strong>CI/CD integration:</strong> Trigger a build pipeline when a commit hook fires</li>
+                <li><strong>Slack/Discord notifications:</strong> Alert the team when a subagent completes a milestone</li>
+                <li><strong>External policy engine:</strong> Delegate permission decisions to an OPA/Cedar policy server</li>
+            </ul>
+
+            <h3>Prompt Hooks</h3>
+
+            <p>Prompt hooks delegate decision-making to a single-turn LLM call. The hook definition includes a prompt template that receives the event context, and the model returns a structured yes/no decision. This bridges the gap between rigid pattern matching (command hooks) and full autonomous reasoning (agent hooks).</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Prompt Hook: Semantic Commit Message Validation</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Review this git commit command. Does the commit message follow conventional commits format (type(scope): subject)? Is the subject in imperative mood, lowercase, under 72 chars, with no trailing period? If it follows the convention, respond with {\"decision\": \"allow\"}. If not, respond with {\"decision\": \"deny\", \"reason\": \"explanation of what's wrong\"}.",
+            "model": "claude-haiku",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}</code></div>
+            </div>
+
+            <p>Key characteristics of prompt hooks:</p>
+            <ul>
+                <li>Single-turn only &mdash; no multi-step reasoning or tool use</li>
+                <li>Model selection via the <code>model</code> field (use fast/cheap models for hooks)</li>
+                <li>The prompt receives the full event context as input</li>
+                <li>Response is parsed as JSON for decision fields</li>
+                <li>Faster than agent hooks but slower than command hooks</li>
+            </ul>
+
+            <h3>Agent Hooks</h3>
+
+            <p>Agent hooks are the most powerful hook type. They launch a lightweight subagent with access to a subset of tools (typically Read, Grep, Glob) that can inspect files, search code, and reason about complex conditions before making a decision.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Agent Hook: Architectural Compliance Check</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "if": "Write(src/**) | Edit(src/**)",
+        "hooks": [
+          {
+            "type": "agent",
+            "instructions": "You are an architectural compliance checker. Before this file is written, verify: 1) Files in src/ do not import from desktop/@tauri-apps/api. 2) Files in desktop/ do not import Node.js modules. 3) No circular dependencies are introduced. Check the import statements in the proposed file content. If compliant, return {\"decision\": \"allow\"}. If not, return {\"decision\": \"deny\", \"reason\": \"specific violation\"}.",
+            "tools": ["Read", "Grep", "Glob"],
+            "model": "claude-sonnet",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}</code></div>
+            </div>
+
+            <div class="warning-card">
+                <h4>Agent Hooks Are Expensive</h4>
+                <p>Every agent hook invocation consumes tokens and adds latency. A PreToolUse agent hook that runs on every Write operation will dramatically slow down the development loop. Use agent hooks only for high-stakes decisions where the cost of a mistake exceeds the cost of the verification. For most cases, command hooks with pattern matching are sufficient and orders of magnitude faster.</p>
+            </div>
+        </section>
+
+        <!-- 11.5 Production Patterns -->
+        <section id="production" class="content-section">
+            <h2>11.5 Production Patterns &mdash; What We&rsquo;ve Built</h2>
+
+            <p>The following patterns are not theoretical designs. They are production hooks running in a codebase with 190+ research projects, 21,298 tests, and multi-agent orchestration across parallel workstreams. Each pattern emerged from real operational needs and has been refined through months of daily use.</p>
+
+            <h3>Pattern 1: Build Validation Gate</h3>
+
+            <p>The most impactful hook in our system is a PreToolUse hook on <code>Bash</code> that intercepts <code>git commit</code> and <code>git push</code> commands to run TypeScript compilation checks. If the build fails, the commit is blocked.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>build-check.sh &mdash; PreToolUse on Bash(git commit|push)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>#!/bin/bash
+# Build gate: block git commit/push when TypeScript build fails
+INPUT=$(cat)
+CMD=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null)
+
+RUN_TSC=false
+if [[ "$CMD" =~ ^git[[:space:]]+push ]]; then
+  RUN_TSC=true
+elif [[ "$CMD" =~ ^git[[:space:]]+commit ]]; then
+  # Only check when TypeScript files are staged
+  STAGED_TS=$(git diff --cached --name-only --diff-filter=ACMR \
+              -- '*.ts' '*.tsx' 2>/dev/null | head -1)
+  [ -n "$STAGED_TS" ] && RUN_TSC=true
+fi
+
+if [ "$RUN_TSC" = true ]; then
+  TSC_OUTPUT=$(npx tsc --noEmit 2>&1)
+  if [ $? -ne 0 ]; then
+    ERRORS=$(echo "$TSC_OUTPUT" | grep "error TS" | head -10)
+    ERROR_COUNT=$(echo "$TSC_OUTPUT" | grep -c "error TS")
+    ACTION=$(echo "$CMD" | awk '{print $2}')
+    printf '{"decision":"block","reason":"TypeScript build failed (%s errors). Fix before %s.\n%s"}\n' \
+      "$ERROR_COUNT" "$ACTION" "$ERRORS"
+    exit 2
+  fi
+fi
+exit 0</code></div>
+            </div>
+
+            <p>Why this works: The hook is surgically targeted. It only runs <code>tsc</code> when TypeScript files are actually staged, avoiding unnecessary build checks on documentation-only commits. The error output includes specific TypeScript errors so the agent can fix them without re-running the full build.</p>
+
+            <h3>Pattern 2: Session State Injection</h3>
+
+            <p>Three SessionStart hooks fire in sequence to establish session context. Each is independent and silent-fails, so a broken state file does not prevent the session from starting.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>SessionStart Hook Chain</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "SessionStart": [
+    {
+      "hooks": [{
+        "type": "command",
+        "command": "node .claude/hooks/gsd-check-update.js"
+      }]
+    },
+    {
+      "hooks": [{
+        "type": "command",
+        "command": "node .claude/hooks/gsd-restore-work-state.js"
+      }]
+    },
+    {
+      "hooks": [{
+        "type": "command",
+        "command": "node .claude/hooks/gsd-inject-snapshot.js"
+      }]
+    }
+  ]
+}</code></div>
+            </div>
+
+            <p>The three hooks serve complementary purposes:</p>
+            <ul>
+                <li><strong>check-update</strong> &mdash; Checks if the GSD framework has a newer version and injects an update notice</li>
+                <li><strong>restore-work-state</strong> &mdash; Loads the last saved work state (current phase, branch, pending items) from disk</li>
+                <li><strong>inject-snapshot</strong> &mdash; Calls the skill-creator orchestrator to inject the latest session snapshot for narrative continuity</li>
+            </ul>
+
+            <p>The result: every new session starts with full context. The agent knows what branch it is on, what work was in progress, and what the current project state looks like &mdash; without the user having to explain anything.</p>
+
+            <h3>Pattern 3: Prompt Injection Defense</h3>
+
+            <p>In a self-modifying system where agents write to planning files that become part of future agent context, prompt injection is a real threat. Our PreToolUse hook scans all writes to <code>.planning/</code> for injection patterns.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Prompt Injection Guard &mdash; Defense in Depth</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>// Injection patterns (subset - full list has 12+ patterns)
+const INJECTION_PATTERNS = [
+  /ignore\s+(all\s+)?previous\s+instructions/i,
+  /override\s+(system|previous)\s+(prompt|instructions)/i,
+  /you\s+are\s+now\s+(?:a|an|the)\s+/i,
+  /pretend\s+(?:you(?:'re| are)\s+|to\s+be\s+)/i,
+  /&lt;\/?(?:system|assistant|human)&gt;/i,
+  /\[SYSTEM\]/i,
+];
+
+// Hard block on config-overwrite attacks
+const protectedPaths = ['settings.json', '.claude/settings', '.claude/hooks/'];
+if (protectedPaths.some(p => filePath.includes(p))) {
+  // Exit 2 = block the operation
+  process.exit(2);
+}
+
+// Advisory warning for .planning/ injection (does not block)
+// Blocking would prevent legitimate workflow operations
+if (findings.length > 0) {
+  output.hookSpecificOutput.additionalContext =
+    `PROMPT INJECTION WARNING: ${findings.length} pattern(s) detected`;
+}</code></div>
+            </div>
+
+            <p>The design is deliberately two-tiered: writes to harness configuration files (settings.json, hook scripts) are <strong>hard-blocked</strong> because those files define the safety gates themselves. Writes to planning files are <strong>advisory-warned</strong> because blocking would create false-positive deadlocks during legitimate documentation work. This is OWASP-style defense-in-depth for agentic systems.</p>
+
+            <h3>Pattern 4: Context Monitor</h3>
+
+            <p>A PostToolUse hook that fires after every significant tool call (Bash, Edit, Write, MultiEdit, Agent, Task) to track project state changes and maintain awareness of what the agent has done during the session.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>PostToolUse Context Monitor</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "PostToolUse": [
+    {
+      "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node .claude/hooks/gsd-context-monitor.js",
+          "timeout": 10
+        }
+      ]
+    }
+  ]
+}</code></div>
+            </div>
+
+            <p>The context monitor tracks file modifications, branch changes, test runs, and commit history. This data feeds into the session snapshot that the SessionEnd hook persists to disk, creating the continuity chain that the next session's SessionStart hook restores.</p>
+
+            <h3>Pattern 5: Session State Persistence</h3>
+
+            <p>The SessionEnd hook pair saves the current work state and generates a session snapshot. This is the write side of the SessionStart/SessionEnd symmetry.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>SessionEnd Persistence Chain</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "SessionEnd": [
+    {
+      "hooks": [{
+        "type": "command",
+        "command": "node .claude/hooks/gsd-save-work-state.js"
+      }]
+    },
+    {
+      "hooks": [{
+        "type": "command",
+        "command": "node .claude/hooks/gsd-snapshot-session.js"
+      }]
+    }
+  ]
+}</code></div>
+            </div>
+
+            <h3>Pattern 6: Environment-Aware Configuration</h3>
+
+            <p>The <code>CLAUDE_ENV_FILE</code> environment variable points to a file that is sourced before each session. This enables dynamic environment configuration without modifying settings.json.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>.claude-env &mdash; Dynamic Environment Configuration</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code># .claude-env (sourced on session start)
+export PROJECT_NAME="gsd-skill-creator"
+export GSD_PROFILE="quality"
+export CLAUDE_HOOK_TOKEN="$(cat ~/.secrets/hook-token)"
+export RESEARCH_DB_URL="postgresql://maple@localhost/artemis"
+
+# Feature flags
+export ENABLE_SWEEP_DAEMON="true"
+export ENABLE_AGENT_WORKTREES="true"
+
+# Branch-aware configuration
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+if [ "$BRANCH" = "main" ]; then
+  export GSD_STRICT_MODE="true"
+  export ALLOW_FORCE_PUSH="false"
+fi</code></div>
+            </div>
+
+            <h3>Pattern 7: TeammateIdle Quality Gate</h3>
+
+            <p>In multi-agent orchestration, a TeammateIdle hook can prevent agents from stopping prematurely. When an agent teammate becomes idle, the hook checks whether its assigned work is actually complete.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>TeammateIdle Quality Gate</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>#!/usr/bin/env node
+// TeammateIdle hook: verify work completion before allowing idle
+const input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
+const teammateId = input.teammate_id;
+
+// Check if the teammate's assigned deliverables exist
+const { execSync } = require('child_process');
+const assignedFiles = JSON.parse(
+  execSync(`cat .planning/assignments/${teammateId}.json`, { encoding: 'utf8' })
+);
+
+const missing = assignedFiles.deliverables.filter(f => {
+  try { require('fs').accessSync(f); return false; }
+  catch { return true; }
+});
+
+if (missing.length > 0) {
+  const output = {
+    hookSpecificOutput: {
+      additionalContext: `Teammate ${teammateId} has ${missing.length} undelivered files: ` +
+        missing.join(', ') + '. Continue working.'
+    }
+  };
+  process.stdout.write(JSON.stringify(output));
+}</code></div>
+            </div>
+
+            <h3>Pattern 8: Task Naming Validation</h3>
+
+            <p>TaskCreated hooks enforce naming conventions for subagent tasks, ensuring consistent naming across the convoy.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>TaskCreated Naming Convention Enforcement</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>#!/usr/bin/env node
+// TaskCreated hook: enforce naming convention
+const input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
+const taskName = input.task_name || '';
+
+// Convention: phase-N.wave-M.agent-NAME
+const pattern = /^phase-\d+\.wave-\d+\.agent-[a-z-]+$/;
+if (!pattern.test(taskName)) {
+  const output = {
+    hookSpecificOutput: {
+      additionalContext: `Task naming violation: "${taskName}" does not match ` +
+        'convention "phase-N.wave-M.agent-NAME". Rename before proceeding.'
+    }
+  };
+  process.stdout.write(JSON.stringify(output));
+  process.exit(2);
+}
+process.exit(0);</code></div>
+            </div>
+
+            <h3>Pattern 9: Auto-Formatting on Write</h3>
+
+            <p>PostToolUse hooks on Write and Edit operations can trigger formatters, linters, or other code quality tools automatically. The key design decision is whether to make the formatter <strong>advisory</strong> (inject a message suggesting the agent fix formatting) or <strong>blocking</strong> (exit 2, forcing the agent to address it immediately).</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Auto-Format on Write (Advisory)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>#!/bin/bash
+# PostToolUse hook: run prettier on written files
+INPUT=$(cat)
+TOOL=$(echo "$INPUT" | jq -r '.tool_name // empty')
+FILE=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+
+# Only format TypeScript/JavaScript files
+if [[ "$TOOL" =~ ^(Write|Edit)$ ]] && [[ "$FILE" =~ \.(ts|tsx|js|jsx)$ ]]; then
+  RESULT=$(npx prettier --check "$FILE" 2>&1)
+  if [ $? -ne 0 ]; then
+    npx prettier --write "$FILE" 2>/dev/null
+    printf '{"hookSpecificOutput":{"additionalContext":"Auto-formatted %s with prettier"}}\n' \
+      "$(basename "$FILE")"
+  fi
+fi
+exit 0</code></div>
+            </div>
+
+            <p>Note the exit code is always 0 (success). Auto-formatting should not block the agent. If the formatter fails (syntax error in the file), the agent will discover it through other means (test failures, build errors). Making the formatter blocking would create a frustrating loop where the agent writes code, the formatter rejects it, the agent rewrites, and the formatter rejects again.</p>
+
+            <h3>Operational Lessons from Production Hooks</h3>
+
+            <p>After running hooks in production across hundreds of sessions, several non-obvious lessons emerged:</p>
+
+            <div class="hook-grid">
+                <div class="pattern-card">
+                    <h4>Lesson 1: Silent Success Is Critical</h4>
+                    <p>The most common hook output is nothing. A hook that runs, finds no problems, and exits 0 with no stdout is the ideal case. When hooks are noisy &mdash; injecting context on every invocation even when everything is fine &mdash; they pollute the agent's context window and degrade reasoning quality. Only inject context when there is something meaningful to say.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Lesson 2: Stdin Timeouts Save Sessions</h4>
+                    <p>A hook that reads from stdin without a timeout can hang the entire session if the harness fails to deliver input. Every production hook should have a <code>setTimeout(() => process.exit(0), 3000)</code> guard. We learned this after a hook hung for 120 seconds, causing the user to force-kill the terminal and lose unsaved work.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Lesson 3: Hook Errors Must Not Propagate</h4>
+                    <p>A hook is infrastructure, not application code. If a hook throws an unhandled exception, the tool call must still proceed. The harness treats non-0/non-2 exit codes as hook failures and continues, but the developer experience is degraded. Wrap every hook in try/catch with <code>process.exit(0)</code> in the catch block. A broken hook should be invisible, not disruptive.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Lesson 4: Version Your Hooks</h4>
+                    <p>When the GSD framework updates, hook APIs may change. We add a <code>// gsd-hook-version: 1.30.0</code> comment to every hook file. The update-check hook compares this version against the installed framework version and warns when hooks need updating. Without versioning, stale hooks silently fail as the harness evolves underneath them.</p>
+                </div>
+            </div>
+
+            <p>The meta-lesson is that hooks are a reliability engineering problem, not a feature engineering problem. The hook system's value comes from its predictability and invisibility &mdash; when hooks work, nobody notices them. When they fail, everything breaks. Design hooks with the same rigor you would apply to a database migration or a deployment pipeline.</p>
+
+        </section>
+
+        <!-- 11.6 Hooks in Skills and Agents -->
+        <section id="skills-agents" class="content-section">
+            <h2>11.6 Hooks in Skills and Agents</h2>
+
+            <p>Skills and agents can define their own hooks in YAML frontmatter. These hooks are <strong>scoped to the component's lifetime</strong> &mdash; they activate when the skill or agent loads and automatically deregister when it completes or unloads. This is the mechanism that makes hooks composable: a security-check skill can install its own PreToolUse hooks, and those hooks disappear when the skill is no longer active.</p>
+
+            <h3>Skill Frontmatter Hooks</h3>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Skill with Scoped Hooks (YAML Frontmatter)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>---
+name: deploy-safety
+description: Safety checks for deployment operations
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      if: "Bash(kubectl apply*) | Bash(helm install*) | Bash(terraform apply*)"
+      hooks:
+        - type: command
+          command: "bash .claude/skills/deploy-safety/pre-deploy-check.sh"
+          timeout: 30
+  PostToolUse:
+    - matcher: "Bash"
+      if: "Bash(kubectl apply*) | Bash(helm install*)"
+      hooks:
+        - type: command
+          command: "bash .claude/skills/deploy-safety/verify-rollout.sh"
+          timeout: 60
+---
+
+# Deploy Safety Skill
+
+When this skill is active, all deployment commands are validated before
+execution and verified after completion.
+
+## Checks performed:
+- Namespace validation (no accidental production deployments)
+- Resource limit verification
+- Rollout status monitoring after apply</code></div>
+            </div>
+
+            <p>When this skill loads (either explicitly via <code>/deploy-safety</code> or automatically via context matching), the PreToolUse and PostToolUse hooks are registered in the hook system. When the skill unloads, they are removed. No cleanup code required.</p>
+
+            <h3>Auto-Cleanup Semantics</h3>
+
+            <p>The lifecycle of a frontmatter hook follows the lifecycle of its parent component:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Hook Activation</th>
+                        <th>Hook Deactivation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Skill</strong></td>
+                        <td>When skill matches context and loads</td>
+                        <td>When skill unloads (context no longer matches) or session ends</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent (subagent)</strong></td>
+                        <td>When subagent starts (SubagentStart)</td>
+                        <td>When subagent stops (SubagentStop)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Task</strong></td>
+                        <td>When task starts (TaskCreated)</td>
+                        <td>When task completes (TaskCompleted)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Stop Hook to SubagentStop Conversion</h3>
+
+            <p>When a skill or agent defines a <code>Stop</code> hook in its frontmatter, and the component is running as a subagent, the Stop hook is automatically converted to a <code>SubagentStop</code> hook. This ensures that cleanup logic defined in the component runs when the subagent terminates, not when the parent session ends.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Stop Hook in Agent Frontmatter</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>---
+name: research-agent
+description: Deep research with cleanup
+hooks:
+  Stop:
+    - hooks:
+        - type: command
+          command: "node .claude/agents/research/cleanup.js"
+---
+# When running as a subagent, Stop -> SubagentStop automatically.
+# cleanup.js runs when the subagent terminates, saving research state.</code></div>
+            </div>
+
+            <h3>The <code>once</code> Field</h3>
+
+            <p>Some hooks should only fire once &mdash; initialization that should not repeat even if the event fires multiple times. The <code>once</code> field marks a hook for automatic deregistration after its first execution.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>One-Shot Initialization Hook</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>---
+name: gpu-workspace
+description: GPU-accelerated computation workspace
+hooks:
+  SessionStart:
+    - hooks:
+        - type: command
+          command: "bash .claude/skills/gpu-workspace/init-cuda.sh"
+          once: true
+---
+# init-cuda.sh checks GPU availability, loads CUDA runtime,
+# and sets environment variables. Only needs to run once per session.
+# If the skill reloads, once prevents double-initialization.</code></div>
+            </div>
+        </section>
+
+        <!-- 11.7 If-Conditions -->
+        <section id="if-conditions" class="content-section">
+            <h2>11.7 If-Conditions &mdash; Precise Targeting</h2>
+
+            <p>The <code>matcher</code> field provides coarse-grained filtering (which tool or event type), while the <code>if</code> field provides fine-grained filtering using a permission-rule syntax. Together, they enable surgical hook targeting that avoids false positives and unnecessary execution.</p>
+
+            <h3>Permission Rule Syntax</h3>
+
+            <p>The <code>if</code> field uses the same syntax as Claude Code's permission rules. The format is <code>ToolName(pattern)</code> where the pattern is matched against the tool's primary input (command for Bash, file path for Write/Edit/Read, etc.).</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>If-Condition Pattern Reference</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code># Bash command patterns
+Bash(git commit*)           # Any git commit command
+Bash(git push*)             # Any git push command
+Bash(npm run build*)        # Build commands
+Bash(rm -rf *)              # Destructive deletions
+Bash(docker *)              # All docker commands
+Bash(kubectl * --namespace=prod*) # Production k8s commands
+
+# File path patterns
+Write(src/**)               # Any write in src/
+Edit(*.ts)                  # Any TypeScript file edit
+Read(.env*)                 # Reading environment files
+Write(.claude/settings*)    # Writing to Claude config
+
+# MCP tool patterns
+mcp__memory__.*             # Any memory MCP tool
+mcp__github__create_issue   # Specific MCP tool
+
+# Combining with pipe (OR)
+Bash(git push*) | Bash(git push --force*) | Bash(git reset --hard*)
+
+# Wildcard patterns
+Write(www/tibsfox/com/Research/**/*.html)  # Research HTML files only
+Edit(src/**/*.test.ts)                      # Test files only</code></div>
+            </div>
+
+            <h3>Matcher vs. If-Condition</h3>
+
+            <p>Understanding when to use each filtering mechanism is important for both correctness and performance:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Matcher</th>
+                        <th>If-Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Granularity</strong></td>
+                        <td>Tool name level</td>
+                        <td>Tool input level</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>Evaluated before hook script runs (zero-cost filter)</td>
+                        <td>Evaluated before hook script runs (zero-cost filter)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Syntax</strong></td>
+                        <td>Pipe-separated tool names: <code>Bash|Write|Edit</code></td>
+                        <td>Permission rule: <code>Bash(git commit*)</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>When to use</strong></td>
+                        <td>When the hook applies to all invocations of a tool</td>
+                        <td>When the hook applies only to specific commands or file paths</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Example</strong></td>
+                        <td><code>"matcher": "Bash"</code> &mdash; all Bash calls</td>
+                        <td><code>"if": "Bash(npm run build*)"</code> &mdash; only build commands</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-card">
+                <h4>Optimization: Always Use Both</h4>
+                <p>For PreToolUse hooks, always specify both <code>matcher</code> and <code>if</code> when possible. The matcher provides the first-pass filter (is this a Bash call?) and the if-condition provides the second-pass filter (is this a git commit?). Both are evaluated by the harness before the hook script executes, so they add zero overhead. Without a matcher, the hook script would be invoked for every tool call and would need to filter internally &mdash; slower and more error-prone.</p>
+            </div>
+
+            <h3>Advanced Pattern Combinations</h3>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Combining Matchers and If-Conditions</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>{
+  "PreToolUse": [
+    {
+      // Block force-push to main/master
+      "matcher": "Bash",
+      "if": "Bash(git push --force*) | Bash(git push -f *)",
+      "hooks": [{
+        "type": "command",
+        "command": "echo '{\"decision\":\"deny\",\"reason\":\"Force push blocked by policy\"}'"
+      }]
+    },
+    {
+      // Allow all reads except secrets
+      "matcher": "Read",
+      "if": "Read(.env*) | Read(*credentials*) | Read(*secret*)",
+      "hooks": [{
+        "type": "command",
+        "command": "echo '{\"decision\":\"deny\",\"reason\":\"Cannot read secret files\"}'"
+      }]
+    },
+    {
+      // Require review for writes to production config
+      "matcher": "Write|Edit",
+      "if": "Write(config/production.*) | Edit(config/production.*)",
+      "hooks": [{
+        "type": "command",
+        "command": "echo '{\"decision\":\"ask\",\"message\":\"This modifies production config\"}'"
+      }]
+    }
+  ]
+}</code></div>
+            </div>
+
+            <h3>Common If-Condition Pitfalls</h3>
+
+            <p>The if-condition syntax looks deceptively simple, but several edge cases trip up practitioners:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Pitfall</th>
+                        <th>Example</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Missing wildcard</strong></td>
+                        <td><code>Bash(git commit)</code> does not match <code>git commit -m "msg"</code></td>
+                        <td>Use <code>Bash(git commit*)</code> with trailing wildcard</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Path separator</strong></td>
+                        <td><code>Write(src/*.ts)</code> does not match <code>src/lib/foo.ts</code></td>
+                        <td>Use <code>Write(src/**/*.ts)</code> for recursive matching</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MCP tool names</strong></td>
+                        <td><code>mcp_memory_add</code> does not match the actual tool name</td>
+                        <td>Use <code>mcp__memory__add</code> (double underscores)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OR syntax spacing</strong></td>
+                        <td><code>Bash(git push)|Bash(git pull)</code> may fail</td>
+                        <td>Use spaces around pipes: <code>Bash(git push*) | Bash(git pull*)</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Negation</strong></td>
+                        <td>There is no <code>NOT</code> operator in if-conditions</td>
+                        <td>Handle negation in the hook script itself, not the if-condition</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The lack of negation in if-conditions is a deliberate design choice. Negation patterns like "match everything except X" are fragile and hard to reason about in a multi-hook system. If you need negation, write a hook script that checks the condition and exits 0 (no-op) when the negation applies. This keeps the if-condition declarative and positive, while the script handles the exception logic.</p>
+
+        </section>
+
+        <!-- 11.8 Best Practices -->
+        <section id="best-practices" class="content-section">
+            <h2>11.8 Best Practices and Troubleshooting</h2>
+
+            <h3>Performance: Keep Hooks Fast</h3>
+
+            <p>Hook latency directly impacts the developer experience. Every PreToolUse hook adds delay before a tool executes. Every SessionStart hook delays the first interaction. The goal is <strong>sub-second hooks for common operations</strong> and no more than 5-second hooks for expensive checks.</p>
+
+            <div class="hook-grid">
+                <div class="pattern-card">
+                    <h4>Fast (target: under 200ms)</h4>
+                    <ul>
+                        <li>Pattern matching with grep/regex</li>
+                        <li>File existence checks</li>
+                        <li>JSON field extraction with jq</li>
+                        <li>Exit code only (no stdout)</li>
+                        <li>Reading a cached state file</li>
+                    </ul>
+                </div>
+                <div class="pattern-card">
+                    <h4>Acceptable (target: under 2s)</h4>
+                    <ul>
+                        <li>Node.js script with stdin parsing</li>
+                        <li>Git operations (status, diff, log)</li>
+                        <li>Small HTTP requests to local services</li>
+                        <li>File content scanning (< 100 files)</li>
+                    </ul>
+                </div>
+                <div class="pattern-card">
+                    <h4>Expensive (use with caution)</h4>
+                    <ul>
+                        <li><code>tsc --noEmit</code> (5-30s depending on project)</li>
+                        <li>Agent hooks with tool access</li>
+                        <li>HTTP hooks to external services</li>
+                        <li>Prompt hooks (model inference)</li>
+                        <li>Full test suite execution</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p><strong>Critical rule:</strong> SessionStart hooks must be fast. A slow SessionStart hook delays every single session, including subagent launches. If your SessionStart hook needs to do something expensive (like fetching from a database), do it asynchronously and inject the result later via a PostToolUse hook on the first tool call.</p>
+
+            <h3>JSON Output Validation</h3>
+
+            <p>The most common hook debugging issue is malformed JSON output. The harness expects clean JSON on stdout, but shell profiles (.bashrc, .zshrc) often print extra text that contaminates the output.</p>
+
+            <div class="warning-card">
+                <h4>Shell Profile Interference</h4>
+                <p>If your shell profile prints a greeting, version number, or any other text on startup, that text will be prepended to your hook's stdout. The harness will fail to parse the JSON and silently treat the hook as failed. Solutions:</p>
+                <ul>
+                    <li>Use <code>#!/usr/bin/env node</code> instead of <code>#!/bin/bash</code> for hooks that need JSON output &mdash; Node.js does not source shell profiles</li>
+                    <li>For bash hooks, redirect profile output: <code>exec 2>/dev/null</code> at the top</li>
+                    <li>Test hooks manually: <code>echo '{}' | bash .claude/hooks/my-hook.sh | jq .</code></li>
+                    <li>Use the <code>/hooks</code> browser in Claude Code to inspect hook output in real time</li>
+                </ul>
+            </div>
+
+            <h3>Exit Code Discipline</h3>
+
+            <p>The three-way exit code protocol (0, 2, other) is simple but easy to get wrong. Common mistakes:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Mistake</th>
+                        <th>What Happens</th>
+                        <th>Fix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Using <code>exit 1</code> to block</td>
+                        <td>Treated as hook failure, tool proceeds anyway</td>
+                        <td>Use <code>exit 2</code> for intentional blocks</td>
+                    </tr>
+                    <tr>
+                        <td>Unhandled exception in Node.js</td>
+                        <td>Exit code 1, treated as hook failure</td>
+                        <td>Wrap in try/catch, use <code>process.exit(0)</code> in catch</td>
+                    </tr>
+                    <tr>
+                        <td>jq error in bash</td>
+                        <td>Non-zero exit, hook treated as failed</td>
+                        <td>Use <code>jq -r '...' 2>/dev/null</code> with fallback</td>
+                    </tr>
+                    <tr>
+                        <td>Stdin timeout</td>
+                        <td>Process hangs until killed</td>
+                        <td>Set a stdin read timeout: <code>setTimeout(() => process.exit(0), 3000)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Defensive Hook Template (Node.js)</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>#!/usr/bin/env node
+// Defensive hook template with timeout and error handling
+
+let input = '';
+const stdinTimeout = setTimeout(() => process.exit(0), 3000);
+
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', chunk => input += chunk);
+process.stdin.on('end', () => {
+  clearTimeout(stdinTimeout);
+  try {
+    const data = JSON.parse(input);
+
+    // --- Your hook logic here ---
+    const toolName = data.tool_name;
+    const toolInput = data.tool_input;
+
+    // Example: block writes to protected paths
+    if (toolName === 'Write' && toolInput?.file_path?.includes('.env')) {
+      const output = {
+        decision: 'deny',
+        reason: 'Cannot write to .env files'
+      };
+      process.stdout.write(JSON.stringify(output));
+      process.exit(2);
+    }
+
+    // --- End hook logic ---
+
+    process.exit(0);
+  } catch (err) {
+    // Silent fail: never block tool execution due to hook error
+    process.exit(0);
+  }
+});</code></div>
+            </div>
+
+            <h3>Environment Variable Quoting</h3>
+
+            <p>Hook commands are executed by the shell, which means environment variables are subject to shell expansion. Always quote variables in hook commands to prevent word splitting and globbing.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Correct vs. Incorrect Variable Usage</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code>// WRONG: unquoted variable in command
+"command": "bash .claude/hooks/check.sh $PROJECT_ROOT"
+
+// RIGHT: quoted variable
+"command": "bash .claude/hooks/check.sh \"$PROJECT_ROOT\""
+
+// BETTER: use env vars inside the script, not in the command string
+"command": "bash .claude/hooks/check.sh"
+// In check.sh: ROOT="${PROJECT_ROOT:-.}"</code></div>
+            </div>
+
+            <h3>The /hooks Browser</h3>
+
+            <p>Claude Code provides a built-in <code>/hooks</code> command that opens an interactive browser showing all registered hooks, their event bindings, execution history, and output logs. This is the primary debugging tool for hook development.</p>
+
+            <p>What the /hooks browser shows:</p>
+            <ul>
+                <li><strong>Registered hooks:</strong> All hooks from all sources (user, project, skill, plugin) with their matchers and if-conditions</li>
+                <li><strong>Execution log:</strong> Recent hook invocations with timing, exit codes, and output</li>
+                <li><strong>Source tracking:</strong> Which configuration file defined each hook</li>
+                <li><strong>Active skill hooks:</strong> Hooks registered by currently-loaded skills</li>
+            </ul>
+
+            <h3>Managed Policy Hooks</h3>
+
+            <p>In enterprise environments, hooks can be defined in managed policy files that users cannot override. These "managed hooks" always run and always take precedence. A managed PreToolUse hook with a deny decision cannot be overridden by a user-level allow.</p>
+
+            <p>This creates a three-tier permission model:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Authority</th>
+                        <th>Can Override</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Managed (enterprise)</strong></td>
+                        <td>Organization security team</td>
+                        <td>Nothing &mdash; always wins</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Project (.claude/settings.json)</strong></td>
+                        <td>Repository maintainers</td>
+                        <td>User settings, skill hooks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User (~/.claude/settings.json)</strong></td>
+                        <td>Individual developer</td>
+                        <td>Skill hooks (within precedence rules)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Testing Hooks Before Deployment</h3>
+
+            <p>Hooks are infrastructure that runs on every tool call. A broken hook can degrade every session. Testing hooks before adding them to settings.json is essential.</p>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span>Manual Hook Testing Workflow</span>
+                    <button onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content"><code># Step 1: Create a test payload matching what the harness sends
+echo '{
+  "tool_name": "Bash",
+  "tool_input": { "command": "git commit -m \"feat: add hook\"" },
+  "session_id": "test-session"
+}' > /tmp/hook-test-input.json
+
+# Step 2: Run the hook with the test payload
+cat /tmp/hook-test-input.json | node .claude/hooks/my-hook.js
+echo "Exit code: $?"
+
+# Step 3: Validate JSON output
+cat /tmp/hook-test-input.json | node .claude/hooks/my-hook.js | jq .
+
+# Step 4: Test edge cases
+echo '{}' | node .claude/hooks/my-hook.js               # Empty input
+echo 'not json' | node .claude/hooks/my-hook.js          # Malformed input
+echo '' | node .claude/hooks/my-hook.js                   # No input
+timeout 5 node .claude/hooks/my-hook.js < /dev/null       # No stdin at all</code></div>
+            </div>
+
+            <p>The edge cases in step 4 are not theoretical. In production, hooks occasionally receive malformed input when the harness encounters unexpected state. A hook that crashes on malformed input will cause silent failures that are difficult to diagnose. Every hook should handle empty input, malformed JSON, and missing fields gracefully.</p>
+
+            <h3>Hook Evolution Strategy</h3>
+
+            <p>Hooks should evolve incrementally. The progression we have found most effective:</p>
+
+            <ol>
+                <li><strong>Start with logging.</strong> Before building a blocking hook, build an advisory hook that logs what it would block. Run it for a week and analyze the false positive rate. If the false positive rate is above 5%, refine the pattern before making it blocking.</li>
+                <li><strong>Graduate to advisory.</strong> Convert the logging hook to an advisory hook that injects context but does not block. This lets the agent self-correct based on the advice, which is often sufficient and less disruptive than blocking.</li>
+                <li><strong>Promote to blocking.</strong> Only after the advisory hook has proven its value with a near-zero false positive rate should it become a blocking hook (exit 2). Blocking hooks must be right every time &mdash; a single false positive erodes trust in the entire hook system.</li>
+                <li><strong>Monitor and retire.</strong> Hooks that fire frequently but never catch anything are dead weight. Review hook execution logs monthly and remove hooks that have not caught a real issue in 30+ days. They are adding latency without value.</li>
+            </ol>
+
+        </section>
+
+        <!-- 11.9 The Automation Stack -->
+        <section id="automation-stack" class="content-section">
+            <h2>11.9 The Automation Stack &mdash; Hooks + Skills + Agents</h2>
+
+            <p>Hooks, skills, and agents are not competing abstractions. They are complementary layers that compose into a complete automation stack. Understanding how they interact is the key to building effective agentic systems.</p>
+
+            <h3>The Three Layers</h3>
+
+            <div class="lifecycle-diagram">
++------------------------------------------------------------------+
+|                    THE AUTOMATION STACK                           |
++------------------------------------------------------------------+
+|                                                                  |
+|  LAYER 3: AGENTS (Autonomous Intelligence)                       |
+|  +------------------------------------------------------------+ |
+|  | Subagents with full tool access, multi-turn reasoning,      | |
+|  | worktree isolation. Make complex decisions, execute plans,   | |
+|  | coordinate with other agents. Non-deterministic.             | |
+|  +------------------------------------------------------------+ |
+|                          |  invokes  |                           |
+|                          v           v                           |
+|  LAYER 2: SKILLS (Adaptive Intelligence)                         |
+|  +------------------------------------------------------------+ |
+|  | Context-matched instruction sets with YAML frontmatter.     | |
+|  | Load automatically when context matches. Provide domain     | |
+|  | knowledge, workflow guidance, and scoped hooks. Stateless.   | |
+|  +------------------------------------------------------------+ |
+|                          |  registers |                          |
+|                          v            v                          |
+|  LAYER 1: HOOKS (Deterministic Control)                          |
+|  +------------------------------------------------------------+ |
+|  | Shell commands, HTTP endpoints, prompts, agents that fire   | |
+|  | at lifecycle events. Provide hard guarantees: always run,    | |
+|  | always enforce. The safety foundation of the entire stack.  | |
+|  +------------------------------------------------------------+ |
+|                          |  executes at |                        |
+|                          v              v                        |
+|  FOUNDATION: LIFECYCLE EVENTS                                    |
+|  +------------------------------------------------------------+ |
+|  | SessionStart, PreToolUse, PostToolUse, SubagentStart/Stop,  | |
+|  | TaskCreated/Completed, PreCompact, SessionEnd, etc.         | |
+|  +------------------------------------------------------------+ |
+|                                                                  |
++------------------------------------------------------------------+</div>
+
+            <h3>How the Layers Interact</h3>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>Hooks Invoke Skills</h4>
+                    <p>A SessionStart hook can check the current project context and load appropriate skills. A PostToolUse hook can detect that the user is working on a specific file type and activate a specialized skill. The hook provides the trigger; the skill provides the intelligence.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Skills Register Hooks</h4>
+                    <p>When a skill loads, its frontmatter hooks are registered in the hook system. This means a skill can bring its own safety rails, quality gates, and automation with it. When the skill unloads, those hooks disappear. This is how you get composable, context-aware automation.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Agents Trigger Events</h4>
+                    <p>When an agent launches a subagent, SubagentStart fires. When it creates a task, TaskCreated fires. When it uses a tool, PreToolUse/PostToolUse fire. Every agent action flows through the hook system, which means every agent operation is subject to the same deterministic controls.</p>
+                </div>
+                <div class="concept-card">
+                    <h4>Hooks Guard Agents</h4>
+                    <p>The most critical interaction: hooks provide the safety boundaries that make autonomous agents viable. Without hooks, an agent could <code>git push --force</code> to main, overwrite configuration files, or bypass security policies. With hooks, these operations are intercepted deterministically &mdash; no matter how the agent reasons about them.</p>
+                </div>
+            </div>
+
+            <h3>Real Architecture: The GSD Automation Pipeline</h3>
+
+            <p>In production, our automation stack looks like this for a typical development cycle:</p>
+
+            <div class="lifecycle-diagram">
+SESSION START
+  |
+  +-- [Hook] gsd-check-update.js          -- check for framework updates
+  +-- [Hook] gsd-restore-work-state.js     -- load saved state from disk
+  +-- [Hook] gsd-inject-snapshot.js        -- inject session narrative
+  |
+  +-- [Skill] session-awareness            -- activates, reads project context
+  +-- [Skill] gsd-workflow                 -- activates, provides phase guidance
+  +-- [Skill] security-hygiene             -- activates, registers defense hooks
+  |
+USER INTERACTION
+  |
+  +-- User: "execute phase 73"
+  |
+  +-- [Skill] gsd-workflow routes to /gsd-execute-phase
+  +-- [Agent] GSD Executor spawns wave agents
+        |
+        +-- [Hook] SubagentStart           -- context injection per agent
+        +-- [Hook] PreToolUse on Write     -- prompt guard scans content
+        +-- [Hook] PreToolUse on Bash      -- build check on commit
+        +-- [Hook] PostToolUse             -- context monitor tracks changes
+        |
+        +-- [Agent] Wave 1 agents execute in parallel
+        +-- [Hook] TaskCompleted           -- result capture
+        +-- [Hook] TeammateIdle            -- quality gate check
+        |
+        +-- [Agent] Wave 2 depends on Wave 1 results
+        +-- ...
+  |
+SESSION END
+  +-- [Hook] gsd-save-work-state.js        -- persist state to disk
+  +-- [Hook] gsd-snapshot-session.js        -- generate session narrative</div>
+
+            <p>Every layer contributes something essential. Remove the hooks and you lose safety guarantees. Remove the skills and you lose adaptive intelligence. Remove the agents and you lose autonomous execution. Together, they form a system that is simultaneously autonomous, intelligent, and safe.</p>
+
+            <h3>The Deterministic/Probabilistic Boundary</h3>
+
+            <p>The most important architectural principle in the automation stack is the <strong>deterministic/probabilistic boundary</strong>. Hooks are deterministic &mdash; given the same input, they always produce the same output. Skills and agents are probabilistic &mdash; their behavior depends on the LLM's reasoning, which can vary.</p>
+
+            <p>Critical safety invariants must live in the deterministic layer (hooks). Workflow guidance and domain knowledge can live in the probabilistic layer (skills). Complex decision-making lives in the highest probabilistic layer (agents). This separation ensures that no amount of creative LLM reasoning can bypass a hard safety boundary.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>Deterministic (Hooks)</h4>
+                    <ul>
+                        <li>Build must pass before commit</li>
+                        <li>Force-push is blocked</li>
+                        <li>Config files are immutable to agents</li>
+                        <li>Session state is persisted on exit</li>
+                        <li>Destructive commands require approval</li>
+                        <li>Prompt injection is detected</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>Probabilistic (Skills + Agents)</h4>
+                    <ul>
+                        <li>Which phase to execute next</li>
+                        <li>How to decompose a feature into waves</li>
+                        <li>Whether code quality meets standards</li>
+                        <li>What tests to write</li>
+                        <li>How to resolve merge conflicts</li>
+                        <li>Whether a commit message is meaningful</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Composability Patterns</h3>
+
+            <p>The automation stack supports several composability patterns that emerge naturally from the three-layer architecture:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hook Chain</strong></td>
+                        <td>Multiple hooks on the same event fire sequentially</td>
+                        <td>SessionStart: update check, then state restore, then snapshot injection</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skill Stack</strong></td>
+                        <td>Multiple skills active simultaneously, each with their own hooks</td>
+                        <td>gsd-workflow + security-hygiene + session-awareness all active</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent Convoy</strong></td>
+                        <td>Parallel agents sharing the same hook environment</td>
+                        <td>4 wave agents all subject to the same build-check and prompt-guard hooks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Event Cascade</strong></td>
+                        <td>One event triggers a hook that causes another event</td>
+                        <td>PostToolUse on Write triggers a Bash(eslint) which triggers PreToolUse on Bash</td>
+                    </tr>
+                    <tr>
+                        <td><strong>State Pipeline</strong></td>
+                        <td>SessionEnd hooks save state that SessionStart hooks restore</td>
+                        <td>Work state, session snapshots, skill observations carried across sessions</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Scaling the Stack</h3>
+
+            <p>As we scaled from a single-project setup to 190+ research projects with multi-agent orchestration, the automation stack evolved along three axes:</p>
+
+            <ul>
+                <li><strong>Hook count:</strong> From 2 hooks (build check, commit validation) to 10+ hooks spanning all lifecycle events. Each hook earned its place through a real operational failure that it now prevents.</li>
+                <li><strong>Skill depth:</strong> From 3 basic skills to 34 specialized skills with full frontmatter hook definitions. Skills went from "instructions for Claude" to "composable automation modules with their own safety rails."</li>
+                <li><strong>Agent trust:</strong> From manually-supervised single agents to parallel agent convoys with varying trust levels. Hooks provide the trust boundaries that make this safe &mdash; a subagent cannot escalate its own permissions because hooks are evaluated by the harness, not by the agent.</li>
+            </ul>
+
+            <div class="info-card">
+                <h4>The Lesson from 190+ Projects</h4>
+                <p>The automation stack is not something you design upfront. It emerges from operational pain. Every hook in our system exists because of a specific incident: a broken build that was committed, a session that lost context, a subagent that wrote to a protected file. The best hook systems are grown, not planned. Start with the hooks that prevent your most common mistakes, then add hooks as new failure modes appear. If a hook fires every day but never catches anything, remove it &mdash; it is adding latency without value.</p>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="content-section">
+            <h2>11.10 Sources and References</h2>
+
+            <h3>Claude Code Hook Architecture</h3>
+            <ul class="sources-list">
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank">Claude Code Hooks Documentation &mdash; Anthropic, 2026</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code/settings" target="_blank">Claude Code Settings Reference &mdash; Anthropic, 2026</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code/security" target="_blank">Claude Code Security Model &mdash; Anthropic, 2026</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank">Claude Code Skills and Agents &mdash; Anthropic, 2026</a></li>
+            </ul>
+
+            <h3>Production Implementation</h3>
+            <ul class="sources-list">
+                <li><a href="https://github.com/Tibsfox/gsd-skill-creator" target="_blank">GSD Skill Creator &mdash; Open Source Implementation, 2026</a></li>
+                <li><a href="https://www.conventionalcommits.org/" target="_blank">Conventional Commits Specification v1.0.0</a></li>
+                <li><a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10 &mdash; Prompt Injection Risk Reference</a></li>
+            </ul>
+
+            <h3>Agentic Safety and Control</h3>
+            <ul class="sources-list">
+                <li><a href="https://arxiv.org/abs/2302.12173" target="_blank">Not what you&rsquo;ve signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection &mdash; Greshake et al., 2023</a></li>
+                <li><a href="https://simonwillison.net/series/prompt-injection/" target="_blank">Prompt Injection Research Series &mdash; Simon Willison, 2022-2026</a></li>
+                <li><a href="https://arxiv.org/abs/2309.02427" target="_blank">Identifying and Mitigating Vulnerabilities in LLM-Integrated Applications &mdash; Wu et al., 2023</a></li>
+            </ul>
+
+            <h3>Event-Driven Architecture</h3>
+            <ul class="sources-list">
+                <li><a href="https://martinfowler.com/articles/201701-event-driven.html" target="_blank">What do you mean by &ldquo;Event-Driven&rdquo;? &mdash; Martin Fowler, 2017</a></li>
+                <li><a href="https://12factor.net/config" target="_blank">The Twelve-Factor App: Config &mdash; Heroku/Adam Wiggins</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Section 11 of 15: Hooks &mdash; The Automation Backbone | <a href="section-10.html">&larr; Previous</a> | <a href="section-12.html">Next &rarr;</a></p>
+        <p>Report generated April 2026 | <a href="../index.html">Return to Index</a> | <a href="references.html">View All References</a></p>
+    </footer>
+
+    <script>
+    function copyCode(button) {
+        var codeBlock = button.closest('.code-example').querySelector('.code-content code');
+        var text = codeBlock.textContent || codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(function(err) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+    </script>
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="section-10.html" style="margin-right:auto">&larr; 10. GSD</a><a href="section-12.html" style="margin-left:auto">12. Teams &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Skills &amp; Agents Architecture &middot; <a href="index.html">Report Index</a> &middot; <a href="../index.html">SAA Overview</a> &middot; <a href="../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

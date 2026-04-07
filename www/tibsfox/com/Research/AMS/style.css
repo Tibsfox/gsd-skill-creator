@@ -1,0 +1,359 @@
+/* AMS — Artemis Math & Science
+   Math/science palette: deep indigo, golden ratio gold, chalk white, blackboard dark
+   Base layout from ../../brand.css */
+
+/* 1. COLOR PALETTE & SEMANTIC OVERRIDES */
+
+:root {
+  --ams-indigo: #312E81;
+  --ams-indigo-mid: #3730A3;
+  --ams-indigo-light: #4F46E5;
+  --ams-gold: #D97706;
+  --ams-gold-light: #FEF3C7;
+  --ams-gold-dark: #92400E;
+  --ams-chalk: #FEFCE8;
+  --ams-blackboard: #1E1B4B;
+  --ams-slate-bg: #FEFCE8;
+  --ams-slate-100: #FEF9C3;
+  --ams-slate-200: #E5E1D8;
+  --ams-slate-300: #D6D3C4;
+  --ams-slate-500: #6B6654;
+  --ams-slate-700: #44403C;
+  --ams-slate-900: #1C1917;
+  --ams-emerald: #059669;
+  --ams-emerald-light: #D1FAE5;
+  --ams-red: #DC2626;
+  --ams-violet: #7C3AED;
+
+  --page-bg: var(--ams-chalk);
+  --page-text: var(--ams-slate-900);
+  --page-text-light: var(--ams-slate-500);
+  --link: var(--ams-indigo-light);
+  --link-hover: var(--ams-indigo);
+  --accent: var(--ams-gold);
+  --accent-light: var(--ams-gold-light);
+  --accent-dark: var(--ams-blackboard);
+  --card-bg: #FFFFFF;
+  --card-border: var(--ams-slate-200);
+  --card-shadow: rgba(30, 27, 75, 0.08);
+  --border: var(--ams-slate-200);
+  --content-width: 58rem;
+}
+
+/* 2. BODY */
+
+body {
+  background: var(--ams-chalk) !important;
+  color: var(--ams-slate-900) !important;
+}
+
+/* 3. HEADER */
+
+header {
+  background: linear-gradient(135deg, #0F0A2E 0%, var(--ams-blackboard) 35%, var(--ams-indigo) 65%, #1E1B6B 100%);
+  color: white;
+  padding: 2.5rem 2rem;
+  border-bottom: 3px solid var(--ams-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 40%, rgba(217, 119, 6, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 75% 30%, rgba(79, 70, 229, 0.12) 0%, transparent 40%),
+              radial-gradient(ellipse at 50% 80%, rgba(5, 150, 105, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+header .subtitle {
+  color: rgba(254, 252, 232, 0.85);
+  font-size: 1rem;
+}
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+header nav a {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+header nav a:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+header nav a.active {
+  background: var(--ams-gold);
+  color: var(--ams-blackboard);
+  font-weight: 600;
+}
+
+/* 4. TYPOGRAPHY */
+
+h2 {
+  color: var(--ams-indigo);
+  border-bottom: 2px solid var(--ams-gold);
+  padding-bottom: 0.4rem;
+}
+h3 { color: var(--ams-indigo-mid); }
+h4 { color: var(--ams-slate-700); }
+
+/* 5. BLOCKQUOTE */
+
+blockquote {
+  border-left: 3px solid var(--ams-gold);
+  background: var(--ams-gold-light);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--ams-gold-dark);
+}
+
+/* 6. BADGES */
+
+.module-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+}
+.badge-info    { background: #EEF2FF; color: var(--ams-indigo); }
+.badge-theorem { background: var(--ams-gold-light); color: var(--ams-gold-dark); }
+.badge-applied { background: var(--ams-emerald-light); color: #065F46; }
+.badge-corpus  { background: #F3E8FF; color: #6B21A8; }
+
+.source-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  background: var(--ams-slate-100);
+  color: var(--ams-slate-500);
+  border: 1px solid var(--ams-slate-300);
+}
+
+/* 7. TABLE */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+th {
+  background: var(--ams-blackboard);
+  color: white;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--ams-slate-200);
+  font-size: 0.88rem;
+}
+tr:nth-child(even) { background: var(--ams-slate-100); }
+tr:hover { background: rgba(217, 119, 6, 0.06); }
+
+/* 8. CATEGORY GRID & CARDS */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.category-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--ams-slate-200);
+  border-radius: 8px;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px var(--card-shadow);
+  border-left: 3px solid var(--ams-indigo-light);
+}
+.category-card:hover {
+  border-color: var(--ams-gold);
+  border-left-color: var(--ams-gold);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12);
+  transform: translateY(-1px);
+}
+.category-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+}
+.category-card p {
+  margin: 0.3rem 0;
+  font-size: 0.82rem;
+  color: var(--ams-slate-500);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--ams-slate-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+/* 9. STATS RIBBON */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.stat {
+  background: white;
+  border: 1px solid var(--ams-slate-200);
+  border-radius: 6px;
+  padding: 0.8rem;
+  text-align: center;
+}
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ams-indigo-light);
+}
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--ams-slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+.stat-value.gold { color: var(--ams-gold); }
+.stat-value.emerald { color: var(--ams-emerald); }
+.stat-value.indigo { color: var(--ams-indigo); }
+
+/* 10. FORMULA DISPLAY */
+
+.formula {
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  font-weight: 700;
+  color: var(--ams-indigo);
+  background: #EEF2FF;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+}
+
+.formula-block {
+  background: var(--ams-blackboard);
+  color: var(--ams-gold-light);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  line-height: 1.8;
+  border-left: 3px solid var(--ams-gold);
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+/* 11. PRE/CODE */
+
+pre {
+  background: var(--ams-blackboard);
+  color: var(--ams-gold-light);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--ams-gold);
+}
+code {
+  background: #EEF2FF;
+  font-family: 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  color: var(--ams-indigo);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* 12. MODULE NAV */
+
+.module-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+.module-nav a {
+  color: var(--ams-slate-500);
+  background: var(--ams-slate-100);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.module-nav a:hover { background: var(--ams-gold-light); color: var(--ams-gold-dark); }
+.module-nav a.active { background: var(--ams-gold); color: var(--ams-blackboard); }
+
+/* 13. CROSS-REFERENCES */
+
+.cross-links {
+  background: white;
+  border: 1px solid var(--ams-slate-200);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  color: var(--ams-indigo-mid);
+}
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: #EEF2FF;
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  color: var(--ams-indigo);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: var(--ams-gold-light); text-decoration: none; }
+
+/* 14. FOOTER */
+
+footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--ams-slate-500);
+  border-top: 1px solid var(--ams-slate-200);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+footer a { color: var(--ams-indigo-light); }
+
+/* 15. RESPONSIVE */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .category-grid { grid-template-columns: 1fr; }
+}

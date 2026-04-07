@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reference Hallucination Detection &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Detecting &amp; Correcting Reference Hallucinations in LLMs</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-hallucination">Hallucination</span></div>
+      <h3>Detecting &amp; Correcting Reference Hallucinations in Commercial LLMs</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.03173" target="_blank"><span class="arxiv-id">2604.03173</span></a></p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.CL, cs.AI</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>A detection methodology for reference hallucinations in commercial LLMs with precision/recall analysis. Compares hallucination rates across commercial LLMs including deep research modes, identifying that extended reasoning often increases rather than decreases hallucination rates for citations. Proposes correction strategies and a citation verification pipeline for research automation workflows.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li>Detection methodology achieves measurable precision and recall for reference hallucinations</li>
+      <li>Deep research modes often <strong>increase</strong> hallucination rates for citations, not decrease them</li>
+      <li>Commercial LLM comparison reveals significant variance in hallucination profiles</li>
+      <li>Correction strategies reduce but do not eliminate fabricated references</li>
+      <li>Citation verification pipeline can be automated but requires external API access</li>
+      <li>Reference hallucinations follow predictable patterns amenable to rule-based detection</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <p>Automated reference extraction from LLM outputs, cross-referenced against bibliographic databases (CrossRef, Semantic Scholar, Google Scholar). Precision/recall measured at the individual citation level. Commercial LLMs compared under standard and deep research modes. Correction strategies tested iteratively with feedback loops.</p>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Mode</th><th>Hallucination Rate</th><th>Correctable</th></tr></thead>
+      <tbody>
+        <tr><td>Standard generation</td><td>Moderate</td><td>Partially via verification</td></tr>
+        <tr><td>Deep research mode</td><td>Higher (counterintuitive)</td><td>Partially via verification</td></tr>
+        <tr><td>With verification pipeline</td><td>Reduced</td><td>Yes, but not eliminated</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>Directly relevant to our research-engine and data-fidelity skills. The finding that deep research modes increase citation hallucination validates our sources-first methodology: we fetch and verify sources before generating content, rather than generating and verifying afterward. Our publish-pipeline should include automated citation verification against CrossRef/Semantic Scholar. The counterintuitive deep-research finding warns against assuming more reasoning = more accuracy.</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (228 projects, 246-project corpus)</h4>
+      <span class="ref-tag">APD &mdash; Papers Deep Dive</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">LLM &mdash; Local LLM Ecosystem</span>
+      <span class="ref-tag">FEC &mdash; Forward Error Correction</span>
+      <span class="ref-tag">PNW &mdash; Research Series</span>
+      <span class="ref-tag">TKN &mdash; Token Economics</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-03159.html">BibTeX Citation Hallucinations</a></li>
+        <li><a href="paper-2603-21687.html">MIRAGE: 60%+ Fabrication</a></li>
+        <li><a href="paper-2604-04177.html">Neurosymbolic Fact-Checking Limits</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.03173 &middot; Reference Hallucinations</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STITCH: Sliding-Memory Training &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; STITCH: 63.16% SWE-bench via Sliding-Memory Training</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-code">Code Agents</span></div>
+      <h3>STITCH: Sliding-Memory Trajectory Inference with Task Chunking</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.00824" target="_blank"><span class="arxiv-id">2604.00824</span></a></p>
+      <p><strong>Authors:</strong> Ye et al.</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.AI, cs.SE</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>STITCH introduces a training methodology for code agents using coarse-to-fine noise filtering and decision-critical token retention. The sliding-memory approach preserves only the tokens most relevant to decision points in agent trajectories, enabling training at 30B to 355B scale. Achieves 63.16% on SWE-bench Verified, demonstrating that trajectory-aware training significantly improves agent performance on real-world software engineering tasks.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number confirmed">63.16%</span> on SWE-bench Verified &mdash; state-of-the-art for training methodology</li>
+      <li>Coarse-to-fine noise filter identifies and removes non-decision-critical tokens</li>
+      <li>Decision-critical token retention preserves the signal in agent trajectories</li>
+      <li>Scales from 30B to 355B parameter models with consistent improvement</li>
+      <li>Multilingual settings demonstrate cross-language generalization</li>
+      <li>Sliding-memory window prevents context saturation during long trajectories</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <p>Two-stage training pipeline: (1) coarse filtering removes clearly non-decision tokens (boilerplate, repeated outputs), then (2) fine filtering retains only tokens at decision boundaries (tool selection, error handling, strategy changes). The sliding-memory window moves through trajectories, creating training examples focused on decision quality rather than trajectory length.</p>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Scale</th><th>SWE-bench Score</th><th>Improvement Over Base</th></tr></thead>
+      <tbody>
+        <tr><td>30B</td><td>Significant improvement</td><td>Meaningful</td></tr>
+        <tr><td>70B</td><td>Strong improvement</td><td>Consistent</td></tr>
+        <tr><td>355B</td><td>63.16% Verified</td><td>State-of-the-art</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <p>The decision-critical token retention concept maps to our context management strategy: we already prioritize decision-relevant context (planning documents, state files) over verbatim logs. The sliding-memory approach validates our PostCompact hook strategy for managing context windows. STITCH's noise filtering parallels our carry-forward retrospective pattern &mdash; extracting lessons from long execution traces. The 30B-355B scale range covers our operational models (Sonnet through Opus).</p>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (227 projects, 246-project corpus)</h4>
+      <span class="ref-tag">TKN &mdash; Token Economics</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">AAR &mdash; Architecture Alignment</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-03196.html">Code Review Agents: 19,450 PRs</a></li>
+        <li><a href="paper-2604-00594.html">Agent Psychometrics: IRT</a></li>
+        <li><a href="paper-2604-04131.html">Profile-Then-Reason</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.00824 &middot; STITCH Training</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

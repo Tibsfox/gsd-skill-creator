@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Architecture &mdash; Agentic Technologies &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-agt">
+  <header>
+    <h1>Agentic Infrastructure &amp; Systems</h1>
+    <div class="subtitle">Architecture, Security &amp; Scaling &mdash; April 2026 Research Synthesis</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="agent-architecture.html" class="active">Agent Architecture</a>
+      <a href="mcp-security.html">MCP Security</a>
+      <a href="page.html?doc=03-stateful-agents-token-management">ML Production</a>
+      <a href="page.html?doc=05-iot-security-usb-stacks">Hardware &amp; Energy</a>
+      <a href="page.html?doc=04-compiler-in-the-loop-agentic">Engineering &amp; PLM</a>
+      <a href="page.html?doc=06-system-design-reliability">Business &amp; Legal</a>
+      <a href="page.html?doc=07-synthesis-ordering-guarantees">Context Engineering</a>
+      <a href="mission.html">Papers</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Agent Architecture: Seven Convergent Signals</h2>
+
+    <blockquote>
+      Building agents is 80% non-glamorous plumbing work and 20% AI.
+      The most common failure mode in agentic systems is not underengineering.
+      It&rsquo;s actually overengineering. Premature complexity is where most projects go to die.
+      &mdash; Nate B Jones, on the Claude Code architecture leak
+    </blockquote>
+
+    <p>Seven independent sources &mdash; an MIT inference paper, a $2.5B production system leak, a recursive composition framework, a stem-cell metaphor from Amazon/Berkeley, a Stanford/MIT meta-harness study, a practitioner deep-dive on Claude Code, and a Warp CEO&rsquo;s industry survey &mdash; converge on the same architectural principles. This page synthesizes the key claims, maps them to each other, and shows the coherent picture that emerges.</p>
+
+    <!-- ================================================================== -->
+    <h2>1. Recursive Language Models (MIT)</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> MIT RLM paper &mdash; inference paradigm for arbitrarily long contexts<br>
+      <strong>Key idea:</strong> Give the LLM a REPL, not a bigger context window</p>
+    </div>
+
+    <p>Recursive Language Models are not a new architecture but an <strong>inference scaffold</strong>. Instead of dumping an entire massive context into the LLM&rsquo;s window, the RLM gives the model a Python REPL and lets it write code to explore, decompose, and transform prompt data programmatically &mdash; like a human in a Jupyter notebook.</p>
+
+    <h3>Three Technical Breakthroughs</h3>
+    <table>
+      <thead><tr><th>Mechanism</th><th>What It Does</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Symbolic variable return</strong></td>
+          <td>Sub-agent results return as Python variables in the parent&rsquo;s REPL, not raw text dumped into context</td>
+          <td>Eliminates context pollution &mdash; the inverse of how most agent frameworks work</td>
+        </tr>
+        <tr>
+          <td><strong>Recursive self-calling</strong></td>
+          <td>The LLM calls <code>llm_query()</code> to spawn child RLM agents, which can themselves recurse with configurable depth limits</td>
+          <td>Natural task decomposition without a fixed orchestration graph</td>
+        </tr>
+        <tr>
+          <td><strong>Non-autoregressive output</strong></td>
+          <td>Answers constructed inside Python variables rather than token-by-token generation</td>
+          <td>Theoretically unlimited output length; avoids counting errors</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>RLMs outperform RAG, ReAct, CodeAct, and sub-agent architectures on long-context benchmarks. The cost structure is input-heavy (cached) with minimal output tokens &mdash; inverting the typical agent cost profile. The key insight: <strong>the LLM controls what enters its own context window through code.</strong></p>
+
+    <!-- ================================================================== -->
+    <h2>2. The 12 Primitives</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> Nate B Jones &mdash; &ldquo;I Broke Down Anthropic&rsquo;s $2.5 Billion Leak&rdquo;<br>
+      <strong>Key idea:</strong> The harness is the product, not the model</p>
+    </div>
+
+    <p>Claude Code&rsquo;s leaked architecture reveals 12 primitives organized in two tiers: Day One Basics (non-negotiables) and Operational Maturity (production lessons). The $2.5B run-rate product is sustained primarily by back-end engineering, not novel AI techniques.</p>
+
+    <h3>The 12 Primitives at a Glance</h3>
+    <table>
+      <thead><tr><th>#</th><th>Primitive</th><th>Core Function</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Tool Registry</strong></td><td>Metadata-first capability catalog &mdash; 207 commands + 184 tools, loaded on demand</td></tr>
+        <tr><td>2</td><td><strong>Permission System</strong></td><td>Tiered trust (built-in &gt; plug-in &gt; skills) with an 18-module security architecture for Bash alone</td></tr>
+        <tr><td>3</td><td><strong>Session Persistence</strong></td><td>Full engine reconstruction from stored JSON after crashes</td></tr>
+        <tr><td>4</td><td><strong>Workflow State</strong></td><td>Task state separate from conversation state &mdash; what step we&rsquo;re in, not what we&rsquo;ve said</td></tr>
+        <tr><td>5</td><td><strong>Token Budget</strong></td><td>Hard limits with pre-execution budget checking; stops before overspend</td></tr>
+        <tr><td>6</td><td><strong>Structured Streaming</strong></td><td>Typed events (tool match, crash reason) &mdash; a black box for every run</td></tr>
+        <tr><td>7</td><td><strong>System Event Logging</strong></td><td>Provable reconstruction of any agent run: context loaded, permissions granted, actions taken</td></tr>
+        <tr><td>8</td><td><strong>Dual-Level Verification</strong></td><td>L1: did the agent complete? L2: do harness changes preserve safety invariants?</td></tr>
+        <tr><td>9</td><td><strong>Tool Pool Assemblies</strong></td><td>Session-specific tool selection from 184 available, not all-or-nothing</td></tr>
+        <tr><td>10</td><td><strong>Transcript Compaction</strong></td><td>Auto-compress conversation history while preserving instructions</td></tr>
+        <tr><td>11</td><td><strong>Permission Audit Trail</strong></td><td>Three handlers (interactive, coordinator, swarm) with full provenance</td></tr>
+        <tr><td>12</td><td><strong>Agent Type System</strong></td><td>Six typed agents (Explore, Plan, Verify, Guide, General, Status) with constrained capabilities</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The Critical Separation</h3>
+    <p>Almost every agentic framework conflates conversation state with task state. Claude Code treats them as fundamentally different problems. Resuming a conversation is not the same as resuming a workflow. This single architectural decision prevents duplicate writes, double-sent messages, and rerun expensive operations after crashes.</p>
+
+    <!-- ================================================================== -->
+    <h2>3. Meta-Agentic Bootstrapping (p3nGu1nZz)</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> Dr. Dimitrios Geromichalos &mdash; three videos on recursive composition, self-organizing intelligence, and SDD<br>
+      <strong>Key idea:</strong> Embed an already-capable agent inside a rule-based world that governs success</p>
+    </div>
+
+    <p>The meta-agentic bootstrapping pattern has two parts: a <strong>domain-specific scaffold</strong> (the governance layer) that defines what success looks like, and an <strong>inner coding agent</strong> (the execution layer) whose job is to work within those constraints. The scaffold is &ldquo;the boss&rdquo; &mdash; it sets the rules of the game.</p>
+
+    <h3>The Self-Correcting Engine</h3>
+    <ol>
+      <li>Agent builds something</li>
+      <li>External validator (not the agent itself) sweeps against scaffold rules</li>
+      <li>Failures produce targeted error signals sent back to the agent</li>
+      <li>Agent repairs and retries until all quality gates pass</li>
+    </ol>
+
+    <h3>Four Mechanisms</h3>
+    <table>
+      <thead><tr><th>Mechanism</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Artifact grammar</strong></td><td>Strict structural definitions that constrain the solution space</td></tr>
+        <tr><td><strong>Externalized correctness</strong></td><td>The agent does not grade its own homework; outside validators do</td></tr>
+        <tr><td><strong>Error-as-feedback loop</strong></td><td>Errors become targeted learning signals, not terminal failures</td></tr>
+        <tr><td><strong>Division of labor</strong></td><td>Scaffold governs, agent executes; separation is non-negotiable</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Recursive Composition</h3>
+    <p>The scaffold + agent + validation pattern can itself become a single component. You nest meta-agents inside each other, creating layers of governance and execution. The question shifts from &ldquo;what tools should we give this model?&rdquo; to <strong>&ldquo;what kind of world, with what rules, for what kind of agent?&rdquo;</strong></p>
+
+    <p>The companion SDD (Specification Driven Development) paper formalizes this: the spec is a first-class artifact that dictates the tests, the tests guide the code, and &ldquo;spec debt&rdquo; is as dangerous as technical debt. The MDA priority framework &mdash; Mechanics first, then Dynamics, then Aesthetics &mdash; orders what to specify and when.</p>
+
+    <!-- ================================================================== -->
+    <h2>4. Pluripotent AI</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> &ldquo;STEM Agent&rdquo; &mdash; Amazon + UC Berkeley, March 2026<br>
+      <strong>Key idea:</strong> Don&rsquo;t build specialized agents &mdash; build one that self-differentiates</p>
+    </div>
+
+    <p>Borrowed from developmental biology: a stem cell is undifferentiated yet capable of specializing into any cell type. The STEM agent starts with no preconceived domain knowledge &mdash; pure reasoning capability &mdash; and self-differentiates based on environment and problems encountered. It discovers capabilities at runtime through MCP, then crystallizes specialized handlers as needed.</p>
+
+    <h3>The Differentiation Lifecycle</h3>
+    <table>
+      <thead><tr><th>Stage</th><th>Biological Analog</th><th>Agent Behavior</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Crystallized</strong></td><td>Cell fate commitment</td><td>Pattern detected from episodic memory</td></tr>
+        <tr><td><strong>Committed</strong></td><td>Progenitor cell</td><td>3 successful activations &mdash; can shortcut the pipeline</td></tr>
+        <tr><td><strong>Mature</strong></td><td>Fully differentiated</td><td>10+ successes &mdash; gets priority routing</td></tr>
+        <tr><td><strong>Apoptosis</strong></td><td>Programmed cell death</td><td>Success drops below threshold &mdash; skill is pruned</td></tr>
+      </tbody>
+    </table>
+
+    <p>The architectural theorem: by forcing all domain capabilities through an MCP layer, <strong>reasoning logic becomes strictly orthogonal to domain knowledge.</strong> You can update the LLM&rsquo;s meta-reasoning without touching tools, or vice versa. The decoupling is mechanical, not aspirational.</p>
+
+    <p>The 8-phase cognitive pipeline (perceive, adapt, skill match, reason, plan, execute, format, learn) runs against 10 behavioral parameters including reasoning depth, exploration vs. exploitation balance, and self-reflection frequency. A caller profiler learns a 20+ dimensional representation of each human user via exponential moving average, silently in the background.</p>
+
+    <!-- ================================================================== -->
+    <h2>5. The Meta-Harness Pattern</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> Stanford RISC Lab + MIT &mdash; Omar (DSPy creator) et al., March 30, 2026<br>
+      <strong>Key idea:</strong> Improving the code <em>around</em> the LLM can matter as much as improving the LLM itself</p>
+    </div>
+
+    <p>A <strong>harness</strong> is the stateful program wrapping a language model that determines what context the model sees at each step &mdash; RAG pipelines, graph RAG, formal reasoning engines, vector databases, agentic loops, all orchestration logic. The <strong>meta-harness</strong> is one level above: a second LLM that reads the entire file system of prior candidate source code, execution traces, and evaluation scores, then proposes optimized harness configurations.</p>
+
+    <h3>How It Works</h3>
+    <ol>
+      <li><strong>Read the full file system</strong> &mdash; all prior candidates, execution traces, scores. A single evaluation can produce up to 10 million tokens of diagnostic information. No summarization allowed; any lossy compression degrades results.</li>
+      <li><strong>Causal reasoning over logs</strong> &mdash; which sequences to analyze, which dependencies matter, which steps caused failures</li>
+      <li><strong>Propose new harness code</strong> &mdash; local edits or substantial rewrites of orchestration logic</li>
+      <li><strong>Evaluate and loop</strong> &mdash; write everything back to the file system (exceeds any context window), repeat</li>
+    </ol>
+
+    <p>The meta-harness treats harness optimization as a <strong>policy search problem in code space</strong>: given a frozen core LLM <em>M</em> and a task distribution <em>X</em>, find the harness <em>H</em> that maximizes expected reward. It achieved 4.7&ndash;7.7 percentage point improvements across text classification, mathematical reasoning, and coding benchmarks.</p>
+
+    <h3>Safety Constraints</h3>
+    <ul>
+      <li>Skills constrain outputs and safety-relevant behavior, not the diagnostic procedure</li>
+      <li>Verifiable reward systems are essential &mdash; the outer LLM only works well where correctness is deterministic</li>
+      <li>Full observability without summarization &mdash; any information reduction causes the harness engineering to fail</li>
+      <li>The harness controls what the core LLM is allowed to see &mdash; absolute gatekeeper function</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <h2>6. Agent Orchestration 2026</h2>
+
+    <div class="card">
+      <p><strong>Source:</strong> Zach Lloyd, Warp CEO (former Google Principal Engineer) + Claude Code deep dive<br>
+      <strong>Key idea:</strong> The industry is converging on convoy/mayor patterns</p>
+    </div>
+
+    <p>Zach Lloyd argues that 2026 is the year agent orchestration moves from individual laptops to cloud-based, team-visible, programmable infrastructure. Developers routinely run 3&ndash;5 concurrent agents against large codebases (~1M lines), and laptops are the bottleneck. Five orchestration patterns are crystallizing across the industry:</p>
+
+    <table>
+      <thead><tr><th>Pattern</th><th>Description</th><th>Industry Examples</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Parallel single-threaded</strong></td>
+          <td>Multiple independent agents in cloud sandboxes, each on a separate task</td>
+          <td>Warp Oz, Stripe Minions, Ramp</td>
+        </tr>
+        <tr>
+          <td><strong>Named agents / scheduled</strong></td>
+          <td>Version-controlled skills running on cron &mdash; auto-updating docs, dead-code cleanup</td>
+          <td>Warp named agents, GitHub Agents</td>
+        </tr>
+        <tr>
+          <td><strong>Agent-as-app-backend</strong></td>
+          <td>Agent capabilities embedded in TUI/web apps for issue triage, de-duplication</td>
+          <td>Power Fixer (open source)</td>
+        </tr>
+        <tr>
+          <td><strong>Human-in-the-loop handoff</strong></td>
+          <td>Agents do 80% of work, engineer steers from phone/web</td>
+          <td>Warp cloud handoff</td>
+        </tr>
+        <tr>
+          <td><strong>Multi-agent coordination</strong></td>
+          <td>Agents orchestrating each other via APIs/SDKs for complex collaborative tasks</td>
+          <td>Next frontier (emerging)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The Claude Code deep dive confirms the primitives needed: the agentic loop (context gathering, action execution, result verification), the Bash tool as universal capability bridge (replaces dozens of bespoke integrations), skills as loadable expertise (markdown with YAML front matter, injected just-in-time), and plan mode separating thinking from doing. The three-tier memory hierarchy (user-level, project-level, auto-memory) enables session resumption with full context restoration.</p>
+
+    <p>The required infrastructure primitives converge across both sources: <strong>environments, hosting, tracking, handoff, and programmability.</strong> Long-running tasks require agents that survive beyond context windows. Multi-agent teams (not just parallel singles) will emerge for hard tasks.</p>
+
+    <!-- ================================================================== -->
+    <h2>7. Implications for Our Architecture</h2>
+
+    <div class="card">
+      <p><strong>Six cross-source patterns &mdash; unanimous or near-unanimous agreement across independent researchers</strong></p>
+    </div>
+
+    <h3>Pattern 1: Scaffold &gt; Model (Unanimous &mdash; 7/7 sources)</h3>
+    <p>Every source converges: the harness/scaffold/environment matters more than the raw model. The 12 Primitives analysis says it directly: &ldquo;80% plumbing, 20% AI.&rdquo; Meta-agentic bootstrapping frames it as &ldquo;the difference between giving someone a hammer versus putting them in a fully equipped workshop with a supervisor and a blueprint.&rdquo; The self-organizing intelligence paper argues complex intelligence emerges from simple rules, not from a more powerful central controller. The meta-harness paper proves it empirically: improving the code <em>around</em> the LLM yields measurable gains with a frozen model.</p>
+
+    <h3>Pattern 2: Externalized Verification (5/7 sources)</h3>
+    <p>The agent should not grade its own homework. Meta-agentic bootstrapping uses external validators scanning against scaffold rules. The 12 Primitives reveal dual-level verification (agent checks work + harness checks harness). SDD ties tests one-to-one to spec criteria. The meta-harness requires verifiable reward systems where correctness is deterministic. RLMs use the REPL itself as a verification environment where code either runs or it doesn&rsquo;t.</p>
+
+    <h3>Pattern 3: Recursive Composition (4/7 sources)</h3>
+    <p>Systems that compose themselves from smaller validated units. Meta-agentic bootstrapping nests scaffold+agent+validator as single components. RLMs spawn child agents that return symbolic variables to parents. Pluripotent AI differentiates and re-differentiates through a lifecycle. The meta-harness uses inner/outer sphere nesting. The key question shifts from &ldquo;what tools?&rdquo; to &ldquo;what kind of world?&rdquo;</p>
+
+    <h3>Pattern 4: State = Files, Not Memory (5/7 sources)</h3>
+    <p>Agent identity and state should be durable, model-independent, and filesystem-based. The 12 Primitives persist sessions as JSON files with full engine reconstruction. The meta-harness writes everything back to the filesystem because it exceeds any context window. The Claude Code deep dive describes the three-tier memory hierarchy as filesystem artifacts. Agent orchestration 2026 requires state that survives beyond context windows.</p>
+
+    <h3>Pattern 5: The Simplicity Imperative (4/7 sources)</h3>
+    <p>The most powerful insight that cuts against over-engineering. The 12 Primitives analysis warns: &ldquo;premature complexity is where most projects go to die.&rdquo; Self-organizing intelligence shows complex behavior from &ldquo;a swarm of simple things, each just following simple local rules.&rdquo; Claude Code&rsquo;s Bash tool &mdash; a single tool that bridges thousands of CLI utilities &mdash; outperforms bespoke integrations. RLMs use a standard Python REPL rather than a custom orchestration protocol.</p>
+
+    <h3>Pattern 6: The Governance/Emergence Tension</h3>
+    <p>The deepest architectural insight from synthesizing all sources: governance (scaffold, spec, constraints) and emergence (self-organization, local rules) are not competing philosophies but <strong>complementary forces in tension.</strong> The self-organizing intelligence paper argues for structure emerging from learning. Meta-agentic bootstrapping argues for strict governance layers. Pluripotent AI resolves the tension: the core is undifferentiated (emergence), but the differentiation signals come from the environment (governance). The system works when the forces balance.</p>
+
+    <h3>The Unified Architecture Frame</h3>
+    <pre>
+GOVERNANCE LAYER (scaffold, spec, constraints)
+  |
+  |-- SCAFFOLD: rules, artifact grammars, success criteria
+  |-- COMPOSE: nests governance+execution as recursive components
+  |
+EXECUTION LAYER (agents using atomic primitives)
+  |
+  |-- QUERY, COMPUTE, OBSERVE, COMPARE, CONNECT, PUBLISH, COMMIT, VERIFY
+  |
+INFRASTRUCTURE LAYER (harness providing 12 primitives)
+  |
+  |-- Registry, Permissions, Session, Workflow, Budget, Streaming,
+  |-- Logging, Verification, Tool Pools, Compaction, Audit, Types
+  |
+EMERGENCE LAYER (self-organizing properties)
+  |
+  |-- SYNCHRONIZE: phase alignment between components
+  |-- EMERGE: structure arising from local rules
+  |-- DIFFERENTIATE: pluripotent specialization lifecycle
+    </pre>
+
+    <p>These four layers are not a hierarchy to implement top-down. They are forces in tension. Governance constrains execution. Execution demands infrastructure. Infrastructure enables emergence. Emergence challenges governance. The system works when the tensions balance &mdash; like particles finding their energy minimum.</p>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>MIT RLM paper &mdash; Recursive Language Models inference paradigm (via YouTube research queue)</li>
+      <li>Nate B Jones &mdash; &ldquo;I Broke Down Anthropic&rsquo;s $2.5 Billion Leak. Your Agent Is Missing 12 Critical Pieces.&rdquo; (26:52)</li>
+      <li>p3nGu1nZz (Dr. Dimitrios Geromichalos) &mdash; Meta-Agentic Bootstrapping, Self-Organizing Intelligence, SDD (3 videos)</li>
+      <li>Amazon + UC Berkeley &mdash; &ldquo;STEM Agent: A Self-Adapting Tool-Enabled Extensible Architecture&rdquo; (March 2026)</li>
+      <li>Stanford RISC Lab + MIT &mdash; Meta-Harness Pattern, Omar (DSPy creator) et al. (March 30, 2026)</li>
+      <li>Zach Lloyd (Warp CEO) &mdash; &ldquo;2026: The Year of Agent Orchestration&rdquo;</li>
+      <li>Claude 101 &mdash; &ldquo;Deep Dive into Coding Agents like Claude Code&rdquo;</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Agentic Infrastructure &amp; Systems &middot; PNW Research Series &middot; gsd-skill-creator</p>
+    <p>Cluster 1: Agent Architecture &middot; April 2026</p>
+    <p><a href="index.html">AGT Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

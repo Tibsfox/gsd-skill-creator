@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social &amp; Persuasion &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Social &amp; Persuasion &mdash; Prosocial AI &amp; Deterministic Scheduling</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html" class="active">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Social &amp; Persuasion</h2>
+
+    <blockquote>
+      Two entries exploring the intersection of AI and social influence: a large-scale study demonstrating that LLMs outperform humans at prosocial persuasion for charitable causes, and a systems-level contribution on deterministic DAG scheduling for frame-stable real-time pipelines. The pairing is deliberate &mdash; persuasion at scale requires the scheduling infrastructure to support it.
+    </blockquote>
+
+    <!-- Key Numbers -->
+    <h2>Key Numbers</h2>
+
+    <div class="card">
+      <p><span class="key-number confirmed">14&ndash;23%</span> &mdash; higher conversion rates for LLM-generated prosocial appeals vs. human-written (2604.03202)</p>
+      <p><span class="key-number">3</span> &mdash; advantage sources: rapid A/B testing, fatigue resistance, demographic personalization (2604.03202)</p>
+      <p><span class="key-number">4</span> &mdash; prosocial certification criteria: truthfulness, autonomy, alignment, equity (2604.03202)</p>
+      <p><span class="key-number warn">DAG</span> &mdash; scheduling topology for deterministic frame completion (zenodo:19427346)</p>
+    </div>
+
+    <!-- Prosocial Certification Framework -->
+    <h2>Prosocial Certification Framework</h2>
+
+    <table>
+      <thead>
+        <tr><th>Criterion</th><th>Audit Method</th><th>Failure Example</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Truthfulness</td><td>Claim verification pipeline</td><td>Inflated impact statistics</td><td>Source citation requirements</td></tr>
+        <tr><td>Autonomy respect</td><td>Dark pattern detection</td><td>False urgency, scarcity framing</td><td>Pattern blocklist + human review</td></tr>
+        <tr><td>Objective alignment</td><td>Intent vs. outcome audit</td><td>Cause marketing for profit</td><td>Transparency reporting</td></tr>
+        <tr><td>Demographic equity</td><td>Bias testing across groups</td><td>Guilt-based messaging targeting</td><td>Fairness constraints in generation</td></tr>
+      </tbody>
+    </table>
+
+    <!-- DAG-to-Agent Mapping -->
+    <h2>DAG Scheduling to Agent Orchestration Mapping</h2>
+
+    <table>
+      <thead>
+        <tr><th>C.A.T. Concept</th><th>Agent Parallel</th><th>Constraint</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Frame</td><td>Task completion cycle</td><td>Total token/time budget</td></tr>
+        <tr><td>Micro-task</td><td>Individual agent action</td><td>Per-action token limit</td></tr>
+        <tr><td>Dependency edge</td><td>Data flow between agents</td><td>Information ordering</td></tr>
+        <tr><td>Deadline monotonic priority</td><td>Urgency-based scheduling</td><td>Critical path first</td></tr>
+        <tr><td>Quality reduction</td><td>Context compression</td><td>Graceful degradation</td></tr>
+        <tr><td>Work stealing</td><td>Load balancing across agents</td><td>Idle agent utilization</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Papers</h2>
+
+    <!-- Paper 1 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-social">Prosocial Persuasion</span></div>
+      <h3>Prosocial Persuasion at Scale: LLMs Outperform Humans</h3>
+      <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2604.03202" target="_blank"><span class="arxiv-id">arXiv:2604.03202</span></a><br>
+      <strong>Categories:</strong> cs.CL, cs.CY &middot; <strong>Date:</strong> April 2026</p>
+      <p><strong>Key Finding:</strong> LLMs generate more effective prosocial persuasion messages than human writers for donation appeals and behavioral change campaigns. The study compares LLM-generated and human-written appeals across multiple charitable causes, measuring actual donation rates and behavioral follow-through (not just self-reported intent). LLM-generated messages achieve 14&ndash;23% higher conversion rates depending on the cause category.</p>
+      <p><strong>Mechanism:</strong> The advantage appears to come from three sources: (1) LLMs can rapidly A/B test message variants and converge on effective framings, (2) they naturally adopt empathetic framing without the &ldquo;compassion fatigue&rdquo; that affects human copywriters working on difficult causes, and (3) they can personalize messages at scale based on audience demographic signals that would be impractical for human writers to process individually.</p>
+      <p><strong>Ethical Dimensions:</strong> The paper explicitly addresses the dual-use concern: the same capabilities that make LLMs effective at prosocial persuasion could be applied to manipulation. The authors propose a &ldquo;prosocial certification&rdquo; framework where persuasion systems are audited for: (1) truthfulness of claims, (2) respect for autonomy (no dark patterns), (3) alignment between the persuader&rsquo;s stated and actual objectives, and (4) equitable treatment across demographic groups.</p>
+      <p><strong>Implication:</strong> LLM persuasion capability is already beyond human baseline for prosocial applications. The question is no longer whether to deploy it but how to ensure it remains prosocial. The certification framework provides a starting point but requires adversarial testing to verify compliance.</p>
+    </div>
+
+    <!-- Paper 2 -->
+    <div class="paper-card">
+      <div><span class="paper-badge badge-social">DAG Scheduling</span></div>
+      <h3>C.A.T. Engine: Deterministic Frame Stability via DAG Scheduling</h3>
+      <p><strong>Paper:</strong> <a href="https://zenodo.org/records/19427346" target="_blank"><span class="arxiv-id">zenodo:19427346</span></a> &mdash; Rawson &amp; Chrzanowski</p>
+      <p><strong>Key Finding:</strong> The C.A.T. (Concurrent Action Topology) engine provides deterministic frame stability for real-time pipelines through DAG-based scheduling. Unlike traditional frame-based systems that drop frames under load, C.A.T. guarantees frame completion by scheduling tasks as a directed acyclic graph with explicit dependency tracking and deadline-aware priority assignment.</p>
+      <p><strong>Architecture:</strong> The engine decomposes each frame into a DAG of micro-tasks with declared dependencies, then schedules them across available cores using a work-stealing algorithm constrained by deadline monotonic priority. Tasks that miss their sub-deadline trigger adaptive quality reduction (lower LOD, reduced particle count) rather than frame drops, maintaining perceptual continuity.</p>
+      <p><strong>Connection to Agentic Systems:</strong> The DAG scheduling pattern maps directly to multi-agent orchestration: agents are nodes, data dependencies are edges, and the scheduling constraint is total context budget rather than frame time. C.A.T.&rsquo;s adaptive quality reduction is analogous to progressive context compression when an agent pipeline exceeds its token budget.</p>
+      <p><strong>Implication:</strong> Deterministic scheduling for real-time systems provides patterns directly applicable to agentic pipeline orchestration. The key insight &mdash; schedule by dependency graph with deadline-aware degradation rather than fixed-order execution &mdash; solves the same class of problems in both domains.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SYNTHESIS                                                     -->
+    <!-- ============================================================ -->
+
+    <div class="synthesis">
+      <h3>Synthesis: Scale Requires Infrastructure</h3>
+      <p>These two entries pair content (what to communicate) with infrastructure (how to schedule it):</p>
+      <ul>
+        <li><strong>Persuasion as capability</strong> (2604.03202) &mdash; LLMs have crossed the human-parity threshold for prosocial persuasion. The 14&ndash;23% improvement in conversion rates is significant enough to make LLM-generated appeals the default for charitable organizations with limited marketing budgets.</li>
+        <li><strong>Scheduling as enabler</strong> (zenodo:19427346) &mdash; Operating persuasion at scale requires deterministic pipeline infrastructure. C.A.T.&rsquo;s DAG scheduling pattern provides the execution model: dependency-aware, deadline-constrained, gracefully degrading.</li>
+      </ul>
+      <p>The connection to the broader APD corpus: prosocial persuasion must be verifiable (hallucination cluster), its claims must be grounded (context cluster), and its deployment must be secured against misuse (security cluster). No cluster operates in isolation.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CROSS-CLUSTER DEPENDENCY MAP                                  -->
+    <!-- ============================================================ -->
+
+    <h2>Cross-Cluster Dependencies for Prosocial Deployment</h2>
+
+    <div class="card">
+      <p>Deploying prosocial persuasion at scale requires capabilities from every other APD cluster:</p>
+      <table>
+        <thead>
+          <tr><th>Requirement</th><th>Cluster</th><th>Specific Paper</th><th>Contribution</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Claim truthfulness</td><td>Hallucination</td><td>2604.03173</td><td>Reference verification pipeline (89% detection)</td></tr>
+          <tr><td>Knowledge grounding</td><td>Context</td><td>2604.04190</td><td>Schema-aware KG for fact structure</td></tr>
+          <tr><td>Deployment security</td><td>MCP Security</td><td>2511.20920</td><td>Three-tier governance model</td></tr>
+          <tr><td>Agent accountability</td><td>Agent Reasoning</td><td>2604.03201</td><td>SCRAT coupled verification traces</td></tr>
+          <tr><td>Skill reliability</td><td>Supply-Chain</td><td>2604.04323</td><td>Three-tier evaluation (23&ndash;41% gap)</td></tr>
+          <tr><td>Pipeline scheduling</td><td>Social (this cluster)</td><td>zenodo:19427346</td><td>DAG-based deterministic execution</td></tr>
+        </tbody>
+      </table>
+      <p>This dependency map illustrates the APD thesis: <strong>no research cluster operates in isolation</strong>. A production-ready prosocial persuasion system requires contributions from all seven clusters working together.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CORPUS CROSS-REFERENCES                                       -->
+    <!-- ============================================================ -->
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (6 projects, 245-project corpus)</h4>
+      <span class="ref-tag">ACE &mdash; Compute Engine</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">MAS &mdash; Multi-Agent Systems</span>
+      <span class="ref-tag">GPO &mdash; GPU Orchestration</span>
+      <span class="ref-tag">HPC &mdash; High Performance Computing</span>
+      <span class="ref-tag">PSC &mdash; Political Science &amp; Complex Plane</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- RELATED APD CLUSTERS                                          -->
+    <!-- ============================================================ -->
+
+    <div class="cross-links">
+      <h4>Related APD Clusters</h4>
+      <ul>
+        <li><a href="hallucination-evaluation.html">Hallucination &mdash; Truthfulness certification requires reference verification</a></li>
+        <li><a href="context-knowledge.html">Context &mdash; Claims must be grounded via schema-aware KG</a></li>
+        <li><a href="mcp-security-papers.html">MCP Security &mdash; Deployment security for persuasion systems</a></li>
+        <li><a href="agent-reasoning.html">Agent Reasoning &mdash; OrgAgent hierarchy for governance of persuasion agents</a></li>
+      </ul>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related PNW Research Series</h4>
+      <ul>
+        <li><a href="../ACE/index.html">ACE &mdash; Compute Engine (scheduling patterns)</a></li>
+        <li><a href="../GPO/index.html">GPO &mdash; GPU Orchestration (parallel execution)</a></li>
+        <li><a href="../PSC/index.html">PSC &mdash; Political Science &amp; Complex Plane (persuasion dynamics)</a></li>
+        <li><a href="../HPC/index.html">HPC &mdash; High Performance Computing (DAG scheduling)</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; Social &amp; Persuasion &middot; 2 entries</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

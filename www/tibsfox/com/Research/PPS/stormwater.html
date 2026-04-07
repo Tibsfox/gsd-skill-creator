@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stormwater &mdash; Picnic Point Parking Structure &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pps">
+  <header>
+    <h1>Picnic Point Parking Structure Feasibility</h1>
+    <div class="subtitle">Ground Level + 2-Floor Parking Structure with Overpass Integration &mdash; Snohomish County, WA</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="geotechnical.html">Geotechnical</a>
+      <a href="structural.html">Structural</a>
+      <a href="permitting.html">Permitting</a>
+      <a href="stormwater.html" class="active">Stormwater</a>
+      <a href="cost-funding.html">Cost</a>
+      <a href="transportation.html">Transit</a>
+      <a href="corpus-analysis.html">Corpus</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Module D: Stormwater</h2>
+
+    <blockquote>
+      Stormwater management for this site carries elevated sensitivity due to the direct hydrological connection to Puget Sound shellfish habitat. The shellfish closure documented in <a href="../PPP/index.html" style="color: inherit;">PPP Mission 1</a> is a potential downstream impact factor &mdash; not a problem this module solves, but one it must not worsen.
+      <br><span class="safety-badge safety-annotate">ANNOTATE</span>
+    </blockquote>
+
+    <div class="module-nav">
+      <a href="#impervious">Impervious Surface</a>
+      <a href="#lid-bmps">LID BMPs</a>
+      <a href="#drainage-manual">Drainage Manual</a>
+      <a href="#oil-water">Oil/Water Separator</a>
+      <a href="#shellfish">Shellfish Nexus</a>
+      <a href="#sources">Sources</a>
+    </div>
+
+    <!-- ============================================================
+         1. IMPERVIOUS SURFACE & DRAINAGE MANUAL TRIGGERS
+         ============================================================ -->
+    <section id="impervious">
+      <h2>1. Impervious Surface &amp; Drainage Manual Triggers</h2>
+
+      <p>The conversion from a surface parking lot to a multi-level parking structure changes the stormwater calculation in two competing ways: the building footprint reduces the total impervious area at grade (because stacked parking occupies less ground area than spread parking for the same number of stalls), but the elevated decks create additional rainfall collection surfaces that must be managed. The net impervious surface change &mdash; the delta between existing lot coverage and proposed structure footprint plus any new access drives or walkways &mdash; determines the stormwater management requirements under Snohomish County's Drainage Manual.</p>
+
+      <p>For a 3-level structure with approximately 150&ndash;200 stalls, the ground-level footprint is estimated at 40,000&ndash;55,000 square feet. The upper deck surfaces collect rainfall that is conveyed through internal downspouts to the ground-level drainage system. This project triggers <strong>full Minimum Requirements 1&ndash;9</strong> compliance via two independent pathways:</p>
+
+      <ul>
+        <li><strong>50% valuation test:</strong> The structure cost ($5M&ndash;$6.4M for precast alone, per Module E) far exceeds 50% of the existing lot's assessed value, triggering full MR 1&ndash;9 compliance under the Snohomish County Drainage Manual.</li>
+        <li><strong>2024 NPDES revision:</strong> The 50% replaced hard surface rule for commercial/industrial projects was codified in the 2024 NPDES Phase I permit update, independently triggering the same MR 1&ndash;9 requirement. Additionally, <strong>MR 6 (Runoff Treatment)</strong> threshold was lowered to <strong>2,000 square feet</strong> of pollution-generating impervious surface (Treatment Design Area, or TDA) in the 2024 permit cycle &mdash; a threshold this project exceeds by an order of magnitude.</li>
+      </ul>
+
+      <p>The impervious surface calculation must account for all hard surfaces including the structure footprint, access drives, sidewalks, the Level 3 bridge connection, and any new utility pads. Credits may be available if the project removes more existing impervious surface than it creates, though the elevated deck collection area typically results in a net increase in managed stormwater volume.</p>
+    </section>
+
+    <!-- ============================================================
+         2. LID BMP PERFORMANCE DATA
+         ============================================================ -->
+    <section id="lid-bmps">
+      <h2>2. LID BMP Performance Data</h2>
+
+      <p>The Washington Department of Ecology's <cite>Stormwater Management Manual for Western Washington (SWMMWW)</cite> and Snohomish County's local drainage manual require the use of Low Impact Development (LID) Best Management Practices (BMPs) to the maximum extent feasible before conventional stormwater facilities are considered. LID BMPs are designed to mimic natural hydrology by infiltrating, filtering, and retaining stormwater close to its source. For a site discharging to permanently closed shellfish waters, the performance data for each candidate BMP is a critical design input.</p>
+
+      <p>Monitored performance data from the <a href="https://www.wastormwatercenter.org/" target="_blank">Washington Stormwater Center</a> and Ecology's Source Assessment Methodology (SAM) studies provides the following pollutant removal efficiencies for the two primary candidate BMPs:</p>
+
+      <table>
+        <thead><tr><th>Pollutant</th><th>Bioretention</th><th>Permeable Pavement</th></tr></thead>
+        <tbody>
+          <tr><td>Total Suspended Solids (TSS)</td><td><strong>88&ndash;99%</strong></td><td><strong>80&ndash;96%</strong></td></tr>
+          <tr><td>Zinc (dissolved + total)</td><td><strong>94%</strong></td><td><strong>71&ndash;82%</strong></td></tr>
+          <tr><td>Copper (dissolved + total)</td><td><strong>73&ndash;90%</strong></td><td>&mdash;</td></tr>
+          <tr><td>Lead</td><td>&mdash;</td><td><strong>65&ndash;98%</strong></td></tr>
+          <tr><td>Fecal coliform</td><td><strong>~69%</strong></td><td>&mdash;</td></tr>
+          <tr><td>PAHs (polycyclic aromatic hydrocarbons)</td><td><strong>&gt;90%</strong></td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+
+      <p>Winter/cold-weather performance is a design concern in the Pacific Northwest. Monitored data shows that <strong>filtration-based removal is not significantly impacted</strong> by cold temperatures; in fact, freeze-thaw cycling can enhance infiltration rates in bioretention media by creating macropore structure (WA Stormwater Center, 2022). However, biological treatment processes (nitrogen removal) are reduced during cold months.</p>
+
+      <p><strong>Caution on bioretention soil mix:</strong> The 2024 SWMMWW revision introduced the <strong>High Performance Bioretention Soil Mix (HPBSM)</strong> specification because monitored data demonstrated that the default BSM (60% sand, 15% compost, 25% topsoil) can <strong>leach copper, nitrogen, and phosphorus</strong> during the initial years of operation &mdash; a counterproductive outcome for a site discharging to impaired shellfish waters (Ecology, 2024). The HPBSM uses reduced compost content and amended mineral components to eliminate the leaching problem. For the Picnic Point project, <strong>HPBSM is the mandatory specification</strong> given the shellfish closure context.</p>
+
+      <p>The feasibility of infiltration-based LID at this site depends on the subsurface soil conditions documented in Module A. Vashon Till's low permeability (typically &lt;0.5 in/hr) may limit infiltration rates and require hybrid systems that combine filtration treatment with detention and controlled discharge. Permeable pavement is feasible for ground-level parking aisles and access drives where the subgrade can accept infiltrated water without compromising foundation stability or slope conditions.</p>
+    </section>
+
+    <!-- ============================================================
+         3. DRAINAGE MANUAL MR 1-9
+         ============================================================ -->
+    <section id="drainage-manual">
+      <h2>3. Drainage Manual Minimum Requirements 1&ndash;9</h2>
+
+      <p>Snohomish County's Drainage Manual, which adopts and supplements the Ecology SWMMWW, establishes nine Minimum Requirements (MR 1&ndash;9) that apply to new and redevelopment projects based on the scale of land-disturbing activity and impervious surface creation. As established above, this project triggers all nine requirements through both the 50% valuation test and the 2024 NPDES revision:</p>
+
+      <table>
+        <thead><tr><th>MR</th><th>Requirement</th><th>PPS Applicability</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Stormwater Site Plan</td><td>Required &mdash; submitted with building permit</td></tr>
+          <tr><td>2</td><td>Construction Stormwater Pollution Prevention</td><td>Required &mdash; SWPPP for construction phase</td></tr>
+          <tr><td>3</td><td>Source Control of Pollution</td><td>Required &mdash; oil/water separator, covered storage</td></tr>
+          <tr><td>4</td><td>Preservation of Natural Drainage Systems</td><td>Required &mdash; protect Picnic Point Creek corridor</td></tr>
+          <tr><td>5</td><td>On-Site Stormwater Management</td><td>Required &mdash; LID BMPs (HPBSM) to maximum extent feasible</td></tr>
+          <tr><td>6</td><td>Runoff Treatment</td><td>Required &mdash; enhanced treatment, TDA threshold 2,000 sqft (2024 NPDES)</td></tr>
+          <tr><td>7</td><td>Flow Control</td><td>Required &mdash; match pre-developed flow durations</td></tr>
+          <tr><td>8</td><td>Wetlands Protection</td><td>TBD &mdash; depends on wetland delineation</td></tr>
+          <tr><td>9</td><td>Operation and Maintenance</td><td>Required &mdash; O&amp;M plan for all stormwater facilities</td></tr>
+        </tbody>
+      </table>
+
+      <p>MR 6 (Runoff Treatment) is particularly significant for this site. The <strong>2024&ndash;2029 NPDES Phase I permit</strong> (effective August 1, 2024) introduced several changes directly relevant to the Picnic Point project: the TDA threshold was lowered to 2,000 square feet, <strong>6PPD-quinone</strong> (a tire-derived chemical lethal to coho salmon) is now formalized as a pollutant of concern requiring treatment, and HPBSM is added as the preferred bioretention specification. These changes reflect the evolving understanding of urban runoff impacts on Puget Sound aquatic life and tighten the treatment standards that this project must meet.</p>
+    </section>
+
+    <!-- ============================================================
+         4. OIL CONTROL ANALYSIS
+         ============================================================ -->
+    <section id="oil-water">
+      <h2>4. Oil Control Analysis</h2>
+
+      <p>The oil control requirement under MR 6 is triggered by specific use-intensity thresholds: <strong>300 or more trip ends per day</strong>, or <strong>100 or more vehicles per 1,000 square feet</strong> of gross building area. An all-day parking facility at a county park may not meet these thresholds under strict interpretation, because park visitors typically generate a single arrival and single departure (2 trip ends per vehicle), and a 200-stall lot that turns over once per day generates only 400 trip ends &mdash; above the threshold but subject to seasonal variation and the lot's actual utilization pattern.</p>
+
+      <p>However, <strong>voluntary oil control is strongly warranted</strong> at this site regardless of whether the threshold is technically triggered. The oil control performance goal per Ecology is <strong>no visible sheen</strong> and a <strong>24-hour average TPH (total petroleum hydrocarbons) of 10 mg/L or less</strong>. Given the direct hydrological connection to permanently closed shellfish waters, exceeding minimum standards rather than arguing for exemption is the appropriate engineering and regulatory strategy. This approach aligns with the SEPA review positioning discussed in Module C.</p>
+
+      <p>Coalescing plate separators or enhanced gravity separators sized per Ecology's General Use Level Designation (GULD) criteria provide the required oil removal efficiency. For a parking structure generating approximately 1&ndash;2 cubic feet per second of peak runoff during the design storm, a coalescing plate OWS unit in the 100&ndash;200 gpm range would be typical. Annual maintenance includes sediment removal, oil skimming, and coalescing plate cleaning or replacement, with costs incorporated into the facility's O&amp;M plan (MR 9).</p>
+    </section>
+
+    <!-- ============================================================
+         5. SHELLFISH CLOSURE NEXUS
+         ============================================================ -->
+    <section id="shellfish">
+      <h2>5. Shellfish Closure Nexus</h2>
+
+      <p>The shellfish closure at Picnic Point, documented in <a href="../PPP/ecology.html">PPP Mission 1 (Ecology Module)</a>, is a <strong>permanent, "prohibited" classification</strong> in Possession Sound, administered by the Washington Department of Health (DOH). Clam, mussel, and oyster harvest is closed year-round. The DOH classification states that shellfish from this area are <strong>"not fit for human consumption at any time"</strong> (DOH, Shellfish Growing Area Classification). The closure is driven primarily by fecal coliform contamination, with DOH research indicating that <strong>51% of fecal coliform loading in shellfish growing areas</strong> originates from stormwater runoff and flooding events (DOH, 2023).</p>
+
+      <p>A critical nuance revealed by the research: the Picnic Point shellfish closure is <strong>not on DOH's list of 15 threatened shellfish growing areas</strong> targeted for active restoration. This is not because the water quality is acceptable &mdash; it is because the closure is long-standing and stable, with no active Possession Sound restoration program in progress. The closure predates modern stormwater management standards and reflects decades of cumulative watershed urbanization, not a single correctable source.</p>
+
+      <h3>The Swim Water Quality Paradox</h3>
+
+      <p>The Washington Department of Ecology's <a href="https://ecology.wa.gov/water-shorelines/water-quality/saltwater/beach-monitoring" target="_blank">BEACH program</a> monitoring reveals a counterintuitive finding: swim-season water quality at Picnic Point is <strong>excellent</strong>. Enterococcus geometric mean concentrations of <strong>10 per 100 mL</strong> are well below the EPA recreational water quality standard of <strong>30 per 100 mL</strong> (Ecology BEACH program, 2024). The resolution of this apparent paradox lies in the distinction between water column quality and benthic/sediment quality. Fecal coliform contamination that impairs shellfish is primarily accumulated in <strong>benthic sediments</strong> where filter-feeding organisms concentrate pathogens over time. The water column through which swimmers pass can be simultaneously clean while the sediments beneath are contaminated &mdash; a critical distinction for public communication about the project's environmental context.</p>
+
+      <h3>Comparable Recovery Timelines</h3>
+
+      <p>The research found no documented case in Snohomish County where a parking-facility stormwater improvement led to shellfish reclassification. At a broader scale, the most relevant comparable is <strong>Drayton Harbor</strong> (Whatcom County), which required <strong>25 years</strong> (1988&ndash;2013) to move from "prohibited" to "approved" classification across 810 acres. That recovery required simultaneously addressing septic systems, municipal sewer infrastructure, marina discharges, agricultural runoff, AND stormwater &mdash; not stormwater alone (DOH, 2013). <strong>Henderson Inlet</strong> (Thurston County) still closes <strong>16 times per year</strong> for rainfall events despite decades of watershed management investment. These precedents underscore that the parking structure's stormwater system, however well-designed, will not resolve the shellfish closure &mdash; but it must demonstrably not worsen it.</p>
+    </section>
+
+    <!-- ============================================================
+         SOURCES
+         ============================================================ -->
+    <section id="sources">
+      <h2>Sources</h2>
+      <ul>
+        <li>Washington Department of Ecology. <cite>Stormwater Management Manual for Western Washington (SWMMWW)</cite>. Publication 19-10-021. Updated 2024. High Performance Bioretention Soil Mix specification.</li>
+        <li>Washington Department of Ecology. <cite>Western Washington Phase I Municipal Stormwater Permit (2024&ndash;2029)</cite>. NPDES Permit No. WAR04-5513. Effective August 1, 2024. 6PPD-quinone, HPBSM, MR 6 TDA threshold revision.</li>
+        <li>Washington Department of Ecology. <cite>BEACH Program</cite>. <a href="https://ecology.wa.gov/water-shorelines/water-quality/saltwater/beach-monitoring" target="_blank">ecology.wa.gov/beach-monitoring</a>. Enterococcus monitoring data, Picnic Point site.</li>
+        <li>Washington Stormwater Center. <cite>BMP Performance Monitoring Data</cite>. <a href="https://www.wastormwatercenter.org/" target="_blank">wastormwatercenter.org</a>. Bioretention and permeable pavement removal efficiencies.</li>
+        <li>Washington Department of Health. <cite>Shellfish Growing Area Classification &mdash; Possession Sound</cite>. Permanently closed, "prohibited" classification. 51% fecal coliform from stormwater/flooding.</li>
+        <li>Washington Department of Health. <cite>Drayton Harbor Shellfish Recovery</cite>. 25-year recovery timeline (1988&ndash;2013), 810 acres prohibited to approved.</li>
+        <li>Snohomish County. <cite>Drainage Manual</cite>. Surface Water Management Division. MR 1&ndash;9.</li>
+        <li>Snohomish County. <cite>Land Disturbing Activity Permit</cite>. SCC 30.63B. Triggered at &gt;2,000 sqft impervious.</li>
+        <li>Ecology SAM Studies. Source Assessment Methodology &mdash; bioretention and permeable pavement field performance data.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         CORPUS CROSS-REFERENCE
+         ============================================================ -->
+    <section class="corpus-crossref">
+      <h2>Corpus Cross-Reference &mdash; Module D: Stormwater</h2>
+      <p class="meta">Research Co-Processor (Unison pipeline) &middot; 239-project corpus &middot; 82 cross-refs &middot; 6 passes &middot; AWF strongest ecology connection</p>
+
+      <h3>Key Connections</h3>
+      <table>
+        <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Connection</th></tr></thead>
+        <tbody>
+          <tr><td>AWF</td><td><a href="../AWF/index.html">Clean Air, Water &amp; Food</a></td><td>ecology</td><td>Strongest &mdash; water quality, pollution control, ecological protection</td></tr>
+          <tr><td>PPP</td><td><a href="../PPP/index.html">Picnic Point Park</a></td><td>ecology</td><td>Mission 1 &mdash; shellfish closure nexus, nearshore water quality baseline</td></tr>
+          <tr><td>ECO</td><td><a href="../ECO/index.html">From Tahoma's Summit to the Salish Sea Floor</a></td><td>ecology</td><td>&ldquo;Water&rdquo; and &ldquo;Puget Sound&rdquo; keyword bridges</td></tr>
+          <tr><td>BCM</td><td><a href="../BCM/index.html">Building Construction</a></td><td>infrastructure</td><td>&ldquo;Construction&rdquo; and &ldquo;drainage&rdquo; overlap</td></tr>
+        </tbody>
+      </table>
+      <p><em>82 cross-refs across 6 passes. Shellfish closure nexus connects back to PPP Mission 1 ecology data. AWF is the strongest ecology connection through water quality vocabulary.</em></p>
+
+      <h3>Expansion Analysis</h3>
+      <ul>
+        <li><strong>AWF (Clean Air, Water &amp; Food)</strong> is the primary ecology bridge &mdash; water quality, contamination, and environmental protection vocabulary overlaps significantly.</li>
+        <li><strong>Shellfish closure</strong> creates a direct research thread to PPP Mission 1, demonstrating the mission dependency relationship.</li>
+        <li><strong>&ldquo;Stormwater&rdquo;</strong> as a standalone term has limited corpus presence but expands through &ldquo;water,&rdquo; &ldquo;drainage,&rdquo; and &ldquo;runoff&rdquo; bridges.</li>
+      </ul>
+
+      <h3>Complex Plane Analysis</h3>
+      <blockquote>
+        82 cross-refs &middot; 6 passes<br>
+        Ecology connections dominate through water quality pathway<br>
+        Infrastructure connections secondary, through construction vocabulary
+      </blockquote>
+      <p>The stormwater module sits at the intersection of engineering infrastructure and ecological protection &mdash; a unique position in PPS. Its corpus profile reflects this dual identity: ecology-domain connections through AWF and PPP provide depth, while infrastructure connections through BCM provide the engineering vocabulary bridge.</p>
+
+      <h3>Knowledge Gaps</h3>
+      <ul>
+        <li><strong>Stormwater engineering</strong> (LID BMPs, Drainage Manual requirements, oil/water separators) is novel to the corpus.</li>
+        <li><strong>NPDES permitting</strong> connects to the permitting module's regulatory gap (Module C) &mdash; both represent the governance domain's underrepresentation.</li>
+        <li><strong>Shellfish water quality science</strong> is partially covered through PPP but the engineering response (treatment trains, source control) is new.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Picnic Point Parking Structure &mdash; Engineering Feasibility &middot; Infrastructure Cluster</p>
+    <p>Module D: Stormwater &middot; April 2026</p>
+    <p><a href="../index.html">PNW Research Series</a> &middot; <a href="corpus-analysis.html">Corpus Analysis</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills in the Wild &mdash; Artemis Papers Deep Dive &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-apd">
+  <header>
+    <h1>Artemis Papers Deep Dive</h1>
+    <div class="subtitle">Paper Deep Dive &mdash; Skills in the Wild: Benchmarking 34K Real-World Skills</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="mcp-security-papers.html">MCP Security</a>
+      <a href="supply-chain-defense.html">Supply-Chain</a>
+      <a href="agent-reasoning.html">Agent Reasoning</a>
+      <a href="code-agents.html">Code Agents</a>
+      <a href="hallucination-evaluation.html">Hallucination</a>
+      <a href="context-knowledge.html">Context</a>
+      <a href="social-persuasion.html">Social</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="paper-card">
+      <div><span class="paper-badge badge-defense">Supply-Chain Defense</span></div>
+      <h3>Skills in the Wild: Benchmarking Agentic Skills in Realistic Settings</h3>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2604.04323" target="_blank"><span class="arxiv-id">2604.04323</span></a></p>
+      <p><strong>Authors:</strong> Liu et al.</p>
+      <p><strong>Date:</strong> April 2026 &middot; <strong>Categories:</strong> cs.AI, cs.SE</p>
+    </div>
+
+    <h2>Abstract</h2>
+    <p>A large-scale empirical study of 34,000 real-world agentic skills across progressive challenge levels. Performance degrades as skill complexity increases, approaching no-skill baseline performance at the highest challenge tiers. Query-specific refinement recovers performance from 57.7% to 65.5%, demonstrating that skill curation and adaptation are essential for maintaining effectiveness at scale.</p>
+
+    <h2>Key Findings</h2>
+    <ol>
+      <li><span class="key-number">34,000</span> real-world skills benchmarked across progressive challenge levels</li>
+      <li>Performance degradation approaches <strong>no-skill baseline</strong> at highest complexity</li>
+      <li><span class="key-number warn">57.7%</span> baseline performance before query-specific refinement</li>
+      <li><span class="key-number confirmed">65.5%</span> recovered performance with refinement &mdash; 7.8 percentage point improvement</li>
+      <li>Progressive challenge levels reveal where skill abstractions break down</li>
+      <li>Skill curation and adaptation are essential at scale &mdash; raw skill count is insufficient</li>
+    </ol>
+
+    <h2>Results</h2>
+    <table>
+      <thead><tr><th>Challenge Level</th><th>Raw Performance</th><th>With Refinement</th><th>Gap to Baseline</th></tr></thead>
+      <tbody>
+        <tr><td>Low complexity</td><td>High</td><td>Minimal gain</td><td>Well above no-skill</td></tr>
+        <tr><td>Medium complexity</td><td>Moderate</td><td>Moderate gain</td><td>Narrowing</td></tr>
+        <tr><td>High complexity</td><td>57.7%</td><td>65.5%</td><td>Approaching no-skill</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Methodology</h2>
+    <p>Large-scale benchmark with 34K real-world skills collected from public repositories and marketplace platforms. Progressive challenge levels test skills at increasing complexity: simple tool invocations, multi-step workflows, error recovery, and adversarial inputs. Performance measured against a no-skill baseline (agent without any skill definitions) and an oracle (manually curated skill set). Query-specific refinement adapts skill descriptions per-query before invocation.</p>
+
+    <h2>Implications for Our Architecture</h2>
+    <div class="synthesis">
+      <h3>Skill Philosophy Validation</h3>
+      <p>Directly validates our skill design philosophy: we have 34 curated skills, not 34,000 uncurated ones. The degradation-to-baseline finding confirms that skill quality matters more than quantity.</p>
+      <h3>Specific Insights</h3>
+      <ul>
+        <li>Our skill-integration system's bounded learning guarantees prevent the complexity explosion this paper documents</li>
+        <li>The 57.7% to 65.5% recovery via query-specific refinement maps to our session-awareness skill's context-dependent activation</li>
+        <li>Progressive challenge levels provide a testing framework for our own skill suite</li>
+        <li>The no-skill baseline comparison should be run against our system to measure actual skill contribution</li>
+      </ul>
+    </div>
+
+    <div class="corpus-refs">
+      <h4>Corpus Cross-References (230 projects, 246-project corpus)</h4>
+      <span class="ref-tag">SAA &mdash; Skills, Agents &amp; Teams</span>
+      <span class="ref-tag">AGT &mdash; Agentic Technologies</span>
+      <span class="ref-tag">DRP &mdash; Disaster Recovery</span>
+      <span class="ref-tag">HPC &mdash; High Performance Computing</span>
+      <span class="ref-tag">AAR &mdash; Architecture Alignment</span>
+    </div>
+
+    <div class="cross-links">
+      <h4>Related APD Papers</h4>
+      <ul>
+        <li><a href="paper-2604-04426.html">ShieldNet: Network-Level Guardrails</a></li>
+        <li><a href="paper-2601-07395.html">MCP-ITP: Tool Description Poisoning</a></li>
+        <li><a href="paper-2604-00594.html">Agent Psychometrics: IRT Profiling</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Artemis Papers Deep Dive &middot; arXiv:2604.04323 &middot; Skills in the Wild</p>
+    <p><a href="index.html">APD Overview</a> &middot; <a href="../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>
