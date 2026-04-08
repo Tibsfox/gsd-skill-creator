@@ -58,18 +58,20 @@ YOUTUBE_CHANNELS = [
 MIN_DURATION_S = 300  # 5 minutes
 
 # ── arXiv Search ──
+# NOTE: Queries use ti+abs (title + abstract only) to avoid full-text false positives.
+# Each query includes relevance keywords that MUST appear in title or abstract.
 
 ARXIV_QUERIES = [
-    ("agent orchestration", "cs.AI"),
-    ("MCP server security", "cs.CR"),
-    ("biological nitrogen fixation", "q-bio.MN"),
-    ("green ammonia electrolysis", "physics.chem-ph"),
-    ("multimodal evaluation benchmark", "cs.CV"),
-    ("code generation agents", "cs.SE"),
-    ("process maturity CMMI", "cs.SE"),
-    ("struvite phosphorus recovery", "physics.chem-ph"),
-    ("vertical farming energy", "physics.app-ph"),
-    ("LLM hallucination detection", "cs.CL"),
+    ("agent orchestration", "cs.AI", ["agent", "orchestrat"]),
+    ("MCP server security", "cs.CR", ["MCP", "model context protocol", "tool poison", "agent"]),
+    ("biological nitrogen fixation", "q-bio.MN", ["nitrogen", "fixation", "ammonia", "nitrogenase"]),
+    ("green ammonia electrolysis", "physics.chem-ph", ["ammonia", "electrolysis", "green ammonia", "nitrogen reduction"]),
+    ("multimodal evaluation benchmark", "cs.CV", ["multimodal", "vision-language", "VLM", "visual question"]),
+    ("code generation agents", "cs.SE", ["code generat", "coding agent", "software agent", "LLM code"]),
+    ("process maturity CMMI", "cs.SE", ["CMMI", "process maturity", "software process", "quality assurance"]),
+    ("struvite phosphorus recovery", "physics.chem-ph", ["phosphorus", "struvite", "nutrient recovery", "wastewater"]),
+    ("vertical farming energy", "physics.app-ph", ["vertical farm", "indoor agriculture", "LED grow", "hydroponic", "controlled environment"]),
+    ("LLM hallucination detection", "cs.CL", ["hallucination", "LLM", "language model", "factual"]),
 ]
 
 ARXIV_MAX_RESULTS = 5  # per query
@@ -251,16 +253,36 @@ def check_youtube(state, dry_run=False):
 
 # ── Source: arXiv ──
 
+def _relevance_check(title, abstract, keywords):
+    """Check if title or abstract contains at least one relevance keyword.
+    Returns the matched keyword or None if no match."""
+    text = (title + ' ' + abstract).lower()
+    for kw in keywords:
+        if kw.lower() in text:
+            return kw
+    return None
+
+
 def check_arxiv(state, dry_run=False):
-    """Search arXiv for new papers matching our research interests."""
+    """Search arXiv for new papers matching our research interests.
+    Uses ti+abs: (title + abstract) search instead of all: (full text)
+    to avoid false positives from incidental keyword matches in body text.
+    Applies relevance filtering via required keywords in title/abstract."""
     print("\n=== arXiv Paper Search ===")
     seen = set(state.get('seen_arxiv_ids', []))
     discoveries = []
+    filtered_count = 0
 
-    for query, category in ARXIV_QUERIES:
+    for query, category, relevance_keywords in ARXIV_QUERIES:
         try:
+            # Use ti+abs: to search title and abstract only (not full text)
             encoded = quote_plus(query)
-            url = f"http://export.arxiv.org/api/query?search_query=all:{encoded}+AND+cat:{category}&sortBy=submittedDate&sortOrder=descending&max_results={ARXIV_MAX_RESULTS}"
+            url = (
+                f"http://export.arxiv.org/api/query?"
+                f"search_query=ti:{encoded}+OR+abs:{encoded}+AND+cat:{category}"
+                f"&sortBy=submittedDate&sortOrder=descending"
+                f"&max_results={ARXIV_MAX_RESULTS}"
+            )
 
             req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
             with urlopen(req, timeout=15) as resp:
@@ -273,12 +295,14 @@ def check_arxiv(state, dry_run=False):
                 arxiv_id_match = re.search(r'<id>http://arxiv.org/abs/([^<]+)</id>', entry)
                 title_match = re.search(r'<title>(.*?)</title>', entry, re.DOTALL)
                 published_match = re.search(r'<published>(\d{4}-\d{2}-\d{2})', entry)
+                abstract_match = re.search(r'<summary>(.*?)</summary>', entry, re.DOTALL)
 
                 if not arxiv_id_match or not title_match:
                     continue
 
                 arxiv_id = arxiv_id_match.group(1).strip()
                 title = re.sub(r'\s+', ' ', title_match.group(1).strip())
+                abstract = re.sub(r'\s+', ' ', abstract_match.group(1).strip()) if abstract_match else ''
                 pub_date = published_match.group(1) if published_match else 'unknown'
 
                 if arxiv_id in seen:
@@ -293,12 +317,18 @@ def check_arxiv(state, dry_run=False):
                     except ValueError:
                         pass
 
+                # Relevance filter: title or abstract must contain a relevance keyword
+                matched_kw = _relevance_check(title, abstract, relevance_keywords)
+                if not matched_kw:
+                    filtered_count += 1
+                    continue
+
                 discoveries.append({
                     'title': title,
                     'duration': 'paper',
                     'id': f'arXiv:{arxiv_id}',
                     'domain': f'{category} / {query}',
-                    'summary': f'arXiv {pub_date}, matched query "{query}"',
+                    'summary': f'arXiv {pub_date}, matched query "{query}" (keyword: {matched_kw})',
                     'source': 'arxiv',
                 })
                 seen.add(arxiv_id)
@@ -309,7 +339,7 @@ def check_arxiv(state, dry_run=False):
 
     state['seen_arxiv_ids'] = list(seen)[-200:]
     state['last_arxiv_check'] = datetime.now(timezone.utc).isoformat()
-    print(f"  Searched {len(ARXIV_QUERIES)} queries, found {len(discoveries)} new papers")
+    print(f"  Searched {len(ARXIV_QUERIES)} queries, found {len(discoveries)} new papers ({filtered_count} filtered as irrelevant)")
     return discoveries
 
 
@@ -383,14 +413,21 @@ def check_hn(state, dry_run=False):
 # ── Source: Google Scholar (simplified — uses arXiv for citation tracking) ──
 
 def check_scholar(state, dry_run=False):
-    """Check for new papers citing our tracked key papers via arXiv."""
+    """Check for new papers citing our tracked key papers via arXiv.
+    Uses ti+abs: search to avoid false positives from full-text matching."""
     print("\n=== Citation Check (via arXiv) ===")
+    seen_arxiv = set(state.get('seen_arxiv_ids', []))
     discoveries = []
 
     for label, query in SCHOLAR_TRACKED:
         try:
             encoded = quote_plus(query)
-            url = f"http://export.arxiv.org/api/query?search_query=all:{encoded}&sortBy=submittedDate&sortOrder=descending&max_results=3"
+            # Use ti+abs instead of all: to reduce false positives
+            url = (
+                f"http://export.arxiv.org/api/query?"
+                f"search_query=ti:{encoded}+OR+abs:{encoded}"
+                f"&sortBy=submittedDate&sortOrder=descending&max_results=3"
+            )
 
             req = Request(url, headers={'User-Agent': 'GSD-ResearchEngine/1.0'})
             with urlopen(req, timeout=15) as resp:
@@ -418,7 +455,6 @@ def check_scholar(state, dry_run=False):
                     except ValueError:
                         pass
 
-                seen_arxiv = set(state.get('seen_arxiv_ids', []))
                 if arxiv_id in seen_arxiv:
                     continue
 
@@ -431,12 +467,12 @@ def check_scholar(state, dry_run=False):
                     'source': 'scholar',
                 })
                 seen_arxiv.add(arxiv_id)
-                state['seen_arxiv_ids'] = list(seen_arxiv)[-200]
                 print(f"  NEW: {arxiv_id} — {title[:60]}... (related to {label})")
 
         except (URLError, Exception) as e:
             print(f"  ERROR [{label}]: {e}")
 
+    state['seen_arxiv_ids'] = list(seen_arxiv)[-200:]
     state['last_scholar_check'] = datetime.now(timezone.utc).isoformat()
     print(f"  Checked {len(SCHOLAR_TRACKED)} tracked papers, found {len(discoveries)} new related papers")
     return discoveries
