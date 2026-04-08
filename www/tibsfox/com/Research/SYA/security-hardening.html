@@ -3,150 +3,1074 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security &amp; Hardening &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <title>Security & Hardening &mdash; Systems Administration &mdash; PNW Research Series</title>
   <link rel="stylesheet" href="../../brand.css">
   <link rel="stylesheet" href="style.css">
   <script src="../series.js" defer></script>
 </head>
 <body class="project-sya">
   <header>
-    <h1>Security &amp; Hardening</h1>
-    <div class="subtitle">CIS Benchmarks, IDS/IPS, SIEM, SSH, SELinux, PKI, Vault, Compliance</div>
+    <h1>Security & Hardening</h1>
+    <div class="subtitle">Systems Administration Deep Research &mdash; Artemis II Mission Research</div>
     <nav>
       <a href="index.html">Overview</a>
-      <a href="history-evolution.html">History</a>
-      <a href="linux-fundamentals.html">Linux</a>
+      <a href="history-evolution.html">History & Evolution</a>
+      <a href="linux-fundamentals.html">Linux Fundamentals</a>
       <a href="networking.html">Networking</a>
-      <a href="storage-filesystems.html">Storage</a>
-      <a href="monitoring-observability.html">Monitoring</a>
-      <a href="security-hardening.html" class="active">Security</a>
-      <a href="automation-iac.html">Automation</a>
-      <a href="cloud-containers.html">Cloud</a>
-      <a href="aiops-future.html">AIOps</a>
-      <a href="professional-practice.html">Practice</a>
+      <a href="storage-filesystems.html">Storage & Filesystems</a>
+      <a href="monitoring-observability.html">Monitoring & Observability</a>
+      <a href="security-hardening.html" class="active">Security & Hardening</a>
+      <a href="automation-iac.html">Automation & IaC</a>
+      <a href="cloud-containers.html">Cloud & Containers</a>
+      <a href="aiops-future.html">AIOps & Future</a>
+      <a href="professional-practice.html">Professional Practice</a>
     </nav>
   </header>
 
   <main>
-    <blockquote>
-      Security is not a feature you add; it is a property of the entire system. Every decision &mdash; from which ports to open to how secrets are stored &mdash; either strengthens or weakens the overall security posture. The sysadmin is the last line of defense between the attacker and the data.
-    </blockquote>
-
-    <!-- CIS BENCHMARKS -->
-    <h2>CIS Benchmarks</h2>
-    <p>The <strong>Center for Internet Security (CIS)</strong> publishes hardening benchmarks for every major operating system, cloud platform, and application. CIS benchmarks are the industry standard for baseline security configuration. They provide two profiles:</p>
-    <div class="card">
-      <p><strong>Level 1:</strong> Basic security settings that can be applied broadly without significant performance impact or functionality loss</p>
-      <p><strong>Level 2:</strong> Defense-in-depth settings for high-security environments, may restrict some functionality</p>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <p><strong>Co-Processor:</strong> 8 corpus cross-references across 3 convergence passes against 249 projects in 13 Rosetta clusters. Deep research expansion: gap analysis + 8x content increase.</p>
     </div>
-    <p>Automated scanning tools like <strong>OpenSCAP</strong>, <strong>Lynis</strong>, and <strong>CIS-CAT</strong> verify compliance against benchmarks and generate remediation reports.</p>
 
-    <!-- PATCH MANAGEMENT -->
-    <h2>Patch Management</h2>
-    <p>Unpatched systems are the most exploited attack vector. A mature patch management process includes: vulnerability scanning (Nessus, OpenVAS, Qualys), risk-based prioritization (CVSS scores, CISA KEV catalog), staged rollout (dev &rarr; staging &rarr; production), rollback plans, and compliance reporting. <strong>Unattended-upgrades</strong> (Debian) and <strong>dnf-automatic</strong> (RHEL) automate security patches on individual hosts. <strong>Spacewalk</strong>, <strong>Foreman</strong>, and <strong>WSUS</strong> manage patching at fleet scale.</p>
+    <h1>Security &amp; Hardening for Systems Administrators</h1>
 
-    <!-- IDS/IPS -->
-    <h2>Intrusion Detection &amp; Prevention</h2>
-    <table>
-      <thead><tr><th>Tool</th><th>Type</th><th>Detection Method</th><th>Deployment</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Suricata</strong></td><td>NIDS/NIPS</td><td>Signature + protocol anomaly, multi-threaded</td><td>Inline (IPS) or passive (IDS)</td></tr>
-        <tr><td><strong>OSSEC / Wazuh</strong></td><td>HIDS</td><td>Log analysis, file integrity, rootkit detection</td><td>Agent on each host, central manager</td></tr>
-        <tr><td><strong>Snort</strong></td><td>NIDS/NIPS</td><td>Signature-based, single-threaded</td><td>Classic, being superseded by Suricata</td></tr>
-        <tr><td><strong>AIDE</strong></td><td>File integrity</td><td>Cryptographic hash comparison of filesystem</td><td>Cron-based scan on each host</td></tr>
-      </tbody>
-    </table>
+<p class="meta">
+  PNW Research Series &mdash; Systems Administration Deep Dive<br>
+  Last updated: April 2026 &bull; Covers CIS Benchmark v4.x, Vault 1.17+, SELinux/AppArmor current, NIST 800-53 Rev 5
+</p>
 
-    <!-- SIEM -->
-    <h2>SIEM (Security Information and Event Management)</h2>
-    <p>SIEM platforms aggregate logs from all systems, apply correlation rules, and generate security alerts. They are the central nervous system of security operations. Key platforms: <strong>Elastic SIEM</strong> (open source, built on ELK), <strong>Splunk</strong> (commercial leader), <strong>Wazuh</strong> (open source, OSSEC-based), <strong>QRadar</strong> (IBM). Effective SIEM requires tuning: out-of-box rules generate excessive false positives. Iterative refinement based on environment-specific baselines is essential.</p>
+<blockquote>
+  "The only truly secure system is one that is powered off, cast in a block of concrete, and sealed in a lead-lined room with armed guards."
+  &mdash; Gene Spafford, Purdue University
+</blockquote>
 
-    <!-- SSH HARDENING -->
-    <h2>SSH Hardening</h2>
-    <p>SSH is the most critical service to harden because it provides direct system access:</p>
-    <pre><code># /etc/ssh/sshd_config — hardened settings
+<p>Security hardening is the practice of reducing a system's attack surface by eliminating unnecessary software, tightening configurations, applying patches, and enforcing access controls. It is not a one-time task&mdash;it is a continuous discipline that spans the full lifecycle of every system you operate. This module covers the major domains of systems security: from industry benchmarks and patch management through intrusion detection, mandatory access controls, cryptographic infrastructure, secrets management, and compliance frameworks.</p>
+
+<!-- ================================================================== -->
+<h2>1. CIS Benchmarks</h2>
+
+<h3>1.1 What CIS Benchmarks Are</h3>
+
+<p>The Center for Internet Security (CIS) publishes consensus-based configuration guidelines for over 100 technologies, including operating systems, cloud platforms, databases, and container runtimes. Each benchmark is a document containing hundreds of specific configuration recommendations, developed through collaboration between security practitioners, vendors, and government agencies.</p>
+
+<p>CIS benchmarks are the most widely adopted hardening standards in the industry. They are referenced by NIST, PCI DSS, HIPAA, FedRAMP, and SOC 2 auditors as evidence of due diligence.</p>
+
+<h3>1.2 Level 1 vs. Level 2</h3>
+
+<table>
+  <tr><th>Profile</th><th>Scope</th><th>Impact</th><th>Use Case</th></tr>
+  <tr><td><strong>Level 1</strong></td><td>Essential security hardening that can be implemented without significant performance impact or reduced functionality.</td><td>Low</td><td>All production systems. This is your baseline.</td></tr>
+  <tr><td><strong>Level 2</strong></td><td>Defense-in-depth measures that may reduce functionality or performance. More restrictive access controls, additional auditing, and stricter network policies.</td><td>Moderate</td><td>High-security environments: financial systems, healthcare, government.</td></tr>
+</table>
+
+<p>Each level further subdivides into <strong>Server</strong> and <strong>Workstation</strong> profiles. A production database server should target Level 1 Server at minimum; a workstation used for software development has different requirements.</p>
+
+<h3>1.3 CIS-CAT Scanning</h3>
+
+<p>CIS-CAT Pro is the official assessment tool. It scans a system against a selected benchmark and produces a compliance report showing pass/fail/not-applicable status for each recommendation. The free CIS-CAT Lite covers a subset of recommendations. For automated scanning at scale, most organizations integrate CIS-CAT into their CI/CD pipeline or use configuration management tools (Ansible, Puppet, Chef) to both enforce and validate compliance.</p>
+
+<h3>1.4 Automated Hardening with Ansible</h3>
+
+<p>The <strong>Ansible Lockdown</strong> project provides pre-built Ansible roles aligned with CIS benchmarks for major platforms:</p>
+
+<ul>
+  <li><code>UBUNTU24-CIS</code> &mdash; Ubuntu 24.04 LTS</li>
+  <li><code>UBUNTU22-CIS</code> &mdash; Ubuntu 22.04 LTS</li>
+  <li><code>RHEL9-CIS</code> &mdash; Red Hat Enterprise Linux 9</li>
+  <li><code>RHEL8-CIS</code> &mdash; Red Hat Enterprise Linux 8</li>
+</ul>
+
+<p>Each role contains variables for every CIS recommendation, allowing you to enable or disable individual controls based on your environment:</p>
+
+<pre><code># group_vars/all.yml for UBUNTU24-CIS
+# Level 1 Server (default)
+ubtu24cis_level: 1
+
+# Disable controls that conflict with our environment
+ubtu24cis_rule_1_1_1_1: true    # Ensure cramfs is disabled
+ubtu24cis_rule_1_1_1_2: true    # Ensure freevxfs is disabled
+ubtu24cis_rule_5_2_4: true      # Ensure SSH MaxAuthTries is set to 4
+ubtu24cis_rule_5_2_6: false     # SKIP: SSH X11 forwarding (we need it)
+ubtu24cis_rule_6_1_10: true     # Ensure no world-writable files exist
+
+# Run with check mode first
+# ansible-playbook -i inventory site.yml --check --diff
+# Then apply
+# ansible-playbook -i inventory site.yml</code></pre>
+
+<p><strong>Critical workflow:</strong> Always run in check mode (<code>--check --diff</code>) first to see what would change. Apply in a staging environment, validate that services still function, then roll to production. CIS hardening can break applications that depend on insecure defaults.</p>
+
+<h3>1.5 Common CIS Findings</h3>
+
+<p>Across Ubuntu and RHEL systems, the most frequent findings are:</p>
+<ul>
+  <li><strong>Unnecessary services enabled:</strong> avahi-daemon, cups, rpcbind running on servers that do not need them.</li>
+  <li><strong>Weak file permissions:</strong> World-readable cron files, world-writable directories outside /tmp, overly permissive /etc/shadow permissions.</li>
+  <li><strong>Missing audit rules:</strong> auditd not configured to log privilege escalation, file system changes, or login events.</li>
+  <li><strong>Password policy:</strong> No password complexity requirements, no login attempt lockout, no password aging.</li>
+  <li><strong>Kernel parameters:</strong> IP forwarding enabled, ICMP redirects accepted, source routing not disabled.</li>
+</ul>
+
+<!-- ================================================================== -->
+<h2>2. Patch Management</h2>
+
+<h3>2.1 The Vulnerability Lifecycle</h3>
+
+<p>Understanding the timeline from vulnerability discovery to patch deployment is essential for prioritizing work:</p>
+
+<ol>
+  <li><strong>Discovery:</strong> A researcher or attacker finds a vulnerability.</li>
+  <li><strong>Disclosure:</strong> Responsible disclosure to the vendor (or public disclosure if zero-day).</li>
+  <li><strong>CVE Assignment:</strong> MITRE assigns a Common Vulnerabilities and Exposures identifier (e.g., CVE-2024-3094 for the xz backdoor).</li>
+  <li><strong>CVSS Scoring:</strong> The National Vulnerability Database (NVD) assigns a Common Vulnerability Scoring System score (0.0-10.0).</li>
+  <li><strong>Vendor Patch:</strong> The software vendor releases a fix.</li>
+  <li><strong>Distribution Patch:</strong> Linux distributions package the fix into their repositories.</li>
+  <li><strong>Deployment:</strong> You apply the patch to your systems.</li>
+</ol>
+
+<p>The window between steps 3 and 7 is your exposure window. Every day that window is open, your systems are vulnerable to known exploits.</p>
+
+<h3>2.2 CVSS Scoring</h3>
+
+<table>
+  <tr><th>Score Range</th><th>Severity</th><th>Patch Timeline</th></tr>
+  <tr><td>9.0 &ndash; 10.0</td><td>Critical</td><td>Emergency: patch within 24-72 hours. Consider emergency maintenance window.</td></tr>
+  <tr><td>7.0 &ndash; 8.9</td><td>High</td><td>Patch within 7 days. Prioritize internet-facing systems.</td></tr>
+  <tr><td>4.0 &ndash; 6.9</td><td>Medium</td><td>Patch within 30 days during regular maintenance windows.</td></tr>
+  <tr><td>0.1 &ndash; 3.9</td><td>Low</td><td>Patch within 90 days or next scheduled maintenance cycle.</td></tr>
+</table>
+
+<p><strong>CVSS is not the whole story.</strong> A CVSS 7.0 vulnerability in an internet-facing web server is far more urgent than a CVSS 9.0 in an air-gapped system. Prioritize based on: CVSS score, exploitability (is there a public exploit?), exposure (internet-facing vs. internal), and asset criticality.</p>
+
+<h3>2.3 Automated Patching</h3>
+
+<p><strong>Debian/Ubuntu:</strong></p>
+<pre><code># Install and configure unattended-upgrades
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure -plow unattended-upgrades
+
+# /etc/apt/apt.conf.d/50unattended-upgrades
+Unattended-Upgrade::Allowed-Origins {
+    "${distro_id}:${distro_codename}-security";
+    "${distro_id}ESMApps:${distro_codename}-apps-security";
+};
+Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+Unattended-Upgrade::Automatic-Reboot "false";  # Reboot manually
+Unattended-Upgrade::Automatic-Reboot-Time "03:00";
+Unattended-Upgrade::Mail "admin@example.com";
+Unattended-Upgrade::MailReport "on-change";</code></pre>
+
+<p><strong>RHEL/Fedora:</strong></p>
+<pre><code># Install and enable dnf-automatic
+sudo dnf install dnf-automatic
+sudo systemctl enable --now dnf-automatic-install.timer
+
+# /etc/dnf/automatic.conf
+[commands]
+upgrade_type = security    # Only security updates
+apply_updates = yes
+download_updates = yes
+
+[emitters]
+emit_via = email
+
+[email]
+email_from = root@example.com
+email_to = admin@example.com</code></pre>
+
+<h3>2.4 Kernel Live Patching</h3>
+
+<p>Rebooting production systems for kernel patches introduces downtime. Live patching technologies apply kernel fixes without restarting:</p>
+
+<ul>
+  <li><strong>Canonical Livepatch:</strong> Service for Ubuntu systems. Patches critical and high-severity kernel CVEs in-memory. Free for up to 5 machines (Ubuntu Pro required for more).</li>
+  <li><strong>kpatch (Red Hat):</strong> Builds and applies binary patches to the running kernel. Used by RHEL's kernel live patching service.</li>
+  <li><strong>kgraft (SUSE):</strong> Similar technology for SUSE Linux Enterprise.</li>
+</ul>
+
+<p>Live patching is not a replacement for regular reboots&mdash;some patches require a full restart&mdash;but it dramatically reduces the urgency of scheduling maintenance windows for routine kernel CVEs.</p>
+
+<h3>2.5 Vulnerability Scanning</h3>
+
+<table>
+  <tr><th>Tool</th><th>Type</th><th>Key Feature</th></tr>
+  <tr><td><strong>Nessus (Tenable)</strong></td><td>Commercial, agent or agentless</td><td>Largest vulnerability plugin library (200K+). Industry standard for compliance scanning.</td></tr>
+  <tr><td><strong>OpenVAS / Greenbone</strong></td><td>Open source, network-based</td><td>Over 100,000 Network Vulnerability Tests (NVTs). Free community feed. Full-featured alternative to Nessus.</td></tr>
+  <tr><td><strong>Trivy (Aqua Security)</strong></td><td>Open source, multi-target</td><td>Scans container images, filesystems, Git repos, Kubernetes clusters, and IaC (Terraform, CloudFormation). Fast, CI/CD-native.</td></tr>
+</table>
+
+<pre><code># Trivy: scan a container image for vulnerabilities
+trivy image --severity HIGH,CRITICAL nginx:1.27
+
+# Trivy: scan local filesystem
+trivy fs --severity HIGH,CRITICAL /path/to/project
+
+# Trivy: scan Kubernetes cluster
+trivy k8s --report summary cluster
+
+# OpenVAS: run via Greenbone Community Container
+docker run -d -p 443:443 --name greenbone greenbone/gsad
+# Then access web UI at https://localhost</code></pre>
+
+<!-- ================================================================== -->
+<h2>3. Intrusion Detection</h2>
+
+<h3>3.1 Host-Based IDS (HIDS)</h3>
+
+<p>Host-based intrusion detection monitors activity on individual hosts: file integrity, log analysis, rootkit detection, and policy compliance.</p>
+
+<p><strong>OSSEC / Wazuh:</strong> Wazuh is the actively-maintained fork of OSSEC. It provides real-time log analysis, file integrity monitoring (FIM), rootkit detection, active response (automatic blocking of malicious IPs), and vulnerability detection. Wazuh agents run on monitored hosts and report to a central Wazuh server.</p>
+
+<pre><code># /var/ossec/etc/ossec.conf (Wazuh agent)
+&lt;ossec_config&gt;
+  &lt;syscheck&gt;
+    &lt;!-- File integrity monitoring --&gt;
+    &lt;directories check_all="yes" realtime="yes"&gt;/etc,/usr/bin,/usr/sbin&lt;/directories&gt;
+    &lt;directories check_all="yes" realtime="yes"&gt;/boot&lt;/directories&gt;
+    &lt;ignore&gt;/etc/mtab&lt;/ignore&gt;
+    &lt;ignore&gt;/etc/hosts.deny&lt;/ignore&gt;
+    &lt;frequency&gt;7200&lt;/frequency&gt;
+  &lt;/syscheck&gt;
+
+  &lt;rootcheck&gt;
+    &lt;rootkit_files&gt;/var/ossec/etc/rootcheck/rootkit_files.txt&lt;/rootkit_files&gt;
+    &lt;rootkit_trojans&gt;/var/ossec/etc/rootcheck/rootkit_trojans.txt&lt;/rootkit_trojans&gt;
+  &lt;/rootcheck&gt;
+&lt;/ossec_config&gt;</code></pre>
+
+<p><strong>AIDE (Advanced Intrusion Detection Environment):</strong> Lightweight file integrity checker. Creates a database of file hashes and attributes, then compares the current state against the database on subsequent runs. Simpler than Wazuh but lacks real-time monitoring and active response.</p>
+
+<pre><code># Initialize AIDE database
+sudo aide --init
+sudo mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+
+# Check for changes (run via cron daily)
+sudo aide --check
+
+# After legitimate changes, update the database
+sudo aide --update</code></pre>
+
+<h3>3.2 Network-Based IDS/IPS (NIDS)</h3>
+
+<p>Network-based intrusion detection inspects network traffic for malicious patterns.</p>
+
+<p><strong>Suricata:</strong> The dominant open-source NIDS/IPS. Multi-threaded, high-performance, supports deep packet inspection, TLS/JA3 fingerprinting, and can operate in IDS (passive) or IPS (inline blocking) mode. Suricata uses the Emerging Threats (ET) ruleset, which contains thousands of signatures for known attack patterns.</p>
+
+<pre><code># Example Suricata rule: detect SSH brute force
+alert ssh $EXTERNAL_NET any -> $HOME_NET 22 (
+    msg:"ET SCAN Potential SSH Brute Force";
+    flow:to_server,established;
+    threshold: type both, track by_src, count 5, seconds 60;
+    classtype:attempted-admin;
+    sid:2019876; rev:3;
+)
+
+# Example: detect SQL injection in HTTP traffic
+alert http $EXTERNAL_NET any -> $HOME_NET any (
+    msg:"ET WEB_SERVER SQL Injection Attempt - UNION SELECT";
+    flow:to_server,established;
+    http.uri;
+    content:"UNION"; nocase;
+    content:"SELECT"; nocase; distance:0;
+    classtype:web-application-attack;
+    sid:2019877; rev:1;
+)</code></pre>
+
+<p><strong>Snort 3:</strong> The original open-source IDS (now maintained by Cisco). Version 3 is a complete rewrite with multi-threading, Lua scripting, and improved performance. Shares rule format compatibility with Suricata.</p>
+
+<h3>3.3 Signature vs. Anomaly Detection</h3>
+
+<p><strong>Signature-based:</strong> Matches traffic or behavior against known patterns (rules). High accuracy for known threats, zero detection of novel attacks. Requires constant rule updates.</p>
+
+<p><strong>Anomaly-based:</strong> Builds a baseline of "normal" behavior and alerts on deviations. Can detect unknown threats but produces more false positives. Machine learning models are increasingly used for anomaly detection, but they require tuning and retraining as normal behavior evolves.</p>
+
+<p>Production deployments use both: signatures catch the known threats, anomaly detection provides a safety net for the unknown.</p>
+
+<h3>3.4 The Detection Engineering Discipline</h3>
+
+<p>Detection engineering treats intrusion detection rules as code: versioned, tested, reviewed, and continuously improved. This is a shift from the traditional approach of enabling a vendor ruleset and hoping for the best.</p>
+
+<p>The detection engineering lifecycle:</p>
+<ol>
+  <li><strong>Hypothesis:</strong> Based on threat intelligence or ATT&CK techniques, identify a behavior you want to detect (e.g., "detect Kerberoasting attempts via anomalous TGS requests").</li>
+  <li><strong>Data source validation:</strong> Confirm that the required log sources are collected and parsed correctly. You cannot detect what you cannot see.</li>
+  <li><strong>Rule development:</strong> Write the detection logic. Test against known-good and known-bad samples.</li>
+  <li><strong>Tuning:</strong> Deploy in detection-only mode. Measure false positive rate. Adjust thresholds, add exclusions for known-good behavior.</li>
+  <li><strong>Production deployment:</strong> Enable alerting. Document the expected false positive rate, investigation steps, and response procedures.</li>
+  <li><strong>Continuous improvement:</strong> Review alert quality monthly. Track metrics: true positive rate, false positive rate, mean time to detect, mean time to respond.</li>
+</ol>
+
+<h3>3.5 False Positive Management</h3>
+
+<p>The curse of intrusion detection is false positives. A rule that fires 100 times a day on legitimate traffic trains operators to ignore it, which means a real attack hidden in the noise goes unnoticed. Systematic management:</p>
+<ul>
+  <li>Track false positive rates per rule. A rule with greater than 90% false positives needs immediate tuning or removal.</li>
+  <li>Tune threshold values rather than disabling rules entirely. Raising a brute force threshold from 3 to 10 attempts may eliminate noise while still catching real attacks.</li>
+  <li>Use suppression lists for known-good sources. Your vulnerability scanner's IP should not trigger IDS alerts during scheduled scans.</li>
+  <li>Review and update rules monthly. As infrastructure changes, detection rules must evolve.</li>
+  <li>Tag rules with MITRE ATT&CK technique IDs for context. This enables coverage gap analysis&mdash;you can see which techniques have no detection rules.</li>
+  <li>Maintain a detection coverage matrix: map your detection rules against ATT&CK techniques and identify blind spots. A SIEM with 500 rules that all detect Initial Access but none detect Lateral Movement has a critical gap.</li>
+</ul>
+
+<!-- ================================================================== -->
+<h2>4. SIEM</h2>
+
+<h3>4.1 Architecture</h3>
+
+<p>A Security Information and Event Management (SIEM) system aggregates logs from across your infrastructure (servers, firewalls, IDS, applications, cloud services), normalizes them into a common format, correlates events across sources, and applies detection rules to identify security incidents.</p>
+
+<p>Core components:</p>
+<ul>
+  <li><strong>Log ingestion:</strong> Collect from agents (Wazuh, Beats, Fluentd), syslog, APIs, cloud trails.</li>
+  <li><strong>Normalization:</strong> Parse diverse log formats into structured fields (source IP, destination port, user, action).</li>
+  <li><strong>Correlation engine:</strong> Match patterns across multiple events and sources.</li>
+  <li><strong>Detection rules:</strong> Signatures, thresholds, and statistical anomalies that trigger alerts.</li>
+  <li><strong>Case management:</strong> Track investigation and response for triggered alerts.</li>
+</ul>
+
+<h3>4.2 SIEM Platforms</h3>
+
+<table>
+  <tr><th>Platform</th><th>Type</th><th>Strengths</th></tr>
+  <tr><td><strong>Wazuh</strong></td><td>Open source</td><td>Unified HIDS + SIEM. Built-in MITRE ATT&CK mapping. Active community. No license costs.</td></tr>
+  <tr><td><strong>Elastic SIEM</strong></td><td>Open source (basic), commercial (advanced)</td><td>Built on Elasticsearch. Powerful search. Pre-built detection rules mapped to MITRE ATT&CK.</td></tr>
+  <tr><td><strong>Splunk</strong></td><td>Commercial</td><td>Industry leader. Most mature search language (SPL). Extensive app ecosystem. Expensive at scale.</td></tr>
+  <tr><td><strong>Microsoft Sentinel</strong></td><td>Cloud-native (Azure)</td><td>Deep Azure/M365 integration. KQL query language. Pay-per-GB pricing.</td></tr>
+</table>
+
+<h3>4.3 MITRE ATT&CK Framework</h3>
+
+<p>MITRE ATT&CK is a knowledge base of adversary tactics, techniques, and procedures (TTPs) based on real-world observations. It organizes attack behavior into a matrix of 14 tactics (the "why"&mdash;Reconnaissance, Initial Access, Execution, Persistence, etc.) and hundreds of techniques (the "how"&mdash;Phishing, PowerShell, Scheduled Tasks, etc.).</p>
+
+<p>For SIEM operators, ATT&CK provides:</p>
+<ul>
+  <li><strong>Detection rule mapping:</strong> Tag every detection rule with the ATT&CK technique it detects. This reveals coverage gaps&mdash;if you have no rules for Lateral Movement techniques, that is a blind spot.</li>
+  <li><strong>Threat intelligence integration:</strong> Threat reports describe adversary TTPs using ATT&CK IDs, allowing you to map intelligence directly to your detection rules.</li>
+  <li><strong>Purple teaming:</strong> Red teams emulate specific ATT&CK techniques while blue teams validate detection coverage.</li>
+</ul>
+
+<h3>4.4 Common Detection Use Cases</h3>
+
+<pre><code># Wazuh rule: detect brute force (5+ failed logins in 60 seconds)
+&lt;group name="authentication_failures"&gt;
+  &lt;rule id="100100" level="10" frequency="5" timeframe="60"&gt;
+    &lt;if_matched_group&gt;authentication_failed&lt;/if_matched_group&gt;
+    &lt;description&gt;Multiple authentication failures from same source&lt;/description&gt;
+    &lt;mitre&gt;
+      &lt;id&gt;T1110&lt;/id&gt;  &lt;!-- Brute Force --&gt;
+    &lt;/mitre&gt;
+  &lt;/rule&gt;
+&lt;/group&gt;</code></pre>
+
+<p>Key detection scenarios:</p>
+<ul>
+  <li><strong>Brute force:</strong> Multiple failed authentication attempts from a single source within a time window (T1110).</li>
+  <li><strong>Lateral movement:</strong> Authentication from one internal host to many others in rapid succession, especially using service accounts (T1021).</li>
+  <li><strong>Data exfiltration:</strong> Unusual outbound data volumes, especially to uncommon destinations or over DNS/ICMP tunnels (T1048).</li>
+  <li><strong>Privilege escalation:</strong> sudo usage by unexpected users, modification of /etc/sudoers, setuid bit changes (T1548).</li>
+  <li><strong>Persistence:</strong> New cron jobs, systemd services, or SSH authorized_keys entries created by non-administrative users (T1053, T1098).</li>
+</ul>
+
+<h3>4.5 SOAR Integration</h3>
+
+<p>Security Orchestration, Automation, and Response (SOAR) platforms automate the response to SIEM alerts. When a brute force alert fires, the SOAR playbook can automatically: enrich the alert with threat intelligence (is the source IP known-malicious?), block the IP at the firewall, create an investigation ticket, and notify the security team. This reduces mean time to response from minutes to seconds for common attack patterns.</p>
+
+<p>A practical SOAR workflow for SSH brute force detection:</p>
+<ol>
+  <li><strong>Trigger:</strong> Wazuh generates alert (rule 100100, multiple authentication failures).</li>
+  <li><strong>Enrichment:</strong> Query AbuseIPDB and VirusTotal for the source IP. Check if it appears in internal asset inventory (is this a legitimate internal system?).</li>
+  <li><strong>Decision:</strong> If the IP is external and has a high abuse confidence score, proceed to block. If internal, escalate to the security team for investigation (possible compromised host or credential stuffing from inside the network).</li>
+  <li><strong>Response:</strong> Add the IP to the firewall blocklist. Create a Jira ticket with the enrichment data. Send a Slack notification to the security channel.</li>
+  <li><strong>Documentation:</strong> Log all actions taken in the case management system for audit trail and post-incident review.</li>
+</ol>
+
+<p>Open-source SOAR options include Wazuh's built-in active response module, Shuffle (a visual SOAR platform), and TheHive + Cortex (case management with automated analysis). For smaller teams, even a set of well-written scripts triggered by webhook integrations can provide significant response automation.</p>
+
+<!-- ================================================================== -->
+<h2>5. SSH Hardening</h2>
+
+<h3>5.1 Essential sshd_config Settings</h3>
+
+<pre><code># /etc/ssh/sshd_config — hardened configuration
+# Authentication
 PermitRootLogin no
-PasswordAuthentication no
 PubkeyAuthentication yes
-AuthorizedKeysFile .ssh/authorized_keys
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
 MaxAuthTries 3
+MaxSessions 3
 LoginGraceTime 30
-AllowUsers deploy monitor
+
+# Restrict users
+AllowGroups ssh-users admin
+
+# Protocol and ciphers
+Protocol 2
+KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+
+# Logging and session
+LogLevel VERBOSE
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+# Forwarding restrictions
 X11Forwarding no
 AllowTcpForwarding no
-ClientAliveInterval 300
-ClientAliveCountMax 2</code></pre>
-    <p>Additional layers: <strong>fail2ban</strong> (ban IPs after failed attempts), <strong>port knocking</strong> (hide SSH port), <strong>SSH certificates</strong> (replace static authorized_keys with time-limited certificates issued by a CA).</p>
+AllowAgentForwarding no
+PermitTunnel no
 
-    <!-- MAC -->
-    <h2>Mandatory Access Control</h2>
-    <p><strong>SELinux</strong> and <strong>AppArmor</strong> implement mandatory access control at the kernel level, confining processes to only the resources their policy allows &mdash; even if the process runs as root.</p>
-    <table>
-      <thead><tr><th>Feature</th><th>SELinux</th><th>AppArmor</th></tr></thead>
-      <tbody>
-        <tr><td>Policy model</td><td>Label-based (type enforcement)</td><td>Path-based (profile per binary)</td></tr>
-        <tr><td>Default distros</td><td>RHEL, Fedora, CentOS, Rocky</td><td>Ubuntu, Debian, SUSE</td></tr>
-        <tr><td>Complexity</td><td>High (steeper learning curve)</td><td>Medium (more approachable)</td></tr>
-        <tr><td>Modes</td><td>Enforcing, Permissive, Disabled</td><td>Enforce, Complain</td></tr>
-        <tr><td>Troubleshooting</td><td><code>ausearch</code>, <code>audit2allow</code>, <code>sealert</code></td><td><code>aa-status</code>, <code>aa-logprof</code>, <code>aa-complain</code></td></tr>
-      </tbody>
-    </table>
-    <p><strong>Never disable SELinux.</strong> If something breaks, switch to permissive mode, diagnose with <code>audit2allow</code>, and create a custom policy module. Disabling MAC is a security regression that most compliance frameworks will flag.</p>
+# Conditional overrides with Match blocks
+Match Group developers
+    AllowTcpForwarding yes
+    PermitTunnel yes
 
-    <!-- PKI/TLS -->
-    <h2>PKI &amp; TLS Certificate Management</h2>
-    <p>Public Key Infrastructure underpins all encrypted communication. Sysadmins manage certificate lifecycles: generation (CSR), signing (CA or Let&rsquo;s Encrypt), deployment, renewal, and revocation. <strong>cert-manager</strong> automates certificate lifecycle in Kubernetes. <strong>Smallstep</strong> and <strong>HashiCorp Vault PKI</strong> provide private CA infrastructure for internal services.</p>
+Match Address 10.0.0.0/8
+    PasswordAuthentication yes  # Allow password auth from internal network only</code></pre>
 
-    <!-- SECRETS MANAGEMENT -->
-    <h2>Secrets Management</h2>
-    <p><strong>HashiCorp Vault</strong> is the standard for secrets management: dynamic secrets (database credentials generated on demand), secret rotation, audit logging, and integration with Kubernetes, Terraform, and CI/CD pipelines. Alternatives: <strong>AWS Secrets Manager</strong>, <strong>Azure Key Vault</strong>, <strong>SOPS</strong> (encrypted files in git), <strong>age</strong> (simple file encryption).</p>
-    <p><strong>Rule:</strong> Secrets never belong in source code, environment variables in Dockerfiles, or configuration files committed to version control.</p>
+<h3>5.2 Key Types: Ed25519 Is the Standard</h3>
 
-    <!-- COMPLIANCE -->
-    <h2>Compliance Frameworks</h2>
-    <table>
-      <thead><tr><th>Framework</th><th>Scope</th><th>Key Requirements for Sysadmins</th></tr></thead>
-      <tbody>
-        <tr><td><strong>NIST 800-53</strong></td><td>US federal systems</td><td>Access control, audit logging, incident response, configuration management</td></tr>
-        <tr><td><strong>SOC 2</strong></td><td>SaaS / service providers</td><td>Security, availability, processing integrity, confidentiality, privacy</td></tr>
-        <tr><td><strong>PCI-DSS</strong></td><td>Payment card processing</td><td>Network segmentation, encryption, vulnerability scanning, access control</td></tr>
-        <tr><td><strong>HIPAA</strong></td><td>Healthcare data (US)</td><td>PHI encryption, access audit trails, disaster recovery, risk assessments</td></tr>
-        <tr><td><strong>ISO 27001</strong></td><td>International information security</td><td>ISMS framework, risk treatment, continuous improvement</td></tr>
-      </tbody>
-    </table>
+<p>Ed25519 is the recommended key type for SSH in 2026. It produces compact 256-bit keys, is faster to generate and verify than RSA, has a simpler implementation with fewer side-channel attack opportunities, and is supported by OpenSSH 6.5+ (released 2014, so effectively universal).</p>
 
-    <!-- CORPUS CROSS-REFERENCES -->
-    <h2>Corpus Cross-References</h2>
-    <p>Pipeline analysis identified <strong>235 related projects</strong> across 2 knowledge domains with 98 cross-references.</p>
-    <table>
-      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
-      <tbody>
-        <tr><td>AGT</td><td>Agentic Technologies Research Digest</td><td>general</td><td>0.311</td></tr>
-        <tr><td>RCA</td><td>Root Cause Analysis</td><td>general</td><td>0.249</td></tr>
-        <tr><td>BEACH</td><td>Water Access, Boating &amp; Fishing</td><td>general</td><td>0.252</td></tr>
-        <tr><td>RFC</td><td>RFC Archive &amp; Authorship</td><td>general</td><td>0.204</td></tr>
-        <tr><td>SRD</td><td>SSH &amp; Remote Desktop Protocols</td><td>general</td><td>0.163</td></tr>
-        <tr><td>FCC</td><td>FCC Catalog of Rules &amp; Regulations</td><td>general</td><td>0.188</td></tr>
-        <tr><td>SYS</td><td>Systems Administration: The Spaces In Between</td><td>general</td><td>0.185</td></tr>
-        <tr><td>ECO</td><td>From Tahoma&rsquo;s Summit to the Salish Sea Floor</td><td>ecology</td><td>0.231</td></tr>
-      </tbody>
-    </table>
-    <p>Domains: general (228), ecology (7). Complex plane: z = 0.1670 + 0.1133i, |z| = 0.2019.</p>
+<pre><code># Generate an Ed25519 key
+ssh-keygen -t ed25519 -C "admin@example.com" -f ~/.ssh/id_ed25519
 
-    <div class="cross-links">
-      <h4>Related Modules</h4>
-      <ul>
-        <li><a href="linux-fundamentals.html">Linux Fundamentals</a></li>
-        <li><a href="networking.html">Networking</a></li>
-        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
-        <li><a href="professional-practice.html">Professional Practice</a></li>
-      </ul>
-    </div>
+# For systems that still require RSA (legacy), use 4096-bit minimum
+ssh-keygen -t rsa -b 4096 -C "admin@example.com"</code></pre>
+
+<h3>5.3 SSH Certificates</h3>
+
+<p>SSH certificates solve the "known_hosts management at scale" problem. Instead of distributing individual public keys to every server, you create a Certificate Authority (CA), sign user keys with it, and configure servers to trust the CA. Benefits:</p>
+
+<ul>
+  <li>No more <code>known_hosts</code> warnings when servers are rebuilt.</li>
+  <li>Certificates can have expiration dates (e.g., 8 hours for temporary access).</li>
+  <li>Principals define which usernames a certificate is valid for.</li>
+  <li>Centralized revocation via a Key Revocation List (KRL).</li>
+</ul>
+
+<pre><code># Create a CA key pair
+ssh-keygen -t ed25519 -f /etc/ssh/ca_user_key -C "SSH User CA"
+
+# Sign a user's public key (valid for 8 hours, for user "deploy")
+ssh-keygen -s /etc/ssh/ca_user_key \
+  -I "deploy-20260408" \
+  -n deploy \
+  -V +8h \
+  ~/.ssh/id_ed25519.pub
+
+# Server configuration: trust the CA
+# /etc/ssh/sshd_config
+TrustedUserCAKeys /etc/ssh/ca_user_key.pub</code></pre>
+
+<h3>5.4 FIDO2 / U2F Hardware Keys</h3>
+
+<p>OpenSSH 8.2+ supports FIDO2 security keys (YubiKey 5, SoloKeys, Google Titan) as SSH authentication factors. The private key material never leaves the hardware device, making key theft via malware impossible.</p>
+
+<pre><code># Generate an SSH key backed by a FIDO2 security key
+ssh-keygen -t ed25519-sk -C "admin@example.com"
+# -sk suffix indicates the key requires a security key for signing
+
+# For resident keys (stored on the security key itself)
+ssh-keygen -t ed25519-sk -O resident -C "admin@example.com"
+
+# The key works like any other SSH key but requires
+# physical touch of the security key for each authentication</code></pre>
+
+<h3>5.5 Fail2ban and sshguard</h3>
+
+<p><strong>Fail2ban</strong> monitors log files for failed authentication attempts and temporarily bans offending IP addresses using firewall rules (iptables, nftables, or firewalld).</p>
+
+<pre><code># /etc/fail2ban/jail.local
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+findtime = 600    # 10-minute window
+bantime = 3600    # 1-hour ban
+action = %(action_mwl)s  # Ban + mail with whois + log lines
+
+[sshd-aggressive]
+enabled = true
+port = ssh
+filter = sshd[mode=aggressive]
+logpath = /var/log/auth.log
+maxretry = 1
+findtime = 86400    # 24-hour window
+bantime = 604800    # 1-week ban for repeat offenders</code></pre>
+
+<h3>5.6 Bastion Hosts / Jump Servers</h3>
+
+<p>Never expose SSH on critical servers directly to the internet. Use a bastion host&mdash;a minimal, hardened server that serves as the sole entry point to your network.</p>
+
+<pre><code># ~/.ssh/config on the operator's workstation
+Host bastion
+    HostName bastion.example.com
+    User admin
+    IdentityFile ~/.ssh/id_ed25519
+    Port 22
+
+Host production-*
+    ProxyJump bastion
+    User deploy
+    IdentityFile ~/.ssh/id_ed25519
+
+Host production-web01
+    HostName 10.0.1.10
+
+Host production-db01
+    HostName 10.0.2.10
+
+# Usage: ssh production-web01
+# Transparently connects through bastion</code></pre>
+
+<p><strong>Security through obscurity debate:</strong> Changing the SSH port from 22 to a non-standard port reduces automated scanning noise but provides no real security against targeted attacks. It is a noise-reduction measure, not a security control. Do it if you want cleaner logs, but never rely on it as your only defense.</p>
+
+<h3>5.7 SSH Audit Tools</h3>
+
+<p>Validating your SSH configuration is as important as writing it. Two essential tools:</p>
+
+<p><strong>ssh-audit</strong> is an open-source tool that analyzes SSH server and client configurations, identifying weak algorithms, outdated key exchange methods, and known vulnerabilities:</p>
+
+<pre><code># Install and run ssh-audit against your server
+pip install ssh-audit
+ssh-audit example.com
+
+# Output highlights:
+# (rec) remove diffie-hellman-group14-sha1 -- using weak SHA-1 hash
+# (rec) remove hmac-sha1 -- using weak SHA-1 hash
+# (rec) add chacha20-poly1305@openssh.com -- modern AEAD cipher
+# (info) OpenSSH 9.6 running on Ubuntu 24.04</code></pre>
+
+<p><strong>Lynis</strong> is a comprehensive security auditing tool that checks SSH configuration as part of a broader system hardening assessment. It produces a hardening index and specific recommendations aligned with CIS benchmarks:</p>
+
+<pre><code># Run Lynis SSH audit
+sudo lynis audit system --tests-from-group "ssh"
+
+# Or a full system audit that includes SSH
+sudo lynis audit system</code></pre>
+
+<p>Run these audit tools after any SSH configuration change and as part of your regular security review cycle (quarterly at minimum). Integrate them into your CI/CD pipeline if you manage SSH configurations via Ansible or similar tools&mdash;audit the configuration before deploying it to production.</p>
+
+<!-- ================================================================== -->
+<h2>6. Mandatory Access Control</h2>
+
+<h3>6.1 Why MAC Matters</h3>
+
+<p>Discretionary Access Control (DAC)&mdash;the standard Unix permission model (user/group/other, read/write/execute)&mdash;has a fundamental weakness: any process running as root can access anything. If an attacker exploits a vulnerability in a root-running service, DAC provides no containment.</p>
+
+<p>Mandatory Access Control (MAC) enforces security policies that even root cannot override. The kernel enforces access decisions based on security labels, not just file ownership. A compromised Apache process running as root but confined by SELinux to the <code>httpd_t</code> type still cannot read <code>/etc/shadow</code>&mdash;the policy does not permit it.</p>
+
+<h3>6.2 SELinux</h3>
+
+<p>SELinux (Security-Enhanced Linux) is the most comprehensive MAC implementation, developed by the NSA and integrated into the Linux kernel. It is the default on RHEL, CentOS, Fedora, and Amazon Linux.</p>
+
+<p><strong>Security contexts</strong> follow the format <code>user:role:type:level</code>. For most administration, the <strong>type</strong> is the critical field:</p>
+
+<pre><code># View the SELinux context of a file
+ls -Z /var/www/html/index.html
+# Output: system_u:object_r:httpd_sys_content_t:s0 /var/www/html/index.html
+
+# View the SELinux context of a running process
+ps -eZ | grep httpd
+# Output: system_u:system_r:httpd_t:s0  1234 ?  00:00:01 httpd
+
+# The httpd_t process type can read httpd_sys_content_t file type
+# But cannot read user_home_t or shadow_t</code></pre>
+
+<p><strong>Booleans</strong> are toggles that enable or disable specific policy features without writing custom rules:</p>
+
+<pre><code># List all booleans related to httpd
+getsebool -a | grep httpd
+
+# Allow Apache to connect to the network (for reverse proxy)
+setsebool -P httpd_can_network_connect on
+
+# Allow Apache to send email
+setsebool -P httpd_can_sendmail on</code></pre>
+
+<p><strong>Troubleshooting:</strong> When SELinux blocks an operation, it logs an AVC (Access Vector Cache) denial to <code>/var/log/audit/audit.log</code>. The diagnostic tools:</p>
+
+<pre><code># Find recent denials
+ausearch -m avc -ts recent
+
+# Analyze a denial and get a human-readable explanation
+audit2why < /var/log/audit/audit.log
+
+# Generate a policy module to allow the denied action
+# WARNING: Review the output before applying!
+audit2allow -a -M my_custom_policy
+semodule -i my_custom_policy.pp</code></pre>
+
+<p><strong>Never blindly run <code>audit2allow</code> and install the result.</strong> Review each allowed access. The tool generates the minimum policy to permit what was denied, but that denial might be exactly the security control you want.</p>
+
+<h3>6.3 AppArmor</h3>
+
+<p>AppArmor is the default MAC system on Ubuntu, Debian, and SUSE. It uses path-based access control (rather than SELinux's label-based approach), which makes it simpler to understand but less granular.</p>
+
+<p>AppArmor profiles define what a program can access:</p>
+
+<pre><code># /etc/apparmor.d/usr.sbin.nginx
+#include &lt;tunables/global&gt;
+
+/usr/sbin/nginx {
+  #include &lt;abstractions/base&gt;
+  #include &lt;abstractions/nameservice&gt;
+
+  # Binary
+  /usr/sbin/nginx mr,
+
+  # Configuration
+  /etc/nginx/** r,
+
+  # Log files
+  /var/log/nginx/** w,
+
+  # Web content (read only)
+  /var/www/** r,
+
+  # PID and socket files
+  /run/nginx.pid rw,
+  /run/nginx/ rw,
+
+  # Network
+  network inet stream,
+  network inet6 stream,
+
+  # Deny everything else implicitly
+}</code></pre>
+
+<p><strong>Modes:</strong></p>
+<ul>
+  <li><strong>Enforce:</strong> Violations are blocked and logged.</li>
+  <li><strong>Complain:</strong> Violations are logged but allowed. Use this for developing and testing new profiles.</li>
+</ul>
+
+<pre><code># Put a profile in complain mode
+sudo aa-complain /etc/apparmor.d/usr.sbin.nginx
+
+# Switch to enforce mode after testing
+sudo aa-enforce /etc/apparmor.d/usr.sbin.nginx
+
+# Generate a profile from observed behavior
+sudo aa-genprof /usr/sbin/nginx
+# Run the application through its normal operations, then finalize the profile</code></pre>
+
+<h3>6.4 Seccomp-BPF for Container Hardening</h3>
+
+<p>Seccomp (Secure Computing Mode) restricts the system calls a process can make. Docker and Kubernetes apply default seccomp profiles that block dangerous syscalls (e.g., <code>mount</code>, <code>reboot</code>, <code>ptrace</code>, <code>kexec_load</code>).</p>
+
+<pre><code>// Custom seccomp profile (JSON) — allow only essential syscalls
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "architectures": ["SCMP_ARCH_X86_64"],
+  "syscalls": [
+    {
+      "names": [
+        "read", "write", "open", "close", "stat", "fstat",
+        "mmap", "mprotect", "munmap", "brk", "rt_sigaction",
+        "rt_sigprocmask", "ioctl", "access", "pipe", "select",
+        "socket", "connect", "accept", "sendto", "recvfrom",
+        "bind", "listen", "clone", "execve", "wait4", "exit_group",
+        "futex", "epoll_create1", "epoll_ctl", "epoll_wait"
+      ],
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}</code></pre>
+
+<pre><code># Apply custom seccomp profile in Docker
+docker run --security-opt seccomp=custom-profile.json nginx
+
+# In Kubernetes (v1.19+)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/custom-profile.json
+  containers:
+    - name: nginx
+      image: nginx:1.27</code></pre>
+
+<p><strong>Defense in depth:</strong> Use seccomp to limit the kernel syscall surface, and AppArmor/SELinux to limit file and network access. Together, they create multiple containment layers that must all be bypassed for a container escape.</p>
+
+<h3>6.5 When MAC Saves You from Root Compromise</h3>
+
+<p>Consider a real-world scenario: an attacker exploits a remote code execution vulnerability in your Apache web server and gains a shell running as <code>root</code>. Without MAC, it is game over&mdash;root can read <code>/etc/shadow</code>, install backdoors, pivot to other systems, and exfiltrate data. With SELinux in enforcing mode:</p>
+
+<ul>
+  <li>The Apache process runs in the <code>httpd_t</code> domain, regardless of the Unix UID.</li>
+  <li>SELinux policy only allows <code>httpd_t</code> to read files labeled <code>httpd_sys_content_t</code>, write to <code>httpd_log_t</code>, and connect to allowed network ports.</li>
+  <li>The attacker's shell inherits the <code>httpd_t</code> context. It cannot read <code>/etc/shadow</code> (<code>shadow_t</code> type), cannot write to <code>/usr/bin</code> (<code>bin_t</code> type), cannot load kernel modules, and cannot connect to arbitrary network ports for a reverse shell.</li>
+  <li>The attacker has root privileges but is confined to a sandbox. The blast radius is limited to what the web server was supposed to do.</li>
+</ul>
+
+<p>This is why MAC is a critical layer in defense-in-depth. DAC (traditional Unix permissions) assumes root is trusted. MAC does not. In a world where software vulnerabilities are inevitable, MAC limits the damage when prevention fails.</p>
+
+<p><strong>Kubernetes Security Profiles Operator (SPO):</strong> For container environments at scale, manually creating seccomp and AppArmor profiles for every workload is impractical. SPO automates this by recording the syscalls and file accesses a workload actually uses during a profiling period, then generating a minimal security profile. This brings the MAC methodology into the container orchestration layer.</p>
+
+<!-- ================================================================== -->
+<h2>7. PKI and Certificate Management</h2>
+
+<h3>7.1 X.509 Certificate Structure</h3>
+
+<p>An X.509 certificate binds a public key to an identity. Key fields:</p>
+
+<table>
+  <tr><th>Field</th><th>Purpose</th></tr>
+  <tr><td><strong>Subject</strong></td><td>Identity of the certificate holder (CN, O, OU, etc.)</td></tr>
+  <tr><td><strong>Issuer</strong></td><td>Identity of the CA that signed the certificate</td></tr>
+  <tr><td><strong>Subject Alternative Names (SANs)</strong></td><td>DNS names and IPs the certificate is valid for. Modern browsers require SANs; CN alone is deprecated.</td></tr>
+  <tr><td><strong>Validity Period</strong></td><td>Not Before and Not After timestamps</td></tr>
+  <tr><td><strong>Public Key</strong></td><td>The subject's public key (RSA 2048+, ECDSA P-256, or Ed25519)</td></tr>
+  <tr><td><strong>Signature</strong></td><td>The CA's digital signature over the certificate contents</td></tr>
+  <tr><td><strong>Extensions</strong></td><td>Key Usage, Extended Key Usage, Basic Constraints, OCSP, CRL</td></tr>
+</table>
+
+<p><strong>Certificate chains:</strong> A server certificate is signed by an intermediate CA, which is signed by a root CA. Clients trust the root CA (stored in their trust store) and can verify the chain. Always configure your server with the full chain (server cert + intermediate), not just the leaf certificate.</p>
+
+<h3>7.2 Let's Encrypt and ACME</h3>
+
+<p>Let's Encrypt provides free, automated, publicly-trusted TLS certificates via the ACME (Automated Certificate Management Environment) protocol. ACME automates the entire certificate lifecycle: domain validation, certificate issuance, and renewal.</p>
+
+<pre><code># Certbot: the reference ACME client
+# Standalone mode (certbot runs its own web server)
+sudo certbot certonly --standalone -d example.com -d www.example.com
+
+# Nginx plugin (certbot modifies nginx config automatically)
+sudo certbot --nginx -d example.com
+
+# Renewal (runs automatically via systemd timer or cron)
+sudo certbot renew --quiet
+
+# Test renewal without actually renewing
+sudo certbot renew --dry-run</code></pre>
+
+<p><strong>Certificate lifetime trends:</strong> The industry is pushing toward shorter certificate lifetimes. Let's Encrypt issues 90-day certificates. Google has proposed 90-day maximum certificate validity for all public CAs. Apple proposed reducing validity to 47 days starting in 2027. This makes automation non-optional&mdash;manual certificate management is incompatible with 47-day lifecycles.</p>
+
+<h3>7.3 Internal CA: step-ca</h3>
+
+<p>For internal services (service-to-service mTLS, internal APIs, database connections), you need a private CA. <strong>step-ca</strong> (by Smallstep) is a lightweight, open-source CA with built-in ACME server support:</p>
+
+<pre><code># Initialize a CA
+step ca init --name "Internal CA" \
+  --provisioner admin@example.com \
+  --dns ca.internal.example.com \
+  --address :443
+
+# Issue a certificate using ACME (just like Let's Encrypt)
+step ca certificate api.internal.example.com api.crt api.key \
+  --provisioner acme
+
+# Configure applications to use step-ca as their ACME server
+# STEP_CA_URL=https://ca.internal.example.com
+# Same certbot/cert-manager workflow, different CA</code></pre>
+
+<p><strong>cert-manager (Kubernetes):</strong> Automates certificate issuance and renewal in Kubernetes clusters. Supports Let's Encrypt, step-ca, Vault PKI, and other ACME-compatible CAs as issuers:</p>
+
+<pre><code>apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: admin@example.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-account
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api-tls
+  namespace: production
+spec:
+  secretName: api-tls-secret
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - api.example.com
+    - api-v2.example.com</code></pre>
+
+<h3>7.4 mTLS for Service-to-Service Authentication</h3>
+
+<p>Mutual TLS (mTLS) requires both the client and server to present certificates. This provides cryptographic identity verification for every service-to-service connection, eliminating the need for API keys or tokens for internal authentication.</p>
+
+<p>Service meshes (Istio, Linkerd) automate mTLS by injecting sidecar proxies that handle certificate issuance, rotation, and mTLS negotiation transparently to the application.</p>
+
+<h3>7.5 Certificate Monitoring</h3>
+
+<p>Certificate expiration is a leading cause of outages. Monitor proactively:</p>
+
+<pre><code># Prometheus blackbox exporter: check certificate expiry
+- alert: TLSCertificateExpiringSoon
+  expr: probe_ssl_earliest_cert_expiry - time() < 30 * 24 * 3600
+  for: 1h
+  labels:
+    severity: high
+  annotations:
+    summary: "TLS certificate for {{ $labels.instance }} expires in less than 30 days"</code></pre>
+
+<p><strong>Certificate Transparency (CT) logs:</strong> Public, append-only logs of all publicly-trusted certificates. Monitor CT logs for unauthorized certificates issued for your domains using tools like <code>certspotter</code> or crt.sh.</p>
+
+<!-- ================================================================== -->
+<h2>8. Secrets Management</h2>
+
+<h3>8.1 The Problem</h3>
+
+<p>Secrets&mdash;database passwords, API keys, TLS private keys, encryption keys, service account tokens&mdash;are the most sensitive data in any infrastructure. The default approach (environment variables, <code>.env</code> files, hardcoded strings in configuration) is catastrophically insecure:</p>
+
+<ul>
+  <li><strong>.env files</strong> get committed to Git repositories, leaked in container images, and exposed in process listings.</li>
+  <li><strong>Hardcoded secrets</strong> appear in version control history forever, even if removed in a later commit.</li>
+  <li><strong>Shared credentials</strong> cannot be rotated without coordinating every system that uses them.</li>
+  <li><strong>Static secrets</strong> have no expiration, no audit trail, and no way to revoke access for a single consumer.</li>
+</ul>
+
+<h3>8.2 HashiCorp Vault</h3>
+
+<p>Vault is the industry standard for centralized secrets management. Its architecture separates storage (where encrypted secrets live) from access (how applications authenticate and retrieve secrets).</p>
+
+<p><strong>Core concepts:</strong></p>
+
+<ul>
+  <li><strong>Auth methods:</strong> How clients prove their identity. Token, AppRole (for machines), Kubernetes (pod service accounts), LDAP, OIDC, AWS IAM, and more.</li>
+  <li><strong>Secret engines:</strong> Backends that generate or store secrets. KV (key-value), database (dynamic credentials), PKI (certificates), transit (encryption as a service), SSH (signed keys), AWS/GCP/Azure (cloud IAM credentials).</li>
+  <li><strong>Policies:</strong> HCL (HashiCorp Configuration Language) rules that define which paths a token can access and with what capabilities (create, read, update, delete, list).</li>
+  <li><strong>Leases:</strong> Every secret has a time-to-live (TTL). When the lease expires, the secret is revoked. This ensures secrets do not live forever.</li>
+</ul>
+
+<pre><code># Enable the database secret engine for dynamic Postgres credentials
+vault secrets enable database
+
+vault write database/config/mydb \
+  plugin_name=postgresql-database-plugin \
+  connection_url="postgresql://{{username}}:{{password}}@db.example.com:5432/mydb?sslmode=require" \
+  allowed_roles="readonly" \
+  username="vault_admin" \
+  password="initial_password"
+
+vault write database/roles/readonly \
+  db_name=mydb \
+  creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
+  default_ttl="1h" \
+  max_ttl="24h"
+
+# Application requests credentials (returns unique username/password, valid for 1 hour)
+vault read database/creds/readonly
+# Key             Value
+# lease_id        database/creds/readonly/abc123
+# lease_duration  1h
+# username        v-app-readonly-abc123-1234567890
+# password        A1b2C3d4E5-random-generated</code></pre>
+
+<p><strong>Transit engine (encryption as a service):</strong></p>
+
+<pre><code># Create an encryption key
+vault write -f transit/keys/payment-data
+
+# Encrypt data (Vault never stores the plaintext)
+vault write transit/encrypt/payment-data \
+  plaintext=$(echo -n "4111-1111-1111-1111" | base64)
+# Returns: vault:v1:encrypted-ciphertext-here
+
+# Decrypt data
+vault write transit/decrypt/payment-data \
+  ciphertext="vault:v1:encrypted-ciphertext-here"
+# Returns: base64-encoded plaintext</code></pre>
+
+<h3>8.3 Alternatives</h3>
+
+<table>
+  <tr><th>Solution</th><th>Best For</th><th>Key Feature</th></tr>
+  <tr><td><strong>AWS Secrets Manager</strong></td><td>AWS-native workloads</td><td>Automatic rotation for RDS, Redshift, DocumentDB credentials</td></tr>
+  <tr><td><strong>Azure Key Vault</strong></td><td>Azure workloads</td><td>HSM-backed key storage, managed identity integration</td></tr>
+  <tr><td><strong>SOPS (Mozilla)</strong></td><td>Encrypting files in Git</td><td>Encrypts values in YAML/JSON/ENV files while keeping keys readable. Uses KMS, PGP, or age for encryption.</td></tr>
+  <tr><td><strong>Sealed Secrets (Bitnami)</strong></td><td>Kubernetes secrets in Git</td><td>Encrypts Kubernetes secrets so they can be safely stored in version control. Only the cluster can decrypt them.</td></tr>
+  <tr><td><strong>External Secrets Operator</strong></td><td>Kubernetes + any backend</td><td>Syncs secrets from Vault, AWS SM, GCP SM, Azure KV into Kubernetes secrets.</td></tr>
+</table>
+
+<h3>8.4 Secret Rotation</h3>
+
+<p>Static secrets are a ticking time bomb. Every credential should have a rotation strategy:</p>
+<ul>
+  <li><strong>Dynamic secrets (Vault):</strong> Generated on demand with short TTLs. Rotation is automatic&mdash;every consumer gets unique, short-lived credentials.</li>
+  <li><strong>Automated rotation:</strong> AWS Secrets Manager can rotate RDS passwords on a schedule. Vault's database engine creates fresh credentials per request.</li>
+  <li><strong>Rotation procedure:</strong> For static secrets that cannot be made dynamic: issue new credential, update all consumers, verify functionality, revoke old credential. Never delete the old credential before all consumers are updated.</li>
+</ul>
+
+<h3>8.5 Zero-Trust Secret Access</h3>
+
+<p>The principle: no entity is trusted by default, even inside the network perimeter. Every secret access must be authenticated, authorized, audited, and time-limited. Vault's audit log records every secret read, write, and lease renewal, providing a complete chain of custody for sensitive data.</p>
+
+<!-- ================================================================== -->
+<h2>9. Compliance Frameworks</h2>
+
+<h3>9.1 Framework Overview</h3>
+
+<table>
+  <tr><th>Framework</th><th>Scope</th><th>Mandatory?</th><th>Key Focus</th></tr>
+  <tr><td><strong>NIST 800-53 Rev 5</strong></td><td>US federal systems</td><td>Yes (federal), voluntary (private)</td><td>20 control families, 1,000+ controls. The most comprehensive framework.</td></tr>
+  <tr><td><strong>NIST CSF 2.0</strong></td><td>All organizations</td><td>Voluntary</td><td>Identify, Protect, Detect, Respond, Recover, Govern. High-level risk framework.</td></tr>
+  <tr><td><strong>SOC 2</strong></td><td>Service organizations</td><td>Contractual</td><td>Trust Services Criteria: Security, Availability, Processing Integrity, Confidentiality, Privacy.</td></tr>
+  <tr><td><strong>PCI DSS v4.0</strong></td><td>Cardholder data environments</td><td>Yes (contractual)</td><td>12 requirements covering network security, access control, encryption, monitoring, testing.</td></tr>
+  <tr><td><strong>HIPAA</strong></td><td>Protected health information</td><td>Yes (legal)</td><td>Technical safeguards: access control, audit controls, integrity, transmission security.</td></tr>
+  <tr><td><strong>FedRAMP</strong></td><td>Cloud services for US government</td><td>Yes (government contracts)</td><td>Based on NIST 800-53. Three impact levels: Low, Moderate, High.</td></tr>
+  <tr><td><strong>ISO 27001</strong></td><td>Information security management</td><td>Voluntary (often contractual)</td><td>93 controls in Annex A. Requires an ISMS (Information Security Management System).</td></tr>
+</table>
+
+<h3>9.2 SOC 2: Type I vs. Type II</h3>
+
+<p><strong>Type I</strong> evaluates the design of controls at a point in time. It answers: "Do you have the right controls in place?" An auditor examines your policies, procedures, and technical controls on a specific date.</p>
+
+<p><strong>Type II</strong> evaluates the operating effectiveness of controls over a period (typically 6-12 months). It answers: "Do your controls actually work consistently?" An auditor reviews evidence (logs, change records, access reviews) across the entire audit period.</p>
+
+<p>Type II is what customers and partners care about. Type I is a stepping stone. Most organizations start with Type I, then transition to Type II once their controls have been operating for 6+ months.</p>
+
+<h3>9.3 PCI DSS: The 12 Requirements</h3>
+
+<p>PCI DSS applies to any organization that stores, processes, or transmits payment card data. The 12 requirements (v4.0):</p>
+
+<ol>
+  <li>Install and maintain network security controls (firewalls, segmentation).</li>
+  <li>Apply secure configurations to all system components.</li>
+  <li>Protect stored account data (encryption at rest, tokenization, masking).</li>
+  <li>Protect cardholder data with strong cryptography during transmission.</li>
+  <li>Protect all systems and networks from malicious software (antivirus, EDR).</li>
+  <li>Develop and maintain secure systems and software (SDLC, patching).</li>
+  <li>Restrict access to system components and cardholder data by business need-to-know.</li>
+  <li>Identify users and authenticate access to system components (MFA, strong passwords).</li>
+  <li>Restrict physical access to cardholder data.</li>
+  <li>Log and monitor all access to system components and cardholder data.</li>
+  <li>Test security of systems and networks regularly (vulnerability scans, penetration tests).</li>
+  <li>Support information security with organizational policies and programs.</li>
+</ol>
+
+<h3>9.4 NIST 800-53: Control Families</h3>
+
+<p>NIST 800-53 Rev 5 organizes 1,000+ security and privacy controls into 20 families. The families most relevant to systems administrators:</p>
+
+<ul>
+  <li><strong>AC (Access Control):</strong> Account management, least privilege, separation of duties, session controls.</li>
+  <li><strong>AU (Audit and Accountability):</strong> Audit logging, log review, log retention, timestamps.</li>
+  <li><strong>CM (Configuration Management):</strong> Baseline configurations, change control, software restrictions.</li>
+  <li><strong>IA (Identification and Authentication):</strong> Multi-factor authentication, credential management, PKI.</li>
+  <li><strong>IR (Incident Response):</strong> Incident handling procedures, reporting, testing.</li>
+  <li><strong>SC (System and Communications Protection):</strong> Encryption, network segmentation, boundary protection.</li>
+  <li><strong>SI (System and Information Integrity):</strong> Patch management, malware protection, monitoring.</li>
+</ul>
+
+<p>NIST 800-53 controls map to nearly every other framework. Implementing NIST 800-53 gives you a foundation that supports SOC 2, PCI DSS, HIPAA, FedRAMP, CMMC, and ISO 27001 compliance simultaneously.</p>
+
+<h3>9.5 Evidence Collection and Audit Preparation</h3>
+
+<p>Compliance is not just about having controls&mdash;it is about proving they work. Auditors require evidence:</p>
+
+<ul>
+  <li><strong>Configuration evidence:</strong> Screenshots or exports of security settings (firewall rules, IAM policies, encryption configurations).</li>
+  <li><strong>Operational evidence:</strong> Logs showing controls in action (access reviews conducted, patches applied, incidents responded to).</li>
+  <li><strong>Policy evidence:</strong> Documented policies and procedures, signed by management, reviewed annually.</li>
+  <li><strong>Testing evidence:</strong> Vulnerability scan reports, penetration test results, disaster recovery test records.</li>
+</ul>
+
+<p>Automate evidence collection wherever possible. Pull firewall rules from infrastructure-as-code repositories, export access review completions from your IdP, and generate vulnerability scan reports on schedule. Manual evidence collection does not scale and introduces human error.</p>
+
+<h3>9.6 Compliance as Code</h3>
+
+<p>Compliance as code transforms static control frameworks into executable, testable policies:</p>
+
+<p><strong>Chef InSpec:</strong> Write compliance checks as Ruby DSL profiles that run against target systems:</p>
+
+<pre><code># CIS Ubuntu 24.04 Level 1 - Check SSH root login disabled
+control 'cis-5.2.10' do
+  impact 1.0
+  title 'Ensure SSH root login is disabled'
+  desc 'The PermitRootLogin parameter should be set to no'
+
+  describe sshd_config do
+    its('PermitRootLogin') { should eq 'no' }
+  end
+end
+
+# CIS - Check that audit log files are not world-readable
+control 'cis-4.1.4.1' do
+  impact 1.0
+  title 'Ensure audit log files are mode 0640 or less permissive'
+
+  describe file('/var/log/audit/audit.log') do
+    it { should_not be_more_permissive_than('0640') }
+  end
+end</code></pre>
+
+<p><strong>Open Policy Agent (OPA) with Rego:</strong> Define policies for infrastructure-as-code, Kubernetes admission control, API authorization, and more:</p>
+
+<pre><code># Rego policy: deny Kubernetes pods running as root
+package kubernetes.admission
+
+deny[msg] {
+  input.request.kind.kind == "Pod"
+  container := input.request.object.spec.containers[_]
+  container.securityContext.runAsUser == 0
+  msg := sprintf("Container '%v' must not run as root (UID 0)", [container.name])
+}
+
+deny[msg] {
+  input.request.kind.kind == "Pod"
+  container := input.request.object.spec.containers[_]
+  not container.securityContext.runAsNonRoot
+  msg := sprintf("Container '%v' must set securityContext.runAsNonRoot to true", [container.name])
+}</code></pre>
+
+<p><strong>Regula (Fugue):</strong> OPA-based tool for validating Terraform, CloudFormation, and Kubernetes YAML against compliance rules (CIS, NIST, PCI DSS, HIPAA) before deployment.</p>
+
+<p>The goal is to shift compliance left: catch violations in CI/CD before they reach production, rather than discovering them in an annual audit.</p>
+
+<hr>
+
+<h2>Putting It All Together: Defense in Depth</h2>
+
+<p>Security hardening is not a checklist you complete once. It is a set of overlapping layers, each compensating for the potential failure of others:</p>
+
+<table>
+  <tr><th>Layer</th><th>Controls</th></tr>
+  <tr><td><strong>Perimeter</strong></td><td>Firewalls, bastion hosts, VPN, WAF</td></tr>
+  <tr><td><strong>Network</strong></td><td>Segmentation, mTLS, IDS/IPS (Suricata)</td></tr>
+  <tr><td><strong>Host</strong></td><td>CIS hardening, MAC (SELinux/AppArmor), patch management, HIDS (Wazuh)</td></tr>
+  <tr><td><strong>Application</strong></td><td>Secure coding, dependency scanning (Trivy), secrets management (Vault), input validation</td></tr>
+  <tr><td><strong>Data</strong></td><td>Encryption at rest and in transit, access controls, backup verification</td></tr>
+  <tr><td><strong>Identity</strong></td><td>MFA, SSH certificates, FIDO2 keys, least privilege, just-in-time access</td></tr>
+  <tr><td><strong>Detection</strong></td><td>SIEM (Wazuh/Elastic), log correlation, MITRE ATT&CK mapping, threat hunting</td></tr>
+  <tr><td><strong>Response</strong></td><td>Incident response procedures, SOAR automation, forensic readiness</td></tr>
+  <tr><td><strong>Governance</strong></td><td>Compliance frameworks, audit evidence, policy as code, continuous assessment</td></tr>
+</table>
+
+<p>No single layer is sufficient. An attacker who bypasses your firewall still faces network segmentation, host-level MAC, application-level input validation, encrypted data at rest, and a SIEM watching for lateral movement. The attacker must bypass every layer; the defender only needs one layer to hold.</p>
+
+<blockquote>
+  "Security is a process, not a product." &mdash; Bruce Schneier
+</blockquote>
+
+<p>Start with the highest-impact, lowest-effort controls: enable automatic security updates, enforce SSH key authentication, apply CIS Level 1, enable a host-based IDS. Then build outward: add network detection, implement secrets management, formalize your compliance posture. Each layer you add raises the cost of a successful attack.</p>
   </main>
 
   <footer>
-    <p>Security &amp; Hardening &middot; Systems Administration &middot; 98 corpus cross-references &middot; April 2026</p>
-    <p><a href="../index.html">PNW Research Series</a></p>
+    <p>Systems Administration &mdash; Infrastructure Cluster &mdash; <a href="index.html">Back to Overview</a></p>
+    <p>Part of the <a href="../index.html">PNW Research Series</a> &middot; Research Co-Processor v2 &middot; April 2026</p>
   </footer>
 </body>
 </html>

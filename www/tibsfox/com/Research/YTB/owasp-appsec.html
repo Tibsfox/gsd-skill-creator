@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWASP AppSec &mdash; YouTube Deep Research &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ytb">
+  <header>
+    <h1>OWASP AppSec</h1>
+    <div class="subtitle">YouTube Deep Research Digest &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="owasp-appsec.html" class="active">OWASP AppSec</a>
+      <a href="iot-nuclear.html">IoT &amp; Nuclear</a>
+      <a href="cmu-cppcon-plm.html">CMU ML / CppCon / PLM</a>
+      <a href="engineering-misc.html">Engineering Education</a>
+      <a href="professional-education.html">Professional Education</a>
+      <a href="hardware-tech.html">Hardware &amp; MCP Summit</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <p><strong>Co-Processor:</strong> 93 corpus cross-references identified across 5 convergence passes against 248 projects in 13 Rosetta clusters.</p>
+    </div>
+
+    <h1>OWASP &amp; Application Security in the Agentic Era</h1>
+<div class="meta">
+  Research Module &mdash; April 2026 | tibsfox.com Research Series<br>
+  Synthesized from OWASP Global AppSec, RSAC 2026, CSA publications, and current academic research<br>
+  Topics: MCP Deception, Zero Trust for AI Agents, Adversary Simulation, LLM Threat Modeling, XDR Pipelines, Vibe Coding Security, OWASP at 25, Developer-First Security, Zero-Budget AppSec
+</div>
+
+<!-- ===================================================================== -->
+<h2>1. MCP Deception and Honeytraps: Catching AI Agents in the Act</h2>
+
+<h3>The OWASP MCP Deception Incubator</h3>
+
+<p>The Model Context Protocol (MCP) is the emergent standard connecting large language models to external tools, databases, and services. With adoption accelerating across Claude Desktop, Cursor, Windsurf, and enterprise agent frameworks, MCP has become the primary attack surface for AI agent exploitation. In response, OWASP launched the <strong>MCP Deception Incubator</strong> project, presented by Harshad Sadashiv Kadam, which applies honeypot and deception principles specifically to MCP-connected agent environments.</p>
+
+<p>The project's flagship artifact is <strong>MCP Threat Trap</strong>, a honeypot system that simulates sensitive internal tools&mdash;such as Okta admin password resets, AWS IAM key rotators, and database migration endpoints&mdash;over the MCP protocol. These fake tools exhibit realistic response delays, proper error handling, and authentic-looking schema definitions. When an AI agent (or a human attacker probing through an agent) interacts with these tools, the honeypot silently triggers advanced Canarytokens that capture rich metadata: source IPs, user agent strings, timing patterns, and the full tool-call payloads that reveal attacker intent.</p>
+
+<p>What makes MCP Threat Trap architecturally notable is its deployment model: the entire system runs on Cloudflare Workers at the global edge, with no EC2 instances, no patching cycles, and no infrastructure to manage. This makes it stealthy (no discoverable server footprint), instantly scalable, and cost-effective enough for organizations of any size to deploy. The project was validated against OWASP AI Security scenarios and caught AI-agent-driven reconnaissance in the wild, including abuse-flagged cloud scanners and curious humans who discovered the endpoints after the project was posted publicly.</p>
+
+<h3>The OWASP MCP Top 10</h3>
+
+<p>Alongside the deception work, OWASP published the <strong>MCP Top 10</strong>, a structured framework for the most critical security risks in AI agent tool integration, led by Vandana Verma Sehgal and currently in beta under a CC BY-NC-SA 4.0 license. The framework catalogs what is already happening, not theoretical risks: between January and February 2026, security researchers filed over 30 CVEs targeting MCP servers, clients, and infrastructure.</p>
+
+<p>The key risks include:</p>
+
+<table>
+  <thead><tr><th>Risk</th><th>Description</th><th>Real-World Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Tool Poisoning</strong></td><td>Adversary embeds malicious instructions in MCP tool descriptions that are invisible in the UI but followed by the model</td><td>Invariant Labs demonstrated SSH key exfiltration from Claude Desktop and Cursor via poisoned tool descriptions</td></tr>
+    <tr><td><strong>Rug Pull Attacks</strong></td><td>MCP tools initially appear legitimate, then become malicious after gaining trust and widespread adoption</td><td>Trusted tools suddenly altered to steal sensitive data or disrupt business operations</td></tr>
+    <tr><td><strong>Schema Poisoning</strong></td><td>Corrupting interface definitions to mislead the model about what parameters a tool accepts</td><td>Modified tool schemas that cause agents to pass credentials as "debug" parameters</td></tr>
+    <tr><td><strong>Tool Shadowing</strong></td><td>Introducing fake or duplicate tools to intercept or alter legitimate interactions</td><td>Duplicate "file_read" tools that exfiltrate content before returning results</td></tr>
+    <tr><td><strong>Supply Chain Compromise</strong></td><td>MCP ecosystem dependencies containing malicious or vulnerable components</td><td>Open-source MCP connectors with execution-level backdoors</td></tr>
+  </tbody>
+</table>
+
+<h3>Detection and Defense</h3>
+
+<p>The primary defense tool is <strong>mcp-scan</strong> by Invariant Labs, which has become the standard security scanner for MCP installations. It detects tool poisoning, rug pulls, cross-origin escalations, and prompt injection in installed MCP servers. Defense-in-depth for MCP environments requires multiple layers: a policy proxy LLM placed before the main model to detect injection attempts, output filtering that scans tool responses for instruction-like content before they reach the agent's context, comprehensive audit logging of every tool call, and human-in-the-loop confirmation gates for high-risk operations. Microsoft has published specific guidance on protecting against indirect prompt injection in MCP, emphasizing the need for content analysis using specialized models to identify injection patterns and context evaluation to understand how content might influence AI behavior.</p>
+
+<blockquote>"The model doesn't know the difference between legitimate instructions and poisoned ones. MCP tool descriptions are injected directly into the AI model's context window." &mdash; OWASP MCP Top 10 documentation</blockquote>
+
+<!-- ===================================================================== -->
+<h2>2. Zero Trust for AI Agents: Machine Identity in the Agentic Era</h2>
+
+<h3>The Identity Crisis</h3>
+
+<p>Traditional zero trust architectures were built around a fundamental assumption: the entity requesting access is a human being who can authenticate via passwords, biometrics, or hardware tokens. AI agents shatter this assumption. They make thousands of API calls per minute, dynamically select actions from available capabilities, spawn sub-agents, delegate tasks to other agents, and operate 24/7 without human oversight. A Cisco survey of large enterprises in early 2026 found that 85% are experimenting with AI agents, yet only 5% have moved those agents into production&mdash;and the gap is almost entirely attributable to unresolved identity and access control concerns.</p>
+
+<p>At RSAC 2026, five major vendors shipped agent identity frameworks, but a VentureBeat analysis identified three critical gaps that none of them solved:</p>
+
+<ol>
+  <li><strong>Agent-to-Agent Delegation:</strong> When Agent A spawns Agent B and Agent B calls a tool on Agent A's behalf, no existing protocol&mdash;not OAuth, SAML, or MCP&mdash;follows the delegation chain. The trust primitive for multi-hop agent delegation simply does not exist yet.</li>
+  <li><strong>Ghost Agents:</strong> Abandoned agent instances from pilots and experiments continue running with standing privileged accounts, long-lived credentials, and no offboarding procedures. These "ghost agents" represent an expanding and invisible attack surface.</li>
+  <li><strong>Accountability Auditing:</strong> While vendors verified <em>who</em> the agent was, none of them tracked <em>what</em> the agent did after authentication. Identity without behavioral auditing is half a solution.</li>
+</ol>
+
+<h3>Frameworks and Protocols</h3>
+
+<p><strong>Cisco's Zero Trust for AI Agents</strong>, announced at RSAC 2026, extends the Cisco Identity Intelligence and Duo IAM platforms to register agents, map them to human owners, and enforce granular, time-bound permissions. All agent tool traffic is routed through an MCP gateway to eliminate blind spots. Cisco also introduced <strong>DefenseClaw</strong>, an open-source secure agent framework integrating Skills Scanner, MCP Scanner, AI BoM (Bill of Materials), and CodeGuard to ensure every skill is scanned and sandboxed, every MCP server is verified, and every AI asset is automatically inventoried.</p>
+
+<p><strong>The Cloud Security Alliance's Agentic Trust Framework (ATF)</strong>, published February 2, 2026, is the first governance specification applying Zero Trust principles to autonomous AI agents with a structured maturity model. The ATF translates zero trust into five core questions: Who are you? (unforgeable credentials, identity verified at every interaction); What are you doing? (continuous behavioral monitoring, AI watching AI); What are you eating and serving? (input validation, output governance, data lineage). The framework introduces an "Intern-to-Principal" maturity progression:</p>
+
+<table>
+  <thead><tr><th>Level</th><th>Trust Posture</th><th>Autonomy</th></tr></thead>
+  <tbody>
+    <tr><td>Intern</td><td>Maximum restrictions, everything logged</td><td>Human approval for every action</td></tr>
+    <tr><td>Associate</td><td>Expanded access for demonstrated reliability</td><td>Partial autonomy within guardrails</td></tr>
+    <tr><td>Senior</td><td>Broader scope with ongoing behavioral monitoring</td><td>Substantial autonomy, anomaly detection</td></tr>
+    <tr><td>Principal</td><td>Full autonomy within defined guardrails</td><td>Continuous verification, no blanket trust</td></tr>
+  </tbody>
+</table>
+
+<p>The CSA's own research found a staggering governance gap: 79% of organizations are already using AI agents, but 86% of those agents were deployed without security approval.</p>
+
+<h3>SPIFFE vs. OAuth for Agent Identity</h3>
+
+<p>The protocol debate has crystallized around two complementary standards. <strong>SPIFFE</strong> (Secure Production Identity Framework for Everyone) focuses on <em>who a workload is</em>, issuing cryptographic identities (SVIDs) to services and workloads so they can prove their authenticity without relying on stored secrets. <strong>OAuth 2.0</strong> focuses on <em>what a workload is allowed to do</em>, providing scoped, policy-driven authorization. The emerging <strong>ID-JAG</strong> framework combines OAuth 2.0 Token Exchange (RFC 8693) and JWT Profile (RFC 7523), where an agent borrows the user's identity assertion and exchanges it for temporary, narrowly scoped access rights. Service meshes like Istio and Linkerd secure agent-to-agent communication through mutual TLS (mTLS) with SPIFFE providing the underlying identity fabric.</p>
+
+<!-- ===================================================================== -->
+<h2>3. Adversary Simulation Beyond Checklists: Red Teaming for AI Systems</h2>
+
+<h3>The Compliance Trap</h3>
+
+<p>Traditional penetration testing and security assessments have long operated on a compliance-driven model: run the annual test, check the box, file the report. This model was already showing cracks for conventional software, but AI systems expose its fundamental inadequacy. AI models are non-deterministic, context-dependent, and exhibit emergent behaviors that cannot be captured by static checklists. As The Register noted in January 2026, "AI red teaming plays a central role in building responsible AI systems, enabling organizations to move beyond compliance checklists and establish measurable controls over AI behavior."</p>
+
+<h3>AI-Specific Red Teaming</h3>
+
+<p>Red teaming AI systems requires fundamentally different methodologies than red teaming traditional infrastructure. The attack surface includes prompt injection, data poisoning, model evasion, tool-call manipulation, jailbreaking, and emergent behaviors that arise only in specific conversational contexts or multi-agent interactions. The best AI-powered red team tools in 2026 learn, adapt, and reason&mdash;blending technical exploitation with behavioral ingenuity to uncover blind spots and simulate novel attack vectors.</p>
+
+<p>Key frameworks for AI adversary simulation include:</p>
+
+<ul>
+  <li><strong>MITRE ATLAS</strong> (Adversarial Threat Landscape for Artificial-Intelligence Systems): As of February 2026, ATLAS contains 16 tactics, 84 techniques, 56 sub-techniques, 32 mitigations, and 42 real-world case studies. In 2025, ATLAS added 14 new techniques specifically for AI agents, covering prompt injection, memory manipulation, and tool-call exploitation. AI-enabled adversary attacks surged 89% compared to prior years.</li>
+  <li><strong>OWASP Top 10 for Agentic Applications (2026):</strong> Identifies risks including rogue agents (misalignment, concealment, self-directed action), human-agent trust exploitation (confident but misleading explanations), and excessive agency. Includes a practical FinBot Capture The Flag reference application for hands-on testing.</li>
+  <li><strong>NIST AI Risk Management Framework:</strong> Provides the governance umbrella under which ATLAS techniques and OWASP controls operate.</li>
+</ul>
+
+<h3>Purple Team Integration and Autonomous Red/Blue Teams</h3>
+
+<p>The most significant organizational shift in 2026 is the normalization of purple teaming as the default collaboration model rather than an occasional special exercise. Red and blue teams now sit together and immediately verify whether logs, alerts, and playbooks behave as expected against each discovered attack path. For AI systems specifically, this means jointly testing whether model guardrails hold under adversarial conditions, whether monitoring systems detect prompt injection attempts in real time, and whether incident response playbooks account for non-deterministic agent behavior.</p>
+
+<p>ISACA reported that autonomous red/blue teaming has emerged as a new frontier: automated red teams probe systems and discover attack paths while automated blue teams monitor telemetry and trigger remediation workflows. Continuous Threat Exposure Management (CTEM) integrates these practices into a daily, threat-informed discipline rather than periodic exercises. The shift is from "did we pass?" to "can we detect and respond in real time?"</p>
+
+<blockquote>"The old model trained people for yesterday's attacks. Continuous, threat-informed practice builds lasting capability against tomorrow's attacks." &mdash; CyberScoop, 2026</blockquote>
+
+<!-- ===================================================================== -->
+<h2>4. LLMs and Threat Modeling: Noise vs. Signal</h2>
+
+<h3>STRIDE and DREAD in the AI Age</h3>
+
+<p>The STRIDE framework (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege) and the DREAD scoring model (Damage, Reproducibility, Exploitability, Affected Users, Discoverability) have been cornerstones of threat modeling since Microsoft introduced them in the early 2000s. However, their application to AI and LLM systems reveals fundamental gaps. An arXiv paper on "Securing Agentic AI" demonstrated that STRIDE does not model the emergent behavior and cognitive reasoning of AI agents, and that threats associated with tool invocation and cognitive subsystems require STRIDE's scope to be extended or supplemented.</p>
+
+<p>The mapping between traditional STRIDE categories and LLM-specific threats is imperfect but instructive:</p>
+
+<table>
+  <thead><tr><th>STRIDE Category</th><th>LLM-Specific Threat</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td>Spoofing</td><td>Model identity impersonation</td><td>Agent claims to be a different, more-trusted agent</td></tr>
+    <tr><td>Tampering</td><td>Prompt injection</td><td>Malicious input alters model behavior mid-conversation</td></tr>
+    <tr><td>Repudiation</td><td>Non-attributable agent actions</td><td>Agent performs actions with no audit trail to responsible party</td></tr>
+    <tr><td>Information Disclosure</td><td>Training data extraction, system prompt leakage</td><td>Adversarial prompts extract PII from model weights</td></tr>
+    <tr><td>Denial of Service</td><td>Unbounded compute consumption</td><td>Recursive agent calls exhaust API quotas or GPU resources</td></tr>
+    <tr><td>Elevation of Privilege</td><td>Excessive agency</td><td>Agent performs actions beyond its intended scope via tool-call chains</td></tr>
+  </tbody>
+</table>
+
+<h3>LLM-Powered Threat Modeling Tools</h3>
+
+<p><strong>STRIDE-GPT</strong>, created by Matthew Adams (Head of Security Enablement at Citi), is an open-source AI-powered threat modeling tool that leverages LLMs to generate threat models based on the STRIDE methodology. It supports automated DREAD risk scoring, generating Gherkin test cases, and producing actionable mitigation recommendations. The tool is transparent about its limitations: "The threat models are not 100% accurate. LLMs can sometimes make mistakes and are prone to hallucinations. The output should be used only as a starting point."</p>
+
+<p>This transparency points to the central challenge: the <strong>noise-to-signal problem</strong>. When LLMs generate threat models, they produce plausible-sounding threats that may be entirely fabricated. Microsoft deprecated DREAD internally due to subjective and inconsistent scoring, and adding LLM-generated content to an already subjective framework can amplify noise exponentially. The practical workflow that has emerged is:</p>
+
+<ol>
+  <li><strong>Use LLMs for breadth:</strong> Generate an initial, comprehensive threat list that humans might not think of</li>
+  <li><strong>Use human expertise for depth:</strong> Filter, validate, and prioritize the LLM output against real system architecture</li>
+  <li><strong>Use frameworks for structure:</strong> Combine STRIDE with the OWASP Top 10 for LLM Applications 2025 to ensure coverage of AI-specific threats that traditional categories miss</li>
+  <li><strong>Use ATLAS for grounding:</strong> Cross-reference generated threats against MITRE ATLAS's 42 real-world case studies to separate theoretical risks from demonstrated attack patterns</li>
+</ol>
+
+<h3>The OWASP Top 10 for LLM Applications</h3>
+
+<p>The OWASP Top 10 for LLM Applications 2025 provides the most authoritative taxonomy of LLM-specific threats. Key entries include Prompt Injection (LLM01), Sensitive Information Disclosure (LLM06), Supply Chain vulnerabilities (LLM05), and Data and Model Poisoning (LLM04). New additions in the 2025 version include System Prompt Leakage (unauthorized exposure of foundational system instructions) and Vector and Embedding Weaknesses (security flaws within retrieval mechanisms and data embeddings used by RAG systems). Teams building agentic AI systems in 2026 typically combine STRIDE with this LLM-specific taxonomy to cover the full threat landscape.</p>
+
+<!-- ===================================================================== -->
+<h2>5. XDR Pipelines for Application-Level Threats</h2>
+
+<h3>From Endpoint to Application: The XDR Evolution</h3>
+
+<p>Extended Detection and Response (XDR) emerged from the endpoint detection and response (EDR) world, unifying telemetry from endpoints, networks, cloud workloads, identity systems, and email into a single correlation engine. The 2026 evolution extends this to application-layer signals&mdash;a critical gap that traditional XDR deployments left open. Application-level threats like business logic abuse, API manipulation, credential stuffing, and supply chain compromise generate signals that are invisible to network-layer and endpoint-layer detection.</p>
+
+<p>The modern security operations stack involves three complementary systems:</p>
+
+<table>
+  <thead><tr><th>System</th><th>Primary Function</th><th>Strength</th></tr></thead>
+  <tbody>
+    <tr><td><strong>SIEM</strong></td><td>Collect and analyze log data from diverse sources</td><td>Real-time monitoring, compliance reporting, long-term storage</td></tr>
+    <tr><td><strong>SOAR</strong></td><td>Automate security operations and orchestrate workflows</td><td>Playbook automation, cross-tool coordination, incident management</td></tr>
+    <tr><td><strong>XDR</strong></td><td>Unify detection and response across security domains</td><td>Cross-domain correlation, real-time response, native integrations</td></tr>
+  </tbody>
+</table>
+
+<h3>Application-Layer Signal Correlation</h3>
+
+<p>The operational flow for application-level threat detection follows a layered model: a SIEM alert (e.g., anomalous API call patterns) triggers a SOAR playbook to automate containment actions (e.g., rate-limiting the API consumer, rotating credentials), while XDR bypasses the SIEM/SOAR chain for real-time response within its native ecosystem, such as isolating compromised endpoints or blocking malicious traffic at the network edge. SOAR serves as the bridge, coordinating responses across disparate tools and ensuring all systems work harmoniously.</p>
+
+<p>For CI/CD pipelines specifically, the integration challenge is that build and deploy logs are often siloed from security tools. Effective XDR for DevSecOps requires ingesting CI/CD telemetry to detect malicious pipeline changes, correlating it with runtime application signals (traces, metrics, error rates), and feeding the combined intelligence into the SOAR layer for automated response. Open XDR architectures are replacing vendor-locked ecosystems in 2026, with platforms winning by integrating with any security tool through open APIs and standardized data formats (OCSF, STIX/TAXII).</p>
+
+<h3>AI-Enhanced Detection</h3>
+
+<p>Leading XDR platforms in 2026 use AI to prioritize and contextualize threats, helping teams focus on what matters most. This is particularly important for application-level signals, where the volume of telemetry is orders of magnitude higher than endpoint data. AI-driven correlation engines join signals into incidents to reduce false positives, though complexity increases with multiple data sources. The OWASP DevSecOps Guideline explains how to implement a secure pipeline that feeds into these detection systems, promoting shift-left security culture while maintaining runtime visibility through XDR integration.</p>
+
+<p>Key trends for 2026 include: application security testing integration (connecting code analysis, supply-chain data, and runtime signals into one workflow), open telemetry standards (OpenTelemetry bridging observability and security telemetry), and framework alignment (combining NIST guidance for baseline expectations, OWASP controls for CI/CD, and SLSA for supply-chain integrity).</p>
+
+<!-- ===================================================================== -->
+<h2>6. Secure Coding Literacy for "Vibe Coders"</h2>
+
+<h3>The Rise of Vibe Coding</h3>
+
+<p>The term "vibe coding" was coined by Andrej Karpathy, co-founder of OpenAI and former AI leader at Tesla, in February 2025. He described it as a coding approach where you "fully give in to the vibes, embrace exponentials, and forget that the code even exists." Merriam-Webster listed it as "slang &amp; trending" in March 2025, and Collins English Dictionary named it the Word of the Year for 2025. By early 2026, 92% of developers report using AI coding assistants, and the practice has moved from novelty to default workflow.</p>
+
+<p>But the security implications are severe and measurable:</p>
+
+<ul>
+  <li><strong>40% to 62%</strong> of AI-generated code contains security vulnerabilities, depending on the study and language</li>
+  <li>AI-written code produces flaws at <strong>2.74x the rate</strong> of human-written code (CodeRabbit analysis of 470 GitHub PRs, December 2025)</li>
+  <li><strong>86% of AI-generated code</strong> failed XSS defense mechanisms (Georgetown CSET study)</li>
+  <li><strong>45% of AI-generated code samples</strong> introduced OWASP Top 10 vulnerabilities (AppSec Santa analysis)</li>
+  <li>Java applications had security failure rates exceeding <strong>70%</strong> when generated by AI assistants</li>
+</ul>
+
+<h3>The CVE Explosion</h3>
+
+<p>Georgia Tech's Systems Software and Security Lab (SSLab) launched the <strong>Vibe Security Radar</strong> in May 2025, tracking CVE entries directly caused by AI-generated code by pulling data from public vulnerability databases and tracing backward to determine whether AI coding tools introduced the bug. The trajectory is alarming:</p>
+
+<table>
+  <thead><tr><th>Month</th><th>CVEs from AI-Generated Code</th><th>Trend</th></tr></thead>
+  <tbody>
+    <tr><td>January 2026</td><td>6</td><td>Baseline</td></tr>
+    <tr><td>February 2026</td><td>15</td><td>+150%</td></tr>
+    <tr><td>March 2026</td><td>35</td><td>+133%</td></tr>
+  </tbody>
+</table>
+
+<p>Across 74 confirmed cases tracked by the Vibe Security Radar, Claude Code was attributed to 27 CVEs, GitHub Copilot to 4, Devin to 2, and Aether and Cursor to 1 each. Real-world impacts have been dramatic: in March 2026, an AI platform had 1.5 million API keys leaked because a founder shipped a vibe-coded application without a single security review.</p>
+
+<h3>The Confidence-Security Paradox</h3>
+
+<p>Research has consistently found that developers using AI assistants wrote measurably less secure code while reporting <em>higher confidence</em> in its security. MIT computer scientist Daniel Jackson warned that leaning on AI coding too much may be "a bit of an impending disaster" because "not only will we have masses of broken code, full of security vulnerabilities, but we'll have a new generation of programmers incapable of dealing with those vulnerabilities."</p>
+
+<p>Common vulnerability classes in AI-generated code include SQL injection, broken authentication, hardcoded secrets, missing input validation, insecure direct object references, and phantom package dependencies (AI suggesting packages that don't exist, which attackers register and fill with malicious code). Copilot's code review feature itself frequently fails to detect critical vulnerabilities such as SQL injection, XSS, and insecure deserialization.</p>
+
+<blockquote>"Copilot does not think about attackers, abuse paths, or unintended behavior&mdash;it predicts what code should look like, not how that code might fail under pressure." &mdash; SecurityJourney, 2026</blockquote>
+
+<h3>Rebuilding Security Literacy</h3>
+
+<p>OWASP recognized the pattern by adding a dedicated vibe coding category to its Top 10 framework in 2025. The remediation path requires updated secure coding training that accounts for AI-generated code, mandatory security review gates that cannot be bypassed by AI confidence, supply chain verification for AI-suggested dependencies (checking that packages actually exist and are maintained), and static analysis tools integrated into the AI coding workflow itself, catching vulnerabilities before the developer ever sees the generated code. Karpathy himself has acknowledged the limits, noting that "vibe coding is now passe" and that the evolving practice is "agentic engineering"&mdash;programming via LLM agents with "more oversight and scrutiny."</p>
+
+<!-- ===================================================================== -->
+<h2>7. 25 Years of OWASP: 9,125 Days of Making Software Safer</h2>
+
+<h3>The Origin Story</h3>
+
+<p>Mark Curphey registered the owasp.org domain and started what would become OWASP on September 9, 2001&mdash;two days before the attacks that would reshape global security thinking. The official launch came on December 1, 2001. Curphey was running software security for Charles Schwab in San Francisco and had been moderating a mailing list called WebAppSec that drew thousands of subscribers. OWASP grew from that mailing list into a formalized collection of documents and tools to raise awareness about web application vulnerabilities. The OWASP Foundation was incorporated as a 501(c)(3) U.S. nonprofit in 2004.</p>
+
+<h3>The Top 10 Timeline</h3>
+
+<table>
+  <thead><tr><th>Year</th><th>Key Change</th><th>Significance</th></tr></thead>
+  <tbody>
+    <tr><td><strong>2003</strong></td><td>First OWASP Top 10 published</td><td>#1 was Broken Access Control. Categories included Unvalidated Input, Broken AuthN, Buffer Overflows</td></tr>
+    <tr><td><strong>2004</strong></td><td>First major update</td><td>Refined based on community feedback and emerging threats. OWASP incorporated as nonprofit</td></tr>
+    <tr><td><strong>2007</strong></td><td>List expanded</td><td>Addressed changing web application landscape, CSRF added as major category</td></tr>
+    <tr><td><strong>2010</strong></td><td>Significant methodology update</td><td>Reflected rise of XSS and SQL injection as dominant attack vectors</td></tr>
+    <tr><td><strong>2013</strong></td><td>Restructured for modern web</td><td>Mobile application considerations introduced</td></tr>
+    <tr><td><strong>2017</strong></td><td>New vulnerability classes</td><td>Added "Insufficient Logging &amp; Monitoring" and "XXE" as distinct categories</td></tr>
+    <tr><td><strong>2019</strong></td><td>API Security Top 10 launched</td><td>First separate list acknowledging APIs as distinct attack surface</td></tr>
+    <tr><td><strong>2021</strong></td><td>Data-driven methodology</td><td>Shifted to data-driven categorization; "Insecure Design" added as new concept</td></tr>
+    <tr><td><strong>2025</strong></td><td>Top 10 for LLM Applications</td><td>AI-specific security risks formalized: prompt injection, training data poisoning, system prompt leakage</td></tr>
+    <tr><td><strong>2026</strong></td><td>Two new categories added</td><td>"Software Supply Chain Failures" (A03) and "Mishandling of Exceptional Conditions" (A10); analyzed 589 CWEs across 248 categories</td></tr>
+  </tbody>
+</table>
+
+<h3>The 25th Anniversary Year</h3>
+
+<p>OWASP celebrated its 25th anniversary with a virtual conference on February 24, 2026 (with a second educational event on September 21) and the Global AppSec EU Conference in Vienna, Austria, June 22&ndash;26, 2026, bringing together over 800 cybersecurity experts. The anniversary year saw the release of the OWASP Top 10 2026, the MCP Top 10, the Agentic AI Top 10, the Smart Contract Top 10 2026, and ASVS 5.0&mdash;an unprecedented burst of framework production reflecting the expanding scope of application security.</p>
+
+<h3>Impact Assessment</h3>
+
+<p>Today OWASP has over 32,000 members, 8,500 contributors, and 300+ active projects spanning web security, API security, AI security, smart contract security, mobile security, and cloud-native security. The Top 10 has become a <em>de facto</em> standard used as a baseline for compliance, education, vendor tooling, and regulatory frameworks worldwide. The OWASP ASVS (Application Security Verification Standard) reached version 5.0 in May 2025, modernized with approximately 350 requirements across 17 chapters at three verification levels.</p>
+
+<p>What worked: creating an open, community-driven taxonomy that the industry could rally around; making education free and accessible; producing tools (ZAP, Dependency-Check, WebGoat) that lowered the barrier to security testing. What didn't: persistent challenges with organizational sustainability, the tension between community governance and foundation overhead, and the reality that despite 25 years of effort, the same vulnerability classes (injection, broken access control, misconfiguration) continue to dominate real-world breaches. OWASP founder Mark Curphey himself raised this concern in a public call for renewed relevance in the age of DevSecOps and software supply chain security.</p>
+
+<!-- ===================================================================== -->
+<h2>8. Developer-First Security Mindset</h2>
+
+<h3>From Shift-Left to Shift-Smart</h3>
+
+<p>The "shift left" movement&mdash;performing security testing earlier in the development lifecycle&mdash;has been DevSecOps orthodoxy for a decade. But by 2026, leading organizations have moved beyond simple shift-left toward what DevOps.com calls "Shift Smart": continuous, context-aware security that spans the entire lifecycle, embedding security into planning, building, testing, deploying, and operating. Teams assess risk continuously and with full environment context rather than at isolated checkpoints.</p>
+
+<p>The OWASP DevSecOps Maturity Model (DSOMM) provides the most detailed framework for measuring this evolution. It breaks security maturity into five levels across six dimensions: infrastructure, secure coding, testing and verification, CI/CD pipeline security, monitoring and measurement, and organizational culture. The trajectory toward 2026 shows increasing reliance on AI-driven security tools, with adoption projected to surge from 20% to 45%. Organizations achieving DSOMM Level 5 use predictive security capabilities and automated policy enforcement.</p>
+
+<h3>Making Security Developer-Friendly</h3>
+
+<p>The developer-first security mindset recognizes that security gates which slow developers down will be circumvented. Instead, security must be embedded into the tools developers already use. The practical implementation includes:</p>
+
+<ul>
+  <li><strong>Security Champions:</strong> Engineers who serve as liaisons between dedicated security teams and development squads, guiding decisions, sharing best practices, and raising awareness rather than just enforcing rules</li>
+  <li><strong>Policy-as-Code:</strong> Security policies expressed as code that runs in CI/CD pipelines, enabling automated enforcement without manual review bottlenecks. Modern implementations keep MTTR under 7 days and block 95% of critical vulnerabilities before production</li>
+  <li><strong>IDE Integration:</strong> SAST tools like Semgrep running directly in the developer's editor, flagging vulnerabilities at write time rather than at build time</li>
+  <li><strong>Self-Service Security Testing:</strong> Cisco introduced self-service AI Defense testing at RSAC 2026, letting developers red-team their own AI applications without waiting for a security team engagement</li>
+  <li><strong>Guardrails Over Gates:</strong> Rather than blocking deployments at security checkpoints, providing guardrails that guide developers toward secure patterns while allowing velocity</li>
+</ul>
+
+<h3>DevSecOps Pipeline Best Practices (2026)</h3>
+
+<p>Wiz published a comprehensive DevSecOps pipeline guide for 2026 that crystallizes current best practices: pre-commit hooks running secret scanners and linters, SAST and SCA in pull request checks, DAST in staging environments, container and IaC scanning in build pipelines, runtime protection and monitoring in production, and continuous compliance verification throughout. The key insight is that every stage produces telemetry that feeds back into the previous stages, creating a feedback loop that continuously improves the security posture of the entire organization, not just individual applications.</p>
+
+<p>The OWASP DevSecOps Guideline (v0.2) provides the canonical open-source reference for this pipeline architecture, covering threat modeling integration, secure coding practices, testing tool selection, deployment hardening, and operational monitoring. It explicitly promotes the shift-left security culture while acknowledging that shift-right (runtime monitoring) is equally essential.</p>
+
+<!-- ===================================================================== -->
+<h2>9. Securing Applications Without Budget</h2>
+
+<h3>The Zero-Cost Security Stack</h3>
+
+<p>Not every organization has a security budget. Startups, open-source projects, nonprofits, and small development teams need application security but cannot afford commercial tooling. OWASP has always served this community, and in 2026, the free and open-source security ecosystem is more capable than ever. AppSec Santa's analysis found that a combination of Semgrep CE (SAST), ZAP (DAST), and Trivy (SCA) covers 8 of the 10 OWASP Top 10 categories at zero cost.</p>
+
+<h3>The Essential Free Tools</h3>
+
+<p><strong>OWASP ZAP (Zed Attack Proxy)</strong> remains the world's most popular open-source DAST tool after being rebranded as "ZAP by Checkmarx" following Checkmarx's 2024 partnership (hiring all three ZAP project leaders and committing to keep ZAP free and open-source under Apache 2.0). Version 2.17.0, released December 2025, provides full-featured automated scanning for SQL injection, XSS, CSRF, and all OWASP Top 10 vulnerability classes. ZAP integrates into CI/CD pipelines for automated security testing in DevSecOps workflows.</p>
+
+<p><strong>OWASP Dependency-Check</strong> is a free, open-source Software Composition Analysis (SCA) tool that identifies project dependencies and checks them against the National Vulnerability Database (NVD) for known, publicly disclosed vulnerabilities. It supports Java, .NET, Node.js, Python, and Ruby ecosystems, and integrates with Maven, Gradle, Jenkins, and other build tools.</p>
+
+<p><strong>Semgrep Community Edition</strong> provides lightweight, fast static analysis supporting multiple programming languages with a pattern-based matching engine. It does not require compilation or deep program analysis, making it ideal for CI/CD integration. The Community Edition is free for teams up to 10 contributors.</p>
+
+<p><strong>Trivy</strong> by Aqua Security scans open-source dependencies, containers, infrastructure-as-code configurations, and Kubernetes manifests for vulnerabilities&mdash;all in one tool. It supports SBOM generation in industry-standard formats (SPDX, CycloneDX) and has become the default SCA scanner for container-native workflows.</p>
+
+<h3>Building a Security Program on Zero Budget</h3>
+
+<table>
+  <thead><tr><th>Layer</th><th>Free Tool</th><th>What It Catches</th></tr></thead>
+  <tbody>
+    <tr><td>SAST (Static Analysis)</td><td>Semgrep CE</td><td>Code-level vulnerabilities, injection flaws, insecure patterns</td></tr>
+    <tr><td>SCA (Dependency Scanning)</td><td>Trivy + OWASP Dependency-Check</td><td>Known CVEs in dependencies, outdated libraries, license risks</td></tr>
+    <tr><td>DAST (Dynamic Testing)</td><td>OWASP ZAP</td><td>Runtime vulnerabilities, XSS, SQLI, CSRF, auth bypass</td></tr>
+    <tr><td>Secret Scanning</td><td>Gitleaks / TruffleHog</td><td>Hardcoded credentials, API keys, tokens in source code</td></tr>
+    <tr><td>IaC Scanning</td><td>Trivy / Checkov</td><td>Misconfigured cloud resources, insecure Terraform/K8s manifests</td></tr>
+    <tr><td>Container Security</td><td>Trivy</td><td>Vulnerable base images, OS package CVEs, SBOM generation</td></tr>
+    <tr><td>Security Requirements</td><td>OWASP ASVS 5.0</td><td>350 requirements across 17 chapters at 3 verification levels</td></tr>
+    <tr><td>Education</td><td>OWASP WebGoat</td><td>Deliberately insecure application for hands-on security training</td></tr>
+  </tbody>
+</table>
+
+<p>The OWASP Application Security Verification Standard (ASVS) deserves special mention as the foundation of a zero-budget security program. ASVS 5.0 provides a detailed checklist of security requirements organized into three verification levels, from Level 1 (low assurance, suitable as a first step) through Level 3 (high assurance for critical systems handling sensitive data). It is completely free, vendor-neutral, and maps directly to CWE identifiers and NIST controls. An organization can use ASVS to define what "secure" means for their application, then use the free tools listed above to verify compliance with those requirements.</p>
+
+<p>OWASP also maintains a comprehensive directory of <strong>Free for Open Source Application Security Tools</strong> on their website, cataloging commercial tools that offer free tiers for open-source projects, including Snyk (SCA), SonarQube Community (SAST), and GitHub's built-in Dependabot and CodeQL scanning.</p>
+
+<blockquote>"You don't need a budget to have a security program. You need a plan, free tools, and the discipline to use them consistently." &mdash; OWASP community principle</blockquote>
+
+<!-- ===================================================================== -->
+<h2>Cross-Cutting Themes</h2>
+
+<p>Several themes emerge across all nine topics that characterize the state of application security in April 2026:</p>
+
+<ol>
+  <li><strong>The agent attack surface is the new perimeter.</strong> MCP tool poisoning, agent identity gaps, ghost agents, and delegation chains represent fundamentally new threat categories that did not exist two years ago. Every framework discussed&mdash;OWASP MCP Top 10, CSA ATF, MITRE ATLAS, Cisco DefenseClaw&mdash;is racing to cover this surface.</li>
+  <li><strong>AI is simultaneously the threat and the defense.</strong> AI generates vulnerable code (vibe coding), enables novel attacks (agent-driven reconnaissance), and powers the detection systems (XDR correlation, autonomous red teaming) that defend against those attacks. Organizations must develop proficiency on both sides.</li>
+  <li><strong>Identity is the foundation.</strong> Whether discussing zero trust for agents, MCP deception honeytraps, or DevSecOps pipeline security, the ability to verify identity&mdash;of humans, agents, tools, and artifacts&mdash;is the prerequisite for every other security control.</li>
+  <li><strong>Compliance is necessary but insufficient.</strong> The shift from checklist-based compliance to continuous, adversary-informed security is the defining organizational transformation of 2026. Purple teaming, CTEM, and DSOMM maturity models all point in the same direction.</li>
+  <li><strong>Free tools have never been better.</strong> The combination of Semgrep, Trivy, ZAP, ASVS, and OWASP's 300+ projects means that budget is no longer a legitimate barrier to application security. The barrier is knowledge and discipline.</li>
+</ol>
+
+<!-- ===================================================================== -->
+<h2>Bibliography and References</h2>
+
+<h3>OWASP Official Publications</h3>
+<ul class="citation">
+  <li>OWASP Foundation, "MCP Tool Poisoning," 2026. <a href="https://owasp.org/www-community/attacks/MCP_Tool_Poisoning">owasp.org/www-community/attacks/MCP_Tool_Poisoning</a></li>
+  <li>OWASP Foundation, "OWASP MCP Top 10," 2026 (beta). <a href="https://owasp.org/www-project-mcp-top-10/">owasp.org/www-project-mcp-top-10</a></li>
+  <li>OWASP Foundation, "Top 10 for Large Language Model Applications 2025." <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">owasp.org/www-project-top-10-for-large-language-model-applications</a></li>
+  <li>OWASP GenAI Security Project, "Top 10 for Agentic Applications 2026." <a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/">genai.owasp.org</a></li>
+  <li>OWASP Foundation, "Application Security Verification Standard (ASVS) 5.0," May 2025. <a href="https://owasp.org/www-project-application-security-verification-standard/">owasp.org/www-project-application-security-verification-standard</a></li>
+  <li>OWASP Foundation, "DevSecOps Maturity Model (DSOMM)." <a href="https://owasp.org/www-project-devsecops-maturity-model/">owasp.org/www-project-devsecops-maturity-model</a></li>
+  <li>OWASP Foundation, "DevSecOps Guideline v0.2." <a href="https://owasp.org/www-project-devsecops-guideline/">owasp.org/www-project-devsecops-guideline</a></li>
+  <li>OWASP Foundation, "OWASP Top 10:2025/2026." <a href="https://owasp.org/Top10/2025/">owasp.org/Top10/2025</a></li>
+  <li>OWASP Foundation, "A Practical Guide for Secure MCP Server Development." <a href="https://genai.owasp.org/resource/a-practical-guide-for-secure-mcp-server-development/">genai.owasp.org</a></li>
+  <li>OWASP Foundation, "Free for Open Source Application Security Tools." <a href="https://owasp.org/www-community/Free_for_Open_Source_Application_Security_Tools">owasp.org</a></li>
+</ul>
+
+<h3>Industry Frameworks</h3>
+<ul class="citation">
+  <li>MITRE Corporation, "ATLAS: Adversarial Threat Landscape for Artificial-Intelligence Systems," 2026. <a href="https://atlas.mitre.org/">atlas.mitre.org</a></li>
+  <li>Cloud Security Alliance, "Agentic Trust Framework: Zero Trust for AI Agents," Feb 2, 2026. <a href="https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents">cloudsecurityalliance.org</a></li>
+  <li>Cloud Security Alliance, "Securing the Agentic Control Plane," Mar 2026. <a href="https://cloudsecurityalliance.org/blog/2026/03/20/2026-securing-the-agentic-control-plane">cloudsecurityalliance.org</a></li>
+</ul>
+
+<h3>Vendor Announcements and Research</h3>
+<ul class="citation">
+  <li>Cisco, "Cisco Reimagines Security for the Agentic Workforce," RSAC 2026. <a href="https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2026/m03/cisco-reimagines-security-for-the-agentic-workforce.html">newsroom.cisco.com</a></li>
+  <li>Microsoft Security Blog, "Announcing Zero Trust for AI," Mar 19, 2026. <a href="https://www.microsoft.com/en-us/security/blog/2026/03/19/new-tools-and-guidance-announcing-zero-trust-for-ai/">microsoft.com</a></li>
+  <li>Microsoft Developer Blog, "Protecting against indirect injection attacks in MCP." <a href="https://developer.microsoft.com/blog/protecting-against-indirect-injection-attacks-mcp">developer.microsoft.com</a></li>
+  <li>Unit 42 (Palo Alto Networks), "New Prompt Injection Attack Vectors Through MCP Sampling." <a href="https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/">unit42.paloaltonetworks.com</a></li>
+  <li>Elastic Security Labs, "MCP Tools: Attack Vectors and Defense Recommendations." <a href="https://www.elastic.co/security-labs/mcp-tools-attack-defense-recommendations">elastic.co</a></li>
+  <li>VentureBeat, "RSAC 2026 shipped five agent identity frameworks and left three critical gaps open." <a href="https://venturebeat.com/security/rsac-2026-agent-identity-frameworks-three-gaps">venturebeat.com</a></li>
+  <li>HashiCorp, "SPIFFE: Securing the identity of agentic AI and non-human actors." <a href="https://www.hashicorp.com/en/blog/spiffe-securing-the-identity-of-agentic-ai-and-non-human-actors">hashicorp.com</a></li>
+</ul>
+
+<h3>Academic and Research Sources</h3>
+<ul class="citation">
+  <li>Georgia Tech SSLab, "Vibe Security Radar," launched May 2025. Tracking CVEs from AI-generated code.</li>
+  <li>"Prompt Injection Attacks in Large Language Models and AI Agent Systems," <em>MDPI Information</em>, 2025. <a href="https://www.mdpi.com/2078-2489/17/1/54">mdpi.com</a></li>
+  <li>"Threat Modelling and Risk Analysis for Large Language Model (LLM)-Powered Applications," arXiv:2406.11007, 2024. <a href="https://arxiv.org/html/2406.11007v1">arxiv.org</a></li>
+  <li>"Securing Agentic AI: Threat Modeling and Risk Analysis," arXiv:2508.10043. <a href="https://arxiv.org/pdf/2508.10043">arxiv.org</a></li>
+  <li>"GitHub's Copilot Code Review: Can AI Spot Security Flaws Before You Commit?" arXiv:2509.13650, 2025. <a href="https://arxiv.org/html/2509.13650v1">arxiv.org</a></li>
+  <li>"Security Weaknesses of Copilot Generated Code in GitHub," arXiv:2310.02059. <a href="https://arxiv.org/html/2310.02059v2">arxiv.org</a></li>
+  <li>"An Explainable Zero Trust Identity Framework for LLMs, AI Agents, and Agentic AI Systems," <em>IJCA</em>, Vol. 187, No. 46. <a href="https://www.ijcaonline.org/archives/volume187/number46/">ijcaonline.org</a></li>
+</ul>
+
+<h3>Tools and Open-Source Projects</h3>
+<ul class="citation">
+  <li>Invariant Labs, "mcp-scan: Security Scanner for MCP." <a href="https://mcpplaygroundonline.com/blog/mcp-security-tool-poisoning-owasp-top-10-mcp-scan">mcp-scan</a></li>
+  <li>Adams, M., "STRIDE-GPT: AI-powered threat modeling." <a href="https://github.com/mrwadams/stride-gpt">github.com/mrwadams/stride-gpt</a></li>
+  <li>OWASP ZAP by Checkmarx, v2.17.0 (Dec 2025). <a href="https://www.zaproxy.org/">zaproxy.org</a></li>
+  <li>OWASP Dependency-Check. <a href="https://owasp.org/www-project-dependency-check/">owasp.org</a></li>
+  <li>Semgrep (open-source SAST). <a href="https://semgrep.dev/">semgrep.dev</a></li>
+  <li>Trivy by Aqua Security (open-source SCA/container scanner). <a href="https://github.com/aquasecurity/trivy">github.com/aquasecurity/trivy</a></li>
+</ul>
+
+<h3>Conference and Event Sources</h3>
+<ul class="citation">
+  <li>OWASP 25th Anniversary Virtual Conference, Feb 24, 2026. <a href="https://infosec-conferences.com/event/owasp-25th-anniversary-virtual-conference-2026">infosec-conferences.com</a></li>
+  <li>OWASP Global AppSec EU 2026, Vienna, Jun 22-26. <a href="https://owasp.glueup.com/event/owasp-global-appsec-eu-2026-vienna-austria-162243/">owasp.glueup.com</a></li>
+  <li>RSA Conference 2026, San Francisco, Mar 2026.</li>
+  <li>Kadam, H.S., "MCP Deception Incubator: Honeytraps as a Framework," OWASP presentation. <a href="https://sessionize.com/s/harshad-sadashiv-kadam/mcp-deception-incubator-honeytraps-as-a-framework-/150098">sessionize.com</a></li>
+</ul>
+
+<h3>Industry Analysis</h3>
+<ul class="citation">
+  <li>The Register, "Using AI to code does not mean your code is more secure," Mar 26, 2026. <a href="https://www.theregister.com/2026/03/26/ai_coding_assistant_not_more_secure/">theregister.com</a></li>
+  <li>CyberScoop, "Red, blue, and now AI: Rethinking cybersecurity training for 2026." <a href="https://cyberscoop.com/continuous-threat-exposure-management-cybersecurity-ctem-ai-resilience/">cyberscoop.com</a></li>
+  <li>ISACA, "Autonomous Red vs Blue Teaming: A New Frontier in Cybersecurity," 2026. <a href="https://www.isaca.org/resources/news-and-trends/industry-news/2026/autonomous-red-vs-blue-teaming-a-new-frontier-in-cybersecurity-risk-and-reward">isaca.org</a></li>
+  <li>Towards Data Science, "The Reality of Vibe Coding: AI Agents and the Security Debt Crisis." <a href="https://towardsdatascience.com/the-reality-of-vibe-coding-ai-agents-and-the-security-debt-crisis/">towardsdatascience.com</a></li>
+  <li>DevOps.com, "The Future of DevSecOps: From Shifting Left to Shifting Smart." <a href="https://devops.com/the-future-of-devsecops-from-shifting-left-to-shifting-smart/">devops.com</a></li>
+  <li>Wiz, "DevSecOps Pipeline Best Practices for 2026." <a href="https://www.wiz.io/academy/application-security/devsecops-pipeline-best-practices">wiz.io</a></li>
+  <li>Karpathy, A., "Vibe coding" (coined Feb 2025). Collins English Dictionary Word of the Year 2025. <a href="https://en.wikipedia.org/wiki/Vibe_coding">Wikipedia</a></li>
+  <li>Veracode, "The Start of OWASP &mdash; A True Story." <a href="https://www.veracode.com/blog/intro-appsec/start-owasp-true-story">veracode.com</a></li>
+</ul>
+  </main>
+
+  <footer>
+    <p>YouTube Deep Research Digest &mdash; Project YTB &mdash; <a href="index.html">Back to Overview</a></p>
+    <p>Part of the <a href="../index.html">PNW Research Series</a> &middot; Research Co-Processor v2 &middot; April 2026</p>
+  </footer>
+</body>
+</html>
