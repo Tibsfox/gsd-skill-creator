@@ -86,6 +86,130 @@
       </ol>
     </div>
 
+    <!-- DEEP EXTRACTION: COMPREHENSIVE SURVEY METHODOLOGY TAXONOMY (arXiv:2408.00803) -->
+    <h2>RCA Methodology Taxonomy &mdash; Comprehensive Survey</h2>
+    <p>Deep extraction from Wang &amp; Qi (arXiv:2408.00803, Southeast University, 2024) provides a complete taxonomy of <strong>90+ distinct RCA methods</strong> surveyed across microservice architectures. The survey reports a <span class="key-number confirmed">74.38%</span> recurrence rate for failures in microservices &mdash; validating investment in pattern learning and persistent diagnostic knowledge.</p>
+
+    <h3>Methods by Data Source</h3>
+    <table>
+      <thead><tr><th>Data Source</th><th>Method Types</th><th>Notable Methods</th><th>Approx. Count</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Metric-based</strong></td><td>Non-graph (KPI correlation, HMM, clustering) and graph-based (dependency, topology, causality, knowledge graphs)</td><td>Sieve, FacGraph, MicroRCA, DejAVu, CloudRanger, AutoMAP, MicroCause, CORAL, REASON</td><td>30+</td></tr>
+        <tr><td><strong>Trace-based</strong></td><td>Correlation analysis (alarm clustering, random walk, frequent pattern mining) and classification (ML, DNN, spectrum-based, GNN)</td><td>TBAC, TraceRCA, TraceRank, MonitorRank, Pinpoint, MicroRank, Sleuth</td><td>25+</td></tr>
+        <tr><td><strong>Log-based</strong></td><td>Correlation analysis (rule-based, ARM, statistical) and classification (decision tree, clustering, NLP, knowledge graphs)</td><td>LogRule, SherLog, LogSed, DeCaf, LogDC, LADRA</td><td>30+</td></tr>
+        <tr><td><strong>Multi-modal</strong></td><td>Vote-based, knowledge graph, Bayesian, contrastive learning, GNN fusion</td><td>Pdiagnose, MicroCBR, CloudRCA, MULAN, DiagFusion, Nezha, GROOT</td><td>10+</td></tr>
+        <tr><td><strong>LLM-enhanced</strong></td><td>Fine-tuning, RAG, confidence estimation, ReAct agents</td><td>RCACopilot, ADARMA</td><td>8+</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Six Challenge Categories</h3>
+    <div class="card">
+      <ol>
+        <li><strong>Data-Related:</strong> Reliability, log volume, sampling rate, trace truncation, incompleteness</li>
+        <li><strong>Dependency Complexity:</strong> Dense interconnected services, cascading faults, ambiguous call relationships</li>
+        <li><strong>Fault Characteristics:</strong> Destructiveness, propagation, 74.38% recurrence rate</li>
+        <li><strong>Methodology Limitations:</strong> Single-modality narrow perspectives, graph completeness vs complexity, labeled data requirements</li>
+        <li><strong>Practical Implementation:</strong> Heterogeneous data integration, interpretability vs accuracy, scalability, real-time requirements</li>
+        <li><strong>Emerging Technical:</strong> LLM black-box nature, agent-based prompting complexity, dynamic adaptation</li>
+      </ol>
+    </div>
+
+    <!-- DEEP EXTRACTION: DYNACAUSAL FULL RESULTS (arXiv:2510.22613) -->
+    <h2>DynaCausal &mdash; Full Results</h2>
+    <p>Deep extraction from Zhang et al. (arXiv:2510.22613, Oct 2025) provides complete benchmark results for DynaCausal&rsquo;s dynamic causality-aware RCA framework.</p>
+
+    <h3>Three-Stage Methodology</h3>
+    <div class="card">
+      <ol>
+        <li><strong>Multi-Modal Data Alignment:</strong> Integrates metrics, logs, and traces into unified multivariate time series. Constructs dynamic call graphs with edge weights: <code>e<sub>i,j</sub><sup>(t)</sup> = &sigma;(&alpha; &middot; Norm(C) + (1-&alpha;) &middot; Norm(R))</code></li>
+        <li><strong>System-Interaction-Aware Representation Learning:</strong> Temporal encoding via Transformer encoders with multi-head self-attention; Hybrid-Aware GAT combining standard graph attention with pre-calculated dynamic edge weights modeling fault propagation causality</li>
+        <li><strong>Causal Representation Discrimination (CRD):</strong> Temporal Causal Disentanglement (TCD) via contrastive learning; Spatial Causal Ordering (SCO) via pairwise ranking constraints</li>
+      </ol>
+    </div>
+
+    <h3>Combined Loss Function</h3>
+    <div class="card">
+      <p><code>L<sub>total</sub> = L<sub>CE</sub> + &lambda;<sub>1</sub> &middot; L<sub>TCD</sub> + &lambda;<sub>2</sub> &middot; L<sub>rank</sub></code></p>
+      <p>Where TCD enforces temporal disentanglement (anomalous vs normal service embeddings) and ranking loss implements causal ordering priorities (root causes must score above downstream affected services).</p>
+    </div>
+
+    <h3>Results: AC@1 (Accuracy at Rank 1)</h3>
+    <table>
+      <thead><tr><th>Method</th><th>Type</th><th>D1 (12 services)</th><th>D2 (50 services)</th></tr></thead>
+      <tbody>
+        <tr><td>MicroRank</td><td>trace-based</td><td>0.444</td><td>0.013</td></tr>
+        <tr><td>Baro</td><td>metric-based</td><td>0.144</td><td>0.263</td></tr>
+        <tr><td>Nezha</td><td>multi-modal</td><td>0.078</td><td>0.092</td></tr>
+        <tr><td>Eadro</td><td>multi-modal</td><td>0.459</td><td>0.301</td></tr>
+        <tr><td>ART</td><td>unsupervised</td><td>0.196</td><td>0.176</td></tr>
+        <tr><td><strong>DynaCausal</strong></td><td><strong>dynamic causal</strong></td><td><strong>0.769</strong></td><td><strong>0.481</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="stats">
+      <div class="stat"><span class="stat-value green">+0.310</span><span class="stat-label">Improvement on D1 vs Best Baseline</span></div>
+      <div class="stat"><span class="stat-value green">+0.180</span><span class="stat-label">Improvement on D2 vs Best Baseline</span></div>
+    </div>
+    <p><strong>Extended D1 metrics:</strong> AC@3=0.980, Avg@5=0.937, MRR=0.873. <strong>Extended D2 metrics:</strong> AC@3=0.696, Avg@5=0.680, MRR=0.626.</p>
+
+    <h3>Ablation Study (AC@1)</h3>
+    <table>
+      <thead><tr><th>Configuration</th><th>D1</th><th>D2</th><th>Degradation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Full DynaCausal</strong></td><td>0.769</td><td>0.481</td><td>&mdash;</td></tr>
+        <tr><td>w/o TCD</td><td>0.743</td><td>0.454</td><td>-3.4% / -5.6%</td></tr>
+        <tr><td>w/o SCO</td><td>0.737</td><td>0.447</td><td>-4.2% / -7.1%</td></tr>
+        <tr><td>w/o H-GAT</td><td>0.697</td><td>0.401</td><td>-9.4% / -16.6%</td></tr>
+        <tr><td>w/ Static graphs</td><td>0.669</td><td>0.395</td><td>-13.0% / -17.9%</td></tr>
+      </tbody>
+    </table>
+    <p>Dynamic graph construction had the greatest impact. Static variants degraded most on the larger D2 dataset (50 services), demonstrating that <strong>dynamic &gt; static is more critical as system complexity grows</strong>.</p>
+
+    <h3>Cascading Fault Case Study</h3>
+    <div class="card">
+      <p>Existing methods incorrectly ranked PaymentService and AdService above the actual root cause CheckoutService. CheckoutService showed only subtle latency increase while downstream services exhibited pronounced memory shifts. DynaCausal&rsquo;s SCO constraint correctly forced root causes to rank above affected downstream services, identifying the subtle-but-causal originator.</p>
+    </div>
+
+    <!-- DEEP EXTRACTION: GOAL-DRIVEN SURVEY (arXiv:2510.19593) -->
+    <h2>Goal-Driven RCA Framework &mdash; Fang et al.</h2>
+    <p>Deep extraction from Fang et al. (arXiv:2510.19593, Oct 2025) reframes RCA through <strong>objectives rather than data types</strong>. The survey covers 135 papers (2014&ndash;2025) and argues that &ldquo;the goal of localizing a faulty service for rapid triage is fundamentally different from identifying a specific functional bug.&rdquo;</p>
+
+    <h3>Formal RCA Definition</h3>
+    <div class="card">
+      <p><strong>F: O &rarr; G</strong> where:</p>
+      <ul>
+        <li><strong>Input Space (O):</strong> Logs, metrics, traces, events, supplementary data (code, configs, docs)</li>
+        <li><strong>Output Space (G):</strong> Incident Propagation Graph (DAG) with three node types: root cause (zero in-degree), trigger (optional catalyst), symptom (observable failure)</li>
+      </ul>
+    </div>
+
+    <h3>Seven Fundamental Goals</h3>
+    <table>
+      <thead><tr><th>#</th><th>Goal</th><th>Sub-Approaches</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Multi-dimensional Data Correlation</strong></td><td>Unified representation learning (DiagFusion, Nezha), graph-based fusion (TrinityRCL, CHASE), LLM-driven semantic fusion (RCACopilot, Atlas)</td></tr>
+        <tr><td>2</td><td><strong>Robustness</strong></td><td>Constraint-based causal discovery (CloudRanger, ServiceRank), sparsity-tolerant methods, multi-agent consensus</td></tr>
+        <tr><td>3</td><td><strong>Adaptive Learning</strong></td><td>Graph-based incremental updates, feedback-driven refinement, few-shot learning, reinforcement learning</td></tr>
+        <tr><td>4</td><td><strong>Real-time Performance</strong></td><td>Search space pruning, dimensionality reduction, parallel/distributed processing, LLM token optimization</td></tr>
+        <tr><td>5</td><td><strong>Interpretability</strong></td><td>Structural (causal graphs), semantic (natural language), evidence-based, interactive visualization</td></tr>
+        <tr><td>6</td><td><strong>Multi-granularity</strong></td><td>Service &rarr; infrastructure/component, service &rarr; code-level, multi-dimensional fine-grained</td></tr>
+        <tr><td>7</td><td><strong>Actionability</strong></td><td>Automated remediation generation, LLM-driven planning, human-in-the-loop validation</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The Effectiveness-Data-Cost Triangle</h3>
+    <div class="card">
+      <p>Fundamental trade-off identified across all surveyed methods: improving <strong>effectiveness</strong> requires richer <strong>data</strong>, but richer data increases <strong>cost</strong>. This three-way competition forces strategic compromises &mdash; no method optimizes all three simultaneously. This is our token-budget constraint in different clothes.</p>
+    </div>
+
+    <h3>Critical Gaps in Current Research</h3>
+    <div class="card">
+      <ul>
+        <li>Current research focuses on <strong>&ldquo;point-finding&rdquo;</strong> (identifying root cause nodes) rather than <strong>&ldquo;graph-building&rdquo;</strong> (constructing complete incident propagation graphs)</li>
+        <li>No existing work generates comprehensive propagation paths with validated causal edges</li>
+        <li>SRE seeking rapid mitigation (MTTR) needs different RCA than developer pursuing permanent fixes (MTBF) &mdash; this distinction is absent from conventional surveys</li>
+      </ul>
+    </div>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>227 related projects</strong> across 1 knowledge domain with 8 keyword matches.</p>

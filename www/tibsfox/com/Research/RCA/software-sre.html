@@ -112,6 +112,83 @@
       <li><strong>Blast radius:</strong> How far the cascade propagated before containment</li>
     </ul>
 
+    <!-- DEEP EXTRACTION: GOOGLE SRE BLAMELESS POSTMORTEM CULTURE (sre.google) -->
+    <h2>Google SRE Blameless Postmortem &mdash; Deep Extraction</h2>
+    <p>Deep extraction from Google&rsquo;s <em>Site Reliability Engineering</em> book, Chapter &ldquo;Postmortem Culture: Learning from Failure,&rdquo; provides the complete operational framework for blameless postmortems as practiced at Google scale.</p>
+
+    <h3>Core Philosophy</h3>
+    <div class="card">
+      <blockquote>&ldquo;The cost of failure is education.&rdquo;</blockquote>
+      <p>Postmortems are written records documenting incidents, impacts, mitigation actions, root causes, and preventive follow-ups. They assume all participants had good intentions with the information available to them. The investigation focuses on <strong>why individuals lacked complete or correct information</strong>, not on personal failings. This approach originated in healthcare and avionics where mistakes carry fatal consequences.</p>
+    </div>
+
+    <h3>Postmortem Trigger Criteria</h3>
+    <p>A postmortem is required when any of the following conditions are met:</p>
+    <table>
+      <thead><tr><th>Trigger</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>User-visible downtime</strong></td><td>Downtime or degradation beyond established thresholds</td></tr>
+        <tr><td><strong>Any data loss</strong></td><td>Regardless of scope or severity</td></tr>
+        <tr><td><strong>On-call intervention</strong></td><td>Engineer performed rollbacks, traffic rerouting, or manual mitigation</td></tr>
+        <tr><td><strong>Resolution time exceeded</strong></td><td>Time to resolve exceeded established limits</td></tr>
+        <tr><td><strong>Monitoring failure</strong></td><td>Incident required manual discovery rather than automated detection</td></tr>
+        <tr><td><strong>Stakeholder request</strong></td><td>Any stakeholder can request a postmortem for any incident</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Full Template Structure (7 Sections)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Section</th><th>Content</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Incident description</strong></td><td>What happened &mdash; factual, non-judgmental account</td></tr>
+        <tr><td>2</td><td><strong>Impact</strong></td><td>User-facing and internal effects: duration, affected users, revenue, SLO consumption</td></tr>
+        <tr><td>3</td><td><strong>Root cause</strong></td><td>Why it happened &mdash; systemic, not individual. Process and system weaknesses.</td></tr>
+        <tr><td>4</td><td><strong>Mitigation actions</strong></td><td>What was done to stop the incident</td></tr>
+        <tr><td>5</td><td><strong>Follow-up actions</strong></td><td>What will prevent recurrence &mdash; with owners and deadlines, categorized as prevent/detect/mitigate</td></tr>
+        <tr><td>6</td><td><strong>Timeline</strong></td><td>Minute-by-minute reconstruction from detection through resolution</td></tr>
+        <tr><td>7</td><td><strong>Lessons learned</strong></td><td>What went well, what went poorly, <strong>where we got lucky</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Review Process</h3>
+    <div class="card">
+      <ul>
+        <li><strong>Initial review:</strong> Senior engineers assess completeness, root cause thoroughness, and action plan priority</li>
+        <li><strong>Publication:</strong> Shared broadly across engineering teams via mailing lists and incident repositories</li>
+        <li><strong>No unreviewed postmortems:</strong> Regular review sessions ensure completion and action item finalization</li>
+        <li>Never include user-identifying information</li>
+      </ul>
+    </div>
+
+    <h3>Cultural Reinforcement Practices</h3>
+    <table>
+      <thead><tr><th>Practice</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Postmortem of the Month</strong></td><td>Organization-wide newsletter featuring interesting cases &mdash; celebrates learning, not blame</td></tr>
+        <tr><td><strong>Postmortem Reading Clubs</strong></td><td>Teams discuss impactful incidents to spread knowledge across organizational boundaries</td></tr>
+        <tr><td><strong>Wheel of Misfortune</strong></td><td>Role-playing exercises reenacting previous incidents for training &mdash; builds muscle memory for incident response</td></tr>
+        <tr><td><strong>Internal Discussion Groups</strong></td><td>Sharing and analysis platforms for cross-team learning</td></tr>
+        <tr><td><strong>Visible Recognition</strong></td><td>Google founders hosted TGIF sessions celebrating exceptional incident handling</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Anti-Pattern</h3>
+    <div class="card">
+      <p><strong>Stigmatizing frequent postmortems</strong> by individuals or teams creates cultures where incidents get &ldquo;swept under the rug,&rdquo; increasing organizational risk. If postmortems are seen as punishment, people stop reporting incidents. The postmortem frequency of a team should be viewed as a signal of transparency, not incompetence.</p>
+    </div>
+
+    <h3>Automation Efforts</h3>
+    <p>Google&rsquo;s &ldquo;Postmortems at Google&rdquo; working group coordinates:</p>
+    <div class="card">
+      <ul>
+        <li>Template standardization across all engineering teams</li>
+        <li>Automated postmortem creation using incident tool data</li>
+        <li>Metadata field enhancement for automated analysis</li>
+        <li>Trend analysis across product boundaries</li>
+        <li>Future ML applications for weakness prediction</li>
+      </ul>
+    </div>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>14 related projects</strong> across 4 knowledge domains with 13 keyword matches.</p>

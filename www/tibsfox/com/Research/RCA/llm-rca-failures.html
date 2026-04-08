@@ -118,6 +118,136 @@
     </ul>
     <p>FVDebug represents a promising direction: using formal methods to verify LLM reasoning rather than replacing it.</p>
 
+    <!-- DEEP EXTRACTION: 12 PITFALL TYPES FULL TABLE (arXiv:2602.09937) -->
+    <h2>Complete 12 Pitfall Classification &mdash; Kim et al.</h2>
+    <p>Deep extraction from Kim et al. (arXiv:2602.09937, Feb 2026) provides the full pitfall taxonomy organized across three failure domains. The study ran <strong>1,675 agent executions</strong> across 5 specific models on the OpenRCA benchmark:</p>
+
+    <h3>Models Tested</h3>
+    <table>
+      <thead><tr><th>Model</th><th>Provider</th><th>Parameters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Claude 3.5 Sonnet</strong></td><td>Anthropic</td><td>Frontier</td></tr>
+        <tr><td><strong>GPT-4</strong></td><td>OpenAI</td><td>Frontier</td></tr>
+        <tr><td><strong>GPT-4o</strong></td><td>OpenAI</td><td>Frontier</td></tr>
+        <tr><td><strong>Llama 3.1 70B</strong></td><td>Meta</td><td>70B</td></tr>
+        <tr><td><strong>Mistral Large</strong></td><td>Mistral</td><td>Frontier</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Intra-Agent Reasoning Failures (6 pitfalls)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Pitfall</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Hallucination</strong></td><td>Agents generate plausible-sounding but incorrect diagnoses without factual grounding</td></tr>
+        <tr><td>2</td><td><strong>Weak Hypothesis Generation</strong></td><td>Agents struggle to formulate diverse or accurate diagnostic theories</td></tr>
+        <tr><td>3</td><td><strong>Incomplete Exploration</strong></td><td>Agents prematurely terminate investigation before exhausting possibilities</td></tr>
+        <tr><td>4</td><td><strong>Assumption Validation Failures</strong></td><td>Agents accept unverified premises without confirmation</td></tr>
+        <tr><td>5</td><td><strong>Root Cause Confusion</strong></td><td>Agents identify symptoms rather than underlying causes</td></tr>
+        <tr><td>6</td><td><strong>Circular Reasoning</strong></td><td>Agents get trapped repeating similar investigations without progression</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Inter-Agent Communication Failures (3 pitfalls)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Pitfall</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>7</td><td><strong>Insufficient Context Window</strong></td><td>Agents lack adequate observability data for comprehensive analysis</td></tr>
+        <tr><td>8</td><td><strong>Ineffective State Tracking</strong></td><td>Agents lose context about system conditions across multiple steps</td></tr>
+        <tr><td>9</td><td><strong>Cross-System Blindness</strong></td><td>Agents cannot correlate failures across distributed system components</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Agent-Environment Interaction Failures (3 pitfalls)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Pitfall</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td><strong>Narrow Tool Utilization</strong></td><td>Agents fail to leverage available diagnostic tools effectively</td></tr>
+        <tr><td>11</td><td><strong>Poor Action Sequencing</strong></td><td>Agents execute operations in suboptimal or illogical orders</td></tr>
+        <tr><td>12</td><td><strong>Tool Invocation Errors</strong></td><td>Agents misuse or misunderstand tool parameters and return values</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Findings</h3>
+    <div class="card">
+      <ul>
+        <li><strong>Most prevalent pitfalls</strong> (hallucinated data interpretation + incomplete exploration) persist across ALL models regardless of capability tier</li>
+        <li><strong>Prompt engineering alone cannot resolve</strong> the dominant pitfalls</li>
+        <li><strong>Inter-agent communication protocol enrichment</strong> reduced communication-related failures by <span class="key-number confirmed">up to 15 percentage points</span></li>
+        <li>Architecture-level issues dominate over model-level issues &mdash; failures stem from system design, not individual model weaknesses</li>
+      </ul>
+    </div>
+
+    <!-- DEEP EXTRACTION: 16 REASONING FAILURE TAXONOMY (arXiv:2601.22208) -->
+    <h2>Complete 16 Reasoning Failure Taxonomy &mdash; Riddell et al.</h2>
+    <p>Deep extraction from Riddell et al. (arXiv:2601.22208, FORGE 2026) provides a labeled taxonomy of 16 common RCA reasoning failures, derived from <strong>48,000 simulated failure scenarios</strong> over <strong>228 execution days</strong> across 6 open-source LLMs.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value red">48,000</span><span class="stat-label">Simulated Scenarios</span></div>
+      <div class="stat"><span class="stat-value blue">228</span><span class="stat-label">Execution Days</span></div>
+      <div class="stat"><span class="stat-value amber">6</span><span class="stat-label">Models Tested</span></div>
+      <div class="stat"><span class="stat-value green">16</span><span class="stat-label">Failure Types Identified</span></div>
+    </div>
+
+    <h3>Per-Hypothesis Failures (RF-01 to RF-08)</h3>
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>RF-01</td><td><strong>Fabricated evidence</strong></td><td>Agent invents data not present in observations</td></tr>
+        <tr><td>RF-02</td><td><strong>Metric interpretation errors</strong></td><td>Misreads numerical values or trends</td></tr>
+        <tr><td>RF-03</td><td><strong>Confused provenance</strong></td><td>Attributes data to wrong source or component</td></tr>
+        <tr><td>RF-04</td><td><strong>Temporal misordering</strong></td><td>Gets sequence of events wrong</td></tr>
+        <tr><td>RF-05</td><td><strong>Spurious causal attribution</strong></td><td>Claims causation without valid evidence chain</td></tr>
+        <tr><td>RF-06</td><td><strong>Unjustified instance specificity</strong></td><td>Over-narrows diagnosis without basis</td></tr>
+        <tr><td>RF-07</td><td><strong>Arbitrary evidence selection</strong></td><td>Cherry-picks supporting data, ignores contradicting</td></tr>
+        <tr><td>RF-08</td><td><strong>Evidential insufficiency</strong></td><td>Reaches conclusions with inadequate evidence</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Full Trace Procedural Failures (RF-09 to RF-12)</h3>
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>RF-09</td><td><strong>Failure to update belief</strong></td><td>Does not revise hypothesis when new evidence contradicts</td></tr>
+        <tr><td>RF-10</td><td><strong>Simulation or role confusion</strong></td><td>Loses track of its diagnostic role or purpose</td></tr>
+        <tr><td>RF-11</td><td><strong>Excessive speculation</strong></td><td>Generates unfounded hypothetical scenarios</td></tr>
+        <tr><td>RF-12</td><td><strong>Repetition or stalled progress</strong></td><td>Gets stuck in loops without advancing the investigation</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Cross-Cutting Failures (RF-13 to RF-16)</h3>
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>RF-13</td><td><strong>Anchoring bias</strong></td><td>Over-indexes on first hypothesis encountered</td></tr>
+        <tr><td>RF-14</td><td><strong>Invalid inference patterns</strong></td><td>Logical fallacies in reasoning chain</td></tr>
+        <tr><td>RF-15</td><td><strong>Internal contradiction</strong></td><td>Holds mutually exclusive positions simultaneously</td></tr>
+        <tr><td>RF-16</td><td><strong>Arithmetic/aggregation errors</strong></td><td>Math mistakes in data analysis</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Counter-Intuitive Findings</h3>
+    <div class="card">
+      <ul>
+        <li><strong>Traces can hurt:</strong> Removing trace data <strong>improved</strong> accuracy by <span class="key-number confirmed">6&ndash;7%</span> &mdash; models were <strong>distracted</strong> by voluminous, noisy trace data rather than aided by it</li>
+        <li><strong>Anchoring bias</strong> causes <span class="key-number confirmed">15&ndash;45% accuracy reduction</span> &mdash; the strongest negative association with correctness across all failure types</li>
+        <li><strong>Simpler workflows often match complex ones:</strong> Straight-Shot (non-agentic) often equaled or surpassed ReAct and Plan-and-Execute for core localization tasks</li>
+        <li><strong>Metrics are the most valuable signal:</strong> Withholding metrics reduced localization by 7&ndash;15% (most essential modality); log exclusion degraded fault-type accuracy by 13%</li>
+        <li><strong>&ldquo;No single model dominates across all RCA subtasks&rdquo;</strong> &mdash; model selection should reflect target RCA objective rather than model size alone</li>
+      </ul>
+    </div>
+
+    <h3>Mitigation Recommendations from the Literature</h3>
+    <div class="card">
+      <ol>
+        <li>Early hypothesis diversification (tree-of-thought approaches)</li>
+        <li>Self-consistency and critique mechanisms for belief revision</li>
+        <li>Evidence sufficiency validation before ranking hypotheses</li>
+        <li>Explicit domain guidance for diagnostic triage heuristics</li>
+        <li>Better trace alert filtering and integration strategies</li>
+        <li>Workflow selection matching model capacity</li>
+      </ol>
+    </div>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>230 related projects</strong> across 2 knowledge domains with 11 keyword matches.</p>

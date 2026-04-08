@@ -93,6 +93,81 @@
     </div>
     <p>The CFS concept maps directly to STAMP&rsquo;s notion of unsafe control actions (see <a href="systems-thinking.html">Systems Thinking</a>) &mdash; the agent is a controller whose process model became inconsistent with reality at the CFS.</p>
 
+    <!-- DEEP EXTRACTION: AGENTRX PIPELINE DETAILS (arXiv:2602.02475) -->
+    <h2>AgentRx &mdash; Full Pipeline Details</h2>
+    <p>Deep extraction from the AgentRx paper (Barke et al., Microsoft Research, Feb 2026) and the <a href="https://www.microsoft.com/en-us/research/blog/systematic-debugging-for-ai-agents-introducing-the-agentrx-framework/">MSR blog announcement</a> (March 12, 2026) provides the complete operational picture of the 4-stage pipeline:</p>
+
+    <h3>Stage 1: Trajectory Normalization</h3>
+    <p>Heterogeneous logs from different agent systems (LangChain, AutoGen, CrewAI, custom frameworks) are converted into a <strong>common intermediate representation</strong>. This normalization step is what makes AgentRx domain-agnostic &mdash; the downstream stages operate on the unified format regardless of the originating agent system.</p>
+
+    <h3>Stage 2: Constraint Synthesis</h3>
+    <p>Constraints are automatically generated from two sources:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Tool schemas:</strong> API response validity requirements derived directly from tool definitions (e.g., &ldquo;if the tool returns a list, the agent must iterate it rather than treating it as a scalar&rdquo;)</li>
+        <li><strong>Domain policies:</strong> User confirmation mandates, access restrictions, and business rules (e.g., &ldquo;before executing a financial transaction, the agent must confirm with the user&rdquo;)</li>
+      </ul>
+      <p>The key distinction: constraint synthesis is <strong>automatic from schemas</strong>, not manual annotation. This makes it scalable across agent deployments without per-domain engineering.</p>
+    </div>
+
+    <h3>Stage 3: Guarded Evaluation</h3>
+    <p>Constraints are evaluated <strong>step-by-step</strong> against the trajectory. Each constraint is only checked when its guard condition applies (e.g., a &ldquo;payment confirmation&rdquo; constraint only fires when a payment tool is invoked). The output is an <strong>auditable validation log</strong> documenting every violation with evidence &mdash; creating an accountability chain that humans can review.</p>
+
+    <h3>Stage 4: LLM-Based Judging</h3>
+    <p>A language model judge analyzes the validation log together with the failure taxonomy to identify the <strong>Critical Failure Step</strong> (CFS) &mdash; the first unrecoverable error in the trajectory. This is the point where intervention would have prevented the cascade of downstream failures.</p>
+
+    <h3>Grounded-Theory Taxonomy Derivation</h3>
+    <p>The 9-category failure taxonomy was derived using <strong>grounded-theory methodology</strong> &mdash; built bottom-up from real failures rather than imposed top-down from theoretical categories. This is the same methodology that our skill-creator observation loop uses: observe real agent behavior, classify patterns, then formalize into reusable knowledge.</p>
+
+    <!-- DEEP EXTRACTION: 9-CATEGORY TAXONOMY (FULL TABLE) -->
+    <h2>Complete 9-Category Failure Taxonomy</h2>
+    <p>The full taxonomy from AgentRx with definitions, derived from 115 manually annotated failed trajectories:</p>
+    <table>
+      <thead><tr><th>#</th><th>Category</th><th>Definition</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Plan Adherence Failure</strong></td><td>Agent ignored required steps or performed unplanned actions &mdash; deviated from its own plan</td></tr>
+        <tr><td>2</td><td><strong>Invention of New Information</strong></td><td>Agent altered facts unsupported by trace or tool output (hallucination)</td></tr>
+        <tr><td>3</td><td><strong>Invalid Invocation</strong></td><td>Malformed tool calls, missing arguments, schema violations</td></tr>
+        <tr><td>4</td><td><strong>Misinterpretation of Tool Output</strong></td><td>Incorrectly read outputs; acted on false assumptions about return values</td></tr>
+        <tr><td>5</td><td><strong>Intent-Plan Misalignment</strong></td><td>Misunderstood user goals or constraints during the planning phase</td></tr>
+        <tr><td>6</td><td><strong>Under-specified User Intent</strong></td><td>Insufficient information from the user prevented task continuation</td></tr>
+        <tr><td>7</td><td><strong>Intent Not Supported</strong></td><td>No available tool addresses the requested action</td></tr>
+        <tr><td>8</td><td><strong>Guardrails Triggered</strong></td><td>Safety or access restriction blocked execution</td></tr>
+        <tr><td>9</td><td><strong>System Failure</strong></td><td>Connectivity or tool endpoint failures external to the agent</td></tr>
+      </tbody>
+    </table>
+    <p>Categories 1&ndash;5 are <strong>agent-attributable</strong> failures (the agent did something wrong). Categories 6&ndash;7 are <strong>specification failures</strong> (the task was not well-defined). Categories 8&ndash;9 are <strong>environmental</strong> failures (external constraints prevented completion).</p>
+
+    <!-- DEEP EXTRACTION: BENCHMARK DETAILS -->
+    <h2>Benchmark: 115 Trajectories Across Three Domains</h2>
+    <p>AgentRx was validated on <strong>115 manually annotated failed trajectories</strong> spanning three distinct agent domains:</p>
+    <table>
+      <thead><tr><th>Domain</th><th>Framework</th><th>Task Type</th></tr></thead>
+      <tbody>
+        <tr><td><strong>tau-bench</strong></td><td>Structured API workflows</td><td>Retail and service tasks with well-defined API sequences</td></tr>
+        <tr><td><strong>Flash</strong></td><td>Incident management</td><td>Real-world troubleshooting and incident triage</td></tr>
+        <tr><td><strong>Magentic-One</strong></td><td>Multi-agent systems</td><td>Open-ended web and file tasks using coordinated agents</td></tr>
+      </tbody>
+    </table>
+    <div class="stats">
+      <div class="stat"><span class="stat-value green">+23.6%</span><span class="stat-label">Step Localization vs Baselines</span></div>
+      <div class="stat"><span class="stat-value green">+22.9%</span><span class="stat-label">Root-Cause Attribution vs Baselines</span></div>
+      <div class="stat"><span class="stat-value blue">115</span><span class="stat-label">Annotated Failed Trajectories</span></div>
+      <div class="stat"><span class="stat-value amber">3</span><span class="stat-label">Agent Domains Covered</span></div>
+    </div>
+
+    <!-- DEEP EXTRACTION: OPEN SOURCE -->
+    <h2>Open-Source Availability</h2>
+    <p>AgentRx was open-sourced on March 12, 2026 under the <strong>CC BY 4.0</strong> license:</p>
+    <div class="card">
+      <ul>
+        <li><strong>Framework code:</strong> <a href="https://aka.ms/AgentRx/Code">https://aka.ms/AgentRx/Code</a></li>
+        <li><strong>Annotated dataset:</strong> <a href="https://aka.ms/AgentRx/Dataset">https://aka.ms/AgentRx/Dataset</a> &mdash; 115 trajectories with CFS + taxonomy labels</li>
+        <li><strong>License:</strong> CC BY 4.0 &mdash; permits commercial use with attribution</li>
+      </ul>
+      <p>Open-source availability means direct integration into our diagnostic pipeline is feasible. The constraint-from-schema approach can be applied to our MCP tool definitions to auto-generate guards.</p>
+    </div>
+
     <!-- CORPUS CROSS-REFERENCES -->
     <h2>Corpus Cross-References</h2>
     <p>Pipeline analysis identified <strong>230 related projects</strong> across 2 knowledge domains with 8 keyword matches.</p>
