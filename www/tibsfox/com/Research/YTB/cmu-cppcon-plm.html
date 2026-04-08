@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMU ML / CppCon / PLM &mdash; YouTube Deep Research &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ytb">
+  <header>
+    <h1>CMU ML / CppCon / PLM</h1>
+    <div class="subtitle">YouTube Deep Research Digest &mdash; Artemis II Mission Research</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="owasp-appsec.html">OWASP AppSec</a>
+      <a href="iot-nuclear.html">IoT &amp; Nuclear</a>
+      <a href="cmu-cppcon-plm.html" class="active">CMU ML / CppCon / PLM</a>
+      <a href="engineering-misc.html">Engineering Education</a>
+      <a href="professional-education.html">Professional Education</a>
+      <a href="hardware-tech.html">Hardware &amp; MCP Summit</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <p><strong>Co-Processor:</strong> 104 corpus cross-references identified across 8 convergence passes against 248 projects in 13 Rosetta clusters.</p>
+    </div>
+
+    <h1>ML Production Systems, Modern C++ Development, and Product Lifecycle Management</h1>
+<div class="meta">
+  Research Module &mdash; Tibsfox Research Series &mdash; April 2026<br>
+  Sources: CMU 17-645 ML in Production, CppCon 2024&ndash;2025, PLM Industry Analysis<br>
+  Cluster: AI &amp; Computation / Systems Engineering
+</div>
+
+<div class="toc">
+  <strong>Table of Contents</strong>
+  <ol>
+    <li><a href="#safety">Safety Engineering for ML Production Systems</a></li>
+    <li><a href="#security">System Security in ML Production</a></li>
+    <li><a href="#fundamentals">ML Security Fundamentals</a></li>
+    <li><a href="#rustcpp">Rust and C++ Interoperability</a></li>
+    <li><a href="#constexpr">constexpr and STL Containers in C++20/23/26</a></li>
+    <li><a href="#groov">groov: Async Special Function Registers</a></li>
+    <li><a href="#workcontracts">Work Contracts: High-Performance Low-Latency Concurrency</a></li>
+    <li><a href="#cadchaos">CAD Chaos and Clean Context in PLM</a></li>
+    <li><a href="#bom">Configuration Management and BOM Chaos</a></li>
+    <li><a href="#bibliography">Bibliography</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="safety">1. Safety Engineering for ML Production Systems</h2>
+
+<p>Carnegie Mellon University's course 17-645 <em>Machine Learning in Production</em>, taught by Christian K&auml;stner, represents the most rigorous academic treatment of how to build, deploy, and operate software products that contain machine-learned components. The safety lecture (Lecture 16 in earlier offerings) addresses a critical insight that the ML community has been slow to internalize: <strong>safety is fundamentally a system property, not a model property</strong>. A model sitting in a Jupyter notebook cannot harm anyone. It is the system surrounding the model&mdash;the sensors, actuators, human interfaces, and operational environment&mdash;that creates or prevents hazards.</p>
+
+<h3>Safety vs. Reliability: The Pressure Tank Analogy</h3>
+
+<p>K&auml;stner draws a sharp distinction between reliability and safety using the pressure tank analogy from Nancy Leveson's work. Making a pressure tank's walls thicker improves <em>reliability</em> (the tank is less likely to fail), but a pressure relief valve improves <em>safety</em> (when the tank does fail, the consequences are contained). In ML systems, improving model accuracy is analogous to thickening the walls&mdash;necessary but insufficient. True safety requires engineering the system around the assumption that the model <em>will</em> make mistakes.</p>
+
+<blockquote>
+  "Robustness is fundamentally about reliability, not safety. Robustness involves checking whether neighboring inputs yield consistent predictions&mdash;useful for reducing mistakes but insufficient for system safety."
+  <span class="citation">&mdash; Christian K&auml;stner, "Safety in ML-Enabled Systems" (Medium, 2022)</span>
+</blockquote>
+
+<h3>Hazard Analysis Techniques for ML Systems</h3>
+
+<p>The course introduces two primary hazard analysis methodologies adapted for ML-enabled systems:</p>
+
+<p><strong>FMEA (Failure Mode and Effects Analysis)</strong> is a forward-analysis technique that starts from individual component failures and traces their consequences through the system. For ML systems, this means systematically asking: "What happens when the model predicts class A instead of class B?" for each possible misclassification, then tracing the downstream effects through controllers, actuators, and the physical environment. FMEA excels at enumerating known failure modes but can miss emergent failures arising from component interactions.</p>
+
+<p><strong>STPA (System-Theoretic Process Analysis)</strong>, developed by Nancy Leveson at MIT, takes a top-down approach rooted in systems theory. STPA models the system as a hierarchy of control loops and identifies <em>unsafe control actions</em>&mdash;actions that, in specific contexts, lead to hazards. The methodology proceeds through four steps: (1) define losses and hazards, (2) model the control structure, (3) identify unsafe control actions, and (4) identify loss scenarios and causal factors. STPA is particularly valuable for ML systems because it naturally captures the interaction between ML components, human operators, and the physical environment. Recent research by K&auml;stner's group (published at CAIN 2025) demonstrates that LLMs can support humans conducting STPA by reducing effort and encouraging broader, more comprehensive thinking beyond the model.</p>
+
+<h3>The Uber ATG Fatality: A Case Study in System Failure</h3>
+
+<p>The March 2018 death of Elaine Herzberg in Tempe, Arizona, is the canonical case study in ML system safety failure. The NTSB investigation (report HAR1903) revealed a cascade of failures that illustrate why model accuracy alone is insufficient:</p>
+
+<ul>
+  <li><strong>Classification instability:</strong> The perception system detected Herzberg 6 seconds before impact via radar and lidar, but alternated between classifying her as a vehicle, a bicycle, and an unknown object for 5 seconds. The system could not classify an object as a pedestrian unless it was near a crosswalk.</li>
+  <li><strong>State history erasure:</strong> Each time the classification changed, the system discarded previous tracking data and treated the object as newly detected, destroying the position history needed for trajectory prediction.</li>
+  <li><strong>Action suppression:</strong> A feature designed to reduce false-alarm emergency braking suppressed any planned braking for a full second while handing control to the safety driver.</li>
+  <li><strong>Organizational failures:</strong> Uber's ATG lacked adequate safety risk assessment procedures, effective oversight of vehicle operators, and mechanisms for addressing automation complacency.</li>
+</ul>
+
+<h3>Runtime Monitoring, Safety Cages, and Designing for Failure</h3>
+
+<p>The course advocates for multiple layers of runtime protection around unreliable ML components:</p>
+
+<p><strong>Safety cages</strong> (also called guardrails or runtime monitors) are components that monitor the inputs and outputs of an ML model and intervene when the model's behavior falls outside acceptable bounds. In the SMIRK pedestrian emergency braking system (from the SMILE III project), an out-of-distribution (OOD) detector rejects inputs that differ significantly from training data, preventing the model from making predictions on data it has never seen. The <strong>doer-checker pattern</strong> pairs a primary ML component (the "doer") with a simpler, verifiable checker that validates outputs before they reach actuators.</p>
+
+<p>K&auml;stner's framework for demonstrating safety involves building structured <strong>assurance cases</strong>&mdash;documented arguments that the system achieves an acceptable level of safety, supported by evidence from hazard analysis, testing, field trials, and operational monitoring. This is aligned with ISO 26262 (functional safety for automotive) and the newer ISO 21448 (SOTIF&mdash;Safety of the Intended Functionality), which specifically addresses hazards arising not from component malfunction but from functional insufficiencies, including limitations of ML perception systems.</p>
+
+<table>
+  <caption>Safety Standards Relevant to ML Systems</caption>
+  <tr><th>Standard</th><th>Focus</th><th>ML Relevance</th></tr>
+  <tr><td>ISO 26262</td><td>Functional safety (hardware/software malfunction)</td><td>SIL levels, fault trees, FMEA</td></tr>
+  <tr><td>ISO 21448 (SOTIF)</td><td>Safety of intended functionality</td><td>Perception limitations, ML insufficiencies</td></tr>
+  <tr><td>UL 4600</td><td>Autonomous product safety</td><td>Safety case framework, operational design domain</td></tr>
+  <tr><td>IEEE P2846</td><td>Assumptions for AV safety</td><td>Formalizing reasonable foreseeable behavior</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="security">2. System Security in ML Production</h2>
+
+<p>While safety concerns what happens when ML systems make honest mistakes, security addresses what happens when adversaries deliberately attack them. CMU's ML in Production course (Lecture 15) covers the threat landscape for deployed ML systems&mdash;a domain that has expanded dramatically as ML models have become high-value targets in production environments.</p>
+
+<h3>The ML Attack Surface</h3>
+
+<p>Production ML systems present a uniquely broad attack surface compared to traditional software. The attack taxonomy spans the entire ML pipeline:</p>
+
+<ul>
+  <li><strong>Data poisoning:</strong> Corrupting training data to manipulate model behavior. Research demonstrates that poisoning just 0.1% of training data can reduce model accuracy by 10&ndash;50%, making it one of the most efficient attack vectors. Backdoor poisoning is particularly insidious: the model performs normally on clean inputs but produces attacker-controlled outputs when a specific trigger pattern is present.</li>
+  <li><strong>Model inversion:</strong> Extracting information about training data from a deployed model's predictions. An attacker with query access can reconstruct approximate representations of training samples, violating the privacy of individuals whose data was used for training.</li>
+  <li><strong>Membership inference:</strong> Determining whether a specific data record was part of the model's training set. This exploits the observation that models behave differently on training data versus unseen data&mdash;overfitting creates detectable statistical signatures. The privacy implications are severe: confirming that a clinical record was used to train a disease-prediction model effectively reveals a diagnosis.</li>
+  <li><strong>Model stealing (extraction):</strong> Creating a functionally equivalent copy of a proprietary model through systematic querying. The attacker builds a "substitute model" that replicates the target's decision boundaries, bypassing intellectual property protections and enabling offline adversarial attack development.</li>
+</ul>
+
+<h3>Supply Chain Security for ML Models</h3>
+
+<p>The rise of model registries like Hugging Face has created an ML supply chain analogous to npm or PyPI&mdash;with analogous security risks, but fewer mature defenses. Over a three-month monitoring period, security researchers uncovered 91 malicious models and 9 malicious dataset loading scripts among 705,000+ models and 176,000+ datasets on Hugging Face.</p>
+
+<p>Key supply chain vulnerabilities include:</p>
+
+<ul>
+  <li><strong>Serialization exploits:</strong> Python's <code>pickle</code> format, widely used for model serialization, allows arbitrary code execution on deserialization. Malicious payloads can grant attackers shell access through silent backdoors that bypass Hugging Face's malicious model scans.</li>
+  <li><strong>Namespace hijacking:</strong> When model authors delete their accounts, their namespaces become available for re-registration. Threat actors can register the abandoned namespace and push poisoned model versions that propagate downstream to dependent registries and applications.</li>
+  <li><strong>Compromised publisher accounts:</strong> A compromised Hugging Face account can push a malicious version of a widely-used model without triggering automated alerts, analogous to dependency confusion attacks in traditional package managers.</li>
+</ul>
+
+<h3>MLSecOps Practices</h3>
+
+<p>MLSecOps integrates security measures throughout the entire ML lifecycle, extending traditional DevSecOps with ML-specific controls:</p>
+
+<ul>
+  <li><strong>Input validation and anomaly detection</strong> at inference time to detect adversarial inputs</li>
+  <li><strong>Model provenance tracking</strong> using cryptographic signing and reproducible training pipelines</li>
+  <li><strong>Differential privacy</strong> during training to limit information leakage from model parameters</li>
+  <li><strong>Regular adversarial testing</strong> (red-teaming) against deployed models</li>
+  <li><strong>Model cards</strong> documenting training data, known limitations, and safety evaluations&mdash;though current model cards vary significantly in completeness and may pass standard benchmarks while still containing embedded backdoors</li>
+</ul>
+
+<blockquote>
+  "The security/utility tradeoff is the central tension in MLSecOps: every defense that limits what the model reveals or how it can be queried also limits its usefulness to legitimate users."
+</blockquote>
+
+<!-- ============================================================ -->
+<h2 id="fundamentals">3. ML Security Fundamentals</h2>
+
+<p>The foundations lecture (Lecture 14 in K&auml;stner's course) establishes the theoretical framework for understanding attacks against ML systems, introducing the MITRE ATLAS framework and exploring the mathematical underpinnings of differential privacy, federated learning security, and model intellectual property protection.</p>
+
+<h3>The MITRE ATLAS Framework</h3>
+
+<p>MITRE ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems) fills a critical gap in the security landscape. While MITRE ATT&CK effectively catalogs threats to traditional IT and OT infrastructure, it lacks coverage of attacks exploiting the unique characteristics of machine learning systems. ATLAS provides the same rigorous, community-validated approach to AI threat intelligence, organized into 16 tactics and 84 techniques as of 2026.</p>
+
+<p>The framework categorizes attacks along four primary axes defined by NIST:</p>
+
+<table>
+  <caption>NIST ML Attack Categories (as mapped by ATLAS)</caption>
+  <tr><th>Category</th><th>Goal</th><th>Example Techniques</th></tr>
+  <tr><td>Evasion</td><td>Cause incorrect predictions at inference time</td><td>Adversarial perturbations, physical-world patches, semantic adversarial examples</td></tr>
+  <tr><td>Poisoning</td><td>Corrupt training to embed backdoors or reduce accuracy</td><td>Data poisoning, model trojaning, clean-label attacks</td></tr>
+  <tr><td>Privacy</td><td>Extract information about training data or model internals</td><td>Membership inference, model inversion, gradient leakage</td></tr>
+  <tr><td>Abuse</td><td>Misuse model capabilities for unintended purposes</td><td>Prompt injection, jailbreaking, deepfake generation</td></tr>
+</table>
+
+<p>As of February 2026, ATLAS contains 42 case studies covering attacks ranging from deepfake-based KYC bypass and ML model evasion to AI agent backdoors and financial transaction hijacking through AI assistants. The ATLAS Navigator at <a href="https://atlas.mitre.org">atlas.mitre.org</a> provides an interactive visualization.</p>
+
+<h3>Differential Privacy in Practice</h3>
+
+<p>Differential privacy provides a mathematical guarantee that individual data points cannot be reverse-engineered from model outputs, even by adversaries with auxiliary information. The core mechanism adds calibrated noise to computations:</p>
+
+<ul>
+  <li>The <strong>Gaussian mechanism</strong> adds noise proportional to &sigma;&sup2; &prop; &Delta;&sub2;&sup2; &middot; log(1.25/&delta;) / &epsilon;&sup2;</li>
+  <li>The <strong>Laplace mechanism</strong> adds noise calibrated to the L1 sensitivity divided by &epsilon;</li>
+  <li><strong>DP-SGD</strong> (Differentially Private Stochastic Gradient Descent) clips per-example gradients to a fixed threshold before adding Gaussian noise, ensuring that no single training example can disproportionately influence the model</li>
+</ul>
+
+<p>The &epsilon; (epsilon) parameter dictates the privacy-utility tradeoff: lower &epsilon; means stronger privacy but more noise and reduced model accuracy. Achieving pure &epsilon;-differential privacy is extremely difficult in practice, so implementations typically use (&epsilon;, &delta;)-differential privacy, where the algorithm is &epsilon;-differentially private with probability (1&minus;&delta;).</p>
+
+<p>Practical challenges include the curse of dimensionality (high-dimensional data requires more noise), correlated records that frustrate global sensitivity calibration, the difficulty of communicating privacy guarantees to end users, and the risk of "privacy theater"&mdash;deploying differential privacy with parameters so loose that they provide illusory protection.</p>
+
+<h3>Federated Learning Security</h3>
+
+<p>Federated learning trains models across decentralized devices without exchanging raw data, reducing centralization risks. Devices compute gradient updates locally and send only the updates to a central aggregation server. However, federated learning introduces its own security challenges: gradient updates can leak information about local data (gradient leakage attacks), Byzantine participants can send poisoned updates, and the aggregation protocol itself can be attacked through model replacement or targeted poisoning.</p>
+
+<h3>Model Watermarking and Fingerprinting</h3>
+
+<p>As ML models become valuable intellectual property, techniques for proving ownership have become critical:</p>
+
+<p><strong>Watermarking</strong> embeds a verifiable signal into model weights during training. Methods include embedding watermarks in the most or least significant weights, using multi-objective optimization to generate token-specific watermark logits, and training with specially crafted trigger inputs that produce distinctive outputs. Watermarking is invasive&mdash;it modifies the model&mdash;but provides robust ownership verification, even after fine-tuning or transfer learning.</p>
+
+<p><strong>Fingerprinting</strong> is non-invasive, leveraging the model's intrinsic characteristics to generate unique identifiers. Adversarial examples serve as effective fingerprints because they show high transferability between similar models (copies, fine-tuned variants) and low transferability between independently trained models. Fingerprinting preserves model functionality and is more versatile, especially when model owners cannot modify the deployed model.</p>
+
+<!-- ============================================================ -->
+<h2 id="rustcpp">4. Rust and C++ Interoperability</h2>
+
+<p>Victor Ciura, a Principal Engineer on Microsoft's Rust team in DevDiv (and a 20+ year veteran of C++ systems programming on Visual C++, Advanced Installer, and Clang Power Tools), has been presenting "Rust/C++ Interop: Carcinization or Intelligent Design?" across multiple conferences in 2025, including NDC TechTown and EuroRust. The title's biological metaphor&mdash;carcinization being the evolutionary tendency of crustaceans to converge on a crab-like form&mdash;playfully asks whether every C++ codebase is fated to evolve toward Rust.</p>
+
+<h3>The Interop Ecosystem</h3>
+
+<p>The Rust/C++ interoperability ecosystem has matured into a constellation of tools, each making different tradeoffs between automation, safety, performance, and ergonomics:</p>
+
+<table>
+  <caption>Rust/C++ Interop Tool Comparison</caption>
+  <tr><th>Tool</th><th>Direction</th><th>Approach</th><th>Safety</th><th>Automation</th><th>Key Limitation</th></tr>
+  <tr><td><strong>bindgen</strong></td><td>C/C++ &rarr; Rust</td><td>Parses headers via libclang</td><td>All <code>unsafe</code></td><td>Fully automatic</td><td>Cannot bind <code>std::string</code>, templates, destructors</td></tr>
+  <tr><td><strong>cbindgen</strong></td><td>Rust &rarr; C/C++</td><td>Generates C/C++ headers from <code>extern "C"</code></td><td>Limited to <code>repr(C)</code></td><td>Automatic</td><td>No C++ concepts (destructors, standard types)</td></tr>
+  <tr><td><strong>CXX</strong></td><td>Bidirectional</td><td>User-defined bridge with <code>#[cxx::bridge]</code></td><td>Safe by default</td><td>Manual bridge definition</td><td>No Rust enums with payloads, no <code>Option&lt;T&gt;</code></td></tr>
+  <tr><td><strong>autocxx</strong></td><td>C++ &rarr; Rust</td><td>Automatic bridge generation atop CXX</td><td>CXX-level safety</td><td>Semi-automatic</td><td>Rapidly evolving, some type support gaps</td></tr>
+  <tr><td><strong>Zngur</strong></td><td>C++ &rarr; Rust</td><td>Zero-overhead Rust type access from C++</td><td>High</td><td>Manual</td><td>Newer, smaller ecosystem</td></tr>
+  <tr><td><strong>Crubit</strong></td><td>Bidirectional</td><td>Google's internal interop tool</td><td>High</td><td>Semi-automatic</td><td>Google-internal focus, limited public support</td></tr>
+</table>
+
+<h3>CXX: The Production Workhorse</h3>
+
+<p>David Tolnay's CXX crate has emerged as the most widely adopted solution for production Rust/C++ interop. The bridge operates through a declarative interface where developers specify shared types and function signatures in a <code>#[cxx::bridge]</code> module. CXX uses static analysis to protect both Rust's and C++'s invariants, then generates code on both sides with static assertions for compile-time verification.</p>
+
+<pre><code>#[cxx::bridge]
+mod ffi {
+    // Shared types visible to both languages
+    struct SharedData {
+        id: u32,
+        name: String,
+    }
+
+    // Functions implemented in C++
+    unsafe extern "C++" {
+        include!("mylib/header.h");
+        fn process_data(data: &SharedData) -> Result<u64>;
+    }
+
+    // Functions implemented in Rust
+    extern "Rust" {
+        fn validate(input: &str) -> bool;
+    }
+}</code></pre>
+
+<p>The resulting FFI bridge operates at zero or negligible overhead&mdash;no copying, no serialization, no memory allocation, no runtime checks. CXX provides builtin bindings for key standard library types (<code>std::string</code>, <code>std::unique_ptr</code>, <code>std::vector</code>, Rust's <code>String</code>, <code>Box</code>, <code>Vec</code>) in any combination.</p>
+
+<h3>Memory Safety Across Language Borders</h3>
+
+<p>The fundamental challenge of Rust/C++ interop is that Rust's ownership rules do not apply across the FFI boundary. Simple types (booleans, integers, pointers) transfer cleanly, but complex data structures with lifetimes, destructors, or non-trivial move semantics require careful boundary design. The key architectural insight from production experience (Mozilla Firefox, Meta, eShard, Chromium) is to <strong>minimize the shared API surface</strong>&mdash;bridge only what must cross the boundary, keep complex logic on one side.</p>
+
+<h3>Gradual Adoption vs. Full Rewrite</h3>
+
+<p>Ciura's presentation addresses the practical reality facing most organizations: a full "rewrite it in Rust" is rarely feasible for large C++ codebases. Meta's strategy&mdash;gradual, incrementally safe migration&mdash;has become the industry model. Tech companies report a roughly 70% reduction in memory-safety vulnerabilities in components migrated to Rust. The White House Office of the National Cyber Director's 2024 guidance urging adoption of memory-safe languages has accelerated this trend, but the interop tooling must mature further before "general-purpose interoperability without loss of performance" is achievable.</p>
+
+<!-- ============================================================ -->
+<h2 id="constexpr">5. constexpr and STL Containers in C++20/23/26</h2>
+
+<p>The evolution of <code>constexpr</code> across C++ standards represents the language's ongoing effort to shift computation from runtime to compile time. C++20 made the landmark change of allowing dynamic memory allocation during constant evaluation, enabling <code>constexpr std::vector</code> and <code>constexpr std::string</code>. But a critical limitation&mdash;the transient allocation rule&mdash;means these containers cannot escape the compile-time context, creating a frustrating gap between what developers expect and what the standard permits.</p>
+
+<h3>C++20: The Foundation</h3>
+
+<p>C++20 introduced constexpr support for <code>std::vector</code>, <code>std::string</code>, and over 100 algorithms from the Standard Template Library. The enabling feature was compile-time <code>new</code> and <code>delete</code>&mdash;the compiler tracks allocations during constant evaluation and verifies they are properly cleaned up. This allows powerful compile-time computation:</p>
+
+<pre><code>constexpr bool testVector(int n) {
+    std::vector<int> vec(n, 1);
+    int sum = 0;
+    for (auto& elem : vec) sum += elem;
+    return n == sum;
+}
+
+static_assert(testVector(10)); // Evaluated entirely at compile time</code></pre>
+
+<h3>The Transient Allocation Limitation</h3>
+
+<p>The critical restriction: all memory allocated during a constant expression <strong>must be deallocated before the expression completes</strong>. This is called "transient allocation," and it prevents the most intuitive use case&mdash;storing the result of a compile-time computation:</p>
+
+<pre><code>// THIS DOES NOT COMPILE
+constexpr std::vector<int> primes = computePrimes(100);
+
+// The vector's heap memory would need to survive into runtime,
+// but the compiler has no mechanism to "promote" compile-time
+// heap allocations to static storage duration.</code></pre>
+
+<p>The workaround requires a two-phase approach: compute the size at compile time, then use <code>std::array</code> with a template parameter:</p>
+
+<pre><code>constexpr size_t N = computeSize();
+
+template <size_t N>
+constexpr std::array<int, N+1> computeResult() { /* ... */ }
+
+constexpr auto result = computeResult<N>(); // Works: std::array is fixed-size</code></pre>
+
+<h3>C++23 Improvements</h3>
+
+<p>C++23 expanded the constexpr surface area incrementally: <code>std::bitset</code>, integral overloads of <code>std::to_chars</code> and <code>std::from_chars</code>, and relaxed rules allowing <code>static</code> and <code>thread_local</code> variables in constexpr functions (if usable in constant expressions). The <code>if consteval</code> construct enables branching on whether code is executing at compile time or runtime. However, C++23 did not address the transient allocation limitation.</p>
+
+<h3>C++26: P3372 and the Constexpr Container Expansion</h3>
+
+<p>C++26 (finalized March 2026 in London Croydon) includes P3372R3 by Hana Dus&iacute;kov&aacute;, which marks <strong>all containers and adapters constexpr</strong> (except <code>std::hive</code>). This includes <code>std::map</code>, <code>std::set</code>, <code>std::unordered_map</code>, <code>std::deque</code>, <code>std::list</code>, and all container adapters. A notable caveat: <code>std::hash</code> cannot be made constexpr because the Cpp17Hash requirements state that hash results are only guaranteed consistent within a single program execution.</p>
+
+<p><strong>Crucially, P3372 does not enable non-transient allocation.</strong> As the proposal explicitly states: "This paper doesn't change anything about [non-transient allocation]. You still can't use any of the allocating containers in a constexpr variable." The proposals P2670 and P3032 explored relaxing the transient allocation rule, but the committee has not adopted them, considering the approach "too brittle" since Kona 2019.</p>
+
+<table>
+  <caption>constexpr Container Support Across Standards</caption>
+  <tr><th>Feature</th><th>C++20</th><th>C++23</th><th>C++26</th></tr>
+  <tr><td><code>std::vector</code></td><td>constexpr (transient only)</td><td>Same</td><td>Same</td></tr>
+  <tr><td><code>std::string</code></td><td>constexpr (transient only)</td><td>Same</td><td>Same</td></tr>
+  <tr><td><code>std::map</code> / <code>std::set</code></td><td>Not constexpr</td><td>Not constexpr</td><td>constexpr (transient only)</td></tr>
+  <tr><td><code>std::unordered_map</code></td><td>Not constexpr</td><td>Not constexpr</td><td>constexpr (no default hash)</td></tr>
+  <tr><td>Non-transient allocation</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr><td><code>if consteval</code></td><td>No</td><td>Yes</td><td>Yes</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="groov">6. groov: Async Special Function Registers</h2>
+
+<p>Michael Caisse, a Senior Principal Engineer at Intel who has been using C++ with embedded systems since 1990, presented "groov: Asynchronous Handling of Special Function Registers" at CppCon 2025. The talk addresses a problem that every firmware developer confronts: how to access hardware registers safely, efficiently, and composably in an era where devices communicate over buses with non-trivial latency.</p>
+
+<h3>The Problem with Traditional Approaches</h3>
+
+<p>The traditional C/C++ approach to hardware register access uses <code>volatile</code> pointers:</p>
+
+<pre><code>// Traditional approach: type safety ends at the cast
+volatile uint32_t *reg = (volatile uint32_t *)0xA0000;
+*reg = (value & 0x0F) | (*reg & 0xF0);  // Read-modify-write with magic numbers</code></pre>
+
+<p>This pattern has multiple problems: type information is lost at the cast, bit field manipulation uses error-prone magic numbers, there is no compile-time verification that field widths and offsets are correct, read-modify-write sequences are not atomic, and the approach is inherently synchronous&mdash;it blocks until the memory-mapped I/O completes, which is problematic for remote devices communicating over I2C, SPI, CAN, or other buses with non-trivial latency.</p>
+
+<h3>groov Architecture</h3>
+
+<p>groov (Generic Register Operation Optimizer, version 5 of Intel's register abstraction library) separates concerns into four layers:</p>
+
+<ul>
+  <li><strong>Registers and Fields:</strong> Empty types that define data layout with names, types, bit ranges, and write semantics (replace, ignore, one-to-clear, etc.)</li>
+  <li><strong>Paths:</strong> Compile-time string lists for accessing fields and registers, functioning like filesystem paths with user-defined literals (<code>"reg"_r</code>, <code>"field"_f</code>)</li>
+  <li><strong>Groups:</strong> Collections that pair registers with a bus interface</li>
+  <li><strong>Buses:</strong> The hardware abstraction layer that implements actual read/write operations, returning senders for async composition</li>
+</ul>
+
+<pre><code>// groov: Type-safe, named, composable register access
+using my_field = groov::field<"status", std::uint32_t, 3, 0>;
+using my_reg = groov::reg<"control", std::uint32_t, 0xA'0000,
+                          groov::w::replace, my_field>;
+
+// Read asynchronously via sender pipeline
+async::just(grp / "control"_r) | groov::read() | async::sync_wait();</code></pre>
+
+<h3>Asynchronous Operations via Senders/Receivers</h3>
+
+<p>groov's key innovation is modeling all register operations as <strong>senders</strong> (from Intel's C++ Baremetal Senders &amp; Receivers library). A sender describes a unit of asynchronous work; a receiver handles the result. For synchronous memory-mapped I/O, the bus returns <code>async::just_result_of</code> senders that complete immediately. For remote devices on I2C or SPI, the bus returns senders that complete when the bus transaction finishes. The same groov code works in both cases&mdash;the abstraction is zero-cost for the synchronous case and properly async for the remote case.</p>
+
+<h3>Register Operation Optimization</h3>
+
+<p>groov computes three key masks at compile time for each write operation:</p>
+
+<ul>
+  <li><strong>Write mask:</strong> Which bits the user explicitly wants to write</li>
+  <li><strong>Identity mask:</strong> Which bits can safely receive an "identity value" without affecting register state (avoiding unnecessary read-modify-write cycles)</li>
+  <li><strong>Identity value:</strong> The safe value for identity bits (typically 0 for "ignore" write semantics, 1 for "one-to-clear")</li>
+</ul>
+
+<p>This compile-time analysis allows groov to eliminate read-modify-write cycles when the bus supports byte-enable or when unwritten fields have known-safe identity values. The bus interface receives these masks as template parameters, enabling bus implementations to make hardware-specific optimization decisions at compile time.</p>
+
+<h3>Testability</h3>
+
+<p>groov provides a test bus injection mechanism: including <code>groov/test.hpp</code> before other groov headers replaces the hardware bus with a memory-backed test store. Functions like <code>set_value()</code>, <code>get_value()</code>, <code>set_read_function()</code>, and <code>set_write_function()</code> allow comprehensive unit testing of register interaction logic without hardware.</p>
+
+<!-- ============================================================ -->
+<h2 id="workcontracts">7. Work Contracts: High-Performance Low-Latency Concurrency</h2>
+
+<p>Michael Maniscalco, a principal engineer and software architect at Lime Trading with over 25 years of experience in data compression and high-frequency trading, introduced "Work Contracts" at CppCon 2024 and followed up with "Work Contracts in Action" at CppCon 2025. The pattern represents a fundamental rethinking of task-based concurrency for environments where nanoseconds matter.</p>
+
+<h3>The Problem with Existing Concurrency Models</h3>
+
+<p>Traditional concurrent programming models introduce latency through mechanisms that are acceptable for general computing but fatal for HFT, game engines, and real-time systems:</p>
+
+<ul>
+  <li><strong>Thread pools with work queues:</strong> Contention on the queue's mutex or CAS loop creates latency spikes under high load. Work-stealing variants reduce average latency but introduce unpredictable worst-case behavior.</li>
+  <li><strong>std::async / std::future:</strong> Promise/future pairs require heap allocation, synchronization primitives, and reference counting. The overhead is negligible for I/O-bound work but significant for microsecond-scale compute tasks.</li>
+  <li><strong>Coroutines (C++20):</strong> Stackless coroutines reduce context-switch overhead but still require a scheduler, and the coroutine frame allocation can introduce jitter.</li>
+  <li><strong>std::jthread (C++20):</strong> Provides cooperative cancellation but no built-in task scheduling or load balancing.</li>
+</ul>
+
+<h3>The Work Contract Model</h3>
+
+<p>A work contract is a lightweight, recurrent callable that can be scheduled, executed, rescheduled, or released. Contracts are created within a <em>contract group</em>, and worker threads poll the group for ready contracts:</p>
+
+<pre><code>bcpp::work_contract_group group;
+
+auto contract = group.create_contract([]() {
+    // Task work here - can reschedule itself for recurrence
+});
+
+contract.schedule();  // Mark as ready for execution
+
+// Worker threads call this in a tight loop:
+group.execute_next_contract();</code></pre>
+
+<p>The key innovation is the <strong>signal tree</strong>&mdash;a data structure that enables O(log N) discovery of the next ready contract without locks, compare-and-swap loops, or memory allocation. The signal tree is both lock-free and wait-free, meaning every operation completes in a bounded number of steps regardless of contention from other threads.</p>
+
+<h3>Lock-Free and Wait-Free Properties</h3>
+
+<p>The distinction matters enormously for real-time systems. Lock-free guarantees system-wide progress (at least one thread makes progress), while wait-free guarantees per-thread progress (every thread completes in bounded time). Most "lock-free" concurrent data structures in practice are only lock-free, not wait-free. The work contract's signal tree achieves wait-free scheduling and discovery, eliminating the priority inversion and starvation scenarios that plague lock-free queues under high contention.</p>
+
+<h3>Architectural Comparison</h3>
+
+<table>
+  <caption>Concurrency Model Comparison for Low-Latency C++</caption>
+  <tr><th>Model</th><th>Allocation</th><th>Scheduling</th><th>Lock-Free</th><th>Wait-Free</th><th>Recurrence</th></tr>
+  <tr><td>Thread pool + queue</td><td>Per-task</td><td>FIFO/priority</td><td>Possible</td><td>No</td><td>Manual</td></tr>
+  <tr><td>std::async</td><td>Per-task (heap)</td><td>Implementation-defined</td><td>No</td><td>No</td><td>Manual</td></tr>
+  <tr><td>Coroutines</td><td>Per-coroutine frame</td><td>Custom scheduler</td><td>Possible</td><td>No</td><td>co_yield</td></tr>
+  <tr><td><strong>Work Contracts</strong></td><td>Once at creation</td><td>Signal tree O(log N)</td><td>Yes</td><td>Yes</td><td>Built-in</td></tr>
+</table>
+
+<h3>Use Cases</h3>
+
+<p>Work contracts are designed for scenarios where:</p>
+
+<ul>
+  <li><strong>High-frequency trading:</strong> Market data processing, order routing, and risk calculation where every microsecond of latency costs money. Maniscalco's employer, Lime Trading, uses work contracts in their production trading infrastructure.</li>
+  <li><strong>Game engines:</strong> Frame-budget-constrained update loops where hundreds of game objects need per-frame processing with deterministic timing.</li>
+  <li><strong>Real-time audio/video:</strong> Sample processing with hard deadlines where missed deadlines cause audible glitches or dropped frames.</li>
+  <li><strong>Embedded systems:</strong> Interrupt-driven processing where contracts model interrupt service routines with proper priority and recurrence.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="cadchaos">8. CAD Chaos and Clean Context in PLM</h2>
+
+<p>Product Lifecycle Management (PLM) is the discipline of managing the entire lifecycle of a product from initial concept through design, manufacturing, service, and disposal. In theory, PLM provides a single source of truth for all product data. In practice, the gap between CAD tools and PLM systems creates what the industry candidly calls "CAD chaos"&mdash;a state where engineering teams cannot reliably find the correct version of a design file, assemblies reference obsolete components, and downstream manufacturing works from stale data.</p>
+
+<h3>The Anatomy of CAD Chaos</h3>
+
+<p>Research and industry surveys paint a consistent picture of the problem's scope:</p>
+
+<ul>
+  <li><strong>Time waste:</strong> Engineers waste up to 19% of their time&mdash;nearly one full day per week&mdash;on non-value-added tasks: searching for CAD files, resolving version conflicts, and verifying that they have the latest revision.</li>
+  <li><strong>Version confusion:</strong> Without proper version control, teams risk using outdated designs or conflicting files, leading to manufacturing delays or costly reworks. Multiple engineers editing the same file creates accidental overwrites.</li>
+  <li><strong>Multi-CAD fragmentation:</strong> Real manufacturing environments use multiple CAD tools (SolidWorks, Creo, CATIA, NX, Inventor). Traditional PLM systems were built to optimize their own tool ecosystem, not the tool diversity that actual manufacturers use. CAD data must be imported or manually rekeyed into a unified product view.</li>
+  <li><strong>Premature release:</strong> Models released to manufacturing before design review completion cause significant downstream problems, from incorrect tooling orders to failed inspections.</li>
+</ul>
+
+<p>Two-thirds of product companies report that these inefficiencies directly cause missed deadlines and higher costs.</p>
+
+<h3>Drafter Workflows and the Context Problem</h3>
+
+<p>The drafter&mdash;the person who creates and maintains technical drawings&mdash;sits at the intersection of design engineering and manufacturing. Their workflow depends on having accurate, current context: which revision of the 3D model is approved, what tolerances apply, which standards govern the drawing format, and what change orders are pending. When this context is fragmented across email threads, shared drives, and disconnected PLM instances, the drafter becomes a manual integration point, resolving conflicts through institutional knowledge rather than systematic process.</p>
+
+<p>The "clean context" philosophy emerging in modern PLM tools addresses this by providing every participant with a coherent, role-appropriate view of product data. Rather than forcing users to navigate complex PLM hierarchies, the system presents the specific information needed for their task, automatically resolving version conflicts, showing applicable change orders, and hiding irrelevant data.</p>
+
+<h3>The PLM-CAD Integration Gap</h3>
+
+<p>Traditional PLM architectures treat CAD files as opaque blobs managed through check-in/check-out. This approach provides version control but loses semantic understanding of the design. Modern approaches are shifting toward:</p>
+
+<ul>
+  <li><strong>Cloud-native data management</strong> that understands CAD model geometry and relationships, not just file metadata</li>
+  <li><strong>Multi-CAD neutral formats</strong> that preserve design intent across tool boundaries</li>
+  <li><strong>Real-time collaboration</strong> replacing the file-lock paradigm with concurrent editing and conflict resolution</li>
+  <li><strong>Automated validation</strong> that checks design rules, tolerance stacks, and manufacturing constraints before release</li>
+</ul>
+
+<p>The gap between what CAD tools produce (rich, parametric 3D models with embedded intelligence) and what PLM systems manage (files with metadata) represents one of the largest unsolved problems in engineering software. Bridging this gap requires PLM systems that understand design semantics, not just file versions.</p>
+
+<!-- ============================================================ -->
+<h2 id="bom">9. Configuration Management and BOM Chaos</h2>
+
+<p>If CAD chaos describes the file-level disorder in engineering, BOM (Bill of Materials) chaos describes the structural-level disorder that cascades through the entire enterprise. The BOM is the most fundamental data artifact in product development&mdash;it defines <em>what</em> a product is made of&mdash;yet it remains "one of the most fragmented and misunderstood data artifacts" in manufacturing. Every system (PLM, ERP, CAD, MES) has its own view of the BOM, every company reinvents how BOMs are defined, and the lack of a unified standard creates friction at every handoff.</p>
+
+<h3>The BOM Type Soup</h3>
+
+<p>Complex products require multiple BOM representations, each serving a different organizational function:</p>
+
+<table>
+  <caption>BOM Types Across the Product Lifecycle</caption>
+  <tr><th>BOM Type</th><th>Owner</th><th>Purpose</th><th>System</th></tr>
+  <tr><td><strong>DBOM</strong> (Design)</td><td>Design Engineering</td><td>Conceptual structure from CAD assemblies</td><td>CAD/PDM</td></tr>
+  <tr><td><strong>EBOM</strong> (Engineering)</td><td>Engineering</td><td>Complete component list with specifications</td><td>PLM</td></tr>
+  <tr><td><strong>MBOM</strong> (Manufacturing)</td><td>Manufacturing Engineering</td><td>How the product is built (process, routing, plant-specific)</td><td>ERP/MES</td></tr>
+  <tr><td><strong>SBOM</strong> (Service)</td><td>Field Service</td><td>Serviceable/replaceable parts</td><td>SLM/CRM</td></tr>
+  <tr><td><strong>PBOM</strong> (Procurement)</td><td>Supply Chain</td><td>Purchased components with supplier info</td><td>ERP/SRM</td></tr>
+</table>
+
+<p>Each BOM type represents a valid but partial view of the same product, and they drift apart as changes propagate through the organization at different speeds. The EBOM-to-MBOM transformation is particularly complex: engineering defines <em>what</em> the product is; manufacturing must determine <em>how</em> to build it, adding process steps, work centers, tooling, and substitutions that have no representation in the engineering view.</p>
+
+<h3>The PLM-ERP Integration Gap</h3>
+
+<p>The most persistent challenge in enterprise product data management is the gap between PLM (which owns the engineering definition) and ERP (which owns the manufacturing and supply chain execution). Common integration failures include:</p>
+
+<ul>
+  <li><strong>Synchronization drift:</strong> EBOM and MBOM updates are not aligned, so manufacturing works from stale engineering data or engineering is unaware of manufacturing substitutions.</li>
+  <li><strong>Manual data entry:</strong> Despite decades of integration middleware, many organizations still re-key BOM data between PLM and ERP, introducing transcription errors.</li>
+  <li><strong>Change propagation failures:</strong> An engineering change order (ECO) modifies the EBOM, but the corresponding MBOM, SBOM, and procurement views are not automatically updated.</li>
+  <li><strong>Siloed systems:</strong> PLM, ERP, MES, and CRM each maintain independent data stores with incompatible schemas, making reconciliation a manual, error-prone process.</li>
+</ul>
+
+<h3>Change Management Workflows</h3>
+
+<p>Configuration management in complex products requires rigorous change control. Engineering, planning, and execution changes all require a mechanism that advances across all BOM structures while keeping original structures intact for traceability. Each end-item may have a distinctive configuration, and the <strong>digital thread</strong> provides the mechanism for connecting multiple BOMs into a coherent data set.</p>
+
+<p>The digital thread model connects the xBOM (the union of all BOM types) into a traceable lineage: requirements &rarr; design &rarr; test &rarr; manufacturing &rarr; service. When the digital thread is properly implemented, a change to a component in the EBOM automatically triggers review workflows for affected MBOMs and SBOMs, procurement notifications for affected suppliers, and traceability updates for regulatory compliance.</p>
+
+<h3>Industry 4.0 and Digital Twin Integration</h3>
+
+<p>Industry 4.0 introduces the digital twin&mdash;a virtual representation of a physical product that mirrors its actual state throughout its lifecycle. The digital twin depends on accurate, real-time BOM data: it must know not just the as-designed configuration (EBOM) but the as-built configuration (MBOM with actual lot numbers and serial numbers) and the as-maintained configuration (SBOM with service history).</p>
+
+<p>Modern approaches to BOM management are moving toward <strong>composable architecture</strong>: modular data services that can be integrated incrementally, starting with small Product Data Management services and expanding to encompass procurement, EBOM-MBOM-SBOM synchronization, and digital twin feeds. This represents a philosophical shift from monolithic PLM/ERP suites toward a federated data mesh where each system of record publishes its BOM view as a service, and consumers subscribe to the views they need.</p>
+
+<blockquote>
+  "Although digitalization and digital transformation offer companies tremendous opportunities to increase their value creation, they also present major challenges. The Bill of Materials, far from being a solved problem, remains the fundamental data artifact whose integrity determines whether digital transformation succeeds or fails."
+</blockquote>
+
+<!-- ============================================================ -->
+<h2 id="bibliography">Bibliography</h2>
+
+<h3>ML Production Systems (CMU Course and Related)</h3>
+<ol>
+  <li>K&auml;stner, C. <em>Machine Learning in Production: From Models to Products.</em> MIT Press, April 2025. <a href="https://mlip-cmu.github.io/book/">mlip-cmu.github.io/book</a></li>
+  <li>K&auml;stner, C. "Safety in ML-Enabled Systems." Medium, 2022. <a href="https://ckaestne.medium.com/safety-in-ml-enabled-systems-b5a5901933ac">Medium article</a></li>
+  <li>K&auml;stner, C. et al. "From Hazard Identification to Controller Design: Proactive and LLM-Supported Safety Engineering for ML-Powered Systems." <em>CAIN 2025.</em> <a href="https://arxiv.org/abs/2502.07974">arXiv:2502.07974</a></li>
+  <li>CMU 17-645 Machine Learning in Production / AI Engineering. <a href="https://mlip-cmu.github.io/s2025/">Course website (Spring 2025)</a></li>
+  <li>K&auml;stner, C. et al. "From Plane Crashes to Algorithmic Harm: Applicability of Safety Engineering Frameworks for Responsible ML." <em>CHI 2023.</em> <a href="https://dl.acm.org/doi/fullHtml/10.1145/3544548.3581407">ACM DL</a></li>
+</ol>
+
+<h3>Safety Standards</h3>
+<ol start="6">
+  <li>ISO 26262:2018 &mdash; Road vehicles &mdash; Functional safety.</li>
+  <li>ISO 21448:2022 &mdash; Road vehicles &mdash; Safety of the intended functionality (SOTIF).</li>
+  <li>UL 4600:2020 &mdash; Standard for Evaluation of Autonomous Products.</li>
+  <li>NTSB. "Collision Between Vehicle Controlled by Developmental Automated Driving System and Pedestrian." Report HAR1903, November 2019. <a href="https://www.ntsb.gov/investigations/accidentreports/reports/har1903.pdf">NTSB Report</a></li>
+</ol>
+
+<h3>ML Security</h3>
+<ol start="10">
+  <li>MITRE ATLAS &mdash; Adversarial Threat Landscape for Artificial-Intelligence Systems. <a href="https://atlas.mitre.org/">atlas.mitre.org</a></li>
+  <li>Shokri, R. et al. "Membership Inference Attacks Against Machine Learning Models." <em>IEEE S&P 2017.</em> <a href="https://arxiv.org/abs/1610.05820">arXiv:1610.05820</a></li>
+  <li>JFrog Security Research. "Data Scientists Targeted by Malicious Hugging Face ML Models with Silent Backdoor." 2024. <a href="https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/">JFrog Blog</a></li>
+  <li>Palo Alto Networks Unit 42. "Model Namespace Reuse: An AI Supply-Chain Attack." 2025. <a href="https://unit42.paloaltonetworks.com/model-namespace-reuse/">Unit 42 Report</a></li>
+  <li>CMU SEI. "The Challenge of Adversarial Machine Learning." <a href="https://www.sei.cmu.edu/blog/the-challenge-of-adversarial-machine-learning/">SEI Blog</a></li>
+  <li>CrowdStrike. "What is MLSecOps?" <a href="https://www.crowdstrike.com/en-us/cybersecurity-101/artificial-intelligence/machine-learning-security-operations-mlsecops/">CrowdStrike</a></li>
+</ol>
+
+<h3>Differential Privacy and Model IP Protection</h3>
+<ol start="16">
+  <li>Ponomareva, N. et al. "How to DP-fy ML: A Practical Guide to Machine Learning with Differential Privacy." <em>arXiv:2303.00654</em>, 2023. <a href="https://arxiv.org/pdf/2303.00654">arXiv</a></li>
+  <li>Sun, Z. et al. "Intellectual Property Protection for Deep Learning Model and Dataset Intelligence." <em>Engineering Applications of AI</em>, 2025. <a href="https://arxiv.org/html/2411.05051v1">arXiv:2411.05051</a></li>
+  <li>Li, H. et al. "A Systematic Review on Model Watermarking for Neural Networks." <em>Frontiers in Big Data</em>, 2021. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8667341/">PMC</a></li>
+</ol>
+
+<h3>Rust/C++ Interoperability</h3>
+<ol start="19">
+  <li>Ciura, V. "Rust/C++ Interop: Carcinization or Intelligent Design?" NDC TechTown 2025. <a href="https://ciura.ro/presentations/2025/Conferences/Rust%20C++%20Interop%20-%20Carcinization%20or%20Intelligent%20Design%20-%20Victor%20Ciura%20-%20NDC%20TechTown%202025.pdf">Slides (PDF)</a></li>
+  <li>Tolnay, D. CXX &mdash; Safe interop between Rust and C++. <a href="https://cxx.rs/">cxx.rs</a></li>
+  <li>Google. autocxx &mdash; Rust &hearts; Existing C++. <a href="https://google.github.io/autocxx/">Documentation</a></li>
+  <li>eShard. "A Tour of the Rust and C++ Interoperability Ecosystem." 2024. <a href="https://eshard.com/posts/Rust-Cxx-interop">eShard Blog</a></li>
+  <li>Mozilla. "Rust/C++ Interop." Firefox Source Docs. <a href="https://firefox-source-docs.mozilla.org/writing-rust-code/cpp-interop.html">Firefox Docs</a></li>
+  <li>Chromium. "Rust and C++ Interoperability." <a href="https://www.chromium.org/Home/chromium-security/memory-safety/rust-and-c-interoperability/">Chromium Docs</a></li>
+</ol>
+
+<h3>Modern C++ (constexpr, groov, Work Contracts)</h3>
+<ol start="25">
+  <li>Dus&iacute;kov&aacute;, H. "P3372R3: constexpr containers." WG21 Paper, 2025. <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3372r3.html">open-std.org</a></li>
+  <li>Barna, B. "constexpr vector and string in C++20 and One Big Limitation." C++ Stories, 2021. <a href="https://www.cppstories.com/2021/constexpr-vecstr-cpp20/">cppstories.com</a></li>
+  <li>Dargo, S. "C++26: More constexpr in the Standard Library." 2025. <a href="https://www.sandordargo.com/blog/2025/04/30/cpp26-constexpr-library-changes">sandordargo.com</a></li>
+  <li>Intel. Generic Register Operation Optimizer (groov). <a href="https://intel.github.io/generic-register-operation-optimizer/">intel.github.io/generic-register-operation-optimizer</a></li>
+  <li>Intel. C++ Baremetal Senders &amp; Receivers. <a href="https://intel.github.io/cpp-baremetal-senders-and-receivers/">intel.github.io/cpp-baremetal-senders-and-receivers</a></li>
+  <li>Maniscalco, M. Work Contracts library. <a href="https://github.com/buildingcpp/work_contract">github.com/buildingcpp/work_contract</a></li>
+  <li>CppCon 2024. "Work Contracts &mdash; Rethinking Task Based Concurrency and Parallelism for Low Latency C++." <a href="https://cppcon2024.sched.com/event/1gZhA/">CppCon Schedule</a></li>
+  <li>CppCon 2025. "groov: Asynchronous Handling of Special Function Registers." <a href="https://cppcon2025.sched.com/event/27bRF/">CppCon Schedule</a></li>
+</ol>
+
+<h3>Product Lifecycle Management</h3>
+<ol start="33">
+  <li>BeyondPLM. "The Digital Evolution of Enterprise BOM Management." 2023. <a href="https://beyondplm.com/2023/03/19/the-digital-evolution-of-enterprise-bom-management-from-cad-part-list-excel-mrp-and-plm-to-digital-bill-of-materials/">beyondplm.com</a></li>
+  <li>PROSTEP. "Bill of Material as a Foundation for PLM-ERP-MES Integration." <a href="https://prostep.us/blog/bill-of-material-as-a-foundation-for-plm-erp-mes-integration/">prostep.us</a></li>
+  <li>PTC. "eBOM, mBOM, sBOM: Strengthening the Digital Thread." <a href="https://www.ptc.com/en/blogs/plm/ebom-vs-mbom-vs-sbom">ptc.com</a></li>
+  <li>Autodesk. "Share Your Bill of Materials: Connecting PDM, PLM, and ERP." <a href="https://www.autodesk.com/autodesk-university/class/Share-Your-Bill-Materials-Connecting-PDM-PLM-and-ERP-2021">Autodesk University</a></li>
+  <li>Visure Solutions. "How to Overcome Version Control Challenges in PDM." <a href="https://visuresolutions.com/plm-guide/version-control-challenges-in-pdm/">visuresolutions.com</a></li>
+  <li>BeyondPLM. "The Role of MBOM in PLM-ERP Integration." 2024. <a href="https://beyondplm.com/2024/07/21/the-role-of-mbom-in-plm-erp-integration/">beyondplm.com</a></li>
+</ol>
+
+<h3>Safety Engineering Methodology</h3>
+<ol start="39">
+  <li>Leveson, N. <em>Engineering a Safer World: Systems Thinking Applied to Safety.</em> MIT Press, 2011.</li>
+  <li>MIT OCW. "Systems Theoretic Process Analysis (STPA)." 16.863J System Safety, Spring 2016. <a href="https://ocw.mit.edu/courses/16-863j-system-safety-spring-2016/">MIT OCW</a></li>
+  <li>Borg, M. et al. "Ergo, SMIRK is safe: a safety case for a machine learning component in a pedestrian automatic emergency brake system." <em>Software Quality Journal</em>, 2023. <a href="https://link.springer.com/article/10.1007/s11219-022-09613-1">Springer</a></li>
+</ol>
+  </main>
+
+  <footer>
+    <p>YouTube Deep Research Digest &mdash; Project YTB &mdash; <a href="index.html">Back to Overview</a></p>
+    <p>Part of the <a href="../index.html">PNW Research Series</a> &middot; Research Co-Processor v2 &middot; April 2026</p>
+  </footer>
+</body>
+</html>

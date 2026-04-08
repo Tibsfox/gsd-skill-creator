@@ -3,164 +3,782 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud &amp; Container Orchestration &mdash; Systems Administration &mdash; PNW Research Series</title>
+  <title>Cloud & Containers &mdash; Systems Administration &mdash; PNW Research Series</title>
   <link rel="stylesheet" href="../../brand.css">
   <link rel="stylesheet" href="style.css">
   <script src="../series.js" defer></script>
 </head>
 <body class="project-sya">
   <header>
-    <h1>Cloud &amp; Container Orchestration</h1>
-    <div class="subtitle">AWS, Azure, GCP, Kubernetes Architecture, Service Mesh, Docker, RBAC</div>
+    <h1>Cloud & Containers</h1>
+    <div class="subtitle">Systems Administration Deep Research &mdash; Artemis II Mission Research</div>
     <nav>
       <a href="index.html">Overview</a>
-      <a href="history-evolution.html">History</a>
-      <a href="linux-fundamentals.html">Linux</a>
+      <a href="history-evolution.html">History & Evolution</a>
+      <a href="linux-fundamentals.html">Linux Fundamentals</a>
       <a href="networking.html">Networking</a>
-      <a href="storage-filesystems.html">Storage</a>
-      <a href="monitoring-observability.html">Monitoring</a>
-      <a href="security-hardening.html">Security</a>
-      <a href="automation-iac.html">Automation</a>
-      <a href="cloud-containers.html" class="active">Cloud</a>
-      <a href="aiops-future.html">AIOps</a>
-      <a href="professional-practice.html">Practice</a>
+      <a href="storage-filesystems.html">Storage & Filesystems</a>
+      <a href="monitoring-observability.html">Monitoring & Observability</a>
+      <a href="security-hardening.html">Security & Hardening</a>
+      <a href="automation-iac.html">Automation & IaC</a>
+      <a href="cloud-containers.html" class="active">Cloud & Containers</a>
+      <a href="aiops-future.html">AIOps & Future</a>
+      <a href="professional-practice.html">Professional Practice</a>
     </nav>
   </header>
 
   <main>
-    <blockquote>
-      The cloud did not eliminate systems administration; it transformed it. Instead of racking servers, sysadmins now architect VPCs, configure IAM policies, and manage container orchestration at a scale that would have been unimaginable a decade ago. The complexity did not decrease &mdash; it moved up the stack.
-    </blockquote>
-
-    <!-- CLOUD PROVIDERS -->
-    <h2>Cloud Provider Comparison</h2>
-    <table>
-      <thead><tr><th>Feature</th><th>AWS</th><th>Azure</th><th>GCP</th></tr></thead>
-      <tbody>
-        <tr><td>Compute</td><td>EC2, Lambda, ECS, EKS</td><td>VMs, Functions, AKS, Container Apps</td><td>Compute Engine, Cloud Run, GKE</td></tr>
-        <tr><td>Object Storage</td><td>S3</td><td>Blob Storage</td><td>Cloud Storage</td></tr>
-        <tr><td>Managed K8s</td><td>EKS</td><td>AKS</td><td>GKE (Autopilot)</td></tr>
-        <tr><td>Serverless</td><td>Lambda</td><td>Functions</td><td>Cloud Functions / Cloud Run</td></tr>
-        <tr><td>Networking</td><td>VPC, ALB/NLB, Route 53</td><td>VNet, App Gateway, Traffic Manager</td><td>VPC, Cloud Load Balancing, Cloud DNS</td></tr>
-        <tr><td>IAM</td><td>IAM (policy-based)</td><td>Azure AD / Entra ID (RBAC)</td><td>IAM (resource hierarchy)</td></tr>
-        <tr><td>Market Position</td><td>~31% share, broadest service catalog</td><td>~25% share, enterprise/hybrid strength</td><td>~12% share, strongest K8s/data/AI</td></tr>
-      </tbody>
-    </table>
-    <p><strong>Multi-cloud</strong> strategies use Terraform or Pulumi to abstract provider differences. In practice, most organizations have a primary cloud with selective use of others for specific capabilities.</p>
-
-    <!-- KUBERNETES ARCHITECTURE -->
-    <h2>Kubernetes Architecture</h2>
-    <p>Kubernetes (from Google&rsquo;s internal Borg system) is the standard container orchestration platform. Understanding its architecture is non-negotiable for modern sysadmins.</p>
-    <div class="card">
-      <p><strong>Control Plane:</strong></p>
-      <ul>
-        <li><strong>kube-apiserver:</strong> RESTful API, all communication passes through it</li>
-        <li><strong>etcd:</strong> Distributed key-value store, source of truth for cluster state</li>
-        <li><strong>kube-scheduler:</strong> Assigns pods to nodes based on resource requirements, affinity, taints</li>
-        <li><strong>kube-controller-manager:</strong> Runs control loops (ReplicaSet, Deployment, Node, Job controllers)</li>
-        <li><strong>cloud-controller-manager:</strong> Cloud-provider-specific controllers (load balancers, volumes)</li>
-      </ul>
-      <p><strong>Worker Nodes:</strong></p>
-      <ul>
-        <li><strong>kubelet:</strong> Node agent, ensures containers run in pods according to PodSpec</li>
-        <li><strong>kube-proxy:</strong> Network proxy implementing Service abstraction (iptables/IPVS)</li>
-        <li><strong>Container runtime:</strong> containerd (default), CRI-O (Red Hat)</li>
-      </ul>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <p><strong>Co-Processor:</strong> 97 corpus cross-references across 8 convergence passes against 249 projects in 13 Rosetta clusters. Deep research expansion: gap analysis + 8x content increase.</p>
     </div>
 
-    <!-- POD LIFECYCLE -->
-    <h2>Pod Lifecycle &amp; Workload Types</h2>
-    <p>Pods move through states: Pending &rarr; Running &rarr; Succeeded/Failed. Workload controllers manage pod replicas:</p>
-    <table>
-      <thead><tr><th>Controller</th><th>Use Case</th><th>Key Behavior</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Deployment</strong></td><td>Stateless applications</td><td>Rolling updates, rollback, scaling</td></tr>
-        <tr><td><strong>StatefulSet</strong></td><td>Stateful applications (databases)</td><td>Stable network identity, ordered scaling, persistent volumes</td></tr>
-        <tr><td><strong>DaemonSet</strong></td><td>One pod per node (monitoring, logging)</td><td>Runs on every node matching selector</td></tr>
-        <tr><td><strong>Job / CronJob</strong></td><td>Batch and scheduled tasks</td><td>Run-to-completion, retry policies, scheduling</td></tr>
-      </tbody>
-    </table>
+    <h1>Cloud &amp; Container Orchestration</h1>
+<p class="meta">Systems Administration Research &mdash; Deep Dive Module<br>
+PNW Research Series &bull; tibsfox.com &bull; April 2026</p>
 
-    <!-- SERVICE MESH -->
-    <h2>Service Mesh</h2>
-    <p>Service meshes add observability, traffic management, and security to microservice communication without application code changes.</p>
-    <table>
-      <thead><tr><th>Mesh</th><th>Architecture</th><th>Key Feature</th><th>Complexity</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Istio</strong></td><td>Envoy sidecar proxies</td><td>Full feature set: mTLS, traffic splitting, fault injection, telemetry</td><td>High</td></tr>
-        <tr><td><strong>Linkerd</strong></td><td>Rust-based micro-proxy</td><td>Lightweight, CNCF graduated, simpler operations</td><td>Medium</td></tr>
-        <tr><td><strong>Cilium</strong></td><td>eBPF (sidecar-free)</td><td>Kernel-level networking, no proxy overhead</td><td>Medium</td></tr>
-      </tbody>
-    </table>
+<blockquote>
+"Kubernetes is not just a container orchestrator. It is a platform for building platforms&mdash;a distributed systems kernel that provides primitives for scheduling, networking, storage, and access control, on top of which entire ecosystems are constructed."
+</blockquote>
 
-    <!-- HELM -->
-    <h2>Helm</h2>
-    <p>Helm is the package manager for Kubernetes. <strong>Charts</strong> are templated Kubernetes manifests with configurable values. Helm manages releases (install, upgrade, rollback) and provides a chart repository ecosystem. <strong>Helmfile</strong> manages multiple releases declaratively. <strong>Kustomize</strong> (built into kubectl) provides an alternative templating approach using overlay patches.</p>
+<!-- ============================================================ -->
+<h2>1. Cloud Provider Landscape</h2>
 
-    <!-- CONTAINER RUNTIMES & DOCKER -->
-    <h2>Container Runtimes &amp; Docker Security</h2>
-    <p><strong>containerd</strong> (CNCF graduated) is the default runtime for Kubernetes since dockershim removal in K8s 1.24. <strong>CRI-O</strong> is the minimal runtime for OpenShift/RHEL. Docker remains the primary tool for building images.</p>
-    <p>Docker security best practices:</p>
-    <div class="card">
-      <ul>
-        <li><strong>Multi-stage builds:</strong> Minimize final image size, exclude build dependencies</li>
-        <li><strong>Non-root user:</strong> <code>USER nonroot</code> in Dockerfile, avoid running as PID 1 root</li>
-        <li><strong>Image scanning:</strong> Trivy, Grype, or Snyk for CVE detection before deployment</li>
-        <li><strong>Minimal base images:</strong> Alpine, distroless, or scratch where possible</li>
-        <li><strong>Read-only filesystem:</strong> <code>--read-only</code> flag prevents container filesystem writes</li>
-        <li><strong>Seccomp &amp; AppArmor profiles:</strong> Restrict syscalls available to containers</li>
-      </ul>
-    </div>
+<h3>1.1 Market Position (2025&ndash;2026)</h3>
 
-    <!-- REGISTRY MANAGEMENT -->
-    <h2>Registry Management</h2>
-    <p>Container registries store and distribute images. <strong>Harbor</strong> (CNCF graduated) provides vulnerability scanning, RBAC, replication, and audit logging for private registries. Cloud-managed options: ECR (AWS), ACR (Azure), Artifact Registry (GCP). <strong>Sigstore/cosign</strong> signs images cryptographically for supply chain security.</p>
+<p>The global cloud infrastructure market is dominated by three hyperscalers, each with distinct strengths and trajectories. As of Q4 2025, AWS holds approximately 28% market share (down from 33% in late 2021, reflecting the natural maturation of the market rather than customer loss), Azure holds 21% (up from 20%, driven by its OpenAI partnership and enterprise integration), and Google Cloud holds 14% (up from 12%, the largest relative gain among the three). The remaining ~37% is split among hundreds of providers including Oracle Cloud, IBM Cloud, Alibaba Cloud, DigitalOcean, Hetzner, and regional players.</p>
 
-    <!-- RBAC -->
-    <h2>RBAC (Role-Based Access Control)</h2>
-    <p>Kubernetes RBAC controls who can do what within the cluster. Four objects: <strong>Role</strong> (namespace-scoped permissions), <strong>ClusterRole</strong> (cluster-wide), <strong>RoleBinding</strong> (assigns Role to subjects), <strong>ClusterRoleBinding</strong> (assigns ClusterRole). Follow the principle of least privilege: grant only the permissions each workload or user needs.</p>
-    <pre><code># ClusterRole: read-only access to pods
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+<h3>1.2 AWS: The Ecosystem</h3>
+
+<p>Amazon Web Services, launched in 2006 with S3 and EC2, remains the most mature and comprehensive cloud platform with over 200 services. Its strengths lie in breadth (there is an AWS service for nearly any use case), global infrastructure (33 regions, 105 availability zones as of early 2026), and ecosystem maturity (the largest third-party tooling, training, and consulting ecosystem). Core services include EC2 (compute), S3 (object storage), RDS/Aurora (managed databases), Lambda (serverless compute), EKS (managed Kubernetes), VPC (networking), and IAM (identity and access management).</p>
+
+<p>AWS's pricing model is pay-as-you-go with reserved instances, savings plans, and spot instances for cost optimization. The sheer number of pricing dimensions (instance type, region, OS, tenancy, payment model) makes cost management a discipline unto itself.</p>
+
+<h3>1.3 Azure: Enterprise Integration</h3>
+
+<p>Microsoft Azure's competitive advantage is its deep integration with the Microsoft ecosystem: Active Directory (Azure AD, now Entra ID), Microsoft 365, Windows Server, SQL Server, and the broader enterprise IT stack that runs on Microsoft technologies. For organizations already invested in Microsoft licensing, Azure offers natural extension points and consolidated billing.</p>
+
+<p>Azure's growth has been significantly accelerated by its exclusive partnership with OpenAI, making it the primary cloud for GPT-4o and other frontier models via Azure AI Studio. Azure Arc extends Azure management to on-premises and multi-cloud environments, and Azure Stack enables running Azure services in your own data center&mdash;a compelling hybrid story for regulated industries.</p>
+
+<h3>1.4 GCP: Data and AI</h3>
+
+<p>Google Cloud Platform differentiates on data analytics and machine learning. BigQuery (serverless data warehouse), Vertex AI (ML platform), and GKE (widely considered the best managed Kubernetes service, unsurprisingly given Kubernetes' Google origins) are its crown jewels. GCP grew revenue at approximately 28% year-over-year in FY2025, the fastest rate among the three hyperscalers.</p>
+
+<p>GCP's networking is built on the same global fiber backbone that serves Google Search, YouTube, and Gmail, providing consistently low latency for global workloads. However, its service catalog is narrower than AWS, and enterprise sales and support have historically lagged behind AWS and Azure.</p>
+
+<h3>1.5 Shared Responsibility Model</h3>
+
+<p>All three providers operate under a shared responsibility model that divides security obligations between the provider and the customer. The division shifts based on the service type:</p>
+
+<table>
+<tr><th>Layer</th><th>IaaS (EC2, VMs)</th><th>PaaS (App Service, Cloud Run)</th><th>SaaS (M365, Workspace)</th></tr>
+<tr><td>Physical infrastructure</td><td>Provider</td><td>Provider</td><td>Provider</td></tr>
+<tr><td>Network controls</td><td>Provider + Customer</td><td>Provider</td><td>Provider</td></tr>
+<tr><td>Operating system</td><td>Customer</td><td>Provider</td><td>Provider</td></tr>
+<tr><td>Application</td><td>Customer</td><td>Customer</td><td>Provider</td></tr>
+<tr><td>Data</td><td>Customer</td><td>Customer</td><td>Customer</td></tr>
+<tr><td>Identity &amp; access</td><td>Customer</td><td>Customer</td><td>Customer</td></tr>
+</table>
+
+<p>AWS frames this as "Security <em>of</em> the Cloud" (their responsibility) versus "Security <em>in</em> the Cloud" (your responsibility). Azure categorizes responsibilities across three tiers. GCP uses the term "shared fate" rather than "shared responsibility," reflecting a commitment to help customers succeed rather than merely delineating legal liability.</p>
+
+<p>The critical insight: <strong>the customer is always responsible for their data, their identities, and their access policies</strong>, regardless of service model. No cloud provider will protect you from misconfigured S3 bucket policies or overly permissive IAM roles.</p>
+
+<h3>1.6 Multi-Cloud Reality</h3>
+
+<p>Multi-cloud is often aspired to but rarely executed well. The common reasons organizations end up multi-cloud are pragmatic (an acquisition brought Azure workloads into an AWS-primary shop), regulatory (data sovereignty requires a specific region only available on one provider), or best-of-breed (BigQuery for analytics, AWS for everything else). True "run the same workload on any cloud" portability is expensive to build and maintain. Kubernetes and Terraform provide a degree of abstraction, but provider-specific services (Aurora, BigQuery, Cosmos DB) have no portable equivalents.</p>
+
+<h3>1.7 Cloud Cost Management</h3>
+
+<p>Cloud spending is one of the largest IT budget items for most organizations, and uncontrolled costs are the most common cloud failure mode after security breaches. Effective cost management requires several disciplines working together:</p>
+
+<ul>
+<li><strong>Right-sizing</strong>&mdash;Matching instance types to actual workload requirements. Most organizations over-provision by 30-50% on initial deployment. Use cloud-native tools (AWS Compute Optimizer, Azure Advisor, GCP Recommender) to identify oversized instances.</li>
+<li><strong>Reserved capacity</strong>&mdash;Committing to 1-year or 3-year terms in exchange for 30-72% discounts. AWS Reserved Instances and Savings Plans, Azure Reservations, and GCP Committed Use Discounts all follow this model. The tradeoff: flexibility versus savings.</li>
+<li><strong>Spot/Preemptible instances</strong>&mdash;Using spare cloud capacity at 60-90% discounts for fault-tolerant workloads (batch processing, CI/CD, stateless web tiers behind autoscalers). AWS Spot Instances, Azure Spot VMs, and GCP Preemptible VMs can be reclaimed with 30 seconds to 2 minutes of notice.</li>
+<li><strong>Tagging and allocation</strong>&mdash;Every resource should be tagged with cost center, team, environment, and project. Without tags, cloud bills are an undifferentiated mass of charges that no one can explain or optimize.</li>
+<li><strong>FinOps practice</strong>&mdash;The cross-functional discipline (engineering + finance + business) of managing cloud costs. Tools like Kubecost (Kubernetes-specific), Infracost (Terraform cost estimation in CI/CD), and cloud-native cost explorers provide visibility. The FinOps Foundation maintains maturity models and best practices.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>2. Kubernetes Architecture</h2>
+
+<h3>2.1 Heritage: From Google Borg to Open Source</h3>
+
+<p>Kubernetes descends from Google's internal cluster management system, Borg, which has orchestrated Google's production workloads (Search, Gmail, YouTube, Maps) since the mid-2000s. In 2014, Google open-sourced a Borg-inspired system as Kubernetes (Greek for "helmsman" or "pilot"), donated it to the newly formed Cloud Native Computing Foundation (CNCF) in 2015, and it rapidly became the de facto standard for container orchestration. As of April 2026, Kubernetes is at version 1.35, with a 15-week release cycle and an N-2 support policy (the three most recent minor versions receive patches for approximately 14 months each).</p>
+
+<h3>2.2 Control Plane Components</h3>
+
+<p>The control plane is the brain of a Kubernetes cluster. It makes global decisions about scheduling, detects and responds to cluster events, and serves as the API surface through which all interactions (human, CI/CD, and controller) flow.</p>
+
+<p><strong>kube-apiserver:</strong> The front door to the cluster. Every <code>kubectl</code> command, every controller reconciliation loop, every admission webhook&mdash;all communicate through the API server's RESTful interface. The API server validates requests, persists state to etcd, and serves as the hub of the cluster's event-driven architecture. It is the only component that communicates directly with etcd.</p>
+
+<p><strong>etcd:</strong> A distributed, strongly consistent key-value store that holds the entire cluster state&mdash;every pod, service, secret, configmap, and custom resource. etcd uses the Raft consensus protocol to maintain consistency across replicas (typically 3 or 5 nodes for production). Backing up etcd is the single most critical disaster recovery task in a Kubernetes cluster. Losing etcd without a backup means losing the cluster.</p>
+
+<p><strong>kube-scheduler:</strong> Watches for newly created pods that have no assigned node and selects a node for them to run on. The scheduler considers resource requirements (CPU, memory, GPU), affinity/anti-affinity rules, taints and tolerations, topology spread constraints, and node conditions. The scheduling algorithm is pluggable via scheduler profiles and extender webhooks.</p>
+
+<p><strong>kube-controller-manager:</strong> Runs a collection of controller loops, each responsible for a specific aspect of cluster state: the Deployment controller manages ReplicaSets, the ReplicaSet controller manages Pods, the Node controller monitors node health, the Job controller tracks job completion, and so on. Each controller watches the API server for changes to its resource type and takes action to converge actual state toward desired state. This is Kubernetes' core reconciliation loop&mdash;the same convergence principle that dates back to CFEngine.</p>
+
+<p><strong>cloud-controller-manager:</strong> Integrates with the underlying cloud provider's API to manage cloud-specific resources: load balancers (for Services of type LoadBalancer), node lifecycle (detecting when a cloud VM is terminated), routes (for pod networking across nodes), and volumes (for persistent storage). This component enables Kubernetes to be cloud-agnostic at the core while supporting cloud-specific features.</p>
+
+<h3>2.3 Worker Node Components</h3>
+
+<p><strong>kubelet:</strong> The primary agent on each worker node. It receives pod specifications from the API server, ensures the specified containers are running and healthy, and reports node and pod status back to the control plane. The kubelet does not manage containers that were not created by Kubernetes.</p>
+
+<p><strong>kube-proxy:</strong> Maintains network rules on each node that implement Service abstractions&mdash;when a pod connects to a Service's ClusterIP, kube-proxy routes the traffic to one of the Service's backend pods. kube-proxy can operate in iptables mode (default), IPVS mode (better performance at scale), or nftables mode (newer). In clusters using Cilium as the CNI, kube-proxy is often replaced entirely by eBPF-based packet processing.</p>
+
+<p><strong>Container runtime:</strong> The software responsible for running containers. Kubernetes uses the Container Runtime Interface (CRI) to communicate with the runtime. containerd (default in most distributions, CNCF graduated project, version 2.1 as of early 2026) and CRI-O (Kubernetes-optimized, lighter weight) are the two production runtimes. Docker was removed as a direct runtime in Kubernetes 1.24 (containerd, which Docker uses internally, remains supported).</p>
+
+<h3>2.4 Admission Controllers and CRDs</h3>
+
+<p><strong>Admission controllers</strong> intercept API requests after authentication and authorization but before persistence to etcd. They can <em>validate</em> (reject invalid requests) or <em>mutate</em> (modify requests before storage). Built-in admission controllers enforce resource quotas, limit ranges, pod security standards, and namespace lifecycle. Custom admission webhooks extend this system&mdash;Kyverno, OPA Gatekeeper, and Istio's sidecar injector all operate as mutating or validating admission webhooks.</p>
+
+<p><strong>Custom Resource Definitions (CRDs)</strong> extend the Kubernetes API with new resource types. Combined with custom controllers (the <strong>operator pattern</strong>), CRDs enable Kubernetes to manage anything: databases (the PostgreSQL operator creates, backs up, and restores PostgreSQL clusters), certificates (cert-manager manages TLS certificates), messaging systems (the Strimzi operator manages Kafka clusters), and hundreds of other workloads. The operator pattern is arguably Kubernetes' most powerful extensibility mechanism.</p>
+
+<!-- ============================================================ -->
+<h2>3. Pod Lifecycle</h2>
+
+<h3>3.1 Pod Phases</h3>
+
+<p>A pod moves through a defined set of phases during its lifetime:</p>
+
+<table>
+<tr><th>Phase</th><th>Meaning</th></tr>
+<tr><td><code>Pending</code></td><td>Pod accepted by the cluster but one or more containers not yet running. Includes time waiting for scheduling, image pulls, and volume mounts.</td></tr>
+<tr><td><code>Running</code></td><td>Pod bound to a node, all containers created, at least one running or starting/restarting.</td></tr>
+<tr><td><code>Succeeded</code></td><td>All containers terminated successfully (exit code 0) and will not restart. Normal for Jobs.</td></tr>
+<tr><td><code>Failed</code></td><td>All containers terminated, at least one with a non-zero exit code or killed by the system.</td></tr>
+<tr><td><code>Unknown</code></td><td>Pod state cannot be determined, usually due to node communication failure.</td></tr>
+</table>
+
+<h3>3.2 Init Containers and Sidecar Containers</h3>
+
+<p><strong>Init containers</strong> run sequentially before application containers start. Each init container must complete successfully before the next one begins. Common uses: wait for a database to become available, clone a Git repository, generate configuration files, run database migrations.</p>
+
+<p><strong>Native sidecar containers</strong> were introduced in Kubernetes 1.28 (August 2023) and reached General Availability in Kubernetes 1.33 (April 2025). Defined as init containers with <code>restartPolicy: Always</code>, they start before application containers, run alongside them for the pod's lifetime, and shut down after application containers exit. This is a major improvement over the traditional sidecar pattern (regular containers in the same pod) because native sidecars have deterministic startup ordering, do not block pod termination, and support probes.</p>
+
+<pre><code># Pod with native sidecar container (Kubernetes 1.28+)
+apiVersion: v1
+kind: Pod
 metadata:
-  name: pod-reader
-rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "watch"]</code></pre>
+  name: app-with-sidecar
+spec:
+  initContainers:
+    - name: log-agent
+      image: fluent/fluent-bit:3.1
+      restartPolicy: Always    # This makes it a native sidecar
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
+      volumeMounts:
+        - name: logs
+          mountPath: /var/log/app
+    - name: wait-for-db
+      image: busybox:1.36
+      command: ['sh', '-c', 'until nc -z postgres 5432; do sleep 2; done']
+  containers:
+    - name: app
+      image: myapp:v2.1.0
+      ports:
+        - containerPort: 8080
+      resources:
+        requests:
+          cpu: 250m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+      volumeMounts:
+        - name: logs
+          mountPath: /var/log/app
+  volumes:
+    - name: logs
+      emptyDir: {}
+</code></pre>
 
-    <!-- CORPUS CROSS-REFERENCES -->
-    <h2>Corpus Cross-References</h2>
-    <p>Pipeline analysis identified <strong>12 related projects</strong> across 4 knowledge domains with 70 cross-references.</p>
-    <table>
-      <thead><tr><th>Code</th><th>Project</th><th>Domain</th><th>Magnitude</th></tr></thead>
-      <tbody>
-        <tr><td>NASA</td><td>NASA Mission Series</td><td>space</td><td>0.292</td></tr>
-        <tr><td>LED</td><td>LED Lighting &amp; Controllers</td><td>general</td><td>0.252</td></tr>
-        <tr><td>K8S</td><td>Kubernetes Ecosystem</td><td>general</td><td>0.144</td></tr>
-        <tr><td>OPS</td><td>OpenStack Cloud Platform</td><td>general</td><td>0.203</td></tr>
-        <tr><td>AAR</td><td>Architecture Alignment &amp; Refinement</td><td>general</td><td>0.214</td></tr>
-        <tr><td>BCM</td><td>Building Construction Mastery</td><td>infrastructure</td><td>0.154</td></tr>
-        <tr><td>PSC</td><td>Political Science, History &amp; the Complex Plane</td><td>governance</td><td>0.121</td></tr>
-        <tr><td>CMH</td><td>The Computational Mesh</td><td>general</td><td>0.095</td></tr>
-      </tbody>
-    </table>
-    <p>Domains: general (9), infrastructure (1), governance (1), space (1). Complex plane: z = 0.1494 + 0.0996i, |z| = 0.1795.</p>
+<h3>3.3 Resource Requests, Limits, and QoS Classes</h3>
 
-    <div class="cross-links">
-      <h4>Related Modules</h4>
-      <ul>
-        <li><a href="automation-iac.html">Automation &amp; IaC</a></li>
-        <li><a href="networking.html">Networking</a></li>
-        <li><a href="monitoring-observability.html">Monitoring &amp; Observability</a></li>
-        <li><a href="security-hardening.html">Security &amp; Hardening</a></li>
-      </ul>
-    </div>
+<p><strong>Requests</strong> are what the scheduler uses to find a node with sufficient capacity. <strong>Limits</strong> are the maximum resources a container can consume. CPU limits are enforced via CFS throttling; memory limits are enforced by the OOM killer (a container exceeding its memory limit is killed).</p>
+
+<p>Kubernetes assigns a Quality of Service (QoS) class to each pod based on its resource configuration:</p>
+
+<table>
+<tr><th>QoS Class</th><th>Condition</th><th>Eviction Priority</th></tr>
+<tr><td><code>Guaranteed</code></td><td>Every container has equal requests and limits for both CPU and memory</td><td>Last to be evicted</td></tr>
+<tr><td><code>Burstable</code></td><td>At least one container has a request or limit, but not all are equal</td><td>Evicted after BestEffort</td></tr>
+<tr><td><code>BestEffort</code></td><td>No containers have any requests or limits</td><td>First to be evicted</td></tr>
+</table>
+
+<p>Production workloads should always be <code>Guaranteed</code> or <code>Burstable</code> with explicit requests. <code>BestEffort</code> pods are the first to be evicted under memory pressure and should only be used for non-critical batch work.</p>
+
+<h3>3.4 Pod Disruption Budgets and Topology</h3>
+
+<p><strong>PodDisruptionBudgets (PDBs)</strong> limit the number of pods that can be simultaneously unavailable during voluntary disruptions (node drains, cluster upgrades, autoscaler scale-downs). A PDB specifying <code>minAvailable: 2</code> ensures at least two replicas remain running during any disruption.</p>
+
+<p><strong>Pod topology spread constraints</strong> distribute pods across failure domains (zones, nodes, racks) to maximize availability. <strong>Affinity/anti-affinity</strong> rules control which nodes or pods can colocate: node affinity selects nodes by labels (e.g., "only schedule on GPU nodes"), pod affinity/anti-affinity selects based on co-located pods (e.g., "keep web and cache pods together" or "spread database replicas across zones").</p>
+
+<!-- ============================================================ -->
+<h2>4. Workload Resources</h2>
+
+<h3>4.1 Deployments</h3>
+
+<p>The Deployment is the workhorse of Kubernetes workload management. It manages a ReplicaSet, which in turn manages Pods, providing declarative updates, rollback, scaling, and self-healing. The rolling update strategy is controlled by two parameters:</p>
+
+<ul>
+<li><code>maxSurge</code>&mdash;Maximum number of pods that can be created above the desired count during an update (default: 25%). Setting to 1 means one extra pod at a time.</li>
+<li><code>maxUnavailable</code>&mdash;Maximum number of pods that can be unavailable during an update (default: 25%). Setting to 0 means no downtime (requires maxSurge > 0).</li>
+</ul>
+
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+  namespace: production
+spec:
+  replicas: 3
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0    # Zero-downtime deployment
+  selector:
+    matchLabels:
+      app: api-server
+  template:
+    metadata:
+      labels:
+        app: api-server
+        version: v2.4.1
+    spec:
+      containers:
+        - name: api
+          image: registry.example.com/api-server:v2.4.1
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: api-server
+</code></pre>
+
+<h3>4.2 StatefulSets</h3>
+
+<p>StatefulSets manage stateful applications that require:</p>
+<ul>
+<li><strong>Stable network identity</strong>&mdash;Pods get predictable DNS names: <code>pod-0.service.namespace.svc.cluster.local</code>, <code>pod-1.service.namespace.svc.cluster.local</code>, etc.</li>
+<li><strong>Stable persistent storage</strong>&mdash;Each pod gets its own PersistentVolumeClaim that survives pod rescheduling.</li>
+<li><strong>Ordered deployment and scaling</strong>&mdash;Pods are created sequentially (pod-0 must be Ready before pod-1 starts) and terminated in reverse order.</li>
+</ul>
+
+<p>Use StatefulSets for databases (PostgreSQL, MySQL, MongoDB), distributed systems (Kafka, ZooKeeper, etcd itself), and any workload where pod identity matters. Note that StatefulSets do not automatically handle data replication&mdash;that remains the application's responsibility.</p>
+
+<h3>4.3 DaemonSets</h3>
+
+<p>A DaemonSet ensures that a copy of a pod runs on every node (or a subset of nodes, filtered by node selectors and tolerations). When a new node joins the cluster, the DaemonSet controller automatically schedules a pod on it. Common use cases:</p>
+
+<ul>
+<li><strong>Log collection</strong>&mdash;Fluent Bit, Fluentd, or Filebeat on every node</li>
+<li><strong>Monitoring</strong>&mdash;Node Exporter (Prometheus metrics), Datadog Agent</li>
+<li><strong>Networking</strong>&mdash;CNI plugins (Calico, Cilium), kube-proxy</li>
+<li><strong>Storage</strong>&mdash;CSI node plugins, local volume provisioners</li>
+<li><strong>Security</strong>&mdash;Falco (runtime security), CrowdStrike Falcon sensor</li>
+</ul>
+
+<h3>4.4 Jobs and CronJobs</h3>
+
+<p><strong>Jobs</strong> run one or more pods to completion. The Job controller ensures the specified number of successful completions is reached, retrying failed pods up to a configurable <code>backoffLimit</code>. Jobs support parallel execution (<code>parallelism</code> and <code>completions</code> fields) for batch processing workloads. Indexed Jobs (introduced in Kubernetes 1.21) assign each pod a unique index for partitioned batch work.</p>
+
+<p><strong>CronJobs</strong> create Jobs on a time-based schedule (cron syntax). Use for periodic tasks: database backups, report generation, certificate rotation, cache warming, cleanup of expired resources. Key settings: <code>concurrencyPolicy</code> (Allow, Forbid, Replace) controls what happens when a new Job is scheduled while the previous one is still running.</p>
+
+<h3>4.5 Decision Guide</h3>
+
+<table>
+<tr><th>Workload Type</th><th>Resource</th><th>Examples</th></tr>
+<tr><td>Stateless services</td><td>Deployment</td><td>Web servers, API servers, microservices</td></tr>
+<tr><td>Stateful services</td><td>StatefulSet</td><td>Databases, message queues, consensus systems</td></tr>
+<tr><td>Node-level agents</td><td>DaemonSet</td><td>Log collectors, monitoring agents, CNI plugins</td></tr>
+<tr><td>One-time tasks</td><td>Job</td><td>Database migrations, batch imports, ML training</td></tr>
+<tr><td>Scheduled tasks</td><td>CronJob</td><td>Backups, reports, cleanup, cert rotation</td></tr>
+</table>
+
+<h3>4.6 Persistent Storage</h3>
+
+<p>Kubernetes abstracts storage through three objects. A <strong>PersistentVolume (PV)</strong> represents a piece of storage provisioned by an administrator or dynamically by a StorageClass. A <strong>PersistentVolumeClaim (PVC)</strong> is a request for storage by a pod&mdash;it binds to a PV that meets its size and access mode requirements. A <strong>StorageClass</strong> defines the provisioner (e.g., <code>ebs.csi.aws.com</code>, <code>pd.csi.storage.gke.io</code>) and parameters (disk type, IOPS, encryption) used for dynamic provisioning.</p>
+
+<p>Access modes control how volumes can be mounted: <code>ReadWriteOnce</code> (single node read-write, most common), <code>ReadOnlyMany</code> (multiple nodes read-only), <code>ReadWriteMany</code> (multiple nodes read-write, requires NFS or a distributed filesystem like CephFS or EFS), and <code>ReadWriteOncePod</code> (single pod read-write, introduced in Kubernetes 1.27 GA). The Container Storage Interface (CSI) is the standard plugin mechanism for storage providers, replacing the older in-tree volume plugins.</p>
+
+<h3>4.7 Health Probes</h3>
+
+<p>Kubernetes supports three types of health probes that are essential for production workloads:</p>
+
+<ul>
+<li><strong>Liveness probes</strong>&mdash;Detect when a container is stuck (deadlock, infinite loop). If a liveness probe fails, the kubelet kills and restarts the container. Use for applications that can enter unrecoverable states.</li>
+<li><strong>Readiness probes</strong>&mdash;Detect when a container is ready to accept traffic. If a readiness probe fails, the pod's IP is removed from Service endpoints (traffic stops flowing to it) but the container is not restarted. Use for applications with lengthy startup or warmup periods.</li>
+<li><strong>Startup probes</strong>&mdash;Protect slow-starting containers. While a startup probe is running, liveness and readiness probes are disabled. Use for legacy applications that may take minutes to start (e.g., JVM applications with large heaps, applications loading ML models).</li>
+</ul>
+
+<p>Probes can be HTTP checks (<code>httpGet</code>), TCP socket checks (<code>tcpSocket</code>), exec commands (<code>exec</code>), or gRPC health checks (<code>grpc</code>, GA since Kubernetes 1.27). Misconfigured probes are one of the most common causes of production incidents&mdash;overly aggressive liveness probes can create restart loops, and missing readiness probes can send traffic to unready pods.</p>
+
+<!-- ============================================================ -->
+<h2>5. Services and Networking</h2>
+
+<h3>5.1 Service Types</h3>
+
+<p>A Kubernetes Service provides a stable network endpoint for a set of pods. Pods are ephemeral&mdash;they get new IP addresses when rescheduled&mdash;but Services provide a persistent ClusterIP and DNS name that clients can rely on.</p>
+
+<table>
+<tr><th>Type</th><th>Scope</th><th>Use Case</th></tr>
+<tr><td><code>ClusterIP</code></td><td>Internal only</td><td>Default. Accessible only from within the cluster. Used for inter-service communication.</td></tr>
+<tr><td><code>NodePort</code></td><td>External via node IP</td><td>Exposes the service on a static port (30000-32767) on every node. Useful for development, rarely used in production.</td></tr>
+<tr><td><code>LoadBalancer</code></td><td>External via cloud LB</td><td>Provisions a cloud load balancer (AWS ALB/NLB, Azure LB, GCP LB) that routes external traffic to the service.</td></tr>
+<tr><td><code>ExternalName</code></td><td>DNS alias</td><td>Returns a CNAME record pointing to an external DNS name. Used to reference external services (e.g., an RDS database) from within the cluster.</td></tr>
+</table>
+
+<h3>5.2 Ingress and Gateway API</h3>
+
+<p>The <strong>Ingress</strong> API provides HTTP/HTTPS routing (host-based and path-based) into the cluster, backed by an Ingress controller (NGINX Ingress, Traefik, HAProxy, Contour/Envoy). However, Ingress has significant limitations: it only supports HTTP/HTTPS, its annotation-based configuration is controller-specific and non-portable, and it conflates infrastructure concerns (load balancer provisioning) with application concerns (routing rules).</p>
+
+<p>The <strong>Gateway API</strong> is the official successor to Ingress, reaching v1.0 in October 2023 and v1.3 in June 2025. It provides a richer, role-oriented model:</p>
+
+<ul>
+<li><strong>GatewayClass</strong>&mdash;Defines the controller (analogous to IngressClass). Managed by infrastructure providers.</li>
+<li><strong>Gateway</strong>&mdash;Defines listeners (ports, protocols, TLS). Managed by cluster operators.</li>
+<li><strong>HTTPRoute / GRPCRoute / TCPRoute / TLPRoute</strong>&mdash;Defines routing rules. Managed by application developers.</li>
+</ul>
+
+<p>This separation of concerns allows platform teams to manage infrastructure (GatewayClass, Gateway) while application teams manage their own routing (Routes) without cluster-admin permissions. The Gateway API also supports both north-south (external to cluster) and east-west (service-to-service mesh) traffic through the GAMMA initiative.</p>
+
+<p>The official retirement of Ingress NGINX was announced for March 2026, accelerating adoption of Gateway API. Major implementations include Istio, Cilium, Envoy Gateway, NGINX Gateway Fabric, and Traefik. AWS Load Balancer Controller reached GA with Gateway API support in early 2026.</p>
+
+<h3>5.3 DNS and Service Discovery</h3>
+
+<p>CoreDNS is the default cluster DNS server. It automatically creates DNS records for Services (<code>my-service.my-namespace.svc.cluster.local</code>) and pods, enabling service discovery without external registries. Headless Services (ClusterIP: None) return individual pod IPs instead of a single virtual IP, which is essential for StatefulSets where clients need to connect to specific pods.</p>
+
+<h3>5.4 Network Policies and CNI Plugins</h3>
+
+<p><strong>NetworkPolicies</strong> are Kubernetes-native firewalls that control pod-to-pod, pod-to-external, and external-to-pod traffic. By default, all pods can communicate with all other pods (flat network). NetworkPolicies restrict this by selecting pods (via labels) and defining allowed ingress and egress rules. They require a CNI plugin that supports them&mdash;not all do.</p>
+
+<p><strong>CNI (Container Network Interface) plugins</strong> provide pod networking:</p>
+
+<table>
+<tr><th>Plugin</th><th>Key Features</th></tr>
+<tr><td>Calico</td><td>BGP-based routing, NetworkPolicy enforcement, eBPF dataplane option, widely deployed</td></tr>
+<tr><td>Cilium</td><td>eBPF-native, L3-L7 NetworkPolicy, transparent encryption, service mesh without sidecars, Hubble observability</td></tr>
+<tr><td>Flannel</td><td>Simple overlay network (VXLAN), no NetworkPolicy support, suitable for simple clusters</td></tr>
+<tr><td>Weave Net</td><td>Mesh overlay, encrypted by default, NetworkPolicy support, easy setup</td></tr>
+</table>
+
+<p>Cilium has emerged as the leading CNI for production clusters, offering eBPF-powered networking that operates at the kernel level for superior performance, deep observability via Hubble, and built-in support for Gateway API, transparent encryption, and service mesh functionality without sidecar proxies.</p>
+
+<p>A basic NetworkPolicy example that restricts a backend service to only accept traffic from frontend pods:</p>
+
+<pre><code># Allow only frontend pods to reach the API on port 8080
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-allow-frontend
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: api-server
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+        - namespaceSelector:
+            matchLabels:
+              environment: production
+      ports:
+        - protocol: TCP
+          port: 8080
+</code></pre>
+
+<p>A critical subtlety: once any NetworkPolicy selects a pod, all traffic not explicitly allowed is denied (default-deny for selected pods). Pods with no NetworkPolicy selecting them remain wide open. Best practice is to create a default-deny policy for each namespace, then add explicit allow rules.</p>
+
+<h3>5.5 Autoscaling</h3>
+
+<p>Kubernetes provides three levels of autoscaling that work together to match resources to demand:</p>
+
+<ul>
+<li><strong>Horizontal Pod Autoscaler (HPA)</strong>&mdash;Adjusts the number of pod replicas based on observed CPU utilization, memory usage, or custom metrics (request rate, queue depth, latency). HPA v2 supports multiple metrics and scaling policies that control the rate of scale-up and scale-down to prevent thrashing.</li>
+<li><strong>Vertical Pod Autoscaler (VPA)</strong>&mdash;Adjusts CPU and memory requests/limits for containers based on historical usage. VPA operates in three modes: <code>Off</code> (recommendations only), <code>Initial</code> (set resources at pod creation), and <code>Auto</code> (evict and recreate pods with updated resources). VPA and HPA should not target the same metric (typically VPA handles memory, HPA handles CPU or custom metrics).</li>
+<li><strong>Cluster Autoscaler / Karpenter</strong>&mdash;Adjusts the number of nodes in the cluster. Cluster Autoscaler (the traditional option) works with cloud provider node groups and scales based on pending pod requests. Karpenter (developed by AWS, now a CNCF sandbox project) takes a more flexible approach: it provisions nodes directly based on pod requirements, selecting optimal instance types, sizes, and purchase options (on-demand vs. spot) in real time, without pre-defined node groups.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>6. Service Mesh</h2>
+
+<h3>6.1 What a Service Mesh Provides</h3>
+
+<p>A service mesh is an infrastructure layer that handles service-to-service communication, providing: <strong>mutual TLS (mTLS)</strong> for zero-trust networking, <strong>traffic management</strong> (canary deployments, traffic splitting, retries, timeouts, circuit breaking), <strong>observability</strong> (distributed tracing, metrics, access logging without application changes), and <strong>policy enforcement</strong> (rate limiting, authorization). The mesh abstracts these cross-cutting concerns out of application code and into infrastructure.</p>
+
+<h3>6.2 Istio</h3>
+
+<p>Istio is the most feature-rich and widely deployed service mesh. Its architecture consists of a control plane (<strong>istiod</strong>&mdash;a single binary that consolidates the formerly separate Pilot, Citadel, and Galley components) and a data plane (<strong>Envoy</strong> sidecar proxies injected into every pod). Envoy intercepts all inbound and outbound traffic, applies routing rules, enforces mTLS, and exports telemetry.</p>
+
+<p>Operators configure Istio through Custom Resources:</p>
+<ul>
+<li><strong>VirtualService</strong>&mdash;Defines routing rules (traffic splitting, header-based routing, fault injection)</li>
+<li><strong>DestinationRule</strong>&mdash;Configures connection pool settings, outlier detection, TLS mode, and load balancing policy for a destination</li>
+<li><strong>AuthorizationPolicy</strong>&mdash;Fine-grained access control (allow/deny based on source, operation, conditions)</li>
+<li><strong>PeerAuthentication</strong>&mdash;Controls mTLS mode (STRICT, PERMISSIVE, DISABLE)</li>
+</ul>
+
+<pre><code># Istio VirtualService - canary deployment (90/10 traffic split)
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: api-server
+  namespace: production
+spec:
+  hosts:
+    - api-server
+  http:
+    - route:
+        - destination:
+            host: api-server
+            subset: stable
+          weight: 90
+        - destination:
+            host: api-server
+            subset: canary
+          weight: 10
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 5xx,reset,connect-failure
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: api-server
+  namespace: production
+spec:
+  host: api-server
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        h2UpgradePolicy: DEFAULT
+        maxRequestsPerConnection: 10
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 30s
+      baseEjectionTime: 30s
+  subsets:
+    - name: stable
+      labels:
+        version: v2.3.0
+    - name: canary
+      labels:
+        version: v2.4.0
+</code></pre>
+
+<p>Istio's resource footprint is significant: istiod typically requires 1-2 GB of memory in production, and each Envoy sidecar consumes approximately 50 MB or more. This overhead is the primary criticism of Istio and has driven interest in lighter alternatives.</p>
+
+<h3>6.3 Linkerd</h3>
+
+<p>Linkerd, originally created by Buoyant, takes a minimalist approach. Its data plane uses <strong>linkerd2-proxy</strong>, a micro-proxy written in Rust specifically for service mesh use cases. The Rust proxy's narrow focus yields smaller images (~10 MB), faster cold starts, and dramatically lower resource consumption: approximately 20-30 MB per sidecar versus 50+ MB for Envoy, and a control plane that fits in 200-300 MB versus Istio's 1-2 GB.</p>
+
+<p>Linkerd provides mTLS, load balancing, retries, timeouts, and golden metrics (success rate, latency, throughput) out of the box. It intentionally omits Istio's more complex features (traffic splitting, fault injection, complex routing rules) in favor of simplicity and operational reliability. The philosophy: a service mesh should be boring infrastructure that just works.</p>
+
+<h3>6.4 Cilium Service Mesh</h3>
+
+<p>Cilium's service mesh is architecturally distinct: it uses <strong>eBPF</strong> (extended Berkeley Packet Filter) programs running in the Linux kernel to process network traffic, eliminating sidecar proxies entirely. This produces significant performance benefits&mdash;financial services companies and real-time data platforms report 40-60% reduction in network overhead compared to traditional sidecar-based meshes. Cilium provides L4 mTLS encryption, L7 traffic management (via an optional Envoy instance for L7 processing), and deep observability through Hubble, all without injecting sidecars into application pods.</p>
+
+<h3>6.5 When You Need a Service Mesh</h3>
+
+<p><strong>You probably need one if:</strong> You have dozens or hundreds of microservices, you need mTLS between all services (zero-trust), you want canary deployments with traffic splitting, you need distributed tracing without modifying application code, or you are in a regulated industry requiring encryption in transit.</p>
+
+<p><strong>You probably do not need one if:</strong> You have fewer than 10 services, your services already handle retries and circuit breaking (libraries like resilience4j), you are not in a zero-trust environment, or you cannot afford the operational complexity and resource overhead. Start with NetworkPolicies and a service mesh later if the need arises.</p>
+
+<!-- ============================================================ -->
+<h2>7. Helm</h2>
+
+<h3>7.1 Chart Structure</h3>
+
+<p>Helm is the package manager for Kubernetes. A Helm <strong>chart</strong> is a collection of files that describe a set of Kubernetes resources:</p>
+
+<pre><code>mychart/
+  Chart.yaml          # Chart metadata (name, version, dependencies)
+  values.yaml         # Default configuration values
+  charts/             # Dependency charts
+  templates/          # Kubernetes manifest templates
+    deployment.yaml
+    service.yaml
+    ingress.yaml
+    _helpers.tpl      # Template helper functions
+    NOTES.txt         # Post-install instructions
+  tests/              # Helm test hooks
+    test-connection.yaml
+</code></pre>
+
+<h3>7.2 Templating</h3>
+
+<p>Helm templates use Go's <code>text/template</code> package extended with the Sprig function library. Values from <code>values.yaml</code> (or overridden via <code>--set</code> or <code>-f</code>) are injected into templates. Template functions and pipelines provide powerful transformations:</p>
+
+<pre><code># templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mychart.fullname" . }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mychart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        {{- include "mychart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.env }}
+          env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+</code></pre>
+
+<p>The <code>checksum/config</code> annotation is a critical pattern: it forces a pod restart when a ConfigMap changes by altering the pod template hash, since Kubernetes does not automatically restart pods when ConfigMaps or Secrets are updated.</p>
+
+<h3>7.3 Releases, Rollbacks, and Dependencies</h3>
+
+<p>A Helm <strong>release</strong> is a specific instance of a chart running in a cluster. Helm maintains a history of releases (stored as Secrets in the cluster), enabling rollback to any previous revision with <code>helm rollback &lt;release&gt; &lt;revision&gt;</code>. Chart <strong>dependencies</strong> are declared in <code>Chart.yaml</code> and downloaded with <code>helm dependency update</code>. Dependencies can be conditional (enabled/disabled via values) and aliased for multiple instances of the same chart.</p>
+
+<h3>7.4 OCI Registries and Helmfile</h3>
+
+<p>Helm 3.8+ supports storing charts as OCI (Open Container Initiative) artifacts in container registries (Docker Hub, Harbor, ECR, ACR, GCR, Zot, GitHub Container Registry). This unifies container image and Helm chart storage, simplifying infrastructure and enabling image signing tools (cosign) to also sign charts.</p>
+
+<p><strong>Helmfile</strong> is a declarative specification for deploying Helm charts. Instead of running <code>helm upgrade --install</code> commands manually, you define all your releases in a <code>helmfile.yaml</code> and apply them with <code>helmfile apply</code>. Helmfile supports environments, value layering, and diff (<code>helmfile diff</code>) to preview changes before applying.</p>
+
+<h3>7.5 Best Practices</h3>
+
+<ul>
+<li><strong>Always lint before release:</strong> <code>helm lint</code> catches template errors before they reach the cluster.</li>
+<li><strong>Dry-run and diff:</strong> <code>helm upgrade --dry-run</code> shows rendered manifests; <code>helm diff upgrade</code> (plugin) shows a diff against the running release.</li>
+<li><strong>Pin chart versions:</strong> Never use <code>latest</code> or unversioned chart references in production.</li>
+<li><strong>Use <code>values.schema.json</code>:</strong> JSON Schema validation for values.yaml catches misconfigurations before templating.</li>
+<li><strong>Avoid Helm for CRDs:</strong> Helm's CRD handling is limited (installed on first install, never upgraded or deleted). Manage CRDs separately or use the operator's installation method.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>8. Container Security</h2>
+
+<h3>8.1 Image Scanning</h3>
+
+<p>Container image scanning identifies known vulnerabilities (CVEs) in OS packages and application dependencies embedded in container images. The scanning should occur at multiple points: during CI/CD (shift left), on admission to the registry, and continuously against the running inventory (new CVEs are disclosed daily against existing images).</p>
+
+<table>
+<tr><th>Tool</th><th>Strengths</th></tr>
+<tr><td>Trivy (Aqua)</td><td>Unified scanner: images, filesystems, IaC, K8s, SBOM. Fast, comprehensive, open source. The de facto standard.</td></tr>
+<tr><td>Grype (Anchore)</td><td>Vulnerability scanner with SBOM integration via Syft. Lightweight and fast.</td></tr>
+<tr><td>Snyk Container</td><td>Developer-friendly with IDE integration, fix suggestions, and base image recommendations.</td></tr>
+</table>
+
+<h3>8.2 Base Image Selection</h3>
+
+<p>The choice of base image has profound security implications. Smaller images have fewer packages, fewer CVEs, and a smaller attack surface.</p>
+
+<table>
+<tr><th>Base Image</th><th>Size</th><th>Shell</th><th>Package Manager</th><th>Use Case</th></tr>
+<tr><td><code>ubuntu:24.04</code></td><td>~77 MB</td><td>Yes</td><td>apt</td><td>Development, debugging</td></tr>
+<tr><td><code>alpine:3.20</code></td><td>~7 MB</td><td>Yes (busybox)</td><td>apk</td><td>General production (uses musl libc, beware of compatibility)</td></tr>
+<tr><td><code>gcr.io/distroless/static</code></td><td>~2 MB</td><td>No</td><td>No</td><td>Statically compiled Go, Rust binaries</td></tr>
+<tr><td><code>gcr.io/distroless/base</code></td><td>~20 MB</td><td>No</td><td>No</td><td>Dynamically linked binaries needing glibc</td></tr>
+<tr><td><code>scratch</code></td><td>0 bytes</td><td>No</td><td>No</td><td>Statically compiled binaries (absolute minimum)</td></tr>
+</table>
+
+<p>Switching from <code>ubuntu</code> to <code>distroless/static</code> routinely reduces image size from 800 MB to 15-30 MB. Distroless and scratch images contain no shell, no package manager, and no diagnostic tools&mdash;which is precisely the point. An attacker who gains code execution inside the container finds no <code>sh</code>, no <code>curl</code>, no <code>wget</code> to escalate with.</p>
+
+<h3>8.3 Dockerfile Best Practices</h3>
+
+<pre><code># Production Dockerfile: multi-stage, non-root, distroless
+# Stage 1: Build
+FROM golang:1.22-bookworm AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o server ./cmd/server
+
+# Stage 2: Runtime
+FROM gcr.io/distroless/static-debian12:nonroot
+COPY --from=builder /app/server /server
+COPY --from=builder /app/configs /configs
+
+EXPOSE 8080
+USER nonroot:nonroot
+ENTRYPOINT ["/server"]
+</code></pre>
+
+<p>Key practices:</p>
+<ul>
+<li><strong>Multi-stage builds</strong>&mdash;Build tools (compilers, package managers, source code) stay in the build stage and are excluded from the final image.</li>
+<li><strong>Non-root execution</strong>&mdash;Run as a non-root user. Distroless images provide a <code>nonroot</code> user (UID 65534). For Alpine, create a user in the Dockerfile.</li>
+<li><strong>.dockerignore</strong>&mdash;Exclude <code>.git</code>, <code>node_modules</code>, test files, documentation, and secrets from the build context.</li>
+<li><strong>Pin versions</strong>&mdash;Use specific image digests (<code>@sha256:...</code>) or at minimum specific tags, never <code>latest</code>.</li>
+<li><strong>Minimize layers</strong>&mdash;Combine related <code>RUN</code> commands. Clean up in the same layer (<code>apt-get install ... && apt-get clean && rm -rf /var/lib/apt/lists/*</code>).</li>
+<li><strong>Read-only root filesystem</strong>&mdash;Set <code>readOnlyRootFilesystem: true</code> in the pod security context. Use <code>emptyDir</code> volumes for any directories that need writes (<code>/tmp</code>, application caches).</li>
+</ul>
+
+<h3>8.4 Runtime Security</h3>
+
+<p><strong>Falco</strong> (CNCF incubating) is a runtime security tool that uses eBPF (or kernel modules) to monitor system calls and detect anomalous behavior: unexpected process execution, file access in sensitive directories, network connections to unusual destinations, privilege escalation attempts. Falco rules are declarative and customizable.</p>
+
+<p><strong>seccomp</strong> (Secure Computing Mode) profiles restrict which system calls a container can make. Kubernetes provides <code>RuntimeDefault</code> (blocks dangerous syscalls like <code>reboot</code> and <code>mount</code>) and supports custom profiles. <strong>AppArmor</strong> profiles provide mandatory access control, restricting file access, network access, and capability usage at a finer grain than seccomp.</p>
+
+<h3>8.5 Admission Policies</h3>
+
+<p><strong>Kyverno</strong> is a Kubernetes-native policy engine that uses familiar YAML syntax (no new language to learn, unlike OPA's Rego). Policies can validate (reject non-compliant resources), mutate (add labels, inject sidecars), and generate (create NetworkPolicies automatically). Example: require all images to come from an approved registry, enforce resource limits on every pod, require specific labels.</p>
+
+<p><strong>OPA Gatekeeper</strong> uses the Open Policy Agent (OPA) with policies written in Rego, a purpose-built policy language. Gatekeeper is more powerful for complex policy logic but has a steeper learning curve.</p>
+
+<p><strong>RBAC design:</strong> Follow the principle of least privilege. Use Roles (namespace-scoped) over ClusterRoles (cluster-scoped) whenever possible. Bind service accounts to specific roles rather than granting broad permissions. Audit RBAC regularly with tools like <code>kubectl auth can-i</code>, <code>rbac-lookup</code>, or <code>rakkess</code>.</p>
+
+<!-- ============================================================ -->
+<h2>9. Container Runtimes and Registries</h2>
+
+<h3>9.1 Container Runtimes</h3>
+
+<p>The container runtime landscape has settled into a clear hierarchy. At the <strong>high level</strong>, CRI-compliant runtimes (containerd, CRI-O) manage the container lifecycle: pulling images, creating containers, managing storage, and reporting status to the kubelet via the Container Runtime Interface (CRI). At the <strong>low level</strong>, OCI-compliant runtimes (runc, crun, kata-containers, gVisor) actually create Linux namespaces and cgroups that isolate the container.</p>
+
+<table>
+<tr><th>Runtime</th><th>Scope</th><th>Key Characteristics</th></tr>
+<tr><td>containerd 2.1</td><td>High-level CRI</td><td>Default in kubeadm, k3s, EKS, GKE, AKS. General-purpose. CNCF graduated. Broad plugin ecosystem.</td></tr>
+<tr><td>CRI-O</td><td>High-level CRI</td><td>Kubernetes-only. Minimal surface area. Used by OpenShift. Version-locked to Kubernetes (CRI-O 1.35 for K8s 1.35).</td></tr>
+<tr><td>runc</td><td>Low-level OCI</td><td>Reference OCI runtime. Written in Go. Default low-level runtime for both containerd and CRI-O.</td></tr>
+<tr><td>crun</td><td>Low-level OCI</td><td>Written in C. Faster startup, lower memory. Used by Podman and optional for CRI-O.</td></tr>
+<tr><td>kata-containers</td><td>Low-level OCI</td><td>Lightweight VMs for stronger isolation. Each container runs in its own micro-VM.</td></tr>
+<tr><td>gVisor (runsc)</td><td>Low-level OCI</td><td>User-space kernel that intercepts system calls. Strong isolation without full VM overhead. Developed by Google.</td></tr>
+</table>
+
+<p>Docker itself is a development tool in the modern landscape. You build images locally with <code>docker build</code>, test with <code>docker compose</code>, push to a registry, and deploy to Kubernetes where containerd or CRI-O runs the containers. Docker was removed as a direct Kubernetes runtime in version 1.24; containerd (which Docker uses internally) was always the actual runtime.</p>
+
+<h3>9.2 The OCI Standard</h3>
+
+<p>The Open Container Initiative (OCI), established in 2015 under the Linux Foundation, defines three specifications that ensure interoperability across the container ecosystem:</p>
+
+<ul>
+<li><strong>image-spec</strong>&mdash;Defines the format of container images (layers, manifests, configuration). Ensures images built by any tool (Docker, Buildah, kaniko, Buildpacks) can run on any OCI-compliant runtime.</li>
+<li><strong>runtime-spec</strong>&mdash;Defines how to run a container from an OCI image (filesystem bundle, lifecycle operations: create, start, kill, delete). Implemented by runc, crun, kata-containers, gVisor.</li>
+<li><strong>distribution-spec</strong>&mdash;Defines the API for pushing and pulling images from registries. Ensures any OCI-compliant registry can store and serve images (and now Helm charts, SBOMs, Wasm modules, and other artifacts).</li>
+</ul>
+
+<h3>9.3 Registry Options</h3>
+
+<table>
+<tr><th>Registry</th><th>Type</th><th>Key Features</th></tr>
+<tr><td>Docker Hub</td><td>Public/Private SaaS</td><td>Largest public registry. Rate-limited free tier (100 pulls/6 hours). Official images.</td></tr>
+<tr><td>Harbor</td><td>Self-hosted (CNCF graduated)</td><td>Vulnerability scanning (Trivy), RBAC, replication, image signing, OCI artifacts.</td></tr>
+<tr><td>Amazon ECR</td><td>AWS-managed</td><td>IAM integration, image scanning, lifecycle policies, cross-region replication.</td></tr>
+<tr><td>Azure ACR</td><td>Azure-managed</td><td>Geo-replication, Azure AD integration, ACR Tasks (in-registry builds).</td></tr>
+<tr><td>Google Artifact Registry</td><td>GCP-managed</td><td>Multi-format (Docker, Maven, npm, Python), IAM, vulnerability scanning.</td></tr>
+<tr><td>GitHub Container Registry</td><td>GitHub-managed</td><td>Free for public images, GitHub Actions integration, GHCR.io.</td></tr>
+<tr><td>Zot</td><td>Self-hosted (OCI-native)</td><td>Minimal, OCI-native, no Docker v2 legacy. Purpose-built for OCI distribution.</td></tr>
+</table>
+
+<h3>9.4 Image Signing and SBOMs</h3>
+
+<p><strong>Cosign</strong> (part of the Sigstore project) signs container images and OCI artifacts using keyless signing (backed by Fulcio, a certificate authority that issues short-lived certificates tied to OIDC identities). Signatures are stored in the same registry as the image, attached as OCI artifacts. Verification happens at admission time using Kyverno or OPA Gatekeeper policies that require a valid signature before allowing an image to run.</p>
+
+<p><strong>Rekor</strong> (Sigstore's transparency log) records all signing events in an append-only, tamper-evident log, providing an audit trail of who signed what and when. This is analogous to Certificate Transparency for TLS certificates.</p>
+
+<p><strong>SBOMs (Software Bill of Materials)</strong> list every component (OS packages, libraries, dependencies) in a container image. <strong>Syft</strong> (by Anchore) generates SBOMs in SPDX or CycloneDX format. SBOMs can be attached to images as OCI artifacts and signed with Cosign, creating a complete supply chain: image + SBOM + signature + transparency log entry.</p>
+
+<pre><code># Generate SBOM, attach to image, sign everything
+syft registry.example.com/myapp:v2.1.0 -o spdx-json > sbom.spdx.json
+cosign attach sbom --sbom sbom.spdx.json registry.example.com/myapp:v2.1.0
+cosign sign registry.example.com/myapp:v2.1.0
+cosign sign --attachment sbom registry.example.com/myapp:v2.1.0
+
+# Verify in CI/CD or admission webhook
+cosign verify registry.example.com/myapp:v2.1.0 \
+  --certificate-identity user@example.com \
+  --certificate-oidc-issuer https://accounts.google.com
+</code></pre>
+
+<p>The combination of image scanning (Trivy/Grype), image signing (Cosign/Sigstore), and SBOMs (Syft) forms a <strong>software supply chain security</strong> pipeline that addresses the entire lifecycle: know what is in your images (SBOM), verify they have not been tampered with (signature), and check for known vulnerabilities (scanner).</p>
+
+<!-- ============================================================ -->
+<h2>Certification Alignment</h2>
+
+<p>The topics in this module align with several industry certifications:</p>
+
+<table>
+<tr><th>Certification</th><th>Relevant Sections</th></tr>
+<tr><td>CKA (Certified Kubernetes Administrator)</td><td>Sections 2-5 (Architecture, Pods, Workloads, Networking)</td></tr>
+<tr><td>CKS (Certified Kubernetes Security Specialist)</td><td>Sections 8-9 (Container Security, Runtimes, RBAC, Admission)</td></tr>
+<tr><td>CKAD (Certified Kubernetes Application Developer)</td><td>Sections 3-4, 7 (Pod Lifecycle, Workloads, Helm)</td></tr>
+<tr><td>AWS SAA-C03 (Solutions Architect Associate)</td><td>Section 1 (Cloud Providers, Shared Responsibility)</td></tr>
+<tr><td>KCSA (Kubernetes and Cloud Security Associate)</td><td>Sections 6, 8-9 (Service Mesh, Security, Supply Chain)</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>Further Reading</h2>
+
+<ul>
+<li>Brendan Burns et al., <em>Kubernetes: Up and Running</em>, 3rd Edition (O'Reilly, 2024)&mdash;the standard Kubernetes textbook</li>
+<li>Liz Rice, <em>Container Security</em> (O'Reilly, 2020)&mdash;deep dive into container isolation, syscalls, capabilities</li>
+<li>Kubernetes Documentation: <a href="https://kubernetes.io/docs/">kubernetes.io/docs</a></li>
+<li>Gateway API Documentation: <a href="https://gateway-api.sigs.k8s.io/">gateway-api.sigs.k8s.io</a></li>
+<li>Istio Documentation: <a href="https://istio.io/latest/docs/">istio.io/docs</a></li>
+<li>Cilium Documentation: <a href="https://docs.cilium.io/">docs.cilium.io</a></li>
+<li>Linkerd Documentation: <a href="https://linkerd.io/2/overview/">linkerd.io</a></li>
+<li>Helm Documentation: <a href="https://helm.sh/docs/">helm.sh/docs</a></li>
+<li>Sigstore Documentation: <a href="https://docs.sigstore.dev/">docs.sigstore.dev</a></li>
+<li>CNCF Landscape: <a href="https://landscape.cncf.io/">landscape.cncf.io</a></li>
+</ul>
   </main>
 
   <footer>
-    <p>Cloud &amp; Containers &middot; Systems Administration &middot; 70 corpus cross-references &middot; April 2026</p>
-    <p><a href="../index.html">PNW Research Series</a></p>
+    <p>Systems Administration &mdash; Infrastructure Cluster &mdash; <a href="index.html">Back to Overview</a></p>
+    <p>Part of the <a href="../index.html">PNW Research Series</a> &middot; Research Co-Processor v2 &middot; April 2026</p>
   </footer>
 </body>
 </html>

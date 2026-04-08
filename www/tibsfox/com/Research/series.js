@@ -202,7 +202,8 @@
     { id: 'WLF', name: 'The Wolf', path: 'WLF/index.html' },
     { id: 'WYR', name: 'Weyerhaeuser', path: 'WYR/index.html' },
     { id: 'WSB', name: 'Small Business', path: 'WSB/index.html' },
-    { id: 'YNT', name: "Yuri's Night", path: 'YNT/index.html' }
+    { id: 'YNT', name: "Yuri's Night", path: 'YNT/index.html' },
+    { id: 'YTB', name: 'YouTube Deep Research', path: 'YTB/index.html' }
   ];
 
   var clusters = [
@@ -217,7 +218,7 @@
     { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS','AMS'] },
     { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'] },
     { name: 'Space', color: '#1E88E5', ids: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'] },
-    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA','FAIS','MAS','AGT','GSI','ALR','APD'] },
+    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT','SAA','FAIS','MAS','AGT','GSI','ALR','APD','YTB'] },
     { name: 'Graphics', color: '#8E24AA', ids: ['NEH','VKD','VKS'] }
   ];
 
